@@ -12,6 +12,9 @@ import helios.rendering.Renderable;
 import helios.rendering.RenderQueue;
 import helios.rendering.RenderPass;
 
+import helios.rendering.text.TextRenderer;
+
+
 #define HELIOS_LOG_SCOPE "helios::rendering::RenderingDevice"
 export namespace helios::rendering {
 
@@ -20,11 +23,26 @@ export namespace helios::rendering {
      *
      * This pure virtual class provides the fundamental API for managing
      * the rendering pipeline and respective contracts for concrete
-     * implementations using a specific rendering backend (e.g. OpenGL,
-     * Vulkan...).
+     * implementations using a specific rendering backend (e.g., OpenGL, Vulkan).
      *
-     * Implementations of `RenderingDevice` are responsible for managing
-     * render passes and configuring the viewport.
+     * ## Responsibilities
+     *
+     * - **Initialization:** Load graphics API function pointers and prepare resources.
+     * - **Render Pass Management:** Begin, execute, and end render passes.
+     * - **Geometry Rendering:** Process `RenderCommand` objects for mesh rendering.
+     * - **Text Rendering:** Provide access to a `TextRenderer` for glyph-based text.
+     *
+     * ## Render Pass Lifecycle
+     *
+     * ```
+     * beginRenderPass(pass)  →  doRender(pass)  →  endRenderPass(pass)
+     * ```
+     *
+     * The `render()` convenience method executes all three steps in sequence.
+     *
+     * @see RenderPass
+     * @see RenderQueue
+     * @see TextRenderer
      */
     class RenderingDevice {
 
@@ -106,6 +124,17 @@ export namespace helios::rendering {
             doRender(renderPass);
             endRenderPass(renderPass);
         }
+
+        /**
+         * @brief Returns the text renderer associated with this device.
+         *
+         * Use this to register font families and access text rendering capabilities.
+         *
+         * @return Reference to the `TextRenderer` implementation.
+         *
+         * @see TextRenderer::addFontFamily()
+         */
+        [[nodiscard]] virtual helios::rendering::text::TextRenderer& textRenderer() const noexcept = 0;
 
 
 

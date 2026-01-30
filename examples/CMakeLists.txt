@@ -15,6 +15,7 @@ foreach(EXAMPLE_FILE ${EXAMPLE_FILES})
     target_link_libraries(${UNIQUE_TARGET} PRIVATE
             helios
             thirdparty::opengl
+            thirdparty::freetype
     )
 
     target_compile_definitions(${UNIQUE_TARGET} PRIVATE GLFW_INCLUDE_NONE)

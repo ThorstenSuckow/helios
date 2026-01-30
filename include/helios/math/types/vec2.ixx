@@ -207,5 +207,6 @@ export namespace helios::math {
     using vec2f = vec2<float>;
     using vec2d = vec2<double>;
     using vec2i = vec2<int>;
+    using vec2ui = vec2<unsigned int>;
 
 }

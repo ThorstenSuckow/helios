@@ -101,6 +101,9 @@ export namespace helios::ext::opengl::rendering {
          */
         std::unique_ptr<helios::ext::opengl::rendering::OpenGLGlyphTextRenderer> textRenderer_;
 
+        mutable const helios::ext::opengl::rendering::shader::OpenGLShader* lastShader_ = nullptr;
+        mutable unsigned int lastVao_ = 0;
+
 
     public:
         ~OpenGLDevice() override = default;
@@ -202,8 +205,7 @@ export namespace helios::ext::opengl::rendering {
         void doRender(helios::rendering::RenderPass& renderPass) const noexcept override {
             const auto& renderQueue = renderPass.renderQueue();
 
-            const helios::ext::opengl::rendering::shader::OpenGLShader* lastShader = nullptr;
-            unsigned int lastVao = 0;
+
 
             for (auto& rc: renderQueue.renderCommands()) {
 
@@ -214,9 +216,9 @@ export namespace helios::ext::opengl::rendering {
                     const auto* shader = static_cast<const helios::ext::opengl::rendering::shader::OpenGLShader*>(&baseShader);
                     assert(shader && "Unexpected failure when casting to OpenGLShader.");
 
-                    if (shader != lastShader) {
+                    if (shader != lastShader_) {
                         shader->use();
-                        lastShader = shader;
+                        lastShader_ = shader;
                     }
 
                     shader->applyUniformValues(renderPass.frameUniformValues());
@@ -228,13 +230,12 @@ export namespace helios::ext::opengl::rendering {
 
                     const auto [primitiveType] = mesh->meshConfig();
 
-                    if (mesh->vao() != lastVao) {
+                    if (mesh->vao() != lastVao_) {
                         glBindVertexArray(mesh->vao());
-                        lastVao = mesh->vao();
+                        lastVao_ = mesh->vao();
                     }
 
                     glDrawElements(toOpenGL(primitiveType), mesh->indexCount(), GL_UNSIGNED_INT, nullptr);
-                    glBindVertexArray(0);
                 }
             }
 
@@ -270,6 +271,7 @@ export namespace helios::ext::opengl::rendering {
          * @param renderPass The render pass to end.
          */
         void endRenderPass(helios::rendering::RenderPass& renderPass) const noexcept override {
+            glBindVertexArray(0);
         }
 
         /**

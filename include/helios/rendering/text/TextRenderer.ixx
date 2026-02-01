@@ -51,11 +51,11 @@ export namespace helios::rendering::text {
      * @see TextRenderCommand
      */
     class TextRenderer {
-
-
     public:
 
-
+        /**
+         * @brief Virtual destructor for proper cleanup of derived classes.
+         */
         virtual ~TextRenderer() = default;
 
         /**
@@ -74,31 +74,5 @@ export namespace helios::rendering::text {
             const TextRenderCommand& command,
             const helios::rendering::shader::UniformValueMap& frameUniformValues
         ) noexcept = 0;
-
-        /**
-         * @brief Registers a font family for text rendering.
-         *
-         * Loads a font from the specified path and caches glyphs within the given
-         * character range. The font can later be referenced by its `FontId` when
-         * creating `TextRenderCommand` objects.
-         *
-         * @param fontId Unique identifier for this font family.
-         * @param path File system path to the font file (e.g., TTF, OTF).
-         * @param begin Start of the character range to load (inclusive, default: 0).
-         * @param end End of the character range to load (exclusive, default: 128).
-         *
-         * @throws std::runtime_error If the font file cannot be loaded.
-         * @throws std::invalid_argument If `begin > end`.
-         */
-        virtual void addFontFamily(
-            const helios::engine::core::data::FontId fontId,
-            std::string_view path,
-            const unsigned short begin = 0,
-            const unsigned short end = 128) = 0;
     };
-
-
-
-
-
 }

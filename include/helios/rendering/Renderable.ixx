@@ -10,6 +10,7 @@ module;
 
 export module helios.rendering.Renderable;
 
+import helios.rendering.RenderQueue;
 import helios.rendering.RenderPrototype;
 import helios.rendering.model.config.MaterialPropertiesOverride;
 import helios.rendering.shader.UniformValueMap;
@@ -17,172 +18,110 @@ import helios.rendering.shader.UniformValueMap;
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
 
+import helios.math;
+
 #define HELIOS_LOG_SCOPE "helios::rendering::Renderable"
 export namespace helios::rendering {
 
-
     /**
-     * @brief Represents a renderable object that combines a shared prototype with instance-specific overrides.
+     * @brief Abstract base class for objects that can be rendered by the rendering system.
      *
-     * A `Renderable` aggregates an immutable `RenderPrototype` (shared asset definition)
-     * with optional instance-specific `MaterialPropertiesOverride`. This separation enables
-     * efficient batching of shared prototypes while allowing per-instance visual adjustments.
+     * A `Renderable` represents any visual entity that can submit render commands to the
+     * rendering pipeline. Concrete implementations define how the object emits itself
+     * to a `RenderQueue` and how uniform values are written for shader consumption.
      *
-     * ## Design
+     * Subclasses must implement:
+     * - `localAABB()`: Returns the local-space axis-aligned bounding box.
+     * - `writeUniformValues()`: Writes object-specific uniform values to a uniform map.
+     * - `emit()`: Submits render commands to the render queue.
      *
-     * - **Shared Prototype:** Multiple `Renderable` instances can reference the same `RenderPrototype`.
-     * - **Per-Instance Overrides:** Each instance can customize material properties.
-     * - **Move-Only:** Prevents accidental duplication during render queue processing.
-     *
-     * ## Data Flow
-     *
-     * ```
-     * RenderPrototype (shared)
-     *        │
-     *        ├── Renderable A (override: red color)
-     *        ├── Renderable B (override: blue color)
-     *        └── Renderable C (no override)
-     * ```
-     *
-     * @note For text rendering, use `TextRenderable` instead.
-     *
-     * @see RenderPrototype
-     * @see RenderCommand
-     * @see MaterialPropertiesOverride
+     * @see helios::rendering::RenderQueue
+     * @see helios::rendering::RenderPrototype
      */
-    class Renderable final {
+    class Renderable {
 
     protected:
 
-        /**
-         * @brief Shared pointer to the immutable RenderPrototype definition.
-         */
-        std::shared_ptr<const helios::rendering::RenderPrototype> renderPrototype_ = nullptr;
-
-        /**
-         * @brief The MaterialPropertiesOverride owned by this class. This will be std::nullopt if not
-         * available.
-         */
-        std::optional<helios::rendering::model::config::MaterialPropertiesOverride> materialOverride_;
-
-        /**
-         * @brief Shared logger instance for all Renderable objects.
-         */
-        inline static const helios::util::log::Logger& logger_ = helios::util::log::LogManager::loggerForScope(HELIOS_LOG_SCOPE);
 
     public:
+
         /**
-         * @brief Deleted default constructor.
+         * @brief Virtual destructor for proper cleanup of derived classes.
          */
-        Renderable() = delete;
+        virtual ~Renderable() = default;
+
+        /**
+         * @brief Default constructor.
+         */
+        Renderable() = default;
 
         /**
          * @brief Deleted copy constructor.
+         *
+         * Renderables are non-copyable to prevent accidental duplication of GPU resources.
          */
         Renderable(const Renderable&) = delete;
 
         /**
          * @brief Deleted copy assignment operator.
+         *
+         * Renderables are non-copyable to prevent accidental duplication of GPU resources.
          */
         Renderable& operator=(const Renderable&)= delete;
 
         /**
-         * @brief Defaulted move constructor.
+         * @brief Move constructor.
+         *
+         * Allows transfer of ownership of rendering resources.
          */
         Renderable(Renderable&&) noexcept = default;
 
         /**
-         * @brief Defaulted move assignment operator.
+         * @brief Move assignment operator.
+         *
+         * Allows transfer of ownership of rendering resources.
          */
         Renderable& operator=(Renderable&&) noexcept = default;
 
         /**
-         * @brief Creates a new Renderable instance.
+         * @brief Returns the local-space axis-aligned bounding box of this renderable.
          *
-         * @param renderPrototype A shared pointer to the immutable RenderPrototype definition. Must not be nullptr.
-         * @param materialOverride An optional set of instance-specific material property overrides.
-         * If std::nullopt, the Renderable uses only the default properties from the RenderPrototype's Material.
+         * The AABB is used for visibility culling, collision detection, and spatial queries.
+         * It represents the bounds of the renderable in its local coordinate system before
+         * any world transformations are applied.
          *
-         * @throws std::invalid_argument if `renderPrototype` is a nullptr.
+         * @return A const reference to the local-space AABB.
          */
-        explicit Renderable(
-            std::shared_ptr<const helios::rendering::RenderPrototype> renderPrototype,
-            const std::optional<helios::rendering::model::config::MaterialPropertiesOverride>& materialOverride = std::nullopt
-        ) :
-            renderPrototype_(std::move(renderPrototype)),
-            materialOverride_(materialOverride)
-        {
-
-            if (!renderPrototype_) {
-                const std::string msg = "Renderable constructor received a null shared pointer.";
-                logger_.error(msg);
-                throw std::invalid_argument(msg);
-            }
-
-        }
-
+        [[nodiscard]] virtual const helios::math::aabbf& localAABB() const noexcept = 0;
 
         /**
-         * @brief Returns a shared pointer to the RenderPrototype used by this Renderable.
+         * @brief Writes object-specific uniform values to a uniform value map.
          *
-         * @return A shared pointer to the RenderPrototype.
+         * This method allows the renderable to contribute its own uniform values
+         * (such as material properties or custom shader parameters) to the rendering
+         * pipeline.
+         *
+         * @param uniformValueMap The uniform value map to write values to.
          */
-        [[nodiscard]] std::shared_ptr<const helios::rendering::RenderPrototype> renderPrototype() const noexcept {
-            return renderPrototype_;
-        }
+        virtual void writeUniformValues(helios::rendering::shader::UniformValueMap& uniformValueMap) const noexcept = 0;
 
         /**
-         * @brief Returns a const reference to the optional instance-specific MaterialPropertiesOverride.
+         * @brief Emits render commands to the render queue.
          *
-         * This allows read-only access to the overrides. Use `.has_value()` to check for existence
-         * and `.value()` or `->` to safely access the override data.
+         * This method is called during the render traversal to submit this renderable's
+         * draw commands to the render queue. The render queue collects and potentially
+         * sorts these commands for efficient GPU execution.
          *
-         * @return A const reference to the std::optional<MaterialPropertiesOverride>.
+         * @param renderQueue The render queue to emit commands to.
+         * @param objectUniformValues Uniform values specific to this object instance
+         *        (e.g., model matrix, object ID).
+         * @param materialUniformValues Uniform values for the material properties
+         *        (e.g., colors, textures, shader parameters).
          */
-
-        [[nodiscard]] const std::optional<helios::rendering::model::config::MaterialPropertiesOverride>& materialOverride() const noexcept {
-            return materialOverride_;
-        }
-
-        /**
-         * @brief Returns a non-const reference to the optional instance-specific MaterialPropertiesOverride.
-         *
-         * This allows modification of the overrides. If the optional currently has no value,
-         * it can be assigned to or `.emplace()` can be used to create a new MaterialPropertiesOverride.
-         *
-         * @return A non-const reference to the std::optional<MaterialPropertiesOverride>.
-         */
-        [[nodiscard]] std::optional<helios::rendering::model::config::MaterialPropertiesOverride>& materialOverride() noexcept {
-            return materialOverride_;
-        }
-
-        /**
-         * @brief Returns true if this Renderable was configured with a MaterialPropertiesOverride.
-         *
-         * @return True if this Renderable was configured with a MaterialPropertiesOverride instance, otherwise false.
-         */
-        [[nodiscard]] bool hasMaterialOverride() const noexcept {
-            return materialOverride_.has_value();
-        }
-
-
-        /**
-         * @brief Writes uniform values into the given map.
-         *
-         * This method first applies the default uniform values from the base Material definition and
-         * then overlays any specific overrides provided by this instance's MaterialPropertiesOverride.
-         *
-         * @param uniformValueMap Target map receiving the uniform values.
-         */
-        void writeUniformValues(helios::rendering::shader::UniformValueMap& uniformValueMap) const noexcept {
-            renderPrototype_->material().writeUniformValues(uniformValueMap);
-
-            if (materialOverride_) {
-                materialOverride_->writeUniformValues(uniformValueMap);
-            }
-        }
-
-
+        virtual void emit(
+            RenderQueue& renderQueue,
+            helios::rendering::shader::UniformValueMap objectUniformValues,
+            helios::rendering::shader::UniformValueMap  materialUniformValues) const = 0;
 
     };
 

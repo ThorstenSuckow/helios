@@ -148,7 +148,7 @@ export namespace helios::rendering {
 
             cameraSceneNode_->camera().onResize(
                 static_cast<float>(renderTargetWidth) * width_,
-                static_cast<float>(renderTargetHeight) * width_
+                static_cast<float>(renderTargetHeight) * height_
             );
         }
 

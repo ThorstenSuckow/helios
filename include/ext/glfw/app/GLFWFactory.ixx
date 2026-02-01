@@ -58,7 +58,8 @@ export namespace helios::ext::glfw::app {
             int aspectRatioNumer = 0, int aspectRatioDenom = 0
         ) {
             auto openGLDevice = std::make_unique<helios::ext::opengl::rendering::OpenGLDevice>(
-                std::make_unique<helios::ext::opengl::rendering::OpenGLGlyphTextRenderer>()
+                std::make_unique<helios::ext::opengl::rendering::OpenGLGlyphTextRenderer>(),
+                std::make_unique<helios::ext::opengl::rendering::FreeTypeFontResourceManager>()
             );
             auto deadzoneStrategy = std::make_unique<helios::input::gamepad::RadialDeadzoneStrategy>();
             auto inputManager = std::make_unique<helios::input::InputManager>(

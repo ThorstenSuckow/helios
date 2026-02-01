@@ -24,6 +24,7 @@ import helios.rendering.RenderTarget;
 import helios.rendering.Viewport;
 
 import helios.rendering.text.TextRenderer;
+import helios.rendering.text.FontResourceProvider;
 
 import helios.ext.opengl.rendering.model.OpenGLMesh;
 import helios.ext.opengl.rendering.shader.OpenGLShader;
@@ -101,7 +102,19 @@ export namespace helios::ext::opengl::rendering {
          */
         std::unique_ptr<helios::ext::opengl::rendering::OpenGLGlyphTextRenderer> textRenderer_;
 
+        /**
+         * @brief Font resource provider for loading fonts and retrieving glyph data.
+         */
+        std::unique_ptr<helios::rendering::text::FontResourceProvider> fontResourceProvider_;
+
+        /**
+         * @brief Cached pointer to the last used shader for state optimization.
+         */
         mutable const helios::ext::opengl::rendering::shader::OpenGLShader* lastShader_ = nullptr;
+
+        /**
+         * @brief Cached VAO ID for state optimization.
+         */
         mutable unsigned int lastVao_ = 0;
 
 
@@ -109,15 +122,19 @@ export namespace helios::ext::opengl::rendering {
         ~OpenGLDevice() override = default;
 
         /**
-         * @brief Constructs an OpenGLDevice with the given text renderer.
+         * @brief Constructs an OpenGLDevice with the given text renderer and font provider.
          *
          * @param textRenderer The text renderer to use for glyph-based text rendering.
          *                     Ownership is transferred to this device.
+         * @param fontResourceProvider The font resource provider for loading fonts.
+         *                             Ownership is transferred to this device.
          */
         explicit OpenGLDevice(
-            std::unique_ptr<helios::ext::opengl::rendering::OpenGLGlyphTextRenderer> textRenderer
+            std::unique_ptr<helios::ext::opengl::rendering::OpenGLGlyphTextRenderer> textRenderer,
+            std::unique_ptr<helios::rendering::text::FontResourceProvider> fontResourceProvider
         ) :
-        textRenderer_(std::move(textRenderer)) {}
+        textRenderer_(std::move(textRenderer)),
+        fontResourceProvider_(std::move(fontResourceProvider)){}
 
         /**
          * @brief Initializes the OpenGL device to access modern OpenGL.
@@ -163,6 +180,11 @@ export namespace helios::ext::opengl::rendering {
          * @see clearColor()
          */
         void beginRenderPass(helios::rendering::RenderPass& renderPass) const noexcept override {
+            // Reset cached state at the beginning of each render pass
+            // to ensure proper shader and VAO binding even when render queue contents change
+            lastShader_ = nullptr;
+            lastVao_ = 0;
+
             const auto& viewport = renderPass.viewport();
 
             assert(viewport.renderTarget() && "Unexpected missing render target for viewport");
@@ -207,9 +229,9 @@ export namespace helios::ext::opengl::rendering {
 
 
 
-            for (auto& rc: renderQueue.renderCommands()) {
+            for (auto& rc: renderQueue.meshRenderCommands()) {
 
-                if (const auto renderPrototype_ptr = rc->renderPrototype().lock()) {
+                if (const auto renderPrototype_ptr = rc.renderPrototype()) {
                     const auto& baseShader = renderPrototype_ptr->material().shader();
                     const auto& baseMesh = renderPrototype_ptr->mesh();
 
@@ -222,8 +244,8 @@ export namespace helios::ext::opengl::rendering {
                     }
 
                     shader->applyUniformValues(renderPass.frameUniformValues());
-                    shader->applyUniformValues(rc->objectUniformValues());
-                    shader->applyUniformValues(rc->materialUniformValues());
+                    shader->applyUniformValues(rc.objectUniformValues());
+                    shader->applyUniformValues(rc.materialUniformValues());
 
                     const auto* mesh = static_cast<const helios::ext::opengl::rendering::model::OpenGLMesh*>(&baseMesh);
                     assert(mesh && "Unexpected failure when casting to OpenGLMesh.");
@@ -285,6 +307,17 @@ export namespace helios::ext::opengl::rendering {
          */
         [[nodiscard]] helios::rendering::text::TextRenderer& textRenderer() const noexcept {
             return *textRenderer_;
+        }
+
+        /**
+         * @brief Returns a reference to the font resource provider.
+         *
+         * Use this to load fonts before creating `TextRenderPrototype` instances.
+         *
+         * @return Reference to the `FontResourceProvider` implementation.
+         */
+        [[nodiscard]] helios::rendering::text::FontResourceProvider& fontResourceProvider() const noexcept override {
+            return *fontResourceProvider_;
         }
 
 

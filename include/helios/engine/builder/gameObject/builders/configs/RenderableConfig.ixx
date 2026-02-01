@@ -168,7 +168,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
             const auto renderPrototype = std::make_shared<helios::rendering::RenderPrototype>(material, mesh);
 
             gameObject_->add<helios::engine::modules::rendering::renderable::components::RenderableComponent>(
-                std::make_shared<helios::rendering::Renderable>(renderPrototype)
+                std::make_shared<helios::rendering::mesh::MeshRenderable>(renderPrototype)
             );
 
             return *this;

@@ -56,6 +56,14 @@ export namespace helios::math {
          */
         constexpr vec4(const T x, const T y, const T z, const T w) noexcept : v{x, y, z, w} {}
 
+        /**
+        /**
+         * @brief Constructs a new vec4 with v used for the x, y, z, w components.
+         *
+         * @param v The value for the x, y, z, w component.
+         */
+        constexpr vec4(const T v) noexcept : v{v, v, v, v} {}
+
 
         /**
          * @brief Constructs a new vec4 from the vec3 vector and the w value.
@@ -124,12 +132,27 @@ export namespace helios::math {
          */
         [[nodiscard]] vec3<T> toVec3() const noexcept;
 
+        /**
+         * @brief Converts this 4D vector to a 2D vector.
+         *
+         * Extracts the x, y components from this vec4, discarding the z,w components.
+         *
+         * @return A new vec2<T> instance with components (x, y).
+         */
+        [[nodiscard]] vec2<T> toVec2() const noexcept;
+
     };
 
     template<helios::math::Numeric T>
     inline vec3<T> vec4<T>::toVec3() const noexcept {
         return vec3<T>{v[0], v[1], v[2]};
     }
+
+    template<helios::math::Numeric T>
+    inline vec2<T> vec4<T>::toVec2() const noexcept {
+        return vec2<T>{v[0], v[1]};
+    }
+
 
     /**
      * @brief Returns a const pointer to the first element of the vector's components.

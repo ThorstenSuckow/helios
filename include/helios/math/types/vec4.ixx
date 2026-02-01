@@ -57,7 +57,6 @@ export namespace helios::math {
         constexpr vec4(const T x, const T y, const T z, const T w) noexcept : v{x, y, z, w} {}
 
         /**
-        /**
          * @brief Constructs a new vec4 with v used for the x, y, z, w components.
          *
          * @param v The value for the x, y, z, w component.

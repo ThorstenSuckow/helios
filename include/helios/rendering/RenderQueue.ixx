@@ -11,7 +11,7 @@ module;
 
 export module helios.rendering.RenderQueue;
 
-import helios.rendering.RenderCommand;
+import helios.rendering.mesh.MeshRenderCommand;
 import helios.rendering.text.TextRenderCommand;
 
 import helios.util.log.Logger;
@@ -47,7 +47,7 @@ export namespace helios::rendering {
         /**
          * @brief Stores the unique ptrs to the RenderCommand objects of this queue.
          */
-        std::vector<std::unique_ptr<const helios::rendering::RenderCommand>> renderCommands_;
+        std::vector<helios::rendering::mesh::MeshRenderCommand> meshRenderCommands_;
 
         /**
          * @brief Stores text render commands for glyph-based text rendering.
@@ -96,13 +96,8 @@ export namespace helios::rendering {
          *
          * @todo prevent adding renderables while rendering
          */
-        void add(std::unique_ptr<const helios::rendering::RenderCommand> renderCommand) {
-            assert(renderCommand && "Received nullptr RenderCommand.");
-            if (!renderCommand) {
-                logger_.error("Attempted to add a nullptr RenderCommand to the queue.");
-                return; // silently skip nullptr to avoid crashes
-            }
-            renderCommands_.emplace_back(std::move(renderCommand));
+        void add(helios::rendering::mesh::MeshRenderCommand renderCommand) {
+            meshRenderCommands_.emplace_back(std::move(renderCommand));
         }
 
         /**
@@ -122,8 +117,8 @@ export namespace helios::rendering {
          *
          * @return A const ref to the list of `RenderCommand`s of this queue.
          */
-        [[nodiscard]] const std::vector<std::unique_ptr<const helios::rendering::RenderCommand>>& renderCommands() const noexcept {
-            return renderCommands_;
+        [[nodiscard]] const std::vector<helios::rendering::mesh::MeshRenderCommand>& meshRenderCommands() const noexcept {
+            return meshRenderCommands_;
         }
 
         /**
@@ -141,7 +136,7 @@ export namespace helios::rendering {
          * This prepares this queue to be reused in a new rendering pass.
          */
         void clear() {
-            renderCommands_.clear();
+            meshRenderCommands_.clear();
             textRenderCommands_.clear();
 
             /**
@@ -157,8 +152,8 @@ export namespace helios::rendering {
          *
          * @return The number of RenderCommands in this queue.
          */
-        [[nodiscard]] size_t renderCommandsSize() const noexcept {
-            return renderCommands_.size();
+        [[nodiscard]] size_t meshRenderCommandsSize() const noexcept {
+            return meshRenderCommands_.size();
         }
 
         /**

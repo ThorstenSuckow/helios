@@ -13,6 +13,7 @@ export module helios.rendering.text.TextRenderPrototype;
 
 import helios.rendering.text.config.TextShaderProperties;
 
+import helios.rendering.text.FontResourceProvider;
 import helios.rendering.shader.Shader;
 import helios.engine.core.data.FontId;
 
@@ -62,7 +63,10 @@ export namespace helios::rendering::text {
          */
         std::shared_ptr <const helios::rendering::text::config::TextShaderProperties> textProperties_;
 
-
+        /**
+         * @brief Provider for loading fonts and retrieving glyph data.
+         */
+        std::shared_ptr <helios::rendering::text::FontResourceProvider> fontResourceProvider_;
 
     public:
 
@@ -71,18 +75,30 @@ export namespace helios::rendering::text {
          *
          * @param shader The shader to use for text rendering.
          * @param textProperties Text-specific shader properties.
+         * @param fontResourceProvider Provider for loading fonts and retrieving glyph data.
          *
-         * @throws std::invalid_argument If `shader` is null.
+         * @throws std::invalid_argument If `shader`, `textProperties`, or `fontResourceProvider` is null.
          */
         explicit TextRenderPrototype(
             std::shared_ptr<const helios::rendering::shader::Shader> shader,
-            std::shared_ptr<const helios::rendering::text::config::TextShaderProperties> textProperties
+            std::shared_ptr<const helios::rendering::text::config::TextShaderProperties> textProperties,
+            std::shared_ptr<helios::rendering::text::FontResourceProvider> fontResourceProvider
+
         ) :
         shader_(std::move(shader)),
-        textProperties_(std::move(textProperties)) {
+        textProperties_(std::move(textProperties)),
+        fontResourceProvider_(std::move(fontResourceProvider)) {
 
             if (!shader_) {
                 throw std::invalid_argument("RenderPrototype received null shader");
+            }
+
+            if (!fontResourceProvider_) {
+                throw std::invalid_argument("RenderPrototype received null fontResourceProvider");
+            }
+
+            if (!textProperties_) {
+                throw std::invalid_argument("RenderPrototype received null textProperties");
             }
 
         }
@@ -94,6 +110,18 @@ export namespace helios::rendering::text {
          */
         [[nodiscard]] const helios::rendering::shader::Shader& shader() const noexcept {
             return *shader_;
+        }
+
+        /**
+         * @brief Returns the font resource provider.
+         *
+         * The font resource provider is used to load fonts and retrieve glyph data
+         * for text layout and rendering.
+         *
+         * @return Reference to the font resource provider.
+         */
+        [[nodiscard]] helios::rendering::text::FontResourceProvider& fontResourceProvider() const noexcept {
+            return *fontResourceProvider_;
         }
 
         /**

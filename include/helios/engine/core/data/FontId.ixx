@@ -30,12 +30,12 @@ export namespace helios::engine::core::data {
      * // Register font with TextRenderer
      * textRenderer.addFontFamily(arialFont, "fonts/arial.ttf");
      *
-     * // Use in DrawProperties
-     * DrawProperties props{arialFont, {100.0f, 200.0f}, 1.0f};
+     * // Use in TextMesh
+     * TextMesh props{arialFont, {100.0f, 200.0f}, 1.0f};
      * ```
      *
      * @see TextRenderer::addFontFamily()
-     * @see DrawProperties
+     * @see TextMesh
      */
     struct FontId {
 

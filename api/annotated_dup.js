@@ -42,6 +42,7 @@ var annotated_dup =
               [ "OpenGLShader", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader.html", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader" ],
               [ "OpenGLUniformLocationMap", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLUniformLocationMap.html", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLUniformLocationMap" ]
             ] ],
+            [ "FreeTypeFontResourceManager", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1FreeTypeFontResourceManager.html", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1FreeTypeFontResourceManager" ],
             [ "OpenGLDevice", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice.html", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice" ],
             [ "OpenGLGlyphTextRenderer", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLGlyphTextRenderer.html", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLGlyphTextRenderer" ]
           ] ]
@@ -408,6 +409,10 @@ var annotated_dup =
             [ "Shape", "structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape.html", "structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape" ]
           ] ]
         ] ],
+        [ "mesh", "namespacehelios_1_1rendering_1_1mesh.html", [
+          [ "MeshRenderable", "classhelios_1_1rendering_1_1mesh_1_1MeshRenderable.html", "classhelios_1_1rendering_1_1mesh_1_1MeshRenderable" ],
+          [ "MeshRenderCommand", "classhelios_1_1rendering_1_1mesh_1_1MeshRenderCommand.html", "classhelios_1_1rendering_1_1mesh_1_1MeshRenderCommand" ]
+        ] ],
         [ "model", "namespacehelios_1_1rendering_1_1model.html", [
           [ "config", "namespacehelios_1_1rendering_1_1model_1_1config.html", [
             [ "MaterialProperties", "classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties.html", "classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties" ],
@@ -426,12 +431,15 @@ var annotated_dup =
             [ "TextShaderProperties", "classhelios_1_1rendering_1_1text_1_1config_1_1TextShaderProperties.html", "classhelios_1_1rendering_1_1text_1_1config_1_1TextShaderProperties" ],
             [ "TextShaderPropertiesOverride", "structhelios_1_1rendering_1_1text_1_1config_1_1TextShaderPropertiesOverride.html", "structhelios_1_1rendering_1_1text_1_1config_1_1TextShaderPropertiesOverride" ]
           ] ],
-          [ "DrawProperties", "structhelios_1_1rendering_1_1text_1_1DrawProperties.html", "structhelios_1_1rendering_1_1text_1_1DrawProperties" ],
+          [ "FontResourceProvider", "classhelios_1_1rendering_1_1text_1_1FontResourceProvider.html", "classhelios_1_1rendering_1_1text_1_1FontResourceProvider" ],
           [ "Glyph", "structhelios_1_1rendering_1_1text_1_1Glyph.html", "structhelios_1_1rendering_1_1text_1_1Glyph" ],
+          [ "TextMesh", "classhelios_1_1rendering_1_1text_1_1TextMesh.html", "classhelios_1_1rendering_1_1text_1_1TextMesh" ],
           [ "TextRenderable", "classhelios_1_1rendering_1_1text_1_1TextRenderable.html", "classhelios_1_1rendering_1_1text_1_1TextRenderable" ],
           [ "TextRenderCommand", "classhelios_1_1rendering_1_1text_1_1TextRenderCommand.html", "classhelios_1_1rendering_1_1text_1_1TextRenderCommand" ],
           [ "TextRenderer", "classhelios_1_1rendering_1_1text_1_1TextRenderer.html", "classhelios_1_1rendering_1_1text_1_1TextRenderer" ],
-          [ "TextRenderPrototype", "classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html", "classhelios_1_1rendering_1_1text_1_1TextRenderPrototype" ]
+          [ "TextRenderPrototype", "classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html", "classhelios_1_1rendering_1_1text_1_1TextRenderPrototype" ],
+          [ "TextLayout", "structhelios_1_1rendering_1_1text_1_1TextLayout.html", "structhelios_1_1rendering_1_1text_1_1TextLayout" ],
+          [ "TypeSetter", "classhelios_1_1rendering_1_1text_1_1TypeSetter.html", "classhelios_1_1rendering_1_1text_1_1TypeSetter" ]
         ] ],
         [ "Renderable", "classhelios_1_1rendering_1_1Renderable.html", "classhelios_1_1rendering_1_1Renderable" ],
         [ "RenderCommand", "classhelios_1_1rendering_1_1RenderCommand.html", "classhelios_1_1rendering_1_1RenderCommand" ],

@@ -112,16 +112,18 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6f3579f165e1c89c41376f81f7eabfa7" id="r_a6f3579f165e1c89c41376f81f7eabfa7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6f3579f165e1c89c41376f81f7eabfa7">TextRenderPrototype</a> (std::shared_ptr&lt; const <a class="el" href="classhelios_1_1rendering_1_1shader_1_1Shader.html">helios::rendering::shader::Shader</a> &gt; <a class="el" href="#a69b9796a0af2c93085131e1309cbb97f">shader</a>, std::shared_ptr&lt; const <a class="el" href="classhelios_1_1rendering_1_1text_1_1config_1_1TextShaderProperties.html">helios::rendering::text::config::TextShaderProperties</a> &gt; <a class="el" href="#ac83f41e46800b2dac0cd046bb8357fad">textProperties</a>)</td></tr>
-<tr class="memdesc:a6f3579f165e1c89c41376f81f7eabfa7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a text render prototype.  <br /></td></tr>
+<tr class="memitem:a85c04314d448d1a74e099d35dc9dd6e9" id="r_a85c04314d448d1a74e099d35dc9dd6e9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a85c04314d448d1a74e099d35dc9dd6e9">TextRenderPrototype</a> (std::shared_ptr&lt; const <a class="el" href="classhelios_1_1rendering_1_1shader_1_1Shader.html">helios::rendering::shader::Shader</a> &gt; <a class="el" href="#a69b9796a0af2c93085131e1309cbb97f">shader</a>, std::shared_ptr&lt; const <a class="el" href="classhelios_1_1rendering_1_1text_1_1config_1_1TextShaderProperties.html">helios::rendering::text::config::TextShaderProperties</a> &gt; <a class="el" href="#ac83f41e46800b2dac0cd046bb8357fad">textProperties</a>, <a class="el" href="classhelios_1_1rendering_1_1text_1_1FontResourceProvider.html">helios::rendering::text::FontResourceProvider</a> *<a class="el" href="#aecf36a734eb5cf66cd0275c052558d5f">fontResourceProvider</a>)</td></tr>
+<tr class="memdesc:a85c04314d448d1a74e099d35dc9dd6e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a text render prototype.  <br /></td></tr>
 <tr class="memitem:a69b9796a0af2c93085131e1309cbb97f" id="r_a69b9796a0af2c93085131e1309cbb97f"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classhelios_1_1rendering_1_1shader_1_1Shader.html">helios::rendering::shader::Shader</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a69b9796a0af2c93085131e1309cbb97f">shader</a> () const noexcept</td></tr>
 <tr class="memdesc:a69b9796a0af2c93085131e1309cbb97f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the shader.  <br /></td></tr>
+<tr class="memitem:aecf36a734eb5cf66cd0275c052558d5f" id="r_aecf36a734eb5cf66cd0275c052558d5f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1rendering_1_1text_1_1FontResourceProvider.html">helios::rendering::text::FontResourceProvider</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aecf36a734eb5cf66cd0275c052558d5f">fontResourceProvider</a> () const noexcept</td></tr>
+<tr class="memdesc:aecf36a734eb5cf66cd0275c052558d5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the font resource provider.  <br /></td></tr>
 <tr class="memitem:ac83f41e46800b2dac0cd046bb8357fad" id="r_ac83f41e46800b2dac0cd046bb8357fad"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classhelios_1_1rendering_1_1text_1_1config_1_1TextShaderProperties.html">helios::rendering::text::config::TextShaderProperties</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac83f41e46800b2dac0cd046bb8357fad">textProperties</a> () const noexcept</td></tr>
 <tr class="memdesc:ac83f41e46800b2dac0cd046bb8357fad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the text shader properties.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Immutable, shared prototype for text rendering configuration. </p>
-<p>`TextRenderPrototype` holds the shader and text properties that are shared across multiple `TextRenderable` instances. This flyweight pattern reduces memory usage and allows efficient batching of text with the same configuration.</p>
+<p>`TextRenderPrototype` holds the shader and text properties that are shared across multiple `TextRenderable` instances. This reduces memory usage and allows efficient batching of text with the same configuration.</p>
 <p>## Design</p>
 <ul>
 <li>**Immutable:** Configuration cannot be changed after construction.</li>
@@ -130,18 +132,21 @@ Public Member Functions</h2></td></tr>
 </ul>
 <p>## Usage</p>
 <p>```cpp auto shader = std::make_shared&lt;OpenGLShader&gt;(...); auto textProps = std::make_shared&lt;TextShaderProperties&gt;(textColor);</p>
-<p>auto prototype = std::make_shared&lt;TextRenderPrototype&gt;(shader, textProps);</p>
-<p>// Share prototype across multiple renderables <a class="el" href="classhelios_1_1rendering_1_1text_1_1TextRenderable.html" title="High-level text component that can be attached to game objects.">TextRenderable</a> title("Title", prototype, drawProps1); <a class="el" href="classhelios_1_1rendering_1_1text_1_1TextRenderable.html" title="High-level text component that can be attached to game objects.">TextRenderable</a> score("Score: 0", prototype, drawProps2); ```</p>
+<p>// Get font provider from rendering device auto&amp; fontProvider = device.fontResourceProvider(); fontProvider.loadFont(FontId{"roboto"}, "fonts/Roboto.ttf");</p>
+<p>auto prototype = std::make_shared&lt;TextRenderPrototype&gt;(shader, textProps, &amp;fontProvider);</p>
+<p>// Share prototype across multiple renderables <a class="el" href="classhelios_1_1rendering_1_1text_1_1TextRenderable.html" title="High-level text component that can be attached to game objects.">TextRenderable</a> title(std::make_unique&lt;TextMesh&gt;("Title", fontId), prototype); <a class="el" href="classhelios_1_1rendering_1_1text_1_1TextRenderable.html" title="High-level text component that can be attached to game objects.">TextRenderable</a> score(std::make_unique&lt;TextMesh&gt;("Score: 0", fontId), prototype); ```</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1rendering_1_1text_1_1TextRenderable.html" title="High-level text component that can be attached to game objects.">TextRenderable</a> </dd>
 <dd>
 TextShaderProperties </dd>
 <dd>
+<a class="el" href="classhelios_1_1rendering_1_1text_1_1FontResourceProvider.html" title="Abstract interface for loading fonts and providing glyph data.">FontResourceProvider</a> </dd>
+<dd>
 Shader </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="TextRenderPrototype_8ixx_source.html#l00051">51</a> of file <a class="el" href="TextRenderPrototype_8ixx_source.html">TextRenderPrototype.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TextRenderPrototype_8ixx_source.html#l00057">57</a> of file <a class="el" href="TextRenderPrototype_8ixx_source.html">TextRenderPrototype.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a6f3579f165e1c89c41376f81f7eabfa7" name="a6f3579f165e1c89c41376f81f7eabfa7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f3579f165e1c89c41376f81f7eabfa7">&#9670;&#160;</a></span>TextRenderPrototype()</h2>
+<a id="a85c04314d448d1a74e099d35dc9dd6e9" name="a85c04314d448d1a74e099d35dc9dd6e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85c04314d448d1a74e099d35dc9dd6e9">&#9670;&#160;</a></span>TextRenderPrototype()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -157,7 +162,12 @@ Shader </dd></dl>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::shared_ptr&lt; const <a class="el" href="classhelios_1_1rendering_1_1text_1_1config_1_1TextShaderProperties.html">helios::rendering::text::config::TextShaderProperties</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>textProperties</em></span>&#160;)</td>
+          <td class="paramtype">std::shared_ptr&lt; const <a class="el" href="classhelios_1_1rendering_1_1text_1_1config_1_1TextShaderProperties.html">helios::rendering::text::config::TextShaderProperties</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>textProperties</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1rendering_1_1text_1_1FontResourceProvider.html">helios::rendering::text::FontResourceProvider</a> *</td>          <td class="paramname"><span class="paramname"><em>fontResourceProvider</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -171,30 +181,70 @@ Shader </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">shader</td><td>The shader to use for text rendering. </td></tr>
-    <tr><td class="paramname">textProperties</td><td>Text-specific shader properties.</td></tr>
+    <tr><td class="paramname">textProperties</td><td>Text-specific shader properties. </td></tr>
+    <tr><td class="paramname">fontResourceProvider</td><td>Raw pointer to the font resource provider (must remain valid for the lifetime of this prototype).</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">std::invalid_argument</td><td>If `shader` is null. </td></tr>
+    <tr><td class="paramname">std::invalid_argument</td><td>If `shader`, `textProperties`, or `fontResourceProvider` is null. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="TextRenderPrototype_8ixx_source.html#l00077">77</a> of file <a class="el" href="TextRenderPrototype_8ixx_source.html">TextRenderPrototype.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TextRenderPrototype_8ixx_source.html#l00091">91</a> of file <a class="el" href="TextRenderPrototype_8ixx_source.html">TextRenderPrototype.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="TextRenderPrototype_8ixx_source.html#l00095">shader()</a>, and <a class="el" href="TextRenderPrototype_8ixx_source.html#l00104">textProperties()</a>.</p>
+<p class="reference">References <a class="el" href="TextRenderPrototype_8ixx_source.html#l00132">fontResourceProvider()</a>, <a class="el" href="TextRenderPrototype_8ixx_source.html#l00120">shader()</a>, and <a class="el" href="TextRenderPrototype_8ixx_source.html#l00141">textProperties()</a>.</p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype_a6f3579f165e1c89c41376f81f7eabfa7_cgraph.svg" width="443" height="144"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype_a85c04314d448d1a74e099d35dc9dd6e9_cgraph.svg" width="443" height="223"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="aecf36a734eb5cf66cd0275c052558d5f" name="aecf36a734eb5cf66cd0275c052558d5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecf36a734eb5cf66cd0275c052558d5f">&#9670;&#160;</a></span>fontResourceProvider()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1rendering_1_1text_1_1FontResourceProvider.html">helios::rendering::text::FontResourceProvider</a> &amp; helios::rendering::text::TextRenderPrototype::fontResourceProvider </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the font resource provider. </p>
+<p>The font resource provider is used to load fonts and retrieve glyph data for text layout and rendering.</p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the font resource provider. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="TextRenderPrototype_8ixx_source.html#l00132">132</a> of file <a class="el" href="TextRenderPrototype_8ixx_source.html">TextRenderPrototype.ixx</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="TextRenderPrototype_8ixx_source.html#l00091">TextRenderPrototype()</a>.</p>
+<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype_aecf36a734eb5cf66cd0275c052558d5f_icgraph.svg" width="443" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
 <a id="a69b9796a0af2c93085131e1309cbb97f" name="a69b9796a0af2c93085131e1309cbb97f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a69b9796a0af2c93085131e1309cbb97f">&#9670;&#160;</a></span>shader()</h2>
 
@@ -221,13 +271,13 @@ Shader </dd></dl>
 <p>Returns the shader. </p>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the shader used for text rendering. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="TextRenderPrototype_8ixx_source.html#l00095">95</a> of file <a class="el" href="TextRenderPrototype_8ixx_source.html">TextRenderPrototype.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TextRenderPrototype_8ixx_source.html#l00120">120</a> of file <a class="el" href="TextRenderPrototype_8ixx_source.html">TextRenderPrototype.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="TextRenderPrototype_8ixx_source.html#l00077">TextRenderPrototype()</a>.</p>
-<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="TextRenderPrototype_8ixx_source.html#l00091">TextRenderPrototype()</a>.</p>
+<div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype_a69b9796a0af2c93085131e1309cbb97f_icgraph.svg" width="443" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
@@ -259,13 +309,13 @@ Shader </dd></dl>
 <p>Returns the text shader properties. </p>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the text-specific properties. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="TextRenderPrototype_8ixx_source.html#l00104">104</a> of file <a class="el" href="TextRenderPrototype_8ixx_source.html">TextRenderPrototype.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TextRenderPrototype_8ixx_source.html#l00141">141</a> of file <a class="el" href="TextRenderPrototype_8ixx_source.html">TextRenderPrototype.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="TextRenderPrototype_8ixx_source.html#l00077">TextRenderPrototype()</a>.</p>
-<div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="TextRenderPrototype_8ixx_source.html#l00091">TextRenderPrototype()</a>.</p>
+<div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div id="dynsection-3-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype_ac83f41e46800b2dac0cd046bb8357fad_icgraph.svg" width="443" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 

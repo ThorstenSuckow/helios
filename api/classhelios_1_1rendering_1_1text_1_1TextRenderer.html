@@ -119,10 +119,9 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a374aec940343b0a76338d808e9bae0c4" id="r_a374aec940343b0a76338d808e9bae0c4"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a374aec940343b0a76338d808e9bae0c4">~TextRenderer</a> ()=default</td></tr>
+<tr class="memdesc:a374aec940343b0a76338d808e9bae0c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor for proper cleanup of derived classes.  <br /></td></tr>
 <tr class="memitem:adc04b64ba141e50cd7fc1366f2aba0da" id="r_adc04b64ba141e50cd7fc1366f2aba0da"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adc04b64ba141e50cd7fc1366f2aba0da">render</a> (const <a class="el" href="classhelios_1_1rendering_1_1text_1_1TextRenderCommand.html">TextRenderCommand</a> &amp;command, const <a class="el" href="classhelios_1_1rendering_1_1shader_1_1UniformValueMap.html">helios::rendering::shader::UniformValueMap</a> &amp;frameUniformValues) noexcept=0</td></tr>
 <tr class="memdesc:adc04b64ba141e50cd7fc1366f2aba0da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renders text based on the given command.  <br /></td></tr>
-<tr class="memitem:a7d3841b67eb894de5bb6fff92be1b27d" id="r_a7d3841b67eb894de5bb6fff92be1b27d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7d3841b67eb894de5bb6fff92be1b27d">addFontFamily</a> (const <a class="el" href="structhelios_1_1engine_1_1core_1_1data_1_1FontId.html">helios::engine::core::data::FontId</a> fontId, std::string_view path, const unsigned short begin=0, const unsigned short end=128)=0</td></tr>
-<tr class="memdesc:a7d3841b67eb894de5bb6fff92be1b27d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a font family for text rendering.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Abstract interface for text rendering implementations. </p>
@@ -167,69 +166,11 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Virtual destructor for proper cleanup of derived classes. </p>
+
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a7d3841b67eb894de5bb6fff92be1b27d" name="a7d3841b67eb894de5bb6fff92be1b27d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7d3841b67eb894de5bb6fff92be1b27d">&#9670;&#160;</a></span>addFontFamily()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void helios::rendering::text::TextRenderer::addFontFamily </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structhelios_1_1engine_1_1core_1_1data_1_1FontId.html">helios::engine::core::data::FontId</a></td>          <td class="paramname"><span class="paramname"><em>fontId</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>path</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const unsigned short</td>          <td class="paramname"><span class="paramname"><em>begin</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const unsigned short</td>          <td class="paramname"><span class="paramname"><em>end</em></span><span class="paramdefsep"> = </span><span class="paramdefval">128</span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Registers a font family for text rendering. </p>
-<p>Loads a font from the specified path and caches glyphs within the given character range. The font can later be referenced by its `FontId` when creating `TextRenderCommand` objects.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">fontId</td><td>Unique identifier for this font family. </td></tr>
-    <tr><td class="paramname">path</td><td>File system path to the font file (e.g., TTF, OTF). </td></tr>
-    <tr><td class="paramname">begin</td><td>Start of the character range to load (inclusive, default: 0). </td></tr>
-    <tr><td class="paramname">end</td><td>End of the character range to load (exclusive, default: 128).</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">std::runtime_error</td><td>If the font file cannot be loaded. </td></tr>
-    <tr><td class="paramname">std::invalid_argument</td><td>If `begin &gt; end`. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implemented in <a class="el" href="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLGlyphTextRenderer.html#a59feb10e3137792e6fe42ec9b6230302">helios::ext::opengl::rendering::OpenGLGlyphTextRenderer</a>.</p>
-
-</div>
-</div>
 <a id="adc04b64ba141e50cd7fc1366f2aba0da" name="adc04b64ba141e50cd7fc1366f2aba0da"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adc04b64ba141e50cd7fc1366f2aba0da">&#9670;&#160;</a></span>render()</h2>
 

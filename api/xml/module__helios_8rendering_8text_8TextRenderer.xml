@@ -12,6 +12,7 @@
         <name>~TextRenderer</name>
         <qualifiedname>helios::rendering::text::TextRenderer::~TextRenderer</qualifiedname>
         <briefdescription>
+<para>Virtual destructor for proper cleanup of derived classes. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -63,92 +64,6 @@
         <inbodydescription>
         </inbodydescription>
         <location file="/tmp/h/include/helios/rendering/text/TextRenderer.ixx" line="73" column="22"/>
-      </memberdef>
-      <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1TextRenderer_1a7d3841b67eb894de5bb6fff92be1b27d" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
-        <type>void</type>
-        <definition>virtual void helios::rendering::text::TextRenderer::addFontFamily</definition>
-        <argsstring>(const helios::engine::core::data::FontId fontId, std::string_view path, const unsigned short begin=0, const unsigned short end=128)=0</argsstring>
-        <name>addFontFamily</name>
-        <qualifiedname>helios::rendering::text::TextRenderer::addFontFamily</qualifiedname>
-        <reimplementedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLGlyphTextRenderer_1a59feb10e3137792e6fe42ec9b6230302">addFontFamily</reimplementedby>
-        <param>
-          <type>const <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1FontId" kindref="compound">helios::engine::core::data::FontId</ref></type>
-          <declname>fontId</declname>
-        </param>
-        <param>
-          <type>std::string_view</type>
-          <declname>path</declname>
-        </param>
-        <param>
-          <type>const unsigned short</type>
-          <declname>begin</declname>
-          <defval>0</defval>
-        </param>
-        <param>
-          <type>const unsigned short</type>
-          <declname>end</declname>
-          <defval>128</defval>
-        </param>
-        <briefdescription>
-<para>Registers a font family for text rendering. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>Loads a font from the specified path and caches glyphs within the given character range. The font can later be referenced by its `FontId` when creating `TextRenderCommand` objects.</para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>fontId</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Unique identifier for this font family. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>path</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>File system path to the font file (e.g., TTF, OTF). </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>begin</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Start of the character range to load (inclusive, default: 0). </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>end</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>End of the character range to load (exclusive, default: 128).</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<parameterlist kind="exception"><parameteritem>
-<parameternamelist>
-<parametername>std::runtime_error</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>If the font file cannot be loaded. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>std::invalid_argument</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>If `begin &gt; end`. </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/text/TextRenderer.ixx" line="93" column="22"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

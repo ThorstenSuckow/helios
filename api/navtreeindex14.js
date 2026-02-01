@@ -1,6 +1,17 @@
 var NAVTREEINDEX14 =
 {
-"classhelios_1_1event_1_1EventQueue.html#afb677226c53f3fcfd7fe081573d3f8d4":[3,0,291,0,0],
+"classhelios_1_1event_1_1EventQueue.html#a28eeb42988a14d9f1e9457bf39a00666":[4,0,0,4,5,1],
+"classhelios_1_1event_1_1EventQueue.html#a28eeb42988a14d9f1e9457bf39a00666":[6,0,0,4,5,1],
+"classhelios_1_1event_1_1EventQueue.html#a5a2fd34261a19ae471f4ede5bf474963":[3,0,292,0,4],
+"classhelios_1_1event_1_1EventQueue.html#a5a2fd34261a19ae471f4ede5bf474963":[4,0,0,4,5,4],
+"classhelios_1_1event_1_1EventQueue.html#a5a2fd34261a19ae471f4ede5bf474963":[6,0,0,4,5,4],
+"classhelios_1_1event_1_1EventQueue.html#ababbf4a41e5a10e17abb6a5c3b20b84d":[3,0,292,0,2],
+"classhelios_1_1event_1_1EventQueue.html#ababbf4a41e5a10e17abb6a5c3b20b84d":[4,0,0,4,5,2],
+"classhelios_1_1event_1_1EventQueue.html#ababbf4a41e5a10e17abb6a5c3b20b84d":[6,0,0,4,5,2],
+"classhelios_1_1event_1_1EventQueue.html#af36e46db487566d8d3c51a690c46ab86":[3,0,292,0,3],
+"classhelios_1_1event_1_1EventQueue.html#af36e46db487566d8d3c51a690c46ab86":[4,0,0,4,5,3],
+"classhelios_1_1event_1_1EventQueue.html#af36e46db487566d8d3c51a690c46ab86":[6,0,0,4,5,3],
+"classhelios_1_1event_1_1EventQueue.html#afb677226c53f3fcfd7fe081573d3f8d4":[3,0,292,0,0],
 "classhelios_1_1event_1_1EventQueue.html#afb677226c53f3fcfd7fe081573d3f8d4":[4,0,0,4,5,0],
 "classhelios_1_1event_1_1EventQueue.html#afb677226c53f3fcfd7fe081573d3f8d4":[6,0,0,4,5,0],
 "classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication.html":[3,0,3,0],
@@ -238,16 +249,5 @@ var NAVTREEINDEX14 =
 "classhelios_1_1ext_1_1imgui_1_1widgets_1_1CameraWidget.html":[3,0,21,0],
 "classhelios_1_1ext_1_1imgui_1_1widgets_1_1CameraWidget.html":[3,0,21,1],
 "classhelios_1_1ext_1_1imgui_1_1widgets_1_1CameraWidget.html":[4,0,0,0,1,0,0],
-"classhelios_1_1ext_1_1imgui_1_1widgets_1_1CameraWidget.html":[6,0,0,0,1,0,0],
-"classhelios_1_1ext_1_1imgui_1_1widgets_1_1CameraWidget.html#a07fc0fbbf52e97d447e2f3177980dd00":[3,0,21,0,3],
-"classhelios_1_1ext_1_1imgui_1_1widgets_1_1CameraWidget.html#a07fc0fbbf52e97d447e2f3177980dd00":[3,0,21,1,3],
-"classhelios_1_1ext_1_1imgui_1_1widgets_1_1CameraWidget.html#a07fc0fbbf52e97d447e2f3177980dd00":[4,0,0,0,1,0,0,3],
-"classhelios_1_1ext_1_1imgui_1_1widgets_1_1CameraWidget.html#a07fc0fbbf52e97d447e2f3177980dd00":[6,0,0,0,1,0,0,3],
-"classhelios_1_1ext_1_1imgui_1_1widgets_1_1CameraWidget.html#a4d2a098ee6d7a6596550c348b8480e7c":[3,0,21,0,1],
-"classhelios_1_1ext_1_1imgui_1_1widgets_1_1CameraWidget.html#a4d2a098ee6d7a6596550c348b8480e7c":[3,0,21,1,1],
-"classhelios_1_1ext_1_1imgui_1_1widgets_1_1CameraWidget.html#a4d2a098ee6d7a6596550c348b8480e7c":[4,0,0,0,1,0,0,1],
-"classhelios_1_1ext_1_1imgui_1_1widgets_1_1CameraWidget.html#a4d2a098ee6d7a6596550c348b8480e7c":[6,0,0,0,1,0,0,1],
-"classhelios_1_1ext_1_1imgui_1_1widgets_1_1CameraWidget.html#a50dee3fa50e4ac784d28e9b698e61daf":[3,0,21,0,0],
-"classhelios_1_1ext_1_1imgui_1_1widgets_1_1CameraWidget.html#a50dee3fa50e4ac784d28e9b698e61daf":[3,0,21,1,0],
-"classhelios_1_1ext_1_1imgui_1_1widgets_1_1CameraWidget.html#a50dee3fa50e4ac784d28e9b698e61daf":[4,0,0,0,1,0,0,0]
+"classhelios_1_1ext_1_1imgui_1_1widgets_1_1CameraWidget.html":[6,0,0,0,1,0,0]
 };

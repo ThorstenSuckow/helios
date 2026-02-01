@@ -5,20 +5,21 @@
     <innerfile refid="SnapshotItem_8ixx">SnapshotItem.ixx</innerfile>
     <innerclass refid="structhelios_1_1scene_1_1SnapshotItem" prot="public">helios::scene::SnapshotItem</innerclass>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="structhelios_1_1scene_1_1SnapshotItem_1a6736dc929f8edf9ff5985df056d3bc2d" prot="private" static="no" mutable="no">
-        <type>std::weak_ptr&lt; const <ref refid="classhelios_1_1rendering_1_1Renderable" kindref="compound">helios::rendering::Renderable</ref> &gt;</type>
-        <definition>std::weak_ptr&lt;const helios::rendering::Renderable&gt; helios::scene::SnapshotItem::renderable_</definition>
+      <memberdef kind="variable" id="structhelios_1_1scene_1_1SnapshotItem_1a0613e8ef184eff133ac11f1851575008" prot="private" static="no" mutable="no">
+        <type>const <ref refid="classhelios_1_1rendering_1_1Renderable" kindref="compound">helios::rendering::Renderable</ref> *</type>
+        <definition>const helios::rendering::Renderable* helios::scene::SnapshotItem::renderable_</definition>
         <argsstring></argsstring>
         <name>renderable_</name>
         <qualifiedname>helios::scene::SnapshotItem::renderable_</qualifiedname>
         <briefdescription>
-<para>A weak pointer to the actual Renderable object. </para>
+<para>A non-owning raw pointer to the Renderable object. </para>
         </briefdescription>
         <detaileddescription>
+<para>The Renderable must remain valid for the lifetime of this <ref refid="structhelios_1_1scene_1_1SnapshotItem" kindref="compound">SnapshotItem</ref>. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/scene/SnapshotItem.ixx" line="53" column="23" bodyfile="/tmp/h/include/helios/scene/SnapshotItem.ixx" bodystart="53" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/scene/SnapshotItem.ixx" line="44" column="45" bodyfile="/tmp/h/include/helios/scene/SnapshotItem.ixx" bodystart="44" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structhelios_1_1scene_1_1SnapshotItem_1afddf6a24f88bbcac3a553112ce261d25" prot="private" static="no" mutable="no">
         <type>const <ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">helios::math::mat4f</ref></type>
@@ -33,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/scene/SnapshotItem.ixx" line="58" column="35" bodyfile="/tmp/h/include/helios/scene/SnapshotItem.ixx" bodystart="58" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/scene/SnapshotItem.ixx" line="49" column="35" bodyfile="/tmp/h/include/helios/scene/SnapshotItem.ixx" bodystart="49" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -53,12 +54,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/scene/SnapshotItem.ixx" line="64" column="9"/>
+        <location file="/tmp/h/include/helios/scene/SnapshotItem.ixx" line="55" column="9"/>
         <references refid="structhelios_1_1scene_1_1SnapshotItem_1a896b2a4f5c6bf92b2dd560281cd0b3f6">helios::scene::SnapshotItem::SnapshotItem</references>
         <referencedby refid="structhelios_1_1scene_1_1SnapshotItem_1a10f299edb3444212e2837607f7cba4b9">helios::scene::SnapshotItem::operator=</referencedby>
+        <referencedby refid="structhelios_1_1scene_1_1SnapshotItem_1a1540048ebbafb1fb1c00967268c5930f" compoundref="SnapshotItem_8ixx" startline="71" endline="77">helios::scene::SnapshotItem::SnapshotItem</referencedby>
         <referencedby refid="structhelios_1_1scene_1_1SnapshotItem_1a896b2a4f5c6bf92b2dd560281cd0b3f6">helios::scene::SnapshotItem::SnapshotItem</referencedby>
         <referencedby refid="structhelios_1_1scene_1_1SnapshotItem_1a6eab653f8e9aca29ddbbf1d147df23b3">helios::scene::SnapshotItem::SnapshotItem</referencedby>
-        <referencedby refid="structhelios_1_1scene_1_1SnapshotItem_1a3d91e9c3e4e5529eb95aee6ca15c3c98" compoundref="SnapshotItem_8ixx" startline="80" endline="86">helios::scene::SnapshotItem::SnapshotItem</referencedby>
       </memberdef>
       <memberdef kind="function" id="structhelios_1_1scene_1_1SnapshotItem_1a10f299edb3444212e2837607f7cba4b9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SnapshotItem &amp;</type>
@@ -75,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/scene/SnapshotItem.ixx" line="65" column="22"/>
+        <location file="/tmp/h/include/helios/scene/SnapshotItem.ixx" line="56" column="22"/>
         <references refid="structhelios_1_1scene_1_1SnapshotItem_1a896b2a4f5c6bf92b2dd560281cd0b3f6">helios::scene::SnapshotItem::SnapshotItem</references>
       </memberdef>
       <memberdef kind="function" id="structhelios_1_1scene_1_1SnapshotItem_1a6eab653f8e9aca29ddbbf1d147df23b3" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
@@ -97,17 +98,17 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/scene/SnapshotItem.ixx" line="71" column="9"/>
+        <location file="/tmp/h/include/helios/scene/SnapshotItem.ixx" line="62" column="9"/>
         <references refid="structhelios_1_1scene_1_1SnapshotItem_1a896b2a4f5c6bf92b2dd560281cd0b3f6">helios::scene::SnapshotItem::SnapshotItem</references>
       </memberdef>
-      <memberdef kind="function" id="structhelios_1_1scene_1_1SnapshotItem_1a3d91e9c3e4e5529eb95aee6ca15c3c98" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="structhelios_1_1scene_1_1SnapshotItem_1a1540048ebbafb1fb1c00967268c5930f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
         <definition>helios::scene::SnapshotItem::SnapshotItem</definition>
-        <argsstring>(std::weak_ptr&lt; const helios::rendering::Renderable &gt; renderable, const helios::math::mat4f &amp;worldMatrix)</argsstring>
+        <argsstring>(const helios::rendering::Renderable *renderable, const helios::math::mat4f &amp;worldMatrix)</argsstring>
         <name>SnapshotItem</name>
         <qualifiedname>helios::scene::SnapshotItem::SnapshotItem</qualifiedname>
         <param>
-          <type>std::weak_ptr&lt; const <ref refid="classhelios_1_1rendering_1_1Renderable" kindref="compound">helios::rendering::Renderable</ref> &gt;</type>
+          <type>const <ref refid="classhelios_1_1rendering_1_1Renderable" kindref="compound">helios::rendering::Renderable</ref> *</type>
           <declname>renderable</declname>
         </param>
         <param>
@@ -123,7 +124,7 @@
 <parametername>renderable</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A weak_ptr to the Renderable. </para>
+<para>A raw pointer to the Renderable (must remain valid for the lifetime of this item). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -139,29 +140,29 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/scene/SnapshotItem.ixx" line="80" column="9" bodyfile="/tmp/h/include/helios/scene/SnapshotItem.ixx" bodystart="80" bodyend="86"/>
-        <references refid="structhelios_1_1scene_1_1SnapshotItem_1a3145126ee37604f07f27f3f8ed8d30e2" compoundref="SnapshotItem_8ixx" startline="96" endline="98">helios::scene::SnapshotItem::renderable</references>
+        <location file="/tmp/h/include/helios/scene/SnapshotItem.ixx" line="71" column="9" bodyfile="/tmp/h/include/helios/scene/SnapshotItem.ixx" bodystart="71" bodyend="77"/>
+        <references refid="structhelios_1_1scene_1_1SnapshotItem_1af7bc9a72d32da9a9cd4df61e8ef2ebf3" compoundref="SnapshotItem_8ixx" startline="84" endline="86">helios::scene::SnapshotItem::renderable</references>
         <references refid="structhelios_1_1scene_1_1SnapshotItem_1a896b2a4f5c6bf92b2dd560281cd0b3f6">helios::scene::SnapshotItem::SnapshotItem</references>
-        <references refid="structhelios_1_1scene_1_1SnapshotItem_1a9b1e4c1e12d5c92284036256995442f5" compoundref="SnapshotItem_8ixx" startline="107" endline="109">helios::scene::SnapshotItem::worldMatrix</references>
+        <references refid="structhelios_1_1scene_1_1SnapshotItem_1a9b1e4c1e12d5c92284036256995442f5" compoundref="SnapshotItem_8ixx" startline="95" endline="97">helios::scene::SnapshotItem::worldMatrix</references>
       </memberdef>
-      <memberdef kind="function" id="structhelios_1_1scene_1_1SnapshotItem_1a3145126ee37604f07f27f3f8ed8d30e2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>std::weak_ptr&lt; const <ref refid="classhelios_1_1rendering_1_1Renderable" kindref="compound">helios::rendering::Renderable</ref> &gt;</type>
-        <definition>std::weak_ptr&lt; const helios::rendering::Renderable &gt; helios::scene::SnapshotItem::renderable</definition>
+      <memberdef kind="function" id="structhelios_1_1scene_1_1SnapshotItem_1af7bc9a72d32da9a9cd4df61e8ef2ebf3" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classhelios_1_1rendering_1_1Renderable" kindref="compound">helios::rendering::Renderable</ref> *</type>
+        <definition>const helios::rendering::Renderable * helios::scene::SnapshotItem::renderable</definition>
         <argsstring>() const noexcept</argsstring>
         <name>renderable</name>
         <qualifiedname>helios::scene::SnapshotItem::renderable</qualifiedname>
         <briefdescription>
-<para>Returns a weak_ptr to the Renderable of this <ref refid="structhelios_1_1scene_1_1SnapshotItem" kindref="compound">SnapshotItem</ref>. Use `.lock()` on the returned weak_ptr to obtain a shared_ptr for the Renderable, if it still exists. If the Renderable does not exist, the <ref refid="structhelios_1_1scene_1_1SnapshotItem" kindref="compound">SnapshotItem</ref> should be ignored for further processing. </para>
+<para>Returns a raw pointer to the Renderable of this <ref refid="structhelios_1_1scene_1_1SnapshotItem" kindref="compound">SnapshotItem</ref>. </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>A weak_ptr to the Renderable of this <ref refid="structhelios_1_1scene_1_1SnapshotItem" kindref="compound">SnapshotItem</ref>. </para>
+<para><simplesect kind="return"><para>A raw pointer to the Renderable of this <ref refid="structhelios_1_1scene_1_1SnapshotItem" kindref="compound">SnapshotItem</ref>. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/scene/SnapshotItem.ixx" line="96" column="24" bodyfile="/tmp/h/include/helios/scene/SnapshotItem.ixx" bodystart="96" bodyend="98"/>
-        <referencedby refid="structhelios_1_1scene_1_1SnapshotItem_1a3d91e9c3e4e5529eb95aee6ca15c3c98" compoundref="SnapshotItem_8ixx" startline="80" endline="86">helios::scene::SnapshotItem::SnapshotItem</referencedby>
+        <location file="/tmp/h/include/helios/scene/SnapshotItem.ixx" line="84" column="46" bodyfile="/tmp/h/include/helios/scene/SnapshotItem.ixx" bodystart="84" bodyend="86"/>
+        <referencedby refid="structhelios_1_1scene_1_1SnapshotItem_1a1540048ebbafb1fb1c00967268c5930f" compoundref="SnapshotItem_8ixx" startline="71" endline="77">helios::scene::SnapshotItem::SnapshotItem</referencedby>
       </memberdef>
       <memberdef kind="function" id="structhelios_1_1scene_1_1SnapshotItem_1a9b1e4c1e12d5c92284036256995442f5" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>const <ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">helios::math::mat4f</ref> &amp;</type>
@@ -179,8 +180,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/scene/SnapshotItem.ixx" line="107" column="36" bodyfile="/tmp/h/include/helios/scene/SnapshotItem.ixx" bodystart="107" bodyend="109"/>
-        <referencedby refid="structhelios_1_1scene_1_1SnapshotItem_1a3d91e9c3e4e5529eb95aee6ca15c3c98" compoundref="SnapshotItem_8ixx" startline="80" endline="86">helios::scene::SnapshotItem::SnapshotItem</referencedby>
+        <location file="/tmp/h/include/helios/scene/SnapshotItem.ixx" line="95" column="36" bodyfile="/tmp/h/include/helios/scene/SnapshotItem.ixx" bodystart="95" bodyend="97"/>
+        <referencedby refid="structhelios_1_1scene_1_1SnapshotItem_1a1540048ebbafb1fb1c00967268c5930f" compoundref="SnapshotItem_8ixx" startline="71" endline="77">helios::scene::SnapshotItem::SnapshotItem</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>

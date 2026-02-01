@@ -1,6 +1,7 @@
 var namespacehelios_1_1rendering =
 [
     [ "asset", "namespacehelios_1_1rendering_1_1asset.html", "namespacehelios_1_1rendering_1_1asset" ],
+    [ "mesh", "namespacehelios_1_1rendering_1_1mesh.html", "namespacehelios_1_1rendering_1_1mesh" ],
     [ "model", "namespacehelios_1_1rendering_1_1model.html", "namespacehelios_1_1rendering_1_1model" ],
     [ "shader", "namespacehelios_1_1rendering_1_1shader.html", "namespacehelios_1_1rendering_1_1shader" ],
     [ "text", "namespacehelios_1_1rendering_1_1text.html", "namespacehelios_1_1rendering_1_1text" ],

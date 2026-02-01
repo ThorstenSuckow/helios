@@ -107,7 +107,6 @@ var hierarchy =
     [ "helios::core::buffer::DoubleBuffer", "classhelios_1_1core_1_1buffer_1_1DoubleBuffer.html", [
       [ "helios::core::buffer::ReadWriteDoubleBuffer< T >", "classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer.html", null ]
     ] ],
-    [ "helios::rendering::text::DrawProperties", "structhelios_1_1rendering_1_1text_1_1DrawProperties.html", null ],
     [ "helios::engine::builder::gameObject::builders::EffectsBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1EffectsBuilder.html", null ],
     [ "helios::engine::runtime::spawn::EmitterContext", "structhelios_1_1engine_1_1runtime_1_1spawn_1_1EmitterContext.html", null ],
     [ "helios::event::Event", "classhelios_1_1event_1_1Event.html", [
@@ -122,6 +121,9 @@ var hierarchy =
       [ "helios::event::DequeEventQueue", "classhelios_1_1event_1_1DequeEventQueue.html", null ]
     ] ],
     [ "helios::engine::core::data::FontId", "structhelios_1_1engine_1_1core_1_1data_1_1FontId.html", null ],
+    [ "helios::rendering::text::FontResourceProvider", "classhelios_1_1rendering_1_1text_1_1FontResourceProvider.html", [
+      [ "helios::ext::opengl::rendering::FreeTypeFontResourceManager", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1FreeTypeFontResourceManager.html", null ]
+    ] ],
     [ "helios::engine::tooling::FpsMetrics", "classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html", null ],
     [ "helios::engine::tooling::FramePacer", "classhelios_1_1engine_1_1tooling_1_1FramePacer.html", null ],
     [ "helios::engine::tooling::FrameStats", "structhelios_1_1engine_1_1tooling_1_1FrameStats.html", null ],
@@ -191,6 +193,7 @@ var hierarchy =
       [ "helios::ext::opengl::rendering::model::OpenGLMesh", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh.html", null ]
     ] ],
     [ "helios::rendering::model::config::MeshConfig", "structhelios_1_1rendering_1_1model_1_1config_1_1MeshConfig.html", null ],
+    [ "helios::rendering::mesh::MeshRenderCommand", "classhelios_1_1rendering_1_1mesh_1_1MeshRenderCommand.html", null ],
     [ "helios::engine::builder::gameObject::builders::MotionBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1MotionBuilder.html", null ],
     [ "helios::engine::builder::gameObject::builders::configs::Move2DConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1Move2DConfig.html", null ],
     [ "helios::core::types::no_init_t", "structhelios_1_1core_1_1types_1_1no__init__t.html", null ],
@@ -203,7 +206,10 @@ var hierarchy =
     [ "helios::util::Random", "classhelios_1_1util_1_1Random.html", null ],
     [ "helios::core::buffer::ReadBuffer&lt; T &gt;", "classhelios_1_1core_1_1buffer_1_1ReadBuffer.html", null ],
     [ "helios::core::buffer::TypeIndexedDoubleBuffer&lt; Indexer &gt;::ReadSource", "classhelios_1_1core_1_1buffer_1_1TypeIndexedDoubleBuffer_1_1ReadSource.html", null ],
-    [ "helios::rendering::Renderable", "classhelios_1_1rendering_1_1Renderable.html", null ],
+    [ "helios::rendering::Renderable", "classhelios_1_1rendering_1_1Renderable.html", [
+      [ "helios::rendering::mesh::MeshRenderable", "classhelios_1_1rendering_1_1mesh_1_1MeshRenderable.html", null ],
+      [ "helios::rendering::text::TextRenderable", "classhelios_1_1rendering_1_1text_1_1TextRenderable.html", null ]
+    ] ],
     [ "helios::engine::builder::gameObject::builders::configs::RenderableConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1RenderableConfig.html", null ],
     [ "helios::rendering::RenderCommand", "classhelios_1_1rendering_1_1RenderCommand.html", null ],
     [ "helios::engine::builder::gameObject::builders::RenderingBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1RenderingBuilder.html", null ],
@@ -302,7 +308,8 @@ var hierarchy =
     [ "helios::engine::runtime::messaging::command::TargetedCommandDispatcher", "classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommandDispatcher.html", [
       [ "helios::engine::runtime::messaging::command::TypedTargetedCommandDispatcher< T >", "classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedTargetedCommandDispatcher.html", null ]
     ] ],
-    [ "helios::rendering::text::TextRenderable", "classhelios_1_1rendering_1_1text_1_1TextRenderable.html", null ],
+    [ "helios::rendering::text::TextLayout", "structhelios_1_1rendering_1_1text_1_1TextLayout.html", null ],
+    [ "helios::rendering::text::TextMesh", "classhelios_1_1rendering_1_1text_1_1TextMesh.html", null ],
     [ "helios::rendering::text::TextRenderCommand", "classhelios_1_1rendering_1_1text_1_1TextRenderCommand.html", null ],
     [ "helios::rendering::text::TextRenderer", "classhelios_1_1rendering_1_1text_1_1TextRenderer.html", [
       [ "helios::ext::opengl::rendering::OpenGLGlyphTextRenderer", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLGlyphTextRenderer.html", null ]
@@ -317,6 +324,7 @@ var hierarchy =
     [ "helios::core::buffer::TypeIndexedDoubleBuffer&lt; Indexer &gt;", "classhelios_1_1core_1_1buffer_1_1TypeIndexedDoubleBuffer.html", null ],
     [ "helios::core::buffer::TypeIndexedReadWriteBuffer&lt; Indexer &gt;", "classhelios_1_1core_1_1buffer_1_1TypeIndexedReadWriteBuffer.html", null ],
     [ "helios::core::data::TypeIndexer&lt; Group &gt;", "classhelios_1_1core_1_1data_1_1TypeIndexer.html", null ],
+    [ "helios::rendering::text::TypeSetter", "classhelios_1_1rendering_1_1text_1_1TypeSetter.html", null ],
     [ "helios::rendering::shader::UniformValueMap", "classhelios_1_1rendering_1_1shader_1_1UniformValueMap.html", null ],
     [ "helios::engine::ecs::Updatable", "classhelios_1_1engine_1_1ecs_1_1Updatable.html", [
       [ "helios::engine::ecs::System", "classhelios_1_1engine_1_1ecs_1_1System.html", [

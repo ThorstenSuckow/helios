@@ -12,6 +12,5 @@ var searchData=
   ['directioncomponent_2eixx_9',['DirectionComponent.ixx',['../DirectionComponent_8ixx.html',1,'']]],
   ['dispatcher_2eixx_10',['Dispatcher.ixx',['../Dispatcher_8ixx.html',1,'']]],
   ['distributedspawnplacer_2eixx_11',['DistributedSpawnPlacer.ixx',['../DistributedSpawnPlacer_8ixx.html',1,'']]],
-  ['doublebuffer_2eixx_12',['DoubleBuffer.ixx',['../DoubleBuffer_8ixx.html',1,'']]],
-  ['drawproperties_2eixx_13',['DrawProperties.ixx',['../DrawProperties_8ixx.html',1,'']]]
+  ['doublebuffer_2eixx_12',['DoubleBuffer.ixx',['../DoubleBuffer_8ixx.html',1,'']]]
 ];

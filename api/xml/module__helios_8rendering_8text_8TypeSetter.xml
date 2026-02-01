@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8rendering_8text_8TypeSetter" kind="module">
+    <compoundname>helios.rendering.text.TypeSetter</compoundname>
+    <innerfile refid="TypeSetter_8ixx">TypeSetter.ixx</innerfile>
+    <innerclass refid="structhelios_1_1rendering_1_1text_1_1TextLayout" prot="public">helios::rendering::text::TextLayout</innerclass>
+    <innerclass refid="classhelios_1_1rendering_1_1text_1_1TypeSetter" prot="public">helios::rendering::text::TypeSetter</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="structhelios_1_1rendering_1_1text_1_1TextLayout_1a9068f8ba9afe42904b6b4a4c61f1f48b" prot="public" static="no" mutable="no">
+        <type>math::aabbf</type>
+        <definition>math::aabbf helios::rendering::text::TextLayout::aabb</definition>
+        <argsstring></argsstring>
+        <name>aabb</name>
+        <qualifiedname>helios::rendering::text::TextLayout::aabb</qualifiedname>
+        <briefdescription>
+<para>Axis-aligned bounding box enclosing all glyphs. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/text/TypeSetter.ixx" line="43" column="21" bodyfile="/tmp/h/include/helios/rendering/text/TypeSetter.ixx" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhelios_1_1rendering_1_1text_1_1TextLayout_1a101b79f54346541f2717aef3d48305ad" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="namespacehelios_1_1math_1a08252f81850c5902e3c8dead272f3332" kindref="member">helios::math::vec4f</ref> &gt;</type>
+        <definition>std::vector&lt;helios::math::vec4f&gt; helios::rendering::text::TextLayout::vertices</definition>
+        <argsstring></argsstring>
+        <name>vertices</name>
+        <qualifiedname>helios::rendering::text::TextLayout::vertices</qualifiedname>
+        <briefdescription>
+<para><ref refid="structhelios_1_1rendering_1_1Vertex" kindref="compound">Vertex</ref> data for all glyphs (position and texture coordinates). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Each glyph consists of 6 vertices (2 triangles). Each vertex is a `vec4f` containing `(x, y, texU, texV)`. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/text/TypeSetter.ixx" line="51" column="21" bodyfile="/tmp/h/include/helios/rendering/text/TypeSetter.ixx" bodystart="51" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1TypeSetter_1a849b293cd01f47745694c4645fdf5fdf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>TextLayout</type>
+        <definition>TextLayout helios::rendering::text::TypeSetter::layout</definition>
+        <argsstring>(std::string_view text, helios::engine::core::data::FontId fontId, FontResourceProvider &amp;fontResourceProvider)</argsstring>
+        <name>layout</name>
+        <qualifiedname>helios::rendering::text::TypeSetter::layout</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1core_1_1data_1_1FontId" kindref="compound">helios::engine::core::data::FontId</ref></type>
+          <declname>fontId</declname>
+        </param>
+        <param>
+          <type>FontResourceProvider &amp;</type>
+          <declname>fontResourceProvider</declname>
+        </param>
+        <briefdescription>
+<para>Computes the layout for a text string. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Generates vertex data and computes the bounding box for the given text using the specified font.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The text string to lay out. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fontId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The font to use for glyph metrics. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fontResourceProvider</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provider for glyph data.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A `TextLayout` containing the AABB and vertex data. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/text/TypeSetter.ixx" line="107" column="20" bodyfile="/tmp/h/include/helios/rendering/text/TypeSetter.ixx" bodystart="107" bodyend="162"/>
+        <references refid="structhelios_1_1rendering_1_1text_1_1Glyph_1ab2ba70d2721c66d26cb7a9e070a7fdea" compoundref="Glyph_8ixx" startline="60">helios::rendering::text::Glyph::bearing</references>
+        <references refid="classhelios_1_1rendering_1_1text_1_1FontResourceProvider_1ab4a216319f349574fd6ceb2994970891">helios::rendering::text::FontResourceProvider::glyph</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/rendering/text/TypeSetter.ixx" line="15" column="15"/>
+  </compounddef>
+</doxygen>

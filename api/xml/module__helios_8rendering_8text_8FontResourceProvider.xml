@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8rendering_8text_8FontResourceProvider" kind="module">
+    <compoundname>helios.rendering.text.FontResourceProvider</compoundname>
+    <innerfile refid="FontResourceProvider_8ixx">FontResourceProvider.ixx</innerfile>
+    <innerclass refid="classhelios_1_1rendering_1_1text_1_1FontResourceProvider" prot="public">helios::rendering::text::FontResourceProvider</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1FontResourceProvider_1a26d24737adde5d8c75c2a86168a7fc5d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual helios::rendering::text::FontResourceProvider::~FontResourceProvider</definition>
+        <argsstring>()=default</argsstring>
+        <name>~FontResourceProvider</name>
+        <qualifiedname>helios::rendering::text::FontResourceProvider::~FontResourceProvider</qualifiedname>
+        <briefdescription>
+<para>Virtual destructor for proper cleanup of derived classes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/text/FontResourceProvider.ixx" line="43" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1FontResourceProvider_1ab68f5970778b7674ef3a0c8f0b750427" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void helios::rendering::text::FontResourceProvider::loadFont</definition>
+        <argsstring>(helios::engine::core::data::FontId fontId, std::string_view pathToFont)=0</argsstring>
+        <name>loadFont</name>
+        <qualifiedname>helios::rendering::text::FontResourceProvider::loadFont</qualifiedname>
+        <reimplementedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1FreeTypeFontResourceManager_1ac3274a31e5b5dc33311938459bd11ca0">loadFont</reimplementedby>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1core_1_1data_1_1FontId" kindref="compound">helios::engine::core::data::FontId</ref></type>
+          <declname>fontId</declname>
+        </param>
+        <param>
+          <type>std::string_view</type>
+          <declname>pathToFont</declname>
+        </param>
+        <briefdescription>
+<para>Loads a font from the specified file path. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Parses the font file and caches glyph data for later retrieval. The font is associated with the given `FontId` for identification.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fontId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Unique identifier for this font. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pathToFont</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>File system path to the font file (e.g., TrueType `.ttf`).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>If a font with the same `fontId` is already loaded, behavior is implementation-defined (may replace or ignore). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/text/FontResourceProvider.ixx" line="57" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1FontResourceProvider_1ab4a216319f349574fd6ceb2994970891" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="structhelios_1_1rendering_1_1text_1_1Glyph" kindref="compound">helios::rendering::text::Glyph</ref></type>
+        <definition>virtual helios::rendering::text::Glyph helios::rendering::text::FontResourceProvider::glyph</definition>
+        <argsstring>(char c, helios::engine::core::data::FontId fontId)=0</argsstring>
+        <name>glyph</name>
+        <qualifiedname>helios::rendering::text::FontResourceProvider::glyph</qualifiedname>
+        <reimplementedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1FreeTypeFontResourceManager_1a9585b22171efb452bbe9fba6b14df911">glyph</reimplementedby>
+        <param>
+          <type>char</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1core_1_1data_1_1FontId" kindref="compound">helios::engine::core::data::FontId</ref></type>
+          <declname>fontId</declname>
+        </param>
+        <briefdescription>
+<para>Retrieves the glyph data for a character. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns the cached glyph metrics and texture ID for the specified character and font. The font must have been previously loaded via `loadFont()`.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The character to retrieve the glyph for. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fontId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The font to use for rendering.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The glyph data for the character.</para>
+</simplesect>
+<simplesect kind="note"><para>This method is marked `noexcept` and must not throw exceptions. If the character is not available, a fallback glyph should be returned. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/text/FontResourceProvider.ixx" line="73" column="48"/>
+        <referencedby refid="classhelios_1_1rendering_1_1text_1_1TypeSetter_1a849b293cd01f47745694c4645fdf5fdf" compoundref="TypeSetter_8ixx" startline="107" endline="162">helios::rendering::text::TypeSetter::layout</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/rendering/text/FontResourceProvider.ixx" line="9" column="15"/>
+  </compounddef>
+</doxygen>

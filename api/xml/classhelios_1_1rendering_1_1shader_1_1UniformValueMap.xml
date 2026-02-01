@@ -27,12 +27,13 @@
         <name>~UniformValueMap</name>
         <qualifiedname>helios::rendering::shader::UniformValueMap::~UniformValueMap</qualifiedname>
         <briefdescription>
+<para>Default destructor. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" line="81" column="9"/>
+        <location file="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" line="85" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1rendering_1_1shader_1_1UniformValueMap_1a8e91edc1d58edc6b289b39e7c8662edb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -41,12 +42,14 @@
         <name>UniformValueMap</name>
         <qualifiedname>helios::rendering::shader::UniformValueMap::UniformValueMap</qualifiedname>
         <briefdescription>
+<para>Default constructor. </para>
         </briefdescription>
         <detaileddescription>
+<para>Initializes an empty uniform value map with no values set. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" line="83" column="9"/>
+        <location file="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" line="92" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1rendering_1_1shader_1_1UniformValueMap_1ad546c85f6f1f4370466b6ea7ab14c8df" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -87,7 +90,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" line="91" column="14" bodyfile="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" bodystart="91" bodyend="93"/>
+        <location file="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" line="100" column="14" bodyfile="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" bodystart="100" bodyend="102"/>
+        <references refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap_1a99dd00e99b2dcf0d6042d129231b1d3b" compoundref="UniformValueMap_8ixx" startline="140" endline="155">mat4f</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1rendering_1_1shader_1_1UniformValueMap_1aa1bb7e38a8043a669bcd8a1df783615e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>const float *</type>
@@ -108,7 +112,7 @@
 <parametername>uniformSemantics</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The `UniformSemantics` identifier for the uniform. </para>
+<para>The `UniformSemantics` identifier for the uniform.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -118,8 +122,41 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" line="102" column="22" bodyfile="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" bodystart="102" bodyend="117"/>
+        <location file="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" line="112" column="22" bodyfile="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" bodystart="112" bodyend="127"/>
         <references refid="namespacehelios_1_1math_1a0e37b93487d103aa6588ba44bdb1a0b6" compoundref="mat4_8ixx" startline="510" endline="512">helios::math::value_ptr</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1shader_1_1UniformValueMap_1a99dd00e99b2dcf0d6042d129231b1d3b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">helios::math::mat4f</ref> *</type>
+        <definition>const helios::math::mat4f * helios::rendering::shader::UniformValueMap::mat4f</definition>
+        <argsstring>(UniformSemantics uniformSemantics) const noexcept</argsstring>
+        <name>mat4f</name>
+        <qualifiedname>helios::rendering::shader::UniformValueMap::mat4f</qualifiedname>
+        <param>
+          <type><ref refid="namespacehelios_1_1rendering_1_1shader_1a0a320e03bcf6f60bc90428c450dfb329" kindref="member">UniformSemantics</ref></type>
+          <declname>uniformSemantics</declname>
+        </param>
+        <briefdescription>
+<para>Returns a const pointer to the `mat4f` value for the specified uniform semantics. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Unlike `mat4f_ptr()`, this returns a pointer to the `mat4f` object itself rather than its underlying float array.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>uniformSemantics</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The `UniformSemantics` identifier for the uniform.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A const pointer to the associated `mat4f`, or `nullptr` if no mat4f is associated with this semantics. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" line="140" column="36" bodyfile="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" bodystart="140" bodyend="155"/>
+        <referencedby refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap_1ad546c85f6f1f4370466b6ea7ab14c8df" compoundref="UniformValueMap_8ixx" startline="100" endline="102">set</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1rendering_1_1shader_1_1UniformValueMap_1aa8cf3644a91d4b3db938d5bfa7983dfd" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -160,7 +197,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" line="125" column="14" bodyfile="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" bodystart="125" bodyend="127"/>
+        <location file="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" line="163" column="14" bodyfile="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" bodystart="163" bodyend="165"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1rendering_1_1shader_1_1UniformValueMap_1ab788a4eaa2575fe0209886f008b8aa9f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>const float *</type>
@@ -191,7 +228,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" line="136" column="22" bodyfile="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" bodystart="136" bodyend="151"/>
+        <location file="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" line="174" column="22" bodyfile="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" bodystart="174" bodyend="189"/>
         <references refid="namespacehelios_1_1math_1a0e37b93487d103aa6588ba44bdb1a0b6" compoundref="mat4_8ixx" startline="510" endline="512">helios::math::value_ptr</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1rendering_1_1shader_1_1UniformValueMap_1a43c216300f5530e86146077c4beb2541" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
@@ -234,7 +271,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" line="161" column="14" bodyfile="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" bodystart="161" bodyend="163"/>
+        <location file="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" line="199" column="14" bodyfile="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" bodystart="199" bodyend="201"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1rendering_1_1shader_1_1UniformValueMap_1ab68388ecafc93f8547049b3975ade28a" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -275,7 +312,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" line="171" column="14" bodyfile="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" bodystart="171" bodyend="173"/>
+        <location file="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" line="209" column="14" bodyfile="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" bodystart="209" bodyend="211"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1rendering_1_1shader_1_1UniformValueMap_1a7b10983326d870ca7b33f26e2c71e830" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>const float *</type>
@@ -307,7 +344,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" line="186" column="22" bodyfile="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" bodystart="186" bodyend="201"/>
+        <location file="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" line="224" column="22" bodyfile="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" bodystart="224" bodyend="239"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1rendering_1_1shader_1_1UniformValueMap_1a90f7cae22a60e4f6944a08ff192c0d0e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>const int *</type>
@@ -338,7 +375,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" line="211" column="20" bodyfile="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" bodystart="211" bodyend="226"/>
+        <location file="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" line="249" column="20" bodyfile="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" bodystart="249" bodyend="264"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -359,16 +396,17 @@
 <para>// Set transform matrices uniforms.set(UniformSemantics::ModelMatrix, modelMat); uniforms.set(UniformSemantics::ViewMatrix, viewMat);</para>
 <para>// Set material properties uniforms.set(<ref refid="namespacehelios_1_1rendering_1_1shader_1a0a320e03bcf6f60bc90428c450dfb329aaaf9abb4ecf0d3618eac3e02b50ab5a7" kindref="member">UniformSemantics::MaterialBaseColor</ref>, vec4f{1.0f, 0.0f, 0.0f, 1.0f});</para>
 <para>// Retrieve raw pointer for OpenGL const float* modelPtr = uniforms.mat4f_ptr(UniformSemantics::ModelMatrix); ```</para>
-<para><xrefsect id="todo_1_todo000032"><xreftitle>Todo</xreftitle><xrefdescription><para>UniformMap must allow only one index for all data structures, i.e. if map_[semantics] contains a mat4f, other types should not be allowed for the same semantics.</para>
+<para><xrefsect id="todo_1_todo000030"><xreftitle>Todo</xreftitle><xrefdescription><para>UniformMap must allow only one index for all data structures, i.e. if map_[semantics] contains a mat4f, other types should not be allowed for the same semantics.</para>
 </xrefdescription></xrefsect></para>
-<para><xrefsect id="todo_1_todo000033"><xreftitle>Todo</xreftitle><xrefdescription><para>UniformValueMaps should be scoped, e.g. per frame (world matrix, projection, view...), per material (colors, emissive...), per object (world matrix...), which allows for better handling of assigning uniforms: per-frame values change once per frame, while per-object values change per object. </para>
+<para><xrefsect id="todo_1_todo000031"><xreftitle>Todo</xreftitle><xrefdescription><para>UniformValueMaps should be scoped, e.g. per frame (world matrix, projection, view...), per material (colors, emissive...), per object (world matrix...), which allows for better handling of assigning uniforms: per-frame values change once per frame, while per-object values change per object. </para>
 </xrefdescription></xrefsect></para>
     </detaileddescription>
-    <location file="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" line="71" column="5" bodyfile="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" bodystart="71" bodyend="228"/>
+    <location file="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" line="71" column="5" bodyfile="/tmp/h/include/helios/rendering/shader/UniformValueMap.ixx" bodystart="71" bodyend="266"/>
     <listofallmembers>
       <member refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap_1a7b10983326d870ca7b33f26e2c71e830" prot="public" virt="non-virtual"><scope>helios::rendering::shader::UniformValueMap</scope><name>float_ptr</name></member>
       <member refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap_1a90f7cae22a60e4f6944a08ff192c0d0e" prot="public" virt="non-virtual"><scope>helios::rendering::shader::UniformValueMap</scope><name>int_ptr</name></member>
       <member refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap_1a4f039c48836f62d3c6b5243b5d55cefb" prot="private" virt="non-virtual"><scope>helios::rendering::shader::UniformValueMap</scope><name>map_</name></member>
+      <member refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap_1a99dd00e99b2dcf0d6042d129231b1d3b" prot="public" virt="non-virtual"><scope>helios::rendering::shader::UniformValueMap</scope><name>mat4f</name></member>
       <member refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap_1aa1bb7e38a8043a669bcd8a1df783615e" prot="public" virt="non-virtual"><scope>helios::rendering::shader::UniformValueMap</scope><name>mat4f_ptr</name></member>
       <member refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap_1ad546c85f6f1f4370466b6ea7ab14c8df" prot="public" virt="non-virtual"><scope>helios::rendering::shader::UniformValueMap</scope><name>set</name></member>
       <member refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap_1aa8cf3644a91d4b3db938d5bfa7983dfd" prot="public" virt="non-virtual"><scope>helios::rendering::shader::UniformValueMap</scope><name>set</name></member>

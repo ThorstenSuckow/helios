@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/text/TextRenderPrototype.ixx" line="58" column="26" bodyfile="/tmp/h/include/helios/rendering/text/TextRenderPrototype.ixx" bodystart="58" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/rendering/text/TextRenderPrototype.ixx" line="64" column="26" bodyfile="/tmp/h/include/helios/rendering/text/TextRenderPrototype.ixx" bodystart="64" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype_1a0fe35614c206a96b760bccfd0b982fa9" prot="private" static="no" mutable="no">
         <type>std::shared_ptr&lt; const <ref refid="classhelios_1_1rendering_1_1text_1_1config_1_1TextShaderProperties" kindref="compound">helios::rendering::text::config::TextShaderProperties</ref> &gt;</type>
@@ -31,14 +31,30 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/text/TextRenderPrototype.ixx" line="63" column="26" bodyfile="/tmp/h/include/helios/rendering/text/TextRenderPrototype.ixx" bodystart="63" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/rendering/text/TextRenderPrototype.ixx" line="69" column="26" bodyfile="/tmp/h/include/helios/rendering/text/TextRenderPrototype.ixx" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype_1af13ec87841926c6e8cf9f2c1b69e6fbe" prot="private" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1rendering_1_1text_1_1FontResourceProvider" kindref="compound">helios::rendering::text::FontResourceProvider</ref> *</type>
+        <definition>helios::rendering::text::FontResourceProvider* helios::rendering::text::TextRenderPrototype::fontResourceProvider_</definition>
+        <argsstring></argsstring>
+        <name>fontResourceProvider_</name>
+        <qualifiedname>helios::rendering::text::TextRenderPrototype::fontResourceProvider_</qualifiedname>
+        <briefdescription>
+<para>Provider for loading fonts and retrieving glyph data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Non-owning raw pointer. The font resource provider must remain valid for the lifetime of this prototype. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/text/TextRenderPrototype.ixx" line="77" column="55" bodyfile="/tmp/h/include/helios/rendering/text/TextRenderPrototype.ixx" bodystart="77" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype_1a6f3579f165e1c89c41376f81f7eabfa7" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype_1a85c04314d448d1a74e099d35dc9dd6e9" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
         <definition>helios::rendering::text::TextRenderPrototype::TextRenderPrototype</definition>
-        <argsstring>(std::shared_ptr&lt; const helios::rendering::shader::Shader &gt; shader, std::shared_ptr&lt; const helios::rendering::text::config::TextShaderProperties &gt; textProperties)</argsstring>
+        <argsstring>(std::shared_ptr&lt; const helios::rendering::shader::Shader &gt; shader, std::shared_ptr&lt; const helios::rendering::text::config::TextShaderProperties &gt; textProperties, helios::rendering::text::FontResourceProvider *fontResourceProvider)</argsstring>
         <name>TextRenderPrototype</name>
         <qualifiedname>helios::rendering::text::TextRenderPrototype::TextRenderPrototype</qualifiedname>
         <param>
@@ -48,6 +64,10 @@
         <param>
           <type>std::shared_ptr&lt; const <ref refid="classhelios_1_1rendering_1_1text_1_1config_1_1TextShaderProperties" kindref="compound">helios::rendering::text::config::TextShaderProperties</ref> &gt;</type>
           <declname>textProperties</declname>
+        </param>
+        <param>
+          <type><ref refid="classhelios_1_1rendering_1_1text_1_1FontResourceProvider" kindref="compound">helios::rendering::text::FontResourceProvider</ref> *</type>
+          <declname>fontResourceProvider</declname>
         </param>
         <briefdescription>
 <para>Constructs a text render prototype. </para>
@@ -66,7 +86,15 @@
 <parametername>textProperties</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Text-specific shader properties.</para>
+<para>Text-specific shader properties. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fontResourceProvider</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Raw pointer to the font resource provider (must remain valid for the lifetime of this prototype).</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -75,7 +103,7 @@
 <parametername>std::invalid_argument</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>If `shader` is null. </para>
+<para>If `shader`, `textProperties`, or `fontResourceProvider` is null. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -83,9 +111,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/text/TextRenderPrototype.ixx" line="77" column="18" bodyfile="/tmp/h/include/helios/rendering/text/TextRenderPrototype.ixx" bodystart="77" bodyend="88"/>
-        <references refid="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype_1a69b9796a0af2c93085131e1309cbb97f" compoundref="TextRenderPrototype_8ixx" startline="95" endline="97">shader</references>
-        <references refid="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype_1ac83f41e46800b2dac0cd046bb8357fad" compoundref="TextRenderPrototype_8ixx" startline="104" endline="106">textProperties</references>
+        <location file="/tmp/h/include/helios/rendering/text/TextRenderPrototype.ixx" line="91" column="18" bodyfile="/tmp/h/include/helios/rendering/text/TextRenderPrototype.ixx" bodystart="91" bodyend="113"/>
+        <references refid="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype_1aecf36a734eb5cf66cd0275c052558d5f" compoundref="TextRenderPrototype_8ixx" startline="132" endline="134">fontResourceProvider</references>
+        <references refid="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype_1a69b9796a0af2c93085131e1309cbb97f" compoundref="TextRenderPrototype_8ixx" startline="120" endline="122">shader</references>
+        <references refid="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype_1ac83f41e46800b2dac0cd046bb8357fad" compoundref="TextRenderPrototype_8ixx" startline="141" endline="143">textProperties</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype_1a69b9796a0af2c93085131e1309cbb97f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>const <ref refid="classhelios_1_1rendering_1_1shader_1_1Shader" kindref="compound">helios::rendering::shader::Shader</ref> &amp;</type>
@@ -103,8 +132,28 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/text/TextRenderPrototype.ixx" line="95" column="50" bodyfile="/tmp/h/include/helios/rendering/text/TextRenderPrototype.ixx" bodystart="95" bodyend="97"/>
-        <referencedby refid="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype_1a6f3579f165e1c89c41376f81f7eabfa7" compoundref="TextRenderPrototype_8ixx" startline="77" endline="88">TextRenderPrototype</referencedby>
+        <location file="/tmp/h/include/helios/rendering/text/TextRenderPrototype.ixx" line="120" column="50" bodyfile="/tmp/h/include/helios/rendering/text/TextRenderPrototype.ixx" bodystart="120" bodyend="122"/>
+        <referencedby refid="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype_1a85c04314d448d1a74e099d35dc9dd6e9" compoundref="TextRenderPrototype_8ixx" startline="91" endline="113">TextRenderPrototype</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype_1aecf36a734eb5cf66cd0275c052558d5f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhelios_1_1rendering_1_1text_1_1FontResourceProvider" kindref="compound">helios::rendering::text::FontResourceProvider</ref> &amp;</type>
+        <definition>helios::rendering::text::FontResourceProvider &amp; helios::rendering::text::TextRenderPrototype::fontResourceProvider</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>fontResourceProvider</name>
+        <qualifiedname>helios::rendering::text::TextRenderPrototype::fontResourceProvider</qualifiedname>
+        <briefdescription>
+<para>Returns the font resource provider. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The font resource provider is used to load fonts and retrieve glyph data for text layout and rendering.</para>
+<para><simplesect kind="return"><para>Reference to the font resource provider. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/text/TextRenderPrototype.ixx" line="132" column="56" bodyfile="/tmp/h/include/helios/rendering/text/TextRenderPrototype.ixx" bodystart="132" bodyend="134"/>
+        <referencedby refid="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype_1a85c04314d448d1a74e099d35dc9dd6e9" compoundref="TextRenderPrototype_8ixx" startline="91" endline="113">TextRenderPrototype</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype_1ac83f41e46800b2dac0cd046bb8357fad" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>const <ref refid="classhelios_1_1rendering_1_1text_1_1config_1_1TextShaderProperties" kindref="compound">helios::rendering::text::config::TextShaderProperties</ref> &amp;</type>
@@ -122,15 +171,15 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/text/TextRenderPrototype.ixx" line="104" column="70" bodyfile="/tmp/h/include/helios/rendering/text/TextRenderPrototype.ixx" bodystart="104" bodyend="106"/>
-        <referencedby refid="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype_1a6f3579f165e1c89c41376f81f7eabfa7" compoundref="TextRenderPrototype_8ixx" startline="77" endline="88">TextRenderPrototype</referencedby>
+        <location file="/tmp/h/include/helios/rendering/text/TextRenderPrototype.ixx" line="141" column="70" bodyfile="/tmp/h/include/helios/rendering/text/TextRenderPrototype.ixx" bodystart="141" bodyend="143"/>
+        <referencedby refid="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype_1a85c04314d448d1a74e099d35dc9dd6e9" compoundref="TextRenderPrototype_8ixx" startline="91" endline="113">TextRenderPrototype</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>
 <para>Immutable, shared prototype for text rendering configuration. </para>
     </briefdescription>
     <detaileddescription>
-<para>`TextRenderPrototype` holds the shader and text properties that are shared across multiple `TextRenderable` instances. This flyweight pattern reduces memory usage and allows efficient batching of text with the same configuration.</para>
+<para>`TextRenderPrototype` holds the shader and text properties that are shared across multiple `TextRenderable` instances. This reduces memory usage and allows efficient batching of text with the same configuration.</para>
 <para>## Design</para>
 <para><itemizedlist>
 <listitem><para>**Immutable:** Configuration cannot be changed after construction.</para>
@@ -140,23 +189,28 @@
 </para>
 <para>## Usage</para>
 <para>```cpp auto shader = std::make_shared&lt;OpenGLShader&gt;(...); auto textProps = std::make_shared&lt;TextShaderProperties&gt;(textColor);</para>
-<para>auto prototype = std::make_shared&lt;TextRenderPrototype&gt;(shader, textProps);</para>
-<para>// Share prototype across multiple renderables <ref refid="classhelios_1_1rendering_1_1text_1_1TextRenderable" kindref="compound">TextRenderable</ref> title(&quot;Title&quot;, prototype, drawProps1); <ref refid="classhelios_1_1rendering_1_1text_1_1TextRenderable" kindref="compound">TextRenderable</ref> score(&quot;Score: 0&quot;, prototype, drawProps2); ```</para>
+<para>// Get font provider from rendering device auto&amp; fontProvider = device.fontResourceProvider(); fontProvider.loadFont(FontId{&quot;roboto&quot;}, &quot;fonts/Roboto.ttf&quot;);</para>
+<para>auto prototype = std::make_shared&lt;TextRenderPrototype&gt;(shader, textProps, &amp;fontProvider);</para>
+<para>// Share prototype across multiple renderables <ref refid="classhelios_1_1rendering_1_1text_1_1TextRenderable" kindref="compound">TextRenderable</ref> title(std::make_unique&lt;TextMesh&gt;(&quot;Title&quot;, fontId), prototype); <ref refid="classhelios_1_1rendering_1_1text_1_1TextRenderable" kindref="compound">TextRenderable</ref> score(std::make_unique&lt;TextMesh&gt;(&quot;Score: 0&quot;, fontId), prototype); ```</para>
 <para><simplesect kind="see"><para><ref refid="classhelios_1_1rendering_1_1text_1_1TextRenderable" kindref="compound">TextRenderable</ref> </para>
 </simplesect>
 <simplesect kind="see"><para>TextShaderProperties </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1rendering_1_1text_1_1FontResourceProvider" kindref="compound">FontResourceProvider</ref> </para>
 </simplesect>
 <simplesect kind="see"><para>Shader </para>
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="/tmp/h/include/helios/rendering/text/TextRenderPrototype.ixx" line="51" column="5" bodyfile="/tmp/h/include/helios/rendering/text/TextRenderPrototype.ixx" bodystart="51" bodyend="108"/>
+    <location file="/tmp/h/include/helios/rendering/text/TextRenderPrototype.ixx" line="57" column="5" bodyfile="/tmp/h/include/helios/rendering/text/TextRenderPrototype.ixx" bodystart="57" bodyend="145"/>
     <listofallmembers>
+      <member refid="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype_1aecf36a734eb5cf66cd0275c052558d5f" prot="public" virt="non-virtual"><scope>helios::rendering::text::TextRenderPrototype</scope><name>fontResourceProvider</name></member>
+      <member refid="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype_1af13ec87841926c6e8cf9f2c1b69e6fbe" prot="private" virt="non-virtual"><scope>helios::rendering::text::TextRenderPrototype</scope><name>fontResourceProvider_</name></member>
       <member refid="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype_1a69b9796a0af2c93085131e1309cbb97f" prot="public" virt="non-virtual"><scope>helios::rendering::text::TextRenderPrototype</scope><name>shader</name></member>
       <member refid="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype_1a756ce905981894099375d137ce11bacc" prot="private" virt="non-virtual"><scope>helios::rendering::text::TextRenderPrototype</scope><name>shader_</name></member>
       <member refid="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype_1ac83f41e46800b2dac0cd046bb8357fad" prot="public" virt="non-virtual"><scope>helios::rendering::text::TextRenderPrototype</scope><name>textProperties</name></member>
       <member refid="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype_1a0fe35614c206a96b760bccfd0b982fa9" prot="private" virt="non-virtual"><scope>helios::rendering::text::TextRenderPrototype</scope><name>textProperties_</name></member>
-      <member refid="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype_1a6f3579f165e1c89c41376f81f7eabfa7" prot="public" virt="non-virtual"><scope>helios::rendering::text::TextRenderPrototype</scope><name>TextRenderPrototype</name></member>
+      <member refid="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype_1a85c04314d448d1a74e099d35dc9dd6e9" prot="public" virt="non-virtual"><scope>helios::rendering::text::TextRenderPrototype</scope><name>TextRenderPrototype</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

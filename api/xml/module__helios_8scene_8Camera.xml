@@ -5,12 +5,12 @@
     <innerfile refid="Camera_8ixx">Camera.ixx</innerfile>
     <innerclass refid="classhelios_1_1scene_1_1Camera" prot="public">helios::scene::Camera</innerclass>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="classhelios_1_1scene_1_1Camera_1a73a85eb4966fb4524dc6b87736500f62" prot="protected" static="no" mutable="yes">
+      <memberdef kind="variable" id="classhelios_1_1scene_1_1Camera_1a612305dde16da3ef55feea253a60da88" prot="protected" static="no" mutable="yes">
         <type><ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">helios::math::mat4f</ref></type>
-        <definition>helios::math::mat4f helios::scene::Camera::projectionMatrix_</definition>
+        <definition>helios::math::mat4f helios::scene::Camera::perspectiveMatrix_</definition>
         <argsstring></argsstring>
-        <name>projectionMatrix_</name>
-        <qualifiedname>helios::scene::Camera::projectionMatrix_</qualifiedname>
+        <name>perspectiveMatrix_</name>
+        <qualifiedname>helios::scene::Camera::perspectiveMatrix_</qualifiedname>
         <briefdescription>
 <para>The projection matrix of this camera. </para>
         </briefdescription>
@@ -18,10 +18,29 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="30" column="37" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="30" bodyend="-1"/>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a6d1911bccc03c847625153d58cc49e99" compoundref="Camera_8ixx" startline="93" endline="96">helios::scene::Camera::Camera</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a1dc42ba642ae41f7028a4cb927a6feb0" compoundref="Camera_8ixx" startline="105" endline="108">helios::scene::Camera::projectionMatrix</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a949fcc8b4e43f2a9afdad8eaafaeb07b" compoundref="Camera_8ixx" startline="78" endline="87">helios::scene::Camera::update</referencedby>
+        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="50" column="37" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="50" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a6d1911bccc03c847625153d58cc49e99" compoundref="Camera_8ixx" startline="150" endline="154">helios::scene::Camera::Camera</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a1dc42ba642ae41f7028a4cb927a6feb0" compoundref="Camera_8ixx" startline="163" endline="170">helios::scene::Camera::projectionMatrix</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a949fcc8b4e43f2a9afdad8eaafaeb07b" compoundref="Camera_8ixx" startline="131" endline="144">helios::scene::Camera::update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1scene_1_1Camera_1aef2089cfccbe0b820eb5df002d812347" prot="protected" static="no" mutable="yes">
+        <type><ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">helios::math::mat4f</ref></type>
+        <definition>helios::math::mat4f helios::scene::Camera::orthographicMatrix_</definition>
+        <argsstring></argsstring>
+        <name>orthographicMatrix_</name>
+        <qualifiedname>helios::scene::Camera::orthographicMatrix_</qualifiedname>
+        <briefdescription>
+<para>The orthographic projection matrix of this camera. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Used when the camera is in orthographic mode (`usePerspective_ == false`). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="57" column="37" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="57" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a6d1911bccc03c847625153d58cc49e99" compoundref="Camera_8ixx" startline="150" endline="154">helios::scene::Camera::Camera</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a1dc42ba642ae41f7028a4cb927a6feb0" compoundref="Camera_8ixx" startline="163" endline="170">helios::scene::Camera::projectionMatrix</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a949fcc8b4e43f2a9afdad8eaafaeb07b" compoundref="Camera_8ixx" startline="131" endline="144">helios::scene::Camera::update</referencedby>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1scene_1_1Camera_1a5c915d9ba00c11dcef1885f02e32945c" prot="protected" static="no" mutable="no">
         <type><ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">helios::math::mat4f</ref></type>
@@ -36,10 +55,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="35" column="29" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="35" bodyend="-1"/>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a6d1911bccc03c847625153d58cc49e99" compoundref="Camera_8ixx" startline="93" endline="96">helios::scene::Camera::Camera</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1aa4db3f9ad22b14be836f3f5ba42576b7" compoundref="Camera_8ixx" startline="133" endline="136">helios::scene::Camera::setViewMatrix</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a920bac1e84b874d725027e37d091cb34" compoundref="Camera_8ixx" startline="117" endline="119">helios::scene::Camera::viewMatrix</referencedby>
+        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="62" column="29" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="62" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a6d1911bccc03c847625153d58cc49e99" compoundref="Camera_8ixx" startline="150" endline="154">helios::scene::Camera::Camera</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1aa4db3f9ad22b14be836f3f5ba42576b7" compoundref="Camera_8ixx" startline="196" endline="199">helios::scene::Camera::setViewMatrix</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a920bac1e84b874d725027e37d091cb34" compoundref="Camera_8ixx" startline="180" endline="182">helios::scene::Camera::viewMatrix</referencedby>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1scene_1_1Camera_1a95f643525bd276faa7edcd1401f47850" prot="protected" static="no" mutable="no">
         <type>float</type>
@@ -56,11 +75,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="42" column="15" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="42" bodyend="-1"/>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a949e8c04f22ca2a1ace596e6e859bee3" compoundref="Camera_8ixx" startline="225" endline="227">helios::scene::Camera::aspectRatio</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a865085d03e951123b7560d68f5eca056" compoundref="Camera_8ixx" startline="145" endline="149">helios::scene::Camera::setAspectRatio</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a956f0190d0bd24ad8960d3e6a94b82db" compoundref="Camera_8ixx" startline="161" endline="170">helios::scene::Camera::setPerspective</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a949fcc8b4e43f2a9afdad8eaafaeb07b" compoundref="Camera_8ixx" startline="78" endline="87">helios::scene::Camera::update</referencedby>
+        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="69" column="15" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="69" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a949e8c04f22ca2a1ace596e6e859bee3" compoundref="Camera_8ixx" startline="362" endline="364">helios::scene::Camera::aspectRatio</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a865085d03e951123b7560d68f5eca056" compoundref="Camera_8ixx" startline="208" endline="212">helios::scene::Camera::setAspectRatio</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1acb7b0305e740d3407fae9090fe942fdc" compoundref="Camera_8ixx" startline="286" endline="307">helios::scene::Camera::setOrtho</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a956f0190d0bd24ad8960d3e6a94b82db" compoundref="Camera_8ixx" startline="256" endline="266">helios::scene::Camera::setPerspective</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a949fcc8b4e43f2a9afdad8eaafaeb07b" compoundref="Camera_8ixx" startline="131" endline="144">helios::scene::Camera::update</referencedby>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1scene_1_1Camera_1a50a2b217510dda5e0e75224a0fc3d624" prot="protected" static="no" mutable="no">
         <type>float</type>
@@ -77,11 +97,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="49" column="15" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="49" bodyend="-1"/>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a956f0190d0bd24ad8960d3e6a94b82db" compoundref="Camera_8ixx" startline="161" endline="170">helios::scene::Camera::setPerspective</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a162c8f353ae0ec96b0b8371a90b99064" compoundref="Camera_8ixx" startline="179" endline="183">helios::scene::Camera::setZNear</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a949fcc8b4e43f2a9afdad8eaafaeb07b" compoundref="Camera_8ixx" startline="78" endline="87">helios::scene::Camera::update</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a11e3916a50eb417e8924ccea8fee56cd" compoundref="Camera_8ixx" startline="234" endline="236">helios::scene::Camera::zNear</referencedby>
+        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="76" column="15" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="76" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1acb7b0305e740d3407fae9090fe942fdc" compoundref="Camera_8ixx" startline="286" endline="307">helios::scene::Camera::setOrtho</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a956f0190d0bd24ad8960d3e6a94b82db" compoundref="Camera_8ixx" startline="256" endline="266">helios::scene::Camera::setPerspective</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a162c8f353ae0ec96b0b8371a90b99064" compoundref="Camera_8ixx" startline="316" endline="320">helios::scene::Camera::setZNear</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a949fcc8b4e43f2a9afdad8eaafaeb07b" compoundref="Camera_8ixx" startline="131" endline="144">helios::scene::Camera::update</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a11e3916a50eb417e8924ccea8fee56cd" compoundref="Camera_8ixx" startline="371" endline="373">helios::scene::Camera::zNear</referencedby>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1scene_1_1Camera_1a3a433ba5fa99dc88e12f63c8750d0a5e" prot="protected" static="no" mutable="no">
         <type>float</type>
@@ -98,11 +119,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="56" column="15" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="56" bodyend="-1"/>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a956f0190d0bd24ad8960d3e6a94b82db" compoundref="Camera_8ixx" startline="161" endline="170">helios::scene::Camera::setPerspective</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a2fcf4ad5e74f95606f6d6ec5184b6d1f" compoundref="Camera_8ixx" startline="192" endline="196">helios::scene::Camera::setZFar</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a949fcc8b4e43f2a9afdad8eaafaeb07b" compoundref="Camera_8ixx" startline="78" endline="87">helios::scene::Camera::update</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1ab6f32b1cf60371dfa764adfb13d4141e" compoundref="Camera_8ixx" startline="243" endline="245">helios::scene::Camera::zFar</referencedby>
+        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="83" column="15" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="83" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1acb7b0305e740d3407fae9090fe942fdc" compoundref="Camera_8ixx" startline="286" endline="307">helios::scene::Camera::setOrtho</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a956f0190d0bd24ad8960d3e6a94b82db" compoundref="Camera_8ixx" startline="256" endline="266">helios::scene::Camera::setPerspective</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a2fcf4ad5e74f95606f6d6ec5184b6d1f" compoundref="Camera_8ixx" startline="329" endline="333">helios::scene::Camera::setZFar</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a949fcc8b4e43f2a9afdad8eaafaeb07b" compoundref="Camera_8ixx" startline="131" endline="144">helios::scene::Camera::update</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1ab6f32b1cf60371dfa764adfb13d4141e" compoundref="Camera_8ixx" startline="380" endline="382">helios::scene::Camera::zFar</referencedby>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1scene_1_1Camera_1a93d6f69ba20a464ad2de8b6233321870" prot="protected" static="no" mutable="no">
         <type>float</type>
@@ -119,11 +141,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="63" column="15" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="63" bodyend="-1"/>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a70b386e4c1f91bd4cca152d5efb4ed76" compoundref="Camera_8ixx" startline="216" endline="218">helios::scene::Camera::fovY</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a1fb02da77bd02b2c88f974ceccab7ce9" compoundref="Camera_8ixx" startline="205" endline="209">helios::scene::Camera::setFovY</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a956f0190d0bd24ad8960d3e6a94b82db" compoundref="Camera_8ixx" startline="161" endline="170">helios::scene::Camera::setPerspective</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a949fcc8b4e43f2a9afdad8eaafaeb07b" compoundref="Camera_8ixx" startline="78" endline="87">helios::scene::Camera::update</referencedby>
+        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="90" column="15" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="90" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a70b386e4c1f91bd4cca152d5efb4ed76" compoundref="Camera_8ixx" startline="353" endline="355">helios::scene::Camera::fovY</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a1fb02da77bd02b2c88f974ceccab7ce9" compoundref="Camera_8ixx" startline="342" endline="346">helios::scene::Camera::setFovY</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a956f0190d0bd24ad8960d3e6a94b82db" compoundref="Camera_8ixx" startline="256" endline="266">helios::scene::Camera::setPerspective</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a949fcc8b4e43f2a9afdad8eaafaeb07b" compoundref="Camera_8ixx" startline="131" endline="144">helios::scene::Camera::update</referencedby>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1scene_1_1Camera_1af1b0b6d8716871661a66609b5bed1255" prot="protected" static="no" mutable="yes">
         <type>bool</type>
@@ -139,13 +161,109 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="68" column="22" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="68" bodyend="-1"/>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a865085d03e951123b7560d68f5eca056" compoundref="Camera_8ixx" startline="145" endline="149">helios::scene::Camera::setAspectRatio</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a1fb02da77bd02b2c88f974ceccab7ce9" compoundref="Camera_8ixx" startline="205" endline="209">helios::scene::Camera::setFovY</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a956f0190d0bd24ad8960d3e6a94b82db" compoundref="Camera_8ixx" startline="161" endline="170">helios::scene::Camera::setPerspective</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a2fcf4ad5e74f95606f6d6ec5184b6d1f" compoundref="Camera_8ixx" startline="192" endline="196">helios::scene::Camera::setZFar</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a162c8f353ae0ec96b0b8371a90b99064" compoundref="Camera_8ixx" startline="179" endline="183">helios::scene::Camera::setZNear</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a949fcc8b4e43f2a9afdad8eaafaeb07b" compoundref="Camera_8ixx" startline="78" endline="87">helios::scene::Camera::update</referencedby>
+        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="95" column="22" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="95" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a5a35d0c45d264b53230813dec89d4fee" compoundref="Camera_8ixx" startline="225" endline="244">helios::scene::Camera::onResize</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a865085d03e951123b7560d68f5eca056" compoundref="Camera_8ixx" startline="208" endline="212">helios::scene::Camera::setAspectRatio</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a1fb02da77bd02b2c88f974ceccab7ce9" compoundref="Camera_8ixx" startline="342" endline="346">helios::scene::Camera::setFovY</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1acb7b0305e740d3407fae9090fe942fdc" compoundref="Camera_8ixx" startline="286" endline="307">helios::scene::Camera::setOrtho</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a956f0190d0bd24ad8960d3e6a94b82db" compoundref="Camera_8ixx" startline="256" endline="266">helios::scene::Camera::setPerspective</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a2fcf4ad5e74f95606f6d6ec5184b6d1f" compoundref="Camera_8ixx" startline="329" endline="333">helios::scene::Camera::setZFar</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a162c8f353ae0ec96b0b8371a90b99064" compoundref="Camera_8ixx" startline="316" endline="320">helios::scene::Camera::setZNear</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a949fcc8b4e43f2a9afdad8eaafaeb07b" compoundref="Camera_8ixx" startline="131" endline="144">helios::scene::Camera::update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1scene_1_1Camera_1a5f18037a0f6ae3986dfde703abe59359" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::scene::Camera::left_</definition>
+        <argsstring></argsstring>
+        <name>left_</name>
+        <qualifiedname>helios::scene::Camera::left_</qualifiedname>
+        <briefdescription>
+<para>Left boundary of the orthographic frustum. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="100" column="15" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="100" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a5a35d0c45d264b53230813dec89d4fee" compoundref="Camera_8ixx" startline="225" endline="244">helios::scene::Camera::onResize</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1acb7b0305e740d3407fae9090fe942fdc" compoundref="Camera_8ixx" startline="286" endline="307">helios::scene::Camera::setOrtho</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a949fcc8b4e43f2a9afdad8eaafaeb07b" compoundref="Camera_8ixx" startline="131" endline="144">helios::scene::Camera::update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1scene_1_1Camera_1aeee258fdd9a5e0e41b647115bcbf30bd" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::scene::Camera::right_</definition>
+        <argsstring></argsstring>
+        <name>right_</name>
+        <qualifiedname>helios::scene::Camera::right_</qualifiedname>
+        <briefdescription>
+<para>Right boundary of the orthographic frustum. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="105" column="15" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="105" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a5a35d0c45d264b53230813dec89d4fee" compoundref="Camera_8ixx" startline="225" endline="244">helios::scene::Camera::onResize</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1acb7b0305e740d3407fae9090fe942fdc" compoundref="Camera_8ixx" startline="286" endline="307">helios::scene::Camera::setOrtho</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a949fcc8b4e43f2a9afdad8eaafaeb07b" compoundref="Camera_8ixx" startline="131" endline="144">helios::scene::Camera::update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1scene_1_1Camera_1aa4a698bc0432df76fd9f1cfae761f32a" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::scene::Camera::bottom_</definition>
+        <argsstring></argsstring>
+        <name>bottom_</name>
+        <qualifiedname>helios::scene::Camera::bottom_</qualifiedname>
+        <briefdescription>
+<para>Bottom boundary of the orthographic frustum. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="110" column="15" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="110" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a5a35d0c45d264b53230813dec89d4fee" compoundref="Camera_8ixx" startline="225" endline="244">helios::scene::Camera::onResize</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1acb7b0305e740d3407fae9090fe942fdc" compoundref="Camera_8ixx" startline="286" endline="307">helios::scene::Camera::setOrtho</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a949fcc8b4e43f2a9afdad8eaafaeb07b" compoundref="Camera_8ixx" startline="131" endline="144">helios::scene::Camera::update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1scene_1_1Camera_1aaed8e7bb0f364814b4bb335d652620b9" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::scene::Camera::top_</definition>
+        <argsstring></argsstring>
+        <name>top_</name>
+        <qualifiedname>helios::scene::Camera::top_</qualifiedname>
+        <briefdescription>
+<para>Top boundary of the orthographic frustum. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="115" column="15" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="115" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a5a35d0c45d264b53230813dec89d4fee" compoundref="Camera_8ixx" startline="225" endline="244">helios::scene::Camera::onResize</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1acb7b0305e740d3407fae9090fe942fdc" compoundref="Camera_8ixx" startline="286" endline="307">helios::scene::Camera::setOrtho</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a949fcc8b4e43f2a9afdad8eaafaeb07b" compoundref="Camera_8ixx" startline="131" endline="144">helios::scene::Camera::update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1scene_1_1Camera_1a092226b923a7bcf9125d99f7c7d09435" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool helios::scene::Camera::usePerspective_</definition>
+        <argsstring></argsstring>
+        <name>usePerspective_</name>
+        <qualifiedname>helios::scene::Camera::usePerspective_</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>Flag indicating the projection mode. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>When `true`, perspective projection is used. When `false`, orthographic projection is used. Defaults to `true`. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="123" column="14" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="123" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a5a35d0c45d264b53230813dec89d4fee" compoundref="Camera_8ixx" startline="225" endline="244">helios::scene::Camera::onResize</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a1dc42ba642ae41f7028a4cb927a6feb0" compoundref="Camera_8ixx" startline="163" endline="170">helios::scene::Camera::projectionMatrix</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1acb7b0305e740d3407fae9090fe942fdc" compoundref="Camera_8ixx" startline="286" endline="307">helios::scene::Camera::setOrtho</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a956f0190d0bd24ad8960d3e6a94b82db" compoundref="Camera_8ixx" startline="256" endline="266">helios::scene::Camera::setPerspective</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a949fcc8b4e43f2a9afdad8eaafaeb07b" compoundref="Camera_8ixx" startline="131" endline="144">helios::scene::Camera::update</referencedby>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -163,15 +281,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="78" column="14" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="78" bodyend="87"/>
-        <references refid="classhelios_1_1scene_1_1Camera_1a95f643525bd276faa7edcd1401f47850" compoundref="Camera_8ixx" startline="42">helios::scene::Camera::aspectRatio_</references>
-        <references refid="classhelios_1_1scene_1_1Camera_1a93d6f69ba20a464ad2de8b6233321870" compoundref="Camera_8ixx" startline="63">helios::scene::Camera::fovY_</references>
-        <references refid="classhelios_1_1scene_1_1Camera_1af1b0b6d8716871661a66609b5bed1255" compoundref="Camera_8ixx" startline="68">helios::scene::Camera::needsUpdate_</references>
+        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="131" column="14" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="131" bodyend="144"/>
+        <references refid="classhelios_1_1scene_1_1Camera_1a95f643525bd276faa7edcd1401f47850" compoundref="Camera_8ixx" startline="69">helios::scene::Camera::aspectRatio_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1aa4a698bc0432df76fd9f1cfae761f32a" compoundref="Camera_8ixx" startline="110">helios::scene::Camera::bottom_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a93d6f69ba20a464ad2de8b6233321870" compoundref="Camera_8ixx" startline="90">helios::scene::Camera::fovY_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a5f18037a0f6ae3986dfde703abe59359" compoundref="Camera_8ixx" startline="100">helios::scene::Camera::left_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1af1b0b6d8716871661a66609b5bed1255" compoundref="Camera_8ixx" startline="95">helios::scene::Camera::needsUpdate_</references>
+        <references refid="namespacehelios_1_1math_1a4b05da38fbe60019d6b5e32a72b4b5e3" compoundref="camera_8ixx" startline="68" endline="79">helios::math::ortho</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1aef2089cfccbe0b820eb5df002d812347" compoundref="Camera_8ixx" startline="57">helios::scene::Camera::orthographicMatrix_</references>
         <references refid="namespacehelios_1_1math_1a3009ee1714550dc2af4d7e5e952e8a90" compoundref="camera_8ixx" startline="35" endline="45">helios::math::perspective</references>
-        <references refid="classhelios_1_1scene_1_1Camera_1a73a85eb4966fb4524dc6b87736500f62" compoundref="Camera_8ixx" startline="30">helios::scene::Camera::projectionMatrix_</references>
-        <references refid="classhelios_1_1scene_1_1Camera_1a3a433ba5fa99dc88e12f63c8750d0a5e" compoundref="Camera_8ixx" startline="56">helios::scene::Camera::zFar_</references>
-        <references refid="classhelios_1_1scene_1_1Camera_1a50a2b217510dda5e0e75224a0fc3d624" compoundref="Camera_8ixx" startline="49">helios::scene::Camera::zNear_</references>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a1dc42ba642ae41f7028a4cb927a6feb0" compoundref="Camera_8ixx" startline="105" endline="108">helios::scene::Camera::projectionMatrix</referencedby>
+        <references refid="classhelios_1_1scene_1_1Camera_1a612305dde16da3ef55feea253a60da88" compoundref="Camera_8ixx" startline="50">helios::scene::Camera::perspectiveMatrix_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1aeee258fdd9a5e0e41b647115bcbf30bd" compoundref="Camera_8ixx" startline="105">helios::scene::Camera::right_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1aaed8e7bb0f364814b4bb335d652620b9" compoundref="Camera_8ixx" startline="115">helios::scene::Camera::top_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a092226b923a7bcf9125d99f7c7d09435" compoundref="Camera_8ixx" startline="123">helios::scene::Camera::usePerspective_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a3a433ba5fa99dc88e12f63c8750d0a5e" compoundref="Camera_8ixx" startline="83">helios::scene::Camera::zFar_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a50a2b217510dda5e0e75224a0fc3d624" compoundref="Camera_8ixx" startline="76">helios::scene::Camera::zNear_</references>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a1dc42ba642ae41f7028a4cb927a6feb0" compoundref="Camera_8ixx" startline="163" endline="170">helios::scene::Camera::projectionMatrix</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1Camera_1a6d1911bccc03c847625153d58cc49e99" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -186,15 +311,17 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="93" column="9" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="93" bodyend="96"/>
-        <references refid="classhelios_1_1scene_1_1Camera_1a73a85eb4966fb4524dc6b87736500f62" compoundref="Camera_8ixx" startline="30">helios::scene::Camera::projectionMatrix_</references>
-        <references refid="classhelios_1_1scene_1_1Camera_1a5c915d9ba00c11dcef1885f02e32945c" compoundref="Camera_8ixx" startline="35">helios::scene::Camera::viewMatrix_</references>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a865085d03e951123b7560d68f5eca056" compoundref="Camera_8ixx" startline="145" endline="149">helios::scene::Camera::setAspectRatio</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a1fb02da77bd02b2c88f974ceccab7ce9" compoundref="Camera_8ixx" startline="205" endline="209">helios::scene::Camera::setFovY</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a956f0190d0bd24ad8960d3e6a94b82db" compoundref="Camera_8ixx" startline="161" endline="170">helios::scene::Camera::setPerspective</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1aa4db3f9ad22b14be836f3f5ba42576b7" compoundref="Camera_8ixx" startline="133" endline="136">helios::scene::Camera::setViewMatrix</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a2fcf4ad5e74f95606f6d6ec5184b6d1f" compoundref="Camera_8ixx" startline="192" endline="196">helios::scene::Camera::setZFar</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a162c8f353ae0ec96b0b8371a90b99064" compoundref="Camera_8ixx" startline="179" endline="183">helios::scene::Camera::setZNear</referencedby>
+        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="150" column="9" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="150" bodyend="154"/>
+        <references refid="classhelios_1_1scene_1_1Camera_1aef2089cfccbe0b820eb5df002d812347" compoundref="Camera_8ixx" startline="57">helios::scene::Camera::orthographicMatrix_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a612305dde16da3ef55feea253a60da88" compoundref="Camera_8ixx" startline="50">helios::scene::Camera::perspectiveMatrix_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a5c915d9ba00c11dcef1885f02e32945c" compoundref="Camera_8ixx" startline="62">helios::scene::Camera::viewMatrix_</references>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a865085d03e951123b7560d68f5eca056" compoundref="Camera_8ixx" startline="208" endline="212">helios::scene::Camera::setAspectRatio</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a1fb02da77bd02b2c88f974ceccab7ce9" compoundref="Camera_8ixx" startline="342" endline="346">helios::scene::Camera::setFovY</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1acb7b0305e740d3407fae9090fe942fdc" compoundref="Camera_8ixx" startline="286" endline="307">helios::scene::Camera::setOrtho</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a956f0190d0bd24ad8960d3e6a94b82db" compoundref="Camera_8ixx" startline="256" endline="266">helios::scene::Camera::setPerspective</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1aa4db3f9ad22b14be836f3f5ba42576b7" compoundref="Camera_8ixx" startline="196" endline="199">helios::scene::Camera::setViewMatrix</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a2fcf4ad5e74f95606f6d6ec5184b6d1f" compoundref="Camera_8ixx" startline="329" endline="333">helios::scene::Camera::setZFar</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a162c8f353ae0ec96b0b8371a90b99064" compoundref="Camera_8ixx" startline="316" endline="320">helios::scene::Camera::setZNear</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1Camera_1a1dc42ba642ae41f7028a4cb927a6feb0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>const <ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">helios::math::mat4f</ref> &amp;</type>
@@ -213,9 +340,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="105" column="36" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="105" bodyend="108"/>
-        <references refid="classhelios_1_1scene_1_1Camera_1a73a85eb4966fb4524dc6b87736500f62" compoundref="Camera_8ixx" startline="30">helios::scene::Camera::projectionMatrix_</references>
-        <references refid="classhelios_1_1scene_1_1Camera_1a949fcc8b4e43f2a9afdad8eaafaeb07b" compoundref="Camera_8ixx" startline="78" endline="87">helios::scene::Camera::update</references>
+        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="163" column="36" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="163" bodyend="170"/>
+        <references refid="classhelios_1_1scene_1_1Camera_1aef2089cfccbe0b820eb5df002d812347" compoundref="Camera_8ixx" startline="57">helios::scene::Camera::orthographicMatrix_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a612305dde16da3ef55feea253a60da88" compoundref="Camera_8ixx" startline="50">helios::scene::Camera::perspectiveMatrix_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a949fcc8b4e43f2a9afdad8eaafaeb07b" compoundref="Camera_8ixx" startline="131" endline="144">helios::scene::Camera::update</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a092226b923a7bcf9125d99f7c7d09435" compoundref="Camera_8ixx" startline="123">helios::scene::Camera::usePerspective_</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1Camera_1a920bac1e84b874d725027e37d091cb34" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>const <ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">helios::math::mat4f</ref> &amp;</type>
@@ -234,9 +363,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="117" column="36" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="117" bodyend="119"/>
-        <references refid="classhelios_1_1scene_1_1Camera_1a5c915d9ba00c11dcef1885f02e32945c" compoundref="Camera_8ixx" startline="35">helios::scene::Camera::viewMatrix_</references>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1aa4db3f9ad22b14be836f3f5ba42576b7" compoundref="Camera_8ixx" startline="133" endline="136">helios::scene::Camera::setViewMatrix</referencedby>
+        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="180" column="36" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="180" bodyend="182"/>
+        <references refid="classhelios_1_1scene_1_1Camera_1a5c915d9ba00c11dcef1885f02e32945c" compoundref="Camera_8ixx" startline="62">helios::scene::Camera::viewMatrix_</references>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1aa4db3f9ad22b14be836f3f5ba42576b7" compoundref="Camera_8ixx" startline="196" endline="199">helios::scene::Camera::setViewMatrix</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1Camera_1aa4db3f9ad22b14be836f3f5ba42576b7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>Camera &amp;</type>
@@ -270,10 +399,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="133" column="16" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="133" bodyend="136"/>
-        <references refid="classhelios_1_1scene_1_1Camera_1a6d1911bccc03c847625153d58cc49e99" compoundref="Camera_8ixx" startline="93" endline="96">helios::scene::Camera::Camera</references>
-        <references refid="classhelios_1_1scene_1_1Camera_1a920bac1e84b874d725027e37d091cb34" compoundref="Camera_8ixx" startline="117" endline="119">helios::scene::Camera::viewMatrix</references>
-        <references refid="classhelios_1_1scene_1_1Camera_1a5c915d9ba00c11dcef1885f02e32945c" compoundref="Camera_8ixx" startline="35">helios::scene::Camera::viewMatrix_</references>
+        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="196" column="16" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="196" bodyend="199"/>
+        <references refid="classhelios_1_1scene_1_1Camera_1a6d1911bccc03c847625153d58cc49e99" compoundref="Camera_8ixx" startline="150" endline="154">helios::scene::Camera::Camera</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a920bac1e84b874d725027e37d091cb34" compoundref="Camera_8ixx" startline="180" endline="182">helios::scene::Camera::viewMatrix</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a5c915d9ba00c11dcef1885f02e32945c" compoundref="Camera_8ixx" startline="62">helios::scene::Camera::viewMatrix_</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1Camera_1a865085d03e951123b7560d68f5eca056" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>Camera &amp;</type>
@@ -304,11 +433,65 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="145" column="16" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="145" bodyend="149"/>
-        <references refid="classhelios_1_1scene_1_1Camera_1a949e8c04f22ca2a1ace596e6e859bee3" compoundref="Camera_8ixx" startline="225" endline="227">helios::scene::Camera::aspectRatio</references>
-        <references refid="classhelios_1_1scene_1_1Camera_1a95f643525bd276faa7edcd1401f47850" compoundref="Camera_8ixx" startline="42">helios::scene::Camera::aspectRatio_</references>
-        <references refid="classhelios_1_1scene_1_1Camera_1a6d1911bccc03c847625153d58cc49e99" compoundref="Camera_8ixx" startline="93" endline="96">helios::scene::Camera::Camera</references>
-        <references refid="classhelios_1_1scene_1_1Camera_1af1b0b6d8716871661a66609b5bed1255" compoundref="Camera_8ixx" startline="68">helios::scene::Camera::needsUpdate_</references>
+        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="208" column="16" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="208" bodyend="212"/>
+        <references refid="classhelios_1_1scene_1_1Camera_1a949e8c04f22ca2a1ace596e6e859bee3" compoundref="Camera_8ixx" startline="362" endline="364">helios::scene::Camera::aspectRatio</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a95f643525bd276faa7edcd1401f47850" compoundref="Camera_8ixx" startline="69">helios::scene::Camera::aspectRatio_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a6d1911bccc03c847625153d58cc49e99" compoundref="Camera_8ixx" startline="150" endline="154">helios::scene::Camera::Camera</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1af1b0b6d8716871661a66609b5bed1255" compoundref="Camera_8ixx" startline="95">helios::scene::Camera::needsUpdate_</references>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a5a35d0c45d264b53230813dec89d4fee" compoundref="Camera_8ixx" startline="225" endline="244">helios::scene::Camera::onResize</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1scene_1_1Camera_1a5a35d0c45d264b53230813dec89d4fee" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::scene::Camera::onResize</definition>
+        <argsstring>(const float width, const float height) noexcept</argsstring>
+        <name>onResize</name>
+        <qualifiedname>helios::scene::Camera::onResize</qualifiedname>
+        <param>
+          <type>const float</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+<para>Handles viewport resize events. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Adjusts the camera projection parameters when the viewport dimensions change.<itemizedlist>
+<listitem><para>For perspective projection: Updates the aspect ratio.</para>
+</listitem><listitem><para>For orthographic projection: Adjusts the right and top boundaries to maintain the correct projection volume.</para>
+</listitem></itemizedlist>
+</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>width</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new viewport width in pixels. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>height</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new viewport height in pixels. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="225" column="14" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="225" bodyend="244"/>
+        <references refid="classhelios_1_1scene_1_1Camera_1aa4a698bc0432df76fd9f1cfae761f32a" compoundref="Camera_8ixx" startline="110">helios::scene::Camera::bottom_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a5f18037a0f6ae3986dfde703abe59359" compoundref="Camera_8ixx" startline="100">helios::scene::Camera::left_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1af1b0b6d8716871661a66609b5bed1255" compoundref="Camera_8ixx" startline="95">helios::scene::Camera::needsUpdate_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1aeee258fdd9a5e0e41b647115bcbf30bd" compoundref="Camera_8ixx" startline="105">helios::scene::Camera::right_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a865085d03e951123b7560d68f5eca056" compoundref="Camera_8ixx" startline="208" endline="212">helios::scene::Camera::setAspectRatio</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1aaed8e7bb0f364814b4bb335d652620b9" compoundref="Camera_8ixx" startline="115">helios::scene::Camera::top_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a092226b923a7bcf9125d99f7c7d09435" compoundref="Camera_8ixx" startline="123">helios::scene::Camera::usePerspective_</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1Camera_1a956f0190d0bd24ad8960d3e6a94b82db" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>Camera &amp;</type>
@@ -375,17 +558,126 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="161" column="16" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="161" bodyend="170"/>
-        <references refid="classhelios_1_1scene_1_1Camera_1a949e8c04f22ca2a1ace596e6e859bee3" compoundref="Camera_8ixx" startline="225" endline="227">helios::scene::Camera::aspectRatio</references>
-        <references refid="classhelios_1_1scene_1_1Camera_1a95f643525bd276faa7edcd1401f47850" compoundref="Camera_8ixx" startline="42">helios::scene::Camera::aspectRatio_</references>
-        <references refid="classhelios_1_1scene_1_1Camera_1a6d1911bccc03c847625153d58cc49e99" compoundref="Camera_8ixx" startline="93" endline="96">helios::scene::Camera::Camera</references>
-        <references refid="classhelios_1_1scene_1_1Camera_1a70b386e4c1f91bd4cca152d5efb4ed76" compoundref="Camera_8ixx" startline="216" endline="218">helios::scene::Camera::fovY</references>
-        <references refid="classhelios_1_1scene_1_1Camera_1a93d6f69ba20a464ad2de8b6233321870" compoundref="Camera_8ixx" startline="63">helios::scene::Camera::fovY_</references>
-        <references refid="classhelios_1_1scene_1_1Camera_1af1b0b6d8716871661a66609b5bed1255" compoundref="Camera_8ixx" startline="68">helios::scene::Camera::needsUpdate_</references>
-        <references refid="classhelios_1_1scene_1_1Camera_1ab6f32b1cf60371dfa764adfb13d4141e" compoundref="Camera_8ixx" startline="243" endline="245">helios::scene::Camera::zFar</references>
-        <references refid="classhelios_1_1scene_1_1Camera_1a3a433ba5fa99dc88e12f63c8750d0a5e" compoundref="Camera_8ixx" startline="56">helios::scene::Camera::zFar_</references>
-        <references refid="classhelios_1_1scene_1_1Camera_1a11e3916a50eb417e8924ccea8fee56cd" compoundref="Camera_8ixx" startline="234" endline="236">helios::scene::Camera::zNear</references>
-        <references refid="classhelios_1_1scene_1_1Camera_1a50a2b217510dda5e0e75224a0fc3d624" compoundref="Camera_8ixx" startline="49">helios::scene::Camera::zNear_</references>
+        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="256" column="16" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="256" bodyend="266"/>
+        <references refid="classhelios_1_1scene_1_1Camera_1a949e8c04f22ca2a1ace596e6e859bee3" compoundref="Camera_8ixx" startline="362" endline="364">helios::scene::Camera::aspectRatio</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a95f643525bd276faa7edcd1401f47850" compoundref="Camera_8ixx" startline="69">helios::scene::Camera::aspectRatio_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a6d1911bccc03c847625153d58cc49e99" compoundref="Camera_8ixx" startline="150" endline="154">helios::scene::Camera::Camera</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a70b386e4c1f91bd4cca152d5efb4ed76" compoundref="Camera_8ixx" startline="353" endline="355">helios::scene::Camera::fovY</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a93d6f69ba20a464ad2de8b6233321870" compoundref="Camera_8ixx" startline="90">helios::scene::Camera::fovY_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1af1b0b6d8716871661a66609b5bed1255" compoundref="Camera_8ixx" startline="95">helios::scene::Camera::needsUpdate_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a092226b923a7bcf9125d99f7c7d09435" compoundref="Camera_8ixx" startline="123">helios::scene::Camera::usePerspective_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1ab6f32b1cf60371dfa764adfb13d4141e" compoundref="Camera_8ixx" startline="380" endline="382">helios::scene::Camera::zFar</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a3a433ba5fa99dc88e12f63c8750d0a5e" compoundref="Camera_8ixx" startline="83">helios::scene::Camera::zFar_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a11e3916a50eb417e8924ccea8fee56cd" compoundref="Camera_8ixx" startline="371" endline="373">helios::scene::Camera::zNear</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a50a2b217510dda5e0e75224a0fc3d624" compoundref="Camera_8ixx" startline="76">helios::scene::Camera::zNear_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1scene_1_1Camera_1acb7b0305e740d3407fae9090fe942fdc" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>Camera &amp;</type>
+        <definition>Camera &amp; helios::scene::Camera::setOrtho</definition>
+        <argsstring>(const float left, const float right, const float bottom, const float top, const float zNear=-1.0f, const float zFar=100.0f) noexcept</argsstring>
+        <name>setOrtho</name>
+        <qualifiedname>helios::scene::Camera::setOrtho</qualifiedname>
+        <param>
+          <type>const float</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>right</declname>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>bottom</declname>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>zNear</declname>
+          <defval>-1.0f</defval>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>zFar</declname>
+          <defval>100.0f</defval>
+        </param>
+        <briefdescription>
+<para>Sets the orthographic projection parameters. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Configures the camera for orthographic projection, which is useful for 2D rendering, UI overlays, or scenes where parallel lines should remain parallel (no perspective distortion).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>left</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The left boundary of the view volume. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>right</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The right boundary of the view volume. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bottom</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The bottom boundary of the view volume. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>top</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The top boundary of the view volume. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>zNear</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The near clipping plane distance. Defaults to -1.0. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>zFar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The far clipping plane distance. Defaults to 100.0.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A reference to this camera instance.</para>
+</simplesect>
+<simplesect kind="note"><para>Calling this method switches the camera to orthographic projection mode. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="286" column="16" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="286" bodyend="307"/>
+        <references refid="classhelios_1_1scene_1_1Camera_1a95f643525bd276faa7edcd1401f47850" compoundref="Camera_8ixx" startline="69">helios::scene::Camera::aspectRatio_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1aa4a698bc0432df76fd9f1cfae761f32a" compoundref="Camera_8ixx" startline="110">helios::scene::Camera::bottom_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a6d1911bccc03c847625153d58cc49e99" compoundref="Camera_8ixx" startline="150" endline="154">helios::scene::Camera::Camera</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a5f18037a0f6ae3986dfde703abe59359" compoundref="Camera_8ixx" startline="100">helios::scene::Camera::left_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1af1b0b6d8716871661a66609b5bed1255" compoundref="Camera_8ixx" startline="95">helios::scene::Camera::needsUpdate_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1aeee258fdd9a5e0e41b647115bcbf30bd" compoundref="Camera_8ixx" startline="105">helios::scene::Camera::right_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1aaed8e7bb0f364814b4bb335d652620b9" compoundref="Camera_8ixx" startline="115">helios::scene::Camera::top_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a092226b923a7bcf9125d99f7c7d09435" compoundref="Camera_8ixx" startline="123">helios::scene::Camera::usePerspective_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1ab6f32b1cf60371dfa764adfb13d4141e" compoundref="Camera_8ixx" startline="380" endline="382">helios::scene::Camera::zFar</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a3a433ba5fa99dc88e12f63c8750d0a5e" compoundref="Camera_8ixx" startline="83">helios::scene::Camera::zFar_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a11e3916a50eb417e8924ccea8fee56cd" compoundref="Camera_8ixx" startline="371" endline="373">helios::scene::Camera::zNear</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a50a2b217510dda5e0e75224a0fc3d624" compoundref="Camera_8ixx" startline="76">helios::scene::Camera::zNear_</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1Camera_1a162c8f353ae0ec96b0b8371a90b99064" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>Camera &amp;</type>
@@ -416,11 +708,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="179" column="16" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="179" bodyend="183"/>
-        <references refid="classhelios_1_1scene_1_1Camera_1a6d1911bccc03c847625153d58cc49e99" compoundref="Camera_8ixx" startline="93" endline="96">helios::scene::Camera::Camera</references>
-        <references refid="classhelios_1_1scene_1_1Camera_1af1b0b6d8716871661a66609b5bed1255" compoundref="Camera_8ixx" startline="68">helios::scene::Camera::needsUpdate_</references>
-        <references refid="classhelios_1_1scene_1_1Camera_1a11e3916a50eb417e8924ccea8fee56cd" compoundref="Camera_8ixx" startline="234" endline="236">helios::scene::Camera::zNear</references>
-        <references refid="classhelios_1_1scene_1_1Camera_1a50a2b217510dda5e0e75224a0fc3d624" compoundref="Camera_8ixx" startline="49">helios::scene::Camera::zNear_</references>
+        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="316" column="16" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="316" bodyend="320"/>
+        <references refid="classhelios_1_1scene_1_1Camera_1a6d1911bccc03c847625153d58cc49e99" compoundref="Camera_8ixx" startline="150" endline="154">helios::scene::Camera::Camera</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1af1b0b6d8716871661a66609b5bed1255" compoundref="Camera_8ixx" startline="95">helios::scene::Camera::needsUpdate_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a11e3916a50eb417e8924ccea8fee56cd" compoundref="Camera_8ixx" startline="371" endline="373">helios::scene::Camera::zNear</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a50a2b217510dda5e0e75224a0fc3d624" compoundref="Camera_8ixx" startline="76">helios::scene::Camera::zNear_</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1Camera_1a2fcf4ad5e74f95606f6d6ec5184b6d1f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>Camera &amp;</type>
@@ -451,11 +743,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="192" column="16" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="192" bodyend="196"/>
-        <references refid="classhelios_1_1scene_1_1Camera_1a6d1911bccc03c847625153d58cc49e99" compoundref="Camera_8ixx" startline="93" endline="96">helios::scene::Camera::Camera</references>
-        <references refid="classhelios_1_1scene_1_1Camera_1af1b0b6d8716871661a66609b5bed1255" compoundref="Camera_8ixx" startline="68">helios::scene::Camera::needsUpdate_</references>
-        <references refid="classhelios_1_1scene_1_1Camera_1ab6f32b1cf60371dfa764adfb13d4141e" compoundref="Camera_8ixx" startline="243" endline="245">helios::scene::Camera::zFar</references>
-        <references refid="classhelios_1_1scene_1_1Camera_1a3a433ba5fa99dc88e12f63c8750d0a5e" compoundref="Camera_8ixx" startline="56">helios::scene::Camera::zFar_</references>
+        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="329" column="16" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="329" bodyend="333"/>
+        <references refid="classhelios_1_1scene_1_1Camera_1a6d1911bccc03c847625153d58cc49e99" compoundref="Camera_8ixx" startline="150" endline="154">helios::scene::Camera::Camera</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1af1b0b6d8716871661a66609b5bed1255" compoundref="Camera_8ixx" startline="95">helios::scene::Camera::needsUpdate_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1ab6f32b1cf60371dfa764adfb13d4141e" compoundref="Camera_8ixx" startline="380" endline="382">helios::scene::Camera::zFar</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a3a433ba5fa99dc88e12f63c8750d0a5e" compoundref="Camera_8ixx" startline="83">helios::scene::Camera::zFar_</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1Camera_1a1fb02da77bd02b2c88f974ceccab7ce9" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>Camera &amp;</type>
@@ -486,11 +778,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="205" column="16" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="205" bodyend="209"/>
-        <references refid="classhelios_1_1scene_1_1Camera_1a6d1911bccc03c847625153d58cc49e99" compoundref="Camera_8ixx" startline="93" endline="96">helios::scene::Camera::Camera</references>
-        <references refid="classhelios_1_1scene_1_1Camera_1a70b386e4c1f91bd4cca152d5efb4ed76" compoundref="Camera_8ixx" startline="216" endline="218">helios::scene::Camera::fovY</references>
-        <references refid="classhelios_1_1scene_1_1Camera_1a93d6f69ba20a464ad2de8b6233321870" compoundref="Camera_8ixx" startline="63">helios::scene::Camera::fovY_</references>
-        <references refid="classhelios_1_1scene_1_1Camera_1af1b0b6d8716871661a66609b5bed1255" compoundref="Camera_8ixx" startline="68">helios::scene::Camera::needsUpdate_</references>
+        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="342" column="16" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="342" bodyend="346"/>
+        <references refid="classhelios_1_1scene_1_1Camera_1a6d1911bccc03c847625153d58cc49e99" compoundref="Camera_8ixx" startline="150" endline="154">helios::scene::Camera::Camera</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a70b386e4c1f91bd4cca152d5efb4ed76" compoundref="Camera_8ixx" startline="353" endline="355">helios::scene::Camera::fovY</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1a93d6f69ba20a464ad2de8b6233321870" compoundref="Camera_8ixx" startline="90">helios::scene::Camera::fovY_</references>
+        <references refid="classhelios_1_1scene_1_1Camera_1af1b0b6d8716871661a66609b5bed1255" compoundref="Camera_8ixx" startline="95">helios::scene::Camera::needsUpdate_</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1Camera_1a70b386e4c1f91bd4cca152d5efb4ed76" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>float</type>
@@ -508,10 +800,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="216" column="16" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="216" bodyend="218"/>
-        <references refid="classhelios_1_1scene_1_1Camera_1a93d6f69ba20a464ad2de8b6233321870" compoundref="Camera_8ixx" startline="63">helios::scene::Camera::fovY_</references>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a1fb02da77bd02b2c88f974ceccab7ce9" compoundref="Camera_8ixx" startline="205" endline="209">helios::scene::Camera::setFovY</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a956f0190d0bd24ad8960d3e6a94b82db" compoundref="Camera_8ixx" startline="161" endline="170">helios::scene::Camera::setPerspective</referencedby>
+        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="353" column="16" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="353" bodyend="355"/>
+        <references refid="classhelios_1_1scene_1_1Camera_1a93d6f69ba20a464ad2de8b6233321870" compoundref="Camera_8ixx" startline="90">helios::scene::Camera::fovY_</references>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a1fb02da77bd02b2c88f974ceccab7ce9" compoundref="Camera_8ixx" startline="342" endline="346">helios::scene::Camera::setFovY</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a956f0190d0bd24ad8960d3e6a94b82db" compoundref="Camera_8ixx" startline="256" endline="266">helios::scene::Camera::setPerspective</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1Camera_1a949e8c04f22ca2a1ace596e6e859bee3" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>float</type>
@@ -529,10 +821,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="225" column="16" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="225" bodyend="227"/>
-        <references refid="classhelios_1_1scene_1_1Camera_1a95f643525bd276faa7edcd1401f47850" compoundref="Camera_8ixx" startline="42">helios::scene::Camera::aspectRatio_</references>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a865085d03e951123b7560d68f5eca056" compoundref="Camera_8ixx" startline="145" endline="149">helios::scene::Camera::setAspectRatio</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a956f0190d0bd24ad8960d3e6a94b82db" compoundref="Camera_8ixx" startline="161" endline="170">helios::scene::Camera::setPerspective</referencedby>
+        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="362" column="16" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="362" bodyend="364"/>
+        <references refid="classhelios_1_1scene_1_1Camera_1a95f643525bd276faa7edcd1401f47850" compoundref="Camera_8ixx" startline="69">helios::scene::Camera::aspectRatio_</references>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a865085d03e951123b7560d68f5eca056" compoundref="Camera_8ixx" startline="208" endline="212">helios::scene::Camera::setAspectRatio</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a956f0190d0bd24ad8960d3e6a94b82db" compoundref="Camera_8ixx" startline="256" endline="266">helios::scene::Camera::setPerspective</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1Camera_1a11e3916a50eb417e8924ccea8fee56cd" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>float</type>
@@ -550,10 +842,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="234" column="16" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="234" bodyend="236"/>
-        <references refid="classhelios_1_1scene_1_1Camera_1a50a2b217510dda5e0e75224a0fc3d624" compoundref="Camera_8ixx" startline="49">helios::scene::Camera::zNear_</references>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a956f0190d0bd24ad8960d3e6a94b82db" compoundref="Camera_8ixx" startline="161" endline="170">helios::scene::Camera::setPerspective</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a162c8f353ae0ec96b0b8371a90b99064" compoundref="Camera_8ixx" startline="179" endline="183">helios::scene::Camera::setZNear</referencedby>
+        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="371" column="16" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="371" bodyend="373"/>
+        <references refid="classhelios_1_1scene_1_1Camera_1a50a2b217510dda5e0e75224a0fc3d624" compoundref="Camera_8ixx" startline="76">helios::scene::Camera::zNear_</references>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1acb7b0305e740d3407fae9090fe942fdc" compoundref="Camera_8ixx" startline="286" endline="307">helios::scene::Camera::setOrtho</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a956f0190d0bd24ad8960d3e6a94b82db" compoundref="Camera_8ixx" startline="256" endline="266">helios::scene::Camera::setPerspective</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a162c8f353ae0ec96b0b8371a90b99064" compoundref="Camera_8ixx" startline="316" endline="320">helios::scene::Camera::setZNear</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1Camera_1ab6f32b1cf60371dfa764adfb13d4141e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>float</type>
@@ -571,10 +864,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="243" column="16" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="243" bodyend="245"/>
-        <references refid="classhelios_1_1scene_1_1Camera_1a3a433ba5fa99dc88e12f63c8750d0a5e" compoundref="Camera_8ixx" startline="56">helios::scene::Camera::zFar_</references>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a956f0190d0bd24ad8960d3e6a94b82db" compoundref="Camera_8ixx" startline="161" endline="170">helios::scene::Camera::setPerspective</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Camera_1a2fcf4ad5e74f95606f6d6ec5184b6d1f" compoundref="Camera_8ixx" startline="192" endline="196">helios::scene::Camera::setZFar</referencedby>
+        <location file="/tmp/h/include/helios/scene/Camera.ixx" line="380" column="16" bodyfile="/tmp/h/include/helios/scene/Camera.ixx" bodystart="380" bodyend="382"/>
+        <references refid="classhelios_1_1scene_1_1Camera_1a3a433ba5fa99dc88e12f63c8750d0a5e" compoundref="Camera_8ixx" startline="83">helios::scene::Camera::zFar_</references>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1acb7b0305e740d3407fae9090fe942fdc" compoundref="Camera_8ixx" startline="286" endline="307">helios::scene::Camera::setOrtho</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a956f0190d0bd24ad8960d3e6a94b82db" compoundref="Camera_8ixx" startline="256" endline="266">helios::scene::Camera::setPerspective</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a2fcf4ad5e74f95606f6d6ec5184b6d1f" compoundref="Camera_8ixx" startline="329" endline="333">helios::scene::Camera::setZFar</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>

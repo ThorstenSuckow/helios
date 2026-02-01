@@ -1,17 +1,12 @@
 var classhelios_1_1rendering_1_1Renderable =
 [
-    [ "Renderable", "classhelios_1_1rendering_1_1Renderable.html#a5f6b1a62d690b901c71292fd85484601", null ],
+    [ "~Renderable", "classhelios_1_1rendering_1_1Renderable.html#a7c026c028ca9e697aa2226ffd265c8ba", null ],
+    [ "Renderable", "classhelios_1_1rendering_1_1Renderable.html#a5a0b1ee7371be890d2b48b5582e4eebf", null ],
     [ "Renderable", "classhelios_1_1rendering_1_1Renderable.html#a6a9406c41eca52028f9cd08a1c2c300a", null ],
     [ "Renderable", "classhelios_1_1rendering_1_1Renderable.html#a6d557b575fc5bd09bcb1370e5ea4b0a9", null ],
-    [ "Renderable", "classhelios_1_1rendering_1_1Renderable.html#a528392841e8f262631950e1bde961e57", null ],
-    [ "hasMaterialOverride", "classhelios_1_1rendering_1_1Renderable.html#a936e692f977095b6fcc40fb931024617", null ],
-    [ "materialOverride", "classhelios_1_1rendering_1_1Renderable.html#a9ff2cf3f0474d419477027dc81c86165", null ],
-    [ "materialOverride", "classhelios_1_1rendering_1_1Renderable.html#a11455b5220d78030b1ddf5dd9abbbd7c", null ],
+    [ "emit", "classhelios_1_1rendering_1_1Renderable.html#a3c0e5815bdfb1205796141c1aee2f140", null ],
+    [ "localAABB", "classhelios_1_1rendering_1_1Renderable.html#aa88bc57dcd3179cfa2c42d389322ce99", null ],
     [ "operator=", "classhelios_1_1rendering_1_1Renderable.html#adc490817c535742ed59dc691a68f440f", null ],
     [ "operator=", "classhelios_1_1rendering_1_1Renderable.html#ac5f1ab331ba24f577a29f072701e595d", null ],
-    [ "renderPrototype", "classhelios_1_1rendering_1_1Renderable.html#ad62cb2a3bbb92eb64b901e110a357e8c", null ],
-    [ "writeUniformValues", "classhelios_1_1rendering_1_1Renderable.html#ac84d4c3a3639c01c10ab926fab13c1cd", null ],
-    [ "logger_", "classhelios_1_1rendering_1_1Renderable.html#ab3090959e1dc6df5b5737501abbb648a", null ],
-    [ "materialOverride_", "classhelios_1_1rendering_1_1Renderable.html#a0969404f052cbd94a94b3a3fa0e6c7a7", null ],
-    [ "renderPrototype_", "classhelios_1_1rendering_1_1Renderable.html#a8fd3f447a861f9fe08d5a4555d12b5b1", null ]
+    [ "writeUniformValues", "classhelios_1_1rendering_1_1Renderable.html#a0d62f39f07325681c0bd8308baedc111", null ]
 ];

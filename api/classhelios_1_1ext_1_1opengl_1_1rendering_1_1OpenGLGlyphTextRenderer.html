@@ -126,12 +126,11 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a1a00f69a4c65901d576d00ac8fd135e8" id="r_a1a00f69a4c65901d576d00ac8fd135e8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1a00f69a4c65901d576d00ac8fd135e8">~OpenGLGlyphTextRenderer</a> () override</td></tr>
 <tr class="memdesc:a1a00f69a4c65901d576d00ac8fd135e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the <a class="el" href="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLGlyphTextRenderer.html" title="Renders and manages text using OpenGL and FreeType.">OpenGLGlyphTextRenderer</a> and releases all OpenGL resources.  <br /></td></tr>
-<tr class="memitem:a59feb10e3137792e6fe42ec9b6230302" id="r_a59feb10e3137792e6fe42ec9b6230302"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a59feb10e3137792e6fe42ec9b6230302">addFontFamily</a> (const <a class="el" href="structhelios_1_1engine_1_1core_1_1data_1_1FontId.html">helios::engine::core::data::FontId</a> fontId, std::string_view path, const unsigned short begin=0, const unsigned short end=128) override</td></tr>
-<tr class="memdesc:a59feb10e3137792e6fe42ec9b6230302"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a font family for text rendering.  <br /></td></tr>
 <tr class="memitem:a18b6c32bb77b80c7aad6ee59877be457" id="r_a18b6c32bb77b80c7aad6ee59877be457"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a18b6c32bb77b80c7aad6ee59877be457">render</a> (const <a class="el" href="classhelios_1_1rendering_1_1text_1_1TextRenderCommand.html">helios::rendering::text::TextRenderCommand</a> &amp;command, const <a class="el" href="classhelios_1_1rendering_1_1shader_1_1UniformValueMap.html">helios::rendering::shader::UniformValueMap</a> &amp;frameUniformValues) noexcept override</td></tr>
 <tr class="memdesc:a18b6c32bb77b80c7aad6ee59877be457"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renders text using the specified render command.  <br /></td></tr>
 <tr class="inherit_header pub_methods_classhelios_1_1rendering_1_1text_1_1TextRenderer"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classhelios_1_1rendering_1_1text_1_1TextRenderer')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public Member Functions inherited from <a class="el" href="classhelios_1_1rendering_1_1text_1_1TextRenderer.html">helios::rendering::text::TextRenderer</a></td></tr>
 <tr class="memitem:a374aec940343b0a76338d808e9bae0c4 inherit pub_methods_classhelios_1_1rendering_1_1text_1_1TextRenderer" id="r_a374aec940343b0a76338d808e9bae0c4"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1rendering_1_1text_1_1TextRenderer.html#a374aec940343b0a76338d808e9bae0c4">~TextRenderer</a> ()=default</td></tr>
+<tr class="memdesc:a374aec940343b0a76338d808e9bae0c4 inherit pub_methods_classhelios_1_1rendering_1_1text_1_1TextRenderer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor for proper cleanup of derived classes.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -149,7 +148,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>OpenGLDevice</b></td
 <p>The class provides methods for initializing OpenGL resources, loading fonts into a cache, and rendering text at specified positions and scales.</p>
 <p>Inherits from the TextRenderer class in the helios rendering system. </p>
 
-<p class="definition">Definition at line <a class="el" href="OpenGLGlyphTextRenderer_8ixx_source.html#l00048">48</a> of file <a class="el" href="OpenGLGlyphTextRenderer_8ixx_source.html">OpenGLGlyphTextRenderer.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="OpenGLGlyphTextRenderer_8ixx_source.html#l00053">53</a> of file <a class="el" href="OpenGLGlyphTextRenderer_8ixx_source.html">OpenGLGlyphTextRenderer.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a1a00f69a4c65901d576d00ac8fd135e8" name="a1a00f69a4c65901d576d00ac8fd135e8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1a00f69a4c65901d576d00ac8fd135e8">&#9670;&#160;</a></span>~OpenGLGlyphTextRenderer()</h2>
@@ -178,73 +177,11 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>OpenGLDevice</b></td
 <p>Cleans up the Vertex Array Object (VAO), Vertex Buffer Object (VBO), and all cached glyph textures for every loaded font.</p>
 <dl class="section note"><dt>Note</dt><dd>Must be called in a valid OpenGL context. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="OpenGLGlyphTextRenderer_8ixx_source.html#l00258">258</a> of file <a class="el" href="OpenGLGlyphTextRenderer_8ixx_source.html">OpenGLGlyphTextRenderer.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="OpenGLGlyphTextRenderer_8ixx_source.html#l00155">155</a> of file <a class="el" href="OpenGLGlyphTextRenderer_8ixx_source.html">OpenGLGlyphTextRenderer.ixx</a>.</p>
 
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a59feb10e3137792e6fe42ec9b6230302" name="a59feb10e3137792e6fe42ec9b6230302"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a59feb10e3137792e6fe42ec9b6230302">&#9670;&#160;</a></span>addFontFamily()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void helios::ext::opengl::rendering::OpenGLGlyphTextRenderer::addFontFamily </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structhelios_1_1engine_1_1core_1_1data_1_1FontId.html">helios::engine::core::data::FontId</a></td>          <td class="paramname"><span class="paramname"><em>fontId</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>path</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const unsigned short</td>          <td class="paramname"><span class="paramname"><em>begin</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const unsigned short</td>          <td class="paramname"><span class="paramname"><em>end</em></span><span class="paramdefsep"> = </span><span class="paramdefval">128</span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel export">export</span><span class="mlabel virtual">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Registers a font family for text rendering. </p>
-<p>Loads the font from the specified path and pre-renders glyphs for all characters in the given range. The glyphs are cached as OpenGL textures.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">fontId</td><td>Unique identifier for this font family. </td></tr>
-    <tr><td class="paramname">path</td><td>File system path to the font file (TTF, OTF). </td></tr>
-    <tr><td class="paramname">begin</td><td>Start of character range to load (inclusive, default: 0). </td></tr>
-    <tr><td class="paramname">end</td><td>End of character range to load (exclusive, default: 128).</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">std::invalid_argument</td><td>If `begin &gt; end`. </td></tr>
-    <tr><td class="paramname">std::runtime_error</td><td>If the font cannot be loaded. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implements <a class="el" href="classhelios_1_1rendering_1_1text_1_1TextRenderer.html#a7d3841b67eb894de5bb6fff92be1b27d">helios::rendering::text::TextRenderer</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="OpenGLGlyphTextRenderer_8ixx_source.html#l00299">299</a> of file <a class="el" href="OpenGLGlyphTextRenderer_8ixx_source.html">OpenGLGlyphTextRenderer.ixx</a>.</p>
-
-</div>
-</div>
 <a id="a18b6c32bb77b80c7aad6ee59877be457" name="a18b6c32bb77b80c7aad6ee59877be457"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a18b6c32bb77b80c7aad6ee59877be457">&#9670;&#160;</a></span>render()</h2>
 
@@ -285,7 +222,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>OpenGLDevice</b></td
 
 <p>Implements <a class="el" href="classhelios_1_1rendering_1_1text_1_1TextRenderer.html#adc04b64ba141e50cd7fc1366f2aba0da">helios::rendering::text::TextRenderer</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="OpenGLGlyphTextRenderer_8ixx_source.html#l00321">321</a> of file <a class="el" href="OpenGLGlyphTextRenderer_8ixx_source.html">OpenGLGlyphTextRenderer.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="OpenGLGlyphTextRenderer_8ixx_source.html#l00186">186</a> of file <a class="el" href="OpenGLGlyphTextRenderer_8ixx_source.html">OpenGLGlyphTextRenderer.ixx</a>.</p>
 
 </div>
 </div>
@@ -315,7 +252,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>OpenGLDevice</b></td
 <p>Returns the texture unit used for text rendering. </p>
 <dl class="section return"><dt>Returns</dt><dd>The texture unit index (always 0). </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="OpenGLGlyphTextRenderer_8ixx_source.html#l00281">281</a> of file <a class="el" href="OpenGLGlyphTextRenderer_8ixx_source.html">OpenGLGlyphTextRenderer.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="OpenGLGlyphTextRenderer_8ixx_source.html#l00171">171</a> of file <a class="el" href="OpenGLGlyphTextRenderer_8ixx_source.html">OpenGLGlyphTextRenderer.ixx</a>.</p>
 
 </div>
 </div>

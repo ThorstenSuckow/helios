@@ -107,7 +107,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Represents a camera for perspective projection.  
+<p>Represents a camera for perspective or orthographic projection.  
  <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -122,8 +122,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aa4db3f9ad22b14be836f3f5ba42576b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the view matrix for this camera.  <br /></td></tr>
 <tr class="memitem:a865085d03e951123b7560d68f5eca056" id="r_a865085d03e951123b7560d68f5eca056"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a6d1911bccc03c847625153d58cc49e99">Camera</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a865085d03e951123b7560d68f5eca056">setAspectRatio</a> (float <a class="el" href="#a949e8c04f22ca2a1ace596e6e859bee3">aspectRatio</a>) noexcept</td></tr>
 <tr class="memdesc:a865085d03e951123b7560d68f5eca056"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the aspect ratio used by the camera.  <br /></td></tr>
+<tr class="memitem:a5a35d0c45d264b53230813dec89d4fee" id="r_a5a35d0c45d264b53230813dec89d4fee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5a35d0c45d264b53230813dec89d4fee">onResize</a> (const float width, const float height) noexcept</td></tr>
+<tr class="memdesc:a5a35d0c45d264b53230813dec89d4fee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles viewport resize events.  <br /></td></tr>
 <tr class="memitem:a956f0190d0bd24ad8960d3e6a94b82db" id="r_a956f0190d0bd24ad8960d3e6a94b82db"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a6d1911bccc03c847625153d58cc49e99">Camera</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a956f0190d0bd24ad8960d3e6a94b82db">setPerspective</a> (float <a class="el" href="#a70b386e4c1f91bd4cca152d5efb4ed76">fovY</a>, float <a class="el" href="#a949e8c04f22ca2a1ace596e6e859bee3">aspectRatio</a>, float <a class="el" href="#a11e3916a50eb417e8924ccea8fee56cd">zNear</a>, float <a class="el" href="#ab6f32b1cf60371dfa764adfb13d4141e">zFar</a>) noexcept</td></tr>
 <tr class="memdesc:a956f0190d0bd24ad8960d3e6a94b82db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the perspective projection parameters.  <br /></td></tr>
+<tr class="memitem:acb7b0305e740d3407fae9090fe942fdc" id="r_acb7b0305e740d3407fae9090fe942fdc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a6d1911bccc03c847625153d58cc49e99">Camera</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acb7b0305e740d3407fae9090fe942fdc">setOrtho</a> (const float left, const float right, const float bottom, const float top, const float <a class="el" href="#a11e3916a50eb417e8924ccea8fee56cd">zNear</a>=-1.0f, const float <a class="el" href="#ab6f32b1cf60371dfa764adfb13d4141e">zFar</a>=100.0f) noexcept</td></tr>
+<tr class="memdesc:acb7b0305e740d3407fae9090fe942fdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the orthographic projection parameters.  <br /></td></tr>
 <tr class="memitem:a162c8f353ae0ec96b0b8371a90b99064" id="r_a162c8f353ae0ec96b0b8371a90b99064"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a6d1911bccc03c847625153d58cc49e99">Camera</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a162c8f353ae0ec96b0b8371a90b99064">setZNear</a> (float <a class="el" href="#a11e3916a50eb417e8924ccea8fee56cd">zNear</a>) noexcept</td></tr>
 <tr class="memdesc:a162c8f353ae0ec96b0b8371a90b99064"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the near clipping plane distance.  <br /></td></tr>
 <tr class="memitem:a2fcf4ad5e74f95606f6d6ec5184b6d1f" id="r_a2fcf4ad5e74f95606f6d6ec5184b6d1f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a6d1911bccc03c847625153d58cc49e99">Camera</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2fcf4ad5e74f95606f6d6ec5184b6d1f">setZFar</a> (float <a class="el" href="#ab6f32b1cf60371dfa764adfb13d4141e">zFar</a>) noexcept</td></tr>
@@ -146,9 +150,12 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a73a85eb4966fb4524dc6b87736500f62" id="r_a73a85eb4966fb4524dc6b87736500f62"><td class="memItemLeft" align="right" valign="top"><a id="a73a85eb4966fb4524dc6b87736500f62" name="a73a85eb4966fb4524dc6b87736500f62"></a>
-<a class="el" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a>&#160;</td><td class="memItemRight" valign="bottom"><b>projectionMatrix_</b></td></tr>
-<tr class="memdesc:a73a85eb4966fb4524dc6b87736500f62"><td class="mdescLeft">&#160;</td><td class="mdescRight">The projection matrix of this camera. <br /></td></tr>
+<tr class="memitem:a612305dde16da3ef55feea253a60da88" id="r_a612305dde16da3ef55feea253a60da88"><td class="memItemLeft" align="right" valign="top"><a id="a612305dde16da3ef55feea253a60da88" name="a612305dde16da3ef55feea253a60da88"></a>
+<a class="el" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a>&#160;</td><td class="memItemRight" valign="bottom"><b>perspectiveMatrix_</b></td></tr>
+<tr class="memdesc:a612305dde16da3ef55feea253a60da88"><td class="mdescLeft">&#160;</td><td class="mdescRight">The projection matrix of this camera. <br /></td></tr>
+<tr class="memitem:aef2089cfccbe0b820eb5df002d812347" id="r_aef2089cfccbe0b820eb5df002d812347"><td class="memItemLeft" align="right" valign="top"><a id="aef2089cfccbe0b820eb5df002d812347" name="aef2089cfccbe0b820eb5df002d812347"></a>
+<a class="el" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a>&#160;</td><td class="memItemRight" valign="bottom"><b>orthographicMatrix_</b></td></tr>
+<tr class="memdesc:aef2089cfccbe0b820eb5df002d812347"><td class="mdescLeft">&#160;</td><td class="mdescRight">The orthographic projection matrix of this camera. <br /></td></tr>
 <tr class="memitem:a5c915d9ba00c11dcef1885f02e32945c" id="r_a5c915d9ba00c11dcef1885f02e32945c"><td class="memItemLeft" align="right" valign="top"><a id="a5c915d9ba00c11dcef1885f02e32945c" name="a5c915d9ba00c11dcef1885f02e32945c"></a>
 <a class="el" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a>&#160;</td><td class="memItemRight" valign="bottom"><b>viewMatrix_</b></td></tr>
 <tr class="memdesc:a5c915d9ba00c11dcef1885f02e32945c"><td class="mdescLeft">&#160;</td><td class="mdescRight">The view matrix of this camera. <br /></td></tr>
@@ -167,12 +174,35 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>fovY_</b> = <a class
 <tr class="memitem:af1b0b6d8716871661a66609b5bed1255" id="r_af1b0b6d8716871661a66609b5bed1255"><td class="memItemLeft" align="right" valign="top"><a id="af1b0b6d8716871661a66609b5bed1255" name="af1b0b6d8716871661a66609b5bed1255"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>needsUpdate_</b> = true</td></tr>
 <tr class="memdesc:af1b0b6d8716871661a66609b5bed1255"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag indicating whether the matrices need to be updated. <br /></td></tr>
+<tr class="memitem:a5f18037a0f6ae3986dfde703abe59359" id="r_a5f18037a0f6ae3986dfde703abe59359"><td class="memItemLeft" align="right" valign="top"><a id="a5f18037a0f6ae3986dfde703abe59359" name="a5f18037a0f6ae3986dfde703abe59359"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>left_</b></td></tr>
+<tr class="memdesc:a5f18037a0f6ae3986dfde703abe59359"><td class="mdescLeft">&#160;</td><td class="mdescRight">Left boundary of the orthographic frustum. <br /></td></tr>
+<tr class="memitem:aeee258fdd9a5e0e41b647115bcbf30bd" id="r_aeee258fdd9a5e0e41b647115bcbf30bd"><td class="memItemLeft" align="right" valign="top"><a id="aeee258fdd9a5e0e41b647115bcbf30bd" name="aeee258fdd9a5e0e41b647115bcbf30bd"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>right_</b></td></tr>
+<tr class="memdesc:aeee258fdd9a5e0e41b647115bcbf30bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Right boundary of the orthographic frustum. <br /></td></tr>
+<tr class="memitem:aa4a698bc0432df76fd9f1cfae761f32a" id="r_aa4a698bc0432df76fd9f1cfae761f32a"><td class="memItemLeft" align="right" valign="top"><a id="aa4a698bc0432df76fd9f1cfae761f32a" name="aa4a698bc0432df76fd9f1cfae761f32a"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>bottom_</b></td></tr>
+<tr class="memdesc:aa4a698bc0432df76fd9f1cfae761f32a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bottom boundary of the orthographic frustum. <br /></td></tr>
+<tr class="memitem:aaed8e7bb0f364814b4bb335d652620b9" id="r_aaed8e7bb0f364814b4bb335d652620b9"><td class="memItemLeft" align="right" valign="top"><a id="aaed8e7bb0f364814b4bb335d652620b9" name="aaed8e7bb0f364814b4bb335d652620b9"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>top_</b></td></tr>
+<tr class="memdesc:aaed8e7bb0f364814b4bb335d652620b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Top boundary of the orthographic frustum. <br /></td></tr>
+<tr class="memitem:a092226b923a7bcf9125d99f7c7d09435" id="r_a092226b923a7bcf9125d99f7c7d09435"><td class="memItemLeft" align="right" valign="top"><a id="a092226b923a7bcf9125d99f7c7d09435" name="a092226b923a7bcf9125d99f7c7d09435"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>usePerspective_</b> = true</td></tr>
+<tr class="memdesc:a092226b923a7bcf9125d99f7c7d09435"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag indicating the projection mode. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Represents a camera for perspective projection. </p>
-<p>The camera provides the view and projection matrices, whereas the view matrix is computed as the inverse of the camera's world transform. </p>
+<div class="textblock"><p>Represents a camera for perspective or orthographic projection. </p>
+<p>The camera provides the view and projection matrices, whereas the view matrix is computed as the inverse of the camera's world transform.</p>
+<p>The camera supports two projection modes:</p><ul>
+<li>**Perspective projection:** Simulates how the human eye perceives depth, where distant objects appear smaller. Use `setPerspective()` to configure.</li>
+<li>**Orthographic projection:** Maintains parallel lines and uniform scaling regardless of distance, useful for 2D rendering, UI elements, or CAD-style views. Use `setOrtho()` to configure.</li>
+</ul>
+<p>By default, the camera uses perspective projection.</p>
+<p>Example usage: ```cpp <a class="el" href="classhelios_1_1scene_1_1Camera.html" title="Represents a camera for perspective or orthographic projection.">helios::scene::Camera</a> camera;</p>
+<p>// Perspective projection camera.setPerspective(<a class="el" href="namespacehelios_1_1math.html#a4949642a7cca09c7950bb6a1b75260c9" title="Converts an angle from degrees to radians.">helios::math::radians</a>(60.0f), 16.0f / 9.0f, 0.1f, 1000.0f);</p>
+<p>// Orthographic projection camera.setOrtho(0.0f, 800.0f, 0.0f, 600.0f, -1.0f, 100.0f); ``` </p>
 
-<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00024">24</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00044">44</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a6d1911bccc03c847625153d58cc49e99" name="a6d1911bccc03c847625153d58cc49e99"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6d1911bccc03c847625153d58cc49e99">&#9670;&#160;</a></span>Camera()</h2>
@@ -199,16 +229,16 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>needsUpdate_</b> = tr
 
 <p>Constructs a camera with identity projection and view matrices. </p>
 
-<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00093">93</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00150">150</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="Camera_8ixx_source.html#l00030">projectionMatrix_</a>, and <a class="el" href="Camera_8ixx_source.html#l00035">viewMatrix_</a>.</p>
+<p class="reference">References <a class="el" href="Camera_8ixx_source.html#l00057">orthographicMatrix_</a>, <a class="el" href="Camera_8ixx_source.html#l00050">perspectiveMatrix_</a>, and <a class="el" href="Camera_8ixx_source.html#l00062">viewMatrix_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Camera_8ixx_source.html#l00145">setAspectRatio()</a>, <a class="el" href="Camera_8ixx_source.html#l00205">setFovY()</a>, <a class="el" href="Camera_8ixx_source.html#l00161">setPerspective()</a>, <a class="el" href="Camera_8ixx_source.html#l00133">setViewMatrix()</a>, <a class="el" href="Camera_8ixx_source.html#l00192">setZFar()</a>, and <a class="el" href="Camera_8ixx_source.html#l00179">setZNear()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Camera_8ixx_source.html#l00208">setAspectRatio()</a>, <a class="el" href="Camera_8ixx_source.html#l00342">setFovY()</a>, <a class="el" href="Camera_8ixx_source.html#l00286">setOrtho()</a>, <a class="el" href="Camera_8ixx_source.html#l00256">setPerspective()</a>, <a class="el" href="Camera_8ixx_source.html#l00196">setViewMatrix()</a>, <a class="el" href="Camera_8ixx_source.html#l00329">setZFar()</a>, and <a class="el" href="Camera_8ixx_source.html#l00316">setZNear()</a>.</p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Camera_a6d1911bccc03c847625153d58cc49e99_icgraph.svg" width="392" height="371"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Camera_a6d1911bccc03c847625153d58cc49e99_icgraph.svg" width="607" height="435"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -240,16 +270,16 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>needsUpdate_</b> = tr
 <p>Gets the current aspect ratio. </p>
 <dl class="section return"><dt>Returns</dt><dd>The aspect ratio (width/height). </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00225">225</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00362">362</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="Camera_8ixx_source.html#l00042">aspectRatio_</a>.</p>
+<p class="reference">References <a class="el" href="Camera_8ixx_source.html#l00069">aspectRatio_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Camera_8ixx_source.html#l00145">setAspectRatio()</a>, and <a class="el" href="Camera_8ixx_source.html#l00161">setPerspective()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Camera_8ixx_source.html#l00208">setAspectRatio()</a>, and <a class="el" href="Camera_8ixx_source.html#l00256">setPerspective()</a>.</p>
 <div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Camera_a949e8c04f22ca2a1ace596e6e859bee3_icgraph.svg" width="392" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Camera_a949e8c04f22ca2a1ace596e6e859bee3_icgraph.svg" width="607" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -280,16 +310,68 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>needsUpdate_</b> = tr
 <p>Gets the current vertical field of view. </p>
 <dl class="section return"><dt>Returns</dt><dd>The vertical field of view in radians. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00216">216</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00353">353</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="Camera_8ixx_source.html#l00063">fovY_</a>.</p>
+<p class="reference">References <a class="el" href="Camera_8ixx_source.html#l00090">fovY_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Camera_8ixx_source.html#l00205">setFovY()</a>, and <a class="el" href="Camera_8ixx_source.html#l00161">setPerspective()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Camera_8ixx_source.html#l00342">setFovY()</a>, and <a class="el" href="Camera_8ixx_source.html#l00256">setPerspective()</a>.</p>
 <div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-2-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Camera_a70b386e4c1f91bd4cca152d5efb4ed76_icgraph.svg" width="392" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a5a35d0c45d264b53230813dec89d4fee" name="a5a35d0c45d264b53230813dec89d4fee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a35d0c45d264b53230813dec89d4fee">&#9670;&#160;</a></span>onResize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::scene::Camera::onResize </td>
+          <td>(</td>
+          <td class="paramtype">const float</td>          <td class="paramname"><span class="paramname"><em>width</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float</td>          <td class="paramname"><span class="paramname"><em>height</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handles viewport resize events. </p>
+<p>Adjusts the camera projection parameters when the viewport dimensions change.</p><ul>
+<li>For perspective projection: Updates the aspect ratio.</li>
+<li>For orthographic projection: Adjusts the right and top boundaries to maintain the correct projection volume.</li>
+</ul>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">width</td><td>The new viewport width in pixels. </td></tr>
+    <tr><td class="paramname">height</td><td>The new viewport height in pixels. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00225">225</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="Camera_8ixx_source.html#l00110">bottom_</a>, <a class="el" href="Camera_8ixx_source.html#l00100">left_</a>, <a class="el" href="Camera_8ixx_source.html#l00095">needsUpdate_</a>, <a class="el" href="Camera_8ixx_source.html#l00105">right_</a>, <a class="el" href="Camera_8ixx_source.html#l00208">setAspectRatio()</a>, <a class="el" href="Camera_8ixx_source.html#l00115">top_</a>, and <a class="el" href="Camera_8ixx_source.html#l00123">usePerspective_</a>.</p>
+<div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-3-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Camera_a5a35d0c45d264b53230813dec89d4fee_cgraph.svg" width="607" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -321,14 +403,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>needsUpdate_</b> = tr
 <p>Typically set to a perspective or orthographic projection.</p>
 <dl class="section return"><dt>Returns</dt><dd>A const reference to this camera's projection matrix. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00105">105</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00163">163</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="Camera_8ixx_source.html#l00030">projectionMatrix_</a>, and <a class="el" href="Camera_8ixx_source.html#l00078">update()</a>.</p>
-<div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="Camera_8ixx_source.html#l00057">orthographicMatrix_</a>, <a class="el" href="Camera_8ixx_source.html#l00050">perspectiveMatrix_</a>, <a class="el" href="Camera_8ixx_source.html#l00131">update()</a>, and <a class="el" href="Camera_8ixx_source.html#l00123">usePerspective_</a>.</p>
+<div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-3-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Camera_a1dc42ba642ae41f7028a4cb927a6feb0_cgraph.svg" width="627" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-4-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Camera_a1dc42ba642ae41f7028a4cb927a6feb0_cgraph.svg" width="627" height="86"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -365,14 +447,22 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>needsUpdate_</b> = tr
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to this camera instance. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00145">145</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00208">208</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="Camera_8ixx_source.html#l00225">aspectRatio()</a>, <a class="el" href="Camera_8ixx_source.html#l00042">aspectRatio_</a>, <a class="el" href="Camera_8ixx_source.html#l00093">Camera()</a>, and <a class="el" href="Camera_8ixx_source.html#l00068">needsUpdate_</a>.</p>
-<div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="Camera_8ixx_source.html#l00362">aspectRatio()</a>, <a class="el" href="Camera_8ixx_source.html#l00069">aspectRatio_</a>, <a class="el" href="Camera_8ixx_source.html#l00150">Camera()</a>, and <a class="el" href="Camera_8ixx_source.html#l00095">needsUpdate_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Camera_8ixx_source.html#l00225">onResize()</a>.</p>
+<div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-4-content" class="dyncontent" style="display:none;">
+<div id="dynsection-5-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Camera_a865085d03e951123b7560d68f5eca056_cgraph.svg" width="392" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div id="dynsection-6" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-6-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Camera_a865085d03e951123b7560d68f5eca056_icgraph.svg" width="392" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -409,14 +499,89 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>needsUpdate_</b> = tr
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to this camera instance. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00205">205</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00342">342</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="Camera_8ixx_source.html#l00093">Camera()</a>, <a class="el" href="Camera_8ixx_source.html#l00216">fovY()</a>, <a class="el" href="Camera_8ixx_source.html#l00063">fovY_</a>, and <a class="el" href="Camera_8ixx_source.html#l00068">needsUpdate_</a>.</p>
-<div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="Camera_8ixx_source.html#l00150">Camera()</a>, <a class="el" href="Camera_8ixx_source.html#l00353">fovY()</a>, <a class="el" href="Camera_8ixx_source.html#l00090">fovY_</a>, and <a class="el" href="Camera_8ixx_source.html#l00095">needsUpdate_</a>.</p>
+<div id="dynsection-7" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div id="dynsection-7-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Camera_a1fb02da77bd02b2c88f974ceccab7ce9_cgraph.svg" width="392" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="acb7b0305e740d3407fae9090fe942fdc" name="acb7b0305e740d3407fae9090fe942fdc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb7b0305e740d3407fae9090fe942fdc">&#9670;&#160;</a></span>setOrtho()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a6d1911bccc03c847625153d58cc49e99">Camera</a> &amp; helios::scene::Camera::setOrtho </td>
+          <td>(</td>
+          <td class="paramtype">const float</td>          <td class="paramname"><span class="paramname"><em>left</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float</td>          <td class="paramname"><span class="paramname"><em>right</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float</td>          <td class="paramname"><span class="paramname"><em>bottom</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float</td>          <td class="paramname"><span class="paramname"><em>top</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float</td>          <td class="paramname"><span class="paramname"><em>zNear</em></span><span class="paramdefsep"> = </span><span class="paramdefval">-1.0f</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float</td>          <td class="paramname"><span class="paramname"><em>zFar</em></span><span class="paramdefsep"> = </span><span class="paramdefval">100.0f</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the orthographic projection parameters. </p>
+<p>Configures the camera for orthographic projection, which is useful for 2D rendering, UI overlays, or scenes where parallel lines should remain parallel (no perspective distortion).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">left</td><td>The left boundary of the view volume. </td></tr>
+    <tr><td class="paramname">right</td><td>The right boundary of the view volume. </td></tr>
+    <tr><td class="paramname">bottom</td><td>The bottom boundary of the view volume. </td></tr>
+    <tr><td class="paramname">top</td><td>The top boundary of the view volume. </td></tr>
+    <tr><td class="paramname">zNear</td><td>The near clipping plane distance. Defaults to -1.0. </td></tr>
+    <tr><td class="paramname">zFar</td><td>The far clipping plane distance. Defaults to 100.0.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A reference to this camera instance.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Calling this method switches the camera to orthographic projection mode. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00286">286</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="Camera_8ixx_source.html#l00069">aspectRatio_</a>, <a class="el" href="Camera_8ixx_source.html#l00110">bottom_</a>, <a class="el" href="Camera_8ixx_source.html#l00150">Camera()</a>, <a class="el" href="Camera_8ixx_source.html#l00100">left_</a>, <a class="el" href="Camera_8ixx_source.html#l00095">needsUpdate_</a>, <a class="el" href="Camera_8ixx_source.html#l00105">right_</a>, <a class="el" href="Camera_8ixx_source.html#l00115">top_</a>, <a class="el" href="Camera_8ixx_source.html#l00123">usePerspective_</a>, <a class="el" href="Camera_8ixx_source.html#l00380">zFar()</a>, <a class="el" href="Camera_8ixx_source.html#l00083">zFar_</a>, <a class="el" href="Camera_8ixx_source.html#l00371">zNear()</a>, and <a class="el" href="Camera_8ixx_source.html#l00076">zNear_</a>.</p>
+<div id="dynsection-8" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-8-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Camera_acb7b0305e740d3407fae9090fe942fdc_cgraph.svg" width="392" height="179"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -470,13 +635,13 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>needsUpdate_</b> = tr
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to this camera instance. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00161">161</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00256">256</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="Camera_8ixx_source.html#l00225">aspectRatio()</a>, <a class="el" href="Camera_8ixx_source.html#l00042">aspectRatio_</a>, <a class="el" href="Camera_8ixx_source.html#l00093">Camera()</a>, <a class="el" href="Camera_8ixx_source.html#l00216">fovY()</a>, <a class="el" href="Camera_8ixx_source.html#l00063">fovY_</a>, <a class="el" href="Camera_8ixx_source.html#l00068">needsUpdate_</a>, <a class="el" href="Camera_8ixx_source.html#l00243">zFar()</a>, <a class="el" href="Camera_8ixx_source.html#l00056">zFar_</a>, <a class="el" href="Camera_8ixx_source.html#l00234">zNear()</a>, and <a class="el" href="Camera_8ixx_source.html#l00049">zNear_</a>.</p>
-<div id="dynsection-6" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="Camera_8ixx_source.html#l00362">aspectRatio()</a>, <a class="el" href="Camera_8ixx_source.html#l00069">aspectRatio_</a>, <a class="el" href="Camera_8ixx_source.html#l00150">Camera()</a>, <a class="el" href="Camera_8ixx_source.html#l00353">fovY()</a>, <a class="el" href="Camera_8ixx_source.html#l00090">fovY_</a>, <a class="el" href="Camera_8ixx_source.html#l00095">needsUpdate_</a>, <a class="el" href="Camera_8ixx_source.html#l00123">usePerspective_</a>, <a class="el" href="Camera_8ixx_source.html#l00380">zFar()</a>, <a class="el" href="Camera_8ixx_source.html#l00083">zFar_</a>, <a class="el" href="Camera_8ixx_source.html#l00371">zNear()</a>, and <a class="el" href="Camera_8ixx_source.html#l00076">zNear_</a>.</p>
+<div id="dynsection-9" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-6-content" class="dyncontent" style="display:none;">
+<div id="dynsection-9-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Camera_a956f0190d0bd24ad8960d3e6a94b82db_cgraph.svg" width="392" height="307"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
@@ -516,13 +681,13 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>needsUpdate_</b> = tr
 <dl class="section return"><dt>Returns</dt><dd>A const reference to this camera instance.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1scene_1_1SceneNode.html#a2cd5ee14fdf4990952266c724c916551" title="Computes and returns the world transform for this SceneNode. Will request the current world transform...">helios::scene::CameraSceneNode::worldTransform()</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00133">133</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00196">196</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="Camera_8ixx_source.html#l00093">Camera()</a>, <a class="el" href="Camera_8ixx_source.html#l00117">viewMatrix()</a>, and <a class="el" href="Camera_8ixx_source.html#l00035">viewMatrix_</a>.</p>
-<div id="dynsection-7" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="Camera_8ixx_source.html#l00150">Camera()</a>, <a class="el" href="Camera_8ixx_source.html#l00180">viewMatrix()</a>, and <a class="el" href="Camera_8ixx_source.html#l00062">viewMatrix_</a>.</p>
+<div id="dynsection-10" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-10-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-7-content" class="dyncontent" style="display:none;">
+<div id="dynsection-10-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Camera_aa4db3f9ad22b14be836f3f5ba42576b7_cgraph.svg" width="392" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
@@ -560,13 +725,13 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>needsUpdate_</b> = tr
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to this camera instance. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00192">192</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00329">329</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="Camera_8ixx_source.html#l00093">Camera()</a>, <a class="el" href="Camera_8ixx_source.html#l00068">needsUpdate_</a>, <a class="el" href="Camera_8ixx_source.html#l00243">zFar()</a>, and <a class="el" href="Camera_8ixx_source.html#l00056">zFar_</a>.</p>
-<div id="dynsection-8" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="Camera_8ixx_source.html#l00150">Camera()</a>, <a class="el" href="Camera_8ixx_source.html#l00095">needsUpdate_</a>, <a class="el" href="Camera_8ixx_source.html#l00380">zFar()</a>, and <a class="el" href="Camera_8ixx_source.html#l00083">zFar_</a>.</p>
+<div id="dynsection-11" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-11-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-8-content" class="dyncontent" style="display:none;">
+<div id="dynsection-11-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Camera_a2fcf4ad5e74f95606f6d6ec5184b6d1f_cgraph.svg" width="392" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
@@ -604,13 +769,13 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>needsUpdate_</b> = tr
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to this camera instance. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00179">179</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00316">316</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="Camera_8ixx_source.html#l00093">Camera()</a>, <a class="el" href="Camera_8ixx_source.html#l00068">needsUpdate_</a>, <a class="el" href="Camera_8ixx_source.html#l00234">zNear()</a>, and <a class="el" href="Camera_8ixx_source.html#l00049">zNear_</a>.</p>
-<div id="dynsection-9" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="Camera_8ixx_source.html#l00150">Camera()</a>, <a class="el" href="Camera_8ixx_source.html#l00095">needsUpdate_</a>, <a class="el" href="Camera_8ixx_source.html#l00371">zNear()</a>, and <a class="el" href="Camera_8ixx_source.html#l00076">zNear_</a>.</p>
+<div id="dynsection-12" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-12-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-9-content" class="dyncontent" style="display:none;">
+<div id="dynsection-12-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Camera_a162c8f353ae0ec96b0b8371a90b99064_cgraph.svg" width="392" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
@@ -642,21 +807,21 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>needsUpdate_</b> = tr
 <p>Updates the view and projection matrices if needed. </p>
 <p>This function recalculates the view and projection matrices based on the current camera parameters. </p>
 
-<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00078">78</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00131">131</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="Camera_8ixx_source.html#l00042">aspectRatio_</a>, <a class="el" href="Camera_8ixx_source.html#l00063">fovY_</a>, <a class="el" href="Camera_8ixx_source.html#l00068">needsUpdate_</a>, <a class="el" href="camera_8ixx_source.html#l00035">helios::math::perspective()</a>, <a class="el" href="Camera_8ixx_source.html#l00030">projectionMatrix_</a>, <a class="el" href="Camera_8ixx_source.html#l00056">zFar_</a>, and <a class="el" href="Camera_8ixx_source.html#l00049">zNear_</a>.</p>
+<p class="reference">References <a class="el" href="Camera_8ixx_source.html#l00069">aspectRatio_</a>, <a class="el" href="Camera_8ixx_source.html#l00110">bottom_</a>, <a class="el" href="Camera_8ixx_source.html#l00090">fovY_</a>, <a class="el" href="Camera_8ixx_source.html#l00100">left_</a>, <a class="el" href="Camera_8ixx_source.html#l00095">needsUpdate_</a>, <a class="el" href="camera_8ixx_source.html#l00068">helios::math::ortho()</a>, <a class="el" href="Camera_8ixx_source.html#l00057">orthographicMatrix_</a>, <a class="el" href="camera_8ixx_source.html#l00035">helios::math::perspective()</a>, <a class="el" href="Camera_8ixx_source.html#l00050">perspectiveMatrix_</a>, <a class="el" href="Camera_8ixx_source.html#l00105">right_</a>, <a class="el" href="Camera_8ixx_source.html#l00115">top_</a>, <a class="el" href="Camera_8ixx_source.html#l00123">usePerspective_</a>, <a class="el" href="Camera_8ixx_source.html#l00083">zFar_</a>, and <a class="el" href="Camera_8ixx_source.html#l00076">zNear_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Camera_8ixx_source.html#l00105">projectionMatrix()</a>.</p>
-<div id="dynsection-10" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-10-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="Camera_8ixx_source.html#l00163">projectionMatrix()</a>.</p>
+<div id="dynsection-13" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-13-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-10-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Camera_a949fcc8b4e43f2a9afdad8eaafaeb07b_cgraph.svg" width="412" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-13-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Camera_a949fcc8b4e43f2a9afdad8eaafaeb07b_cgraph.svg" width="412" height="86"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
-<div id="dynsection-11" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-11-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-14" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-14-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-11-content" class="dyncontent" style="display:none;">
+<div id="dynsection-14-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Camera_a949fcc8b4e43f2a9afdad8eaafaeb07b_icgraph.svg" width="392" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
@@ -689,15 +854,15 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>needsUpdate_</b> = tr
 <p>The view matrix represents the inverse of the camera's world transform.</p>
 <dl class="section return"><dt>Returns</dt><dd>A const reference to this camera's view matrix. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00117">117</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00180">180</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="Camera_8ixx_source.html#l00035">viewMatrix_</a>.</p>
+<p class="reference">References <a class="el" href="Camera_8ixx_source.html#l00062">viewMatrix_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Camera_8ixx_source.html#l00133">setViewMatrix()</a>.</p>
-<div id="dynsection-12" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-12-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="Camera_8ixx_source.html#l00196">setViewMatrix()</a>.</p>
+<div id="dynsection-15" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-15-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-12-content" class="dyncontent" style="display:none;">
+<div id="dynsection-15-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Camera_a920bac1e84b874d725027e37d091cb34_icgraph.svg" width="392" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
@@ -729,16 +894,16 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>needsUpdate_</b> = tr
 <p>Gets the current far clipping plane distance. </p>
 <dl class="section return"><dt>Returns</dt><dd>The far clipping plane distance. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00243">243</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00380">380</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="Camera_8ixx_source.html#l00056">zFar_</a>.</p>
+<p class="reference">References <a class="el" href="Camera_8ixx_source.html#l00083">zFar_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Camera_8ixx_source.html#l00161">setPerspective()</a>, and <a class="el" href="Camera_8ixx_source.html#l00192">setZFar()</a>.</p>
-<div id="dynsection-13" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-13-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="Camera_8ixx_source.html#l00286">setOrtho()</a>, <a class="el" href="Camera_8ixx_source.html#l00256">setPerspective()</a>, and <a class="el" href="Camera_8ixx_source.html#l00329">setZFar()</a>.</p>
+<div id="dynsection-16" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-16-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-13-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Camera_ab6f32b1cf60371dfa764adfb13d4141e_icgraph.svg" width="392" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-16-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Camera_ab6f32b1cf60371dfa764adfb13d4141e_icgraph.svg" width="392" height="179"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -769,16 +934,16 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>needsUpdate_</b> = tr
 <p>Gets the current near clipping plane distance. </p>
 <dl class="section return"><dt>Returns</dt><dd>The near clipping plane distance. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00234">234</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Camera_8ixx_source.html#l00371">371</a> of file <a class="el" href="Camera_8ixx_source.html">Camera.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="Camera_8ixx_source.html#l00049">zNear_</a>.</p>
+<p class="reference">References <a class="el" href="Camera_8ixx_source.html#l00076">zNear_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Camera_8ixx_source.html#l00161">setPerspective()</a>, and <a class="el" href="Camera_8ixx_source.html#l00179">setZNear()</a>.</p>
-<div id="dynsection-14" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-14-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="Camera_8ixx_source.html#l00286">setOrtho()</a>, <a class="el" href="Camera_8ixx_source.html#l00256">setPerspective()</a>, and <a class="el" href="Camera_8ixx_source.html#l00316">setZNear()</a>.</p>
+<div id="dynsection-17" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-17-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-14-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Camera_a11e3916a50eb417e8924ccea8fee56cd_icgraph.svg" width="392" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-17-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Camera_a11e3916a50eb417e8924ccea8fee56cd_icgraph.svg" width="392" height="179"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>

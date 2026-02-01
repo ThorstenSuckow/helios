@@ -22,6 +22,5 @@ var searchData=
   ['direction_5f_19',['direction_',['../classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1Aim2DComponent.html#a3c0795d8c60eaa7f539c0dddea0db227',1,'helios::engine::mechanics::combat::components::Aim2DComponent::direction_'],['../classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent.html#a202ab576c20ceecdb563e4ffc42d4e23',1,'helios::engine::modules::physics::motion::components::Move2DComponent::direction_']]],
   ['directionfromsteering_5f_20',['directionFromSteering_',['../classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent.html#a1debcd0dc1919c2de3499a076314aeb9',1,'helios::engine::modules::physics::motion::components::SteeringComponent']]],
   ['dispatcher_5f_21',['dispatcher_',['../classhelios_1_1event_1_1EventManager.html#a1deac9e3799c2f473fdb16bddb4dada8',1,'helios::event::EventManager']]],
-  ['dodgerblue_22',['DodgerBlue',['../structhelios_1_1util_1_1Colors.html#a92a058bf66d6e8b1980c1c0b481fcc9b',1,'helios::util::Colors']]],
-  ['drawproperties_5f_23',['drawProperties_',['../classhelios_1_1rendering_1_1text_1_1TextRenderable.html#a04916ea85d38e2ab1615875dfdb6d6de',1,'helios::rendering::text::TextRenderable']]]
+  ['dodgerblue_22',['DodgerBlue',['../structhelios_1_1util_1_1Colors.html#a92a058bf66d6e8b1980c1c0b481fcc9b',1,'helios::util::Colors']]]
 ];

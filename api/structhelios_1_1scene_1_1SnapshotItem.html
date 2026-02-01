@@ -117,22 +117,21 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a10f299edb3444212e2837607f7cba4b9" id="r_a10f299edb3444212e2837607f7cba4b9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a896b2a4f5c6bf92b2dd560281cd0b3f6">SnapshotItem</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a10f299edb3444212e2837607f7cba4b9">operator=</a> (const <a class="el" href="#a896b2a4f5c6bf92b2dd560281cd0b3f6">SnapshotItem</a> &amp;)=delete</td></tr>
 <tr class="memitem:a6eab653f8e9aca29ddbbf1d147df23b3" id="r_a6eab653f8e9aca29ddbbf1d147df23b3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6eab653f8e9aca29ddbbf1d147df23b3">SnapshotItem</a> (SnapshotItem &amp;&amp;) noexcept=default</td></tr>
 <tr class="memdesc:a6eab653f8e9aca29ddbbf1d147df23b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide custom move constructor.  <br /></td></tr>
-<tr class="memitem:a3d91e9c3e4e5529eb95aee6ca15c3c98" id="r_a3d91e9c3e4e5529eb95aee6ca15c3c98"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3d91e9c3e4e5529eb95aee6ca15c3c98">SnapshotItem</a> (std::weak_ptr&lt; const <a class="el" href="classhelios_1_1rendering_1_1Renderable.html">helios::rendering::Renderable</a> &gt; <a class="el" href="#a3145126ee37604f07f27f3f8ed8d30e2">renderable</a>, const <a class="el" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a> &amp;<a class="el" href="#a9b1e4c1e12d5c92284036256995442f5">worldMatrix</a>)</td></tr>
-<tr class="memdesc:a3d91e9c3e4e5529eb95aee6ca15c3c98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="structhelios_1_1scene_1_1SnapshotItem.html" title="Structure for representing a snapshot item of a renderable&#39;s object state at a specific point in time...">SnapshotItem</a> with the specified renderable and the worldMatrix.  <br /></td></tr>
-<tr class="memitem:a3145126ee37604f07f27f3f8ed8d30e2" id="r_a3145126ee37604f07f27f3f8ed8d30e2"><td class="memItemLeft" align="right" valign="top">std::weak_ptr&lt; const <a class="el" href="classhelios_1_1rendering_1_1Renderable.html">helios::rendering::Renderable</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3145126ee37604f07f27f3f8ed8d30e2">renderable</a> () const noexcept</td></tr>
-<tr class="memdesc:a3145126ee37604f07f27f3f8ed8d30e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a weak_ptr to the Renderable of this <a class="el" href="structhelios_1_1scene_1_1SnapshotItem.html" title="Structure for representing a snapshot item of a renderable&#39;s object state at a specific point in time...">SnapshotItem</a>. Use `.lock()` on the returned weak_ptr to obtain a shared_ptr for the Renderable, if it still exists. If the Renderable does not exist, the <a class="el" href="structhelios_1_1scene_1_1SnapshotItem.html" title="Structure for representing a snapshot item of a renderable&#39;s object state at a specific point in time...">SnapshotItem</a> should be ignored for further processing.  <br /></td></tr>
+<tr class="memitem:a1540048ebbafb1fb1c00967268c5930f" id="r_a1540048ebbafb1fb1c00967268c5930f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1540048ebbafb1fb1c00967268c5930f">SnapshotItem</a> (const <a class="el" href="classhelios_1_1rendering_1_1Renderable.html">helios::rendering::Renderable</a> *<a class="el" href="#af7bc9a72d32da9a9cd4df61e8ef2ebf3">renderable</a>, const <a class="el" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a> &amp;<a class="el" href="#a9b1e4c1e12d5c92284036256995442f5">worldMatrix</a>)</td></tr>
+<tr class="memdesc:a1540048ebbafb1fb1c00967268c5930f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="structhelios_1_1scene_1_1SnapshotItem.html" title="Structure for representing a snapshot item of a renderable&#39;s object state at a specific point in time...">SnapshotItem</a> with the specified renderable and the worldMatrix.  <br /></td></tr>
+<tr class="memitem:af7bc9a72d32da9a9cd4df61e8ef2ebf3" id="r_af7bc9a72d32da9a9cd4df61e8ef2ebf3"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classhelios_1_1rendering_1_1Renderable.html">helios::rendering::Renderable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af7bc9a72d32da9a9cd4df61e8ef2ebf3">renderable</a> () const noexcept</td></tr>
+<tr class="memdesc:af7bc9a72d32da9a9cd4df61e8ef2ebf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a raw pointer to the Renderable of this <a class="el" href="structhelios_1_1scene_1_1SnapshotItem.html" title="Structure for representing a snapshot item of a renderable&#39;s object state at a specific point in time...">SnapshotItem</a>.  <br /></td></tr>
 <tr class="memitem:a9b1e4c1e12d5c92284036256995442f5" id="r_a9b1e4c1e12d5c92284036256995442f5"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9b1e4c1e12d5c92284036256995442f5">worldMatrix</a> () const noexcept</td></tr>
 <tr class="memdesc:a9b1e4c1e12d5c92284036256995442f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a const ref to the worldMatrix of this <a class="el" href="structhelios_1_1scene_1_1SnapshotItem.html" title="Structure for representing a snapshot item of a renderable&#39;s object state at a specific point in time...">SnapshotItem</a>. The world transformation matrix is a copy from the world transformation matrix created with this <a class="el" href="structhelios_1_1scene_1_1SnapshotItem.html" title="Structure for representing a snapshot item of a renderable&#39;s object state at a specific point in time...">SnapshotItem</a>.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Structure for representing a snapshot item of a renderable's object state at a specific point in time. </p>
-<p>The structure bundles a weak pointer to a Renderable and a pre-calculated worldMatrix, serving as a lightweight DTO to be used with a `Snapshot`.</p>
+<p>The structure bundles a non-owning raw pointer to a Renderable and a pre-calculated worldMatrix, serving as a lightweight DTO to be used with a `Snapshot`.</p>
 <p>A <a class="el" href="structhelios_1_1scene_1_1SnapshotItem.html" title="Structure for representing a snapshot item of a renderable&#39;s object state at a specific point in time...">SnapshotItem</a> captures the essential information to render an item without the need to traverse the entire <a class="el" href="classhelios_1_1scene_1_1Scene.html" title="Represents a hierarchical SceneGraph that organizes all renderable and non-renderable objects within ...">Scene</a> Graph during the rendering phase. The worldMatrix is a copy of the <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>'s worldMatrix at the time of this creation, ensuring that its value remains constant, even if the transformation of the <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> should change during rendering.</p>
-<p>Note that for the Renderable a weak pointer is stored to allow for checking its existence in the render pass. While internal properties of the Renderable might change while this <a class="el" href="structhelios_1_1scene_1_1SnapshotItem.html" title="Structure for representing a snapshot item of a renderable&#39;s object state at a specific point in time...">SnapshotItem</a> is processed, the worldMatrix is immutable and reflects the transformation state at the moment the <a class="el" href="classhelios_1_1scene_1_1Snapshot.html" title="Represents an immutable snapshot of a SceneGraph at a given point in time.">Snapshot</a> was taken.</p>
-<p>Thus, as a precondition, we assume that no changes to the Renderable are made while the Renderable "exists" as a weak ptr in a particular <a class="el" href="classhelios_1_1scene_1_1Snapshot.html" title="Represents an immutable snapshot of a SceneGraph at a given point in time.">Snapshot</a> of a scene that would lead to invalidating its rendering. We rely on the state information available within the Renderable as a reflection of its state when the <a class="el" href="classhelios_1_1scene_1_1Snapshot.html" title="Represents an immutable snapshot of a SceneGraph at a given point in time.">Snapshot</a> was taken.</p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000040">Todo</a></b></dt><dd>we're intentionally preferring stability over performance by using weak_ptr instead of raw pointers. This leaves room for (performance) improvements in later iterations. The Renderable as a weak pointer can later on be further implemented into a pure DTO, storing only scalar values that get send directly to the underlying rendering backend (e.g. vaos, vbos etc.). </dd></dl>
+<p>The caller must ensure that the Renderable remains valid for the lifetime of this <a class="el" href="structhelios_1_1scene_1_1SnapshotItem.html" title="Structure for representing a snapshot item of a renderable&#39;s object state at a specific point in time...">SnapshotItem</a> (typically within a single frame).</p>
+<p>While internal properties of the Renderable might change while this <a class="el" href="structhelios_1_1scene_1_1SnapshotItem.html" title="Structure for representing a snapshot item of a renderable&#39;s object state at a specific point in time...">SnapshotItem</a> is processed, the worldMatrix is immutable and reflects the transformation state at the moment the <a class="el" href="classhelios_1_1scene_1_1Snapshot.html" title="Represents an immutable snapshot of a SceneGraph at a given point in time.">Snapshot</a> was taken. </p>
 
-<p class="definition">Definition at line <a class="el" href="SnapshotItem_8ixx_source.html#l00048">48</a> of file <a class="el" href="SnapshotItem_8ixx_source.html">SnapshotItem.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SnapshotItem_8ixx_source.html#l00037">37</a> of file <a class="el" href="SnapshotItem_8ixx_source.html">SnapshotItem.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a896b2a4f5c6bf92b2dd560281cd0b3f6" name="a896b2a4f5c6bf92b2dd560281cd0b3f6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a896b2a4f5c6bf92b2dd560281cd0b3f6">&#9670;&#160;</a></span>SnapshotItem() <span class="overload">[1/3]</span></h2>
@@ -161,7 +160,7 @@ Public Member Functions</h2></td></tr>
 
 <p class="reference">References <a class="el" href="#a896b2a4f5c6bf92b2dd560281cd0b3f6">SnapshotItem()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#a10f299edb3444212e2837607f7cba4b9">operator=()</a>, <a class="el" href="#a896b2a4f5c6bf92b2dd560281cd0b3f6">SnapshotItem()</a>, <a class="el" href="#a6eab653f8e9aca29ddbbf1d147df23b3">SnapshotItem()</a>, and <a class="el" href="SnapshotItem_8ixx_source.html#l00080">SnapshotItem()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="#a10f299edb3444212e2837607f7cba4b9">operator=()</a>, <a class="el" href="SnapshotItem_8ixx_source.html#l00071">SnapshotItem()</a>, <a class="el" href="#a896b2a4f5c6bf92b2dd560281cd0b3f6">SnapshotItem()</a>, and <a class="el" href="#a6eab653f8e9aca29ddbbf1d147df23b3">SnapshotItem()</a>.</p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
@@ -213,8 +212,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a3d91e9c3e4e5529eb95aee6ca15c3c98" name="a3d91e9c3e4e5529eb95aee6ca15c3c98"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3d91e9c3e4e5529eb95aee6ca15c3c98">&#9670;&#160;</a></span>SnapshotItem() <span class="overload">[3/3]</span></h2>
+<a id="a1540048ebbafb1fb1c00967268c5930f" name="a1540048ebbafb1fb1c00967268c5930f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1540048ebbafb1fb1c00967268c5930f">&#9670;&#160;</a></span>SnapshotItem() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -225,7 +224,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">helios::scene::SnapshotItem::SnapshotItem </td>
           <td>(</td>
-          <td class="paramtype">std::weak_ptr&lt; const <a class="el" href="classhelios_1_1rendering_1_1Renderable.html">helios::rendering::Renderable</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>renderable</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1rendering_1_1Renderable.html">helios::rendering::Renderable</a> *</td>          <td class="paramname"><span class="paramname"><em>renderable</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -243,20 +242,20 @@ Public Member Functions</h2></td></tr>
 <p>Constructs a new <a class="el" href="structhelios_1_1scene_1_1SnapshotItem.html" title="Structure for representing a snapshot item of a renderable&#39;s object state at a specific point in time...">SnapshotItem</a> with the specified renderable and the worldMatrix. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">renderable</td><td>A weak_ptr to the Renderable. </td></tr>
+    <tr><td class="paramname">renderable</td><td>A raw pointer to the Renderable (must remain valid for the lifetime of this item). </td></tr>
     <tr><td class="paramname">worldMatrix</td><td>A const ref to the world transformation matrix, which gets copied. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="SnapshotItem_8ixx_source.html#l00080">80</a> of file <a class="el" href="SnapshotItem_8ixx_source.html">SnapshotItem.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SnapshotItem_8ixx_source.html#l00071">71</a> of file <a class="el" href="SnapshotItem_8ixx_source.html">SnapshotItem.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="SnapshotItem_8ixx_source.html#l00096">renderable()</a>, <a class="el" href="#a896b2a4f5c6bf92b2dd560281cd0b3f6">SnapshotItem()</a>, and <a class="el" href="SnapshotItem_8ixx_source.html#l00107">worldMatrix()</a>.</p>
+<p class="reference">References <a class="el" href="SnapshotItem_8ixx_source.html#l00084">renderable()</a>, <a class="el" href="#a896b2a4f5c6bf92b2dd560281cd0b3f6">SnapshotItem()</a>, and <a class="el" href="SnapshotItem_8ixx_source.html#l00095">worldMatrix()</a>.</p>
 <div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-3-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="structhelios_1_1scene_1_1SnapshotItem_a3d91e9c3e4e5529eb95aee6ca15c3c98_cgraph.svg" width="470" height="203"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="structhelios_1_1scene_1_1SnapshotItem_a1540048ebbafb1fb1c00967268c5930f_cgraph.svg" width="470" height="203"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -295,8 +294,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a3145126ee37604f07f27f3f8ed8d30e2" name="a3145126ee37604f07f27f3f8ed8d30e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3145126ee37604f07f27f3f8ed8d30e2">&#9670;&#160;</a></span>renderable()</h2>
+<a id="af7bc9a72d32da9a9cd4df61e8ef2ebf3" name="af7bc9a72d32da9a9cd4df61e8ef2ebf3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7bc9a72d32da9a9cd4df61e8ef2ebf3">&#9670;&#160;</a></span>renderable()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -305,7 +304,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::weak_ptr&lt; const <a class="el" href="classhelios_1_1rendering_1_1Renderable.html">helios::rendering::Renderable</a> &gt; helios::scene::SnapshotItem::renderable </td>
+          <td class="memname">const <a class="el" href="classhelios_1_1rendering_1_1Renderable.html">helios::rendering::Renderable</a> * helios::scene::SnapshotItem::renderable </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -318,17 +317,17 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Returns a weak_ptr to the Renderable of this <a class="el" href="structhelios_1_1scene_1_1SnapshotItem.html" title="Structure for representing a snapshot item of a renderable&#39;s object state at a specific point in time...">SnapshotItem</a>. Use `.lock()` on the returned weak_ptr to obtain a shared_ptr for the Renderable, if it still exists. If the Renderable does not exist, the <a class="el" href="structhelios_1_1scene_1_1SnapshotItem.html" title="Structure for representing a snapshot item of a renderable&#39;s object state at a specific point in time...">SnapshotItem</a> should be ignored for further processing. </p>
-<dl class="section return"><dt>Returns</dt><dd>A weak_ptr to the Renderable of this <a class="el" href="structhelios_1_1scene_1_1SnapshotItem.html" title="Structure for representing a snapshot item of a renderable&#39;s object state at a specific point in time...">SnapshotItem</a>. </dd></dl>
+<p>Returns a raw pointer to the Renderable of this <a class="el" href="structhelios_1_1scene_1_1SnapshotItem.html" title="Structure for representing a snapshot item of a renderable&#39;s object state at a specific point in time...">SnapshotItem</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd>A raw pointer to the Renderable of this <a class="el" href="structhelios_1_1scene_1_1SnapshotItem.html" title="Structure for representing a snapshot item of a renderable&#39;s object state at a specific point in time...">SnapshotItem</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SnapshotItem_8ixx_source.html#l00096">96</a> of file <a class="el" href="SnapshotItem_8ixx_source.html">SnapshotItem.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SnapshotItem_8ixx_source.html#l00084">84</a> of file <a class="el" href="SnapshotItem_8ixx_source.html">SnapshotItem.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="SnapshotItem_8ixx_source.html#l00080">SnapshotItem()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="SnapshotItem_8ixx_source.html#l00071">SnapshotItem()</a>.</p>
 <div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-5-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-5-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="structhelios_1_1scene_1_1SnapshotItem_a3145126ee37604f07f27f3f8ed8d30e2_icgraph.svg" width="470" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="structhelios_1_1scene_1_1SnapshotItem_af7bc9a72d32da9a9cd4df61e8ef2ebf3_icgraph.svg" width="470" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -359,9 +358,9 @@ Public Member Functions</h2></td></tr>
 <p>Returns a const ref to the worldMatrix of this <a class="el" href="structhelios_1_1scene_1_1SnapshotItem.html" title="Structure for representing a snapshot item of a renderable&#39;s object state at a specific point in time...">SnapshotItem</a>. The world transformation matrix is a copy from the world transformation matrix created with this <a class="el" href="structhelios_1_1scene_1_1SnapshotItem.html" title="Structure for representing a snapshot item of a renderable&#39;s object state at a specific point in time...">SnapshotItem</a>. </p>
 <dl class="section return"><dt>Returns</dt><dd>The const ref to the world matrix of this <a class="el" href="structhelios_1_1scene_1_1SnapshotItem.html" title="Structure for representing a snapshot item of a renderable&#39;s object state at a specific point in time...">SnapshotItem</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SnapshotItem_8ixx_source.html#l00107">107</a> of file <a class="el" href="SnapshotItem_8ixx_source.html">SnapshotItem.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SnapshotItem_8ixx_source.html#l00095">95</a> of file <a class="el" href="SnapshotItem_8ixx_source.html">SnapshotItem.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="SnapshotItem_8ixx_source.html#l00080">SnapshotItem()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="SnapshotItem_8ixx_source.html#l00071">SnapshotItem()</a>.</p>
 <div id="dynsection-6" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-6-summary" class="dynsummary" style="display:block;">
 </div>

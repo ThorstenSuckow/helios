@@ -1,0 +1,333 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1rendering_1_1text_1_1TextMesh" kind="class" language="C++" prot="public">
+    <compoundname>helios::rendering::text::TextMesh</compoundname>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1rendering_1_1text_1_1TextMesh_1afbc4cdc696047e227d402aec806bcc72" prot="private" static="no" mutable="no">
+        <type><ref refid="structhelios_1_1engine_1_1core_1_1data_1_1FontId" kindref="compound">helios::engine::core::data::FontId</ref></type>
+        <definition>helios::engine::core::data::FontId helios::rendering::text::TextMesh::fontId_</definition>
+        <argsstring></argsstring>
+        <name>fontId_</name>
+        <qualifiedname>helios::rendering::text::TextMesh::fontId_</qualifiedname>
+        <briefdescription>
+<para>Font identifier for glyph lookup. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="65" column="44" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1rendering_1_1text_1_1TextMesh_1a75977fbc576c2341c2a90cc5c697c1e5" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string helios::rendering::text::TextMesh::text_</definition>
+        <argsstring></argsstring>
+        <name>text_</name>
+        <qualifiedname>helios::rendering::text::TextMesh::text_</qualifiedname>
+        <briefdescription>
+<para>The text string to render. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="70" column="21" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1rendering_1_1text_1_1TextMesh_1aa37fbe4a7f2b1cb6f385b02c0b0a88d0" prot="private" static="no" mutable="yes">
+        <type>bool</type>
+        <definition>bool helios::rendering::text::TextMesh::needsUpdate_</definition>
+        <argsstring></argsstring>
+        <name>needsUpdate_</name>
+        <qualifiedname>helios::rendering::text::TextMesh::needsUpdate_</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>Flag indicating whether the cached layout needs recomputation. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="75" column="22" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1rendering_1_1text_1_1TextMesh_1a958723362380dcaeba853571ffab081b" prot="private" static="no" mutable="yes">
+        <type><ref refid="structhelios_1_1rendering_1_1text_1_1TextLayout" kindref="compound">TextLayout</ref></type>
+        <definition>TextLayout helios::rendering::text::TextMesh::textLayout_</definition>
+        <argsstring></argsstring>
+        <name>textLayout_</name>
+        <qualifiedname>helios::rendering::text::TextMesh::textLayout_</qualifiedname>
+        <briefdescription>
+<para>Cached layout data (AABB and vertices). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="80" column="28" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1rendering_1_1text_1_1TextMesh_1a98eaf678292dbfeb5c07f7f6c410533c" prot="private" static="no" mutable="yes">
+        <type><ref refid="classhelios_1_1rendering_1_1text_1_1TypeSetter" kindref="compound">TypeSetter</ref></type>
+        <definition>TypeSetter helios::rendering::text::TextMesh::typeSetter_</definition>
+        <argsstring></argsstring>
+        <name>typeSetter_</name>
+        <qualifiedname>helios::rendering::text::TextMesh::typeSetter_</qualifiedname>
+        <briefdescription>
+<para><ref refid="classhelios_1_1rendering_1_1text_1_1TypeSetter" kindref="compound">TypeSetter</ref> instance for computing text layout. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="85" column="28" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="85" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1TextMesh_1a69681ce1a4c266c7339e0aa1533be78f" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::rendering::text::TextMesh::updateCache</definition>
+        <argsstring>(FontResourceProvider &amp;fontResourceProvider) const</argsstring>
+        <name>updateCache</name>
+        <qualifiedname>helios::rendering::text::TextMesh::updateCache</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1rendering_1_1text_1_1FontResourceProvider" kindref="compound">FontResourceProvider</ref> &amp;</type>
+          <declname>fontResourceProvider</declname>
+        </param>
+        <briefdescription>
+<para>Updates the cached layout if needed. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fontResourceProvider</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provider for glyph data. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="92" column="14" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="92" bodyend="101"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1TextMesh_1a1b4c33a7057a7f5363f54774183775bf" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::rendering::text::TextMesh::TextMesh</definition>
+        <argsstring>(std::string text, helios::engine::core::data::FontId fontId) noexcept</argsstring>
+        <name>TextMesh</name>
+        <qualifiedname>helios::rendering::text::TextMesh::TextMesh</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1core_1_1data_1_1FontId" kindref="compound">helios::engine::core::data::FontId</ref></type>
+          <declname>fontId</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a <ref refid="classhelios_1_1rendering_1_1text_1_1TextMesh" kindref="compound">TextMesh</ref> with the given text and font. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The text string to render. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fontId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The font identifier for glyph lookup. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="111" column="18" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="111" bodyend="117"/>
+        <references refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1ab88efd9db53ef6bec25a8154fd6115a3" compoundref="TextMesh_8ixx" startline="176" endline="178">fontId</references>
+        <references refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1a4ca16d4d6a4709796c58a929355940c4" compoundref="TextMesh_8ixx" startline="167" endline="169">text</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1TextMesh_1ae8223797a0ef9c56ffa0842ad887a7fe" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="namespacehelios_1_1math_1a124c0492430aeecedc1c1a5ece4ba488" kindref="member">helios::math::aabbf</ref> &amp;</type>
+        <definition>const helios::math::aabbf &amp; helios::rendering::text::TextMesh::localAABB</definition>
+        <argsstring>(FontResourceProvider &amp;fontResourceProvider) const noexcept</argsstring>
+        <name>localAABB</name>
+        <qualifiedname>helios::rendering::text::TextMesh::localAABB</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1rendering_1_1text_1_1FontResourceProvider" kindref="compound">FontResourceProvider</ref> &amp;</type>
+          <declname>fontResourceProvider</declname>
+        </param>
+        <briefdescription>
+<para>Returns the local-space axis-aligned bounding box. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Triggers layout computation if the cache is invalid.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fontResourceProvider</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provider for glyph data.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to the cached AABB. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="129" column="36" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="129" bodyend="132"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1TextMesh_1aebfe7c0a3859daa3123416297afb68d8" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::span&lt; <ref refid="namespacehelios_1_1math_1a08252f81850c5902e3c8dead272f3332" kindref="member">helios::math::vec4f</ref> &gt;</type>
+        <definition>std::span&lt; helios::math::vec4f &gt; helios::rendering::text::TextMesh::vertices</definition>
+        <argsstring>(FontResourceProvider &amp;fontResourceProvider) const noexcept</argsstring>
+        <name>vertices</name>
+        <qualifiedname>helios::rendering::text::TextMesh::vertices</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1rendering_1_1text_1_1FontResourceProvider" kindref="compound">FontResourceProvider</ref> &amp;</type>
+          <declname>fontResourceProvider</declname>
+        </param>
+        <briefdescription>
+<para>Returns the vertex data for rendering. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Each glyph is represented as 6 vertices (2 triangles). Triggers layout computation if the cache is invalid.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fontResourceProvider</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provider for glyph data.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A span of vertex data (x, y, texU, texV per vertex). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="144" column="20" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="144" bodyend="147"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1TextMesh_1a0e523735e2c4505387838fe2355180c8" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::rendering::text::TextMesh::setText</definition>
+        <argsstring>(std::string text) noexcept</argsstring>
+        <name>setText</name>
+        <qualifiedname>helios::rendering::text::TextMesh::setText</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+<para>Updates the text string. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Invalidates the cached layout, which will be recomputed on the next call to `vertices()` or `localAABB()`.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new text to render. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="157" column="14" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="157" bodyend="160"/>
+        <references refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1a4ca16d4d6a4709796c58a929355940c4" compoundref="TextMesh_8ixx" startline="167" endline="169">text</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1TextMesh_1a4ca16d4d6a4709796c58a929355940c4" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::string_view</type>
+        <definition>std::string_view helios::rendering::text::TextMesh::text</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>text</name>
+        <qualifiedname>helios::rendering::text::TextMesh::text</qualifiedname>
+        <briefdescription>
+<para>Returns the current text string. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>View of the text string. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="167" column="27" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="167" bodyend="169"/>
+        <referencedby refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1a0e523735e2c4505387838fe2355180c8" compoundref="TextMesh_8ixx" startline="157" endline="160">setText</referencedby>
+        <referencedby refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1a1b4c33a7057a7f5363f54774183775bf" compoundref="TextMesh_8ixx" startline="111" endline="117">TextMesh</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1TextMesh_1ab88efd9db53ef6bec25a8154fd6115a3" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structhelios_1_1engine_1_1core_1_1data_1_1FontId" kindref="compound">helios::engine::core::data::FontId</ref></type>
+        <definition>helios::engine::core::data::FontId helios::rendering::text::TextMesh::fontId</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>fontId</name>
+        <qualifiedname>helios::rendering::text::TextMesh::fontId</qualifiedname>
+        <briefdescription>
+<para>Returns the font identifier. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The font ID used for glyph lookup. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="176" column="45" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="176" bodyend="178"/>
+        <referencedby refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1a1b4c33a7057a7f5363f54774183775bf" compoundref="TextMesh_8ixx" startline="111" endline="117">TextMesh</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Manages text content and caches layout data for efficient rendering. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>`TextMesh` encapsulates a text string along with its font and provides lazy computation of vertex data and bounding boxes. The layout is computed on-demand and cached until the text content changes.</para>
+<para>## Caching Strategy</para>
+<para><itemizedlist>
+<listitem><para>Layout computation is deferred until `vertices()` or `localAABB()` is called.</para>
+</listitem><listitem><para>The cache is invalidated when `setText()` is called.</para>
+</listitem><listitem><para>The `TypeSetter` is used internally to compute glyph positions.</para>
+</listitem></itemizedlist>
+</para>
+<para>## Usage</para>
+<para>```cpp <ref refid="classhelios_1_1rendering_1_1text_1_1TextMesh" kindref="compound">TextMesh</ref> mesh(&quot;Score: 0&quot;, FontId{1});</para>
+<para>// Access vertices for rendering (triggers layout if needed) auto verts = mesh.vertices(fontProvider);</para>
+<para>// Update text (invalidates cache) mesh.setText(&quot;Score: 100&quot;); ```</para>
+<para><simplesect kind="see"><para><ref refid="classhelios_1_1rendering_1_1text_1_1TypeSetter" kindref="compound">TypeSetter</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1rendering_1_1text_1_1TextRenderable" kindref="compound">TextRenderable</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1rendering_1_1text_1_1FontResourceProvider" kindref="compound">FontResourceProvider</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="60" column="5" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="60" bodyend="179"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1ab88efd9db53ef6bec25a8154fd6115a3" prot="public" virt="non-virtual"><scope>helios::rendering::text::TextMesh</scope><name>fontId</name></member>
+      <member refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1afbc4cdc696047e227d402aec806bcc72" prot="private" virt="non-virtual"><scope>helios::rendering::text::TextMesh</scope><name>fontId_</name></member>
+      <member refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1ae8223797a0ef9c56ffa0842ad887a7fe" prot="public" virt="non-virtual"><scope>helios::rendering::text::TextMesh</scope><name>localAABB</name></member>
+      <member refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1aa37fbe4a7f2b1cb6f385b02c0b0a88d0" prot="private" virt="non-virtual"><scope>helios::rendering::text::TextMesh</scope><name>needsUpdate_</name></member>
+      <member refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1a0e523735e2c4505387838fe2355180c8" prot="public" virt="non-virtual"><scope>helios::rendering::text::TextMesh</scope><name>setText</name></member>
+      <member refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1a4ca16d4d6a4709796c58a929355940c4" prot="public" virt="non-virtual"><scope>helios::rendering::text::TextMesh</scope><name>text</name></member>
+      <member refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1a75977fbc576c2341c2a90cc5c697c1e5" prot="private" virt="non-virtual"><scope>helios::rendering::text::TextMesh</scope><name>text_</name></member>
+      <member refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1a958723362380dcaeba853571ffab081b" prot="private" virt="non-virtual"><scope>helios::rendering::text::TextMesh</scope><name>textLayout_</name></member>
+      <member refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1a1b4c33a7057a7f5363f54774183775bf" prot="public" virt="non-virtual"><scope>helios::rendering::text::TextMesh</scope><name>TextMesh</name></member>
+      <member refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1a98eaf678292dbfeb5c07f7f6c410533c" prot="private" virt="non-virtual"><scope>helios::rendering::text::TextMesh</scope><name>typeSetter_</name></member>
+      <member refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1a69681ce1a4c266c7339e0aa1533be78f" prot="private" virt="non-virtual"><scope>helios::rendering::text::TextMesh</scope><name>updateCache</name></member>
+      <member refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1aebfe7c0a3859daa3123416297afb68d8" prot="public" virt="non-virtual"><scope>helios::rendering::text::TextMesh</scope><name>vertices</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

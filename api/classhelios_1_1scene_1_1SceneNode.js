@@ -22,7 +22,7 @@ var classhelios_1_1scene_1_1SceneNode =
     [ "onWorldTransformUpdate", "classhelios_1_1scene_1_1SceneNode.html#a3ea0d74f134d284d702a06d456e633a0", null ],
     [ "operator=", "classhelios_1_1scene_1_1SceneNode.html#a7cc7b1c8b3b57927c9d33abd8f652964", null ],
     [ "parent", "classhelios_1_1scene_1_1SceneNode.html#a4e31b52717a76a9bae9a80a1db0b808b", null ],
-    [ "renderable", "classhelios_1_1scene_1_1SceneNode.html#a2f4bba61e70c28e98747ee84af651812", null ],
+    [ "renderable", "classhelios_1_1scene_1_1SceneNode.html#a844895ba977a844954abecadefaca359", null ],
     [ "renderable", "classhelios_1_1scene_1_1SceneNode.html#a01e293e31d8c30a3f9cbae3ad19ca6d8", null ],
     [ "setActive", "classhelios_1_1scene_1_1SceneNode.html#a6fc8bb37765c30988515c45845208f4d", null ],
     [ "setInheritance", "classhelios_1_1scene_1_1SceneNode.html#a75103edee2bbacbebe2296dd88d1a1e9", null ],

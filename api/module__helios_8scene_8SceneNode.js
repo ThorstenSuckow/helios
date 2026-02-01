@@ -13,7 +13,7 @@ var module__helios_8scene_8SceneNode =
     [ "helios::scene::SceneNode::guid", "module__helios_8scene_8SceneNode.html#a1488aa0cc05f989400589f36814afba1", null ],
     [ "helios::scene::SceneNode::addNode", "module__helios_8scene_8SceneNode.html#a639af371377e5279a7e644da2af05e5a", null ],
     [ "helios::scene::SceneNode::children", "module__helios_8scene_8SceneNode.html#a345af64a75ad370d482051006658c81e", null ],
-    [ "helios::scene::SceneNode::renderable", "module__helios_8scene_8SceneNode.html#a2f4bba61e70c28e98747ee84af651812", null ],
+    [ "helios::scene::SceneNode::renderable", "module__helios_8scene_8SceneNode.html#a844895ba977a844954abecadefaca359", null ],
     [ "helios::scene::SceneNode::hasRenderable", "module__helios_8scene_8SceneNode.html#a3a41a256979415a6678bb391660b0ced", null ],
     [ "helios::scene::SceneNode::renderable", "module__helios_8scene_8SceneNode.html#a01e293e31d8c30a3f9cbae3ad19ca6d8", null ],
     [ "helios::scene::SceneNode::setScale", "module__helios_8scene_8SceneNode.html#aa61104006dc48bc2a57dbe6fc6cbcb5b", null ],

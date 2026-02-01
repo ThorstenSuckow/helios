@@ -14,8 +14,9 @@ export module helios.rendering.text.TextRenderCommand;
 
 import helios.rendering.shader.UniformValueMap;
 import helios.rendering.text.TextRenderPrototype;
-import helios.rendering.text.DrawProperties;
+import helios.rendering.text.TextMesh;
 
+import helios.engine.core.data.FontId;
 
 export namespace helios::rendering::text {
 
@@ -40,7 +41,7 @@ export namespace helios::rendering::text {
      *
      * @see TextRenderable
      * @see TextRenderer
-     * @see DrawProperties
+     * @see TextMesh
      */
     class TextRenderCommand {
 
@@ -54,27 +55,50 @@ export namespace helios::rendering::text {
         /**
          * @brief Uniform values specific to this text instance.
          */
-        helios::rendering::shader::UniformValueMap textUniformValues_;
+        helios::rendering::shader::UniformValueMap objectUniformValues_;
 
         /**
-         * @brief The text string to render.
+         * @brief Material/text-specific uniform values (e.g., color).
          */
-        std::string text_;
+        helios::rendering::shader::UniformValueMap materialUniformValues_;
 
         /**
-         * @brief Positioning and styling data.
+         * @brief Non-owning pointer to the text mesh containing vertex data.
+         *
+         * The text mesh must remain valid for the lifetime of this command.
          */
-        helios::rendering::text::DrawProperties drawProperties_;
+        const helios::rendering::text::TextMesh* textMesh_;
+
 
         public:
 
+        /**
+         * @brief Deleted copy constructor.
+         *
+         * TextRenderCommand is move-only to prevent accidental duplication.
+         */
         TextRenderCommand(const TextRenderCommand&)=delete;
+
+        /**
+         * @brief Deleted copy assignment operator.
+         *
+         * TextRenderCommand is move-only to prevent accidental duplication.
+         */
         TextRenderCommand& operator=(const TextRenderCommand&)=delete;
 
+        /**
+         * @brief Move constructor.
+         */
         TextRenderCommand(TextRenderCommand&&) noexcept = default;
 
+        /**
+         * @brief Move assignment operator.
+         */
         TextRenderCommand& operator=(TextRenderCommand&&) noexcept = default;
 
+        /**
+         * @brief Default destructor.
+         */
         ~TextRenderCommand() = default;
 
         /**
@@ -88,27 +112,18 @@ export namespace helios::rendering::text {
          * @pre `textRenderPrototype` must not be null.
          */
         TextRenderCommand(
-            std::string text,
+            const helios::rendering::text::TextMesh* textMesh,
             const helios::rendering::text::TextRenderPrototype* textRenderPrototype,
-            const helios::rendering::text::DrawProperties drawProperties,
-            const helios::rendering::shader::UniformValueMap& textUniformValues
+            helios::rendering::shader::UniformValueMap objectUniformValues,
+            helios::rendering::shader::UniformValueMap materialUniformValues
             ) noexcept :
-                text_(std::move(text)),
+                textMesh_(textMesh),
                 textRenderPrototype_(textRenderPrototype),
-                drawProperties_(drawProperties),
-                textUniformValues_(textUniformValues) {
+                objectUniformValues_(std::move(objectUniformValues)),
+                materialUniformValues_(std::move(materialUniformValues)) {
 
             assert(textRenderPrototype_ && "TextRenderPrototype must not be null");
 
-        }
-
-        /**
-         * @brief Returns the text string.
-         *
-         * @return View of the text to render.
-         */
-        [[nodiscard]] std::string_view text() const noexcept {
-            return text_;
         }
 
         /**
@@ -121,12 +136,14 @@ export namespace helios::rendering::text {
         }
 
         /**
-         * @brief Returns the draw properties.
+         * @brief Returns the text mesh containing vertex data.
          *
-         * @return Reference to positioning and styling data.
+         * The mesh provides access to the pre-computed glyph vertices for rendering.
+         *
+         * @return Non-owning pointer to the text mesh.
          */
-        [[nodiscard]] const helios::rendering::text::DrawProperties& drawProperties() const noexcept {
-            return drawProperties_;
+        [[nodiscard]] const helios::rendering::text::TextMesh* textMesh() const noexcept {
+            return textMesh_;
         }
 
         /**
@@ -134,8 +151,19 @@ export namespace helios::rendering::text {
          *
          * @return Reference to the uniform value map.
          */
-        [[nodiscard]] const helios::rendering::shader::UniformValueMap& textUniformValues() const noexcept {
-            return textUniformValues_;
+        [[nodiscard]] const helios::rendering::shader::UniformValueMap& objectUniformValues() const noexcept {
+            return objectUniformValues_;
+        }
+
+        /**
+         * @brief Returns the material-specific uniform values.
+         *
+         * Contains values such as text color and other material properties.
+         *
+         * @return Reference to the material uniform value map.
+         */
+        [[nodiscard]] const helios::rendering::shader::UniformValueMap& materialUniformValues() const noexcept {
+            return materialUniformValues_;
         }
     };
 

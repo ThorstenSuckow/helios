@@ -467,10 +467,8 @@ export namespace helios::scene {
              */
             virtual void onWorldTransformUpdate() noexcept {
                 if (renderable_) {
-                    if (const auto prototype = renderable_->renderPrototype()) {
-                        const auto& localAABB = prototype->mesh().aabb();
-                        aabb_ = localAABB.applyTransform(worldTransform_);
-                    }
+                    const auto& localAABB = renderable_->localAABB();
+                    aabb_ = localAABB.applyTransform(worldTransform_);
                 }
             }
 

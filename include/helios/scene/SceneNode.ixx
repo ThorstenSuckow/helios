@@ -253,12 +253,12 @@ export namespace helios::scene {
             }
 
             /**
-             * @brief Returns a shared pointer to the Renderable of this SceneNode.
+             * @brief Returns a raw pointer to the Renderable of this SceneNode.
              *
-             * @return A shared_ptr to the Renderable, may be nullptr if none is set.
+             * @return A raw pointer to the Renderable, may be nullptr if none is set.
              */
-            [[nodiscard]] std::shared_ptr<const helios::rendering::Renderable> renderable() const noexcept {
-                return renderable_;
+            [[nodiscard]] const helios::rendering::Renderable* renderable() const noexcept {
+                return renderable_.get();
             }
 
             /**
@@ -467,10 +467,8 @@ export namespace helios::scene {
              */
             virtual void onWorldTransformUpdate() noexcept {
                 if (renderable_) {
-                    if (const auto prototype = renderable_->renderPrototype()) {
-                        const auto& localAABB = prototype->mesh().aabb();
-                        aabb_ = localAABB.applyTransform(worldTransform_);
-                    }
+                    const auto& localAABB = renderable_->localAABB();
+                    aabb_ = localAABB.applyTransform(worldTransform_);
                 }
             }
 

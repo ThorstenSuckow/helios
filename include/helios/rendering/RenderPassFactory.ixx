@@ -110,65 +110,47 @@ export namespace helios::rendering {
             const auto& snapshotItems = snapshot.snapshotItems();
 
             for (const auto& item : snapshotItems) {
-                auto renderCommand = makeRenderCommand(item);
-                if (renderCommand) {
-                    renderQueue.add(std::move(renderCommand));
-                }
-                // if renderCommand is nullptr, it's already logged in makeRenderCommand, so we skip it
+                makeRenderCommand(item, renderQueue);
             }
         }
 
         /**
-         * @brief Creates a single `RenderCommand` from a `helios::scene::SnapshotItem`.
+         * @brief Emits render commands from a `helios::scene::SnapshotItem` to the render queue.
          *
-         * This method extracts necessary data from the `SnapshotItem` and bundles them
-         * into a `RenderCommand` object.
+         * This method extracts necessary data from the `SnapshotItem`, sets up the object
+         * uniform values (e.g., model matrix), and delegates to the `Renderable` to emit
+         * its render commands to the queue.
          *
-         * @param snapshotItem A const ref to the `SnapshotItem` from which to create
-         * the `RenderCommand`.
+         * @param snapshotItem A const ref to the `SnapshotItem` from which to create render commands.
+         * @param renderQueue A ref to the `RenderQueue` to emit commands to.
          *
-         * @return A unique pointer to the newly created `RenderCommand`. Returns nullptr
-         * if the associated Renderable is no longer available, or if the
-         * shader is not available from the `Renderable`'s material, or if the mesh is
-         * no longer available.
-         *
-         * @todo future versions might want to use a FactoryMethod in RenderCommand
-         * that takes a SnapshotItem and creates a RenderCommand from it (e.g.
-         * `RenderCommand::fromSnapshotItem()`); or a Factory `RenderCommandBuilder()`
-         * with fluent configuration `.withShader().withMesh().build();`
+         * @note If the `Renderable` pointer in the `SnapshotItem` is `nullptr`, a warning is
+         *       logged and no commands are emitted.
          */
-        [[nodiscard]] std::unique_ptr<RenderCommand> makeRenderCommand(
-            const helios::scene::SnapshotItem& snapshotItem) const noexcept {
+        void makeRenderCommand(
+            const helios::scene::SnapshotItem& snapshotItem,
+             helios::rendering::RenderQueue& renderQueue) const noexcept {
 
-            const auto& renderable = snapshotItem.renderable();
+            const auto* renderable = snapshotItem.renderable();
 
-            const auto sharedRenderable = renderable.lock();
-            if (sharedRenderable == nullptr) {
+            if (renderable == nullptr) {
                 logger_.warn("Renderable no longer available");
-                return nullptr;
+                return;
             }
 
-            auto objectUniformValues = std::make_unique<helios::rendering::shader::UniformValueMap>();
-            auto materialUniformValues = std::make_unique<helios::rendering::shader::UniformValueMap>();
-            objectUniformValues->set(
+            auto objectUniformValues = helios::rendering::shader::UniformValueMap();
+            auto materialUniformValues = helios::rendering::shader::UniformValueMap();
+            objectUniformValues.set(
                 helios::rendering::shader::UniformSemantics::ModelMatrix,
                 snapshotItem.worldMatrix()
             );
 
-            // make sure Material writes its uniform values
-            /**
-             * @todo when batching is implemented, this could be refactored
-             * out of this factory method
-             */
-            sharedRenderable->writeUniformValues(*materialUniformValues);
-
-            const auto renderPrototype = sharedRenderable->renderPrototype();
-
-            return std::make_unique<RenderCommand>(
-                renderPrototype,
+            renderable->emit(
+                renderQueue,
                 std::move(objectUniformValues),
                 std::move(materialUniformValues)
             );
+
         }
 
     };

@@ -16,10 +16,30 @@ import helios.scene.SceneNode;
 export namespace helios::scene {
 
     /**
-     * @brief Represents a camera for perspective projection.
+     * @brief Represents a camera for perspective or orthographic projection.
      *
      * The camera provides the view and projection matrices, whereas the view matrix
      * is computed as the inverse of the camera's world transform.
+     *
+     * The camera supports two projection modes:
+     * - **Perspective projection:** Simulates how the human eye perceives depth, where
+     *   distant objects appear smaller. Use `setPerspective()` to configure.
+     * - **Orthographic projection:** Maintains parallel lines and uniform scaling regardless
+     *   of distance, useful for 2D rendering, UI elements, or CAD-style views. Use `setOrtho()`
+     *   to configure.
+     *
+     * By default, the camera uses perspective projection.
+     *
+     * Example usage:
+     * ```cpp
+     * helios::scene::Camera camera;
+     *
+     * // Perspective projection
+     * camera.setPerspective(helios::math::radians(60.0f), 16.0f / 9.0f, 0.1f, 1000.0f);
+     *
+     * // Orthographic projection
+     * camera.setOrtho(0.0f, 800.0f, 0.0f, 600.0f, -1.0f, 100.0f);
+     * ```
      */
     class Camera {
 
@@ -27,7 +47,14 @@ export namespace helios::scene {
         /**
          * @brief The projection matrix of this camera.
          */
-        mutable helios::math::mat4f projectionMatrix_;
+        mutable helios::math::mat4f perspectiveMatrix_;
+
+        /**
+         * @brief The orthographic projection matrix of this camera.
+         *
+         * Used when the camera is in orthographic mode (`usePerspective_ == false`).
+         */
+        mutable helios::math::mat4f orthographicMatrix_;
 
         /**
          * @brief The view matrix of this camera.
@@ -67,7 +94,33 @@ export namespace helios::scene {
          */
         mutable bool needsUpdate_ = true;
 
+        /**
+         * @brief Left boundary of the orthographic frustum.
+         */
+        float left_;
 
+        /**
+         * @brief Right boundary of the orthographic frustum.
+         */
+        float right_;
+
+        /**
+         * @brief Bottom boundary of the orthographic frustum.
+         */
+        float bottom_;
+
+        /**
+         * @brief Top boundary of the orthographic frustum.
+         */
+        float top_;
+
+        /**
+         * @brief Flag indicating the projection mode.
+         *
+         * When `true`, perspective projection is used. When `false`, orthographic
+         * projection is used. Defaults to `true`.
+         */
+        bool usePerspective_ = true;
 
         /**
          * @brief Updates the view and projection matrices if needed.
@@ -81,7 +134,11 @@ export namespace helios::scene {
                 return;
             }
 
-            projectionMatrix_ = helios::math::perspective(fovY_, aspectRatio_, zNear_, zFar_);
+            if (usePerspective_) {
+                perspectiveMatrix_ = helios::math::perspective(fovY_, aspectRatio_, zNear_, zFar_);
+            } else {
+                orthographicMatrix_ = helios::math::ortho(left_, right_, bottom_, top_, zNear_, zFar_);
+            }
 
             needsUpdate_ = false;
         }
@@ -91,7 +148,8 @@ export namespace helios::scene {
          * @brief Constructs a camera with identity projection and view matrices.
          */
         Camera() noexcept :
-            projectionMatrix_(helios::math::mat4f::identity()),
+            perspectiveMatrix_(helios::math::mat4f::identity()),
+            orthographicMatrix_(helios::math::mat4f::identity()),
             viewMatrix_(helios::math::mat4f::identity())
         {}
 
@@ -104,8 +162,13 @@ export namespace helios::scene {
          */
         [[nodiscard]] const helios::math::mat4f& projectionMatrix() const noexcept {
             update();
-            return projectionMatrix_;
+            
+            if (usePerspective_) {
+                return perspectiveMatrix_;
+            }
+            return orthographicMatrix_;
         }
+
 
         /**
          * @brief Gets the current view matrix.
@@ -149,6 +212,38 @@ export namespace helios::scene {
         }
 
         /**
+         * @brief Handles viewport resize events.
+         *
+         * Adjusts the camera projection parameters when the viewport dimensions change.
+         * - For perspective projection: Updates the aspect ratio.
+         * - For orthographic projection: Adjusts the right and top boundaries to maintain
+         *   the correct projection volume.
+         *
+         * @param width The new viewport width in pixels.
+         * @param height The new viewport height in pixels.
+         */
+        void onResize(const float width, const float height) noexcept {
+
+            if (usePerspective_) {
+                setAspectRatio(width / height);
+                return;
+            }
+
+            if (left_ == 0.0f && bottom_ == 0.0f) {
+                right_ = width;
+                top_ = height;
+            } else {
+
+                left_ = -width/2.0f;
+                right_ = width/2.0f;
+                bottom_ = -height/2.0f;
+                top_ = height/2.0f;
+            }
+
+            needsUpdate_ = true;
+        }
+
+        /**
          * @brief Sets the perspective projection parameters.
          *
          * @param fovY The vertical field of view in radians.
@@ -165,6 +260,48 @@ export namespace helios::scene {
             aspectRatio_ = aspectRatio;
             zNear_ = zNear;
             zFar_ = zFar;
+            needsUpdate_ = true;
+            usePerspective_ = true;
+            return *this;
+        }
+
+        /**
+         * @brief Sets the orthographic projection parameters.
+         *
+         * Configures the camera for orthographic projection, which is useful for 2D rendering,
+         * UI overlays, or scenes where parallel lines should remain parallel (no perspective
+         * distortion).
+         *
+         * @param left The left boundary of the view volume.
+         * @param right The right boundary of the view volume.
+         * @param bottom The bottom boundary of the view volume.
+         * @param top The top boundary of the view volume.
+         * @param zNear The near clipping plane distance. Defaults to -1.0.
+         * @param zFar The far clipping plane distance. Defaults to 100.0.
+         *
+         * @return A reference to this camera instance.
+         *
+         * @note Calling this method switches the camera to orthographic projection mode.
+         */
+        Camera& setOrtho(
+            const float left , const float right,
+            const float bottom, const float top,
+            const float zNear = -1.0f, const float zFar = 100.0f) noexcept {
+
+            assert(zFar > zNear && "zFar must be greater than zNear");
+
+            zNear_ = zNear;
+            zFar_ = zFar;
+
+            left_ = left;
+            right_ = right;
+            bottom_ = bottom;
+            top_ = top;
+
+            aspectRatio_ = (right - left) / (top - bottom); // w/h
+
+            usePerspective_ = false;
+
             needsUpdate_ = true;
             return *this;
         }

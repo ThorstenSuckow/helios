@@ -78,8 +78,17 @@ export namespace helios::rendering::shader {
         std::array<std::optional<UniformValue>, std::to_underlying(UniformSemantics::size_)> map_;
 
     public:
+
+        /**
+         * @brief Default destructor.
+         */
         ~UniformValueMap() = default;
 
+        /**
+         * @brief Default constructor.
+         *
+         * Initializes an empty uniform value map with no values set.
+         */
         UniformValueMap() = default;
 
         /**
@@ -96,8 +105,9 @@ export namespace helios::rendering::shader {
          * @brief Returns a raw const pointer to the `mat4f` for the specified uniform semantics.
          *
          * @param uniformSemantics The `UniformSemantics` identifier for the uniform.
+         *
          * @return A raw const pointer to the associated mat4f, or `nullptr` if no mat4f is
-         * associated with this semantics.
+         *         associated with this semantics.
          */
         [[nodiscard]] const float* mat4f_ptr(UniformSemantics uniformSemantics) const noexcept {
 
@@ -110,6 +120,34 @@ export namespace helios::rendering::shader {
             if (const auto& el = map_[index]; el.has_value()) {
                 if (const auto* it = std::get_if<helios::math::mat4f>(&el.value())) {
                     return helios::math::value_ptr(*it);
+                }
+            }
+
+            return nullptr;
+        }
+
+        /**
+         * @brief Returns a const pointer to the `mat4f` value for the specified uniform semantics.
+         *
+         * Unlike `mat4f_ptr()`, this returns a pointer to the `mat4f` object itself rather than
+         * its underlying float array.
+         *
+         * @param uniformSemantics The `UniformSemantics` identifier for the uniform.
+         *
+         * @return A const pointer to the associated `mat4f`, or `nullptr` if no mat4f is
+         *         associated with this semantics.
+         */
+        [[nodiscard]] const helios::math::mat4f* mat4f(UniformSemantics uniformSemantics) const noexcept {
+
+            const auto index = std::to_underlying(uniformSemantics);
+
+            if (index >= map_.size()) {
+                return nullptr;
+            }
+
+            if (const auto& el = map_[index]; el.has_value()) {
+                if (const auto* it = std::get_if<helios::math::mat4f>(&el.value())) {
+                    return it;
                 }
             }
 

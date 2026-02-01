@@ -146,15 +146,10 @@ export namespace helios::rendering {
                 return;
             }
 
-            const float w = static_cast<float>(renderTargetWidth) * width_;
-            const float h = static_cast<float>(renderTargetHeight) * height_;
-
-            if (h > 0.0f) {
-                logger_.info(std::format("Setting aspect ratio {0}/{1}", w, h));
-                cameraSceneNode_->camera().setAspectRatio(w / h);
-            } else {
-                logger_.warn("updateCamera: cannot set aspect ratio, height is 0");
-            }
+            cameraSceneNode_->camera().onResize(
+                static_cast<float>(renderTargetWidth) * width_,
+                static_cast<float>(renderTargetHeight) * height_
+            );
         }
 
     public:

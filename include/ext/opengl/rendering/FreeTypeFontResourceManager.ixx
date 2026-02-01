@@ -197,7 +197,7 @@ export namespace helios::ext::opengl::rendering {
             const helios::engine::core::data::FontId fontId
         ) override {
 
-            assert(fontCache_.contains(fontId) && "FontCache already existing");
+            assert(fontCache_.contains(fontId) && "Font cache entry not found for given FontId (font not loaded?)");
 
             return fontCache_[fontId].characters[c];
         }

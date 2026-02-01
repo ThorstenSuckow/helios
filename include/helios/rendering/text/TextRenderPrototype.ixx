@@ -23,8 +23,8 @@ export namespace helios::rendering::text {
      * @brief Immutable, shared prototype for text rendering configuration.
      *
      * `TextRenderPrototype` holds the shader and text properties that are shared
-     * across multiple `TextRenderable` instances. This flyweight pattern reduces
-     * memory usage and allows efficient batching of text with the same configuration.
+     * across multiple `TextRenderable` instances. This reduces memory usage and
+     * allows efficient batching of text with the same configuration.
      *
      * ## Design
      *
@@ -38,15 +38,20 @@ export namespace helios::rendering::text {
      * auto shader = std::make_shared<OpenGLShader>(...);
      * auto textProps = std::make_shared<TextShaderProperties>(textColor);
      *
-     * auto prototype = std::make_shared<TextRenderPrototype>(shader, textProps);
+     * // Get font provider from rendering device
+     * auto& fontProvider = device.fontResourceProvider();
+     * fontProvider.loadFont(FontId{"roboto"}, "fonts/Roboto.ttf");
+     *
+     * auto prototype = std::make_shared<TextRenderPrototype>(shader, textProps, &fontProvider);
      *
      * // Share prototype across multiple renderables
-     * TextRenderable title("Title", prototype, drawProps1);
-     * TextRenderable score("Score: 0", prototype, drawProps2);
+     * TextRenderable title(std::make_unique<TextMesh>("Title", fontId), prototype);
+     * TextRenderable score(std::make_unique<TextMesh>("Score: 0", fontId), prototype);
      * ```
      *
      * @see TextRenderable
      * @see TextShaderProperties
+     * @see FontResourceProvider
      * @see Shader
      */
     class TextRenderPrototype final {
@@ -65,8 +70,11 @@ export namespace helios::rendering::text {
 
         /**
          * @brief Provider for loading fonts and retrieving glyph data.
+         *
+         * Non-owning raw pointer. The font resource provider must remain valid
+         * for the lifetime of this prototype.
          */
-        std::shared_ptr <helios::rendering::text::FontResourceProvider> fontResourceProvider_;
+        helios::rendering::text::FontResourceProvider* fontResourceProvider_;
 
     public:
 
@@ -75,14 +83,15 @@ export namespace helios::rendering::text {
          *
          * @param shader The shader to use for text rendering.
          * @param textProperties Text-specific shader properties.
-         * @param fontResourceProvider Provider for loading fonts and retrieving glyph data.
+         * @param fontResourceProvider Raw pointer to the font resource provider
+         *        (must remain valid for the lifetime of this prototype).
          *
          * @throws std::invalid_argument If `shader`, `textProperties`, or `fontResourceProvider` is null.
          */
         explicit TextRenderPrototype(
             std::shared_ptr<const helios::rendering::shader::Shader> shader,
             std::shared_ptr<const helios::rendering::text::config::TextShaderProperties> textProperties,
-            std::shared_ptr<helios::rendering::text::FontResourceProvider> fontResourceProvider
+            helios::rendering::text::FontResourceProvider* fontResourceProvider
 
         ) :
         shader_(std::move(shader)),

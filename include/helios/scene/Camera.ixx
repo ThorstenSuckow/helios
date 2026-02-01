@@ -288,7 +288,7 @@ export namespace helios::scene {
             const float bottom, const float top,
             const float zNear = -1.0f, const float zFar = 100.0f) noexcept {
 
-            assert(zFar > 0 && zFar > zNear && "zFar must be positive and greater than zNear");
+            assert(zFar > zNear && "zFar must be greater than zNear");
 
             zNear_ = zNear;
             zFar_ = zFar;

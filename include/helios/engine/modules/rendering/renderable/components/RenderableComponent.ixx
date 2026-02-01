@@ -50,9 +50,7 @@ export namespace helios::engine::modules::rendering::renderable::components {
         renderable_(std::move(renderable)) {
 
             assert(renderable_ != nullptr && "renderable must not be nullptr");
-            aabb_ = renderable_->renderPrototype()
-                  ? renderable_->renderPrototype()->mesh().aabb()
-                  : helios::math::aabbf{};
+            aabb_ = renderable_->localAABB();
 
         }
 

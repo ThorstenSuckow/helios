@@ -4,6 +4,8 @@
  */
 module;
 
+#include <memory>
+
 export module helios.rendering.RenderingDevice;
 
 import helios.math.types;
@@ -11,8 +13,8 @@ import helios.util.log;
 import helios.rendering.Renderable;
 import helios.rendering.RenderQueue;
 import helios.rendering.RenderPass;
-
 import helios.rendering.text.TextRenderer;
+import helios.rendering.text.FontResourceProvider;
 
 
 #define HELIOS_LOG_SCOPE "helios::rendering::RenderingDevice"
@@ -136,7 +138,18 @@ export namespace helios::rendering {
          */
         [[nodiscard]] virtual helios::rendering::text::TextRenderer& textRenderer() const noexcept = 0;
 
-
+        /**
+         * @brief Returns the font resource provider associated with this device.
+         *
+         * Use this to load fonts and access glyph data for text rendering.
+         * Fonts should be loaded before creating `TextRenderPrototype` instances
+         * that reference them.
+         *
+         * @return Reference to the `FontResourceProvider` implementation.
+         *
+         * @see FontResourceProvider::loadFont()
+         */
+        [[nodiscard]] virtual helios::rendering::text::FontResourceProvider& fontResourceProvider() const noexcept = 0;
 
         /**
          * @brief Returns the initialized state of this rendering device.

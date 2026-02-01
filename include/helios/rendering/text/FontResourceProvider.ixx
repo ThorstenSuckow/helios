@@ -70,7 +70,7 @@ export namespace helios::rendering::text{
          * @note This method is marked `noexcept` and must not throw exceptions.
          *       If the character is not available, a fallback glyph should be returned.
          */
-        virtual helios::rendering::text::Glyph glyph(char c, helios::engine::core::data::FontId fontId) noexcept = 0;
+        virtual helios::rendering::text::Glyph glyph(char c, helios::engine::core::data::FontId fontId) = 0;
 
 
 

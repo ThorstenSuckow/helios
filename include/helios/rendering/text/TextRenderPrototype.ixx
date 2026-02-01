@@ -96,7 +96,7 @@ export namespace helios::rendering::text {
         ) :
         shader_(std::move(shader)),
         textProperties_(std::move(textProperties)),
-        fontResourceProvider_(std::move(fontResourceProvider)) {
+        fontResourceProvider_(fontResourceProvider) {
 
             if (!shader_) {
                 throw std::invalid_argument("RenderPrototype received null shader");

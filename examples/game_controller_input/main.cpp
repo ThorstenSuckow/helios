@@ -25,11 +25,11 @@ import helios.ext.opengl.rendering.shader.OpenGLShader;
 import helios.ext.opengl.rendering.shader.OpenGLUniformLocationMap;
 import helios.rendering.shader.UniformSemantics;
 import helios.ext.opengl.rendering.model.OpenGLMesh;
-import helios.rendering.model.Material;
-import helios.rendering.model.config.MeshConfig;
-import helios.rendering.model.config.MaterialProperties;
-import helios.rendering.model.config.MaterialPropertiesOverride;
-import helios.rendering.model.config.PrimitiveType;
+import helios.rendering.material.Material;
+import helios.rendering.mesh.MeshConfig;
+import helios.rendering.mesh.config.MaterialShaderProperties;
+import helios.rendering.material.MaterialShaderPropertiesOverride;
+import helios.rendering.mesh.PrimitiveType;
 import helios.rendering.RenderPassFactory;
 import helios.rendering.RenderPrototype;
 import helios.rendering.Renderable;
@@ -61,7 +61,7 @@ using namespace helios::ext::glfw::window;
 void updateButton(
     helios::scene::SceneNode& button,
     const bool pressed,
-    helios::rendering::model::config::MaterialPropertiesOverride& originalOverride) {
+    helios::rendering::material::MaterialShaderPropertiesOverride& originalOverride) {
 
     button.setScale(helios::math::vec3f(SCALING_FACTOR * (pressed ? 1.2f : 1.0f)));
     if (button.renderable()->hasMaterialOverride()) {
@@ -112,35 +112,35 @@ int main() {
 
 
     // material configs
-    auto circleMaterialProps = std::make_shared<helios::rendering::model::config::MaterialProperties>(
+    auto circleMaterialProps = std::make_shared<helios::rendering::mesh::config::MaterialShaderProperties>(
         helios::math::vec4f(1.0f, 0.0f, 1.0f, 0.5f),
         0.0f
     );
 
-    auto lineMaterialProps = std::make_shared<helios::rendering::model::config::MaterialProperties>(
+    auto lineMaterialProps = std::make_shared<helios::rendering::mesh::config::MaterialShaderProperties>(
         helios::math::vec4f(1.0f, 1.0f, 1.0f, 1.0f),
         0.0f
     );
 
     // create circle RenderPrototype
     const auto circleShape      = helios::rendering::asset::shape::basic::Circle();
-    const auto circleMeshConfig = std::make_shared<const helios::rendering::model::config::MeshConfig>(circleShape.primitiveType());
+    const auto circleMeshConfig = std::make_shared<const helios::rendering::mesh::MeshConfig>(circleShape.primitiveType());
     const auto circleMesh       = std::make_shared<const helios::ext::opengl::rendering::model::OpenGLMesh>(circleShape, circleMeshConfig);
-    const auto circleMaterial   = std::make_shared<const helios::rendering::model::Material>(shader, circleMaterialProps);
+    const auto circleMaterial   = std::make_shared<const helios::rendering::material::Material>(shader, circleMaterialProps);
     const auto circlePrototype  = std::make_shared<const helios::rendering::RenderPrototype>(circleMaterial, circleMesh);
 
     // create line RenderPrototype
     const auto lineShape      = helios::rendering::asset::shape::basic::Line();
-    const auto lineMeshConfig = std::make_shared<const helios::rendering::model::config::MeshConfig>(lineShape.primitiveType());
+    const auto lineMeshConfig = std::make_shared<const helios::rendering::mesh::MeshConfig>(lineShape.primitiveType());
     const auto lineMesh       = std::make_shared<const helios::ext::opengl::rendering::model::OpenGLMesh>(lineShape, lineMeshConfig);
-    const auto lineMaterial   = std::make_shared<const helios::rendering::model::Material>(shader, lineMaterialProps);
+    const auto lineMaterial   = std::make_shared<const helios::rendering::material::Material>(shader, lineMaterialProps);
     const auto linePrototype  = std::make_shared<const helios::rendering::RenderPrototype>(lineMaterial, lineMesh);
 
     // create rectangle RenderPrototype
     const auto recShape       = helios::rendering::asset::shape::basic::Rectangle();
-    const auto recShapeConfig = std::make_shared<const helios::rendering::model::config::MeshConfig>(recShape.primitiveType());
+    const auto recShapeConfig = std::make_shared<const helios::rendering::mesh::MeshConfig>(recShape.primitiveType());
     const auto recMesh        = std::make_shared<const helios::ext::opengl::rendering::model::OpenGLMesh>(recShape, recShapeConfig);
-    const auto recMaterial    = std::make_shared<const helios::rendering::model::Material>(shader, lineMaterialProps);
+    const auto recMaterial    = std::make_shared<const helios::rendering::material::Material>(shader, lineMaterialProps);
     const auto recPrototype   = std::make_shared<const helios::rendering::RenderPrototype>(recMaterial, recMesh);
 
     const auto circleRenderable = std::make_shared<helios::rendering::Renderable>(circlePrototype);
@@ -148,7 +148,7 @@ int main() {
     const auto recRenderable    = std::make_shared<helios::rendering::Renderable>(recPrototype);
 
     // create the button renderables
-    auto buttonMaterialPropsOverride = helios::rendering::model::config::MaterialPropertiesOverride(
+    auto buttonMaterialPropsOverride = helios::rendering::material::MaterialShaderPropertiesOverride(
         helios::math::vec4f(0.25f, 0.96f, 0.35f, 0.5f),
         0.0f
     );
@@ -168,25 +168,25 @@ int main() {
 
     //create the dpad renderables
     auto dpadRenderableLft = std::make_shared<helios::rendering::Renderable>(
-    recPrototype, helios::rendering::model::config::MaterialPropertiesOverride(
+    recPrototype, helios::rendering::material::MaterialShaderPropertiesOverride(
         helios::math::vec4f(1.0f, 1.0f, 0.0f, 0.5f),
         0.0f
     )
     );
     auto dpadRenderableRgt = std::make_shared<helios::rendering::Renderable>(
-    recPrototype, helios::rendering::model::config::MaterialPropertiesOverride(
+    recPrototype, helios::rendering::material::MaterialShaderPropertiesOverride(
         helios::math::vec4f(0.0f, 1.0f, 1.0f, 0.5f),
         0.0f
     )
     );
     auto dpadRenderableUp = std::make_shared<helios::rendering::Renderable>(
-    recPrototype, helios::rendering::model::config::MaterialPropertiesOverride(
+    recPrototype, helios::rendering::material::MaterialShaderPropertiesOverride(
         helios::math::vec4f(1.0f, 0.0f, 1.0f, 0.5f),
         0.0f
     )
     );
     auto dpadRenderableDown = std::make_shared<helios::rendering::Renderable>(
-    recPrototype, helios::rendering::model::config::MaterialPropertiesOverride(
+    recPrototype, helios::rendering::material::MaterialShaderPropertiesOverride(
         helios::math::vec4f(1.0f, 1.0f, 1.0f, 0.5f),
         0.0f
     )

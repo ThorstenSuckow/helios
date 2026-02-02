@@ -134,7 +134,10 @@ export namespace helios::rendering {
             :
             viewport_(viewport),
             renderQueue_(std::move(renderQueue)),
-            frameUniformValues_(frameUniformValues) {}
+            frameUniformValues_(frameUniformValues) {
+
+            assert(viewport_ != nullptr && "Unexpected nullptr for viewport in RenderPass constructor");
+        }
 
         /**
          * @brief Returns a const ref to the `RenderQueue` this `RenderPass` holds.

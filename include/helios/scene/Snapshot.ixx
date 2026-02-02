@@ -5,8 +5,9 @@
 module;
 
 
-#include <vector>
 #include <memory>
+#include <span>
+#include <vector>
 
 export module helios.scene.Snapshot;
 
@@ -58,7 +59,7 @@ export namespace helios::scene {
         /**
          * @brief The viewport associated with this Snapshot.
          */
-        std::shared_ptr<const helios::rendering::Viewport> viewport_;
+        const helios::rendering::Viewport& viewport_;
 
     public:
 
@@ -79,6 +80,16 @@ export namespace helios::scene {
         Snapshot& operator=(const Snapshot&) = delete;
 
         /**
+         * @brief Delete move constructor.
+         */
+        Snapshot(Snapshot&&) noexcept = delete;
+
+        /**
+         * @brief Delete move assignment.
+         */
+        Snapshot& operator=(Snapshot&&) noexcept = delete;
+
+        /**
          * @brief Constructs a new immutable Snapshot from the given data.
          *
          * @param viewport The viewport associated with this snapshot.
@@ -88,7 +99,7 @@ export namespace helios::scene {
          * transferring ownership to this instance.
          */
         Snapshot(
-            std::shared_ptr<const helios::rendering::Viewport> viewport,
+            const helios::rendering::Viewport& viewport,
             const math::mat4f& projectionMatrix,
             const math::mat4f& viewMatrix,
             std::vector<SnapshotItem> snapshotItems) noexcept :
@@ -105,7 +116,7 @@ export namespace helios::scene {
          *
          * @return A const reference to this Snapshot's collection of SnapshotItems.
          */
-        [[nodiscard]] const std::vector<SnapshotItem>& snapshotItems() const noexcept {
+        [[nodiscard]] std::span<const SnapshotItem> snapshotItems() const noexcept {
             return snapshotItems_;
         }
 
@@ -114,7 +125,7 @@ export namespace helios::scene {
          *
          * @return A shared pointer to the const Viewport.
          */
-        [[nodiscard]] std::shared_ptr<const helios::rendering::Viewport> viewport() const noexcept {
+        [[nodiscard]] const helios::rendering::Viewport& viewport() const noexcept {
             return viewport_;
         }
 

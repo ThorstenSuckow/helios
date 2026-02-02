@@ -58,7 +58,7 @@ export namespace helios::engine::modules::rendering::renderable::components {
          * @brief Copy Constructor
          */
         explicit RenderableComponent(const RenderableComponent& other)  :
-        renderable_(std::move(other.renderable_)), aabb_(other.aabb_) {}
+        renderable_(other.renderable_), aabb_(other.aabb_) {}
 
 
         /**
@@ -79,13 +79,24 @@ export namespace helios::engine::modules::rendering::renderable::components {
         }
 
         /**
-         * @brief Retrieves the stored Renderable.
+         * @brief Retrieves a shared pointer to the stored Renderable.
          *
          * @return Shared pointer to the Renderable.
          */
-        [[nodiscard]] std::shared_ptr<helios::rendering::Renderable> renderable() const noexcept {
+        [[nodiscard]] std::shared_ptr<helios::rendering::Renderable> shareRenderable() const noexcept {
             return renderable_;
         }
+
+        /**
+         * @brief Retrieves a const ref to the stored Renderable.
+         *
+         * @return Const ref to the Renderable (never null after construction).
+         */
+        [[nodiscard]] const helios::rendering::Renderable& renderable() const noexcept {
+            return *renderable_;
+        }
+
+
 
     };
 

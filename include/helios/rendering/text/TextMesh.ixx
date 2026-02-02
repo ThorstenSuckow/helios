@@ -7,8 +7,10 @@ module;
 #include <memory>
 #include <span>
 #include <string>
+#include <limits>
 #include <algorithm>
 #include <utility>
+#include <vector>
 
 export module helios.rendering.text.TextMesh;
 

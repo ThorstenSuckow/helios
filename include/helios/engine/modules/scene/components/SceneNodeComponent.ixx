@@ -62,7 +62,7 @@ export namespace helios::engine::modules::scene::components {
 
             assert(parent != nullptr && "unexpected nullptr for SceneNode's parent");
 
-            auto sceneNode = std::make_unique<helios::scene::SceneNode>(other.sceneNode_->renderable());
+            auto sceneNode = std::make_unique<helios::scene::SceneNode>(other.sceneNode_->shareRenderable());
 
             sceneNode_ = parent->addNode(std::move(sceneNode));
         }
@@ -81,10 +81,10 @@ export namespace helios::engine::modules::scene::components {
         void onAttach(helios::engine::ecs::GameObject* gameObject) noexcept override {
             Component::onAttach(gameObject);
 
-            assert(sceneNode_->renderable() != nullptr && "Unexpected nullptr for SceneNode's renderable");
+            assert(sceneNode_->shareRenderable() != nullptr && "Unexpected nullptr for SceneNode's renderable");
 
             // this will automatically create the RenderableComponent if not alreay registered
-            gameObject->getOrAdd<helios::engine::modules::rendering::renderable::components::RenderableComponent>(sceneNode_->renderable());
+            gameObject->getOrAdd<helios::engine::modules::rendering::renderable::components::RenderableComponent>(sceneNode_->shareRenderable());
         }
 
         /**

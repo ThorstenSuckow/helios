@@ -17,8 +17,8 @@ import helios.math.types;
 import helios.rendering.RenderingDevice;
 import helios.rendering.RenderQueue;
 import helios.rendering.RenderPass;
-import helios.rendering.model.config.PrimitiveType;
-import helios.rendering.model.config.MeshConfig;
+import helios.rendering.mesh.PrimitiveType;
+import helios.rendering.mesh.MeshConfig;
 import helios.rendering.ClearFlags;
 import helios.rendering.RenderTarget;
 import helios.rendering.Viewport;
@@ -29,6 +29,7 @@ import helios.rendering.text.FontResourceProvider;
 import helios.ext.opengl.rendering.model.OpenGLMesh;
 import helios.ext.opengl.rendering.shader.OpenGLShader;
 import helios.ext.opengl.rendering.OpenGLGlyphTextRenderer;
+import helios.ext.opengl.rendering.OpenGLMeshRenderer;
 
 export namespace helios::ext::opengl::rendering {
 
@@ -64,38 +65,6 @@ export namespace helios::ext::opengl::rendering {
      */
     class OpenGLDevice : public  helios::rendering::RenderingDevice {
 
-        /**
-         * @brief Translates helios abstract PrimitiveType enum to its corresponding OpenGL GLenum value.
-         *
-         * This is a utility function used exclusively by the OpenGLDevice to interpret the
-         * API-agnostic primitive type requested by the helios configuration.
-         *
-         * @param primitiveType The API-agnostic PrimitiveType value.
-         *
-         * @return The corresponding OpenGL primitive type as a GLenum. If mapping does not
-         * succeed, the function falls back to GL_TRIANGLES.
-         */
-        [[nodiscard]] GLenum toOpenGL(helios::rendering::model::config::PrimitiveType primitiveType) const noexcept {
-            switch (primitiveType) {
-                case helios::rendering::model::config::PrimitiveType::Points:
-                    return GL_POINTS;
-                case helios::rendering::model::config::PrimitiveType::Lines:
-                    return GL_LINES;
-                case helios::rendering::model::config::PrimitiveType::LineLoop:
-                    return GL_LINE_LOOP;
-                case helios::rendering::model::config::PrimitiveType::LineStrip:
-                    return GL_LINE_STRIP;
-                case helios::rendering::model::config::PrimitiveType::Triangles:
-                    return GL_TRIANGLES;
-                case helios::rendering::model::config::PrimitiveType::TriangleStrip:
-                    return GL_TRIANGLE_STRIP;
-                case helios::rendering::model::config::PrimitiveType::TriangleFan:
-                    return GL_TRIANGLE_FAN;
-                default:
-                    logger_.warn("Failed to resolve primitive type, falling back to GL_TRIANGLES.");
-                    return GL_TRIANGLES;
-            }
-        }
 
         /**
          * @brief Text renderer for FreeType-based glyph rendering.
@@ -103,36 +72,32 @@ export namespace helios::ext::opengl::rendering {
         std::unique_ptr<helios::ext::opengl::rendering::OpenGLGlyphTextRenderer> textRenderer_;
 
         /**
+         * @brief Mesh renderer for geometry rendering.
+         */
+        std::unique_ptr<helios::ext::opengl::rendering::OpenGLMeshRenderer> meshRenderer_;
+
+        /**
          * @brief Font resource provider for loading fonts and retrieving glyph data.
          */
         std::unique_ptr<helios::rendering::text::FontResourceProvider> fontResourceProvider_;
-
-        /**
-         * @brief Cached pointer to the last used shader for state optimization.
-         */
-        mutable const helios::ext::opengl::rendering::shader::OpenGLShader* lastShader_ = nullptr;
-
-        /**
-         * @brief Cached VAO ID for state optimization.
-         */
-        mutable unsigned int lastVao_ = 0;
 
 
     public:
         ~OpenGLDevice() override = default;
 
         /**
-         * @brief Constructs an OpenGLDevice with the given text renderer and font provider.
+         * @brief Constructs an OpenGLDevice with the given renderers and font provider.
          *
-         * @param textRenderer The text renderer to use for glyph-based text rendering.
-         *                     Ownership is transferred to this device.
+         * @param meshRenderer The mesh renderer for geometry rendering.
+         * @param textRenderer The text renderer for glyph-based text rendering.
          * @param fontResourceProvider The font resource provider for loading fonts.
-         *                             Ownership is transferred to this device.
          */
         explicit OpenGLDevice(
+            std::unique_ptr<helios::ext::opengl::rendering::OpenGLMeshRenderer> meshRenderer,
             std::unique_ptr<helios::ext::opengl::rendering::OpenGLGlyphTextRenderer> textRenderer,
             std::unique_ptr<helios::rendering::text::FontResourceProvider> fontResourceProvider
         ) :
+        meshRenderer_(std::move(meshRenderer)),
         textRenderer_(std::move(textRenderer)),
         fontResourceProvider_(std::move(fontResourceProvider)){}
 
@@ -180,10 +145,7 @@ export namespace helios::ext::opengl::rendering {
          * @see clearColor()
          */
         void beginRenderPass(helios::rendering::RenderPass& renderPass) const noexcept override {
-            // Reset cached state at the beginning of each render pass
-            // to ensure proper shader and VAO binding even when render queue contents change
-            lastShader_ = nullptr;
-            lastVao_ = 0;
+            meshRenderer_->beginRenderPass(renderPass);
 
             const auto& viewport = renderPass.viewport();
 
@@ -227,43 +189,31 @@ export namespace helios::ext::opengl::rendering {
         void doRender(helios::rendering::RenderPass& renderPass) const noexcept override {
             const auto& renderQueue = renderPass.renderQueue();
 
-
-
-            for (auto& rc: renderQueue.meshRenderCommands()) {
-
-                if (const auto renderPrototype_ptr = rc.renderPrototype()) {
-                    const auto& baseShader = renderPrototype_ptr->material().shader();
-                    const auto& baseMesh = renderPrototype_ptr->mesh();
-
-                    const auto* shader = static_cast<const helios::ext::opengl::rendering::shader::OpenGLShader*>(&baseShader);
-                    assert(shader && "Unexpected failure when casting to OpenGLShader.");
-
-                    if (shader != lastShader_) {
-                        shader->use();
-                        lastShader_ = shader;
-                    }
-
-                    shader->applyUniformValues(renderPass.frameUniformValues());
-                    shader->applyUniformValues(rc.objectUniformValues());
-                    shader->applyUniformValues(rc.materialUniformValues());
-
-                    const auto* mesh = static_cast<const helios::ext::opengl::rendering::model::OpenGLMesh*>(&baseMesh);
-                    assert(mesh && "Unexpected failure when casting to OpenGLMesh.");
-
-                    const auto [primitiveType] = mesh->meshConfig();
-
-                    if (mesh->vao() != lastVao_) {
-                        glBindVertexArray(mesh->vao());
-                        lastVao_ = mesh->vao();
-                    }
-
-                    glDrawElements(toOpenGL(primitiveType), mesh->indexCount(), GL_UNSIGNED_INT, nullptr);
-                }
+            if (renderQueue.meshRenderCommandsSize() > 0) {
+                renderMeshCommands(renderPass);
             }
 
             if (renderQueue.textRenderCommandsSize() > 0) {
                 renderTextCommands(renderPass);
             }
+        }
+
+        /**
+         * @brief Renders all mesh commands in the render pass.
+         *
+         * Iterates through the mesh render commands in the render queue and delegates
+         * each command to the `OpenGLMeshRenderer` for rendering.
+         *
+         * @param renderPass The render pass containing mesh render commands.
+         */
+        void renderMeshCommands(const helios::rendering::RenderPass& renderPass) const noexcept {
+
+            const auto& renderQueue = renderPass.renderQueue();
+
+            for (auto& rc: renderQueue.meshRenderCommands()) {
+                meshRenderer_->render(rc, renderPass.frameUniformValues());
+            }
+
         }
 
         /**
@@ -278,12 +228,9 @@ export namespace helios::ext::opengl::rendering {
             const auto& renderQueue = renderPass.renderQueue();
 
             for (auto& rc: renderQueue.textRenderCommands()) {
-
-                textRenderer_->render(rc, renderPass.frameUniformValues());//shader, text, screenPosition, scale);
+                textRenderer_->render(rc, renderPass.frameUniformValues());
             }
         }
-
-
 
         /**
          * @brief Ends the specified render pass.

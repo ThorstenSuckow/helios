@@ -183,7 +183,7 @@ int main() {
             rnb.renderable()
                .shader(shader_ptr)
                .color(helios::util::Colors::Turquoise.withW(0.2f))
-               .primitiveType(helios::rendering::model::config::PrimitiveType::Lines)
+               .primitiveType(helios::rendering::mesh::PrimitiveType::Lines)
                .shape(std::make_shared<helios::rendering::asset::shape::basic::Grid>(29, 19))
                .attachTo(&root);
         })
@@ -201,7 +201,7 @@ int main() {
             rnb.renderable()
                .shader(shader_ptr)
                .color(helios::util::Colors::Yellow)
-               .primitiveType(helios::rendering::model::config::PrimitiveType::LineLoop)
+               .primitiveType(helios::rendering::mesh::PrimitiveType::LineLoop)
                .shape(std::make_shared<helios::rendering::asset::shape::basic::Triangle>())
                .attachTo(&root);
         })
@@ -226,7 +226,7 @@ int main() {
             rnb.renderable()
                .shader(shader_ptr)
                .color(helios::util::Colors::White)
-               .primitiveType(helios::rendering::model::config::PrimitiveType::Lines)
+               .primitiveType(helios::rendering::mesh::PrimitiveType::Lines)
                .shape(std::make_shared<helios::rendering::asset::shape::basic::Line>())
                .build();
 
@@ -241,7 +241,7 @@ int main() {
             rnb.renderable()
                .shader(shader_ptr)
                .color(helios::util::Colors::Red)
-               .primitiveType(helios::rendering::model::config::PrimitiveType::Lines)
+               .primitiveType(helios::rendering::mesh::PrimitiveType::Lines)
                .shape(std::make_shared<helios::rendering::asset::shape::basic::Line>())
                .build();
 

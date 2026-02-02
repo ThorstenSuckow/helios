@@ -7,7 +7,7 @@ module;
 export module helios.engine.builder.gameObject.builders.RenderingBuilder;
 
 import helios.engine.ecs.GameObject;
-import helios.engine.builder.gameObject.builders.configs.RenderableConfig;
+import helios.engine.builder.gameObject.builders.configs.MeshRenderableConfig;
 import helios.engine.builder.gameObject.builders.configs.SceneNodeConfig;
 
 export namespace helios::engine::builder::gameObject::builders {
@@ -37,10 +37,10 @@ export namespace helios::engine::builder::gameObject::builders {
         /**
          * @brief Returns a config for renderable (mesh/material) setup.
          *
-         * @return RenderableConfig for fluent configuration.
+         * @return MeshRenderableConfig for fluent configuration.
          */
-        helios::engine::builder::gameObject::builders::configs::RenderableConfig renderable() const {
-            return helios::engine::builder::gameObject::builders::configs::RenderableConfig{gameObject_};
+        helios::engine::builder::gameObject::builders::configs::MeshRenderableConfig meshRenderable() const {
+            return helios::engine::builder::gameObject::builders::configs::MeshRenderableConfig{gameObject_};
         }
 
         /**

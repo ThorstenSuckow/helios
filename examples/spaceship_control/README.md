@@ -73,7 +73,7 @@ The example uses the fluent builder pattern for GameObject creation:
 auto shipGameObject = GameObjectFactory::instance()
     .gameObject()
     .withRendering([&](auto& rnb) {
-        rnb.renderable()
+        rnb.meshRenderable()
            .shader(shader)
            .color(Colors::Yellow)
            .primitiveType(PrimitiveType::LineLoop)
@@ -161,7 +161,7 @@ while (!win->shouldClose()) {
     gameLoop.update(gameWorld, deltaTime, inputSnapshot);
     
     // Render scene
-    const auto& snapshot = scene->createSnapshot(mainViewport);
+    const auto& snapshot = scene->createSnapshot(*mainViewport);
     if (snapshot.has_value()) {
         auto renderPass = RenderPassFactory::getInstance().buildRenderPass(*snapshot);
         app->renderingDevice().render(renderPass);

@@ -1,142 +1,192 @@
 // ============================================================================
+// Text Rendering Demo
+// ============================================================================
+//
+// This example demonstrates dynamic text rendering using the helios text
+// rendering system. It showcases:
+// - FreeType-based glyph rendering with OpenGL
+// - Font loading and configuration
+// - Orthographic projection for 2D UI text
+// - Real-time text updates (displaying frame time)
+//
+// ============================================================================
+
+// ============================================================================
 // Includes
 // ============================================================================
 
-#include <cassert>
 #include <iostream>
 #include <memory>
-#include <ostream>
 #include <string>
-#include <vector>
-
 
 import helios.ext;
 import helios;
 
-#define ASPECT_RATIO_NUMER 4
-#define ASPECT_RATIO_DENOM 3
-
-
-
 
 int main() {
 
+    // ========================================================================
+    // 1. Constants
+    // ========================================================================
+    constexpr int SCREEN_WIDTH = 1920;
+    constexpr int SCREEN_HEIGHT = 1080;
+    constexpr float ASPECT_RATIO_NUMER = 16.0f;
+    constexpr float ASPECT_RATIO_DENOM = 9.0f;
 
-    // ========================================
-    // Window Setup
-    // ========================================
+    // ========================================================================
+    // 2. Application and Window Setup
+    // ========================================================================
+    // Create an OpenGL application with GLFW window management.
     const auto app = helios::ext::glfw::app::GLFWFactory::makeOpenGLApp(
-        "helios - Text Rendering Demo", 800, 600, ASPECT_RATIO_NUMER, ASPECT_RATIO_DENOM
+        "helios - Text Rendering Demo",
+        SCREEN_WIDTH, SCREEN_HEIGHT,
+        ASPECT_RATIO_NUMER, ASPECT_RATIO_DENOM
     );
 
-    auto win = dynamic_cast<helios::ext::glfw::window::GLFWWindow*>(app->current());
-    auto mainViewport = std::make_shared<helios::rendering::Viewport>(0.0f, 0.0f, 1.0f, 1.0f);
+    auto* win = dynamic_cast<helios::ext::glfw::window::GLFWWindow*>(app->current());
 
+    // Create the main viewport covering the full window.
+    auto mainViewport = std::make_shared<helios::rendering::Viewport>(0.0f, 0.0f, 1.0f, 1.0f);
     mainViewport->setClearFlags(std::to_underlying(helios::rendering::ClearFlags::Color))
-                  .setClearColor(helios::math::vec4f(0.051f, 0.051f, 0.153f, 1.0f));
+                .setClearColor(helios::math::vec4f(0.051f, 0.051f, 0.153f, 1.0f));
     win->addViewport(mainViewport);
 
-    helios::input::InputManager& inputManager = app->inputManager();
+    // Disable logging for cleaner console output.
+    helios::util::log::LogManager::getInstance().enableLogging(false);
 
-    // ========================================
-    // Freetype
-    // ========================================
+    // ========================================================================
+    // 3. Frame Timing Setup
+    // ========================================================================
+    // Configure frame pacing for consistent timing (0 = unlimited FPS).
+    auto fpsMetrics = helios::engine::tooling::FpsMetrics();
+    auto framePacer = helios::engine::tooling::FramePacer(
+        std::make_unique<helios::util::time::Stopwatch>()
+    );
+    framePacer.setTargetFps(0.0f);
+    helios::engine::tooling::FrameStats frameStats{};
 
+    // ========================================================================
+    // 4. UI Scene and Camera Setup
+    // ========================================================================
+    // Create a dedicated scene for UI elements with no culling.
+    auto uiScene = std::make_unique<helios::scene::Scene>(
+        std::make_unique<helios::scene::CullNoneStrategy>()
+    );
 
+    // Create a viewport for UI rendering.
+    auto uiViewport = std::make_shared<helios::rendering::Viewport>(0.0f, 0.0f, 1.0f, 1.0f);
+    uiViewport->setClearFlags(std::to_underlying(helios::rendering::ClearFlags::Color));
+    win->addViewport(uiViewport);
 
-    // use orthographic projection. The top parameter could be set to the original window's
-    // height, this should be bound to the framebuffer's size the rendering oocurs later on.
-    // (0.0f, 0.0f) refers to the bottom left corner of the screen.
-    helios::math::mat4f projection = helios::math::ortho(0.0f, 800.0f, 0.0f, 600.0f, -1.0f, 100.0);
+    // Configure orthographic camera for 2D text rendering.
+    // Origin (0,0) is at the bottom-left corner of the screen.
+    auto uiCamera = std::make_unique<helios::scene::Camera>();
+    auto uiCameraSceneNode = std::make_unique<helios::scene::CameraSceneNode>(std::move(uiCamera));
+    auto* uiCameraSceneNode_ptr = uiCameraSceneNode.get();
 
+    uiCameraSceneNode_ptr->setInheritance(helios::math::TransformType::Translation);
+    uiViewport->setCameraSceneNode(uiCameraSceneNode_ptr);
+    uiCameraSceneNode_ptr->setTranslation(helios::math::vec3f(0.0f, 0.0f, -100.0f));
+    uiCameraSceneNode_ptr->camera().setOrtho(0, SCREEN_WIDTH, 0, SCREEN_HEIGHT);
+    uiCameraSceneNode_ptr->lookAtLocal(
+        helios::math::vec3f(0.0f, 0.0f, 0.0f),
+        helios::math::vec3f(0.0f, 1.0f, 0.0f)
+    );
 
+    std::ignore = uiScene->addNode(std::move(uiCameraSceneNode));
 
-    auto uniformLocationMap = std::make_unique<helios::ext::opengl::rendering::shader::OpenGLUniformLocationMap>();
-    auto success = uniformLocationMap->set(helios::rendering::shader::UniformSemantics::ProjectionMatrix, 1);
-    success = uniformLocationMap->set(helios::rendering::shader::UniformSemantics::TextTexture, 3);
-    success = uniformLocationMap->set(helios::rendering::shader::UniformSemantics::TextColor, 4);
+    // ========================================================================
+    // 5. Text Shader Setup
+    // ========================================================================
+    // Configure uniform locations for the text shader.
+    auto glyphUniformLocationMap = std::make_unique<
+        helios::ext::opengl::rendering::shader::OpenGLUniformLocationMap
+    >();
+    glyphUniformLocationMap->set(helios::rendering::shader::UniformSemantics::ProjectionMatrix, 1);
+    glyphUniformLocationMap->set(helios::rendering::shader::UniformSemantics::TextTexture, 3);
+    glyphUniformLocationMap->set(helios::rendering::shader::UniformSemantics::TextColor, 4);
+    glyphUniformLocationMap->set(helios::rendering::shader::UniformSemantics::ModelMatrix, 8);
+    glyphUniformLocationMap->set(helios::rendering::shader::UniformSemantics::ViewMatrix, 9);
 
-    auto shader = std::make_shared<helios::ext::opengl::rendering::shader::OpenGLShader>(
+    // Create the text shader from vertex and fragment shader files.
+    auto glyphShader = std::make_shared<helios::ext::opengl::rendering::shader::OpenGLShader>(
         "resources/font_shader.vert",
         "resources/font_shader.frag",
         helios::util::io::BasicStringFileReader()
     );
+    glyphShader->setUniformLocationMap(std::move(glyphUniformLocationMap));
 
-    shader->setUniformLocationMap(std::move(uniformLocationMap));
+    // ========================================================================
+    // 6. Font Loading
+    // ========================================================================
+    // Load the font via the rendering device's font resource provider.
+    auto fontId = helios::engine::core::data::FontId{"roboto"};
+    auto& fontResourceProvider = app->renderingDevice().fontResourceProvider();
+    fontResourceProvider.loadFont(fontId, "resources/Roboto-SemiBoldItalic.ttf");
 
-
-    // define global text properties (arial)
-
-
-    auto WorkbenchFont = helios::engine::core::data::FontId{"wokbench"};
-
-    // create reusable text prototype with specific shader using the global text properties.
-    auto textPrototype = std::make_shared<helios::rendering::text::TextRenderPrototype>(
-        shader, std::make_shared<helios::rendering::text::config::TextShaderProperties>()
+    // ========================================================================
+    // 7. Text Prototype and Renderable Creation
+    // ========================================================================
+    // Create a reusable text prototype with shader and font configuration.
+    auto uiTextPrototype = std::make_shared<helios::rendering::text::TextRenderPrototype>(
+        glyphShader,
+        std::make_shared<helios::rendering::text::TextShaderProperties>(),
+        &fontResourceProvider
     );
 
-    // create a unique TextRenderable that renders the string "Hello World!"
-    auto textRenderable = std::make_unique<helios::rendering::text::TextRenderable>(
-        "Hello World",
-        textPrototype,
-        helios::rendering::text::DrawProperties{
-            .fontId=WorkbenchFont,
-            .position=helios::math::vec2f{50.0f, 50.0f}
-        },
-        helios::rendering::text::config::TextShaderPropertiesOverride{
-            .baseColor=helios::util::Colors::Pink
-        }
+    // Create a TextRenderable for displaying dynamic text.
+    auto textRenderable = std::make_shared<helios::rendering::text::TextRenderable>(
+        std::make_unique<helios::rendering::text::TextMesh>("Hello World!", fontId),
+        uiTextPrototype
     );
 
+    // Add the text to the UI scene graph.
+    auto textSceneNode = std::make_unique<helios::scene::SceneNode>(textRenderable);
+    auto* textNode = uiScene->addNode(std::move(textSceneNode));
+    textNode->setScale({1.0f, 1.0f, 1.0f});
+    textNode->setTranslation({100.0f, 100.0f, 0.0f});
 
-    auto& openGlDevice = app->renderingDevice();
-    openGlDevice.textRenderer().addFontFamily(
-        WorkbenchFont, "resources/Roboto-SemiBoldItalic.ttf");
+    // ========================================================================
+    // 8. Input Setup
+    // ========================================================================
+    helios::input::InputManager& inputManager = app->inputManager();
 
+    // ========================================================================
+    // 9. Main Loop
+    // ========================================================================
+    float deltaTime = 0.0f;
 
-    // ========================================
-    // Main Loop
-    // ========================================
-    unsigned int i=0;
     while (!win->shouldClose()) {
+        framePacer.beginFrame();
 
+        // Process window events and poll input.
+        app->eventManager().dispatchAll();
         inputManager.poll(0.0f);
 
-        // Check for ESC key to close the application
+        // Exit on ESC key.
         if (inputManager.isKeyPressed(helios::input::types::Key::ESC)) {
             win->setShouldClose(true);
         }
 
-        auto frameUniformValues = std::make_unique<helios::rendering::shader::UniformValueMap>();
-        frameUniformValues->set(helios::rendering::shader::UniformSemantics::ProjectionMatrix, projection);
-        frameUniformValues->set(helios::rendering::shader::UniformSemantics::TextTexture, helios::ext::opengl::rendering::OpenGLGlyphTextRenderer::textTextureUnit());
+        // Update text content with current frame time.
+        textRenderable->setText(std::format("Frame Time: {:.4f} ms", deltaTime * 1000.0f));
 
-        auto uniformValues = helios::rendering::shader::UniformValueMap();
-        textRenderable->setText(std::format("Hello World {0}", i++));
-
-        // manually create command updates
-        textRenderable->writeUniformValues(uniformValues);
-
-        auto uiRenderQueue = std::make_unique<helios::rendering::RenderQueue>();
-
-        auto textRenderCommand = helios::rendering::text::TextRenderCommand(
-            std::string{textRenderable->text()},
-            textPrototype.get(),
-            textRenderable->drawProperties(),
-            uniformValues
-        );
-
-        uiRenderQueue->add(std::move(textRenderCommand));
-        auto uiRenderPass = helios::rendering::RenderPass(mainViewport, std::move(uiRenderQueue));
-        uiRenderPass.setFrameUniformValues(std::move(frameUniformValues));
-
-
-        openGlDevice.render(uiRenderPass);
+        // Render the UI scene.
+        const auto& uiSnapshot = uiScene->createSnapshot(*uiViewport);
+        if (uiSnapshot.has_value()) {
+            auto uiRenderPass = helios::rendering::RenderPassFactory::getInstance()
+                .buildRenderPass(*uiSnapshot);
+            app->renderingDevice().render(uiRenderPass);
+        }
 
         win->swapBuffers();
+
+        // Update frame timing.
+        frameStats = framePacer.sync();
+        fpsMetrics.addFrame(frameStats);
+        deltaTime = frameStats.totalFrameTime;
     }
 
 
-
-    return 0;
+    return EXIT_SUCCESS;
 }

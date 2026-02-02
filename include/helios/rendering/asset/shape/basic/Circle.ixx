@@ -13,7 +13,7 @@ export module helios.rendering.asset.shape.basic.Circle;
 import helios.rendering.asset.shape.Shape;
 import helios.rendering.Vertex;
 import helios.math.types;
-import helios.rendering.model.config.PrimitiveType;
+import helios.rendering.mesh.PrimitiveType;
 
 using namespace helios::rendering;
 
@@ -106,8 +106,8 @@ export namespace helios::rendering::asset::shape::basic {
                 generateIndices(segments)
             ) {}
 
-        [[nodiscard]] helios::rendering::model::config::PrimitiveType primitiveType() const noexcept override {
-            return model::config::PrimitiveType::Triangles;
+        [[nodiscard]] helios::rendering::mesh::PrimitiveType primitiveType() const noexcept override {
+            return mesh::PrimitiveType::Triangles;
         }
     };
 

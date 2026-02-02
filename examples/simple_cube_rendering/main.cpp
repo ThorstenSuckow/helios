@@ -58,8 +58,8 @@ int main() {
     // ========================================
     // Material properties are not considered in this demo, since we do not use
     // an OpenGLUniformLocationMap
-    auto cubeMaterialProps = MaterialProperties();
-    auto cubeMaterialProps_shared = std::make_shared<MaterialProperties>(cubeMaterialProps);
+    auto cubeMaterialProps = MaterialShaderProperties();
+    auto cubeMaterialProps_shared = std::make_shared<MaterialShaderProperties>(cubeMaterialProps);
     auto material_ptr = std::make_shared<Material>(
         shader_ptr, cubeMaterialProps_shared
     );

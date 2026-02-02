@@ -7,7 +7,7 @@ module;
 export module helios.engine.builder.gameObject.builders.configs;
 
 export import helios.engine.builder.gameObject.builders.configs.Move2DConfig;
-export import helios.engine.builder.gameObject.builders.configs.RenderableConfig;
+export import helios.engine.builder.gameObject.builders.configs.MeshRenderableConfig;
 export import helios.engine.builder.gameObject.builders.configs.SceneNodeConfig;
 export import helios.engine.builder.gameObject.builders.configs.SteeringConfig;
 export import helios.engine.builder.gameObject.builders.configs.TransformConfig;

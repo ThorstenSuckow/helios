@@ -77,16 +77,11 @@ export namespace helios::ext::opengl::rendering::shader {
          * @return true if the position for the specified uniformSemantics was registered with this
          * map, otherwise false (e.g. if position was < 0)
          */
-        [[nodiscard]] bool set(
+        bool set(
             helios::rendering::shader::UniformSemantics uniformSemantics,
             int position
         ) noexcept {
             assert(position >= 0 && "position must not be less than 0");
-
-            if (position < 0) {
-                logger_.error(std::format("position must not be < 0, was {0}", position));
-                return false;
-            }
 
             const decltype(sentinel_) index = std::to_underlying(uniformSemantics);
 

@@ -1,5 +1,5 @@
 /**
- * @file RenderableConfig.ixx
+ * @file MeshRenderableConfig.ixx
  * @brief Configuration for renderable components (mesh, material, shader).
  */
 module;
@@ -8,14 +8,14 @@ module;
 #include <unordered_map>
 #include <cassert>
 
-export module helios.engine.builder.gameObject.builders.configs.RenderableConfig;
+export module helios.engine.builder.gameObject.builders.configs.MeshRenderableConfig;
 
 import helios.engine.ecs.GameObject;
 import helios.rendering;
 import helios.ext.opengl;
 import helios.engine.modules.rendering;
 import helios.math.types;
-import helios.rendering.model.config;
+import helios.rendering.mesh;
 import helios.scene.SceneNode;
 
 import helios.engine.builder.gameObject.builders.configs.SceneNodeConfig;
@@ -29,7 +29,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
      * Allows specification of shape, shader, primitive type, and color.
      * Builds and attaches a RenderableComponent.
      */
-    class RenderableConfig {
+    class MeshRenderableConfig {
 
         /**
          * @brief Non-owning pointer to the target GameObject.
@@ -49,7 +49,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         /**
          * @brief The primitive type for mesh rendering.
          */
-        helios::rendering::model::config::PrimitiveType primitiveType_;
+        helios::rendering::mesh::PrimitiveType primitiveType_;
 
         /**
          * @brief The base color for the material.
@@ -57,15 +57,15 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         helios::math::vec4f color_;
 
         static inline std::unordered_map<
-            helios::rendering::model::config::PrimitiveType,
-            std::shared_ptr<helios::rendering::model::config::MeshConfig>
+            helios::rendering::mesh::PrimitiveType,
+            std::shared_ptr<helios::rendering::mesh::MeshConfig>
         > meshConfigs_;
 
-        static std::shared_ptr<helios::rendering::model::config::MeshConfig> meshConfig(helios::rendering::model::config::PrimitiveType primitiveType) {
+        static std::shared_ptr<helios::rendering::mesh::MeshConfig> meshConfig(helios::rendering::mesh::PrimitiveType primitiveType) {
 
             auto [it, inserted] = meshConfigs_.try_emplace(
                 primitiveType,
-                std::make_shared<helios::rendering::model::config::MeshConfig>(primitiveType)
+                std::make_shared<helios::rendering::mesh::MeshConfig>(primitiveType)
             );
 
             return it->second;
@@ -74,11 +74,11 @@ export namespace helios::engine::builder::gameObject::builders::configs {
     public:
 
         /**
-         * @brief Constructs a RenderableConfig for the given GameObject.
+         * @brief Constructs a MeshRenderableConfig for the given GameObject.
          *
          * @param gameObject Target GameObject to configure.
          */
-        explicit RenderableConfig(
+        explicit MeshRenderableConfig(
             helios::engine::ecs::GameObject* gameObject
         ) : gameObject_(gameObject) {}
 
@@ -89,7 +89,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @return Reference to this config for chaining.
          */
-        RenderableConfig& shape(std::shared_ptr<helios::rendering::asset::shape::Shape> shape) {
+        MeshRenderableConfig& shape(std::shared_ptr<helios::rendering::asset::shape::Shape> shape) {
             shape_ = shape;
 
             return *this;
@@ -102,7 +102,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @return Reference to this config for chaining.
          */
-        RenderableConfig& shader(std::shared_ptr<helios::ext::opengl::rendering::shader::OpenGLShader> shader) {
+        MeshRenderableConfig& shader(std::shared_ptr<helios::ext::opengl::rendering::shader::OpenGLShader> shader) {
             shader_ = shader;
 
             return *this;
@@ -115,7 +115,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @return Reference to this config for chaining.
          */
-        RenderableConfig& primitiveType(helios::rendering::model::config::PrimitiveType primitiveType) {
+        MeshRenderableConfig& primitiveType(helios::rendering::mesh::PrimitiveType primitiveType) {
             primitiveType_ = primitiveType;
 
             return *this;
@@ -128,7 +128,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @return Reference to this config for chaining.
          */
-        RenderableConfig& color(const helios::math::vec4f color) {
+        MeshRenderableConfig& color(const helios::math::vec4f color) {
             color_ = color;
 
             return *this;
@@ -153,17 +153,17 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @return Reference to this config for chaining.
          */
-        RenderableConfig& build() {
+        MeshRenderableConfig& build() {
 
             assert(shape_ && shader_ && "Unexpected missing shape and/or shader");
 
             auto mesh = std::make_shared<helios::ext::opengl::rendering::model::OpenGLMesh>(
                 *shape_,
-                std::move(RenderableConfig::meshConfig(primitiveType_))
+                std::move(MeshRenderableConfig::meshConfig(primitiveType_))
             );
 
-            auto materialProperties = std::make_shared<helios::rendering::model::config::MaterialProperties>(color_);
-            auto material = std::make_shared<helios::rendering::model::Material>(shader_, materialProperties);
+            auto materialProperties = std::make_shared<helios::rendering::material::MaterialShaderProperties>(color_);
+            auto material = std::make_shared<helios::rendering::material::Material>(shader_, materialProperties);
 
             const auto renderPrototype = std::make_shared<helios::rendering::RenderPrototype>(material, mesh);
 

@@ -10,7 +10,7 @@ module;
 export module helios.rendering.asset.shape.Shape;
 
 import helios.rendering.Vertex;
-import helios.rendering.model.config.PrimitiveType;
+import helios.rendering.mesh.PrimitiveType;
 
 using namespace helios::rendering;
 
@@ -55,7 +55,7 @@ export namespace helios::rendering::asset::shape {
          *
          * @return The intended PrimitiveType of this Shape.
          */
-        [[nodiscard]] virtual helios::rendering::model::config::PrimitiveType primitiveType() const noexcept = 0;
+        [[nodiscard]] virtual helios::rendering::mesh::PrimitiveType primitiveType() const noexcept = 0;
     };
 
 }

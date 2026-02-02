@@ -178,7 +178,6 @@ export namespace helios::ext::glfw::input {
                         );
 
                     } else {
-                        logger_.warn(std::format("Querying gamepad {0} as gamepad failed", std::to_underlying(gamepadId)));
                         // could also be a reset() method in GamepadState-object,
                         // but since we use it only once a manual assignment will do for now
                         gamepadStates_[index].updateAxes(

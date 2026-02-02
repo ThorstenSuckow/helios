@@ -6,7 +6,9 @@ module;
 
 #include <cassert>
 #include <format>
+#include <helios/helios_config.h>
 #include <memory>
+#include <span>
 #include <vector>
 
 export module helios.rendering.RenderQueue;
@@ -72,20 +74,19 @@ export namespace helios::rendering {
          */
         RenderQueue& operator=(const RenderQueue&) = delete;
 
-        /**
-         * @brief Delete move constructor.
-         */
-        RenderQueue(RenderQueue&&) noexcept = delete;
 
-        /**
-         * @brief Delete move assignment operator.
-         */
-        RenderQueue& operator=(RenderQueue&&) noexcept = delete;
+        RenderQueue(RenderQueue&&) noexcept = default;
+
+
+        RenderQueue& operator=(RenderQueue&&) noexcept = default;
 
         /**
          * @brief Constructs a new empty RenderQueue.
          */
-        RenderQueue() = default;
+        RenderQueue() {
+            textRenderCommands_.reserve(RENDERQUEUE_TEXTRENDER_COMMANDS_SIZE);
+            meshRenderCommands_.reserve(RENDERQUEUE_MESHRENDER_COMMANDS_SIZE);
+        };
 
         /**
          * @brief Adds a `RenderCommand` to this `RenderQueue`.
@@ -117,7 +118,7 @@ export namespace helios::rendering {
          *
          * @return A const ref to the list of `RenderCommand`s of this queue.
          */
-        [[nodiscard]] const std::vector<helios::rendering::mesh::MeshRenderCommand>& meshRenderCommands() const noexcept {
+        [[nodiscard]] std::span<const helios::rendering::mesh::MeshRenderCommand> meshRenderCommands() const  noexcept {
             return meshRenderCommands_;
         }
 
@@ -126,7 +127,7 @@ export namespace helios::rendering {
          *
          * @return A const ref to the list of text render commands in this queue.
          */
-        [[nodiscard]] const std::vector<helios::rendering::text::TextRenderCommand>& textRenderCommands() const noexcept {
+        [[nodiscard]] std::span<const helios::rendering::text::TextRenderCommand> textRenderCommands() const  noexcept {
             return textRenderCommands_;
         }
 

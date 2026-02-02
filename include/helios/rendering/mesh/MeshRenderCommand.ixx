@@ -14,12 +14,30 @@ import helios.rendering.shader.UniformValueMap;
 export namespace helios::rendering::mesh {
 
     /**
-     * @brief DTO for storing rendering-specific command information to be
-     * passed to the RenderQueue.
+     * @brief DTO for storing rendering-specific command information to be passed to the RenderQueue.
      *
-     * A `MeshRenderCommand` holds a non-owning raw pointer to the `RenderPrototype`.
-     * The caller must ensure that the `RenderPrototype` remains valid for the
-     * lifetime of this command (typically within a single frame).
+     * A `MeshRenderCommand` encapsulates all data needed to render a single mesh instance:
+     * - A reference to the `RenderPrototype` (mesh + material)
+     * - Object-specific uniform values (e.g., model matrix)
+     * - Material-specific uniform values (e.g., colors, textures)
+     *
+     * ## Ownership Model
+     *
+     * - **RenderPrototype:** Non-owning raw pointer. The caller must ensure that the
+     *   `RenderPrototype` remains valid for the lifetime of this command (typically
+     *   within a single frame).
+     * - **UniformValueMaps:** Owned by the command. Moved into the command on construction.
+     *
+     * ## Design
+     *
+     * - **Move-Only:** Commands are non-copyable to prevent accidental duplication
+     *   during render queue processing.
+     * - **Single-Frame Lifetime:** Commands are typically created during scene traversal
+     *   and consumed by the renderer within the same frame.
+     *
+     * @see RenderQueue
+     * @see MeshRenderer
+     * @see RenderPrototype
      */
     class MeshRenderCommand {
         /**
@@ -34,13 +52,13 @@ export namespace helios::rendering::mesh {
          * This map contains uniforms that change per object instance, such as the world
          * transformation matrix.
          */
-        const helios::rendering::shader::UniformValueMap objectUniformValues_;
+        helios::rendering::shader::UniformValueMap objectUniformValues_;
 
         /**
          * @brief An owning, unique pointer to the uniform values specific to the material of the object to
          * be rendered. This map contains uniforms related to the surface properties of a material.
          */
-        const helios::rendering::shader::UniformValueMap materialUniformValues_;
+        helios::rendering::shader::UniformValueMap materialUniformValues_;
 
         public:
         /**
@@ -82,13 +100,13 @@ export namespace helios::rendering::mesh {
          * @param materialUniformValues A `UniformValueMap` containing all uniform values for the material.
          */
         MeshRenderCommand(
-        const helios::rendering::RenderPrototype* renderPrototype,
-        helios::rendering::shader::UniformValueMap objectUniformValues,
-        helios::rendering::shader::UniformValueMap materialUniformValues
+            const helios::rendering::RenderPrototype* renderPrototype,
+            const helios::rendering::shader::UniformValueMap& objectUniformValues,
+            const helios::rendering::shader::UniformValueMap& materialUniformValues
             ) noexcept :
         renderPrototype_(renderPrototype),
-        objectUniformValues_(std::move(objectUniformValues)),
-        materialUniformValues_(std::move(materialUniformValues)) { }
+        objectUniformValues_(objectUniformValues),
+        materialUniformValues_(materialUniformValues) { }
 
         /**
          * @brief Returns the RenderPrototype associated with this command.

@@ -12,7 +12,6 @@ export module helios.rendering.Renderable;
 
 import helios.rendering.RenderQueue;
 import helios.rendering.RenderPrototype;
-import helios.rendering.model.config.MaterialPropertiesOverride;
 import helios.rendering.shader.UniformValueMap;
 
 import helios.util.log.Logger;
@@ -120,8 +119,8 @@ export namespace helios::rendering {
          */
         virtual void emit(
             RenderQueue& renderQueue,
-            helios::rendering::shader::UniformValueMap objectUniformValues,
-            helios::rendering::shader::UniformValueMap  materialUniformValues) const = 0;
+            helios::rendering::shader::UniformValueMap& objectUniformValues,
+            helios::rendering::shader::UniformValueMap&  materialUniformValues) const = 0;
 
     };
 

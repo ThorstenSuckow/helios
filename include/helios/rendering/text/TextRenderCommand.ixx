@@ -114,13 +114,13 @@ export namespace helios::rendering::text {
         TextRenderCommand(
             const helios::rendering::text::TextMesh* textMesh,
             const helios::rendering::text::TextRenderPrototype* textRenderPrototype,
-            helios::rendering::shader::UniformValueMap objectUniformValues,
-            helios::rendering::shader::UniformValueMap materialUniformValues
+            const helios::rendering::shader::UniformValueMap& objectUniformValues,
+            const helios::rendering::shader::UniformValueMap& materialUniformValues
             ) noexcept :
                 textMesh_(textMesh),
                 textRenderPrototype_(textRenderPrototype),
-                objectUniformValues_(std::move(objectUniformValues)),
-                materialUniformValues_(std::move(materialUniformValues)) {
+                objectUniformValues_(objectUniformValues),
+                materialUniformValues_(materialUniformValues) {
 
             assert(textRenderPrototype_ && "TextRenderPrototype must not be null");
 

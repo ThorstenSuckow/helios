@@ -145,17 +145,20 @@ export namespace helios::rendering::mesh {
         /**
          * @brief Returns a shared pointer to the RenderPrototype used by this MeshRenderable.
          *
-         * **PERF-NOTE:** This method returns a copy of the `shared_ptr`, which triggers
-         * atomic reference count increment/decrement. If only read access is needed,
-         * consider adding a `const RenderPrototype&` overload or using `renderPrototype_.get()`
-         * directly for hot paths (e.g., during frame rendering).
-         *
          * @return A shared pointer to the RenderPrototype.
          */
         [[nodiscard]] std::shared_ptr<const helios::rendering::RenderPrototype> shareRenderPrototype() const noexcept {
             return renderPrototype_;
         }
 
+        /**
+         * @brief Returns a raw pointer to the RenderPrototype used by this MeshRenderable.
+         *
+         * This method provides direct access to the prototype without incrementing the
+         * reference count, making it suitable for use in hot rendering paths.
+         *
+         * @return A raw pointer to the RenderPrototype (never null after construction).
+         */
         [[nodiscard]] const helios::rendering::RenderPrototype* renderPrototype() const noexcept {
             return renderPrototype_.get();
         }
@@ -233,15 +236,15 @@ export namespace helios::rendering::mesh {
          */
         void emit(
             helios::rendering::RenderQueue& renderQueue,
-            helios::rendering::shader::UniformValueMap objectUniformValues,
-            helios::rendering::shader::UniformValueMap materialUniformValues) const override {
+            helios::rendering::shader::UniformValueMap& objectUniformValues,
+            helios::rendering::shader::UniformValueMap& materialUniformValues) const override {
 
             writeUniformValues(materialUniformValues);
 
             renderQueue.add(helios::rendering::mesh::MeshRenderCommand(
                 renderPrototype_.get(),
-                std::move(objectUniformValues),
-                std::move(materialUniformValues)
+                objectUniformValues,
+                materialUniformValues
             ));
         };
 

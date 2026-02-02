@@ -1,35 +1,29 @@
 #include <gtest/gtest.h>
 #include <memory>
 
-import helios.rendering.RenderPass;
-import helios.rendering.RenderQueue;
-import helios.rendering.RenderCommand;
-import helios.rendering.Viewport;
-import helios.rendering.ClearFlags;
-import helios.rendering.RenderPrototype;
-import helios.rendering.shader.UniformValueMap;
-import helios.rendering.shader.UniformSemantics;
+import helios.rendering;
 
 using namespace helios::rendering;
 using namespace helios::rendering::shader;
 
 TEST(RenderPassTest, HandlesArgsProperly) {
 
-    auto frameUniformValues = std::make_unique<UniformValueMap>();
-    frameUniformValues->set(UniformSemantics::MaterialRoughness, 1.0f);
+    auto frameUniformValues = UniformValueMap();
+    frameUniformValues.set(UniformSemantics::MaterialRoughness, 1.0f);
 
-    auto objectUniformValues = std::make_unique<UniformValueMap>();
-    std::weak_ptr<RenderPrototype> weak;
-    auto renderCommand = std::make_unique<RenderCommand>(weak, std::move(objectUniformValues), nullptr);
+    auto objectUniformValues = UniformValueMap();
+    auto materialUniformValues = UniformValueMap();
 
-    auto queue = std::make_unique<RenderQueue>();
-    queue->add(std::move(renderCommand));
+    auto renderCommand = mesh::MeshRenderCommand(nullptr, objectUniformValues, materialUniformValues);
 
-    const auto viewport = std::make_shared<const helios::rendering::Viewport>(0.0f, 0.0f, 1.0f, 1.0f);
+    auto queue = RenderQueue();
+    queue.add(std::move(renderCommand));
 
-    auto pass = RenderPass(viewport, std::move(queue), std::move(frameUniformValues));
+    auto viewport = helios::rendering::Viewport(0.0f, 0.0f, 1.0f, 1.0f);
 
-    EXPECT_EQ(pass.renderQueue().renderCommandsSize(), 1);
+    auto pass = RenderPass(&viewport, std::move(queue), frameUniformValues);
+
+    EXPECT_EQ(pass.renderQueue().meshRenderCommandsSize(), 1);
     const float* roughness = pass.frameUniformValues().float_ptr(UniformSemantics::MaterialRoughness);
     ASSERT_NE(roughness, nullptr);
     EXPECT_EQ(*roughness, 1.0f);
@@ -39,29 +33,29 @@ TEST(RenderPassTest, HandlesArgsProperly) {
 // --------------------
 // @see helios/#74
 // --------------------
-TEST(RenderPassTest, HandlesNullRenderQueueGracefully) {
-    auto uniformValues = std::make_unique<UniformValueMap>();
-    const auto viewport = std::make_shared<const helios::rendering::Viewport>(0.0f, 0.0f, 1.0f, 1.0f);
+TEST(RenderPassTest, HandlesEmptyRenderQueueGracefully) {
+    auto uniformValues = UniformValueMap();
+    auto viewport = helios::rendering::Viewport(0.0f, 0.0f, 1.0f, 1.0f);
 
-    auto pass = RenderPass(viewport, nullptr, std::move(uniformValues));
-    EXPECT_EQ(pass.renderQueue().renderCommandsSize(), 0);
+    auto pass = RenderPass(&viewport, RenderQueue(), uniformValues);
+    EXPECT_EQ(pass.renderQueue().meshRenderCommandsSize(), 0);
 }
 
-TEST(RenderPassTest, HandlesNullUniformValueMapGracefully) {
-    auto renderQueue = std::make_unique<RenderQueue>();
-    const auto viewport = std::make_shared<const helios::rendering::Viewport>(0.0f, 0.0f, 1.0f, 1.0f);
+TEST(RenderPassTest, HandlesEmptyUniformValueMapGracefully) {
+    auto renderQueue = RenderQueue();
+    auto viewport = helios::rendering::Viewport(0.0f, 0.0f, 1.0f, 1.0f);
 
-    auto pass = RenderPass(viewport, std::move(renderQueue), nullptr);
+    auto pass = RenderPass(&viewport, std::move(renderQueue), UniformValueMap());
 
     EXPECT_EQ(pass.frameUniformValues().mat4f_ptr(UniformSemantics::ModelMatrix), nullptr);
 }
 
-TEST(RenderPassTest, HandlesBothNullArgsGracefully) {
-    const auto viewport = std::make_shared<const helios::rendering::Viewport>(0.0f, 0.0f, 1.0f, 1.0f);
+TEST(RenderPassTest, HandlesBothEmptyArgsGracefully) {
+    auto viewport = helios::rendering::Viewport(0.0f, 0.0f, 1.0f, 1.0f);
 
-    auto pass = RenderPass(viewport, nullptr, nullptr);
+    auto pass = RenderPass(&viewport, RenderQueue(), UniformValueMap());
 
-    EXPECT_EQ(pass.renderQueue().renderCommandsSize(), 0);
+    EXPECT_EQ(pass.renderQueue().meshRenderCommandsSize(), 0);
     EXPECT_EQ(pass.frameUniformValues().mat4f_ptr(UniformSemantics::ModelMatrix), nullptr);
 }
 // --------------------
@@ -71,11 +65,13 @@ TEST(RenderPassTest, HandlesBothNullArgsGracefully) {
 // --------------------
 // @see helios/#
 // --------------------
-TEST(RenderPassTest, HandlesNullViewportGracefully) {
-    auto uniformValues = std::make_unique<UniformValueMap>();
+TEST(RenderPassTest, HandlesNullViewportE) {
+    auto uniformValues = UniformValueMap();
 
-    auto pass = RenderPass(nullptr, nullptr, std::move(uniformValues));
-    EXPECT_EQ(pass.viewport().clearFlags(), std::to_underlying(ClearFlags::Color));
+    #ifdef HELIOS_DEBUG
+        EXPECT_DEATH(
+                RenderPass(nullptr, RenderQueue(), uniformValues),
+                ".*Unexpected nullptr.*"
+        );
+    #endif
 }
-// --------------------
-// --------------------

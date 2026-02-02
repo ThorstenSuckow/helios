@@ -232,7 +232,7 @@ while (!win->shouldClose()) {
     ));
 
     // 5. Render the scene
-    const auto& snapshot = scene->createSnapshot(mainViewport);
+    const auto& snapshot = scene->createSnapshot(*mainViewport);
     if (snapshot.has_value()) {
         auto renderPass = RenderPassFactory::getInstance().buildRenderPass(*snapshot);
         app->renderingDevice().render(renderPass);

@@ -2,15 +2,13 @@
 #include <vector>
 
 import helios.rendering.Vertex;
-import helios.rendering.model;
+import helios.rendering;
 
-using namespace helios::rendering::model;
+
 using namespace helios::rendering;
 
-import helios.rendering.model;
 
-using namespace helios::rendering::model;
-using namespace helios::rendering::model::config;
+using namespace helios::rendering::mesh;
 using namespace helios::rendering;
 
 class MyMesh : public Mesh {

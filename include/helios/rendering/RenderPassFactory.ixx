@@ -14,7 +14,6 @@ import helios.scene.SnapshotItem;
 
 import helios.rendering.RenderPass;
 import helios.rendering.RenderQueue;
-import helios.rendering.RenderCommand;
 
 import helios.rendering.shader.UniformSemantics;
 import helios.rendering.shader.UniformValueMap;
@@ -26,12 +25,38 @@ import helios.util.log.LogManager;
 export namespace helios::rendering {
 
     /**
-     * @brief A factory class for constructing `RenderPass` objects and populating
-     * their `RenderQueue`s based on a `helios::scene::Snapshot`.
+     * @brief Factory for constructing `RenderPass` objects from scene snapshots.
      *
-     * @note This class implements a singleton pattern. In the future, the conversion of high-level
-     * scene data (Snapshot/SnapshotItems) into lower-level rendering
-     * commands might be realized with strategies and/or separate factories.
+     * `RenderPassFactory` transforms high-level scene data (`Snapshot` and `SnapshotItem`)
+     * into low-level rendering commands suitable for the rendering device. It creates
+     * `RenderPass` objects with populated `RenderQueue`s and configured frame uniforms.
+     *
+     * ## Responsibilities
+     *
+     * - Build `RenderPass` objects from `Snapshot` data.
+     * - Populate `RenderQueue` with `MeshRenderCommand` and `TextRenderCommand` objects.
+     * - Configure frame-level uniforms (view/projection matrices).
+     *
+     * ## Usage
+     *
+     * ```cpp
+     * auto& factory = RenderPassFactory::getInstance();
+     * auto snapshot = sceneGraph.createSnapshot(viewport);
+     * auto renderPass = factory.buildRenderPass(snapshot);
+     *
+     * device.beginRenderPass(renderPass);
+     * device.doRender(renderPass);
+     * device.endRenderPass(renderPass);
+     * ```
+     *
+     * @note This class implements a singleton pattern. In the future, the conversion
+     *       of high-level scene data into lower-level rendering commands might be
+     *       realized with strategies and/or separate factories.
+     *
+     * @see RenderPass
+     * @see Snapshot
+     * @see SnapshotItem
+     * @see RenderQueue
      */
     class RenderPassFactory {
 
@@ -56,50 +81,52 @@ export namespace helios::rendering {
         }
 
         /**
-         * @brief Builds a `RenderPass` from a given `helios::scene::Snapshot`.
+         * @brief Builds a `RenderPass` from a given `Snapshot`.
          *
          * This method orchestrates the creation of a `RenderQueue` and populates it
-         * with `RenderCommand`s derived from the `SnapshotItem`s within the snapshot.
-         * It also sets up frame-specific uniform values for the `RenderPass`.
+         * with render commands derived from the `SnapshotItem`s within the snapshot.
+         * It also sets up frame-specific uniform values (view and projection matrices)
+         * for the `RenderPass`.
          *
-         * @param snapshot A const ref to the snapshot containing the scene data for which
-         * the `RenderPass` is to be built.
+         * @param snapshot A const reference to the snapshot containing the scene data
+         *                 for which the `RenderPass` is to be built.
          *
-         * @return A fully constructed `RenderPass` object. The returned object owns the
-         * `RenderQueue` and the frame-specific `UniformValueMap`.
+         * @return A fully constructed `RenderPass` object containing the render queue
+         *         and frame-specific uniforms.
          *
-         * @see ::populateRenderQueue()
+         * @see populateRenderQueue()
          */
         [[nodiscard]] RenderPass buildRenderPass(const helios::scene::Snapshot& snapshot) const {
 
-            auto renderQueue = std::make_unique<RenderQueue>();
+            auto renderQueue = RenderQueue();
 
-            populateRenderQueue(snapshot, *renderQueue);
+            populateRenderQueue(snapshot, renderQueue);
 
             const auto& projectionMatrix = snapshot.projectionMatrix();
             const auto& viewMatrix = snapshot.viewMatrix();
 
-            auto frameUniformValues = std::make_unique<helios::rendering::shader::UniformValueMap>();
-            frameUniformValues->set(helios::rendering::shader::UniformSemantics::ProjectionMatrix, projectionMatrix);
-            frameUniformValues->set(helios::rendering::shader::UniformSemantics::ViewMatrix, viewMatrix);
+            auto frameUniformValues = helios::rendering::shader::UniformValueMap();
+            frameUniformValues.set(helios::rendering::shader::UniformSemantics::ProjectionMatrix, projectionMatrix);
+            frameUniformValues.set(helios::rendering::shader::UniformSemantics::ViewMatrix, viewMatrix);
 
             return RenderPass(
-                snapshot.viewport(),
+                &snapshot.viewport(),
                 std::move(renderQueue),
-                std::move(frameUniformValues)
+                frameUniformValues
             );
         }
 
         /**
-         * @brief Populates an existing `RenderQueue` with `RenderCommand`s based on a `Snapshot`.
+         * @brief Populates an existing `RenderQueue` with render commands based on a `Snapshot`.
          *
-         * This method clears the specified `RenderQueue` before adding new `RenderCommand`s to it.
+         * This method clears the specified `RenderQueue` before adding new commands.
+         * Each `SnapshotItem` in the snapshot is processed via `makeRenderCommand()`.
          *
-         * @param snapshot A const ref to the `Snapshot` providing scene data.
-         * @param renderQueue A ref to the `RenderQueue` to be filled. This queue will be cleared before
-         * new commands are added.
+         * @param snapshot A const reference to the `Snapshot` providing scene data.
+         * @param renderQueue A reference to the `RenderQueue` to be filled. This queue
+         *                    will be cleared before new commands are added.
          *
-         * @see ::makeRenderCommand()
+         * @see makeRenderCommand()
          */
         void populateRenderQueue(
             const helios::scene::Snapshot& snapshot, helios::rendering::RenderQueue& renderQueue) const {
@@ -107,7 +134,7 @@ export namespace helios::rendering {
             // clear the queue
             renderQueue.clear();
 
-            const auto& snapshotItems = snapshot.snapshotItems();
+            auto snapshotItems = snapshot.snapshotItems();
 
             for (const auto& item : snapshotItems) {
                 makeRenderCommand(item, renderQueue);
@@ -115,17 +142,18 @@ export namespace helios::rendering {
         }
 
         /**
-         * @brief Emits render commands from a `helios::scene::SnapshotItem` to the render queue.
+         * @brief Emits render commands from a `SnapshotItem` to the render queue.
          *
          * This method extracts necessary data from the `SnapshotItem`, sets up the object
          * uniform values (e.g., model matrix), and delegates to the `Renderable` to emit
          * its render commands to the queue.
          *
-         * @param snapshotItem A const ref to the `SnapshotItem` from which to create render commands.
-         * @param renderQueue A ref to the `RenderQueue` to emit commands to.
+         * @param snapshotItem A const reference to the `SnapshotItem` from which to create
+         *                     render commands.
+         * @param renderQueue A reference to the `RenderQueue` to emit commands to.
          *
-         * @note If the `Renderable` pointer in the `SnapshotItem` is `nullptr`, a warning is
-         *       logged and no commands are emitted.
+         * @note If the `Renderable` pointer in the `SnapshotItem` is `nullptr`, a warning
+         *       is logged and no commands are emitted.
          */
         void makeRenderCommand(
             const helios::scene::SnapshotItem& snapshotItem,
@@ -147,8 +175,8 @@ export namespace helios::rendering {
 
             renderable->emit(
                 renderQueue,
-                std::move(objectUniformValues),
-                std::move(materialUniformValues)
+               objectUniformValues,
+                materialUniformValues
             );
 
         }

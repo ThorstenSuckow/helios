@@ -99,7 +99,7 @@ Create implementations for:
 - `helios::window::Window` (if new windowing system)
 - `helios::rendering::RenderingDevice` (if new rendering API)
 - `helios::rendering::Shader`
-- `helios::rendering::model::Mesh`
+- `helios::rendering::mesh::Mesh`
 - `helios::input::InputAdapter` (if new input system)
 
 ### 2. Create Factory

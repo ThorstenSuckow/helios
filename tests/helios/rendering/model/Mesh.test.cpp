@@ -19,7 +19,7 @@ public:
     explicit MyMesh(
         std::shared_ptr<const std::vector<helios::rendering::Vertex>> vertices,
         std::shared_ptr<const std::vector<unsigned int>> indices,
-        std::shared_ptr<const helios::rendering::model::config::MeshConfig> meshConfig
+        std::shared_ptr<const helios::rendering::mesh::MeshConfig> meshConfig
         ) noexcept
             : Mesh(
                 std::move(vertices),

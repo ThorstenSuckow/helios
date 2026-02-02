@@ -7,15 +7,15 @@ module;
 #include <memory>
 #include <stdexcept>
 
-export module helios.rendering.model.Material;
+export module helios.rendering.material.Material;
 
 import helios.rendering.shader.UniformValueMap;
-import helios.rendering.model.config.MaterialProperties;
+import helios.rendering.material.MaterialShaderProperties;
 import helios.util.log;
 import helios.rendering.shader.Shader;
 
-#define HELIOS_LOG_SCOPE "helios::rendering::model::Material"
-export namespace helios::rendering::model {
+#define HELIOS_LOG_SCOPE "helios::rendering::material::Material"
+export namespace helios::rendering::material {
 
     /**
      * @brief Represents a parameterizable material.
@@ -30,9 +30,9 @@ export namespace helios::rendering::model {
         Material() = default;
 
         /**
-         * @brief Shared pointer for the raw, immutable MaterialProperties.
+         * @brief Shared pointer for the raw, immutable MaterialShaderProperties.
          */
-        std::shared_ptr<const helios::rendering::model::config::MaterialProperties> materialProperties_;
+        std::shared_ptr<const helios::rendering::material::MaterialShaderProperties> materialProperties_;
 
         /**
          * @brief Shared pointer to the immutable Shader.
@@ -51,13 +51,13 @@ export namespace helios::rendering::model {
          * @brief Creates a new Material.
          *
          * @param shader A shared pointer to the immutable Shader used by this instance.
-         * @param materialProperties A shared pointer to the MaterialProperties for this Material.
+         * @param materialProperties A shared pointer to the MaterialShaderProperties for this Material.
          *
          * @throws std::invalid_argument if shader or materialProperties is a null shared pointer.
          */
         explicit Material(
             std::shared_ptr<const helios::rendering::shader::Shader> shader,
-            std::shared_ptr<const helios::rendering::model::config::MaterialProperties> materialProperties
+            std::shared_ptr<const helios::rendering::material::MaterialShaderProperties> materialProperties
         ) :
             shader_(std::move(shader)),
             materialProperties_(std::move(materialProperties))
@@ -72,11 +72,11 @@ export namespace helios::rendering::model {
         }
 
         /**
-         * @brief Returns a const reference to the underlying MaterialProperties.
+         * @brief Returns a const reference to the underlying MaterialShaderProperties.
          *
-         * @return The const reference to this Material's MaterialProperties.
+         * @return The const reference to this Material's MaterialShaderProperties.
          */
-        [[nodiscard]] const helios::rendering::model::config::MaterialProperties& materialProperties() const noexcept {
+        [[nodiscard]] const helios::rendering::material::MaterialShaderProperties& materialProperties() const noexcept {
             return *materialProperties_;
         }
 
@@ -94,7 +94,7 @@ export namespace helios::rendering::model {
         /**
          * @brief Writes this Material's uniform values into the given map.
          *
-         * Delegates to MaterialProperties::writeUniformValues().
+         * Delegates to MaterialShaderProperties::writeUniformValues().
          *
          * @param uniformValueMap Target map receiving the uniform values.
          */

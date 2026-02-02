@@ -80,7 +80,6 @@ export namespace helios::scene {
         /**
          * @brief A shared pointer to the Renderable this node represents in the
          * SceneGraph. May be nullptr if this node does not represent a
-         * renderable object.
          */
         std::shared_ptr<helios::rendering::Renderable> renderable_;
 
@@ -257,7 +256,7 @@ export namespace helios::scene {
              *
              * @return A raw pointer to the Renderable, may be nullptr if none is set.
              */
-            [[nodiscard]] const helios::rendering::Renderable* renderable() const noexcept {
+            [[nodiscard]] helios::rendering::Renderable* renderable() noexcept {
                 return renderable_.get();
             }
 
@@ -271,11 +270,20 @@ export namespace helios::scene {
             }
 
             /**
+             * @brief Returns a const pointer to the non-const Renderable of this SceneNode.
+             *
+             * @return A shared_ptr to the Renderable, may be nullptr if none is set.
+             */
+            [[nodiscard]] const helios::rendering::Renderable* renderable() const noexcept {
+                return renderable_.get();
+            }
+
+            /**
              * @brief Returns a shared pointer to the non-const Renderable of this SceneNode.
              *
              * @return A shared_ptr to the Renderable, may be nullptr if none is set.
              */
-            [[nodiscard]] std::shared_ptr<helios::rendering::Renderable> renderable() noexcept {
+            [[nodiscard]] std::shared_ptr<helios::rendering::Renderable> shareRenderable() noexcept {
                 return renderable_;
             }
 

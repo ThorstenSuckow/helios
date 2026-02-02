@@ -18,7 +18,7 @@ import helios.rendering.RenderQueue;
 import helios.rendering.text.TextRenderCommand;
 
 import helios.rendering.text.TextRenderPrototype;
-import helios.rendering.text.config.TextShaderPropertiesOverride;
+import helios.rendering.text.TextShaderPropertiesOverride;
 import helios.rendering.text.TextMesh;
 
 import helios.rendering.shader.UniformValueMap;
@@ -67,7 +67,7 @@ export namespace helios::rendering::text {
         /**
          * @brief Optional overrides for text shader properties.
          */
-        std::optional<helios::rendering::text::config::TextShaderPropertiesOverride> textPropertiesOverride_;
+        std::optional<helios::rendering::text::TextShaderPropertiesOverride> textPropertiesOverride_;
 
         /**
          * @brief Positioning and styling data (font, position, scale).
@@ -90,7 +90,7 @@ export namespace helios::rendering::text {
         explicit TextRenderable(
             std::unique_ptr<helios::rendering::text::TextMesh> textMesh,
             std::shared_ptr<const helios::rendering::text::TextRenderPrototype> renderPrototype,
-            const std::optional<helios::rendering::text::config::TextShaderPropertiesOverride>& textPropertiesOverride = std::nullopt
+            const std::optional<helios::rendering::text::TextShaderPropertiesOverride>& textPropertiesOverride = std::nullopt
         ) :
             textRenderPrototype_(std::move(renderPrototype)),
             textMesh_(std::move(textMesh)),
@@ -135,10 +135,19 @@ export namespace helios::rendering::text {
         /**
          * @brief Returns the text render prototype.
          *
+         * **PERF-NOTE:** This method returns a copy of the `shared_ptr`, triggering atomic
+         * reference counting. For read-only access in rendering loops, consider using
+         * `textRenderPrototype_.get()` directly or adding a `const TextRenderPrototype&`
+         * overload.
+         *
          * @return Shared pointer to the prototype.
          */
-        [[nodiscard]] std::shared_ptr<const helios::rendering::text::TextRenderPrototype> textRenderPrototype() const noexcept {
+        [[nodiscard]] std::shared_ptr<const helios::rendering::text::TextRenderPrototype> shareTextRenderPrototype() const noexcept {
             return textRenderPrototype_;
+        }
+
+        [[nodiscard]] const helios::rendering::text::TextRenderPrototype* textRenderPrototype() const noexcept {
+            return textRenderPrototype_.get();
         }
 
         /**

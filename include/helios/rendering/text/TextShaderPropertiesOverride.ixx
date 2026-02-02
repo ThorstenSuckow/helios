@@ -6,7 +6,7 @@ module;
 
 #include <optional>
 
-export module helios.rendering.text.config.TextShaderPropertiesOverride;
+export module helios.rendering.text.TextShaderPropertiesOverride;
 
 
 import helios.math.types;
@@ -14,7 +14,7 @@ import helios.rendering.shader.UniformValueMap;
 import helios.rendering.shader.UniformSemantics;
 
 
-export namespace helios::rendering::text::config {
+export namespace helios::rendering::text {
 
     /**
      * @brief Optional overrides for text shader properties.

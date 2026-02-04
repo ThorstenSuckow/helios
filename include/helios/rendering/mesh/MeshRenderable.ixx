@@ -15,7 +15,7 @@ import helios.rendering.mesh.MeshRenderCommand;
 import helios.rendering.Renderable;
 import helios.rendering.RenderQueue;
 import helios.rendering.RenderPrototype;
-import helios.rendering.model.config.MaterialPropertiesOverride;
+import helios.rendering.material.MaterialShaderPropertiesOverride;
 import helios.rendering.shader.UniformValueMap;
 
 import helios.util.log.Logger;
@@ -29,7 +29,7 @@ export namespace helios::rendering::mesh {
      * @brief Represents a renderable object that combines a shared prototype with instance-specific overrides.
      *
      * A `MeshRenderable` aggregates an immutable `RenderPrototype` (shared asset definition)
-     * with optional instance-specific `MaterialPropertiesOverride`. This separation enables
+     * with optional instance-specific `MaterialShaderPropertiesOverride`. This separation enables
      * efficient batching of shared prototypes while allowing per-instance visual adjustments.
      *
      * ## Design
@@ -48,11 +48,27 @@ export namespace helios::rendering::mesh {
      *        └── MeshRenderable C (no override)
      * ```
      *
+     * ## Performance Considerations
+     *
+     * **PERF-NOTE: shared_ptr overhead**
+     *
+     * The `renderPrototype_` member uses `std::shared_ptr`, which incurs atomic
+     * reference counting overhead on every copy. In the hot rendering path, consider:
+     *
+     * - Returning `const RenderPrototype&` instead of `std::shared_ptr` from getters
+     *   when ownership transfer is not required.
+     * - Using `std::shared_ptr<T>::get()` for temporary access instead of copying
+     *   the shared_ptr.
+     * - Evaluating whether `std::unique_ptr` with raw pointer access would suffice
+     *   if the prototype lifetime is well-defined (e.g., asset manager ownership).
+     *
+     * @see renderPrototype()
+     *
      * @note For text rendering, use `TextRenderable` instead.
      *
      * @see RenderPrototype
      * @see RenderCommand
-     * @see MaterialPropertiesOverride
+     * @see MaterialShaderPropertiesOverride
      */
     class MeshRenderable final : public helios::rendering::Renderable {
 
@@ -64,10 +80,10 @@ export namespace helios::rendering::mesh {
         std::shared_ptr<const helios::rendering::RenderPrototype> renderPrototype_ = nullptr;
 
         /**
-         * @brief The MaterialPropertiesOverride owned by this class. This will be std::nullopt if not
+         * @brief The MaterialShaderPropertiesOverride owned by this class. This will be std::nullopt if not
          * available.
          */
-        std::optional<helios::rendering::model::config::MaterialPropertiesOverride> materialOverride_;
+        std::optional<helios::rendering::material::MaterialShaderPropertiesOverride> materialOverride_;
 
         /**
          * @brief Shared logger instance for all MeshRenderable objects.
@@ -111,7 +127,7 @@ export namespace helios::rendering::mesh {
          */
         explicit MeshRenderable(
             std::shared_ptr<const helios::rendering::RenderPrototype> renderPrototype,
-            const std::optional<helios::rendering::model::config::MaterialPropertiesOverride>& materialOverride = std::nullopt
+            const std::optional<helios::rendering::material::MaterialShaderPropertiesOverride>& materialOverride = std::nullopt
         ) :
             renderPrototype_(std::move(renderPrototype)),
             materialOverride_(materialOverride)
@@ -131,39 +147,51 @@ export namespace helios::rendering::mesh {
          *
          * @return A shared pointer to the RenderPrototype.
          */
-        [[nodiscard]] std::shared_ptr<const helios::rendering::RenderPrototype> renderPrototype() const noexcept {
+        [[nodiscard]] std::shared_ptr<const helios::rendering::RenderPrototype> shareRenderPrototype() const noexcept {
             return renderPrototype_;
         }
 
         /**
-         * @brief Returns a const reference to the optional instance-specific MaterialPropertiesOverride.
+         * @brief Returns a raw pointer to the RenderPrototype used by this MeshRenderable.
+         *
+         * This method provides direct access to the prototype without incrementing the
+         * reference count, making it suitable for use in hot rendering paths.
+         *
+         * @return A raw pointer to the RenderPrototype (never null after construction).
+         */
+        [[nodiscard]] const helios::rendering::RenderPrototype* renderPrototype() const noexcept {
+            return renderPrototype_.get();
+        }
+
+        /**
+         * @brief Returns a const reference to the optional instance-specific MaterialShaderPropertiesOverride.
          *
          * This allows read-only access to the overrides. Use `.has_value()` to check for existence
          * and `.value()` or `->` to safely access the override data.
          *
-         * @return A const reference to the std::optional<MaterialPropertiesOverride>.
+         * @return A const reference to the std::optional<MaterialShaderPropertiesOverride>.
          */
 
-        [[nodiscard]] const std::optional<helios::rendering::model::config::MaterialPropertiesOverride>& materialOverride() const noexcept {
+        [[nodiscard]] const std::optional<helios::rendering::material::MaterialShaderPropertiesOverride>& materialOverride() const noexcept {
             return materialOverride_;
         }
 
         /**
-         * @brief Returns a non-const reference to the optional instance-specific MaterialPropertiesOverride.
+         * @brief Returns a non-const reference to the optional instance-specific MaterialShaderPropertiesOverride.
          *
          * This allows modification of the overrides. If the optional currently has no value,
-         * it can be assigned to or `.emplace()` can be used to create a new MaterialPropertiesOverride.
+         * it can be assigned to or `.emplace()` can be used to create a new MaterialShaderPropertiesOverride.
          *
-         * @return A non-const reference to the std::optional<MaterialPropertiesOverride>.
+         * @return A non-const reference to the std::optional<MaterialShaderPropertiesOverride>.
          */
-        [[nodiscard]] std::optional<helios::rendering::model::config::MaterialPropertiesOverride>& materialOverride() noexcept {
+        [[nodiscard]] std::optional<helios::rendering::material::MaterialShaderPropertiesOverride>& materialOverride() noexcept {
             return materialOverride_;
         }
 
         /**
-         * @brief Returns true if this MeshRenderable was configured with a MaterialPropertiesOverride.
+         * @brief Returns true if this MeshRenderable was configured with a MaterialShaderPropertiesOverride.
          *
-         * @return True if this MeshRenderable was configured with a MaterialPropertiesOverride instance, otherwise false.
+         * @return True if this MeshRenderable was configured with a MaterialShaderPropertiesOverride instance, otherwise false.
          */
         [[nodiscard]] bool hasMaterialOverride() const noexcept {
             return materialOverride_.has_value();
@@ -184,7 +212,7 @@ export namespace helios::rendering::mesh {
          * @brief Writes uniform values into the given map.
          *
          * This method first applies the default uniform values from the base Material definition and
-         * then overlays any specific overrides provided by this instance's MaterialPropertiesOverride.
+         * then overlays any specific overrides provided by this instance's MaterialShaderPropertiesOverride.
          *
          * @param uniformValueMap Target map receiving the uniform values.
          */
@@ -208,15 +236,15 @@ export namespace helios::rendering::mesh {
          */
         void emit(
             helios::rendering::RenderQueue& renderQueue,
-            helios::rendering::shader::UniformValueMap objectUniformValues,
-            helios::rendering::shader::UniformValueMap materialUniformValues) const override {
+            helios::rendering::shader::UniformValueMap& objectUniformValues,
+            helios::rendering::shader::UniformValueMap& materialUniformValues) const override {
 
             writeUniformValues(materialUniformValues);
 
             renderQueue.add(helios::rendering::mesh::MeshRenderCommand(
                 renderPrototype_.get(),
-                std::move(objectUniformValues),
-                std::move(materialUniformValues)
+                objectUniformValues,
+                materialUniformValues
             ));
         };
 
@@ -224,3 +252,4 @@ export namespace helios::rendering::mesh {
     };
 
 }
+

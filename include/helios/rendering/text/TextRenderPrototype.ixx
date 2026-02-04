@@ -11,7 +11,7 @@ module;
 export module helios.rendering.text.TextRenderPrototype;
 
 
-import helios.rendering.text.config.TextShaderProperties;
+import helios.rendering.text.TextShaderProperties;
 
 import helios.rendering.text.FontResourceProvider;
 import helios.rendering.shader.Shader;
@@ -49,6 +49,20 @@ export namespace helios::rendering::text {
      * TextRenderable score(std::make_unique<TextMesh>("Score: 0", fontId), prototype);
      * ```
      *
+     * ## Performance Considerations
+     *
+     * **PERF-NOTE: shared_ptr for shader and properties**
+     *
+     * The `shader_` and `textProperties_` members use `std::shared_ptr`. Since prototypes
+     * are typically long-lived and shared across many renderables, the ref-counting
+     * overhead is amortized. However:
+     *
+     * - Avoid copying `TextRenderPrototype` shared_ptrs in tight loops. The prototype
+     *   getters return references, which is the correct pattern.
+     * - The `fontResourceProvider_` uses a raw pointer intentionally to avoid circular
+     *   references and unnecessary ref-counting—this is the preferred pattern for
+     *   service-like dependencies with well-defined lifetimes.
+     *
      * @see TextRenderable
      * @see TextShaderProperties
      * @see FontResourceProvider
@@ -66,7 +80,7 @@ export namespace helios::rendering::text {
         /**
          * @brief Text-specific shader properties (e.g., color).
          */
-        std::shared_ptr <const helios::rendering::text::config::TextShaderProperties> textProperties_;
+        std::shared_ptr <const helios::rendering::text::TextShaderProperties> textProperties_;
 
         /**
          * @brief Provider for loading fonts and retrieving glyph data.
@@ -90,7 +104,7 @@ export namespace helios::rendering::text {
          */
         explicit TextRenderPrototype(
             std::shared_ptr<const helios::rendering::shader::Shader> shader,
-            std::shared_ptr<const helios::rendering::text::config::TextShaderProperties> textProperties,
+            std::shared_ptr<const helios::rendering::text::TextShaderProperties> textProperties,
             helios::rendering::text::FontResourceProvider* fontResourceProvider
 
         ) :
@@ -138,7 +152,7 @@ export namespace helios::rendering::text {
          *
          * @return Reference to the text-specific properties.
          */
-        [[nodiscard]] const helios::rendering::text::config::TextShaderProperties& textProperties() const noexcept {
+        [[nodiscard]] const helios::rendering::text::TextShaderProperties& textProperties() const noexcept {
             return *textProperties_;
         }
 

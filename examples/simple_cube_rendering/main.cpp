@@ -7,8 +7,8 @@ import helios.ext;
 
 using namespace helios::ext::glfw::app;
 using namespace helios::rendering;
-using namespace helios::rendering::model;
-using namespace helios::rendering::model::config;
+using namespace helios::rendering::mesh;
+using namespace helios::rendering::material;
 using namespace helios::rendering::shader;
 using namespace helios::ext::opengl::rendering;
 using namespace helios::ext::opengl::rendering::shader;
@@ -58,8 +58,8 @@ int main() {
     // ========================================
     // Material properties are not considered in this demo, since we do not use
     // an OpenGLUniformLocationMap
-    auto cubeMaterialProps = MaterialProperties();
-    auto cubeMaterialProps_shared = std::make_shared<MaterialProperties>(cubeMaterialProps);
+    auto cubeMaterialProps = MaterialShaderProperties();
+    auto cubeMaterialProps_shared = std::make_shared<MaterialShaderProperties>(cubeMaterialProps);
     auto material_ptr = std::make_shared<Material>(
         shader_ptr, cubeMaterialProps_shared
     );
@@ -81,7 +81,7 @@ int main() {
     const auto renderPrototype = std::make_shared<RenderPrototype>(
         material_ptr, mesh_ptr
     );
-    auto cubeRenderable = std::make_shared<Renderable>(renderPrototype);
+    auto cubeRenderable = std::make_shared<MeshRenderable>(renderPrototype);
 
     // ========================================
     // 6. Scene Graph Setup
@@ -137,7 +137,7 @@ int main() {
         ));
 
         // Create a snapshot of the scene and render it
-        const auto snapshot = scene->createSnapshot(mainViewport);
+        const auto snapshot = scene->createSnapshot(*mainViewport);
         if (snapshot.has_value()) {
             auto renderPass = RenderPassFactory::getInstance().buildRenderPass(*snapshot);
             app->renderingDevice().render(renderPass);

@@ -24,7 +24,7 @@ import helios.ext.glfw.window.GLFWWindowUserPointer;
 import helios.ext.glfw.window.GLFWWindow;
 import helios.ext.glfw.input.GLFWInputAdapter;
 
-import helios.rendering.model.Material;
+import helios.rendering.material.Material;
 import helios.rendering.RenderTarget;
 
 import helios.ext.opengl.rendering;
@@ -58,6 +58,7 @@ export namespace helios::ext::glfw::app {
             int aspectRatioNumer = 0, int aspectRatioDenom = 0
         ) {
             auto openGLDevice = std::make_unique<helios::ext::opengl::rendering::OpenGLDevice>(
+                std::make_unique<helios::ext::opengl::rendering::OpenGLMeshRenderer>(),
                 std::make_unique<helios::ext::opengl::rendering::OpenGLGlyphTextRenderer>(),
                 std::make_unique<helios::ext::opengl::rendering::FreeTypeFontResourceManager>()
             );

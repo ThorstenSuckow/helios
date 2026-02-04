@@ -5,11 +5,11 @@ This example demonstrates how to render dynamic text using the helios text rende
 ## What You'll Learn
 
 - Setting up the text rendering pipeline
-- Loading fonts with `TextRenderer::addFontFamily()`
+- Loading fonts via `FontResourceProvider`
 - Creating `TextRenderPrototype` for shared shader configuration
 - Using `TextRenderable` for dynamic text display
-- Building `TextRenderCommand` objects for the render queue
-- Configuring orthographic projection for 2D text
+- Integrating text into the scene graph
+- Configuring orthographic projection for 2D UI text
 
 ## Prerequisites
 
@@ -38,206 +38,152 @@ render_text_demo/
 Create an OpenGL application with a configured viewport:
 
 ```cpp
+constexpr int SCREEN_WIDTH = 1920;
+constexpr int SCREEN_HEIGHT = 1080;
+
 const auto app = helios::ext::glfw::app::GLFWFactory::makeOpenGLApp(
-    "helios - Text Rendering Demo", 800, 600, 4, 3
+    "helios - Text Rendering Demo",
+    SCREEN_WIDTH, SCREEN_HEIGHT,
+    16.0f, 9.0f  // Aspect ratio
 );
 
-auto win = dynamic_cast<helios::ext::glfw::window::GLFWWindow*>(app->current());
-auto mainViewport = std::make_shared<helios::rendering::Viewport>(0.0f, 0.0f, 1.0f, 1.0f);
+auto* win = dynamic_cast<helios::ext::glfw::window::GLFWWindow*>(app->current());
 
+auto mainViewport = std::make_shared<helios::rendering::Viewport>(0.0f, 0.0f, 1.0f, 1.0f);
 mainViewport->setClearFlags(std::to_underlying(helios::rendering::ClearFlags::Color))
-              .setClearColor(helios::math::vec4f(0.051f, 0.051f, 0.153f, 1.0f));
+            .setClearColor(helios::math::vec4f(0.051f, 0.051f, 0.153f, 1.0f));
 win->addViewport(mainViewport);
 ```
 
-**What's happening:**
-- Creates a window with 4:3 aspect ratio
-- Configures a viewport covering the entire window
-- Sets a dark blue clear color
+### 2. UI Scene and Orthographic Camera
 
-### 2. Orthographic Projection
-
-Text rendering uses orthographic projection where screen coordinates map directly to pixels:
+Text rendering uses a dedicated scene with orthographic projection:
 
 ```cpp
-helios::math::mat4f projection = helios::math::ortho(
-    0.0f, 800.0f,   // left, right
-    0.0f, 600.0f,   // bottom, top
-    -1.0f, 100.0f   // near, far
+// Create UI scene with no culling (all text is always visible).
+auto uiScene = std::make_unique<helios::scene::Scene>(
+    std::make_unique<helios::scene::CullNoneStrategy>()
 );
+
+// Create UI viewport.
+auto uiViewport = std::make_shared<helios::rendering::Viewport>(0.0f, 0.0f, 1.0f, 1.0f);
+win->addViewport(uiViewport);
+
+// Configure orthographic camera.
+// Origin (0,0) is at the bottom-left corner of the screen.
+auto uiCamera = std::make_unique<helios::scene::Camera>();
+auto uiCameraSceneNode = std::make_unique<helios::scene::CameraSceneNode>(std::move(uiCamera));
+auto* uiCameraSceneNode_ptr = uiCameraSceneNode.get();
+
+uiViewport->setCameraSceneNode(uiCameraSceneNode_ptr);
+uiCameraSceneNode_ptr->camera().setOrtho(0, SCREEN_WIDTH, 0, SCREEN_HEIGHT);
+uiCameraSceneNode_ptr->setTranslation(helios::math::vec3f(0.0f, 0.0f, -100.0f));
+uiCameraSceneNode_ptr->lookAtLocal(
+    helios::math::vec3f(0.0f, 0.0f, 0.0f),
+    helios::math::vec3f(0.0f, 1.0f, 0.0f)
+);
+
+std::ignore = uiScene->addNode(std::move(uiCameraSceneNode));
 ```
 
-**What's happening:**
-- `(0, 0)` is the bottom-left corner of the screen
-- `(800, 600)` is the top-right corner
-- Text position is specified in screen pixels
+### 3. Text Shader Setup
 
-### 3. Shader Setup
-
-The text shader requires specific uniform locations for projection, texture, and color:
+The text shader requires specific uniform locations:
 
 ```cpp
-auto uniformLocationMap = std::make_unique<
+auto glyphUniformLocationMap = std::make_unique<
     helios::ext::opengl::rendering::shader::OpenGLUniformLocationMap
 >();
-uniformLocationMap->set(UniformSemantics::ProjectionMatrix, 1);
-uniformLocationMap->set(UniformSemantics::TextTexture, 3);
-uniformLocationMap->set(UniformSemantics::TextColor, 4);
+glyphUniformLocationMap->set(helios::rendering::shader::UniformSemantics::ProjectionMatrix, 1);
+glyphUniformLocationMap->set(helios::rendering::shader::UniformSemantics::TextTexture, 3);
+glyphUniformLocationMap->set(helios::rendering::shader::UniformSemantics::TextColor, 4);
+glyphUniformLocationMap->set(helios::rendering::shader::UniformSemantics::ModelMatrix, 8);
+glyphUniformLocationMap->set(helios::rendering::shader::UniformSemantics::ViewMatrix, 9);
 
-auto shader = std::make_shared<helios::ext::opengl::rendering::shader::OpenGLShader>(
+auto glyphShader = std::make_shared<helios::ext::opengl::rendering::shader::OpenGLShader>(
     "resources/font_shader.vert",
     "resources/font_shader.frag",
     helios::util::io::BasicStringFileReader()
 );
-shader->setUniformLocationMap(std::move(uniformLocationMap));
+glyphShader->setUniformLocationMap(std::move(glyphUniformLocationMap));
 ```
-
-**Vertex Shader (`font_shader.vert`):**
-```glsl
-#version 430 core
-
-layout(location = 0) in vec4 vertex;  // <vec2 pos, vec2 tex>
-out vec2 TexCoords;
-
-layout (location=1) uniform mat4 projectionMatrix;
-
-void main() {
-    gl_Position = projectionMatrix * vec4(vertex.xy, 0.0, 1.0);
-    TexCoords = vertex.zw;
-}
-```
-
-**Fragment Shader (`font_shader.frag`):**
-```glsl
-#version 430 core
-
-in vec2 TexCoords;
-out vec4 color;
-
-layout (location=3) uniform sampler2D text;
-layout (location=4) uniform vec4 textColor;
-
-void main() {
-    vec4 sampled = vec4(1.0, 1.0, 1.0, texture(text, TexCoords).r);
-    color = textColor * sampled;
-}
-```
-
-**Key Points:**
-- The vertex shader combines position and texture coordinates in a single `vec4`
-- The fragment shader samples the red channel as alpha (FreeType grayscale glyphs)
-- Text color is applied as a uniform
 
 ### 4. Font Loading
 
-Register a font family with the text renderer:
+Load fonts via the rendering device's font resource provider:
 
 ```cpp
-auto WorkbenchFont = helios::engine::core::data::FontId{"workbench"};
-
-auto& openGlDevice = app->renderingDevice();
-openGlDevice.textRenderer().addFontFamily(
-    WorkbenchFont, 
-    "resources/Roboto-SemiBoldItalic.ttf"
-);
+auto fontId = helios::engine::core::data::FontId{"roboto"};
+auto& fontResourceProvider = app->renderingDevice().fontResourceProvider();
+fontResourceProvider.loadFont(fontId, "resources/Roboto-SemiBoldItalic.ttf");
 ```
-
-**What's happening:**
-- `FontId` creates a unique identifier from the string "workbench"
-- `addFontFamily()` loads the TTF file and caches glyph textures
-- Default character range is ASCII 0-127
 
 ### 5. Text Prototype and Renderable
 
-Create a reusable prototype and a text instance:
+Create a reusable prototype and text instance:
 
 ```cpp
-// Shared prototype with shader configuration
-auto textPrototype = std::make_shared<helios::rendering::text::TextRenderPrototype>(
-    shader, 
-    std::make_shared<helios::rendering::text::config::TextShaderProperties>()
+// Shared prototype with shader and font configuration.
+auto uiTextPrototype = std::make_shared<helios::rendering::text::TextRenderPrototype>(
+    glyphShader,
+    std::make_shared<helios::rendering::text::TextShaderProperties>(),
+    &fontResourceProvider
 );
 
-// Instance-specific text renderable
-auto textRenderable = std::make_unique<helios::rendering::text::TextRenderable>(
-    "Hello World",
-    textPrototype,
-    helios::rendering::text::DrawProperties{
-        .fontId = WorkbenchFont,
-        .position = helios::math::vec2f{50.0f, 50.0f}
-    },
-    helios::rendering::text::config::TextShaderPropertiesOverride{
-        .baseColor = helios::util::Colors::Pink
-    }
+// Create a TextRenderable for dynamic text display.
+auto textRenderable = std::make_shared<helios::rendering::text::TextRenderable>(
+    std::make_unique<helios::rendering::text::TextMesh>("Hello World!", fontId),
+    uiTextPrototype
 );
+
+// Add to the scene graph.
+auto textSceneNode = std::make_unique<helios::scene::SceneNode>(textRenderable);
+auto* textNode = uiScene->addNode(std::move(textSceneNode));
+textNode->setScale({1.0f, 1.0f, 1.0f});
+textNode->setTranslation({100.0f, 100.0f, 0.0f});
 ```
-
-**What's happening:**
-- `TextRenderPrototype` holds shared shader and text properties
-- `TextRenderable` combines the prototype with instance-specific data
-- `DrawProperties` specifies font, position, and scale
-- `TextShaderPropertiesOverride` allows per-instance color customization
 
 ### 6. Render Loop
 
 Update and render text each frame:
 
 ```cpp
-unsigned int i = 0;
+float deltaTime = 0.0f;
+
 while (!win->shouldClose()) {
+    framePacer.beginFrame();
+
+    app->eventManager().dispatchAll();
     inputManager.poll(0.0f);
 
     if (inputManager.isKeyPressed(helios::input::types::Key::ESC)) {
         win->setShouldClose(true);
     }
 
-    // Frame uniforms
-    auto frameUniformValues = std::make_unique<helios::rendering::shader::UniformValueMap>();
-    frameUniformValues->set(UniformSemantics::ProjectionMatrix, projection);
-    frameUniformValues->set(UniformSemantics::TextTexture, 
-        helios::ext::opengl::rendering::OpenGLGlyphTextRenderer::textTextureUnit());
+    // Update text content dynamically.
+    textRenderable->setText(std::format("Frame Time: {:.4f} ms", deltaTime * 1000.0f));
 
-    // Update text dynamically
-    textRenderable->setText(std::format("Hello World {0}", i++));
+    // Render the UI scene.
+    const auto& uiSnapshot = uiScene->createSnapshot(*uiViewport);
+    if (uiSnapshot.has_value()) {
+        auto uiRenderPass = helios::rendering::RenderPassFactory::getInstance()
+            .buildRenderPass(*uiSnapshot);
+        app->renderingDevice().render(uiRenderPass);
+    }
 
-    // Build uniform values from renderable
-    auto uniformValues = helios::rendering::shader::UniformValueMap();
-    textRenderable->writeUniformValues(uniformValues);
-
-    // Create render command
-    auto textRenderCommand = helios::rendering::text::TextRenderCommand(
-        std::string{textRenderable->text()},
-        textPrototype.get(),
-        textRenderable->drawProperties(),
-        uniformValues
-    );
-
-    // Build render queue and pass
-    auto uiRenderQueue = std::make_unique<helios::rendering::RenderQueue>();
-    uiRenderQueue->add(std::move(textRenderCommand));
-
-    auto uiRenderPass = helios::rendering::RenderPass(mainViewport, std::move(uiRenderQueue));
-    uiRenderPass.setFrameUniformValues(std::move(frameUniformValues));
-
-    openGlDevice.render(uiRenderPass);
     win->swapBuffers();
+
+    frameStats = framePacer.sync();
+    deltaTime = frameStats.totalFrameTime;
 }
 ```
-
-**What's happening:**
-1. Poll input and check for ESC key
-2. Set up frame-level uniforms (projection, texture unit)
-3. Update the text string dynamically
-4. Write uniform values from the renderable
-5. Create a `TextRenderCommand` with all rendering data
-6. Add to render queue and execute the render pass
 
 ## Key Concepts
 
 ### Text Rendering Pipeline
 
 ```
-TextRenderable (high-level)
+TextRenderable (high-level, scene graph)
        │
        ▼
 TextRenderCommand (low-level, per-frame)
@@ -254,30 +200,32 @@ OpenGLGlyphTextRenderer (FreeType + OpenGL)
 Text uses screen-space coordinates with orthographic projection:
 
 ```
-(0, 600) ────────────────── (800, 600)
-    │                            │
-    │     Text appears here      │
-    │     at (50, 50)            │
-    │         ●                  │
-    │                            │
-(0, 0) ────────────────────── (800, 0)
+(0, 1080) ─────────────────── (1920, 1080)
+    │                              │
+    │      Text appears here       │
+    │      at (100, 100)           │
+    │           ●                  │
+    │                              │
+(0, 0) ─────────────────────── (1920, 0)
 ```
+
+## Controls
+
+- **ESC** - Exit application
 
 ## Running the Example
 
 ```bash
-cd build/examples/render_text_demo
-./main
+cd build/bin
+./render_text_demo
 ```
-
-Press **ESC** to close the application.
 
 ## Expected Output
 
-A window displaying "Hello World X" where X increments each frame, rendered in pink text on a dark blue background.
+A window displaying "Frame Time: X.XXXX ms" where X updates each frame, rendered in white text on a dark blue background.
 
 ## See Also
 
-- [Text Rendering Guide](/docs/core-concepts/text-rendering)
-- [Simple Cube Rendering](/docs/examples/simple-cube) - Basic 3D rendering
-- [Spaceship Control](/docs/examples/spaceship-control) - Complete game loop example
+- [Simple Cube Rendering](../simple_cube_rendering/README.md) - Basic 3D rendering
+- [Spaceship Control](../spaceship_control/README.md) - Complete game loop example
+- [Spaceship Shooting](../spaceship_shooting/README.md) - Advanced gameplay mechanics

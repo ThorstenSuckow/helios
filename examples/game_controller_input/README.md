@@ -65,7 +65,7 @@ We create a scene with several simple shapes (circles, rectangles) that will rep
 
 // Create a shared shader and material properties
 auto shader = std::make_shared<OpenGLShader>(...);
-auto buttonMaterialPropsOverride = MaterialPropertiesOverride(...);
+auto buttonMaterialPropsOverride = MaterialShaderPropertiesOverride(...);
 
 // Create a renderable for a button (e.g., a circle)
 auto buttonRenderableA = std::make_shared<Renderable>(
@@ -136,7 +136,7 @@ This function scales the node and changes its opacity to give visual feedback.
 void updateButton(
     helios::scene::SceneNode& button,
     const bool pressed,
-    helios::rendering::model::config::MaterialPropertiesOverride& originalOverride
+    helios::rendering::material::MaterialShaderPropertiesOverride& originalOverride
 ) {
     // Scale up when pressed
     button.setScale(helios::math::vec3f(SCALING_FACTOR * (pressed ? 1.2f : 1.0f)));

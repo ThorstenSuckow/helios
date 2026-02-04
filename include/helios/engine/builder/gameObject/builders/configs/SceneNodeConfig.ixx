@@ -77,7 +77,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
 
             const auto* renderableComponent = gameObject_->get<helios::engine::modules::rendering::renderable::components::RenderableComponent>();
 
-            auto renderable = renderableComponent->renderable();
+            auto renderable = renderableComponent->shareRenderable();
 
             auto node = std::make_unique<helios::scene::SceneNode>(renderable);
             auto node_ptr = parent->addNode(std::move(node));
@@ -100,7 +100,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
 
             const auto* renderableComponent = gameObject_->get<helios::engine::modules::rendering::renderable::components::RenderableComponent>();
 
-            auto renderable = renderableComponent->renderable();
+            auto renderable = renderableComponent->shareRenderable();
 
             auto node = std::make_unique<helios::scene::SceneNode>(renderable);
 

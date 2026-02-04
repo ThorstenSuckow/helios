@@ -4,12 +4,12 @@
  */
 module;
 
-export module helios.rendering.model.config.MeshConfig;
+export module helios.rendering.mesh.MeshConfig;
 
-import helios.rendering.model.config.PrimitiveType;
+import helios.rendering.mesh.PrimitiveType;
 
 
-export namespace helios::rendering::model::config {
+export namespace helios::rendering::mesh {
 
     /**
      * @brief Configuration for how a Mesh's data should be interpreted and rendered.

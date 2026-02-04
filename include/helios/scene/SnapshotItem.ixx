@@ -4,6 +4,7 @@
  */
 module;
 
+#include <cassert>
 #include <memory>
 
 export module helios.scene.SnapshotItem;
@@ -49,17 +50,7 @@ export namespace helios::scene {
         const helios::math::mat4f worldMatrix_;
 
     public:
-        /**
-         * @brief Prevent copying.
-         */
-        SnapshotItem(const SnapshotItem&)=delete;
-        SnapshotItem& operator=(const SnapshotItem&)=delete;
 
-        /**
-         * @brief Provide custom move constructor
-         * @see https://en.cppreference.com/w/cpp/language/move_constructor.html
-         */
-        SnapshotItem(SnapshotItem&&) noexcept = default;
 
         /**
          * @brief Constructs a new SnapshotItem with the specified renderable
@@ -74,6 +65,7 @@ export namespace helios::scene {
         ) :
             renderable_(renderable),
             worldMatrix_(worldMatrix) {
+            assert(renderable_ && "Unexpected nullptr forRenderable");
         }
 
         /**

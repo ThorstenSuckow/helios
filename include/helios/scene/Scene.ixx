@@ -9,7 +9,6 @@ module;
 #include <format>
 #include <memory>
 #include <optional>
-#include <stdexcept>
 #include <vector>
 
 export module helios.scene.Scene;
@@ -260,9 +259,9 @@ export namespace helios::scene {
          * @todo This should be refactored into a factory to prevent domain leakage between Scene and Rendering.
          */
         [[nodiscard]] std::optional<Snapshot>
-        createSnapshot(const std::shared_ptr<const rendering::Viewport>& viewport) const {
+        createSnapshot(const rendering::Viewport& viewport) const {
 
-            const auto* cameraSceneNode = viewport->cameraSceneNode();
+            const auto* cameraSceneNode = viewport.cameraSceneNode();
 
             if (!cameraSceneNode) {
                 logger_.warn("Viewport was not configured with a camera, skipping createSnapshot()...");
@@ -275,7 +274,10 @@ export namespace helios::scene {
             renderables.reserve(nodes.size());
             for (const auto& node: nodes) {
                 if (node->isActive() && node->hasRenderable()) {
-                    renderables.emplace_back(node->renderable(), node->cachedWorldTransform());
+                    renderables.emplace_back(
+                        node->renderable(),
+                        node->cachedWorldTransform()
+                    );
                 }
             }
 

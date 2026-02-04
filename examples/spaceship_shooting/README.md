@@ -78,7 +78,7 @@ The example demonstrates the spawn pipeline for projectiles:
 auto projectilePrefab = GameObjectFactory::instance()
     .gameObject()
     .withRendering([&](auto& rnb) {
-        rnb.renderable()
+        rnb.meshRenderable()
            .shader(shader)
            .color(Colors::Yellow)
            .primitiveType(PrimitiveType::LineLoop)

@@ -12,5 +12,5 @@ This namespace provides mesh rendering abstractions for 3D geometry. It defines 
 <summary>Doxygen</summary><p>
 @namespace helios::rendering::mesh
 @brief Mesh rendering abstractions and command types.
-@details This namespace provides the core types for mesh rendering. `MeshRenderable` is a high-level component that can be attached to game objects, combining a shared `RenderPrototype` with optional per-instance `MaterialPropertiesOverride`. `MeshRenderCommand` is the low-level command object that encapsulates all data needed for a single mesh draw call.
+@details This namespace provides the core types for mesh rendering. `MeshRenderable` is a high-level component that can be attached to game objects, combining a shared `RenderPrototype` with optional per-instance `MaterialShaderPropertiesOverride`. `MeshRenderCommand` is the low-level command object that encapsulates all data needed for a single mesh draw call.
 </p></details>

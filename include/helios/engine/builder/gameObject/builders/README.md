@@ -11,7 +11,7 @@ Each builder encapsulates a specific domain of entity configuration. Builders pr
 | Builder | Domain | Configs Provided |
 |---------|--------|------------------|
 | `MotionBuilder` | Movement | `Move2DConfig`, `SteeringConfig` |
-| `RenderingBuilder` | Visuals | `RenderableConfig`, `SceneNodeConfig` |
+| `RenderingBuilder` | Visuals | `MeshRenderableConfig`, `SceneNodeConfig` |
 | `SceneBuilder` | Scene Graph | `SceneNodeConfig` |
 | `CollisionBuilder` | Physics | `CollisionConfig`, `LevelBoundsCollisionConfig` |
 | `TransformBuilder` | Spatial | `TransformConfig` |

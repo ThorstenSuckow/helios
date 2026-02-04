@@ -99,12 +99,12 @@ shader_ptr->setUniformLocationMap(std::move(uniformLocationMap));
 Materials combine shaders with properties like color and roughness:
 
 ```cpp
-auto cubeMaterialProps = MaterialProperties(
+auto cubeMaterialProps = MaterialShaderProperties(
     helios::math::vec4f(1.0f, 0.0f, 1.0f, 1.0f), // Magenta RGBA
     0.0f  // Roughness (0 = smooth, 1 = rough)
 );
 
-auto cubeMaterialProps_shared = std::make_shared<MaterialProperties>(cubeMaterialProps);
+auto cubeMaterialProps_shared = std::make_shared<MaterialShaderProperties>(cubeMaterialProps);
 auto material_ptr = std::make_shared<Material>(
     shader_ptr, cubeMaterialProps_shared
 );
@@ -232,7 +232,7 @@ while (!win->shouldClose()) {
     ));
 
     // 5. Render the scene
-    const auto& snapshot = scene->createSnapshot(mainViewport);
+    const auto& snapshot = scene->createSnapshot(*mainViewport);
     if (snapshot.has_value()) {
         auto renderPass = RenderPassFactory::getInstance().buildRenderPass(*snapshot);
         app->renderingDevice().render(renderPass);

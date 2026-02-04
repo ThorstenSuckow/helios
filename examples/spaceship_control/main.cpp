@@ -21,8 +21,8 @@ import helios.examples.spaceshipControl.SpaceshipWidget;
 
 using namespace helios::ext::glfw::app;
 using namespace helios::rendering;
-using namespace helios::rendering::model;
-using namespace helios::rendering::model::config;
+using namespace helios::rendering::mesh;
+using namespace helios::rendering::material;
 using namespace helios::rendering::shader;
 using namespace helios::ext::opengl::rendering;
 using namespace helios::ext::opengl::rendering::shader;
@@ -180,10 +180,10 @@ int main() {
     auto theGrid = helios::engine::builder::gameObject::GameObjectFactory::instance()
         .gameObject()
         .withRendering([&shader_ptr, &root = *levelPtr->rootNode()](auto& rnb) {
-            rnb.renderable()
+            rnb.meshRenderable()
                .shader(shader_ptr)
                .color(helios::util::Colors::Turquoise.withW(0.2f))
-               .primitiveType(helios::rendering::model::config::PrimitiveType::Lines)
+               .primitiveType(helios::rendering::mesh::PrimitiveType::Lines)
                .shape(std::make_shared<helios::rendering::asset::shape::basic::Grid>(29, 19))
                .attachTo(&root);
         })
@@ -198,10 +198,10 @@ int main() {
     auto shipGameObject = helios::engine::builder::gameObject::GameObjectFactory::instance()
         .gameObject()
         .withRendering([&shader_ptr, &root = *levelPtr->rootNode()](auto& rnb) {
-            rnb.renderable()
+            rnb.meshRenderable()
                .shader(shader_ptr)
                .color(helios::util::Colors::Yellow)
-               .primitiveType(helios::rendering::model::config::PrimitiveType::LineLoop)
+               .primitiveType(helios::rendering::mesh::PrimitiveType::LineLoop)
                .shape(std::make_shared<helios::rendering::asset::shape::basic::Triangle>())
                .attachTo(&root);
         })
@@ -223,10 +223,10 @@ int main() {
     auto leftStickGizmo = helios::engine::builder::gameObject::GameObjectFactory::instance()
         .gameObject()
         .withRendering([&shader_ptr, &shipGameObject](auto& rnb) {
-            rnb.renderable()
+            rnb.meshRenderable()
                .shader(shader_ptr)
                .color(helios::util::Colors::White)
-               .primitiveType(helios::rendering::model::config::PrimitiveType::Lines)
+               .primitiveType(helios::rendering::mesh::PrimitiveType::Lines)
                .shape(std::make_shared<helios::rendering::asset::shape::basic::Line>())
                .build();
 
@@ -238,10 +238,10 @@ int main() {
     auto shipDirectionGizmo = helios::engine::builder::gameObject::GameObjectFactory::instance()
         .gameObject()
         .withRendering([&shader_ptr, &shipGameObject](auto& rnb) {
-            rnb.renderable()
+            rnb.meshRenderable()
                .shader(shader_ptr)
                .color(helios::util::Colors::Red)
-               .primitiveType(helios::rendering::model::config::PrimitiveType::Lines)
+               .primitiveType(helios::rendering::mesh::PrimitiveType::Lines)
                .shape(std::make_shared<helios::rendering::asset::shape::basic::Line>())
                .build();
 
@@ -337,7 +337,7 @@ int main() {
         // ----------------------------------------
         // 7.4 Rendering
         // ----------------------------------------
-        const auto& snapshot = scene->createSnapshot(mainViewport);
+        const auto& snapshot = scene->createSnapshot(*mainViewport);
         if (snapshot.has_value()) {
             auto renderPass = RenderPassFactory::getInstance().buildRenderPass(*snapshot);
             app->renderingDevice().render(renderPass);

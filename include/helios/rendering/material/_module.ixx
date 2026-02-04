@@ -9,8 +9,8 @@
  * @details This module provides mesh and material definitions for 3D models,
  * including data structures for geometry and material properties used in rendering.
  */
-export module helios.rendering.model;
+export module helios.rendering.material;
 
-export import helios.rendering.model.Mesh;
-export import helios.rendering.model.Material;
-export import helios.rendering.model.config;
+export import helios.rendering.material.Material;
+export import helios.rendering.material.MaterialShaderProperties;
+export import helios.rendering.material.MaterialShaderPropertiesOverride;

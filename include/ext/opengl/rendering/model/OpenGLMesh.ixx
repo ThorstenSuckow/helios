@@ -12,8 +12,8 @@ module;
 
 export module helios.ext.opengl.rendering.model.OpenGLMesh;
 
-import helios.rendering.model.Mesh;
-import helios.rendering.model.config.MeshConfig;
+import helios.rendering.mesh.Mesh;
+import helios.rendering.mesh.MeshConfig;
 import helios.rendering.asset.shape.Shape;
 import helios.rendering.Vertex;
 
@@ -26,7 +26,7 @@ export namespace helios::ext::opengl::rendering::model {
      * The raw mesh data is uploaded to the GPU, preparing it for subsequent
      * rendering commands / draw calls.
      */
-    class OpenGLMesh final : public helios::rendering::model::Mesh {
+    class OpenGLMesh final : public helios::rendering::mesh::Mesh {
 
     protected:
 
@@ -147,7 +147,7 @@ export namespace helios::ext::opengl::rendering::model {
         explicit OpenGLMesh(
             std::shared_ptr<const std::vector<helios::rendering::Vertex>> vertices,
             std::shared_ptr<const std::vector<unsigned int>> indices,
-            std::shared_ptr<const helios::rendering::model::config::MeshConfig> meshConfig
+            std::shared_ptr<const helios::rendering::mesh::MeshConfig> meshConfig
         ) :
             Mesh(
                 std::move(vertices),
@@ -181,7 +181,7 @@ export namespace helios::ext::opengl::rendering::model {
          */
         explicit OpenGLMesh(
             const helios::rendering::asset::shape::Shape& shape,
-            std::shared_ptr<const helios::rendering::model::config::MeshConfig> meshConfig
+            std::shared_ptr<const helios::rendering::mesh::MeshConfig> meshConfig
         ) :
             Mesh(
                 shape,

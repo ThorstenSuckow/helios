@@ -1,12 +1,12 @@
 /**
- * @file MaterialPropertiesOverride.ixx
+ * @file MaterialShaderPropertiesOverride.ixx
  * @brief Overrides for material properties to customize rendering parameters.
  */
 module;
 
 #include <optional>
 
-export module helios.rendering.model.config.MaterialPropertiesOverride;
+export module helios.rendering.material.MaterialShaderPropertiesOverride;
 
 
 import helios.math.types;
@@ -14,19 +14,19 @@ import helios.rendering.shader.UniformValueMap;
 import helios.rendering.shader.UniformSemantics;
 
 
-export namespace helios::rendering::model::config {
+export namespace helios::rendering::material {
 
     /**
      * @brief Configuration container for overriding specific material properties.
      *
      * This struct holds optional data values that can be used to override the default
-     * properties defined in MaterialProperties used by a Material.
+     * properties defined in MaterialShaderProperties used by a Material.
      * Only properties for which a value is present will be applied as overrides.
      *
      * This struct is mutable by design. Changing its values will impact all MaterialInstances
      * using **this** instance.
      */
-    struct MaterialPropertiesOverride {
+    struct MaterialShaderPropertiesOverride {
 
 
         /**
@@ -40,7 +40,7 @@ export namespace helios::rendering::model::config {
         std::optional<float> roughness;
 
         /**
-         * @brief Writes this MaterialPropertiesOverride's values into the given map.
+         * @brief Writes this MaterialShaderPropertiesOverride's values into the given map.
          *
          * This method is typically called **after** the Material's base properties were
          * written into the map.

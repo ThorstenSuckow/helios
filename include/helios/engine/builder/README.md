@@ -43,7 +43,7 @@ Fine-grained configuration classes used by builders:
 |--------|---------|
 | `Move2DConfig` | 2D movement parameters |
 | `SteeringConfig` | Rotation and steering behavior |
-| `RenderableConfig` | Mesh, material, and shader setup |
+| `MeshRenderableConfig` | Mesh, material, and shader setup |
 | `SceneNodeConfig` | Scene graph parenting and inheritance |
 | `TransformConfig` | Scale and translation |
 | `CollisionConfig` | Collision layers and responses |
@@ -144,5 +144,5 @@ The builder module follows these principles:
 <summary>Doxygen</summary><p>
 @namespace helios::engine::builder
 @brief Fluent builder pattern for constructing GameObjects.
-@details This module provides a declarative, composable API for creating GameObject instances with their associated components. The builder pattern enables clean, readable entity construction while abstracting component dependencies and initialization order. Key classes include GameObjectFactory (entry point), GameObjectPrototype (fluent configuration), domain-specific builders (MotionBuilder, RenderingBuilder, CollisionBuilder, etc.), and fine-grained config classes (Move2DConfig, RenderableConfig, etc.).
+@details This module provides a declarative, composable API for creating GameObject instances with their associated components. The builder pattern enables clean, readable entity construction while abstracting component dependencies and initialization order. Key classes include GameObjectFactory (entry point), GameObjectPrototype (fluent configuration), domain-specific builders (MotionBuilder, RenderingBuilder, CollisionBuilder, etc.), and fine-grained config classes (Move2DConfig, MeshRenderableConfig, etc.).
 </p></details>

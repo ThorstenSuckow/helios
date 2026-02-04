@@ -8,7 +8,7 @@ module;
 #include <string>
 #include <utility>
 
-export module helios.rendering.text.config.TextShaderProperties;
+export module helios.rendering.text.TextShaderProperties;
 
 import helios.rendering.shader.Shader;
 import helios.engine.core.data.FontId;
@@ -19,7 +19,7 @@ import helios.math;
 import helios.rendering.shader.UniformValueMap;
 import helios.rendering.shader.UniformSemantics;
 
-export namespace helios::rendering::text::config {
+export namespace helios::rendering::text {
 
     /**
      * @brief Immutable shader properties for text rendering.

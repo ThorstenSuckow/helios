@@ -1,18 +1,18 @@
 /**
- * @file MaterialProperties.ixx
+ * @file MaterialShaderProperties.ixx
  * @brief Default material properties used by materials and instances.
  */
 module;
 
-export module helios.rendering.model.config.MaterialProperties;
+export module helios.rendering.material.MaterialShaderProperties;
 
-import helios.rendering.model.config.MaterialPropertiesOverride;
+import helios.rendering.material.MaterialShaderPropertiesOverride;
 
 import helios.math.types;
 import helios.rendering.shader.UniformValueMap;
 import helios.rendering.shader.UniformSemantics;
 
-export namespace helios::rendering::model::config {
+export namespace helios::rendering::material {
 
     /**
      * @brief Represents a Value Object for an immutable set of material properties.
@@ -20,11 +20,11 @@ export namespace helios::rendering::model::config {
      * This class acts as a Value Object, encapsulating fundamental material characteristics
      * like base color and roughness. Once an instance is created, its properties cannot
      * be changed. Methods prefixed with `with*` facilitate functional updates by returning a
-     * **new** MaterialProperties instance with the specified property modified, leaving the
+     * **new** MaterialShaderProperties instance with the specified property modified, leaving the
      * original object - which may still be in use by existing Renderables - untouched.
      *
      */
-    class MaterialProperties {
+    class MaterialShaderProperties {
 
         private:
             /**
@@ -52,75 +52,75 @@ export namespace helios::rendering::model::config {
 
         public:
             /**
-             * @brief Default destructor for MaterialProperties.
+             * @brief Default destructor for MaterialShaderProperties.
              */
-            ~MaterialProperties() = default;
+            ~MaterialShaderProperties() = default;
 
             /**
-             * @brief Default constructor for MaterialProperties.
+             * @brief Default constructor for MaterialShaderProperties.
              *
              * initializes all properties to their default values.
              */
-            MaterialProperties() = default;
+            MaterialShaderProperties() = default;
 
             /**
-             * @brief Constructs a MaterialProperties instance with the specified values.
+             * @brief Constructs a MaterialShaderProperties instance with the specified values.
              *
-             * @param baseColor The initial base color for this MaterialProperties instance.
+             * @param baseColor The initial base color for this MaterialShaderProperties instance.
              * @param roughness The initial roughness factor for the material, which defaults to 0.0f.
              */
-            explicit MaterialProperties(
+            explicit MaterialShaderProperties(
                 helios::math::vec4f baseColor,
                 float roughness = 0.0f
             ) noexcept : baseColor_(baseColor), roughness_(roughness){}
 
 
             /**
-             * Creates a new MaterialProperties instance with an updated base color.
+             * Creates a new MaterialShaderProperties instance with an updated base color.
              *
-             * This method returns a new MaterialProperties instance where only the base color has been changed to the
+             * This method returns a new MaterialShaderProperties instance where only the base color has been changed to the
              * provided value.
              *
              * @param baseColor The new base color for the material.
              *
-             * @return A new immutable instance of MaterialProperties with the updated base color.
+             * @return A new immutable instance of MaterialShaderProperties with the updated base color.
              */
-            [[nodiscard]] MaterialProperties withBaseColor(helios::math::vec4f baseColor) const noexcept {
-                return MaterialProperties(
+            [[nodiscard]] MaterialShaderProperties withBaseColor(helios::math::vec4f baseColor) const noexcept {
+                return MaterialShaderProperties(
                     baseColor,
                     roughness_
                 );
             }
 
             /**
-             * Creates a new MaterialPropertiesOverride instance with an updated base color.
+             * Creates a new MaterialShaderPropertiesOverride instance with an updated base color.
              *
-             * This method returns a new MaterialPropertiesOverride instance where only the base
+             * This method returns a new MaterialShaderPropertiesOverride instance where only the base
              * color has been changed to the provided value.
              *
              * @param baseColor The new base color for the material.
              *
-             * @return A new instance of MaterialPropertiesOvrride with the updated base color.
+             * @return A new instance of MaterialShaderPropertiesOvrride with the updated base color.
              */
-            [[nodiscard]] MaterialPropertiesOverride overrideBaseColor(helios::math::vec4f baseColor) const noexcept {
-                return MaterialPropertiesOverride(
+            [[nodiscard]] MaterialShaderPropertiesOverride overrideBaseColor(helios::math::vec4f baseColor) const noexcept {
+                return MaterialShaderPropertiesOverride(
                     baseColor,
                     roughness_
                 );
             }
 
             /**
-             * Creates a new MaterialProperties instance with an updated roughness factor.
+             * Creates a new MaterialShaderProperties instance with an updated roughness factor.
              *
-             * This method returns a new MaterialProperties instance where only the roughness factor has been changed to the
+             * This method returns a new MaterialShaderProperties instance where only the roughness factor has been changed to the
              * provided value.
              *
              * @param roughness The new roughness factor for the material.
              *
-             * @return A new immutable instance of MaterialProperties with the updated roughness factor.
+             * @return A new immutable instance of MaterialShaderProperties with the updated roughness factor.
              */
-            [[nodiscard]] MaterialProperties withRoughness(float roughness) const noexcept {
-                return MaterialProperties(
+            [[nodiscard]] MaterialShaderProperties withRoughness(float roughness) const noexcept {
+                return MaterialShaderProperties(
                     baseColor_,
                     roughness
                 );

@@ -18,7 +18,7 @@ import helios.rendering.RenderQueue;
 import helios.rendering.text.TextRenderCommand;
 
 import helios.rendering.text.TextRenderPrototype;
-import helios.rendering.text.config.TextShaderPropertiesOverride;
+import helios.rendering.text.TextShaderPropertiesOverride;
 import helios.rendering.text.TextMesh;
 
 import helios.rendering.shader.UniformValueMap;
@@ -67,7 +67,7 @@ export namespace helios::rendering::text {
         /**
          * @brief Optional overrides for text shader properties.
          */
-        std::optional<helios::rendering::text::config::TextShaderPropertiesOverride> textPropertiesOverride_;
+        std::optional<helios::rendering::text::TextShaderPropertiesOverride> textPropertiesOverride_;
 
         /**
          * @brief Positioning and styling data (font, position, scale).
@@ -78,19 +78,18 @@ export namespace helios::rendering::text {
     public:
 
         /**
-         * @brief Constructs a TextRenderable with the given text and configuration.
+         * @brief Constructs a TextRenderable with the given text mesh and configuration.
          *
-         * @param text The text string to render.
+         * @param textMesh Unique pointer to the text mesh containing text content, font, and layout data.
          * @param renderPrototype Shared prototype with shader and font configuration.
-         * @param drawProperties Position, scale, and font selection.
-         * @param textPropertiesOverride Optional overrides for shader properties.
+         * @param textPropertiesOverride Optional overrides for shader properties (e.g., text color).
          *
          * @throws std::invalid_argument If `renderPrototype` is null.
          */
         explicit TextRenderable(
             std::unique_ptr<helios::rendering::text::TextMesh> textMesh,
             std::shared_ptr<const helios::rendering::text::TextRenderPrototype> renderPrototype,
-            const std::optional<helios::rendering::text::config::TextShaderPropertiesOverride>& textPropertiesOverride = std::nullopt
+            const std::optional<helios::rendering::text::TextShaderPropertiesOverride>& textPropertiesOverride = std::nullopt
         ) :
             textRenderPrototype_(std::move(renderPrototype)),
             textMesh_(std::move(textMesh)),
@@ -135,10 +134,27 @@ export namespace helios::rendering::text {
         /**
          * @brief Returns the text render prototype.
          *
+         * **PERF-NOTE:** This method returns a copy of the `shared_ptr`, triggering atomic
+         * reference counting. For read-only access in rendering loops, consider using
+         * `textRenderPrototype_.get()` directly or adding a `const TextRenderPrototype&`
+         * overload.
+         *
          * @return Shared pointer to the prototype.
          */
-        [[nodiscard]] std::shared_ptr<const helios::rendering::text::TextRenderPrototype> textRenderPrototype() const noexcept {
+        [[nodiscard]] std::shared_ptr<const helios::rendering::text::TextRenderPrototype> shareTextRenderPrototype() const noexcept {
             return textRenderPrototype_;
+        }
+
+        /**
+         * @brief Returns a const ref to the TextRenderPrototype used by this TextRenderable.
+         *
+         * This method provides direct access to the prototype without incrementing the
+         * reference count, making it suitable for use in hot rendering paths.
+         *
+         * @return A const ref to the TextRenderPrototype.
+         */
+        [[nodiscard]] const helios::rendering::text::TextRenderPrototype& textRenderPrototype() const noexcept {
+            return *textRenderPrototype_;
         }
 
         /**
@@ -180,8 +196,8 @@ export namespace helios::rendering::text {
          */
         void emit(
             helios::rendering::RenderQueue& renderQueue,
-            helios::rendering::shader::UniformValueMap objectUniformValues,
-            helios::rendering::shader::UniformValueMap materialUniformValues) const override {
+            helios::rendering::shader::UniformValueMap& objectUniformValues,
+            helios::rendering::shader::UniformValueMap& materialUniformValues) const override {
 
 
             writeUniformValues(materialUniformValues);
@@ -189,8 +205,8 @@ export namespace helios::rendering::text {
             renderQueue.add(helios::rendering::text::TextRenderCommand(
                 textMesh_.get(),
                 textRenderPrototype_.get(),
-                std::move(objectUniformValues),
-                std::move(materialUniformValues)
+                objectUniformValues,
+                materialUniformValues
             ));
         };
 

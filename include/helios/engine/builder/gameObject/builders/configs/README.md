@@ -19,7 +19,7 @@ Config classes provide a fluent interface for adding and configuring specific co
 
 | Config | Components Added | Purpose |
 |--------|------------------|---------|
-| `RenderableConfig` | `RenderableComponent` | Mesh, material, shader setup |
+| `MeshRenderableConfig` | `RenderableComponent` | Mesh, material, shader setup |
 | `SceneNodeConfig` | `SceneNodeComponent` | Scene graph integration |
 
 ### Spatial

@@ -23,7 +23,7 @@ export namespace helios::rendering {
     /**
      * @brief Encapsulates a single rendering pass with its associated resources.
      *
-     * A `RenderPass` holds a `RenderQueue` containing all `RenderCommand` and
+     * A `RenderPass` holds a `RenderQueue` containing all `MeshRenderCommand` and
      * `TextRenderCommand` objects to be processed. It also stores frame-level
      * uniform values (e.g., view and projection matrices) that remain constant
      * during the pass.
@@ -31,8 +31,15 @@ export namespace helios::rendering {
      * ## Components
      *
      * - **RenderQueue:** Contains geometry and text render commands.
-     * - **Viewport:** Defines the rendering area and clear settings.
+     * - **Viewport:** Non-owning pointer to the rendering area and clear settings.
      * - **UniformValueMap:** Frame-level uniforms applied to all commands.
+     *
+     * ## Ownership Model
+     *
+     * - **RenderQueue:** Owned by value (moved into the pass).
+     * - **UniformValueMap:** Owned by value (copied/moved into the pass).
+     * - **Viewport:** Non-owning raw pointer. The caller must ensure the viewport
+     *   remains valid for the lifetime of this pass.
      *
      * ## Lifecycle
      *
@@ -40,7 +47,7 @@ export namespace helios::rendering {
      * RenderingDevice::beginRenderPass(pass)
      *     → Clear buffers, configure viewport
      * RenderingDevice::doRender(pass)
-     *     → Process RenderCommands and TextRenderCommands
+     *     → Process MeshRenderCommands and TextRenderCommands
      * RenderingDevice::endRenderPass(pass)
      *     → Finalize pass, unbind resources
      * ```
@@ -51,26 +58,30 @@ export namespace helios::rendering {
      * @see RenderQueue
      * @see RenderingDevice
      * @see Viewport
+     * @see RenderPassFactory
      */
     class RenderPass {
 
     private:
         /**
-         * @brief An owning unique pointer to the `RenderQueue` for this pass.
+         * @brief The `RenderQueue` for this pass, containing all render commands.
          */
-        std::unique_ptr<helios::rendering::RenderQueue> renderQueue_;
+        helios::rendering::RenderQueue renderQueue_;
 
         /**
-         * @brief An owning unique pointer to the uniform values specific to the current pass (i.e.,
-         * the rendered "frame"). This map contains uniforms that change once per frame, such as the view and the
-         * projection matrix.
+         * @brief Uniform values specific to the current frame.
+         *
+         * This map contains uniforms that change once per frame, such as the view
+         * and the projection matrices.
          */
-        std::unique_ptr<const helios::rendering::shader::UniformValueMap> frameUniformValues_;
+        helios::rendering::shader::UniformValueMap frameUniformValues_;
 
         /**
-         * @brief Shared ownership of the `Viewport` processed by this pass.
+         * @brief Non-owning pointer to the `Viewport` processed by this pass.
+         *
+         * The caller must ensure the viewport remains valid for the lifetime of this pass.
          */
-        std::shared_ptr<const helios::rendering::Viewport> viewport_;
+        const helios::rendering::Viewport* viewport_;
 
     protected:
         /**
@@ -106,38 +117,26 @@ export namespace helios::rendering {
         RenderPass& operator=(RenderPass&&) noexcept = default;
 
         /**
-         * @brief Create a new `RenderPass` with the specified  `Viewport`, `RenderQueue` and the `UniformValueMap`.
-         * Ownership of Viewport is shared with this instance, the latter objects are transferred to **this** `RenderPass`.
+         * @brief Creates a new `RenderPass` with the specified viewport, render queue, and frame uniforms.
          *
-         * @param viewport The viewport this RenderPass is processing.
-         * @param renderQueue A unique ptr to the `RenderQueue` that should be processed with this pass.
-         * @param frameUniformValues A unique ptr to the `UniformValueMap` associated with this pass, i.e.
-         * frame-specific uniform values. If no values are specified, a default empty set is created.
+         * The render queue is moved into this pass. The viewport pointer must remain
+         * valid for the lifetime of this pass.
+         *
+         * @param viewport Non-owning pointer to the viewport this RenderPass is processing.
+         * @param renderQueue The `RenderQueue` to be processed with this pass (moved).
+         * @param frameUniformValues Frame-specific uniform values (e.g., view/projection matrices).
          */
         explicit RenderPass(
-            std::shared_ptr<const helios::rendering::Viewport> viewport,
-            std::unique_ptr<helios::rendering::RenderQueue> renderQueue,
-            std::unique_ptr<const helios::rendering::shader::UniformValueMap> frameUniformValues = nullptr
+            const helios::rendering::Viewport* viewport,
+            helios::rendering::RenderQueue renderQueue,
+            const helios::rendering::shader::UniformValueMap& frameUniformValues
             ) noexcept
             :
-            viewport_(std::move(viewport)),
+            viewport_(viewport),
             renderQueue_(std::move(renderQueue)),
-            frameUniformValues_(std::move(frameUniformValues)) {
+            frameUniformValues_(frameUniformValues) {
 
-            if (!viewport_) {
-                //logger_.error("Constructor received a nullptr Viewport. Creating a default empty Viewport.");
-                viewport_ = std::make_shared<Viewport>();
-            }
-
-            if (!renderQueue_) {
-                //logger_.error("Constructor received a nullptr RenderQueue. Creating a default empty queue.");
-                renderQueue_ = std::make_unique<helios::rendering::RenderQueue>();
-            }
-
-            if (!frameUniformValues_) {
-                //logger_.warn("Constructor received a nullptr UniformValueMap. Creating a default empty map.");
-                frameUniformValues_ = std::make_unique<helios::rendering::shader::UniformValueMap>();
-            }
+            assert(viewport_ != nullptr && "Unexpected nullptr for viewport in RenderPass constructor");
         }
 
         /**
@@ -146,7 +145,7 @@ export namespace helios::rendering {
          * @return A const ref to this `RenderPass`' `RenderQueue`.
          */
         [[nodiscard]] const RenderQueue& renderQueue() const noexcept {
-            return *renderQueue_;
+            return renderQueue_;
         }
 
         /**
@@ -159,13 +158,12 @@ export namespace helios::rendering {
         }
 
         /**
-         * @brief Sets this `RenderPass`' `UniformValueMap` containing per-frame specific uniform values.
-         * Transfers ownership of the provided UniformValueMap to this `RenderPass`.
+         * @brief Sets the frame-specific uniform values for this pass.
          *
-         * @param frameUniformValues A unique ptr to the `UniformValueMap` for frame specific uniform values.
+         * @param frameUniformValues The `UniformValueMap` containing frame-specific uniform values.
          */
-        void setFrameUniformValues(std::unique_ptr<const helios::rendering::shader::UniformValueMap> frameUniformValues) noexcept {
-            frameUniformValues_ = std::move(frameUniformValues);
+        void setFrameUniformValues(const helios::rendering::shader::UniformValueMap& frameUniformValues) noexcept {
+            frameUniformValues_ = frameUniformValues;
         }
 
         /**
@@ -176,7 +174,7 @@ export namespace helios::rendering {
          * @return A const reference to this `RenderPass`' `UniformValueMap` for the current frame.
          */
         [[nodiscard]] const helios::rendering::shader::UniformValueMap& frameUniformValues() const noexcept {
-            return *frameUniformValues_;
+            return frameUniformValues_;
         }
     };
 

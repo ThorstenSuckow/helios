@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8ext_8opengl_8rendering_8OpenGLMeshRenderer" kind="module">
+    <compoundname>helios.ext.opengl.rendering.OpenGLMeshRenderer</compoundname>
+    <innerfile refid="OpenGLMeshRenderer_8ixx">OpenGLMeshRenderer.ixx</innerfile>
+    <innerclass refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLMeshRenderer" prot="public">helios::ext::opengl::rendering::OpenGLMeshRenderer</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLMeshRenderer_1accd7af6628105ddac739ee29d98a867a" prot="private" static="no" mutable="yes">
+        <type>const <ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader" kindref="compound">helios::ext::opengl::rendering::shader::OpenGLShader</ref> *</type>
+        <definition>const helios::ext::opengl::rendering::shader::OpenGLShader* helios::ext::opengl::rendering::OpenGLMeshRenderer::lastShader_</definition>
+        <argsstring></argsstring>
+        <name>lastShader_</name>
+        <qualifiedname>helios::ext::opengl::rendering::OpenGLMeshRenderer::lastShader_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>Cached pointer to the last used shader for state optimization. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Used to avoid redundant shader program activations. Reset at the beginning of each render pass. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/ext/opengl/rendering/OpenGLMeshRenderer.ixx" line="72" column="76" bodyfile="/tmp/h/include/ext/opengl/rendering/OpenGLMeshRenderer.ixx" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLMeshRenderer_1af93ab35de0242006a19159a25a61434a" prot="private" static="no" mutable="yes">
+        <type>unsigned int</type>
+        <definition>unsigned int helios::ext::opengl::rendering::OpenGLMeshRenderer::lastVao_</definition>
+        <argsstring></argsstring>
+        <name>lastVao_</name>
+        <qualifiedname>helios::ext::opengl::rendering::OpenGLMeshRenderer::lastVao_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>Cached VAO ID for state optimization. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Used to avoid redundant VAO bindings. Reset at the beginning of each render pass. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/ext/opengl/rendering/OpenGLMeshRenderer.ixx" line="79" column="30" bodyfile="/tmp/h/include/ext/opengl/rendering/OpenGLMeshRenderer.ixx" bodystart="79" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLMeshRenderer_1a014819462e13c94e34c6ba2b0e19d212" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::ext::opengl::rendering::OpenGLMeshRenderer::init</definition>
+        <argsstring>()</argsstring>
+        <name>init</name>
+        <qualifiedname>helios::ext::opengl::rendering::OpenGLMeshRenderer::init</qualifiedname>
+        <briefdescription>
+<para>Initializes the renderer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Currently a no-op placeholder for future initialization logic. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/ext/opengl/rendering/OpenGLMeshRenderer.ixx" line="86" column="14" bodyfile="/tmp/h/include/ext/opengl/rendering/OpenGLMeshRenderer.ixx" bodystart="86" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLMeshRenderer_1ac5e589bdb464735cb411bd7af40d3d5f" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::ext::opengl::rendering::OpenGLMeshRenderer::beginRenderPass</definition>
+        <argsstring>(helios::rendering::RenderPass &amp;renderPass) const noexcept</argsstring>
+        <name>beginRenderPass</name>
+        <qualifiedname>helios::ext::opengl::rendering::OpenGLMeshRenderer::beginRenderPass</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1rendering_1_1RenderPass" kindref="compound">helios::rendering::RenderPass</ref> &amp;</type>
+          <declname>renderPass</declname>
+        </param>
+        <briefdescription>
+<para>Resets cached rendering state at the beginning of a render pass. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This ensures proper shader and VAO binding even when the render queue contents change between frames. Called internally by `OpenGLDevice` before processing the render queue.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>renderPass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The render pass being started (currently unused, reserved for future use). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/ext/opengl/rendering/OpenGLMeshRenderer.ixx" line="100" column="14" bodyfile="/tmp/h/include/ext/opengl/rendering/OpenGLMeshRenderer.ixx" bodystart="100" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLMeshRenderer_1a4bc5cf32656e9db52e3750a531fe5482" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::ext::opengl::rendering::OpenGLMeshRenderer::~OpenGLMeshRenderer</definition>
+        <argsstring>() override</argsstring>
+        <name>~OpenGLMeshRenderer</name>
+        <qualifiedname>helios::ext::opengl::rendering::OpenGLMeshRenderer::~OpenGLMeshRenderer</qualifiedname>
+        <briefdescription>
+<para>Destructor that unbinds any currently bound VAO. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Ensures clean OpenGL state upon destruction. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/ext/opengl/rendering/OpenGLMeshRenderer.ixx" line="116" column="9" bodyfile="/tmp/h/include/ext/opengl/rendering/OpenGLMeshRenderer.ixx" bodystart="116" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLMeshRenderer_1aa05d8d2158accb4ea60061a99d8d7394" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::ext::opengl::rendering::OpenGLMeshRenderer::render</definition>
+        <argsstring>(const helios::rendering::mesh::MeshRenderCommand &amp;command, const helios::rendering::shader::UniformValueMap &amp;frameUniformValues) noexcept</argsstring>
+        <name>render</name>
+        <qualifiedname>helios::ext::opengl::rendering::OpenGLMeshRenderer::render</qualifiedname>
+        <reimplements refid="classhelios_1_1rendering_1_1mesh_1_1MeshRenderer_1ab2f80bf9dc2fc28d6ca18ed7b5c782ae">render</reimplements>
+        <param>
+          <type>const <ref refid="classhelios_1_1rendering_1_1mesh_1_1MeshRenderCommand" kindref="compound">helios::rendering::mesh::MeshRenderCommand</ref> &amp;</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap" kindref="compound">helios::rendering::shader::UniformValueMap</ref> &amp;</type>
+          <declname>frameUniformValues</declname>
+        </param>
+        <briefdescription>
+<para>Renders a mesh using the provided render command and frame-level uniforms. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method performs the following steps: 1. Extracts the shader and mesh from the render command&apos;s prototype. 2. Activates the shader if it differs from the previously used shader (state caching). 3. Applies frame-level, object-level, and material-level uniform values. 4. Binds the mesh&apos;s VAO if it differs from the previously bound VAO (state caching). 5. Issues a `glDrawElements` call with the appropriate primitive type.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>command</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The render command containing the render prototype with mesh, material, and per-object uniform data. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>frameUniformValues</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Frame-level uniform values shared across all objects (e.g., view and projection matrices).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>If the render command does not contain a valid render prototype, the method returns without issuing any draw calls.</para>
+</simplesect>
+<simplesect kind="see"><para>MeshRenderCommand </para>
+</simplesect>
+<simplesect kind="see"><para>UniformValueMap </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/ext/opengl/rendering/OpenGLMeshRenderer.ixx" line="143" column="14" bodyfile="/tmp/h/include/ext/opengl/rendering/OpenGLMeshRenderer.ixx" bodystart="143" bodyend="176"/>
+        <references refid="namespacehelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLEnumMapper_1aa1ca6dd5d5fdf09c2bae6d4f7694f3c2" compoundref="OpenGLEnums_8ixx" startline="41" endline="60">helios::ext::opengl::rendering::OpenGLEnumMapper::toOpenGL</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/h/include/ext/opengl/rendering/OpenGLMeshRenderer.ixx" line="14" column="15"/>
+  </compounddef>
+</doxygen>

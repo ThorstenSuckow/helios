@@ -186,14 +186,18 @@ var hierarchy =
       [ "helios::engine::runtime::spawn::SpawnManager", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html", null ]
     ] ],
     [ "helios::math::mat4&lt; T &gt;", "structhelios_1_1math_1_1mat4.html", null ],
-    [ "helios::rendering::model::Material", "classhelios_1_1rendering_1_1model_1_1Material.html", null ],
-    [ "helios::rendering::model::config::MaterialProperties", "classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties.html", null ],
-    [ "helios::rendering::model::config::MaterialPropertiesOverride", "structhelios_1_1rendering_1_1model_1_1config_1_1MaterialPropertiesOverride.html", null ],
-    [ "helios::rendering::model::Mesh", "classhelios_1_1rendering_1_1model_1_1Mesh.html", [
+    [ "helios::rendering::material::Material", "classhelios_1_1rendering_1_1material_1_1Material.html", null ],
+    [ "helios::rendering::material::MaterialShaderProperties", "classhelios_1_1rendering_1_1material_1_1MaterialShaderProperties.html", null ],
+    [ "helios::rendering::material::MaterialShaderPropertiesOverride", "structhelios_1_1rendering_1_1material_1_1MaterialShaderPropertiesOverride.html", null ],
+    [ "helios::rendering::mesh::Mesh", "classhelios_1_1rendering_1_1mesh_1_1Mesh.html", [
       [ "helios::ext::opengl::rendering::model::OpenGLMesh", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh.html", null ]
     ] ],
-    [ "helios::rendering::model::config::MeshConfig", "structhelios_1_1rendering_1_1model_1_1config_1_1MeshConfig.html", null ],
+    [ "helios::rendering::mesh::MeshConfig", "structhelios_1_1rendering_1_1mesh_1_1MeshConfig.html", null ],
+    [ "helios::engine::builder::gameObject::builders::configs::MeshRenderableConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1MeshRenderableConfig.html", null ],
     [ "helios::rendering::mesh::MeshRenderCommand", "classhelios_1_1rendering_1_1mesh_1_1MeshRenderCommand.html", null ],
+    [ "helios::rendering::mesh::MeshRenderer", "classhelios_1_1rendering_1_1mesh_1_1MeshRenderer.html", [
+      [ "helios::ext::opengl::rendering::OpenGLMeshRenderer", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLMeshRenderer.html", null ]
+    ] ],
     [ "helios::engine::builder::gameObject::builders::MotionBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1MotionBuilder.html", null ],
     [ "helios::engine::builder::gameObject::builders::configs::Move2DConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1Move2DConfig.html", null ],
     [ "helios::core::types::no_init_t", "structhelios_1_1core_1_1types_1_1no__init__t.html", null ],
@@ -210,8 +214,6 @@ var hierarchy =
       [ "helios::rendering::mesh::MeshRenderable", "classhelios_1_1rendering_1_1mesh_1_1MeshRenderable.html", null ],
       [ "helios::rendering::text::TextRenderable", "classhelios_1_1rendering_1_1text_1_1TextRenderable.html", null ]
     ] ],
-    [ "helios::engine::builder::gameObject::builders::configs::RenderableConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1RenderableConfig.html", null ],
-    [ "helios::rendering::RenderCommand", "classhelios_1_1rendering_1_1RenderCommand.html", null ],
     [ "helios::engine::builder::gameObject::builders::RenderingBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1RenderingBuilder.html", null ],
     [ "helios::rendering::RenderingDevice", "classhelios_1_1rendering_1_1RenderingDevice.html", [
       [ "helios::ext::opengl::rendering::OpenGLDevice", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice.html", null ]
@@ -315,8 +317,8 @@ var hierarchy =
       [ "helios::ext::opengl::rendering::OpenGLGlyphTextRenderer", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLGlyphTextRenderer.html", null ]
     ] ],
     [ "helios::rendering::text::TextRenderPrototype", "classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html", null ],
-    [ "helios::rendering::text::config::TextShaderProperties", "classhelios_1_1rendering_1_1text_1_1config_1_1TextShaderProperties.html", null ],
-    [ "helios::rendering::text::config::TextShaderPropertiesOverride", "structhelios_1_1rendering_1_1text_1_1config_1_1TextShaderPropertiesOverride.html", null ],
+    [ "helios::rendering::text::TextShaderProperties", "classhelios_1_1rendering_1_1text_1_1TextShaderProperties.html", null ],
+    [ "helios::rendering::text::TextShaderPropertiesOverride", "structhelios_1_1rendering_1_1text_1_1TextShaderPropertiesOverride.html", null ],
     [ "helios::core::spatial::Transform", "classhelios_1_1core_1_1spatial_1_1Transform.html", null ],
     [ "helios::engine::builder::gameObject::builders::TransformBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1TransformBuilder.html", null ],
     [ "helios::engine::builder::gameObject::builders::configs::TransformConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TransformConfig.html", null ],

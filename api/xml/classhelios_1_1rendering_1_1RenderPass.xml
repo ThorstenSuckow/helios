@@ -3,50 +3,52 @@
   <compounddef id="classhelios_1_1rendering_1_1RenderPass" kind="class" language="C++" prot="public">
     <compoundname>helios::rendering::RenderPass</compoundname>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classhelios_1_1rendering_1_1RenderPass_1a98e610776349551ac08ce83682a252a0" prot="private" static="no" mutable="no">
-        <type>std::unique_ptr&lt; <ref refid="classhelios_1_1rendering_1_1RenderQueue" kindref="compound">helios::rendering::RenderQueue</ref> &gt;</type>
-        <definition>std::unique_ptr&lt;helios::rendering::RenderQueue&gt; helios::rendering::RenderPass::renderQueue_</definition>
+      <memberdef kind="variable" id="classhelios_1_1rendering_1_1RenderPass_1ac6bc69369314021980c77949c6cbad85" prot="private" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1rendering_1_1RenderQueue" kindref="compound">helios::rendering::RenderQueue</ref></type>
+        <definition>helios::rendering::RenderQueue helios::rendering::RenderPass::renderQueue_</definition>
         <argsstring></argsstring>
         <name>renderQueue_</name>
         <qualifiedname>helios::rendering::RenderPass::renderQueue_</qualifiedname>
         <briefdescription>
-<para>An owning unique pointer to the `RenderQueue` for this pass. </para>
+<para>The `RenderQueue` for this pass, containing all render commands. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/RenderPass.ixx" line="61" column="25" bodyfile="/tmp/h/include/helios/rendering/RenderPass.ixx" bodystart="61" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/rendering/RenderPass.ixx" line="69" column="40" bodyfile="/tmp/h/include/helios/rendering/RenderPass.ixx" bodystart="69" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classhelios_1_1rendering_1_1RenderPass_1aaa7698120fe0fd86ae4334fe78f0e172" prot="private" static="no" mutable="no">
-        <type>std::unique_ptr&lt; const <ref refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap" kindref="compound">helios::rendering::shader::UniformValueMap</ref> &gt;</type>
-        <definition>std::unique_ptr&lt;const helios::rendering::shader::UniformValueMap&gt; helios::rendering::RenderPass::frameUniformValues_</definition>
+      <memberdef kind="variable" id="classhelios_1_1rendering_1_1RenderPass_1ae3c29ac63155a9315be46b0b4d5f6baa" prot="private" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap" kindref="compound">helios::rendering::shader::UniformValueMap</ref></type>
+        <definition>helios::rendering::shader::UniformValueMap helios::rendering::RenderPass::frameUniformValues_</definition>
         <argsstring></argsstring>
         <name>frameUniformValues_</name>
         <qualifiedname>helios::rendering::RenderPass::frameUniformValues_</qualifiedname>
         <briefdescription>
-<para>An owning unique pointer to the uniform values specific to the current pass (i.e., the rendered &quot;frame&quot;). This map contains uniforms that change once per frame, such as the view and the projection matrix. </para>
+<para>Uniform values specific to the current frame. </para>
         </briefdescription>
         <detaileddescription>
+<para>This map contains uniforms that change once per frame, such as the view and the projection matrices. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/RenderPass.ixx" line="68" column="25" bodyfile="/tmp/h/include/helios/rendering/RenderPass.ixx" bodystart="68" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/rendering/RenderPass.ixx" line="77" column="52" bodyfile="/tmp/h/include/helios/rendering/RenderPass.ixx" bodystart="77" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classhelios_1_1rendering_1_1RenderPass_1a4005c84e429c5a5ec4cbda1d5de7962e" prot="private" static="no" mutable="no">
-        <type>std::shared_ptr&lt; const <ref refid="classhelios_1_1rendering_1_1Viewport" kindref="compound">helios::rendering::Viewport</ref> &gt;</type>
-        <definition>std::shared_ptr&lt;const helios::rendering::Viewport&gt; helios::rendering::RenderPass::viewport_</definition>
+      <memberdef kind="variable" id="classhelios_1_1rendering_1_1RenderPass_1ade14ade8ad77e7bc86bb45bcfd6fe97b" prot="private" static="no" mutable="no">
+        <type>const <ref refid="classhelios_1_1rendering_1_1Viewport" kindref="compound">helios::rendering::Viewport</ref> *</type>
+        <definition>const helios::rendering::Viewport* helios::rendering::RenderPass::viewport_</definition>
         <argsstring></argsstring>
         <name>viewport_</name>
         <qualifiedname>helios::rendering::RenderPass::viewport_</qualifiedname>
         <briefdescription>
-<para>Shared ownership of the `Viewport` processed by this pass. </para>
+<para>Non-owning pointer to the `Viewport` processed by this pass. </para>
         </briefdescription>
         <detaileddescription>
+<para>The caller must ensure the viewport remains valid for the lifetime of this pass. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/RenderPass.ixx" line="73" column="25" bodyfile="/tmp/h/include/helios/rendering/RenderPass.ixx" bodystart="73" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/rendering/RenderPass.ixx" line="84" column="43" bodyfile="/tmp/h/include/helios/rendering/RenderPass.ixx" bodystart="84" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-static-attrib">
@@ -66,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/RenderPass.ixx" line="79" column="55" bodyfile="/tmp/h/include/helios/rendering/RenderPass.ixx" bodystart="79" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/rendering/RenderPass.ixx" line="90" column="55" bodyfile="/tmp/h/include/helios/rendering/RenderPass.ixx" bodystart="90" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -82,7 +84,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/RenderPass.ixx" line="84" column="9"/>
+        <location file="/tmp/h/include/helios/rendering/RenderPass.ixx" line="95" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1rendering_1_1RenderPass_1afac382a610028b5e09af4ade728b78b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -100,13 +102,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/RenderPass.ixx" line="90" column="9"/>
+        <location file="/tmp/h/include/helios/rendering/RenderPass.ixx" line="101" column="9"/>
         <references refid="classhelios_1_1rendering_1_1RenderPass_1afac382a610028b5e09af4ade728b78b3">RenderPass</references>
         <referencedby refid="classhelios_1_1rendering_1_1RenderPass_1a10c7f73c83242609ccd9828ab3068c67">operator=</referencedby>
         <referencedby refid="classhelios_1_1rendering_1_1RenderPass_1aba8b646ce3f4ae9c019edda7d4eb6b0f">operator=</referencedby>
+        <referencedby refid="classhelios_1_1rendering_1_1RenderPass_1ad2560604956310b7db1c3bfdf7be7ecc" compoundref="RenderPass_8ixx" startline="129" endline="140">RenderPass</referencedby>
         <referencedby refid="classhelios_1_1rendering_1_1RenderPass_1afac382a610028b5e09af4ade728b78b3">RenderPass</referencedby>
         <referencedby refid="classhelios_1_1rendering_1_1RenderPass_1a4867d96bd4f5f7348254a0dca848847a">RenderPass</referencedby>
-        <referencedby refid="classhelios_1_1rendering_1_1RenderPass_1aade7bd52eb917132f463a45ed3aaac87" compoundref="RenderPass_8ixx" startline="117" endline="141">RenderPass</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1rendering_1_1RenderPass_1a10c7f73c83242609ccd9828ab3068c67" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classhelios_1_1rendering_1_1RenderPass_1afac382a610028b5e09af4ade728b78b3" kindref="member">RenderPass</ref> &amp;</type>
@@ -124,7 +126,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/RenderPass.ixx" line="96" column="20"/>
+        <location file="/tmp/h/include/helios/rendering/RenderPass.ixx" line="107" column="20"/>
         <references refid="classhelios_1_1rendering_1_1RenderPass_1afac382a610028b5e09af4ade728b78b3">RenderPass</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1rendering_1_1RenderPass_1a4867d96bd4f5f7348254a0dca848847a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
@@ -143,7 +145,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/RenderPass.ixx" line="101" column="9"/>
+        <location file="/tmp/h/include/helios/rendering/RenderPass.ixx" line="112" column="9"/>
         <references refid="classhelios_1_1rendering_1_1RenderPass_1afac382a610028b5e09af4ade728b78b3">RenderPass</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1rendering_1_1RenderPass_1aba8b646ce3f4ae9c019edda7d4eb6b0f" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
@@ -162,38 +164,38 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/RenderPass.ixx" line="106" column="20"/>
+        <location file="/tmp/h/include/helios/rendering/RenderPass.ixx" line="117" column="20"/>
         <references refid="classhelios_1_1rendering_1_1RenderPass_1afac382a610028b5e09af4ade728b78b3">RenderPass</references>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1rendering_1_1RenderPass_1aade7bd52eb917132f463a45ed3aaac87" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1RenderPass_1ad2560604956310b7db1c3bfdf7be7ecc" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
         <definition>helios::rendering::RenderPass::RenderPass</definition>
-        <argsstring>(std::shared_ptr&lt; const helios::rendering::Viewport &gt; viewport, std::unique_ptr&lt; helios::rendering::RenderQueue &gt; renderQueue, std::unique_ptr&lt; const helios::rendering::shader::UniformValueMap &gt; frameUniformValues=nullptr) noexcept</argsstring>
+        <argsstring>(const helios::rendering::Viewport *viewport, helios::rendering::RenderQueue renderQueue, const helios::rendering::shader::UniformValueMap &amp;frameUniformValues) noexcept</argsstring>
         <name>RenderPass</name>
         <qualifiedname>helios::rendering::RenderPass::RenderPass</qualifiedname>
         <param>
-          <type>std::shared_ptr&lt; const <ref refid="classhelios_1_1rendering_1_1Viewport" kindref="compound">helios::rendering::Viewport</ref> &gt;</type>
+          <type>const <ref refid="classhelios_1_1rendering_1_1Viewport" kindref="compound">helios::rendering::Viewport</ref> *</type>
           <declname>viewport</declname>
         </param>
         <param>
-          <type>std::unique_ptr&lt; <ref refid="classhelios_1_1rendering_1_1RenderQueue" kindref="compound">helios::rendering::RenderQueue</ref> &gt;</type>
+          <type><ref refid="classhelios_1_1rendering_1_1RenderQueue" kindref="compound">helios::rendering::RenderQueue</ref></type>
           <declname>renderQueue</declname>
         </param>
         <param>
-          <type>std::unique_ptr&lt; const <ref refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap" kindref="compound">helios::rendering::shader::UniformValueMap</ref> &gt;</type>
+          <type>const <ref refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap" kindref="compound">helios::rendering::shader::UniformValueMap</ref> &amp;</type>
           <declname>frameUniformValues</declname>
-          <defval>nullptr</defval>
         </param>
         <briefdescription>
-<para>Create a new `RenderPass` with the specified `Viewport`, `RenderQueue` and the `UniformValueMap`. Ownership of <ref refid="classhelios_1_1rendering_1_1Viewport" kindref="compound">Viewport</ref> is shared with this instance, the latter objects are transferred to **this** `RenderPass`. </para>
+<para>Creates a new `RenderPass` with the specified viewport, render queue, and frame uniforms. </para>
         </briefdescription>
         <detaileddescription>
+<para>The render queue is moved into this pass. The viewport pointer must remain valid for the lifetime of this pass.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>viewport</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The viewport this <ref refid="classhelios_1_1rendering_1_1RenderPass" kindref="compound">RenderPass</ref> is processing. </para>
+<para>Non-owning pointer to the viewport this <ref refid="classhelios_1_1rendering_1_1RenderPass" kindref="compound">RenderPass</ref> is processing. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -201,7 +203,7 @@
 <parametername>renderQueue</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A unique ptr to the `RenderQueue` that should be processed with this pass. </para>
+<para>The `RenderQueue` to be processed with this pass (moved). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -209,7 +211,7 @@
 <parametername>frameUniformValues</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A unique ptr to the `UniformValueMap` associated with this pass, i.e. frame-specific uniform values. If no values are specified, a default empty set is created. </para>
+<para>Frame-specific uniform values (e.g., view/projection matrices). </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -217,11 +219,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/RenderPass.ixx" line="117" column="18" bodyfile="/tmp/h/include/helios/rendering/RenderPass.ixx" bodystart="117" bodyend="141"/>
-        <references refid="classhelios_1_1rendering_1_1RenderPass_1a9b3b86c9d3d2455bba80ee4b410fbb5b" compoundref="RenderPass_8ixx" startline="178" endline="180">frameUniformValues</references>
+        <location file="/tmp/h/include/helios/rendering/RenderPass.ixx" line="129" column="18" bodyfile="/tmp/h/include/helios/rendering/RenderPass.ixx" bodystart="129" bodyend="140"/>
+        <references refid="classhelios_1_1rendering_1_1RenderPass_1a9b3b86c9d3d2455bba80ee4b410fbb5b" compoundref="RenderPass_8ixx" startline="176" endline="178">frameUniformValues</references>
         <references refid="classhelios_1_1rendering_1_1RenderPass_1afac382a610028b5e09af4ade728b78b3">RenderPass</references>
-        <references refid="classhelios_1_1rendering_1_1RenderPass_1aa8e67383f0e4057c47b80405c02eae19" compoundref="RenderPass_8ixx" startline="148" endline="150">renderQueue</references>
-        <references refid="classhelios_1_1rendering_1_1RenderPass_1ab0e71c167bc7d90cd4dc1be780cbe7d5" compoundref="RenderPass_8ixx" startline="157" endline="159">viewport</references>
+        <references refid="classhelios_1_1rendering_1_1RenderPass_1aa8e67383f0e4057c47b80405c02eae19" compoundref="RenderPass_8ixx" startline="147" endline="149">renderQueue</references>
+        <references refid="classhelios_1_1rendering_1_1RenderPass_1ab0e71c167bc7d90cd4dc1be780cbe7d5" compoundref="RenderPass_8ixx" startline="156" endline="158">viewport</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1rendering_1_1RenderPass_1aa8e67383f0e4057c47b80405c02eae19" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>const <ref refid="classhelios_1_1rendering_1_1RenderQueue" kindref="compound">RenderQueue</ref> &amp;</type>
@@ -239,8 +241,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/RenderPass.ixx" line="148" column="28" bodyfile="/tmp/h/include/helios/rendering/RenderPass.ixx" bodystart="148" bodyend="150"/>
-        <referencedby refid="classhelios_1_1rendering_1_1RenderPass_1aade7bd52eb917132f463a45ed3aaac87" compoundref="RenderPass_8ixx" startline="117" endline="141">RenderPass</referencedby>
+        <location file="/tmp/h/include/helios/rendering/RenderPass.ixx" line="147" column="28" bodyfile="/tmp/h/include/helios/rendering/RenderPass.ixx" bodystart="147" bodyend="149"/>
+        <referencedby refid="classhelios_1_1rendering_1_1RenderPass_1ad2560604956310b7db1c3bfdf7be7ecc" compoundref="RenderPass_8ixx" startline="129" endline="140">RenderPass</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1rendering_1_1RenderPass_1ab0e71c167bc7d90cd4dc1be780cbe7d5" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>const <ref refid="classhelios_1_1rendering_1_1Viewport" kindref="compound">Viewport</ref> &amp;</type>
@@ -258,21 +260,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/RenderPass.ixx" line="157" column="25" bodyfile="/tmp/h/include/helios/rendering/RenderPass.ixx" bodystart="157" bodyend="159"/>
-        <referencedby refid="classhelios_1_1rendering_1_1RenderPass_1aade7bd52eb917132f463a45ed3aaac87" compoundref="RenderPass_8ixx" startline="117" endline="141">RenderPass</referencedby>
+        <location file="/tmp/h/include/helios/rendering/RenderPass.ixx" line="156" column="25" bodyfile="/tmp/h/include/helios/rendering/RenderPass.ixx" bodystart="156" bodyend="158"/>
+        <referencedby refid="classhelios_1_1rendering_1_1RenderPass_1ad2560604956310b7db1c3bfdf7be7ecc" compoundref="RenderPass_8ixx" startline="129" endline="140">RenderPass</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1rendering_1_1RenderPass_1a54bc377a9a1ad0c2d0f8a31342d247d7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1RenderPass_1ae0e0719f483e94dfba011dd94f1113f0" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
         <definition>void helios::rendering::RenderPass::setFrameUniformValues</definition>
-        <argsstring>(std::unique_ptr&lt; const helios::rendering::shader::UniformValueMap &gt; frameUniformValues) noexcept</argsstring>
+        <argsstring>(const helios::rendering::shader::UniformValueMap &amp;frameUniformValues) noexcept</argsstring>
         <name>setFrameUniformValues</name>
         <qualifiedname>helios::rendering::RenderPass::setFrameUniformValues</qualifiedname>
         <param>
-          <type>std::unique_ptr&lt; const <ref refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap" kindref="compound">helios::rendering::shader::UniformValueMap</ref> &gt;</type>
+          <type>const <ref refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap" kindref="compound">helios::rendering::shader::UniformValueMap</ref> &amp;</type>
           <declname>frameUniformValues</declname>
         </param>
         <briefdescription>
-<para>Sets this `RenderPass`&apos; `UniformValueMap` containing per-frame specific uniform values. Transfers ownership of the provided UniformValueMap to this `RenderPass`. </para>
+<para>Sets the frame-specific uniform values for this pass. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -280,7 +282,7 @@
 <parametername>frameUniformValues</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A unique ptr to the `UniformValueMap` for frame specific uniform values. </para>
+<para>The `UniformValueMap` containing frame-specific uniform values. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -288,8 +290,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/RenderPass.ixx" line="167" column="14" bodyfile="/tmp/h/include/helios/rendering/RenderPass.ixx" bodystart="167" bodyend="169"/>
-        <references refid="classhelios_1_1rendering_1_1RenderPass_1a9b3b86c9d3d2455bba80ee4b410fbb5b" compoundref="RenderPass_8ixx" startline="178" endline="180">frameUniformValues</references>
+        <location file="/tmp/h/include/helios/rendering/RenderPass.ixx" line="165" column="14" bodyfile="/tmp/h/include/helios/rendering/RenderPass.ixx" bodystart="165" bodyend="167"/>
+        <references refid="classhelios_1_1rendering_1_1RenderPass_1a9b3b86c9d3d2455bba80ee4b410fbb5b" compoundref="RenderPass_8ixx" startline="176" endline="178">frameUniformValues</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1rendering_1_1RenderPass_1a9b3b86c9d3d2455bba80ee4b410fbb5b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>const <ref refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap" kindref="compound">helios::rendering::shader::UniformValueMap</ref> &amp;</type>
@@ -308,25 +310,32 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/RenderPass.ixx" line="178" column="59" bodyfile="/tmp/h/include/helios/rendering/RenderPass.ixx" bodystart="178" bodyend="180"/>
-        <referencedby refid="classhelios_1_1rendering_1_1RenderPass_1aade7bd52eb917132f463a45ed3aaac87" compoundref="RenderPass_8ixx" startline="117" endline="141">RenderPass</referencedby>
-        <referencedby refid="classhelios_1_1rendering_1_1RenderPass_1a54bc377a9a1ad0c2d0f8a31342d247d7" compoundref="RenderPass_8ixx" startline="167" endline="169">setFrameUniformValues</referencedby>
+        <location file="/tmp/h/include/helios/rendering/RenderPass.ixx" line="176" column="59" bodyfile="/tmp/h/include/helios/rendering/RenderPass.ixx" bodystart="176" bodyend="178"/>
+        <referencedby refid="classhelios_1_1rendering_1_1RenderPass_1ad2560604956310b7db1c3bfdf7be7ecc" compoundref="RenderPass_8ixx" startline="129" endline="140">RenderPass</referencedby>
+        <referencedby refid="classhelios_1_1rendering_1_1RenderPass_1ae0e0719f483e94dfba011dd94f1113f0" compoundref="RenderPass_8ixx" startline="165" endline="167">setFrameUniformValues</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>
 <para>Encapsulates a single rendering pass with its associated resources. </para>
     </briefdescription>
     <detaileddescription>
-<para>A `RenderPass` holds a `RenderQueue` containing all `RenderCommand` and `TextRenderCommand` objects to be processed. It also stores frame-level uniform values (e.g., view and projection matrices) that remain constant during the pass.</para>
+<para>A `RenderPass` holds a `RenderQueue` containing all `MeshRenderCommand` and `TextRenderCommand` objects to be processed. It also stores frame-level uniform values (e.g., view and projection matrices) that remain constant during the pass.</para>
 <para>## Components</para>
 <para><itemizedlist>
 <listitem><para>**RenderQueue:** Contains geometry and text render commands.</para>
-</listitem><listitem><para>**Viewport:** Defines the rendering area and clear settings.</para>
+</listitem><listitem><para>**Viewport:** Non-owning pointer to the rendering area and clear settings.</para>
 </listitem><listitem><para>**UniformValueMap:** Frame-level uniforms applied to all commands.</para>
 </listitem></itemizedlist>
 </para>
+<para>## Ownership Model</para>
+<para><itemizedlist>
+<listitem><para>**RenderQueue:** Owned by value (moved into the pass).</para>
+</listitem><listitem><para>**UniformValueMap:** Owned by value (copied/moved into the pass).</para>
+</listitem><listitem><para>**Viewport:** Non-owning raw pointer. The caller must ensure the viewport remains valid for the lifetime of this pass.</para>
+</listitem></itemizedlist>
+</para>
 <para>## Lifecycle</para>
-<para>``` RenderingDevice::beginRenderPass(pass) → Clear buffers, configure viewport RenderingDevice::doRender(pass) → Process RenderCommands and TextRenderCommands RenderingDevice::endRenderPass(pass) → Finalize pass, unbind resources ```</para>
+<para>``` RenderingDevice::beginRenderPass(pass) → Clear buffers, configure viewport RenderingDevice::doRender(pass) → Process MeshRenderCommands and TextRenderCommands RenderingDevice::endRenderPass(pass) → Finalize pass, unbind resources ```</para>
 <para><simplesect kind="note"><para>Future versions should support additional configuration like depth testing, stencil operations, and draw modes.</para>
 </simplesect>
 <simplesect kind="see"><para><ref refid="classhelios_1_1rendering_1_1RenderQueue" kindref="compound">RenderQueue</ref> </para>
@@ -334,6 +343,8 @@
 <simplesect kind="see"><para><ref refid="classhelios_1_1rendering_1_1RenderingDevice" kindref="compound">RenderingDevice</ref> </para>
 </simplesect>
 <simplesect kind="see"><para><ref refid="classhelios_1_1rendering_1_1Viewport" kindref="compound">Viewport</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1rendering_1_1RenderPassFactory" kindref="compound">RenderPassFactory</ref> </para>
 </simplesect>
 </para>
     </detaileddescription>
@@ -350,21 +361,21 @@
         <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
       </node>
     </collaborationgraph>
-    <location file="/tmp/h/include/helios/rendering/RenderPass.ixx" line="55" column="5" bodyfile="/tmp/h/include/helios/rendering/RenderPass.ixx" bodystart="55" bodyend="181"/>
+    <location file="/tmp/h/include/helios/rendering/RenderPass.ixx" line="63" column="5" bodyfile="/tmp/h/include/helios/rendering/RenderPass.ixx" bodystart="63" bodyend="179"/>
     <listofallmembers>
       <member refid="classhelios_1_1rendering_1_1RenderPass_1a9b3b86c9d3d2455bba80ee4b410fbb5b" prot="public" virt="non-virtual"><scope>helios::rendering::RenderPass</scope><name>frameUniformValues</name></member>
-      <member refid="classhelios_1_1rendering_1_1RenderPass_1aaa7698120fe0fd86ae4334fe78f0e172" prot="private" virt="non-virtual"><scope>helios::rendering::RenderPass</scope><name>frameUniformValues_</name></member>
+      <member refid="classhelios_1_1rendering_1_1RenderPass_1ae3c29ac63155a9315be46b0b4d5f6baa" prot="private" virt="non-virtual"><scope>helios::rendering::RenderPass</scope><name>frameUniformValues_</name></member>
       <member refid="classhelios_1_1rendering_1_1RenderPass_1a3e984be7b0f5767e98d681219b290967" prot="protected" virt="non-virtual"><scope>helios::rendering::RenderPass</scope><name>logger_</name></member>
       <member refid="classhelios_1_1rendering_1_1RenderPass_1a10c7f73c83242609ccd9828ab3068c67" prot="public" virt="non-virtual"><scope>helios::rendering::RenderPass</scope><name>operator=</name></member>
       <member refid="classhelios_1_1rendering_1_1RenderPass_1aba8b646ce3f4ae9c019edda7d4eb6b0f" prot="public" virt="non-virtual"><scope>helios::rendering::RenderPass</scope><name>operator=</name></member>
       <member refid="classhelios_1_1rendering_1_1RenderPass_1afac382a610028b5e09af4ade728b78b3" prot="public" virt="non-virtual"><scope>helios::rendering::RenderPass</scope><name>RenderPass</name></member>
       <member refid="classhelios_1_1rendering_1_1RenderPass_1a4867d96bd4f5f7348254a0dca848847a" prot="public" virt="non-virtual"><scope>helios::rendering::RenderPass</scope><name>RenderPass</name></member>
-      <member refid="classhelios_1_1rendering_1_1RenderPass_1aade7bd52eb917132f463a45ed3aaac87" prot="public" virt="non-virtual"><scope>helios::rendering::RenderPass</scope><name>RenderPass</name></member>
+      <member refid="classhelios_1_1rendering_1_1RenderPass_1ad2560604956310b7db1c3bfdf7be7ecc" prot="public" virt="non-virtual"><scope>helios::rendering::RenderPass</scope><name>RenderPass</name></member>
       <member refid="classhelios_1_1rendering_1_1RenderPass_1aa8e67383f0e4057c47b80405c02eae19" prot="public" virt="non-virtual"><scope>helios::rendering::RenderPass</scope><name>renderQueue</name></member>
-      <member refid="classhelios_1_1rendering_1_1RenderPass_1a98e610776349551ac08ce83682a252a0" prot="private" virt="non-virtual"><scope>helios::rendering::RenderPass</scope><name>renderQueue_</name></member>
-      <member refid="classhelios_1_1rendering_1_1RenderPass_1a54bc377a9a1ad0c2d0f8a31342d247d7" prot="public" virt="non-virtual"><scope>helios::rendering::RenderPass</scope><name>setFrameUniformValues</name></member>
+      <member refid="classhelios_1_1rendering_1_1RenderPass_1ac6bc69369314021980c77949c6cbad85" prot="private" virt="non-virtual"><scope>helios::rendering::RenderPass</scope><name>renderQueue_</name></member>
+      <member refid="classhelios_1_1rendering_1_1RenderPass_1ae0e0719f483e94dfba011dd94f1113f0" prot="public" virt="non-virtual"><scope>helios::rendering::RenderPass</scope><name>setFrameUniformValues</name></member>
       <member refid="classhelios_1_1rendering_1_1RenderPass_1ab0e71c167bc7d90cd4dc1be780cbe7d5" prot="public" virt="non-virtual"><scope>helios::rendering::RenderPass</scope><name>viewport</name></member>
-      <member refid="classhelios_1_1rendering_1_1RenderPass_1a4005c84e429c5a5ec4cbda1d5de7962e" prot="private" virt="non-virtual"><scope>helios::rendering::RenderPass</scope><name>viewport_</name></member>
+      <member refid="classhelios_1_1rendering_1_1RenderPass_1ade14ade8ad77e7bc86bb45bcfd6fe97b" prot="private" virt="non-virtual"><scope>helios::rendering::RenderPass</scope><name>viewport_</name></member>
       <member refid="classhelios_1_1rendering_1_1RenderPass_1a86414eb8eafb963d6e34e4b8148fed8f" prot="public" virt="non-virtual"><scope>helios::rendering::RenderPass</scope><name>~RenderPass</name></member>
     </listofallmembers>
   </compounddef>

@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['backend_0',['Backend',['../dir_c65593c1e2ce5122a06a0735d96badb1.html#autotoc_md31',1,'Creating a New Backend'],['../index.html#autotoc_md526',1,'Custom Rendering Backend']]],
-  ['basecolor_1',['baseColor',['../structhelios_1_1rendering_1_1model_1_1config_1_1MaterialPropertiesOverride.html#a09b64d092d029ff98b9774f3e40a8dea',1,'helios::rendering::model::config::MaterialPropertiesOverride::baseColor'],['../structhelios_1_1rendering_1_1text_1_1config_1_1TextShaderPropertiesOverride.html#a9fef80ca817707d4e895caeebada7a11',1,'helios::rendering::text::config::TextShaderPropertiesOverride::baseColor']]],
+  ['backend_0',['Backend',['../dir_c65593c1e2ce5122a06a0735d96badb1.html#autotoc_md31',1,'Creating a New Backend'],['../index.html#autotoc_md522',1,'Custom Rendering Backend']]],
+  ['basecolor_1',['baseColor',['../structhelios_1_1rendering_1_1material_1_1MaterialShaderPropertiesOverride.html#a5ca7738cdc693512c58b20440323a418',1,'helios::rendering::material::MaterialShaderPropertiesOverride::baseColor'],['../structhelios_1_1rendering_1_1text_1_1TextShaderPropertiesOverride.html#acbab23ba23f54249355306ef51a72f05',1,'helios::rendering::text::TextShaderPropertiesOverride::baseColor']]],
   ['basic_20chase_20behavior_2',['Basic Chase Behavior',['../dir_40abc66e1b4db114e64ae16d6ae11ca0.html#autotoc_md220',1,'']]],
   ['basiceventmanager_3',['BasicEventManager',['../classhelios_1_1event_1_1BasicEventManager.html',1,'helios::event::BasicEventManager'],['../classhelios_1_1event_1_1BasicEventManager.html#a09c5a6c3edfa8b34e5858606be3e769b',1,'helios::event::BasicEventManager::BasicEventManager()']]],
   ['basiceventmanager_2eixx_4',['BasicEventManager.ixx',['../BasicEventManager_8ixx.html',1,'']]],
@@ -28,7 +28,7 @@ var searchData=
   ['brown_25',['Brown',['../structhelios_1_1util_1_1Colors.html#af3357f960a2606101e00c4269d08e337',1,'helios::util::Colors']]],
   ['buffer_26',['Buffer',['../classhelios_1_1core_1_1buffer_1_1Buffer.html',1,'helios::core::buffer::Buffer'],['../classhelios_1_1core_1_1buffer_1_1Buffer.html#ad1705f673a3085124b7674ae52ff2713',1,'helios::core::buffer::Buffer::Buffer()']]],
   ['buffer_2eixx_27',['Buffer.ixx',['../Buffer_8ixx.html',1,'']]],
-  ['build_28',['build',['../classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1RenderableConfig.html#a55db0c21def3776b94649f23186da59a',1,'helios::engine::builder::gameObject::builders::configs::RenderableConfig']]],
+  ['build_28',['build',['../classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1MeshRenderableConfig.html#af4436380ba32d997266b1461f07197b5',1,'helios::engine::builder::gameObject::builders::configs::MeshRenderableConfig']]],
   ['builders_29',['Builders',['../dir_918a2537f64cade110d64935620958ab.html#autotoc_md74',1,'']]],
   ['builders_30',['gameObject/builders/',['../dir_a8f8c4b70d3587fcf7159bd2d30de216.html#autotoc_md93',1,'']]],
   ['builders_20configs_31',['gameObject/builders/configs/',['../dir_a8f8c4b70d3587fcf7159bd2d30de216.html#autotoc_md94',1,'']]],

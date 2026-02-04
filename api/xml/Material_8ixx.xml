@@ -6,7 +6,7 @@
     <includes local="no">stdexcept</includes>
     <includes refid="Shader_8ixx" local="no">helios.rendering.shader.Shader</includes>
     <includes refid="helios_2util_2log_2__module_8ixx" local="no">helios.util.log</includes>
-    <includes refid="MaterialProperties_8ixx" local="no">helios.rendering.model.config.MaterialProperties</includes>
+    <includes refid="MaterialShaderProperties_8ixx" local="no">helios.rendering.material.MaterialShaderProperties</includes>
     <includes refid="UniformValueMap_8ixx" local="no">helios.rendering.shader.UniformValueMap</includes>
     <incdepgraph>
       <node id="9">
@@ -32,20 +32,20 @@
         </childnode>
       </node>
       <node id="23">
-        <label>helios.rendering.model.config.MaterialProperties</label>
-        <link refid="MaterialProperties_8ixx"/>
+        <label>helios.rendering.material.MaterialShaderProperties</label>
+        <link refid="MaterialShaderProperties_8ixx"/>
+        <childnode refid="10" relation="include">
+        </childnode>
         <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="24" relation="include">
         </childnode>
       </node>
       <node id="24">
-        <label>helios.rendering.model.config.MaterialPropertiesOverride</label>
-        <link refid="MaterialPropertiesOverride_8ixx"/>
+        <label>helios.rendering.material.MaterialShaderPropertiesOverride</label>
+        <link refid="MaterialShaderPropertiesOverride_8ixx"/>
         <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
@@ -186,21 +186,21 @@
         <label>vector</label>
       </node>
     </incdepgraph>
-    <innerclass refid="classhelios_1_1rendering_1_1model_1_1Material" prot="public">helios::rendering::model::Material</innerclass>
+    <innerclass refid="classhelios_1_1rendering_1_1material_1_1Material" prot="public">helios::rendering::material::Material</innerclass>
     <innernamespace refid="namespacehelios">helios</innernamespace>
     <innernamespace refid="namespacehelios_1_1rendering">helios::rendering</innernamespace>
-    <innernamespace refid="namespacehelios_1_1rendering_1_1model">helios::rendering::model</innernamespace>
+    <innernamespace refid="namespacehelios_1_1rendering_1_1material">helios::rendering::material</innernamespace>
     <sectiondef kind="define">
       <memberdef kind="define" id="Material_8ixx_1acbc04f24078582c7d42b2085be5d5750" prot="public" static="no">
         <name>HELIOS_LOG_SCOPE</name>
-        <initializer>&quot;helios::rendering::model::Material&quot;</initializer>
+        <initializer>&quot;helios::rendering::material::Material&quot;</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/model/Material.ixx" line="17" column="9" bodyfile="/tmp/h/include/helios/rendering/model/Material.ixx" bodystart="17" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/rendering/material/Material.ixx" line="17" column="9" bodyfile="/tmp/h/include/helios/rendering/material/Material.ixx" bodystart="17" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -218,15 +218,15 @@
 <codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdexcept&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8rendering_8model_8Material" kindref="compound">helios.rendering.model.Material</ref>;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8rendering_8material_8Material" kindref="compound">helios.rendering.material.Material</ref>;</highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
 <codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8rendering_8shader_8UniformValueMap" kindref="compound">helios.rendering.shader.UniformValueMap</ref>;</highlight></codeline>
-<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8rendering_8model_8config_8MaterialProperties" kindref="compound">helios.rendering.model.config.MaterialProperties</ref>;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8rendering_8material_8MaterialShaderProperties" kindref="compound">helios.rendering.material.MaterialShaderProperties</ref>;</highlight></codeline>
 <codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8util_8log" kindref="compound">helios.util.log</ref>;</highlight></codeline>
 <codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8rendering_8shader_8Shader" kindref="compound">helios.rendering.shader.Shader</ref>;</highlight></codeline>
 <codeline lineno="16"><highlight class="normal"></highlight></codeline>
-<codeline lineno="17" refid="Material_8ixx_1acbc04f24078582c7d42b2085be5d5750" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>HELIOS_LOG_SCOPE<sp/>&quot;helios::rendering::model::Material&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1rendering_1_1model" kindref="compound">helios::rendering::model</ref><sp/>{</highlight></codeline>
+<codeline lineno="17" refid="Material_8ixx_1acbc04f24078582c7d42b2085be5d5750" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>HELIOS_LOG_SCOPE<sp/>&quot;helios::rendering::material::Material&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18" refid="namespacehelios_1_1rendering_1_1material" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1rendering_1_1material" kindref="compound">helios::rendering::material</ref><sp/>{</highlight></codeline>
 <codeline lineno="19"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
 <codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Represents<sp/>a<sp/>parameterizable<sp/>material.</highlight></codeline>
@@ -234,61 +234,61 @@
 <codeline lineno="23"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>A<sp/>Material<sp/>contains<sp/>a<sp/>reference<sp/>to<sp/>a<sp/>shared,<sp/>immutable<sp/>`Shader`<sp/>and</highlight></codeline>
 <codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>material<sp/>properties<sp/>used<sp/>to<sp/>configure<sp/>the<sp/>shader<sp/>at<sp/>draw<sp/>time.</highlight></codeline>
 <codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="26" refid="classhelios_1_1rendering_1_1model_1_1Material" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1rendering_1_1model_1_1Material_1a7db1883309702d67ed3834c071173bdb" kindref="member">Material</ref><sp/>final<sp/>{</highlight></codeline>
+<codeline lineno="26" refid="classhelios_1_1rendering_1_1material_1_1Material" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1rendering_1_1material_1_1Material_1a9e2e2c7f2ed5cd14cae75f37317d0b97" kindref="member">Material</ref><sp/>final<sp/>{</highlight></codeline>
 <codeline lineno="27"><highlight class="normal"></highlight></codeline>
 <codeline lineno="28"><highlight class="normal"></highlight></codeline>
 <codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="30" refid="classhelios_1_1rendering_1_1model_1_1Material_1a7db1883309702d67ed3834c071173bdb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1rendering_1_1model_1_1Material_1a7db1883309702d67ed3834c071173bdb" kindref="member">Material</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="30" refid="classhelios_1_1rendering_1_1material_1_1Material_1a9e2e2c7f2ed5cd14cae75f37317d0b97" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1rendering_1_1material_1_1Material_1a9e2e2c7f2ed5cd14cae75f37317d0b97" kindref="member">Material</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Shared<sp/>pointer<sp/>for<sp/>the<sp/>raw,<sp/>immutable<sp/>MaterialProperties.</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Shared<sp/>pointer<sp/>for<sp/>the<sp/>raw,<sp/>immutable<sp/>MaterialShaderProperties.</highlight></codeline>
 <codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="35" refid="classhelios_1_1rendering_1_1model_1_1Material_1ac7060340ba7d307aac7f30d46474b1d5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;const<sp/>helios::rendering::model::config::MaterialProperties&gt;<sp/><ref refid="classhelios_1_1rendering_1_1model_1_1Material_1ac7060340ba7d307aac7f30d46474b1d5" kindref="member">materialProperties_</ref>;</highlight></codeline>
+<codeline lineno="35" refid="classhelios_1_1rendering_1_1material_1_1Material_1aaac40d0c37ea98cd0fdf2696746d93d4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;const<sp/>helios::rendering::material::MaterialShaderProperties&gt;<sp/><ref refid="classhelios_1_1rendering_1_1material_1_1Material_1aaac40d0c37ea98cd0fdf2696746d93d4" kindref="member">materialProperties_</ref>;</highlight></codeline>
 <codeline lineno="36"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
 <codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Shared<sp/>pointer<sp/>to<sp/>the<sp/>immutable<sp/>Shader.</highlight></codeline>
 <codeline lineno="39"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="40" refid="classhelios_1_1rendering_1_1model_1_1Material_1a0b16bb315fdf18861e2586378d16df43" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;const<sp/>helios::rendering::shader::Shader&gt;<sp/><ref refid="classhelios_1_1rendering_1_1model_1_1Material_1a0b16bb315fdf18861e2586378d16df43" kindref="member">shader_</ref>{};</highlight></codeline>
+<codeline lineno="40" refid="classhelios_1_1rendering_1_1material_1_1Material_1a1b8c3262377aa05a766336a6b84a5ef8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;const<sp/>helios::rendering::shader::Shader&gt;<sp/><ref refid="classhelios_1_1rendering_1_1material_1_1Material_1a1b8c3262377aa05a766336a6b84a5ef8" kindref="member">shader_</ref>{};</highlight></codeline>
 <codeline lineno="41"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="42"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
 <codeline lineno="43"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Shared<sp/>logger<sp/>instance<sp/>for<sp/>all<sp/>Material<sp/>objects.</highlight></codeline>
 <codeline lineno="44"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="45" refid="classhelios_1_1rendering_1_1model_1_1Material_1a9cef4928f7f9bc0b885f6659faa5a356" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1util_1_1log_1_1Logger" kindref="compound">helios::util::log::Logger</ref>&amp;<sp/><ref refid="classhelios_1_1rendering_1_1model_1_1Material_1a9cef4928f7f9bc0b885f6659faa5a356" kindref="member">logger_</ref><sp/>=<sp/><ref refid="classhelios_1_1util_1_1log_1_1LogManager_1a750d8fd5b3ee3678600644756b0631e7" kindref="member">helios::util::log::LogManager::loggerForScope</ref>(<ref refid="OpenGLUniformLocationMap_8ixx_1acbc04f24078582c7d42b2085be5d5750" kindref="member">HELIOS_LOG_SCOPE</ref>);</highlight></codeline>
+<codeline lineno="45" refid="classhelios_1_1rendering_1_1material_1_1Material_1a3cba76d85a9b1bb9e4ff5ffc281c7652" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1util_1_1log_1_1Logger" kindref="compound">helios::util::log::Logger</ref>&amp;<sp/><ref refid="classhelios_1_1rendering_1_1material_1_1Material_1a3cba76d85a9b1bb9e4ff5ffc281c7652" kindref="member">logger_</ref><sp/>=<sp/><ref refid="classhelios_1_1util_1_1log_1_1LogManager_1a750d8fd5b3ee3678600644756b0631e7" kindref="member">helios::util::log::LogManager::loggerForScope</ref>(<ref refid="OpenGLUniformLocationMap_8ixx_1acbc04f24078582c7d42b2085be5d5750" kindref="member">HELIOS_LOG_SCOPE</ref>);</highlight></codeline>
 <codeline lineno="46"><highlight class="normal"></highlight></codeline>
 <codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="48" refid="classhelios_1_1rendering_1_1model_1_1Material_1aaf3a9fd39ec7f25ace56cd65a937d857" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1rendering_1_1model_1_1Material_1aaf3a9fd39ec7f25ace56cd65a937d857" kindref="member">~Material</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="48" refid="classhelios_1_1rendering_1_1material_1_1Material_1a974a60df3a4824668532258827016afc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1rendering_1_1material_1_1Material_1a974a60df3a4824668532258827016afc" kindref="member">~Material</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="49"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="50"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
 <codeline lineno="51"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Creates<sp/>a<sp/>new<sp/>Material.</highlight></codeline>
 <codeline lineno="52"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="53"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>shader<sp/>A<sp/>shared<sp/>pointer<sp/>to<sp/>the<sp/>immutable<sp/>Shader<sp/>used<sp/>by<sp/>this<sp/>instance.</highlight></codeline>
-<codeline lineno="54"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>materialProperties<sp/>A<sp/>shared<sp/>pointer<sp/>to<sp/>the<sp/>MaterialProperties<sp/>for<sp/>this<sp/>Material.</highlight></codeline>
+<codeline lineno="54"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>materialProperties<sp/>A<sp/>shared<sp/>pointer<sp/>to<sp/>the<sp/>MaterialShaderProperties<sp/>for<sp/>this<sp/>Material.</highlight></codeline>
 <codeline lineno="55"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="56"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@throws<sp/>std::invalid_argument<sp/>if<sp/>shader<sp/>or<sp/>materialProperties<sp/>is<sp/>a<sp/>null<sp/>shared<sp/>pointer.</highlight></codeline>
 <codeline lineno="57"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="58" refid="classhelios_1_1rendering_1_1model_1_1Material_1a23481bde5a56c1d2d4a9c8bca57bc7a1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1rendering_1_1model_1_1Material_1a23481bde5a56c1d2d4a9c8bca57bc7a1" kindref="member">Material</ref>(</highlight></codeline>
-<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;const<sp/>helios::rendering::shader::Shader&gt;<sp/><ref refid="classhelios_1_1rendering_1_1model_1_1Material_1afc78ee032a66d4b2bb48b866612c9125" kindref="member">shader</ref>,</highlight></codeline>
-<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;const<sp/>helios::rendering::model::config::MaterialProperties&gt;<sp/><ref refid="classhelios_1_1rendering_1_1model_1_1Material_1abee66c72fa5c827dfdba3a2efe023277" kindref="member">materialProperties</ref></highlight></codeline>
+<codeline lineno="58" refid="classhelios_1_1rendering_1_1material_1_1Material_1a960af91c6543693a71470ab3ca0a7fd7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1rendering_1_1material_1_1Material_1a960af91c6543693a71470ab3ca0a7fd7" kindref="member">Material</ref>(</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;const<sp/>helios::rendering::shader::Shader&gt;<sp/><ref refid="classhelios_1_1rendering_1_1material_1_1Material_1a4c3143a0cdc335e3918a199293f14acb" kindref="member">shader</ref>,</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;const<sp/>helios::rendering::material::MaterialShaderProperties&gt;<sp/><ref refid="classhelios_1_1rendering_1_1material_1_1Material_1abddbbed2d02057d2a433d86386c15deb" kindref="member">materialProperties</ref></highlight></codeline>
 <codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>)<sp/>:</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1rendering_1_1model_1_1Material_1a0b16bb315fdf18861e2586378d16df43" kindref="member">shader_</ref>(std::move(<ref refid="classhelios_1_1rendering_1_1model_1_1Material_1afc78ee032a66d4b2bb48b866612c9125" kindref="member">shader</ref>)),</highlight></codeline>
-<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1rendering_1_1model_1_1Material_1ac7060340ba7d307aac7f30d46474b1d5" kindref="member">materialProperties_</ref>(std::move(<ref refid="classhelios_1_1rendering_1_1model_1_1Material_1abee66c72fa5c827dfdba3a2efe023277" kindref="member">materialProperties</ref>))</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1rendering_1_1material_1_1Material_1a1b8c3262377aa05a766336a6b84a5ef8" kindref="member">shader_</ref>(std::move(<ref refid="classhelios_1_1rendering_1_1material_1_1Material_1a4c3143a0cdc335e3918a199293f14acb" kindref="member">shader</ref>)),</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1rendering_1_1material_1_1Material_1aaac40d0c37ea98cd0fdf2696746d93d4" kindref="member">materialProperties_</ref>(std::move(<ref refid="classhelios_1_1rendering_1_1material_1_1Material_1abddbbed2d02057d2a433d86386c15deb" kindref="member">materialProperties</ref>))</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!<ref refid="classhelios_1_1rendering_1_1model_1_1Material_1a0b16bb315fdf18861e2586378d16df43" kindref="member">shader_</ref><sp/>||<sp/>!<ref refid="classhelios_1_1rendering_1_1model_1_1Material_1ac7060340ba7d307aac7f30d46474b1d5" kindref="member">materialProperties_</ref>)<sp/>{</highlight></codeline>
-<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>msg<sp/>=<sp/>!<ref refid="classhelios_1_1rendering_1_1model_1_1Material_1a0b16bb315fdf18861e2586378d16df43" kindref="member">shader_</ref><sp/>?</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!<ref refid="classhelios_1_1rendering_1_1material_1_1Material_1a1b8c3262377aa05a766336a6b84a5ef8" kindref="member">shader_</ref><sp/>||<sp/>!<ref refid="classhelios_1_1rendering_1_1material_1_1Material_1aaac40d0c37ea98cd0fdf2696746d93d4" kindref="member">materialProperties_</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>msg<sp/>=<sp/>!<ref refid="classhelios_1_1rendering_1_1material_1_1Material_1a1b8c3262377aa05a766336a6b84a5ef8" kindref="member">shader_</ref><sp/>?</highlight></codeline>
 <codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Material<sp/>constructor<sp/>received<sp/>a<sp/>shader<sp/>nullptr.&quot;</highlight><highlight class="normal"><sp/>:</highlight></codeline>
 <codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Material<sp/>constructor<sp/>received<sp/>a<sp/>materialProperties<sp/>nullptr.&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1rendering_1_1model_1_1Material_1a9cef4928f7f9bc0b885f6659faa5a356" kindref="member">logger_</ref>.error(msg);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1rendering_1_1material_1_1Material_1a3cba76d85a9b1bb9e4ff5ffc281c7652" kindref="member">logger_</ref>.error(msg);</highlight></codeline>
 <codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::invalid_argument(msg);</highlight></codeline>
 <codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="73"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="74"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="75"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Returns<sp/>a<sp/>const<sp/>reference<sp/>to<sp/>the<sp/>underlying<sp/>MaterialProperties.</highlight></codeline>
+<codeline lineno="75"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Returns<sp/>a<sp/>const<sp/>reference<sp/>to<sp/>the<sp/>underlying<sp/>MaterialShaderProperties.</highlight></codeline>
 <codeline lineno="76"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="77"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>The<sp/>const<sp/>reference<sp/>to<sp/>this<sp/>Material&apos;s<sp/>MaterialProperties.</highlight></codeline>
+<codeline lineno="77"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>The<sp/>const<sp/>reference<sp/>to<sp/>this<sp/>Material&apos;s<sp/>MaterialShaderProperties.</highlight></codeline>
 <codeline lineno="78"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="79" refid="classhelios_1_1rendering_1_1model_1_1Material_1abee66c72fa5c827dfdba3a2efe023277" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties" kindref="compound">helios::rendering::model::config::MaterialProperties</ref>&amp;<sp/><ref refid="classhelios_1_1rendering_1_1model_1_1Material_1abee66c72fa5c827dfdba3a2efe023277" kindref="member">materialProperties</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*<ref refid="classhelios_1_1rendering_1_1model_1_1Material_1ac7060340ba7d307aac7f30d46474b1d5" kindref="member">materialProperties_</ref>;</highlight></codeline>
+<codeline lineno="79" refid="classhelios_1_1rendering_1_1material_1_1Material_1abddbbed2d02057d2a433d86386c15deb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1rendering_1_1material_1_1MaterialShaderProperties" kindref="compound">helios::rendering::material::MaterialShaderProperties</ref>&amp;<sp/><ref refid="classhelios_1_1rendering_1_1material_1_1Material_1abddbbed2d02057d2a433d86386c15deb" kindref="member">materialProperties</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*<ref refid="classhelios_1_1rendering_1_1material_1_1Material_1aaac40d0c37ea98cd0fdf2696746d93d4" kindref="member">materialProperties_</ref>;</highlight></codeline>
 <codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="82"><highlight class="normal"></highlight></codeline>
 <codeline lineno="83"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
@@ -297,25 +297,25 @@
 <codeline lineno="86"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="87"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>const<sp/>ref<sp/>to<sp/>the<sp/>Shader<sp/>used<sp/>by<sp/>this<sp/>Material.</highlight></codeline>
 <codeline lineno="88"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="89" refid="classhelios_1_1rendering_1_1model_1_1Material_1afc78ee032a66d4b2bb48b866612c9125" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1rendering_1_1shader_1_1Shader" kindref="compound">helios::rendering::shader::Shader</ref>&amp;<sp/><ref refid="classhelios_1_1rendering_1_1model_1_1Material_1afc78ee032a66d4b2bb48b866612c9125" kindref="member">shader</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
-<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*<ref refid="classhelios_1_1rendering_1_1model_1_1Material_1a0b16bb315fdf18861e2586378d16df43" kindref="member">shader_</ref>;</highlight></codeline>
+<codeline lineno="89" refid="classhelios_1_1rendering_1_1material_1_1Material_1a4c3143a0cdc335e3918a199293f14acb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1rendering_1_1shader_1_1Shader" kindref="compound">helios::rendering::shader::Shader</ref>&amp;<sp/><ref refid="classhelios_1_1rendering_1_1material_1_1Material_1a4c3143a0cdc335e3918a199293f14acb" kindref="member">shader</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*<ref refid="classhelios_1_1rendering_1_1material_1_1Material_1a1b8c3262377aa05a766336a6b84a5ef8" kindref="member">shader_</ref>;</highlight></codeline>
 <codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="92"><highlight class="normal"></highlight></codeline>
 <codeline lineno="93"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="94"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
 <codeline lineno="95"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Writes<sp/>this<sp/>Material&apos;s<sp/>uniform<sp/>values<sp/>into<sp/>the<sp/>given<sp/>map.</highlight></codeline>
 <codeline lineno="96"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="97"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Delegates<sp/>to<sp/>MaterialProperties::writeUniformValues().</highlight></codeline>
+<codeline lineno="97"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Delegates<sp/>to<sp/>MaterialShaderProperties::writeUniformValues().</highlight></codeline>
 <codeline lineno="98"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="99"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>uniformValueMap<sp/>Target<sp/>map<sp/>receiving<sp/>the<sp/>uniform<sp/>values.</highlight></codeline>
 <codeline lineno="100"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="101" refid="classhelios_1_1rendering_1_1model_1_1Material_1a3bd2e09ddc59bfc501a889079bc865b6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1rendering_1_1model_1_1Material_1a3bd2e09ddc59bfc501a889079bc865b6" kindref="member">writeUniformValues</ref>(<ref refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap" kindref="compound">helios::rendering::shader::UniformValueMap</ref>&amp;<sp/>uniformValueMap)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1rendering_1_1model_1_1Material_1ac7060340ba7d307aac7f30d46474b1d5" kindref="member">materialProperties_</ref>-&gt;writeUniformValues(uniformValueMap);</highlight></codeline>
+<codeline lineno="101" refid="classhelios_1_1rendering_1_1material_1_1Material_1a740d6cd2bebb918e984ecc91cb7e36a4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1rendering_1_1material_1_1Material_1a740d6cd2bebb918e984ecc91cb7e36a4" kindref="member">writeUniformValues</ref>(<ref refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap" kindref="compound">helios::rendering::shader::UniformValueMap</ref>&amp;<sp/>uniformValueMap)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1rendering_1_1material_1_1Material_1aaac40d0c37ea98cd0fdf2696746d93d4" kindref="member">materialProperties_</ref>-&gt;writeUniformValues(uniformValueMap);</highlight></codeline>
 <codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="105"><highlight class="normal"></highlight></codeline>
 <codeline lineno="106"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>helios::rendering::model</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="/tmp/h/include/helios/rendering/model/Material.ixx"/>
+    <location file="/tmp/h/include/helios/rendering/material/Material.ixx"/>
   </compounddef>
 </doxygen>

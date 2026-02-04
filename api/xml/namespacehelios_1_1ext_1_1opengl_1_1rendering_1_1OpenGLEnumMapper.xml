@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="namespacehelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLEnumMapper" kind="namespace" language="C++">
+    <compoundname>helios::ext::opengl::rendering::OpenGLEnumMapper</compoundname>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespacehelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLEnumMapper_1aa1ca6dd5d5fdf09c2bae6d4f7694f3c2" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>GLenum</type>
+        <definition>GLenum helios::ext::opengl::rendering::OpenGLEnumMapper::toOpenGL</definition>
+        <argsstring>(helios::rendering::mesh::PrimitiveType primitiveType) noexcept</argsstring>
+        <name>toOpenGL</name>
+        <qualifiedname>helios::ext::opengl::rendering::OpenGLEnumMapper::toOpenGL</qualifiedname>
+        <param>
+          <type><ref refid="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588c" kindref="member">helios::rendering::mesh::PrimitiveType</ref></type>
+          <declname>primitiveType</declname>
+        </param>
+        <briefdescription>
+<para>Translates a helios abstract PrimitiveType enum to its corresponding OpenGL GLenum value. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This utility function maps API-agnostic primitive types defined by helios to their OpenGL equivalents. It is used internally by <ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLMeshRenderer" kindref="compound">OpenGLMeshRenderer</ref> and other OpenGL rendering components.</para>
+<para>Supported mappings:<itemizedlist>
+<listitem><para>`PrimitiveType::Points` → `GL_POINTS`</para>
+</listitem><listitem><para>`PrimitiveType::Lines` → `GL_LINES`</para>
+</listitem><listitem><para>`PrimitiveType::LineLoop` → `GL_LINE_LOOP`</para>
+</listitem><listitem><para>`PrimitiveType::LineStrip` → `GL_LINE_STRIP`</para>
+</listitem><listitem><para>`PrimitiveType::Triangles` → `GL_TRIANGLES`</para>
+</listitem><listitem><para>`PrimitiveType::TriangleStrip` → `GL_TRIANGLE_STRIP`</para>
+</listitem><listitem><para>`PrimitiveType::TriangleFan` → `GL_TRIANGLE_FAN`</para>
+</listitem></itemizedlist>
+</para>
+<para>Example usage: ```cpp auto glPrimitive = OpenGLEnumMapper::toOpenGL(PrimitiveType::Triangles); glDrawElements(glPrimitive, indexCount, GL_UNSIGNED_INT, nullptr); ```</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>primitiveType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The API-agnostic PrimitiveType value.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The corresponding OpenGL primitive type as a GLenum. Falls back to `GL_TRIANGLES` if the mapping is not explicitly defined.</para>
+</simplesect>
+<simplesect kind="note"><para>This function is marked `[[nodiscard]]` to encourage proper usage of the return value. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/ext/opengl/rendering/OpenGLEnums.ixx" line="41" column="13" bodyfile="/tmp/h/include/ext/opengl/rendering/OpenGLEnums.ixx" bodystart="41" bodyend="60"/>
+        <references refid="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588ca2ba065d2b3004087cc8f111bf56f134b" compoundref="PrimitiveType_8ixx" startline="50">helios::rendering::mesh::LineLoop</references>
+        <references refid="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588caa0b0293a2db49f5f93c15a62e095c819" compoundref="PrimitiveType_8ixx" startline="45">helios::rendering::mesh::Lines</references>
+        <references refid="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588cae7f9e73b8edd21f420a63b3ace5768a2" compoundref="PrimitiveType_8ixx" startline="55">helios::rendering::mesh::LineStrip</references>
+        <references refid="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588ca75dd5f1160a3f02b6fae89c54361a1b3" compoundref="PrimitiveType_8ixx" startline="40">helios::rendering::mesh::Points</references>
+        <references refid="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588ca18d58fde618e4a30e2dfdc122e693047" compoundref="PrimitiveType_8ixx" startline="70">helios::rendering::mesh::TriangleFan</references>
+        <references refid="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588ca7ca66fdfaad3eb33fc65d7490178f856" compoundref="PrimitiveType_8ixx" startline="60">helios::rendering::mesh::Triangles</references>
+        <references refid="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588ca1da0b9ead8b051940a89214bae22831c" compoundref="PrimitiveType_8ixx" startline="65">helios::rendering::mesh::TriangleStrip</references>
+        <referencedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLMeshRenderer_1aa05d8d2158accb4ea60061a99d8d7394" compoundref="OpenGLMeshRenderer_8ixx" startline="143" endline="176">helios::ext::opengl::rendering::OpenGLMeshRenderer::render</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/h/include/ext/opengl/rendering/OpenGLEnums.ixx" line="10" column="1"/>
+  </compounddef>
+</doxygen>

@@ -2,14 +2,111 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="namespacehelios_1_1rendering_1_1mesh" kind="namespace" language="C++">
     <compoundname>helios::rendering::mesh</compoundname>
+    <innerclass refid="classhelios_1_1rendering_1_1mesh_1_1Mesh" prot="public">helios::rendering::mesh::Mesh</innerclass>
+    <innerclass refid="structhelios_1_1rendering_1_1mesh_1_1MeshConfig" prot="public">helios::rendering::mesh::MeshConfig</innerclass>
     <innerclass refid="classhelios_1_1rendering_1_1mesh_1_1MeshRenderable" prot="public">helios::rendering::mesh::MeshRenderable</innerclass>
     <innerclass refid="classhelios_1_1rendering_1_1mesh_1_1MeshRenderCommand" prot="public">helios::rendering::mesh::MeshRenderCommand</innerclass>
+    <innerclass refid="classhelios_1_1rendering_1_1mesh_1_1MeshRenderer" prot="public">helios::rendering::mesh::MeshRenderer</innerclass>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588c" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>PrimitiveType</name>
+        <qualifiedname>helios::rendering::mesh::PrimitiveType</qualifiedname>
+        <enumvalue id="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588ca75dd5f1160a3f02b6fae89c54361a1b3" prot="public">
+          <name>Points</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Draw each vertex as a single point. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588caa0b0293a2db49f5f93c15a62e095c819" prot="public">
+          <name>Lines</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Treat each pair of vertices as an independent line segment. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588ca2ba065d2b3004087cc8f111bf56f134b" prot="public">
+          <name>LineLoop</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Connect vertices in sequence and close the loop (last -&gt; first). </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588cae7f9e73b8edd21f420a63b3ace5768a2" prot="public">
+          <name>LineStrip</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Connect vertices in sequence forming a continuous polyline. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588ca7ca66fdfaad3eb33fc65d7490178f856" prot="public">
+          <name>Triangles</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Interpret each group of three vertices as an independent triangle. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588ca1da0b9ead8b051940a89214bae22831c" prot="public">
+          <name>TriangleStrip</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Build a connected strip of triangles sharing vertices. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588ca18d58fde618e4a30e2dfdc122e693047" prot="public">
+          <name>TriangleFan</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Build triangles sharing the first vertex (fan topology). </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588ca4eecfb50c5a20eb78bc4d5304e9d8618" prot="public">
+          <name>size_</name>
+          <briefdescription>
+<para>Sentinel value equal to the number of primitive types. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Defines how vertices are assembled into primitives during rendering. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This enum provides API-agnostic representations for common primitive assembly modes (points, lines, triangles, and their strip/fan variants). Backends should map these values to the corresponding native topology constants.</para>
+<para>Example (pseudo-code mapping to OpenGL): <programlisting filename=".cpp"><codeline><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(primitiveType)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588ca75dd5f1160a3f02b6fae89c54361a1b3" kindref="member">PrimitiveType::Points</ref>:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GL_POINTS;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588caa0b0293a2db49f5f93c15a62e095c819" kindref="member">PrimitiveType::Lines</ref>:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GL_LINES;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588ca2ba065d2b3004087cc8f111bf56f134b" kindref="member">PrimitiveType::LineLoop</ref>:<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GL_LINE_LOOP;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588cae7f9e73b8edd21f420a63b3ace5768a2" kindref="member">PrimitiveType::LineStrip</ref>:<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GL_LINE_STRIP;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588ca7ca66fdfaad3eb33fc65d7490178f856" kindref="member">PrimitiveType::Triangles</ref>:<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GL_TRIANGLES;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588ca1da0b9ead8b051940a89214bae22831c" kindref="member">PrimitiveType::TriangleStrip</ref>:<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GL_TRIANGLE_STRIP;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588ca18d58fde618e4a30e2dfdc122e693047" kindref="member">PrimitiveType::TriangleFan</ref>:<sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GL_TRIANGLE_FAN;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">:<sp/></highlight><highlight class="comment">//<sp/>unreachable<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return<sp/>GL_TRIANGLES;</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+<para><simplesect kind="see"><para><ref refid="structhelios_1_1rendering_1_1mesh_1_1MeshConfig" kindref="compound">MeshConfig</ref> (default is `PrimitiveType::Triangles`) </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/mesh/PrimitiveType.ixx" line="36" column="5" bodyfile="/tmp/h/include/helios/rendering/mesh/PrimitiveType.ixx" bodystart="36" bodyend="76"/>
+      </memberdef>
+    </sectiondef>
     <briefdescription>
-<para>Mesh rendering abstractions and command types. </para>
+<para><ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh" kindref="compound">Mesh</ref> rendering abstractions and command types. </para>
     </briefdescription>
     <detaileddescription>
-<para>This namespace provides the core types for mesh rendering. <computeroutput><ref refid="classhelios_1_1rendering_1_1mesh_1_1MeshRenderable" kindref="compound">MeshRenderable</ref></computeroutput> is a high-level component that can be attached to game objects, combining a shared <computeroutput><ref refid="classhelios_1_1rendering_1_1RenderPrototype" kindref="compound">RenderPrototype</ref></computeroutput> with optional per-instance <computeroutput>MaterialPropertiesOverride</computeroutput>. <computeroutput><ref refid="classhelios_1_1rendering_1_1mesh_1_1MeshRenderCommand" kindref="compound">MeshRenderCommand</ref></computeroutput> is the low-level command object that encapsulates all data needed for a single mesh draw call. </para>
+<para>This namespace provides the core types for mesh rendering. <computeroutput><ref refid="classhelios_1_1rendering_1_1mesh_1_1MeshRenderable" kindref="compound">MeshRenderable</ref></computeroutput> is a high-level component that can be attached to game objects, combining a shared <computeroutput><ref refid="classhelios_1_1rendering_1_1RenderPrototype" kindref="compound">RenderPrototype</ref></computeroutput> with optional per-instance <computeroutput>MaterialShaderPropertiesOverride</computeroutput>. <computeroutput><ref refid="classhelios_1_1rendering_1_1mesh_1_1MeshRenderCommand" kindref="compound">MeshRenderCommand</ref></computeroutput> is the low-level command object that encapsulates all data needed for a single mesh draw call. </para>
     </detaileddescription>
-    <location file="/tmp/h/include/helios/rendering/mesh/MeshRenderable.ixx" line="25" column="1"/>
+    <location file="/tmp/h/include/helios/rendering/mesh/Mesh.ixx" line="26" column="1"/>
   </compounddef>
 </doxygen>

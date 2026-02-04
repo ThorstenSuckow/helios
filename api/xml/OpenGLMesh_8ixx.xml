@@ -9,8 +9,8 @@
     <includes local="no">string</includes>
     <includes refid="Vertex_8ixx" local="no">helios.rendering.Vertex</includes>
     <includes refid="Shape_8ixx" local="no">helios.rendering.asset.shape.Shape</includes>
-    <includes refid="MeshConfig_8ixx" local="no">helios.rendering.model.config.MeshConfig</includes>
-    <includes refid="Mesh_8ixx" local="no">helios.rendering.model.Mesh</includes>
+    <includes refid="MeshConfig_8ixx" local="no">helios.rendering.mesh.MeshConfig</includes>
+    <includes refid="Mesh_8ixx" local="no">helios.rendering.mesh.Mesh</includes>
     <incdepgraph>
       <node id="1">
         <label>OpenGLMesh.ixx</label>
@@ -59,7 +59,7 @@
         </childnode>
       </node>
       <node id="12">
-        <label>helios.rendering.model.Mesh</label>
+        <label>helios.rendering.mesh.Mesh</label>
         <link refid="Mesh_8ixx"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -71,27 +71,27 @@
         </childnode>
         <childnode refid="14" relation="include">
         </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
         <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
         <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
       </node>
       <node id="11">
-        <label>helios.rendering.model.config.MeshConfig</label>
+        <label>helios.rendering.mesh.MeshConfig</label>
         <link refid="MeshConfig_8ixx"/>
         <childnode refid="10" relation="include">
         </childnode>
       </node>
       <node id="10">
-        <label>helios.rendering.model.config.PrimitiveType</label>
+        <label>helios.rendering.mesh.PrimitiveType</label>
         <link refid="PrimitiveType_8ixx"/>
       </node>
       <node id="19">
@@ -201,8 +201,8 @@
 <codeline lineno="12"><highlight class="normal"></highlight></codeline>
 <codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8ext_8opengl_8rendering_8model_8OpenGLMesh" kindref="compound">helios.ext.opengl.rendering.model.OpenGLMesh</ref>;</highlight></codeline>
 <codeline lineno="14"><highlight class="normal"></highlight></codeline>
-<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8rendering_8model_8Mesh" kindref="compound">helios.rendering.model.Mesh</ref>;</highlight></codeline>
-<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8rendering_8model_8config_8MeshConfig" kindref="compound">helios.rendering.model.config.MeshConfig</ref>;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8rendering_8mesh_8Mesh" kindref="compound">helios.rendering.mesh.Mesh</ref>;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8rendering_8mesh_8MeshConfig" kindref="compound">helios.rendering.mesh.MeshConfig</ref>;</highlight></codeline>
 <codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8rendering_8asset_8shape_8Shape" kindref="compound">helios.rendering.asset.shape.Shape</ref>;</highlight></codeline>
 <codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8rendering_8Vertex" kindref="compound">helios.rendering.Vertex</ref>;</highlight></codeline>
 <codeline lineno="19"><highlight class="normal"></highlight></codeline>
@@ -215,7 +215,7 @@
 <codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>raw<sp/>mesh<sp/>data<sp/>is<sp/>uploaded<sp/>to<sp/>the<sp/>GPU,<sp/>preparing<sp/>it<sp/>for<sp/>subsequent</highlight></codeline>
 <codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>rendering<sp/>commands<sp/>/<sp/>draw<sp/>calls.</highlight></codeline>
 <codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="29" refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a9b3f32bc20f441643ae07027a88ec3cd" kindref="member">OpenGLMesh</ref><sp/>final<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1rendering_1_1model_1_1Mesh" kindref="compound">helios::rendering::model::Mesh</ref><sp/>{</highlight></codeline>
+<codeline lineno="29" refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a9b3f32bc20f441643ae07027a88ec3cd" kindref="member">OpenGLMesh</ref><sp/>final<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh" kindref="compound">helios::rendering::mesh::Mesh</ref><sp/>{</highlight></codeline>
 <codeline lineno="30"><highlight class="normal"></highlight></codeline>
 <codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="32"><highlight class="normal"></highlight></codeline>
@@ -278,16 +278,16 @@
 <codeline lineno="89"><highlight class="normal"></highlight></codeline>
 <codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glBufferData(</highlight></codeline>
 <codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GL_ARRAY_BUFFER,</highlight></codeline>
-<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1rendering_1_1model_1_1Mesh_1a619940a18c6f132f668be0e28112a5ca" kindref="member">vertices_</ref>-&gt;size()<sp/>*<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="structhelios_1_1rendering_1_1Vertex" kindref="compound">helios::rendering::Vertex</ref>),</highlight></codeline>
-<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;(*<ref refid="classhelios_1_1rendering_1_1model_1_1Mesh_1a619940a18c6f132f668be0e28112a5ca" kindref="member">vertices_</ref>)[0],</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a2cce5a0f7de32f749a1b0435e5868eac" kindref="member">vertices_</ref>-&gt;size()<sp/>*<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="structhelios_1_1rendering_1_1Vertex" kindref="compound">helios::rendering::Vertex</ref>),</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;(*<ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a2cce5a0f7de32f749a1b0435e5868eac" kindref="member">vertices_</ref>)[0],</highlight></codeline>
 <codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GL_STATIC_DRAW</highlight></codeline>
 <codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>
 <codeline lineno="96"><highlight class="normal"></highlight></codeline>
 <codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,<sp/><ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a6c2571a610293e55b51faa79f3b10f1d" kindref="member">ebo_</ref>);</highlight></codeline>
 <codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glBufferData(</highlight></codeline>
 <codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GL_ELEMENT_ARRAY_BUFFER,</highlight></codeline>
-<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1rendering_1_1model_1_1Mesh_1a0100ea58ef8bb486ccd66076fc680eee" kindref="member">indices_</ref>-&gt;size()<sp/>*<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">),</highlight></codeline>
-<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;(*<ref refid="classhelios_1_1rendering_1_1model_1_1Mesh_1a0100ea58ef8bb486ccd66076fc680eee" kindref="member">indices_</ref>)[0],</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a5b664bfba4df5b255f619d7655cce22d" kindref="member">indices_</ref>-&gt;size()<sp/>*<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">),</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;(*<ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a5b664bfba4df5b255f619d7655cce22d" kindref="member">indices_</ref>)[0],</highlight></codeline>
 <codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GL_STATIC_DRAW</highlight></codeline>
 <codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>
 <codeline lineno="104"><highlight class="normal"></highlight></codeline>
@@ -333,23 +333,23 @@
 <codeline lineno="144"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="145"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@throws<sp/>std::invalid_argument<sp/>if<sp/>either<sp/>&quot;vertices&quot;,<sp/>&quot;indices&quot;<sp/>or<sp/>meshConfig<sp/>is<sp/>a<sp/>null<sp/>shared<sp/>pointer</highlight></codeline>
 <codeline lineno="146"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="147" refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a2d4c0ccf2f175ce3ac7dddc9bd7c808f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a2d4c0ccf2f175ce3ac7dddc9bd7c808f" kindref="member">OpenGLMesh</ref>(</highlight></codeline>
-<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;helios::rendering::Vertex&gt;&gt;<sp/><ref refid="classhelios_1_1rendering_1_1model_1_1Mesh_1aa2383da2182e03b6308d1b878a43d244" kindref="member">vertices</ref>,</highlight></codeline>
-<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;unsigned<sp/>int&gt;&gt;<sp/><ref refid="classhelios_1_1rendering_1_1model_1_1Mesh_1a5d5e430b3449485439c14953df2c0744" kindref="member">indices</ref>,</highlight></codeline>
-<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;const<sp/>helios::rendering::model::config::MeshConfig&gt;<sp/><ref refid="classhelios_1_1rendering_1_1model_1_1Mesh_1a0f0040d40bc06b1d36ca7ee9a7bbe2ca" kindref="member">meshConfig</ref></highlight></codeline>
+<codeline lineno="147" refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a77951b4083715c1e2bbbdea305b16b57" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a77951b4083715c1e2bbbdea305b16b57" kindref="member">OpenGLMesh</ref>(</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;helios::rendering::Vertex&gt;&gt;<sp/><ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1aa26dab09b7cc8466d89f43510fb817e3" kindref="member">vertices</ref>,</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;unsigned<sp/>int&gt;&gt;<sp/><ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1aa42ae3ba109e72e272168a0e08d966e1" kindref="member">indices</ref>,</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;const<sp/>helios::rendering::mesh::MeshConfig&gt;<sp/><ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1abaf4ac43a29a53657fd439254e8ac7a5" kindref="member">meshConfig</ref></highlight></codeline>
 <codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>)<sp/>:</highlight></codeline>
-<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1rendering_1_1model_1_1Mesh_1a0209d3961a858b2ef36d2a5368138d3b" kindref="member">Mesh</ref>(</highlight></codeline>
-<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::move(<ref refid="classhelios_1_1rendering_1_1model_1_1Mesh_1aa2383da2182e03b6308d1b878a43d244" kindref="member">vertices</ref>),</highlight></codeline>
-<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::move(<ref refid="classhelios_1_1rendering_1_1model_1_1Mesh_1a5d5e430b3449485439c14953df2c0744" kindref="member">indices</ref>),</highlight></codeline>
-<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::move(<ref refid="classhelios_1_1rendering_1_1model_1_1Mesh_1a0f0040d40bc06b1d36ca7ee9a7bbe2ca" kindref="member">meshConfig</ref>)</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a309125f19a9a34e703e33b9505c849a7" kindref="member">Mesh</ref>(</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::move(<ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1aa26dab09b7cc8466d89f43510fb817e3" kindref="member">vertices</ref>),</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::move(<ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1aa42ae3ba109e72e272168a0e08d966e1" kindref="member">indices</ref>),</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::move(<ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1abaf4ac43a29a53657fd439254e8ac7a5" kindref="member">meshConfig</ref>)</highlight></codeline>
 <codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>),</highlight></codeline>
 <codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a0cb20b32780fecc3812fec350edb0288" kindref="member">vao_</ref>(<ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a9212653e5193b458950e6353db99369a" kindref="member">generateGLVertexArray</ref>()),</highlight></codeline>
 <codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1ae9ca6c9aabe1e4548b34246b009507bd" kindref="member">vbo_</ref>(<ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a421d0398c351167fc8e3c34467415d97" kindref="member">generateGLBuffer</ref>()),</highlight></codeline>
 <codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a6c2571a610293e55b51faa79f3b10f1d" kindref="member">ebo_</ref>(<ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a421d0398c351167fc8e3c34467415d97" kindref="member">generateGLBuffer</ref>())<sp/>{</highlight></codeline>
 <codeline lineno="160"><highlight class="normal"></highlight></codeline>
-<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!<ref refid="classhelios_1_1rendering_1_1model_1_1Mesh_1a619940a18c6f132f668be0e28112a5ca" kindref="member">vertices_</ref><sp/>||<sp/>!<ref refid="classhelios_1_1rendering_1_1model_1_1Mesh_1a0100ea58ef8bb486ccd66076fc680eee" kindref="member">indices_</ref><sp/>||<sp/>!<ref refid="classhelios_1_1rendering_1_1model_1_1Mesh_1a783b79efbd2f56643c95ad29e0302e2f" kindref="member">meshConfig_</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!<ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a2cce5a0f7de32f749a1b0435e5868eac" kindref="member">vertices_</ref><sp/>||<sp/>!<ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a5b664bfba4df5b255f619d7655cce22d" kindref="member">indices_</ref><sp/>||<sp/>!<ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a6d8ef2ed1a395431a8a4a1fdd504ae18" kindref="member">meshConfig_</ref>)<sp/>{</highlight></codeline>
 <codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>msg<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;Mesh<sp/>constructor<sp/>received<sp/>a<sp/>null<sp/>shared<sp/>pointer.&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1rendering_1_1model_1_1Mesh_1ac3f9cfb476a61f6526888c140f9452a4" kindref="member">logger_</ref>.error(msg);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a2aea274d86f8531ef349034aa1ede438" kindref="member">logger_</ref>.error(msg);</highlight></codeline>
 <codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::invalid_argument(msg);</highlight></codeline>
 <codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="166"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
@@ -368,21 +368,21 @@
 <codeline lineno="179"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@throws<sp/>std::invalid_argument<sp/>if<sp/>meshConfig<sp/>is<sp/>a<sp/>null<sp/>shared<sp/>pointer,<sp/>or<sp/>if<sp/>the</highlight></codeline>
 <codeline lineno="180"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>shape<sp/>contained<sp/>null<sp/>data</highlight></codeline>
 <codeline lineno="181"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="182" refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a4118cd59bc33ae54ff8abb339cd67fc9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a4118cd59bc33ae54ff8abb339cd67fc9" kindref="member">OpenGLMesh</ref>(</highlight></codeline>
+<codeline lineno="182" refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a878fbf33ad6e8e67ded9b9e1bf2f3eb9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a878fbf33ad6e8e67ded9b9e1bf2f3eb9" kindref="member">OpenGLMesh</ref>(</highlight></codeline>
 <codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape" kindref="compound">helios::rendering::asset::shape::Shape</ref>&amp;<sp/>shape,</highlight></codeline>
-<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;const<sp/>helios::rendering::model::config::MeshConfig&gt;<sp/><ref refid="classhelios_1_1rendering_1_1model_1_1Mesh_1a0f0040d40bc06b1d36ca7ee9a7bbe2ca" kindref="member">meshConfig</ref></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;const<sp/>helios::rendering::mesh::MeshConfig&gt;<sp/><ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1abaf4ac43a29a53657fd439254e8ac7a5" kindref="member">meshConfig</ref></highlight></codeline>
 <codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>)<sp/>:</highlight></codeline>
-<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1rendering_1_1model_1_1Mesh_1a0209d3961a858b2ef36d2a5368138d3b" kindref="member">Mesh</ref>(</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a309125f19a9a34e703e33b9505c849a7" kindref="member">Mesh</ref>(</highlight></codeline>
 <codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>shape,</highlight></codeline>
-<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::move(<ref refid="classhelios_1_1rendering_1_1model_1_1Mesh_1a0f0040d40bc06b1d36ca7ee9a7bbe2ca" kindref="member">meshConfig</ref>)</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::move(<ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1abaf4ac43a29a53657fd439254e8ac7a5" kindref="member">meshConfig</ref>)</highlight></codeline>
 <codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>),</highlight></codeline>
 <codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a0cb20b32780fecc3812fec350edb0288" kindref="member">vao_</ref>(<ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a9212653e5193b458950e6353db99369a" kindref="member">generateGLVertexArray</ref>()),</highlight></codeline>
 <codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1ae9ca6c9aabe1e4548b34246b009507bd" kindref="member">vbo_</ref>(<ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a421d0398c351167fc8e3c34467415d97" kindref="member">generateGLBuffer</ref>()),</highlight></codeline>
 <codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a6c2571a610293e55b51faa79f3b10f1d" kindref="member">ebo_</ref>(<ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a421d0398c351167fc8e3c34467415d97" kindref="member">generateGLBuffer</ref>())<sp/>{</highlight></codeline>
 <codeline lineno="193"><highlight class="normal"></highlight></codeline>
-<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!<ref refid="classhelios_1_1rendering_1_1model_1_1Mesh_1a619940a18c6f132f668be0e28112a5ca" kindref="member">vertices_</ref><sp/>||<sp/>!<ref refid="classhelios_1_1rendering_1_1model_1_1Mesh_1a0100ea58ef8bb486ccd66076fc680eee" kindref="member">indices_</ref><sp/>||<sp/>!<ref refid="classhelios_1_1rendering_1_1model_1_1Mesh_1a783b79efbd2f56643c95ad29e0302e2f" kindref="member">meshConfig_</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!<ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a2cce5a0f7de32f749a1b0435e5868eac" kindref="member">vertices_</ref><sp/>||<sp/>!<ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a5b664bfba4df5b255f619d7655cce22d" kindref="member">indices_</ref><sp/>||<sp/>!<ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a6d8ef2ed1a395431a8a4a1fdd504ae18" kindref="member">meshConfig_</ref>)<sp/>{</highlight></codeline>
 <codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>msg<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;Mesh<sp/>constructor<sp/>received<sp/>a<sp/>null<sp/>shared<sp/>pointer.&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1rendering_1_1model_1_1Mesh_1ac3f9cfb476a61f6526888c140f9452a4" kindref="member">logger_</ref>.error(msg);</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a2aea274d86f8531ef349034aa1ede438" kindref="member">logger_</ref>.error(msg);</highlight></codeline>
 <codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::invalid_argument(msg);</highlight></codeline>
 <codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="199"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>

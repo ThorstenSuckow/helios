@@ -107,7 +107,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>A factory class for constructing `RenderPass` objects and populating their `RenderQueue`s based on a `helios::scene::Snapshot`.  
+<p>Factory for constructing `RenderPass` objects from scene snapshots.  
  <a href="#details">More...</a></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Collaboration diagram for helios::rendering::RenderPassFactory:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -119,11 +119,11 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ab3de082b56a0e7b2ca11da66453252ef" id="r_ab3de082b56a0e7b2ca11da66453252ef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1rendering_1_1RenderPass.html">RenderPass</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab3de082b56a0e7b2ca11da66453252ef">buildRenderPass</a> (const <a class="el" href="classhelios_1_1scene_1_1Snapshot.html">helios::scene::Snapshot</a> &amp;snapshot) const</td></tr>
-<tr class="memdesc:ab3de082b56a0e7b2ca11da66453252ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds a `RenderPass` from a given `helios::scene::Snapshot`.  <br /></td></tr>
+<tr class="memdesc:ab3de082b56a0e7b2ca11da66453252ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds a `RenderPass` from a given `Snapshot`.  <br /></td></tr>
 <tr class="memitem:ab24ad189d343ee9bdc7ed6395ee76bcb" id="r_ab24ad189d343ee9bdc7ed6395ee76bcb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab24ad189d343ee9bdc7ed6395ee76bcb">populateRenderQueue</a> (const <a class="el" href="classhelios_1_1scene_1_1Snapshot.html">helios::scene::Snapshot</a> &amp;snapshot, <a class="el" href="classhelios_1_1rendering_1_1RenderQueue.html">helios::rendering::RenderQueue</a> &amp;renderQueue) const</td></tr>
-<tr class="memdesc:ab24ad189d343ee9bdc7ed6395ee76bcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Populates an existing `RenderQueue` with `RenderCommand`s based on a `Snapshot`.  <br /></td></tr>
+<tr class="memdesc:ab24ad189d343ee9bdc7ed6395ee76bcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Populates an existing `RenderQueue` with render commands based on a `Snapshot`.  <br /></td></tr>
 <tr class="memitem:a0d266254acf26e1e1d9ac3f8cdedd712" id="r_a0d266254acf26e1e1d9ac3f8cdedd712"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d266254acf26e1e1d9ac3f8cdedd712">makeRenderCommand</a> (const <a class="el" href="structhelios_1_1scene_1_1SnapshotItem.html">helios::scene::SnapshotItem</a> &amp;snapshotItem, <a class="el" href="classhelios_1_1rendering_1_1RenderQueue.html">helios::rendering::RenderQueue</a> &amp;renderQueue) const noexcept</td></tr>
-<tr class="memdesc:a0d266254acf26e1e1d9ac3f8cdedd712"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emits render commands from a `helios::scene::SnapshotItem` to the render queue.  <br /></td></tr>
+<tr class="memdesc:a0d266254acf26e1e1d9ac3f8cdedd712"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emits render commands from a `SnapshotItem` to the render queue.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -134,13 +134,30 @@ Static Public Member Functions</h2></td></tr>
 Static Protected Attributes</h2></td></tr>
 <tr class="memitem:aab5f2c3ba19ec1b271108b51e96bd2ac" id="r_aab5f2c3ba19ec1b271108b51e96bd2ac"><td class="memItemLeft" align="right" valign="top"><a id="aab5f2c3ba19ec1b271108b51e96bd2ac" name="aab5f2c3ba19ec1b271108b51e96bd2ac"></a>
 static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">helios::util::log::Logger</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>logger_</b></td></tr>
-<tr class="memdesc:aab5f2c3ba19ec1b271108b51e96bd2ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shared logger instance for all <a class="el" href="classhelios_1_1rendering_1_1RenderPassFactory.html" title="A factory class for constructing `RenderPass` objects and populating their `RenderQueue`s based on a ...">RenderPassFactory</a> objects. <br /></td></tr>
+<tr class="memdesc:aab5f2c3ba19ec1b271108b51e96bd2ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shared logger instance for all <a class="el" href="classhelios_1_1rendering_1_1RenderPassFactory.html" title="Factory for constructing `RenderPass` objects from scene snapshots.">RenderPassFactory</a> objects. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A factory class for constructing `RenderPass` objects and populating their `RenderQueue`s based on a `helios::scene::Snapshot`. </p>
-<dl class="section note"><dt>Note</dt><dd>This class implements a singleton pattern. In the future, the conversion of high-level scene data (Snapshot/SnapshotItems) into lower-level rendering commands might be realized with strategies and/or separate factories. </dd></dl>
+<div class="textblock"><p>Factory for constructing `RenderPass` objects from scene snapshots. </p>
+<p>`RenderPassFactory` transforms high-level scene data (`Snapshot` and `SnapshotItem`) into low-level rendering commands suitable for the rendering device. It creates `RenderPass` objects with populated `RenderQueue`s and configured frame uniforms.</p>
+<p>## Responsibilities</p>
+<ul>
+<li>Build `RenderPass` objects from `Snapshot` data.</li>
+<li>Populate `RenderQueue` with `MeshRenderCommand` and `TextRenderCommand` objects.</li>
+<li>Configure frame-level uniforms (view/projection matrices).</li>
+</ul>
+<p>## Usage</p>
+<p>```cpp auto&amp; factory = <a class="el" href="#aa496584b96f57e06cc53dc24e797f0b0" title="Returns the singleton instance of `RenderPassFactory`.">RenderPassFactory::getInstance()</a>; auto snapshot = sceneGraph.createSnapshot(viewport); auto renderPass = factory.buildRenderPass(snapshot);</p>
+<p>device.beginRenderPass(renderPass); device.doRender(renderPass); device.endRenderPass(renderPass); ```</p>
+<dl class="section note"><dt>Note</dt><dd>This class implements a singleton pattern. In the future, the conversion of high-level scene data into lower-level rendering commands might be realized with strategies and/or separate factories.</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1rendering_1_1RenderPass.html" title="Encapsulates a single rendering pass with its associated resources.">RenderPass</a> </dd>
+<dd>
+Snapshot </dd>
+<dd>
+SnapshotItem </dd>
+<dd>
+<a class="el" href="classhelios_1_1rendering_1_1RenderQueue.html" title="Manages collections of render commands for geometry and text.">RenderQueue</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RenderPassFactory_8ixx_source.html#l00036">36</a> of file <a class="el" href="RenderPassFactory_8ixx_source.html">RenderPassFactory.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RenderPassFactory_8ixx_source.html#l00061">61</a> of file <a class="el" href="RenderPassFactory_8ixx_source.html">RenderPassFactory.ixx</a>.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="ab3de082b56a0e7b2ca11da66453252ef" name="ab3de082b56a0e7b2ca11da66453252ef"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab3de082b56a0e7b2ca11da66453252ef">&#9670;&#160;</a></span>buildRenderPass()</h2>
@@ -165,20 +182,20 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 </table>
 </div><div class="memdoc">
 
-<p>Builds a `RenderPass` from a given `helios::scene::Snapshot`. </p>
-<p>This method orchestrates the creation of a `RenderQueue` and populates it with `RenderCommand`s derived from the `SnapshotItem`s within the snapshot. It also sets up frame-specific uniform values for the `RenderPass`.</p>
+<p>Builds a `RenderPass` from a given `Snapshot`. </p>
+<p>This method orchestrates the creation of a `RenderQueue` and populates it with render commands derived from the `SnapshotItem`s within the snapshot. It also sets up frame-specific uniform values (view and projection matrices) for the `RenderPass`.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">snapshot</td><td>A const ref to the snapshot containing the scene data for which the `RenderPass` is to be built.</td></tr>
+    <tr><td class="paramname">snapshot</td><td>A const reference to the snapshot containing the scene data for which the `RenderPass` is to be built.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A fully constructed `RenderPass` object. The returned object owns the `RenderQueue` and the frame-specific `UniformValueMap`.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd>::populateRenderQueue() </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A fully constructed `RenderPass` object containing the render queue and frame-specific uniforms.</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#ab24ad189d343ee9bdc7ed6395ee76bcb" title="Populates an existing `RenderQueue` with render commands based on a `Snapshot`.">populateRenderQueue()</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RenderPassFactory_8ixx_source.html#l00073">73</a> of file <a class="el" href="RenderPassFactory_8ixx_source.html">RenderPassFactory.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RenderPassFactory_8ixx_source.html#l00099">99</a> of file <a class="el" href="RenderPassFactory_8ixx_source.html">RenderPassFactory.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="RenderPassFactory_8ixx_source.html#l00104">populateRenderQueue()</a>, <a class="el" href="UniformSemantics_8ixx_source.html#l00046">helios::rendering::shader::ProjectionMatrix</a>, <a class="el" href="Snapshot_8ixx_source.html#l00129">helios::scene::Snapshot::projectionMatrix()</a>, <a class="el" href="UniformSemantics_8ixx_source.html#l00051">helios::rendering::shader::ViewMatrix</a>, <a class="el" href="Snapshot_8ixx_source.html#l00141">helios::scene::Snapshot::viewMatrix()</a>, and <a class="el" href="Snapshot_8ixx_source.html#l00117">helios::scene::Snapshot::viewport()</a>.</p>
+<p class="reference">References <a class="el" href="RenderPassFactory_8ixx_source.html#l00131">populateRenderQueue()</a>, <a class="el" href="UniformSemantics_8ixx_source.html#l00046">helios::rendering::shader::ProjectionMatrix</a>, <a class="el" href="Snapshot_8ixx_source.html#l00140">helios::scene::Snapshot::projectionMatrix()</a>, <a class="el" href="UniformSemantics_8ixx_source.html#l00051">helios::rendering::shader::ViewMatrix</a>, <a class="el" href="Snapshot_8ixx_source.html#l00152">helios::scene::Snapshot::viewMatrix()</a>, and <a class="el" href="Snapshot_8ixx_source.html#l00128">helios::scene::Snapshot::viewport()</a>.</p>
 <div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
@@ -214,7 +231,7 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 <p>Returns the singleton instance of `RenderPassFactory`. </p>
 <dl class="section return"><dt>Returns</dt><dd>A reference to the single `RenderPassFactory` instance. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RenderPassFactory_8ixx_source.html#l00052">52</a> of file <a class="el" href="RenderPassFactory_8ixx_source.html">RenderPassFactory.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RenderPassFactory_8ixx_source.html#l00077">77</a> of file <a class="el" href="RenderPassFactory_8ixx_source.html">RenderPassFactory.ixx</a>.</p>
 
 </div>
 </div>
@@ -245,22 +262,22 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 </table>
 </div><div class="memdoc">
 
-<p>Emits render commands from a `helios::scene::SnapshotItem` to the render queue. </p>
+<p>Emits render commands from a `SnapshotItem` to the render queue. </p>
 <p>This method extracts necessary data from the `SnapshotItem`, sets up the object uniform values (e.g., model matrix), and delegates to the `Renderable` to emit its render commands to the queue.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">snapshotItem</td><td>A const ref to the `SnapshotItem` from which to create render commands. </td></tr>
-    <tr><td class="paramname">renderQueue</td><td>A ref to the `RenderQueue` to emit commands to.</td></tr>
+    <tr><td class="paramname">snapshotItem</td><td>A const reference to the `SnapshotItem` from which to create render commands. </td></tr>
+    <tr><td class="paramname">renderQueue</td><td>A reference to the `RenderQueue` to emit commands to.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>If the `Renderable` pointer in the `SnapshotItem` is `nullptr`, a warning is logged and no commands are emitted. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RenderPassFactory_8ixx_source.html#l00130">130</a> of file <a class="el" href="RenderPassFactory_8ixx_source.html">RenderPassFactory.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RenderPassFactory_8ixx_source.html#l00158">158</a> of file <a class="el" href="RenderPassFactory_8ixx_source.html">RenderPassFactory.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="RenderPassFactory_8ixx_source.html#l00042">logger_</a>, and <a class="el" href="UniformSemantics_8ixx_source.html#l00041">helios::rendering::shader::ModelMatrix</a>.</p>
+<p class="reference">References <a class="el" href="RenderPassFactory_8ixx_source.html#l00067">logger_</a>, and <a class="el" href="UniformSemantics_8ixx_source.html#l00041">helios::rendering::shader::ModelMatrix</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="RenderPassFactory_8ixx_source.html#l00104">populateRenderQueue()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="RenderPassFactory_8ixx_source.html#l00131">populateRenderQueue()</a>.</p>
 <div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
@@ -297,22 +314,22 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 </table>
 </div><div class="memdoc">
 
-<p>Populates an existing `RenderQueue` with `RenderCommand`s based on a `Snapshot`. </p>
-<p>This method clears the specified `RenderQueue` before adding new `RenderCommand`s to it.</p>
+<p>Populates an existing `RenderQueue` with render commands based on a `Snapshot`. </p>
+<p>This method clears the specified `RenderQueue` before adding new commands. Each `SnapshotItem` in the snapshot is processed via `makeRenderCommand()`.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">snapshot</td><td>A const ref to the `Snapshot` providing scene data. </td></tr>
-    <tr><td class="paramname">renderQueue</td><td>A ref to the `RenderQueue` to be filled. This queue will be cleared before new commands are added.</td></tr>
+    <tr><td class="paramname">snapshot</td><td>A const reference to the `Snapshot` providing scene data. </td></tr>
+    <tr><td class="paramname">renderQueue</td><td>A reference to the `RenderQueue` to be filled. This queue will be cleared before new commands are added.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd>::makeRenderCommand() </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a0d266254acf26e1e1d9ac3f8cdedd712" title="Emits render commands from a `SnapshotItem` to the render queue.">makeRenderCommand()</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RenderPassFactory_8ixx_source.html#l00104">104</a> of file <a class="el" href="RenderPassFactory_8ixx_source.html">RenderPassFactory.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RenderPassFactory_8ixx_source.html#l00131">131</a> of file <a class="el" href="RenderPassFactory_8ixx_source.html">RenderPassFactory.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="RenderQueue_8ixx_source.html#l00138">helios::rendering::RenderQueue::clear()</a>, <a class="el" href="RenderPassFactory_8ixx_source.html#l00130">makeRenderCommand()</a>, and <a class="el" href="Snapshot_8ixx_source.html#l00108">helios::scene::Snapshot::snapshotItems()</a>.</p>
+<p class="reference">References <a class="el" href="RenderQueue_8ixx_source.html#l00139">helios::rendering::RenderQueue::clear()</a>, <a class="el" href="RenderPassFactory_8ixx_source.html#l00158">makeRenderCommand()</a>, and <a class="el" href="Snapshot_8ixx_source.html#l00119">helios::scene::Snapshot::snapshotItems()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="RenderPassFactory_8ixx_source.html#l00073">buildRenderPass()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="RenderPassFactory_8ixx_source.html#l00099">buildRenderPass()</a>.</p>
 <div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>

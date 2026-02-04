@@ -1,5 +1,15 @@
 var NAVTREEINDEX33 =
 {
+"module__helios_8util_8log_8Logger.html":[3,0,380],
+"module__helios_8util_8log_8Logger.html#a03cbf3976848f10002a33b89e9ddc9f1":[3,0,380,9],
+"module__helios_8util_8log_8Logger.html#a1575e94516fc1586b8d7fb1aae724254":[3,0,380,5],
+"module__helios_8util_8log_8Logger.html#a251284a49f19d7b77dc0646838e1bd97":[3,0,380,8],
+"module__helios_8util_8log_8Logger.html#a2e2431f126536f97c52e26feea552bd5":[3,0,380,4],
+"module__helios_8util_8log_8Logger.html#a4220a95c98cfdb625c0f88d8fb3614e3":[3,0,380,3],
+"module__helios_8util_8log_8Logger.html#a60ef33d5014392cbb88633fb8d0521e4":[3,0,380,2],
+"module__helios_8util_8log_8Logger.html#a77b4817447ad32e35b6805a7f4d6d6cf":[3,0,380,1],
+"module__helios_8util_8log_8Logger.html#ad0cdf4d952a639758e097ef25fddee8e":[3,0,380,7],
+"module__helios_8util_8log_8Logger.html#ad4232b55897e7681214aa47a5a6bb3ec":[3,0,380,6],
 "module__helios_8util_8time.html":[3,0,384],
 "module__helios_8util_8time_8Stopwatch.html":[3,0,385],
 "module__helios_8util_8time_8Stopwatch.html#a1eee2ebce8dcd1f2b4d0b5d1a21fb09f":[3,0,385,1],
@@ -239,15 +249,5 @@ var NAVTREEINDEX33 =
 "namespacehelios_1_1engine_1_1modules_1_1rendering_1_1renderable.html":[4,0,0,3,4,4,2],
 "namespacehelios_1_1engine_1_1modules_1_1rendering_1_1renderable_1_1components.html":[4,0,0,3,4,4,2,0],
 "namespacehelios_1_1engine_1_1modules_1_1scene.html":[4,0,0,3,4,6],
-"namespacehelios_1_1engine_1_1modules_1_1scene_1_1components.html":[4,0,0,3,4,6,0],
-"namespacehelios_1_1engine_1_1modules_1_1spatial.html":[4,0,0,3,4,8],
-"namespacehelios_1_1engine_1_1modules_1_1spatial_1_1transform.html":[4,0,0,3,4,8,0],
-"namespacehelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components.html":[4,0,0,3,4,8,0,0],
-"namespacehelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1systems.html":[4,0,0,3,4,8,0,1],
-"namespacehelios_1_1engine_1_1modules_1_1systems.html":[4,0,0,3,4,7],
-"namespacehelios_1_1engine_1_1modules_1_1systems_1_1scene.html":[4,0,0,3,4,7,0],
-"namespacehelios_1_1engine_1_1runtime.html":[4,0,0,3,5],
-"namespacehelios_1_1engine_1_1runtime_1_1gameloop.html":[4,0,0,3,5,0],
-"namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#a575a13ff55382c2226f56af26ed21c9b":[4,0,0,3,5,0,6],
-"namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#aa57e7c5caf8850bd2c56ef8d345afa71":[4,0,0,3,5,0,5]
+"namespacehelios_1_1engine_1_1modules_1_1scene_1_1components.html":[4,0,0,3,4,6,0]
 };

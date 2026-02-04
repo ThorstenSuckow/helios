@@ -1,0 +1,436 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8rendering_8mesh_8Mesh" kind="module">
+    <compoundname>helios.rendering.mesh.Mesh</compoundname>
+    <innerfile refid="Mesh_8ixx">Mesh.ixx</innerfile>
+    <innerclass refid="classhelios_1_1rendering_1_1mesh_1_1Mesh" prot="public">helios::rendering::mesh::Mesh</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a22763e6a305fcb6f40cf094947bfe5a2" prot="protected" static="no" mutable="yes">
+        <type>bool</type>
+        <definition>bool helios::rendering::mesh::Mesh::needsUpdate_</definition>
+        <argsstring></argsstring>
+        <name>needsUpdate_</name>
+        <qualifiedname>helios::rendering::mesh::Mesh::needsUpdate_</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>Flag indicating whether the mesh requires updates to its computed data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This variable is used to track whether the mesh&apos;s derived properties, such as its axis-aligned bounding box (AABB), are outdated and need to be recalculated. It is marked as mutable to allow modification within const member functions. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/mesh/Mesh.ixx" line="51" column="22" bodyfile="/tmp/h/include/helios/rendering/mesh/Mesh.ixx" bodystart="51" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a493882e9ae39726cb56e27fcd7379150" compoundref="Mesh_8ixx" startline="207" endline="238">helios::rendering::mesh::Mesh::aabb</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a1cae74842586dac085c65673506b62d6" prot="protected" static="no" mutable="yes">
+        <type><ref refid="namespacehelios_1_1math_1a124c0492430aeecedc1c1a5ece4ba488" kindref="member">helios::math::aabbf</ref></type>
+        <definition>helios::math::aabbf helios::rendering::mesh::Mesh::aabb_</definition>
+        <argsstring></argsstring>
+        <name>aabb_</name>
+        <qualifiedname>helios::rendering::mesh::Mesh::aabb_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>Represents the axis-aligned bounding box (AABB) for the mesh. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This member variable stores the computed or cached AABB for the mesh in 3D space. The AABB is a minimal bounding box aligned with the coordinate axes that encloses all the vertices of the mesh. It is marked mutable to allow updates during read-only operations, such as recalculating bounds as vertex positions are modified or updated dynamically.</para>
+<para><simplesect kind="see"><para><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">helios::math::aabb</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/mesh/Mesh.ixx" line="65" column="37" bodyfile="/tmp/h/include/helios/rendering/mesh/Mesh.ixx" bodystart="65" bodyend="65"/>
+        <referencedby refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a493882e9ae39726cb56e27fcd7379150" compoundref="Mesh_8ixx" startline="207" endline="238">helios::rendering::mesh::Mesh::aabb</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a2cce5a0f7de32f749a1b0435e5868eac" prot="protected" static="no" mutable="no">
+        <type>std::shared_ptr&lt; const std::vector&lt; Vertex &gt; &gt;</type>
+        <definition>std::shared_ptr&lt;const std::vector&lt;Vertex&gt; &gt; helios::rendering::mesh::Mesh::vertices_</definition>
+        <argsstring></argsstring>
+        <name>vertices_</name>
+        <qualifiedname>helios::rendering::mesh::Mesh::vertices_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>Shared pointer to the raw, immutable vertices. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/mesh/Mesh.ixx" line="70" column="25" bodyfile="/tmp/h/include/helios/rendering/mesh/Mesh.ixx" bodystart="70" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a493882e9ae39726cb56e27fcd7379150" compoundref="Mesh_8ixx" startline="207" endline="238">helios::rendering::mesh::Mesh::aabb</referencedby>
+        <referencedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a858a37e95993a377af507b76b1db0998" compoundref="OpenGLMesh_8ixx" startline="86" endline="125">helios::ext::opengl::rendering::model::OpenGLMesh::init</referencedby>
+        <referencedby refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1ae85f9420cd4583c186a3a37b928be60e" compoundref="Mesh_8ixx" startline="141" endline="154">helios::rendering::mesh::Mesh::Mesh</referencedby>
+        <referencedby refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1aa769126283db3551f959f3bb8276ed3c" compoundref="Mesh_8ixx" startline="117" endline="130">helios::rendering::mesh::Mesh::Mesh</referencedby>
+        <referencedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a878fbf33ad6e8e67ded9b9e1bf2f3eb9" compoundref="OpenGLMesh_8ixx" startline="182" endline="205">helios::ext::opengl::rendering::model::OpenGLMesh::OpenGLMesh</referencedby>
+        <referencedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a77951b4083715c1e2bbbdea305b16b57" compoundref="OpenGLMesh_8ixx" startline="147" endline="171">helios::ext::opengl::rendering::model::OpenGLMesh::OpenGLMesh</referencedby>
+        <referencedby refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1aa26dab09b7cc8466d89f43510fb817e3" compoundref="Mesh_8ixx" startline="171" endline="173">helios::rendering::mesh::Mesh::vertices</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a5b664bfba4df5b255f619d7655cce22d" prot="protected" static="no" mutable="no">
+        <type>std::shared_ptr&lt; const std::vector&lt; unsigned int &gt; &gt;</type>
+        <definition>std::shared_ptr&lt;const std::vector&lt;unsigned int&gt; &gt; helios::rendering::mesh::Mesh::indices_</definition>
+        <argsstring></argsstring>
+        <name>indices_</name>
+        <qualifiedname>helios::rendering::mesh::Mesh::indices_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>Shared pointer to the raw, immutable indices. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/mesh/Mesh.ixx" line="75" column="25" bodyfile="/tmp/h/include/helios/rendering/mesh/Mesh.ixx" bodystart="75" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a3100d377759531d9f5ed29b2cbf74848" compoundref="Mesh_8ixx" startline="161" endline="163">helios::rendering::mesh::Mesh::indexCount</referencedby>
+        <referencedby refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1aa42ae3ba109e72e272168a0e08d966e1" compoundref="Mesh_8ixx" startline="181" endline="183">helios::rendering::mesh::Mesh::indices</referencedby>
+        <referencedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a858a37e95993a377af507b76b1db0998" compoundref="OpenGLMesh_8ixx" startline="86" endline="125">helios::ext::opengl::rendering::model::OpenGLMesh::init</referencedby>
+        <referencedby refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1ae85f9420cd4583c186a3a37b928be60e" compoundref="Mesh_8ixx" startline="141" endline="154">helios::rendering::mesh::Mesh::Mesh</referencedby>
+        <referencedby refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1aa769126283db3551f959f3bb8276ed3c" compoundref="Mesh_8ixx" startline="117" endline="130">helios::rendering::mesh::Mesh::Mesh</referencedby>
+        <referencedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a878fbf33ad6e8e67ded9b9e1bf2f3eb9" compoundref="OpenGLMesh_8ixx" startline="182" endline="205">helios::ext::opengl::rendering::model::OpenGLMesh::OpenGLMesh</referencedby>
+        <referencedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a77951b4083715c1e2bbbdea305b16b57" compoundref="OpenGLMesh_8ixx" startline="147" endline="171">helios::ext::opengl::rendering::model::OpenGLMesh::OpenGLMesh</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a6d8ef2ed1a395431a8a4a1fdd504ae18" prot="protected" static="no" mutable="no">
+        <type>std::shared_ptr&lt; const <ref refid="structhelios_1_1rendering_1_1mesh_1_1MeshConfig" kindref="compound">helios::rendering::mesh::MeshConfig</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;const helios::rendering::mesh::MeshConfig&gt; helios::rendering::mesh::Mesh::meshConfig_</definition>
+        <argsstring></argsstring>
+        <name>meshConfig_</name>
+        <qualifiedname>helios::rendering::mesh::Mesh::meshConfig_</qualifiedname>
+        <briefdescription>
+<para>Shared pointer to the <ref refid="structhelios_1_1rendering_1_1mesh_1_1MeshConfig" kindref="compound">MeshConfig</ref> used with this <ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh" kindref="compound">Mesh</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/mesh/Mesh.ixx" line="80" column="25" bodyfile="/tmp/h/include/helios/rendering/mesh/Mesh.ixx" bodystart="80" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1ae85f9420cd4583c186a3a37b928be60e" compoundref="Mesh_8ixx" startline="141" endline="154">helios::rendering::mesh::Mesh::Mesh</referencedby>
+        <referencedby refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1aa769126283db3551f959f3bb8276ed3c" compoundref="Mesh_8ixx" startline="117" endline="130">helios::rendering::mesh::Mesh::Mesh</referencedby>
+        <referencedby refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1abaf4ac43a29a53657fd439254e8ac7a5" compoundref="Mesh_8ixx" startline="191" endline="193">helios::rendering::mesh::Mesh::meshConfig</referencedby>
+        <referencedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a878fbf33ad6e8e67ded9b9e1bf2f3eb9" compoundref="OpenGLMesh_8ixx" startline="182" endline="205">helios::ext::opengl::rendering::model::OpenGLMesh::OpenGLMesh</referencedby>
+        <referencedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a77951b4083715c1e2bbbdea305b16b57" compoundref="OpenGLMesh_8ixx" startline="147" endline="171">helios::ext::opengl::rendering::model::OpenGLMesh::OpenGLMesh</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a2aea274d86f8531ef349034aa1ede438" prot="protected" static="yes" mutable="no">
+        <type>const <ref refid="classhelios_1_1util_1_1log_1_1Logger" kindref="compound">helios::util::log::Logger</ref> &amp;</type>
+        <definition>const helios::util::log::Logger&amp; helios::rendering::mesh::Mesh::logger_</definition>
+        <argsstring></argsstring>
+        <name>logger_</name>
+        <qualifiedname>helios::rendering::mesh::Mesh::logger_</qualifiedname>
+        <initializer>= <ref refid="classhelios_1_1util_1_1log_1_1LogManager_1a750d8fd5b3ee3678600644756b0631e7" kindref="member">helios::util::log::LogManager::loggerForScope</ref>(
+            <ref refid="OpenGLUniformLocationMap_8ixx_1acbc04f24078582c7d42b2085be5d5750" kindref="member">HELIOS_LOG_SCOPE</ref>
+        )</initializer>
+        <briefdescription>
+<para>Shared logger instance for all <ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh" kindref="compound">Mesh</ref> objects. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/mesh/Mesh.ixx" line="100" column="55" bodyfile="/tmp/h/include/helios/rendering/mesh/Mesh.ixx" bodystart="100" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1ae85f9420cd4583c186a3a37b928be60e" compoundref="Mesh_8ixx" startline="141" endline="154">helios::rendering::mesh::Mesh::Mesh</referencedby>
+        <referencedby refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1aa769126283db3551f959f3bb8276ed3c" compoundref="Mesh_8ixx" startline="117" endline="130">helios::rendering::mesh::Mesh::Mesh</referencedby>
+        <referencedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a878fbf33ad6e8e67ded9b9e1bf2f3eb9" compoundref="OpenGLMesh_8ixx" startline="182" endline="205">helios::ext::opengl::rendering::model::OpenGLMesh::OpenGLMesh</referencedby>
+        <referencedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a77951b4083715c1e2bbbdea305b16b57" compoundref="OpenGLMesh_8ixx" startline="147" endline="171">helios::ext::opengl::rendering::model::OpenGLMesh::OpenGLMesh</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a309125f19a9a34e703e33b9505c849a7" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::rendering::mesh::Mesh::Mesh</definition>
+        <argsstring>()=default</argsstring>
+        <name>Mesh</name>
+        <qualifiedname>helios::rendering::mesh::Mesh::Mesh</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/mesh/Mesh.ixx" line="41" column="9"/>
+        <referencedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a878fbf33ad6e8e67ded9b9e1bf2f3eb9" compoundref="OpenGLMesh_8ixx" startline="182" endline="205">helios::ext::opengl::rendering::model::OpenGLMesh::OpenGLMesh</referencedby>
+        <referencedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a77951b4083715c1e2bbbdea305b16b57" compoundref="OpenGLMesh_8ixx" startline="147" endline="171">helios::ext::opengl::rendering::model::OpenGLMesh::OpenGLMesh</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1mesh_1_1Mesh_1af94de770b332752e3b7fb1d6bad446d9" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void helios::rendering::mesh::Mesh::init</definition>
+        <argsstring>()=0</argsstring>
+        <name>init</name>
+        <qualifiedname>helios::rendering::mesh::Mesh::init</qualifiedname>
+        <reimplementedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a858a37e95993a377af507b76b1db0998">init</reimplementedby>
+        <briefdescription>
+<para>Initializes the <ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh" kindref="compound">Mesh</ref> by setting up vertex attributes and buffers with the underlying GL API. This method should be called _once_ by the derived class before using this <ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh" kindref="compound">Mesh</ref> in a rendering pass. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><xrefsect id="todo_1_todo000024"><xreftitle>Todo</xreftitle><xrefdescription><para>std::shared_ptr&lt;const std::vector&lt;Texture&gt;&gt; textures_; </para>
+</xrefdescription></xrefsect></para>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::runtime_error</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the <ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh" kindref="compound">Mesh</ref> could not be initialized. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/mesh/Mesh.ixx" line="95" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1mesh_1_1Mesh_1af547b4fdcb1cfae7bff321e1c10f12fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual helios::rendering::mesh::Mesh::~Mesh</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Mesh</name>
+        <qualifiedname>helios::rendering::mesh::Mesh::~Mesh</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/mesh/Mesh.ixx" line="106" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1mesh_1_1Mesh_1aa769126283db3551f959f3bb8276ed3c" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::rendering::mesh::Mesh::Mesh</definition>
+        <argsstring>(std::shared_ptr&lt; const std::vector&lt; Vertex &gt; &gt; vertices, std::shared_ptr&lt; const std::vector&lt; unsigned int &gt; &gt; indices, std::shared_ptr&lt; const helios::rendering::mesh::MeshConfig &gt; meshConfig)</argsstring>
+        <name>Mesh</name>
+        <qualifiedname>helios::rendering::mesh::Mesh::Mesh</qualifiedname>
+        <param>
+          <type>std::shared_ptr&lt; const std::vector&lt; Vertex &gt; &gt;</type>
+          <declname>vertices</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; const std::vector&lt; unsigned int &gt; &gt;</type>
+          <declname>indices</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; const <ref refid="structhelios_1_1rendering_1_1mesh_1_1MeshConfig" kindref="compound">helios::rendering::mesh::MeshConfig</ref> &gt;</type>
+          <declname>meshConfig</declname>
+        </param>
+        <briefdescription>
+<para>Creates a new <ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh" kindref="compound">Mesh</ref> instance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vertices</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A shared_ptr to a vector of <ref refid="structhelios_1_1rendering_1_1Vertex" kindref="compound">Vertex</ref>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>indices</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A shared_ptr to a vector of indices. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>meshConfig</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A shared_ptr to the <ref refid="structhelios_1_1rendering_1_1mesh_1_1MeshConfig" kindref="compound">MeshConfig</ref> used with this <ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh" kindref="compound">Mesh</ref>.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if either &quot;vertices&quot;, &quot;indices&quot; or meshConfig is a null shared_ptr </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/mesh/Mesh.ixx" line="117" column="18" bodyfile="/tmp/h/include/helios/rendering/mesh/Mesh.ixx" bodystart="117" bodyend="130"/>
+        <references refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1aa42ae3ba109e72e272168a0e08d966e1" compoundref="Mesh_8ixx" startline="181" endline="183">helios::rendering::mesh::Mesh::indices</references>
+        <references refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a5b664bfba4df5b255f619d7655cce22d" compoundref="Mesh_8ixx" startline="75">helios::rendering::mesh::Mesh::indices_</references>
+        <references refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a2aea274d86f8531ef349034aa1ede438" compoundref="Mesh_8ixx" startline="100">helios::rendering::mesh::Mesh::logger_</references>
+        <references refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1abaf4ac43a29a53657fd439254e8ac7a5" compoundref="Mesh_8ixx" startline="191" endline="193">helios::rendering::mesh::Mesh::meshConfig</references>
+        <references refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a6d8ef2ed1a395431a8a4a1fdd504ae18" compoundref="Mesh_8ixx" startline="80">helios::rendering::mesh::Mesh::meshConfig_</references>
+        <references refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1aa26dab09b7cc8466d89f43510fb817e3" compoundref="Mesh_8ixx" startline="171" endline="173">helios::rendering::mesh::Mesh::vertices</references>
+        <references refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a2cce5a0f7de32f749a1b0435e5868eac" compoundref="Mesh_8ixx" startline="70">helios::rendering::mesh::Mesh::vertices_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1mesh_1_1Mesh_1ae85f9420cd4583c186a3a37b928be60e" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::rendering::mesh::Mesh::Mesh</definition>
+        <argsstring>(const helios::rendering::asset::shape::Shape &amp;shape, std::shared_ptr&lt; const helios::rendering::mesh::MeshConfig &gt; meshConfig)</argsstring>
+        <name>Mesh</name>
+        <qualifiedname>helios::rendering::mesh::Mesh::Mesh</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape" kindref="compound">helios::rendering::asset::shape::Shape</ref> &amp;</type>
+          <declname>shape</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; const <ref refid="structhelios_1_1rendering_1_1mesh_1_1MeshConfig" kindref="compound">helios::rendering::mesh::MeshConfig</ref> &gt;</type>
+          <declname>meshConfig</declname>
+        </param>
+        <briefdescription>
+<para>Creates a new <ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh" kindref="compound">Mesh</ref> instance from the specified Shape. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>shape</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A const reference to the Shape. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>meshConfig</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A shared_ptr to the <ref refid="structhelios_1_1rendering_1_1mesh_1_1MeshConfig" kindref="compound">MeshConfig</ref> used with this <ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh" kindref="compound">Mesh</ref>.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if meshConfig is a null shared_ptr, or if the shape contained null data. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/mesh/Mesh.ixx" line="141" column="18" bodyfile="/tmp/h/include/helios/rendering/mesh/Mesh.ixx" bodystart="141" bodyend="154"/>
+        <references refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1aa42ae3ba109e72e272168a0e08d966e1" compoundref="Mesh_8ixx" startline="181" endline="183">helios::rendering::mesh::Mesh::indices</references>
+        <references refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a5b664bfba4df5b255f619d7655cce22d" compoundref="Mesh_8ixx" startline="75">helios::rendering::mesh::Mesh::indices_</references>
+        <references refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a2aea274d86f8531ef349034aa1ede438" compoundref="Mesh_8ixx" startline="100">helios::rendering::mesh::Mesh::logger_</references>
+        <references refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1abaf4ac43a29a53657fd439254e8ac7a5" compoundref="Mesh_8ixx" startline="191" endline="193">helios::rendering::mesh::Mesh::meshConfig</references>
+        <references refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a6d8ef2ed1a395431a8a4a1fdd504ae18" compoundref="Mesh_8ixx" startline="80">helios::rendering::mesh::Mesh::meshConfig_</references>
+        <references refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1aa26dab09b7cc8466d89f43510fb817e3" compoundref="Mesh_8ixx" startline="171" endline="173">helios::rendering::mesh::Mesh::vertices</references>
+        <references refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a2cce5a0f7de32f749a1b0435e5868eac" compoundref="Mesh_8ixx" startline="70">helios::rendering::mesh::Mesh::vertices_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a3100d377759531d9f5ed29b2cbf74848" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>unsigned int</type>
+        <definition>unsigned int helios::rendering::mesh::Mesh::indexCount</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>indexCount</name>
+        <qualifiedname>helios::rendering::mesh::Mesh::indexCount</qualifiedname>
+        <briefdescription>
+<para>Returns the index count of this <ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh" kindref="compound">Mesh</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The number of indices handled by this <ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh" kindref="compound">Mesh</ref>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/mesh/Mesh.ixx" line="161" column="23" bodyfile="/tmp/h/include/helios/rendering/mesh/Mesh.ixx" bodystart="161" bodyend="163"/>
+        <references refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a5b664bfba4df5b255f619d7655cce22d" compoundref="Mesh_8ixx" startline="75">helios::rendering::mesh::Mesh::indices_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1mesh_1_1Mesh_1aa26dab09b7cc8466d89f43510fb817e3" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const std::vector&lt; Vertex &gt; &amp;</type>
+        <definition>const std::vector&lt; Vertex &gt; &amp; helios::rendering::mesh::Mesh::vertices</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>vertices</name>
+        <qualifiedname>helios::rendering::mesh::Mesh::vertices</qualifiedname>
+        <briefdescription>
+<para>Returns a const reference to the underlying vertices. The returned data is guaranteed to be a valid reference to existing data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A const ref to the vector of <ref refid="structhelios_1_1rendering_1_1Vertex" kindref="compound">Vertex</ref>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/mesh/Mesh.ixx" line="171" column="28" bodyfile="/tmp/h/include/helios/rendering/mesh/Mesh.ixx" bodystart="171" bodyend="173"/>
+        <references refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a2cce5a0f7de32f749a1b0435e5868eac" compoundref="Mesh_8ixx" startline="70">helios::rendering::mesh::Mesh::vertices_</references>
+        <referencedby refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1ae85f9420cd4583c186a3a37b928be60e" compoundref="Mesh_8ixx" startline="141" endline="154">helios::rendering::mesh::Mesh::Mesh</referencedby>
+        <referencedby refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1aa769126283db3551f959f3bb8276ed3c" compoundref="Mesh_8ixx" startline="117" endline="130">helios::rendering::mesh::Mesh::Mesh</referencedby>
+        <referencedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a77951b4083715c1e2bbbdea305b16b57" compoundref="OpenGLMesh_8ixx" startline="147" endline="171">helios::ext::opengl::rendering::model::OpenGLMesh::OpenGLMesh</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1mesh_1_1Mesh_1aa42ae3ba109e72e272168a0e08d966e1" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const std::vector&lt; unsigned int &gt; &amp;</type>
+        <definition>const std::vector&lt; unsigned int &gt; &amp; helios::rendering::mesh::Mesh::indices</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>indices</name>
+        <qualifiedname>helios::rendering::mesh::Mesh::indices</qualifiedname>
+        <briefdescription>
+<para>Returns a const reference to the underlying indices. The returned data is guaranteed to be a valid reference to existing data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A const ref to the vector of indices. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/mesh/Mesh.ixx" line="181" column="28" bodyfile="/tmp/h/include/helios/rendering/mesh/Mesh.ixx" bodystart="181" bodyend="183"/>
+        <references refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a5b664bfba4df5b255f619d7655cce22d" compoundref="Mesh_8ixx" startline="75">helios::rendering::mesh::Mesh::indices_</references>
+        <referencedby refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1ae85f9420cd4583c186a3a37b928be60e" compoundref="Mesh_8ixx" startline="141" endline="154">helios::rendering::mesh::Mesh::Mesh</referencedby>
+        <referencedby refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1aa769126283db3551f959f3bb8276ed3c" compoundref="Mesh_8ixx" startline="117" endline="130">helios::rendering::mesh::Mesh::Mesh</referencedby>
+        <referencedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a77951b4083715c1e2bbbdea305b16b57" compoundref="OpenGLMesh_8ixx" startline="147" endline="171">helios::ext::opengl::rendering::model::OpenGLMesh::OpenGLMesh</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1mesh_1_1Mesh_1abaf4ac43a29a53657fd439254e8ac7a5" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="structhelios_1_1rendering_1_1mesh_1_1MeshConfig" kindref="compound">helios::rendering::mesh::MeshConfig</ref> &amp;</type>
+        <definition>const helios::rendering::mesh::MeshConfig &amp; helios::rendering::mesh::Mesh::meshConfig</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>meshConfig</name>
+        <qualifiedname>helios::rendering::mesh::Mesh::meshConfig</qualifiedname>
+        <briefdescription>
+<para>Returns a const reference to <ref refid="structhelios_1_1rendering_1_1mesh_1_1MeshConfig" kindref="compound">MeshConfig</ref> used with this <ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh" kindref="compound">Mesh</ref>. The returned <ref refid="structhelios_1_1rendering_1_1mesh_1_1MeshConfig" kindref="compound">MeshConfig</ref> is guaranteed to be a valid reference to existing data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The <ref refid="structhelios_1_1rendering_1_1mesh_1_1MeshConfig" kindref="compound">MeshConfig</ref> used with this <ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh" kindref="compound">Mesh</ref>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/mesh/Mesh.ixx" line="191" column="52" bodyfile="/tmp/h/include/helios/rendering/mesh/Mesh.ixx" bodystart="191" bodyend="193"/>
+        <references refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a6d8ef2ed1a395431a8a4a1fdd504ae18" compoundref="Mesh_8ixx" startline="80">helios::rendering::mesh::Mesh::meshConfig_</references>
+        <referencedby refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1ae85f9420cd4583c186a3a37b928be60e" compoundref="Mesh_8ixx" startline="141" endline="154">helios::rendering::mesh::Mesh::Mesh</referencedby>
+        <referencedby refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1aa769126283db3551f959f3bb8276ed3c" compoundref="Mesh_8ixx" startline="117" endline="130">helios::rendering::mesh::Mesh::Mesh</referencedby>
+        <referencedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a878fbf33ad6e8e67ded9b9e1bf2f3eb9" compoundref="OpenGLMesh_8ixx" startline="182" endline="205">helios::ext::opengl::rendering::model::OpenGLMesh::OpenGLMesh</referencedby>
+        <referencedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a77951b4083715c1e2bbbdea305b16b57" compoundref="OpenGLMesh_8ixx" startline="147" endline="171">helios::ext::opengl::rendering::model::OpenGLMesh::OpenGLMesh</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a493882e9ae39726cb56e27fcd7379150" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="namespacehelios_1_1math_1a124c0492430aeecedc1c1a5ece4ba488" kindref="member">helios::math::aabbf</ref> &amp;</type>
+        <definition>const helios::math::aabbf &amp; helios::rendering::mesh::Mesh::aabb</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>aabb</name>
+        <qualifiedname>helios::rendering::mesh::Mesh::aabb</qualifiedname>
+        <briefdescription>
+<para>Retrieves the axis-aligned bounding box (AABB) of the mesh. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The method calculates and returns the AABB of the mesh, which encloses the mesh&apos;s vertices. If the mesh requires an update to its bounding box, this method recomputes the bounds based on the vertex positions and caches the result for future calls. The returned AABB represents the minimal rectangle in 3D space that contains all the vertices of the mesh.</para>
+<para><simplesect kind="return"><para>Reference to the computed axis-aligned bounding box. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/mesh/Mesh.ixx" line="207" column="36" bodyfile="/tmp/h/include/helios/rendering/mesh/Mesh.ixx" bodystart="207" bodyend="238"/>
+        <references refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a1cae74842586dac085c65673506b62d6" compoundref="Mesh_8ixx" startline="65" endline="65">helios::rendering::mesh::Mesh::aabb_</references>
+        <references refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a22763e6a305fcb6f40cf094947bfe5a2" compoundref="Mesh_8ixx" startline="51">helios::rendering::mesh::Mesh::needsUpdate_</references>
+        <references refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1a2cce5a0f7de32f749a1b0435e5868eac" compoundref="Mesh_8ixx" startline="70">helios::rendering::mesh::Mesh::vertices_</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/rendering/mesh/Mesh.ixx" line="14" column="15"/>
+  </compounddef>
+</doxygen>

@@ -44,7 +44,8 @@ var annotated_dup =
             ] ],
             [ "FreeTypeFontResourceManager", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1FreeTypeFontResourceManager.html", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1FreeTypeFontResourceManager" ],
             [ "OpenGLDevice", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice.html", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice" ],
-            [ "OpenGLGlyphTextRenderer", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLGlyphTextRenderer.html", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLGlyphTextRenderer" ]
+            [ "OpenGLGlyphTextRenderer", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLGlyphTextRenderer.html", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLGlyphTextRenderer" ],
+            [ "OpenGLMeshRenderer", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLMeshRenderer.html", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLMeshRenderer" ]
           ] ]
         ] ]
       ] ],
@@ -87,8 +88,8 @@ var annotated_dup =
                 [ "GfxEffectsConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1GfxEffectsConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1GfxEffectsConfig" ],
                 [ "LevelBoundsCollisionConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1LevelBoundsCollisionConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1LevelBoundsCollisionConfig" ],
                 [ "LifecycleConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1LifecycleConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1LifecycleConfig" ],
+                [ "MeshRenderableConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1MeshRenderableConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1MeshRenderableConfig" ],
                 [ "Move2DConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1Move2DConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1Move2DConfig" ],
-                [ "RenderableConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1RenderableConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1RenderableConfig" ],
                 [ "SceneNodeConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1SceneNodeConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1SceneNodeConfig" ],
                 [ "SpawnConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1SpawnConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1SpawnConfig" ],
                 [ "SteeringConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1SteeringConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1SteeringConfig" ],
@@ -409,28 +410,23 @@ var annotated_dup =
             [ "Shape", "structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape.html", "structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape" ]
           ] ]
         ] ],
-        [ "mesh", "namespacehelios_1_1rendering_1_1mesh.html", [
-          [ "MeshRenderable", "classhelios_1_1rendering_1_1mesh_1_1MeshRenderable.html", "classhelios_1_1rendering_1_1mesh_1_1MeshRenderable" ],
-          [ "MeshRenderCommand", "classhelios_1_1rendering_1_1mesh_1_1MeshRenderCommand.html", "classhelios_1_1rendering_1_1mesh_1_1MeshRenderCommand" ]
+        [ "material", "namespacehelios_1_1rendering_1_1material.html", [
+          [ "Material", "classhelios_1_1rendering_1_1material_1_1Material.html", "classhelios_1_1rendering_1_1material_1_1Material" ],
+          [ "MaterialShaderProperties", "classhelios_1_1rendering_1_1material_1_1MaterialShaderProperties.html", "classhelios_1_1rendering_1_1material_1_1MaterialShaderProperties" ],
+          [ "MaterialShaderPropertiesOverride", "structhelios_1_1rendering_1_1material_1_1MaterialShaderPropertiesOverride.html", "structhelios_1_1rendering_1_1material_1_1MaterialShaderPropertiesOverride" ]
         ] ],
-        [ "model", "namespacehelios_1_1rendering_1_1model.html", [
-          [ "config", "namespacehelios_1_1rendering_1_1model_1_1config.html", [
-            [ "MaterialProperties", "classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties.html", "classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties" ],
-            [ "MaterialPropertiesOverride", "structhelios_1_1rendering_1_1model_1_1config_1_1MaterialPropertiesOverride.html", "structhelios_1_1rendering_1_1model_1_1config_1_1MaterialPropertiesOverride" ],
-            [ "MeshConfig", "structhelios_1_1rendering_1_1model_1_1config_1_1MeshConfig.html", "structhelios_1_1rendering_1_1model_1_1config_1_1MeshConfig" ]
-          ] ],
-          [ "Material", "classhelios_1_1rendering_1_1model_1_1Material.html", "classhelios_1_1rendering_1_1model_1_1Material" ],
-          [ "Mesh", "classhelios_1_1rendering_1_1model_1_1Mesh.html", "classhelios_1_1rendering_1_1model_1_1Mesh" ]
+        [ "mesh", "namespacehelios_1_1rendering_1_1mesh.html", [
+          [ "Mesh", "classhelios_1_1rendering_1_1mesh_1_1Mesh.html", "classhelios_1_1rendering_1_1mesh_1_1Mesh" ],
+          [ "MeshConfig", "structhelios_1_1rendering_1_1mesh_1_1MeshConfig.html", "structhelios_1_1rendering_1_1mesh_1_1MeshConfig" ],
+          [ "MeshRenderable", "classhelios_1_1rendering_1_1mesh_1_1MeshRenderable.html", "classhelios_1_1rendering_1_1mesh_1_1MeshRenderable" ],
+          [ "MeshRenderCommand", "classhelios_1_1rendering_1_1mesh_1_1MeshRenderCommand.html", "classhelios_1_1rendering_1_1mesh_1_1MeshRenderCommand" ],
+          [ "MeshRenderer", "classhelios_1_1rendering_1_1mesh_1_1MeshRenderer.html", "classhelios_1_1rendering_1_1mesh_1_1MeshRenderer" ]
         ] ],
         [ "shader", "namespacehelios_1_1rendering_1_1shader.html", [
           [ "Shader", "classhelios_1_1rendering_1_1shader_1_1Shader.html", "classhelios_1_1rendering_1_1shader_1_1Shader" ],
           [ "UniformValueMap", "classhelios_1_1rendering_1_1shader_1_1UniformValueMap.html", "classhelios_1_1rendering_1_1shader_1_1UniformValueMap" ]
         ] ],
         [ "text", "namespacehelios_1_1rendering_1_1text.html", [
-          [ "config", "namespacehelios_1_1rendering_1_1text_1_1config.html", [
-            [ "TextShaderProperties", "classhelios_1_1rendering_1_1text_1_1config_1_1TextShaderProperties.html", "classhelios_1_1rendering_1_1text_1_1config_1_1TextShaderProperties" ],
-            [ "TextShaderPropertiesOverride", "structhelios_1_1rendering_1_1text_1_1config_1_1TextShaderPropertiesOverride.html", "structhelios_1_1rendering_1_1text_1_1config_1_1TextShaderPropertiesOverride" ]
-          ] ],
           [ "FontResourceProvider", "classhelios_1_1rendering_1_1text_1_1FontResourceProvider.html", "classhelios_1_1rendering_1_1text_1_1FontResourceProvider" ],
           [ "Glyph", "structhelios_1_1rendering_1_1text_1_1Glyph.html", "structhelios_1_1rendering_1_1text_1_1Glyph" ],
           [ "TextMesh", "classhelios_1_1rendering_1_1text_1_1TextMesh.html", "classhelios_1_1rendering_1_1text_1_1TextMesh" ],
@@ -438,11 +434,12 @@ var annotated_dup =
           [ "TextRenderCommand", "classhelios_1_1rendering_1_1text_1_1TextRenderCommand.html", "classhelios_1_1rendering_1_1text_1_1TextRenderCommand" ],
           [ "TextRenderer", "classhelios_1_1rendering_1_1text_1_1TextRenderer.html", "classhelios_1_1rendering_1_1text_1_1TextRenderer" ],
           [ "TextRenderPrototype", "classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html", "classhelios_1_1rendering_1_1text_1_1TextRenderPrototype" ],
+          [ "TextShaderProperties", "classhelios_1_1rendering_1_1text_1_1TextShaderProperties.html", "classhelios_1_1rendering_1_1text_1_1TextShaderProperties" ],
+          [ "TextShaderPropertiesOverride", "structhelios_1_1rendering_1_1text_1_1TextShaderPropertiesOverride.html", "structhelios_1_1rendering_1_1text_1_1TextShaderPropertiesOverride" ],
           [ "TextLayout", "structhelios_1_1rendering_1_1text_1_1TextLayout.html", "structhelios_1_1rendering_1_1text_1_1TextLayout" ],
           [ "TypeSetter", "classhelios_1_1rendering_1_1text_1_1TypeSetter.html", "classhelios_1_1rendering_1_1text_1_1TypeSetter" ]
         ] ],
         [ "Renderable", "classhelios_1_1rendering_1_1Renderable.html", "classhelios_1_1rendering_1_1Renderable" ],
-        [ "RenderCommand", "classhelios_1_1rendering_1_1RenderCommand.html", "classhelios_1_1rendering_1_1RenderCommand" ],
         [ "RenderingDevice", "classhelios_1_1rendering_1_1RenderingDevice.html", "classhelios_1_1rendering_1_1RenderingDevice" ],
         [ "RenderPass", "classhelios_1_1rendering_1_1RenderPass.html", "classhelios_1_1rendering_1_1RenderPass" ],
         [ "RenderPassFactory", "classhelios_1_1rendering_1_1RenderPassFactory.html", "classhelios_1_1rendering_1_1RenderPassFactory" ],

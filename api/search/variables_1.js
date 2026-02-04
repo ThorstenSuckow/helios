@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['basecolor_0',['baseColor',['../structhelios_1_1rendering_1_1model_1_1config_1_1MaterialPropertiesOverride.html#a09b64d092d029ff98b9774f3e40a8dea',1,'helios::rendering::model::config::MaterialPropertiesOverride::baseColor'],['../structhelios_1_1rendering_1_1text_1_1config_1_1TextShaderPropertiesOverride.html#a9fef80ca817707d4e895caeebada7a11',1,'helios::rendering::text::config::TextShaderPropertiesOverride::baseColor']]],
+  ['basecolor_0',['baseColor',['../structhelios_1_1rendering_1_1material_1_1MaterialShaderPropertiesOverride.html#a5ca7738cdc693512c58b20440323a418',1,'helios::rendering::material::MaterialShaderPropertiesOverride::baseColor'],['../structhelios_1_1rendering_1_1text_1_1TextShaderPropertiesOverride.html#acbab23ba23f54249355306ef51a72f05',1,'helios::rendering::text::TextShaderPropertiesOverride::baseColor']]],
   ['bearing_1',['bearing',['../structhelios_1_1rendering_1_1text_1_1Glyph.html#ab2ba70d2721c66d26cb7a9e070a7fdea',1,'helios::rendering::text::Glyph']]],
   ['beige_2',['Beige',['../structhelios_1_1util_1_1Colors.html#a51a3cacb710c054bf3cd41684f5bb1c4',1,'helios::util::Colors']]],
   ['black_3',['Black',['../structhelios_1_1util_1_1Colors.html#af4c86c5fcc6d41740a31df96780243a1',1,'helios::util::Colors']]],

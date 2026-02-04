@@ -1,4 +1,4 @@
 var TextShaderProperties_8ixx =
 [
-    [ "helios::rendering::text::config::TextShaderProperties", "classhelios_1_1rendering_1_1text_1_1config_1_1TextShaderProperties.html", "classhelios_1_1rendering_1_1text_1_1config_1_1TextShaderProperties" ]
+    [ "helios::rendering::text::TextShaderProperties", "classhelios_1_1rendering_1_1text_1_1TextShaderProperties.html", "classhelios_1_1rendering_1_1text_1_1TextShaderProperties" ]
 ];

@@ -49,10 +49,10 @@
 <varlistentry><term>Class <ref refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow" kindref="compound">helios::ext::glfw::window::GLFWWindow</ref>  </term></varlistentry>
 <listitem><para><anchor id="todo_1_todo000001"/>add glfwSetWindowRefreshCallback  </para>
 </listitem>
-<varlistentry><term>Member <ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a2d4c0ccf2f175ce3ac7dddc9bd7c808f" kindref="member">helios::ext::opengl::rendering::model::OpenGLMesh::OpenGLMesh</ref>  (std::shared_ptr&lt; const std::vector&lt; helios::rendering::Vertex &gt; &gt; vertices, std::shared_ptr&lt; const std::vector&lt; unsigned int &gt; &gt; indices, std::shared_ptr&lt; const helios::rendering::model::config::MeshConfig &gt; meshConfig)</term></varlistentry>
+<varlistentry><term>Member <ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a77951b4083715c1e2bbbdea305b16b57" kindref="member">helios::ext::opengl::rendering::model::OpenGLMesh::OpenGLMesh</ref>  (std::shared_ptr&lt; const std::vector&lt; helios::rendering::Vertex &gt; &gt; vertices, std::shared_ptr&lt; const std::vector&lt; unsigned int &gt; &gt; indices, std::shared_ptr&lt; const helios::rendering::mesh::MeshConfig &gt; meshConfig)</term></varlistentry>
 <listitem><para><anchor id="todo_1_todo000002"/>this should not be part of the constructor, instead, lazy init in render pass, then reuse.  </para>
 </listitem>
-<varlistentry><term>Member <ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a4118cd59bc33ae54ff8abb339cd67fc9" kindref="member">helios::ext::opengl::rendering::model::OpenGLMesh::OpenGLMesh</ref>  (const <ref refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape" kindref="compound">helios::rendering::asset::shape::Shape</ref> &amp;shape, std::shared_ptr&lt; const helios::rendering::model::config::MeshConfig &gt; meshConfig)</term></varlistentry>
+<varlistentry><term>Member <ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh_1a878fbf33ad6e8e67ded9b9e1bf2f3eb9" kindref="member">helios::ext::opengl::rendering::model::OpenGLMesh::OpenGLMesh</ref>  (const <ref refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape" kindref="compound">helios::rendering::asset::shape::Shape</ref> &amp;shape, std::shared_ptr&lt; const helios::rendering::mesh::MeshConfig &gt; meshConfig)</term></varlistentry>
 <listitem><para><anchor id="todo_1_todo000003"/>this should not be part of the constructor, instead, lazy init in render pass, then reuse.  </para>
 </listitem>
 <varlistentry><term>Member <ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1aa97dd0a5a8fb57989616b7fac5139f8b" kindref="member">helios::ext::opengl::rendering::OpenGLDevice::init</ref>  () override</term></varlistentry>
@@ -72,7 +72,7 @@
 <varlistentry><term>Member <ref refid="structhelios_1_1math_1_1vec3_1a38d076eec3ebd34f4353d99e3f58ad1e" kindref="member">helios::math::vec3&lt; T &gt;::same</ref>  (const vec3&lt; T &gt; &amp;rgt, T epsilon=0.0001) const</term></varlistentry>
 <listitem><para><anchor id="todo_1_todo000023"/>account for abs (values close to zero) and rel (larger values), move epsilon to global constant?  </para>
 </listitem>
-<varlistentry><term>Member <ref refid="classhelios_1_1rendering_1_1model_1_1Mesh_1abd79cc39a499bd1b368afd4dd534b00b" kindref="member">helios::rendering::model::Mesh::init</ref>  ()=0</term></varlistentry>
+<varlistentry><term>Member <ref refid="classhelios_1_1rendering_1_1mesh_1_1Mesh_1af94de770b332752e3b7fb1d6bad446d9" kindref="member">helios::rendering::mesh::Mesh::init</ref>  ()=0</term></varlistentry>
 <listitem><para><anchor id="todo_1_todo000024"/> std::shared_ptr&lt;const std::vector&lt;Texture&gt;&gt; textures_;  </para>
 </listitem>
 <varlistentry><term>Member <ref refid="classhelios_1_1rendering_1_1RenderQueue_1a8cd37510ae60116863bea9d3bafe2254" kindref="member">helios::rendering::RenderQueue::add</ref>  (<ref refid="classhelios_1_1rendering_1_1mesh_1_1MeshRenderCommand" kindref="compound">helios::rendering::mesh::MeshRenderCommand</ref> renderCommand)</term></varlistentry>
@@ -100,7 +100,7 @@
 <varlistentry><term>Class <ref refid="classhelios_1_1scene_1_1FrustumCullingStrategy" kindref="compound">helios::scene::FrustumCullingStrategy</ref>  </term></varlistentry>
 <listitem><para><anchor id="todo_1_todo000034"/>The returned list should be considered &quot;as is&quot; for now: Each entry in the list is a single renderable entity to consider. Its child nodes (i.e. the sub tree for which this node is the root) should _not_ be automatically considered for rendering. Later iterations should probably use an individual struct that provides a hint whether for a given node a whole subtree should be considered, saving time for culling and memory when constructing the list.  </para>
 </listitem>
-<varlistentry><term>Member <ref refid="classhelios_1_1scene_1_1Scene_1ab3ad742392c2a2b159cf8927ee6cf375" kindref="member">helios::scene::Scene::createSnapshot</ref>  (const std::shared_ptr&lt; const rendering::Viewport &gt; &amp;viewport) const</term></varlistentry>
+<varlistentry><term>Member <ref refid="classhelios_1_1scene_1_1Scene_1a054843594de8ccc99336935ac0cbde11" kindref="member">helios::scene::Scene::createSnapshot</ref>  (const <ref refid="classhelios_1_1rendering_1_1Viewport" kindref="compound">rendering::Viewport</ref> &amp;viewport) const</term></varlistentry>
 <listitem><para><anchor id="todo_1_todo000036"/>This should be refactored into a factory to prevent domain leakage between <ref refid="classhelios_1_1scene_1_1Scene" kindref="compound">Scene</ref> and Rendering.  </para>
 </listitem>
 <varlistentry><term>Member <ref refid="classhelios_1_1scene_1_1SceneNode_1a316494fedf68d4ca53cd4453885e0b07" kindref="member">helios::scene::SceneNode::SceneNode</ref>  () noexcept</term></varlistentry>

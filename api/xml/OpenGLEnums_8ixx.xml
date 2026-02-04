@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="OpenGLEnums_8ixx" kind="file" language="C++">
+    <compoundname>OpenGLEnums.ixx</compoundname>
+    <includes local="no">glad/gl.h</includes>
+    <includes local="no">cassert</includes>
+    <includes refid="PrimitiveType_8ixx" local="no">helios.rendering.mesh.PrimitiveType</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>OpenGLEnums.ixx</label>
+        <link refid="OpenGLEnums_8ixx"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>helios.rendering.mesh.PrimitiveType</label>
+        <link refid="PrimitiveType_8ixx"/>
+      </node>
+      <node id="3">
+        <label>cassert</label>
+      </node>
+      <node id="2">
+        <label>glad/gl.h</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespacehelios">helios</innernamespace>
+    <innernamespace refid="namespacehelios_1_1ext">helios::ext</innernamespace>
+    <innernamespace refid="namespacehelios_1_1ext_1_1opengl">helios::ext::opengl</innernamespace>
+    <innernamespace refid="namespacehelios_1_1ext_1_1opengl_1_1rendering">helios::ext::opengl::rendering</innernamespace>
+    <innernamespace refid="namespacehelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLEnumMapper">helios::ext::opengl::rendering::OpenGLEnumMapper</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="keyword">module</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;glad/gl.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cassert&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8ext_8opengl_8rendering_8OpenGLEnumMapper" kindref="compound">helios.ext.opengl.rendering.OpenGLEnumMapper</ref>;</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8rendering_8mesh_8PrimitiveType" kindref="compound">helios.rendering.mesh.PrimitiveType</ref>;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10" refid="namespacehelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLEnumMapper" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLEnumMapper" kindref="compound">helios::ext::opengl::rendering::OpenGLEnumMapper</ref><sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Translates<sp/>a<sp/>helios<sp/>abstract<sp/>PrimitiveType<sp/>enum<sp/>to<sp/>its<sp/>corresponding<sp/>OpenGL<sp/>GLenum<sp/>value.</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>utility<sp/>function<sp/>maps<sp/>API-agnostic<sp/>primitive<sp/>types<sp/>defined<sp/>by<sp/>helios<sp/>to<sp/>their</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>OpenGL<sp/>equivalents.<sp/>It<sp/>is<sp/>used<sp/>internally<sp/>by<sp/>OpenGLMeshRenderer<sp/>and<sp/>other<sp/>OpenGL</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>rendering<sp/>components.</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Supported<sp/>mappings:</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>-<sp/>`PrimitiveType::Points`<sp/>→<sp/>`GL_POINTS`</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>-<sp/>`PrimitiveType::Lines`<sp/>→<sp/>`GL_LINES`</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>-<sp/>`PrimitiveType::LineLoop`<sp/>→<sp/>`GL_LINE_LOOP`</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>-<sp/>`PrimitiveType::LineStrip`<sp/>→<sp/>`GL_LINE_STRIP`</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>-<sp/>`PrimitiveType::Triangles`<sp/>→<sp/>`GL_TRIANGLES`</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>-<sp/>`PrimitiveType::TriangleStrip`<sp/>→<sp/>`GL_TRIANGLE_STRIP`</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>-<sp/>`PrimitiveType::TriangleFan`<sp/>→<sp/>`GL_TRIANGLE_FAN`</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Example<sp/>usage:</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```cpp</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>auto<sp/>glPrimitive<sp/>=<sp/>OpenGLEnumMapper::toOpenGL(PrimitiveType::Triangles);</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>glDrawElements(glPrimitive,<sp/>indexCount,<sp/>GL_UNSIGNED_INT,<sp/>nullptr);</highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>primitiveType<sp/>The<sp/>API-agnostic<sp/>PrimitiveType<sp/>value.</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>The<sp/>corresponding<sp/>OpenGL<sp/>primitive<sp/>type<sp/>as<sp/>a<sp/>GLenum.<sp/>Falls<sp/>back<sp/>to</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>`GL_TRIANGLES`<sp/>if<sp/>the<sp/>mapping<sp/>is<sp/>not<sp/>explicitly<sp/>defined.</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@note<sp/>This<sp/>function<sp/>is<sp/>marked<sp/>`[[nodiscard]]`<sp/>to<sp/>encourage<sp/>proper<sp/>usage<sp/>of<sp/>the<sp/>return<sp/>value.</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41" refid="namespacehelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLEnumMapper_1aa1ca6dd5d5fdf09c2bae6d4f7694f3c2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/>GLenum<sp/><ref refid="namespacehelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLEnumMapper_1aa1ca6dd5d5fdf09c2bae6d4f7694f3c2" kindref="member">toOpenGL</ref>(<ref refid="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588c" kindref="member">helios::rendering::mesh::PrimitiveType</ref><sp/>primitiveType)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(primitiveType)<sp/>{</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588ca75dd5f1160a3f02b6fae89c54361a1b3" kindref="member">helios::rendering::mesh::PrimitiveType::Points</ref>:</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GL_POINTS;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588caa0b0293a2db49f5f93c15a62e095c819" kindref="member">helios::rendering::mesh::PrimitiveType::Lines</ref>:</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GL_LINES;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588ca2ba065d2b3004087cc8f111bf56f134b" kindref="member">helios::rendering::mesh::PrimitiveType::LineLoop</ref>:</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GL_LINE_LOOP;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588cae7f9e73b8edd21f420a63b3ace5768a2" kindref="member">helios::rendering::mesh::PrimitiveType::LineStrip</ref>:</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GL_LINE_STRIP;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588ca7ca66fdfaad3eb33fc65d7490178f856" kindref="member">helios::rendering::mesh::PrimitiveType::Triangles</ref>:</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GL_TRIANGLES;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588ca1da0b9ead8b051940a89214bae22831c" kindref="member">helios::rendering::mesh::PrimitiveType::TriangleStrip</ref>:</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GL_TRIANGLE_STRIP;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1rendering_1_1mesh_1a6aff3084e2d307edec0051d9c379588ca18d58fde618e4a30e2dfdc122e693047" kindref="member">helios::rendering::mesh::PrimitiveType::TriangleFan</ref>:</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GL_TRIANGLE_FAN;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GL_TRIANGLES;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="61"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/tmp/h/include/ext/opengl/rendering/OpenGLEnums.ixx"/>
+  </compounddef>
+</doxygen>

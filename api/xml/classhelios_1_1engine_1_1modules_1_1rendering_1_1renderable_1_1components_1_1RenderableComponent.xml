@@ -65,7 +65,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="/tmp/h/include/helios/engine/modules/rendering/renderable/components/RenderableComponent.ixx" line="49" column="18" bodyfile="/tmp/h/include/helios/engine/modules/rendering/renderable/components/RenderableComponent.ixx" bodystart="49" bodyend="55"/>
-        <references refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1renderable_1_1components_1_1RenderableComponent_1a87cbe520b4663a751ce48748c1171c7f" compoundref="RenderableComponent_8ixx" startline="86" endline="88">renderable</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1renderable_1_1components_1_1RenderableComponent_1a78f0cf6f0703e1cbb80be820073c91f0" compoundref="RenderableComponent_8ixx" startline="95" endline="97">renderable</references>
         <referencedby refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1renderable_1_1components_1_1RenderableComponent_1aa03f155859878a0910a1d90f1e4d199c" compoundref="RenderableComponent_8ixx" startline="60" endline="61">RenderableComponent</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1rendering_1_1renderable_1_1components_1_1RenderableComponent_1aa03f155859878a0910a1d90f1e4d199c" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
@@ -121,14 +121,14 @@
         <references refid="classhelios_1_1engine_1_1ecs_1_1Component_1a3489588d238d04928e767908a0721be1" compoundref="Component_8ixx" startline="239" endline="241">helios::engine::ecs::Component::gameObject</references>
         <references refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1model_1_1components_1_1ModelAabbComponent_1a3b18f63bca545ed66f27d0274f86fef4" compoundref="ModelAabbComponent_8ixx" startline="46" endline="48">helios::engine::modules::rendering::model::components::ModelAabbComponent::setAabb</references>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1rendering_1_1renderable_1_1components_1_1RenderableComponent_1a87cbe520b4663a751ce48748c1171c7f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1rendering_1_1renderable_1_1components_1_1RenderableComponent_1af7d568a65becedc6d571f238e7d518b2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>std::shared_ptr&lt; <ref refid="classhelios_1_1rendering_1_1Renderable" kindref="compound">helios::rendering::Renderable</ref> &gt;</type>
-        <definition>std::shared_ptr&lt; helios::rendering::Renderable &gt; helios::engine::modules::rendering::renderable::components::RenderableComponent::renderable</definition>
+        <definition>std::shared_ptr&lt; helios::rendering::Renderable &gt; helios::engine::modules::rendering::renderable::components::RenderableComponent::shareRenderable</definition>
         <argsstring>() const noexcept</argsstring>
-        <name>renderable</name>
-        <qualifiedname>helios::engine::modules::rendering::renderable::components::RenderableComponent::renderable</qualifiedname>
+        <name>shareRenderable</name>
+        <qualifiedname>helios::engine::modules::rendering::renderable::components::RenderableComponent::shareRenderable</qualifiedname>
         <briefdescription>
-<para>Retrieves the stored Renderable. </para>
+<para>Retrieves a shared pointer to the stored Renderable. </para>
         </briefdescription>
         <detaileddescription>
 <para><simplesect kind="return"><para>Shared pointer to the Renderable. </para>
@@ -140,6 +140,24 @@
         <location file="/tmp/h/include/helios/engine/modules/rendering/renderable/components/RenderableComponent.ixx" line="86" column="26" bodyfile="/tmp/h/include/helios/engine/modules/rendering/renderable/components/RenderableComponent.ixx" bodystart="86" bodyend="88"/>
         <referencedby refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1SceneNodeConfig_1ae48e2d8712a059a0c6392a40cf6d4c29" compoundref="SceneNodeConfig_8ixx" startline="97" endline="116">helios::engine::builder::gameObject::builders::configs::SceneNodeConfig::parent</referencedby>
         <referencedby refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1SceneNodeConfig_1a089f8f32aa3ed109cc25dc609aa60470" compoundref="SceneNodeConfig_8ixx" startline="74" endline="88">helios::engine::builder::gameObject::builders::configs::SceneNodeConfig::parent</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1rendering_1_1renderable_1_1components_1_1RenderableComponent_1a78f0cf6f0703e1cbb80be820073c91f0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classhelios_1_1rendering_1_1Renderable" kindref="compound">helios::rendering::Renderable</ref> &amp;</type>
+        <definition>const helios::rendering::Renderable &amp; helios::engine::modules::rendering::renderable::components::RenderableComponent::renderable</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>renderable</name>
+        <qualifiedname>helios::engine::modules::rendering::renderable::components::RenderableComponent::renderable</qualifiedname>
+        <briefdescription>
+<para>Retrieves a const ref to the stored Renderable. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Const ref to the Renderable (never null after construction). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/rendering/renderable/components/RenderableComponent.ixx" line="95" column="46" bodyfile="/tmp/h/include/helios/engine/modules/rendering/renderable/components/RenderableComponent.ixx" bodystart="95" bodyend="97"/>
         <referencedby refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1renderable_1_1components_1_1RenderableComponent_1a1de2d6036ebc0c67fa4db98a842eb216" compoundref="RenderableComponent_8ixx" startline="49" endline="55">RenderableComponent</referencedby>
       </memberdef>
     </sectiondef>
@@ -211,7 +229,7 @@
         <link refid="classhelios_1_1util_1_1Guid"/>
       </node>
     </collaborationgraph>
-    <location file="/tmp/h/include/helios/engine/modules/rendering/renderable/components/RenderableComponent.ixx" line="30" column="5" bodyfile="/tmp/h/include/helios/engine/modules/rendering/renderable/components/RenderableComponent.ixx" bodystart="30" bodyend="90"/>
+    <location file="/tmp/h/include/helios/engine/modules/rendering/renderable/components/RenderableComponent.ixx" line="30" column="5" bodyfile="/tmp/h/include/helios/engine/modules/rendering/renderable/components/RenderableComponent.ixx" bodystart="30" bodyend="101"/>
     <listofallmembers>
       <member refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1renderable_1_1components_1_1RenderableComponent_1a8b747196185796c006101a9455c948aa" prot="private" virt="non-virtual"><scope>helios::engine::modules::rendering::renderable::components::RenderableComponent</scope><name>aabb_</name></member>
       <member refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1aea2a33eed58899d7f93accbe7a89149f" prot="public" virt="virtual"><scope>helios::engine::modules::rendering::renderable::components::RenderableComponent</scope><name>clone</name></member>
@@ -229,10 +247,11 @@
       <member refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1renderable_1_1components_1_1RenderableComponent_1a165d24e22dce365af85a54be24c35afe" prot="public" virt="virtual"><scope>helios::engine::modules::rendering::renderable::components::RenderableComponent</scope><name>onAttach</name></member>
       <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1ae18881cca0af5463608e59d112b3f257" prot="public" virt="virtual"><scope>helios::engine::modules::rendering::renderable::components::RenderableComponent</scope><name>onDeactivate</name></member>
       <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1aacc77dfd9a7a39b733e0f90a7e50d43e" prot="public" virt="virtual"><scope>helios::engine::modules::rendering::renderable::components::RenderableComponent</scope><name>onRelease</name></member>
-      <member refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1renderable_1_1components_1_1RenderableComponent_1a87cbe520b4663a751ce48748c1171c7f" prot="public" virt="non-virtual"><scope>helios::engine::modules::rendering::renderable::components::RenderableComponent</scope><name>renderable</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1renderable_1_1components_1_1RenderableComponent_1a78f0cf6f0703e1cbb80be820073c91f0" prot="public" virt="non-virtual"><scope>helios::engine::modules::rendering::renderable::components::RenderableComponent</scope><name>renderable</name></member>
       <member refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1renderable_1_1components_1_1RenderableComponent_1a199fc0ad87b9b5f24d2ac62e4143e0ad" prot="private" virt="non-virtual"><scope>helios::engine::modules::rendering::renderable::components::RenderableComponent</scope><name>renderable_</name></member>
       <member refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1renderable_1_1components_1_1RenderableComponent_1a1de2d6036ebc0c67fa4db98a842eb216" prot="public" virt="non-virtual"><scope>helios::engine::modules::rendering::renderable::components::RenderableComponent</scope><name>RenderableComponent</name></member>
       <member refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1renderable_1_1components_1_1RenderableComponent_1aa03f155859878a0910a1d90f1e4d199c" prot="public" virt="non-virtual"><scope>helios::engine::modules::rendering::renderable::components::RenderableComponent</scope><name>RenderableComponent</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1renderable_1_1components_1_1RenderableComponent_1af7d568a65becedc6d571f238e7d518b2" prot="public" virt="non-virtual"><scope>helios::engine::modules::rendering::renderable::components::RenderableComponent</scope><name>shareRenderable</name></member>
       <member refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563" prot="public" virt="virtual"><scope>helios::engine::modules::rendering::renderable::components::RenderableComponent</scope><name>typeId</name></member>
       <member refid="classhelios_1_1engine_1_1ecs_1_1Cloneable_1a7663aa6519f970dc8f0255a0e09bac17" prot="public" virt="virtual"><scope>helios::engine::modules::rendering::renderable::components::RenderableComponent</scope><name>~Cloneable</name></member>
       <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1aa014415a814f5252c94d040c2e80c83f" prot="public" virt="virtual"><scope>helios::engine::modules::rendering::renderable::components::RenderableComponent</scope><name>~Component</name></member>

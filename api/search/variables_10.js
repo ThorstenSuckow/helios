@@ -9,7 +9,7 @@ var searchData=
   ['seagreen_6',['SeaGreen',['../structhelios_1_1util_1_1Colors.html#a2684622cfcd0c51dbc066e7b292ebdd5',1,'helios::util::Colors']]],
   ['seashell_7',['Seashell',['../structhelios_1_1util_1_1Colors.html#a47c99310e83ff49e0876712c4105179d',1,'helios::util::Colors']]],
   ['seconds_8',['SECONDS',['../namespacehelios_1_1core_1_1units.html#a90333ee787d05c7f8003cace76268c41',1,'helios::core::units']]],
-  ['shader_5f_9',['shader_',['../classhelios_1_1rendering_1_1model_1_1Material.html#a0b16bb315fdf18861e2586378d16df43',1,'helios::rendering::model::Material']]],
+  ['shader_5f_9',['shader_',['../classhelios_1_1rendering_1_1material_1_1Material.html#a1b8c3262377aa05a766336a6b84a5ef8',1,'helios::rendering::material::Material']]],
   ['sienna_10',['Sienna',['../structhelios_1_1util_1_1Colors.html#ac60b6861fd747c3549a94ad2e21579bb',1,'helios::util::Colors']]],
   ['size_11',['size',['../structhelios_1_1rendering_1_1text_1_1Glyph.html#adab158411ce08a0377a9546f4cc5bf68',1,'helios::rendering::text::Glyph']]],
   ['skyblue_12',['SkyBlue',['../structhelios_1_1util_1_1Colors.html#adda6cb37e6e1ceac901600fd7320faa6',1,'helios::util::Colors']]],

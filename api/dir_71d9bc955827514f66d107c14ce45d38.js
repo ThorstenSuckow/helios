@@ -5,5 +5,7 @@ var dir_71d9bc955827514f66d107c14ce45d38 =
     [ "_module.ixx", "ext_2opengl_2rendering_2__module_8ixx.html", null ],
     [ "FreeTypeFontResourceManager.ixx", "FreeTypeFontResourceManager_8ixx.html", "FreeTypeFontResourceManager_8ixx" ],
     [ "OpenGLDevice.ixx", "OpenGLDevice_8ixx.html", "OpenGLDevice_8ixx" ],
-    [ "OpenGLGlyphTextRenderer.ixx", "OpenGLGlyphTextRenderer_8ixx.html", "OpenGLGlyphTextRenderer_8ixx" ]
+    [ "OpenGLEnums.ixx", "OpenGLEnums_8ixx.html", "OpenGLEnums_8ixx" ],
+    [ "OpenGLGlyphTextRenderer.ixx", "OpenGLGlyphTextRenderer_8ixx.html", "OpenGLGlyphTextRenderer_8ixx" ],
+    [ "OpenGLMeshRenderer.ixx", "OpenGLMeshRenderer_8ixx.html", "OpenGLMeshRenderer_8ixx" ]
 ];

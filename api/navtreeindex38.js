@@ -1,5 +1,7 @@
 var NAVTREEINDEX38 =
 {
+"structhelios_1_1util_1_1Colors.html#a4a6dd5125285c30f2e9be2e6dd7f8510":[3,0,373,0,86],
+"structhelios_1_1util_1_1Colors.html#a4a6dd5125285c30f2e9be2e6dd7f8510":[4,0,0,9,3,86],
 "structhelios_1_1util_1_1Colors.html#a4a6dd5125285c30f2e9be2e6dd7f8510":[6,0,0,9,3,86],
 "structhelios_1_1util_1_1Colors.html#a4bcaf9da461070ea49ae2990c566216d":[3,0,373,0,39],
 "structhelios_1_1util_1_1Colors.html#a4bcaf9da461070ea49ae2990c566216d":[4,0,0,9,3,39],

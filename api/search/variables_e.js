@@ -14,7 +14,7 @@ var searchData=
   ['powderblue_11',['PowderBlue',['../structhelios_1_1util_1_1Colors.html#a5676b94198fada7e2a90360dfbc2f20d',1,'helios::util::Colors']]],
   ['prefab_12',['prefab',['../structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig.html#a7d222b3a96ed220754c4863afc563b47',1,'helios::engine::runtime::pooling::GameObjectPoolConfig']]],
   ['prephase_5f_13',['prePhase_',['../classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html#a7d4eb13220ecd447c6af0914fd214921',1,'helios::engine::runtime::gameloop::GameLoop']]],
-  ['primitivetype_14',['primitiveType',['../structhelios_1_1rendering_1_1model_1_1config_1_1MeshConfig.html#a7cb1229de566ac92aa1e26068f661fd4',1,'helios::rendering::model::config::MeshConfig']]],
+  ['primitivetype_14',['primitiveType',['../structhelios_1_1rendering_1_1mesh_1_1MeshConfig.html#a3954860520d205b2dc0ec2402edf5e1e',1,'helios::rendering::mesh::MeshConfig']]],
   ['progid_5f_15',['progId_',['../classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader.html#a8026bd0761ea2fcf7a95a180dd04c6da',1,'helios::ext::opengl::rendering::shader::OpenGLShader']]],
   ['projectilespeed_5f_16',['projectileSpeed_',['../classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent.html#accb4b59ab1fecb6cab41ce51ab97b6ac',1,'helios::engine::mechanics::combat::components::ShootComponent']]],
   ['projectionmatrix_5f_17',['projectionMatrix_',['../classhelios_1_1scene_1_1Snapshot.html#a47dffe6969f2ed64915d1fd4599cd44a',1,'helios::scene::Snapshot']]],

@@ -119,7 +119,7 @@ $(function() {
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">export</span> <span class="keyword">module</span> <a class="code" href="module__helios_8rendering_8text_8TextRenderPrototype.html">helios.rendering.text.TextRenderPrototype</a>;</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">import</span> <a class="code" href="module__helios_8rendering_8text_8config_8TextShaderProperties.html">helios.rendering.text.config.TextShaderProperties</a>;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">import</span> <a class="code" href="module__helios_8rendering_8text_8TextShaderProperties.html">helios.rendering.text.TextShaderProperties</a>;</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">import</span> <a class="code" href="module__helios_8rendering_8text_8FontResourceProvider.html">helios.rendering.text.FontResourceProvider</a>;</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">import</span> <a class="code" href="module__helios_8rendering_8shader_8Shader.html">helios.rendering.shader.Shader</a>;</div>
@@ -157,127 +157,141 @@ $(function() {
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">     * TextRenderable score(std::make_unique&lt;TextMesh&gt;(&quot;Score: 0&quot;, fontId), prototype);</span></div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">     * ```</span></div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">     * @see TextRenderable</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">     * @see TextShaderProperties</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">     * @see FontResourceProvider</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">     * @see Shader</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">     */</span></div>
-<div class="foldopen" id="foldopen00057" data-start="{" data-end="};">
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html">   57</a></span>    <span class="keyword">class </span><a class="code hl_function" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#a85c04314d448d1a74e099d35dc9dd6e9">TextRenderPrototype</a> final {</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment"></span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">         * @brief The shader used for rendering text.</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        std::shared_ptr &lt;const helios::rendering::shader::Shader&gt; shader_;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment"></span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">         * @brief Text-specific shader properties (e.g., color).</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        std::shared_ptr &lt;const helios::rendering::text::config::TextShaderProperties&gt; textProperties_;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment"></span> </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">         * @brief Provider for loading fonts and retrieving glyph data.</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">         * Non-owning raw pointer. The font resource provider must remain valid</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">         * for the lifetime of this prototype.</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        <a class="code hl_class" href="classhelios_1_1rendering_1_1text_1_1FontResourceProvider.html">helios::rendering::text::FontResourceProvider</a>* fontResourceProvider_;</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment"></span> </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">         * @brief Constructs a text render prototype.</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">         * @param shader The shader to use for text rendering.</span></div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">         * @param textProperties Text-specific shader properties.</span></div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment">         * @param fontResourceProvider Raw pointer to the font resource provider</span></div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment">         *        (must remain valid for the lifetime of this prototype).</span></div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">         * @throws std::invalid_argument If `shader`, `textProperties`, or `fontResourceProvider` is null.</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">     * ## Performance Considerations</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">     * **PERF-NOTE: shared_ptr for shader and properties**</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">     * The `shader_` and `textProperties_` members use `std::shared_ptr`. Since prototypes</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">     * are typically long-lived and shared across many renderables, the ref-counting</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">     * overhead is amortized. However:</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">     * - Avoid copying `TextRenderPrototype` shared_ptrs in tight loops. The prototype</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">     *   getters return references, which is the correct pattern.</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">     * - The `fontResourceProvider_` uses a raw pointer intentionally to avoid circular</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">     *   references and unnecessary ref-counting—this is the preferred pattern for</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">     *   service-like dependencies with well-defined lifetimes.</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">     * @see TextRenderable</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">     * @see TextShaderProperties</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">     * @see FontResourceProvider</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">     * @see Shader</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">     */</span></div>
+<div class="foldopen" id="foldopen00071" data-start="{" data-end="};">
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html">   71</a></span>    <span class="keyword">class </span><a class="code hl_function" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#a7b470495e3542b9cce603398958772e1">TextRenderPrototype</a> final {</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment"></span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">         * @brief The shader used for rendering text.</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        std::shared_ptr &lt;const helios::rendering::shader::Shader&gt; shader_;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment"></span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">         * @brief Text-specific shader properties (e.g., color).</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        std::shared_ptr &lt;const helios::rendering::text::TextShaderProperties&gt; textProperties_;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment"></span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment">         * @brief Provider for loading fonts and retrieving glyph data.</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment">         * Non-owning raw pointer. The font resource provider must remain valid</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">         * for the lifetime of this prototype.</span></div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00091" data-start="{" data-end="}">
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#a85c04314d448d1a74e099d35dc9dd6e9">   91</a></span>        <span class="keyword">explicit</span> <a class="code hl_function" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#a85c04314d448d1a74e099d35dc9dd6e9">TextRenderPrototype</a>(</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            std::shared_ptr&lt;const helios::rendering::shader::Shader&gt; <a class="code hl_function" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#a69b9796a0af2c93085131e1309cbb97f">shader</a>,</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            std::shared_ptr&lt;const helios::rendering::text::config::TextShaderProperties&gt; <a class="code hl_function" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#ac83f41e46800b2dac0cd046bb8357fad">textProperties</a>,</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            <a class="code hl_class" href="classhelios_1_1rendering_1_1text_1_1FontResourceProvider.html">helios::rendering::text::FontResourceProvider</a>* <a class="code hl_function" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#aecf36a734eb5cf66cd0275c052558d5f">fontResourceProvider</a></div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        ) :</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        shader_(std::move(<a class="code hl_function" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#a69b9796a0af2c93085131e1309cbb97f">shader</a>)),</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        textProperties_(std::move(<a class="code hl_function" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#ac83f41e46800b2dac0cd046bb8357fad">textProperties</a>)),</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        fontResourceProvider_(<a class="code hl_function" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#aecf36a734eb5cf66cd0275c052558d5f">fontResourceProvider</a>) {</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            <span class="keywordflow">if</span> (!shader_) {</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>                <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;RenderPrototype received null shader&quot;</span>);</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>            }</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>            <span class="keywordflow">if</span> (!fontResourceProvider_) {</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;RenderPrototype received null fontResourceProvider&quot;</span>);</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>            }</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            <span class="keywordflow">if</span> (!textProperties_) {</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;RenderPrototype received null textProperties&quot;</span>);</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>            }</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        }</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        <a class="code hl_class" href="classhelios_1_1rendering_1_1text_1_1FontResourceProvider.html">helios::rendering::text::FontResourceProvider</a>* fontResourceProvider_;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment"></span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment">         * @brief Constructs a text render prototype.</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">         * @param shader The shader to use for text rendering.</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment">         * @param textProperties Text-specific shader properties.</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment">         * @param fontResourceProvider Raw pointer to the font resource provider</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment">         *        (must remain valid for the lifetime of this prototype).</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment">         * @throws std::invalid_argument If `shader`, `textProperties`, or `fontResourceProvider` is null.</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00105" data-start="{" data-end="}">
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#a7b470495e3542b9cce603398958772e1">  105</a></span>        <span class="keyword">explicit</span> <a class="code hl_function" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#a7b470495e3542b9cce603398958772e1">TextRenderPrototype</a>(</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>            std::shared_ptr&lt;const helios::rendering::shader::Shader&gt; <a class="code hl_function" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#a69b9796a0af2c93085131e1309cbb97f">shader</a>,</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>            std::shared_ptr&lt;const helios::rendering::text::TextShaderProperties&gt; <a class="code hl_function" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#a4aa46870dd0689eb9f84d99bcbaf7785">textProperties</a>,</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            <a class="code hl_class" href="classhelios_1_1rendering_1_1text_1_1FontResourceProvider.html">helios::rendering::text::FontResourceProvider</a>* <a class="code hl_function" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#aecf36a734eb5cf66cd0275c052558d5f">fontResourceProvider</a></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        ) :</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        shader_(std::move(<a class="code hl_function" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#a69b9796a0af2c93085131e1309cbb97f">shader</a>)),</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        textProperties_(std::move(<a class="code hl_function" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#a4aa46870dd0689eb9f84d99bcbaf7785">textProperties</a>)),</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        fontResourceProvider_(<a class="code hl_function" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#aecf36a734eb5cf66cd0275c052558d5f">fontResourceProvider</a>) {</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>            <span class="keywordflow">if</span> (!shader_) {</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;RenderPrototype received null shader&quot;</span>);</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>            }</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>            <span class="keywordflow">if</span> (!fontResourceProvider_) {</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>                <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;RenderPrototype received null fontResourceProvider&quot;</span>);</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>            }</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>            <span class="keywordflow">if</span> (!textProperties_) {</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;RenderPrototype received null textProperties&quot;</span>);</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>            }</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        }</div>
 </div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="comment"></span> </div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="comment">         * @brief Returns the shader.</span></div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="comment">         * @return Reference to the shader used for text rendering.</span></div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00120" data-start="{" data-end="}">
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno"><a class="line" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#a69b9796a0af2c93085131e1309cbb97f">  120</a></span>        [[nodiscard]] <span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1rendering_1_1shader_1_1Shader.html">helios::rendering::shader::Shader</a>&amp; <a class="code hl_function" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#a69b9796a0af2c93085131e1309cbb97f">shader</a>() const noexcept {</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>            <span class="keywordflow">return</span> *shader_;</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        }</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="comment"></span> </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="comment">         * @brief Returns the shader.</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="comment">         * @return Reference to the shader used for text rendering.</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00134" data-start="{" data-end="}">
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno"><a class="line" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#a69b9796a0af2c93085131e1309cbb97f">  134</a></span>        [[nodiscard]] <span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1rendering_1_1shader_1_1Shader.html">helios::rendering::shader::Shader</a>&amp; <a class="code hl_function" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#a69b9796a0af2c93085131e1309cbb97f">shader</a>() const noexcept {</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>            <span class="keywordflow">return</span> *shader_;</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        }</div>
 </div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="comment"></span> </div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="comment">         * @brief Returns the font resource provider.</span></div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="comment">         * The font resource provider is used to load fonts and retrieve glyph data</span></div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="comment">         * for text layout and rendering.</span></div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="comment">         * @return Reference to the font resource provider.</span></div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00132" data-start="{" data-end="}">
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno"><a class="line" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#aecf36a734eb5cf66cd0275c052558d5f">  132</a></span>        [[nodiscard]] <a class="code hl_class" href="classhelios_1_1rendering_1_1text_1_1FontResourceProvider.html">helios::rendering::text::FontResourceProvider</a>&amp; <a class="code hl_function" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#aecf36a734eb5cf66cd0275c052558d5f">fontResourceProvider</a>() const noexcept {</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>            <span class="keywordflow">return</span> *fontResourceProvider_;</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        }</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="comment"></span> </div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span><span class="comment">         * @brief Returns the font resource provider.</span></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><span class="comment">         * The font resource provider is used to load fonts and retrieve glyph data</span></div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="comment">         * for text layout and rendering.</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span><span class="comment">         * @return Reference to the font resource provider.</span></div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00146" data-start="{" data-end="}">
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno"><a class="line" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#aecf36a734eb5cf66cd0275c052558d5f">  146</a></span>        [[nodiscard]] <a class="code hl_class" href="classhelios_1_1rendering_1_1text_1_1FontResourceProvider.html">helios::rendering::text::FontResourceProvider</a>&amp; <a class="code hl_function" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#aecf36a734eb5cf66cd0275c052558d5f">fontResourceProvider</a>() const noexcept {</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>            <span class="keywordflow">return</span> *fontResourceProvider_;</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        }</div>
 </div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="comment"></span> </div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="comment">         * @brief Returns the text shader properties.</span></div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span><span class="comment">         * @return Reference to the text-specific properties.</span></div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00141" data-start="{" data-end="}">
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno"><a class="line" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#ac83f41e46800b2dac0cd046bb8357fad">  141</a></span>        [[nodiscard]] <span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1rendering_1_1text_1_1config_1_1TextShaderProperties.html">helios::rendering::text::config::TextShaderProperties</a>&amp; <a class="code hl_function" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#ac83f41e46800b2dac0cd046bb8357fad">textProperties</a>() const noexcept {</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>            <span class="keywordflow">return</span> *textProperties_;</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        }</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span><span class="comment"></span> </div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span><span class="comment">         * @brief Returns the text shader properties.</span></div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="comment">         * @return Reference to the text-specific properties.</span></div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00155" data-start="{" data-end="}">
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno"><a class="line" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#a4aa46870dd0689eb9f84d99bcbaf7785">  155</a></span>        [[nodiscard]] <span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1rendering_1_1text_1_1TextShaderProperties.html">helios::rendering::text::TextShaderProperties</a>&amp; <a class="code hl_function" href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#a4aa46870dd0689eb9f84d99bcbaf7785">textProperties</a>() const noexcept {</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>            <span class="keywordflow">return</span> *textProperties_;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        }</div>
 </div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    };</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    };</div>
 </div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>}</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> </div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>}</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
 <div class="ttc" id="aclasshelios_1_1rendering_1_1shader_1_1Shader_html"><div class="ttname"><a href="classhelios_1_1rendering_1_1shader_1_1Shader.html">helios::rendering::shader::Shader</a></div><div class="ttdoc">Abstract representation of a Shader program (e.g. composed of vertex/fragment shader).</div><div class="ttdef"><b>Definition</b> <a href="Shader_8ixx_source.html#l00023">Shader.ixx:23</a></div></div>
 <div class="ttc" id="aclasshelios_1_1rendering_1_1text_1_1FontResourceProvider_html"><div class="ttname"><a href="classhelios_1_1rendering_1_1text_1_1FontResourceProvider.html">helios::rendering::text::FontResourceProvider</a></div><div class="ttdoc">Abstract interface for loading fonts and providing glyph data.</div><div class="ttdef"><b>Definition</b> <a href="FontResourceProvider_8ixx_source.html#l00035">FontResourceProvider.ixx:35</a></div></div>
-<div class="ttc" id="aclasshelios_1_1rendering_1_1text_1_1TextRenderPrototype_html_a69b9796a0af2c93085131e1309cbb97f"><div class="ttname"><a href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#a69b9796a0af2c93085131e1309cbb97f">helios::rendering::text::TextRenderPrototype::shader</a></div><div class="ttdeci">const helios::rendering::shader::Shader &amp; shader() const noexcept</div><div class="ttdoc">Returns the shader.</div><div class="ttdef"><b>Definition</b> <a href="#l00120">TextRenderPrototype.ixx:120</a></div></div>
-<div class="ttc" id="aclasshelios_1_1rendering_1_1text_1_1TextRenderPrototype_html_a85c04314d448d1a74e099d35dc9dd6e9"><div class="ttname"><a href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#a85c04314d448d1a74e099d35dc9dd6e9">helios::rendering::text::TextRenderPrototype::TextRenderPrototype</a></div><div class="ttdeci">TextRenderPrototype(std::shared_ptr&lt; const helios::rendering::shader::Shader &gt; shader, std::shared_ptr&lt; const helios::rendering::text::config::TextShaderProperties &gt; textProperties, helios::rendering::text::FontResourceProvider *fontResourceProvider)</div><div class="ttdoc">Constructs a text render prototype.</div><div class="ttdef"><b>Definition</b> <a href="#l00091">TextRenderPrototype.ixx:91</a></div></div>
-<div class="ttc" id="aclasshelios_1_1rendering_1_1text_1_1TextRenderPrototype_html_ac83f41e46800b2dac0cd046bb8357fad"><div class="ttname"><a href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#ac83f41e46800b2dac0cd046bb8357fad">helios::rendering::text::TextRenderPrototype::textProperties</a></div><div class="ttdeci">const helios::rendering::text::config::TextShaderProperties &amp; textProperties() const noexcept</div><div class="ttdoc">Returns the text shader properties.</div><div class="ttdef"><b>Definition</b> <a href="#l00141">TextRenderPrototype.ixx:141</a></div></div>
-<div class="ttc" id="aclasshelios_1_1rendering_1_1text_1_1TextRenderPrototype_html_aecf36a734eb5cf66cd0275c052558d5f"><div class="ttname"><a href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#aecf36a734eb5cf66cd0275c052558d5f">helios::rendering::text::TextRenderPrototype::fontResourceProvider</a></div><div class="ttdeci">helios::rendering::text::FontResourceProvider &amp; fontResourceProvider() const noexcept</div><div class="ttdoc">Returns the font resource provider.</div><div class="ttdef"><b>Definition</b> <a href="#l00132">TextRenderPrototype.ixx:132</a></div></div>
-<div class="ttc" id="aclasshelios_1_1rendering_1_1text_1_1config_1_1TextShaderProperties_html"><div class="ttname"><a href="classhelios_1_1rendering_1_1text_1_1config_1_1TextShaderProperties.html">helios::rendering::text::config::TextShaderProperties</a></div><div class="ttdoc">Immutable shader properties for text rendering.</div><div class="ttdef"><b>Definition</b> <a href="TextShaderProperties_8ixx_source.html#l00047">TextShaderProperties.ixx:47</a></div></div>
+<div class="ttc" id="aclasshelios_1_1rendering_1_1text_1_1TextRenderPrototype_html_a4aa46870dd0689eb9f84d99bcbaf7785"><div class="ttname"><a href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#a4aa46870dd0689eb9f84d99bcbaf7785">helios::rendering::text::TextRenderPrototype::textProperties</a></div><div class="ttdeci">const helios::rendering::text::TextShaderProperties &amp; textProperties() const noexcept</div><div class="ttdoc">Returns the text shader properties.</div><div class="ttdef"><b>Definition</b> <a href="#l00155">TextRenderPrototype.ixx:155</a></div></div>
+<div class="ttc" id="aclasshelios_1_1rendering_1_1text_1_1TextRenderPrototype_html_a69b9796a0af2c93085131e1309cbb97f"><div class="ttname"><a href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#a69b9796a0af2c93085131e1309cbb97f">helios::rendering::text::TextRenderPrototype::shader</a></div><div class="ttdeci">const helios::rendering::shader::Shader &amp; shader() const noexcept</div><div class="ttdoc">Returns the shader.</div><div class="ttdef"><b>Definition</b> <a href="#l00134">TextRenderPrototype.ixx:134</a></div></div>
+<div class="ttc" id="aclasshelios_1_1rendering_1_1text_1_1TextRenderPrototype_html_a7b470495e3542b9cce603398958772e1"><div class="ttname"><a href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#a7b470495e3542b9cce603398958772e1">helios::rendering::text::TextRenderPrototype::TextRenderPrototype</a></div><div class="ttdeci">TextRenderPrototype(std::shared_ptr&lt; const helios::rendering::shader::Shader &gt; shader, std::shared_ptr&lt; const helios::rendering::text::TextShaderProperties &gt; textProperties, helios::rendering::text::FontResourceProvider *fontResourceProvider)</div><div class="ttdoc">Constructs a text render prototype.</div><div class="ttdef"><b>Definition</b> <a href="#l00105">TextRenderPrototype.ixx:105</a></div></div>
+<div class="ttc" id="aclasshelios_1_1rendering_1_1text_1_1TextRenderPrototype_html_aecf36a734eb5cf66cd0275c052558d5f"><div class="ttname"><a href="classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html#aecf36a734eb5cf66cd0275c052558d5f">helios::rendering::text::TextRenderPrototype::fontResourceProvider</a></div><div class="ttdeci">helios::rendering::text::FontResourceProvider &amp; fontResourceProvider() const noexcept</div><div class="ttdoc">Returns the font resource provider.</div><div class="ttdef"><b>Definition</b> <a href="#l00146">TextRenderPrototype.ixx:146</a></div></div>
+<div class="ttc" id="aclasshelios_1_1rendering_1_1text_1_1TextShaderProperties_html"><div class="ttname"><a href="classhelios_1_1rendering_1_1text_1_1TextShaderProperties.html">helios::rendering::text::TextShaderProperties</a></div><div class="ttdoc">Immutable shader properties for text rendering.</div><div class="ttdef"><b>Definition</b> <a href="TextShaderProperties_8ixx_source.html#l00047">TextShaderProperties.ixx:47</a></div></div>
 <div class="ttc" id="amodule__helios_8engine_8core_8data_8FontId_html"><div class="ttname"><a href="module__helios_8engine_8core_8data_8FontId.html">helios.engine.core.data.FontId</a></div></div>
 <div class="ttc" id="amodule__helios_8rendering_8shader_8Shader_html"><div class="ttname"><a href="module__helios_8rendering_8shader_8Shader.html">helios.rendering.shader.Shader</a></div></div>
 <div class="ttc" id="amodule__helios_8rendering_8text_8FontResourceProvider_html"><div class="ttname"><a href="module__helios_8rendering_8text_8FontResourceProvider.html">helios.rendering.text.FontResourceProvider</a></div></div>
 <div class="ttc" id="amodule__helios_8rendering_8text_8TextRenderPrototype_html"><div class="ttname"><a href="module__helios_8rendering_8text_8TextRenderPrototype.html">helios.rendering.text.TextRenderPrototype</a></div></div>
-<div class="ttc" id="amodule__helios_8rendering_8text_8config_8TextShaderProperties_html"><div class="ttname"><a href="module__helios_8rendering_8text_8config_8TextShaderProperties.html">helios.rendering.text.config.TextShaderProperties</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1rendering_1_1text_html"><div class="ttname"><a href="namespacehelios_1_1rendering_1_1text.html">helios::rendering::text</a></div><div class="ttdoc">Text rendering abstractions and data types.</div></div>
+<div class="ttc" id="amodule__helios_8rendering_8text_8TextShaderProperties_html"><div class="ttname"><a href="module__helios_8rendering_8text_8TextShaderProperties.html">helios.rendering.text.TextShaderProperties</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1rendering_1_1text_html"><div class="ttname"><a href="namespacehelios_1_1rendering_1_1text.html">helios::rendering::text</a></div><div class="ttdoc">Text rendering abstractions and data types.</div><div class="ttdef"><b>Definition</b> <a href="FontResourceProvider_8ixx_source.html#l00016">FontResourceProvider.ixx:16</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

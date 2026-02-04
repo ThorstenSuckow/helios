@@ -4,7 +4,7 @@ var searchData=
   ['inactivegameobjects_5f_1',['inactiveGameObjects_',['../classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#a379daf214aeac51f8c4e9835357e5924',1,'helios::engine::runtime::pooling::GameObjectPool']]],
   ['indianred_2',['IndianRed',['../structhelios_1_1util_1_1Colors.html#a4bcaf9da461070ea49ae2990c566216d',1,'helios::util::Colors']]],
   ['indices_3',['indices',['../structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape.html#af74c1c5bf7d0ae3eba004b8822fc2a9e',1,'helios::rendering::asset::shape::Shape']]],
-  ['indices_5f_4',['indices_',['../classhelios_1_1rendering_1_1model_1_1Mesh.html#a0100ea58ef8bb486ccd66076fc680eee',1,'helios::rendering::model::Mesh']]],
+  ['indices_5f_4',['indices_',['../classhelios_1_1rendering_1_1mesh_1_1Mesh.html#a5b664bfba4df5b255f619d7655cce22d',1,'helios::rendering::mesh::Mesh']]],
   ['indigo_5',['Indigo',['../structhelios_1_1util_1_1Colors.html#a1a51dd8155b7ef7db2f225f4d56a9958',1,'helios::util::Colors']]],
   ['inheritance_5f_6',['inheritance_',['../classhelios_1_1scene_1_1SceneNode.html#ada344398e1a3784ef655bd88a5e352e9',1,'helios::scene::SceneNode']]],
   ['inheritedvelocity_5f_7',['inheritedVelocity_',['../classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent.html#aa1cc086a73e9e3ee325fb0d0e3a54ef9',1,'helios::engine::modules::physics::motion::components::Move2DComponent']]],

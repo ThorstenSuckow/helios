@@ -5,3 +5,4 @@
 export module helios.engine.mechanics.spawn.components;
 
 export import helios.engine.mechanics.spawn.components.SpawnedByProfileComponent;
+export import helios.engine.mechanics.spawn.components.EmittedByComponent;

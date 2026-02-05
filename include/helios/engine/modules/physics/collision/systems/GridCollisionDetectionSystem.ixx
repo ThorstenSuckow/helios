@@ -99,6 +99,8 @@ export namespace helios::engine::modules::physics::collision::systems {
             bool bIsCollisionReporter = false;
             helios::engine::modules::physics::collision::types::CollisionBehavior aCollisionBehavior;
             helios::engine::modules::physics::collision::types::CollisionBehavior bCollisionBehavior;
+            uint32_t collisionLayer = 0;
+            uint32_t otherCollisionLayer = 0;
 
             [[nodiscard]] inline constexpr bool hasAnyInteraction() const noexcept {
                 return (isSolidCollision || isTriggerCollision) && (aIsCollisionReporter || bIsCollisionReporter);
@@ -302,6 +304,8 @@ export namespace helios::engine::modules::physics::collision::systems {
             bool bIsCollisionReporter = collisionStruct.bIsCollisionReporter;
             bool isSolidCollision     = collisionStruct.isSolidCollision;
             bool isTriggerCollision   = collisionStruct.isTriggerCollision;
+            uint32_t collisionLayer = collisionStruct.collisionLayer;
+            uint32_t otherCollisionLayer = collisionStruct.otherCollisionLayer;
 
             assert((isSolidCollision || isTriggerCollision)
                 && (aIsCollisionReporter || bIsCollisionReporter)
@@ -311,11 +315,11 @@ export namespace helios::engine::modules::physics::collision::systems {
             if (isTriggerCollision || isSolidCollision) {
                 csc_a->setState(
                     contact, isSolidCollision, isTriggerCollision, collisionStruct.aCollisionBehavior,
-                    aIsCollisionReporter, match->guid()
+                    aIsCollisionReporter, match->guid(), collisionLayer, otherCollisionLayer
                 );
                 csc_b->setState(
                     contact, isSolidCollision, isTriggerCollision, collisionStruct.bCollisionBehavior,
-                    bIsCollisionReporter, candidate->guid()
+                    bIsCollisionReporter, candidate->guid(), collisionLayer, otherCollisionLayer
                 );
             }
 
@@ -376,7 +380,11 @@ export namespace helios::engine::modules::physics::collision::systems {
                 isSolidCollision
                 ? cc->solidCollisionBehavior(matchCC->layerId()) : cc->triggerCollisionBehavior(matchCC->layerId()),
                 isSolidCollision
-                ? matchCC->solidCollisionBehavior(cc->layerId()) : matchCC->triggerCollisionBehavior(cc->layerId())
+                ? matchCC->solidCollisionBehavior(cc->layerId()) : matchCC->triggerCollisionBehavior(cc->layerId()),
+                // use the layerId of cc
+                cc->layerId(),
+                matchCC->layerId()
+
             };
         }
 

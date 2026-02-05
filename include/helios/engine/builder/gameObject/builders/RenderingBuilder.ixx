@@ -8,6 +8,7 @@ export module helios.engine.builder.gameObject.builders.RenderingBuilder;
 
 import helios.engine.ecs.GameObject;
 import helios.engine.builder.gameObject.builders.configs.MeshRenderableConfig;
+import helios.engine.builder.gameObject.builders.configs.TextRenderableConfig;
 import helios.engine.builder.gameObject.builders.configs.SceneNodeConfig;
 
 export namespace helios::engine::builder::gameObject::builders {
@@ -41,6 +42,15 @@ export namespace helios::engine::builder::gameObject::builders {
          */
         helios::engine::builder::gameObject::builders::configs::MeshRenderableConfig meshRenderable() const {
             return helios::engine::builder::gameObject::builders::configs::MeshRenderableConfig{gameObject_};
+        }
+
+        /**
+         * @brief Returns a config for text renderable setup.
+         *
+         * @return TextRenderableConfig for fluent configuration.
+         */
+        helios::engine::builder::gameObject::builders::configs::TextRenderableConfig textRenderable() const {
+            return helios::engine::builder::gameObject::builders::configs::TextRenderableConfig{gameObject_};
         }
 
         /**

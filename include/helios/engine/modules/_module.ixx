@@ -9,4 +9,5 @@ export import helios.engine.modules.spatial;
 export import helios.engine.modules.rendering;
 export import helios.engine.modules.scene;
 export import helios.engine.modules.ai;
+export import helios.engine.modules.ui;
 

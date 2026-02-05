@@ -12,3 +12,4 @@ export import helios.engine.core.data.FontId;
 export import helios.engine.core.data.ViewportId;
 export import helios.engine.core.data.ScorePoolId;
 export import helios.engine.core.data.ScoreTypeId;
+export import helios.engine.core.data.CollisionLayer;

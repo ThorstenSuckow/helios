@@ -122,7 +122,7 @@ int main() {
     // Load the font via the rendering device's font resource provider.
     auto fontId = helios::engine::core::data::FontId{"roboto"};
     auto& fontResourceProvider = app->renderingDevice().fontResourceProvider();
-    fontResourceProvider.loadFont(fontId, "resources/Roboto-SemiBoldItalic.ttf");
+    fontResourceProvider.loadFont(fontId, 24, "resources/Roboto-SemiBoldItalic.ttf");
 
     // ========================================================================
     // 7. Text Prototype and Renderable Creation
@@ -136,7 +136,7 @@ int main() {
 
     // Create a TextRenderable for displaying dynamic text.
     auto textRenderable = std::make_shared<helios::rendering::text::TextRenderable>(
-        std::make_unique<helios::rendering::text::TextMesh>("Hello World!", fontId),
+        std::make_unique<helios::rendering::text::TextMesh>("Hello World!", 1.0f, fontId),
         uiTextPrototype
     );
 

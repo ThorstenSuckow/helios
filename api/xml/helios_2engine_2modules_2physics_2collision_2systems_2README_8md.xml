@@ -19,6 +19,22 @@
 <codeline><highlight class="normal">3.<sp/>**CollisionStateResponseSystem**<sp/>-<sp/>Processes<sp/>collision<sp/>states<sp/>and<sp/>issues<sp/>response<sp/>commands<sp/>(e.g.,<sp/>despawn).</highlight></codeline>
 <codeline><highlight class="normal">4.<sp/>**CollisionStateClearSystem**<sp/>-<sp/>Clears<sp/>collision<sp/>state<sp/>components<sp/>at<sp/>frame<sp/>end<sp/>(post-phase).</highlight></codeline>
 <codeline></codeline>
+<codeline><highlight class="normal">##<sp/>GridCollisionDetectionSystem</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Implements<sp/>grid-based<sp/>spatial<sp/>partitioning<sp/>for<sp/>efficient<sp/>collision<sp/>detection:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>**Broadphase:**<sp/>Entities<sp/>are<sp/>inserted<sp/>into<sp/>grid<sp/>cells<sp/>based<sp/>on<sp/>their<sp/>AABB</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Narrowphase:**<sp/>AABB<sp/>intersection<sp/>tests<sp/>for<sp/>entities<sp/>sharing<sp/>the<sp/>same<sp/>cell</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Layer<sp/>Filtering:**<sp/>Uses<sp/>layer<sp/>masks<sp/>for<sp/>fine-grained<sp/>collision<sp/>pair<sp/>control</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Hit<sp/>Policy:**<sp/>Supports<sp/>`OneHit`<sp/>(first<sp/>collision<sp/>only)<sp/>or<sp/>`All`<sp/>(multi-target)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>CollisionStateResponseSystem</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Processes<sp/>collision<sp/>states<sp/>and<sp/>executes<sp/>configured<sp/>behaviors:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>Reads<sp/>`CollisionStateComponent`<sp/>to<sp/>determine<sp/>collision<sp/>response</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Issues<sp/>`DespawnCommand`<sp/>for<sp/>entities<sp/>with<sp/>`Despawn`<sp/>behavior</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Publishes<sp/>`SolidCollisionEvent`<sp/>/<sp/>`TriggerCollisionEvent`<sp/>for<sp/>`PassEvent`<sp/>behavior</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>
 <codeline></codeline>

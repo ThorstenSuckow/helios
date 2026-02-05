@@ -1,0 +1,180 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1modules_1_1ui_1_1transform_1_1systems_1_1UiTransformSystem" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::modules::ui::transform::systems::UiTransformSystem</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1ecs_1_1System" prot="public" virt="non-virtual">helios::engine::ecs::System</basecompoundref>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ui_1_1transform_1_1systems_1_1UiTransformSystem_1ae5bd75c52d6c33bef07e22216539e62e" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
+        <definition>helios::math::vec3f helios::engine::modules::ui::transform::systems::UiTransformSystem::anchor</definition>
+        <argsstring>(const helios::math::vec3f unanchored, helios::math::vec3f size, const helios::engine::modules::ui::layout::Anchor pivot)</argsstring>
+        <name>anchor</name>
+        <qualifiedname>helios::engine::modules::ui::transform::systems::UiTransformSystem::anchor</qualifiedname>
+        <param>
+          <type>const <ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
+          <declname>unanchored</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacehelios_1_1engine_1_1modules_1_1ui_1_1layout_1a858f90f428368a1ead0dd663f2826258" kindref="member">helios::engine::modules::ui::layout::Anchor</ref></type>
+          <declname>pivot</declname>
+        </param>
+        <briefdescription>
+<para>Adjusts position based on pivot point and element size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>unanchored</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The position before pivot adjustment. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size of the element. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pivot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The pivot point to apply.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The adjusted position. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/ui/transform/systems/UiTransformSystem.ixx" line="45" column="29" bodyfile="/tmp/h/include/helios/engine/modules/ui/transform/systems/UiTransformSystem.ixx" bodystart="45" bodyend="61"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ui_1_1transform_1_1systems_1_1UiTransformSystem_1aaeb3aab4499b52957bea4b123bcd2496" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::ui::transform::systems::UiTransformSystem::update</definition>
+        <argsstring>(helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept override</argsstring>
+        <name>update</name>
+        <qualifiedname>helios::engine::modules::ui::transform::systems::UiTransformSystem::update</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1ecs_1_1System_1a4e9969641985fa04db6214332c88605b">update</reimplements>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Updates UI element positions based on viewport dimensions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Queries entities with UiTransformComponent and computes their screen positions based on anchor, pivot, margins, and current viewport bounds.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current frame&apos;s update context. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/ui/transform/systems/UiTransformSystem.ixx" line="73" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ui/transform/systems/UiTransformSystem.ixx" bodystart="73" bodyend="119"/>
+        <references refid="namespacehelios_1_1engine_1_1modules_1_1ui_1_1layout_1a858f90f428368a1ead0dd663f2826258a4f1f6016fc9f3f2353c0cc7c67b292bd" compoundref="Anchor_8ixx" startline="24">helios::engine::modules::ui::layout::Center</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" compoundref="System_8ixx" startline="48">helios::engine::ecs::System::gameWorld_</references>
+        <references refid="namespacehelios_1_1engine_1_1modules_1_1ui_1_1layout_1a858f90f428368a1ead0dd663f2826258a1d85a557894c340c318493f33bfa8efb" compoundref="Anchor_8ixx" startline="29">helios::engine::modules::ui::layout::TopRight</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>System for computing UI element screen positions. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Processes entities with UiTransformComponent to compute their final screen positions based on anchor points, pivot points, margins, and current viewport dimensions. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::ecs::System</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1System"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::ecs::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Updatable"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::modules::ui::transform::systems::UiTransformSystem</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1ui_1_1transform_1_1systems_1_1UiTransformSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>helios::engine::ecs::System</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1System"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>gameWorld_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::ecs::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Updatable"/>
+      </node>
+      <node id="6">
+        <label>helios::engine::mechanics::scoring::ScoreCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::modules::ui::transform::systems::UiTransformSystem</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1ui_1_1transform_1_1systems_1_1UiTransformSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>helios::engine::runtime::spawn::SpawnCommandHandlerRegistry</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandlerRegistry"/>
+      </node>
+      <node id="4">
+        <label>helios::engine::runtime::world::GameWorld</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>logger_</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>scoreCommandHandler_</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>spawnCommandHandlerRegistry_</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>helios::util::log::Logger</label>
+        <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
+      </node>
+    </collaborationgraph>
+    <location file="/tmp/h/include/helios/engine/modules/ui/transform/systems/UiTransformSystem.ixx" line="35" column="5" bodyfile="/tmp/h/include/helios/engine/modules/ui/transform/systems/UiTransformSystem.ixx" bodystart="35" bodyend="120"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1transform_1_1systems_1_1UiTransformSystem_1ae5bd75c52d6c33bef07e22216539e62e" prot="private" virt="non-virtual"><scope>helios::engine::modules::ui::transform::systems::UiTransformSystem</scope><name>anchor</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" prot="protected" virt="non-virtual"><scope>helios::engine::modules::ui::transform::systems::UiTransformSystem</scope><name>gameWorld_</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1ae0464c1668e257439243a4f25979a7ff" prot="public" virt="virtual"><scope>helios::engine::modules::ui::transform::systems::UiTransformSystem</scope><name>init</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a26d81abcda05fe8b12a1ddb4ed6099a3" prot="public" virt="non-virtual"><scope>helios::engine::modules::ui::transform::systems::UiTransformSystem</scope><name>Updatable</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1transform_1_1systems_1_1UiTransformSystem_1aaeb3aab4499b52957bea4b123bcd2496" prot="public" virt="virtual"><scope>helios::engine::modules::ui::transform::systems::UiTransformSystem</scope><name>update</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a937c99bfacd777c53e0f811ab9d335a6" prot="public" virt="virtual"><scope>helios::engine::modules::ui::transform::systems::UiTransformSystem</scope><name>~System</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a0f54f92a2a8d6c8dc2fc2ebed41d5a85" prot="public" virt="virtual"><scope>helios::engine::modules::ui::transform::systems::UiTransformSystem</scope><name>~Updatable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

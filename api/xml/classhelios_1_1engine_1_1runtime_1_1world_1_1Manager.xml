@@ -2,6 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>helios::engine::runtime::world::Manager</compoundname>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager" prot="public" virt="non-virtual">helios::engine::mechanics::scoring::ScorePoolManager</derivedcompoundref>
     <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager" prot="public" virt="non-virtual">helios::engine::runtime::pooling::GameObjectPoolManager</derivedcompoundref>
     <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" prot="public" virt="non-virtual">helios::engine::runtime::spawn::SpawnManager</derivedcompoundref>
     <sectiondef kind="protected-attrib">
@@ -76,6 +77,7 @@
         <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld)</argsstring>
         <name>init</name>
         <qualifiedname>helios::engine::runtime::world::Manager::init</qualifiedname>
+        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a04f62fb1b24bfc389acaa48fdd31293e">init</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a7f5ef214b56eba5241a20de5d964eff2">init</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1aeab1d9b1aabd174751fa20937a9841f2">init</reimplementedby>
         <param>
@@ -108,6 +110,7 @@
         <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld, helios::engine::runtime::world::UpdateContext &amp;update_context) noexcept=0</argsstring>
         <name>flush</name>
         <qualifiedname>helios::engine::runtime::world::Manager::flush</qualifiedname>
+        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a05625cf859f18873e47f79e7e9f9816e">flush</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1ab69a353b11e4ee5a834dca810f3239e9">flush</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a345caf68f5d311a54f74a921b933705e">flush</reimplementedby>
         <param>
@@ -172,12 +175,18 @@
     </detaileddescription>
     <inheritancegraph>
       <node id="2">
+        <label>helios::engine::mechanics::scoring::ScorePoolManager</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
         <label>helios::engine::runtime::pooling::GameObjectPoolManager</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="3">
+      <node id="4">
         <label>helios::engine::runtime::spawn::SpawnManager</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager"/>
         <childnode refid="1" relation="public-inheritance">
@@ -190,6 +199,10 @@
     </inheritancegraph>
     <collaborationgraph>
       <node id="4">
+        <label>helios::engine::mechanics::scoring::ScoreCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler"/>
+      </node>
+      <node id="5">
         <label>helios::engine::runtime::spawn::SpawnCommandHandlerRegistry</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandlerRegistry"/>
       </node>
@@ -200,6 +213,9 @@
           <edgelabel>logger_</edgelabel>
         </childnode>
         <childnode refid="4" relation="usage">
+          <edgelabel>scoreCommandHandler_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
           <edgelabel>spawnCommandHandlerRegistry_</edgelabel>
         </childnode>
       </node>

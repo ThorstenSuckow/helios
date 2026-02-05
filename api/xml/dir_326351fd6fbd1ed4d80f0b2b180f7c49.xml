@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_326351fd6fbd1ed4d80f0b2b180f7c49" kind="dir">
+    <compoundname>commands</compoundname>
+    <innerfile refid="helios_2engine_2mechanics_2scoring_2commands_2__module_8ixx">helios/engine/mechanics/scoring/commands/_module.ixx</innerfile>
+    <innerfile refid="UpdateScoreCommand_8ixx">UpdateScoreCommand.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_326351fd6fbd1ed4d80f0b2b180f7c49_1autotoc_md228">
+<title>helios::engine::mechanics::scoring::commands</title><para>Score update commands for the command buffer.</para>
+<para>This namespace contains command classes used to request score updates through the command system.</para>
+</sect1>
+<sect1 id="dir_326351fd6fbd1ed4d80f0b2b180f7c49_1autotoc_md229">
+<title>Commands</title><para><table rows="2" cols="2"><row>
+<entry thead="yes"><para>Command  </para>
+</entry><entry thead="yes"><para>Description  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>UpdateScoreCommand</computeroutput>  </para>
+</entry><entry thead="no"><para>Command that carries score update information to the ScorePoolManager  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_326351fd6fbd1ed4d80f0b2b180f7c49_1autotoc_md230">
+<title>Usage</title><para>Commands are typically issued by scoring systems (e.g., <computeroutput>CombatScoringSystem</computeroutput>) when a scoring event occurs:</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>scoreContext<sp/>=<sp/>types::ScoreValueContext{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.scoreTypeId<sp/>=<sp/>ScoreTypeId::id&lt;KillReward&gt;(),</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.scorePoolId<sp/>=<sp/>playerScorePoolId,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.value<sp/>=<sp/>100.0</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">updateContext.commandBuffer().add&lt;UpdateScoreCommand&gt;(std::move(scoreValueContext));</highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+</para>
+<para><details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/mechanics/scoring/commands/"/>
+  </compounddef>
+</doxygen>

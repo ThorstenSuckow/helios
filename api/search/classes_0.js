@@ -10,5 +10,6 @@ var searchData=
   ['aim2dcommand_7',['Aim2DCommand',['../classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1Aim2DCommand.html',1,'helios::engine::mechanics::combat::commands']]],
   ['aim2dcomponent_8',['Aim2DComponent',['../classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1Aim2DComponent.html',1,'helios::engine::mechanics::combat::components']]],
   ['application_9',['Application',['../classhelios_1_1app_1_1Application.html',1,'helios::app']]],
-  ['axisspawnplacer_10',['AxisSpawnPlacer',['../classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1AxisSpawnPlacer.html',1,'helios::engine::runtime::spawn::behavior::placements']]]
+  ['attackcontext_10',['AttackContext',['../structhelios_1_1engine_1_1mechanics_1_1combat_1_1types_1_1AttackContext.html',1,'helios::engine::mechanics::combat::types']]],
+  ['axisspawnplacer_11',['AxisSpawnPlacer',['../classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1AxisSpawnPlacer.html',1,'helios::engine::runtime::spawn::behavior::placements']]]
 ];

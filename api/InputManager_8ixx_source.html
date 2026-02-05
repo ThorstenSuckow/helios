@@ -255,123 +255,146 @@ $(function() {
 <div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>            <span class="keywordflow">return</span> input_-&gt;isKeyPressed(key, *observedWin_);</div>
 <div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        }</div>
 </div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="comment"></span> </div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="comment">         * @brief Explicitly tells this InputManager which gamepads to poll for input states</span></div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="comment">         * in `poll()`.</span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span><span class="comment"></span> </div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><span class="comment">         * @brief Returns true if the specified key is currently released, otherwise false.</span></div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="comment">         * This method delegates to the underlying `InputAdapter`.</span></div>
 <div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span><span class="comment">         * @param gamepadMask A bitmask representing the gamepad ids that should be observed by</span></div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span><span class="comment">         * this InputManager (e.g. `registerGamepads(Gamepad::ONE | Gamepad::THREE)`).</span></div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span><span class="comment">         * @return The bitmask this InputManager uses for polling gamepad states. If an invalid</span></div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span><span class="comment">         * mask is provided, the method returns a mask that represents no gamepads.</span></div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span><span class="comment">         * @see InputAdapter::isKeyReleased</span></div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span><span class="comment">         * @param key The key to check for the released state.</span></div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span><span class="comment">         * @return True if the key is released; returns false if the observed window is not set.</span></div>
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span><span class="comment">         */</span></div>
 <div class="foldopen" id="foldopen00151" data-start="{" data-end="}">
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno"><a class="line" href="classhelios_1_1input_1_1InputManager.html#a50c3854c194f5f40d1e5a724f5512c0c">  151</a></span>        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code hl_function" href="classhelios_1_1input_1_1InputManager.html#a50c3854c194f5f40d1e5a724f5512c0c">registerGamepads</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> mask) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>            <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> maxMask = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(std::pow(</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>                helios::input::types::Gamepad::size_,</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>                2.0f</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>            ) - 1);</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>            assert(mask &lt;= maxMask &amp;&amp; <span class="stringliteral">&quot;mask out of bounds&quot;</span>);</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>            <span class="keywordflow">if</span> (mask &gt; maxMask) {</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>                <a class="code hl_variable" href="classhelios_1_1input_1_1InputManager.html#a29a9dd828ced10e5ddf6cbe757debf97">logger_</a>.warn(<span class="stringliteral">&quot;Gamepad mask out of bounds. Clamping to maximum valid value.&quot;</span>);</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>                mask = maxMask;</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>            }</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> </div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>            gamepadMask_ = mask;</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>            <span class="keywordflow">return</span> gamepadMask_;</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        }</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno"><a class="line" href="classhelios_1_1input_1_1InputManager.html#aabbbcaa0938a51cc0cd6621b5ba9dee9">  151</a></span>        [[nodiscard]] <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1input_1_1InputManager.html#aabbbcaa0938a51cc0cd6621b5ba9dee9">isKeyReleased</a>(<span class="keyword">const</span> <a class="code hl_enumeration" href="namespacehelios_1_1input_1_1types.html#a963e220296531c047308439c3425bcc5">helios::input::types::Key</a>&amp; key) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>            <span class="keywordflow">if</span> (observedWin_ == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>                <a class="code hl_variable" href="classhelios_1_1input_1_1InputManager.html#a29a9dd828ced10e5ddf6cbe757debf97">logger_</a>.warn(<span class="stringliteral">&quot;No window to observe.&quot;</span>);</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>            }</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>            <span class="keywordflow">return</span> input_-&gt;isKeyReleased(key, *observedWin_);</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>        }</div>
 </div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span><span class="comment"></span> </div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="comment">         * @brief Returns a const reference to the `GamepadState` for the specified `gamepadId`.</span></div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="comment">         * This method queries the `InputAdapter` owned by this `InputManager` for the</span></div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="comment">         * `GamepadState` identified by the specified `gamepadId`. If no `GamepadState` exists</span></div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="comment">         * for the given id, this method returns a `GamepadState` object initialized to its</span></div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span><span class="comment">         * default values. To test whether a gamepad is available, use `isConnected()`.</span></div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="comment">         * `GamepadState` objects are updated by calling `poll()`.</span></div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span><span class="comment">         * @param gamepadId The id of the gamepad for which the `GamepadState` is queried.</span></div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><span class="comment">         * @return A const reference to the `GamepadState` for the specified gamepad.</span></div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span><span class="comment">         * @see isConnected()</span></div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span><span class="comment">         * @see poll()</span></div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00186" data-start="{" data-end="}">
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno"><a class="line" href="classhelios_1_1input_1_1InputManager.html#a3ae14ffca9c0950090bffa87d8ef7b7f">  186</a></span>        [[nodiscard]] <span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1input_1_1gamepad_1_1GamepadState.html">helios::input::gamepad::GamepadState</a>&amp; <a class="code hl_function" href="classhelios_1_1input_1_1InputManager.html#a3ae14ffca9c0950090bffa87d8ef7b7f">gamepadState</a>(<a class="code hl_enumeration" href="namespacehelios_1_1input_1_1types.html#a4dd39c1a113edbe36b92b088d8dbf2ff">helios::input::types::Gamepad</a> gamepadId) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>            <span class="keywordflow">return</span> input_-&gt;gamepadState(gamepadId);</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>        }</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><span class="comment"></span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><span class="comment">         * @brief Explicitly tells this InputManager which gamepads to poll for input states</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span><span class="comment">         * in `poll()`.</span></div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="comment">         * @param gamepadMask A bitmask representing the gamepad ids that should be observed by</span></div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span><span class="comment">         * this InputManager (e.g. `registerGamepads(Gamepad::ONE | Gamepad::THREE)`).</span></div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span><span class="comment">         * @return The bitmask this InputManager uses for polling gamepad states. If an invalid</span></div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="comment">         * mask is provided, the method returns a mask that represents no gamepads.</span></div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00171" data-start="{" data-end="}">
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno"><a class="line" href="classhelios_1_1input_1_1InputManager.html#a50c3854c194f5f40d1e5a724f5512c0c">  171</a></span>        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code hl_function" href="classhelios_1_1input_1_1InputManager.html#a50c3854c194f5f40d1e5a724f5512c0c">registerGamepads</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> mask) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>            <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> maxMask = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(std::pow(</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>                helios::input::types::Gamepad::size_,</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>                2.0f</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>            ) - 1);</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>            assert(mask &lt;= maxMask &amp;&amp; <span class="stringliteral">&quot;mask out of bounds&quot;</span>);</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>            <span class="keywordflow">if</span> (mask &gt; maxMask) {</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>                <a class="code hl_variable" href="classhelios_1_1input_1_1InputManager.html#a29a9dd828ced10e5ddf6cbe757debf97">logger_</a>.warn(<span class="stringliteral">&quot;Gamepad mask out of bounds. Clamping to maximum valid value.&quot;</span>);</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>                mask = maxMask;</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>            }</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span> </div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>            gamepadMask_ = mask;</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>            <span class="keywordflow">return</span> gamepadMask_;</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        }</div>
 </div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="comment"></span> </div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span><span class="comment">         * @brief Returns true if the specified gamepad is connected, otherwise false.</span></div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="comment">         * @param gamepadId The id of the gamepad to test.</span></div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span><span class="comment">         * @return True if a gamepad was found for the specified `gamepadId`, otherwise false.</span></div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00197" data-start="{" data-end="}">
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno"><a class="line" href="classhelios_1_1input_1_1InputManager.html#aabc1c034f222ef983272ac4145575458">  197</a></span>        [[nodiscard]] <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1input_1_1InputManager.html#aabc1c034f222ef983272ac4145575458">isConnected</a>(<a class="code hl_enumeration" href="namespacehelios_1_1input_1_1types.html#a4dd39c1a113edbe36b92b088d8dbf2ff">helios::input::types::Gamepad</a> gamepadId) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>            <span class="keywordflow">return</span> input_-&gt;isConnected(gamepadId);</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        }</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span><span class="comment"></span> </div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span><span class="comment">         * @brief Returns a const reference to the `GamepadState` for the specified `gamepadId`.</span></div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><span class="comment">         * This method queries the `InputAdapter` owned by this `InputManager` for the</span></div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="comment">         * `GamepadState` identified by the specified `gamepadId`. If no `GamepadState` exists</span></div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="comment">         * for the given id, this method returns a `GamepadState` object initialized to its</span></div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span><span class="comment">         * default values. To test whether a gamepad is available, use `isConnected()`.</span></div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span><span class="comment">         * `GamepadState` objects are updated by calling `poll()`.</span></div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span><span class="comment">         * @param gamepadId The id of the gamepad for which the `GamepadState` is queried.</span></div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span><span class="comment">         * @return A const reference to the `GamepadState` for the specified gamepad.</span></div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span><span class="comment">         * @see isConnected()</span></div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span><span class="comment">         * @see poll()</span></div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00206" data-start="{" data-end="}">
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno"><a class="line" href="classhelios_1_1input_1_1InputManager.html#a3ae14ffca9c0950090bffa87d8ef7b7f">  206</a></span>        [[nodiscard]] <span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1input_1_1gamepad_1_1GamepadState.html">helios::input::gamepad::GamepadState</a>&amp; <a class="code hl_function" href="classhelios_1_1input_1_1InputManager.html#a3ae14ffca9c0950090bffa87d8ef7b7f">gamepadState</a>(<a class="code hl_enumeration" href="namespacehelios_1_1input_1_1types.html#a4dd39c1a113edbe36b92b088d8dbf2ff">helios::input::types::Gamepad</a> gamepadId) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>            <span class="keywordflow">return</span> input_-&gt;gamepadState(gamepadId);</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        }</div>
 </div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span> </div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span><span class="comment"></span> </div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span><span class="comment">         * @brief Retrieves the InputAdapter associated with this InputManager.</span></div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span><span class="comment">         * @return A reference to the InputAdapter associated with this InputManager.</span></div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00207" data-start="{" data-end="}">
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno"><a class="line" href="classhelios_1_1input_1_1InputManager.html#a3702474b44961f776a97501f13d1620b">  207</a></span>        [[nodiscard]] <span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1input_1_1InputAdapter.html">helios::input::InputAdapter</a>&amp; <a class="code hl_function" href="classhelios_1_1input_1_1InputManager.html#a3702474b44961f776a97501f13d1620b">inputAdapter</a>() const noexcept {</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>            <span class="keywordflow">return</span> *input_;</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>        }</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span><span class="comment"></span> </div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span><span class="comment">         * @brief Returns true if the specified gamepad is connected, otherwise false.</span></div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span><span class="comment">         * @param gamepadId The id of the gamepad to test.</span></div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span><span class="comment">         * @return True if a gamepad was found for the specified `gamepadId`, otherwise false.</span></div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00217" data-start="{" data-end="}">
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno"><a class="line" href="classhelios_1_1input_1_1InputManager.html#aabc1c034f222ef983272ac4145575458">  217</a></span>        [[nodiscard]] <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1input_1_1InputManager.html#aabc1c034f222ef983272ac4145575458">isConnected</a>(<a class="code hl_enumeration" href="namespacehelios_1_1input_1_1types.html#a4dd39c1a113edbe36b92b088d8dbf2ff">helios::input::types::Gamepad</a> gamepadId) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>            <span class="keywordflow">return</span> input_-&gt;isConnected(gamepadId);</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        }</div>
 </div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span><span class="comment"></span> </div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span><span class="comment">         * @brief Retrieves the InputAdapter associated with this InputManager.</span></div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span><span class="comment">         * This non-const overload allows modification of InputAdapter settings,</span></div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span><span class="comment">         * such as gamepad deadzone and axis inversion configuration.</span></div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span><span class="comment">         * @return A reference to the InputAdapter associated with this InputManager.</span></div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00219" data-start="{" data-end="}">
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno"><a class="line" href="classhelios_1_1input_1_1InputManager.html#a572c0a1172916da778df50383c475e97">  219</a></span>        [[nodiscard]] <a class="code hl_class" href="classhelios_1_1input_1_1InputAdapter.html">helios::input::InputAdapter</a>&amp; <a class="code hl_function" href="classhelios_1_1input_1_1InputManager.html#a572c0a1172916da778df50383c475e97">inputAdapter</a>() noexcept {</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>            <span class="keywordflow">return</span> *input_;</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>        }</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span> </div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span><span class="comment"></span> </div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span><span class="comment">         * @brief Retrieves the InputAdapter associated with this InputManager.</span></div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span><span class="comment">         * @return A reference to the InputAdapter associated with this InputManager.</span></div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00227" data-start="{" data-end="}">
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno"><a class="line" href="classhelios_1_1input_1_1InputManager.html#a3702474b44961f776a97501f13d1620b">  227</a></span>        [[nodiscard]] <span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1input_1_1InputAdapter.html">helios::input::InputAdapter</a>&amp; <a class="code hl_function" href="classhelios_1_1input_1_1InputManager.html#a3702474b44961f776a97501f13d1620b">inputAdapter</a>() const noexcept {</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>            <span class="keywordflow">return</span> *input_;</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>        }</div>
 </div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    };</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span><span class="comment"></span> </div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span><span class="comment">         * @brief Retrieves the InputAdapter associated with this InputManager.</span></div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span><span class="comment">         * This non-const overload allows modification of InputAdapter settings,</span></div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span><span class="comment">         * such as gamepad deadzone and axis inversion configuration.</span></div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span><span class="comment">         * @return A reference to the InputAdapter associated with this InputManager.</span></div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00239" data-start="{" data-end="}">
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno"><a class="line" href="classhelios_1_1input_1_1InputManager.html#a572c0a1172916da778df50383c475e97">  239</a></span>        [[nodiscard]] <a class="code hl_class" href="classhelios_1_1input_1_1InputAdapter.html">helios::input::InputAdapter</a>&amp; <a class="code hl_function" href="classhelios_1_1input_1_1InputManager.html#a572c0a1172916da778df50383c475e97">inputAdapter</a>() noexcept {</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>            <span class="keywordflow">return</span> *input_;</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>        }</div>
 </div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span> </div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span> </div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>} <span class="comment">// namespace helios::input</span></div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span> </div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    };</div>
+</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span> </div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span> </div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span> </div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>} <span class="comment">// namespace helios::input</span></div>
 <div class="ttc" id="aOpenGLUniformLocationMap_8ixx_html_acbc04f24078582c7d42b2085be5d5750"><div class="ttname"><a href="OpenGLUniformLocationMap_8ixx.html#acbc04f24078582c7d42b2085be5d5750">HELIOS_LOG_SCOPE</a></div><div class="ttdeci">#define HELIOS_LOG_SCOPE</div><div class="ttdef"><b>Definition</b> <a href="OpenGLUniformLocationMap_8ixx_source.html#l00020">OpenGLUniformLocationMap.ixx:20</a></div></div>
 <div class="ttc" id="aclasshelios_1_1input_1_1InputAdapter_html"><div class="ttname"><a href="classhelios_1_1input_1_1InputAdapter.html">helios::input::InputAdapter</a></div><div class="ttdoc">Abstract interface for platform-specific input adapters.</div><div class="ttdef"><b>Definition</b> <a href="InputAdapter_8ixx_source.html#l00040">InputAdapter.ixx:40</a></div></div>
 <div class="ttc" id="aclasshelios_1_1input_1_1InputManager_html_a0ad681204f4b9f65189340a0e3b87f28"><div class="ttname"><a href="classhelios_1_1input_1_1InputManager.html#a0ad681204f4b9f65189340a0e3b87f28">helios::input::InputManager::observe</a></div><div class="ttdeci">void observe(const helios::window::Window &amp;win) noexcept</div><div class="ttdoc">Sets the window this InputManager will observe for input.</div><div class="ttdef"><b>Definition</b> <a href="#l00080">InputManager.ixx:80</a></div></div>
 <div class="ttc" id="aclasshelios_1_1input_1_1InputManager_html_a29a9dd828ced10e5ddf6cbe757debf97"><div class="ttname"><a href="classhelios_1_1input_1_1InputManager.html#a29a9dd828ced10e5ddf6cbe757debf97">helios::input::InputManager::logger_</a></div><div class="ttdeci">static const helios::util::log::Logger &amp; logger_</div><div class="ttdoc">Shared logger instance for all InputManager objects.</div><div class="ttdef"><b>Definition</b> <a href="#l00058">InputManager.ixx:58</a></div></div>
-<div class="ttc" id="aclasshelios_1_1input_1_1InputManager_html_a3702474b44961f776a97501f13d1620b"><div class="ttname"><a href="classhelios_1_1input_1_1InputManager.html#a3702474b44961f776a97501f13d1620b">helios::input::InputManager::inputAdapter</a></div><div class="ttdeci">const helios::input::InputAdapter &amp; inputAdapter() const noexcept</div><div class="ttdoc">Retrieves the InputAdapter associated with this InputManager.</div><div class="ttdef"><b>Definition</b> <a href="#l00207">InputManager.ixx:207</a></div></div>
-<div class="ttc" id="aclasshelios_1_1input_1_1InputManager_html_a3ae14ffca9c0950090bffa87d8ef7b7f"><div class="ttname"><a href="classhelios_1_1input_1_1InputManager.html#a3ae14ffca9c0950090bffa87d8ef7b7f">helios::input::InputManager::gamepadState</a></div><div class="ttdeci">const helios::input::gamepad::GamepadState &amp; gamepadState(helios::input::types::Gamepad gamepadId) const noexcept</div><div class="ttdoc">Returns a const reference to the `GamepadState` for the specified `gamepadId`.</div><div class="ttdef"><b>Definition</b> <a href="#l00186">InputManager.ixx:186</a></div></div>
+<div class="ttc" id="aclasshelios_1_1input_1_1InputManager_html_a3702474b44961f776a97501f13d1620b"><div class="ttname"><a href="classhelios_1_1input_1_1InputManager.html#a3702474b44961f776a97501f13d1620b">helios::input::InputManager::inputAdapter</a></div><div class="ttdeci">const helios::input::InputAdapter &amp; inputAdapter() const noexcept</div><div class="ttdoc">Retrieves the InputAdapter associated with this InputManager.</div><div class="ttdef"><b>Definition</b> <a href="#l00227">InputManager.ixx:227</a></div></div>
+<div class="ttc" id="aclasshelios_1_1input_1_1InputManager_html_a3ae14ffca9c0950090bffa87d8ef7b7f"><div class="ttname"><a href="classhelios_1_1input_1_1InputManager.html#a3ae14ffca9c0950090bffa87d8ef7b7f">helios::input::InputManager::gamepadState</a></div><div class="ttdeci">const helios::input::gamepad::GamepadState &amp; gamepadState(helios::input::types::Gamepad gamepadId) const noexcept</div><div class="ttdoc">Returns a const reference to the `GamepadState` for the specified `gamepadId`.</div><div class="ttdef"><b>Definition</b> <a href="#l00206">InputManager.ixx:206</a></div></div>
 <div class="ttc" id="aclasshelios_1_1input_1_1InputManager_html_a4981679919003c18830da98f4e3c8e65"><div class="ttname"><a href="classhelios_1_1input_1_1InputManager.html#a4981679919003c18830da98f4e3c8e65">helios::input::InputManager::InputManager</a></div><div class="ttdeci">InputManager(std::unique_ptr&lt; helios::input::InputAdapter &gt; input)</div><div class="ttdoc">Creates a new InputManager with the specified InputAdapter.</div><div class="ttdef"><b>Definition</b> <a href="#l00069">InputManager.ixx:69</a></div></div>
-<div class="ttc" id="aclasshelios_1_1input_1_1InputManager_html_a50c3854c194f5f40d1e5a724f5512c0c"><div class="ttname"><a href="classhelios_1_1input_1_1InputManager.html#a50c3854c194f5f40d1e5a724f5512c0c">helios::input::InputManager::registerGamepads</a></div><div class="ttdeci">unsigned int registerGamepads(unsigned int mask) noexcept</div><div class="ttdoc">Explicitly tells this InputManager which gamepads to poll for input states in `poll()`.</div><div class="ttdef"><b>Definition</b> <a href="#l00151">InputManager.ixx:151</a></div></div>
-<div class="ttc" id="aclasshelios_1_1input_1_1InputManager_html_a572c0a1172916da778df50383c475e97"><div class="ttname"><a href="classhelios_1_1input_1_1InputManager.html#a572c0a1172916da778df50383c475e97">helios::input::InputManager::inputAdapter</a></div><div class="ttdeci">helios::input::InputAdapter &amp; inputAdapter() noexcept</div><div class="ttdoc">Retrieves the InputAdapter associated with this InputManager.</div><div class="ttdef"><b>Definition</b> <a href="#l00219">InputManager.ixx:219</a></div></div>
+<div class="ttc" id="aclasshelios_1_1input_1_1InputManager_html_a50c3854c194f5f40d1e5a724f5512c0c"><div class="ttname"><a href="classhelios_1_1input_1_1InputManager.html#a50c3854c194f5f40d1e5a724f5512c0c">helios::input::InputManager::registerGamepads</a></div><div class="ttdeci">unsigned int registerGamepads(unsigned int mask) noexcept</div><div class="ttdoc">Explicitly tells this InputManager which gamepads to poll for input states in `poll()`.</div><div class="ttdef"><b>Definition</b> <a href="#l00171">InputManager.ixx:171</a></div></div>
+<div class="ttc" id="aclasshelios_1_1input_1_1InputManager_html_a572c0a1172916da778df50383c475e97"><div class="ttname"><a href="classhelios_1_1input_1_1InputManager.html#a572c0a1172916da778df50383c475e97">helios::input::InputManager::inputAdapter</a></div><div class="ttdeci">helios::input::InputAdapter &amp; inputAdapter() noexcept</div><div class="ttdoc">Retrieves the InputAdapter associated with this InputManager.</div><div class="ttdef"><b>Definition</b> <a href="#l00239">InputManager.ixx:239</a></div></div>
 <div class="ttc" id="aclasshelios_1_1input_1_1InputManager_html_a73ff092ed6634db2dc52d8224700d35f"><div class="ttname"><a href="classhelios_1_1input_1_1InputManager.html#a73ff092ed6634db2dc52d8224700d35f">helios::input::InputManager::observedWindow</a></div><div class="ttdeci">const helios::window::Window * observedWindow() const</div><div class="ttdoc">Returns a non-owning pointer to the currently observed window.</div><div class="ttdef"><b>Definition</b> <a href="#l00092">InputManager.ixx:92</a></div></div>
 <div class="ttc" id="aclasshelios_1_1input_1_1InputManager_html_a9cdcf0b8c5ca77db5cba2498132479f1"><div class="ttname"><a href="classhelios_1_1input_1_1InputManager.html#a9cdcf0b8c5ca77db5cba2498132479f1">helios::input::InputManager::isKeyPressed</a></div><div class="ttdeci">bool isKeyPressed(const helios::input::types::Key &amp;key) const noexcept</div><div class="ttdoc">Returns true if the specified key is currently pressed, otherwise false.</div><div class="ttdef"><b>Definition</b> <a href="#l00131">InputManager.ixx:131</a></div></div>
-<div class="ttc" id="aclasshelios_1_1input_1_1InputManager_html_aabc1c034f222ef983272ac4145575458"><div class="ttname"><a href="classhelios_1_1input_1_1InputManager.html#aabc1c034f222ef983272ac4145575458">helios::input::InputManager::isConnected</a></div><div class="ttdeci">bool isConnected(helios::input::types::Gamepad gamepadId) const noexcept</div><div class="ttdoc">Returns true if the specified gamepad is connected, otherwise false.</div><div class="ttdef"><b>Definition</b> <a href="#l00197">InputManager.ixx:197</a></div></div>
+<div class="ttc" id="aclasshelios_1_1input_1_1InputManager_html_aabbbcaa0938a51cc0cd6621b5ba9dee9"><div class="ttname"><a href="classhelios_1_1input_1_1InputManager.html#aabbbcaa0938a51cc0cd6621b5ba9dee9">helios::input::InputManager::isKeyReleased</a></div><div class="ttdeci">bool isKeyReleased(const helios::input::types::Key &amp;key) const noexcept</div><div class="ttdoc">Returns true if the specified key is currently released, otherwise false.</div><div class="ttdef"><b>Definition</b> <a href="#l00151">InputManager.ixx:151</a></div></div>
+<div class="ttc" id="aclasshelios_1_1input_1_1InputManager_html_aabc1c034f222ef983272ac4145575458"><div class="ttname"><a href="classhelios_1_1input_1_1InputManager.html#aabc1c034f222ef983272ac4145575458">helios::input::InputManager::isConnected</a></div><div class="ttdeci">bool isConnected(helios::input::types::Gamepad gamepadId) const noexcept</div><div class="ttdoc">Returns true if the specified gamepad is connected, otherwise false.</div><div class="ttdef"><b>Definition</b> <a href="#l00217">InputManager.ixx:217</a></div></div>
 <div class="ttc" id="aclasshelios_1_1input_1_1InputManager_html_ab46c4ce60870839d557ba3d141964f01"><div class="ttname"><a href="classhelios_1_1input_1_1InputManager.html#ab46c4ce60870839d557ba3d141964f01">helios::input::InputManager::poll</a></div><div class="ttdeci">void poll(float deltaTime) noexcept</div><div class="ttdoc">Polls events from the currently observed window and registered gamepads.</div><div class="ttdef"><b>Definition</b> <a href="#l00110">InputManager.ixx:110</a></div></div>
 <div class="ttc" id="aclasshelios_1_1input_1_1gamepad_1_1GamepadState_html"><div class="ttname"><a href="classhelios_1_1input_1_1gamepad_1_1GamepadState.html">helios::input::gamepad::GamepadState</a></div><div class="ttdoc">A lightweight class for transferring the state of a Gamepad.</div><div class="ttdef"><b>Definition</b> <a href="GamepadState_8ixx_source.html#l00054">GamepadState.ixx:54</a></div></div>
 <div class="ttc" id="aclasshelios_1_1util_1_1log_1_1LogManager_html_a750d8fd5b3ee3678600644756b0631e7"><div class="ttname"><a href="classhelios_1_1util_1_1log_1_1LogManager.html#a750d8fd5b3ee3678600644756b0631e7">helios::util::log::LogManager::loggerForScope</a></div><div class="ttdeci">static const Logger &amp; loggerForScope(const std::string &amp;scope) noexcept</div><div class="ttdoc">Convenience accessor to obtain a logger for a textual scope via the singleton.</div><div class="ttdef"><b>Definition</b> <a href="LogManager_8ixx_source.html#l00128">LogManager.ixx:128</a></div></div>
 <div class="ttc" id="aclasshelios_1_1util_1_1log_1_1Logger_html"><div class="ttname"><a href="classhelios_1_1util_1_1log_1_1Logger.html">helios::util::log::Logger</a></div><div class="ttdoc">Logger implementation with configurable output sinks.</div><div class="ttdef"><b>Definition</b> <a href="Logger_8ixx_source.html#l00035">Logger.ixx:35</a></div></div>
-<div class="ttc" id="aclasshelios_1_1window_1_1Window_html"><div class="ttname"><a href="classhelios_1_1window_1_1Window.html">helios::window::Window</a></div><div class="ttdoc">Abstract base class representing a generic window.</div><div class="ttdef"><b>Definition</b> <a href="Window_8ixx_source.html#l00032">Window.ixx:32</a></div></div>
+<div class="ttc" id="aclasshelios_1_1window_1_1Window_html"><div class="ttname"><a href="classhelios_1_1window_1_1Window.html">helios::window::Window</a></div><div class="ttdoc">Abstract base class representing a generic window.</div><div class="ttdef"><b>Definition</b> <a href="Window_8ixx_source.html#l00034">Window.ixx:34</a></div></div>
 <div class="ttc" id="amodule__helios_8input_8InputAdapter_html"><div class="ttname"><a href="module__helios_8input_8InputAdapter.html">helios.input.InputAdapter</a></div></div>
 <div class="ttc" id="amodule__helios_8input_8InputManager_html"><div class="ttname"><a href="module__helios_8input_8InputManager.html">helios.input.InputManager</a></div></div>
 <div class="ttc" id="amodule__helios_8input_8gamepad_8GamepadState_html"><div class="ttname"><a href="module__helios_8input_8gamepad_8GamepadState.html">helios.input.gamepad.GamepadState</a></div></div>

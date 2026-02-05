@@ -2,14 +2,21 @@ var namespacehelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs =
 [
     [ "ChaseConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ChaseConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ChaseConfig" ],
     [ "CollisionConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1CollisionConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1CollisionConfig" ],
+    [ "CombatConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1CombatConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1CombatConfig" ],
     [ "GfxEffectsConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1GfxEffectsConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1GfxEffectsConfig" ],
+    [ "HealthConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1HealthConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1HealthConfig" ],
     [ "LevelBoundsCollisionConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1LevelBoundsCollisionConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1LevelBoundsCollisionConfig" ],
     [ "LifecycleConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1LifecycleConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1LifecycleConfig" ],
     [ "MeshRenderableConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1MeshRenderableConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1MeshRenderableConfig" ],
     [ "Move2DConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1Move2DConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1Move2DConfig" ],
+    [ "ObserverConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ObserverConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ObserverConfig" ],
     [ "SceneNodeConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1SceneNodeConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1SceneNodeConfig" ],
+    [ "ScorePoolConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ScorePoolConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ScorePoolConfig" ],
+    [ "ScoreValueConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ScoreValueConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ScoreValueConfig" ],
     [ "SpawnConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1SpawnConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1SpawnConfig" ],
     [ "SteeringConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1SteeringConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1SteeringConfig" ],
+    [ "TextRenderableConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig" ],
     [ "TransformConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TransformConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TransformConfig" ],
+    [ "UiTransformConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1UiTransformConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1UiTransformConfig" ],
     [ "WeaponConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1WeaponConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1WeaponConfig" ]
 ];

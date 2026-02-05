@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_f62186ca603740537cec9464f8799975" kind="dir">
+    <compoundname>systems</compoundname>
+    <innerfile refid="helios_2engine_2mechanics_2scoring_2systems_2__module_8ixx">helios/engine/mechanics/scoring/systems/_module.ixx</innerfile>
+    <innerfile refid="CombatScoringSystem_8ixx">CombatScoringSystem.ixx</innerfile>
+    <innerfile refid="ScoreObserverClearSystem_8ixx">ScoreObserverClearSystem.ixx</innerfile>
+    <innerfile refid="ScoreObserverSystem_8ixx">ScoreObserverSystem.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_f62186ca603740537cec9464f8799975_1autotoc_md244">
+<title>helios::engine::mechanics::scoring::systems</title><para>Systems for score processing and observation.</para>
+<para>This namespace contains systems that handle scoring events, update score observers, and manage score state lifecycle.</para>
+</sect1>
+<sect1 id="dir_f62186ca603740537cec9464f8799975_1autotoc_md245">
+<title>Systems</title><para><table rows="4" cols="3"><row>
+<entry thead="yes"><para>System  </para>
+</entry><entry thead="yes"><para>Phase  </para>
+</entry><entry thead="yes"><para>Description  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>CombatScoringSystem</computeroutput>  </para>
+</entry><entry thead="no"><para>Update  </para>
+</entry><entry thead="no"><para>Processes death events and issues score commands  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ScoreObserverSystem</computeroutput>  </para>
+</entry><entry thead="no"><para>Update  </para>
+</entry><entry thead="no"><para>Syncs ScoreObserverComponent values from ScorePools  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ScoreObserverClearSystem</computeroutput>  </para>
+</entry><entry thead="no"><para>Post  </para>
+</entry><entry thead="no"><para>Clears hasUpdate flags on ScoreObserverComponents  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_f62186ca603740537cec9464f8799975_1autotoc_md246">
+<title>Execution Order</title><para>1. <bold>CombatScoringSystem</bold> - Listens for <computeroutput>DeathEvent</computeroutput>, checks for <computeroutput>ScoreValueComponent</computeroutput>, issues <computeroutput>UpdateScoreCommand</computeroutput> 2. <bold>ScoreObserverSystem</bold> - Reads from <computeroutput>ScorePool</computeroutput> and updates <computeroutput>ScoreObserverComponent.value</computeroutput> 3. <bold>ScoreObserverClearSystem</bold> - Clears <computeroutput>hasUpdate</computeroutput> flag after UI systems have processed changes</para>
+<para><hruler/>
+</para>
+<para><details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/mechanics/scoring/systems/"/>
+  </compounddef>
+</doxygen>

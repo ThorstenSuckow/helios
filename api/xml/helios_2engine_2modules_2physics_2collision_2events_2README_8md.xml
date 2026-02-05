@@ -2,25 +2,41 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="helios_2engine_2modules_2physics_2collision_2events_2README_8md" kind="file" language="Markdown">
     <compoundname>helios/engine/modules/physics/collision/events/README.md</compoundname>
-    <innernamespace refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1events">helios::engine::modules::physics::events</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1events">helios::engine::modules::physics::collision::events</innernamespace>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
     <programlisting>
-<codeline><highlight class="normal">#<sp/>helios::engine::modules::physics::events</highlight></codeline>
+<codeline><highlight class="normal">#<sp/>helios::engine::modules::physics::collision::events</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">Physics<sp/>event<sp/>types<sp/>for<sp/>collision<sp/>and<sp/>trigger<sp/>notifications.</highlight></codeline>
+<codeline><highlight class="normal">Collision<sp/>event<sp/>types<sp/>for<sp/>the<sp/>helios<sp/>engine.</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">This<sp/>namespace<sp/>contains<sp/>event<sp/>structures<sp/>dispatched<sp/>by<sp/>the<sp/>collision<sp/>detection<sp/>system.<sp/>Events<sp/>are<sp/>placed<sp/>in<sp/>the<sp/>`GameLoopEventBus`<sp/>for<sp/>consumption<sp/>by<sp/>gameplay<sp/>systems<sp/>in<sp/>the<sp/>next<sp/>frame.</highlight></codeline>
+<codeline><highlight class="normal">This<sp/>namespace<sp/>contains<sp/>event<sp/>structures<sp/>dispatched<sp/>by<sp/>the<sp/>collision<sp/>detection<sp/>system<sp/>when<sp/>entities<sp/>collide.</highlight></codeline>
 <codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Events</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Event<sp/>|<sp/>Description<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|-------------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SolidCollisionEvent`<sp/>|<sp/>Emitted<sp/>when<sp/>a<sp/>solid<sp/>(physical)<sp/>collision<sp/>is<sp/>detected<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`TriggerCollisionEvent`<sp/>|<sp/>Emitted<sp/>when<sp/>a<sp/>trigger<sp/>(non-physical)<sp/>collision<sp/>is<sp/>detected<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Event<sp/>Dispatch</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Events<sp/>are<sp/>published<sp/>via<sp/>the<sp/>`UpdateContext`<sp/>when<sp/>an<sp/>entity<sp/>with<sp/>`PassEvent`<sp/>collision<sp/>behavior<sp/>detects<sp/>a<sp/>collision.<sp/>Events<sp/>contain<sp/>a<sp/>`CollisionContext`<sp/>struct<sp/>with<sp/>full<sp/>collision<sp/>details.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Solid<sp/>vs<sp/>Trigger</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>**Solid<sp/>collisions:**<sp/>Physical<sp/>interactions<sp/>that<sp/>can<sp/>block<sp/>movement<sp/>or<sp/>trigger<sp/>physics<sp/>responses</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Trigger<sp/>collisions:**<sp/>Non-physical<sp/>interactions<sp/>for<sp/>gameplay<sp/>logic<sp/>(pickups,<sp/>damage<sp/>zones,<sp/>area<sp/>effects)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
 <codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
-<codeline><highlight class="normal">@namespace<sp/>helios::engine::modules::physics::events</highlight></codeline>
-<codeline><highlight class="normal">@brief<sp/>Physics<sp/>event<sp/>types<sp/>for<sp/>collision<sp/>and<sp/>trigger<sp/>notifications.</highlight></codeline>
-<codeline><highlight class="normal">@details<sp/>Contains<sp/>event<sp/>structures<sp/>dispatched<sp/>by<sp/>the<sp/>collision<sp/>detection<sp/>system<sp/>for</highlight></codeline>
-<codeline><highlight class="normal">consumption<sp/>by<sp/>gameplay<sp/>systems.</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::engine::modules::physics::collision::events</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Collision<sp/>event<sp/>types<sp/>for<sp/>the<sp/>helios<sp/>engine.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Contains<sp/>event<sp/>structures<sp/>dispatched<sp/>by<sp/>the<sp/>collision<sp/>detection<sp/>system.<sp/>SolidCollisionEvent<sp/>represents<sp/>physical<sp/>collisions,<sp/>while<sp/>TriggerCollisionEvent<sp/>represents<sp/>non-blocking<sp/>gameplay<sp/>interactions.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
     </programlisting>
     <location file="/tmp/h/include/helios/engine/modules/physics/collision/events/README.md"/>

@@ -79,6 +79,22 @@
         </inbodydescription>
         <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="87" column="28" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="87" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1rendering_1_1text_1_1TextMesh_1acb4940b698a69521083d20db895129d1" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::rendering::text::TextMesh::fontScale_</definition>
+        <argsstring></argsstring>
+        <name>fontScale_</name>
+        <qualifiedname>helios::rendering::text::TextMesh::fontScale_</qualifiedname>
+        <initializer>= 1.0f</initializer>
+        <briefdescription>
+<para>The scale factor for the font. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="92" column="15" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="92" bodyend="-1"/>
+      </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
       <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1TextMesh_1a69681ce1a4c266c7339e0aa1533be78f" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
@@ -108,14 +124,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="94" column="14" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="94" bodyend="103"/>
+        <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="99" column="14" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="99" bodyend="108"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1TextMesh_1a1b4c33a7057a7f5363f54774183775bf" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1TextMesh_1aabb3a7c930b99690f43a99652a6cee15" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
         <definition>helios::rendering::text::TextMesh::TextMesh</definition>
-        <argsstring>(std::string text, helios::engine::core::data::FontId fontId) noexcept</argsstring>
+        <argsstring>(std::string text, const float fontScale, const helios::engine::core::data::FontId fontId) noexcept</argsstring>
         <name>TextMesh</name>
         <qualifiedname>helios::rendering::text::TextMesh::TextMesh</qualifiedname>
         <param>
@@ -123,7 +139,11 @@
           <declname>text</declname>
         </param>
         <param>
-          <type><ref refid="structhelios_1_1engine_1_1core_1_1data_1_1FontId" kindref="compound">helios::engine::core::data::FontId</ref></type>
+          <type>const float</type>
+          <declname>fontScale</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1FontId" kindref="compound">helios::engine::core::data::FontId</ref></type>
           <declname>fontId</declname>
         </param>
         <briefdescription>
@@ -140,6 +160,14 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
+<parametername>fontScale</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The scale of the font, relative to the pixelHeight it was loaded with. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
 <parametername>fontId</parametername>
 </parameternamelist>
 <parameterdescription>
@@ -151,9 +179,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="113" column="18" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="113" bodyend="119"/>
-        <references refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1ab88efd9db53ef6bec25a8154fd6115a3" compoundref="TextMesh_8ixx" startline="178" endline="180">fontId</references>
-        <references refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1a4ca16d4d6a4709796c58a929355940c4" compoundref="TextMesh_8ixx" startline="169" endline="171">text</references>
+        <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="119" column="18" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="119" bodyend="127"/>
+        <references refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1ab88efd9db53ef6bec25a8154fd6115a3" compoundref="TextMesh_8ixx" startline="217" endline="219">fontId</references>
+        <references refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1afed985c42653a3b4b0ebec733b35f598" compoundref="TextMesh_8ixx" startline="199" endline="201">fontScale</references>
+        <references refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1a4ca16d4d6a4709796c58a929355940c4" compoundref="TextMesh_8ixx" startline="177" endline="179">text</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1TextMesh_1ae8223797a0ef9c56ffa0842ad887a7fe" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>const <ref refid="namespacehelios_1_1math_1a124c0492430aeecedc1c1a5ece4ba488" kindref="member">helios::math::aabbf</ref> &amp;</type>
@@ -185,7 +214,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="131" column="36" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="131" bodyend="134"/>
+        <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="139" column="36" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="139" bodyend="142"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1TextMesh_1aebfe7c0a3859daa3123416297afb68d8" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>std::span&lt; <ref refid="namespacehelios_1_1math_1a08252f81850c5902e3c8dead272f3332" kindref="member">helios::math::vec4f</ref> &gt;</type>
@@ -217,7 +246,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="146" column="20" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="146" bodyend="149"/>
+        <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="154" column="20" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="154" bodyend="157"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1TextMesh_1a0e523735e2c4505387838fe2355180c8" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -247,8 +276,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="159" column="14" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="159" bodyend="162"/>
-        <references refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1a4ca16d4d6a4709796c58a929355940c4" compoundref="TextMesh_8ixx" startline="169" endline="171">text</references>
+        <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="167" column="14" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="167" bodyend="170"/>
+        <references refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1a4ca16d4d6a4709796c58a929355940c4" compoundref="TextMesh_8ixx" startline="177" endline="179">text</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1TextMesh_1a4ca16d4d6a4709796c58a929355940c4" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>std::string_view</type>
@@ -266,9 +295,76 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="169" column="27" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="169" bodyend="171"/>
-        <referencedby refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1a0e523735e2c4505387838fe2355180c8" compoundref="TextMesh_8ixx" startline="159" endline="162">setText</referencedby>
-        <referencedby refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1a1b4c33a7057a7f5363f54774183775bf" compoundref="TextMesh_8ixx" startline="113" endline="119">TextMesh</referencedby>
+        <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="177" column="27" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="177" bodyend="179"/>
+        <referencedby refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1a0e523735e2c4505387838fe2355180c8" compoundref="TextMesh_8ixx" startline="167" endline="170">setText</referencedby>
+        <referencedby refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1aabb3a7c930b99690f43a99652a6cee15" compoundref="TextMesh_8ixx" startline="119" endline="127">TextMesh</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1TextMesh_1a39ce449c552635641d71653b83da1e07" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::rendering::text::TextMesh::setFontScale</definition>
+        <argsstring>(const float scale) noexcept</argsstring>
+        <name>setFontScale</name>
+        <qualifiedname>helios::rendering::text::TextMesh::setFontScale</qualifiedname>
+        <param>
+          <type>const float</type>
+          <declname>scale</declname>
+        </param>
+        <briefdescription>
+<para>Sets the font scale factor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Invalidates the cached layout, which will be recomputed on the next call to `vertices()` or `localAABB()`.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>scale</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new scale factor relative to the font&apos;s pixel height. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="189" column="14" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="189" bodyend="192"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1TextMesh_1afed985c42653a3b4b0ebec733b35f598" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::rendering::text::TextMesh::fontScale</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>fontScale</name>
+        <qualifiedname>helios::rendering::text::TextMesh::fontScale</qualifiedname>
+        <briefdescription>
+<para>Returns the current font scale factor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The scale factor relative to the font&apos;s pixel height. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="199" column="16" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="199" bodyend="201"/>
+        <referencedby refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1aabb3a7c930b99690f43a99652a6cee15" compoundref="TextMesh_8ixx" startline="119" endline="127">TextMesh</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1TextMesh_1a6602c0e52d3604b819ea0bb869667ddd" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::rendering::text::TextMesh::needsUpdate</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>needsUpdate</name>
+        <qualifiedname>helios::rendering::text::TextMesh::needsUpdate</qualifiedname>
+        <briefdescription>
+<para>Checks if the cached layout needs recomputation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if the layout is invalid and needs to be recomputed. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="208" column="14" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="208" bodyend="210"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1TextMesh_1ab88efd9db53ef6bec25a8154fd6115a3" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="structhelios_1_1engine_1_1core_1_1data_1_1FontId" kindref="compound">helios::engine::core::data::FontId</ref></type>
@@ -286,8 +382,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="178" column="45" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="178" bodyend="180"/>
-        <referencedby refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1a1b4c33a7057a7f5363f54774183775bf" compoundref="TextMesh_8ixx" startline="113" endline="119">TextMesh</referencedby>
+        <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="217" column="45" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="217" bodyend="219"/>
+        <referencedby refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1aabb3a7c930b99690f43a99652a6cee15" compoundref="TextMesh_8ixx" startline="119" endline="127">TextMesh</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -314,17 +410,21 @@
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="62" column="5" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="62" bodyend="181"/>
+    <location file="/tmp/h/include/helios/rendering/text/TextMesh.ixx" line="62" column="5" bodyfile="/tmp/h/include/helios/rendering/text/TextMesh.ixx" bodystart="62" bodyend="220"/>
     <listofallmembers>
       <member refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1ab88efd9db53ef6bec25a8154fd6115a3" prot="public" virt="non-virtual"><scope>helios::rendering::text::TextMesh</scope><name>fontId</name></member>
       <member refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1afbc4cdc696047e227d402aec806bcc72" prot="private" virt="non-virtual"><scope>helios::rendering::text::TextMesh</scope><name>fontId_</name></member>
+      <member refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1afed985c42653a3b4b0ebec733b35f598" prot="public" virt="non-virtual"><scope>helios::rendering::text::TextMesh</scope><name>fontScale</name></member>
+      <member refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1acb4940b698a69521083d20db895129d1" prot="private" virt="non-virtual"><scope>helios::rendering::text::TextMesh</scope><name>fontScale_</name></member>
       <member refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1ae8223797a0ef9c56ffa0842ad887a7fe" prot="public" virt="non-virtual"><scope>helios::rendering::text::TextMesh</scope><name>localAABB</name></member>
+      <member refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1a6602c0e52d3604b819ea0bb869667ddd" prot="public" virt="non-virtual"><scope>helios::rendering::text::TextMesh</scope><name>needsUpdate</name></member>
       <member refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1aa37fbe4a7f2b1cb6f385b02c0b0a88d0" prot="private" virt="non-virtual"><scope>helios::rendering::text::TextMesh</scope><name>needsUpdate_</name></member>
+      <member refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1a39ce449c552635641d71653b83da1e07" prot="public" virt="non-virtual"><scope>helios::rendering::text::TextMesh</scope><name>setFontScale</name></member>
       <member refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1a0e523735e2c4505387838fe2355180c8" prot="public" virt="non-virtual"><scope>helios::rendering::text::TextMesh</scope><name>setText</name></member>
       <member refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1a4ca16d4d6a4709796c58a929355940c4" prot="public" virt="non-virtual"><scope>helios::rendering::text::TextMesh</scope><name>text</name></member>
       <member refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1a75977fbc576c2341c2a90cc5c697c1e5" prot="private" virt="non-virtual"><scope>helios::rendering::text::TextMesh</scope><name>text_</name></member>
       <member refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1a958723362380dcaeba853571ffab081b" prot="private" virt="non-virtual"><scope>helios::rendering::text::TextMesh</scope><name>textLayout_</name></member>
-      <member refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1a1b4c33a7057a7f5363f54774183775bf" prot="public" virt="non-virtual"><scope>helios::rendering::text::TextMesh</scope><name>TextMesh</name></member>
+      <member refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1aabb3a7c930b99690f43a99652a6cee15" prot="public" virt="non-virtual"><scope>helios::rendering::text::TextMesh</scope><name>TextMesh</name></member>
       <member refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1a98eaf678292dbfeb5c07f7f6c410533c" prot="private" virt="non-virtual"><scope>helios::rendering::text::TextMesh</scope><name>typeSetter_</name></member>
       <member refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1a69681ce1a4c266c7339e0aa1533be78f" prot="private" virt="non-virtual"><scope>helios::rendering::text::TextMesh</scope><name>updateCache</name></member>
       <member refid="classhelios_1_1rendering_1_1text_1_1TextMesh_1aebfe7c0a3859daa3123416297afb68d8" prot="public" virt="non-virtual"><scope>helios::rendering::text::TextMesh</scope><name>vertices</name></member>

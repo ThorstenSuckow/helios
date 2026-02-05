@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="helios_2engine_2mechanics_2scoring_2components_2README_8md" kind="file" language="Markdown">
+    <compoundname>helios/engine/mechanics/scoring/components/README.md</compoundname>
+    <innernamespace refid="namespacehelios_1_1engine_1_1mechanics_1_1scoring_1_1components">helios::engine::mechanics::scoring::components</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>helios::engine::mechanics::scoring::components</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Score-related<sp/>ECS<sp/>components.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>namespace<sp/>contains<sp/>components<sp/>for<sp/>associating<sp/>entities<sp/>with<sp/>score<sp/>pools,<sp/>storing<sp/>score<sp/>values,<sp/>and<sp/>observing<sp/>score<sp/>changes.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Components</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Component<sp/>|<sp/>Description<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-----------|-------------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ScorePoolComponent`<sp/>|<sp/>Associates<sp/>an<sp/>entity<sp/>with<sp/>a<sp/>score<sp/>pool<sp/>(e.g.,<sp/>player<sp/>→<sp/>player&apos;s<sp/>pool)<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ScoreValueComponent&lt;T&gt;`<sp/>|<sp/>Template<sp/>component<sp/>storing<sp/>a<sp/>score<sp/>value<sp/>of<sp/>type<sp/>T<sp/>(e.g.,<sp/>KillReward)<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ScoreObserverComponent`<sp/>|<sp/>Observes<sp/>a<sp/>score<sp/>pool<sp/>and<sp/>caches<sp/>its<sp/>value<sp/>for<sp/>UI<sp/>display<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Attaching<sp/>score<sp/>pool<sp/>to<sp/>player</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">auto&amp;<sp/>poolComp<sp/>=<sp/>player.add&lt;ScorePoolComponent&gt;();</highlight></codeline>
+<codeline><highlight class="normal">poolComp.setScorePoolId(ScorePoolId{&quot;player1&quot;});</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Defining<sp/>kill<sp/>reward<sp/>on<sp/>enemy</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">auto&amp;<sp/>scoreValue<sp/>=<sp/>enemy.add&lt;ScoreValueComponent&lt;KillReward&gt;&gt;(100.0);</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Observing<sp/>score<sp/>for<sp/>UI</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">auto&amp;<sp/>observer<sp/>=<sp/>scoreText.add&lt;ScoreObserverComponent&gt;();</highlight></codeline>
+<codeline><highlight class="normal">observer.setScorePoolId(ScorePoolId{&quot;player1&quot;});</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::engine::mechanics::scoring::components</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Score-related<sp/>ECS<sp/>components.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Contains<sp/>components<sp/>for<sp/>score<sp/>pool<sp/>association,<sp/>score<sp/>value<sp/>storage,<sp/>and<sp/>score<sp/>observation<sp/>for<sp/>UI<sp/>binding.</highlight></codeline>
+<codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
+    </programlisting>
+    <location file="/tmp/h/include/helios/engine/mechanics/scoring/components/README.md"/>
+  </compounddef>
+</doxygen>

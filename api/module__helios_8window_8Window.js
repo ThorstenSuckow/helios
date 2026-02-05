@@ -17,6 +17,7 @@ var module__helios_8window_8Window =
     [ "helios::window::Window::height", "module__helios_8window_8Window.html#a36cf16dcb794e5cc07a363673e4787a5", null ],
     [ "helios::window::Window::renderTarget", "module__helios_8window_8Window.html#a6bf6b252e26575dfced4453a3184994d", null ],
     [ "helios::window::Window::addViewport", "module__helios_8window_8Window.html#a27293cbb3681a49f31960ac9487c7f92", null ],
+    [ "helios::window::Window::viewportSnapshots", "module__helios_8window_8Window.html#a31513e45ce3613916d9995bad121d8c8", null ],
     [ "helios::window::Window::operator==", "module__helios_8window_8Window.html#aa5192a6c6fbaf5938b5e73515d66f4d9", null ],
     [ "helios::window::Window::logger_", "module__helios_8window_8Window.html#a6b70ab4bbf999583b306297859e074cc", null ],
     [ "helios::window::Window::width_", "module__helios_8window_8Window.html#a82e3d26ab8aeb610b1c92a6130802f11", null ],

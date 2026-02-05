@@ -112,8 +112,8 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a849b293cd01f47745694c4645fdf5fdf" id="r_a849b293cd01f47745694c4645fdf5fdf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structhelios_1_1rendering_1_1text_1_1TextLayout.html">TextLayout</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a849b293cd01f47745694c4645fdf5fdf">layout</a> (std::string_view <a class="el" href="namespacehelios_1_1rendering_1_1text.html">text</a>, <a class="el" href="structhelios_1_1engine_1_1core_1_1data_1_1FontId.html">helios::engine::core::data::FontId</a> fontId, <a class="el" href="classhelios_1_1rendering_1_1text_1_1FontResourceProvider.html">FontResourceProvider</a> &amp;fontResourceProvider)</td></tr>
-<tr class="memdesc:a849b293cd01f47745694c4645fdf5fdf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the layout for a text string.  <br /></td></tr>
+<tr class="memitem:a2cde61b338a7b4b8b71162c69a036fd7" id="r_a2cde61b338a7b4b8b71162c69a036fd7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structhelios_1_1rendering_1_1text_1_1TextLayout.html">TextLayout</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2cde61b338a7b4b8b71162c69a036fd7">layout</a> (const std::string_view <a class="el" href="namespacehelios_1_1rendering_1_1text.html">text</a>, const float scale, const <a class="el" href="structhelios_1_1engine_1_1core_1_1data_1_1FontId.html">helios::engine::core::data::FontId</a> fontId, <a class="el" href="classhelios_1_1rendering_1_1text_1_1FontResourceProvider.html">FontResourceProvider</a> &amp;fontResourceProvider)</td></tr>
+<tr class="memdesc:a2cde61b338a7b4b8b71162c69a036fd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the layout for a text string.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Computes text layout by positioning glyphs and generating vertex data. </p>
@@ -136,8 +136,8 @@ Public Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="TypeSetter_8ixx_source.html#l00090">90</a> of file <a class="el" href="TypeSetter_8ixx_source.html">TypeSetter.ixx</a>.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a849b293cd01f47745694c4645fdf5fdf" name="a849b293cd01f47745694c4645fdf5fdf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a849b293cd01f47745694c4645fdf5fdf">&#9670;&#160;</a></span>layout()</h2>
+<a id="a2cde61b338a7b4b8b71162c69a036fd7" name="a2cde61b338a7b4b8b71162c69a036fd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cde61b338a7b4b8b71162c69a036fd7">&#9670;&#160;</a></span>layout()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -148,12 +148,17 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="structhelios_1_1rendering_1_1text_1_1TextLayout.html">TextLayout</a> helios::rendering::text::TypeSetter::layout </td>
           <td>(</td>
-          <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>text</em></span>, </td>
+          <td class="paramtype">const std::string_view</td>          <td class="paramname"><span class="paramname"><em>text</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structhelios_1_1engine_1_1core_1_1data_1_1FontId.html">helios::engine::core::data::FontId</a></td>          <td class="paramname"><span class="paramname"><em>fontId</em></span>, </td>
+          <td class="paramtype">const float</td>          <td class="paramname"><span class="paramname"><em>scale</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structhelios_1_1engine_1_1core_1_1data_1_1FontId.html">helios::engine::core::data::FontId</a></td>          <td class="paramname"><span class="paramname"><em>fontId</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -173,6 +178,7 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">text</td><td>The text string to lay out. </td></tr>
+    <tr><td class="paramname">scale</td><td>The scaling used for rendering the font, relative to its origin pixel-height </td></tr>
     <tr><td class="paramname">fontId</td><td>The font to use for glyph metrics. </td></tr>
     <tr><td class="paramname">fontResourceProvider</td><td>Provider for glyph data.</td></tr>
   </table>
@@ -180,14 +186,14 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A `TextLayout` containing the AABB and vertex data. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="TypeSetter_8ixx_source.html#l00107">107</a> of file <a class="el" href="TypeSetter_8ixx_source.html">TypeSetter.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeSetter_8ixx_source.html#l00108">108</a> of file <a class="el" href="TypeSetter_8ixx_source.html">TypeSetter.ixx</a>.</p>
 
 <p class="reference">References <a class="el" href="Glyph_8ixx_source.html#l00060">helios::rendering::text::Glyph::bearing</a>, and <a class="el" href="classhelios_1_1rendering_1_1text_1_1FontResourceProvider.html#ab4a216319f349574fd6ceb2994970891">helios::rendering::text::FontResourceProvider::glyph()</a>.</p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1text_1_1TypeSetter_a849b293cd01f47745694c4645fdf5fdf_cgraph.svg" width="432" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1text_1_1TypeSetter_a2cde61b338a7b4b8b71162c69a036fd7_cgraph.svg" width="432" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>

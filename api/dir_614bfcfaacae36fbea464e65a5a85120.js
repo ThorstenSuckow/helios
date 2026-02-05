@@ -16,5 +16,6 @@ var dir_614bfcfaacae36fbea464e65a5a85120 =
     [ "RenderTarget.ixx", "RenderTarget_8ixx.html", "RenderTarget_8ixx" ],
     [ "RenderTargetFwd.ixx", "RenderTargetFwd_8ixx.html", null ],
     [ "Vertex.ixx", "Vertex_8ixx.html", "Vertex_8ixx" ],
-    [ "Viewport.ixx", "Viewport_8ixx.html", "Viewport_8ixx" ]
+    [ "Viewport.ixx", "Viewport_8ixx.html", "Viewport_8ixx" ],
+    [ "ViewportSnapshot.ixx", "ViewportSnapshot_8ixx.html", "ViewportSnapshot_8ixx" ]
 ];

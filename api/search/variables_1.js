@@ -6,6 +6,7 @@ var searchData=
   ['black_3',['Black',['../structhelios_1_1util_1_1Colors.html#af4c86c5fcc6d41740a31df96780243a1',1,'helios::util::Colors']]],
   ['blue_4',['Blue',['../structhelios_1_1util_1_1Colors.html#ace1784c6b680572db228f105612548c8',1,'helios::util::Colors']]],
   ['bottom_5f_5',['bottom_',['../classhelios_1_1scene_1_1Camera.html#aa4a698bc0432df76fd9f1cfae761f32a',1,'helios::scene::Camera']]],
-  ['brown_6',['Brown',['../structhelios_1_1util_1_1Colors.html#af3357f960a2606101e00c4269d08e337',1,'helios::util::Colors']]],
-  ['burlywood_7',['Burlywood',['../structhelios_1_1util_1_1Colors.html#a2fc7df1dd0211c3d0f27d898a0d2759e',1,'helios::util::Colors']]]
+  ['bounds_6',['bounds',['../structhelios_1_1rendering_1_1ViewportSnapshot.html#a54c1f5786011b271d7fbf851d19baec5',1,'helios::rendering::ViewportSnapshot']]],
+  ['brown_7',['Brown',['../structhelios_1_1util_1_1Colors.html#af3357f960a2606101e00c4269d08e337',1,'helios::util::Colors']]],
+  ['burlywood_8',['Burlywood',['../structhelios_1_1util_1_1Colors.html#a2fc7df1dd0211c3d0f27d898a0d2759e',1,'helios::util::Colors']]]
 ];

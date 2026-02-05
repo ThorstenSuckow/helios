@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_2e322012c304bd84ecea0543a8b62f92" kind="dir">
+    <compoundname>components</compoundname>
+    <innerfile refid="helios_2engine_2mechanics_2scoring_2components_2__module_8ixx">helios/engine/mechanics/scoring/components/_module.ixx</innerfile>
+    <innerfile refid="ScoreObserverComponent_8ixx">ScoreObserverComponent.ixx</innerfile>
+    <innerfile refid="ScorePoolComponent_8ixx">ScorePoolComponent.ixx</innerfile>
+    <innerfile refid="ScoreValueComponent_8ixx">ScoreValueComponent.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_2e322012c304bd84ecea0543a8b62f92_1autotoc_md232">
+<title>helios::engine::mechanics::scoring::components</title><para>Score-related ECS components.</para>
+<para>This namespace contains components for associating entities with score pools, storing score values, and observing score changes.</para>
+</sect1>
+<sect1 id="dir_2e322012c304bd84ecea0543a8b62f92_1autotoc_md233">
+<title>Components</title><para><table rows="4" cols="2"><row>
+<entry thead="yes"><para>Component  </para>
+</entry><entry thead="yes"><para>Description  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ScorePoolComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Associates an entity with a score pool (e.g., player → player&apos;s pool)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ScoreValueComponent&lt;T&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para>Template component storing a score value of type T (e.g., KillReward)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ScoreObserverComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Observes a score pool and caches its value for UI display  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_2e322012c304bd84ecea0543a8b62f92_1autotoc_md234">
+<title>Usage</title><sect2 id="dir_2e322012c304bd84ecea0543a8b62f92_1autotoc_md235">
+<title>Attaching score pool to player</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>poolComp<sp/>=<sp/>player.add&lt;ScorePoolComponent&gt;();</highlight></codeline>
+<codeline><highlight class="normal">poolComp.setScorePoolId(ScorePoolId{</highlight><highlight class="stringliteral">&quot;player1&quot;</highlight><highlight class="normal">});</highlight></codeline>
+</programlisting></para>
+</sect2>
+<sect2 id="dir_2e322012c304bd84ecea0543a8b62f92_1autotoc_md236">
+<title>Defining kill reward on enemy</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>scoreValue<sp/>=<sp/>enemy.add&lt;ScoreValueComponent&lt;KillReward&gt;&gt;(100.0);</highlight></codeline>
+</programlisting></para>
+</sect2>
+<sect2 id="dir_2e322012c304bd84ecea0543a8b62f92_1autotoc_md237">
+<title>Observing score for UI</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>observer<sp/>=<sp/>scoreText.add&lt;ScoreObserverComponent&gt;();</highlight></codeline>
+<codeline><highlight class="normal">observer.setScorePoolId(ScorePoolId{</highlight><highlight class="stringliteral">&quot;player1&quot;</highlight><highlight class="normal">});</highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+</para>
+<para><details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect2>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/mechanics/scoring/components/"/>
+  </compounddef>
+</doxygen>

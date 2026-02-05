@@ -2,6 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>helios::engine::runtime::messaging::command::WorldCommand</compoundname>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1commands_1_1UpdateScoreCommand" prot="public" virt="non-virtual">helios::engine::mechanics::scoring::commands::UpdateScoreCommand</derivedcompoundref>
     <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1DespawnCommand" prot="public" virt="non-virtual">helios::engine::runtime::spawn::commands::DespawnCommand</derivedcompoundref>
     <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand" prot="public" virt="non-virtual">helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand</derivedcompoundref>
     <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1SpawnCommand" prot="public" virt="non-virtual">helios::engine::runtime::spawn::commands::SpawnCommand</derivedcompoundref>
@@ -27,6 +28,7 @@
         <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld) const noexcept=0</argsstring>
         <name>execute</name>
         <qualifiedname>helios::engine::runtime::messaging::command::WorldCommand::execute</qualifiedname>
+        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1commands_1_1UpdateScoreCommand_1af54e491def5a2ee658d9014cd8fd7ba1">execute</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1DespawnCommand_1a27d6b601c1d80bd842c3d5b01b08bfad">execute</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_1ac52d2b8e0f355b14e1a4777c9519b675">execute</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1SpawnCommand_1abb3d93337e9b64a12bdbb0d369282829">execute</reimplementedby>
@@ -61,6 +63,7 @@
         <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld, helios::engine::runtime::messaging::command::WorldCommandDispatcher &amp;dispatcher) const noexcept</argsstring>
         <name>accept</name>
         <qualifiedname>helios::engine::runtime::messaging::command::WorldCommand::accept</qualifiedname>
+        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1commands_1_1UpdateScoreCommand_1aaed0d900897ae2afef5e350dfc134a97">accept</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1DespawnCommand_1a9345f2a9f35dcdf2398d3e787e657269">accept</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_1a78a32b69a8df38b4f4c543010467df0c">accept</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1SpawnCommand_1af74bbc5f5d852aa75b97fee99a9ffeb5">accept</reimplementedby>
@@ -113,23 +116,29 @@ Override this method in derived commands to enable dispatch to specialized handl
 </para>
     </detaileddescription>
     <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::mechanics::scoring::commands::UpdateScoreCommand</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1commands_1_1UpdateScoreCommand"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
       <node id="1">
         <label>helios::engine::runtime::messaging::command::WorldCommand</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand"/>
       </node>
-      <node id="2">
+      <node id="3">
         <label>helios::engine::runtime::spawn::commands::DespawnCommand</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1DespawnCommand"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="3">
+      <node id="4">
         <label>helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="4">
+      <node id="5">
         <label>helios::engine::runtime::spawn::commands::SpawnCommand</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1SpawnCommand"/>
         <childnode refid="1" relation="public-inheritance">

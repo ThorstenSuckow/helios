@@ -14,15 +14,16 @@
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>all<sp/>building<sp/>blocks<sp/>for<sp/>implementing<sp/>combat<sp/>mechanics<sp/>such<sp/>as<sp/>aiming,<sp/>shooting,<sp/>and<sp/>projectile<sp/>spawning.</highlight></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>all<sp/>building<sp/>blocks<sp/>for<sp/>implementing<sp/>combat<sp/>mechanics<sp/>such<sp/>as<sp/>aiming,<sp/>shooting,<sp/>projectile<sp/>spawning,<sp/>and<sp/>attack<sp/>attribution.</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Submodules</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">|<sp/>Submodule<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|-----------|---------|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`commands/`<sp/>|<sp/>Commands<sp/>for<sp/>combat<sp/>actions<sp/>(ShootCommand,<sp/>Aim2DCommand)<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`components/`<sp/>|<sp/>Data<sp/>containers<sp/>for<sp/>combat<sp/>state<sp/>(aiming<sp/>direction,<sp/>cooldowns,<sp/>projectile<sp/>config)<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`components/`<sp/>|<sp/>Data<sp/>containers<sp/>for<sp/>combat<sp/>state<sp/>(aiming,<sp/>cooldowns,<sp/>attack<sp/>tracking)<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`systems/`<sp/>|<sp/>ECS<sp/>systems<sp/>for<sp/>processing<sp/>combat<sp/>logic<sp/>(ProjectileSpawnSystem)<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`types/`<sp/>|<sp/>Combat<sp/>data<sp/>types<sp/>(AttackContext)<sp/>|</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Key<sp/>Classes</highlight></codeline>
 <codeline></codeline>
@@ -30,6 +31,8 @@
 <codeline><highlight class="normal">|-------|---------|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`Aim2DComponent`<sp/>|<sp/>Stores<sp/>aiming<sp/>direction<sp/>and<sp/>fire<sp/>frequency<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`ShootComponent`<sp/>|<sp/>Weapon<sp/>cooldown,<sp/>spawn<sp/>profile<sp/>reference,<sp/>emitter<sp/>state<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`LastAttackerComponent`<sp/>|<sp/>Tracks<sp/>last<sp/>entity<sp/>that<sp/>attacked<sp/>this<sp/>entity<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`AttackContext`<sp/>|<sp/>Data<sp/>struct<sp/>with<sp/>attacker<sp/>info<sp/>for<sp/>kill<sp/>attribution<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`Aim2DCommand`<sp/>|<sp/>Updates<sp/>aim<sp/>direction<sp/>from<sp/>input<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`ShootCommand`<sp/>|<sp/>Triggers<sp/>projectile<sp/>spawn<sp/>when<sp/>cooldown<sp/>allows<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`ProjectileSpawnSystem`<sp/>|<sp/>Reads<sp/>shoot<sp/>state<sp/>and<sp/>enqueues<sp/>spawn<sp/>commands<sp/>|</highlight></codeline>
@@ -43,13 +46,19 @@
 <codeline><highlight class="normal">3.<sp/>`ProjectileSpawnSystem`<sp/>reads<sp/>component<sp/>state<sp/>and<sp/>generates<sp/>`SpawnCommand`</highlight></codeline>
 <codeline><highlight class="normal">4.<sp/>Spawn<sp/>system<sp/>handles<sp/>actual<sp/>projectile<sp/>creation<sp/>via<sp/>pool<sp/>and<sp/>profile</highlight></codeline>
 <codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Attack<sp/>Attribution<sp/>Flow</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">1.<sp/>`DamageOnCollisionSystem`<sp/>applies<sp/>damage<sp/>and<sp/>updates<sp/>`LastAttackerComponent`</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>`HealthUpdateSystem`<sp/>detects<sp/>death<sp/>and<sp/>publishes<sp/>`DeathEvent`<sp/>with<sp/>`AttackContext`</highlight></codeline>
+<codeline><highlight class="normal">3.<sp/>`CombatScoringSystem`<sp/>reads<sp/>`DeathEvent`<sp/>and<sp/>awards<sp/>score<sp/>to<sp/>attacker</highlight></codeline>
+<codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
 <codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
 <codeline><highlight class="normal">@namespace<sp/>helios::engine::mechanics::combat</highlight></codeline>
 <codeline><highlight class="normal">@brief<sp/>Combat-related<sp/>gameplay<sp/>systems,<sp/>components,<sp/>and<sp/>commands.</highlight></codeline>
-<codeline><highlight class="normal">@details<sp/>This<sp/>namespace<sp/>contains<sp/>the<sp/>combat<sp/>layer<sp/>of<sp/>the<sp/>gameplay<sp/>system.<sp/>It<sp/>includes<sp/>components<sp/>for<sp/>storing<sp/>weapon<sp/>and<sp/>aiming<sp/>state,<sp/>commands<sp/>for<sp/>translating<sp/>input<sp/>into<sp/>combat<sp/>actions,<sp/>and<sp/>systems<sp/>for<sp/>spawning<sp/>projectiles<sp/>based<sp/>on<sp/>combat<sp/>state.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>This<sp/>namespace<sp/>contains<sp/>the<sp/>combat<sp/>layer<sp/>of<sp/>the<sp/>gameplay<sp/>system.<sp/>It<sp/>includes<sp/>components<sp/>for<sp/>storing<sp/>weapon<sp/>and<sp/>aiming<sp/>state,<sp/>commands<sp/>for<sp/>translating<sp/>input<sp/>into<sp/>combat<sp/>actions,<sp/>systems<sp/>for<sp/>spawning<sp/>projectiles,<sp/>and<sp/>types<sp/>for<sp/>attack<sp/>attribution.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
 <codeline></codeline>
     </programlisting>

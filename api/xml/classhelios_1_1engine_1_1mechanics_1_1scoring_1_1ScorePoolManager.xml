@@ -1,0 +1,295 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::mechanics::scoring::ScorePoolManager</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" prot="public" virt="non-virtual">helios::engine::runtime::world::Manager</basecompoundref>
+    <basecompoundref refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler" prot="public" virt="non-virtual">helios::engine::mechanics::scoring::ScoreCommandHandler</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a2af5f17fef387546d5a2e3d03ebb98e8" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePool" kindref="compound">ScorePool</ref> &gt;</type>
+        <definition>std::vector&lt;ScorePool&gt; helios::engine::mechanics::scoring::ScorePoolManager::pools_</definition>
+        <argsstring></argsstring>
+        <name>pools_</name>
+        <qualifiedname>helios::engine::mechanics::scoring::ScorePoolManager::pools_</qualifiedname>
+        <briefdescription>
+<para>Collection of score pools managed by this manager. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/mechanics/scoring/ScorePoolManager.ixx" line="48" column="21" bodyfile="/tmp/h/include/helios/engine/mechanics/scoring/ScorePoolManager.ixx" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1aa34229b674e0da187b8c56c6cc90dfd0" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structhelios_1_1engine_1_1mechanics_1_1scoring_1_1types_1_1ScoreValueContext" kindref="compound">helios::engine::mechanics::scoring::types::ScoreValueContext</ref> &gt;</type>
+        <definition>std::vector&lt;helios::engine::mechanics::scoring::types::ScoreValueContext&gt; helios::engine::mechanics::scoring::ScorePoolManager::scores_</definition>
+        <argsstring></argsstring>
+        <name>scores_</name>
+        <qualifiedname>helios::engine::mechanics::scoring::ScorePoolManager::scores_</qualifiedname>
+        <briefdescription>
+<para>Pending score contexts to be processed on flush. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/mechanics/scoring/ScorePoolManager.ixx" line="53" column="21" bodyfile="/tmp/h/include/helios/engine/mechanics/scoring/ScorePoolManager.ixx" bodystart="53" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a055dd5eeddf3e34a2663fb0017b2f041" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePool" kindref="compound">ScorePool</ref> &amp;</type>
+        <definition>ScorePool &amp; helios::engine::mechanics::scoring::ScorePoolManager::addScorePool</definition>
+        <argsstring>(helios::engine::core::data::ScorePoolId scorePoolId) noexcept</argsstring>
+        <name>addScorePool</name>
+        <qualifiedname>helios::engine::mechanics::scoring::ScorePoolManager::addScorePool</qualifiedname>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1core_1_1data_1_1ScorePoolId" kindref="compound">helios::engine::core::data::ScorePoolId</ref></type>
+          <declname>scorePoolId</declname>
+        </param>
+        <briefdescription>
+<para>Creates and registers a new score pool. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>scorePoolId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Unique identifier for the new pool.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to the newly created <ref refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePool" kindref="compound">ScorePool</ref>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/mechanics/scoring/ScorePoolManager.ixx" line="66" column="19" bodyfile="/tmp/h/include/helios/engine/mechanics/scoring/ScorePoolManager.ixx" bodystart="66" bodyend="73"/>
+        <references refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a68108b524ba7d30d4c281c05c777e3c0" compoundref="ScorePoolManager_8ixx" startline="83" endline="94">scorePool</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a68108b524ba7d30d4c281c05c777e3c0" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePool" kindref="compound">ScorePool</ref> *</type>
+        <definition>ScorePool * helios::engine::mechanics::scoring::ScorePoolManager::scorePool</definition>
+        <argsstring>(const helios::engine::core::data::ScorePoolId scorePoolId) noexcept</argsstring>
+        <name>scorePool</name>
+        <qualifiedname>helios::engine::mechanics::scoring::ScorePoolManager::scorePool</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1ScorePoolId" kindref="compound">helios::engine::core::data::ScorePoolId</ref></type>
+          <declname>scorePoolId</declname>
+        </param>
+        <briefdescription>
+<para>Retrieves a score pool by ID. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>scorePoolId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ID of the pool to find.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to the <ref refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePool" kindref="compound">ScorePool</ref>, or nullptr if not found. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/mechanics/scoring/ScorePoolManager.ixx" line="83" column="20" bodyfile="/tmp/h/include/helios/engine/mechanics/scoring/ScorePoolManager.ixx" bodystart="83" bodyend="94"/>
+        <references refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a68108b524ba7d30d4c281c05c777e3c0" compoundref="ScorePoolManager_8ixx" startline="83" endline="94">scorePool</references>
+        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a055dd5eeddf3e34a2663fb0017b2f041" compoundref="ScorePoolManager_8ixx" startline="66" endline="73">addScorePool</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a68108b524ba7d30d4c281c05c777e3c0" compoundref="ScorePoolManager_8ixx" startline="83" endline="94">scorePool</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1ScoreObserverSystem_1a346f8e8c52e95e96ae83e0130ce9a653" compoundref="ScoreObserverSystem_8ixx" startline="55" endline="78">helios::engine::mechanics::scoring::systems::ScoreObserverSystem::update</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a05625cf859f18873e47f79e7e9f9816e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::mechanics::scoring::ScorePoolManager::flush</definition>
+        <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld, helios::engine::runtime::world::UpdateContext &amp;update_context) noexcept override</argsstring>
+        <name>flush</name>
+        <qualifiedname>helios::engine::mechanics::scoring::ScorePoolManager::flush</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a290b20a4d512d096650dc187f1f3e940">flush</reimplements>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>update_context</declname>
+        </param>
+        <briefdescription>
+<para>Flushes pending score updates to their respective pools. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Processes all pending ScoreValueContext entries and adds them to the appropriate score pools based on their scorePoolId.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the game world. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>update_context</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the update context. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/mechanics/scoring/ScorePoolManager.ixx" line="106" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/scoring/ScorePoolManager.ixx" bodystart="106" bodyend="123"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1ac30bf7894a4fd962ca9e67c4ca02f395" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::mechanics::scoring::ScorePoolManager::submit</definition>
+        <argsstring>(const helios::engine::mechanics::scoring::commands::UpdateScoreCommand &amp;updateScoreCommand) noexcept override</argsstring>
+        <name>submit</name>
+        <qualifiedname>helios::engine::mechanics::scoring::ScorePoolManager::submit</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler_1afe94066de66d4fdde2a84b530c2cc8b5">submit</reimplements>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1commands_1_1UpdateScoreCommand" kindref="compound">helios::engine::mechanics::scoring::commands::UpdateScoreCommand</ref> &amp;</type>
+          <declname>updateScoreCommand</declname>
+        </param>
+        <briefdescription>
+<para>Submits a score update command for processing. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updateScoreCommand</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The command containing score context.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the command was accepted. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/mechanics/scoring/ScorePoolManager.ixx" line="133" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/scoring/ScorePoolManager.ixx" bodystart="133" bodyend="139"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a04f62fb1b24bfc389acaa48fdd31293e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::mechanics::scoring::ScorePoolManager::init</definition>
+        <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld) override</argsstring>
+        <name>init</name>
+        <qualifiedname>helios::engine::mechanics::scoring::ScorePoolManager::init</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ae7e2cd7531de5ce1fdc1f4a179b70929">init</reimplements>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <briefdescription>
+<para>Initializes the manager and registers it as the score command handler. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the game world. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/mechanics/scoring/ScorePoolManager.ixx" line="146" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/scoring/ScorePoolManager.ixx" bodystart="146" bodyend="148"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a37b8248fc6f250140046bd81401853ef" compoundref="GameWorld_8ixx" startline="312" endline="320">helios::engine::runtime::world::GameWorld::registerScoreCommandHandler</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Manages score pools and processes score commands. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager" kindref="compound">ScorePoolManager</ref> is responsible for creating and managing score pools, and for handling score update commands. It implements both the Manager interface (for lifecycle management) and <ref refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler" kindref="compound">ScoreCommandHandler</ref> (for receiving score commands). </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>helios::engine::mechanics::scoring::ScoreCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::mechanics::scoring::ScorePoolManager</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios::engine::runtime::world::Manager</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="5">
+        <label>helios::engine::mechanics::scoring::ScoreCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::mechanics::scoring::ScorePoolManager</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>helios::engine::runtime::spawn::SpawnCommandHandlerRegistry</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandlerRegistry"/>
+      </node>
+      <node id="3">
+        <label>helios::engine::runtime::world::GameWorld</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>logger_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>scoreCommandHandler_</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>spawnCommandHandlerRegistry_</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios::engine::runtime::world::Manager</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>gameWorld_</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>helios::util::log::Logger</label>
+        <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
+      </node>
+    </collaborationgraph>
+    <location file="/tmp/h/include/helios/engine/mechanics/scoring/ScorePoolManager.ixx" line="42" column="5" bodyfile="/tmp/h/include/helios/engine/mechanics/scoring/ScorePoolManager.ixx" bodystart="43" bodyend="150"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a055dd5eeddf3e34a2663fb0017b2f041" prot="public" virt="non-virtual"><scope>helios::engine::mechanics::scoring::ScorePoolManager</scope><name>addScorePool</name></member>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a05625cf859f18873e47f79e7e9f9816e" prot="public" virt="virtual"><scope>helios::engine::mechanics::scoring::ScorePoolManager</scope><name>flush</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1aaa2bc033955a07d4d97592eb2f817659" prot="protected" virt="non-virtual"><scope>helios::engine::mechanics::scoring::ScorePoolManager</scope><name>gameWorld_</name></member>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a04f62fb1b24bfc389acaa48fdd31293e" prot="public" virt="virtual"><scope>helios::engine::mechanics::scoring::ScorePoolManager</scope><name>init</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ab0f750d777e2368c08fc413188673622" prot="public" virt="virtual"><scope>helios::engine::mechanics::scoring::ScorePoolManager</scope><name>onAdd</name></member>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a2af5f17fef387546d5a2e3d03ebb98e8" prot="private" virt="non-virtual"><scope>helios::engine::mechanics::scoring::ScorePoolManager</scope><name>pools_</name></member>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a68108b524ba7d30d4c281c05c777e3c0" prot="public" virt="non-virtual"><scope>helios::engine::mechanics::scoring::ScorePoolManager</scope><name>scorePool</name></member>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1aa34229b674e0da187b8c56c6cc90dfd0" prot="private" virt="non-virtual"><scope>helios::engine::mechanics::scoring::ScorePoolManager</scope><name>scores_</name></member>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1ac30bf7894a4fd962ca9e67c4ca02f395" prot="public" virt="virtual"><scope>helios::engine::mechanics::scoring::ScorePoolManager</scope><name>submit</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a116b5758bea5a39bbc0d24bc62bdcdd7" prot="public" virt="virtual"><scope>helios::engine::mechanics::scoring::ScorePoolManager</scope><name>~Manager</name></member>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler_1a57a07935f12d35eed7436d88933a3610" prot="public" virt="virtual"><scope>helios::engine::mechanics::scoring::ScorePoolManager</scope><name>~ScoreCommandHandler</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

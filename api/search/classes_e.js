@@ -1,26 +1,7 @@
 var searchData=
 [
-  ['radialdeadzonestrategy_0',['RadialDeadzoneStrategy',['../classhelios_1_1input_1_1gamepad_1_1RadialDeadzoneStrategy.html',1,'helios::input::gamepad']]],
-  ['random_1',['Random',['../classhelios_1_1util_1_1Random.html',1,'helios::util']]],
-  ['randomdirectioninitializer_2',['RandomDirectionInitializer',['../classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1RandomDirectionInitializer.html',1,'helios::engine::runtime::spawn::behavior::initializers']]],
-  ['randomspawnplacer_3',['RandomSpawnPlacer',['../classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1RandomSpawnPlacer.html',1,'helios::engine::runtime::spawn::behavior::placements']]],
-  ['readbuffer_4',['ReadBuffer',['../classhelios_1_1core_1_1buffer_1_1ReadBuffer.html',1,'helios::core::buffer']]],
-  ['readsource_5',['ReadSource',['../classhelios_1_1core_1_1buffer_1_1TypeIndexedDoubleBuffer_1_1ReadSource.html',1,'helios::core::buffer::TypeIndexedDoubleBuffer']]],
-  ['readwritebuffer_6',['ReadWriteBuffer',['../classhelios_1_1core_1_1buffer_1_1ReadWriteBuffer.html',1,'helios::core::buffer']]],
-  ['readwritedoublebuffer_7',['ReadWriteDoubleBuffer',['../classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer.html',1,'helios::core::buffer']]],
-  ['rectangle_8',['Rectangle',['../structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Rectangle.html',1,'helios::rendering::asset::shape::basic']]],
-  ['renderable_9',['Renderable',['../classhelios_1_1rendering_1_1Renderable.html',1,'helios::rendering']]],
-  ['renderablecomponent_10',['RenderableComponent',['../classhelios_1_1engine_1_1modules_1_1rendering_1_1renderable_1_1components_1_1RenderableComponent.html',1,'helios::engine::modules::rendering::renderable::components']]],
-  ['renderingbuilder_11',['RenderingBuilder',['../classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1RenderingBuilder.html',1,'helios::engine::builder::gameObject::builders']]],
-  ['renderingdevice_12',['RenderingDevice',['../classhelios_1_1rendering_1_1RenderingDevice.html',1,'helios::rendering']]],
-  ['renderpass_13',['RenderPass',['../classhelios_1_1rendering_1_1RenderPass.html',1,'helios::rendering']]],
-  ['renderpassfactory_14',['RenderPassFactory',['../classhelios_1_1rendering_1_1RenderPassFactory.html',1,'helios::rendering']]],
-  ['renderprototype_15',['RenderPrototype',['../classhelios_1_1rendering_1_1RenderPrototype.html',1,'helios::rendering']]],
-  ['renderqueue_16',['RenderQueue',['../classhelios_1_1rendering_1_1RenderQueue.html',1,'helios::rendering']]],
-  ['rendertarget_17',['RenderTarget',['../classhelios_1_1rendering_1_1RenderTarget.html',1,'helios::rendering']]],
-  ['requestedamountisavailablecondition_18',['RequestedAmountIsAvailableCondition',['../classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1conditions_1_1RequestedAmountIsAvailableCondition.html',1,'helios::engine::runtime::spawn::policy::conditions']]],
-  ['rhombus_19',['Rhombus',['../structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Rhombus.html',1,'helios::rendering::asset::shape::basic']]],
-  ['rotationstatecomponent_20',['RotationStateComponent',['../classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent.html',1,'helios::engine::modules::spatial::transform::components']]],
-  ['ruleconfig_21',['RuleConfig',['../structhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1RuleConfig.html',1,'helios::engine::runtime::spawn::scheduling']]],
-  ['ruleprocessor_22',['RuleProcessor',['../classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1RuleProcessor.html',1,'helios::engine::runtime::spawn::scheduling']]]
+  ['pass_0',['Pass',['../classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html',1,'helios::engine::runtime::gameloop']]],
+  ['passcommitlistener_1',['PassCommitListener',['../classhelios_1_1engine_1_1runtime_1_1gameloop_1_1PassCommitListener.html',1,'helios::engine::runtime::gameloop']]],
+  ['phase_2',['Phase',['../classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html',1,'helios::engine::runtime::gameloop']]],
+  ['projectilespawnsystem_3',['ProjectileSpawnSystem',['../classhelios_1_1engine_1_1mechanics_1_1combat_1_1systems_1_1ProjectileSpawnSystem.html',1,'helios::engine::mechanics::combat::systems']]]
 ];

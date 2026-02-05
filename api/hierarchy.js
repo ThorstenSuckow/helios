@@ -5,6 +5,7 @@ var hierarchy =
     [ "helios::app::Application", "classhelios_1_1app_1_1Application.html", [
       [ "helios::ext::glfw::app::GLFWApplication", "classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication.html", null ]
     ] ],
+    [ "helios::engine::mechanics::combat::types::AttackContext", "structhelios_1_1engine_1_1mechanics_1_1combat_1_1types_1_1AttackContext.html", null ],
     [ "helios::core::buffer::Buffer", "classhelios_1_1core_1_1buffer_1_1Buffer.html", [
       [ "helios::core::buffer::ReadWriteBuffer< T >", "classhelios_1_1core_1_1buffer_1_1ReadWriteBuffer.html", null ]
     ] ],
@@ -14,8 +15,29 @@ var hierarchy =
       [ "helios::engine::ecs::CloneableComponent< LevelBoundsBehaviorComponent >", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html", [
         [ "helios::engine::mechanics::bounds::components::LevelBoundsBehaviorComponent", "classhelios_1_1engine_1_1mechanics_1_1bounds_1_1components_1_1LevelBoundsBehaviorComponent.html", null ]
       ] ],
+      [ "helios::engine::ecs::CloneableComponent< LastAttackerComponent >", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html", [
+        [ "helios::engine::mechanics::combat::components::LastAttackerComponent", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent.html", null ]
+      ] ],
+      [ "helios::engine::ecs::CloneableComponent< DamageDealerComponent >", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html", [
+        [ "helios::engine::mechanics::damage::components::DamageDealerComponent", "classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1DamageDealerComponent.html", null ]
+      ] ],
+      [ "helios::engine::ecs::CloneableComponent< HealthComponent >", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html", [
+        [ "helios::engine::mechanics::health::components::HealthComponent", "classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent.html", null ]
+      ] ],
       [ "helios::engine::ecs::CloneableComponent< DelayedComponentEnabler >", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html", [
         [ "helios::engine::mechanics::lifecycle::components::DelayedComponentEnabler", "classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1DelayedComponentEnabler.html", null ]
+      ] ],
+      [ "helios::engine::ecs::CloneableComponent< ScoreObserverComponent >", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html", [
+        [ "helios::engine::mechanics::scoring::components::ScoreObserverComponent", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScoreObserverComponent.html", null ]
+      ] ],
+      [ "helios::engine::ecs::CloneableComponent< ScorePoolComponent >", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html", [
+        [ "helios::engine::mechanics::scoring::components::ScorePoolComponent", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScorePoolComponent.html", null ]
+      ] ],
+      [ "helios::engine::ecs::CloneableComponent< ScoreValueComponent< T > >", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html", [
+        [ "helios::engine::mechanics::scoring::components::ScoreValueComponent< T >", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScoreValueComponent.html", null ]
+      ] ],
+      [ "helios::engine::ecs::CloneableComponent< EmittedByComponent >", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html", [
+        [ "helios::engine::mechanics::spawn::components::EmittedByComponent", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1EmittedByComponent.html", null ]
       ] ],
       [ "helios::engine::ecs::CloneableComponent< SpawnedByProfileComponent >", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html", [
         [ "helios::engine::mechanics::spawn::components::SpawnedByProfileComponent", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent.html", null ]
@@ -65,15 +87,28 @@ var hierarchy =
       [ "helios::engine::ecs::CloneableComponent< TranslationStateComponent >", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html", [
         [ "helios::engine::modules::spatial::transform::components::TranslationStateComponent", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1TranslationStateComponent.html", null ]
       ] ],
+      [ "helios::engine::ecs::CloneableComponent< UiTextComponent >", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html", [
+        [ "helios::engine::modules::ui::widgets::components::UiTextComponent", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiTextComponent.html", null ]
+      ] ],
       [ "helios::engine::ecs::CloneableComponent< Derived >", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html", null ]
     ] ],
     [ "helios::engine::builder::gameObject::builders::CollisionBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1CollisionBuilder.html", null ],
     [ "helios::engine::builder::gameObject::builders::configs::CollisionConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1CollisionConfig.html", null ],
+    [ "helios::engine::modules::physics::collision::types::CollisionContext", "structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1_1CollisionContext.html", null ],
     [ "helios::util::Colors", "structhelios_1_1util_1_1Colors.html", null ],
+    [ "helios::engine::builder::gameObject::builders::CombatBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1CombatBuilder.html", null ],
+    [ "helios::engine::builder::gameObject::builders::configs::CombatConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1CombatConfig.html", null ],
     [ "helios::engine::runtime::messaging::command::CommandBuffer", "classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html", null ],
     [ "helios::engine::ecs::Component", "classhelios_1_1engine_1_1ecs_1_1Component.html", [
       [ "helios::engine::ecs::CloneableComponent< LevelBoundsBehaviorComponent >", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html", null ],
+      [ "helios::engine::ecs::CloneableComponent< LastAttackerComponent >", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html", null ],
+      [ "helios::engine::ecs::CloneableComponent< DamageDealerComponent >", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html", null ],
+      [ "helios::engine::ecs::CloneableComponent< HealthComponent >", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html", null ],
       [ "helios::engine::ecs::CloneableComponent< DelayedComponentEnabler >", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html", null ],
+      [ "helios::engine::ecs::CloneableComponent< ScoreObserverComponent >", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html", null ],
+      [ "helios::engine::ecs::CloneableComponent< ScorePoolComponent >", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html", null ],
+      [ "helios::engine::ecs::CloneableComponent< ScoreValueComponent< T > >", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html", null ],
+      [ "helios::engine::ecs::CloneableComponent< EmittedByComponent >", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html", null ],
       [ "helios::engine::ecs::CloneableComponent< SpawnedByProfileComponent >", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html", null ],
       [ "helios::engine::ecs::CloneableComponent< ChaseComponent >", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html", null ],
       [ "helios::engine::ecs::CloneableComponent< SpinComponent >", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html", null ],
@@ -90,9 +125,11 @@ var hierarchy =
       [ "helios::engine::ecs::CloneableComponent< RotationStateComponent >", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html", null ],
       [ "helios::engine::ecs::CloneableComponent< ScaleStateComponent >", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html", null ],
       [ "helios::engine::ecs::CloneableComponent< TranslationStateComponent >", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html", null ],
+      [ "helios::engine::ecs::CloneableComponent< UiTextComponent >", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html", null ],
       [ "helios::engine::ecs::CloneableComponent< Derived >", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html", null ],
       [ "helios::engine::mechanics::combat::components::Aim2DComponent", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1Aim2DComponent.html", null ],
-      [ "helios::engine::mechanics::combat::components::ShootComponent", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent.html", null ]
+      [ "helios::engine::mechanics::combat::components::ShootComponent", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent.html", null ],
+      [ "helios::engine::modules::ui::transform::components::UiTransformComponent", "classhelios_1_1engine_1_1modules_1_1ui_1_1transform_1_1components_1_1UiTransformComponent.html", null ]
     ] ],
     [ "helios::engine::core::data::ComponentTypeId", "classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId.html", null ],
     [ "helios::app::controller::Controller", "classhelios_1_1app_1_1controller_1_1Controller.html", [
@@ -103,6 +140,7 @@ var hierarchy =
     [ "helios::input::gamepad::DeadzoneStrategy", "classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy.html", [
       [ "helios::input::gamepad::RadialDeadzoneStrategy", "classhelios_1_1input_1_1gamepad_1_1RadialDeadzoneStrategy.html", null ]
     ] ],
+    [ "helios::engine::mechanics::health::events::DeathEvent", "classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1DeathEvent.html", null ],
     [ "helios::event::Dispatcher", "classhelios_1_1event_1_1Dispatcher.html", null ],
     [ "helios::core::buffer::DoubleBuffer", "classhelios_1_1core_1_1buffer_1_1DoubleBuffer.html", [
       [ "helios::core::buffer::ReadWriteDoubleBuffer< T >", "classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer.html", null ]
@@ -150,9 +188,14 @@ var hierarchy =
     [ "std::hash&lt; helios::engine::core::data::ComponentTypeId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ComponentTypeId_01_4.html", null ],
     [ "std::hash&lt; helios::engine::core::data::FontId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1FontId_01_4.html", null ],
     [ "std::hash&lt; helios::engine::core::data::GameObjectPoolId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId_01_4.html", null ],
+    [ "std::hash&lt; helios::engine::core::data::ScorePoolId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ScorePoolId_01_4.html", null ],
+    [ "std::hash&lt; helios::engine::core::data::ScoreTypeId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ScoreTypeId_01_4.html", null ],
     [ "std::hash&lt; helios::engine::core::data::SpawnProfileId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1SpawnProfileId_01_4.html", null ],
     [ "std::hash&lt; helios::engine::core::data::SpawnRuleId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1SpawnRuleId_01_4.html", null ],
+    [ "std::hash&lt; helios::engine::core::data::ViewportId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ViewportId_01_4.html", null ],
     [ "std::hash&lt; helios::util::Guid &gt;", "structstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4.html", null ],
+    [ "helios::engine::builder::gameObject::builders::HealthBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1HealthBuilder.html", null ],
+    [ "helios::engine::builder::gameObject::builders::configs::HealthConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1HealthConfig.html", null ],
     [ "helios::ext::imgui::ImGuiBackend", "classhelios_1_1ext_1_1imgui_1_1ImGuiBackend.html", [
       [ "helios::ext::imgui::ImGuiGlfwOpenGLBackend", "classhelios_1_1ext_1_1imgui_1_1ImGuiGlfwOpenGLBackend.html", null ]
     ] ],
@@ -182,6 +225,7 @@ var hierarchy =
       [ "helios::util::log::ConsoleSink", "classhelios_1_1util_1_1log_1_1ConsoleSink.html", null ]
     ] ],
     [ "helios::engine::runtime::world::Manager", "classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html", [
+      [ "helios::engine::mechanics::scoring::ScorePoolManager", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager.html", null ],
       [ "helios::engine::runtime::pooling::GameObjectPoolManager", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager.html", null ],
       [ "helios::engine::runtime::spawn::SpawnManager", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html", null ]
     ] ],
@@ -201,6 +245,8 @@ var hierarchy =
     [ "helios::engine::builder::gameObject::builders::MotionBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1MotionBuilder.html", null ],
     [ "helios::engine::builder::gameObject::builders::configs::Move2DConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1Move2DConfig.html", null ],
     [ "helios::core::types::no_init_t", "structhelios_1_1core_1_1types_1_1no__init__t.html", null ],
+    [ "helios::engine::builder::gameObject::builders::ObserverBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1ObserverBuilder.html", null ],
+    [ "helios::engine::builder::gameObject::builders::configs::ObserverConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ObserverConfig.html", null ],
     [ "helios::ext::opengl::rendering::shader::OpenGLUniformLocationMap", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLUniformLocationMap.html", null ],
     [ "helios::engine::runtime::gameloop::Pass", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html", null ],
     [ "helios::engine::runtime::gameloop::PassCommitListener", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1PassCommitListener.html", [
@@ -235,6 +281,20 @@ var hierarchy =
     ] ],
     [ "helios::engine::builder::gameObject::builders::configs::SceneNodeConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1SceneNodeConfig.html", null ],
     [ "helios::engine::runtime::spawn::scheduling::ScheduledSpawnPlan", "structhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1ScheduledSpawnPlan.html", null ],
+    [ "helios::engine::mechanics::scoring::types::Score", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1types_1_1Score.html", [
+      [ "helios::engine::mechanics::scoring::types::KillReward", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1types_1_1KillReward.html", null ]
+    ] ],
+    [ "helios::engine::mechanics::scoring::ScoreCommandHandler", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler.html", [
+      [ "helios::engine::mechanics::scoring::ScorePoolManager", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager.html", null ]
+    ] ],
+    [ "helios::engine::mechanics::scoring::ScorePool", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePool.html", null ],
+    [ "helios::engine::builder::gameObject::builders::configs::ScorePoolConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ScorePoolConfig.html", null ],
+    [ "helios::engine::core::data::ScorePoolId", "structhelios_1_1engine_1_1core_1_1data_1_1ScorePoolId.html", null ],
+    [ "helios::engine::mechanics::scoring::ScorePoolSnapshot", "structhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolSnapshot.html", null ],
+    [ "helios::engine::core::data::ScoreTypeId", "classhelios_1_1engine_1_1core_1_1data_1_1ScoreTypeId.html", null ],
+    [ "helios::engine::builder::gameObject::builders::configs::ScoreValueConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ScoreValueConfig.html", null ],
+    [ "helios::engine::mechanics::scoring::types::ScoreValueContext", "structhelios_1_1engine_1_1mechanics_1_1scoring_1_1types_1_1ScoreValueContext.html", null ],
+    [ "helios::engine::builder::gameObject::builders::ScoringBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1ScoringBuilder.html", null ],
     [ "helios::rendering::shader::Shader", "classhelios_1_1rendering_1_1shader_1_1Shader.html", [
       [ "helios::ext::opengl::rendering::shader::OpenGLShader", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader.html", null ]
     ] ],
@@ -248,7 +308,6 @@ var hierarchy =
       [ "helios::rendering::asset::shape::basic::Rhombus", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Rhombus.html", null ],
       [ "helios::rendering::asset::shape::basic::Triangle", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Triangle.html", null ]
     ] ],
-    [ "helios::engine::builder::gameObject::builders::ShootingBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1ShootingBuilder.html", null ],
     [ "helios::scene::Snapshot", "classhelios_1_1scene_1_1Snapshot.html", null ],
     [ "helios::scene::SnapshotItem", "structhelios_1_1scene_1_1SnapshotItem.html", null ],
     [ "helios::engine::modules::physics::collision::events::SolidCollisionEvent", "classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1events_1_1SolidCollisionEvent.html", null ],
@@ -312,6 +371,7 @@ var hierarchy =
     ] ],
     [ "helios::rendering::text::TextLayout", "structhelios_1_1rendering_1_1text_1_1TextLayout.html", null ],
     [ "helios::rendering::text::TextMesh", "classhelios_1_1rendering_1_1text_1_1TextMesh.html", null ],
+    [ "helios::engine::builder::gameObject::builders::configs::TextRenderableConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig.html", null ],
     [ "helios::rendering::text::TextRenderCommand", "classhelios_1_1rendering_1_1text_1_1TextRenderCommand.html", null ],
     [ "helios::rendering::text::TextRenderer", "classhelios_1_1rendering_1_1text_1_1TextRenderer.html", [
       [ "helios::ext::opengl::rendering::OpenGLGlyphTextRenderer", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLGlyphTextRenderer.html", null ]
@@ -327,13 +387,20 @@ var hierarchy =
     [ "helios::core::buffer::TypeIndexedReadWriteBuffer&lt; Indexer &gt;", "classhelios_1_1core_1_1buffer_1_1TypeIndexedReadWriteBuffer.html", null ],
     [ "helios::core::data::TypeIndexer&lt; Group &gt;", "classhelios_1_1core_1_1data_1_1TypeIndexer.html", null ],
     [ "helios::rendering::text::TypeSetter", "classhelios_1_1rendering_1_1text_1_1TypeSetter.html", null ],
+    [ "helios::engine::builder::gameObject::builders::UiTransformBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1UiTransformBuilder.html", null ],
+    [ "helios::engine::builder::gameObject::builders::configs::UiTransformConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1UiTransformConfig.html", null ],
     [ "helios::rendering::shader::UniformValueMap", "classhelios_1_1rendering_1_1shader_1_1UniformValueMap.html", null ],
     [ "helios::engine::ecs::Updatable", "classhelios_1_1engine_1_1ecs_1_1Updatable.html", [
       [ "helios::engine::ecs::System", "classhelios_1_1engine_1_1ecs_1_1System.html", [
         [ "helios::engine::mechanics::bounds::systems::LevelBoundsBehaviorSystem", "classhelios_1_1engine_1_1mechanics_1_1bounds_1_1systems_1_1LevelBoundsBehaviorSystem.html", null ],
         [ "helios::engine::mechanics::combat::systems::ProjectileSpawnSystem", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1systems_1_1ProjectileSpawnSystem.html", null ],
+        [ "helios::engine::mechanics::damage::systems::DamageOnCollisionSystem", "classhelios_1_1engine_1_1mechanics_1_1damage_1_1systems_1_1DamageOnCollisionSystem.html", null ],
+        [ "helios::engine::mechanics::health::systems::HealthUpdateSystem", "classhelios_1_1engine_1_1mechanics_1_1health_1_1systems_1_1HealthUpdateSystem.html", null ],
         [ "helios::engine::mechanics::input::systems::TwinStickInputSystem", "classhelios_1_1engine_1_1mechanics_1_1input_1_1systems_1_1TwinStickInputSystem.html", null ],
         [ "helios::engine::mechanics::lifecycle::systems::DelayedComponentEnablerSystem", "classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1DelayedComponentEnablerSystem.html", null ],
+        [ "helios::engine::mechanics::scoring::systems::CombatScoringSystem", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1CombatScoringSystem.html", null ],
+        [ "helios::engine::mechanics::scoring::systems::ScoreObserverClearSystem", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1ScoreObserverClearSystem.html", null ],
+        [ "helios::engine::mechanics::scoring::systems::ScoreObserverSystem", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1ScoreObserverSystem.html", null ],
         [ "helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem.html", null ],
         [ "helios::engine::modules::ai::systems::ChaseSystem", "classhelios_1_1engine_1_1modules_1_1ai_1_1systems_1_1ChaseSystem.html", null ],
         [ "helios::engine::modules::physics::collision::systems::BoundsUpdateSystem", "classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1BoundsUpdateSystem.html", null ],
@@ -346,7 +413,10 @@ var hierarchy =
         [ "helios::engine::modules::spatial::transform::systems::ComposeTransformSystem", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1systems_1_1ComposeTransformSystem.html", null ],
         [ "helios::engine::modules::spatial::transform::systems::ScaleSystem", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1systems_1_1ScaleSystem.html", null ],
         [ "helios::engine::modules::spatial::transform::systems::TransformClearSystem", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1systems_1_1TransformClearSystem.html", null ],
-        [ "helios::engine::modules::systems::scene::SceneSyncSystem", "classhelios_1_1engine_1_1modules_1_1systems_1_1scene_1_1SceneSyncSystem.html", null ]
+        [ "helios::engine::modules::systems::scene::SceneSyncSystem", "classhelios_1_1engine_1_1modules_1_1systems_1_1scene_1_1SceneSyncSystem.html", null ],
+        [ "helios::engine::modules::ui::binding::systems::Score2UiTextUpdateSystem", "classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1Score2UiTextUpdateSystem.html", null ],
+        [ "helios::engine::modules::ui::transform::systems::UiTransformSystem", "classhelios_1_1engine_1_1modules_1_1ui_1_1transform_1_1systems_1_1UiTransformSystem.html", null ],
+        [ "helios::engine::modules::ui::widgets::systems::UiTextBoundsUpdateSystem", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1UiTextBoundsUpdateSystem.html", null ]
       ] ]
     ] ],
     [ "helios::engine::runtime::world::UpdateContext", "structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html", null ],
@@ -355,7 +425,9 @@ var hierarchy =
     [ "helios::math::vec4&lt; T &gt;", "structhelios_1_1math_1_1vec4.html", null ],
     [ "helios::rendering::Vertex", "structhelios_1_1rendering_1_1Vertex.html", null ],
     [ "helios::rendering::Viewport", "classhelios_1_1rendering_1_1Viewport.html", null ],
+    [ "helios::engine::core::data::ViewportId", "structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html", null ],
     [ "helios::rendering::ViewportKey", "structhelios_1_1rendering_1_1ViewportKey.html", null ],
+    [ "helios::rendering::ViewportSnapshot", "structhelios_1_1rendering_1_1ViewportSnapshot.html", null ],
     [ "helios::engine::builder::gameObject::builders::configs::WeaponConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1WeaponConfig.html", null ],
     [ "helios::window::Window", "classhelios_1_1window_1_1Window.html", [
       [ "helios::ext::glfw::window::GLFWWindow", "classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow.html", null ]
@@ -364,11 +436,15 @@ var hierarchy =
       [ "helios::ext::glfw::window::GLFWWindowConfig", "structhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindowConfig.html", null ]
     ] ],
     [ "helios::engine::runtime::messaging::command::WorldCommand", "classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand.html", [
+      [ "helios::engine::mechanics::scoring::commands::UpdateScoreCommand", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1commands_1_1UpdateScoreCommand.html", null ],
       [ "helios::engine::runtime::spawn::commands::DespawnCommand", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1DespawnCommand.html", null ],
       [ "helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand.html", null ],
       [ "helios::engine::runtime::spawn::commands::SpawnCommand", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1SpawnCommand.html", null ]
     ] ],
     [ "helios::engine::runtime::messaging::command::WorldCommandDispatcher", "classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher.html", [
+      [ "helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher< helios::engine::mechanics::scoring::commands::UpdateScoreCommand >", "classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher.html", [
+        [ "helios::engine::mechanics::scoring::ScoreCommandDispatcher", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandDispatcher.html", null ]
+      ] ],
       [ "helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher< helios::engine::runtime::spawn::commands::DespawnCommand >", "classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher.html", [
         [ "helios::engine::runtime::spawn::dispatcher::DespawnCommandDispatcher", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1DespawnCommandDispatcher.html", null ]
       ] ],

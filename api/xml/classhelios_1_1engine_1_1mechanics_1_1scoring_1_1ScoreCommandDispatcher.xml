@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandDispatcher" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>helios::engine::mechanics::scoring::ScoreCommandDispatcher</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher" prot="public" virt="non-virtual">helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; helios::engine::mechanics::scoring::commands::UpdateScoreCommand &gt;</basecompoundref>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandDispatcher_1ad61ed3888db1fb4368f766b38fffb598" prot="protected" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::mechanics::scoring::ScoreCommandDispatcher::dispatchTyped</definition>
+        <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld, const helios::engine::mechanics::scoring::commands::UpdateScoreCommand &amp;command) noexcept override</argsstring>
+        <name>dispatchTyped</name>
+        <qualifiedname>helios::engine::mechanics::scoring::ScoreCommandDispatcher::dispatchTyped</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher_1ae99b8d4dc66acf8340000f97c0fdd16d">dispatchTyped</reimplements>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1commands_1_1UpdateScoreCommand" kindref="compound">helios::engine::mechanics::scoring::commands::UpdateScoreCommand</ref> &amp;</type>
+          <declname>command</declname>
+        </param>
+        <briefdescription>
+<para>Dispatches the command to the game world&apos;s score handler. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the game world. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>command</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The UpdateScoreCommand to dispatch. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/mechanics/scoring/ScoreCommandDispatcher.ixx" line="37" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/scoring/ScoreCommandDispatcher.ixx" bodystart="37" bodyend="47"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandDispatcher_1a2c87a83ecd307aae34d7cf9cc0c0e630" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::mechanics::scoring::ScoreCommandDispatcher::ScoreCommandDispatcher</definition>
+        <argsstring>()=default</argsstring>
+        <name>ScoreCommandDispatcher</name>
+        <qualifiedname>helios::engine::mechanics::scoring::ScoreCommandDispatcher::ScoreCommandDispatcher</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/mechanics/scoring/ScoreCommandDispatcher.ixx" line="52" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Dispatcher that routes UpdateScoreCommand to the registered <ref refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler" kindref="compound">ScoreCommandHandler</ref>. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Extends TypedWorldCommandDispatcher to handle score-specific commands. When a command is dispatched, it forwards the score context to the GameWorld&apos;s registered <ref refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler" kindref="compound">ScoreCommandHandler</ref>. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>helios::engine::mechanics::scoring::ScoreCommandDispatcher</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandDispatcher"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; helios::engine::mechanics::scoring::commands::UpdateScoreCommand &gt;</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::runtime::messaging::command::WorldCommandDispatcher</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>helios::engine::mechanics::scoring::ScoreCommandDispatcher</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandDispatcher"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; helios::engine::mechanics::scoring::commands::UpdateScoreCommand &gt;</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::runtime::messaging::command::WorldCommandDispatcher</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher"/>
+      </node>
+    </collaborationgraph>
+    <location file="/tmp/h/include/helios/engine/mechanics/scoring/ScoreCommandDispatcher.ixx" line="26" column="5" bodyfile="/tmp/h/include/helios/engine/mechanics/scoring/ScoreCommandDispatcher.ixx" bodystart="27" bodyend="54"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher_1ada9b7af011e293a1d5712a1134bdf66d" prot="public" virt="virtual"><scope>helios::engine::mechanics::scoring::ScoreCommandDispatcher</scope><name>dispatch</name></member>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandDispatcher_1ad61ed3888db1fb4368f766b38fffb598" prot="protected" virt="virtual"><scope>helios::engine::mechanics::scoring::ScoreCommandDispatcher</scope><name>dispatchTyped</name></member>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandDispatcher_1a2c87a83ecd307aae34d7cf9cc0c0e630" prot="public" virt="non-virtual"><scope>helios::engine::mechanics::scoring::ScoreCommandDispatcher</scope><name>ScoreCommandDispatcher</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher_1a99cfdc9890b444664a9ae3a98e8b6d1f" prot="public" virt="virtual"><scope>helios::engine::mechanics::scoring::ScoreCommandDispatcher</scope><name>~WorldCommandDispatcher</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

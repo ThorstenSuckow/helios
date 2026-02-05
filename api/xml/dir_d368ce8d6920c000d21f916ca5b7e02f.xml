@@ -5,18 +5,19 @@
     <innerdir refid="dir_7d3bcdf99a77c1f991d9debddb7a154b">commands</innerdir>
     <innerdir refid="dir_991442008f2dac028067584555d54581">components</innerdir>
     <innerdir refid="dir_9f8a06593596762c781b6162de719b91">systems</innerdir>
+    <innerdir refid="dir_66f29c90d119077444d3c4255baff55d">types</innerdir>
     <innerfile refid="helios_2engine_2mechanics_2combat_2__module_8ixx">helios/engine/mechanics/combat/_module.ixx</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_d368ce8d6920c000d21f916ca5b7e02f_1autotoc_md148">
+<sect1 id="dir_d368ce8d6920c000d21f916ca5b7e02f_1autotoc_md151">
 <title>helios::engine::mechanics::combat</title><para>Combat-related gameplay systems, components, and commands.</para>
 </sect1>
-<sect1 id="dir_d368ce8d6920c000d21f916ca5b7e02f_1autotoc_md149">
-<title>Overview</title><para>This module provides all building blocks for implementing combat mechanics such as aiming, shooting, and projectile spawning.</para>
+<sect1 id="dir_d368ce8d6920c000d21f916ca5b7e02f_1autotoc_md152">
+<title>Overview</title><para>This module provides all building blocks for implementing combat mechanics such as aiming, shooting, projectile spawning, and attack attribution.</para>
 </sect1>
-<sect1 id="dir_d368ce8d6920c000d21f916ca5b7e02f_1autotoc_md150">
-<title>Submodules</title><para><table rows="4" cols="2"><row>
+<sect1 id="dir_d368ce8d6920c000d21f916ca5b7e02f_1autotoc_md153">
+<title>Submodules</title><para><table rows="5" cols="2"><row>
 <entry thead="yes"><para>Submodule  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
 </entry></row>
@@ -26,17 +27,21 @@
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>components/</computeroutput>  </para>
-</entry><entry thead="no"><para>Data containers for combat state (aiming direction, cooldowns, projectile config)  </para>
+</entry><entry thead="no"><para>Data containers for combat state (aiming, cooldowns, attack tracking)  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>systems/</computeroutput>  </para>
 </entry><entry thead="no"><para>ECS systems for processing combat logic (ProjectileSpawnSystem)  </para>
 </entry></row>
+<row>
+<entry thead="no"><para><computeroutput>types/</computeroutput>  </para>
+</entry><entry thead="no"><para>Combat data types (AttackContext)  </para>
+</entry></row>
 </table>
 </para>
 </sect1>
-<sect1 id="dir_d368ce8d6920c000d21f916ca5b7e02f_1autotoc_md151">
-<title>Key Classes</title><para><table rows="6" cols="2"><row>
+<sect1 id="dir_d368ce8d6920c000d21f916ca5b7e02f_1autotoc_md154">
+<title>Key Classes</title><para><table rows="8" cols="2"><row>
 <entry thead="yes"><para>Class  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
 </entry></row>
@@ -47,6 +52,14 @@
 <row>
 <entry thead="no"><para><computeroutput>ShootComponent</computeroutput>  </para>
 </entry><entry thead="no"><para>Weapon cooldown, spawn profile reference, emitter state  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>LastAttackerComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Tracks last entity that attacked this entity  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>AttackContext</computeroutput>  </para>
+</entry><entry thead="no"><para>Data struct with attacker info for kill attribution  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>Aim2DCommand</computeroutput>  </para>
@@ -63,14 +76,17 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_d368ce8d6920c000d21f916ca5b7e02f_1autotoc_md152">
+<sect1 id="dir_d368ce8d6920c000d21f916ca5b7e02f_1autotoc_md155">
 <title>Architecture</title><para>Combat follows the command pattern integrated with the spawn system:</para>
 <para>1. Input systems generate <computeroutput>ShootCommand</computeroutput> and <computeroutput>Aim2DCommand</computeroutput> 2. Commands update <computeroutput>ShootComponent</computeroutput> and <computeroutput>Aim2DComponent</computeroutput> state 3. <computeroutput>ProjectileSpawnSystem</computeroutput> reads component state and generates <computeroutput>SpawnCommand</computeroutput> 4. Spawn system handles actual projectile creation via pool and profile</para>
+<sect2 id="dir_d368ce8d6920c000d21f916ca5b7e02f_1autotoc_md156">
+<title>Attack Attribution Flow</title><para>1. <computeroutput>DamageOnCollisionSystem</computeroutput> applies damage and updates <computeroutput>LastAttackerComponent</computeroutput> 2. <computeroutput>HealthUpdateSystem</computeroutput> detects death and publishes <computeroutput>DeathEvent</computeroutput> with <computeroutput>AttackContext</computeroutput> 3. <computeroutput>CombatScoringSystem</computeroutput> reads <computeroutput>DeathEvent</computeroutput> and awards score to attacker</para>
 <para><hruler/>
 </para>
 <para><details><summary>Doxygen</summary><para></para>
 <para></para>
 </details></para>
+</sect2>
 </sect1>
     </detaileddescription>
     <location file="/tmp/h/include/helios/engine/mechanics/combat/"/>

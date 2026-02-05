@@ -4,25 +4,121 @@
     <compoundname>types</compoundname>
     <innerfile refid="helios_2engine_2modules_2physics_2collision_2types_2__module_8ixx">helios/engine/modules/physics/collision/types/_module.ixx</innerfile>
     <innerfile refid="CollisionBehavior_8ixx">CollisionBehavior.ixx</innerfile>
+    <innerfile refid="CollisionContext_8ixx">CollisionContext.ixx</innerfile>
     <innerfile refid="CollisionResponse_8ixx">CollisionResponse.ixx</innerfile>
     <innerfile refid="HitPolicy_8ixx">HitPolicy.ixx</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_37a029dcaa1a76caf2ff39f24d0096d4_1autotoc_md262">
+<sect1 id="dir_37a029dcaa1a76caf2ff39f24d0096d4_1autotoc_md331">
 <title>helios::engine::modules::physics::collision::types</title><para>Type definitions for collision system behavior configuration.</para>
 </sect1>
-<sect1 id="dir_37a029dcaa1a76caf2ff39f24d0096d4_1autotoc_md263">
+<sect1 id="dir_37a029dcaa1a76caf2ff39f24d0096d4_1autotoc_md332">
 <title>Overview</title><para>This module provides enumeration types and configuration structures used by the collision detection system to control how collisions are processed and resolved.</para>
 </sect1>
-<sect1 id="dir_37a029dcaa1a76caf2ff39f24d0096d4_1autotoc_md264">
-<title>Key Types</title><para><table rows="2" cols="2"><row>
+<sect1 id="dir_37a029dcaa1a76caf2ff39f24d0096d4_1autotoc_md333">
+<title>Key Types</title><para><table rows="3" cols="2"><row>
 <entry thead="yes"><para>Type  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>CollisionBehavior</computeroutput>  </para>
-</entry><entry thead="no"><para>Enum defining collision response types (Trigger, Solid, etc.)  </para>
+</entry><entry thead="no"><para>Bitmask enum defining collision response types  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>CollisionContext</computeroutput>  </para>
+</entry><entry thead="no"><para>Struct containing collision event data  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_37a029dcaa1a76caf2ff39f24d0096d4_1autotoc_md334">
+<title>CollisionBehavior</title><para>Bitmask values that can be combined to define collision responses:</para>
+<para><table rows="9" cols="2"><row>
+<entry thead="yes"><para>Value  </para>
+</entry><entry thead="yes"><para>Description  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>None</computeroutput>  </para>
+</entry><entry thead="no"><para>No collision response  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>Reflect</computeroutput>  </para>
+</entry><entry thead="no"><para>Reflect velocity off the collision surface  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>Bounce</computeroutput>  </para>
+</entry><entry thead="no"><para>Bounce with restitution applied  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>Stick</computeroutput>  </para>
+</entry><entry thead="no"><para>Attach entity to the collision surface  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>Despawn</computeroutput>  </para>
+</entry><entry thead="no"><para>Remove entity from the game world  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>PassEvent</computeroutput>  </para>
+</entry><entry thead="no"><para>Emit event without physical response  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>PushEvent</computeroutput>  </para>
+</entry><entry thead="no"><para>Push event to double-buffered event bus  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>FrameEvent</computeroutput>  </para>
+</entry><entry thead="no"><para>Process event in the current frame  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_37a029dcaa1a76caf2ff39f24d0096d4_1autotoc_md335">
+<title>CollisionContext</title><para>Contains collision event data:</para>
+<para><table rows="9" cols="3"><row>
+<entry thead="yes"><para>Field  </para>
+</entry><entry thead="yes"><para>Type  </para>
+</entry><entry thead="yes"><para>Description  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>source</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>Guid</computeroutput>  </para>
+</entry><entry thead="no"><para>Source entity GUID  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>contact</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>vec3f</computeroutput>  </para>
+</entry><entry thead="no"><para>World-space contact point  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>isSolid</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>bool</computeroutput>  </para>
+</entry><entry thead="no"><para>True if blocking collision  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>isTrigger</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>bool</computeroutput>  </para>
+</entry><entry thead="no"><para>True if trigger collision  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>isCollisionReporter</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>bool</computeroutput>  </para>
+</entry><entry thead="no"><para>True if source reports events  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>other</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>optional&lt;Guid&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para>Other entity GUID (if any)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>collisionLayerId</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>uint32_t</computeroutput>  </para>
+</entry><entry thead="no"><para>Source entity layer  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>otherCollisionLayerId</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>uint32_t</computeroutput>  </para>
+</entry><entry thead="no"><para>Other entity layer  </para>
 </entry></row>
 </table>
 </para>

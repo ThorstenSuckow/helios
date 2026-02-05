@@ -2,12 +2,13 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types" kind="namespace" language="C++">
     <compoundname>helios::engine::modules::physics::collision::types</compoundname>
+    <innerclass refid="structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1_1CollisionContext" prot="public">helios::engine::modules::physics::collision::types::CollisionContext</innerclass>
     <sectiondef kind="enum">
-      <memberdef kind="enum" id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2" prot="public" static="no" strong="yes">
-        <type>uint8_t</type>
+      <memberdef kind="enum" id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a3c17ab6bf5f5cf9dc514ff7c5bf91bdc" prot="public" static="no" strong="yes">
+        <type>uint16_t</type>
         <name>CollisionBehavior</name>
         <qualifiedname>helios::engine::modules::physics::collision::types::CollisionBehavior</qualifiedname>
-        <enumvalue id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2a6adf97f83acf6453d4a6a4b1070f3754" prot="public">
+        <enumvalue id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a3c17ab6bf5f5cf9dc514ff7c5bf91bdca6adf97f83acf6453d4a6a4b1070f3754" prot="public">
           <name>None</name>
           <initializer>= 0</initializer>
           <briefdescription>
@@ -16,7 +17,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2a74de3e45e4491e956e8dc18d841d9b00" prot="public">
+        <enumvalue id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a3c17ab6bf5f5cf9dc514ff7c5bf91bdca74de3e45e4491e956e8dc18d841d9b00" prot="public">
           <name>Reflect</name>
           <initializer>= 1 &lt;&lt; 0</initializer>
           <briefdescription>
@@ -26,7 +27,7 @@
 <para>Uses the surface normal to calculate a reflected velocity vector. Commonly used for projectiles bouncing off walls. </para>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2aeb9a56428f85bbdfd3846322baaffe6e" prot="public">
+        <enumvalue id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a3c17ab6bf5f5cf9dc514ff7c5bf91bdcaeb9a56428f85bbdfd3846322baaffe6e" prot="public">
           <name>Bounce</name>
           <initializer>= 1 &lt;&lt; 1</initializer>
           <briefdescription>
@@ -36,7 +37,7 @@
 <para>Similar to Reflect but applies a restitution coefficient to reduce velocity. Used for physics-based bouncing. </para>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2abf865bdc779ea87d172a8b1e5adc01b8" prot="public">
+        <enumvalue id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a3c17ab6bf5f5cf9dc514ff7c5bf91bdcabf865bdc779ea87d172a8b1e5adc01b8" prot="public">
           <name>Stick</name>
           <initializer>= 1 &lt;&lt; 2</initializer>
           <briefdescription>
@@ -46,7 +47,7 @@
 <para>Stops the entity&apos;s movement and attaches it to the collided object. Used for projectiles that embed on impact. </para>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2a573a38c8ee30e1c0d6ad84ce4f965cf0" prot="public">
+        <enumvalue id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a3c17ab6bf5f5cf9dc514ff7c5bf91bdca573a38c8ee30e1c0d6ad84ce4f965cf0" prot="public">
           <name>Despawn</name>
           <initializer>= 1 &lt;&lt; 3</initializer>
           <briefdescription>
@@ -56,8 +57,8 @@
 <para>Marks the entity for removal from the game world. Used for projectiles that are destroyed on impact. </para>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2aa4ecfc70574394990cf17bd83df499f7" prot="public">
-          <name>Event</name>
+        <enumvalue id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a3c17ab6bf5f5cf9dc514ff7c5bf91bdcaa3dc60b4f4856b916cda712b945ee785" prot="public">
+          <name>PassEvent</name>
           <initializer>= 1 &lt;&lt; 4</initializer>
           <briefdescription>
 <para>Emit an event without physical response. </para>
@@ -66,23 +67,31 @@
 <para>Generates a collision event for game logic processing without affecting the entity&apos;s physics state. </para>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2a4eecfb50c5a20eb78bc4d5304e9d8618" prot="public">
-          <name>size_</name>
-          <initializer>= 6</initializer>
+        <enumvalue id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a3c17ab6bf5f5cf9dc514ff7c5bf91bdca301ffac1d70c66bc4d963c8e3a524a08" prot="public">
+          <name>PushEvent</name>
+          <initializer>= 1 &lt;&lt; 5</initializer>
           <briefdescription>
-<para>Internal: Number of behavior types for array sizing. </para>
+<para>Push collision event to the event bus. </para>
           </briefdescription>
           <detaileddescription>
-<para><simplesect kind="warning"><para>Do not use as a behavior value. </para>
-</simplesect>
-</para>
+<para>Pushes the collision event to the double-buffered event bus for processing in the next frame. Used for deferred collision handling. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a3c17ab6bf5f5cf9dc514ff7c5bf91bdcaa1596dcfbc3409b10f60aef33500231d" prot="public">
+          <name>FrameEvent</name>
+          <initializer>= 1 &lt;&lt; 6</initializer>
+          <briefdescription>
+<para>Process collision event in the current frame. </para>
+          </briefdescription>
+          <detaileddescription>
+<para>Sends the collision event to the immediate bus for processing within the same frame. Used for time-critical collision responses. </para>
           </detaileddescription>
         </enumvalue>
         <briefdescription>
 <para>Defines how an entity responds to a collision event. </para>
         </briefdescription>
         <detaileddescription>
-<para><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2" kindref="member">CollisionBehavior</ref> values are used as bitmasks to configure per-layer collision responses in CollisionComponent. Multiple behaviors can be combined using bitwise operations.</para>
+<para><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a3c17ab6bf5f5cf9dc514ff7c5bf91bdc" kindref="member">CollisionBehavior</ref> values are used as bitmasks to configure per-layer collision responses in CollisionComponent. Multiple behaviors can be combined using bitwise operations.</para>
 <para>The behavior determines what action the collision system takes when two entities collide based on their layer configuration.</para>
 <para><simplesect kind="note"><para>Not all behaviors are currently fully implemented. Currently supported:<itemizedlist>
 <listitem><para>`Reflect` — Fully supported</para>
@@ -95,7 +104,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/physics/collision/types/CollisionBehavior.ixx" line="30" column="5" bodyfile="/tmp/h/include/helios/engine/modules/physics/collision/types/CollisionBehavior.ixx" bodystart="30" bodyend="83"/>
+        <location file="/tmp/h/include/helios/engine/modules/physics/collision/types/CollisionBehavior.ixx" line="30" column="5" bodyfile="/tmp/h/include/helios/engine/modules/physics/collision/types/CollisionBehavior.ixx" bodystart="30" bodyend="92"/>
       </memberdef>
       <memberdef kind="enum" id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a6a9de8f399df76cc158f000a343f02a4" prot="public" static="no" strong="yes">
         <type>uint8_t</type>
@@ -191,11 +200,161 @@
         <location file="/tmp/h/include/helios/engine/modules/physics/collision/types/HitPolicy.ixx" line="53" column="5" bodyfile="/tmp/h/include/helios/engine/modules/physics/collision/types/HitPolicy.ixx" bodystart="53" bodyend="73"/>
       </memberdef>
     </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a619e92f878230f525a54d26f528a028e" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>size_t</type>
+        <definition>size_t helios::engine::modules::physics::collision::types::CollisionBehaviorItemSize</definition>
+        <argsstring></argsstring>
+        <name>CollisionBehaviorItemSize</name>
+        <qualifiedname>helios::engine::modules::physics::collision::types::CollisionBehaviorItemSize</qualifiedname>
+        <initializer>= 8</initializer>
+        <briefdescription>
+<para>Number of distinct <ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a3c17ab6bf5f5cf9dc514ff7c5bf91bdc" kindref="member">CollisionBehavior</ref> flags. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/physics/collision/types/CollisionBehavior.ixx" line="97" column="22" bodyfile="/tmp/h/include/helios/engine/modules/physics/collision/types/CollisionBehavior.ixx" bodystart="97" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a521770137593e0e96a1c38531d1da7a1" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a3c17ab6bf5f5cf9dc514ff7c5bf91bdc" kindref="member">CollisionBehavior</ref></type>
+        <definition>CollisionBehavior helios::engine::modules::physics::collision::types::operator|</definition>
+        <argsstring>(CollisionBehavior lhs, CollisionBehavior rhs) noexcept</argsstring>
+        <name>operator|</name>
+        <qualifiedname>helios::engine::modules::physics::collision::types::operator|</qualifiedname>
+        <param>
+          <type><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a3c17ab6bf5f5cf9dc514ff7c5bf91bdc" kindref="member">CollisionBehavior</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a3c17ab6bf5f5cf9dc514ff7c5bf91bdc" kindref="member">CollisionBehavior</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>Combines two <ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a3c17ab6bf5f5cf9dc514ff7c5bf91bdc" kindref="member">CollisionBehavior</ref> flags using bitwise OR. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left-hand side behavior. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Right-hand side behavior.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Combined behavior flags. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/physics/collision/types/CollisionBehavior.ixx" line="107" column="34" bodyfile="/tmp/h/include/helios/engine/modules/physics/collision/types/CollisionBehavior.ixx" bodystart="107" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a3b24a820cf47254e25f27921af338128" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a3c17ab6bf5f5cf9dc514ff7c5bf91bdc" kindref="member">CollisionBehavior</ref></type>
+        <definition>CollisionBehavior helios::engine::modules::physics::collision::types::operator&amp;</definition>
+        <argsstring>(CollisionBehavior lhs, CollisionBehavior rhs) noexcept</argsstring>
+        <name>operator&amp;</name>
+        <qualifiedname>helios::engine::modules::physics::collision::types::operator&amp;</qualifiedname>
+        <param>
+          <type><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a3c17ab6bf5f5cf9dc514ff7c5bf91bdc" kindref="member">CollisionBehavior</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a3c17ab6bf5f5cf9dc514ff7c5bf91bdc" kindref="member">CollisionBehavior</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>Masks two <ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a3c17ab6bf5f5cf9dc514ff7c5bf91bdc" kindref="member">CollisionBehavior</ref> flags using bitwise AND. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left-hand side behavior. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Right-hand side behavior.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Masked behavior flags. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/physics/collision/types/CollisionBehavior.ixx" line="121" column="34" bodyfile="/tmp/h/include/helios/engine/modules/physics/collision/types/CollisionBehavior.ixx" bodystart="121" bodyend="125"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a64a83db4cb7e1f46e4c4713073081493" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::modules::physics::collision::types::hasFlag</definition>
+        <argsstring>(const CollisionBehavior mask, const CollisionBehavior flag) noexcept</argsstring>
+        <name>hasFlag</name>
+        <qualifiedname>helios::engine::modules::physics::collision::types::hasFlag</qualifiedname>
+        <param>
+          <type>const <ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a3c17ab6bf5f5cf9dc514ff7c5bf91bdc" kindref="member">CollisionBehavior</ref></type>
+          <declname>mask</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a3c17ab6bf5f5cf9dc514ff7c5bf91bdc" kindref="member">CollisionBehavior</ref></type>
+          <declname>flag</declname>
+        </param>
+        <briefdescription>
+<para>Checks if a behavior mask contains a specific flag. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mask</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The behavior mask to check. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>flag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The flag to test for.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the mask contains the flag, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/physics/collision/types/CollisionBehavior.ixx" line="135" column="21" bodyfile="/tmp/h/include/helios/engine/modules/physics/collision/types/CollisionBehavior.ixx" bodystart="135" bodyend="137"/>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1CollisionStateResponseSystem_1a93a2954ef3b5d76fbaeb0ad878afb5a7" compoundref="CollisionStateResponseSystem_8ixx" startline="69" endline="105">helios::engine::modules::physics::collision::systems::CollisionStateResponseSystem::update</referencedby>
+      </memberdef>
+    </sectiondef>
     <briefdescription>
 <para>Type definitions for collision system behavior configuration. </para>
     </briefdescription>
     <detaileddescription>
-<para>Provides enums and structs that configure collision detection and response behavior. </para>
+<para>Provides enums and structs that configure collision detection and response behavior, including bitmask-based behavior flags and collision event context data. </para>
     </detaileddescription>
     <location file="/tmp/h/include/helios/engine/modules/physics/collision/types/CollisionBehavior.ixx" line="13" column="1"/>
   </compounddef>

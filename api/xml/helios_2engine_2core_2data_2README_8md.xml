@@ -17,28 +17,48 @@
 <codeline><highlight class="normal">##<sp/>Components</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">-<sp/>**ComponentTypeId**<sp/>-<sp/>Compile-time<sp/>type<sp/>identifier<sp/>for<sp/>O(1)<sp/>component<sp/>indexing<sp/>within<sp/>GameObject.</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**FontId**<sp/>-<sp/>Strongly-typed<sp/>identifier<sp/>for<sp/>referencing<sp/>fonts.</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**GameObjectPool**<sp/>-<sp/>Low-level<sp/>O(1)<sp/>object<sp/>pooling<sp/>for<sp/>entity<sp/>recycling.</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**GameObjectPoolId**<sp/>-<sp/>Strongly-typed<sp/>identifier<sp/>for<sp/>referencing<sp/>pools.</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**GameObjectPoolRegistry**<sp/>-<sp/>Central<sp/>registry<sp/>managing<sp/>multiple<sp/>pools<sp/>by<sp/>ID.</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**GameObjectFilter**<sp/>-<sp/>Bitmask<sp/>enum<sp/>for<sp/>filtering<sp/>entities<sp/>by<sp/>active/inactive<sp/>state<sp/>and<sp/>component<sp/>state.</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**GameObjectView**<sp/>-<sp/>Lazy<sp/>range<sp/>adapter<sp/>for<sp/>component-filtered<sp/>iteration<sp/>with<sp/>structured<sp/>binding<sp/>support.</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**ScorePoolId**<sp/>-<sp/>Strongly-typed<sp/>identifier<sp/>for<sp/>score<sp/>pools.</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**ScoreTypeId**<sp/>-<sp/>Strongly-typed<sp/>identifier<sp/>for<sp/>score<sp/>types.</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**SpawnProfileId**<sp/>-<sp/>Strongly-typed<sp/>identifier<sp/>for<sp/>spawn<sp/>profiles.</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**SpawnRuleId**<sp/>-<sp/>Strongly-typed<sp/>identifier<sp/>for<sp/>spawn<sp/>rules.</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**ViewportId**<sp/>-<sp/>Strongly-typed<sp/>identifier<sp/>for<sp/>viewports.</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Strongly-Typed<sp/>IDs</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">The<sp/>ID<sp/>types<sp/>(`GameObjectPoolId`,<sp/>`SpawnProfileId`,<sp/>`SpawnRuleId`)<sp/>provide<sp/>type-safe<sp/>identifiers<sp/>that<sp/>can<sp/>be<sp/>constructed<sp/>from<sp/>string<sp/>literals<sp/>using<sp/>FNV-1a<sp/>hashing:</highlight></codeline>
+<codeline><highlight class="normal">###<sp/>String-Based<sp/>IDs<sp/>(FNV-1a<sp/>Hashing)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>ID<sp/>types<sp/>`FontId`,<sp/>`GameObjectPoolId`,<sp/>`ScorePoolId`,<sp/>`SpawnProfileId`,<sp/>`SpawnRuleId`,<sp/>and<sp/>`ViewportId`<sp/>provide<sp/>type-safe<sp/>identifiers<sp/>constructed<sp/>from<sp/>string<sp/>literals<sp/>using<sp/>FNV-1a<sp/>hashing:</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">```cpp</highlight></codeline>
 <codeline><highlight class="normal">//<sp/>Compile-time<sp/>constant<sp/>IDs<sp/>from<sp/>strings</highlight></codeline>
 <codeline><highlight class="normal">constexpr<sp/>GameObjectPoolId<sp/>ENEMY_POOL{&quot;enemies&quot;};</highlight></codeline>
 <codeline><highlight class="normal">constexpr<sp/>SpawnProfileId<sp/>ENEMY_PROFILE{&quot;enemy_spawn&quot;};</highlight></codeline>
 <codeline><highlight class="normal">constexpr<sp/>SpawnRuleId<sp/>WAVE_RULE{&quot;wave_spawn&quot;};</highlight></codeline>
+<codeline><highlight class="normal">constexpr<sp/>ScorePoolId<sp/>PLAYER_SCORE{&quot;player&quot;};</highlight></codeline>
+<codeline><highlight class="normal">constexpr<sp/>ViewportId<sp/>UI_VIEWPORT{&quot;Ui&quot;};</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">//<sp/>Use<sp/>in<sp/>registries<sp/>and<sp/>schedulers</highlight></codeline>
 <codeline><highlight class="normal">poolManager.createPool(ENEMY_POOL,<sp/>100);</highlight></codeline>
 <codeline><highlight class="normal">spawnManager.registerProfile(ENEMY_PROFILE,<sp/>profile);</highlight></codeline>
 <codeline><highlight class="normal">scheduler.addRule(ENEMY_PROFILE,<sp/>std::make_unique&lt;TimerSpawnRule&gt;(WAVE_RULE,<sp/>2.0f,<sp/>5));</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Type-Based<sp/>IDs<sp/>(TypeIndexer)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">`ComponentTypeId`<sp/>and<sp/>`ScoreTypeId`<sp/>use<sp/>`TypeIndexer`<sp/>to<sp/>generate<sp/>unique,<sp/>monotonically<sp/>increasing<sp/>IDs<sp/>for<sp/>each<sp/>type<sp/>at<sp/>compile<sp/>time:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Get<sp/>unique<sp/>ID<sp/>for<sp/>a<sp/>component<sp/>type</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>typeId<sp/>=<sp/>ComponentTypeId::id&lt;HealthComponent&gt;();</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Get<sp/>unique<sp/>ID<sp/>for<sp/>a<sp/>score<sp/>type</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>scoreId<sp/>=<sp/>ScoreTypeId::id&lt;KillScore&gt;();</highlight></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">All<sp/>ID<sp/>types<sp/>support:</highlight></codeline>

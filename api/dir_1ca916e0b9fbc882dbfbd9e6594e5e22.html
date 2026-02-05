@@ -133,13 +133,13 @@ Files</h2></td></tr>
 <tr class="memdesc:Updatable_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface for components that require per-frame updates. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md122"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md124"></a>
 helios::engine::ecs</h1>
 <p>Core Entity-Component-System architecture for the helios game engine.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md123"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md125"></a>
 Overview</h1>
 <p>This module provides the foundational classes for the composition-based game architecture. It separates data (Components) from behavior (Systems). Entity lifecycle and world management are provided by <span class="tt"><a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1world.html" title="World state management and per-frame update context.">helios.engine.runtime.world</a></span>.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md124"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md126"></a>
 Key Classes</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -155,7 +155,7 @@ Key Classes</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">Updatable</span>  </td><td class="markdownTableBodyNone">Interface for per-frame updatable objects  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md125"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md127"></a>
 Component Storage Model</h1>
 <p><span class="tt">GameObject</span> uses a <b>type-indexed storage</b> system for components. Instead of a hash-based lookup, components are stored in a contiguous vector where the index corresponds to the component's compile-time <span class="tt">ComponentTypeId</span>.</p>
 <p><b>Performance Characteristics:</b></p>
@@ -181,9 +181,9 @@ Component Storage Model</h1>
 <div class="line"><span class="comment">// Content:  nullptr  Transform  nullptr   Move2D    ...</span></div>
 <div class="line"><span class="comment">//                       ↑                    ↑</span></div>
 <div class="line"><span class="comment">//           ComponentTypeId::id&lt;Transform&gt;()  ComponentTypeId::id&lt;Move2D&gt;()</span></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md126"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md128"></a>
 Submodules</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md127"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md129"></a>
 query/</h2>
 <p>Entity query utilities for filtering and iterating GameObjects:</p>
 <table class="markdownTable">
@@ -194,7 +194,7 @@ query/</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">GameObjectView</span>  </td><td class="markdownTableBodyNone">Lazy range for component-based iteration  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md128"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md130"></a>
 Related Modules</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -204,7 +204,7 @@ Related Modules</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html" title="Central game loop orchestration module.">helios.engine.runtime.gameloop</a></span>  </td><td class="markdownTableBodyNone">GameLoop, Phase, Pass  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md129"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md131"></a>
 Architecture</h1>
 <div class="fragment"><div class="line">┌─────────────────────────────────────────────────────────────┐</div>
 <div class="line">│                        GameWorld                            │</div>
@@ -225,7 +225,7 @@ Architecture</h1>
 <div class="line">│       ▼            ▼            ▼                           │</div>
 <div class="line">│    Systems      Systems      Systems     (execute in order) │</div>
 <div class="line">└─────────────────────────────────────────────────────────────┘</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md130"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md132"></a>
 Usage Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8ecs.html">helios.engine.ecs</a>;</div>
 <div class="line"><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8runtime_8world_8GameWorld.html">helios.engine.runtime.world.GameWorld</a>;</div>
@@ -243,9 +243,9 @@ Usage Example</h1>
 <div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span> [obj, move] : world.<a class="code hl_function" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#a83857f38d3ffb10560f863107707929d">find</a>&lt;Move2DComponent&gt;().each()) {</div>
 <div class="line">    <span class="comment">// Process matching entities</span></div>
 <div class="line">}</div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_html"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">helios::engine::runtime::world::GameWorld</a></div><div class="ttdoc">Central registry for game entities, managers, pools, and the active level.</div><div class="ttdef"><b>Definition</b> <a href="GameWorld_8ixx_source.html#l00092">GameWorld.ixx:92</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_html_a28a53dcdcfb8880867db35145d88d3e2"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#a28a53dcdcfb8880867db35145d88d3e2">helios::engine::runtime::world::GameWorld::addGameObject</a></div><div class="ttdeci">helios::engine::ecs::GameObject * addGameObject(std::unique_ptr&lt; helios::engine::ecs::GameObject &gt; gameObject)</div><div class="ttdoc">Adds a GameObject to the world and transfers ownership.</div><div class="ttdef"><b>Definition</b> <a href="GameWorld_8ixx_source.html#l00345">GameWorld.ixx:345</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_html_a83857f38d3ffb10560f863107707929d"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#a83857f38d3ffb10560f863107707929d">helios::engine::runtime::world::GameWorld::find</a></div><div class="ttdeci">helios::engine::ecs::GameObject * find(const helios::util::Guid &amp;guid)</div><div class="ttdoc">Finds a GameObject by its unique identifier.</div><div class="ttdef"><b>Definition</b> <a href="GameWorld_8ixx_source.html#l00374">GameWorld.ixx:374</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_html"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">helios::engine::runtime::world::GameWorld</a></div><div class="ttdoc">Central registry for game entities, managers, pools, and the active level.</div><div class="ttdef"><b>Definition</b> <a href="GameWorld_8ixx_source.html#l00094">GameWorld.ixx:94</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_html_a28a53dcdcfb8880867db35145d88d3e2"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#a28a53dcdcfb8880867db35145d88d3e2">helios::engine::runtime::world::GameWorld::addGameObject</a></div><div class="ttdeci">helios::engine::ecs::GameObject * addGameObject(std::unique_ptr&lt; helios::engine::ecs::GameObject &gt; gameObject)</div><div class="ttdoc">Adds a GameObject to the world and transfers ownership.</div><div class="ttdef"><b>Definition</b> <a href="GameWorld_8ixx_source.html#l00382">GameWorld.ixx:382</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_html_a83857f38d3ffb10560f863107707929d"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#a83857f38d3ffb10560f863107707929d">helios::engine::runtime::world::GameWorld::find</a></div><div class="ttdeci">helios::engine::ecs::GameObject * find(const helios::util::Guid &amp;guid)</div><div class="ttdoc">Finds a GameObject by its unique identifier.</div><div class="ttdef"><b>Definition</b> <a href="GameWorld_8ixx_source.html#l00411">GameWorld.ixx:411</a></div></div>
 <div class="ttc" id="amodule__helios_8engine_8ecs_html"><div class="ttname"><a href="module__helios_8engine_8ecs.html">helios.engine.ecs</a></div></div>
 <div class="ttc" id="amodule__helios_8engine_8runtime_8world_8GameWorld_html"><div class="ttname"><a href="module__helios_8engine_8runtime_8world_8GameWorld.html">helios.engine.runtime.world.GameWorld</a></div></div>
 </div><!-- fragment --><hr  />

@@ -8,13 +8,13 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_c8ba3234849006b257a05b362b115823_1autotoc_md172">
+<sect1 id="dir_c8ba3234849006b257a05b362b115823_1autotoc_md210">
 <title>helios::engine::mechanics::lifecycle</title><para>Lifecycle management for entity components with delayed activation support.</para>
 </sect1>
-<sect1 id="dir_c8ba3234849006b257a05b362b115823_1autotoc_md173">
+<sect1 id="dir_c8ba3234849006b257a05b362b115823_1autotoc_md211">
 <title>Overview</title><para>This module provides mechanisms for controlling when components become active during an entity&apos;s lifecycle. The primary use case is delaying component activation after spawn, enabling patterns like collision immunity, staggered wave spawns, and effect sequencing.</para>
 </sect1>
-<sect1 id="dir_c8ba3234849006b257a05b362b115823_1autotoc_md174">
+<sect1 id="dir_c8ba3234849006b257a05b362b115823_1autotoc_md212">
 <title>Key Classes</title><para><table rows="3" cols="2"><row>
 <entry thead="yes"><para>Class  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
@@ -30,7 +30,7 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_c8ba3234849006b257a05b362b115823_1autotoc_md175">
+<sect1 id="dir_c8ba3234849006b257a05b362b115823_1autotoc_md213">
 <title>Architecture</title><para><programlisting><codeline><highlight class="normal">DelayedComponentEnablerInitializer</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼<sp/>defer(ComponentTypeId,<sp/>delay)</highlight></codeline>
@@ -49,7 +49,7 @@
 <codeline><highlight class="normal">└────────────────────────────────┘</highlight></codeline>
 </programlisting></para>
 </sect1>
-<sect1 id="dir_c8ba3234849006b257a05b362b115823_1autotoc_md176">
+<sect1 id="dir_c8ba3234849006b257a05b362b115823_1autotoc_md214">
 <title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>During<sp/>spawn<sp/>initialization,<sp/>defer<sp/>collision<sp/>component<sp/>by<sp/>0.5<sp/>seconds</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>enabler<sp/>=<sp/>entity-&gt;get&lt;DelayedComponentEnabler&gt;();</highlight></codeline>
 <codeline><highlight class="normal">enabler-&gt;defer(ComponentTypeId::id&lt;CollisionComponent&gt;(),<sp/>0.5f);</highlight></codeline>
@@ -61,7 +61,7 @@
 <codeline><highlight class="normal">&gt;&gt;(0.1f);<sp/><sp/></highlight><highlight class="comment">//<sp/>0.1s<sp/>delay<sp/>between<sp/>each<sp/>entity<sp/>in<sp/>batch</highlight></codeline>
 </programlisting></para>
 </sect1>
-<sect1 id="dir_c8ba3234849006b257a05b362b115823_1autotoc_md177">
+<sect1 id="dir_c8ba3234849006b257a05b362b115823_1autotoc_md215">
 <title>Common Patterns</title><para><bold>Collision Immunity</bold> <programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Projectiles<sp/>ignore<sp/>collisions<sp/>for<sp/>0.2s<sp/>after<sp/>spawn</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal">DelayedComponentEnablerInitializer&lt;CollisionComponent&gt;(0.2f)</highlight></codeline>
 </programlisting></para>

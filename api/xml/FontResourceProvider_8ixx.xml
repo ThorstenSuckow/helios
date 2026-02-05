@@ -6,13 +6,17 @@
     <includes refid="FontId_8ixx" local="no">helios.engine.core.data.FontId</includes>
     <includes refid="Glyph_8ixx" local="no">helios.rendering.text.Glyph</includes>
     <incdepgraph>
-      <node id="5">
+      <node id="6">
         <label>helios.core.algorithms</label>
         <link refid="algorithms_8ixx"/>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="6" relation="include">
+        <childnode refid="7" relation="include">
         </childnode>
+      </node>
+      <node id="5">
+        <label>helios.core.types</label>
+        <link refid="types_8ixx"/>
       </node>
       <node id="3">
         <label>helios.engine.core.data.FontId</label>
@@ -23,49 +27,51 @@
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
       </node>
-      <node id="14">
+      <node id="15">
         <label>helios.math.TransformType</label>
         <link refid="TransformType_8ixx"/>
         <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="8">
+      <node id="9">
         <label>helios.math</label>
         <link refid="helios_2math_2__module_8ixx"/>
-        <childnode refid="9" relation="include">
-        </childnode>
         <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
-      </node>
-      <node id="9">
-        <label>helios.math.concepts</label>
-        <link refid="helios_2math_2concepts_2__module_8ixx"/>
-        <childnode refid="9" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
       </node>
       <node id="10">
-        <label>helios.math.transform</label>
-        <link refid="helios_2math_2transform_2__module_8ixx"/>
+        <label>helios.math.concepts</label>
+        <link refid="helios_2math_2concepts_2__module_8ixx"/>
         <childnode refid="10" relation="include">
         </childnode>
       </node>
       <node id="11">
-        <label>helios.math.types</label>
-        <link refid="helios_2math_2types_2__module_8ixx"/>
+        <label>helios.math.transform</label>
+        <link refid="helios_2math_2transform_2__module_8ixx"/>
         <childnode refid="11" relation="include">
         </childnode>
       </node>
       <node id="12">
+        <label>helios.math.types</label>
+        <link refid="helios_2math_2types_2__module_8ixx"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
         <label>helios.math.utils</label>
         <link refid="utils_8ixx"/>
-        <childnode refid="13" relation="include">
+        <childnode refid="14" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -75,22 +81,22 @@
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="7" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="7">
+      <node id="8">
         <label>helios.rendering.text.Glyph</label>
         <link refid="Glyph_8ixx"/>
-        <childnode refid="8" relation="include">
+        <childnode refid="9" relation="include">
         </childnode>
       </node>
       <node id="4">
         <label>cstdint</label>
       </node>
-      <node id="13">
+      <node id="14">
         <label>numbers</label>
       </node>
-      <node id="6">
+      <node id="7">
         <label>string</label>
       </node>
       <node id="2">
@@ -158,35 +164,36 @@
 <codeline lineno="49"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>font<sp/>is<sp/>associated<sp/>with<sp/>the<sp/>given<sp/>`FontId`<sp/>for<sp/>identification.</highlight></codeline>
 <codeline lineno="50"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="51"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>fontId<sp/>Unique<sp/>identifier<sp/>for<sp/>this<sp/>font.</highlight></codeline>
-<codeline lineno="52"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>pathToFont<sp/>File<sp/>system<sp/>path<sp/>to<sp/>the<sp/>font<sp/>file<sp/>(e.g.,<sp/>TrueType<sp/>`.ttf`).</highlight></codeline>
-<codeline lineno="53"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="54"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@note<sp/>If<sp/>a<sp/>font<sp/>with<sp/>the<sp/>same<sp/>`fontId`<sp/>is<sp/>already<sp/>loaded,<sp/>behavior<sp/>is</highlight></codeline>
-<codeline lineno="55"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/>implementation-defined<sp/>(may<sp/>replace<sp/>or<sp/>ignore).</highlight></codeline>
-<codeline lineno="56"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="57" refid="classhelios_1_1rendering_1_1text_1_1FontResourceProvider_1ab68f5970778b7674ef3a0c8f0b750427" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1rendering_1_1text_1_1FontResourceProvider_1ab68f5970778b7674ef3a0c8f0b750427" kindref="member">loadFont</ref>(<ref refid="structhelios_1_1engine_1_1core_1_1data_1_1FontId" kindref="compound">helios::engine::core::data::FontId</ref><sp/>fontId,<sp/>std::string_view<sp/>pathToFont)<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="58"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="59"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="60"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Retrieves<sp/>the<sp/>glyph<sp/>data<sp/>for<sp/>a<sp/>character.</highlight></codeline>
-<codeline lineno="61"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="62"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Returns<sp/>the<sp/>cached<sp/>glyph<sp/>metrics<sp/>and<sp/>texture<sp/>ID<sp/>for<sp/>the<sp/>specified<sp/>character</highlight></codeline>
-<codeline lineno="63"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>and<sp/>font.<sp/>The<sp/>font<sp/>must<sp/>have<sp/>been<sp/>previously<sp/>loaded<sp/>via<sp/>`loadFont()`.</highlight></codeline>
-<codeline lineno="64"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="65"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>c<sp/>The<sp/>character<sp/>to<sp/>retrieve<sp/>the<sp/>glyph<sp/>for.</highlight></codeline>
-<codeline lineno="66"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>fontId<sp/>The<sp/>font<sp/>to<sp/>use<sp/>for<sp/>rendering.</highlight></codeline>
-<codeline lineno="67"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="68"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>The<sp/>glyph<sp/>data<sp/>for<sp/>the<sp/>character.</highlight></codeline>
-<codeline lineno="69"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="70"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@note<sp/>This<sp/>method<sp/>is<sp/>marked<sp/>`noexcept`<sp/>and<sp/>must<sp/>not<sp/>throw<sp/>exceptions.</highlight></codeline>
-<codeline lineno="71"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/>If<sp/>the<sp/>character<sp/>is<sp/>not<sp/>available,<sp/>a<sp/>fallback<sp/>glyph<sp/>should<sp/>be<sp/>returned.</highlight></codeline>
-<codeline lineno="72"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="73" refid="classhelios_1_1rendering_1_1text_1_1FontResourceProvider_1ab4a216319f349574fd6ceb2994970891" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1rendering_1_1text_1_1Glyph" kindref="compound">helios::rendering::text::Glyph</ref><sp/><ref refid="classhelios_1_1rendering_1_1text_1_1FontResourceProvider_1ab4a216319f349574fd6ceb2994970891" kindref="member">glyph</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>c,<sp/><ref refid="structhelios_1_1engine_1_1core_1_1data_1_1FontId" kindref="compound">helios::engine::core::data::FontId</ref><sp/>fontId)<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>pixelHeight<sp/>The<sp/>height<sp/>of<sp/>the<sp/>font,<sp/>in<sp/>pixels.</highlight></codeline>
+<codeline lineno="53"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>pathToFont<sp/>File<sp/>system<sp/>path<sp/>to<sp/>the<sp/>font<sp/>file<sp/>(e.g.,<sp/>TrueType<sp/>`.ttf`).</highlight></codeline>
+<codeline lineno="54"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="55"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@note<sp/>If<sp/>a<sp/>font<sp/>with<sp/>the<sp/>same<sp/>`fontId`<sp/>is<sp/>already<sp/>loaded,<sp/>behavior<sp/>is</highlight></codeline>
+<codeline lineno="56"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/>implementation-defined<sp/>(may<sp/>replace<sp/>or<sp/>ignore).</highlight></codeline>
+<codeline lineno="57"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58" refid="classhelios_1_1rendering_1_1text_1_1FontResourceProvider_1acdfad3ae69b18ba4d97cb926e42beaa2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1rendering_1_1text_1_1FontResourceProvider_1acdfad3ae69b18ba4d97cb926e42beaa2" kindref="member">loadFont</ref>(<ref refid="structhelios_1_1engine_1_1core_1_1data_1_1FontId" kindref="compound">helios::engine::core::data::FontId</ref><sp/>fontId,<sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>pixelHeight,<sp/>std::string_view<sp/>pathToFont)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="60"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="61"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Retrieves<sp/>the<sp/>glyph<sp/>data<sp/>for<sp/>a<sp/>character.</highlight></codeline>
+<codeline lineno="62"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="63"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Returns<sp/>the<sp/>cached<sp/>glyph<sp/>metrics<sp/>and<sp/>texture<sp/>ID<sp/>for<sp/>the<sp/>specified<sp/>character</highlight></codeline>
+<codeline lineno="64"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>and<sp/>font.<sp/>The<sp/>font<sp/>must<sp/>have<sp/>been<sp/>previously<sp/>loaded<sp/>via<sp/>`loadFont()`.</highlight></codeline>
+<codeline lineno="65"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="66"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>c<sp/>The<sp/>character<sp/>to<sp/>retrieve<sp/>the<sp/>glyph<sp/>for.</highlight></codeline>
+<codeline lineno="67"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>fontId<sp/>The<sp/>font<sp/>to<sp/>use<sp/>for<sp/>rendering.</highlight></codeline>
+<codeline lineno="68"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="69"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>The<sp/>glyph<sp/>data<sp/>for<sp/>the<sp/>character.</highlight></codeline>
+<codeline lineno="70"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="71"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@note<sp/>This<sp/>method<sp/>is<sp/>marked<sp/>`noexcept`<sp/>and<sp/>must<sp/>not<sp/>throw<sp/>exceptions.</highlight></codeline>
+<codeline lineno="72"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/>If<sp/>the<sp/>character<sp/>is<sp/>not<sp/>available,<sp/>a<sp/>fallback<sp/>glyph<sp/>should<sp/>be<sp/>returned.</highlight></codeline>
+<codeline lineno="73"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74" refid="classhelios_1_1rendering_1_1text_1_1FontResourceProvider_1ab4a216319f349574fd6ceb2994970891" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1rendering_1_1text_1_1Glyph" kindref="compound">helios::rendering::text::Glyph</ref><sp/><ref refid="classhelios_1_1rendering_1_1text_1_1FontResourceProvider_1ab4a216319f349574fd6ceb2994970891" kindref="member">glyph</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>c,<sp/><ref refid="structhelios_1_1engine_1_1core_1_1data_1_1FontId" kindref="compound">helios::engine::core::data::FontId</ref><sp/>fontId)<sp/>=<sp/>0;</highlight></codeline>
 <codeline lineno="75"><highlight class="normal"></highlight></codeline>
 <codeline lineno="76"><highlight class="normal"></highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="79"><highlight class="normal"></highlight></codeline>
-<codeline lineno="80"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal">}</highlight></codeline>
     </programlisting>
     <location file="/tmp/h/include/helios/rendering/text/FontResourceProvider.ixx"/>
   </compounddef>

@@ -11,6 +11,7 @@ var namespacehelios_1_1input =
       ] ],
       [ "Key", "namespacehelios_1_1input_1_1types.html#a963e220296531c047308439c3425bcc5", [
         [ "ESC", "namespacehelios_1_1input_1_1types.html#a963e220296531c047308439c3425bcc5aec4d00988f117bae026eab04ddfa7f33", null ],
+        [ "TILDE", "namespacehelios_1_1input_1_1types.html#a963e220296531c047308439c3425bcc5afa378b1b6c52b1404b7cbdd2a1567fa4", null ],
         [ "size_", "namespacehelios_1_1input_1_1types.html#a963e220296531c047308439c3425bcc5a501d3c1d3d31f70db984de48396437f6", null ]
       ] ]
     ] ],

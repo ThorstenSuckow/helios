@@ -3,11 +3,15 @@
   <compounddef id="dir_4f0da182a846ab23c4f0200a8e7a4684" kind="dir">
     <compoundname>data</compoundname>
     <innerfile refid="helios_2engine_2core_2data_2__module_8ixx">helios/engine/core/data/_module.ixx</innerfile>
+    <innerfile refid="CollisionLayer_8ixx">CollisionLayer.ixx</innerfile>
     <innerfile refid="ComponentTypeId_8ixx">ComponentTypeId.ixx</innerfile>
     <innerfile refid="FontId_8ixx">FontId.ixx</innerfile>
     <innerfile refid="GameObjectPoolId_8ixx">GameObjectPoolId.ixx</innerfile>
+    <innerfile refid="ScorePoolId_8ixx">ScorePoolId.ixx</innerfile>
+    <innerfile refid="ScoreTypeId_8ixx">ScoreTypeId.ixx</innerfile>
     <innerfile refid="SpawnProfileId_8ixx">SpawnProfileId.ixx</innerfile>
     <innerfile refid="SpawnRuleId_8ixx">SpawnRuleId.ixx</innerfile>
+    <innerfile refid="ViewportId_8ixx">ViewportId.ixx</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
@@ -18,27 +22,43 @@
 <sect1 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md103">
 <title>Components</title><para><itemizedlist>
 <listitem><para><bold>ComponentTypeId</bold> - Compile-time type identifier for O(1) component indexing within GameObject.</para>
+</listitem><listitem><para><bold>FontId</bold> - Strongly-typed identifier for referencing fonts.</para>
 </listitem><listitem><para><bold>GameObjectPool</bold> - Low-level O(1) object pooling for entity recycling.</para>
 </listitem><listitem><para><bold>GameObjectPoolId</bold> - Strongly-typed identifier for referencing pools.</para>
 </listitem><listitem><para><bold>GameObjectPoolRegistry</bold> - Central registry managing multiple pools by ID.</para>
 </listitem><listitem><para><bold>GameObjectFilter</bold> - Bitmask enum for filtering entities by active/inactive state and component state.</para>
 </listitem><listitem><para><bold>GameObjectView</bold> - Lazy range adapter for component-filtered iteration with structured binding support.</para>
+</listitem><listitem><para><bold>ScorePoolId</bold> - Strongly-typed identifier for score pools.</para>
+</listitem><listitem><para><bold>ScoreTypeId</bold> - Strongly-typed identifier for score types.</para>
 </listitem><listitem><para><bold>SpawnProfileId</bold> - Strongly-typed identifier for spawn profiles.</para>
 </listitem><listitem><para><bold>SpawnRuleId</bold> - Strongly-typed identifier for spawn rules.</para>
+</listitem><listitem><para><bold>ViewportId</bold> - Strongly-typed identifier for viewports.</para>
 </listitem></itemizedlist>
 </para>
 </sect1>
 <sect1 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md104">
-<title>Strongly-Typed IDs</title><para>The ID types (<computeroutput>GameObjectPoolId</computeroutput>, <computeroutput>SpawnProfileId</computeroutput>, <computeroutput>SpawnRuleId</computeroutput>) provide type-safe identifiers that can be constructed from string literals using FNV-1a hashing:</para>
+<title>Strongly-Typed IDs</title><sect2 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md105">
+<title>String-Based IDs (FNV-1a Hashing)</title><para>The ID types <computeroutput>FontId</computeroutput>, <computeroutput>GameObjectPoolId</computeroutput>, <computeroutput>ScorePoolId</computeroutput>, <computeroutput>SpawnProfileId</computeroutput>, <computeroutput>SpawnRuleId</computeroutput>, and <computeroutput>ViewportId</computeroutput> provide type-safe identifiers constructed from string literals using FNV-1a hashing:</para>
 <para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Compile-time<sp/>constant<sp/>IDs<sp/>from<sp/>strings</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>GameObjectPoolId<sp/>ENEMY_POOL{</highlight><highlight class="stringliteral">&quot;enemies&quot;</highlight><highlight class="normal">};</highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>SpawnProfileId<sp/>ENEMY_PROFILE{</highlight><highlight class="stringliteral">&quot;enemy_spawn&quot;</highlight><highlight class="normal">};</highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>SpawnRuleId<sp/>WAVE_RULE{</highlight><highlight class="stringliteral">&quot;wave_spawn&quot;</highlight><highlight class="normal">};</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>ScorePoolId<sp/>PLAYER_SCORE{</highlight><highlight class="stringliteral">&quot;player&quot;</highlight><highlight class="normal">};</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>ViewportId<sp/>UI_VIEWPORT{</highlight><highlight class="stringliteral">&quot;Ui&quot;</highlight><highlight class="normal">};</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Use<sp/>in<sp/>registries<sp/>and<sp/>schedulers</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal">poolManager.createPool(ENEMY_POOL,<sp/>100);</highlight></codeline>
 <codeline><highlight class="normal">spawnManager.registerProfile(ENEMY_PROFILE,<sp/>profile);</highlight></codeline>
 <codeline><highlight class="normal">scheduler.addRule(ENEMY_PROFILE,<sp/>std::make_unique&lt;TimerSpawnRule&gt;(WAVE_RULE,<sp/>2.0f,<sp/>5));</highlight></codeline>
+</programlisting></para>
+</sect2>
+<sect2 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md106">
+<title>Type-Based IDs (TypeIndexer)</title><para><computeroutput>ComponentTypeId</computeroutput> and <computeroutput>ScoreTypeId</computeroutput> use <computeroutput>TypeIndexer</computeroutput> to generate unique, monotonically increasing IDs for each type at compile time:</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Get<sp/>unique<sp/>ID<sp/>for<sp/>a<sp/>component<sp/>type</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>typeId<sp/>=<sp/>ComponentTypeId::id&lt;HealthComponent&gt;();</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Get<sp/>unique<sp/>ID<sp/>for<sp/>a<sp/>score<sp/>type</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>scoreId<sp/>=<sp/>ScoreTypeId::id&lt;KillScore&gt;();</highlight></codeline>
 </programlisting></para>
 <para>All ID types support:<itemizedlist>
 <listitem><para>Hashing for <computeroutput>std::unordered_map</computeroutput> / <computeroutput>std::unordered_set</computeroutput></para>
@@ -54,6 +74,7 @@
  <details><summary>Doxygen</summary><para></para>
 <para></para>
 </details></para>
+</sect2>
 </sect1>
     </detaileddescription>
     <location file="/tmp/h/include/helios/engine/core/data/"/>

@@ -25,6 +25,7 @@
         <referencedby refid="classhelios_1_1engine_1_1ecs_1_1Component_1a3489588d238d04928e767908a0721be1" compoundref="Component_8ixx" startline="239" endline="241">helios::engine::ecs::Component::gameObject</referencedby>
         <referencedby refid="classhelios_1_1engine_1_1ecs_1_1Component_1a081d44a554b723d719f7909638735819" compoundref="Component_8ixx" startline="142" endline="144">helios::engine::ecs::Component::isAttached</referencedby>
         <referencedby refid="classhelios_1_1engine_1_1ecs_1_1Component_1ac08c7be419071c67780342322aa1e679" compoundref="Component_8ixx" startline="106" endline="108">helios::engine::ecs::Component::onAttach</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionStateComponent_1ac6917627b9fcfdb359588dbea1d53bfe" compoundref="CollisionStateComponent_8ixx" startline="117" endline="157">helios::engine::modules::physics::collision::components::CollisionStateComponent::setState</referencedby>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1engine_1_1ecs_1_1Component_1ab5895e14ca5df63711d46a492fb40c64" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -120,12 +121,17 @@
         <argsstring>() noexcept</argsstring>
         <name>onAcquire</name>
         <qualifiedname>helios::engine::ecs::Component::onAcquire</qualifiedname>
+        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1a96922614e11abd220d700e63f4640cf4">onAcquire</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1aae674ff681394598a32613d766e29ac9">onAcquire</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScoreObserverComponent_1af25a035b975ab8345fb1c6d5e6bea0e8">onAcquire</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1EmittedByComponent_1a911d76d9ce7f3551830aa12ec0a74234">onAcquire</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1AabbColliderComponent_1a768c6316e9902ae26932615630d76242">onAcquire</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionStateComponent_1a5223797413a58f2c3188e025c7b32d44">onAcquire</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1a9808fb82250d10b4fd5b0c1bdddfb477">onAcquire</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1ComposeTransformComponent_1a2c8e85ebe0baa8c1a27c8c6f8425ef70">onAcquire</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1ScaleStateComponent_1a575dac49e656fb2d7248428be91d299f">onAcquire</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1TranslationStateComponent_1a595d241523bc3602e17b0ed4135b8d1d">onAcquire</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiTextComponent_1ac2dbfd3a02e9b41330eee381d01bc4ba">onAcquire</reimplementedby>
         <briefdescription>
 <para>Called when the component&apos;s <ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">GameObject</ref> is re-acquired from a pool. </para>
         </briefdescription>
@@ -143,11 +149,16 @@
         <argsstring>() noexcept</argsstring>
         <name>onRelease</name>
         <qualifiedname>helios::engine::ecs::Component::onRelease</qualifiedname>
+        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1a4059f228ae279956df88c4b12521f13d">onRelease</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1ad5ce1d294774f469c6d3eda780d3acfa">onRelease</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScoreObserverComponent_1ad79aeb56bd6e8156718be8ad8b67ec8a">onRelease</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1EmittedByComponent_1a20280189f5b9efef7c3af67ad857c40b">onRelease</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1AabbColliderComponent_1a333cafa927db2e35eb46820c94260802">onRelease</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1a93c9ddd73f4bc59cdf99cab98418f950">onRelease</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1ComposeTransformComponent_1a1ac905810210f9d230bc4d2ab3ae51d4">onRelease</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1ScaleStateComponent_1a981662f7b673a99a7d6167c69cc3b8e0">onRelease</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1TranslationStateComponent_1a139bc1e425cff20b02f77f3449397cd0">onRelease</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiTextComponent_1aa7f13fe96a03b6fc9d0eb98a3346e8ba">onRelease</reimplementedby>
         <briefdescription>
 <para>Called when the component&apos;s <ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">GameObject</ref> is released to a pool. </para>
         </briefdescription>
@@ -204,7 +215,7 @@
         </inbodydescription>
         <location file="/tmp/h/include/helios/engine/ecs/Component.ixx" line="162" column="15" bodyfile="/tmp/h/include/helios/engine/ecs/Component.ixx" bodystart="162" bodyend="164"/>
         <references refid="classhelios_1_1engine_1_1ecs_1_1Component_1ab5895e14ca5df63711d46a492fb40c64" compoundref="Component_8ixx" startline="84">helios::engine::ecs::Component::isEnabled_</references>
-        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a398512331f26b4a44dda02476249f610" compoundref="GridCollisionDetectionSystem_8ixx" startline="421" endline="462">helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::update</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a398512331f26b4a44dda02476249f610" compoundref="GridCollisionDetectionSystem_8ixx" startline="429" endline="470">helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::update</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1Component_1a58e0f3384ee76bb9961ffb46e3181bda" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -363,8 +374,17 @@
         <reimplementedby refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563">typeId</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563">typeId</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563">typeId</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563">typeId</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563">typeId</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563">typeId</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563">typeId</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563">typeId</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563">typeId</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563">typeId</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563">typeId</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1Aim2DComponent_1a29199079c74b8dc5a2869428fe29fea7">typeId</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1a94557d55ba2c6d6381154bafa7486c9e">typeId</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1ui_1_1transform_1_1components_1_1UiTransformComponent_1a68072bb3825033c2128482835ae6fc58">typeId</reimplementedby>
         <briefdescription>
 <para>Returns the ComponentTypeId for this <ref refid="classhelios_1_1engine_1_1ecs_1_1Component" kindref="compound">Component</ref>. </para>
         </briefdescription>

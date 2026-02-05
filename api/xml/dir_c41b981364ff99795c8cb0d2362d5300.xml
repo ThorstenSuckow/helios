@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_c41b981364ff99795c8cb0d2362d5300" kind="dir">
+    <compoundname>types</compoundname>
+    <innerfile refid="helios_2engine_2mechanics_2scoring_2types_2__module_8ixx">helios/engine/mechanics/scoring/types/_module.ixx</innerfile>
+    <innerfile refid="KillReward_8ixx">KillReward.ixx</innerfile>
+    <innerfile refid="Score_8ixx">Score.ixx</innerfile>
+    <innerfile refid="ScoreContext_8ixx">ScoreContext.ixx</innerfile>
+    <innerfile refid="ScorePoolRevision_8ixx">ScorePoolRevision.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_c41b981364ff99795c8cb0d2362d5300_1autotoc_md248">
+<title>helios::engine::mechanics::scoring::types</title><para>Score data types and value classes.</para>
+<para>This namespace contains types for score values, score contexts, and related data structures used throughout the scoring system.</para>
+</sect1>
+<sect1 id="dir_c41b981364ff99795c8cb0d2362d5300_1autotoc_md249">
+<title>Types</title><para><table rows="5" cols="2"><row>
+<entry thead="yes"><para>Type  </para>
+</entry><entry thead="yes"><para>Description  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>Score</computeroutput>  </para>
+</entry><entry thead="no"><para>Abstract base class for score value types  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>KillReward</computeroutput>  </para>
+</entry><entry thead="no"><para>Concrete score type for kill rewards  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ScoreContext</computeroutput>  </para>
+</entry><entry thead="no"><para>Data structure containing score type, pool ID, and value  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ScorePoolRevision</computeroutput>  </para>
+</entry><entry thead="no"><para>Type alias for tracking pool changes  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_c41b981364ff99795c8cb0d2362d5300_1autotoc_md250">
+<title>Score Hierarchy</title><para><programlisting><codeline><highlight class="normal">Score<sp/>(abstract)</highlight></codeline>
+<codeline><highlight class="normal">└──<sp/>KillReward</highlight></codeline>
+<codeline><highlight class="normal">└──<sp/>(custom<sp/>score<sp/>types...)</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_c41b981364ff99795c8cb0d2362d5300_1autotoc_md251">
+<title>ScoreContext</title><para>Used to transfer score data through the command system:</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal">ScoreValueContext{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.scoreTypeId<sp/>=<sp/>ScoreTypeId::id&lt;KillReward&gt;(),</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.scorePoolId<sp/>=<sp/>ScorePoolId{</highlight><highlight class="stringliteral">&quot;player1&quot;</highlight><highlight class="normal">},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.value<sp/>=<sp/>100.0</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+</para>
+<para><details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/mechanics/scoring/types/"/>
+  </compounddef>
+</doxygen>

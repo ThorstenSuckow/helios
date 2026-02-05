@@ -8,5 +8,6 @@ var namespacehelios_1_1engine_1_1modules =
     [ "model", "namespacehelios_1_1engine_1_1modules_1_1model.html", "namespacehelios_1_1engine_1_1modules_1_1model" ],
     [ "scene", "namespacehelios_1_1engine_1_1modules_1_1scene.html", "namespacehelios_1_1engine_1_1modules_1_1scene" ],
     [ "systems", "namespacehelios_1_1engine_1_1modules_1_1systems.html", "namespacehelios_1_1engine_1_1modules_1_1systems" ],
-    [ "spatial", "namespacehelios_1_1engine_1_1modules_1_1spatial.html", "namespacehelios_1_1engine_1_1modules_1_1spatial" ]
+    [ "spatial", "namespacehelios_1_1engine_1_1modules_1_1spatial.html", "namespacehelios_1_1engine_1_1modules_1_1spatial" ],
+    [ "ui", "namespacehelios_1_1engine_1_1modules_1_1ui.html", "namespacehelios_1_1engine_1_1modules_1_1ui" ]
 ];

@@ -20,14 +20,45 @@
 <codeline></codeline>
 <codeline><highlight class="normal">|<sp/>Type<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|------|---------|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`CollisionBehavior`<sp/>|<sp/>Enum<sp/>defining<sp/>collision<sp/>response<sp/>types<sp/>(Trigger,<sp/>Solid,<sp/>etc.)<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`CollisionBehavior`<sp/>|<sp/>Bitmask<sp/>enum<sp/>defining<sp/>collision<sp/>response<sp/>types<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`CollisionContext`<sp/>|<sp/>Struct<sp/>containing<sp/>collision<sp/>event<sp/>data<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>CollisionBehavior</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Bitmask<sp/>values<sp/>that<sp/>can<sp/>be<sp/>combined<sp/>to<sp/>define<sp/>collision<sp/>responses:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Value<sp/>|<sp/>Description<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|-------------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`None`<sp/>|<sp/>No<sp/>collision<sp/>response<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`Reflect`<sp/>|<sp/>Reflect<sp/>velocity<sp/>off<sp/>the<sp/>collision<sp/>surface<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`Bounce`<sp/>|<sp/>Bounce<sp/>with<sp/>restitution<sp/>applied<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`Stick`<sp/>|<sp/>Attach<sp/>entity<sp/>to<sp/>the<sp/>collision<sp/>surface<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`Despawn`<sp/>|<sp/>Remove<sp/>entity<sp/>from<sp/>the<sp/>game<sp/>world<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`PassEvent`<sp/>|<sp/>Emit<sp/>event<sp/>without<sp/>physical<sp/>response<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`PushEvent`<sp/>|<sp/>Push<sp/>event<sp/>to<sp/>double-buffered<sp/>event<sp/>bus<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`FrameEvent`<sp/>|<sp/>Process<sp/>event<sp/>in<sp/>the<sp/>current<sp/>frame<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>CollisionContext</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Contains<sp/>collision<sp/>event<sp/>data:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Field<sp/>|<sp/>Type<sp/>|<sp/>Description<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|------|-------------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`source`<sp/>|<sp/>`Guid`<sp/>|<sp/>Source<sp/>entity<sp/>GUID<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`contact`<sp/>|<sp/>`vec3f`<sp/>|<sp/>World-space<sp/>contact<sp/>point<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`isSolid`<sp/>|<sp/>`bool`<sp/>|<sp/>True<sp/>if<sp/>blocking<sp/>collision<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`isTrigger`<sp/>|<sp/>`bool`<sp/>|<sp/>True<sp/>if<sp/>trigger<sp/>collision<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`isCollisionReporter`<sp/>|<sp/>`bool`<sp/>|<sp/>True<sp/>if<sp/>source<sp/>reports<sp/>events<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`other`<sp/>|<sp/>`optional&lt;Guid&gt;`<sp/>|<sp/>Other<sp/>entity<sp/>GUID<sp/>(if<sp/>any)<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`collisionLayerId`<sp/>|<sp/>`uint32_t`<sp/>|<sp/>Source<sp/>entity<sp/>layer<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`otherCollisionLayerId`<sp/>|<sp/>`uint32_t`<sp/>|<sp/>Other<sp/>entity<sp/>layer<sp/>|</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>
 <codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
 <codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
 <codeline><highlight class="normal">@namespace<sp/>helios::engine::modules::physics::collision::types</highlight></codeline>
 <codeline><highlight class="normal">@brief<sp/>Type<sp/>definitions<sp/>for<sp/>collision<sp/>system<sp/>behavior<sp/>configuration.</highlight></codeline>
-<codeline><highlight class="normal">@details<sp/>Provides<sp/>enums<sp/>and<sp/>structs<sp/>that<sp/>configure<sp/>collision<sp/>detection<sp/>and<sp/>response<sp/>behavior.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Provides<sp/>enums<sp/>and<sp/>structs<sp/>that<sp/>configure<sp/>collision<sp/>detection<sp/>and<sp/>response<sp/>behavior,<sp/>including<sp/>bitmask-based<sp/>behavior<sp/>flags<sp/>and<sp/>collision<sp/>event<sp/>context<sp/>data.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
 <codeline></codeline>
     </programlisting>

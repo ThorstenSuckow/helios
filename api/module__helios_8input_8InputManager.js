@@ -6,6 +6,7 @@ var module__helios_8input_8InputManager =
     [ "helios::input::InputManager::observedWindow", "module__helios_8input_8InputManager.html#a73ff092ed6634db2dc52d8224700d35f", null ],
     [ "helios::input::InputManager::poll", "module__helios_8input_8InputManager.html#ab46c4ce60870839d557ba3d141964f01", null ],
     [ "helios::input::InputManager::isKeyPressed", "module__helios_8input_8InputManager.html#a9cdcf0b8c5ca77db5cba2498132479f1", null ],
+    [ "helios::input::InputManager::isKeyReleased", "module__helios_8input_8InputManager.html#aabbbcaa0938a51cc0cd6621b5ba9dee9", null ],
     [ "helios::input::InputManager::registerGamepads", "module__helios_8input_8InputManager.html#a50c3854c194f5f40d1e5a724f5512c0c", null ],
     [ "helios::input::InputManager::gamepadState", "module__helios_8input_8InputManager.html#a3ae14ffca9c0950090bffa87d8ef7b7f", null ],
     [ "helios::input::InputManager::isConnected", "module__helios_8input_8InputManager.html#aabc1c034f222ef983272ac4145575458", null ],

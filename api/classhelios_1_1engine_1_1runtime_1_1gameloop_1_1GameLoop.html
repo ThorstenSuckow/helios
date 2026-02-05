@@ -132,8 +132,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a6b6e5665315d75f4e7007b78eb6f449e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a reference to the command buffer.  <br /></td></tr>
 <tr class="memitem:a7915a98afe2de477625904422cf6d029" id="r_a7915a98afe2de477625904422cf6d029"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7915a98afe2de477625904422cf6d029">init</a> (<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">helios::engine::runtime::world::GameWorld</a> &amp;gameWorld)</td></tr>
 <tr class="memdesc:a7915a98afe2de477625904422cf6d029"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html" title="Central orchestrator for the game update cycle.">GameLoop</a> and all registered phases and passes.  <br /></td></tr>
-<tr class="memitem:aff5330464fa41a1d7a8ebcc41b75b571" id="r_aff5330464fa41a1d7a8ebcc41b75b571"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aff5330464fa41a1d7a8ebcc41b75b571">update</a> (<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">helios::engine::runtime::world::GameWorld</a> &amp;gameWorld, float deltaTime, const <a class="el" href="classhelios_1_1input_1_1InputSnapshot.html">helios::input::InputSnapshot</a> &amp;inputSnapshot) noexcept</td></tr>
-<tr class="memdesc:aff5330464fa41a1d7a8ebcc41b75b571"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes one full frame update across all phases.  <br /></td></tr>
+<tr class="memitem:a8dbc5c72e9d25b13933ccda14b0975d7" id="r_a8dbc5c72e9d25b13933ccda14b0975d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8dbc5c72e9d25b13933ccda14b0975d7">update</a> (<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">helios::engine::runtime::world::GameWorld</a> &amp;gameWorld, float deltaTime, const <a class="el" href="classhelios_1_1input_1_1InputSnapshot.html">helios::input::InputSnapshot</a> &amp;inputSnapshot, std::span&lt; const <a class="el" href="structhelios_1_1rendering_1_1ViewportSnapshot.html">helios::rendering::ViewportSnapshot</a> &gt; viewportSnapshots) noexcept</td></tr>
+<tr class="memdesc:a8dbc5c72e9d25b13933ccda14b0975d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes one full frame update across all phases.  <br /></td></tr>
 <tr class="inherit_header pub_methods_classhelios_1_1engine_1_1runtime_1_1gameloop_1_1PassCommitListener"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classhelios_1_1engine_1_1runtime_1_1gameloop_1_1PassCommitListener')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public Member Functions inherited from <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1PassCommitListener.html">helios::engine::runtime::gameloop::PassCommitListener</a></td></tr>
 <tr class="memitem:a0bf454935a73dcfd5273289d92f21c27 inherit pub_methods_classhelios_1_1engine_1_1runtime_1_1gameloop_1_1PassCommitListener" id="r_a0bf454935a73dcfd5273289d92f21c27"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1PassCommitListener.html#a0bf454935a73dcfd5273289d92f21c27">~PassCommitListener</a> ()=default</td></tr>
 <tr class="memdesc:a0bf454935a73dcfd5273289d92f21c27 inherit pub_methods_classhelios_1_1engine_1_1runtime_1_1gameloop_1_1PassCommitListener"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor for proper polymorphic cleanup.  <br /></td></tr>
@@ -203,7 +203,7 @@ CommandBuffer </dd>
 <dd>
 <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1PassCommitListener.html" title="Interface for receiving notifications when a pass reaches its commit point.">PassCommitListener</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameLoop_8ixx_source.html#l00075">75</a> of file <a class="el" href="GameLoop_8ixx_source.html">GameLoop.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameLoop_8ixx_source.html#l00078">78</a> of file <a class="el" href="GameLoop_8ixx_source.html">GameLoop.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a41b297a4ee926ed2b989996ceb61bb7f" name="a41b297a4ee926ed2b989996ceb61bb7f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a41b297a4ee926ed2b989996ceb61bb7f">&#9670;&#160;</a></span>GameLoop()</h2>
@@ -260,9 +260,9 @@ CommandBuffer </dd>
 <p>Returns a reference to the command buffer. </p>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the CommandBuffer owned by this <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html" title="Central orchestrator for the game update cycle.">GameLoop</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameLoop_8ixx_source.html#l00272">272</a> of file <a class="el" href="GameLoop_8ixx_source.html">GameLoop.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameLoop_8ixx_source.html#l00275">275</a> of file <a class="el" href="GameLoop_8ixx_source.html">GameLoop.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameLoop_8ixx_source.html#l00114">commandBuffer_</a>.</p>
+<p class="reference">References <a class="el" href="GameLoop_8ixx_source.html#l00117">commandBuffer_</a>.</p>
 
 </div>
 </div>
@@ -305,9 +305,9 @@ Pass::init() </dd>
 <dd>
 System::init() </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameLoop_8ixx_source.html#l00294">294</a> of file <a class="el" href="GameLoop_8ixx_source.html">GameLoop.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameLoop_8ixx_source.html#l00297">297</a> of file <a class="el" href="GameLoop_8ixx_source.html">GameLoop.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="Phase_8ixx_source.html#l00042">helios::engine::runtime::gameloop::Main</a>, <a class="el" href="GameLoop_8ixx_source.html#l00104">mainPhase_</a>, <a class="el" href="GameLoop_8ixx_source.html#l00249">phase()</a>, <a class="el" href="Phase_8ixx_source.html#l00047">helios::engine::runtime::gameloop::Post</a>, <a class="el" href="GameLoop_8ixx_source.html#l00109">postPhase_</a>, <a class="el" href="Phase_8ixx_source.html#l00037">helios::engine::runtime::gameloop::Pre</a>, and <a class="el" href="GameLoop_8ixx_source.html#l00099">prePhase_</a>.</p>
+<p class="reference">References <a class="el" href="Phase_8ixx_source.html#l00042">helios::engine::runtime::gameloop::Main</a>, <a class="el" href="GameLoop_8ixx_source.html#l00107">mainPhase_</a>, <a class="el" href="GameLoop_8ixx_source.html#l00252">phase()</a>, <a class="el" href="Phase_8ixx_source.html#l00047">helios::engine::runtime::gameloop::Post</a>, <a class="el" href="GameLoop_8ixx_source.html#l00112">postPhase_</a>, <a class="el" href="Phase_8ixx_source.html#l00037">helios::engine::runtime::gameloop::Pre</a>, and <a class="el" href="GameLoop_8ixx_source.html#l00102">prePhase_</a>.</p>
 <div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
@@ -369,9 +369,9 @@ UpdateContext::readPass() </dd></dl>
 
 <p>Implements <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1PassCommitListener.html#ad8b56d62719d7fd9849cc9eaa44b9679">helios::engine::runtime::gameloop::PassCommitListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="GameLoop_8ixx_source.html#l00181">181</a> of file <a class="el" href="GameLoop_8ixx_source.html">GameLoop.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameLoop_8ixx_source.html#l00184">184</a> of file <a class="el" href="GameLoop_8ixx_source.html">GameLoop.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameLoop_8ixx_source.html#l00114">commandBuffer_</a>, <a class="el" href="CommitPoint_8ixx_source.html#l00056">helios::engine::runtime::gameloop::FlushCommands</a>, <a class="el" href="CommitPoint_8ixx_source.html#l00064">helios::engine::runtime::gameloop::FlushManagers</a>, <a class="el" href="GameLoop_8ixx_source.html#l00139">passEventBus_</a>, and <a class="el" href="CommitPoint_8ixx_source.html#l00049">helios::engine::runtime::gameloop::PassEvents</a>.</p>
+<p class="reference">References <a class="el" href="GameLoop_8ixx_source.html#l00117">commandBuffer_</a>, <a class="el" href="CommitPoint_8ixx_source.html#l00056">helios::engine::runtime::gameloop::FlushCommands</a>, <a class="el" href="CommitPoint_8ixx_source.html#l00064">helios::engine::runtime::gameloop::FlushManagers</a>, <a class="el" href="GameLoop_8ixx_source.html#l00142">passEventBus_</a>, and <a class="el" href="CommitPoint_8ixx_source.html#l00049">helios::engine::runtime::gameloop::PassEvents</a>.</p>
 
 </div>
 </div>
@@ -407,11 +407,11 @@ UpdateContext::readPass() </dd></dl>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the requested <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html" title="Represents a phase in the game loop containing multiple passes.">Phase</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameLoop_8ixx_source.html#l00249">249</a> of file <a class="el" href="GameLoop_8ixx_source.html">GameLoop.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameLoop_8ixx_source.html#l00252">252</a> of file <a class="el" href="GameLoop_8ixx_source.html">GameLoop.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="Phase_8ixx_source.html#l00042">helios::engine::runtime::gameloop::Main</a>, <a class="el" href="GameLoop_8ixx_source.html#l00104">mainPhase_</a>, <a class="el" href="Phase_8ixx_source.html#l00047">helios::engine::runtime::gameloop::Post</a>, <a class="el" href="GameLoop_8ixx_source.html#l00109">postPhase_</a>, <a class="el" href="Phase_8ixx_source.html#l00037">helios::engine::runtime::gameloop::Pre</a>, and <a class="el" href="GameLoop_8ixx_source.html#l00099">prePhase_</a>.</p>
+<p class="reference">References <a class="el" href="Phase_8ixx_source.html#l00042">helios::engine::runtime::gameloop::Main</a>, <a class="el" href="GameLoop_8ixx_source.html#l00107">mainPhase_</a>, <a class="el" href="Phase_8ixx_source.html#l00047">helios::engine::runtime::gameloop::Post</a>, <a class="el" href="GameLoop_8ixx_source.html#l00112">postPhase_</a>, <a class="el" href="Phase_8ixx_source.html#l00037">helios::engine::runtime::gameloop::Pre</a>, and <a class="el" href="GameLoop_8ixx_source.html#l00102">prePhase_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="GameLoop_8ixx_source.html#l00294">init()</a>, and <a class="el" href="GameLoop_8ixx_source.html#l00349">update()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="GameLoop_8ixx_source.html#l00297">init()</a>, and <a class="el" href="GameLoop_8ixx_source.html#l00353">update()</a>.</p>
 <div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
@@ -461,11 +461,11 @@ UpdateContext::readPass() </dd></dl>
 <dd>
 UpdateContext::readPhase() </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameLoop_8ixx_source.html#l00216">216</a> of file <a class="el" href="GameLoop_8ixx_source.html">GameLoop.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameLoop_8ixx_source.html#l00219">219</a> of file <a class="el" href="GameLoop_8ixx_source.html">GameLoop.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameLoop_8ixx_source.html#l00114">commandBuffer_</a>, <a class="el" href="GameWorld_8ixx_source.html#l00322">helios::engine::runtime::world::GameWorld::flushManagers()</a>, <a class="el" href="UpdateContext_8ixx_source.html#l00199">helios::engine::runtime::world::UpdateContext::gameWorld()</a>, <a class="el" href="GameLoop_8ixx_source.html#l00139">passEventBus_</a>, and <a class="el" href="GameLoop_8ixx_source.html#l00126">phaseEventBus_</a>.</p>
+<p class="reference">References <a class="el" href="GameLoop_8ixx_source.html#l00117">commandBuffer_</a>, <a class="el" href="GameWorld_8ixx_source.html#l00359">helios::engine::runtime::world::GameWorld::flushManagers()</a>, <a class="el" href="UpdateContext_8ixx_source.html#l00222">helios::engine::runtime::world::UpdateContext::gameWorld()</a>, <a class="el" href="GameLoop_8ixx_source.html#l00142">passEventBus_</a>, and <a class="el" href="GameLoop_8ixx_source.html#l00129">phaseEventBus_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="GameLoop_8ixx_source.html#l00349">update()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="GameLoop_8ixx_source.html#l00353">update()</a>.</p>
 <div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
@@ -481,8 +481,8 @@ UpdateContext::readPhase() </dd></dl>
 
 </div>
 </div>
-<a id="aff5330464fa41a1d7a8ebcc41b75b571" name="aff5330464fa41a1d7a8ebcc41b75b571"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aff5330464fa41a1d7a8ebcc41b75b571">&#9670;&#160;</a></span>update()</h2>
+<a id="a8dbc5c72e9d25b13933ccda14b0975d7" name="a8dbc5c72e9d25b13933ccda14b0975d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8dbc5c72e9d25b13933ccda14b0975d7">&#9670;&#160;</a></span>update()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -503,7 +503,12 @@ UpdateContext::readPhase() </dd></dl>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classhelios_1_1input_1_1InputSnapshot.html">helios::input::InputSnapshot</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>inputSnapshot</em></span>&#160;)</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1input_1_1InputSnapshot.html">helios::input::InputSnapshot</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>inputSnapshot</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::span&lt; const <a class="el" href="structhelios_1_1rendering_1_1ViewportSnapshot.html">helios::rendering::ViewportSnapshot</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>viewportSnapshots</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -527,7 +532,8 @@ UpdateContext::readPhase() </dd></dl>
   <table class="params">
     <tr><td class="paramname">gameWorld</td><td>Reference to the game world. </td></tr>
     <tr><td class="paramname">deltaTime</td><td>Time elapsed since the last frame in seconds. </td></tr>
-    <tr><td class="paramname">inputSnapshot</td><td>Snapshot of the current input state.</td></tr>
+    <tr><td class="paramname">inputSnapshot</td><td>Snapshot of the current input state. </td></tr>
+    <tr><td class="paramname">viewportSnapshots</td><td>Snapshots of viewports registered with an id.</td></tr>
   </table>
   </dd>
 </dl>
@@ -538,14 +544,14 @@ UpdateContext::readPhase() </dd></dl>
 <dd>
 UpdateContext </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameLoop_8ixx_source.html#l00349">349</a> of file <a class="el" href="GameLoop_8ixx_source.html">GameLoop.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameLoop_8ixx_source.html#l00353">353</a> of file <a class="el" href="GameLoop_8ixx_source.html">GameLoop.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameLoop_8ixx_source.html#l00114">commandBuffer_</a>, <a class="el" href="GameLoop_8ixx_source.html#l00155">frameEventBus_</a>, <a class="el" href="Phase_8ixx_source.html#l00042">helios::engine::runtime::gameloop::Main</a>, <a class="el" href="GameLoop_8ixx_source.html#l00104">mainPhase_</a>, <a class="el" href="GameLoop_8ixx_source.html#l00139">passEventBus_</a>, <a class="el" href="GameLoop_8ixx_source.html#l00249">phase()</a>, <a class="el" href="GameLoop_8ixx_source.html#l00216">phaseCommit()</a>, <a class="el" href="GameLoop_8ixx_source.html#l00126">phaseEventBus_</a>, <a class="el" href="Phase_8ixx_source.html#l00047">helios::engine::runtime::gameloop::Post</a>, <a class="el" href="GameLoop_8ixx_source.html#l00109">postPhase_</a>, <a class="el" href="Phase_8ixx_source.html#l00037">helios::engine::runtime::gameloop::Pre</a>, and <a class="el" href="GameLoop_8ixx_source.html#l00099">prePhase_</a>.</p>
+<p class="reference">References <a class="el" href="GameLoop_8ixx_source.html#l00117">commandBuffer_</a>, <a class="el" href="GameLoop_8ixx_source.html#l00158">frameEventBus_</a>, <a class="el" href="Phase_8ixx_source.html#l00042">helios::engine::runtime::gameloop::Main</a>, <a class="el" href="GameLoop_8ixx_source.html#l00107">mainPhase_</a>, <a class="el" href="GameLoop_8ixx_source.html#l00142">passEventBus_</a>, <a class="el" href="GameLoop_8ixx_source.html#l00252">phase()</a>, <a class="el" href="GameLoop_8ixx_source.html#l00219">phaseCommit()</a>, <a class="el" href="GameLoop_8ixx_source.html#l00129">phaseEventBus_</a>, <a class="el" href="Phase_8ixx_source.html#l00047">helios::engine::runtime::gameloop::Post</a>, <a class="el" href="GameLoop_8ixx_source.html#l00112">postPhase_</a>, <a class="el" href="Phase_8ixx_source.html#l00037">helios::engine::runtime::gameloop::Pre</a>, and <a class="el" href="GameLoop_8ixx_source.html#l00102">prePhase_</a>.</p>
 <div id="dynsection-6" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-6-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-6-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_aff5330464fa41a1d7a8ebcc41b75b571_cgraph.svg" width="100%" height="425"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_a8dbc5c72e9d25b13933ccda14b0975d7_cgraph.svg" width="100%" height="425"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>

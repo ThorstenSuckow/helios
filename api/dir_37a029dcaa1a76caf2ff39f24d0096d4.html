@@ -110,7 +110,7 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="dir_37a029dcaa1a76caf2ff39f24d0096d4_dep.svg" width="112" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="dir_37a029dcaa1a76caf2ff39f24d0096d4_dep.svg" width="208" height="156"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-files" class="groupheader"><a id="files" name="files"></a>
@@ -119,25 +119,75 @@ Files</h2></td></tr>
 <tr class="memdesc:helios_2engine_2modules_2physics_2collision_2types_2__module_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aggregate module for <a class="el" href="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types.html" title="Type definitions for collision system behavior configuration.">helios::engine::modules::physics::collision::types</a> namespace. <br /></td></tr>
 <tr class="memitem:CollisionBehavior_2Eixx" id="r_CollisionBehavior_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="CollisionBehavior_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="CollisionBehavior_8ixx.html">CollisionBehavior.ixx</a></td></tr>
 <tr class="memdesc:CollisionBehavior_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration of collision response behaviors. <br /></td></tr>
+<tr class="memitem:CollisionContext_2Eixx" id="r_CollisionContext_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="CollisionContext_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="CollisionContext_8ixx.html">CollisionContext.ixx</a></td></tr>
+<tr class="memdesc:CollisionContext_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Context data for collision events. <br /></td></tr>
 <tr class="memitem:CollisionResponse_2Eixx" id="r_CollisionResponse_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="CollisionResponse_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="CollisionResponse_8ixx.html">CollisionResponse.ixx</a></td></tr>
 <tr class="memdesc:CollisionResponse_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enum for defining collision response behaviors. <br /></td></tr>
 <tr class="memitem:HitPolicy_2Eixx" id="r_HitPolicy_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="HitPolicy_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="HitPolicy_8ixx.html">HitPolicy.ixx</a></td></tr>
 <tr class="memdesc:HitPolicy_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines collision hit policies controlling how many collisions are reported per frame. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md262"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md331"></a>
 helios::engine::modules::physics::collision::types</h1>
 <p>Type definitions for collision system behavior configuration.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md263"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md332"></a>
 Overview</h1>
 <p>This module provides enumeration types and configuration structures used by the collision detection system to control how collisions are processed and resolved.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md264"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md333"></a>
 Key Types</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Type  </th><th class="markdownTableHeadNone">Purpose  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">CollisionBehavior</span>  </td><td class="markdownTableBodyNone">Enum defining collision response types (Trigger, Solid, etc.)  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">CollisionBehavior</span>  </td><td class="markdownTableBodyNone">Bitmask enum defining collision response types  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">CollisionContext</span>  </td><td class="markdownTableBodyNone">Struct containing collision event data  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md334"></a>
+CollisionBehavior</h1>
+<p>Bitmask values that can be combined to define collision responses:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Value  </th><th class="markdownTableHeadNone">Description  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">None</span>  </td><td class="markdownTableBodyNone">No collision response  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">Reflect</span>  </td><td class="markdownTableBodyNone">Reflect velocity off the collision surface  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">Bounce</span>  </td><td class="markdownTableBodyNone">Bounce with restitution applied  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">Stick</span>  </td><td class="markdownTableBodyNone">Attach entity to the collision surface  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">Despawn</span>  </td><td class="markdownTableBodyNone">Remove entity from the game world  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">PassEvent</span>  </td><td class="markdownTableBodyNone">Emit event without physical response  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">PushEvent</span>  </td><td class="markdownTableBodyNone">Push event to double-buffered event bus  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">FrameEvent</span>  </td><td class="markdownTableBodyNone">Process event in the current frame  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md335"></a>
+CollisionContext</h1>
+<p>Contains collision event data:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Field  </th><th class="markdownTableHeadNone">Type  </th><th class="markdownTableHeadNone">Description  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">source</span>  </td><td class="markdownTableBodyNone"><span class="tt">Guid</span>  </td><td class="markdownTableBodyNone">Source entity GUID  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">contact</span>  </td><td class="markdownTableBodyNone"><span class="tt">vec3f</span>  </td><td class="markdownTableBodyNone">World-space contact point  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">isSolid</span>  </td><td class="markdownTableBodyNone"><span class="tt">bool</span>  </td><td class="markdownTableBodyNone">True if blocking collision  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">isTrigger</span>  </td><td class="markdownTableBodyNone"><span class="tt">bool</span>  </td><td class="markdownTableBodyNone">True if trigger collision  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">isCollisionReporter</span>  </td><td class="markdownTableBodyNone"><span class="tt">bool</span>  </td><td class="markdownTableBodyNone">True if source reports events  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">other</span>  </td><td class="markdownTableBodyNone"><span class="tt">optional&lt;Guid&gt;</span>  </td><td class="markdownTableBodyNone">Other entity GUID (if any)  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">collisionLayerId</span>  </td><td class="markdownTableBodyNone"><span class="tt">uint32_t</span>  </td><td class="markdownTableBodyNone">Source entity layer  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">otherCollisionLayerId</span>  </td><td class="markdownTableBodyNone"><span class="tt">uint32_t</span>  </td><td class="markdownTableBodyNone">Other entity layer  </td></tr>
 </table>
 <hr  />
  <details >

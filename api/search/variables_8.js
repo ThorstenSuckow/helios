@@ -12,6 +12,10 @@ var searchData=
   ['inputmanager_5f_9',['inputManager_',['../classhelios_1_1app_1_1Application.html#a1a784b65ca2b1ce428b90d1be0728b0b',1,'helios::app::Application']]],
   ['intensity_5f_10',['intensity_',['../classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent.html#a7571f57473bd46ce4be7be42c786802c',1,'helios::engine::mechanics::combat::components::ShootComponent']]],
   ['isactive_5f_11',['isActive_',['../classhelios_1_1engine_1_1ecs_1_1GameObject.html#ab96332cd723532c33d3586df4e6c43e1',1,'helios::engine::ecs::GameObject::isActive_'],['../classhelios_1_1scene_1_1SceneNode.html#a34d361ed73787a31ca60aac86bb7d9a2',1,'helios::scene::SceneNode::isActive_']]],
-  ['isenabled_5f_12',['isEnabled_',['../classhelios_1_1engine_1_1ecs_1_1Component.html#ab5895e14ca5df63711d46a492fb40c64',1,'helios::engine::ecs::Component']]],
-  ['ivory_13',['Ivory',['../structhelios_1_1util_1_1Colors.html#a7ccc5935e13166438ed55ba82d9722d2',1,'helios::util::Colors']]]
+  ['iscollisionreporter_12',['isCollisionReporter',['../structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1_1CollisionContext.html#ade43e5a317c4a32615268536cf1b50cd',1,'helios::engine::modules::physics::collision::types::CollisionContext']]],
+  ['isdirty_5f_13',['isDirty_',['../classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiTextComponent.html#a4869554c41143ac5ee33b44b88bb6a43',1,'helios::engine::modules::ui::widgets::components::UiTextComponent']]],
+  ['isenabled_5f_14',['isEnabled_',['../classhelios_1_1engine_1_1ecs_1_1Component.html#ab5895e14ca5df63711d46a492fb40c64',1,'helios::engine::ecs::Component']]],
+  ['issolid_15',['isSolid',['../structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1_1CollisionContext.html#a4ee8edb7662d02275bbe2be2ab95a2ea',1,'helios::engine::modules::physics::collision::types::CollisionContext']]],
+  ['istrigger_16',['isTrigger',['../structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1_1CollisionContext.html#aa85a000d802ca2563e756af2816fb6b8',1,'helios::engine::modules::physics::collision::types::CollisionContext']]],
+  ['ivory_17',['Ivory',['../structhelios_1_1util_1_1Colors.html#a7ccc5935e13166438ed55ba82d9722d2',1,'helios::util::Colors']]]
 ];

@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="helios_2engine_2mechanics_2health_2README_8md" kind="file" language="Markdown">
+    <compoundname>helios/engine/mechanics/health/README.md</compoundname>
+    <innernamespace refid="namespacehelios_1_1engine_1_1mechanics_1_1health">helios::engine::mechanics::health</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>helios::engine::mechanics::health</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Health<sp/>management<sp/>system<sp/>for<sp/>game<sp/>entities.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>components,<sp/>events,<sp/>and<sp/>systems<sp/>for<sp/>tracking<sp/>entity<sp/>health,<sp/>processing<sp/>damage,<sp/>and<sp/>handling<sp/>death.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Submodules</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Submodule<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-----------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`components/`<sp/>|<sp/>Health-related<sp/>ECS<sp/>components<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`events/`<sp/>|<sp/>Health-related<sp/>events<sp/>(death)<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`systems/`<sp/>|<sp/>Systems<sp/>for<sp/>health<sp/>processing<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Architecture</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">1.<sp/>**HealthComponent**<sp/>tracks<sp/>current<sp/>and<sp/>maximum<sp/>health</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>**Combat<sp/>systems**<sp/>call<sp/>`takeDamage()`<sp/>when<sp/>damage<sp/>is<sp/>dealt</highlight></codeline>
+<codeline><highlight class="normal">3.<sp/>**HealthUpdateSystem**<sp/>detects<sp/>`health<sp/>&lt;=<sp/>0`<sp/>and:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>Issues<sp/>`DespawnCommand`<sp/>to<sp/>remove<sp/>the<sp/>entity</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>Publishes<sp/>`DeathEvent`<sp/>for<sp/>other<sp/>systems<sp/>(e.g.,<sp/>scoring)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Integration</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>health<sp/>system<sp/>integrates<sp/>with:</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Combat<sp/>system**<sp/>-<sp/>receives<sp/>damage<sp/>via<sp/>`takeDamage()`</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Scoring<sp/>system**<sp/>-<sp/>`DeathEvent`<sp/>triggers<sp/>score<sp/>awards</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Spawn<sp/>system**<sp/>-<sp/>dead<sp/>entities<sp/>are<sp/>despawned<sp/>via<sp/>command</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::engine::mechanics::health</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Health<sp/>management<sp/>system<sp/>for<sp/>game<sp/>entities.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Provides<sp/>infrastructure<sp/>for<sp/>tracking<sp/>entity<sp/>health,<sp/>processing<sp/>damage<sp/>and<sp/>healing,<sp/>and<sp/>handling<sp/>entity<sp/>death<sp/>through<sp/>events.</highlight></codeline>
+<codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
+    </programlisting>
+    <location file="/tmp/h/include/helios/engine/mechanics/health/README.md"/>
+  </compounddef>
+</doxygen>

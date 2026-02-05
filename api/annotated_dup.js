@@ -85,27 +85,38 @@ var annotated_dup =
               [ "configs", "namespacehelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs.html", [
                 [ "ChaseConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ChaseConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ChaseConfig" ],
                 [ "CollisionConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1CollisionConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1CollisionConfig" ],
+                [ "CombatConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1CombatConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1CombatConfig" ],
                 [ "GfxEffectsConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1GfxEffectsConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1GfxEffectsConfig" ],
+                [ "HealthConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1HealthConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1HealthConfig" ],
                 [ "LevelBoundsCollisionConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1LevelBoundsCollisionConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1LevelBoundsCollisionConfig" ],
                 [ "LifecycleConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1LifecycleConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1LifecycleConfig" ],
                 [ "MeshRenderableConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1MeshRenderableConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1MeshRenderableConfig" ],
                 [ "Move2DConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1Move2DConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1Move2DConfig" ],
+                [ "ObserverConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ObserverConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ObserverConfig" ],
                 [ "SceneNodeConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1SceneNodeConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1SceneNodeConfig" ],
+                [ "ScorePoolConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ScorePoolConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ScorePoolConfig" ],
+                [ "ScoreValueConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ScoreValueConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ScoreValueConfig" ],
                 [ "SpawnConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1SpawnConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1SpawnConfig" ],
                 [ "SteeringConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1SteeringConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1SteeringConfig" ],
+                [ "TextRenderableConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig" ],
                 [ "TransformConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TransformConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TransformConfig" ],
+                [ "UiTransformConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1UiTransformConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1UiTransformConfig" ],
                 [ "WeaponConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1WeaponConfig.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1WeaponConfig" ]
               ] ],
               [ "AiBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1AiBuilder.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1AiBuilder" ],
               [ "CollisionBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1CollisionBuilder.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1CollisionBuilder" ],
+              [ "CombatBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1CombatBuilder.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1CombatBuilder" ],
               [ "EffectsBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1EffectsBuilder.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1EffectsBuilder" ],
+              [ "HealthBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1HealthBuilder.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1HealthBuilder" ],
               [ "LifecycleBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1LifecycleBuilder.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1LifecycleBuilder" ],
               [ "MotionBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1MotionBuilder.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1MotionBuilder" ],
+              [ "ObserverBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1ObserverBuilder.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1ObserverBuilder" ],
               [ "RenderingBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1RenderingBuilder.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1RenderingBuilder" ],
               [ "SceneBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1SceneBuilder.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1SceneBuilder" ],
-              [ "ShootingBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1ShootingBuilder.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1ShootingBuilder" ],
+              [ "ScoringBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1ScoringBuilder.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1ScoringBuilder" ],
               [ "SpawnBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1SpawnBuilder.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1SpawnBuilder" ],
-              [ "TransformBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1TransformBuilder.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1TransformBuilder" ]
+              [ "TransformBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1TransformBuilder.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1TransformBuilder" ],
+              [ "UiTransformBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1UiTransformBuilder.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1UiTransformBuilder" ]
             ] ],
             [ "GameObjectFactory", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory" ]
           ] ]
@@ -115,8 +126,11 @@ var annotated_dup =
             [ "ComponentTypeId", "classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId.html", "classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId" ],
             [ "FontId", "structhelios_1_1engine_1_1core_1_1data_1_1FontId.html", "structhelios_1_1engine_1_1core_1_1data_1_1FontId" ],
             [ "GameObjectPoolId", "structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId.html", "structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" ],
+            [ "ScorePoolId", "structhelios_1_1engine_1_1core_1_1data_1_1ScorePoolId.html", "structhelios_1_1engine_1_1core_1_1data_1_1ScorePoolId" ],
+            [ "ScoreTypeId", "classhelios_1_1engine_1_1core_1_1data_1_1ScoreTypeId.html", "classhelios_1_1engine_1_1core_1_1data_1_1ScoreTypeId" ],
             [ "SpawnProfileId", "structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId.html", "structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId" ],
-            [ "SpawnRuleId", "structhelios_1_1engine_1_1core_1_1data_1_1SpawnRuleId.html", "structhelios_1_1engine_1_1core_1_1data_1_1SpawnRuleId" ]
+            [ "SpawnRuleId", "structhelios_1_1engine_1_1core_1_1data_1_1SpawnRuleId.html", "structhelios_1_1engine_1_1core_1_1data_1_1SpawnRuleId" ],
+            [ "ViewportId", "structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html", "structhelios_1_1engine_1_1core_1_1data_1_1ViewportId" ]
           ] ]
         ] ],
         [ "ecs", "namespacehelios_1_1engine_1_1ecs.html", [
@@ -143,10 +157,33 @@ var annotated_dup =
             ] ],
             [ "components", "namespacehelios_1_1engine_1_1mechanics_1_1combat_1_1components.html", [
               [ "Aim2DComponent", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1Aim2DComponent.html", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1Aim2DComponent" ],
+              [ "LastAttackerComponent", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent.html", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent" ],
               [ "ShootComponent", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent.html", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent" ]
             ] ],
             [ "systems", "namespacehelios_1_1engine_1_1mechanics_1_1combat_1_1systems.html", [
               [ "ProjectileSpawnSystem", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1systems_1_1ProjectileSpawnSystem.html", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1systems_1_1ProjectileSpawnSystem" ]
+            ] ],
+            [ "types", "namespacehelios_1_1engine_1_1mechanics_1_1combat_1_1types.html", [
+              [ "AttackContext", "structhelios_1_1engine_1_1mechanics_1_1combat_1_1types_1_1AttackContext.html", "structhelios_1_1engine_1_1mechanics_1_1combat_1_1types_1_1AttackContext" ]
+            ] ]
+          ] ],
+          [ "damage", "namespacehelios_1_1engine_1_1mechanics_1_1damage.html", [
+            [ "components", "namespacehelios_1_1engine_1_1mechanics_1_1damage_1_1components.html", [
+              [ "DamageDealerComponent", "classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1DamageDealerComponent.html", "classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1DamageDealerComponent" ]
+            ] ],
+            [ "systems", "namespacehelios_1_1engine_1_1mechanics_1_1damage_1_1systems.html", [
+              [ "DamageOnCollisionSystem", "classhelios_1_1engine_1_1mechanics_1_1damage_1_1systems_1_1DamageOnCollisionSystem.html", "classhelios_1_1engine_1_1mechanics_1_1damage_1_1systems_1_1DamageOnCollisionSystem" ]
+            ] ]
+          ] ],
+          [ "health", "namespacehelios_1_1engine_1_1mechanics_1_1health.html", [
+            [ "components", "namespacehelios_1_1engine_1_1mechanics_1_1health_1_1components.html", [
+              [ "HealthComponent", "classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent.html", "classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent" ]
+            ] ],
+            [ "events", "namespacehelios_1_1engine_1_1mechanics_1_1health_1_1events.html", [
+              [ "DeathEvent", "classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1DeathEvent.html", "classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1DeathEvent" ]
+            ] ],
+            [ "systems", "namespacehelios_1_1engine_1_1mechanics_1_1health_1_1systems.html", [
+              [ "HealthUpdateSystem", "classhelios_1_1engine_1_1mechanics_1_1health_1_1systems_1_1HealthUpdateSystem.html", "classhelios_1_1engine_1_1mechanics_1_1health_1_1systems_1_1HealthUpdateSystem" ]
             ] ]
           ] ],
           [ "input", "namespacehelios_1_1engine_1_1mechanics_1_1input.html", [
@@ -162,8 +199,34 @@ var annotated_dup =
               [ "DelayedComponentEnablerSystem", "classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1DelayedComponentEnablerSystem.html", "classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1DelayedComponentEnablerSystem" ]
             ] ]
           ] ],
+          [ "scoring", "namespacehelios_1_1engine_1_1mechanics_1_1scoring.html", [
+            [ "commands", "namespacehelios_1_1engine_1_1mechanics_1_1scoring_1_1commands.html", [
+              [ "UpdateScoreCommand", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1commands_1_1UpdateScoreCommand.html", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1commands_1_1UpdateScoreCommand" ]
+            ] ],
+            [ "components", "namespacehelios_1_1engine_1_1mechanics_1_1scoring_1_1components.html", [
+              [ "ScoreObserverComponent", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScoreObserverComponent.html", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScoreObserverComponent" ],
+              [ "ScorePoolComponent", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScorePoolComponent.html", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScorePoolComponent" ],
+              [ "ScoreValueComponent", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScoreValueComponent.html", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScoreValueComponent" ]
+            ] ],
+            [ "systems", "namespacehelios_1_1engine_1_1mechanics_1_1scoring_1_1systems.html", [
+              [ "ScoreObserverClearSystem", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1ScoreObserverClearSystem.html", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1ScoreObserverClearSystem" ],
+              [ "CombatScoringSystem", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1CombatScoringSystem.html", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1CombatScoringSystem" ],
+              [ "ScoreObserverSystem", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1ScoreObserverSystem.html", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1ScoreObserverSystem" ]
+            ] ],
+            [ "types", "namespacehelios_1_1engine_1_1mechanics_1_1scoring_1_1types.html", [
+              [ "KillReward", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1types_1_1KillReward.html", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1types_1_1KillReward" ],
+              [ "Score", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1types_1_1Score.html", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1types_1_1Score" ],
+              [ "ScoreValueContext", "structhelios_1_1engine_1_1mechanics_1_1scoring_1_1types_1_1ScoreValueContext.html", "structhelios_1_1engine_1_1mechanics_1_1scoring_1_1types_1_1ScoreValueContext" ]
+            ] ],
+            [ "ScoreCommandDispatcher", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandDispatcher.html", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandDispatcher" ],
+            [ "ScoreCommandHandler", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler.html", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler" ],
+            [ "ScorePool", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePool.html", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePool" ],
+            [ "ScorePoolManager", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager.html", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager" ],
+            [ "ScorePoolSnapshot", "structhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolSnapshot.html", "structhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolSnapshot" ]
+          ] ],
           [ "spawn", "namespacehelios_1_1engine_1_1mechanics_1_1spawn.html", [
             [ "components", "namespacehelios_1_1engine_1_1mechanics_1_1spawn_1_1components.html", [
+              [ "EmittedByComponent", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1EmittedByComponent.html", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1EmittedByComponent" ],
               [ "SpawnedByProfileComponent", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent.html", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent" ]
             ] ],
             [ "systems", "namespacehelios_1_1engine_1_1mechanics_1_1spawn_1_1systems.html", [
@@ -219,6 +282,9 @@ var annotated_dup =
                 [ "CollisionStateClearSystem", "classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1CollisionStateClearSystem.html", "classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1CollisionStateClearSystem" ],
                 [ "CollisionStateResponseSystem", "classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1CollisionStateResponseSystem.html", "classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1CollisionStateResponseSystem" ],
                 [ "GridCollisionDetectionSystem", "classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem.html", "classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem" ]
+              ] ],
+              [ "types", "namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types.html", [
+                [ "CollisionContext", "structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1_1CollisionContext.html", "structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1_1CollisionContext" ]
               ] ]
             ] ]
           ] ],
@@ -256,6 +322,29 @@ var annotated_dup =
                 [ "ComposeTransformSystem", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1systems_1_1ComposeTransformSystem.html", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1systems_1_1ComposeTransformSystem" ],
                 [ "ScaleSystem", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1systems_1_1ScaleSystem.html", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1systems_1_1ScaleSystem" ],
                 [ "TransformClearSystem", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1systems_1_1TransformClearSystem.html", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1systems_1_1TransformClearSystem" ]
+              ] ]
+            ] ]
+          ] ],
+          [ "ui", "namespacehelios_1_1engine_1_1modules_1_1ui.html", [
+            [ "binding", "namespacehelios_1_1engine_1_1modules_1_1ui_1_1binding.html", [
+              [ "systems", "namespacehelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems.html", [
+                [ "Score2UiTextUpdateSystem", "classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1Score2UiTextUpdateSystem.html", "classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1Score2UiTextUpdateSystem" ]
+              ] ]
+            ] ],
+            [ "transform", "namespacehelios_1_1engine_1_1modules_1_1ui_1_1transform.html", [
+              [ "components", "namespacehelios_1_1engine_1_1modules_1_1ui_1_1transform_1_1components.html", [
+                [ "UiTransformComponent", "classhelios_1_1engine_1_1modules_1_1ui_1_1transform_1_1components_1_1UiTransformComponent.html", "classhelios_1_1engine_1_1modules_1_1ui_1_1transform_1_1components_1_1UiTransformComponent" ]
+              ] ],
+              [ "systems", "namespacehelios_1_1engine_1_1modules_1_1ui_1_1transform_1_1systems.html", [
+                [ "UiTransformSystem", "classhelios_1_1engine_1_1modules_1_1ui_1_1transform_1_1systems_1_1UiTransformSystem.html", "classhelios_1_1engine_1_1modules_1_1ui_1_1transform_1_1systems_1_1UiTransformSystem" ]
+              ] ]
+            ] ],
+            [ "widgets", "namespacehelios_1_1engine_1_1modules_1_1ui_1_1widgets.html", [
+              [ "components", "namespacehelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components.html", [
+                [ "UiTextComponent", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiTextComponent.html", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiTextComponent" ]
+              ] ],
+              [ "systems", "namespacehelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems.html", [
+                [ "UiTextBoundsUpdateSystem", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1UiTextBoundsUpdateSystem.html", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1UiTextBoundsUpdateSystem" ]
               ] ]
             ] ]
           ] ]
@@ -448,7 +537,8 @@ var annotated_dup =
         [ "RenderTarget", "classhelios_1_1rendering_1_1RenderTarget.html", "classhelios_1_1rendering_1_1RenderTarget" ],
         [ "Vertex", "structhelios_1_1rendering_1_1Vertex.html", "structhelios_1_1rendering_1_1Vertex" ],
         [ "ViewportKey", "structhelios_1_1rendering_1_1ViewportKey.html", "structhelios_1_1rendering_1_1ViewportKey" ],
-        [ "Viewport", "classhelios_1_1rendering_1_1Viewport.html", "classhelios_1_1rendering_1_1Viewport" ]
+        [ "Viewport", "classhelios_1_1rendering_1_1Viewport.html", "classhelios_1_1rendering_1_1Viewport" ],
+        [ "ViewportSnapshot", "structhelios_1_1rendering_1_1ViewportSnapshot.html", "structhelios_1_1rendering_1_1ViewportSnapshot" ]
       ] ],
       [ "scene", "namespacehelios_1_1scene.html", [
         [ "Camera", "classhelios_1_1scene_1_1Camera.html", "classhelios_1_1scene_1_1Camera" ],
@@ -492,8 +582,11 @@ var annotated_dup =
       [ "hash&lt; helios::engine::core::data::ComponentTypeId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ComponentTypeId_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ComponentTypeId_01_4" ],
       [ "hash&lt; helios::engine::core::data::FontId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1FontId_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1FontId_01_4" ],
       [ "hash&lt; helios::engine::core::data::GameObjectPoolId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId_01_4" ],
+      [ "hash&lt; helios::engine::core::data::ScorePoolId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ScorePoolId_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ScorePoolId_01_4" ],
+      [ "hash&lt; helios::engine::core::data::ScoreTypeId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ScoreTypeId_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ScoreTypeId_01_4" ],
       [ "hash&lt; helios::engine::core::data::SpawnProfileId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1SpawnProfileId_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1SpawnProfileId_01_4" ],
       [ "hash&lt; helios::engine::core::data::SpawnRuleId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1SpawnRuleId_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1SpawnRuleId_01_4" ],
+      [ "hash&lt; helios::engine::core::data::ViewportId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ViewportId_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ViewportId_01_4" ],
       [ "hash&lt; helios::util::Guid &gt;", "structstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4.html", "structstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4" ]
     ] ]
 ];

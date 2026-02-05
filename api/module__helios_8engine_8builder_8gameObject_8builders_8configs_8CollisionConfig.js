@@ -7,5 +7,6 @@ var module__helios_8engine_8builder_8gameObject_8builders_8configs_8CollisionCon
     [ "helios::engine::builder::gameObject::builders::configs::CollisionConfig::hitPolicy", "module__helios_8engine_8builder_8gameObject_8builders_8configs_8CollisionConfig.html#a3c21ee3846aa87b4f7dfc0972de03f47", null ],
     [ "helios::engine::builder::gameObject::builders::configs::CollisionConfig::reportCollisions", "module__helios_8engine_8builder_8gameObject_8builders_8configs_8CollisionConfig.html#a646bc540a8bca5796172fa397162d946", null ],
     [ "helios::engine::builder::gameObject::builders::configs::CollisionConfig::solidCollisionMask", "module__helios_8engine_8builder_8gameObject_8builders_8configs_8CollisionConfig.html#a1b5b0c7cbcfa16252dcf7d23ca640052", null ],
-    [ "helios::engine::builder::gameObject::builders::configs::CollisionConfig::onSolidCollision", "module__helios_8engine_8builder_8gameObject_8builders_8configs_8CollisionConfig.html#a21a4c3525c31d20cad956b6206c46a07", null ]
+    [ "helios::engine::builder::gameObject::builders::configs::CollisionConfig::onSolidCollision", "module__helios_8engine_8builder_8gameObject_8builders_8configs_8CollisionConfig.html#a21a4c3525c31d20cad956b6206c46a07", null ],
+    [ "helios::engine::builder::gameObject::builders::configs::CollisionConfig::dealDamage", "module__helios_8engine_8builder_8gameObject_8builders_8configs_8CollisionConfig.html#a8a7620abb73b234d864ee97df39d1c8c", null ]
 ];

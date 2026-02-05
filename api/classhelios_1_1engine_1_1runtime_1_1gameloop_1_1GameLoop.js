@@ -6,7 +6,7 @@ var classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop =
     [ "onPassCommit", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html#a4bf78e22f99e1d3028b50f4aa5ed9acd", null ],
     [ "phase", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html#a72b7ba2e6461d61b0f384a3d7b940a82", null ],
     [ "phaseCommit", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html#aa8aeafec5ba655ccacde623ad32f40ec", null ],
-    [ "update", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html#aff5330464fa41a1d7a8ebcc41b75b571", null ],
+    [ "update", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html#a8dbc5c72e9d25b13933ccda14b0975d7", null ],
     [ "commandBuffer_", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html#a1ee2f3b652d9619f4f328b43862b15c2", null ],
     [ "frameEventBus_", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html#ae54b7c4d141a90c2fc65a0bbbe887426", null ],
     [ "logger_", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html#a8abc8cce8e4faa1a54d61531b10781bd", null ],

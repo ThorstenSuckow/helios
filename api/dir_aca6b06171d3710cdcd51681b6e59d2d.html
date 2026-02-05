@@ -110,23 +110,43 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="dir_aca6b06171d3710cdcd51681b6e59d2d_dep.svg" width="134" height="156"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="dir_aca6b06171d3710cdcd51681b6e59d2d_dep.svg" width="318" height="178"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-files" class="groupheader"><a id="files" name="files"></a>
 Files</h2></td></tr>
 <tr class="memitem:_5Fmodule_2Eixx" id="r__5Fmodule_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="helios_2engine_2modules_2physics_2collision_2events_2__module_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="helios_2engine_2modules_2physics_2collision_2events_2__module_8ixx.html">_module.ixx</a></td></tr>
-<tr class="memdesc:helios_2engine_2modules_2physics_2collision_2events_2__module_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aggregate module for <a class="el" href="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1events.html">helios::engine::modules::physics::collision::events</a> namespace. <br /></td></tr>
+<tr class="memdesc:helios_2engine_2modules_2physics_2collision_2events_2__module_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aggregate module for <a class="el" href="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1events.html" title="Collision event types for the helios engine.">helios::engine::modules::physics::collision::events</a> namespace. <br /></td></tr>
 <tr class="memitem:SolidCollisionEvent_2Eixx" id="r_SolidCollisionEvent_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="SolidCollisionEvent_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SolidCollisionEvent_8ixx.html">SolidCollisionEvent.ixx</a></td></tr>
-<tr class="memdesc:SolidCollisionEvent_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event dispatched when two solid colliders physically collide. <br /></td></tr>
+<tr class="memdesc:SolidCollisionEvent_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event emitted when a solid (physical) collision occurs. <br /></td></tr>
 <tr class="memitem:TriggerCollisionEvent_2Eixx" id="r_TriggerCollisionEvent_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="TriggerCollisionEvent_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="TriggerCollisionEvent_8ixx.html">TriggerCollisionEvent.ixx</a></td></tr>
-<tr class="memdesc:TriggerCollisionEvent_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event dispatched when two solid colliders physically collide. <br /></td></tr>
+<tr class="memdesc:TriggerCollisionEvent_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event emitted when a trigger (non-physical) collision occurs. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md255"></a>
-helios::engine::modules::physics::events</h1>
-<p>Physics event types for collision and trigger notifications.</p>
-<p>This namespace contains event structures dispatched by the collision detection system. Events are placed in the <span class="tt">GameLoopEventBus</span> for consumption by gameplay systems in the next frame.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md318"></a>
+helios::engine::modules::physics::collision::events</h1>
+<p>Collision event types for the helios engine.</p>
+<p>This namespace contains event structures dispatched by the collision detection system when entities collide.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md319"></a>
+Events</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Event  </th><th class="markdownTableHeadNone">Description  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">SolidCollisionEvent</span>  </td><td class="markdownTableBodyNone">Emitted when a solid (physical) collision is detected  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">TriggerCollisionEvent</span>  </td><td class="markdownTableBodyNone">Emitted when a trigger (non-physical) collision is detected  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md320"></a>
+Event Dispatch</h1>
+<p>Events are published via the <span class="tt">UpdateContext</span> when an entity with <span class="tt">PassEvent</span> collision behavior detects a collision. Events contain a <span class="tt">CollisionContext</span> struct with full collision details.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md321"></a>
+Solid vs Trigger</h1>
+<ul>
+<li><b>Solid collisions:</b> Physical interactions that can block movement or trigger physics responses</li>
+<li><b>Trigger collisions:</b> Non-physical interactions for gameplay logic (pickups, damage zones, area effects)</li>
+</ul>
+<hr  />
 <details >
 <summary >
 Doxygen</summary>

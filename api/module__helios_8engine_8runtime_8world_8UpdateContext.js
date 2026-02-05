@@ -1,7 +1,8 @@
 var module__helios_8engine_8runtime_8world_8UpdateContext =
 [
     [ "UpdateContext", "structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html", "structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" ],
-    [ "helios::engine::runtime::world::UpdateContext::UpdateContext", "module__helios_8engine_8runtime_8world_8UpdateContext.html#a09dd8965eda970b6009e3e855d20549e", null ],
+    [ "helios::engine::runtime::world::UpdateContext::UpdateContext", "module__helios_8engine_8runtime_8world_8UpdateContext.html#a0065b60b6bde860af115c594b61fbf39", null ],
+    [ "helios::engine::runtime::world::UpdateContext::viewportSnapshots", "module__helios_8engine_8runtime_8world_8UpdateContext.html#a47e89a8a5cf18618ffdc6caccd012100", null ],
     [ "helios::engine::runtime::world::UpdateContext::deltaTime", "module__helios_8engine_8runtime_8world_8UpdateContext.html#a0197c610dc51fc676bcde9b84545ed7b", null ],
     [ "helios::engine::runtime::world::UpdateContext::totalTime", "module__helios_8engine_8runtime_8world_8UpdateContext.html#ad7f5caca30eb2409b98e21f48c5a0e45", null ],
     [ "helios::engine::runtime::world::UpdateContext::inputSnapshot", "module__helios_8engine_8runtime_8world_8UpdateContext.html#a1c9a47461e487485eeeaaf442510dd68", null ],

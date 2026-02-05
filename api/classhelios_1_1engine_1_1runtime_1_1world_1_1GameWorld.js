@@ -14,13 +14,16 @@ var classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld =
     [ "hasManager", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#ab53994280aeec233c1dd91f02a09e589", null ],
     [ "init", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#aae71c0fe187189d167cb967181831740", null ],
     [ "level", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#a49f6a9068ec4cc0408ded2c8bd60f1ba", null ],
+    [ "registerScoreCommandHandler", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#a37b8248fc6f250140046bd81401853ef", null ],
     [ "registerSpawnCommandHandler", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#a035f7979ac9743fceecaeea93204cd37", null ],
     [ "removeGameObject", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#abd79ce03a1a9cda53d24be4236e7ba5c", null ],
+    [ "scoreCommandHandler", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#a462d7a1e1252eb4c2b274c2e253a8da4", null ],
     [ "setLevel", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#a8d76de93fc524c7cfe07d506a79130db", null ],
     [ "spawnCommandHandler", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#a81250d5cb4d49746a9702d9f4a66d6ec", null ],
     [ "gameObjects_", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#ae6be15dea22ccb29caf122440d8021c7", null ],
     [ "level_", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#a70d324aa0446f3bc86e89b0774bdd963", null ],
     [ "logger_", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#a5cc257dd2ebbd269a60b9891889f4b50", null ],
     [ "managers_", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#aae88d3ee210e2e4ed03cbba46419734d", null ],
+    [ "scoreCommandHandler_", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#ad19913ff20f7cf576045de7124483f77", null ],
     [ "spawnCommandHandlerRegistry_", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#ae3bae7b84d6f67f747d4129f2e7101ec", null ]
 ];

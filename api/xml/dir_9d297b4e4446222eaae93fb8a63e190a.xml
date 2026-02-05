@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_9d297b4e4446222eaae93fb8a63e190a" kind="dir">
+    <compoundname>damage</compoundname>
+    <innerdir refid="dir_7e26dcc97bb1bade0c54f32b129ed6eb">components</innerdir>
+    <innerdir refid="dir_05d8c04f1bccd0726b5933dcb857cee7">systems</innerdir>
+    <innerfile refid="helios_2engine_2mechanics_2damage_2__module_8ixx">helios/engine/mechanics/damage/_module.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_9d297b4e4446222eaae93fb8a63e190a_1autotoc_md169">
+<title>helios::engine::mechanics::damage</title><para>Damage dealing system for game entities.</para>
+<para>This module provides components and systems for applying damage to entities based on collision events.</para>
+</sect1>
+<sect1 id="dir_9d297b4e4446222eaae93fb8a63e190a_1autotoc_md170">
+<title>Submodules</title><para><table rows="3" cols="2"><row>
+<entry thead="yes"><para>Submodule  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>components/</computeroutput>  </para>
+</entry><entry thead="no"><para>Damage-related ECS components  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>systems/</computeroutput>  </para>
+</entry><entry thead="no"><para>Systems for damage processing  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_9d297b4e4446222eaae93fb8a63e190a_1autotoc_md171">
+<title>Architecture</title><para>1. <bold>DamageDealerComponent</bold> defines damage values per collision layer 2. <bold>DamageOnCollisionSystem</bold> listens for <computeroutput>SolidCollisionEvent</computeroutput> 3. When collision occurs, damage is applied to the target&apos;s <computeroutput>HealthComponent</computeroutput> 4. <bold>LastAttackerComponent</bold> is updated with attack context for attribution</para>
+</sect1>
+<sect1 id="dir_9d297b4e4446222eaae93fb8a63e190a_1autotoc_md172">
+<title>Integration</title><para>The damage system integrates with:<itemizedlist>
+<listitem><para><bold>Collision system</bold> - receives <computeroutput>SolidCollisionEvent</computeroutput> for damage triggers</para>
+</listitem><listitem><para><bold>Health system</bold> - applies damage via <computeroutput>HealthComponent.takeDamage()</computeroutput></para>
+</listitem><listitem><para><bold>Combat system</bold> - updates <computeroutput>LastAttackerComponent</computeroutput> for kill attribution</para>
+</listitem><listitem><para><bold>Spawn system</bold> - uses <computeroutput>EmittedByComponent</computeroutput> to track projectile sources</para>
+</listitem></itemizedlist>
+</para>
+<para><hruler/>
+</para>
+<para><details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/mechanics/damage/"/>
+  </compounddef>
+</doxygen>

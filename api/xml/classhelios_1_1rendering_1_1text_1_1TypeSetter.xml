@@ -3,18 +3,22 @@
   <compounddef id="classhelios_1_1rendering_1_1text_1_1TypeSetter" kind="class" language="C++" prot="public">
     <compoundname>helios::rendering::text::TypeSetter</compoundname>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1TypeSetter_1a849b293cd01f47745694c4645fdf5fdf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1TypeSetter_1a2cde61b338a7b4b8b71162c69a036fd7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="structhelios_1_1rendering_1_1text_1_1TextLayout" kindref="compound">TextLayout</ref></type>
         <definition>TextLayout helios::rendering::text::TypeSetter::layout</definition>
-        <argsstring>(std::string_view text, helios::engine::core::data::FontId fontId, FontResourceProvider &amp;fontResourceProvider)</argsstring>
+        <argsstring>(const std::string_view text, const float scale, const helios::engine::core::data::FontId fontId, FontResourceProvider &amp;fontResourceProvider)</argsstring>
         <name>layout</name>
         <qualifiedname>helios::rendering::text::TypeSetter::layout</qualifiedname>
         <param>
-          <type>std::string_view</type>
+          <type>const std::string_view</type>
           <declname>text</declname>
         </param>
         <param>
-          <type><ref refid="structhelios_1_1engine_1_1core_1_1data_1_1FontId" kindref="compound">helios::engine::core::data::FontId</ref></type>
+          <type>const float</type>
+          <declname>scale</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1FontId" kindref="compound">helios::engine::core::data::FontId</ref></type>
           <declname>fontId</declname>
         </param>
         <param>
@@ -32,6 +36,14 @@
 </parameternamelist>
 <parameterdescription>
 <para>The text string to lay out. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>scale</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The scaling used for rendering the font, relative to its origin pixel-height </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -57,7 +69,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/text/TypeSetter.ixx" line="107" column="20" bodyfile="/tmp/h/include/helios/rendering/text/TypeSetter.ixx" bodystart="107" bodyend="162"/>
+        <location file="/tmp/h/include/helios/rendering/text/TypeSetter.ixx" line="108" column="20" bodyfile="/tmp/h/include/helios/rendering/text/TypeSetter.ixx" bodystart="108" bodyend="164"/>
         <references refid="structhelios_1_1rendering_1_1text_1_1Glyph_1ab2ba70d2721c66d26cb7a9e070a7fdea" compoundref="Glyph_8ixx" startline="60">helios::rendering::text::Glyph::bearing</references>
         <references refid="classhelios_1_1rendering_1_1text_1_1FontResourceProvider_1ab4a216319f349574fd6ceb2994970891">helios::rendering::text::FontResourceProvider::glyph</references>
       </memberdef>
@@ -86,9 +98,9 @@
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="/tmp/h/include/helios/rendering/text/TypeSetter.ixx" line="90" column="5" bodyfile="/tmp/h/include/helios/rendering/text/TypeSetter.ixx" bodystart="90" bodyend="166"/>
+    <location file="/tmp/h/include/helios/rendering/text/TypeSetter.ixx" line="90" column="5" bodyfile="/tmp/h/include/helios/rendering/text/TypeSetter.ixx" bodystart="90" bodyend="168"/>
     <listofallmembers>
-      <member refid="classhelios_1_1rendering_1_1text_1_1TypeSetter_1a849b293cd01f47745694c4645fdf5fdf" prot="public" virt="non-virtual"><scope>helios::rendering::text::TypeSetter</scope><name>layout</name></member>
+      <member refid="classhelios_1_1rendering_1_1text_1_1TypeSetter_1a2cde61b338a7b4b8b71162c69a036fd7" prot="public" virt="non-virtual"><scope>helios::rendering::text::TypeSetter</scope><name>layout</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

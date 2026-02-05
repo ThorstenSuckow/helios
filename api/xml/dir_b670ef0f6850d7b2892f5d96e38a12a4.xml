@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_b670ef0f6850d7b2892f5d96e38a12a4" kind="dir">
+    <compoundname>health</compoundname>
+    <innerdir refid="dir_b2dc284bc44df997cbbb992175867665">components</innerdir>
+    <innerdir refid="dir_fd5d3d54ac0a369cf6af2bf220932640">events</innerdir>
+    <innerdir refid="dir_5205709783a7211c89208e8fb92d7bc9">systems</innerdir>
+    <innerfile refid="helios_2engine_2mechanics_2health_2__module_8ixx">helios/engine/mechanics/health/_module.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_b670ef0f6850d7b2892f5d96e38a12a4_1autotoc_md186">
+<title>helios::engine::mechanics::health</title><para>Health management system for game entities.</para>
+<para>This module provides components, events, and systems for tracking entity health, processing damage, and handling death.</para>
+</sect1>
+<sect1 id="dir_b670ef0f6850d7b2892f5d96e38a12a4_1autotoc_md187">
+<title>Submodules</title><para><table rows="4" cols="2"><row>
+<entry thead="yes"><para>Submodule  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>components/</computeroutput>  </para>
+</entry><entry thead="no"><para>Health-related ECS components  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>events/</computeroutput>  </para>
+</entry><entry thead="no"><para>Health-related events (death)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>systems/</computeroutput>  </para>
+</entry><entry thead="no"><para>Systems for health processing  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_b670ef0f6850d7b2892f5d96e38a12a4_1autotoc_md188">
+<title>Architecture</title><para>1. <bold>HealthComponent</bold> tracks current and maximum health 2. <bold>Combat systems</bold> call <computeroutput>takeDamage()</computeroutput> when damage is dealt 3. <bold>HealthUpdateSystem</bold> detects <computeroutput>health &lt;= 0</computeroutput> and:<itemizedlist>
+<listitem><para>Issues <computeroutput>DespawnCommand</computeroutput> to remove the entity</para>
+</listitem><listitem><para>Publishes <computeroutput>DeathEvent</computeroutput> for other systems (e.g., scoring)</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="dir_b670ef0f6850d7b2892f5d96e38a12a4_1autotoc_md189">
+<title>Integration</title><para>The health system integrates with:<itemizedlist>
+<listitem><para><bold>Combat system</bold> - receives damage via <computeroutput>takeDamage()</computeroutput></para>
+</listitem><listitem><para><bold>Scoring system</bold> - <computeroutput>DeathEvent</computeroutput> triggers score awards</para>
+</listitem><listitem><para><bold>Spawn system</bold> - dead entities are despawned via command</para>
+</listitem></itemizedlist>
+</para>
+<para><hruler/>
+</para>
+<para><details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/mechanics/health/"/>
+  </compounddef>
+</doxygen>

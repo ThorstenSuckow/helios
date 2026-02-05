@@ -9,6 +9,7 @@ var modulemembers_func =
     [ "g", "modulemembers_func_g.html", null ],
     [ "h", "modulemembers_func_h.html", null ],
     [ "i", "modulemembers_func_i.html", null ],
+    [ "k", "modulemembers_func_k.html", null ],
     [ "l", "modulemembers_func_l.html", null ],
     [ "m", "modulemembers_func_m.html", null ],
     [ "n", "modulemembers_func_n.html", null ],

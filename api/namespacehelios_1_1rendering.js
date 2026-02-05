@@ -16,6 +16,7 @@ var namespacehelios_1_1rendering =
     [ "Vertex", "structhelios_1_1rendering_1_1Vertex.html", "structhelios_1_1rendering_1_1Vertex" ],
     [ "ViewportKey", "structhelios_1_1rendering_1_1ViewportKey.html", "structhelios_1_1rendering_1_1ViewportKey" ],
     [ "Viewport", "classhelios_1_1rendering_1_1Viewport.html", "classhelios_1_1rendering_1_1Viewport" ],
+    [ "ViewportSnapshot", "structhelios_1_1rendering_1_1ViewportSnapshot.html", "structhelios_1_1rendering_1_1ViewportSnapshot" ],
     [ "ClearFlags", "namespacehelios_1_1rendering.html#aad4b10dc2924beaf3680fb245505290c", [
       [ "None", "namespacehelios_1_1rendering.html#aad4b10dc2924beaf3680fb245505290ca6adf97f83acf6453d4a6a4b1070f3754", null ],
       [ "Color", "namespacehelios_1_1rendering.html#aad4b10dc2924beaf3680fb245505290cacb5feb1b7314637725a2e73bdc9f7295", null ],

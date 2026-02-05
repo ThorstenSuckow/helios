@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_9cbb4b4cfd398af02a68f2645b2e9ca6" kind="dir">
+    <compoundname>scoring</compoundname>
+    <innerdir refid="dir_326351fd6fbd1ed4d80f0b2b180f7c49">commands</innerdir>
+    <innerdir refid="dir_2e322012c304bd84ecea0543a8b62f92">components</innerdir>
+    <innerdir refid="dir_f62186ca603740537cec9464f8799975">systems</innerdir>
+    <innerdir refid="dir_c41b981364ff99795c8cb0d2362d5300">types</innerdir>
+    <innerfile refid="helios_2engine_2mechanics_2scoring_2__module_8ixx">helios/engine/mechanics/scoring/_module.ixx</innerfile>
+    <innerfile refid="ScoreCommandDispatcher_8ixx">ScoreCommandDispatcher.ixx</innerfile>
+    <innerfile refid="ScoreCommandHandler_8ixx">ScoreCommandHandler.ixx</innerfile>
+    <innerfile refid="ScorePool_8ixx">ScorePool.ixx</innerfile>
+    <innerfile refid="ScorePoolManager_8ixx">ScorePoolManager.ixx</innerfile>
+    <innerfile refid="ScorePoolSnapshot_8ixx">ScorePoolSnapshot.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_9cbb4b4cfd398af02a68f2645b2e9ca6_1autotoc_md239">
+<title>helios::engine::mechanics::scoring</title><para>Score management and tracking system for game mechanics.</para>
+<para>This module provides components, systems, and infrastructure for tracking and managing scores in the helios engine. It supports multiple score pools (e.g., per-player), score types (e.g., kill rewards), and integrates with the combat and UI systems.</para>
+</sect1>
+<sect1 id="dir_9cbb4b4cfd398af02a68f2645b2e9ca6_1autotoc_md240">
+<title>Submodules</title><para><table rows="5" cols="2"><row>
+<entry thead="yes"><para>Submodule  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>commands/</computeroutput>  </para>
+</entry><entry thead="no"><para>Score update commands for the command buffer  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>components/</computeroutput>  </para>
+</entry><entry thead="no"><para>Score-related ECS components  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>systems/</computeroutput>  </para>
+</entry><entry thead="no"><para>Systems for score processing and observation  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>types/</computeroutput>  </para>
+</entry><entry thead="no"><para>Score data types and value classes  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_9cbb4b4cfd398af02a68f2645b2e9ca6_1autotoc_md241">
+<title>Key Classes</title><para><table rows="6" cols="2"><row>
+<entry thead="yes"><para>Class  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ScorePoolManager</computeroutput>  </para>
+</entry><entry thead="no"><para>Manager that owns score pools and handles score commands  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ScorePool</computeroutput>  </para>
+</entry><entry thead="no"><para>Container accumulating scores by type with running total  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ScorePoolSnapshot</computeroutput>  </para>
+</entry><entry thead="no"><para>Immutable snapshot of pool state  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ScoreCommandHandler</computeroutput>  </para>
+</entry><entry thead="no"><para>Abstract interface for score command processing  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ScoreCommandDispatcher</computeroutput>  </para>
+</entry><entry thead="no"><para>Routes score commands to the handler  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_9cbb4b4cfd398af02a68f2645b2e9ca6_1autotoc_md242">
+<title>Architecture</title><para>The scoring system follows a command-based architecture:</para>
+<para>1. <bold>Combat events</bold> trigger <computeroutput>UpdateScoreCommand</computeroutput> via <computeroutput>CombatScoringSystem</computeroutput> 2. <bold>Commands</bold> are dispatched to <computeroutput>ScorePoolManager</computeroutput> via <computeroutput>ScoreCommandDispatcher</computeroutput> 3. <bold>Scores</bold> are accumulated in <computeroutput>ScorePool</computeroutput> instances 4. <bold>UI</bold> observes pools via <computeroutput>ScoreObserverComponent</computeroutput> + <computeroutput>ScoreObserverSystem</computeroutput></para>
+<para><hruler/>
+</para>
+<para><details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/mechanics/scoring/"/>
+  </compounddef>
+</doxygen>

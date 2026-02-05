@@ -120,8 +120,8 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a26d24737adde5d8c75c2a86168a7fc5d" id="r_a26d24737adde5d8c75c2a86168a7fc5d"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a26d24737adde5d8c75c2a86168a7fc5d">~FontResourceProvider</a> ()=default</td></tr>
 <tr class="memdesc:a26d24737adde5d8c75c2a86168a7fc5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor for proper cleanup of derived classes.  <br /></td></tr>
-<tr class="memitem:ab68f5970778b7674ef3a0c8f0b750427" id="r_ab68f5970778b7674ef3a0c8f0b750427"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab68f5970778b7674ef3a0c8f0b750427">loadFont</a> (<a class="el" href="structhelios_1_1engine_1_1core_1_1data_1_1FontId.html">helios::engine::core::data::FontId</a> fontId, std::string_view pathToFont)=0</td></tr>
-<tr class="memdesc:ab68f5970778b7674ef3a0c8f0b750427"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a font from the specified file path.  <br /></td></tr>
+<tr class="memitem:acdfad3ae69b18ba4d97cb926e42beaa2" id="r_acdfad3ae69b18ba4d97cb926e42beaa2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acdfad3ae69b18ba4d97cb926e42beaa2">loadFont</a> (<a class="el" href="structhelios_1_1engine_1_1core_1_1data_1_1FontId.html">helios::engine::core::data::FontId</a> fontId, unsigned int pixelHeight, std::string_view pathToFont)=0</td></tr>
+<tr class="memdesc:acdfad3ae69b18ba4d97cb926e42beaa2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a font from the specified file path.  <br /></td></tr>
 <tr class="memitem:ab4a216319f349574fd6ceb2994970891" id="r_ab4a216319f349574fd6ceb2994970891"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structhelios_1_1rendering_1_1text_1_1Glyph.html">helios::rendering::text::Glyph</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab4a216319f349574fd6ceb2994970891">glyph</a> (char c, <a class="el" href="structhelios_1_1engine_1_1core_1_1data_1_1FontId.html">helios::engine::core::data::FontId</a> fontId)=0</td></tr>
 <tr class="memdesc:ab4a216319f349574fd6ceb2994970891"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the glyph data for a character.  <br /></td></tr>
 </table>
@@ -211,7 +211,7 @@ OpenGLGlyphTextRenderer </dd></dl>
 
 <p>Implemented in <a class="el" href="classhelios_1_1ext_1_1opengl_1_1rendering_1_1FreeTypeFontResourceManager.html#a9585b22171efb452bbe9fba6b14df911">helios::ext::opengl::rendering::FreeTypeFontResourceManager</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="TypeSetter_8ixx_source.html#l00107">helios::rendering::text::TypeSetter::layout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="TypeSetter_8ixx_source.html#l00108">helios::rendering::text::TypeSetter::layout()</a>.</p>
 <div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
@@ -221,8 +221,8 @@ OpenGLGlyphTextRenderer </dd></dl>
 
 </div>
 </div>
-<a id="ab68f5970778b7674ef3a0c8f0b750427" name="ab68f5970778b7674ef3a0c8f0b750427"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab68f5970778b7674ef3a0c8f0b750427">&#9670;&#160;</a></span>loadFont()</h2>
+<a id="acdfad3ae69b18ba4d97cb926e42beaa2" name="acdfad3ae69b18ba4d97cb926e42beaa2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdfad3ae69b18ba4d97cb926e42beaa2">&#9670;&#160;</a></span>loadFont()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -234,6 +234,11 @@ OpenGLGlyphTextRenderer </dd></dl>
           <td class="memname">virtual void helios::rendering::text::FontResourceProvider::loadFont </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structhelios_1_1engine_1_1core_1_1data_1_1FontId.html">helios::engine::core::data::FontId</a></td>          <td class="paramname"><span class="paramname"><em>fontId</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>pixelHeight</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -253,13 +258,14 @@ OpenGLGlyphTextRenderer </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">fontId</td><td>Unique identifier for this font. </td></tr>
+    <tr><td class="paramname">pixelHeight</td><td>The height of the font, in pixels. </td></tr>
     <tr><td class="paramname">pathToFont</td><td>File system path to the font file (e.g., TrueType `.ttf`).</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>If a font with the same `fontId` is already loaded, behavior is implementation-defined (may replace or ignore). </dd></dl>
 
-<p>Implemented in <a class="el" href="classhelios_1_1ext_1_1opengl_1_1rendering_1_1FreeTypeFontResourceManager.html#ac3274a31e5b5dc33311938459bd11ca0">helios::ext::opengl::rendering::FreeTypeFontResourceManager</a>.</p>
+<p>Implemented in <a class="el" href="classhelios_1_1ext_1_1opengl_1_1rendering_1_1FreeTypeFontResourceManager.html#ae72500c988e385a156ed43d195fa086f">helios::ext::opengl::rendering::FreeTypeFontResourceManager</a>.</p>
 
 </div>
 </div>

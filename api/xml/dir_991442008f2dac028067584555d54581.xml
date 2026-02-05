@@ -4,29 +4,43 @@
     <compoundname>components</compoundname>
     <innerfile refid="helios_2engine_2mechanics_2combat_2components_2__module_8ixx">helios/engine/mechanics/combat/components/_module.ixx</innerfile>
     <innerfile refid="Aim2DComponent_8ixx">Aim2DComponent.ixx</innerfile>
+    <innerfile refid="LastAttackerComponent_8ixx">LastAttackerComponent.ixx</innerfile>
     <innerfile refid="ShootComponent_8ixx">ShootComponent.ixx</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_991442008f2dac028067584555d54581_1autotoc_md145">
-<title>helios::engine::mechanics::combat::components</title><para>Combat-specific components for aiming and shooting mechanics.</para>
+<sect1 id="dir_991442008f2dac028067584555d54581_1autotoc_md147">
+<title>helios::engine::mechanics::combat::components</title><para>Combat-specific components for aiming, shooting, and attack tracking.</para>
 <para>These components implement high-level combat behaviors that coordinate between input, physics, and rendering systems.</para>
 </sect1>
-<sect1 id="dir_991442008f2dac028067584555d54581_1autotoc_md146">
-<title>Components</title><para><table rows="3" cols="2"><row>
+<sect1 id="dir_991442008f2dac028067584555d54581_1autotoc_md148">
+<title>Components</title><para><table rows="4" cols="2"><row>
 <entry thead="yes"><para>Component  </para>
 </entry><entry thead="yes"><para>Description  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>Aim2DComponent</computeroutput>  </para>
-</entry><entry thead="no"><para>Stores 2D aim direction and fire frequency.  </para>
+</entry><entry thead="no"><para>Stores 2D aim direction and fire frequency  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>ShootComponent</computeroutput>  </para>
-</entry><entry thead="no"><para>Manages projectile shooting with cooldown timer.  </para>
+</entry><entry thead="no"><para>Manages projectile shooting with cooldown timer  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>LastAttackerComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Tracks the last entity that attacked this entity  </para>
 </entry></row>
 </table>
 </para>
+</sect1>
+<sect1 id="dir_991442008f2dac028067584555d54581_1autotoc_md149">
+<title>LastAttackerComponent</title><para>Stores an <computeroutput>AttackContext</computeroutput> containing:<itemizedlist>
+<listitem><para>Source entity GUID (the attacker)</para>
+</listitem><listitem><para>Contact point (where the attack landed)</para>
+</listitem><listitem><para>Damage applied</para>
+</listitem></itemizedlist>
+</para>
+<para>Used by <computeroutput>HealthUpdateSystem</computeroutput> to include attack context in <computeroutput>DeathEvent</computeroutput> for kill attribution and scoring.</para>
 <para><hruler/>
 </para>
 <para><details><summary>Doxygen</summary><para></para>

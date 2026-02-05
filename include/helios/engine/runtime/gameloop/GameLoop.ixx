@@ -6,6 +6,8 @@ module;
 
 #include <cassert>
 #include <memory>
+#include <vector>
+#include <span>
 
 export module helios.engine.runtime.gameloop.GameLoop;
 
@@ -22,6 +24,7 @@ import helios.engine.runtime.gameloop.CommitPoint;
 import helios.engine.runtime.gameloop.Phase;
 
 import helios.input.InputSnapshot;
+import helios.rendering.ViewportSnapshot;
 
 import helios.engine.runtime.gameloop.PassCommitListener;
 
@@ -339,6 +342,7 @@ export namespace helios::engine::runtime::gameloop {
          * @param gameWorld Reference to the game world.
          * @param deltaTime Time elapsed since the last frame in seconds.
          * @param inputSnapshot Snapshot of the current input state.
+         * @param viewportSnapshots Snapshots of viewports registered with an id.
          *
          * @pre init() must have been called before the first update.
          *
@@ -346,7 +350,12 @@ export namespace helios::engine::runtime::gameloop {
          * @see phaseCommit()
          * @see UpdateContext
          */
-        void update(helios::engine::runtime::world::GameWorld& gameWorld, float deltaTime, const helios::input::InputSnapshot& inputSnapshot) noexcept {
+        void update(
+            helios::engine::runtime::world::GameWorld& gameWorld,
+            float deltaTime,
+            const helios::input::InputSnapshot& inputSnapshot,
+            std::span<const helios::rendering::ViewportSnapshot> viewportSnapshots
+        ) noexcept {
 
             assert(initialized_ && "GameLoop not initialized");
 
@@ -357,7 +366,8 @@ export namespace helios::engine::runtime::gameloop {
                   phaseEventBus_,
                   passEventBus_,
                   frameEventBus_,
-                  inputSnapshot
+                  inputSnapshot,
+                  viewportSnapshots
               );
 
 

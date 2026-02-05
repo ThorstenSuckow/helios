@@ -87,6 +87,25 @@ export namespace helios::ext::glfw::input {
         }
 
         /**
+         * @brief Checks if a specific key is currently released for the given window.
+         *
+         * If the specified window is not of type GLFWWindow, this method always returns false.
+         *
+         * @copydoc helios::input::InputAdapter::isKeyReleased()
+         */
+        [[nodiscard]] bool isKeyReleased(helios::input::types::Key key,
+            const helios::window::Window& win) const noexcept override {
+            auto const* win_ptr = dynamic_cast<helios::ext::glfw::window::GLFWWindow const*>(&win);
+
+            if (!win_ptr) {
+                logger_.warn("GLFWInput requires GLFWWindow");
+                return false;
+            }
+
+            return isKeyReleased(key, *win_ptr);
+        }
+
+        /**
          * @brief Checks if a specific key is currently pressed for the given GLFWWindow.
          *
          * @param key The helios key to check.
@@ -100,6 +119,22 @@ export namespace helios::ext::glfw::input {
                 win.nativeHandle(),
                 helios::ext::glfw::input::GLFWKeyLookup::from(key)
             ) == GLFW_PRESS;
+        }
+
+        /**
+         * @brief Checks if a specific key is currently released for the given GLFWWindow.
+         *
+         * @param key The helios key to check.
+         * @param win The `GLFWWindow` instance to query for the key-release.
+         *
+         * @return true if the key is released, otherwise false.
+         */
+        [[nodiscard]] bool isKeyReleased(helios::input::types::Key key,
+            const helios::ext::glfw::window::GLFWWindow& win) const noexcept {
+            return glfwGetKey(
+                win.nativeHandle(),
+                helios::ext::glfw::input::GLFWKeyLookup::from(key)
+            ) == GLFW_RELEASE;
         }
 
         /**

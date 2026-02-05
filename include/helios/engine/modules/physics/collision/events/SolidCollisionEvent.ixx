@@ -1,6 +1,6 @@
 /**
  * @file SolidCollisionEvent.ixx
- * @brief Event dispatched when two solid colliders physically collide.
+ * @brief Event emitted when a solid (physical) collision occurs.
  */
 module;
 
@@ -8,103 +8,60 @@ export module helios.engine.modules.physics.collision.events.SolidCollisionEvent
 
 import helios.util.Guid;
 import helios.math;
+import helios.engine.modules.physics.collision.types.CollisionContext;
+import helios.core.types;
 
 export namespace helios::engine::modules::physics::collision::events {
 
     /**
-     * @brief Event representing a physical collision between two solid objects.
+     * @brief Event emitted when a solid collision is detected.
      *
-     * @details SolidCollisionEvent is used to communicate solid (physical) collisions
-     * between GameObjects. Unlike TriggerCollisionEvent, this event indicates a
-     * physical interaction that may require resolution such as position correction,
-     * velocity reflection, or damage calculation.
-     *
-     * The GridCollisionDetectionSystem detects collisions and stores the result in
-     * CollisionStateComponent. Downstream systems can then create and dispatch
-     * SolidCollisionEvent instances based on the collision state.
-     *
-     * The event carries GUIDs of both participating GameObjects and the
-     * contact point in world space where the collision occurred.
-     *
-     * Example usage (reading from event bus):
-     * ```cpp
-     * for (const auto& event : eventBus.readPass<SolidCollisionEvent>()) {
-     *     auto* sourceObj = gameWorld.find(event.source());
-     *     auto* matchObj = gameWorld.find(event.match());
-     *     // Handle collision response...
-     * }
-     * ```
-     *
-     * @see TriggerCollisionEvent
-     * @see CollisionStateComponent
-     * @see GridCollisionDetectionSystem
-     * @see CollisionComponent
+     * Solid collisions represent physical interactions between entities that can
+     * block movement or trigger physics responses. This event is published to the
+     * event bus when an entity with PassEvent behavior detects a solid collision.
      */
     class SolidCollisionEvent {
 
         /**
-         * @brief GUID of the GameObject that initiated or detected the collision.
+         * @brief Context data describing the collision.
          */
-        const helios::util::Guid source_;
+        collision::types::CollisionContext collisionContext_;
 
         /**
-         * @brief GUID of the GameObject that was collided with.
+         * @brief GUID of the entity that reported the collision.
          */
-        const helios::util::Guid match_;
-
-        /**
-         * @brief The world-space contact point of the collision.
-         */
-        const helios::math::vec3f contact_;
+        helios::util::Guid source_;
 
     public:
 
         /**
          * @brief Constructs a SolidCollisionEvent.
          *
-         * @param source GUID of the GameObject that detected or initiated the collision.
-         * @param match GUID of the GameObject that was collided with.
-         * @param contact The world-space position where the collision occurred.
+         * @param source GUID of the reporting entity.
+         * @param collisionContext Context data describing the collision.
          */
         explicit SolidCollisionEvent(
             const helios::util::Guid source,
-            const helios::util::Guid match,
-            const helios::math::vec3f contact
-        ) : source_(source), match_(match), contact_(contact) {}
+            const collision::types::CollisionContext& collisionContext
+        ) : collisionContext_(collisionContext), source_(source) {}
 
         /**
-         * @brief Returns the contact point in world space.
+         * @brief Returns the collision context.
          *
-         * @return The 3D position where the collision occurred.
+         * @return Reference to the collision context data.
          */
-        [[nodiscard]] helios::math::vec3f contact() const noexcept {
-            return contact_;
+        [[nodiscard]] const collision::types::CollisionContext& collisionContext() const noexcept {
+            return collisionContext_;
         }
 
         /**
-         * @brief Returns the GUID of the source GameObject.
+         * @brief Returns the source entity GUID.
          *
-         * @details The source is the entity that detected/reported the collision.
-         * Use `GameWorld::find()` to retrieve the actual GameObject.
-         *
-         * @return GUID of the collision reporter.
+         * @return GUID of the entity that reported the collision.
          */
         [[nodiscard]] helios::util::Guid source() const noexcept {
             return source_;
         }
-
-        /**
-         * @brief Returns the GUID of the matched GameObject.
-         *
-         * @details The match is the entity that was collided with.
-         * Use `GameWorld::find()` to retrieve the actual GameObject.
-         *
-         * @return GUID of the collided entity.
-         */
-        [[nodiscard]] helios::util::Guid match() const noexcept {
-            return match_;
-        }
-
 
     };
 

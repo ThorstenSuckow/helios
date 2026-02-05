@@ -137,6 +137,26 @@ export namespace helios::input {
             return input_->isKeyPressed(key, *observedWin_);
         }
 
+        /**
+         * @brief Returns true if the specified key is currently released, otherwise false.
+         *
+         * This method delegates to the underlying `InputAdapter`.
+         *
+         * @see InputAdapter::isKeyReleased
+         *
+         * @param key The key to check for the released state.
+         *
+         * @return True if the key is released; returns false if the observed window is not set.
+         */
+        [[nodiscard]] bool isKeyReleased(const helios::input::types::Key& key) const noexcept {
+            if (observedWin_ == nullptr) {
+                logger_.warn("No window to observe.");
+                return false;
+            }
+
+            return input_->isKeyReleased(key, *observedWin_);
+        }
+
 
         /**
          * @brief Explicitly tells this InputManager which gamepads to poll for input states

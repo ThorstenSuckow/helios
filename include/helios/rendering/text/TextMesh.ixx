@@ -87,6 +87,11 @@ export namespace helios::rendering::text {
         mutable TypeSetter typeSetter_;
 
         /**
+         * @brief The scale factor for the font.
+         */
+        float fontScale_ = 1.0f;
+
+        /**
          * @brief Updates the cached layout if needed.
          *
          * @param fontResourceProvider Provider for glyph data.
@@ -97,7 +102,7 @@ export namespace helios::rendering::text {
                 return;
             }
 
-            textLayout_ = typeSetter_.layout(text_, fontId_, fontResourceProvider);
+            textLayout_ = typeSetter_.layout(text_, fontScale_, fontId_, fontResourceProvider);
 
             needsUpdate_ = false;
         }
@@ -108,14 +113,17 @@ export namespace helios::rendering::text {
          * @brief Constructs a TextMesh with the given text and font.
          *
          * @param text The text string to render.
+         * @param fontScale The scale of the font, relative to the pixelHeight it was loaded with.
          * @param fontId The font identifier for glyph lookup.
          */
         explicit TextMesh(
             std::string text,
-            helios::engine::core::data::FontId fontId
+            const float fontScale,
+            const helios::engine::core::data::FontId fontId
         ) noexcept
         :
             text_(std::move(text)),
+            fontScale_(fontScale),
             fontId_(fontId) {}
 
 
@@ -168,6 +176,37 @@ export namespace helios::rendering::text {
          */
         [[nodiscard]] std::string_view text() const noexcept {
             return text_;
+        }
+
+        /**
+         * @brief Sets the font scale factor.
+         *
+         * Invalidates the cached layout, which will be recomputed on the next
+         * call to `vertices()` or `localAABB()`.
+         *
+         * @param scale The new scale factor relative to the font's pixel height.
+         */
+        void setFontScale(const float scale) noexcept {
+            fontScale_ = scale;
+            needsUpdate_ = true;
+        }
+
+        /**
+         * @brief Returns the current font scale factor.
+         *
+         * @return The scale factor relative to the font's pixel height.
+         */
+        [[nodiscard]] float fontScale() const noexcept {
+            return fontScale_;
+        }
+
+        /**
+         * @brief Checks if the cached layout needs recomputation.
+         *
+         * @return True if the layout is invalid and needs to be recomputed.
+         */
+        bool needsUpdate() const noexcept {
+            return needsUpdate_;
         }
 
         /**

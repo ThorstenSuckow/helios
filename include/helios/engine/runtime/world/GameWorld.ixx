@@ -23,6 +23,8 @@ import helios.engine.runtime.spawn.SpawnCommandHandler;
 import helios.engine.ecs.Component;
 import helios.engine.ecs.CloneableComponent;
 
+import helios.engine.mechanics.scoring.ScoreCommandHandler;
+
 import helios.util.Guid;
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
@@ -149,6 +151,13 @@ export namespace helios::engine::runtime::world {
          */
         std::unique_ptr<helios::engine::runtime::world::Level> level_ = nullptr;
 
+        /**
+         * @brief Registered handler for score commands.
+         *
+         * @details Receives score update commands and processes them
+         * according to the scoring system logic.
+         */
+        helios::engine::mechanics::scoring::ScoreCommandHandler* scoreCommandHandler_;
 
         /**
          * @brief Registry for mapping spawn profiles to their command handlers.
@@ -272,7 +281,6 @@ export namespace helios::engine::runtime::world {
             return added;
         }
 
-
         /**
          * @brief Retrieves a SpawnCommandHandler for a specific spawn profile.
          *
@@ -289,6 +297,35 @@ export namespace helios::engine::runtime::world {
         [[nodiscard]] helios::engine::runtime::spawn::SpawnCommandHandler* spawnCommandHandler(
             const helios::engine::core::data::SpawnProfileId spawnProfileId) {
             return spawnCommandHandlerRegistry_.get(spawnProfileId);
+        }
+
+        /**
+         * @brief Registers a handler for score commands.
+         *
+         * @details Associates a ScoreCommandHandler with this GameWorld.
+         * Only one handler can be registered at a time.
+         *
+         * @param scoreCommandHandler Reference to the handler to register.
+         *
+         * @return True if registration succeeded, false if already registered.
+         */
+        bool registerScoreCommandHandler(
+            helios::engine::mechanics::scoring::ScoreCommandHandler& scoreCommandHandler
+        ) {
+            assert(!scoreCommandHandler_ && "ScoreCommandHandler already registered");
+
+            scoreCommandHandler_ = &scoreCommandHandler;
+
+            return true;
+        }
+
+        /**
+         * @brief Retrieves the registered ScoreCommandHandler.
+         *
+         * @return Pointer to the handler, or nullptr if not registered.
+         */
+        [[nodiscard]] helios::engine::mechanics::scoring::ScoreCommandHandler* scoreCommandHandler() {
+            return scoreCommandHandler_;
         }
 
         /**

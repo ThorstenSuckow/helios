@@ -13,9 +13,13 @@ export import helios.engine.builder.gameObject.builders.RenderingBuilder;
 export import helios.engine.builder.gameObject.builders.SceneBuilder;
 export import helios.engine.builder.gameObject.builders.CollisionBuilder;
 export import helios.engine.builder.gameObject.builders.TransformBuilder;
+export import helios.engine.builder.gameObject.builders.UiTransformBuilder;
 export import helios.engine.builder.gameObject.builders.EffectsBuilder;
 export import helios.engine.builder.gameObject.builders.SpawnBuilder;
 export import helios.engine.builder.gameObject.builders.AiBuilder;
-export import helios.engine.builder.gameObject.builders.ShootingBuilder;
+export import helios.engine.builder.gameObject.builders.CombatBuilder;
 export import helios.engine.builder.gameObject.builders.LifecycleBuilder;
+export import helios.engine.builder.gameObject.builders.HealthBuilder;
+export import helios.engine.builder.gameObject.builders.ScoringBuilder;
+export import helios.engine.builder.gameObject.builders.ObserverBuilder;
 

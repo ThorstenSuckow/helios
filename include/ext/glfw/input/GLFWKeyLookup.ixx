@@ -26,7 +26,7 @@ export namespace helios::ext::glfw::input::GLFWKeyLookup {
             std::array<int, helios::input::types::Key::size_> map{};
 
             map[helios::input::types::Key::ESC] = GLFW_KEY_ESCAPE;
-
+            map[helios::input::types::Key::TILDE] = GLFW_KEY_GRAVE_ACCENT;
             return map;
         }();
 

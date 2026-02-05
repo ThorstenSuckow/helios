@@ -293,7 +293,7 @@ int main() {
             cb.levelBoundsCollision()
               .onCollision(helios::engine::modules::physics::collision::types::CollisionBehavior::Bounce);
         })
-        .withShooting([](auto& ccb) {
+        .withCombat([](auto& ccb) {
 
             ccb.weapon()
                .fireRate(5.0f);//15.0f);//5.0f;
@@ -901,8 +901,8 @@ int main() {
         const GamepadState& gamepadState = inputManager.gamepadState(Gamepad::ONE);
         const auto inputSnapshot = helios::input::InputSnapshot(gamepadState);
 
-        gameLoop.update(gameWorld, DELTA_TIME, inputSnapshot);
-
+        const auto viewportSnapshots = win->viewportSnapshots();
+        gameLoop.update(gameWorld, DELTA_TIME, inputSnapshot, viewportSnapshots);
 
         // ----------------------------------------
         // 10.3 Gizmo / Debug Visualization Update

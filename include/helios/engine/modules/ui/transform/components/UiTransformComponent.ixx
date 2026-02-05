@@ -1,0 +1,139 @@
+/**
+ * @file UiTransformComponent.ixx
+ * @brief Component for viewport-relative UI positioning.
+ */
+module;
+
+#include <cmath>
+
+export module helios.engine.modules.ui.transform.components.UiTransformComponent;
+
+import helios.engine.ecs.Component;
+
+import helios.engine.modules.ui.layout.Anchor;
+
+import helios.engine.core.data.ComponentTypeId;
+
+import helios.math;
+
+import helios.core;
+import helios.engine.core;
+
+export namespace helios::engine::modules::ui::transform::components {
+
+
+    /**
+     * @brief Component for viewport-relative UI positioning.
+     *
+     * Stores positioning parameters for UI elements including anchor point,
+     * pivot point, margins, and the target viewport. Used by UiTransformSystem
+     * to compute screen positions.
+     */
+    class UiTransformComponent : public helios::engine::ecs::Component {
+
+        /**
+         * @brief Anchor point relative to the viewport.
+         */
+        helios::engine::modules::ui::layout::Anchor anchor_{helios::engine::modules::ui::layout::Anchor::Center};
+
+        /**
+         * @brief Pivot point of this element for positioning calculations.
+         */
+        helios::engine::modules::ui::layout::Anchor pivot_{helios::engine::modules::ui::layout::Anchor::Center};
+
+        /**
+         * @brief ID of the viewport this element is positioned relative to.
+         */
+        helios::engine::core::data::ViewportId viewportId_{helios::core::types::no_init};
+
+        /**
+         * @brief Margins from anchor point (top, right, bottom, left).
+         */
+        helios::math::vec4f margins_{};
+
+        public:
+
+
+        UiTransformComponent() = default;
+
+
+        /**
+         * @brief Sets the anchor point.
+         *
+         * @param anchor The anchor point relative to the viewport.
+         */
+        void setAnchor(const helios::engine::modules::ui::layout::Anchor anchor) noexcept {
+            anchor_ = anchor;
+        }
+
+        /**
+         * @brief Returns the current anchor point.
+         *
+         * @return The anchor point relative to the viewport.
+         */
+        [[nodiscard]] helios::engine::modules::ui::layout::Anchor anchor() const noexcept {
+            return anchor_;
+        }
+
+        /**
+         * @brief Sets the viewport ID.
+         *
+         * @param viewportId The ID of the viewport for positioning.
+         */
+        void setViewportId(const helios::engine::core::data::ViewportId viewportId) noexcept {
+            viewportId_ = viewportId;
+        }
+
+        /**
+         * @brief Sets the margins from the anchor point.
+         *
+         * @param margins Margins as vec4f (top, right, bottom, left).
+         */
+        void setMargins(const helios::math::vec4f margins) noexcept {
+            margins_ = margins;
+        }
+
+        /**
+         * @brief Returns the current margins.
+         *
+         * @return Margins as vec4f (top, right, bottom, left).
+         */
+        [[nodiscard]] helios::math::vec4f margins() const noexcept {
+            return margins_;
+        }
+
+        /**
+         * @brief Sets the pivot point.
+         *
+         * @param pivot The pivot point of this element.
+         */
+        void setPivot(const helios::engine::modules::ui::layout::Anchor pivot) noexcept {
+            pivot_ = pivot;
+        }
+
+        /**
+         * @brief Returns the current pivot point.
+         *
+         * @return The pivot point of this element.
+         */
+        [[nodiscard]]  helios::engine::modules::ui::layout::Anchor pivot() const noexcept {
+            return pivot_;
+        }
+
+        /**
+         * @brief Returns the viewport ID.
+         *
+         * @return The ID of the viewport this element is positioned relative to.
+         */
+        [[nodiscard]] helios::engine::core::data::ViewportId viewportId() const noexcept {
+            return viewportId_;
+        }
+
+
+        [[nodiscard]] helios::engine::core::data::ComponentTypeId typeId() const noexcept override {
+            return helios::engine::core::data::ComponentTypeId::id<UiTransformComponent>();
+        }
+
+    };
+
+}

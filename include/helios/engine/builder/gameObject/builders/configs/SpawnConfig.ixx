@@ -8,7 +8,7 @@ export module helios.engine.builder.gameObject.builders.configs.SpawnConfig;
 
 import helios.engine.ecs.GameObject;
 
-import helios.engine.mechanics.spawn.components.SpawnedByProfileComponent;
+import helios.engine.mechanics.spawn.components;
 
 export namespace helios::engine::builder::gameObject::builders::configs {
 
@@ -44,6 +44,20 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          */
         SpawnConfig& useSpawnProfile() {
             gameObject_->add<helios::engine::mechanics::spawn::components::SpawnedByProfileComponent>();
+
+            return *this;
+        }
+
+        /**
+         * @brief Tracks the emitter that created this entity.
+         *
+         * Adds EmittedByComponent which stores the GUID of the entity
+         * that emitted/spawned this entity (e.g., player → projectile).
+         *
+         * @return Reference to this config for chaining.
+         */
+        SpawnConfig& trackEmitter() {
+            gameObject_->add<helios::engine::mechanics::spawn::components::EmittedByComponent>();
 
             return *this;
         }

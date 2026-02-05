@@ -49,12 +49,13 @@ export namespace helios::rendering::text{
          * The font is associated with the given `FontId` for identification.
          *
          * @param fontId Unique identifier for this font.
+         * @param pixelHeight The height of the font, in pixels.
          * @param pathToFont File system path to the font file (e.g., TrueType `.ttf`).
          *
          * @note If a font with the same `fontId` is already loaded, behavior is
          *       implementation-defined (may replace or ignore).
          */
-        virtual void loadFont(helios::engine::core::data::FontId fontId, std::string_view pathToFont) = 0;
+        virtual void loadFont(helios::engine::core::data::FontId fontId, unsigned int pixelHeight, std::string_view pathToFont) = 0;
 
         /**
          * @brief Retrieves the glyph data for a character.

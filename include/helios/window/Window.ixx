@@ -5,8 +5,9 @@
 module;
 
 #include <memory>
-#include <string>
 #include <stdexcept>
+#include <string>
+#include <unordered_map>
 
 export module helios.window.Window;
 
@@ -16,6 +17,7 @@ import helios.math.types;
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
 import helios.rendering.RenderTarget;
+import helios.rendering.ViewportSnapshot;
 import helios.rendering.Viewport;
 
 #define HELIOS_LOG_SCOPE "helios::window::Window"
@@ -32,6 +34,9 @@ export namespace helios::window {
     class Window {
 
     private:
+        /**
+         * @brief Unique identifier for this window instance.
+         */
         util::Guid guid_;
 
     protected:
@@ -93,10 +98,10 @@ export namespace helios::window {
          * Initializes basic properties such as width, height and the viewport
          * of the window.
          *
-         * @param renderTarget
+         * @param renderTarget The RenderTarget for this window. Ownership is transferred.
          * @param cfg A const ref to the window configuration used for this instance.
          *
-         * @throws std::invalid_argument if renderTarget is a nullptr
+         * @throws std::invalid_argument if renderTarget is a nullptr.
          */
         explicit Window(
             std::unique_ptr<helios::rendering::RenderTarget> renderTarget,
@@ -218,6 +223,25 @@ export namespace helios::window {
          */
         std::shared_ptr<helios::rendering::Viewport> addViewport(std::shared_ptr<helios::rendering::Viewport> viewport) const {
             return renderTarget_->addViewport(std::move(viewport));
+        }
+
+        /**
+         * @brief Returns snapshots of all viewports with assigned IDs.
+         *
+         * Collects immutable ViewportSnapshot objects from all viewports
+         * that have a valid ViewportId. Useful for passing viewport state
+         * to systems that need frame-consistent viewport data.
+         *
+         * @return A vector of ViewportSnapshot objects.
+         */
+        [[nodiscard]] std::vector<helios::rendering::ViewportSnapshot> viewportSnapshots() {
+            std::vector<helios::rendering::ViewportSnapshot> snapshots;
+            for (auto& viewport : renderTarget_->viewports()) {
+                if (viewport->viewportId()) {
+                    snapshots.push_back(viewport->snapshot());
+                }
+            }
+            return snapshots;
         }
 
         /**

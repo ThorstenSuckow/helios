@@ -5,8 +5,9 @@
 module;
 
 #include <memory>
-#include <vector>
+#include <span>
 #include <stdexcept>
+#include <vector>
 
 export module helios.rendering.RenderTarget;
 
@@ -108,9 +109,22 @@ export namespace helios::rendering {
             }
 
             viewport->setRenderTarget(&*this, viewportKey_);
+
+            // make sure viewport is initialized with the render target's size
+            viewport->onRenderTargetResize(width_, height_);
+
             viewports_.emplace_back(viewport);
 
             return viewport;
+        }
+
+        /**
+         * @brief Returns a read-only view of all viewports owned by this RenderTarget.
+         *
+         * @return A span of shared pointers to the viewports.
+         */
+        [[nodiscard]] std::span<const std::shared_ptr<helios::rendering::Viewport>> viewports() noexcept {
+            return viewports_;
         }
 
         /**
@@ -127,7 +141,7 @@ export namespace helios::rendering {
             width_  = width;
             height_ = height;
 
-            for (auto& it : viewports_) {
+            for (const auto& it : viewports_) {
                 it->onRenderTargetResize(width_, height_);
             }
         }

@@ -33,6 +33,8 @@ import helios.rendering.shader.UniformSemantics;
 import helios.engine.core.data.FontId;
 import helios.rendering.text.TextRenderCommand;
 
+import helios.rendering.RenderPass;
+
 import helios.rendering.shader.UniformValueMap;
 
 export namespace helios::ext::opengl::rendering {
@@ -90,7 +92,27 @@ export namespace helios::ext::opengl::rendering {
          */
         unsigned int vbo_{};
 
+        /**
+         * @brief Cached pointer to the last used shader for state optimization.
+         *
+         * Used to avoid redundant shader program activations. Reset at the beginning
+         * of each render pass.
+         */
+        mutable const helios::ext::opengl::rendering::shader::OpenGLShader* lastShader_ = nullptr;
 
+        /**
+         * @brief Cached texture ID for state optimization.
+         *
+         * Used to avoid redundant texture bindings.
+         */
+        mutable unsigned int lastTexture_ = 0;
+
+        /**
+         * @brief Cached VAO ID for state optimization.
+         *
+         * Used to avoid redundant VAO bindings. Reset at the beginning of each render pass.
+         */
+        mutable unsigned int lastVao_ = 0;
 
         /**
          * @brief Renders text at a specified position using a specified font and scale.
@@ -113,7 +135,11 @@ export namespace helios::ext::opengl::rendering {
         )  noexcept {
 
             glActiveTexture(GL_TEXTURE0);
-            glBindVertexArray(vao_);
+
+            if (vao_ != lastVao_) {
+                glBindVertexArray(vao_);
+                lastVao_ = vao_;
+            }
 
             int offset = 0;
             int stride = 6;
@@ -126,7 +152,9 @@ export namespace helios::ext::opengl::rendering {
                 // render glyph texture over quad
                 glBindTexture(GL_TEXTURE_2D, glyph.textureId);
                 // update content of vbo memory
+
                 glBindBuffer(GL_ARRAY_BUFFER, vbo_);
+
                 glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(helios::math::vec4f) * stride, vertex.data());
                 glBindBuffer(GL_ARRAY_BUFFER, 0);
                 //render quad
@@ -136,10 +164,24 @@ export namespace helios::ext::opengl::rendering {
                 offset += stride;
             }
 
-            glBindVertexArray(0);
-            glBindTexture(GL_TEXTURE_2D, 0);
         }
 
+
+        /**
+         * @brief Resets cached rendering state at the beginning of a render pass.
+         *
+         * This ensures proper shader and VAO binding even when the render queue
+         * contents change between frames. Called internally by `OpenGLDevice` before
+         * processing the render queue.
+         *
+         * @param renderPass The render pass being started (currently unused, reserved for future use).
+         */
+        void beginRenderPass(helios::rendering::RenderPass& renderPass) const noexcept {
+            // Reset cached state at the beginning of each render pass
+            // to ensure proper shader and VAO binding even when render queue contents change
+            lastShader_ = nullptr;
+            lastVao_ = 0;
+        }
 
     public:
 
@@ -161,6 +203,12 @@ export namespace helios::ext::opengl::rendering {
                 glDeleteBuffers(1, &vbo_);
             }
 
+            /**
+             *@todo glDeleteTextures()
+             */
+
+            glBindVertexArray(0);
+            glBindTexture(GL_TEXTURE_2D, 0);
         }
 
         /**
@@ -193,7 +241,10 @@ export namespace helios::ext::opengl::rendering {
                 const auto* shader = static_cast<const helios::ext::opengl::rendering::shader::OpenGLShader*>(&baseShader);
                 assert(shader && "Unexpected failure when casting to OpenGLShader.");
 
-                shader->use();
+                if (lastShader_ != shader) {
+                    shader->use();
+                    lastShader_ = shader;
+                }
 
                 shader->applyUniformValues(frameUniformValues);
                 shader->applyUniformValues(command.objectUniformValues());;

@@ -18,8 +18,10 @@ export namespace helios::input::types {
      * this enumeration.
      */
     enum Key {
+
         ESC,
 
+        TILDE,
 
         /**
          * @brief Number of entries in this enumeration.

@@ -7,28 +7,48 @@ This module provides core data structures used for managing GameObjects within t
 ## Components
 
 - **ComponentTypeId** - Compile-time type identifier for O(1) component indexing within GameObject.
+- **FontId** - Strongly-typed identifier for referencing fonts.
 - **GameObjectPool** - Low-level O(1) object pooling for entity recycling.
 - **GameObjectPoolId** - Strongly-typed identifier for referencing pools.
 - **GameObjectPoolRegistry** - Central registry managing multiple pools by ID.
 - **GameObjectFilter** - Bitmask enum for filtering entities by active/inactive state and component state.
 - **GameObjectView** - Lazy range adapter for component-filtered iteration with structured binding support.
+- **ScorePoolId** - Strongly-typed identifier for score pools.
+- **ScoreTypeId** - Strongly-typed identifier for score types.
 - **SpawnProfileId** - Strongly-typed identifier for spawn profiles.
 - **SpawnRuleId** - Strongly-typed identifier for spawn rules.
+- **ViewportId** - Strongly-typed identifier for viewports.
 
 ## Strongly-Typed IDs
 
-The ID types (`GameObjectPoolId`, `SpawnProfileId`, `SpawnRuleId`) provide type-safe identifiers that can be constructed from string literals using FNV-1a hashing:
+### String-Based IDs (FNV-1a Hashing)
+
+The ID types `FontId`, `GameObjectPoolId`, `ScorePoolId`, `SpawnProfileId`, `SpawnRuleId`, and `ViewportId` provide type-safe identifiers constructed from string literals using FNV-1a hashing:
 
 ```cpp
 // Compile-time constant IDs from strings
 constexpr GameObjectPoolId ENEMY_POOL{"enemies"};
 constexpr SpawnProfileId ENEMY_PROFILE{"enemy_spawn"};
 constexpr SpawnRuleId WAVE_RULE{"wave_spawn"};
+constexpr ScorePoolId PLAYER_SCORE{"player"};
+constexpr ViewportId UI_VIEWPORT{"Ui"};
 
 // Use in registries and schedulers
 poolManager.createPool(ENEMY_POOL, 100);
 spawnManager.registerProfile(ENEMY_PROFILE, profile);
 scheduler.addRule(ENEMY_PROFILE, std::make_unique<TimerSpawnRule>(WAVE_RULE, 2.0f, 5));
+```
+
+### Type-Based IDs (TypeIndexer)
+
+`ComponentTypeId` and `ScoreTypeId` use `TypeIndexer` to generate unique, monotonically increasing IDs for each type at compile time:
+
+```cpp
+// Get unique ID for a component type
+auto typeId = ComponentTypeId::id<HealthComponent>();
+
+// Get unique ID for a score type
+auto scoreId = ScoreTypeId::id<KillScore>();
 ```
 
 All ID types support:

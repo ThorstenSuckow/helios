@@ -152,7 +152,8 @@ export namespace helios::engine::mechanics::combat::systems {
                         helios::engine::runtime::spawn::SpawnContext{
                             helios::engine::runtime::spawn::EmitterContext{
                                 tsc->translation(),
-                                sc->sourceVelocity() + (aimDirection * sc->projectileSpeed())
+                                sc->sourceVelocity() + (aimDirection * sc->projectileSpeed()),
+                                entity->guid()
                             }
                         }
                     );

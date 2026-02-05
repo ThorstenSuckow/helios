@@ -146,6 +146,7 @@ export namespace helios::ext::opengl::rendering {
          */
         void beginRenderPass(helios::rendering::RenderPass& renderPass) const noexcept override {
             meshRenderer_->beginRenderPass(renderPass);
+            textRenderer_->beginRenderPass(renderPass);
 
             const auto& viewport = renderPass.viewport();
 

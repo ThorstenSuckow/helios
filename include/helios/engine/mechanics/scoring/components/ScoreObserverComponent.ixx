@@ -40,10 +40,6 @@ export namespace helios::engine::mechanics::scoring::components {
          */
         helios::engine::core::data::ScorePoolId scorePoolId_{helios::core::types::no_init};
 
-        /**
-         * @brief Cached generation id of the ScorePoolSnapshot.
-         */
-        helios::engine::mechanics::scoring::types::ScorePoolRevision revision_;
 
         /**
          * @brief Flag indicating whether the value changed this frame.
@@ -105,7 +101,7 @@ export namespace helios::engine::mechanics::scoring::components {
          * @param snapshot The snapshot to use for the next update..
          */
         void update(const helios::engine::mechanics::scoring::ScorePoolSnapshot& snapshot) noexcept {
-            if (revision_ == snapshot.revision) {
+            if (snapshot_.revision == snapshot.revision) {
                 return;
             }
             snapshot_ = snapshot;
@@ -130,6 +126,21 @@ export namespace helios::engine::mechanics::scoring::components {
             return hasUpdate_;
         }
 
+        /**
+         * @copydoc Component::onAcquire()
+         */
+        void onAcquire() noexcept override {
+            clearUpdate();
+            snapshot_ = {};
+        }
+
+        /**
+         * @copydoc Component::onRelease()
+         */
+        void onRelease() noexcept override {
+            clearUpdate();
+            snapshot_ = {};
+        }
     };
 
 

@@ -134,6 +134,7 @@ class UiTextComponent : public helios::engine::ecs::CloneableComponent<UiTextCom
             if (template_ == "{0}" || template_.empty()) {
                 renderable_->setText(std::to_string(doubleValue_));
                 needsResize_ = true;
+                isDirty_ = false;
                 return;
             }
 

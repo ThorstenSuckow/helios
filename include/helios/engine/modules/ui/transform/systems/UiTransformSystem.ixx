@@ -56,6 +56,7 @@ export namespace helios::engine::modules::ui::transform::systems {
                     return unanchored - size;
             }
 
+            assert(false && "Unreachable!");
             std::unreachable();
         }
 

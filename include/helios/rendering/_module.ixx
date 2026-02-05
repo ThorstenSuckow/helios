@@ -10,6 +10,7 @@ export import helios.rendering.RenderPass;
 export import helios.rendering.RenderTarget;
 export import helios.rendering.ClearFlags;
 export import helios.rendering.Viewport;
+export import helios.rendering.ViewportSnapshot;
 export import helios.rendering.RenderPrototype;
 export import helios.rendering.RenderPassFactory;
 export import helios.rendering.RenderingDevice;

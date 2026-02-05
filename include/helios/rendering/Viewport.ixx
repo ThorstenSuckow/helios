@@ -12,7 +12,11 @@ module;
 
 export module helios.rendering.Viewport;
 
+import helios.rendering.ViewportSnapshot;
+
 import helios.rendering.ClearFlags;
+import helios.core.types;
+import helios.engine.core.data.ViewportId;
 import helios.math.types;
 import helios.scene.CameraSceneNode;
 import :RenderTargetFwd;
@@ -22,6 +26,9 @@ import helios.util.log.Logger;
 #define HELIOS_LOG_SCOPE "helios::rendering::Viewport"
 export namespace helios::rendering {
 
+
+    
+    
     /**
      * @brief A passkey used to establish a parent-child relationship between a RenderTarget and a Viewport.
      *
@@ -94,6 +101,11 @@ export namespace helios::rendering {
         float height_ = 1.0f;
 
         /**
+         * @brief Size of the parent RenderTarget in pixels.
+         */
+        helios::math::vec2ui renderTargetSize_{};
+
+        /**
          * @brief The cameraSceneNode associated as the main camera with this viewport.
          */
         helios::scene::CameraSceneNode* cameraSceneNode_ = nullptr;
@@ -118,16 +130,45 @@ export namespace helios::rendering {
         int zIndex_ = 0;
 
         /**
+         * @brief Unique identifier for this viewport.
+         */
+        const helios::engine::core::data::ViewportId viewportId_{helios::core::types::no_init};
+
+        /**
+         * @brief Cached absolute bounds [x, y, width, height] in pixels.
+         */
+        mutable helios::math::vec4f absoluteBounds_{};
+
+        /**
          * @brief Updates the cached dimensions vector if it is dirty.
          */
-        void updateBounds() const noexcept {
+        void updateCache() const noexcept {
+
+            if (!needsUpdate_) {
+                return;
+            }
+
             bounds_[0] = x_;
             bounds_[1] = y_;
             bounds_[2] = width_;
             bounds_[3] = height_;
 
+            absoluteBounds_ = {
+            bounds_[0] * renderTargetSize_[0],
+            bounds_[1] * renderTargetSize_[1],
+            bounds_[2] * renderTargetSize_[0],
+            bounds_[3] * renderTargetSize_[1]
+            };
+
+            snapshot_ = {viewportId_, bounds_, absoluteBounds_};
+
             needsUpdate_ = false;
         }
+
+        /**
+         * @brief Cached viewport snapshot for efficient access.
+         */
+        mutable ViewportSnapshot snapshot_{};
 
         /**
          * @brief Updates this Viewport's CameraSceneNode and its associated Camera based on the dimension of the RenderTarget.
@@ -170,9 +211,13 @@ export namespace helios::rendering {
          * @param zIndex The z-index that determines the rendering order.
          */
         explicit Viewport(
-            float x, float y, float width, float height, int zIndex = 0
+            float x, float y, float width, float height,
+            const helios::engine::core::data::ViewportId viewportId = helios::engine::core::data::ViewportId{helios::core::types::no_init},
+            const int zIndex = 0
         ) noexcept
-            : zIndex_(zIndex) {
+            :
+            viewportId_(viewportId),
+            zIndex_(zIndex) {
             setBounds(x, y, width, height);
         }
 
@@ -185,6 +230,15 @@ export namespace helios::rendering {
          */
         [[nodiscard]] const helios::rendering::RenderTarget* renderTarget() const noexcept {
             return renderTarget_;
+        }
+
+        /**
+         * @brief Returns the unique identifier for this viewport.
+         *
+         * @return The ViewportId assigned to this viewport.
+         */
+        [[nodiscard]] helios::engine::core::data::ViewportId viewportId() const noexcept {
+            return viewportId_;
         }
 
         /**
@@ -239,10 +293,32 @@ export namespace helios::rendering {
          * @return A const reference to a vec4f containing [x, y, width, height].
          */
         [[nodiscard]] const helios::math::vec4f& bounds() const noexcept {
-            if (needsUpdate_) {
-                updateBounds();
-            }
+            updateCache();
             return bounds_;
+        }
+
+        /**
+         * @brief Gets the cached absolute bounds of the viewport in pixels.
+         *
+         * @return A const reference to a vec4f containing [x, y, width, height] in pixels.
+         */
+        [[nodiscard]] const helios::math::vec4f& absoluteBounds() const noexcept {
+            updateCache();
+            return absoluteBounds_;
+        }
+
+        /**
+         * @brief Returns an immutable snapshot of this viewport's current state.
+         *
+         * The snapshot contains the viewport ID and both normalized and absolute bounds.
+         * Useful for passing viewport state to rendering systems without exposing the
+         * mutable Viewport object.
+         *
+         * @return A ViewportSnapshot containing the current viewport state.
+         */
+        [[nodiscard]] ViewportSnapshot snapshot() const noexcept {
+            updateCache();
+            return snapshot_;
         }
 
 
@@ -339,6 +415,8 @@ export namespace helios::rendering {
          * @see updateCamera()
          */
          void onRenderTargetResize(const unsigned int width, const unsigned int height) noexcept {
+            renderTargetSize_ = {width, height};
+            needsUpdate_ = true;
             updateCamera(width, height);
          }
     };

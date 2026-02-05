@@ -27,7 +27,7 @@ export namespace helios::engine::modules::physics::collision::types {
      * - `Bounce` — Fully supported
      * - `Despawn` — Fully supported
      */
-    enum class CollisionBehavior : uint8_t {
+    enum class CollisionBehavior : uint16_t {
 
         /**
          * @brief No collision response.
@@ -72,16 +72,69 @@ export namespace helios::engine::modules::physics::collision::types {
          * @details Generates a collision event for game logic processing
          * without affecting the entity's physics state.
          */
-        Event   = 1 << 4,
+        PassEvent   = 1 << 4,
 
         /**
-         * @brief Internal: Number of behavior types for array sizing.
+         * @brief Push collision event to the event bus.
          *
-         * @warning Do not use as a behavior value.
+         * @details Pushes the collision event to the double-buffered event bus
+         * for processing in the next frame. Used for deferred collision handling.
          */
-        size_ = 6
+        PushEvent   = 1 << 5,
+
+        /**
+         * @brief Process collision event in the current frame.
+         *
+         * @details Sends the collision event to the immediate bus for processing
+         * within the same frame. Used for time-critical collision responses.
+         */
+        FrameEvent   = 1 << 6
     };
 
+    /**
+     * @brief Number of distinct CollisionBehavior flags.
+     */
+    constexpr size_t CollisionBehaviorItemSize = 8;
 
+    /**
+     * @brief Combines two CollisionBehavior flags using bitwise OR.
+     *
+     * @param lhs Left-hand side behavior.
+     * @param rhs Right-hand side behavior.
+     *
+     * @return Combined behavior flags.
+     */
+    [[nodiscard]] constexpr CollisionBehavior operator|(CollisionBehavior lhs, CollisionBehavior rhs) noexcept {
+        return static_cast<CollisionBehavior>(
+            static_cast<uint16_t>(lhs) | static_cast<uint16_t>(rhs)
+        );
+    }
+
+    /**
+     * @brief Masks two CollisionBehavior flags using bitwise AND.
+     *
+     * @param lhs Left-hand side behavior.
+     * @param rhs Right-hand side behavior.
+     *
+     * @return Masked behavior flags.
+     */
+    [[nodiscard]] constexpr CollisionBehavior operator&(CollisionBehavior lhs, CollisionBehavior rhs) noexcept {
+        return static_cast<CollisionBehavior>(
+            static_cast<uint16_t>(lhs) & static_cast<uint16_t>(rhs)
+        );
+    }
+
+    /**
+     * @brief Checks if a behavior mask contains a specific flag.
+     *
+     * @param mask The behavior mask to check.
+     * @param flag The flag to test for.
+     *
+     * @return True if the mask contains the flag, false otherwise.
+     */
+    [[nodiscard]] constexpr bool hasFlag(const CollisionBehavior mask, const CollisionBehavior flag) noexcept {
+        return (mask & flag) == flag;
+    }
 
 }
+

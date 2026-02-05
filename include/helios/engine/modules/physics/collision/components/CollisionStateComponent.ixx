@@ -11,6 +11,7 @@ module;
 export module helios.engine.modules.physics.collision.components.CollisionStateComponent;
 
 import helios.engine.modules.physics.collision.types.CollisionBehavior;
+import helios.engine.modules.physics.collision.types.CollisionContext;
 
 import helios.engine.ecs.CloneableComponent;
 import helios.engine.ecs.GameObject;
@@ -60,19 +61,34 @@ export namespace helios::engine::modules::physics::collision::components {
         /**
          * @brief The collision behavior to apply.
          */
-        helios::engine::modules::physics::collision::types::CollisionBehavior collisionBehavior_;
+        helios::engine::modules::physics::collision::types::CollisionBehavior collisionBehavior_ = types::CollisionBehavior::None;
 
         /**
          * @brief Flag indicating whether a collision was detected this frame.
          */
         bool hasCollision_ = false;
 
+        /**
+         * @brief Full collision context data for event publishing.
+         */
+        helios::engine::modules::physics::collision::types::CollisionContext collisionContext_{};
+
+        /**
+         * @brief Collision layer ID of this entity.
+         */
+        uint32_t collisionLayer_ = 0;
+
+        /**
+         * @brief Collision layer ID of the other entity.
+         */
+        uint32_t otherCollisionLayer_ = 0;
+
     public:
 
         /**
          * @brief Default constructor.
          */
-        explicit CollisionStateComponent() {}
+        CollisionStateComponent() = default;
 
         /**
          * @brief Copy constructor (creates empty state).
@@ -93,6 +109,8 @@ export namespace helios::engine::modules::physics::collision::components {
          * @param collisionBehavior The behavior to apply for this collision.
          * @param isCollisionReporter Whether this entity reports the collision.
          * @param other GUID of the other entity (optional).
+         * @param collisionLayer Collision layer ID of this entity.
+         * @param otherCollisionLayer Collision layer ID of the other entity.
          *
          * @return True if the state was set, false if a collision was already recorded.
          */
@@ -102,7 +120,9 @@ export namespace helios::engine::modules::physics::collision::components {
             const bool isTrigger,
             const helios::engine::modules::physics::collision::types::CollisionBehavior collisionBehavior,
             const bool isCollisionReporter,
-            std::optional<helios::util::Guid> other = std::nullopt) {
+            std::optional<helios::util::Guid> other = std::nullopt,
+            const uint32_t collisionLayer = 0,
+            const uint32_t otherCollisionLayer = 0) {
 
             if (hasCollision_) {
                 return false;
@@ -118,6 +138,20 @@ export namespace helios::engine::modules::physics::collision::components {
 
             other_ = other;
             contact_ = contact;
+
+            collisionLayer_ = collisionLayer;
+            otherCollisionLayer_ = otherCollisionLayer;
+
+            collisionContext_ = types::CollisionContext{
+                .source = gameObject_->guid(),
+                .contact = contact,
+                .isSolid = isSolid,
+                .isTrigger = isTrigger,
+                .isCollisionReporter = isCollisionReporter,
+                .other = other,
+                .collisionLayerId = collisionLayer,
+                .otherCollisionLayerId = otherCollisionLayer,
+            };
 
             return true;
         }
@@ -139,6 +173,11 @@ export namespace helios::engine::modules::physics::collision::components {
 
             other_ = std::nullopt;
             contact_ = helios::math::vec3f{0.0f, 0.0f, 0.0f};
+
+            collisionContext_ = types::CollisionContext{};
+
+            collisionLayer_ = 0;
+            otherCollisionLayer_ = 0;
         }
 
         /**
@@ -149,6 +188,16 @@ export namespace helios::engine::modules::physics::collision::components {
         void onAcquire() noexcept override {
             reset();
         }
+
+        /**
+         * @brief Returns the full collision context data.
+         *
+         * @return Reference to the CollisionContext struct containing all collision details.
+         */
+        [[nodiscard]] const types::CollisionContext& collisionContext() const noexcept {
+            return collisionContext_;
+        }
+
 
         /**
          * @brief Checks whether a collision was detected this frame.
@@ -211,6 +260,24 @@ export namespace helios::engine::modules::physics::collision::components {
          */
         [[nodiscard]] helios::math::vec3f contact() const noexcept {
             return contact_;
+        }
+
+        /**
+         * @brief Returns the collision layer ID of this entity.
+         *
+         * @return The collision layer ID.
+         */
+        [[nodiscard]] uint32_t collisionLayer() const noexcept {
+            return collisionLayer_;
+        }
+
+        /**
+         * @brief Returns the collision layer ID of the other entity.
+         *
+         * @return The other entity's collision layer ID.
+         */
+        [[nodiscard]] uint32_t otherCollisionLayer() const noexcept {
+            return otherCollisionLayer_;
         }
 
     };

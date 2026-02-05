@@ -45,6 +45,8 @@ export namespace helios::engine::modules::physics::collision::components {
      */
     class CollisionComponent : public helios::engine::ecs::CloneableComponent<CollisionComponent> {
 
+        const size_t CollisionBehaviorSize = helios::engine::modules::physics::collision::types::CollisionBehaviorItemSize;
+
         /**
          * @brief The collision layer this component belongs to.
          */
@@ -71,7 +73,7 @@ export namespace helios::engine::modules::physics::collision::components {
          */
         bool isCollisionReporter_ = true;
 
-        static_assert(std::to_underlying(helios::engine::modules::physics::collision::types::CollisionBehavior::size_) <= 32);
+        static_assert(helios::engine::modules::physics::collision::types::CollisionBehaviorItemSize <= 32);
 
         /**
          * @brief Per-behavior layer masks for solid collisions.
@@ -82,7 +84,7 @@ export namespace helios::engine::modules::physics::collision::components {
          */
         std::array<
             uint32_t,
-            std::to_underlying(helios::engine::modules::physics::collision::types::CollisionBehavior::size_)
+            helios::engine::modules::physics::collision::types::CollisionBehaviorItemSize
         > solidCollisionBehavior_{};
 
         /**
@@ -94,7 +96,7 @@ export namespace helios::engine::modules::physics::collision::components {
          */
         std::array<
             uint32_t,
-            std::to_underlying(helios::engine::modules::physics::collision::types::CollisionBehavior::size_)
+            helios::engine::modules::physics::collision::types::CollisionBehaviorItemSize
         > triggerCollisionBehavior_{};
 
         /**
@@ -261,8 +263,12 @@ export namespace helios::engine::modules::physics::collision::components {
                 behavior &= ~otherLayerId;
             }
 
-            const auto idx = std::bit_width(std::to_underlying(collisionBehavior)) - 1;
-            solidCollisionBehavior_[idx] |= otherLayerId;
+            const auto rawMask = std::to_underlying(collisionBehavior);
+            for (int i = 0; i <  CollisionBehaviorSize; i++) {
+                if ((rawMask >> i ) & 1) {
+                    solidCollisionBehavior_[i] |= otherLayerId;
+                }
+            }
 
             return *this;
         }
@@ -283,14 +289,15 @@ export namespace helios::engine::modules::physics::collision::components {
                 return CollisionBehavior::None;
             }
 
+            auto resultMask = CollisionBehavior::None;
             for (int i = 0; i < solidCollisionBehavior_.size(); i++) {
 
                 if ((solidCollisionBehavior_[i] & otherLayerId) != 0) {
-                    return static_cast<CollisionBehavior>(1 << i);
+                    resultMask = resultMask | static_cast<CollisionBehavior>(1 << i);
                 }
             }
 
-            return CollisionBehavior::None;
+            return resultMask;
         }
 
         /**
@@ -310,14 +317,14 @@ export namespace helios::engine::modules::physics::collision::components {
                 return CollisionBehavior::None;
             }
 
+            auto resultMask = CollisionBehavior::None;
             for (int i = 0; i < triggerCollisionBehavior_.size(); i++) {
-
                 if ((triggerCollisionBehavior_[i] & otherLayerId) != 0) {
-                    return static_cast<CollisionBehavior>(1 << i);
+                    resultMask = resultMask | static_cast<CollisionBehavior>(1 << i);
                 }
             }
 
-            return CollisionBehavior::None;
+            return resultMask;
         }
 
 
@@ -342,8 +349,12 @@ export namespace helios::engine::modules::physics::collision::components {
                 behavior &= ~otherLayerId;
             }
 
-            const auto idx = std::bit_width(std::to_underlying(collisionBehavior)) - 1;
-            triggerCollisionBehavior_[idx] |= otherLayerId;
+            const auto rawMask = std::to_underlying(collisionBehavior);
+            for (int i = 0; i <  CollisionBehaviorSize; i++) {
+                if ((rawMask >> i ) & 1) {
+                    triggerCollisionBehavior_[i] |= otherLayerId;
+                }
+            }
 
             return *this;
         }

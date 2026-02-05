@@ -207,8 +207,8 @@ export namespace helios::engine::builder::gameObject {
                 CombatBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::CombatBuilder>(gameObject_.get())),
                 lifecycleBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::LifecycleBuilder>(gameObject_.get())),
                 healthBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::HealthBuilder>(gameObject_.get())),
-            scoringBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::ScoringBuilder>(gameObject_.get())),
-        observerBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::ObserverBuilder>(gameObject_.get()))
+                scoringBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::ScoringBuilder>(gameObject_.get())),
+                observerBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::ObserverBuilder>(gameObject_.get()))
 
             {}
 

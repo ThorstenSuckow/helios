@@ -93,7 +93,7 @@ export namespace helios::engine::mechanics::damage::systems {
                 const auto damageApplied = ddc->damage(event.collisionContext().otherCollisionLayerId);
                 hc->takeDamage(damageApplied);
                 logger_.info(std::format(
-                    "Hiting entity {0} with {1} damage! {2} health left ",
+                    "Hitting entity {0} with {1} damage! {2} health left ",
                     other.value().value(),
                     damageApplied,
                     hc->health()

@@ -55,7 +55,7 @@ export namespace helios::engine::mechanics::combat::components {
          *
          * @return The stored AttackContext.
          */
-        [[nodiscard]] helios::engine::mechanics::combat::types::AttackContext lastAttackContext() noexcept {
+        [[nodiscard]] helios::engine::mechanics::combat::types::AttackContext lastAttackContext() const noexcept {
             return lastAttackContext_;
         }
 

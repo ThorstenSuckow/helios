@@ -38,11 +38,11 @@ export namespace helios::engine::builder::gameObject::builders::configs {
 
         std::string text_;
 
-        float fontScale_;;
+        float fontScale_;
 
         std::string template_;
 
-        bool isUiText_ = false;;
+        bool isUiText_ = false;
 
 
 

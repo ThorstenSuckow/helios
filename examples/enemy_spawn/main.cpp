@@ -422,7 +422,8 @@ int main() {
         const GamepadState& gamepadState = inputManager.gamepadState(Gamepad::ONE);
         const auto inputSnapshot = helios::input::InputSnapshot(gamepadState);
 
-        gameLoop.update(gameWorld, DELTA_TIME, inputSnapshot);
+        const auto viewportSnapshots = win->viewportSnapshots();
+        gameLoop.update(gameWorld, DELTA_TIME, inputSnapshot, viewportSnapshots);
 
 
         // ----------------------------------------

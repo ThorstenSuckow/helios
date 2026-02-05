@@ -17,6 +17,8 @@ import helios.engine.runtime.spawn.SpawnProfile;
 import helios.engine.runtime.spawn.SpawnContext;
 import helios.engine.runtime.spawn.events.SpawnPlanCommandExecutedEvent;
 
+import helios.engine.mechanics.spawn.components.EmittedByComponent;
+
 import helios.engine.runtime.spawn.commands.SpawnCommand;
 import helios.engine.runtime.spawn.commands.ScheduledSpawnPlanCommand;
 import helios.engine.runtime.spawn.commands.DespawnCommand;
@@ -198,8 +200,6 @@ export namespace helios::engine::runtime::spawn {
                const auto spawnCount = std::min(amount, poolSnapshot.inactiveCount);
                 for (size_t i = 0; i < spawnCount; i++) {
 
-
-
                     auto* go = gameObjectPoolManager_->acquire(gameObjectPoolId);
                     assert(go && "Failed to acquire GameObject");
 
@@ -213,6 +213,13 @@ export namespace helios::engine::runtime::spawn {
 
                     auto spawnCursor = helios::engine::runtime::spawn::SpawnPlanCursor{spawnCount, i};
                     const auto& spawnContext =  scheduledSpawnPlanCommand.spawnContext();
+
+                    const auto& emitter = spawnContext.emitterContext;
+                    auto* ebc = go->get<helios::engine::mechanics::spawn::components::EmittedByComponent>();
+                    if (emitter.has_value() && ebc) {
+                        ebc->setSource(emitter.value().source);
+                    }
+
                     if (tsc) {
                         
                         auto bounds = aabb->bounds();
@@ -282,6 +289,11 @@ export namespace helios::engine::runtime::spawn {
                 auto* aabb = go->get<helios::engine::modules::physics::collision::components::AabbColliderComponent>();
                 assert(aabb && "unexpected missing AabbColliderComponent");
 
+                const auto& emitter = spawnContext.emitterContext;
+                auto* ebc = go->get<helios::engine::mechanics::spawn::components::EmittedByComponent>();
+                if (emitter.has_value() && ebc) {
+                    ebc->setSource(emitter.value().source);
+                }
 
                 if (tsc) {
 

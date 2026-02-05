@@ -103,6 +103,7 @@ export namespace helios::ext::opengl::rendering {
          * Each glyph bitmap is uploaded to the GPU as a GL_R8 texture.
          *
          * @param fontId Unique identifier for this font.
+         * @param pixelHeight The height of the font, in pixels.
          * @param pathToFont File system path to the font file (e.g., `.ttf`).
          *
          * @throws std::runtime_error If FreeType initialization fails.
@@ -112,8 +113,9 @@ export namespace helios::ext::opengl::rendering {
          * @pre The font ID must not already be loaded (asserts in debug builds).
          */
         void loadFont(
-            helios::engine::core::data::FontId fontId,
-            std::string_view pathToFont
+            const helios::engine::core::data::FontId fontId,
+            const unsigned int pixelHeight,
+            const std::string_view pathToFont
         ) override {
 
             const int begin = 0;
@@ -136,7 +138,7 @@ export namespace helios::ext::opengl::rendering {
                 throw std::runtime_error("ERROR::FREETYPE: Failed to load font");
             }
 
-            FT_Set_Pixel_Sizes(face, 0, 24);
+            FT_Set_Pixel_Sizes(face, 0, pixelHeight);
             glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
             glPixelStorei(GL_UNPACK_ROW_LENGTH, face->glyph->bitmap.pitch);
 

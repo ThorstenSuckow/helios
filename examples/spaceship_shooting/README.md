@@ -131,7 +131,7 @@ auto shipGameObject = GameObjectFactory::instance()
         cb.levelBoundsCollision()
           .onCollision(CollisionBehavior::Bounce);
     })
-    .withShooting([](auto& ccb) {
+    .withCombat([](auto& ccb) {
         ccb.weapon().fireRate(5.0f);  // 5 shots per second
     })
     .withMotion([](auto& mcb) {

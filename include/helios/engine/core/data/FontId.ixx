@@ -10,6 +10,7 @@ module;
 export module helios.engine.core.data.FontId;
 
 import helios.core.algorithms;
+import helios.core.types;
 
 export namespace helios::engine::core::data {
 
@@ -44,14 +45,14 @@ export namespace helios::engine::core::data {
         /**
          * @brief The hashed identifier value.
          */
-        uint32_t id_;
+        uint32_t id_{};
 
         /**
          * @brief Private constructor from raw hash value.
          *
          * @param id The pre-computed hash value.
          */
-        explicit constexpr FontId(uint32_t id) noexcept
+        explicit constexpr FontId(const uint32_t id) noexcept
             : id_(id) {
         }
 
@@ -67,6 +68,8 @@ export namespace helios::engine::core::data {
          */
         explicit constexpr FontId(const std::string_view str) noexcept
             : FontId(helios::core::algorithms::fnv1a_hash(str)) {}
+
+        explicit constexpr FontId(helios::core::types::no_init_t) {};
 
         /**
          * @brief Returns the raw identifier value.

@@ -1,13 +1,14 @@
 /**
- * @file ShootingBuilder.ixx
+ * @file CombatBuilder.ixx
  * @brief Builder for weapon and combat component configuration.
  */
 module;
 
-export module helios.engine.builder.gameObject.builders.ShootingBuilder;
+export module helios.engine.builder.gameObject.builders.CombatBuilder;
 
 import helios.engine.ecs.GameObject;
 import helios.engine.builder.gameObject.builders.configs.WeaponConfig;
+import helios.engine.builder.gameObject.builders.configs.CombatConfig;
 
 export namespace helios::engine::builder::gameObject::builders {
 
@@ -17,7 +18,7 @@ export namespace helios::engine::builder::gameObject::builders {
      * Provides factory methods for setting up weapon systems
      * including fire rate and projectile spawning.
      */
-    class ShootingBuilder {
+    class CombatBuilder {
 
         /**
          * @brief Non-owning pointer to the target GameObject.
@@ -27,11 +28,11 @@ export namespace helios::engine::builder::gameObject::builders {
     public:
 
         /**
-         * @brief Constructs a ShootingBuilder for the given GameObject.
+         * @brief Constructs a CombatBuilder for the given GameObject.
          *
          * @param gameObject Target GameObject to configure.
          */
-        explicit ShootingBuilder(helios::engine::ecs::GameObject* gameObject) : gameObject_(gameObject) {}
+        explicit CombatBuilder(helios::engine::ecs::GameObject* gameObject) : gameObject_(gameObject) {}
 
         /**
          * @brief Returns a config for weapon setup.
@@ -40,6 +41,10 @@ export namespace helios::engine::builder::gameObject::builders {
          */
         [[nodiscard]] helios::engine::builder::gameObject::builders::configs::WeaponConfig weapon() const {
             return helios::engine::builder::gameObject::builders::configs::WeaponConfig{gameObject_};
+        }
+
+        [[nodiscard]] helios::engine::builder::gameObject::builders::configs::CombatConfig combat() const {
+            return helios::engine::builder::gameObject::builders::configs::CombatConfig{gameObject_};
         }
 
     };

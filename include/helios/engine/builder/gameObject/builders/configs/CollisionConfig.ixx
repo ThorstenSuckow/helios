@@ -14,6 +14,7 @@ import helios.engine.ecs.GameObject;
 import helios.engine.modules.physics.collision.components;
 import helios.engine.modules.physics.collision.types;
 
+import helios.engine.mechanics.damage.components.DamageDealerComponent;
 
 export namespace helios::engine::builder::gameObject::builders::configs {
 
@@ -160,6 +161,28 @@ export namespace helios::engine::builder::gameObject::builders::configs {
             return *this;
         }
 
+        /**
+         * @brief Configures damage dealing on collision with a specific layer.
+         *
+         * Adds or updates a DamageDealerComponent to deal the specified damage
+         * when colliding with entities on the given layer.
+         *
+         * @param damageAmount The amount of damage to deal.
+         * @param otherLayerId The layer to deal damage to.
+         *
+         * @return Reference to this config for chaining.
+         */
+        CollisionConfig& dealDamage(
+                    const float damageAmount,
+                    const uint32_t otherLayerId
+                ) {
+            ensureCollisionComponent(true);
+
+            gameObject_->getOrAdd<helios::engine::mechanics::damage::components::DamageDealerComponent>()
+                        .setDamage(damageAmount, otherLayerId);
+
+            return *this;
+        }
 
     };
 

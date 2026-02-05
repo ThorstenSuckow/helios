@@ -26,6 +26,7 @@ import helios.engine.modules.physics.collision.types.CollisionBehavior;
 import helios.engine.modules.physics.collision.components.CollisionStateComponent;
 
 import helios.engine.runtime.spawn.commands.DespawnCommand;
+import helios.engine.modules.physics.collision.events;
 
 import helios.engine.mechanics.spawn.components.SpawnedByProfileComponent;
 
@@ -61,7 +62,7 @@ export namespace helios::engine::modules::physics::collision::systems {
          *
          * @details Iterates over all entities with CollisionStateComponent and PoolIdComponent.
          * For entities with active collisions, reads the collision behavior and issues
-         * appropriate commands to the command buffer.
+         * appropriate commands and/or events.
          *
          * @param updateContext Context providing access to the command buffer and world.
          */
@@ -78,13 +79,27 @@ export namespace helios::engine::modules::physics::collision::systems {
 
                 CollisionBehavior collisionBehavior = csc->collisionBehavior();
 
-                if (collisionBehavior == CollisionBehavior::Despawn) {
-                    updateContext.commandBuffer().add<DespawnCommand>(
-                        entity->guid(),
-                        sbp->spawnProfileId()
-                    );
+                if (hasFlag(collisionBehavior, CollisionBehavior::PassEvent)) {
+
+                    if (csc->isTrigger()) {
+                        updateContext.pushPass<events::TriggerCollisionEvent>(
+                            entity->guid(),
+                            csc->collisionContext()
+                       );
+                    }
+
+                    if (csc->isSolid()) {
+                        updateContext.pushPass<events::SolidCollisionEvent>(
+                            entity->guid(),
+                            csc->collisionContext()
+                       );
+                    }
                 }
 
+
+                if (hasFlag(collisionBehavior, CollisionBehavior::Despawn)) {
+                    updateContext.commandBuffer().add<DespawnCommand>(entity->guid(), sbp->spawnProfileId());
+                }
             }
 
         }

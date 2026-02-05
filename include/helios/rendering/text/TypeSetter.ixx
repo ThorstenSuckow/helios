@@ -99,14 +99,16 @@ export namespace helios::rendering::text {
          * using the specified font.
          *
          * @param text The text string to lay out.
+         * @param scale The scaling used for rendering the font, relative to its origin pixel-height
          * @param fontId The font to use for glyph metrics.
          * @param fontResourceProvider Provider for glyph data.
          *
          * @return A `TextLayout` containing the AABB and vertex data.
          */
         TextLayout layout(
-            std::string_view text,
-            helios::engine::core::data::FontId fontId,
+            const std::string_view text,
+            const float scale,
+            const helios::engine::core::data::FontId fontId,
             FontResourceProvider& fontResourceProvider) {
 
             helios::math::aabbf aabb = {};
@@ -132,10 +134,10 @@ export namespace helios::rendering::text {
             for (char c : text) {
                 auto glyph = fontResourceProvider.glyph(c, fontId);
 
-                float xpos = penX + glyph.bearing[0];
-                float ypos = penY - (glyph.size[1] - glyph.bearing[1]);
-                float w = glyph.size[0];
-                float h = glyph.size[1];
+                float xpos = penX + glyph.bearing[0] * scale;
+                float ypos = penY - (glyph.size[1] - glyph.bearing[1]) * scale;
+                const float w = glyph.size[0] * scale;
+                const float h = glyph.size[1] * scale;
 
                 vertices.push_back({xpos, ypos +h, 0.0f, 0.0f});
                 vertices.push_back({xpos, ypos, 0.0f, 1.0f});
@@ -151,7 +153,7 @@ export namespace helios::rendering::text {
                 minY = std::min(minY, ypos);
                 maxY = std::max(maxY, ypos + h);
 
-                penX += (glyph.advance >> 6);
+                penX += (glyph.advance >> 6) * scale;
             }
 
             aabb = helios::math::aabbf(minX, minY, minZ, maxX, maxY, maxZ);

@@ -15,11 +15,15 @@ Each builder encapsulates a specific domain of entity configuration. Builders pr
 | `SceneBuilder` | Scene Graph | `SceneNodeConfig` |
 | `CollisionBuilder` | Physics | `CollisionConfig`, `LevelBoundsCollisionConfig` |
 | `TransformBuilder` | Spatial | `TransformConfig` |
+| `UiTransformBuilder` | UI Layout | `UiTransformConfig` |
 | `EffectsBuilder` | VFX | `GfxEffectsConfig` |
 | `SpawnBuilder` | Spawning | `SpawnConfig` |
 | `AiBuilder` | AI | `ChaseConfig` |
-| `ShootingBuilder` | Combat | `WeaponConfig` |
+| `CombatBuilder` | Combat | `WeaponConfig` |
 | `LifecycleBuilder` | Lifecycle | `LifecycleConfig` |
+| `HealthBuilder` | Health | `HealthConfig` |
+| `ScoringBuilder` | Scoring | `ScoreValueConfig`, `ScorePoolConfig` |
+| `ObserverBuilder` | Data Binding | `ObserverConfig` |
 
 ## Usage Pattern
 

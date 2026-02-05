@@ -33,7 +33,7 @@ Domain-specific builders for different aspects of entity configuration:
 | `EffectsBuilder` | Visual effects (spin, etc.) |
 | `SpawnBuilder` | Spawn system integration |
 | `AiBuilder` | AI behavior configuration |
-| `ShootingBuilder` | Weapon and projectile setup |
+| `CombatBuilder` | Weapon and projectile setup |
 
 ### gameObject/builders/configs/
 

@@ -33,11 +33,15 @@ prototype
     .withRendering([](RenderingBuilder& b) { /* configure rendering */ })
     .withCollision([](CollisionBuilder& b) { /* configure collision */ })
     .withTransform([](TransformBuilder& b) { /* configure transform */ })
+    .withUiTransform([](UiTransformBuilder& b) { /* configure UI transform */ })
     .withEffects([](EffectsBuilder& b) { /* configure effects */ })
     .withSpawn([](SpawnBuilder& b) { /* configure spawn */ })
     .withAi([](AiBuilder& b) { /* configure AI */ })
-    .withShooting([](ShootingBuilder& b) { /* configure weapons */ })
+    .withCombat([](CombatBuilder& b) { /* configure weapons */ })
     .withLifecycle([](LifecycleBuilder& b) { /* configure lifecycle */ })
+    .withHealth([](HealthBuilder& b) { /* configure health */ })
+    .withScoring([](ScoringBuilder& b) { /* configure scoring */ })
+    .withObserver([](ObserverBuilder& b) { /* configure observers */ })
     .make(active);  // Returns std::unique_ptr<GameObject>
 ```
 

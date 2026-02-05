@@ -91,6 +91,18 @@ export namespace helios::input {
             helios::input::types::Key key,
             const helios::window::Window& win) const noexcept = 0;
 
+        /**
+         * @brief Returns true if the key is released, otherwise false.
+         *
+         * @param key The key to query for the `released` state.
+         * @param win The window instance from which the state should be queried.
+         *
+         * @return True if the key is released, otherwise false.
+         */
+        [[nodiscard]] virtual bool isKeyReleased(
+            helios::input::types::Key key,
+            const helios::window::Window& win) const noexcept = 0;
+
 
         /**
          * @brief Returns a boolean value indicating the availability (i.e., connect state)

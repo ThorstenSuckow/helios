@@ -6,9 +6,12 @@ module;
 
 #include <span>
 
+
 export module helios.engine.runtime.world.UpdateContext;
 
 import helios.input.InputSnapshot;
+import helios.rendering.ViewportSnapshot;
+
 import helios.engine.runtime.messaging.event.GameLoopEventBus;
 
 export namespace helios::engine::runtime::messaging::command {
@@ -121,6 +124,11 @@ export namespace helios::engine::runtime::world {
          */
         const helios::engine::runtime::messaging::event::GameLoopEventBus::ReadSource frameEventSource_;
 
+        /**
+         * @brief Immutable snapshot of all viewport states for this frame.
+         */
+        std::span<const helios::rendering::ViewportSnapshot> viewportSnapshots_;
+
     public:
 
 
@@ -129,10 +137,12 @@ export namespace helios::engine::runtime::world {
          *
          * @param commandBuffer Reference to the command buffer for queueing commands.
          * @param gameWorld Reference to the game world for entity lookups.
-         * @param deltaTime Time since last frame / update in seconds
+         * @param deltaTime Time since last frame / update in seconds.
          * @param phaseEventBus Reference to the phase-level event bus for cross-phase communication.
          * @param passEventBus Reference to the pass-level event bus for cross-pass communication.
+         * @param frameEventBus Reference to the frame-level event bus for cross-frame communication.
          * @param inputSnapshot The input snapshot for this frame.
+         * @param viewportSnapshots Immutable snapshot of viewport states.
          */
         UpdateContext(
             helios::engine::runtime::messaging::command::CommandBuffer& commandBuffer,
@@ -141,7 +151,8 @@ export namespace helios::engine::runtime::world {
             helios::engine::runtime::messaging::event::GameLoopEventBus& phaseEventBus,
             helios::engine::runtime::messaging::event::GameLoopEventBus& passEventBus,
             helios::engine::runtime::messaging::event::GameLoopEventBus& frameEventBus,
-            const helios::input::InputSnapshot& inputSnapshot
+            const helios::input::InputSnapshot& inputSnapshot,
+            std::span<const helios::rendering::ViewportSnapshot> viewportSnapshots
         ) : commandBuffer_(commandBuffer), gameWorld_(gameWorld),
         deltaTime_(deltaTime),
         totalTime_(totalTime_ + deltaTime),
@@ -151,9 +162,21 @@ export namespace helios::engine::runtime::world {
         passEventSource_(passEventBus.readSource()),
         frameEventSink_(frameEventBus.writeSink()),
         frameEventSource_(frameEventBus.readSource()),
-        inputSnapshot_(inputSnapshot) {
+        inputSnapshot_(inputSnapshot),
+        viewportSnapshots_(viewportSnapshots)
+        {
 
         }
+
+        /**
+         * @brief Returns the viewport snapshots for this frame.
+         *
+         * @return A span of const ViewportSnapshot objects.
+         */
+        [[nodiscard]] std::span<const helios::rendering::ViewportSnapshot> viewportSnapshots() const noexcept {
+            return viewportSnapshots_;
+        }
+
 
         /**
          * @brief Returns the time elapsed since the last frame, in seconds.

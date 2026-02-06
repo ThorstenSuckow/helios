@@ -14,7 +14,7 @@ Stores information about an attack event:
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `source` | `Guid` | GUID of the attacking entity |
+| `source` | `EntityHandle` | Handle of the attacking entity |
 | `contact` | `vec3f` | World-space contact point |
 | `damageApplied` | `float` | Net damage after modifiers |
 

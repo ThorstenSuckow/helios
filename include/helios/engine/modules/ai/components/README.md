@@ -18,7 +18,7 @@ Stores data for chase/pursuit behavior:
 
 | Property | Type | Purpose |
 |----------|------|---------|
-| `target_` | `Guid` | GUID of the entity to chase |
+| `target_` | `EntityHandle` | Handle of the entity to chase |
 | `cooldown_` | `float` | Interval between direction updates (seconds) |
 | `cooldownTimer_` | `float` | Elapsed time since last update |
 
@@ -26,8 +26,8 @@ Stores data for chase/pursuit behavior:
 
 ```cpp
 // Set target entity
-void setTarget(Guid guid);
-Guid target() const;
+void setTarget(EntityHandle handle);
+EntityHandle target() const;
 
 // Configure update frequency
 void setCooldown(float seconds);

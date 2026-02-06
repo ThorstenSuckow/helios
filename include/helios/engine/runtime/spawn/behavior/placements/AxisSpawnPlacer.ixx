@@ -14,7 +14,7 @@ import helios.engine.runtime.spawn.SpawnContext;
 import helios.engine.runtime.spawn.behavior.SpawnPlacer;
 import helios.util.Random;
 import helios.math;
-import helios.util.Guid;
+import helios.engine.ecs.EntityHandle;
 
 import helios.engine.runtime.world.UpdateContext;
 
@@ -103,7 +103,7 @@ export namespace helios::engine::runtime::spawn::behavior::placements {
          * @pre Origin must be within environment bounds.
          */
         helios::math::vec3f getPosition(
-            const helios::util::Guid& guid,
+            const helios::engine::ecs::EntityHandle& entityHandle,
             const helios::math::aabbf& gameObjectBounds,
             const helios::math::aabbf& environmentBounds,
             const SpawnPlanCursor& cursor,

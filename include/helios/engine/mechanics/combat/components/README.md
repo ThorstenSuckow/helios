@@ -15,7 +15,7 @@ These components implement high-level combat behaviors that coordinate between i
 ## LastAttackerComponent
 
 Stores an `AttackContext` containing:
-- Source entity GUID (the attacker)
+- Source entity handle (the attacker)
 - Contact point (where the attack landed)
 - Damage applied
 

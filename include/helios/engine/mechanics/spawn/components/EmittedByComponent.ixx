@@ -11,6 +11,8 @@ import helios.engine.core.data.SpawnProfileId;
 import helios.core.types;
 import helios.util;
 
+import helios.engine.ecs.EntityHandle;
+
 export namespace helios::engine::mechanics::spawn::components {
 
 
@@ -24,9 +26,9 @@ export namespace helios::engine::mechanics::spawn::components {
     class EmittedByComponent : public helios::engine::ecs::CloneableComponent<EmittedByComponent> {
 
         /**
-         * @brief GUID of the entity that emitted this object.
+         * @brief Handle of the entity that emitted this object.
          */
-        helios::util::Guid source_{helios::core::types::no_init};
+        helios::engine::ecs::EntityHandle source_{};
 
     public:
 
@@ -45,18 +47,18 @@ export namespace helios::engine::mechanics::spawn::components {
         /**
          * @brief Sets the source entity that emitted this object.
          *
-         * @param source GUID of the emitting entity.
+         * @param source Handle of the emitting entity.
          */
-        void setSource(const helios::util::Guid source) noexcept {
+        void setSource(const helios::engine::ecs::EntityHandle& source) noexcept {
             source_ = source;
         }
 
         /**
-         * @brief Returns the GUID of the source entity.
+         * @brief Returns the handle of the source entity.
          *
-         * @return GUID of the entity that emitted this object.
+         * @return Handle of the entity that emitted this object.
          */
-        [[nodiscard]] helios::util::Guid source() const noexcept {
+        [[nodiscard]] helios::engine::ecs::EntityHandle source() const noexcept {
             return source_;
         }
 
@@ -64,7 +66,7 @@ export namespace helios::engine::mechanics::spawn::components {
          * @brief Resets the component to its initial state.
          */
         void reset() {
-            source_ = helios::util::Guid{helios::core::types::no_init};
+            source_ = helios::engine::ecs::EntityHandle{};
         }
 
         /**

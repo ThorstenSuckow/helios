@@ -34,12 +34,12 @@ Contains collision event data:
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `source` | `Guid` | Source entity GUID |
+| `source` | `EntityHandle` | Source entity handle |
 | `contact` | `vec3f` | World-space contact point |
 | `isSolid` | `bool` | True if blocking collision |
 | `isTrigger` | `bool` | True if trigger collision |
 | `isCollisionReporter` | `bool` | True if source reports events |
-| `other` | `optional<Guid>` | Other entity GUID (if any) |
+| `other` | `optional<EntityHandle>` | Other entity handle (if any) |
 | `collisionLayerId` | `uint32_t` | Source entity layer |
 | `otherCollisionLayerId` | `uint32_t` | Other entity layer |
 

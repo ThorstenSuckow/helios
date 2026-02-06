@@ -23,8 +23,8 @@ import helios.engine.runtime.pooling.GameObjectPoolRegistry;
 
 import helios.engine.runtime.pooling.GameObjectPoolConfig;
 
+import helios.engine.ecs.EntityHandle;
 import helios.core.types;
-import helios.util.Guid;
 
 import helios.engine.runtime.pooling.GameObjectPoolSnapshot;
 
@@ -38,7 +38,7 @@ export namespace helios::engine::runtime::pooling {
      * and the acquire/release lifecycle of pooled GameObjects.
      *
      * The manager integrates with the GameWorld to clone prefabs during pool
-     * initialization and to look up GameObjects by their GUID during
+     * initialization and to look up GameObjects by their EntityHandle during
      * acquire/release operations.
      *
      * ## Lifecycle
@@ -64,7 +64,7 @@ export namespace helios::engine::runtime::pooling {
      *     bullet->get<ComposeTransformComponent>()->setTranslation(spawnPos);
      * }
      *
-     * poolManager.release(bulletPoolId, bullet->guid());
+     * poolManager.release(bulletPoolId, bullet->entityHandle());
      * ```
      *
      * @see GameObjectPool
@@ -85,7 +85,7 @@ export namespace helios::engine::runtime::pooling {
          * @brief Non-owning pointer to the associated GameWorld.
          *
          * @details Set during `init()`. Used for cloning prefabs and looking up
-         * GameObjects by GUID.
+         * GameObjects by their EntityHandle.
          */
         helios::engine::runtime::world::GameWorld* gameWorld_ = nullptr;
 
@@ -113,7 +113,7 @@ export namespace helios::engine::runtime::pooling {
             const helios::engine::core::data::GameObjectPoolId gameObjectPoolId,
             const helios::engine::ecs::GameObject& gameObjectPrefab
         ) {
-            helios::util::Guid guid{helios::core::types::no_init};
+            helios::engine::ecs::EntityHandle entityHandle{};
 
             auto* gameObjectPool = pool(gameObjectPoolId);
             
@@ -125,7 +125,7 @@ export namespace helios::engine::runtime::pooling {
                 if (go) {
                     go->setActive(false);
                     go->onRelease();
-                    gameObjectPool->addInactive(go->guid());
+                    gameObjectPool->addInactive(go->entityHandle());
                 }
             }
         }
@@ -182,20 +182,20 @@ export namespace helios::engine::runtime::pooling {
          * GameWorld. Calls `onRelease()` on the GameObject to allow cleanup.
          *
          * @param gameObjectPoolId The pool that owns this entity.
-         * @param entityId The GUID of the entity to release.
+         * @param entityHandle The EntityHandle of the entity to release.
          *
          * @return Pointer to the released GameObject, or nullptr if not found.
          */
         helios::engine::ecs::GameObject* release(
             const helios::engine::core::data::GameObjectPoolId gameObjectPoolId,
-            const helios::util::Guid& entityId
+            const helios::engine::ecs::EntityHandle& entityHandle
         ) {
             auto* gameObjectPool = pool(gameObjectPoolId);
             
-            helios::engine::ecs::GameObject* worldGo = gameWorld_->find(entityId);
+            helios::engine::ecs::GameObject* worldGo = gameWorld_->find(entityHandle);
 
             if (worldGo) {
-                if (gameObjectPool->release(entityId)) {
+                if (gameObjectPool->release(entityHandle)) {
                     worldGo->onRelease();
                     worldGo->setActive(false);
                 }
@@ -210,9 +210,6 @@ export namespace helios::engine::runtime::pooling {
          * @details Retrieves the next available inactive entity, activates it,
          * and calls `onAcquire()` to prepare it for use.
          *
-         * If an entity's GUID is no longer valid in the GameWorld, it is removed
-         * from the pool and the next entity is tried.
-         *
          * @param gameObjectPoolId The pool to acquire from.
          *
          * @return Pointer to the acquired GameObject, or nullptr if pool exhausted.
@@ -220,13 +217,13 @@ export namespace helios::engine::runtime::pooling {
         [[nodiscard]] helios::engine::ecs::GameObject* acquire(
             const helios::engine::core::data::GameObjectPoolId gameObjectPoolId
         )  {
-            helios::util::Guid guid{helios::core::types::no_init};
+            helios::engine::ecs::EntityHandle entityHandle{};
 
             auto* gameObjectPool = pool(gameObjectPoolId);
 
-            while (gameObjectPool->acquire(guid)) {
+            while (gameObjectPool->acquire(entityHandle)) {
 
-                auto* worldGo = gameWorld_->find(guid);
+                auto* worldGo = gameWorld_->find(entityHandle);
 
                 if (worldGo) {
                     worldGo->onAcquire();
@@ -234,9 +231,9 @@ export namespace helios::engine::runtime::pooling {
                 }
 
                 // we assume the pool is owned by this gameWorld,
-                // so removing this guid does not impact another gameWorld that is
+                // so removing this entityHandle does not impact another gameWorld that is
                 // using this pool
-                gameObjectPool->releaseAndRemove(guid);
+                gameObjectPool->releaseAndRemove(entityHandle);
             }
 
             return nullptr;

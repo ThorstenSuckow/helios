@@ -15,6 +15,8 @@ This module provides the foundational classes for the composition-based game arc
 | `CloneableComponent` | CRTP base for components that support cloning |
 | `System` | Abstract base for logic processors (registered with `GameLoop`) |
 | `Updatable` | Interface for per-frame updatable objects |
+| `EntityPool<T>` | Sparse-set based pool for efficient entity storage and iteration |
+| `EntityHandle` | Versioned handle for safe entity references |
 
 ## Component Storage Model
 
@@ -40,6 +42,41 @@ This module provides the foundational classes for the composition-based game arc
 // Content:  nullptr  Transform  nullptr   Move2D    ...
 //                       ↑                    ↑
 //           ComponentTypeId::id<Transform>()  ComponentTypeId::id<Move2D>()
+```
+
+## EntityPool
+
+`EntityPool<T>` is a sparse-set based data structure for storing entities with versioned handles. It provides O(1) insertion, lookup, and cache-friendly iteration.
+
+**Data Structure:**
+
+```
+sparse_:  [0]  [1]  [2]  [3]  ...     (maps entity ID → dense index)
+           ↓    ↓    ↓    ↓
+dense_:   [0]  [2]  [3]  ...          (entity IDs, contiguous)
+denseData_: [E0] [E2] [E3] ...        (actual entities, cache-friendly)
+version_: [1]  [1]  [2]  [1]  ...     (version per ID, incremented on removal)
+```
+
+
+**Versioned Handles:**
+
+`EntityHandle` contains both an entity ID and a version number. When an entity is removed, its version is incremented. This allows detection of stale handles that reference deleted entities.
+
+```cpp
+// EntityPool usage example
+EntityPool<GameObject> pool;
+
+// Add entity, receive handle
+auto handle = pool.emplace(std::make_unique<GameObject>());
+
+// Retrieve entity via handle (O(1))
+auto* entity = pool.get(handle);
+
+// Iterate all entities (cache-friendly)
+for (auto& e : pool.entities()) {
+    // process entity
+}
 ```
 
 ## Submodules

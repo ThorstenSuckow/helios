@@ -6,7 +6,9 @@ This module provides core data structures used for managing GameObjects within t
 
 ## Components
 
+- **CollisionLayer** - Strongly-typed identifier for collision layers.
 - **ComponentTypeId** - Compile-time type identifier for O(1) component indexing within GameObject.
+- **EntityId** - Unique identifier for an entity within an EntityPool.
 - **FontId** - Strongly-typed identifier for referencing fonts.
 - **GameObjectPool** - Low-level O(1) object pooling for entity recycling.
 - **GameObjectPoolId** - Strongly-typed identifier for referencing pools.
@@ -17,6 +19,7 @@ This module provides core data structures used for managing GameObjects within t
 - **ScoreTypeId** - Strongly-typed identifier for score types.
 - **SpawnProfileId** - Strongly-typed identifier for spawn profiles.
 - **SpawnRuleId** - Strongly-typed identifier for spawn rules.
+- **VersionId** - Version number for stale entity handle detection.
 - **ViewportId** - Strongly-typed identifier for viewports.
 
 ## Strongly-Typed IDs
@@ -49,6 +52,25 @@ auto typeId = ComponentTypeId::id<HealthComponent>();
 
 // Get unique ID for a score type
 auto scoreId = ScoreTypeId::id<KillScore>();
+```
+
+### Entity IDs (EntityPool)
+
+`EntityId` and `VersionId` are used together in `EntityHandle` for safe entity references within an `EntityPool`:
+
+```cpp
+// EntityHandle combines EntityId + VersionId
+struct EntityHandle {
+    EntityId entityId;   // Index into sparse array
+    VersionId versionId; // Detects stale references
+};
+
+// Pool operations return handles
+EntityPool<GameObject> pool;
+EntityHandle handle = pool.emplace(std::make_unique<GameObject>());
+
+// Handle validation detects removed entities
+auto* entity = pool.get(handle);  // nullptr if handle is stale
 ```
 
 All ID types support:

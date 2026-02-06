@@ -47,11 +47,11 @@ using namespace helios::engine::ecs::query;
  * }
  * ```
  *
- * @tparam MapT The map type (const or non-const unordered_map).
+ * @tparam SpanT The span type (const or non-const unordered_map).
  * @tparam GameObjectT The GameObject type (for type flexibility).
  * @tparam Cs The component types to filter by. GameObjects must have ALL specified types.
  */
-template<class MapT, class GameObjectT, class... Cs>
+template<class SpanT, class GameObjectT, class... Cs>
 class GameObjectView {
 private:
     /**
@@ -62,9 +62,9 @@ private:
     using Obj = GameObjectT;
 
     /**
-     * @brief Removes const from MapT for iterator type deduction.
+     * @brief Removes const from SpanT for iterator type deduction.
      */
-    using RawMap = std::remove_const_t<MapT>;
+    using RawMap = std::remove_const_t<SpanT>;
 
     /**
      * @brief Iterator type selected based on map constness.
@@ -72,7 +72,7 @@ private:
      * @details Uses const_iterator for const maps, iterator otherwise.
      */
     using It = std::conditional_t<
-        std::is_const_v<MapT>,
+        std::is_const_v<SpanT>,
         typename RawMap::const_iterator,
         typename RawMap::iterator>;
 
@@ -81,7 +81,7 @@ private:
      *
      * @details Returns const Obj* for const maps, Obj* otherwise.
      */
-    using Ptr = std::conditional_t<std::is_const_v<MapT>, const Obj*, Obj*>;
+    using Ptr = std::conditional_t<std::is_const_v<SpanT>, const Obj*, Obj*>;
 
     /**
      * @brief Normalizes component type by removing const/volatile/reference qualifiers.
@@ -101,14 +101,14 @@ private:
      * @note Added for const-correct component pointer access.
      */
     template<class C>
-    using CompPtr = std::conditional_t<std::is_const_v<MapT>, const Comp<C>*, Comp<C>*>;
+    using CompPtr = std::conditional_t<std::is_const_v<SpanT>, const Comp<C>*, Comp<C>*>;
 
     /**
      * @brief Pointer to the underlying map.
      *
      * @note Default-initialized to nullptr for safety.
      */
-    MapT* objects_{nullptr};
+    SpanT objects_{};
 
     /**
      * @brief Checks if a GameObject matches the filter criteria.
@@ -175,7 +175,7 @@ public:
      * @param objects Reference to the map to iterate over.
      * @param filterType Filter criteria for GameObject state (Bitmask consisting of Active, Inactive, ComponentEnabled, ComponentDisabled, All).
      */
-    explicit GameObjectView(MapT& objects, const helios::engine::ecs::query::GameObjectFilter filterType) noexcept : objects_(&objects), filterType_(filterType) {}
+    explicit GameObjectView(SpanT objects, const helios::engine::ecs::query::GameObjectFilter filterType) noexcept : objects_(objects), filterType_(filterType) {}
 
     /**
      * @brief Forward iterator for filtered GameObject traversal.
@@ -208,7 +208,7 @@ public:
          * @note Simplified implementation without storing objects_ reference.
          */
         void advanceToNextMatch() noexcept {
-            while (it_ != end_ && !matches(it_->second.get(), filterType_)) {
+            while (it_ != end_ && !matches(it_->get(), filterType_)) {
                 ++it_;
             }
         }
@@ -231,7 +231,7 @@ public:
          * @return Pointer to the current GameObject.
          */
         [[nodiscard]] Ptr operator*() const noexcept {
-            return static_cast<Ptr>(it_->second.get());
+            return static_cast<Ptr>(it_->get());
         }
 
         /**
@@ -419,7 +419,7 @@ public:
      * @note Builds iterators directly from map iterators.
      */
     [[nodiscard]] Iterator begin() const noexcept {
-        return Iterator(objects_->begin(), objects_->end(), filterType_);
+        return Iterator(objects_.begin(), objects_.end(), filterType_);
     }
 
     /**
@@ -428,7 +428,7 @@ public:
      * @return Iterator representing the end of the range.
      */
     [[nodiscard]] Iterator end() const noexcept {
-        return Iterator(objects_->end(), objects_->end(), filterType_);
+        return Iterator(objects_.end(), objects_.end(), filterType_);
     }
 };
 

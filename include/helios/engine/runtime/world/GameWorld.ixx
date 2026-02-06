@@ -13,6 +13,7 @@ module;
 #include <memory>
 #include <unordered_map>
 #include <string>
+#include <span>
 
 export module helios.engine.runtime.world.GameWorld;
 
@@ -30,9 +31,11 @@ import helios.util.log.Logger;
 import helios.util.log.LogManager;
 import helios.engine.runtime.world.Level;
 
+import helios.engine.ecs.EntityPool;
+import helios.engine.ecs.EntityHandle;
 
 import helios.engine.ecs.query.GameObjectFilter;
-import helios.engine.core.data.SpawnProfileId;
+import helios.engine.core.data;
 
 import helios.engine.runtime.spawn.SpawnCommandHandlerRegistry;
 
@@ -94,7 +97,8 @@ export namespace helios::engine::runtime::world {
     class GameWorld {
 
         /** @brief Internal map type for GameObject storage. */
-        using Map = std::unordered_map<helios::util::Guid, std::unique_ptr<helios::engine::ecs::GameObject>>;
+        //using Map = std::unordered_map<helios::util::Guid, std::unique_ptr<helios::engine::ecs::GameObject>>;
+        using Span = std::span<std::unique_ptr<helios::engine::ecs::GameObject>>;
 
         /**
          * @brief Lazy range type for component-filtered GameObject iteration.
@@ -107,11 +111,13 @@ export namespace helios::engine::runtime::world {
          * @note GameObjectView is included as a .h header in the global module fragment
          *       due to MSVC ICE issues when used as a .ixx module interface unit.
          *
-         * @tparam MapT The map type (const or non-const).
+         * @tparam SpanT The map type (const or non-const).
          * @tparam Cs The component types to filter by.
          */
-        template<class MapT, class... Cs>
-        using GameObjectRange = GameObjectView<MapT, helios::engine::ecs::GameObject, Cs...>;
+        template<class SpanT, class... Cs>
+        using GameObjectRange = GameObjectView<
+            SpanT, helios::engine::ecs::GameObject, Cs...
+        >;
 
 
     protected:
@@ -125,7 +131,7 @@ export namespace helios::engine::runtime::world {
          */
         std::unordered_map<helios::util::Guid, std::unique_ptr<helios::engine::ecs::GameObject>> gameObjects_;
 
-
+        helios::engine::ecs::EntityPool<helios::engine::ecs::GameObject> entityPool_{};
 
         /**
          * @brief The logger used with this GameWorld instance.
@@ -172,6 +178,13 @@ export namespace helios::engine::runtime::world {
 
 
     public:
+
+
+        GameWorld() = default;
+
+        explicit GameWorld(size_t gameObjectNum) {
+            entityPool_.reserve(gameObjectNum);
+        };
 
 
         /**
@@ -384,35 +397,17 @@ export namespace helios::engine::runtime::world {
                 logger_.warn("Attempted to add null GameObject to GameWorld");
                 return nullptr;
             }
-            if (gameObjects_.contains(gameObject->guid())) {
-                logger_.warn(std::format("GameObject with Guid {} already exists in GameWorld",
-                                         gameObject->guid().value()));
-                return nullptr;
-            }
 
-            auto* ptr = gameObject.get();
-            gameObjects_.emplace(gameObject->guid(), std::move(gameObject));
-
-            return ptr;
+            const auto handle = entityPool_.emplace(std::move(gameObject));
+            auto* go = entityPool_.get(handle);
+            go->setHandle(handle);
+            return go;
         }
 
-        /**
-         * @brief Finds a GameObject by its unique identifier.
-         *
-         * @param guid The unique identifier of the GameObject to find.
-         *
-         * @return Pointer to the GameObject if found, nullptr otherwise.
-         *
-         * @retval GameObject* Non-owning pointer to the found object
-         * @retval nullptr If no GameObject with the specified Guid exists
-         *
-         * @note This is the non-const overload. Use the const overload for read-only access.
-         */
-        [[nodiscard]] helios::engine::ecs::GameObject* find(const helios::util::Guid& guid) {
-            if (auto it = gameObjects_.find(guid); it != gameObjects_.end()) {
-                return it->second.get();
-            }
-            return nullptr;
+
+
+        [[nodiscard]] helios::engine::ecs::GameObject* find(const helios::engine::ecs::EntityHandle& handle) {
+           return entityPool_.get(handle);
         }
 
         /**
@@ -464,7 +459,7 @@ export namespace helios::engine::runtime::world {
          */
         template<class... Cs>
         [[nodiscard]] auto find(GameObjectFilter query = GameObjectFilter::Active | GameObjectFilter::ComponentEnabled) {
-            return GameObjectRange<Map, Cs...>(gameObjects_, query);
+            return GameObjectRange<Span, Cs...>(entityPool_.entities(), query);
         }
 
         /**
@@ -485,43 +480,14 @@ export namespace helios::engine::runtime::world {
          */
         template<class... Cs>
         [[nodiscard]] auto find(GameObjectFilter query = GameObjectFilter::Active | GameObjectFilter::ComponentEnabled) const {
-            return GameObjectRange<const Map, Cs...>(gameObjects_, query);
+            return GameObjectRange<const Span, Cs...>(entityPool_.entities(), query);
         }
 
-        /**
-         * @brief Finds a GameObject by its unique identifier (const overload).
-         *
-         * @param guid The unique identifier of the GameObject to find.
-         *
-         * @return Const pointer to the GameObject if found, nullptr otherwise.
-         *
-         * @retval const GameObject* Non-owning const pointer to the found object
-         * @retval nullptr If no GameObject with the specified Guid exists
-         *
-         * @note This overload is used when the GameWorld is accessed via const reference.
-         */
-        [[nodiscard]] const helios::engine::ecs::GameObject* find(const helios::util::Guid& guid) const {
-            if (auto it = gameObjects_.find(guid); it != gameObjects_.end()) {
-                return it->second.get();
-            }
-            return nullptr;
+        [[nodiscard]] const helios::engine::ecs::GameObject* find(const helios::engine::ecs::EntityHandle& handle) const {
+            return entityPool_.get(handle);
         }
 
-        /**
-         * @brief Creates a clone of an existing GameObject.
-         *
-         * @details Clones all Cloneable components from the source GameObject.
-         * The cloned GameObject is initially inactive and receives a new Guid.
-         * Non-cloneable components are skipped with a warning.
-         *
-         * @param gameObject The source GameObject to clone.
-         *
-         * @return Pointer to the newly created clone, or nullptr on failure.
-         *
-         * @note The clone is added to the world in an inactive state.
-         */
         [[nodiscard]] helios::engine::ecs::GameObject* clone(const helios::engine::ecs::GameObject& gameObject) {
-
 
             auto newGo = std::make_unique<helios::engine::ecs::GameObject>();
             /**
@@ -546,46 +512,6 @@ export namespace helios::engine::runtime::world {
             return addGameObject(std::move(newGo));
         }
 
-
-        /**
-         * @brief Removes a GameObject from the world and transfers ownership to the caller.
-         *
-         * @param gameObject Reference to the GameObject to remove.
-         *
-         * @return Unique pointer to the removed GameObject, or nullptr if not found.
-         *
-         * @retval std::unique_ptr<GameObject> Ownership of the removed object
-         * @retval nullptr If the GameObject was not found in the world
-         *
-         * @note After successful removal, all non-owning pointers to the GameObject
-         *       become invalid unless the caller maintains the returned unique_ptr.
-         * @note Attempting to remove a GameObject that doesn't exist returns nullptr
-         *       and logs a warning.
-         */
-        [[nodiscard]] std::unique_ptr<helios::engine::ecs::GameObject> removeGameObject(const helios::engine::ecs::GameObject& gameObject) {
-            auto node = gameObjects_.extract(gameObject.guid());
-
-            if (node.empty()) {
-                logger_.warn(std::format("Attempted to remove non-existent GameObject with Guid {} from GameWorld",
-                                         gameObject.guid().value()));
-                return nullptr;
-            }
-
-            return std::move(node.mapped());
-        }
-
-        /**
-         * @brief Retrieves a const ref to the map of all active GameObjects.
-         *
-         * @return A const reference to the internal map of GameObjects, indexed by Guid.
-         *
-         * @warning Modifying the map directly (e.g. adding/removing elements) bypasses
-         *          GameWorld's management logic and should be avoided. Use addGameObject()
-         *          and removeGameObject() instead.
-         */
-        [[nodiscard]] const std::unordered_map<helios::util::Guid, std::unique_ptr<helios::engine::ecs::GameObject>>& gameObjects() const noexcept {
-            return gameObjects_;
-        }
     };
 
 }

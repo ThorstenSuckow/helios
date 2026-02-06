@@ -51,7 +51,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         /**
          * @brief Tracks the emitter that created this entity.
          *
-         * Adds EmittedByComponent which stores the GUID of the entity
+         * Adds EmittedByComponent which stores the handle of the entity
          * that emitted/spawned this entity (e.g., player → projectile).
          *
          * @return Reference to this config for chaining.

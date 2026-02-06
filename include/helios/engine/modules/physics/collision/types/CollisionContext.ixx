@@ -12,6 +12,7 @@ import helios.math;
 
 import helios.util;
 
+import helios.engine.ecs.EntityHandle;
 import helios.core.types;
 
 export namespace helios::engine::modules::physics::collision::types {
@@ -25,9 +26,9 @@ export namespace helios::engine::modules::physics::collision::types {
     struct CollisionContext {
 
         /**
-         * @brief GUID of the source entity that initiated the collision check.
+         * @brief Handle of the source entity that initiated the collision check.
          */
-        helios::util::Guid source{helios::core::types::no_init};
+        helios::engine::ecs::EntityHandle source;
 
         /**
          * @brief World-space contact point of the collision.
@@ -50,11 +51,11 @@ export namespace helios::engine::modules::physics::collision::types {
         bool isCollisionReporter;
 
         /**
-         * @brief GUID of the other entity involved in the collision.
+         * @brief Handle of the other entity involved in the collision.
          *
          * May be empty if the collision is with a non-entity object (e.g., world bounds).
          */
-        std::optional<helios::util::Guid> other;
+        std::optional<helios::engine::ecs::EntityHandle> other;
 
         /**
          * @brief Collision layer ID of the source entity.

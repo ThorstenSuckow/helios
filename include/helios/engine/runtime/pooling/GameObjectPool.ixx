@@ -11,11 +11,13 @@ module;
 #include <memory>
 #include <unordered_map>
 #include <vector>
+#include <cassert>
 
 
 export module helios.engine.runtime.pooling.GameObjectPool;
 
 import helios.util.Guid;
+import helios.engine.ecs.EntityHandle;
 
 export namespace helios::engine::runtime::pooling {
 
@@ -46,17 +48,17 @@ export namespace helios::engine::runtime::pooling {
          *
          * Enables O(1) lookup for release operations.
          */
-        std::unordered_map<helios::util::Guid, size_t> activeIndex_;
+        std::unordered_map<helios::engine::ecs::EntityHandle, size_t> activeIndex_;
 
         /**
          * @brief List of Guids for currently active (in-use) GameObjects.
          */
-        std::vector<helios::util::Guid> activeGameObjects_;
+        std::vector<helios::engine::ecs::EntityHandle> activeGameObjects_;
 
         /**
          * @brief List of Guids for currently inactive (available) GameObjects.
          */
-        std::vector<helios::util::Guid> inactiveGameObjects_;
+        std::vector<helios::engine::ecs::EntityHandle> inactiveGameObjects_;
 
         /**
          * @brief The maximum number of objects this pool manages.
@@ -112,46 +114,48 @@ export namespace helios::engine::runtime::pooling {
         /**
          * @brief Acquires an inactive GameObject from the pool.
          *
-         * @details Removes a Guid from the inactive list and adds it to the active
+         * @details Removes a EntityHandle from the inactive list and adds it to the active
          * tracking structures. The caller is responsible for activating the actual
          * GameObject in the GameWorld.
          *
-         * @param[out] guid Receives the Guid of the acquired object on success.
+         * @param[out] entityHandle Receives the EntityHandle of the acquired object on success.
          *
          * @return True if an object was acquired, false if the pool is exhausted.
          */
-        [[nodiscard]] bool acquire(helios::util::Guid& guid) {
+        [[nodiscard]] bool acquire(helios::engine::ecs::EntityHandle& entityHandle) {
 
             if (inactiveGameObjects_.empty()) {
                 return false;
             }
 
-            guid = inactiveGameObjects_.back();
+            entityHandle = inactiveGameObjects_.back();
 
             inactiveGameObjects_.pop_back();
 
-            activeIndex_[guid] = activeGameObjects_.size();
-            activeGameObjects_.push_back(guid);
+            activeIndex_[entityHandle] = activeGameObjects_.size();
+            activeGameObjects_.push_back(entityHandle);
 
             return true;
         }
 
         /**
-         * @brief Adds a Guid to the inactive list without acquiring it.
+         * @brief Adds a EntityHandle to the inactive list without acquiring it.
          *
          * @details Used during pool initialization to register pre-created GameObjects.
          * Fails if the pool is already at capacity.
          *
-         * @param guid The Guid of the GameObject to add.
+         * @param entityHandle The EntityHandle of the GameObject to add.
          *
          * @return True if added successfully, false if pool is full.
          */
-        bool addInactive(const helios::util::Guid& guid) {
+        bool addInactive(const helios::engine::ecs::EntityHandle& entityHandle) {
+
+            assert(entityHandle.isValid() && "Unexpected invalid entityHandle");
 
             const size_t used = (activeCount() + inactiveCount());
 
             if (used < size()) {
-                inactiveGameObjects_.push_back(guid);
+                inactiveGameObjects_.push_back(entityHandle);
                 return true;
             }
 
@@ -159,21 +163,23 @@ export namespace helios::engine::runtime::pooling {
         }
 
         /**
-         * @brief Releases a GameObject back to the pool by its Guid.
+         * @brief Releases a GameObject back to the pool by its EntityHandle.
          *
          * @details
-         * Validates the Guid against both the GameWorld and the active tracking list.
+         * Validates the EntityHandle against both the GameWorld and the active tracking list.
          * Uses swap-and-pop for O(1) removal from the active list. The object is
          * marked inactive and added to the inactive list for future acquisition.
          *
-         * @param guid The unique identifier of the GameObject to release.
+         * @param entityHandle The unique identifier of the GameObject to release.
          *
-         * @return True if the object was successfully released, false if the Guid
+         * @return True if the object was successfully released, false if the EntityHandle
          *         was not found in the GameWorld or not tracked as active.
          */
-        bool release(const helios::util::Guid& guid) {
+        bool release(const helios::engine::ecs::EntityHandle& entityHandle) {
 
-            auto it = activeIndex_.find(guid);
+            assert(entityHandle.isValid() && "Unexpected invalid entityHandle");
+
+            auto it = activeIndex_.find(entityHandle);
 
             if (it == activeIndex_.end()) {
                 return false;
@@ -183,9 +189,9 @@ export namespace helios::engine::runtime::pooling {
             size_t idx = it->second;
             auto lastGuid = activeGameObjects_.back();
 
-            // swap the last guid in activeGameObjects with the
-            // guid to remove, effectively overwriting guid
-            // to release with a currently active guid
+            // swap the last entityHandle in activeGameObjects with the
+            // entityHandle to remove, effectively overwriting entityHandle
+            // to release with a currently active entityHandle
             activeGameObjects_[idx] = lastGuid;
             activeIndex_[lastGuid] = idx;
 
@@ -193,10 +199,10 @@ export namespace helios::engine::runtime::pooling {
             // remove the one at the tail
             activeGameObjects_.pop_back();
 
-            // clear the queried guid from active index and update
+            // clear the queried entityHandle from active index and update
             // inactiveGameObjects
             activeIndex_.erase(it);
-            inactiveGameObjects_.push_back(guid);
+            inactiveGameObjects_.push_back(entityHandle);
 
             return true;
         }
@@ -204,32 +210,34 @@ export namespace helios::engine::runtime::pooling {
         /**
          * @brief Releases and permanently removes a GameObject from the pool.
          *
-         * @details Unlike `release()`, this method does not add the Guid back to the
+         * @details Unlike `release()`, this method does not add the EntityHandle back to the
          * inactive list. Use this when a pooled object is being destroyed rather than
          * recycled.
          *
-         * @param guid The unique identifier of the GameObject to remove.
+         * @param entityHandle The unique identifier of the GameObject to remove.
          *
-         * @return True if removed successfully, false if Guid was not active.
+         * @return True if removed successfully, false if EntityHandle was not active.
          */
-        bool releaseAndRemove(const helios::util::Guid& guid) {
+        bool releaseAndRemove(const helios::engine::ecs::EntityHandle& entityHandle) {
 
-            auto it = activeIndex_.find(guid);
+            assert(entityHandle.isValid() && "Unexpected invalid entityHandle");
+
+            auto it = activeIndex_.find(entityHandle);
 
             if (it == activeIndex_.end()) {
                 return false;
             }
 
             const size_t idx = it->second;
-            const auto lastGuid = activeGameObjects_.back();
+            const auto lastEntityHandle = activeGameObjects_.back();
 
-            activeGameObjects_[idx] = lastGuid;
+            activeGameObjects_[idx] = lastEntityHandle;
             activeGameObjects_.pop_back();
 
             activeIndex_.erase(it);
 
-            if (lastGuid != guid) {
-                activeIndex_[lastGuid] = idx;
+            if (lastEntityHandle != entityHandle) {
+                activeIndex_[lastEntityHandle] = idx;
             }
 
             return true;

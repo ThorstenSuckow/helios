@@ -83,14 +83,14 @@ export namespace helios::engine::modules::physics::collision::systems {
 
                     if (csc->isTrigger()) {
                         updateContext.pushPass<events::TriggerCollisionEvent>(
-                            entity->guid(),
+                            entity->entityHandle(),
                             csc->collisionContext()
                        );
                     }
 
                     if (csc->isSolid()) {
                         updateContext.pushPass<events::SolidCollisionEvent>(
-                            entity->guid(),
+                            entity->entityHandle(),
                             csc->collisionContext()
                        );
                     }
@@ -98,7 +98,8 @@ export namespace helios::engine::modules::physics::collision::systems {
 
 
                 if (hasFlag(collisionBehavior, CollisionBehavior::Despawn)) {
-                    updateContext.commandBuffer().add<DespawnCommand>(entity->guid(), sbp->spawnProfileId());
+                    updateContext.commandBuffer().add<DespawnCommand>(
+                        entity->entityHandle(), sbp->spawnProfileId());
                 }
             }
 

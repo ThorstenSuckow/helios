@@ -11,7 +11,7 @@ export module helios.engine.runtime.spawn.behavior.SpawnPlacer;
 import helios.engine.runtime.spawn.SpawnPlanCursor;
 import helios.engine.runtime.spawn.SpawnContext;
 import helios.math;
-import helios.util.Guid;
+import helios.engine.ecs.EntityHandle;
 
 export namespace helios::engine::runtime::spawn::behavior {
 
@@ -52,7 +52,7 @@ export namespace helios::engine::runtime::spawn::behavior {
         /**
          * @brief Calculates the spawn position for an entity.
          *
-         * @param guid The GUID of the entity being spawned.
+         * @param entityHandle The handle of the entity being spawned.
          * @param gameObjectBounds The bounding box of the entity to spawn.
          * @param environmentBounds The level bounds to spawn within.
          * @param cursor The current position within the spawn batch.
@@ -61,7 +61,7 @@ export namespace helios::engine::runtime::spawn::behavior {
          * @return The world position for the spawned entity.
          */
         virtual helios::math::vec3f getPosition(
-            const helios::util::Guid& guid,
+            const helios::engine::ecs::EntityHandle& entityHandle,
             const helios::math::aabbf& gameObjectBounds,
             const helios::math::aabbf& environmentBounds,
             const SpawnPlanCursor& cursor,

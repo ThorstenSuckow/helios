@@ -12,7 +12,7 @@ Health-related events.
 
 Published by `HealthUpdateSystem` when an entity dies. Contains:
 
-- `source()` - GUID of the deceased entity
+- `source()` - Handle of the deceased entity
 - `attackContext()` - Optional combat context if death was from damage
 
 Used by other systems (e.g., `CombatScoringSystem`) to react to entity deaths.

@@ -13,6 +13,7 @@ import helios.engine.ecs.GameObject;
 import helios.engine.ecs.CloneableComponent;
 import helios.engine.builder.gameObject.builders;
 
+import helios.engine.runtime.world.GameWorld;
 
 import helios.engine.modules;
 import helios.engine.mechanics;
@@ -231,6 +232,11 @@ export namespace helios::engine::builder::gameObject {
             std::unique_ptr<helios::engine::ecs::GameObject> make(const bool active = false) {
                 gameObject_->setActive(active);
                 return std::move(gameObject_);
+            }
+
+            helios::engine::ecs::GameObject* makeAndAdd(helios::engine::runtime::world::GameWorld& gameWorld, const bool active = false) {
+                gameObject_->setActive(active);
+                return gameWorld.addGameObject(std::move(gameObject_));
             }
 
             /**

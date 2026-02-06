@@ -62,10 +62,10 @@ export namespace helios::engine::mechanics::health::systems {
                     continue;
                 }
 
-                logger_.info(std::format("Entity {0} killed.", entity->guid().value()));
+                logger_.info(std::format("Entity {0} killed.", entity->entityHandle().entityId));
 
                 updateContext.commandBuffer().add<helios::engine::runtime::spawn::commands::DespawnCommand>(
-                    entity->guid(),
+                    entity->entityHandle(),
                     sbp->spawnProfileId()
                 );
 
@@ -73,12 +73,12 @@ export namespace helios::engine::mechanics::health::systems {
                 if (lac) {
                     auto attackContext = lac->lastAttackContext();
                     updateContext.pushPhase<helios::engine::mechanics::health::events::DeathEvent>(
-                        entity->guid(),
+                        entity->entityHandle(),
                         attackContext
                     );
                 } else {
                     updateContext.pushPhase<helios::engine::mechanics::health::events::DeathEvent>(
-                        entity->guid()
+                        entity->entityHandle()
                     );
                 }
 

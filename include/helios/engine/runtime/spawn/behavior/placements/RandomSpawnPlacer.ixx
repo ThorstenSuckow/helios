@@ -11,7 +11,7 @@ import helios.engine.runtime.spawn.SpawnContext;
 import helios.engine.runtime.spawn.behavior.SpawnPlacer;
 import helios.util.Random;
 import helios.math;
-import helios.util.Guid;
+import helios.engine.ecs.EntityHandle;
 
 export namespace helios::engine::runtime::spawn::behavior::placements {
 
@@ -33,7 +33,7 @@ export namespace helios::engine::runtime::spawn::behavior::placements {
         /**
          * @brief Returns a random position within the level bounds.
          *
-         * @param guid The GUID of the entity being spawned (unused).
+         * @param entityHandle The handle of the entity being spawned (unused).
          * @param gameObjectBounds The bounding box of the entity to spawn (unused).
          * @param environmentBounds The level bounds to spawn within.
          * @param cursor The current position within the spawn batch (unused).
@@ -42,7 +42,7 @@ export namespace helios::engine::runtime::spawn::behavior::placements {
          * @return A random vec3f with Z = 0.
          */
         helios::math::vec3f getPosition(
-            const helios::util::Guid& guid,
+            const helios::engine::ecs::EntityHandle& entityHandle,
             const helios::math::aabbf& gameObjectBounds,
             const helios::math::aabbf& environmentBounds,
             const SpawnPlanCursor& cursor,

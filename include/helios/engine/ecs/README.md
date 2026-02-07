@@ -15,8 +15,13 @@ This module provides the foundational classes for the composition-based game arc
 | `CloneableComponent` | CRTP base for components that support cloning |
 | `System` | Abstract base for logic processors (registered with `GameLoop`) |
 | `Updatable` | Interface for per-frame updatable objects |
+| `EntityRegistry` | Global registry for entity handle allocation and validation |
+| `EntityManager` | Unified interface for entity creation and component storage |
 | `EntityPool<T>` | Sparse-set based pool for efficient entity storage and iteration |
 | `EntityHandle` | Versioned handle for safe entity references |
+| `SparseSetBase` | Type-erased base for polymorphic sparse set access |
+| `SparseSet<T>` | Generic O(1) data structure for component storage |
+| `Traits` | Compile-time concepts for component lifecycle hooks |
 
 ## Component Storage Model
 
@@ -42,6 +47,47 @@ This module provides the foundational classes for the composition-based game arc
 // Content:  nullptr  Transform  nullptr   Move2D    ...
 //                       ↑                    ↑
 //           ComponentTypeId::id<Transform>()  ComponentTypeId::id<Move2D>()
+```
+
+## EntityRegistry and EntityManager
+
+The **EntityRegistry** is the single source of truth for entity lifecycle. It manages handle allocation, version tracking, and entity validation.
+
+The **EntityManager** provides a high-level API combining registry and component storage:
+
+```cpp
+EntityRegistry registry;
+EntityManager manager(registry);
+
+// Create entity
+auto entity = manager.create();
+
+// Attach components
+auto* transform = manager.emplace<TransformComponent>(entity, glm::vec3{0.0f});
+auto* velocity = manager.emplace<VelocityComponent>(entity);
+
+// Retrieve component
+auto* t = manager.get<TransformComponent>(entity);
+
+// Remove entity (removes all components and destroys handle)
+manager.remove(entity);
+```
+
+**Architecture:**
+
+```
+┌────────────────────────────────────────────────────────────┐
+│                     EntityManager                          │
+│  ┌──────────────────┐    ┌───────────────────────────────┐ │
+│  │  EntityRegistry  │    │  Component Storage            │ │
+│  │  (handle mgmt)   │    │  vector<SparseSet<T>>         │ │
+│  │  - create()      │    │  (indexed by TypeIndexer)     │ │
+│  │  - destroy()     │    │                               │ │
+│  │  - isValid()     │    │  [0] SparseSet<Transform>     │ │
+│  └──────────────────┘    │  [1] SparseSet<Velocity>      │ │
+│                          │  [2] SparseSet<Health>        │ │
+│                          └───────────────────────────────┘ │
+└────────────────────────────────────────────────────────────┘
 ```
 
 ## EntityPool
@@ -80,6 +126,27 @@ for (auto& e : pool.entities()) {
 ```
 
 ## Submodules
+
+### Traits
+
+Compile-time concepts for component lifecycle hooks:
+
+| Trait | Purpose |
+|-------|---------|
+| `HasOnRemove` | Intercept removal (return `false` to cancel) |
+| `HasOnAcquire` | Called when acquired from a pool |
+| `HasOnRelease` | Called when released back to a pool |
+
+```cpp
+struct ResourceComponent {
+    bool onRemove() {
+        cleanup();
+        return true;  // Allow removal
+    }
+};
+
+static_assert(helios::engine::ecs::traits::HasOnRemove<ResourceComponent>);
+```
 
 ### query/
 

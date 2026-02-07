@@ -46,7 +46,7 @@ export namespace helios::engine::ecs {
      * ## Responsibilities
      *
      * - **Entity Creation:** Delegates to `EntityRegistry` for handle allocation.
-     * - **Entity Removal:** Removes all components and invalidates the handle.
+     * - **Entity Destruction:** Removes all components and invalidates the handle.
      * - **Component Storage:** Maintains a vector of `SparseSet` instances, one per
      *   component type, indexed by `TypeIndexer`.
      *
@@ -58,9 +58,13 @@ export namespace helios::engine::ecs {
      *
      * auto entity = manager.create();
      * auto* transform = manager.emplace<TransformComponent>(entity, glm::vec3{0.0f});
-     * auto* retrieved = manager.get<TransformComponent>(entity);
      *
-     * manager.remove(entity); // Removes all components and destroys handle
+     * if (manager.has<TransformComponent>(entity)) {
+     *     auto* t = manager.get<TransformComponent>(entity);
+     * }
+     *
+     * manager.remove<TransformComponent>(entity);  // Remove single component
+     * manager.destroy(entity);                     // Destroy entity and all components
      * ```
      *
      * @see EntityRegistry
@@ -103,21 +107,22 @@ export namespace helios::engine::ecs {
         }
 
         /**
-         * @brief Removes an entity and all its components.
+         * @brief Destroys an entity and all its components.
          *
          * Iterates over all component storages and removes any data associated
-         * with the given entity. If any component's `onRemove` callback returns
+         * with the given entity. If any component's `onRemove` trait returns
          * `false`, removal is cancelled and the entity remains valid.
          *
-         * @param handle The entity to remove.
+         * @param handle The entity to destroy.
          *
-         * @return `true` if the entity was successfully removed, `false` if the
+         * @return `true` if the entity was successfully destroyed, `false` if the
          *         handle was invalid or a component blocked removal.
          *
+         * @see remove
          * @see SparseSet::remove
          * @see EntityRegistry::destroy
          */
-        [[nodiscard]] bool remove(const EntityHandle& handle) {
+        [[nodiscard]] bool destroy(const EntityHandle& handle) {
 
             if (!registry_.isValid(handle)) {
                 return false;
@@ -179,6 +184,31 @@ export namespace helios::engine::ecs {
         }
 
         /**
+         * @brief Checks whether an entity has a specific component.
+         *
+         * @tparam T The component type to check for.
+         *
+         * @param handle The entity to query.
+         *
+         * @return `true` if the entity has the component, `false` if the handle
+         *         is invalid or the component is not attached.
+         */
+        template<typename T, typename... Args>
+        [[nodiscard]] bool has(const EntityHandle handle) const {
+            if (!registry_.isValid(handle)) {
+                return false;
+            }
+
+            const auto typeId = TypeIndexer::typeIndex<T>();
+
+            if (typeId < components_.size() && components_[typeId] != nullptr) {
+                return components_[typeId]->contains(handle.entityId);
+            }
+
+            return false;
+        }
+
+        /**
          * @brief Constructs and attaches a component to an entity.
          *
          * If the component type has not been registered yet, a new `SparseSet`
@@ -216,6 +246,39 @@ export namespace helios::engine::ecs {
             auto* sparseSet = static_cast<SparseSet<T>*>(components_[typeId].get());
 
             return sparseSet->emplace(entityId, std::forward<Args>(args)...);
+        }
+
+        /**
+         * @brief Removes a specific component from an entity.
+         *
+         * Unlike `destroy()`, this only removes a single component type while
+         * keeping the entity and other components intact.
+         *
+         * @tparam T The component type to remove.
+         *
+         * @param handle The entity whose component to remove.
+         *
+         * @return `true` if the component was removed, `false` if the handle was
+         *         invalid, the component was not attached, or removal was blocked
+         *         by `onRemove`.
+         *
+         * @see destroy
+         * @see SparseSet::remove
+         */
+        template<typename T>
+        bool remove(const EntityHandle& handle) {
+
+            if (!registry_.isValid(handle)) {
+                return false;
+            }
+
+            const auto entityId = handle.entityId;
+            const auto typeId = TypeIndexer::typeIndex<T>();
+            if (typeId >= components_.size() || !components_[typeId]) {
+                return false;
+            }
+
+            return components_[typeId]->remove(entityId);
         }
 
 

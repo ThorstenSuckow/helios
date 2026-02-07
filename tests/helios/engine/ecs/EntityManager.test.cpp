@@ -28,6 +28,11 @@ class MyComponent {
 
     public:
     int value = 0;
+    bool remove = true;
+
+    bool onRemove() {
+        return remove;
+    }
 
 
 };
@@ -43,7 +48,7 @@ TEST(EntityManager, create) {
     EXPECT_EQ(handle.versionId, 1);
 }
 
-TEST(EntityManager, remove) {
+TEST(EntityManager, destroy) {
 
     EntityRegistry registry;
     EntityManager em(registry);
@@ -52,7 +57,7 @@ TEST(EntityManager, remove) {
     EXPECT_EQ(handle.entityId, 0);
     EXPECT_EQ(handle.versionId, 1);
 
-    EXPECT_TRUE(em.remove(handle));
+    EXPECT_TRUE(em.destroy(handle));
 }
 
 TEST(EntityManager, emplace) {
@@ -64,16 +69,42 @@ TEST(EntityManager, emplace) {
     EXPECT_EQ(handle.entityId, 0);
     EXPECT_EQ(handle.versionId, 1);
 
+    EXPECT_FALSE(em.has<MyComponent>(handle));
+
     auto* cmp = em.emplace<MyComponent>(handle, 10);
 
+    EXPECT_TRUE(em.has<MyComponent>(handle));
     EXPECT_NE(cmp, nullptr);
 
     auto* ref = em.get<MyComponent>(handle);
 
     EXPECT_EQ(ref->value, 10);
 
-    // ... and remove
-    EXPECT_TRUE(em.remove(handle));
+    // ... and destroy
+    EXPECT_TRUE(em.destroy(handle));
 
     EXPECT_EQ(em.get<MyComponent>(handle), nullptr);
+}
+
+TEST(EntityManager, remove) {
+
+    EntityRegistry registry;
+    EntityManager em(registry);
+
+    const auto handle = em.create();
+    EXPECT_EQ(handle.entityId, 0);
+    EXPECT_EQ(handle.versionId, 1);
+
+    EXPECT_FALSE(em.has<MyComponent>(handle));
+
+    auto* cmp = em.emplace<MyComponent>(handle, 10);
+    EXPECT_TRUE(em.has<MyComponent>(handle));
+
+    cmp->remove = false;
+    EXPECT_FALSE(em.remove<MyComponent>(handle));
+    cmp->remove = true;
+    EXPECT_TRUE(em.remove<MyComponent>(handle));
+
+    EXPECT_FALSE(em.has<MyComponent>(handle));
+
 }

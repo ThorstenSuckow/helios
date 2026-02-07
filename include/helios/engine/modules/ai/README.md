@@ -62,7 +62,7 @@ auto enemy = GameObjectFactory::gameObject()
 
 The `ChaseSystem` operates as follows:
 
-1. **Target Lookup**: Finds target entity by GUID in GameWorld
+1. **Target Lookup**: Finds target entity by handle in GameWorld
 2. **Cooldown Check**: Only updates direction after cooldown expires
 3. **Direction Calculation**: Computes normalized vector from entity to target
 4. **Steering Update**: Sets steering intent to face target direction
@@ -76,7 +76,7 @@ The `ChaseSystem` operates as follows:
 │  │   - SteeringComponent                                   ││
 │  │   - TranslationStateComponent                           ││
 │  ├─────────────────────────────────────────────────────────┤│
-│  │ 1. Find target by GUID                                  ││
+│  │ 1. Find target by handle                                ││
 │  │ 2. Update cooldown timer                                ││
 │  │ 3. If timer >= cooldown:                                ││
 │  │    - Calculate direction to target                      ││

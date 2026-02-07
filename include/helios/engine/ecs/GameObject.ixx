@@ -14,13 +14,21 @@ module;
 
 export module helios.engine.ecs.GameObject;
 
+import helios.engine.ecs.EntityHandle;
+
 import helios.util.Guid;
 import helios.engine.ecs.Component;
 import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.core.data.ComponentTypeId;
 
+
+namespace helios::engine::runtime::world {
+    class GameWorld;
+}
+
 export namespace helios::engine::ecs {
+
 
     /**
      * @brief Base class for interactive game entities with component-based composition.
@@ -58,6 +66,8 @@ export namespace helios::engine::ecs {
      * @see GameObjectPool
      */
     class GameObject {
+
+        friend class helios::engine::runtime::world::GameWorld;
 
     protected:
 
@@ -126,6 +136,15 @@ export namespace helios::engine::ecs {
         void invalidateCache() noexcept { needsUpdate_ = true; }
 
         /**
+         * @brief The runtime id used by this GameObject.
+         *
+         * @details The runtime id serves as a per-frame-unique value
+         */
+        helios::engine::ecs::EntityHandle entityHandle_{0,0};
+
+
+
+        /**
          * @brief Rebuilds the component cache if invalidated.
          *
          * @details Iterates through `components_` and populates `componentView_` and
@@ -155,6 +174,11 @@ export namespace helios::engine::ecs {
         }
 
 
+        void setHandle(const EntityHandle& entityHandle) noexcept {
+            entityHandle_ = entityHandle;
+        }
+
+
     public:
         /**
          * @brief Constructs a new GameObject with a unique Guid.
@@ -162,7 +186,9 @@ export namespace helios::engine::ecs {
          * @details The Guid is automatically generated and remains constant for the
          * lifetime of this object.
          */
-        GameObject() : guid_(helios::util::Guid::generate()) {};
+        GameObject()
+        : guid_(helios::util::Guid::generate())
+        {};
 
         /**
          * @brief Constructs a new GameObject with a specified active state.
@@ -175,6 +201,12 @@ export namespace helios::engine::ecs {
          * @brief Virtual destructor for proper polymorphic cleanup.
          */
         virtual ~GameObject() = default;
+
+
+        [[nodiscard]] const helios::engine::ecs::EntityHandle& entityHandle() const noexcept {
+            return entityHandle_;
+        }
+
 
         /**
          * @brief Adds a new component of type T to the GameObject.
@@ -594,6 +626,5 @@ export namespace helios::engine::ecs {
         }
 
     };
-
 
 } // namespace helios::engine::modules

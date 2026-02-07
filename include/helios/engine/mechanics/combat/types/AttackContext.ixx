@@ -13,6 +13,8 @@ import helios.util;
 
 import helios.core.types;
 
+import helios.engine.ecs.EntityHandle;
+
 export namespace helios::engine::mechanics::combat::types {
 
     /**
@@ -24,9 +26,9 @@ export namespace helios::engine::mechanics::combat::types {
     struct AttackContext {
 
         /**
-         * @brief GUID of the entity that performed the attack.
+         * @brief Handle of the entity that performed the attack.
          */
-        helios::util::Guid source{helios::core::types::no_init};
+        helios::engine::ecs::EntityHandle source{};
 
         /**
          * @brief World-space contact point where the attack landed.

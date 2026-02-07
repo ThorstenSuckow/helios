@@ -123,7 +123,7 @@ export namespace helios::engine::mechanics::bounds::systems {
                         assert(sbp && "Unexpected missing SpawnProfile");
 
                         updateContext.commandBuffer().add<helios::engine::runtime::spawn::commands::DespawnCommand>(
-                            entity->guid(), sbp->spawnProfileId()
+                            entity->entityHandle(), sbp->spawnProfileId()
                         );
 
                     }

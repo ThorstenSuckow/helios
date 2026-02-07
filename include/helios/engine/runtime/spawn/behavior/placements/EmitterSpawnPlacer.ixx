@@ -12,7 +12,7 @@ import helios.engine.runtime.spawn.SpawnPlanCursor;
 import helios.engine.runtime.spawn.SpawnContext;
 import helios.engine.runtime.spawn.behavior.SpawnPlacer;
 import helios.math;
-import helios.util.Guid;
+import helios.engine.ecs.EntityHandle;
 
 export namespace helios::engine::runtime::spawn::behavior::placements {
 
@@ -35,7 +35,7 @@ export namespace helios::engine::runtime::spawn::behavior::placements {
         /**
          * @brief Returns the emitter's position.
          *
-         * @param guid The GUID of the entity being spawned (unused).
+         * @param entityHandle The handle of the entity being spawned (unused).
          * @param gameObjectBounds The bounding box of the entity to spawn (unused).
          * @param environmentBounds The level bounds (unused).
          * @param cursor The current position within the spawn batch (unused).
@@ -46,7 +46,7 @@ export namespace helios::engine::runtime::spawn::behavior::placements {
          * @pre spawnContext.emitterContext must have a value.
          */
         helios::math::vec3f getPosition(
-            const helios::util::Guid& guid,
+            const helios::engine::ecs::EntityHandle& entityHandle,
             const helios::math::aabbf& gameObjectBounds,
             const helios::math::aabbf& environmentBounds,
             const SpawnPlanCursor& cursor,

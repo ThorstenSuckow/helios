@@ -32,7 +32,7 @@ export namespace helios::engine::modules::ai::systems {
      * entity based on a cooldown timer.
      *
      * The system:
-     * 1. Finds the target entity by GUID
+     * 1. Finds the target entity by handle
      * 2. Waits for the cooldown timer to expire
      * 3. Calculates direction from entity to target
      * 4. Sets steering intent to face that direction
@@ -54,9 +54,9 @@ export namespace helios::engine::modules::ai::systems {
                 helios::engine::modules::spatial::transform::components::TranslationStateComponent
             >().each()) {
 
-                const auto guid = cc->target();
+                const auto entityHandle = cc->target();
 
-                const auto* go = gameWorld_->find(guid);
+                const auto* go = gameWorld_->find(entityHandle);
 
                 if (!go) {
                     continue;

@@ -20,7 +20,7 @@ This module provides infrastructure for memory-efficient entity management throu
 
 The pooling system follows a layered architecture:
 
-1. **GameObjectPool**: Low-level GUID tracking (active/inactive lists)
+1. **GameObjectPool**: Low-level handle-based tracking (active/inactive lists)
 2. **GameObjectPoolRegistry**: Pool lookup by typed ID
 3. **GameObjectPoolManager**: Integration with GameWorld for prefab cloning and entity lookup
 4. **GameObjectPoolConfig**: Declarative pool configuration
@@ -60,6 +60,6 @@ poolManager->release(GameObjectPoolId{1}, bullet->guid());
 <summary>Doxygen</summary><p>
 @namespace helios::engine::runtime::pooling
 @brief GameObject pooling for efficient object recycling.
-@details Provides GameObjectPool for GUID-based entity tracking, registries for pool lookup, configuration structures for declarative pool setup, and managers for integration with GameWorld.
+@details Provides GameObjectPool for handle-based entity tracking, registries for pool lookup, configuration structures for declarative pool setup, and managers for integration with GameWorld.
 </p></details>
 

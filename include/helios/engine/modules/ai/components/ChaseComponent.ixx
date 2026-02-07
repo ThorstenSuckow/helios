@@ -4,6 +4,7 @@
  */
 module;
 
+#include <cassert>
 export module helios.engine.modules.ai.components.ChaseComponent;
 
 import helios.engine.ecs.CloneableComponent;
@@ -11,12 +12,15 @@ import helios.engine.ecs.CloneableComponent;
 import helios.core.types;
 import helios.util.Guid;
 
+import helios.engine.ecs.EntityHandle;
+
+
 export namespace helios::engine::modules::ai::components {
 
     /**
      * @brief Component storing chase behavior data.
      *
-     * Tracks a target entity by GUID and controls the frequency
+     * Tracks a target entity by handle and controls the frequency
      * of direction updates via a cooldown timer. Used by ChaseSystem
      * to steer entities towards their targets.
      */
@@ -33,9 +37,9 @@ export namespace helios::engine::modules::ai::components {
         float cooldownTimer_ = 0.0f;
 
         /**
-         * @brief GUID of the entity to chase.
+         * @brief EntityHandle of the entity to chase.
          */
-        helios::util::Guid target_{helios::core::types::no_init};
+        helios::engine::ecs::EntityHandle target_{};
 
     public:
 
@@ -45,11 +49,11 @@ export namespace helios::engine::modules::ai::components {
         ChaseComponent() = default;
 
         /**
-         * @brief Returns the target entity's GUID.
+         * @brief Returns the target entity's handle.
          *
-         * @return The GUID of the chase target.
+         * @return The handle of the chase target.
          */
-        [[nodiscard]] helios::util::Guid target() const noexcept {
+        [[nodiscard]] helios::engine::ecs::EntityHandle target() const noexcept {
             return target_;
         }
 
@@ -101,10 +105,11 @@ export namespace helios::engine::modules::ai::components {
         /**
          * @brief Sets the target entity to chase.
          *
-         * @param guid The GUID of the target entity.
+         * @param entityHandle The EntityHandle of the target entity.
          */
-        void setTarget(const helios::util::Guid guid) noexcept {
-            target_ = guid;
+        void setTarget(const helios::engine::ecs::EntityHandle& entityHandle) noexcept {
+            assert(entityHandle.isValid() && "Unexpected invalid entityHandle");
+            target_ = entityHandle;
         }
     };
 

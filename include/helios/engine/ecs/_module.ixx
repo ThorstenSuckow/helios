@@ -14,6 +14,7 @@ export import helios.engine.ecs.EntityHandle;
 export import helios.engine.ecs.EntityRegistry;
 export import helios.engine.ecs.SparseSet;
 export import helios.engine.ecs.Traits;
+export import helios.engine.ecs.EntityManager;
 
 export import helios.engine.ecs.query;
 

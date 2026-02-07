@@ -55,7 +55,9 @@ helios::engine::ecs::EntityPool<T>& componentPool() {
 
     return pool->entityPool();
 }
+
+
 ```
 
- - EntityRegistry organizes an EntityPool of (non-unique pointered) entites.
- - Additionally, the above mentioned datastructure for maintaining lists of components, which are plain structs, with no inheritance.
+- EntityRegistry organizes an EntityPool of (non-unique pointered) entites.
+- Additionally, the above mentioned datastructure for maintaining lists of components, which are plain structs, with no inheritance.

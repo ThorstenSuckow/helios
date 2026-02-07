@@ -66,11 +66,16 @@ auto entity = manager.create();
 auto* transform = manager.emplace<TransformComponent>(entity, glm::vec3{0.0f});
 auto* velocity = manager.emplace<VelocityComponent>(entity);
 
-// Retrieve component
-auto* t = manager.get<TransformComponent>(entity);
+// Check and retrieve component
+if (manager.has<TransformComponent>(entity)) {
+    auto* t = manager.get<TransformComponent>(entity);
+}
 
-// Remove entity (removes all components and destroys handle)
-manager.remove(entity);
+// Remove single component
+manager.remove<TransformComponent>(entity);
+
+// Destroy entity (removes all components and invalidates handle)
+manager.destroy(entity);
 ```
 
 **Architecture:**

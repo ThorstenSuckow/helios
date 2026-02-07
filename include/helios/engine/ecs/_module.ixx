@@ -11,6 +11,7 @@ export import helios.engine.ecs.System;
 export import helios.engine.ecs.Updatable;
 export import helios.engine.ecs.EntityPool;
 export import helios.engine.ecs.EntityHandle;
+export import helios.engine.ecs.EntityRegistry;
 
 export import helios.engine.ecs.query;
 

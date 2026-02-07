@@ -197,7 +197,7 @@ export namespace helios::engine::runtime::spawn {
 
 
 
-               const auto spawnCount = std::min(amount, poolSnapshot.inactiveCount);
+                const auto spawnCount = std::min(amount, poolSnapshot.inactiveCount);
                 for (size_t i = 0; i < spawnCount; i++) {
 
                     auto* go = gameObjectPoolManager_->acquire(gameObjectPoolId);

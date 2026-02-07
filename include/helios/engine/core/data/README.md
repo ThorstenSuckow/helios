@@ -9,6 +9,7 @@ This module provides core data structures used for managing GameObjects within t
 - **CollisionLayer** - Strongly-typed identifier for collision layers.
 - **ComponentTypeId** - Compile-time type identifier for O(1) component indexing within GameObject.
 - **EntityId** - Unique identifier for an entity within an EntityPool.
+- **EntityTombstone** - Sentinel value for invalid sparse array indices.
 - **FontId** - Strongly-typed identifier for referencing fonts.
 - **GameObjectPool** - Low-level O(1) object pooling for entity recycling.
 - **GameObjectPoolId** - Strongly-typed identifier for referencing pools.

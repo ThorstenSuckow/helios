@@ -16,6 +16,49 @@ import helios.engine.ecs.Traits;
 export namespace helios::engine::ecs {
 
     /**
+     * @brief Abstract base class for type-erased sparse set access.
+     *
+     * `SparseSetBase` provides a non-templated interface for polymorphic
+     * operations on sparse sets. This enables containers like `EntityManager`
+     * to store heterogeneous component pools and perform common operations
+     * (e.g., removal) without knowing the concrete component type.
+     *
+     * @see SparseSet
+     * @see EntityManager
+     */
+    class SparseSetBase {
+
+        public:
+
+        /**
+         * @brief Virtual destructor for proper cleanup of derived classes.
+         */
+        virtual ~SparseSetBase() = default;
+
+        /**
+         * @brief Removes the element at the given index.
+         *
+         * @param id The EntityId of the element to remove.
+         *
+         * @return `true` if the element was removed, `false` if not found or
+         *         removal was cancelled.
+         */
+        virtual bool remove(helios::engine::core::data::EntityId id) = 0;
+
+        /**
+         * @brief Checks whether an element exists for the specified EntityId.
+         *
+         * @param id The EntityId to test.
+         *
+         * @return `true` if the set contains the EntityId, `false` otherwise.
+         */
+        [[nodiscard]] virtual bool contains(helios::engine::core::data::EntityId id) const = 0;
+
+
+    };
+
+
+    /**
      * @brief Sentinel value indicating an empty slot in the sparse array.
      *
      * Aliased from `helios::engine::core::data::EntityTombstone`.
@@ -43,10 +86,10 @@ export namespace helios::engine::ecs {
      * │  │  2  │  ×  │  0  │  ×  │  1  │  ×  │  ×  │  (dense idx)   │
      * │  └──┬──┴─────┴──┬──┴─────┴──┬──┴─────┴─────┘                │
      * │     │           │           │                               │
-     * │     │           │           └──────────────┐                │
-     * │     │           └────────────────┐         │                │
-     * │     └──────────────────────┐     │         │                │
-     * │                            ▼     ▼         ▼                │
+     * │     │           │  ┌────────┘                               │
+     * │     │   ┌───────┘  │                                        │
+     * │     └───│──────────│────────┐                               │
+     * │         ▼          ▼        ▼                               │
      * │  DENSE STORAGE (contiguous)                                 │
      * │  ┌─────────┬─────────┬─────────┐                            │
      * │  │  T[0]   │  T[1]   │  T[2]   │                            │
@@ -103,7 +146,7 @@ export namespace helios::engine::ecs {
      * @see EntityTombstone
      */
     template <typename T>
-    class SparseSet {
+    class SparseSet : public SparseSetBase {
 
 
         /**
@@ -204,7 +247,7 @@ export namespace helios::engine::ecs {
          *
          * @return `true` if the element was removed, `false` if not found or removal was cancelled.
          */
-        [[nodiscard]] bool remove(const EntityId idx) {
+        [[nodiscard]] bool remove(const EntityId idx) override {
 
             if (idx >= sparse_.size() || sparse_[idx] == Tombstone) {
                 return false;
@@ -267,6 +310,18 @@ export namespace helios::engine::ecs {
             }
 
             return &storage_[sparse_[idx]];
+        }
+
+
+        /**
+         * @brief Checks whether an element is registered for the specified EntityId.
+         *
+         * @param idx The entityId to test.
+         *
+         * @return True if this sparse set contains the entityId, otherwise false.
+         */
+        [[nodiscard]] bool contains(const EntityId idx) const override {
+            return idx < sparse_.size() && sparse_[idx] != Tombstone;
         }
 
 

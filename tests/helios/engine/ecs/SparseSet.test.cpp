@@ -28,7 +28,12 @@ TEST(SparseSetTest, emplace) {
 
     SparseSet<Entity> storage;
 
+    EXPECT_FALSE(storage.contains(EntityId{1}));
+
     auto* ent = storage.emplace(EntityId{1}, Entity{});
+
+
+    EXPECT_TRUE(storage.contains(EntityId{1}));
 
     EXPECT_NE(ent, nullptr);
 

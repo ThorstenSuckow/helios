@@ -12,12 +12,14 @@ module;
 #include <unordered_map>
 #include <vector>
 #include <cassert>
+#include <limits>
 
 
 export module helios.engine.runtime.pooling.GameObjectPool;
 
 import helios.util.Guid;
 import helios.engine.ecs.EntityHandle;
+import helios.engine.core.data;
 
 export namespace helios::engine::runtime::pooling {
 
@@ -34,9 +36,9 @@ export namespace helios::engine::runtime::pooling {
      * - **acquire**: Pops from the inactive list and adds to active tracking
      * - **release**: Swap-and-pop removal from active list, push to inactive
      *
-     * GameObjects themselves are owned by GameWorld; this pool only tracks their Guids.
+     * GameObjects themselves are owned by GameWorld; this pool only tracks their EntityHandles.
      *
-     * @todo Prevent duplicate Guids from being added to the pool.
+     * @todo Prevent duplicate EntityHandles from being added to the pool.
      */
     class GameObjectPool {
 
@@ -44,19 +46,26 @@ export namespace helios::engine::runtime::pooling {
     protected:
 
         /**
-         * @brief Maps active GameObject Guids to their index in activeGameObjects_.
+         * @brief Maps active GameObject EntityIds to their index in activeGameObjects_.
          *
          * Enables O(1) lookup for release operations.
          */
-        std::unordered_map<helios::engine::ecs::EntityHandle, size_t> activeIndex_;
+        std::vector<size_t> activeIndex_;
 
         /**
-         * @brief List of Guids for currently active (in-use) GameObjects.
+         * @brief Tracks version numbers for active EntityHandles.
+         *
+         * Used to validate that a release operation targets the correct entity version.
+         */
+        std::vector<size_t> versionIndex_;
+
+        /**
+         * @brief List of EntityHandles for currently active (in-use) GameObjects.
          */
         std::vector<helios::engine::ecs::EntityHandle> activeGameObjects_;
 
         /**
-         * @brief List of Guids for currently inactive (available) GameObjects.
+         * @brief List of EntityHandles for currently inactive (available) GameObjects.
          */
         std::vector<helios::engine::ecs::EntityHandle> inactiveGameObjects_;
 
@@ -65,12 +74,30 @@ export namespace helios::engine::runtime::pooling {
          */
         size_t poolSize_ = 0;
 
+        /**
+         * @brief Minimum EntityId in the pool (used for sparse array offset).
+         */
+        helios::engine::core::data::EntityId minEntityId_ = std::numeric_limits<helios::engine::core::data::EntityId>::max();
+
+        /**
+         * @brief Maximum EntityId in the pool (used for sparse array sizing).
+         */
+        helios::engine::core::data::EntityId maxEntityId_ = std::numeric_limits<helios::engine::core::data::EntityId>::lowest();
+
+        /**
+         * @brief Offset for sparse array indexing (equals minEntityId_ after lock).
+         */
+        size_t delta_ = 0;
 
         /**
          * @brief Unique identifier for this pool instance.
          */
         const helios::util::Guid guid_;
 
+        /**
+         * @brief True if the pool is locked and ready for acquire/release operations.
+         */
+        bool locked_ = false;
 
     public:
 
@@ -129,13 +156,44 @@ export namespace helios::engine::runtime::pooling {
             }
 
             entityHandle = inactiveGameObjects_.back();
-
             inactiveGameObjects_.pop_back();
 
-            activeIndex_[entityHandle] = activeGameObjects_.size();
+
+            auto idx = entityHandle.entityId - delta_;
+
+            if (activeIndex_.size() <= idx) {
+                activeIndex_.resize(idx + 1, helios::engine::core::data::EntityTombstone);
+                versionIndex_.resize(idx + 1, helios::engine::core::data::EntityTombstone);
+            }
+
+            activeIndex_[idx] = activeGameObjects_.size();
+            versionIndex_[idx] = entityHandle.versionId;
+
             activeGameObjects_.push_back(entityHandle);
 
             return true;
+        }
+
+        /**
+         * @brief Checks if the pool is locked.
+         *
+         * @return True if the pool is locked and ready for acquire/release operations.
+         */
+        [[nodiscard]] bool isLocked() const noexcept {
+            return locked_;
+        }
+
+        /**
+         * @brief Locks the pool for acquire/release operations.
+         *
+         * @details After locking, no more EntityHandles can be added via `addInactive()`.
+         * The sparse arrays are sized based on the min/max EntityIds added.
+         */
+        void lock() noexcept {
+            locked_ = true;
+            delta_ = minEntityId_;
+            activeIndex_.resize(maxEntityId_ - delta_ + 1, helios::engine::core::data::EntityTombstone);
+            versionIndex_.resize(maxEntityId_ - delta_ + 1, helios::engine::core::data::EntityTombstone);
         }
 
         /**
@@ -148,11 +206,17 @@ export namespace helios::engine::runtime::pooling {
          *
          * @return True if added successfully, false if pool is full.
          */
-        bool addInactive(const helios::engine::ecs::EntityHandle& entityHandle) {
+        bool addInactive(const helios::engine::ecs::EntityHandle entityHandle) {
+
+            assert(!locked_ && "Pool is locked");
 
             assert(entityHandle.isValid() && "Unexpected invalid entityHandle");
 
             const size_t used = (activeCount() + inactiveCount());
+
+            minEntityId_ = std::min(minEntityId_, entityHandle.entityId);
+            maxEntityId_ = std::max(maxEntityId_, entityHandle.entityId);
+
 
             if (used < size()) {
                 inactiveGameObjects_.push_back(entityHandle);
@@ -175,25 +239,34 @@ export namespace helios::engine::runtime::pooling {
          * @return True if the object was successfully released, false if the EntityHandle
          *         was not found in the GameWorld or not tracked as active.
          */
-        bool release(const helios::engine::ecs::EntityHandle& entityHandle) {
+        bool release(const helios::engine::ecs::EntityHandle entityHandle) {
 
             assert(entityHandle.isValid() && "Unexpected invalid entityHandle");
 
-            auto it = activeIndex_.find(entityHandle);
+            assert(entityHandle.entityId >= delta_  && "Unexpected entityHandle");
 
-            if (it == activeIndex_.end()) {
+            const auto sparseIdx = entityHandle.entityId - delta_;
+
+            assert(sparseIdx < activeIndex_.size() && "Unexpected sparse index");
+
+            const auto denseIndex = activeIndex_[sparseIdx];
+            if (denseIndex == helios::engine::core::data::EntityTombstone) {
                 return false;
-           }
+            }
 
+            assert(versionIndex_[sparseIdx] == entityHandle.versionId && "Version mismatch");
 
-            size_t idx = it->second;
-            auto lastGuid = activeGameObjects_.back();
+            auto lastEntityHandle = activeGameObjects_.back();
 
-            // swap the last entityHandle in activeGameObjects with the
-            // entityHandle to remove, effectively overwriting entityHandle
-            // to release with a currently active entityHandle
-            activeGameObjects_[idx] = lastGuid;
-            activeIndex_[lastGuid] = idx;
+            if (denseIndex != activeGameObjects_.size() - 1) {
+                // swap the last entityHandle in activeGameObjects with the
+                // entityHandle to remove, effectively overwriting entityHandle
+                // to release with a currently active entityHandle
+                activeGameObjects_[denseIndex] = lastEntityHandle;
+                activeIndex_[lastEntityHandle.entityId-delta_] = denseIndex;
+                versionIndex_[lastEntityHandle.entityId-delta_] = lastEntityHandle.versionId;
+            }
+
 
             // the swap operation has create a duplicate entry,
             // remove the one at the tail
@@ -201,7 +274,9 @@ export namespace helios::engine::runtime::pooling {
 
             // clear the queried entityHandle from active index and update
             // inactiveGameObjects
-            activeIndex_.erase(it);
+            activeIndex_[sparseIdx] = helios::engine::core::data::EntityTombstone;
+            versionIndex_[sparseIdx] = helios::engine::core::data::EntityTombstone;
+
             inactiveGameObjects_.push_back(entityHandle);
 
             return true;
@@ -218,29 +293,36 @@ export namespace helios::engine::runtime::pooling {
          *
          * @return True if removed successfully, false if EntityHandle was not active.
          */
-        bool releaseAndRemove(const helios::engine::ecs::EntityHandle& entityHandle) {
+        bool releaseAndRemove(const helios::engine::ecs::EntityHandle entityHandle) {
 
             assert(entityHandle.isValid() && "Unexpected invalid entityHandle");
 
-            auto it = activeIndex_.find(entityHandle);
+            const auto sparseIdx = entityHandle.entityId - delta_;
 
-            if (it == activeIndex_.end()) {
+            assert(sparseIdx < activeIndex_.size() && "Unexpected sparse index");
+
+            const auto denseIndex = activeIndex_[sparseIdx];
+
+            if (denseIndex == helios::engine::core::data::EntityTombstone) {
                 return false;
             }
 
-            const size_t idx = it->second;
-            const auto lastEntityHandle = activeGameObjects_.back();
+            assert(versionIndex_[sparseIdx] == entityHandle.versionId && "Version mismatch");
 
-            activeGameObjects_[idx] = lastEntityHandle;
-            activeGameObjects_.pop_back();
-
-            activeIndex_.erase(it);
-
-            if (lastEntityHandle != entityHandle) {
-                activeIndex_[lastEntityHandle] = idx;
+            if (denseIndex != activeGameObjects_.size() - 1) {
+                const auto lastEntityHandle = activeGameObjects_.back();
+                activeIndex_[lastEntityHandle.entityId - delta_] = denseIndex;
+                versionIndex_[lastEntityHandle.entityId - delta_] = lastEntityHandle.versionId;
+                activeGameObjects_[denseIndex] = lastEntityHandle;
             }
 
+            activeGameObjects_.pop_back();
+
+            activeIndex_[sparseIdx] = helios::engine::core::data::EntityTombstone;
+            versionIndex_[sparseIdx] = helios::engine::core::data::EntityTombstone;
+
             return true;
+
         }
 
 

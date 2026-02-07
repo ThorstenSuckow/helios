@@ -19,10 +19,7 @@ import helios.engine.core.data;
 
 export namespace helios::engine::ecs {
 
-    /**
-     * @brief Sentinel value indicating an invalid or removed sparse index.
-     */
-    constexpr size_t tombstone = std::numeric_limits<size_t>::max();
+
 
     /**
      * @brief A sparse-set based entity pool with versioned handles.
@@ -80,7 +77,7 @@ export namespace helios::engine::ecs {
          */
         void resizeIfNecessary(const size_t idx) {
             if (sparse_.size() <= idx) {
-                sparse_.resize(idx + 1,tombstone);
+                sparse_.resize(idx + 1,helios::engine::core::data::EntityTombstone);
             }
             if (version_.size() <= idx) {
                 version_.resize(idx + 1, 1);
@@ -98,7 +95,7 @@ export namespace helios::engine::ecs {
             const auto idx = handle.entityId;
             const auto version = handle.versionId;
 
-            if (idx >= sparse_.size() || sparse_[idx] == tombstone) {
+            if (idx >= sparse_.size() || sparse_[idx] == helios::engine::core::data::EntityTombstone) {
                 return nullptr;
             }
 

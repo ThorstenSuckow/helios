@@ -12,6 +12,12 @@ class Entity {
 public:
     int value = 0;
 
+    bool remove_ = true;
+
+    bool onRemove() {
+        return remove_;
+    }
+
     bool operator==(const Entity& other) const {
         return value == other.value;
     }
@@ -52,27 +58,25 @@ TEST(SparseSetTest, remove) {
 
     auto* ent1 = storage.emplace(EntityId{1}, Entity{10});
     auto* ent2 = storage.emplace(EntityId{2}, Entity{20});
-    auto* ent3 = storage.emplace(EntityId{3}, 30);
+    auto* ent3 = storage.emplace(EntityId{3}, 30, false);
     auto* ent4 = storage.emplace(EntityId{4}, Entity{40});
 
 
-    // no callback
     EXPECT_TRUE(storage.remove(EntityId{1}));
     EXPECT_EQ(storage.get(EntityId{1}), nullptr);
     EXPECT_EQ(storage.get(EntityId{2})->value, 20);
     EXPECT_EQ(storage.get(EntityId{3})->value, 30);
     EXPECT_EQ(storage.get(EntityId{4})->value, 40);
 
-    // false callback
-    storage.setOnRemoveCallback(onRemoveCallbackFalse);
+    // entity 3 onRemove -> false
     EXPECT_FALSE(storage.remove(EntityId{3}));
     EXPECT_EQ(storage.get(EntityId{1}), nullptr);
     EXPECT_EQ(storage.get(EntityId{2})->value, 20);
     EXPECT_EQ(storage.get(EntityId{3})->value, 30);
     EXPECT_EQ(storage.get(EntityId{4})->value, 40);
 
-    // true callback
-    storage.setOnRemoveCallback(onRemoveCallbackTrue);
+    // true callback (entity 3, default)
+    storage.get(3)->remove_ = true;
     EXPECT_TRUE(storage.remove(EntityId{3}));
     EXPECT_EQ(storage.get(EntityId{1}), nullptr);
     EXPECT_EQ(storage.get(EntityId{2})->value, 20);

@@ -11,7 +11,7 @@ module;
 export module helios.engine.ecs.SparseSet;
 
 import helios.engine.core.data;
-
+import helios.engine.ecs.Traits;
 
 export namespace helios::engine::ecs {
 
@@ -105,17 +105,6 @@ export namespace helios::engine::ecs {
     template <typename T>
     class SparseSet {
 
-        /**
-         * @brief Callback type invoked before element removal.
-         *
-         * Returns `true` to allow removal, `false` to cancel.
-         */
-        using RemoveCallback = std::function<bool(T&)>;
-
-        /**
-         * @brief Optional callback invoked before removing an element.
-         */
-        RemoveCallback removeCallback_ = nullptr;
 
         /**
          * @brief Maps EntityId to dense storage index.
@@ -226,9 +215,12 @@ export namespace helios::engine::ecs {
 
             assert(sparseIdx == idx && "Sparse index mismatch");
 
-            if (removeCallback_ != nullptr && !removeCallback_(storage_[denseIndex])) {
-                return false;
+            if constexpr (helios::engine::ecs::traits::HasOnRemove<T>) {
+                if (!storage_[denseIndex].onRemove()) {
+                    return false;
+                }
             }
+
 
             if (denseIndex != storage_.size() - 1) {
                 storage_[denseIndex] = std::move(storage_.back());
@@ -277,17 +269,6 @@ export namespace helios::engine::ecs {
             return &storage_[sparse_[idx]];
         }
 
-        /**
-         * @brief Registers a callback invoked before element removal.
-         *
-         * The callback receives a mutable reference to the element about to be removed.
-         * If it returns `false`, the removal is cancelled.
-         *
-         * @param callback The callback function to register.
-         */
-        void setOnRemoveCallback(RemoveCallback callback) {
-            removeCallback_ = std::move(callback);
-        }
 
     };
 

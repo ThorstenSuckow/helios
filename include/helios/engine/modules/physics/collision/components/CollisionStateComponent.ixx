@@ -13,6 +13,7 @@ export module helios.engine.modules.physics.collision.components.CollisionStateC
 import helios.engine.modules.physics.collision.types.CollisionBehavior;
 import helios.engine.modules.physics.collision.types.CollisionContext;
 
+import helios.engine.ecs.EntityHandle;
 import helios.engine.ecs.CloneableComponent;
 import helios.engine.ecs.GameObject;
 import helios.util.Guid;
@@ -54,9 +55,9 @@ export namespace helios::engine::modules::physics::collision::components {
         bool isCollisionReporter_ = false;
 
         /**
-         * @brief GUID of the other entity involved in the collision.
+         * @brief Handle of the other entity involved in the collision.
          */
-        std::optional<helios::util::Guid> other_;
+        std::optional<helios::engine::ecs::EntityHandle> other_;
 
         /**
          * @brief The collision behavior to apply.
@@ -120,7 +121,7 @@ export namespace helios::engine::modules::physics::collision::components {
             const bool isTrigger,
             const helios::engine::modules::physics::collision::types::CollisionBehavior collisionBehavior,
             const bool isCollisionReporter,
-            std::optional<helios::util::Guid> other = std::nullopt,
+            std::optional<helios::engine::ecs::EntityHandle> other = std::nullopt,
             const uint32_t collisionLayer = 0,
             const uint32_t otherCollisionLayer = 0) {
 
@@ -143,7 +144,7 @@ export namespace helios::engine::modules::physics::collision::components {
             otherCollisionLayer_ = otherCollisionLayer;
 
             collisionContext_ = types::CollisionContext{
-                .source = gameObject_->guid(),
+                .source = gameObject_->entityHandle(),
                 .contact = contact,
                 .isSolid = isSolid,
                 .isTrigger = isTrigger,
@@ -209,11 +210,11 @@ export namespace helios::engine::modules::physics::collision::components {
         }
 
         /**
-         * @brief Returns the GUID of the other entity involved in the collision.
+         * @brief Returns the handle of the other entity involved in the collision.
          *
-         * @return Optional GUID of the other entity, or nullopt if not set.
+         * @return Optional handle of the other entity, or nullopt if not set.
          */
-        [[nodiscard]] std::optional<helios::util::Guid> other() const noexcept {
+        [[nodiscard]] std::optional<helios::engine::ecs::EntityHandle> other() const noexcept {
             return other_;
         }
 

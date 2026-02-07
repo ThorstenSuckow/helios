@@ -4,6 +4,8 @@
  */
 module;
 
+#include <cassert>
+
 export module helios.engine.builder.gameObject.builders.configs.ChaseConfig;
 
 import helios.engine.ecs.GameObject;
@@ -11,6 +13,9 @@ import helios.engine.ecs.GameObject;
 import helios.util.Guid;
 
 import helios.engine.modules.ai.components.ChaseComponent;
+
+import helios.engine.ecs.EntityHandle;
+
 
 export namespace helios::engine::builder::gameObject::builders::configs {
 
@@ -41,13 +46,14 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         /**
          * @brief Sets the target entity to chase.
          *
-         * @param guid The GUID of the target GameObject.
+         * @param entityHandle The handle of the target GameObject.
          *
          * @return Reference to this config for chaining.
          */
-        ChaseConfig& target(const helios::util::Guid guid) {
+        ChaseConfig& target(const helios::engine::ecs::EntityHandle& entityHandle) {
+            assert(entityHandle.isValid() && "Unexpected invalid entityHandle");
             gameObject_->getOrAdd<helios::engine::modules::ai::components::ChaseComponent>()
-                        .setTarget(guid);
+                        .setTarget(entityHandle);
 
             return *this;
         }

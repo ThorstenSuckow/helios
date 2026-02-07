@@ -9,6 +9,8 @@ export module helios.engine.runtime.spawn.EmitterContext;
 import helios.math;
 import helios.util;
 
+import helios.engine.ecs.EntityHandle;
+
 export namespace helios::engine::runtime::spawn {
 
     /**
@@ -43,9 +45,9 @@ export namespace helios::engine::runtime::spawn {
         const helios::math::vec3f velocity;
 
         /**
-         * The guid of the entity that is responsible for this EmitterContext.
+         * @brief Handle of the entity that is responsible for this EmitterContext.
          */
-        const helios::util::Guid source;
+        const helios::engine::ecs::EntityHandle source;
 
     };
 

@@ -18,7 +18,7 @@ Processes entities with `ChaseComponent`, `SteeringComponent`, and `TranslationS
 
 ### Behavior
 
-1. **Target Resolution**: Looks up target entity by GUID
+1. **Target Resolution**: Looks up target entity by handle
 2. **Timer Update**: Advances cooldown timer by delta time
 3. **Cooldown Check**: Only updates direction when timer exceeds cooldown
 4. **Direction Calculation**: Computes normalized vector from entity to target
@@ -28,7 +28,7 @@ Processes entities with `ChaseComponent`, `SteeringComponent`, and `TranslationS
 
 | Component | Purpose |
 |-----------|---------|
-| `ChaseComponent` | Target GUID and timing configuration |
+| `ChaseComponent` | Target handle and timing configuration |
 | `SteeringComponent` | Receives steering intent updates |
 | `TranslationStateComponent` | Provides current entity position |
 

@@ -197,7 +197,7 @@ export namespace helios::engine::runtime::spawn {
 
 
 
-               const auto spawnCount = std::min(amount, poolSnapshot.inactiveCount);
+                const auto spawnCount = std::min(amount, poolSnapshot.inactiveCount);
                 for (size_t i = 0; i < spawnCount; i++) {
 
                     auto* go = gameObjectPoolManager_->acquire(gameObjectPoolId);
@@ -226,7 +226,7 @@ export namespace helios::engine::runtime::spawn {
                         ensureBounds(go, bounds);
 
                         const auto position = spawnProfile->spawnPlacer->getPosition(
-                            go->guid(),
+                            go->entityHandle(),
                             bounds,
                             gameWorld_->level().bounds(),
                             spawnCursor,
@@ -301,7 +301,7 @@ export namespace helios::engine::runtime::spawn {
                     ensureBounds(go, bounds);
 
                     const auto position = spawnProfile->spawnPlacer->getPosition(
-                        go->guid(),
+                        go->entityHandle(),
                         bounds,
                         gameWorld_->level().bounds(),
                         {1, 1},
@@ -342,7 +342,7 @@ export namespace helios::engine::runtime::spawn {
                 const auto spawnProfile = it->second.get();
                 auto gameObjectPoolId = spawnProfile->gameObjectPoolId;
 
-                gameObjectPoolManager_->release(gameObjectPoolId, despawnCommand.guid());
+                gameObjectPoolManager_->release(gameObjectPoolId, despawnCommand.entityHandle());
 
             }
         }

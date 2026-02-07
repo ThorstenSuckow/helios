@@ -72,7 +72,7 @@ export namespace helios::engine::runtime::spawn {
         /**
          * @brief Submits a despawn command to return an entity to its pool.
          *
-         * @param despawnCommand The command containing entity GUID and profile ID.
+         * @param despawnCommand The command containing entity handle and profile ID.
          *
          * @return true if the command was accepted, false otherwise.
          */

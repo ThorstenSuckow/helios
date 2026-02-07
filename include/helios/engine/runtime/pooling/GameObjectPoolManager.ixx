@@ -23,8 +23,8 @@ import helios.engine.runtime.pooling.GameObjectPoolRegistry;
 
 import helios.engine.runtime.pooling.GameObjectPoolConfig;
 
+import helios.engine.ecs.EntityHandle;
 import helios.core.types;
-import helios.util.Guid;
 
 import helios.engine.runtime.pooling.GameObjectPoolSnapshot;
 
@@ -38,15 +38,34 @@ export namespace helios::engine::runtime::pooling {
      * and the acquire/release lifecycle of pooled GameObjects.
      *
      * The manager integrates with the GameWorld to clone prefabs during pool
-     * initialization and to look up GameObjects by their GUID during
+     * initialization and to look up GameObjects by their EntityHandle during
      * acquire/release operations.
      *
      * ## Lifecycle
      *
      * 1. **Configuration**: Add pool configurations via `addPoolConfig()`.
      * 2. **Initialization**: Call `init()` to create pools and populate them
-     *    with cloned prefab instances.
+     *    with cloned prefab instances. This **locks** the pools.
      * 3. **Runtime**: Use `acquire()` and `release()` to manage entity lifecycle.
+     *
+     * ## Pool Locking
+     *
+     * After `init()` completes, each pool is **locked**. A locked pool:
+     * - Cannot accept new EntityHandles via `addInactive()`
+     * - Has its sparse arrays sized based on min/max EntityIds
+     * - Is ready for O(1) acquire/release operations
+     *
+     * This design optimizes memory layout but means the pool size is fixed
+     * at initialization time.
+     *
+     * ## Trade-offs
+     *
+     * - **Fixed Capacity**: Pool size cannot grow after initialization. If more
+     *   entities are needed, `acquire()` returns nullptr when exhausted.
+     * - **Memory Overhead**: Sparse arrays are sized for the EntityId range,
+     *   which may waste memory if EntityIds are not contiguous.
+     * - **Initialization Cost**: All prefab clones are created upfront during
+     *   `init()`, which may cause a startup delay for large pools.
      *
      * ## Example
      *
@@ -64,7 +83,7 @@ export namespace helios::engine::runtime::pooling {
      *     bullet->get<ComposeTransformComponent>()->setTranslation(spawnPos);
      * }
      *
-     * poolManager.release(bulletPoolId, bullet->guid());
+     * poolManager.release(bulletPoolId, bullet->entityHandle());
      * ```
      *
      * @see GameObjectPool
@@ -85,7 +104,7 @@ export namespace helios::engine::runtime::pooling {
          * @brief Non-owning pointer to the associated GameWorld.
          *
          * @details Set during `init()`. Used for cloning prefabs and looking up
-         * GameObjects by GUID.
+         * GameObjects by their EntityHandle.
          */
         helios::engine::runtime::world::GameWorld* gameWorld_ = nullptr;
 
@@ -100,20 +119,30 @@ export namespace helios::engine::runtime::pooling {
             std::unique_ptr<GameObjectPoolConfig>> poolConfigs_;
 
         /**
-         * @brief Populates a pool with cloned prefab instances.
+         * @brief Populates a pool with cloned prefab instances and locks it.
          *
          * @details Clones the prefab GameObject until the pool reaches its
-         * configured capacity. Each clone is immediately deactivated and
-         * marked as inactive in the pool.
+         * configured capacity. Each clone is:
+         * 1. Added to the GameWorld
+         * 2. Immediately deactivated (`setActive(false)`)
+         * 3. Prepared for pooling (`onRelease()`)
+         * 4. Registered as inactive in the pool
+         *
+         * After all clones are created, the pool is **locked** via `lock()`.
+         * Locking finalizes the sparse array sizing based on the min/max EntityIds
+         * and enables O(1) acquire/release operations. Once locked, no new
+         * EntityHandles can be added to the pool.
          *
          * @param gameObjectPoolId The pool to fill.
          * @param gameObjectPrefab The prefab to clone.
+         *
+         * @post The pool is locked and ready for acquire/release operations.
          */
         void fillPool(
             const helios::engine::core::data::GameObjectPoolId gameObjectPoolId,
             const helios::engine::ecs::GameObject& gameObjectPrefab
         ) {
-            helios::util::Guid guid{helios::core::types::no_init};
+            helios::engine::ecs::EntityHandle entityHandle{};
 
             auto* gameObjectPool = pool(gameObjectPoolId);
             
@@ -125,9 +154,11 @@ export namespace helios::engine::runtime::pooling {
                 if (go) {
                     go->setActive(false);
                     go->onRelease();
-                    gameObjectPool->addInactive(go->guid());
+                    gameObjectPool->addInactive(go->entityHandle());
                 }
             }
+
+            gameObjectPool->lock();
         }
         
     public:
@@ -182,20 +213,20 @@ export namespace helios::engine::runtime::pooling {
          * GameWorld. Calls `onRelease()` on the GameObject to allow cleanup.
          *
          * @param gameObjectPoolId The pool that owns this entity.
-         * @param entityId The GUID of the entity to release.
+         * @param entityHandle The EntityHandle of the entity to release.
          *
          * @return Pointer to the released GameObject, or nullptr if not found.
          */
         helios::engine::ecs::GameObject* release(
             const helios::engine::core::data::GameObjectPoolId gameObjectPoolId,
-            const helios::util::Guid& entityId
+            const helios::engine::ecs::EntityHandle& entityHandle
         ) {
             auto* gameObjectPool = pool(gameObjectPoolId);
             
-            helios::engine::ecs::GameObject* worldGo = gameWorld_->find(entityId);
+            helios::engine::ecs::GameObject* worldGo = gameWorld_->find(entityHandle);
 
             if (worldGo) {
-                if (gameObjectPool->release(entityId)) {
+                if (gameObjectPool->release(entityHandle)) {
                     worldGo->onRelease();
                     worldGo->setActive(false);
                 }
@@ -210,9 +241,6 @@ export namespace helios::engine::runtime::pooling {
          * @details Retrieves the next available inactive entity, activates it,
          * and calls `onAcquire()` to prepare it for use.
          *
-         * If an entity's GUID is no longer valid in the GameWorld, it is removed
-         * from the pool and the next entity is tried.
-         *
          * @param gameObjectPoolId The pool to acquire from.
          *
          * @return Pointer to the acquired GameObject, or nullptr if pool exhausted.
@@ -220,13 +248,13 @@ export namespace helios::engine::runtime::pooling {
         [[nodiscard]] helios::engine::ecs::GameObject* acquire(
             const helios::engine::core::data::GameObjectPoolId gameObjectPoolId
         )  {
-            helios::util::Guid guid{helios::core::types::no_init};
+            helios::engine::ecs::EntityHandle entityHandle{};
 
             auto* gameObjectPool = pool(gameObjectPoolId);
 
-            while (gameObjectPool->acquire(guid)) {
+            while (gameObjectPool->acquire(entityHandle)) {
 
-                auto* worldGo = gameWorld_->find(guid);
+                auto* worldGo = gameWorld_->find(entityHandle);
 
                 if (worldGo) {
                     worldGo->onAcquire();
@@ -234,9 +262,9 @@ export namespace helios::engine::runtime::pooling {
                 }
 
                 // we assume the pool is owned by this gameWorld,
-                // so removing this guid does not impact another gameWorld that is
+                // so removing this entityHandle does not impact another gameWorld that is
                 // using this pool
-                gameObjectPool->releaseAndRemove(guid);
+                gameObjectPool->releaseAndRemove(entityHandle);
             }
 
             return nullptr;

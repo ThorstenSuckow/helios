@@ -45,8 +45,27 @@ export namespace helios::engine::runtime::pooling {
      *
      * 1. **Configuration**: Add pool configurations via `addPoolConfig()`.
      * 2. **Initialization**: Call `init()` to create pools and populate them
-     *    with cloned prefab instances.
+     *    with cloned prefab instances. This **locks** the pools.
      * 3. **Runtime**: Use `acquire()` and `release()` to manage entity lifecycle.
+     *
+     * ## Pool Locking
+     *
+     * After `init()` completes, each pool is **locked**. A locked pool:
+     * - Cannot accept new EntityHandles via `addInactive()`
+     * - Has its sparse arrays sized based on min/max EntityIds
+     * - Is ready for O(1) acquire/release operations
+     *
+     * This design optimizes memory layout but means the pool size is fixed
+     * at initialization time.
+     *
+     * ## Trade-offs
+     *
+     * - **Fixed Capacity**: Pool size cannot grow after initialization. If more
+     *   entities are needed, `acquire()` returns nullptr when exhausted.
+     * - **Memory Overhead**: Sparse arrays are sized for the EntityId range,
+     *   which may waste memory if EntityIds are not contiguous.
+     * - **Initialization Cost**: All prefab clones are created upfront during
+     *   `init()`, which may cause a startup delay for large pools.
      *
      * ## Example
      *
@@ -100,14 +119,24 @@ export namespace helios::engine::runtime::pooling {
             std::unique_ptr<GameObjectPoolConfig>> poolConfigs_;
 
         /**
-         * @brief Populates a pool with cloned prefab instances.
+         * @brief Populates a pool with cloned prefab instances and locks it.
          *
          * @details Clones the prefab GameObject until the pool reaches its
-         * configured capacity. Each clone is immediately deactivated and
-         * marked as inactive in the pool.
+         * configured capacity. Each clone is:
+         * 1. Added to the GameWorld
+         * 2. Immediately deactivated (`setActive(false)`)
+         * 3. Prepared for pooling (`onRelease()`)
+         * 4. Registered as inactive in the pool
+         *
+         * After all clones are created, the pool is **locked** via `lock()`.
+         * Locking finalizes the sparse array sizing based on the min/max EntityIds
+         * and enables O(1) acquire/release operations. Once locked, no new
+         * EntityHandles can be added to the pool.
          *
          * @param gameObjectPoolId The pool to fill.
          * @param gameObjectPrefab The prefab to clone.
+         *
+         * @post The pool is locked and ready for acquire/release operations.
          */
         void fillPool(
             const helios::engine::core::data::GameObjectPoolId gameObjectPoolId,
@@ -128,6 +157,8 @@ export namespace helios::engine::runtime::pooling {
                     gameObjectPool->addInactive(go->entityHandle());
                 }
             }
+
+            gameObjectPool->lock();
         }
         
     public:

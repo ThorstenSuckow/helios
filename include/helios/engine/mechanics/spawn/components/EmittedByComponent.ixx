@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.mechanics.spawn.components.EmittedByComponent;
 
-import helios.engine.ecs.CloneableComponent;
+
 import helios.engine.core.data.SpawnProfileId;
 import helios.core.types;
 import helios.util;
@@ -23,14 +23,42 @@ export namespace helios::engine::mechanics::spawn::components {
      * and its source entity (e.g., the player or enemy that fired it). This enables
      * game logic to attribute actions like damage or scoring to the correct source.
      */
-    class EmittedByComponent : public helios::engine::ecs::CloneableComponent<EmittedByComponent> {
+    class EmittedByComponent {
 
         /**
          * @brief Handle of the entity that emitted this object.
          */
         helios::engine::ecs::EntityHandle source_{};
 
+        /**
+         * @brief Whether this component is enabled.
+         */
+        bool isEnabled_ = true;
+
     public:
+
+        /**
+         * @brief Checks whether this component is enabled.
+         *
+         * @return True if enabled, false otherwise.
+         */
+        [[nodiscard]] bool isEnabled() const noexcept {
+            return isEnabled_;
+        }
+
+        /**
+         * @brief Enables this component.
+         */
+        void enable() noexcept {
+            isEnabled_ = true;
+        }
+
+        /**
+         * @brief Disables this component.
+         */
+        void disable() noexcept {
+            isEnabled_ = false;
+        }
 
         /**
          * @brief Default constructor.
@@ -42,14 +70,18 @@ export namespace helios::engine::mechanics::spawn::components {
          *
          * @param other The component to copy from (state is not copied).
          */
-        explicit EmittedByComponent(const EmittedByComponent& other) {}
+        EmittedByComponent(const EmittedByComponent& other) {}
+
+        EmittedByComponent& operator=(const EmittedByComponent&) = default;
+        EmittedByComponent(EmittedByComponent&&) noexcept = default;
+        EmittedByComponent& operator=(EmittedByComponent&&) noexcept = default;
 
         /**
          * @brief Sets the source entity that emitted this object.
          *
          * @param source Handle of the emitting entity.
          */
-        void setSource(const helios::engine::ecs::EntityHandle& source) noexcept {
+        void setSource(const helios::engine::ecs::EntityHandle source) noexcept {
             source_ = source;
         }
 
@@ -70,16 +102,20 @@ export namespace helios::engine::mechanics::spawn::components {
         }
 
         /**
-         * @copydoc CloneableComponent::onAcquire()
+         * @brief Called when this entity is acquired from a pool.
+         *
+         * @details Resets the source handle to prevent stale references.
          */
-        void onAcquire() noexcept override {
+        void onAcquire() noexcept {
             reset();
         }
 
         /**
-         * @copydoc CloneableComponent::onRelease()
+         * @brief Called when this entity is released back to a pool.
+         *
+         * @details Resets the source handle to prevent stale references.
          */
-        void onRelease() noexcept override {
+        void onRelease() noexcept {
             reset();
         }
 

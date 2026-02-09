@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.mechanics.spawn.components.SpawnedByProfileComponent;
 
-import helios.engine.ecs.CloneableComponent;
+
 import helios.engine.core.data.SpawnProfileId;
 import helios.core.types;
 
@@ -25,22 +25,22 @@ export namespace helios::engine::mechanics::spawn::components {
      * Example usage:
      * ```cpp
      * // During prefab setup
-     * auto prefab = std::make_unique<GameObject>();
-     * prefab->add<SpawnedByProfileComponent>();
+     * auto prefab = gameWorld.addGameObject();
+     * prefab.add<SpawnedByProfileComponent>();
      *
      * // During spawn (in SpawnManager)
-     * auto* comp = entity->get<SpawnedByProfileComponent>();
+     * auto* comp = entity.get<SpawnedByProfileComponent>();
      * comp->setSpawnProfileId(profileId);
      *
      * // During despawn
-     * auto profileId = entity->get<SpawnedByProfileComponent>()->spawnProfileId();
-     * poolManager.release(profileId, entity->guid());
+     * auto profileId = entity.get<SpawnedByProfileComponent>()->spawnProfileId();
+     * poolManager.release(profileId, entity.entityHandle());
      * ```
      *
      * @see SpawnProfileId
      * @see GameObjectPoolManager
      */
-    class SpawnedByProfileComponent : public helios::engine::ecs::CloneableComponent<SpawnedByProfileComponent> {
+    class SpawnedByProfileComponent  {
 
         /**
          * @brief The spawn profile ID that created this entity.
@@ -49,7 +49,35 @@ export namespace helios::engine::mechanics::spawn::components {
          */
         helios::engine::core::data::SpawnProfileId spawnProfileId_{helios::core::types::no_init};
 
+        /**
+         * @brief Whether this component is enabled.
+         */
+        bool isEnabled_ = true;
+
     public:
+
+        /**
+         * @brief Checks whether this component is enabled.
+         *
+         * @return True if enabled, false otherwise.
+         */
+        [[nodiscard]] bool isEnabled() const noexcept {
+            return isEnabled_;
+        }
+
+        /**
+         * @brief Enables this component.
+         */
+        void enable() noexcept {
+            isEnabled_ = true;
+        }
+
+        /**
+         * @brief Disables this component.
+         */
+        void disable() noexcept {
+            isEnabled_ = false;
+        }
 
         /**
          * @brief Default constructor.
@@ -61,8 +89,12 @@ export namespace helios::engine::mechanics::spawn::components {
          *
          * @param other The component to copy from.
          */
-        explicit SpawnedByProfileComponent(const SpawnedByProfileComponent& other)
+        SpawnedByProfileComponent(const SpawnedByProfileComponent& other)
             : spawnProfileId_(other.spawnProfileId_) {}
+
+        SpawnedByProfileComponent& operator=(const SpawnedByProfileComponent&) = default;
+        SpawnedByProfileComponent(SpawnedByProfileComponent&&) noexcept = default;
+        SpawnedByProfileComponent& operator=(SpawnedByProfileComponent&&) noexcept = default;
 
         /**
          * @brief Returns the spawn profile ID.

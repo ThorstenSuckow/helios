@@ -61,7 +61,7 @@ export namespace helios::engine::modules::physics::motion::commands {
          *
          * @param gameObject The target entity with a Move2DComponent.
          */
-        void execute(helios::engine::ecs::GameObject& gameObject) const noexcept override {
+        void execute(helios::engine::ecs::GameObject gameObject) const noexcept override {
 
             auto* moveComponent2D = gameObject.get<helios::engine::modules::physics::motion::components::Move2DComponent>();
 

@@ -9,7 +9,7 @@ module;
 
 export module helios.engine.modules.physics.motion.components.DirectionComponent;
 
-import helios.engine.ecs.CloneableComponent;
+
 
 import helios.math;
 
@@ -23,14 +23,42 @@ export namespace helios::engine::modules::physics::motion::components {
      * movement direction, facing direction, or other vector-based properties.
      * It enforces normalization of the stored vector.
      */
-    class  DirectionComponent : public helios::engine::ecs::CloneableComponent<DirectionComponent> {
+    class  DirectionComponent {
 
         /**
          * @brief The stored normalized direction vector.
          */
         helios::math::vec3f direction_{};
 
+        /**
+         * @brief Whether this component is enabled.
+         */
+        bool isEnabled_ = true;
+
     public:
+
+        /**
+         * @brief Checks whether this component is enabled.
+         *
+         * @return True if enabled, false otherwise.
+         */
+        [[nodiscard]] bool isEnabled() const noexcept {
+            return isEnabled_;
+        }
+
+        /**
+         * @brief Enables this component.
+         */
+        void enable() noexcept {
+            isEnabled_ = true;
+        }
+
+        /**
+         * @brief Disables this component.
+         */
+        void disable() noexcept {
+            isEnabled_ = false;
+        }
 
         /**
          * @brief Default constructor.
@@ -42,7 +70,11 @@ export namespace helios::engine::modules::physics::motion::components {
          *
          * @param other The component to copy from.
          */
-        explicit DirectionComponent(const DirectionComponent& other) : direction_(other.direction()) {}
+        DirectionComponent(const DirectionComponent& other) : direction_(other.direction()) {}
+
+        DirectionComponent& operator=(const DirectionComponent&) = default;
+        DirectionComponent(DirectionComponent&&) noexcept = default;
+        DirectionComponent& operator=(DirectionComponent&&) noexcept = default;
 
         /**
          * @brief Sets the direction vector.

@@ -10,17 +10,18 @@ This module provides the foundational classes for the composition-based game arc
 
 | Class | Purpose |
 |-------|---------|
-| `GameObject` | Container for components representing a game entity |
-| `Component` | Base class for data containers attached to GameObjects |
-| `CloneableComponent` | CRTP base for components that support cloning |
-| `System` | Abstract base for logic processors (registered with `GameLoop`) |
-| `Updatable` | Interface for per-frame updatable objects |
-| `EntityRegistry` | Global registry for entity handle allocation and validation |
+| `GameObject` | Lightweight entity facade (~16 bytes, pass-by-value) |
+| `EntityHandle` | Versioned handle for safe entity references (8 bytes) |
+| `EntityRegistry` | Handle allocation and validation |
 | `EntityManager` | Unified interface for entity creation and component storage |
-| `EntityPool<T>` | Sparse-set based pool for efficient entity storage and iteration |
-| `EntityHandle` | Versioned handle for safe entity references |
-| `SparseSetBase` | Type-erased base for polymorphic sparse set access |
 | `SparseSet<T>` | Generic O(1) data structure for component storage |
+| `SparseSetBase` | Type-erased base for polymorphic sparse set access |
+| `View` | Component-based entity queries |
+| `System` | Abstract base for logic processors |
+| `Updatable` | Interface for per-frame updatable objects |
+| `ComponentOps` | Function pointers for lifecycle callbacks |
+| `ComponentOpsRegistry` | Global registry mapping type IDs to ComponentOps |
+| `ComponentReflector` | Compile-time type registration |
 | `Traits` | Compile-time concepts for component lifecycle hooks |
 
 ## Component Storage Model
@@ -204,12 +205,12 @@ helios::engine::runtime::world::GameWorld world;
 
 // Add entity with components
 auto entity = std::make_unique<helios::engine::ecs::GameObject>();
-entity->add<Move2DComponent>();
-entity->add<SceneNodeComponent>(sceneNode);
+entity.add<Move2DComponent>();
+entity.add<SceneNodeComponent>(sceneNode);
 auto* player = world.addGameObject(std::move(entity));
 
 // Query entities by component
-for (auto [obj, move] : world.find<Move2DComponent>().each()) {
+for (auto [obj, move] : world.find<Move2DComponent>()) {
     // Process matching entities
 }
 ```

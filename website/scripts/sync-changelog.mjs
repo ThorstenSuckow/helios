@@ -208,24 +208,29 @@ async function main() {
       meta: { title: 'Spawn System', description: 'Entity lifecycle management with spawn scheduling, profiles, behaviors, and pool integration.', slug: '/core-concepts/spawn-system', tags: ['gameplay', 'architecture', 'spawn'], keywords: ['helios', 'spawn system', 'object pooling', 'entity lifecycle', 'SpawnManager', 'SpawnScheduler'], sidebar_label: 'Spawn System', sidebar_position: 7 }
     },
     {
+      src: path.join(repoRoot, 'docs', 'core-concepts', 'object-pooling.md'),
+      dest: path.join(websiteRoot, 'docs', 'core-concepts', 'object-pooling.md'),
+      meta: { title: 'Object Pooling', description: 'Efficient entity lifecycle management with pre-allocated pools for frequently spawned objects.', slug: '/core-concepts/object-pooling', tags: ['gameplay', 'architecture', 'pooling'], keywords: ['helios', 'object pooling', 'GameObjectPool', 'entity recycling', 'prefab', 'acquire', 'release'], sidebar_label: 'Object Pooling', sidebar_position: 8 }
+    },
+    {
       src: path.join(repoRoot, 'docs', 'core-concepts', 'gameobject-builder.md'),
       dest: path.join(websiteRoot, 'docs', 'core-concepts', 'gameobject-builder.md'),
-      meta: { title: 'GameObject Builder', description: 'Fluent builder pattern for constructing GameObjects with their associated components.', slug: '/core-concepts/gameobject-builder', tags: ['gameplay', 'architecture', 'builder'], keywords: ['helios', 'builder pattern', 'GameObjectFactory', 'fluent API', 'entity construction'], sidebar_label: 'GameObject Builder', sidebar_position: 8 }
+      meta: { title: 'GameObject Builder', description: 'Fluent builder pattern for constructing GameObjects with their associated components.', slug: '/core-concepts/gameobject-builder', tags: ['gameplay', 'architecture', 'builder'], keywords: ['helios', 'builder pattern', 'GameObjectFactory', 'fluent API', 'entity construction'], sidebar_label: 'GameObject Builder', sidebar_position: 9 }
     },
     {
       src: path.join(repoRoot, 'docs', 'core-concepts', 'text-rendering.md'),
       dest: path.join(websiteRoot, 'docs', 'core-concepts', 'text-rendering.md'),
-      meta: { title: 'Text Rendering', description: 'GPU-accelerated text rendering with FreeType and OpenGL.', slug: '/core-concepts/text-rendering', tags: ['rendering', 'text', 'freetype'], keywords: ['helios', 'text rendering', 'FreeType', 'OpenGL', 'glyph', 'font'], sidebar_label: 'Text Rendering', sidebar_position: 9 }
+      meta: { title: 'Text Rendering', description: 'GPU-accelerated text rendering with FreeType and OpenGL.', slug: '/core-concepts/text-rendering', tags: ['rendering', 'text', 'freetype'], keywords: ['helios', 'text rendering', 'FreeType', 'OpenGL', 'glyph', 'font'], sidebar_label: 'Text Rendering', sidebar_position: 10 }
     },
     {
       src: path.join(repoRoot, 'docs', 'core-concepts', 'sparse-set.md'),
       dest: path.join(websiteRoot, 'docs', 'core-concepts', 'sparse-set.md'),
-      meta: { title: 'Sparse Set', description: 'Generic O(1) data structure for efficient entity-component storage in the ECS.', slug: '/core-concepts/sparse-set', tags: ['ecs', 'architecture', 'data-structure'], keywords: ['helios', 'sparse set', 'ECS', 'component storage', 'swap-and-pop', 'O(1)'], sidebar_label: 'Sparse Set', sidebar_position: 10 }
+      meta: { title: 'Sparse Set', description: 'Generic O(1) data structure for efficient entity-component storage in the ECS.', slug: '/core-concepts/sparse-set', tags: ['ecs', 'architecture', 'data-structure'], keywords: ['helios', 'sparse set', 'ECS', 'component storage', 'swap-and-pop', 'O(1)'], sidebar_label: 'Sparse Set', sidebar_position: 11 }
     },
     {
       src: path.join(repoRoot, 'docs', 'core-concepts', 'component-registry.md'),
       dest: path.join(websiteRoot, 'docs', 'core-concepts', 'component-registry.md'),
-      meta: { title: 'Component Registry', description: 'Modular component registration system for runtime reflection, cloning, and lifecycle hooks.', slug: '/core-concepts/component-registry', tags: ['ecs', 'architecture', 'registry'], keywords: ['helios', 'component registry', 'ECS', 'reflection', 'cloning', 'lifecycle'], sidebar_label: 'Component Registry', sidebar_position: 11 }
+      meta: { title: 'Component Registry', description: 'Modular component registration system for runtime reflection, cloning, and lifecycle hooks.', slug: '/core-concepts/component-registry', tags: ['ecs', 'architecture', 'registry'], keywords: ['helios', 'component registry', 'ECS', 'reflection', 'cloning', 'lifecycle'], sidebar_label: 'Component Registry', sidebar_position: 12 }
     },
     {
       src: path.join(repoRoot, 'docs', 'core-concepts', 'component-lifecycle.md'),
@@ -326,6 +331,11 @@ async function main() {
       src: path.join(repoRoot, 'examples', 'render_text_demo', 'README.md'),
       dest: path.join(websiteRoot, 'docs', 'examples', 'render-text-demo.md'),
       meta: { title: 'Text Rendering Demo', description: 'Example: FreeType-based text rendering with dynamic updates, font loading, and orthographic projection.', slug: '/examples/render-text-demo', tags: ['examples', 'text', 'rendering', 'freetype'], keywords: ['helios', 'text rendering', 'FreeType', 'font', 'glyph', 'OpenGL'], sidebar_label: 'Text Rendering' }
+    },
+    {
+      src: path.join(repoRoot, 'examples', 'scoring_demo', 'README.md'),
+      dest: path.join(websiteRoot, 'docs', 'examples', 'scoring-demo.md'),
+      meta: { title: 'Scoring Demo', description: 'Example: Score pools, score observers, UI text rendering, and kill attribution with health/damage mechanics.', slug: '/examples/scoring-demo', tags: ['examples', 'scoring', 'ui', 'gameplay'], keywords: ['helios', 'scoring', 'score pool', 'UI', 'text rendering', 'health', 'damage'], sidebar_label: 'Scoring Demo' }
     },
   ];
 

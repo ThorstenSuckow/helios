@@ -4,7 +4,7 @@
  */
 module;
 
-#include <helios/engine/ecs/query/GameObjectView.h>
+
 #include <algorithm>
 #include <cassert>
 #include <cmath>
@@ -22,6 +22,8 @@ import helios.engine.modules.physics.motion.components.DirectionComponent;
 import helios.engine.modules.spatial.transform.components.RotationStateComponent;
 
 import helios.engine.runtime.world.UpdateContext;
+
+import helios.engine.mechanics.lifecycle.components.Active;
 
 export namespace helios::engine::modules::physics::motion::systems {
 
@@ -118,11 +120,12 @@ export namespace helios::engine::modules::physics::motion::systems {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
 
-            for (auto [entity, hc, rsc, dc] : gameWorld_->find<
+            for (auto [entity, hc, rsc, dc, active] : gameWorld_->view<
                 helios::engine::modules::physics::motion::components::SteeringComponent,
                 helios::engine::modules::spatial::transform::components::RotationStateComponent,
-                helios::engine::modules::physics::motion::components::DirectionComponent
-            >().each()) {
+                helios::engine::modules::physics::motion::components::DirectionComponent,
+                helios::engine::mechanics::lifecycle::components::Active
+            >().whereEnabled()) {
 
 
                 if (hc->stateChanged()) {

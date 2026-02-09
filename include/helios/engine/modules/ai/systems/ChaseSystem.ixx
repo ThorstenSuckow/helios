@@ -4,7 +4,7 @@
  */
 module;
 
-#include <helios/engine/ecs/query/GameObjectView.h>
+#include <algorithm>
 
 export module helios.engine.modules.ai.systems.ChaseSystem;
 
@@ -21,6 +21,9 @@ import helios.engine.modules.ai.components.ChaseComponent;
 import helios.engine.modules.physics.motion.components.SteeringComponent;
 
 import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
+
+import helios.engine.mechanics.lifecycle.components.Active;
+
 
 export namespace helios::engine::modules::ai::systems {
 
@@ -48,15 +51,16 @@ export namespace helios::engine::modules::ai::systems {
          */
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
-            for (auto [entity, sc, cc, tsc] : gameWorld_->find<
+            for (auto [entity, sc, cc, tsc, active] : gameWorld_->view<
                 helios::engine::modules::physics::motion::components::SteeringComponent,
                 helios::engine::modules::ai::components::ChaseComponent,
-                helios::engine::modules::spatial::transform::components::TranslationStateComponent
-            >().each()) {
+                helios::engine::modules::spatial::transform::components::TranslationStateComponent,
+                helios::engine::mechanics::lifecycle::components::Active
+            >().whereEnabled()) {
 
                 const auto entityHandle = cc->target();
 
-                const auto* go = gameWorld_->find(entityHandle);
+                const auto go = gameWorld_->find(entityHandle);
 
                 if (!go) {
                     continue;

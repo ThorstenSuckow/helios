@@ -8,6 +8,7 @@ module;
 #include <memory>
 #include <stdexcept>
 #include <unordered_map>
+#include <optional>
 
 export module helios.engine.runtime.pooling.GameObjectPoolManager;
 
@@ -72,6 +73,12 @@ export namespace helios::engine::runtime::pooling {
      * ```cpp
      * GameObjectPoolManager poolManager;
      *
+     * // Create prefab
+     * auto bulletPrefab = gameWorld.addGameObject();
+     * bulletPrefab.add<RenderableComponent>(mesh, material);
+     * bulletPrefab.add<Move2DComponent>();
+     * bulletPrefab.setActive(false);
+     *
      * auto config = std::make_unique<GameObjectPoolConfig>(
      *     bulletPoolId, bulletPrefab, 100
      * );
@@ -79,10 +86,13 @@ export namespace helios::engine::runtime::pooling {
      *
      * poolManager.init(gameWorld);
      *
-     * if (auto* bullet = poolManager.acquire(bulletPoolId)) {
-     *     bullet->get<ComposeTransformComponent>()->setTranslation(spawnPos);
+     * // Acquire returns std::optional<GameObject>
+     * if (auto bullet = poolManager.acquire(bulletPoolId)) {
+     *     bullet->get<TranslationStateComponent>()->setTranslation(spawnPos);
+     *     bullet->setActive(true);
      * }
      *
+     * // Release back to pool
      * poolManager.release(bulletPoolId, bullet->entityHandle());
      * ```
      *
@@ -140,7 +150,7 @@ export namespace helios::engine::runtime::pooling {
          */
         void fillPool(
             const helios::engine::core::data::GameObjectPoolId gameObjectPoolId,
-            const helios::engine::ecs::GameObject& gameObjectPrefab
+            helios::engine::ecs::GameObject gameObjectPrefab
         ) {
             helios::engine::ecs::EntityHandle entityHandle{};
 
@@ -150,12 +160,10 @@ export namespace helios::engine::runtime::pooling {
             const size_t space = used < gameObjectPool->size() ? gameObjectPool->size() - used : 0;
 
             for (size_t i = 0; i < space; i++) {
-                helios::engine::ecs::GameObject* go = gameWorld_->clone(gameObjectPrefab);
-                if (go) {
-                    go->setActive(false);
-                    go->onRelease();
-                    gameObjectPool->addInactive(go->entityHandle());
-                }
+                helios::engine::ecs::GameObject go = gameWorld_->clone(gameObjectPrefab);
+                go.setActive(false);
+                go.onRelease();
+                gameObjectPool->addInactive(go.entityHandle());
             }
 
             gameObjectPool->lock();
@@ -210,20 +218,22 @@ export namespace helios::engine::runtime::pooling {
          * @brief Releases a GameObject back to its pool.
          *
          * @details Marks the entity as inactive in both the pool and the
-         * GameWorld. Calls `onRelease()` on the GameObject to allow cleanup.
+         * GameWorld. Calls `onRelease()` on the GameObject to trigger
+         * component cleanup hooks, then deactivates it.
          *
          * @param gameObjectPoolId The pool that owns this entity.
          * @param entityHandle The EntityHandle of the entity to release.
          *
-         * @return Pointer to the released GameObject, or nullptr if not found.
+         * @return Optional containing the released GameObject if found,
+         *         std::nullopt if the entity was not found in the GameWorld.
          */
-        helios::engine::ecs::GameObject* release(
+        std::optional<helios::engine::ecs::GameObject> release(
             const helios::engine::core::data::GameObjectPoolId gameObjectPoolId,
             const helios::engine::ecs::EntityHandle& entityHandle
         ) {
             auto* gameObjectPool = pool(gameObjectPoolId);
             
-            helios::engine::ecs::GameObject* worldGo = gameWorld_->find(entityHandle);
+            auto worldGo = gameWorld_->find(entityHandle);
 
             if (worldGo) {
                 if (gameObjectPool->release(entityHandle)) {
@@ -238,14 +248,19 @@ export namespace helios::engine::runtime::pooling {
         /**
          * @brief Acquires an inactive GameObject from the pool.
          *
-         * @details Retrieves the next available inactive entity, activates it,
-         * and calls `onAcquire()` to prepare it for use.
+         * @details Retrieves the next available inactive entity and calls
+         * `onAcquire()` to trigger component initialization hooks. The caller
+         * is responsible for activating the entity via `setActive(true)`.
+         *
+         * If an acquired entity is no longer valid in the GameWorld (stale handle),
+         * it is removed from the pool and the next available entity is tried.
          *
          * @param gameObjectPoolId The pool to acquire from.
          *
-         * @return Pointer to the acquired GameObject, or nullptr if pool exhausted.
+         * @return Optional containing the acquired GameObject if available,
+         *         std::nullopt if the pool is exhausted.
          */
-        [[nodiscard]] helios::engine::ecs::GameObject* acquire(
+        [[nodiscard]] std::optional<helios::engine::ecs::GameObject> acquire(
             const helios::engine::core::data::GameObjectPoolId gameObjectPoolId
         )  {
             helios::engine::ecs::EntityHandle entityHandle{};
@@ -254,7 +269,7 @@ export namespace helios::engine::runtime::pooling {
 
             while (gameObjectPool->acquire(entityHandle)) {
 
-                auto* worldGo = gameWorld_->find(entityHandle);
+                auto worldGo = gameWorld_->find(entityHandle);
 
                 if (worldGo) {
                     worldGo->onAcquire();
@@ -267,7 +282,7 @@ export namespace helios::engine::runtime::pooling {
                 gameObjectPool->releaseAndRemove(entityHandle);
             }
 
-            return nullptr;
+            return std::nullopt;
 
         }
 
@@ -289,7 +304,7 @@ export namespace helios::engine::runtime::pooling {
                     poolConfig->amount);
 
                 pools_.addPool(gameObjectPoolId, std::move(pool));
-                fillPool(gameObjectPoolId, *poolConfig->prefab);
+                fillPool(gameObjectPoolId, poolConfig->prefab);
             }
 
         };

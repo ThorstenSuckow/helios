@@ -34,7 +34,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         /**
          * @brief Non-owning pointer to the target GameObject.
          */
-        helios::engine::ecs::GameObject* gameObject_;
+        helios::engine::ecs::GameObject gameObject_;
 
         /**
          * @brief The shape geometry to render.
@@ -79,7 +79,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @param gameObject Target GameObject to configure.
          */
         explicit MeshRenderableConfig(
-            helios::engine::ecs::GameObject* gameObject
+            helios::engine::ecs::GameObject gameObject
         ) : gameObject_(gameObject) {}
 
         /**
@@ -167,9 +167,12 @@ export namespace helios::engine::builder::gameObject::builders::configs {
 
             const auto renderPrototype = std::make_shared<helios::rendering::RenderPrototype>(material, mesh);
 
-            gameObject_->add<helios::engine::modules::rendering::renderable::components::RenderableComponent>(
+            auto& rc = gameObject_.add<helios::engine::modules::rendering::renderable::components::RenderableComponent>(
                 std::make_shared<helios::rendering::mesh::MeshRenderable>(renderPrototype)
             );
+
+            auto& msc = gameObject_.getOrAdd<helios::engine::modules::rendering::model::components::ModelAabbComponent>();
+            msc.setAabb(rc.renderable().localAABB());
 
             return *this;
         }

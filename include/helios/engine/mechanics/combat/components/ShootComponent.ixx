@@ -9,7 +9,7 @@ module;
 export module helios.engine.mechanics.combat.components.ShootComponent;
 
 import helios.math;
-import helios.engine.ecs.Component;
+
 import helios.engine.ecs.GameObject;
 import helios.engine.mechanics.combat.components.Aim2DComponent;
 import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
@@ -35,7 +35,7 @@ export namespace helios::engine::mechanics::combat::components {
      * shootComponent->shoot(1.0f);
      * ```
      */
-    class ShootComponent : public helios::engine::ecs::Component {
+    class ShootComponent{
 
     protected:
 
@@ -46,20 +46,6 @@ export namespace helios::engine::mechanics::combat::components {
          * Controls whether projectiles are spawned during update().
          */
         float intensity_ = 0.0f;
-
-        /**
-         * @brief Pointer to the aim component for direction.
-         *
-         * @details Set during onAttach(). Must not be null when shooting.
-         */
-        helios::engine::mechanics::combat::components::Aim2DComponent* aimComponent_ = nullptr;
-
-        /**
-         * @brief Pointer to the scene node component for spawn position.
-         *
-         * @details Set during onAttach(). Must not be null when shooting.
-         */
-        helios::engine::modules::spatial::transform::components::ComposeTransformComponent* transformComponent_ = nullptr;
 
         /**
          * @brief Cooldown interval between shots, in seconds.
@@ -96,29 +82,46 @@ export namespace helios::engine::mechanics::combat::components {
          */
         float fireRate_ = 1.0f;
 
+        /**
+         * @brief Whether this component is enabled.
+         */
+        bool isEnabled_ = true;
 
     public:
+
+        /**
+         * @brief Checks whether this component is enabled.
+         *
+         * @return True if enabled, false otherwise.
+         */
+        [[nodiscard]] bool isEnabled() const noexcept {
+            return isEnabled_;
+        }
+
+        /**
+         * @brief Enables this component.
+         */
+        void enable() noexcept {
+            isEnabled_ = true;
+        }
+
+        /**
+         * @brief Disables this component.
+         */
+        void disable() noexcept {
+            isEnabled_ = false;
+        }
 
         /**
          * @brief Constructs a new ShootComponent with default settings.
          */
         ShootComponent() = default;
 
-        /**
-         * @brief Called when the component is attached to a GameObject.
-         *
-         * @details Retrieves references to required sibling components.
-         *
-         * @param gameObject The GameObject this component is being attached to.
-         */
-        void onAttach(::helios::engine::ecs::GameObject* gameObject) noexcept override {
-            Component::onAttach(gameObject);
+        ShootComponent(const ShootComponent&) = default;
+        ShootComponent& operator=(const ShootComponent&) = default;
+        ShootComponent(ShootComponent&&) noexcept = default;
+        ShootComponent& operator=(ShootComponent&&) noexcept = default;
 
-            aimComponent_ = gameObject->get<helios::engine::mechanics::combat::components::Aim2DComponent>();
-            transformComponent_ = gameObject->get<helios::engine::modules::spatial::transform::components::ComposeTransformComponent>();
-            assert(aimComponent_ != nullptr && "Unexpected nullptr for aimComponent_");
-            assert(transformComponent_ != nullptr && "Unexpected nullptr for transformComponent_");
-        }
 
         /**
          * @brief Sets the shooting intensity.
@@ -131,7 +134,7 @@ export namespace helios::engine::mechanics::combat::components {
          */
         void shoot(const float intensity, const helios::math::vec3f sourceVelocity) {
 
-            if (intensity <= helios::math::EPSILON_LENGTH || !aimComponent_) {
+            if (intensity <= helios::math::EPSILON_LENGTH) {
                 intensity_ = 0.0f;
                 return;
             }
@@ -236,14 +239,7 @@ export namespace helios::engine::mechanics::combat::components {
             cooldownDelta_ = 1.0f/fireRate_;
         }
 
-        /**
-         * @brief Returns the ComponentTypeId for this component's type.
-         *
-         * @return The ComponentTypeId for this Component's type.
-         */
-        [[nodiscard]] helios::engine::core::data::ComponentTypeId typeId() const noexcept final {
-            return helios::engine::core::data::ComponentTypeId::id<Aim2DComponent>();
-        };
+
     };
 
 

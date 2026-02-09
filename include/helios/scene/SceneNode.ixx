@@ -81,7 +81,7 @@ export namespace helios::scene {
          * @brief A shared pointer to the Renderable this node represents in the
          * SceneGraph. May be nullptr if this node does not represent a
          */
-        std::shared_ptr<helios::rendering::Renderable> renderable_;
+        std::shared_ptr<helios::rendering::Renderable> renderable_ = nullptr;
 
         /**
          * @brief The parent node of **this** node.
@@ -550,7 +550,7 @@ export namespace helios::scene {
              *
              * @param active true to consider this SceneNodefor rendering, otherwise false.
              */
-            void setActive(bool active) noexcept {
+            void setActive(const bool active) noexcept {
                 isActive_ = active;
             }
      };

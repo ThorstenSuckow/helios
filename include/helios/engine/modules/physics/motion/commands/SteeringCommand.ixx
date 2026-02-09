@@ -62,7 +62,7 @@ export namespace helios::engine::modules::physics::motion::commands {
          *
          * @param gameObject The GameObject to apply the command to.
          */
-        void execute(helios::engine::ecs::GameObject& gameObject) const noexcept override {
+        void execute(helios::engine::ecs::GameObject gameObject) const noexcept override {
 
             auto* hc = gameObject.get<helios::engine::modules::physics::motion::components::SteeringComponent>();
 

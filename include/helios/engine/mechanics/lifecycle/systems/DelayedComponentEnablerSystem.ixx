@@ -4,7 +4,7 @@
  */
 module;
 
-#include <helios/engine/ecs/query/GameObjectView.h>
+
 #include <vector>
 
 export module helios.engine.mechanics.lifecycle.systems.DelayedComponentEnablerSystem;
@@ -14,6 +14,10 @@ import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.mechanics.lifecycle.components.DelayedComponentEnabler;
 import helios.engine.core.data.ComponentTypeId;
+
+import helios.engine.ecs.ComponentOpsRegistry;
+
+import helios.engine.mechanics.lifecycle.components.Active;
 
 export namespace helios::engine::mechanics::lifecycle::systems {
 
@@ -57,9 +61,10 @@ export namespace helios::engine::mechanics::lifecycle::systems {
 
             const float delta = updateContext.deltaTime();
 
-            for (auto [entity, dce] : gameWorld_->find<
-                helios::engine::mechanics::lifecycle::components::DelayedComponentEnabler
-            >().each()) {
+            for (auto [entity, dce, active] : gameWorld_->view<
+                helios::engine::mechanics::lifecycle::components::DelayedComponentEnabler,
+                helios::engine::mechanics::lifecycle::components::Active
+            >().whereEnabled()) {
 
                 sync_.clear();
 
@@ -72,10 +77,11 @@ export namespace helios::engine::mechanics::lifecycle::systems {
                     const auto componentTypeId = deferredComponent.componentTypeId;
 
                     if (deferredComponent.delta <= 0) {
-                        auto* cmp = entity->get(componentTypeId);
+                        auto* rawCmp = entity.raw(componentTypeId);
+                        auto ops = helios::engine::ecs::ComponentOpsRegistry::ops(componentTypeId);
 
-                        if (cmp) {
-                            cmp->enable();
+                        if (rawCmp && ops.enable) {
+                            ops.enable(rawCmp);
                         }
 
                         sync_.push_back(componentTypeId);

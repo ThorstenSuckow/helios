@@ -16,7 +16,7 @@ This module provides components that track and manage the activation state of ot
 
 ```cpp
 // Defer collision component activation by 0.5 seconds
-auto* enabler = entity->get<DelayedComponentEnabler>();
+auto* enabler = entity.get<DelayedComponentEnabler>();
 enabler->defer(ComponentTypeId::id<CollisionComponent>(), 0.5f);
 
 // Check currently deferred components

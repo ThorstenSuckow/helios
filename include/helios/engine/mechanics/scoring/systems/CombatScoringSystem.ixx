@@ -67,9 +67,9 @@ export namespace helios::engine::mechanics::scoring::systems {
 
                 auto& attackContext = event.attackContext().value();
 
-                const auto* enemy = updateContext.gameWorld().find(event.source());
+                const auto enemy = updateContext.gameWorld().find(event.source());
 
-                const auto* hitman = updateContext.gameWorld().find(attackContext.source);
+                const auto hitman = updateContext.gameWorld().find(attackContext.source);
 
                 if (!enemy || ! hitman) {
                     continue;
@@ -95,7 +95,7 @@ export namespace helios::engine::mechanics::scoring::systems {
 
                 logger_.info(
                     std::format("Entity {0} killed. Reward: {1}",
-                    hitman->guid().value(),
+                    hitman->entityHandle().entityId,
                     svc->score().value())
                 );
 

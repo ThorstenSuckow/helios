@@ -9,7 +9,7 @@ module;
 
 export module helios.engine.mechanics.bounds.components.LevelBoundsBehaviorComponent;
 
-import helios.engine.ecs.CloneableComponent;
+
 
 import helios.engine.modules.physics.collision.types.CollisionBehavior;
 
@@ -26,7 +26,7 @@ export namespace helios::engine::mechanics::bounds::components {
      * restitution (bounciness) when colliding with level walls, used by physics
      * or movement systems to resolve out-of-bounds conditions.
      */
-    class LevelBoundsBehaviorComponent : public helios::engine::ecs::CloneableComponent<LevelBoundsBehaviorComponent> {
+    class LevelBoundsBehaviorComponent  {
 
     private:
         /**
@@ -49,7 +49,35 @@ export namespace helios::engine::mechanics::bounds::components {
 
         helios::engine::modules::physics::collision::types::CollisionResponse collisionResponse_ = helios::engine::modules::physics::collision::types::CollisionResponse::None;
 
+        /**
+         * @brief Whether this component is enabled.
+         */
+        bool isEnabled_ = true;
+
     public:
+
+        /**
+         * @brief Checks whether this component is enabled.
+         *
+         * @return True if enabled, false otherwise.
+         */
+        [[nodiscard]] bool isEnabled() const noexcept {
+            return isEnabled_;
+        }
+
+        /**
+         * @brief Enables this component.
+         */
+        void enable() noexcept {
+            isEnabled_ = true;
+        }
+
+        /**
+         * @brief Disables this component.
+         */
+        void disable() noexcept {
+            isEnabled_ = false;
+        }
 
         /**
          * @brief Constructs a LevelBoundsBehaviorComponent with a specified restitution.
@@ -76,11 +104,15 @@ export namespace helios::engine::mechanics::bounds::components {
          *
          * @param other The component to copy from.
          */
-        explicit LevelBoundsBehaviorComponent(const LevelBoundsBehaviorComponent& other) :
+        LevelBoundsBehaviorComponent(const LevelBoundsBehaviorComponent& other) :
         restitution_(other.restitution_),
         collisionBehavior_(other.collisionBehavior_),
         collisionResponse_(other.collisionResponse_)
         {}
+
+        LevelBoundsBehaviorComponent& operator=(const LevelBoundsBehaviorComponent&) = default;
+        LevelBoundsBehaviorComponent(LevelBoundsBehaviorComponent&&) noexcept = default;
+        LevelBoundsBehaviorComponent& operator=(LevelBoundsBehaviorComponent&&) noexcept = default;
 
         /**
          * @brief Retrieves the restitution coefficient.

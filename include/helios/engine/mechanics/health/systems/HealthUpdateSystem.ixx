@@ -26,6 +26,8 @@ import helios.engine.modules.physics.collision.events;
 
 import helios.engine.mechanics.spawn.components.SpawnedByProfileComponent;
 
+import helios.engine.mechanics.lifecycle.components.Active;
+
 import helios.util.log;
 
 #define HELIOS_LOG_SCOPE "helios::engine::mechanics::health::systems::HealthUpdateSystem"
@@ -53,32 +55,33 @@ export namespace helios::engine::mechanics::health::systems {
          */
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
-            for (auto [entity, hc, sbp] : gameWorld_->find<
+            for (auto [entity, hc, sbp, active] : gameWorld_->view<
                 helios::engine::mechanics::health::components::HealthComponent,
-                helios::engine::mechanics::spawn::components::SpawnedByProfileComponent
-            >().each()) {
+                helios::engine::mechanics::spawn::components::SpawnedByProfileComponent,
+                helios::engine::mechanics::lifecycle::components::Active
+            >().whereEnabled()) {
 
                 if (hc->isAlive()) {
                     continue;
                 }
 
-                logger_.info(std::format("Entity {0} killed.", entity->entityHandle().entityId));
+                logger_.info(std::format("Entity {0} killed.", entity.entityHandle().entityId));
 
                 updateContext.commandBuffer().add<helios::engine::runtime::spawn::commands::DespawnCommand>(
-                    entity->entityHandle(),
+                    entity.entityHandle(),
                     sbp->spawnProfileId()
                 );
 
-                auto* lac = entity->get<helios::engine::mechanics::combat::components::LastAttackerComponent>();
+                auto* lac = entity.get<helios::engine::mechanics::combat::components::LastAttackerComponent>();
                 if (lac) {
                     auto attackContext = lac->lastAttackContext();
                     updateContext.pushPhase<helios::engine::mechanics::health::events::DeathEvent>(
-                        entity->entityHandle(),
+                        entity.entityHandle(),
                         attackContext
                     );
                 } else {
                     updateContext.pushPhase<helios::engine::mechanics::health::events::DeathEvent>(
-                        entity->entityHandle()
+                        entity.entityHandle()
                     );
                 }
 

@@ -12,8 +12,8 @@ module;
 
 export module helios.engine.mechanics.lifecycle.components.DelayedComponentEnabler;
 
-import helios.engine.ecs.CloneableComponent;
-import helios.engine.ecs.Component;
+
+
 import helios.engine.ecs.GameObject;
 import helios.engine.core.data.SpawnProfileId;
 import helios.engine.core.data.ComponentTypeId;
@@ -41,7 +41,7 @@ export namespace helios::engine::mechanics::lifecycle::components {
      * @see DelayedComponentEnablerSystem
      * @see DelayedComponentEnablerInitializer
      */
-    class DelayedComponentEnabler : public helios::engine::ecs::CloneableComponent<DelayedComponentEnabler> {
+    class DelayedComponentEnabler {
 
         /**
          * @brief Internal structure tracking a deferred component.
@@ -75,8 +75,12 @@ export namespace helios::engine::mechanics::lifecycle::components {
          *
          * @param other The source component to copy from.
          */
-        explicit DelayedComponentEnabler(const DelayedComponentEnabler& other)
+        DelayedComponentEnabler(const DelayedComponentEnabler& other)
             : deferredComponents_(other.deferredComponents_) {}
+
+        DelayedComponentEnabler& operator=(const DelayedComponentEnabler&) = default;
+        DelayedComponentEnabler(DelayedComponentEnabler&&) noexcept = default;
+        DelayedComponentEnabler& operator=(DelayedComponentEnabler&&) noexcept = default;
 
         /**
          * @brief Returns a view of all currently deferred components.
@@ -113,18 +117,20 @@ export namespace helios::engine::mechanics::lifecycle::components {
          *
          * @note Asserts if delta <= 0 or if the component does not exist on the entity.
          */
-        void defer(helios::engine::core::data::ComponentTypeId componentTypeId, const float delta) {
+        void defer(
+            helios::engine::ecs::GameObject gameObject,
+            helios::engine::core::data::ComponentTypeId componentTypeId, const float delta) {
             assert(delta > 0 && "delta must be greater than 0");
 
-            auto* cmp = gameObject_->get(componentTypeId);
-            assert(cmp && "ComponentTypeId not part of GameObject");
+            const bool hasCmp  = gameObject.has(componentTypeId);
+            assert(hasCmp && "ComponentTypeId not part of GameObject");
 
-            auto it = std::ranges::find_if(deferredComponents_,
+            const auto it = std::ranges::find_if(deferredComponents_,
                 [componentTypeId](const auto& item) {
                 return item.componentTypeId == componentTypeId;
             });
 
-            cmp->disable();
+            gameObject.disableComponent(componentTypeId);
 
             if (it == deferredComponents_.end()) {
                 deferredComponents_.push_back({delta, componentTypeId});

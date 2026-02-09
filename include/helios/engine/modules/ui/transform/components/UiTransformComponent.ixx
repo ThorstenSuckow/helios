@@ -8,7 +8,7 @@ module;
 
 export module helios.engine.modules.ui.transform.components.UiTransformComponent;
 
-import helios.engine.ecs.Component;
+
 
 import helios.engine.modules.ui.layout.Anchor;
 
@@ -29,7 +29,7 @@ export namespace helios::engine::modules::ui::transform::components {
      * pivot point, margins, and the target viewport. Used by UiTransformSystem
      * to compute screen positions.
      */
-    class UiTransformComponent : public helios::engine::ecs::Component {
+    class UiTransformComponent{
 
         /**
          * @brief Anchor point relative to the viewport.
@@ -51,10 +51,60 @@ export namespace helios::engine::modules::ui::transform::components {
          */
         helios::math::vec4f margins_{};
 
+        /**
+         * @brief Whether this component is enabled.
+         */
+        bool isEnabled_ = true;
+
         public:
 
+        /**
+         * @brief Checks whether this component is enabled.
+         *
+         * @return True if enabled, false otherwise.
+         */
+        [[nodiscard]] bool isEnabled() const noexcept {
+            return isEnabled_;
+        }
 
+        /**
+         * @brief Enables this component.
+         */
+        void enable() noexcept {
+            isEnabled_ = true;
+        }
+
+        /**
+         * @brief Disables this component.
+         */
+        void disable() noexcept {
+            isEnabled_ = false;
+        }
+
+        /**
+         * @brief Default constructor.
+         */
         UiTransformComponent() = default;
+
+        /**
+         * @brief Copy constructor.
+         */
+        UiTransformComponent(const UiTransformComponent&) = default;
+
+        /**
+         * @brief Copy assignment operator.
+         */
+        UiTransformComponent& operator=(const UiTransformComponent&) = default;
+
+        /**
+         * @brief Move constructor.
+         */
+        UiTransformComponent(UiTransformComponent&&) noexcept = default;
+
+        /**
+         * @brief Move assignment operator.
+         */
+        UiTransformComponent& operator=(UiTransformComponent&&) noexcept = default;
 
 
         /**
@@ -130,9 +180,6 @@ export namespace helios::engine::modules::ui::transform::components {
         }
 
 
-        [[nodiscard]] helios::engine::core::data::ComponentTypeId typeId() const noexcept override {
-            return helios::engine::core::data::ComponentTypeId::id<UiTransformComponent>();
-        }
 
     };
 

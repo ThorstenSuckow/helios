@@ -116,6 +116,25 @@ Demonstrates FreeType-based text rendering with:
 
 ---
 
+### 8. Scoring Demo
+
+**Location:** `scoring_demo/`
+
+A complete scoring system example featuring:
+- ScorePoolManager for centralized score tracking
+- ScorePoolComponent and ScoreValueComponent for attribution
+- ScoreObserverComponent for UI data binding
+- Kill scoring via LastAttackerComponent
+- Health and damage system integration
+- Dynamic UI text updates
+
+**Controls:**
+- Left Stick - Move spaceship
+- Right Stick - Aim and fire projectiles
+- ESC - Exit application
+
+---
+
 ## Building the Examples
 
 All examples are automatically built when you build the helios project.

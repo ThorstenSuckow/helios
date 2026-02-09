@@ -131,80 +131,100 @@ Both `zNear` and `zFar` are specified as positive values representing distances 
 
 ## GameObject Active State
 
-### The `isActive()` Flag
+### The `setActive()` Method
 
-Every `GameObject` has an `isActive()` flag that determines whether it participates in the game loop:
+Every `GameObject` can be activated or deactivated via `setActive()`:
 
 ```cpp
-bool isActive() const noexcept;
-void setActive(bool active) noexcept;
+void setActive(bool active);
 ```
+
+### Active/Inactive Tag Components
+
+When `setActive()` is called, the engine manages tag components:
+
+| Call | Result |
+|------|--------|
+| `setActive(true)` | Adds `Active` tag, removes `Inactive` tag, calls `onActivate()` on components |
+| `setActive(false)` | Adds `Inactive` tag, removes `Active` tag, calls `onDeactivate()` on components |
 
 ### Behavior
 
 When a GameObject is **inactive**:
 
-- It **exists** in the GameWorld and retains all its components and state
-- It is **not rendered** (SceneNode is deactivated)
-- It is **not processed** by systems (movement, physics, collision detection)
+- It **exists** in the EntityManager and retains all its components
+- It is **not rendered** (SceneNodeComponent deactivates the SceneNode)
+- It is **not processed** by systems that filter for `Active`
 - It does **not participate** in gameplay calculations
 
 This is essential for object pooling where pre-allocated objects wait in an inactive state until acquired.
 
 ### System Filtering
 
-By default, systems should only process active GameObjects. Use `GameObjectFilter` to filter queries:
+Systems use the `View` API to filter for active entities with enabled components:
 
 ```cpp
-import helios.engine.ecs.query.GameObjectFilter;
-
-using helios::engine::ecs::query::GameObjectFilter;
+import helios.engine.mechanics.lifecycle.components.Active;
 
 void update(UpdateContext& ctx) noexcept override {
-    // Filter for active GameObjects with enabled components
-    auto filter = GameObjectFilter::Active | GameObjectFilter::ComponentEnabled;
-    
-    for (auto [obj, component] : gameWorld_->find<MyComponent>(filter).each()) {
-        // Only active objects with enabled components
+    // Filter for active entities with enabled components
+    for (auto [entity, component, active] : gameWorld_->view<
+        MyComponent,
+        Active
+    >().whereEnabled()) {
+        // Only active entities with enabled components
     }
 }
 ```
 
-Alternatively, filter manually within the loop:
+### Excluding Inactive Entities
+
+Alternatively, exclude inactive entities:
 
 ```cpp
+import helios.engine.mechanics.lifecycle.components.Inactive;
+
 void update(UpdateContext& ctx) noexcept override {
-    for (auto [obj, component] : gameWorld_->find<MyComponent>().each()) {
-        if (!obj->isActive()) {
-            continue;  // Skip inactive objects
-        }
-        if (component.isDisabled()) {
+    for (auto [entity, component] : gameWorld_->view<MyComponent>()
+        .exclude<Inactive>()) {
+        // All entities except those with Inactive tag
+        if (!component->isEnabled()) {
             continue;  // Skip disabled components
         }
-        // Process active object with enabled component...
+        // Process entity with enabled component...
     }
 }
 ```
 
 ### Lifecycle Callbacks
 
-Components receive lifecycle notifications when their owning GameObject changes state:
+Components can implement lifecycle hooks that are automatically invoked:
 
 ```cpp
-class MyComponent : public Component {
-    void onActivate() noexcept override {
+class MyComponent {
+    bool isEnabled_ = true;
+
+public:
+    // Enable/Disable (optional)
+    [[nodiscard]] bool isEnabled() const noexcept { return isEnabled_; }
+    void enable() noexcept { isEnabled_ = true; }
+    void disable() noexcept { isEnabled_ = false; }
+    
+    // Activation callbacks (optional)
+    void onActivate() noexcept {
         // Called when GameObject becomes active
     }
     
-    void onDeactivate() noexcept override {
+    void onDeactivate() noexcept {
         // Called when GameObject becomes inactive
     }
     
-    void onAcquire() noexcept override {
+    // Pool lifecycle (optional)
+    void onAcquire() noexcept {
         // Called when acquired from a pool
     }
     
-    void onRelease() noexcept override {
+    void onRelease() noexcept {
         // Called when released back to a pool
     }
 };

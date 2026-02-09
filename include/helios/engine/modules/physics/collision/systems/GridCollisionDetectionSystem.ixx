@@ -17,10 +17,10 @@ export module helios.engine.modules.physics.collision.systems.GridCollisionDetec
 
 import helios.engine.ecs.System;
 import helios.engine.runtime.world.UpdateContext;
-import helios.engine.ecs.query.GameObjectFilter;
 import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.GameWorld;
 
+import helios.engine.mechanics.lifecycle.components.Active;
 
 import helios.engine.modules.physics.collision.events.TriggerCollisionEvent;
 import helios.engine.modules.physics.collision.events.SolidCollisionEvent;
@@ -148,7 +148,7 @@ export namespace helios::engine::modules::physics::collision::systems {
             /**
              * @brief Pointer to the GameObject entity.
              */
-            helios::engine::ecs::GameObject* gameObject;
+            helios::engine::ecs::GameObject gameObject;
 
             /**
              * @brief Pointer to the AABB collider component providing world-space bounds.
@@ -293,8 +293,8 @@ export namespace helios::engine::modules::physics::collision::systems {
          * @param csc_b Collision state component of the second entity.
          */
         inline void postEvent(
-            const helios::engine::ecs::GameObject* candidate,
-            const helios::engine::ecs::GameObject* match,
+            const helios::engine::ecs::GameObject candidate,
+            const helios::engine::ecs::GameObject match,
             const helios::math::vec3f contact,
             const CollisionStruct collisionStruct,
             const helios::engine::runtime::world::UpdateContext& updateContext,
@@ -316,12 +316,14 @@ export namespace helios::engine::modules::physics::collision::systems {
             // post the events
             if (isTriggerCollision || isSolidCollision) {
                 csc_a->setState(
+                    candidate,
                     contact, isSolidCollision, isTriggerCollision, collisionStruct.aCollisionBehavior,
-                    aIsCollisionReporter, match->entityHandle(), collisionLayer, otherCollisionLayer
+                    aIsCollisionReporter, match.entityHandle(), collisionLayer, otherCollisionLayer
                 );
                 csc_b->setState(
+                    match,
                     contact, isSolidCollision, isTriggerCollision, collisionStruct.bCollisionBehavior,
-                    bIsCollisionReporter, candidate->entityHandle(), collisionLayer, otherCollisionLayer
+                    bIsCollisionReporter, candidate.entityHandle(), collisionLayer, otherCollisionLayer
                 );
             }
 
@@ -432,15 +434,12 @@ export namespace helios::engine::modules::physics::collision::systems {
 
             prepareCollisionDetection();
 
-            // only consider enabled CollisionSettingsComponents
-            constexpr auto filter = helios::engine::ecs::query::GameObjectFilter::Active | helios::engine::ecs::query::GameObjectFilter::ComponentEnabled;
-
-            for (auto [entity, cc, csc, acc] : gameWorld_->find<
+            for (auto [entity, cc, csc, acc, active] : gameWorld_->view<
                 CollisionComponent,
                 CollisionStateComponent,
-                AabbColliderComponent
-
-            >(filter).each()) {
+                AabbColliderComponent,
+                helios::engine::mechanics::lifecycle::components::Active
+            >().whereEnabled()) {
 
                 if (!acc->boundsInitialized()) {
                     continue;
@@ -518,7 +517,7 @@ export namespace helios::engine::modules::physics::collision::systems {
          * @param collisionComponent Pointer to the entity's collision component.
          */
         inline void updateCollisionCandidate(
-            helios::engine::ecs::GameObject* go,
+            helios::engine::ecs::GameObject go,
             const helios::math::aabbi& bounds,
             AabbColliderComponent* aabbColliderComponent,
             CollisionComponent* collisionComponent,
@@ -616,8 +615,8 @@ export namespace helios::engine::modules::physics::collision::systems {
                         continue;
                     }
 
-                    auto lHandle = candidate.gameObject->entityHandle();
-                    auto rHandle = gameObject->entityHandle();
+                    auto lHandle = candidate.gameObject.entityHandle();
+                    auto rHandle = gameObject.entityHandle();
 
                     if (lHandle > rHandle) {
                         std::swap(lHandle, rHandle);

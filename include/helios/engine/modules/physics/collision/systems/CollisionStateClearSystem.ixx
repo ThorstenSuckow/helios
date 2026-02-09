@@ -27,6 +27,8 @@ import helios.engine.modules.physics.collision.components.CollisionStateComponen
 
 import helios.engine.runtime.spawn.commands.DespawnCommand;
 
+import helios.engine.mechanics.lifecycle.components.Active;
+
 using namespace helios::engine::modules::physics::collision::components;
 using namespace helios::engine::modules::physics::collision::types;
 using namespace helios::engine::runtime::spawn::commands;
@@ -55,9 +57,10 @@ export namespace helios::engine::modules::physics::collision::systems {
          * @param updateContext Context containing frame data and world access.
          */
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
-            for (auto [entity, csc] : gameWorld_->find<
-               CollisionStateComponent
-           >().each()) {
+            for (auto [entity, csc, active] : gameWorld_->view<
+               CollisionStateComponent,
+               helios::engine::mechanics::lifecycle::components::Active
+           >().whereEnabled()) {
                 csc->reset();
            }
         }

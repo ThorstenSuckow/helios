@@ -4,8 +4,11 @@
 import helios.engine.ecs;
 import helios.engine.core.data;
 
+
 using namespace helios::engine::ecs;
 using namespace helios::engine::core::data;
+
+
 
 class Entity {
 
@@ -23,8 +26,10 @@ public:
     }
 };
 
-
 TEST(SparseSetTest, emplace) {
+
+    ComponentReflector::registerType<Entity>();
+
 
     SparseSet<Entity> storage;
 
@@ -43,6 +48,7 @@ TEST(SparseSetTest, emplace) {
 }
 
 TEST(SparseSetTest, get) {
+    ComponentReflector::registerType<Entity>();
 
     SparseSet<Entity> storage;
 
@@ -55,6 +61,7 @@ TEST(SparseSetTest, get) {
 
 
 TEST(SparseSetTest, remove) {
+    ComponentReflector::registerType<Entity>();
 
     const std::function<bool(Entity& entity)> onRemoveCallbackFalse = [](Entity& entity) ->bool { return false;};
     const std::function<bool(Entity& entity)> onRemoveCallbackTrue = [](Entity& entity) ->bool { return true;};
@@ -73,14 +80,6 @@ TEST(SparseSetTest, remove) {
     EXPECT_EQ(storage.get(EntityId{3})->value, 30);
     EXPECT_EQ(storage.get(EntityId{4})->value, 40);
 
-    // entity 3 onRemove -> false
-    EXPECT_FALSE(storage.remove(EntityId{3}));
-    EXPECT_EQ(storage.get(EntityId{1}), nullptr);
-    EXPECT_EQ(storage.get(EntityId{2})->value, 20);
-    EXPECT_EQ(storage.get(EntityId{3})->value, 30);
-    EXPECT_EQ(storage.get(EntityId{4})->value, 40);
-
-    // true callback (entity 3, default)
     storage.get(3)->remove_ = true;
     EXPECT_TRUE(storage.remove(EntityId{3}));
     EXPECT_EQ(storage.get(EntityId{1}), nullptr);

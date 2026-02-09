@@ -5,7 +5,7 @@
 module;
 
 #include <format>
-#include <helios/engine/ecs/query/GameObjectView.h>
+
 #include <string>
 
 export module helios.engine.mechanics.damage.systems.DamageOnCollisionSystem;
@@ -65,7 +65,7 @@ export namespace helios::engine::mechanics::damage::systems {
 
             for (const auto& event : eventPass) {
 
-                auto* go = updateContext.gameWorld().find(event.collisionContext().source);
+                auto go = updateContext.gameWorld().find(event.collisionContext().source);
 
                 if (!go) {
                     continue;
@@ -80,7 +80,8 @@ export namespace helios::engine::mechanics::damage::systems {
                 if (!other.has_value()) {
                     continue;
                 }
-                const auto* target = updateContext.gameWorld().find(other.value());
+
+                auto target = updateContext.gameWorld().find(other.value());
                 if (!target) {
                     continue;
                 }

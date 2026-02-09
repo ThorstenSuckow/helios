@@ -70,4 +70,89 @@ export namespace helios::engine::ecs::traits {
         {t.onRelease()} -> std::same_as<void>;
     };
 
+    /**
+     * @brief Trait for components that can be enabled/disabled.
+     *
+     * @details When a type `T` satisfies `HasToggleable`, the component can be
+     * toggled on/off via `enable()` and `disable()` methods. Both methods must
+     * be present for the trait to be satisfied.
+     *
+     * ## Usage
+     *
+     * ```cpp
+     * struct MyComponent {
+     *     bool isEnabled_ = true;
+     *
+     *     void enable() noexcept { isEnabled_ = true; }
+     *     void disable() noexcept { isEnabled_ = false; }
+     * };
+     *
+     * static_assert(traits::HasToggleable<MyComponent>);
+     * ```
+     *
+     * @tparam T The type to check.
+     */
+    template<typename T>
+    concept HasToggleable = requires(T t) {
+        {t.disable()} -> std::same_as<void>;
+        {t.enable()} -> std::same_as<void>;
+    };
+
+    /**
+     * @brief Trait for components with post-copy initialization.
+     *
+     * @details When a type `T` satisfies `HasClone`, the `onClone()` method is
+     * called after copy construction during entity cloning. Use this for
+     * initialization that requires the copy to be complete.
+     *
+     * ## Usage
+     *
+     * ```cpp
+     * struct SceneNodeComponent {
+     *     SceneNode* sceneNode_;
+     *
+     *     void onClone(const SceneNodeComponent& source) {
+     *         // Create a new SceneNode for this clone
+     *         auto node = std::make_unique<SceneNode>(source.sceneNode_->shareRenderable());
+     *         sceneNode_ = source.sceneNode_->parent()->addNode(std::move(node));
+     *     }
+     * };
+     *
+     * static_assert(traits::HasClone<SceneNodeComponent>);
+     * ```
+     *
+     * @tparam T The type to check.
+     */
+    template<typename T>
+    concept HasClone = requires(T t, const T& source) {
+        {t.onClone(source)} -> std::same_as<void>;
+    };
+
+    /**
+     * @brief Trait for components responding to GameObject activation.
+     *
+     * @details When a type `T` satisfies `HasActivatable`, the `onActivate()`
+     * and `onDeactivate()` methods are called when the owning GameObject's
+     * active state changes via `setActive()`. Both methods must be present.
+     *
+     * ## Usage
+     *
+     * ```cpp
+     * struct AIComponent {
+     *     void onActivate() { startBehaviorTree(); }
+     *     void onDeactivate() { pauseBehaviorTree(); }
+     * };
+     *
+     * static_assert(traits::HasActivatable<AIComponent>);
+     * ```
+     *
+     * @tparam T The type to check.
+     */
+    template<typename T>
+    concept HasActivatable = requires(T t) {
+        {t.onActivate()} -> std::same_as<void>;
+        {t.onDeactivate()} -> std::same_as<void>;
+    };
+
+
 }

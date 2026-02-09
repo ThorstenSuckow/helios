@@ -38,7 +38,7 @@ DelayedComponentEnablerInitializer
 
 ```cpp
 // During spawn initialization, defer collision component by 0.5 seconds
-auto* enabler = entity->get<DelayedComponentEnabler>();
+auto* enabler = entity.get<DelayedComponentEnabler>();
 enabler->defer(ComponentTypeId::id<CollisionComponent>(), 0.5f);
 
 // Or use the initializer for batch spawns with staggered activation

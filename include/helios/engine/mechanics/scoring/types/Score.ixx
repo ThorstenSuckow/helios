@@ -25,7 +25,7 @@ export namespace helios::engine::mechanics::scoring::types {
         /**
          * @brief The numeric score value.
          */
-        const double value_;
+        double value_;
 
     public:
 

@@ -10,7 +10,7 @@ export module helios.engine.mechanics.scoring.components.ScoreObserverComponent;
 import helios.engine.mechanics.scoring.ScorePoolSnapshot;
 import helios.engine.mechanics.scoring.types.ScorePoolRevision;
 
-import helios.engine.ecs.CloneableComponent;
+
 
 import helios.engine.core.data;
 import helios.core.types;
@@ -29,7 +29,7 @@ export namespace helios::engine::mechanics::scoring::components {
      * updates this component's value from the referenced ScorePool each frame.
      * The hasUpdate flag indicates when the value has changed.
      */
-    class ScoreObserverComponent : public helios::engine::ecs::CloneableComponent<ScoreObserverComponent> {
+    class ScoreObserverComponent {
 
         friend class helios::engine::mechanics::scoring::systems::ScoreObserverClearSystem;
 
@@ -54,6 +54,11 @@ export namespace helios::engine::mechanics::scoring::components {
         helios::engine::mechanics::scoring::ScorePoolSnapshot snapshot_;
 
         /**
+         * @brief Whether this component is enabled.
+         */
+        bool isEnabled_ = true;
+
+        /**
          * @brief Clears the update flag.
          *
          * Called by ScoreObserverClearSystem.
@@ -64,6 +69,28 @@ export namespace helios::engine::mechanics::scoring::components {
 
     public:
 
+        /**
+         * @brief Checks whether this component is enabled.
+         *
+         * @return True if enabled, false otherwise.
+         */
+        [[nodiscard]] bool isEnabled() const noexcept {
+            return isEnabled_;
+        }
+
+        /**
+         * @brief Enables this component.
+         */
+        void enable() noexcept {
+            isEnabled_ = true;
+        }
+
+        /**
+         * @brief Disables this component.
+         */
+        void disable() noexcept {
+            isEnabled_ = false;
+        }
 
         ScoreObserverComponent() = default;
 
@@ -74,6 +101,10 @@ export namespace helios::engine::mechanics::scoring::components {
          */
         ScoreObserverComponent(const ScoreObserverComponent& other) :
             scorePoolId_(other.scorePoolId_) {}
+
+        ScoreObserverComponent& operator=(const ScoreObserverComponent&) = default;
+        ScoreObserverComponent(ScoreObserverComponent&&) noexcept = default;
+        ScoreObserverComponent& operator=(ScoreObserverComponent&&) noexcept = default;
 
         /**
          * @brief Sets the score pool to observe.
@@ -127,17 +158,21 @@ export namespace helios::engine::mechanics::scoring::components {
         }
 
         /**
-         * @copydoc Component::onAcquire()
+         * @brief Called when this entity is acquired from a pool.
+         *
+         * @details Clears the update flag and resets the cached snapshot.
          */
-        void onAcquire() noexcept override {
+        void onAcquire() noexcept {
             clearUpdate();
             snapshot_ = {};
         }
 
         /**
-         * @copydoc Component::onRelease()
+         * @brief Called when this entity is released back to a pool.
+         *
+         * @details Clears the update flag and resets the cached snapshot.
          */
-        void onRelease() noexcept override {
+        void onRelease() noexcept {
             clearUpdate();
             snapshot_ = {};
         }

@@ -7,7 +7,7 @@ module;
 
 export module helios.engine.mechanics.scoring.components.ScorePoolComponent;
 
-import helios.engine.ecs.CloneableComponent;
+
 
 import helios.engine.core.data;
 import helios.core.types;
@@ -21,7 +21,7 @@ export namespace helios::engine::mechanics::scoring::components {
      * Attached to entities (e.g., player) to specify which score pool
      * receives points when that entity performs scoring actions.
      */
-    class ScorePoolComponent : public helios::engine::ecs::CloneableComponent<ScorePoolComponent> {
+    class ScorePoolComponent  {
 
     private:
 
@@ -30,9 +30,36 @@ export namespace helios::engine::mechanics::scoring::components {
          */
         helios::engine::core::data::ScorePoolId scorePoolId_{helios::core::types::no_init};
 
+        /**
+         * @brief Whether this component is enabled.
+         */
+        bool isEnabled_ = true;
+
 
     public:
 
+        /**
+         * @brief Checks whether this component is enabled.
+         *
+         * @return True if enabled, false otherwise.
+         */
+        [[nodiscard]] bool isEnabled() const noexcept {
+            return isEnabled_;
+        }
+
+        /**
+         * @brief Enables this component.
+         */
+        void enable() noexcept {
+            isEnabled_ = true;
+        }
+
+        /**
+         * @brief Disables this component.
+         */
+        void disable() noexcept {
+            isEnabled_ = false;
+        }
 
         ScorePoolComponent() = default;
 
@@ -42,6 +69,10 @@ export namespace helios::engine::mechanics::scoring::components {
          * @param other The component to copy from.
          */
         ScorePoolComponent(const ScorePoolComponent& other) : scorePoolId_(other.scorePoolId_)  {}
+
+        ScorePoolComponent& operator=(const ScorePoolComponent&) = default;
+        ScorePoolComponent(ScorePoolComponent&&) noexcept = default;
+        ScorePoolComponent& operator=(ScorePoolComponent&&) noexcept = default;
 
         /**
          * @brief Sets the associated score pool.

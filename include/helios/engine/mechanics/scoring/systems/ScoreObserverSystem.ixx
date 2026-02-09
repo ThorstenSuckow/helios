@@ -6,7 +6,7 @@ module;
 
 
 #include <format>
-#include <helios/engine/ecs/query/GameObjectView.h>
+
 
 export module helios.engine.mechanics.scoring.systems.ScoreObserverSystem;
 
@@ -26,6 +26,8 @@ import helios.engine.mechanics.combat.types.AttackContext;
 import helios.engine.mechanics.combat.components.LastAttackerComponent;
 
 import helios.engine.modules.physics.collision.events;
+
+import helios.engine.mechanics.lifecycle.components.Active;
 
 
 import helios.util.log;
@@ -54,9 +56,10 @@ export namespace helios::engine::mechanics::scoring::systems {
          */
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
-            for (auto [entity, soc] : gameWorld_->find<
-                helios::engine::mechanics::scoring::components::ScoreObserverComponent
-            >().each()) {
+            for (auto [entity, soc, active] : gameWorld_->view<
+                helios::engine::mechanics::scoring::components::ScoreObserverComponent,
+                helios::engine::mechanics::lifecycle::components::Active
+            >().whereEnabled()) {
 
                 auto* scorePoolManager = gameWorld_->getManager<helios::engine::mechanics::scoring::ScorePoolManager>();
 

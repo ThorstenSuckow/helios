@@ -52,14 +52,20 @@ export namespace helios::engine::core::data {
          */
         size_t id_{0};
 
-        /**
-         * @brief Private constructor for internal use.
-         *
-         * @param id The type ID value.
-         */
-        explicit ComponentTypeId(const size_t id) : id_(id) {}
 
     public:
+
+        /**
+         * @brief Constructs a ComponentTypeId with a specific ID value.
+         *
+         * @details This constructor initializes a ComponentTypeId object with a given
+         * ID, representing a unique identifier for a component type. The ID is used
+         * internally for indexing and retrieving components from the storage system.
+         *
+         * @param id The unique identifier assigned to the component type.
+         * This ID must be a valid non-negative value.
+         */
+        explicit ComponentTypeId(const size_t id) : id_(id) {}
 
         /**
          * @brief Constructs an uninitialized ComponentTypeId.

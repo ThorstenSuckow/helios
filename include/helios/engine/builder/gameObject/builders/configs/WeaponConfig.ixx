@@ -28,7 +28,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         /**
          * @brief Non-owning pointer to the target GameObject.
          */
-         helios::engine::ecs::GameObject* gameObject_;
+         helios::engine::ecs::GameObject gameObject_;
 
     public:
 
@@ -37,8 +37,8 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @param gameObject Target GameObject to configure.
          */
-        explicit WeaponConfig(helios::engine::ecs::GameObject* gameObject) : gameObject_(gameObject) {
-            gameObject_->add<helios::engine::mechanics::combat::components::Aim2DComponent>();
+        explicit WeaponConfig(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {
+            gameObject_.add<helios::engine::mechanics::combat::components::Aim2DComponent>();
         }
 
         /**
@@ -49,8 +49,13 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         WeaponConfig& fireRate(const float fireRate) {
-            gameObject_->getOrAdd<helios::engine::mechanics::combat::components::ShootComponent>()
+            gameObject_.getOrAdd<helios::engine::mechanics::combat::components::ShootComponent>()
                         .setFireRate(fireRate);
+
+            auto* transformComponent_ = gameObject_.get<helios::engine::modules::spatial::transform::components::ComposeTransformComponent>();
+            auto* ac = gameObject_.get<helios::engine::mechanics::combat::components::Aim2DComponent>();
+            assert(transformComponent_ != nullptr && "Unexpected nullptr for transformComponent_");
+            assert(ac != nullptr && "Unexpected nullptr for Aim2DComponent");
 
             return *this;
         }

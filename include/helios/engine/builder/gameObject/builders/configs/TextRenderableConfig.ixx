@@ -28,7 +28,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
 
     class TextRenderableConfig {
 
-        helios::engine::ecs::GameObject* gameObject_;
+        helios::engine::ecs::GameObject gameObject_;
 
         helios::rendering::text::FontResourceProvider* fontResourceProvider_;
 
@@ -52,7 +52,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
 
 
         explicit TextRenderableConfig(
-            helios::engine::ecs::GameObject* gameObject
+            helios::engine::ecs::GameObject gameObject
         ) : gameObject_(gameObject) {}
 
 
@@ -121,10 +121,13 @@ export namespace helios::engine::builder::gameObject::builders::configs {
                     textPrototype
             );
 
-            gameObject_->add<helios::engine::modules::rendering::renderable::components::RenderableComponent>(renderable);
+            gameObject_.add<helios::engine::modules::rendering::renderable::components::RenderableComponent>(renderable);
+
+            auto& msc = gameObject_.getOrAdd<helios::engine::modules::rendering::model::components::ModelAabbComponent>();
+            msc.setAabb(renderable->localAABB());
 
             if (isUiText_) {
-                gameObject_->add<helios::engine::modules::ui::widgets::components::UiTextComponent>(renderable.get())
+                gameObject_.add<helios::engine::modules::ui::widgets::components::UiTextComponent>(renderable.get())
                             .setTemplate(template_);
 
                 isUiText_ = false;

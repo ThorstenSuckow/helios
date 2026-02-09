@@ -57,7 +57,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         /**
          * @brief Non-owning pointer to the target GameObject.
          */
-        helios::engine::ecs::GameObject* gameObject_;
+        helios::engine::ecs::GameObject& gameObject_;
 
     public:
 
@@ -66,7 +66,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @param gameObject Non-owning pointer to the target entity.
          */
-        explicit LifecycleConfig(helios::engine::ecs::GameObject* gameObject) : gameObject_(gameObject) {}
+        explicit LifecycleConfig(helios::engine::ecs::GameObject& gameObject) : gameObject_(gameObject) {}
 
         /**
          * @brief Enables delayed component activation for this entity.
@@ -79,7 +79,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          */
         LifecycleConfig& useDelayedComponentEnabler() {
 
-            gameObject_->getOrAdd<helios::engine::mechanics::lifecycle::components::DelayedComponentEnabler>();
+            gameObject_.getOrAdd<helios::engine::mechanics::lifecycle::components::DelayedComponentEnabler>();
 
             return *this;
         }

@@ -23,7 +23,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         /**
          * @brief Non-owning pointer to the target GameObject.
          */
-        helios::engine::ecs::GameObject* gameObject_;
+        helios::engine::ecs::GameObject gameObject_;
 
     public:
 
@@ -32,7 +32,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @param gameObject Target GameObject to configure.
          */
-        explicit SpawnConfig(helios::engine::ecs::GameObject* gameObject) : gameObject_(gameObject) {}
+        explicit SpawnConfig(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {}
 
         /**
          * @brief Marks the entity as spawned by a spawn profile.
@@ -43,7 +43,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         SpawnConfig& useSpawnProfile() {
-            gameObject_->add<helios::engine::mechanics::spawn::components::SpawnedByProfileComponent>();
+            gameObject_.add<helios::engine::mechanics::spawn::components::SpawnedByProfileComponent>();
 
             return *this;
         }
@@ -57,7 +57,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         SpawnConfig& trackEmitter() {
-            gameObject_->add<helios::engine::mechanics::spawn::components::EmittedByComponent>();
+            gameObject_.add<helios::engine::mechanics::spawn::components::EmittedByComponent>();
 
             return *this;
         }

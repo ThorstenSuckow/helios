@@ -24,7 +24,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         /**
          * @brief Non-owning pointer to the target GameObject.
          */
-        helios::engine::ecs::GameObject* gameObject_;
+        helios::engine::ecs::GameObject gameObject_;
 
     public:
 
@@ -33,8 +33,8 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @param gameObject Target GameObject to configure.
          */
-        explicit HealthConfig(helios::engine::ecs::GameObject* gameObject) : gameObject_(gameObject) {
-            gameObject_->add<helios::engine::mechanics::health::components::HealthComponent>();
+        explicit HealthConfig(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {
+            gameObject.add<helios::engine::mechanics::health::components::HealthComponent>();
         }
 
         /**
@@ -45,7 +45,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         HealthConfig& maxHealth(const float maxHealth) {
-            gameObject_->getOrAdd<helios::engine::mechanics::health::components::HealthComponent>()
+            gameObject_.getOrAdd<helios::engine::mechanics::health::components::HealthComponent>()
                         .setMaxHealth(maxHealth);
 
             return *this;

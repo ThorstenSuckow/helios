@@ -7,7 +7,7 @@ module;
 #include <cassert>
 export module helios.engine.modules.ai.components.ChaseComponent;
 
-import helios.engine.ecs.CloneableComponent;
+
 
 import helios.core.types;
 import helios.util.Guid;
@@ -24,7 +24,7 @@ export namespace helios::engine::modules::ai::components {
      * of direction updates via a cooldown timer. Used by ChaseSystem
      * to steer entities towards their targets.
      */
-    class ChaseComponent : public helios::engine::ecs::CloneableComponent<ChaseComponent> {
+    class ChaseComponent  {
 
         /**
          * @brief Time between target direction updates (seconds).
@@ -41,12 +41,45 @@ export namespace helios::engine::modules::ai::components {
          */
         helios::engine::ecs::EntityHandle target_{};
 
+        /**
+         * @brief Whether this component is enabled.
+         */
+        bool isEnabled_ = true;
+
     public:
+
+        /**
+         * @brief Checks whether this component is enabled.
+         *
+         * @return True if enabled, false otherwise.
+         */
+        [[nodiscard]] bool isEnabled() const noexcept {
+            return isEnabled_;
+        }
+
+        /**
+         * @brief Enables this component.
+         */
+        void enable() noexcept {
+            isEnabled_ = true;
+        }
+
+        /**
+         * @brief Disables this component.
+         */
+        void disable() noexcept {
+            isEnabled_ = false;
+        }
 
         /**
          * @brief Default constructor.
          */
         ChaseComponent() = default;
+
+        ChaseComponent(const ChaseComponent&) = default;
+        ChaseComponent& operator=(const ChaseComponent&) = default;
+        ChaseComponent(ChaseComponent&&) noexcept = default;
+        ChaseComponent& operator=(ChaseComponent&&) noexcept = default;
 
         /**
          * @brief Returns the target entity's handle.

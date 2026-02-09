@@ -133,11 +133,17 @@ Classes</h2></td></tr>
 Typedefs</h2></td></tr>
 <tr class="memitem:a7886ef44eabe7b1a1f109e6c5fe971ca" id="r_a7886ef44eabe7b1a1f109e6c5fe971ca"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7886ef44eabe7b1a1f109e6c5fe971ca">helios::engine::core::data::CollisionLayer</a> = uint32_t</td></tr>
 <tr class="memdesc:a7886ef44eabe7b1a1f109e6c5fe971ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for collision layer identifiers.  <br /></td></tr>
+<tr class="memitem:a1876d5539fc6b911fbe54f8b56fd2ec0" id="r_a1876d5539fc6b911fbe54f8b56fd2ec0"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1876d5539fc6b911fbe54f8b56fd2ec0">helios::engine::core::data::EntityId</a> = uint32_t</td></tr>
+<tr class="memdesc:a1876d5539fc6b911fbe54f8b56fd2ec0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unique identifier for an entity within an EntityPool.  <br /></td></tr>
+<tr class="memitem:a64dc3794b3b3f72af16a0c2a4cab2763" id="r_a64dc3794b3b3f72af16a0c2a4cab2763"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a64dc3794b3b3f72af16a0c2a4cab2763">helios::engine::core::data::VersionId</a> = uint32_t</td></tr>
+<tr class="memdesc:a64dc3794b3b3f72af16a0c2a4cab2763"><td class="mdescLeft">&#160;</td><td class="mdescRight">Version number for detecting stale entity references.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:ae64ec2be155f406b8b8f557354c66efb" id="r_ae64ec2be155f406b8b8f557354c66efb"><td class="memItemLeft" align="right" valign="top">constexpr std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae64ec2be155f406b8b8f557354c66efb">helios::engine::core::data::MAX_COLLISION_LAYERS</a> = std::numeric_limits&lt;<a class="el" href="#a7886ef44eabe7b1a1f109e6c5fe971ca">CollisionLayer</a>&gt;::digits</td></tr>
 <tr class="memdesc:ae64ec2be155f406b8b8f557354c66efb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum number of distinct collision layers.  <br /></td></tr>
+<tr class="memitem:a7ca6be0dedf2b339faa79a8cd3d80bf2" id="r_a7ca6be0dedf2b339faa79a8cd3d80bf2"><td class="memItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7ca6be0dedf2b339faa79a8cd3d80bf2">helios::engine::core::data::EntityTombstone</a> = std::numeric_limits&lt;size_t&gt;::max()</td></tr>
+<tr class="memdesc:a7ca6be0dedf2b339faa79a8cd3d80bf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sentinel value indicating an invalid or removed sparse index.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Data structures for efficient entity management. </p>
@@ -170,7 +176,104 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a1876d5539fc6b911fbe54f8b56fd2ec0" name="a1876d5539fc6b911fbe54f8b56fd2ec0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1876d5539fc6b911fbe54f8b56fd2ec0">&#9670;&#160;</a></span>EntityId</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a1876d5539fc6b911fbe54f8b56fd2ec0">helios::engine::core::data::EntityId</a> = uint32_t</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Unique identifier for an entity within an EntityPool. </p>
+<p>Used as the index into the sparse array of an EntityPool. Combined with a <a class="el" href="#a64dc3794b3b3f72af16a0c2a4cab2763" title="Version number for detecting stale entity references.">VersionId</a> in an EntityHandle, it enables safe entity references that detect stale handles after entity removal.</p>
+<dl class="section see"><dt>See also</dt><dd>EntityHandle </dd>
+<dd>
+<a class="el" href="#a64dc3794b3b3f72af16a0c2a4cab2763" title="Version number for detecting stale entity references.">VersionId</a> </dd>
+<dd>
+EntityPool </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="EntityId_8ixx_source.html#l00026">26</a> of file <a class="el" href="EntityId_8ixx_source.html">EntityId.ixx</a>.</p>
+
+</div>
+</div>
+<a id="a64dc3794b3b3f72af16a0c2a4cab2763" name="a64dc3794b3b3f72af16a0c2a4cab2763"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64dc3794b3b3f72af16a0c2a4cab2763">&#9670;&#160;</a></span>VersionId</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a64dc3794b3b3f72af16a0c2a4cab2763">helios::engine::core::data::VersionId</a> = uint32_t</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Version number for detecting stale entity references. </p>
+<p>Each entity slot in an EntityPool has an associated version that is incremented when the entity is removed. EntityHandles store both the <a class="el" href="#a1876d5539fc6b911fbe54f8b56fd2ec0" title="Unique identifier for an entity within an EntityPool.">EntityId</a> and <a class="el" href="#a64dc3794b3b3f72af16a0c2a4cab2763" title="Version number for detecting stale entity references.">VersionId</a>, allowing the pool to detect when a handle refers to a recycled slot.</p>
+<p>A valid version starts at 1 (uninitialized handles have version 0).</p>
+<dl class="section see"><dt>See also</dt><dd>EntityHandle </dd>
+<dd>
+<a class="el" href="#a1876d5539fc6b911fbe54f8b56fd2ec0" title="Unique identifier for an entity within an EntityPool.">EntityId</a> </dd>
+<dd>
+EntityPool </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="VersionId_8ixx_source.html#l00029">29</a> of file <a class="el" href="VersionId_8ixx_source.html">VersionId.ixx</a>.</p>
+
+</div>
+</div>
 <a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a id="a7ca6be0dedf2b339faa79a8cd3d80bf2" name="a7ca6be0dedf2b339faa79a8cd3d80bf2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ca6be0dedf2b339faa79a8cd3d80bf2">&#9670;&#160;</a></span>EntityTombstone</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t helios::engine::core::data::EntityTombstone = std::numeric_limits&lt;size_t&gt;::max()</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sentinel value indicating an invalid or removed sparse index. </p>
+<p>Used in sparse-set data structures (e.g., EntityPool, GameObjectPool) to mark slots that do not contain valid entity references. When a slot contains this value, the corresponding entity has been removed or was never assigned.</p>
+<dl class="section see"><dt>See also</dt><dd>EntityPool </dd>
+<dd>
+GameObjectPool </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="EntityTombstone_8ixx_source.html#l00026">26</a> of file <a class="el" href="EntityTombstone_8ixx_source.html">EntityTombstone.ixx</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="GameObjectPool_8ixx_source.html#l00152">helios::engine::runtime::pooling::GameObjectPool::acquire()</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00192">helios::engine::runtime::pooling::GameObjectPool::lock()</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00242">helios::engine::runtime::pooling::GameObjectPool::release()</a>, and <a class="el" href="GameObjectPool_8ixx_source.html#l00296">helios::engine::runtime::pooling::GameObjectPool::releaseAndRemove()</a>.</p>
+
+</div>
+</div>
 <a id="ae64ec2be155f406b8b8f557354c66efb" name="ae64ec2be155f406b8b8f557354c66efb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae64ec2be155f406b8b8f557354c66efb">&#9670;&#160;</a></span>MAX_COLLISION_LAYERS</h2>
 

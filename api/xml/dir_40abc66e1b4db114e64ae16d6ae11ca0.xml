@@ -5,17 +5,18 @@
     <innerdir refid="dir_edf47c1d8e77b52ba192443804668e20">components</innerdir>
     <innerdir refid="dir_d085c729ee8a56dff1cc9d67ead9cf36">systems</innerdir>
     <innerfile refid="helios_2engine_2modules_2ai_2__module_8ixx">helios/engine/modules/ai/_module.ixx</innerfile>
+    <innerfile refid="modules_2ai_2registry_8ixx">modules/ai/registry.ixx</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md277">
+<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md274">
 <title>helios::engine::modules::ai</title><para>AI behavior modules for game entities in the helios engine.</para>
 </sect1>
-<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md278">
+<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md275">
 <title>Overview</title><para>This module provides components and systems for artificial intelligence behaviors. Currently focused on simple pursuit/chase mechanics, with architecture designed for expansion to more complex AI patterns.</para>
 </sect1>
-<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md279">
-<title>Submodules</title><sect2 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md280">
+<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md276">
+<title>Submodules</title><sect2 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md277">
 <title>components/</title><para>Data components storing AI behavior state:</para>
 <para><table rows="2" cols="2"><row>
 <entry thead="yes"><para>Component  </para>
@@ -28,7 +29,7 @@
 </table>
 </para>
 </sect2>
-<sect2 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md281">
+<sect2 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md278">
 <title>systems/</title><para>Systems that process AI components:</para>
 <para><table rows="2" cols="2"><row>
 <entry thead="yes"><para>System  </para>
@@ -42,8 +43,8 @@
 </para>
 </sect2>
 </sect1>
-<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md282">
-<title>Usage</title><sect2 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md283">
+<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md279">
+<title>Usage</title><sect2 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md280">
 <title>Basic Chase Behavior</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8modules_8ai" kindref="compound">helios.engine.modules.ai</ref>;</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Create<sp/>enemy<sp/>that<sp/>chases<sp/>player</highlight><highlight class="normal"></highlight></codeline>
@@ -57,7 +58,7 @@
 <codeline><highlight class="normal">enemy-&gt;add&lt;TranslationStateComponent&gt;();</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md284">
+<sect2 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md281">
 <title>Using with GameObjectFactory</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>enemy<sp/>=<sp/>GameObjectFactory::gameObject()</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.withAi([&amp;](</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>ai)<sp/>{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ai.chasing()</highlight></codeline>
@@ -72,9 +73,9 @@
 </programlisting></para>
 </sect2>
 </sect1>
-<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md285">
+<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md282">
 <title>Chase Behavior Details</title><para>The <computeroutput>ChaseSystem</computeroutput> operates as follows:</para>
-<para>1. <bold>Target Lookup</bold>: Finds target entity by GUID in GameWorld 2. <bold>Cooldown Check</bold>: Only updates direction after cooldown expires 3. <bold>Direction Calculation</bold>: Computes normalized vector from entity to target 4. <bold>Steering Update</bold>: Sets steering intent to face target direction</para>
+<para>1. <bold>Target Lookup</bold>: Finds target entity by handle in GameWorld 2. <bold>Cooldown Check</bold>: Only updates direction after cooldown expires 3. <bold>Direction Calculation</bold>: Computes normalized vector from entity to target 4. <bold>Steering Update</bold>: Sets steering intent to face target direction</para>
 <para><programlisting><codeline><highlight class="normal">┌─────────────────────────────────────────────────────────────┐</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ChaseSystem<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/>┌─────────────────────────────────────────────────────────┐│</highlight></codeline>
@@ -83,7 +84,7 @@
 <codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/>-<sp/>SteeringComponent<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/>-<sp/>TranslationStateComponent<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/>├─────────────────────────────────────────────────────────┤│</highlight></codeline>
-<codeline><highlight class="normal">│<sp/><sp/>│<sp/>1.<sp/>Find<sp/>target<sp/>by<sp/>GUID<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/>1.<sp/>Find<sp/>target<sp/>by<sp/>handle<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/>│<sp/>2.<sp/>Update<sp/>cooldown<sp/>timer<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/>│<sp/>3.<sp/>If<sp/>timer<sp/>&gt;=<sp/>cooldown:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/><sp/>-<sp/>Calculate<sp/>direction<sp/>to<sp/>target<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
@@ -93,7 +94,7 @@
 <codeline><highlight class="normal">└─────────────────────────────────────────────────────────────┘</highlight></codeline>
 </programlisting></para>
 </sect1>
-<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md286">
+<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md283">
 <title>Component Dependencies</title><para><table rows="2" cols="2"><row>
 <entry thead="yes"><para>Component  </para>
 </entry><entry thead="yes"><para>Required Companions  </para>
@@ -105,7 +106,7 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md287">
+<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md284">
 <title>Related Modules</title><para><table rows="4" cols="2"><row>
 <entry thead="yes"><para>Module  </para>
 </entry><entry thead="yes"><para>Purpose  </para>

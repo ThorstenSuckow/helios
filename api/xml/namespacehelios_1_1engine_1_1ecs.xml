@@ -2,19 +2,68 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="namespacehelios_1_1engine_1_1ecs" kind="namespace" language="C++">
     <compoundname>helios::engine::ecs</compoundname>
-    <innerclass refid="classhelios_1_1engine_1_1ecs_1_1Cloneable" prot="public">helios::engine::ecs::Cloneable</innerclass>
-    <innerclass refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" prot="public">helios::engine::ecs::CloneableComponent</innerclass>
-    <innerclass refid="classhelios_1_1engine_1_1ecs_1_1Component" prot="public">helios::engine::ecs::Component</innerclass>
+    <innerclass refid="structhelios_1_1engine_1_1ecs_1_1ComponentOps" prot="public">helios::engine::ecs::ComponentOps</innerclass>
+    <innerclass refid="classhelios_1_1engine_1_1ecs_1_1ComponentOpsRegistry" prot="public">helios::engine::ecs::ComponentOpsRegistry</innerclass>
+    <innerclass refid="classhelios_1_1engine_1_1ecs_1_1ComponentReflector" prot="public">helios::engine::ecs::ComponentReflector</innerclass>
+    <innerclass refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle" prot="public">helios::engine::ecs::EntityHandle</innerclass>
+    <innerclass refid="classhelios_1_1engine_1_1ecs_1_1EntityManager" prot="public">helios::engine::ecs::EntityManager</innerclass>
+    <innerclass refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry" prot="public">helios::engine::ecs::EntityRegistry</innerclass>
     <innerclass refid="classhelios_1_1engine_1_1ecs_1_1GameObject" prot="public">helios::engine::ecs::GameObject</innerclass>
+    <innerclass refid="classhelios_1_1engine_1_1ecs_1_1SparseSetBase" prot="public">helios::engine::ecs::SparseSetBase</innerclass>
+    <innerclass refid="classhelios_1_1engine_1_1ecs_1_1SparseSet" prot="public">helios::engine::ecs::SparseSet</innerclass>
     <innerclass refid="classhelios_1_1engine_1_1ecs_1_1System" prot="public">helios::engine::ecs::System</innerclass>
     <innerclass refid="classhelios_1_1engine_1_1ecs_1_1Updatable" prot="public">helios::engine::ecs::Updatable</innerclass>
-    <innernamespace refid="namespacehelios_1_1engine_1_1ecs_1_1query">helios::engine::ecs::query</innernamespace>
+    <innerclass refid="classhelios_1_1engine_1_1ecs_1_1View" prot="public">helios::engine::ecs::View</innerclass>
+    <innernamespace refid="namespacehelios_1_1engine_1_1ecs_1_1traits">helios::engine::ecs::traits</innernamespace>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="namespacehelios_1_1engine_1_1ecs_1acf98fa4115bdfac0977ffa728809bf19" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto helios::engine::ecs::InitialVersion</definition>
+        <argsstring></argsstring>
+        <name>InitialVersion</name>
+        <qualifiedname>helios::engine::ecs::InitialVersion</qualifiedname>
+        <initializer>= <ref refid="namespacehelios_1_1engine_1_1core_1_1data_1a64dc3794b3b3f72af16a0c2a4cab2763" kindref="member">helios::engine::core::data::VersionId</ref>{1}</initializer>
+        <briefdescription>
+<para>The initial version assigned to newly created entities. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Versions start at 1 to distinguish valid handles from default-initialized handles that may have a version of 0. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/EntityRegistry.ixx" line="28" column="20" bodyfile="/tmp/h/include/helios/engine/ecs/EntityRegistry.ixx" bodystart="28" bodyend="28"/>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry_1ab400a74c90d34d8e7e70cfe098b458c0" compoundref="EntityRegistry_8ixx" startline="119" endline="141">helios::engine::ecs::EntityRegistry::create</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacehelios_1_1engine_1_1ecs_1a4e37324a7a242e9d9a994dde9b2d8de7" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto helios::engine::ecs::Tombstone</definition>
+        <argsstring></argsstring>
+        <name>Tombstone</name>
+        <qualifiedname>helios::engine::ecs::Tombstone</qualifiedname>
+        <initializer>= <ref refid="namespacehelios_1_1engine_1_1core_1_1data_1a7ca6be0dedf2b339faa79a8cd3d80bf2" kindref="member">helios::engine::core::data::EntityTombstone</ref></initializer>
+        <briefdescription>
+<para>Sentinel value indicating an empty slot in the sparse array. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Aliased from `helios::engine::core::data::EntityTombstone`. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/SparseSet.ixx" line="73" column="20" bodyfile="/tmp/h/include/helios/engine/ecs/SparseSet.ixx" bodystart="73" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1SparseSet_1a5ce060ab2b528837d6e3588ae84ece6c" compoundref="SparseSet_8ixx" startline="363" endline="365">helios::engine::ecs::SparseSet&lt; T &gt;::contains</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1SparseSet_1a69b9ae3f2df72503e8fd7237c8e3ef20" compoundref="SparseSet_8ixx" startline="230" endline="249">helios::engine::ecs::SparseSet&lt; T &gt;::emplace</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1SparseSet_1a202ca2ab4166a46c28e737b531053b4f" compoundref="SparseSet_8ixx" startline="330" endline="337">helios::engine::ecs::SparseSet&lt; T &gt;::get</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1SparseSet_1a1f516ec283a56422dfd71dc1c6f0e932" compoundref="SparseSet_8ixx" startline="346" endline="353">helios::engine::ecs::SparseSet&lt; T &gt;::get</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1SparseSet_1a08bcad065586a1bf3f8e46686a45ed63" compoundref="SparseSet_8ixx" startline="262" endline="281">helios::engine::ecs::SparseSet&lt; T &gt;::insert</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1SparseSet_1aa72c9d0be676855619731b67eda0d3ee" compoundref="SparseSet_8ixx" startline="297" endline="321">helios::engine::ecs::SparseSet&lt; T &gt;::remove</referencedby>
+      </memberdef>
+    </sectiondef>
     <briefdescription>
 <para>Core Entity-Component-System architecture. </para>
     </briefdescription>
     <detaileddescription>
-<para>This module provides the foundational classes for the composition-based game architecture. It includes entity base classes (<ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">GameObject</ref>, <ref refid="classhelios_1_1engine_1_1ecs_1_1Component" kindref="compound">Component</ref>, <ref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" kindref="compound">CloneableComponent</ref>), system infrastructure (<ref refid="classhelios_1_1engine_1_1ecs_1_1System" kindref="compound">System</ref>), and query utilities (GameObjectFilter, GameObjectView). </para>
+<para>This module provides the foundational classes for the composition-based game architecture. It includes entity base classes (<ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">GameObject</ref>, Component, CloneableComponent), system infrastructure (<ref refid="classhelios_1_1engine_1_1ecs_1_1System" kindref="compound">System</ref>), and query utilities (GameObjectFilter, GameObjectView). </para>
     </detaileddescription>
-    <location file="/tmp/h/include/helios/engine/ecs/CloneableComponent.ixx" line="15" column="1"/>
+    <location file="/tmp/h/include/helios/engine/ecs/ComponentOps.ixx" line="11" column="1"/>
   </compounddef>
 </doxygen>

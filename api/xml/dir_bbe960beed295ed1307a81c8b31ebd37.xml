@@ -5,14 +5,15 @@
     <innerdir refid="dir_c723e3cec65e0ebbf524b85c829eaed3">components</innerdir>
     <innerdir refid="dir_caaad60d0afbb69336f7da156903a2e2">systems</innerdir>
     <innerfile refid="helios_2engine_2mechanics_2spawn_2__module_8ixx">helios/engine/mechanics/spawn/_module.ixx</innerfile>
+    <innerfile refid="mechanics_2spawn_2registry_8ixx">mechanics/spawn/registry.ixx</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_bbe960beed295ed1307a81c8b31ebd37_1autotoc_md258">
+<sect1 id="dir_bbe960beed295ed1307a81c8b31ebd37_1autotoc_md255">
 <title>helios::engine::mechanics::spawn</title><para>Entity spawning and lifecycle management.</para>
 <para>This module provides the infrastructure for spawning and despawning GameObjects at runtime based on configurable conditions and scheduling rules.</para>
 </sect1>
-<sect1 id="dir_bbe960beed295ed1307a81c8b31ebd37_1autotoc_md259">
+<sect1 id="dir_bbe960beed295ed1307a81c8b31ebd37_1autotoc_md256">
 <title>Architecture</title><para>The spawn system follows a scheduler-based architecture with separation of concerns:</para>
 <para><programlisting><codeline><highlight class="normal">┌─────────────────────┐<sp/><sp/><sp/><sp/>┌─────────────────────┐</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/>SpawnCondition<sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/>│<sp/><sp/><sp/>SpawnStrategy<sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
@@ -38,7 +39,7 @@
 <codeline><highlight class="normal">└─────────────────────────────────────────────────┘</highlight></codeline>
 </programlisting></para>
 </sect1>
-<sect1 id="dir_bbe960beed295ed1307a81c8b31ebd37_1autotoc_md260">
+<sect1 id="dir_bbe960beed295ed1307a81c8b31ebd37_1autotoc_md257">
 <title>Submodules</title><para><table rows="3" cols="2"><row>
 <entry thead="yes"><para>Directory  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
@@ -54,7 +55,7 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_bbe960beed295ed1307a81c8b31ebd37_1autotoc_md261">
+<sect1 id="dir_bbe960beed295ed1307a81c8b31ebd37_1autotoc_md258">
 <title>Related Modules</title><para>The spawn system integrates with several other modules:</para>
 <para><itemizedlist>
 <listitem><para><computeroutput>helios.engine.mechanics.spawn.logic</computeroutput> — SpawnScheduler, SpawnCondition, SpawnStrategy</para>
@@ -64,7 +65,7 @@
 </listitem></itemizedlist>
 </para>
 </sect1>
-<sect1 id="dir_bbe960beed295ed1307a81c8b31ebd37_1autotoc_md262">
+<sect1 id="dir_bbe960beed295ed1307a81c8b31ebd37_1autotoc_md259">
 <title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>1.<sp/>Create<sp/>spawn<sp/>rules<sp/>with<sp/>conditions</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>scheduler<sp/>=<sp/>std::make_unique&lt;SpawnScheduler&gt;();</highlight></codeline>
 <codeline><highlight class="normal">scheduler-&gt;addRule(</highlight></codeline>

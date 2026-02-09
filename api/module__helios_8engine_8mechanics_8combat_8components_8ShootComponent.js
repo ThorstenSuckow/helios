@@ -1,8 +1,14 @@
 var module__helios_8engine_8mechanics_8combat_8components_8ShootComponent =
 [
     [ "ShootComponent", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent.html", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent" ],
+    [ "helios::engine::mechanics::combat::components::ShootComponent::isEnabled", "module__helios_8engine_8mechanics_8combat_8components_8ShootComponent.html#a4bfb2b8e2b0f09c48b3ad3ecc6018eca", null ],
+    [ "helios::engine::mechanics::combat::components::ShootComponent::enable", "module__helios_8engine_8mechanics_8combat_8components_8ShootComponent.html#a63f5fc21fc873ba49061c00195d1cd93", null ],
+    [ "helios::engine::mechanics::combat::components::ShootComponent::disable", "module__helios_8engine_8mechanics_8combat_8components_8ShootComponent.html#adfc4fb0e0fc19e19302d48502b26e807", null ],
     [ "helios::engine::mechanics::combat::components::ShootComponent::ShootComponent", "module__helios_8engine_8mechanics_8combat_8components_8ShootComponent.html#ac4815699e2c6db49974cb64c6f4cdbf0", null ],
-    [ "helios::engine::mechanics::combat::components::ShootComponent::onAttach", "module__helios_8engine_8mechanics_8combat_8components_8ShootComponent.html#a8c6cf3e6ae421313e9d05f09e2e1a600", null ],
+    [ "helios::engine::mechanics::combat::components::ShootComponent::ShootComponent", "module__helios_8engine_8mechanics_8combat_8components_8ShootComponent.html#a287e2854c968de8df4daf08b12631347", null ],
+    [ "helios::engine::mechanics::combat::components::ShootComponent::operator=", "module__helios_8engine_8mechanics_8combat_8components_8ShootComponent.html#a5ae19d7b5ae708b7ca5a6dac18a74f89", null ],
+    [ "helios::engine::mechanics::combat::components::ShootComponent::ShootComponent", "module__helios_8engine_8mechanics_8combat_8components_8ShootComponent.html#a362d2e3df85d7b2d605bf06dc7baf6b5", null ],
+    [ "helios::engine::mechanics::combat::components::ShootComponent::operator=", "module__helios_8engine_8mechanics_8combat_8components_8ShootComponent.html#a52baae4e34b50c7c3042793cbcc3331c", null ],
     [ "helios::engine::mechanics::combat::components::ShootComponent::shoot", "module__helios_8engine_8mechanics_8combat_8components_8ShootComponent.html#a8233473e4c885f47808b21ee51862898", null ],
     [ "helios::engine::mechanics::combat::components::ShootComponent::cooldownDelta", "module__helios_8engine_8mechanics_8combat_8components_8ShootComponent.html#abcaa99e09aafafe975f82c3835508801", null ],
     [ "helios::engine::mechanics::combat::components::ShootComponent::intensity", "module__helios_8engine_8mechanics_8combat_8components_8ShootComponent.html#acb35f190e76bbe799d8064f10ab30258", null ],
@@ -14,13 +20,11 @@ var module__helios_8engine_8mechanics_8combat_8components_8ShootComponent =
     [ "helios::engine::mechanics::combat::components::ShootComponent::sourceVelocity", "module__helios_8engine_8mechanics_8combat_8components_8ShootComponent.html#a7b27d5b884947b46f569d2428e8d5590", null ],
     [ "helios::engine::mechanics::combat::components::ShootComponent::fireRate", "module__helios_8engine_8mechanics_8combat_8components_8ShootComponent.html#a2ae31e3e89dbb862c54e473910d4a6b7", null ],
     [ "helios::engine::mechanics::combat::components::ShootComponent::setFireRate", "module__helios_8engine_8mechanics_8combat_8components_8ShootComponent.html#a714d4c63c6e95cffeb932b19c43124c7", null ],
-    [ "helios::engine::mechanics::combat::components::ShootComponent::typeId", "module__helios_8engine_8mechanics_8combat_8components_8ShootComponent.html#a94557d55ba2c6d6381154bafa7486c9e", null ],
     [ "helios::engine::mechanics::combat::components::ShootComponent::intensity_", "module__helios_8engine_8mechanics_8combat_8components_8ShootComponent.html#a7571f57473bd46ce4be7be42c786802c", null ],
-    [ "helios::engine::mechanics::combat::components::ShootComponent::aimComponent_", "module__helios_8engine_8mechanics_8combat_8components_8ShootComponent.html#a06bc48f53fccd78964104ad61f0af2a1", null ],
-    [ "helios::engine::mechanics::combat::components::ShootComponent::transformComponent_", "module__helios_8engine_8mechanics_8combat_8components_8ShootComponent.html#aa428c3ca107d94a4f7c7aab544167840", null ],
     [ "helios::engine::mechanics::combat::components::ShootComponent::cooldownDelta_", "module__helios_8engine_8mechanics_8combat_8components_8ShootComponent.html#a4a9163802f6ee046ac0fd62e7ac091dd", null ],
     [ "helios::engine::mechanics::combat::components::ShootComponent::cooldownTimer_", "module__helios_8engine_8mechanics_8combat_8components_8ShootComponent.html#a8efb4fb812830b71b51a2a0dd175fddf", null ],
     [ "helios::engine::mechanics::combat::components::ShootComponent::projectileSpeed_", "module__helios_8engine_8mechanics_8combat_8components_8ShootComponent.html#accb4b59ab1fecb6cab41ce51ab97b6ac", null ],
     [ "helios::engine::mechanics::combat::components::ShootComponent::sourceVelocity_", "module__helios_8engine_8mechanics_8combat_8components_8ShootComponent.html#ab0858a76ad9850f19c1ce92b49da1f4f", null ],
-    [ "helios::engine::mechanics::combat::components::ShootComponent::fireRate_", "module__helios_8engine_8mechanics_8combat_8components_8ShootComponent.html#addb5c7762ac2ae4489ffd703468418f0", null ]
+    [ "helios::engine::mechanics::combat::components::ShootComponent::fireRate_", "module__helios_8engine_8mechanics_8combat_8components_8ShootComponent.html#addb5c7762ac2ae4489ffd703468418f0", null ],
+    [ "helios::engine::mechanics::combat::components::ShootComponent::isEnabled_", "module__helios_8engine_8mechanics_8combat_8components_8ShootComponent.html#a5524c082eae9683eb55dbb6e3ecbdc86", null ]
 ];

@@ -128,20 +128,26 @@ Directories</h2></td></tr>
 Files</h2></td></tr>
 <tr class="memitem:_5Fmodule_2Eixx" id="r__5Fmodule_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="helios_2engine_2modules_2__module_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="helios_2engine_2modules_2__module_8ixx.html">_module.ixx</a></td></tr>
 <tr class="memdesc:helios_2engine_2modules_2__module_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aggregate module for <a class="el" href="namespacehelios_1_1engine_1_1modules.html" title="Domain-specific components and systems.">helios::engine::modules</a> namespace. <br /></td></tr>
+<tr class="memitem:registry_2Eixx" id="r_registry_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="modules_2registry_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modules_2registry_8ixx.html">registry.ixx</a></td></tr>
+<tr class="memdesc:modules_2registry_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Component registration for all engine modules. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md355"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md352"></a>
 helios::engine::modules</h1>
 <p>Domain-specific components and systems built on top of the ECS architecture.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md356"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md353"></a>
 Overview</h1>
-<p>This module provides concrete game logic implementations using the composition-based component model. While <span class="tt"><a class="el" href="namespacehelios_1_1engine_1_1ecs.html" title="Core Entity-Component-System architecture.">helios.engine.ecs</a></span> provides the base classes (GameObject, Component, System), this module contains domain-specific functionality for physics, scene integration, and rendering.</p>
-<p>For gameplay mechanics (bounds, combat, spawn, input), see <span class="tt"><a class="el" href="namespacehelios_1_1engine_1_1mechanics.html" title="High-level gameplay systems and components for game logic.">helios.engine.mechanics</a></span>.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md357"></a>
+<p>This module provides concrete game logic implementations using the composition-based component model. Components are stored in SparseSets and manipulated through the ECS View system.</p>
+<p>For gameplay mechanics (bounds, combat, spawn, input, health, scoring), see <span class="tt"><a class="el" href="namespacehelios_1_1engine_1_1mechanics.html" title="High-level gameplay systems and components for game logic.">helios.engine.mechanics</a></span>.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md354"></a>
 Submodules</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Module  </th><th class="markdownTableHeadNone">Purpose  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">ai/</span>  </td><td class="markdownTableBodyNone">AI behavior components (chase, seek)  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">effects/</span>  </td><td class="markdownTableBodyNone">Visual effects (spin, fade)  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">physics/</span>  </td><td class="markdownTableBodyNone">Physics simulation (collision, motion)  </td></tr>
 <tr class="markdownTableRowEven">
@@ -149,49 +155,76 @@ Submodules</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">scene/</span>  </td><td class="markdownTableBodyNone">Scene graph integration  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt">rendering/</span>  </td><td class="markdownTableBodyNone">Renderable components  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">rendering/</span>  </td><td class="markdownTableBodyNone">Renderable and model components  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">pool/</span>  </td><td class="markdownTableBodyNone">Object pool components  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">ui/</span>  </td><td class="markdownTableBodyNone">UI layout, transform, widgets, data binding  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md358"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md355"></a>
 Architecture</h1>
 <div class="fragment"><div class="line">helios.engine.modules</div>
+<div class="line">├── ai/              # AI behavior</div>
+<div class="line">│   └── chase/       # Chase/seek behavior</div>
+<div class="line">├── effects/         # Visual effects</div>
+<div class="line">│   └── gfx/         # Graphics effects (spin)</div>
 <div class="line">├── physics/</div>
-<div class="line">│   ├── collision/   # AABB, collision detection</div>
-<div class="line">│   └── motion/      # Movement, steering</div>
+<div class="line">│   ├── collision/   # AABB, collision detection, collision state</div>
+<div class="line">│   └── motion/      # Movement (Move2D), steering, direction</div>
 <div class="line">├── spatial/</div>
 <div class="line">│   └── transform/   # Translation, rotation, scale components</div>
 <div class="line">├── scene/           # SceneNode integration</div>
-<div class="line">├── rendering/       # Renderable components</div>
-<div class="line">└── pool/            # Pool ID components</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md359"></a>
-Relationship to ECS and Runtime</h1>
-<p>This module <b>imports</b> from <span class="tt"><a class="el" href="namespacehelios_1_1engine_1_1ecs.html" title="Core Entity-Component-System architecture.">helios.engine.ecs</a></span>:</p>
-<ul>
-<li><span class="tt">GameObject</span>, <span class="tt">Component</span> — Base classes extended by domain components</li>
-<li><span class="tt">System</span> — Base class extended by domain systems</li>
-</ul>
-<p>This module <b>imports</b> from <span class="tt"><a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1world.html" title="World state management and per-frame update context.">helios.engine.runtime.world</a></span>:</p>
-<ul>
-<li><span class="tt">GameWorld</span> — Used by systems for entity queries</li>
-<li><span class="tt">Manager</span> — Extended by domain managers (ProjectileManager)</li>
-</ul>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md360"></a>
+<div class="line">├── rendering/</div>
+<div class="line">│   ├── model/       # Model AABB component</div>
+<div class="line">│   └── renderable/  # Renderable component</div>
+<div class="line">└── ui/</div>
+<div class="line">    ├── binding/     # Data binding</div>
+<div class="line">    ├── layout/      # Anchors, layout</div>
+<div class="line">    ├── transform/   # UI positioning</div>
+<div class="line">    └── widgets/     # Text, buttons</div>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md356"></a>
+Key Components</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Component  </th><th class="markdownTableHeadNone">Purpose  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">CollisionComponent</span>  </td><td class="markdownTableBodyNone">Layer-based collision filtering  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">CollisionStateComponent</span>  </td><td class="markdownTableBodyNone">Per-frame collision state  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">Move2DComponent</span>  </td><td class="markdownTableBodyNone">2D physics-based movement  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">SteeringComponent</span>  </td><td class="markdownTableBodyNone">Rotation and heading control  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">TranslationStateComponent</span>  </td><td class="markdownTableBodyNone">Position state  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">ScaleStateComponent</span>  </td><td class="markdownTableBodyNone">Scale state  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">RotationStateComponent</span>  </td><td class="markdownTableBodyNone">Rotation state  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">SceneNodeComponent</span>  </td><td class="markdownTableBodyNone">Links entity to scene graph  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">RenderableComponent</span>  </td><td class="markdownTableBodyNone">Visual representation  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">UiTransformComponent</span>  </td><td class="markdownTableBodyNone">Viewport-relative positioning  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md357"></a>
 Usage Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8modules_8physics_8motion_8components_8Move2DComponent.html">helios.engine.modules.physics.motion.components.Move2DComponent</a>;</div>
 <div class="line"><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8modules_8physics_8collision_8components_8CollisionComponent.html">helios.engine.modules.physics.collision.components.CollisionComponent</a>;</div>
 <div class="line"><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8modules_8scene_8components_8SceneNodeComponent.html">helios.engine.modules.scene.components.SceneNodeComponent</a>;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Add domain components</span></div>
-<div class="line">entity-&gt;add&lt;Move2DComponent&gt;();</div>
-<div class="line">entity-&gt;add&lt;CollisionComponent&gt;(layerId, mask);</div>
-<div class="line">entity-&gt;add&lt;SceneNodeComponent&gt;(sceneNode);</div>
+<div class="line">entity.add&lt;Move2DComponent&gt;(speed);</div>
+<div class="line">entity.add&lt;CollisionComponent&gt;(layerId);</div>
+<div class="line">entity.add&lt;SceneNodeComponent&gt;(sceneNode);</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// Add domain systems to game loop</span></div>
-<div class="line">gameLoop.phase(PhaseType::Main)</div>
-<div class="line">    .addPass()</div>
-<div class="line">    .addSystem&lt;Move2DSystem&gt;(&amp;gameWorld)</div>
-<div class="line">    .addSystem&lt;GridCollisionDetectionSystem&gt;(&amp;gameWorld);</div>
+<div class="line"><span class="comment">// Query with views</span></div>
+<div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span> [go, move, collision, active] : gameWorld-&gt;view&lt;</div>
+<div class="line">    Move2DComponent,</div>
+<div class="line">    CollisionComponent,</div>
+<div class="line">    Active</div>
+<div class="line">&gt;().whereEnabled()) {</div>
+<div class="line">    <span class="comment">// Process entities</span></div>
+<div class="line">}</div>
 <div class="ttc" id="amodule__helios_8engine_8modules_8physics_8collision_8components_8CollisionComponent_html"><div class="ttname"><a href="module__helios_8engine_8modules_8physics_8collision_8components_8CollisionComponent.html">helios.engine.modules.physics.collision.components.CollisionComponent</a></div></div>
 <div class="ttc" id="amodule__helios_8engine_8modules_8physics_8motion_8components_8Move2DComponent_html"><div class="ttname"><a href="module__helios_8engine_8modules_8physics_8motion_8components_8Move2DComponent.html">helios.engine.modules.physics.motion.components.Move2DComponent</a></div></div>
 <div class="ttc" id="amodule__helios_8engine_8modules_8scene_8components_8SceneNodeComponent_html"><div class="ttname"><a href="module__helios_8engine_8modules_8scene_8components_8SceneNodeComponent.html">helios.engine.modules.scene.components.SceneNodeComponent</a></div></div>

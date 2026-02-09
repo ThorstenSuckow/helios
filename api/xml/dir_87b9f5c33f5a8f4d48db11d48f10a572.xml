@@ -10,20 +10,29 @@
     <innerdir refid="dir_7002044952ee345c222d895bec1a9397">spatial</innerdir>
     <innerdir refid="dir_bf15dcce3b0eb2b2bde353446d930b9c">ui</innerdir>
     <innerfile refid="helios_2engine_2modules_2__module_8ixx">helios/engine/modules/_module.ixx</innerfile>
+    <innerfile refid="modules_2registry_8ixx">modules/registry.ixx</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_87b9f5c33f5a8f4d48db11d48f10a572_1autotoc_md355">
+<sect1 id="dir_87b9f5c33f5a8f4d48db11d48f10a572_1autotoc_md352">
 <title>helios::engine::modules</title><para>Domain-specific components and systems built on top of the ECS architecture.</para>
 </sect1>
-<sect1 id="dir_87b9f5c33f5a8f4d48db11d48f10a572_1autotoc_md356">
-<title>Overview</title><para>This module provides concrete game logic implementations using the composition-based component model. While <computeroutput><ref refid="namespacehelios_1_1engine_1_1ecs" kindref="compound">helios.engine.ecs</ref></computeroutput> provides the base classes (GameObject, Component, System), this module contains domain-specific functionality for physics, scene integration, and rendering.</para>
-<para>For gameplay mechanics (bounds, combat, spawn, input), see <computeroutput><ref refid="namespacehelios_1_1engine_1_1mechanics" kindref="compound">helios.engine.mechanics</ref></computeroutput>.</para>
+<sect1 id="dir_87b9f5c33f5a8f4d48db11d48f10a572_1autotoc_md353">
+<title>Overview</title><para>This module provides concrete game logic implementations using the composition-based component model. Components are stored in SparseSets and manipulated through the ECS View system.</para>
+<para>For gameplay mechanics (bounds, combat, spawn, input, health, scoring), see <computeroutput><ref refid="namespacehelios_1_1engine_1_1mechanics" kindref="compound">helios.engine.mechanics</ref></computeroutput>.</para>
 </sect1>
-<sect1 id="dir_87b9f5c33f5a8f4d48db11d48f10a572_1autotoc_md357">
-<title>Submodules</title><para><table rows="6" cols="2"><row>
+<sect1 id="dir_87b9f5c33f5a8f4d48db11d48f10a572_1autotoc_md354">
+<title>Submodules</title><para><table rows="8" cols="2"><row>
 <entry thead="yes"><para>Module  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ai/</computeroutput>  </para>
+</entry><entry thead="no"><para>AI behavior components (chase, seek)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>effects/</computeroutput>  </para>
+</entry><entry thead="no"><para>Visual effects (spin, fade)  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>physics/</computeroutput>  </para>
@@ -39,56 +48,103 @@
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>rendering/</computeroutput>  </para>
-</entry><entry thead="no"><para>Renderable components  </para>
+</entry><entry thead="no"><para>Renderable and model components  </para>
 </entry></row>
 <row>
-<entry thead="no"><para><computeroutput>pool/</computeroutput>  </para>
-</entry><entry thead="no"><para>Object pool components  </para>
+<entry thead="no"><para><computeroutput>ui/</computeroutput>  </para>
+</entry><entry thead="no"><para>UI layout, transform, widgets, data binding  </para>
 </entry></row>
 </table>
 </para>
 </sect1>
-<sect1 id="dir_87b9f5c33f5a8f4d48db11d48f10a572_1autotoc_md358">
+<sect1 id="dir_87b9f5c33f5a8f4d48db11d48f10a572_1autotoc_md355">
 <title>Architecture</title><para><programlisting><codeline><highlight class="normal">helios.engine.modules</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>ai/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>AI<sp/>behavior</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>chase/<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Chase/seek<sp/>behavior</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>effects/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Visual<sp/>effects</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>gfx/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Graphics<sp/>effects<sp/>(spin)</highlight></codeline>
 <codeline><highlight class="normal">├──<sp/>physics/</highlight></codeline>
-<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>collision/<sp/><sp/><sp/>#<sp/>AABB,<sp/>collision<sp/>detection</highlight></codeline>
-<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>motion/<sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Movement,<sp/>steering</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>collision/<sp/><sp/><sp/>#<sp/>AABB,<sp/>collision<sp/>detection,<sp/>collision<sp/>state</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>motion/<sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Movement<sp/>(Move2D),<sp/>steering,<sp/>direction</highlight></codeline>
 <codeline><highlight class="normal">├──<sp/>spatial/</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>transform/<sp/><sp/><sp/>#<sp/>Translation,<sp/>rotation,<sp/>scale<sp/>components</highlight></codeline>
 <codeline><highlight class="normal">├──<sp/>scene/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>SceneNode<sp/>integration</highlight></codeline>
-<codeline><highlight class="normal">├──<sp/>rendering/<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Renderable<sp/>components</highlight></codeline>
-<codeline><highlight class="normal">└──<sp/>pool/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Pool<sp/>ID<sp/>components</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>rendering/</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>model/<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Model<sp/>AABB<sp/>component</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>renderable/<sp/><sp/>#<sp/>Renderable<sp/>component</highlight></codeline>
+<codeline><highlight class="normal">└──<sp/>ui/</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>├──<sp/>binding/<sp/><sp/><sp/><sp/><sp/>#<sp/>Data<sp/>binding</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>├──<sp/>layout/<sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Anchors,<sp/>layout</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>├──<sp/>transform/<sp/><sp/><sp/>#<sp/>UI<sp/>positioning</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>└──<sp/>widgets/<sp/><sp/><sp/><sp/><sp/>#<sp/>Text,<sp/>buttons</highlight></codeline>
 </programlisting></para>
 </sect1>
-<sect1 id="dir_87b9f5c33f5a8f4d48db11d48f10a572_1autotoc_md359">
-<title>Relationship to ECS and Runtime</title><para>This module <bold>imports</bold> from <computeroutput><ref refid="namespacehelios_1_1engine_1_1ecs" kindref="compound">helios.engine.ecs</ref></computeroutput>:</para>
-<para><itemizedlist>
-<listitem><para><computeroutput>GameObject</computeroutput>, <computeroutput>Component</computeroutput> — Base classes extended by domain components</para>
-</listitem><listitem><para><computeroutput>System</computeroutput> — Base class extended by domain systems</para>
-</listitem></itemizedlist>
-</para>
-<para>This module <bold>imports</bold> from <computeroutput><ref refid="namespacehelios_1_1engine_1_1runtime_1_1world" kindref="compound">helios.engine.runtime.world</ref></computeroutput>:</para>
-<para><itemizedlist>
-<listitem><para><computeroutput>GameWorld</computeroutput> — Used by systems for entity queries</para>
-</listitem><listitem><para><computeroutput>Manager</computeroutput> — Extended by domain managers (ProjectileManager)</para>
-</listitem></itemizedlist>
+<sect1 id="dir_87b9f5c33f5a8f4d48db11d48f10a572_1autotoc_md356">
+<title>Key Components</title><para><table rows="11" cols="2"><row>
+<entry thead="yes"><para>Component  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>CollisionComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Layer-based collision filtering  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>CollisionStateComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Per-frame collision state  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>Move2DComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>2D physics-based movement  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>SteeringComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Rotation and heading control  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>TranslationStateComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Position state  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ScaleStateComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Scale state  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>RotationStateComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Rotation state  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>SceneNodeComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Links entity to scene graph  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>RenderableComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Visual representation  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>UiTransformComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Viewport-relative positioning  </para>
+</entry></row>
+</table>
 </para>
 </sect1>
-<sect1 id="dir_87b9f5c33f5a8f4d48db11d48f10a572_1autotoc_md360">
+<sect1 id="dir_87b9f5c33f5a8f4d48db11d48f10a572_1autotoc_md357">
 <title>Usage Example</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8modules_8physics_8motion_8components_8Move2DComponent" kindref="compound">helios.engine.modules.physics.motion.components.Move2DComponent</ref>;</highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8modules_8physics_8collision_8components_8CollisionComponent" kindref="compound">helios.engine.modules.physics.collision.components.CollisionComponent</ref>;</highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8modules_8scene_8components_8SceneNodeComponent" kindref="compound">helios.engine.modules.scene.components.SceneNodeComponent</ref>;</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Add<sp/>domain<sp/>components</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal">entity-&gt;add&lt;Move2DComponent&gt;();</highlight></codeline>
-<codeline><highlight class="normal">entity-&gt;add&lt;CollisionComponent&gt;(layerId,<sp/>mask);</highlight></codeline>
-<codeline><highlight class="normal">entity-&gt;add&lt;SceneNodeComponent&gt;(sceneNode);</highlight></codeline>
+<codeline><highlight class="normal">entity.add&lt;Move2DComponent&gt;(speed);</highlight></codeline>
+<codeline><highlight class="normal">entity.add&lt;CollisionComponent&gt;(layerId);</highlight></codeline>
+<codeline><highlight class="normal">entity.add&lt;SceneNodeComponent&gt;(sceneNode);</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Add<sp/>domain<sp/>systems<sp/>to<sp/>game<sp/>loop</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal">gameLoop.phase(PhaseType::Main)</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addPass()</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addSystem&lt;Move2DSystem&gt;(&amp;gameWorld)</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addSystem&lt;GridCollisionDetectionSystem&gt;(&amp;gameWorld);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Query<sp/>with<sp/>views</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>[go,<sp/>move,<sp/>collision,<sp/>active]<sp/>:<sp/>gameWorld-&gt;view&lt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>Move2DComponent,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>CollisionComponent,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>Active</highlight></codeline>
+<codeline><highlight class="normal">&gt;().whereEnabled())<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Process<sp/>entities</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
 </programlisting></para>
 <para><hruler/>
 </para>

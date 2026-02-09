@@ -79,7 +79,7 @@
 </para>
         </detaileddescription>
         <inbodydescription>
-<para><xrefsect id="todo_1_todo000011"><xreftitle>Todo</xreftitle><xrefdescription><para>this should be processed before iterating over all schedulers: A scheduler owns the rule, hence a rule that triggered the event&apos;s can be associated with the owning Scheduler, making it unneccesary to iterate over already processed events </para>
+<para><xrefsect id="todo_1_todo000010"><xreftitle>Todo</xreftitle><xrefdescription><para>this should be processed before iterating over all schedulers: A scheduler owns the rule, hence a rule that triggered the event&apos;s can be associated with the owning Scheduler, making it unneccesary to iterate over already processed events </para>
 </xrefdescription></xrefsect></para>
         </inbodydescription>
         <location file="/tmp/h/include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" line="100" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" bodystart="100" bodyend="130"/>
@@ -127,6 +127,14 @@
       </node>
     </inheritancegraph>
     <collaborationgraph>
+      <node id="9">
+        <label>helios::engine::ecs::EntityManager</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1EntityManager"/>
+      </node>
+      <node id="8">
+        <label>helios::engine::ecs::EntityRegistry</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry"/>
+      </node>
       <node id="2">
         <label>helios::engine::ecs::System</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1System"/>
@@ -165,6 +173,12 @@
         </childnode>
         <childnode refid="7" relation="usage">
           <edgelabel>spawnCommandHandlerRegistry_</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>entityRegistry_</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>em_</edgelabel>
         </childnode>
       </node>
       <node id="5">

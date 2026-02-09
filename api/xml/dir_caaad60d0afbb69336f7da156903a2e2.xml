@@ -7,13 +7,13 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_caaad60d0afbb69336f7da156903a2e2_1autotoc_md264">
+<sect1 id="dir_caaad60d0afbb69336f7da156903a2e2_1autotoc_md261">
 <title>helios::engine::mechanics::spawn::systems</title><para>Systems for spawn lifecycle management within the game loop.</para>
 </sect1>
-<sect1 id="dir_caaad60d0afbb69336f7da156903a2e2_1autotoc_md265">
+<sect1 id="dir_caaad60d0afbb69336f7da156903a2e2_1autotoc_md262">
 <title>Overview</title><para>This module contains the GameObjectSpawnSystem which integrates spawning into the game loop. The system evaluates spawn conditions via a SpawnScheduler and enqueues spawn commands for deferred execution.</para>
 </sect1>
-<sect1 id="dir_caaad60d0afbb69336f7da156903a2e2_1autotoc_md266">
+<sect1 id="dir_caaad60d0afbb69336f7da156903a2e2_1autotoc_md263">
 <title>Key Classes</title><para><table rows="2" cols="2"><row>
 <entry thead="yes"><para>System  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
@@ -25,11 +25,11 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_caaad60d0afbb69336f7da156903a2e2_1autotoc_md267">
+<sect1 id="dir_caaad60d0afbb69336f7da156903a2e2_1autotoc_md264">
 <title>System Flow</title><para>The GameObjectSpawnSystem performs the following each frame:</para>
 <para>1. <bold>Read Frame Events:</bold> Consumes <computeroutput>SpawnPlanCommandExecutedEvent</computeroutput> from the previous frame 2. <bold>Commit Completed Spawns:</bold> Updates the scheduler with successful spawn counts 3. <bold>Evaluate Conditions:</bold> Checks all spawn rules against current conditions 4. <bold>Drain Scheduled Plans:</bold> Enqueues ready plans as <computeroutput>ScheduledSpawnPlanCommand</computeroutput></para>
 </sect1>
-<sect1 id="dir_caaad60d0afbb69336f7da156903a2e2_1autotoc_md268">
+<sect1 id="dir_caaad60d0afbb69336f7da156903a2e2_1autotoc_md265">
 <title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Create<sp/>scheduler<sp/>with<sp/>spawn<sp/>rules</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>scheduler<sp/>=<sp/>std::make_unique&lt;SpawnScheduler&gt;();</highlight></codeline>
 <codeline><highlight class="normal">scheduler-&gt;addRule(enemyRuleId,<sp/>std::make_unique&lt;TimerSpawnCondition&gt;(2.0f),<sp/>enemyProfileId);</highlight></codeline>

@@ -2,51 +2,89 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22" kind="dir">
     <compoundname>ecs</compoundname>
-    <innerdir refid="dir_6634d24428e27f0a06eb229019da5d06">query</innerdir>
     <innerfile refid="helios_2engine_2ecs_2__module_8ixx">helios/engine/ecs/_module.ixx</innerfile>
-    <innerfile refid="CloneableComponent_8ixx">CloneableComponent.ixx</innerfile>
-    <innerfile refid="Component_8ixx">Component.ixx</innerfile>
+    <innerfile refid="ComponentOps_8ixx">ComponentOps.ixx</innerfile>
+    <innerfile refid="ComponentOpsRegistry_8ixx">ComponentOpsRegistry.ixx</innerfile>
+    <innerfile refid="ComponentReflector_8ixx">ComponentReflector.ixx</innerfile>
+    <innerfile refid="EntityHandle_8ixx">EntityHandle.ixx</innerfile>
+    <innerfile refid="EntityManager_8ixx">EntityManager.ixx</innerfile>
+    <innerfile refid="EntityRegistry_8ixx">EntityRegistry.ixx</innerfile>
     <innerfile refid="GameObject_8ixx">GameObject.ixx</innerfile>
+    <innerfile refid="SparseSet_8ixx">SparseSet.ixx</innerfile>
     <innerfile refid="System_8ixx">System.ixx</innerfile>
+    <innerfile refid="Traits_8ixx">Traits.ixx</innerfile>
     <innerfile refid="Updatable_8ixx">Updatable.ixx</innerfile>
+    <innerfile refid="View_8ixx">View.ixx</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md124">
+<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md117">
 <title>helios::engine::ecs</title><para>Core Entity-Component-System architecture for the helios game engine.</para>
 </sect1>
-<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md125">
+<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md118">
 <title>Overview</title><para>This module provides the foundational classes for the composition-based game architecture. It separates data (Components) from behavior (Systems). Entity lifecycle and world management are provided by <computeroutput><ref refid="namespacehelios_1_1engine_1_1runtime_1_1world" kindref="compound">helios.engine.runtime.world</ref></computeroutput>.</para>
 </sect1>
-<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md126">
-<title>Key Classes</title><para><table rows="6" cols="2"><row>
+<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md119">
+<title>Key Classes</title><para><table rows="14" cols="2"><row>
 <entry thead="yes"><para>Class  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>GameObject</computeroutput>  </para>
-</entry><entry thead="no"><para>Container for components representing a game entity  </para>
+</entry><entry thead="no"><para>Lightweight entity facade (~16 bytes, pass-by-value)  </para>
 </entry></row>
 <row>
-<entry thead="no"><para><computeroutput>Component</computeroutput>  </para>
-</entry><entry thead="no"><para>Base class for data containers attached to GameObjects  </para>
+<entry thead="no"><para><computeroutput>EntityHandle</computeroutput>  </para>
+</entry><entry thead="no"><para>Versioned handle for safe entity references (8 bytes)  </para>
 </entry></row>
 <row>
-<entry thead="no"><para><computeroutput>CloneableComponent</computeroutput>  </para>
-</entry><entry thead="no"><para>CRTP base for components that support cloning  </para>
+<entry thead="no"><para><computeroutput>EntityRegistry</computeroutput>  </para>
+</entry><entry thead="no"><para>Handle allocation and validation  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>EntityManager</computeroutput>  </para>
+</entry><entry thead="no"><para>Unified interface for entity creation and component storage  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>SparseSet&lt;T&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para>Generic O(1) data structure for component storage  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>SparseSetBase</computeroutput>  </para>
+</entry><entry thead="no"><para>Type-erased base for polymorphic sparse set access  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>View</computeroutput>  </para>
+</entry><entry thead="no"><para>Component-based entity queries  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>System</computeroutput>  </para>
-</entry><entry thead="no"><para>Abstract base for logic processors (registered with <computeroutput>GameLoop</computeroutput>)  </para>
+</entry><entry thead="no"><para>Abstract base for logic processors  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>Updatable</computeroutput>  </para>
 </entry><entry thead="no"><para>Interface for per-frame updatable objects  </para>
 </entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ComponentOps</computeroutput>  </para>
+</entry><entry thead="no"><para>Function pointers for lifecycle callbacks  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ComponentOpsRegistry</computeroutput>  </para>
+</entry><entry thead="no"><para>Global registry mapping type IDs to ComponentOps  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ComponentReflector</computeroutput>  </para>
+</entry><entry thead="no"><para>Compile-time type registration  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>Traits</computeroutput>  </para>
+</entry><entry thead="no"><para>Compile-time concepts for component lifecycle hooks  </para>
+</entry></row>
 </table>
 </para>
 </sect1>
-<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md127">
+<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md120">
 <title>Component Storage Model</title><para><computeroutput>GameObject</computeroutput> uses a <bold>type-indexed storage</bold> system for components. Instead of a hash-based lookup, components are stored in a contiguous vector where the index corresponds to the component&apos;s compile-time <computeroutput>ComponentTypeId</computeroutput>.</para>
 <para><bold>Performance Characteristics:</bold></para>
 <para><table rows="5" cols="3"><row>
@@ -89,8 +127,103 @@
 <codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ComponentTypeId::id&lt;Transform&gt;()<sp/><sp/>ComponentTypeId::id&lt;Move2D&gt;()</highlight></codeline>
 </programlisting></para>
 </sect1>
-<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md128">
-<title>Submodules</title><sect2 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md129">
+<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md121">
+<title>EntityRegistry and EntityManager</title><para>The <bold>EntityRegistry</bold> is the single source of truth for entity lifecycle. It manages handle allocation, version tracking, and entity validation.</para>
+<para>The <bold>EntityManager</bold> provides a high-level API combining registry and component storage:</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal">EntityRegistry<sp/>registry;</highlight></codeline>
+<codeline><highlight class="normal">EntityManager<sp/>manager(registry);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Create<sp/>entity</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>entity<sp/>=<sp/>manager.create();</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Attach<sp/>components</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>transform<sp/>=<sp/>manager.emplace&lt;TransformComponent&gt;(entity,<sp/>glm::vec3{0.0f});</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>velocity<sp/>=<sp/>manager.emplace&lt;VelocityComponent&gt;(entity);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Check<sp/>and<sp/>retrieve<sp/>component</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(manager.has&lt;TransformComponent&gt;(entity))<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>t<sp/>=<sp/>manager.get&lt;TransformComponent&gt;(entity);</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Remove<sp/>single<sp/>component</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">manager.remove&lt;TransformComponent&gt;(entity);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Destroy<sp/>entity<sp/>(removes<sp/>all<sp/>components<sp/>and<sp/>invalidates<sp/>handle)</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">manager.destroy(entity);</highlight></codeline>
+</programlisting></para>
+<para><bold>Architecture:</bold></para>
+<para><programlisting><codeline><highlight class="normal">┌────────────────────────────────────────────────────────────┐</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>EntityManager<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>┌──────────────────┐<sp/><sp/><sp/><sp/>┌───────────────────────────────┐<sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>EntityRegistry<sp/><sp/>│<sp/><sp/><sp/><sp/>│<sp/><sp/>Component<sp/>Storage<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>(handle<sp/>mgmt)<sp/><sp/><sp/>│<sp/><sp/><sp/><sp/>│<sp/><sp/>vector&lt;SparseSet&lt;T&gt;&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>-<sp/>create()<sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/>│<sp/><sp/>(indexed<sp/>by<sp/>TypeIndexer)<sp/><sp/><sp/><sp/><sp/>│<sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>-<sp/>destroy()<sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>-<sp/>isValid()<sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/>│<sp/><sp/>[0]<sp/>SparseSet&lt;Transform&gt;<sp/><sp/><sp/><sp/><sp/>│<sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>└──────────────────┘<sp/><sp/><sp/><sp/>│<sp/><sp/>[1]<sp/>SparseSet&lt;Velocity&gt;<sp/><sp/><sp/><sp/><sp/><sp/>│<sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/>[2]<sp/>SparseSet&lt;Health&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>└───────────────────────────────┘<sp/>│</highlight></codeline>
+<codeline><highlight class="normal">└────────────────────────────────────────────────────────────┘</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md122">
+<title>EntityPool</title><para><computeroutput>EntityPool&lt;T&gt;</computeroutput> is a sparse-set based data structure for storing entities with versioned handles. It provides O(1) insertion, lookup, and cache-friendly iteration.</para>
+<para><bold>Data Structure:</bold></para>
+<para><programlisting><codeline><highlight class="normal">sparse_:<sp/><sp/>[0]<sp/><sp/>[1]<sp/><sp/>[2]<sp/><sp/>[3]<sp/><sp/>...<sp/><sp/><sp/><sp/><sp/>(maps<sp/>entity<sp/>ID<sp/>→<sp/>dense<sp/>index)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>↓<sp/><sp/><sp/><sp/>↓<sp/><sp/><sp/><sp/>↓<sp/><sp/><sp/><sp/>↓</highlight></codeline>
+<codeline><highlight class="normal">dense_:<sp/><sp/><sp/>[0]<sp/><sp/>[2]<sp/><sp/>[3]<sp/><sp/>...<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(entity<sp/>IDs,<sp/>contiguous)</highlight></codeline>
+<codeline><highlight class="normal">denseData_:<sp/>[E0]<sp/>[E2]<sp/>[E3]<sp/>...<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(actual<sp/>entities,<sp/>cache-friendly)</highlight></codeline>
+<codeline><highlight class="normal">version_:<sp/>[1]<sp/><sp/>[1]<sp/><sp/>[2]<sp/><sp/>[1]<sp/><sp/>...<sp/><sp/><sp/><sp/><sp/>(version<sp/>per<sp/>ID,<sp/>incremented<sp/>on<sp/>removal)</highlight></codeline>
+</programlisting></para>
+<para><bold>Versioned Handles:</bold></para>
+<para><computeroutput>EntityHandle</computeroutput> contains both an entity ID and a version number. When an entity is removed, its version is incremented. This allows detection of stale handles that reference deleted entities.</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>EntityPool<sp/>usage<sp/>example</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">EntityPool&lt;GameObject&gt;<sp/>pool;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Add<sp/>entity,<sp/>receive<sp/>handle</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>handle<sp/>=<sp/>pool.emplace(std::make_unique&lt;GameObject&gt;());</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Retrieve<sp/>entity<sp/>via<sp/>handle<sp/>(O(1))</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>entity<sp/>=<sp/>pool.get(handle);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Iterate<sp/>all<sp/>entities<sp/>(cache-friendly)</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>e<sp/>:<sp/>pool.entities())<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>process<sp/>entity</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md123">
+<title>Submodules</title><sect2 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md124">
+<title>Traits</title><para>Compile-time concepts for component lifecycle hooks:</para>
+<para><table rows="4" cols="2"><row>
+<entry thead="yes"><para>Trait  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>HasOnRemove</computeroutput>  </para>
+</entry><entry thead="no"><para>Intercept removal (return <computeroutput>false</computeroutput> to cancel)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>HasOnAcquire</computeroutput>  </para>
+</entry><entry thead="no"><para>Called when acquired from a pool  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>HasOnRelease</computeroutput>  </para>
+</entry><entry thead="no"><para>Called when released back to a pool  </para>
+</entry></row>
+</table>
+</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="keyword">struct<sp/></highlight><highlight class="normal">ResourceComponent<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>onRemove()<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cleanup();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;<sp/><sp/></highlight><highlight class="comment">//<sp/>Allow<sp/>removal</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(<ref refid="concepthelios_1_1engine_1_1ecs_1_1traits_1_1HasOnRemove" kindref="compound">helios::engine::ecs::traits::HasOnRemove&lt;ResourceComponent&gt;</ref>);</highlight></codeline>
+</programlisting></para>
+</sect2>
+<sect2 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md125">
 <title>query/</title><para>Entity query utilities for filtering and iterating GameObjects:</para>
 <para><table rows="3" cols="2"><row>
 <entry thead="yes"><para>Class  </para>
@@ -108,7 +241,7 @@
 </para>
 </sect2>
 </sect1>
-<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md130">
+<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md126">
 <title>Related Modules</title><para><table rows="3" cols="2"><row>
 <entry thead="yes"><para>Module  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
@@ -124,7 +257,7 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md131">
+<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md127">
 <title>Architecture</title><para><programlisting><codeline><highlight class="normal">┌─────────────────────────────────────────────────────────────┐</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GameWorld<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/>┌─────────────┐<sp/><sp/>┌─────────────┐<sp/><sp/>┌─────────────────────┐<sp/><sp/>│</highlight></codeline>
@@ -146,7 +279,7 @@
 <codeline><highlight class="normal">└─────────────────────────────────────────────────────────────┘</highlight></codeline>
 </programlisting></para>
 </sect1>
-<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md132">
+<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md128">
 <title>Usage Example</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8ecs" kindref="compound">helios.engine.ecs</ref>;</highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8runtime_8world_8GameWorld" kindref="compound">helios.engine.runtime.world.GameWorld</ref>;</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
@@ -155,12 +288,12 @@
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Add<sp/>entity<sp/>with<sp/>components</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>entity<sp/>=<sp/>std::make_unique&lt;helios::engine::ecs::GameObject&gt;();</highlight></codeline>
-<codeline><highlight class="normal">entity-&gt;add&lt;Move2DComponent&gt;();</highlight></codeline>
-<codeline><highlight class="normal">entity-&gt;add&lt;SceneNodeComponent&gt;(sceneNode);</highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>player<sp/>=<sp/>world.<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a28a53dcdcfb8880867db35145d88d3e2" kindref="member">addGameObject</ref>(std::move(entity));</highlight></codeline>
+<codeline><highlight class="normal">entity.add&lt;Move2DComponent&gt;();</highlight></codeline>
+<codeline><highlight class="normal">entity.add&lt;SceneNodeComponent&gt;(sceneNode);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>player<sp/>=<sp/>world.<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a672057079d4cf81a8d05b07aa87fee3c" kindref="member">addGameObject</ref>(std::move(entity));</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Query<sp/>entities<sp/>by<sp/>component</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>[obj,<sp/>move]<sp/>:<sp/>world.<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a83857f38d3ffb10560f863107707929d" kindref="member">find</ref>&lt;Move2DComponent&gt;().each())<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>[obj,<sp/>move]<sp/>:<sp/>world.<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ac4319f3453e06ad04125c43b17047398" kindref="member">find</ref>&lt;Move2DComponent&gt;())<sp/>{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Process<sp/>matching<sp/>entities</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal">}</highlight></codeline>
 </programlisting></para>

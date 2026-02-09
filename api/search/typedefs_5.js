@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['scorepoolrevision_0',['ScorePoolRevision',['../namespacehelios_1_1engine_1_1mechanics_1_1scoring_1_1types.html#a011dfc88867a7333c5bf452f039b6b16',1,'helios::engine::mechanics::scoring::types']]],
-  ['sinktypeid_1',['SinkTypeId',['../namespacehelios_1_1util_1_1log.html#a43ac66e3137c172ec852cd889ea1e1f5',1,'helios::util::log']]]
+  ['gameloopeventbus_0',['GameLoopEventBus',['../namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1event.html#a59b7e7d4204d917672591bc8a383d9b4',1,'helios::engine::runtime::messaging::event']]]
 ];

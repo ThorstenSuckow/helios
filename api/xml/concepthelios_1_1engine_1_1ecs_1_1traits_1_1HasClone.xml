@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="concepthelios_1_1engine_1_1ecs_1_1traits_1_1HasClone" kind="concept">
+    <compoundname>helios::engine::ecs::traits::HasClone</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;typename T&gt;
+concept <ref refid="concepthelios_1_1engine_1_1ecs_1_1traits_1_1HasClone" kindref="compound">helios::engine::ecs::traits::HasClone</ref> =  requires(T t, const T&amp; source) {
+        {t.onClone(source)} -&gt; std::same_as&lt;void&gt;;
+    }    </initializer>
+    <briefdescription>
+<para>Trait for components with post-copy initialization. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>When a type `T` satisfies `HasClone`, the `onClone()` method is called after copy construction during entity cloning. Use this for initialization that requires the copy to be complete.</para>
+<para>## Usage</para>
+<para>```cpp struct SceneNodeComponent { SceneNode* sceneNode_;</para>
+<para>void onClone(const SceneNodeComponent&amp; source) { // Create a new SceneNode for this clone auto node = std::make_unique&lt;SceneNode&gt;(source.sceneNode_-&gt;shareRenderable()); sceneNode_ = source.sceneNode_-&gt;parent()-&gt;addNode(std::move(node)); } };</para>
+<para>static_assert(traits::HasClone&lt;SceneNodeComponent&gt;); ```</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type to check. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/ecs/Traits.ixx" line="127" column="5"/>
+  </compounddef>
+</doxygen>

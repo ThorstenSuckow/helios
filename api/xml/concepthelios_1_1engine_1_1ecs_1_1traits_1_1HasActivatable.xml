@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="concepthelios_1_1engine_1_1ecs_1_1traits_1_1HasActivatable" kind="concept">
+    <compoundname>helios::engine::ecs::traits::HasActivatable</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;typename T&gt;
+concept <ref refid="concepthelios_1_1engine_1_1ecs_1_1traits_1_1HasActivatable" kindref="compound">helios::engine::ecs::traits::HasActivatable</ref> =  requires(T t) {
+        {t.onActivate()} -&gt; std::same_as&lt;void&gt;;
+        {t.onDeactivate()} -&gt; std::same_as&lt;void&gt;;
+    }    </initializer>
+    <briefdescription>
+<para>Trait for components responding to GameObject activation. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>When a type `T` satisfies `HasActivatable`, the `onActivate()` and `onDeactivate()` methods are called when the owning GameObject&apos;s active state changes via `setActive()`. Both methods must be present.</para>
+<para>## Usage</para>
+<para>```cpp struct AIComponent { void onActivate() { startBehaviorTree(); } void onDeactivate() { pauseBehaviorTree(); } };</para>
+<para>static_assert(traits::HasActivatable&lt;AIComponent&gt;); ```</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type to check. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/ecs/Traits.ixx" line="152" column="5"/>
+  </compounddef>
+</doxygen>

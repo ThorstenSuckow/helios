@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="concepthelios_1_1engine_1_1ecs_1_1traits_1_1HasToggleable" kind="concept">
+    <compoundname>helios::engine::ecs::traits::HasToggleable</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;typename T&gt;
+concept <ref refid="concepthelios_1_1engine_1_1ecs_1_1traits_1_1HasToggleable" kindref="compound">helios::engine::ecs::traits::HasToggleable</ref> =  requires(T t) {
+        {t.disable()} -&gt; std::same_as&lt;void&gt;;
+        {t.enable()} -&gt; std::same_as&lt;void&gt;;
+    }    </initializer>
+    <briefdescription>
+<para>Trait for components that can be enabled/disabled. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>When a type `T` satisfies `HasToggleable`, the component can be toggled on/off via `enable()` and `disable()` methods. Both methods must be present for the trait to be satisfied.</para>
+<para>## Usage</para>
+<para>```cpp struct MyComponent { bool isEnabled_ = true;</para>
+<para>void enable() noexcept { isEnabled_ = true; } void disable() noexcept { isEnabled_ = false; } };</para>
+<para>static_assert(traits::HasToggleable&lt;MyComponent&gt;); ```</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type to check. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/ecs/Traits.ixx" line="96" column="5"/>
+  </compounddef>
+</doxygen>

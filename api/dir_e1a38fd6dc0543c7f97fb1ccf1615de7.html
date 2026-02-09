@@ -129,15 +129,17 @@ Directories</h2></td></tr>
 Files</h2></td></tr>
 <tr class="memitem:_5Fmodule_2Eixx" id="r__5Fmodule_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="helios_2engine_2mechanics_2__module_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="helios_2engine_2mechanics_2__module_8ixx.html">_module.ixx</a></td></tr>
 <tr class="memdesc:helios_2engine_2mechanics_2__module_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aggregate module for <a class="el" href="namespacehelios_1_1engine_1_1mechanics.html" title="High-level gameplay systems and components for game logic.">helios::engine::mechanics</a> namespace. <br /></td></tr>
+<tr class="memitem:registry_2Eixx" id="r_registry_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="mechanics_2registry_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mechanics_2registry_8ixx.html">registry.ixx</a></td></tr>
+<tr class="memdesc:mechanics_2registry_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Component registration for all engine mechanics. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md223"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md219"></a>
 helios::engine::mechanics</h1>
 <p>High-level gameplay mechanics and systems for game logic.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md224"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md220"></a>
 Overview</h1>
 <p>This module provides the core building blocks for implementing game mechanics. It contains components that store game state and systems that implement game rules according to the composition-over-inheritance principle.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md225"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md221"></a>
 Submodules</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -145,13 +147,43 @@ Submodules</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">bounds/</span>  </td><td class="markdownTableBodyNone">Level boundary behavior and response systems  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt">combat/</span>  </td><td class="markdownTableBodyNone">Weapon, shooting, and projectile mechanics  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">combat/</span>  </td><td class="markdownTableBodyNone">Weapon, shooting, attack tracking  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">damage/</span>  </td><td class="markdownTableBodyNone">Damage dealing and damage application  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">health/</span>  </td><td class="markdownTableBodyNone">Health tracking and death detection  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">lifecycle/</span>  </td><td class="markdownTableBodyNone">Entity activation state (Active/Inactive tags)  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">scoring/</span>  </td><td class="markdownTableBodyNone">Score pools, score values, and score tracking  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">spawn/</span>  </td><td class="markdownTableBodyNone">Entity spawning and lifecycle management  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">input/</span>  </td><td class="markdownTableBodyNone">Input processing systems (twin-stick controllers)  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md226"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md222"></a>
+Key Components</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Component  </th><th class="markdownTableHeadNone">Purpose  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">Active</span> / <span class="tt">Inactive</span>  </td><td class="markdownTableBodyNone">Tag components for entity activation state  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">HealthComponent</span>  </td><td class="markdownTableBodyNone">Tracks current/max health, alive status  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">DamageDealerComponent</span>  </td><td class="markdownTableBodyNone">Stores layer-based damage values  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">LastAttackerComponent</span>  </td><td class="markdownTableBodyNone">Tracks last entity that dealt damage  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">SpawnedByProfileComponent</span>  </td><td class="markdownTableBodyNone">Links entity to spawn profile for pooling  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">EmittedByComponent</span>  </td><td class="markdownTableBodyNone">Tracks source entity (e.g., player → projectile)  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">ScoreValueComponent</span>  </td><td class="markdownTableBodyNone">Score awarded when entity is defeated  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">ScorePoolComponent</span>  </td><td class="markdownTableBodyNone">Associates entity with a score pool  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md223"></a>
 Key Systems</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -159,11 +191,11 @@ Key Systems</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">TwinStickInputSystem</span>  </td><td class="markdownTableBodyNone">Translates gamepad input to movement/aim commands  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt">LevelBoundsBehaviorSystem</span>  </td><td class="markdownTableBodyNone">Applies bounce/wrap/despawn at level edges  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">LevelBoundsSystem</span>  </td><td class="markdownTableBodyNone">Applies bounce/wrap/despawn at level edges  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">ProjectileSpawnSystem</span>  </td><td class="markdownTableBodyNone">Spawns projectiles based on weapon state  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">HealthDepletedSystem</span>  </td><td class="markdownTableBodyNone">Detects death and triggers death events  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt">GameObjectSpawnSystem</span>  </td><td class="markdownTableBodyNone">Executes scheduled spawn plans  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">DamageApplicationSystem</span>  </td><td class="markdownTableBodyNone">Applies damage from collision events  </td></tr>
 </table>
 <hr  />
 <details >

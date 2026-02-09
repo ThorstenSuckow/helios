@@ -1,0 +1,255 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1ecs_1_1View" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::ecs::View</compoundname>
+    <innerclass refid="structhelios_1_1engine_1_1ecs_1_1View_1_1Iterator" prot="public">helios::engine::ecs::View::Iterator</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename...</type>
+        <declname>Components</declname>
+        <defname>Components</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1ecs_1_1View_1a88b1ead365d68bac917632827fb0f9bc" prot="private" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1engine_1_1ecs_1_1EntityManager" kindref="compound">EntityManager</ref> *</type>
+        <definition>EntityManager* helios::engine::ecs::View&lt; Components &gt;::em_</definition>
+        <argsstring></argsstring>
+        <name>em_</name>
+        <qualifiedname>helios::engine::ecs::View::em_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/View.ixx" line="51" column="23" bodyfile="/tmp/h/include/helios/engine/ecs/View.ixx" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1ecs_1_1View_1a2c103470f9e90c6ac6c07ddf801e932f" prot="private" static="no" mutable="no">
+        <type>std::tuple&lt; <ref refid="classhelios_1_1engine_1_1ecs_1_1SparseSet" kindref="compound">SparseSet</ref>&lt; Components &gt; *... &gt;</type>
+        <definition>std::tuple&lt;SparseSet&lt;Components&gt;*... &gt; helios::engine::ecs::View&lt; Components &gt;::includeSets_</definition>
+        <argsstring></argsstring>
+        <name>includeSets_</name>
+        <qualifiedname>helios::engine::ecs::View::includeSets_</qualifiedname>
+        <briefdescription>
+<para>Pointers to the SparseSets of the included components. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/View.ixx" line="56" column="20" bodyfile="/tmp/h/include/helios/engine/ecs/View.ixx" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1ecs_1_1View_1afdbbb466fdb8113d9195f6b64f0412d8" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::function&lt; bool(<ref refid="namespacehelios_1_1engine_1_1core_1_1data_1a1876d5539fc6b911fbe54f8b56fd2ec0" kindref="member">EntityId</ref>)&gt; &gt;</type>
+        <definition>std::vector&lt;std::function&lt;bool(EntityId)&gt; &gt; helios::engine::ecs::View&lt; Components &gt;::excludeChecks_</definition>
+        <argsstring></argsstring>
+        <name>excludeChecks_</name>
+        <qualifiedname>helios::engine::ecs::View::excludeChecks_</qualifiedname>
+        <briefdescription>
+<para>List of exclusion predicates. * Stores functions that return true if an entity should be EXCLUDED. Operates on <ref refid="namespacehelios_1_1engine_1_1core_1_1data_1a1876d5539fc6b911fbe54f8b56fd2ec0" kindref="member">EntityId</ref> (index) because the <ref refid="classhelios_1_1engine_1_1ecs_1_1SparseSet" kindref="compound">SparseSet</ref> uses it internally. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/View.ixx" line="63" column="21" bodyfile="/tmp/h/include/helios/engine/ecs/View.ixx" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1ecs_1_1View_1a1e192fa561b880d9b2236ae97283aa35" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool helios::engine::ecs::View&lt; Components &gt;::filterEnabledOnly_</definition>
+        <argsstring></argsstring>
+        <name>filterEnabledOnly_</name>
+        <qualifiedname>helios::engine::ecs::View::filterEnabledOnly_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>Flag to filter only enabled components. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/View.ixx" line="68" column="14" bodyfile="/tmp/h/include/helios/engine/ecs/View.ixx" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1ecs_1_1View_1a678a8d26e4dcfaee3f4aea902e1a1cb1" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool helios::engine::ecs::View&lt; Components &gt;::filterActiveOnly_</definition>
+        <argsstring></argsstring>
+        <name>filterActiveOnly_</name>
+        <qualifiedname>helios::engine::ecs::View::filterActiveOnly_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/View.ixx" line="70" column="14" bodyfile="/tmp/h/include/helios/engine/ecs/View.ixx" bodystart="70" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1View_1a5a37987aa1422f61c8be3597f6b1f319" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::ecs::View&lt; Components &gt;::View</definition>
+        <argsstring>(EntityManager *em)</argsstring>
+        <name>View</name>
+        <qualifiedname>helios::engine::ecs::View::View</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1ecs_1_1EntityManager" kindref="compound">EntityManager</ref> *</type>
+          <declname>em</declname>
+        </param>
+        <briefdescription>
+<para>Constructs the view and retrieves the necessary component sets. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>em</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the <ref refid="classhelios_1_1engine_1_1ecs_1_1EntityManager" kindref="compound">EntityManager</ref> to retrieve sets and construct GameObjects. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/View.ixx" line="78" column="18" bodyfile="/tmp/h/include/helios/engine/ecs/View.ixx" bodystart="78" bodyend="81"/>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1View_1a3c293a9ed0d9343432a714c8edf68a36" compoundref="View_8ixx" startline="103" endline="112">helios::engine::ecs::View&lt; Components &gt;::exclude</referencedby>
+        <referencedby refid="structhelios_1_1engine_1_1ecs_1_1View_1_1Iterator_1a81fd28a824c096dd040b3dca6e67f885" compoundref="View_8ixx" startline="161" endline="162">helios::engine::ecs::View&lt; Components &gt;::Iterator::Iterator</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1View_1a0454834cb04780ea3411edcb395bc446" compoundref="View_8ixx" startline="122" endline="125">helios::engine::ecs::View&lt; Components &gt;::whereEnabled</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1View_1a3c293a9ed0d9343432a714c8edf68a36" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classhelios_1_1engine_1_1ecs_1_1View_1a5a37987aa1422f61c8be3597f6b1f319" kindref="member">View</ref> &amp;</type>
+        <definition>View &amp; helios::engine::ecs::View&lt; Components &gt;::exclude</definition>
+        <argsstring>()</argsstring>
+        <name>exclude</name>
+        <qualifiedname>helios::engine::ecs::View::exclude</qualifiedname>
+        <briefdescription>
+<para>Excludes entities that have a specific component. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Entities possessing the specified component type will be skipped during iteration. Multiple exclusions can be chained.</para>
+<para>```cpp // Skip entities with Shield or Invincible for (auto [e, health] : world-&gt;view&lt;HealthComponent&gt;() .<ref refid="classhelios_1_1engine_1_1ecs_1_1View_1a3c293a9ed0d9343432a714c8edf68a36" kindref="member">exclude&lt;ShieldComponent&gt;()</ref> .<ref refid="classhelios_1_1engine_1_1ecs_1_1View_1a3c293a9ed0d9343432a714c8edf68a36" kindref="member">exclude&lt;InvincibleComponent&gt;()</ref>) { // Only vulnerable entities } ```</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The component type to exclude.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to this <ref refid="classhelios_1_1engine_1_1ecs_1_1View" kindref="compound">View</ref> for method chaining. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/View.ixx" line="103" column="14" bodyfile="/tmp/h/include/helios/engine/ecs/View.ixx" bodystart="103" bodyend="112"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1View_1a5a37987aa1422f61c8be3597f6b1f319" compoundref="View_8ixx" startline="78" endline="81">helios::engine::ecs::View&lt; Components &gt;::View</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1View_1a0454834cb04780ea3411edcb395bc446" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1ecs_1_1View_1a5a37987aa1422f61c8be3597f6b1f319" kindref="member">View</ref> &amp;</type>
+        <definition>View &amp; helios::engine::ecs::View&lt; Components &gt;::whereEnabled</definition>
+        <argsstring>()</argsstring>
+        <name>whereEnabled</name>
+        <qualifiedname>helios::engine::ecs::View::whereEnabled</qualifiedname>
+        <briefdescription>
+<para>Filters to only include entities with enabled components. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Components must implement `isEnabled()` returning bool. Components without this method are assumed to be enabled.</para>
+<para><simplesect kind="return"><para>Reference to this <ref refid="classhelios_1_1engine_1_1ecs_1_1View" kindref="compound">View</ref> for method chaining. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/View.ixx" line="122" column="14" bodyfile="/tmp/h/include/helios/engine/ecs/View.ixx" bodystart="122" bodyend="125"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1View_1a5a37987aa1422f61c8be3597f6b1f319" compoundref="View_8ixx" startline="78" endline="81">helios::engine::ecs::View&lt; Components &gt;::View</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1View_1a36efde6cb4008bea0338dc7a4e3f8f32" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structhelios_1_1engine_1_1ecs_1_1View_1_1Iterator" kindref="compound">Iterator</ref></type>
+        <definition>Iterator helios::engine::ecs::View&lt; Components &gt;::begin</definition>
+        <argsstring>()</argsstring>
+        <name>begin</name>
+        <qualifiedname>helios::engine::ecs::View::begin</qualifiedname>
+        <briefdescription>
+<para>Returns an iterator to the first valid entity. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Uses the first component type&apos;s <ref refid="classhelios_1_1engine_1_1ecs_1_1SparseSet" kindref="compound">SparseSet</ref> as the lead. If the first entity is invalid, advances to the next valid one.</para>
+<para><simplesect kind="return"><para><ref refid="structhelios_1_1engine_1_1ecs_1_1View_1_1Iterator" kindref="compound">Iterator</ref> to the first valid entity, or <ref refid="classhelios_1_1engine_1_1ecs_1_1View_1a5064ece3e22d516edd36b82f4ac65132" kindref="member">end()</ref> if none found. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/View.ixx" line="298" column="19" bodyfile="/tmp/h/include/helios/engine/ecs/View.ixx" bodystart="298" bodyend="312"/>
+        <references refid="structhelios_1_1engine_1_1ecs_1_1View_1_1Iterator_1a493cb2a0b6d77bb4c72a369844e9c088" compoundref="View_8ixx" startline="241" endline="245">helios::engine::ecs::View&lt; Components &gt;::Iterator::advance</references>
+        <references refid="structhelios_1_1engine_1_1ecs_1_1View_1_1Iterator_1adcb6853183056b7afcb02daf95c2e7c5" compoundref="View_8ixx" startline="175" endline="233">helios::engine::ecs::View&lt; Components &gt;::Iterator::isValid</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1View_1a5064ece3e22d516edd36b82f4ac65132" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structhelios_1_1engine_1_1ecs_1_1View_1_1Iterator" kindref="compound">Iterator</ref></type>
+        <definition>Iterator helios::engine::ecs::View&lt; Components &gt;::end</definition>
+        <argsstring>()</argsstring>
+        <name>end</name>
+        <qualifiedname>helios::engine::ecs::View::end</qualifiedname>
+        <briefdescription>
+<para>Returns an iterator to the end (past the last entity). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>End iterator for comparison. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/View.ixx" line="319" column="19" bodyfile="/tmp/h/include/helios/engine/ecs/View.ixx" bodystart="319" bodyend="327"/>
+        <referencedby refid="structhelios_1_1engine_1_1ecs_1_1View_1_1Iterator_1a81fd28a824c096dd040b3dca6e67f885" compoundref="View_8ixx" startline="161" endline="162">helios::engine::ecs::View&lt; Components &gt;::Iterator::Iterator</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A view class to iterate over entities having specific components. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The <ref refid="classhelios_1_1engine_1_1ecs_1_1View" kindref="compound">View</ref> acts as a lightweight iterator over the SparseSets of the requested components. It uses the first component type (Lead) as the primary iterator and cross-references existence in other sets.</para>
+<para>## Usage</para>
+<para>```cpp for (auto [entity, transform, velocity, active] : gameWorld-&gt;view&lt; TransformComponent, VelocityComponent, Active &gt;().<ref refid="classhelios_1_1engine_1_1ecs_1_1View_1a0454834cb04780ea3411edcb395bc446" kindref="member">whereEnabled()</ref>) { // Process entity } ```</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Components</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The component types to query for.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1ecs_1_1EntityManager" kindref="compound">EntityManager</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1ecs_1_1SparseSet" kindref="compound">SparseSet</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/ecs/View.ixx" line="48" column="5" bodyfile="/tmp/h/include/helios/engine/ecs/View.ixx" bodystart="48" bodyend="328"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1View_1a36efde6cb4008bea0338dc7a4e3f8f32" prot="public" virt="non-virtual"><scope>helios::engine::ecs::View</scope><name>begin</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1View_1a88b1ead365d68bac917632827fb0f9bc" prot="private" virt="non-virtual"><scope>helios::engine::ecs::View</scope><name>em_</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1View_1a5064ece3e22d516edd36b82f4ac65132" prot="public" virt="non-virtual"><scope>helios::engine::ecs::View</scope><name>end</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1View_1a3c293a9ed0d9343432a714c8edf68a36" prot="public" virt="non-virtual"><scope>helios::engine::ecs::View</scope><name>exclude</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1View_1afdbbb466fdb8113d9195f6b64f0412d8" prot="private" virt="non-virtual"><scope>helios::engine::ecs::View</scope><name>excludeChecks_</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1View_1a678a8d26e4dcfaee3f4aea902e1a1cb1" prot="private" virt="non-virtual"><scope>helios::engine::ecs::View</scope><name>filterActiveOnly_</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1View_1a1e192fa561b880d9b2236ae97283aa35" prot="private" virt="non-virtual"><scope>helios::engine::ecs::View</scope><name>filterEnabledOnly_</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1View_1a2c103470f9e90c6ac6c07ddf801e932f" prot="private" virt="non-virtual"><scope>helios::engine::ecs::View</scope><name>includeSets_</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1View_1a5a37987aa1422f61c8be3597f6b1f319" prot="public" virt="non-virtual"><scope>helios::engine::ecs::View</scope><name>View</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1View_1a0454834cb04780ea3411edcb395bc446" prot="public" virt="non-virtual"><scope>helios::engine::ecs::View</scope><name>whereEnabled</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

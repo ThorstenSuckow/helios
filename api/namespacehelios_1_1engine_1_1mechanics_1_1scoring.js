@@ -8,5 +8,6 @@ var namespacehelios_1_1engine_1_1mechanics_1_1scoring =
     [ "ScoreCommandHandler", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler.html", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler" ],
     [ "ScorePool", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePool.html", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePool" ],
     [ "ScorePoolManager", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager.html", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager" ],
-    [ "ScorePoolSnapshot", "structhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolSnapshot.html", "structhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolSnapshot" ]
+    [ "ScorePoolSnapshot", "structhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolSnapshot.html", "structhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolSnapshot" ],
+    [ "registerComponents", "namespacehelios_1_1engine_1_1mechanics_1_1scoring.html#ab4c5f88fd823d42fdba6b3f26b0005fb", null ]
 ];

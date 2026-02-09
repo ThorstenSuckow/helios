@@ -19,7 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="28" column="15" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="28" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="32" column="15" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1a57280da15a9d9a69c80c31220572815d" prot="private" static="no" mutable="no">
         <type>float</type>
@@ -35,26 +35,90 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="33" column="15" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="33" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="37" column="15" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="37" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1a540083d0c6011d9694576add80f53a1d" prot="private" static="no" mutable="no">
-        <type><ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref></type>
-        <definition>helios::util::Guid helios::engine::modules::ai::components::ChaseComponent::target_</definition>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1a136be129c509bf5c0a4d91cd644d2796" prot="private" static="no" mutable="no">
+        <type><ref refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle" kindref="compound">helios::engine::ecs::EntityHandle</ref></type>
+        <definition>helios::engine::ecs::EntityHandle helios::engine::modules::ai::components::ChaseComponent::target_</definition>
         <argsstring></argsstring>
         <name>target_</name>
         <qualifiedname>helios::engine::modules::ai::components::ChaseComponent::target_</qualifiedname>
-        <initializer>{<ref refid="namespacehelios_1_1core_1_1types_1a209d373c4d42ac831d2f6bfd1c4165ad" kindref="member">helios::core::types::no_init</ref>}</initializer>
+        <initializer>{}</initializer>
         <briefdescription>
-<para>GUID of the entity to chase. </para>
+<para>EntityHandle of the entity to chase. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="38" column="28" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="38" bodyend="38"/>
+        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="42" column="43" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="42" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1afb8619b1da47a6e9d299f1cc814b8525" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool helios::engine::modules::ai::components::ChaseComponent::isEnabled_</definition>
+        <argsstring></argsstring>
+        <name>isEnabled_</name>
+        <qualifiedname>helios::engine::modules::ai::components::ChaseComponent::isEnabled_</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>Whether this component is enabled. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="47" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="47" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1af92c59f728413564a65b086b0672b506" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::modules::ai::components::ChaseComponent::isEnabled</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>isEnabled</name>
+        <qualifiedname>helios::engine::modules::ai::components::ChaseComponent::isEnabled</qualifiedname>
+        <briefdescription>
+<para>Checks whether this component is enabled. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if enabled, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="56" column="15" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="56" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1a250e6981e52a877c89b43f55ab833212" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::ai::components::ChaseComponent::enable</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>enable</name>
+        <qualifiedname>helios::engine::modules::ai::components::ChaseComponent::enable</qualifiedname>
+        <briefdescription>
+<para>Enables this component. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="63" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="63" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1a282c2d191ea016269c4c573907f37058" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::ai::components::ChaseComponent::disable</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>disable</name>
+        <qualifiedname>helios::engine::modules::ai::components::ChaseComponent::disable</qualifiedname>
+        <briefdescription>
+<para>Disables this component. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="70" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="70" bodyend="72"/>
+      </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1a890b401836d9583a1db14dc515878d71" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>helios::engine::modules::ai::components::ChaseComponent::ChaseComponent</definition>
@@ -68,25 +132,103 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="45" column="9"/>
+        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="77" column="9"/>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1a49ba5bcbbd4e181559bdcc73717da8f9">helios::engine::modules::ai::components::ChaseComponent::ChaseComponent</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1ada31c5559a3f0189ffb730f53c381a81">helios::engine::modules::ai::components::ChaseComponent::ChaseComponent</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1a3ae880da1e9b13af0c72d4e378e2a5b1">helios::engine::modules::ai::components::ChaseComponent::operator=</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1ab4f829360f0dcfdb4c6f34d95c6a96c2">helios::engine::modules::ai::components::ChaseComponent::operator=</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1a716e200999e523b0679422e6945e7e05" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type><ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref></type>
-        <definition>helios::util::Guid helios::engine::modules::ai::components::ChaseComponent::target</definition>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1ada31c5559a3f0189ffb730f53c381a81" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::modules::ai::components::ChaseComponent::ChaseComponent</definition>
+        <argsstring>(const ChaseComponent &amp;)=default</argsstring>
+        <name>ChaseComponent</name>
+        <qualifiedname>helios::engine::modules::ai::components::ChaseComponent::ChaseComponent</qualifiedname>
+        <param>
+          <type>const ChaseComponent &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="79" column="9"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1a890b401836d9583a1db14dc515878d71">helios::engine::modules::ai::components::ChaseComponent::ChaseComponent</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1ab4f829360f0dcfdb4c6f34d95c6a96c2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>ChaseComponent &amp;</type>
+        <definition>ChaseComponent &amp; helios::engine::modules::ai::components::ChaseComponent::operator=</definition>
+        <argsstring>(const ChaseComponent &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>helios::engine::modules::ai::components::ChaseComponent::operator=</qualifiedname>
+        <param>
+          <type>const ChaseComponent &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="80" column="24"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1a890b401836d9583a1db14dc515878d71">helios::engine::modules::ai::components::ChaseComponent::ChaseComponent</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1a49ba5bcbbd4e181559bdcc73717da8f9" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::modules::ai::components::ChaseComponent::ChaseComponent</definition>
+        <argsstring>(ChaseComponent &amp;&amp;) noexcept=default</argsstring>
+        <name>ChaseComponent</name>
+        <qualifiedname>helios::engine::modules::ai::components::ChaseComponent::ChaseComponent</qualifiedname>
+        <param>
+          <type>ChaseComponent &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="81" column="9"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1a890b401836d9583a1db14dc515878d71">helios::engine::modules::ai::components::ChaseComponent::ChaseComponent</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1a3ae880da1e9b13af0c72d4e378e2a5b1" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>ChaseComponent &amp;</type>
+        <definition>ChaseComponent &amp; helios::engine::modules::ai::components::ChaseComponent::operator=</definition>
+        <argsstring>(ChaseComponent &amp;&amp;) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>helios::engine::modules::ai::components::ChaseComponent::operator=</qualifiedname>
+        <param>
+          <type>ChaseComponent &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="82" column="24"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1a890b401836d9583a1db14dc515878d71">helios::engine::modules::ai::components::ChaseComponent::ChaseComponent</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1a9d6969aaea998f74cbd0b0b6923b56ac" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle" kindref="compound">helios::engine::ecs::EntityHandle</ref></type>
+        <definition>helios::engine::ecs::EntityHandle helios::engine::modules::ai::components::ChaseComponent::target</definition>
         <argsstring>() const noexcept</argsstring>
         <name>target</name>
         <qualifiedname>helios::engine::modules::ai::components::ChaseComponent::target</qualifiedname>
         <briefdescription>
-<para>Returns the target entity&apos;s GUID. </para>
+<para>Returns the target entity&apos;s handle. </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>The GUID of the chase target. </para>
+<para><simplesect kind="return"><para>The handle of the chase target. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="52" column="29" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="52" bodyend="54"/>
+        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="89" column="44" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="89" bodyend="91"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1a9d6969aaea998f74cbd0b0b6923b56ac" compoundref="ChaseComponent_8ixx" startline="89" endline="91">helios::engine::modules::ai::components::ChaseComponent::target</references>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1a9d6969aaea998f74cbd0b0b6923b56ac" compoundref="ChaseComponent_8ixx" startline="89" endline="91">helios::engine::modules::ai::components::ChaseComponent::target</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1af6ed0af72667bcea73e36396266bdf73" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>float</type>
@@ -104,8 +246,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="61" column="16" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="61" bodyend="63"/>
-        <referencedby refid="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1acce73a87e74cfeaf2e6d5fb531e344bd" compoundref="ChaseComponent_8ixx" startline="70" endline="72">helios::engine::modules::ai::components::ChaseComponent::setCooldown</referencedby>
+        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="98" column="16" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="98" bodyend="100"/>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1acce73a87e74cfeaf2e6d5fb531e344bd" compoundref="ChaseComponent_8ixx" startline="107" endline="109">helios::engine::modules::ai::components::ChaseComponent::setCooldown</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1acce73a87e74cfeaf2e6d5fb531e344bd" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -134,8 +276,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="70" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="70" bodyend="72"/>
-        <references refid="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1af6ed0af72667bcea73e36396266bdf73" compoundref="ChaseComponent_8ixx" startline="61" endline="63">helios::engine::modules::ai::components::ChaseComponent::cooldown</references>
+        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="107" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="107" bodyend="109"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1af6ed0af72667bcea73e36396266bdf73" compoundref="ChaseComponent_8ixx" startline="98" endline="100">helios::engine::modules::ai::components::ChaseComponent::cooldown</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1a87a06d25592e3dd725fd37203f00f4a4" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>float</type>
@@ -153,7 +295,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="79" column="16" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="79" bodyend="81"/>
+        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="116" column="16" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="116" bodyend="118"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1a4e6b5003b2eebe941e59d6de47e909ff" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -182,7 +324,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="88" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="88" bodyend="90"/>
+        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="125" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="125" bodyend="127"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1a27d23f652883707d12f92be0bf5ea2f0" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -211,17 +353,17 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="97" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="97" bodyend="99"/>
+        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="134" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="134" bodyend="136"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1a0e0ff93db3d55ddd15629b888f6a4add" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1a46b70c748c0c2813b6096dda50c4a469" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
         <definition>void helios::engine::modules::ai::components::ChaseComponent::setTarget</definition>
-        <argsstring>(const helios::util::Guid guid) noexcept</argsstring>
+        <argsstring>(const helios::engine::ecs::EntityHandle &amp;entityHandle) noexcept</argsstring>
         <name>setTarget</name>
         <qualifiedname>helios::engine::modules::ai::components::ChaseComponent::setTarget</qualifiedname>
         <param>
-          <type>const <ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref></type>
-          <declname>guid</declname>
+          <type>const <ref refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle" kindref="compound">helios::engine::ecs::EntityHandle</ref> &amp;</type>
+          <declname>entityHandle</declname>
         </param>
         <briefdescription>
 <para>Sets the target entity to chase. </para>
@@ -229,10 +371,10 @@
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>guid</parametername>
+<parametername>entityHandle</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The GUID of the target entity. </para>
+<para>The EntityHandle of the target entity. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -240,13 +382,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="106" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="106" bodyend="108"/>
+        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="143" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="143" bodyend="146"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="7" column="15"/>
+    <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="8" column="15"/>
   </compounddef>
 </doxygen>

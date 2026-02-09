@@ -2,7 +2,6 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent" kind="class" language="C++" prot="public">
     <compoundname>helios::engine::modules::spatial::transform::components::RotationStateComponent</compoundname>
-    <basecompoundref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" prot="public" virt="non-virtual">helios::engine::ecs::CloneableComponent&lt; RotationStateComponent &gt;</basecompoundref>
     <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1af7a56a5665866d4f38060912ef427630" prot="private" static="no" mutable="no">
         <type>float</type>
@@ -129,26 +128,72 @@
         </inbodydescription>
         <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="71" column="29" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="71" bodyend="-1"/>
       </memberdef>
-    </sectiondef>
-    <sectiondef kind="private-func">
-      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a32503b08a76e1d9256bcc3947fe83f94" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>void</type>
-        <definition>void helios::engine::modules::spatial::transform::components::RotationStateComponent::update</definition>
-        <argsstring>()</argsstring>
-        <name>update</name>
-        <qualifiedname>helios::engine::modules::spatial::transform::components::RotationStateComponent::update</qualifiedname>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a3abfd56aaab06476124b2f3a17f2ab18" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool helios::engine::modules::spatial::transform::components::RotationStateComponent::isEnabled_</definition>
+        <argsstring></argsstring>
+        <name>isEnabled_</name>
+        <qualifiedname>helios::engine::modules::spatial::transform::components::RotationStateComponent::isEnabled_</qualifiedname>
+        <initializer>= true</initializer>
         <briefdescription>
-<para>Recalculates rotation matrices if dirty. </para>
+<para>Whether this component is enabled. </para>
         </briefdescription>
         <detaileddescription>
-<para>Updates spinRotationMatrix_, headingRotationMatrix_, and composedRotationMatrix_ based on current angles and axes. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="81" column="14" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="81" bodyend="102"/>
+        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="76" column="14" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="76" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a889a159096e914bc4ce0c11642617704" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::modules::spatial::transform::components::RotationStateComponent::isEnabled</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>isEnabled</name>
+        <qualifiedname>helios::engine::modules::spatial::transform::components::RotationStateComponent::isEnabled</qualifiedname>
+        <briefdescription>
+<para>Checks whether this component is enabled. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if enabled, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="85" column="15" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="85" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1ac28237ee55ab268d37ac0b398c3f5c7d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::spatial::transform::components::RotationStateComponent::enable</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>enable</name>
+        <qualifiedname>helios::engine::modules::spatial::transform::components::RotationStateComponent::enable</qualifiedname>
+        <briefdescription>
+<para>Enables this component. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="92" column="14" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="92" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1ab0324301e21e7c8cd7ef710aa5478547" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::spatial::transform::components::RotationStateComponent::disable</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>disable</name>
+        <qualifiedname>helios::engine::modules::spatial::transform::components::RotationStateComponent::disable</qualifiedname>
+        <briefdescription>
+<para>Disables this component. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="99" column="14" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="99" bodyend="101"/>
+      </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a94f0e2b3d6f8ed3a2cbe1f0202d3f82e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>helios::engine::modules::spatial::transform::components::RotationStateComponent::RotationStateComponent</definition>
@@ -162,10 +207,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="109" column="9"/>
-        <referencedby refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a27b9144ac994c1f98e733508ae633633" compoundref="RotationStateComponent_8ixx" startline="118" endline="121">RotationStateComponent</referencedby>
+        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="139" column="9"/>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1aa64c377cd6b023efbbfbd71e5a09c947">operator=</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a8a20ffc4c6f497c429b8199998861554">operator=</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a27b9144ac994c1f98e733508ae633633" compoundref="RotationStateComponent_8ixx" startline="148" endline="151">RotationStateComponent</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1abc1dfc74c803e1819c91606cb2d879a8">RotationStateComponent</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a27b9144ac994c1f98e733508ae633633" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a27b9144ac994c1f98e733508ae633633" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
         <definition>helios::engine::modules::spatial::transform::components::RotationStateComponent::RotationStateComponent</definition>
         <argsstring>(const RotationStateComponent &amp;other)</argsstring>
@@ -192,7 +240,61 @@ Copies rotation axes but resets angles and matrices. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="118" column="18" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="118" bodyend="121"/>
+        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="148" column="9" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="148" bodyend="151"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a94f0e2b3d6f8ed3a2cbe1f0202d3f82e">RotationStateComponent</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1aa64c377cd6b023efbbfbd71e5a09c947" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a94f0e2b3d6f8ed3a2cbe1f0202d3f82e" kindref="member">RotationStateComponent</ref> &amp;</type>
+        <definition>RotationStateComponent &amp; helios::engine::modules::spatial::transform::components::RotationStateComponent::operator=</definition>
+        <argsstring>(const RotationStateComponent &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>helios::engine::modules::spatial::transform::components::RotationStateComponent::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a94f0e2b3d6f8ed3a2cbe1f0202d3f82e" kindref="member">RotationStateComponent</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="153" column="32"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a94f0e2b3d6f8ed3a2cbe1f0202d3f82e">RotationStateComponent</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1abc1dfc74c803e1819c91606cb2d879a8" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::modules::spatial::transform::components::RotationStateComponent::RotationStateComponent</definition>
+        <argsstring>(RotationStateComponent &amp;&amp;) noexcept=default</argsstring>
+        <name>RotationStateComponent</name>
+        <qualifiedname>helios::engine::modules::spatial::transform::components::RotationStateComponent::RotationStateComponent</qualifiedname>
+        <param>
+          <type>RotationStateComponent &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="154" column="9"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a94f0e2b3d6f8ed3a2cbe1f0202d3f82e">RotationStateComponent</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a8a20ffc4c6f497c429b8199998861554" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a94f0e2b3d6f8ed3a2cbe1f0202d3f82e" kindref="member">RotationStateComponent</ref> &amp;</type>
+        <definition>RotationStateComponent &amp; helios::engine::modules::spatial::transform::components::RotationStateComponent::operator=</definition>
+        <argsstring>(RotationStateComponent &amp;&amp;) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>helios::engine::modules::spatial::transform::components::RotationStateComponent::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a94f0e2b3d6f8ed3a2cbe1f0202d3f82e" kindref="member">RotationStateComponent</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="155" column="32"/>
         <references refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a94f0e2b3d6f8ed3a2cbe1f0202d3f82e">RotationStateComponent</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a33c6574b155bf4eac28fa6e6417ba2a7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -222,7 +324,9 @@ Copies rotation axes but resets angles and matrices. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="128" column="14" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="128" bodyend="131"/>
+        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="162" column="14" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="162" bodyend="165"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a33c6574b155bf4eac28fa6e6417ba2a7" compoundref="RotationStateComponent_8ixx" startline="162" endline="165">setHeadingRotationAngle</references>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a33c6574b155bf4eac28fa6e6417ba2a7" compoundref="RotationStateComponent_8ixx" startline="162" endline="165">setHeadingRotationAngle</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a37dde665456f67228c6a9868478cfd45" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>float</type>
@@ -240,7 +344,7 @@ Copies rotation axes but resets angles and matrices. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="138" column="16" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="138" bodyend="140"/>
+        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="172" column="16" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="172" bodyend="174"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a6143b75e1459b2b39e065f32d6ecae93" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -269,7 +373,7 @@ Copies rotation axes but resets angles and matrices. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="147" column="14" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="147" bodyend="150"/>
+        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="181" column="14" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="181" bodyend="184"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1ab7ca37df0c8c99cb20b406e9b442c20b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
@@ -287,7 +391,7 @@ Copies rotation axes but resets angles and matrices. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="157" column="30" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="157" bodyend="159"/>
+        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="191" column="30" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="191" bodyend="193"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1aa20ccd210c7948895eb22dfc92a4bca5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -316,7 +420,7 @@ Copies rotation axes but resets angles and matrices. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="166" column="14" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="166" bodyend="169"/>
+        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="200" column="14" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="200" bodyend="203"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a148d8193cfc4a9c06edb0cf2fe507f1c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>float</type>
@@ -334,7 +438,7 @@ Copies rotation axes but resets angles and matrices. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="176" column="16" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="176" bodyend="178"/>
+        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="210" column="16" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="210" bodyend="212"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1ab91be89acc6794914edfeebf1af47aec" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -363,7 +467,7 @@ Copies rotation axes but resets angles and matrices. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="185" column="14" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="185" bodyend="188"/>
+        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="219" column="14" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="219" bodyend="222"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1ae57b9e2aa535a6445124fc67ed203574" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
@@ -381,7 +485,7 @@ Copies rotation axes but resets angles and matrices. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="195" column="30" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="195" bodyend="197"/>
+        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="229" column="30" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="229" bodyend="231"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a7e6ad15dab6abee9473a0a6aee698ea4" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>const <ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">helios::math::mat4f</ref> &amp;</type>
@@ -400,7 +504,7 @@ Copies rotation axes but resets angles and matrices. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="206" column="35" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="206" bodyend="209"/>
+        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="240" column="35" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="240" bodyend="243"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1addf076bfb65831c77809c45dbec6614f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>const <ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">helios::math::mat4f</ref> &amp;</type>
@@ -419,7 +523,7 @@ Copies rotation axes but resets angles and matrices. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="218" column="35" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="218" bodyend="221"/>
+        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="252" column="35" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="252" bodyend="255"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a3ea72c3c96673de403446debac67dd45" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>const <ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">helios::math::mat4f</ref> &amp;</type>
@@ -438,7 +542,25 @@ Copies rotation axes but resets angles and matrices. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="230" column="35" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="230" bodyend="233"/>
+        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="264" column="35" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="264" bodyend="267"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a32503b08a76e1d9256bcc3947fe83f94" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::spatial::transform::components::RotationStateComponent::update</definition>
+        <argsstring>()</argsstring>
+        <name>update</name>
+        <qualifiedname>helios::engine::modules::spatial::transform::components::RotationStateComponent::update</qualifiedname>
+        <briefdescription>
+<para>Recalculates rotation matrices if dirty. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Updates spinRotationMatrix_, headingRotationMatrix_, and composedRotationMatrix_ based on current angles and axes. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="111" column="14" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="111" bodyend="132"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -452,96 +574,26 @@ Copies rotation axes but resets angles and matrices. </para>
 </para>
 <para>The component caches the computed rotation matrices and only recalculates them when the underlying angles or axes change (dirty flag pattern). </para>
     </detaileddescription>
-    <inheritancegraph>
-      <node id="4">
-        <label>helios::engine::ecs::Cloneable</label>
-        <link refid="classhelios_1_1engine_1_1ecs_1_1Cloneable"/>
-      </node>
-      <node id="2">
-        <label>helios::engine::ecs::CloneableComponent&lt; RotationStateComponent &gt;</label>
-        <link refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent"/>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
-        <childnode refid="4" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="3">
-        <label>helios::engine::ecs::Component</label>
-        <link refid="classhelios_1_1engine_1_1ecs_1_1Component"/>
-      </node>
-      <node id="1">
-        <label>helios::engine::modules::spatial::transform::components::RotationStateComponent</label>
-        <link refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent"/>
-        <childnode refid="2" relation="public-inheritance">
-        </childnode>
-      </node>
-    </inheritancegraph>
-    <collaborationgraph>
-      <node id="6">
-        <label>helios::engine::ecs::Cloneable</label>
-        <link refid="classhelios_1_1engine_1_1ecs_1_1Cloneable"/>
-      </node>
-      <node id="2">
-        <label>helios::engine::ecs::CloneableComponent&lt; RotationStateComponent &gt;</label>
-        <link refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent"/>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
-        <childnode refid="6" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="3">
-        <label>helios::engine::ecs::Component</label>
-        <link refid="classhelios_1_1engine_1_1ecs_1_1Component"/>
-        <childnode refid="4" relation="usage">
-          <edgelabel>gameObject_</edgelabel>
-        </childnode>
-      </node>
-      <node id="4">
-        <label>helios::engine::ecs::GameObject</label>
-        <link refid="classhelios_1_1engine_1_1ecs_1_1GameObject"/>
-        <childnode refid="5" relation="usage">
-          <edgelabel>guid_</edgelabel>
-        </childnode>
-      </node>
-      <node id="1">
-        <label>helios::engine::modules::spatial::transform::components::RotationStateComponent</label>
-        <link refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent"/>
-        <childnode refid="2" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="5">
-        <label>helios::util::Guid</label>
-        <link refid="classhelios_1_1util_1_1Guid"/>
-      </node>
-    </collaborationgraph>
-    <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="31" column="5" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="31" bodyend="235"/>
+    <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" line="31" column="5" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/components/RotationStateComponent.ixx" bodystart="31" bodyend="269"/>
     <listofallmembers>
-      <member refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1aea2a33eed58899d7f93accbe7a89149f" prot="public" virt="virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>clone</name></member>
-      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a5b888a1acd1799700525f3eab51b1a62" prot="public" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>Component</name></member>
       <member refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a76f63bf8ba4c5ebd3678b87e1cf5a7a4" prot="private" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>composedRotationMatrix_</name></member>
-      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a21492dd1100f113c7f049c3bd8a7a179" prot="public" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>disable</name></member>
-      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a8c2eb9405720e29d3a637061d523fb89" prot="public" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>enable</name></member>
-      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a3489588d238d04928e767908a0721be1" prot="public" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>gameObject</name></member>
-      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1aff1c0d42b10c04da6034ff5e49d42f12" prot="protected" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>gameObject_</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1ab0324301e21e7c8cd7ef710aa5478547" prot="public" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>disable</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1ac28237ee55ab268d37ac0b398c3f5c7d" prot="public" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>enable</name></member>
       <member refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1addf076bfb65831c77809c45dbec6614f" prot="public" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>headingRotation</name></member>
       <member refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a37dde665456f67228c6a9868478cfd45" prot="public" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>headingRotationAngle</name></member>
       <member refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1af7a56a5665866d4f38060912ef427630" prot="private" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>headingRotationAngle_</name></member>
       <member refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1ab7ca37df0c8c99cb20b406e9b442c20b" prot="public" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>headingRotationAxis</name></member>
       <member refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a5b483cdf34b4823c515e95fe5283ef20" prot="private" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>headingRotationAxis_</name></member>
       <member refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a09fac1d407c00d23aa55951cf4f201da" prot="private" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>headingRotationMatrix_</name></member>
-      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a081d44a554b723d719f7909638735819" prot="public" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>isAttached</name></member>
-      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a58e0f3384ee76bb9961ffb46e3181bda" prot="public" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>isDisabled</name></member>
-      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a4edb1632c9901e8276f77ad53e773911" prot="public" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>isEnabled</name></member>
-      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1ab5895e14ca5df63711d46a492fb40c64" prot="protected" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>isEnabled_</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a889a159096e914bc4ce0c11642617704" prot="public" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>isEnabled</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a3abfd56aaab06476124b2f3a17f2ab18" prot="private" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>isEnabled_</name></member>
       <member refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1ad6d2ddabee933e5b71cd68c89e1a5c4c" prot="private" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>needsUpdate_</name></member>
-      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a9f6ca8f70b132c8d5ca1d0ffdb8f39f9" prot="public" virt="virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>onAcquire</name></member>
-      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1ab9614bf06e8e2d970cca3d2eb03e2425" prot="public" virt="virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>onActivate</name></member>
-      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1ac08c7be419071c67780342322aa1e679" prot="public" virt="virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>onAttach</name></member>
-      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1ae18881cca0af5463608e59d112b3f257" prot="public" virt="virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>onDeactivate</name></member>
-      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1aacc77dfd9a7a39b733e0f90a7e50d43e" prot="public" virt="virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>onRelease</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1aa64c377cd6b023efbbfbd71e5a09c947" prot="public" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>operator=</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a8a20ffc4c6f497c429b8199998861554" prot="public" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>operator=</name></member>
       <member refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a3ea72c3c96673de403446debac67dd45" prot="public" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>rotation</name></member>
       <member refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a94f0e2b3d6f8ed3a2cbe1f0202d3f82e" prot="public" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>RotationStateComponent</name></member>
       <member refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a27b9144ac994c1f98e733508ae633633" prot="public" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>RotationStateComponent</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1abc1dfc74c803e1819c91606cb2d879a8" prot="public" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>RotationStateComponent</name></member>
       <member refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a33c6574b155bf4eac28fa6e6417ba2a7" prot="public" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>setHeadingRotationAngle</name></member>
       <member refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a6143b75e1459b2b39e065f32d6ecae93" prot="public" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>setHeadingRotationAxis</name></member>
       <member refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1aa20ccd210c7948895eb22dfc92a4bca5" prot="public" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>setSpinRotationAngle</name></member>
@@ -552,10 +604,7 @@ Copies rotation axes but resets angles and matrices. </para>
       <member refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1ae57b9e2aa535a6445124fc67ed203574" prot="public" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>spinRotationAxis</name></member>
       <member refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a6dafabe35fa26db29c21fd6b1628741a" prot="private" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>spinRotationAxis_</name></member>
       <member refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1ad48870c653578ded15226d385605da2a" prot="private" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>spinRotationMatrix_</name></member>
-      <member refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563" prot="public" virt="virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>typeId</name></member>
       <member refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent_1a32503b08a76e1d9256bcc3947fe83f94" prot="private" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>update</name></member>
-      <member refid="classhelios_1_1engine_1_1ecs_1_1Cloneable_1a7663aa6519f970dc8f0255a0e09bac17" prot="public" virt="virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>~Cloneable</name></member>
-      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1aa014415a814f5252c94d040c2e80c83f" prot="public" virt="virtual"><scope>helios::engine::modules::spatial::transform::components::RotationStateComponent</scope><name>~Component</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

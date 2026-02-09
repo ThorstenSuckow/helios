@@ -9,5 +9,6 @@ var namespacehelios_1_1engine_1_1modules_1_1ui =
       ] ]
     ] ],
     [ "transform", "namespacehelios_1_1engine_1_1modules_1_1ui_1_1transform.html", "namespacehelios_1_1engine_1_1modules_1_1ui_1_1transform" ],
-    [ "widgets", "namespacehelios_1_1engine_1_1modules_1_1ui_1_1widgets.html", "namespacehelios_1_1engine_1_1modules_1_1ui_1_1widgets" ]
+    [ "widgets", "namespacehelios_1_1engine_1_1modules_1_1ui_1_1widgets.html", "namespacehelios_1_1engine_1_1modules_1_1ui_1_1widgets" ],
+    [ "registerComponents", "namespacehelios_1_1engine_1_1modules_1_1ui.html#a2cb2608bd3f7ce0c87af4f6654953fdf", null ]
 ];

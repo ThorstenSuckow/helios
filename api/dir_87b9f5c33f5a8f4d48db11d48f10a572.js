@@ -7,5 +7,6 @@ var dir_87b9f5c33f5a8f4d48db11d48f10a572 =
     [ "scene", "dir_656b8020a7b0aa8521ec0615ad91cdfe.html", "dir_656b8020a7b0aa8521ec0615ad91cdfe" ],
     [ "spatial", "dir_7002044952ee345c222d895bec1a9397.html", "dir_7002044952ee345c222d895bec1a9397" ],
     [ "ui", "dir_bf15dcce3b0eb2b2bde353446d930b9c.html", "dir_bf15dcce3b0eb2b2bde353446d930b9c" ],
-    [ "_module.ixx", "helios_2engine_2modules_2__module_8ixx.html", null ]
+    [ "_module.ixx", "helios_2engine_2modules_2__module_8ixx.html", null ],
+    [ "registry.ixx", "modules_2registry_8ixx.html", "modules_2registry_8ixx" ]
 ];

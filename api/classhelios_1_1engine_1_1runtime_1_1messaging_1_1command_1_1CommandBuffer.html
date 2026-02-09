@@ -128,10 +128,10 @@ requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1runti
 requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand.html">WorldCommand</a>, T&gt;</td></tr>
 <tr class="memitem:ae38bd4c38ca9714e8d8b83e840929ca9 template"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae38bd4c38ca9714e8d8b83e840929ca9">hasDispatcher</a> () const</td></tr>
 <tr class="memdesc:ae38bd4c38ca9714e8d8b83e840929ca9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a dispatcher is registered for a specific <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand.html" title="Abstract base class for commands that operate on the entire GameWorld.">WorldCommand</a> type.  <br /></td></tr>
-<tr class="memitem:ad496c8124b20e7a3a0a03685261a1f01" id="r_ad496c8124b20e7a3a0a03685261a1f01"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... Args&gt; <br />
+<tr class="memitem:ae86242f86c27014387f22b448112dd81" id="r_ae86242f86c27014387f22b448112dd81"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... Args&gt; <br />
 requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand.html">TargetedCommand</a>, T&gt;</td></tr>
-<tr class="memitem:ad496c8124b20e7a3a0a03685261a1f01 template"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad496c8124b20e7a3a0a03685261a1f01">add</a> (const <a class="el" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</a> &amp;guid, Args &amp;&amp;...args)</td></tr>
-<tr class="memdesc:ad496c8124b20e7a3a0a03685261a1f01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a command targeting a GameObject identified by Guid.  <br /></td></tr>
+<tr class="memitem:ae86242f86c27014387f22b448112dd81 template"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae86242f86c27014387f22b448112dd81">add</a> (const <a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a> &amp;entityHandle, Args &amp;&amp;...args)</td></tr>
+<tr class="memdesc:ae86242f86c27014387f22b448112dd81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a command targeting a GameObject identified by Guid.  <br /></td></tr>
 <tr class="memitem:aefadad69c3bb4d3dd76d627e1775bb0d" id="r_aefadad69c3bb4d3dd76d627e1775bb0d"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... Args&gt; <br />
 requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand.html">WorldCommand</a>, T&gt;</td></tr>
 <tr class="memitem:aefadad69c3bb4d3dd76d627e1775bb0d template"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aefadad69c3bb4d3dd76d627e1775bb0d">add</a> (Args &amp;&amp;...args)</td></tr>
@@ -149,7 +149,7 @@ requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1runti
 <p>// Execute all commands at end of frame cmdBuffer.flush(world); // Executes and clears buffer ```</p>
 <dl class="section note"><dt>Note</dt><dd>Commands targeting non-existent GameObjects are silently skipped during <a class="el" href="#accac0953fe00e2fe4c480334bdd826ec" title="Executes all buffered commands against the GameWorld and clears the buffer.">flush()</a>. This behavior will be logged once the logging system is available. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00060">60</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00061">61</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="aefadad69c3bb4d3dd76d627e1775bb0d" name="aefadad69c3bb4d3dd76d627e1775bb0d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aefadad69c3bb4d3dd76d627e1775bb0d">&#9670;&#160;</a></span>add() <span class="overload">[1/2]</span></h2>
@@ -193,12 +193,12 @@ requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1runti
 </dl>
 <p>WorldCommands operate on the entire GameWorld rather than a specific GameObject. They are executed before TargetedCommands during <a class="el" href="#accac0953fe00e2fe4c480334bdd826ec" title="Executes all buffered commands against the GameWorld and clears the buffer.">flush()</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00238">238</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00239">239</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
 
 </div>
 </div>
-<a id="ad496c8124b20e7a3a0a03685261a1f01" name="ad496c8124b20e7a3a0a03685261a1f01"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad496c8124b20e7a3a0a03685261a1f01">&#9670;&#160;</a></span>add() <span class="overload">[2/2]</span></h2>
+<a id="ae86242f86c27014387f22b448112dd81" name="ae86242f86c27014387f22b448112dd81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae86242f86c27014387f22b448112dd81">&#9670;&#160;</a></span>add() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -212,7 +212,7 @@ requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1runti
         <tr>
           <td class="memname">void helios::engine::runtime::messaging::command::CommandBuffer::add </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>guid</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>entityHandle</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -240,7 +240,7 @@ requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1runti
 <dd>
 This overload is useful when the GameObject instance is not directly available, such as in networked scenarios or when processing serialized commands. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00217">217</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00218">218</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
 
 </div>
 </div>
@@ -287,9 +287,9 @@ requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1runti
 <dl class="section pre"><dt>Precondition</dt><dd>No dispatcher for type T must already be registered.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to **this** <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Queue for deferred execution of game commands.">CommandBuffer</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00137">137</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00138">138</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="CommandBuffer_8ixx_source.html#l00156">hasDispatcher()</a>.</p>
+<p class="reference">References <a class="el" href="CommandBuffer_8ixx_source.html#l00157">hasDispatcher()</a>.</p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
@@ -342,9 +342,9 @@ requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1runti
 <dl class="section pre"><dt>Precondition</dt><dd>No dispatcher for type T must already be registered.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to **this** <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Queue for deferred execution of game commands.">CommandBuffer</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00178">178</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00179">179</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="CommandBuffer_8ixx_source.html#l00156">hasDispatcher()</a>.</p>
+<p class="reference">References <a class="el" href="CommandBuffer_8ixx_source.html#l00157">hasDispatcher()</a>.</p>
 <div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
@@ -385,7 +385,7 @@ requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1runti
 
 <p class="reference">References <a class="el" href="CommandBuffer_8ixx_source.html#l00314">clear()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="CommandBuffer_8ixx_source.html#l00314">clear()</a>, and <a class="el" href="CommandBuffer_8ixx_source.html#l00268">flush()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="CommandBuffer_8ixx_source.html#l00314">clear()</a>, and <a class="el" href="CommandBuffer_8ixx_source.html#l00269">flush()</a>.</p>
 <div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
@@ -438,9 +438,9 @@ requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1runti
 All commands are cleared after execution, regardless of success or failure.</dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>Command execution should be noexcept. If execute() throws, the flush operation aborts and remaining commands are not executed. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00268">268</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00269">269</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="CommandBuffer_8ixx_source.html#l00314">clear()</a>, and <a class="el" href="GameWorld_8ixx_source.html#l00411">helios::engine::runtime::world::GameWorld::find()</a>.</p>
+<p class="reference">References <a class="el" href="CommandBuffer_8ixx_source.html#l00314">clear()</a>, and <a class="el" href="GameWorld_8ixx_source.html#l00464">helios::engine::runtime::world::GameWorld::find()</a>.</p>
 <div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
@@ -485,7 +485,7 @@ requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1runti
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if a dispatcher is registered for type T, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00197">197</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00198">198</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
 
 </div>
 </div>
@@ -524,9 +524,9 @@ requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1runti
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if a dispatcher is registered for type T, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00156">156</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00157">157</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="CommandBuffer_8ixx_source.html#l00137">addDispatcher()</a>, and <a class="el" href="CommandBuffer_8ixx_source.html#l00178">addDispatcher()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="CommandBuffer_8ixx_source.html#l00138">addDispatcher()</a>, and <a class="el" href="CommandBuffer_8ixx_source.html#l00179">addDispatcher()</a>.</p>
 <div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-5-summary" class="dynsummary" style="display:block;">
 </div>

@@ -1,13 +1,19 @@
 var module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent =
 [
     [ "UiTextComponent", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiTextComponent.html", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiTextComponent" ],
+    [ "helios::engine::modules::ui::widgets::components::UiTextComponent::isEnabled", "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#af482296f9d1d77ea8e2da2db4d19aeaf", null ],
+    [ "helios::engine::modules::ui::widgets::components::UiTextComponent::enable", "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#a2bc6c1460fe74912cb882ca036f9283a", null ],
+    [ "helios::engine::modules::ui::widgets::components::UiTextComponent::disable", "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#a7edaf655511bfd775e9f36411fbaa304", null ],
     [ "helios::engine::modules::ui::widgets::components::UiTextComponent::UiTextComponent", "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#a57f2548b4dcfcc9e5f02f3fecb2be4fa", null ],
     [ "helios::engine::modules::ui::widgets::components::UiTextComponent::UiTextComponent", "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#af33d65d3aac01f1ee03dd5de4a63c257", null ],
+    [ "helios::engine::modules::ui::widgets::components::UiTextComponent::operator=", "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#aa52f3f47d44e2770842fb1d3d0d4d295", null ],
+    [ "helios::engine::modules::ui::widgets::components::UiTextComponent::UiTextComponent", "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#a05e56b34a1e3f84d33f4dcaa566ba138", null ],
+    [ "helios::engine::modules::ui::widgets::components::UiTextComponent::operator=", "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#aded323cc4e3e85ee11dd2bd19f23f252", null ],
     [ "helios::engine::modules::ui::widgets::components::UiTextComponent::renderable", "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#ad5d3cd1fe4d274b2e0fbf93dff460577", null ],
     [ "helios::engine::modules::ui::widgets::components::UiTextComponent::setTemplate", "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#ad45a884c0ddfdd97aea0cac63594223c", null ],
     [ "helios::engine::modules::ui::widgets::components::UiTextComponent::reset", "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#a98cbe97a3109c14b10f3512141147c1c", null ],
-    [ "helios::engine::modules::ui::widgets::components::UiTextComponent::onAcquire", "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#ac2dbfd3a02e9b41330eee381d01bc4ba", null ],
-    [ "helios::engine::modules::ui::widgets::components::UiTextComponent::onRelease", "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#aa7f13fe96a03b6fc9d0eb98a3346e8ba", null ],
+    [ "helios::engine::modules::ui::widgets::components::UiTextComponent::onAcquire", "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#aaa1b42a834c11c2ef03c32bc1e8d9827", null ],
+    [ "helios::engine::modules::ui::widgets::components::UiTextComponent::onRelease", "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#a7cdb5ea50deabb80c732e9f54d099dc2", null ],
     [ "helios::engine::modules::ui::widgets::components::UiTextComponent::update", "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#ab341134fc3ea3f11257d09eda77db7fb", null ],
     [ "helios::engine::modules::ui::widgets::components::UiTextComponent::needsResize", "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#a64cf9c25c8a55e76bc170e6695802860", null ],
     [ "helios::engine::modules::ui::widgets::components::UiTextComponent::resizeComplete", "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#a51194fb56af3bb1705c93df80dc6fed0", null ],
@@ -16,5 +22,6 @@ var module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent =
     [ "helios::engine::modules::ui::widgets::components::UiTextComponent::renderable_", "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#a3cadf23c78913bd41503da6d2f50ac52", null ],
     [ "helios::engine::modules::ui::widgets::components::UiTextComponent::doubleValue_", "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#ad6593f775c1bb994b5c98c471d31605c", null ],
     [ "helios::engine::modules::ui::widgets::components::UiTextComponent::isDirty_", "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#a4869554c41143ac5ee33b44b88bb6a43", null ],
-    [ "helios::engine::modules::ui::widgets::components::UiTextComponent::needsResize_", "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#a61c34d3beef78cd268a0db3b422104de", null ]
+    [ "helios::engine::modules::ui::widgets::components::UiTextComponent::needsResize_", "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#a61c34d3beef78cd268a0db3b422104de", null ],
+    [ "helios::engine::modules::ui::widgets::components::UiTextComponent::isEnabled_", "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#a73240d4b197cb66a5c60f079d6d592ee", null ]
 ];

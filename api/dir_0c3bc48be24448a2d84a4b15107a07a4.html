@@ -110,7 +110,7 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="dir_0c3bc48be24448a2d84a4b15107a07a4_dep.svg" width="638" height="314"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="dir_0c3bc48be24448a2d84a4b15107a07a4_dep.svg" width="100%" height="535"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-subdirs" class="groupheader"><a id="subdirs" name="subdirs"></a>
@@ -122,13 +122,15 @@ Directories</h2></td></tr>
 Files</h2></td></tr>
 <tr class="memitem:_5Fmodule_2Eixx" id="r__5Fmodule_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="helios_2engine_2modules_2spatial_2transform_2__module_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="helios_2engine_2modules_2spatial_2transform_2__module_8ixx.html">_module.ixx</a></td></tr>
 <tr class="memdesc:helios_2engine_2modules_2spatial_2transform_2__module_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aggregate module for <a class="el" href="namespacehelios_1_1engine_1_1modules_1_1spatial_1_1transform.html" title="Transform components and systems for spatial state management.">helios::engine::modules::spatial::transform</a> namespace. <br /></td></tr>
+<tr class="memitem:registry_2Eixx" id="r_registry_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="modules_2spatial_2transform_2registry_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modules_2spatial_2transform_2registry_8ixx.html">registry.ixx</a></td></tr>
+<tr class="memdesc:modules_2spatial_2transform_2registry_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Component registration for spatial transform module. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md399"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md396"></a>
 helios::engine::modules::spatial::transform</h1>
 <p>Transform components and systems for spatial state management.</p>
 <p>This module provides components that store individual transform properties and systems that compose them into final world transforms.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md400"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md397"></a>
 Submodules</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -138,7 +140,7 @@ Submodules</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">systems/</span>  </td><td class="markdownTableBodyNone">Transform composition and cleanup systems  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md401"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md398"></a>
 Key Classes</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -158,11 +160,11 @@ Key Classes</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">TransformClearSystem</span>  </td><td class="markdownTableBodyNone">Clears dirty flags after scene sync  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md402"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md399"></a>
 Transform Workflow</h1>
 <p>Each frame, transform state flows through the pipeline:</p>
 <p>1. <b>Input Systems</b> write deltas to state components 2. <b>ComposeTransformSystem</b> combines deltas into final matrix 3. <b>SceneSyncSystem</b> copies matrix to SceneNode 4. <b>TransformClearSystem</b> resets dirty flags</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md403"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md400"></a>
 Usage</h1>
 <div class="fragment"><div class="line"><span class="comment">// Create entity with transform components (via builder)</span></div>
 <div class="line"><span class="keyword">auto</span> entity = GameObjectFactory::gameObject()</div>
@@ -174,10 +176,10 @@ Usage</h1>
 <div class="line">    .make(<span class="keyword">true</span>);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Direct component access for per-frame updates</span></div>
-<div class="line"><span class="keyword">auto</span>* translation = entity-&gt;get&lt;TranslationStateComponent&gt;();</div>
+<div class="line"><span class="keyword">auto</span>* translation = entity.get&lt;TranslationStateComponent&gt;();</div>
 <div class="line">translation-&gt;add({1.0f, 0.0f, 0.0f});  <span class="comment">// Move right</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">auto</span>* rotation = entity-&gt;get&lt;RotationStateComponent&gt;();</div>
+<div class="line"><span class="keyword">auto</span>* rotation = entity.get&lt;RotationStateComponent&gt;();</div>
 <div class="line">rotation-&gt;add(<a class="code hl_function" href="namespacehelios_1_1math.html#a4949642a7cca09c7950bb6a1b75260c9">helios::math::radians</a>(45.0f), <a class="code hl_variable" href="namespacehelios_1_1math.html#a64379fe55f1794fad912feafd5051224">helios::math::Z_AXISf</a>);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Register systems in correct order</span></div>

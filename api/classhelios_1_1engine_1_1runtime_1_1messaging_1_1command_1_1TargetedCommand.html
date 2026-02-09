@@ -120,18 +120,18 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:afdb2e242ce5c8d3d5a642529ba21f96f" id="r_afdb2e242ce5c8d3d5a642529ba21f96f"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afdb2e242ce5c8d3d5a642529ba21f96f">~TargetedCommand</a> ()=default</td></tr>
 <tr class="memdesc:afdb2e242ce5c8d3d5a642529ba21f96f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor to ensure proper cleanup of derived classes.  <br /></td></tr>
-<tr class="memitem:afb88bb52b4cdfa2dbf5867690d132793" id="r_afb88bb52b4cdfa2dbf5867690d132793"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afb88bb52b4cdfa2dbf5867690d132793">execute</a> (<a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html">helios::engine::ecs::GameObject</a> &amp;gameObject) const noexcept=0</td></tr>
-<tr class="memdesc:afb88bb52b4cdfa2dbf5867690d132793"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes the command on the specified GameObject.  <br /></td></tr>
-<tr class="memitem:ace7d60bfa2adf707ab4812533d9afd83" id="r_ace7d60bfa2adf707ab4812533d9afd83"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ace7d60bfa2adf707ab4812533d9afd83">accept</a> (<a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html">helios::engine::ecs::GameObject</a> &amp;gameObject, <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommandDispatcher.html">helios::engine::runtime::messaging::command::TargetedCommandDispatcher</a> &amp;dispatcher) const noexcept</td></tr>
-<tr class="memdesc:ace7d60bfa2adf707ab4812533d9afd83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accepts a dispatcher for type-safe command handling.  <br /></td></tr>
+<tr class="memitem:a7b06969ba22a31d99ea0b77732993ed7" id="r_a7b06969ba22a31d99ea0b77732993ed7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7b06969ba22a31d99ea0b77732993ed7">execute</a> (<a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html">helios::engine::ecs::GameObject</a> gameObject) const noexcept=0</td></tr>
+<tr class="memdesc:a7b06969ba22a31d99ea0b77732993ed7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes the command on the specified GameObject.  <br /></td></tr>
+<tr class="memitem:aaaecdfa3765611e2cf3452ef9e81951d" id="r_aaaecdfa3765611e2cf3452ef9e81951d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaaecdfa3765611e2cf3452ef9e81951d">accept</a> (<a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html">helios::engine::ecs::GameObject</a> gameObject, <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommandDispatcher.html">helios::engine::runtime::messaging::command::TargetedCommandDispatcher</a> &amp;dispatcher) const noexcept</td></tr>
+<tr class="memdesc:aaaecdfa3765611e2cf3452ef9e81951d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accepts a dispatcher for type-safe command handling.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Abstract base class for commands targeting a specific GameObject. </p>
 <p>A <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand.html" title="Abstract base class for commands targeting a specific GameObject.">TargetedCommand</a> encapsulates a single game action (e.g., movement, attack) to be performed on a specific GameObject identified by its Guid.</p>
 <p>Concrete commands are typically created by input systems and queued in a <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Queue for deferred execution of game commands.">CommandBuffer</a>. The buffer then executes them against the target GameObject during the command flush phase.</p>
-<p>Commands support the Visitor pattern through <a class="el" href="#ace7d60bfa2adf707ab4812533d9afd83" title="Accepts a dispatcher for type-safe command handling.">accept()</a>, enabling type-safe dispatch to specialized handlers without explicit type checking.</p>
+<p>Commands support the Visitor pattern through <a class="el" href="#aaaecdfa3765611e2cf3452ef9e81951d" title="Accepts a dispatcher for type-safe command handling.">accept()</a>, enabling type-safe dispatch to specialized handlers without explicit type checking.</p>
 <p>Example implementation: ```cpp class MoveCommand : public <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand.html" title="Abstract base class for commands targeting a specific GameObject.">TargetedCommand</a> { <a class="el" href="namespacehelios_1_1math.html#a71f1e40e636f47229c3122bdb63099d5" title="Single-precision floating-point 3D vector.">helios::math::vec3f</a> direction_; float speed_; public: MoveCommand(helios::math::vec3f dir, float speed) : direction_(dir), speed_(speed) {}</p>
-<p>void <a class="el" href="#afb88bb52b4cdfa2dbf5867690d132793" title="Executes the command on the specified GameObject.">execute(helios::engine::ecs::GameObject&amp; obj) const </a>noexcept override { auto* move = obj.get&lt;Move2DComponent&gt;(); if (move) move-&gt;setVelocity(direction_ * speed_); } }; ```</p>
+<p>void <a class="el" href="#a7b06969ba22a31d99ea0b77732993ed7" title="Executes the command on the specified GameObject.">execute(helios::engine::ecs::GameObject obj) const </a>noexcept override { auto* move = obj.get&lt;Move2DComponent&gt;(); if (move) move-&gt;setVelocity(direction_ * speed_); } }; ```</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand.html" title="Abstract base class for commands that operate on the entire GameWorld.">WorldCommand</a> for commands operating on the entire GameWorld </dd>
 <dd>
 <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommandDispatcher.html" title="Abstract dispatcher interface for type-safe TargetedCommand handling.">TargetedCommandDispatcher</a> for type-safe <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1command.html" title="Command pattern implementation for deferred action execution.">command</a> dispatch </dd></dl>
@@ -166,8 +166,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="ace7d60bfa2adf707ab4812533d9afd83" name="ace7d60bfa2adf707ab4812533d9afd83"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ace7d60bfa2adf707ab4812533d9afd83">&#9670;&#160;</a></span>accept()</h2>
+<a id="aaaecdfa3765611e2cf3452ef9e81951d" name="aaaecdfa3765611e2cf3452ef9e81951d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaaecdfa3765611e2cf3452ef9e81951d">&#9670;&#160;</a></span>accept()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -178,7 +178,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void helios::engine::runtime::messaging::command::TargetedCommand::accept </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html">helios::engine::ecs::GameObject</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>gameObject</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html">helios::engine::ecs::GameObject</a></td>          <td class="paramname"><span class="paramname"><em>gameObject</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -207,8 +207,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="afb88bb52b4cdfa2dbf5867690d132793" name="afb88bb52b4cdfa2dbf5867690d132793"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afb88bb52b4cdfa2dbf5867690d132793">&#9670;&#160;</a></span>execute()</h2>
+<a id="a7b06969ba22a31d99ea0b77732993ed7" name="a7b06969ba22a31d99ea0b77732993ed7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b06969ba22a31d99ea0b77732993ed7">&#9670;&#160;</a></span>execute()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -219,7 +219,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void helios::engine::runtime::messaging::command::TargetedCommand::execute </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html">helios::engine::ecs::GameObject</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>gameObject</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html">helios::engine::ecs::GameObject</a></td>          <td class="paramname"><span class="paramname"><em>gameObject</em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -237,9 +237,9 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>Implementations must be noexcept. If <a class="el" href="#afb88bb52b4cdfa2dbf5867690d132793" title="Executes the command on the specified GameObject.">execute()</a> could fail, handle errors internally (e.g., log and skip). </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Implementations must be noexcept. If <a class="el" href="#a7b06969ba22a31d99ea0b77732993ed7" title="Executes the command on the specified GameObject.">execute()</a> could fail, handle errors internally (e.g., log and skip). </dd></dl>
 
-<p>Implemented in <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1Aim2DCommand.html#ac0c629ab75061dde4a02d165009d8bac">helios::engine::mechanics::combat::commands::Aim2DCommand</a>, <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1ShootCommand.html#a193b4eff8c457a885c72d602ccfff601">helios::engine::mechanics::combat::commands::ShootCommand</a>, <a class="el" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1Move2DCommand.html#a0d5f4a8a8ef0668bb052ed577426db66">helios::engine::modules::physics::motion::commands::Move2DCommand</a>, and <a class="el" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1SteeringCommand.html#a5faf71297753def59805676b937cb691">helios::engine::modules::physics::motion::commands::SteeringCommand</a>.</p>
+<p>Implemented in <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1Aim2DCommand.html#a861541234b341ec5191dde68cb887507">helios::engine::mechanics::combat::commands::Aim2DCommand</a>, <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1ShootCommand.html#a405136175de8de53c1bd4417e0ee0e57">helios::engine::mechanics::combat::commands::ShootCommand</a>, <a class="el" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1Move2DCommand.html#a4cd5c2f5e4c9571d67f1e735d802dabf">helios::engine::modules::physics::motion::commands::Move2DCommand</a>, and <a class="el" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1SteeringCommand.html#a0c81ba64684234c619fd09dca98ab395">helios::engine::modules::physics::motion::commands::SteeringCommand</a>.</p>
 
 </div>
 </div>

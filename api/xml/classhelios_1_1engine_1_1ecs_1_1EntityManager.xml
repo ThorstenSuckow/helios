@@ -1,0 +1,1005 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1ecs_1_1EntityManager" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::ecs::EntityManager</compoundname>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a9e81d3664390434fea14b3088dfbe8ef" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1ecs_1_1SparseSetBase" kindref="compound">SparseSetBase</ref> &gt; &gt;</type>
+        <definition>std::vector&lt;std::unique_ptr&lt;SparseSetBase&gt; &gt; helios::engine::ecs::EntityManager::components_</definition>
+        <argsstring></argsstring>
+        <name>components_</name>
+        <qualifiedname>helios::engine::ecs::EntityManager::components_</qualifiedname>
+        <briefdescription>
+<para>Component storage indexed by type ID. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>@odo sort after size() </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" line="73" column="21" bodyfile="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a0c7486af9a57bc0f708d5530f2bcf4de" prot="private" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry" kindref="compound">EntityRegistry</ref> &amp;</type>
+        <definition>EntityRegistry&amp; helios::engine::ecs::EntityManager::registry_</definition>
+        <argsstring></argsstring>
+        <name>registry_</name>
+        <qualifiedname>helios::engine::ecs::EntityManager::registry_</qualifiedname>
+        <briefdescription>
+<para>Reference to the entity registry for handle management. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" line="78" column="24" bodyfile="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a16ce8c7b1d2567a01c6a3ab148aca7bd" prot="private" static="no" mutable="no">
+        <type>const size_t</type>
+        <definition>const size_t helios::engine::ecs::EntityManager::capacity_</definition>
+        <argsstring></argsstring>
+        <name>capacity_</name>
+        <qualifiedname>helios::engine::ecs::EntityManager::capacity_</qualifiedname>
+        <briefdescription>
+<para>initial capacity for the underlying sparsesets. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" line="83" column="22" bodyfile="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" bodystart="83" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1EntityManager_1ac4488fc3ec13ecdc4465a376a10df610" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::ecs::EntityManager::EntityManager</definition>
+        <argsstring>(EntityRegistry &amp;registry, size_t capacity=ENTITY_MANAGER_DEFAULT_CAPACITY)</argsstring>
+        <name>EntityManager</name>
+        <qualifiedname>helios::engine::ecs::EntityManager::EntityManager</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry" kindref="compound">EntityRegistry</ref> &amp;</type>
+          <declname>registry</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>capacity</declname>
+          <defval>ENTITY_MANAGER_DEFAULT_CAPACITY</defval>
+        </param>
+        <briefdescription>
+<para>Constructs an <ref refid="classhelios_1_1engine_1_1ecs_1_1EntityManager" kindref="compound">EntityManager</ref> with the given registry. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>registry</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry" kindref="compound">EntityRegistry</ref> used for handle allocation and validation. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" line="92" column="18" bodyfile="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" bodystart="92" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a0329c03ca1997fb72d3e58725e937fe3" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle" kindref="compound">EntityHandle</ref></type>
+        <definition>EntityHandle helios::engine::ecs::EntityManager::create</definition>
+        <argsstring>()</argsstring>
+        <name>create</name>
+        <qualifiedname>helios::engine::ecs::EntityManager::create</qualifiedname>
+        <briefdescription>
+<para>Creates a new entity. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Delegates to the underlying `EntityRegistry` to allocate a new handle.</para>
+<para><simplesect kind="return"><para>A valid `EntityHandle` for the newly created entity.</para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry_1ab400a74c90d34d8e7e70cfe098b458c0" kindref="member">EntityRegistry::create</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" line="104" column="23" bodyfile="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" bodystart="104" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a25b75ef19285ac096849471b41b8a33d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::ecs::EntityManager::isValid</definition>
+        <argsstring>(const EntityHandle handle) const noexcept</argsstring>
+        <name>isValid</name>
+        <qualifiedname>helios::engine::ecs::EntityManager::isValid</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle" kindref="compound">EntityHandle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Checks if an entity handle is valid. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The handle to validate.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>`true` if the handle refers to a living entity. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" line="115" column="15" bodyfile="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" bodystart="115" bodyend="117"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a01ae81037793ce4bebb83a256220c38e" compoundref="EntityManager_8ixx" startline="513" endline="515">handle</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1EntityManager_1aa803ffb4157df506b30b1b85832f8b87" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::ecs::EntityManager::isValid</definition>
+        <argsstring>(const EntityId entityId) const noexcept</argsstring>
+        <name>isValid</name>
+        <qualifiedname>helios::engine::ecs::EntityManager::isValid</qualifiedname>
+        <param>
+          <type>const <ref refid="namespacehelios_1_1engine_1_1core_1_1data_1a1876d5539fc6b911fbe54f8b56fd2ec0" kindref="member">EntityId</ref></type>
+          <declname>entityId</declname>
+        </param>
+        <briefdescription>
+<para>Checks if an entity ID is valid. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>entityId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The entity ID to validate.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>`true` if the entity ID refers to a living entity. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" line="126" column="15" bodyfile="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" bodystart="126" bodyend="128"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a01ae81037793ce4bebb83a256220c38e" compoundref="EntityManager_8ixx" startline="513" endline="515">handle</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a407554a390eb1986ae7b469caa406fad" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::ecs::EntityManager::destroy</definition>
+        <argsstring>(const EntityHandle &amp;handle)</argsstring>
+        <name>destroy</name>
+        <qualifiedname>helios::engine::ecs::EntityManager::destroy</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle" kindref="compound">EntityHandle</ref> &amp;</type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Destroys an entity and invalidates its handle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Increments the entity&apos;s version in the registry, making all existing handles to this entity stale. Does not automatically remove components from storage.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The handle of the entity to destroy.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>`true` if the entity was destroyed, `false` if already invalid. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" line="141" column="15" bodyfile="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" bodystart="141" bodyend="165"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a01ae81037793ce4bebb83a256220c38e" compoundref="EntityManager_8ixx" startline="513" endline="515">handle</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1ComponentOpsRegistry_1a4f41db7b6ae7e83ba8092343d8620e59" compoundref="ComponentOpsRegistry_8ixx" startline="82" endline="89">helios::engine::ecs::ComponentOpsRegistry::ops</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a1852346799d7912d40fd61e32dfb9654" compoundref="EntityManager_8ixx" startline="498" endline="504">raw</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1EntityManager_1afc62dc2277d76ec4a52e2bb04a49715f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T *</type>
+        <definition>T * helios::engine::ecs::EntityManager::get</definition>
+        <argsstring>(const EntityHandle handle) const</argsstring>
+        <name>get</name>
+        <qualifiedname>helios::engine::ecs::EntityManager::get</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle" kindref="compound">EntityHandle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Retrieves a component for the given entity. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The component type to retrieve.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The entity whose component to retrieve.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to the component, or `nullptr` if the entity is invalid or does not have the requested component. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" line="178" column="12" bodyfile="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" bodystart="178" bodyend="189"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a01ae81037793ce4bebb83a256220c38e" compoundref="EntityManager_8ixx" startline="513" endline="515">handle</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1ab500472e8088cfef0c39c8e4df787a6e" compoundref="EntityManager_8ixx" startline="240" endline="252">has</references>
+        <references refid="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId_1ae2b1610edbd9844c96d65f5572fa6db9" compoundref="ComponentTypeId_8ixx" startline="97" endline="100">helios::engine::core::data::ComponentTypeId::id</references>
+        <references refid="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId_1a324f7ed295515954f0147169dfdff208" compoundref="ComponentTypeId_8ixx" startline="82" endline="84">helios::engine::core::data::ComponentTypeId::value</references>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1aabc010881d9c613de7cd9102c20d198d" compoundref="EntityManager_8ixx" startline="384" endline="397">emplaceOrGet</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1EntityManager_1ab5c96f1027c20943e58595197575d57d" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classhelios_1_1engine_1_1ecs_1_1SparseSet" kindref="compound">SparseSet</ref>&lt; T &gt; *</type>
+        <definition>SparseSet&lt; T &gt; * helios::engine::ecs::EntityManager::getSparseSet</definition>
+        <argsstring>()</argsstring>
+        <name>getSparseSet</name>
+        <qualifiedname>helios::engine::ecs::EntityManager::getSparseSet</qualifiedname>
+        <briefdescription>
+<para>Returns the <ref refid="classhelios_1_1engine_1_1ecs_1_1SparseSet" kindref="compound">SparseSet</ref> for a component type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The component type.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to the <ref refid="classhelios_1_1engine_1_1ecs_1_1SparseSet" kindref="compound">SparseSet</ref>, or `nullptr` if the type has no storage. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" line="199" column="20" bodyfile="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" bodystart="199" bodyend="208"/>
+        <references refid="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId_1ae2b1610edbd9844c96d65f5572fa6db9" compoundref="ComponentTypeId_8ixx" startline="97" endline="100">helios::engine::core::data::ComponentTypeId::id</references>
+        <references refid="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId_1a324f7ed295515954f0147169dfdff208" compoundref="ComponentTypeId_8ixx" startline="82" endline="84">helios::engine::core::data::ComponentTypeId::value</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a9747785b45dce1e2e0c4320116f66156" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>const <ref refid="classhelios_1_1engine_1_1ecs_1_1SparseSet" kindref="compound">SparseSet</ref>&lt; T &gt; *</type>
+        <definition>const SparseSet&lt; T &gt; * helios::engine::ecs::EntityManager::getSparseSet</definition>
+        <argsstring>() const</argsstring>
+        <name>getSparseSet</name>
+        <qualifiedname>helios::engine::ecs::EntityManager::getSparseSet</qualifiedname>
+        <briefdescription>
+<para>Returns the <ref refid="classhelios_1_1engine_1_1ecs_1_1SparseSet" kindref="compound">SparseSet</ref> for a component type (const). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The component type.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Const pointer to the <ref refid="classhelios_1_1engine_1_1ecs_1_1SparseSet" kindref="compound">SparseSet</ref>, or `nullptr` if the type has no storage. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" line="218" column="26" bodyfile="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" bodystart="218" bodyend="227"/>
+        <references refid="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId_1ae2b1610edbd9844c96d65f5572fa6db9" compoundref="ComponentTypeId_8ixx" startline="97" endline="100">helios::engine::core::data::ComponentTypeId::id</references>
+        <references refid="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId_1a324f7ed295515954f0147169dfdff208" compoundref="ComponentTypeId_8ixx" startline="82" endline="84">helios::engine::core::data::ComponentTypeId::value</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1EntityManager_1ab500472e8088cfef0c39c8e4df787a6e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool helios::engine::ecs::EntityManager::has</definition>
+        <argsstring>(const EntityHandle handle) const</argsstring>
+        <name>has</name>
+        <qualifiedname>helios::engine::ecs::EntityManager::has</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle" kindref="compound">EntityHandle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Checks whether an entity has a specific component. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The component type to check for.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The entity to query.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>`true` if the entity has the component, `false` if the handle is invalid or the component is not attached. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" line="240" column="15" bodyfile="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" bodystart="240" bodyend="252"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a01ae81037793ce4bebb83a256220c38e" compoundref="EntityManager_8ixx" startline="513" endline="515">handle</references>
+        <references refid="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId_1ae2b1610edbd9844c96d65f5572fa6db9" compoundref="ComponentTypeId_8ixx" startline="97" endline="100">helios::engine::core::data::ComponentTypeId::id</references>
+        <references refid="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId_1a324f7ed295515954f0147169dfdff208" compoundref="ComponentTypeId_8ixx" startline="82" endline="84">helios::engine::core::data::ComponentTypeId::value</references>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1ac5e13477c8dfc73875e797a5ec74baef" compoundref="EntityManager_8ixx" startline="467" endline="488">clone</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a935c5347e407e1f7c7c37b45991eb0d3" compoundref="EntityManager_8ixx" startline="307" endline="324">enable</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1afc62dc2277d76ec4a52e2bb04a49715f" compoundref="EntityManager_8ixx" startline="178" endline="189">get</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a1852346799d7912d40fd61e32dfb9654" compoundref="EntityManager_8ixx" startline="498" endline="504">raw</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a15f4a7849d69f466ffbf51f3cec11582" compoundref="EntityManager_8ixx" startline="417" endline="435">remove</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1EntityManager_1ab78084139db82bc0bb0545643d25f476" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::ecs::EntityManager::has</definition>
+        <argsstring>(const EntityHandle handle, const helios::engine::core::data::ComponentTypeId typeId) const</argsstring>
+        <name>has</name>
+        <qualifiedname>helios::engine::ecs::EntityManager::has</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle" kindref="compound">EntityHandle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId" kindref="compound">helios::engine::core::data::ComponentTypeId</ref></type>
+          <declname>typeId</declname>
+        </param>
+        <briefdescription>
+<para>Checks whether an entity has a component by type ID. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The entity to query. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>typeId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The component type identifier.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>`true` if the entity has the component, `false` otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" line="262" column="15" bodyfile="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" bodystart="262" bodyend="274"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a01ae81037793ce4bebb83a256220c38e" compoundref="EntityManager_8ixx" startline="513" endline="515">handle</references>
+        <references refid="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId_1a324f7ed295515954f0147169dfdff208" compoundref="ComponentTypeId_8ixx" startline="82" endline="84">helios::engine::core::data::ComponentTypeId::value</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1EntityManager_1af0925a35a775f6781d54f1e22fbd3b1a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::ecs::EntityManager::enable</definition>
+        <argsstring>(const EntityHandle handle, const helios::engine::core::data::ComponentTypeId typeId) const</argsstring>
+        <name>enable</name>
+        <qualifiedname>helios::engine::ecs::EntityManager::enable</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle" kindref="compound">EntityHandle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId" kindref="compound">helios::engine::core::data::ComponentTypeId</ref></type>
+          <declname>typeId</declname>
+        </param>
+        <briefdescription>
+<para>Enables a component by type ID. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Calls the component&apos;s `enable()` method if registered.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The entity whose component to enable. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>typeId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The component type identifier. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" line="284" column="14" bodyfile="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" bodystart="284" bodyend="286"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1af0925a35a775f6781d54f1e22fbd3b1a" compoundref="EntityManager_8ixx" startline="284" endline="286">enable</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a01ae81037793ce4bebb83a256220c38e" compoundref="EntityManager_8ixx" startline="513" endline="515">handle</references>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a06c03480f8768b5163d0a59616de36bf" compoundref="EntityManager_8ixx" startline="296" endline="298">disable</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1af0925a35a775f6781d54f1e22fbd3b1a" compoundref="EntityManager_8ixx" startline="284" endline="286">enable</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a935c5347e407e1f7c7c37b45991eb0d3" compoundref="EntityManager_8ixx" startline="307" endline="324">enable</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a06c03480f8768b5163d0a59616de36bf" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::ecs::EntityManager::disable</definition>
+        <argsstring>(const EntityHandle handle, const helios::engine::core::data::ComponentTypeId typeId) const</argsstring>
+        <name>disable</name>
+        <qualifiedname>helios::engine::ecs::EntityManager::disable</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle" kindref="compound">EntityHandle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId" kindref="compound">helios::engine::core::data::ComponentTypeId</ref></type>
+          <declname>typeId</declname>
+        </param>
+        <briefdescription>
+<para>Disables a component by type ID. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Calls the component&apos;s `disable()` method if registered.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The entity whose component to disable. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>typeId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The component type identifier. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" line="296" column="14" bodyfile="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" bodystart="296" bodyend="298"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1af0925a35a775f6781d54f1e22fbd3b1a" compoundref="EntityManager_8ixx" startline="284" endline="286">enable</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a01ae81037793ce4bebb83a256220c38e" compoundref="EntityManager_8ixx" startline="513" endline="515">handle</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a935c5347e407e1f7c7c37b45991eb0d3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::ecs::EntityManager::enable</definition>
+        <argsstring>(const EntityHandle handle, const helios::engine::core::data::ComponentTypeId typeId, const bool enable) const</argsstring>
+        <name>enable</name>
+        <qualifiedname>helios::engine::ecs::EntityManager::enable</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle" kindref="compound">EntityHandle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId" kindref="compound">helios::engine::core::data::ComponentTypeId</ref></type>
+          <declname>typeId</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>enable</declname>
+        </param>
+        <briefdescription>
+<para>Enables or disables a component by type ID. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The entity whose component to modify. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>typeId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The component type identifier. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>enable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>`true` to enable, `false` to disable. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" line="307" column="14" bodyfile="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" bodystart="307" bodyend="324"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1af0925a35a775f6781d54f1e22fbd3b1a" compoundref="EntityManager_8ixx" startline="284" endline="286">enable</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a01ae81037793ce4bebb83a256220c38e" compoundref="EntityManager_8ixx" startline="513" endline="515">handle</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1ab500472e8088cfef0c39c8e4df787a6e" compoundref="EntityManager_8ixx" startline="240" endline="252">has</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1ComponentOpsRegistry_1a4f41db7b6ae7e83ba8092343d8620e59" compoundref="ComponentOpsRegistry_8ixx" startline="82" endline="89">helios::engine::ecs::ComponentOpsRegistry::ops</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a1852346799d7912d40fd61e32dfb9654" compoundref="EntityManager_8ixx" startline="498" endline="504">raw</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1EntityManager_1af0e75c4b42a3efb8f308ca9430075464" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>T *</type>
+        <definition>T * helios::engine::ecs::EntityManager::emplace</definition>
+        <argsstring>(const EntityHandle handle, Args &amp;&amp;...args)</argsstring>
+        <name>emplace</name>
+        <qualifiedname>helios::engine::ecs::EntityManager::emplace</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle" kindref="compound">EntityHandle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Constructs and attaches a component to an entity. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the component type has not been registered yet, a new `SparseSet` is created. The component is constructed in-place with the provided arguments. Return nullptre if the component already exists or if the handle was invalid.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The component type to emplace. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Constructor argument types.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The entity to attach the component to. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Arguments forwarded to the component constructor.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to the newly created component, or `nullptr` if the handle is invalid. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" line="344" column="11" bodyfile="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" bodystart="344" bodyend="369"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a01ae81037793ce4bebb83a256220c38e" compoundref="EntityManager_8ixx" startline="513" endline="515">handle</references>
+        <references refid="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId_1ae2b1610edbd9844c96d65f5572fa6db9" compoundref="ComponentTypeId_8ixx" startline="97" endline="100">helios::engine::core::data::ComponentTypeId::id</references>
+        <references refid="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId_1a324f7ed295515954f0147169dfdff208" compoundref="ComponentTypeId_8ixx" startline="82" endline="84">helios::engine::core::data::ComponentTypeId::value</references>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1aabc010881d9c613de7cd9102c20d198d" compoundref="EntityManager_8ixx" startline="384" endline="397">emplaceOrGet</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1EntityManager_1aabc010881d9c613de7cd9102c20d198d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>T *</type>
+        <definition>T * helios::engine::ecs::EntityManager::emplaceOrGet</definition>
+        <argsstring>(const EntityHandle handle, Args &amp;&amp;...args)</argsstring>
+        <name>emplaceOrGet</name>
+        <qualifiedname>helios::engine::ecs::EntityManager::emplaceOrGet</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle" kindref="compound">EntityHandle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Returns existing component or creates a new one. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The component type. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Constructor argument types.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The entity. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Arguments forwarded to the constructor if creating.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to the existing or newly created component, or `nullptr` if the handle is invalid. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" line="384" column="11" bodyfile="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" bodystart="384" bodyend="397"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1af0e75c4b42a3efb8f308ca9430075464" compoundref="EntityManager_8ixx" startline="344" endline="369">emplace</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1afc62dc2277d76ec4a52e2bb04a49715f" compoundref="EntityManager_8ixx" startline="178" endline="189">get</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a01ae81037793ce4bebb83a256220c38e" compoundref="EntityManager_8ixx" startline="513" endline="515">handle</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a1852346799d7912d40fd61e32dfb9654" compoundref="EntityManager_8ixx" startline="498" endline="504">raw</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a15f4a7849d69f466ffbf51f3cec11582" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool helios::engine::ecs::EntityManager::remove</definition>
+        <argsstring>(const EntityHandle &amp;handle)</argsstring>
+        <name>remove</name>
+        <qualifiedname>helios::engine::ecs::EntityManager::remove</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle" kindref="compound">EntityHandle</ref> &amp;</type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Removes a specific component from an entity. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Unlike `destroy()`, this only removes a single component type while keeping the entity and other components intact.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The component type to remove.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The entity whose component to remove.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>`true` if the component was removed, `false` if the handle was invalid, the component was not attached, or removal was blocked by `onRemove`.</para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a407554a390eb1986ae7b469caa406fad" kindref="member">destroy</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1ecs_1_1SparseSet_1aa72c9d0be676855619731b67eda0d3ee" kindref="member">SparseSet::remove</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" line="417" column="14" bodyfile="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" bodystart="417" bodyend="435"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a01ae81037793ce4bebb83a256220c38e" compoundref="EntityManager_8ixx" startline="513" endline="515">handle</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1ab500472e8088cfef0c39c8e4df787a6e" compoundref="EntityManager_8ixx" startline="240" endline="252">has</references>
+        <references refid="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId_1ae2b1610edbd9844c96d65f5572fa6db9" compoundref="ComponentTypeId_8ixx" startline="97" endline="100">helios::engine::core::data::ComponentTypeId::id</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1ComponentOpsRegistry_1a4f41db7b6ae7e83ba8092343d8620e59" compoundref="ComponentOpsRegistry_8ixx" startline="82" endline="89">helios::engine::ecs::ComponentOpsRegistry::ops</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a1852346799d7912d40fd61e32dfb9654" compoundref="EntityManager_8ixx" startline="498" endline="504">raw</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a507caffb8716c5e9fee9c56018c22860" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::generator&lt; <ref refid="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId" kindref="compound">helios::engine::core::data::ComponentTypeId</ref> &gt;</type>
+        <definition>std::generator&lt; helios::engine::core::data::ComponentTypeId &gt; helios::engine::ecs::EntityManager::componentTypeIds</definition>
+        <argsstring>(const EntityHandle handle) const</argsstring>
+        <name>componentTypeIds</name>
+        <qualifiedname>helios::engine::ecs::EntityManager::componentTypeIds</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle" kindref="compound">EntityHandle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Returns a generator over all component type IDs attached to an entity. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The entity to query.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Generator yielding <ref refid="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId" kindref="compound">ComponentTypeId</ref> for each attached component. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" line="445" column="9" bodyfile="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" bodystart="445" bodyend="455"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a01ae81037793ce4bebb83a256220c38e" compoundref="EntityManager_8ixx" startline="513" endline="515">handle</references>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1ac5e13477c8dfc73875e797a5ec74baef" compoundref="EntityManager_8ixx" startline="467" endline="488">clone</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1EntityManager_1ac5e13477c8dfc73875e797a5ec74baef" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::ecs::EntityManager::clone</definition>
+        <argsstring>(const EntityHandle source, const EntityHandle target)</argsstring>
+        <name>clone</name>
+        <qualifiedname>helios::engine::ecs::EntityManager::clone</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle" kindref="compound">EntityHandle</ref></type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle" kindref="compound">EntityHandle</ref></type>
+          <declname>target</declname>
+        </param>
+        <briefdescription>
+<para>Clones all components from source entity to target entity. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Iterates through all components on the source and copies them to the target using the registered clone function. Skips components that already exist on the target.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>source</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The entity to clone from. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>target</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The entity to clone to. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" line="467" column="14" bodyfile="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" bodystart="467" bodyend="488"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a507caffb8716c5e9fee9c56018c22860" compoundref="EntityManager_8ixx" startline="445" endline="455">componentTypeIds</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1ab500472e8088cfef0c39c8e4df787a6e" compoundref="EntityManager_8ixx" startline="240" endline="252">has</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1ComponentOpsRegistry_1a4f41db7b6ae7e83ba8092343d8620e59" compoundref="ComponentOpsRegistry_8ixx" startline="82" endline="89">helios::engine::ecs::ComponentOpsRegistry::ops</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a1852346799d7912d40fd61e32dfb9654" compoundref="EntityManager_8ixx" startline="498" endline="504">raw</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a1852346799d7912d40fd61e32dfb9654" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void *</type>
+        <definition>void * helios::engine::ecs::EntityManager::raw</definition>
+        <argsstring>(const EntityHandle handle, const helios::engine::core::data::ComponentTypeId typeId) const</argsstring>
+        <name>raw</name>
+        <qualifiedname>helios::engine::ecs::EntityManager::raw</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle" kindref="compound">EntityHandle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId" kindref="compound">helios::engine::core::data::ComponentTypeId</ref></type>
+          <declname>typeId</declname>
+        </param>
+        <briefdescription>
+<para>Returns raw void pointer to a component. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The entity. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>typeId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The component type identifier.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Raw pointer to the component, or `nullptr` if not found. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" line="498" column="15" bodyfile="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" bodystart="498" bodyend="504"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a01ae81037793ce4bebb83a256220c38e" compoundref="EntityManager_8ixx" startline="513" endline="515">handle</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1ab500472e8088cfef0c39c8e4df787a6e" compoundref="EntityManager_8ixx" startline="240" endline="252">has</references>
+        <references refid="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId_1a324f7ed295515954f0147169dfdff208" compoundref="ComponentTypeId_8ixx" startline="82" endline="84">helios::engine::core::data::ComponentTypeId::value</references>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1ac5e13477c8dfc73875e797a5ec74baef" compoundref="EntityManager_8ixx" startline="467" endline="488">clone</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a407554a390eb1986ae7b469caa406fad" compoundref="EntityManager_8ixx" startline="141" endline="165">destroy</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1aabc010881d9c613de7cd9102c20d198d" compoundref="EntityManager_8ixx" startline="384" endline="397">emplaceOrGet</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a935c5347e407e1f7c7c37b45991eb0d3" compoundref="EntityManager_8ixx" startline="307" endline="324">enable</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a15f4a7849d69f466ffbf51f3cec11582" compoundref="EntityManager_8ixx" startline="417" endline="435">remove</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a01ae81037793ce4bebb83a256220c38e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle" kindref="compound">EntityHandle</ref></type>
+        <definition>EntityHandle helios::engine::ecs::EntityManager::handle</definition>
+        <argsstring>(const EntityId entityId) const</argsstring>
+        <name>handle</name>
+        <qualifiedname>helios::engine::ecs::EntityManager::handle</qualifiedname>
+        <param>
+          <type>const <ref refid="namespacehelios_1_1engine_1_1core_1_1data_1a1876d5539fc6b911fbe54f8b56fd2ec0" kindref="member">EntityId</ref></type>
+          <declname>entityId</declname>
+        </param>
+        <briefdescription>
+<para>Reconstructs an <ref refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle" kindref="compound">EntityHandle</ref> from an <ref refid="namespacehelios_1_1engine_1_1core_1_1data_1a1876d5539fc6b911fbe54f8b56fd2ec0" kindref="member">EntityId</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>entityId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The entity ID.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle" kindref="compound">EntityHandle</ref> with current version from the registry. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" line="513" column="23" bodyfile="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" bodystart="513" bodyend="515"/>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a507caffb8716c5e9fee9c56018c22860" compoundref="EntityManager_8ixx" startline="445" endline="455">componentTypeIds</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a407554a390eb1986ae7b469caa406fad" compoundref="EntityManager_8ixx" startline="141" endline="165">destroy</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a06c03480f8768b5163d0a59616de36bf" compoundref="EntityManager_8ixx" startline="296" endline="298">disable</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1af0e75c4b42a3efb8f308ca9430075464" compoundref="EntityManager_8ixx" startline="344" endline="369">emplace</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1aabc010881d9c613de7cd9102c20d198d" compoundref="EntityManager_8ixx" startline="384" endline="397">emplaceOrGet</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1af0925a35a775f6781d54f1e22fbd3b1a" compoundref="EntityManager_8ixx" startline="284" endline="286">enable</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a935c5347e407e1f7c7c37b45991eb0d3" compoundref="EntityManager_8ixx" startline="307" endline="324">enable</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1afc62dc2277d76ec4a52e2bb04a49715f" compoundref="EntityManager_8ixx" startline="178" endline="189">get</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1ab500472e8088cfef0c39c8e4df787a6e" compoundref="EntityManager_8ixx" startline="240" endline="252">has</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1ab78084139db82bc0bb0545643d25f476" compoundref="EntityManager_8ixx" startline="262" endline="274">has</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a25b75ef19285ac096849471b41b8a33d" compoundref="EntityManager_8ixx" startline="115" endline="117">isValid</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1aa803ffb4157df506b30b1b85832f8b87" compoundref="EntityManager_8ixx" startline="126" endline="128">isValid</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a1852346799d7912d40fd61e32dfb9654" compoundref="EntityManager_8ixx" startline="498" endline="504">raw</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a15f4a7849d69f466ffbf51f3cec11582" compoundref="EntityManager_8ixx" startline="417" endline="435">remove</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Manages entities and their associated components. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>`EntityManager` provides a unified interface for creating entities and attaching/retrieving components. It delegates handle management to an `EntityRegistry` and stores component data in type-specific `SparseSet` containers.</para>
+<para>## Responsibilities</para>
+<para><itemizedlist>
+<listitem><para>**Entity Creation:** Delegates to `EntityRegistry` for handle allocation.</para>
+</listitem><listitem><para>**Entity Destruction:** Removes all components and invalidates the handle.</para>
+</listitem><listitem><para>**Component Storage:** Maintains a vector of `SparseSet` instances, one per component type, indexed by `TypeIndexer`.</para>
+</listitem></itemizedlist>
+</para>
+<para>## Usage</para>
+<para>```cpp <ref refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry" kindref="compound">EntityRegistry</ref> registry; <ref refid="classhelios_1_1engine_1_1ecs_1_1EntityManager" kindref="compound">EntityManager</ref> manager(registry);</para>
+<para>auto entity = manager.create(); auto* transform = manager.emplace&lt;TransformComponent&gt;(entity, glm::vec3{0.0f});</para>
+<para>if (manager.has&lt;TransformComponent&gt;(entity)) { auto* t = manager.get&lt;TransformComponent&gt;(entity); }</para>
+<para>manager.remove&lt;TransformComponent&gt;(entity); // Remove single component manager.destroy(entity); // Destroy entity and all components ```</para>
+<para><simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry" kindref="compound">EntityRegistry</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1ecs_1_1SparseSet" kindref="compound">SparseSet</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle" kindref="compound">EntityHandle</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" line="67" column="5" bodyfile="/tmp/h/include/helios/engine/ecs/EntityManager.ixx" bodystart="67" bodyend="518"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a16ce8c7b1d2567a01c6a3ab148aca7bd" prot="private" virt="non-virtual"><scope>helios::engine::ecs::EntityManager</scope><name>capacity_</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1ac5e13477c8dfc73875e797a5ec74baef" prot="public" virt="non-virtual"><scope>helios::engine::ecs::EntityManager</scope><name>clone</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a9e81d3664390434fea14b3088dfbe8ef" prot="private" virt="non-virtual"><scope>helios::engine::ecs::EntityManager</scope><name>components_</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a507caffb8716c5e9fee9c56018c22860" prot="public" virt="non-virtual"><scope>helios::engine::ecs::EntityManager</scope><name>componentTypeIds</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a0329c03ca1997fb72d3e58725e937fe3" prot="public" virt="non-virtual"><scope>helios::engine::ecs::EntityManager</scope><name>create</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a407554a390eb1986ae7b469caa406fad" prot="public" virt="non-virtual"><scope>helios::engine::ecs::EntityManager</scope><name>destroy</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a06c03480f8768b5163d0a59616de36bf" prot="public" virt="non-virtual"><scope>helios::engine::ecs::EntityManager</scope><name>disable</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1af0e75c4b42a3efb8f308ca9430075464" prot="public" virt="non-virtual"><scope>helios::engine::ecs::EntityManager</scope><name>emplace</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1aabc010881d9c613de7cd9102c20d198d" prot="public" virt="non-virtual"><scope>helios::engine::ecs::EntityManager</scope><name>emplaceOrGet</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1af0925a35a775f6781d54f1e22fbd3b1a" prot="public" virt="non-virtual"><scope>helios::engine::ecs::EntityManager</scope><name>enable</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a935c5347e407e1f7c7c37b45991eb0d3" prot="public" virt="non-virtual"><scope>helios::engine::ecs::EntityManager</scope><name>enable</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1ac4488fc3ec13ecdc4465a376a10df610" prot="public" virt="non-virtual"><scope>helios::engine::ecs::EntityManager</scope><name>EntityManager</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1afc62dc2277d76ec4a52e2bb04a49715f" prot="public" virt="non-virtual"><scope>helios::engine::ecs::EntityManager</scope><name>get</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1ab5c96f1027c20943e58595197575d57d" prot="public" virt="non-virtual"><scope>helios::engine::ecs::EntityManager</scope><name>getSparseSet</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a9747785b45dce1e2e0c4320116f66156" prot="public" virt="non-virtual"><scope>helios::engine::ecs::EntityManager</scope><name>getSparseSet</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a01ae81037793ce4bebb83a256220c38e" prot="public" virt="non-virtual"><scope>helios::engine::ecs::EntityManager</scope><name>handle</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1ab500472e8088cfef0c39c8e4df787a6e" prot="public" virt="non-virtual"><scope>helios::engine::ecs::EntityManager</scope><name>has</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1ab78084139db82bc0bb0545643d25f476" prot="public" virt="non-virtual"><scope>helios::engine::ecs::EntityManager</scope><name>has</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a25b75ef19285ac096849471b41b8a33d" prot="public" virt="non-virtual"><scope>helios::engine::ecs::EntityManager</scope><name>isValid</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1aa803ffb4157df506b30b1b85832f8b87" prot="public" virt="non-virtual"><scope>helios::engine::ecs::EntityManager</scope><name>isValid</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a1852346799d7912d40fd61e32dfb9654" prot="public" virt="non-virtual"><scope>helios::engine::ecs::EntityManager</scope><name>raw</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a0c7486af9a57bc0f708d5530f2bcf4de" prot="private" virt="non-virtual"><scope>helios::engine::ecs::EntityManager</scope><name>registry_</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a15f4a7849d69f466ffbf51f3cec11582" prot="public" virt="non-virtual"><scope>helios::engine::ecs::EntityManager</scope><name>remove</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -5,12 +5,15 @@
     <innerfile refid="helios_2engine_2core_2data_2__module_8ixx">helios/engine/core/data/_module.ixx</innerfile>
     <innerfile refid="CollisionLayer_8ixx">CollisionLayer.ixx</innerfile>
     <innerfile refid="ComponentTypeId_8ixx">ComponentTypeId.ixx</innerfile>
+    <innerfile refid="EntityId_8ixx">EntityId.ixx</innerfile>
+    <innerfile refid="EntityTombstone_8ixx">EntityTombstone.ixx</innerfile>
     <innerfile refid="FontId_8ixx">FontId.ixx</innerfile>
     <innerfile refid="GameObjectPoolId_8ixx">GameObjectPoolId.ixx</innerfile>
     <innerfile refid="ScorePoolId_8ixx">ScorePoolId.ixx</innerfile>
     <innerfile refid="ScoreTypeId_8ixx">ScoreTypeId.ixx</innerfile>
     <innerfile refid="SpawnProfileId_8ixx">SpawnProfileId.ixx</innerfile>
     <innerfile refid="SpawnRuleId_8ixx">SpawnRuleId.ixx</innerfile>
+    <innerfile refid="VersionId_8ixx">VersionId.ixx</innerfile>
     <innerfile refid="ViewportId_8ixx">ViewportId.ixx</innerfile>
     <briefdescription>
     </briefdescription>
@@ -21,7 +24,10 @@
 </sect1>
 <sect1 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md103">
 <title>Components</title><para><itemizedlist>
-<listitem><para><bold>ComponentTypeId</bold> - Compile-time type identifier for O(1) component indexing within GameObject.</para>
+<listitem><para><bold>CollisionLayer</bold> - Strongly-typed identifier for collision layers.</para>
+</listitem><listitem><para><bold>ComponentTypeId</bold> - Compile-time type identifier for O(1) component indexing within GameObject.</para>
+</listitem><listitem><para><bold>EntityId</bold> - Unique identifier for an entity within an EntityPool.</para>
+</listitem><listitem><para><bold>EntityTombstone</bold> - Sentinel value for invalid sparse array indices.</para>
 </listitem><listitem><para><bold>FontId</bold> - Strongly-typed identifier for referencing fonts.</para>
 </listitem><listitem><para><bold>GameObjectPool</bold> - Low-level O(1) object pooling for entity recycling.</para>
 </listitem><listitem><para><bold>GameObjectPoolId</bold> - Strongly-typed identifier for referencing pools.</para>
@@ -32,6 +38,7 @@
 </listitem><listitem><para><bold>ScoreTypeId</bold> - Strongly-typed identifier for score types.</para>
 </listitem><listitem><para><bold>SpawnProfileId</bold> - Strongly-typed identifier for spawn profiles.</para>
 </listitem><listitem><para><bold>SpawnRuleId</bold> - Strongly-typed identifier for spawn rules.</para>
+</listitem><listitem><para><bold>VersionId</bold> - Version number for stale entity handle detection.</para>
 </listitem><listitem><para><bold>ViewportId</bold> - Strongly-typed identifier for viewports.</para>
 </listitem></itemizedlist>
 </para>
@@ -59,6 +66,22 @@
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Get<sp/>unique<sp/>ID<sp/>for<sp/>a<sp/>score<sp/>type</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>scoreId<sp/>=<sp/>ScoreTypeId::id&lt;KillScore&gt;();</highlight></codeline>
+</programlisting></para>
+</sect2>
+<sect2 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md107">
+<title>Entity IDs (EntityPool)</title><para><computeroutput>EntityId</computeroutput> and <computeroutput>VersionId</computeroutput> are used together in <computeroutput>EntityHandle</computeroutput> for safe entity references within an <computeroutput>EntityPool</computeroutput>:</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>EntityHandle<sp/>combines<sp/>EntityId<sp/>+<sp/>VersionId</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">EntityHandle<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1engine_1_1core_1_1data_1a1876d5539fc6b911fbe54f8b56fd2ec0" kindref="member">EntityId</ref><sp/>entityId;<sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Index<sp/>into<sp/>sparse<sp/>array</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1engine_1_1core_1_1data_1a64dc3794b3b3f72af16a0c2a4cab2763" kindref="member">VersionId</ref><sp/>versionId;<sp/></highlight><highlight class="comment">//<sp/>Detects<sp/>stale<sp/>references</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Pool<sp/>operations<sp/>return<sp/>handles</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">EntityPool&lt;GameObject&gt;<sp/>pool;</highlight></codeline>
+<codeline><highlight class="normal">EntityHandle<sp/>handle<sp/>=<sp/>pool.emplace(std::make_unique&lt;GameObject&gt;());</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Handle<sp/>validation<sp/>detects<sp/>removed<sp/>entities</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>entity<sp/>=<sp/>pool.get(handle);<sp/><sp/></highlight><highlight class="comment">//<sp/>nullptr<sp/>if<sp/>handle<sp/>is<sp/>stale</highlight></codeline>
 </programlisting></para>
 <para>All ID types support:<itemizedlist>
 <listitem><para>Hashing for <computeroutput>std::unordered_map</computeroutput> / <computeroutput>std::unordered_set</computeroutput></para>

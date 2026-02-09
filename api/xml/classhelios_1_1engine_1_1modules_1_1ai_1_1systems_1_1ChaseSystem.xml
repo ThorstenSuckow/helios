@@ -32,11 +32,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/ai/systems/ChaseSystem.ixx" line="49" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ai/systems/ChaseSystem.ixx" bodystart="49" bodyend="88"/>
+        <location file="/tmp/h/include/helios/engine/modules/ai/systems/ChaseSystem.ixx" line="52" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ai/systems/ChaseSystem.ixx" bodystart="52" bodyend="92"/>
         <references refid="namespacehelios_1_1math_1af25d93f23f91acae02abfd7706b2e36d" compoundref="utils_8ixx" startline="22">helios::math::EPSILON_LENGTH</references>
         <references refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" compoundref="System_8ixx" startline="48">helios::engine::ecs::System::gameWorld_</references>
         <references refid="structhelios_1_1math_1_1vec3_1a3bbdd06a78770b9dadc233e0acca4295" compoundref="vec3_8ixx" startline="434" endline="448">helios::math::vec3&lt; T &gt;::normalize</references>
-        <references refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1TranslationStateComponent_1a1f7f42f2f5bca1af05e04db397d0634f" compoundref="TranslationStateComponent_8ixx" startline="94" endline="96">helios::engine::modules::spatial::transform::components::TranslationStateComponent::translation</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1TranslationStateComponent_1a1f7f42f2f5bca1af05e04db397d0634f" compoundref="TranslationStateComponent_8ixx" startline="137" endline="139">helios::engine::modules::spatial::transform::components::TranslationStateComponent::translation</references>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -44,7 +44,7 @@
     </briefdescription>
     <detaileddescription>
 <para>Processes all entities with ChaseComponent, SteeringComponent, and TranslationStateComponent. Updates steering intent to face the target entity based on a cooldown timer.</para>
-<para>The system: 1. Finds the target entity by GUID 2. Waits for the cooldown timer to expire 3. Calculates direction from entity to target 4. Sets steering intent to face that direction </para>
+<para>The system: 1. Finds the target entity by handle 2. Waits for the cooldown timer to expire 3. Calculates direction from entity to target 4. Sets steering intent to face that direction </para>
     </detaileddescription>
     <inheritancegraph>
       <node id="2">
@@ -65,6 +65,14 @@
       </node>
     </inheritancegraph>
     <collaborationgraph>
+      <node id="9">
+        <label>helios::engine::ecs::EntityManager</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1EntityManager"/>
+      </node>
+      <node id="8">
+        <label>helios::engine::ecs::EntityRegistry</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry"/>
+      </node>
       <node id="2">
         <label>helios::engine::ecs::System</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1System"/>
@@ -104,13 +112,19 @@
         <childnode refid="7" relation="usage">
           <edgelabel>spawnCommandHandlerRegistry_</edgelabel>
         </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>entityRegistry_</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>em_</edgelabel>
+        </childnode>
       </node>
       <node id="5">
         <label>helios::util::log::Logger</label>
         <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
       </node>
     </collaborationgraph>
-    <location file="/tmp/h/include/helios/engine/modules/ai/systems/ChaseSystem.ixx" line="40" column="5" bodyfile="/tmp/h/include/helios/engine/modules/ai/systems/ChaseSystem.ixx" bodystart="40" bodyend="90"/>
+    <location file="/tmp/h/include/helios/engine/modules/ai/systems/ChaseSystem.ixx" line="43" column="5" bodyfile="/tmp/h/include/helios/engine/modules/ai/systems/ChaseSystem.ixx" bodystart="43" bodyend="94"/>
     <listofallmembers>
       <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" prot="protected" virt="non-virtual"><scope>helios::engine::modules::ai::systems::ChaseSystem</scope><name>gameWorld_</name></member>
       <member refid="classhelios_1_1engine_1_1ecs_1_1System_1ae0464c1668e257439243a4f25979a7ff" prot="public" virt="virtual"><scope>helios::engine::modules::ai::systems::ChaseSystem</scope><name>init</name></member>

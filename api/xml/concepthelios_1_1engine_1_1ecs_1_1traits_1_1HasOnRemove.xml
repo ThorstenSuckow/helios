@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="concepthelios_1_1engine_1_1ecs_1_1traits_1_1HasOnRemove" kind="concept">
+    <compoundname>helios::engine::ecs::traits::HasOnRemove</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;typename T&gt;
+concept <ref refid="concepthelios_1_1engine_1_1ecs_1_1traits_1_1HasOnRemove" kindref="compound">helios::engine::ecs::traits::HasOnRemove</ref> =  requires(T t) {
+        {t.onRemove()} -&gt; std::convertible_to&lt;bool&gt;;
+    }    </initializer>
+    <briefdescription>
+<para>Trait for components that support removal interception. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>When a type `T` satisfies `HasOnRemove`, the `SparseSet` will invoke `onRemove()` before removing the element. If the method returns `false`, removal is cancelled.</para>
+<para>## Usage</para>
+<para>```cpp struct MyComponent { bool onRemove() { // Cleanup logic... return true; // Allow removal } };</para>
+<para>static_assert(traits::HasOnRemove&lt;MyComponent&gt;); ```</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type to check.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para>SparseSet::remove </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/ecs/Traits.ixx" line="39" column="5"/>
+  </compounddef>
+</doxygen>

@@ -8,9 +8,10 @@ var searchData=
   ['hash_3c_20helios_3a_3aengine_3a_3acore_3a_3adata_3a_3aspawnprofileid_20_3e_5',['hash&lt; helios::engine::core::data::SpawnProfileId &gt;',['../structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1SpawnProfileId_01_4.html',1,'std']]],
   ['hash_3c_20helios_3a_3aengine_3a_3acore_3a_3adata_3a_3aspawnruleid_20_3e_6',['hash&lt; helios::engine::core::data::SpawnRuleId &gt;',['../structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1SpawnRuleId_01_4.html',1,'std']]],
   ['hash_3c_20helios_3a_3aengine_3a_3acore_3a_3adata_3a_3aviewportid_20_3e_7',['hash&lt; helios::engine::core::data::ViewportId &gt;',['../structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ViewportId_01_4.html',1,'std']]],
-  ['hash_3c_20helios_3a_3autil_3a_3aguid_20_3e_8',['hash&lt; helios::util::Guid &gt;',['../structstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4.html',1,'std']]],
-  ['healthbuilder_9',['HealthBuilder',['../classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1HealthBuilder.html',1,'helios::engine::builder::gameObject::builders']]],
-  ['healthcomponent_10',['HealthComponent',['../classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent.html',1,'helios::engine::mechanics::health::components']]],
-  ['healthconfig_11',['HealthConfig',['../classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1HealthConfig.html',1,'helios::engine::builder::gameObject::builders::configs']]],
-  ['healthupdatesystem_12',['HealthUpdateSystem',['../classhelios_1_1engine_1_1mechanics_1_1health_1_1systems_1_1HealthUpdateSystem.html',1,'helios::engine::mechanics::health::systems']]]
+  ['hash_3c_20helios_3a_3aengine_3a_3aecs_3a_3aentityhandle_20_3e_8',['hash&lt; helios::engine::ecs::EntityHandle &gt;',['../structstd_1_1hash_3_01helios_1_1engine_1_1ecs_1_1EntityHandle_01_4.html',1,'std']]],
+  ['hash_3c_20helios_3a_3autil_3a_3aguid_20_3e_9',['hash&lt; helios::util::Guid &gt;',['../structstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4.html',1,'std']]],
+  ['healthbuilder_10',['HealthBuilder',['../classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1HealthBuilder.html',1,'helios::engine::builder::gameObject::builders']]],
+  ['healthcomponent_11',['HealthComponent',['../classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent.html',1,'helios::engine::mechanics::health::components']]],
+  ['healthconfig_12',['HealthConfig',['../classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1HealthConfig.html',1,'helios::engine::builder::gameObject::builders::configs']]],
+  ['healthupdatesystem_13',['HealthUpdateSystem',['../classhelios_1_1engine_1_1mechanics_1_1health_1_1systems_1_1HealthUpdateSystem.html',1,'helios::engine::mechanics::health::systems']]]
 ];

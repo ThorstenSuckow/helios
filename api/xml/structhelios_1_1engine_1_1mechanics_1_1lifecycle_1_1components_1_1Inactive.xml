@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="structhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1Inactive" kind="struct" language="C++" prot="public">
+    <compoundname>helios::engine::mechanics::lifecycle::components::Inactive</compoundname>
+    <briefdescription>
+<para>Tag component indicating that an entity is inactive. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This empty struct serves as a marker component for filtering inactive entities in views. It is automatically managed by `GameObject::setActive()`.</para>
+<para>When `setActive(false)` is called:<itemizedlist>
+<listitem><para>The `Inactive` tag is added</para>
+</listitem><listitem><para>The `Active` tag is removed</para>
+</listitem><listitem><para>`onDeactivate()` is called on components that support it</para>
+</listitem></itemizedlist>
+</para>
+<para>## Usage in Views</para>
+<para>```cpp // Exclude inactive entities for (auto [entity, health] : gameWorld-&gt;view&lt;HealthComponent&gt;() .exclude&lt;Inactive&gt;()) { // Process only non-inactive entities } ```</para>
+<para><simplesect kind="see"><para><ref refid="structhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1Active" kindref="compound">Active</ref> </para>
+</simplesect>
+<simplesect kind="see"><para>GameObject::setActive </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/mechanics/lifecycle/components/Inactive.ixx" line="35" column="5" bodyfile="/tmp/h/include/helios/engine/mechanics/lifecycle/components/Inactive.ixx" bodystart="35" bodyend="35"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

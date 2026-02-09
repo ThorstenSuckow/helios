@@ -22,19 +22,19 @@
         </inbodydescription>
         <location file="/tmp/h/include/helios/engine/runtime/spawn/behavior/SpawnInitializer.ixx" line="55" column="17"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer_1a0d6b4e625d18d579ec91ff33da128190" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer_1a6580de8b02f9ba339a0466b2b76c5084" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
         <definition>virtual void helios::engine::runtime::spawn::behavior::SpawnInitializer::initialize</definition>
-        <argsstring>(const helios::engine::ecs::GameObject &amp;gameObject, const SpawnPlanCursor &amp;cursor, const SpawnContext &amp;spawnContext)=0</argsstring>
+        <argsstring>(helios::engine::ecs::GameObject gameObject, const SpawnPlanCursor &amp;cursor, const SpawnContext &amp;spawnContext)=0</argsstring>
         <name>initialize</name>
         <qualifiedname>helios::engine::runtime::spawn::behavior::SpawnInitializer::initialize</qualifiedname>
-        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1DelayedComponentEnablerInitializer_1adec2ca03061b3a18ca1c5872eeb909fe">initialize</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1EmitterInitializer_1a618402306c09bcb656c31f39715062a3">initialize</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1InitializerList_1ac1e943d133dc4cf55102bf5f5513af99">initialize</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1MoveInitializer_1a382af58de739429d24a401b7c92f4566">initialize</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1RandomDirectionInitializer_1acf5624e44f6f9ecdf519610807902bd2">initialize</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1DelayedComponentEnablerInitializer_1aa62271db362f6450fb7a9e53c9346313">initialize</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1EmitterInitializer_1a4fea97ad277deeefa09cae4d735de17b">initialize</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1InitializerList_1afa55188a1168954f0374072cd03dd630">initialize</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1MoveInitializer_1ae047147f4547547c56e5e94233e81ce0">initialize</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1RandomDirectionInitializer_1acc5c6d430c92ca5523aec5dabe4f8207">initialize</reimplementedby>
         <param>
-          <type>const <ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> &amp;</type>
+          <type><ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref></type>
           <declname>gameObject</declname>
         </param>
         <param>
@@ -94,7 +94,7 @@
 </listitem></itemizedlist>
 </para>
 <para>Example implementation: ```cpp class ProjectileInitializer : public <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer" kindref="compound">SpawnInitializer</ref> { float speed_; public: explicit ProjectileInitializer(float speed) : speed_(speed) {}</para>
-<para>void initialize(const GameObject&amp; go, const SpawnPlanCursor&amp; cursor,
+<para>void initialize(const GameObject go, const SpawnPlanCursor&amp; cursor,
                     const SpawnContext&amp; ctx) override { if (auto* dir = go.get&lt;DirectionComponent&gt;()) { dir-&gt;setDirection(ctx.emitterContext-&gt;velocity.normalized()); } if (auto* move = go.get&lt;Move2DComponent&gt;()) { move-&gt;setSpeed(speed_); } } }; ```</para>
 <para><simplesect kind="see"><para><ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnProfile" kindref="compound">SpawnProfile</ref> </para>
 </simplesect>
@@ -142,7 +142,7 @@
     </inheritancegraph>
     <location file="/tmp/h/include/helios/engine/runtime/spawn/behavior/SpawnInitializer.ixx" line="51" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/behavior/SpawnInitializer.ixx" bodystart="51" bodyend="71"/>
     <listofallmembers>
-      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer_1a0d6b4e625d18d579ec91ff33da128190" prot="public" virt="pure-virtual"><scope>helios::engine::runtime::spawn::behavior::SpawnInitializer</scope><name>initialize</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer_1a6580de8b02f9ba339a0466b2b76c5084" prot="public" virt="pure-virtual"><scope>helios::engine::runtime::spawn::behavior::SpawnInitializer</scope><name>initialize</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer_1ad5514051aaafea0f164769d695a96991" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::behavior::SpawnInitializer</scope><name>~SpawnInitializer</name></member>
     </listofallmembers>
   </compounddef>

@@ -83,14 +83,14 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a708ae0e49a327520ae5c75666f97b5ca" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a1e1485ee793b24b4a6bcba470e397b20" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
         <definition>void helios::engine::runtime::spawn::SpawnManager::ensureBounds</definition>
-        <argsstring>(const helios::engine::ecs::GameObject *go, helios::math::aabbf &amp;bounds)</argsstring>
+        <argsstring>(helios::engine::ecs::GameObject go, helios::math::aabbf &amp;bounds)</argsstring>
         <name>ensureBounds</name>
         <qualifiedname>helios::engine::runtime::spawn::SpawnManager::ensureBounds</qualifiedname>
         <param>
-          <type>const <ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> *</type>
+          <type><ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref></type>
           <declname>go</declname>
         </param>
         <param>
@@ -231,7 +231,7 @@
 </para>
         </detaileddescription>
         <inbodydescription>
-<para><xrefsect id="todo_1_todo000016"><xreftitle>Todo</xreftitle><xrefdescription><para>log </para>
+<para><xrefsect id="todo_1_todo000015"><xreftitle>Todo</xreftitle><xrefdescription><para>log </para>
 </xrefdescription></xrefsect></para>
         </inbodydescription>
         <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="260" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="260" bodyend="322"/>
@@ -555,8 +555,8 @@
         <inbodydescription>
         </inbodydescription>
         <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="475" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="475" bodyend="483"/>
-        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aa5461339dafdae850a4327e59a1ba112" compoundref="GameWorld_8ixx" startline="340" endline="349">helios::engine::runtime::world::GameWorld::getManager</references>
-        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a035f7979ac9743fceecaeea93204cd37" compoundref="GameWorld_8ixx" startline="273" endline="282">helios::engine::runtime::world::GameWorld::registerSpawnCommandHandler</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aa5461339dafdae850a4327e59a1ba112" compoundref="GameWorld_8ixx" startline="372" endline="381">helios::engine::runtime::world::GameWorld::getManager</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a035f7979ac9743fceecaeea93204cd37" compoundref="GameWorld_8ixx" startline="305" endline="314">helios::engine::runtime::world::GameWorld::registerSpawnCommandHandler</references>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -609,11 +609,19 @@
       </node>
     </inheritancegraph>
     <collaborationgraph>
+      <node id="8">
+        <label>helios::engine::ecs::EntityManager</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1EntityManager"/>
+      </node>
+      <node id="7">
+        <label>helios::engine::ecs::EntityRegistry</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry"/>
+      </node>
       <node id="5">
         <label>helios::engine::mechanics::scoring::ScoreCommandHandler</label>
         <link refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler"/>
       </node>
-      <node id="7">
+      <node id="9">
         <label>helios::engine::runtime::spawn::SpawnCommandHandler</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler"/>
       </node>
@@ -626,7 +634,7 @@
         <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
-        <childnode refid="7" relation="public-inheritance">
+        <childnode refid="9" relation="public-inheritance">
         </childnode>
       </node>
       <node id="3">
@@ -640,6 +648,12 @@
         </childnode>
         <childnode refid="6" relation="usage">
           <edgelabel>spawnCommandHandlerRegistry_</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>entityRegistry_</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>em_</edgelabel>
         </childnode>
       </node>
       <node id="2">
@@ -659,7 +673,7 @@
       <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1ac51fc20588ef7abf0d7e9b675bc6e0b3" prot="public" virt="non-virtual"><scope>helios::engine::runtime::spawn::SpawnManager</scope><name>addSpawnProfile</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a8fa9d044ec944334d2d1f6db4395cbfe" prot="private" virt="non-virtual"><scope>helios::engine::runtime::spawn::SpawnManager</scope><name>despawnCommands_</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1af33cd04062d77fdd17f02751e6581931" prot="private" virt="non-virtual"><scope>helios::engine::runtime::spawn::SpawnManager</scope><name>despawnObjects</name></member>
-      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a708ae0e49a327520ae5c75666f97b5ca" prot="private" virt="non-virtual"><scope>helios::engine::runtime::spawn::SpawnManager</scope><name>ensureBounds</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a1e1485ee793b24b4a6bcba470e397b20" prot="private" virt="non-virtual"><scope>helios::engine::runtime::spawn::SpawnManager</scope><name>ensureBounds</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1abd4a02937d8d6686cc432788692fd367" prot="private" virt="non-virtual"><scope>helios::engine::runtime::spawn::SpawnManager</scope><name>executeScheduledSpawnPlanCommands</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a345caf68f5d311a54f74a921b933705e" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::SpawnManager</scope><name>flush</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a89d55461036f73f89fe562b46ca7f384" prot="private" virt="non-virtual"><scope>helios::engine::runtime::spawn::SpawnManager</scope><name>gameObjectPoolManager_</name></member>

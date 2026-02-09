@@ -11,13 +11,13 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_50a13eed33dcd9f476e4986821866285_1autotoc_md475">
+<sect1 id="dir_50a13eed33dcd9f476e4986821866285_1autotoc_md472">
 <title>helios::engine::runtime::pooling</title><para>GameObject pooling for efficient object recycling.</para>
 </sect1>
-<sect1 id="dir_50a13eed33dcd9f476e4986821866285_1autotoc_md476">
+<sect1 id="dir_50a13eed33dcd9f476e4986821866285_1autotoc_md473">
 <title>Overview</title><para>This module provides infrastructure for memory-efficient entity management through object pooling. Pools pre-allocate GameObjects that can be acquired and released during gameplay, avoiding repeated allocation overhead.</para>
 </sect1>
-<sect1 id="dir_50a13eed33dcd9f476e4986821866285_1autotoc_md477">
+<sect1 id="dir_50a13eed33dcd9f476e4986821866285_1autotoc_md474">
 <title>Key Classes</title><para><table rows="6" cols="2"><row>
 <entry thead="yes"><para>Class  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
@@ -45,12 +45,12 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_50a13eed33dcd9f476e4986821866285_1autotoc_md478">
+<sect1 id="dir_50a13eed33dcd9f476e4986821866285_1autotoc_md475">
 <title>Architecture</title><para>The pooling system follows a layered architecture:</para>
-<para>1. <bold>GameObjectPool</bold>: Low-level GUID tracking (active/inactive lists) 2. <bold>GameObjectPoolRegistry</bold>: Pool lookup by typed ID 3. <bold>GameObjectPoolManager</bold>: Integration with GameWorld for prefab cloning and entity lookup 4. <bold>GameObjectPoolConfig</bold>: Declarative pool configuration</para>
+<para>1. <bold>GameObjectPool</bold>: Low-level handle-based tracking (active/inactive lists) 2. <bold>GameObjectPoolRegistry</bold>: Pool lookup by typed ID 3. <bold>GameObjectPoolManager</bold>: Integration with GameWorld for prefab cloning and entity lookup 4. <bold>GameObjectPoolConfig</bold>: Declarative pool configuration</para>
 <para>Spawn/despawn request handling has been moved to <computeroutput><ref refid="namespacehelios_1_1engine_1_1runtime_1_1spawn" kindref="compound">helios::engine::runtime::spawn</ref></computeroutput>.</para>
 </sect1>
-<sect1 id="dir_50a13eed33dcd9f476e4986821866285_1autotoc_md479">
+<sect1 id="dir_50a13eed33dcd9f476e4986821866285_1autotoc_md476">
 <title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>1.<sp/>Create<sp/>a<sp/>prefab<sp/>template</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>bulletPrefab<sp/>=<sp/>GameObjectFactory::gameObject()</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.withMotion([](</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>m)<sp/>{<sp/>m.move2D().speed(10.0f);<sp/>})</highlight></codeline>

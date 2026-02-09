@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1ecs_1_1ComponentOpsRegistry" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::ecs::ComponentOpsRegistry</compoundname>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1ecs_1_1ComponentOpsRegistry_1a1e7dcae3f4619dc3c216cb4cc7010dbe" prot="private" static="yes" mutable="no">
+        <type>std::vector&lt; <ref refid="structhelios_1_1engine_1_1ecs_1_1ComponentOps" kindref="compound">ComponentOps</ref> &gt;</type>
+        <definition>std::vector&lt;ComponentOps&gt; helios::engine::ecs::ComponentOpsRegistry::operations_</definition>
+        <argsstring></argsstring>
+        <name>operations_</name>
+        <qualifiedname>helios::engine::ecs::ComponentOpsRegistry::operations_</qualifiedname>
+        <briefdescription>
+<para>Type-indexed storage for <ref refid="structhelios_1_1engine_1_1ecs_1_1ComponentOps" kindref="compound">ComponentOps</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/ComponentOpsRegistry.ixx" line="49" column="35" bodyfile="/tmp/h/include/helios/engine/ecs/ComponentOpsRegistry.ixx" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1ecs_1_1ComponentOpsRegistry_1a4f53fea0ea9cee7f6f437847c66b9e4d" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="structhelios_1_1engine_1_1ecs_1_1ComponentOps" kindref="compound">ComponentOps</ref></type>
+        <definition>ComponentOps helios::engine::ecs::ComponentOpsRegistry::emptyOps_</definition>
+        <argsstring></argsstring>
+        <name>emptyOps_</name>
+        <qualifiedname>helios::engine::ecs::ComponentOpsRegistry::emptyOps_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>Empty ops returned for unregistered types. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/ComponentOpsRegistry.ixx" line="54" column="46" bodyfile="/tmp/h/include/helios/engine/ecs/ComponentOpsRegistry.ixx" bodystart="54" bodyend="54"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1ComponentOpsRegistry_1ade4bd74049b3f12d429df09067607924" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void helios::engine::ecs::ComponentOpsRegistry::setOps</definition>
+        <argsstring>(const helios::engine::core::data::ComponentTypeId typeId, const ComponentOps &amp;ops)</argsstring>
+        <name>setOps</name>
+        <qualifiedname>helios::engine::ecs::ComponentOpsRegistry::setOps</qualifiedname>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId" kindref="compound">helios::engine::core::data::ComponentTypeId</ref></type>
+          <declname>typeId</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1ecs_1_1ComponentOps" kindref="compound">ComponentOps</ref> &amp;</type>
+          <declname>ops</declname>
+        </param>
+        <briefdescription>
+<para>Registers <ref refid="structhelios_1_1engine_1_1ecs_1_1ComponentOps" kindref="compound">ComponentOps</ref> for a component type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Auto-resizes the internal vector if necessary.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>typeId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unique identifier for the component type. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ops</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The lifecycle function pointers to register. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/ComponentOpsRegistry.ixx" line="66" column="21" bodyfile="/tmp/h/include/helios/engine/ecs/ComponentOpsRegistry.ixx" bodystart="66" bodyend="73"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1ComponentOpsRegistry_1a4f41db7b6ae7e83ba8092343d8620e59" compoundref="ComponentOpsRegistry_8ixx" startline="82" endline="89">ops</references>
+        <references refid="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId_1a324f7ed295515954f0147169dfdff208" compoundref="ComponentTypeId_8ixx" startline="82" endline="84">helios::engine::core::data::ComponentTypeId::value</references>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1ComponentReflector_1a766a63ff1fca4a9ff2a95406af08f393" compoundref="ComponentReflector_8ixx" startline="71" endline="147">helios::engine::ecs::ComponentReflector::registerType</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1ComponentOpsRegistry_1a4f41db7b6ae7e83ba8092343d8620e59" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="structhelios_1_1engine_1_1ecs_1_1ComponentOps" kindref="compound">ComponentOps</ref> &amp;</type>
+        <definition>static const ComponentOps &amp; helios::engine::ecs::ComponentOpsRegistry::ops</definition>
+        <argsstring>(const helios::engine::core::data::ComponentTypeId typeId)</argsstring>
+        <name>ops</name>
+        <qualifiedname>helios::engine::ecs::ComponentOpsRegistry::ops</qualifiedname>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId" kindref="compound">helios::engine::core::data::ComponentTypeId</ref></type>
+          <declname>typeId</declname>
+        </param>
+        <briefdescription>
+<para>Retrieves <ref refid="structhelios_1_1engine_1_1ecs_1_1ComponentOps" kindref="compound">ComponentOps</ref> for a component type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>typeId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unique identifier for the component type.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to the registered <ref refid="structhelios_1_1engine_1_1ecs_1_1ComponentOps" kindref="compound">ComponentOps</ref>, or empty ops if not registered. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/ComponentOpsRegistry.ixx" line="82" column="35" bodyfile="/tmp/h/include/helios/engine/ecs/ComponentOpsRegistry.ixx" bodystart="82" bodyend="89"/>
+        <references refid="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId_1a324f7ed295515954f0147169dfdff208" compoundref="ComponentTypeId_8ixx" startline="82" endline="84">helios::engine::core::data::ComponentTypeId::value</references>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1GameObject_1a0447ff56cdd329a2db5436096f8353ae" compoundref="GameObject_8ixx" startline="148" endline="171">helios::engine::ecs::GameObject::add</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1ac5e13477c8dfc73875e797a5ec74baef" compoundref="EntityManager_8ixx" startline="467" endline="488">helios::engine::ecs::EntityManager::clone</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a407554a390eb1986ae7b469caa406fad" compoundref="EntityManager_8ixx" startline="141" endline="165">helios::engine::ecs::EntityManager::destroy</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a935c5347e407e1f7c7c37b45991eb0d3" compoundref="EntityManager_8ixx" startline="307" endline="324">helios::engine::ecs::EntityManager::enable</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1GameObject_1ad1a7a9e6853925618d4aa9170409f072" compoundref="GameObject_8ixx" startline="337" endline="346">helios::engine::ecs::GameObject::onAcquire</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1GameObject_1a2a7b9dc93c0a360e83ed33534742b7ae" compoundref="GameObject_8ixx" startline="320" endline="329">helios::engine::ecs::GameObject::onRelease</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a15f4a7849d69f466ffbf51f3cec11582" compoundref="EntityManager_8ixx" startline="417" endline="435">helios::engine::ecs::EntityManager::remove</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1GameObject_1a5b86c188307f1f2e8500509708d60d93" compoundref="GameObject_8ixx" startline="284" endline="303">helios::engine::ecs::GameObject::setActive</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1ComponentOpsRegistry_1ade4bd74049b3f12d429df09067607924" compoundref="ComponentOpsRegistry_8ixx" startline="66" endline="73">setOps</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1DelayedComponentEnablerSystem_1ae7c5a33ae0ce9c8bfdf69a5b3a758bf6" compoundref="DelayedComponentEnablerSystem_8ixx" startline="60" endline="93">helios::engine::mechanics::lifecycle::systems::DelayedComponentEnablerSystem::update</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Global registry for component lifecycle function pointers. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>`ComponentOpsRegistry` provides O(1) lookup of `ComponentOps` by `ComponentTypeId`. It uses a type-indexed vector where the index corresponds to the component type&apos;s unique identifier.</para>
+<para>## Usage</para>
+<para>```cpp // Registration (done by <ref refid="classhelios_1_1engine_1_1ecs_1_1ComponentReflector" kindref="compound">ComponentReflector</ref>) ComponentOpsRegistry::setOps(typeId, ops);</para>
+<para>// Lookup at runtime const auto&amp; ops = ComponentOpsRegistry::ops(typeId); if (ops.onAcquire) { ops.onAcquire(rawComponent); } ```</para>
+<para><simplesect kind="note"><para>Not thread-safe. All registration must complete before concurrent access.</para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="structhelios_1_1engine_1_1ecs_1_1ComponentOps" kindref="compound">ComponentOps</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1ecs_1_1ComponentReflector" kindref="compound">ComponentReflector</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/ecs/ComponentOpsRegistry.ixx" line="44" column="5" bodyfile="/tmp/h/include/helios/engine/ecs/ComponentOpsRegistry.ixx" bodystart="44" bodyend="91"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1ComponentOpsRegistry_1a4f53fea0ea9cee7f6f437847c66b9e4d" prot="private" virt="non-virtual"><scope>helios::engine::ecs::ComponentOpsRegistry</scope><name>emptyOps_</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1ComponentOpsRegistry_1a1e7dcae3f4619dc3c216cb4cc7010dbe" prot="private" virt="non-virtual"><scope>helios::engine::ecs::ComponentOpsRegistry</scope><name>operations_</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1ComponentOpsRegistry_1a4f41db7b6ae7e83ba8092343d8620e59" prot="public" virt="non-virtual"><scope>helios::engine::ecs::ComponentOpsRegistry</scope><name>ops</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1ComponentOpsRegistry_1ade4bd74049b3f12d429df09067607924" prot="public" virt="non-virtual"><scope>helios::engine::ecs::ComponentOpsRegistry</scope><name>setOps</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

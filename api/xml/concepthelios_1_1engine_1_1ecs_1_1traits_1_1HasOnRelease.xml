@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="concepthelios_1_1engine_1_1ecs_1_1traits_1_1HasOnRelease" kind="concept">
+    <compoundname>helios::engine::ecs::traits::HasOnRelease</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;typename T&gt;
+concept <ref refid="concepthelios_1_1engine_1_1ecs_1_1traits_1_1HasOnRelease" kindref="compound">helios::engine::ecs::traits::HasOnRelease</ref> =  requires(T t) {
+        {t.onRelease()} -&gt; std::same_as&lt;void&gt;;
+    }    </initializer>
+    <briefdescription>
+<para>Called when this GameObject is released back to a pool. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Notifies all attached components by calling their `onRelease()` method. Used by the pool system to clean up component state before pooling.</para>
+<para><simplesect kind="see"><para>GameObjectPool </para>
+</simplesect>
+<simplesect kind="see"><para>Component::onRelease </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/ecs/Traits.ixx" line="69" column="5"/>
+  </compounddef>
+</doxygen>

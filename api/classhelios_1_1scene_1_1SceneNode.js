@@ -24,7 +24,7 @@ var classhelios_1_1scene_1_1SceneNode =
     [ "parent", "classhelios_1_1scene_1_1SceneNode.html#a4e31b52717a76a9bae9a80a1db0b808b", null ],
     [ "renderable", "classhelios_1_1scene_1_1SceneNode.html#a844895ba977a844954abecadefaca359", null ],
     [ "renderable", "classhelios_1_1scene_1_1SceneNode.html#a4177a6bf53d0e942dd332de0852492f3", null ],
-    [ "setActive", "classhelios_1_1scene_1_1SceneNode.html#a6fc8bb37765c30988515c45845208f4d", null ],
+    [ "setActive", "classhelios_1_1scene_1_1SceneNode.html#ae383a85c8ca2c486bc2745c6ed8e6588", null ],
     [ "setInheritance", "classhelios_1_1scene_1_1SceneNode.html#a75103edee2bbacbebe2296dd88d1a1e9", null ],
     [ "setParent", "classhelios_1_1scene_1_1SceneNode.html#a8e150f0c631aa964846dc20cd627b538", null ],
     [ "setRotation", "classhelios_1_1scene_1_1SceneNode.html#acac79a13bb5bb933c3f9c230a98d3daf", null ],

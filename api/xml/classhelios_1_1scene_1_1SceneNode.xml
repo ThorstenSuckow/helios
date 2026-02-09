@@ -50,6 +50,7 @@
         <argsstring></argsstring>
         <name>renderable_</name>
         <qualifiedname>helios::scene::SceneNode::renderable_</qualifiedname>
+        <initializer>= nullptr</initializer>
         <briefdescription>
 <para>A shared pointer to the Renderable this node represents in the SceneGraph. May be nullptr if this node does not represent a. </para>
         </briefdescription>
@@ -159,7 +160,7 @@
         </inbodydescription>
         <location file="/tmp/h/include/helios/scene/SceneNode.ixx" line="119" column="14" bodyfile="/tmp/h/include/helios/scene/SceneNode.ixx" bodystart="119" bodyend="-1"/>
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1af9530fc7b8962c228dd883bf0f509a4a" compoundref="SceneNode_8ixx" startline="542" endline="544">isActive</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1SceneNode_1a6fc8bb37765c30988515c45845208f4d" compoundref="SceneNode_8ixx" startline="553" endline="555">setActive</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1SceneNode_1ae383a85c8ca2c486bc2745c6ed8e6588" compoundref="SceneNode_8ixx" startline="553" endline="555">setActive</referencedby>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1scene_1_1SceneNode_1a2b09e19ce61e810a5d21a77d196fbcf1" prot="protected" static="no" mutable="no">
         <type><ref refid="namespacehelios_1_1math_1a124c0492430aeecedc1c1a5ece4ba488" kindref="member">helios::math::aabbf</ref></type>
@@ -314,7 +315,7 @@
 <para>Constructs a new <ref refid="classhelios_1_1scene_1_1SceneNode" kindref="compound">SceneNode</ref> that represents no renderable object. Nodes constructed in this way should be treated as transformation nodes. </para>
         </briefdescription>
         <detaileddescription>
-<para><xrefsect id="todo_1_todo000038"><xreftitle>Todo</xreftitle><xrefdescription><para>explicitly implement move (assignment) constructor if required, since we have deleted the copy constructors </para>
+<para><xrefsect id="todo_1_todo000036"><xreftitle>Todo</xreftitle><xrefdescription><para>explicitly implement move (assignment) constructor if required, since we have deleted the copy constructors </para>
 </xrefdescription></xrefsect></para>
         </detaileddescription>
         <inbodydescription>
@@ -577,7 +578,6 @@
         </inbodydescription>
         <location file="/tmp/h/include/helios/scene/SceneNode.ixx" line="286" column="30" bodyfile="/tmp/h/include/helios/scene/SceneNode.ixx" bodystart="286" bodyend="288"/>
         <references refid="classhelios_1_1scene_1_1SceneNode_1adc5b1c905e0a2eee271107ebb91652af" compoundref="SceneNode_8ixx" startline="84">renderable_</references>
-        <referencedby refid="classhelios_1_1engine_1_1modules_1_1scene_1_1components_1_1SceneNodeComponent_1aa700d35d1fbf5bb920fada8003a4184a" compoundref="SceneNodeComponent_8ixx" startline="59" endline="68">helios::engine::modules::scene::components::SceneNodeComponent::SceneNodeComponent</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1SceneNode_1aa61104006dc48bc2a57dbe6fc6cbcb5b" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classhelios_1_1scene_1_1SceneNode_1a30ad1d7f49d6114a261cbac2706546ab" kindref="member">SceneNode</ref> &amp;</type>
@@ -742,7 +742,6 @@
         <references refid="classhelios_1_1scene_1_1SceneNode_1a718f8d4e4ecddeb659031dd9ad9ad079" compoundref="SceneNode_8ixx" startline="92">parent_</references>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a30ad1d7f49d6114a261cbac2706546ab">SceneNode</references>
         <referencedby refid="classhelios_1_1scene_1_1CameraSceneNode_1ad57acd6f8c8b2e6b02707ba1424377cb" compoundref="CameraSceneNode_8ixx" startline="112" endline="148">helios::scene::CameraSceneNode::lookAt</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1modules_1_1scene_1_1components_1_1SceneNodeComponent_1aa700d35d1fbf5bb920fada8003a4184a" compoundref="SceneNodeComponent_8ixx" startline="59" endline="68">helios::engine::modules::scene::components::SceneNodeComponent::SceneNodeComponent</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1SceneNode_1abc594768ba59f9154b707424aa76a871" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -1046,14 +1045,14 @@
         <referencedby refid="classhelios_1_1scene_1_1Scene_1a054843594de8ccc99336935ac0cbde11" compoundref="Scene_8ixx" startline="262" endline="290">helios::scene::Scene::createSnapshot</referencedby>
         <referencedby refid="classhelios_1_1scene_1_1CullNoneStrategy_1ae80f1dc83394827d2515e22d0f7ed7b5" compoundref="CullNoneStrategy_8ixx" startline="33" endline="42">helios::scene::CullNoneStrategy::cull</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1scene_1_1SceneNode_1a6fc8bb37765c30988515c45845208f4d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1scene_1_1SceneNode_1ae383a85c8ca2c486bc2745c6ed8e6588" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
         <definition>void helios::scene::SceneNode::setActive</definition>
-        <argsstring>(bool active) noexcept</argsstring>
+        <argsstring>(const bool active) noexcept</argsstring>
         <name>setActive</name>
         <qualifiedname>helios::scene::SceneNode::setActive</qualifiedname>
         <param>
-          <type>bool</type>
+          <type>const bool</type>
           <declname>active</declname>
         </param>
         <briefdescription>
@@ -1148,7 +1147,7 @@
       <member refid="classhelios_1_1scene_1_1SceneNode_1a1a7a726c994dd5b29a0719f45845ccb0" prot="public" virt="non-virtual"><scope>helios::scene::SceneNode</scope><name>SceneNode</name></member>
       <member refid="classhelios_1_1scene_1_1SceneNode_1ac391d6973219428d9048caffe721cfb1" prot="public" virt="non-virtual"><scope>helios::scene::SceneNode</scope><name>SceneNode</name></member>
       <member refid="classhelios_1_1scene_1_1SceneNode_1af2af3ad7c17ecf2a693724deed12ce02" prot="public" virt="non-virtual"><scope>helios::scene::SceneNode</scope><name>SceneNode</name></member>
-      <member refid="classhelios_1_1scene_1_1SceneNode_1a6fc8bb37765c30988515c45845208f4d" prot="public" virt="non-virtual"><scope>helios::scene::SceneNode</scope><name>setActive</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1ae383a85c8ca2c486bc2745c6ed8e6588" prot="public" virt="non-virtual"><scope>helios::scene::SceneNode</scope><name>setActive</name></member>
       <member refid="classhelios_1_1scene_1_1SceneNode_1a75103edee2bbacbebe2296dd88d1a1e9" prot="public" virt="non-virtual"><scope>helios::scene::SceneNode</scope><name>setInheritance</name></member>
       <member refid="classhelios_1_1scene_1_1SceneNode_1a8e150f0c631aa964846dc20cd627b538" prot="protected" virt="non-virtual"><scope>helios::scene::SceneNode</scope><name>setParent</name></member>
       <member refid="classhelios_1_1scene_1_1SceneNode_1acac79a13bb5bb933c3f9c230a98d3daf" prot="public" virt="non-virtual"><scope>helios::scene::SceneNode</scope><name>setRotation</name></member>

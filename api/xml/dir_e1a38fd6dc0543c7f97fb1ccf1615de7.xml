@@ -11,17 +11,18 @@
     <innerdir refid="dir_9cbb4b4cfd398af02a68f2645b2e9ca6">scoring</innerdir>
     <innerdir refid="dir_bbe960beed295ed1307a81c8b31ebd37">spawn</innerdir>
     <innerfile refid="helios_2engine_2mechanics_2__module_8ixx">helios/engine/mechanics/_module.ixx</innerfile>
+    <innerfile refid="mechanics_2registry_8ixx">mechanics/registry.ixx</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_e1a38fd6dc0543c7f97fb1ccf1615de7_1autotoc_md223">
+<sect1 id="dir_e1a38fd6dc0543c7f97fb1ccf1615de7_1autotoc_md219">
 <title>helios::engine::mechanics</title><para>High-level gameplay mechanics and systems for game logic.</para>
 </sect1>
-<sect1 id="dir_e1a38fd6dc0543c7f97fb1ccf1615de7_1autotoc_md224">
+<sect1 id="dir_e1a38fd6dc0543c7f97fb1ccf1615de7_1autotoc_md220">
 <title>Overview</title><para>This module provides the core building blocks for implementing game mechanics. It contains components that store game state and systems that implement game rules according to the composition-over-inheritance principle.</para>
 </sect1>
-<sect1 id="dir_e1a38fd6dc0543c7f97fb1ccf1615de7_1autotoc_md225">
-<title>Submodules</title><para><table rows="5" cols="2"><row>
+<sect1 id="dir_e1a38fd6dc0543c7f97fb1ccf1615de7_1autotoc_md221">
+<title>Submodules</title><para><table rows="9" cols="2"><row>
 <entry thead="yes"><para>Submodule  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
 </entry></row>
@@ -31,7 +32,23 @@
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>combat/</computeroutput>  </para>
-</entry><entry thead="no"><para>Weapon, shooting, and projectile mechanics  </para>
+</entry><entry thead="no"><para>Weapon, shooting, attack tracking  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>damage/</computeroutput>  </para>
+</entry><entry thead="no"><para>Damage dealing and damage application  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>health/</computeroutput>  </para>
+</entry><entry thead="no"><para>Health tracking and death detection  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>lifecycle/</computeroutput>  </para>
+</entry><entry thead="no"><para>Entity activation state (Active/Inactive tags)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>scoring/</computeroutput>  </para>
+</entry><entry thead="no"><para>Score pools, score values, and score tracking  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>spawn/</computeroutput>  </para>
@@ -44,7 +61,47 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_e1a38fd6dc0543c7f97fb1ccf1615de7_1autotoc_md226">
+<sect1 id="dir_e1a38fd6dc0543c7f97fb1ccf1615de7_1autotoc_md222">
+<title>Key Components</title><para><table rows="9" cols="2"><row>
+<entry thead="yes"><para>Component  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>Active</computeroutput> / <computeroutput>Inactive</computeroutput>  </para>
+</entry><entry thead="no"><para>Tag components for entity activation state  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>HealthComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Tracks current/max health, alive status  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>DamageDealerComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Stores layer-based damage values  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>LastAttackerComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Tracks last entity that dealt damage  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>SpawnedByProfileComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Links entity to spawn profile for pooling  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>EmittedByComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Tracks source entity (e.g., player → projectile)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ScoreValueComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Score awarded when entity is defeated  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ScorePoolComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Associates entity with a score pool  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_e1a38fd6dc0543c7f97fb1ccf1615de7_1autotoc_md223">
 <title>Key Systems</title><para><table rows="5" cols="2"><row>
 <entry thead="yes"><para>System  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
@@ -54,16 +111,16 @@
 </entry><entry thead="no"><para>Translates gamepad input to movement/aim commands  </para>
 </entry></row>
 <row>
-<entry thead="no"><para><computeroutput>LevelBoundsBehaviorSystem</computeroutput>  </para>
+<entry thead="no"><para><computeroutput>LevelBoundsSystem</computeroutput>  </para>
 </entry><entry thead="no"><para>Applies bounce/wrap/despawn at level edges  </para>
 </entry></row>
 <row>
-<entry thead="no"><para><computeroutput>ProjectileSpawnSystem</computeroutput>  </para>
-</entry><entry thead="no"><para>Spawns projectiles based on weapon state  </para>
+<entry thead="no"><para><computeroutput>HealthDepletedSystem</computeroutput>  </para>
+</entry><entry thead="no"><para>Detects death and triggers death events  </para>
 </entry></row>
 <row>
-<entry thead="no"><para><computeroutput>GameObjectSpawnSystem</computeroutput>  </para>
-</entry><entry thead="no"><para>Executes scheduled spawn plans  </para>
+<entry thead="no"><para><computeroutput>DamageApplicationSystem</computeroutput>  </para>
+</entry><entry thead="no"><para>Applies damage from collision events  </para>
 </entry></row>
 </table>
 </para>

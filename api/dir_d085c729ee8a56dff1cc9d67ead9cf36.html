@@ -110,7 +110,7 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="dir_d085c729ee8a56dff1cc9d67ead9cf36_dep.svg" width="644" height="178"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="dir_d085c729ee8a56dff1cc9d67ead9cf36_dep.svg" width="100%" height="433"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-files" class="groupheader"><a id="files" name="files"></a>
@@ -121,13 +121,13 @@ Files</h2></td></tr>
 <tr class="memdesc:ChaseSystem_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">System for updating entity steering to chase targets. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md289"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md286"></a>
 helios::engine::modules::ai::systems</h1>
 <p>AI behavior processing systems.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md290"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md287"></a>
 Overview</h1>
 <p>Systems that process AI components and update entity behavior. Registered with the GameLoop and executed during the appropriate phase.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md291"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md288"></a>
 Systems</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -135,32 +135,32 @@ Systems</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">ChaseSystem</span>  </td><td class="markdownTableBodyNone">Steers entities towards their chase targets  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md292"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md289"></a>
 ChaseSystem</h1>
 <p>Processes entities with <span class="tt">ChaseComponent</span>, <span class="tt">SteeringComponent</span>, and <span class="tt">TranslationStateComponent</span>.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md293"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md290"></a>
 Behavior</h2>
-<p>1. <b>Target Resolution</b>: Looks up target entity by GUID 2. <b>Timer Update</b>: Advances cooldown timer by delta time 3. <b>Cooldown Check</b>: Only updates direction when timer exceeds cooldown 4. <b>Direction Calculation</b>: Computes normalized vector from entity to target 5. <b>Steering Update</b>: Sets steering intent to face calculated direction</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md294"></a>
+<p>1. <b>Target Resolution</b>: Looks up target entity by handle 2. <b>Timer Update</b>: Advances cooldown timer by delta time 3. <b>Cooldown Check</b>: Only updates direction when timer exceeds cooldown 4. <b>Direction Calculation</b>: Computes normalized vector from entity to target 5. <b>Steering Update</b>: Sets steering intent to face calculated direction</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md291"></a>
 Required Components</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Component  </th><th class="markdownTableHeadNone">Purpose  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">ChaseComponent</span>  </td><td class="markdownTableBodyNone">Target GUID and timing configuration  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">ChaseComponent</span>  </td><td class="markdownTableBodyNone">Target handle and timing configuration  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">SteeringComponent</span>  </td><td class="markdownTableBodyNone">Receives steering intent updates  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">TranslationStateComponent</span>  </td><td class="markdownTableBodyNone">Provides current entity position  </td></tr>
 </table>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md295"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md292"></a>
 Registration</h2>
 <div class="fragment"><div class="line"><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8modules_8ai_8systems.html">helios.engine.modules.ai.systems</a>;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Register with GameLoop main phase</span></div>
 <div class="line">gameLoop.addSystem&lt;ChaseSystem&gt;(Phase::Main, gameWorld);</div>
 <div class="ttc" id="amodule__helios_8engine_8modules_8ai_8systems_html"><div class="ttname"><a href="module__helios_8engine_8modules_8ai_8systems.html">helios.engine.modules.ai.systems</a></div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md296"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md293"></a>
 Related Modules</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">

@@ -110,7 +110,7 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="dir_d368ce8d6920c000d21f916ca5b7e02f_dep.svg" width="642" height="387"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="dir_d368ce8d6920c000d21f916ca5b7e02f_dep.svg" width="100%" height="590"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-subdirs" class="groupheader"><a id="subdirs" name="subdirs"></a>
@@ -124,15 +124,17 @@ Directories</h2></td></tr>
 Files</h2></td></tr>
 <tr class="memitem:_5Fmodule_2Eixx" id="r__5Fmodule_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="helios_2engine_2mechanics_2combat_2__module_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="helios_2engine_2mechanics_2combat_2__module_8ixx.html">_module.ixx</a></td></tr>
 <tr class="memdesc:helios_2engine_2mechanics_2combat_2__module_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aggregate module for <a class="el" href="namespacehelios_1_1engine_1_1mechanics_1_1combat.html" title="Combat-related gameplay systems, components, and commands.">helios::engine::mechanics::combat</a> namespace. <br /></td></tr>
+<tr class="memitem:registry_2Eixx" id="r_registry_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="mechanics_2combat_2registry_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mechanics_2combat_2registry_8ixx.html">registry.ixx</a></td></tr>
+<tr class="memdesc:mechanics_2combat_2registry_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Component registration for combat module. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md151"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md147"></a>
 helios::engine::mechanics::combat</h1>
 <p>Combat-related gameplay systems, components, and commands.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md152"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md148"></a>
 Overview</h1>
 <p>This module provides all building blocks for implementing combat mechanics such as aiming, shooting, projectile spawning, and attack attribution.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md153"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md149"></a>
 Submodules</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -146,7 +148,7 @@ Submodules</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">types/</span>  </td><td class="markdownTableBodyNone">Combat data types (AttackContext)  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md154"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md150"></a>
 Key Classes</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -166,11 +168,11 @@ Key Classes</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">ProjectileSpawnSystem</span>  </td><td class="markdownTableBodyNone">Reads shoot state and enqueues spawn commands  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md155"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md151"></a>
 Architecture</h1>
 <p>Combat follows the command pattern integrated with the spawn system:</p>
 <p>1. Input systems generate <span class="tt">ShootCommand</span> and <span class="tt">Aim2DCommand</span> 2. Commands update <span class="tt">ShootComponent</span> and <span class="tt">Aim2DComponent</span> state 3. <span class="tt">ProjectileSpawnSystem</span> reads component state and generates <span class="tt">SpawnCommand</span> 4. Spawn system handles actual projectile creation via pool and profile</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md156"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md152"></a>
 Attack Attribution Flow</h2>
 <p>1. <span class="tt">DamageOnCollisionSystem</span> applies damage and updates <span class="tt">LastAttackerComponent</span> 2. <span class="tt">HealthUpdateSystem</span> detects death and publishes <span class="tt">DeathEvent</span> with <span class="tt">AttackContext</span> 3. <span class="tt">CombatScoringSystem</span> reads <span class="tt">DeathEvent</span> and awards score to attacker</p>
 <hr  />

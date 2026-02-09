@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1ecs_1_1ComponentReflector" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::ecs::ComponentReflector</compoundname>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1ComponentReflector_1a766a63ff1fca4a9ff2a95406af08f393" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>static void helios::engine::ecs::ComponentReflector::registerType</definition>
+        <argsstring>()</argsstring>
+        <name>registerType</name>
+        <qualifiedname>helios::engine::ecs::ComponentReflector::registerType</qualifiedname>
+        <briefdescription>
+<para>Registers a component type with the reflection system. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Generates `ComponentOps` function pointers based on which lifecycle hooks the type implements. Uses `if constexpr` for zero-overhead when hooks are not present.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The component type to register. Must be copy-constructible for cloning support. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/ComponentReflector.ixx" line="71" column="21" bodyfile="/tmp/h/include/helios/engine/ecs/ComponentReflector.ixx" bodystart="71" bodyend="147"/>
+        <references refid="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId_1ae2b1610edbd9844c96d65f5572fa6db9" compoundref="ComponentTypeId_8ixx" startline="97" endline="100">helios::engine::core::data::ComponentTypeId::id</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1ComponentOpsRegistry_1ade4bd74049b3f12d429df09067607924" compoundref="ComponentOpsRegistry_8ixx" startline="66" endline="73">helios::engine::ecs::ComponentOpsRegistry::setOps</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Generates and registers <ref refid="structhelios_1_1engine_1_1ecs_1_1ComponentOps" kindref="compound">ComponentOps</ref> for a component type. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>`ComponentReflector` uses compile-time trait detection to generate appropriate function pointers for each lifecycle hook that a component type implements. This enables zero-overhead conditional invocation at runtime.</para>
+<para>## Usage</para>
+<para>```cpp // Register a component type <ref refid="classhelios_1_1engine_1_1ecs_1_1ComponentReflector_1a766a63ff1fca4a9ff2a95406af08f393" kindref="member">ComponentReflector::registerType&lt;HealthComponent&gt;()</ref>;</para>
+<para>// Or use the module registry pattern inline void registerComponents() { using R = <ref refid="classhelios_1_1engine_1_1ecs_1_1ComponentReflector" kindref="compound">ComponentReflector</ref>; R::registerType&lt;CollisionComponent&gt;(); R::registerType&lt;AabbColliderComponent&gt;(); } ```</para>
+<para>## Trait Detection</para>
+<para>The reflector checks for the following traits at compile time:<itemizedlist>
+<listitem><para>`HasOnAcquire` - `onAcquire()` method</para>
+</listitem><listitem><para>`HasOnRelease` - `onRelease()` method</para>
+</listitem><listitem><para>`HasOnRemove` - `onRemove()` method returning bool</para>
+</listitem><listitem><para>`HasToggleable` - `enable()` and `disable()` methods</para>
+</listitem><listitem><para>`HasClone` - `onClone(const T&amp;)` method</para>
+</listitem><listitem><para>`HasActivatable` - `onActivate()` and `onDeactivate()` methods</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="see"><para><ref refid="structhelios_1_1engine_1_1ecs_1_1ComponentOps" kindref="compound">ComponentOps</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1ecs_1_1ComponentOpsRegistry" kindref="compound">ComponentOpsRegistry</ref> </para>
+</simplesect>
+<simplesect kind="see"><para>Traits </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/ecs/ComponentReflector.ixx" line="56" column="5" bodyfile="/tmp/h/include/helios/engine/ecs/ComponentReflector.ixx" bodystart="56" bodyend="149"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1ComponentReflector_1a766a63ff1fca4a9ff2a95406af08f393" prot="public" virt="non-virtual"><scope>helios::engine::ecs::ComponentReflector</scope><name>registerType</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

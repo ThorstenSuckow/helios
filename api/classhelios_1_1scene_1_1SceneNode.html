@@ -185,8 +185,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:abfaab87eb2e94a094fda0d96ce28a373"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current transform inheritance flags for this node.  <br /></td></tr>
 <tr class="memitem:af9530fc7b8962c228dd883bf0f509a4a" id="r_af9530fc7b8962c228dd883bf0f509a4a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af9530fc7b8962c228dd883bf0f509a4a">isActive</a> () const noexcept</td></tr>
 <tr class="memdesc:af9530fc7b8962c228dd883bf0f509a4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> and its child nodes should be considered for rendering.  <br /></td></tr>
-<tr class="memitem:a6fc8bb37765c30988515c45845208f4d" id="r_a6fc8bb37765c30988515c45845208f4d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6fc8bb37765c30988515c45845208f4d">setActive</a> (bool active) noexcept</td></tr>
-<tr class="memdesc:a6fc8bb37765c30988515c45845208f4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the active state of this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>.  <br /></td></tr>
+<tr class="memitem:ae383a85c8ca2c486bc2745c6ed8e6588" id="r_ae383a85c8ca2c486bc2745c6ed8e6588"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae383a85c8ca2c486bc2745c6ed8e6588">setActive</a> (const bool active) noexcept</td></tr>
+<tr class="memdesc:ae383a85c8ca2c486bc2745c6ed8e6588"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the active state of this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -199,7 +199,7 @@ Protected Attributes</h2></td></tr>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>needsUpdate_</b> = true</td></tr>
 <tr class="memdesc:a7810bc9069939badd249ce54f794d1e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean flag to represent the dirty-state of this node. Should be set to false if the current `worldTransform_` for this node was computed, otherwise true, e.g. if the node's local transform has been changed. <br /></td></tr>
 <tr class="memitem:adc5b1c905e0a2eee271107ebb91652af" id="r_adc5b1c905e0a2eee271107ebb91652af"><td class="memItemLeft" align="right" valign="top"><a id="adc5b1c905e0a2eee271107ebb91652af" name="adc5b1c905e0a2eee271107ebb91652af"></a>
-std::shared_ptr&lt; <a class="el" href="classhelios_1_1rendering_1_1Renderable.html">helios::rendering::Renderable</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>renderable_</b></td></tr>
+std::shared_ptr&lt; <a class="el" href="classhelios_1_1rendering_1_1Renderable.html">helios::rendering::Renderable</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>renderable_</b> = nullptr</td></tr>
 <tr class="memdesc:adc5b1c905e0a2eee271107ebb91652af"><td class="mdescLeft">&#160;</td><td class="mdescRight">A shared pointer to the Renderable this node represents in the SceneGraph. May be nullptr if this node does not represent a. <br /></td></tr>
 <tr class="memitem:a718f8d4e4ecddeb659031dd9ad9ad079" id="r_a718f8d4e4ecddeb659031dd9ad9ad079"><td class="memItemLeft" align="right" valign="top"><a id="a718f8d4e4ecddeb659031dd9ad9ad079" name="a718f8d4e4ecddeb659031dd9ad9ad079"></a>
 <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>parent_</b> = nullptr</td></tr>
@@ -323,7 +323,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 </div><div class="memdoc">
 
 <p>Constructs a new <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> that represents no renderable object. Nodes constructed in this way should be treated as transformation nodes. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000038">Todo</a></b></dt><dd>explicitly implement move (assignment) constructor if required, since we have deleted the copy constructors </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000036">Todo</a></b></dt><dd>explicitly implement move (assignment) constructor if required, since we have deleted the copy constructors </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00176">176</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
@@ -1098,7 +1098,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 
 <p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00092">parent_</a>, and <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="CameraSceneNode_8ixx_source.html#l00112">helios::scene::CameraSceneNode::lookAt()</a>, and <a class="el" href="SceneNodeComponent_8ixx_source.html#l00059">helios::engine::modules::scene::components::SceneNodeComponent::SceneNodeComponent()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="CameraSceneNode_8ixx_source.html#l00112">helios::scene::CameraSceneNode::lookAt()</a>.</p>
 <div id="dynsection-20" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-20-summary" class="dynsummary" style="display:block;">
 </div>
@@ -1109,7 +1109,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <div id="dynsection-21-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-21-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a4e31b52717a76a9bae9a80a1db0b808b_icgraph.svg" width="500" height="131"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a4e31b52717a76a9bae9a80a1db0b808b_icgraph.svg" width="452" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -1186,8 +1186,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 
 </div>
 </div>
-<a id="a6fc8bb37765c30988515c45845208f4d" name="a6fc8bb37765c30988515c45845208f4d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6fc8bb37765c30988515c45845208f4d">&#9670;&#160;</a></span>setActive()</h2>
+<a id="ae383a85c8ca2c486bc2745c6ed8e6588" name="ae383a85c8ca2c486bc2745c6ed8e6588"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae383a85c8ca2c486bc2745c6ed8e6588">&#9670;&#160;</a></span>setActive()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1198,7 +1198,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
         <tr>
           <td class="memname">void helios::scene::SceneNode::setActive </td>
           <td>(</td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>active</em></span></td><td>)</td>
+          <td class="paramtype">const bool</td>          <td class="paramname"><span class="paramname"><em>active</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1477,14 +1477,6 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 
 <p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00084">renderable_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="SceneNodeComponent_8ixx_source.html#l00059">helios::engine::modules::scene::components::SceneNodeComponent::SceneNodeComponent()</a>.</p>
-<div id="dynsection-28" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-28-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-28-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a5633e22296012f06bbae084e97d0c16b_icgraph.svg" width="500" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
 </div>
 </div>
 <a id="aeb8fe0f5531a26fa2fc3a353572a1115" name="aeb8fe0f5531a26fa2fc3a353572a1115"></a>
@@ -1518,16 +1510,16 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00497">inheritWorldTransform()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00113">localTransform_</a>, <a class="el" href="SceneNode_8ixx_source.html#l00078">needsUpdate_</a>, <a class="el" href="SceneNode_8ixx_source.html#l00476">onWorldTransformUpdate()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00092">parent_</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00106">worldTransform_</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="SceneNode_8ixx_source.html#l00442">aabb()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00404">worldTransform()</a>.</p>
-<div id="dynsection-29" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-28" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-28-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-28-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_aeb8fe0f5531a26fa2fc3a353572a1115_cgraph.svg" width="442" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div id="dynsection-29" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-29-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-29-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_aeb8fe0f5531a26fa2fc3a353572a1115_cgraph.svg" width="442" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-30" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-30-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-30-content" class="dyncontent" style="display:none;">
 <div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_aeb8fe0f5531a26fa2fc3a353572a1115_icgraph.svg" width="100%" height="386"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
@@ -1564,16 +1556,16 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00432">needsUpdate()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00457">update()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00106">worldTransform_</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="CameraSceneNode_8ixx_source.html#l00112">helios::scene::CameraSceneNode::lookAt()</a>.</p>
-<div id="dynsection-31" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-30" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-30-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-30-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a2cd5ee14fdf4990952266c724c916551_cgraph.svg" width="100%" height="410"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<div id="dynsection-31" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-31-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-31-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a2cd5ee14fdf4990952266c724c916551_cgraph.svg" width="100%" height="410"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
-<div id="dynsection-32" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-32-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-32-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a2cd5ee14fdf4990952266c724c916551_icgraph.svg" width="452" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 

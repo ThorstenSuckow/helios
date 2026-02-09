@@ -134,12 +134,18 @@ var annotated_dup =
           ] ]
         ] ],
         [ "ecs", "namespacehelios_1_1engine_1_1ecs.html", [
-          [ "Cloneable", "classhelios_1_1engine_1_1ecs_1_1Cloneable.html", "classhelios_1_1engine_1_1ecs_1_1Cloneable" ],
-          [ "CloneableComponent", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html", "classhelios_1_1engine_1_1ecs_1_1CloneableComponent" ],
-          [ "Component", "classhelios_1_1engine_1_1ecs_1_1Component.html", "classhelios_1_1engine_1_1ecs_1_1Component" ],
+          [ "ComponentOps", "structhelios_1_1engine_1_1ecs_1_1ComponentOps.html", "structhelios_1_1engine_1_1ecs_1_1ComponentOps" ],
+          [ "ComponentOpsRegistry", "classhelios_1_1engine_1_1ecs_1_1ComponentOpsRegistry.html", "classhelios_1_1engine_1_1ecs_1_1ComponentOpsRegistry" ],
+          [ "ComponentReflector", "classhelios_1_1engine_1_1ecs_1_1ComponentReflector.html", "classhelios_1_1engine_1_1ecs_1_1ComponentReflector" ],
+          [ "EntityHandle", "structhelios_1_1engine_1_1ecs_1_1EntityHandle.html", "structhelios_1_1engine_1_1ecs_1_1EntityHandle" ],
+          [ "EntityManager", "classhelios_1_1engine_1_1ecs_1_1EntityManager.html", "classhelios_1_1engine_1_1ecs_1_1EntityManager" ],
+          [ "EntityRegistry", "classhelios_1_1engine_1_1ecs_1_1EntityRegistry.html", "classhelios_1_1engine_1_1ecs_1_1EntityRegistry" ],
           [ "GameObject", "classhelios_1_1engine_1_1ecs_1_1GameObject.html", "classhelios_1_1engine_1_1ecs_1_1GameObject" ],
+          [ "SparseSetBase", "classhelios_1_1engine_1_1ecs_1_1SparseSetBase.html", "classhelios_1_1engine_1_1ecs_1_1SparseSetBase" ],
+          [ "SparseSet", "classhelios_1_1engine_1_1ecs_1_1SparseSet.html", "classhelios_1_1engine_1_1ecs_1_1SparseSet" ],
           [ "System", "classhelios_1_1engine_1_1ecs_1_1System.html", "classhelios_1_1engine_1_1ecs_1_1System" ],
-          [ "Updatable", "classhelios_1_1engine_1_1ecs_1_1Updatable.html", "classhelios_1_1engine_1_1ecs_1_1Updatable" ]
+          [ "Updatable", "classhelios_1_1engine_1_1ecs_1_1Updatable.html", "classhelios_1_1engine_1_1ecs_1_1Updatable" ],
+          [ "View", "classhelios_1_1engine_1_1ecs_1_1View.html", "classhelios_1_1engine_1_1ecs_1_1View" ]
         ] ],
         [ "mechanics", "namespacehelios_1_1engine_1_1mechanics.html", [
           [ "bounds", "namespacehelios_1_1engine_1_1mechanics_1_1bounds.html", [
@@ -193,7 +199,9 @@ var annotated_dup =
           ] ],
           [ "lifecycle", "namespacehelios_1_1engine_1_1mechanics_1_1lifecycle.html", [
             [ "components", "namespacehelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components.html", [
-              [ "DelayedComponentEnabler", "classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1DelayedComponentEnabler.html", "classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1DelayedComponentEnabler" ]
+              [ "Active", "structhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1Active.html", null ],
+              [ "DelayedComponentEnabler", "classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1DelayedComponentEnabler.html", "classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1DelayedComponentEnabler" ],
+              [ "Inactive", "structhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1Inactive.html", null ]
             ] ],
             [ "systems", "namespacehelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems.html", [
               [ "DelayedComponentEnablerSystem", "classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1DelayedComponentEnablerSystem.html", "classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1DelayedComponentEnablerSystem" ]
@@ -587,6 +595,7 @@ var annotated_dup =
       [ "hash&lt; helios::engine::core::data::SpawnProfileId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1SpawnProfileId_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1SpawnProfileId_01_4" ],
       [ "hash&lt; helios::engine::core::data::SpawnRuleId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1SpawnRuleId_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1SpawnRuleId_01_4" ],
       [ "hash&lt; helios::engine::core::data::ViewportId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ViewportId_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ViewportId_01_4" ],
+      [ "hash&lt; helios::engine::ecs::EntityHandle &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1ecs_1_1EntityHandle_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1ecs_1_1EntityHandle_01_4" ],
       [ "hash&lt; helios::util::Guid &gt;", "structstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4.html", "structstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4" ]
     ] ]
 ];

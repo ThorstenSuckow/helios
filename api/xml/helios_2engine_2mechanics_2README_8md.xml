@@ -21,18 +21,35 @@
 <codeline><highlight class="normal">|<sp/>Submodule<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|-----------|---------|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`bounds/`<sp/>|<sp/>Level<sp/>boundary<sp/>behavior<sp/>and<sp/>response<sp/>systems<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`combat/`<sp/>|<sp/>Weapon,<sp/>shooting,<sp/>and<sp/>projectile<sp/>mechanics<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`combat/`<sp/>|<sp/>Weapon,<sp/>shooting,<sp/>attack<sp/>tracking<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`damage/`<sp/>|<sp/>Damage<sp/>dealing<sp/>and<sp/>damage<sp/>application<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`health/`<sp/>|<sp/>Health<sp/>tracking<sp/>and<sp/>death<sp/>detection<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`lifecycle/`<sp/>|<sp/>Entity<sp/>activation<sp/>state<sp/>(Active/Inactive<sp/>tags)<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`scoring/`<sp/>|<sp/>Score<sp/>pools,<sp/>score<sp/>values,<sp/>and<sp/>score<sp/>tracking<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`spawn/`<sp/>|<sp/>Entity<sp/>spawning<sp/>and<sp/>lifecycle<sp/>management<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`input/`<sp/>|<sp/>Input<sp/>processing<sp/>systems<sp/>(twin-stick<sp/>controllers)<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Key<sp/>Components</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Component<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-----------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`Active`<sp/>/<sp/>`Inactive`<sp/>|<sp/>Tag<sp/>components<sp/>for<sp/>entity<sp/>activation<sp/>state<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`HealthComponent`<sp/>|<sp/>Tracks<sp/>current/max<sp/>health,<sp/>alive<sp/>status<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`DamageDealerComponent`<sp/>|<sp/>Stores<sp/>layer-based<sp/>damage<sp/>values<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`LastAttackerComponent`<sp/>|<sp/>Tracks<sp/>last<sp/>entity<sp/>that<sp/>dealt<sp/>damage<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SpawnedByProfileComponent`<sp/>|<sp/>Links<sp/>entity<sp/>to<sp/>spawn<sp/>profile<sp/>for<sp/>pooling<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`EmittedByComponent`<sp/>|<sp/>Tracks<sp/>source<sp/>entity<sp/>(e.g.,<sp/>player<sp/>→<sp/>projectile)<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ScoreValueComponent`<sp/>|<sp/>Score<sp/>awarded<sp/>when<sp/>entity<sp/>is<sp/>defeated<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ScorePoolComponent`<sp/>|<sp/>Associates<sp/>entity<sp/>with<sp/>a<sp/>score<sp/>pool<sp/>|</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Key<sp/>Systems</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">|<sp/>System<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|--------|---------|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`TwinStickInputSystem`<sp/>|<sp/>Translates<sp/>gamepad<sp/>input<sp/>to<sp/>movement/aim<sp/>commands<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`LevelBoundsBehaviorSystem`<sp/>|<sp/>Applies<sp/>bounce/wrap/despawn<sp/>at<sp/>level<sp/>edges<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`ProjectileSpawnSystem`<sp/>|<sp/>Spawns<sp/>projectiles<sp/>based<sp/>on<sp/>weapon<sp/>state<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`GameObjectSpawnSystem`<sp/>|<sp/>Executes<sp/>scheduled<sp/>spawn<sp/>plans<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`LevelBoundsSystem`<sp/>|<sp/>Applies<sp/>bounce/wrap/despawn<sp/>at<sp/>level<sp/>edges<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`HealthDepletedSystem`<sp/>|<sp/>Detects<sp/>death<sp/>and<sp/>triggers<sp/>death<sp/>events<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`DamageApplicationSystem`<sp/>|<sp/>Applies<sp/>damage<sp/>from<sp/>collision<sp/>events<sp/>|</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>
 <codeline></codeline>
@@ -40,7 +57,7 @@
 <codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
 <codeline><highlight class="normal">@namespace<sp/>helios::engine::mechanics</highlight></codeline>
 <codeline><highlight class="normal">@brief<sp/>High-level<sp/>gameplay<sp/>systems<sp/>and<sp/>components<sp/>for<sp/>game<sp/>logic.</highlight></codeline>
-<codeline><highlight class="normal">@details<sp/>This<sp/>namespace<sp/>contains<sp/>the<sp/>gameplay<sp/>layer<sp/>of<sp/>the<sp/>engine,<sp/>providing<sp/>components<sp/>that<sp/>store<sp/>game<sp/>state<sp/>and<sp/>systems<sp/>that<sp/>implement<sp/>game<sp/>rules.<sp/>Components<sp/>are<sp/>pure<sp/>data<sp/>containers;<sp/>systems<sp/>read<sp/>and<sp/>modify<sp/>them<sp/>each<sp/>frame.<sp/>The<sp/>namespace<sp/>is<sp/>subdivided<sp/>into<sp/>`bounds`<sp/>for<sp/>level<sp/>boundary<sp/>behavior,<sp/>`combat`<sp/>for<sp/>weapon<sp/>and<sp/>projectile<sp/>mechanics,<sp/>`spawn`<sp/>for<sp/>entity<sp/>lifecycle<sp/>management,<sp/>and<sp/>`input`<sp/>for<sp/>input<sp/>processing<sp/>systems.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>This<sp/>namespace<sp/>contains<sp/>the<sp/>gameplay<sp/>layer<sp/>of<sp/>the<sp/>engine,<sp/>providing<sp/>components<sp/>that<sp/>store<sp/>game<sp/>state<sp/>and<sp/>systems<sp/>that<sp/>implement<sp/>game<sp/>rules.<sp/>Components<sp/>are<sp/>pure<sp/>data<sp/>containers;<sp/>systems<sp/>read<sp/>and<sp/>modify<sp/>them<sp/>each<sp/>frame.<sp/>The<sp/>namespace<sp/>is<sp/>subdivided<sp/>into<sp/>`bounds`<sp/>for<sp/>level<sp/>boundary<sp/>behavior,<sp/>`combat`<sp/>for<sp/>weapon<sp/>and<sp/>attack<sp/>tracking,<sp/>`damage`<sp/>for<sp/>damage<sp/>dealing,<sp/>`health`<sp/>for<sp/>health<sp/>tracking,<sp/>`lifecycle`<sp/>for<sp/>entity<sp/>activation,<sp/>`scoring`<sp/>for<sp/>score<sp/>management,<sp/>`spawn`<sp/>for<sp/>entity<sp/>lifecycle<sp/>management,<sp/>and<sp/>`input`<sp/>for<sp/>input<sp/>processing<sp/>systems.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
     </programlisting>
     <location file="/tmp/h/include/helios/engine/mechanics/README.md"/>

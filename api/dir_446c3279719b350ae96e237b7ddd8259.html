@@ -129,11 +129,11 @@ Files</h2></td></tr>
 <tr class="memdesc:Phase_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a phase within the game loop containing multiple passes. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md455"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md452"></a>
 helios::engine::runtime::gameloop</h1>
 <p>Central game loop orchestration module providing phased system execution.</p>
 <p>The <span class="tt">gameloop</span> module provides the core infrastructure for managing the game update cycle. It organizes systems into a hierarchical structure of phases and passes, enabling deterministic execution order and event synchronization.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md456"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md453"></a>
 Architecture</h1>
 <p>The game loop follows a three-phase architecture:</p>
 <p><b>Pre Phase</b> — Processes input and generates commands. Systems in this phase read player input and enqueue commands into the CommandBuffer.</p>
@@ -141,7 +141,7 @@ Architecture</h1>
 <p><b>Post Phase</b> — Handles cleanup and synchronization. Systems in this phase synchronize the gameplay state with the scene graph and clear dirty flags.</p>
 <p>Each phase contains one or more passes. A pass groups related systems and can optionally define a commit point for event synchronization within the phase.</p>
 <p>Commands can be enqueued into the CommandBuffer during any phase, not just the Pre phase. After each phase completes, the CommandBuffer is flushed and all registered managers process their pending requests. This ensures that spawn/despawn operations and other deferred actions are executed at well-defined points in the update cycle.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md457"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md454"></a>
 Key Components</h1>
 <p><b>GameLoop</b> is the central orchestrator that owns the three phases, the CommandBuffer, and the event buses. It drives the frame update by iterating through all phases and committing events and commands after each phase.</p>
 <p><b>Phase</b> represents a distinct stage in the update cycle. Phases contain passes and are executed in fixed order (Pre → Main → Post).</p>
@@ -153,7 +153,7 @@ Key Components</h1>
 <li><span class="tt">Structural</span> — Combines all three flags for a full structural commit.</li>
 </ul>
 <p>Flags can be combined using bitwise OR to trigger multiple actions at once.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md458"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md455"></a>
 Usage</h1>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;helios/engine/gameloop/GameLoop.ixx&quot;</span></div>
 <div class="line"> </div>
@@ -197,15 +197,15 @@ Usage</h1>
 <div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase_html_ab6843bc03abe3867cd46c4888f88176f"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html#ab6843bc03abe3867cd46c4888f88176f">helios::engine::runtime::gameloop::Phase::addPass</a></div><div class="ttdeci">Pass &amp; addPass()</div><div class="ttdoc">Creates and adds a new pass to this phase.</div><div class="ttdef"><b>Definition</b> <a href="Phase_8ixx_source.html#l00202">Phase.ixx:202</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1engine_1_1runtime_1_1gameloop_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html">helios::engine::runtime::gameloop</a></div><div class="ttdoc">Central game loop orchestration module.</div><div class="ttdef"><b>Definition</b> <a href="CommitPoint_8ixx_source.html#l00013">CommitPoint.ixx:13</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1engine_1_1runtime_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1runtime.html">helios::engine::runtime</a></div><div class="ttdoc">Runtime infrastructure for game execution and lifecycle orchestration.</div><div class="ttdef"><b>Definition</b> <a href="CommitPoint_8ixx_source.html#l00013">CommitPoint.ixx:13</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1engine_html"><div class="ttname"><a href="namespacehelios_1_1engine.html">helios::engine</a></div><div class="ttdoc">Main engine module aggregating core infrastructure and game systems.</div><div class="ttdef"><b>Definition</b> <a href="AiBuilder_8ixx_source.html#l00012">AiBuilder.ixx:12</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1engine_html"><div class="ttname"><a href="namespacehelios_1_1engine.html">helios::engine</a></div><div class="ttdoc">Main engine module aggregating core infrastructure and game systems.</div><div class="ttdef"><b>Definition</b> <a href="bootstrap_8ixx_source.html#l00012">bootstrap.ixx:12</a></div></div>
 <div class="ttc" id="anamespacehelios_html"><div class="ttname"><a href="namespacehelios.html">helios</a></div><div class="ttdef"><b>Definition</b> <a href="GLFWApplication_8ixx_source.html#l00029">GLFWApplication.ixx:29</a></div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md459"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md456"></a>
 Event Synchronization</h1>
 <p>The game loop provides three levels of event synchronization:</p>
 <p><b>Pass-level events</b> are synchronized at commit points within a phase. This allows systems in the next pass to react to events generated by the previous pass - within the same phase. Pass-level events are discarded at the end of the phase and do not carry over to the next phase.</p>
 <p><b>Phase-level events</b> are synchronized after each phase completes. Only events written via <span class="tt">pushPhase()</span> are available to systems in the following phase. Commands are flushed and managers process their requests at phase boundaries.</p>
 <p><b>Frame-level events</b> are synchronized at the end of the Post phase. Events written via <span class="tt">pushFrame()</span> become readable in the next frame via <span class="tt">readFrame()</span>. This is useful for cross-frame communication such as audio/VFX triggers, UI updates, or analytics events.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md460"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md457"></a>
 CommitPoint Configuration</h1>
 <p>Commit points provide fine-grained control over synchronization within a phase. By default, <span class="tt">addCommitPoint()</span> uses <span class="tt">CommitPoint::PassEvents</span> which only synchronizes pass-level events.</p>
 <p>For more control, specify the desired flags explicitly:</p>

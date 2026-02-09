@@ -8,13 +8,13 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_c723e3cec65e0ebbf524b85c829eaed3_1autotoc_md253">
+<sect1 id="dir_c723e3cec65e0ebbf524b85c829eaed3_1autotoc_md250">
 <title>helios::engine::mechanics::spawn::components</title><para>Components for spawn-related entity tracking.</para>
 </sect1>
-<sect1 id="dir_c723e3cec65e0ebbf524b85c829eaed3_1autotoc_md254">
+<sect1 id="dir_c723e3cec65e0ebbf524b85c829eaed3_1autotoc_md251">
 <title>Overview</title><para>This module provides components that track spawn-related metadata on GameObjects. These components enable the spawn/despawn pipeline to route entities to the correct pools and managers.</para>
 </sect1>
-<sect1 id="dir_c723e3cec65e0ebbf524b85c829eaed3_1autotoc_md255">
+<sect1 id="dir_c723e3cec65e0ebbf524b85c829eaed3_1autotoc_md252">
 <title>Key Classes</title><para><table rows="2" cols="2"><row>
 <entry thead="yes"><para>Class  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
@@ -26,17 +26,17 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_c723e3cec65e0ebbf524b85c829eaed3_1autotoc_md256">
+<sect1 id="dir_c723e3cec65e0ebbf524b85c829eaed3_1autotoc_md253">
 <title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Attach<sp/>to<sp/>prefab<sp/>during<sp/>pool<sp/>configuration</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>prefab<sp/>=<sp/>std::make_unique&lt;GameObject&gt;();</highlight></codeline>
 <codeline><highlight class="normal">prefab-&gt;add&lt;SpawnedByProfileComponent&gt;();</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Set<sp/>profile<sp/>ID<sp/>during<sp/>spawn</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>comp<sp/>=<sp/>entity-&gt;get&lt;SpawnedByProfileComponent&gt;();</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>comp<sp/>=<sp/>entity.get&lt;SpawnedByProfileComponent&gt;();</highlight></codeline>
 <codeline><highlight class="normal">comp-&gt;setSpawnProfileId(enemyProfileId);</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Read<sp/>profile<sp/>ID<sp/>during<sp/>despawn</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>profileId<sp/>=<sp/>entity-&gt;get&lt;SpawnedByProfileComponent&gt;()-&gt;spawnProfileId();</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>profileId<sp/>=<sp/>entity.get&lt;SpawnedByProfileComponent&gt;()-&gt;spawnProfileId();</highlight></codeline>
 </programlisting></para>
 <para><hruler/>
  <details><summary>Doxygen</summary><para></para>

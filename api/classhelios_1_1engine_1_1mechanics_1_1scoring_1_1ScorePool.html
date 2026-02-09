@@ -125,7 +125,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1f1ed090f94aa46578848238bb3697fa" id="r_a1f1ed090f94aa46578848238bb3697fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structhelios_1_1engine_1_1core_1_1data_1_1ScorePoolId.html">helios::engine::core::data::ScorePoolId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1f1ed090f94aa46578848238bb3697fa">scorePoolId</a> () const noexcept</td></tr>
 <tr class="memdesc:a1f1ed090f94aa46578848238bb3697fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the pool's unique identifier.  <br /></td></tr>
 <tr class="memitem:ad1e123fa54d72bb3d7a011174fbbf870" id="r_ad1e123fa54d72bb3d7a011174fbbf870"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1engine_1_1mechanics_1_1scoring_1_1types.html#a011dfc88867a7333c5bf452f039b6b16">helios::engine::mechanics::scoring::types::ScorePoolRevision</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad1e123fa54d72bb3d7a011174fbbf870">revision</a> () const noexcept</td></tr>
+<tr class="memdesc:ad1e123fa54d72bb3d7a011174fbbf870"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current revision number.  <br /></td></tr>
 <tr class="memitem:ac81c66195df3daf4e10c283005b7fa7c" id="r_ac81c66195df3daf4e10c283005b7fa7c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolSnapshot.html">helios::engine::mechanics::scoring::ScorePoolSnapshot</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac81c66195df3daf4e10c283005b7fa7c">snapshot</a> () const noexcept</td></tr>
+<tr class="memdesc:ac81c66195df3daf4e10c283005b7fa7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a snapshot of the current pool state.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Container that accumulates scores by type within a pool. </p>
@@ -311,7 +313,11 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ScorePool_8ixx_source.html#l00139">139</a> of file <a class="el" href="ScorePool_8ixx_source.html">ScorePool.ixx</a>.</p>
+<p>Returns the current revision number. </p>
+<p>The revision is incremented whenever a score value changes. Used by observers to detect changes without polling values.</p>
+<dl class="section return"><dt>Returns</dt><dd>The current ScorePoolRevision. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="ScorePool_8ixx_source.html#l00147">147</a> of file <a class="el" href="ScorePool_8ixx_source.html">ScorePool.ixx</a>.</p>
 
 </div>
 </div>
@@ -376,7 +382,11 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ScorePool_8ixx_source.html#l00143">143</a> of file <a class="el" href="ScorePool_8ixx_source.html">ScorePool.ixx</a>.</p>
+<p>Returns a snapshot of the current pool state. </p>
+<p>The snapshot contains the pool ID, total score, and current revision. Useful for observers and UI binding.</p>
+<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="structhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolSnapshot.html" title="Immutable snapshot of a ScorePool&#39;s state.">ScorePoolSnapshot</a> with current values. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="ScorePool_8ixx_source.html#l00159">159</a> of file <a class="el" href="ScorePool_8ixx_source.html">ScorePool.ixx</a>.</p>
 
 </div>
 </div>

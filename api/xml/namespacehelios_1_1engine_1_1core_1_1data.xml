@@ -27,6 +27,53 @@
         </inbodydescription>
         <location file="/tmp/h/include/helios/engine/core/data/CollisionLayer.ixx" line="22" column="5" bodyfile="/tmp/h/include/helios/engine/core/data/CollisionLayer.ixx" bodystart="22" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="typedef" id="namespacehelios_1_1engine_1_1core_1_1data_1a1876d5539fc6b911fbe54f8b56fd2ec0" prot="public" static="no">
+        <type>uint32_t</type>
+        <definition>using helios::engine::core::data::EntityId =  uint32_t</definition>
+        <argsstring></argsstring>
+        <name>EntityId</name>
+        <qualifiedname>helios::engine::core::data::EntityId</qualifiedname>
+        <briefdescription>
+<para>Unique identifier for an entity within an EntityPool. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Used as the index into the sparse array of an EntityPool. Combined with a <ref refid="namespacehelios_1_1engine_1_1core_1_1data_1a64dc3794b3b3f72af16a0c2a4cab2763" kindref="member">VersionId</ref> in an EntityHandle, it enables safe entity references that detect stale handles after entity removal.</para>
+<para><simplesect kind="see"><para>EntityHandle </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="namespacehelios_1_1engine_1_1core_1_1data_1a64dc3794b3b3f72af16a0c2a4cab2763" kindref="member">VersionId</ref> </para>
+</simplesect>
+<simplesect kind="see"><para>EntityPool </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/core/data/EntityId.ixx" line="26" column="5" bodyfile="/tmp/h/include/helios/engine/core/data/EntityId.ixx" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacehelios_1_1engine_1_1core_1_1data_1a64dc3794b3b3f72af16a0c2a4cab2763" prot="public" static="no">
+        <type>uint32_t</type>
+        <definition>using helios::engine::core::data::VersionId =  uint32_t</definition>
+        <argsstring></argsstring>
+        <name>VersionId</name>
+        <qualifiedname>helios::engine::core::data::VersionId</qualifiedname>
+        <briefdescription>
+<para>Version number for detecting stale entity references. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Each entity slot in an EntityPool has an associated version that is incremented when the entity is removed. EntityHandles store both the <ref refid="namespacehelios_1_1engine_1_1core_1_1data_1a1876d5539fc6b911fbe54f8b56fd2ec0" kindref="member">EntityId</ref> and <ref refid="namespacehelios_1_1engine_1_1core_1_1data_1a64dc3794b3b3f72af16a0c2a4cab2763" kindref="member">VersionId</ref>, allowing the pool to detect when a handle refers to a recycled slot.</para>
+<para>A valid version starts at 1 (uninitialized handles have version 0).</para>
+<para><simplesect kind="see"><para>EntityHandle </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="namespacehelios_1_1engine_1_1core_1_1data_1a1876d5539fc6b911fbe54f8b56fd2ec0" kindref="member">EntityId</ref> </para>
+</simplesect>
+<simplesect kind="see"><para>EntityPool </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/core/data/VersionId.ixx" line="29" column="5" bodyfile="/tmp/h/include/helios/engine/core/data/VersionId.ixx" bodystart="29" bodyend="-1"/>
+      </memberdef>
     </sectiondef>
     <sectiondef kind="var">
       <memberdef kind="variable" id="namespacehelios_1_1engine_1_1core_1_1data_1ae64ec2be155f406b8b8f557354c66efb" prot="public" static="no" constexpr="yes" mutable="no">
@@ -45,6 +92,32 @@
         <inbodydescription>
         </inbodydescription>
         <location file="/tmp/h/include/helios/engine/core/data/CollisionLayer.ixx" line="29" column="27" bodyfile="/tmp/h/include/helios/engine/core/data/CollisionLayer.ixx" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacehelios_1_1engine_1_1core_1_1data_1a7ca6be0dedf2b339faa79a8cd3d80bf2" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>size_t</type>
+        <definition>size_t helios::engine::core::data::EntityTombstone</definition>
+        <argsstring></argsstring>
+        <name>EntityTombstone</name>
+        <qualifiedname>helios::engine::core::data::EntityTombstone</qualifiedname>
+        <initializer>= std::numeric_limits&lt;size_t&gt;::max()</initializer>
+        <briefdescription>
+<para>Sentinel value indicating an invalid or removed sparse index. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Used in sparse-set data structures (e.g., EntityPool, GameObjectPool) to mark slots that do not contain valid entity references. When a slot contains this value, the corresponding entity has been removed or was never assigned.</para>
+<para><simplesect kind="see"><para>EntityPool </para>
+</simplesect>
+<simplesect kind="see"><para>GameObjectPool </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/core/data/EntityTombstone.ixx" line="26" column="22" bodyfile="/tmp/h/include/helios/engine/core/data/EntityTombstone.ixx" bodystart="26" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1ac075b7c3e3112e2edad93e6ca3bde262" compoundref="GameObjectPool_8ixx" startline="152" endline="175">helios::engine::runtime::pooling::GameObjectPool::acquire</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a2817bb4defc54943a118fc6195d6af99" compoundref="GameObjectPool_8ixx" startline="192" endline="197">helios::engine::runtime::pooling::GameObjectPool::lock</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a71d483b2b0a17fbfa498bdbc73a69308" compoundref="GameObjectPool_8ixx" startline="242" endline="283">helios::engine::runtime::pooling::GameObjectPool::release</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1ab70bf12552324d87248d5a42cbc239e1" compoundref="GameObjectPool_8ixx" startline="296" endline="326">helios::engine::runtime::pooling::GameObjectPool::releaseAndRemove</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>

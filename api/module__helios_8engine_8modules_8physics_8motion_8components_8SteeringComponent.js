@@ -1,9 +1,15 @@
 var module__helios_8engine_8modules_8physics_8motion_8components_8SteeringComponent =
 [
     [ "SteeringComponent", "classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent.html", "classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent" ],
+    [ "helios::engine::modules::physics::motion::components::SteeringComponent::isEnabled", "module__helios_8engine_8modules_8physics_8motion_8components_8SteeringComponent.html#af50622fca705852baee0ffadbc6e2271", null ],
+    [ "helios::engine::modules::physics::motion::components::SteeringComponent::enable", "module__helios_8engine_8modules_8physics_8motion_8components_8SteeringComponent.html#a39a9ec2e1a33b7435315de8f0131d8f3", null ],
+    [ "helios::engine::modules::physics::motion::components::SteeringComponent::disable", "module__helios_8engine_8modules_8physics_8motion_8components_8SteeringComponent.html#a4d20cc6bdb619d40e98241ba6ffee62f", null ],
     [ "helios::engine::modules::physics::motion::components::SteeringComponent::SteeringComponent", "module__helios_8engine_8modules_8physics_8motion_8components_8SteeringComponent.html#af0b1f793e845de05a8eba273338a1be9", null ],
     [ "helios::engine::modules::physics::motion::components::SteeringComponent::SteeringComponent", "module__helios_8engine_8modules_8physics_8motion_8components_8SteeringComponent.html#abf7cdabd02dab980fd71c5baded3bc73", null ],
     [ "helios::engine::modules::physics::motion::components::SteeringComponent::SteeringComponent", "module__helios_8engine_8modules_8physics_8motion_8components_8SteeringComponent.html#a41ce6af90ffb93ea37f4b7a106daf0d7", null ],
+    [ "helios::engine::modules::physics::motion::components::SteeringComponent::operator=", "module__helios_8engine_8modules_8physics_8motion_8components_8SteeringComponent.html#a9063e1890a805ccad225d828326fe165", null ],
+    [ "helios::engine::modules::physics::motion::components::SteeringComponent::SteeringComponent", "module__helios_8engine_8modules_8physics_8motion_8components_8SteeringComponent.html#a3645f871c797fea9858d30712d8edabf", null ],
+    [ "helios::engine::modules::physics::motion::components::SteeringComponent::operator=", "module__helios_8engine_8modules_8physics_8motion_8components_8SteeringComponent.html#a83bcb760d0dc724788fe92ee30424d76", null ],
     [ "helios::engine::modules::physics::motion::components::SteeringComponent::setHeading", "module__helios_8engine_8modules_8physics_8motion_8components_8SteeringComponent.html#aeb9bfa0f76d72aa8c63328181e527354", null ],
     [ "helios::engine::modules::physics::motion::components::SteeringComponent::setDirectionFromSteering", "module__helios_8engine_8modules_8physics_8motion_8components_8SteeringComponent.html#a1b3df6484f3ea81fa92ecb77cb4d3485", null ],
     [ "helios::engine::modules::physics::motion::components::SteeringComponent::directionFromSteering", "module__helios_8engine_8modules_8physics_8motion_8components_8SteeringComponent.html#af1b36a81a75c300638d19f34e9763530", null ],
@@ -45,5 +51,6 @@ var module__helios_8engine_8modules_8physics_8motion_8components_8SteeringCompon
     [ "helios::engine::modules::physics::motion::components::SteeringComponent::steeringInput_", "module__helios_8engine_8modules_8physics_8motion_8components_8SteeringComponent.html#a623e6ee4c6073dad69377c46b68cf6e6", null ],
     [ "helios::engine::modules::physics::motion::components::SteeringComponent::rotationAxis_", "module__helios_8engine_8modules_8physics_8motion_8components_8SteeringComponent.html#afd181512ba623155d8d7e140ed128806", null ],
     [ "helios::engine::modules::physics::motion::components::SteeringComponent::useInstantRotation_", "module__helios_8engine_8modules_8physics_8motion_8components_8SteeringComponent.html#aa8b45c3a03f76f72703178551fbb1bb2", null ],
-    [ "helios::engine::modules::physics::motion::components::SteeringComponent::directionFromSteering_", "module__helios_8engine_8modules_8physics_8motion_8components_8SteeringComponent.html#a1debcd0dc1919c2de3499a076314aeb9", null ]
+    [ "helios::engine::modules::physics::motion::components::SteeringComponent::directionFromSteering_", "module__helios_8engine_8modules_8physics_8motion_8components_8SteeringComponent.html#a1debcd0dc1919c2de3499a076314aeb9", null ],
+    [ "helios::engine::modules::physics::motion::components::SteeringComponent::isEnabled_", "module__helios_8engine_8modules_8physics_8motion_8components_8SteeringComponent.html#a39410dda256c9920fdec19429310548e", null ]
 ];

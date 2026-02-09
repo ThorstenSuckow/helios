@@ -121,13 +121,13 @@ Files</h2></td></tr>
 <tr class="memdesc:ChaseComponent_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Component for AI chase/seek behavior. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md270"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md267"></a>
 helios::engine::modules::ai::components</h1>
 <p>AI behavior data components.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md271"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md268"></a>
 Overview</h1>
 <p>Components storing AI behavior state. These are pure data containers processed by the corresponding systems in <span class="tt"><a class="el" href="namespacehelios_1_1engine_1_1modules_1_1ai_1_1systems.html" title="AI behavior processing systems.">helios.engine.modules.ai.systems</a></span>.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md272"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md269"></a>
 Components</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -135,24 +135,24 @@ Components</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">ChaseComponent</span>  </td><td class="markdownTableBodyNone">Tracks a target entity and controls pursuit timing  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md273"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md270"></a>
 ChaseComponent</h1>
 <p>Stores data for chase/pursuit behavior:</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Property  </th><th class="markdownTableHeadNone">Type  </th><th class="markdownTableHeadNone">Purpose  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">target_</span>  </td><td class="markdownTableBodyNone"><span class="tt">Guid</span>  </td><td class="markdownTableBodyNone">GUID of the entity to chase  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">target_</span>  </td><td class="markdownTableBodyNone"><span class="tt">EntityHandle</span>  </td><td class="markdownTableBodyNone">Handle of the entity to chase  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">cooldown_</span>  </td><td class="markdownTableBodyNone"><span class="tt">float</span>  </td><td class="markdownTableBodyNone">Interval between direction updates (seconds)  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">cooldownTimer_</span>  </td><td class="markdownTableBodyNone"><span class="tt">float</span>  </td><td class="markdownTableBodyNone">Elapsed time since last update  </td></tr>
 </table>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md274"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md271"></a>
 API</h2>
 <div class="fragment"><div class="line"><span class="comment">// Set target entity</span></div>
-<div class="line"><span class="keywordtype">void</span> setTarget(Guid guid);</div>
-<div class="line">Guid target() <span class="keyword">const</span>;</div>
+<div class="line"><span class="keywordtype">void</span> setTarget(EntityHandle handle);</div>
+<div class="line">EntityHandle target() <span class="keyword">const</span>;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Configure update frequency</span></div>
 <div class="line"><span class="keywordtype">void</span> setCooldown(<span class="keywordtype">float</span> seconds);</div>
@@ -162,7 +162,7 @@ API</h2>
 <div class="line"><span class="keywordtype">void</span> updateCooldownTimerBy(<span class="keywordtype">float</span> delta);</div>
 <div class="line"><span class="keywordtype">void</span> setCooldownTimer(<span class="keywordtype">float</span> timer);</div>
 <div class="line"><span class="keywordtype">float</span> cooldownTimer() <span class="keyword">const</span>;</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md275"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md272"></a>
 Related Modules</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">

@@ -20,61 +20,38 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/builder/gameObject/GameObjectFactory.ixx" line="401" column="34" bodyfile="/tmp/h/include/helios/engine/builder/gameObject/GameObjectFactory.ixx" bodystart="401" bodyend="404"/>
+        <location file="/tmp/h/include/helios/engine/builder/gameObject/GameObjectFactory.ixx" line="380" column="34" bodyfile="/tmp/h/include/helios/engine/builder/gameObject/GameObjectFactory.ixx" bodystart="380" bodyend="383"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory_1a397b02576652662326a68bf15612309a" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>GameObjectPrototype</type>
-        <definition>static GameObjectPrototype helios::engine::builder::gameObject::GameObjectFactory::from</definition>
-        <argsstring>(helios::engine::ecs::GameObject *gameObject)</argsstring>
-        <name>from</name>
-        <qualifiedname>helios::engine::builder::gameObject::GameObjectFactory::from</qualifiedname>
-        <param>
-          <type><ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> *</type>
-          <declname>gameObject</declname>
-        </param>
-        <briefdescription>
-<para>Creates a prototype by cloning an existing GameObject. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>Copies all components that implement the `Cloneable` interface. The new GameObject starts inactive.</para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername><ref refid="namespacehelios_1_1engine_1_1builder_1_1gameObject" kindref="compound">gameObject</ref></parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Source GameObject to clone from.</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>A prototype for further configuration. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-<para><xrefsect id="todo_1_todo000008"><xreftitle>Todo</xreftitle><xrefdescription><para>Optional ClonePolicy where rules are specified? </para>
-</xrefdescription></xrefsect></para>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/builder/gameObject/GameObjectFactory.ixx" line="416" column="36" bodyfile="/tmp/h/include/helios/engine/builder/gameObject/GameObjectFactory.ixx" bodystart="416" bodyend="440"/>
-        <references refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory_1a3a44a416b173e083ec0c64811fc1f747" compoundref="GameObjectFactory_8ixx" startline="447" endline="449">gameObject</references>
-      </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory_1a3a44a416b173e083ec0c64811fc1f747" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory_1ac6d64b614d8d67bce93033dbcb1fd58d" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>GameObjectPrototype</type>
         <definition>static GameObjectPrototype helios::engine::builder::gameObject::GameObjectFactory::gameObject</definition>
-        <argsstring>()</argsstring>
+        <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld)</argsstring>
         <name>gameObject</name>
         <qualifiedname>helios::engine::builder::gameObject::GameObjectFactory::gameObject</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
         <briefdescription>
 <para>Creates a new empty GameObject prototype. </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>A prototype for fluent configuration. </para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The world where the GameObject lives.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A prototype for fluent configuration. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/builder/gameObject/GameObjectFactory.ixx" line="447" column="36" bodyfile="/tmp/h/include/helios/engine/builder/gameObject/GameObjectFactory.ixx" bodystart="447" bodyend="449"/>
-        <referencedby refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory_1a397b02576652662326a68bf15612309a" compoundref="GameObjectFactory_8ixx" startline="416" endline="440">from</referencedby>
+        <location file="/tmp/h/include/helios/engine/builder/gameObject/GameObjectFactory.ixx" line="392" column="36" bodyfile="/tmp/h/include/helios/engine/builder/gameObject/GameObjectFactory.ixx" bodystart="392" bodyend="394"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -82,12 +59,11 @@
     </briefdescription>
     <detaileddescription>
 <para>Provides static methods for constructing new GameObjects or creating copies from existing templates. Uses the builder pattern internally via `GameObjectPrototype` for fluent component configuration.</para>
-<para>Example usage: ```cpp auto player = <ref refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory_1a3a44a416b173e083ec0c64811fc1f747" kindref="member">GameObjectFactory::gameObject()</ref> .withMotion([](auto&amp; m) { m.move2D().speed(5.0f); }) .withRendering([&amp;](auto&amp; r) { r.renderable().shape(shape).shader(shader).build(); }) .make(true); ``` </para>
+<para>Example usage: ```cpp auto player = <ref refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory_1ac6d64b614d8d67bce93033dbcb1fd58d" kindref="member">GameObjectFactory::gameObject()</ref> .withMotion([](auto&amp; m) { m.move2D().speed(5.0f); }) .withRendering([&amp;](auto&amp; r) { r.renderable().shape(shape).shader(shader).build(); }) .make(true); ``` </para>
     </detaileddescription>
-    <location file="/tmp/h/include/helios/engine/builder/gameObject/GameObjectFactory.ixx" line="40" column="5" bodyfile="/tmp/h/include/helios/engine/builder/gameObject/GameObjectFactory.ixx" bodystart="40" bodyend="451"/>
+    <location file="/tmp/h/include/helios/engine/builder/gameObject/GameObjectFactory.ixx" line="41" column="5" bodyfile="/tmp/h/include/helios/engine/builder/gameObject/GameObjectFactory.ixx" bodystart="41" bodyend="396"/>
     <listofallmembers>
-      <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory_1a397b02576652662326a68bf15612309a" prot="public" virt="non-virtual"><scope>helios::engine::builder::gameObject::GameObjectFactory</scope><name>from</name></member>
-      <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory_1a3a44a416b173e083ec0c64811fc1f747" prot="public" virt="non-virtual"><scope>helios::engine::builder::gameObject::GameObjectFactory</scope><name>gameObject</name></member>
+      <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory_1ac6d64b614d8d67bce93033dbcb1fd58d" prot="public" virt="non-virtual"><scope>helios::engine::builder::gameObject::GameObjectFactory</scope><name>gameObject</name></member>
       <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory_1a3e1f2fd66b4f091ccbaa98b494240d64" prot="public" virt="non-virtual"><scope>helios::engine::builder::gameObject::GameObjectFactory</scope><name>instance</name></member>
     </listofallmembers>
   </compounddef>

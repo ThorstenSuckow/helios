@@ -43,7 +43,7 @@
 <codeline></codeline>
 <codeline><highlight class="normal">//<sp/>2.<sp/>Register<sp/>dispatcher<sp/>for<sp/>command<sp/>type</highlight></codeline>
 <codeline><highlight class="normal">auto<sp/>moveDispatcher<sp/>=<sp/>std::make_unique&lt;TypedTargetedCommandDispatcher&lt;Move2DCommand&gt;&gt;(</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>[&amp;](const<sp/>Move2DCommand&amp;<sp/>cmd,<sp/>GameObject*<sp/>target)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>[&amp;](const<sp/>Move2DCommand&amp;<sp/>cmd,<sp/>GameObject<sp/>target)<sp/>{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>auto*<sp/>move<sp/>=<sp/>target-&gt;get&lt;Move2DComponent&gt;();</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>move-&gt;setDirection(cmd.direction());</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>move-&gt;setThrottle(cmd.throttle());</highlight></codeline>

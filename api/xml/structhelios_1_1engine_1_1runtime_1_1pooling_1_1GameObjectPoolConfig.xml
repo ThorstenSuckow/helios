@@ -17,11 +17,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolConfig.ixx" line="53" column="60" bodyfile="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolConfig.ixx" bodystart="53" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolConfig.ixx" line="56" column="60" bodyfile="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolConfig.ixx" bodystart="56" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig_1a7d222b3a96ed220754c4863afc563b47" prot="public" static="no" mutable="no">
-        <type>const std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> &gt;</type>
-        <definition>const std::unique_ptr&lt;helios::engine::ecs::GameObject&gt; helios::engine::runtime::pooling::GameObjectPoolConfig::prefab</definition>
+      <memberdef kind="variable" id="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig_1ac1b68e03d5380f3f33efd16bace7bc28" prot="public" static="no" mutable="no">
+        <type>const <ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref></type>
+        <definition>const helios::engine::ecs::GameObject helios::engine::runtime::pooling::GameObjectPoolConfig::prefab</definition>
         <argsstring></argsstring>
         <name>prefab</name>
         <qualifiedname>helios::engine::runtime::pooling::GameObjectPoolConfig::prefab</qualifiedname>
@@ -29,11 +29,11 @@
 <para>Template object used for cloning pooled instances. </para>
         </briefdescription>
         <detaileddescription>
-<para>The prefab defines the component configuration for all objects created by this pool. Ownership is transferred to the pool. </para>
+<para>The prefab defines the component configuration for all objects created by this pool. Since GameObject is lightweight (~16 bytes), it is stored by value. The prefab should be inactive. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolConfig.ixx" line="61" column="31" bodyfile="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolConfig.ixx" bodystart="61" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolConfig.ixx" line="65" column="47" bodyfile="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolConfig.ixx" bodystart="65" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig_1aa78c442cfcaea88e7d267ff43fd2d39c" prot="public" static="no" mutable="no">
         <type>const size_t</type>
@@ -49,23 +49,23 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolConfig.ixx" line="69" column="22" bodyfile="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolConfig.ixx" bodystart="69" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolConfig.ixx" line="73" column="22" bodyfile="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolConfig.ixx" bodystart="73" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
 <para>Configuration structure for creating a <ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool" kindref="compound">GameObjectPool</ref>. </para>
     </briefdescription>
     <detaileddescription>
-<para><ref refid="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig" kindref="compound">GameObjectPoolConfig</ref> bundles all information required to initialize a <ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool" kindref="compound">GameObjectPool</ref>: a unique identifier, a prefab template for cloning, and the initial pool size. This configuration is typically passed to the <ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager" kindref="compound">GameObjectPoolManager</ref> responsibkle for this pool config.</para>
+<para><ref refid="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig" kindref="compound">GameObjectPoolConfig</ref> bundles all information required to initialize a <ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool" kindref="compound">GameObjectPool</ref>: a unique identifier, a prefab template for cloning, and the initial pool size. This configuration is typically passed to the <ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager" kindref="compound">GameObjectPoolManager</ref> responsible for this pool config.</para>
 <para>The prefab serves as the archetype from which all pooled instances are cloned. Components attached to the prefab will be duplicated to each pooled object.</para>
-<para>Example usage: ```cpp auto enemyPrefab = std::make_unique&lt;GameObject&gt;(); enemyPrefab-&gt;add&lt;RenderableComponent&gt;(mesh, material); enemyPrefab-&gt;add&lt;Move2DComponent&gt;();</para>
-<para><ref refid="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig" kindref="compound">GameObjectPoolConfig</ref> config{ .gameObjectPoolId = GameObjectPoolId{1}, .prefab = std::move(enemyPrefab), .amount = 50 };</para>
+<para>Example usage: ```cpp // Create prefab via GameWorld auto enemyPrefab = gameWorld.addGameObject(); enemyPrefab.add&lt;RenderableComponent&gt;(mesh, material); enemyPrefab.add&lt;Move2DComponent&gt;(); enemyPrefab.add&lt;HealthComponent&gt;(100.0f); enemyPrefab.setActive(false); // Prefabs should be inactive</para>
+<para>auto config = std::make_unique&lt;GameObjectPoolConfig&gt;( GameObjectPoolId{1}, enemyPrefab, 50 // Pre-allocate 50 clones );</para>
 <para>poolManager.addPoolConfig(std::move(config)); ```</para>
 <para><simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool" kindref="compound">GameObjectPool</ref> </para>
 </simplesect>
 <simplesect kind="see"><para>GameObjectPoolId </para>
 </simplesect>
-<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolRegistry" kindref="compound">GameObjectPoolRegistry</ref> </para>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager" kindref="compound">GameObjectPoolManager</ref> </para>
 </simplesect>
 </para>
     </detaileddescription>
@@ -74,19 +74,26 @@
         <label>helios::engine::core::data::GameObjectPoolId</label>
         <link refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId"/>
       </node>
+      <node id="3">
+        <label>helios::engine::ecs::GameObject</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1GameObject"/>
+      </node>
       <node id="1">
         <label>helios::engine::runtime::pooling::GameObjectPoolConfig</label>
         <link refid="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig"/>
         <childnode refid="2" relation="usage">
           <edgelabel>gameObjectPoolId</edgelabel>
         </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>prefab</edgelabel>
+        </childnode>
       </node>
     </collaborationgraph>
-    <location file="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolConfig.ixx" line="46" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolConfig.ixx" bodystart="46" bodyend="71"/>
+    <location file="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolConfig.ixx" line="49" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolConfig.ixx" bodystart="49" bodyend="75"/>
     <listofallmembers>
       <member refid="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig_1aa78c442cfcaea88e7d267ff43fd2d39c" prot="public" virt="non-virtual"><scope>helios::engine::runtime::pooling::GameObjectPoolConfig</scope><name>amount</name></member>
       <member refid="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig_1a0bc086fe931274b62ec9d9d855691cd8" prot="public" virt="non-virtual"><scope>helios::engine::runtime::pooling::GameObjectPoolConfig</scope><name>gameObjectPoolId</name></member>
-      <member refid="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig_1a7d222b3a96ed220754c4863afc563b47" prot="public" virt="non-virtual"><scope>helios::engine::runtime::pooling::GameObjectPoolConfig</scope><name>prefab</name></member>
+      <member refid="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig_1ac1b68e03d5380f3f33efd16bace7bc28" prot="public" virt="non-virtual"><scope>helios::engine::runtime::pooling::GameObjectPoolConfig</scope><name>prefab</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

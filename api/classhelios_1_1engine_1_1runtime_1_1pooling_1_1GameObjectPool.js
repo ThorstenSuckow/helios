@@ -1,17 +1,24 @@
 var classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool =
 [
     [ "GameObjectPool", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#a7eef46f5767afbd4e92e38a7938c0750", null ],
-    [ "acquire", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#afb2b70dfef45864ea3bfd1e148542007", null ],
+    [ "acquire", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#ac075b7c3e3112e2edad93e6ca3bde262", null ],
     [ "activeCount", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#a7103aa91a43d728efa94eb2a9c55cb44", null ],
-    [ "addInactive", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#a60e9a358d1f385eb9f058013ce441f35", null ],
+    [ "addInactive", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#aae26060ad396a22b173bbda1bf29d2b0", null ],
     [ "guid", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#a2589e780d738d2a5f2c6d2a47a19abc7", null ],
     [ "inactiveCount", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#a0a2c82c68a0214cf96b7b627c53d4716", null ],
-    [ "release", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#aaba699ebdbc101329c7324addd9afe38", null ],
-    [ "releaseAndRemove", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#a5fc0afe6ecd0e0d923fd294496f1115e", null ],
+    [ "isLocked", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#a2bf3122d7e7e1aa9b3efaa0aec649b72", null ],
+    [ "lock", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#a2817bb4defc54943a118fc6195d6af99", null ],
+    [ "release", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#a71d483b2b0a17fbfa498bdbc73a69308", null ],
+    [ "releaseAndRemove", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#ab70bf12552324d87248d5a42cbc239e1", null ],
     [ "size", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#a81b5e2ed58b5db8445480bcd458db5c7", null ],
-    [ "activeGameObjects_", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#a713727c90eca4836c2310195dd9aff43", null ],
-    [ "activeIndex_", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#a1b6402445fd9dac5901832a72cf8fa7c", null ],
+    [ "activeGameObjects_", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#a8b152814a37b5dd75e7fbbc3a21e0aa5", null ],
+    [ "activeIndex_", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#afaf63b9e180dc22177ebe038923c23d1", null ],
+    [ "delta_", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#ad239e54f9f8d46f7e3452809f991747f", null ],
     [ "guid_", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#a22a7227e1f59facdd4eeecc6de3f9ddc", null ],
-    [ "inactiveGameObjects_", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#a379daf214aeac51f8c4e9835357e5924", null ],
-    [ "poolSize_", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#a266a99fd8a31439417b7a1c4ed759c42", null ]
+    [ "inactiveGameObjects_", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#a6a00a5454d4b7e8087b0ae3e1bef4a1d", null ],
+    [ "locked_", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#a333827a5d1929bf26f74b8745df309de", null ],
+    [ "maxEntityId_", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#ae01936e92700e878ac3e0122cf43514d", null ],
+    [ "minEntityId_", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#a236b70f08d7397dbb5ab1179e4ef7293", null ],
+    [ "poolSize_", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#a266a99fd8a31439417b7a1c4ed759c42", null ],
+    [ "versionIndex_", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#aad4858b225d850bd70aa2a7e9f8d7c09", null ]
 ];

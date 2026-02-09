@@ -124,14 +124,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a2589e780d738d2a5f2c6d2a47a19abc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the unique identifier of this pool.  <br /></td></tr>
 <tr class="memitem:a81b5e2ed58b5db8445480bcd458db5c7" id="r_a81b5e2ed58b5db8445480bcd458db5c7"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a81b5e2ed58b5db8445480bcd458db5c7">size</a> () const noexcept</td></tr>
 <tr class="memdesc:a81b5e2ed58b5db8445480bcd458db5c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the maximum capacity of this pool.  <br /></td></tr>
-<tr class="memitem:afb2b70dfef45864ea3bfd1e148542007" id="r_afb2b70dfef45864ea3bfd1e148542007"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afb2b70dfef45864ea3bfd1e148542007">acquire</a> (<a class="el" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</a> &amp;<a class="el" href="#a2589e780d738d2a5f2c6d2a47a19abc7">guid</a>)</td></tr>
-<tr class="memdesc:afb2b70dfef45864ea3bfd1e148542007"><td class="mdescLeft">&#160;</td><td class="mdescRight">Acquires an inactive GameObject from the pool.  <br /></td></tr>
-<tr class="memitem:a60e9a358d1f385eb9f058013ce441f35" id="r_a60e9a358d1f385eb9f058013ce441f35"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a60e9a358d1f385eb9f058013ce441f35">addInactive</a> (const <a class="el" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</a> &amp;<a class="el" href="#a2589e780d738d2a5f2c6d2a47a19abc7">guid</a>)</td></tr>
-<tr class="memdesc:a60e9a358d1f385eb9f058013ce441f35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a Guid to the inactive list without acquiring it.  <br /></td></tr>
-<tr class="memitem:aaba699ebdbc101329c7324addd9afe38" id="r_aaba699ebdbc101329c7324addd9afe38"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaba699ebdbc101329c7324addd9afe38">release</a> (const <a class="el" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</a> &amp;<a class="el" href="#a2589e780d738d2a5f2c6d2a47a19abc7">guid</a>)</td></tr>
-<tr class="memdesc:aaba699ebdbc101329c7324addd9afe38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases a GameObject back to the pool by its Guid.  <br /></td></tr>
-<tr class="memitem:a5fc0afe6ecd0e0d923fd294496f1115e" id="r_a5fc0afe6ecd0e0d923fd294496f1115e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5fc0afe6ecd0e0d923fd294496f1115e">releaseAndRemove</a> (const <a class="el" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</a> &amp;<a class="el" href="#a2589e780d738d2a5f2c6d2a47a19abc7">guid</a>)</td></tr>
-<tr class="memdesc:a5fc0afe6ecd0e0d923fd294496f1115e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases and permanently removes a GameObject from the pool.  <br /></td></tr>
+<tr class="memitem:ac075b7c3e3112e2edad93e6ca3bde262" id="r_ac075b7c3e3112e2edad93e6ca3bde262"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac075b7c3e3112e2edad93e6ca3bde262">acquire</a> (<a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a> &amp;entityHandle)</td></tr>
+<tr class="memdesc:ac075b7c3e3112e2edad93e6ca3bde262"><td class="mdescLeft">&#160;</td><td class="mdescRight">Acquires an inactive GameObject from the pool.  <br /></td></tr>
+<tr class="memitem:a2bf3122d7e7e1aa9b3efaa0aec649b72" id="r_a2bf3122d7e7e1aa9b3efaa0aec649b72"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2bf3122d7e7e1aa9b3efaa0aec649b72">isLocked</a> () const noexcept</td></tr>
+<tr class="memdesc:a2bf3122d7e7e1aa9b3efaa0aec649b72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the pool is locked.  <br /></td></tr>
+<tr class="memitem:a2817bb4defc54943a118fc6195d6af99" id="r_a2817bb4defc54943a118fc6195d6af99"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2817bb4defc54943a118fc6195d6af99">lock</a> () noexcept</td></tr>
+<tr class="memdesc:a2817bb4defc54943a118fc6195d6af99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Locks the pool for acquire/release operations.  <br /></td></tr>
+<tr class="memitem:aae26060ad396a22b173bbda1bf29d2b0" id="r_aae26060ad396a22b173bbda1bf29d2b0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aae26060ad396a22b173bbda1bf29d2b0">addInactive</a> (const <a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a> entityHandle)</td></tr>
+<tr class="memdesc:aae26060ad396a22b173bbda1bf29d2b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a EntityHandle to the inactive list without acquiring it.  <br /></td></tr>
+<tr class="memitem:a71d483b2b0a17fbfa498bdbc73a69308" id="r_a71d483b2b0a17fbfa498bdbc73a69308"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a71d483b2b0a17fbfa498bdbc73a69308">release</a> (const <a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a> entityHandle)</td></tr>
+<tr class="memdesc:a71d483b2b0a17fbfa498bdbc73a69308"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases a GameObject back to the pool by its EntityHandle.  <br /></td></tr>
+<tr class="memitem:ab70bf12552324d87248d5a42cbc239e1" id="r_ab70bf12552324d87248d5a42cbc239e1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab70bf12552324d87248d5a42cbc239e1">releaseAndRemove</a> (const <a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a> entityHandle)</td></tr>
+<tr class="memdesc:ab70bf12552324d87248d5a42cbc239e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases and permanently removes a GameObject from the pool.  <br /></td></tr>
 <tr class="memitem:a7103aa91a43d728efa94eb2a9c55cb44" id="r_a7103aa91a43d728efa94eb2a9c55cb44"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7103aa91a43d728efa94eb2a9c55cb44">activeCount</a> () const noexcept</td></tr>
 <tr class="memdesc:a7103aa91a43d728efa94eb2a9c55cb44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of active game objects.  <br /></td></tr>
 <tr class="memitem:a0a2c82c68a0214cf96b7b627c53d4716" id="r_a0a2c82c68a0214cf96b7b627c53d4716"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0a2c82c68a0214cf96b7b627c53d4716">inactiveCount</a> () const noexcept</td></tr>
@@ -139,21 +143,36 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a1b6402445fd9dac5901832a72cf8fa7c" id="r_a1b6402445fd9dac5901832a72cf8fa7c"><td class="memItemLeft" align="right" valign="top"><a id="a1b6402445fd9dac5901832a72cf8fa7c" name="a1b6402445fd9dac5901832a72cf8fa7c"></a>
-std::unordered_map&lt; <a class="el" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</a>, size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>activeIndex_</b></td></tr>
-<tr class="memdesc:a1b6402445fd9dac5901832a72cf8fa7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maps active GameObject Guids to their index in activeGameObjects_. <br /></td></tr>
-<tr class="memitem:a713727c90eca4836c2310195dd9aff43" id="r_a713727c90eca4836c2310195dd9aff43"><td class="memItemLeft" align="right" valign="top"><a id="a713727c90eca4836c2310195dd9aff43" name="a713727c90eca4836c2310195dd9aff43"></a>
-std::vector&lt; <a class="el" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>activeGameObjects_</b></td></tr>
-<tr class="memdesc:a713727c90eca4836c2310195dd9aff43"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of Guids for currently active (in-use) GameObjects. <br /></td></tr>
-<tr class="memitem:a379daf214aeac51f8c4e9835357e5924" id="r_a379daf214aeac51f8c4e9835357e5924"><td class="memItemLeft" align="right" valign="top"><a id="a379daf214aeac51f8c4e9835357e5924" name="a379daf214aeac51f8c4e9835357e5924"></a>
-std::vector&lt; <a class="el" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>inactiveGameObjects_</b></td></tr>
-<tr class="memdesc:a379daf214aeac51f8c4e9835357e5924"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of Guids for currently inactive (available) GameObjects. <br /></td></tr>
+<tr class="memitem:afaf63b9e180dc22177ebe038923c23d1" id="r_afaf63b9e180dc22177ebe038923c23d1"><td class="memItemLeft" align="right" valign="top"><a id="afaf63b9e180dc22177ebe038923c23d1" name="afaf63b9e180dc22177ebe038923c23d1"></a>
+std::vector&lt; size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>activeIndex_</b></td></tr>
+<tr class="memdesc:afaf63b9e180dc22177ebe038923c23d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maps active GameObject EntityIds to their index in activeGameObjects_. <br /></td></tr>
+<tr class="memitem:aad4858b225d850bd70aa2a7e9f8d7c09" id="r_aad4858b225d850bd70aa2a7e9f8d7c09"><td class="memItemLeft" align="right" valign="top"><a id="aad4858b225d850bd70aa2a7e9f8d7c09" name="aad4858b225d850bd70aa2a7e9f8d7c09"></a>
+std::vector&lt; size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>versionIndex_</b></td></tr>
+<tr class="memdesc:aad4858b225d850bd70aa2a7e9f8d7c09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tracks version numbers for active EntityHandles. <br /></td></tr>
+<tr class="memitem:a8b152814a37b5dd75e7fbbc3a21e0aa5" id="r_a8b152814a37b5dd75e7fbbc3a21e0aa5"><td class="memItemLeft" align="right" valign="top"><a id="a8b152814a37b5dd75e7fbbc3a21e0aa5" name="a8b152814a37b5dd75e7fbbc3a21e0aa5"></a>
+std::vector&lt; <a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>activeGameObjects_</b></td></tr>
+<tr class="memdesc:a8b152814a37b5dd75e7fbbc3a21e0aa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of EntityHandles for currently active (in-use) GameObjects. <br /></td></tr>
+<tr class="memitem:a6a00a5454d4b7e8087b0ae3e1bef4a1d" id="r_a6a00a5454d4b7e8087b0ae3e1bef4a1d"><td class="memItemLeft" align="right" valign="top"><a id="a6a00a5454d4b7e8087b0ae3e1bef4a1d" name="a6a00a5454d4b7e8087b0ae3e1bef4a1d"></a>
+std::vector&lt; <a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>inactiveGameObjects_</b></td></tr>
+<tr class="memdesc:a6a00a5454d4b7e8087b0ae3e1bef4a1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of EntityHandles for currently inactive (available) GameObjects. <br /></td></tr>
 <tr class="memitem:a266a99fd8a31439417b7a1c4ed759c42" id="r_a266a99fd8a31439417b7a1c4ed759c42"><td class="memItemLeft" align="right" valign="top"><a id="a266a99fd8a31439417b7a1c4ed759c42" name="a266a99fd8a31439417b7a1c4ed759c42"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>poolSize_</b> = 0</td></tr>
 <tr class="memdesc:a266a99fd8a31439417b7a1c4ed759c42"><td class="mdescLeft">&#160;</td><td class="mdescRight">The maximum number of objects this pool manages. <br /></td></tr>
+<tr class="memitem:a236b70f08d7397dbb5ab1179e4ef7293" id="r_a236b70f08d7397dbb5ab1179e4ef7293"><td class="memItemLeft" align="right" valign="top"><a id="a236b70f08d7397dbb5ab1179e4ef7293" name="a236b70f08d7397dbb5ab1179e4ef7293"></a>
+<a class="el" href="namespacehelios_1_1engine_1_1core_1_1data.html#a1876d5539fc6b911fbe54f8b56fd2ec0">helios::engine::core::data::EntityId</a>&#160;</td><td class="memItemRight" valign="bottom"><b>minEntityId_</b> = std::numeric_limits&lt;<a class="el" href="namespacehelios_1_1engine_1_1core_1_1data.html#a1876d5539fc6b911fbe54f8b56fd2ec0">helios::engine::core::data::EntityId</a>&gt;::max()</td></tr>
+<tr class="memdesc:a236b70f08d7397dbb5ab1179e4ef7293"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum EntityId in the pool (used for sparse array offset). <br /></td></tr>
+<tr class="memitem:ae01936e92700e878ac3e0122cf43514d" id="r_ae01936e92700e878ac3e0122cf43514d"><td class="memItemLeft" align="right" valign="top"><a id="ae01936e92700e878ac3e0122cf43514d" name="ae01936e92700e878ac3e0122cf43514d"></a>
+<a class="el" href="namespacehelios_1_1engine_1_1core_1_1data.html#a1876d5539fc6b911fbe54f8b56fd2ec0">helios::engine::core::data::EntityId</a>&#160;</td><td class="memItemRight" valign="bottom"><b>maxEntityId_</b> = std::numeric_limits&lt;<a class="el" href="namespacehelios_1_1engine_1_1core_1_1data.html#a1876d5539fc6b911fbe54f8b56fd2ec0">helios::engine::core::data::EntityId</a>&gt;::lowest()</td></tr>
+<tr class="memdesc:ae01936e92700e878ac3e0122cf43514d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum EntityId in the pool (used for sparse array sizing). <br /></td></tr>
+<tr class="memitem:ad239e54f9f8d46f7e3452809f991747f" id="r_ad239e54f9f8d46f7e3452809f991747f"><td class="memItemLeft" align="right" valign="top"><a id="ad239e54f9f8d46f7e3452809f991747f" name="ad239e54f9f8d46f7e3452809f991747f"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>delta_</b> = 0</td></tr>
+<tr class="memdesc:ad239e54f9f8d46f7e3452809f991747f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Offset for sparse array indexing (equals minEntityId_ after lock). <br /></td></tr>
 <tr class="memitem:a22a7227e1f59facdd4eeecc6de3f9ddc" id="r_a22a7227e1f59facdd4eeecc6de3f9ddc"><td class="memItemLeft" align="right" valign="top"><a id="a22a7227e1f59facdd4eeecc6de3f9ddc" name="a22a7227e1f59facdd4eeecc6de3f9ddc"></a>
 const <a class="el" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</a>&#160;</td><td class="memItemRight" valign="bottom"><b>guid_</b></td></tr>
 <tr class="memdesc:a22a7227e1f59facdd4eeecc6de3f9ddc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unique identifier for this pool instance. <br /></td></tr>
+<tr class="memitem:a333827a5d1929bf26f74b8745df309de" id="r_a333827a5d1929bf26f74b8745df309de"><td class="memItemLeft" align="right" valign="top"><a id="a333827a5d1929bf26f74b8745df309de" name="a333827a5d1929bf26f74b8745df309de"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>locked_</b> = false</td></tr>
+<tr class="memdesc:a333827a5d1929bf26f74b8745df309de"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if the pool is locked and ready for acquire/release operations. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Object pool for efficient GameObject lifecycle management. </p>
@@ -162,10 +181,10 @@ const <a class="el" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</
 <li>**acquire**: Pops from the inactive list and adds to active tracking</li>
 <li>**release**: Swap-and-pop removal from active list, push to inactive</li>
 </ul>
-<p>GameObjects themselves are owned by GameWorld; this pool only tracks their Guids.</p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000015">Todo</a></b></dt><dd>Prevent duplicate Guids from being added to the pool. </dd></dl>
+<p>GameObjects themselves are owned by GameWorld; this pool only tracks their EntityHandles.</p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000014">Todo</a></b></dt><dd>Prevent duplicate EntityHandles from being added to the pool. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00039">39</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00043">43</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a7eef46f5767afbd4e92e38a7938c0750" name="a7eef46f5767afbd4e92e38a7938c0750"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7eef46f5767afbd4e92e38a7938c0750">&#9670;&#160;</a></span>GameObjectPool()</h2>
@@ -199,15 +218,15 @@ const <a class="el" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00084">84</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00113">113</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00054">activeGameObjects_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00070">guid_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00059">inactiveGameObjects_</a>, and <a class="el" href="GameObjectPool_8ixx_source.html#l00064">poolSize_</a>.</p>
+<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00065">activeGameObjects_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00095">guid_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00070">inactiveGameObjects_</a>, and <a class="el" href="GameObjectPool_8ixx_source.html#l00075">poolSize_</a>.</p>
 
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="afb2b70dfef45864ea3bfd1e148542007" name="afb2b70dfef45864ea3bfd1e148542007"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afb2b70dfef45864ea3bfd1e148542007">&#9670;&#160;</a></span>acquire()</h2>
+<a id="ac075b7c3e3112e2edad93e6ca3bde262" name="ac075b7c3e3112e2edad93e6ca3bde262"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac075b7c3e3112e2edad93e6ca3bde262">&#9670;&#160;</a></span>acquire()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -218,7 +237,7 @@ const <a class="el" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</
         <tr>
           <td class="memname">bool helios::engine::runtime::pooling::GameObjectPool::acquire </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>guid</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>entityHandle</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -230,24 +249,18 @@ const <a class="el" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</
 </div><div class="memdoc">
 
 <p>Acquires an inactive GameObject from the pool. </p>
-<p>Removes a Guid from the inactive list and adds it to the active tracking structures. The caller is responsible for activating the actual GameObject in the GameWorld.</p>
+<p>Removes a EntityHandle from the inactive list and adds it to the active tracking structures. The caller is responsible for activating the actual GameObject in the GameWorld.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">guid</td><td>Receives the Guid of the acquired object on success.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">entityHandle</td><td>Receives the EntityHandle of the acquired object on success.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if an object was acquired, false if the pool is exhausted. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00123">123</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00152">152</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00054">activeGameObjects_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00049">activeIndex_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00099">guid()</a>, and <a class="el" href="GameObjectPool_8ixx_source.html#l00059">inactiveGameObjects_</a>.</p>
-<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_afb2b70dfef45864ea3bfd1e148542007_cgraph.svg" width="484" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00065">activeGameObjects_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00053">activeIndex_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00090">delta_</a>, <a class="el" href="EntityHandle_8ixx_source.html#l00032">helios::engine::ecs::EntityHandle::entityId</a>, <a class="el" href="EntityTombstone_8ixx_source.html#l00026">helios::engine::core::data::EntityTombstone</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00070">inactiveGameObjects_</a>, <a class="el" href="EntityHandle_8ixx_source.html#l00039">helios::engine::ecs::EntityHandle::versionId</a>, and <a class="el" href="GameObjectPool_8ixx_source.html#l00060">versionIndex_</a>.</p>
 
 </div>
 </div>
@@ -277,22 +290,22 @@ const <a class="el" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</
 <p>Returns the number of active game objects. </p>
 <dl class="section return"><dt>Returns</dt><dd>The number of active game objects. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00244">244</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00334">334</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00054">activeGameObjects_</a>.</p>
+<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00065">activeGameObjects_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="GameObjectPool_8ixx_source.html#l00149">addInactive()</a>.</p>
-<div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="GameObjectPool_8ixx_source.html#l00209">addInactive()</a>.</p>
+<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_a7103aa91a43d728efa94eb2a9c55cb44_icgraph.svg" width="448" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
-<a id="a60e9a358d1f385eb9f058013ce441f35" name="a60e9a358d1f385eb9f058013ce441f35"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a60e9a358d1f385eb9f058013ce441f35">&#9670;&#160;</a></span>addInactive()</h2>
+<a id="aae26060ad396a22b173bbda1bf29d2b0" name="aae26060ad396a22b173bbda1bf29d2b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae26060ad396a22b173bbda1bf29d2b0">&#9670;&#160;</a></span>addInactive()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -303,7 +316,7 @@ const <a class="el" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</
         <tr>
           <td class="memname">bool helios::engine::runtime::pooling::GameObjectPool::addInactive </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>guid</em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a></td>          <td class="paramname"><span class="paramname"><em>entityHandle</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -314,24 +327,24 @@ const <a class="el" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</
 </table>
 </div><div class="memdoc">
 
-<p>Adds a Guid to the inactive list without acquiring it. </p>
+<p>Adds a EntityHandle to the inactive list without acquiring it. </p>
 <p>Used during pool initialization to register pre-created GameObjects. Fails if the pool is already at capacity.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">guid</td><td>The Guid of the GameObject to add.</td></tr>
+    <tr><td class="paramname">entityHandle</td><td>The EntityHandle of the GameObject to add.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if added successfully, false if pool is full. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00149">149</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00209">209</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00244">activeCount()</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00099">guid()</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00253">inactiveCount()</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00059">inactiveGameObjects_</a>, and <a class="el" href="GameObjectPool_8ixx_source.html#l00108">size()</a>.</p>
-<div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00334">activeCount()</a>, <a class="el" href="EntityHandle_8ixx_source.html#l00032">helios::engine::ecs::EntityHandle::entityId</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00343">inactiveCount()</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00070">inactiveGameObjects_</a>, <a class="el" href="EntityHandle_8ixx_source.html#l00073">helios::engine::ecs::EntityHandle::isValid()</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00100">locked_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00085">maxEntityId_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00080">minEntityId_</a>, and <a class="el" href="GameObjectPool_8ixx_source.html#l00137">size()</a>.</p>
+<div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-3-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_a60e9a358d1f385eb9f058013ce441f35_cgraph.svg" width="484" height="275"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_aae26060ad396a22b173bbda1bf29d2b0_cgraph.svg" width="483" height="274"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -362,17 +375,9 @@ const <a class="el" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</
 <p>Returns the unique identifier of this pool. </p>
 <dl class="section return"><dt>Returns</dt><dd>The Guid assigned to this pool instance. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00099">99</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00128">128</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00070">guid_</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="GameObjectPool_8ixx_source.html#l00123">acquire()</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00149">addInactive()</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00174">release()</a>, and <a class="el" href="GameObjectPool_8ixx_source.html#l00215">releaseAndRemove()</a>.</p>
-<div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-4-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_a2589e780d738d2a5f2c6d2a47a19abc7_icgraph.svg" width="484" height="302"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00095">guid_</a>.</p>
 
 </div>
 </div>
@@ -402,22 +407,86 @@ const <a class="el" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</
 <p>Returns the number of inactive game objects. </p>
 <dl class="section return"><dt>Returns</dt><dd>The number of inactive game objects. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00253">253</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00343">343</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00059">inactiveGameObjects_</a>.</p>
+<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00070">inactiveGameObjects_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="GameObjectPool_8ixx_source.html#l00149">addInactive()</a>.</p>
-<div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="GameObjectPool_8ixx_source.html#l00209">addInactive()</a>.</p>
+<div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div id="dynsection-3-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_a0a2c82c68a0214cf96b7b627c53d4716_icgraph.svg" width="448" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
-<a id="aaba699ebdbc101329c7324addd9afe38" name="aaba699ebdbc101329c7324addd9afe38"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaba699ebdbc101329c7324addd9afe38">&#9670;&#160;</a></span>release()</h2>
+<a id="a2bf3122d7e7e1aa9b3efaa0aec649b72" name="a2bf3122d7e7e1aa9b3efaa0aec649b72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bf3122d7e7e1aa9b3efaa0aec649b72">&#9670;&#160;</a></span>isLocked()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::engine::runtime::pooling::GameObjectPool::isLocked </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if the pool is locked. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if the pool is locked and ready for acquire/release operations. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00182">182</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00100">locked_</a>.</p>
+
+</div>
+</div>
+<a id="a2817bb4defc54943a118fc6195d6af99" name="a2817bb4defc54943a118fc6195d6af99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2817bb4defc54943a118fc6195d6af99">&#9670;&#160;</a></span>lock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::engine::runtime::pooling::GameObjectPool::lock </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Locks the pool for acquire/release operations. </p>
+<p>After locking, no more EntityHandles can be added via `addInactive()`. The sparse arrays are sized based on the min/max EntityIds added. </p>
+
+<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00192">192</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00053">activeIndex_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00090">delta_</a>, <a class="el" href="EntityTombstone_8ixx_source.html#l00026">helios::engine::core::data::EntityTombstone</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00100">locked_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00085">maxEntityId_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00080">minEntityId_</a>, and <a class="el" href="GameObjectPool_8ixx_source.html#l00060">versionIndex_</a>.</p>
+
+</div>
+</div>
+<a id="a71d483b2b0a17fbfa498bdbc73a69308" name="a71d483b2b0a17fbfa498bdbc73a69308"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71d483b2b0a17fbfa498bdbc73a69308">&#9670;&#160;</a></span>release()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -428,7 +497,7 @@ const <a class="el" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</
         <tr>
           <td class="memname">bool helios::engine::runtime::pooling::GameObjectPool::release </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>guid</em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a></td>          <td class="paramname"><span class="paramname"><em>entityHandle</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -439,30 +508,30 @@ const <a class="el" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</
 </table>
 </div><div class="memdoc">
 
-<p>Releases a GameObject back to the pool by its Guid. </p>
-<p>Validates the Guid against both the GameWorld and the active tracking list. Uses swap-and-pop for O(1) removal from the active list. The object is marked inactive and added to the inactive list for future acquisition.</p>
+<p>Releases a GameObject back to the pool by its EntityHandle. </p>
+<p>Validates the EntityHandle against both the GameWorld and the active tracking list. Uses swap-and-pop for O(1) removal from the active list. The object is marked inactive and added to the inactive list for future acquisition.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">guid</td><td>The unique identifier of the GameObject to release.</td></tr>
+    <tr><td class="paramname">entityHandle</td><td>The unique identifier of the GameObject to release.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>True if the object was successfully released, false if the Guid was not found in the GameWorld or not tracked as active. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the object was successfully released, false if the EntityHandle was not found in the GameWorld or not tracked as active. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00174">174</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00242">242</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00054">activeGameObjects_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00049">activeIndex_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00099">guid()</a>, and <a class="el" href="GameObjectPool_8ixx_source.html#l00059">inactiveGameObjects_</a>.</p>
-<div id="dynsection-6" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00065">activeGameObjects_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00053">activeIndex_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00090">delta_</a>, <a class="el" href="EntityHandle_8ixx_source.html#l00032">helios::engine::ecs::EntityHandle::entityId</a>, <a class="el" href="EntityTombstone_8ixx_source.html#l00026">helios::engine::core::data::EntityTombstone</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00070">inactiveGameObjects_</a>, <a class="el" href="EntityHandle_8ixx_source.html#l00073">helios::engine::ecs::EntityHandle::isValid()</a>, <a class="el" href="EntityHandle_8ixx_source.html#l00039">helios::engine::ecs::EntityHandle::versionId</a>, and <a class="el" href="GameObjectPool_8ixx_source.html#l00060">versionIndex_</a>.</p>
+<div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-6-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_aaba699ebdbc101329c7324addd9afe38_cgraph.svg" width="484" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-4-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_a71d483b2b0a17fbfa498bdbc73a69308_cgraph.svg" width="419" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
-<a id="a5fc0afe6ecd0e0d923fd294496f1115e" name="a5fc0afe6ecd0e0d923fd294496f1115e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5fc0afe6ecd0e0d923fd294496f1115e">&#9670;&#160;</a></span>releaseAndRemove()</h2>
+<a id="ab70bf12552324d87248d5a42cbc239e1" name="ab70bf12552324d87248d5a42cbc239e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab70bf12552324d87248d5a42cbc239e1">&#9670;&#160;</a></span>releaseAndRemove()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -473,7 +542,7 @@ const <a class="el" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</
         <tr>
           <td class="memname">bool helios::engine::runtime::pooling::GameObjectPool::releaseAndRemove </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>guid</em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a></td>          <td class="paramname"><span class="paramname"><em>entityHandle</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -485,23 +554,23 @@ const <a class="el" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</
 </div><div class="memdoc">
 
 <p>Releases and permanently removes a GameObject from the pool. </p>
-<p>Unlike `release()`, this method does not add the Guid back to the inactive list. Use this when a pooled object is being destroyed rather than recycled.</p>
+<p>Unlike `release()`, this method does not add the EntityHandle back to the inactive list. Use this when a pooled object is being destroyed rather than recycled.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">guid</td><td>The unique identifier of the GameObject to remove.</td></tr>
+    <tr><td class="paramname">entityHandle</td><td>The unique identifier of the GameObject to remove.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>True if removed successfully, false if Guid was not active. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>True if removed successfully, false if EntityHandle was not active. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00215">215</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00296">296</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00054">activeGameObjects_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00049">activeIndex_</a>, and <a class="el" href="GameObjectPool_8ixx_source.html#l00099">guid()</a>.</p>
-<div id="dynsection-7" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00065">activeGameObjects_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00053">activeIndex_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00090">delta_</a>, <a class="el" href="EntityHandle_8ixx_source.html#l00032">helios::engine::ecs::EntityHandle::entityId</a>, <a class="el" href="EntityTombstone_8ixx_source.html#l00026">helios::engine::core::data::EntityTombstone</a>, <a class="el" href="EntityHandle_8ixx_source.html#l00073">helios::engine::ecs::EntityHandle::isValid()</a>, <a class="el" href="EntityHandle_8ixx_source.html#l00039">helios::engine::ecs::EntityHandle::versionId</a>, and <a class="el" href="GameObjectPool_8ixx_source.html#l00060">versionIndex_</a>.</p>
+<div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-7-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_a5fc0afe6ecd0e0d923fd294496f1115e_cgraph.svg" width="484" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_ab70bf12552324d87248d5a42cbc239e1_cgraph.svg" width="419" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -532,15 +601,15 @@ const <a class="el" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</
 <p>Returns the maximum capacity of this pool. </p>
 <dl class="section return"><dt>Returns</dt><dd>The pool size specified at construction. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00108">108</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00137">137</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00064">poolSize_</a>.</p>
+<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00075">poolSize_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="GameObjectPool_8ixx_source.html#l00149">addInactive()</a>.</p>
-<div id="dynsection-8" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="GameObjectPool_8ixx_source.html#l00209">addInactive()</a>.</p>
+<div id="dynsection-6" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-8-content" class="dyncontent" style="display:none;">
+<div id="dynsection-6-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_a81b5e2ed58b5db8445480bcd458db5c7_icgraph.svg" width="483" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 

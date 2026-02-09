@@ -93,7 +93,7 @@
     </briefdescription>
     <detaileddescription>
 <para>Components implementing this interface will have their <ref refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1ad3d6efe1251fc1784c5e55386fa8e8f7" kindref="member">update()</ref> method called each frame by the owning <ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">GameObject</ref>. This enables frame-dependent behaviors such as physics simulation, animation, and input processing.</para>
-<para>Example implementation: ```cpp class PhysicsComponent : public <ref refid="classhelios_1_1engine_1_1ecs_1_1Component" kindref="compound">Component</ref>, public <ref refid="classhelios_1_1engine_1_1ecs_1_1Updatable" kindref="compound">Updatable</ref> { public: void update(UpdateContext&amp; ctx) noexcept override { velocity_ += gravity_ * ctx.deltaTime; position_ += velocity_ * ctx.deltaTime; } }; ```</para>
+<para>Example implementation: ```cpp class PhysicsComponent : public Component, public <ref refid="classhelios_1_1engine_1_1ecs_1_1Updatable" kindref="compound">Updatable</ref> { public: void update(UpdateContext&amp; ctx) noexcept override { velocity_ += gravity_ * ctx.deltaTime; position_ += velocity_ * ctx.deltaTime; } }; ```</para>
 <para><simplesect kind="note"><para>Implementations must be noexcept to prevent exceptions from propagating during the game loop. </para>
 </simplesect>
 </para>

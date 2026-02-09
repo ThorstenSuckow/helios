@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="concepthelios_1_1engine_1_1ecs_1_1traits_1_1HasOnAcquire" kind="concept">
+    <compoundname>helios::engine::ecs::traits::HasOnAcquire</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;typename T&gt;
+concept <ref refid="concepthelios_1_1engine_1_1ecs_1_1traits_1_1HasOnAcquire" kindref="compound">helios::engine::ecs::traits::HasOnAcquire</ref> =  requires(T t) {
+        {t.onAcquire()} -&gt; std::same_as&lt;void&gt;;
+    }    </initializer>
+    <briefdescription>
+<para>Called when this GameObject is acquired from a pool. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Notifies all attached components by calling their `onAcquire()` method. Used by the pool system to reset or initialize component state before reuse.</para>
+<para><simplesect kind="see"><para>GameObjectPool </para>
+</simplesect>
+<simplesect kind="see"><para>Component::onAcquire </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/ecs/Traits.ixx" line="54" column="5"/>
+  </compounddef>
+</doxygen>

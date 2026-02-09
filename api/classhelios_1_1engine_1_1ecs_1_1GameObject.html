@@ -107,123 +107,73 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Base class for interactive game entities with component-based composition.  
+<p>Lightweight facade for entity component manipulation.  
  <a href="#details">More...</a></p>
-<div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Collaboration diagram for helios::engine::ecs::GameObject:</div>
-<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject__coll__graph.svg" width="154" height="147"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a67619a0697c23f6fdb970e83fb83a4cd" id="r_a67619a0697c23f6fdb970e83fb83a4cd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a67619a0697c23f6fdb970e83fb83a4cd">GameObject</a> ()</td></tr>
-<tr class="memdesc:a67619a0697c23f6fdb970e83fb83a4cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a> with a unique Guid.  <br /></td></tr>
-<tr class="memitem:ad18c1f425a24a178414fb56ac012d03a" id="r_ad18c1f425a24a178414fb56ac012d03a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad18c1f425a24a178414fb56ac012d03a">GameObject</a> (bool <a class="el" href="#a0d1cba81608678222f4e81d3d40d5c74">isActive</a>)</td></tr>
-<tr class="memdesc:ad18c1f425a24a178414fb56ac012d03a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a> with a specified active state.  <br /></td></tr>
-<tr class="memitem:a83bc07b9e583dc3550797320af914d3f" id="r_a83bc07b9e583dc3550797320af914d3f"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a83bc07b9e583dc3550797320af914d3f">~GameObject</a> ()=default</td></tr>
-<tr class="memdesc:a83bc07b9e583dc3550797320af914d3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor for proper polymorphic cleanup.  <br /></td></tr>
-<tr class="memitem:a4ab506f41218f4f1c4c6fad4252c4513" id="r_a4ab506f41218f4f1c4c6fad4252c4513"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... Args&gt; </td></tr>
-<tr class="memitem:a4ab506f41218f4f1c4c6fad4252c4513 template"><td class="memItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4ab506f41218f4f1c4c6fad4252c4513">add</a> (Args &amp;&amp;... args)</td></tr>
-<tr class="memdesc:a4ab506f41218f4f1c4c6fad4252c4513"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a new component of type T to the <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a>.  <br /></td></tr>
-<tr class="memitem:a0840c3e851ec591e4b1267de0f61b361" id="r_a0840c3e851ec591e4b1267de0f61b361"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1engine_1_1ecs_1_1Component.html">helios::engine::ecs::Component</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0840c3e851ec591e4b1267de0f61b361">getOrAdd</a> (std::unique_ptr&lt; <a class="el" href="classhelios_1_1engine_1_1ecs_1_1Component.html">helios::engine::ecs::Component</a> &gt; component)</td></tr>
-<tr class="memdesc:a0840c3e851ec591e4b1267de0f61b361"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a pre-constructed component if no component of the same type exists.  <br /></td></tr>
-<tr class="memitem:a655cf20c81a6aa4155cc67c92bee297f" id="r_a655cf20c81a6aa4155cc67c92bee297f"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... Args&gt; </td></tr>
-<tr class="memitem:a655cf20c81a6aa4155cc67c92bee297f template"><td class="memItemLeft" align="right" valign="top">std::remove_cvref_t&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a655cf20c81a6aa4155cc67c92bee297f">getOrAdd</a> (Args &amp;&amp;... args)</td></tr>
-<tr class="memdesc:a655cf20c81a6aa4155cc67c92bee297f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves an existing component of type T, or creates and adds it if not present.  <br /></td></tr>
-<tr class="memitem:a5b1a6365e062590bf79fa725bb5c046c" id="r_a5b1a6365e062590bf79fa725bb5c046c"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:a5b1a6365e062590bf79fa725bb5c046c template"><td class="memItemLeft" align="right" valign="top">std::remove_cvref_t&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5b1a6365e062590bf79fa725bb5c046c">get</a> () const</td></tr>
-<tr class="memdesc:a5b1a6365e062590bf79fa725bb5c046c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves a component of type T.  <br /></td></tr>
-<tr class="memitem:ae60970e5d215c256f4ee31f6149b55e7" id="r_ae60970e5d215c256f4ee31f6149b55e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1engine_1_1ecs_1_1Component.html">helios::engine::ecs::Component</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae60970e5d215c256f4ee31f6149b55e7">get</a> (const <a class="el" href="#aab62fcfd969fc1bd71f0d81107527c42">ComponentTypeId</a> componentTypeId) const noexcept</td></tr>
-<tr class="memdesc:ae60970e5d215c256f4ee31f6149b55e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves a component by its runtime <a class="el" href="#aab62fcfd969fc1bd71f0d81107527c42">ComponentTypeId</a>.  <br /></td></tr>
-<tr class="memitem:aba3072484b3be880210479a0b9ca0b87" id="r_aba3072484b3be880210479a0b9ca0b87"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aba3072484b3be880210479a0b9ca0b87">has</a> (const <a class="el" href="#aab62fcfd969fc1bd71f0d81107527c42">ComponentTypeId</a> componentTypeId) const noexcept</td></tr>
-<tr class="memdesc:aba3072484b3be880210479a0b9ca0b87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a component with the given type ID exists.  <br /></td></tr>
-<tr class="memitem:ab4e448bf2d5737d628e89bc4182e8584" id="r_ab4e448bf2d5737d628e89bc4182e8584"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:ab4e448bf2d5737d628e89bc4182e8584 template"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab4e448bf2d5737d628e89bc4182e8584">has</a> () const</td></tr>
-<tr class="memdesc:ab4e448bf2d5737d628e89bc4182e8584"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a> has a component of type T.  <br /></td></tr>
-<tr class="memitem:ad0c91ea72c3c793aa20011a49eccc17d" id="r_ad0c91ea72c3c793aa20011a49eccc17d"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:ad0c91ea72c3c793aa20011a49eccc17d template"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad0c91ea72c3c793aa20011a49eccc17d">hasEnabledComponent</a> () const</td></tr>
-<tr class="memdesc:ad0c91ea72c3c793aa20011a49eccc17d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a> has a component of type T and returns true if this component is enabled.  <br /></td></tr>
-<tr class="memitem:acc58902b41ca07f6d6044eea959824b6" id="r_acc58902b41ca07f6d6044eea959824b6"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:acc58902b41ca07f6d6044eea959824b6 template"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acc58902b41ca07f6d6044eea959824b6">hasDisabledComponent</a> () const</td></tr>
-<tr class="memdesc:acc58902b41ca07f6d6044eea959824b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a> has a component of type T and returns true if this component is disabled.  <br /></td></tr>
-<tr class="memitem:a3674dd45d53436ffeaf50ee266e9f101" id="r_a3674dd45d53436ffeaf50ee266e9f101"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3674dd45d53436ffeaf50ee266e9f101">guid</a> () const noexcept</td></tr>
-<tr class="memdesc:a3674dd45d53436ffeaf50ee266e9f101"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the unique identifier for this <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a>.  <br /></td></tr>
-<tr class="memitem:a0d1cba81608678222f4e81d3d40d5c74" id="r_a0d1cba81608678222f4e81d3d40d5c74"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d1cba81608678222f4e81d3d40d5c74">isActive</a> () const noexcept</td></tr>
-<tr class="memdesc:a0d1cba81608678222f4e81d3d40d5c74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a> is currently active.  <br /></td></tr>
-<tr class="memitem:abbd2af79a07146f78163fe1483097d94" id="r_abbd2af79a07146f78163fe1483097d94"><td class="memItemLeft" align="right" valign="top">std::span&lt; <a class="el" href="classhelios_1_1engine_1_1ecs_1_1Component.html">helios::engine::ecs::Component</a> *const &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abbd2af79a07146f78163fe1483097d94">components</a> () noexcept</td></tr>
-<tr class="memdesc:abbd2af79a07146f78163fe1483097d94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a span over all attached (non-null) components.  <br /></td></tr>
-<tr class="memitem:adac0befd71d8db8cbfe3d42a1aac1d0e" id="r_adac0befd71d8db8cbfe3d42a1aac1d0e"><td class="memItemLeft" align="right" valign="top">std::span&lt; const <a class="el" href="classhelios_1_1engine_1_1ecs_1_1Component.html">helios::engine::ecs::Component</a> *const &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adac0befd71d8db8cbfe3d42a1aac1d0e">components</a> () const noexcept</td></tr>
-<tr class="memdesc:adac0befd71d8db8cbfe3d42a1aac1d0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a const span over all attached (non-null) components.  <br /></td></tr>
-<tr class="memitem:a72a9d3833a1ae1464dab535bce3166ed" id="r_a72a9d3833a1ae1464dab535bce3166ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a72a9d3833a1ae1464dab535bce3166ed">setActive</a> (bool active) noexcept</td></tr>
-<tr class="memdesc:a72a9d3833a1ae1464dab535bce3166ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the active state of this <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a>.  <br /></td></tr>
-<tr class="memitem:ad1a7a9e6853925618d4aa9170409f072" id="r_ad1a7a9e6853925618d4aa9170409f072"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad1a7a9e6853925618d4aa9170409f072">onAcquire</a> ()</td></tr>
-<tr class="memdesc:ad1a7a9e6853925618d4aa9170409f072"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when this <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a> is acquired from a pool.  <br /></td></tr>
+<tr class="memitem:a1f382e1049da10b3c07f6d05e4424a6b" id="r_a1f382e1049da10b3c07f6d05e4424a6b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1f382e1049da10b3c07f6d05e4424a6b">GameObject</a> (const <a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a> <a class="el" href="#abd1f621c0ff1399530712ee7facfe02a">entityHandle</a>, <a class="el" href="classhelios_1_1engine_1_1ecs_1_1EntityManager.html">helios::engine::ecs::EntityManager</a> *entityManager) noexcept</td></tr>
+<tr class="memdesc:a1f382e1049da10b3c07f6d05e4424a6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Lightweight facade for entity component manipulation.">GameObject</a> wrapper.  <br /></td></tr>
+<tr class="memitem:a4f04eb1029e742649a0018361b0ff7b2" id="r_a4f04eb1029e742649a0018361b0ff7b2"><td class="memItemLeft" align="right" valign="top">std::generator&lt; <a class="el" href="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId.html">helios::engine::core::data::ComponentTypeId</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4f04eb1029e742649a0018361b0ff7b2">componentTypeIds</a> () const</td></tr>
+<tr class="memdesc:a4f04eb1029e742649a0018361b0ff7b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a generator over all component type IDs attached to this entity.  <br /></td></tr>
+<tr class="memitem:abd1f621c0ff1399530712ee7facfe02a" id="r_abd1f621c0ff1399530712ee7facfe02a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abd1f621c0ff1399530712ee7facfe02a">entityHandle</a> () noexcept</td></tr>
+<tr class="memdesc:abd1f621c0ff1399530712ee7facfe02a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the underlying entity handle.  <br /></td></tr>
+<tr class="memitem:a7135aa7138d11abfe995def238555b1d" id="r_a7135aa7138d11abfe995def238555b1d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7135aa7138d11abfe995def238555b1d">entityHandle</a> () const noexcept</td></tr>
+<tr class="memdesc:a7135aa7138d11abfe995def238555b1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the underlying entity handle (const).  <br /></td></tr>
+<tr class="memitem:a0447ff56cdd329a2db5436096f8353ae" id="r_a0447ff56cdd329a2db5436096f8353ae"><td class="memTemplParams" colspan="2">template&lt;typename T, typename ... Args&gt; </td></tr>
+<tr class="memitem:a0447ff56cdd329a2db5436096f8353ae template"><td class="memItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0447ff56cdd329a2db5436096f8353ae">add</a> (Args &amp;&amp;...args)</td></tr>
+<tr class="memdesc:a0447ff56cdd329a2db5436096f8353ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs and attaches a component to this entity.  <br /></td></tr>
+<tr class="memitem:ad6fbab6897f2899f0e6f98c37ba294e8" id="r_ad6fbab6897f2899f0e6f98c37ba294e8"><td class="memTemplParams" colspan="2">template&lt;typename T, typename ... Args&gt; </td></tr>
+<tr class="memitem:ad6fbab6897f2899f0e6f98c37ba294e8 template"><td class="memItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad6fbab6897f2899f0e6f98c37ba294e8">getOrAdd</a> (Args &amp;&amp;...args)</td></tr>
+<tr class="memdesc:ad6fbab6897f2899f0e6f98c37ba294e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns existing component or creates a new one.  <br /></td></tr>
+<tr class="memitem:ab1c1f6b81c4965b76967c29a6af7f713" id="r_ab1c1f6b81c4965b76967c29a6af7f713"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab1c1f6b81c4965b76967c29a6af7f713">raw</a> (const <a class="el" href="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId.html">helios::engine::core::data::ComponentTypeId</a> typeId)</td></tr>
+<tr class="memdesc:ab1c1f6b81c4965b76967c29a6af7f713"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns raw pointer to component by type ID.  <br /></td></tr>
+<tr class="memitem:a2229cd5bbcce0a3504519ed979ccdeb7" id="r_a2229cd5bbcce0a3504519ed979ccdeb7"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a2229cd5bbcce0a3504519ed979ccdeb7 template"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2229cd5bbcce0a3504519ed979ccdeb7">get</a> ()</td></tr>
+<tr class="memdesc:a2229cd5bbcce0a3504519ed979ccdeb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns pointer to a component.  <br /></td></tr>
+<tr class="memitem:a2afb01851bc29d6f5d69b0e13a448dce" id="r_a2afb01851bc29d6f5d69b0e13a448dce"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a2afb01851bc29d6f5d69b0e13a448dce template"><td class="memItemLeft" align="right" valign="top">const T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2afb01851bc29d6f5d69b0e13a448dce">get</a> () const</td></tr>
+<tr class="memdesc:a2afb01851bc29d6f5d69b0e13a448dce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns const pointer to a component.  <br /></td></tr>
+<tr class="memitem:a48e5d5ad5f29072db8f736628d57103c" id="r_a48e5d5ad5f29072db8f736628d57103c"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a48e5d5ad5f29072db8f736628d57103c template"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a48e5d5ad5f29072db8f736628d57103c">has</a> ()</td></tr>
+<tr class="memdesc:a48e5d5ad5f29072db8f736628d57103c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this entity has a specific component type.  <br /></td></tr>
+<tr class="memitem:ab81181f32386dacc35659869c317da9f" id="r_ab81181f32386dacc35659869c317da9f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab81181f32386dacc35659869c317da9f">has</a> (<a class="el" href="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId.html">helios::engine::core::data::ComponentTypeId</a> typeId)</td></tr>
+<tr class="memdesc:ab81181f32386dacc35659869c317da9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this entity has a component by type ID.  <br /></td></tr>
+<tr class="memitem:a7f52a024349c472966d8d16c102b0cb0" id="r_a7f52a024349c472966d8d16c102b0cb0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7f52a024349c472966d8d16c102b0cb0">enableComponent</a> (const <a class="el" href="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId.html">helios::engine::core::data::ComponentTypeId</a> typeId)</td></tr>
+<tr class="memdesc:a7f52a024349c472966d8d16c102b0cb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables a specific component by type ID.  <br /></td></tr>
+<tr class="memitem:aaf8a34b2fb8daed88c1d363dd82eb81f" id="r_aaf8a34b2fb8daed88c1d363dd82eb81f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaf8a34b2fb8daed88c1d363dd82eb81f">disableComponent</a> (const <a class="el" href="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId.html">helios::engine::core::data::ComponentTypeId</a> typeId)</td></tr>
+<tr class="memdesc:aaf8a34b2fb8daed88c1d363dd82eb81f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disables a specific component by type ID.  <br /></td></tr>
+<tr class="memitem:a5b86c188307f1f2e8500509708d60d93" id="r_a5b86c188307f1f2e8500509708d60d93"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5b86c188307f1f2e8500509708d60d93">setActive</a> (const bool active)</td></tr>
+<tr class="memdesc:a5b86c188307f1f2e8500509708d60d93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the activation state of this <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Lightweight facade for entity component manipulation.">GameObject</a>.  <br /></td></tr>
+<tr class="memitem:a3b2fdacd0144acb72a94f1c541bf9e99" id="r_a3b2fdacd0144acb72a94f1c541bf9e99"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3b2fdacd0144acb72a94f1c541bf9e99">isActive</a> () const</td></tr>
+<tr class="memdesc:a3b2fdacd0144acb72a94f1c541bf9e99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether this <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Lightweight facade for entity component manipulation.">GameObject</a> is active.  <br /></td></tr>
 <tr class="memitem:a2a7b9dc93c0a360e83ed33534742b7ae" id="r_a2a7b9dc93c0a360e83ed33534742b7ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2a7b9dc93c0a360e83ed33534742b7ae">onRelease</a> ()</td></tr>
-<tr class="memdesc:a2a7b9dc93c0a360e83ed33534742b7ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when this <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a> is released back to a pool.  <br /></td></tr>
-<tr class="memitem:af7ff904acd77051dd3f36b3a773ad797" id="r_af7ff904acd77051dd3f36b3a773ad797"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af7ff904acd77051dd3f36b3a773ad797">finalizeAttach</a> (<a class="el" href="classhelios_1_1engine_1_1ecs_1_1Component.html">helios::engine::ecs::Component</a> *component=nullptr)</td></tr>
-<tr class="memdesc:af7ff904acd77051dd3f36b3a773ad797"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finalizes attachment of components by calling lifecycle callbacks.  <br /></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-pro-types" class="groupheader"><a id="pro-types" name="pro-types"></a>
-Protected Types</h2></td></tr>
-<tr class="memitem:aab62fcfd969fc1bd71f0d81107527c42" id="r_aab62fcfd969fc1bd71f0d81107527c42"><td class="memItemLeft" align="right" valign="top"><a id="aab62fcfd969fc1bd71f0d81107527c42" name="aab62fcfd969fc1bd71f0d81107527c42"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>ComponentTypeId</b> = <a class="el" href="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId.html">helios::engine::core::data::ComponentTypeId</a></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:a67673dcd1782395361f022ca5a3a791f" id="r_a67673dcd1782395361f022ca5a3a791f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a67673dcd1782395361f022ca5a3a791f">invalidateCache</a> () noexcept</td></tr>
-<tr class="memdesc:a67673dcd1782395361f022ca5a3a791f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invalidates the component cache, forcing a rebuild on next access.  <br /></td></tr>
-<tr class="memitem:abe645224202704dffec3bfaebae4321d" id="r_abe645224202704dffec3bfaebae4321d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abe645224202704dffec3bfaebae4321d">updateCache</a> () const</td></tr>
-<tr class="memdesc:abe645224202704dffec3bfaebae4321d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rebuilds the component cache if invalidated.  <br /></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:a95fda7c8eefc7d517e8571c764b7cc56" id="r_a95fda7c8eefc7d517e8571c764b7cc56"><td class="memItemLeft" align="right" valign="top"><a id="a95fda7c8eefc7d517e8571c764b7cc56" name="a95fda7c8eefc7d517e8571c764b7cc56"></a>
-<a class="el" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</a>&#160;</td><td class="memItemRight" valign="bottom"><b>guid_</b></td></tr>
-<tr class="memdesc:a95fda7c8eefc7d517e8571c764b7cc56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unique identifier for this <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a>. <br /></td></tr>
-<tr class="memitem:a26a0b28c4411f1e8e1cf316f2aabad5d" id="r_a26a0b28c4411f1e8e1cf316f2aabad5d"><td class="memItemLeft" align="right" valign="top"><a id="a26a0b28c4411f1e8e1cf316f2aabad5d" name="a26a0b28c4411f1e8e1cf316f2aabad5d"></a>
-std::vector&lt; std::unique_ptr&lt; <a class="el" href="classhelios_1_1engine_1_1ecs_1_1Component.html">Component</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>components_</b></td></tr>
-<tr class="memdesc:a26a0b28c4411f1e8e1cf316f2aabad5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-indexed storage for components attached to this <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a>. <br /></td></tr>
-<tr class="memitem:ab96332cd723532c33d3586df4e6c43e1" id="r_ab96332cd723532c33d3586df4e6c43e1"><td class="memItemLeft" align="right" valign="top"><a id="ab96332cd723532c33d3586df4e6c43e1" name="ab96332cd723532c33d3586df4e6c43e1"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true</td></tr>
-<tr class="memdesc:ab96332cd723532c33d3586df4e6c43e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Active state flag for this <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a>. <br /></td></tr>
-<tr class="memitem:a828332bafbc8ccde55c63da519e32d19" id="r_a828332bafbc8ccde55c63da519e32d19"><td class="memItemLeft" align="right" valign="top"><a id="a828332bafbc8ccde55c63da519e32d19" name="a828332bafbc8ccde55c63da519e32d19"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>needsUpdate_</b> = true</td></tr>
-<tr class="memdesc:a828332bafbc8ccde55c63da519e32d19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag indicating whether the component cache needs to be rebuilt. <br /></td></tr>
-<tr class="memitem:aab2e552e23fcc7c0744b425e65505d3a" id="r_aab2e552e23fcc7c0744b425e65505d3a"><td class="memItemLeft" align="right" valign="top"><a id="aab2e552e23fcc7c0744b425e65505d3a" name="aab2e552e23fcc7c0744b425e65505d3a"></a>
-std::vector&lt; <a class="el" href="classhelios_1_1engine_1_1ecs_1_1Component.html">helios::engine::ecs::Component</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>componentView_</b></td></tr>
-<tr class="memdesc:aab2e552e23fcc7c0744b425e65505d3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cached view of non-null component pointers for mutable access. <br /></td></tr>
-<tr class="memitem:a50b052cfbf2cddcfbfbb1931e8a34847" id="r_a50b052cfbf2cddcfbfbb1931e8a34847"><td class="memItemLeft" align="right" valign="top"><a id="a50b052cfbf2cddcfbfbb1931e8a34847" name="a50b052cfbf2cddcfbfbb1931e8a34847"></a>
-std::vector&lt; const <a class="el" href="classhelios_1_1engine_1_1ecs_1_1Component.html">helios::engine::ecs::Component</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>componentConstView_</b></td></tr>
-<tr class="memdesc:a50b052cfbf2cddcfbfbb1931e8a34847"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cached view of non-null component pointers for const access. <br /></td></tr>
+<tr class="memdesc:a2a7b9dc93c0a360e83ed33534742b7ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notifies all components that the entity is being released to a pool.  <br /></td></tr>
+<tr class="memitem:ad1a7a9e6853925618d4aa9170409f072" id="r_ad1a7a9e6853925618d4aa9170409f072"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad1a7a9e6853925618d4aa9170409f072">onAcquire</a> ()</td></tr>
+<tr class="memdesc:ad1a7a9e6853925618d4aa9170409f072"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notifies all components that the entity is being acquired from a pool.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Base class for interactive game entities with component-based composition. </p>
-<p><a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a> serves as the fundamental building block for all interactive entities in the helios engine. It provides a type-indexed component storage system that enables O(1) component access and modification.</p>
-<p>**Component Storage Architecture:** Components are stored in a vector indexed by `ComponentTypeId`. Each component type receives a unique compile-time ID, which determines its position in the storage vector. This approach trades memory (sparse vector with nullptr slots) for speed (direct indexing without hashing).</p>
-<p>**Lifecycle Management:** The <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a> manages component lifecycles through callbacks:</p><ul>
-<li>`onAttach()` - Called when a component is added.</li>
-<li>`onActivate()` / `onDeactivate()` - Called when the <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a>'s active state changes.</li>
-<li>`onAcquire()` / `onRelease()` - Called during pool-based lifecycle management.</li>
-</ul>
-<p>**Storage Model:** Components are stored in a `std::vector&lt;std::unique_ptr&lt;Component&gt;&gt;` where the index corresponds to the component's `ComponentTypeId::value()`. The vector is resized on demand when new component types are added. Slots for component types that are not attached to this <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a> remain nullptr.</p>
-<p>**Performance Characteristics:**</p><ul>
-<li>`get&lt;T&gt;()`: O(1) - Direct array access via type ID.</li>
-<li>`has&lt;T&gt;()`: O(1) - Bounds check + nullptr check.</li>
-<li>`add&lt;T&gt;()`: O(1) amortized - May trigger resize if type ID exceeds current capacity.</li>
-<li>`components()`: O(n) on first call after modification (cache rebuild), O(1) thereafter.</li>
-</ul>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1ecs_1_1Component.html" title="Abstract base class for components attached to GameObjects.">Component</a> </dd>
+<div class="textblock"><p>Lightweight facade for entity component manipulation. </p>
+<p>`GameObject` provides a type-safe, convenient interface for working with entities and their components. It wraps an `EntityHandle` and a pointer to the `EntityManager`, delegating all operations.</p>
+<p>## Size and Copy Semantics</p>
+<p><a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Lightweight facade for entity component manipulation.">GameObject</a> is only 16 bytes (8 bytes <a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html" title="A versioned handle for referencing entities in an EntityPool.">EntityHandle</a> + 8 bytes pointer) and should be **passed by value**, not by reference:</p>
+<p>```cpp // Correct - pass by value void processEntity(GameObject entity) { ... }</p>
+<p>// Unnecessary - reference adds indirection void processEntity(GameObject&amp; entity); // Avoid void processEntity(const GameObject&amp; entity); // Avoid ```</p>
+<p>## Usage</p>
+<p>```cpp auto player = gameWorld.addGameObject();</p>
+<p>// Add components player.add&lt;TransformComponent&gt;(position); player.add&lt;HealthComponent&gt;(100.0f);</p>
+<p>// Query and access if (player.has&lt;HealthComponent&gt;()) { player.get&lt;HealthComponent&gt;()-&gt;takeDamage(10.0f); }</p>
+<p>// Activation state player.setActive(false); // Calls onDeactivate() on components ```</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html" title="A versioned handle for referencing entities in an EntityPool.">EntityHandle</a> </dd>
 <dd>
-GameWorld </dd>
+<a class="el" href="classhelios_1_1engine_1_1ecs_1_1EntityManager.html" title="Manages entities and their associated components.">EntityManager</a> </dd>
 <dd>
-GameObjectPool </dd></dl>
+GameWorld </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00060">60</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00077">77</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a67619a0697c23f6fdb970e83fb83a4cd" name="a67619a0697c23f6fdb970e83fb83a4cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a67619a0697c23f6fdb970e83fb83a4cd">&#9670;&#160;</a></span>GameObject() <span class="overload">[1/2]</span></h2>
+<a id="a1f382e1049da10b3c07f6d05e4424a6b" name="a1f382e1049da10b3c07f6d05e4424a6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f382e1049da10b3c07f6d05e4424a6b">&#9670;&#160;</a></span>GameObject()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -234,104 +184,50 @@ GameObjectPool </dd></dl>
         <tr>
           <td class="memname">helios::engine::ecs::GameObject::GameObject </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
+          <td class="paramtype">const <a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a></td>          <td class="paramname"><span class="paramname"><em>entityHandle</em></span>, </td>
         </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Constructs a new <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a> with a unique Guid. </p>
-<p>The Guid is automatically generated and remains constant for the lifetime of this object. </p>
-
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00165">165</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
-
-<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00072">guid_</a>.</p>
-
-</div>
-</div>
-<a id="ad18c1f425a24a178414fb56ac012d03a" name="ad18c1f425a24a178414fb56ac012d03a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad18c1f425a24a178414fb56ac012d03a">&#9670;&#160;</a></span>GameObject() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
         <tr>
-          <td class="memname">helios::engine::ecs::GameObject::GameObject </td>
-          <td>(</td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>isActive</em></span></td><td>)</td>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1engine_1_1ecs_1_1EntityManager.html">helios::engine::ecs::EntityManager</a> *</td>          <td class="paramname"><span class="paramname"><em>entityManager</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel export">export</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs a new <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a> with a specified active state. </p>
+<p>Constructs a <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Lightweight facade for entity component manipulation.">GameObject</a> wrapper. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">isActive</td><td>Initial active state. If false, the object starts inactive. </td></tr>
+    <tr><td class="paramname">entityHandle</td><td>The entity handle to wrap. </td></tr>
+    <tr><td class="paramname">entityManager</td><td>Pointer to the <a class="el" href="classhelios_1_1engine_1_1ecs_1_1EntityManager.html" title="Manages entities and their associated components.">EntityManager</a>. Must not be null. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00172">172</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00098">98</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00072">guid_</a>, <a class="el" href="GameObject_8ixx_source.html#l00444">isActive()</a>, and <a class="el" href="GameObject_8ixx_source.html#l00095">isActive_</a>.</p>
-<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00121">entityHandle()</a>.</p>
+<div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_ad18c1f425a24a178414fb56ac012d03a_cgraph.svg" width="430" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_a1f382e1049da10b3c07f6d05e4424a6b_cgraph.svg" width="462" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
-
-</div>
-</div>
-<a id="a83bc07b9e583dc3550797320af914d3f" name="a83bc07b9e583dc3550797320af914d3f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a83bc07b9e583dc3550797320af914d3f">&#9670;&#160;</a></span>~GameObject()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual helios::engine::ecs::GameObject::~GameObject </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel virtual">virtual</span><span class="mlabel default">default</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Virtual destructor for proper polymorphic cleanup. </p>
 
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a4ab506f41218f4f1c4c6fad4252c4513" name="a4ab506f41218f4f1c4c6fad4252c4513"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4ab506f41218f4f1c4c6fad4252c4513">&#9670;&#160;</a></span>add()</h2>
+<a id="a0447ff56cdd329a2db5436096f8353ae" name="a0447ff56cdd329a2db5436096f8353ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0447ff56cdd329a2db5436096f8353ae">&#9670;&#160;</a></span>add()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, typename... Args&gt; </div>
+template&lt;typename T, typename ... Args&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -350,48 +246,45 @@ template&lt;typename T, typename... Args&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Adds a new component of type T to the <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a>. </p>
-<p>The component is created in-place, stored at the index corresponding to its `ComponentTypeId`, and attached to this <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a> (`onAttach()` is called). If the type ID exceeds the current vector capacity, the vector is resized.</p>
-<p>**Complexity:** O(1) amortized. Resize operations are O(n) but occur infrequently.</p>
+<p>Constructs and attaches a component to this entity. </p>
+<p>If the entity is active, calls `onActivate()` on the new component. If inactive, calls `onDeactivate()`.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td>The type of component to add. Must derive from <a class="el" href="classhelios_1_1engine_1_1ecs_1_1Component.html" title="Abstract base class for components attached to GameObjects.">Component</a>. </td></tr>
-    <tr><td class="paramname">Args</td><td>Argument types for the component's constructor.</td></tr>
+    <tr><td class="paramname">T</td><td>The component type to add. </td></tr>
+    <tr><td class="paramname">Args</td><td>Constructor argument types.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">args</td><td>Arguments forwarded to the component's constructor.</td></tr>
+    <tr><td class="paramname">args</td><td>Arguments forwarded to the component constructor.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Reference to the newly created component.</dd></dl>
-<dl class="section pre"><dt>Precondition</dt><dd>No component of type T is already attached (asserts in debug mode).</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The component is stored directly at `components_[<a class="el" href="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId.html#ae2b1610edbd9844c96d65f5572fa6db9" title="Gets the ComponentTypeId for a specific component type.">ComponentTypeId::id&lt;T&gt;()</a>.value()]`. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the newly created component. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00200">200</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00148">148</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00087">components_</a>, <a class="el" href="GameObject_8ixx_source.html#l00559">finalizeAttach()</a>, <a class="el" href="GameObject_8ixx_source.html#l00362">has()</a>, <a class="el" href="ComponentTypeId_8ixx_source.html#l00091">helios::engine::core::data::ComponentTypeId::id()</a>, and <a class="el" href="GameObject_8ixx_source.html#l00126">invalidateCache()</a>.</p>
+<p class="reference">References <a class="el" href="ComponentTypeId_8ixx_source.html#l00097">helios::engine::core::data::ComponentTypeId::id()</a>, <a class="el" href="ComponentOpsRegistry_8ixx_source.html#l00082">helios::engine::ecs::ComponentOpsRegistry::ops()</a>, and <a class="el" href="GameObject_8ixx_source.html#l00198">raw()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="GameObject_8ixx_source.html#l00288">getOrAdd()</a>.</p>
-<div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<p class="reference">Referenced by <a class="el" href="GameObject_8ixx_source.html#l00184">getOrAdd()</a>.</p>
+<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_a0447ff56cdd329a2db5436096f8353ae_cgraph.svg" width="648" height="287"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-2-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_a4ab506f41218f4f1c4c6fad4252c4513_cgraph.svg" width="655" height="243"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-3-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_a4ab506f41218f4f1c4c6fad4252c4513_icgraph.svg" width="382" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_a0447ff56cdd329a2db5436096f8353ae_icgraph.svg" width="382" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
-<a id="adac0befd71d8db8cbfe3d42a1aac1d0e" name="adac0befd71d8db8cbfe3d42a1aac1d0e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adac0befd71d8db8cbfe3d42a1aac1d0e">&#9670;&#160;</a></span>components() <span class="overload">[1/2]</span></h2>
+<a id="a4f04eb1029e742649a0018361b0ff7b2" name="a4f04eb1029e742649a0018361b0ff7b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f04eb1029e742649a0018361b0ff7b2">&#9670;&#160;</a></span>componentTypeIds()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -400,144 +293,7 @@ template&lt;typename T, typename... Args&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::span&lt; const <a class="el" href="classhelios_1_1engine_1_1ecs_1_1Component.html">helios::engine::ecs::Component</a> *const  &gt; helios::engine::ecs::GameObject::components </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns a const span over all attached (non-null) components. </p>
-<p>Provides read-only access to a cached, filtered view of components.</p>
-<p>**Complexity:** O(1) if cache is valid, O(n) on first call after modification.</p>
-<dl class="section return"><dt>Returns</dt><dd>Span of non-null component pointers for const access. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00475">475</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
-
-<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00119">componentConstView_</a>, and <a class="el" href="GameObject_8ixx_source.html#l00135">updateCache()</a>.</p>
-<div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-4-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_adac0befd71d8db8cbfe3d42a1aac1d0e_cgraph.svg" width="462" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
-</div>
-</div>
-<a id="abbd2af79a07146f78163fe1483097d94" name="abbd2af79a07146f78163fe1483097d94"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abbd2af79a07146f78163fe1483097d94">&#9670;&#160;</a></span>components() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::span&lt; <a class="el" href="classhelios_1_1engine_1_1ecs_1_1Component.html">helios::engine::ecs::Component</a> *const  &gt; helios::engine::ecs::GameObject::components </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns a span over all attached (non-null) components. </p>
-<p>Provides access to a cached, filtered view of components. The cache is lazily rebuilt when components are added or removed.</p>
-<p>**Complexity:** O(1) if cache is valid, O(n) on first call after modification.</p>
-<dl class="section return"><dt>Returns</dt><dd>Span of non-null component pointers for mutable access.</dd></dl>
-<dl class="section warning"><dt>Warning</dt><dd>Modifying the underlying vector bypasses lifecycle callbacks. Use `add()` for proper component management. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00461">461</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
-
-<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00111">componentView_</a>, and <a class="el" href="GameObject_8ixx_source.html#l00135">updateCache()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="GameWorld_8ixx_source.html#l00523">helios::engine::runtime::world::GameWorld::clone()</a>, and <a class="el" href="DelayedComponentEnablerInitializer_8ixx_source.html#l00097">helios::engine::runtime::spawn::behavior::initializers::DelayedComponentEnablerInitializer&lt; ComponentTypes &gt;::initialize()</a>.</p>
-<div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-5-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_abbd2af79a07146f78163fe1483097d94_cgraph.svg" width="462" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-6" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-6-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_abbd2af79a07146f78163fe1483097d94_icgraph.svg" width="527" height="144"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
-</div>
-</div>
-<a id="af7ff904acd77051dd3f36b3a773ad797" name="af7ff904acd77051dd3f36b3a773ad797"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af7ff904acd77051dd3f36b3a773ad797">&#9670;&#160;</a></span>finalizeAttach()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void helios::engine::ecs::GameObject::finalizeAttach </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classhelios_1_1engine_1_1ecs_1_1Component.html">helios::engine::ecs::Component</a> *</td>          <td class="paramname"><span class="paramname"><em>component</em></span><span class="paramdefsep"> = </span><span class="paramdefval">nullptr</span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Finalizes attachment of components by calling lifecycle callbacks. </p>
-<p>If a specific component is passed, only that component is finalized. Otherwise, all unattached components are finalized. Calls `onAttach()` followed by `onActivate()` or `onDeactivate()` based on the <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a>'s active state.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">component</td><td>Optional pointer to a specific component to finalize. If nullptr, all components are processed. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00559">559</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
-
-<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00087">components_</a>, and <a class="el" href="GameObject_8ixx_source.html#l00095">isActive_</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="GameObject_8ixx_source.html#l00200">add()</a>, and <a class="el" href="GameObject_8ixx_source.html#l00241">getOrAdd()</a>.</p>
-<div id="dynsection-7" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-7-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_af7ff904acd77051dd3f36b3a773ad797_icgraph.svg" width="100%" height="386"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
-
-</div>
-</div>
-<a id="a5b1a6365e062590bf79fa725bb5c046c" name="a5b1a6365e062590bf79fa725bb5c046c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5b1a6365e062590bf79fa725bb5c046c">&#9670;&#160;</a></span>get() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::remove_cvref_t&lt; T &gt; * helios::engine::ecs::GameObject::get </td>
+          <td class="memname">std::generator&lt; <a class="el" href="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId.html">helios::engine::core::data::ComponentTypeId</a> &gt; helios::engine::ecs::GameObject::componentTypeIds </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -550,39 +306,23 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Retrieves a component of type T. </p>
-<p>Performs a direct array access using the component's type ID. If the type ID is out of bounds or the slot is nullptr, returns nullptr.</p>
-<p>**Complexity:** O(1) - Direct index access without hashing.</p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>The type of component to retrieve. cv-qualifiers are stripped.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Pointer to the component if found, nullptr otherwise. </dd></dl>
+<p>Returns a generator over all component type IDs attached to this entity. </p>
+<dl class="section return"><dt>Returns</dt><dd>Generator yielding <a class="el" href="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId.html" title="Unique type identifier for component types.">ComponentTypeId</a> for each attached component. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00311">311</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00112">112</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00087">components_</a>, and <a class="el" href="ComponentTypeId_8ixx_source.html#l00091">helios::engine::core::data::ComponentTypeId::id()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="GameWorld_8ixx_source.html#l00382">helios::engine::runtime::world::GameWorld::addGameObject()</a>, <a class="el" href="GameObject_8ixx_source.html#l00288">getOrAdd()</a>, <a class="el" href="GameObject_8ixx_source.html#l00417">hasDisabledComponent()</a>, <a class="el" href="GameObject_8ixx_source.html#l00397">hasEnabledComponent()</a>, <a class="el" href="DelayedComponentEnablerInitializer_8ixx_source.html#l00097">helios::engine::runtime::spawn::behavior::initializers::DelayedComponentEnablerInitializer&lt; ComponentTypes &gt;::initialize()</a>, <a class="el" href="EmitterInitializer_8ixx_source.html#l00051">helios::engine::runtime::spawn::behavior::initializers::EmitterInitializer::initialize()</a>, and <a class="el" href="RandomDirectionInitializer_8ixx_source.html#l00046">helios::engine::runtime::spawn::behavior::initializers::RandomDirectionInitializer::initialize()</a>.</p>
-<div id="dynsection-8" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="DelayedComponentEnablerInitializer_8ixx_source.html#l00097">helios::engine::runtime::spawn::behavior::initializers::DelayedComponentEnablerInitializer&lt; ComponentTypes &gt;::initialize()</a>, <a class="el" href="GameObject_8ixx_source.html#l00337">onAcquire()</a>, <a class="el" href="GameObject_8ixx_source.html#l00320">onRelease()</a>, and <a class="el" href="GameObject_8ixx_source.html#l00284">setActive()</a>.</p>
+<div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-8-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_a5b1a6365e062590bf79fa725bb5c046c_cgraph.svg" width="635" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-9" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-9-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_a5b1a6365e062590bf79fa725bb5c046c_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div id="dynsection-3-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_a4f04eb1029e742649a0018361b0ff7b2_icgraph.svg" width="570" height="272"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
-<a id="ae60970e5d215c256f4ee31f6149b55e7" name="ae60970e5d215c256f4ee31f6149b55e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae60970e5d215c256f4ee31f6149b55e7">&#9670;&#160;</a></span>get() <span class="overload">[2/2]</span></h2>
+<a id="aaf8a34b2fb8daed88c1d363dd82eb81f" name="aaf8a34b2fb8daed88c1d363dd82eb81f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf8a34b2fb8daed88c1d363dd82eb81f">&#9670;&#160;</a></span>disableComponent()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -591,9 +331,87 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1engine_1_1ecs_1_1Component.html">helios::engine::ecs::Component</a> * helios::engine::ecs::GameObject::get </td>
+          <td class="memname">void helios::engine::ecs::GameObject::disableComponent </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="#aab62fcfd969fc1bd71f0d81107527c42">ComponentTypeId</a></td>          <td class="paramname"><span class="paramname"><em>componentTypeId</em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId.html">helios::engine::core::data::ComponentTypeId</a></td>          <td class="paramname"><span class="paramname"><em>typeId</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Disables a specific component by type ID. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">typeId</td><td>The component type identifier. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00263">263</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="DelayedComponentEnabler_8ixx_source.html#l00120">helios::engine::mechanics::lifecycle::components::DelayedComponentEnabler::defer()</a>.</p>
+<div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-4-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_aaf8a34b2fb8daed88c1d363dd82eb81f_icgraph.svg" width="551" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a7f52a024349c472966d8d16c102b0cb0" name="a7f52a024349c472966d8d16c102b0cb0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f52a024349c472966d8d16c102b0cb0">&#9670;&#160;</a></span>enableComponent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::engine::ecs::GameObject::enableComponent </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId.html">helios::engine::core::data::ComponentTypeId</a></td>          <td class="paramname"><span class="paramname"><em>typeId</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enables a specific component by type ID. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">typeId</td><td>The component type identifier. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00254">254</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+
+</div>
+</div>
+<a id="a7135aa7138d11abfe995def238555b1d" name="a7135aa7138d11abfe995def238555b1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7135aa7138d11abfe995def238555b1d">&#9670;&#160;</a></span>entityHandle() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a> helios::engine::ecs::GameObject::entityHandle </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -604,42 +422,148 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Retrieves a component by its runtime <a class="el" href="#aab62fcfd969fc1bd71f0d81107527c42">ComponentTypeId</a>. </p>
-<p>Performs a direct array access using the provided type ID value. Useful when the component type is not known at compile time.</p>
-<p>**Complexity:** O(1) - Direct index access.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">componentTypeId</td><td>The runtime type ID of the component.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Pointer to the component if found, nullptr otherwise. </dd></dl>
+<p>Returns the underlying entity handle (const). </p>
+<dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html" title="A versioned handle for referencing entities in an EntityPool.">EntityHandle</a> for this <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Lightweight facade for entity component manipulation.">GameObject</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00342">342</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
-
-<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00087">components_</a>, and <a class="el" href="GameObject_8ixx_source.html#l00383">has()</a>.</p>
-<div id="dynsection-10" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-10-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-10-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_ae60970e5d215c256f4ee31f6149b55e7_cgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00130">130</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
 
 </div>
 </div>
-<a id="a655cf20c81a6aa4155cc67c92bee297f" name="a655cf20c81a6aa4155cc67c92bee297f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a655cf20c81a6aa4155cc67c92bee297f">&#9670;&#160;</a></span>getOrAdd() <span class="overload">[1/2]</span></h2>
+<a id="abd1f621c0ff1399530712ee7facfe02a" name="abd1f621c0ff1399530712ee7facfe02a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd1f621c0ff1399530712ee7facfe02a">&#9670;&#160;</a></span>entityHandle() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename T, typename... Args&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::remove_cvref_t&lt; T &gt; &amp; helios::engine::ecs::GameObject::getOrAdd </td>
+          <td class="memname"><a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a> helios::engine::ecs::GameObject::entityHandle </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the underlying entity handle. </p>
+<dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html" title="A versioned handle for referencing entities in an EntityPool.">EntityHandle</a> for this <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Lightweight facade for entity component manipulation.">GameObject</a>. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00121">121</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="GameWorld_8ixx_source.html#l00501">helios::engine::runtime::world::GameWorld::clone()</a>, <a class="el" href="GameObject_8ixx_source.html#l00098">GameObject()</a>, and <a class="el" href="GridCollisionDetectionSystem_8ixx_source.html#l00570">helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::solveCell()</a>.</p>
+<div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_abd1f621c0ff1399530712ee7facfe02a_icgraph.svg" width="100%" height="456"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a2229cd5bbcce0a3504519ed979ccdeb7" name="a2229cd5bbcce0a3504519ed979ccdeb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2229cd5bbcce0a3504519ed979ccdeb7">&#9670;&#160;</a></span>get() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T * helios::engine::ecs::GameObject::get </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns pointer to a component. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The component type.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to the component, or nullptr if not attached. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00210">210</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="DelayedComponentEnablerInitializer_8ixx_source.html#l00097">helios::engine::runtime::spawn::behavior::initializers::DelayedComponentEnablerInitializer&lt; ComponentTypes &gt;::initialize()</a>, <a class="el" href="EmitterInitializer_8ixx_source.html#l00051">helios::engine::runtime::spawn::behavior::initializers::EmitterInitializer::initialize()</a>, and <a class="el" href="RandomDirectionInitializer_8ixx_source.html#l00046">helios::engine::runtime::spawn::behavior::initializers::RandomDirectionInitializer::initialize()</a>.</p>
+<div id="dynsection-6" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-6-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_a2229cd5bbcce0a3504519ed979ccdeb7_icgraph.svg" width="471" height="254"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a2afb01851bc29d6f5d69b0e13a448dce" name="a2afb01851bc29d6f5d69b0e13a448dce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2afb01851bc29d6f5d69b0e13a448dce">&#9670;&#160;</a></span>get() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const T * helios::engine::ecs::GameObject::get </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns const pointer to a component. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The component type.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Const pointer to the component, or nullptr if not attached. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00222">222</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+
+</div>
+</div>
+<a id="ad6fbab6897f2899f0e6f98c37ba294e8" name="ad6fbab6897f2899f0e6f98c37ba294e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6fbab6897f2899f0e6f98c37ba294e8">&#9670;&#160;</a></span>getOrAdd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename ... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T &amp; helios::engine::ecs::GameObject::getOrAdd </td>
           <td>(</td>
           <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span></td><td>)</td>
           <td></td>
@@ -652,49 +576,49 @@ template&lt;typename T, typename... Args&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Retrieves an existing component of type T, or creates and adds it if not present. </p>
-<p>Convenience method that combines `get&lt;T&gt;()` and `add&lt;T&gt;()`. If the component already exists, the constructor arguments are ignored.</p>
-<p>**Complexity:** O(1) amortized.</p>
+<p>Returns existing component or creates a new one. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td>The type of component to retrieve or add. Must derive from <a class="el" href="classhelios_1_1engine_1_1ecs_1_1Component.html" title="Abstract base class for components attached to GameObjects.">Component</a>. </td></tr>
-    <tr><td class="paramname">Args</td><td>Argument types for the component's constructor.</td></tr>
+    <tr><td class="paramname">T</td><td>The component type. </td></tr>
+    <tr><td class="paramname">Args</td><td>Constructor argument types.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">args</td><td>Arguments forwarded to the component's constructor if creation is needed.</td></tr>
+    <tr><td class="paramname">args</td><td>Arguments forwarded to the constructor if creating.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the existing or newly created component. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00288">288</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00184">184</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00200">add()</a>, and <a class="el" href="GameObject_8ixx_source.html#l00311">get()</a>.</p>
-<div id="dynsection-11" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-11-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00148">add()</a>.</p>
+<div id="dynsection-7" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-11-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_a655cf20c81a6aa4155cc67c92bee297f_cgraph.svg" width="100%" height="482"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div id="dynsection-7-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_ad6fbab6897f2899f0e6f98c37ba294e8_cgraph.svg" width="100%" height="515"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
 </div>
-<a id="a0840c3e851ec591e4b1267de0f61b361" name="a0840c3e851ec591e4b1267de0f61b361"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0840c3e851ec591e4b1267de0f61b361">&#9670;&#160;</a></span>getOrAdd() <span class="overload">[2/2]</span></h2>
+<a id="a48e5d5ad5f29072db8f736628d57103c" name="a48e5d5ad5f29072db8f736628d57103c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48e5d5ad5f29072db8f736628d57103c">&#9670;&#160;</a></span>has() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1engine_1_1ecs_1_1Component.html">helios::engine::ecs::Component</a> * helios::engine::ecs::GameObject::getOrAdd </td>
+          <td class="memname">bool helios::engine::ecs::GameObject::has </td>
           <td>(</td>
-          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classhelios_1_1engine_1_1ecs_1_1Component.html">helios::engine::ecs::Component</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>component</em></span></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -705,128 +629,29 @@ template&lt;typename T, typename... Args&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Adds a pre-constructed component if no component of the same type exists. </p>
-<p>If a component with the same `ComponentTypeId` already exists, returns the existing component without taking ownership of the passed pointer. Otherwise, stores the component at its type-indexed position and takes ownership.</p>
-<p>**Complexity:** O(1) amortized. May trigger resize if type ID exceeds capacity.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">component</td><td>Unique pointer to the component to add. Ownership is transferred only if no component of the same type exists.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Pointer to the existing or newly added component, or nullptr if the input was nullptr.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>Uses `component-&gt;typeId()` for runtime type identification. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00241">241</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
-
-<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00087">components_</a>, <a class="el" href="GameObject_8ixx_source.html#l00559">finalizeAttach()</a>, <a class="el" href="GameObject_8ixx_source.html#l00383">has()</a>, and <a class="el" href="GameObject_8ixx_source.html#l00126">invalidateCache()</a>.</p>
-<div id="dynsection-12" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-12-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-12-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_a0840c3e851ec591e4b1267de0f61b361_cgraph.svg" width="100%" height="452"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
-
-</div>
-</div>
-<a id="a3674dd45d53436ffeaf50ee266e9f101" name="a3674dd45d53436ffeaf50ee266e9f101"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3674dd45d53436ffeaf50ee266e9f101">&#9670;&#160;</a></span>guid()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</a> &amp; helios::engine::ecs::GameObject::guid </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns the unique identifier for this <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a>. </p>
-<dl class="section return"><dt>Returns</dt><dd>Const reference to the Guid, valid for the lifetime of this object. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00433">433</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
-
-<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00072">guid_</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="GameWorld_8ixx_source.html#l00565">helios::engine::runtime::world::GameWorld::removeGameObject()</a>, and <a class="el" href="GridCollisionDetectionSystem_8ixx_source.html#l00569">helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::solveCell()</a>.</p>
-<div id="dynsection-13" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-13-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-13-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_a3674dd45d53436ffeaf50ee266e9f101_icgraph.svg" width="100%" height="420"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
-
-</div>
-</div>
-<a id="ab4e448bf2d5737d628e89bc4182e8584" name="ab4e448bf2d5737d628e89bc4182e8584"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab4e448bf2d5737d628e89bc4182e8584">&#9670;&#160;</a></span>has() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool helios::engine::ecs::GameObject::has </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Checks if the <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a> has a component of type T. </p>
-<p>Delegates to `has(<a class="el" href="#aab62fcfd969fc1bd71f0d81107527c42">ComponentTypeId</a>)` using the compile-time type ID.</p>
-<p>**Complexity:** O(1) - Direct index bounds check + nullptr comparison.</p>
+<p>Checks if this entity has a specific component type. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td>The type of component to check for. cv-qualifiers are stripped.</td></tr>
+    <tr><td class="paramname">T</td><td>The component type to check.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>True if the component exists, false otherwise. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the component is attached, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00383">383</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00234">234</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00383">has()</a>, and <a class="el" href="ComponentTypeId_8ixx_source.html#l00091">helios::engine::core::data::ComponentTypeId::id()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="GameObject_8ixx_source.html#l00342">get()</a>, <a class="el" href="GameObject_8ixx_source.html#l00241">getOrAdd()</a>, and <a class="el" href="GameObject_8ixx_source.html#l00383">has()</a>.</p>
-<div id="dynsection-14" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-14-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="DelayedComponentEnabler_8ixx_source.html#l00120">helios::engine::mechanics::lifecycle::components::DelayedComponentEnabler::defer()</a>.</p>
+<div id="dynsection-8" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-14-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_ab4e448bf2d5737d628e89bc4182e8584_cgraph.svg" width="635" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-15" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-15-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-15-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_ab4e448bf2d5737d628e89bc4182e8584_icgraph.svg" width="382" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-8-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_a48e5d5ad5f29072db8f736628d57103c_icgraph.svg" width="452" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
-<a id="aba3072484b3be880210479a0b9ca0b87" name="aba3072484b3be880210479a0b9ca0b87"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aba3072484b3be880210479a0b9ca0b87">&#9670;&#160;</a></span>has() <span class="overload">[2/2]</span></h2>
+<a id="ab81181f32386dacc35659869c317da9f" name="ab81181f32386dacc35659869c317da9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab81181f32386dacc35659869c317da9f">&#9670;&#160;</a></span>has() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -837,176 +662,32 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="memname">bool helios::engine::ecs::GameObject::has </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="#aab62fcfd969fc1bd71f0d81107527c42">ComponentTypeId</a></td>          <td class="paramname"><span class="paramname"><em>componentTypeId</em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Checks if a component with the given type ID exists. </p>
-<p>Performs bounds checking and nullptr verification.</p>
-<p>**Complexity:** O(1) - Bounds check + nullptr comparison.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">componentTypeId</td><td>The runtime type ID of the component to check.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if a component with this type ID exists, false otherwise. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00362">362</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
-
-<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00087">components_</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="GameObject_8ixx_source.html#l00200">add()</a>.</p>
-<div id="dynsection-16" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-16-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-16-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_aba3072484b3be880210479a0b9ca0b87_icgraph.svg" width="572" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
-</div>
-</div>
-<a id="acc58902b41ca07f6d6044eea959824b6" name="acc58902b41ca07f6d6044eea959824b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acc58902b41ca07f6d6044eea959824b6">&#9670;&#160;</a></span>hasDisabledComponent()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool helios::engine::ecs::GameObject::hasDisabledComponent </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Checks if the <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a> has a component of type T and returns true if this component is disabled. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>The type of component to check for existence and if it's disabled.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the component exists and is disabled, false otherwise. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00417">417</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
-
-<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00311">get()</a>.</p>
-<div id="dynsection-17" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-17-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-17-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_acc58902b41ca07f6d6044eea959824b6_cgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
-
-</div>
-</div>
-<a id="ad0c91ea72c3c793aa20011a49eccc17d" name="ad0c91ea72c3c793aa20011a49eccc17d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad0c91ea72c3c793aa20011a49eccc17d">&#9670;&#160;</a></span>hasEnabledComponent()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool helios::engine::ecs::GameObject::hasEnabledComponent </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Checks if the <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a> has a component of type T and returns true if this component is enabled. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>The type of component to check for existence and if it's enabled.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the component exists and is enabled, false otherwise. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00397">397</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
-
-<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00311">get()</a>.</p>
-<div id="dynsection-18" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-18-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-18-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_ad0c91ea72c3c793aa20011a49eccc17d_cgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
-
-</div>
-</div>
-<a id="a67673dcd1782395361f022ca5a3a791f" name="a67673dcd1782395361f022ca5a3a791f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a67673dcd1782395361f022ca5a3a791f">&#9670;&#160;</a></span>invalidateCache()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void helios::engine::ecs::GameObject::invalidateCache </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId.html">helios::engine::core::data::ComponentTypeId</a></td>          <td class="paramname"><span class="paramname"><em>typeId</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel protected">protected</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Invalidates the component cache, forcing a rebuild on next access. </p>
-<p>Called automatically when components are added or removed. </p>
+<p>Checks if this entity has a component by type ID. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">typeId</td><td>The component type identifier.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the component is attached, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00126">126</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
-
-<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00103">needsUpdate_</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="GameObject_8ixx_source.html#l00200">add()</a>, and <a class="el" href="GameObject_8ixx_source.html#l00241">getOrAdd()</a>.</p>
-<div id="dynsection-19" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-19-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-19-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_a67673dcd1782395361f022ca5a3a791f_icgraph.svg" width="100%" height="386"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00245">245</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
 
 </div>
 </div>
-<a id="a0d1cba81608678222f4e81d3d40d5c74" name="a0d1cba81608678222f4e81d3d40d5c74"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d1cba81608678222f4e81d3d40d5c74">&#9670;&#160;</a></span>isActive()</h2>
+<a id="a3b2fdacd0144acb72a94f1c541bf9e99" name="a3b2fdacd0144acb72a94f1c541bf9e99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b2fdacd0144acb72a94f1c541bf9e99">&#9670;&#160;</a></span>isActive()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1023,26 +704,15 @@ template&lt;typename T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Checks if this <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a> is currently active. </p>
-<dl class="section return"><dt>Returns</dt><dd>True if the <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a> is active, false otherwise.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>Inactive GameObjects are typically skipped during updates and rendering. </dd></dl>
+<p>Returns whether this <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Lightweight facade for entity component manipulation.">GameObject</a> is active. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if the entity has the Active tag component. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00444">444</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
-
-<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00095">isActive_</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="GameObject_8ixx_source.html#l00172">GameObject()</a>.</p>
-<div id="dynsection-20" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-20-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-20-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_a0d1cba81608678222f4e81d3d40d5c74_icgraph.svg" width="430" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00310">310</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
 
 </div>
 </div>
@@ -1069,15 +739,18 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Called when this <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a> is acquired from a pool. </p>
-<p>Notifies all attached components by calling their `onAcquire()` method. Used by the pool system to reset or initialize component state before reuse.</p>
-<dl class="section see"><dt>See also</dt><dd>GameObjectPool </dd>
-<dd>
-<a class="el" href="classhelios_1_1engine_1_1ecs_1_1Component.html#a9f6ca8f70b132c8d5ca1d0ffdb8f39f9" title="Called when the component&#39;s GameObject is re-acquired from a pool.">Component::onAcquire</a> </dd></dl>
+<p>Notifies all components that the entity is being acquired from a pool. </p>
+<p>Iterates through all attached components and calls `onAcquire()` on those that implement it. </p>
 
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00524">524</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00337">337</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00087">components_</a>.</p>
+<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00112">componentTypeIds()</a>, <a class="el" href="ComponentOpsRegistry_8ixx_source.html#l00082">helios::engine::ecs::ComponentOpsRegistry::ops()</a>, and <a class="el" href="GameObject_8ixx_source.html#l00198">raw()</a>.</p>
+<div id="dynsection-9" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-9-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_ad1a7a9e6853925618d4aa9170409f072_cgraph.svg" width="100%" height="434"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
 
 </div>
 </div>
@@ -1104,28 +777,67 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Called when this <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a> is released back to a pool. </p>
-<p>Notifies all attached components by calling their `onRelease()` method. Used by the pool system to clean up component state before pooling.</p>
-<dl class="section see"><dt>See also</dt><dd>GameObjectPool </dd>
-<dd>
-<a class="el" href="classhelios_1_1engine_1_1ecs_1_1Component.html#aacc77dfd9a7a39b733e0f90a7e50d43e" title="Called when the component&#39;s GameObject is released to a pool.">Component::onRelease</a> </dd></dl>
+<p>Notifies all components that the entity is being released to a pool. </p>
+<p>Iterates through all attached components and calls `onRelease()` on those that implement it. </p>
 
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00541">541</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00320">320</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00087">components_</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00189">helios::engine::runtime::pooling::GameObjectPoolManager::release()</a>.</p>
-<div id="dynsection-21" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-21-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00112">componentTypeIds()</a>, <a class="el" href="ComponentOpsRegistry_8ixx_source.html#l00082">helios::engine::ecs::ComponentOpsRegistry::ops()</a>, and <a class="el" href="GameObject_8ixx_source.html#l00198">raw()</a>.</p>
+<div id="dynsection-10" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-10-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-21-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_a2a7b9dc93c0a360e83ed33534742b7ae_icgraph.svg" width="498" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-10-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_a2a7b9dc93c0a360e83ed33534742b7ae_cgraph.svg" width="100%" height="434"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
 </div>
-<a id="a72a9d3833a1ae1464dab535bce3166ed" name="a72a9d3833a1ae1464dab535bce3166ed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a72a9d3833a1ae1464dab535bce3166ed">&#9670;&#160;</a></span>setActive()</h2>
+<a id="ab1c1f6b81c4965b76967c29a6af7f713" name="ab1c1f6b81c4965b76967c29a6af7f713"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1c1f6b81c4965b76967c29a6af7f713">&#9670;&#160;</a></span>raw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * helios::engine::ecs::GameObject::raw </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId.html">helios::engine::core::data::ComponentTypeId</a></td>          <td class="paramname"><span class="paramname"><em>typeId</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns raw pointer to component by type ID. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">typeId</td><td>The component type identifier.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Raw void pointer to the component, or nullptr if not found. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00198">198</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="GameObject_8ixx_source.html#l00148">add()</a>, <a class="el" href="GameObject_8ixx_source.html#l00337">onAcquire()</a>, <a class="el" href="GameObject_8ixx_source.html#l00320">onRelease()</a>, and <a class="el" href="GameObject_8ixx_source.html#l00284">setActive()</a>.</p>
+<div id="dynsection-11" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-11-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-11-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_ab1c1f6b81c4965b76967c29a6af7f713_icgraph.svg" width="616" height="243"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a5b86c188307f1f2e8500509708d60d93" name="a5b86c188307f1f2e8500509708d60d93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b86c188307f1f2e8500509708d60d93">&#9670;&#160;</a></span>setActive()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1136,76 +848,44 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="memname">void helios::engine::ecs::GameObject::setActive </td>
           <td>(</td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>active</em></span></td><td>)</td>
+          <td class="paramtype">const bool</td>          <td class="paramname"><span class="paramname"><em>active</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Sets the active state of this <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Base class for interactive game entities with component-based composition.">GameObject</a>. </p>
-<p>When the active state changes, this method notifies all attached components by calling onActivate() or onDeactivate() accordingly. If the new state equals the current state, no action is taken. (</p><dl class="section see"><dt>See also</dt><dd><a class="el" href="#a4ab506f41218f4f1c4c6fad4252c4513" title="Adds a new component of type T to the GameObject.">add()</a>)</dd></dl>
+<p>Sets the activation state of this <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Lightweight facade for entity component manipulation.">GameObject</a>. </p>
+<p>When deactivated:</p><ul>
+<li>An `Inactive` tag component is added</li>
+<li>The `Active` tag component is removed</li>
+<li>`onDeactivate()` is called on components that support it</li>
+</ul>
+<p>When activated:</p><ul>
+<li>The `Inactive` tag component is removed</li>
+<li>An `Active` tag component is added</li>
+<li>`onActivate()` is called on components that support it</li>
+</ul>
+<dl class="section note"><dt>Note</dt><dd>Does **not** call `enable()`/`disable()` on components.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">active</td><td>The new active state. </td></tr>
+    <tr><td class="paramname">active</td><td>True to activate, false to deactivate. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00489">489</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00284">284</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00087">components_</a>, and <a class="el" href="GameObject_8ixx_source.html#l00095">isActive_</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00189">helios::engine::runtime::pooling::GameObjectPoolManager::release()</a>.</p>
-<div id="dynsection-22" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-22-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00112">componentTypeIds()</a>, <a class="el" href="ComponentOpsRegistry_8ixx_source.html#l00082">helios::engine::ecs::ComponentOpsRegistry::ops()</a>, and <a class="el" href="GameObject_8ixx_source.html#l00198">raw()</a>.</p>
+<div id="dynsection-12" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-12-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-22-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_a72a9d3833a1ae1464dab535bce3166ed_icgraph.svg" width="491" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
-</div>
-</div>
-<a id="abe645224202704dffec3bfaebae4321d" name="abe645224202704dffec3bfaebae4321d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abe645224202704dffec3bfaebae4321d">&#9670;&#160;</a></span>updateCache()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void helios::engine::ecs::GameObject::updateCache </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel protected">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Rebuilds the component cache if invalidated. </p>
-<p>Iterates through `components_` and populates `componentView_` and `componentConstView_` with non-null entries. This operation is O(n) where n is the size of the components vector. </p>
-
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00135">135</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
-
-<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00119">componentConstView_</a>, <a class="el" href="GameObject_8ixx_source.html#l00087">components_</a>, <a class="el" href="GameObject_8ixx_source.html#l00111">componentView_</a>, and <a class="el" href="GameObject_8ixx_source.html#l00103">needsUpdate_</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="GameObject_8ixx_source.html#l00475">components()</a>, and <a class="el" href="GameObject_8ixx_source.html#l00461">components()</a>.</p>
-<div id="dynsection-23" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-23-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-23-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_abe645224202704dffec3bfaebae4321d_icgraph.svg" width="100%" height="426"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div id="dynsection-12-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_a5b86c188307f1f2e8500509708d60d93_cgraph.svg" width="100%" height="434"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>

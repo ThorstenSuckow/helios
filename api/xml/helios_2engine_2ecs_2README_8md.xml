@@ -20,11 +20,19 @@
 <codeline></codeline>
 <codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|-------|---------|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`GameObject`<sp/>|<sp/>Container<sp/>for<sp/>components<sp/>representing<sp/>a<sp/>game<sp/>entity<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`Component`<sp/>|<sp/>Base<sp/>class<sp/>for<sp/>data<sp/>containers<sp/>attached<sp/>to<sp/>GameObjects<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`CloneableComponent`<sp/>|<sp/>CRTP<sp/>base<sp/>for<sp/>components<sp/>that<sp/>support<sp/>cloning<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`System`<sp/>|<sp/>Abstract<sp/>base<sp/>for<sp/>logic<sp/>processors<sp/>(registered<sp/>with<sp/>`GameLoop`)<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`GameObject`<sp/>|<sp/>Lightweight<sp/>entity<sp/>facade<sp/>(~16<sp/>bytes,<sp/>pass-by-value)<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`EntityHandle`<sp/>|<sp/>Versioned<sp/>handle<sp/>for<sp/>safe<sp/>entity<sp/>references<sp/>(8<sp/>bytes)<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`EntityRegistry`<sp/>|<sp/>Handle<sp/>allocation<sp/>and<sp/>validation<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`EntityManager`<sp/>|<sp/>Unified<sp/>interface<sp/>for<sp/>entity<sp/>creation<sp/>and<sp/>component<sp/>storage<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SparseSet&lt;T&gt;`<sp/>|<sp/>Generic<sp/>O(1)<sp/>data<sp/>structure<sp/>for<sp/>component<sp/>storage<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SparseSetBase`<sp/>|<sp/>Type-erased<sp/>base<sp/>for<sp/>polymorphic<sp/>sparse<sp/>set<sp/>access<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`View`<sp/>|<sp/>Component-based<sp/>entity<sp/>queries<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`System`<sp/>|<sp/>Abstract<sp/>base<sp/>for<sp/>logic<sp/>processors<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`Updatable`<sp/>|<sp/>Interface<sp/>for<sp/>per-frame<sp/>updatable<sp/>objects<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ComponentOps`<sp/>|<sp/>Function<sp/>pointers<sp/>for<sp/>lifecycle<sp/>callbacks<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ComponentOpsRegistry`<sp/>|<sp/>Global<sp/>registry<sp/>mapping<sp/>type<sp/>IDs<sp/>to<sp/>ComponentOps<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ComponentReflector`<sp/>|<sp/>Compile-time<sp/>type<sp/>registration<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`Traits`<sp/>|<sp/>Compile-time<sp/>concepts<sp/>for<sp/>component<sp/>lifecycle<sp/>hooks<sp/>|</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Component<sp/>Storage<sp/>Model</highlight></codeline>
 <codeline></codeline>
@@ -52,7 +60,109 @@
 <codeline><highlight class="normal">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ComponentTypeId::id&lt;Transform&gt;()<sp/><sp/>ComponentTypeId::id&lt;Move2D&gt;()</highlight></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>
 <codeline></codeline>
+<codeline><highlight class="normal">##<sp/>EntityRegistry<sp/>and<sp/>EntityManager</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>**EntityRegistry**<sp/>is<sp/>the<sp/>single<sp/>source<sp/>of<sp/>truth<sp/>for<sp/>entity<sp/>lifecycle.<sp/>It<sp/>manages<sp/>handle<sp/>allocation,<sp/>version<sp/>tracking,<sp/>and<sp/>entity<sp/>validation.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>**EntityManager**<sp/>provides<sp/>a<sp/>high-level<sp/>API<sp/>combining<sp/>registry<sp/>and<sp/>component<sp/>storage:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">EntityRegistry<sp/>registry;</highlight></codeline>
+<codeline><highlight class="normal">EntityManager<sp/>manager(registry);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Create<sp/>entity</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>entity<sp/>=<sp/>manager.create();</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Attach<sp/>components</highlight></codeline>
+<codeline><highlight class="normal">auto*<sp/>transform<sp/>=<sp/>manager.emplace&lt;TransformComponent&gt;(entity,<sp/>glm::vec3{0.0f});</highlight></codeline>
+<codeline><highlight class="normal">auto*<sp/>velocity<sp/>=<sp/>manager.emplace&lt;VelocityComponent&gt;(entity);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Check<sp/>and<sp/>retrieve<sp/>component</highlight></codeline>
+<codeline><highlight class="normal">if<sp/>(manager.has&lt;TransformComponent&gt;(entity))<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>auto*<sp/>t<sp/>=<sp/>manager.get&lt;TransformComponent&gt;(entity);</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Remove<sp/>single<sp/>component</highlight></codeline>
+<codeline><highlight class="normal">manager.remove&lt;TransformComponent&gt;(entity);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Destroy<sp/>entity<sp/>(removes<sp/>all<sp/>components<sp/>and<sp/>invalidates<sp/>handle)</highlight></codeline>
+<codeline><highlight class="normal">manager.destroy(entity);</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Architecture:**</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">┌────────────────────────────────────────────────────────────┐</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>EntityManager<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>┌──────────────────┐<sp/><sp/><sp/><sp/>┌───────────────────────────────┐<sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>EntityRegistry<sp/><sp/>│<sp/><sp/><sp/><sp/>│<sp/><sp/>Component<sp/>Storage<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>(handle<sp/>mgmt)<sp/><sp/><sp/>│<sp/><sp/><sp/><sp/>│<sp/><sp/>vector&lt;SparseSet&lt;T&gt;&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>-<sp/>create()<sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/>│<sp/><sp/>(indexed<sp/>by<sp/>TypeIndexer)<sp/><sp/><sp/><sp/><sp/>│<sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>-<sp/>destroy()<sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>-<sp/>isValid()<sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/>│<sp/><sp/>[0]<sp/>SparseSet&lt;Transform&gt;<sp/><sp/><sp/><sp/><sp/>│<sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>└──────────────────┘<sp/><sp/><sp/><sp/>│<sp/><sp/>[1]<sp/>SparseSet&lt;Velocity&gt;<sp/><sp/><sp/><sp/><sp/><sp/>│<sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/>[2]<sp/>SparseSet&lt;Health&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>└───────────────────────────────┘<sp/>│</highlight></codeline>
+<codeline><highlight class="normal">└────────────────────────────────────────────────────────────┘</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>EntityPool</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">`EntityPool&lt;T&gt;`<sp/>is<sp/>a<sp/>sparse-set<sp/>based<sp/>data<sp/>structure<sp/>for<sp/>storing<sp/>entities<sp/>with<sp/>versioned<sp/>handles.<sp/>It<sp/>provides<sp/>O(1)<sp/>insertion,<sp/>lookup,<sp/>and<sp/>cache-friendly<sp/>iteration.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Data<sp/>Structure:**</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">sparse_:<sp/><sp/>[0]<sp/><sp/>[1]<sp/><sp/>[2]<sp/><sp/>[3]<sp/><sp/>...<sp/><sp/><sp/><sp/><sp/>(maps<sp/>entity<sp/>ID<sp/>→<sp/>dense<sp/>index)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>↓<sp/><sp/><sp/><sp/>↓<sp/><sp/><sp/><sp/>↓<sp/><sp/><sp/><sp/>↓</highlight></codeline>
+<codeline><highlight class="normal">dense_:<sp/><sp/><sp/>[0]<sp/><sp/>[2]<sp/><sp/>[3]<sp/><sp/>...<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(entity<sp/>IDs,<sp/>contiguous)</highlight></codeline>
+<codeline><highlight class="normal">denseData_:<sp/>[E0]<sp/>[E2]<sp/>[E3]<sp/>...<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(actual<sp/>entities,<sp/>cache-friendly)</highlight></codeline>
+<codeline><highlight class="normal">version_:<sp/>[1]<sp/><sp/>[1]<sp/><sp/>[2]<sp/><sp/>[1]<sp/><sp/>...<sp/><sp/><sp/><sp/><sp/>(version<sp/>per<sp/>ID,<sp/>incremented<sp/>on<sp/>removal)</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Versioned<sp/>Handles:**</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">`EntityHandle`<sp/>contains<sp/>both<sp/>an<sp/>entity<sp/>ID<sp/>and<sp/>a<sp/>version<sp/>number.<sp/>When<sp/>an<sp/>entity<sp/>is<sp/>removed,<sp/>its<sp/>version<sp/>is<sp/>incremented.<sp/>This<sp/>allows<sp/>detection<sp/>of<sp/>stale<sp/>handles<sp/>that<sp/>reference<sp/>deleted<sp/>entities.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>EntityPool<sp/>usage<sp/>example</highlight></codeline>
+<codeline><highlight class="normal">EntityPool&lt;GameObject&gt;<sp/>pool;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Add<sp/>entity,<sp/>receive<sp/>handle</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>handle<sp/>=<sp/>pool.emplace(std::make_unique&lt;GameObject&gt;());</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Retrieve<sp/>entity<sp/>via<sp/>handle<sp/>(O(1))</highlight></codeline>
+<codeline><highlight class="normal">auto*<sp/>entity<sp/>=<sp/>pool.get(handle);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Iterate<sp/>all<sp/>entities<sp/>(cache-friendly)</highlight></codeline>
+<codeline><highlight class="normal">for<sp/>(auto&amp;<sp/>e<sp/>:<sp/>pool.entities())<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>process<sp/>entity</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Submodules</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Traits</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Compile-time<sp/>concepts<sp/>for<sp/>component<sp/>lifecycle<sp/>hooks:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Trait<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`HasOnRemove`<sp/>|<sp/>Intercept<sp/>removal<sp/>(return<sp/>`false`<sp/>to<sp/>cancel)<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`HasOnAcquire`<sp/>|<sp/>Called<sp/>when<sp/>acquired<sp/>from<sp/>a<sp/>pool<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`HasOnRelease`<sp/>|<sp/>Called<sp/>when<sp/>released<sp/>back<sp/>to<sp/>a<sp/>pool<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">struct<sp/>ResourceComponent<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>bool<sp/>onRemove()<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cleanup();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return<sp/>true;<sp/><sp/>//<sp/>Allow<sp/>removal</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">static_assert(helios::engine::ecs::traits::HasOnRemove&lt;ResourceComponent&gt;);</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">###<sp/>query/</highlight></codeline>
 <codeline></codeline>
@@ -105,12 +215,12 @@
 <codeline></codeline>
 <codeline><highlight class="normal">//<sp/>Add<sp/>entity<sp/>with<sp/>components</highlight></codeline>
 <codeline><highlight class="normal">auto<sp/>entity<sp/>=<sp/>std::make_unique&lt;helios::engine::ecs::GameObject&gt;();</highlight></codeline>
-<codeline><highlight class="normal">entity-&gt;add&lt;Move2DComponent&gt;();</highlight></codeline>
-<codeline><highlight class="normal">entity-&gt;add&lt;SceneNodeComponent&gt;(sceneNode);</highlight></codeline>
+<codeline><highlight class="normal">entity.add&lt;Move2DComponent&gt;();</highlight></codeline>
+<codeline><highlight class="normal">entity.add&lt;SceneNodeComponent&gt;(sceneNode);</highlight></codeline>
 <codeline><highlight class="normal">auto*<sp/>player<sp/>=<sp/>world.addGameObject(std::move(entity));</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">//<sp/>Query<sp/>entities<sp/>by<sp/>component</highlight></codeline>
-<codeline><highlight class="normal">for<sp/>(auto<sp/>[obj,<sp/>move]<sp/>:<sp/>world.find&lt;Move2DComponent&gt;().each())<sp/>{</highlight></codeline>
+<codeline><highlight class="normal">for<sp/>(auto<sp/>[obj,<sp/>move]<sp/>:<sp/>world.find&lt;Move2DComponent&gt;())<sp/>{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Process<sp/>matching<sp/>entities</highlight></codeline>
 <codeline><highlight class="normal">}</highlight></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>

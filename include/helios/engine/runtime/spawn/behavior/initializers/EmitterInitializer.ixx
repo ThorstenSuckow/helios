@@ -49,7 +49,7 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
          * @pre spawnContext.emitterContext must have a value.
          */
         void initialize(
-            const helios::engine::ecs::GameObject& gameObject,
+            helios::engine::ecs::GameObject gameObject,
             const SpawnPlanCursor& cursor,
             const SpawnContext& spawnContext
         ) override {

@@ -44,7 +44,7 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
          * @param spawnContext Context data (unused).
          */
         void initialize(
-            const helios::engine::ecs::GameObject& gameObject,
+            helios::engine::ecs::GameObject gameObject,
             const SpawnPlanCursor& cursor,
             const SpawnContext& spawnContext
         ) override {

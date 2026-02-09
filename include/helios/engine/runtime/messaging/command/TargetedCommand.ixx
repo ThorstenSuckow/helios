@@ -34,7 +34,7 @@ export namespace helios::engine::runtime::messaging::command {
      *     MoveCommand(helios::math::vec3f dir, float speed)
      *         : direction_(dir), speed_(speed) {}
      *
-     *     void execute(helios::engine::ecs::GameObject& obj) const noexcept override {
+     *     void execute(helios::engine::ecs::GameObject obj) const noexcept override {
      *         auto* move = obj.get<Move2DComponent>();
      *         if (move) move->setVelocity(direction_ * speed_);
      *     }
@@ -61,7 +61,7 @@ export namespace helios::engine::runtime::messaging::command {
          * @note Implementations must be noexcept. If execute() could fail,
          *       handle errors internally (e.g., log and skip).
          */
-        virtual void execute(helios::engine::ecs::GameObject& gameObject) const noexcept = 0;
+        virtual void execute(helios::engine::ecs::GameObject gameObject) const noexcept = 0;
 
         /**
          * @brief Accepts a dispatcher for type-safe command handling.
@@ -73,7 +73,7 @@ export namespace helios::engine::runtime::messaging::command {
          * to specialized handlers. The default implementation is a no-op.
          */
         virtual void accept(
-            helios::engine::ecs::GameObject& gameObject,
+            helios::engine::ecs::GameObject gameObject,
             helios::engine::runtime::messaging::command::TargetedCommandDispatcher& dispatcher) const noexcept {
             // no-op by default
         }

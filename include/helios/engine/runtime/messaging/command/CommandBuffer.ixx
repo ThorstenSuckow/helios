@@ -283,7 +283,7 @@ export namespace helios::engine::runtime::messaging::command {
             // Targeted commands are processed second
             for (auto& targetedCommandProxy : targetedCommandBuffer_) {
 
-                auto* gameObject = gameWorld.find(targetedCommandProxy.entityHandle);
+                auto gameObject = gameWorld.find(targetedCommandProxy.entityHandle);
 
                 if (!gameObject) {
                     logger_.warn("GameObject with entityHandle not found, skipping command");

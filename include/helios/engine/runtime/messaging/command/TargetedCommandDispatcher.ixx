@@ -43,7 +43,7 @@ export namespace helios::engine::runtime::messaging::command {
          * @param command The command to dispatch.
          */
         virtual void dispatch(
-            helios::engine::ecs::GameObject& gameObject,
+            helios::engine::ecs::GameObject gameObject,
             const TargetedCommand& command
         ) = 0;
     };

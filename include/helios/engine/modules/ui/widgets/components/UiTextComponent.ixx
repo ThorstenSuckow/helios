@@ -16,7 +16,7 @@ import helios.rendering.text.TextRenderable;
 import helios.math.types;
 import helios.core.units.Unit;
 
-import helios.engine.ecs.CloneableComponent;
+
 import helios.engine.ecs.GameObject;
 
 import helios.engine.modules.rendering.renderable.components.RenderableComponent;
@@ -31,7 +31,7 @@ export namespace helios::engine::modules::ui::widgets::components {
  * Wraps a TextRenderable and provides template-based value formatting.
  * Supports dirty tracking to minimize rendering updates.
  */
-class UiTextComponent : public helios::engine::ecs::CloneableComponent<UiTextComponent> {
+class UiTextComponent {
 
     protected:
 
@@ -60,8 +60,35 @@ class UiTextComponent : public helios::engine::ecs::CloneableComponent<UiTextCom
          */
         bool needsResize_ = true;
 
+        /**
+         * @brief Whether this component is enabled.
+         */
+        bool isEnabled_ = true;
+
     public:
 
+        /**
+         * @brief Checks whether this component is enabled.
+         *
+         * @return True if enabled, false otherwise.
+         */
+        [[nodiscard]] bool isEnabled() const noexcept {
+            return isEnabled_;
+        }
+
+        /**
+         * @brief Enables this component.
+         */
+        void enable() noexcept {
+            isEnabled_ = true;
+        }
+
+        /**
+         * @brief Disables this component.
+         */
+        void disable() noexcept {
+            isEnabled_ = false;
+        }
 
         /**
          * @brief Constructs a UiTextComponent with the given renderable.
@@ -79,9 +106,13 @@ class UiTextComponent : public helios::engine::ecs::CloneableComponent<UiTextCom
          *
          * @param other The component to copy from.
          */
-        explicit UiTextComponent(const UiTextComponent& other) : template_(other.template_), renderable_(other.renderable_) {
+        UiTextComponent(const UiTextComponent& other) : template_(other.template_), renderable_(other.renderable_) {
             assert(renderable_ != nullptr && "TextRenderable must not be nullptr");
         }
+
+        UiTextComponent& operator=(const UiTextComponent&) = default;
+        UiTextComponent(UiTextComponent&&) noexcept = default;
+        UiTextComponent& operator=(UiTextComponent&&) noexcept = default;
 
         /**
          * @brief Returns the underlying text renderable.
@@ -112,11 +143,11 @@ class UiTextComponent : public helios::engine::ecs::CloneableComponent<UiTextCom
             doubleValue_ = 0.0f;
         }
 
-        void onAcquire() noexcept override {
+        void onAcquire() noexcept {
             reset();
         }
 
-        void onRelease() noexcept override {
+        void onRelease() noexcept {
             reset();
         }
 

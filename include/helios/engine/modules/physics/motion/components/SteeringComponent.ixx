@@ -16,7 +16,7 @@ import helios.util.Guid;
 import helios.core.spatial.Transform;
 import helios.math;
 import helios.core.units.Unit;
-import helios.engine.ecs.CloneableComponent;
+
 import helios.engine.ecs.GameObject;
 import helios.engine.modules.scene.components.SceneNodeComponent;
 
@@ -32,7 +32,7 @@ export namespace helios::engine::modules::physics::motion::components {
      * It maintains the current and target rotation angles and is used by the
      * SteeringSystem to update the entity's orientation.
      */
-    class SteeringComponent : public helios::engine::ecs::CloneableComponent<SteeringComponent> {
+    class SteeringComponent  {
 
     protected:
 
@@ -127,7 +127,35 @@ export namespace helios::engine::modules::physics::motion::components {
          */
         bool directionFromSteering_ = false;
 
+        /**
+         * @brief Whether this component is enabled.
+         */
+        bool isEnabled_ = true;
+
     public:
+
+        /**
+         * @brief Checks whether this component is enabled.
+         *
+         * @return True if enabled, false otherwise.
+         */
+        [[nodiscard]] bool isEnabled() const noexcept {
+            return isEnabled_;
+        }
+
+        /**
+         * @brief Enables this component.
+         */
+        void enable() noexcept {
+            isEnabled_ = true;
+        }
+
+        /**
+         * @brief Disables this component.
+         */
+        void disable() noexcept {
+            isEnabled_ = false;
+        }
 
         /**
          * @brief Default constructor.
@@ -148,13 +176,17 @@ export namespace helios::engine::modules::physics::motion::components {
          *
          * @param other The component to copy from.
          */
-        explicit SteeringComponent(const SteeringComponent& other) :
+        SteeringComponent(const SteeringComponent& other) :
             useInstantRotation_(other.useInstantRotation_),
             rotationSpeed_(other.rotationSpeed_),
             directionFromSteering_(other.directionFromSteering_),
             rotationSpeedThreshold_(other.rotationSpeedThreshold_),
             rotationDampening_(other.rotationDampening_),
             rotationAxis_(other.rotationAxis_) {}
+
+        SteeringComponent& operator=(const SteeringComponent&) = default;
+        SteeringComponent(SteeringComponent&&) noexcept = default;
+        SteeringComponent& operator=(SteeringComponent&&) noexcept = default;
 
         /**
          * @deprecated Use setSteeringIntent instead.

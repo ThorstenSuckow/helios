@@ -136,10 +136,26 @@ export namespace helios::engine::mechanics::scoring {
             return scorePoolId_;
         }
 
+        /**
+         * @brief Returns the current revision number.
+         *
+         * @details The revision is incremented whenever a score value changes.
+         * Used by observers to detect changes without polling values.
+         *
+         * @return The current ScorePoolRevision.
+         */
         [[nodiscard]] helios::engine::mechanics::scoring::types::ScorePoolRevision revision() const noexcept {
             return revision_;
         }
 
+        /**
+         * @brief Returns a snapshot of the current pool state.
+         *
+         * @details The snapshot contains the pool ID, total score, and current
+         * revision. Useful for observers and UI binding.
+         *
+         * @return A ScorePoolSnapshot with current values.
+         */
         [[nodiscard]] helios::engine::mechanics::scoring::ScorePoolSnapshot snapshot() const noexcept {
             return {.scorePoolId = scorePoolId_, .totalScore = totalScore_, .revision = revision_};
         }

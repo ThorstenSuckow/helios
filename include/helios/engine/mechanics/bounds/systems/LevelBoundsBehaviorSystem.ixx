@@ -4,7 +4,7 @@
  */
 module;
 
-#include <helios/engine/ecs/query/GameObjectView.h>
+#include <cassert>
 
 export module helios.engine.mechanics.bounds.systems.LevelBoundsBehaviorSystem;
 
@@ -32,11 +32,16 @@ import helios.engine.modules.spatial.transform.components.RotationStateComponent
 import helios.scene.SceneNode;
 import helios.engine.modules.scene.components.SceneNodeComponent;
 
+import helios.engine.ecs.View;
+
 import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.runtime.spawn.commands.DespawnCommand;
 
 import helios.engine.mechanics.spawn.components.SpawnedByProfileComponent;
+
+import helios.engine.mechanics.lifecycle.components.Active;
+
 
 export namespace helios::engine::mechanics::bounds::systems {
 
@@ -81,15 +86,16 @@ export namespace helios::engine::mechanics::bounds::systems {
 
             using namespace helios::engine::modules::physics::collision::types;
 
-            for (auto [entity, m2d, ab, sc, dc, tsc, bc, bbc] : gameWorld_->find<
+            for (auto [entity, m2d, ab, sc, dc, tsc, bc, bbc, active] : gameWorld_->view<
                 helios::engine::modules::physics::motion::components::Move2DComponent,
                 helios::engine::modules::rendering::model::components::ModelAabbComponent,
                 helios::engine::modules::scene::components::SceneNodeComponent,
                 helios::engine::modules::physics::motion::components::DirectionComponent,
                 helios::engine::modules::spatial::transform::components::TranslationStateComponent,
                 helios::engine::modules::physics::collision::components::AabbColliderComponent,
-                helios::engine::mechanics::bounds::components::LevelBoundsBehaviorComponent
-            >().each()) {
+                helios::engine::mechanics::bounds::components::LevelBoundsBehaviorComponent,
+                helios::engine::mechanics::lifecycle::components::Active
+            >().whereEnabled()) {
 
 
                 auto& objectBounds = bc->bounds();
@@ -119,11 +125,11 @@ export namespace helios::engine::mechanics::bounds::systems {
                         /**
                          * @todo optimize
                          */
-                        auto* sbp = entity->get<helios::engine::mechanics::spawn::components::SpawnedByProfileComponent>();
+                        auto* sbp = entity.get<helios::engine::mechanics::spawn::components::SpawnedByProfileComponent>();
                         assert(sbp && "Unexpected missing SpawnProfile");
 
                         updateContext.commandBuffer().add<helios::engine::runtime::spawn::commands::DespawnCommand>(
-                            entity->guid(), sbp->spawnProfileId()
+                            entity.entityHandle(), sbp->spawnProfileId()
                         );
 
                     }
@@ -160,12 +166,12 @@ export namespace helios::engine::mechanics::bounds::systems {
          * @param collisionResponse The type of response to apply.
          */
         void updateCollisionResponse(
-            helios::engine::ecs::GameObject* go,
+            helios::engine::ecs::GameObject go,
             BounceResult bounceResult,
             helios::engine::modules::physics::collision::types::CollisionResponse collisionResponse) {
 
             if (collisionResponse == helios::engine::modules::physics::collision::types::CollisionResponse::AlignHeadingToDirection) {
-                auto* psc = go->get<helios::engine::modules::physics::motion::components::SteeringComponent>();
+                auto* psc = go.get<helios::engine::modules::physics::motion::components::SteeringComponent>();
 
                 const auto direction = bounceResult.direction;
 

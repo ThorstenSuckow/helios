@@ -16,9 +16,9 @@ This module provides components and systems for visual effects such as rotation 
 ## Usage
 
 ```cpp
-gameObject->add<SpinComponent>();
-gameObject->get<SpinComponent>()->setSpeed(270.0f);
-gameObject->get<SpinComponent>()->setAxis(helios::math::Z_AXISf);
+gameObject_.add<SpinComponent>();
+gameObject_.get<SpinComponent>()->setSpeed(270.0f);
+gameObject_.get<SpinComponent>()->setAxis(helios::math::Z_AXISf);
 ```
 
 ---

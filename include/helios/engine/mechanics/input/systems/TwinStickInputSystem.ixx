@@ -13,7 +13,7 @@ import helios.math.utils;
 import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.ecs.System;
-import helios.engine.ecs.Component;
+
 import helios.engine.runtime.messaging.command.CommandBuffer;
 import helios.engine.modules.physics.motion.commands.Move2DCommand;
 import helios.engine.modules.physics.motion.commands.SteeringCommand;
@@ -49,7 +49,7 @@ export namespace helios::engine::mechanics::input::systems {
         /**
          * @brief Reference to the GameObject this system reads input for.
          */
-        helios::engine::ecs::GameObject& gameObject_;
+        helios::engine::ecs::GameObject gameObject_;
 
     public:
 
@@ -58,7 +58,7 @@ export namespace helios::engine::mechanics::input::systems {
          *
          * @param gameObject Reference to the GameObject to generate input commands for.
          */
-        explicit TwinStickInputSystem(helios::engine::ecs::GameObject& gameObject) :
+        explicit TwinStickInputSystem(helios::engine::ecs::GameObject gameObject) :
         gameObject_(gameObject) {}
 
         /**
@@ -86,11 +86,11 @@ export namespace helios::engine::mechanics::input::systems {
              * and no input was detected (after normalizing)
              */
             commandBuffer.add<helios::engine::modules::physics::motion::commands::Move2DCommand>(
-                gameObject_.guid(), ldir, finalSpeed
+                gameObject_.entityHandle(), ldir, finalSpeed
             );
 
             commandBuffer.add<helios::engine::modules::physics::motion::commands::SteeringCommand>(
-                gameObject_.guid(), ldir, finalSpeed
+                gameObject_.entityHandle(), ldir, finalSpeed
             );
 
             // Right stick: aiming
@@ -105,7 +105,7 @@ export namespace helios::engine::mechanics::input::systems {
             }
 
             commandBuffer.add<helios::engine::mechanics::combat::commands::Aim2DCommand>(
-                gameObject_.guid(), rdir, finalFreq
+                gameObject_.entityHandle(), rdir, finalFreq
             );
 
             if (useDedicatedShootInput_) {
@@ -113,13 +113,13 @@ export namespace helios::engine::mechanics::input::systems {
                 const auto rightTrigger = inputSnapshot.gamepadState().triggerRight();
                 if (rightTrigger > 0.0f) {
                     commandBuffer.add<helios::engine::mechanics::combat::commands::ShootCommand>(
-                       gameObject_.guid(), rightTrigger
+                       gameObject_.entityHandle(), rightTrigger
                    );
                 }
             } else {
                 if (finalFreq > 0.0f) {
                     commandBuffer.add<helios::engine::mechanics::combat::commands::ShootCommand>(
-                       gameObject_.guid(), finalFreq
+                       gameObject_.entityHandle(), finalFreq
                    );
                 }
             }

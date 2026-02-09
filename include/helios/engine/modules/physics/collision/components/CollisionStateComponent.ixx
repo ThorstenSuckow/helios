@@ -13,7 +13,8 @@ export module helios.engine.modules.physics.collision.components.CollisionStateC
 import helios.engine.modules.physics.collision.types.CollisionBehavior;
 import helios.engine.modules.physics.collision.types.CollisionContext;
 
-import helios.engine.ecs.CloneableComponent;
+import helios.engine.ecs.EntityHandle;
+
 import helios.engine.ecs.GameObject;
 import helios.util.Guid;
 import helios.math;
@@ -31,8 +32,7 @@ export namespace helios::engine::modules::physics::collision::components {
      * The state should be reset at the start of each frame by the collision system or
      * when the owning GameObject is acquired from a pool.
      */
-    class CollisionStateComponent : public helios::engine::ecs::CloneableComponent<CollisionStateComponent> {
-
+    class CollisionStateComponent  {
         /**
          * @brief World-space contact point of the collision.
          */
@@ -54,9 +54,9 @@ export namespace helios::engine::modules::physics::collision::components {
         bool isCollisionReporter_ = false;
 
         /**
-         * @brief GUID of the other entity involved in the collision.
+         * @brief Handle of the other entity involved in the collision.
          */
-        std::optional<helios::util::Guid> other_;
+        std::optional<helios::engine::ecs::EntityHandle> other_;
 
         /**
          * @brief The collision behavior to apply.
@@ -83,7 +83,35 @@ export namespace helios::engine::modules::physics::collision::components {
          */
         uint32_t otherCollisionLayer_ = 0;
 
+        /**
+         * @brief Whether this component is enabled.
+         */
+        bool isEnabled_ = true;
+
     public:
+
+        /**
+         * @brief Checks whether this component is enabled.
+         *
+         * @return True if enabled, false otherwise.
+         */
+        [[nodiscard]] bool isEnabled() const noexcept {
+            return isEnabled_;
+        }
+
+        /**
+         * @brief Enables this component.
+         */
+        void enable() noexcept {
+            isEnabled_ = true;
+        }
+
+        /**
+         * @brief Disables this component.
+         */
+        void disable() noexcept {
+            isEnabled_ = false;
+        }
 
         /**
          * @brief Default constructor.
@@ -95,7 +123,11 @@ export namespace helios::engine::modules::physics::collision::components {
          *
          * @param other The component to copy from (state is not copied).
          */
-        explicit CollisionStateComponent(const CollisionStateComponent& other) {}
+        CollisionStateComponent(const CollisionStateComponent& other) {}
+
+        CollisionStateComponent& operator=(const CollisionStateComponent&) = default;
+        CollisionStateComponent(CollisionStateComponent&&) noexcept = default;
+        CollisionStateComponent& operator=(CollisionStateComponent&&) noexcept = default;
 
         /**
          * @brief Sets the collision state for this frame.
@@ -115,12 +147,13 @@ export namespace helios::engine::modules::physics::collision::components {
          * @return True if the state was set, false if a collision was already recorded.
          */
         bool setState(
+            helios::engine::ecs::GameObject gameObject,
             helios::math::vec3f contact,
             const bool isSolid,
             const bool isTrigger,
             const helios::engine::modules::physics::collision::types::CollisionBehavior collisionBehavior,
             const bool isCollisionReporter,
-            std::optional<helios::util::Guid> other = std::nullopt,
+            std::optional<helios::engine::ecs::EntityHandle> other = std::nullopt,
             const uint32_t collisionLayer = 0,
             const uint32_t otherCollisionLayer = 0) {
 
@@ -143,7 +176,7 @@ export namespace helios::engine::modules::physics::collision::components {
             otherCollisionLayer_ = otherCollisionLayer;
 
             collisionContext_ = types::CollisionContext{
-                .source = gameObject_->guid(),
+                .source = gameObject.entityHandle(),
                 .contact = contact,
                 .isSolid = isSolid,
                 .isTrigger = isTrigger,
@@ -185,7 +218,7 @@ export namespace helios::engine::modules::physics::collision::components {
          *
          * @details Resets all collision state to prepare for a new lifecycle.
          */
-        void onAcquire() noexcept override {
+        void onAcquire() noexcept {
             reset();
         }
 
@@ -209,11 +242,11 @@ export namespace helios::engine::modules::physics::collision::components {
         }
 
         /**
-         * @brief Returns the GUID of the other entity involved in the collision.
+         * @brief Returns the handle of the other entity involved in the collision.
          *
-         * @return Optional GUID of the other entity, or nullopt if not set.
+         * @return Optional handle of the other entity, or nullopt if not set.
          */
-        [[nodiscard]] std::optional<helios::util::Guid> other() const noexcept {
+        [[nodiscard]] std::optional<helios::engine::ecs::EntityHandle> other() const noexcept {
             return other_;
         }
 

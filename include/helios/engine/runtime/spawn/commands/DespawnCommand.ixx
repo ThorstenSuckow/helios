@@ -10,7 +10,7 @@ module;
 export module helios.engine.runtime.spawn.commands.DespawnCommand;
 
 import helios.engine.runtime.messaging.command.WorldCommand;
-import helios.util.Guid;
+import helios.engine.ecs.EntityHandle;
 
 
 
@@ -25,7 +25,7 @@ export namespace helios::engine::runtime::spawn::commands {
      *
      * @details DespawnCommand is a WorldCommand that requests the deactivation
      * and return of a GameObject to its pool. The command identifies the target
-     * entity by its GUID and specifies the spawn profile for pool return.
+     * entity by its handle and specifies the spawn profile for pool return.
      *
      * The command is dispatched to a DespawnCommandDispatcher which forwards it
      * to the appropriate SpawnManager for deferred processing.
@@ -37,9 +37,9 @@ export namespace helios::engine::runtime::spawn::commands {
     class DespawnCommand : public helios::engine::runtime::messaging::command::WorldCommand {
 
         /**
-         * @brief The GUID of the entity to despawn.
+         * @brief The handle of the entity to despawn.
          */
-        const helios::util::Guid guid_;
+        const helios::engine::ecs::EntityHandle guid_;
 
         /**
          * @brief The spawn profile ID for pool return.
@@ -51,13 +51,13 @@ export namespace helios::engine::runtime::spawn::commands {
         /**
          * @brief Constructs a DespawnCommand with a target profile.
          *
-         * @param guid The GUID of the entity to despawn.
+         * @param entityHandle The handle of the entity to despawn.
          * @param spawnProfileId The spawn profile ID for pool return.
          */
         explicit DespawnCommand(
-            const helios::util::Guid& guid,
+            const helios::engine::ecs::EntityHandle& entityHandle,
             const helios::engine::core::data::SpawnProfileId spawnProfileId) :
-            guid_(guid), spawnProfileId_(spawnProfileId) {}
+            guid_(entityHandle), spawnProfileId_(spawnProfileId) {}
 
         /**
          * @brief Direct execution is not supported; requires a dispatcher.
@@ -84,11 +84,11 @@ export namespace helios::engine::runtime::spawn::commands {
         }
 
         /**
-         * @brief Returns the GUID of the entity to despawn.
+         * @brief Returns the handle of the entity to despawn.
          *
-         * @return The entity's GUID.
+         * @return The entity handle.
          */
-        [[nodiscard]] helios::util::Guid guid() const noexcept {
+        [[nodiscard]] helios::engine::ecs::EntityHandle entityHandle() const noexcept {
             return guid_;
         }
 

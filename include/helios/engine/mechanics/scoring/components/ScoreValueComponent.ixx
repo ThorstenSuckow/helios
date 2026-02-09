@@ -8,7 +8,7 @@ module;
 
 export module helios.engine.mechanics.scoring.components.ScoreValueComponent;
 
-import helios.engine.ecs.CloneableComponent;
+
 
 import helios.engine.mechanics.scoring.types.Score;
 
@@ -25,7 +25,7 @@ export namespace helios::engine::mechanics::scoring::components {
      */
     template<typename T>
     requires std::is_base_of_v<helios::engine::mechanics::scoring::types::Score, T>
-    class ScoreValueComponent : public helios::engine::ecs::CloneableComponent<ScoreValueComponent<T>> {
+    class ScoreValueComponent  {
 
     private:
 
@@ -34,8 +34,36 @@ export namespace helios::engine::mechanics::scoring::components {
          */
         T score_{};
 
+        /**
+         * @brief Whether this component is enabled.
+         */
+        bool isEnabled_ = true;
+
 
     public:
+
+        /**
+         * @brief Checks whether this component is enabled.
+         *
+         * @return True if enabled, false otherwise.
+         */
+        [[nodiscard]] bool isEnabled() const noexcept {
+            return isEnabled_;
+        }
+
+        /**
+         * @brief Enables this component.
+         */
+        void enable() noexcept {
+            isEnabled_ = true;
+        }
+
+        /**
+         * @brief Disables this component.
+         */
+        void disable() noexcept {
+            isEnabled_ = false;
+        }
 
         /**
          * @brief Constructs a ScoreValueComponent with forwarded arguments.
@@ -44,14 +72,21 @@ export namespace helios::engine::mechanics::scoring::components {
          * @param args Arguments forwarded to the Score constructor.
          */
         template<typename... Args>
-        explicit ScoreValueComponent(Args&&... args) : score_(std::forward<Args>(args)...){}
+        explicit ScoreValueComponent(Args&&... args) : score_(std::forward<Args>(args)...) {}
 
         /**
          * @brief Copy constructor.
          *
          * @param other The component to copy from.
          */
-        ScoreValueComponent(const ScoreValueComponent& other) : score_(other.score_)  {}
+        ScoreValueComponent(const ScoreValueComponent& other) : score_(other.score_) {}
+
+        ScoreValueComponent& operator=(const ScoreValueComponent& other) = default;
+
+        ScoreValueComponent(ScoreValueComponent&& other) noexcept = default;
+        ScoreValueComponent& operator=(ScoreValueComponent&& other) noexcept = default;
+
+
 
         /**
          * @brief Returns the stored score value.

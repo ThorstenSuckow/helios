@@ -15,7 +15,7 @@ import helios.engine.runtime.spawn.behavior.SpawnInitializer;
 import helios.engine.runtime.spawn.SpawnPlanCursor;
 import helios.engine.runtime.spawn.SpawnContext;
 import helios.engine.ecs.GameObject;
-import helios.engine.ecs.Component;
+
 import helios.engine.mechanics.lifecycle.components.DelayedComponentEnabler;
 import helios.engine.core.data.ComponentTypeId;
 
@@ -95,19 +95,16 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
          * @param spawnContext Context data (unused).
          */
         void initialize(
-            const helios::engine::ecs::GameObject& gameObject,
+            helios::engine::ecs::GameObject gameObject,
             const SpawnPlanCursor& cursor,
             const SpawnContext& spawnContext
         ) override {
 
-            auto components = gameObject.components();
             bool deferFound = false;
 
             auto position = cycleLength_ != 0 ?  cursor.position % cycleLength_ : cursor.position;
 
-            for (auto& component : components) {
-
-                const auto typeId = component->typeId();
+            for (auto typeId : gameObject.componentTypeIds()) {
 
                 // Find the component that should be deferred.
                 const bool deferThisComponent = std::find(
@@ -119,7 +116,7 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
                     auto* dec = gameObject.get<helios::engine::mechanics::lifecycle::components::DelayedComponentEnabler>();
                     assert(dec && "Missing DelayedComponentEnabler");
 
-                    dec->defer(typeId, (position + 1) * delay_);
+                    dec->defer(gameObject, typeId, (position + 1) * delay_);
                 }
             }
 

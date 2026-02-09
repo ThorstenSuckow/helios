@@ -13,7 +13,7 @@ import helios.engine.runtime.spawn.SpawnContext;
 import helios.engine.runtime.spawn.behavior.SpawnPlacer;
 import helios.util.Random;
 import helios.math;
-import helios.util.Guid;
+import helios.engine.ecs.EntityHandle;
 
 import helios.engine.runtime.world.UpdateContext;
 
@@ -50,7 +50,7 @@ export namespace helios::engine::runtime::spawn::behavior::placements {
         /**
          * @brief Calculates spawn position for a vertical column layout.
          *
-         * @param guid The GUID of the entity being spawned.
+         * @param entityHandle The handle of the entity being spawned.
          * @param gameObjectBounds The AABB of the entity to spawn.
          * @param environmentBounds The AABB of the spawn environment (arena).
          * @param cursor Current position in the spawn batch.
@@ -59,7 +59,7 @@ export namespace helios::engine::runtime::spawn::behavior::placements {
          * @return World position for the entity (left edge, vertically distributed).
          */
         helios::math::vec3f getPosition(
-            const helios::util::Guid& guid,
+            const helios::engine::ecs::EntityHandle& entityHandle,
             const helios::math::aabbf& gameObjectBounds,
             const helios::math::aabbf& environmentBounds,
             const SpawnPlanCursor& cursor,

@@ -18,9 +18,12 @@ export namespace helios::engine::mechanics::scoring {
     /**
      * @brief Immutable snapshot of a ScorePool's state.
      *
-     * Captures the pool ID and current score value at a specific point in time.
-     * Useful for passing score data to UI or other systems without exposing
-     * the mutable ScorePool.
+     * @details Captures the pool ID, total score, and revision at a specific
+     * point in time. Useful for passing score data to UI or other systems
+     * without exposing the mutable ScorePool.
+     *
+     * The revision field allows observers to detect changes by comparing
+     * snapshots without needing to track individual score values.
      */
     struct ScorePoolSnapshot {
 
@@ -30,12 +33,15 @@ export namespace helios::engine::mechanics::scoring {
         helios::engine::core::data::ScorePoolId scorePoolId{helios::core::types::no_init};
 
         /**
-         * @brief The score value at the time of the snapshot.
+         * @brief The total score value at the time of the snapshot.
          */
         double totalScore;
 
         /**
-         * @brief The revision of the ScorePool.
+         * @brief The revision number for change detection.
+         *
+         * @details Incremented whenever a score in the pool changes.
+         * Compare revisions to detect updates without polling values.
          */
         helios::engine::mechanics::scoring::types::ScorePoolRevision revision;
     };

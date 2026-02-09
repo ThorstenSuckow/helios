@@ -7,7 +7,7 @@ module;
 
 #include <format>
 
-#include <helios/engine/ecs/query/GameObjectView.h>
+
 
 export module helios.engine.modules.ui.binding.systems.Score2UiTextUpdateSystem;
 
@@ -18,6 +18,8 @@ import helios.engine.runtime.world.UpdateContext;
 import helios.engine.ecs.System;
 
 import helios.engine.modules.ui.widgets.components.UiTextComponent;
+
+import helios.engine.mechanics.lifecycle.components.Active;
 
 
 export namespace helios::engine::modules::ui::binding::systems {
@@ -41,10 +43,11 @@ export namespace helios::engine::modules::ui::binding::systems {
          */
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
-            for (auto [entity, soc, txt] : gameWorld_->find<
+            for (auto [entity, soc, txt, active] : gameWorld_->view<
                 helios::engine::mechanics::scoring::components::ScoreObserverComponent,
-                helios::engine::modules::ui::widgets::components::UiTextComponent
-            >().each()) {
+                helios::engine::modules::ui::widgets::components::UiTextComponent,
+                helios::engine::mechanics::lifecycle::components::Active
+            >().whereEnabled()) {
 
                 if (soc->hasUpdate()) {
                     txt->setDouble(soc->totalScore());

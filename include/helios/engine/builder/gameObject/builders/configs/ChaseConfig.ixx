@@ -4,6 +4,8 @@
  */
 module;
 
+#include <cassert>
+
 export module helios.engine.builder.gameObject.builders.configs.ChaseConfig;
 
 import helios.engine.ecs.GameObject;
@@ -11,6 +13,9 @@ import helios.engine.ecs.GameObject;
 import helios.util.Guid;
 
 import helios.engine.modules.ai.components.ChaseComponent;
+
+import helios.engine.ecs.EntityHandle;
+
 
 export namespace helios::engine::builder::gameObject::builders::configs {
 
@@ -25,7 +30,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         /**
          * @brief Non-owning pointer to the target GameObject.
          */
-        helios::engine::ecs::GameObject* gameObject_;
+        helios::engine::ecs::GameObject gameObject_;
 
     public:
 
@@ -34,20 +39,21 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @param gameObject Target GameObject to configure.
          */
-        explicit ChaseConfig(helios::engine::ecs::GameObject* gameObject) : gameObject_(gameObject) {
-            gameObject_->add<helios::engine::modules::ai::components::ChaseComponent>();
+        explicit ChaseConfig(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {
+            gameObject.add<helios::engine::modules::ai::components::ChaseComponent>();
         }
 
         /**
          * @brief Sets the target entity to chase.
          *
-         * @param guid The GUID of the target GameObject.
+         * @param entityHandle The handle of the target GameObject.
          *
          * @return Reference to this config for chaining.
          */
-        ChaseConfig& target(const helios::util::Guid guid) {
-            gameObject_->getOrAdd<helios::engine::modules::ai::components::ChaseComponent>()
-                        .setTarget(guid);
+        ChaseConfig& target(const helios::engine::ecs::EntityHandle& entityHandle) {
+            assert(entityHandle.isValid() && "Unexpected invalid entityHandle");
+            gameObject_.getOrAdd<helios::engine::modules::ai::components::ChaseComponent>()
+                        .setTarget(entityHandle);
 
             return *this;
         }
@@ -60,7 +66,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         ChaseConfig& seekInterval(const float interval) {
-            gameObject_->getOrAdd<helios::engine::modules::ai::components::ChaseComponent>()
+            gameObject_.getOrAdd<helios::engine::modules::ai::components::ChaseComponent>()
                         .setCooldown(interval);
 
             return *this;

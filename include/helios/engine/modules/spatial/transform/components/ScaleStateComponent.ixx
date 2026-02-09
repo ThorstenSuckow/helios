@@ -8,7 +8,7 @@ export module helios.engine.modules.spatial.transform.components.ScaleStateCompo
 
 import helios.engine.ecs.GameObject;
 import helios.math.types;
-import helios.engine.ecs.CloneableComponent;
+
 import helios.core.spatial.Transform;
 import helios.core.units.Unit;
 
@@ -23,7 +23,7 @@ export namespace helios::engine::modules::spatial::transform::components {
      * unit of measurement. It tracks changes via a dirty flag, allowing other systems
      * to react to scale updates.
      */
-    class ScaleStateComponent : public helios::engine::ecs::CloneableComponent<ScaleStateComponent> {
+    class ScaleStateComponent  {
         /**
          * @brief Width of the entity.
          */
@@ -49,7 +49,35 @@ export namespace helios::engine::modules::spatial::transform::components {
          */
         bool isDirty_ = true;
 
+        /**
+         * @brief Whether this component is enabled.
+         */
+        bool isEnabled_ = true;
+
     public:
+
+        /**
+         * @brief Checks whether this component is enabled.
+         *
+         * @return True if enabled, false otherwise.
+         */
+        [[nodiscard]] bool isEnabled() const noexcept {
+            return isEnabled_;
+        }
+
+        /**
+         * @brief Enables this component.
+         */
+        void enable() noexcept {
+            isEnabled_ = true;
+        }
+
+        /**
+         * @brief Disables this component.
+         */
+        void disable() noexcept {
+            isEnabled_ = false;
+        }
 
         /**
          * @brief Constructs a ScaleStateComponent with specified dimensions and unit.
@@ -70,29 +98,26 @@ export namespace helios::engine::modules::spatial::transform::components {
          *
          * @param other The component to copy from.
          */
-        explicit ScaleStateComponent(const ScaleStateComponent& other) :
+        ScaleStateComponent(const ScaleStateComponent& other) :
             width_(other.width_),
             height_(other.height_),
             depth_(other.depth_),
             unit_(other.unit_),
             isDirty_(true) {}
 
+        ScaleStateComponent& operator=(const ScaleStateComponent&) = default;
+        ScaleStateComponent(ScaleStateComponent&&) noexcept = default;
+        ScaleStateComponent& operator=(ScaleStateComponent&&) noexcept = default;
 
-        /**
-         * @brief Called when the component is attached to a GameObject.
-         *
-         * @param gameObject Pointer to the parent GameObject.
-         */
-        void onAttach(helios::engine::ecs::GameObject* gameObject) noexcept override {
-            Component::onAttach(gameObject);
-        }
+
+
 
         /**
          * @brief Resets the dirty flag to true when acquired.
          *
          * Makes sure scaling is considered once the component was acquired.
          */
-        void onAcquire() noexcept override {
+        void onAcquire() noexcept {
             isDirty_ = true;
         }
 
@@ -101,7 +126,7 @@ export namespace helios::engine::modules::spatial::transform::components {
          *
          * Makes sure the entities dirty-state is reset to the default state.
          */
-        void onRelease() noexcept override {
+        void onRelease() noexcept {
             isDirty_ = true;
         }
 

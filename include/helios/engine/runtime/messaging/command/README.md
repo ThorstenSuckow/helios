@@ -33,7 +33,7 @@ updateContext.commandBuffer().enqueue(std::move(moveCmd));
 
 // 2. Register dispatcher for command type
 auto moveDispatcher = std::make_unique<TypedTargetedCommandDispatcher<Move2DCommand>>(
-    [&](const Move2DCommand& cmd, GameObject* target) {
+    [&](const Move2DCommand& cmd, GameObject target) {
         auto* move = target->get<Move2DComponent>();
         move->setDirection(cmd.direction());
         move->setThrottle(cmd.throttle());

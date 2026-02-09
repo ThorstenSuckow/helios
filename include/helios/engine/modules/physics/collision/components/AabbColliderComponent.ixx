@@ -9,7 +9,7 @@ module;
 export module helios.engine.modules.physics.collision.components.AabbColliderComponent;
 
 import helios.math.types;
-import helios.engine.ecs.CloneableComponent;
+
 
 export namespace helios::engine::modules::physics::collision::components {
 
@@ -20,14 +20,42 @@ export namespace helios::engine::modules::physics::collision::components {
      * This component attaches a spatial bounding box to a GameObject, which can be used
      * by physics systems for broad-phase collision detection or simple trigger interactions.
      */
-    class AabbColliderComponent : public helios::engine::ecs::CloneableComponent<AabbColliderComponent> {
+    class AabbColliderComponent  {
 
         /**
          * @brief The local bounds of the collider.
          */
         helios::math::aabbf bounds_;
 
+        /**
+         * @brief Whether this component is enabled.
+         */
+        bool isEnabled_ = true;
+
     public:
+
+        /**
+         * @brief Checks whether this component is enabled.
+         *
+         * @return True if enabled, false otherwise.
+         */
+        [[nodiscard]] bool isEnabled() const noexcept {
+            return isEnabled_;
+        }
+
+        /**
+         * @brief Enables this component.
+         */
+        void enable() noexcept {
+            isEnabled_ = true;
+        }
+
+        /**
+         * @brief Disables this component.
+         */
+        void disable() noexcept {
+            isEnabled_ = false;
+        }
 
         /**
          * @brief Default constructor.
@@ -39,20 +67,24 @@ export namespace helios::engine::modules::physics::collision::components {
          *
          * Preserves the bounds of this component.
          */
-        explicit AabbColliderComponent(const AabbColliderComponent& other ) :
+        AabbColliderComponent(const AabbColliderComponent& other ) :
         bounds_(other.bounds_) {}
+
+        AabbColliderComponent& operator=(const AabbColliderComponent&) = default;
+        AabbColliderComponent(AabbColliderComponent&&) noexcept = default;
+        AabbColliderComponent& operator=(AabbColliderComponent&&) noexcept = default;
 
         /**
          * @brief Resets the bounds to invalidate state when this Component is acquired.
          */
-        void onAcquire() noexcept override {
+        void onAcquire() noexcept {
             bounds_ = {};
         }
 
         /**
          * @brief Resets the bounds to invalidate state when this Component is released.
          */
-        void onRelease() noexcept override {
+        void onRelease() noexcept {
             bounds_ = {};
         }
 

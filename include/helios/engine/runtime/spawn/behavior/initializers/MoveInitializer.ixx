@@ -136,7 +136,7 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
          * @param spawnContext The spawn context (unused).
          */
         void random(
-            const helios::engine::ecs::GameObject& gameObject,
+            helios::engine::ecs::GameObject gameObject,
             const SpawnPlanCursor& cursor,
             const SpawnContext& spawnContext
         ) const noexcept {
@@ -178,13 +178,13 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
          * @param directionType The direction strategy (`Axis` or `Point`).
          */
         void alignTo (
-            const helios::engine::ecs::GameObject& gameObject,
+            helios::engine::ecs::GameObject gameObject,
             const SpawnPlanCursor& cursor,
             const SpawnContext& spawnContext,
             const helios::math::vec3f target,
             const DirectionType directionType = DirectionType::Axis
             
-        ) const noexcept {
+        ) noexcept {
 
             static auto rGen = helios::util::Random(12345);
 
@@ -254,7 +254,7 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
          * @param spawnContext The spawn context with emitter information.
          */
         void initialize(
-            const helios::engine::ecs::GameObject& gameObject,
+            helios::engine::ecs::GameObject gameObject,
             const SpawnPlanCursor& cursor,
             const SpawnContext& spawnContext
         ) override {

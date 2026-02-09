@@ -4,7 +4,8 @@
  */
 module;
 
-#include <helios/engine/ecs/query/GameObjectView.h>
+#include <cassert>
+#include <utility>
 
 export module helios.engine.modules.ui.transform.systems.UiTransformSystem;
 
@@ -20,7 +21,10 @@ import helios.engine.runtime.world.GameWorld;
 
 import helios.engine.modules.rendering.model.components.ModelAabbComponent;
 
+import helios.engine.mechanics.lifecycle.components.Active;
+
 import helios.math;
+
 
 export namespace helios::engine::modules::ui::transform::systems {
 
@@ -72,12 +76,13 @@ export namespace helios::engine::modules::ui::transform::systems {
          */
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
-            for (auto [entity, tc, tsc, ctc, mbc] : gameWorld_->find<
+            for (auto [entity, tc, tsc, ctc, mbc, active] : gameWorld_->view<
                 helios::engine::modules::ui::transform::components::UiTransformComponent,
                 helios::engine::modules::spatial::transform::components::TranslationStateComponent,
                 helios::engine::modules::spatial::transform::components::ComposeTransformComponent,
-                helios::engine::modules::rendering::model::components::ModelAabbComponent
-            >().each()) {
+                helios::engine::modules::rendering::model::components::ModelAabbComponent,
+                helios::engine::mechanics::lifecycle::components::Active
+            >().whereEnabled()) {
 
                 if (!tc->viewportId()) {
                     continue;

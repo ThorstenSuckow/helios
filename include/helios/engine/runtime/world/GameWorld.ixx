@@ -4,15 +4,14 @@
  */
 module;
 
-// NOTE: GameObjectView is intentionally a .h header instead of a .ixx module interface.
-// Using it as a module interface unit causes Internal Compiler Errors (ICE) in MSVC
-// (VS2022/VS2026) when structured bindings are used with the each() iterator.
-// The workaround is to include it in the global module fragment.
-#include <helios/engine/ecs/query/GameObjectView.h>
+
+#include <cassert>
 #include <format>
 #include <memory>
-#include <unordered_map>
+#include <optional>
+#include <span>
 #include <string>
+#include <unordered_map>
 
 export module helios.engine.runtime.world.GameWorld;
 
@@ -20,8 +19,8 @@ import helios.engine.runtime.world.UpdateContext;
 import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.Manager;
 import helios.engine.runtime.spawn.SpawnCommandHandler;
-import helios.engine.ecs.Component;
-import helios.engine.ecs.CloneableComponent;
+
+
 
 import helios.engine.mechanics.scoring.ScoreCommandHandler;
 
@@ -30,9 +29,12 @@ import helios.util.log.Logger;
 import helios.util.log.LogManager;
 import helios.engine.runtime.world.Level;
 
+import helios.engine.ecs.EntityHandle;
+import helios.engine.ecs.EntityManager;
+import helios.engine.ecs.EntityRegistry;
+import helios.engine.ecs.View;
 
-import helios.engine.ecs.query.GameObjectFilter;
-import helios.engine.core.data.SpawnProfileId;
+import helios.engine.core.data;
 
 import helios.engine.runtime.spawn.SpawnCommandHandlerRegistry;
 
@@ -47,74 +49,80 @@ export namespace helios::engine::runtime::world {
      *
      * @details
      * The GameWorld is the root container for the game state. It manages the lifecycle
-     * of GameObjects, coordinates Managers, and holds the current Level.
+     * of entities via EntityRegistry/EntityManager, coordinates Managers, and holds
+     * the current Level.
      *
      * ## Key Responsibilities
      *
-     * - **Entity Management:** Owns all GameObjects and provides amortized O(1) lookup by Guid
-     *   via `std::unordered_map`.
-     * - **Component Queries:** Efficient iteration over GameObjects with specific components
-     *   via `find<Components...>()` with optional filtering by active/enabled state.
-     * - **Pool Management:** Registers and provides access to GameObjectPools for entity recycling.
+     * - **Entity Management:** Creates entities via `addGameObject()` which returns
+     *   lightweight (~16 bytes) `GameObject` wrappers. Entities are identified by
+     *   versioned `EntityHandle` for stale reference detection.
+     * - **Component Queries:** Efficient iteration over entities with specific components
+     *   via `view<Components...>()` with optional filtering via `.whereEnabled()` and
+     *   `.exclude<T>()`.
+     * - **Entity Cloning:** Deep-copy entities with all components via `clone()`.
+     * - **Pool Management:** Registers and provides access to SpawnCommandHandlers for
+     *   entity recycling.
      * - **Manager Coordination:** Holds Managers that handle cross-cutting concerns
      *   (spawning, projectile pooling) and flushes them each frame.
      * - **Level Management:** Holds the active Level instance with arena bounds.
      *
      * ## Usage with GameLoop
      *
-     * The GameWorld is passed to Systems via UpdateContext. Systems query GameObjects
-     * and their components, while mutations are typically performed through Commands
+     * The GameWorld is passed to Systems via UpdateContext. Systems query entities
+     * using views, while mutations are typically performed through Commands
      * that are flushed by the CommandBuffer.
      *
      * ```cpp
      * // In a System
      * void update(UpdateContext& ctx) noexcept override {
-     *     for (auto [obj, move] : ctx.gameWorld().find<Move2DComponent>().each()) {
-     *         // Process entities with Move2DComponent
+     *     for (auto [entity, transform, velocity, active] : gameWorld_->view<
+     *         TransformComponent,
+     *         VelocityComponent,
+     *         Active
+     *     >().whereEnabled()) {
+     *         // Process entities with both components
      *     }
      * }
      * ```
      *
-     * ## Filtering
+     * ## Entity Lifecycle
      *
-     * The `find()` methods accept a `GameObjectFilter` bitmask to control which
-     * entities are returned:
+     * ```cpp
+     * // Create entity
+     * auto player = gameWorld.addGameObject();
      *
-     * - `GameObjectFilter::Active` — Only active GameObjects
-     * - `GameObjectFilter::ComponentEnabled` — Only objects with enabled components
+     * // Add components
+     * player.add<TransformComponent>(position);
+     * player.add<HealthComponent>(100.0f);
      *
-     * Default filter is `Active | ComponentEnabled`.
+     * // Activate
+     * player.setActive(true);
+     *
+     * // Find by handle
+     * if (auto entity = gameWorld.find(handle)) {
+     *     entity->get<HealthComponent>()->takeDamage(10.0f);
+     * }
+     *
+     * // Clone
+     * auto clone = gameWorld.clone(player);
+     * ```
      *
      * @see GameObject
-     * @see GameObjectFilter
+     * @see EntityHandle
+     * @see EntityManager
+     * @see View
      * @see UpdateContext
      * @see Manager
      * @see Level
      */
     class GameWorld {
 
-        /** @brief Internal map type for GameObject storage. */
-        using Map = std::unordered_map<helios::util::Guid, std::unique_ptr<helios::engine::ecs::GameObject>>;
-
-        /**
-         * @brief Lazy range type for component-filtered GameObject iteration.
-         *
-         * @details
-         * This alias wraps GameObjectView with the appropriate map and component types.
-         * The view filters GameObjects on-the-fly during iteration, yielding only
-         * those that possess all specified component types.
-         *
-         * @note GameObjectView is included as a .h header in the global module fragment
-         *       due to MSVC ICE issues when used as a .ixx module interface unit.
-         *
-         * @tparam MapT The map type (const or non-const).
-         * @tparam Cs The component types to filter by.
-         */
-        template<class MapT, class... Cs>
-        using GameObjectRange = GameObjectView<MapT, helios::engine::ecs::GameObject, Cs...>;
 
 
     protected:
+
+
         /**
          * @brief Hash map storing all active GameObjects, indexed by their Guid.
          *
@@ -124,7 +132,6 @@ export namespace helios::engine::runtime::world {
          * hash distribution in practice.
          */
         std::unordered_map<helios::util::Guid, std::unique_ptr<helios::engine::ecs::GameObject>> gameObjects_;
-
 
 
         /**
@@ -157,7 +164,7 @@ export namespace helios::engine::runtime::world {
          * @details Receives score update commands and processes them
          * according to the scoring system logic.
          */
-        helios::engine::mechanics::scoring::ScoreCommandHandler* scoreCommandHandler_;
+        helios::engine::mechanics::scoring::ScoreCommandHandler* scoreCommandHandler_ = nullptr;
 
         /**
          * @brief Registry for mapping spawn profiles to their command handlers.
@@ -169,9 +176,34 @@ export namespace helios::engine::runtime::world {
          */
         helios::engine::runtime::spawn::SpawnCommandHandlerRegistry spawnCommandHandlerRegistry_{};
 
+        /**
+         * @brief Entity registry for handle allocation and validation.
+         *
+         * @details Manages entity lifecycle including creation, destruction,
+         * and stale handle detection via versioning.
+         */
+        helios::engine::ecs::EntityRegistry entityRegistry_{};
 
+        /**
+         * @brief Entity manager for component storage.
+         *
+         * @details Stores components in type-indexed SparseSets and provides
+         * methods for component manipulation. Marked `mutable` to allow const
+         * methods to use it without const_cast.
+         */
+        mutable helios::engine::ecs::EntityManager em_;
 
     public:
+        /**
+
+        * @brief Central registry for game entities, managers, pools, and the active level.
+         *
+         * @details
+         * The GameWorld serves as the primary container for managing the game state and its subsystems.
+         * It facilitates the lifecycle of entities, oversees component-based management, coordinates Managers,
+         * and holds a reference to the active Level instance.
+         */
+        explicit GameWorld() : em_(helios::engine::ecs::EntityManager(entityRegistry_)) { };
 
 
         /**
@@ -362,230 +394,122 @@ export namespace helios::engine::runtime::world {
             }
         }
 
-
-
         /**
-         * @brief Adds a GameObject to the world and transfers ownership.
+         * @brief Creates a new GameObject in the world.
          *
-         * @param gameObject The GameObject to add. Ownership is transferred to the GameWorld.
+         * @details Allocates an entity handle via the EntityRegistry and returns
+         * a lightweight GameObject wrapper. The returned GameObject is ~16 bytes
+         * and should be passed by value.
          *
-         * @return Pointer to the added GameObject, or nullptr if addition failed.
+         * @return A new GameObject ready for component attachment.
          *
-         * @retval GameObject* Non-owning pointer to the added object (valid until removed)
-         * @retval nullptr If gameObject was null or a GameObject with the same Guid already exists
-         *
-         * @note The GameWorld takes ownership of the GameObject. The returned pointer remains
-         *       valid until the GameObject is removed from the world.
-         * @note Attempting to add a nullptr or a GameObject with a duplicate Guid will fail,
-         *       return nullptr, and log a warning.
+         * @see GameObject
+         * @see EntityManager::create
          */
-        [[nodiscard]] helios::engine::ecs::GameObject* addGameObject(std::unique_ptr<helios::engine::ecs::GameObject> gameObject) {
-            if (!gameObject) {
-                logger_.warn("Attempted to add null GameObject to GameWorld");
-                return nullptr;
-            }
-            if (gameObjects_.contains(gameObject->guid())) {
-                logger_.warn(std::format("GameObject with Guid {} already exists in GameWorld",
-                                         gameObject->guid().value()));
-                return nullptr;
-            }
-
-            auto* ptr = gameObject.get();
-            gameObjects_.emplace(gameObject->guid(), std::move(gameObject));
-
-            return ptr;
+        [[nodiscard]] helios::engine::ecs::GameObject addGameObject() {
+            const auto handle = em_.create();
+            return helios::engine::ecs::GameObject(handle, &em_);
         }
 
         /**
-         * @brief Finds a GameObject by its unique identifier.
+         * @brief Creates a View for iterating entities with specific components.
          *
-         * @param guid The unique identifier of the GameObject to find.
+         * @details Returns a lightweight view that iterates over all entities
+         * possessing the specified component types. Use with range-based for loops
+         * and structured bindings.
          *
-         * @return Pointer to the GameObject if found, nullptr otherwise.
-         *
-         * @retval GameObject* Non-owning pointer to the found object
-         * @retval nullptr If no GameObject with the specified Guid exists
-         *
-         * @note This is the non-const overload. Use the const overload for read-only access.
-         */
-        [[nodiscard]] helios::engine::ecs::GameObject* find(const helios::util::Guid& guid) {
-            if (auto it = gameObjects_.find(guid); it != gameObjects_.end()) {
-                return it->second.get();
-            }
-            return nullptr;
-        }
-
-        /**
-         * @brief Finds all GameObjects that have the specified component types.
-         *
-         * @details
-         * Returns a lazy range that filters GameObjects on-the-fly during iteration.
-         * Only GameObjects possessing all specified component types are yielded.
-         *
-         * The query is controlled by a `GameObjectFilter` bitmask:
-         *
-         * | Filter | Effect |
-         * |--------|--------|
-         * | `Active` | Only `obj->isActive() == true` |
-         * | `Inactive` | Only `obj->isActive() == false` |
-         * | `ComponentEnabled` | Only objects where queried components are enabled |
-         * | `ComponentDisabled` | Only objects where queried components are disabled |
-         *
-         * Filters can be combined: `Active | ComponentEnabled` (default).
-         *
-         * Example usage:
          * ```cpp
-         * // Range-based for loop with default filter (Active + ComponentEnabled)
-         * for (auto* obj : gameWorld.find<Move2DComponent, SceneNodeComponent>()) {
-         *     auto* move = obj->get<Move2DComponent>();
-         *     move->setVelocity({1.0f, 0.0f, 0.0f});
-         * }
-         *
-         * // Using each() for direct component access (structured bindings)
-         * for (auto [obj, move] : gameWorld.find<Move2DComponent>().each()) {
-         *     move.get().setVelocity({1.0f, 0.0f, 0.0f});
-         * }
-         *
-         * // Custom filter: find inactive objects
-         * for (auto* obj : gameWorld.find<HealthComponent>(GameObjectFilter::Inactive)) {
-         *     // Process inactive entities (e.g., respawn logic)
+         * for (auto [entity, transform, velocity, active] : gameWorld.view<
+         *     TransformComponent,
+         *     VelocityComponent,
+         *     Active
+         * >().whereEnabled()) {
+         *     // Process matching entities
          * }
          * ```
          *
-         * @tparam Cs The component types to filter by. GameObjects must have all types.
+         * @tparam Components The component types to query for.
          *
-         * @param query Filter bitmask controlling which entities are included.
-         *              Default: `Active | ComponentEnabled`.
+         * @return A View for iterating matching entities.
          *
-         * @return A GameObjectView object that can be iterated over.
-         *
-         * @see GameObjectFilter
-         * @see GameObjectView
+         * @see View
          */
-        template<class... Cs>
-        [[nodiscard]] auto find(GameObjectFilter query = GameObjectFilter::Active | GameObjectFilter::ComponentEnabled) {
-            return GameObjectRange<Map, Cs...>(gameObjects_, query);
+        template <typename... Components>
+        [[nodiscard]] auto view() {
+            return helios::engine::ecs::View<Components...>(&em_);
         }
 
         /**
-         * @brief Finds all GameObjects that have the specified component types (const overload).
+         * @brief Creates a const View for iterating entities with specific components.
          *
-         * @details
-         * Const version of the component-based find. Returns const pointers to GameObjects.
-         * See the non-const overload for detailed usage and filter documentation.
+         * @tparam Components The component types to query for.
          *
-         * @tparam Cs The component types to filter by. GameObjects must have all types.
-         *
-         * @param query Filter bitmask controlling which entities are included.
-         *              Default: `Active | ComponentEnabled`.
-         *
-         * @return A const GameObjectView object that can be iterated over.
-         *
-         * @see GameObjectFilter
+         * @return A const View for iterating matching entities.
          */
-        template<class... Cs>
-        [[nodiscard]] auto find(GameObjectFilter query = GameObjectFilter::Active | GameObjectFilter::ComponentEnabled) const {
-            return GameObjectRange<const Map, Cs...>(gameObjects_, query);
+        template <typename... Components>
+        [[nodiscard]] auto view() const {
+            return helios::engine::ecs::View<Components...>(&em_);
         }
 
         /**
-         * @brief Finds a GameObject by its unique identifier (const overload).
+         * @brief Finds a GameObject by its EntityHandle.
          *
-         * @param guid The unique identifier of the GameObject to find.
+         * @details Validates the handle and returns a GameObject wrapper if valid.
+         * Returns std::nullopt if the handle is stale or invalid.
          *
-         * @return Const pointer to the GameObject if found, nullptr otherwise.
+         * @param handle The EntityHandle to look up.
          *
-         * @retval const GameObject* Non-owning const pointer to the found object
-         * @retval nullptr If no GameObject with the specified Guid exists
-         *
-         * @note This overload is used when the GameWorld is accessed via const reference.
+         * @return Optional containing the GameObject if found, std::nullopt otherwise.
          */
-        [[nodiscard]] const helios::engine::ecs::GameObject* find(const helios::util::Guid& guid) const {
-            if (auto it = gameObjects_.find(guid); it != gameObjects_.end()) {
-                return it->second.get();
+        [[nodiscard]] std::optional<helios::engine::ecs::GameObject> find(const helios::engine::ecs::EntityHandle handle) {
+            if (!em_.isValid(handle)) {
+                return std::nullopt;
             }
-            return nullptr;
+
+            return helios::engine::ecs::GameObject(handle, &em_);
         }
 
         /**
-         * @brief Creates a clone of an existing GameObject.
+         * @brief Finds a GameObject by its EntityHandle (const version).
          *
-         * @details Clones all Cloneable components from the source GameObject.
-         * The cloned GameObject is initially inactive and receives a new Guid.
-         * Non-cloneable components are skipped with a warning.
+         * @param handle The EntityHandle to look up.
+         *
+         * @return Optional containing the GameObject if found, std::nullopt otherwise.
+         */
+        [[nodiscard]] std::optional<helios::engine::ecs::GameObject> find(const helios::engine::ecs::EntityHandle handle) const {
+
+            if (!em_.isValid(handle)) {
+                return std::nullopt;
+            }
+
+            return helios::engine::ecs::GameObject(handle, &em_);
+        }
+
+        /**
+         * @brief Clones a GameObject and all its components.
+         *
+         * @details Creates a new entity and copies all components from the source
+         * to the target. The new GameObject is initially inactive. Components with
+         * `onClone()` hooks will have them invoked after copy construction.
          *
          * @param gameObject The source GameObject to clone.
          *
-         * @return Pointer to the newly created clone, or nullptr on failure.
+         * @return A new inactive GameObject with cloned components.
          *
-         * @note The clone is added to the world in an inactive state.
+         * @see EntityManager::clone
          */
-        [[nodiscard]] helios::engine::ecs::GameObject* clone(const helios::engine::ecs::GameObject& gameObject) {
+        [[nodiscard]] helios::engine::ecs::GameObject clone(const helios::engine::ecs::GameObject gameObject) {
+
+            auto newGo = addGameObject();
+
+            newGo.setActive(false);
+
+            em_.clone(gameObject.entityHandle(), newGo.entityHandle());
 
 
-            auto newGo = std::make_unique<helios::engine::ecs::GameObject>();
-            /**
-             * @todo Optional ClonePolicy where rules are specified?
-             */
-            newGo->setActive(false);
-
-            for (const auto* component : gameObject.components()) {
-                if (const auto* cc = dynamic_cast<const helios::engine::ecs::Cloneable*>(component)) {
-                    auto cComponent = cc->clone();
-                    // use getOrAdd since cloned components may have already added
-                    // other components in onAttach(), which we will not defer for now.
-                    // we assume that the cloned component that allows for adding
-                    // components in onAttach is the source of truth for said components
-                    newGo->getOrAdd(std::move(cComponent));
-                } else {
-                    logger_.warn("Component not cloneable.");
-                }
-
-            }
-
-            return addGameObject(std::move(newGo));
+            return newGo;
         }
 
-
-        /**
-         * @brief Removes a GameObject from the world and transfers ownership to the caller.
-         *
-         * @param gameObject Reference to the GameObject to remove.
-         *
-         * @return Unique pointer to the removed GameObject, or nullptr if not found.
-         *
-         * @retval std::unique_ptr<GameObject> Ownership of the removed object
-         * @retval nullptr If the GameObject was not found in the world
-         *
-         * @note After successful removal, all non-owning pointers to the GameObject
-         *       become invalid unless the caller maintains the returned unique_ptr.
-         * @note Attempting to remove a GameObject that doesn't exist returns nullptr
-         *       and logs a warning.
-         */
-        [[nodiscard]] std::unique_ptr<helios::engine::ecs::GameObject> removeGameObject(const helios::engine::ecs::GameObject& gameObject) {
-            auto node = gameObjects_.extract(gameObject.guid());
-
-            if (node.empty()) {
-                logger_.warn(std::format("Attempted to remove non-existent GameObject with Guid {} from GameWorld",
-                                         gameObject.guid().value()));
-                return nullptr;
-            }
-
-            return std::move(node.mapped());
-        }
-
-        /**
-         * @brief Retrieves a const ref to the map of all active GameObjects.
-         *
-         * @return A const reference to the internal map of GameObjects, indexed by Guid.
-         *
-         * @warning Modifying the map directly (e.g. adding/removing elements) bypasses
-         *          GameWorld's management logic and should be avoided. Use addGameObject()
-         *          and removeGameObject() instead.
-         */
-        [[nodiscard]] const std::unordered_map<helios::util::Guid, std::unique_ptr<helios::engine::ecs::GameObject>>& gameObjects() const noexcept {
-            return gameObjects_;
-        }
     };
 
 }

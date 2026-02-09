@@ -4,7 +4,7 @@
  */
 module;
 
-#include <helios/engine/ecs/query/GameObjectView.h>
+#include <cassert>
 
 export module helios.engine.mechanics.combat.systems.ProjectileSpawnSystem;
 
@@ -21,6 +21,9 @@ import helios.engine.runtime.spawn.EmitterContext;
 import helios.engine.core.data.SpawnProfileId;
 
 import helios.math;
+
+import helios.engine.mechanics.lifecycle.components.Active;
+
 
 export namespace helios::engine::mechanics::combat::systems {
 
@@ -104,11 +107,12 @@ export namespace helios::engine::mechanics::combat::systems {
          */
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
-            for (auto [entity, tsc, ac, sc] : gameWorld_->find<
+            for (auto [entity, tsc, ac, sc, active] : gameWorld_->view<
                 helios::engine::modules::spatial::transform::components::TranslationStateComponent,
                 helios::engine::mechanics::combat::components::Aim2DComponent,
-                helios::engine::mechanics::combat::components::ShootComponent
-            >().each()) {
+                helios::engine::mechanics::combat::components::ShootComponent,
+                helios::engine::mechanics::lifecycle::components::Active
+            >().whereEnabled()) {
 
 
                 const float intensity = sc->intensity();
@@ -153,7 +157,7 @@ export namespace helios::engine::mechanics::combat::systems {
                             helios::engine::runtime::spawn::EmitterContext{
                                 tsc->translation(),
                                 sc->sourceVelocity() + (aimDirection * sc->projectileSpeed()),
-                                entity->guid()
+                                entity.entityHandle()
                             }
                         }
                     );

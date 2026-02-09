@@ -24,7 +24,7 @@ export namespace helios::engine::builder::gameObject::builders {
         /**
          * @brief Non-owning pointer to the target GameObject.
          */
-        helios::engine::ecs::GameObject* gameObject_;
+        helios::engine::ecs::GameObject gameObject_;
 
     public:
 
@@ -33,7 +33,7 @@ export namespace helios::engine::builder::gameObject::builders {
          *
          * @param gameObject Target GameObject to configure.
          */
-        explicit RenderingBuilder(helios::engine::ecs::GameObject* gameObject) : gameObject_(gameObject) {}
+        explicit RenderingBuilder(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {}
 
         /**
          * @brief Returns a config for renderable (mesh/material) setup.

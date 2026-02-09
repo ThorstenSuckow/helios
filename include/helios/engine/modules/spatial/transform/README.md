@@ -45,10 +45,10 @@ auto entity = GameObjectFactory::gameObject()
     .make(true);
 
 // Direct component access for per-frame updates
-auto* translation = entity->get<TranslationStateComponent>();
+auto* translation = entity.get<TranslationStateComponent>();
 translation->add({1.0f, 0.0f, 0.0f});  // Move right
 
-auto* rotation = entity->get<RotationStateComponent>();
+auto* rotation = entity.get<RotationStateComponent>();
 rotation->add(helios::math::radians(45.0f), helios::math::Z_AXISf);
 
 // Register systems in correct order

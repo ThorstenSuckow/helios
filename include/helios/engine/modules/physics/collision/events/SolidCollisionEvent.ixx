@@ -6,10 +6,11 @@ module;
 
 export module helios.engine.modules.physics.collision.events.SolidCollisionEvent;
 
-import helios.util.Guid;
+import helios.engine.ecs.EntityHandle;
 import helios.math;
 import helios.engine.modules.physics.collision.types.CollisionContext;
 import helios.core.types;
+
 
 export namespace helios::engine::modules::physics::collision::events {
 
@@ -28,20 +29,20 @@ export namespace helios::engine::modules::physics::collision::events {
         collision::types::CollisionContext collisionContext_;
 
         /**
-         * @brief GUID of the entity that reported the collision.
+         * @brief Handle of the entity that reported the collision.
          */
-        helios::util::Guid source_;
+        helios::engine::ecs::EntityHandle source_;
 
     public:
 
         /**
          * @brief Constructs a SolidCollisionEvent.
          *
-         * @param source GUID of the reporting entity.
+         * @param source Handle of the reporting entity.
          * @param collisionContext Context data describing the collision.
          */
         explicit SolidCollisionEvent(
-            const helios::util::Guid source,
+            const helios::engine::ecs::EntityHandle source,
             const collision::types::CollisionContext& collisionContext
         ) : collisionContext_(collisionContext), source_(source) {}
 
@@ -55,11 +56,11 @@ export namespace helios::engine::modules::physics::collision::events {
         }
 
         /**
-         * @brief Returns the source entity GUID.
+         * @brief Returns the source entity handle.
          *
-         * @return GUID of the entity that reported the collision.
+         * @return Handle of the entity that reported the collision.
          */
-        [[nodiscard]] helios::util::Guid source() const noexcept {
+        [[nodiscard]] helios::engine::ecs::EntityHandle source() const noexcept {
             return source_;
         }
 

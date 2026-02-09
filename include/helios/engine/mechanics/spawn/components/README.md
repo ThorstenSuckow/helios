@@ -20,11 +20,11 @@ auto prefab = std::make_unique<GameObject>();
 prefab->add<SpawnedByProfileComponent>();
 
 // Set profile ID during spawn
-auto* comp = entity->get<SpawnedByProfileComponent>();
+auto* comp = entity.get<SpawnedByProfileComponent>();
 comp->setSpawnProfileId(enemyProfileId);
 
 // Read profile ID during despawn
-auto profileId = entity->get<SpawnedByProfileComponent>()->spawnProfileId();
+auto profileId = entity.get<SpawnedByProfileComponent>()->spawnProfileId();
 ```
 
 ---

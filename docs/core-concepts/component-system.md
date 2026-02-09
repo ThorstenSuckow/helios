@@ -6,95 +6,95 @@ helios implements a **composition-based component architecture** that separates 
 
 The component system follows the "composition over inheritance" principle:
 
-- **Components** store data for GameObjects (pure data containers)
-- **Systems** operate on groups of GameObjects with specific component configurations
-- **GameWorld** manages the lifecycle of GameObjects, Managers, and Pools
+- **Components** store data for entities (plain data classes, no base class required)
+- **Systems** operate on groups of entities with specific component configurations
+- **GameWorld** manages entity lifecycle via EntityRegistry and EntityManager
 - **GameLoop** orchestrates Systems across Phases and Passes
 
 This design allows you to build complex entities by mixing and matching components rather than creating specialized subclasses.
 
 ## Key Classes
 
-### `Component`
+### Components
 
-The base class for all components attached to a GameObject. Components are **data containers** — they store state but should not contain complex update logic.
+Components are **plain data classes** — they store state but should not contain complex update logic. Unlike traditional ECS frameworks, helios components do **not** inherit from a base class.
 
 ```cpp
-import helios.engine.ecs.Component;
+class HealthComponent {
+    float health_ = 100.0f;
+    float maxHealth_ = 100.0f;
+    bool isEnabled_ = true;
 
-class HealthComponent : public helios::engine::ecs::Component {
-    int health_ = 100;
-    
 public:
-    void takeDamage(int amount) { health_ -= amount; }
-    int health() const { return health_; }
+    // Required: Copy and Move constructors
+    HealthComponent(const HealthComponent&) = default;
+    HealthComponent(HealthComponent&&) noexcept = default;
+
+    // Optional: Enable/Disable for view filtering
+    [[nodiscard]] bool isEnabled() const noexcept { return isEnabled_; }
+    void enable() noexcept { isEnabled_ = true; }
+    void disable() noexcept { isEnabled_ = false; }
+
+    // Business logic
+    void takeDamage(float amount) { health_ -= amount; }
+    [[nodiscard]] float health() const { return health_; }
 };
 ```
 
-> **Note:** The namespace `helios::engine::ecs` contains the core entity-component classes (`GameObject`, `Component`, `System`), while `helios::engine::runtime::world` manages the game world and lifecycle (`GameWorld`, `UpdateContext`, `Manager`).
-
-Components receive a back-reference to their owning GameObject via `onAttach()`, allowing them to interact with sibling components or the entity as a whole.
+> **Note:** Components must have a `noexcept` move constructor for efficient storage in SparseSets. See [Component Structure](ecs/component-structure.md) for full requirements.
 
 #### Component Enabled State
 
-Each component has an `isEnabled()` flag that controls whether it participates in system processing:
+Components can implement `isEnabled()` / `enable()` / `disable()` for view filtering:
 
 ```cpp
-bool isEnabled() const noexcept;
-bool isDisabled() const noexcept;
+[[nodiscard]] bool isEnabled() const noexcept;
 void enable() noexcept;
 void disable() noexcept;
 ```
 
 | State | Meaning |
 |-------|---------|
-| `isEnabled() == true` | Component is active and processed by systems |
-| `isEnabled() == false` | Component is skipped by systems but remains attached |
+| `isEnabled() == true` | Component is active and included in filtered views |
+| `isEnabled() == false` | Component is skipped by `.whereEnabled()` but remains attached |
 
-This allows fine-grained control over individual components without removing them from the GameObject. For example, temporarily disabling a `CollisionComponent` makes an entity pass through walls.
+This allows fine-grained control over individual components. For example, temporarily disabling a `CollisionComponent` makes an entity pass through walls.
 
-**Important:** Disabling a component does **not** disable the entire GameObject. Use `GameObject::setActive(false)` to exclude an entity from all processing. See [Conventions: GameObject Active State](conventions.md#gameobject-active-state).
+**Important:** Disabling a component does **not** deactivate the entire entity. Use `GameObject::setActive(false)` to exclude an entity from all processing.
 
 ### `GameObject`
 
-A container for components that represents an entity in the game world.
+A lightweight wrapper (~16 bytes) for entity manipulation. Pass by value, not by reference.
 
 ```cpp
-import helios.engine.ecs.GameObject;
+// Create entity via GameWorld
+auto entity = gameWorld.addGameObject();
 
-auto entity = std::make_unique<helios::engine::ecs::GameObject>();
-
-// Add components to define behavior
-entity->add<SceneNodeComponent>(sceneNode);
-entity->add<Move2DComponent>();
-entity->add<HealthComponent>();
+// Add components
+entity.add<SceneNodeComponent>(sceneNode);
+entity.add<Move2DComponent>(speed);
+entity.add<HealthComponent>(100.0f);
 
 // Retrieve components by type (O(1) lookup)
-auto* health = entity->get<HealthComponent>();
+auto* health = entity.get<HealthComponent>();
+
+// Check component presence
+if (entity.has<CollisionComponent>()) {
+    // ...
+}
 ```
 
-Each GameObject has a unique `Guid` for identification and can be queried efficiently via `GameWorld::find<Components...>()`.
+Each entity is identified by a versioned `EntityHandle` for safe reference tracking.
 
-#### Type-Indexed Component Storage
+#### Component Storage
 
-Components are stored in a contiguous vector, indexed by their compile-time `ComponentTypeId`. This provides **O(1) direct access** without hash lookups:
+Components are stored in type-specific `SparseSet<T>` containers managed by `EntityManager`. This provides **O(1) access**:
 
 | Operation | Complexity | Description |
 |-----------|------------|-------------|
-| `get<T>()` | O(1) | Direct array access via type ID index |
-| `has<T>()` | O(1) | Bounds check + nullptr comparison |
-| `add<T>()` | O(1) amortized | May resize vector for new type IDs |
-| `components()` | O(1) / O(n) | Cached span; rebuilds on first access after modification |
-
-The vector may contain nullptr entries for component types not attached to a particular GameObject. The `components()` method returns a filtered span of non-null entries.
-
-```cpp
-// Conceptual storage layout:
-// Index:     [0]        [1]        [2]        [3]       ...
-// Content: nullptr  Transform   nullptr    Move2D     ...
-//                      ↑                      ↑
-//     ComponentTypeId::id<Transform>()   ComponentTypeId::id<Move2D>()
-```
+| `get<T>()` | O(1) | Direct SparseSet lookup via type ID |
+| `has<T>()` | O(1) | SparseSet contains check |
+| `add<T>()` | O(1) amortized | SparseSet emplace |
 
 ### `System`
 
@@ -106,10 +106,14 @@ import helios.engine.ecs.System;
 class PhysicsSystem : public helios::engine::ecs::System {
 public:
     void update(UpdateContext& ctx) noexcept override {
-        // Iterate all active GameObjects with Move2DComponent
-        for (auto [obj, move] : ctx.gameWorld().find<Move2DComponent>().each()) {
-            auto* node = obj->get<SceneNodeComponent>();
+        // Iterate all active entities with required components
+        for (auto [entity, move, transform, active] : gameWorld_->view<
+            Move2DComponent,
+            TranslationStateComponent,
+            Active
+        >().whereEnabled()) {
             // Apply physics simulation...
+            transform->translateBy(move->velocity() * ctx.deltaTime());
         }
     }
 };
@@ -119,21 +123,25 @@ Systems are organized into Phases (Pre, Main, Post) and Passes within each Phase
 
 ### `GameWorld`
 
-The root container managing GameObjects, Managers, and Pools. Located in `helios::engine::runtime::world`.
+The root container managing entities, Managers, and Pools. Located in `helios::engine::runtime::world`.
 
 ```cpp
 import helios.engine.runtime.world.GameWorld;
 
 helios::engine::runtime::world::GameWorld world;
 
-// Add entities
-auto* player = world.addGameObject(std::move(playerEntity));
+// Create entities
+auto player = world.addGameObject();
+player.add<Move2DComponent>(speed);
 
 // Add managers for deferred processing
-world.addManager(std::move(spawnManager));
+world.addManager<SpawnManager>();
 
-// Query entities by component
-for (auto* obj : world.find<Move2DComponent, SceneNodeComponent>()) {
+// Query entities by component using views
+for (auto [entity, move, collision] : world.view<
+    Move2DComponent,
+    CollisionComponent
+>()) {
     // Process matching entities
 }
 ```
@@ -275,7 +283,7 @@ public:
 For components that need cloning (e.g., for object pools), implement `CloneableComponent`:
 
 ```cpp
-import helios.engine.ecs.CloneableComponent;
+
 
 class HealthComponent : public helios::engine::ecs::CloneableComponent {
     int maxHealth_ = 100;

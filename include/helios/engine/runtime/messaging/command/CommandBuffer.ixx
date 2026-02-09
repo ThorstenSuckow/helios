@@ -23,6 +23,7 @@ import helios.engine.runtime.messaging.command.TypedWorldCommandDispatcher;
 
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.ecs.GameObject;
+import helios.engine.ecs.EntityHandle;
 import helios.util.Guid;
 
 import helios.util.log.Logger;
@@ -64,7 +65,7 @@ export namespace helios::engine::runtime::messaging::command {
          */
         struct TargetedCommandProxy {
             std::type_index typeIdx;
-            helios::util::Guid guid;
+            helios::engine::ecs::EntityHandle entityHandle;
             std::unique_ptr<helios::engine::runtime::messaging::command::TargetedCommand> targetedCommand;
         };
 
@@ -214,12 +215,12 @@ export namespace helios::engine::runtime::messaging::command {
          */
         template<typename T, typename... Args>
         requires std::is_base_of_v<TargetedCommand, T>
-        void add(const helios::util::Guid& guid, Args&& ...args) {
+        void add(const helios::engine::ecs::EntityHandle& entityHandle, Args&& ...args) {
 
             const std::type_index key{ typeid(T) };
             auto cmd = std::make_unique<T>(std::forward<Args>(args)...);
 
-            targetedCommandBuffer_.push_back(TargetedCommandProxy{key, guid, std::move(cmd)});
+            targetedCommandBuffer_.push_back(TargetedCommandProxy{key, entityHandle, std::move(cmd)});
         }
 
         /**
@@ -282,11 +283,10 @@ export namespace helios::engine::runtime::messaging::command {
             // Targeted commands are processed second
             for (auto& targetedCommandProxy : targetedCommandBuffer_) {
 
-                auto* gameObject = gameWorld.find(targetedCommandProxy.guid);
+                auto gameObject = gameWorld.find(targetedCommandProxy.entityHandle);
 
                 if (!gameObject) {
-                    logger_.warn(std::format("GameObject with Guid {} not found, skipping command",
-                                             targetedCommandProxy.guid.value()));
+                    logger_.warn("GameObject with entityHandle not found, skipping command");
                     continue;
                 }
 

@@ -17,10 +17,10 @@ export module helios.engine.modules.physics.collision.systems.GridCollisionDetec
 
 import helios.engine.ecs.System;
 import helios.engine.runtime.world.UpdateContext;
-import helios.engine.ecs.query.GameObjectFilter;
 import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.GameWorld;
 
+import helios.engine.mechanics.lifecycle.components.Active;
 
 import helios.engine.modules.physics.collision.events.TriggerCollisionEvent;
 import helios.engine.modules.physics.collision.events.SolidCollisionEvent;
@@ -31,6 +31,8 @@ import helios.engine.modules.physics.collision.components.AabbColliderComponent;
 
 import helios.engine.modules.physics.collision.types.CollisionBehavior;
 import helios.engine.modules.physics.collision.types.HitPolicy;
+
+import helios.engine.ecs.EntityHandle;
 
 import helios.util.Guid;
 import helios.math;
@@ -108,26 +110,26 @@ export namespace helios::engine::modules::physics::collision::systems {
         };
 
         /**
-         * @brief Hash functor for pairs of GUIDs.
+         * @brief Hash functor for pairs of EntityHandles.
          *
-         * Enables the use of GUID pairs as keys in unordered containers. The hash combines
-         * both GUIDs using XOR with a bit-shift to reduce collision probability for symmetric pairs.
+         * Enables the use of EntityHandle pairs as keys in unordered containers. The hash combines
+         * both handles using XOR with a bit-shift to reduce collision probability for symmetric pairs.
          *
          * @todo switch to uint32_t once helios/#174 is implemented
          */
-        struct GuidPairHash {
+        struct EntityHandlePairHash {
 
             /**
-             * @brief Computes a hash value for a GUID pair.
+             * @brief Computes a hash value for an EntityHandle pair.
              *
-             * @param pair The pair of GUIDs to hash.
+             * @param pair The pair of EntityHandles to hash.
              *
-             * @return A combined hash value for both GUIDs.
+             * @return A combined hash value for both handles.
              */
-            std::size_t operator()(const std::pair<helios::util::Guid, helios::util::Guid>& pair) const {
+            std::uint64_t operator()(const std::pair<helios::engine::ecs::EntityHandle, helios::engine::ecs::EntityHandle>& pair) const {
 
-                auto g1 = std::hash<helios::util::Guid>{}(pair.first);
-                auto g2 = std::hash<helios::util::Guid>{}(pair.second);
+                auto g1 = std::hash<helios::engine::ecs::EntityHandle>{}(pair.first);
+                auto g2 = std::hash<helios::engine::ecs::EntityHandle>{}(pair.second);
 
                 // compute the hash for the pair - shift g2 one position left, then xor with g1.
                 return g1 ^ (g2 << 1);
@@ -146,7 +148,7 @@ export namespace helios::engine::modules::physics::collision::systems {
             /**
              * @brief Pointer to the GameObject entity.
              */
-            helios::engine::ecs::GameObject* gameObject;
+            helios::engine::ecs::GameObject gameObject;
 
             /**
              * @brief Pointer to the AABB collider component providing world-space bounds.
@@ -193,10 +195,10 @@ export namespace helios::engine::modules::physics::collision::systems {
         /**
          * @brief Set of already-processed collision pairs to avoid duplicate events.
          *
-         * Stores pairs of GUIDs in canonical order (smaller GUID first) to ensure each
+         * Stores pairs of EntityHandles in canonical order (smaller handle first) to ensure each
          * collision pair is processed only once per frame, even when entities span multiple cells.
          */
-        std::unordered_set<std::pair<helios::util::Guid, helios::util::Guid>, GuidPairHash> solvedCollisions_;
+        std::unordered_set<std::pair<helios::engine::ecs::EntityHandle, helios::engine::ecs::EntityHandle>, EntityHandlePairHash> solvedCollisions_;
 
         /**
          * @brief Size of each grid cell in world units.
@@ -291,8 +293,8 @@ export namespace helios::engine::modules::physics::collision::systems {
          * @param csc_b Collision state component of the second entity.
          */
         inline void postEvent(
-            const helios::engine::ecs::GameObject* candidate,
-            const helios::engine::ecs::GameObject* match,
+            const helios::engine::ecs::GameObject candidate,
+            const helios::engine::ecs::GameObject match,
             const helios::math::vec3f contact,
             const CollisionStruct collisionStruct,
             const helios::engine::runtime::world::UpdateContext& updateContext,
@@ -314,12 +316,14 @@ export namespace helios::engine::modules::physics::collision::systems {
             // post the events
             if (isTriggerCollision || isSolidCollision) {
                 csc_a->setState(
+                    candidate,
                     contact, isSolidCollision, isTriggerCollision, collisionStruct.aCollisionBehavior,
-                    aIsCollisionReporter, match->guid(), collisionLayer, otherCollisionLayer
+                    aIsCollisionReporter, match.entityHandle(), collisionLayer, otherCollisionLayer
                 );
                 csc_b->setState(
+                    match,
                     contact, isSolidCollision, isTriggerCollision, collisionStruct.bCollisionBehavior,
-                    bIsCollisionReporter, candidate->guid(), collisionLayer, otherCollisionLayer
+                    bIsCollisionReporter, candidate.entityHandle(), collisionLayer, otherCollisionLayer
                 );
             }
 
@@ -430,15 +434,12 @@ export namespace helios::engine::modules::physics::collision::systems {
 
             prepareCollisionDetection();
 
-            // only consider enabled CollisionSettingsComponents
-            constexpr auto filter = helios::engine::ecs::query::GameObjectFilter::Active | helios::engine::ecs::query::GameObjectFilter::ComponentEnabled;
-
-            for (auto [entity, cc, csc, acc] : gameWorld_->find<
+            for (auto [entity, cc, csc, acc, active] : gameWorld_->view<
                 CollisionComponent,
                 CollisionStateComponent,
-                AabbColliderComponent
-
-            >(filter).each()) {
+                AabbColliderComponent,
+                helios::engine::mechanics::lifecycle::components::Active
+            >().whereEnabled()) {
 
                 if (!acc->boundsInitialized()) {
                     continue;
@@ -516,7 +517,7 @@ export namespace helios::engine::modules::physics::collision::systems {
          * @param collisionComponent Pointer to the entity's collision component.
          */
         inline void updateCollisionCandidate(
-            helios::engine::ecs::GameObject* go,
+            helios::engine::ecs::GameObject go,
             const helios::math::aabbi& bounds,
             AabbColliderComponent* aabbColliderComponent,
             CollisionComponent* collisionComponent,
@@ -614,19 +615,19 @@ export namespace helios::engine::modules::physics::collision::systems {
                         continue;
                     }
 
-                    auto lGuid = candidate.gameObject->guid();
-                    auto rGuid = gameObject->guid();
+                    auto lHandle = candidate.gameObject.entityHandle();
+                    auto rHandle = gameObject.entityHandle();
 
-                    if (lGuid > rGuid) {
-                        std::swap(lGuid, rGuid);
+                    if (lHandle > rHandle) {
+                        std::swap(lHandle, rHandle);
                     }
 
                     // if we have already processed a collision, do not add this collision again.
-                    if (solvedCollisions_.contains({lGuid, rGuid})) {
+                    if (solvedCollisions_.contains({lHandle, rHandle})) {
                         continue;
                     }
 
-                    solvedCollisions_.insert({lGuid, rGuid});
+                    solvedCollisions_.insert({lHandle, rHandle});
 
                     postEvent(
                         candidate.gameObject, gameObject,

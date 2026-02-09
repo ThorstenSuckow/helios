@@ -4,7 +4,7 @@
  */
 module;
 
-#include <helios/engine/ecs/query/GameObjectView.h>
+
 #include <cmath>
 
 export module helios.engine.modules.physics.motion.systems.SpinSystem;
@@ -18,6 +18,8 @@ import helios.math;
 import helios.engine.modules.effects.gfx.components.SpinComponent;
 import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
 import helios.engine.modules.spatial.transform.components.RotationStateComponent;
+
+import helios.engine.mechanics.lifecycle.components.Active;
 
 export namespace helios::engine::modules::physics::motion::systems {
     
@@ -46,10 +48,11 @@ export namespace helios::engine::modules::physics::motion::systems {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
 
-            for (auto [entity, sc, rsc] : gameWorld_->find<
+            for (auto [entity, sc, rsc, active] : gameWorld_->view<
                 helios::engine::modules::effects::gfx::components::SpinComponent,
-                helios::engine::modules::spatial::transform::components::RotationStateComponent
-            >().each()) {
+                helios::engine::modules::spatial::transform::components::RotationStateComponent,
+                helios::engine::mechanics::lifecycle::components::Active
+            >().whereEnabled()) {
 
                 float delta = updateContext.deltaTime();
 

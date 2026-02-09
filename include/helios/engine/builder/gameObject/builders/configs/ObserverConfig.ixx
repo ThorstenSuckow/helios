@@ -29,7 +29,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         /**
          * @brief Non-owning pointer to the target GameObject.
          */
-        helios::engine::ecs::GameObject* gameObject_;
+        helios::engine::ecs::GameObject gameObject_;
 
     public:
 
@@ -38,7 +38,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @param gameObject Target GameObject to configure.
          */
-        explicit ObserverConfig(helios::engine::ecs::GameObject* gameObject) : gameObject_(gameObject) {
+        explicit ObserverConfig(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {
 
         }
 
@@ -51,11 +51,11 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          */
         ObserverConfig& scorePool(const helios::engine::core::data::ScorePoolId scorePoolId) {
 
-            auto* soc = gameObject_->get<helios::engine::mechanics::scoring::components::ScoreObserverComponent>();
+            auto* soc = gameObject_.get<helios::engine::mechanics::scoring::components::ScoreObserverComponent>();
 
             assert(!soc && "ScoreObserverComponent already available.");
 
-            gameObject_->add<helios::engine::mechanics::scoring::components::ScoreObserverComponent>()
+            gameObject_.add<helios::engine::mechanics::scoring::components::ScoreObserverComponent>()
                        .setScorePoolId(scorePoolId);
             return *this;
         }

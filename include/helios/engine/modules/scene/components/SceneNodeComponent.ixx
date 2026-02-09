@@ -14,7 +14,7 @@ import helios.scene.SceneNode;
 import helios.math.types;
 import helios.core.units.Unit;
 
-import helios.engine.ecs.CloneableComponent;
+
 import helios.engine.ecs.GameObject;
 
 import helios.engine.modules.rendering.renderable.components.RenderableComponent;
@@ -32,7 +32,7 @@ export namespace helios::engine::modules::scene::components {
      *
      * @note The SceneNode must remain valid for the lifetime of this component.
      */
-    class SceneNodeComponent : public helios::engine::ecs::CloneableComponent<SceneNodeComponent> {
+    class SceneNodeComponent  {
 
     protected:
 
@@ -41,7 +41,53 @@ export namespace helios::engine::modules::scene::components {
          */
         helios::scene::SceneNode* sceneNode_;
 
+        /**
+         * @brief Whether this component is enabled.
+         */
+        bool isEnabled_ = true;
+
     public:
+
+        /**
+         * @brief Checks whether this component is enabled.
+         *
+         * @return True if enabled, false otherwise.
+         */
+        [[nodiscard]] bool isEnabled() const noexcept {
+            return isEnabled_;
+        }
+
+        /**
+         * @brief Enables this component.
+         */
+        void enable() noexcept {
+            isEnabled_ = true;
+        }
+
+        /**
+         * @brief Disables this component.
+         */
+        void disable() noexcept {
+            isEnabled_ = false;
+        }
+
+        /**
+         * @brief Called when the owning GameObject is activated.
+         *
+         * @details Activates the SceneNode, making it visible in the scene graph.
+         */
+        void onActivate() noexcept {
+            sceneNode_->setActive(true);
+        }
+
+        /**
+         * @brief Called when the owning GameObject is deactivated.
+         *
+         * @details Deactivates the SceneNode, hiding it from the scene graph.
+         */
+        void onDeactivate() noexcept {
+            sceneNode_->setActive(false);
+        }
 
 
 
@@ -56,7 +102,40 @@ export namespace helios::engine::modules::scene::components {
             assert(sceneNode_ != nullptr && "sceneNode must not be nullptr");
         }
 
-        explicit SceneNodeComponent(const SceneNodeComponent& other) {
+        /**
+         * @brief Copy constructor.
+         *
+         * @details Copies the SceneNode pointer. The actual SceneNode cloning
+         * is handled by onClone() during entity cloning.
+         */
+        SceneNodeComponent(const SceneNodeComponent& other) = default;
+
+        /**
+         * @brief Copy assignment operator.
+         */
+        SceneNodeComponent& operator=(const SceneNodeComponent&)= default;
+
+        /**
+         * @brief Move constructor.
+         */
+        SceneNodeComponent(SceneNodeComponent&&) noexcept = default;
+
+        /**
+         * @brief Move assignment operator.
+         */
+        SceneNodeComponent& operator=(SceneNodeComponent&&) noexcept = default;
+
+        /**
+         * @brief Called after copy construction during entity cloning.
+         *
+         * @details Creates a new SceneNode for this entity by cloning the source's
+         * renderable and adding it to the same parent node. This ensures each
+         * cloned entity has its own SceneNode in the scene graph.
+         *
+         * @param other The source component to clone from.
+         */
+        void onClone(const SceneNodeComponent& other) {
+
 
             auto* parent = other.sceneNode_->parent();
 
@@ -67,43 +146,6 @@ export namespace helios::engine::modules::scene::components {
             sceneNode_ = parent->addNode(std::move(sceneNode));
         }
 
-
-
-        /**
-         * @brief Called when the component is attached to a GameObject.
-         *
-         * @details
-         * Automatically adds or retrieves a ModelAabbComponent on the GameObject
-         * and initializes it with the captured AABB from the SceneNode.
-         *
-         * @param gameObject Pointer to the parent GameObject.
-         */
-        void onAttach(helios::engine::ecs::GameObject* gameObject) noexcept override {
-            Component::onAttach(gameObject);
-
-            assert(sceneNode_->shareRenderable() != nullptr && "Unexpected nullptr for SceneNode's renderable");
-
-            // this will automatically create the RenderableComponent if not alreay registered
-            gameObject->getOrAdd<helios::engine::modules::rendering::renderable::components::RenderableComponent>(sceneNode_->shareRenderable());
-        }
-
-        /**
-         * @brief Called when the owning GameObject becomes active.
-         *
-         * @details Activates the underlying SceneNode so it is included in rendering.
-         */
-        void onActivate() noexcept override {
-            sceneNode_->setActive(true);
-        }
-
-        /**
-         * @brief Called when the owning GameObject becomes inactive.
-         *
-         * @details Deactivates the underlying SceneNode so it is excluded from rendering.
-         */
-        void onDeactivate() noexcept override {
-            sceneNode_->setActive(false);
-        }
 
         /**
          * @brief Returns the underlying SceneNode.

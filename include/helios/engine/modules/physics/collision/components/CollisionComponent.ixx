@@ -9,7 +9,7 @@ module;
 
 export module helios.engine.modules.physics.collision.components.CollisionComponent;
 
-import helios.engine.ecs.CloneableComponent;
+
 import helios.engine.ecs.GameObject;
 
 import helios.engine.modules.physics.collision.types.CollisionBehavior;
@@ -43,14 +43,14 @@ export namespace helios::engine::modules::physics::collision::components {
      * collision.setSolidCollisionMask(LAYER_ENEMY);
      * ```
      */
-    class CollisionComponent : public helios::engine::ecs::CloneableComponent<CollisionComponent> {
+    class CollisionComponent  {
 
-        const size_t CollisionBehaviorSize = helios::engine::modules::physics::collision::types::CollisionBehaviorItemSize;
+        size_t CollisionBehaviorSize = helios::engine::modules::physics::collision::types::CollisionBehaviorItemSize;
 
         /**
          * @brief The collision layer this component belongs to.
          */
-        const uint32_t layerId_{};
+        uint32_t layerId_{};
 
         /**
          * @brief Bitmask specifying layers that generate trigger collisions.
@@ -109,7 +109,35 @@ export namespace helios::engine::modules::physics::collision::components {
          */
         helios::engine::modules::physics::collision::types::HitPolicy hitPolicy_ = types::HitPolicy::OneHit;
 
+        /**
+         * @brief Whether this component is enabled.
+         */
+        bool isEnabled_ = true;
+
     public:
+
+        /**
+         * @brief Checks whether this component is enabled.
+         *
+         * @return True if enabled, false otherwise.
+         */
+        [[nodiscard]] bool isEnabled() const noexcept {
+            return isEnabled_;
+        }
+
+        /**
+         * @brief Enables this component.
+         */
+        void enable() noexcept {
+            isEnabled_ = true;
+        }
+
+        /**
+         * @brief Disables this component.
+         */
+        void disable() noexcept {
+            isEnabled_ = false;
+        }
 
         /**
          * @brief Constructs a CollisionComponent with a layer ID.
@@ -135,7 +163,7 @@ export namespace helios::engine::modules::physics::collision::components {
          *
          * @param other The component to copy from.
          */
-        explicit CollisionComponent(const CollisionComponent& other) :
+        CollisionComponent(const CollisionComponent& other) :
             layerId_(other.layerId_),
             isCollisionReporter_(other.isCollisionReporter_),
             solidCollisionMask_(other.solidCollisionMask_),
@@ -144,6 +172,10 @@ export namespace helios::engine::modules::physics::collision::components {
             triggerCollisionBehavior_(other.triggerCollisionBehavior_),
             hitPolicy_(other.hitPolicy_)
         {}
+
+        CollisionComponent& operator=(const CollisionComponent&) = default;
+        CollisionComponent(CollisionComponent&&) noexcept = default;
+        CollisionComponent& operator=(CollisionComponent&&) noexcept = default;
 
 
         /**

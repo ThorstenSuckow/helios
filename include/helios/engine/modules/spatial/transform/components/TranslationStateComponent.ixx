@@ -8,7 +8,7 @@ module;
 
 export module helios.engine.modules.spatial.transform.components.TranslationStateComponent;
 
-import helios.engine.ecs.CloneableComponent;
+
 
 import helios.math;
 
@@ -22,14 +22,42 @@ export namespace helios::engine::modules::spatial::transform::components {
      * container for the ComposeTransformSystem to build the final translation matrix.
      * It separates the raw position data from the computed ComposeTransformComponent.
      */
-    class TranslationStateComponent : public helios::engine::ecs::CloneableComponent<TranslationStateComponent> {
+    class TranslationStateComponent {
 
         /**
          * @brief The current translation vector.
          */
         helios::math::vec3f translation_{};
 
+        /**
+         * @brief Whether this component is enabled.
+         */
+        bool isEnabled_ = true;
+
     public:
+
+        /**
+         * @brief Checks whether this component is enabled.
+         *
+         * @return True if enabled, false otherwise.
+         */
+        [[nodiscard]] bool isEnabled() const noexcept {
+            return isEnabled_;
+        }
+
+        /**
+         * @brief Enables this component.
+         */
+        void enable() noexcept {
+            isEnabled_ = true;
+        }
+
+        /**
+         * @brief Disables this component.
+         */
+        void disable() noexcept {
+            isEnabled_ = false;
+        }
 
         /**
          * @brief Default constructor.
@@ -41,9 +69,24 @@ export namespace helios::engine::modules::spatial::transform::components {
          *
          * @param other The component to copy from.
          */
-        explicit TranslationStateComponent(const TranslationStateComponent& other) :
+        TranslationStateComponent(const TranslationStateComponent& other) :
             translation_(other.translation_){
         }
+
+        /**
+         * @brief Copy assignment operator.
+         */
+        TranslationStateComponent& operator=(const TranslationStateComponent&) = default;
+
+        /**
+         * @brief Move constructor.
+         */
+        TranslationStateComponent(TranslationStateComponent&&) noexcept = default;
+
+        /**
+         * @brief Move assignment operator.
+         */
+        TranslationStateComponent& operator=(TranslationStateComponent&&) noexcept = default;
 
         /**
          * @brief Creates a new TranslationStateComponent with the specified translation vector.
@@ -56,7 +99,7 @@ export namespace helios::engine::modules::spatial::transform::components {
         /**
          * @brief Resets the translation vector to 0-vector when acquired.
          */
-        void onAcquire() noexcept override{
+        void onAcquire() noexcept{
             translation_ = helios::math::vec3f{};
         }
 
@@ -64,7 +107,7 @@ export namespace helios::engine::modules::spatial::transform::components {
         /**
          * @brief Resets the translation vector to 0-vector when released.
          */
-        void onRelease() noexcept override {
+        void onRelease() noexcept {
             translation_ = helios::math::vec3f{};
         }
 

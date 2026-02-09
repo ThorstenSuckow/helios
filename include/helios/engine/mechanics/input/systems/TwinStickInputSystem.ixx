@@ -13,7 +13,7 @@ import helios.math.utils;
 import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.ecs.System;
-import helios.engine.ecs.Component;
+
 import helios.engine.runtime.messaging.command.CommandBuffer;
 import helios.engine.modules.physics.motion.commands.Move2DCommand;
 import helios.engine.modules.physics.motion.commands.SteeringCommand;
@@ -49,7 +49,7 @@ export namespace helios::engine::mechanics::input::systems {
         /**
          * @brief Reference to the GameObject this system reads input for.
          */
-        helios::engine::ecs::GameObject& gameObject_;
+        helios::engine::ecs::GameObject gameObject_;
 
     public:
 
@@ -58,7 +58,7 @@ export namespace helios::engine::mechanics::input::systems {
          *
          * @param gameObject Reference to the GameObject to generate input commands for.
          */
-        explicit TwinStickInputSystem(helios::engine::ecs::GameObject& gameObject) :
+        explicit TwinStickInputSystem(helios::engine::ecs::GameObject gameObject) :
         gameObject_(gameObject) {}
 
         /**

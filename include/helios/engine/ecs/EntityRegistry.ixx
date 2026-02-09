@@ -141,6 +141,23 @@ export namespace helios::engine::ecs {
         }
 
         /**
+         * @brief looks up the version for an EntityId.
+         *
+         * This method takes an EntityId as the argument and looks up the corresponding
+         * version. If the EntityId is not part of the registry, 0 will be returned.
+         *
+         * @param entityId The entity to retrieve the version for.
+         *
+         * @return The version for the EntityId, or 0 if not found.
+         */
+        [[nodiscard]] helios::engine::core::data::VersionId version(const helios::engine::core::data::EntityId entityId) const {
+            if (entityId >= versions_.size()) {
+                return 0;
+            }
+            return versions_[entityId];
+        }
+
+        /**
          * @brief Checks whether the given handle refers to a currently alive entity.
          *
          * A handle is valid if its index is within bounds and its version matches

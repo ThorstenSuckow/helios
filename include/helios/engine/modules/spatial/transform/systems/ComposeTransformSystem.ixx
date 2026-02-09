@@ -4,7 +4,7 @@
  */
 module;
 
-#include <helios/engine/ecs/query/GameObjectView.h>
+
 
 export module helios.engine.modules.spatial.transform.systems.ComposeTransformSystem;
 
@@ -18,6 +18,8 @@ import helios.engine.modules.effects.gfx.components.SpinComponent;
 import helios.engine.runtime.world.GameWorld;
 
 import helios.engine.runtime.world.UpdateContext;
+
+import helios.engine.mechanics.lifecycle.components.Active;
 
 import helios.math;
 
@@ -45,17 +47,19 @@ export namespace helios::engine::modules::spatial::transform::systems {
 
             const float deltaTime = updateContext.deltaTime();
 
-            for (auto [entity, tc, tsc] : gameWorld_->find<
+            for (auto [entity, tc, tsc, active] : gameWorld_->view<
                 helios::engine::modules::spatial::transform::components::ComposeTransformComponent,
-                helios::engine::modules::spatial::transform::components::TranslationStateComponent
-            >().each()) {
+                helios::engine::modules::spatial::transform::components::TranslationStateComponent,
+                helios::engine::mechanics::lifecycle::components::Active
+            >().whereEnabled()) {
                 tc->setLocalTranslation(tsc->translation());
             }
 
-            for (auto [entity, tc, rsc] : gameWorld_->find<
+            for (auto [entity, tc, rsc, active] : gameWorld_->view<
                 helios::engine::modules::spatial::transform::components::ComposeTransformComponent,
-                helios::engine::modules::spatial::transform::components::RotationStateComponent
-            >().each()) {
+                helios::engine::modules::spatial::transform::components::RotationStateComponent,
+                helios::engine::mechanics::lifecycle::components::Active
+            >().whereEnabled()) {
 
                tc->setLocalRotation(rsc->rotation());
             }

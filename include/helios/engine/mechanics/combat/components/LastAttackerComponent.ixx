@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.mechanics.combat.components.LastAttackerComponent;
 
-import helios.engine.ecs.CloneableComponent;
+
 
 import helios.engine.mechanics.combat.types.AttackContext;
 
@@ -19,7 +19,7 @@ export namespace helios::engine::mechanics::combat::components {
      * attribution of kills for scoring and other game logic. The attack context
      * is updated by the damage system when damage is applied.
      */
-    class LastAttackerComponent : public helios::engine::ecs::CloneableComponent<LastAttackerComponent> {
+    class LastAttackerComponent {
 
     private:
 
@@ -28,9 +28,35 @@ export namespace helios::engine::mechanics::combat::components {
          */
         helios::engine::mechanics::combat::types::AttackContext lastAttackContext_{};
 
+        /**
+         * @brief Whether this component is enabled.
+         */
+        bool isEnabled_ = true;
 
     public:
 
+        /**
+         * @brief Checks whether this component is enabled.
+         *
+         * @return True if enabled, false otherwise.
+         */
+        [[nodiscard]] bool isEnabled() const noexcept {
+            return isEnabled_;
+        }
+
+        /**
+         * @brief Enables this component.
+         */
+        void enable() noexcept {
+            isEnabled_ = true;
+        }
+
+        /**
+         * @brief Disables this component.
+         */
+        void disable() noexcept {
+            isEnabled_ = false;
+        }
 
         LastAttackerComponent() = default;
 
@@ -40,6 +66,10 @@ export namespace helios::engine::mechanics::combat::components {
          * @param other The component to copy from (state is not copied).
          */
         LastAttackerComponent(const LastAttackerComponent& other) {}
+
+        LastAttackerComponent& operator=(const LastAttackerComponent&) = default;
+        LastAttackerComponent(LastAttackerComponent&&) noexcept = default;
+        LastAttackerComponent& operator=(LastAttackerComponent&&) noexcept = default;
 
         /**
          * @brief Sets the last attack context.
@@ -67,16 +97,20 @@ export namespace helios::engine::mechanics::combat::components {
         }
 
         /**
-         * @copydoc CloneableComponent::onAcquire()
+         * @brief Called when this entity is acquired from a pool.
+         *
+         * @details Resets the attack context to ensure no stale data.
          */
-        void onAcquire() noexcept override {
+        void onAcquire() noexcept {
             reset();
         }
 
         /**
-         * @copydoc CloneableComponent::onRelease()
+         * @brief Called when this entity is released back to a pool.
+         *
+         * @details Resets the attack context to ensure no stale data.
          */
-        void onRelease() noexcept override {
+        void onRelease() noexcept {
             reset();
         }
 

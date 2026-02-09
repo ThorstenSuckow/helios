@@ -30,10 +30,15 @@ Domain-specific builders for different aspects of entity configuration:
 | `SceneBuilder` | Scene graph integration |
 | `CollisionBuilder` | Collision detection configuration |
 | `TransformBuilder` | Spatial transform setup |
+| `UiTransformBuilder` | UI/viewport-relative transform setup |
 | `EffectsBuilder` | Visual effects (spin, etc.) |
 | `SpawnBuilder` | Spawn system integration |
 | `AiBuilder` | AI behavior configuration |
 | `CombatBuilder` | Weapon and projectile setup |
+| `LifecycleBuilder` | Entity lifecycle (active/inactive) |
+| `HealthBuilder` | Health and damage configuration |
+| `ScoringBuilder` | Score tracking configuration |
+| `ObserverBuilder` | Data binding and observation |
 
 ### gameObject/builders/configs/
 
@@ -44,14 +49,22 @@ Fine-grained configuration classes used by builders:
 | `Move2DConfig` | 2D movement parameters |
 | `SteeringConfig` | Rotation and steering behavior |
 | `MeshRenderableConfig` | Mesh, material, and shader setup |
+| `TextRenderableConfig` | Text rendering setup |
 | `SceneNodeConfig` | Scene graph parenting and inheritance |
 | `TransformConfig` | Scale and translation |
+| `UiTransformConfig` | UI/viewport-relative positioning |
 | `CollisionConfig` | Collision layers and responses |
 | `LevelBoundsCollisionConfig` | Arena boundary behavior |
 | `GfxEffectsConfig` | Visual effects parameters |
 | `SpawnConfig` | Spawn profile integration |
 | `ChaseConfig` | AI chase behavior |
 | `WeaponConfig` | Weapon fire rate and projectiles |
+| `CombatConfig` | Combat system configuration |
+| `LifecycleConfig` | Entity lifecycle settings |
+| `HealthConfig` | Health and max health values |
+| `ScoreValueConfig` | Score value on defeat |
+| `ScorePoolConfig` | Score pool binding |
+| `ObserverConfig` | Data observation/binding |
 
 ## Usage
 

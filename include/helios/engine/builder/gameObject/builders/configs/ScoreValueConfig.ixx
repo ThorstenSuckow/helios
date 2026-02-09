@@ -27,7 +27,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         /**
          * @brief Non-owning pointer to the target GameObject.
          */
-        helios::engine::ecs::GameObject* gameObject_;
+        helios::engine::ecs::GameObject gameObject_;
 
     public:
 
@@ -36,7 +36,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @param gameObject Target GameObject to configure.
          */
-        explicit ScoreValueConfig(helios::engine::ecs::GameObject* gameObject) : gameObject_(gameObject) {
+        explicit ScoreValueConfig(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {
 
         }
 
@@ -53,11 +53,11 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         template<typename T, typename... Args>
         ScoreValueConfig& score(Args&&... args) {
 
-            auto* svc = gameObject_->get<helios::engine::mechanics::scoring::components::ScoreValueComponent<T>>();
+            auto* svc = gameObject_.get<helios::engine::mechanics::scoring::components::ScoreValueComponent<T>>();
 
             assert(!svc && "Component already available.");
 
-            gameObject_->add<helios::engine::mechanics::scoring::components::ScoreValueComponent<T>>(std::forward<Args>(args)...);
+            gameObject_.add<helios::engine::mechanics::scoring::components::ScoreValueComponent<T>>(std::forward<Args>(args)...);
 
             return *this;
         }

@@ -10,13 +10,19 @@ This module provides the foundational classes for the composition-based game arc
 
 | Class | Purpose |
 |-------|---------|
-| `GameObject` | Container for components representing a game entity |
-| `Component` | Base class for data containers attached to GameObjects |
-| `CloneableComponent` | CRTP base for components that support cloning |
-| `System` | Abstract base for logic processors (registered with `GameLoop`) |
+| `GameObject` | Lightweight entity facade (~16 bytes, pass-by-value) |
+| `EntityHandle` | Versioned handle for safe entity references (8 bytes) |
+| `EntityRegistry` | Handle allocation and validation |
+| `EntityManager` | Unified interface for entity creation and component storage |
+| `SparseSet<T>` | Generic O(1) data structure for component storage |
+| `SparseSetBase` | Type-erased base for polymorphic sparse set access |
+| `View` | Component-based entity queries |
+| `System` | Abstract base for logic processors |
 | `Updatable` | Interface for per-frame updatable objects |
-| `EntityPool<T>` | Sparse-set based pool for efficient entity storage and iteration |
-| `EntityHandle` | Versioned handle for safe entity references |
+| `ComponentOps` | Function pointers for lifecycle callbacks |
+| `ComponentOpsRegistry` | Global registry mapping type IDs to ComponentOps |
+| `ComponentReflector` | Compile-time type registration |
+| `Traits` | Compile-time concepts for component lifecycle hooks |
 
 ## Component Storage Model
 
@@ -42,6 +48,52 @@ This module provides the foundational classes for the composition-based game arc
 // Content:  nullptr  Transform  nullptr   Move2D    ...
 //                       ↑                    ↑
 //           ComponentTypeId::id<Transform>()  ComponentTypeId::id<Move2D>()
+```
+
+## EntityRegistry and EntityManager
+
+The **EntityRegistry** is the single source of truth for entity lifecycle. It manages handle allocation, version tracking, and entity validation.
+
+The **EntityManager** provides a high-level API combining registry and component storage:
+
+```cpp
+EntityRegistry registry;
+EntityManager manager(registry);
+
+// Create entity
+auto entity = manager.create();
+
+// Attach components
+auto* transform = manager.emplace<TransformComponent>(entity, glm::vec3{0.0f});
+auto* velocity = manager.emplace<VelocityComponent>(entity);
+
+// Check and retrieve component
+if (manager.has<TransformComponent>(entity)) {
+    auto* t = manager.get<TransformComponent>(entity);
+}
+
+// Remove single component
+manager.remove<TransformComponent>(entity);
+
+// Destroy entity (removes all components and invalidates handle)
+manager.destroy(entity);
+```
+
+**Architecture:**
+
+```
+┌────────────────────────────────────────────────────────────┐
+│                     EntityManager                          │
+│  ┌──────────────────┐    ┌───────────────────────────────┐ │
+│  │  EntityRegistry  │    │  Component Storage            │ │
+│  │  (handle mgmt)   │    │  vector<SparseSet<T>>         │ │
+│  │  - create()      │    │  (indexed by TypeIndexer)     │ │
+│  │  - destroy()     │    │                               │ │
+│  │  - isValid()     │    │  [0] SparseSet<Transform>     │ │
+│  └──────────────────┘    │  [1] SparseSet<Velocity>      │ │
+│                          │  [2] SparseSet<Health>        │ │
+│                          └───────────────────────────────┘ │
+└────────────────────────────────────────────────────────────┘
 ```
 
 ## EntityPool
@@ -80,6 +132,27 @@ for (auto& e : pool.entities()) {
 ```
 
 ## Submodules
+
+### Traits
+
+Compile-time concepts for component lifecycle hooks:
+
+| Trait | Purpose |
+|-------|---------|
+| `HasOnRemove` | Intercept removal (return `false` to cancel) |
+| `HasOnAcquire` | Called when acquired from a pool |
+| `HasOnRelease` | Called when released back to a pool |
+
+```cpp
+struct ResourceComponent {
+    bool onRemove() {
+        cleanup();
+        return true;  // Allow removal
+    }
+};
+
+static_assert(helios::engine::ecs::traits::HasOnRemove<ResourceComponent>);
+```
 
 ### query/
 
@@ -132,12 +205,12 @@ helios::engine::runtime::world::GameWorld world;
 
 // Add entity with components
 auto entity = std::make_unique<helios::engine::ecs::GameObject>();
-entity->add<Move2DComponent>();
-entity->add<SceneNodeComponent>(sceneNode);
+entity.add<Move2DComponent>();
+entity.add<SceneNodeComponent>(sceneNode);
 auto* player = world.addGameObject(std::move(entity));
 
 // Query entities by component
-for (auto [obj, move] : world.find<Move2DComponent>().each()) {
+for (auto [obj, move] : world.find<Move2DComponent>()) {
     // Process matching entities
 }
 ```

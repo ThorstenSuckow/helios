@@ -4,7 +4,7 @@
  */
 module;
 
-#include <helios/engine/ecs/query/GameObjectView.h>
+
 
 export module helios.engine.modules.physics.collision.systems.BoundsUpdateSystem;
 
@@ -26,6 +26,8 @@ import helios.engine.modules.spatial.transform.components.RotationStateComponent
 import helios.engine.modules.physics.collision.components.AabbColliderComponent;
 
 import helios.engine.modules.rendering.model.components.ModelAabbComponent;
+
+import helios.engine.mechanics.lifecycle.components.Active;
 
 export namespace helios::engine::modules::physics::collision::systems {
 
@@ -63,14 +65,15 @@ export namespace helios::engine::modules::physics::collision::systems {
          */
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
-            for (auto [entity, mab, sc, tsc, sca, rsc, bc] : gameWorld_->find<
+            for (auto [entity, mab, sc, tsc, sca, rsc, bc, active] : gameWorld_->view<
                 helios::engine::modules::rendering::model::components::ModelAabbComponent,
                 helios::engine::modules::scene::components::SceneNodeComponent,
                 helios::engine::modules::spatial::transform::components::TranslationStateComponent,
                 helios::engine::modules::spatial::transform::components::ScaleStateComponent,
                 helios::engine::modules::spatial::transform::components::RotationStateComponent,
-                helios::engine::modules::physics::collision::components::AabbColliderComponent
-            >().each()) {
+                helios::engine::modules::physics::collision::components::AabbColliderComponent,
+                helios::engine::mechanics::lifecycle::components::Active
+            >().whereEnabled()) {
 
                 bc->setBounds(helios::engine::modules::physics::collision::Bounds::computeWorldAabb(
                     *mab, *sc, *tsc, *sca, *rsc

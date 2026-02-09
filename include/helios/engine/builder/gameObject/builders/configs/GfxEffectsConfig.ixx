@@ -26,7 +26,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         /**
          * @brief Non-owning pointer to the target GameObject.
          */
-        helios::engine::ecs::GameObject* gameObject_;
+        helios::engine::ecs::GameObject gameObject_;
 
     public:
 
@@ -35,7 +35,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @param gameObject Target GameObject to configure.
          */
-        explicit GfxEffectsConfig(helios::engine::ecs::GameObject* gameObject) : gameObject_(gameObject) {}
+        explicit GfxEffectsConfig(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {}
 
         /**
          * @brief Adds continuous rotation (spin) effect.
@@ -46,10 +46,10 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         GfxEffectsConfig& spin(const float degreesPerSecond, const helios::math::vec3f spinAxis) {
-            gameObject_->add<helios::engine::modules::effects::gfx::components::SpinComponent>(
+            gameObject_.add<helios::engine::modules::effects::gfx::components::SpinComponent>(
                 degreesPerSecond, spinAxis
             );
-            gameObject_->getOrAdd<helios::engine::modules::spatial::transform::components::RotationStateComponent>();
+            gameObject_.getOrAdd<helios::engine::modules::spatial::transform::components::RotationStateComponent>();
             return *this;
         }
 

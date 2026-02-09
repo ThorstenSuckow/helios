@@ -4,7 +4,7 @@
  */
 module;
 
-#include <helios/engine/ecs/query/GameObjectView.h>
+
 
 export module helios.engine.modules.spatial.transform.systems.TransformClearSystem;
 
@@ -16,6 +16,8 @@ import helios.engine.modules.scene.components.SceneNodeComponent;
 import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
 
 import helios.engine.modules.spatial.transform.components.ScaleStateComponent;
+
+import helios.engine.mechanics.lifecycle.components.Active;
 
 export namespace helios::engine::modules::spatial::transform::systems {
 
@@ -39,13 +41,17 @@ export namespace helios::engine::modules::spatial::transform::systems {
          */
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
-            for (auto [entity, tc] : gameWorld_->find<
-                helios::engine::modules::spatial::transform::components::ComposeTransformComponent
-                >().each()) {
+            for (auto [entity, tc, active] : gameWorld_->view<
+                helios::engine::modules::spatial::transform::components::ComposeTransformComponent,
+                helios::engine::mechanics::lifecycle::components::Active
+                >().whereEnabled()) {
                 tc->clearDirty();
             }
 
-            for (auto [entity, sc] : gameWorld_->find<helios::engine::modules::spatial::transform::components::ScaleStateComponent>().each()) {
+            for (auto [entity, sc, active] : gameWorld_->view<
+                helios::engine::modules::spatial::transform::components::ScaleStateComponent,
+                helios::engine::mechanics::lifecycle::components::Active
+            >().whereEnabled()) {
                 sc->clearDirty();
             }
 

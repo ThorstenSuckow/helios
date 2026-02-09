@@ -61,7 +61,7 @@ export namespace helios::engine::mechanics::combat::commands {
          *
          * @param gameObject The target entity with an Aim2DComponent.
          */
-        void execute(helios::engine::ecs::GameObject& gameObject) const noexcept override {
+        void execute(helios::engine::ecs::GameObject gameObject) const noexcept override {
 
             auto* aimComponent = gameObject.get<helios::engine::mechanics::combat::components::Aim2DComponent>();
 

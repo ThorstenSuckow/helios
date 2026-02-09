@@ -26,7 +26,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         /**
          * @brief Non-owning pointer to the target GameObject.
          */
-         helios::engine::ecs::GameObject* gameObject_;
+         helios::engine::ecs::GameObject gameObject_;
 
     public:
 
@@ -35,8 +35,8 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @param gameObject Target GameObject to configure.
          */
-        explicit TransformConfig(helios::engine::ecs::GameObject* gameObject) : gameObject_(gameObject) {
-            gameObject_->add<helios::engine::modules::spatial::transform::components::ComposeTransformComponent>();
+        explicit TransformConfig(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {
+            gameObject_.add<helios::engine::modules::spatial::transform::components::ComposeTransformComponent>();
 
         }
 
@@ -52,7 +52,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
             const helios::math::vec3f scale,
             const helios::core::units::Unit unit = helios::core::units::Unit::Meter
         ) {
-            gameObject_->add<helios::engine::modules::spatial::transform::components::ScaleStateComponent>(scale, unit);
+            gameObject_.add<helios::engine::modules::spatial::transform::components::ScaleStateComponent>(scale, unit);
             return *this;
         }
 
@@ -64,7 +64,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         TransformConfig& translate(const helios::math::vec3f translation) {
-            gameObject_->getOrAdd<helios::engine::modules::spatial::transform::components::TranslationStateComponent>()
+            gameObject_.getOrAdd<helios::engine::modules::spatial::transform::components::TranslationStateComponent>()
                         .setTranslation(translation);
             return *this;
         }

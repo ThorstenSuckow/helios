@@ -10,7 +10,7 @@ module;
 export module helios.engine.builder.gameObject.GameObjectFactory;
 
 import helios.engine.ecs.GameObject;
-import helios.engine.ecs.CloneableComponent;
+
 import helios.engine.builder.gameObject.builders;
 
 import helios.engine.runtime.world.GameWorld;
@@ -51,7 +51,7 @@ export namespace helios::engine::builder::gameObject {
             /**
              * @brief The GameObject being configured.
              */
-            std::unique_ptr<helios::engine::ecs::GameObject> gameObject_{};
+            helios::engine::ecs::GameObject gameObject_;
 
             /**
              * @brief Builder for motion-related components.
@@ -168,48 +168,24 @@ export namespace helios::engine::builder::gameObject {
 
 
             /**
-             * @brief Constructs a prototype from an existing GameObject.
-             *
-             * @param gameObject The GameObject to configure.
-             */
-            explicit GameObjectPrototype(std::unique_ptr<helios::engine::ecs::GameObject> gameObject) :
-            gameObject_(std::move(gameObject)),
-            motionBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::MotionBuilder>(gameObject_.get())),
-            renderingBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::RenderingBuilder>(gameObject_.get())),
-            sceneBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::SceneBuilder>(gameObject_.get())),
-            collisionBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::CollisionBuilder>(gameObject_.get())),
-            transformBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::TransformBuilder>(gameObject_.get())),
-            uiTransformBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::UiTransformBuilder>(gameObject_.get())),
-            effectsBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::EffectsBuilder>(gameObject_.get())),
-            spawnBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::SpawnBuilder>(gameObject_.get())),
-            aiBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::AiBuilder>(gameObject_.get())),
-            CombatBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::CombatBuilder>(gameObject_.get())),
-            lifecycleBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::LifecycleBuilder>(gameObject_.get())),
-            healthBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::HealthBuilder>(gameObject_.get())),
-            scoringBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::ScoringBuilder>(gameObject_.get())),
-            observerBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::ObserverBuilder>(gameObject_.get()))
-
-            {}
-
-            /**
              * @brief Constructs a prototype with a new empty GameObject.
              */
-            GameObjectPrototype() :
-                gameObject_(std::make_unique<helios::engine::ecs::GameObject>(false)),
-                motionBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::MotionBuilder>(gameObject_.get())),
-                renderingBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::RenderingBuilder>(gameObject_.get())),
-                sceneBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::SceneBuilder>(gameObject_.get())),
-                collisionBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::CollisionBuilder>(gameObject_.get())),
-                transformBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::TransformBuilder>(gameObject_.get())),
-                uiTransformBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::UiTransformBuilder>(gameObject_.get())),
-                effectsBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::EffectsBuilder>(gameObject_.get())),
-                spawnBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::SpawnBuilder>(gameObject_.get())),
-                aiBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::AiBuilder>(gameObject_.get())),
-                CombatBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::CombatBuilder>(gameObject_.get())),
-                lifecycleBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::LifecycleBuilder>(gameObject_.get())),
-                healthBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::HealthBuilder>(gameObject_.get())),
-                scoringBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::ScoringBuilder>(gameObject_.get())),
-                observerBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::ObserverBuilder>(gameObject_.get()))
+            GameObjectPrototype(helios::engine::runtime::world::GameWorld& gameWorld) :
+                gameObject_(gameWorld.addGameObject()),
+                motionBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::MotionBuilder>(gameObject_)),
+                renderingBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::RenderingBuilder>(gameObject_)),
+                sceneBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::SceneBuilder>(gameObject_)),
+                collisionBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::CollisionBuilder>(gameObject_)),
+                transformBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::TransformBuilder>(gameObject_)),
+                uiTransformBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::UiTransformBuilder>(gameObject_)),
+                effectsBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::EffectsBuilder>(gameObject_)),
+                spawnBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::SpawnBuilder>(gameObject_)),
+                aiBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::AiBuilder>(gameObject_)),
+                CombatBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::CombatBuilder>(gameObject_)),
+                lifecycleBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::LifecycleBuilder>(gameObject_)),
+                healthBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::HealthBuilder>(gameObject_)),
+                scoringBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::ScoringBuilder>(gameObject_)),
+                observerBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::ObserverBuilder>(gameObject_))
 
             {}
 
@@ -229,15 +205,12 @@ export namespace helios::engine::builder::gameObject {
              *
              * @return Ownership of the configured GameObject.
              */
-            std::unique_ptr<helios::engine::ecs::GameObject> make(const bool active = false) {
-                gameObject_->setActive(active);
-                return std::move(gameObject_);
+            helios::engine::ecs::GameObject make(const bool active = false) {
+                gameObject_.setActive(active);
+                return gameObject_;
             }
 
-            helios::engine::ecs::GameObject* makeAndAdd(helios::engine::runtime::world::GameWorld& gameWorld, const bool active = false) {
-                gameObject_->setActive(active);
-                return gameWorld.addGameObject(std::move(gameObject_));
-            }
+
 
             /**
              * @brief Configures motion-related components.
@@ -410,48 +383,14 @@ export namespace helios::engine::builder::gameObject {
         }
 
         /**
-         * @brief Creates a prototype by cloning an existing GameObject.
-         *
-         * Copies all components that implement the `Cloneable` interface.
-         * The new GameObject starts inactive.
-         *
-         * @param gameObject Source GameObject to clone from.
-         *
-         * @return A prototype for further configuration.
-         */
-        static GameObjectPrototype from(helios::engine::ecs::GameObject* gameObject) {
-
-            auto newGo = std::make_unique<helios::engine::ecs::GameObject>();
-            /**
-             * @todo Optional ClonePolicy where rules are specified?
-             */
-            newGo->setActive(false);
-
-            for (const auto* component : gameObject->components()) {
-                if (const auto* cc = dynamic_cast<const helios::engine::ecs::Cloneable*>(component)) {
-                    auto cComponent = cc->clone();
-                    // use getOrAdd since cloned components may have already added
-                    // other components in onAttach(), which we will not defer for now.
-                    // we assume that the cloned component that allows for adding
-                    // components in onAttach is the source of truth for said components
-                    newGo->getOrAdd(std::move(cComponent));
-                } else {
-                    //logger_.warn("Component not cloneable.");
-                }
-
-            }
-
-            return GameObjectPrototype(std::move(newGo));
-
-        }
-
-        /**
          * @brief Creates a new empty GameObject prototype.
+         *
+         * @param gameWorld The world where the GameObject lives.
          *
          * @return A prototype for fluent configuration.
          */
-        static GameObjectPrototype gameObject() {
-            return {};
+        static GameObjectPrototype gameObject(helios::engine::runtime::world::GameWorld& gameWorld) {
+            return GameObjectPrototype(gameWorld);
         }
 
     };

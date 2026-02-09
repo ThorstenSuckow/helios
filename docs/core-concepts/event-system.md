@@ -58,8 +58,8 @@ Events are plain data structs that carry information. They don't have an `execut
 
 ```cpp
 struct TriggerCollisionEvent {
-    helios::util::Guid entityA;
-    helios::util::Guid entityB;
+    helios::engine::ecs::EntityHandle entityA;
+    helios::engine::ecs::EntityHandle entityB;
     helios::math::vec3f contactPoint;
 };
 
@@ -84,8 +84,8 @@ The helios game loop is organized into **Phases** and **Passes**:
 │  │  │ Pass 1  │──>│ Pass 2  │──>│ Pass 3  │                    │    │
 │  │  │ (Input) │   │(Commit) │   │(Physics)│                    │    │
 │  │  └─────────┘   └────┬────┘   └─────────┘                    │    │
-│  │                     │                                        │    │
-│  │              Pass Commit Point                               │    │
+│  │                     │                                       │    │
+│  │              Pass Commit Point                              │    │
 │  └─────────────────────────────────────────────────────────────┘    │
 │                            │                                        │
 │                     Phase Commit                                    │
@@ -94,7 +94,7 @@ The helios game loop is organized into **Phases** and **Passes**:
 │  │                    MAIN PHASE                               │    │
 │  │  ┌─────────┐   ┌─────────┐   ┌─────────┐                    │    │
 │  │  │ Pass 1  │──>│ Pass 2  │──>│ Pass 3  │                    │    │
-│  │  │(Gameplay│   │(Collision│  │ (AI)   │                    │    │
+│  │  │(Gameplay│   │(Collision│  │ (AI)   │                     │    │
 │  │  └─────────┘   └─────────┘   └─────────┘                    │    │
 │  └─────────────────────────────────────────────────────────────┘    │
 │                            │                                        │

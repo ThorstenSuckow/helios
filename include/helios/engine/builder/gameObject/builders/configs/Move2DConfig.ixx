@@ -26,7 +26,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         /**
          * @brief Non-owning pointer to the target GameObject.
          */
-        helios::engine::ecs::GameObject* gameObject_;
+        helios::engine::ecs::GameObject gameObject_;
 
     public:
 
@@ -35,13 +35,13 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @param gameObject Target GameObject to configure.
          */
-        explicit Move2DConfig(helios::engine::ecs::GameObject* gameObject) : gameObject_(gameObject) {
+        explicit Move2DConfig(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {
 
-            gameObject_->add<helios::engine::modules::physics::motion::components::Move2DComponent>();
+            gameObject_.add<helios::engine::modules::physics::motion::components::Move2DComponent>();
 
-            gameObject_->getOrAdd<helios::engine::modules::spatial::transform::components::ComposeTransformComponent>();
-            gameObject_->getOrAdd<helios::engine::modules::physics::motion::components::DirectionComponent>();
-            gameObject_->getOrAdd<helios::engine::modules::spatial::transform::components::TranslationStateComponent>();
+            gameObject_.getOrAdd<helios::engine::modules::spatial::transform::components::ComposeTransformComponent>();
+            gameObject_.getOrAdd<helios::engine::modules::physics::motion::components::DirectionComponent>();
+            gameObject_.getOrAdd<helios::engine::modules::spatial::transform::components::TranslationStateComponent>();
 
         }
 
@@ -53,7 +53,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         Move2DConfig& speed(const float movementSpeed) {
-            gameObject_->get<helios::engine::modules::physics::motion::components::Move2DComponent>()
+            gameObject_.get<helios::engine::modules::physics::motion::components::Move2DComponent>()
                       ->setMovementSpeed(movementSpeed);
 
             return *this;
@@ -67,7 +67,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         Move2DConfig& acceleration(const float movementAcceleration) {
-            gameObject_->get<helios::engine::modules::physics::motion::components::Move2DComponent>()
+            gameObject_.get<helios::engine::modules::physics::motion::components::Move2DComponent>()
                       ->setMovementAcceleration(movementAcceleration);
 
             return *this;
@@ -83,7 +83,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         Move2DConfig& instantAcceleration(const bool useInstantAcceleration) {
-            gameObject_->get<helios::engine::modules::physics::motion::components::Move2DComponent>()
+            gameObject_.get<helios::engine::modules::physics::motion::components::Move2DComponent>()
                       ->setUseInstantAcceleration(useInstantAcceleration);
 
             return *this;

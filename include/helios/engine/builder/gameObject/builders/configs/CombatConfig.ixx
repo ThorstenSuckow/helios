@@ -20,11 +20,11 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         /**
          * @brief Non-owning pointer to the target GameObject.
          */
-         helios::engine::ecs::GameObject* gameObject_;
+         helios::engine::ecs::GameObject gameObject_;
 
     public:
 
-        explicit CombatConfig(helios::engine::ecs::GameObject* gameObject) : gameObject_(gameObject) {
+        explicit CombatConfig(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {
 
         }
 
@@ -36,7 +36,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         CombatConfig& trackLastAttacker() {
-            gameObject_->getOrAdd<helios::engine::mechanics::combat::components::LastAttackerComponent>();
+            gameObject_.getOrAdd<helios::engine::mechanics::combat::components::LastAttackerComponent>();
 
             return *this;
         }

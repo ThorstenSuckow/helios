@@ -28,7 +28,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         /**
          * @brief Non-owning pointer to the target GameObject.
          */
-        helios::engine::ecs::GameObject* gameObject_;
+        helios::engine::ecs::GameObject gameObject_;
 
         /**
          * @brief Validates LevelBoundsBehaviorComponent presence.
@@ -37,7 +37,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          */
         void ensureLevelBoundsBehaviorComponent(const bool isAvailable) const noexcept {
 
-            auto* lbcc = gameObject_->get<helios::engine::mechanics::bounds::components::LevelBoundsBehaviorComponent>();
+            auto* lbcc = gameObject_.get<helios::engine::mechanics::bounds::components::LevelBoundsBehaviorComponent>();
 
             if (isAvailable) {
                 assert(lbcc && "LevelBoundsBehaviorComponent not configured");
@@ -54,7 +54,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @param gameObject Target GameObject to configure.
          */
-        explicit LevelBoundsCollisionConfig(helios::engine::ecs::GameObject* gameObject) : gameObject_(gameObject) {}
+        explicit LevelBoundsCollisionConfig(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {}
 
         /**
          * @brief Sets the collision behavior at level boundaries.
@@ -65,7 +65,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          */
         LevelBoundsCollisionConfig& onCollision(helios::engine::modules::physics::collision::types::CollisionBehavior collisionBehavior) {
 
-            gameObject_->getOrAdd<helios::engine::mechanics::bounds::components::LevelBoundsBehaviorComponent>()
+            gameObject_.getOrAdd<helios::engine::mechanics::bounds::components::LevelBoundsBehaviorComponent>()
                         .setCollisionBehavior(collisionBehavior);
 
             return *this;
@@ -80,7 +80,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          */
         LevelBoundsCollisionConfig& restitution(const float restitution) {
 
-            gameObject_->getOrAdd<helios::engine::mechanics::bounds::components::LevelBoundsBehaviorComponent>()
+            gameObject_.getOrAdd<helios::engine::mechanics::bounds::components::LevelBoundsBehaviorComponent>()
                        .setRestitution(restitution);
 
             return *this;
@@ -95,7 +95,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          */
         LevelBoundsCollisionConfig& respondWith(helios::engine::modules::physics::collision::types::CollisionResponse collisionResponse) {
 
-            gameObject_->getOrAdd<helios::engine::mechanics::bounds::components::LevelBoundsBehaviorComponent>()
+            gameObject_.getOrAdd<helios::engine::mechanics::bounds::components::LevelBoundsBehaviorComponent>()
                         .setCollisionResponse(collisionResponse);
 
             return *this;

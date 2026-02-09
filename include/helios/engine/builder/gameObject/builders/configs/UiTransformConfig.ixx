@@ -31,7 +31,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         /**
          * @brief Non-owning pointer to the target GameObject.
          */
-         helios::engine::ecs::GameObject* gameObject_;
+         helios::engine::ecs::GameObject gameObject_;
 
 
     public:
@@ -41,10 +41,10 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @param gameObject Target GameObject to configure.
          */
-        explicit UiTransformConfig(helios::engine::ecs::GameObject* gameObject) : gameObject_(gameObject) {
-            gameObject_->getOrAdd<helios::engine::modules::spatial::transform::components::ComposeTransformComponent>();
-            gameObject_->getOrAdd<helios::engine::modules::spatial::transform::components::TranslationStateComponent>();
-            gameObject_->add<helios::engine::modules::ui::transform::components::UiTransformComponent>();
+        explicit UiTransformConfig(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {
+            gameObject_.getOrAdd<helios::engine::modules::spatial::transform::components::ComposeTransformComponent>();
+            gameObject_.getOrAdd<helios::engine::modules::spatial::transform::components::TranslationStateComponent>();
+            gameObject_.add<helios::engine::modules::ui::transform::components::UiTransformComponent>();
         }
 
         /**
@@ -55,7 +55,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         UiTransformConfig& anchor(const helios::engine::modules::ui::layout::Anchor anchor) {
-            gameObject_->get<helios::engine::modules::ui::transform::components::UiTransformComponent>()
+            gameObject_.get<helios::engine::modules::ui::transform::components::UiTransformComponent>()
                         ->setAnchor(anchor);
             return *this;
         }
@@ -68,7 +68,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         UiTransformConfig& viewport(const helios::engine::core::data::ViewportId viewportId) {
-            gameObject_->get<helios::engine::modules::ui::transform::components::UiTransformComponent>()
+            gameObject_.get<helios::engine::modules::ui::transform::components::UiTransformComponent>()
                         ->setViewportId(viewportId);
             return *this;
         }
@@ -81,7 +81,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         UiTransformConfig& pivot(const helios::engine::modules::ui::layout::Anchor anchor) {
-            gameObject_->get<helios::engine::modules::ui::transform::components::UiTransformComponent>()
+            gameObject_.get<helios::engine::modules::ui::transform::components::UiTransformComponent>()
                         ->setPivot(anchor);
             return *this;
         }
@@ -94,7 +94,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         UiTransformConfig& margins(const helios::math::vec4f margins) {
-            gameObject_->get<helios::engine::modules::ui::transform::components::UiTransformComponent>()
+            gameObject_.get<helios::engine::modules::ui::transform::components::UiTransformComponent>()
                         ->setMargins(margins);
             return *this;
         }

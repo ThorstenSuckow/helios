@@ -4,7 +4,7 @@
  */
 module;
 
-#include <helios/engine/ecs/query/GameObjectView.h>
+
 
 export module helios.engine.modules.spatial.transform.systems.ScaleSystem;
 
@@ -21,6 +21,8 @@ import helios.engine.modules.spatial.transform.components.ScaleStateComponent;
 import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
 
 import helios.engine.modules.rendering.model.components.ModelAabbComponent;
+
+import helios.engine.mechanics.lifecycle.components.Active;
 
 export namespace helios::engine::modules::spatial::transform::systems {
 
@@ -61,11 +63,12 @@ export namespace helios::engine::modules::spatial::transform::systems {
          */
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
-            for (auto [entity, mab, sc, tc] : gameWorld_->find<
+            for (auto [entity, mab, sc, tc, active] : gameWorld_->view<
                 helios::engine::modules::rendering::model::components::ModelAabbComponent,
                 helios::engine::modules::spatial::transform::components::ScaleStateComponent,
-                helios::engine::modules::spatial::transform::components::ComposeTransformComponent
-            >().each()) {
+                helios::engine::modules::spatial::transform::components::ComposeTransformComponent,
+                helios::engine::mechanics::lifecycle::components::Active
+            >().whereEnabled()) {
 
                 if (!sc->isDirty()) {
                     continue;

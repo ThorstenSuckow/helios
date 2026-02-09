@@ -7,7 +7,7 @@ module;
 export module helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
 
 import helios.math.types;
-import helios.engine.ecs.CloneableComponent;
+
 import helios.core.spatial.Transform;
 
 export namespace helios::engine::modules::spatial::transform::components {
@@ -20,7 +20,7 @@ export namespace helios::engine::modules::spatial::transform::components {
      * Changes to local properties mark the component as dirty, signaling systems to
      * recompute the world transform.
      */
-    class ComposeTransformComponent : public helios::engine::ecs::CloneableComponent<ComposeTransformComponent> {
+    class ComposeTransformComponent {
 
         /**
          * @brief The local transformation (translation, rotation, scale).
@@ -37,8 +37,35 @@ export namespace helios::engine::modules::spatial::transform::components {
          */
         helios::math::mat4f worldTransform_ = helios::math::mat4f::identity();
 
+        /**
+         * @brief Whether this component is enabled.
+         */
+        bool isEnabled_ = true;
 
     public:
+
+        /**
+         * @brief Checks whether this component is enabled.
+         *
+         * @return True if enabled, false otherwise.
+         */
+        [[nodiscard]] bool isEnabled() const noexcept {
+            return isEnabled_;
+        }
+
+        /**
+         * @brief Enables this component.
+         */
+        void enable() noexcept {
+            isEnabled_ = true;
+        }
+
+        /**
+         * @brief Disables this component.
+         */
+        void disable() noexcept {
+            isEnabled_ = false;
+        }
 
         /**
          * @brief Default constructor.
@@ -50,10 +77,14 @@ export namespace helios::engine::modules::spatial::transform::components {
          *
          * @param other The component to copy from.
          */
-        explicit ComposeTransformComponent(const ComposeTransformComponent& other) :
+        ComposeTransformComponent(const ComposeTransformComponent& other) :
             transform_(other.transform_),
             worldTransform_(other.worldTransform_),
             isDirty_(true){}
+
+        ComposeTransformComponent& operator=(const ComposeTransformComponent&) = default;
+        ComposeTransformComponent(ComposeTransformComponent&&) noexcept = default;
+        ComposeTransformComponent& operator=(ComposeTransformComponent&&) noexcept = default;
 
         /**
          * @brief Checks if the transform is dirty.
@@ -76,7 +107,7 @@ export namespace helios::engine::modules::spatial::transform::components {
          *
          * Makes sure the transform is considered after the component was acquired.
          */
-        void onAcquire() noexcept override {
+        void onAcquire() noexcept {
             isDirty_ = true;
         }
 
@@ -85,7 +116,7 @@ export namespace helios::engine::modules::spatial::transform::components {
          *
          * Makes sure the entities dirty-state is reset to the default state.
          */
-        void onRelease() noexcept override {
+        void onRelease() noexcept {
             isDirty_ = true;
         }
 

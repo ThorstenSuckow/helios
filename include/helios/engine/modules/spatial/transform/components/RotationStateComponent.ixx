@@ -8,7 +8,7 @@ module;
 
 export module helios.engine.modules.spatial.transform.components.RotationStateComponent;
 
-import helios.engine.ecs.CloneableComponent;
+
 
 import helios.math;
 
@@ -28,7 +28,7 @@ export namespace helios::engine::modules::spatial::transform::components {
      * The component caches the computed rotation matrices and only recalculates them
      * when the underlying angles or axes change (dirty flag pattern).
      */
-    class RotationStateComponent : public helios::engine::ecs::CloneableComponent<RotationStateComponent> {
+    class RotationStateComponent  {
 
         /**
          * @brief Current heading rotation angle in degrees.
@@ -69,6 +69,36 @@ export namespace helios::engine::modules::spatial::transform::components {
          * @brief Cached composed rotation matrix (heading * spin).
          */
         helios::math::mat4f composedRotationMatrix_;
+
+        /**
+         * @brief Whether this component is enabled.
+         */
+        bool isEnabled_ = true;
+
+    public:
+
+        /**
+         * @brief Checks whether this component is enabled.
+         *
+         * @return True if enabled, false otherwise.
+         */
+        [[nodiscard]] bool isEnabled() const noexcept {
+            return isEnabled_;
+        }
+
+        /**
+         * @brief Enables this component.
+         */
+        void enable() noexcept {
+            isEnabled_ = true;
+        }
+
+        /**
+         * @brief Disables this component.
+         */
+        void disable() noexcept {
+            isEnabled_ = false;
+        }
 
     private:
 
@@ -115,10 +145,14 @@ export namespace helios::engine::modules::spatial::transform::components {
          *
          * @details Copies rotation axes but resets angles and matrices.
          */
-        explicit RotationStateComponent(const RotationStateComponent& other) :
+        RotationStateComponent(const RotationStateComponent& other) :
         headingRotationAxis_(other.headingRotationAxis_),
         spinRotationAxis_(other.spinRotationAxis_)
         {}
+
+        RotationStateComponent& operator=(const RotationStateComponent&) = default;
+        RotationStateComponent(RotationStateComponent&&) noexcept = default;
+        RotationStateComponent& operator=(RotationStateComponent&&) noexcept = default;
 
         /**
          * @brief Sets the heading rotation angle.

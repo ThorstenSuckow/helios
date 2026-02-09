@@ -9,7 +9,7 @@ module;
 
 export module helios.engine.modules.rendering.renderable.components.RenderableComponent;
 
-import helios.engine.ecs.CloneableComponent;
+
 import helios.engine.ecs.GameObject;
 
 import helios.rendering.Renderable;
@@ -27,7 +27,7 @@ export namespace helios::engine::modules::rendering::renderable::components {
      * When attached, it automatically extracts the AABB from the renderable's mesh
      * and populates a ModelAabbComponent on the same GameObject.
      */
-    class RenderableComponent : public helios::engine::ecs::CloneableComponent<RenderableComponent> {
+    class RenderableComponent  {
 
         /**
          * @brief Shared pointer to the renderable resource.
@@ -39,7 +39,35 @@ export namespace helios::engine::modules::rendering::renderable::components {
          */
        helios::math::aabbf aabb_{};
 
+        /**
+         * @brief Whether this component is enabled.
+         */
+        bool isEnabled_ = true;
+
     public:
+
+        /**
+         * @brief Checks whether this component is enabled.
+         *
+         * @return True if enabled, false otherwise.
+         */
+        [[nodiscard]] bool isEnabled() const noexcept {
+            return isEnabled_;
+        }
+
+        /**
+         * @brief Enables this component.
+         */
+        void enable() noexcept {
+            isEnabled_ = true;
+        }
+
+        /**
+         * @brief Disables this component.
+         */
+        void disable() noexcept {
+            isEnabled_ = false;
+        }
 
         /**
          * @brief Constructs a RenderableComponent.
@@ -47,7 +75,7 @@ export namespace helios::engine::modules::rendering::renderable::components {
          * @param renderable Shared pointer to the Renderable. Must not be nullptr.
          */
         explicit RenderableComponent(std::shared_ptr<helios::rendering::Renderable> renderable) :
-        renderable_(std::move(renderable)) {
+            renderable_(std::move(renderable)) {
 
             assert(renderable_ != nullptr && "renderable must not be nullptr");
             aabb_ = renderable_->localAABB();
@@ -55,28 +83,32 @@ export namespace helios::engine::modules::rendering::renderable::components {
         }
 
         /**
-         * @brief Copy Constructor
+         * @brief Copy constructor.
+         *
+         * @details Copies the shared pointer to the Renderable. Both components
+         * will reference the same Renderable resource (shared ownership).
+         *
+         * @param other The component to copy from.
          */
-        explicit RenderableComponent(const RenderableComponent& other)  :
+        RenderableComponent(const RenderableComponent& other)  :
         renderable_(other.renderable_), aabb_(other.aabb_) {}
 
+        /**
+         * @brief Copy assignment operator.
+         */
+        RenderableComponent& operator=(const RenderableComponent&) = default;
 
         /**
-         * @brief Called when the component is attached to a GameObject.
-         *
-         * @details
-         * Automatically adds or retrieves a ModelAabbComponent on the GameObject
-         * and initializes it with the captured AABB from the Renderable.
-         *
-         * @param gameObject Pointer to the parent GameObject.
+         * @brief Move constructor.
          */
-        void onAttach(helios::engine::ecs::GameObject* gameObject) noexcept override {
-            Component::onAttach(gameObject);
+        RenderableComponent(RenderableComponent&&) noexcept = default;
 
-            auto& msc = gameObject->getOrAdd<helios::engine::modules::rendering::model::components::ModelAabbComponent>();
+        /**
+         * @brief Move assignment operator.
+         */
+        RenderableComponent& operator=(RenderableComponent&&) noexcept = default;
 
-            msc.setAabb(aabb_);
-        }
+
 
         /**
          * @brief Retrieves a shared pointer to the stored Renderable.

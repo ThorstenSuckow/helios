@@ -4,7 +4,7 @@
  */
 module;
 
-#include <helios/engine/ecs/query/GameObjectView.h>
+
 
 export module helios.engine.modules.ui.widgets.systems.UiTextBoundsUpdateSystem;
 import helios.engine.ecs.System;
@@ -12,6 +12,8 @@ import helios.engine.modules.ui.widgets.components.UiTextComponent;
 
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
+
+import helios.engine.mechanics.lifecycle.components.Active;
 
 import helios.engine.modules.rendering.model.components.ModelAabbComponent;
 
@@ -36,10 +38,11 @@ export namespace helios::engine::modules::ui::widgets::systems {
          */
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
-            for (auto [entity, txt, mac] : gameWorld_->find<
+            for (auto [entity, txt, mac, active] : gameWorld_->view<
                 helios::engine::modules::ui::widgets::components::UiTextComponent,
-                helios::engine::modules::rendering::model::components::ModelAabbComponent
-            >().each()) {
+                helios::engine::modules::rendering::model::components::ModelAabbComponent,
+                helios::engine::mechanics::lifecycle::components::Active
+            >().whereEnabled()) {
 
                 if (txt->needsResize()) {
                     auto aabb = txt->renderable()->localAABB();

@@ -39,6 +39,9 @@ class MyComponent {
 
 TEST(EntityManager, create) {
 
+    ComponentReflector::registerType<Entity>();
+    ComponentReflector::registerType<MyComponent>();
+
     EntityRegistry registry;
 
     EntityManager em(registry);
@@ -50,6 +53,9 @@ TEST(EntityManager, create) {
 
 TEST(EntityManager, destroy) {
 
+    ComponentReflector::registerType<Entity>();
+    ComponentReflector::registerType<MyComponent>();
+
     EntityRegistry registry;
     EntityManager em(registry);
 
@@ -57,10 +63,21 @@ TEST(EntityManager, destroy) {
     EXPECT_EQ(handle.entityId, 0);
     EXPECT_EQ(handle.versionId, 1);
 
+    em.emplace<MyComponent>(handle, 10);
+    em.emplace<Entity>(handle, 10);
+    EXPECT_TRUE(em.has<MyComponent>(handle));
+    EXPECT_TRUE(em.has<Entity>(handle));
+
     EXPECT_TRUE(em.destroy(handle));
+
+    EXPECT_FALSE(em.has<MyComponent>(handle));
+    EXPECT_FALSE(em.has<Entity>(handle));
 }
 
 TEST(EntityManager, emplace) {
+
+    ComponentReflector::registerType<Entity>();
+    ComponentReflector::registerType<MyComponent>();
 
     EntityRegistry registry;
     EntityManager em(registry);
@@ -87,6 +104,9 @@ TEST(EntityManager, emplace) {
 }
 
 TEST(EntityManager, remove) {
+
+    ComponentReflector::registerType<Entity>();
+    ComponentReflector::registerType<MyComponent>();
 
     EntityRegistry registry;
     EntityManager em(registry);

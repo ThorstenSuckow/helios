@@ -54,7 +54,14 @@ export namespace helios::engine::ecs {
          */
         [[nodiscard]] virtual bool contains(helios::engine::core::data::EntityId id) const = 0;
 
-
+        /**
+         * @brief Returns a raw void pointer to the element at the given index.
+         *
+         * @param id The EntityId to look up.
+         *
+         * @return Raw pointer to the element, or `nullptr` if not found.
+         */
+        [[nodiscard]] virtual void* raw(helios::engine::core::data::EntityId id) = 0;
     };
 
 
@@ -171,6 +178,43 @@ export namespace helios::engine::ecs {
     public:
 
         /**
+         * @brief Default constructor creating an empty sparse set.
+         */
+        SparseSet() = default;
+
+        /**
+         * @brief Constructs a sparse set with pre-allocated capacity.
+         *
+         * @param capacity The initial capacity to reserve for all internal vectors.
+         */
+        explicit SparseSet(const size_t capacity) {
+            sparse_.reserve(capacity);
+            storage_.reserve(capacity);
+            denseToSparse_.reserve(capacity);
+        };
+
+        /**
+         * @brief Copy operations are deleted to prevent accidental duplication.
+         */
+        SparseSet(const SparseSet&) = delete;
+
+        /**
+         * @brief Copy assignment is deleted.
+         */
+        SparseSet& operator=(const SparseSet&) = delete;
+
+        /**
+         * @brief Move constructor.
+         */
+        SparseSet(SparseSet&&) noexcept = default;
+
+        /**
+         * @brief Move assignment operator.
+         */
+        SparseSet& operator=(SparseSet&&) noexcept = default;
+
+
+        /**
          * @brief Constructs and inserts an element at the given index.
          *
          * Forwards arguments to construct `T` in-place.
@@ -238,14 +282,17 @@ export namespace helios::engine::ecs {
 
 
         /**
-         * @brief Removes the element at the given index.
+         * @brief Removes the element at the given index using swap-and-pop.
          *
-         * Uses swap-and-pop to maintain dense storage contiguity. If a remove callback
-         * is registered and returns `false`, removal is cancelled.
+         * @details Uses the swap-and-pop technique for O(1) removal:
+         * 1. Move the last element to the position of the removed element
+         * 2. Update the sparse array entry for the moved element
+         * 3. Pop the last element from dense storage
+         * 4. Mark the removed slot as Tombstone
          *
          * @param idx The EntityId of the element to remove.
          *
-         * @return `true` if the element was removed, `false` if not found or removal was cancelled.
+         * @return `true` if the element was removed, `false` if not found.
          */
         [[nodiscard]] bool remove(const EntityId idx) override {
 
@@ -257,13 +304,6 @@ export namespace helios::engine::ecs {
             const auto sparseIdx  = denseToSparse_[denseIndex];
 
             assert(sparseIdx == idx && "Sparse index mismatch");
-
-            if constexpr (helios::engine::ecs::traits::HasOnRemove<T>) {
-                if (!storage_[denseIndex].onRemove()) {
-                    return false;
-                }
-            }
-
 
             if (denseIndex != storage_.size() - 1) {
                 storage_[denseIndex] = std::move(storage_.back());
@@ -324,6 +364,144 @@ export namespace helios::engine::ecs {
             return idx < sparse_.size() && sparse_[idx] != Tombstone;
         }
 
+        /**
+         * @copydoc SparseSetBase::raw
+         */
+        [[nodiscard]] void* raw(const helios::engine::core::data::EntityId id) override {
+
+            T* ptr = get(id);
+            return static_cast<void*>(ptr);
+        }
+
+
+        /**
+         * @brief Forward iterator for traversing the sparse set.
+         *
+         * @details Iterates over the dense storage array, providing access to both
+         * the stored element and its associated EntityId.
+         */
+        struct Iterator {
+            using DataIt = typename std::vector<T>::iterator;
+            using IdIt = typename std::vector<EntityId>::iterator;
+
+            DataIt dataIt_;
+            IdIt idIt_;
+
+            using iterator_category = std::forward_iterator_tag;
+            using value_type = T;
+            using difference_type = std::ptrdiff_t;
+            using pointer = T*;
+            using reference = T&;
+
+            Iterator() = default;
+
+            Iterator(DataIt dataIt, IdIt idIt) : dataIt_(dataIt), idIt_(idIt) {}
+
+            reference operator*() const { return *dataIt_; }
+            pointer operator->() const { return &*dataIt_; }
+
+            /**
+             * @brief Returns the EntityId for the current element.
+             *
+             * @return The EntityId associated with the current element.
+             */
+            [[nodiscard]] EntityId entityId() const { return *idIt_; }
+
+            [[nodiscard]] bool operator==(const Iterator& other) const { return dataIt_ == other.dataIt_;}
+            [[nodiscard]] bool operator!=(const Iterator& other) const { return dataIt_ != other.dataIt_;}
+
+            Iterator& operator++(int) {
+                Iterator tmp = *this;
+                ++(*this);
+                return tmp;
+            }
+
+            Iterator& operator++() {
+                ++dataIt_; ++idIt_; return *this;
+            }
+        };
+
+        /**
+         * @brief Const forward iterator for traversing the sparse set.
+         *
+         * @details Provides read-only access to elements and their EntityIds.
+         */
+        struct ConstIterator {
+            using DataIt = typename std::vector<T>::const_iterator;
+            using IdIt = typename std::vector<EntityId>::const_iterator;
+
+            DataIt dataIt_;
+            IdIt idIt_;
+
+            using iterator_category = std::forward_iterator_tag;
+            using value_type = T;
+            using difference_type = std::ptrdiff_t;
+            using pointer = const T*;
+            using reference = const T&;
+
+            ConstIterator() = default;
+
+            ConstIterator(DataIt dataIt, IdIt idIt) : dataIt_(dataIt), idIt_(idIt) {}
+
+            reference operator*() const { return *dataIt_; }
+            pointer operator->() const { return &*dataIt_; }
+
+            /**
+             * @brief Returns the EntityId for the current element.
+             *
+             * @return The EntityId associated with the current element.
+             */
+            [[nodiscard]] EntityId entityId() const { return *idIt_; }
+
+            [[nodiscard]] bool operator==(const ConstIterator& other) const { return dataIt_ == other.dataIt_;}
+            [[nodiscard]] bool operator!=(const ConstIterator& other) const { return dataIt_ != other.dataIt_;}
+
+            ConstIterator& operator++(int) {
+                ConstIterator tmp = *this;
+                ++(*this);
+                return tmp;
+            }
+
+            ConstIterator& operator++() {
+                ++dataIt_; ++idIt_; return *this;
+            }
+        };
+
+        /**
+         * @brief Returns an iterator to the beginning of the dense storage.
+         *
+         * @return Iterator pointing to the first element.
+         */
+        [[nodiscard]] Iterator begin() {
+            return Iterator(storage_.begin(), denseToSparse_.begin());
+        }
+
+        /**
+         * @brief Returns an iterator to the end of the dense storage.
+         *
+         * @return Iterator pointing past the last element.
+         */
+        [[nodiscard]] Iterator end() {
+            return Iterator(storage_.end(), denseToSparse_.end());
+        }
+
+        /**
+         * @brief Returns a const iterator to the beginning of the dense storage.
+         *
+         * @return ConstIterator pointing to the first element.
+         */
+        [[nodiscard]] ConstIterator begin() const {
+            return ConstIterator(storage_.begin(), denseToSparse_.begin());
+        }
+
+        /**
+         * @brief Returns a const iterator to the end of the dense storage.
+         *
+         * @return ConstIterator pointing past the last element.
+         */
+        [[nodiscard]] ConstIterator end() const {
+            return ConstIterator(storage_.end(), denseToSparse_.end());
+        }
 
     };
 

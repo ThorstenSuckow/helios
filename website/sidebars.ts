@@ -40,7 +40,30 @@ const sidebars: SidebarsConfig = {
         'core-concepts/command-system',
         'core-concepts/event-system',
         'core-concepts/spawn-system',
-        'core-concepts/text-rendering'
+        'core-concepts/text-rendering',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'ECS Architecture',
+      link: {
+        type: 'doc',
+        id: 'core-concepts/ecs/overview'
+      },
+      items: [
+        'core-concepts/ecs/component-structure',
+        'core-concepts/ecs/gameobject',
+        'core-concepts/ecs/entity-manager',
+        'core-concepts/ecs/entity-registry',
+        'core-concepts/ecs/entity-handle',
+        'core-concepts/ecs/view',
+        'core-concepts/ecs/system',
+        'core-concepts/ecs/updatable',
+        'core-concepts/ecs/traits',
+        'core-concepts/ecs/component-ops',
+        'core-concepts/sparse-set',
+        'core-concepts/component-registry',
+        'core-concepts/component-lifecycle',
       ],
     },
     {

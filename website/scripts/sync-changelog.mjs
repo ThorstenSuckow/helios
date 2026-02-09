@@ -218,6 +218,76 @@ async function main() {
       meta: { title: 'Text Rendering', description: 'GPU-accelerated text rendering with FreeType and OpenGL.', slug: '/core-concepts/text-rendering', tags: ['rendering', 'text', 'freetype'], keywords: ['helios', 'text rendering', 'FreeType', 'OpenGL', 'glyph', 'font'], sidebar_label: 'Text Rendering', sidebar_position: 9 }
     },
     {
+      src: path.join(repoRoot, 'docs', 'core-concepts', 'sparse-set.md'),
+      dest: path.join(websiteRoot, 'docs', 'core-concepts', 'sparse-set.md'),
+      meta: { title: 'Sparse Set', description: 'Generic O(1) data structure for efficient entity-component storage in the ECS.', slug: '/core-concepts/sparse-set', tags: ['ecs', 'architecture', 'data-structure'], keywords: ['helios', 'sparse set', 'ECS', 'component storage', 'swap-and-pop', 'O(1)'], sidebar_label: 'Sparse Set', sidebar_position: 10 }
+    },
+    {
+      src: path.join(repoRoot, 'docs', 'core-concepts', 'component-registry.md'),
+      dest: path.join(websiteRoot, 'docs', 'core-concepts', 'component-registry.md'),
+      meta: { title: 'Component Registry', description: 'Modular component registration system for runtime reflection, cloning, and lifecycle hooks.', slug: '/core-concepts/component-registry', tags: ['ecs', 'architecture', 'registry'], keywords: ['helios', 'component registry', 'ECS', 'reflection', 'cloning', 'lifecycle'], sidebar_label: 'Component Registry', sidebar_position: 11 }
+    },
+    {
+      src: path.join(repoRoot, 'docs', 'core-concepts', 'component-lifecycle.md'),
+      dest: path.join(websiteRoot, 'docs', 'core-concepts', 'component-lifecycle.md'),
+      meta: { title: 'Component Lifecycle', description: 'Lifecycle hooks for ECS components: onAcquire, onRelease, onRemove, enable/disable, and cloning.', slug: '/core-concepts/component-lifecycle', tags: ['ecs', 'architecture', 'lifecycle'], keywords: ['helios', 'component lifecycle', 'ECS', 'hooks', 'pooling', 'onAcquire', 'onRelease'], sidebar_label: 'Component Lifecycle', sidebar_position: 12 }
+    },
+    {
+      src: path.join(repoRoot, 'docs', 'core-concepts', 'ecs', 'gameobject.md'),
+      dest: path.join(websiteRoot, 'docs', 'core-concepts', 'ecs', 'gameobject.md'),
+      meta: { title: 'GameObject', description: 'High-level entity wrapper providing type-safe component access and lifecycle management.', slug: '/core-concepts/ecs/gameobject', tags: ['ecs', 'architecture', 'entity'], keywords: ['helios', 'GameObject', 'ECS', 'entity', 'component', 'facade'], sidebar_label: 'GameObject', sidebar_position: 1 }
+    },
+    {
+      src: path.join(repoRoot, 'docs', 'core-concepts', 'ecs', 'README.md'),
+      dest: path.join(websiteRoot, 'docs', 'core-concepts', 'ecs', 'overview.md'),
+      meta: { title: 'ECS Architecture', description: 'Entity-Component-System architecture overview for the helios game engine.', slug: '/core-concepts/ecs', tags: ['ecs', 'architecture', 'overview'], keywords: ['helios', 'ECS', 'entity', 'component', 'system', 'architecture'], sidebar_label: 'Overview', sidebar_position: 0 }
+    },
+    {
+      src: path.join(repoRoot, 'docs', 'core-concepts', 'ecs', 'component-structure.md'),
+      dest: path.join(websiteRoot, 'docs', 'core-concepts', 'ecs', 'component-structure.md'),
+      meta: { title: 'Component Structure', description: 'Required structure for ECS components including Copy/Move constructors for the prefab system.', slug: '/core-concepts/ecs/component-structure', tags: ['ecs', 'component', 'prefab'], keywords: ['helios', 'component', 'copy constructor', 'move constructor', 'prefab', 'cloning'], sidebar_label: 'Component Structure', sidebar_position: 1 }
+    },
+    {
+      src: path.join(repoRoot, 'docs', 'core-concepts', 'ecs', 'entity-manager.md'),
+      dest: path.join(websiteRoot, 'docs', 'core-concepts', 'ecs', 'entity-manager.md'),
+      meta: { title: 'EntityManager', description: 'Central manager for entity lifecycle and component storage in the ECS.', slug: '/core-concepts/ecs/entity-manager', tags: ['ecs', 'architecture', 'manager'], keywords: ['helios', 'EntityManager', 'ECS', 'component storage', 'SparseSet'], sidebar_label: 'EntityManager', sidebar_position: 2 }
+    },
+    {
+      src: path.join(repoRoot, 'docs', 'core-concepts', 'ecs', 'entity-registry.md'),
+      dest: path.join(websiteRoot, 'docs', 'core-concepts', 'ecs', 'entity-registry.md'),
+      meta: { title: 'EntityRegistry', description: 'Single source of truth for entity lifecycle with versioned handles and index recycling.', slug: '/core-concepts/ecs/entity-registry', tags: ['ecs', 'architecture', 'registry'], keywords: ['helios', 'EntityRegistry', 'ECS', 'versioned handles', 'entity lifecycle'], sidebar_label: 'EntityRegistry', sidebar_position: 3 }
+    },
+    {
+      src: path.join(repoRoot, 'docs', 'core-concepts', 'ecs', 'entity-handle.md'),
+      dest: path.join(websiteRoot, 'docs', 'core-concepts', 'ecs', 'entity-handle.md'),
+      meta: { title: 'EntityHandle', description: 'Lightweight versioned reference for safe entity identification.', slug: '/core-concepts/ecs/entity-handle', tags: ['ecs', 'architecture', 'handle'], keywords: ['helios', 'EntityHandle', 'ECS', 'versioned reference', 'stale detection'], sidebar_label: 'EntityHandle', sidebar_position: 4 }
+    },
+    {
+      src: path.join(repoRoot, 'docs', 'core-concepts', 'ecs', 'view.md'),
+      dest: path.join(websiteRoot, 'docs', 'core-concepts', 'ecs', 'view.md'),
+      meta: { title: 'View', description: 'Lightweight iterator for querying entities with specific components.', slug: '/core-concepts/ecs/view', tags: ['ecs', 'architecture', 'query'], keywords: ['helios', 'View', 'ECS', 'component query', 'iteration'], sidebar_label: 'View', sidebar_position: 5 }
+    },
+    {
+      src: path.join(repoRoot, 'docs', 'core-concepts', 'ecs', 'system.md'),
+      dest: path.join(websiteRoot, 'docs', 'core-concepts', 'ecs', 'system.md'),
+      meta: { title: 'System', description: 'Abstract base class for game logic processors operating on the GameWorld.', slug: '/core-concepts/ecs/system', tags: ['ecs', 'architecture', 'system'], keywords: ['helios', 'System', 'ECS', 'game logic', 'Updatable'], sidebar_label: 'System', sidebar_position: 6 }
+    },
+    {
+      src: path.join(repoRoot, 'docs', 'core-concepts', 'ecs', 'updatable.md'),
+      dest: path.join(websiteRoot, 'docs', 'core-concepts', 'ecs', 'updatable.md'),
+      meta: { title: 'Updatable', description: 'Interface for objects requiring per-frame updates in the game loop.', slug: '/core-concepts/ecs/updatable', tags: ['ecs', 'architecture', 'interface'], keywords: ['helios', 'Updatable', 'ECS', 'update', 'game loop'], sidebar_label: 'Updatable', sidebar_position: 7 }
+    },
+    {
+      src: path.join(repoRoot, 'docs', 'core-concepts', 'ecs', 'traits.md'),
+      dest: path.join(websiteRoot, 'docs', 'core-concepts', 'ecs', 'traits.md'),
+      meta: { title: 'Traits', description: 'Compile-time detection of component lifecycle hooks using C++20 concepts.', slug: '/core-concepts/ecs/traits', tags: ['ecs', 'architecture', 'concepts'], keywords: ['helios', 'Traits', 'ECS', 'concepts', 'compile-time', 'lifecycle'], sidebar_label: 'Traits', sidebar_position: 8 }
+    },
+    {
+      src: path.join(repoRoot, 'docs', 'core-concepts', 'ecs', 'component-ops.md'),
+      dest: path.join(websiteRoot, 'docs', 'core-concepts', 'ecs', 'component-ops.md'),
+      meta: { title: 'ComponentOps', description: 'Function pointers for type-erased component lifecycle callbacks.', slug: '/core-concepts/ecs/component-ops', tags: ['ecs', 'architecture', 'reflection'], keywords: ['helios', 'ComponentOps', 'ECS', 'function pointers', 'type erasure'], sidebar_label: 'ComponentOps', sidebar_position: 9 }
+    },
+    {
       src: path.join(repoRoot, 'examples', 'README.md'),
       dest: path.join(websiteRoot, 'docs', 'examples', 'overview.md'),
       meta: { title: 'Examples Overview', description: 'Example applications demonstrating helios features: rendering, input, scene graph, and more.', slug: '/examples', tags: ['examples', 'tutorial'], keywords: ['helios', 'examples', 'tutorials', 'getting started'], sidebar_label: 'Overview' }

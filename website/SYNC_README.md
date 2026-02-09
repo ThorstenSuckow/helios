@@ -18,8 +18,16 @@ The following files are **automatically copied** from the repository during the 
 | `docs/CONTRIBUTING.md` | `docs/contributing/commits.md`        | Commit message conventions |
 | `docs/CHANGELOG_GUIDE.md` | `docs/contributing/changelog-guide.md` | Changelog maintenance guide |
 | `docs/core-concepts/conventions.md` | `docs/core-concepts/conventions.md`   | Technical conventions (LHS, matrices, units) |
+| `docs/core-concepts/scene-graph.md` | `docs/core-concepts/scene-graph.md` | Scene graph architecture |
+| `docs/core-concepts/component-system.md` | `docs/core-concepts/component-system.md` | Composition-based entity design |
+| `docs/core-concepts/gameloop-architecture.md` | `docs/core-concepts/gameloop-architecture.md` | Game loop phases and passes |
 | `docs/core-concepts/command-system.md` | `docs/core-concepts/command-system.md` | Command pattern, dispatchers, managers |
 | `docs/core-concepts/event-system.md` | `docs/core-concepts/event-system.md` | Phase/pass event propagation |
+| `docs/core-concepts/spawn-system.md` | `docs/core-concepts/spawn-system.md` | Spawn scheduling and profiles |
+| `docs/core-concepts/object-pooling.md` | `docs/core-concepts/object-pooling.md` | Entity pooling system |
+| `docs/core-concepts/gameobject-builder.md` | `docs/core-concepts/gameobject-builder.md` | Fluent builder pattern |
+| `docs/core-concepts/text-rendering.md` | `docs/core-concepts/text-rendering.md` | FreeType-based text rendering |
+| `docs/core-concepts/sparse-set.md` | `docs/core-concepts/sparse-set.md` | O(1) component storage |
 | `docs/core-concepts/component-registry.md` | `docs/core-concepts/component-registry.md` | Modular component registration system |
 | `docs/core-concepts/component-lifecycle.md` | `docs/core-concepts/component-lifecycle.md` | Component lifecycle hooks |
 | `docs/core-concepts/ecs/README.md` | `docs/core-concepts/ecs/overview.md` | ECS architecture overview |
@@ -33,6 +41,15 @@ The following files are **automatically copied** from the repository during the 
 | `docs/core-concepts/ecs/updatable.md` | `docs/core-concepts/ecs/updatable.md` | Per-frame update interface |
 | `docs/core-concepts/ecs/traits.md` | `docs/core-concepts/ecs/traits.md` | Compile-time lifecycle detection |
 | `docs/core-concepts/ecs/component-ops.md` | `docs/core-concepts/ecs/component-ops.md` | Lifecycle function pointers |
+| `examples/README.md` | `docs/examples/overview.md` | Examples overview |
+| `examples/simple_cube_rendering/README.md` | `docs/examples/simple-cube.md` | Simple cube rendering tutorial |
+| `examples/game_controller_input/README.md` | `docs/examples/gamepad-input.md` | Gamepad input tutorial |
+| `examples/spaceship_control/README.md` | `docs/examples/spaceship-control.md` | Spaceship control example |
+| `examples/spaceship_shooting/README.md` | `docs/examples/spaceship-shooting.md` | Twin-stick shooting example |
+| `examples/enemy_spawn/README.md` | `docs/examples/enemy-spawn.md` | Enemy spawning example |
+| `examples/collision_detection/README.md` | `docs/examples/collision-detection.md` | Collision detection example |
+| `examples/render_text_demo/README.md` | `docs/examples/render-text-demo.md` | Text rendering demo |
+| `examples/scoring_demo/README.md` | `docs/examples/scoring-demo.md` | Scoring system demo |
 
 ### How It Works
 

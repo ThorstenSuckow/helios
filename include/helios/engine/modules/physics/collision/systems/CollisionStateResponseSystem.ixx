@@ -30,6 +30,8 @@ import helios.engine.modules.physics.collision.events;
 
 import helios.engine.mechanics.spawn.components.SpawnedByProfileComponent;
 
+import helios.engine.mechanics.lifecycle.components.Active;
+
 using namespace helios::engine::modules::physics::collision::components;
 using namespace helios::engine::modules::physics::collision::types;
 using namespace helios::engine::runtime::spawn::commands;
@@ -68,10 +70,11 @@ export namespace helios::engine::modules::physics::collision::systems {
          */
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
-            for (auto [entity, csc, sbp] : gameWorld_->find<
+            for (auto [entity, csc, sbp, active] : gameWorld_->view<
                 CollisionStateComponent,
-                helios::engine::mechanics::spawn::components::SpawnedByProfileComponent
-            >().each()) {
+                helios::engine::mechanics::spawn::components::SpawnedByProfileComponent,
+                helios::engine::mechanics::lifecycle::components::Active
+            >().whereEnabled()) {
 
                 if (!csc->hasCollision()) {
                     continue;
@@ -83,14 +86,14 @@ export namespace helios::engine::modules::physics::collision::systems {
 
                     if (csc->isTrigger()) {
                         updateContext.pushPass<events::TriggerCollisionEvent>(
-                            entity->entityHandle(),
+                            entity.entityHandle(),
                             csc->collisionContext()
                        );
                     }
 
                     if (csc->isSolid()) {
                         updateContext.pushPass<events::SolidCollisionEvent>(
-                            entity->entityHandle(),
+                            entity.entityHandle(),
                             csc->collisionContext()
                        );
                     }
@@ -99,7 +102,7 @@ export namespace helios::engine::modules::physics::collision::systems {
 
                 if (hasFlag(collisionBehavior, CollisionBehavior::Despawn)) {
                     updateContext.commandBuffer().add<DespawnCommand>(
-                        entity->entityHandle(), sbp->spawnProfileId());
+                        entity.entityHandle(), sbp->spawnProfileId());
                 }
             }
 

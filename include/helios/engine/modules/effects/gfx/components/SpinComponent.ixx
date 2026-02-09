@@ -7,7 +7,7 @@ module;
 
 export module helios.engine.modules.effects.gfx.components.SpinComponent;
 
-import helios.engine.ecs.CloneableComponent;
+
 
 import helios.math;
 
@@ -24,7 +24,7 @@ export namespace helios::engine::modules::effects::gfx::components {
      * around a specific axis. It stores the rotation speed, axis, and current
      * rotation state.
      */
-    class SpinComponent : public helios::engine::ecs::CloneableComponent<SpinComponent> {
+    class SpinComponent {
 
         /**
          * @brief Rotation speed in degrees per second.
@@ -41,7 +41,35 @@ export namespace helios::engine::modules::effects::gfx::components {
          */
         float currentRotation_ = 0.0f;
 
+        /**
+         * @brief Whether this component is enabled.
+         */
+        bool isEnabled_ = true;
+
     public:
+
+        /**
+         * @brief Checks whether this component is enabled.
+         *
+         * @return True if enabled, false otherwise.
+         */
+        [[nodiscard]] bool isEnabled() const noexcept {
+            return isEnabled_;
+        }
+
+        /**
+         * @brief Enables this component.
+         */
+        void enable() noexcept {
+            isEnabled_ = true;
+        }
+
+        /**
+         * @brief Disables this component.
+         */
+        void disable() noexcept {
+            isEnabled_ = false;
+        }
 
         /**
          * @brief Constructs a SpinComponent.
@@ -59,9 +87,13 @@ export namespace helios::engine::modules::effects::gfx::components {
          *
          * @param other The component to copy from.
          */
-        explicit SpinComponent(const SpinComponent& other)
+        SpinComponent(const SpinComponent& other)
         : rotationSpeed_(other.rotationSpeed_),
           rotationAxis_(other.rotationAxis_) {}
+
+        SpinComponent& operator=(const SpinComponent&) = default;
+        SpinComponent(SpinComponent&&) noexcept = default;
+        SpinComponent& operator=(SpinComponent&&) noexcept = default;
 
         /**
          * @brief Returns the rotation axis.

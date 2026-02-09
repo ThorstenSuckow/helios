@@ -1,6 +1,6 @@
 /**
  * @file _module.ixx
- * @brief Aggregate module for collision_detection example.
+ * @brief Aggregate module for scoring example.
  */
 
 export module helios.examples.scoring;

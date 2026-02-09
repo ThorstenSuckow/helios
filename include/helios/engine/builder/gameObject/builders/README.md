@@ -46,7 +46,7 @@ prototype.withMotion([](MotionBuilder& builder) {
 ┌─────────────────────────────────────────────────────────────┐
 │                     Builder (e.g. MotionBuilder)            │
 │  ┌─────────────────────────────────────────────────────────┐│
-│  │ GameObject* gameObject_                                 ││
+│  │ GameObject gameObject_                                 ││
 │  ├─────────────────────────────────────────────────────────┤│
 │  │ move2D()     → Move2DConfig{gameObject_}               ││
 │  │ steering()   → SteeringConfig{gameObject_}             ││

@@ -23,7 +23,7 @@ export namespace helios::engine::builder::gameObject::builders {
         /**
          * @brief Non-owning pointer to the target GameObject.
          */
-        helios::engine::ecs::GameObject* gameObject_;
+        helios::engine::ecs::GameObject gameObject_;
 
     public:
 
@@ -32,7 +32,7 @@ export namespace helios::engine::builder::gameObject::builders {
          *
          * @param gameObject Target GameObject to configure.
          */
-        explicit CollisionBuilder(helios::engine::ecs::GameObject* gameObject) : gameObject_(gameObject) {}
+        explicit CollisionBuilder(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {}
 
         /**
          * @brief Returns a config for general collision setup.

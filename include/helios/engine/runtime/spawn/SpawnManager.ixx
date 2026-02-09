@@ -137,13 +137,13 @@ export namespace helios::engine::runtime::spawn {
          *
          * @see helios::engine::modules::physics::collision::Bounds::computeWorldAabb
          */
-        void ensureBounds(const helios::engine::ecs::GameObject* go, helios::math::aabbf& bounds) {
+        void ensureBounds(helios::engine::ecs::GameObject go, helios::math::aabbf& bounds) {
             if (bounds.min()[0] > bounds.max()[0]) {
-                const auto mab   = go->get<helios::engine::modules::rendering::model::components::ModelAabbComponent>();
-                const auto sca    = go->get<helios::engine::modules::spatial::transform::components::ScaleStateComponent>();
-                const auto rsc = go->get<helios::engine::modules::spatial::transform::components::RotationStateComponent>();
-                const auto scn   = go->get<helios::engine::modules::scene::components::SceneNodeComponent>();
-                const auto tsc   = go->get<helios::engine::modules::spatial::transform::components::TranslationStateComponent>();
+                const auto* mab   = go.get<helios::engine::modules::rendering::model::components::ModelAabbComponent>();
+                const auto* sca    = go.get<helios::engine::modules::spatial::transform::components::ScaleStateComponent>();
+                auto* rsc = go.get<helios::engine::modules::spatial::transform::components::RotationStateComponent>();
+                const auto* scn   = go.get<helios::engine::modules::scene::components::SceneNodeComponent>();
+                const auto* tsc   = go.get<helios::engine::modules::spatial::transform::components::TranslationStateComponent>();
 
                 assert(mab && scn && tsc && sca && rsc && "Missing Components for AABB computation");
                 bounds = helios::engine::modules::physics::collision::Bounds::computeWorldAabb(
@@ -200,7 +200,7 @@ export namespace helios::engine::runtime::spawn {
                 const auto spawnCount = std::min(amount, poolSnapshot.inactiveCount);
                 for (size_t i = 0; i < spawnCount; i++) {
 
-                    auto* go = gameObjectPoolManager_->acquire(gameObjectPoolId);
+                    auto go = gameObjectPoolManager_->acquire(gameObjectPoolId);
                     assert(go && "Failed to acquire GameObject");
 
                     auto* tsc = go->get<helios::engine::modules::spatial::transform::components::TranslationStateComponent>();
@@ -223,7 +223,7 @@ export namespace helios::engine::runtime::spawn {
                     if (tsc) {
                         
                         auto bounds = aabb->bounds();
-                        ensureBounds(go, bounds);
+                        ensureBounds(go.value(), bounds);
 
                         const auto position = spawnProfile->spawnPlacer->getPosition(
                             go->entityHandle(),
@@ -279,7 +279,7 @@ export namespace helios::engine::runtime::spawn {
                     continue;
                 }
 
-                auto* go = gameObjectPoolManager_->acquire(gameObjectPoolId);
+                auto go = gameObjectPoolManager_->acquire(gameObjectPoolId);
                 assert(go && "Failed to acquire GameObject");
 
                 auto* tsc = go->get<helios::engine::modules::spatial::transform::components::TranslationStateComponent>();
@@ -298,7 +298,7 @@ export namespace helios::engine::runtime::spawn {
                 if (tsc) {
 
                     auto bounds = aabb->bounds();
-                    ensureBounds(go, bounds);
+                    ensureBounds(go.value(), bounds);
 
                     const auto position = spawnProfile->spawnPlacer->getPosition(
                         go->entityHandle(),

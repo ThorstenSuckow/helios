@@ -32,7 +32,7 @@ export namespace helios::engine::runtime::spawn::behavior {
      * public:
      *     explicit ProjectileInitializer(float speed) : speed_(speed) {}
      *
-     *     void initialize(const GameObject& go, const SpawnPlanCursor& cursor,
+     *     void initialize(const GameObject go, const SpawnPlanCursor& cursor,
      *                     const SpawnContext& ctx) override {
      *         if (auto* dir = go.get<DirectionComponent>()) {
      *             dir->setDirection(ctx.emitterContext->velocity.normalized());
@@ -62,7 +62,7 @@ export namespace helios::engine::runtime::spawn::behavior {
          * @param spawnContext Context data including optional emitter info.
          */
         virtual void initialize(
-            const helios::engine::ecs::GameObject& gameObject,
+            helios::engine::ecs::GameObject gameObject,
             const SpawnPlanCursor& cursor,
             const SpawnContext& spawnContext
         ) = 0;

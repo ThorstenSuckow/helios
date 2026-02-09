@@ -20,6 +20,19 @@ The following files are **automatically copied** from the repository during the 
 | `docs/core-concepts/conventions.md` | `docs/core-concepts/conventions.md`   | Technical conventions (LHS, matrices, units) |
 | `docs/core-concepts/command-system.md` | `docs/core-concepts/command-system.md` | Command pattern, dispatchers, managers |
 | `docs/core-concepts/event-system.md` | `docs/core-concepts/event-system.md` | Phase/pass event propagation |
+| `docs/core-concepts/component-registry.md` | `docs/core-concepts/component-registry.md` | Modular component registration system |
+| `docs/core-concepts/component-lifecycle.md` | `docs/core-concepts/component-lifecycle.md` | Component lifecycle hooks |
+| `docs/core-concepts/ecs/README.md` | `docs/core-concepts/ecs/overview.md` | ECS architecture overview |
+| `docs/core-concepts/ecs/component-structure.md` | `docs/core-concepts/ecs/component-structure.md` | Component Copy/Move requirements |
+| `docs/core-concepts/ecs/gameobject.md` | `docs/core-concepts/ecs/gameobject.md` | High-level entity wrapper |
+| `docs/core-concepts/ecs/entity-manager.md` | `docs/core-concepts/ecs/entity-manager.md` | Entity and component management |
+| `docs/core-concepts/ecs/entity-registry.md` | `docs/core-concepts/ecs/entity-registry.md` | Entity lifecycle and versioning |
+| `docs/core-concepts/ecs/entity-handle.md` | `docs/core-concepts/ecs/entity-handle.md` | Versioned entity reference |
+| `docs/core-concepts/ecs/view.md` | `docs/core-concepts/ecs/view.md` | Component-based entity queries |
+| `docs/core-concepts/ecs/system.md` | `docs/core-concepts/ecs/system.md` | Game logic processor base class |
+| `docs/core-concepts/ecs/updatable.md` | `docs/core-concepts/ecs/updatable.md` | Per-frame update interface |
+| `docs/core-concepts/ecs/traits.md` | `docs/core-concepts/ecs/traits.md` | Compile-time lifecycle detection |
+| `docs/core-concepts/ecs/component-ops.md` | `docs/core-concepts/ecs/component-ops.md` | Lifecycle function pointers |
 
 ### How It Works
 

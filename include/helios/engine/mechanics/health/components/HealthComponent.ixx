@@ -9,7 +9,7 @@ module;
 
 export module helios.engine.mechanics.health.components.HealthComponent;
 
-import helios.engine.ecs.CloneableComponent;
+
 
 
 export namespace helios::engine::mechanics::health::components {
@@ -21,7 +21,7 @@ export namespace helios::engine::mechanics::health::components {
      * Manages current and maximum health values for an entity. Provides
      * methods for taking damage, healing, and checking alive status.
      */
-    class HealthComponent : public helios::engine::ecs::CloneableComponent<HealthComponent> {
+    class HealthComponent  {
 
     private:
 
@@ -36,8 +36,35 @@ export namespace helios::engine::mechanics::health::components {
          */
         float health_{};
 
+        /**
+         * @brief Whether this component is enabled.
+         */
+        bool isEnabled_ = true;
+
     public:
 
+        /**
+         * @brief Checks whether this component is enabled.
+         *
+         * @return True if enabled, false otherwise.
+         */
+        [[nodiscard]] bool isEnabled() const noexcept {
+            return isEnabled_;
+        }
+
+        /**
+         * @brief Enables this component.
+         */
+        void enable() noexcept {
+            isEnabled_ = true;
+        }
+
+        /**
+         * @brief Disables this component.
+         */
+        void disable() noexcept {
+            isEnabled_ = false;
+        }
 
         HealthComponent() = default;
 
@@ -57,6 +84,10 @@ export namespace helios::engine::mechanics::health::components {
             assert(maxHealth_ != 0.0f && "max health must not be 0");
 
         }
+
+        HealthComponent& operator=(const HealthComponent&) = default;
+        HealthComponent(HealthComponent&&) noexcept = default;
+        HealthComponent& operator=(HealthComponent&&) noexcept = default;
 
         /**
          * @brief Applies damage to this entity.
@@ -124,16 +155,20 @@ export namespace helios::engine::mechanics::health::components {
         }
 
         /**
-         * @copydoc CloneableComponent::onAcquire()
+         * @brief Called when this entity is acquired from a pool.
+         *
+         * @details Resets health to maximum value.
          */
-        void onAcquire() noexcept override {
+        void onAcquire() noexcept {
             reset();
         }
 
         /**
-         * @copydoc CloneableComponent::onRelease()
+         * @brief Called when this entity is released back to a pool.
+         *
+         * @details Resets health to maximum value.
          */
-        void onRelease() noexcept override {
+        void onRelease() noexcept {
             reset();
         }
 

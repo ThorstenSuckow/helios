@@ -14,7 +14,7 @@ export module helios.engine.mechanics.damage.components.DamageDealerComponent;
 
 import helios.engine.core.data.CollisionLayer;
 
-import helios.engine.ecs.CloneableComponent;
+
 
 
 
@@ -26,10 +26,8 @@ export namespace helios::engine::mechanics::damage::components {
      * Allows an entity to deal different amounts of damage depending on
      * which collision layer the target belongs to. Uses a fixed-size array
      * indexed by layer ID for O(1) damage lookup.
-     *
-     * @tparam N Maximum number of collision layers (defaults to MAX_COLLISION_LAYER_IDS).
      */
-    class DamageDealerComponent : public helios::engine::ecs::CloneableComponent<DamageDealerComponent> {
+    class DamageDealerComponent {
 
     private:
 
@@ -38,8 +36,35 @@ export namespace helios::engine::mechanics::damage::components {
          */
         std::array<float, helios::engine::core::data::MAX_COLLISION_LAYERS> damageRegistry_{};
 
+        /**
+         * @brief Whether this component is enabled.
+         */
+        bool isEnabled_ = true;
 
     public:
+
+        /**
+         * @brief Checks whether this component is enabled.
+         *
+         * @return True if enabled, false otherwise.
+         */
+        [[nodiscard]] bool isEnabled() const noexcept {
+            return isEnabled_;
+        }
+
+        /**
+         * @brief Enables this component.
+         */
+        void enable() noexcept {
+            isEnabled_ = true;
+        }
+
+        /**
+         * @brief Disables this component.
+         */
+        void disable() noexcept {
+            isEnabled_ = false;
+        }
 
         DamageDealerComponent() = default;
 
@@ -49,6 +74,10 @@ export namespace helios::engine::mechanics::damage::components {
          * @param other The component to copy from.
          */
         DamageDealerComponent(const DamageDealerComponent& other) : damageRegistry_(other.damageRegistry_) {}
+
+        DamageDealerComponent& operator=(const DamageDealerComponent&) = default;
+        DamageDealerComponent(DamageDealerComponent&&) noexcept = default;
+        DamageDealerComponent& operator=(DamageDealerComponent&&) noexcept = default;
 
         /**
          * @brief Sets the damage dealt to entities on a specific layer.

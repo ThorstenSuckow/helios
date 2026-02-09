@@ -30,7 +30,7 @@ The Command System provides a mechanism for **deferred action execution**. Inste
 
 ### TargetedCommand
 
-A `TargetedCommand` operates on a **specific GameObject** identified by its `Guid`. Use this for per-entity actions like movement, attacks, or state changes.
+A `TargetedCommand` operates on a **specific entity** identified by its `EntityHandle`. Use this for per-entity actions like movement, attacks, or state changes.
 
 ```cpp
 class MoveCommand : public TargetedCommand {
@@ -41,10 +41,10 @@ public:
     MoveCommand(helios::math::vec3f dir, float speed)
         : direction_(dir), speed_(speed) {}
 
-    void execute(helios::engine::ecs::GameObject& obj) const noexcept override {
-        auto* move = obj.get<Move2DComponent>();
+    void execute(helios::engine::ecs::GameObject entity) const noexcept override {
+        auto* move = entity.get<Move2DComponent>();
         if (move) {
-            move->setVelocity(direction_ * speed_);
+            move->setMoveIntent(direction_, speed_);
         }
     }
 };
@@ -62,9 +62,10 @@ public:
     explicit SpawnEnemyCommand(helios::math::vec3f pos) : position_(pos) {}
 
     void execute(helios::engine::runtime::world::GameWorld& world) const noexcept override {
-        auto enemy = std::make_unique<helios::engine::ecs::GameObject>();
-        // Configure enemy...
-        world.addGameObject(std::move(enemy));
+        auto enemy = world.addGameObject();
+        enemy.add<Move2DComponent>(5.0f);
+        enemy.add<TranslationStateComponent>(position_);
+        enemy.setActive(true);
     }
 };
 ```

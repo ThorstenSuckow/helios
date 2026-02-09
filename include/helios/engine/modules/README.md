@@ -4,45 +4,60 @@ Domain-specific components and systems built on top of the ECS architecture.
 
 ## Overview
 
-This module provides concrete game logic implementations using the composition-based component model. While `helios.engine.ecs` provides the base classes (GameObject, Component, System), this module contains domain-specific functionality for physics, scene integration, and rendering.
+This module provides concrete game logic implementations using the composition-based component model. Components are stored in SparseSets and manipulated through the ECS View system.
 
-For gameplay mechanics (bounds, combat, spawn, input), see `helios.engine.mechanics`.
+For gameplay mechanics (bounds, combat, spawn, input, health, scoring), see `helios.engine.mechanics`.
 
 ## Submodules
 
 | Module | Purpose |
 |--------|---------|
+| `ai/` | AI behavior components (chase, seek) |
+| `effects/` | Visual effects (spin, fade) |
 | `physics/` | Physics simulation (collision, motion) |
 | `spatial/` | Transform management (translation, rotation, scale) |
 | `scene/` | Scene graph integration |
-| `rendering/` | Renderable components |
-| `pool/` | Object pool components |
+| `rendering/` | Renderable and model components |
+| `ui/` | UI layout, transform, widgets, data binding |
 
 ## Architecture
 
 ```
 helios.engine.modules
+├── ai/              # AI behavior
+│   └── chase/       # Chase/seek behavior
+├── effects/         # Visual effects
+│   └── gfx/         # Graphics effects (spin)
 ├── physics/
-│   ├── collision/   # AABB, collision detection
-│   └── motion/      # Movement, steering
+│   ├── collision/   # AABB, collision detection, collision state
+│   └── motion/      # Movement (Move2D), steering, direction
 ├── spatial/
 │   └── transform/   # Translation, rotation, scale components
 ├── scene/           # SceneNode integration
-├── rendering/       # Renderable components
-└── pool/            # Pool ID components
+├── rendering/
+│   ├── model/       # Model AABB component
+│   └── renderable/  # Renderable component
+└── ui/
+    ├── binding/     # Data binding
+    ├── layout/      # Anchors, layout
+    ├── transform/   # UI positioning
+    └── widgets/     # Text, buttons
 ```
 
-## Relationship to ECS and Runtime
+## Key Components
 
-This module **imports** from `helios.engine.ecs`:
-
-- `GameObject`, `Component` — Base classes extended by domain components
-- `System` — Base class extended by domain systems
-
-This module **imports** from `helios.engine.runtime.world`:
-
-- `GameWorld` — Used by systems for entity queries
-- `Manager` — Extended by domain managers (ProjectileManager)
+| Component | Purpose |
+|-----------|---------|
+| `CollisionComponent` | Layer-based collision filtering |
+| `CollisionStateComponent` | Per-frame collision state |
+| `Move2DComponent` | 2D physics-based movement |
+| `SteeringComponent` | Rotation and heading control |
+| `TranslationStateComponent` | Position state |
+| `ScaleStateComponent` | Scale state |
+| `RotationStateComponent` | Rotation state |
+| `SceneNodeComponent` | Links entity to scene graph |
+| `RenderableComponent` | Visual representation |
+| `UiTransformComponent` | Viewport-relative positioning |
 
 ## Usage Example
 
@@ -52,15 +67,18 @@ import helios.engine.modules.physics.collision.components.CollisionComponent;
 import helios.engine.modules.scene.components.SceneNodeComponent;
 
 // Add domain components
-entity->add<Move2DComponent>();
-entity->add<CollisionComponent>(layerId, mask);
-entity->add<SceneNodeComponent>(sceneNode);
+entity.add<Move2DComponent>(speed);
+entity.add<CollisionComponent>(layerId);
+entity.add<SceneNodeComponent>(sceneNode);
 
-// Add domain systems to game loop
-gameLoop.phase(PhaseType::Main)
-    .addPass()
-    .addSystem<Move2DSystem>(&gameWorld)
-    .addSystem<GridCollisionDetectionSystem>(&gameWorld);
+// Query with views
+for (auto [go, move, collision, active] : gameWorld->view<
+    Move2DComponent,
+    CollisionComponent,
+    Active
+>().whereEnabled()) {
+    // Process entities
+}
 ```
 
 ---
@@ -69,5 +87,5 @@ gameLoop.phase(PhaseType::Main)
 <summary>Doxygen</summary><p>
 @namespace helios::engine::modules
 @brief Domain-specific components and systems.
-@details This namespace provides concrete game logic implementations built on top of the ECS architecture. It includes physics systems (collision, motion), spatial transform components, scene graph integration, and rendering components. For gameplay mechanics (combat, spawn, bounds), see `helios::engine::mechanics`.
+@details This namespace provides concrete game logic implementations built on top of the ECS architecture. It includes AI behavior, visual effects, physics systems (collision, motion), spatial transform components, scene graph integration, rendering components, and UI systems. For gameplay mechanics (combat, spawn, bounds, health, scoring), see `helios::engine::mechanics`.
 </p></details>

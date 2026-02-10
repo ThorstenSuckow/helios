@@ -61,6 +61,9 @@ int main() {
     // 1. Application and Window Setup
     // ========================================
 
+    // bootstrap the components
+    helios::engine::bootstrap::registerAllComponents();
+
     const auto app = GLFWFactory::makeOpenGLApp(
         "helios - Enemy Spawn Demo", 1980, 1024, ASPECT_RATIO_NUMER, ASPECT_RATIO_DENOM
     );
@@ -173,7 +176,7 @@ int main() {
 
     // purple enemy prefab
     auto purpleEnemyPrefab = helios::engine::builder::gameObject::GameObjectFactory::instance()
-        .gameObject()
+        .gameObject(gameWorld)
         .withRendering([&defaultShader, &root = *levelPtr->rootNode()](auto& rnb) {
             rnb.meshRenderable()
                .shader(defaultShader)
@@ -210,7 +213,7 @@ int main() {
 
     // THE GRID
     auto theGrid = helios::engine::builder::gameObject::GameObjectFactory::instance()
-        .gameObject()
+        .gameObject(gameWorld)
         .withRendering([&defaultShader, &root = *levelPtr->rootNode()](auto& rnb) {
             rnb.meshRenderable()
                .shader(defaultShader)
@@ -232,7 +235,7 @@ int main() {
 
     // ship game object
     auto shipGameObject = helios::engine::builder::gameObject::GameObjectFactory::instance()
-        .gameObject()
+        .gameObject(gameWorld)
         .withRendering([&defaultShader, &root = *levelPtr->rootNode()](auto& rnb) {
             rnb.meshRenderable()
                .shader(defaultShader)
@@ -264,8 +267,8 @@ int main() {
 
     // GIZMO Left stick
     auto leftStickGizmo = helios::engine::builder::gameObject::GameObjectFactory::instance()
-        .gameObject()
-        .withRendering([&defaultShader, &shipGameObject](auto& rnb) {
+        .gameObject(gameWorld)
+        .withRendering([&defaultShader, shipGameObject](auto& rnb) {
             rnb.meshRenderable()
                .shader(defaultShader)
                .color(helios::util::Colors::White)
@@ -274,13 +277,13 @@ int main() {
                .build();
 
             rnb.sceneNode()
-               .parent(shipGameObject.get())
+               .parent(shipGameObject)
                .inherit(helios::math::TransformType::Translation);
         }).make();
 
     auto shipDirectionGizmo = helios::engine::builder::gameObject::GameObjectFactory::instance()
-        .gameObject()
-        .withRendering([&defaultShader, &shipGameObject](auto& rnb) {
+        .gameObject(gameWorld)
+        .withRendering([&defaultShader, shipGameObject](auto& rnb) {
             rnb.meshRenderable()
                .shader(defaultShader)
                .color(helios::util::Colors::Red)
@@ -289,7 +292,7 @@ int main() {
                .build();
 
             rnb.sceneNode()
-               .parent(shipGameObject.get())
+               .parent(shipGameObject)
                .inherit(helios::math::TransformType::Translation);
         })
         .make();
@@ -310,7 +313,7 @@ int main() {
 
     poolManager.addPoolConfig(std::make_unique<helios::engine::runtime::pooling::GameObjectPoolConfig>(
                 PurpleEnemyPoolId,
-                std::move(purpleEnemyPrefab),
+                purpleEnemyPrefab,
                 200
             ));
 
@@ -349,7 +352,7 @@ int main() {
 
     gameLoop.phase(helios::engine::runtime::gameloop::PhaseType::Pre)
             .addPass()
-            .addSystem<helios::engine::mechanics::input::systems::TwinStickInputSystem>(*shipGameObject)
+            .addSystem<helios::engine::mechanics::input::systems::TwinStickInputSystem>(shipGameObject)
             .addCommitPoint(helios::engine::runtime::gameloop::CommitPoint::Structural)
             .addPass()
             .addSystem<helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem>(std::move(spawnSchedulers))
@@ -381,17 +384,15 @@ int main() {
     // ========================================
 
     // embedd the immediate game objects
-    leftStickGizmo->setActive(true);
-    shipDirectionGizmo->setActive(true);
+    leftStickGizmo.setActive(true);
+    shipDirectionGizmo.setActive(true);
 
-    theGrid->setActive(true);
-    std::ignore = gameWorld.addGameObject(std::move(theGrid));
-    std::ignore = shipGameObject->get<helios::engine::modules::scene::components::SceneNodeComponent>()->sceneNode()->addNode(std::move(cameraSceneNode));
+    theGrid.setActive(true);
 
-    shipGameObject->setActive(true);
-    auto* theShipPtr = gameWorld.addGameObject(std::move(shipGameObject));
-    auto* leftStickGizmoNode = leftStickGizmo->get<helios::engine::modules::scene::components::SceneNodeComponent>()->sceneNode();
-    auto* shipDirectionGizmoNode = shipDirectionGizmo->get<helios::engine::modules::scene::components::SceneNodeComponent>()->sceneNode();
+    std::ignore = shipGameObject.get<helios::engine::modules::scene::components::SceneNodeComponent>()->sceneNode()->addNode(std::move(cameraSceneNode));
+
+    auto* leftStickGizmoNode = leftStickGizmo.get<helios::engine::modules::scene::components::SceneNodeComponent>()->sceneNode();
+    auto* shipDirectionGizmoNode = shipDirectionGizmo.get<helios::engine::modules::scene::components::SceneNodeComponent>()->sceneNode();
 
     // ENGINE INIT
     gameWorld.init();
@@ -429,7 +430,7 @@ int main() {
         // ----------------------------------------
         // 7.3 Gizmo / Debug Visualization Update
         // ----------------------------------------
-        const auto* mc = theShipPtr->get<helios::engine::modules::physics::motion::components::Move2DComponent>();
+        const auto* mc = shipGameObject.get<helios::engine::modules::physics::motion::components::Move2DComponent>();
         if (mc) {
             leftStickGizmoNode->setScale((mc->direction() * mc->throttle()  * 4.0f).toVec3());
             shipDirectionGizmoNode->setScale(mc->velocity().normalize() * mc->speedRatio() * 4.0f);

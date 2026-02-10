@@ -28,13 +28,15 @@ export namespace helios::examples::spaceshipControl {
      * and SteeringComponent (rotation).
      *
      * Multiple GameObjects can be registered and selected via a dropdown.
+     *
+     * @note GameObject is a lightweight facade (16 bytes) and is stored by value.
      */
     class SpaceshipWidget : public ImGuiWidget {
 
     private:
         struct GameObjectEntry {
             std::string name;
-            helios::engine::ecs::GameObject* gameObject = nullptr;
+            helios::engine::ecs::GameObject gameObject;
         };
 
         std::vector<GameObjectEntry> gameObjects_;
@@ -47,8 +49,7 @@ export namespace helios::examples::spaceshipControl {
             if (selectedIndex_ < 0 || selectedIndex_ >= static_cast<int>(gameObjects_.size())) {
                 selectedIndex_ = 0;
             }
-            auto* go = gameObjects_[selectedIndex_].gameObject;
-            return go ? go->get<Move2DComponent>() : nullptr;
+            return gameObjects_[selectedIndex_].gameObject.get<Move2DComponent>();
         }
 
         [[nodiscard]] SteeringComponent* getSelectedHeading() noexcept {
@@ -58,8 +59,7 @@ export namespace helios::examples::spaceshipControl {
             if (selectedIndex_ < 0 || selectedIndex_ >= static_cast<int>(gameObjects_.size())) {
                 selectedIndex_ = 0;
             }
-            auto* go = gameObjects_[selectedIndex_].gameObject;
-            return go ? go->get<SteeringComponent>() : nullptr;
+            return gameObjects_[selectedIndex_].gameObject.get<SteeringComponent>();
         }
 
     public:
@@ -69,9 +69,9 @@ export namespace helios::examples::spaceshipControl {
          * @brief Registers a GameObject for tuning in this widget.
          *
          * @param name Display name for the object in the dropdown.
-         * @param gameObject Pointer to the GameObject instance (must have Move2DComponent).
+         * @param gameObject The GameObject instance (passed by value, 16 bytes).
          */
-        void addGameObject(const std::string& name, helios::engine::ecs::GameObject* gameObject) {
+        void addGameObject(const std::string& name, helios::engine::ecs::GameObject gameObject) {
             gameObjects_.push_back({name, gameObject});
         }
 

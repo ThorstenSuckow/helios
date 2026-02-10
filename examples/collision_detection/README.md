@@ -79,7 +79,7 @@ enum class CollisionId : uint32_t {
 };
 
 // Configure player collision
-shipGameObject->get<CollisionComponent>()
+shipGameObject.get<CollisionComponent>()
     ->setLayer(CollisionId::Player)
     ->setMask(CollisionId::Enemy | CollisionId::Boundary);
 
@@ -136,7 +136,7 @@ projectileBuilder.withCollision([](auto& cb) {
 // Pre-Phase: Input, Spawning, Physics
 gameLoop.phase(PhaseType::Pre)
     .addPass()
-    .addSystem<TwinStickInputSystem>(*shipGameObject)
+    .addSystem<TwinStickInputSystem>(shipGameObject)
     .addCommitPoint(CommitPoint::Structural)
     .addPass()
     .addSystem<ProjectileSpawnSystem>(ProjectileSpawnProfileId)

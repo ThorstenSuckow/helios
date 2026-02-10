@@ -3,7 +3,7 @@ title: GameObject Builder
 description: Fluent builder pattern for constructing GameObjects with their associated components.
 slug: /core-concepts/gameobject-builder
 sidebar_label: GameObject Builder
-sidebar_position: 8
+sidebar_position: 9
 tags: [gameplay, architecture, builder]
 keywords: [helios, builder pattern, GameObjectFactory, fluent API, entity construction]
 ---
@@ -15,17 +15,15 @@ helios provides a **fluent builder pattern** for constructing GameObjects with t
 
 ## Overview
 
-The traditional approach of manually adding components can become verbose and error-prone:
+The traditional approach of manually adding components can become verbose:
 
 ```cpp
 // Manual approach - verbose and repetitive
-auto entity = std::make_unique<GameObject>();
-entity->add<Move2DComponent>();
-entity->get<Move2DComponent>()->setMovementSpeed(5.0f);
-entity->get<Move2DComponent>()->setMovementAcceleration(10.0f);
-entity->add<ComposeTransformComponent>();
-entity->add<DirectionComponent>();
-entity->add<TranslationStateComponent>();
+auto entity = gameWorld.addGameObject();
+entity.add<Move2DComponent>(5.0f, 10.0f);
+entity.add<ComposeTransformComponent>();
+entity.add<DirectionComponent>();
+entity.add<TranslationStateComponent>();
 // ... more configuration
 ```
 
@@ -33,7 +31,7 @@ The builder pattern provides a cleaner alternative:
 
 ```cpp
 // Builder approach - fluent and composable
-auto player = GameObjectFactory::gameObject()
+auto player = GameObjectFactory::gameObject(gameWorld)
     .withMotion([](auto& motion) {
         motion.move2D()
               .speed(5.0f)
@@ -72,16 +70,13 @@ The builder system is organized into three layers:
 
 ### GameObjectFactory
 
-The entry point for entity construction. Provides static methods for creating new entities or cloning existing ones.
+The entry point for entity construction. Requires a GameWorld reference.
 
 ```cpp
 import helios.engine.builder;
 
-// Create a new empty entity
-auto prototype = GameObjectFactory::gameObject();
-
-// Clone from existing template
-auto prototype = GameObjectFactory::from(templateEntity);
+// Create a new entity via the GameWorld
+auto prototype = GameObjectFactory::gameObject(gameWorld);
 ```
 
 ### GameObjectPrototype
@@ -97,8 +92,11 @@ prototype
     .withEffects([](EffectsBuilder& b) { /* ... */ })
     .withSpawn([](SpawnBuilder& b) { /* ... */ })
     .withAi([](AiBuilder& b) { /* ... */ })
-    .withShooting([](ShootingBuilder& b) { /* ... */ })
-    .make(active);  // Returns std::unique_ptr<GameObject>
+    .withCombat([](CombatBuilder& b) { /* ... */ })
+    .withHealth([](HealthBuilder& b) { /* ... */ })
+    .withScoring([](ScoringBuilder& b) { /* ... */ })
+    .withLifecycle([](LifecycleBuilder& b) { /* ... */ })
+    .make(active);  // Returns GameObject (by value)
 ```
 
 ### Domain Builders
@@ -108,14 +106,19 @@ Each builder encapsulates configuration for a specific domain:
 | Builder | Domain | Configs Provided |
 |---------|--------|------------------|
 | `MotionBuilder` | Movement | `Move2DConfig`, `SteeringConfig` |
-| `RenderingBuilder` | Visuals | `RenderableConfig`, `SceneNodeConfig` |
+| `RenderingBuilder` | Visuals | `MeshRenderableConfig`, `TextRenderableConfig`, `SceneNodeConfig` |
 | `SceneBuilder` | Scene Graph | `SceneNodeConfig` |
 | `CollisionBuilder` | Physics | `CollisionConfig`, `LevelBoundsCollisionConfig` |
 | `TransformBuilder` | Spatial | `TransformConfig` |
+| `UiTransformBuilder` | UI Layout | `UiTransformConfig` |
 | `EffectsBuilder` | VFX | `GfxEffectsConfig` |
 | `SpawnBuilder` | Spawning | `SpawnConfig` |
 | `AiBuilder` | AI | `ChaseConfig` |
-| `ShootingBuilder` | Combat | `WeaponConfig` |
+| `CombatBuilder` | Combat | `WeaponConfig`, `CombatConfig` |
+| `HealthBuilder` | Health | `HealthConfig` |
+| `ScoringBuilder` | Scoring | `ScoreValueConfig`, `ScorePoolConfig` |
+| `LifecycleBuilder` | Lifecycle | `LifecycleConfig` |
+| `ObserverBuilder` | Data Binding | `ObserverConfig` |
 
 ### Config Classes
 
@@ -134,9 +137,9 @@ Configs automatically handle component dependencies using `getOrAdd()`, preventi
 ### Basic Entity
 
 ```cpp
-auto bullet = GameObjectFactory::gameObject()
+auto bullet = GameObjectFactory::gameObject(gameWorld)
     .withRendering([&](auto& r) {
-        r.renderable()
+        r.meshRenderable()
          .shape(circleShape)
          .shader(shader)
          .primitiveType(PrimitiveType::Triangles)
@@ -154,7 +157,7 @@ auto bullet = GameObjectFactory::gameObject()
 ### Complex Entity
 
 ```cpp
-auto player = GameObjectFactory::gameObject()
+auto player = GameObjectFactory::gameObject(gameWorld)
     .withMotion([](auto& motion) {
         motion.move2D()
               .speed(5.0f)

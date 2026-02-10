@@ -511,17 +511,17 @@ int main() {
             hsb.health()
                .maxHealth(100.0f);
         })
-        .withTransform([](auto& tb) {
-            tb.transform()
-              .scale(helios::math::vec3f(SPACESHIP_LENGTH/2.0f, SPACESHIP_LENGTH/2.0f, 0.0f));
-        })
         .withScoring([](helios::engine::builder::gameObject::builders::ScoringBuilder& sb) {
             sb.scoreValue()
-              .score<helios::engine::mechanics::scoring::types::KillReward>(100);
+              .score<helios::engine::mechanics::scoring::types::KillReward>(50);
         })
         .withCombat([](auto& cb) {
             cb.combat()
               .trackLastAttacker();
+        })
+        .withTransform([](auto& tb) {
+            tb.transform()
+              .scale(helios::math::vec3f(SPACESHIP_LENGTH/2.0f, SPACESHIP_LENGTH/2.0f, 0.0f));
         })
         .withCollision([](auto& cb) {
             cb.collision()
@@ -573,6 +573,18 @@ int main() {
             tb.transform()
               .scale(helios::math::vec3f(SPACESHIP_LENGTH/2.0f, SPACESHIP_LENGTH/2.0f, 0.0f));
         })
+        .withHealth([](auto& hsb) {
+            hsb.health()
+               .maxHealth(100.0f);
+        })
+        .withScoring([](helios::engine::builder::gameObject::builders::ScoringBuilder& sb) {
+            sb.scoreValue()
+              .score<helios::engine::mechanics::scoring::types::KillReward>(100);
+        })
+        .withCombat([](auto& cb) {
+            cb.combat()
+              .trackLastAttacker();
+        })
         .withCollision([](auto& cb) {
             cb.collision()
               .layerId(helios::examples::scoring::CollisionId::Enemy)
@@ -623,6 +635,18 @@ int main() {
         .withTransform([BLUE_ENEMY_SCALE](auto& tb) {
             tb.transform()
               .scale(BLUE_ENEMY_SCALE);
+        })
+        .withHealth([](auto& hsb) {
+            hsb.health()
+               .maxHealth(100.0f);
+        })
+        .withScoring([](helios::engine::builder::gameObject::builders::ScoringBuilder& sb) {
+            sb.scoreValue()
+              .score<helios::engine::mechanics::scoring::types::KillReward>(150);
+        })
+        .withCombat([](auto& cb) {
+            cb.combat()
+              .trackLastAttacker();
         })
         .withCollision([](auto& cb) {
             cb.collision()

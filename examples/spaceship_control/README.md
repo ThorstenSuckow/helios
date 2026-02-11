@@ -71,7 +71,7 @@ The example uses the fluent builder pattern for GameObject creation:
 
 ```cpp
 auto shipGameObject = GameObjectFactory::instance()
-    .gameObject()
+    .gameObject(gameWorld)
     .withRendering([&](auto& rnb) {
         rnb.meshRenderable()
            .shader(shader)
@@ -101,7 +101,7 @@ auto shipGameObject = GameObjectFactory::instance()
 // Pre-Phase: Input and Physics
 gameLoop.phase(PhaseType::Pre)
     .addPass()
-    .addSystem<TwinStickInputSystem>(*shipGameObject)
+    .addSystem<TwinStickInputSystem>(shipGameObject)
     .addCommitPoint(CommitPoint::Structural)
     .addPass()
     .addSystem<ScaleSystem>()

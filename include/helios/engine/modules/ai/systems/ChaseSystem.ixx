@@ -62,7 +62,7 @@ export namespace helios::engine::modules::ai::systems {
 
                 const auto go = gameWorld_->find(entityHandle);
 
-                if (!go) {
+                if (!go || !go->isActive()) {
                     continue;
                 }
 

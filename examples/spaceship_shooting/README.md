@@ -76,7 +76,7 @@ The example demonstrates the spawn pipeline for projectiles:
 ```cpp
 // 1. Create projectile prefab
 auto projectilePrefab = GameObjectFactory::instance()
-    .gameObject()
+    .gameObject(gameWorld)
     .withRendering([&](auto& rnb) {
         rnb.meshRenderable()
            .shader(shader)
@@ -124,7 +124,7 @@ gameLoop.phase(PhaseType::Pre)
 
 ```cpp
 auto shipGameObject = GameObjectFactory::instance()
-    .gameObject()
+    .gameObject(gameWorld)
     .withRendering([&](auto& rnb) { /* ... */ })
     .withCollision([](auto& cb) {
         cb.collision().useBoundingBox();
@@ -147,7 +147,7 @@ auto shipGameObject = GameObjectFactory::instance()
 // Pre-Phase: Input, Spawning, Physics
 gameLoop.phase(PhaseType::Pre)
     .addPass()
-    .addSystem<TwinStickInputSystem>(*shipGameObject)
+    .addSystem<TwinStickInputSystem>(shipGameObject)
     .addCommitPoint(CommitPoint::Structural)
     .addPass()
     .addSystem<ProjectileSpawnSystem>(ProjectileSpawnProfileId)

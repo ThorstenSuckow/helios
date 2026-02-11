@@ -8,7 +8,7 @@ This namespace contains systems that compute screen positions for UI elements ba
 
 | System | Description |
 |--------|-------------|
-| `UiTransformSystem` | Computes screen positions based on anchor, pivot, margins, and viewport bounds |
+| `UiTransformSystem` | Computes screen positions based on anchor, pivot, offsets, and viewport bounds |
 
 ## Processing
 

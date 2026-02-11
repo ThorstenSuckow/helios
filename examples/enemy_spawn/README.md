@@ -74,7 +74,7 @@ The example demonstrates the complete spawn pipeline:
 ```cpp
 // 1. Create prefab with GameObjectFactory
 auto enemyPrefab = GameObjectFactory::instance()
-    .gameObject()
+    .gameObject(gameWorld)
     .withRendering([&](auto& rnb) { /* ... */ })
     .withMotion([](auto& mcb) {
         mcb.move2D().speed(5.0f).instantAcceleration(true);
@@ -125,7 +125,7 @@ gameLoop.phase(PhaseType::Pre)
 // Pre-Phase: Input, Spawning, Physics
 gameLoop.phase(PhaseType::Pre)
     .addPass()
-    .addSystem<TwinStickInputSystem>(*shipGameObject)
+    .addSystem<TwinStickInputSystem>(shipGameObject)
     .addCommitPoint(CommitPoint::Structural)
     .addPass()
     .addSystem<GameObjectSpawnSystem>(spawnSchedulers)

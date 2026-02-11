@@ -8,7 +8,7 @@ This namespace contains components for storing UI element positioning parameters
 
 | Component | Description |
 |-----------|-------------|
-| `UiTransformComponent` | Stores anchor, pivot, margins, and viewport reference for UI positioning |
+| `UiTransformComponent` | Stores anchor, pivot, offsets, and viewport reference for UI positioning |
 
 ## UiTransformComponent Properties
 
@@ -16,7 +16,7 @@ This namespace contains components for storing UI element positioning parameters
 |----------|------|-------------|
 | `anchor` | `Anchor` | Where the element attaches to the viewport |
 | `pivot` | `Anchor` | The element's own reference point for positioning |
-| `margins` | `vec4f` | Offset from anchor (top, right, bottom, left) |
+| `offsets` | `vec4f` | Offset from anchor (top, right, bottom, left) |
 | `viewportId` | `ViewportId` | The viewport this element is positioned relative to |
 
 ---
@@ -25,5 +25,5 @@ This namespace contains components for storing UI element positioning parameters
 <summary>Doxygen</summary><p>
 @namespace helios::engine::modules::ui::transform::components
 @brief UI transform state components.
-@details Contains components that store positioning parameters for UI elements, including anchor points, pivot points, margins, and viewport references.
+@details Contains components that store positioning parameters for UI elements, including anchor points, pivot points, offsets, and viewport references.
 </p></details>

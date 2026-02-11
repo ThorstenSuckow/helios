@@ -15,7 +15,7 @@ This namespace provides components and systems for viewport-relative positioning
 
 | Class | Purpose |
 |-------|---------|
-| `UiTransformComponent` | Stores anchor, pivot, margins, and viewport reference |
+| `UiTransformComponent` | Stores anchor, pivot, offsets, and viewport reference |
 | `UiTransformSystem` | Computes screen positions based on viewport bounds |
 
 ---
@@ -24,5 +24,5 @@ This namespace provides components and systems for viewport-relative positioning
 <summary>Doxygen</summary><p>
 @namespace helios::engine::modules::ui::transform
 @brief UI transform components and positioning systems.
-@details This namespace handles viewport-relative positioning for UI elements. Components store layout parameters (anchor, pivot, margins), while systems compute final screen positions based on current viewport dimensions.
+@details This namespace handles viewport-relative positioning for UI elements. Components store layout parameters (anchor, pivot, offsets), while systems compute final screen positions based on current viewport dimensions.
 </p></details>

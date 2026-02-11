@@ -26,7 +26,7 @@ export namespace helios::engine::modules::ui::transform::components {
      * @brief Component for viewport-relative UI positioning.
      *
      * Stores positioning parameters for UI elements including anchor point,
-     * pivot point, margins, and the target viewport. Used by UiTransformSystem
+     * pivot point, offsets, and the target viewport. Used by UiTransformSystem
      * to compute screen positions.
      */
     class UiTransformComponent{
@@ -47,9 +47,9 @@ export namespace helios::engine::modules::ui::transform::components {
         helios::engine::core::data::ViewportId viewportId_{helios::core::types::no_init};
 
         /**
-         * @brief Margins from anchor point (top, right, bottom, left).
+         * @brief Offsets from anchor point (top, right, bottom, left).
          */
-        helios::math::vec4f margins_{};
+        helios::math::vec4f offsets_{};
 
         /**
          * @brief Whether this component is enabled.
@@ -135,21 +135,21 @@ export namespace helios::engine::modules::ui::transform::components {
         }
 
         /**
-         * @brief Sets the margins from the anchor point.
+         * @brief Sets the offsets from the anchor point.
          *
-         * @param margins Margins as vec4f (top, right, bottom, left).
+         * @param offsets Offsets as vec4f (top, right, bottom, left).
          */
-        void setMargins(const helios::math::vec4f margins) noexcept {
-            margins_ = margins;
+        void setOffsets(const helios::math::vec4f offsets) noexcept {
+            offsets_ = offsets;
         }
 
         /**
-         * @brief Returns the current margins.
+         * @brief Returns the current offsets.
          *
-         * @return Margins as vec4f (top, right, bottom, left).
+         * @return Offsets as vec4f (top, right, bottom, left).
          */
-        [[nodiscard]] helios::math::vec4f margins() const noexcept {
-            return margins_;
+        [[nodiscard]] helios::math::vec4f offsets() const noexcept {
+            return offsets_;
         }
 
         /**

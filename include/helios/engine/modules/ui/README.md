@@ -28,11 +28,11 @@ This module provides components and systems for creating and managing UI element
 
 The UI module follows the ECS pattern used throughout helios:
 
-1. **Components** store UI-specific state (anchors, margins, text content)
+1. **Components** store UI-specific state (anchors, offsets, text content)
 2. **Systems** process components each frame to update positions and content
 3. **Bindings** connect game state (e.g., scores) to UI widgets
 
-UI elements are positioned relative to viewports using anchors and margins, allowing for resolution-independent layouts.
+UI elements are positioned relative to viewports using anchors and offsets, allowing for resolution-independent layouts.
 
 ---
 
@@ -40,5 +40,5 @@ UI elements are positioned relative to viewports using anchors and margins, allo
 <summary>Doxygen</summary><p>
 @namespace helios::engine::modules::ui
 @brief User interface components and systems for game entities.
-@details This namespace provides a lightweight UI framework built on the ECS architecture. It supports viewport-relative positioning through anchors and margins, text rendering with template-based formatting, and data binding between game state and UI components.
+@details This namespace provides a lightweight UI framework built on the ECS architecture. It supports viewport-relative positioning through anchors and offsets, text rendering with template-based formatting, and data binding between game state and UI components.
 </p></details>

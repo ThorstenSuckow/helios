@@ -33,7 +33,7 @@ export namespace helios::engine::modules::ui::transform::systems {
      * @brief System for computing UI element screen positions.
      *
      * Processes entities with UiTransformComponent to compute their final
-     * screen positions based on anchor points, pivot points, margins, and
+     * screen positions based on anchor points, pivot points, offsets, and
      * current viewport dimensions.
      */
     class UiTransformSystem : public helios::engine::ecs::System {
@@ -70,7 +70,7 @@ export namespace helios::engine::modules::ui::transform::systems {
          * @brief Updates UI element positions based on viewport dimensions.
          *
          * Queries entities with UiTransformComponent and computes their screen
-         * positions based on anchor, pivot, margins, and current viewport bounds.
+         * positions based on anchor, pivot, offsets, and current viewport bounds.
          *
          * @param updateContext The current frame's update context.
          */
@@ -98,24 +98,30 @@ export namespace helios::engine::modules::ui::transform::systems {
                     const auto viewportWidth = snapshot.absoluteBounds[2];
                     const auto viewportHeight = snapshot.absoluteBounds[3];
 
-                    const auto margins = tc->margins();
+                    const auto offsets = tc->offsets();
 
                     switch (tc->anchor()) {
 
-                        case helios::engine::modules::ui::layout::Anchor::Center:
-                            tsc->setTranslation({viewportWidth / 2.0f, viewportHeight / 2.0f, 0.0f});
+                        case helios::engine::modules::ui::layout::Anchor::Center: {
+                            auto anchored = helios::math::vec3f(
+                            viewportWidth / 2.0f - offsets[1],
+                            viewportHeight / 2.0f - offsets[0],
+                            0.0f
+                            );
+                            anchored = anchor(anchored, mbc->aabb().size(), pivot);
+                            tsc->setTranslation(anchored);
+                        }
                             break;
 
-                        case helios::engine::modules::ui::layout::Anchor::TopRight:
+                        case helios::engine::modules::ui::layout::Anchor::TopRight: {
                             auto anchored = helios::math::vec3f(
-                                viewportWidth - margins[1],
-                                viewportHeight - margins[0],
-                                0.0f
+                               viewportWidth - offsets[1],
+                               viewportHeight - offsets[0],
+                               0.0f
                             );
-
                             anchored = anchor(anchored, mbc->aabb().size(), pivot);
-
                             tsc->setTranslation(anchored);
+                        }
                             break;
 
                     }

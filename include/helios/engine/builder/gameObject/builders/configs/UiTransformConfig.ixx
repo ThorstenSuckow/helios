@@ -89,7 +89,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         /**
          * @brief Sets the offsets for UI positioning.
          *
-         * @param offsets The offsets as vec4f (left, top, right, bottom).
+         * @param offsets The offsets as vec4f (top, right, bottom, left).
          *
          * @return Reference to this config for chaining.
          */

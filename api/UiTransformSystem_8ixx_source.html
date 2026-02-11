@@ -141,7 +141,7 @@ $(function() {
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">     * @brief System for computing UI element screen positions.</span></div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">     *</span></div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">     * Processes entities with UiTransformComponent to compute their final</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">     * screen positions based on anchor points, pivot points, margins, and</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">     * screen positions based on anchor points, pivot points, offsets, and</span></div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">     * current viewport dimensions.</span></div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">     */</span></div>
 <div class="foldopen" id="foldopen00039" data-start="{" data-end="};">
@@ -179,7 +179,7 @@ $(function() {
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">         * @brief Updates UI element positions based on viewport dimensions.</span></div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">         *</span></div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">         * Queries entities with UiTransformComponent and computes their screen</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">         * positions based on anchor, pivot, margins, and current viewport bounds.</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">         * positions based on anchor, pivot, offsets, and current viewport bounds.</span></div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">         *</span></div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">         * @param updateContext The current frame&#39;s update context.</span></div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">         */</span></div>
@@ -208,36 +208,42 @@ $(function() {
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                    <span class="keyword">const</span> <span class="keyword">auto</span> viewportWidth = snapshot.absoluteBounds[2];</div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                    <span class="keyword">const</span> <span class="keyword">auto</span> viewportHeight = snapshot.absoluteBounds[3];</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                    <span class="keyword">const</span> <span class="keyword">auto</span> margins = tc-&gt;margins();</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                    <span class="keyword">const</span> <span class="keyword">auto</span> offsets = tc-&gt;offsets();</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                    <span class="keywordflow">switch</span> (tc-&gt;anchor()) {</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacehelios_1_1engine_1_1modules_1_1ui_1_1layout.html#a858f90f428368a1ead0dd663f2826258a4f1f6016fc9f3f2353c0cc7c67b292bd">helios::engine::modules::ui::layout::Anchor::Center</a>:</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                            tsc-&gt;setTranslation({viewportWidth / 2.0f, viewportHeight / 2.0f, 0.0f});</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacehelios_1_1engine_1_1modules_1_1ui_1_1layout.html#a858f90f428368a1ead0dd663f2826258a1d85a557894c340c318493f33bfa8efb">helios::engine::modules::ui::layout::Anchor::TopRight</a>:</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                            <span class="keyword">auto</span> anchored = <a class="code hl_typedef" href="namespacehelios_1_1math.html#a71f1e40e636f47229c3122bdb63099d5">helios::math::vec3f</a>(</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                                viewportWidth - margins[1],</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>                                viewportHeight - margins[0],</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                                0.0f</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                            );</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacehelios_1_1engine_1_1modules_1_1ui_1_1layout.html#a858f90f428368a1ead0dd663f2826258a4f1f6016fc9f3f2353c0cc7c67b292bd">helios::engine::modules::ui::layout::Anchor::Center</a>: {</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                            <span class="keyword">auto</span> anchored = <a class="code hl_typedef" href="namespacehelios_1_1math.html#a71f1e40e636f47229c3122bdb63099d5">helios::math::vec3f</a>(</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                            viewportWidth / 2.0f - offsets[1],</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>                            viewportHeight / 2.0f - offsets[0],</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                            0.0f</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                            );</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                            anchored = anchor(anchored, mbc-&gt;aabb().size(), pivot);</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>                            tsc-&gt;setTranslation(anchored);</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                        }</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                            <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                            anchored = anchor(anchored, mbc-&gt;aabb().size(), pivot);</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>                            tsc-&gt;setTranslation(anchored);</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                    }</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>                }</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>            }</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        }</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacehelios_1_1engine_1_1modules_1_1ui_1_1layout.html#a858f90f428368a1ead0dd663f2826258a1d85a557894c340c318493f33bfa8efb">helios::engine::modules::ui::layout::Anchor::TopRight</a>: {</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>                            <span class="keyword">auto</span> anchored = <a class="code hl_typedef" href="namespacehelios_1_1math.html#a71f1e40e636f47229c3122bdb63099d5">helios::math::vec3f</a>(</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>                               viewportWidth - offsets[1],</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                               viewportHeight - offsets[0],</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>                               0.0f</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                            );</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>                            anchored = anchor(anchored, mbc-&gt;aabb().size(), pivot);</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                            tsc-&gt;setTranslation(anchored);</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                        }</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>                    }</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>                }</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            }</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        }</div>
 </div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    };</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    };</div>
 </div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>}</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>}</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
 <div class="ttc" id="aclasshelios_1_1engine_1_1ecs_1_1System_html"><div class="ttname"><a href="classhelios_1_1engine_1_1ecs_1_1System.html">helios::engine::ecs::System</a></div><div class="ttdoc">Abstract base class for game systems.</div><div class="ttdef"><b>Definition</b> <a href="System_8ixx_source.html#l00038">System.ixx:38</a></div></div>
 <div class="ttc" id="aclasshelios_1_1engine_1_1ecs_1_1System_html_a1b71da2e3fb9d2effca00a1ecdfca1f5"><div class="ttname"><a href="classhelios_1_1engine_1_1ecs_1_1System.html#a1b71da2e3fb9d2effca00a1ecdfca1f5">helios::engine::ecs::System::gameWorld_</a></div><div class="ttdeci">helios::engine::runtime::world::GameWorld * gameWorld_</div><div class="ttdoc">Pointer to the GameWorld this system belongs to.</div><div class="ttdef"><b>Definition</b> <a href="System_8ixx_source.html#l00048">System.ixx:48</a></div></div>
 <div class="ttc" id="aclasshelios_1_1engine_1_1modules_1_1rendering_1_1model_1_1components_1_1ModelAabbComponent_html"><div class="ttname"><a href="classhelios_1_1engine_1_1modules_1_1rendering_1_1model_1_1components_1_1ModelAabbComponent.html">helios::engine::modules::rendering::model::components::ModelAabbComponent</a></div><div class="ttdoc">Component that stores the canonical Axis-Aligned Bounding Box (AABB) of a model.</div><div class="ttdef"><b>Definition</b> <a href="ModelAabbComponent_8ixx_source.html#l00023">ModelAabbComponent.ixx:23</a></div></div>

@@ -87,15 +87,15 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         }
 
         /**
-         * @brief Sets the margins for UI positioning.
+         * @brief Sets the offsets for UI positioning.
          *
-         * @param margins The margins as vec4f (left, top, right, bottom).
+         * @param offsets The offsets as vec4f (left, top, right, bottom).
          *
          * @return Reference to this config for chaining.
          */
-        UiTransformConfig& margins(const helios::math::vec4f margins) {
+        UiTransformConfig& offsets(const helios::math::vec4f offsets) {
             gameObject_.get<helios::engine::modules::ui::transform::components::UiTransformComponent>()
-                        ->setMargins(margins);
+                        ->setOffsets(offsets);
             return *this;
         }
 

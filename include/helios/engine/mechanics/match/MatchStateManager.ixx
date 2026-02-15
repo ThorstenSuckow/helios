@@ -4,9 +4,8 @@
  */
 module;
 
-#include <cassert>
+#include <span>
 #include <memory>
-#include <stdexcept>
 #include <unordered_map>
 
 export module helios.engine.mechanics.match.MatchStateManager;
@@ -19,6 +18,7 @@ import helios.engine.mechanics.match.components;
 
 import helios.engine.mechanics.match.commands;
 import helios.engine.mechanics.match.types;
+import helios.engine.mechanics.match.rules;
 
 import helios.engine.ecs.GameObject;
 
@@ -37,6 +37,7 @@ export namespace helios::engine::mechanics::match {
 
     using namespace helios::engine::mechanics::match::types;
     using namespace helios::engine::mechanics::match::commands;
+    using namespace helios::engine::mechanics::match::rules;
 
     /**
      * @brief Manages match state transitions using a rule-based state machine.
@@ -86,18 +87,27 @@ export namespace helios::engine::mechanics::match {
             }
         }
 
-        static constexpr MatchStateTransitionRule rules_[] = {
-            MatchStateTransitionRule(MatchState::Undefined, MatchStateTransitionId::WarmupRequested, MatchState::Warmup, MatchStateTransitionType::Standard),
-            MatchStateTransitionRule(MatchState::Warmup, MatchStateTransitionId::IntroRequested, MatchState::Intro, MatchStateTransitionType::Standard),
-            MatchStateTransitionRule(MatchState::Intro, MatchStateTransitionId::CountdownRequested, MatchState::Countdown, MatchStateTransitionType::Standard),
-            MatchStateTransitionRule(MatchState::Countdown, MatchStateTransitionId::PlayerSpawnRequested, MatchState::PlayerSpawn, MatchStateTransitionType::Standard),
-            MatchStateTransitionRule(MatchState::Warmup, MatchStateTransitionId::PlayerSpawnRequested, MatchState::PlayerSpawn, MatchStateTransitionType::Standard),
-            MatchStateTransitionRule(MatchState::PlayerSpawn, MatchStateTransitionId::StartRequested, MatchState::Playing, MatchStateTransitionType::Standard),
-
-        };
+        std::vector<MatchStateTransitionRule> rules_;
 
 
     public:
+
+        /**
+         * @brief Constructs a GameStateManager with custom transition rules.
+         *
+         * @param rules A span of transition rules defining valid state transitions.
+         */
+        explicit MatchStateManager(std::span<const MatchStateTransitionRule> rules)
+        : rules_(rules.begin(), rules.end()) {}
+
+        /**
+         * @brief Constructs a GameStateManager with default transition rules.
+         */
+        MatchStateManager() {
+            rules_.assign(DefaultMatchStateTransitionRules::rules().begin(),
+                DefaultMatchStateTransitionRules::rules().end()
+            );
+        }
 
         /**
          * @brief Registers a listener to be notified of state transitions.

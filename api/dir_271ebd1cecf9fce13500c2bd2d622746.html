@@ -123,19 +123,21 @@ Files</h2></td></tr>
 <tr class="memdesc:Level_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the Level class representing a game level or stage. <br /></td></tr>
 <tr class="memitem:Manager_2Eixx" id="r_Manager_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="Manager_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Manager_8ixx.html">Manager.ixx</a></td></tr>
 <tr class="memdesc:Manager_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract base class for game world managers. <br /></td></tr>
+<tr class="memitem:Session_2Eixx" id="r_Session_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="Session_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Session_8ixx.html">Session.ixx</a></td></tr>
+<tr class="memdesc:Session_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Session state container for game and match state. <br /></td></tr>
 <tr class="memitem:SystemRegistry_2Eixx" id="r_SystemRegistry_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="SystemRegistry_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SystemRegistry_8ixx.html">SystemRegistry.ixx</a></td></tr>
 <tr class="memdesc:SystemRegistry_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registry for managing System instances within a game loop phase. <br /></td></tr>
 <tr class="memitem:UpdateContext_2Eixx" id="r_UpdateContext_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="UpdateContext_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UpdateContext_8ixx.html">UpdateContext.ixx</a></td></tr>
 <tr class="memdesc:UpdateContext_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Context struct passed to components during per-frame updates. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md555"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md638"></a>
 helios::engine::runtime::world</h1>
 <p>World state management and per-frame update context.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md556"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md639"></a>
 Overview</h1>
 <p>This module provides the core classes for managing game state during runtime. The <span class="tt">GameWorld</span> class serves as the central registry for all GameObjects, while <span class="tt">UpdateContext</span> provides the frame context passed to systems during updates.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md557"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md640"></a>
 Key Classes</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -151,7 +153,7 @@ Key Classes</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">Manager</span>  </td><td class="markdownTableBodyNone">Abstract base for deferred operation handlers  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md558"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md641"></a>
 Usage</h1>
 <div class="fragment"><div class="line"><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8runtime_8world_8GameWorld.html">helios.engine.runtime.world.GameWorld</a>;</div>
 <div class="line"><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8runtime_8world_8UpdateContext.html">helios.engine.runtime.world.UpdateContext</a>;</div>
@@ -165,9 +167,9 @@ Usage</h1>
 <div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span>* obj : world.<a class="code hl_function" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#ac4319f3453e06ad04125c43b17047398">find</a>&lt;ComposeTransformComponent&gt;()) {</div>
 <div class="line">    <span class="comment">// Process matching entities</span></div>
 <div class="line">}</div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_html"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">helios::engine::runtime::world::GameWorld</a></div><div class="ttdoc">Central registry for game entities, managers, pools, and the active level.</div><div class="ttdef"><b>Definition</b> <a href="GameWorld_8ixx_source.html#l00119">GameWorld.ixx:119</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_html_a672057079d4cf81a8d05b07aa87fee3c"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#a672057079d4cf81a8d05b07aa87fee3c">helios::engine::runtime::world::GameWorld::addGameObject</a></div><div class="ttdeci">helios::engine::ecs::GameObject addGameObject()</div><div class="ttdoc">Creates a new GameObject in the world.</div><div class="ttdef"><b>Definition</b> <a href="GameWorld_8ixx_source.html#l00409">GameWorld.ixx:409</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_html_ac4319f3453e06ad04125c43b17047398"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#ac4319f3453e06ad04125c43b17047398">helios::engine::runtime::world::GameWorld::find</a></div><div class="ttdeci">std::optional&lt; helios::engine::ecs::GameObject &gt; find(const helios::engine::ecs::EntityHandle handle)</div><div class="ttdoc">Finds a GameObject by its EntityHandle.</div><div class="ttdef"><b>Definition</b> <a href="GameWorld_8ixx_source.html#l00464">GameWorld.ixx:464</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_html"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">helios::engine::runtime::world::GameWorld</a></div><div class="ttdoc">Central registry for game entities, managers, pools, and the active level.</div><div class="ttdef"><b>Definition</b> <a href="GameWorld_8ixx_source.html#l00125">GameWorld.ixx:125</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_html_a672057079d4cf81a8d05b07aa87fee3c"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#a672057079d4cf81a8d05b07aa87fee3c">helios::engine::runtime::world::GameWorld::addGameObject</a></div><div class="ttdeci">helios::engine::ecs::GameObject addGameObject()</div><div class="ttdoc">Creates a new GameObject in the world.</div><div class="ttdef"><b>Definition</b> <a href="GameWorld_8ixx_source.html#l00530">GameWorld.ixx:530</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_html_ac4319f3453e06ad04125c43b17047398"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#ac4319f3453e06ad04125c43b17047398">helios::engine::runtime::world::GameWorld::find</a></div><div class="ttdeci">std::optional&lt; helios::engine::ecs::GameObject &gt; find(const helios::engine::ecs::EntityHandle handle)</div><div class="ttdoc">Finds a GameObject by its EntityHandle.</div><div class="ttdef"><b>Definition</b> <a href="GameWorld_8ixx_source.html#l00585">GameWorld.ixx:585</a></div></div>
 <div class="ttc" id="amodule__helios_8engine_8runtime_8world_8GameWorld_html"><div class="ttname"><a href="module__helios_8engine_8runtime_8world_8GameWorld.html">helios.engine.runtime.world.GameWorld</a></div></div>
 <div class="ttc" id="amodule__helios_8engine_8runtime_8world_8UpdateContext_html"><div class="ttname"><a href="module__helios_8engine_8runtime_8world_8UpdateContext.html">helios.engine.runtime.world.UpdateContext</a></div></div>
 </div><!-- fragment --><hr  />

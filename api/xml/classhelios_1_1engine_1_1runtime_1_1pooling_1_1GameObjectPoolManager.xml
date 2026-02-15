@@ -222,6 +222,7 @@
         </inbodydescription>
         <location file="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolManager.ixx" line="230" column="23" bodyfile="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolManager.ixx" bodystart="230" bodyend="246"/>
         <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a9cc0f690e30550d213698d06210f69a6" compoundref="GameObjectPoolManager_8ixx" startline="337" endline="342">pool</references>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a1f3ad93fd926408196bca49a9707757e" compoundref="GameObjectPoolManager_8ixx" startline="354" endline="368">reset</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a965ef591bc25269837e5e95118cb52d2" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>std::optional&lt; <ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> &gt;</type>
@@ -369,6 +370,25 @@
         <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a8dd6b2a3a5252afb190ab22e0ddbc277" compoundref="GameObjectPoolManager_8ixx" startline="207" endline="215">poolSnapshot</referencedby>
         <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a85c5d5ed93c6e22f4d09750273e77c73" compoundref="GameObjectPoolManager_8ixx" startline="230" endline="246">release</referencedby>
       </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a1f3ad93fd926408196bca49a9707757e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::pooling::GameObjectPoolManager::reset</definition>
+        <argsstring>() override</argsstring>
+        <name>reset</name>
+        <qualifiedname>helios::engine::runtime::pooling::GameObjectPoolManager::reset</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a967a3375eca948be9ebeaca2e34c7475">reset</reimplements>
+        <briefdescription>
+<para>Resets all pools by releasing all active GameObjects. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Iterates through all registered pools and releases every active entity back to its pool. This effectively returns all pooled objects to their inactive state without destroying them.</para>
+<para>Useful for level transitions or game restarts where all pooled objects should be recycled. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolManager.ixx" line="354" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolManager.ixx" bodystart="354" bodyend="368"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a85c5d5ed93c6e22f4d09750273e77c73" compoundref="GameObjectPoolManager_8ixx" startline="230" endline="246">release</references>
+      </memberdef>
     </sectiondef>
     <briefdescription>
 <para>High-level manager for GameObject pooling operations. </para>
@@ -423,17 +443,29 @@
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="8">
+      <node id="11">
         <label>helios::engine::ecs::EntityManager</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1EntityManager"/>
       </node>
-      <node id="7">
+      <node id="10">
         <label>helios::engine::ecs::EntityRegistry</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry"/>
+      </node>
+      <node id="6">
+        <label>helios::engine::mechanics::gamestate::GameStateCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateCommandHandler"/>
+      </node>
+      <node id="7">
+        <label>helios::engine::mechanics::match::MatchStateCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1MatchStateCommandHandler"/>
       </node>
       <node id="5">
         <label>helios::engine::mechanics::scoring::ScoreCommandHandler</label>
         <link refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler"/>
+      </node>
+      <node id="8">
+        <label>helios::engine::modules::ui::UiActionCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandHandler"/>
       </node>
       <node id="1">
         <label>helios::engine::runtime::pooling::GameObjectPoolManager</label>
@@ -441,7 +473,7 @@
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="6">
+      <node id="9">
         <label>helios::engine::runtime::spawn::SpawnCommandHandlerRegistry</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandlerRegistry"/>
       </node>
@@ -455,13 +487,25 @@
           <edgelabel>scoreCommandHandler_</edgelabel>
         </childnode>
         <childnode refid="6" relation="usage">
-          <edgelabel>spawnCommandHandlerRegistry_</edgelabel>
+          <edgelabel>gameStateCommandHandler_</edgelabel>
         </childnode>
         <childnode refid="7" relation="usage">
-          <edgelabel>entityRegistry_</edgelabel>
+          <edgelabel>matchStateCommandHandler_</edgelabel>
         </childnode>
         <childnode refid="8" relation="usage">
+          <edgelabel>uiActionCommandHandler_</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>spawnCommandHandlerRegistry_</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>entityRegistry_</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
           <edgelabel>em_</edgelabel>
+        </childnode>
+        <childnode refid="12" relation="usage">
+          <edgelabel>session_</edgelabel>
         </childnode>
       </node>
       <node id="2">
@@ -471,12 +515,16 @@
           <edgelabel>gameWorld_</edgelabel>
         </childnode>
       </node>
+      <node id="12">
+        <label>helios::engine::runtime::world::Session</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session"/>
+      </node>
       <node id="4">
         <label>helios::util::log::Logger</label>
         <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
       </node>
     </collaborationgraph>
-    <location file="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolManager.ixx" line="103" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolManager.ixx" bodystart="103" bodyend="344"/>
+    <location file="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolManager.ixx" line="103" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolManager.ixx" bodystart="103" bodyend="370"/>
     <listofallmembers>
       <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a965ef591bc25269837e5e95118cb52d2" prot="public" virt="non-virtual"><scope>helios::engine::runtime::pooling::GameObjectPoolManager</scope><name>acquire</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1af957b45c3ef1a8f19c94d7e0cb7e4554" prot="public" virt="non-virtual"><scope>helios::engine::runtime::pooling::GameObjectPoolManager</scope><name>addPoolConfig</name></member>
@@ -490,6 +538,7 @@
       <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a7ccf9220ff11a84e8a5f78f8855ab629" prot="private" virt="non-virtual"><scope>helios::engine::runtime::pooling::GameObjectPoolManager</scope><name>pools_</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a8dd6b2a3a5252afb190ab22e0ddbc277" prot="public" virt="non-virtual"><scope>helios::engine::runtime::pooling::GameObjectPoolManager</scope><name>poolSnapshot</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a85c5d5ed93c6e22f4d09750273e77c73" prot="public" virt="non-virtual"><scope>helios::engine::runtime::pooling::GameObjectPoolManager</scope><name>release</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a1f3ad93fd926408196bca49a9707757e" prot="public" virt="virtual"><scope>helios::engine::runtime::pooling::GameObjectPoolManager</scope><name>reset</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a116b5758bea5a39bbc0d24bc62bdcdd7" prot="public" virt="virtual"><scope>helios::engine::runtime::pooling::GameObjectPoolManager</scope><name>~Manager</name></member>
     </listofallmembers>
   </compounddef>

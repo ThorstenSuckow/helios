@@ -5,6 +5,22 @@
     <innerfile refid="SpawnManager_8ixx">SpawnManager.ixx</innerfile>
     <innerclass refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" prot="public">helios::engine::runtime::spawn::SpawnManager</innerclass>
     <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a13c47e1ad5e367d3d0df4cb5d4dfed0d" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler" kindref="compound">helios::engine::runtime::spawn::scheduling::SpawnScheduler</ref> &gt; &gt;</type>
+        <definition>std::vector&lt;std::unique_ptr&lt;helios::engine::runtime::spawn::scheduling::SpawnScheduler&gt; &gt; helios::engine::runtime::spawn::SpawnManager::spawnSchedulers_</definition>
+        <argsstring></argsstring>
+        <name>spawnSchedulers_</name>
+        <qualifiedname>helios::engine::runtime::spawn::SpawnManager::spawnSchedulers_</qualifiedname>
+        <briefdescription>
+<para>Collection of schedulers that manage spawn rules and conditions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Each scheduler owns and evaluates its registered spawn rules independently. When conditions are met, the scheduler produces ScheduledSpawnPlan instances for execution. Multiple schedulers allow grouping spawn rules by category (e.g., enemies, powerups, projectiles). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="111" column="21" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="111" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a78bfec2a2616bb6a3788f99362f87414" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1SpawnCommand" kindref="compound">helios::engine::runtime::spawn::commands::SpawnCommand</ref> &gt;</type>
         <definition>std::vector&lt;helios::engine::runtime::spawn::commands::SpawnCommand&gt; helios::engine::runtime::spawn::SpawnManager::spawnCommands_</definition>
@@ -18,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="102" column="21" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="102" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="116" column="21" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="116" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a8fa9d044ec944334d2d1f6db4395cbfe" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1DespawnCommand" kindref="compound">helios::engine::runtime::spawn::commands::DespawnCommand</ref> &gt;</type>
@@ -33,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="107" column="21" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="107" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="121" column="21" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="121" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a93a51b6d502195cc187ad7de5e0c362a" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand" kindref="compound">helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand</ref> &gt;</type>
@@ -48,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="112" column="21" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="112" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="126" column="21" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="126" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a89d55461036f73f89fe562b46ca7f384" prot="private" static="no" mutable="no">
         <type><ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager" kindref="compound">helios::engine::runtime::pooling::GameObjectPoolManager</ref> *</type>
@@ -64,7 +80,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="117" column="65" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="117" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="131" column="65" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="131" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a4dd482abce2d7e87a3998d534bc76116" prot="private" static="no" mutable="no">
         <type>std::unordered_map&lt; <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId" kindref="compound">helios::engine::core::data::SpawnProfileId</ref>, std::unique_ptr&lt; const <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnProfile" kindref="compound">helios::engine::runtime::spawn::SpawnProfile</ref> &gt; &gt;</type>
@@ -79,7 +95,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="124" column="2" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="124" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="138" column="2" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="138" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -125,7 +141,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="140" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="140" bodyend="153"/>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="154" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="154" bodyend="167"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1abd4a02937d8d6686cc432788692fd367" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -179,7 +195,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="166" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="166" bodyend="250"/>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="180" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="180" bodyend="264"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a3b4d91b8369332eea4a4b910b626fd3d" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -231,10 +247,10 @@
 </para>
         </detaileddescription>
         <inbodydescription>
-<para><xrefsect id="todo_1_todo000015"><xreftitle>Todo</xreftitle><xrefdescription><para>log </para>
+<para><xrefsect id="todo_1_todo000017"><xreftitle>Todo</xreftitle><xrefdescription><para>log </para>
 </xrefdescription></xrefsect></para>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="260" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="260" bodyend="322"/>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="274" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="274" bodyend="336"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1af33cd04062d77fdd17f02751e6581931" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -287,7 +303,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="332" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="332" bodyend="348"/>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="346" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="346" bodyend="362"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a0ed05ecdafaaa1de8bfe0fe4a8540166" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -302,8 +318,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="356" column="9"/>
-        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1ac51fc20588ef7abf0d7e9b675bc6e0b3" compoundref="SpawnManager_8ixx" startline="438" endline="447">helios::engine::runtime::spawn::SpawnManager::addSpawnProfile</referencedby>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="370" column="9"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1ac51fc20588ef7abf0d7e9b675bc6e0b3" compoundref="SpawnManager_8ixx" startline="465" endline="474">helios::engine::runtime::spawn::SpawnManager::addSpawnProfile</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a68c1e1c5bc8e28061333e50e7d5836bc" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>bool</type>
@@ -335,7 +351,37 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="365" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="365" bodyend="368"/>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="379" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="379" bodyend="382"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a11b64df3f6da630ef18e0ce51adf7529" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::spawn::SpawnManager::addScheduler</definition>
+        <argsstring>(std::unique_ptr&lt; helios::engine::runtime::spawn::scheduling::SpawnScheduler &gt; scheduler)</argsstring>
+        <name>addScheduler</name>
+        <qualifiedname>helios::engine::runtime::spawn::SpawnManager::addScheduler</qualifiedname>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler" kindref="compound">helios::engine::runtime::spawn::scheduling::SpawnScheduler</ref> &gt;</type>
+          <declname>scheduler</declname>
+        </param>
+        <briefdescription>
+<para>Adds a spawn scheduler to this manager. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Schedulers evaluate spawn rules and produce spawn plans based on game conditions. Multiple schedulers can be added for different spawn categories.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>scheduler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The scheduler to add. Ownership is transferred. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="393" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="393" bodyend="395"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a5896ba755340affff00edcd3757068c7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>bool</type>
@@ -367,7 +413,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="377" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="377" bodyend="380"/>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="404" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="404" bodyend="407"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1ab2c6562cae1e34f6e90068710044f085" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>bool</type>
@@ -399,7 +445,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="390" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="390" bodyend="395"/>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="417" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="417" bodyend="422"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a345caf68f5d311a54f74a921b933705e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>void</type>
@@ -441,7 +487,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="403" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="403" bodyend="421"/>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="430" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="430" bodyend="448"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1ac51fc20588ef7abf0d7e9b675bc6e0b3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SpawnManager &amp;</type>
@@ -487,9 +533,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="438" column="22" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="438" bodyend="447"/>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="465" column="22" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="465" bodyend="474"/>
         <references refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a0ed05ecdafaaa1de8bfe0fe4a8540166">helios::engine::runtime::spawn::SpawnManager::SpawnManager</references>
-        <references refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1aa356bdd063bd2b7ca1f3548218e32411" compoundref="SpawnManager_8ixx" startline="456" endline="464">helios::engine::runtime::spawn::SpawnManager::spawnProfile</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1aa356bdd063bd2b7ca1f3548218e32411" compoundref="SpawnManager_8ixx" startline="483" endline="491">helios::engine::runtime::spawn::SpawnManager::spawnProfile</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1aa356bdd063bd2b7ca1f3548218e32411" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnProfile" kindref="compound">helios::engine::runtime::spawn::SpawnProfile</ref> *</type>
@@ -520,8 +566,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="456" column="61" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="456" bodyend="464"/>
-        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1ac51fc20588ef7abf0d7e9b675bc6e0b3" compoundref="SpawnManager_8ixx" startline="438" endline="447">helios::engine::runtime::spawn::SpawnManager::addSpawnProfile</referencedby>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="483" column="61" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="483" bodyend="491"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1ac51fc20588ef7abf0d7e9b675bc6e0b3" compoundref="SpawnManager_8ixx" startline="465" endline="474">helios::engine::runtime::spawn::SpawnManager::addSpawnProfile</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1aeab1d9b1aabd174751fa20937a9841f2" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>void</type>
@@ -552,9 +598,44 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="475" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="475" bodyend="483"/>
-        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aa5461339dafdae850a4327e59a1ba112" compoundref="GameWorld_8ixx" startline="372" endline="381">helios::engine::runtime::world::GameWorld::getManager</references>
-        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a035f7979ac9743fceecaeea93204cd37" compoundref="GameWorld_8ixx" startline="305" endline="314">helios::engine::runtime::world::GameWorld::registerSpawnCommandHandler</references>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="502" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="502" bodyend="510"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aa5461339dafdae850a4327e59a1ba112" compoundref="GameWorld_8ixx" startline="493" endline="502">helios::engine::runtime::world::GameWorld::getManager</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a035f7979ac9743fceecaeea93204cd37" compoundref="GameWorld_8ixx" startline="348" endline="357">helios::engine::runtime::world::GameWorld::registerSpawnCommandHandler</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1afd3944ee30a76fd530a1d0e832269edf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::spawn::SpawnManager::reset</definition>
+        <argsstring>() override</argsstring>
+        <name>reset</name>
+        <qualifiedname>helios::engine::runtime::spawn::SpawnManager::reset</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a967a3375eca948be9ebeaca2e34c7475">reset</reimplements>
+        <briefdescription>
+<para>Resets all schedulers, profiles, and pending commands. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Called during level transitions or game restarts to clear all spawn state. Resets each scheduler, calls `onReset()` on all placers and initializers, and clears all pending command queues. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="519" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="519" bodyend="534"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a04cfc39a0594e73328241fbf22354316" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::span&lt; std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler" kindref="compound">helios::engine::runtime::spawn::scheduling::SpawnScheduler</ref> &gt; &gt;</type>
+        <definition>std::span&lt; std::unique_ptr&lt; helios::engine::runtime::spawn::scheduling::SpawnScheduler &gt; &gt; helios::engine::runtime::spawn::SpawnManager::spawnSchedulers</definition>
+        <argsstring>()</argsstring>
+        <name>spawnSchedulers</name>
+        <qualifiedname>helios::engine::runtime::spawn::SpawnManager::spawnSchedulers</qualifiedname>
+        <briefdescription>
+<para>Returns a span of all registered spawn schedulers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Span of spawn scheduler unique pointers. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="541" column="19" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="541" bodyend="543"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

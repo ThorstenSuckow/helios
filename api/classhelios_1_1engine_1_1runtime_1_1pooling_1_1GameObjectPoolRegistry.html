@@ -116,6 +116,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a6b447a82262d3edfcb4b94b3be3d7eea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <br /></td></tr>
 <tr class="memitem:a83f27617fa435b8183760804f14d9ef6" id="r_a83f27617fa435b8183760804f14d9ef6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html">GameObjectPool</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a83f27617fa435b8183760804f14d9ef6">addPool</a> (const <a class="el" href="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId.html">helios::engine::core::data::GameObjectPoolId</a> id, std::unique_ptr&lt; <a class="el" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html">GameObjectPool</a> &gt; gameObjectPool) noexcept</td></tr>
 <tr class="memdesc:a83f27617fa435b8183760804f14d9ef6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a new pool to the registry.  <br /></td></tr>
+<tr class="memitem:a5cf3058c7137128a806f0993fa47bea0" id="r_a5cf3058c7137128a806f0993fa47bea0"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId.html">helios::engine::core::data::GameObjectPoolId</a>, std::unique_ptr&lt; <a class="el" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html">GameObjectPool</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5cf3058c7137128a806f0993fa47bea0">pools</a> ()</td></tr>
+<tr class="memdesc:a5cf3058c7137128a806f0993fa47bea0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a reference to the internal pool map.  <br /></td></tr>
 <tr class="memitem:a64a7e0dc59d36bb2f1056214b534f350" id="r_a64a7e0dc59d36bb2f1056214b534f350"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html">GameObjectPool</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a64a7e0dc59d36bb2f1056214b534f350">pool</a> (const <a class="el" href="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId.html">helios::engine::core::data::GameObjectPoolId</a> id) const</td></tr>
 <tr class="memdesc:a64a7e0dc59d36bb2f1056214b534f350"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves a pool by its ID.  <br /></td></tr>
 <tr class="memitem:a291a9118fd25c9e467c244810639e838" id="r_a291a9118fd25c9e467c244810639e838"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a291a9118fd25c9e467c244810639e838">has</a> (const <a class="el" href="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId.html">helios::engine::core::data::GameObjectPoolId</a> id) const noexcept</td></tr>
@@ -129,7 +131,7 @@ Public Member Functions</h2></td></tr>
 <p>constexpr GameObjectPoolId BULLET_POOL{1}; registry.addPool(BULLET_POOL, std::make_unique&lt;GameObjectPool&gt;(100));</p>
 <p>// Later, acquire a bullet from the pool auto* pool = registry.pool(BULLET_POOL); <a class="el" href="classhelios_1_1util_1_1Guid.html" title="Representative of a Globally Unique Identifier.">helios::util::Guid</a> bulletGuid; if (pool &amp;&amp; pool-&gt;acquire(bulletGuid)) { // Use the bullet } ``` </p>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPoolRegistry_8ixx_source.html#l00044">44</a> of file <a class="el" href="GameObjectPoolRegistry_8ixx_source.html">GameObjectPoolRegistry.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPoolRegistry_8ixx_source.html#l00045">45</a> of file <a class="el" href="GameObjectPoolRegistry_8ixx_source.html">GameObjectPoolRegistry.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a6b447a82262d3edfcb4b94b3be3d7eea" name="a6b447a82262d3edfcb4b94b3be3d7eea"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6b447a82262d3edfcb4b94b3be3d7eea">&#9670;&#160;</a></span>GameObjectPoolRegistry()</h2>
@@ -197,7 +199,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Raw pointer to the added pool for immediate use. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPoolRegistry_8ixx_source.html#l00071">71</a> of file <a class="el" href="GameObjectPoolRegistry_8ixx_source.html">GameObjectPoolRegistry.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPoolRegistry_8ixx_source.html#l00072">72</a> of file <a class="el" href="GameObjectPoolRegistry_8ixx_source.html">GameObjectPoolRegistry.ixx</a>.</p>
 
 </div>
 </div>
@@ -233,7 +235,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the pool exists, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPoolRegistry_8ixx_source.html#l00104">104</a> of file <a class="el" href="GameObjectPoolRegistry_8ixx_source.html">GameObjectPoolRegistry.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPoolRegistry_8ixx_source.html#l00118">118</a> of file <a class="el" href="GameObjectPoolRegistry_8ixx_source.html">GameObjectPoolRegistry.ixx</a>.</p>
 
 </div>
 </div>
@@ -269,7 +271,38 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the pool, or nullptr if not found. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPoolRegistry_8ixx_source.html#l00086">86</a> of file <a class="el" href="GameObjectPoolRegistry_8ixx_source.html">GameObjectPoolRegistry.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPoolRegistry_8ixx_source.html#l00100">100</a> of file <a class="el" href="GameObjectPoolRegistry_8ixx_source.html">GameObjectPoolRegistry.ixx</a>.</p>
+
+</div>
+</div>
+<a id="a5cf3058c7137128a806f0993fa47bea0" name="a5cf3058c7137128a806f0993fa47bea0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5cf3058c7137128a806f0993fa47bea0">&#9670;&#160;</a></span>pools()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unordered_map&lt; <a class="el" href="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId.html">helios::engine::core::data::GameObjectPoolId</a>, std::unique_ptr&lt; <a class="el" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html">GameObjectPool</a> &gt; &gt; &amp; helios::engine::runtime::pooling::GameObjectPoolRegistry::pools </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns a reference to the internal pool map. </p>
+<p>Provides direct access to all pools for iteration or bulk operations. The returned map should not be modified directly; use `addPool()` instead.</p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the pool map. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="GameObjectPoolRegistry_8ixx_source.html#l00088">88</a> of file <a class="el" href="GameObjectPoolRegistry_8ixx_source.html">GameObjectPoolRegistry.ixx</a>.</p>
 
 </div>
 </div>

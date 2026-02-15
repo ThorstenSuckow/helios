@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="helios_2engine_2mechanics_2match_2README_8md" kind="file" language="Markdown">
+    <compoundname>helios/engine/mechanics/match/README.md</compoundname>
+    <innernamespace refid="namespacehelios_1_1engine_1_1mechanics_1_1match">helios::engine::mechanics::match</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>helios::engine::mechanics::match</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Match<sp/>state<sp/>management<sp/>system<sp/>for<sp/>the<sp/>helios<sp/>engine.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>a<sp/>rule-based<sp/>state<sp/>machine<sp/>for<sp/>managing<sp/>match<sp/>states<sp/>(e.g.,<sp/>Warmup,<sp/>PlayerSpawn,<sp/>Playing)<sp/>with<sp/>transitions,<sp/>listeners,<sp/>and<sp/>command-driven<sp/>state<sp/>changes.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Submodules</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Submodule<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-----------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`commands/`<sp/>|<sp/>Commands<sp/>for<sp/>requesting<sp/>state<sp/>transitions<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`components/`<sp/>|<sp/>Components<sp/>for<sp/>storing<sp/>match<sp/>state<sp/>and<sp/>timer<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`dispatcher/`<sp/>|<sp/>Dispatchers<sp/>for<sp/>routing<sp/>state<sp/>commands<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`listeners/`<sp/>|<sp/>Listeners<sp/>for<sp/>reacting<sp/>to<sp/>state<sp/>transitions<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`systems/`<sp/>|<sp/>Systems<sp/>for<sp/>match<sp/>flow<sp/>and<sp/>rules<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`types/`<sp/>|<sp/>Core<sp/>types,<sp/>enums,<sp/>and<sp/>data<sp/>structures<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Architecture</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">1.<sp/>**MatchStateManager**<sp/>holds<sp/>the<sp/>transition<sp/>rules<sp/>and<sp/>processes<sp/>state<sp/>commands</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>**MatchStateCommand**<sp/>encapsulates<sp/>a<sp/>transition<sp/>request</highlight></codeline>
+<codeline><highlight class="normal">3.<sp/>**MatchStateTransitionRule**<sp/>defines<sp/>valid<sp/>from<sp/>-&gt;<sp/>to<sp/>transitions<sp/>with<sp/>optional<sp/>guards</highlight></codeline>
+<codeline><highlight class="normal">4.<sp/>**MatchStateTransitionListener**<sp/>implementations<sp/>react<sp/>to<sp/>state<sp/>changes</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Match<sp/>Flow</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">┌───────────────┐<sp/><sp/><sp/>WarmupRequested<sp/><sp/><sp/>┌───────────────┐</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>Undefined<sp/><sp/><sp/>│<sp/>──────────────────►<sp/>│<sp/><sp/><sp/><sp/>Warmup<sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">└───────────────┘<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>└───────────────┘</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PlayerSpawnRequested</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>┌───────────────┐</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/>PlayerSpawn<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>└───────────────┘</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>StartRequested</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>┌───────────────┐</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/>Playing<sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>└───────────────┘</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Create<sp/>manager</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>manager<sp/>=<sp/>std::make_unique&lt;MatchStateManager&gt;();</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Add<sp/>listeners</highlight></codeline>
+<codeline><highlight class="normal">manager-&gt;addMatchStateListener(std::make_unique&lt;PlayerSpawnListener&gt;(playerObject));</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Submit<sp/>transition<sp/>via<sp/>command</highlight></codeline>
+<codeline><highlight class="normal">commandBuffer.add&lt;MatchStateCommand&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>MatchStateTransitionRequest(MatchState::Warmup,<sp/>MatchStateTransitionId::PlayerSpawnRequested)</highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::engine::mechanics::match</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Match<sp/>state<sp/>management<sp/>system<sp/>for<sp/>the<sp/>helios<sp/>engine.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Provides<sp/>a<sp/>rule-based<sp/>state<sp/>machine<sp/>for<sp/>managing<sp/>match<sp/>states<sp/>with<sp/>transitions,<sp/>listeners,<sp/>and<sp/>command-driven<sp/>state<sp/>changes.</highlight></codeline>
+<codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
+<codeline></codeline>
+    </programlisting>
+    <location file="/tmp/h/include/helios/engine/mechanics/match/README.md"/>
+  </compounddef>
+</doxygen>

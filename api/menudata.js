@@ -109,6 +109,7 @@ var menudata={children:[
 {text:"g",url:"modulemembers_type.html#index_g"},
 {text:"i",url:"modulemembers_type.html#index_i"},
 {text:"l",url:"modulemembers_type.html#index_l"},
+{text:"m",url:"modulemembers_type.html#index_m"},
 {text:"o",url:"modulemembers_type.html#index_o"},
 {text:"p",url:"modulemembers_type.html#index_p"},
 {text:"r",url:"modulemembers_type.html#index_r"},

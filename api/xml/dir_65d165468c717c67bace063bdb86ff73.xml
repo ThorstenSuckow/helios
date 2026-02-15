@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_65d165468c717c67bace063bdb86ff73" kind="dir">
+    <compoundname>match</compoundname>
+    <innerdir refid="dir_82c0e5f2466dbad6335583ffce9c996a">commands</innerdir>
+    <innerdir refid="dir_aa6a3dd4ed48a30c8a77c0ae3ea7750b">components</innerdir>
+    <innerdir refid="dir_0f1722f86276c8a09cbfccf41430b534">dispatcher</innerdir>
+    <innerdir refid="dir_f9a8cd8fd3995795dc04f45f6888faba">listeners</innerdir>
+    <innerdir refid="dir_c709f84978d2d66f31b50c8123d67a14">rules</innerdir>
+    <innerdir refid="dir_c15260370b6d31e4f1b37eb15587b087">systems</innerdir>
+    <innerdir refid="dir_cb33ccb71eb51ab476530a91930975dc">types</innerdir>
+    <innerfile refid="helios_2engine_2mechanics_2match_2__module_8ixx">helios/engine/mechanics/match/_module.ixx</innerfile>
+    <innerfile refid="MatchStateCommandHandler_8ixx">MatchStateCommandHandler.ixx</innerfile>
+    <innerfile refid="MatchStateManager_8ixx">MatchStateManager.ixx</innerfile>
+    <innerfile refid="MatchStateTransitionListener_8ixx">MatchStateTransitionListener.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_65d165468c717c67bace063bdb86ff73_1autotoc_md272">
+<title>helios::engine::mechanics::match</title><para>Match state management system for the helios engine.</para>
+<para>This module provides a rule-based state machine for managing match states (e.g., Warmup, PlayerSpawn, Playing) with transitions, listeners, and command-driven state changes.</para>
+</sect1>
+<sect1 id="dir_65d165468c717c67bace063bdb86ff73_1autotoc_md273">
+<title>Submodules</title><para><table rows="7" cols="2"><row>
+<entry thead="yes"><para>Submodule  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>commands/</computeroutput>  </para>
+</entry><entry thead="no"><para>Commands for requesting state transitions  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>components/</computeroutput>  </para>
+</entry><entry thead="no"><para>Components for storing match state and timer  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>dispatcher/</computeroutput>  </para>
+</entry><entry thead="no"><para>Dispatchers for routing state commands  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>listeners/</computeroutput>  </para>
+</entry><entry thead="no"><para>Listeners for reacting to state transitions  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>systems/</computeroutput>  </para>
+</entry><entry thead="no"><para>Systems for match flow and rules  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>types/</computeroutput>  </para>
+</entry><entry thead="no"><para>Core types, enums, and data structures  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_65d165468c717c67bace063bdb86ff73_1autotoc_md274">
+<title>Architecture</title><para>1. <bold>MatchStateManager</bold> holds the transition rules and processes state commands 2. <bold>MatchStateCommand</bold> encapsulates a transition request 3. <bold>MatchStateTransitionRule</bold> defines valid from -&gt; to transitions with optional guards 4. <bold>MatchStateTransitionListener</bold> implementations react to state changes</para>
+</sect1>
+<sect1 id="dir_65d165468c717c67bace063bdb86ff73_1autotoc_md275">
+<title>Match Flow</title><para><programlisting><codeline><highlight class="normal">┌───────────────┐<sp/><sp/><sp/>WarmupRequested<sp/><sp/><sp/>┌───────────────┐</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>Undefined<sp/><sp/><sp/>│<sp/>──────────────────►<sp/>│<sp/><sp/><sp/><sp/>Warmup<sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">└───────────────┘<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>└───────────────┘</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PlayerSpawnRequested</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>┌───────────────┐</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/>PlayerSpawn<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>└───────────────┘</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>StartRequested</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>┌───────────────┐</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/>Playing<sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>└───────────────┘</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_65d165468c717c67bace063bdb86ff73_1autotoc_md276">
+<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Create<sp/>manager</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>manager<sp/>=<sp/>std::make_unique&lt;MatchStateManager&gt;();</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Add<sp/>listeners</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">manager-&gt;addMatchStateListener(std::make_unique&lt;PlayerSpawnListener&gt;(playerObject));</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Submit<sp/>transition<sp/>via<sp/>command</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">commandBuffer.add&lt;MatchStateCommand&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>MatchStateTransitionRequest(MatchState::Warmup,<sp/>MatchStateTransitionId::PlayerSpawnRequested)</highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+</para>
+<para><details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/mechanics/match/"/>
+  </compounddef>
+</doxygen>

@@ -208,7 +208,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="/tmp/h/include/helios/engine/mechanics/scoring/ScorePoolManager.ixx" line="146" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/scoring/ScorePoolManager.ixx" bodystart="146" bodyend="148"/>
-        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a37b8248fc6f250140046bd81401853ef" compoundref="GameWorld_8ixx" startline="344" endline="352">helios::engine::runtime::world::GameWorld::registerScoreCommandHandler</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a37b8248fc6f250140046bd81401853ef" compoundref="GameWorld_8ixx" startline="413" endline="421">helios::engine::runtime::world::GameWorld::registerScoreCommandHandler</references>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -236,13 +236,21 @@
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="8">
+      <node id="11">
         <label>helios::engine::ecs::EntityManager</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1EntityManager"/>
       </node>
-      <node id="7">
+      <node id="10">
         <label>helios::engine::ecs::EntityRegistry</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry"/>
+      </node>
+      <node id="6">
+        <label>helios::engine::mechanics::gamestate::GameStateCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateCommandHandler"/>
+      </node>
+      <node id="7">
+        <label>helios::engine::mechanics::match::MatchStateCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1MatchStateCommandHandler"/>
       </node>
       <node id="5">
         <label>helios::engine::mechanics::scoring::ScoreCommandHandler</label>
@@ -256,7 +264,11 @@
         <childnode refid="5" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="6">
+      <node id="8">
+        <label>helios::engine::modules::ui::UiActionCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandHandler"/>
+      </node>
+      <node id="9">
         <label>helios::engine::runtime::spawn::SpawnCommandHandlerRegistry</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandlerRegistry"/>
       </node>
@@ -270,13 +282,25 @@
           <edgelabel>scoreCommandHandler_</edgelabel>
         </childnode>
         <childnode refid="6" relation="usage">
-          <edgelabel>spawnCommandHandlerRegistry_</edgelabel>
+          <edgelabel>gameStateCommandHandler_</edgelabel>
         </childnode>
         <childnode refid="7" relation="usage">
-          <edgelabel>entityRegistry_</edgelabel>
+          <edgelabel>matchStateCommandHandler_</edgelabel>
         </childnode>
         <childnode refid="8" relation="usage">
+          <edgelabel>uiActionCommandHandler_</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>spawnCommandHandlerRegistry_</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>entityRegistry_</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
           <edgelabel>em_</edgelabel>
+        </childnode>
+        <childnode refid="12" relation="usage">
+          <edgelabel>session_</edgelabel>
         </childnode>
       </node>
       <node id="2">
@@ -285,6 +309,10 @@
         <childnode refid="3" relation="usage">
           <edgelabel>gameWorld_</edgelabel>
         </childnode>
+      </node>
+      <node id="12">
+        <label>helios::engine::runtime::world::Session</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session"/>
       </node>
       <node id="4">
         <label>helios::util::log::Logger</label>
@@ -299,6 +327,7 @@
       <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a04f62fb1b24bfc389acaa48fdd31293e" prot="public" virt="virtual"><scope>helios::engine::mechanics::scoring::ScorePoolManager</scope><name>init</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ab0f750d777e2368c08fc413188673622" prot="public" virt="virtual"><scope>helios::engine::mechanics::scoring::ScorePoolManager</scope><name>onAdd</name></member>
       <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a2af5f17fef387546d5a2e3d03ebb98e8" prot="private" virt="non-virtual"><scope>helios::engine::mechanics::scoring::ScorePoolManager</scope><name>pools_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a967a3375eca948be9ebeaca2e34c7475" prot="public" virt="virtual"><scope>helios::engine::mechanics::scoring::ScorePoolManager</scope><name>reset</name></member>
       <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a68108b524ba7d30d4c281c05c777e3c0" prot="public" virt="non-virtual"><scope>helios::engine::mechanics::scoring::ScorePoolManager</scope><name>scorePool</name></member>
       <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1aa34229b674e0da187b8c56c6cc90dfd0" prot="private" virt="non-virtual"><scope>helios::engine::mechanics::scoring::ScorePoolManager</scope><name>scores_</name></member>
       <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1ac30bf7894a4fd962ca9e67c4ca02f395" prot="public" virt="virtual"><scope>helios::engine::mechanics::scoring::ScorePoolManager</scope><name>submit</name></member>

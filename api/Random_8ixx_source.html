@@ -133,7 +133,7 @@ $(function() {
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">     * ```</span></div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">     */</span></div>
 <div class="foldopen" id="foldopen00027" data-start="{" data-end="};">
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classhelios_1_1util_1_1Random.html">   27</a></span>    <span class="keyword">class </span><a class="code hl_function" href="classhelios_1_1util_1_1Random.html#a65f34a4c69ccb7dc6e12faf42c62ad86">Random</a> {</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classhelios_1_1util_1_1Random.html">   27</a></span>    <span class="keyword">class </span><a class="code hl_function" href="classhelios_1_1util_1_1Random.html#a4b1ddd3f4d068f05948a123195908323">Random</a> {</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keyword">private</span>:</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment"></span> </div>
@@ -148,54 +148,77 @@ $(function() {
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">         * @see https://en.cppreference.com/w/cpp/numeric/random/uniform_real_distribution</span></div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">         */</span></div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        std::uniform_real_distribution&lt;float&gt; uniformDist_;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment"></span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">        * @brief Initializes the generator with the provided seed value.</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">        */</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="classhelios_1_1util_1_1Random.html#a65f34a4c69ccb7dc6e12faf42c62ad86">   49</a></span>        <span class="keyword">explicit</span> <a class="code hl_function" href="classhelios_1_1util_1_1Random.html#a65f34a4c69ccb7dc6e12faf42c62ad86">Random</a>(uint32_t seed) : gen_(seed) {};</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment"></span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">         * @brief The initial seed used to initialize the generator.</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">         * @details Stored for use by `reset()` to restore the generator to its</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">         * initial state.</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        uint32_t initialSeed_;</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment"></span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">         * @brief Generates a pseudo-random float in the range [a, b).</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">         * @details Uses `std::uniform_real_distribution` to generate a uniformly</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">         * distributed floating-point number.</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">         * @param a The lower bound of the range (inclusive).</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">         * @param b The upper bound of the range (exclusive).</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">         * @return A random float value in the range [a, b).</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment"></span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">         * @brief Initializes the generator with the provided seed value.</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">         * @param seed The seed value for the random number generator.</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="classhelios_1_1util_1_1Random.html#a4b1ddd3f4d068f05948a123195908323">   58</a></span>        <span class="keyword">explicit</span> <a class="code hl_function" href="classhelios_1_1util_1_1Random.html#a4b1ddd3f4d068f05948a123195908323">Random</a>(<span class="keyword">const</span> uint32_t seed) : gen_(seed), initialSeed_(seed) {};</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment"></span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">         * @brief Resets the generator to its initial state.</span></div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">         * @see https://en.cppreference.com/w/cpp/numeric/random/uniform_real_distribution</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00065" data-start="{" data-end="}">
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="classhelios_1_1util_1_1Random.html#a8f32c6075d653622da519b783386a205">   65</a></span>        [[nodiscard]] <span class="keywordtype">float</span> <a class="code hl_function" href="classhelios_1_1util_1_1Random.html#a8f32c6075d653622da519b783386a205">randomFloat</a>(<span class="keywordtype">float</span> a, <span class="keywordtype">float</span> b) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>            <span class="keywordflow">if</span> (b &lt; a) {</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>                <span class="keyword">auto</span> tmp = a; a = b; b = tmp;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            }</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>            <span class="keywordflow">if</span> (a == b) {</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>                <span class="keywordflow">return</span> a;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            }</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            <span class="keywordflow">return</span> uniformDist_(</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>                gen_,</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>                std::uniform_real_distribution&lt;float&gt;::param_type{a, b}</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            );</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        }</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">         * @details Re-seeds the generator with the original seed value and</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">         * resets the distribution state. Useful for reproducible sequences.</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00066" data-start="{" data-end="}">
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="classhelios_1_1util_1_1Random.html#a04cd8307124864e33c6cf794a6d18638">   66</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1util_1_1Random.html#a04cd8307124864e33c6cf794a6d18638">reset</a>() {</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>            gen_.seed(initialSeed_);</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            uniformDist_.reset();</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        }</div>
 </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    };</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment"></span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">         * @brief Generates a pseudo-random float in the range [a, b).</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">         * @details Uses `std::uniform_real_distribution` to generate a uniformly</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">         * distributed floating-point number.</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">         * @param a The lower bound of the range (inclusive).</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">         * @param b The upper bound of the range (exclusive).</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">         * @return A random float value in the range [a, b).</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">         * @see https://en.cppreference.com/w/cpp/numeric/random/uniform_real_distribution</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00085" data-start="{" data-end="}">
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="classhelios_1_1util_1_1Random.html#a8f32c6075d653622da519b783386a205">   85</a></span>        [[nodiscard]] <span class="keywordtype">float</span> <a class="code hl_function" href="classhelios_1_1util_1_1Random.html#a8f32c6075d653622da519b783386a205">randomFloat</a>(<span class="keywordtype">float</span> a, <span class="keywordtype">float</span> b) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            <span class="keywordflow">if</span> (b &lt; a) {</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>                <span class="keyword">auto</span> tmp = a; a = b; b = tmp;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            }</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>            <span class="keywordflow">if</span> (a == b) {</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                <span class="keywordflow">return</span> a;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            }</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>            <span class="keywordflow">return</span> uniformDist_(</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                gen_,</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                std::uniform_real_distribution&lt;float&gt;::param_type{a, b}</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>            );</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        }</div>
 </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>}</div>
-<div class="ttc" id="aclasshelios_1_1util_1_1Random_html_a65f34a4c69ccb7dc6e12faf42c62ad86"><div class="ttname"><a href="classhelios_1_1util_1_1Random.html#a65f34a4c69ccb7dc6e12faf42c62ad86">helios::util::Random::Random</a></div><div class="ttdeci">Random(uint32_t seed)</div><div class="ttdoc">Initializes the generator with the provided seed value.</div><div class="ttdef"><b>Definition</b> <a href="#l00049">Random.ixx:49</a></div></div>
-<div class="ttc" id="aclasshelios_1_1util_1_1Random_html_a8f32c6075d653622da519b783386a205"><div class="ttname"><a href="classhelios_1_1util_1_1Random.html#a8f32c6075d653622da519b783386a205">helios::util::Random::randomFloat</a></div><div class="ttdeci">float randomFloat(float a, float b) noexcept</div><div class="ttdoc">Generates a pseudo-random float in the range [a, b).</div><div class="ttdef"><b>Definition</b> <a href="#l00065">Random.ixx:65</a></div></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    };</div>
+</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>}</div>
+<div class="ttc" id="aclasshelios_1_1util_1_1Random_html_a04cd8307124864e33c6cf794a6d18638"><div class="ttname"><a href="classhelios_1_1util_1_1Random.html#a04cd8307124864e33c6cf794a6d18638">helios::util::Random::reset</a></div><div class="ttdeci">void reset()</div><div class="ttdoc">Resets the generator to its initial state.</div><div class="ttdef"><b>Definition</b> <a href="#l00066">Random.ixx:66</a></div></div>
+<div class="ttc" id="aclasshelios_1_1util_1_1Random_html_a4b1ddd3f4d068f05948a123195908323"><div class="ttname"><a href="classhelios_1_1util_1_1Random.html#a4b1ddd3f4d068f05948a123195908323">helios::util::Random::Random</a></div><div class="ttdeci">Random(const uint32_t seed)</div><div class="ttdoc">Initializes the generator with the provided seed value.</div><div class="ttdef"><b>Definition</b> <a href="#l00058">Random.ixx:58</a></div></div>
+<div class="ttc" id="aclasshelios_1_1util_1_1Random_html_a8f32c6075d653622da519b783386a205"><div class="ttname"><a href="classhelios_1_1util_1_1Random.html#a8f32c6075d653622da519b783386a205">helios::util::Random::randomFloat</a></div><div class="ttdeci">float randomFloat(float a, float b) noexcept</div><div class="ttdoc">Generates a pseudo-random float in the range [a, b).</div><div class="ttdef"><b>Definition</b> <a href="#l00085">Random.ixx:85</a></div></div>
 <div class="ttc" id="amodule__helios_8util_8Random_html"><div class="ttname"><a href="module__helios_8util_8Random.html">helios.util.Random</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1util_html"><div class="ttname"><a href="namespacehelios_1_1util.html">helios::util</a></div><div class="ttdoc">Utility functions and helper classes.</div><div class="ttdef"><b>Definition</b> <a href="Colors_8ixx_source.html#l00009">Colors.ixx:9</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

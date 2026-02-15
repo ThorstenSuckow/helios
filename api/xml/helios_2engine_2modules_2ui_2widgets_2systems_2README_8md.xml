@@ -12,13 +12,23 @@
 <codeline></codeline>
 <codeline><highlight class="normal">UI<sp/>widget<sp/>processing<sp/>systems.</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">This<sp/>namespace<sp/>contains<sp/>systems<sp/>that<sp/>process<sp/>UI<sp/>widget<sp/>components,<sp/>handling<sp/>tasks<sp/>such<sp/>as<sp/>bounds<sp/>updates<sp/>when<sp/>content<sp/>changes.</highlight></codeline>
+<codeline><highlight class="normal">This<sp/>namespace<sp/>contains<sp/>systems<sp/>that<sp/>process<sp/>UI<sp/>widget<sp/>components,<sp/>handling<sp/>tasks<sp/>such<sp/>as<sp/>navigation,<sp/>styling,<sp/>and<sp/>bounds<sp/>updates.</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Systems</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">|<sp/>System<sp/>|<sp/>Description<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|--------|-------------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`MenuNavigationSystem`<sp/>|<sp/>Handles<sp/>gamepad<sp/>input<sp/>for<sp/>menu<sp/>navigation<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`UiStyleUpdateSystem`<sp/>|<sp/>Applies<sp/>visual<sp/>styles<sp/>based<sp/>on<sp/>interaction<sp/>state<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`UiTextBoundsUpdateSystem`<sp/>|<sp/>Updates<sp/>AABB<sp/>bounds<sp/>when<sp/>text<sp/>content<sp/>changes<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>MenuNavigationSystem</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Processes<sp/>gamepad<sp/>Up/Down<sp/>input<sp/>to<sp/>change<sp/>menu<sp/>selection<sp/>and<sp/>A<sp/>button<sp/>to<sp/>activate<sp/>items.<sp/>Updates<sp/>`UiStateComponent`<sp/>selection<sp/>state<sp/>and<sp/>issues<sp/>`UiActionCommand`<sp/>on<sp/>activation.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>UiStyleUpdateSystem</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Queries<sp/>entities<sp/>with<sp/>`UiTextComponent`,<sp/>`UiStyleComponent`,<sp/>and<sp/>`UiStateComponent`.<sp/>Applies<sp/>appropriate<sp/>colors<sp/>and<sp/>scales<sp/>based<sp/>on<sp/>the<sp/>current<sp/>interaction<sp/>state<sp/>(normal,<sp/>selected,<sp/>disabled).</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>UiTextBoundsUpdateSystem</highlight></codeline>
 <codeline></codeline>
@@ -30,7 +40,7 @@
 <codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
 <codeline><highlight class="normal">@namespace<sp/>helios::engine::modules::ui::widgets::systems</highlight></codeline>
 <codeline><highlight class="normal">@brief<sp/>UI<sp/>widget<sp/>processing<sp/>systems.</highlight></codeline>
-<codeline><highlight class="normal">@details<sp/>Contains<sp/>systems<sp/>for<sp/>processing<sp/>UI<sp/>widget<sp/>state<sp/>changes.<sp/>UiTextBoundsUpdateSystem<sp/>ensures<sp/>AABB<sp/>bounds<sp/>stay<sp/>synchronized<sp/>with<sp/>text<sp/>content.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Contains<sp/>systems<sp/>for<sp/>processing<sp/>UI<sp/>widget<sp/>state<sp/>changes<sp/>including<sp/>menu<sp/>navigation,<sp/>style<sp/>application,<sp/>and<sp/>AABB<sp/>bounds<sp/>synchronization<sp/>with<sp/>text<sp/>content.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
     </programlisting>
     <location file="/tmp/h/include/helios/engine/modules/ui/widgets/systems/README.md"/>

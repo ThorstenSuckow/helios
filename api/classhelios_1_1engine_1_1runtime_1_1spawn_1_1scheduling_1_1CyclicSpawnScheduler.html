@@ -130,6 +130,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a67a0468dc4047525b11d00dabd84f9e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a spawn rule to the cycle.  <br /></td></tr>
 <tr class="memitem:a49245e938da1b02443555ffdd2b57c53" id="r_a49245e938da1b02443555ffdd2b57c53"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a49245e938da1b02443555ffdd2b57c53">commit</a> (const <a class="el" href="structhelios_1_1engine_1_1core_1_1data_1_1SpawnRuleId.html">helios::engine::core::data::SpawnRuleId</a> spawnRuleId, const size_t spawnCount) noexcept override</td></tr>
 <tr class="memdesc:a49245e938da1b02443555ffdd2b57c53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Commits a completed spawn to update rule state.  <br /></td></tr>
+<tr class="memitem:a78aaa4935e379c7339cd01939a70c0d0" id="r_a78aaa4935e379c7339cd01939a70c0d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a78aaa4935e379c7339cd01939a70c0d0">reset</a> () noexcept override</td></tr>
+<tr class="memdesc:a78aaa4935e379c7339cd01939a70c0d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets all rule states and the cursor to initial values.  <br /></td></tr>
 <tr class="inherit_header pub_methods_classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public Member Functions inherited from <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler.html">helios::engine::runtime::spawn::scheduling::SpawnScheduler</a></td></tr>
 <tr class="memitem:a78ade769a3425fe857497925d2dcefb8 inherit pub_methods_classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler" id="r_a78ade769a3425fe857497925d2dcefb8"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler.html#a78ade769a3425fe857497925d2dcefb8">~SpawnScheduler</a> ()=default</td></tr>
 <tr class="memdesc:a78ade769a3425fe857497925d2dcefb8 inherit pub_methods_classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor for proper cleanup.  <br /></td></tr>
@@ -316,7 +318,41 @@ template&lt;std::size_t N&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="CyclicSpawnScheduler_8ixx_source.html#l00134">134</a> of file <a class="el" href="CyclicSpawnScheduler_8ixx_source.html">CyclicSpawnScheduler.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="SpawnScheduler_8ixx_source.html#l00059">helios::engine::runtime::spawn::scheduling::SpawnScheduler::scheduledSpawnPlans_</a>.</p>
+<p class="reference">References <a class="el" href="SpawnScheduler_8ixx_source.html#l00058">helios::engine::runtime::spawn::scheduling::SpawnScheduler::scheduledSpawnPlans_</a>.</p>
+
+</div>
+</div>
+<a id="a78aaa4935e379c7339cd01939a70c0d0" name="a78aaa4935e379c7339cd01939a70c0d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78aaa4935e379c7339cd01939a70c0d0">&#9670;&#160;</a></span>reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::size_t N&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler.html">helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler</a>&lt; N &gt;::reset </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel export">export</span><span class="mlabel virtual">virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Resets all rule states and the cursor to initial values. </p>
+<p>Iterates through all rules and resets their state. Also resets the cursor to the first rule in the cycle. </p>
+
+<p>Implements <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler.html#aa8939dcb68a9af4e835f73e3ea986e3f">helios::engine::runtime::spawn::scheduling::SpawnScheduler</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="CyclicSpawnScheduler_8ixx_source.html#l00221">221</a> of file <a class="el" href="CyclicSpawnScheduler_8ixx_source.html">CyclicSpawnScheduler.ixx</a>.</p>
 
 </div>
 </div>

@@ -10,11 +10,11 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_b670ef0f6850d7b2892f5d96e38a12a4_1autotoc_md182">
+<sect1 id="dir_b670ef0f6850d7b2892f5d96e38a12a4_1autotoc_md218">
 <title>helios::engine::mechanics::health</title><para>Health management system for game entities.</para>
 <para>This module provides components, events, and systems for tracking entity health, processing damage, and handling death.</para>
 </sect1>
-<sect1 id="dir_b670ef0f6850d7b2892f5d96e38a12a4_1autotoc_md183">
+<sect1 id="dir_b670ef0f6850d7b2892f5d96e38a12a4_1autotoc_md219">
 <title>Submodules</title><para><table rows="4" cols="2"><row>
 <entry thead="yes"><para>Submodule  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
@@ -34,14 +34,14 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_b670ef0f6850d7b2892f5d96e38a12a4_1autotoc_md184">
+<sect1 id="dir_b670ef0f6850d7b2892f5d96e38a12a4_1autotoc_md220">
 <title>Architecture</title><para>1. <bold>HealthComponent</bold> tracks current and maximum health 2. <bold>Combat systems</bold> call <computeroutput>takeDamage()</computeroutput> when damage is dealt 3. <bold>HealthUpdateSystem</bold> detects <computeroutput>health &lt;= 0</computeroutput> and:<itemizedlist>
 <listitem><para>Issues <computeroutput>DespawnCommand</computeroutput> to remove the entity</para>
 </listitem><listitem><para>Publishes <computeroutput>DeathEvent</computeroutput> for other systems (e.g., scoring)</para>
 </listitem></itemizedlist>
 </para>
 </sect1>
-<sect1 id="dir_b670ef0f6850d7b2892f5d96e38a12a4_1autotoc_md185">
+<sect1 id="dir_b670ef0f6850d7b2892f5d96e38a12a4_1autotoc_md221">
 <title>Integration</title><para>The health system integrates with:<itemizedlist>
 <listitem><para><bold>Combat system</bold> - receives damage via <computeroutput>takeDamage()</computeroutput></para>
 </listitem><listitem><para><bold>Scoring system</bold> - <computeroutput>DeathEvent</computeroutput> triggers score awards</para>

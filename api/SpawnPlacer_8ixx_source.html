@@ -176,14 +176,25 @@ $(function() {
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>            <span class="keyword">const</span> <a class="code hl_struct" href="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnPlanCursor.html">SpawnPlanCursor</a>&amp; cursor,</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>            <span class="keyword">const</span> <a class="code hl_struct" href="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnContext.html">SpawnContext</a>&amp; spawnContext</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        ) = 0;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    };</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment"></span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">         * @brief Called when the spawn system is reset.</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">         * @details Override to reset any internal state (e.g., RNG seeds).</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">         * The default implementation is a no-op.</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00077" data-start="{" data-end="}">
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer.html#abea5e3997bd6843c8b343cc16b50aae5">   77</a></span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer.html#abea5e3997bd6843c8b343cc16b50aae5">onReset</a>() noexcept {</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            <span class="comment">// noop</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        }</div>
 </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>}</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    };</div>
+</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>}</div>
 <div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer_html"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer.html">helios::engine::runtime::spawn::behavior::SpawnPlacer</a></div><div class="ttdoc">Abstract interface for determining spawn positions.</div><div class="ttdef"><b>Definition</b> <a href="#l00046">SpawnPlacer.ixx:46</a></div></div>
 <div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer_html_a21d28851f1becad7a52bcef9d1c779a8"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer.html#a21d28851f1becad7a52bcef9d1c779a8">helios::engine::runtime::spawn::behavior::SpawnPlacer::getPosition</a></div><div class="ttdeci">virtual helios::math::vec3f getPosition(const helios::engine::ecs::EntityHandle &amp;entityHandle, const helios::math::aabbf &amp;gameObjectBounds, const helios::math::aabbf &amp;environmentBounds, const SpawnPlanCursor &amp;cursor, const SpawnContext &amp;spawnContext)=0</div><div class="ttdoc">Calculates the spawn position for an entity.</div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer_html_abea5e3997bd6843c8b343cc16b50aae5"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer.html#abea5e3997bd6843c8b343cc16b50aae5">helios::engine::runtime::spawn::behavior::SpawnPlacer::onReset</a></div><div class="ttdeci">virtual void onReset() noexcept</div><div class="ttdoc">Called when the spawn system is reset.</div><div class="ttdef"><b>Definition</b> <a href="#l00077">SpawnPlacer.ixx:77</a></div></div>
 <div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer_html_ac07de59ae9dc454269cdef3a8b9a73ba"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer.html#ac07de59ae9dc454269cdef3a8b9a73ba">helios::engine::runtime::spawn::behavior::SpawnPlacer::~SpawnPlacer</a></div><div class="ttdeci">virtual ~SpawnPlacer()=default</div></div>
 <div class="ttc" id="amodule__helios_8engine_8ecs_8EntityHandle_html"><div class="ttname"><a href="module__helios_8engine_8ecs_8EntityHandle.html">helios.engine.ecs.EntityHandle</a></div></div>
 <div class="ttc" id="amodule__helios_8engine_8runtime_8spawn_8SpawnContext_html"><div class="ttname"><a href="module__helios_8engine_8runtime_8spawn_8SpawnContext.html">helios.engine.runtime.spawn.SpawnContext</a></div></div>

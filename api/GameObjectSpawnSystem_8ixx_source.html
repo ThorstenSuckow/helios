@@ -121,145 +121,96 @@ $(function() {
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8ecs_8System.html">helios.engine.ecs.System</a>;</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8runtime_8messaging_8command_8CommandBuffer.html">helios.engine.runtime.messaging.command.CommandBuffer</a>;</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8runtime_8world_8UpdateContext.html">helios.engine.runtime.world.UpdateContext</a>;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8runtime_8spawn_8commands_8ScheduledSpawnPlanCommand.html">helios.engine.runtime.spawn.commands.ScheduledSpawnPlanCommand</a>;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8runtime_8spawn_8scheduling_8SpawnScheduler.html">helios.engine.runtime.spawn.scheduling.SpawnScheduler</a>;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8runtime_8spawn_8events_8SpawnPlanCommandExecutedEvent.html">helios.engine.runtime.spawn.events.SpawnPlanCommandExecutedEvent</a>;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="foldopen" id="foldopen00020" data-start="{" data-end="}">
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="namespacehelios_1_1engine_1_1mechanics_1_1spawn_1_1systems.html">   20</a></span><span class="keyword">export</span> <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1engine_1_1mechanics_1_1spawn_1_1systems.html">helios::engine::mechanics::spawn::systems</a> {</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"></span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">    /**</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">     * @brief System that evaluates spawn conditions and enqueues spawn commands.</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">     * @details GameObjectSpawnSystem bridges the spawn scheduling logic with the</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">     * command-based spawning pipeline. It manages multiple SpawnScheduler instances</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">     * and performs the following each frame:</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">     * 1. **Read Frame Events:** Consumes `SpawnPlanCommandExecutedEvent` from the</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">     *    previous frame to commit completed spawn operations to all schedulers.</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">     * 2. **Evaluate Conditions:** Calls `SpawnScheduler::evaluate()` on each</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">     *    scheduler to check all registered spawn rules against their conditions.</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">     * 3. **Drain Scheduled Plans:** Retrieves all plans that are ready to execute</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">     *    and enqueues them as `ScheduledSpawnPlanCommand` into the CommandBuffer.</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">     * The actual spawning is performed by the command dispatcher/manager layer,</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">     * keeping this system focused on scheduling logic only.</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">     * Example setup:</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">     * ```cpp</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">     * std::vector&lt;std::unique_ptr&lt;SpawnScheduler&gt;&gt; schedulers;</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">     * auto enemyScheduler = std::make_unique&lt;SpawnScheduler&gt;();</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">     * enemyScheduler-&gt;addRule(enemyProfileId, std::move(enemyRule));</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">     * schedulers.push_back(std::move(enemyScheduler));</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">     * auto powerupScheduler = std::make_unique&lt;SpawnScheduler&gt;();</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">     * powerupScheduler-&gt;addRule(powerupProfileId, std::move(powerupRule));</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">     * schedulers.push_back(std::move(powerupScheduler));</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">     * auto spawnSystem = std::make_unique&lt;GameObjectSpawnSystem&gt;(schedulers);</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">     * mainPhase.addPass().add(std::move(spawnSystem));</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">     * ```</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">     * @note This system reads frame-level events via `readFrame()`, meaning it</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">     *       processes spawn confirmations from the previous frame.</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">     * @see SpawnScheduler</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">     * @see ScheduledSpawnPlanCommand</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">     * @see SpawnPlanCommandExecutedEvent</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">     */</span></div>
-<div class="foldopen" id="foldopen00064" data-start="{" data-end="};">
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem.html">   64</a></span>    <span class="keyword">class </span><a class="code hl_function" href="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem.html#adf86cf3e07d18b3aabe3bc3278385ca1">GameObjectSpawnSystem</a> : <span class="keyword">public</span> <a class="code hl_class" href="classhelios_1_1engine_1_1ecs_1_1System.html">helios::engine::ecs::System</a> {</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment"></span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">         * @brief Collection of schedulers that manage spawn rules and conditions.</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">         * @details Each scheduler owns and evaluates its registered spawn rules</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">         * independently. When conditions are met, the scheduler produces</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">         * ScheduledSpawnPlan instances for execution. Multiple schedulers allow</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">         * grouping spawn rules by category (e.g., enemies, powerups, projectiles).</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        std::vector&lt;std::unique_ptr&lt;helios::engine::runtime::spawn::scheduling::SpawnScheduler&gt;&gt; spawnSchedulers_;</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment"></span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">         * @brief Constructs a GameObjectSpawnSystem with the given schedulers.</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">         * @param spawnSchedulers Vector of schedulers managing spawn rules.</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">         *        Ownership of all schedulers is transferred to this system.</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00084" data-start="{" data-end="}">
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem.html#adf86cf3e07d18b3aabe3bc3278385ca1">   84</a></span>        <span class="keyword">explicit</span> <a class="code hl_function" href="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem.html#adf86cf3e07d18b3aabe3bc3278385ca1">GameObjectSpawnSystem</a>(</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>             std::vector&lt;std::unique_ptr&lt;helios::engine::runtime::spawn::scheduling::SpawnScheduler&gt;&gt; spawnSchedulers</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        ) :</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            spawnSchedulers_(std::move(spawnSchedulers)) {}</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8runtime_8world_8GameWorld.html">helios.engine.runtime.world.GameWorld</a>;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8runtime_8spawn_8commands_8ScheduledSpawnPlanCommand.html">helios.engine.runtime.spawn.commands.ScheduledSpawnPlanCommand</a>;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8runtime_8spawn_8SpawnManager.html">helios.engine.runtime.spawn.SpawnManager</a>;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8runtime_8spawn_8scheduling_8SpawnScheduler.html">helios.engine.runtime.spawn.scheduling.SpawnScheduler</a>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8runtime_8spawn_8events_8SpawnPlanCommandExecutedEvent.html">helios.engine.runtime.spawn.events.SpawnPlanCommandExecutedEvent</a>;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="foldopen" id="foldopen00022" data-start="{" data-end="}">
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="namespacehelios_1_1engine_1_1mechanics_1_1spawn_1_1systems.html">   22</a></span><span class="keyword">export</span> <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1engine_1_1mechanics_1_1spawn_1_1systems.html">helios::engine::mechanics::spawn::systems</a> {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="foldopen" id="foldopen00025" data-start="{" data-end="};">
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem.html">   25</a></span>    <span class="keyword">class </span><a class="code hl_function" href="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem.html#a7c02d4c13cda557bf422015dad4f65d0">GameObjectSpawnSystem</a> : <span class="keyword">public</span> <a class="code hl_class" href="classhelios_1_1engine_1_1ecs_1_1System.html">helios::engine::ecs::System</a> {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <a class="code hl_class" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html">helios::engine::runtime::spawn::SpawnManager</a>&amp; spawnManager_;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="foldopen" id="foldopen00033" data-start="{" data-end="}">
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem.html#a7c02d4c13cda557bf422015dad4f65d0">   33</a></span>        <span class="keyword">explicit</span> <a class="code hl_function" href="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem.html#a7c02d4c13cda557bf422015dad4f65d0">GameObjectSpawnSystem</a>(<a class="code hl_class" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html">helios::engine::runtime::spawn::SpawnManager</a>&amp; spawnManager) noexcept</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        : spawnManager_{spawnManager} {}</div>
 </div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment"></span> </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">         * @brief Processes spawn scheduling and enqueues spawn commands.</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">         * @details Iterates through all schedulers and performs these steps for each:</span></div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">         * 1. Reads `SpawnPlanCommandExecutedEvent` from frame event bus</span></div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">         * 2. Commits completed spawns to the scheduler (for tracking/cooldowns)</span></div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment">         * 3. Evaluates all spawn rules against current conditions</span></div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment">         * 4. Drains ready spawn plans and enqueues them as commands</span></div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">         * @param updateContext The current frame&#39;s update context.</span></div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00100" data-start="{" data-end="}">
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem.html#a69d47de2e4bae743dab2fc03349b3902">  100</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem.html#a69d47de2e4bae743dab2fc03349b3902">update</a>(<a class="code hl_struct" href="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a>&amp; updateContext) <span class="keyword">noexcept</span> <span class="keyword">override</span> {</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>            <span class="keyword">const</span> <span class="keyword">auto</span>&amp; events = updateContext.readFrame&lt;</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                <a class="code hl_struct" href="structhelios_1_1engine_1_1runtime_1_1spawn_1_1events_1_1SpawnPlanCommandExecutedEvent.html">helios::engine::runtime::spawn::events::SpawnPlanCommandExecutedEvent</a></div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            &gt;();</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>            <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; spawnScheduler : spawnSchedulers_) {</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment"></span> </div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment">                /**</span></div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment">                 * @todo this should be processed before iterating over all schedulers: A scheduler owns the rule,</span></div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="comment">                 * hence a rule that triggered the event&#39;s can be associated with the owning Scheduler, making it</span></div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="comment">                 * unneccesary to iterate over already processed events</span></div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="comment">                 */</span></div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_namespace" href="namespacehelios_1_1event.html">event</a> : events) {</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                    spawnScheduler-&gt;commit(<a class="code hl_namespace" href="namespacehelios_1_1event.html">event</a>.spawnRuleId, <a class="code hl_namespace" href="namespacehelios_1_1event.html">event</a>.spawnCount);</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                }</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>                spawnScheduler-&gt;evaluate(updateContext);</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                <span class="keyword">auto</span> scheduledPlans = spawnScheduler-&gt;drainScheduledPlans();</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; plan : scheduledPlans) {</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>                    updateContext.commandBuffer().add&lt;</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                        <a class="code hl_class" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand.html">helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand</a></div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                    &gt;(</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                        plan.spawnProfileId, plan.spawnPlan, plan.spawnContext</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>                    );</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>                }</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            }</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        }</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment"></span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">         * @brief Processes spawn scheduling and enqueues spawn commands.</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">         * @details Iterates through all schedulers and performs these steps for each:</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">         * 1. Reads `SpawnPlanCommandExecutedEvent` from frame event bus</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">         * 2. Commits completed spawns to the scheduler (for tracking/cooldowns)</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">         * 3. Evaluates all spawn rules against current conditions</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">         * 4. Drains ready spawn plans and enqueues them as commands</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">         * @param updateContext The current frame&#39;s update context.</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00048" data-start="{" data-end="}">
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem.html#a69d47de2e4bae743dab2fc03349b3902">   48</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem.html#a69d47de2e4bae743dab2fc03349b3902">update</a>(<a class="code hl_struct" href="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a>&amp; updateContext) <span class="keyword">noexcept</span> <span class="keyword">override</span> {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            <span class="keyword">const</span> <span class="keyword">auto</span>&amp; events = updateContext.readFrame&lt;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                <a class="code hl_struct" href="structhelios_1_1engine_1_1runtime_1_1spawn_1_1events_1_1SpawnPlanCommandExecutedEvent.html">helios::engine::runtime::spawn::events::SpawnPlanCommandExecutedEvent</a></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            &gt;();</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; spawnScheduler : spawnManager_.spawnSchedulers()) {</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment"></span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">                /**</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">                 * @todo this should be processed before iterating over all schedulers: A scheduler owns the rule,</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">                 * hence a rule that triggered the event&#39;s can be associated with the owning Scheduler, making it</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">                 * unneccesary to iterate over already processed events</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">                 */</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_namespace" href="namespacehelios_1_1event.html">event</a> : events) {</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                    spawnScheduler-&gt;commit(<a class="code hl_namespace" href="namespacehelios_1_1event.html">event</a>.spawnRuleId, <a class="code hl_namespace" href="namespacehelios_1_1event.html">event</a>.spawnCount);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                }</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                spawnScheduler-&gt;evaluate(updateContext);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                <span class="keyword">auto</span> scheduledPlans = spawnScheduler-&gt;drainScheduledPlans();</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>                <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; plan : scheduledPlans) {</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                    updateContext.commandBuffer().add&lt;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>                        <a class="code hl_class" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand.html">helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand</a></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>                    &gt;(</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                        plan.spawnProfileId, plan.spawnPlan, plan.spawnContext</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>                    );</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>                }</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            }</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        }</div>
 </div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    };</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    };</div>
 </div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>}</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>}</div>
 </div>
 <div class="ttc" id="aclasshelios_1_1engine_1_1ecs_1_1System_html"><div class="ttname"><a href="classhelios_1_1engine_1_1ecs_1_1System.html">helios::engine::ecs::System</a></div><div class="ttdoc">Abstract base class for game systems.</div><div class="ttdef"><b>Definition</b> <a href="System_8ixx_source.html#l00038">System.ixx:38</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem_html_a69d47de2e4bae743dab2fc03349b3902"><div class="ttname"><a href="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem.html#a69d47de2e4bae743dab2fc03349b3902">helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem::update</a></div><div class="ttdeci">void update(helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept override</div><div class="ttdoc">Processes spawn scheduling and enqueues spawn commands.</div><div class="ttdef"><b>Definition</b> <a href="#l00100">GameObjectSpawnSystem.ixx:100</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem_html_adf86cf3e07d18b3aabe3bc3278385ca1"><div class="ttname"><a href="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem.html#adf86cf3e07d18b3aabe3bc3278385ca1">helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem::GameObjectSpawnSystem</a></div><div class="ttdeci">GameObjectSpawnSystem(std::vector&lt; std::unique_ptr&lt; helios::engine::runtime::spawn::scheduling::SpawnScheduler &gt; &gt; spawnSchedulers)</div><div class="ttdoc">Constructs a GameObjectSpawnSystem with the given schedulers.</div><div class="ttdef"><b>Definition</b> <a href="#l00084">GameObjectSpawnSystem.ixx:84</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem_html_a69d47de2e4bae743dab2fc03349b3902"><div class="ttname"><a href="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem.html#a69d47de2e4bae743dab2fc03349b3902">helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem::update</a></div><div class="ttdeci">void update(helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept override</div><div class="ttdoc">Processes spawn scheduling and enqueues spawn commands.</div><div class="ttdef"><b>Definition</b> <a href="#l00048">GameObjectSpawnSystem.ixx:48</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem_html_a7c02d4c13cda557bf422015dad4f65d0"><div class="ttname"><a href="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem.html#a7c02d4c13cda557bf422015dad4f65d0">helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem::GameObjectSpawnSystem</a></div><div class="ttdeci">GameObjectSpawnSystem(helios::engine::runtime::spawn::SpawnManager &amp;spawnManager) noexcept</div><div class="ttdef"><b>Definition</b> <a href="#l00033">GameObjectSpawnSystem.ixx:33</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_html"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html">helios::engine::runtime::spawn::SpawnManager</a></div><div class="ttdoc">Manager for processing spawn and despawn commands.</div><div class="ttdef"><b>Definition</b> <a href="SpawnManager_8ixx_source.html#l00100">SpawnManager.ixx:101</a></div></div>
 <div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_html"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand.html">helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand</a></div><div class="ttdoc">Command for executing a scheduled spawn plan.</div><div class="ttdef"><b>Definition</b> <a href="ScheduledSpawnPlanCommand_8ixx_source.html#l00042">ScheduledSpawnPlanCommand.ixx:42</a></div></div>
 <div class="ttc" id="amodule__helios_8engine_8ecs_8System_html"><div class="ttname"><a href="module__helios_8engine_8ecs_8System.html">helios.engine.ecs.System</a></div></div>
 <div class="ttc" id="amodule__helios_8engine_8mechanics_8spawn_8systems_8GameObjectSpawnSystem_html"><div class="ttname"><a href="module__helios_8engine_8mechanics_8spawn_8systems_8GameObjectSpawnSystem.html">helios.engine.mechanics.spawn.systems.GameObjectSpawnSystem</a></div></div>
 <div class="ttc" id="amodule__helios_8engine_8runtime_8messaging_8command_8CommandBuffer_html"><div class="ttname"><a href="module__helios_8engine_8runtime_8messaging_8command_8CommandBuffer.html">helios.engine.runtime.messaging.command.CommandBuffer</a></div></div>
+<div class="ttc" id="amodule__helios_8engine_8runtime_8spawn_8SpawnManager_html"><div class="ttname"><a href="module__helios_8engine_8runtime_8spawn_8SpawnManager.html">helios.engine.runtime.spawn.SpawnManager</a></div></div>
 <div class="ttc" id="amodule__helios_8engine_8runtime_8spawn_8commands_8ScheduledSpawnPlanCommand_html"><div class="ttname"><a href="module__helios_8engine_8runtime_8spawn_8commands_8ScheduledSpawnPlanCommand.html">helios.engine.runtime.spawn.commands.ScheduledSpawnPlanCommand</a></div></div>
 <div class="ttc" id="amodule__helios_8engine_8runtime_8spawn_8events_8SpawnPlanCommandExecutedEvent_html"><div class="ttname"><a href="module__helios_8engine_8runtime_8spawn_8events_8SpawnPlanCommandExecutedEvent.html">helios.engine.runtime.spawn.events.SpawnPlanCommandExecutedEvent</a></div></div>
 <div class="ttc" id="amodule__helios_8engine_8runtime_8spawn_8scheduling_8SpawnScheduler_html"><div class="ttname"><a href="module__helios_8engine_8runtime_8spawn_8scheduling_8SpawnScheduler.html">helios.engine.runtime.spawn.scheduling.SpawnScheduler</a></div></div>
+<div class="ttc" id="amodule__helios_8engine_8runtime_8world_8GameWorld_html"><div class="ttname"><a href="module__helios_8engine_8runtime_8world_8GameWorld.html">helios.engine.runtime.world.GameWorld</a></div></div>
 <div class="ttc" id="amodule__helios_8engine_8runtime_8world_8UpdateContext_html"><div class="ttname"><a href="module__helios_8engine_8runtime_8world_8UpdateContext.html">helios.engine.runtime.world.UpdateContext</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1mechanics_1_1spawn_1_1systems.html">helios::engine::mechanics::spawn::systems</a></div><div class="ttdoc">Systems for spawn lifecycle management.</div><div class="ttdef"><b>Definition</b> <a href="#l00020">GameObjectSpawnSystem.ixx:20</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1mechanics_1_1spawn_1_1systems.html">helios::engine::mechanics::spawn::systems</a></div><div class="ttdoc">Systems for spawn lifecycle management.</div><div class="ttdef"><b>Definition</b> <a href="#l00022">GameObjectSpawnSystem.ixx:22</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1event_html"><div class="ttname"><a href="namespacehelios_1_1event.html">helios::event</a></div><div class="ttdoc">Event system.</div><div class="ttdef"><b>Definition</b> <a href="BasicEventManager_8ixx_source.html#l00020">BasicEventManager.ixx:20</a></div></div>
 <div class="ttc" id="astructhelios_1_1engine_1_1runtime_1_1spawn_1_1events_1_1SpawnPlanCommandExecutedEvent_html"><div class="ttname"><a href="structhelios_1_1engine_1_1runtime_1_1spawn_1_1events_1_1SpawnPlanCommandExecutedEvent.html">helios::engine::runtime::spawn::events::SpawnPlanCommandExecutedEvent</a></div><div class="ttdoc">Event indicating a spawn plan command has been executed.</div><div class="ttdef"><b>Definition</b> <a href="SpawnPlanCommandExecutedEvent_8ixx_source.html#l00023">SpawnPlanCommandExecutedEvent.ixx:23</a></div></div>
 <div class="ttc" id="astructhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_html"><div class="ttname"><a href="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a></div><div class="ttdoc">Context passed to systems and components during per-frame updates.</div><div class="ttdef"><b>Definition</b> <a href="UpdateContext_8ixx_source.html#l00059">UpdateContext.ixx:59</a></div></div>

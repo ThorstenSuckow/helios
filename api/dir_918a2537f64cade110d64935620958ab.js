@@ -8,6 +8,7 @@ var dir_918a2537f64cade110d64935620958ab =
     [ "EffectsBuilder.ixx", "EffectsBuilder_8ixx.html", "EffectsBuilder_8ixx" ],
     [ "HealthBuilder.ixx", "HealthBuilder_8ixx.html", "HealthBuilder_8ixx" ],
     [ "LifecycleBuilder.ixx", "LifecycleBuilder_8ixx.html", "LifecycleBuilder_8ixx" ],
+    [ "MenuBuilder.ixx", "MenuBuilder_8ixx.html", "MenuBuilder_8ixx" ],
     [ "MotionBuilder.ixx", "MotionBuilder_8ixx.html", "MotionBuilder_8ixx" ],
     [ "ObserverBuilder.ixx", "ObserverBuilder_8ixx.html", "ObserverBuilder_8ixx" ],
     [ "RenderingBuilder.ixx", "RenderingBuilder_8ixx.html", "RenderingBuilder_8ixx" ],

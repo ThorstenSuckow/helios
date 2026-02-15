@@ -5,6 +5,7 @@ var module__helios_8engine_8runtime_8spawn_8scheduling_8CyclicSpawnScheduler =
     [ "helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler::evaluate", "module__helios_8engine_8runtime_8spawn_8scheduling_8CyclicSpawnScheduler.html#a103d5ca8b224b755d1f4754d584363e1", null ],
     [ "helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler::addRule", "module__helios_8engine_8runtime_8spawn_8scheduling_8CyclicSpawnScheduler.html#a67a0468dc4047525b11d00dabd84f9e1", null ],
     [ "helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler::commit", "module__helios_8engine_8runtime_8spawn_8scheduling_8CyclicSpawnScheduler.html#a49245e938da1b02443555ffdd2b57c53", null ],
+    [ "helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler::reset", "module__helios_8engine_8runtime_8spawn_8scheduling_8CyclicSpawnScheduler.html#a78aaa4935e379c7339cd01939a70c0d0", null ],
     [ "helios::engine::runtime::spawn::scheduling::RuleConfig::spawnProfileId", "module__helios_8engine_8runtime_8spawn_8scheduling_8CyclicSpawnScheduler.html#a221d6807202e36ca4fdae48c6fe4380a", null ],
     [ "helios::engine::runtime::spawn::scheduling::RuleConfig::spawnRule", "module__helios_8engine_8runtime_8spawn_8scheduling_8CyclicSpawnScheduler.html#aa8e2a6b81e2fb9e726327703c7a5f484", null ]
 ];

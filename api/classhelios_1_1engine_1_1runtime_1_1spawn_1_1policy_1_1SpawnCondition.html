@@ -124,6 +124,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a8f099492bc15035f9d97382951d036bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates whether the spawn condition is satisfied.  <br /></td></tr>
 <tr class="memitem:a1e0f204a7662fbb8fc83f76a2f7b0abd" id="r_a1e0f204a7662fbb8fc83f76a2f7b0abd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1e0f204a7662fbb8fc83f76a2f7b0abd">onCommit</a> (<a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRuleState.html">SpawnRuleState</a> &amp;spawnRuleState, const size_t spawnAmount) const</td></tr>
 <tr class="memdesc:a1e0f204a7662fbb8fc83f76a2f7b0abd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called after a successful spawn to update condition state.  <br /></td></tr>
+<tr class="memitem:a63431eb1c8203192413c74bb0f64c720" id="r_a63431eb1c8203192413c74bb0f64c720"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a63431eb1c8203192413c74bb0f64c720">onReset</a> (<a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRuleState.html">SpawnRuleState</a> &amp;spawnRuleState) const noexcept=0</td></tr>
+<tr class="memdesc:a63431eb1c8203192413c74bb0f64c720"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when the spawn system is reset.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Abstract interface for determining when spawning should occur. </p>
@@ -269,6 +271,42 @@ SpawnScheduler </dd></dl>
 <p>Reimplemented in <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1conditions_1_1RequestedAmountIsAvailableCondition.html#a50459fca1c9637963d296971ca5cef8a">helios::engine::runtime::spawn::policy::conditions::RequestedAmountIsAvailableCondition</a>, <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1conditions_1_1TimerSpawnCondition.html#a2f1166b99782f2bbb37e06e0f1eb4dd8">helios::engine::runtime::spawn::policy::conditions::TimerSpawnCondition</a>, and <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnConditionAll.html#abb4281649d92188ca17bce0430fae4b6">helios::engine::runtime::spawn::policy::SpawnConditionAll</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="SpawnCondition_8ixx_source.html#l00090">90</a> of file <a class="el" href="SpawnCondition_8ixx_source.html">SpawnCondition.ixx</a>.</p>
+
+</div>
+</div>
+<a id="a63431eb1c8203192413c74bb0f64c720" name="a63431eb1c8203192413c74bb0f64c720"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63431eb1c8203192413c74bb0f64c720">&#9670;&#160;</a></span>onReset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void helios::engine::runtime::spawn::policy::SpawnCondition::onReset </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRuleState.html">SpawnRuleState</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>spawnRuleState</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel pure-virtual">pure virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Called when the spawn system is reset. </p>
+<p>Override to reset condition state (e.g., timers, counters).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">spawnRuleState</td><td>The rule's runtime state to reset. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1conditions_1_1RequestedAmountIsAvailableCondition.html#ac1203da77ec268cc97b209fb67200259">helios::engine::runtime::spawn::policy::conditions::RequestedAmountIsAvailableCondition</a>, <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1conditions_1_1TimerSpawnCondition.html#aadff5d8624dad74bb37db7e06c9fa4a8">helios::engine::runtime::spawn::policy::conditions::TimerSpawnCondition</a>, and <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnConditionAll.html#a9bda8d5e8847f199ce457fa9c42b4353">helios::engine::runtime::spawn::policy::SpawnConditionAll</a>.</p>
 
 </div>
 </div>

@@ -2,25 +2,37 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classhelios_1_1input_1_1gamepad_1_1GamepadState" kind="class" language="C++" prot="public">
     <compoundname>helios::input::gamepad::GamepadState</compoundname>
-    <sectiondef kind="private-static-attrib">
-      <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a325cea504c73fc8434bb9d49d95e1c2c" prot="private" static="yes" mutable="no">
-        <type>const <ref refid="classhelios_1_1util_1_1log_1_1Logger" kindref="compound">helios::util::log::Logger</ref> &amp;</type>
-        <definition>const helios::util::log::Logger&amp; helios::input::gamepad::GamepadState::logger_</definition>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a02d0d94bf9c60d62f2e5db96c4c30664" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t helios::input::gamepad::GamepadState::currInput_</definition>
         <argsstring></argsstring>
-        <name>logger_</name>
-        <qualifiedname>helios::input::gamepad::GamepadState::logger_</qualifiedname>
-        <initializer>= <ref refid="classhelios_1_1util_1_1log_1_1LogManager_1a750d8fd5b3ee3678600644756b0631e7" kindref="member">helios::util::log::LogManager::loggerForScope</ref>(<ref refid="OpenGLUniformLocationMap_8ixx_1acbc04f24078582c7d42b2085be5d5750" kindref="member">HELIOS_LOG_SCOPE</ref>)</initializer>
+        <name>currInput_</name>
+        <qualifiedname>helios::input::gamepad::GamepadState::currInput_</qualifiedname>
+        <initializer>= 0</initializer>
         <briefdescription>
-<para>Shared logger instance for all <ref refid="classhelios_1_1input_1_1gamepad_1_1GamepadState" kindref="compound">GamepadState</ref> objects. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="60" column="55" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="60" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="62" column="18" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="62" bodyend="-1"/>
       </memberdef>
-    </sectiondef>
-    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a40e9f4fdd205daab0567e330b93307f0" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t helios::input::gamepad::GamepadState::prevInput_</definition>
+        <argsstring></argsstring>
+        <name>prevInput_</name>
+        <qualifiedname>helios::input::gamepad::GamepadState::prevInput_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="63" column="18" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="63" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a37dcba74ef2c26410c4cca731669d1eb" prot="private" static="no" mutable="no">
         <type>bool</type>
         <definition>bool helios::input::gamepad::GamepadState::buttonA_</definition>
@@ -35,7 +47,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="66" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="66" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="74" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a337e675dfebc7cf0cfeff7848e59f131" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool helios::input::gamepad::GamepadState::prevButtonA_</definition>
+        <argsstring></argsstring>
+        <name>prevButtonA_</name>
+        <qualifiedname>helios::input::gamepad::GamepadState::prevButtonA_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="75" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="75" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ae5cb1b517a8c4f926d1f96dd4595994f" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -51,7 +78,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="71" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="71" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="80" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1af600e19f4cabc12934dea6c964cec01a" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool helios::input::gamepad::GamepadState::prevButtonB_</definition>
+        <argsstring></argsstring>
+        <name>prevButtonB_</name>
+        <qualifiedname>helios::input::gamepad::GamepadState::prevButtonB_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="81" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="81" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1af3478bd934ad44820f83737fce5900b4" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -67,7 +109,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="76" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="76" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="86" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="86" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a3c6285085def7476581e628f1368c389" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -83,7 +125,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="81" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="81" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="91" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="91" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1aa3867ef03a5b5f5cfcb419f4f74cf974" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -99,7 +141,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="86" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="86" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="96" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1aa6f8a08fb8e160459132d95aa7cd5267" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool helios::input::gamepad::GamepadState::prevButtonStart_</definition>
+        <argsstring></argsstring>
+        <name>prevButtonStart_</name>
+        <qualifiedname>helios::input::gamepad::GamepadState::prevButtonStart_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="98" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="98" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ada5f6e008c624319d446574709438a87" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -115,7 +172,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="91" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="91" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="103" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="103" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ab1e303c22fe2b7407ff61561149cd24f" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -131,7 +188,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="96" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="96" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="108" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="108" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a625487eb9eb45856d940e24835279d8b" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -147,7 +204,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="101" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="101" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="113" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="113" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a906b02f423ef230d3523201d46e9c28b" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -163,7 +220,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="106" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="106" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="118" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="118" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a736fb9190d6bc42c2a93861544caba12" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -179,7 +236,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="111" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="111" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="123" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="123" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7a6c592f5925e83cf26f3348237c9c48" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -195,7 +252,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="116" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="116" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="128" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="128" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a52205ef339bf07b5c76921ee001cc4f4" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -211,7 +268,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="121" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="121" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="133" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1affbd184b693c130ed905f19b0011600e" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool helios::input::gamepad::GamepadState::prevButtonDpadUp_</definition>
+        <argsstring></argsstring>
+        <name>prevButtonDpadUp_</name>
+        <qualifiedname>helios::input::gamepad::GamepadState::prevButtonDpadUp_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="134" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="134" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a9855843f8c9083fcff5b1692193ae7b8" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -227,7 +299,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="126" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="126" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="139" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="139" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a070b84f29c9db635c34f08ddf2e58189" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -243,7 +315,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="131" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="131" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="144" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="144" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a651636bfdcc0878f69b4ee3f560fa3fb" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool helios::input::gamepad::GamepadState::prevButtonDpadDown_</definition>
+        <argsstring></argsstring>
+        <name>prevButtonDpadDown_</name>
+        <qualifiedname>helios::input::gamepad::GamepadState::prevButtonDpadDown_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="145" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="145" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a720c42a55f7c970bb3b8308e33727232" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -259,7 +346,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="136" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="136" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="150" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="150" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1abcdad9fd3caf6b083a2cff6fde8d6b9a" prot="private" static="no" mutable="yes">
         <type>bool</type>
@@ -275,7 +362,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="141" column="22" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="141" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="155" column="22" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="155" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a4cf399b3a341b4698bbaa06d1cc93e11" prot="private" static="no" mutable="no">
         <type>float</type>
@@ -291,7 +378,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="146" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="146" bodyend="146"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="160" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="160" bodyend="160"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a35c166617e5ee812004752d56d63680f" prot="private" static="no" mutable="no">
         <type>float</type>
@@ -307,7 +394,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="151" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="151" bodyend="151"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="165" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="165" bodyend="165"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ad65321ad66f955100089607bc1eaf4be" prot="private" static="no" mutable="no">
         <type>float</type>
@@ -323,7 +410,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="156" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="156" bodyend="156"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="170" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="170" bodyend="170"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a6551fc2bec3b38a3a3fedec1e37d242c" prot="private" static="no" mutable="no">
         <type>float</type>
@@ -339,7 +426,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="161" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="161" bodyend="161"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="175" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="175" bodyend="175"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ad2e2787d84a497b91639810b8f7bc084" prot="private" static="no" mutable="no">
         <type>float</type>
@@ -355,7 +442,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="166" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="166" bodyend="166"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="180" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="180" bodyend="180"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a99d2b5fb49b2212dffe9294f31fc5777" prot="private" static="no" mutable="no">
         <type>float</type>
@@ -371,7 +458,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="171" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="171" bodyend="171"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="185" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="185" bodyend="185"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ac2ef934b898514fa3ada5223f9b37bfd" prot="private" static="no" mutable="yes">
         <type><ref refid="namespacehelios_1_1math_1aeab5c7e555a142f8f763a3317460d5c0" kindref="member">helios::math::vec2f</ref></type>
@@ -386,7 +473,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="176" column="37" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="176" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="190" column="37" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="190" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a9d5a4d43bcd7dc77fe37907b7bae1ff2" prot="private" static="no" mutable="yes">
         <type><ref refid="namespacehelios_1_1math_1aeab5c7e555a142f8f763a3317460d5c0" kindref="member">helios::math::vec2f</ref></type>
@@ -401,7 +488,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="181" column="37" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="181" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="195" column="37" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="195" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a3ad5ba7e6bb8316530db9b57b3c32fe1" prot="private" static="no" mutable="yes">
         <type><ref refid="namespacehelios_1_1math_1aeab5c7e555a142f8f763a3317460d5c0" kindref="member">helios::math::vec2f</ref></type>
@@ -416,7 +503,25 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="186" column="37" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="186" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="200" column="37" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="200" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a325cea504c73fc8434bb9d49d95e1c2c" prot="private" static="yes" mutable="no">
+        <type>const <ref refid="classhelios_1_1util_1_1log_1_1Logger" kindref="compound">helios::util::log::Logger</ref> &amp;</type>
+        <definition>const helios::util::log::Logger&amp; helios::input::gamepad::GamepadState::logger_</definition>
+        <argsstring></argsstring>
+        <name>logger_</name>
+        <qualifiedname>helios::input::gamepad::GamepadState::logger_</qualifiedname>
+        <initializer>= <ref refid="classhelios_1_1util_1_1log_1_1LogManager_1a750d8fd5b3ee3678600644756b0631e7" kindref="member">helios::util::log::LogManager::loggerForScope</ref>(<ref refid="OpenGLUniformLocationMap_8ixx_1acbc04f24078582c7d42b2085be5d5750" kindref="member">HELIOS_LOG_SCOPE</ref>)</initializer>
+        <briefdescription>
+<para>Shared logger instance for all <ref refid="classhelios_1_1input_1_1gamepad_1_1GamepadState" kindref="compound">GamepadState</ref> objects. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="68" column="55" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="68" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -433,7 +538,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="193" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="193" bodyend="199"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="207" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="207" bodyend="213"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -449,7 +554,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="202" column="9"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="216" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a34778e517d4c1c4472914439b995f3dd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -465,7 +570,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="209" column="9"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="223" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -568,25 +673,25 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="218" column="18" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="218" bodyend="235"/>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ad50c09d2f84f2e1095f937c787eac86e" compoundref="GamepadState_8ixx" startline="435" endline="437">buttonA</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a068967ab65a6874ce5b5de039af79e8c" compoundref="GamepadState_8ixx" startline="444" endline="446">buttonB</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a8b2355cd51de412b86fc565fa4f2d4e4" compoundref="GamepadState_8ixx" startline="480" endline="482">buttonBack</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7a4a6a420b36e858ab68f6fd181ca0f0" compoundref="GamepadState_8ixx" startline="552" endline="554">buttonDpadDown</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a1de9efc2cfe80fa50b14d3f0a7bee4ac" compoundref="GamepadState_8ixx" startline="561" endline="563">buttonDpadLeft</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1afbd0ee0861ba38451c1aecbb6fb0e283" compoundref="GamepadState_8ixx" startline="543" endline="545">buttonDpadRight</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ab92525c10fcd68ba5b3c780f52e38174" compoundref="GamepadState_8ixx" startline="534" endline="536">buttonDpadUp</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ac37675a6b2a9f26eacb75481a8654e60" compoundref="GamepadState_8ixx" startline="489" endline="491">buttonGuide</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a0e29924d8d026778ace2e91c778ba4a5" compoundref="GamepadState_8ixx" startline="498" endline="500">buttonLeftBumper</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1afa01f268c73449a45d5cba341f68648a" compoundref="GamepadState_8ixx" startline="516" endline="518">buttonLeftThumb</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a0153832e95905c8c7ad3ad9092d8eac0" compoundref="GamepadState_8ixx" startline="507" endline="509">buttonRightBumper</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1af6450490a050564bf1366148b04d67de" compoundref="GamepadState_8ixx" startline="525" endline="527">buttonRightThumb</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a2023f54665e7aa39ba455a901adc6e1d" compoundref="GamepadState_8ixx" startline="471" endline="473">buttonStart</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a2416fe357772c57d9dcf0fa46f3e255c" compoundref="GamepadState_8ixx" startline="453" endline="455">buttonX</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a6bbce85c5ea851e8a6fa47e3c8e1d330" compoundref="GamepadState_8ixx" startline="462" endline="464">buttonY</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a24dee448f65b242cfa6fb36a2615559a" compoundref="GamepadState_8ixx" startline="376" endline="378">triggerLeft</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a71cd296694d25b524c2d48943faa1590" compoundref="GamepadState_8ixx" startline="386" endline="388">triggerRight</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="273" endline="329">updateAxes</references>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="232" column="18" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="232" bodyend="249"/>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ad50c09d2f84f2e1095f937c787eac86e" compoundref="GamepadState_8ixx" startline="469" endline="471">buttonA</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a068967ab65a6874ce5b5de039af79e8c" compoundref="GamepadState_8ixx" startline="478" endline="480">buttonB</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a8b2355cd51de412b86fc565fa4f2d4e4" compoundref="GamepadState_8ixx" startline="630" endline="632">buttonBack</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7a4a6a420b36e858ab68f6fd181ca0f0" compoundref="GamepadState_8ixx" startline="702" endline="704">buttonDpadDown</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a1de9efc2cfe80fa50b14d3f0a7bee4ac" compoundref="GamepadState_8ixx" startline="711" endline="713">buttonDpadLeft</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1afbd0ee0861ba38451c1aecbb6fb0e283" compoundref="GamepadState_8ixx" startline="693" endline="695">buttonDpadRight</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ab92525c10fcd68ba5b3c780f52e38174" compoundref="GamepadState_8ixx" startline="684" endline="686">buttonDpadUp</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ac37675a6b2a9f26eacb75481a8654e60" compoundref="GamepadState_8ixx" startline="639" endline="641">buttonGuide</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a0e29924d8d026778ace2e91c778ba4a5" compoundref="GamepadState_8ixx" startline="648" endline="650">buttonLeftBumper</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1afa01f268c73449a45d5cba341f68648a" compoundref="GamepadState_8ixx" startline="666" endline="668">buttonLeftThumb</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a0153832e95905c8c7ad3ad9092d8eac0" compoundref="GamepadState_8ixx" startline="657" endline="659">buttonRightBumper</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1af6450490a050564bf1366148b04d67de" compoundref="GamepadState_8ixx" startline="675" endline="677">buttonRightThumb</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a2023f54665e7aa39ba455a901adc6e1d" compoundref="GamepadState_8ixx" startline="612" endline="614">buttonStart</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a2416fe357772c57d9dcf0fa46f3e255c" compoundref="GamepadState_8ixx" startline="487" endline="489">buttonX</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a6bbce85c5ea851e8a6fa47e3c8e1d330" compoundref="GamepadState_8ixx" startline="496" endline="498">buttonY</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a24dee448f65b242cfa6fb36a2615559a" compoundref="GamepadState_8ixx" startline="410" endline="412">triggerLeft</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a71cd296694d25b524c2d48943faa1590" compoundref="GamepadState_8ixx" startline="420" endline="422">triggerRight</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="287" endline="363">updateAxes</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -858,25 +963,25 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="273" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="273" bodyend="329"/>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ad50c09d2f84f2e1095f937c787eac86e" compoundref="GamepadState_8ixx" startline="435" endline="437">buttonA</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a068967ab65a6874ce5b5de039af79e8c" compoundref="GamepadState_8ixx" startline="444" endline="446">buttonB</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a8b2355cd51de412b86fc565fa4f2d4e4" compoundref="GamepadState_8ixx" startline="480" endline="482">buttonBack</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7a4a6a420b36e858ab68f6fd181ca0f0" compoundref="GamepadState_8ixx" startline="552" endline="554">buttonDpadDown</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a1de9efc2cfe80fa50b14d3f0a7bee4ac" compoundref="GamepadState_8ixx" startline="561" endline="563">buttonDpadLeft</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1afbd0ee0861ba38451c1aecbb6fb0e283" compoundref="GamepadState_8ixx" startline="543" endline="545">buttonDpadRight</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ab92525c10fcd68ba5b3c780f52e38174" compoundref="GamepadState_8ixx" startline="534" endline="536">buttonDpadUp</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ac37675a6b2a9f26eacb75481a8654e60" compoundref="GamepadState_8ixx" startline="489" endline="491">buttonGuide</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a0e29924d8d026778ace2e91c778ba4a5" compoundref="GamepadState_8ixx" startline="498" endline="500">buttonLeftBumper</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1afa01f268c73449a45d5cba341f68648a" compoundref="GamepadState_8ixx" startline="516" endline="518">buttonLeftThumb</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a0153832e95905c8c7ad3ad9092d8eac0" compoundref="GamepadState_8ixx" startline="507" endline="509">buttonRightBumper</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1af6450490a050564bf1366148b04d67de" compoundref="GamepadState_8ixx" startline="525" endline="527">buttonRightThumb</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a2023f54665e7aa39ba455a901adc6e1d" compoundref="GamepadState_8ixx" startline="471" endline="473">buttonStart</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a2416fe357772c57d9dcf0fa46f3e255c" compoundref="GamepadState_8ixx" startline="453" endline="455">buttonX</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a6bbce85c5ea851e8a6fa47e3c8e1d330" compoundref="GamepadState_8ixx" startline="462" endline="464">buttonY</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a24dee448f65b242cfa6fb36a2615559a" compoundref="GamepadState_8ixx" startline="376" endline="378">triggerLeft</references>
-        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a71cd296694d25b524c2d48943faa1590" compoundref="GamepadState_8ixx" startline="386" endline="388">triggerRight</references>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="218" endline="235">GamepadState</referencedby>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="287" column="14" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="287" bodyend="363"/>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ad50c09d2f84f2e1095f937c787eac86e" compoundref="GamepadState_8ixx" startline="469" endline="471">buttonA</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a068967ab65a6874ce5b5de039af79e8c" compoundref="GamepadState_8ixx" startline="478" endline="480">buttonB</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a8b2355cd51de412b86fc565fa4f2d4e4" compoundref="GamepadState_8ixx" startline="630" endline="632">buttonBack</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7a4a6a420b36e858ab68f6fd181ca0f0" compoundref="GamepadState_8ixx" startline="702" endline="704">buttonDpadDown</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a1de9efc2cfe80fa50b14d3f0a7bee4ac" compoundref="GamepadState_8ixx" startline="711" endline="713">buttonDpadLeft</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1afbd0ee0861ba38451c1aecbb6fb0e283" compoundref="GamepadState_8ixx" startline="693" endline="695">buttonDpadRight</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ab92525c10fcd68ba5b3c780f52e38174" compoundref="GamepadState_8ixx" startline="684" endline="686">buttonDpadUp</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ac37675a6b2a9f26eacb75481a8654e60" compoundref="GamepadState_8ixx" startline="639" endline="641">buttonGuide</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a0e29924d8d026778ace2e91c778ba4a5" compoundref="GamepadState_8ixx" startline="648" endline="650">buttonLeftBumper</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1afa01f268c73449a45d5cba341f68648a" compoundref="GamepadState_8ixx" startline="666" endline="668">buttonLeftThumb</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a0153832e95905c8c7ad3ad9092d8eac0" compoundref="GamepadState_8ixx" startline="657" endline="659">buttonRightBumper</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1af6450490a050564bf1366148b04d67de" compoundref="GamepadState_8ixx" startline="675" endline="677">buttonRightThumb</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a2023f54665e7aa39ba455a901adc6e1d" compoundref="GamepadState_8ixx" startline="612" endline="614">buttonStart</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a2416fe357772c57d9dcf0fa46f3e255c" compoundref="GamepadState_8ixx" startline="487" endline="489">buttonX</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a6bbce85c5ea851e8a6fa47e3c8e1d330" compoundref="GamepadState_8ixx" startline="496" endline="498">buttonY</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a24dee448f65b242cfa6fb36a2615559a" compoundref="GamepadState_8ixx" startline="410" endline="412">triggerLeft</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a71cd296694d25b524c2d48943faa1590" compoundref="GamepadState_8ixx" startline="420" endline="422">triggerRight</references>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="232" endline="249">GamepadState</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a15503e1057188f37e734b4e430283cba" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>float</type>
@@ -894,7 +999,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="336" column="16" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="336" bodyend="338"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="370" column="16" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="370" bodyend="372"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ac5875cb2c966c9ea593e1f729a4ad965" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>float</type>
@@ -912,7 +1017,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="346" column="16" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="346" bodyend="348"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="380" column="16" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="380" bodyend="382"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1adc8c001a3468e86ab3bdc11a2a1b18c4" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>float</type>
@@ -930,7 +1035,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="356" column="16" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="356" bodyend="358"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="390" column="16" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="390" bodyend="392"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a8c88c277946b970cddfe8d532e283522" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>float</type>
@@ -948,7 +1053,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="366" column="16" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="366" bodyend="368"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="400" column="16" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="400" bodyend="402"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a24dee448f65b242cfa6fb36a2615559a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>float</type>
@@ -966,9 +1071,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="376" column="16" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="376" bodyend="378"/>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="218" endline="235">GamepadState</referencedby>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="273" endline="329">updateAxes</referencedby>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="410" column="16" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="410" bodyend="412"/>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="232" endline="249">GamepadState</referencedby>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="287" endline="363">updateAxes</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a71cd296694d25b524c2d48943faa1590" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>float</type>
@@ -986,9 +1091,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="386" column="16" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="386" bodyend="388"/>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="218" endline="235">GamepadState</referencedby>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="273" endline="329">updateAxes</referencedby>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="420" column="16" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="420" bodyend="422"/>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="232" endline="249">GamepadState</referencedby>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="287" endline="363">updateAxes</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a37a76a1aaeae04c4f19c7396f57158e1" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="namespacehelios_1_1math_1aeab5c7e555a142f8f763a3317460d5c0" kindref="member">helios::math::vec2f</ref></type>
@@ -1006,7 +1111,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="396" column="30" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="396" bodyend="401"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="430" column="30" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="430" bodyend="435"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1aab66dc09e2d3d2f673b176028b409073" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="namespacehelios_1_1math_1aeab5c7e555a142f8f763a3317460d5c0" kindref="member">helios::math::vec2f</ref></type>
@@ -1024,7 +1129,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="409" column="30" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="409" bodyend="414"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="443" column="30" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="443" bodyend="448"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1add4cb5588dfbc246ba5ba729afee2743" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="namespacehelios_1_1math_1aeab5c7e555a142f8f763a3317460d5c0" kindref="member">helios::math::vec2f</ref></type>
@@ -1042,7 +1147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="423" column="30" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="423" bodyend="428"/>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="457" column="30" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="457" bodyend="462"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ad50c09d2f84f2e1095f937c787eac86e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -1060,9 +1165,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="435" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="435" bodyend="437"/>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="218" endline="235">GamepadState</referencedby>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="273" endline="329">updateAxes</referencedby>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="469" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="469" bodyend="471"/>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="232" endline="249">GamepadState</referencedby>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="287" endline="363">updateAxes</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a068967ab65a6874ce5b5de039af79e8c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -1080,9 +1185,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="444" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="444" bodyend="446"/>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="218" endline="235">GamepadState</referencedby>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="273" endline="329">updateAxes</referencedby>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="478" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="478" bodyend="480"/>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="232" endline="249">GamepadState</referencedby>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="287" endline="363">updateAxes</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a2416fe357772c57d9dcf0fa46f3e255c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -1100,9 +1205,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="453" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="453" bodyend="455"/>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="218" endline="235">GamepadState</referencedby>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="273" endline="329">updateAxes</referencedby>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="487" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="487" bodyend="489"/>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="232" endline="249">GamepadState</referencedby>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="287" endline="363">updateAxes</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a6bbce85c5ea851e8a6fa47e3c8e1d330" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -1120,9 +1225,153 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="462" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="462" bodyend="464"/>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="218" endline="235">GamepadState</referencedby>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="273" endline="329">updateAxes</referencedby>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="496" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="496" bodyend="498"/>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="232" endline="249">GamepadState</referencedby>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="287" endline="363">updateAxes</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a67f51f3cebf6ecb3d899d1c2fbb63c56" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::input::gamepad::GamepadState::isButtonDown</definition>
+        <argsstring>(const GamepadInput input) const</argsstring>
+        <name>isButtonDown</name>
+        <qualifiedname>helios::input::gamepad::GamepadState::isButtonDown</qualifiedname>
+        <param>
+          <type>const <ref refid="namespacehelios_1_1input_1_1types_1a4ca7a325d1231e8ec2688156eac9de98" kindref="member">GamepadInput</ref></type>
+          <declname>input</declname>
+        </param>
+        <briefdescription>
+<para>Checks if a button is currently held down. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>input</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The button to check.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the button is currently pressed. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="508" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="508" bodyend="525"/>
+        <references refid="namespacehelios_1_1input_1_1types_1a4ca7a325d1231e8ec2688156eac9de98a7fc56270e7a70fa81a5935b72eacbe29" compoundref="Gamepad_8ixx" startline="32">helios::input::types::A</references>
+        <references refid="namespacehelios_1_1input_1_1types_1a4ca7a325d1231e8ec2688156eac9de98a9d5ed678fe57bcca610140957afab571" compoundref="Gamepad_8ixx" startline="37">helios::input::types::B</references>
+        <references refid="namespacehelios_1_1input_1_1types_1a4ca7a325d1231e8ec2688156eac9de98a08a38277b0309070706f6652eeae9a53" compoundref="Gamepad_8ixx" startline="67">helios::input::types::Down</references>
+        <references refid="namespacehelios_1_1input_1_1types_1a4ca7a325d1231e8ec2688156eac9de98aa6122a65eaa676f700ae68d393054a37" compoundref="Gamepad_8ixx" startline="22">helios::input::types::Start</references>
+        <references refid="namespacehelios_1_1input_1_1types_1a4ca7a325d1231e8ec2688156eac9de98a258f49887ef8d14ac268c92b02503aaa" compoundref="Gamepad_8ixx" startline="62">helios::input::types::Up</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1aec46d9879d32710b16483399f3bf55ba" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::input::gamepad::GamepadState::isButtonHeld</definition>
+        <argsstring>(const GamepadInput input) const</argsstring>
+        <name>isButtonHeld</name>
+        <qualifiedname>helios::input::gamepad::GamepadState::isButtonHeld</qualifiedname>
+        <param>
+          <type>const <ref refid="namespacehelios_1_1input_1_1types_1a4ca7a325d1231e8ec2688156eac9de98" kindref="member">GamepadInput</ref></type>
+          <declname>input</declname>
+        </param>
+        <briefdescription>
+<para>Checks if a button has been held for at least 2 frames. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>input</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The button to check.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the button was pressed last frame and is still pressed. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="534" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="534" bodyend="551"/>
+        <references refid="namespacehelios_1_1input_1_1types_1a4ca7a325d1231e8ec2688156eac9de98a7fc56270e7a70fa81a5935b72eacbe29" compoundref="Gamepad_8ixx" startline="32">helios::input::types::A</references>
+        <references refid="namespacehelios_1_1input_1_1types_1a4ca7a325d1231e8ec2688156eac9de98a9d5ed678fe57bcca610140957afab571" compoundref="Gamepad_8ixx" startline="37">helios::input::types::B</references>
+        <references refid="namespacehelios_1_1input_1_1types_1a4ca7a325d1231e8ec2688156eac9de98a08a38277b0309070706f6652eeae9a53" compoundref="Gamepad_8ixx" startline="67">helios::input::types::Down</references>
+        <references refid="namespacehelios_1_1input_1_1types_1a4ca7a325d1231e8ec2688156eac9de98aa6122a65eaa676f700ae68d393054a37" compoundref="Gamepad_8ixx" startline="22">helios::input::types::Start</references>
+        <references refid="namespacehelios_1_1input_1_1types_1a4ca7a325d1231e8ec2688156eac9de98a258f49887ef8d14ac268c92b02503aaa" compoundref="Gamepad_8ixx" startline="62">helios::input::types::Up</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1afe8b64c9c90a56039c7f07a9e81a3bc1" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::input::gamepad::GamepadState::isButtonUp</definition>
+        <argsstring>(const GamepadInput input) const</argsstring>
+        <name>isButtonUp</name>
+        <qualifiedname>helios::input::gamepad::GamepadState::isButtonUp</qualifiedname>
+        <param>
+          <type>const <ref refid="namespacehelios_1_1input_1_1types_1a4ca7a325d1231e8ec2688156eac9de98" kindref="member">GamepadInput</ref></type>
+          <declname>input</declname>
+        </param>
+        <briefdescription>
+<para>Checks if a button was released this frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>input</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The button to check.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the button was pressed last frame but is now released. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="560" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="560" bodyend="577"/>
+        <references refid="namespacehelios_1_1input_1_1types_1a4ca7a325d1231e8ec2688156eac9de98a7fc56270e7a70fa81a5935b72eacbe29" compoundref="Gamepad_8ixx" startline="32">helios::input::types::A</references>
+        <references refid="namespacehelios_1_1input_1_1types_1a4ca7a325d1231e8ec2688156eac9de98a9d5ed678fe57bcca610140957afab571" compoundref="Gamepad_8ixx" startline="37">helios::input::types::B</references>
+        <references refid="namespacehelios_1_1input_1_1types_1a4ca7a325d1231e8ec2688156eac9de98a08a38277b0309070706f6652eeae9a53" compoundref="Gamepad_8ixx" startline="67">helios::input::types::Down</references>
+        <references refid="namespacehelios_1_1input_1_1types_1a4ca7a325d1231e8ec2688156eac9de98aa6122a65eaa676f700ae68d393054a37" compoundref="Gamepad_8ixx" startline="22">helios::input::types::Start</references>
+        <references refid="namespacehelios_1_1input_1_1types_1a4ca7a325d1231e8ec2688156eac9de98a258f49887ef8d14ac268c92b02503aaa" compoundref="Gamepad_8ixx" startline="62">helios::input::types::Up</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a3503d0722b3190a9b847e9b04bf0110a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::input::gamepad::GamepadState::isButtonPressed</definition>
+        <argsstring>(const GamepadInput input) const</argsstring>
+        <name>isButtonPressed</name>
+        <qualifiedname>helios::input::gamepad::GamepadState::isButtonPressed</qualifiedname>
+        <param>
+          <type>const <ref refid="namespacehelios_1_1input_1_1types_1a4ca7a325d1231e8ec2688156eac9de98" kindref="member">GamepadInput</ref></type>
+          <declname>input</declname>
+        </param>
+        <briefdescription>
+<para>Checks if a button was pressed this frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>input</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The button to check.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the button was not pressed last frame but is pressed now. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="587" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="587" bodyend="604"/>
+        <references refid="namespacehelios_1_1input_1_1types_1a4ca7a325d1231e8ec2688156eac9de98a7fc56270e7a70fa81a5935b72eacbe29" compoundref="Gamepad_8ixx" startline="32">helios::input::types::A</references>
+        <references refid="namespacehelios_1_1input_1_1types_1a4ca7a325d1231e8ec2688156eac9de98a9d5ed678fe57bcca610140957afab571" compoundref="Gamepad_8ixx" startline="37">helios::input::types::B</references>
+        <references refid="namespacehelios_1_1input_1_1types_1a4ca7a325d1231e8ec2688156eac9de98a08a38277b0309070706f6652eeae9a53" compoundref="Gamepad_8ixx" startline="67">helios::input::types::Down</references>
+        <references refid="namespacehelios_1_1input_1_1types_1a4ca7a325d1231e8ec2688156eac9de98aa6122a65eaa676f700ae68d393054a37" compoundref="Gamepad_8ixx" startline="22">helios::input::types::Start</references>
+        <references refid="namespacehelios_1_1input_1_1types_1a4ca7a325d1231e8ec2688156eac9de98a258f49887ef8d14ac268c92b02503aaa" compoundref="Gamepad_8ixx" startline="62">helios::input::types::Up</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a2023f54665e7aa39ba455a901adc6e1d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -1140,9 +1389,27 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="471" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="471" bodyend="473"/>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="218" endline="235">GamepadState</referencedby>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="273" endline="329">updateAxes</referencedby>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="612" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="612" bodyend="614"/>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="232" endline="249">GamepadState</referencedby>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="287" endline="363">updateAxes</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a045c149a4f18f3f75f637e2283af38f1" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::input::gamepad::GamepadState::buttonPressedStart</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>buttonPressedStart</name>
+        <qualifiedname>helios::input::gamepad::GamepadState::buttonPressedStart</qualifiedname>
+        <briefdescription>
+<para>Returns true if Start was pressed this frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if Start was just pressed. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="621" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="621" bodyend="623"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a8b2355cd51de412b86fc565fa4f2d4e4" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -1160,9 +1427,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="480" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="480" bodyend="482"/>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="218" endline="235">GamepadState</referencedby>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="273" endline="329">updateAxes</referencedby>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="630" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="630" bodyend="632"/>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="232" endline="249">GamepadState</referencedby>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="287" endline="363">updateAxes</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ac37675a6b2a9f26eacb75481a8654e60" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -1180,9 +1447,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="489" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="489" bodyend="491"/>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="218" endline="235">GamepadState</referencedby>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="273" endline="329">updateAxes</referencedby>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="639" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="639" bodyend="641"/>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="232" endline="249">GamepadState</referencedby>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="287" endline="363">updateAxes</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a0e29924d8d026778ace2e91c778ba4a5" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -1200,9 +1467,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="498" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="498" bodyend="500"/>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="218" endline="235">GamepadState</referencedby>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="273" endline="329">updateAxes</referencedby>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="648" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="648" bodyend="650"/>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="232" endline="249">GamepadState</referencedby>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="287" endline="363">updateAxes</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a0153832e95905c8c7ad3ad9092d8eac0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -1220,9 +1487,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="507" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="507" bodyend="509"/>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="218" endline="235">GamepadState</referencedby>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="273" endline="329">updateAxes</referencedby>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="657" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="657" bodyend="659"/>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="232" endline="249">GamepadState</referencedby>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="287" endline="363">updateAxes</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1afa01f268c73449a45d5cba341f68648a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -1240,9 +1507,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="516" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="516" bodyend="518"/>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="218" endline="235">GamepadState</referencedby>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="273" endline="329">updateAxes</referencedby>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="666" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="666" bodyend="668"/>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="232" endline="249">GamepadState</referencedby>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="287" endline="363">updateAxes</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1af6450490a050564bf1366148b04d67de" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -1260,9 +1527,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="525" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="525" bodyend="527"/>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="218" endline="235">GamepadState</referencedby>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="273" endline="329">updateAxes</referencedby>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="675" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="675" bodyend="677"/>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="232" endline="249">GamepadState</referencedby>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="287" endline="363">updateAxes</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ab92525c10fcd68ba5b3c780f52e38174" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -1280,9 +1547,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="534" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="534" bodyend="536"/>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="218" endline="235">GamepadState</referencedby>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="273" endline="329">updateAxes</referencedby>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="684" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="684" bodyend="686"/>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="232" endline="249">GamepadState</referencedby>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="287" endline="363">updateAxes</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1afbd0ee0861ba38451c1aecbb6fb0e283" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -1300,9 +1567,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="543" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="543" bodyend="545"/>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="218" endline="235">GamepadState</referencedby>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="273" endline="329">updateAxes</referencedby>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="693" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="693" bodyend="695"/>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="232" endline="249">GamepadState</referencedby>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="287" endline="363">updateAxes</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7a4a6a420b36e858ab68f6fd181ca0f0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -1320,9 +1587,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="552" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="552" bodyend="554"/>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="218" endline="235">GamepadState</referencedby>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="273" endline="329">updateAxes</referencedby>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="702" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="702" bodyend="704"/>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="232" endline="249">GamepadState</referencedby>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="287" endline="363">updateAxes</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a1de9efc2cfe80fa50b14d3f0a7bee4ac" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -1340,13 +1607,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="561" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="561" bodyend="563"/>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="218" endline="235">GamepadState</referencedby>
-        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="273" endline="329">updateAxes</referencedby>
+        <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="711" column="15" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="711" bodyend="713"/>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" compoundref="GamepadState_8ixx" startline="232" endline="249">GamepadState</referencedby>
+        <referencedby refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" compoundref="GamepadState_8ixx" startline="287" endline="363">updateAxes</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>A lightweight class for transferring the state of a Gamepad. </para>
+<para>A lightweight class for transferring the state of a <ref refid="namespacehelios_1_1input_1_1types_1a4dd39c1a113edbe36b92b088d8dbf2ff" kindref="member">Gamepad</ref>. </para>
     </briefdescription>
     <detaileddescription>
 <para>This class models a reusable object representing the input state of a gamepad. The input state of a gamepad consists of the state of the left and right trigger, ranging from [0, 1], where 1 means fully pressed and 0 means not pressed at all.</para>
@@ -1366,7 +1633,7 @@ This implementation is inspired by the GLFW gamepad input model. <simplesect kin
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="54" column="5" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="54" bodyend="564"/>
+    <location file="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" line="59" column="5" bodyfile="/tmp/h/include/helios/input/gamepad/GamepadState.ixx" bodystart="59" bodyend="714"/>
     <listofallmembers>
       <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a4cf399b3a341b4698bbaa06d1cc93e11" prot="private" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>axisLeftX_</name></member>
       <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a35c166617e5ee812004752d56d63680f" prot="private" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>axisLeftY_</name></member>
@@ -1392,6 +1659,7 @@ This implementation is inspired by the GLFW gamepad input model. <simplesect kin
       <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a625487eb9eb45856d940e24835279d8b" prot="private" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>buttonLeftBumper_</name></member>
       <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1afa01f268c73449a45d5cba341f68648a" prot="public" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>buttonLeftThumb</name></member>
       <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a736fb9190d6bc42c2a93861544caba12" prot="private" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>buttonLeftThumb_</name></member>
+      <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a045c149a4f18f3f75f637e2283af38f1" prot="public" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>buttonPressedStart</name></member>
       <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a0153832e95905c8c7ad3ad9092d8eac0" prot="public" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>buttonRightBumper</name></member>
       <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a906b02f423ef230d3523201d46e9c28b" prot="private" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>buttonRightBumper_</name></member>
       <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1af6450490a050564bf1366148b04d67de" prot="public" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>buttonRightThumb</name></member>
@@ -1402,14 +1670,25 @@ This implementation is inspired by the GLFW gamepad input model. <simplesect kin
       <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1af3478bd934ad44820f83737fce5900b4" prot="private" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>buttonX_</name></member>
       <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a6bbce85c5ea851e8a6fa47e3c8e1d330" prot="public" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>buttonY</name></member>
       <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a3c6285085def7476581e628f1368c389" prot="private" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>buttonY_</name></member>
+      <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a02d0d94bf9c60d62f2e5db96c4c30664" prot="private" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>currInput_</name></member>
       <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a34778e517d4c1c4472914439b995f3dd" prot="public" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>GamepadState</name></member>
       <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" prot="public" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>GamepadState</name></member>
+      <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a67f51f3cebf6ecb3d899d1c2fbb63c56" prot="public" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>isButtonDown</name></member>
+      <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1aec46d9879d32710b16483399f3bf55ba" prot="public" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>isButtonHeld</name></member>
+      <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a3503d0722b3190a9b847e9b04bf0110a" prot="public" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>isButtonPressed</name></member>
+      <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1afe8b64c9c90a56039c7f07a9e81a3bc1" prot="public" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>isButtonUp</name></member>
       <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a37a76a1aaeae04c4f19c7396f57158e1" prot="public" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>left</name></member>
       <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ac2ef934b898514fa3ada5223f9b37bfd" prot="private" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>left_</name></member>
       <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a15503e1057188f37e734b4e430283cba" prot="public" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>leftX</name></member>
       <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ac5875cb2c966c9ea593e1f729a4ad965" prot="public" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>leftY</name></member>
       <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a325cea504c73fc8434bb9d49d95e1c2c" prot="private" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>logger_</name></member>
       <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1abcdad9fd3caf6b083a2cff6fde8d6b9a" prot="private" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>needsUpdate_</name></member>
+      <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a337e675dfebc7cf0cfeff7848e59f131" prot="private" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>prevButtonA_</name></member>
+      <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1af600e19f4cabc12934dea6c964cec01a" prot="private" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>prevButtonB_</name></member>
+      <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a651636bfdcc0878f69b4ee3f560fa3fb" prot="private" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>prevButtonDpadDown_</name></member>
+      <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1affbd184b693c130ed905f19b0011600e" prot="private" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>prevButtonDpadUp_</name></member>
+      <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1aa6f8a08fb8e160459132d95aa7cd5267" prot="private" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>prevButtonStart_</name></member>
+      <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a40e9f4fdd205daab0567e330b93307f0" prot="private" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>prevInput_</name></member>
       <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1aab66dc09e2d3d2f673b176028b409073" prot="public" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>right</name></member>
       <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a9d5a4d43bcd7dc77fe37907b7bae1ff2" prot="private" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>right_</name></member>
       <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1adc8c001a3468e86ab3bdc11a2a1b18c4" prot="public" virt="non-virtual"><scope>helios::input::gamepad::GamepadState</scope><name>rightX</name></member>

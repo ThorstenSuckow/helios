@@ -798,11 +798,11 @@ Detection&quot; (Chapter 7). The algorithm divides the world into a uniform 3D g
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="9">
+      <node id="12">
         <label>helios::engine::ecs::EntityManager</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1EntityManager"/>
       </node>
-      <node id="8">
+      <node id="11">
         <label>helios::engine::ecs::EntityRegistry</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry"/>
       </node>
@@ -819,6 +819,14 @@ Detection&quot; (Chapter 7). The algorithm divides the world into a uniform 3D g
         <label>helios::engine::ecs::Updatable</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1Updatable"/>
       </node>
+      <node id="7">
+        <label>helios::engine::mechanics::gamestate::GameStateCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateCommandHandler"/>
+      </node>
+      <node id="8">
+        <label>helios::engine::mechanics::match::MatchStateCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1MatchStateCommandHandler"/>
+      </node>
       <node id="6">
         <label>helios::engine::mechanics::scoring::ScoreCommandHandler</label>
         <link refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler"/>
@@ -829,7 +837,11 @@ Detection&quot; (Chapter 7). The algorithm divides the world into a uniform 3D g
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="7">
+      <node id="9">
+        <label>helios::engine::modules::ui::UiActionCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandHandler"/>
+      </node>
+      <node id="10">
         <label>helios::engine::runtime::spawn::SpawnCommandHandlerRegistry</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandlerRegistry"/>
       </node>
@@ -843,14 +855,30 @@ Detection&quot; (Chapter 7). The algorithm divides the world into a uniform 3D g
           <edgelabel>scoreCommandHandler_</edgelabel>
         </childnode>
         <childnode refid="7" relation="usage">
-          <edgelabel>spawnCommandHandlerRegistry_</edgelabel>
+          <edgelabel>gameStateCommandHandler_</edgelabel>
         </childnode>
         <childnode refid="8" relation="usage">
-          <edgelabel>entityRegistry_</edgelabel>
+          <edgelabel>matchStateCommandHandler_</edgelabel>
         </childnode>
         <childnode refid="9" relation="usage">
+          <edgelabel>uiActionCommandHandler_</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>spawnCommandHandlerRegistry_</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>entityRegistry_</edgelabel>
+        </childnode>
+        <childnode refid="12" relation="usage">
           <edgelabel>em_</edgelabel>
         </childnode>
+        <childnode refid="13" relation="usage">
+          <edgelabel>session_</edgelabel>
+        </childnode>
+      </node>
+      <node id="13">
+        <label>helios::engine::runtime::world::Session</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session"/>
       </node>
       <node id="5">
         <label>helios::util::log::Logger</label>

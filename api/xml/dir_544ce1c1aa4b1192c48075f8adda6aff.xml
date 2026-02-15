@@ -3,18 +3,28 @@
   <compounddef id="dir_544ce1c1aa4b1192c48075f8adda6aff" kind="dir">
     <compoundname>systems</compoundname>
     <innerfile refid="helios_2engine_2modules_2ui_2widgets_2systems_2__module_8ixx">helios/engine/modules/ui/widgets/systems/_module.ixx</innerfile>
+    <innerfile refid="MenuNavigationSystem_8ixx">MenuNavigationSystem.ixx</innerfile>
+    <innerfile refid="UiStyleUpdateSystem_8ixx">UiStyleUpdateSystem.ixx</innerfile>
     <innerfile refid="UiTextBoundsUpdateSystem_8ixx">UiTextBoundsUpdateSystem.ixx</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_544ce1c1aa4b1192c48075f8adda6aff_1autotoc_md442">
+<sect1 id="dir_544ce1c1aa4b1192c48075f8adda6aff_1autotoc_md523">
 <title>helios::engine::modules::ui::widgets::systems</title><para>UI widget processing systems.</para>
-<para>This namespace contains systems that process UI widget components, handling tasks such as bounds updates when content changes.</para>
+<para>This namespace contains systems that process UI widget components, handling tasks such as navigation, styling, and bounds updates.</para>
 </sect1>
-<sect1 id="dir_544ce1c1aa4b1192c48075f8adda6aff_1autotoc_md443">
-<title>Systems</title><para><table rows="2" cols="2"><row>
+<sect1 id="dir_544ce1c1aa4b1192c48075f8adda6aff_1autotoc_md524">
+<title>Systems</title><para><table rows="4" cols="2"><row>
 <entry thead="yes"><para>System  </para>
 </entry><entry thead="yes"><para>Description  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>MenuNavigationSystem</computeroutput>  </para>
+</entry><entry thead="no"><para>Handles gamepad input for menu navigation  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>UiStyleUpdateSystem</computeroutput>  </para>
+</entry><entry thead="no"><para>Applies visual styles based on interaction state  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>UiTextBoundsUpdateSystem</computeroutput>  </para>
@@ -23,7 +33,13 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_544ce1c1aa4b1192c48075f8adda6aff_1autotoc_md444">
+<sect1 id="dir_544ce1c1aa4b1192c48075f8adda6aff_1autotoc_md525">
+<title>MenuNavigationSystem</title><para>Processes gamepad Up/Down input to change menu selection and A button to activate items. Updates <computeroutput>UiStateComponent</computeroutput> selection state and issues <computeroutput>UiActionCommand</computeroutput> on activation.</para>
+</sect1>
+<sect1 id="dir_544ce1c1aa4b1192c48075f8adda6aff_1autotoc_md526">
+<title>UiStyleUpdateSystem</title><para>Queries entities with <computeroutput>UiTextComponent</computeroutput>, <computeroutput>UiStyleComponent</computeroutput>, and <computeroutput>UiStateComponent</computeroutput>. Applies appropriate colors and scales based on the current interaction state (normal, selected, disabled).</para>
+</sect1>
+<sect1 id="dir_544ce1c1aa4b1192c48075f8adda6aff_1autotoc_md527">
 <title>UiTextBoundsUpdateSystem</title><para>Queries entities with <computeroutput>UiTextComponent</computeroutput> and <computeroutput>ModelAabbComponent</computeroutput>. When the text component signals <computeroutput>needsResize()</computeroutput>, the system retrieves the new AABB from the underlying <computeroutput>TextRenderable</computeroutput> and updates <computeroutput>ModelAabbComponent</computeroutput>.</para>
 <para><hruler/>
 </para>

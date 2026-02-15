@@ -165,6 +165,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a4e31b52717a76a9bae9a80a1db0b808b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a pointer to this node's parent node.  <br /></td></tr>
 <tr class="memitem:abc594768ba59f9154b707424aa76a871" id="r_abc594768ba59f9154b707424aa76a871"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abc594768ba59f9154b707424aa76a871">applyWorldTransform</a> (const <a class="el" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a> &amp;parentWorldTransform, <a class="el" href="structhelios_1_1scene_1_1SceneGraphKey.html">helios::scene::SceneGraphKey</a> sceneGraphKey) noexcept</td></tr>
 <tr class="memdesc:abc594768ba59f9154b707424aa76a871"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the world transform for this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>.  <br /></td></tr>
+<tr class="memitem:aff2ef2c3845f9f1a2e93db7aa97a6119" id="r_aff2ef2c3845f9f1a2e93db7aa97a6119"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aff2ef2c3845f9f1a2e93db7aa97a6119">setIsRoot</a> (<a class="el" href="structhelios_1_1scene_1_1SceneGraphKey.html">helios::scene::SceneGraphKey</a> sceneGraphKey) noexcept</td></tr>
+<tr class="memdesc:aff2ef2c3845f9f1a2e93db7aa97a6119"><td class="mdescLeft">&#160;</td><td class="mdescRight">Marks this node as the root of the scene graph.  <br /></td></tr>
+<tr class="memitem:a9c46993eb00407a73731378631874064" id="r_a9c46993eb00407a73731378631874064"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9c46993eb00407a73731378631874064">isRoot</a> () const noexcept</td></tr>
+<tr class="memdesc:a9c46993eb00407a73731378631874064"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether this node is the root of the scene graph.  <br /></td></tr>
 <tr class="memitem:a2cd5ee14fdf4990952266c724c916551" id="r_a2cd5ee14fdf4990952266c724c916551"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2cd5ee14fdf4990952266c724c916551">worldTransform</a> () noexcept</td></tr>
 <tr class="memdesc:a2cd5ee14fdf4990952266c724c916551"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes and returns the world transform for this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>. Will request the current world transform from the parent node to calculate this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>'s world transform. For efficiency, this method should cache the result and only trigger a recompute if this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> is dirty (`needsUpdate_ == true`).  <br /></td></tr>
 <tr class="memitem:ab908b6a16d34640eca0d92f2573e6cc3" id="r_ab908b6a16d34640eca0d92f2573e6cc3"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab908b6a16d34640eca0d92f2573e6cc3">cachedWorldTransform</a> () const noexcept</td></tr>
@@ -198,6 +202,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a7810bc9069939badd249ce54f794d1e7" id="r_a7810bc9069939badd249ce54f794d1e7"><td class="memItemLeft" align="right" valign="top"><a id="a7810bc9069939badd249ce54f794d1e7" name="a7810bc9069939badd249ce54f794d1e7"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>needsUpdate_</b> = true</td></tr>
 <tr class="memdesc:a7810bc9069939badd249ce54f794d1e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean flag to represent the dirty-state of this node. Should be set to false if the current `worldTransform_` for this node was computed, otherwise true, e.g. if the node's local transform has been changed. <br /></td></tr>
+<tr class="memitem:a482726c24befc242df1ab12d90c3cbe9" id="r_a482726c24befc242df1ab12d90c3cbe9"><td class="memItemLeft" align="right" valign="top"><a id="a482726c24befc242df1ab12d90c3cbe9" name="a482726c24befc242df1ab12d90c3cbe9"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isRoot_</b> = false</td></tr>
+<tr class="memdesc:a482726c24befc242df1ab12d90c3cbe9"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if this node is the root of the scene graph. <br /></td></tr>
 <tr class="memitem:adc5b1c905e0a2eee271107ebb91652af" id="r_adc5b1c905e0a2eee271107ebb91652af"><td class="memItemLeft" align="right" valign="top"><a id="adc5b1c905e0a2eee271107ebb91652af" name="adc5b1c905e0a2eee271107ebb91652af"></a>
 std::shared_ptr&lt; <a class="el" href="classhelios_1_1rendering_1_1Renderable.html">helios::rendering::Renderable</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>renderable_</b> = nullptr</td></tr>
 <tr class="memdesc:adc5b1c905e0a2eee271107ebb91652af"><td class="mdescLeft">&#160;</td><td class="mdescRight">A shared pointer to the Renderable this node represents in the SceneGraph. May be nullptr if this node does not represent a. <br /></td></tr>
@@ -283,7 +290,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 
 <p class="reference">References <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="CameraSceneNode_8ixx_source.html#l00071">helios::scene::CameraSceneNode::addNode()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00239">addNode()</a>, <a class="el" href="#a7cc7b1c8b3b57927c9d33abd8f652964">operator=()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00360">parent()</a>, <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00146">setParent()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00314">setRotation()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00299">setScale()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00330">setTranslation()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="CameraSceneNode_8ixx_source.html#l00071">helios::scene::CameraSceneNode::addNode()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00244">addNode()</a>, <a class="el" href="#a7cc7b1c8b3b57927c9d33abd8f652964">operator=()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00365">parent()</a>, <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00151">setParent()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00319">setRotation()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00304">setScale()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00335">setTranslation()</a>.</p>
 <div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
@@ -323,9 +330,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 </div><div class="memdoc">
 
 <p>Constructs a new <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> that represents no renderable object. Nodes constructed in this way should be treated as transformation nodes. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000036">Todo</a></b></dt><dd>explicitly implement move (assignment) constructor if required, since we have deleted the copy constructors </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000038">Todo</a></b></dt><dd>explicitly implement move (assignment) constructor if required, since we have deleted the copy constructors </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00176">176</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00181">181</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
 </div>
 </div>
@@ -360,7 +367,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00187">187</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00192">192</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
 <p class="reference">References <a class="el" href="Guid_8ixx_source.html#l00084">helios::util::Guid::generate()</a>.</p>
 <div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
@@ -408,9 +415,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00199">199</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00204">204</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="Guid_8ixx_source.html#l00084">helios::util::Guid::generate()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00259">renderable()</a>.</p>
+<p class="reference">References <a class="el" href="Guid_8ixx_source.html#l00084">helios::util::Guid::generate()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00264">renderable()</a>.</p>
 <div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-5-summary" class="dynsummary" style="display:block;">
 </div>
@@ -451,9 +458,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00214">214</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00219">219</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="Guid_8ixx_source.html#l00084">helios::util::Guid::generate()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00259">renderable()</a>.</p>
+<p class="reference">References <a class="el" href="Guid_8ixx_source.html#l00084">helios::util::Guid::generate()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00264">renderable()</a>.</p>
 <div id="dynsection-6" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-6-summary" class="dynsummary" style="display:block;">
 </div>
@@ -490,9 +497,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p>Returns the axis-aligned bounding box for this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> in world coordinates. </p>
 <dl class="section return"><dt>Returns</dt><dd>The AABB transformed to world space. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00442">442</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00465">465</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00124">aabb_</a>, <a class="el" href="SceneNode_8ixx_source.html#l00432">needsUpdate()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00457">update()</a>.</p>
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00129">aabb_</a>, <a class="el" href="SceneNode_8ixx_source.html#l00455">needsUpdate()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00480">update()</a>.</p>
 <div id="dynsection-7" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-7-summary" class="dynsummary" style="display:block;">
 </div>
@@ -536,9 +543,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 
 <p>Reimplemented in <a class="el" href="classhelios_1_1scene_1_1CameraSceneNode.html#a58b5b9c583ddf40dcc81793c19fc0c79">helios::scene::CameraSceneNode</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00239">239</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00244">244</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00098">children_</a>, and <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>.</p>
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00103">children_</a>, and <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>.</p>
 <div id="dynsection-8" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-8-summary" class="dynsummary" style="display:block;">
 </div>
@@ -586,9 +593,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if the world transform was updated, otherwise false. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00377">377</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00382">382</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00497">inheritWorldTransform()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00432">needsUpdate()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00078">needsUpdate_</a>, <a class="el" href="SceneNode_8ixx_source.html#l00476">onWorldTransformUpdate()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00106">worldTransform_</a>.</p>
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00520">inheritWorldTransform()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00455">needsUpdate()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00078">needsUpdate_</a>, <a class="el" href="SceneNode_8ixx_source.html#l00499">onWorldTransformUpdate()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00111">worldTransform_</a>.</p>
 <div id="dynsection-9" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-9-summary" class="dynsummary" style="display:block;">
 </div>
@@ -624,11 +631,11 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p>Returns the current worldTransform matrix of this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> **without triggering any recomputation**. This method is efficient for access when the world transform is known to be up-to-date. </p>
 <dl class="section return"><dt>Returns</dt><dd>The current worldTransform matrix of this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00420">420</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00443">443</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00106">worldTransform_</a>.</p>
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00111">worldTransform_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Scene_8ixx_source.html#l00262">helios::scene::Scene::createSnapshot()</a>, <a class="el" href="CameraSceneNode_8ixx_source.html#l00112">helios::scene::CameraSceneNode::lookAt()</a>, and <a class="el" href="CameraSceneNode_8ixx_source.html#l00193">helios::scene::CameraSceneNode::onWorldTransformUpdate()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Scene_8ixx_source.html#l00265">helios::scene::Scene::createSnapshot()</a>, <a class="el" href="CameraSceneNode_8ixx_source.html#l00112">helios::scene::CameraSceneNode::lookAt()</a>, and <a class="el" href="CameraSceneNode_8ixx_source.html#l00193">helios::scene::CameraSceneNode::onWorldTransformUpdate()</a>.</p>
 <div id="dynsection-10" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-10-summary" class="dynsummary" style="display:block;">
 </div>
@@ -664,9 +671,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p>Returns a const ref to the list of this node's children. </p>
 <dl class="section return"><dt>Returns</dt><dd>A const ref to the list of children of this node. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00250">250</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00255">255</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00098">children_</a>.</p>
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00103">children_</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="CullNoneStrategy_8ixx_source.html#l00033">helios::scene::CullNoneStrategy::cull()</a>.</p>
 <div id="dynsection-11" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
@@ -704,7 +711,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p>Returns the globally unique identifier for this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>. </p>
 <dl class="section return"><dt>Returns</dt><dd>The unique identifier for this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00226">226</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00231">231</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
 </div>
 </div>
@@ -734,11 +741,11 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p>Returns true if this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> was configured with a Renderable. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if the <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> was configured with a Renderable, otherwise false. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00268">268</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00273">273</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00259">renderable()</a>.</p>
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00264">renderable()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Scene_8ixx_source.html#l00262">helios::scene::Scene::createSnapshot()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Scene_8ixx_source.html#l00265">helios::scene::Scene::createSnapshot()</a>.</p>
 <div id="dynsection-12" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-12-summary" class="dynsummary" style="display:block;">
 </div>
@@ -781,9 +788,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <dl class="section return"><dt>Returns</dt><dd>The active inheritance mask.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="#a75103edee2bbacbebe2296dd88d1a1e9" title="Sets which transform components this node inherits from its parent.">setInheritance()</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00533">533</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00556">556</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00136">inheritance_</a>.</p>
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00141">inheritance_</a>.</p>
 
 </div>
 </div>
@@ -823,11 +830,11 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <dd>
 <a class="el" href="namespacehelios_1_1math.html#a27682cda52181a23edab8c0249fa531d" title="Bitmask enum controlling which transform components a child node inherits from its parent.">helios::math::TransformType</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00497">497</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00520">520</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="TransformType_8ixx_source.html#l00072">helios::math::All</a>, <a class="el" href="SceneNode_8ixx_source.html#l00136">inheritance_</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00113">localTransform_</a>.</p>
+<p class="reference">References <a class="el" href="TransformType_8ixx_source.html#l00072">helios::math::All</a>, <a class="el" href="SceneNode_8ixx_source.html#l00141">inheritance_</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00118">localTransform_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="SceneNode_8ixx_source.html#l00377">applyWorldTransform()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00457">update()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="SceneNode_8ixx_source.html#l00382">applyWorldTransform()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00480">update()</a>.</p>
 <div id="dynsection-14" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-14-summary" class="dynsummary" style="display:block;">
 </div>
@@ -863,17 +870,49 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p>Returns whether this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> and its child nodes should be considered for rendering. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if the <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> should be considered for rendering, otherwise false. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00542">542</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00565">565</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00119">isActive_</a>.</p>
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00124">isActive_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Scene_8ixx_source.html#l00262">helios::scene::Scene::createSnapshot()</a>, and <a class="el" href="CullNoneStrategy_8ixx_source.html#l00033">helios::scene::CullNoneStrategy::cull()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Scene_8ixx_source.html#l00265">helios::scene::Scene::createSnapshot()</a>, and <a class="el" href="CullNoneStrategy_8ixx_source.html#l00033">helios::scene::CullNoneStrategy::cull()</a>.</p>
 <div id="dynsection-15" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-15-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-15-content" class="dyncontent" style="display:none;">
 <div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_af9530fc7b8962c228dd883bf0f509a4a_icgraph.svg" width="100%" height="404"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
+
+</div>
+</div>
+<a id="a9c46993eb00407a73731378631874064" name="a9c46993eb00407a73731378631874064"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c46993eb00407a73731378631874064">&#9670;&#160;</a></span>isRoot()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::scene::SceneNode::isRoot </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks whether this node is the root of the scene graph. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if this is the root node. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00414">414</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00083">isRoot_</a>.</p>
 
 </div>
 </div>
@@ -903,9 +942,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p>Returns this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>'s localTransform. </p>
 <dl class="section return"><dt>Returns</dt><dd>A const reference to this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>'s `Transform` object. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00341">341</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00346">346</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00113">localTransform_</a>.</p>
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00118">localTransform_</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="CameraSceneNode_8ixx_source.html#l00162">helios::scene::CameraSceneNode::lookAtLocal()</a>.</p>
 <div id="dynsection-16" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
@@ -943,9 +982,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p>Returns this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>'s localTransform. </p>
 <dl class="section return"><dt>Returns</dt><dd>A reference to this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>'s `Transform` object. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00350">350</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00355">355</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00113">localTransform_</a>.</p>
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00118">localTransform_</a>.</p>
 
 </div>
 </div>
@@ -976,11 +1015,11 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p>The <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> is considered "dirty" if either the `localTransform_` needs an update, or if the `needsUpdate_` property is set to true.</p>
 <dl class="section return"><dt>Returns</dt><dd>true if this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> is considered to be dirty, otherwise false. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00432">432</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00455">455</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00113">localTransform_</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00078">needsUpdate_</a>.</p>
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00118">localTransform_</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00078">needsUpdate_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="SceneNode_8ixx_source.html#l00442">aabb()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00377">applyWorldTransform()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00404">worldTransform()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="SceneNode_8ixx_source.html#l00465">aabb()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00382">applyWorldTransform()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00427">worldTransform()</a>.</p>
 <div id="dynsection-17" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-17-summary" class="dynsummary" style="display:block;">
 </div>
@@ -1018,11 +1057,11 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 
 <p>Reimplemented in <a class="el" href="classhelios_1_1scene_1_1CameraSceneNode.html#ae9863cf5d6dde842d58d1c86ccec02e0">helios::scene::CameraSceneNode</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00476">476</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00499">499</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00124">aabb_</a>, <a class="el" href="SceneNode_8ixx_source.html#l00084">renderable_</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00106">worldTransform_</a>.</p>
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00129">aabb_</a>, <a class="el" href="SceneNode_8ixx_source.html#l00089">renderable_</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00111">worldTransform_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="SceneNode_8ixx_source.html#l00377">applyWorldTransform()</a>, <a class="el" href="CameraSceneNode_8ixx_source.html#l00193">helios::scene::CameraSceneNode::onWorldTransformUpdate()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00457">update()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="SceneNode_8ixx_source.html#l00382">applyWorldTransform()</a>, <a class="el" href="CameraSceneNode_8ixx_source.html#l00193">helios::scene::CameraSceneNode::onWorldTransformUpdate()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00480">update()</a>.</p>
 <div id="dynsection-18" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-18-summary" class="dynsummary" style="display:block;">
 </div>
@@ -1094,9 +1133,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p>Returns a pointer to this node's parent node. </p>
 <dl class="section return"><dt>Returns</dt><dd>The pointer to this node's parent, or nullptr if no parent exists, e.g. for the root node. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00360">360</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00365">365</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00092">parent_</a>, and <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>.</p>
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00097">parent_</a>, and <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="CameraSceneNode_8ixx_source.html#l00112">helios::scene::CameraSceneNode::lookAt()</a>.</p>
 <div id="dynsection-20" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
@@ -1140,9 +1179,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p>Returns a const pointer to the non-const Renderable of this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>. </p>
 <dl class="section return"><dt>Returns</dt><dd>A shared_ptr to the Renderable, may be nullptr if none is set. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00277">277</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00282">282</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00084">renderable_</a>.</p>
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00089">renderable_</a>.</p>
 
 </div>
 </div>
@@ -1172,11 +1211,11 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p>Returns a raw pointer to the Renderable of this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>. </p>
 <dl class="section return"><dt>Returns</dt><dd>A raw pointer to the Renderable, may be nullptr if none is set. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00259">259</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00264">264</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00084">renderable_</a>.</p>
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00089">renderable_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Scene_8ixx_source.html#l00262">helios::scene::Scene::createSnapshot()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00268">hasRenderable()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00214">SceneNode()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00199">SceneNode()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Scene_8ixx_source.html#l00265">helios::scene::Scene::createSnapshot()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00273">hasRenderable()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00219">SceneNode()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00204">SceneNode()</a>.</p>
 <div id="dynsection-22" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-22-summary" class="dynsummary" style="display:block;">
 </div>
@@ -1218,9 +1257,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00553">553</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00576">576</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00119">isActive_</a>.</p>
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00124">isActive_</a>.</p>
 
 </div>
 </div>
@@ -1257,9 +1296,46 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="namespacehelios_1_1math.html#a27682cda52181a23edab8c0249fa531d" title="Bitmask enum controlling which transform components a child node inherits from its parent.">helios::math::TransformType</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00521">521</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00544">544</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00136">inheritance_</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00078">needsUpdate_</a>.</p>
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00141">inheritance_</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00078">needsUpdate_</a>.</p>
+
+</div>
+</div>
+<a id="aff2ef2c3845f9f1a2e93db7aa97a6119" name="aff2ef2c3845f9f1a2e93db7aa97a6119"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff2ef2c3845f9f1a2e93db7aa97a6119">&#9670;&#160;</a></span>setIsRoot()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::scene::SceneNode::setIsRoot </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1scene_1_1SceneGraphKey.html">helios::scene::SceneGraphKey</a></td>          <td class="paramname"><span class="paramname"><em>sceneGraphKey</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Marks this node as the root of the scene graph. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sceneGraphKey</td><td>The passkey for scene-graph-only access. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00405">405</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00083">isRoot_</a>.</p>
 
 </div>
 </div>
@@ -1295,9 +1371,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="#a639af371377e5279a7e644da2af05e5a" title="Adds a new child node to this SceneNode. The node&#39;s parent is automatically set to **this** node.">addNode()</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00146">146</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00151">151</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00092">parent_</a>, and <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>.</p>
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00097">parent_</a>, and <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>.</p>
 <div id="dynsection-23" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-23-summary" class="dynsummary" style="display:block;">
 </div>
@@ -1339,9 +1415,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00314">314</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00319">319</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00113">localTransform_</a>, <a class="el" href="SceneNode_8ixx_source.html#l00078">needsUpdate_</a>, and <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>.</p>
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00118">localTransform_</a>, <a class="el" href="SceneNode_8ixx_source.html#l00078">needsUpdate_</a>, and <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="CameraSceneNode_8ixx_source.html#l00112">helios::scene::CameraSceneNode::lookAt()</a>, and <a class="el" href="CameraSceneNode_8ixx_source.html#l00162">helios::scene::CameraSceneNode::lookAtLocal()</a>.</p>
 <div id="dynsection-24" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
@@ -1391,9 +1467,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00299">299</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00304">304</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00113">localTransform_</a>, <a class="el" href="SceneNode_8ixx_source.html#l00078">needsUpdate_</a>, and <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>.</p>
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00118">localTransform_</a>, <a class="el" href="SceneNode_8ixx_source.html#l00078">needsUpdate_</a>, and <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>.</p>
 <div id="dynsection-26" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-26-summary" class="dynsummary" style="display:block;">
 </div>
@@ -1435,9 +1511,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00330">330</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00335">335</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00113">localTransform_</a>, <a class="el" href="SceneNode_8ixx_source.html#l00078">needsUpdate_</a>, and <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>.</p>
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00118">localTransform_</a>, <a class="el" href="SceneNode_8ixx_source.html#l00078">needsUpdate_</a>, and <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>.</p>
 <div id="dynsection-27" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-27-summary" class="dynsummary" style="display:block;">
 </div>
@@ -1473,9 +1549,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p>Returns a shared pointer to the non-const Renderable of this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>. </p>
 <dl class="section return"><dt>Returns</dt><dd>A shared_ptr to the Renderable, may be nullptr if none is set. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00286">286</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00291">291</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00084">renderable_</a>.</p>
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00089">renderable_</a>.</p>
 
 </div>
 </div>
@@ -1505,11 +1581,11 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p>Updates the world transform and axis-aligned bounding box of this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>. </p>
 <p>Recomputes the `worldTransform_` based on the parent's world transform and this node's `localTransform_`. Also updates the `aabb_` to reflect the current world-space bounds. </p>
 
-<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00457">457</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00480">480</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00497">inheritWorldTransform()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00113">localTransform_</a>, <a class="el" href="SceneNode_8ixx_source.html#l00078">needsUpdate_</a>, <a class="el" href="SceneNode_8ixx_source.html#l00476">onWorldTransformUpdate()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00092">parent_</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00106">worldTransform_</a>.</p>
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00520">inheritWorldTransform()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00118">localTransform_</a>, <a class="el" href="SceneNode_8ixx_source.html#l00078">needsUpdate_</a>, <a class="el" href="SceneNode_8ixx_source.html#l00499">onWorldTransformUpdate()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00097">parent_</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00111">worldTransform_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="SceneNode_8ixx_source.html#l00442">aabb()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00404">worldTransform()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="SceneNode_8ixx_source.html#l00465">aabb()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00427">worldTransform()</a>.</p>
 <div id="dynsection-28" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-28-summary" class="dynsummary" style="display:block;">
 </div>
@@ -1551,9 +1627,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p>Computes and returns the world transform for this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>. Will request the current world transform from the parent node to calculate this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>'s world transform. For efficiency, this method should cache the result and only trigger a recompute if this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> is dirty (`needsUpdate_ == true`). </p>
 <dl class="section return"><dt>Returns</dt><dd>The current world transform matrix for this scene node. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00404">404</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00427">427</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00432">needsUpdate()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00457">update()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00106">worldTransform_</a>.</p>
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00455">needsUpdate()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00480">update()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00111">worldTransform_</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="CameraSceneNode_8ixx_source.html#l00112">helios::scene::CameraSceneNode::lookAt()</a>.</p>
 <div id="dynsection-30" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>

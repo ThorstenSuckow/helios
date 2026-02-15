@@ -7,6 +7,7 @@ var namespacehelios_1_1engine_1_1builder_1_1gameObject_1_1builders =
     [ "EffectsBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1EffectsBuilder.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1EffectsBuilder" ],
     [ "HealthBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1HealthBuilder.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1HealthBuilder" ],
     [ "LifecycleBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1LifecycleBuilder.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1LifecycleBuilder" ],
+    [ "MenuBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1MenuBuilder.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1MenuBuilder" ],
     [ "MotionBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1MotionBuilder.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1MotionBuilder" ],
     [ "ObserverBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1ObserverBuilder.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1ObserverBuilder" ],
     [ "RenderingBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1RenderingBuilder.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1RenderingBuilder" ],

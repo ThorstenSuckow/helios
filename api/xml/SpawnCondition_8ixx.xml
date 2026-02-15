@@ -106,7 +106,7 @@
         <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="34">
+      <node id="36">
         <label>helios.engine.runtime.pooling.GameObjectPoolSnapshot</label>
         <link refid="GameObjectPoolSnapshot_8ixx"/>
       </node>
@@ -115,12 +115,12 @@
         <link refid="SpawnCondition_8ixx"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="34" relation="include">
+        <childnode refid="36" relation="include">
         </childnode>
-        <childnode refid="35" relation="include">
+        <childnode refid="37" relation="include">
         </childnode>
       </node>
-      <node id="35">
+      <node id="37">
         <label>helios.engine.runtime.spawn.policy.SpawnRuleState</label>
         <link refid="SpawnRuleState_8ixx"/>
       </node>
@@ -151,10 +151,18 @@
         </childnode>
         <childnode refid="26" relation="include">
         </childnode>
-        <childnode refid="31" relation="include">
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
         </childnode>
         <childnode refid="16" relation="include">
         </childnode>
+      </node>
+      <node id="27">
+        <label>helios.input.types.Gamepad</label>
+        <link refid="Gamepad_8ixx"/>
       </node>
       <node id="16">
         <label>helios.math.types</label>
@@ -172,35 +180,35 @@
         <childnode refid="17" relation="include">
         </childnode>
       </node>
-      <node id="26">
+      <node id="28">
         <label>helios.util.log.LogManager</label>
         <link refid="LogManager_8ixx"/>
         <childnode refid="21" relation="include">
         </childnode>
-        <childnode refid="27" relation="include">
-        </childnode>
-        <childnode refid="28" relation="include">
-        </childnode>
-        <childnode refid="6" relation="include">
-        </childnode>
         <childnode refid="29" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="30" relation="include">
         </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
         <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
         </childnode>
         <childnode refid="33" relation="include">
         </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
       </node>
-      <node id="33">
+      <node id="35">
         <label>helios.util.log.LogSink</label>
         <link refid="LogSink_8ixx"/>
         <childnode refid="21" relation="include">
         </childnode>
       </node>
-      <node id="31">
+      <node id="33">
         <label>helios.util.log.Logger</label>
         <link refid="Logger_8ixx"/>
         <childnode refid="21" relation="include">
@@ -209,11 +217,11 @@
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="29" relation="include">
+        <childnode refid="31" relation="include">
         </childnode>
-        <childnode refid="32" relation="include">
+        <childnode refid="34" relation="include">
         </childnode>
-        <childnode refid="33" relation="include">
+        <childnode refid="35" relation="include">
         </childnode>
       </node>
       <node id="24">
@@ -222,22 +230,25 @@
       <node id="13">
         <label>atomic</label>
       </node>
+      <node id="25">
+        <label>cassert</label>
+      </node>
       <node id="18">
         <label>cstdint</label>
       </node>
-      <node id="30">
+      <node id="32">
         <label>cstring</label>
       </node>
-      <node id="25">
+      <node id="26">
         <label>helios/helios_config.h</label>
       </node>
-      <node id="32">
+      <node id="34">
         <label>iostream</label>
       </node>
       <node id="6">
         <label>memory</label>
       </node>
-      <node id="29">
+      <node id="31">
         <label>mutex</label>
       </node>
       <node id="3">
@@ -249,10 +260,10 @@
       <node id="19">
         <label>string_view</label>
       </node>
-      <node id="27">
+      <node id="29">
         <label>unordered_map</label>
       </node>
-      <node id="28">
+      <node id="30">
         <label>unordered_set</label>
       </node>
       <node id="7">
@@ -366,11 +377,22 @@
 <codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>noop</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="96"><highlight class="normal"></highlight></codeline>
-<codeline lineno="97"><highlight class="normal"></highlight></codeline>
-<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="99"><highlight class="normal"></highlight></codeline>
-<codeline lineno="100"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="97"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="98"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Called<sp/>when<sp/>the<sp/>spawn<sp/>system<sp/>is<sp/>reset.</highlight></codeline>
+<codeline lineno="99"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="100"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>Override<sp/>to<sp/>reset<sp/>condition<sp/>state<sp/>(e.g.,<sp/>timers,<sp/>counters).</highlight></codeline>
+<codeline lineno="101"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="102"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>spawnRuleState<sp/>The<sp/>rule&apos;s<sp/>runtime<sp/>state<sp/>to<sp/>reset.</highlight></codeline>
+<codeline lineno="103"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="104" refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition_1a63431eb1c8203192413c74bb0f64c720" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition_1a63431eb1c8203192413c74bb0f64c720" kindref="member">onReset</ref>(</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRuleState" kindref="compound">SpawnRuleState</ref>&amp;<sp/>spawnRuleState</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal">}</highlight></codeline>
     </programlisting>
     <location file="/tmp/h/include/helios/engine/runtime/spawn/policy/SpawnCondition.ixx"/>
   </compounddef>

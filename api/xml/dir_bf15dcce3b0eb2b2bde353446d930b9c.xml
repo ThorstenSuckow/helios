@@ -3,26 +3,33 @@
   <compounddef id="dir_bf15dcce3b0eb2b2bde353446d930b9c" kind="dir">
     <compoundname>ui</compoundname>
     <innerdir refid="dir_40beb99ff63ba99bafdb722dd2fc39d6">binding</innerdir>
+    <innerdir refid="dir_6f2112188f0c1ce958d999c9b794ddfc">commands</innerdir>
     <innerdir refid="dir_e9d9767dc5aa2ecbd422c595afa60315">layout</innerdir>
     <innerdir refid="dir_7742e0808b30ee69050dd8321a97f607">transform</innerdir>
     <innerdir refid="dir_6b8d22b47901fb001c79b00cc142bfba">widgets</innerdir>
     <innerfile refid="helios_2engine_2modules_2ui_2__module_8ixx">helios/engine/modules/ui/_module.ixx</innerfile>
     <innerfile refid="modules_2ui_2registry_8ixx">modules/ui/registry.ixx</innerfile>
+    <innerfile refid="UiActionCommandHandler_8ixx">UiActionCommandHandler.ixx</innerfile>
+    <innerfile refid="UiActionCommandManager_8ixx">UiActionCommandManager.ixx</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_bf15dcce3b0eb2b2bde353446d930b9c_1autotoc_md416">
+<sect1 id="dir_bf15dcce3b0eb2b2bde353446d930b9c_1autotoc_md493">
 <title>helios::engine::modules::ui</title><para>User interface components and systems for game entities.</para>
-<para>This module provides components and systems for creating and managing UI elements within the helios engine. It supports viewport-relative positioning, text rendering, and data binding between game state and UI components.</para>
+<para>This module provides components and systems for creating and managing UI elements within the helios engine. It supports viewport-relative positioning, text rendering, menus, and data binding between game state and UI components.</para>
 </sect1>
-<sect1 id="dir_bf15dcce3b0eb2b2bde353446d930b9c_1autotoc_md417">
-<title>Submodules</title><para><table rows="5" cols="2"><row>
+<sect1 id="dir_bf15dcce3b0eb2b2bde353446d930b9c_1autotoc_md494">
+<title>Submodules</title><para><table rows="6" cols="2"><row>
 <entry thead="yes"><para>Submodule  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>binding/</computeroutput>  </para>
 </entry><entry thead="no"><para>Systems for binding game data to UI components  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>commands/</computeroutput>  </para>
+</entry><entry thead="no"><para>UI action commands and dispatchers  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>layout/</computeroutput>  </para>
@@ -34,13 +41,13 @@
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>widgets/</computeroutput>  </para>
-</entry><entry thead="no"><para>UI widget components (text, etc.) and related systems  </para>
+</entry><entry thead="no"><para>UI widget components (menus, text, etc.) and related systems  </para>
 </entry></row>
 </table>
 </para>
 </sect1>
-<sect1 id="dir_bf15dcce3b0eb2b2bde353446d930b9c_1autotoc_md418">
-<title>Key Classes</title><para><table rows="7" cols="2"><row>
+<sect1 id="dir_bf15dcce3b0eb2b2bde353446d930b9c_1autotoc_md495">
+<title>Key Classes</title><para><table rows="16" cols="2"><row>
 <entry thead="yes"><para>Class  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
 </entry></row>
@@ -57,8 +64,44 @@
 </entry><entry thead="no"><para>Computes UI element positions based on viewport and anchor  </para>
 </entry></row>
 <row>
+<entry thead="no"><para><computeroutput>MenuComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Manages menu items and selection state  </para>
+</entry></row>
+<row>
 <entry thead="no"><para><computeroutput>UiTextComponent</computeroutput>  </para>
 </entry><entry thead="no"><para>Text display with template-based formatting  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>UiStateComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Tracks interaction states (selected, hovered, focused)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>UiStyleComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Defines colors and scales for different states  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>UiFocusComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Tracks the currently focused UI entity  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>UiActionComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Associates actions with UI elements  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>UiActionCommand</computeroutput>  </para>
+</entry><entry thead="no"><para>Command for triggering UI actions  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>UiActionCommandManager</computeroutput>  </para>
+</entry><entry thead="no"><para>Processes UI action commands with policy-based dispatch  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>MenuNavigationSystem</computeroutput>  </para>
+</entry><entry thead="no"><para>Handles gamepad input for menu navigation  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>UiStyleUpdateSystem</computeroutput>  </para>
+</entry><entry thead="no"><para>Applies styles based on interaction state  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>UiTextBoundsUpdateSystem</computeroutput>  </para>
@@ -71,9 +114,9 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_bf15dcce3b0eb2b2bde353446d930b9c_1autotoc_md419">
+<sect1 id="dir_bf15dcce3b0eb2b2bde353446d930b9c_1autotoc_md496">
 <title>Architecture</title><para>The UI module follows the ECS pattern used throughout helios:</para>
-<para>1. <bold>Components</bold> store UI-specific state (anchors, offsets, text content) 2. <bold>Systems</bold> process components each frame to update positions and content 3. <bold>Bindings</bold> connect game state (e.g., scores) to UI widgets</para>
+<para>1. <bold>Components</bold> store UI-specific state (anchors, offsets, text content, interaction state) 2. <bold>Systems</bold> process components each frame to update positions, styling, and content 3. <bold>Commands</bold> handle UI actions (button presses, menu selections) 4. <bold>Bindings</bold> connect game state (e.g., scores) to UI widgets</para>
 <para>UI elements are positioned relative to viewports using anchors and offsets, allowing for resolution-independent layouts.</para>
 <para><hruler/>
 </para>

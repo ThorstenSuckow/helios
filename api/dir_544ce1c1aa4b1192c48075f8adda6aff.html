@@ -110,30 +110,44 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="dir_544ce1c1aa4b1192c48075f8adda6aff_dep.svg" width="526" height="178"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="dir_544ce1c1aa4b1192c48075f8adda6aff_dep.svg" width="100%" height="433"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-files" class="groupheader"><a id="files" name="files"></a>
 Files</h2></td></tr>
 <tr class="memitem:_5Fmodule_2Eixx" id="r__5Fmodule_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="helios_2engine_2modules_2ui_2widgets_2systems_2__module_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="helios_2engine_2modules_2ui_2widgets_2systems_2__module_8ixx.html">_module.ixx</a></td></tr>
 <tr class="memdesc:helios_2engine_2modules_2ui_2widgets_2systems_2__module_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Module facade for UI widget systems. <br /></td></tr>
+<tr class="memitem:MenuNavigationSystem_2Eixx" id="r_MenuNavigationSystem_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="MenuNavigationSystem_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MenuNavigationSystem_8ixx.html">MenuNavigationSystem.ixx</a></td></tr>
+<tr class="memdesc:MenuNavigationSystem_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">System for handling menu navigation input. <br /></td></tr>
+<tr class="memitem:UiStyleUpdateSystem_2Eixx" id="r_UiStyleUpdateSystem_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="UiStyleUpdateSystem_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UiStyleUpdateSystem_8ixx.html">UiStyleUpdateSystem.ixx</a></td></tr>
+<tr class="memdesc:UiStyleUpdateSystem_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">System for updating UI text element bounds. <br /></td></tr>
 <tr class="memitem:UiTextBoundsUpdateSystem_2Eixx" id="r_UiTextBoundsUpdateSystem_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="UiTextBoundsUpdateSystem_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UiTextBoundsUpdateSystem_8ixx.html">UiTextBoundsUpdateSystem.ixx</a></td></tr>
 <tr class="memdesc:UiTextBoundsUpdateSystem_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">System for updating UI text element bounds. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md442"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md523"></a>
 helios::engine::modules::ui::widgets::systems</h1>
 <p>UI widget processing systems.</p>
-<p>This namespace contains systems that process UI widget components, handling tasks such as bounds updates when content changes.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md443"></a>
+<p>This namespace contains systems that process UI widget components, handling tasks such as navigation, styling, and bounds updates.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md524"></a>
 Systems</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">System  </th><th class="markdownTableHeadNone">Description  </th></tr>
 <tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">MenuNavigationSystem</span>  </td><td class="markdownTableBodyNone">Handles gamepad input for menu navigation  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">UiStyleUpdateSystem</span>  </td><td class="markdownTableBodyNone">Applies visual styles based on interaction state  </td></tr>
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">UiTextBoundsUpdateSystem</span>  </td><td class="markdownTableBodyNone">Updates AABB bounds when text content changes  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md444"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md525"></a>
+MenuNavigationSystem</h1>
+<p>Processes gamepad Up/Down input to change menu selection and A button to activate items. Updates <span class="tt">UiStateComponent</span> selection state and issues <span class="tt">UiActionCommand</span> on activation.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md526"></a>
+UiStyleUpdateSystem</h1>
+<p>Queries entities with <span class="tt">UiTextComponent</span>, <span class="tt">UiStyleComponent</span>, and <span class="tt">UiStateComponent</span>. Applies appropriate colors and scales based on the current interaction state (normal, selected, disabled).</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md527"></a>
 UiTextBoundsUpdateSystem</h1>
 <p>Queries entities with <span class="tt">UiTextComponent</span> and <span class="tt">ModelAabbComponent</span>. When the text component signals <span class="tt">needsResize()</span>, the system retrieves the new AABB from the underlying <span class="tt">TextRenderable</span> and updates <span class="tt">ModelAabbComponent</span>.</p>
 <hr  />

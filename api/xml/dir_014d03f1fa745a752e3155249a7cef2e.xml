@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_014d03f1fa745a752e3155249a7cef2e" kind="dir">
+    <compoundname>gamestate</compoundname>
+    <innerdir refid="dir_9ed579b54552e16b14ed01281ebc7fc1">commands</innerdir>
+    <innerdir refid="dir_62cf329d4ce586358d86df60cebb9b6f">components</innerdir>
+    <innerdir refid="dir_1e2b4d8616b5a94ef0f3093c433613bf">dispatcher</innerdir>
+    <innerdir refid="dir_b9cfb45c1b77dbd8e10a3c02853a7bae">listeners</innerdir>
+    <innerdir refid="dir_f37f1451bcfc86b6b712fff4e15caf0b">rules</innerdir>
+    <innerdir refid="dir_8d252ebd3a650eb75bc4449c8c9c4277">systems</innerdir>
+    <innerdir refid="dir_c06739a7e81ea970219d6849a6b58298">types</innerdir>
+    <innerfile refid="helios_2engine_2mechanics_2gamestate_2__module_8ixx">helios/engine/mechanics/gamestate/_module.ixx</innerfile>
+    <innerfile refid="GameStateCommandHandler_8ixx">GameStateCommandHandler.ixx</innerfile>
+    <innerfile refid="GameStateManager_8ixx">GameStateManager.ixx</innerfile>
+    <innerfile refid="GameStateTransitionListener_8ixx">GameStateTransitionListener.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_014d03f1fa745a752e3155249a7cef2e_1autotoc_md191">
+<title>helios::engine::mechanics::gamestate</title><para>Game state management system for the helios engine.</para>
+<para>This module provides a rule-based state machine for managing game states (e.g., Title, Running, Paused) with transitions, listeners, and command-driven state changes.</para>
+</sect1>
+<sect1 id="dir_014d03f1fa745a752e3155249a7cef2e_1autotoc_md192">
+<title>Submodules</title><para><table rows="8" cols="2"><row>
+<entry thead="yes"><para>Submodule  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>commands/</computeroutput>  </para>
+</entry><entry thead="no"><para>Commands for requesting state transitions  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>components/</computeroutput>  </para>
+</entry><entry thead="no"><para>Components for storing game state  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>dispatcher/</computeroutput>  </para>
+</entry><entry thead="no"><para>Dispatchers for routing state commands  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>listeners/</computeroutput>  </para>
+</entry><entry thead="no"><para>Listeners for reacting to state transitions  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>rules/</computeroutput>  </para>
+</entry><entry thead="no"><para>Transition rules defining valid state changes  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>systems/</computeroutput>  </para>
+</entry><entry thead="no"><para>Systems for input-driven state changes  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>types/</computeroutput>  </para>
+</entry><entry thead="no"><para>Core types, enums, and data structures  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_014d03f1fa745a752e3155249a7cef2e_1autotoc_md193">
+<title>Architecture</title><para>1. <bold>GameStateManager</bold> holds the transition rules and processes state commands 2. <bold>GameStateCommand</bold> encapsulates a transition request 3. <bold>GameStateTransitionRule</bold> defines valid from -&gt; to transitions with optional guards 4. <bold>GameStateTransitionListener</bold> implementations react to state changes</para>
+</sect1>
+<sect1 id="dir_014d03f1fa745a752e3155249a7cef2e_1autotoc_md194">
+<title>State Flow</title><para><programlisting><codeline><highlight class="normal">┌─────────────┐<sp/><sp/><sp/>StartRequested<sp/><sp/><sp/>┌─────────────┐</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/>Title<sp/><sp/><sp/><sp/>│<sp/>─────────────────►<sp/>│<sp/><sp/><sp/>Running<sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">└─────────────┘<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>└─────────────┘</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TogglePause</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>┌─────────────┐</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/>Paused<sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>└─────────────┘</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_014d03f1fa745a752e3155249a7cef2e_1autotoc_md195">
+<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Create<sp/>manager<sp/>with<sp/>default<sp/>rules</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>manager<sp/>=<sp/>std::make_unique&lt;GameStateManager&gt;();</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Add<sp/>listeners</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">manager-&gt;addGameStateListener(std::make_unique&lt;WorldResetListener&gt;());</highlight></codeline>
+<codeline><highlight class="normal">manager-&gt;addGameStateListener(std::make_unique&lt;FocusMenuListener&gt;(menuId));</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Submit<sp/>transition<sp/>via<sp/>command</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">commandBuffer.add&lt;GameStateCommand&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>GameStateTransitionRequest(GameState::Title,<sp/>GameStateTransitionId::StartRequested)</highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+</para>
+<para><details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/mechanics/gamestate/"/>
+  </compounddef>
+</doxygen>

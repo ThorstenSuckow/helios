@@ -121,6 +121,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad5514051aaafea0f164769d695a96991" id="r_ad5514051aaafea0f164769d695a96991"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad5514051aaafea0f164769d695a96991">~SpawnInitializer</a> ()=default</td></tr>
 <tr class="memitem:a6580de8b02f9ba339a0466b2b76c5084" id="r_a6580de8b02f9ba339a0466b2b76c5084"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6580de8b02f9ba339a0466b2b76c5084">initialize</a> (<a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html">helios::engine::ecs::GameObject</a> gameObject, const <a class="el" href="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnPlanCursor.html">SpawnPlanCursor</a> &amp;cursor, const <a class="el" href="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnContext.html">SpawnContext</a> &amp;spawnContext)=0</td></tr>
 <tr class="memdesc:a6580de8b02f9ba339a0466b2b76c5084"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a spawned entity's state.  <br /></td></tr>
+<tr class="memitem:a361663aa22bbaa8053eb83b0adee8223" id="r_a361663aa22bbaa8053eb83b0adee8223"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a361663aa22bbaa8053eb83b0adee8223">onReset</a> () noexcept</td></tr>
+<tr class="memdesc:a361663aa22bbaa8053eb83b0adee8223"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when the spawn system is reset.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Abstract interface for initializing spawned entity state. </p>
@@ -211,6 +213,38 @@ Public Member Functions</h2></td></tr>
 </dl>
 
 <p>Implemented in <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1DelayedComponentEnablerInitializer.html#aa62271db362f6450fb7a9e53c9346313">helios::engine::runtime::spawn::behavior::initializers::DelayedComponentEnablerInitializer&lt; ComponentTypes &gt;</a>, <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1EmitterInitializer.html#a4fea97ad277deeefa09cae4d735de17b">helios::engine::runtime::spawn::behavior::initializers::EmitterInitializer</a>, <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1InitializerList.html#afa55188a1168954f0374072cd03dd630">helios::engine::runtime::spawn::behavior::initializers::InitializerList&lt; N &gt;</a>, <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1MoveInitializer.html#ae047147f4547547c56e5e94233e81ce0">helios::engine::runtime::spawn::behavior::initializers::MoveInitializer</a>, and <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1RandomDirectionInitializer.html#acc5c6d430c92ca5523aec5dabe4f8207">helios::engine::runtime::spawn::behavior::initializers::RandomDirectionInitializer</a>.</p>
+
+</div>
+</div>
+<a id="a361663aa22bbaa8053eb83b0adee8223" name="a361663aa22bbaa8053eb83b0adee8223"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a361663aa22bbaa8053eb83b0adee8223">&#9670;&#160;</a></span>onReset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void helios::engine::runtime::spawn::behavior::SpawnInitializer::onReset </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel virtual">virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Called when the spawn system is reset. </p>
+<p>Override to reset any internal state (e.g., RNG seeds). The default implementation is a no-op. </p>
+
+<p>Reimplemented in <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1MoveInitializer.html#a52da231cb8c38e7217bed1a9c3a4d423">helios::engine::runtime::spawn::behavior::initializers::MoveInitializer</a>, and <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1RandomDirectionInitializer.html#a0e904523f6d2fe97f2302a3d3c2d472e">helios::engine::runtime::spawn::behavior::initializers::RandomDirectionInitializer</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="SpawnInitializer_8ixx_source.html#l00076">76</a> of file <a class="el" href="SpawnInitializer_8ixx_source.html">SpawnInitializer.ixx</a>.</p>
 
 </div>
 </div>

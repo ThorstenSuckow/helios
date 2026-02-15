@@ -9,13 +9,13 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_5dc6246ab3eb4b7f43f53e4aa10504cc_1autotoc_md509">
+<sect1 id="dir_5dc6246ab3eb4b7f43f53e4aa10504cc_1autotoc_md592">
 <title>helios::engine::runtime::spawn::dispatcher</title><para>Command dispatchers for spawn operations.</para>
 </sect1>
-<sect1 id="dir_5dc6246ab3eb4b7f43f53e4aa10504cc_1autotoc_md510">
+<sect1 id="dir_5dc6246ab3eb4b7f43f53e4aa10504cc_1autotoc_md593">
 <title>Overview</title><para>This module contains dispatchers that route spawn and despawn commands to the appropriate managers for processing. Dispatchers implement the visitor pattern, allowing the CommandBuffer to route commands without knowing their concrete types.</para>
 </sect1>
-<sect1 id="dir_5dc6246ab3eb4b7f43f53e4aa10504cc_1autotoc_md511">
+<sect1 id="dir_5dc6246ab3eb4b7f43f53e4aa10504cc_1autotoc_md594">
 <title>Key Classes</title><para><table rows="4" cols="3"><row>
 <entry thead="yes"><para>Dispatcher  </para>
 </entry><entry thead="yes"><para>Handles  </para>
@@ -39,7 +39,7 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_5dc6246ab3eb4b7f43f53e4aa10504cc_1autotoc_md512">
+<sect1 id="dir_5dc6246ab3eb4b7f43f53e4aa10504cc_1autotoc_md595">
 <title>Architecture</title><para><programlisting><codeline><highlight class="normal">┌─────────────────┐<sp/><sp/><sp/><sp/><sp/>┌───────────────┐<sp/><sp/><sp/><sp/><sp/>┌──────────────────────────────────┐</highlight></codeline>
 <codeline><highlight class="normal">│<sp/>CommandBuffer<sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/>Dispatcher<sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/>SpawnCommandHandler<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/>(SpawnManager)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
@@ -54,7 +54,7 @@
 <codeline><highlight class="normal">commandBuffer.addDispatcher&lt;ScheduledSpawnPlanCommandDispatcher&gt;();</highlight></codeline>
 </programlisting></para>
 </sect1>
-<sect1 id="dir_5dc6246ab3eb4b7f43f53e4aa10504cc_1autotoc_md513">
+<sect1 id="dir_5dc6246ab3eb4b7f43f53e4aa10504cc_1autotoc_md596">
 <title>Usage</title><para>Commands are added to the buffer by systems and automatically routed during flush:</para>
 <para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>In<sp/>a<sp/>system</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal">commandBuffer.add&lt;SpawnCommand&gt;(profileId,<sp/>spawnContext,<sp/>count);</highlight></codeline>

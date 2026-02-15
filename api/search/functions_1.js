@@ -20,9 +20,10 @@ var searchData=
   ['buttonguide_17',['buttonGuide',['../classhelios_1_1input_1_1gamepad_1_1GamepadState.html#ac37675a6b2a9f26eacb75481a8654e60',1,'helios::input::gamepad::GamepadState']]],
   ['buttonleftbumper_18',['buttonLeftBumper',['../classhelios_1_1input_1_1gamepad_1_1GamepadState.html#a0e29924d8d026778ace2e91c778ba4a5',1,'helios::input::gamepad::GamepadState']]],
   ['buttonleftthumb_19',['buttonLeftThumb',['../classhelios_1_1input_1_1gamepad_1_1GamepadState.html#afa01f268c73449a45d5cba341f68648a',1,'helios::input::gamepad::GamepadState']]],
-  ['buttonrightbumper_20',['buttonRightBumper',['../classhelios_1_1input_1_1gamepad_1_1GamepadState.html#a0153832e95905c8c7ad3ad9092d8eac0',1,'helios::input::gamepad::GamepadState']]],
-  ['buttonrightthumb_21',['buttonRightThumb',['../classhelios_1_1input_1_1gamepad_1_1GamepadState.html#af6450490a050564bf1366148b04d67de',1,'helios::input::gamepad::GamepadState']]],
-  ['buttonstart_22',['buttonStart',['../classhelios_1_1input_1_1gamepad_1_1GamepadState.html#a2023f54665e7aa39ba455a901adc6e1d',1,'helios::input::gamepad::GamepadState']]],
-  ['buttonx_23',['buttonX',['../classhelios_1_1input_1_1gamepad_1_1GamepadState.html#a2416fe357772c57d9dcf0fa46f3e255c',1,'helios::input::gamepad::GamepadState']]],
-  ['buttony_24',['buttonY',['../classhelios_1_1input_1_1gamepad_1_1GamepadState.html#a6bbce85c5ea851e8a6fa47e3c8e1d330',1,'helios::input::gamepad::GamepadState']]]
+  ['buttonpressedstart_20',['buttonPressedStart',['../classhelios_1_1input_1_1gamepad_1_1GamepadState.html#a045c149a4f18f3f75f637e2283af38f1',1,'helios::input::gamepad::GamepadState']]],
+  ['buttonrightbumper_21',['buttonRightBumper',['../classhelios_1_1input_1_1gamepad_1_1GamepadState.html#a0153832e95905c8c7ad3ad9092d8eac0',1,'helios::input::gamepad::GamepadState']]],
+  ['buttonrightthumb_22',['buttonRightThumb',['../classhelios_1_1input_1_1gamepad_1_1GamepadState.html#af6450490a050564bf1366148b04d67de',1,'helios::input::gamepad::GamepadState']]],
+  ['buttonstart_23',['buttonStart',['../classhelios_1_1input_1_1gamepad_1_1GamepadState.html#a2023f54665e7aa39ba455a901adc6e1d',1,'helios::input::gamepad::GamepadState']]],
+  ['buttonx_24',['buttonX',['../classhelios_1_1input_1_1gamepad_1_1GamepadState.html#a2416fe357772c57d9dcf0fa46f3e255c',1,'helios::input::gamepad::GamepadState']]],
+  ['buttony_25',['buttonY',['../classhelios_1_1input_1_1gamepad_1_1GamepadState.html#a6bbce85c5ea851e8a6fa47e3c8e1d330',1,'helios::input::gamepad::GamepadState']]]
 ];

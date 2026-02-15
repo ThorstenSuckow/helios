@@ -8,6 +8,8 @@ var dir_c01646dfa756089b07ac7b4e7ae63e35 =
     [ "HealthConfig.ixx", "HealthConfig_8ixx.html", "HealthConfig_8ixx" ],
     [ "LevelBoundsCollisionConfig.ixx", "LevelBoundsCollisionConfig_8ixx.html", "LevelBoundsCollisionConfig_8ixx" ],
     [ "LifecycleConfig.ixx", "LifecycleConfig_8ixx.html", "LifecycleConfig_8ixx" ],
+    [ "MenuConfig.ixx", "MenuConfig_8ixx.html", "MenuConfig_8ixx" ],
+    [ "MenuItemConfig.ixx", "MenuItemConfig_8ixx.html", "MenuItemConfig_8ixx" ],
     [ "MeshRenderableConfig.ixx", "MeshRenderableConfig_8ixx.html", "MeshRenderableConfig_8ixx" ],
     [ "Move2DConfig.ixx", "Move2DConfig_8ixx.html", "Move2DConfig_8ixx" ],
     [ "ObserverConfig.ixx", "ObserverConfig_8ixx.html", "ObserverConfig_8ixx" ],

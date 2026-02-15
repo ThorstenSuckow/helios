@@ -3,57 +3,73 @@
   <compounddef id="dir_e9da0b62584c6eecb1a84f8213bdf7a4" kind="dir">
     <compoundname>components</compoundname>
     <innerfile refid="helios_2engine_2modules_2ui_2widgets_2components_2__module_8ixx">helios/engine/modules/ui/widgets/components/_module.ixx</innerfile>
+    <innerfile refid="MenuComponent_8ixx">MenuComponent.ixx</innerfile>
+    <innerfile refid="UiActionComponent_8ixx">UiActionComponent.ixx</innerfile>
+    <innerfile refid="UiFocusComponent_8ixx">UiFocusComponent.ixx</innerfile>
+    <innerfile refid="UiStateComponent_8ixx">UiStateComponent.ixx</innerfile>
+    <innerfile refid="UiStyleComponent_8ixx">UiStyleComponent.ixx</innerfile>
     <innerfile refid="UiTextComponent_8ixx">UiTextComponent.ixx</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_e9da0b62584c6eecb1a84f8213bdf7a4_1autotoc_md433">
+<sect1 id="dir_e9da0b62584c6eecb1a84f8213bdf7a4_1autotoc_md510">
 <title>helios::engine::modules::ui::widgets::components</title><para>UI widget state components.</para>
-<para>This namespace contains components that store the state and content of UI widgets.</para>
+<para>This namespace contains components that store the state, content, and styling of UI widgets.</para>
 </sect1>
-<sect1 id="dir_e9da0b62584c6eecb1a84f8213bdf7a4_1autotoc_md434">
-<title>Components</title><para><table rows="2" cols="2"><row>
+<sect1 id="dir_e9da0b62584c6eecb1a84f8213bdf7a4_1autotoc_md511">
+<title>Components</title><para><table rows="7" cols="2"><row>
 <entry thead="yes"><para>Component  </para>
 </entry><entry thead="yes"><para>Description  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>MenuComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Manages a collection of menu items and tracks selection  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>UiTextComponent</computeroutput>  </para>
 </entry><entry thead="no"><para>Text display with template-based formatting  </para>
 </entry></row>
+<row>
+<entry thead="no"><para><computeroutput>UiStateComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Tracks interaction states (selected, hovered, focused, pressed)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>UiStyleComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Defines colors and scales for normal, selected, and disabled states  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>UiFocusComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Tracks the currently focused UI entity  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>UiActionComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Associates an action ID with a UI element  </para>
+</entry></row>
 </table>
 </para>
 </sect1>
-<sect1 id="dir_e9da0b62584c6eecb1a84f8213bdf7a4_1autotoc_md435">
+<sect1 id="dir_e9da0b62584c6eecb1a84f8213bdf7a4_1autotoc_md512">
+<title>MenuComponent</title><para>Manages a list of menu item entity handles and tracks the currently selected index.</para>
+</sect1>
+<sect1 id="dir_e9da0b62584c6eecb1a84f8213bdf7a4_1autotoc_md513">
 <title>UiTextComponent</title><para>Wraps a <computeroutput>TextRenderable</computeroutput> and provides template-based value display. Supports dirty tracking to minimize updates.</para>
-<sect2 id="dir_e9da0b62584c6eecb1a84f8213bdf7a4_1autotoc_md436">
-<title>Key Methods</title><para><table rows="5" cols="2"><row>
-<entry thead="yes"><para>Method  </para>
-</entry><entry thead="yes"><para>Description  </para>
-</entry></row>
-<row>
-<entry thead="no"><para><computeroutput>setTemplate()</computeroutput>  </para>
-</entry><entry thead="no"><para>Sets the format template (uses <computeroutput>std::format</computeroutput> syntax)  </para>
-</entry></row>
-<row>
-<entry thead="no"><para><computeroutput>setDouble()</computeroutput>  </para>
-</entry><entry thead="no"><para>Sets the numeric value to display  </para>
-</entry></row>
-<row>
-<entry thead="no"><para><computeroutput>needsResize()</computeroutput>  </para>
-</entry><entry thead="no"><para>Returns <computeroutput>true</computeroutput> if bounds need recalculation  </para>
-</entry></row>
-<row>
-<entry thead="no"><para><computeroutput>resizeComplete()</computeroutput>  </para>
-</entry><entry thead="no"><para>Marks resize as complete  </para>
-</entry></row>
-</table>
-</para>
+</sect1>
+<sect1 id="dir_e9da0b62584c6eecb1a84f8213bdf7a4_1autotoc_md514">
+<title>UiStateComponent</title><para>Tracks common UI interaction states: selected, hovered, focused, enabled, and pressed.</para>
+</sect1>
+<sect1 id="dir_e9da0b62584c6eecb1a84f8213bdf7a4_1autotoc_md515">
+<title>UiStyleComponent</title><para>Defines visual properties for different states, including colors (normal, selected, disabled) and scale factors.</para>
+</sect1>
+<sect1 id="dir_e9da0b62584c6eecb1a84f8213bdf7a4_1autotoc_md516">
+<title>UiFocusComponent</title><para>Stores an optional reference to the currently focused entity for input handling.</para>
+</sect1>
+<sect1 id="dir_e9da0b62584c6eecb1a84f8213bdf7a4_1autotoc_md517">
+<title>UiActionComponent</title><para>Associates an <computeroutput>ActionId</computeroutput> with a UI element that can be triggered when the element is activated.</para>
 <para><hruler/>
 </para>
 <para><details><summary>Doxygen</summary><para></para>
 <para></para>
 </details></para>
-</sect2>
 </sect1>
     </detaileddescription>
     <location file="/tmp/h/include/helios/engine/modules/ui/widgets/components/"/>

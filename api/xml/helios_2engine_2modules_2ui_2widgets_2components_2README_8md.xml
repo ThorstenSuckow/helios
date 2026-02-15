@@ -12,26 +12,42 @@
 <codeline></codeline>
 <codeline><highlight class="normal">UI<sp/>widget<sp/>state<sp/>components.</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">This<sp/>namespace<sp/>contains<sp/>components<sp/>that<sp/>store<sp/>the<sp/>state<sp/>and<sp/>content<sp/>of<sp/>UI<sp/>widgets.</highlight></codeline>
+<codeline><highlight class="normal">This<sp/>namespace<sp/>contains<sp/>components<sp/>that<sp/>store<sp/>the<sp/>state,<sp/>content,<sp/>and<sp/>styling<sp/>of<sp/>UI<sp/>widgets.</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Components</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">|<sp/>Component<sp/>|<sp/>Description<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|-----------|-------------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`MenuComponent`<sp/>|<sp/>Manages<sp/>a<sp/>collection<sp/>of<sp/>menu<sp/>items<sp/>and<sp/>tracks<sp/>selection<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`UiTextComponent`<sp/>|<sp/>Text<sp/>display<sp/>with<sp/>template-based<sp/>formatting<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`UiStateComponent`<sp/>|<sp/>Tracks<sp/>interaction<sp/>states<sp/>(selected,<sp/>hovered,<sp/>focused,<sp/>pressed)<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`UiStyleComponent`<sp/>|<sp/>Defines<sp/>colors<sp/>and<sp/>scales<sp/>for<sp/>normal,<sp/>selected,<sp/>and<sp/>disabled<sp/>states<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`UiFocusComponent`<sp/>|<sp/>Tracks<sp/>the<sp/>currently<sp/>focused<sp/>UI<sp/>entity<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`UiActionComponent`<sp/>|<sp/>Associates<sp/>an<sp/>action<sp/>ID<sp/>with<sp/>a<sp/>UI<sp/>element<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>MenuComponent</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Manages<sp/>a<sp/>list<sp/>of<sp/>menu<sp/>item<sp/>entity<sp/>handles<sp/>and<sp/>tracks<sp/>the<sp/>currently<sp/>selected<sp/>index.</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>UiTextComponent</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">Wraps<sp/>a<sp/>`TextRenderable`<sp/>and<sp/>provides<sp/>template-based<sp/>value<sp/>display.<sp/>Supports<sp/>dirty<sp/>tracking<sp/>to<sp/>minimize<sp/>updates.</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">###<sp/>Key<sp/>Methods</highlight></codeline>
+<codeline><highlight class="normal">##<sp/>UiStateComponent</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">|<sp/>Method<sp/>|<sp/>Description<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|--------|-------------|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`setTemplate()`<sp/>|<sp/>Sets<sp/>the<sp/>format<sp/>template<sp/>(uses<sp/>`std::format`<sp/>syntax)<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`setDouble()`<sp/>|<sp/>Sets<sp/>the<sp/>numeric<sp/>value<sp/>to<sp/>display<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`needsResize()`<sp/>|<sp/>Returns<sp/>`true`<sp/>if<sp/>bounds<sp/>need<sp/>recalculation<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`resizeComplete()`<sp/>|<sp/>Marks<sp/>resize<sp/>as<sp/>complete<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">Tracks<sp/>common<sp/>UI<sp/>interaction<sp/>states:<sp/>selected,<sp/>hovered,<sp/>focused,<sp/>enabled,<sp/>and<sp/>pressed.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>UiStyleComponent</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Defines<sp/>visual<sp/>properties<sp/>for<sp/>different<sp/>states,<sp/>including<sp/>colors<sp/>(normal,<sp/>selected,<sp/>disabled)<sp/>and<sp/>scale<sp/>factors.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>UiFocusComponent</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Stores<sp/>an<sp/>optional<sp/>reference<sp/>to<sp/>the<sp/>currently<sp/>focused<sp/>entity<sp/>for<sp/>input<sp/>handling.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>UiActionComponent</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Associates<sp/>an<sp/>`ActionId`<sp/>with<sp/>a<sp/>UI<sp/>element<sp/>that<sp/>can<sp/>be<sp/>triggered<sp/>when<sp/>the<sp/>element<sp/>is<sp/>activated.</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>
 <codeline></codeline>
@@ -39,7 +55,7 @@
 <codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
 <codeline><highlight class="normal">@namespace<sp/>helios::engine::modules::ui::widgets::components</highlight></codeline>
 <codeline><highlight class="normal">@brief<sp/>UI<sp/>widget<sp/>state<sp/>components.</highlight></codeline>
-<codeline><highlight class="normal">@details<sp/>Contains<sp/>components<sp/>for<sp/>UI<sp/>widgets.<sp/>UiTextComponent<sp/>provides<sp/>template-based<sp/>text<sp/>display<sp/>with<sp/>dirty<sp/>tracking<sp/>for<sp/>efficient<sp/>updates.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Contains<sp/>components<sp/>for<sp/>UI<sp/>widgets<sp/>including<sp/>menus,<sp/>text,<sp/>interaction<sp/>state,<sp/>styling,<sp/>focus<sp/>tracking,<sp/>and<sp/>action<sp/>binding.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
     </programlisting>
     <location file="/tmp/h/include/helios/engine/modules/ui/widgets/components/README.md"/>

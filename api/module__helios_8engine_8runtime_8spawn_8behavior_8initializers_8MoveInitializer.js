@@ -11,5 +11,6 @@ var module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8MoveInitiali
     [ "helios::engine::runtime::spawn::behavior::initializers::MoveInitializer::MoveInitializer", "module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8MoveInitializer.html#ae895c56c346fad65c5246eb3bbfcb732", null ],
     [ "helios::engine::runtime::spawn::behavior::initializers::MoveInitializer::MoveInitializer", "module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8MoveInitializer.html#a4905d1db361b9e45967cc2a249b7c00e", null ],
     [ "helios::engine::runtime::spawn::behavior::initializers::MoveInitializer::MoveInitializer", "module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8MoveInitializer.html#ad459bfb349bf4d8882af3c3c5307b764", null ],
-    [ "helios::engine::runtime::spawn::behavior::initializers::MoveInitializer::initialize", "module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8MoveInitializer.html#ae047147f4547547c56e5e94233e81ce0", null ]
+    [ "helios::engine::runtime::spawn::behavior::initializers::MoveInitializer::initialize", "module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8MoveInitializer.html#ae047147f4547547c56e5e94233e81ce0", null ],
+    [ "helios::engine::runtime::spawn::behavior::initializers::MoveInitializer::onReset", "module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8MoveInitializer.html#a52da231cb8c38e7217bed1a9c3a4d423", null ]
 ];

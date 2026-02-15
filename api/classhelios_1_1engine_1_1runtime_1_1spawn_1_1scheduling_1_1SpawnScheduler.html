@@ -130,6 +130,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a61670b5004b39c53a0de3d59c1b10f8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Drains and returns all scheduled spawn plans.  <br /></td></tr>
 <tr class="memitem:a7a7feaf2f36c3e38b880e183e3458749" id="r_a7a7feaf2f36c3e38b880e183e3458749"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7a7feaf2f36c3e38b880e183e3458749">commit</a> (const <a class="el" href="structhelios_1_1engine_1_1core_1_1data_1_1SpawnRuleId.html">helios::engine::core::data::SpawnRuleId</a> spawnRuleId, const size_t spawnCount) noexcept=0</td></tr>
 <tr class="memdesc:a7a7feaf2f36c3e38b880e183e3458749"><td class="mdescLeft">&#160;</td><td class="mdescRight">Commits a completed spawn operation to update rule state.  <br /></td></tr>
+<tr class="memitem:aa8939dcb68a9af4e835f73e3ea986e3f" id="r_aa8939dcb68a9af4e835f73e3ea986e3f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa8939dcb68a9af4e835f73e3ea986e3f">reset</a> () noexcept=0</td></tr>
+<tr class="memdesc:aa8939dcb68a9af4e835f73e3ea986e3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets all rule states to their initial values.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -155,7 +157,7 @@ std::vector&lt; <a class="el" href="structhelios_1_1engine_1_1runtime_1_1spawn_1
 <dd>
 <a class="el" href="structhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1ScheduledSpawnPlan.html" title="A spawn plan that has been scheduled for execution.">ScheduledSpawnPlan</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SpawnScheduler_8ixx_source.html#l00052">52</a> of file <a class="el" href="SpawnScheduler_8ixx_source.html">SpawnScheduler.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SpawnScheduler_8ixx_source.html#l00051">51</a> of file <a class="el" href="SpawnScheduler_8ixx_source.html">SpawnScheduler.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a78ade769a3425fe857497925d2dcefb8" name="a78ade769a3425fe857497925d2dcefb8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a78ade769a3425fe857497925d2dcefb8">&#9670;&#160;</a></span>~SpawnScheduler()</h2>
@@ -280,9 +282,9 @@ std::vector&lt; <a class="el" href="structhelios_1_1engine_1_1runtime_1_1spawn_1
 <p>Moves all pending plans out of the scheduler and returns them. The internal buffer is left empty.</p>
 <dl class="section return"><dt>Returns</dt><dd>Vector of scheduled spawn plans. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SpawnScheduler_8ixx_source.html#l00105">105</a> of file <a class="el" href="SpawnScheduler_8ixx_source.html">SpawnScheduler.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SpawnScheduler_8ixx_source.html#l00104">104</a> of file <a class="el" href="SpawnScheduler_8ixx_source.html">SpawnScheduler.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="SpawnScheduler_8ixx_source.html#l00059">scheduledSpawnPlans_</a>.</p>
+<p class="reference">References <a class="el" href="SpawnScheduler_8ixx_source.html#l00058">scheduledSpawnPlans_</a>.</p>
 
 </div>
 </div>
@@ -327,6 +329,36 @@ std::vector&lt; <a class="el" href="structhelios_1_1engine_1_1runtime_1_1spawn_1
 
 </div>
 </div>
+<a id="aa8939dcb68a9af4e835f73e3ea986e3f" name="aa8939dcb68a9af4e835f73e3ea986e3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8939dcb68a9af4e835f73e3ea986e3f">&#9670;&#160;</a></span>reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void helios::engine::runtime::spawn::scheduling::SpawnScheduler::reset </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel pure-virtual">pure virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Resets all rule states to their initial values. </p>
+<p>Called during level transitions or game restarts. </p>
+
+<p>Implemented in <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler.html#a78aaa4935e379c7339cd01939a70c0d0">helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler&lt; N &gt;</a>, and <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1DefaultSpawnScheduler.html#abebf8e3617bbff5113bacc7da76ff795">helios::engine::runtime::spawn::scheduling::DefaultSpawnScheduler</a>.</p>
+
+</div>
+</div>
 <a id="ad35f027f53cd022471b2c96d466e263e" name="ad35f027f53cd022471b2c96d466e263e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad35f027f53cd022471b2c96d466e263e">&#9670;&#160;</a></span>scheduledPlans()</h2>
 
@@ -353,9 +385,9 @@ std::vector&lt; <a class="el" href="structhelios_1_1engine_1_1runtime_1_1spawn_1
 <p>Returns a read-only view of scheduled spawn plans. </p>
 <dl class="section return"><dt>Returns</dt><dd>Span of currently scheduled plans. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SpawnScheduler_8ixx_source.html#l00093">93</a> of file <a class="el" href="SpawnScheduler_8ixx_source.html">SpawnScheduler.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SpawnScheduler_8ixx_source.html#l00092">92</a> of file <a class="el" href="SpawnScheduler_8ixx_source.html">SpawnScheduler.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="SpawnScheduler_8ixx_source.html#l00059">scheduledSpawnPlans_</a>.</p>
+<p class="reference">References <a class="el" href="SpawnScheduler_8ixx_source.html#l00058">scheduledSpawnPlans_</a>.</p>
 
 </div>
 </div>

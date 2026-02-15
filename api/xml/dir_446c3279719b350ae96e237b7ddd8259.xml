@@ -11,11 +11,11 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_446c3279719b350ae96e237b7ddd8259_1autotoc_md452">
+<sect1 id="dir_446c3279719b350ae96e237b7ddd8259_1autotoc_md535">
 <title>helios::engine::runtime::gameloop</title><para>Central game loop orchestration module providing phased system execution.</para>
 <para>The <computeroutput>gameloop</computeroutput> module provides the core infrastructure for managing the game update cycle. It organizes systems into a hierarchical structure of phases and passes, enabling deterministic execution order and event synchronization.</para>
 </sect1>
-<sect1 id="dir_446c3279719b350ae96e237b7ddd8259_1autotoc_md453">
+<sect1 id="dir_446c3279719b350ae96e237b7ddd8259_1autotoc_md536">
 <title>Architecture</title><para>The game loop follows a three-phase architecture:</para>
 <para><bold>Pre Phase</bold> — Processes input and generates commands. Systems in this phase read player input and enqueue commands into the CommandBuffer.</para>
 <para><bold>Main Phase</bold> — Executes core gameplay simulation. This includes physics, AI, game logic, and collision detection systems.</para>
@@ -23,7 +23,7 @@
 <para>Each phase contains one or more passes. A pass groups related systems and can optionally define a commit point for event synchronization within the phase.</para>
 <para>Commands can be enqueued into the CommandBuffer during any phase, not just the Pre phase. After each phase completes, the CommandBuffer is flushed and all registered managers process their pending requests. This ensures that spawn/despawn operations and other deferred actions are executed at well-defined points in the update cycle.</para>
 </sect1>
-<sect1 id="dir_446c3279719b350ae96e237b7ddd8259_1autotoc_md454">
+<sect1 id="dir_446c3279719b350ae96e237b7ddd8259_1autotoc_md537">
 <title>Key Components</title><para><bold>GameLoop</bold> is the central orchestrator that owns the three phases, the CommandBuffer, and the event buses. It drives the frame update by iterating through all phases and committing events and commands after each phase.</para>
 <para><bold>Phase</bold> represents a distinct stage in the update cycle. Phases contain passes and are executed in fixed order (Pre → Main → Post).</para>
 <para><bold>Pass</bold> contains a registry of systems that execute sequentially. Passes support commit points to synchronize pass-level events before the next pass begins.</para>
@@ -36,14 +36,14 @@
 </para>
 <para>Flags can be combined using bitwise OR to trigger multiple actions at once.</para>
 </sect1>
-<sect1 id="dir_446c3279719b350ae96e237b7ddd8259_1autotoc_md455">
+<sect1 id="dir_446c3279719b350ae96e237b7ddd8259_1autotoc_md538">
 <title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="preprocessor">#include<sp/>&quot;helios/engine/gameloop/GameLoop.ixx&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"><ref refid="namespacehelios" kindref="compound">helios</ref>.<ref refid="namespacehelios_1_1engine" kindref="compound">engine</ref>.<ref refid="namespacehelios_1_1engine_1_1runtime" kindref="compound">runtime</ref>.<ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop" kindref="compound">gameloop</ref>.<ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop" kindref="compound">GameLoop</ref><sp/>gameLoop;</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Configure<sp/>Pre<sp/>phase</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal">gameLoop.<ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a72b7ba2e6461d61b0f384a3d7b940a82" kindref="member">phase</ref>(<ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1aa57e7c5caf8850bd2c56ef8d345afa71" kindref="member">PhaseType</ref>.Pre)</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.<ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase_1ab6843bc03abe3867cd46c4888f88176f" kindref="member">addPass</ref>()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.<ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase_1a14ac55084488132a02512a95cf79585a" kindref="member">addPass</ref>()</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.add&lt;InputSystem&gt;(&amp;inputManager);</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Configure<sp/>Main<sp/>phase<sp/>with<sp/>custom<sp/>commit<sp/>points</highlight><highlight class="normal"></highlight></codeline>
@@ -53,7 +53,7 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.add&lt;HeadingSystem&gt;(&amp;gameWorld)</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Commit<sp/>pass<sp/>events<sp/>and<sp/>flush<sp/>commands,<sp/>but<sp/>defer<sp/>manager<sp/>flush</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.<ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass_1a36ee909a78fabac1cf997d98b0f8438c" kindref="member">addCommitPoint</ref>(CommitPoint::PassEvents<sp/>|<sp/>CommitPoint::FlushCommands)</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.<ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase_1ab6843bc03abe3867cd46c4888f88176f" kindref="member">addPass</ref>()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.<ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase_1a14ac55084488132a02512a95cf79585a" kindref="member">addPass</ref>()</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>CollisionSystem<sp/>can<sp/>now<sp/>read<sp/>events<sp/>from<sp/>the<sp/>previous<sp/>pass</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.add&lt;CollisionSystem&gt;(&amp;gameWorld)</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Full<sp/>structural<sp/>commit:<sp/>events,<sp/>commands,<sp/>and<sp/>managers</highlight><highlight class="normal"></highlight></codeline>
@@ -75,13 +75,13 @@
 <codeline><highlight class="normal">}</highlight></codeline>
 </programlisting></para>
 </sect1>
-<sect1 id="dir_446c3279719b350ae96e237b7ddd8259_1autotoc_md456">
+<sect1 id="dir_446c3279719b350ae96e237b7ddd8259_1autotoc_md539">
 <title>Event Synchronization</title><para>The game loop provides three levels of event synchronization:</para>
 <para><bold>Pass-level events</bold> are synchronized at commit points within a phase. This allows systems in the next pass to react to events generated by the previous pass - within the same phase. Pass-level events are discarded at the end of the phase and do not carry over to the next phase.</para>
 <para><bold>Phase-level events</bold> are synchronized after each phase completes. Only events written via <computeroutput>pushPhase()</computeroutput> are available to systems in the following phase. Commands are flushed and managers process their requests at phase boundaries.</para>
 <para><bold>Frame-level events</bold> are synchronized at the end of the Post phase. Events written via <computeroutput>pushFrame()</computeroutput> become readable in the next frame via <computeroutput>readFrame()</computeroutput>. This is useful for cross-frame communication such as audio/VFX triggers, UI updates, or analytics events.</para>
 </sect1>
-<sect1 id="dir_446c3279719b350ae96e237b7ddd8259_1autotoc_md457">
+<sect1 id="dir_446c3279719b350ae96e237b7ddd8259_1autotoc_md540">
 <title>CommitPoint Configuration</title><para>Commit points provide fine-grained control over synchronization within a phase. By default, <computeroutput>addCommitPoint()</computeroutput> uses <computeroutput>CommitPoint::PassEvents</computeroutput> which only synchronizes pass-level events.</para>
 <para>For more control, specify the desired flags explicitly:</para>
 <para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Only<sp/>synchronize<sp/>pass<sp/>events<sp/>(default)</highlight><highlight class="normal"></highlight></codeline>

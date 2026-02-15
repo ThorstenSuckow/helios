@@ -97,9 +97,50 @@ int main() {
     const auto basicStringFileReader = BasicStringFileReader();
 
     // ui related config
+
+    // +----------------------------
+    // | Title
+    // +----------------------------
+    auto titleScene = std::make_unique<helios::scene::Scene>(
+       std::make_unique<helios::scene::CullNoneStrategy>()
+    );
+
+    // Create a viewport for UI rendering.
+    auto titleViewport = std::make_shared<helios::rendering::Viewport>(
+        // move the viewport to the upper right
+        0.0f, 0.0f, 1.0f, 1.0f, helios::engine::core::data::ViewportId{"titleViewport"}
+    );
+
+    titleViewport->setClearFlags(std::to_underlying(helios::rendering::ClearFlags::Depth));
+
+
+    // Configure orthographic camera for 2D text rendering.
+    // Origin (0,0) is at the bottom-left corner of the screen.
+    auto titleCamera = std::make_unique<helios::scene::Camera>();
+    auto titleCameraSceneNode = std::make_unique<helios::scene::CameraSceneNode>(std::move(titleCamera));
+    auto* titleCameraSceneNode_ptr = titleCameraSceneNode.get();
+
+    titleCameraSceneNode_ptr->setInheritance(helios::math::TransformType::Translation);
+    titleViewport->setCameraSceneNode(titleCameraSceneNode_ptr);
+    titleCameraSceneNode_ptr->setTranslation(helios::math::vec3f(0.0f, 0.0f, -100.0f));
+    titleCameraSceneNode_ptr->camera().setOrtho(
+        0, SCREEN_WIDTH, 0, SCREEN_HEIGHT);
+    titleCameraSceneNode_ptr->lookAtLocal(
+        helios::math::vec3f(0.0f, 0.0f, 0.0f),
+        helios::math::vec3f(0.0f, 1.0f, 0.0f)
+    );
+
+    // add camera first, then add the viewport - the camera needs the render target's size,
+    // so the proper order is important.
+    win->addViewport(titleViewport);
+    std::ignore = titleScene->addNode(std::move(titleCameraSceneNode));
+
+    // +----------------------------
+    // | HUD
+    // +----------------------------
     auto hudScene = std::make_unique<helios::scene::Scene>(
        std::make_unique<helios::scene::CullNoneStrategy>()
-   );
+    );
 
     // Create a viewport for UI rendering.
     auto hudViewport = std::make_shared<helios::rendering::Viewport>(
@@ -130,6 +171,45 @@ int main() {
     // so the proper order is important.
     win->addViewport(hudViewport);
     std::ignore = hudScene->addNode(std::move(hudCameraSceneNode));
+
+
+    // +----------------------------
+    // | MENU
+    // +----------------------------
+    auto menuScene = std::make_unique<helios::scene::Scene>(
+       std::make_unique<helios::scene::CullNoneStrategy>()
+    );
+
+    // Create a viewport for UI rendering.
+    auto menuViewport = std::make_shared<helios::rendering::Viewport>(
+        0.0f, 0.0f, 1.0f, 1.0f, helios::engine::core::data::ViewportId{"menuViewport"}
+    );
+
+    menuViewport->setClearFlags(std::to_underlying(helios::rendering::ClearFlags::Depth));
+
+
+    // Configure orthographic camera for 2D text rendering.
+    // Origin (0,0) is at the bottom-left corner of the screen.
+    auto menuCamera = std::make_unique<helios::scene::Camera>();
+    auto menuCameraSceneNode = std::make_unique<helios::scene::CameraSceneNode>(std::move(menuCamera));
+    auto* menuCameraSceneNode_ptr = menuCameraSceneNode.get();
+
+    menuCameraSceneNode_ptr->setInheritance(helios::math::TransformType::Translation);
+    menuViewport->setCameraSceneNode(menuCameraSceneNode_ptr);
+    menuCameraSceneNode_ptr->setTranslation(helios::math::vec3f(0.0f, 0.0f, -100.0f));
+    menuCameraSceneNode_ptr->camera().setOrtho(
+        0, SCREEN_WIDTH, 0, SCREEN_HEIGHT);
+    menuCameraSceneNode_ptr->lookAtLocal(
+        helios::math::vec3f(0.0f, 0.0f, 0.0f),
+        helios::math::vec3f(0.0f, 1.0f, 0.0f)
+    );
+
+    // add camera first, then add the viewport - the camera needs the render target's size,
+    // so the proper order is important.
+    win->addViewport(menuViewport);
+    std::ignore = menuScene->addNode(std::move(menuCameraSceneNode));
+
+
 
     // ========================================
     // 1.2. ImGui & Tooling Setup
@@ -255,9 +335,12 @@ int main() {
     // 5.5 Font Loading
     // ========================================================================
     // Load the font via the rendering device's font resource provider.
-    auto fontIdRoboto = helios::engine::core::data::FontId{"roboto"};
+    auto gameTitleFont = helios::engine::core::data::FontId{"titleBig"};
     auto& fontResourceProvider = app->renderingDevice().fontResourceProvider();
-    fontResourceProvider.loadFont(fontIdRoboto, 24, "resources/Roboto-SemiBoldItalic.ttf");
+    fontResourceProvider.loadFont(gameTitleFont, 96, "resources/Tiny5/Tiny5-Regular.ttf");//"Roboto-SemiBoldItalic.ttf");
+
+    auto uiTextFont = helios::engine::core::data::FontId{"uiMed"};
+    fontResourceProvider.loadFont(uiTextFont, 32, "resources/Tiny5/Tiny5-Regular.ttf");
 
     // ========================================================================
     // 5.6. Text Prototype and Renderable Creation
@@ -274,12 +357,213 @@ int main() {
     // 6. GameObject Prefabs
     // ========================================
 
+    auto titleText = helios::engine::builder::gameObject::GameObjectFactory::instance()
+        .gameObject(gameWorld)
+        .withRendering([&](auto& rnb) {
+            rnb.textRenderable()
+               .text("helios ascending")
+               .fontId(gameTitleFont)
+               .fontScale(1.0f)
+               .fontResourceProvider(app->renderingDevice().fontResourceProvider())
+               .shader(glyphShader)
+               .color(helios::util::Colors::WhiteSmoke)
+               .attachTo(&titleScene->root());
+
+        })
+        .withUiTransform([](auto& tb) {
+            tb.transform()
+              .pivot(helios::engine::modules::ui::layout::Anchor::Center)
+              .viewport(helios::engine::core::data::ViewportId{"titleViewport"})
+              .anchor(helios::engine::modules::ui::layout::Anchor::Center)
+              .offsets({-100.0f, 0.0f, 0.0f, 0.0f});
+
+        })
+        .make();
+
+    auto pressStartText = helios::engine::builder::gameObject::GameObjectFactory::instance()
+        .gameObject(gameWorld)
+        .withRendering([&](auto& rnb) {
+            rnb.textRenderable()
+               .text("press start")
+               .fontId(uiTextFont)
+               .fontScale(1.0f)
+               .fontResourceProvider(app->renderingDevice().fontResourceProvider())
+               .shader(glyphShader)
+               .color(helios::util::Colors::LightGray)
+               .attachTo(&titleScene->root());
+
+        })
+        .withUiTransform([](auto& tb) {
+            tb.transform()
+              .pivot(helios::engine::modules::ui::layout::Anchor::Center)
+              .viewport(helios::engine::core::data::ViewportId{"titleViewport"})
+              .anchor(helios::engine::modules::ui::layout::Anchor::Center)
+              .offsets({40.0f, 0.0f, 0.0f, 0.0f});
+
+        })
+        .make();
+
+    auto menuPauseText = helios::engine::builder::gameObject::GameObjectFactory::instance()
+        .gameObject(gameWorld)
+        .withRendering([&](auto& rnb) {
+            rnb.textRenderable()
+               .text("pause")
+               .fontId(uiTextFont)
+               .fontScale(1.0f)
+               .fontResourceProvider(app->renderingDevice().fontResourceProvider())
+               .shader(glyphShader)
+               .color(helios::util::Colors::LightGray)
+               .attachTo(&menuScene->root());
+        })
+        .withUiTransform([](auto& tb) {
+            tb.transform()
+              .pivot(helios::engine::modules::ui::layout::Anchor::BottomLeft)
+              .viewport(helios::engine::core::data::ViewportId{"menuViewport"})
+              .anchor(helios::engine::modules::ui::layout::Anchor::BottomLeft)
+              .offsets({0.0f, 0.0f, 50.0f, 50.0f});
+        })
+        .make(true);
+
+    auto menuBox = helios::engine::builder::gameObject::GameObjectFactory::instance()
+        .gameObject(gameWorld)
+        .withRendering([&](auto& rnb) {
+            rnb.meshRenderable()
+               .shader(defaultShader)
+               .color(helios::util::Colors::Turquoise.withW(0.8f))
+               .primitiveType(helios::rendering::mesh::PrimitiveType::LineLoop)
+               .shape(std::make_shared<helios::rendering::asset::shape::basic::Rectangle>())
+               .attachTo(&menuScene->root());
+        })
+        .withMenu([](auto& mb) {
+            mb.menu()
+              .menuId(helios::engine::core::data::MenuId{"MainMenu"});
+        })
+        .withTransform([](auto& tb) {
+            tb.transform()
+              .scale(helios::math::vec3f(600.0f, 400.0f, 0.0f));
+        })
+         .withUiTransform([](auto& tb) {
+            tb.transform()
+              .pivot(helios::engine::modules::ui::layout::Anchor::Center)
+              .viewport(helios::engine::core::data::ViewportId{"menuViewport"})
+              .anchor(helios::engine::modules::ui::layout::Anchor::Center)
+              .offsets({0.0f, 0.0f, 0.0f, 0.0f});
+        })
+        .make(true);
+
+
+    auto continueText = helios::engine::builder::gameObject::GameObjectFactory::instance()
+        .gameObject(gameWorld)
+        .withRendering([&](auto& rnb) {
+            rnb.textRenderable()
+               .text("continue")
+               .asUiText()
+               .fontId(uiTextFont)
+               .fontScale(1.0f)
+               .fontResourceProvider(app->renderingDevice().fontResourceProvider())
+               .shader(glyphShader)
+               .color(helios::util::Colors::LightGray)
+               .attachTo(menuBox)
+               .inherit(helios::math::TransformType::Translation);
+
+        })
+
+        .withMenu([&](auto& mb) {
+            mb.menuItem(menuBox)
+              .index(0)
+              .normalScale(1.0f)
+              .selectedScale(1.2f)
+              .actionId(helios::engine::core::data::ActionId{"continueGame"})
+              .normalColor(helios::util::Colors::LightGray)
+              .selectedColor(helios::util::Colors::White)
+              .selected(true);
+        })
+        .withUiTransform([](auto& tb) {
+            tb.transform()
+              .pivot(helios::engine::modules::ui::layout::Anchor::TopLeft)
+              .viewport(helios::engine::core::data::ViewportId{"menuViewport"})
+              .anchor(helios::engine::modules::ui::layout::Anchor::TopLeft)
+              .offsets({80.0f, 0.0f, 0.0f, 80.0f});
+
+        })
+        .make(true);
+
+    auto restartText = helios::engine::builder::gameObject::GameObjectFactory::instance()
+        .gameObject(gameWorld)
+        .withRendering([&](auto& rnb) {
+            rnb.textRenderable()
+               .text("restart")
+               .asUiText()
+               .fontId(uiTextFont)
+               .fontScale(1.0f)
+               .fontResourceProvider(app->renderingDevice().fontResourceProvider())
+               .shader(glyphShader)
+               .color(helios::util::Colors::LightGray)
+               .attachTo(menuBox)
+               .inherit(helios::math::TransformType::Translation);
+
+        })
+        .withMenu([&](auto& mb) {
+             mb.menuItem(menuBox)
+               .index(1)
+               .normalScale(1.0f)
+               .selectedScale(1.2f)
+               .actionId(helios::engine::core::data::ActionId{"restartGame"})
+               .normalColor(helios::util::Colors::LightGray)
+               .selectedColor(helios::util::Colors::White)
+               .selected(false);
+        })
+        .withUiTransform([](auto& tb) {
+            tb.transform()
+              .pivot(helios::engine::modules::ui::layout::Anchor::TopLeft)
+              .viewport(helios::engine::core::data::ViewportId{"menuViewport"})
+              .anchor(helios::engine::modules::ui::layout::Anchor::TopLeft)
+              .offsets({120.0f, 0.0f, 0.0f, 80.0f});
+
+        })
+        .make(true);
+
+    auto quitText = helios::engine::builder::gameObject::GameObjectFactory::instance()
+        .gameObject(gameWorld)
+        .withRendering([&](auto& rnb) {
+            rnb.textRenderable()
+               .text("quit")
+               .asUiText()
+               .fontId(uiTextFont)
+               .fontScale(1.0f)
+               .fontResourceProvider(app->renderingDevice().fontResourceProvider())
+               .shader(glyphShader)
+               .color(helios::util::Colors::LightGray)
+               .attachTo(menuBox)
+               .inherit(helios::math::TransformType::Translation);
+
+        })
+        .withMenu([&](auto& mb) {
+            mb.menuItem(menuBox)
+              .normalColor(helios::util::Colors::LightGray)
+              .normalScale(1.0f)
+              .selectedScale(1.2f)
+              .actionId(helios::engine::core::data::ActionId{"quitGame"})
+              .selectedColor(helios::util::Colors::White)
+              .index(2)
+              .selected(false);
+        })
+        .withUiTransform([](auto& tb) {
+            tb.transform()
+              .pivot(helios::engine::modules::ui::layout::Anchor::TopLeft)
+              .viewport(helios::engine::core::data::ViewportId{"menuViewport"})
+              .anchor(helios::engine::modules::ui::layout::Anchor::TopLeft)
+              .offsets({160.0f, 0.0f, 0.0f, 80.0f});
+
+        })
+        .make(true);
+
     auto scoreText = helios::engine::builder::gameObject::GameObjectFactory::instance()
         .gameObject(gameWorld)
         .withRendering([&](auto& rnb) {
             rnb.textRenderable()
                .text("0")
-               .fontId(fontIdRoboto)
+               .fontId(uiTextFont)
                .fontScale(1.0f)
                .fontResourceProvider(app->renderingDevice().fontResourceProvider())
                .shader(glyphShader)
@@ -297,7 +581,7 @@ int main() {
               .pivot(helios::engine::modules::ui::layout::Anchor::TopRight)
               .viewport(helios::engine::core::data::ViewportId{"hudViewport"})
               .anchor(helios::engine::modules::ui::layout::Anchor::TopRight)
-              .margins({60.0f, 50.0f, 0.0f, 0.0f});
+              .offsets({60.0f, 50.0f, 0.0f, 0.0f});
 
         })
         .make();
@@ -307,8 +591,8 @@ int main() {
         .withRendering([&](auto& rnb) {
             rnb.textRenderable()
                .text("Highscore: 00000000")
-               .fontId(fontIdRoboto)
-               .fontScale(0.6f)
+               .fontId(uiTextFont)
+               .fontScale(0.8f)
                .fontResourceProvider(app->renderingDevice().fontResourceProvider())
                .shader(glyphShader)
                .color(helios::util::Colors::LightGray)
@@ -319,7 +603,7 @@ int main() {
               .pivot(helios::engine::modules::ui::layout::Anchor::TopRight)
               .viewport(helios::engine::core::data::ViewportId{"hudViewport"})
               .anchor(helios::engine::modules::ui::layout::Anchor::TopRight)
-              .margins({25.0f, 50.0f, 0.0f, 0.0f});
+              .offsets({25.0f, 50.0f, 0.0f, 0.0f});
         })
         .make();
 
@@ -718,6 +1002,61 @@ int main() {
     auto& poolManager      = gameWorld.addManager<helios::engine::runtime::pooling::GameObjectPoolManager>();
     auto& scorePoolManager = gameWorld.addManager<helios::engine::mechanics::scoring::ScorePoolManager>();
     auto& spawnManager     = gameWorld.addManager<helios::engine::runtime::spawn::SpawnManager>();
+    auto& gameStateManager = gameWorld.addManager<helios::engine::mechanics::gamestate::GameStateManager>();
+    auto& matchStateManager = gameWorld.addManager<helios::engine::mechanics::match::MatchStateManager>();
+    auto& uiActionCommandManager = gameWorld.addManager<helios::engine::modules::ui::UiActionCommandManager>();
+
+    matchStateManager.addMatchStateListener(
+        std::make_unique<helios::engine::mechanics::match::listeners::PlayerSpawnListener>(shipGameObject)
+    );
+
+
+
+    uiActionCommandManager.addPolicy(
+        helios::engine::core::data::ActionId{"continueGame"},
+        [](
+            helios::engine::runtime::world::UpdateContext& updateContext,
+            const helios::engine::modules::ui::commands::UiActionCommand& actionCommand) noexcept -> void {
+            updateContext.commandBuffer().add<helios::engine::mechanics::gamestate::commands::GameStateCommand>(
+                helios::engine::mechanics::gamestate::types::GameStateTransitionRequest(
+                    helios::engine::mechanics::gamestate::types::GameState::Paused,
+                    helios::engine::mechanics::gamestate::types::GameStateTransitionId::TogglePause
+                )
+            );
+        }
+    ).addPolicy(
+        helios::engine::core::data::ActionId{"quitGame"},
+        [](
+            helios::engine::runtime::world::UpdateContext& updateContext,
+            const helios::engine::modules::ui::commands::UiActionCommand& actionCommand) noexcept -> void {
+            updateContext.commandBuffer().add<helios::engine::mechanics::gamestate::commands::GameStateCommand>(
+                helios::engine::mechanics::gamestate::types::GameStateTransitionRequest(
+                    helios::engine::mechanics::gamestate::types::GameState::Paused,
+                    helios::engine::mechanics::gamestate::types::GameStateTransitionId::QuitGameRequested
+                )
+            );
+        }
+    ).addPolicy(
+        helios::engine::core::data::ActionId{"restartGame"},
+        [](
+            helios::engine::runtime::world::UpdateContext& updateContext,
+            const helios::engine::modules::ui::commands::UiActionCommand& actionCommand) noexcept -> void {
+            updateContext.commandBuffer().add<helios::engine::mechanics::gamestate::commands::GameStateCommand>(
+                helios::engine::mechanics::gamestate::types::GameStateTransitionRequest(
+                    helios::engine::mechanics::gamestate::types::GameState::Paused,
+                    helios::engine::mechanics::gamestate::types::GameStateTransitionId::RestartRequested
+                )
+            );
+        }
+    );
+
+    gameStateManager.addGameStateListener(
+        std::make_unique<helios::engine::mechanics::gamestate::listeners::FocusMenuListener>(
+            helios::engine::core::data::MenuId{"MainMenu"}
+        )
+    ).addGameStateListener(
+        std::make_unique<helios::engine::mechanics::gamestate::listeners::WorldResetListener>()
+    );
 
     scorePoolManager.addScorePool(helios::engine::core::data::ScorePoolId{"playerOneScorePool"});
 
@@ -810,7 +1149,7 @@ int main() {
   //  blueEnemyMassScheduler->addSpawnCommandModifier(std::make_unique<helios::engine::runtime::spawn::DeferSpawn>(1.0f));
 
 
-    spawnSchedulers.push_back(std::move(blueEnemyMassScheduler));
+    spawnManager.addScheduler(std::move(blueEnemyMassScheduler));
     // +-------------------------------------
     // | ^^ EO blue enemy spawn config
     // +-------------------------------------
@@ -924,7 +1263,8 @@ int main() {
     spawnManager.addSpawnProfile(TopRowSpawnProfileId, std::move(topRowSpawnProfile));
     spawnManager.addSpawnProfile(BottomRowSpawnProfileId, std::move(bottomRowSpawnProfile));
 
-    spawnSchedulers.push_back(std::move(orangeEnemySpawnScheduler));
+    spawnManager.addScheduler(std::move(orangeEnemySpawnScheduler));
+
 
     // +-------------------------------------
     // | ^^ EO orange enemy spawn config
@@ -953,7 +1293,7 @@ int main() {
     // bind the spawn rules to the SpawnProfiles
     purpleEnemySpawnScheduler->addRule(RandomSpawnSpawnProfileId, std::move(purpleEnemySpawnRule));
 
-    spawnSchedulers.push_back(std::move(purpleEnemySpawnScheduler));
+    spawnManager.addScheduler(std::move(purpleEnemySpawnScheduler));
 
     // ========================================
     // 8. Command Dispatchers
@@ -967,6 +1307,12 @@ int main() {
      std::make_unique<helios::engine::runtime::spawn::dispatcher::DespawnCommandDispatcher>()
     ).addDispatcher<helios::engine::mechanics::scoring::commands::UpdateScoreCommand>(
         std::make_unique<helios::engine::mechanics::scoring::ScoreCommandDispatcher>()
+    ).addDispatcher<helios::engine::mechanics::gamestate::commands::GameStateCommand>(
+        std::make_unique<helios::engine::mechanics::gamestate::dispatcher::GameStateCommandDispatcher>()
+    ).addDispatcher<helios::engine::modules::ui::commands::UiActionCommand>(
+        std::make_unique<helios::engine::modules::ui::commands::UiActionCommandDispatcher>()
+    ).addDispatcher<helios::engine::mechanics::match::commands::MatchStateCommand>(
+        std::make_unique<helios::engine::mechanics::match::dispatcher::MatchStateCommandDispatcher>()
     );
 
     // ========================================
@@ -983,16 +1329,30 @@ int main() {
     // | PRE PHASE: Input, Spawning, Movement
     // +----------------------------------------------
 
+    auto RunningAndTitle = helios::engine::mechanics::gamestate::GameState::Running |
+                          helios::engine::mechanics::gamestate::GameState::Title;
+
     gameLoop.phase(helios::engine::runtime::gameloop::PhaseType::Pre)
-            .addPass()
+            .addPass(helios::engine::mechanics::gamestate::GameState::Any)
+            .addSystem<helios::engine::mechanics::gamestate::systems::GameStateInputResponseSystem>()
             .addSystem<helios::engine::mechanics::scoring::systems::ScoreObserverSystem>()
             .addSystem<helios::engine::mechanics::input::systems::TwinStickInputSystem>(shipGameObject)
+
             .addCommitPoint(helios::engine::runtime::gameloop::CommitPoint::Structural)
-            .addPass()
-            .addSystem<helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem>(std::move(spawnSchedulers))
+
+
+            .addPass(helios::engine::mechanics::gamestate::GameState::Running)
+            .addSystem<helios::engine::mechanics::match::systems::MatchFlowSystem>()
+
+            .addCommitPoint(helios::engine::runtime::gameloop::CommitPoint::Structural)
+
+
+            .addPass(RunningAndTitle)
+            .addSystem<helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem>(spawnManager)
             .addSystem<helios::engine::mechanics::combat::systems::ProjectileSpawnSystem>(ProjectileSpawnSpawnProfileId)
             .addCommitPoint(helios::engine::runtime::gameloop::CommitPoint::Structural)
-            .addPass()
+
+            .addPass(RunningAndTitle)
             .addSystem<helios::engine::modules::ai::systems::ChaseSystem>()
             .addSystem<helios::engine::modules::spatial::transform::systems::ScaleSystem>()
             .addSystem<helios::engine::modules::physics::motion::systems::SteeringSystem>()
@@ -1002,18 +1362,24 @@ int main() {
     // +----------------------------------------------
     // | MAIN PHASE: Collision Detection and Response
     // +----------------------------------------------
+    // +---------------------------------------------
     gameLoop.phase(helios::engine::runtime::gameloop::PhaseType::Main)
-            .addPass()
+            .addPass(helios::engine::mechanics::gamestate::GameState::Any)
             .addSystem<helios::engine::modules::physics::collision::systems::BoundsUpdateSystem>()
+            .addCommitPoint()
+
+            .addPass(RunningAndTitle)
             .addSystem<helios::engine::mechanics::bounds::systems::LevelBoundsBehaviorSystem>()
             .addSystem<helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem>(
                 levelPtr->bounds(), CELL_LENGTH/2.0f
              )
             .addCommitPoint()
-            .addPass()
+
+            .addPass(RunningAndTitle)
             .addSystem<helios::engine::modules::physics::collision::systems::CollisionStateResponseSystem>()
             .addCommitPoint(helios::engine::runtime::gameloop::CommitPoint::PassEvents)
-            .addPass()
+
+            .addPass(RunningAndTitle)
             .addSystem<helios::engine::mechanics::damage::systems::DamageOnCollisionSystem>()
             .addSystem<helios::engine::mechanics::health::systems::HealthUpdateSystem>();
 
@@ -1021,7 +1387,12 @@ int main() {
     // | POST PHASE: Transform Composition and Cleanup
     // +----------------------------------------------
     gameLoop.phase(helios::engine::runtime::gameloop::PhaseType::Post)
-             .addPass()
+             .addPass(helios::engine::mechanics::gamestate::GameState::Paused)
+             .addSystem<helios::engine::modules::ui::widgets::systems::MenuNavigationSystem>()
+             .addSystem<helios::engine::modules::ui::widgets::systems::UiStyleUpdateSystem>()
+             .addCommitPoint()
+
+             .addPass(helios::engine::mechanics::gamestate::GameState::Any)
              .addSystem<helios::engine::modules::ui::binding::systems::Score2UiTextUpdateSystem>()
              .addSystem<helios::engine::mechanics::scoring::systems::CombatScoringSystem>()
 
@@ -1034,6 +1405,7 @@ int main() {
              .addSystem<helios::engine::mechanics::lifecycle::systems::DelayedComponentEnablerSystem>()
              .addSystem<helios::engine::modules::physics::collision::systems::CollisionStateClearSystem>()
              .addSystem<helios::engine::mechanics::scoring::systems::ScoreObserverClearSystem>();
+
 
 
     float DELTA_TIME = 0.0f;
@@ -1054,7 +1426,7 @@ int main() {
 
     //std::ignore = shipGameObject.get<helios::engine::modules::scene::components::SceneNodeComponent>()->sceneNode()->addNode(std::move(cameraSceneNode));
 
-    shipGameObject.setActive(true);
+    shipGameObject.setActive(false);
     auto* leftStickGizmoNode = leftStickGizmo.get<helios::engine::modules::scene::components::SceneNodeComponent>()->sceneNode();
     auto* rightStickGizmoNode = rightStickGizmo.get<helios::engine::modules::scene::components::SceneNodeComponent>()->sceneNode();
     auto* shipDirectionGizmoNode = shipDirectionGizmo.get<helios::engine::modules::scene::components::SceneNodeComponent>()->sceneNode();
@@ -1062,6 +1434,8 @@ int main() {
     // add ui objects
     scoreText.setActive(true);
     highScoreText.setActive(true);
+    titleText.setActive(true);
+    pressStartText.setActive(true);
 
 
 
@@ -1073,6 +1447,13 @@ int main() {
     bool showImgui = false;
     bool tilde = false;
 
+
+    gameLoop.commandBuffer().add<helios::engine::mechanics::gamestate::commands::GameStateCommand>(
+        helios::engine::mechanics::gamestate::types::GameStateTransitionRequest(
+            helios::engine::mechanics::gamestate::types::GameState::Undefined,
+            helios::engine::mechanics::gamestate::types::GameStateTransitionId::TitleRequested
+        )
+    );
     while (!win->shouldClose()) {
         framePacer.beginFrame();
 
@@ -1106,6 +1487,8 @@ int main() {
         const auto viewportSnapshots = win->viewportSnapshots();
         gameLoop.update(gameWorld, DELTA_TIME, inputSnapshot, viewportSnapshots);
 
+        const auto gameState = gameWorld.session().gameState();
+
 
         // ----------------------------------------
         // 10.3 Gizmo / Debug Visualization Update
@@ -1130,13 +1513,47 @@ int main() {
             app->renderingDevice().render(renderPass);
         }
 
-        // Render the UI scene.
-        const auto& hudSnapshot = hudScene->createSnapshot(*hudViewport);
-        if (hudSnapshot.has_value()) {
-            auto uiRenderPass = helios::rendering::RenderPassFactory::getInstance()
-                .buildRenderPass(*hudSnapshot);
-            app->renderingDevice().render(uiRenderPass);
+        if (gameState != helios::engine::mechanics::gamestate::GameState::Title) {
+            const auto& hudSnapshot = hudScene->createSnapshot(*hudViewport);
+            if (hudSnapshot.has_value()) {
+                auto uiRenderPass = helios::rendering::RenderPassFactory::getInstance()
+                    .buildRenderPass(*hudSnapshot);
+                app->renderingDevice().render(uiRenderPass);
+            }
         }
+
+        switch (gameState) {
+            case helios::engine::mechanics::gamestate::GameState::Title: {
+                    const auto& titleSnapshot = titleScene->createSnapshot(*titleViewport);
+                    if (titleSnapshot.has_value()) {
+                        auto titleRenderPass = helios::rendering::RenderPassFactory::getInstance()
+                            .buildRenderPass(*titleSnapshot);
+                        app->renderingDevice().render(titleRenderPass);
+                    }
+                }
+                break;
+            case helios::engine::mechanics::gamestate::GameState::Paused: {
+                const auto& menuSnapshot = menuScene->createSnapshot(*menuViewport);
+                if (menuSnapshot.has_value()) {
+                    auto menuRenderPass = helios::rendering::RenderPassFactory::getInstance()
+                        .buildRenderPass(*menuSnapshot);
+                    app->renderingDevice().render(menuRenderPass);
+                }
+            }
+                break;
+
+            case helios::engine::mechanics::gamestate::GameState::Running: {
+
+            }
+            break;
+            default:
+                // intentionally left empty
+                break;
+
+        }
+
+        // Render the UI scene.
+
 
         // ----------------------------------------
         // 10.5 ImGui Overlay Rendering

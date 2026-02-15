@@ -10,6 +10,7 @@ export import helios.engine.mechanics.match.commands;
 export import helios.engine.mechanics.match.dispatcher;
 export import helios.engine.mechanics.match.types;
 export import helios.engine.mechanics.match.listeners;
+export import helios.engine.mechanics.match.rules;
 
 export import helios.engine.mechanics.match.MatchStateCommandHandler;
 export import helios.engine.mechanics.match.MatchStateManager;

@@ -103,6 +103,18 @@ export namespace helios::engine::runtime::world {
             helios::engine::runtime::world::GameWorld& gameWorld,
             helios::engine::runtime::world::UpdateContext& update_context
         ) noexcept = 0;
+
+        /**
+         * @brief Resets the manager to its initial state.
+         *
+         * @details Called during level transitions or game restarts to clear
+         * any accumulated state. Override to reset queues, counters, or other
+         * runtime data. The default implementation is a no-op.
+         */
+        virtual void reset() {
+
+            //noop
+        }
     };
 
 

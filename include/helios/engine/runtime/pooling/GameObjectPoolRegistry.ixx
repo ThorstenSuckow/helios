@@ -6,6 +6,7 @@ module;
 
 #include <memory>
 #include <unordered_map>
+#include <ranges>
 
 export module helios.engine.runtime.pooling.GameObjectPoolRegistry;
 
@@ -75,6 +76,19 @@ export namespace helios::engine::runtime::pooling {
             pools_[id] = std::move(gameObjectPool);
             return pools_[id].get();
         }
+
+        /**
+         * @brief Returns a reference to the internal pool map.
+         *
+         * @details Provides direct access to all pools for iteration or bulk operations.
+         * The returned map should not be modified directly; use `addPool()` instead.
+         *
+         * @return Reference to the pool map.
+         */
+        [[nodiscard]]std::unordered_map<helios::engine::core::data::GameObjectPoolId, std::unique_ptr<GameObjectPool>>& pools() {
+            return pools_;
+        }
+
 
         /**
          * @brief Retrieves a pool by its ID.

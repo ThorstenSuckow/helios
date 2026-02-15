@@ -341,6 +341,32 @@ export namespace helios::engine::runtime::pooling {
             return pools_.pool(gameObjectPoolId);
         }
 
+        /**
+         * @brief Resets all pools by releasing all active GameObjects.
+         *
+         * @details Iterates through all registered pools and releases every active
+         * entity back to its pool. This effectively returns all pooled objects to
+         * their inactive state without destroying them.
+         *
+         * Useful for level transitions or game restarts where all pooled objects
+         * should be recycled.
+         */
+        void reset() override {
+
+            for (auto& [poolId, poolPtr]  : pools_.pools()) {
+
+                auto activeSpan = poolPtr->activeGameObjects();
+                auto toRelease = std::vector(activeSpan.begin(), activeSpan.end());
+
+                for (auto entityHandle : toRelease) {
+                    release(poolId, entityHandle);
+                }
+
+
+            }
+
+        }
+
     };
 
 }

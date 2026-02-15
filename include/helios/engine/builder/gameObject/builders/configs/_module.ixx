@@ -25,3 +25,5 @@ export import helios.engine.builder.gameObject.builders.configs.CombatConfig;
 export import helios.engine.builder.gameObject.builders.configs.ScoreValueConfig;
 export import helios.engine.builder.gameObject.builders.configs.ScorePoolConfig;
 export import helios.engine.builder.gameObject.builders.configs.ObserverConfig;
+export import helios.engine.builder.gameObject.builders.configs.MenuConfig;
+export import helios.engine.builder.gameObject.builders.configs.MenuItemConfig;

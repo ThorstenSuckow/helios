@@ -29,6 +29,16 @@ export namespace helios::engine::modules::ui::layout {
         TopRight,
 
         /**
+        * @brief Anchor to the bottom left corner of the viewport.
+        */
+       BottomLeft,
+
+        /**
+         * @brief Anchor to the top left corner of the viewport.
+         */
+        TopLeft,
+
+        /**
          * @brief Sentinel value for iteration.
          */
         size_

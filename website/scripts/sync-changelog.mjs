@@ -238,6 +238,11 @@ async function main() {
       meta: { title: 'Component Lifecycle', description: 'Lifecycle hooks for ECS components: onAcquire, onRelease, onRemove, enable/disable, and cloning.', slug: '/core-concepts/component-lifecycle', tags: ['ecs', 'architecture', 'lifecycle'], keywords: ['helios', 'component lifecycle', 'ECS', 'hooks', 'pooling', 'onAcquire', 'onRelease'], sidebar_label: 'Component Lifecycle', sidebar_position: 12 }
     },
     {
+      src: path.join(repoRoot, 'docs', 'core-concepts', 'state-management.md'),
+      dest: path.join(websiteRoot, 'docs', 'core-concepts', 'state-management.md'),
+      meta: { title: 'State Management', description: 'Rule-based state machines for game and match state transitions with listeners and command-driven changes.', slug: '/core-concepts/state-management', tags: ['gameplay', 'architecture', 'state'], keywords: ['helios', 'state management', 'GameState', 'MatchState', 'state machine', 'transitions'], sidebar_label: 'State Management', sidebar_position: 13 }
+    },
+    {
       src: path.join(repoRoot, 'docs', 'core-concepts', 'ecs', 'gameobject.md'),
       dest: path.join(websiteRoot, 'docs', 'core-concepts', 'ecs', 'gameobject.md'),
       meta: { title: 'GameObject', description: 'High-level entity wrapper providing type-safe component access and lifecycle management.', slug: '/core-concepts/ecs/gameobject', tags: ['ecs', 'architecture', 'entity'], keywords: ['helios', 'GameObject', 'ECS', 'entity', 'component', 'facade'], sidebar_label: 'GameObject', sidebar_position: 1 }

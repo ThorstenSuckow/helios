@@ -30,6 +30,7 @@ The following files are **automatically copied** from the repository during the 
 | `docs/core-concepts/sparse-set.md` | `docs/core-concepts/sparse-set.md` | O(1) component storage |
 | `docs/core-concepts/component-registry.md` | `docs/core-concepts/component-registry.md` | Modular component registration system |
 | `docs/core-concepts/component-lifecycle.md` | `docs/core-concepts/component-lifecycle.md` | Component lifecycle hooks |
+| `docs/core-concepts/state-management.md` | `docs/core-concepts/state-management.md` | Game and match state management |
 | `docs/core-concepts/ecs/README.md` | `docs/core-concepts/ecs/overview.md` | ECS architecture overview |
 | `docs/core-concepts/ecs/component-structure.md` | `docs/core-concepts/ecs/component-structure.md` | Component Copy/Move requirements |
 | `docs/core-concepts/ecs/gameobject.md` | `docs/core-concepts/ecs/gameobject.md` | High-level entity wrapper |

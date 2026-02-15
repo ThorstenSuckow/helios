@@ -36,6 +36,7 @@ const sidebars: SidebarsConfig = {
         'core-concepts/scene-graph',
         'core-concepts/component-system',
         'core-concepts/gameloop-architecture',
+        'core-concepts/state-management',
         'core-concepts/gameobject-builder',
         'core-concepts/command-system',
         'core-concepts/event-system',

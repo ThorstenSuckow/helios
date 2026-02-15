@@ -5,6 +5,7 @@
 module;
 
 #include <algorithm>
+#include <cassert>
 #include <helios/helios_config.h>
 
 export module helios.input.gamepad.GamepadState;
@@ -13,9 +14,13 @@ import helios.math.types;
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
 
+import helios.input.types.Gamepad;
+
 
 #define HELIOS_LOG_SCOPE "helios::input::gamepad::GamepadState"
 export namespace helios::input::gamepad {
+
+    using namespace helios::input::types;
 
     /**
      * @brief A lightweight class for transferring the state of a Gamepad.
@@ -52,8 +57,11 @@ export namespace helios::input::gamepad {
      * @see https://www.glfw.org/docs/latest/input_guide.html#joystick
      */
     class GamepadState {
-
     private:
+
+        uint32_t currInput_ = 0;
+        uint32_t prevInput_ = 0;
+
         /**
          * @brief Shared logger instance for all GamepadState objects.
          */
@@ -64,11 +72,13 @@ export namespace helios::input::gamepad {
          * @brief State of the A button (true if pressed).
          */
         bool buttonA_ = false;
+        bool prevButtonA_ = false;
 
         /**
          * @brief State of the B button (true if pressed).
          */
         bool buttonB_ = false;
+        bool prevButtonB_ = false;
 
         /**
          * @brief State of the X button (true if pressed).
@@ -84,6 +94,8 @@ export namespace helios::input::gamepad {
          * @brief State of the Start button (true if pressed).
          */
         bool buttonStart_ = false;
+
+        bool prevButtonStart_ = false;
 
         /**
          * @brief State of the Back button (true if pressed).
@@ -119,6 +131,7 @@ export namespace helios::input::gamepad {
          * @brief State of the D-pad up button (true if pressed).
          */
         bool buttonDpadUp_ = false;
+        bool prevButtonDpadUp_ = false;
 
         /**
          * @brief State of the D-pad right button (true if pressed).
@@ -129,6 +142,7 @@ export namespace helios::input::gamepad {
          * @brief State of the D-pad down button (true if pressed).
          */
         bool buttonDpadDown_ = false;
+        bool prevButtonDpadDown_ = false;
 
         /**
          * @brief State of the D-pad left button (true if pressed).
@@ -281,7 +295,7 @@ export namespace helios::input::gamepad {
             bool buttonDpadDown, bool buttonDpadLeft
         ) noexcept {
 
-            #ifdef HELIOS_DEBUG
+#ifdef HELIOS_DEBUG
             if(axisLeftX < -1.0f || axisLeftX > 1.0f) {
                 logger_.warn("axisLeftX is out of bounds.");
             }
@@ -300,7 +314,7 @@ export namespace helios::input::gamepad {
             if(triggerRight < 0.0f || triggerRight > 1.0f) {
                 logger_.warn("triggerRight is out of bounds.");
             }
-            #endif
+#endif
 
             axisLeftX_ = std::clamp(axisLeftX, -1.0f, 1.0f);
             axisLeftY_ = std::clamp(axisLeftY, -1.0f, 1.0f);
@@ -308,21 +322,41 @@ export namespace helios::input::gamepad {
             axisRightY_ = std::clamp(axisRightY, -1.0f, 1.0f);
             triggerLeft_ = std::clamp(triggerLeft, 0.0f, 1.0f);
             triggerRight_ = std::clamp(triggerRight, 0.0f, 1.0f);
+;
 
+            prevButtonA_ = buttonA_;
             buttonA_ = buttonA;
+
+            prevButtonB_ = buttonB_;
             buttonB_ = buttonB;
+
             buttonX_ = buttonX;
+
             buttonY_ = buttonY;
+
+            prevButtonStart_ = buttonStart_;
             buttonStart_ = buttonStart;
+
             buttonBack_ = buttonBack;
+
             buttonGuide_ = buttonGuide;
+
             buttonLeftBumper_ = buttonLeftBumper;
+
             buttonRightBumper_ = buttonRightBumper;
+
             buttonLeftThumb_ = buttonLeftThumb;
+
             buttonRightThumb_ = buttonRightThumb;
+
+            prevButtonDpadUp_ = buttonDpadUp_;
             buttonDpadUp_ = buttonDpadUp;
+
             buttonDpadRight_ = buttonDpadRight;
+
+            prevButtonDpadDown_ = buttonDpadDown_;
             buttonDpadDown_ = buttonDpadDown;
+
             buttonDpadLeft_ = buttonDpadLeft;
 
             needsUpdate_ = true;
@@ -465,11 +499,127 @@ export namespace helios::input::gamepad {
 
 
         /**
+         * @brief Checks if a button is currently held down.
+         *
+         * @param input The button to check.
+         *
+         * @return True if the button is currently pressed.
+         */
+        [[nodiscard]] bool isButtonDown(const GamepadInput input) const {
+            switch (input) {
+                case GamepadInput::Start:
+                    return buttonStart_;
+                case GamepadInput::Down:
+                    return buttonDpadDown_;
+                case GamepadInput::Up:
+                    return buttonDpadUp_;
+                case GamepadInput::A:
+                    return buttonA_;
+                case GamepadInput::B:
+                    return buttonB_;
+
+                default:
+                    assert(false && "Unexpected input");
+                    return false;
+            }
+        }
+
+        /**
+         * @brief Checks if a button has been held for at least 2 frames.
+         *
+         * @param input The button to check.
+         *
+         * @return True if the button was pressed last frame and is still pressed.
+         */
+        [[nodiscard]] bool isButtonHeld(const GamepadInput input) const {
+            switch (input) {
+                case GamepadInput::Start:
+                    return prevButtonStart_ && buttonStart_;
+                case GamepadInput::Down:
+                    return prevButtonDpadDown_ && buttonDpadDown_;
+                case GamepadInput::Up:
+                    return prevButtonDpadUp_ && buttonDpadUp_;
+                case GamepadInput::A:
+                    return prevButtonA_ && buttonA_;
+                case GamepadInput::B:
+                    return prevButtonB_ && buttonB_;
+
+                default:
+                    assert(false && "Unexpected input");
+                    return false;
+            }
+        }
+
+        /**
+         * @brief Checks if a button was released this frame.
+         *
+         * @param input The button to check.
+         *
+         * @return True if the button was pressed last frame but is now released.
+         */
+        [[nodiscard]] bool isButtonUp(const GamepadInput input) const {
+            switch (input) {
+                case GamepadInput::Start:
+                    return prevButtonStart_ && !buttonStart_;
+                case GamepadInput::Down:
+                    return prevButtonDpadDown_ && !buttonDpadDown_;
+                case GamepadInput::Up:
+                    return prevButtonDpadUp_ && !buttonDpadUp_;
+                case GamepadInput::A:
+                    return prevButtonA_ && !buttonA_;
+                case GamepadInput::B:
+                    return prevButtonB_ && !buttonB_;
+
+                default:
+                    assert(false && "Unexpected input");
+                    return false;
+            }
+        }
+
+
+        /**
+         * @brief Checks if a button was pressed this frame.
+         *
+         * @param input The button to check.
+         *
+         * @return True if the button was not pressed last frame but is pressed now.
+         */
+        [[nodiscard]] bool isButtonPressed(const GamepadInput input) const {
+            switch (input) {
+                case GamepadInput::Start:
+                    return !prevButtonStart_ && buttonStart_;
+                case GamepadInput::Down:
+                    return !prevButtonDpadDown_ && buttonDpadDown_;
+                case GamepadInput::Up:
+                    return !prevButtonDpadUp_ && buttonDpadUp_;
+                case GamepadInput::A:
+                    return !prevButtonA_ && buttonA_;
+                case GamepadInput::B:
+                    return !prevButtonB_ && buttonB_;
+
+                default:
+                    assert(false && "Unexpected input");
+                    return false;
+            }
+        }
+
+
+
+        /**
          * @brief Returns true when the Start button is pressed.
          * @return true if pressed, false otherwise.
          */
         [[nodiscard]] bool buttonStart() const noexcept {
-            return buttonStart_;
+            return prevButtonStart_ && buttonStart_;
+        };
+
+        /**
+         * @brief Returns true if Start was pressed this frame.
+         *
+         * @return True if Start was just pressed.
+         */
+        [[nodiscard]] bool buttonPressedStart() const noexcept {
+            return !prevButtonStart_ && buttonStart_;
         };
 
 

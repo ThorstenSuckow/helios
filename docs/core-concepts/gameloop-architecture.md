@@ -36,6 +36,58 @@ The game loop is organized into **Phases** and **Passes**:
 
 For detailed event propagation rules, see [Event System](event-system.md).
 
+## State-Based Pass Filtering
+
+Passes can be configured to run only during specific game states. This allows gameplay systems to be automatically disabled during menus or paused states without explicit checks in each system.
+
+### GameState Parameter
+
+When adding a pass, you can specify which `GameState` it should run in:
+
+```cpp
+// This pass only runs when game is Running
+gameLoop.phase(PhaseType::Main)
+    .addPass(GameState::Running)
+        .addSystem<MovementSystem>()
+        .addSystem<CollisionSystem>();
+
+// This pass runs in all states (default)
+gameLoop.phase(PhaseType::Pre)
+    .addPass(GameState::Any)
+        .addSystem<InputSystem>();
+
+// This pass runs when paused OR running
+gameLoop.phase(PhaseType::Post)
+    .addPass(GameState::Running | GameState::Paused)
+        .addSystem<SceneSyncSystem>();
+```
+
+### Available States
+
+| State | Description |
+|-------|-------------|
+| `GameState::Title` | Main menu / title screen |
+| `GameState::Running` | Active gameplay |
+| `GameState::Paused` | Game is paused |
+| `GameState::Any` | Runs in all states (default) |
+
+### Evaluation
+
+During `Phase::update()`, each pass checks if its configured state matches the current session state:
+
+```cpp
+void update(UpdateContext& ctx, GameState currentState) {
+    for (auto& pass : passes_) {
+        if (hasFlag(pass->runsIn(), currentState)) {
+            pass->update(ctx);
+            // ... commit point handling
+        }
+    }
+}
+```
+
+For the complete state management system including GameStateManager and MatchStateManager, see [State Management](state-management.md).
+
 ## Practical Example: Twin-Stick Shooter
 
 The following example demonstrates how to configure a complete game loop for a twin-stick shooter with spawning, physics, collision, and rendering:
@@ -58,22 +110,22 @@ gameLoop.commandBuffer()
 // PRE PHASE: Input, Spawning, Motion Preparation
 // ═══════════════════════════════════════════════════════════════════
 gameLoop.phase(PhaseType::Pre)
-    // Pass 1: Input handling
-    .addPass()
+    // Pass 1: Input handling (runs in all states)
+    .addPass(GameState::Any)
     .addSystem<TwinStickInputSystem>(*playerGameObject)
     
     // Commit Point: Structural changes (spawn/despawn) execute here
     .addCommitPoint(CommitPoint::Structural)
     
-    // Pass 2: Spawn scheduling (after input, before physics)
-    .addPass()
+    // Pass 2: Spawn scheduling (only when Running)
+    .addPass(GameState::Running)
     .addSystem<GameObjectSpawnSystem>(spawnSchedulers)
     
     // Commit Point: New entities are now active
     .addCommitPoint(CommitPoint::Structural)
     
-    // Pass 3: Motion systems (all entities including newly spawned)
-    .addPass()
+    // Pass 3: Motion systems (only when Running)
+    .addPass(GameState::Running)
     .addSystem<ScaleSystem>()
     .addSystem<SteeringSystem>()
     .addSystem<SpinSystem>()
@@ -83,8 +135,8 @@ gameLoop.phase(PhaseType::Pre)
 // MAIN PHASE: Gameplay Logic, Collision, AI
 // ═══════════════════════════════════════════════════════════════════
 gameLoop.phase(PhaseType::Main)
-    // Pass 1: Update bounds and check collisions
-    .addPass()
+    // Pass 1: Update bounds and check collisions (only when Running)
+    .addPass(GameState::Running)
     .addSystem<BoundsUpdateSystem>()
     .addSystem<LevelBoundsBehaviorSystem>()
     .addSystem<GridCollisionDetectionSystem>(cellSize, levelBounds)
@@ -92,8 +144,8 @@ gameLoop.phase(PhaseType::Main)
     // Commit Point: Collision events become readable
     .addCommitPoint()
     
-    // Pass 2: React to collisions (damage, despawn, etc.)
-    .addPass()
+    // Pass 2: React to collisions (only when Running)
+    .addPass(GameState::Running)
     .addSystem<ProjectileCollisionSystem>()
     .addSystem<EnemyCollisionSystem>();
 
@@ -101,7 +153,8 @@ gameLoop.phase(PhaseType::Main)
 // POST PHASE: Scene Sync, Transform Cleanup
 // ═══════════════════════════════════════════════════════════════════
 gameLoop.phase(PhaseType::Post)
-    .addPass()
+    // Scene sync runs in all states (needed for UI updates while paused)
+    .addPass(GameState::Any)
     .addSystem<ComposeTransformSystem>()
     .addSystem<SceneSyncSystem>(scene.get())
     .addSystem<TransformClearSystem>()
@@ -267,5 +320,6 @@ Immediate events should be processed within the same frame without additional do
 
 - [Command System](command-system.md) — Command pattern, dispatchers, managers
 - [Event System](event-system.md) — Phase/Pass event propagation with double-buffered buses
+- [State Management](state-management.md) — Game and match state transitions
 - [Component System](component-system.md) — ECS-style composition architecture
 - [Spawn System](spawn-system.md) — Entity lifecycle with spawn scheduling and pooling

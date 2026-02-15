@@ -115,11 +115,20 @@ class UiTextComponent {
         UiTextComponent& operator=(UiTextComponent&&) noexcept = default;
 
         /**
-         * @brief Returns the underlying text renderable.
+         * @brief Returns the underlying text renderable as const pointer.
+         *
+         * @return Const pointer to the TextRenderable. Never nullptr.
+         */
+        [[nodiscard]] const helios::rendering::text::TextRenderable* renderable() const noexcept {
+            return renderable_;
+        }
+
+        /**
+         * @brief Returns the underlying text renderable as a pointer.
          *
          * @return Pointer to the TextRenderable. Never nullptr.
          */
-        [[nodiscard]] const helios::rendering::text::TextRenderable* renderable() const noexcept {
+        [[nodiscard]] helios::rendering::text::TextRenderable* renderable() noexcept {
             return renderable_;
         }
 

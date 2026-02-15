@@ -122,6 +122,11 @@ export namespace helios::engine::builder::gameObject {
              * @brief Builder for observer components.
              */
             std::unique_ptr<helios::engine::builder::gameObject::builders::ObserverBuilder> observerBuilder_;
+
+            /**
+             * @brief Builder for menu components.
+             */
+            std::unique_ptr<helios::engine::builder::gameObject::builders::MenuBuilder> menuBuilder_;
         public:
 
             /** @brief Callback type for motion configuration. */
@@ -166,6 +171,8 @@ export namespace helios::engine::builder::gameObject {
             /** @brief Callback type for observer configuration. */
             using ObserverBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::ObserverBuilder&)>;
 
+            /** @brief Callback type for menu configuration. */
+            using MenuBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::MenuBuilder&)>;
 
             /**
              * @brief Constructs a prototype with a new empty GameObject.
@@ -185,7 +192,8 @@ export namespace helios::engine::builder::gameObject {
                 lifecycleBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::LifecycleBuilder>(gameObject_)),
                 healthBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::HealthBuilder>(gameObject_)),
                 scoringBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::ScoringBuilder>(gameObject_)),
-                observerBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::ObserverBuilder>(gameObject_))
+                observerBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::ObserverBuilder>(gameObject_)),
+                menuBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::MenuBuilder>(gameObject_))
 
             {}
 
@@ -365,6 +373,18 @@ export namespace helios::engine::builder::gameObject {
              */
             GameObjectPrototype& withObserver(const ObserverBuilderCallback& obc) {
                 obc(*observerBuilder_);
+                return *this;
+            }
+
+            /**
+             * @brief Configures menu components.
+             *
+             * @param obc Callback receiving a MenuBuilder reference.
+             *
+             * @return Reference to this prototype for chaining.
+             */
+            GameObjectPrototype& withMenu(const MenuBuilderCallback& obc) {
+                obc(*menuBuilder_);
                 return *this;
             }
 

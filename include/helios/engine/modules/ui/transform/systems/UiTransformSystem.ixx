@@ -19,6 +19,8 @@ import helios.engine.modules.ui.layout.Anchor;
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.runtime.world.GameWorld;
 
+import helios.engine.modules.scene.components.SceneNodeComponent;
+
 import helios.engine.modules.rendering.model.components.ModelAabbComponent;
 
 import helios.engine.mechanics.lifecycle.components.Active;
@@ -58,6 +60,12 @@ export namespace helios::engine::modules::ui::transform::systems {
 
                 case helios::engine::modules::ui::layout::Anchor::TopRight:
                     return unanchored - size;
+
+                case helios::engine::modules::ui::layout::Anchor::TopLeft:
+                    return unanchored.withY(unanchored[1] - size[1]);
+
+                case helios::engine::modules::ui::layout::Anchor::BottomLeft:
+                    return unanchored;
             }
 
             assert(false && "Unreachable!");
@@ -76,11 +84,12 @@ export namespace helios::engine::modules::ui::transform::systems {
          */
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
-            for (auto [entity, tc, tsc, ctc, mbc, active] : gameWorld_->view<
+            for (auto [entity, tc, tsc, ctc, mbc, snc, active] : gameWorld_->view<
                 helios::engine::modules::ui::transform::components::UiTransformComponent,
                 helios::engine::modules::spatial::transform::components::TranslationStateComponent,
                 helios::engine::modules::spatial::transform::components::ComposeTransformComponent,
                 helios::engine::modules::rendering::model::components::ModelAabbComponent,
+                helios::engine::modules::scene::components::SceneNodeComponent,
                 helios::engine::mechanics::lifecycle::components::Active
             >().whereEnabled()) {
 
@@ -95,18 +104,64 @@ export namespace helios::engine::modules::ui::transform::systems {
 
                     auto pivot = tc->pivot();
 
-                    const auto viewportWidth = snapshot.absoluteBounds[2];
-                    const auto viewportHeight = snapshot.absoluteBounds[3];
+                    auto sceneNode = snc->sceneNode();
+
+                    float viewportWidth;
+                    float viewportHeight;
+
+                    auto uiRect   = helios::math::vec4f(
+                        mbc->aabb().min()[0], mbc->aabb().min()[1],
+                        mbc->aabb().size()[0], mbc->aabb().size()[1]
+                    );
+                    auto worldRect = helios::math::vec4f(
+                        uiRect[0] + uiRect[0] / 2.0f,
+                        uiRect[1] + uiRect[1] / 2.0f,
+                        uiRect[2], uiRect[3]
+                    );
+
+
+                    auto parentUiRect = helios::math::vec4f{};
+                    auto parentWorldRect = helios::math::vec4f{};
 
                     const auto offsets = tc->offsets();
+
+                    if (sceneNode->parent()->isRoot()) {
+                        viewportWidth = snapshot.absoluteBounds[2];
+                        viewportHeight = snapshot.absoluteBounds[3];
+
+                        parentUiRect = helios::math::vec4f(0, 0, viewportWidth, viewportHeight);
+
+                        parentWorldRect = helios::math::vec4f(
+                            viewportWidth / 2.0f,
+                            viewportHeight /2.0f,
+                            viewportWidth,
+                            viewportHeight
+                        );
+
+                    } else {
+                        auto parent = sceneNode->parent();
+                        auto bounds = parent->aabb();
+                        auto size   = parent->aabb().size();
+
+                        parentUiRect = helios::math::vec4f(
+                            -size[0]/2.0f,
+                            -size[1]/2.0f,
+                            size[0], size[1]
+                        );
+                        parentWorldRect = helios::math::vec4f(
+                            parentUiRect[0] + parentUiRect[2] / 2.0f,
+                            parentUiRect[1] + parentUiRect[3] / 2.0f,
+                            parentUiRect[2] , parentUiRect[3]
+                        );
+                    }
+
 
                     switch (tc->anchor()) {
 
                         case helios::engine::modules::ui::layout::Anchor::Center: {
                             auto anchored = helios::math::vec3f(
-                            viewportWidth / 2.0f - offsets[1],
-                            viewportHeight / 2.0f - offsets[0],
-                            0.0f
+                                parentUiRect[0] + parentUiRect[2]/2.0f - offsets[1] ,
+                                parentUiRect[1] + parentUiRect[3]/2.0f - offsets[0], 0.0f
                             );
                             anchored = anchor(anchored, mbc->aabb().size(), pivot);
                             tsc->setTranslation(anchored);
@@ -115,8 +170,30 @@ export namespace helios::engine::modules::ui::transform::systems {
 
                         case helios::engine::modules::ui::layout::Anchor::TopRight: {
                             auto anchored = helios::math::vec3f(
-                               viewportWidth - offsets[1],
-                               viewportHeight - offsets[0],
+                                parentUiRect[0] + parentUiRect[2] - offsets[1],
+                                parentUiRect[1] + parentUiRect[3] - offsets[0],
+                                0.0f
+                            );
+                            anchored = anchor(anchored, mbc->aabb().size(), pivot);
+                            tsc->setTranslation(anchored);
+                        }
+                            break;
+
+                        case helios::engine::modules::ui::layout::Anchor::TopLeft: {
+                            auto anchored = helios::math::vec3f(
+                               parentUiRect[0] + offsets[3],
+                               parentUiRect[1] + parentUiRect[3] - offsets[0],
+                               0.0f
+                           );
+                            anchored = anchor(anchored, mbc->aabb().size(), pivot);
+                            tsc->setTranslation(anchored);
+                        }
+                            break;
+
+                        case helios::engine::modules::ui::layout::Anchor::BottomLeft: {
+                            auto anchored = helios::math::vec3f(
+                               parentUiRect[0] + offsets[3],
+                               parentUiRect[1] + offsets[2],
                                0.0f
                             );
                             anchored = anchor(anchored, mbc->aabb().size(), pivot);

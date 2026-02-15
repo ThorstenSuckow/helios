@@ -15,14 +15,20 @@ module;
 
 export module helios.engine.runtime.world.GameWorld;
 
+import helios.engine.runtime.world.Session;
+
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.Manager;
 import helios.engine.runtime.spawn.SpawnCommandHandler;
 
-
+import helios.engine.modules.ui.UiActionCommandHandler;
 
 import helios.engine.mechanics.scoring.ScoreCommandHandler;
+import helios.engine.mechanics.gamestate.components;
+import helios.engine.mechanics.gamestate.GameStateCommandHandler;
+
+import helios.engine.mechanics.match.MatchStateCommandHandler;
 
 import helios.util.Guid;
 import helios.util.log.Logger;
@@ -167,6 +173,21 @@ export namespace helios::engine::runtime::world {
         helios::engine::mechanics::scoring::ScoreCommandHandler* scoreCommandHandler_ = nullptr;
 
         /**
+         * @brief Registered handler for game state commands.
+         */
+        helios::engine::mechanics::gamestate::GameStateCommandHandler* gameStateCommandHandler_ = nullptr;
+
+        /**
+         * @brief Registered handler for match state commands.
+         */
+        helios::engine::mechanics::match::MatchStateCommandHandler* matchStateCommandHandler_ = nullptr;
+
+        /**
+         * @brief Registered handler for UI action commands.
+         */
+        helios::engine::modules::ui::UiActionCommandHandler* uiActionCommandHandler_ = nullptr;
+
+        /**
          * @brief Registry for mapping spawn profiles to their command handlers.
          *
          * @details
@@ -193,17 +214,39 @@ export namespace helios::engine::runtime::world {
          */
         mutable helios::engine::ecs::EntityManager em_;
 
-    public:
         /**
+         * @brief The current game session holding state data.
+         */
+        Session session_;
 
-        * @brief Central registry for game entities, managers, pools, and the active level.
+
+
+    public:
+
+        /**
+         * @brief Central registry for game entities, managers, pools, and the active level.
          *
          * @details
          * The GameWorld serves as the primary container for managing the game state and its subsystems.
          * It facilitates the lifecycle of entities, oversees component-based management, coordinates Managers,
          * and holds a reference to the active Level instance.
          */
-        explicit GameWorld() : em_(helios::engine::ecs::EntityManager(entityRegistry_)) { };
+        explicit GameWorld() : em_(helios::engine::ecs::EntityManager(entityRegistry_)), session_(Session(addGameObject())) { };
+
+        GameWorld(const GameWorld&) = delete;
+        GameWorld operator=(const GameWorld&) = delete;
+
+        GameWorld(const GameWorld&&) = delete;
+        GameWorld operator=(const GameWorld&&) = delete;
+
+        /**
+         * @brief Returns a reference to the current game session.
+         *
+         * @return Reference to the Session.
+         */
+        [[nodiscard]] Session& session() {
+            return session_;
+        }
 
 
         /**
@@ -314,6 +357,32 @@ export namespace helios::engine::runtime::world {
         }
 
         /**
+         * @brief Registers a handler for UI action commands.
+         *
+         * @param uiActionCommandHandler Reference to the handler to register.
+         *
+         * @return True if registration succeeded.
+         */
+        bool registerUiActionCommandHandler(
+            helios::engine::modules::ui::UiActionCommandHandler& uiActionCommandHandler
+        ) {
+            assert(!uiActionCommandHandler_ && "uiActionCommandHandler already registered");
+
+            uiActionCommandHandler_ = &uiActionCommandHandler;
+
+            return true;
+        }
+
+        /**
+         * @brief Retrieves the registered UI action command handler.
+         *
+         * @return Pointer to the handler, or nullptr if not registered.
+         */
+        [[nodiscard]] helios::engine::modules::ui::UiActionCommandHandler* uiActionCommandHandler() {
+            return uiActionCommandHandler_;
+        }
+
+        /**
          * @brief Retrieves a SpawnCommandHandler for a specific spawn profile.
          *
          * @details Used to submit spawn/despawn commands to the handler responsible
@@ -358,6 +427,58 @@ export namespace helios::engine::runtime::world {
          */
         [[nodiscard]] helios::engine::mechanics::scoring::ScoreCommandHandler* scoreCommandHandler() {
             return scoreCommandHandler_;
+        }
+
+        /**
+         * @brief Registers a handler for game state commands.
+         *
+         * @param gameStateCommandHandler Reference to the handler to register.
+         *
+         * @return True if registration succeeded.
+         */
+        bool registerGameStateCommandHandler(
+            helios::engine::mechanics::gamestate::GameStateCommandHandler& gameStateCommandHandler
+        ) {
+            assert(!gameStateCommandHandler_ && "GameStateCommandHandler already registered");
+
+            gameStateCommandHandler_ = &gameStateCommandHandler;
+
+            return true;
+        }
+
+        /**
+         * @brief Retrieves the registered game state command handler.
+         *
+         * @return Pointer to the handler, or nullptr if not registered.
+         */
+        [[nodiscard]] helios::engine::mechanics::gamestate::GameStateCommandHandler* gameStateCommandHandler() {
+            return gameStateCommandHandler_;
+        }
+
+        /**
+         * @brief Registers a handler for match state commands.
+         *
+         * @param matchStateCommandHandler Reference to the handler to register.
+         *
+         * @return True if registration succeeded.
+         */
+        bool registerMatchStateCommandHandler(
+            helios::engine::mechanics::match::MatchStateCommandHandler& matchStateCommandHandler
+        ) {
+            assert(!matchStateCommandHandler_ && "MatchStateCommandHandler already registered");
+
+            matchStateCommandHandler_ = &matchStateCommandHandler;
+
+            return true;
+        }
+
+        /**
+         * @brief Retrieves the registered match state command handler.
+         *
+         * @return Pointer to the handler, or nullptr if not registered.
+         */
+        [[nodiscard]] helios::engine::mechanics::match::MatchStateCommandHandler* matchStateCommandHandler() {
+            return matchStateCommandHandler_;
         }
 
         /**
@@ -509,6 +630,24 @@ export namespace helios::engine::runtime::world {
 
             return newGo;
         }
+
+        /**
+         * @brief Resets all managers and the session to their initial state.
+         *
+         * @details Called during level transitions or game restarts to clear
+         * accumulated state. Invokes reset() on all managers and the session.
+         */
+        void reset() {
+
+            for (auto& mgr : managers_) {
+                mgr->reset();
+            }
+
+            session_.reset();
+
+        }
+
+
 
     };
 

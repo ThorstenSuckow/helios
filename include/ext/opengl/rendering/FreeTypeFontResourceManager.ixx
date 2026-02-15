@@ -140,13 +140,15 @@ export namespace helios::ext::opengl::rendering {
 
             FT_Set_Pixel_Sizes(face, 0, pixelHeight);
             glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-            glPixelStorei(GL_UNPACK_ROW_LENGTH, face->glyph->bitmap.pitch);
+            //glPixelStorei(GL_UNPACK_ROW_LENGTH, face->glyph->bitmap.pitch);
 
             for (unsigned short c = begin; c < end; ++c) {
 
                 if (FT_Load_Char(face, c, FT_LOAD_RENDER)) {
                     throw std::runtime_error("ERROR::FREETYTPE: Failed to load Glyph");
                 }
+
+                FT_Render_Glyph(face->glyph, FT_RENDER_MODE_NORMAL);
 
                 unsigned int texture;
                 glGenTextures(1, &texture);
@@ -164,8 +166,9 @@ export namespace helios::ext::opengl::rendering {
                 );
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+                glGenerateMipmap(GL_TEXTURE_2D);
 
                 fontCache_[fontId].characters[c - begin] =  {
                     texture,

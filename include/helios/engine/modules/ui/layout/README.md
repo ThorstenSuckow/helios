@@ -16,6 +16,8 @@ This namespace provides fundamental layout types used by the UI system to positi
 |-------|-------------|
 | `Center` | Element is anchored to the center of the viewport |
 | `TopRight` | Element is anchored to the top-right corner |
+| `TopLeft` | Element is anchored to the top-left corner |
+| `BottomLeft` | Element is anchored to the bottom-left corner |
 
 ---
 

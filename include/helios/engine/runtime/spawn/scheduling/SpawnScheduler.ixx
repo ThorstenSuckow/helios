@@ -11,7 +11,6 @@ module;
 export module helios.engine.runtime.spawn.scheduling.SpawnScheduler;
 
 import helios.engine.runtime.world.UpdateContext;
-import helios.engine.runtime.spawn.SpawnManager;
 import helios.engine.runtime.spawn.SpawnContext;
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.spawn.scheduling.SpawnPlan;
@@ -120,6 +119,12 @@ export namespace helios::engine::runtime::spawn::scheduling {
          */
         virtual void commit(const helios::engine::core::data::SpawnRuleId spawnRuleId, const size_t spawnCount) noexcept = 0;
 
+        /**
+         * @brief Resets all rule states to their initial values.
+         *
+         * @details Called during level transitions or game restarts.
+         */
+        virtual void reset() noexcept = 0;
     };
 
 }

@@ -17,6 +17,9 @@ import helios.engine.runtime.world.GameWorld;
 
 import helios.engine.runtime.gameloop.CommitPoint;
 
+import helios.engine.mechanics.gamestate.types;
+
+
 export namespace helios::engine::runtime::gameloop {
 
     class GameLoop;
@@ -103,17 +106,26 @@ export namespace helios::engine::runtime::gameloop {
          * The commit point determines whether pass-level events are synchronized,
          * the command buffer is flushed, or managers are processed.
          *
+         * Passes are conditionally executed based on their configured game state.
+         * A pass is only updated if its `runsIn()` state matches the current game state.
+         *
          * @param updateContext The current update context.
+         * @param gameState The current game state used to filter pass execution.
          *
          * @see CommitPoint
          * @see Pass::addCommitPoint()
+         * @see Pass::runsIn()
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext){
+        void update(helios::engine::runtime::world::UpdateContext& updateContext,
+            helios::engine::mechanics::gamestate::types::GameState gameState){
 
             for (auto& pass : passEntries_) {
                 // every pass contains systems that are updated here
-                pass->update(updateContext);
-                notifyPassCommitListeners(pass->commitPoint(), updateContext);
+                if (helios::engine::mechanics::gamestate::types::hasFlag(pass->runsIn(), gameState)) {
+                    pass->update(updateContext);
+                    notifyPassCommitListeners(pass->commitPoint(), updateContext);
+                }
+
             }
         };
 
@@ -197,11 +209,20 @@ export namespace helios::engine::runtime::gameloop {
         /**
          * @brief Creates and adds a new pass to this phase.
          *
+         * @details The optional gameState parameter specifies in which game states this
+         * pass should execute. By default, passes run in all states (GameState::Any).
+         * Passes are skipped if the current game state does not match the configured mask.
+         *
+         * @param gameState The game state(s) in which this pass should run.
+         *
          * @return Reference to the newly created Pass for method chaining.
+         *
+         * @see Pass::runsIn()
+         * @see GameState
          */
-        Pass& addPass() {
+        Pass& addPass(const helios::engine::mechanics::gamestate::types::GameState gameState = helios::engine::mechanics::gamestate::types::GameState::Any) {
 
-            auto entry = std::make_unique<Pass>(*this);
+            auto entry = std::make_unique<Pass>(*this, gameState);
             auto* raw = entry.get();
             passEntries_.emplace_back(std::move(entry));
 

@@ -41,11 +41,11 @@ export namespace helios::engine::runtime::spawn::commands {
      */
     class ScheduledSpawnPlanCommand : public helios::engine::runtime::messaging::command::WorldCommand {
 
-        const helios::engine::core::data::SpawnProfileId spawnProfileId_;
+        helios::engine::core::data::SpawnProfileId spawnProfileId_;
 
-        const helios::engine::runtime::spawn::scheduling::SpawnPlan spawnPlan_;
+        helios::engine::runtime::spawn::scheduling::SpawnPlan spawnPlan_;
 
-        const helios::engine::runtime::spawn::SpawnContext spawnContext_;
+        helios::engine::runtime::spawn::SpawnContext spawnContext_;
 
     public:
 

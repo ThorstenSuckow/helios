@@ -1,6 +1,6 @@
 /**
- * @file SpawnScheduler.ixx
- * @brief Scheduler that evaluates spawn rules and produces spawn plans.
+ * @file DefaultSpawnScheduler.ixx
+ * @brief Default scheduler that evaluates all spawn rules each frame.
  */
 module;
 
@@ -172,6 +172,22 @@ export namespace helios::engine::runtime::spawn::scheduling {
 
                     spawnRule->commit(it->second, spawnCount);
                 }
+            }
+        }
+
+        /**
+         * @brief Resets all rule states to their initial values.
+         *
+         * @details Iterates through all rules and resets their state.
+         */
+        void reset() noexcept override {
+            for (auto& spawnRule : spawnRules_ | std::views::values) {
+
+                auto it = spawnRuleStates_.find(spawnRule->spawnRuleId());
+                assert(it != spawnRuleStates_.end() && "Unexpected missing spawnRuleState");
+
+                spawnRule->reset(it->second);
+
             }
         }
 

@@ -52,6 +52,17 @@ export namespace helios::rendering::text {
         std::optional<helios::math::vec4f> baseColor;
 
         /**
+         * @brief Creates a new override with the given base color.
+         *
+         * @param color The color to set.
+         *
+         * @return A new TextShaderPropertiesOverride with the color set.
+         */
+        [[nodiscard]] TextShaderPropertiesOverride withBaseColor(helios::math::vec4f color) noexcept {
+            return TextShaderPropertiesOverride(color);
+        }
+
+        /**
          * @brief Writes override values to a uniform value map.
          *
          * Only writes values that are set (non-nullopt). This method should be

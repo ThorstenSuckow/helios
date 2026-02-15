@@ -28,6 +28,8 @@ export namespace helios::engine::runtime::spawn::behavior::placements {
      */
     class RandomSpawnPlacer final : public SpawnPlacer {
 
+        helios::util::Random rGen_{12345};
+
     public:
 
         /**
@@ -49,12 +51,18 @@ export namespace helios::engine::runtime::spawn::behavior::placements {
             const SpawnContext& spawnContext
         ) override {
 
-            static auto rGen = helios::util::Random(12345);
 
-            float xPos = rGen.randomFloat(environmentBounds.min()[0], environmentBounds.max()[0]);
-            float yPos = rGen.randomFloat(environmentBounds.min()[1], environmentBounds.max()[1]);
+            float xPos = rGen_.randomFloat(environmentBounds.min()[0], environmentBounds.max()[0]);
+            float yPos = rGen_.randomFloat(environmentBounds.min()[1], environmentBounds.max()[1]);
 
             return helios::math::vec3f{xPos, yPos, 0.0f};
+        }
+
+        /**
+         * @brief Resets the random number generator to its initial seed.
+         */
+        void onReset() noexcept override {
+            rGen_.reset();
         }
 
 

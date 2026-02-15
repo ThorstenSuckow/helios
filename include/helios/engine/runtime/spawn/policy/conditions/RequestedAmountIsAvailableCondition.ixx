@@ -83,6 +83,17 @@ export namespace helios::engine::runtime::spawn::policy::conditions {
             spawnRuleState.setSinceLastSpawn(0.0f);
         }
 
+        /**
+         * @brief Resets the spawn timer.
+         *
+         * @param spawnRuleState The rule's runtime state to reset.
+         */
+        void onReset(
+            SpawnRuleState& spawnRuleState
+        ) const noexcept override {
+            spawnRuleState.setSinceLastSpawn(0.0f);
+        }
+
     };
 
 }

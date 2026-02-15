@@ -23,6 +23,8 @@ import helios.engine.runtime.messaging.event.GameLoopEventBus;
 import helios.engine.runtime.gameloop.CommitPoint;
 import helios.engine.runtime.gameloop.Phase;
 
+import helios.engine.mechanics.gamestate.types;
+
 import helios.input.InputSnapshot;
 import helios.rendering.ViewportSnapshot;
 
@@ -370,6 +372,7 @@ export namespace helios::engine::runtime::gameloop {
                   viewportSnapshots
               );
 
+            auto& session = gameWorld.session();
 
             // gameloop phases
             for (auto phase : {helios::engine::runtime::gameloop::PhaseType::Pre,
@@ -378,16 +381,16 @@ export namespace helios::engine::runtime::gameloop {
 
                 switch (phase) {
                     case helios::engine::runtime::gameloop::PhaseType::Pre:
-                        prePhase_.update(updateContext);
+                        prePhase_.update(updateContext, session.gameState());
                         phaseCommit(gameWorld, updateContext);
                         break;
                     case helios::engine::runtime::gameloop::PhaseType::Main:
-                        mainPhase_.update(updateContext);
+                        mainPhase_.update(updateContext, session.gameState());
                         phaseCommit(gameWorld, updateContext);
 
                         break;
                     case helios::engine::runtime::gameloop::PhaseType::Post:
-                        postPhase_.update(updateContext);
+                        postPhase_.update(updateContext, session.gameState());
                         phaseCommit(gameWorld, updateContext);
                         frameEventBus_.swapBuffers();
                         break;

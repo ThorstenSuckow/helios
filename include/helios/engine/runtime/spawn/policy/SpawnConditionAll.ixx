@@ -123,6 +123,20 @@ export namespace helios::engine::runtime::spawn::policy {
 
         }
 
+        /**
+         * @brief Propagates reset to all child conditions.
+         *
+         * @param spawnRuleState The rule's runtime state to reset.
+         */
+        void onReset(
+            SpawnRuleState& spawnRuleState
+        ) const noexcept override {
+            for (auto& condition : spawnConditions_) {
+                condition->onReset(spawnRuleState);
+            }
+
+        }
+
 
     };
 

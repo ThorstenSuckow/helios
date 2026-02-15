@@ -94,6 +94,17 @@ export namespace helios::engine::runtime::spawn::policy {
             // noop
         }
 
+        /**
+         * @brief Called when the spawn system is reset.
+         *
+         * @details Override to reset condition state (e.g., timers, counters).
+         *
+         * @param spawnRuleState The rule's runtime state to reset.
+         */
+        virtual void onReset(
+            SpawnRuleState& spawnRuleState
+        ) const noexcept = 0;
+
 
     };
 

@@ -78,6 +78,11 @@ export namespace helios::scene {
         bool needsUpdate_ = true;
 
         /**
+         * @brief True if this node is the root of the scene graph.
+         */
+        bool isRoot_ = false;
+
+        /**
          * @brief A shared pointer to the Renderable this node represents in the
          * SceneGraph. May be nullptr if this node does not represent a
          */
@@ -390,6 +395,24 @@ export namespace helios::scene {
 
                 onWorldTransformUpdate();
                 return true;
+            }
+
+            /**
+             * @brief Marks this node as the root of the scene graph.
+             *
+             * @param sceneGraphKey The passkey for scene-graph-only access.
+             */
+            void setIsRoot(helios::scene::SceneGraphKey sceneGraphKey) noexcept {
+                isRoot_ = true;
+            }
+
+            /**
+             * @brief Checks whether this node is the root of the scene graph.
+             *
+             * @return True if this is the root node.
+             */
+            [[nodiscard]] bool isRoot() const noexcept {
+                return isRoot_;
             }
 
             /**

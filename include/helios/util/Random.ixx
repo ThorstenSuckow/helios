@@ -40,14 +40,34 @@ export namespace helios::util {
          */
         std::uniform_real_distribution<float> uniformDist_;
 
+        /**
+         * @brief The initial seed used to initialize the generator.
+         *
+         * @details Stored for use by `reset()` to restore the generator to its
+         * initial state.
+         */
+        uint32_t initialSeed_;
 
     public:
 
         /**
-        * @brief Initializes the generator with the provided seed value.
-        */
-        explicit Random(uint32_t seed) : gen_(seed) {};
+         * @brief Initializes the generator with the provided seed value.
+         *
+         * @param seed The seed value for the random number generator.
+         */
+        explicit Random(const uint32_t seed) : gen_(seed), initialSeed_(seed) {};
 
+        /**
+         * @brief Resets the generator to its initial state.
+         *
+         * @details Re-seeds the generator with the original seed value and
+         * resets the distribution state. Useful for reproducible sequences.
+         */
+        void reset() {
+            gen_.seed(initialSeed_);
+
+            uniformDist_.reset();
+        }
 
         /**
          * @brief Generates a pseudo-random float in the range [a, b).

@@ -16,6 +16,7 @@ import helios.engine.runtime.world.SystemRegistry;
 
 import helios.engine.runtime.world.UpdateContext;
 
+import helios.engine.mechanics.gamestate.types;
 
 export namespace helios::engine::modules {
     class GameWorld;
@@ -64,6 +65,11 @@ export namespace helios::engine::runtime::gameloop {
         Phase& owner_;
 
         /**
+         * @brief The game state(s) in which this pass should execute.
+         */
+        helios::engine::mechanics::gamestate::types::GameState gameState_;
+
+        /**
          * @brief Updates all systems registered in this pass.
          *
          * @param updateContext The current update context.
@@ -92,6 +98,8 @@ export namespace helios::engine::runtime::gameloop {
          */
         CommitPoint commitPoint_ = CommitPoint::None;
 
+
+
         public:
 
         /**
@@ -100,8 +108,9 @@ export namespace helios::engine::runtime::gameloop {
          * @param owner Reference to the parent Phase.
          */
         explicit Pass(
-            Phase& owner
-        ) : owner_(owner) {}
+            Phase& owner,
+            const helios::engine::mechanics::gamestate::types::GameState gameState
+        ) : owner_(owner), gameState_(gameState) {}
 
         /**
          * @brief Adds a system of type T to this pass.
@@ -167,6 +176,21 @@ export namespace helios::engine::runtime::gameloop {
          */
         [[nodiscard]] CommitPoint commitPoint() const noexcept {
             return commitPoint_;
+        }
+
+        /**
+         * @brief Returns the game state(s) in which this pass executes.
+         *
+         * @details Passes can be configured to run only during specific game states
+         * (e.g., Playing, Paused). The pass will be skipped if the current game state
+         * does not match the configured state mask.
+         *
+         * @return The game state bitmask for this pass.
+         *
+         * @see GameState
+         */
+        [[nodiscard]] helios::engine::mechanics::gamestate::types::GameState runsIn() {
+            return gameState_;
         }
 
 

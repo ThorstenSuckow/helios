@@ -22,4 +22,5 @@ export import helios.engine.builder.gameObject.builders.LifecycleBuilder;
 export import helios.engine.builder.gameObject.builders.HealthBuilder;
 export import helios.engine.builder.gameObject.builders.ScoringBuilder;
 export import helios.engine.builder.gameObject.builders.ObserverBuilder;
+export import helios.engine.builder.gameObject.builders.MenuBuilder;
 

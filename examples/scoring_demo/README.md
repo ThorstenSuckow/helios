@@ -161,7 +161,7 @@ auto scoreText = GameObjectFactory::gameObject(gameWorld)
     .withUiTransform([&](auto& ui) {
         ui.transform()
           .anchor(Anchor::TopLeft)
-          .margins({10.0f, 10.0f, 0.0f, 0.0f})
+          .offsets({10.0f, 10.0f, 0.0f, 0.0f})
           .viewportId(mainViewportId);
     })
     .withObserver([](auto& obs) {

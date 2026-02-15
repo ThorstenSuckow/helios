@@ -67,7 +67,7 @@ export namespace helios::rendering::text {
         /**
          * @brief Optional overrides for text shader properties.
          */
-        std::optional<helios::rendering::text::TextShaderPropertiesOverride> textPropertiesOverride_;
+        std::optional<helios::rendering::text::TextShaderPropertiesOverride> textShaderPropertiesOverride_;
 
         /**
          * @brief Positioning and styling data (font, position, scale).
@@ -82,24 +82,42 @@ export namespace helios::rendering::text {
          *
          * @param textMesh Unique pointer to the text mesh containing text content, font, and layout data.
          * @param renderPrototype Shared prototype with shader and font configuration.
-         * @param textPropertiesOverride Optional overrides for shader properties (e.g., text color).
+         * @param textShaderPropertiesOverride Optional overrides for shader properties (e.g., text color).
          *
          * @throws std::invalid_argument If `renderPrototype` is null.
          */
         explicit TextRenderable(
             std::unique_ptr<helios::rendering::text::TextMesh> textMesh,
             std::shared_ptr<const helios::rendering::text::TextRenderPrototype> renderPrototype,
-            const std::optional<helios::rendering::text::TextShaderPropertiesOverride>& textPropertiesOverride = std::nullopt
+            const std::optional<helios::rendering::text::TextShaderPropertiesOverride>& textShaderPropertiesOverride = std::nullopt
         ) :
             textRenderPrototype_(std::move(renderPrototype)),
             textMesh_(std::move(textMesh)),
-            textPropertiesOverride_(textPropertiesOverride)
+            textShaderPropertiesOverride_(textShaderPropertiesOverride)
         {
 
             if (!textRenderPrototype_) {
                 throw std::invalid_argument("Unexpected nullptr for TextRenderPrototype");
             }
 
+        }
+
+        /**
+         * @brief Returns the optional shader properties override.
+         *
+         * @return Optional containing the override if set.
+         */
+        [[nodiscard]] std::optional<helios::rendering::text::TextShaderPropertiesOverride> textShaderPropertiesOverride() noexcept {
+            return textShaderPropertiesOverride_;
+        }
+
+        /**
+         * @brief Sets the shader properties override.
+         *
+         * @param textShaderPropertiesOverride The override to apply.
+         */
+        void setTextShaderPropertiesOverride(helios::rendering::text::TextShaderPropertiesOverride textShaderPropertiesOverride) noexcept {
+             textShaderPropertiesOverride_ = textShaderPropertiesOverride;
         }
 
         /**
@@ -169,6 +187,15 @@ export namespace helios::rendering::text {
         }
 
         /**
+         * @brief Returns a mutable reference to the text mesh.
+         *
+         * @return Mutable reference to the text mesh.
+         */
+        [[nodiscard]]  helios::rendering::text::TextMesh& textMesh() noexcept {
+            return *textMesh_;
+        }
+
+        /**
          * @brief Writes uniform values to the given map.
          *
          * Applies the prototype's text properties first, then any instance-specific
@@ -179,8 +206,8 @@ export namespace helios::rendering::text {
         void writeUniformValues(helios::rendering::shader::UniformValueMap& uniformValueMap) const noexcept override {
             textRenderPrototype_->textProperties().writeUniformValues(uniformValueMap);
 
-            if (textPropertiesOverride_) {
-                textPropertiesOverride_->writeUniformValues(uniformValueMap);
+            if (textShaderPropertiesOverride_) {
+                textShaderPropertiesOverride_->writeUniformValues(uniformValueMap);
             }
         }
 

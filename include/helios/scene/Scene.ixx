@@ -175,7 +175,10 @@ export namespace helios::scene {
          * @param frustumCullingStrategy The frustum culling strategy to use with this Scene.
          */
         explicit Scene(std::unique_ptr<helios::scene::FrustumCullingStrategy> frustumCullingStrategy) :
-            frustumCullingStrategy_(std::move(frustumCullingStrategy)), root_(std::make_unique<SceneNode>()) {}
+            frustumCullingStrategy_(std::move(frustumCullingStrategy)), root_(std::make_unique<SceneNode>()) {
+
+            root_->setIsRoot(sceneGraphKey_);
+        }
 
 
         /**

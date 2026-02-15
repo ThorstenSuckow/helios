@@ -13,6 +13,7 @@ module;
 #include <vector>
 #include <cassert>
 #include <limits>
+#include <span>
 
 
 export module helios.engine.runtime.pooling.GameObjectPool;
@@ -343,6 +344,24 @@ export namespace helios::engine::runtime::pooling {
         [[nodiscard]] size_t inactiveCount() const noexcept {
             return inactiveGameObjects_.size();
         }
+
+        /**
+         * @brief Returns a span of all inactive EntityHandles.
+         *
+         * @return Span of inactive EntityHandles.
+         */
+        std::span<helios::engine::ecs::EntityHandle> inactiveGameObjects() {
+            return inactiveGameObjects_;
+        };
+
+        /**
+         * @brief Returns a span of all active EntityHandles.
+         *
+         * @return Span of active EntityHandles.
+         */
+        std::span<helios::engine::ecs::EntityHandle> activeGameObjects() {
+            return activeGameObjects_;
+        };
     };
 
 }

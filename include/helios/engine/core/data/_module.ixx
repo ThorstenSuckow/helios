@@ -16,3 +16,5 @@ export import helios.engine.core.data.CollisionLayer;
 export import helios.engine.core.data.EntityId;
 export import helios.engine.core.data.VersionId;
 export import helios.engine.core.data.EntityTombstone;
+export import helios.engine.core.data.MenuId;
+export import helios.engine.core.data.ActionId;

@@ -39,7 +39,7 @@ export namespace helios::engine::runtime::spawn::commands {
         /**
          * @brief The handle of the entity to despawn.
          */
-        const helios::engine::ecs::EntityHandle guid_;
+        helios::engine::ecs::EntityHandle entityHandle_;
 
         /**
          * @brief The spawn profile ID for pool return.
@@ -55,9 +55,9 @@ export namespace helios::engine::runtime::spawn::commands {
          * @param spawnProfileId The spawn profile ID for pool return.
          */
         explicit DespawnCommand(
-            const helios::engine::ecs::EntityHandle& entityHandle,
+            const helios::engine::ecs::EntityHandle entityHandle,
             const helios::engine::core::data::SpawnProfileId spawnProfileId) :
-            guid_(entityHandle), spawnProfileId_(spawnProfileId) {}
+            entityHandle_(entityHandle), spawnProfileId_(spawnProfileId) {}
 
         /**
          * @brief Direct execution is not supported; requires a dispatcher.
@@ -89,7 +89,7 @@ export namespace helios::engine::runtime::spawn::commands {
          * @return The entity handle.
          */
         [[nodiscard]] helios::engine::ecs::EntityHandle entityHandle() const noexcept {
-            return guid_;
+            return entityHandle_;
         }
 
         /**

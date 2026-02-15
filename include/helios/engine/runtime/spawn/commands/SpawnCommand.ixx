@@ -42,12 +42,12 @@ export namespace helios::engine::runtime::spawn::commands {
         /**
          * @brief The number of GameObjects to spawn.
          */
-        const size_t spawnBudget_;
+        size_t spawnBudget_;
 
 
-        const helios::engine::core::data::SpawnProfileId spawnProfileId_;
+        helios::engine::core::data::SpawnProfileId spawnProfileId_;
 
-        const helios::engine::runtime::spawn::SpawnContext spawnContext_;
+        helios::engine::runtime::spawn::SpawnContext spawnContext_;
 
     public:
 

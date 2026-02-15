@@ -212,6 +212,24 @@ export namespace helios::engine::runtime::spawn::scheduling {
             }
         }
 
+        /**
+         * @brief Resets all rule states and the cursor to initial values.
+         *
+         * @details Iterates through all rules and resets their state.
+         * Also resets the cursor to the first rule in the cycle.
+         */
+        void reset() noexcept override {
+            for (auto& ruleConfig : ringBuffer_) {
+
+                auto it = spawnRuleStates_.find(ruleConfig.spawnRule->spawnRuleId());
+                assert(it != spawnRuleStates_.end() && "Unexpected missing spawnRuleState");
+
+                ruleConfig.spawnRule->reset(it->second);
+
+            }
+            cursor_ = 0;
+        }
+
     };
 
 }

@@ -85,8 +85,17 @@ export namespace helios::engine::runtime::spawn::policy {
          * @param spawnRuleState The state to update.
          * @param spawnAmount The number of entities spawned.
          */
-        void commit(SpawnRuleState& spawnRuleState, const size_t spawnAmount) {
+        void commit(SpawnRuleState& spawnRuleState, const size_t spawnAmount) const {
             spawnCondition_->onCommit(spawnRuleState, spawnAmount);
+        }
+
+        /**
+         * @brief Resets the rule's condition state.
+         *
+         * @param spawnRuleState The state to reset.
+         */
+        void reset(SpawnRuleState& spawnRuleState) const{
+            spawnCondition_->onReset(spawnRuleState);
         }
 
         /**

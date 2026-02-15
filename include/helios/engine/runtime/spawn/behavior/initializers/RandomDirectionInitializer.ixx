@@ -34,6 +34,8 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
      */
     class RandomDirectionInitializer final : public SpawnInitializer {
 
+        helios::util::Random rGen_{12345};
+
     public:
 
         /**
@@ -49,18 +51,24 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
             const SpawnContext& spawnContext
         ) override {
 
-            static auto rGen = helios::util::Random(12345);
 
             auto* mc = gameObject.get<helios::engine::modules::physics::motion::components::Move2DComponent>();
             auto* dc = gameObject.get<helios::engine::modules::physics::motion::components::DirectionComponent>();
 
             auto dir = helios::math::vec2f{
-                rGen.randomFloat(-1.0f, 1.0f),
-                rGen.randomFloat(-1.0f, 1.0f)
+                rGen_.randomFloat(-1.0f, 1.0f),
+                rGen_.randomFloat(-1.0f, 1.0f)
             };
 
             dc->setDirection(dir.normalize().toVec3());
             mc->move(dc->direction(), 1.0f);
+        }
+
+        /**
+         * @brief Resets the random number generator to its initial seed.
+         */
+        void onReset() noexcept override  {
+            rGen_.reset();
         }
 
     };

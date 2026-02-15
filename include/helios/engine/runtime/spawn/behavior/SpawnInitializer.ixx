@@ -67,6 +67,15 @@ export namespace helios::engine::runtime::spawn::behavior {
             const SpawnContext& spawnContext
         ) = 0;
 
+        /**
+         * @brief Called when the spawn system is reset.
+         *
+         * @details Override to reset any internal state (e.g., RNG seeds).
+         * The default implementation is a no-op.
+         */
+        virtual void onReset() noexcept {
+
+        }
 
     };
 

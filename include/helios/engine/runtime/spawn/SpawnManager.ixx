@@ -17,6 +17,10 @@ import helios.engine.runtime.spawn.SpawnProfile;
 import helios.engine.runtime.spawn.SpawnContext;
 import helios.engine.runtime.spawn.events.SpawnPlanCommandExecutedEvent;
 
+import helios.engine.runtime.messaging.command.CommandBuffer;
+
+import helios.engine.runtime.spawn.scheduling.SpawnScheduler;
+
 import helios.engine.mechanics.spawn.components.EmittedByComponent;
 
 import helios.engine.runtime.spawn.commands.SpawnCommand;
@@ -95,6 +99,16 @@ export namespace helios::engine::runtime::spawn {
      */
     class SpawnManager : public helios::engine::runtime::world::Manager,
                          public helios::engine::runtime::spawn::SpawnCommandHandler {
+
+        /**
+         * @brief Collection of schedulers that manage spawn rules and conditions.
+         *
+         * @details Each scheduler owns and evaluates its registered spawn rules
+         * independently. When conditions are met, the scheduler produces
+         * ScheduledSpawnPlan instances for execution. Multiple schedulers allow
+         * grouping spawn rules by category (e.g., enemies, powerups, projectiles).
+         */
+        std::vector<std::unique_ptr<helios::engine::runtime::spawn::scheduling::SpawnScheduler>> spawnSchedulers_;
 
         /**
          * @brief Queue of pending spawn commands.
@@ -368,6 +382,19 @@ export namespace helios::engine::runtime::spawn {
         }
 
         /**
+         * @brief Adds a spawn scheduler to this manager.
+         *
+         * @details Schedulers evaluate spawn rules and produce spawn plans based
+         * on game conditions. Multiple schedulers can be added for different
+         * spawn categories.
+         *
+         * @param scheduler The scheduler to add. Ownership is transferred.
+         */
+        void addScheduler(std::unique_ptr<helios::engine::runtime::spawn::scheduling::SpawnScheduler> scheduler) {
+            spawnSchedulers_.push_back(std::move(scheduler));
+        }
+
+        /**
          * @brief Submits a despawn command for deferred processing.
          *
          * @param command The despawn command to queue.
@@ -482,6 +509,38 @@ export namespace helios::engine::runtime::spawn {
 
         }
 
+        /**
+         * @brief Resets all schedulers, profiles, and pending commands.
+         *
+         * @details Called during level transitions or game restarts to clear
+         * all spawn state. Resets each scheduler, calls `onReset()` on all
+         * placers and initializers, and clears all pending command queues.
+         */
+        void reset() override {
+
+            for (auto& scheduler: spawnSchedulers_) {
+                scheduler->reset();
+            }
+
+            for (auto& [_, profile]: spawnProfiles_) {
+                profile->spawnPlacer->onReset();
+                profile->spawnInitializer->onReset();
+            }
+
+
+            despawnCommands_.clear();
+            spawnCommands_.clear();
+            scheduledSpawnPlanCommands_.clear();
+        }
+
+        /**
+         * @brief Returns a span of all registered spawn schedulers.
+         *
+         * @return Span of spawn scheduler unique pointers.
+         */
+        std::span<std::unique_ptr<helios::engine::runtime::spawn::scheduling::SpawnScheduler>> spawnSchedulers() {
+            return spawnSchedulers_;
+        }
     };
 
 

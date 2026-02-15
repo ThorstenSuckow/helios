@@ -111,6 +111,8 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
      */
     class MoveInitializer final : public SpawnInitializer {
 
+        helios::util::Random rGen_{12345};
+
         /**
          * @brief The direction strategy to apply during initialization.
          */
@@ -139,15 +141,14 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
             helios::engine::ecs::GameObject gameObject,
             const SpawnPlanCursor& cursor,
             const SpawnContext& spawnContext
-        ) const noexcept {
-            static auto rGen = helios::util::Random(12345);
+        ) noexcept {
 
             auto* mc = gameObject.get<helios::engine::modules::physics::motion::components::Move2DComponent>();
             auto* dc = gameObject.get<helios::engine::modules::physics::motion::components::DirectionComponent>();
 
             auto dir = helios::math::vec2f{
-                rGen.randomFloat(-1.0f, 1.0f),
-                rGen.randomFloat(-1.0f, 1.0f)
+                rGen_.randomFloat(-1.0f, 1.0f),
+                rGen_.randomFloat(-1.0f, 1.0f)
             };
             auto* sc = gameObject.get<helios::engine::modules::physics::motion::components::SteeringComponent>();
             if (sc) {
@@ -185,8 +186,6 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
             const DirectionType directionType = DirectionType::Axis
             
         ) noexcept {
-
-            static auto rGen = helios::util::Random(12345);
 
             auto* mc = gameObject.get<helios::engine::modules::physics::motion::components::Move2DComponent>();
             auto* sc = gameObject.get<helios::engine::modules::physics::motion::components::SteeringComponent>();
@@ -277,11 +276,11 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
                     alignTo(gameObject, cursor, spawnContext, direction_, directionType_);
                     return;
             }
-
-
-
         }
 
+        void onReset() noexcept override  {
+            rGen_.reset();
+        }
     };
 
 }

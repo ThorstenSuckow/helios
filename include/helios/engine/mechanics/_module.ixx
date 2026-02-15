@@ -16,3 +16,5 @@ export import helios.engine.mechanics.lifecycle;
 export import helios.engine.mechanics.damage;
 export import helios.engine.mechanics.health;
 export import helios.engine.mechanics.scoring;
+export import helios.engine.mechanics.gamestate;
+export import helios.engine.mechanics.match;

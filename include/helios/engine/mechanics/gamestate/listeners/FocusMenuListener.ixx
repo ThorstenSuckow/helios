@@ -65,7 +65,14 @@ export namespace helios::engine::mechanics::gamestate::listeners {
         ) noexcept {
 
             if (from == GameState::Paused) {
-                updateContext.gameWorld().session().setFocusedEntity(std::nullopt);
+                auto go = updateContext.gameWorld().session().focusedEntity();
+
+                if (go) {
+                    auto* mc = go->get<helios::engine::modules::ui::widgets::components::MenuComponent>();
+                    if (mc && mc->menuId() == menuId_) {
+                        updateContext.gameWorld().session().setFocusedEntity(std::nullopt);
+                    }
+                }
             }
         }
 
@@ -85,8 +92,8 @@ export namespace helios::engine::mechanics::gamestate::listeners {
                     if (mc->menuId() == menuId_) {
                         mc->setSelectedIndex(selectedIndex_);
                         updateContext.gameWorld().session().setFocusedEntity(entity);
+                        break;
                     }
-                    break;
                 }
 
             }

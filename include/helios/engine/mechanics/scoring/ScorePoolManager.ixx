@@ -34,10 +34,17 @@ export namespace helios::engine::mechanics::scoring {
     /**
      * @brief Manages score pools and processes score commands.
      *
-     * ScorePoolManager is responsible for creating and managing score pools,
+     * @details ScorePoolManager is responsible for creating and managing score pools,
      * and for handling score update commands. It implements both the Manager
      * interface (for lifecycle management) and ScoreCommandHandler (for
-     * receiving score commands).
+     * receiving score commands from the command system).
+     *
+     * Score updates are batched: commands submitted via `submit()` are queued
+     * and processed during `flush()`, ensuring deterministic ordering.
+     *
+     * @see ScorePool
+     * @see ScoreCommandHandler
+     * @see Manager
      */
     class ScorePoolManager : public helios::engine::runtime::world::Manager,
                              public helios::engine::mechanics::scoring::ScoreCommandHandler {
@@ -147,6 +154,18 @@ export namespace helios::engine::mechanics::scoring {
             gameWorld.registerScoreCommandHandler(*this);
         }
 
+
+        /**
+         * @brief Resets all managed score pools to zero.
+         *
+         * @details Iterates through all registered pools and calls their reset()
+         * method, clearing all scores and resetting totals.
+         */
+        virtual void reset() {
+            for (auto& pool : pools_) {
+                pool.reset();
+            }
+        }
     };
 
 }

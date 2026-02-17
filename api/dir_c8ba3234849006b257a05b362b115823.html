@@ -126,13 +126,13 @@ Files</h2></td></tr>
 <tr class="memdesc:mechanics_2lifecycle_2registry_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Component registration for lifecycle module. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md242"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md255"></a>
 helios::engine::mechanics::lifecycle</h1>
 <p>Lifecycle management for entity components with delayed activation support.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md243"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md256"></a>
 Overview</h1>
 <p>This module provides mechanisms for controlling when components become active during an entity's lifecycle. The primary use case is delaying component activation after spawn, enabling patterns like collision immunity, staggered wave spawns, and effect sequencing.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md244"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md257"></a>
 Key Classes</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -142,7 +142,7 @@ Key Classes</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">DelayedComponentEnablerSystem</span>  </td><td class="markdownTableBodyNone">System that decrements timers and enables components  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md245"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md258"></a>
 Architecture</h1>
 <div class="fragment"><div class="line">DelayedComponentEnablerInitializer</div>
 <div class="line">        │</div>
@@ -160,7 +160,7 @@ Architecture</h1>
 <div class="line">│  - enable() when delta &lt;= 0    │</div>
 <div class="line">│  - sync() to remove completed  │</div>
 <div class="line">└────────────────────────────────┘</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md246"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md259"></a>
 Usage</h1>
 <div class="fragment"><div class="line"><span class="comment">// During spawn initialization, defer collision component by 0.5 seconds</span></div>
 <div class="line"><span class="keyword">auto</span>* enabler = entity.get&lt;DelayedComponentEnabler&gt;();</div>
@@ -171,7 +171,7 @@ Usage</h1>
 <div class="line">    CollisionComponent,</div>
 <div class="line">    RenderableComponent</div>
 <div class="line">&gt;&gt;(0.1f);  <span class="comment">// 0.1s delay between each entity in batch</span></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md247"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md260"></a>
 Common Patterns</h1>
 <p><b>Collision Immunity</b> </p><div class="fragment"><div class="line"><span class="comment">// Projectiles ignore collisions for 0.2s after spawn</span></div>
 <div class="line">DelayedComponentEnablerInitializer&lt;CollisionComponent&gt;(0.2f)</div>

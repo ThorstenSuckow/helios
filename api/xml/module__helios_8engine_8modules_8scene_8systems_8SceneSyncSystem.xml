@@ -3,45 +3,45 @@
   <compounddef id="module__helios_8engine_8modules_8scene_8systems_8SceneSyncSystem" kind="module">
     <compoundname>helios.engine.modules.scene.systems.SceneSyncSystem</compoundname>
     <innerfile refid="SceneSyncSystem_8ixx">SceneSyncSystem.ixx</innerfile>
-    <innerclass refid="classhelios_1_1engine_1_1modules_1_1systems_1_1scene_1_1SceneSyncSystem" prot="public">helios::engine::modules::systems::scene::SceneSyncSystem</innerclass>
+    <innerclass refid="classhelios_1_1engine_1_1modules_1_1scene_1_1systems_1_1SceneSyncSystem" prot="public">helios::engine::modules::scene::systems::SceneSyncSystem</innerclass>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1systems_1_1scene_1_1SceneSyncSystem_1ae882c26989b2b87b5d7899a2035b721c" prot="private" static="no" mutable="no">
-        <type><ref refid="classhelios_1_1scene_1_1Scene" kindref="compound">helios::scene::Scene</ref> *</type>
-        <definition>helios::scene::Scene* helios::engine::modules::systems::scene::SceneSyncSystem::scene_</definition>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1scene_1_1systems_1_1SceneSyncSystem_1a0eabf7fc514eefa357a257940ebd4196" prot="private" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap" kindref="compound">helios::engine::modules::scene::types::SceneToViewportMap</ref> &amp;</type>
+        <definition>helios::engine::modules::scene::types::SceneToViewportMap&amp; helios::engine::modules::scene::systems::SceneSyncSystem::sceneToViewportMap_</definition>
         <argsstring></argsstring>
-        <name>scene_</name>
-        <qualifiedname>helios::engine::modules::systems::scene::SceneSyncSystem::scene_</qualifiedname>
+        <name>sceneToViewportMap_</name>
+        <qualifiedname>helios::engine::modules::scene::systems::SceneSyncSystem::sceneToViewportMap_</qualifiedname>
         <briefdescription>
-<para>Pointer to the Scene being synchronized. </para>
+<para>Reference to the scene-to-viewport mapping for scene iteration. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/scene/systems/SceneSyncSystem.ixx" line="38" column="30" bodyfile="/tmp/h/include/helios/engine/modules/scene/systems/SceneSyncSystem.ixx" bodystart="38" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/engine/modules/scene/systems/SceneSyncSystem.ixx" line="50" column="67" bodyfile="/tmp/h/include/helios/engine/modules/scene/systems/SceneSyncSystem.ixx" bodystart="50" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1systems_1_1scene_1_1SceneSyncSystem_1a3d667d9d199ee151f1f3463ef22d89be" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1scene_1_1systems_1_1SceneSyncSystem_1a9e12cf3677e7827966ed4ab92f7705af" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
-        <definition>helios::engine::modules::systems::scene::SceneSyncSystem::SceneSyncSystem</definition>
-        <argsstring>(helios::scene::Scene *scene)</argsstring>
+        <definition>helios::engine::modules::scene::systems::SceneSyncSystem::SceneSyncSystem</definition>
+        <argsstring>(helios::engine::modules::scene::types::SceneToViewportMap &amp;sceneToViewportMap)</argsstring>
         <name>SceneSyncSystem</name>
-        <qualifiedname>helios::engine::modules::systems::scene::SceneSyncSystem::SceneSyncSystem</qualifiedname>
+        <qualifiedname>helios::engine::modules::scene::systems::SceneSyncSystem::SceneSyncSystem</qualifiedname>
         <param>
-          <type><ref refid="classhelios_1_1scene_1_1Scene" kindref="compound">helios::scene::Scene</ref> *</type>
-          <declname>scene</declname>
+          <type><ref refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap" kindref="compound">helios::engine::modules::scene::types::SceneToViewportMap</ref> &amp;</type>
+          <declname>sceneToViewportMap</declname>
         </param>
         <briefdescription>
-<para>Constructs a <ref refid="classhelios_1_1engine_1_1modules_1_1systems_1_1scene_1_1SceneSyncSystem" kindref="compound">SceneSyncSystem</ref>. </para>
+<para>Constructs the system with the scene-to-viewport map. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>scene</parametername>
+<parametername>sceneToViewportMap</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Pointer to the Scene to synchronize with. Must not be nullptr. </para>
+<para>Reference to the scene mapping for accessing all scenes. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -49,29 +49,30 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/scene/systems/SceneSyncSystem.ixx" line="47" column="18" bodyfile="/tmp/h/include/helios/engine/modules/scene/systems/SceneSyncSystem.ixx" bodystart="47" bodyend="49"/>
+        <location file="/tmp/h/include/helios/engine/modules/scene/systems/SceneSyncSystem.ixx" line="59" column="18" bodyfile="/tmp/h/include/helios/engine/modules/scene/systems/SceneSyncSystem.ixx" bodystart="59" bodyend="60"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1systems_1_1scene_1_1SceneSyncSystem_1a7de703da9ebae17ad639b7dc0d3e687c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1scene_1_1systems_1_1SceneSyncSystem_1a3fb3238f23b0c2ffa7188f5fff920662" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>void</type>
-        <definition>void helios::engine::modules::systems::scene::SceneSyncSystem::update</definition>
+        <definition>void helios::engine::modules::scene::systems::SceneSyncSystem::update</definition>
         <argsstring>(helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept override</argsstring>
         <name>update</name>
-        <qualifiedname>helios::engine::modules::systems::scene::SceneSyncSystem::update</qualifiedname>
+        <qualifiedname>helios::engine::modules::scene::systems::SceneSyncSystem::update</qualifiedname>
         <reimplements refid="classhelios_1_1engine_1_1ecs_1_1System_1a4e9969641985fa04db6214332c88605b">update</reimplements>
         <param>
           <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
           <declname>updateContext</declname>
         </param>
         <briefdescription>
-<para>Updates the system, synchronizing transforms. </para>
+<para>Synchronizes gameplay transforms with the scene graph. </para>
         </briefdescription>
         <detaileddescription>
+<para>Performs a two-pass synchronization: 1. Writes dirty local transforms to SceneNodes 2. Updates all scene hierarchies 3. Reads computed world transforms back to components</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>updateContext</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Context containing frame timing and game state. </para>
+<para>The current frame&apos;s update context. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -79,7 +80,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/scene/systems/SceneSyncSystem.ixx" line="56" column="14" bodyfile="/tmp/h/include/helios/engine/modules/scene/systems/SceneSyncSystem.ixx" bodystart="56" bodyend="96"/>
+        <location file="/tmp/h/include/helios/engine/modules/scene/systems/SceneSyncSystem.ixx" line="72" column="14" bodyfile="/tmp/h/include/helios/engine/modules/scene/systems/SceneSyncSystem.ixx" bodystart="72" bodyend="114"/>
         <references refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" compoundref="System_8ixx" startline="48">helios::engine::ecs::System::gameWorld_</references>
       </memberdef>
     </sectiondef>
@@ -87,6 +88,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/tmp/h/include/helios/engine/modules/scene/systems/SceneSyncSystem.ixx" line="10" column="15"/>
+    <location file="/tmp/h/include/helios/engine/modules/scene/systems/SceneSyncSystem.ixx" line="11" column="15"/>
   </compounddef>
 </doxygen>

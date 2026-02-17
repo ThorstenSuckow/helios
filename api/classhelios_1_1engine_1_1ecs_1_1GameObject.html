@@ -159,18 +159,24 @@ Public Member Functions</h2></td></tr>
 <p><a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Lightweight facade for entity component manipulation.">GameObject</a> is only 16 bytes (8 bytes <a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html" title="A versioned handle for referencing entities in an EntityPool.">EntityHandle</a> + 8 bytes pointer) and should be **passed by value**, not by reference:</p>
 <p>```cpp // Correct - pass by value void processEntity(GameObject entity) { ... }</p>
 <p>// Unnecessary - reference adds indirection void processEntity(GameObject&amp; entity); // Avoid void processEntity(const GameObject&amp; entity); // Avoid ```</p>
+<p>## Hierarchy Integration</p>
+<p>When a <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Lightweight facade for entity component manipulation.">GameObject</a> has a `HierarchyComponent`, activation changes trigger hierarchy propagation. Calling `setActive()` marks the hierarchy as dirty, and `HierarchyPropagationSystem` propagates the state to all descendants.</p>
 <p>## Usage</p>
 <p>```cpp auto player = gameWorld.addGameObject();</p>
 <p>// Add components player.add&lt;TransformComponent&gt;(position); player.add&lt;HealthComponent&gt;(100.0f);</p>
 <p>// Query and access if (player.has&lt;HealthComponent&gt;()) { player.get&lt;HealthComponent&gt;()-&gt;takeDamage(10.0f); }</p>
-<p>// Activation state player.setActive(false); // Calls onDeactivate() on components ```</p>
+<p>// Activation state (propagates to children if HierarchyComponent present) player.setActive(false); // Calls onDeactivate() on components ```</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html" title="A versioned handle for referencing entities in an EntityPool.">EntityHandle</a> </dd>
 <dd>
 <a class="el" href="classhelios_1_1engine_1_1ecs_1_1EntityManager.html" title="Manages entities and their associated components.">EntityManager</a> </dd>
 <dd>
-GameWorld </dd></dl>
+GameWorld </dd>
+<dd>
+HierarchyComponent </dd>
+<dd>
+HierarchyPropagationSystem </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00077">77</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00086">86</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a1f382e1049da10b3c07f6d05e4424a6b" name="a1f382e1049da10b3c07f6d05e4424a6b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1f382e1049da10b3c07f6d05e4424a6b">&#9670;&#160;</a></span>GameObject()</h2>
@@ -208,9 +214,9 @@ GameWorld </dd></dl>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00098">98</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00107">107</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00121">entityHandle()</a>.</p>
+<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00130">entityHandle()</a>.</p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
@@ -263,11 +269,11 @@ template&lt;typename T, typename ... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the newly created component. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00148">148</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00157">157</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="ComponentTypeId_8ixx_source.html#l00097">helios::engine::core::data::ComponentTypeId::id()</a>, <a class="el" href="ComponentOpsRegistry_8ixx_source.html#l00082">helios::engine::ecs::ComponentOpsRegistry::ops()</a>, and <a class="el" href="GameObject_8ixx_source.html#l00198">raw()</a>.</p>
+<p class="reference">References <a class="el" href="ComponentTypeId_8ixx_source.html#l00097">helios::engine::core::data::ComponentTypeId::id()</a>, <a class="el" href="ComponentOpsRegistry_8ixx_source.html#l00082">helios::engine::ecs::ComponentOpsRegistry::ops()</a>, and <a class="el" href="GameObject_8ixx_source.html#l00207">raw()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="GameObject_8ixx_source.html#l00184">getOrAdd()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="GameObject_8ixx_source.html#l00193">getOrAdd()</a>.</p>
 <div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
@@ -309,9 +315,9 @@ template&lt;typename T, typename ... Args&gt; </div>
 <p>Returns a generator over all component type IDs attached to this entity. </p>
 <dl class="section return"><dt>Returns</dt><dd>Generator yielding <a class="el" href="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId.html" title="Unique type identifier for component types.">ComponentTypeId</a> for each attached component. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00112">112</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00121">121</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="DelayedComponentEnablerInitializer_8ixx_source.html#l00097">helios::engine::runtime::spawn::behavior::initializers::DelayedComponentEnablerInitializer&lt; ComponentTypes &gt;::initialize()</a>, <a class="el" href="GameObject_8ixx_source.html#l00337">onAcquire()</a>, <a class="el" href="GameObject_8ixx_source.html#l00320">onRelease()</a>, and <a class="el" href="GameObject_8ixx_source.html#l00284">setActive()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="DelayedComponentEnablerInitializer_8ixx_source.html#l00097">helios::engine::runtime::spawn::behavior::initializers::DelayedComponentEnablerInitializer&lt; ComponentTypes &gt;::initialize()</a>, <a class="el" href="GameObject_8ixx_source.html#l00367">onAcquire()</a>, <a class="el" href="GameObject_8ixx_source.html#l00350">onRelease()</a>, and <a class="el" href="GameObject_8ixx_source.html#l00298">setActive()</a>.</p>
 <div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
@@ -352,7 +358,7 @@ template&lt;typename T, typename ... Args&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00263">263</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00272">272</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="DelayedComponentEnabler_8ixx_source.html#l00120">helios::engine::mechanics::lifecycle::components::DelayedComponentEnabler::defer()</a>.</p>
 <div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
@@ -395,7 +401,7 @@ template&lt;typename T, typename ... Args&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00254">254</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00263">263</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
 
 </div>
 </div>
@@ -425,7 +431,7 @@ template&lt;typename T, typename ... Args&gt; </div>
 <p>Returns the underlying entity handle (const). </p>
 <dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html" title="A versioned handle for referencing entities in an EntityPool.">EntityHandle</a> for this <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Lightweight facade for entity component manipulation.">GameObject</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00130">130</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00139">139</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
 
 </div>
 </div>
@@ -455,9 +461,9 @@ template&lt;typename T, typename ... Args&gt; </div>
 <p>Returns the underlying entity handle. </p>
 <dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html" title="A versioned handle for referencing entities in an EntityPool.">EntityHandle</a> for this <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Lightweight facade for entity component manipulation.">GameObject</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00121">121</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00130">130</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MenuComponent_8ixx_source.html#l00088">helios::engine::modules::ui::widgets::components::MenuComponent::addMenuItem()</a>, <a class="el" href="GameWorld_8ixx_source.html#l00622">helios::engine::runtime::world::GameWorld::clone()</a>, <a class="el" href="GameObject_8ixx_source.html#l00098">GameObject()</a>, <a class="el" href="MenuComponent_8ixx_source.html#l00105">helios::engine::modules::ui::widgets::components::MenuComponent::insert()</a>, and <a class="el" href="GridCollisionDetectionSystem_8ixx_source.html#l00570">helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::solveCell()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MenuComponent_8ixx_source.html#l00088">helios::engine::modules::ui::widgets::components::MenuComponent::addMenuItem()</a>, <a class="el" href="GameWorld_8ixx_source.html#l00622">helios::engine::runtime::world::GameWorld::clone()</a>, <a class="el" href="GameObject_8ixx_source.html#l00107">GameObject()</a>, <a class="el" href="MenuComponent_8ixx_source.html#l00105">helios::engine::modules::ui::widgets::components::MenuComponent::insert()</a>, and <a class="el" href="GridCollisionDetectionSystem_8ixx_source.html#l00570">helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::solveCell()</a>.</p>
 <div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-5-summary" class="dynsummary" style="display:block;">
 </div>
@@ -501,7 +507,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the component, or nullptr if not attached. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00210">210</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00219">219</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="DelayedComponentEnablerInitializer_8ixx_source.html#l00097">helios::engine::runtime::spawn::behavior::initializers::DelayedComponentEnablerInitializer&lt; ComponentTypes &gt;::initialize()</a>, <a class="el" href="EmitterInitializer_8ixx_source.html#l00051">helios::engine::runtime::spawn::behavior::initializers::EmitterInitializer::initialize()</a>, and <a class="el" href="RandomDirectionInitializer_8ixx_source.html#l00048">helios::engine::runtime::spawn::behavior::initializers::RandomDirectionInitializer::initialize()</a>.</p>
 <div id="dynsection-6" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
@@ -547,7 +553,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Const pointer to the component, or nullptr if not attached. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00222">222</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00231">231</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
 
 </div>
 </div>
@@ -592,9 +598,9 @@ template&lt;typename T, typename ... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the existing or newly created component. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00184">184</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00193">193</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00148">add()</a>.</p>
+<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00157">add()</a>.</p>
 <div id="dynsection-7" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-7-summary" class="dynsummary" style="display:block;">
 </div>
@@ -638,7 +644,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the component is attached, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00234">234</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00243">243</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="DelayedComponentEnabler_8ixx_source.html#l00120">helios::engine::mechanics::lifecycle::components::DelayedComponentEnabler::defer()</a>.</p>
 <div id="dynsection-8" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
@@ -682,7 +688,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the component is attached, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00245">245</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00254">254</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
 
 </div>
 </div>
@@ -712,7 +718,15 @@ template&lt;typename T&gt; </div>
 <p>Returns whether this <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html" title="Lightweight facade for entity component manipulation.">GameObject</a> is active. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if the entity has the Active tag component. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00310">310</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00340">340</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="GameObject_8ixx_source.html#l00298">setActive()</a>.</p>
+<div id="dynsection-9" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-9-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_a3b2fdacd0144acb72a94f1c541bf9e99_icgraph.svg" width="410" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 
 </div>
 </div>
@@ -742,13 +756,13 @@ template&lt;typename T&gt; </div>
 <p>Notifies all components that the entity is being acquired from a pool. </p>
 <p>Iterates through all attached components and calls `onAcquire()` on those that implement it. </p>
 
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00337">337</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00367">367</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00112">componentTypeIds()</a>, <a class="el" href="ComponentOpsRegistry_8ixx_source.html#l00082">helios::engine::ecs::ComponentOpsRegistry::ops()</a>, and <a class="el" href="GameObject_8ixx_source.html#l00198">raw()</a>.</p>
-<div id="dynsection-9" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00121">componentTypeIds()</a>, <a class="el" href="ComponentOpsRegistry_8ixx_source.html#l00082">helios::engine::ecs::ComponentOpsRegistry::ops()</a>, and <a class="el" href="GameObject_8ixx_source.html#l00207">raw()</a>.</p>
+<div id="dynsection-10" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-10-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-9-content" class="dyncontent" style="display:none;">
+<div id="dynsection-10-content" class="dyncontent" style="display:none;">
 <div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_ad1a7a9e6853925618d4aa9170409f072_cgraph.svg" width="100%" height="434"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
@@ -780,13 +794,13 @@ template&lt;typename T&gt; </div>
 <p>Notifies all components that the entity is being released to a pool. </p>
 <p>Iterates through all attached components and calls `onRelease()` on those that implement it. </p>
 
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00320">320</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00350">350</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00112">componentTypeIds()</a>, <a class="el" href="ComponentOpsRegistry_8ixx_source.html#l00082">helios::engine::ecs::ComponentOpsRegistry::ops()</a>, and <a class="el" href="GameObject_8ixx_source.html#l00198">raw()</a>.</p>
-<div id="dynsection-10" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-10-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00121">componentTypeIds()</a>, <a class="el" href="ComponentOpsRegistry_8ixx_source.html#l00082">helios::engine::ecs::ComponentOpsRegistry::ops()</a>, and <a class="el" href="GameObject_8ixx_source.html#l00207">raw()</a>.</p>
+<div id="dynsection-11" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-11-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-10-content" class="dyncontent" style="display:none;">
+<div id="dynsection-11-content" class="dyncontent" style="display:none;">
 <div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_a2a7b9dc93c0a360e83ed33534742b7ae_cgraph.svg" width="100%" height="434"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
@@ -824,13 +838,13 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Raw void pointer to the component, or nullptr if not found. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00198">198</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00207">207</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="GameObject_8ixx_source.html#l00148">add()</a>, <a class="el" href="GameObject_8ixx_source.html#l00337">onAcquire()</a>, <a class="el" href="GameObject_8ixx_source.html#l00320">onRelease()</a>, and <a class="el" href="GameObject_8ixx_source.html#l00284">setActive()</a>.</p>
-<div id="dynsection-11" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-11-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="GameObject_8ixx_source.html#l00157">add()</a>, <a class="el" href="GameObject_8ixx_source.html#l00367">onAcquire()</a>, <a class="el" href="GameObject_8ixx_source.html#l00350">onRelease()</a>, and <a class="el" href="GameObject_8ixx_source.html#l00298">setActive()</a>.</p>
+<div id="dynsection-12" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-12-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-11-content" class="dyncontent" style="display:none;">
+<div id="dynsection-12-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_ab1c1f6b81c4965b76967c29a6af7f713_icgraph.svg" width="616" height="243"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
@@ -864,28 +878,33 @@ template&lt;typename T&gt; </div>
 <li>An `Inactive` tag component is added</li>
 <li>The `Active` tag component is removed</li>
 <li>`onDeactivate()` is called on components that support it</li>
+<li>If a `HierarchyComponent` is present, it is marked dirty for propagation</li>
 </ul>
 <p>When activated:</p><ul>
 <li>The `Inactive` tag component is removed</li>
 <li>An `Active` tag component is added</li>
 <li>`onActivate()` is called on components that support it</li>
+<li>If a `HierarchyComponent` is present, it is marked dirty for propagation</li>
 </ul>
 <dl class="section note"><dt>Note</dt><dd>Does **not** call `enable()`/`disable()` on components.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">active</td><td>True to activate, false to deactivate. </td></tr>
+    <tr><td class="paramname">active</td><td>True to activate, false to deactivate.</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section see"><dt>See also</dt><dd>HierarchyComponent </dd>
+<dd>
+HierarchyPropagationSystem </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00284">284</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObject_8ixx_source.html#l00298">298</a> of file <a class="el" href="GameObject_8ixx_source.html">GameObject.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00112">componentTypeIds()</a>, <a class="el" href="ComponentOpsRegistry_8ixx_source.html#l00082">helios::engine::ecs::ComponentOpsRegistry::ops()</a>, and <a class="el" href="GameObject_8ixx_source.html#l00198">raw()</a>.</p>
-<div id="dynsection-12" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-12-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00121">componentTypeIds()</a>, <a class="el" href="GameObject_8ixx_source.html#l00340">isActive()</a>, <a class="el" href="ComponentOpsRegistry_8ixx_source.html#l00082">helios::engine::ecs::ComponentOpsRegistry::ops()</a>, and <a class="el" href="GameObject_8ixx_source.html#l00207">raw()</a>.</p>
+<div id="dynsection-13" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-13-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-12-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_a5b86c188307f1f2e8500509708d60d93_cgraph.svg" width="100%" height="434"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div id="dynsection-13-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1GameObject_a5b86c188307f1f2e8500509708d60d93_cgraph.svg" width="100%" height="482"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>

@@ -131,9 +131,15 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Container that accumulates scores by type within a pool. </p>
-<p><a class="el" href="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePool.html" title="Container that accumulates scores by type within a pool.">ScorePool</a> maintains a collection of scores indexed by ScoreTypeId, along with a running total. Used by <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager.html" title="Manages score pools and processes score commands.">ScorePoolManager</a> to track scores for different entities or players. </p>
+<p><a class="el" href="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePool.html" title="Container that accumulates scores by type within a pool.">ScorePool</a> maintains a collection of scores indexed by ScoreTypeId, along with a running total. It tracks changes via a revision number that is incremented whenever a score value changes, enabling efficient change detection by observers.</p>
+<p>ScorePools are managed by <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager.html" title="Manages score pools and processes score commands.">ScorePoolManager</a>, which handles command processing and pool lifecycle.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager.html" title="Manages score pools and processes score commands.">ScorePoolManager</a> </dd>
+<dd>
+<a class="el" href="structhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolSnapshot.html" title="Immutable snapshot of a ScorePool&#39;s state.">ScorePoolSnapshot</a> </dd>
+<dd>
+ScoreValueContext </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ScorePool_8ixx_source.html#l00030">30</a> of file <a class="el" href="ScorePool_8ixx_source.html">ScorePool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ScorePool_8ixx_source.html#l00038">38</a> of file <a class="el" href="ScorePool_8ixx_source.html">ScorePool.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a3907dce8c73e8d6bad055115721959e9" name="a3907dce8c73e8d6bad055115721959e9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3907dce8c73e8d6bad055115721959e9">&#9670;&#160;</a></span>ScorePool()</h2>
@@ -166,9 +172,9 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="ScorePool_8ixx_source.html#l00077">77</a> of file <a class="el" href="ScorePool_8ixx_source.html">ScorePool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ScorePool_8ixx_source.html#l00085">85</a> of file <a class="el" href="ScorePool_8ixx_source.html">ScorePool.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="ScorePool_8ixx_source.html#l00135">scorePoolId()</a>.</p>
+<p class="reference">References <a class="el" href="ScorePool_8ixx_source.html#l00144">scorePoolId()</a>.</p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
@@ -211,9 +217,9 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="ScorePool_8ixx_source.html#l00096">96</a> of file <a class="el" href="ScorePool_8ixx_source.html">ScorePool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ScorePool_8ixx_source.html#l00104">104</a> of file <a class="el" href="ScorePool_8ixx_source.html">ScorePool.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="ScorePool_8ixx_source.html#l00085">id()</a>, <a class="el" href="ScoreContext_8ixx_source.html#l00025">helios::engine::mechanics::scoring::types::ScoreValueContext::scoreTypeId</a>, <a class="el" href="ScoreTypeId_8ixx_source.html#l00057">helios::engine::core::data::ScoreTypeId::value()</a>, and <a class="el" href="ScoreContext_8ixx_source.html#l00035">helios::engine::mechanics::scoring::types::ScoreValueContext::value</a>.</p>
+<p class="reference">References <a class="el" href="ScorePool_8ixx_source.html#l00093">id()</a>, <a class="el" href="ScoreContext_8ixx_source.html#l00025">helios::engine::mechanics::scoring::types::ScoreValueContext::scoreTypeId</a>, <a class="el" href="ScoreTypeId_8ixx_source.html#l00057">helios::engine::core::data::ScoreTypeId::value()</a>, and <a class="el" href="ScoreContext_8ixx_source.html#l00035">helios::engine::mechanics::scoring::types::ScoreValueContext::value</a>.</p>
 <div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
@@ -249,9 +255,9 @@ Public Member Functions</h2></td></tr>
 <p>Returns the pool's unique identifier. </p>
 <dl class="section return"><dt>Returns</dt><dd>The ScorePoolId. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ScorePool_8ixx_source.html#l00085">85</a> of file <a class="el" href="ScorePool_8ixx_source.html">ScorePool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ScorePool_8ixx_source.html#l00093">93</a> of file <a class="el" href="ScorePool_8ixx_source.html">ScorePool.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="ScorePool_8ixx_source.html#l00096">addScore()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="ScorePool_8ixx_source.html#l00104">addScore()</a>.</p>
 <div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
@@ -286,7 +292,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Resets all scores to zero. </p>
 
-<p class="definition">Definition at line <a class="el" href="ScorePool_8ixx_source.html#l00115">115</a> of file <a class="el" href="ScorePool_8ixx_source.html">ScorePool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ScorePool_8ixx_source.html#l00123">123</a> of file <a class="el" href="ScorePool_8ixx_source.html">ScorePool.ixx</a>.</p>
 
 </div>
 </div>
@@ -317,7 +323,7 @@ Public Member Functions</h2></td></tr>
 <p>The revision is incremented whenever a score value changes. Used by observers to detect changes without polling values.</p>
 <dl class="section return"><dt>Returns</dt><dd>The current ScorePoolRevision. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ScorePool_8ixx_source.html#l00147">147</a> of file <a class="el" href="ScorePool_8ixx_source.html">ScorePool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ScorePool_8ixx_source.html#l00156">156</a> of file <a class="el" href="ScorePool_8ixx_source.html">ScorePool.ixx</a>.</p>
 
 </div>
 </div>
@@ -347,9 +353,9 @@ Public Member Functions</h2></td></tr>
 <p>Returns the pool's unique identifier. </p>
 <dl class="section return"><dt>Returns</dt><dd>The ScorePoolId. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ScorePool_8ixx_source.html#l00135">135</a> of file <a class="el" href="ScorePool_8ixx_source.html">ScorePool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ScorePool_8ixx_source.html#l00144">144</a> of file <a class="el" href="ScorePool_8ixx_source.html">ScorePool.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="ScorePool_8ixx_source.html#l00077">ScorePool()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="ScorePool_8ixx_source.html#l00085">ScorePool()</a>.</p>
 <div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
@@ -386,7 +392,7 @@ Public Member Functions</h2></td></tr>
 <p>The snapshot contains the pool ID, total score, and current revision. Useful for observers and UI binding.</p>
 <dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="structhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolSnapshot.html" title="Immutable snapshot of a ScorePool&#39;s state.">ScorePoolSnapshot</a> with current values. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ScorePool_8ixx_source.html#l00159">159</a> of file <a class="el" href="ScorePool_8ixx_source.html">ScorePool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ScorePool_8ixx_source.html#l00168">168</a> of file <a class="el" href="ScorePool_8ixx_source.html">ScorePool.ixx</a>.</p>
 
 </div>
 </div>
@@ -416,7 +422,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns the running total of all scores. </p>
 <dl class="section return"><dt>Returns</dt><dd>The total score value. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ScorePool_8ixx_source.html#l00126">126</a> of file <a class="el" href="ScorePool_8ixx_source.html">ScorePool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ScorePool_8ixx_source.html#l00135">135</a> of file <a class="el" href="ScorePool_8ixx_source.html">ScorePool.ixx</a>.</p>
 
 </div>
 </div>

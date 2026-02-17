@@ -1,0 +1,247 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1modules_1_1scene_1_1systems_1_1SceneRenderingSystem" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::modules::scene::systems::SceneRenderingSystem</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1ecs_1_1System" prot="public" virt="non-virtual">helios::engine::ecs::System</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1scene_1_1systems_1_1SceneRenderingSystem_1a388436fd49a39cbf9c91f2a30118a1d9" prot="private" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1rendering_1_1RenderingDevice" kindref="compound">helios::rendering::RenderingDevice</ref> &amp;</type>
+        <definition>helios::rendering::RenderingDevice&amp; helios::engine::modules::scene::systems::SceneRenderingSystem::renderingDevice_</definition>
+        <argsstring></argsstring>
+        <name>renderingDevice_</name>
+        <qualifiedname>helios::engine::modules::scene::systems::SceneRenderingSystem::renderingDevice_</qualifiedname>
+        <briefdescription>
+<para>Reference to the rendering device for draw call submission. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/scene/systems/SceneRenderingSystem.ixx" line="55" column="44" bodyfile="/tmp/h/include/helios/engine/modules/scene/systems/SceneRenderingSystem.ixx" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1scene_1_1systems_1_1SceneRenderingSystem_1ac98a0c4b0e31482f2ac8b833bd3e15b2" prot="private" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap" kindref="compound">helios::engine::modules::scene::types::SceneToViewportMap</ref> &amp;</type>
+        <definition>helios::engine::modules::scene::types::SceneToViewportMap&amp; helios::engine::modules::scene::systems::SceneRenderingSystem::sceneToViewportMap_</definition>
+        <argsstring></argsstring>
+        <name>sceneToViewportMap_</name>
+        <qualifiedname>helios::engine::modules::scene::systems::SceneRenderingSystem::sceneToViewportMap_</qualifiedname>
+        <briefdescription>
+<para>Reference to the scene-to-viewport mapping. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/scene/systems/SceneRenderingSystem.ixx" line="60" column="67" bodyfile="/tmp/h/include/helios/engine/modules/scene/systems/SceneRenderingSystem.ixx" bodystart="60" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1scene_1_1systems_1_1SceneRenderingSystem_1aa786a39d8573dbac7b73146e4cb4c25b" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::modules::scene::systems::SceneRenderingSystem::SceneRenderingSystem</definition>
+        <argsstring>(helios::rendering::RenderingDevice &amp;renderingDevice, helios::engine::modules::scene::types::SceneToViewportMap &amp;sceneToViewportMap)</argsstring>
+        <name>SceneRenderingSystem</name>
+        <qualifiedname>helios::engine::modules::scene::systems::SceneRenderingSystem::SceneRenderingSystem</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1rendering_1_1RenderingDevice" kindref="compound">helios::rendering::RenderingDevice</ref> &amp;</type>
+          <declname>renderingDevice</declname>
+        </param>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap" kindref="compound">helios::engine::modules::scene::types::SceneToViewportMap</ref> &amp;</type>
+          <declname>sceneToViewportMap</declname>
+        </param>
+        <briefdescription>
+<para>Constructs the system with required dependencies. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>renderingDevice</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The rendering device for submitting draw calls. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sceneToViewportMap</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Mapping from scenes to their viewports. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/scene/systems/SceneRenderingSystem.ixx" line="70" column="18" bodyfile="/tmp/h/include/helios/engine/modules/scene/systems/SceneRenderingSystem.ixx" bodystart="70" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1scene_1_1systems_1_1SceneRenderingSystem_1ace01514307054d6c9fc26a46ec6e67e3" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::scene::systems::SceneRenderingSystem::update</definition>
+        <argsstring>(helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept override</argsstring>
+        <name>update</name>
+        <qualifiedname>helios::engine::modules::scene::systems::SceneRenderingSystem::update</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1ecs_1_1System_1a4e9969641985fa04db6214332c88605b">update</reimplements>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Renders all active viewports for this frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Iterates over the session&apos;s active viewport IDs, resolves each to its scene and viewport, creates a snapshot, builds a <ref refid="classhelios_1_1rendering_1_1RenderPass" kindref="compound">RenderPass</ref>, and submits it to the rendering device.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current frame&apos;s update context. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/scene/systems/SceneRenderingSystem.ixx" line="85" column="14" bodyfile="/tmp/h/include/helios/engine/modules/scene/systems/SceneRenderingSystem.ixx" bodystart="85" bodyend="113"/>
+        <references refid="classhelios_1_1rendering_1_1RenderPassFactory_1ab3de082b56a0e7b2ca11da66453252ef" compoundref="RenderPassFactory_8ixx" startline="99" endline="117">helios::rendering::RenderPassFactory::buildRenderPass</references>
+        <references refid="classhelios_1_1rendering_1_1RenderPassFactory_1aa496584b96f57e06cc53dc24e797f0b0" compoundref="RenderPassFactory_8ixx" startline="77" endline="81">helios::rendering::RenderPassFactory::getInstance</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Renders scenes through their configured viewports. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This system iterates over all active viewport IDs from the session, resolves the associated scene and viewport via <ref refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap" kindref="compound">SceneToViewportMap</ref>, creates a scene snapshot, and submits it to the rendering device.</para>
+<para>The system runs in the Post phase after all gameplay updates are complete, ensuring the scene graph reflects the final state for this frame.</para>
+<para><simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap" kindref="compound">SceneToViewportMap</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1rendering_1_1RenderingDevice" kindref="compound">RenderingDevice</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1rendering_1_1RenderPassFactory" kindref="compound">RenderPassFactory</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::ecs::System</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1System"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::ecs::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Updatable"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::modules::scene::systems::SceneRenderingSystem</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1scene_1_1systems_1_1SceneRenderingSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="12">
+        <label>helios::engine::ecs::EntityManager</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1EntityManager"/>
+      </node>
+      <node id="11">
+        <label>helios::engine::ecs::EntityRegistry</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry"/>
+      </node>
+      <node id="2">
+        <label>helios::engine::ecs::System</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1System"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>gameWorld_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::ecs::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Updatable"/>
+      </node>
+      <node id="7">
+        <label>helios::engine::mechanics::gamestate::GameStateCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateCommandHandler"/>
+      </node>
+      <node id="8">
+        <label>helios::engine::mechanics::match::MatchStateCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1MatchStateCommandHandler"/>
+      </node>
+      <node id="6">
+        <label>helios::engine::mechanics::scoring::ScoreCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::modules::scene::systems::SceneRenderingSystem</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1scene_1_1systems_1_1SceneRenderingSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>helios::engine::modules::ui::UiActionCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandHandler"/>
+      </node>
+      <node id="10">
+        <label>helios::engine::runtime::spawn::SpawnCommandHandlerRegistry</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandlerRegistry"/>
+      </node>
+      <node id="4">
+        <label>helios::engine::runtime::world::GameWorld</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>logger_</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>scoreCommandHandler_</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>gameStateCommandHandler_</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>matchStateCommandHandler_</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>uiActionCommandHandler_</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>spawnCommandHandlerRegistry_</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>entityRegistry_</edgelabel>
+        </childnode>
+        <childnode refid="12" relation="usage">
+          <edgelabel>em_</edgelabel>
+        </childnode>
+        <childnode refid="13" relation="usage">
+          <edgelabel>session_</edgelabel>
+        </childnode>
+      </node>
+      <node id="13">
+        <label>helios::engine::runtime::world::Session</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session"/>
+      </node>
+      <node id="5">
+        <label>helios::util::log::Logger</label>
+        <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
+      </node>
+    </collaborationgraph>
+    <location file="/tmp/h/include/helios/engine/modules/scene/systems/SceneRenderingSystem.ixx" line="50" column="5" bodyfile="/tmp/h/include/helios/engine/modules/scene/systems/SceneRenderingSystem.ixx" bodystart="50" bodyend="115"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" prot="protected" virt="non-virtual"><scope>helios::engine::modules::scene::systems::SceneRenderingSystem</scope><name>gameWorld_</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1ae0464c1668e257439243a4f25979a7ff" prot="public" virt="virtual"><scope>helios::engine::modules::scene::systems::SceneRenderingSystem</scope><name>init</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1systems_1_1SceneRenderingSystem_1a388436fd49a39cbf9c91f2a30118a1d9" prot="private" virt="non-virtual"><scope>helios::engine::modules::scene::systems::SceneRenderingSystem</scope><name>renderingDevice_</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1systems_1_1SceneRenderingSystem_1aa786a39d8573dbac7b73146e4cb4c25b" prot="public" virt="non-virtual"><scope>helios::engine::modules::scene::systems::SceneRenderingSystem</scope><name>SceneRenderingSystem</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1systems_1_1SceneRenderingSystem_1ac98a0c4b0e31482f2ac8b833bd3e15b2" prot="private" virt="non-virtual"><scope>helios::engine::modules::scene::systems::SceneRenderingSystem</scope><name>sceneToViewportMap_</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a26d81abcda05fe8b12a1ddb4ed6099a3" prot="public" virt="non-virtual"><scope>helios::engine::modules::scene::systems::SceneRenderingSystem</scope><name>Updatable</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1systems_1_1SceneRenderingSystem_1ace01514307054d6c9fc26a46ec6e67e3" prot="public" virt="virtual"><scope>helios::engine::modules::scene::systems::SceneRenderingSystem</scope><name>update</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a937c99bfacd777c53e0f811ab9d335a6" prot="public" virt="virtual"><scope>helios::engine::modules::scene::systems::SceneRenderingSystem</scope><name>~System</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a0f54f92a2a8d6c8dc2fc2ebed41d5a85" prot="public" virt="virtual"><scope>helios::engine::modules::scene::systems::SceneRenderingSystem</scope><name>~Updatable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

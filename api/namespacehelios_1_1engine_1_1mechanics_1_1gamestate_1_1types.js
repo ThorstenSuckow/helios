@@ -37,5 +37,6 @@ var namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types =
     ] ],
     [ "hasFlag", "namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#ab0579070ccee01e3cbb703c14375bf77", null ],
     [ "operator&", "namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a02090d5a1bd064971c1be9315b221085", null ],
-    [ "operator|", "namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#af65e991fd980093437a4316684efbf74", null ]
+    [ "operator|", "namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#af65e991fd980093437a4316684efbf74", null ],
+    [ "GameStateTypeSize", "namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a54ed1e4e41fc7a66768c28383874826a", null ]
 ];

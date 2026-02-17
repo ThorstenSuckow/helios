@@ -20,7 +20,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/builder/gameObject/GameObjectFactory.ixx" line="400" column="34" bodyfile="/tmp/h/include/helios/engine/builder/gameObject/GameObjectFactory.ixx" bodystart="400" bodyend="403"/>
+        <location file="/tmp/h/include/helios/engine/builder/gameObject/GameObjectFactory.ixx" line="428" column="34" bodyfile="/tmp/h/include/helios/engine/builder/gameObject/GameObjectFactory.ixx" bodystart="428" bodyend="431"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory_1ac6d64b614d8d67bce93033dbcb1fd58d" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>GameObjectPrototype</type>
@@ -51,7 +51,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/builder/gameObject/GameObjectFactory.ixx" line="412" column="36" bodyfile="/tmp/h/include/helios/engine/builder/gameObject/GameObjectFactory.ixx" bodystart="412" bodyend="414"/>
+        <location file="/tmp/h/include/helios/engine/builder/gameObject/GameObjectFactory.ixx" line="440" column="36" bodyfile="/tmp/h/include/helios/engine/builder/gameObject/GameObjectFactory.ixx" bodystart="440" bodyend="442"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -59,9 +59,20 @@
     </briefdescription>
     <detaileddescription>
 <para>Provides static methods for constructing new GameObjects or creating copies from existing templates. Uses the builder pattern internally via `GameObjectPrototype` for fluent component configuration.</para>
-<para>Example usage: ```cpp auto player = <ref refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory_1ac6d64b614d8d67bce93033dbcb1fd58d" kindref="member">GameObjectFactory::gameObject()</ref> .withMotion([](auto&amp; m) { m.move2D().speed(5.0f); }) .withRendering([&amp;](auto&amp; r) { r.renderable().shape(shape).shader(shader).build(); }) .make(true); ``` </para>
+<para>The factory supports domain-specific builders for different component categories: motion, rendering, collision, transform, effects, spawn, AI, combat, lifecycle, health, scoring, observer, and menu.</para>
+<para>## Usage</para>
+<para>```cpp auto player = GameObjectFactory::gameObject(gameWorld) .withMotion([](auto&amp; m) { m.move2D().speed(5.0f); }) .withRendering([&amp;](auto&amp; r) { r.renderable().shape(shape).shader(shader).build(); }) .withCollision([](auto&amp; c) { c.aabb().layer(CollisionLayer::Player); }) .make(true); ```</para>
+<para><simplesect kind="see"><para>GameObjectPrototype </para>
+</simplesect>
+<simplesect kind="see"><para>MotionBuilder </para>
+</simplesect>
+<simplesect kind="see"><para>RenderingBuilder </para>
+</simplesect>
+<simplesect kind="see"><para>CollisionBuilder </para>
+</simplesect>
+</para>
     </detaileddescription>
-    <location file="/tmp/h/include/helios/engine/builder/gameObject/GameObjectFactory.ixx" line="41" column="5" bodyfile="/tmp/h/include/helios/engine/builder/gameObject/GameObjectFactory.ixx" bodystart="41" bodyend="416"/>
+    <location file="/tmp/h/include/helios/engine/builder/gameObject/GameObjectFactory.ixx" line="52" column="5" bodyfile="/tmp/h/include/helios/engine/builder/gameObject/GameObjectFactory.ixx" bodystart="52" bodyend="444"/>
     <listofallmembers>
       <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory_1ac6d64b614d8d67bce93033dbcb1fd58d" prot="public" virt="non-virtual"><scope>helios::engine::builder::gameObject::GameObjectFactory</scope><name>gameObject</name></member>
       <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory_1a3e1f2fd66b4f091ccbaa98b494240d64" prot="public" virt="non-virtual"><scope>helios::engine::builder::gameObject::GameObjectFactory</scope><name>instance</name></member>

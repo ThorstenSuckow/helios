@@ -12,12 +12,13 @@
         <name>pending_</name>
         <qualifiedname>helios::engine::mechanics::gamestate::GameStateManager::pending_</qualifiedname>
         <briefdescription>
+<para>Queue of pending state commands to process on flush. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" line="59" column="21" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" bodystart="59" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" line="72" column="21" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" bodystart="72" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateManager_1a4348058a08d808aa9407d7227e62a04e" prot="private" static="no" mutable="no">
         <type>std::vector&lt; std::unique_ptr&lt; GameStateTransitionListener &gt; &gt;</type>
@@ -26,12 +27,13 @@
         <name>listeners_</name>
         <qualifiedname>helios::engine::mechanics::gamestate::GameStateManager::listeners_</qualifiedname>
         <briefdescription>
+<para>Registered transition listeners. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" line="61" column="21" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" bodystart="61" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" line="77" column="21" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" bodystart="77" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateManager_1aac8800ef52aa6a40d71d471b80c56298" prot="private" static="no" mutable="no">
         <type>std::vector&lt; GameStateTransitionRule &gt;</type>
@@ -40,21 +42,22 @@
         <name>rules_</name>
         <qualifiedname>helios::engine::mechanics::gamestate::GameStateManager::rules_</qualifiedname>
         <briefdescription>
+<para>Configured transition rules for the state machine. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" line="91" column="21" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" bodystart="91" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" line="143" column="21" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" bodystart="143" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateManager_1adb750735a36d3ff8e1bf34258632be1b" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateManager_1af2e5cea846a5268f2038aa847102d94e" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
-        <definition>void helios::engine::mechanics::gamestate::GameStateManager::executeListener</definition>
+        <definition>void helios::engine::mechanics::gamestate::GameStateManager::signalExit</definition>
         <argsstring>(const GameState from, const GameState to, const GameStateTransitionId transitionId, helios::engine::runtime::world::UpdateContext &amp;updateContext)</argsstring>
-        <name>executeListener</name>
-        <qualifiedname>helios::engine::mechanics::gamestate::GameStateManager::executeListener</qualifiedname>
+        <name>signalExit</name>
+        <qualifiedname>helios::engine::mechanics::gamestate::GameStateManager::signalExit</qualifiedname>
         <param>
           <type>const GameState</type>
           <declname>from</declname>
@@ -72,7 +75,7 @@
           <declname>updateContext</declname>
         </param>
         <briefdescription>
-<para>Notifies all registered listeners of a state transition. </para>
+<para>Notifies listeners of state exit. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -88,6 +91,136 @@
 <parametername>to</parametername>
 </parameternamelist>
 <parameterdescription>
+<para>The target state. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>transitionId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The transition identifier. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current update context. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" line="87" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" bodystart="87" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateManager_1a9fca937e8bc4fb346363423b1b455c30" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::mechanics::gamestate::GameStateManager::signalTransition</definition>
+        <argsstring>(const GameState from, const GameState to, const GameStateTransitionId transitionId, helios::engine::runtime::world::UpdateContext &amp;updateContext)</argsstring>
+        <name>signalTransition</name>
+        <qualifiedname>helios::engine::mechanics::gamestate::GameStateManager::signalTransition</qualifiedname>
+        <param>
+          <type>const GameState</type>
+          <declname>from</declname>
+        </param>
+        <param>
+          <type>const GameState</type>
+          <declname>to</declname>
+        </param>
+        <param>
+          <type>const GameStateTransitionId</type>
+          <declname>transitionId</declname>
+        </param>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Notifies listeners of state transition. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>from</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The source state. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>to</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The target state. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>transitionId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The transition identifier. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current update context. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" line="106" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" bodystart="106" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateManager_1aa4abf18e6a061add120c4d633eb8d1c4" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::mechanics::gamestate::GameStateManager::signalEnter</definition>
+        <argsstring>(const GameState from, const GameState to, const GameStateTransitionId transitionId, helios::engine::runtime::world::UpdateContext &amp;updateContext)</argsstring>
+        <name>signalEnter</name>
+        <qualifiedname>helios::engine::mechanics::gamestate::GameStateManager::signalEnter</qualifiedname>
+        <param>
+          <type>const GameState</type>
+          <declname>from</declname>
+        </param>
+        <param>
+          <type>const GameState</type>
+          <declname>to</declname>
+        </param>
+        <param>
+          <type>const GameStateTransitionId</type>
+          <declname>transitionId</declname>
+        </param>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Notifies listeners of state entry. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>from</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The source state. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>to</parametername>
+</parameternamelist>
+<parameterdescription>
 <para>The state being entered. </para>
 </parameterdescription>
 </parameteritem>
@@ -96,7 +229,7 @@
 <parametername>transitionId</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The identifier of the transition. </para>
+<para>The transition identifier. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -104,16 +237,15 @@
 <parametername>updateContext</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The current update context.</para>
+<para>The current update context. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<xrefsect id="todo_1_todo000009"><xreftitle>Todo</xreftitle><xrefdescription><para>Add support for vetoing transitions. </para>
-</xrefdescription></xrefsect></para>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" line="74" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" bodystart="74" bodyend="89"/>
+        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" line="128" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" bodystart="128" bodyend="138"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateManager_1a192aba5045b419582598613a51554a1a" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
@@ -142,8 +274,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" line="100" column="18" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" bodystart="100" bodyend="101"/>
-        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateManager_1ad1010128751d09563b580666cbe44883" compoundref="GameStateManager_8ixx" startline="119" endline="122">helios::engine::mechanics::gamestate::GameStateManager::addGameStateListener</referencedby>
+        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" line="152" column="18" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" bodystart="152" bodyend="153"/>
+        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateManager_1ad1010128751d09563b580666cbe44883" compoundref="GameStateManager_8ixx" startline="171" endline="174">helios::engine::mechanics::gamestate::GameStateManager::addGameStateListener</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateManager_1ae0675b5644472c0cb60a646fcbcba2ba" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -158,8 +290,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" line="106" column="9" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" bodystart="106" bodyend="111"/>
-        <references refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1rules_1_1DefaultGameStateTransitionRules_1aae48e9d2a3153d781749d6c97e13d572" compoundref="DefaultGameStateTransitionRules_8ixx" startline="82" endline="84">helios::engine::mechanics::gamestate::rules::DefaultGameStateTransitionRules::rules</references>
+        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" line="158" column="9" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" bodystart="158" bodyend="163"/>
+        <references refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1rules_1_1DefaultGameStateTransitionRules_1aae48e9d2a3153d781749d6c97e13d572" compoundref="DefaultGameStateTransitionRules_8ixx" startline="96" endline="98">helios::engine::mechanics::gamestate::rules::DefaultGameStateTransitionRules::rules</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateManager_1ad1010128751d09563b580666cbe44883" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>GameStateManager &amp;</type>
@@ -190,8 +322,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" line="119" column="26" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" bodystart="119" bodyend="122"/>
-        <references refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateManager_1a192aba5045b419582598613a51554a1a" compoundref="GameStateManager_8ixx" startline="100" endline="101">helios::engine::mechanics::gamestate::GameStateManager::GameStateManager</references>
+        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" line="171" column="26" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" bodystart="171" bodyend="174"/>
+        <references refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateManager_1a192aba5045b419582598613a51554a1a" compoundref="GameStateManager_8ixx" startline="152" endline="153">helios::engine::mechanics::gamestate::GameStateManager::GameStateManager</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateManager_1a09fbe557da332c3210f87162f13b36e7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>void</type>
@@ -234,7 +366,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" line="134" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" bodystart="134" bodyend="174"/>
+        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" line="186" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" bodystart="186" bodyend="228"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateManager_1af2495b2958d7dc90ce46ff6e020d1bda" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>bool</type>
@@ -266,7 +398,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" line="183" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" bodystart="183" bodyend="188"/>
+        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" line="237" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" bodystart="237" bodyend="242"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateManager_1a180050fcd9494bf9b61f9a14cda5fe68" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -296,7 +428,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" line="196" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" bodystart="196" bodyend="198"/>
+        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" line="250" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" bodystart="250" bodyend="252"/>
         <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a9a354e9a300fd0dc304a8fefce5b1051" compoundref="GameWorld_8ixx" startline="439" endline="447">helios::engine::runtime::world::GameWorld::registerGameStateCommandHandler</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateManager_1a4f4ff260e025e15f61e726736e889c26" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
@@ -313,7 +445,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" line="203" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" bodystart="203" bodyend="205"/>
+        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" line="257" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/GameStateManager.ixx" bodystart="257" bodyend="259"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

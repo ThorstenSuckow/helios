@@ -155,11 +155,22 @@ Additional Inherited Members</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Manages game state transitions using a rule-based state machine. </p>
 <p>The <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateManager.html" title="Manages game state transitions using a rule-based state machine.">GameStateManager</a> processes GameStateCommands and applies transition rules to move between game states (e.g., Title -&gt; Running -&gt; Paused). It supports guard callbacks for conditional transitions and notifies registered listeners on state changes.</p>
+<p>## Transition Flow</p>
+<p>1. Commands are submitted via `submit()` and queued 2. On `flush()`, the last pending command is evaluated against rules 3. If a rule matches and its guard passes, the transition executes:</p><ul>
+<li>`onGameStateExit()` is called on listeners</li>
+<li>`onGameStateTransition()` is called on listeners</li>
+<li>Session state is updated</li>
+<li>`onGameStateEnter()` is called on listeners</li>
+</ul>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1_1GameStateTransitionRule.html" title="Defines a valid state transition with optional guard.">GameStateTransitionRule</a> </dd>
 <dd>
-<a class="el" href="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateTransitionListener.html" title="Abstract listener for game state transition events.">GameStateTransitionListener</a> </dd></dl>
+<a class="el" href="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateTransitionListener.html" title="Abstract listener for game state transition events.">GameStateTransitionListener</a> </dd>
+<dd>
+<a class="el" href="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1commands_1_1GameStateCommand.html" title="A command that encapsulates a game state transition request.">GameStateCommand</a> </dd>
+<dd>
+LambdaGameStateListener </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameStateManager_8ixx_source.html#l00054">54</a> of file <a class="el" href="GameStateManager_8ixx_source.html">GameStateManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameStateManager_8ixx_source.html#l00066">66</a> of file <a class="el" href="GameStateManager_8ixx_source.html">GameStateManager.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a192aba5045b419582598613a51554a1a" name="a192aba5045b419582598613a51554a1a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a192aba5045b419582598613a51554a1a">&#9670;&#160;</a></span>GameStateManager() <span class="overload">[1/2]</span></h2>
@@ -192,9 +203,9 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="GameStateManager_8ixx_source.html#l00100">100</a> of file <a class="el" href="GameStateManager_8ixx_source.html">GameStateManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameStateManager_8ixx_source.html#l00152">152</a> of file <a class="el" href="GameStateManager_8ixx_source.html">GameStateManager.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="GameStateManager_8ixx_source.html#l00119">addGameStateListener()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="GameStateManager_8ixx_source.html#l00171">addGameStateListener()</a>.</p>
 <div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
@@ -229,9 +240,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Constructs a <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateManager.html" title="Manages game state transitions using a rule-based state machine.">GameStateManager</a> with default transition rules. </p>
 
-<p class="definition">Definition at line <a class="el" href="GameStateManager_8ixx_source.html#l00106">106</a> of file <a class="el" href="GameStateManager_8ixx_source.html">GameStateManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameStateManager_8ixx_source.html#l00158">158</a> of file <a class="el" href="GameStateManager_8ixx_source.html">GameStateManager.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="DefaultGameStateTransitionRules_8ixx_source.html#l00082">helios::engine::mechanics::gamestate::rules::DefaultGameStateTransitionRules::rules()</a>.</p>
+<p class="reference">References <a class="el" href="DefaultGameStateTransitionRules_8ixx_source.html#l00096">helios::engine::mechanics::gamestate::rules::DefaultGameStateTransitionRules::rules()</a>.</p>
 <div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
@@ -274,9 +285,9 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this manager for method chaining. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameStateManager_8ixx_source.html#l00119">119</a> of file <a class="el" href="GameStateManager_8ixx_source.html">GameStateManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameStateManager_8ixx_source.html#l00171">171</a> of file <a class="el" href="GameStateManager_8ixx_source.html">GameStateManager.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameStateManager_8ixx_source.html#l00100">GameStateManager()</a>.</p>
+<p class="reference">References <a class="el" href="GameStateManager_8ixx_source.html#l00152">GameStateManager()</a>.</p>
 <div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
@@ -325,7 +336,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html#a290b20a4d512d096650dc187f1f3e940">helios::engine::runtime::world::Manager</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="GameStateManager_8ixx_source.html#l00134">134</a> of file <a class="el" href="GameStateManager_8ixx_source.html">GameStateManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameStateManager_8ixx_source.html#l00186">186</a> of file <a class="el" href="GameStateManager_8ixx_source.html">GameStateManager.ixx</a>.</p>
 
 </div>
 </div>
@@ -362,7 +373,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html#ae7e2cd7531de5ce1fdc1f4a179b70929">helios::engine::runtime::world::Manager</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="GameStateManager_8ixx_source.html#l00196">196</a> of file <a class="el" href="GameStateManager_8ixx_source.html">GameStateManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameStateManager_8ixx_source.html#l00250">250</a> of file <a class="el" href="GameStateManager_8ixx_source.html">GameStateManager.ixx</a>.</p>
 
 <p class="reference">References <a class="el" href="GameWorld_8ixx_source.html#l00439">helios::engine::runtime::world::GameWorld::registerGameStateCommandHandler()</a>.</p>
 <div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
@@ -401,7 +412,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html#a967a3375eca948be9ebeaca2e34c7475">helios::engine::runtime::world::Manager</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="GameStateManager_8ixx_source.html#l00203">203</a> of file <a class="el" href="GameStateManager_8ixx_source.html">GameStateManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameStateManager_8ixx_source.html#l00257">257</a> of file <a class="el" href="GameStateManager_8ixx_source.html">GameStateManager.ixx</a>.</p>
 
 </div>
 </div>
@@ -439,7 +450,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateCommandHandler.html#aa3b040ecab49b2b4b7b84b6cbbf16da0">helios::engine::mechanics::gamestate::GameStateCommandHandler</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="GameStateManager_8ixx_source.html#l00183">183</a> of file <a class="el" href="GameStateManager_8ixx_source.html">GameStateManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameStateManager_8ixx_source.html#l00237">237</a> of file <a class="el" href="GameStateManager_8ixx_source.html">GameStateManager.ixx</a>.</p>
 
 </div>
 </div>

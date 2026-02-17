@@ -1,0 +1,266 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8engine_8modules_8rendering_8viewport_8types_8StateToViewportPolicy" kind="module">
+    <compoundname>helios.engine.modules.rendering.viewport.types.StateToViewportPolicy</compoundname>
+    <innerfile refid="StateToViewportPolicy_8ixx">StateToViewportPolicy.ixx</innerfile>
+    <innerclass refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1viewport_1_1types_1_1StateToViewportPolicy" prot="public">helios::engine::modules::rendering::viewport::types::StateToViewportPolicy</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1rendering_1_1viewport_1_1types_1_1StateToViewportPolicy_1a7cb9ee2b4fb0f759f13b5c5d433ebdfc" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::vector&lt; ViewportId &gt; &gt;</type>
+        <definition>std::vector&lt;std::vector&lt;ViewportId&gt; &gt; helios::engine::modules::rendering::viewport::types::StateToViewportPolicy::gameStates_</definition>
+        <argsstring></argsstring>
+        <name>gameStates_</name>
+        <qualifiedname>helios::engine::modules::rendering::viewport::types::StateToViewportPolicy::gameStates_</qualifiedname>
+        <briefdescription>
+<para>Viewport IDs indexed by <ref refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80be" kindref="member">GameState</ref> bit position. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/rendering/viewport/types/StateToViewportPolicy.ixx" line="57" column="21" bodyfile="/tmp/h/include/helios/engine/modules/rendering/viewport/types/StateToViewportPolicy.ixx" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1rendering_1_1viewport_1_1types_1_1StateToViewportPolicy_1a1bd33679f19e40af1af5e96914ff0895" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::vector&lt; ViewportId &gt; &gt;</type>
+        <definition>std::vector&lt;std::vector&lt;ViewportId&gt; &gt; helios::engine::modules::rendering::viewport::types::StateToViewportPolicy::matchStates_</definition>
+        <argsstring></argsstring>
+        <name>matchStates_</name>
+        <qualifiedname>helios::engine::modules::rendering::viewport::types::StateToViewportPolicy::matchStates_</qualifiedname>
+        <briefdescription>
+<para>Viewport IDs indexed by <ref refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9b" kindref="member">MatchState</ref> bit position. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/rendering/viewport/types/StateToViewportPolicy.ixx" line="62" column="21" bodyfile="/tmp/h/include/helios/engine/modules/rendering/viewport/types/StateToViewportPolicy.ixx" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1rendering_1_1viewport_1_1types_1_1StateToViewportPolicy_1ac07a70fedb7e388a810395f7481a8c74" prot="private" static="no" mutable="yes">
+        <type>std::vector&lt; ViewportId &gt;</type>
+        <definition>std::vector&lt;ViewportId&gt; helios::engine::modules::rendering::viewport::types::StateToViewportPolicy::combined_</definition>
+        <argsstring></argsstring>
+        <name>combined_</name>
+        <qualifiedname>helios::engine::modules::rendering::viewport::types::StateToViewportPolicy::combined_</qualifiedname>
+        <briefdescription>
+<para>Temporary buffer for combining viewport IDs. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/rendering/viewport/types/StateToViewportPolicy.ixx" line="67" column="29" bodyfile="/tmp/h/include/helios/engine/modules/rendering/viewport/types/StateToViewportPolicy.ixx" bodystart="67" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1rendering_1_1viewport_1_1types_1_1StateToViewportPolicy_1a704cb1610515a251ec74f54276746ff3" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::rendering::viewport::types::StateToViewportPolicy::update</definition>
+        <argsstring>(size_t st, const ViewportId viewportId, std::vector&lt; std::vector&lt; ViewportId &gt; &gt; &amp;states)</argsstring>
+        <name>update</name>
+        <qualifiedname>helios::engine::modules::rendering::viewport::types::StateToViewportPolicy::update</qualifiedname>
+        <param>
+          <type>size_t</type>
+          <declname>st</declname>
+        </param>
+        <param>
+          <type>const ViewportId</type>
+          <declname>viewportId</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::vector&lt; ViewportId &gt; &gt; &amp;</type>
+          <declname>states</declname>
+        </param>
+        <briefdescription>
+<para>Updates the state-to-viewport mapping for a given bitmask. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>st</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>State bitmask to update. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>viewportId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Viewport ID to associate with the state(s). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>states</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Target vector to update (gameStates_ or matchStates_). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/rendering/viewport/types/StateToViewportPolicy.ixx" line="76" column="14" bodyfile="/tmp/h/include/helios/engine/modules/rendering/viewport/types/StateToViewportPolicy.ixx" bodystart="76" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1rendering_1_1viewport_1_1types_1_1StateToViewportPolicy_1a8bc70d4766642ef8f894a5f8eed7ea47" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::modules::rendering::viewport::types::StateToViewportPolicy::StateToViewportPolicy</definition>
+        <argsstring>()</argsstring>
+        <name>StateToViewportPolicy</name>
+        <qualifiedname>helios::engine::modules::rendering::viewport::types::StateToViewportPolicy::StateToViewportPolicy</qualifiedname>
+        <briefdescription>
+<para>Default constructor with pre-allocated capacity. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/rendering/viewport/types/StateToViewportPolicy.ixx" line="105" column="9" bodyfile="/tmp/h/include/helios/engine/modules/rendering/viewport/types/StateToViewportPolicy.ixx" bodystart="105" bodyend="109"/>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1viewport_1_1types_1_1StateToViewportPolicy_1a21ea2fdf98266bb7ed810d95f56a46c1" compoundref="StateToViewportPolicy_8ixx" startline="139" endline="149">helios::engine::modules::rendering::viewport::types::StateToViewportPolicy::add</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1viewport_1_1types_1_1StateToViewportPolicy_1a4fd020f2482eed9c7fea099b1f58fe56" compoundref="StateToViewportPolicy_8ixx" startline="119" endline="129">helios::engine::modules::rendering::viewport::types::StateToViewportPolicy::add</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1rendering_1_1viewport_1_1types_1_1StateToViewportPolicy_1a4fd020f2482eed9c7fea099b1f58fe56" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>StateToViewportPolicy &amp;</type>
+        <definition>StateToViewportPolicy &amp; helios::engine::modules::rendering::viewport::types::StateToViewportPolicy::add</definition>
+        <argsstring>(MatchState state, ViewportId viewportId) noexcept</argsstring>
+        <name>add</name>
+        <qualifiedname>helios::engine::modules::rendering::viewport::types::StateToViewportPolicy::add</qualifiedname>
+        <param>
+          <type>MatchState</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>ViewportId</type>
+          <declname>viewportId</declname>
+        </param>
+        <briefdescription>
+<para>Associates a viewport with one or more match states. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9b" kindref="member">MatchState</ref> bitmask to associate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>viewportId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Viewport ID to add.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to this policy for method chaining. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/rendering/viewport/types/StateToViewportPolicy.ixx" line="119" column="31" bodyfile="/tmp/h/include/helios/engine/modules/rendering/viewport/types/StateToViewportPolicy.ixx" bodystart="119" bodyend="129"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1viewport_1_1types_1_1StateToViewportPolicy_1a8bc70d4766642ef8f894a5f8eed7ea47" compoundref="StateToViewportPolicy_8ixx" startline="105" endline="109">helios::engine::modules::rendering::viewport::types::StateToViewportPolicy::StateToViewportPolicy</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1rendering_1_1viewport_1_1types_1_1StateToViewportPolicy_1a21ea2fdf98266bb7ed810d95f56a46c1" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>StateToViewportPolicy &amp;</type>
+        <definition>StateToViewportPolicy &amp; helios::engine::modules::rendering::viewport::types::StateToViewportPolicy::add</definition>
+        <argsstring>(GameState state, ViewportId viewportId) noexcept</argsstring>
+        <name>add</name>
+        <qualifiedname>helios::engine::modules::rendering::viewport::types::StateToViewportPolicy::add</qualifiedname>
+        <param>
+          <type>GameState</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>ViewportId</type>
+          <declname>viewportId</declname>
+        </param>
+        <briefdescription>
+<para>Associates a viewport with one or more game states. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80be" kindref="member">GameState</ref> bitmask to associate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>viewportId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Viewport ID to add.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to this policy for method chaining. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/rendering/viewport/types/StateToViewportPolicy.ixx" line="139" column="31" bodyfile="/tmp/h/include/helios/engine/modules/rendering/viewport/types/StateToViewportPolicy.ixx" bodystart="139" bodyend="149"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1viewport_1_1types_1_1StateToViewportPolicy_1a8bc70d4766642ef8f894a5f8eed7ea47" compoundref="StateToViewportPolicy_8ixx" startline="105" endline="109">helios::engine::modules::rendering::viewport::types::StateToViewportPolicy::StateToViewportPolicy</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1rendering_1_1viewport_1_1types_1_1StateToViewportPolicy_1a06fb9edd550a77a5ca4a8cbaac483536" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const std::vector&lt; ViewportId &gt; &amp;</type>
+        <definition>const std::vector&lt; ViewportId &gt; &amp; helios::engine::modules::rendering::viewport::types::StateToViewportPolicy::viewportIds</definition>
+        <argsstring>(const GameState gameState, const MatchState matchState) const noexcept</argsstring>
+        <name>viewportIds</name>
+        <qualifiedname>helios::engine::modules::rendering::viewport::types::StateToViewportPolicy::viewportIds</qualifiedname>
+        <param>
+          <type>const GameState</type>
+          <declname>gameState</declname>
+        </param>
+        <param>
+          <type>const MatchState</type>
+          <declname>matchState</declname>
+        </param>
+        <briefdescription>
+<para>Returns viewport IDs for the given game/match state combination. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Combines viewports associated with the <ref refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80be" kindref="member">GameState</ref> and <ref refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9b" kindref="member">MatchState</ref>. <ref refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80be" kindref="member">GameState</ref> must be a single-bit (power of 2) value. <ref refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9b" kindref="member">MatchState</ref> can be Undefined, in which case only <ref refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80be" kindref="member">GameState</ref> viewports are returned.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameState</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current game state (must be a single state, not bitmask). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>matchState</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current match state (may be Undefined).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to internal vector of combined viewport IDs. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/rendering/viewport/types/StateToViewportPolicy.ixx" line="163" column="28" bodyfile="/tmp/h/include/helios/engine/modules/rendering/viewport/types/StateToViewportPolicy.ixx" bodystart="163" bodyend="195"/>
+        <references refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beaec0fc0100c4fc1ce4eea230c3dc10360" compoundref="GameState_8ixx" startline="29">helios::engine::mechanics::gamestate::types::Undefined</references>
+        <references refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9baec0fc0100c4fc1ce4eea230c3dc10360" compoundref="MatchState_8ixx" startline="29">helios::engine::mechanics::match::types::Undefined</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/modules/rendering/viewport/types/StateToViewportPolicy.ixx" line="13" column="15"/>
+  </compounddef>
+</doxygen>

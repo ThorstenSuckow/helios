@@ -9,14 +9,14 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md345">
+<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md358">
 <title>helios::engine::modules::ai</title><para>AI behavior modules for game entities in the helios engine.</para>
 </sect1>
-<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md346">
+<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md359">
 <title>Overview</title><para>This module provides components and systems for artificial intelligence behaviors. Currently focused on simple pursuit/chase mechanics, with architecture designed for expansion to more complex AI patterns.</para>
 </sect1>
-<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md347">
-<title>Submodules</title><sect2 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md348">
+<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md360">
+<title>Submodules</title><sect2 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md361">
 <title>components/</title><para>Data components storing AI behavior state:</para>
 <para><table rows="2" cols="2"><row>
 <entry thead="yes"><para>Component  </para>
@@ -29,7 +29,7 @@
 </table>
 </para>
 </sect2>
-<sect2 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md349">
+<sect2 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md362">
 <title>systems/</title><para>Systems that process AI components:</para>
 <para><table rows="2" cols="2"><row>
 <entry thead="yes"><para>System  </para>
@@ -43,8 +43,8 @@
 </para>
 </sect2>
 </sect1>
-<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md350">
-<title>Usage</title><sect2 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md351">
+<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md363">
+<title>Usage</title><sect2 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md364">
 <title>Basic Chase Behavior</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8modules_8ai" kindref="compound">helios.engine.modules.ai</ref>;</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Create<sp/>enemy<sp/>that<sp/>chases<sp/>player</highlight><highlight class="normal"></highlight></codeline>
@@ -58,7 +58,7 @@
 <codeline><highlight class="normal">enemy-&gt;add&lt;TranslationStateComponent&gt;();</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md352">
+<sect2 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md365">
 <title>Using with GameObjectFactory</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>enemy<sp/>=<sp/>GameObjectFactory::gameObject()</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.withAi([&amp;](</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>ai)<sp/>{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ai.chasing()</highlight></codeline>
@@ -73,7 +73,7 @@
 </programlisting></para>
 </sect2>
 </sect1>
-<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md353">
+<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md366">
 <title>Chase Behavior Details</title><para>The <computeroutput>ChaseSystem</computeroutput> operates as follows:</para>
 <para>1. <bold>Target Lookup</bold>: Finds target entity by handle in GameWorld 2. <bold>Cooldown Check</bold>: Only updates direction after cooldown expires 3. <bold>Direction Calculation</bold>: Computes normalized vector from entity to target 4. <bold>Steering Update</bold>: Sets steering intent to face target direction</para>
 <para><programlisting><codeline><highlight class="normal">┌─────────────────────────────────────────────────────────────┐</highlight></codeline>
@@ -94,7 +94,7 @@
 <codeline><highlight class="normal">└─────────────────────────────────────────────────────────────┘</highlight></codeline>
 </programlisting></para>
 </sect1>
-<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md354">
+<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md367">
 <title>Component Dependencies</title><para><table rows="2" cols="2"><row>
 <entry thead="yes"><para>Component  </para>
 </entry><entry thead="yes"><para>Required Companions  </para>
@@ -106,7 +106,7 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md355">
+<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md368">
 <title>Related Modules</title><para><table rows="4" cols="2"><row>
 <entry thead="yes"><para>Module  </para>
 </entry><entry thead="yes"><para>Purpose  </para>

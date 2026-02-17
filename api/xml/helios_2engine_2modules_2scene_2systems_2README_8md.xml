@@ -2,24 +2,55 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="helios_2engine_2modules_2scene_2systems_2README_8md" kind="file" language="Markdown">
     <compoundname>helios/engine/modules/scene/systems/README.md</compoundname>
-    <innernamespace refid="namespacehelios_1_1engine_1_1modules_1_1systems_1_1scene">helios::engine::modules::systems::scene</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1modules_1_1scene_1_1systems">helios::engine::modules::scene::systems</innernamespace>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
     <programlisting>
-<codeline><highlight class="normal">#<sp/>helios::engine::modules::systems::scene</highlight></codeline>
+<codeline><highlight class="normal">#<sp/>helios::engine::modules::scene::systems</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">Scene<sp/>graph<sp/>synchronization<sp/>systems.<sp/>This<sp/>namespace<sp/>contains<sp/>systems<sp/>that<sp/>bridge<sp/>the<sp/>gameplay<sp/>simulation<sp/>layer<sp/>with<sp/>the<sp/>rendering<sp/>scene<sp/>graph.<sp/>They<sp/>propagate<sp/>transformation<sp/>data<sp/>from<sp/>gameplay<sp/>components<sp/>to<sp/>SceneNodes<sp/>and<sp/>read<sp/>back<sp/>computed<sp/>world<sp/>transforms.</highlight></codeline>
+<codeline><highlight class="normal">Scene<sp/>graph<sp/>synchronization<sp/>and<sp/>rendering<sp/>systems.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Systems</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>System<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|--------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SceneSyncSystem`<sp/>|<sp/>Propagates<sp/>transforms<sp/>from<sp/>gameplay<sp/>components<sp/>to<sp/>scene<sp/>nodes<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SceneRenderingSystem`<sp/>|<sp/>Renders<sp/>scenes<sp/>through<sp/>their<sp/>associated<sp/>viewports<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>SceneSyncSystem</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Bridges<sp/>the<sp/>gameplay<sp/>simulation<sp/>layer<sp/>with<sp/>the<sp/>rendering<sp/>scene<sp/>graph.<sp/>Propagates<sp/>transformation<sp/>data<sp/>from<sp/>gameplay<sp/>components<sp/>to<sp/>SceneNodes<sp/>and<sp/>reads<sp/>back<sp/>computed<sp/>world<sp/>transforms.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>SceneRenderingSystem</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Iterates<sp/>over<sp/>all<sp/>active<sp/>viewport<sp/>IDs<sp/>from<sp/>the<sp/>session,<sp/>resolves<sp/>the<sp/>associated<sp/>scene<sp/>and<sp/>viewport<sp/>via<sp/>SceneToViewportMap,<sp/>creates<sp/>a<sp/>scene<sp/>snapshot,<sp/>and<sp/>submits<sp/>it<sp/>to<sp/>the<sp/>rendering<sp/>device.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Registration:**</highlight></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">systemRegistry.add&lt;SceneRenderingSystem&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>Phase::Post,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>renderingDevice,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>sceneToViewportMap</highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Related<sp/>Modules</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Module<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|--------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`helios.engine.modules.scene.types`<sp/>|<sp/>SceneToViewportMap<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`helios.rendering`<sp/>|<sp/>RenderingDevice,<sp/>RenderPass<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`helios.scene`<sp/>|<sp/>Scene<sp/>graph<sp/>|</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>
 <codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
 <codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
-<codeline><highlight class="normal">@namespace<sp/>helios::engine::modules::systems::scene</highlight></codeline>
-<codeline><highlight class="normal">@brief<sp/>Scene<sp/>graph<sp/>synchronization<sp/>systems.</highlight></codeline>
-<codeline><highlight class="normal">@details<sp/>This<sp/>namespace<sp/>contains<sp/>systems<sp/>that<sp/>bridge<sp/>gameplay<sp/>simulation<sp/>and<sp/>the<sp/>rendering<sp/>scene<sp/>graph.</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::engine::modules::scene::systems</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Scene<sp/>graph<sp/>synchronization<sp/>and<sp/>rendering<sp/>systems.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Contains<sp/>systems<sp/>that<sp/>bridge<sp/>gameplay<sp/>simulation<sp/>and<sp/>the<sp/>rendering<sp/>scene<sp/>graph,<sp/>including<sp/>transform<sp/>propagation<sp/>and<sp/>viewport-based<sp/>scene<sp/>rendering.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
-<codeline></codeline>
     </programlisting>
     <location file="/tmp/h/include/helios/engine/modules/scene/systems/README.md"/>
   </compounddef>

@@ -11,13 +11,13 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_d368ce8d6920c000d21f916ca5b7e02f_1autotoc_md147">
+<sect1 id="dir_d368ce8d6920c000d21f916ca5b7e02f_1autotoc_md160">
 <title>helios::engine::mechanics::combat</title><para>Combat-related gameplay systems, components, and commands.</para>
 </sect1>
-<sect1 id="dir_d368ce8d6920c000d21f916ca5b7e02f_1autotoc_md148">
+<sect1 id="dir_d368ce8d6920c000d21f916ca5b7e02f_1autotoc_md161">
 <title>Overview</title><para>This module provides all building blocks for implementing combat mechanics such as aiming, shooting, projectile spawning, and attack attribution.</para>
 </sect1>
-<sect1 id="dir_d368ce8d6920c000d21f916ca5b7e02f_1autotoc_md149">
+<sect1 id="dir_d368ce8d6920c000d21f916ca5b7e02f_1autotoc_md162">
 <title>Submodules</title><para><table rows="5" cols="2"><row>
 <entry thead="yes"><para>Submodule  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
@@ -41,7 +41,7 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_d368ce8d6920c000d21f916ca5b7e02f_1autotoc_md150">
+<sect1 id="dir_d368ce8d6920c000d21f916ca5b7e02f_1autotoc_md163">
 <title>Key Classes</title><para><table rows="8" cols="2"><row>
 <entry thead="yes"><para>Class  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
@@ -77,10 +77,10 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_d368ce8d6920c000d21f916ca5b7e02f_1autotoc_md151">
+<sect1 id="dir_d368ce8d6920c000d21f916ca5b7e02f_1autotoc_md164">
 <title>Architecture</title><para>Combat follows the command pattern integrated with the spawn system:</para>
 <para>1. Input systems generate <computeroutput>ShootCommand</computeroutput> and <computeroutput>Aim2DCommand</computeroutput> 2. Commands update <computeroutput>ShootComponent</computeroutput> and <computeroutput>Aim2DComponent</computeroutput> state 3. <computeroutput>ProjectileSpawnSystem</computeroutput> reads component state and generates <computeroutput>SpawnCommand</computeroutput> 4. Spawn system handles actual projectile creation via pool and profile</para>
-<sect2 id="dir_d368ce8d6920c000d21f916ca5b7e02f_1autotoc_md152">
+<sect2 id="dir_d368ce8d6920c000d21f916ca5b7e02f_1autotoc_md165">
 <title>Attack Attribution Flow</title><para>1. <computeroutput>DamageOnCollisionSystem</computeroutput> applies damage and updates <computeroutput>LastAttackerComponent</computeroutput> 2. <computeroutput>HealthUpdateSystem</computeroutput> detects death and publishes <computeroutput>DeathEvent</computeroutput> with <computeroutput>AttackContext</computeroutput> 3. <computeroutput>CombatScoringSystem</computeroutput> reads <computeroutput>DeathEvent</computeroutput> and awards score to attacker</para>
 <para><hruler/>
 </para>

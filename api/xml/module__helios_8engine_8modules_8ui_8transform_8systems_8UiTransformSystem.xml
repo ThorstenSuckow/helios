@@ -27,6 +27,7 @@
 <para>Adjusts position based on pivot point and element size. </para>
         </briefdescription>
         <detaileddescription>
+<para>Transforms a position from anchor-relative to pivot-relative coordinates. The pivot determines which point of the element is placed at the anchor position.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>unanchored</parametername>
@@ -52,13 +53,13 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The adjusted position. </para>
+<simplesect kind="return"><para>The adjusted position accounting for pivot offset. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/ui/transform/systems/UiTransformSystem.ixx" line="51" column="29" bodyfile="/tmp/h/include/helios/engine/modules/ui/transform/systems/UiTransformSystem.ixx" bodystart="51" bodyend="73"/>
+        <location file="/tmp/h/include/helios/engine/modules/ui/transform/systems/UiTransformSystem.ixx" line="83" column="29" bodyfile="/tmp/h/include/helios/engine/modules/ui/transform/systems/UiTransformSystem.ixx" bodystart="83" bodyend="105"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ui_1_1transform_1_1systems_1_1UiTransformSystem_1aaeb3aab4499b52957bea4b123bcd2496" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>void</type>
@@ -72,10 +73,11 @@
           <declname>updateContext</declname>
         </param>
         <briefdescription>
-<para>Updates UI element positions based on viewport dimensions. </para>
+<para>Computes and applies screen positions for all UI elements. </para>
         </briefdescription>
         <detaileddescription>
-<para>Queries entities with UiTransformComponent and computes their screen positions based on anchor, pivot, offsets, and current viewport bounds.</para>
+<para>Iterates over all entities with UI layout components and computes their final screen positions. For each entity:</para>
+<para>1. Finds the matching viewport snapshot by viewportId 2. Determines parent bounds (viewport for root, parent AABB otherwise) 3. Computes anchor position based on anchor type and offsets 4. Adjusts for pivot point 5. Updates TranslationStateComponent with final position</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>updateContext</parametername>
@@ -89,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/ui/transform/systems/UiTransformSystem.ixx" line="85" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ui/transform/systems/UiTransformSystem.ixx" bodystart="85" bodyend="207"/>
+        <location file="/tmp/h/include/helios/engine/modules/ui/transform/systems/UiTransformSystem.ixx" line="123" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ui/transform/systems/UiTransformSystem.ixx" bodystart="123" bodyend="252"/>
         <references refid="namespacehelios_1_1engine_1_1modules_1_1ui_1_1layout_1a858f90f428368a1ead0dd663f2826258a98e5a1c44509157ebcaf46c515c78875" compoundref="Anchor_8ixx" startline="34">helios::engine::modules::ui::layout::BottomLeft</references>
         <references refid="namespacehelios_1_1engine_1_1modules_1_1ui_1_1layout_1a858f90f428368a1ead0dd663f2826258a4f1f6016fc9f3f2353c0cc7c67b292bd" compoundref="Anchor_8ixx" startline="24">helios::engine::modules::ui::layout::Center</references>
         <references refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" compoundref="System_8ixx" startline="48">helios::engine::ecs::System::gameWorld_</references>

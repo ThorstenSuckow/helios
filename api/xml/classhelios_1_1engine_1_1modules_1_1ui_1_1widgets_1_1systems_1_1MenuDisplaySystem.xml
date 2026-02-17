@@ -1,0 +1,247 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::modules::ui::widgets::systems::MenuDisplaySystem</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1ecs_1_1System" prot="public" virt="non-virtual">helios::engine::ecs::System</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem_1ac5c1173917b6a874c0ccfedf5ca9788c" prot="private" static="no" mutable="no">
+        <type><ref refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle" kindref="compound">helios::engine::ecs::EntityHandle</ref></type>
+        <definition>helios::engine::ecs::EntityHandle helios::engine::modules::ui::widgets::systems::MenuDisplaySystem::prevEntityHandle_</definition>
+        <argsstring></argsstring>
+        <name>prevEntityHandle_</name>
+        <qualifiedname>helios::engine::modules::ui::widgets::systems::MenuDisplaySystem::prevEntityHandle_</qualifiedname>
+        <briefdescription>
+<para>Handle to the previously focused entity for change detection. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuDisplaySystem.ixx" line="59" column="43" bodyfile="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuDisplaySystem.ixx" bodystart="59" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem_1a22a223ce60b75a028329948103b77d1f" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::ui::widgets::systems::MenuDisplaySystem::showMenu</definition>
+        <argsstring>(helios::engine::ecs::GameObject go, bool show, helios::engine::runtime::world::GameWorld &amp;gameWorld)</argsstring>
+        <name>showMenu</name>
+        <qualifiedname>helios::engine::modules::ui::widgets::systems::MenuDisplaySystem::showMenu</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref></type>
+          <declname>go</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>show</declname>
+        </param>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <briefdescription>
+<para>Shows or hides a menu and its items. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>go</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The menu entity. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>show</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>True to show, false to hide. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the game world for item lookup. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuDisplaySystem.ixx" line="68" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuDisplaySystem.ixx" bodystart="68" bodyend="84"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem_1a7fcf27e865b36e92bd386ab7aed59c86" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::ui::widgets::systems::MenuDisplaySystem::update</definition>
+        <argsstring>(helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept override</argsstring>
+        <name>update</name>
+        <qualifiedname>helios::engine::modules::ui::widgets::systems::MenuDisplaySystem::update</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1ecs_1_1System_1a4e9969641985fa04db6214332c88605b">update</reimplements>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Updates menu visibility based on focus changes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Compares the current focused entity with the previous one. If focus changed, hides the previous menu and shows the new one. Skips processing if focus remains unchanged.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current frame&apos;s update context. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuDisplaySystem.ixx" line="99" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuDisplaySystem.ixx" bodystart="99" bodyend="131"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Controls menu visibility based on session UI focus state. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This system monitors the session&apos;s focused entity and shows/hides menus accordingly. When the focused entity changes:<itemizedlist>
+<listitem><para>The previously focused menu (if any) is hidden</para>
+</listitem><listitem><para>The newly focused menu is shown along with its menu items</para>
+</listitem></itemizedlist>
+</para>
+<para>The system tracks the previous focused entity to detect focus changes and avoid redundant visibility updates.</para>
+<para><simplesect kind="see"><para>MenuComponent </para>
+</simplesect>
+<simplesect kind="see"><para>UiFocusComponent </para>
+</simplesect>
+<simplesect kind="see"><para>Session::focusedEntity() </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::ecs::System</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1System"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::ecs::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Updatable"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::modules::ui::widgets::systems::MenuDisplaySystem</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="12">
+        <label>helios::engine::ecs::EntityManager</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1EntityManager"/>
+      </node>
+      <node id="11">
+        <label>helios::engine::ecs::EntityRegistry</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry"/>
+      </node>
+      <node id="2">
+        <label>helios::engine::ecs::System</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1System"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>gameWorld_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::ecs::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Updatable"/>
+      </node>
+      <node id="7">
+        <label>helios::engine::mechanics::gamestate::GameStateCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateCommandHandler"/>
+      </node>
+      <node id="8">
+        <label>helios::engine::mechanics::match::MatchStateCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1MatchStateCommandHandler"/>
+      </node>
+      <node id="6">
+        <label>helios::engine::mechanics::scoring::ScoreCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler"/>
+      </node>
+      <node id="9">
+        <label>helios::engine::modules::ui::UiActionCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandHandler"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::modules::ui::widgets::systems::MenuDisplaySystem</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>helios::engine::runtime::spawn::SpawnCommandHandlerRegistry</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandlerRegistry"/>
+      </node>
+      <node id="4">
+        <label>helios::engine::runtime::world::GameWorld</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>logger_</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>scoreCommandHandler_</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>gameStateCommandHandler_</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>matchStateCommandHandler_</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>uiActionCommandHandler_</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>spawnCommandHandlerRegistry_</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>entityRegistry_</edgelabel>
+        </childnode>
+        <childnode refid="12" relation="usage">
+          <edgelabel>em_</edgelabel>
+        </childnode>
+        <childnode refid="13" relation="usage">
+          <edgelabel>session_</edgelabel>
+        </childnode>
+      </node>
+      <node id="13">
+        <label>helios::engine::runtime::world::Session</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session"/>
+      </node>
+      <node id="5">
+        <label>helios::util::log::Logger</label>
+        <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
+      </node>
+    </collaborationgraph>
+    <location file="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuDisplaySystem.ixx" line="54" column="5" bodyfile="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuDisplaySystem.ixx" bodystart="54" bodyend="133"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" prot="protected" virt="non-virtual"><scope>helios::engine::modules::ui::widgets::systems::MenuDisplaySystem</scope><name>gameWorld_</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1ae0464c1668e257439243a4f25979a7ff" prot="public" virt="virtual"><scope>helios::engine::modules::ui::widgets::systems::MenuDisplaySystem</scope><name>init</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem_1ac5c1173917b6a874c0ccfedf5ca9788c" prot="private" virt="non-virtual"><scope>helios::engine::modules::ui::widgets::systems::MenuDisplaySystem</scope><name>prevEntityHandle_</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem_1a22a223ce60b75a028329948103b77d1f" prot="private" virt="non-virtual"><scope>helios::engine::modules::ui::widgets::systems::MenuDisplaySystem</scope><name>showMenu</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a26d81abcda05fe8b12a1ddb4ed6099a3" prot="public" virt="non-virtual"><scope>helios::engine::modules::ui::widgets::systems::MenuDisplaySystem</scope><name>Updatable</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem_1a7fcf27e865b36e92bd386ab7aed59c86" prot="public" virt="virtual"><scope>helios::engine::modules::ui::widgets::systems::MenuDisplaySystem</scope><name>update</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a937c99bfacd777c53e0f811ab9d335a6" prot="public" virt="virtual"><scope>helios::engine::modules::ui::widgets::systems::MenuDisplaySystem</scope><name>~System</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a0f54f92a2a8d6c8dc2fc2ebed41d5a85" prot="public" virt="virtual"><scope>helios::engine::modules::ui::widgets::systems::MenuDisplaySystem</scope><name>~Updatable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_aff2aa077c6219aca897b0a4c890747b" kind="dir">
+    <compoundname>types</compoundname>
+    <innerfile refid="helios_2engine_2modules_2scene_2types_2__module_8ixx">helios/engine/modules/scene/types/_module.ixx</innerfile>
+    <innerfile refid="SceneToViewportMap_8ixx">SceneToViewportMap.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_aff2aa077c6219aca897b0a4c890747b_1autotoc_md495">
+<title>helios::engine::modules::scene::types</title><para>Types and data structures for scene management.</para>
+</sect1>
+<sect1 id="dir_aff2aa077c6219aca897b0a4c890747b_1autotoc_md496">
+<title>Types</title><para><table rows="2" cols="2"><row>
+<entry thead="yes"><para>Type  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>SceneToViewportMap</computeroutput>  </para>
+</entry><entry thead="no"><para>Maps scenes to their associated viewports  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_aff2aa077c6219aca897b0a4c890747b_1autotoc_md497">
+<title>SceneToViewportMap</title><para>Maintains the relationship between Scene objects and Viewport objects for rendering. A scene can be rendered through multiple viewports (e.g., split-screen), and the map provides O(1) lookups after cache updates.</para>
+<para><bold>Usage:</bold> <programlisting filename=".cpp"><codeline><highlight class="normal">SceneToViewportMap<sp/>map;</highlight></codeline>
+<codeline><highlight class="normal">map.add(&amp;gameScene,<sp/>&amp;mainViewport);</highlight></codeline>
+<codeline><highlight class="normal">map.add(&amp;uiScene,<sp/>&amp;hudViewport);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Query<sp/>scene<sp/>for<sp/>viewport</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>scene<sp/>=<sp/>map.scene(viewportId);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Query<sp/>all<sp/>viewports<sp/>for<sp/>a<sp/>scene</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>viewports<sp/>=<sp/>map.viewports(sceneId);</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_aff2aa077c6219aca897b0a4c890747b_1autotoc_md498">
+<title>Related Modules</title><para><table rows="4" cols="2"><row>
+<entry thead="yes"><para>Module  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="namespacehelios_1_1engine_1_1modules_1_1scene_1_1systems" kindref="compound">helios.engine.modules.scene.systems</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>Systems using the scene-to-viewport mapping  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="namespacehelios_1_1scene" kindref="compound">helios.scene</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>Scene graph types  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="namespacehelios_1_1rendering" kindref="compound">helios.rendering</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>Viewport definitions  </para>
+</entry></row>
+</table>
+</para>
+<para><hruler/>
+ <details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/modules/scene/types/"/>
+  </compounddef>
+</doxygen>

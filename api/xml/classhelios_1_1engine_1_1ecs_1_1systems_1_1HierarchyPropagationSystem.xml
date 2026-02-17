@@ -1,0 +1,228 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1ecs_1_1systems_1_1HierarchyPropagationSystem" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::ecs::systems::HierarchyPropagationSystem</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1ecs_1_1System" prot="public" virt="non-virtual">helios::engine::ecs::System</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1ecs_1_1systems_1_1HierarchyPropagationSystem_1aaeca33500a9666a5d792ddb1c653b27b" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">GameObject</ref> &gt;</type>
+        <definition>std::vector&lt;GameObject&gt; helios::engine::ecs::systems::HierarchyPropagationSystem::roots_</definition>
+        <argsstring></argsstring>
+        <name>roots_</name>
+        <qualifiedname>helios::engine::ecs::systems::HierarchyPropagationSystem::roots_</qualifiedname>
+        <briefdescription>
+<para>Temporary storage for root entities pending propagation. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/systems/HierarchyPropagationSystem.ixx" line="71" column="21" bodyfile="/tmp/h/include/helios/engine/ecs/systems/HierarchyPropagationSystem.ixx" bodystart="71" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1systems_1_1HierarchyPropagationSystem_1a4d2718b08b3f1394c5003288a8084549" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::ecs::systems::HierarchyPropagationSystem::updateEntityHierarchy</definition>
+        <argsstring>(GameObject go, bool active)</argsstring>
+        <name>updateEntityHierarchy</name>
+        <qualifiedname>helios::engine::ecs::systems::HierarchyPropagationSystem::updateEntityHierarchy</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">GameObject</ref></type>
+          <declname>go</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>active</declname>
+        </param>
+        <briefdescription>
+<para>Recursively updates activation state for an entity and its children. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>go</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The entity to update. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>active</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The activation state to apply. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/systems/HierarchyPropagationSystem.ixx" line="53" column="14" bodyfile="/tmp/h/include/helios/engine/ecs/systems/HierarchyPropagationSystem.ixx" bodystart="53" bodyend="66"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1systems_1_1HierarchyPropagationSystem_1a3df564e6a18c7a223ad720a1f141eb8f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::ecs::systems::HierarchyPropagationSystem::update</definition>
+        <argsstring>(helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept override</argsstring>
+        <name>update</name>
+        <qualifiedname>helios::engine::ecs::systems::HierarchyPropagationSystem::update</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1ecs_1_1System_1a4e9969641985fa04db6214332c88605b">update</reimplements>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Processes hierarchy propagation for dirty root entities. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current frame&apos;s update context. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/systems/HierarchyPropagationSystem.ixx" line="80" column="14" bodyfile="/tmp/h/include/helios/engine/ecs/systems/HierarchyPropagationSystem.ixx" bodystart="80" bodyend="111"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" compoundref="System_8ixx" startline="48">helios::engine::ecs::System::gameWorld_</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Propagates activation state from parent to child entities. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This system processes entities with HierarchyComponent and propagates their active/inactive state to all descendants. Only root entities (those without a parent) that are marked dirty trigger propagation.</para>
+<para>The system runs in two passes:<itemizedlist>
+<listitem><para>Active roots: propagate active state to children</para>
+</listitem><listitem><para>Inactive roots: propagate inactive state to children </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::ecs::System</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1System"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::ecs::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Updatable"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::ecs::systems::HierarchyPropagationSystem</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1systems_1_1HierarchyPropagationSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="12">
+        <label>helios::engine::ecs::EntityManager</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1EntityManager"/>
+      </node>
+      <node id="11">
+        <label>helios::engine::ecs::EntityRegistry</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry"/>
+      </node>
+      <node id="2">
+        <label>helios::engine::ecs::System</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1System"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>gameWorld_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::ecs::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Updatable"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::ecs::systems::HierarchyPropagationSystem</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1systems_1_1HierarchyPropagationSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>helios::engine::mechanics::gamestate::GameStateCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateCommandHandler"/>
+      </node>
+      <node id="8">
+        <label>helios::engine::mechanics::match::MatchStateCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1MatchStateCommandHandler"/>
+      </node>
+      <node id="6">
+        <label>helios::engine::mechanics::scoring::ScoreCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler"/>
+      </node>
+      <node id="9">
+        <label>helios::engine::modules::ui::UiActionCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandHandler"/>
+      </node>
+      <node id="10">
+        <label>helios::engine::runtime::spawn::SpawnCommandHandlerRegistry</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandlerRegistry"/>
+      </node>
+      <node id="4">
+        <label>helios::engine::runtime::world::GameWorld</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>logger_</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>scoreCommandHandler_</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>gameStateCommandHandler_</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>matchStateCommandHandler_</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>uiActionCommandHandler_</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>spawnCommandHandlerRegistry_</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>entityRegistry_</edgelabel>
+        </childnode>
+        <childnode refid="12" relation="usage">
+          <edgelabel>em_</edgelabel>
+        </childnode>
+        <childnode refid="13" relation="usage">
+          <edgelabel>session_</edgelabel>
+        </childnode>
+      </node>
+      <node id="13">
+        <label>helios::engine::runtime::world::Session</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session"/>
+      </node>
+      <node id="5">
+        <label>helios::util::log::Logger</label>
+        <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
+      </node>
+    </collaborationgraph>
+    <location file="/tmp/h/include/helios/engine/ecs/systems/HierarchyPropagationSystem.ixx" line="45" column="5" bodyfile="/tmp/h/include/helios/engine/ecs/systems/HierarchyPropagationSystem.ixx" bodystart="45" bodyend="112"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" prot="protected" virt="non-virtual"><scope>helios::engine::ecs::systems::HierarchyPropagationSystem</scope><name>gameWorld_</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1ae0464c1668e257439243a4f25979a7ff" prot="public" virt="virtual"><scope>helios::engine::ecs::systems::HierarchyPropagationSystem</scope><name>init</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1systems_1_1HierarchyPropagationSystem_1aaeca33500a9666a5d792ddb1c653b27b" prot="private" virt="non-virtual"><scope>helios::engine::ecs::systems::HierarchyPropagationSystem</scope><name>roots_</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a26d81abcda05fe8b12a1ddb4ed6099a3" prot="public" virt="non-virtual"><scope>helios::engine::ecs::systems::HierarchyPropagationSystem</scope><name>Updatable</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1systems_1_1HierarchyPropagationSystem_1a3df564e6a18c7a223ad720a1f141eb8f" prot="public" virt="virtual"><scope>helios::engine::ecs::systems::HierarchyPropagationSystem</scope><name>update</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1systems_1_1HierarchyPropagationSystem_1a4d2718b08b3f1394c5003288a8084549" prot="private" virt="non-virtual"><scope>helios::engine::ecs::systems::HierarchyPropagationSystem</scope><name>updateEntityHierarchy</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a937c99bfacd777c53e0f811ab9d335a6" prot="public" virt="virtual"><scope>helios::engine::ecs::systems::HierarchyPropagationSystem</scope><name>~System</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a0f54f92a2a8d6c8dc2fc2ebed41d5a85" prot="public" virt="virtual"><scope>helios::engine::ecs::systems::HierarchyPropagationSystem</scope><name>~Updatable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

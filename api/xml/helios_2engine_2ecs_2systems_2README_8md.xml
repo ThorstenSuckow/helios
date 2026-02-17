@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="helios_2engine_2ecs_2systems_2README_8md" kind="file" language="Markdown">
+    <compoundname>helios/engine/ecs/systems/README.md</compoundname>
+    <innernamespace refid="namespacehelios_1_1engine_1_1ecs_1_1systems">helios::engine::ecs::systems</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>helios::engine::ecs::systems</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Core<sp/>ECS<sp/>systems<sp/>for<sp/>entity<sp/>management<sp/>and<sp/>hierarchy<sp/>propagation.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>submodule<sp/>contains<sp/>systems<sp/>that<sp/>operate<sp/>on<sp/>fundamental<sp/>ECS<sp/>components.<sp/>These<sp/>systems<sp/>are<sp/>typically<sp/>registered<sp/>early<sp/>in<sp/>the<sp/>game<sp/>loop<sp/>to<sp/>ensure<sp/>proper<sp/>entity<sp/>state<sp/>before<sp/>game-specific<sp/>systems<sp/>run.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Systems</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>System<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|--------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`HierarchyPropagationSystem`<sp/>|<sp/>Propagates<sp/>activation<sp/>state<sp/>through<sp/>entity<sp/>hierarchies<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>HierarchyPropagationSystem</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Processes<sp/>entities<sp/>with<sp/>`HierarchyComponent`<sp/>and<sp/>propagates<sp/>their<sp/>active/inactive<sp/>state<sp/>to<sp/>all<sp/>descendants.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Behavior:**</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">1.<sp/>Finds<sp/>root<sp/>entities<sp/>(no<sp/>parent)<sp/>that<sp/>are<sp/>marked<sp/>dirty</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>For<sp/>active<sp/>roots:<sp/>recursively<sp/>activates<sp/>all<sp/>children</highlight></codeline>
+<codeline><highlight class="normal">3.<sp/>For<sp/>inactive<sp/>roots:<sp/>recursively<sp/>deactivates<sp/>all<sp/>children</highlight></codeline>
+<codeline><highlight class="normal">4.<sp/>Clears<sp/>dirty<sp/>flag<sp/>after<sp/>propagation</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Required<sp/>Components:**</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`HierarchyComponent`<sp/>–<sp/>Hierarchy<sp/>relationships</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`Active`<sp/>or<sp/>`Inactive`<sp/>–<sp/>Lifecycle<sp/>tag<sp/>components</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Usage:**</highlight></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Register<sp/>in<sp/>game<sp/>loop</highlight></codeline>
+<codeline><highlight class="normal">systemRegistry.add&lt;HierarchyPropagationSystem&gt;(Phase::Pre);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>When<sp/>entity<sp/>activation<sp/>changes</highlight></codeline>
+<codeline><highlight class="normal">auto*<sp/>hc<sp/>=<sp/>entity.get&lt;HierarchyComponent&gt;();</highlight></codeline>
+<codeline><highlight class="normal">hc-&gt;markDirty();<sp/><sp/>//<sp/>Children<sp/>will<sp/>be<sp/>updated<sp/>next<sp/>frame</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Related<sp/>Modules</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Module<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|--------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`helios.engine.ecs.components`<sp/>|<sp/>Components<sp/>processed<sp/>by<sp/>these<sp/>systems<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`helios.engine.mechanics.lifecycle`<sp/>|<sp/>Active/Inactive<sp/>components<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+<codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::engine::ecs::systems</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Core<sp/>ECS<sp/>systems<sp/>for<sp/>entity<sp/>management.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Provides<sp/>systems<sp/>that<sp/>operate<sp/>on<sp/>fundamental<sp/>ECS<sp/>components,<sp/>including<sp/>hierarchy<sp/>propagation<sp/>for<sp/>parent-child<sp/>entity<sp/>relationships.</highlight></codeline>
+<codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
+<codeline></codeline>
+    </programlisting>
+    <location file="/tmp/h/include/helios/engine/ecs/systems/README.md"/>
+  </compounddef>
+</doxygen>

@@ -125,9 +125,9 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a0b499798e34d2bfed10fe7e404edbe5a" id="r_a0b499798e34d2bfed10fe7e404edbe5a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0b499798e34d2bfed10fe7e404edbe5a">MatchStateManager</a> (std::span&lt; const <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1match_1_1types_1_1MatchStateTransitionRule.html">MatchStateTransitionRule</a> &gt; <a class="el" href="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1rules.html">rules</a>)</td></tr>
-<tr class="memdesc:a0b499798e34d2bfed10fe7e404edbe5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a GameStateManager with custom transition rules.  <br /></td></tr>
+<tr class="memdesc:a0b499798e34d2bfed10fe7e404edbe5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1match_1_1MatchStateManager.html" title="Manages match state transitions using a rule-based state machine.">MatchStateManager</a> with custom transition rules.  <br /></td></tr>
 <tr class="memitem:a6a32958f3143d4514af21695de0b0494" id="r_a6a32958f3143d4514af21695de0b0494"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6a32958f3143d4514af21695de0b0494">MatchStateManager</a> ()</td></tr>
-<tr class="memdesc:a6a32958f3143d4514af21695de0b0494"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a GameStateManager with default transition rules.  <br /></td></tr>
+<tr class="memdesc:a6a32958f3143d4514af21695de0b0494"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1match_1_1MatchStateManager.html" title="Manages match state transitions using a rule-based state machine.">MatchStateManager</a> with default transition rules.  <br /></td></tr>
 <tr class="memitem:a16453408a1f1b57763283718955938ca" id="r_a16453408a1f1b57763283718955938ca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a0b499798e34d2bfed10fe7e404edbe5a">MatchStateManager</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a16453408a1f1b57763283718955938ca">addMatchStateListener</a> (std::unique_ptr&lt; <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1match_1_1MatchStateTransitionListener.html">MatchStateTransitionListener</a> &gt; listener) noexcept</td></tr>
 <tr class="memdesc:a16453408a1f1b57763283718955938ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a listener to be notified of state transitions.  <br /></td></tr>
 <tr class="memitem:a2534616b1f41a27fc06e2356cc80f721" id="r_a2534616b1f41a27fc06e2356cc80f721"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2534616b1f41a27fc06e2356cc80f721">flush</a> (<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">helios::engine::runtime::world::GameWorld</a> &amp;gameWorld, <a class="el" href="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a> &amp;updateContext) noexcept override</td></tr>
@@ -155,11 +155,22 @@ Additional Inherited Members</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Manages match state transitions using a rule-based state machine. </p>
 <p>The <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1match_1_1MatchStateManager.html" title="Manages match state transitions using a rule-based state machine.">MatchStateManager</a> processes MatchStateCommands and applies transition rules to move between match states (e.g., Warmup -&gt; PlayerSpawn -&gt; Playing). It supports guard callbacks for conditional transitions and notifies registered listeners on state changes.</p>
+<p>## Transition Flow</p>
+<p>1. Commands are submitted via `submit()` and queued 2. On `flush()`, the last pending command is evaluated against rules 3. If a rule matches and its guard passes, the transition executes:</p><ul>
+<li>`onMatchStateExit()` is called on listeners</li>
+<li>`onMatchStateTransition()` is called on listeners</li>
+<li>Session state is updated</li>
+<li>`onMatchStateEnter()` is called on listeners</li>
+</ul>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1mechanics_1_1match_1_1types_1_1MatchStateTransitionRule.html" title="Defines a valid state transition with optional guard.">MatchStateTransitionRule</a> </dd>
 <dd>
-<a class="el" href="classhelios_1_1engine_1_1mechanics_1_1match_1_1MatchStateTransitionListener.html" title="Abstract listener for match state transition events.">MatchStateTransitionListener</a> </dd></dl>
+<a class="el" href="classhelios_1_1engine_1_1mechanics_1_1match_1_1MatchStateTransitionListener.html" title="Abstract listener for match state transition events.">MatchStateTransitionListener</a> </dd>
+<dd>
+<a class="el" href="classhelios_1_1engine_1_1mechanics_1_1match_1_1commands_1_1MatchStateCommand.html" title="A command that encapsulates a match state transition request.">MatchStateCommand</a> </dd>
+<dd>
+LambdaMatchStateListener </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="MatchStateManager_8ixx_source.html#l00053">53</a> of file <a class="el" href="MatchStateManager_8ixx_source.html">MatchStateManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MatchStateManager_8ixx_source.html#l00065">65</a> of file <a class="el" href="MatchStateManager_8ixx_source.html">MatchStateManager.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a0b499798e34d2bfed10fe7e404edbe5a" name="a0b499798e34d2bfed10fe7e404edbe5a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0b499798e34d2bfed10fe7e404edbe5a">&#9670;&#160;</a></span>MatchStateManager() <span class="overload">[1/2]</span></h2>
@@ -184,7 +195,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs a GameStateManager with custom transition rules. </p>
+<p>Constructs a <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1match_1_1MatchStateManager.html" title="Manages match state transitions using a rule-based state machine.">MatchStateManager</a> with custom transition rules. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">rules</td><td>A span of transition rules defining valid state transitions. </td></tr>
@@ -192,9 +203,9 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="MatchStateManager_8ixx_source.html#l00100">100</a> of file <a class="el" href="MatchStateManager_8ixx_source.html">MatchStateManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MatchStateManager_8ixx_source.html#l00151">151</a> of file <a class="el" href="MatchStateManager_8ixx_source.html">MatchStateManager.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MatchStateManager_8ixx_source.html#l00118">addMatchStateListener()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MatchStateManager_8ixx_source.html#l00169">addMatchStateListener()</a>.</p>
 <div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
@@ -227,11 +238,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs a GameStateManager with default transition rules. </p>
+<p>Constructs a <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1match_1_1MatchStateManager.html" title="Manages match state transitions using a rule-based state machine.">MatchStateManager</a> with default transition rules. </p>
 
-<p class="definition">Definition at line <a class="el" href="MatchStateManager_8ixx_source.html#l00106">106</a> of file <a class="el" href="MatchStateManager_8ixx_source.html">MatchStateManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MatchStateManager_8ixx_source.html#l00157">157</a> of file <a class="el" href="MatchStateManager_8ixx_source.html">MatchStateManager.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="DefaultMatchStateTransitionRules_8ixx_source.html#l00076">helios::engine::mechanics::match::rules::DefaultMatchStateTransitionRules::rules()</a>.</p>
+<p class="reference">References <a class="el" href="DefaultMatchStateTransitionRules_8ixx_source.html#l00139">helios::engine::mechanics::match::rules::DefaultMatchStateTransitionRules::rules()</a>.</p>
 <div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
@@ -274,9 +285,9 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this manager for method chaining. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="MatchStateManager_8ixx_source.html#l00118">118</a> of file <a class="el" href="MatchStateManager_8ixx_source.html">MatchStateManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MatchStateManager_8ixx_source.html#l00169">169</a> of file <a class="el" href="MatchStateManager_8ixx_source.html">MatchStateManager.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="MatchStateManager_8ixx_source.html#l00100">MatchStateManager()</a>.</p>
+<p class="reference">References <a class="el" href="MatchStateManager_8ixx_source.html#l00151">MatchStateManager()</a>.</p>
 <div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
@@ -325,7 +336,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html#a290b20a4d512d096650dc187f1f3e940">helios::engine::runtime::world::Manager</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="MatchStateManager_8ixx_source.html#l00133">133</a> of file <a class="el" href="MatchStateManager_8ixx_source.html">MatchStateManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MatchStateManager_8ixx_source.html#l00184">184</a> of file <a class="el" href="MatchStateManager_8ixx_source.html">MatchStateManager.ixx</a>.</p>
 
 </div>
 </div>
@@ -362,7 +373,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html#ae7e2cd7531de5ce1fdc1f4a179b70929">helios::engine::runtime::world::Manager</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="MatchStateManager_8ixx_source.html#l00194">194</a> of file <a class="el" href="MatchStateManager_8ixx_source.html">MatchStateManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MatchStateManager_8ixx_source.html#l00250">250</a> of file <a class="el" href="MatchStateManager_8ixx_source.html">MatchStateManager.ixx</a>.</p>
 
 <p class="reference">References <a class="el" href="GameWorld_8ixx_source.html#l00465">helios::engine::runtime::world::GameWorld::registerMatchStateCommandHandler()</a>.</p>
 <div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
@@ -401,7 +412,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html#a967a3375eca948be9ebeaca2e34c7475">helios::engine::runtime::world::Manager</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="MatchStateManager_8ixx_source.html#l00201">201</a> of file <a class="el" href="MatchStateManager_8ixx_source.html">MatchStateManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MatchStateManager_8ixx_source.html#l00257">257</a> of file <a class="el" href="MatchStateManager_8ixx_source.html">MatchStateManager.ixx</a>.</p>
 
 </div>
 </div>
@@ -439,7 +450,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1match_1_1MatchStateCommandHandler.html#a5cc633f35590713c53965fcac62dfe02">helios::engine::mechanics::match::MatchStateCommandHandler</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="MatchStateManager_8ixx_source.html#l00181">181</a> of file <a class="el" href="MatchStateManager_8ixx_source.html">MatchStateManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MatchStateManager_8ixx_source.html#l00237">237</a> of file <a class="el" href="MatchStateManager_8ixx_source.html">MatchStateManager.ixx</a>.</p>
 
 </div>
 </div>

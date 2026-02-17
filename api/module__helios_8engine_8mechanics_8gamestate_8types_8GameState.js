@@ -12,5 +12,6 @@ var module__helios_8engine_8mechanics_8gamestate_8types_8GameState =
     [ "helios::engine::mechanics::gamestate::types::GameStateType", "module__helios_8engine_8mechanics_8gamestate_8types_8GameState.html#a73b150e7583e97e71959b2f58fe4b9b1", null ],
     [ "helios::engine::mechanics::gamestate::types::operator|", "module__helios_8engine_8mechanics_8gamestate_8types_8GameState.html#af65e991fd980093437a4316684efbf74", null ],
     [ "helios::engine::mechanics::gamestate::types::operator&", "module__helios_8engine_8mechanics_8gamestate_8types_8GameState.html#a02090d5a1bd064971c1be9315b221085", null ],
-    [ "helios::engine::mechanics::gamestate::types::hasFlag", "module__helios_8engine_8mechanics_8gamestate_8types_8GameState.html#ab0579070ccee01e3cbb703c14375bf77", null ]
+    [ "helios::engine::mechanics::gamestate::types::hasFlag", "module__helios_8engine_8mechanics_8gamestate_8types_8GameState.html#ab0579070ccee01e3cbb703c14375bf77", null ],
+    [ "helios::engine::mechanics::gamestate::types::GameStateTypeSize", "module__helios_8engine_8mechanics_8gamestate_8types_8GameState.html#a54ed1e4e41fc7a66768c28383874826a", null ]
 ];

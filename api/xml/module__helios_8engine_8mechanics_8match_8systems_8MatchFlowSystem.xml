@@ -4,30 +4,39 @@
     <compoundname>helios.engine.mechanics.match.systems.MatchFlowSystem</compoundname>
     <innerfile refid="MatchFlowSystem_8ixx">MatchFlowSystem.ixx</innerfile>
     <innerclass refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1systems_1_1MatchFlowSystem" prot="public">helios::engine::mechanics::match::systems::MatchFlowSystem</innerclass>
-    <sectiondef kind="func">
-      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1match_1_1systems_1_1MatchFlowSystem_1a01dd40a403819d83f7f31109061718f4" prot="private" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>typename T</type>
-          </param>
-        </templateparamlist>
-        <type>bool</type>
-        <definition>bool helios::engine::mechanics::match::systems::MatchFlowSystem::hasEvent</definition>
-        <argsstring>(const helios::engine::runtime::world::UpdateContext &amp;ctx) noexcept</argsstring>
-        <name>hasEvent</name>
-        <qualifiedname>helios::engine::mechanics::match::systems::MatchFlowSystem::hasEvent</qualifiedname>
-        <param>
-          <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
-          <declname>ctx</declname>
-        </param>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1match_1_1systems_1_1MatchFlowSystem_1aff53f5d39dfb8120a16851d714bc8d83" prot="private" static="no" mutable="no">
+        <type>MatchState</type>
+        <definition>MatchState helios::engine::mechanics::match::systems::MatchFlowSystem::prevMatchSate_</definition>
+        <argsstring></argsstring>
+        <name>prevMatchSate_</name>
+        <qualifiedname>helios::engine::mechanics::match::systems::MatchFlowSystem::prevMatchSate_</qualifiedname>
+        <initializer>= MatchState::Undefined</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/mechanics/match/systems/MatchFlowSystem.ixx" line="33" column="15" bodyfile="/tmp/h/include/helios/engine/mechanics/match/systems/MatchFlowSystem.ixx" bodystart="33" bodyend="36"/>
+        <location file="/tmp/h/include/helios/engine/mechanics/match/systems/MatchFlowSystem.ixx" line="32" column="20" bodyfile="/tmp/h/include/helios/engine/mechanics/match/systems/MatchFlowSystem.ixx" bodystart="32" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1match_1_1systems_1_1MatchFlowSystem_1ad37b37d02728dcfb6849509066c4c669" prot="private" static="no" mutable="no">
+        <type>MatchStateTransitionId</type>
+        <definition>MatchStateTransitionId helios::engine::mechanics::match::systems::MatchFlowSystem::prevMatchStateTransitionId_</definition>
+        <argsstring></argsstring>
+        <name>prevMatchStateTransitionId_</name>
+        <qualifiedname>helios::engine::mechanics::match::systems::MatchFlowSystem::prevMatchStateTransitionId_</qualifiedname>
+        <initializer>= MatchStateTransitionId::Undefined</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/mechanics/match/systems/MatchFlowSystem.ixx" line="33" column="32" bodyfile="/tmp/h/include/helios/engine/mechanics/match/systems/MatchFlowSystem.ixx" bodystart="33" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
       <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1match_1_1systems_1_1MatchFlowSystem_1a9c84d303c34a6518dac0a75931a0e0a9" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>void</type>
         <definition>void helios::engine::mechanics::match::systems::MatchFlowSystem::update</definition>
@@ -56,12 +65,15 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/mechanics/match/systems/MatchFlowSystem.ixx" line="45" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/match/systems/MatchFlowSystem.ixx" bodystart="45" bodyend="80"/>
-        <references refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9babd6d6eb309a4b95da66bef960b4810a6" compoundref="MatchState_8ixx" startline="35">helios::engine::mechanics::match::types::PlayerSpawn</references>
+        <location file="/tmp/h/include/helios/engine/mechanics/match/systems/MatchFlowSystem.ixx" line="43" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/match/systems/MatchFlowSystem.ixx" bodystart="43" bodyend="103"/>
+        <references refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9ba8f3d10eb21bd36347c258679eba9e92b" compoundref="MatchState_8ixx" startline="45">helios::engine::mechanics::match::types::Finished</references>
+        <references refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9bab9fbac179f1be377fe125f9deb1a4ba9" compoundref="MatchState_8ixx" startline="41">helios::engine::mechanics::match::types::PlayerDeath</references>
+        <references refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9babd6d6eb309a4b95da66bef960b4810a6" compoundref="MatchState_8ixx" startline="37">helios::engine::mechanics::match::types::PlayerSpawn</references>
         <references refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70aaa03a010fa4886c60875a71f37b22f15" compoundref="MatchStateTransitionId_8ixx" startline="34">helios::engine::mechanics::match::types::PlayerSpawnRequested</references>
+        <references refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70a894ce1b6075d9de36dec60cc22e20536" compoundref="MatchStateTransitionId_8ixx" startline="44">helios::engine::mechanics::match::types::QuitRequested</references>
         <references refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70a098b846b8fb78489d3e9cc558a565f2b" compoundref="MatchStateTransitionId_8ixx" startline="36">helios::engine::mechanics::match::types::StartRequested</references>
-        <references refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9baec0fc0100c4fc1ce4eea230c3dc10360" compoundref="MatchState_8ixx" startline="27">helios::engine::mechanics::match::types::Undefined</references>
-        <references refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9ba89be10c310ee8cfe640aba66e7368c6c" compoundref="MatchState_8ixx" startline="29">helios::engine::mechanics::match::types::Warmup</references>
+        <references refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9baec0fc0100c4fc1ce4eea230c3dc10360" compoundref="MatchState_8ixx" startline="29">helios::engine::mechanics::match::types::Undefined</references>
+        <references refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9ba89be10c310ee8cfe640aba66e7368c6c" compoundref="MatchState_8ixx" startline="31">helios::engine::mechanics::match::types::Warmup</references>
         <references refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70a3badd370a329294628d42d1a06d298ff" compoundref="MatchStateTransitionId_8ixx" startline="22">helios::engine::mechanics::match::types::WarmupRequested</references>
       </memberdef>
     </sectiondef>

@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_ee142403c4fa16dd4361af2a521a19d8" kind="dir">
+    <compoundname>viewport</compoundname>
+    <innerdir refid="dir_b81f5c8bf4eb3cede8d35ccb0839338d">components</innerdir>
+    <innerdir refid="dir_72674e320da1c0002eddd65e35d67c9e">systems</innerdir>
+    <innerdir refid="dir_dc69de751da32a7352a405d8dd1c58c8">types</innerdir>
+    <innerfile refid="helios_2engine_2modules_2rendering_2viewport_2__module_8ixx">helios/engine/modules/rendering/viewport/_module.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_ee142403c4fa16dd4361af2a521a19d8_1autotoc_md465">
+<title>helios::engine::modules::rendering::viewport</title><para>State-based viewport management for conditional rendering.</para>
+</sect1>
+<sect1 id="dir_ee142403c4fa16dd4361af2a521a19d8_1autotoc_md466">
+<title>Overview</title><para>This module provides a policy-driven system for determining which viewports should be rendered based on the current game and match state. This enables different viewports to be shown during different game phases (e.g., menu viewport during pause, game viewport during play).</para>
+</sect1>
+<sect1 id="dir_ee142403c4fa16dd4361af2a521a19d8_1autotoc_md467">
+<title>Submodules</title><para><table rows="4" cols="2"><row>
+<entry thead="yes"><para>Submodule  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>components/</computeroutput>  </para>
+</entry><entry thead="no"><para>State components for viewport management  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>systems/</computeroutput>  </para>
+</entry><entry thead="no"><para>Systems that update viewport state  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>types/</computeroutput>  </para>
+</entry><entry thead="no"><para>Policy and configuration types  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_ee142403c4fa16dd4361af2a521a19d8_1autotoc_md468">
+<title>Architecture</title><para><programlisting><codeline><highlight class="normal">┌─────────────────────────────────────────────────────────────┐</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>StateToViewportPolicy<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>┌─────────────────────────────────────────────────────────┐│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/>GameState::Running<sp/><sp/>→<sp/>[gameViewportId]<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/>GameState::Paused<sp/><sp/><sp/>→<sp/>[menuViewportId]<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/>MatchState::Playing<sp/>→<sp/>[hudViewportId]<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>└─────────────────────────────────────────────────────────┘│</highlight></codeline>
+<codeline><highlight class="normal">└─────────────────────────────────────────────────────────────┘</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼</highlight></codeline>
+<codeline><highlight class="normal">┌─────────────────────────────────────────────────────────────┐</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>StateToViewportPolicyUpdateSystem<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>•<sp/>Reads<sp/>current<sp/>GameState/MatchState<sp/>from<sp/>Session<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>•<sp/>Queries<sp/>policy<sp/>for<sp/>active<sp/>viewports<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>•<sp/>Updates<sp/>Session<sp/>with<sp/>active<sp/>viewport<sp/>IDs<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">└─────────────────────────────────────────────────────────────┘</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼</highlight></codeline>
+<codeline><highlight class="normal">┌─────────────────────────────────────────────────────────────┐</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Rendering<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>•<sp/>Renders<sp/>only<sp/>viewports<sp/>in<sp/>active<sp/>list<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">└─────────────────────────────────────────────────────────────┘</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_ee142403c4fa16dd4361af2a521a19d8_1autotoc_md469">
+<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8modules_8rendering_8viewport" kindref="compound">helios.engine.modules.rendering.viewport</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1modules_1_1rendering_1_1viewport_1_1types" kindref="compound">helios::engine::modules::rendering::viewport::types</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Configure<sp/>viewport<sp/>policy</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1viewport_1_1types_1_1StateToViewportPolicy" kindref="compound">StateToViewportPolicy</ref><sp/>policy;</highlight></codeline>
+<codeline><highlight class="normal">policy.<ref refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1viewport_1_1types_1_1StateToViewportPolicy_1a4fd020f2482eed9c7fea099b1f58fe56" kindref="member">add</ref>(GameState::Running,<sp/>gameViewportId)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>.<ref refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1viewport_1_1types_1_1StateToViewportPolicy_1a4fd020f2482eed9c7fea099b1f58fe56" kindref="member">add</ref>(GameState::Paused,<sp/>menuViewportId)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>.<ref refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1viewport_1_1types_1_1StateToViewportPolicy_1a4fd020f2482eed9c7fea099b1f58fe56" kindref="member">add</ref>(GameState::GameOver,<sp/>gameOverViewportId)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>.<ref refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1viewport_1_1types_1_1StateToViewportPolicy_1a4fd020f2482eed9c7fea099b1f58fe56" kindref="member">add</ref>(MatchState::Playing,<sp/>hudViewportId);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Register<sp/>system</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">systemRegistry.<ref refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1viewport_1_1types_1_1StateToViewportPolicy_1a4fd020f2482eed9c7fea099b1f58fe56" kindref="member">add</ref>&lt;StateToViewportPolicyUpdateSystem&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>Phase::Pre,<sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>std::move(policy)</highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_ee142403c4fa16dd4361af2a521a19d8_1autotoc_md470">
+<title>Related Modules</title><para><table rows="5" cols="2"><row>
+<entry thead="yes"><para>Module  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="classhelios_1_1rendering_1_1Viewport" kindref="compound">helios.rendering.Viewport</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>Low-level viewport definition  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate" kindref="compound">helios.engine.mechanics.gamestate</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>Game state management  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="namespacehelios_1_1engine_1_1mechanics_1_1match" kindref="compound">helios.engine.mechanics.match</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>Match state management  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session" kindref="compound">helios.engine.runtime.world.Session</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>Session state storage  </para>
+</entry></row>
+</table>
+</para>
+<para><hruler/>
+ <details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/modules/rendering/viewport/"/>
+  </compounddef>
+</doxygen>

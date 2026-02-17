@@ -110,20 +110,55 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="dir_ecc8c78a9a3196411b3443247737022f_dep.svg" width="594" height="178"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="dir_ecc8c78a9a3196411b3443247737022f_dep.svg" width="100%" height="433"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-files" class="groupheader"><a id="files" name="files"></a>
 Files</h2></td></tr>
 <tr class="memitem:_5Fmodule_2Eixx" id="r__5Fmodule_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="helios_2engine_2modules_2scene_2systems_2__module_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="helios_2engine_2modules_2scene_2systems_2__module_8ixx.html">_module.ixx</a></td></tr>
-<tr class="memdesc:helios_2engine_2modules_2scene_2systems_2__module_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aggregate module for helios::engine::modules::scene::systems namespace. <br /></td></tr>
+<tr class="memdesc:helios_2engine_2modules_2scene_2systems_2__module_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aggregate module for <a class="el" href="namespacehelios_1_1engine_1_1modules_1_1scene_1_1systems.html" title="Scene graph synchronization and rendering systems.">helios::engine::modules::scene::systems</a> namespace. <br /></td></tr>
+<tr class="memitem:SceneRenderingSystem_2Eixx" id="r_SceneRenderingSystem_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="SceneRenderingSystem_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SceneRenderingSystem_8ixx.html">SceneRenderingSystem.ixx</a></td></tr>
+<tr class="memdesc:SceneRenderingSystem_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">System for rendering scenes through their associated viewports. <br /></td></tr>
 <tr class="memitem:SceneSyncSystem_2Eixx" id="r_SceneSyncSystem_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="SceneSyncSystem_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SceneSyncSystem_8ixx.html">SceneSyncSystem.ixx</a></td></tr>
 <tr class="memdesc:SceneSyncSystem_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">System for synchronizing gameplay transforms with the scene graph. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md457"></a>
-helios::engine::modules::systems::scene</h1>
-<p>Scene graph synchronization systems. This namespace contains systems that bridge the gameplay simulation layer with the rendering scene graph. They propagate transformation data from gameplay components to SceneNodes and read back computed world transforms.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md489"></a>
+helios::engine::modules::scene::systems</h1>
+<p>Scene graph synchronization and rendering systems.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md490"></a>
+Systems</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">System  </th><th class="markdownTableHeadNone">Purpose  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">SceneSyncSystem</span>  </td><td class="markdownTableBodyNone">Propagates transforms from gameplay components to scene nodes  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">SceneRenderingSystem</span>  </td><td class="markdownTableBodyNone">Renders scenes through their associated viewports  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md491"></a>
+SceneSyncSystem</h1>
+<p>Bridges the gameplay simulation layer with the rendering scene graph. Propagates transformation data from gameplay components to SceneNodes and reads back computed world transforms.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md492"></a>
+SceneRenderingSystem</h1>
+<p>Iterates over all active viewport IDs from the session, resolves the associated scene and viewport via SceneToViewportMap, creates a scene snapshot, and submits it to the rendering device.</p>
+<p><b>Registration:</b> </p><div class="fragment"><div class="line">systemRegistry.add&lt;SceneRenderingSystem&gt;(</div>
+<div class="line">    Phase::Post,</div>
+<div class="line">    renderingDevice,</div>
+<div class="line">    sceneToViewportMap</div>
+<div class="line">);</div>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md493"></a>
+Related Modules</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Module  </th><th class="markdownTableHeadNone">Purpose  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacehelios_1_1engine_1_1modules_1_1scene_1_1types.html" title="Types and data structures for scene management.">helios.engine.modules.scene.types</a></span>  </td><td class="markdownTableBodyNone">SceneToViewportMap  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacehelios_1_1rendering.html" title="Graphics rendering infrastructure.">helios.rendering</a></span>  </td><td class="markdownTableBodyNone">RenderingDevice, RenderPass  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacehelios_1_1scene.html" title="Scene graph and camera management.">helios.scene</a></span>  </td><td class="markdownTableBodyNone">Scene graph  </td></tr>
+</table>
 <hr  />
  <details >
 <summary >

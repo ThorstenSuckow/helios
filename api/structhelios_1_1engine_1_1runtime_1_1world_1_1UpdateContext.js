@@ -1,6 +1,6 @@
 var structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext =
 [
-    [ "UpdateContext", "structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#a0065b60b6bde860af115c594b61fbf39", null ],
+    [ "UpdateContext", "structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#a6e4557410fac459623c7c44b49a0005a", null ],
     [ "commandBuffer", "structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#a006a361316386a5d08617793cb358355", null ],
     [ "deltaTime", "structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#a0197c610dc51fc676bcde9b84545ed7b", null ],
     [ "gameWorld", "structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#a459e72fe47399985183cc6ca35531dfa", null ],
@@ -11,6 +11,7 @@ var structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext =
     [ "readFrame", "structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#a5fa74f194fbee96f883d6964df940bef", null ],
     [ "readPass", "structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#a3e5fef71dad1d4fc531446a1138f8634", null ],
     [ "readPhase", "structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#af2268c3ee45b07619f013e4d81a05b83", null ],
+    [ "session", "structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#a538cadeb656147150f4a12261d67c7f7", null ],
     [ "totalTime", "structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#ad7f5caca30eb2409b98e21f48c5a0e45", null ],
     [ "viewportSnapshots", "structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#a47e89a8a5cf18618ffdc6caccd012100", null ]
 ];

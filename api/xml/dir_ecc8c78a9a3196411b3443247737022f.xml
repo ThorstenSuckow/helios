@@ -3,12 +3,61 @@
   <compounddef id="dir_ecc8c78a9a3196411b3443247737022f" kind="dir">
     <compoundname>systems</compoundname>
     <innerfile refid="helios_2engine_2modules_2scene_2systems_2__module_8ixx">helios/engine/modules/scene/systems/_module.ixx</innerfile>
+    <innerfile refid="SceneRenderingSystem_8ixx">SceneRenderingSystem.ixx</innerfile>
     <innerfile refid="SceneSyncSystem_8ixx">SceneSyncSystem.ixx</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_ecc8c78a9a3196411b3443247737022f_1autotoc_md457">
-<title>helios::engine::modules::systems::scene</title><para>Scene graph synchronization systems. This namespace contains systems that bridge the gameplay simulation layer with the rendering scene graph. They propagate transformation data from gameplay components to SceneNodes and read back computed world transforms.</para>
+<sect1 id="dir_ecc8c78a9a3196411b3443247737022f_1autotoc_md489">
+<title>helios::engine::modules::scene::systems</title><para>Scene graph synchronization and rendering systems.</para>
+</sect1>
+<sect1 id="dir_ecc8c78a9a3196411b3443247737022f_1autotoc_md490">
+<title>Systems</title><para><table rows="3" cols="2"><row>
+<entry thead="yes"><para>System  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>SceneSyncSystem</computeroutput>  </para>
+</entry><entry thead="no"><para>Propagates transforms from gameplay components to scene nodes  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>SceneRenderingSystem</computeroutput>  </para>
+</entry><entry thead="no"><para>Renders scenes through their associated viewports  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_ecc8c78a9a3196411b3443247737022f_1autotoc_md491">
+<title>SceneSyncSystem</title><para>Bridges the gameplay simulation layer with the rendering scene graph. Propagates transformation data from gameplay components to SceneNodes and reads back computed world transforms.</para>
+</sect1>
+<sect1 id="dir_ecc8c78a9a3196411b3443247737022f_1autotoc_md492">
+<title>SceneRenderingSystem</title><para>Iterates over all active viewport IDs from the session, resolves the associated scene and viewport via SceneToViewportMap, creates a scene snapshot, and submits it to the rendering device.</para>
+<para><bold>Registration:</bold> <programlisting filename=".cpp"><codeline><highlight class="normal">systemRegistry.add&lt;SceneRenderingSystem&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>Phase::Post,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>renderingDevice,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>sceneToViewportMap</highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_ecc8c78a9a3196411b3443247737022f_1autotoc_md493">
+<title>Related Modules</title><para><table rows="4" cols="2"><row>
+<entry thead="yes"><para>Module  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="namespacehelios_1_1engine_1_1modules_1_1scene_1_1types" kindref="compound">helios.engine.modules.scene.types</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>SceneToViewportMap  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="namespacehelios_1_1rendering" kindref="compound">helios.rendering</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>RenderingDevice, RenderPass  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="namespacehelios_1_1scene" kindref="compound">helios.scene</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>Scene graph  </para>
+</entry></row>
+</table>
+</para>
 <para><hruler/>
  <details><summary>Doxygen</summary><para></para>
 <para></para>

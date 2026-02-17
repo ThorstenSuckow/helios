@@ -128,13 +128,13 @@ Files</h2></td></tr>
 <tr class="memdesc:mechanics_2combat_2registry_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Component registration for combat module. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md147"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md160"></a>
 helios::engine::mechanics::combat</h1>
 <p>Combat-related gameplay systems, components, and commands.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md148"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md161"></a>
 Overview</h1>
 <p>This module provides all building blocks for implementing combat mechanics such as aiming, shooting, projectile spawning, and attack attribution.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md149"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md162"></a>
 Submodules</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -148,7 +148,7 @@ Submodules</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">types/</span>  </td><td class="markdownTableBodyNone">Combat data types (AttackContext)  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md150"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md163"></a>
 Key Classes</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -168,11 +168,11 @@ Key Classes</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">ProjectileSpawnSystem</span>  </td><td class="markdownTableBodyNone">Reads shoot state and enqueues spawn commands  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md151"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md164"></a>
 Architecture</h1>
 <p>Combat follows the command pattern integrated with the spawn system:</p>
 <p>1. Input systems generate <span class="tt">ShootCommand</span> and <span class="tt">Aim2DCommand</span> 2. Commands update <span class="tt">ShootComponent</span> and <span class="tt">Aim2DComponent</span> state 3. <span class="tt">ProjectileSpawnSystem</span> reads component state and generates <span class="tt">SpawnCommand</span> 4. Spawn system handles actual projectile creation via pool and profile</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md152"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md165"></a>
 Attack Attribution Flow</h2>
 <p>1. <span class="tt">DamageOnCollisionSystem</span> applies damage and updates <span class="tt">LastAttackerComponent</span> 2. <span class="tt">HealthUpdateSystem</span> detects death and publishes <span class="tt">DeathEvent</span> with <span class="tt">AttackContext</span> 3. <span class="tt">CombatScoringSystem</span> reads <span class="tt">DeathEvent</span> and awards score to attacker</p>
 <hr  />

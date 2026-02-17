@@ -143,7 +143,7 @@ $(function() {
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">         *</span></div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">         * @param id The pre-computed hash value.</span></div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keyword">explicit</span> <span class="keyword">constexpr</span> ViewportId(<span class="keyword">const</span> uint32_t <span class="keywordtype">id</span>) noexcept</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keyword">explicit</span> <span class="keyword">constexpr</span> <a class="code hl_function" href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#aad554c341305545751809c1b0acb4b9a">ViewportId</a>(<span class="keyword">const</span> uint32_t <span class="keywordtype">id</span>) noexcept</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>            : id_(<span class="keywordtype">id</span>) {</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        }</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
@@ -159,102 +159,106 @@ $(function() {
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">         */</span></div>
 <div class="foldopen" id="foldopen00051" data-start="{" data-end="}">
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#ad3baa97f44a444ceb0f08876bb46706e">   51</a></span>        <span class="keyword">explicit</span> <span class="keyword">constexpr</span> <a class="code hl_function" href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#ad3baa97f44a444ceb0f08876bb46706e">ViewportId</a>(<span class="keyword">const</span> std::string_view str) noexcept</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            : ViewportId(<a class="code hl_function" href="namespacehelios_1_1core_1_1algorithms.html#a3df283d4b3d4c5006c1bb3c30e03ab1e">helios::core::algorithms::fnv1a_hash</a>(str)) {}</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            : <a class="code hl_function" href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#aad554c341305545751809c1b0acb4b9a">ViewportId</a>(<a class="code hl_function" href="namespacehelios_1_1core_1_1algorithms.html#a3df283d4b3d4c5006c1bb3c30e03ab1e">helios::core::algorithms::fnv1a_hash</a>(str)) {}</div>
 </div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#a61c72b4273764dbd35e88c09726907ea">   54</a></span>        <span class="keyword">explicit</span> <span class="keyword">constexpr</span> <a class="code hl_function" href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#a61c72b4273764dbd35e88c09726907ea">ViewportId</a>(<a class="code hl_struct" href="structhelios_1_1core_1_1types_1_1no__init__t.html">helios::core::types::no_init_t</a>) {};</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment"></span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">         * @brief Returns the raw identifier value.</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">         * @return The 32-bit hash value.</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00061" data-start="{" data-end="}">
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#a81d384737f05726b744eada922018c6d">   61</a></span>        [[nodiscard]] uint32_t <a class="code hl_function" href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#a81d384737f05726b744eada922018c6d">value</a>() const noexcept {</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            <span class="keywordflow">return</span> id_;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        }</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#aad554c341305545751809c1b0acb4b9a">   56</a></span>        <span class="keyword">explicit</span> <span class="keyword">constexpr</span> <a class="code hl_function" href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#aad554c341305545751809c1b0acb4b9a">ViewportId</a>() : ViewportId(<a class="code hl_namespace" href="namespacehelios.html">helios</a>::<a class="code hl_namespace" href="namespacehelios_1_1engine_1_1core.html">core</a>::types::no_init){};</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment"></span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">         * @brief Returns the raw identifier value.</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">         * @return The 32-bit hash value.</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00063" data-start="{" data-end="}">
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#a81d384737f05726b744eada922018c6d">   63</a></span>        [[nodiscard]] uint32_t <a class="code hl_function" href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#a81d384737f05726b744eada922018c6d">value</a>() const noexcept {</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            <span class="keywordflow">return</span> id_;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        }</div>
 </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="foldopen" id="foldopen00066" data-start="{" data-end="}">
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#ac9aab5571c5ffac41552a36d390c85d9">   66</a></span>        [[nodiscard]] <span class="keyword">explicit</span> <span class="keyword">operator</span> bool() const noexcept {</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>            <span class="keywordflow">return</span> id_ != 0;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        }</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="foldopen" id="foldopen00068" data-start="{" data-end="}">
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#ac9aab5571c5ffac41552a36d390c85d9">   68</a></span>        [[nodiscard]] <span class="keyword">explicit</span> <span class="keyword">operator</span> bool() const noexcept {</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            <span class="keywordflow">return</span> id_ != 0;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        }</div>
 </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment"></span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">         * @brief Equality comparison operator.</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#a36079f7e7d28e2edbc43a1313d0751bd">   73</a></span>        <span class="keyword">friend</span> <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_friend" href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#a36079f7e7d28e2edbc43a1313d0751bd">operator==</a>(ViewportId, ViewportId) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment"></span> </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">         * @brief Less-than comparison for ordered containers.</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">         * @param other The ViewportId to compare against.</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment"></span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">         * @brief Equality comparison operator.</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#a36079f7e7d28e2edbc43a1313d0751bd">   75</a></span>        <span class="keyword">friend</span> <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_friend" href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#a36079f7e7d28e2edbc43a1313d0751bd">operator==</a>(ViewportId, ViewportId) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment"></span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">         * @brief Less-than comparison for ordered containers.</span></div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">         * @return `true` if this id is less than `other`.</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00082" data-start="{" data-end="}">
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#a15a257500051205f16645897293863fd">   82</a></span>        <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#a15a257500051205f16645897293863fd">operator&lt;</a>(<span class="keyword">const</span> ViewportId&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            <span class="keywordflow">return</span> id_ &lt; other.id_;</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        }</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">         * @param other The ViewportId to compare against.</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">         * @return `true` if this id is less than `other`.</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00084" data-start="{" data-end="}">
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#a15a257500051205f16645897293863fd">   84</a></span>        <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#a15a257500051205f16645897293863fd">operator&lt;</a>(<span class="keyword">const</span> ViewportId&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            <span class="keywordflow">return</span> id_ &lt; other.id_;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        }</div>
 </div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment"></span> </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment">         * @brief Greater-than comparison for ordered containers.</span></div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">         * @param other The ViewportId to compare against.</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment"></span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">         * @brief Greater-than comparison for ordered containers.</span></div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">         * @return `true` if this id is greater than `other`.</span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00093" data-start="{" data-end="}">
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#a1de1f1786d24a9f0143fc1c8b76391e0">   93</a></span>        <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#a1de1f1786d24a9f0143fc1c8b76391e0">operator&gt;</a>(<span class="keyword">const</span> ViewportId&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            <span class="keywordflow">return</span> id_ &gt; other.id_;</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        }</div>
-</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    };</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">         * @param other The ViewportId to compare against.</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">         * @return `true` if this id is greater than `other`.</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00095" data-start="{" data-end="}">
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#a1de1f1786d24a9f0143fc1c8b76391e0">   95</a></span>        <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#a1de1f1786d24a9f0143fc1c8b76391e0">operator&gt;</a>(<span class="keyword">const</span> ViewportId&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>            <span class="keywordflow">return</span> id_ &gt; other.id_;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        }</div>
 </div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>}</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment"></span> </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment"> * @brief Hash specialization for `ViewportId` to enable use in unordered containers.</span></div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="keyword">template</span>&lt;&gt;</div>
-<div class="foldopen" id="foldopen00105" data-start="{" data-end="};">
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ViewportId_01_4.html">  105</a></span><span class="keyword">struct </span>std::hash&lt;<a class="code hl_namespace" href="namespacehelios.html">helios</a>::engine::core::data::ViewportId&gt; {</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment"></span> </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment">    /**</span></div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment">     * @brief Computes the hash value for a ViewportId.</span></div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="comment">     * @param id The ViewportId to hash.</span></div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="comment">     * @return The hash value (same as the internal id).</span></div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="comment">     */</span></div>
-<div class="foldopen" id="foldopen00114" data-start="{" data-end="}">
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno"><a class="line" href="structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ViewportId_01_4.html#ae8a0c5bfdc6ce646ab1c041b73713d56">  114</a></span>    std::size_t <a class="code hl_function" href="structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ViewportId_01_4.html#ae8a0c5bfdc6ce646ab1c041b73713d56">operator()</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html">helios::engine::core::data::ViewportId</a>&amp; <span class="keywordtype">id</span>) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        <span class="keywordflow">return</span> <span class="keywordtype">id</span>.value();</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    }</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    };</div>
 </div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>};</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>}</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment"></span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment"> * @brief Hash specialization for `ViewportId` to enable use in unordered containers.</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="keyword">template</span>&lt;&gt;</div>
+<div class="foldopen" id="foldopen00107" data-start="{" data-end="};">
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ViewportId_01_4.html">  107</a></span><span class="keyword">struct </span>std::hash&lt;<a class="code hl_namespace" href="namespacehelios.html">helios</a>::engine::core::data::ViewportId&gt; {</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment"></span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment">    /**</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="comment">     * @brief Computes the hash value for a ViewportId.</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="comment">     * @param id The ViewportId to hash.</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="comment">     * @return The hash value (same as the internal id).</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="comment">     */</span></div>
+<div class="foldopen" id="foldopen00116" data-start="{" data-end="}">
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ViewportId_01_4.html#ae8a0c5bfdc6ce646ab1c041b73713d56">  116</a></span>    std::size_t <a class="code hl_function" href="structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ViewportId_01_4.html#ae8a0c5bfdc6ce646ab1c041b73713d56">operator()</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html">helios::engine::core::data::ViewportId</a>&amp; <span class="keywordtype">id</span>) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <span class="keywordflow">return</span> <span class="keywordtype">id</span>.value();</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    }</div>
+</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>};</div>
 </div>
 <div class="ttc" id="amodule__helios_8core_8algorithms_html"><div class="ttname"><a href="module__helios_8core_8algorithms.html">helios.core.algorithms</a></div></div>
 <div class="ttc" id="amodule__helios_8core_8types_html"><div class="ttname"><a href="module__helios_8core_8types.html">helios.core.types</a></div></div>
 <div class="ttc" id="amodule__helios_8engine_8core_8data_8ViewportId_html"><div class="ttname"><a href="module__helios_8engine_8core_8data_8ViewportId.html">helios.engine.core.data.ViewportId</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1core_1_1algorithms_html_a3df283d4b3d4c5006c1bb3c30e03ab1e"><div class="ttname"><a href="namespacehelios_1_1core_1_1algorithms.html#a3df283d4b3d4c5006c1bb3c30e03ab1e">helios::core::algorithms::fnv1a_hash</a></div><div class="ttdeci">constexpr uint32_t fnv1a_hash(const std::string_view str) noexcept</div><div class="ttdoc">Computes a 32-bit FNV-1a hash from a string.</div><div class="ttdef"><b>Definition</b> <a href="algorithms_8ixx_source.html#l00050">algorithms.ixx:50</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1engine_1_1core_1_1data_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1core_1_1data.html">helios::engine::core::data</a></div><div class="ttdoc">Data structures for efficient entity management.</div><div class="ttdef"><b>Definition</b> <a href="ActionId_8ixx_source.html#l00015">ActionId.ixx:15</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1engine_1_1core_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1core.html">helios::engine::core</a></div><div class="ttdoc">Core engine infrastructure providing fundamental building blocks.</div><div class="ttdef"><b>Definition</b> <a href="ActionId_8ixx_source.html#l00015">ActionId.ixx:15</a></div></div>
 <div class="ttc" id="anamespacehelios_html"><div class="ttname"><a href="namespacehelios.html">helios</a></div><div class="ttdef"><b>Definition</b> <a href="GLFWApplication_8ixx_source.html#l00029">GLFWApplication.ixx:29</a></div></div>
 <div class="ttc" id="astructhelios_1_1core_1_1types_1_1no__init__t_html"><div class="ttname"><a href="structhelios_1_1core_1_1types_1_1no__init__t.html">helios::core::types::no_init_t</a></div><div class="ttdoc">Tag type used to indicate skipping default initialization.</div><div class="ttdef"><b>Definition</b> <a href="types_8ixx_source.html#l00045">types.ixx:45</a></div></div>
 <div class="ttc" id="astructhelios_1_1engine_1_1core_1_1data_1_1ViewportId_html"><div class="ttname"><a href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html">helios::engine::core::data::ViewportId</a></div><div class="ttdoc">Strongly-typed identifier for viewports.</div><div class="ttdef"><b>Definition</b> <a href="#l00023">ViewportId.ixx:23</a></div></div>
-<div class="ttc" id="astructhelios_1_1engine_1_1core_1_1data_1_1ViewportId_html_a15a257500051205f16645897293863fd"><div class="ttname"><a href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#a15a257500051205f16645897293863fd">helios::engine::core::data::ViewportId::operator&lt;</a></div><div class="ttdeci">constexpr bool operator&lt;(const ViewportId &amp;other) const noexcept</div><div class="ttdoc">Less-than comparison for ordered containers.</div><div class="ttdef"><b>Definition</b> <a href="#l00082">ViewportId.ixx:82</a></div></div>
-<div class="ttc" id="astructhelios_1_1engine_1_1core_1_1data_1_1ViewportId_html_a1de1f1786d24a9f0143fc1c8b76391e0"><div class="ttname"><a href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#a1de1f1786d24a9f0143fc1c8b76391e0">helios::engine::core::data::ViewportId::operator&gt;</a></div><div class="ttdeci">constexpr bool operator&gt;(const ViewportId &amp;other) const noexcept</div><div class="ttdoc">Greater-than comparison for ordered containers.</div><div class="ttdef"><b>Definition</b> <a href="#l00093">ViewportId.ixx:93</a></div></div>
+<div class="ttc" id="astructhelios_1_1engine_1_1core_1_1data_1_1ViewportId_html_a15a257500051205f16645897293863fd"><div class="ttname"><a href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#a15a257500051205f16645897293863fd">helios::engine::core::data::ViewportId::operator&lt;</a></div><div class="ttdeci">constexpr bool operator&lt;(const ViewportId &amp;other) const noexcept</div><div class="ttdoc">Less-than comparison for ordered containers.</div><div class="ttdef"><b>Definition</b> <a href="#l00084">ViewportId.ixx:84</a></div></div>
+<div class="ttc" id="astructhelios_1_1engine_1_1core_1_1data_1_1ViewportId_html_a1de1f1786d24a9f0143fc1c8b76391e0"><div class="ttname"><a href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#a1de1f1786d24a9f0143fc1c8b76391e0">helios::engine::core::data::ViewportId::operator&gt;</a></div><div class="ttdeci">constexpr bool operator&gt;(const ViewportId &amp;other) const noexcept</div><div class="ttdoc">Greater-than comparison for ordered containers.</div><div class="ttdef"><b>Definition</b> <a href="#l00095">ViewportId.ixx:95</a></div></div>
 <div class="ttc" id="astructhelios_1_1engine_1_1core_1_1data_1_1ViewportId_html_a36079f7e7d28e2edbc43a1313d0751bd"><div class="ttname"><a href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#a36079f7e7d28e2edbc43a1313d0751bd">helios::engine::core::data::ViewportId::operator==</a></div><div class="ttdeci">friend constexpr bool operator==(ViewportId, ViewportId) noexcept=default</div><div class="ttdoc">Equality comparison operator.</div></div>
 <div class="ttc" id="astructhelios_1_1engine_1_1core_1_1data_1_1ViewportId_html_a61c72b4273764dbd35e88c09726907ea"><div class="ttname"><a href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#a61c72b4273764dbd35e88c09726907ea">helios::engine::core::data::ViewportId::ViewportId</a></div><div class="ttdeci">constexpr ViewportId(helios::core::types::no_init_t)</div><div class="ttdef"><b>Definition</b> <a href="#l00054">ViewportId.ixx:54</a></div></div>
-<div class="ttc" id="astructhelios_1_1engine_1_1core_1_1data_1_1ViewportId_html_a81d384737f05726b744eada922018c6d"><div class="ttname"><a href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#a81d384737f05726b744eada922018c6d">helios::engine::core::data::ViewportId::value</a></div><div class="ttdeci">uint32_t value() const noexcept</div><div class="ttdoc">Returns the raw identifier value.</div><div class="ttdef"><b>Definition</b> <a href="#l00061">ViewportId.ixx:61</a></div></div>
+<div class="ttc" id="astructhelios_1_1engine_1_1core_1_1data_1_1ViewportId_html_a81d384737f05726b744eada922018c6d"><div class="ttname"><a href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#a81d384737f05726b744eada922018c6d">helios::engine::core::data::ViewportId::value</a></div><div class="ttdeci">uint32_t value() const noexcept</div><div class="ttdoc">Returns the raw identifier value.</div><div class="ttdef"><b>Definition</b> <a href="#l00063">ViewportId.ixx:63</a></div></div>
+<div class="ttc" id="astructhelios_1_1engine_1_1core_1_1data_1_1ViewportId_html_aad554c341305545751809c1b0acb4b9a"><div class="ttname"><a href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#aad554c341305545751809c1b0acb4b9a">helios::engine::core::data::ViewportId::ViewportId</a></div><div class="ttdeci">constexpr ViewportId()</div><div class="ttdef"><b>Definition</b> <a href="#l00056">ViewportId.ixx:56</a></div></div>
 <div class="ttc" id="astructhelios_1_1engine_1_1core_1_1data_1_1ViewportId_html_ad3baa97f44a444ceb0f08876bb46706e"><div class="ttname"><a href="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId.html#ad3baa97f44a444ceb0f08876bb46706e">helios::engine::core::data::ViewportId::ViewportId</a></div><div class="ttdeci">constexpr ViewportId(const std::string_view str) noexcept</div><div class="ttdoc">Constructs a ViewportId from a string name.</div><div class="ttdef"><b>Definition</b> <a href="#l00051">ViewportId.ixx:51</a></div></div>
-<div class="ttc" id="astructstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ViewportId_01_4_html_ae8a0c5bfdc6ce646ab1c041b73713d56"><div class="ttname"><a href="structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ViewportId_01_4.html#ae8a0c5bfdc6ce646ab1c041b73713d56">std::hash&lt; helios::engine::core::data::ViewportId &gt;::operator()</a></div><div class="ttdeci">std::size_t operator()(const helios::engine::core::data::ViewportId &amp;id) const noexcept</div><div class="ttdoc">Computes the hash value for a ViewportId.</div><div class="ttdef"><b>Definition</b> <a href="#l00114">ViewportId.ixx:114</a></div></div>
+<div class="ttc" id="astructstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ViewportId_01_4_html_ae8a0c5bfdc6ce646ab1c041b73713d56"><div class="ttname"><a href="structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ViewportId_01_4.html#ae8a0c5bfdc6ce646ab1c041b73713d56">std::hash&lt; helios::engine::core::data::ViewportId &gt;::operator()</a></div><div class="ttdeci">std::size_t operator()(const helios::engine::core::data::ViewportId &amp;id) const noexcept</div><div class="ttdoc">Computes the hash value for a ViewportId.</div><div class="ttdef"><b>Definition</b> <a href="#l00116">ViewportId.ixx:116</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

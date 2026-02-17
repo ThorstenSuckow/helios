@@ -134,12 +134,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ac30bf7894a4fd962ca9e67c4ca02f395"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submits a score update command for processing.  <br /></td></tr>
 <tr class="memitem:a04f62fb1b24bfc389acaa48fdd31293e" id="r_a04f62fb1b24bfc389acaa48fdd31293e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a04f62fb1b24bfc389acaa48fdd31293e">init</a> (<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">helios::engine::runtime::world::GameWorld</a> &amp;gameWorld) override</td></tr>
 <tr class="memdesc:a04f62fb1b24bfc389acaa48fdd31293e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the manager and registers it as the score command handler.  <br /></td></tr>
+<tr class="memitem:add6f1d0c59fdfbab9a6e94e9ded439ac" id="r_add6f1d0c59fdfbab9a6e94e9ded439ac"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#add6f1d0c59fdfbab9a6e94e9ded439ac">reset</a> ()</td></tr>
+<tr class="memdesc:add6f1d0c59fdfbab9a6e94e9ded439ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets all managed score pools to zero.  <br /></td></tr>
 <tr class="inherit_header pub_methods_classhelios_1_1engine_1_1runtime_1_1world_1_1Manager"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classhelios_1_1engine_1_1runtime_1_1world_1_1Manager')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public Member Functions inherited from <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html">helios::engine::runtime::world::Manager</a></td></tr>
 <tr class="memitem:a116b5758bea5a39bbc0d24bc62bdcdd7 inherit pub_methods_classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" id="r_a116b5758bea5a39bbc0d24bc62bdcdd7"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html#a116b5758bea5a39bbc0d24bc62bdcdd7">~Manager</a> ()=default</td></tr>
 <tr class="memitem:ab0f750d777e2368c08fc413188673622 inherit pub_methods_classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" id="r_ab0f750d777e2368c08fc413188673622"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html#ab0f750d777e2368c08fc413188673622">onAdd</a> (<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">helios::engine::runtime::world::GameWorld</a> &amp;gameWorld)</td></tr>
 <tr class="memdesc:ab0f750d777e2368c08fc413188673622 inherit pub_methods_classhelios_1_1engine_1_1runtime_1_1world_1_1Manager"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when the manager is added to a <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html" title="Central registry for game entities, managers, pools, and the active level.">GameWorld</a>.  <br /></td></tr>
-<tr class="memitem:a967a3375eca948be9ebeaca2e34c7475 inherit pub_methods_classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" id="r_a967a3375eca948be9ebeaca2e34c7475"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html#a967a3375eca948be9ebeaca2e34c7475">reset</a> ()</td></tr>
-<tr class="memdesc:a967a3375eca948be9ebeaca2e34c7475 inherit pub_methods_classhelios_1_1engine_1_1runtime_1_1world_1_1Manager"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the manager to its initial state.  <br /></td></tr>
 <tr class="inherit_header pub_methods_classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public Member Functions inherited from <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler.html">helios::engine::mechanics::scoring::ScoreCommandHandler</a></td></tr>
 <tr class="memitem:a57a07935f12d35eed7436d88933a3610 inherit pub_methods_classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler" id="r_a57a07935f12d35eed7436d88933a3610"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler.html#a57a07935f12d35eed7436d88933a3610">~ScoreCommandHandler</a> ()=default</td></tr>
 </table><table class="memberdecls">
@@ -152,9 +152,15 @@ Additional Inherited Members</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Manages score pools and processes score commands. </p>
-<p><a class="el" href="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager.html" title="Manages score pools and processes score commands.">ScorePoolManager</a> is responsible for creating and managing score pools, and for handling score update commands. It implements both the Manager interface (for lifecycle management) and <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler.html" title="Abstract interface for processing score update commands.">ScoreCommandHandler</a> (for receiving score commands). </p>
+<p><a class="el" href="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager.html" title="Manages score pools and processes score commands.">ScorePoolManager</a> is responsible for creating and managing score pools, and for handling score update commands. It implements both the Manager interface (for lifecycle management) and <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler.html" title="Abstract interface for processing score update commands.">ScoreCommandHandler</a> (for receiving score commands from the command system).</p>
+<p>Score updates are batched: commands submitted via `submit()` are queued and processed during `flush()`, ensuring deterministic ordering.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePool.html" title="Container that accumulates scores by type within a pool.">ScorePool</a> </dd>
+<dd>
+<a class="el" href="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler.html" title="Abstract interface for processing score update commands.">ScoreCommandHandler</a> </dd>
+<dd>
+Manager </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ScorePoolManager_8ixx_source.html#l00042">42</a> of file <a class="el" href="ScorePoolManager_8ixx_source.html">ScorePoolManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ScorePoolManager_8ixx_source.html#l00049">49</a> of file <a class="el" href="ScorePoolManager_8ixx_source.html">ScorePoolManager.ixx</a>.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="a055dd5eeddf3e34a2663fb0017b2f041" name="a055dd5eeddf3e34a2663fb0017b2f041"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a055dd5eeddf3e34a2663fb0017b2f041">&#9670;&#160;</a></span>addScorePool()</h2>
@@ -188,9 +194,9 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the newly created <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePool.html" title="Container that accumulates scores by type within a pool.">ScorePool</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ScorePoolManager_8ixx_source.html#l00066">66</a> of file <a class="el" href="ScorePoolManager_8ixx_source.html">ScorePoolManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ScorePoolManager_8ixx_source.html#l00073">73</a> of file <a class="el" href="ScorePoolManager_8ixx_source.html">ScorePoolManager.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="ScorePoolManager_8ixx_source.html#l00083">scorePool()</a>.</p>
+<p class="reference">References <a class="el" href="ScorePoolManager_8ixx_source.html#l00090">scorePool()</a>.</p>
 <div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
@@ -239,7 +245,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html#a290b20a4d512d096650dc187f1f3e940">helios::engine::runtime::world::Manager</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="ScorePoolManager_8ixx_source.html#l00106">106</a> of file <a class="el" href="ScorePoolManager_8ixx_source.html">ScorePoolManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ScorePoolManager_8ixx_source.html#l00113">113</a> of file <a class="el" href="ScorePoolManager_8ixx_source.html">ScorePoolManager.ixx</a>.</p>
 
 </div>
 </div>
@@ -276,7 +282,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html#ae7e2cd7531de5ce1fdc1f4a179b70929">helios::engine::runtime::world::Manager</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="ScorePoolManager_8ixx_source.html#l00146">146</a> of file <a class="el" href="ScorePoolManager_8ixx_source.html">ScorePoolManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ScorePoolManager_8ixx_source.html#l00153">153</a> of file <a class="el" href="ScorePoolManager_8ixx_source.html">ScorePoolManager.ixx</a>.</p>
 
 <p class="reference">References <a class="el" href="GameWorld_8ixx_source.html#l00413">helios::engine::runtime::world::GameWorld::registerScoreCommandHandler()</a>.</p>
 <div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
@@ -285,6 +291,38 @@ Additional Inherited Members</h2></td></tr>
 <div id="dynsection-3-content" class="dyncontent" style="display:none;">
 <div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_a04f62fb1b24bfc389acaa48fdd31293e_cgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
+
+</div>
+</div>
+<a id="add6f1d0c59fdfbab9a6e94e9ded439ac" name="add6f1d0c59fdfbab9a6e94e9ded439ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add6f1d0c59fdfbab9a6e94e9ded439ac">&#9670;&#160;</a></span>reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void helios::engine::mechanics::scoring::ScorePoolManager::reset </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Resets all managed score pools to zero. </p>
+<p>Iterates through all registered pools and calls their <a class="el" href="#add6f1d0c59fdfbab9a6e94e9ded439ac" title="Resets all managed score pools to zero.">reset()</a> method, clearing all scores and resetting totals. </p>
+
+<p>Reimplemented from <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html#a967a3375eca948be9ebeaca2e34c7475">helios::engine::runtime::world::Manager</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="ScorePoolManager_8ixx_source.html#l00164">164</a> of file <a class="el" href="ScorePoolManager_8ixx_source.html">ScorePoolManager.ixx</a>.</p>
 
 </div>
 </div>
@@ -320,11 +358,11 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePool.html" title="Container that accumulates scores by type within a pool.">ScorePool</a>, or nullptr if not found. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ScorePoolManager_8ixx_source.html#l00083">83</a> of file <a class="el" href="ScorePoolManager_8ixx_source.html">ScorePoolManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ScorePoolManager_8ixx_source.html#l00090">90</a> of file <a class="el" href="ScorePoolManager_8ixx_source.html">ScorePoolManager.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="ScorePoolManager_8ixx_source.html#l00083">scorePool()</a>.</p>
+<p class="reference">References <a class="el" href="ScorePoolManager_8ixx_source.html#l00090">scorePool()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="ScorePoolManager_8ixx_source.html#l00066">addScorePool()</a>, <a class="el" href="ScorePoolManager_8ixx_source.html#l00083">scorePool()</a>, and <a class="el" href="ScoreObserverSystem_8ixx_source.html#l00057">helios::engine::mechanics::scoring::systems::ScoreObserverSystem::update()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="ScorePoolManager_8ixx_source.html#l00073">addScorePool()</a>, <a class="el" href="ScorePoolManager_8ixx_source.html#l00090">scorePool()</a>, and <a class="el" href="ScoreObserverSystem_8ixx_source.html#l00057">helios::engine::mechanics::scoring::systems::ScoreObserverSystem::update()</a>.</p>
 <div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
@@ -374,7 +412,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler.html#afe94066de66d4fdde2a84b530c2cc8b5">helios::engine::mechanics::scoring::ScoreCommandHandler</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="ScorePoolManager_8ixx_source.html#l00133">133</a> of file <a class="el" href="ScorePoolManager_8ixx_source.html">ScorePoolManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ScorePoolManager_8ixx_source.html#l00140">140</a> of file <a class="el" href="ScorePoolManager_8ixx_source.html">ScorePoolManager.ixx</a>.</p>
 
 </div>
 </div>

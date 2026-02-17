@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_332ee2fb83ffca0bb7838dea50093abe" kind="dir">
+    <compoundname>systems</compoundname>
+    <innerfile refid="helios_2engine_2ecs_2systems_2__module_8ixx">helios/engine/ecs/systems/_module.ixx</innerfile>
+    <innerfile refid="HierarchyPropagationSystem_8ixx">HierarchyPropagationSystem.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_332ee2fb83ffca0bb7838dea50093abe_1autotoc_md137">
+<title>helios::engine::ecs::systems</title><para>Core ECS systems for entity management and hierarchy propagation.</para>
+</sect1>
+<sect1 id="dir_332ee2fb83ffca0bb7838dea50093abe_1autotoc_md138">
+<title>Overview</title><para>This submodule contains systems that operate on fundamental ECS components. These systems are typically registered early in the game loop to ensure proper entity state before game-specific systems run.</para>
+</sect1>
+<sect1 id="dir_332ee2fb83ffca0bb7838dea50093abe_1autotoc_md139">
+<title>Systems</title><para><table rows="2" cols="2"><row>
+<entry thead="yes"><para>System  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>HierarchyPropagationSystem</computeroutput>  </para>
+</entry><entry thead="no"><para>Propagates activation state through entity hierarchies  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_332ee2fb83ffca0bb7838dea50093abe_1autotoc_md140">
+<title>HierarchyPropagationSystem</title><para>Processes entities with <computeroutput>HierarchyComponent</computeroutput> and propagates their active/inactive state to all descendants.</para>
+<para><bold>Behavior:</bold></para>
+<para>1. Finds root entities (no parent) that are marked dirty 2. For active roots: recursively activates all children 3. For inactive roots: recursively deactivates all children 4. Clears dirty flag after propagation</para>
+<para><bold>Required Components:</bold><itemizedlist>
+<listitem><para><computeroutput>HierarchyComponent</computeroutput> – Hierarchy relationships</para>
+</listitem><listitem><para><computeroutput>Active</computeroutput> or <computeroutput>Inactive</computeroutput> – Lifecycle tag components</para>
+</listitem></itemizedlist>
+</para>
+<para><bold>Usage:</bold> <programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Register<sp/>in<sp/>game<sp/>loop</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">systemRegistry.add&lt;HierarchyPropagationSystem&gt;(Phase::Pre);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>When<sp/>entity<sp/>activation<sp/>changes</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>hc<sp/>=<sp/>entity.get&lt;HierarchyComponent&gt;();</highlight></codeline>
+<codeline><highlight class="normal">hc-&gt;markDirty();<sp/><sp/></highlight><highlight class="comment">//<sp/>Children<sp/>will<sp/>be<sp/>updated<sp/>next<sp/>frame</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_332ee2fb83ffca0bb7838dea50093abe_1autotoc_md141">
+<title>Related Modules</title><para><table rows="3" cols="2"><row>
+<entry thead="yes"><para>Module  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="namespacehelios_1_1engine_1_1ecs_1_1components" kindref="compound">helios.engine.ecs.components</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>Components processed by these systems  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="namespacehelios_1_1engine_1_1mechanics_1_1lifecycle" kindref="compound">helios.engine.mechanics.lifecycle</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>Active/Inactive components  </para>
+</entry></row>
+</table>
+</para>
+<para><hruler/>
+ <details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/ecs/systems/"/>
+  </compounddef>
+</doxygen>

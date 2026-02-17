@@ -26,17 +26,28 @@ export namespace helios::engine::builder::gameObject {
     /**
      * @brief Factory class for creating and cloning GameObjects.
      *
-     * Provides static methods for constructing new GameObjects or creating
+     * @details Provides static methods for constructing new GameObjects or creating
      * copies from existing templates. Uses the builder pattern internally
      * via `GameObjectPrototype` for fluent component configuration.
      *
-     * Example usage:
+     * The factory supports domain-specific builders for different component categories:
+     * motion, rendering, collision, transform, effects, spawn, AI, combat, lifecycle,
+     * health, scoring, observer, and menu.
+     *
+     * ## Usage
+     *
      * ```cpp
-     * auto player = GameObjectFactory::gameObject()
+     * auto player = GameObjectFactory::gameObject(gameWorld)
      *     .withMotion([](auto& m) { m.move2D().speed(5.0f); })
      *     .withRendering([&](auto& r) { r.renderable().shape(shape).shader(shader).build(); })
+     *     .withCollision([](auto& c) { c.aabb().layer(CollisionLayer::Player); })
      *     .make(true);
      * ```
+     *
+     * @see GameObjectPrototype
+     * @see MotionBuilder
+     * @see RenderingBuilder
+     * @see CollisionBuilder
      */
     class GameObjectFactory {
 
@@ -52,6 +63,8 @@ export namespace helios::engine::builder::gameObject {
              * @brief The GameObject being configured.
              */
             helios::engine::ecs::GameObject gameObject_;
+
+            helios::engine::runtime::world::GameWorld& gameWorld_;
 
             /**
              * @brief Builder for motion-related components.
@@ -179,6 +192,7 @@ export namespace helios::engine::builder::gameObject {
              */
             GameObjectPrototype(helios::engine::runtime::world::GameWorld& gameWorld) :
                 gameObject_(gameWorld.addGameObject()),
+                gameWorld_(gameWorld),
                 motionBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::MotionBuilder>(gameObject_)),
                 renderingBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::RenderingBuilder>(gameObject_)),
                 sceneBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::SceneBuilder>(gameObject_)),
@@ -385,6 +399,20 @@ export namespace helios::engine::builder::gameObject {
              */
             GameObjectPrototype& withMenu(const MenuBuilderCallback& obc) {
                 obc(*menuBuilder_);
+                return *this;
+            }
+
+            /**
+             * @brief Marks this GameObject as the player entity in the session.
+             *
+             * @details Registers the GameObject with the session so it can be
+             * retrieved via `Session::playerEntity()`. Only one entity should
+             * be marked as player per session.
+             *
+             * @return Reference to this prototype for chaining.
+             */
+            GameObjectPrototype& asPlayerEntity() noexcept {
+                gameWorld_.session().setPlayerEntity(gameObject_);
                 return *this;
             }
 

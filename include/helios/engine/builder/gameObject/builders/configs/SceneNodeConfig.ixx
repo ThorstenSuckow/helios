@@ -12,6 +12,7 @@ export module helios.engine.builder.gameObject.builders.configs.SceneNodeConfig;
 import helios.engine.ecs.GameObject;
 import helios.scene;
 import helios.engine.modules.rendering;
+import helios.engine.ecs.components;
 import helios.engine.modules.scene;
 
 import helios.math;
@@ -21,8 +22,21 @@ export namespace helios::engine::builder::gameObject::builders::configs {
     /**
      * @brief Fluent configuration for scene graph integration.
      *
-     * Allows attaching a GameObject's renderable to the scene graph
+     * @details Allows attaching a GameObject's renderable to the scene graph
      * by creating a SceneNode and setting its parent and inheritance mode.
+     * The config automatically manages HierarchyComponent relationships when
+     * parenting to another GameObject.
+     *
+     * ## Usage
+     *
+     * ```cpp
+     * sceneConfig.parent(rootNode)
+     *            .inherit(TransformType::Translation | TransformType::Rotation);
+     * ```
+     *
+     * @see SceneNodeComponent
+     * @see HierarchyComponent
+     * @see TransformType
      */
     class SceneNodeConfig {
 
@@ -30,6 +44,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @brief Non-owning pointer to the target GameObject.
          */
         helios::engine::ecs::GameObject gameObject_;
+
 
         /**
          * @brief Validates that a RenderableComponent exists.
@@ -91,13 +106,21 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         /**
          * @brief Creates a SceneNode and parents it to another GameObject's node.
          *
+         * @details Establishes both scene graph and ECS hierarchy relationships:
+         * - Adds HierarchyComponent to both entities if not present
+         * - Sets parent-child relationship in HierarchyComponent
+         * - Parents the SceneNode to the parent GameObject's SceneNode
+         *
          * @param parent Parent GameObject whose SceneNode will be the parent.
          *
          * @return Reference to this config for chaining.
          */
-        SceneNodeConfig& parent(const helios::engine::ecs::GameObject parent) {
+        SceneNodeConfig& parent(helios::engine::ecs::GameObject parent) {
             ensureSceneNode(false);
             ensureRenderableComponent();
+
+            parent.getOrAdd<helios::engine::ecs::components::HierarchyComponent>().addChild(gameObject_.entityHandle());
+            gameObject_.getOrAdd<helios::engine::ecs::components::HierarchyComponent>().setParent(parent.entityHandle());
 
             const auto* renderableComponent = gameObject_.get<helios::engine::modules::rendering::renderable::components::RenderableComponent>();
 
@@ -132,6 +155,8 @@ export namespace helios::engine::builder::gameObject::builders::configs {
 
             return *this;
         }
+
+
 
     };
 

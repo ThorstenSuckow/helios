@@ -43,35 +43,48 @@ export namespace helios::engine::mechanics::gamestate {
     /**
      * @brief Manages game state transitions using a rule-based state machine.
      *
-     * The GameStateManager processes GameStateCommands and applies transition rules
+     * @details The GameStateManager processes GameStateCommands and applies transition rules
      * to move between game states (e.g., Title -> Running -> Paused). It supports
      * guard callbacks for conditional transitions and notifies registered listeners
      * on state changes.
      *
+     * ## Transition Flow
+     *
+     * 1. Commands are submitted via `submit()` and queued
+     * 2. On `flush()`, the last pending command is evaluated against rules
+     * 3. If a rule matches and its guard passes, the transition executes:
+     *    - `onGameStateExit()` is called on listeners
+     *    - `onGameStateTransition()` is called on listeners
+     *    - Session state is updated
+     *    - `onGameStateEnter()` is called on listeners
+     *
      * @see GameStateTransitionRule
      * @see GameStateTransitionListener
+     * @see GameStateCommand
+     * @see LambdaGameStateListener
      */
     class GameStateManager : public helios::engine::runtime::world::Manager,
                              public GameStateCommandHandler {
 
-
-
+        /**
+         * @brief Queue of pending state commands to process on flush.
+         */
         std::vector<GameStateCommand> pending_;
 
+        /**
+         * @brief Registered transition listeners.
+         */
         std::vector<std::unique_ptr<GameStateTransitionListener>> listeners_;
 
-
         /**
-         * @brief Notifies all registered listeners of a state transition.
+         * @brief Notifies listeners of state exit.
          *
          * @param from The state being exited.
-         * @param to The state being entered.
-         * @param transitionId The identifier of the transition.
+         * @param to The target state.
+         * @param transitionId The transition identifier.
          * @param updateContext The current update context.
-         *
-         * @todo Add support for vetoing transitions.
          */
-        void executeListener(
+        void signalExit(
             const GameState from,
             const GameState to,
             const GameStateTransitionId transitionId,
@@ -79,15 +92,54 @@ export namespace helios::engine::mechanics::gamestate {
 
             for (auto& listener : listeners_) {
                 listener->onGameStateExit(updateContext, from);
+            }
+        }
+
+        /**
+         * @brief Notifies listeners of state transition.
+         *
+         * @param from The source state.
+         * @param to The target state.
+         * @param transitionId The transition identifier.
+         * @param updateContext The current update context.
+         */
+        void signalTransition(
+           const GameState from,
+           const GameState to,
+           const GameStateTransitionId transitionId,
+           helios::engine::runtime::world::UpdateContext& updateContext)  {
+
+            for (auto& listener : listeners_) {
                 listener->onGameStateTransition(
                     updateContext,
                     GameStateTransitionContext{from, to, transitionId}
                 );
+            }
+        }
+
+        /**
+         * @brief Notifies listeners of state entry.
+         *
+         * @param from The source state.
+         * @param to The state being entered.
+         * @param transitionId The transition identifier.
+         * @param updateContext The current update context.
+         */
+        void signalEnter(
+           const GameState from,
+           const GameState to,
+           const GameStateTransitionId transitionId,
+           helios::engine::runtime::world::UpdateContext& updateContext)  {
+
+            for (auto& listener : listeners_) {
                 listener->onGameStateEnter(updateContext, to);
 
             }
         }
 
+        /**
+         * @brief Configured transition rules for the state machine.
+         */
         std::vector<GameStateTransitionRule> rules_;
 
     public:
@@ -165,8 +217,10 @@ export namespace helios::engine::mechanics::gamestate {
                         }
                     }
 
+                    signalExit(from, rule.to(), transitionId, updateContext);
+                    signalTransition(from, rule.to(), transitionId, updateContext);
                     session.setGameState(rule.to());
-                    executeListener(from, rule.to(), transitionId, updateContext);
+                    signalEnter(from, rule.to(), transitionId, updateContext);
                 }
             }
 

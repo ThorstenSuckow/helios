@@ -4,4 +4,6 @@
  */
 export module helios.engine.mechanics.match.rules;
 
+export import helios.engine.mechanics.match.rules.guards;
+
 export import helios.engine.mechanics.match.rules.DefaultMatchStateTransitionRules;

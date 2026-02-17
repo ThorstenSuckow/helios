@@ -31,7 +31,7 @@ public:
      *
      * @param entity The entity to focus, or nullopt to clear focus.
      */
-    void setFocusedEntity(const std::optional<helios::engine::ecs::GameObject> entity) noexcept {
+    void setFocusedEntity(const std::optional<helios::engine::ecs::GameObject>& entity) noexcept {
         focusedEntity_ = entity;
     }
 

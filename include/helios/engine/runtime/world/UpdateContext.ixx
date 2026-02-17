@@ -21,7 +21,7 @@ export namespace helios::engine::runtime::messaging::command {
 
 export namespace helios::engine::runtime::world {
 
-
+    class Session;
 
     class GameWorld;
 
@@ -83,6 +83,9 @@ export namespace helios::engine::runtime::world {
          * @brief Reference to the game world for entity lookups.
          */
         helios::engine::runtime::world::GameWorld& gameWorld_;
+
+
+        helios::engine::runtime::world::Session& session_;
 
         /**
          * @brief Sink for pushing phase-level events during update.
@@ -147,13 +150,14 @@ export namespace helios::engine::runtime::world {
         UpdateContext(
             helios::engine::runtime::messaging::command::CommandBuffer& commandBuffer,
             helios::engine::runtime::world::GameWorld& gameWorld,
+            helios::engine::runtime::world::Session& session,
             const float deltaTime,
             helios::engine::runtime::messaging::event::GameLoopEventBus& phaseEventBus,
             helios::engine::runtime::messaging::event::GameLoopEventBus& passEventBus,
             helios::engine::runtime::messaging::event::GameLoopEventBus& frameEventBus,
             const helios::input::InputSnapshot& inputSnapshot,
             std::span<const helios::rendering::ViewportSnapshot> viewportSnapshots
-        ) : commandBuffer_(commandBuffer), gameWorld_(gameWorld),
+        ) : commandBuffer_(commandBuffer), gameWorld_(gameWorld), session_(session),
         deltaTime_(deltaTime),
         totalTime_(totalTime_ + deltaTime),
         phaseEventSink_(phaseEventBus.writeSink()),
@@ -212,6 +216,15 @@ export namespace helios::engine::runtime::world {
          */
         [[nodiscard]] helios::engine::runtime::messaging::command::CommandBuffer& commandBuffer() const noexcept {
             return commandBuffer_;
+        }
+
+        /**
+         * @brief Returns the session for game/match state access.
+         *
+         * @return Ref to the Session used with this UpdateContext.
+         */
+        [[nodiscard]] helios::engine::runtime::world::Session& session() const noexcept {
+            return session_;
         }
 
         /**

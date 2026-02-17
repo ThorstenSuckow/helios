@@ -17,6 +17,8 @@ export namespace helios::engine::mechanics::gamestate::types {
      */
     using GameStateType = uint16_t;
 
+    constexpr size_t GameStateTypeSize = 16;
+
     /**
      * @brief Enumeration of possible game states.
      *
@@ -40,6 +42,7 @@ export namespace helios::engine::mechanics::gamestate::types {
          * @brief Bitmask representing all defined states.
          */
         Any = Loading | Title | Menu | Paused | Running
+
 
     };
 

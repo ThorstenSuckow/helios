@@ -26,6 +26,9 @@ import helios.scene.SnapshotItem;
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
 
+import helios.engine.core.data.SceneId;
+import helios.core.types;
+
 #define HELIOS_LOG_SCOPE "helios::scene::Scene"
 export namespace helios::scene {
 
@@ -58,12 +61,12 @@ export namespace helios::scene {
          *
          * @see helios::scene::SceneNode::setWorldTransform()
          */
-        const SceneGraphKey sceneGraphKey_{};
+        SceneGraphKey sceneGraphKey_{};
 
         /**
          * @brief 4x4 identity matrix for internal use.
          */
-        const helios::math::mat4f mat4fid = helios::math::mat4f::identity();
+        helios::math::mat4f mat4fid = helios::math::mat4f::identity();
 
         /**
          * @brief The root node of this scene.
@@ -71,6 +74,11 @@ export namespace helios::scene {
          * All other SceneNodes are (in)direct children of this node.
          */
         std::unique_ptr<SceneNode> root_;
+
+        /**
+         * @brief Unique identifier for this scene.
+         */
+        helios::engine::core::data::SceneId sceneId_{helios::core::types::no_init};
 
         /**
          * @brief Internal helper function to force-propagate the worldTransformation of SceneNodes to their child nodes.
@@ -156,15 +164,18 @@ export namespace helios::scene {
         Scene& operator=(const Scene&) = delete;
 
         /**
-         * @brief Prevent move constructor.
+         * @brief Move constructor.
          */
-        Scene(Scene&&) noexcept = delete;
+        Scene(Scene&&) noexcept = default;
 
         /**
-         * @brief Prevent move assignment operator.
+         * @brief Move assignment operator.
          */
-        Scene& operator=(Scene&&) noexcept = delete;
+        Scene& operator=(Scene&&) noexcept = default;
 
+        /**
+         * @brief Destructor.
+         */
         ~Scene() = default;
 
         /**
@@ -180,6 +191,19 @@ export namespace helios::scene {
             root_->setIsRoot(sceneGraphKey_);
         }
 
+        /**
+         * @brief Constructs a new Scene with a specific scene ID.
+         *
+         * @param frustumCullingStrategy The frustum culling strategy to use with this Scene.
+         * @param sceneId Unique identifier for this scene.
+         */
+        explicit Scene(
+            std::unique_ptr<helios::scene::FrustumCullingStrategy> frustumCullingStrategy,
+                       const helios::engine::core::data::SceneId sceneId) :
+            Scene(std::move(frustumCullingStrategy))
+             {
+                 sceneId_ = sceneId;
+        }
 
         /**
          * @brief Adds a new SceneNode to this scene.
@@ -206,6 +230,15 @@ export namespace helios::scene {
          */
         void updateNodes() const {
             updateNodes(*root_, mat4fid);
+        }
+
+        /**
+         * @brief Returns the unique identifier for this scene.
+         *
+         * @return The SceneId for this scene.
+         */
+        [[nodiscard]] helios::engine::core::data::SceneId sceneId() const noexcept {
+            return sceneId_;
         }
 
         /**

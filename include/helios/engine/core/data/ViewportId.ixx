@@ -53,6 +53,8 @@ export namespace helios::engine::core::data {
 
         explicit constexpr ViewportId(helios::core::types::no_init_t) {};
 
+        explicit constexpr ViewportId() : ViewportId(helios::core::types::no_init){};
+
         /**
          * @brief Returns the raw identifier value.
          *

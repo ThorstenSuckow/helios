@@ -18,6 +18,7 @@ export namespace helios::engine::modules::ui::widgets {
         using R = helios::engine::ecs::ComponentReflector;
 
         R::registerType<components::UiTextComponent>();
+        R::registerType<components::MenuComponent>();
     }
 
 }

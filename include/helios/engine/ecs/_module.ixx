@@ -4,6 +4,10 @@
  */
 export module helios.engine.ecs;
 
+export import helios.engine.ecs.components;
+export import helios.engine.ecs.systems;
+
+
 export import helios.engine.ecs.GameObject;
 export import helios.engine.ecs.System;
 export import helios.engine.ecs.Updatable;

@@ -27,26 +27,58 @@ import helios.engine.mechanics.lifecycle.components.Active;
 
 import helios.math;
 
+import helios.engine.ecs.components.HierarchyComponent;
 
 export namespace helios::engine::modules::ui::transform::systems {
 
 
     /**
-     * @brief System for computing UI element screen positions.
+     * @brief Computes screen positions for UI elements based on layout configuration.
      *
-     * Processes entities with UiTransformComponent to compute their final
-     * screen positions based on anchor points, pivot points, offsets, and
-     * current viewport dimensions.
+     * @details This system processes entities with UiTransformComponent and computes
+     * their final screen positions. The positioning algorithm considers:
+     *
+     * - **Anchor:** Where the element attaches to its parent (Center, TopLeft, etc.)
+     * - **Pivot:** The element's own reference point for positioning
+     * - **Offsets:** Margins from the anchor point (top, right, bottom, left)
+     * - **Viewport:** Current viewport dimensions for root-level elements
+     * - **Parent bounds:** For nested UI elements via HierarchyComponent
+     *
+     * ## Hierarchy Support
+     *
+     * For elements with a HierarchyComponent, the system uses the parent entity's
+     * AABB and transform to compute relative positioning. Root elements (those
+     * attached to the scene root) use viewport dimensions as their parent bounds.
+     *
+     * ## Required Components
+     *
+     * | Component | Purpose |
+     * |-----------|---------|
+     * | `UiTransformComponent` | Layout configuration (anchor, pivot, offsets) |
+     * | `TranslationStateComponent` | Receives computed position |
+     * | `ComposeTransformComponent` | Transform composition |
+     * | `ModelAabbComponent` | Element bounds for size calculations |
+     * | `SceneNodeComponent` | Scene graph integration |
+     * | `Active` | Lifecycle tag |
+     *
+     * @see UiTransformComponent
+     * @see Anchor
+     * @see HierarchyComponent
      */
     class UiTransformSystem : public helios::engine::ecs::System {
+
         /**
          * @brief Adjusts position based on pivot point and element size.
+         *
+         * @details Transforms a position from anchor-relative to pivot-relative
+         * coordinates. The pivot determines which point of the element is placed
+         * at the anchor position.
          *
          * @param unanchored The position before pivot adjustment.
          * @param size The size of the element.
          * @param pivot The pivot point to apply.
          *
-         * @return The adjusted position.
+         * @return The adjusted position accounting for pivot offset.
          */
         helios::math::vec3f anchor(
                 const helios::math::vec3f unanchored,
@@ -75,10 +107,16 @@ export namespace helios::engine::modules::ui::transform::systems {
     public:
 
         /**
-         * @brief Updates UI element positions based on viewport dimensions.
+         * @brief Computes and applies screen positions for all UI elements.
          *
-         * Queries entities with UiTransformComponent and computes their screen
-         * positions based on anchor, pivot, offsets, and current viewport bounds.
+         * @details Iterates over all entities with UI layout components and computes
+         * their final screen positions. For each entity:
+         *
+         * 1. Finds the matching viewport snapshot by viewportId
+         * 2. Determines parent bounds (viewport for root, parent AABB otherwise)
+         * 3. Computes anchor position based on anchor type and offsets
+         * 4. Adjusts for pivot point
+         * 5. Updates TranslationStateComponent with final position
          *
          * @param updateContext The current frame's update context.
          */
@@ -139,20 +177,27 @@ export namespace helios::engine::modules::ui::transform::systems {
                         );
 
                     } else {
-                        auto parent = sceneNode->parent();
-                        auto bounds = parent->aabb();
-                        auto size   = parent->aabb().size();
 
-                        parentUiRect = helios::math::vec4f(
-                            -size[0]/2.0f,
-                            -size[1]/2.0f,
-                            size[0], size[1]
-                        );
-                        parentWorldRect = helios::math::vec4f(
-                            parentUiRect[0] + parentUiRect[2] / 2.0f,
-                            parentUiRect[1] + parentUiRect[3] / 2.0f,
-                            parentUiRect[2] , parentUiRect[3]
-                        );
+                        auto* hc = entity.get<helios::engine::ecs::components::HierarchyComponent>();
+
+                        if (!hc || !hc->parent()) {
+                            continue;
+                        }
+
+                        // we rely on the parent entity so we do not have to wait for the SceneGraph sync
+                        if (auto parentGo = gameWorld_->find(hc->parent().value())) {
+                            auto* pmaabbcc = parentGo->get<rendering::model::components::ModelAabbComponent>();
+                            auto* pctc = parentGo->get<spatial::transform::components::ComposeTransformComponent>();
+
+                            auto size = pmaabbcc->aabb().size() * pctc->localScaling();
+
+                            parentUiRect = helios::math::vec4f(
+                                -(size[0] * 0.5f),
+                                -(size[1] * 0.5f),
+                                size[0],
+                                size[1]
+                            );
+                        }
                     }
 
 

@@ -23,9 +23,17 @@ export namespace helios::engine::mechanics::scoring {
     /**
      * @brief Container that accumulates scores by type within a pool.
      *
-     * ScorePool maintains a collection of scores indexed by ScoreTypeId,
-     * along with a running total. Used by ScorePoolManager to track
-     * scores for different entities or players.
+     * @details ScorePool maintains a collection of scores indexed by ScoreTypeId,
+     * along with a running total. It tracks changes via a revision number that
+     * is incremented whenever a score value changes, enabling efficient change
+     * detection by observers.
+     *
+     * ScorePools are managed by ScorePoolManager, which handles command processing
+     * and pool lifecycle.
+     *
+     * @see ScorePoolManager
+     * @see ScorePoolSnapshot
+     * @see ScoreValueContext
      */
     class ScorePool {
 
@@ -115,6 +123,7 @@ export namespace helios::engine::mechanics::scoring {
         void reset() noexcept {
             std::fill(scores_.begin(), scores_.end(), 0.0f);
             setTotal(0.0f);
+            revision_++;
         }
 
 

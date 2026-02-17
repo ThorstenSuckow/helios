@@ -66,7 +66,7 @@ export namespace helios::engine::mechanics::gamestate::listeners {
 
             bool reset = (from == GameState::Title && to == GameState::Running)   ||
                          (from == GameState::Paused && to == GameState::Title)    ||
-                         (from == GameState::Paused &&
+                         ((from == GameState::Paused || from == GameState::Running) &&
                              transitionId == GameStateTransitionId::RestartRequested &&
                              to == GameState::Running) ||
                          (from == GameState::Running && to == GameState::Title) ;

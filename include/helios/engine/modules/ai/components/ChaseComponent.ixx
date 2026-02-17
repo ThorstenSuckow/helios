@@ -76,7 +76,8 @@ export namespace helios::engine::modules::ai::components {
          */
         ChaseComponent() = default;
 
-        ChaseComponent(const ChaseComponent&) = default;
+        ChaseComponent(const ChaseComponent& other) :
+        cooldown_(other.cooldown_), cooldownTimer_(other.cooldownTimer_), target_(other.target_) {} ;
         ChaseComponent& operator=(const ChaseComponent&) = default;
         ChaseComponent(ChaseComponent&&) noexcept = default;
         ChaseComponent& operator=(ChaseComponent&&) noexcept = default;

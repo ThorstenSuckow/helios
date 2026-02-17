@@ -24,6 +24,13 @@ This module provides the foundational classes for the composition-based game arc
 | `ComponentReflector` | Compile-time type registration |
 | `Traits` | Compile-time concepts for component lifecycle hooks |
 
+### Submodules
+
+| Submodule | Purpose |
+|-----------|---------|
+| `components/` | Core ECS components (e.g., `HierarchyComponent`) |
+| `systems/` | Core ECS systems (e.g., `HierarchyPropagationSystem`) |
+
 ## Component Storage Model
 
 `GameObject` uses a **type-indexed storage** system for components. Instead of a hash-based lookup, components are stored in a contiguous vector where the index corresponds to the component's compile-time `ComponentTypeId`.

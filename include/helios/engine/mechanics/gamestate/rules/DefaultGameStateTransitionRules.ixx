@@ -64,11 +64,25 @@ export namespace helios::engine::mechanics::gamestate::rules {
             ),
 
             GameStateTransitionRule(
-                GameState::Paused,
-                GameStateTransitionId::QuitGameRequested,
+                GameState::Running,
+                GameStateTransitionId::RestartRequested,
+                GameState::Running,
+                GameStateTransitionType::Standard
+            ),
+
+            GameStateTransitionRule(
+               GameState::Paused,
+               GameStateTransitionId::RestartRequested,
+               GameState::Running,
+               GameStateTransitionType::Standard
+           ),
+
+            GameStateTransitionRule(
+                GameState::Running,
+                GameStateTransitionId::TitleRequested,
                 GameState::Title,
                 GameStateTransitionType::Standard
-            )
+            ),
 
         };
 

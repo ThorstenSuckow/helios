@@ -8,3 +8,4 @@ export module helios.engine.modules.scene;
 
 export import helios.engine.modules.scene.components;
 export import helios.engine.modules.scene.systems;
+export import helios.engine.modules.scene.types;

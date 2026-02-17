@@ -17,6 +17,8 @@ export namespace helios::engine::mechanics::match::types {
      */
     using MatchStateType = uint16_t;
 
+    constexpr size_t MatchStateTypeSize = 16;
+
     /**
      * @brief Enumeration of possible match states.
      *
@@ -38,10 +40,15 @@ export namespace helios::engine::mechanics::match::types {
 
         PlayerDeath = 1 << 5,
 
+        GameOver = 1 << 6,
+
+        Finished = 1 << 7,
+
+
         /**
          * @brief Bitmask representing all defined states.
          */
-        Any = Warmup | Intro | Countdown | Playing | PlayerDeath | PlayerSpawn
+        Any = Warmup | Intro | Countdown | Playing | PlayerDeath | PlayerSpawn | GameOver | Finished
 
     };
 

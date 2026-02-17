@@ -42,35 +42,48 @@ export namespace helios::engine::mechanics::match {
     /**
      * @brief Manages match state transitions using a rule-based state machine.
      *
-     * The MatchStateManager processes MatchStateCommands and applies transition rules
+     * @details The MatchStateManager processes MatchStateCommands and applies transition rules
      * to move between match states (e.g., Warmup -> PlayerSpawn -> Playing). It supports
      * guard callbacks for conditional transitions and notifies registered listeners
      * on state changes.
      *
+     * ## Transition Flow
+     *
+     * 1. Commands are submitted via `submit()` and queued
+     * 2. On `flush()`, the last pending command is evaluated against rules
+     * 3. If a rule matches and its guard passes, the transition executes:
+     *    - `onMatchStateExit()` is called on listeners
+     *    - `onMatchStateTransition()` is called on listeners
+     *    - Session state is updated
+     *    - `onMatchStateEnter()` is called on listeners
+     *
      * @see MatchStateTransitionRule
      * @see MatchStateTransitionListener
+     * @see MatchStateCommand
+     * @see LambdaMatchStateListener
      */
     class MatchStateManager : public helios::engine::runtime::world::Manager,
                              public MatchStateCommandHandler {
 
-
-
+        /**
+         * @brief Queue of pending state commands to process on flush.
+         */
         std::vector<MatchStateCommand> pending_;
 
+        /**
+         * @brief Registered transition listeners.
+         */
         std::vector<std::unique_ptr<MatchStateTransitionListener>> listeners_;
 
-
         /**
-         * @brief Notifies all registered listeners of a state transition.
+         * @brief Notifies listeners of state exit.
          *
          * @param from The state being exited.
-         * @param to The state being entered.
-         * @param transitionId The identifier of the transition.
+         * @param to The target state.
+         * @param transitionId The transition identifier.
          * @param updateContext The current update context.
-         *
-         * @todo Add support for vetoing transitions.
          */
-        void executeListener(
+        void signalExit(
             const MatchState from,
             const MatchState to,
             const MatchStateTransitionId transitionId,
@@ -78,22 +91,60 @@ export namespace helios::engine::mechanics::match {
 
             for (auto& listener : listeners_) {
                 listener->onMatchStateExit(updateContext, from);
+            }
+        }
+
+        /**
+         * @brief Notifies listeners of state entry.
+         *
+         * @param from The source state.
+         * @param to The state being entered.
+         * @param transitionId The transition identifier.
+         * @param updateContext The current update context.
+         */
+        void signalEnter(
+            const MatchState from,
+            const MatchState to,
+            const MatchStateTransitionId transitionId,
+            helios::engine::runtime::world::UpdateContext& updateContext)  {
+
+            for (auto& listener : listeners_) {
+                listener->onMatchStateEnter(updateContext, to);
+            }
+        }
+
+        /**
+         * @brief Notifies listeners of state transition.
+         *
+         * @param from The source state.
+         * @param to The target state.
+         * @param transitionId The transition identifier.
+         * @param updateContext The current update context.
+         */
+        void signalTransition(
+            const MatchState from,
+            const MatchState to,
+            const MatchStateTransitionId transitionId,
+            helios::engine::runtime::world::UpdateContext& updateContext)  {
+
+            for (auto& listener : listeners_) {
                 listener->onMatchStateTransition(
                     updateContext,
                     MatchStateTransitionContext{from, to, transitionId}
                 );
-                listener->onMatchStateEnter(updateContext, to);
-
             }
         }
 
+        /**
+         * @brief Configured transition rules for the state machine.
+         */
         std::vector<MatchStateTransitionRule> rules_;
 
 
     public:
 
         /**
-         * @brief Constructs a GameStateManager with custom transition rules.
+         * @brief Constructs a MatchStateManager with custom transition rules.
          *
          * @param rules A span of transition rules defining valid state transitions.
          */
@@ -101,7 +152,7 @@ export namespace helios::engine::mechanics::match {
         : rules_(rules.begin(), rules.end()) {}
 
         /**
-         * @brief Constructs a GameStateManager with default transition rules.
+         * @brief Constructs a MatchStateManager with default transition rules.
          */
         MatchStateManager() {
             rules_.assign(DefaultMatchStateTransitionRules::rules().begin(),
@@ -158,14 +209,19 @@ export namespace helios::engine::mechanics::match {
             for (auto& rule : rules_) {
                 if (rule.from() == from && rule.transitionId() == transitionId) {
 
+                    // invoke the transitions that can satisfy the guard
                     if (rule.guard()) {
+                        // if the guard does not evaluate to true, do not change the state
                         if (!rule.guard()(updateContext, transitionRequest)) {
                             break;
                         }
                     }
 
-                    session.setMatchState(rule.to());
-                    executeListener(from, rule.to(), transitionId, updateContext);
+                    // clean up
+                    signalExit(from, rule.to(), transitionId, updateContext);
+                    signalTransition(from, rule.to(), transitionId, updateContext);
+                    session.setMatchStateFrom(MatchStateTransitionContext(currentFrom, rule.to(), transitionId));
+                    signalEnter(from, rule.to(), transitionId, updateContext);
                 }
             }
 

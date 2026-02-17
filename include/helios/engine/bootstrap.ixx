@@ -8,6 +8,7 @@ export module helios.engine.Bootstrap;
 
 import helios.engine.mechanics.registry;
 import helios.engine.modules.registry;
+import helios.engine.ecs.registry;
 
 export namespace helios::engine::bootstrap {
 
@@ -39,6 +40,7 @@ export namespace helios::engine::bootstrap {
 
         helios::engine::mechanics::registerComponents();
         helios::engine::modules::registerComponents();
+        helios::engine::ecs::registerComponents();
 
     }
 

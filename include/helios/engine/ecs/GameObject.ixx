@@ -21,6 +21,7 @@ import helios.engine.mechanics.lifecycle.components.Active;
 import helios.util.Guid;
 
 import helios.engine.ecs.EntityManager;
+import helios.engine.ecs.components.HierarchyComponent;
 import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.ecs.ComponentOpsRegistry;
@@ -52,6 +53,12 @@ export namespace helios::engine::ecs {
      * void processEntity(const GameObject& entity); // Avoid
      * ```
      *
+     * ## Hierarchy Integration
+     *
+     * When a GameObject has a `HierarchyComponent`, activation changes trigger
+     * hierarchy propagation. Calling `setActive()` marks the hierarchy as dirty,
+     * and `HierarchyPropagationSystem` propagates the state to all descendants.
+     *
      * ## Usage
      *
      * ```cpp
@@ -66,13 +73,15 @@ export namespace helios::engine::ecs {
      *     player.get<HealthComponent>()->takeDamage(10.0f);
      * }
      *
-     * // Activation state
+     * // Activation state (propagates to children if HierarchyComponent present)
      * player.setActive(false);  // Calls onDeactivate() on components
      * ```
      *
      * @see EntityHandle
      * @see EntityManager
      * @see GameWorld
+     * @see HierarchyComponent
+     * @see HierarchyPropagationSystem
      */
     class GameObject {
 
@@ -271,21 +280,42 @@ export namespace helios::engine::ecs {
          * - An `Inactive` tag component is added
          * - The `Active` tag component is removed
          * - `onDeactivate()` is called on components that support it
+         * - If a `HierarchyComponent` is present, it is marked dirty for propagation
          *
          * When activated:
          * - The `Inactive` tag component is removed
          * - An `Active` tag component is added
          * - `onActivate()` is called on components that support it
+         * - If a `HierarchyComponent` is present, it is marked dirty for propagation
          *
          * @note Does **not** call `enable()`/`disable()` on components.
          *
          * @param active True to activate, false to deactivate.
+         *
+         * @see HierarchyComponent
+         * @see HierarchyPropagationSystem
          */
         void setActive(const bool active) {
-            if (active) {
+
+            bool isActive = entityManager_->has<helios::engine::mechanics::lifecycle::components::Active>(entityHandle_);
+            bool isInActive = entityManager_->has<helios::engine::mechanics::lifecycle::components::Inactive>(entityHandle_);
+
+            if (!isActive && active) {
+                auto* hc =  entityManager_->get<helios::engine::ecs::components::HierarchyComponent>(entityHandle_);
+                if (hc) {
+                    hc->markDirty();
+                }
+
                 entityManager_->remove<helios::engine::mechanics::lifecycle::components::Inactive>(entityHandle_);
                 entityManager_->emplaceOrGet<helios::engine::mechanics::lifecycle::components::Active>(entityHandle_);
-            } else {
+            }
+
+            if (!isInActive && !active) {
+                auto* hc =  entityManager_->get<helios::engine::ecs::components::HierarchyComponent>(entityHandle_);
+                if (hc) {
+                    hc->markDirty();
+                }
+
                 entityManager_->emplaceOrGet<helios::engine::mechanics::lifecycle::components::Inactive>(entityHandle_);
                 entityManager_->remove<helios::engine::mechanics::lifecycle::components::Active>(entityHandle_);
             }

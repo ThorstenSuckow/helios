@@ -61,6 +61,9 @@ export namespace helios::engine::mechanics::match::listeners {
             if (to == MatchState::PlayerSpawn) {
                 gameObject_.setActive(true);
             }
+            if (to == MatchState::PlayerDeath || to == MatchState::GameOver) {
+                gameObject_.setActive(false);
+            }
 
         }
 

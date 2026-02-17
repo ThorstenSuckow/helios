@@ -251,7 +251,7 @@ export namespace helios::engine::runtime::gameloop {
          *
          * @return Reference to the requested Phase.
          */
-        helios::engine::runtime::gameloop::Phase& phase(helios::engine::runtime::gameloop::PhaseType phaseType) {
+        [[nodiscard]] helios::engine::runtime::gameloop::Phase& phase(const helios::engine::runtime::gameloop::PhaseType phaseType) noexcept {
 
             switch (phaseType) {
                 case helios::engine::runtime::gameloop::PhaseType::Pre:
@@ -274,7 +274,7 @@ export namespace helios::engine::runtime::gameloop {
          *
          * @return Reference to the CommandBuffer owned by this GameLoop.
          */
-        helios::engine::runtime::messaging::command::CommandBuffer& commandBuffer() {
+        [[nodiscard]] helios::engine::runtime::messaging::command::CommandBuffer& commandBuffer() noexcept {
             return commandBuffer_;
         }
 
@@ -364,6 +364,7 @@ export namespace helios::engine::runtime::gameloop {
             auto updateContext = helios::engine::runtime::world::UpdateContext(
                   commandBuffer_,
                   gameWorld,
+                  gameWorld.session(),
                   deltaTime,
                   phaseEventBus_,
                   passEventBus_,
@@ -381,16 +382,17 @@ export namespace helios::engine::runtime::gameloop {
 
                 switch (phase) {
                     case helios::engine::runtime::gameloop::PhaseType::Pre:
-                        prePhase_.update(updateContext, session.gameState());
+                        prePhase_.update(updateContext);
                         phaseCommit(gameWorld, updateContext);
+
                         break;
                     case helios::engine::runtime::gameloop::PhaseType::Main:
-                        mainPhase_.update(updateContext, session.gameState());
+                        mainPhase_.update(updateContext);
                         phaseCommit(gameWorld, updateContext);
 
                         break;
                     case helios::engine::runtime::gameloop::PhaseType::Post:
-                        postPhase_.update(updateContext, session.gameState());
+                        postPhase_.update(updateContext);
                         phaseCommit(gameWorld, updateContext);
                         frameEventBus_.swapBuffers();
                         break;

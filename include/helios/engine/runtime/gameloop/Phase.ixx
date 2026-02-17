@@ -15,6 +15,8 @@ import helios.engine.runtime.gameloop.Pass;
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.runtime.world.GameWorld;
 
+import helios.engine.runtime.world.Session;
+
 import helios.engine.runtime.gameloop.CommitPoint;
 
 import helios.engine.mechanics.gamestate.types;
@@ -116,14 +118,17 @@ export namespace helios::engine::runtime::gameloop {
          * @see Pass::addCommitPoint()
          * @see Pass::runsIn()
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext,
-            helios::engine::mechanics::gamestate::types::GameState gameState){
+        void update(helios::engine::runtime::world::UpdateContext& updateContext){
 
             for (auto& pass : passEntries_) {
                 // every pass contains systems that are updated here
-                if (helios::engine::mechanics::gamestate::types::hasFlag(pass->runsIn(), gameState)) {
+                if (helios::engine::mechanics::gamestate::types::hasFlag(
+                    pass->runsIn(),
+                    updateContext.session().gameState())
+                ) {
                     pass->update(updateContext);
-                    notifyPassCommitListeners(pass->commitPoint(), updateContext);
+                    notifyPassCommitListeners(
+                        pass->commitPoint(), updateContext);
                 }
 
             }
@@ -234,7 +239,7 @@ export namespace helios::engine::runtime::gameloop {
          *
          * @return Reference to the parent GameLoop.
          */
-        [[nodiscard]] helios::engine::runtime::gameloop::GameLoop& gameLoop()  {
+        [[nodiscard]] helios::engine::runtime::gameloop::GameLoop& gameLoop() noexcept {
             return gameloop_;
         }
 

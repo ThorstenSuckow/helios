@@ -6,3 +6,4 @@
 export module helios.engine.mechanics.match.listeners;
 
 export import helios.engine.mechanics.match.listeners.PlayerSpawnListener;
+export import helios.engine.mechanics.match.listeners.LambdaMatchStateListener;

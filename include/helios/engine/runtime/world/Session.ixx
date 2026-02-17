@@ -5,6 +5,8 @@
 module;
 
 #include <optional>
+#include <vector>
+#include <span>
 
 export module helios.engine.runtime.world.Session;
 
@@ -20,6 +22,10 @@ import helios.engine.ecs.GameObject;
 
 import helios.engine.modules.ui.widgets.components.UiFocusComponent;
 
+import helios.engine.core.data.ViewportId;
+
+import helios.engine.modules.rendering.viewport.components.ActiveViewportIdsStateComponent;
+
 import helios.engine.mechanics.match.components;
 
 export namespace helios::engine::runtime::world {
@@ -29,6 +35,8 @@ export namespace helios::engine::runtime::world {
 
     using namespace helios::engine::mechanics::gamestate::types;
     using namespace helios::engine::mechanics::gamestate::components;
+
+    using namespace helios::engine::modules::rendering::viewport::components;
 
     /**
      * @brief Holds session-level state for the current game instance.
@@ -44,7 +52,7 @@ export namespace helios::engine::runtime::world {
 
         ecs::GameObject gameObject_;
 
-
+        std::optional<ecs::GameObject> playerEntity_;
 
     public:
 
@@ -60,10 +68,28 @@ export namespace helios::engine::runtime::world {
 
             gameObject_.add<GameStateComponent>();
             gameObject_.add<modules::ui::widgets::components::UiFocusComponent>();
+            gameObject_.add<ActiveViewportIdsStateComponent>();
             gameObject_.add<MatchStateComponent>();
 
         }
 
+        /**
+         * @brief Sets the player entity for this session.
+         *
+         * @param go The GameObject representing the player.
+         */
+        void setPlayerEntity(const ecs::GameObject go) noexcept {
+            playerEntity_ = go;
+        }
+
+        /**
+         * @brief Returns the player entity if set.
+         *
+         * @return Optional containing the player GameObject, or nullopt.
+         */
+        [[nodiscard]] std::optional<ecs::GameObject> playerEntity() const noexcept {
+            return playerEntity_;
+        }
 
 
         /**
@@ -101,13 +127,12 @@ export namespace helios::engine::runtime::world {
         /**
          * @brief Sets the current match state.
          *
-         * @param matchState The new match state.
+         * @param matchStateTransitionContext
          */
-        void setMatchState(const MatchState matchState) noexcept {
-            auto* msc = gameObject_.get<MatchStateComponent>();
+        void setMatchStateFrom(const MatchStateTransitionContext matchStateTransitionContext) noexcept {
 
-            if (msc) {
-                msc->setMatchState(matchState);
+            if (auto* msc = gameObject_.get<MatchStateComponent>()) {
+                msc->setMatchState(matchStateTransitionContext);
             }
         }
 
@@ -134,6 +159,18 @@ export namespace helios::engine::runtime::world {
         }
 
         /**
+         * @brief Returns the current match state transition ID.
+         *
+         * @return The transition ID, or Undefined if not available.
+         */
+        [[nodiscard]] MatchStateTransitionId matchStateTransitionId() const noexcept {
+            auto* ms = gameObject_.get<MatchStateComponent>();
+
+            return ms ? ms->matchStateTransitionId() : MatchStateTransitionId::Undefined;
+        }
+
+
+        /**
          * @brief Sets the currently focused UI entity.
          *
          * @param gameObject The entity to focus, or nullopt to clear focus.
@@ -149,7 +186,31 @@ export namespace helios::engine::runtime::world {
          */
         std::optional<helios::engine::ecs::GameObject> focusedEntity() noexcept {
             return gameObject_.get<modules::ui::widgets::components::UiFocusComponent>()->focusedEntity();
-    ;
+        }
+
+        /**
+         * @brief Replaces the active viewport IDs with the provided list.
+         *
+         * @param viewportIds The new list of active viewport IDs.
+         */
+        void addViewportIds(const std::vector<helios::engine::core::data::ViewportId>& viewportIds) noexcept {
+            gameObject_.get<ActiveViewportIdsStateComponent>()->addViewportIds(viewportIds);
+        }
+
+        /**
+         * @brief Returns the currently active viewport IDs.
+         *
+         * @return Read-only span of viewport identifiers.
+         */
+        std::span<const helios::engine::core::data::ViewportId> viewportIds() const noexcept {
+            return gameObject_.get<ActiveViewportIdsStateComponent>()->viewportIds();
+        }
+
+        /**
+         * @brief Clears all active viewport IDs.
+         */
+       void clearViewportIds() noexcept {
+            gameObject_.get<ActiveViewportIdsStateComponent>()->clear();
         }
     };
 

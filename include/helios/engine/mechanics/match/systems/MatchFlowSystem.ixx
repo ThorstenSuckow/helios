@@ -29,11 +29,9 @@ export namespace helios::engine::mechanics::match::systems {
      */
     class MatchFlowSystem : public helios::engine::ecs::System {
 
-        template<typename T>
-        [[nodiscard]] bool hasEvent(const helios::engine::runtime::world::UpdateContext& ctx) noexcept {
-            const auto& ev = ctx.readFrame<T>();
-            return !ev.empty();
-        }
+        MatchState prevMatchSate_ = MatchState::Undefined;
+        MatchStateTransitionId prevMatchStateTransitionId_ = MatchStateTransitionId::Undefined;
+
 
     public:
 
@@ -44,13 +42,28 @@ export namespace helios::engine::mechanics::match::systems {
          */
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
-            auto& session = updateContext.gameWorld().session();
+            auto& session = updateContext.session();
 
 
             auto& commandBuffer = updateContext.commandBuffer();
             const auto matchState = session.matchState();
+            const auto matchStateTransitionId = session.matchStateTransitionId();
+
+            if (matchState != MatchState::Undefined && prevMatchSate_ == matchState && prevMatchStateTransitionId_ == matchStateTransitionId) {
+                return;
+            }
+
+            prevMatchSate_= matchState;
+            prevMatchStateTransitionId_ = matchStateTransitionId;
 
             switch (matchState) {
+
+                case MatchState::Finished: {
+                    commandBuffer.add<MatchStateCommand>(
+                        MatchStateTransitionRequest(matchState, MatchStateTransitionId::WarmupRequested)
+                    );
+                    break;
+                }
 
                 case MatchState::Undefined: {
                     commandBuffer.add<MatchStateCommand>(
@@ -70,6 +83,16 @@ export namespace helios::engine::mechanics::match::systems {
                     commandBuffer.add<MatchStateCommand>(
                         MatchStateTransitionRequest(matchState, MatchStateTransitionId::StartRequested)
                     );
+                    break;
+                }
+
+                case MatchState::PlayerDeath: {
+                    if (matchStateTransitionId == MatchStateTransitionId::QuitRequested) {
+                        commandBuffer.add<MatchStateCommand>(
+                            MatchStateTransitionRequest(MatchState::PlayerDeath, MatchStateTransitionId::QuitRequested)
+                        );
+                    }
+
                     break;
                 }
 

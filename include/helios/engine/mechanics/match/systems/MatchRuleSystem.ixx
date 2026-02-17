@@ -16,7 +16,7 @@ import helios.engine.ecs;
 import helios.engine.runtime;
 
 
-export namespace helios::engine::mechanics::gamestate::systems {
+export namespace helios::engine::mechanics::match::systems {
 
     using namespace helios::input::types;
 

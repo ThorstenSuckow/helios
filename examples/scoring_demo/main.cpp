@@ -1130,17 +1130,6 @@ int main() {
         [](helios::engine::runtime::world::UpdateContext& updateContext,
                 const helios::engine::mechanics::match::MatchState from)->void {
 
-                if (from == helios::engine::mechanics::match::MatchState::GameOver) {
-                    auto go = updateContext.session().focusedEntity();
-
-                    if (go) {
-                        auto* mc = go->get<helios::engine::modules::ui::widgets::components::MenuComponent>();
-                        if (mc && mc->menuId() == helios::engine::core::data::MenuId("GameOverMenu")) {
-                            updateContext.session().setFocusedEntity(std::nullopt);
-                        }
-                    }
-                 }
-
         },
         [](helios::engine::runtime::world::UpdateContext& updateContext,
              const helios::engine::mechanics::match::MatchStateTransitionContext transitionContext)->void {
@@ -1159,19 +1148,6 @@ int main() {
         [](helios::engine::runtime::world::UpdateContext& updateContext,
              const helios::engine::mechanics::match::MatchState to)->void {
 
-            if (to == helios::engine::mechanics::match::MatchState::GameOver) {
-                updateContext.gameWorld().session().setFocusedEntity(std::nullopt);
-
-                for (auto [entity, mc] : updateContext.gameWorld().view<
-                    helios::engine::modules::ui::widgets::components::MenuComponent
-                >().whereEnabled()) {
-                    if (mc->menuId() == helios::engine::core::data::MenuId{"GameOverMenu"}) {
-                        mc->setSelectedIndex(0);
-                        updateContext.gameWorld().session().setFocusedEntity(entity);
-                        break;
-                    }
-                }
-            }
         })
     );
 
@@ -1284,10 +1260,6 @@ int main() {
     );
 
     gameStateManager.addGameStateListener(
-        std::make_unique<helios::engine::mechanics::gamestate::listeners::FocusMenuListener>(
-            helios::engine::core::data::MenuId{"MainMenu"}
-        )
-    ).addGameStateListener(
         std::make_unique<helios::engine::mechanics::gamestate::listeners::WorldResetListener>()
     );
 
@@ -1561,8 +1533,16 @@ int main() {
     stateToViewportMap.add(GameState::Any, ViewportId{"mainViewport"})
                       .add(GameState::Title, ViewportId{"titleViewport"})
                       .add(GameState::Paused | GameState::Running, ViewportId{"menuViewport"})
-                      .add(MatchState::Playing, ViewportId{"Playing"});
+                      .add(MatchState::Playing, ViewportId{"hudViewport"});
     stateToViewportMap.freeze();
+
+    auto stateToMenuMap = helios::engine::state::CombinedStateToIdMapPair<
+        GameState, MatchState, MenuId
+    >();
+
+    stateToMenuMap.add(GameState::Paused, MatchState::Undefined, MenuId{"MainMenu"})
+                  .add(GameState::Running, MatchState::GameOver, MenuId{"GameOverMenu"});
+    stateToMenuMap.freeze();
 
 
     // ========================================
@@ -1598,8 +1578,8 @@ int main() {
             .addCommitPoint(helios::engine::runtime::gameloop::CommitPoint::Structural)
 
             .addPass(Running | Paused)
+            .addSystem<helios::engine::modules::ui::widgets::systems::MenuDisplaySystem>(stateToMenuMap)
             .addSystem<helios::engine::mechanics::match::systems::MatchFlowSystem>()
-            .addSystem<helios::engine::modules::ui::widgets::systems::MenuDisplaySystem>()
             .addCommitPoint(helios::engine::runtime::gameloop::CommitPoint::PassEvents)
 
             .addPass(Running | Title)

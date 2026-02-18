@@ -1,132 +1,197 @@
 /**
  * @file MenuDisplaySystem.ixx
- * @brief System for controlling menu visibility based on UI focus.
+ * @brief System for controlling menu visibility based on game state.
  */
 module;
 
 #include <iostream>
 #include <algorithm>
+#include <vector>
+#include <cassert>
+#include <helios/helios_config.h>
+
 
 export module helios.engine.modules.ui.widgets.systems.MenuDisplaySystem;
-import helios.engine.ecs.System;
+
+import helios.engine.ecs;
+import helios.engine.runtime.world;
+import helios.engine.core.data;
+
+import helios.engine.modules.ui.widgets.components.UiFocusComponent;
 
 import helios.engine.modules.ui.widgets.components.MenuComponent;
 
+import helios.engine.state.CombinedStateToIdMapPair;
 
-import helios.engine.modules.ui.widgets.components.UiStateComponent;
-import helios.engine.modules.ui.widgets.components.UiActionComponent;
-
-import helios.engine.modules.ui.commands.UiActionCommand;
-
-import helios.engine.ecs.GameObject;
-import helios.engine.runtime.world.GameWorld;
-import helios.engine.runtime.world.UpdateContext;
-
-import helios.engine.mechanics.lifecycle.components.Active;
-
-import helios.engine.ecs.EntityHandle;
-
-import helios.engine.runtime.messaging.command.CommandBuffer;
-
-import helios.input.types.Gamepad;
+import helios.engine.mechanics.gamestate.types;
+import helios.engine.mechanics.match.types;
 
 import helios.engine.modules.rendering.model.components.ModelAabbComponent;
 import helios.math;
+
+
 export namespace helios::engine::modules::ui::widgets::systems {
 
-    using namespace helios::input::types;
+
+    using namespace helios::engine::core::data;
+    using namespace helios::engine::state;
+    using namespace helios::engine::mechanics::gamestate::types;
+    using namespace helios::engine::mechanics::match::types;
+    using namespace helios::engine::ecs;
+    using namespace helios::engine::modules::ui::widgets::components;
 
     /**
-     * @brief Controls menu visibility based on session UI focus state.
+     * @brief Controls menu visibility based on game and match state.
      *
-     * @details This system monitors the session's focused entity and shows/hides
-     * menus accordingly. When the focused entity changes:
-     * - The previously focused menu (if any) is hidden
-     * - The newly focused menu is shown along with its menu items
+     * @details Uses a CombinedStateToIdMapPair to determine which menus
+     * should be active for the current state combination. Automatically
+     * shows/hides menus and manages focus when states change.
      *
-     * The system tracks the previous focused entity to detect focus changes
-     * and avoid redundant visibility updates.
+     * ## Behavior
      *
+     * - Menus not associated with the current state are hidden
+     * - Menus associated with the current state are shown
+     * - When no item has focus, the first menu's default item is focused
+     * - Inactive focused items have their UiFocusComponent removed
+     *
+     * @see CombinedStateToIdMapPair
      * @see MenuComponent
-     * @see UiFocusComponent
-     * @see Session::focusedEntity()
+     * @see MenuNavigationSystem
      */
     class MenuDisplaySystem : public helios::engine::ecs::System {
 
         /**
-         * @brief Handle to the previously focused entity for change detection.
+         * @brief Previously active menu IDs for change detection.
          */
-        helios::engine::ecs::EntityHandle prevEntityHandle_;
-        
+        std::vector<MenuId> prevMenuIds_;
+
         /**
-         * @brief Shows or hides a menu and its items.
-         *
-         * @param go The menu entity.
-         * @param show True to show, false to hide.
-         * @param gameWorld Reference to the game world for item lookup.
+         * @brief Policy mapping states to menu IDs.
          */
-        void showMenu(
-            helios::engine::ecs::GameObject go,
-            bool show,
-            helios::engine::runtime::world::GameWorld& gameWorld
-        ) {
-            auto* mc = go.get<helios::engine::modules::ui::widgets::components::MenuComponent>();
+        CombinedStateToIdMapPair<GameState, MatchState, MenuId> stateToMenuMap_;
 
-            if (!mc) {
-                return;
+        /**
+         * @brief Cache for inactive focused items to be cleaned up.
+         */
+        std::vector<GameObject> inactiveItems_;
+
+        /**
+         * @brief Shows or hides a menu by ID.
+         *
+         * @param menuId The menu to show/hide.
+         * @param show True to show, false to hide.
+         * @param components View of all MenuComponent entities.
+         */
+        void showMenu(const MenuId menuId, const bool show, View<MenuComponent>& components) {
+            for (auto [entity, mc] : components) {
+                if (mc->menuId() == menuId) {
+                    entity.setActive(show);
+                }
             }
+        }
 
-            go.setActive(show);
-            for (auto& item : mc->menuItems()) {
-                gameWorld.find(item)->setActive(show);
+        /**
+         * @brief Focuses the first item of a menu.
+         *
+         * @param menuId The menu to focus.
+         * @param components View of all MenuComponent entities.
+         */
+        void focusMenu(const MenuId menuId, View<MenuComponent>& components) {
+            for (auto [entity, mc] : components) {
+                if (mc->menuId() == menuId) {
+                    mc->selectDefaultIndex();
+
+                    if (mc->menuItems().size() > mc->selectedIndex()) {
+                        auto menuItem = gameWorld_->find(mc->menuItems()[mc->selectedIndex()]);
+                        menuItem->getOrAdd<UiFocusComponent>();
+                    }
+
+                    break;
+                }
             }
-
-        } 
-
+        }
         
         
     public:
 
         /**
-         * @brief Updates menu visibility based on focus changes.
+         * @brief Constructs the system with a state-to-menu policy.
          *
-         * @details Compares the current focused entity with the previous one.
-         * If focus changed, hides the previous menu and shows the new one.
-         * Skips processing if focus remains unchanged.
+         * @param stateToMenuMap Policy mapping game/match states to menu IDs.
+         */
+        explicit MenuDisplaySystem(CombinedStateToIdMapPair<GameState, MatchState, MenuId> stateToMenuMap)
+        : stateToMenuMap_(std::move(stateToMenuMap)) {
+
+            inactiveItems_.reserve(INACTIVE_FOCUSED_ITEMS_CACHE_CAPACITY);
+        }
+
+        /**
+         * @brief Updates menu visibility based on current state.
+         *
+         * @details Queries the current game and match state, then:
+         * 1. Hides menus that are no longer active
+         * 2. Shows menus for the current state
+         * 3. Ensures at least one menu item has focus
          *
          * @param updateContext The current frame's update context.
          */
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
 
-            auto focusedEntity = updateContext.gameWorld().session().focusedEntity();
+            auto& session = updateContext.session();
 
-            if (focusedEntity && focusedEntity->entityHandle() == prevEntityHandle_) {
+            auto gameState = session.gameState();
+            auto matchState = session.matchState();
+
+            auto menuIds = stateToMenuMap_.ids(gameState, matchState);
+
+            if (menuIds.empty() && prevMenuIds_.empty()) {
                 return;
             }
 
-            if (prevEntityHandle_.isValid()) {
-                auto go = updateContext.gameWorld().find(prevEntityHandle_);
-                if (go) {
-                    showMenu(go.value(), false,updateContext.gameWorld());
+            View<MenuComponent> components = gameWorld_->view<MenuComponent>().whereEnabled();
+
+
+            for (auto& prevMenuId : prevMenuIds_) {
+                if (std::ranges::find(menuIds, prevMenuId) == menuIds.end()) {
+                    showMenu(prevMenuId, false, components);
                 }
-                prevEntityHandle_ = helios::engine::ecs::EntityHandle();
             }
 
-            if (!focusedEntity) {
+            prevMenuIds_.assign(menuIds.begin(), menuIds.end());
+            for (auto& menuId : menuIds) {
+                showMenu(menuId, true,components);
+            }
+
+            if (menuIds.empty()) {
                 return;
             }
 
-            prevEntityHandle_ = focusedEntity->entityHandle();
 
+            bool hasFocus = false;
+            inactiveItems_.clear();
 
-            auto* mc = focusedEntity->get<helios::engine::modules::ui::widgets::components::MenuComponent>();
+            for (auto [entity, fc] :  gameWorld_->view<UiFocusComponent>().whereEnabled()) {
 
-            if (!mc) {
-                return;
+                /**
+                 * @todo Check if item is child element of menu?
+                 */
+                if (entity.isActive()) {
+                    hasFocus = true;
+                    break;
+                }
+
+                inactiveItems_.push_back(entity);
             }
 
-            showMenu(focusedEntity.value(), true, updateContext.gameWorld());
+            for (auto& item : inactiveItems_) {
+                item.remove<UiFocusComponent>();
+            }
+
+            // focus an item from the first menu
+            if (!hasFocus) {
+                focusMenu(menuIds[0], components);
+            }
 
         }
 

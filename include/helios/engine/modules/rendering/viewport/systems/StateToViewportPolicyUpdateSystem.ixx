@@ -10,10 +10,10 @@ module;
 
 export module helios.engine.modules.rendering.viewport.systems.StateToViewportPolicyUpdateSystem;
 
-import helios.engine.modules.rendering.viewport.types.StateToViewportPolicy;
-
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.Session;
+
+import helios.engine.state.StateToIdMapPair;
 
 import helios.engine.ecs.System;
 import helios.engine.runtime.world.UpdateContext;
@@ -21,21 +21,24 @@ import helios.engine.runtime.world.UpdateContext;
 import helios.engine.mechanics.gamestate.types;
 import helios.engine.mechanics.match.types;
 
+import helios.engine.core.data;
+
 export namespace helios::engine::modules::rendering::viewport::systems {
 
-    using namespace helios::engine::modules::rendering::viewport::types;
+
     using namespace helios::engine::mechanics::match::types;
     using namespace helios::engine::mechanics::gamestate::types;
+    using namespace helios::engine::state;
 
     /**
      * @brief Updates the session's active viewport list based on state policy.
      *
-     * @details This system queries the current GameState and MatchState from
-     * the session, then uses the configured StateToViewportPolicy to determine
-     * which viewports should be active. The resulting viewport IDs are stored
-     * in the session for use by the rendering system.
+     * @details Queries the current GameState and MatchState from the session,
+     * then uses the configured StateToIdMapPair to determine which viewports
+     * should be active. The resulting viewport IDs are stored in the session
+     * for use by the rendering system.
      *
-     * @see StateToViewportPolicy
+     * @see StateToIdMapPair
      * @see Session
      */
     class StateToViewportPolicyUpdateSystem : public helios::engine::ecs::System {
@@ -43,21 +46,23 @@ export namespace helios::engine::modules::rendering::viewport::systems {
         /**
          * @brief Policy defining viewport-to-state mappings.
          */
-        StateToViewportPolicy stateToViewportPolicy_;
+        StateToIdMapPair<GameState, MatchState, ViewportId> stateToIdMapPair_;
 
     public:
 
         /**
-         * @brief Constructs the system with a state-to-viewport policy.
+         * @brief Constructs the system with a state-to-ID map pair.
          *
-         * @param stateToViewportPolicy Policy defining which viewports are
-         *        active for each game/match state combination.
+         * @param stateToIdMapPair Policy mapping game/match states to viewport IDs.
          */
-        explicit StateToViewportPolicyUpdateSystem(StateToViewportPolicy stateToViewportPolicy)
-            : stateToViewportPolicy_(std::move(stateToViewportPolicy)){}
+        explicit StateToViewportPolicyUpdateSystem(StateToIdMapPair<GameState, MatchState, ViewportId> stateToIdMapPair)
+            : stateToIdMapPair_(std::move(stateToIdMapPair)){}
 
         /**
-         * @brief Updates the session's active viewport IDs based on current state.
+         * @brief Updates the session's active viewport IDs.
+         *
+         * @details Clears the current viewport IDs and sets them based on
+         * the current game and match state combination.
          *
          * @param updateContext The current frame's update context.
          */
@@ -70,8 +75,8 @@ export namespace helios::engine::modules::rendering::viewport::systems {
 
             session.clearViewportIds();
 
-            auto viewportIds = stateToViewportPolicy_.viewportIds(gameState, matchState);
-            session.addViewportIds(viewportIds);
+            auto viewportIds = stateToIdMapPair_.ids(gameState, matchState);
+            session.setViewportIds(viewportIds);
 
 
 

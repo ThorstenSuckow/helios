@@ -7,4 +7,4 @@ export module helios.engine.modules.rendering.viewport;
 
 export import helios.engine.modules.rendering.viewport.components;
 export import helios.engine.modules.rendering.viewport.systems;
-export import helios.engine.modules.rendering.viewport.types;
+

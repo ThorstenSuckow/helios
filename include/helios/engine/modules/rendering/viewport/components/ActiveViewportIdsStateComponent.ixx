@@ -44,8 +44,8 @@ export namespace helios::engine::modules::rendering::viewport::components {
          *
          * @param viewportIds The new list of active viewport IDs.
          */
-        void addViewportIds(const std::vector<ViewportId>& viewportIds) {
-            viewportIds_ = viewportIds;
+        void setViewportIds(std::span<const ViewportId>& viewportIds) {
+            viewportIds_.assign(viewportIds.begin(), viewportIds.end());
         }
 
         /**

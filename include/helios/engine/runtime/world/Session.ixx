@@ -193,8 +193,8 @@ export namespace helios::engine::runtime::world {
          *
          * @param viewportIds The new list of active viewport IDs.
          */
-        void addViewportIds(const std::vector<helios::engine::core::data::ViewportId>& viewportIds) noexcept {
-            gameObject_.get<ActiveViewportIdsStateComponent>()->addViewportIds(viewportIds);
+        void setViewportIds(std::span<const helios::engine::core::data::ViewportId>& viewportIds) noexcept {
+            gameObject_.get<ActiveViewportIdsStateComponent>()->setViewportIds(viewportIds);
         }
 
         /**

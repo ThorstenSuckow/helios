@@ -20,8 +20,6 @@ import helios.engine.core.data;
 import helios.engine.mechanics.gamestate.components;
 import helios.engine.ecs.GameObject;
 
-import helios.engine.modules.ui.widgets.components.UiFocusComponent;
-
 import helios.engine.core.data.ViewportId;
 
 import helios.engine.modules.rendering.viewport.components.ActiveViewportIdsStateComponent;
@@ -67,7 +65,6 @@ export namespace helios::engine::runtime::world {
         explicit Session(const ecs::GameObject go) : gameObject_(go) {
 
             gameObject_.add<GameStateComponent>();
-            gameObject_.add<modules::ui::widgets::components::UiFocusComponent>();
             gameObject_.add<ActiveViewportIdsStateComponent>();
             gameObject_.add<MatchStateComponent>();
 
@@ -170,23 +167,6 @@ export namespace helios::engine::runtime::world {
         }
 
 
-        /**
-         * @brief Sets the currently focused UI entity.
-         *
-         * @param gameObject The entity to focus, or nullopt to clear focus.
-         */
-        void setFocusedEntity(std::optional<helios::engine::ecs::GameObject> gameObject) noexcept {
-            gameObject_.get<modules::ui::widgets::components::UiFocusComponent>()->setFocusedEntity(gameObject);
-        }
-
-        /**
-         * @brief Returns the currently focused UI entity.
-         *
-         * @return The focused entity, or nullopt if none is focused.
-         */
-        std::optional<helios::engine::ecs::GameObject> focusedEntity() noexcept {
-            return gameObject_.get<modules::ui::widgets::components::UiFocusComponent>()->focusedEntity();
-        }
 
         /**
          * @brief Replaces the active viewport IDs with the provided list.

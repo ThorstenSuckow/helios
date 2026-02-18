@@ -198,6 +198,18 @@ export namespace helios::engine::ecs {
         }
 
         /**
+         * @brief Removes a component from this entity.
+         *
+         * @tparam T The component type to remove.
+         *
+         * @return True if the component was removed, false if not present.
+         */
+        template<typename T>
+        [[nodiscard]] bool remove() {
+            return entityManager_->remove<T>(entityHandle_);
+        }
+
+        /**
          * @brief Returns raw pointer to component by type ID.
          *
          * @param typeId The component type identifier.

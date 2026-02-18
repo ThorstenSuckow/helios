@@ -1552,12 +1552,18 @@ int main() {
     using namespace helios::engine::mechanics::match::types;
     using namespace helios::engine::core::data;
 
-    auto stateToViewportPolicy = helios::engine::modules::rendering::viewport::types::StateToViewportPolicy();
 
-    stateToViewportPolicy.add(GameState::Any, ViewportId{"mainViewport"})
-                         .add(GameState::Title, ViewportId{"titleViewport"})
-                         .add(GameState::Paused | GameState::Running, ViewportId{"menuViewport"})
-                         .add(MatchState::Playing, ViewportId{"hudViewport"});
+
+    auto stateToViewportMap = helios::engine::state::StateToIdMapPair<
+        GameState, MatchState, ViewportId
+    >();
+
+    stateToViewportMap.add(GameState::Any, ViewportId{"mainViewport"})
+                      .add(GameState::Title, ViewportId{"titleViewport"})
+                      .add(GameState::Paused | GameState::Running, ViewportId{"menuViewport"})
+                      .add(MatchState::Playing, ViewportId{"Playing"});
+    stateToViewportMap.freeze();
+
 
     // ========================================
     // 9. GameLoop Phase Configuration
@@ -1655,7 +1661,7 @@ int main() {
              .addSystem<helios::engine::modules::spatial::transform::systems::ComposeTransformSystem>()
 
              .addSystem<helios::engine::modules::rendering::viewport::systems::StateToViewportPolicyUpdateSystem>(
-                 stateToViewportPolicy)
+                 stateToViewportMap)
              .addSystem<helios::engine::modules::scene::systems::SceneSyncSystem>(sceneToViewportMap)
              .addSystem<helios::engine::modules::scene::systems::SceneRenderingSystem>(
                  app->renderingDevice(), sceneToViewportMap)

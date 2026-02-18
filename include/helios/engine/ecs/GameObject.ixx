@@ -205,7 +205,7 @@ export namespace helios::engine::ecs {
          * @return True if the component was removed, false if not present.
          */
         template<typename T>
-        [[nodiscard]] bool remove() {
+        bool remove() {
             return entityManager_->remove<T>(entityHandle_);
         }
 

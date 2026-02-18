@@ -112,9 +112,13 @@ export namespace helios::engine::state {
          *
          * @return Span of IDs for the state combination.
          */
-        std::span<const TId> ids(const LState stateLft, const RState stateRgt) const  {
+        [[nodiscard]] std::span<const TId> ids(const LState stateLft, const RState stateRgt) const  {
 
             assert(lft_.isFrozen() && rgt_.isFrozen() && "Cannot merge if sources are not frozen.");
+
+            if (!lft_.isFrozen() || !rgt_.isFrozen()) {
+                return {};
+            }
 
             mergeInto(combined_, lft_.ids(stateLft), rgt_.ids(stateRgt));
 

@@ -7,3 +7,4 @@ export module helios.engine.state;
 
 export import helios.engine.state.StateToIdMap;
 export import helios.engine.state.StateToIdMapPair;
+export import helios.engine.state.CombinedStateToIdMapPair;

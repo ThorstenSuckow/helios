@@ -58,6 +58,7 @@ export namespace helios::engine::modules::ui::widgets::systems {
      * @see MenuComponent
      * @see MenuNavigationSystem
      */
+    template<typename StateLft, typename StateRgt>
     class MenuDisplaySystem : public helios::engine::ecs::System {
 
         /**
@@ -68,7 +69,7 @@ export namespace helios::engine::modules::ui::widgets::systems {
         /**
          * @brief Policy mapping states to menu IDs.
          */
-        CombinedStateToIdMapPair<GameState, MatchState, MenuId> stateToMenuMap_;
+        CombinedStateToIdMapPair<StateLft, StateRgt, MenuId> stateToMenuMap_;
 
         /**
          * @brief Cache for inactive focused items to be cleaned up.
@@ -105,7 +106,6 @@ export namespace helios::engine::modules::ui::widgets::systems {
                         auto menuItem = gameWorld_->find(mc->menuItems()[mc->selectedIndex()]);
                         menuItem->getOrAdd<UiFocusComponent>();
                     }
-
                     break;
                 }
             }
@@ -119,7 +119,7 @@ export namespace helios::engine::modules::ui::widgets::systems {
          *
          * @param stateToMenuMap Policy mapping game/match states to menu IDs.
          */
-        explicit MenuDisplaySystem(CombinedStateToIdMapPair<GameState, MatchState, MenuId> stateToMenuMap)
+        explicit MenuDisplaySystem(CombinedStateToIdMapPair<StateLft, StateRgt, MenuId> stateToMenuMap)
         : stateToMenuMap_(std::move(stateToMenuMap)) {
 
             inactiveItems_.reserve(INACTIVE_FOCUSED_ITEMS_CACHE_CAPACITY);
@@ -140,8 +140,8 @@ export namespace helios::engine::modules::ui::widgets::systems {
 
             auto& session = updateContext.session();
 
-            auto gameState = session.gameState();
-            auto matchState = session.matchState();
+            auto gameState = session.state<StateLft>();
+            auto matchState = session.state<StateRgt>();
 
             auto menuIds = stateToMenuMap_.ids(gameState, matchState);
 
@@ -181,6 +181,10 @@ export namespace helios::engine::modules::ui::widgets::systems {
                     break;
                 }
 
+                /**
+                 * @todo guaranteee that the UiFocusComponent is exclusive,
+                 * break here if first comp with focus was found.
+                 */
                 inactiveItems_.push_back(entity);
             }
 

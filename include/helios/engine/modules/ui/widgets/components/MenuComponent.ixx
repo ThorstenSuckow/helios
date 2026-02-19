@@ -87,7 +87,8 @@ public:
         if (index != selectedIndex_) {
             markDirty();
         }
-        selectedIndex_ = index;
+        previousSelectedIndex_ = selectedIndex_;
+        selectedIndex_ = index;;
     }
 
     /**
@@ -147,6 +148,15 @@ public:
      */
     [[nodiscard]] bool isDirty() const noexcept {
         return isDirty_;
+    }
+
+    /**
+     * @brief Returns the index of the previous selected menu index.
+     *
+     * @return The index of the previous selected menu item.
+     */
+    [[nodiscard]] size_t previousSelectedIndex() const noexcept {
+        return previousSelectedIndex_;
     }
 
     /**

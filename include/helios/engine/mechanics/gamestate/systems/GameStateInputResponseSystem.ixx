@@ -7,8 +7,8 @@ module;
 
 export module helios.engine.mechanics.gamestate.systems.GameStateInputResponseSystem;
 
-import helios.engine.mechanics.gamestate.components;
-import helios.engine.mechanics.gamestate.commands;
+import helios.engine.state;
+
 import helios.engine.mechanics.gamestate.types;
 
 import helios.input.types.Gamepad;
@@ -20,7 +20,8 @@ import helios.engine.runtime;
 export namespace helios::engine::mechanics::gamestate::systems {
 
     using namespace helios::input::types;
-    using namespace helios::engine::mechanics::gamestate::commands;
+    using namespace helios::engine::state::types;
+    using namespace helios::engine::state::commands;
     using namespace helios::engine::mechanics::gamestate::types;
 
     /**
@@ -42,20 +43,20 @@ export namespace helios::engine::mechanics::gamestate::systems {
          */
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
-            auto gameState = updateContext.gameWorld().session().gameState();
+            auto gameState = updateContext.gameWorld().session().state<GameState>();
 
             if (updateContext.inputSnapshot().gamepadState().isButtonPressed(GamepadInput::Start)) {
 
                 switch (gameState) {
                     case GameState::Title:
-                        updateContext.commandBuffer().add<GameStateCommand>(
-                            GameStateTransitionRequest(GameState::Title, GameStateTransitionId::StartRequested)
+                        updateContext.commandBuffer().add<StateCommand<GameState>>(
+                            StateTransitionRequest<GameState>(GameState::Title, GameStateTransitionId::StartRequested)
                         );
                         break;
 
                     case GameState::Running:
-                        updateContext.commandBuffer().add<GameStateCommand>(
-                            GameStateTransitionRequest(GameState::Running, GameStateTransitionId::TogglePause)
+                        updateContext.commandBuffer().add<StateCommand<GameState>>(
+                            StateTransitionRequest<GameState>(GameState::Running, GameStateTransitionId::TogglePause)
                         );
                         break;
 

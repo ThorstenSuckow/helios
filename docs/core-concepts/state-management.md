@@ -1,213 +1,314 @@
-# Game and Match State Management
+# State Management
 
-helios provides a rule-based state machine architecture for managing both **Game States** (application-level states like Title, Running, Paused) and **Match States** (gameplay-level states like Warmup, PlayerSpawn, Playing).
+helios provides a generic, template-based state machine architecture for managing application and gameplay states. The system is fully parameterized by state type, enabling reuse for different state enums (e.g., GameState, MatchState).
 
 ## Overview
 
-The state management system consists of two parallel managers:
+The state management system uses a common architectural pattern for all state types:
 
-| Manager | Scope | Example States |
-|---------|-------|----------------|
-| `GameStateManager` | Application lifecycle | Title, Running, Paused |
-| `MatchStateManager` | Match/round lifecycle | Warmup, PlayerSpawn, Playing |
+| Component | Description |
+|-----------|-------------|
+| `StateManager<StateType>` | Rule-based state machine with listener support |
+| `StateTransitionRule<StateType>` | Defines valid transitions with optional guards |
+| `StateTransitionListener<StateType>` | Interface for transition observers |
+| `StateCommand<StateType>` | Command for requesting transitions |
+| `StateComponent<StateType>` | Stores current state on entities |
 
-Both managers share the same architectural pattern:
+### Example State Configurations
 
-1. **Rule-based transitions** with optional guards
-2. **Listener notifications** on state changes
-3. **Command-driven** state changes via `CommandBuffer`
-4. **Session integration** for centralized state storage
+| State Type | Scope | Example States |
+|------------|-------|----------------|
+| `GameState` | Application lifecycle | Title, Running, Paused |
+| `MatchState` | Match/round lifecycle | Warmup, PlayerSpawn, Playing |
+
+## Hierarchical State Machine
+
+helios supports hierarchical state management where lower-level states (e.g., MatchState) only apply within specific higher-level states (e.g., GameState::Running):
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                         GameState                                   │
+│                                                                     │
+│  ┌──────────┐      StartRequested      ┌──────────────────────────┐ │
+│  │  Title   │ ───────────────────────► │        Running           │ │
+│  └──────────┘                          │                          │ │
+│       ▲                                │  ┌────────────────────┐  │ │
+│       │                                │  │    MatchState      │  │ │
+│       │ ReturnToTitle                  │  │                    │  │ │
+│       │                                │  │ ┌────────┐         │  │ │
+│       │                                │  │ │Warmup  │         │  │ │
+│       │                                │  │ └───┬────┘         │  │ │
+│       │                                │  │     │ PlayerSpawn  │  │ │
+│       │                                │  │     ▼              │  │ │
+│       │                                │  │ ┌────────┐         │  │ │
+│       │                                │  │ │Spawning│         │  │ │
+│       │                                │  │ └───┬────┘         │  │ │
+│       │                                │  │     │ StartMatch   │  │ │
+│       │                                │  │     ▼              │  │ │
+│       │                                │  │ ┌────────┐         │  │ │
+│       │                                │  │ │Playing │         │  │ │
+│       │                                │  │ └───┬────┘         │  │ │
+│       │                                │  │     │ GameOver     │  │ │
+│       │                                │  │     ▼              │  │ │
+│       │                                │  │ ┌────────┐         │  │ │
+│       └────────────────────────────────┼──┼─│GameOver│         │  │ │
+│                                        │  │ └────────┘         │  │ │
+│                                        │  └────────────────────┘  │ │
+│                                        │                          │ │
+│                                        │      TogglePause         │ │
+│                                        └────────────┬─────────────┘ │
+│                                                     │               │
+│                                                     ▼               │
+│                                        ┌────────────────────────┐   │
+│                                        │        Paused          │   │
+│                                        │  (MatchState frozen)   │   │
+│                                        └────────────┬───────────┘   │
+│                                                     │               │
+│                                               TogglePause           │
+│                                                     │               │
+│                                                     ▼               │
+│                                        ┌────────────────────────┐   │
+│                                        │        Running         │   │
+│                                        └────────────────────────┘   │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+### Key Concepts
+
+- **GameState** is the top-level state controlling application lifecycle
+- **MatchState** is a nested state that only progresses while `GameState::Running`
+- When `GameState` transitions to `Paused`, the `MatchState` is frozen
+- Transitions between states are triggered by `StateCommand<T>`
 
 ## Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                       Session                               │
-│  ┌───────────────────┐      ┌───────────────────┐           │
-│  │ GameStateComponent│      │MatchStateComponent│           │
-│  └───────────────────┘      └───────────────────┘           │
+│  ┌─────────────────────┐    ┌─────────────────────┐         │
+│  │ StateComponent<GS>  │    │ StateComponent<MS>  │         │
+│  └─────────────────────┘    └─────────────────────┘         │
 └─────────────────────────────────────────────────────────────┘
          ▲                           ▲
          │                           │
-┌────────┴────────┐         ┌────────┴────────┐
-│ GameStateManager│         │MatchStateManager│
-│  - rules[]      │         │  - rules[]      │
-│  - listeners[]  │         │  - listeners[]  │
-└─────────────────┘         └─────────────────┘
+┌────────┴──────────┐       ┌────────┴──────────┐
+│ StateManager<GS>  │       │ StateManager<MS>  │
+│  - rules[]        │       │  - rules[]        │
+│  - listeners[]    │       │  - listeners[]    │
+└───────────────────┘       └───────────────────┘
          ▲                           ▲
          │                           │
-┌────────┴────────┐         ┌────────┴────────┐
-│ GameStateCommand│         │MatchStateCommand│
-└─────────────────┘         └─────────────────┘
+┌────────┴──────────┐       ┌────────┴──────────┐
+│ StateCommand<GS>  │       │ StateCommand<MS>  │
+└───────────────────┘       └───────────────────┘
 ```
 
-## Game State Flow
+## Session State Registration
 
-The `GameStateManager` controls the overall application state:
+Before using any state type with the state management system, it must be explicitly registered with the Session via `trackState<T>()`. This adds the corresponding `StateComponent<T>` to the session entity, enabling systems to read and write the state.
 
-```
-┌─────────────┐   StartRequested   ┌─────────────┐
-│    Title    │ ─────────────────► │   Running   │
-└─────────────┘                    └─────────────┘
-                                         │
-                                   TogglePause
-                                         │
-                                         ▼
-                                   ┌─────────────┐
-                                   │   Paused    │
-                                   └─────────────┘
-                                         │
-                                   TogglePause
-                                         │
-                                         ▼
-                                   ┌─────────────┐
-                                   │   Running   │
-                                   └─────────────┘
+```cpp
+auto& session = gameWorld.session();
+
+// Register state types before use
+session.trackState<GameState>();
+session.trackState<MatchState>();
 ```
 
-### GameState Enum
+Explicit registration avoids hard-coded state types in the Session class. It enables custom state types without modifying engine code and ensures that StateComponent exists before StateManager attempts to update it. Furthermore, it makes state dependencies visible at initialization time.
 
-| State | Description |
-|-------|-------------|
-| `Title` | Main menu / title screen |
-| `Running` | Game is actively playing |
-| `Paused` | Game is paused |
+## Type Trait Specialization
 
-## Match State Flow
+To use `StateManager<YourState>`, you must specialize `StateTransitionId`:
 
-The `MatchStateManager` controls the match/round lifecycle within a running game:
+```cpp
+// In your bindings module:
+template<>
+struct helios::engine::state::types::StateTransitionId<GameState> {
+    using Type = GameStateTransitionId;
+};
 
-```
-┌───────────────┐   WarmupRequested   ┌───────────────┐
-│   Undefined   │ ──────────────────► │    Warmup     │
-└───────────────┘                     └───────────────┘
-                                             │
-                                    PlayerSpawnRequested
-                                             │
-                                             ▼
-                                      ┌───────────────┐
-                                      │  PlayerSpawn  │
-                                      └───────────────┘
-                                             │
-                                       StartRequested
-                                             │
-                                             ▼
-                                      ┌───────────────┐
-                                      │    Playing    │
-                                      └───────────────┘
+template<>
+struct helios::engine::state::types::StateTransitionId<MatchState> {
+    using Type = MatchStateTransitionId;
+};
 ```
 
-### MatchState Enum
+## Transition Flow
 
-| State | Description |
-|-------|-------------|
-| `Undefined` | Initial state before match starts |
-| `Warmup` | Pre-match preparation phase |
-| `Intro` | Introduction/cutscene phase |
-| `Countdown` | Countdown before gameplay |
-| `PlayerSpawn` | Player entity spawning |
-| `Playing` | Active gameplay |
+When a state transition is requested:
+
+1. `StateCommand<T>` is submitted to the command buffer
+2. `StateCommandDispatcher<T>` routes it to the registered `StateManager<T>`
+3. During `flush()`, the manager processes pending commands
+4. Matching rule is found and guard is evaluated (if present)
+5. Listeners are notified in order:
+   - `onStateExit(from)`
+   - `onStateTransition(context)`
+   - `onStateEnter(to)`
+6. Session state is updated via `StateComponent<T>`
 
 ## Transition Rules
 
-Both managers use transition rules to define valid state changes:
+Rules define valid state changes with optional guards:
 
 ```cpp
-// GameStateTransitionRule(from, transitionId, to, type)
-GameStateTransitionRule(
-    GameState::Title, 
-    GameStateTransitionId::StartRequested, 
-    GameState::Running, 
-    GameStateTransitionType::Standard
-);
+using namespace helios::engine::state::types;
+
+// Define rules as constexpr array
+constexpr StateTransitionRule<GameState> gameStateRules[] = {
+    // from, transitionId, to
+    {GameState::Title, GameStateTransitionId::StartRequested, GameState::Running},
+    {GameState::Running, GameStateTransitionId::TogglePause, GameState::Paused},
+    {GameState::Paused, GameStateTransitionId::TogglePause, GameState::Running},
+};
 ```
 
-Rules can include guards for conditional transitions:
+### Guarded Transitions
+
+Guards are function pointers that can block a transition:
 
 ```cpp
-GameStateTransitionRule rule{
+// Guard callback type: bool(*)(UpdateContext&, const StateTransitionRequest<T>)
+constexpr StateTransitionRule<GameState> guardedRule{
     GameState::Running,
-    GameStateTransitionId::TogglePause,
-    GameState::Paused,
-    GameStateTransitionType::Guarded,
-    [](const UpdateContext& ctx) { return canPause(ctx); }
+    GameStateTransitionId::GameOver,
+    GameState::Title,
+    // Guard: only allow if player has no lives
+    [](auto& ctx, auto& req) {
+        return ctx.session().lives() == 0;
+    }
 };
 ```
 
 ## Listeners
 
-Listeners react to state changes and can perform actions like:
-- Resetting the game world
-- Spawning the player
-- Showing/hiding UI elements
-- Playing audio cues
+Listeners observe state transitions and perform side effects:
+
+### Interface
 
 ```cpp
-class WorldResetListener : public GameStateTransitionListener {
+template<typename StateType>
+class StateTransitionListener {
 public:
-    void onGameStateEnter(UpdateContext& ctx, GameState state) override {
-        if (state == GameState::Running) {
+    virtual void onStateExit(UpdateContext& ctx, StateType from) = 0;
+    virtual void onStateTransition(UpdateContext& ctx, StateTransitionContext<StateType> transitionCtx) = 0;
+    virtual void onStateEnter(UpdateContext& ctx, StateType to) = 0;
+};
+```
+
+### Lambda-based Listener
+
+```cpp
+using namespace helios::engine::state::listeners;
+
+auto listener = std::make_unique<LambdaStateListener<GameState>>(
+    // onExit
+    [](auto& ctx, GameState from) {
+        if (from == GameState::Running) {
+            // Clean up running state
+        }
+    },
+    // onTransition
+    [](auto& ctx, auto transitionCtx) {
+        // Log transition
+    },
+    // onEnter
+    [](auto& ctx, GameState to) {
+        if (to == GameState::Running) {
             ctx.gameWorld().reset();
         }
     }
-};
+);
 
-// Register with manager
-gameStateManager->addGameStateListener(std::make_unique<WorldResetListener>());
+stateManager->addStateListener(std::move(listener));
 ```
 
 ## Usage Example
 
-### Configuring State Managers
+### Creating State Managers
 
 ```cpp
-// Create managers
-auto gameStateManager = std::make_unique<GameStateManager>();
-auto matchStateManager = std::make_unique<MatchStateManager>();
+using namespace helios::engine::state;
+
+// Register state types with session (required before managers are flushed)
+auto& session = gameWorld.session();
+session.trackState<GameState>();
+session.trackState<MatchState>();
+
+// Create managers with rules
+auto gameStateManager = std::make_unique<StateManager<GameState>>(gameStateRules);
+auto matchStateManager = std::make_unique<StateManager<MatchState>>(matchStateRules);
 
 // Add listeners
-gameStateManager->addGameStateListener(std::make_unique<WorldResetListener>());
-matchStateManager->addMatchStateListener(std::make_unique<PlayerSpawnListener>(player));
+gameStateManager->addStateListener(std::make_unique<LambdaStateListener<GameState>>(
+    /* callbacks */
+));
 
-// Register with GameWorld
-gameWorld.addManager(std::move(gameStateManager));
-gameWorld.addManager(std::move(matchStateManager));
+// Register with GameLoop (managers are initialized and flushed automatically)
+gameLoop.addManager(std::move(gameStateManager));
+gameLoop.addManager(std::move(matchStateManager));
 ```
 
 ### Requesting State Transitions
 
-State transitions are requested via commands:
-
 ```cpp
+using namespace helios::engine::state::commands;
+using namespace helios::engine::state::types;
+
 // Request game start
-commandBuffer.add<GameStateCommand>(
-    GameStateTransitionRequest(GameState::Title, GameStateTransitionId::StartRequested)
+updateContext.commandBuffer().add<StateCommand<GameState>>(
+    StateTransitionRequest<GameState>{
+        GameState::Title,
+        GameStateTransitionId::StartRequested
+    }
 );
 
 // Request player spawn in match
-commandBuffer.add<MatchStateCommand>(
-    MatchStateTransitionRequest(MatchState::Warmup, MatchStateTransitionId::PlayerSpawnRequested)
+updateContext.commandBuffer().add<StateCommand<MatchState>>(
+    StateTransitionRequest<MatchState>{
+        MatchState::Warmup,
+        MatchStateTransitionId::PlayerSpawnRequested
+    }
 );
 ```
 
 ### Querying Current State
 
-Access the current state through the Session:
-
 ```cpp
 auto& session = gameWorld.session();
 
-GameState gameState = session.gameState();
-MatchState matchState = session.matchState();
+GameState gameState = session.state<GameState>();
+MatchState matchState = session.state<MatchState>();
 
 if (gameState == GameState::Running && matchState == MatchState::Playing) {
     // Game is actively playing
 }
 ```
 
+## State-to-ID Mapping
+
+For associating viewports or menus with states, use the mapping utilities:
+
+```cpp
+using namespace helios::engine::state;
+
+CombinedStateToIdMapPair<GameState, MatchState, ViewportId> viewportPolicy;
+
+// Map state combinations to viewport IDs
+viewportPolicy.add(GameState::Running, MatchState::Playing, ViewportId("game"));
+viewportPolicy.add(GameState::Paused, MatchState::Undefined, ViewportId("pause_menu"));
+viewportPolicy.add(GameState::Running, MatchState::GameOver, ViewportId("game_over"));
+
+viewportPolicy.freeze();
+
+// Query active viewports for current state
+auto viewportIds = viewportPolicy.ids(gameState, matchState);
+```
+
 ## Pass-Level State Filtering
 
-Passes in the game loop can be configured to run only during specific game states:
+Passes in the game loop can be configured to run only during specific states:
 
 ```cpp
 // This pass only runs when game is Running

@@ -1,0 +1,21 @@
+/**
+ * @file _module.ixx
+ * @brief Aggregate module for state-to-ID mapping utilities.
+ */
+
+export module helios.engine.state;
+
+export import helios.engine.state.commands;
+export import helios.engine.state.components;
+export import helios.engine.state.dispatcher;
+export import helios.engine.state.listeners;
+export import helios.engine.state.types;
+
+
+export import helios.engine.state.StateToIdMap;
+export import helios.engine.state.StateToIdMapPair;
+export import helios.engine.state.CombinedStateToIdMapPair;
+export import helios.engine.state.StateTransitionListener;
+export import helios.engine.state.StateCommandHandler;
+export import helios.engine.state.TypedStateCommandHandler;
+export import helios.engine.state.StateManager;

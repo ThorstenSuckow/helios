@@ -11,110 +11,24 @@ export module helios.engine.core.data.ViewportId;
 
 import helios.core.algorithms;
 import helios.core.types;
+import helios.core.data;
 
 export namespace helios::engine::core::data {
 
     /**
-     * @brief Strongly-typed identifier for viewports.
-     *
-     * Uses FNV-1a string hashing to generate unique identifiers at compile time.
-     * Enables type-safe referencing of viewports by name (e.g., "Ui", "Game").
+     * @brief Tag type for ViewportId.
      */
-    struct ViewportId {
-
-    private:
-
-        /**
-         * @brief The hashed identifier value.
-         */
-        uint32_t id_{};
-
-        /**
-         * @brief Private constructor from raw hash value.
-         *
-         * @param id The pre-computed hash value.
-         */
-        explicit constexpr ViewportId(const uint32_t id) noexcept
-            : id_(id) {
-        }
-
-    public:
-
-        /**
-         * @brief Constructs a ViewportId from a string name.
-         *
-         * Uses FNV-1a hashing to convert the string to a 32-bit identifier.
-         * This constructor is `constexpr`, allowing compile-time evaluation.
-         *
-         * @param str The viewport name (e.g., "Ui", "Game").
-         */
-        explicit constexpr ViewportId(const std::string_view str) noexcept
-            : ViewportId(helios::core::algorithms::fnv1a_hash(str)) {}
-
-        explicit constexpr ViewportId(helios::core::types::no_init_t) {};
-
-        explicit constexpr ViewportId() : ViewportId(helios::core::types::no_init){};
-
-        /**
-         * @brief Returns the raw identifier value.
-         *
-         * @return The 32-bit hash value.
-         */
-        [[nodiscard]] uint32_t value() const noexcept {
-            return id_;
-        }
-
-
-        [[nodiscard]] explicit operator bool() const noexcept {
-            return id_ != 0;
-        }
-
-        /**
-         * @brief Equality comparison operator.
-         */
-        friend constexpr bool operator==(ViewportId, ViewportId) noexcept = default;
-
-        /**
-         * @brief Less-than comparison for ordered containers.
-         *
-         * @param other The ViewportId to compare against.
-         *
-         * @return `true` if this id is less than `other`.
-         */
-        constexpr bool operator<(const ViewportId& other) const noexcept {
-            return id_ < other.id_;
-        }
-
-        /**
-         * @brief Greater-than comparison for ordered containers.
-         *
-         * @param other The ViewportId to compare against.
-         *
-         * @return `true` if this id is greater than `other`.
-         */
-        constexpr bool operator>(const ViewportId& other) const noexcept {
-            return id_ > other.id_;
-        }
-
-    };
-
-}
-
-/**
- * @brief Hash specialization for `ViewportId` to enable use in unordered containers.
- */
-template<>
-struct std::hash<helios::engine::core::data::ViewportId> {
+    struct ViewportIdTag{};
 
     /**
-     * @brief Computes the hash value for a ViewportId.
+     * @brief Strongly-typed identifier for viewports.
      *
-     * @param id The ViewportId to hash.
+     * @details Used to uniquely identify viewports across the rendering
+     * system. Supports compile-time string-based construction via FNV-1a
+     * hashing.
      *
-     * @return The hash value (same as the internal id).
+     * @see helios::core::data::StrongId
      */
-    std::size_t operator()(const helios::engine::core::data::ViewportId& id) const noexcept {
-        return id.value();
-    }
+    using ViewportId = helios::core::data::StrongId<ViewportIdTag, uint32_t>;
 
-};
+}

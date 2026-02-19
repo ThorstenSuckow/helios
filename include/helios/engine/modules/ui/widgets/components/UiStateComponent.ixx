@@ -33,7 +33,7 @@ class UiStateComponent {
          *
          * @param selected True if selected.
          */
-        void setSelected(bool selected) noexcept {
+        void setSelected(const bool selected) noexcept {
             isSelected_ = selected;
         }
 

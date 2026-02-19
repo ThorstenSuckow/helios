@@ -6,12 +6,17 @@ module;
 
 export module helios.engine.mechanics.match.rules.guards.DefaultMatchStateTransitionGuards;
 
-import helios.engine.mechanics.match.types.MatchStateTransitionRequest;
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.runtime.world.Session;
+import helios.engine.runtime.world.GameWorld;
+
+import helios.engine.mechanics.match.types;
+import helios.engine.state.types;
 
 export namespace helios::engine::mechanics::match::rules::guards {
 
+    using namespace helios::engine::mechanics::match::types;
+    using namespace helios::engine::state::types;
     using namespace helios::engine::mechanics::match::types;
 
     /**
@@ -41,10 +46,11 @@ export namespace helios::engine::mechanics::match::rules::guards {
          */
         static bool isPlayerActive(
             helios::engine::runtime::world::UpdateContext& updateContext,
-            const MatchStateTransitionRequest transitionRequest
+            const StateTransitionRequest<MatchState> transitionRequest
         ) {
-            auto playerOpt = updateContext.session().playerEntity();
+            auto playerOpt = updateContext.gameWorld().find(updateContext.session().playerEntityHandle());
             return playerOpt.has_value() && playerOpt->isActive();
+
         }
 
         /**
@@ -57,10 +63,11 @@ export namespace helios::engine::mechanics::match::rules::guards {
          */
         static bool isPlayerInactive(
             helios::engine::runtime::world::UpdateContext& updateContext,
-            const MatchStateTransitionRequest transitionRequest
+            const StateTransitionRequest<MatchState> transitionRequest
         ) {
-            auto playerOpt = updateContext.session().playerEntity();
+            auto playerOpt = updateContext.gameWorld().find(updateContext.session().playerEntityHandle());
             return playerOpt.has_value() && !playerOpt->isActive();
+
         }
 
     };

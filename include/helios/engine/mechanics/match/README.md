@@ -1,26 +1,37 @@
 # helios::engine::mechanics::match
 
-Match state management system for the helios engine.
+Match state management for the helios engine.
 
-This module provides a rule-based state machine for managing match states (e.g., Warmup, PlayerSpawn, Playing) with transitions, listeners, and command-driven state changes.
+This module provides domain-specific types and bindings for managing match states (Warmup, PlayerSpawn, Playing). It uses the generic `helios::engine::state` framework.
+
+## Components
+
+| Component | Description |
+|-----------|-------------|
+| `MatchStateManager` | Type alias for `StateManager<MatchState>` |
+| `MatchState` | Enum defining match/round lifecycle states |
+| `MatchStateTransitionId` | Enum defining valid transition triggers |
 
 ## Submodules
 
 | Submodule | Purpose |
 |-----------|---------|
-| `commands/` | Commands for requesting state transitions |
-| `components/` | Components for storing match state and timer |
-| `dispatcher/` | Dispatchers for routing state commands |
-| `listeners/` | Listeners for reacting to state transitions |
+| `rules/` | Default transition rules and guards |
 | `systems/` | Systems for match flow and rules |
-| `types/` | Core types, enums, and data structures |
+| `types/` | Core types, enums, and type trait specializations |
 
 ## Architecture
 
-1. **MatchStateManager** holds the transition rules and processes state commands
-2. **MatchStateCommand** encapsulates a transition request
-3. **MatchStateTransitionRule** defines valid from -> to transitions with optional guards
-4. **MatchStateTransitionListener** implementations react to state changes
+`MatchStateManager` is a type alias for `StateManager<MatchState>`:
+
+```cpp
+using MatchStateManager = helios::engine::state::StateManager<types::MatchState>;
+```
+
+The generic `StateManager` provides:
+- Rule-based transitions with optional guards
+- Listener notifications on state changes
+- Command-driven state changes via `StateCommand<MatchState>`
 
 ## Match Flow
 
@@ -47,15 +58,24 @@ This module provides a rule-based state machine for managing match states (e.g.,
 ## Usage
 
 ```cpp
-// Create manager
-auto manager = std::make_unique<MatchStateManager>();
+using namespace helios::engine::mechanics::match;
+using namespace helios::engine::state;
+using namespace helios::engine::state::commands;
+
+// Create manager with rules
+auto manager = std::make_unique<MatchStateManager>(matchStateRules);
 
 // Add listeners
-manager->addMatchStateListener(std::make_unique<PlayerSpawnListener>(playerObject));
+manager->addStateListener(std::make_unique<LambdaStateListener<types::MatchState>>(
+    /* onExit, onTransition, onEnter callbacks */
+));
 
 // Submit transition via command
-commandBuffer.add<MatchStateCommand>(
-    MatchStateTransitionRequest(MatchState::Warmup, MatchStateTransitionId::PlayerSpawnRequested)
+commandBuffer.add<StateCommand<types::MatchState>>(
+    StateTransitionRequest<types::MatchState>{
+        types::MatchState::Warmup,
+        types::MatchStateTransitionId::PlayerSpawnRequested
+    }
 );
 ```
 
@@ -64,7 +84,7 @@ commandBuffer.add<MatchStateCommand>(
 <details>
 <summary>Doxygen</summary><p>
 @namespace helios::engine::mechanics::match
-@brief Match state management system for the helios engine.
-@details Provides a rule-based state machine for managing match states with transitions, listeners, and command-driven state changes.
+@brief Match state management for the helios engine.
+@details Provides domain-specific types and bindings for managing match states using the generic helios::engine::state framework.
 </p></details>
 

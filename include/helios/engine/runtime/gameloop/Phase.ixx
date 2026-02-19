@@ -11,6 +11,7 @@ export module helios.engine.runtime.gameloop.Phase;
 
 import helios.engine.runtime.gameloop.PassCommitListener;
 import helios.engine.runtime.gameloop.Pass;
+import helios.engine.runtime.gameloop.TypedPass;
 
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.runtime.world.GameWorld;
@@ -24,6 +25,7 @@ import helios.engine.mechanics.gamestate.types;
 
 export namespace helios::engine::runtime::gameloop {
 
+    using namespace helios::engine::mechanics::gamestate::types;
     class GameLoop;
 
 
@@ -121,14 +123,10 @@ export namespace helios::engine::runtime::gameloop {
         void update(helios::engine::runtime::world::UpdateContext& updateContext){
 
             for (auto& pass : passEntries_) {
-                // every pass contains systems that are updated here
-                if (helios::engine::mechanics::gamestate::types::hasFlag(
-                    pass->runsIn(),
-                    updateContext.session().gameState())
-                ) {
+
+                if (pass->shouldRun(updateContext)) {
                     pass->update(updateContext);
-                    notifyPassCommitListeners(
-                        pass->commitPoint(), updateContext);
+                    notifyPassCommitListeners(pass->commitPoint(), updateContext);
                 }
 
             }
@@ -212,22 +210,25 @@ export namespace helios::engine::runtime::gameloop {
         }
 
         /**
-         * @brief Creates and adds a new pass to this phase.
+         * @brief Creates and adds a new typed pass to this phase.
          *
-         * @details The optional gameState parameter specifies in which game states this
-         * pass should execute. By default, passes run in all states (GameState::Any).
-         * Passes are skipped if the current game state does not match the configured mask.
+         * @details The state parameter specifies in which states this pass
+         * should execute. Passes are skipped if the current state does not
+         * match the configured mask (using bitwise AND).
          *
-         * @param gameState The game state(s) in which this pass should run.
+         * @tparam StateType The state enum type (e.g., GameState, MatchState).
+         *
+         * @param t The state mask specifying when this pass should run.
          *
          * @return Reference to the newly created Pass for method chaining.
          *
-         * @see Pass::runsIn()
-         * @see GameState
+         * @see TypedPass
+         * @see Session::state()
          */
-        Pass& addPass(const helios::engine::mechanics::gamestate::types::GameState gameState = helios::engine::mechanics::gamestate::types::GameState::Any) {
+        template<typename StateType>
+        Pass& addPass(const StateType t) {//    const helios::engine::mechanics::gamestate::types::GameState gameState = helios::engine::mechanics::gamestate::types::GameState::Any) {
 
-            auto entry = std::make_unique<Pass>(*this, gameState);
+            auto entry = std::make_unique<TypedPass<StateType>>(*this, t);
             auto* raw = entry.get();
             passEntries_.emplace_back(std::move(entry));
 

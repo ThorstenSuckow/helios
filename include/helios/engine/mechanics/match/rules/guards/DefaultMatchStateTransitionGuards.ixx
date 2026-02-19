@@ -48,9 +48,9 @@ export namespace helios::engine::mechanics::match::rules::guards {
             helios::engine::runtime::world::UpdateContext& updateContext,
             const StateTransitionRequest<MatchState> transitionRequest
         ) {
-            if (auto playerOpt = updateContext.gameWorld().find(updateContext.session().playerEntityHandle())) {
-                return playerOpt.has_value() && playerOpt->isActive();
-            }
+            auto playerOpt = updateContext.gameWorld().find(updateContext.session().playerEntityHandle());
+            return playerOpt.has_value() && playerOpt->isActive();
+
         }
 
         /**
@@ -65,9 +65,9 @@ export namespace helios::engine::mechanics::match::rules::guards {
             helios::engine::runtime::world::UpdateContext& updateContext,
             const StateTransitionRequest<MatchState> transitionRequest
         ) {
-            if (auto playerOpt = updateContext.gameWorld().find(updateContext.session().playerEntityHandle())) {
-                return playerOpt.has_value() && !playerOpt->isActive();
-            }
+            auto playerOpt = updateContext.gameWorld().find(updateContext.session().playerEntityHandle());
+            return playerOpt.has_value() && !playerOpt->isActive();
+
         }
 
     };

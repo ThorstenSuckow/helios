@@ -107,18 +107,7 @@ export namespace helios::engine::runtime::world {
          * @brief Resets the session state.
          */
         void reset() {
-            assert(false && "TBD");
-        }
 
-        /**
-         * @brief Checks if the game is currently paused.
-         *
-         * @return True if GameState is Paused.
-         */
-        [[nodiscard]] bool isPaused() const noexcept {
-            auto* gpc = gameObject_.get<StateComponent<GameState>>();
-
-            return gpc && gpc->state() == GameState::Paused;
         }
 
         /**

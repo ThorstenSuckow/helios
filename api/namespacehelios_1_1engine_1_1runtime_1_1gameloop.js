@@ -4,6 +4,7 @@ var namespacehelios_1_1engine_1_1runtime_1_1gameloop =
     [ "Pass", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass" ],
     [ "PassCommitListener", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1PassCommitListener.html", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1PassCommitListener" ],
     [ "Phase", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase" ],
+    [ "TypedPass", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1TypedPass.html", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1TypedPass" ],
     [ "CommitPoint", "namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8ec", [
       [ "None", "namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8eca6adf97f83acf6453d4a6a4b1070f3754", null ],
       [ "PassEvents", "namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8ecad42654403d0dfa55915ee7ba7fd7af0f", null ],

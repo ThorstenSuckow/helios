@@ -2,12 +2,13 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>helios::engine::runtime::world::Manager</compoundname>
-    <derivedcompoundref refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateManager" prot="public" virt="non-virtual">helios::engine::mechanics::gamestate::GameStateManager</derivedcompoundref>
-    <derivedcompoundref refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1MatchStateManager" prot="public" virt="non-virtual">helios::engine::mechanics::match::MatchStateManager</derivedcompoundref>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1state_1_1StateManager" prot="public" virt="non-virtual">helios::engine::state::StateManager&lt; types::GameState &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1state_1_1StateManager" prot="public" virt="non-virtual">helios::engine::state::StateManager&lt; helios::engine::mechanics::match::types::MatchState &gt;</derivedcompoundref>
     <derivedcompoundref refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager" prot="public" virt="non-virtual">helios::engine::mechanics::scoring::ScorePoolManager</derivedcompoundref>
     <derivedcompoundref refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager" prot="public" virt="non-virtual">helios::engine::modules::ui::UiActionCommandManager</derivedcompoundref>
     <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager" prot="public" virt="non-virtual">helios::engine::runtime::pooling::GameObjectPoolManager</derivedcompoundref>
     <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" prot="public" virt="non-virtual">helios::engine::runtime::spawn::SpawnManager</derivedcompoundref>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1state_1_1StateManager" prot="public" virt="non-virtual">helios::engine::state::StateManager&lt; StateType &gt;</derivedcompoundref>
     <sectiondef kind="protected-attrib">
       <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1aaa2bc033955a07d4d97592eb2f817659" prot="protected" static="no" mutable="no">
         <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> *</type>
@@ -80,12 +81,13 @@
         <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld)</argsstring>
         <name>init</name>
         <qualifiedname>helios::engine::runtime::world::Manager::init</qualifiedname>
-        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateManager_1a180050fcd9494bf9b61f9a14cda5fe68">init</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1MatchStateManager_1a2e08513fdcbb8a9154e1b7c4895463d2">init</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a04f62fb1b24bfc389acaa48fdd31293e">init</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager_1a376734356261cdf9d67af7bc03b15698">init</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a7f5ef214b56eba5241a20de5d964eff2">init</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1aeab1d9b1aabd174751fa20937a9841f2">init</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1state_1_1StateManager_1a176a52f4173536aa3fde8324f1f72cb6">init</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1state_1_1StateManager_1a176a52f4173536aa3fde8324f1f72cb6">init</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1state_1_1StateManager_1a176a52f4173536aa3fde8324f1f72cb6">init</reimplementedby>
         <param>
           <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
           <declname>gameWorld</declname>
@@ -116,12 +118,13 @@
         <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld, helios::engine::runtime::world::UpdateContext &amp;update_context) noexcept=0</argsstring>
         <name>flush</name>
         <qualifiedname>helios::engine::runtime::world::Manager::flush</qualifiedname>
-        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateManager_1a09fbe557da332c3210f87162f13b36e7">flush</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1MatchStateManager_1a2534616b1f41a27fc06e2356cc80f721">flush</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a05625cf859f18873e47f79e7e9f9816e">flush</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager_1aba013e3e716888f010cedcde9534e7cf">flush</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1ab69a353b11e4ee5a834dca810f3239e9">flush</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a345caf68f5d311a54f74a921b933705e">flush</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1state_1_1StateManager_1af596b7158c7753e319d8030c3faad9b1">flush</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1state_1_1StateManager_1af596b7158c7753e319d8030c3faad9b1">flush</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1state_1_1StateManager_1af596b7158c7753e319d8030c3faad9b1">flush</reimplementedby>
         <param>
           <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
           <declname>gameWorld</declname>
@@ -164,11 +167,12 @@
         <argsstring>()</argsstring>
         <name>reset</name>
         <qualifiedname>helios::engine::runtime::world::Manager::reset</qualifiedname>
-        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateManager_1a4f4ff260e025e15f61e726736e889c26">reset</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1MatchStateManager_1a7f5b316b1070ab8097b9de0c9212f866">reset</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1add6f1d0c59fdfbab9a6e94e9ded439ac">reset</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a1f3ad93fd926408196bca49a9707757e">reset</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1afd3944ee30a76fd530a1d0e832269edf">reset</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1state_1_1StateManager_1abd21bd2f4c2738a52d1854d3389f3488">reset</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1state_1_1StateManager_1abd21bd2f4c2738a52d1854d3389f3488">reset</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1state_1_1StateManager_1abd21bd2f4c2738a52d1854d3389f3488">reset</reimplementedby>
         <briefdescription>
 <para>Resets the manager to its initial state. </para>
         </briefdescription>
@@ -204,18 +208,6 @@
 </para>
     </detaileddescription>
     <inheritancegraph>
-      <node id="2">
-        <label>helios::engine::mechanics::gamestate::GameStateManager</label>
-        <link refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateManager"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="3">
-        <label>helios::engine::mechanics::match::MatchStateManager</label>
-        <link refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1MatchStateManager"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="4">
         <label>helios::engine::mechanics::scoring::ScorePoolManager</label>
         <link refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager"/>
@@ -244,33 +236,43 @@
         <label>helios::engine::runtime::world::Manager</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager"/>
       </node>
+      <node id="8">
+        <label>helios::engine::state::StateManager&lt; StateType &gt;</label>
+        <link refid="classhelios_1_1engine_1_1state_1_1StateManager"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::state::StateManager&lt; helios::engine::mechanics::match::types::MatchState &gt;</label>
+        <link refid="classhelios_1_1engine_1_1state_1_1StateManager"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios::engine::state::StateManager&lt; types::GameState &gt;</label>
+        <link refid="classhelios_1_1engine_1_1state_1_1StateManager"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="10">
+      <node id="8">
         <label>helios::engine::ecs::EntityManager</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1EntityManager"/>
       </node>
-      <node id="9">
+      <node id="7">
         <label>helios::engine::ecs::EntityRegistry</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry"/>
-      </node>
-      <node id="5">
-        <label>helios::engine::mechanics::gamestate::GameStateCommandHandler</label>
-        <link refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateCommandHandler"/>
-      </node>
-      <node id="6">
-        <label>helios::engine::mechanics::match::MatchStateCommandHandler</label>
-        <link refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1MatchStateCommandHandler"/>
       </node>
       <node id="4">
         <label>helios::engine::mechanics::scoring::ScoreCommandHandler</label>
         <link refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler"/>
       </node>
-      <node id="7">
+      <node id="5">
         <label>helios::engine::modules::ui::UiActionCommandHandler</label>
         <link refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandHandler"/>
       </node>
-      <node id="8">
+      <node id="6">
         <label>helios::engine::runtime::spawn::SpawnCommandHandlerRegistry</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandlerRegistry"/>
       </node>
@@ -284,24 +286,18 @@
           <edgelabel>scoreCommandHandler_</edgelabel>
         </childnode>
         <childnode refid="5" relation="usage">
-          <edgelabel>gameStateCommandHandler_</edgelabel>
-        </childnode>
-        <childnode refid="6" relation="usage">
-          <edgelabel>matchStateCommandHandler_</edgelabel>
-        </childnode>
-        <childnode refid="7" relation="usage">
           <edgelabel>uiActionCommandHandler_</edgelabel>
         </childnode>
-        <childnode refid="8" relation="usage">
+        <childnode refid="6" relation="usage">
           <edgelabel>spawnCommandHandlerRegistry_</edgelabel>
         </childnode>
-        <childnode refid="9" relation="usage">
+        <childnode refid="7" relation="usage">
           <edgelabel>entityRegistry_</edgelabel>
         </childnode>
-        <childnode refid="10" relation="usage">
+        <childnode refid="8" relation="usage">
           <edgelabel>em_</edgelabel>
         </childnode>
-        <childnode refid="11" relation="usage">
+        <childnode refid="9" relation="usage">
           <edgelabel>session_</edgelabel>
         </childnode>
       </node>
@@ -312,7 +308,7 @@
           <edgelabel>gameWorld_</edgelabel>
         </childnode>
       </node>
-      <node id="11">
+      <node id="9">
         <label>helios::engine::runtime::world::Session</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session"/>
       </node>

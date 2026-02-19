@@ -144,9 +144,19 @@ Additional Inherited Members</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Handles gamepad input for menu navigation. </p>
-<p>Processes Up/Down input to change selection and A button to activate the selected menu item. Updates UiStateComponent selection state and issues UiActionCommand on activation. </p>
+<p>Processes Up/Down input to change selection and A button to activate the selected menu item. Updates <a class="el" href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiStateComponent.html" title="Tracks interaction state for UI widgets.">UiStateComponent</a> selection state and issues UiActionCommand on activation.</p>
+<p>## Input Handling</p>
+<ul>
+<li>**Up/Down**: Navigate through menu items</li>
+<li>**A Button**: Activate selected item (triggers UiActionCommand)</li>
+</ul>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1MenuComponent.html" title="Manages a collection of menu items for UI navigation.">MenuComponent</a> </dd>
+<dd>
+<a class="el" href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem.html" title="Controls menu visibility based on game and match state.">MenuDisplaySystem</a> </dd>
+<dd>
+UiActionCommand </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="MenuNavigationSystem_8ixx_source.html#l00043">43</a> of file <a class="el" href="MenuNavigationSystem_8ixx_source.html">MenuNavigationSystem.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MenuNavigationSystem_8ixx_source.html#l00065">65</a> of file <a class="el" href="MenuNavigationSystem_8ixx_source.html">MenuNavigationSystem.ixx</a>.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="a91a710a4f26f25df573afdad02d17ecd" name="a91a710a4f26f25df573afdad02d17ecd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a91a710a4f26f25df573afdad02d17ecd">&#9670;&#160;</a></span>update()</h2>
@@ -172,6 +182,7 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Processes menu navigation input. </p>
+<p>Finds the currently focused menu item, handles Up/Down navigation, and triggers UiActionCommand when the A button is pressed on an item with a <a class="el" href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiActionComponent.html" title="Associates an action identifier with a UI element.">UiActionComponent</a>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">updateContext</td><td>The current frame's update context. </td></tr>
@@ -181,14 +192,14 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classhelios_1_1engine_1_1ecs_1_1System.html#a4e9969641985fa04db6214332c88605b">helios::engine::ecs::System</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="MenuNavigationSystem_8ixx_source.html#l00053">53</a> of file <a class="el" href="MenuNavigationSystem_8ixx_source.html">MenuNavigationSystem.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MenuNavigationSystem_8ixx_source.html#l00119">119</a> of file <a class="el" href="MenuNavigationSystem_8ixx_source.html">MenuNavigationSystem.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="Gamepad_8ixx_source.html#l00032">helios::input::types::A</a>, <a class="el" href="Gamepad_8ixx_source.html#l00067">helios::input::types::Down</a>, <a class="el" href="System_8ixx_source.html#l00048">helios::engine::ecs::System::gameWorld_</a>, <a class="el" href="MenuComponent_8ixx_source.html#l00095">helios::engine::modules::ui::widgets::components::MenuComponent::menuItems()</a>, and <a class="el" href="Gamepad_8ixx_source.html#l00062">helios::input::types::Up</a>.</p>
+<p class="reference">References <a class="el" href="Gamepad_8ixx_source.html#l00032">helios::input::types::A</a>, <a class="el" href="CommandBuffer_8ixx_source.html#l00218">helios::engine::runtime::messaging::command::CommandBuffer::add()</a>, <a class="el" href="UpdateContext_8ixx_source.html#l00217">helios::engine::runtime::world::UpdateContext::commandBuffer()</a>, <a class="el" href="Gamepad_8ixx_source.html#l00067">helios::input::types::Down</a>, <a class="el" href="InputSnapshot_8ixx_source.html#l00075">helios::input::InputSnapshot::gamepadState()</a>, <a class="el" href="System_8ixx_source.html#l00048">helios::engine::ecs::System::gameWorld_</a>, <a class="el" href="UpdateContext_8ixx_source.html#l00208">helios::engine::runtime::world::UpdateContext::inputSnapshot()</a>, <a class="el" href="MenuComponent_8ixx_source.html#l00126">helios::engine::modules::ui::widgets::components::MenuComponent::menuItems()</a>, <a class="el" href="MenuComponent_8ixx_source.html#l00106">helios::engine::modules::ui::widgets::components::MenuComponent::selectedIndex()</a>, and <a class="el" href="Gamepad_8ixx_source.html#l00062">helios::input::types::Up</a>.</p>
 <div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-2-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuNavigationSystem_a91a710a4f26f25df573afdad02d17ecd_cgraph.svg" width="468" height="80"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuNavigationSystem_a91a710a4f26f25df573afdad02d17ecd_cgraph.svg" width="486" height="446"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>

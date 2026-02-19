@@ -5,12 +5,12 @@
     <innerfile refid="StateToViewportPolicyUpdateSystem_8ixx">StateToViewportPolicyUpdateSystem.ixx</innerfile>
     <innerclass refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1viewport_1_1systems_1_1StateToViewportPolicyUpdateSystem" prot="public">helios::engine::modules::rendering::viewport::systems::StateToViewportPolicyUpdateSystem</innerclass>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1rendering_1_1viewport_1_1systems_1_1StateToViewportPolicyUpdateSystem_1a31d36afa4f42109d57b63b509f4573f9" prot="private" static="no" mutable="no">
-        <type>StateToViewportPolicy</type>
-        <definition>StateToViewportPolicy helios::engine::modules::rendering::viewport::systems::StateToViewportPolicyUpdateSystem::stateToViewportPolicy_</definition>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1rendering_1_1viewport_1_1systems_1_1StateToViewportPolicyUpdateSystem_1a012f18ed6f1c702def4d122bf7562a28" prot="private" static="no" mutable="no">
+        <type>StateToIdMapPair&lt; StateLft, StateRgt, ViewportId &gt;</type>
+        <definition>StateToIdMapPair&lt;StateLft, StateRgt, ViewportId&gt; helios::engine::modules::rendering::viewport::systems::StateToViewportPolicyUpdateSystem&lt; StateLft, StateRgt &gt;::stateToIdMapPair_</definition>
         <argsstring></argsstring>
-        <name>stateToViewportPolicy_</name>
-        <qualifiedname>helios::engine::modules::rendering::viewport::systems::StateToViewportPolicyUpdateSystem::stateToViewportPolicy_</qualifiedname>
+        <name>stateToIdMapPair_</name>
+        <qualifiedname>helios::engine::modules::rendering::viewport::systems::StateToViewportPolicyUpdateSystem::stateToIdMapPair_</qualifiedname>
         <briefdescription>
 <para>Policy defining viewport-to-state mappings. </para>
         </briefdescription>
@@ -18,30 +18,30 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/rendering/viewport/systems/StateToViewportPolicyUpdateSystem.ixx" line="46" column="31" bodyfile="/tmp/h/include/helios/engine/modules/rendering/viewport/systems/StateToViewportPolicyUpdateSystem.ixx" bodystart="46" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/engine/modules/rendering/viewport/systems/StateToViewportPolicyUpdateSystem.ixx" line="62" column="26" bodyfile="/tmp/h/include/helios/engine/modules/rendering/viewport/systems/StateToViewportPolicyUpdateSystem.ixx" bodystart="62" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1rendering_1_1viewport_1_1systems_1_1StateToViewportPolicyUpdateSystem_1afba546012752e71eba5c309017d4fee0" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1rendering_1_1viewport_1_1systems_1_1StateToViewportPolicyUpdateSystem_1a01fce5d6f2611e512122a656217d4601" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
-        <definition>helios::engine::modules::rendering::viewport::systems::StateToViewportPolicyUpdateSystem::StateToViewportPolicyUpdateSystem</definition>
-        <argsstring>(StateToViewportPolicy stateToViewportPolicy)</argsstring>
+        <definition>helios::engine::modules::rendering::viewport::systems::StateToViewportPolicyUpdateSystem&lt; StateLft, StateRgt &gt;::StateToViewportPolicyUpdateSystem</definition>
+        <argsstring>(StateToIdMapPair&lt; StateLft, StateRgt, ViewportId &gt; stateToIdMapPair)</argsstring>
         <name>StateToViewportPolicyUpdateSystem</name>
         <qualifiedname>helios::engine::modules::rendering::viewport::systems::StateToViewportPolicyUpdateSystem::StateToViewportPolicyUpdateSystem</qualifiedname>
         <param>
-          <type>StateToViewportPolicy</type>
-          <declname>stateToViewportPolicy</declname>
+          <type>StateToIdMapPair&lt; StateLft, StateRgt, ViewportId &gt;</type>
+          <declname>stateToIdMapPair</declname>
         </param>
         <briefdescription>
-<para>Constructs the system with a state-to-viewport policy. </para>
+<para>Constructs the system with a state-to-ID map pair. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>stateToViewportPolicy</parametername>
+<parametername>stateToIdMapPair</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Policy defining which viewports are active for each game/match state combination. </para>
+<para>Policy mapping states to viewport IDs. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -49,11 +49,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/rendering/viewport/systems/StateToViewportPolicyUpdateSystem.ixx" line="56" column="18" bodyfile="/tmp/h/include/helios/engine/modules/rendering/viewport/systems/StateToViewportPolicyUpdateSystem.ixx" bodystart="56" bodyend="57"/>
+        <location file="/tmp/h/include/helios/engine/modules/rendering/viewport/systems/StateToViewportPolicyUpdateSystem.ixx" line="71" column="18" bodyfile="/tmp/h/include/helios/engine/modules/rendering/viewport/systems/StateToViewportPolicyUpdateSystem.ixx" bodystart="71" bodyend="72"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1rendering_1_1viewport_1_1systems_1_1StateToViewportPolicyUpdateSystem_1abb23105daab5014988c90a05fe894497" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1rendering_1_1viewport_1_1systems_1_1StateToViewportPolicyUpdateSystem_1a4cdd772266a2f5817b020ff76c9d833c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>void</type>
-        <definition>void helios::engine::modules::rendering::viewport::systems::StateToViewportPolicyUpdateSystem::update</definition>
+        <definition>void helios::engine::modules::rendering::viewport::systems::StateToViewportPolicyUpdateSystem&lt; StateLft, StateRgt &gt;::update</definition>
         <argsstring>(helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept override</argsstring>
         <name>update</name>
         <qualifiedname>helios::engine::modules::rendering::viewport::systems::StateToViewportPolicyUpdateSystem::update</qualifiedname>
@@ -63,9 +63,10 @@
           <declname>updateContext</declname>
         </param>
         <briefdescription>
-<para>Updates the session&apos;s active viewport IDs based on current state. </para>
+<para>Updates the session&apos;s active viewport IDs. </para>
         </briefdescription>
         <detaileddescription>
+<para>Clears the current viewport IDs and sets them based on the current game and match state combination.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>updateContext</parametername>
@@ -79,7 +80,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/rendering/viewport/systems/StateToViewportPolicyUpdateSystem.ixx" line="64" column="14" bodyfile="/tmp/h/include/helios/engine/modules/rendering/viewport/systems/StateToViewportPolicyUpdateSystem.ixx" bodystart="64" bodyend="79"/>
+        <location file="/tmp/h/include/helios/engine/modules/rendering/viewport/systems/StateToViewportPolicyUpdateSystem.ixx" line="82" column="14" bodyfile="/tmp/h/include/helios/engine/modules/rendering/viewport/systems/StateToViewportPolicyUpdateSystem.ixx" bodystart="82" bodyend="97"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

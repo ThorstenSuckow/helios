@@ -103,46 +103,68 @@ $(function() {
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">helios::engine::runtime::gameloop::Pass Class Reference<span class="mlabels"><span class="mlabel export">export</span></span><div class="ingroups">module <a class="el" href="module__helios_8engine_8runtime_8gameloop_8Pass.html">helios.engine.runtime.gameloop.Pass</a></div></div></div>
+  <div class="headertitle"><div class="title">helios::engine::runtime::gameloop::Pass Class Reference<span class="mlabels"><span class="mlabel abstract">abstract</span><span class="mlabel export">export</span></span><div class="ingroups">module <a class="el" href="module__helios_8engine_8runtime_8gameloop_8Pass.html">helios.engine.runtime.gameloop.Pass</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Represents a single pass within a game loop phase.  
+<p>Abstract base class for game loop passes.  
  <a href="#details">More...</a></p>
+<div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Inheritance diagram for helios::engine::runtime::gameloop::Pass:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass__inherit__graph.svg" width="183" height="154"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Collaboration diagram for helios::engine::runtime::gameloop::Pass:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass__coll__graph.svg" width="218" height="162"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6d67ea5a8520f5e9d0dc3b14e6239f45" id="r_a6d67ea5a8520f5e9d0dc3b14e6239f45"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6d67ea5a8520f5e9d0dc3b14e6239f45">Pass</a> (<a class="el" href="#af8f0775327faeea59ae852fc781d44bf">Phase</a> &amp;owner, const <a class="el" href="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a8e0bcae228fdf9f4cb489e7f912d80be">helios::engine::mechanics::gamestate::types::GameState</a> gameState)</td></tr>
-<tr class="memdesc:a6d67ea5a8520f5e9d0dc3b14e6239f45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html" title="Represents a single pass within a game loop phase.">Pass</a> with a reference to its owning <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html" title="Represents a phase in the game loop containing multiple passes.">Phase</a>.  <br /></td></tr>
+<tr class="memitem:ae7a1dd86b9d60b2ff6e01e57da7e993a" id="r_ae7a1dd86b9d60b2ff6e01e57da7e993a"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae7a1dd86b9d60b2ff6e01e57da7e993a">~Pass</a> ()=default</td></tr>
+<tr class="memitem:abc1e3e3598668d49320ce2dd2b7a9e2e" id="r_abc1e3e3598668d49320ce2dd2b7a9e2e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abc1e3e3598668d49320ce2dd2b7a9e2e">update</a> (<a class="el" href="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a> &amp;updateContext)=0</td></tr>
+<tr class="memdesc:abc1e3e3598668d49320ce2dd2b7a9e2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates all systems in this pass.  <br /></td></tr>
+<tr class="memitem:a63111fee9ce176b86e08133d3c1ae5b4" id="r_a63111fee9ce176b86e08133d3c1ae5b4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a63111fee9ce176b86e08133d3c1ae5b4">init</a> (<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">helios::engine::runtime::world::GameWorld</a> &amp;gameWorld)=0</td></tr>
+<tr class="memdesc:a63111fee9ce176b86e08133d3c1ae5b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes all systems in this pass.  <br /></td></tr>
+<tr class="memitem:a5c6fbf481a72dde9ce1836df322ce1a3" id="r_a5c6fbf481a72dde9ce1836df322ce1a3"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html">Phase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5c6fbf481a72dde9ce1836df322ce1a3">addCommitPoint</a> (const <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8ec">CommitPoint</a> <a class="el" href="#a5d87f9a34e42378dfbdea76367416646">commitPoint</a>=<a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8ecad42654403d0dfa55915ee7ba7fd7af0f">CommitPoint::PassEvents</a>)=0</td></tr>
+<tr class="memdesc:a5c6fbf481a72dde9ce1836df322ce1a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a commit point and returns the owning <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html" title="Represents a phase in the game loop containing multiple passes.">Phase</a>.  <br /></td></tr>
+<tr class="memitem:a5d87f9a34e42378dfbdea76367416646" id="r_a5d87f9a34e42378dfbdea76367416646"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8ec">CommitPoint</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5d87f9a34e42378dfbdea76367416646">commitPoint</a> () const noexcept=0</td></tr>
+<tr class="memdesc:a5d87f9a34e42378dfbdea76367416646"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the configured commit point.  <br /></td></tr>
+<tr class="memitem:ad67143a03191d6f19c182f1a0bb6a815" id="r_ad67143a03191d6f19c182f1a0bb6a815"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad67143a03191d6f19c182f1a0bb6a815">shouldRun</a> (<a class="el" href="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a> &amp;updateContext) const noexcept=0</td></tr>
+<tr class="memdesc:ad67143a03191d6f19c182f1a0bb6a815"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines if this pass should execute.  <br /></td></tr>
 <tr class="memitem:a903a70bb72f46a10ecaee1ab7b89dcf1" id="r_a903a70bb72f46a10ecaee1ab7b89dcf1"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... Args&gt; <br />
 requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1ecs_1_1System.html">helios::engine::ecs::System</a>, T&gt;</td></tr>
-<tr class="memitem:a903a70bb72f46a10ecaee1ab7b89dcf1 template"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a6d67ea5a8520f5e9d0dc3b14e6239f45">Pass</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a903a70bb72f46a10ecaee1ab7b89dcf1">addSystem</a> (Args &amp;&amp;... args)</td></tr>
+<tr class="memitem:a903a70bb72f46a10ecaee1ab7b89dcf1 template"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html">Pass</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a903a70bb72f46a10ecaee1ab7b89dcf1">addSystem</a> (Args &amp;&amp;... args)</td></tr>
 <tr class="memdesc:a903a70bb72f46a10ecaee1ab7b89dcf1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a system of type T to this pass.  <br /></td></tr>
-<tr class="memitem:a36ee909a78fabac1cf997d98b0f8438c" id="r_a36ee909a78fabac1cf997d98b0f8438c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#af8f0775327faeea59ae852fc781d44bf">Phase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a36ee909a78fabac1cf997d98b0f8438c">addCommitPoint</a> (const <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8ec">CommitPoint</a> <a class="el" href="#abe0ce572c3e6b983a31d458542dd113c">commitPoint</a>=<a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8ecad42654403d0dfa55915ee7ba7fd7af0f">CommitPoint::PassEvents</a>)</td></tr>
-<tr class="memdesc:a36ee909a78fabac1cf997d98b0f8438c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Marks this pass with a commit point and returns the owning <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html" title="Represents a phase in the game loop containing multiple passes.">Phase</a>.  <br /></td></tr>
-<tr class="memitem:abe0ce572c3e6b983a31d458542dd113c" id="r_abe0ce572c3e6b983a31d458542dd113c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8ec">CommitPoint</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abe0ce572c3e6b983a31d458542dd113c">commitPoint</a> () const noexcept</td></tr>
-<tr class="memdesc:abe0ce572c3e6b983a31d458542dd113c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the configured commit point for this pass.  <br /></td></tr>
-<tr class="memitem:a7475d435aa819840637eb6799421a12a" id="r_a7475d435aa819840637eb6799421a12a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a8e0bcae228fdf9f4cb489e7f912d80be">helios::engine::mechanics::gamestate::types::GameState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7475d435aa819840637eb6799421a12a">runsIn</a> ()</td></tr>
-<tr class="memdesc:a7475d435aa819840637eb6799421a12a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the game state(s) in which this pass executes.  <br /></td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-friends" class="groupheader"><a id="friends" name="friends"></a>
-Friends</h2></td></tr>
-<tr class="memitem:af8f0775327faeea59ae852fc781d44bf" id="r_af8f0775327faeea59ae852fc781d44bf"><td class="memItemLeft" align="right" valign="top"><a id="af8f0775327faeea59ae852fc781d44bf" name="af8f0775327faeea59ae852fc781d44bf"></a>
-class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af8f0775327faeea59ae852fc781d44bf">helios::engine::runtime::gameloop::Phase</a></td></tr>
+<tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a250ed9ad716af2b60d3af697cc4bd415" id="r_a250ed9ad716af2b60d3af697cc4bd415"><td class="memItemLeft" align="right" valign="top"><a id="a250ed9ad716af2b60d3af697cc4bd415" name="a250ed9ad716af2b60d3af697cc4bd415"></a>
+<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry.html">helios::engine::runtime::world::SystemRegistry</a>&#160;</td><td class="memItemRight" valign="bottom"><b>systemRegistry_</b> {}</td></tr>
+<tr class="memdesc:a250ed9ad716af2b60d3af697cc4bd415"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registry holding all systems for this pass. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Represents a single pass within a game loop phase. </p>
-<p>A <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html" title="Represents a single pass within a game loop phase.">Pass</a> contains a registry of systems that are executed sequentially during the game loop update. Passes can be configured with a commit point to synchronize events between passes.</p>
-<p>Systems are added to a pass using the fluent `add&lt;T&gt;()` method, and a commit point can be added using `addCommitPoint()`.</p>
-<p>Example usage: ```cpp gameLoop.phase(PhaseType::Main) .addPass() .add&lt;MovementSystem&gt;() .add&lt;PhysicsSystem&gt;() .<a class="el" href="#a36ee909a78fabac1cf997d98b0f8438c" title="Marks this pass with a commit point and returns the owning Phase.">addCommitPoint()</a> .addPass() .add&lt;CollisionSystem&gt;(); ```</p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html" title="Represents a phase in the game loop containing multiple passes.">Phase</a> </dd>
+<div class="textblock"><p>Abstract base class for game loop passes. </p>
+<p>A <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html" title="Abstract base class for game loop passes.">Pass</a> represents a logical grouping of systems executed sequentially within a <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html" title="Represents a phase in the game loop containing multiple passes.">Phase</a>. Concrete implementations (<a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1TypedPass.html" title="State-filtered pass that only executes in specific states.">TypedPass</a>) add state-based filtering via <a class="el" href="#ad67143a03191d6f19c182f1a0bb6a815" title="Determines if this pass should execute.">shouldRun()</a>.</p>
+<p>## Key Features</p>
+<ul>
+<li>**System Registration:** Systems are added via <a class="el" href="#a903a70bb72f46a10ecaee1ab7b89dcf1" title="Adds a system of type T to this pass.">addSystem&lt;T&gt;()</a></li>
+<li>**Commit Points:** Control when events/commands are synchronized</li>
+<li>**State Filtering:** Passes can be skipped based on game state</li>
+</ul>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1TypedPass.html" title="State-filtered pass that only executes in specific states.">TypedPass</a> </dd>
+<dd>
+<a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html" title="Represents a phase in the game loop containing multiple passes.">Phase</a> </dd>
 <dd>
 System </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Pass_8ixx_source.html#l00053">53</a> of file <a class="el" href="Pass_8ixx_source.html">Pass.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Pass_8ixx_source.html#l00046">46</a> of file <a class="el" href="Pass_8ixx_source.html">Pass.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a6d67ea5a8520f5e9d0dc3b14e6239f45" name="a6d67ea5a8520f5e9d0dc3b14e6239f45"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6d67ea5a8520f5e9d0dc3b14e6239f45">&#9670;&#160;</a></span>Pass()</h2>
+<a id="ae7a1dd86b9d60b2ff6e01e57da7e993a" name="ae7a1dd86b9d60b2ff6e01e57da7e993a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7a1dd86b9d60b2ff6e01e57da7e993a">&#9670;&#160;</a></span>~Pass()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -151,54 +173,24 @@ System </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">helios::engine::runtime::gameloop::Pass::Pass </td>
+          <td class="memname">virtual helios::engine::runtime::gameloop::Pass::~Pass </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#af8f0775327faeea59ae852fc781d44bf">Phase</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>owner</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a8e0bcae228fdf9f4cb489e7f912d80be">helios::engine::mechanics::gamestate::types::GameState</a></td>          <td class="paramname"><span class="paramname"><em>gameState</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel export">export</span></span>  </td>
+<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel virtual">virtual</span><span class="mlabel default">default</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs a <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html" title="Represents a single pass within a game loop phase.">Pass</a> with a reference to its owning <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html" title="Represents a phase in the game loop containing multiple passes.">Phase</a>. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">owner</td><td>Reference to the parent <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html" title="Represents a phase in the game loop containing multiple passes.">Phase</a>. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="Pass_8ixx_source.html#l00110">110</a> of file <a class="el" href="Pass_8ixx_source.html">Pass.ixx</a>.</p>
-
-<p class="reference">References <a class="el" href="Pass_8ixx_source.html#l00055">helios::engine::runtime::gameloop::Phase</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Pass_8ixx_source.html#l00127">addSystem()</a>.</p>
-<div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass_a6d67ea5a8520f5e9d0dc3b14e6239f45_cgraph.svg" width="410" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass_a6d67ea5a8520f5e9d0dc3b14e6239f45_icgraph.svg" width="444" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a36ee909a78fabac1cf997d98b0f8438c" name="a36ee909a78fabac1cf997d98b0f8438c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a36ee909a78fabac1cf997d98b0f8438c">&#9670;&#160;</a></span>addCommitPoint()</h2>
+<a id="a5c6fbf481a72dde9ce1836df322ce1a3" name="a5c6fbf481a72dde9ce1836df322ce1a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c6fbf481a72dde9ce1836df322ce1a3">&#9670;&#160;</a></span>addCommitPoint()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -207,7 +199,7 @@ System </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#af8f0775327faeea59ae852fc781d44bf">Phase</a> &amp; helios::engine::runtime::gameloop::Pass::addCommitPoint </td>
+          <td class="memname">virtual <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html">Phase</a> &amp; helios::engine::runtime::gameloop::Pass::addCommitPoint </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8ec">CommitPoint</a></td>          <td class="paramname"><span class="paramname"><em>commitPoint</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8ecad42654403d0dfa55915ee7ba7fd7af0f">CommitPoint::PassEvents</a></span></td><td>)</td>
           <td></td>
@@ -215,43 +207,28 @@ System </dd></dl>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span></span>  </td>
+<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Marks this pass with a commit point and returns the owning <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html" title="Represents a phase in the game loop containing multiple passes.">Phase</a>. </p>
-<p>When a commit point is set, the specified synchronization actions are performed after this pass completes. The default is `CommitPoint::PassEvents` which only synchronizes pass-level events.</p>
-<p>Available <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8ec" title="Flags defining synchronization actions at the end of a pass.">CommitPoint</a> flags:</p><ul>
-<li>`PassEvents` — Events pushed via `UpdateContext::pushPass()` become readable.</li>
-<li>`FlushCommands` — Pending commands from the CommandBuffer are executed.</li>
-<li>`FlushManagers` — Managers process their queued requests.</li>
-<li>`Structural` — Combines all three flags.</li>
-</ul>
-<p>Flags can be combined using bitwise OR: ```cpp pass.addCommitPoint(<a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8ecad42654403d0dfa55915ee7ba7fd7af0f" title="Commits pass-level events.">CommitPoint::PassEvents</a> | <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8eca7ce9ed9ce12e02385a7745e379e97ca8" title="Flushes the command buffer.">CommitPoint::FlushCommands</a>); ```</p>
+<p>Adds a commit point and returns the owning <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html" title="Represents a phase in the game loop containing multiple passes.">Phase</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">commitPoint</td><td>The flags specifying which actions to perform (default: PassEvents).</td></tr>
+    <tr><td class="paramname">commitPoint</td><td>The synchronization flags.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Reference to the owning <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html" title="Represents a phase in the game loop containing multiple passes.">Phase</a> for continued configuration.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8ec" title="Flags defining synchronization actions at the end of a pass.">CommitPoint</a> </dd>
-<dd>
-UpdateContext::pushPass() </dd>
-<dd>
-UpdateContext::readPass() </dd>
-<dd>
-GameLoop::passCommit() </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the owning <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html" title="Represents a phase in the game loop containing multiple passes.">Phase</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Pass_8ixx_source.html#l00160">160</a> of file <a class="el" href="Pass_8ixx_source.html">Pass.ixx</a>.</p>
+<p>Implemented in <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1TypedPass.html#a933636dcf64735eda8863e94b54b0e57">helios::engine::runtime::gameloop::TypedPass&lt; StateType &gt;</a>.</p>
 
-<p class="reference">References <a class="el" href="Pass_8ixx_source.html#l00177">commitPoint()</a>, <a class="el" href="Pass_8ixx_source.html#l00055">helios::engine::runtime::gameloop::Phase</a>, and <a class="el" href="CommitPoint_8ixx_source.html#l00049">helios::engine::runtime::gameloop::PassEvents</a>.</p>
+<p class="reference">References <a class="el" href="#a5d87f9a34e42378dfbdea76367416646">commitPoint()</a>, and <a class="el" href="CommitPoint_8ixx_source.html#l00049">helios::engine::runtime::gameloop::PassEvents</a>.</p>
 <div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-2-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass_a36ee909a78fabac1cf997d98b0f8438c_cgraph.svg" width="531" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass_a5c6fbf481a72dde9ce1836df322ce1a3_cgraph.svg" width="531" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -269,7 +246,7 @@ requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1ecs_1
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a6d67ea5a8520f5e9d0dc3b14e6239f45">Pass</a> &amp; helios::engine::runtime::gameloop::Pass::addSystem </td>
+          <td class="memname"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html">Pass</a> &amp; helios::engine::runtime::gameloop::Pass::addSystem </td>
           <td>(</td>
           <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span></td><td>)</td>
           <td></td>
@@ -296,22 +273,30 @@ requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1ecs_1
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Reference to this <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html" title="Represents a single pass within a game loop phase.">Pass</a> for method chaining. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to this <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html" title="Abstract base class for game loop passes.">Pass</a> for method chaining. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Pass_8ixx_source.html#l00127">127</a> of file <a class="el" href="Pass_8ixx_source.html">Pass.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Pass_8ixx_source.html#l00108">108</a> of file <a class="el" href="Pass_8ixx_source.html">Pass.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="Pass_8ixx_source.html#l00110">Pass()</a>.</p>
+<p class="reference">References <a class="el" href="Pass_8ixx_source.html#l00108">addSystem()</a>, and <a class="el" href="Pass_8ixx_source.html#l00052">systemRegistry_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Pass_8ixx_source.html#l00108">addSystem()</a>.</p>
 <div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-3-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass_a903a70bb72f46a10ecaee1ab7b89dcf1_cgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass_a903a70bb72f46a10ecaee1ab7b89dcf1_cgraph.svg" width="224" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-4-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass_a903a70bb72f46a10ecaee1ab7b89dcf1_icgraph.svg" width="224" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
-<a id="abe0ce572c3e6b983a31d458542dd113c" name="abe0ce572c3e6b983a31d458542dd113c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abe0ce572c3e6b983a31d458542dd113c">&#9670;&#160;</a></span>commitPoint()</h2>
+<a id="a5d87f9a34e42378dfbdea76367416646" name="a5d87f9a34e42378dfbdea76367416646"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d87f9a34e42378dfbdea76367416646">&#9670;&#160;</a></span>commitPoint()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -320,7 +305,7 @@ requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1ecs_1
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8ec">CommitPoint</a> helios::engine::runtime::gameloop::Pass::commitPoint </td>
+          <td class="memname">virtual <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8ec">CommitPoint</a> helios::engine::runtime::gameloop::Pass::commitPoint </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -328,32 +313,28 @@ requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1ecs_1
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel pure-virtual">pure virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Returns the configured commit point for this pass. </p>
-<p>The commit point determines what synchronization actions are performed after this pass completes. If no commit point was added, returns <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8eca6adf97f83acf6453d4a6a4b1070f3754" title="No commit action.">CommitPoint::None</a>.</p>
-<dl class="section return"><dt>Returns</dt><dd>The commit point flags for this pass.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8ec" title="Flags defining synchronization actions at the end of a pass.">CommitPoint</a> </dd>
-<dd>
-<a class="el" href="#a36ee909a78fabac1cf997d98b0f8438c" title="Marks this pass with a commit point and returns the owning Phase.">addCommitPoint()</a> </dd></dl>
+<p>Returns the configured commit point. </p>
+<dl class="section return"><dt>Returns</dt><dd>The commit point flags for this pass. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Pass_8ixx_source.html#l00177">177</a> of file <a class="el" href="Pass_8ixx_source.html">Pass.ixx</a>.</p>
+<p>Implemented in <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1TypedPass.html#afc727acdc585b51bf9d9284655ae76ff">helios::engine::runtime::gameloop::TypedPass&lt; StateType &gt;</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Pass_8ixx_source.html#l00160">addCommitPoint()</a>.</p>
-<div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="#a5c6fbf481a72dde9ce1836df322ce1a3">addCommitPoint()</a>.</p>
+<div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-4-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass_abe0ce572c3e6b983a31d458542dd113c_icgraph.svg" width="531" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass_a5d87f9a34e42378dfbdea76367416646_icgraph.svg" width="531" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
-<a id="a7475d435aa819840637eb6799421a12a" name="a7475d435aa819840637eb6799421a12a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7475d435aa819840637eb6799421a12a">&#9670;&#160;</a></span>runsIn()</h2>
+<a id="a63111fee9ce176b86e08133d3c1ae5b4" name="a63111fee9ce176b86e08133d3c1ae5b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63111fee9ce176b86e08133d3c1ae5b4">&#9670;&#160;</a></span>init()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -362,25 +343,111 @@ requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1ecs_1
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a8e0bcae228fdf9f4cb489e7f912d80be">helios::engine::mechanics::gamestate::types::GameState</a> helios::engine::runtime::gameloop::Pass::runsIn </td>
+          <td class="memname">virtual void helios::engine::runtime::gameloop::Pass::init </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">helios::engine::runtime::world::GameWorld</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>gameWorld</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span></span>  </td>
+<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Returns the game state(s) in which this pass executes. </p>
-<p>Passes can be configured to run only during specific game states (e.g., Playing, Paused). The pass will be skipped if the current game state does not match the configured state mask.</p>
-<dl class="section return"><dt>Returns</dt><dd>The game state bitmask for this pass.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd>GameState </dd></dl>
+<p>Initializes all systems in this pass. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">gameWorld</td><td>Reference to the game world. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="Pass_8ixx_source.html#l00192">192</a> of file <a class="el" href="Pass_8ixx_source.html">Pass.ixx</a>.</p>
+</div>
+</div>
+<a id="ad67143a03191d6f19c182f1a0bb6a815" name="ad67143a03191d6f19c182f1a0bb6a815"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad67143a03191d6f19c182f1a0bb6a815">&#9670;&#160;</a></span>shouldRun()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool helios::engine::runtime::gameloop::Pass::shouldRun </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>updateContext</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel pure-virtual">pure virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Determines if this pass should execute. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">updateContext</td><td>The current update context.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the pass should run. </dd></dl>
+
+<p>Implemented in <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1TypedPass.html#a7733ed1cd17abc4a3c85da27684b6c2b">helios::engine::runtime::gameloop::TypedPass&lt; StateType &gt;</a>.</p>
+
+<p class="reference">References <a class="el" href="#ad67143a03191d6f19c182f1a0bb6a815">shouldRun()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="#ad67143a03191d6f19c182f1a0bb6a815">shouldRun()</a>.</p>
+<div id="dynsection-6" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-6-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass_ad67143a03191d6f19c182f1a0bb6a815_cgraph.svg" width="219" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div id="dynsection-7" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-7-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass_ad67143a03191d6f19c182f1a0bb6a815_icgraph.svg" width="219" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="abc1e3e3598668d49320ce2dd2b7a9e2e" name="abc1e3e3598668d49320ce2dd2b7a9e2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc1e3e3598668d49320ce2dd2b7a9e2e">&#9670;&#160;</a></span>update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void helios::engine::runtime::gameloop::Pass::update </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>updateContext</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Updates all systems in this pass. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">updateContext</td><td>The current update context. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

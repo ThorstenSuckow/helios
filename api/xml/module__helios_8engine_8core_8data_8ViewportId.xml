@@ -3,241 +3,26 @@
   <compounddef id="module__helios_8engine_8core_8data_8ViewportId" kind="module">
     <compoundname>helios.engine.core.data.ViewportId</compoundname>
     <innerfile refid="ViewportId_8ixx">ViewportId.ixx</innerfile>
-    <innerclass refid="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId" prot="public">helios::engine::core::data::ViewportId</innerclass>
-    <sectiondef kind="var">
-      <memberdef kind="variable" id="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId_1a0e955fb8386e85f216c17d5a8aefc491" prot="private" static="no" mutable="no">
-        <type>uint32_t</type>
-        <definition>uint32_t helios::engine::core::data::ViewportId::id_</definition>
+    <innerclass refid="structhelios_1_1engine_1_1core_1_1data_1_1ViewportIdTag" prot="public">helios::engine::core::data::ViewportIdTag</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacehelios_1_1engine_1_1core_1_1data_1ad7a3a4de437b171216482e5f1853a90e" prot="public" static="no">
+        <type><ref refid="structhelios_1_1core_1_1data_1_1StrongId" kindref="compound">helios::core::data::StrongId</ref>&lt; ViewportIdTag, uint32_t &gt;</type>
+        <definition>using helios::engine::core::data::ViewportId =  helios::core::data::StrongId&lt;ViewportIdTag, uint32_t&gt;</definition>
         <argsstring></argsstring>
-        <name>id_</name>
-        <qualifiedname>helios::engine::core::data::ViewportId::id_</qualifiedname>
-        <initializer>{}</initializer>
-        <briefdescription>
-<para>The hashed identifier value. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/core/data/ViewportId.ixx" line="30" column="18" bodyfile="/tmp/h/include/helios/engine/core/data/ViewportId.ixx" bodystart="30" bodyend="30"/>
-      </memberdef>
-    </sectiondef>
-    <sectiondef kind="func">
-      <memberdef kind="function" id="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId_1a903e75b57b683428eca74bf62e97df97" prot="private" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>constexpr</type>
-        <definition>helios::engine::core::data::ViewportId::ViewportId</definition>
-        <argsstring>(const uint32_t id) noexcept</argsstring>
         <name>ViewportId</name>
-        <qualifiedname>helios::engine::core::data::ViewportId::ViewportId</qualifiedname>
-        <param>
-          <type>const uint32_t</type>
-          <declname>id</declname>
-        </param>
+        <qualifiedname>helios::engine::core::data::ViewportId</qualifiedname>
         <briefdescription>
-<para>Private constructor from raw hash value. </para>
+<para>Strongly-typed identifier for viewports. </para>
         </briefdescription>
         <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>id</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The pre-computed hash value. </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/core/data/ViewportId.ixx" line="37" column="28" bodyfile="/tmp/h/include/helios/engine/core/data/ViewportId.ixx" bodystart="37" bodyend="39"/>
-      </memberdef>
-      <memberdef kind="function" id="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId_1ad3baa97f44a444ceb0f08876bb46706e" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>constexpr</type>
-        <definition>helios::engine::core::data::ViewportId::ViewportId</definition>
-        <argsstring>(const std::string_view str) noexcept</argsstring>
-        <name>ViewportId</name>
-        <qualifiedname>helios::engine::core::data::ViewportId::ViewportId</qualifiedname>
-        <param>
-          <type>const std::string_view</type>
-          <declname>str</declname>
-        </param>
-        <briefdescription>
-<para>Constructs a <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId" kindref="compound">ViewportId</ref> from a string name. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>Uses FNV-1a hashing to convert the string to a 32-bit identifier. This constructor is `constexpr`, allowing compile-time evaluation.</para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>str</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The viewport name (e.g., &quot;Ui&quot;, &quot;Game&quot;). </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/core/data/ViewportId.ixx" line="51" column="28" bodyfile="/tmp/h/include/helios/engine/core/data/ViewportId.ixx" bodystart="51" bodyend="52"/>
-        <references refid="namespacehelios_1_1core_1_1algorithms_1a3df283d4b3d4c5006c1bb3c30e03ab1e" compoundref="algorithms_8ixx" startline="50" endline="57">helios::core::algorithms::fnv1a_hash</references>
-      </memberdef>
-      <memberdef kind="function" id="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId_1a61c72b4273764dbd35e88c09726907ea" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" virt="non-virtual">
-        <type>constexpr</type>
-        <definition>helios::engine::core::data::ViewportId::ViewportId</definition>
-        <argsstring>(helios::core::types::no_init_t)</argsstring>
-        <name>ViewportId</name>
-        <qualifiedname>helios::engine::core::data::ViewportId::ViewportId</qualifiedname>
-        <param>
-          <type><ref refid="structhelios_1_1core_1_1types_1_1no__init__t" kindref="compound">helios::core::types::no_init_t</ref></type>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/core/data/ViewportId.ixx" line="54" column="28" bodyfile="/tmp/h/include/helios/engine/core/data/ViewportId.ixx" bodystart="54" bodyend="54"/>
-      </memberdef>
-      <memberdef kind="function" id="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId_1aad554c341305545751809c1b0acb4b9a" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" virt="non-virtual">
-        <type>constexpr</type>
-        <definition>helios::engine::core::data::ViewportId::ViewportId</definition>
-        <argsstring>()</argsstring>
-        <name>ViewportId</name>
-        <qualifiedname>helios::engine::core::data::ViewportId::ViewportId</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/core/data/ViewportId.ixx" line="56" column="28" bodyfile="/tmp/h/include/helios/engine/core/data/ViewportId.ixx" bodystart="56" bodyend="56"/>
-      </memberdef>
-      <memberdef kind="function" id="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId_1a81d384737f05726b744eada922018c6d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>uint32_t</type>
-        <definition>uint32_t helios::engine::core::data::ViewportId::value</definition>
-        <argsstring>() const noexcept</argsstring>
-        <name>value</name>
-        <qualifiedname>helios::engine::core::data::ViewportId::value</qualifiedname>
-        <briefdescription>
-<para>Returns the raw identifier value. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><simplesect kind="return"><para>The 32-bit hash value. </para>
+<para>Used to uniquely identify viewports across the rendering system. Supports compile-time string-based construction via FNV-1a hashing.</para>
+<para><simplesect kind="see"><para><ref refid="structhelios_1_1core_1_1data_1_1StrongId" kindref="compound">helios::core::data::StrongId</ref> </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/core/data/ViewportId.ixx" line="63" column="19" bodyfile="/tmp/h/include/helios/engine/core/data/ViewportId.ixx" bodystart="63" bodyend="65"/>
-      </memberdef>
-      <memberdef kind="function" id="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId_1ac9aab5571c5ffac41552a36d390c85d9" prot="public" static="no" nodiscard="yes" const="yes" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
-        <type></type>
-        <definition>helios::engine::core::data::ViewportId::operator bool</definition>
-        <argsstring>() const noexcept</argsstring>
-        <name>operator bool</name>
-        <qualifiedname>helios::engine::core::data::ViewportId::operator bool</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/core/data/ViewportId.ixx" line="68" column="19" bodyfile="/tmp/h/include/helios/engine/core/data/ViewportId.ixx" bodystart="68" bodyend="70"/>
-      </memberdef>
-      <memberdef kind="function" id="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId_1a15a257500051205f16645897293863fd" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool helios::engine::core::data::ViewportId::operator&lt;</definition>
-        <argsstring>(const ViewportId &amp;other) const noexcept</argsstring>
-        <name>operator&lt;</name>
-        <qualifiedname>helios::engine::core::data::ViewportId::operator&lt;</qualifiedname>
-        <param>
-          <type>const ViewportId &amp;</type>
-          <declname>other</declname>
-        </param>
-        <briefdescription>
-<para>Less-than comparison for ordered containers. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>other</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId" kindref="compound">ViewportId</ref> to compare against.</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>`true` if this id is less than `other`. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/core/data/ViewportId.ixx" line="84" column="19" bodyfile="/tmp/h/include/helios/engine/core/data/ViewportId.ixx" bodystart="84" bodyend="86"/>
-      </memberdef>
-      <memberdef kind="function" id="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId_1a1de1f1786d24a9f0143fc1c8b76391e0" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool helios::engine::core::data::ViewportId::operator&gt;</definition>
-        <argsstring>(const ViewportId &amp;other) const noexcept</argsstring>
-        <name>operator&gt;</name>
-        <qualifiedname>helios::engine::core::data::ViewportId::operator&gt;</qualifiedname>
-        <param>
-          <type>const ViewportId &amp;</type>
-          <declname>other</declname>
-        </param>
-        <briefdescription>
-<para>Greater-than comparison for ordered containers. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>other</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId" kindref="compound">ViewportId</ref> to compare against.</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>`true` if this id is greater than `other`. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/core/data/ViewportId.ixx" line="95" column="24" bodyfile="/tmp/h/include/helios/engine/core/data/ViewportId.ixx" bodystart="95" bodyend="97"/>
-      </memberdef>
-      <memberdef kind="function" id="structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ViewportId_01_4_1ae8a0c5bfdc6ce646ab1c041b73713d56" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>std::size_t</type>
-        <definition>std::size_t std::hash&lt; helios::engine::core::data::ViewportId &gt;::operator()</definition>
-        <argsstring>(const helios::engine::core::data::ViewportId &amp;id) const noexcept</argsstring>
-        <name>operator()</name>
-        <qualifiedname>std::hash&lt; helios::engine::core::data::ViewportId &gt;::operator()</qualifiedname>
-        <param>
-          <type>const <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId" kindref="compound">helios::engine::core::data::ViewportId</ref> &amp;</type>
-          <declname>id</declname>
-        </param>
-        <briefdescription>
-<para>Computes the hash value for a ViewportId. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>id</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The ViewportId to hash.</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>The hash value (same as the internal id). </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/core/data/ViewportId.ixx" line="116" column="17" bodyfile="/tmp/h/include/helios/engine/core/data/ViewportId.ixx" bodystart="116" bodyend="118"/>
+        <location file="/tmp/h/include/helios/engine/core/data/ViewportId.ixx" line="32" column="5" bodyfile="/tmp/h/include/helios/engine/core/data/ViewportId.ixx" bodystart="32" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

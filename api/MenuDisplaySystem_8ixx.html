@@ -107,24 +107,23 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>System for controlling menu visibility based on UI focus.  
+<p>System for controlling menu visibility based on game state.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;cassert&gt;</code><br />
+<code>#include &lt;helios/helios_config.h&gt;</code><br />
 <code>import <a class="el" href="helios_2math_2__module_8ixx_source.html">helios.math</a>;</code><br />
-<code>import <a class="el" href="UiStateComponent_8ixx_source.html">helios.engine.modules.ui.widgets.components.UiStateComponent</a>;</code><br />
-<code>import <a class="el" href="CommandBuffer_8ixx_source.html">helios.engine.runtime.messaging.command.CommandBuffer</a>;</code><br />
-<code>import <a class="el" href="GameObject_8ixx_source.html">helios.engine.ecs.GameObject</a>;</code><br />
-<code>import <a class="el" href="System_8ixx_source.html">helios.engine.ecs.System</a>;</code><br />
+<code>import <a class="el" href="helios_2engine_2mechanics_2gamestate_2types_2__module_8ixx_source.html">helios.engine.mechanics.gamestate.types</a>;</code><br />
+<code>import <a class="el" href="CombinedStateToIdMapPair_8ixx_source.html">helios.engine.state.CombinedStateToIdMapPair</a>;</code><br />
 <code>import <a class="el" href="MenuComponent_8ixx_source.html">helios.engine.modules.ui.widgets.components.MenuComponent</a>;</code><br />
-<code>import <a class="el" href="UiActionComponent_8ixx_source.html">helios.engine.modules.ui.widgets.components.UiActionComponent</a>;</code><br />
-<code>import <a class="el" href="Active_8ixx_source.html">helios.engine.mechanics.lifecycle.components.Active</a>;</code><br />
-<code>import <a class="el" href="EntityHandle_8ixx_source.html">helios.engine.ecs.EntityHandle</a>;</code><br />
-<code>import <a class="el" href="UiActionCommand_8ixx_source.html">helios.engine.modules.ui.commands.UiActionCommand</a>;</code><br />
-<code>import <a class="el" href="GameWorld_8ixx_source.html">helios.engine.runtime.world.GameWorld</a>;</code><br />
-<code>import <a class="el" href="UpdateContext_8ixx_source.html">helios.engine.runtime.world.UpdateContext</a>;</code><br />
-<code>import <a class="el" href="Gamepad_8ixx_source.html">helios.input.types.Gamepad</a>;</code><br />
+<code>import <a class="el" href="helios_2engine_2core_2data_2__module_8ixx_source.html">helios.engine.core.data</a>;</code><br />
+<code>import <a class="el" href="helios_2engine_2mechanics_2match_2types_2__module_8ixx_source.html">helios.engine.mechanics.match.types</a>;</code><br />
+<code>import <a class="el" href="helios_2engine_2runtime_2world_2__module_8ixx_source.html">helios.engine.runtime.world</a>;</code><br />
 <code>import <a class="el" href="ModelAabbComponent_8ixx_source.html">helios.engine.modules.rendering.model.components.ModelAabbComponent</a>;</code><br />
+<code>import <a class="el" href="UiFocusComponent_8ixx_source.html">helios.engine.modules.ui.widgets.components.UiFocusComponent</a>;</code><br />
+<code>import <a class="el" href="helios_2engine_2ecs_2__module_8ixx_source.html">helios.engine.ecs</a>;</code><br />
 </div><div class="textblock"><div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Include dependency graph for MenuDisplaySystem.ixx:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
@@ -136,8 +135,8 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:helios_3A_3Aengine_3A_3Amodules_3A_3Aui_3A_3Awidgets_3A_3Asystems_3A_3AMenuDisplaySystem" id="r_helios_3A_3Aengine_3A_3Amodules_3A_3Aui_3A_3Awidgets_3A_3Asystems_3A_3AMenuDisplaySystem"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem.html">helios::engine::modules::ui::widgets::systems::MenuDisplaySystem</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Controls menu visibility based on session UI focus state.  <a href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem.html#details">More...</a><br /></td></tr>
+<tr class="memitem:helios_3A_3Aengine_3A_3Amodules_3A_3Aui_3A_3Awidgets_3A_3Asystems_3A_3AMenuDisplaySystem_3C_20StateLft_2C_20StateRgt_20_3E" id="r_helios_3A_3Aengine_3A_3Amodules_3A_3Aui_3A_3Awidgets_3A_3Asystems_3A_3AMenuDisplaySystem_3C_20StateLft_2C_20StateRgt_20_3E"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem.html">helios::engine::modules::ui::widgets::systems::MenuDisplaySystem&lt; StateLft, StateRgt &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Controls menu visibility based on game and match state.  <a href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
@@ -154,7 +153,7 @@ Namespaces</h2></td></tr>
 <tr class="memdesc:namespacehelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems"><td class="mdescLeft">&#160;</td><td class="mdescRight">UI widget processing systems. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>System for controlling menu visibility based on UI focus. </p>
+<div class="textblock"><p>System for controlling menu visibility based on game state. </p>
 
 <p class="definition">Definition in file <a class="el" href="MenuDisplaySystem_8ixx_source.html">MenuDisplaySystem.ixx</a>.</p>
 </div></div><!-- contents -->

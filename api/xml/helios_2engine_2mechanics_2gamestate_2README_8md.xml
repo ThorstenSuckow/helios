@@ -10,28 +10,38 @@
     <programlisting>
 <codeline><highlight class="normal">#<sp/>helios::engine::mechanics::gamestate</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">Game<sp/>state<sp/>management<sp/>system<sp/>for<sp/>the<sp/>helios<sp/>engine.</highlight></codeline>
+<codeline><highlight class="normal">Game<sp/>state<sp/>management<sp/>for<sp/>the<sp/>helios<sp/>engine.</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>a<sp/>rule-based<sp/>state<sp/>machine<sp/>for<sp/>managing<sp/>game<sp/>states<sp/>(e.g.,<sp/>Title,<sp/>Running,<sp/>Paused)<sp/>with<sp/>transitions,<sp/>listeners,<sp/>and<sp/>command-driven<sp/>state<sp/>changes.</highlight></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>domain-specific<sp/>types<sp/>and<sp/>bindings<sp/>for<sp/>managing<sp/>game<sp/>states<sp/>(Title,<sp/>Running,<sp/>Paused).<sp/>It<sp/>uses<sp/>the<sp/>generic<sp/>`helios::engine::state`<sp/>framework.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Components</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Component<sp/>|<sp/>Description<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-----------|-------------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`GameStateManager`<sp/>|<sp/>Type<sp/>alias<sp/>for<sp/>`StateManager&lt;GameState&gt;`<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`GameState`<sp/>|<sp/>Enum<sp/>defining<sp/>application-level<sp/>states<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`GameStateTransitionId`<sp/>|<sp/>Enum<sp/>defining<sp/>valid<sp/>transition<sp/>triggers<sp/>|</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Submodules</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">|<sp/>Submodule<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|-----------|---------|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`commands/`<sp/>|<sp/>Commands<sp/>for<sp/>requesting<sp/>state<sp/>transitions<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`components/`<sp/>|<sp/>Components<sp/>for<sp/>storing<sp/>game<sp/>state<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`dispatcher/`<sp/>|<sp/>Dispatchers<sp/>for<sp/>routing<sp/>state<sp/>commands<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`listeners/`<sp/>|<sp/>Listeners<sp/>for<sp/>reacting<sp/>to<sp/>state<sp/>transitions<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`rules/`<sp/>|<sp/>Transition<sp/>rules<sp/>defining<sp/>valid<sp/>state<sp/>changes<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`rules/`<sp/>|<sp/>Default<sp/>transition<sp/>rules<sp/>and<sp/>guards<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`systems/`<sp/>|<sp/>Systems<sp/>for<sp/>input-driven<sp/>state<sp/>changes<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`types/`<sp/>|<sp/>Core<sp/>types,<sp/>enums,<sp/>and<sp/>data<sp/>structures<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`types/`<sp/>|<sp/>Core<sp/>types,<sp/>enums,<sp/>and<sp/>type<sp/>trait<sp/>specializations<sp/>|</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Architecture</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">1.<sp/>**GameStateManager**<sp/>holds<sp/>the<sp/>transition<sp/>rules<sp/>and<sp/>processes<sp/>state<sp/>commands</highlight></codeline>
-<codeline><highlight class="normal">2.<sp/>**GameStateCommand**<sp/>encapsulates<sp/>a<sp/>transition<sp/>request</highlight></codeline>
-<codeline><highlight class="normal">3.<sp/>**GameStateTransitionRule**<sp/>defines<sp/>valid<sp/>from<sp/>-&gt;<sp/>to<sp/>transitions<sp/>with<sp/>optional<sp/>guards</highlight></codeline>
-<codeline><highlight class="normal">4.<sp/>**GameStateTransitionListener**<sp/>implementations<sp/>react<sp/>to<sp/>state<sp/>changes</highlight></codeline>
+<codeline><highlight class="normal">`GameStateManager`<sp/>is<sp/>a<sp/>type<sp/>alias<sp/>for<sp/>`StateManager&lt;GameState&gt;`:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>GameStateManager<sp/>=<sp/>helios::engine::state::StateManager&lt;types::GameState&gt;;</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>generic<sp/>`StateManager`<sp/>provides:</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Rule-based<sp/>transitions<sp/>with<sp/>optional<sp/>guards</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Listener<sp/>notifications<sp/>on<sp/>state<sp/>changes</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Command-driven<sp/>state<sp/>changes<sp/>via<sp/>`StateCommand&lt;GameState&gt;`</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>State<sp/>Flow</highlight></codeline>
 <codeline></codeline>
@@ -51,16 +61,24 @@
 <codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">```cpp</highlight></codeline>
-<codeline><highlight class="normal">//<sp/>Create<sp/>manager<sp/>with<sp/>default<sp/>rules</highlight></codeline>
-<codeline><highlight class="normal">auto<sp/>manager<sp/>=<sp/>std::make_unique&lt;GameStateManager&gt;();</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>namespace<sp/>helios::engine::mechanics::gamestate;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>namespace<sp/>helios::engine::state;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>namespace<sp/>helios::engine::state::commands;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Create<sp/>manager<sp/>with<sp/>rules</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>manager<sp/>=<sp/>std::make_unique&lt;GameStateManager&gt;(gameStateRules);</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">//<sp/>Add<sp/>listeners</highlight></codeline>
-<codeline><highlight class="normal">manager-&gt;addGameStateListener(std::make_unique&lt;WorldResetListener&gt;());</highlight></codeline>
-<codeline><highlight class="normal">manager-&gt;addGameStateListener(std::make_unique&lt;FocusMenuListener&gt;(menuId));</highlight></codeline>
+<codeline><highlight class="normal">manager-&gt;addStateListener(std::make_unique&lt;LambdaStateListener&lt;types::GameState&gt;&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>/*<sp/>onExit,<sp/>onTransition,<sp/>onEnter<sp/>callbacks<sp/>*/</highlight></codeline>
+<codeline><highlight class="normal">));</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">//<sp/>Submit<sp/>transition<sp/>via<sp/>command</highlight></codeline>
-<codeline><highlight class="normal">commandBuffer.add&lt;GameStateCommand&gt;(</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>GameStateTransitionRequest(GameState::Title,<sp/>GameStateTransitionId::StartRequested)</highlight></codeline>
+<codeline><highlight class="normal">commandBuffer.add&lt;StateCommand&lt;types::GameState&gt;&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>StateTransitionRequest&lt;types::GameState&gt;{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>types::GameState::Title,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>types::GameStateTransitionId::StartRequested</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline><highlight class="normal">);</highlight></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>
 <codeline></codeline>
@@ -69,8 +87,8 @@
 <codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
 <codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
 <codeline><highlight class="normal">@namespace<sp/>helios::engine::mechanics::gamestate</highlight></codeline>
-<codeline><highlight class="normal">@brief<sp/>Game<sp/>state<sp/>management<sp/>system<sp/>for<sp/>the<sp/>helios<sp/>engine.</highlight></codeline>
-<codeline><highlight class="normal">@details<sp/>Provides<sp/>a<sp/>rule-based<sp/>state<sp/>machine<sp/>for<sp/>managing<sp/>game<sp/>states<sp/>with<sp/>transitions,<sp/>listeners,<sp/>and<sp/>command-driven<sp/>state<sp/>changes.</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Game<sp/>state<sp/>management<sp/>for<sp/>the<sp/>helios<sp/>engine.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Provides<sp/>domain-specific<sp/>types<sp/>and<sp/>bindings<sp/>for<sp/>managing<sp/>game<sp/>states<sp/>using<sp/>the<sp/>generic<sp/>helios::engine::state<sp/>framework.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
 <codeline></codeline>
     </programlisting>

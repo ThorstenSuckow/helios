@@ -107,19 +107,21 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Session state container for game and match state.  
+<p>Session state container for game-wide state.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;optional&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 <code>#include &lt;span&gt;</code><br />
-<code>import <a class="el" href="ActiveViewportIdsStateComponent_8ixx_source.html">helios.engine.modules.rendering.viewport.components.ActiveViewportIdsStateComponent</a>;</code><br />
-<code>import <a class="el" href="ViewportId_8ixx_source.html">helios.engine.core.data.ViewportId</a>;</code><br />
-<code>import <a class="el" href="UiFocusComponent_8ixx_source.html">helios.engine.modules.ui.widgets.components.UiFocusComponent</a>;</code><br />
-<code>import <a class="el" href="helios_2engine_2mechanics_2gamestate_2components_2__module_8ixx_source.html">helios.engine.mechanics.gamestate.components</a>;</code><br />
-<code>import <a class="el" href="helios_2engine_2core_2data_2__module_8ixx_source.html">helios.engine.core.data</a>;</code><br />
-<code>import <a class="el" href="helios_2engine_2mechanics_2match_2components_2__module_8ixx_source.html">helios.engine.mechanics.match.components</a>;</code><br />
-<code>import <a class="el" href="helios_2engine_2mechanics_2match_2types_2__module_8ixx_source.html">helios.engine.mechanics.match.types</a>;</code><br />
+<code>#include &lt;cassert&gt;</code><br />
+<code>import <a class="el" href="EntityHandle_8ixx_source.html">helios.engine.ecs.EntityHandle</a>;</code><br />
 <code>import <a class="el" href="GameObject_8ixx_source.html">helios.engine.ecs.GameObject</a>;</code><br />
+<code>import <a class="el" href="helios_2engine_2core_2data_2__module_8ixx_source.html">helios.engine.core.data</a>;</code><br />
+<code>import <a class="el" href="ViewportId_8ixx_source.html">helios.engine.core.data.ViewportId</a>;</code><br />
+<code>import <a class="el" href="helios_2engine_2state_2components_2__module_8ixx_source.html">helios.engine.state.components</a>;</code><br />
+<code>import <a class="el" href="helios_2engine_2state_2types_2__module_8ixx_source.html">helios.engine.state.types</a>;</code><br />
+<code>import <a class="el" href="StateTransitionId_8ixx_source.html">helios.engine.state.types.StateTransitionId</a>;</code><br />
+<code>import <a class="el" href="helios_2engine_2mechanics_2match_2types_2__module_8ixx_source.html">helios.engine.mechanics.match.types</a>;</code><br />
+<code>import <a class="el" href="ActiveViewportIdsStateComponent_8ixx_source.html">helios.engine.modules.rendering.viewport.components.ActiveViewportIdsStateComponent</a>;</code><br />
 <code>import <a class="el" href="helios_2engine_2mechanics_2gamestate_2types_2__module_8ixx_source.html">helios.engine.mechanics.gamestate.types</a>;</code><br />
 </div><div class="textblock"><div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Include dependency graph for Session.ixx:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -146,7 +148,7 @@ Namespaces</h2></td></tr>
 <tr class="memdesc:namespacehelios_1_1engine_1_1runtime_1_1world"><td class="mdescLeft">&#160;</td><td class="mdescRight">World state management and per-frame update context. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Session state container for game and match state. </p>
+<div class="textblock"><p>Session state container for game-wide state. </p>
 
 <p class="definition">Definition in file <a class="el" href="Session_8ixx_source.html">Session.ixx</a>.</p>
 </div></div><!-- contents -->

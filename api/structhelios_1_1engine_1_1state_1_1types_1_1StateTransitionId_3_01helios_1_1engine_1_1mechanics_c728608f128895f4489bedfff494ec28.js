@@ -1,0 +1,4 @@
+var structhelios_1_1engine_1_1state_1_1types_1_1StateTransitionId_3_01helios_1_1engine_1_1mechanics_c728608f128895f4489bedfff494ec28 =
+[
+    [ "Type", "structhelios_1_1engine_1_1state_1_1types_1_1StateTransitionId_3_01helios_1_1engine_1_1mechanics_c728608f128895f4489bedfff494ec28.html#a80ab0e0ff228ff55ced5694ed237ba76", null ]
+];

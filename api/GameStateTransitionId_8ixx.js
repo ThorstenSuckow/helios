@@ -1,5 +1,6 @@
 var GameStateTransitionId_8ixx =
 [
+    [ "helios::engine::state::types::StateTransitionId&lt; helios::engine::mechanics::gamestate::types::GameState &gt;", "structhelios_1_1engine_1_1state_1_1types_1_1StateTransitionId_3_01helios_1_1engine_1_1mechanics_45d1fe060e024a568800acdb9ff2360e.html", "structhelios_1_1engine_1_1state_1_1types_1_1StateTransitionId_3_01helios_1_1engine_1_1mechanics_45d1fe060e024a568800acdb9ff2360e" ],
     [ "helios::engine::mechanics::gamestate::types::GameStateTransitionId", "namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a73539c0b43e1877f9c1e3fd329cc1fa4", [
       [ "helios::engine::mechanics::gamestate::types::GameStateTransitionId::Undefined", "namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a73539c0b43e1877f9c1e3fd329cc1fa4aec0fc0100c4fc1ce4eea230c3dc10360", null ],
       [ "helios::engine::mechanics::gamestate::types::GameStateTransitionId::TitleRequested", "namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a73539c0b43e1877f9c1e3fd329cc1fa4a14401b636e7a97ceab91c643463e4d65", null ],

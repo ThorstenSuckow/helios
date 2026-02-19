@@ -5,51 +5,81 @@
     <innerfile refid="MenuDisplaySystem_8ixx">MenuDisplaySystem.ixx</innerfile>
     <innerclass refid="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem" prot="public">helios::engine::modules::ui::widgets::systems::MenuDisplaySystem</innerclass>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem_1ac5c1173917b6a874c0ccfedf5ca9788c" prot="private" static="no" mutable="no">
-        <type><ref refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle" kindref="compound">helios::engine::ecs::EntityHandle</ref></type>
-        <definition>helios::engine::ecs::EntityHandle helios::engine::modules::ui::widgets::systems::MenuDisplaySystem::prevEntityHandle_</definition>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem_1aa7fe333c56e79806fd0bdf486b1db53e" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; MenuId &gt;</type>
+        <definition>std::vector&lt;MenuId&gt; helios::engine::modules::ui::widgets::systems::MenuDisplaySystem&lt; StateLft, StateRgt &gt;::prevMenuIds_</definition>
         <argsstring></argsstring>
-        <name>prevEntityHandle_</name>
-        <qualifiedname>helios::engine::modules::ui::widgets::systems::MenuDisplaySystem::prevEntityHandle_</qualifiedname>
+        <name>prevMenuIds_</name>
+        <qualifiedname>helios::engine::modules::ui::widgets::systems::MenuDisplaySystem::prevMenuIds_</qualifiedname>
         <briefdescription>
-<para>Handle to the previously focused entity for change detection. </para>
+<para>Previously active menu IDs for change detection. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuDisplaySystem.ixx" line="59" column="43" bodyfile="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuDisplaySystem.ixx" bodystart="59" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuDisplaySystem.ixx" line="67" column="21" bodyfile="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuDisplaySystem.ixx" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem_1aa6e9e94d66f96cd8e16ca4abe3b95c52" prot="private" static="no" mutable="no">
+        <type>CombinedStateToIdMapPair&lt; StateLft, StateRgt, MenuId &gt;</type>
+        <definition>CombinedStateToIdMapPair&lt;StateLft, StateRgt, MenuId&gt; helios::engine::modules::ui::widgets::systems::MenuDisplaySystem&lt; StateLft, StateRgt &gt;::stateToMenuMap_</definition>
+        <argsstring></argsstring>
+        <name>stateToMenuMap_</name>
+        <qualifiedname>helios::engine::modules::ui::widgets::systems::MenuDisplaySystem::stateToMenuMap_</qualifiedname>
+        <briefdescription>
+<para>Policy mapping states to menu IDs. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuDisplaySystem.ixx" line="72" column="34" bodyfile="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuDisplaySystem.ixx" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem_1a0ff408bbb616abdc5c45b1afd2783dca" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; GameObject &gt;</type>
+        <definition>std::vector&lt;GameObject&gt; helios::engine::modules::ui::widgets::systems::MenuDisplaySystem&lt; StateLft, StateRgt &gt;::inactiveItems_</definition>
+        <argsstring></argsstring>
+        <name>inactiveItems_</name>
+        <qualifiedname>helios::engine::modules::ui::widgets::systems::MenuDisplaySystem::inactiveItems_</qualifiedname>
+        <briefdescription>
+<para>Cache for inactive focused items to be cleaned up. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuDisplaySystem.ixx" line="77" column="21" bodyfile="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuDisplaySystem.ixx" bodystart="77" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem_1a22a223ce60b75a028329948103b77d1f" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem_1a8cecdffe6d09735c07e5d21967cc7e91" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
-        <definition>void helios::engine::modules::ui::widgets::systems::MenuDisplaySystem::showMenu</definition>
-        <argsstring>(helios::engine::ecs::GameObject go, bool show, helios::engine::runtime::world::GameWorld &amp;gameWorld)</argsstring>
+        <definition>void helios::engine::modules::ui::widgets::systems::MenuDisplaySystem&lt; StateLft, StateRgt &gt;::showMenu</definition>
+        <argsstring>(const MenuId menuId, const bool show, View&lt; MenuComponent &gt; &amp;components)</argsstring>
         <name>showMenu</name>
         <qualifiedname>helios::engine::modules::ui::widgets::systems::MenuDisplaySystem::showMenu</qualifiedname>
         <param>
-          <type><ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref></type>
-          <declname>go</declname>
+          <type>const MenuId</type>
+          <declname>menuId</declname>
         </param>
         <param>
-          <type>bool</type>
+          <type>const bool</type>
           <declname>show</declname>
         </param>
         <param>
-          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
-          <declname>gameWorld</declname>
+          <type>View&lt; MenuComponent &gt; &amp;</type>
+          <declname>components</declname>
         </param>
         <briefdescription>
-<para>Shows or hides a menu and its items. </para>
+<para>Shows or hides a menu by ID. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>go</parametername>
+<parametername>menuId</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The menu entity. </para>
+<para>The menu to show/hide. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -62,10 +92,10 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>gameWorld</parametername>
+<parametername>components</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Reference to the game world for item lookup. </para>
+<para><ref refid="classhelios_1_1engine_1_1ecs_1_1View" kindref="compound">View</ref> of all <ref refid="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1MenuComponent" kindref="compound">MenuComponent</ref> entities. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -73,11 +103,81 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuDisplaySystem.ixx" line="68" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuDisplaySystem.ixx" bodystart="68" bodyend="84"/>
+        <location file="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuDisplaySystem.ixx" line="86" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuDisplaySystem.ixx" bodystart="86" bodyend="92"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem_1a7fcf27e865b36e92bd386ab7aed59c86" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem_1a43c327f63988802e2ef4d284156bfca3" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
-        <definition>void helios::engine::modules::ui::widgets::systems::MenuDisplaySystem::update</definition>
+        <definition>void helios::engine::modules::ui::widgets::systems::MenuDisplaySystem&lt; StateLft, StateRgt &gt;::focusMenu</definition>
+        <argsstring>(const MenuId menuId, View&lt; MenuComponent &gt; &amp;components)</argsstring>
+        <name>focusMenu</name>
+        <qualifiedname>helios::engine::modules::ui::widgets::systems::MenuDisplaySystem::focusMenu</qualifiedname>
+        <param>
+          <type>const MenuId</type>
+          <declname>menuId</declname>
+        </param>
+        <param>
+          <type>View&lt; MenuComponent &gt; &amp;</type>
+          <declname>components</declname>
+        </param>
+        <briefdescription>
+<para>Focuses the first item of a menu. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>menuId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The menu to focus. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>components</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classhelios_1_1engine_1_1ecs_1_1View" kindref="compound">View</ref> of all <ref refid="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1MenuComponent" kindref="compound">MenuComponent</ref> entities. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuDisplaySystem.ixx" line="100" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuDisplaySystem.ixx" bodystart="100" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem_1a2f2fb33aac64e9c701f225e6f70b93dd" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::modules::ui::widgets::systems::MenuDisplaySystem&lt; StateLft, StateRgt &gt;::MenuDisplaySystem</definition>
+        <argsstring>(CombinedStateToIdMapPair&lt; StateLft, StateRgt, MenuId &gt; stateToMenuMap)</argsstring>
+        <name>MenuDisplaySystem</name>
+        <qualifiedname>helios::engine::modules::ui::widgets::systems::MenuDisplaySystem::MenuDisplaySystem</qualifiedname>
+        <param>
+          <type>CombinedStateToIdMapPair&lt; StateLft, StateRgt, MenuId &gt;</type>
+          <declname>stateToMenuMap</declname>
+        </param>
+        <briefdescription>
+<para>Constructs the system with a state-to-menu policy. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stateToMenuMap</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Policy mapping game/match states to menu IDs. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuDisplaySystem.ixx" line="122" column="18" bodyfile="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuDisplaySystem.ixx" bodystart="122" bodyend="126"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem_1ab923705577cff067e8f18d7e33334c5d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::ui::widgets::systems::MenuDisplaySystem&lt; StateLft, StateRgt &gt;::update</definition>
         <argsstring>(helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept override</argsstring>
         <name>update</name>
         <qualifiedname>helios::engine::modules::ui::widgets::systems::MenuDisplaySystem::update</qualifiedname>
@@ -87,10 +187,10 @@
           <declname>updateContext</declname>
         </param>
         <briefdescription>
-<para>Updates menu visibility based on focus changes. </para>
+<para>Updates menu visibility based on current state. </para>
         </briefdescription>
         <detaileddescription>
-<para>Compares the current focused entity with the previous one. If focus changed, hides the previous menu and shows the new one. Skips processing if focus remains unchanged.</para>
+<para>Queries the current game and match state, then: 1. Hides menus that are no longer active 2. Shows menus for the current state 3. Ensures at least one menu item has focus</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>updateContext</parametername>
@@ -103,14 +203,19 @@
 </para>
         </detaileddescription>
         <inbodydescription>
+<para><xrefsect id="todo_1_todo000014"><xreftitle>Todo</xreftitle><xrefdescription><para>Check if item is child element of menu? </para>
+</xrefdescription></xrefsect></para>
+<para><xrefsect id="todo_1_todo000015"><xreftitle>Todo</xreftitle><xrefdescription><para>guaranteee that the <ref refid="structhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiFocusComponent" kindref="compound">UiFocusComponent</ref> is exclusive, break here if first comp with focus was found. </para>
+</xrefdescription></xrefsect></para>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuDisplaySystem.ixx" line="99" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuDisplaySystem.ixx" bodystart="99" bodyend="131"/>
+        <location file="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuDisplaySystem.ixx" line="138" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuDisplaySystem.ixx" bodystart="138" bodyend="200"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" compoundref="System_8ixx" startline="48">helios::engine::ecs::System::gameWorld_</references>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuDisplaySystem.ixx" line="10" column="15"/>
+    <location file="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuDisplaySystem.ixx" line="14" column="15"/>
   </compounddef>
 </doxygen>

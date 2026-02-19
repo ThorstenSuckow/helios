@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_24f556f2b844507e90167b0c5b1b7e80" kind="dir">
+    <compoundname>listeners</compoundname>
+    <innerfile refid="helios_2engine_2state_2listeners_2__module_8ixx">helios/engine/state/listeners/_module.ixx</innerfile>
+    <innerfile refid="LambdaStateListener_8ixx">LambdaStateListener.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_24f556f2b844507e90167b0c5b1b7e80_1autotoc_md660">
+<title>helios::engine::state::listeners</title><para>Listeners for observing state transitions.</para>
+</sect1>
+<sect1 id="dir_24f556f2b844507e90167b0c5b1b7e80_1autotoc_md661">
+<title>Components</title><para><table rows="2" cols="2"><row>
+<entry thead="yes"><para>Class  </para>
+</entry><entry thead="yes"><para>Description  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>LambdaStateListener&lt;StateType&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para>Lambda-based listener implementation  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_24f556f2b844507e90167b0c5b1b7e80_1autotoc_md662">
+<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1state_1_1listeners" kindref="compound">helios::engine::state::listeners</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>listener<sp/>=<sp/>std::make_unique&lt;LambdaStateListener&lt;GameState&gt;&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>onExit</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>[](</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>ctx,<sp/><ref refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80be" kindref="member">GameState</ref><sp/><ref refid="namespacehelios_1_1ext_1_1glfw_1_1input_1_1GLFWGamepadLookup_1a62b69cffc672cd5aaf3b0d9145d92cbf" kindref="member">from</ref>)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Handle<sp/>state<sp/>exit</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>onTransition</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>[](</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>ctx,<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>transitionCtx)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Handle<sp/>transition</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>onEnter</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>[](</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>ctx,<sp/><ref refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80be" kindref="member">GameState</ref><sp/>to)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Handle<sp/>state<sp/>entry</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">stateManager.addStateListener(std::move(listener));</highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+ <details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/state/listeners/"/>
+  </compounddef>
+</doxygen>

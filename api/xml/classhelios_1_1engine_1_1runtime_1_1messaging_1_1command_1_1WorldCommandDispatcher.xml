@@ -2,13 +2,12 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>helios::engine::runtime::messaging::command::WorldCommandDispatcher</compoundname>
-    <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher" prot="public" virt="non-virtual">helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; helios::engine::mechanics::gamestate::commands::GameStateCommand &gt;</derivedcompoundref>
-    <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher" prot="public" virt="non-virtual">helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; helios::engine::mechanics::match::commands::MatchStateCommand &gt;</derivedcompoundref>
     <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher" prot="public" virt="non-virtual">helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; helios::engine::mechanics::scoring::commands::UpdateScoreCommand &gt;</derivedcompoundref>
     <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher" prot="public" virt="non-virtual">helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; helios::engine::modules::ui::commands::UiActionCommand &gt;</derivedcompoundref>
     <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher" prot="public" virt="non-virtual">helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; helios::engine::runtime::spawn::commands::DespawnCommand &gt;</derivedcompoundref>
     <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher" prot="public" virt="non-virtual">helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand &gt;</derivedcompoundref>
     <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher" prot="public" virt="non-virtual">helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; helios::engine::runtime::spawn::commands::SpawnCommand &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher" prot="public" virt="non-virtual">helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; helios::engine::state::commands::StateCommand&lt; StateType &gt; &gt;</derivedcompoundref>
     <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher" prot="public" virt="non-virtual">helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; T &gt;</derivedcompoundref>
     <sectiondef kind="public-func">
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher_1a99cfdc9890b444664a9ae3a98e8b6d1f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
@@ -32,7 +31,6 @@
         <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld, const WorldCommand &amp;command)=0</argsstring>
         <name>dispatch</name>
         <qualifiedname>helios::engine::runtime::messaging::command::WorldCommandDispatcher::dispatch</qualifiedname>
-        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher_1ada9b7af011e293a1d5712a1134bdf66d">dispatch</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher_1ada9b7af011e293a1d5712a1134bdf66d">dispatch</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher_1ada9b7af011e293a1d5712a1134bdf66d">dispatch</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher_1ada9b7af011e293a1d5712a1134bdf66d">dispatch</reimplementedby>
@@ -90,73 +88,55 @@
     </detaileddescription>
     <inheritancegraph>
       <node id="3">
-        <label>helios::engine::mechanics::gamestate::dispatcher::GameStateCommandDispatcher</label>
-        <link refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1dispatcher_1_1GameStateCommandDispatcher"/>
+        <label>helios::engine::mechanics::scoring::ScoreCommandDispatcher</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandDispatcher"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
       <node id="5">
-        <label>helios::engine::mechanics::match::dispatcher::MatchStateCommandDispatcher</label>
-        <link refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1dispatcher_1_1MatchStateCommandDispatcher"/>
+        <label>helios::engine::modules::ui::commands::UiActionCommandDispatcher</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommandDispatcher"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="7">
-        <label>helios::engine::mechanics::scoring::ScoreCommandDispatcher</label>
-        <link refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandDispatcher"/>
-        <childnode refid="6" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="9">
-        <label>helios::engine::modules::ui::commands::UiActionCommandDispatcher</label>
-        <link refid="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommandDispatcher"/>
-        <childnode refid="8" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="16">
+      <node id="14">
         <label>helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; T &gt;</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="2">
-        <label>helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; helios::engine::mechanics::gamestate::commands::GameStateCommand &gt;</label>
-        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="4">
-        <label>helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; helios::engine::mechanics::match::commands::MatchStateCommand &gt;</label>
-        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="6">
         <label>helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; helios::engine::mechanics::scoring::commands::UpdateScoreCommand &gt;</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="8">
+      <node id="4">
         <label>helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; helios::engine::modules::ui::commands::UiActionCommand &gt;</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="10">
+      <node id="6">
         <label>helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; helios::engine::runtime::spawn::commands::DespawnCommand &gt;</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="12">
+      <node id="8">
         <label>helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand &gt;</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="14">
+      <node id="10">
         <label>helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; helios::engine::runtime::spawn::commands::SpawnCommand &gt;</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; helios::engine::state::commands::StateCommand&lt; StateType &gt; &gt;</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
@@ -165,22 +145,28 @@
         <label>helios::engine::runtime::messaging::command::WorldCommandDispatcher</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher"/>
       </node>
-      <node id="11">
+      <node id="7">
         <label>helios::engine::runtime::spawn::dispatcher::DespawnCommandDispatcher</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1DespawnCommandDispatcher"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>helios::engine::runtime::spawn::dispatcher::ScheduledSpawnPlanCommandDispatcher</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1ScheduledSpawnPlanCommandDispatcher"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>helios::engine::runtime::spawn::dispatcher::SpawnCommandDispatcher</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1SpawnCommandDispatcher"/>
         <childnode refid="10" relation="public-inheritance">
         </childnode>
       </node>
       <node id="13">
-        <label>helios::engine::runtime::spawn::dispatcher::ScheduledSpawnPlanCommandDispatcher</label>
-        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1ScheduledSpawnPlanCommandDispatcher"/>
+        <label>helios::engine::state::dispatcher::StateCommandDispatcher&lt; StateType &gt;</label>
+        <link refid="classhelios_1_1engine_1_1state_1_1dispatcher_1_1StateCommandDispatcher"/>
         <childnode refid="12" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="15">
-        <label>helios::engine::runtime::spawn::dispatcher::SpawnCommandDispatcher</label>
-        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1SpawnCommandDispatcher"/>
-        <childnode refid="14" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>

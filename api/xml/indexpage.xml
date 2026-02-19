@@ -7,10 +7,10 @@
     </briefdescription>
     <detaileddescription>
 <para><anchor id="index_1md__2tmp_2h_2docs_2heliosapi"/></para>
-<sect1 id="index_1autotoc_md735">
+<sect1 id="index_1autotoc_md732">
 <title>Introduction</title><para><computeroutput><ref refid="namespacehelios" kindref="compound">helios</ref></computeroutput> is an ongoing, educational project and strives for providing a foundational and modular technical backbone for game development. Designed with a top-down, prototype-oriented approach, it emphasizes a clear separation of concerns and robust architectural patterns to help with creating maintainable games.</para>
 </sect1>
-<sect1 id="index_1autotoc_md736">
+<sect1 id="index_1autotoc_md733">
 <title>Core Purpose</title><para>The primary objective of <computeroutput><ref refid="namespacehelios" kindref="compound">helios</ref></computeroutput> is to offer a flexible and extensible platform for interactive games. As a prototype, it provides the following systems:</para>
 <para><itemizedlist>
 <listitem><para><bold>Rendering Pipeline:</bold> A rendering layer with customizable render passes.</para>
@@ -19,9 +19,9 @@
 </listitem></itemizedlist>
 </para>
 </sect1>
-<sect1 id="index_1autotoc_md737">
+<sect1 id="index_1autotoc_md734">
 <title>Architecture Overview</title><para>The framework&apos;s architecture follows a component-based philosophy, providing abstract interfaces that decouple high-level scene descriptions from underlying hardware implementations.</para>
-<sect2 id="index_1autotoc_md738">
+<sect2 id="index_1autotoc_md735">
 <title>Core Modules</title><para><programlisting><codeline><highlight class="normal">helios</highlight></codeline>
 <codeline><highlight class="normal">├──<sp/>core<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Units,<sp/>buffers,<sp/>and<sp/>fundamental<sp/>constants</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>buffer<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Double-buffered<sp/>data<sp/>structures</highlight></codeline>
@@ -68,7 +68,7 @@
 <codeline><highlight class="normal">└──<sp/>app<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Application<sp/>lifecycle<sp/>and<sp/>controllers</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="index_1autotoc_md739">
+<sect2 id="index_1autotoc_md736">
 <title>Extension Modules</title><para><programlisting><codeline><highlight class="normal">helios.ext</highlight></codeline>
 <codeline><highlight class="normal">├──<sp/>imgui<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>ImGui<sp/>integration<sp/>for<sp/>debug<sp/>overlays</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>widgets<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Ready-to-use<sp/>debug<sp/>widgets</highlight></codeline>
@@ -90,8 +90,8 @@
 </programlisting></para>
 </sect2>
 </sect1>
-<sect1 id="index_1autotoc_md740">
-<title>Core Concepts</title><sect2 id="index_1autotoc_md741">
+<sect1 id="index_1autotoc_md737">
+<title>Core Concepts</title><sect2 id="index_1autotoc_md738">
 <title>1. Scene Graph</title><para>The scene graph organizes objects hierarchically, with automatic transform propagation from parent to child nodes. Transform inheritance can be selectively controlled per node.</para>
 <para><bold>Key Classes:</bold><itemizedlist>
 <listitem><para><computeroutput>Scene</computeroutput> - Root container for all scene objects</para>
@@ -123,7 +123,7 @@
 <codeline><highlight class="normal">camPtr-&gt;lookAt(<ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">vec3f</ref>(0.0f,<sp/>0.0f,<sp/>0.0f),<sp/><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">vec3f</ref>(0.0f,<sp/>1.0f,<sp/>0.0f));</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="index_1autotoc_md742">
+<sect2 id="index_1autotoc_md739">
 <title>2. Rendering Pipeline</title><para>The rendering pipeline uses a deferred command pattern with render passes.</para>
 <para><bold>Flow:</bold> <programlisting><codeline><highlight class="normal">Scene<sp/>→<sp/>Snapshot<sp/>→<sp/>RenderPass<sp/>→<sp/>RenderQueue<sp/>→<sp/>RenderCommand<sp/>→<sp/>GPU</highlight></codeline>
 </programlisting></para>
@@ -150,7 +150,7 @@
 <codeline><highlight class="normal">};</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="index_1autotoc_md743">
+<sect2 id="index_1autotoc_md740">
 <title>3. Material System</title><para>Materials define surface appearance with shaders and properties.</para>
 <para><bold>Key Classes:</bold><itemizedlist>
 <listitem><para><computeroutput>Material</computeroutput> - Shader + default MaterialProperties</para>
@@ -170,7 +170,7 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>std::make_shared&lt;MaterialProperties&gt;(materialProps));</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="index_1autotoc_md744">
+<sect2 id="index_1autotoc_md741">
 <title>4. Input System</title><para>Unified input handling for keyboard, mouse, and gamepad.</para>
 <para><bold>Key Classes:</bold><itemizedlist>
 <listitem><para><computeroutput>InputManager</computeroutput> - Central input coordinator</para>
@@ -215,7 +215,7 @@
 <codeline><highlight class="normal">settings.setInvertRightY(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="index_1autotoc_md745">
+<sect2 id="index_1autotoc_md742">
 <title>5. Logging System</title><para>Flexible logging with configurable output destinations (sinks).</para>
 <para><bold>Key Classes:</bold><itemizedlist>
 <listitem><para><computeroutput>Logger</computeroutput> - Scoped logger for categorized output</para>
@@ -243,7 +243,7 @@
 <codeline><highlight class="normal">mgr.disableSink(</highlight><highlight class="stringliteral">&quot;imgui&quot;</highlight><highlight class="normal">);</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="index_1autotoc_md746">
+<sect2 id="index_1autotoc_md743">
 <title>6. ImGui Debug Overlay</title><para>Integrated debug UI with docking support and persistent settings.</para>
 <para><bold>Key Classes:</bold><itemizedlist>
 <listitem><para><computeroutput>ImGuiOverlay</computeroutput> - Widget manager with DockSpace support</para>
@@ -297,7 +297,7 @@
 </listitem></itemizedlist>
 </para>
 </sect2>
-<sect2 id="index_1autotoc_md747">
+<sect2 id="index_1autotoc_md744">
 <title>8. Game System</title><para>A composition-based game architecture separating data (Components) from behavior (Systems).</para>
 <para><bold>Key Classes:</bold><itemizedlist>
 <listitem><para><computeroutput>GameObject</computeroutput> - Container for Components with unique GUID</para>
@@ -368,7 +368,7 @@
 </programlisting></para>
 <para>See Component System, Game Loop Architecture, Command System, and Spawn System for details.</para>
 </sect2>
-<sect2 id="index_1autotoc_md748">
+<sect2 id="index_1autotoc_md745">
 <title>9. Units System</title><para>Standardized measurement units for consistent object sizing across the engine.</para>
 <para><bold>Key Constants:</bold><itemizedlist>
 <listitem><para>Standard unit: <bold>Meter</bold> (1 hu = 1 m)</para>
@@ -386,7 +386,7 @@
 <codeline><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>SHIP_WIDTH<sp/>=<sp/>5.0f;<sp/><sp/></highlight><highlight class="comment">//<sp/>5<sp/>hu<sp/>=<sp/>5<sp/>meters</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="index_1autotoc_md749">
+<sect2 id="index_1autotoc_md746">
 <title>7. Frame Pacing and Performance Metrics</title><para>Control frame rate and monitor performance with built-in timing tools.</para>
 <para><bold>Key Classes:</bold><itemizedlist>
 <listitem><para><computeroutput>FramePacer</computeroutput> - Maintains consistent frame rate through precise timing</para>
@@ -437,8 +437,8 @@
 </programlisting></para>
 </sect2>
 </sect1>
-<sect1 id="index_1autotoc_md750">
-<title>Quick Start</title><sect2 id="index_1autotoc_md751">
+<sect1 id="index_1autotoc_md747">
+<title>Quick Start</title><sect2 id="index_1autotoc_md748">
 <title>Creating a Simple Application</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8ext_8glfw_8app_8GLFWFactory" kindref="compound">helios.ext.glfw.app.GLFWFactory</ref>;</highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8scene_8Scene" kindref="compound">helios.scene.Scene</ref>;</highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8scene_8CameraSceneNode" kindref="compound">helios.scene.CameraSceneNode</ref>;</highlight></codeline>
@@ -495,9 +495,9 @@
 </programlisting></para>
 </sect2>
 </sect1>
-<sect1 id="index_1autotoc_md752">
+<sect1 id="index_1autotoc_md749">
 <title>Module Details</title><para>For detailed information about each module, see:</para>
-<sect2 id="index_1autotoc_md753">
+<sect2 id="index_1autotoc_md750">
 <title>Core Concepts</title><para><itemizedlist>
 <listitem><para><bold>Component System</bold> - ECS-style composition architecture</para>
 </listitem><listitem><para><bold>Game Loop Architecture</bold> - Phase/Pass structure and event handling</para>
@@ -509,7 +509,7 @@
 </listitem></itemizedlist>
 </para>
 </sect2>
-<sect2 id="index_1autotoc_md754">
+<sect2 id="index_1autotoc_md751">
 <title>Module References</title><para><itemizedlist>
 <listitem><para><bold><ref refid="dir_4e12247f2bbe360a59cd98a83515e8f1" kindref="compound">Core</ref></bold> - Units and fundamental constants</para>
 </listitem><listitem><para><bold><ref refid="dir_614bfcfaacae36fbea464e65a5a85120" kindref="compound">Rendering</ref></bold> - Rendering system and pipeline</para>
@@ -528,20 +528,20 @@
 </para>
 </sect2>
 </sect1>
-<sect1 id="index_1autotoc_md755">
-<title>Advanced Topics</title><sect2 id="index_1autotoc_md756">
+<sect1 id="index_1autotoc_md752">
+<title>Advanced Topics</title><sect2 id="index_1autotoc_md753">
 <title>Custom Rendering Backend</title><para>To implement a custom rendering backend:</para>
 <para>1. Implement <computeroutput>RenderingDevice</computeroutput> interface 2. Extend <computeroutput>Mesh</computeroutput> for your platform (e.g., <computeroutput>VulkanMesh</computeroutput>) 3. Extend <computeroutput>Shader</computeroutput> for your platform (e.g., <computeroutput>VulkanShader</computeroutput>) 4. Create a factory (e.g., <computeroutput>VulkanFactory</computeroutput>)</para>
 </sect2>
-<sect2 id="index_1autotoc_md757">
+<sect2 id="index_1autotoc_md754">
 <title>Custom Input Adapter</title><para>To implement a custom input adapter:</para>
 <para>1. Implement <computeroutput>InputAdapter</computeroutput> interface 2. Map platform-specific events to helios types 3. Update <computeroutput>GamepadState</computeroutput> on polling</para>
 </sect2>
 </sect1>
-<sect1 id="index_1autotoc_md758">
+<sect1 id="index_1autotoc_md755">
 <title>API Documentation</title><para>For detailed class-by-class documentation, see the <ulink url="https://helios.garagecraft.games/docs/helios/">Doxygen-generated API reference</ulink>.</para>
 </sect1>
-<sect1 id="index_1autotoc_md759">
+<sect1 id="index_1autotoc_md756">
 <title>Examples</title><para>Check the <ulink url="../examples/">examples/</ulink> directory for complete working examples:</para>
 <para><itemizedlist>
 <listitem><para><bold>Simple Cube Rendering</bold> - Basic rendering tutorial</para>
@@ -552,7 +552,7 @@
 </listitem></itemizedlist>
 </para>
 </sect1>
-<sect1 id="index_1autotoc_md760">
+<sect1 id="index_1autotoc_md757">
 <title>License</title><para><computeroutput><ref refid="namespacehelios" kindref="compound">helios</ref></computeroutput> is distributed under the MIT-license. </para>
 </sect1>
     </detaileddescription>

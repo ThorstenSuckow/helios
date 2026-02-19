@@ -116,8 +116,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a1c22609dfb21151cb2c60db9c1a4c196"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html" title="Represents a phase in the game loop containing multiple passes.">Phase</a> with a reference to its owning <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html" title="Central orchestrator for the game update cycle.">GameLoop</a>.  <br /></td></tr>
 <tr class="memitem:a6b4a1f29d5eafcbb8f86e6bc867d3d11" id="r_a6b4a1f29d5eafcbb8f86e6bc867d3d11"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6b4a1f29d5eafcbb8f86e6bc867d3d11">addPassCommitListener</a> (<a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1PassCommitListener.html">PassCommitListener</a> *passCommitListener)</td></tr>
 <tr class="memdesc:a6b4a1f29d5eafcbb8f86e6bc867d3d11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a listener to be notified when passes commit.  <br /></td></tr>
-<tr class="memitem:a14ac55084488132a02512a95cf79585a" id="r_a14ac55084488132a02512a95cf79585a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html">Pass</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a14ac55084488132a02512a95cf79585a">addPass</a> (const <a class="el" href="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a8e0bcae228fdf9f4cb489e7f912d80be">helios::engine::mechanics::gamestate::types::GameState</a> gameState=<a class="el" href="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a8e0bcae228fdf9f4cb489e7f912d80beaed36a1ef76a59ee3f15180e0441188ad">helios::engine::mechanics::gamestate::types::GameState::Any</a>)</td></tr>
-<tr class="memdesc:a14ac55084488132a02512a95cf79585a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates and adds a new pass to this phase.  <br /></td></tr>
+<tr class="memitem:a88638a425d6afe3141de12474f6ea52d" id="r_a88638a425d6afe3141de12474f6ea52d"><td class="memTemplParams" colspan="2">template&lt;typename StateType&gt; </td></tr>
+<tr class="memitem:a88638a425d6afe3141de12474f6ea52d template"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html">Pass</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a88638a425d6afe3141de12474f6ea52d">addPass</a> (const StateType t)</td></tr>
+<tr class="memdesc:a88638a425d6afe3141de12474f6ea52d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates and adds a new typed pass to this phase.  <br /></td></tr>
 <tr class="memitem:aa478fd5c979d7b3454afd1a4a9521851" id="r_aa478fd5c979d7b3454afd1a4a9521851"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html">helios::engine::runtime::gameloop::GameLoop</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa478fd5c979d7b3454afd1a4a9521851">gameLoop</a> () noexcept</td></tr>
 <tr class="memdesc:aa478fd5c979d7b3454afd1a4a9521851"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a reference to the owning <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html" title="Central orchestrator for the game update cycle.">GameLoop</a>.  <br /></td></tr>
 </table><table class="memberdecls">
@@ -131,13 +132,13 @@ class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac
 <p>A <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html" title="Represents a phase in the game loop containing multiple passes.">Phase</a> groups related systems into passes that are executed sequentially. Each pass can contain multiple systems and may have a commit point for event synchronization.</p>
 <p>Commit points allow fine-grained control over when commands are flushed, managers are processed, and pass-level events are synchronized. See <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8ec" title="Flags defining synchronization actions at the end of a pass.">CommitPoint</a> for available synchronization options.</p>
 <p>Phases are owned by the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html" title="Central orchestrator for the game update cycle.">GameLoop</a> and should not be created directly.</p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html" title="Represents a single pass within a game loop phase.">Pass</a> </dd>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html" title="Abstract base class for game loop passes.">Pass</a> </dd>
 <dd>
 <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8ec" title="Flags defining synchronization actions at the end of a pass.">CommitPoint</a> </dd>
 <dd>
 <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html" title="Central orchestrator for the game update cycle.">GameLoop</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Phase_8ixx_source.html#l00072">72</a> of file <a class="el" href="Phase_8ixx_source.html">Phase.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Phase_8ixx_source.html#l00074">74</a> of file <a class="el" href="Phase_8ixx_source.html">Phase.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a1c22609dfb21151cb2c60db9c1a4c196" name="a1c22609dfb21151cb2c60db9c1a4c196"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1c22609dfb21151cb2c60db9c1a4c196">&#9670;&#160;</a></span>Phase()</h2>
@@ -170,16 +171,18 @@ class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Phase_8ixx_source.html#l00178">178</a> of file <a class="el" href="Phase_8ixx_source.html">Phase.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Phase_8ixx_source.html#l00176">176</a> of file <a class="el" href="Phase_8ixx_source.html">Phase.ixx</a>.</p>
 
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a14ac55084488132a02512a95cf79585a" name="a14ac55084488132a02512a95cf79585a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a14ac55084488132a02512a95cf79585a">&#9670;&#160;</a></span>addPass()</h2>
+<a id="a88638a425d6afe3141de12474f6ea52d" name="a88638a425d6afe3141de12474f6ea52d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88638a425d6afe3141de12474f6ea52d">&#9670;&#160;</a></span>addPass()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename StateType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -187,7 +190,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac
         <tr>
           <td class="memname"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html">Pass</a> &amp; helios::engine::runtime::gameloop::Phase::addPass </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a8e0bcae228fdf9f4cb489e7f912d80be">helios::engine::mechanics::gamestate::types::GameState</a></td>          <td class="paramname"><span class="paramname"><em>gameState</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a8e0bcae228fdf9f4cb489e7f912d80beaed36a1ef76a59ee3f15180e0441188ad">helios::engine::mechanics::gamestate::types::GameState::Any</a></span></td><td>)</td>
+          <td class="paramtype">const StateType</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -198,22 +201,26 @@ class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac
 </table>
 </div><div class="memdoc">
 
-<p>Creates and adds a new pass to this phase. </p>
-<p>The optional gameState parameter specifies in which game states this pass should execute. By default, passes run in all states (GameState::Any). Passes are skipped if the current game state does not match the configured mask.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">gameState</td><td>The game state(s) in which this pass should run.</td></tr>
+<p>Creates and adds a new typed pass to this phase. </p>
+<p>The state parameter specifies in which states this pass should execute. Passes are skipped if the current state does not match the configured mask (using bitwise AND).</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">StateType</td><td>The state enum type (e.g., <a class="el" href="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a8e0bcae228fdf9f4cb489e7f912d80be" title="Enumeration of possible game states.">GameState</a>, MatchState).</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Reference to the newly created <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html" title="Represents a single pass within a game loop phase.">Pass</a> for method chaining.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html#a7475d435aa819840637eb6799421a12a" title="Returns the game state(s) in which this pass executes.">Pass::runsIn()</a> </dd>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>The state mask specifying when this pass should run.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the newly created <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html" title="Abstract base class for game loop passes.">Pass</a> for method chaining.</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1TypedPass.html" title="State-filtered pass that only executes in specific states.">TypedPass</a> </dd>
 <dd>
-GameState </dd></dl>
+Session::state() </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Phase_8ixx_source.html#l00228">228</a> of file <a class="el" href="Phase_8ixx_source.html">Phase.ixx</a>.</p>
-
-<p class="reference">References <a class="el" href="GameState_8ixx_source.html#l00044">helios::engine::mechanics::gamestate::types::Any</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Phase_8ixx_source.html#l00229">229</a> of file <a class="el" href="Phase_8ixx_source.html">Phase.ixx</a>.</p>
 
 </div>
 </div>
@@ -254,7 +261,7 @@ GameState </dd></dl>
 <dd>
 notifyPassCommitListeners() </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Phase_8ixx_source.html#l00201">201</a> of file <a class="el" href="Phase_8ixx_source.html">Phase.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Phase_8ixx_source.html#l00199">199</a> of file <a class="el" href="Phase_8ixx_source.html">Phase.ixx</a>.</p>
 
 </div>
 </div>
@@ -284,7 +291,7 @@ notifyPassCommitListeners() </dd></dl>
 <p>Returns a reference to the owning <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html" title="Central orchestrator for the game update cycle.">GameLoop</a>. </p>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the parent <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html" title="Central orchestrator for the game update cycle.">GameLoop</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Phase_8ixx_source.html#l00242">242</a> of file <a class="el" href="Phase_8ixx_source.html">Phase.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Phase_8ixx_source.html#l00243">243</a> of file <a class="el" href="Phase_8ixx_source.html">Phase.ixx</a>.</p>
 
 </div>
 </div>

@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="helios_2engine_2state_2README_8md" kind="file" language="Markdown">
+    <compoundname>helios/engine/state/README.md</compoundname>
+    <innernamespace refid="namespacehelios_1_1engine_1_1state">helios::engine::state</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>helios::engine::state</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Generic,<sp/>template-based<sp/>state<sp/>management<sp/>system<sp/>with<sp/>rule-based<sp/>transitions.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>a<sp/>complete<sp/>state<sp/>management<sp/>framework<sp/>including:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>**State<sp/>machines**<sp/>with<sp/>rule-based<sp/>transitions<sp/>and<sp/>guards</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Commands<sp/>and<sp/>dispatchers**<sp/>for<sp/>requesting<sp/>state<sp/>changes</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Listeners**<sp/>for<sp/>reacting<sp/>to<sp/>state<sp/>transitions</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**ID<sp/>mapping<sp/>utilities**<sp/>for<sp/>associating<sp/>states<sp/>with<sp/>viewports/menus</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">All<sp/>components<sp/>are<sp/>parameterized<sp/>by<sp/>state<sp/>type,<sp/>enabling<sp/>reuse<sp/>for<sp/>different<sp/>state<sp/>enums<sp/>(e.g.,<sp/>GameState,<sp/>MatchState).</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Core<sp/>Components</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>State<sp/>Management</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Description<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|-------------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`StateManager&lt;StateType&gt;`<sp/>|<sp/>Rule-based<sp/>state<sp/>machine<sp/>with<sp/>listener<sp/>support<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`StateTransitionRule&lt;StateType&gt;`<sp/>|<sp/>Defines<sp/>valid<sp/>transitions<sp/>with<sp/>optional<sp/>guards<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`StateTransitionListener&lt;StateType&gt;`<sp/>|<sp/>Interface<sp/>for<sp/>transition<sp/>observers<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`LambdaStateListener&lt;StateType&gt;`<sp/>|<sp/>Lambda-based<sp/>listener<sp/>implementation<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`StateCommand&lt;StateType&gt;`<sp/>|<sp/>Command<sp/>for<sp/>requesting<sp/>transitions<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`StateCommandDispatcher&lt;StateType&gt;`<sp/>|<sp/>Routes<sp/>commands<sp/>to<sp/>handlers<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`StateComponent&lt;StateType&gt;`<sp/>|<sp/>Stores<sp/>current<sp/>state<sp/>on<sp/>entities<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>ID<sp/>Mapping</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Description<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|-------------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`StateToIdMap&lt;TState,<sp/>TId&gt;`<sp/>|<sp/>Maps<sp/>a<sp/>single<sp/>state<sp/>type<sp/>to<sp/>ID<sp/>lists<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`StateToIdMapPair&lt;LState,<sp/>RState,<sp/>TId&gt;`<sp/>|<sp/>Combines<sp/>two<sp/>state<sp/>maps,<sp/>returns<sp/>union<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`CombinedStateToIdMapPair&lt;LState,<sp/>RState,<sp/>TId&gt;`<sp/>|<sp/>Maps<sp/>state<sp/>pairs<sp/>directly<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Type<sp/>Trait<sp/>Specialization</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">To<sp/>use<sp/>`StateManager&lt;YourState&gt;`,<sp/>you<sp/>must<sp/>specialize<sp/>`StateTransitionId`:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>In<sp/>your<sp/>bindings<sp/>module:</highlight></codeline>
+<codeline><highlight class="normal">template&lt;&gt;</highlight></codeline>
+<codeline><highlight class="normal">struct<sp/>helios::engine::state::types::StateTransitionId&lt;GameState&gt;<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>using<sp/>Type<sp/>=<sp/>GameStateTransitionId;</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Defining<sp/>Rules</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>namespace<sp/>helios::engine::state;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>namespace<sp/>helios::engine::state::types;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">constexpr<sp/>StateTransitionRule&lt;GameState&gt;<sp/>gameStateRules[]<sp/>=<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{GameState::MainMenu,<sp/>GameStateTransitionId::StartGame,<sp/>GameState::Running},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{GameState::Running,<sp/>GameStateTransitionId::Pause,<sp/>GameState::Paused},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{GameState::Paused,<sp/>GameStateTransitionId::Resume,<sp/>GameState::Running},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{GameState::Running,<sp/>GameStateTransitionId::GameOver,<sp/>GameState::MainMenu,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Optional<sp/>guard:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[](auto&amp;<sp/>ctx,<sp/>auto&amp;<sp/>req)<sp/>{<sp/>return<sp/>ctx.session().lives()<sp/>==<sp/>0;<sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Creating<sp/>the<sp/>Manager</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>gameStateManager<sp/>=<sp/>std::make_unique&lt;StateManager&lt;GameState&gt;&gt;(gameStateRules);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">gameStateManager-&gt;addStateListener(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>std::make_unique&lt;LambdaStateListener&lt;GameState&gt;&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[](auto&amp;<sp/>ctx,<sp/>GameState<sp/>from)<sp/>{<sp/>/*<sp/>onExit<sp/>*/<sp/>},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[](auto&amp;<sp/>ctx,<sp/>auto<sp/>transitionCtx)<sp/>{<sp/>/*<sp/>onTransition<sp/>*/<sp/>},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[](auto&amp;<sp/>ctx,<sp/>GameState<sp/>to)<sp/>{<sp/>/*<sp/>onEnter<sp/>*/<sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>)</highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">gameLoop.addManager(std::move(gameStateManager));</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Requesting<sp/>Transitions</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">updateContext.commandBuffer().add&lt;StateCommand&lt;GameState&gt;&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>StateTransitionRequest&lt;GameState&gt;{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GameState::Running,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GameStateTransitionId::Pause</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Transition<sp/>Flow</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">1.<sp/>`StateCommand`<sp/>is<sp/>submitted<sp/>to<sp/>the<sp/>command<sp/>buffer</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>`StateCommandDispatcher`<sp/>routes<sp/>it<sp/>to<sp/>`StateManager`</highlight></codeline>
+<codeline><highlight class="normal">3.<sp/>`StateManager::flush()`<sp/>processes<sp/>pending<sp/>commands</highlight></codeline>
+<codeline><highlight class="normal">4.<sp/>Matching<sp/>rule<sp/>is<sp/>found<sp/>and<sp/>guard<sp/>is<sp/>evaluated</highlight></codeline>
+<codeline><highlight class="normal">5.<sp/>Listeners<sp/>are<sp/>notified:<sp/>`onStateExit`<sp/>→<sp/>`onStateTransition`<sp/>→<sp/>`onStateEnter`</highlight></codeline>
+<codeline><highlight class="normal">6.<sp/>Session<sp/>state<sp/>is<sp/>updated</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>ID<sp/>Mapping</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">For<sp/>viewport/menu<sp/>activation<sp/>based<sp/>on<sp/>state:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">CombinedStateToIdMapPair&lt;GameState,<sp/>MatchState,<sp/>ViewportId&gt;<sp/>viewportPolicy;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">viewportPolicy.add(GameState::Running,<sp/>MatchState::Playing,<sp/>ViewportId(&quot;game&quot;));</highlight></codeline>
+<codeline><highlight class="normal">viewportPolicy.add(GameState::Paused,<sp/>MatchState::Undefined,<sp/>ViewportId(&quot;pause&quot;));</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">viewportPolicy.freeze();</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+<codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::engine::state</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Generic,<sp/>template-based<sp/>state<sp/>management<sp/>system.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Provides<sp/>a<sp/>complete<sp/>framework<sp/>for<sp/>managing<sp/>application<sp/>state<sp/>with<sp/>rule-based<sp/>transitions,<sp/>guards,<sp/>listeners,<sp/>and<sp/>ID<sp/>mapping<sp/>utilities.<sp/>All<sp/>components<sp/>are<sp/>parameterized<sp/>by<sp/>state<sp/>type<sp/>for<sp/>maximum<sp/>reuse.</highlight></codeline>
+<codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
+<codeline></codeline>
+    </programlisting>
+    <location file="/tmp/h/include/helios/engine/state/README.md"/>
+  </compounddef>
+</doxygen>

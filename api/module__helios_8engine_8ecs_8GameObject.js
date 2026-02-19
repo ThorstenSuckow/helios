@@ -7,6 +7,7 @@ var module__helios_8engine_8ecs_8GameObject =
     [ "helios::engine::ecs::GameObject::entityHandle", "module__helios_8engine_8ecs_8GameObject.html#a7135aa7138d11abfe995def238555b1d", null ],
     [ "helios::engine::ecs::GameObject::add", "module__helios_8engine_8ecs_8GameObject.html#a0447ff56cdd329a2db5436096f8353ae", null ],
     [ "helios::engine::ecs::GameObject::getOrAdd", "module__helios_8engine_8ecs_8GameObject.html#ad6fbab6897f2899f0e6f98c37ba294e8", null ],
+    [ "helios::engine::ecs::GameObject::remove", "module__helios_8engine_8ecs_8GameObject.html#ab7e20b435045181306f91a3a439b4620", null ],
     [ "helios::engine::ecs::GameObject::raw", "module__helios_8engine_8ecs_8GameObject.html#ab1c1f6b81c4965b76967c29a6af7f713", null ],
     [ "helios::engine::ecs::GameObject::get", "module__helios_8engine_8ecs_8GameObject.html#a2229cd5bbcce0a3504519ed979ccdeb7", null ],
     [ "helios::engine::ecs::GameObject::get", "module__helios_8engine_8ecs_8GameObject.html#a2afb01851bc29d6f5d69b0e13a448dce", null ],

@@ -1,0 +1,275 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8engine_8state_8CombinedStateToIdMapPair" kind="module">
+    <compoundname>helios.engine.state.CombinedStateToIdMapPair</compoundname>
+    <innerfile refid="CombinedStateToIdMapPair_8ixx">CombinedStateToIdMapPair.ixx</innerfile>
+    <innerclass refid="classhelios_1_1engine_1_1state_1_1CombinedStateToIdMapPair" prot="public">helios::engine::state::CombinedStateToIdMapPair</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1state_1_1CombinedStateToIdMapPair_1a5a8dde795b4e167c1360db796f1a8bfa" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::vector&lt; std::vector&lt; TId &gt; &gt; &gt;</type>
+        <definition>std::vector&lt;std::vector&lt;std::vector&lt;TId&gt; &gt; &gt; helios::engine::state::CombinedStateToIdMapPair&lt; LState, RState, TId &gt;::states_</definition>
+        <argsstring></argsstring>
+        <name>states_</name>
+        <qualifiedname>helios::engine::state::CombinedStateToIdMapPair::states_</qualifiedname>
+        <briefdescription>
+<para>2D matrix of ID lists indexed by [LState][RState]. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/state/CombinedStateToIdMapPair.ixx" line="56" column="21" bodyfile="/tmp/h/include/helios/engine/state/CombinedStateToIdMapPair.ixx" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1state_1_1CombinedStateToIdMapPair_1a7f0caa296230a32ab2c21be80aec2e04" prot="private" static="no" mutable="no">
+        <type>const std::vector&lt; TId &gt;</type>
+        <definition>const std::vector&lt;TId&gt; helios::engine::state::CombinedStateToIdMapPair&lt; LState, RState, TId &gt;::empty_</definition>
+        <argsstring></argsstring>
+        <name>empty_</name>
+        <qualifiedname>helios::engine::state::CombinedStateToIdMapPair::empty_</qualifiedname>
+        <briefdescription>
+<para>Empty vector returned for invalid lookups. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/state/CombinedStateToIdMapPair.ixx" line="61" column="27" bodyfile="/tmp/h/include/helios/engine/state/CombinedStateToIdMapPair.ixx" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1state_1_1CombinedStateToIdMapPair_1a20f618b82bb994221b196295e9c6695c" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool helios::engine::state::CombinedStateToIdMapPair&lt; LState, RState, TId &gt;::frozen_</definition>
+        <argsstring></argsstring>
+        <name>frozen_</name>
+        <qualifiedname>helios::engine::state::CombinedStateToIdMapPair::frozen_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>Whether the map is frozen. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/state/CombinedStateToIdMapPair.ixx" line="66" column="14" bodyfile="/tmp/h/include/helios/engine/state/CombinedStateToIdMapPair.ixx" bodystart="66" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1state_1_1CombinedStateToIdMapPair_1a4d7873647875318bc663cf4493c86ae3" prot="private" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>static constexpr size_t helios::engine::state::CombinedStateToIdMapPair&lt; LState, RState, TId &gt;::indexOf</definition>
+        <argsstring>(const LState stateLft)</argsstring>
+        <name>indexOf</name>
+        <qualifiedname>helios::engine::state::CombinedStateToIdMapPair::indexOf</qualifiedname>
+        <param>
+          <type>const LState</type>
+          <declname>stateLft</declname>
+        </param>
+        <briefdescription>
+<para>Computes the index for a left state value. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stateLft</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The left state (must be non-zero, power of 2).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The bit position index. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/state/CombinedStateToIdMapPair.ixx" line="75" column="34" bodyfile="/tmp/h/include/helios/engine/state/CombinedStateToIdMapPair.ixx" bodystart="75" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1state_1_1CombinedStateToIdMapPair_1a431d6008e56d3611b6b5d1da18a0e784" prot="private" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>static constexpr size_t helios::engine::state::CombinedStateToIdMapPair&lt; LState, RState, TId &gt;::indexOf</definition>
+        <argsstring>(const RState stateRgt)</argsstring>
+        <name>indexOf</name>
+        <qualifiedname>helios::engine::state::CombinedStateToIdMapPair::indexOf</qualifiedname>
+        <param>
+          <type>const RState</type>
+          <declname>stateRgt</declname>
+        </param>
+        <briefdescription>
+<para>Computes the index for a right state value. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Supports undefined (0) state which maps to index 0. Non-zero states map to their bit position + 1.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stateRgt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The right state (may be 0, otherwise power of 2).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The index (0 for undefined, bit position + 1 otherwise). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/state/CombinedStateToIdMapPair.ixx" line="94" column="34" bodyfile="/tmp/h/include/helios/engine/state/CombinedStateToIdMapPair.ixx" bodystart="94" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1state_1_1CombinedStateToIdMapPair_1a8cf1fd9f2b32b7275f8160293997cb48" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>CombinedStateToIdMapPair &amp;</type>
+        <definition>CombinedStateToIdMapPair &amp; helios::engine::state::CombinedStateToIdMapPair&lt; LState, RState, TId &gt;::add</definition>
+        <argsstring>(const LState stateLft, const RState stateRgt, const TId id) noexcept</argsstring>
+        <name>add</name>
+        <qualifiedname>helios::engine::state::CombinedStateToIdMapPair::add</qualifiedname>
+        <param>
+          <type>const LState</type>
+          <declname>stateLft</declname>
+        </param>
+        <param>
+          <type>const RState</type>
+          <declname>stateRgt</declname>
+        </param>
+        <param>
+          <type>const TId</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+<para>Adds an ID for a specific state combination. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stateLft</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The left state (must be non-zero). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stateRgt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The right state (may be 0 for fallback). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ID to associate with this combination.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to this map for chaining. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/state/CombinedStateToIdMapPair.ixx" line="117" column="34" bodyfile="/tmp/h/include/helios/engine/state/CombinedStateToIdMapPair.ixx" bodystart="117" bodyend="138"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1state_1_1CombinedStateToIdMapPair_1a3ade3b0c9b3acea01209095d07a5cf87" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::state::CombinedStateToIdMapPair&lt; LState, RState, TId &gt;::finalize</definition>
+        <argsstring>()</argsstring>
+        <name>finalize</name>
+        <qualifiedname>helios::engine::state::CombinedStateToIdMapPair::finalize</qualifiedname>
+        <briefdescription>
+<para>Sorts and deduplicates all ID lists. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/state/CombinedStateToIdMapPair.ixx" line="143" column="14" bodyfile="/tmp/h/include/helios/engine/state/CombinedStateToIdMapPair.ixx" bodystart="143" bodyend="151"/>
+        <referencedby refid="classhelios_1_1engine_1_1state_1_1CombinedStateToIdMapPair_1abb30c593aef69fd2a47569b50ee56450" compoundref="CombinedStateToIdMapPair_8ixx" startline="156" endline="159">helios::engine::state::CombinedStateToIdMapPair&lt; LState, RState, TId &gt;::freeze</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1state_1_1CombinedStateToIdMapPair_1abb30c593aef69fd2a47569b50ee56450" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::state::CombinedStateToIdMapPair&lt; LState, RState, TId &gt;::freeze</definition>
+        <argsstring>()</argsstring>
+        <name>freeze</name>
+        <qualifiedname>helios::engine::state::CombinedStateToIdMapPair::freeze</qualifiedname>
+        <briefdescription>
+<para>Finalizes and prevents further modifications. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/state/CombinedStateToIdMapPair.ixx" line="156" column="14" bodyfile="/tmp/h/include/helios/engine/state/CombinedStateToIdMapPair.ixx" bodystart="156" bodyend="159"/>
+        <references refid="classhelios_1_1engine_1_1state_1_1CombinedStateToIdMapPair_1a3ade3b0c9b3acea01209095d07a5cf87" compoundref="CombinedStateToIdMapPair_8ixx" startline="143" endline="151">helios::engine::state::CombinedStateToIdMapPair&lt; LState, RState, TId &gt;::finalize</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1state_1_1CombinedStateToIdMapPair_1a97d84339482faceca5be43146138a56c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::state::CombinedStateToIdMapPair&lt; LState, RState, TId &gt;::isFrozen</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>isFrozen</name>
+        <qualifiedname>helios::engine::state::CombinedStateToIdMapPair::isFrozen</qualifiedname>
+        <briefdescription>
+<para>Checks if the map is frozen. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if frozen. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/state/CombinedStateToIdMapPair.ixx" line="166" column="15" bodyfile="/tmp/h/include/helios/engine/state/CombinedStateToIdMapPair.ixx" bodystart="166" bodyend="168"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1state_1_1CombinedStateToIdMapPair_1a2752025cb4292bc40adbf3a0e69d77a0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::span&lt; const TId &gt;</type>
+        <definition>std::span&lt; const TId &gt; helios::engine::state::CombinedStateToIdMapPair&lt; LState, RState, TId &gt;::ids</definition>
+        <argsstring>(const LState stateLft, const RState stateRgt) const noexcept</argsstring>
+        <name>ids</name>
+        <qualifiedname>helios::engine::state::CombinedStateToIdMapPair::ids</qualifiedname>
+        <param>
+          <type>const LState</type>
+          <declname>stateLft</declname>
+        </param>
+        <param>
+          <type>const RState</type>
+          <declname>stateRgt</declname>
+        </param>
+        <briefdescription>
+<para>Returns IDs for a state combination. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the specific combination has no IDs, falls back to the IDs registered for the left state with undefined right state.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stateLft</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The left state to query. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stateRgt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The right state to query.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Span of IDs for the state combination. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/state/CombinedStateToIdMapPair.ixx" line="181" column="20" bodyfile="/tmp/h/include/helios/engine/state/CombinedStateToIdMapPair.ixx" bodystart="181" bodyend="200"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/state/CombinedStateToIdMapPair.ixx" line="16" column="15"/>
+  </compounddef>
+</doxygen>

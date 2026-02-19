@@ -1,0 +1,587 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1state_1_1StateManager" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::state::StateManager</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" prot="public" virt="non-virtual">helios::engine::runtime::world::Manager</basecompoundref>
+    <basecompoundref refid="classhelios_1_1engine_1_1state_1_1TypedStateCommandHandler" prot="public" virt="non-virtual">helios::engine::state::TypedStateCommandHandler&lt; StateType &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename StateType</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1state_1_1StateManager_1a9973e722117e8c407dc6259238e1c41b" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classhelios_1_1engine_1_1state_1_1commands_1_1StateCommand" kindref="compound">StateCommand</ref>&lt; StateType &gt; &gt;</type>
+        <definition>std::vector&lt;StateCommand&lt;StateType&gt; &gt; helios::engine::state::StateManager&lt; StateType &gt;::pending_</definition>
+        <argsstring></argsstring>
+        <name>pending_</name>
+        <qualifiedname>helios::engine::state::StateManager::pending_</qualifiedname>
+        <briefdescription>
+<para>Queue of pending state commands. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/state/StateManager.ixx" line="70" column="21" bodyfile="/tmp/h/include/helios/engine/state/StateManager.ixx" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1state_1_1StateManager_1a6b4cee2deb34fac71dc784e65826ca53" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1state_1_1StateTransitionListener" kindref="compound">StateTransitionListener</ref>&lt; StateType &gt; &gt; &gt;</type>
+        <definition>std::vector&lt;std::unique_ptr&lt;StateTransitionListener&lt;StateType&gt; &gt; &gt; helios::engine::state::StateManager&lt; StateType &gt;::listeners_</definition>
+        <argsstring></argsstring>
+        <name>listeners_</name>
+        <qualifiedname>helios::engine::state::StateManager::listeners_</qualifiedname>
+        <briefdescription>
+<para>Registered transition listeners. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/state/StateManager.ixx" line="75" column="21" bodyfile="/tmp/h/include/helios/engine/state/StateManager.ixx" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1state_1_1StateManager_1a8a551056f7cbd9ed81cca5e27866e6aa" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classhelios_1_1engine_1_1state_1_1types_1_1StateTransitionRule" kindref="compound">StateTransitionRule</ref>&lt; StateType &gt; &gt;</type>
+        <definition>std::vector&lt;StateTransitionRule&lt;StateType&gt; &gt; helios::engine::state::StateManager&lt; StateType &gt;::rules_</definition>
+        <argsstring></argsstring>
+        <name>rules_</name>
+        <qualifiedname>helios::engine::state::StateManager::rules_</qualifiedname>
+        <briefdescription>
+<para>Transition rules defining valid state changes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/state/StateManager.ixx" line="80" column="21" bodyfile="/tmp/h/include/helios/engine/state/StateManager.ixx" bodystart="80" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1state_1_1StateManager_1a540239de1a8dd39711ad5d6208dcec7d" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::state::StateManager&lt; StateType &gt;::signalExit</definition>
+        <argsstring>(const StateType from, const StateType to, const StateTransitionIdType&lt; StateType &gt; transitionId, helios::engine::runtime::world::UpdateContext &amp;updateContext)</argsstring>
+        <name>signalExit</name>
+        <qualifiedname>helios::engine::state::StateManager::signalExit</qualifiedname>
+        <param>
+          <type>const StateType</type>
+          <declname>from</declname>
+        </param>
+        <param>
+          <type>const StateType</type>
+          <declname>to</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacehelios_1_1engine_1_1state_1_1types_1a8206d62c7b5bc68fb20729209b2eb542" kindref="member">StateTransitionIdType</ref>&lt; StateType &gt;</type>
+          <declname>transitionId</declname>
+        </param>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Notifies listeners of state exit. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>from</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state being exited. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>to</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The target state. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>transitionId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The transition identifier. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current frame&apos;s update context. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/state/StateManager.ixx" line="90" column="14" bodyfile="/tmp/h/include/helios/engine/state/StateManager.ixx" bodystart="90" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1state_1_1StateManager_1a3270bec17b77c693abfdda7377dc2a36" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::state::StateManager&lt; StateType &gt;::signalTransition</definition>
+        <argsstring>(const StateType from, const StateType to, const StateTransitionIdType&lt; StateType &gt; transitionId, helios::engine::runtime::world::UpdateContext &amp;updateContext)</argsstring>
+        <name>signalTransition</name>
+        <qualifiedname>helios::engine::state::StateManager::signalTransition</qualifiedname>
+        <param>
+          <type>const StateType</type>
+          <declname>from</declname>
+        </param>
+        <param>
+          <type>const StateType</type>
+          <declname>to</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacehelios_1_1engine_1_1state_1_1types_1a8206d62c7b5bc68fb20729209b2eb542" kindref="member">StateTransitionIdType</ref>&lt; StateType &gt;</type>
+          <declname>transitionId</declname>
+        </param>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Notifies listeners of the transition. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>from</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The source state. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>to</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The target state. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>transitionId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The transition identifier. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current frame&apos;s update context. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/state/StateManager.ixx" line="109" column="14" bodyfile="/tmp/h/include/helios/engine/state/StateManager.ixx" bodystart="109" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1state_1_1StateManager_1a3080c1d2709031429bb557c11b4e843c" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::state::StateManager&lt; StateType &gt;::signalEnter</definition>
+        <argsstring>(const StateType from, const StateType to, const StateTransitionIdType&lt; StateType &gt; transitionId, helios::engine::runtime::world::UpdateContext &amp;updateContext)</argsstring>
+        <name>signalEnter</name>
+        <qualifiedname>helios::engine::state::StateManager::signalEnter</qualifiedname>
+        <param>
+          <type>const StateType</type>
+          <declname>from</declname>
+        </param>
+        <param>
+          <type>const StateType</type>
+          <declname>to</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacehelios_1_1engine_1_1state_1_1types_1a8206d62c7b5bc68fb20729209b2eb542" kindref="member">StateTransitionIdType</ref>&lt; StateType &gt;</type>
+          <declname>transitionId</declname>
+        </param>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Notifies listeners of state entry. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>from</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The source state. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>to</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state being entered. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>transitionId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The transition identifier. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current frame&apos;s update context. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/state/StateManager.ixx" line="131" column="14" bodyfile="/tmp/h/include/helios/engine/state/StateManager.ixx" bodystart="131" bodyend="141"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1state_1_1StateManager_1a1123ae4a933d5b6a9da97b3ff91f624f" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::state::StateManager&lt; StateType &gt;::StateManager</definition>
+        <argsstring>(std::span&lt; const StateTransitionRule&lt; StateType &gt; &gt; rules)</argsstring>
+        <name>StateManager</name>
+        <qualifiedname>helios::engine::state::StateManager::StateManager</qualifiedname>
+        <param>
+          <type>std::span&lt; const <ref refid="classhelios_1_1engine_1_1state_1_1types_1_1StateTransitionRule" kindref="compound">StateTransitionRule</ref>&lt; StateType &gt; &gt;</type>
+          <declname>rules</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a state manager with transition rules. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rules</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Span of valid transition rules. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/state/StateManager.ixx" line="151" column="18" bodyfile="/tmp/h/include/helios/engine/state/StateManager.ixx" bodystart="151" bodyend="152"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1state_1_1StateManager_1a2e7db1e0999cebc060246a224139fcdb" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1state_1_1StateManager_1a1123ae4a933d5b6a9da97b3ff91f624f" kindref="member">StateManager</ref> &amp;</type>
+        <definition>StateManager &amp; helios::engine::state::StateManager&lt; StateType &gt;::addStateListener</definition>
+        <argsstring>(std::unique_ptr&lt; StateTransitionListener&lt; StateType &gt; &gt; listener) noexcept</argsstring>
+        <name>addStateListener</name>
+        <qualifiedname>helios::engine::state::StateManager::addStateListener</qualifiedname>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1state_1_1StateTransitionListener" kindref="compound">StateTransitionListener</ref>&lt; StateType &gt; &gt;</type>
+          <declname>listener</declname>
+        </param>
+        <briefdescription>
+<para>Registers a state transition listener. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>listener</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The listener to add.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to this manager for chaining. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/state/StateManager.ixx" line="161" column="22" bodyfile="/tmp/h/include/helios/engine/state/StateManager.ixx" bodystart="161" bodyend="164"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1state_1_1StateManager_1af596b7158c7753e319d8030c3faad9b1" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::state::StateManager&lt; StateType &gt;::flush</definition>
+        <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld, helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept override</argsstring>
+        <name>flush</name>
+        <qualifiedname>helios::engine::state::StateManager::flush</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a290b20a4d512d096650dc187f1f3e940">flush</reimplements>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Processes pending state commands. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Processes the last pending command, finds matching rules, executes guards, and triggers the transition if valid.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The game world. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current frame&apos;s update context. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/state/StateManager.ixx" line="175" column="14" bodyfile="/tmp/h/include/helios/engine/state/StateManager.ixx" bodystart="175" bodyend="217"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1state_1_1StateManager_1a19df21f7ae037e26e5296abd4a03cc38" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::state::StateManager&lt; StateType &gt;::submit</definition>
+        <argsstring>(const StateCommand&lt; StateType &gt; &amp;stateCommand) noexcept override</argsstring>
+        <name>submit</name>
+        <qualifiedname>helios::engine::state::StateManager::submit</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1state_1_1TypedStateCommandHandler_1afa3a4a4a4cfff7861f2c4ba73cce908d">submit</reimplements>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1state_1_1commands_1_1StateCommand" kindref="compound">StateCommand</ref>&lt; StateType &gt; &amp;</type>
+          <declname>stateCommand</declname>
+        </param>
+        <briefdescription>
+<para>Submits a state command for processing. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stateCommand</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The command to queue.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True (always accepts commands). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/state/StateManager.ixx" line="226" column="14" bodyfile="/tmp/h/include/helios/engine/state/StateManager.ixx" bodystart="226" bodyend="231"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1state_1_1StateManager_1a176a52f4173536aa3fde8324f1f72cb6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::state::StateManager&lt; StateType &gt;::init</definition>
+        <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld) override</argsstring>
+        <name>init</name>
+        <qualifiedname>helios::engine::state::StateManager::init</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ae7e2cd7531de5ce1fdc1f4a179b70929">init</reimplements>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <briefdescription>
+<para>Initializes the manager and registers with GameWorld. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The game world to register with. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/state/StateManager.ixx" line="238" column="14" bodyfile="/tmp/h/include/helios/engine/state/StateManager.ixx" bodystart="238" bodyend="240"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1state_1_1StateManager_1abd21bd2f4c2738a52d1854d3389f3488" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::state::StateManager&lt; StateType &gt;::reset</definition>
+        <argsstring>() override</argsstring>
+        <name>reset</name>
+        <qualifiedname>helios::engine::state::StateManager::reset</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a967a3375eca948be9ebeaca2e34c7475">reset</reimplements>
+        <briefdescription>
+<para>Clears all pending commands. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/state/StateManager.ixx" line="245" column="14" bodyfile="/tmp/h/include/helios/engine/state/StateManager.ixx" bodystart="245" bodyend="247"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Manages state transitions using a rule-based system. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Implements both Manager and <ref refid="classhelios_1_1engine_1_1state_1_1TypedStateCommandHandler" kindref="compound">TypedStateCommandHandler</ref> interfaces. Processes state transition commands by matching against registered rules, executing guards, and notifying listeners.</para>
+<para>## Transition Flow</para>
+<para>1. Commands are submitted via <ref refid="classhelios_1_1engine_1_1state_1_1StateManager_1a19df21f7ae037e26e5296abd4a03cc38" kindref="member">submit()</ref> and queued 2. During <ref refid="classhelios_1_1engine_1_1state_1_1StateManager_1af596b7158c7753e319d8030c3faad9b1" kindref="member">flush()</ref>, the last pending command is processed 3. Rules are checked to find a matching transition 4. If a guard is present, it must return true 5. Listeners are notified: onStateExit -&gt; onStateTransition -&gt; onStateEnter 6. Session state is updated</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>StateType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state enum type.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1state_1_1types_1_1StateTransitionRule" kindref="compound">StateTransitionRule</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1state_1_1StateTransitionListener" kindref="compound">StateTransitionListener</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1state_1_1commands_1_1StateCommand" kindref="compound">StateCommand</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::runtime::world::Manager</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager"/>
+      </node>
+      <node id="4">
+        <label>helios::engine::state::StateCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1state_1_1StateCommandHandler"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::state::StateManager&lt; StateType &gt;</label>
+        <link refid="classhelios_1_1engine_1_1state_1_1StateManager"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::state::TypedStateCommandHandler&lt; StateType &gt;</label>
+        <link refid="classhelios_1_1engine_1_1state_1_1TypedStateCommandHandler"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="9">
+        <label>helios::engine::ecs::EntityManager</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1EntityManager"/>
+      </node>
+      <node id="8">
+        <label>helios::engine::ecs::EntityRegistry</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry"/>
+      </node>
+      <node id="5">
+        <label>helios::engine::mechanics::scoring::ScoreCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler"/>
+      </node>
+      <node id="6">
+        <label>helios::engine::modules::ui::UiActionCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandHandler"/>
+      </node>
+      <node id="7">
+        <label>helios::engine::runtime::spawn::SpawnCommandHandlerRegistry</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandlerRegistry"/>
+      </node>
+      <node id="3">
+        <label>helios::engine::runtime::world::GameWorld</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>logger_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>scoreCommandHandler_</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>uiActionCommandHandler_</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>spawnCommandHandlerRegistry_</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>entityRegistry_</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>em_</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>session_</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios::engine::runtime::world::Manager</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>gameWorld_</edgelabel>
+        </childnode>
+      </node>
+      <node id="10">
+        <label>helios::engine::runtime::world::Session</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session"/>
+      </node>
+      <node id="12">
+        <label>helios::engine::state::StateCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1state_1_1StateCommandHandler"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::state::StateManager&lt; StateType &gt;</label>
+        <link refid="classhelios_1_1engine_1_1state_1_1StateManager"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>helios::engine::state::TypedStateCommandHandler&lt; StateType &gt;</label>
+        <link refid="classhelios_1_1engine_1_1state_1_1TypedStateCommandHandler"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>helios::util::log::Logger</label>
+        <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
+      </node>
+    </collaborationgraph>
+    <location file="/tmp/h/include/helios/engine/state/StateManager.ixx" line="64" column="5" bodyfile="/tmp/h/include/helios/engine/state/StateManager.ixx" bodystart="65" bodyend="249"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a2e7db1e0999cebc060246a224139fcdb" prot="public" virt="non-virtual"><scope>helios::engine::state::StateManager</scope><name>addStateListener</name></member>
+      <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1af596b7158c7753e319d8030c3faad9b1" prot="public" virt="virtual"><scope>helios::engine::state::StateManager</scope><name>flush</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1aaa2bc033955a07d4d97592eb2f817659" prot="protected" virt="non-virtual"><scope>helios::engine::state::StateManager</scope><name>gameWorld_</name></member>
+      <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a176a52f4173536aa3fde8324f1f72cb6" prot="public" virt="virtual"><scope>helios::engine::state::StateManager</scope><name>init</name></member>
+      <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a6b4cee2deb34fac71dc784e65826ca53" prot="private" virt="non-virtual"><scope>helios::engine::state::StateManager</scope><name>listeners_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ab0f750d777e2368c08fc413188673622" prot="public" virt="virtual"><scope>helios::engine::state::StateManager</scope><name>onAdd</name></member>
+      <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a9973e722117e8c407dc6259238e1c41b" prot="private" virt="non-virtual"><scope>helios::engine::state::StateManager</scope><name>pending_</name></member>
+      <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1abd21bd2f4c2738a52d1854d3389f3488" prot="public" virt="virtual"><scope>helios::engine::state::StateManager</scope><name>reset</name></member>
+      <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a8a551056f7cbd9ed81cca5e27866e6aa" prot="private" virt="non-virtual"><scope>helios::engine::state::StateManager</scope><name>rules_</name></member>
+      <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a3080c1d2709031429bb557c11b4e843c" prot="private" virt="non-virtual"><scope>helios::engine::state::StateManager</scope><name>signalEnter</name></member>
+      <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a540239de1a8dd39711ad5d6208dcec7d" prot="private" virt="non-virtual"><scope>helios::engine::state::StateManager</scope><name>signalExit</name></member>
+      <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a3270bec17b77c693abfdda7377dc2a36" prot="private" virt="non-virtual"><scope>helios::engine::state::StateManager</scope><name>signalTransition</name></member>
+      <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a1123ae4a933d5b6a9da97b3ff91f624f" prot="public" virt="non-virtual"><scope>helios::engine::state::StateManager</scope><name>StateManager</name></member>
+      <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a19df21f7ae037e26e5296abd4a03cc38" prot="public" virt="virtual"><scope>helios::engine::state::StateManager</scope><name>submit</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a116b5758bea5a39bbc0d24bc62bdcdd7" prot="public" virt="virtual"><scope>helios::engine::state::StateManager</scope><name>~Manager</name></member>
+      <member refid="classhelios_1_1engine_1_1state_1_1StateCommandHandler_1a0e219522933348b745aed2adba19724d" prot="public" virt="virtual"><scope>helios::engine::state::StateManager</scope><name>~StateCommandHandler</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

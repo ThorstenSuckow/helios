@@ -115,11 +115,13 @@ Classes</h2></td></tr>
 <tr class="memitem:GameLoop" id="r_GameLoop"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html">GameLoop</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Central orchestrator for the game update cycle.  <a href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Pass" id="r_Pass"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html">Pass</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a single pass within a game loop phase.  <a href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract base class for game loop passes.  <a href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html#details">More...</a><br /></td></tr>
 <tr class="memitem:PassCommitListener" id="r_PassCommitListener"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1PassCommitListener.html">PassCommitListener</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface for receiving notifications when a pass reaches its commit point.  <a href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1PassCommitListener.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Phase" id="r_Phase"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html">Phase</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a phase in the game loop containing multiple passes.  <a href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html#details">More...</a><br /></td></tr>
+<tr class="memitem:TypedPass" id="r_TypedPass"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1TypedPass.html">TypedPass</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">State-filtered pass that only executes in specific states.  <a href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1TypedPass.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -148,7 +150,7 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Central game loop orchestration module. </p>
-<p>Provides the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html" title="Central orchestrator for the game update cycle.">GameLoop</a>, <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html" title="Represents a phase in the game loop containing multiple passes.">Phase</a>, and <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html" title="Represents a single pass within a game loop phase.">Pass</a> classes for managing phased system execution with deterministic ordering and event synchronization. </p>
+<p>Provides the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html" title="Central orchestrator for the game update cycle.">GameLoop</a>, <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html" title="Represents a phase in the game loop containing multiple passes.">Phase</a>, and <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html" title="Abstract base class for game loop passes.">Pass</a> classes for managing phased system execution with deterministic ordering and event synchronization. </p>
 </div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
 <a id="abdb94a899ecc215ffa46e24880ebd8ec" name="abdb94a899ecc215ffa46e24880ebd8ec"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abdb94a899ecc215ffa46e24880ebd8ec">&#9670;&#160;</a></span>CommitPoint</h2>
@@ -178,14 +180,14 @@ Functions</h2></td></tr>
 <li>Managers process their queued requests at commit points</li>
 </ul>
 <p>Example usage: ```cpp pass.addCommitPoint(<a class="el" href="#abdb94a899ecc215ffa46e24880ebd8ecad42654403d0dfa55915ee7ba7fd7af0f" title="Commits pass-level events.">CommitPoint::PassEvents</a> | <a class="el" href="#abdb94a899ecc215ffa46e24880ebd8eca7ce9ed9ce12e02385a7745e379e97ca8" title="Flushes the command buffer.">CommitPoint::FlushCommands</a>); ```</p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html#a36ee909a78fabac1cf997d98b0f8438c" title="Marks this pass with a commit point and returns the owning Phase.">Pass::addCommitPoint()</a> </dd>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html#a5c6fbf481a72dde9ce1836df322ce1a3" title="Adds a commit point and returns the owning Phase.">Pass::addCommitPoint()</a> </dd>
 <dd>
 GameLoop::passCommit() </dd></dl>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="abdb94a899ecc215ffa46e24880ebd8eca6adf97f83acf6453d4a6a4b1070f3754" name="abdb94a899ecc215ffa46e24880ebd8eca6adf97f83acf6453d4a6a4b1070f3754"></a>None&#160;</td><td class="fielddoc"><p>No commit action. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="abdb94a899ecc215ffa46e24880ebd8ecad42654403d0dfa55915ee7ba7fd7af0f" name="abdb94a899ecc215ffa46e24880ebd8ecad42654403d0dfa55915ee7ba7fd7af0f"></a>PassEvents&#160;</td><td class="fielddoc"><p>Commits pass-level events. </p>
-<p>Events pushed via `UpdateContext::pushPass()` become readable in subsequent passes through `UpdateContext::readPass()`. <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html" title="Represents a single pass within a game loop phase.">Pass</a> events are discarded at the end of the phase. </p>
+<p>Events pushed via `UpdateContext::pushPass()` become readable in subsequent passes through `UpdateContext::readPass()`. <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html" title="Abstract base class for game loop passes.">Pass</a> events are discarded at the end of the phase. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="abdb94a899ecc215ffa46e24880ebd8eca7ce9ed9ce12e02385a7745e379e97ca8" name="abdb94a899ecc215ffa46e24880ebd8eca7ce9ed9ce12e02385a7745e379e97ca8"></a>FlushCommands&#160;</td><td class="fielddoc"><p>Flushes the command buffer. </p>
 <p>Pending commands are dispatched to their registered handlers and executed. </p>
@@ -237,7 +239,7 @@ GameLoop::passCommit() </dd></dl>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="Phase_8ixx_source.html#l00038">38</a> of file <a class="el" href="Phase_8ixx_source.html">Phase.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Phase_8ixx_source.html#l00040">40</a> of file <a class="el" href="Phase_8ixx_source.html">Phase.ixx</a>.</p>
 
 </div>
 </div>

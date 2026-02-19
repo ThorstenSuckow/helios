@@ -1,5 +1,6 @@
 var module__helios_8engine_8mechanics_8match_8types_8MatchStateTransitionId =
 [
+    [ "StateTransitionId&lt; helios::engine::mechanics::match::types::MatchState &gt;", "structhelios_1_1engine_1_1state_1_1types_1_1StateTransitionId_3_01helios_1_1engine_1_1mechanics_c728608f128895f4489bedfff494ec28.html", "structhelios_1_1engine_1_1state_1_1types_1_1StateTransitionId_3_01helios_1_1engine_1_1mechanics_c728608f128895f4489bedfff494ec28" ],
     [ "helios::engine::mechanics::match::types::MatchStateTransitionId", "module__helios_8engine_8mechanics_8match_8types_8MatchStateTransitionId.html#a582a1deeeb0b47612daff20c822fad70", [
       [ "helios::engine::mechanics::match::types::MatchStateTransitionId::Undefined", "module__helios_8engine_8mechanics_8match_8types_8MatchStateTransitionId.html#a582a1deeeb0b47612daff20c822fad70aec0fc0100c4fc1ce4eea230c3dc10360", null ],
       [ "helios::engine::mechanics::match::types::MatchStateTransitionId::WarmupRequested", "module__helios_8engine_8mechanics_8match_8types_8MatchStateTransitionId.html#a582a1deeeb0b47612daff20c822fad70a3badd370a329294628d42d1a06d298ff", null ],
@@ -15,5 +16,6 @@ var module__helios_8engine_8mechanics_8match_8types_8MatchStateTransitionId =
       [ "helios::engine::mechanics::match::types::MatchStateTransitionId::RespawnRequested", "module__helios_8engine_8mechanics_8match_8types_8MatchStateTransitionId.html#a582a1deeeb0b47612daff20c822fad70a6fe7fa1af6567da46b7f26f21a81c0e3", null ],
       [ "helios::engine::mechanics::match::types::MatchStateTransitionId::QuitRequested", "module__helios_8engine_8mechanics_8match_8types_8MatchStateTransitionId.html#a582a1deeeb0b47612daff20c822fad70a894ce1b6075d9de36dec60cc22e20536", null ],
       [ "helios::engine::mechanics::match::types::MatchStateTransitionId::RestartRequested", "module__helios_8engine_8mechanics_8match_8types_8MatchStateTransitionId.html#a582a1deeeb0b47612daff20c822fad70abedfd09a1d1fc1b855c549c441a37ebc", null ]
-    ] ]
+    ] ],
+    [ "helios::engine::state::types::StateTransitionId< helios::engine::mechanics::match::types::MatchState >::Type", "module__helios_8engine_8mechanics_8match_8types_8MatchStateTransitionId.html#a80ab0e0ff228ff55ced5694ed237ba76", null ]
 ];

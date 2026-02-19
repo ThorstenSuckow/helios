@@ -108,172 +108,244 @@ $(function() {
 <div class="contents">
 <a href="MenuDisplaySystem_8ixx.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/**</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * @file MenuDisplaySystem.ixx</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> * @brief System for controlling menu visibility based on UI focus.</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> * @brief System for controlling menu visibility based on game state.</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">module</span>;</div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;algorithm&gt;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">export</span> <span class="keyword">module</span> <a class="code" href="module__helios_8engine_8modules_8ui_8widgets_8systems_8MenuDisplaySystem.html">helios.engine.modules.ui.widgets.systems.MenuDisplaySystem</a>;</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8ecs_8System.html">helios.engine.ecs.System</a>;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;cassert&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;helios/helios_config.h&gt;</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8modules_8ui_8widgets_8components_8MenuComponent.html">helios.engine.modules.ui.widgets.components.MenuComponent</a>;</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">export</span> <span class="keyword">module</span> <a class="code" href="module__helios_8engine_8modules_8ui_8widgets_8systems_8MenuDisplaySystem.html">helios.engine.modules.ui.widgets.systems.MenuDisplaySystem</a>;</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8modules_8ui_8widgets_8components_8UiStateComponent.html">helios.engine.modules.ui.widgets.components.UiStateComponent</a>;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8modules_8ui_8widgets_8components_8UiActionComponent.html">helios.engine.modules.ui.widgets.components.UiActionComponent</a>;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8modules_8ui_8commands_8UiActionCommand.html">helios.engine.modules.ui.commands.UiActionCommand</a>;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8ecs_8GameObject.html">helios.engine.ecs.GameObject</a>;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8runtime_8world_8GameWorld.html">helios.engine.runtime.world.GameWorld</a>;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8runtime_8world_8UpdateContext.html">helios.engine.runtime.world.UpdateContext</a>;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8mechanics_8lifecycle_8components_8Active.html">helios.engine.mechanics.lifecycle.components.Active</a>;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8ecs_8EntityHandle.html">helios.engine.ecs.EntityHandle</a>;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8ecs.html">helios.engine.ecs</a>;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8runtime_8world.html">helios.engine.runtime.world</a>;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8core_8data.html">helios.engine.core.data</a>;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8modules_8ui_8widgets_8components_8UiFocusComponent.html">helios.engine.modules.ui.widgets.components.UiFocusComponent</a>;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8modules_8ui_8widgets_8components_8MenuComponent.html">helios.engine.modules.ui.widgets.components.MenuComponent</a>;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8state_8CombinedStateToIdMapPair.html">helios.engine.state.CombinedStateToIdMapPair</a>;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8mechanics_8gamestate_8types.html">helios.engine.mechanics.gamestate.types</a>;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8mechanics_8match_8types.html">helios.engine.mechanics.match.types</a>;</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8runtime_8messaging_8command_8CommandBuffer.html">helios.engine.runtime.messaging.command.CommandBuffer</a>;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keyword">import</span> <a class="code" href="module__helios_8input_8types_8Gamepad.html">helios.input.types.Gamepad</a>;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8modules_8rendering_8model_8components_8ModelAabbComponent.html">helios.engine.modules.rendering.model.components.ModelAabbComponent</a>;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keyword">import</span> <a class="code" href="module__helios_8math.html">helios.math</a>;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8modules_8rendering_8model_8components_8ModelAabbComponent.html">helios.engine.modules.rendering.model.components.ModelAabbComponent</a>;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keyword">import</span> <a class="code" href="module__helios_8math.html">helios.math</a>;</div>
-<div class="foldopen" id="foldopen00035" data-start="{" data-end="}">
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="namespacehelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems.html">   35</a></span><span class="keyword">export</span> <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems.html">helios::engine::modules::ui::widgets::systems</a> {</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacehelios_1_1input_1_1types.html">helios::input::types</a>;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment"></span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">    /**</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">     * @brief Controls menu visibility based on session UI focus state.</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">     * @details This system monitors the session&#39;s focused entity and shows/hides</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">     * menus accordingly. When the focused entity changes:</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">     * - The previously focused menu (if any) is hidden</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">     * - The newly focused menu is shown along with its menu items</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">     * The system tracks the previous focused entity to detect focus changes</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">     * and avoid redundant visibility updates.</span></div>
+<div class="foldopen" id="foldopen00033" data-start="{" data-end="}">
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="namespacehelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems.html">   33</a></span><span class="keyword">export</span> <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems.html">helios::engine::modules::ui::widgets::systems</a> {</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacehelios_1_1engine_1_1core_1_1data.html">helios::engine::core::data</a>;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacehelios_1_1engine_1_1state.html">helios::engine::state</a>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html">helios::engine::mechanics::gamestate::types</a>;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types.html">helios::engine::mechanics::match::types</a>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacehelios_1_1engine_1_1ecs.html">helios::engine::ecs</a>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacehelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components.html">helios::engine::modules::ui::widgets::components</a>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment"></span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">    /**</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">     * @brief Controls menu visibility based on game and match state.</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">     * @details Uses a CombinedStateToIdMapPair to determine which menus</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">     * should be active for the current state combination. Automatically</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">     * shows/hides menus and manages focus when states change.</span></div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">     * @see MenuComponent</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">     * @see UiFocusComponent</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">     * @see Session::focusedEntity()</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">     */</span></div>
-<div class="foldopen" id="foldopen00054" data-start="{" data-end="};">
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem.html">   54</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem.html">MenuDisplaySystem</a> : <span class="keyword">public</span> <a class="code hl_class" href="classhelios_1_1engine_1_1ecs_1_1System.html">helios::engine::ecs::System</a> {</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment"></span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">         * @brief Handle to the previously focused entity for change detection.</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <a class="code hl_struct" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a> prevEntityHandle_;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="comment"></span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">         * @brief Shows or hides a menu and its items.</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">         * @param go The menu entity.</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">         * @param show True to show, false to hide.</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">         * @param gameWorld Reference to the game world for item lookup.</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="keywordtype">void</span> showMenu(</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            <a class="code hl_class" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html">helios::engine::ecs::GameObject</a> go,</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>            <span class="keywordtype">bool</span> show,</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>            <a class="code hl_class" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">helios::engine::runtime::world::GameWorld</a>&amp; gameWorld</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        ) {</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            <span class="keyword">auto</span>* mc = go.<a class="code hl_function" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html#a2229cd5bbcce0a3504519ed979ccdeb7">get</a>&lt;<a class="code hl_class" href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1MenuComponent.html">helios::engine::modules::ui::widgets::components::MenuComponent</a>&gt;();</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            <span class="keywordflow">if</span> (!mc) {</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>                <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            }</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            go.<a class="code hl_function" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html#a5b86c188307f1f2e8500509708d60d93">setActive</a>(show);</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; item : mc-&gt;menuItems()) {</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                gameWorld.<a class="code hl_function" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#ac4319f3453e06ad04125c43b17047398">find</a>(item)-&gt;setActive(show);</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            }</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        } </div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        </div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment"></span> </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">         * @brief Updates menu visibility based on focus changes.</span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">         * @details Compares the current focused entity with the previous one.</span></div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">         * If focus changed, hides the previous menu and shows the new one.</span></div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment">         * Skips processing if focus remains unchanged.</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">     * ## Behavior</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">     * - Menus not associated with the current state are hidden</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">     * - Menus associated with the current state are shown</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">     * - When no item has focus, the first menu&#39;s default item is focused</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">     * - Inactive focused items have their UiFocusComponent removed</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">     * @see CombinedStateToIdMapPair</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">     * @see MenuComponent</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">     * @see MenuNavigationSystem</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> StateLft, <span class="keyword">typename</span> StateRgt&gt;</div>
+<div class="foldopen" id="foldopen00062" data-start="{" data-end="};">
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem.html">   62</a></span>    <span class="keyword">class </span><a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem.html#a2f2fb33aac64e9c701f225e6f70b93dd">MenuDisplaySystem</a> : <span class="keyword">public</span> <a class="code hl_class" href="classhelios_1_1engine_1_1ecs_1_1System.html">helios::engine::ecs::System</a> {</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment"></span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">         * @brief Previously active menu IDs for change detection.</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        std::vector&lt;MenuId&gt; prevMenuIds_;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment"></span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">         * @brief Policy mapping states to menu IDs.</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <a class="code hl_class" href="classhelios_1_1engine_1_1state_1_1CombinedStateToIdMapPair.html">CombinedStateToIdMapPair&lt;StateLft, StateRgt, MenuId&gt;</a> stateToMenuMap_;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment"></span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">         * @brief Cache for inactive focused items to be cleaned up.</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        std::vector&lt;GameObject&gt; inactiveItems_;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment"></span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">         * @brief Shows or hides a menu by ID.</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">         * @param menuId The menu to show/hide.</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">         * @param show True to show, false to hide.</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">         * @param components View of all MenuComponent entities.</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <span class="keywordtype">void</span> showMenu(<span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1engine_1_1core_1_1data.html#aeed72402625b875cba0952c656aebfa4">MenuId</a> menuId, <span class="keyword">const</span> <span class="keywordtype">bool</span> show, <a class="code hl_class" href="classhelios_1_1engine_1_1ecs_1_1View.html">View&lt;MenuComponent&gt;</a>&amp; <a class="code hl_namespace" href="namespacehelios_1_1engine_1_1ecs_1_1components.html">components</a>) {</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span> [entity, mc] : <a class="code hl_namespace" href="namespacehelios_1_1engine_1_1ecs_1_1components.html">components</a>) {</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>                <span class="keywordflow">if</span> (mc-&gt;menuId() == menuId) {</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                    entity.setActive(show);</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                }</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>            }</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        }</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment"></span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment">         * @brief Focuses the first item of a menu.</span></div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">         * @param updateContext The current frame&#39;s update context.</span></div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00099" data-start="{" data-end="}">
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem.html#a7fcf27e865b36e92bd386ab7aed59c86">   99</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem.html#a7fcf27e865b36e92bd386ab7aed59c86">update</a>(<a class="code hl_struct" href="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a>&amp; updateContext) <span class="keyword">noexcept</span> <span class="keyword">override</span> {</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>            <span class="keyword">auto</span> focusedEntity = updateContext.gameWorld().session().focusedEntity();</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            <span class="keywordflow">if</span> (focusedEntity &amp;&amp; focusedEntity-&gt;entityHandle() == prevEntityHandle_) {</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>            }</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            <span class="keywordflow">if</span> (prevEntityHandle_.isValid()) {</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                <span class="keyword">auto</span> go = updateContext.gameWorld().find(prevEntityHandle_);</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                <span class="keywordflow">if</span> (go) {</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                    showMenu(go.value(), <span class="keyword">false</span>,updateContext.gameWorld());</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>                }</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                prevEntityHandle_ = <a class="code hl_struct" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a>();</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>            }</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>            <span class="keywordflow">if</span> (!focusedEntity) {</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>                <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>            }</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>            prevEntityHandle_ = focusedEntity-&gt;entityHandle();</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>            <span class="keyword">auto</span>* mc = focusedEntity-&gt;get&lt;<a class="code hl_class" href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1MenuComponent.html">helios::engine::modules::ui::widgets::components::MenuComponent</a>&gt;();</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">         * @param menuId The menu to focus.</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">         * @param components View of all MenuComponent entities.</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        <span class="keywordtype">void</span> focusMenu(<span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1engine_1_1core_1_1data.html#aeed72402625b875cba0952c656aebfa4">MenuId</a> menuId, <a class="code hl_class" href="classhelios_1_1engine_1_1ecs_1_1View.html">View&lt;MenuComponent&gt;</a>&amp; <a class="code hl_namespace" href="namespacehelios_1_1engine_1_1ecs_1_1components.html">components</a>) {</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span> [entity, mc] : <a class="code hl_namespace" href="namespacehelios_1_1engine_1_1ecs_1_1components.html">components</a>) {</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>                <span class="keywordflow">if</span> (mc-&gt;menuId() == menuId) {</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                    mc-&gt;selectDefaultIndex();</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                    <span class="keywordflow">if</span> (mc-&gt;menuItems().size() &gt; mc-&gt;selectedIndex()) {</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                        <span class="keyword">auto</span> menuItem = <a class="code hl_variable" href="classhelios_1_1engine_1_1ecs_1_1System.html#a1b71da2e3fb9d2effca00a1ecdfca1f5">gameWorld_</a>-&gt;find(mc-&gt;menuItems()[mc-&gt;selectedIndex()]);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                        menuItem-&gt;getOrAdd&lt;<a class="code hl_struct" href="structhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiFocusComponent.html">UiFocusComponent</a>&gt;();</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>                    }</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                }</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>            }</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        }</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="comment"></span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="comment">         * @brief Constructs the system with a state-to-menu policy.</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="comment">         * @param stateToMenuMap Policy mapping game/match states to menu IDs.</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00122" data-start="{" data-end="}">
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem.html#a2f2fb33aac64e9c701f225e6f70b93dd">  122</a></span>        <span class="keyword">explicit</span> <a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem.html#a2f2fb33aac64e9c701f225e6f70b93dd">MenuDisplaySystem</a>(<a class="code hl_class" href="classhelios_1_1engine_1_1state_1_1CombinedStateToIdMapPair.html">CombinedStateToIdMapPair&lt;StateLft, StateRgt, MenuId&gt;</a> stateToMenuMap)</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        : stateToMenuMap_(std::move(stateToMenuMap)) {</div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>            <span class="keywordflow">if</span> (!mc) {</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>                <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>            }</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            showMenu(focusedEntity.value(), <span class="keyword">true</span>, updateContext.gameWorld());</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        }</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>            inactiveItems_.reserve(INACTIVE_FOCUSED_ITEMS_CACHE_CAPACITY);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        }</div>
 </div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    };</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="comment"></span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="comment">         * @brief Updates menu visibility based on current state.</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="comment">         * @details Queries the current game and match state, then:</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="comment">         * 1. Hides menus that are no longer active</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="comment">         * 2. Shows menus for the current state</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="comment">         * 3. Ensures at least one menu item has focus</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span><span class="comment">         * @param updateContext The current frame&#39;s update context.</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00138" data-start="{" data-end="}">
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem.html#ab923705577cff067e8f18d7e33334c5d">  138</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem.html#ab923705577cff067e8f18d7e33334c5d">update</a>(<a class="code hl_struct" href="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a>&amp; updateContext) <span class="keyword">noexcept</span> <span class="keyword">override</span> {</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>            <span class="keyword">auto</span>&amp; session = updateContext.session();</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>            <span class="keyword">auto</span> gameState = session.state&lt;StateLft&gt;();</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>            <span class="keyword">auto</span> matchState = session.state&lt;StateRgt&gt;();</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>            <span class="keyword">auto</span> menuIds = stateToMenuMap_.ids(gameState, matchState);</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            <span class="keywordflow">if</span> (menuIds.empty() &amp;&amp; prevMenuIds_.empty()) {</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>                <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>            }</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>            <a class="code hl_class" href="classhelios_1_1engine_1_1ecs_1_1View.html">View&lt;MenuComponent&gt;</a> <a class="code hl_namespace" href="namespacehelios_1_1engine_1_1ecs_1_1components.html">components</a> = <a class="code hl_variable" href="classhelios_1_1engine_1_1ecs_1_1System.html#a1b71da2e3fb9d2effca00a1ecdfca1f5">gameWorld_</a>-&gt;view&lt;<a class="code hl_class" href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1MenuComponent.html">MenuComponent</a>&gt;().whereEnabled();</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; prevMenuId : prevMenuIds_) {</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>                <span class="keywordflow">if</span> (std::ranges::find(menuIds, prevMenuId) == menuIds.end()) {</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>                    showMenu(prevMenuId, <span class="keyword">false</span>, <a class="code hl_namespace" href="namespacehelios_1_1engine_1_1ecs_1_1components.html">components</a>);</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>                }</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>            }</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>            prevMenuIds_.assign(menuIds.begin(), menuIds.end());</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; menuId : menuIds) {</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>                showMenu(menuId, <span class="keyword">true</span>,<a class="code hl_namespace" href="namespacehelios_1_1engine_1_1ecs_1_1components.html">components</a>);</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>            }</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>            <span class="keywordflow">if</span> (menuIds.empty()) {</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>                <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>            }</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>            <span class="keywordtype">bool</span> hasFocus = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>            inactiveItems_.clear();</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span> [entity, fc] :  <a class="code hl_variable" href="classhelios_1_1engine_1_1ecs_1_1System.html#a1b71da2e3fb9d2effca00a1ecdfca1f5">gameWorld_</a>-&gt;view&lt;<a class="code hl_struct" href="structhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiFocusComponent.html">UiFocusComponent</a>&gt;().whereEnabled()) {</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span><span class="comment"></span> </div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span><span class="comment">                /**</span></div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="comment">                 * @todo Check if item is child element of menu?</span></div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span><span class="comment">                 */</span></div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>                <span class="keywordflow">if</span> (entity.isActive()) {</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>                    hasFocus = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>                }</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span><span class="comment"></span> </div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span><span class="comment">                /**</span></div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span><span class="comment">                 * @todo guaranteee that the UiFocusComponent is exclusive,</span></div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span><span class="comment">                 * break here if first comp with focus was found.</span></div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span><span class="comment">                 */</span></div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>                inactiveItems_.push_back(entity);</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>            }</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span> </div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; item : inactiveItems_) {</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>                item.remove&lt;<a class="code hl_struct" href="structhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiFocusComponent.html">UiFocusComponent</a>&gt;();</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>            }</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span> </div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>            <span class="comment">// focus an item from the first menu</span></div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>            <span class="keywordflow">if</span> (!hasFocus) {</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>                focusMenu(menuIds[0], <a class="code hl_namespace" href="namespacehelios_1_1engine_1_1ecs_1_1components.html">components</a>);</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>            }</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span> </div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        }</div>
 </div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>}</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    };</div>
 </div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1ecs_1_1GameObject_html"><div class="ttname"><a href="classhelios_1_1engine_1_1ecs_1_1GameObject.html">helios::engine::ecs::GameObject</a></div><div class="ttdoc">Lightweight facade for entity component manipulation.</div><div class="ttdef"><b>Definition</b> <a href="GameObject_8ixx_source.html#l00086">GameObject.ixx:86</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1ecs_1_1GameObject_html_a2229cd5bbcce0a3504519ed979ccdeb7"><div class="ttname"><a href="classhelios_1_1engine_1_1ecs_1_1GameObject.html#a2229cd5bbcce0a3504519ed979ccdeb7">helios::engine::ecs::GameObject::get</a></div><div class="ttdeci">T * get()</div><div class="ttdoc">Returns pointer to a component.</div><div class="ttdef"><b>Definition</b> <a href="GameObject_8ixx_source.html#l00219">GameObject.ixx:219</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1ecs_1_1GameObject_html_a5b86c188307f1f2e8500509708d60d93"><div class="ttname"><a href="classhelios_1_1engine_1_1ecs_1_1GameObject.html#a5b86c188307f1f2e8500509708d60d93">helios::engine::ecs::GameObject::setActive</a></div><div class="ttdeci">void setActive(const bool active)</div><div class="ttdoc">Sets the activation state of this GameObject.</div><div class="ttdef"><b>Definition</b> <a href="GameObject_8ixx_source.html#l00298">GameObject.ixx:298</a></div></div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>}</div>
+</div>
 <div class="ttc" id="aclasshelios_1_1engine_1_1ecs_1_1System_html"><div class="ttname"><a href="classhelios_1_1engine_1_1ecs_1_1System.html">helios::engine::ecs::System</a></div><div class="ttdoc">Abstract base class for game systems.</div><div class="ttdef"><b>Definition</b> <a href="System_8ixx_source.html#l00038">System.ixx:38</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1MenuComponent_html"><div class="ttname"><a href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1MenuComponent.html">helios::engine::modules::ui::widgets::components::MenuComponent</a></div><div class="ttdoc">Manages a collection of menu items for UI navigation.</div><div class="ttdef"><b>Definition</b> <a href="MenuComponent_8ixx_source.html#l00025">MenuComponent.ixx:25</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem_html"><div class="ttname"><a href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem.html">helios::engine::modules::ui::widgets::systems::MenuDisplaySystem</a></div><div class="ttdoc">Controls menu visibility based on session UI focus state.</div><div class="ttdef"><b>Definition</b> <a href="#l00054">MenuDisplaySystem.ixx:54</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem_html_a7fcf27e865b36e92bd386ab7aed59c86"><div class="ttname"><a href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem.html#a7fcf27e865b36e92bd386ab7aed59c86">helios::engine::modules::ui::widgets::systems::MenuDisplaySystem::update</a></div><div class="ttdeci">void update(helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept override</div><div class="ttdoc">Updates menu visibility based on focus changes.</div><div class="ttdef"><b>Definition</b> <a href="#l00099">MenuDisplaySystem.ixx:99</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_html"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">helios::engine::runtime::world::GameWorld</a></div><div class="ttdoc">Central registry for game entities, managers, pools, and the active level.</div><div class="ttdef"><b>Definition</b> <a href="GameWorld_8ixx_source.html#l00125">GameWorld.ixx:125</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_html_ac4319f3453e06ad04125c43b17047398"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#ac4319f3453e06ad04125c43b17047398">helios::engine::runtime::world::GameWorld::find</a></div><div class="ttdeci">std::optional&lt; helios::engine::ecs::GameObject &gt; find(const helios::engine::ecs::EntityHandle handle)</div><div class="ttdoc">Finds a GameObject by its EntityHandle.</div><div class="ttdef"><b>Definition</b> <a href="GameWorld_8ixx_source.html#l00585">GameWorld.ixx:585</a></div></div>
-<div class="ttc" id="amodule__helios_8engine_8ecs_8EntityHandle_html"><div class="ttname"><a href="module__helios_8engine_8ecs_8EntityHandle.html">helios.engine.ecs.EntityHandle</a></div></div>
-<div class="ttc" id="amodule__helios_8engine_8ecs_8GameObject_html"><div class="ttname"><a href="module__helios_8engine_8ecs_8GameObject.html">helios.engine.ecs.GameObject</a></div></div>
-<div class="ttc" id="amodule__helios_8engine_8ecs_8System_html"><div class="ttname"><a href="module__helios_8engine_8ecs_8System.html">helios.engine.ecs.System</a></div></div>
-<div class="ttc" id="amodule__helios_8engine_8mechanics_8lifecycle_8components_8Active_html"><div class="ttname"><a href="module__helios_8engine_8mechanics_8lifecycle_8components_8Active.html">helios.engine.mechanics.lifecycle.components.Active</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1ecs_1_1System_html_a1b71da2e3fb9d2effca00a1ecdfca1f5"><div class="ttname"><a href="classhelios_1_1engine_1_1ecs_1_1System.html#a1b71da2e3fb9d2effca00a1ecdfca1f5">helios::engine::ecs::System::gameWorld_</a></div><div class="ttdeci">helios::engine::runtime::world::GameWorld * gameWorld_</div><div class="ttdoc">Pointer to the GameWorld this system belongs to.</div><div class="ttdef"><b>Definition</b> <a href="System_8ixx_source.html#l00048">System.ixx:48</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1ecs_1_1View_html"><div class="ttname"><a href="classhelios_1_1engine_1_1ecs_1_1View.html">helios::engine::ecs::View</a></div><div class="ttdoc">A view class to iterate over entities having specific components.</div><div class="ttdef"><b>Definition</b> <a href="View_8ixx_source.html#l00048">View.ixx:48</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1MenuComponent_html"><div class="ttname"><a href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1MenuComponent.html">helios::engine::modules::ui::widgets::components::MenuComponent</a></div><div class="ttdoc">Manages a collection of menu items for UI navigation.</div><div class="ttdef"><b>Definition</b> <a href="MenuComponent_8ixx_source.html#l00027">MenuComponent.ixx:27</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem_html_a2f2fb33aac64e9c701f225e6f70b93dd"><div class="ttname"><a href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem.html#a2f2fb33aac64e9c701f225e6f70b93dd">helios::engine::modules::ui::widgets::systems::MenuDisplaySystem::MenuDisplaySystem</a></div><div class="ttdeci">MenuDisplaySystem(CombinedStateToIdMapPair&lt; StateLft, StateRgt, MenuId &gt; stateToMenuMap)</div><div class="ttdoc">Constructs the system with a state-to-menu policy.</div><div class="ttdef"><b>Definition</b> <a href="#l00122">MenuDisplaySystem.ixx:122</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem_html_ab923705577cff067e8f18d7e33334c5d"><div class="ttname"><a href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem.html#ab923705577cff067e8f18d7e33334c5d">helios::engine::modules::ui::widgets::systems::MenuDisplaySystem::update</a></div><div class="ttdeci">void update(helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept override</div><div class="ttdoc">Updates menu visibility based on current state.</div><div class="ttdef"><b>Definition</b> <a href="#l00138">MenuDisplaySystem.ixx:138</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1state_1_1CombinedStateToIdMapPair_html"><div class="ttname"><a href="classhelios_1_1engine_1_1state_1_1CombinedStateToIdMapPair.html">helios::engine::state::CombinedStateToIdMapPair</a></div><div class="ttdoc">Maps combined state pairs directly to ID lists.</div><div class="ttdef"><b>Definition</b> <a href="CombinedStateToIdMapPair_8ixx_source.html#l00051">CombinedStateToIdMapPair.ixx:51</a></div></div>
+<div class="ttc" id="amodule__helios_8engine_8core_8data_html"><div class="ttname"><a href="module__helios_8engine_8core_8data.html">helios.engine.core.data</a></div></div>
+<div class="ttc" id="amodule__helios_8engine_8ecs_html"><div class="ttname"><a href="module__helios_8engine_8ecs.html">helios.engine.ecs</a></div></div>
+<div class="ttc" id="amodule__helios_8engine_8mechanics_8gamestate_8types_html"><div class="ttname"><a href="module__helios_8engine_8mechanics_8gamestate_8types.html">helios.engine.mechanics.gamestate.types</a></div></div>
+<div class="ttc" id="amodule__helios_8engine_8mechanics_8match_8types_html"><div class="ttname"><a href="module__helios_8engine_8mechanics_8match_8types.html">helios.engine.mechanics.match.types</a></div></div>
 <div class="ttc" id="amodule__helios_8engine_8modules_8rendering_8model_8components_8ModelAabbComponent_html"><div class="ttname"><a href="module__helios_8engine_8modules_8rendering_8model_8components_8ModelAabbComponent.html">helios.engine.modules.rendering.model.components.ModelAabbComponent</a></div></div>
-<div class="ttc" id="amodule__helios_8engine_8modules_8ui_8commands_8UiActionCommand_html"><div class="ttname"><a href="module__helios_8engine_8modules_8ui_8commands_8UiActionCommand.html">helios.engine.modules.ui.commands.UiActionCommand</a></div></div>
 <div class="ttc" id="amodule__helios_8engine_8modules_8ui_8widgets_8components_8MenuComponent_html"><div class="ttname"><a href="module__helios_8engine_8modules_8ui_8widgets_8components_8MenuComponent.html">helios.engine.modules.ui.widgets.components.MenuComponent</a></div></div>
-<div class="ttc" id="amodule__helios_8engine_8modules_8ui_8widgets_8components_8UiActionComponent_html"><div class="ttname"><a href="module__helios_8engine_8modules_8ui_8widgets_8components_8UiActionComponent.html">helios.engine.modules.ui.widgets.components.UiActionComponent</a></div></div>
-<div class="ttc" id="amodule__helios_8engine_8modules_8ui_8widgets_8components_8UiStateComponent_html"><div class="ttname"><a href="module__helios_8engine_8modules_8ui_8widgets_8components_8UiStateComponent.html">helios.engine.modules.ui.widgets.components.UiStateComponent</a></div></div>
+<div class="ttc" id="amodule__helios_8engine_8modules_8ui_8widgets_8components_8UiFocusComponent_html"><div class="ttname"><a href="module__helios_8engine_8modules_8ui_8widgets_8components_8UiFocusComponent.html">helios.engine.modules.ui.widgets.components.UiFocusComponent</a></div></div>
 <div class="ttc" id="amodule__helios_8engine_8modules_8ui_8widgets_8systems_8MenuDisplaySystem_html"><div class="ttname"><a href="module__helios_8engine_8modules_8ui_8widgets_8systems_8MenuDisplaySystem.html">helios.engine.modules.ui.widgets.systems.MenuDisplaySystem</a></div></div>
-<div class="ttc" id="amodule__helios_8engine_8runtime_8messaging_8command_8CommandBuffer_html"><div class="ttname"><a href="module__helios_8engine_8runtime_8messaging_8command_8CommandBuffer.html">helios.engine.runtime.messaging.command.CommandBuffer</a></div></div>
-<div class="ttc" id="amodule__helios_8engine_8runtime_8world_8GameWorld_html"><div class="ttname"><a href="module__helios_8engine_8runtime_8world_8GameWorld.html">helios.engine.runtime.world.GameWorld</a></div></div>
-<div class="ttc" id="amodule__helios_8engine_8runtime_8world_8UpdateContext_html"><div class="ttname"><a href="module__helios_8engine_8runtime_8world_8UpdateContext.html">helios.engine.runtime.world.UpdateContext</a></div></div>
-<div class="ttc" id="amodule__helios_8input_8types_8Gamepad_html"><div class="ttname"><a href="module__helios_8input_8types_8Gamepad.html">helios.input.types.Gamepad</a></div></div>
+<div class="ttc" id="amodule__helios_8engine_8runtime_8world_html"><div class="ttname"><a href="module__helios_8engine_8runtime_8world.html">helios.engine.runtime.world</a></div></div>
+<div class="ttc" id="amodule__helios_8engine_8state_8CombinedStateToIdMapPair_html"><div class="ttname"><a href="module__helios_8engine_8state_8CombinedStateToIdMapPair.html">helios.engine.state.CombinedStateToIdMapPair</a></div></div>
 <div class="ttc" id="amodule__helios_8math_html"><div class="ttname"><a href="module__helios_8math.html">helios.math</a></div><div class="ttdoc">Mathematical operations and types module.</div></div>
-<div class="ttc" id="anamespacehelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems.html">helios::engine::modules::ui::widgets::systems</a></div><div class="ttdoc">UI widget processing systems.</div><div class="ttdef"><b>Definition</b> <a href="#l00035">MenuDisplaySystem.ixx:35</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1input_1_1types_html"><div class="ttname"><a href="namespacehelios_1_1input_1_1types.html">helios::input::types</a></div><div class="ttdoc">Input type definitions.</div><div class="ttdef"><b>Definition</b> <a href="Gamepad_8ixx_source.html#l00009">Gamepad.ixx:9</a></div></div>
-<div class="ttc" id="astructhelios_1_1engine_1_1ecs_1_1EntityHandle_html"><div class="ttname"><a href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a></div><div class="ttdoc">A versioned handle for referencing entities in an EntityPool.</div><div class="ttdef"><b>Definition</b> <a href="EntityHandle_8ixx_source.html#l00027">EntityHandle.ixx:27</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1engine_1_1core_1_1data_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1core_1_1data.html">helios::engine::core::data</a></div><div class="ttdoc">Data structures for efficient entity management.</div><div class="ttdef"><b>Definition</b> <a href="ActionId_8ixx_source.html#l00015">ActionId.ixx:15</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1engine_1_1core_1_1data_html_aeed72402625b875cba0952c656aebfa4"><div class="ttname"><a href="namespacehelios_1_1engine_1_1core_1_1data.html#aeed72402625b875cba0952c656aebfa4">helios::engine::core::data::MenuId</a></div><div class="ttdeci">helios::core::data::StrongId&lt; MenuIdTag, uint32_t &gt; MenuId</div><div class="ttdoc">Strongly-typed identifier for menus.</div><div class="ttdef"><b>Definition</b> <a href="MenuId_8ixx_source.html#l00032">MenuId.ixx:32</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1engine_1_1ecs_1_1components_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1ecs_1_1components.html">helios::engine::ecs::components</a></div><div class="ttdoc">ECS core components for entity relationships.</div><div class="ttdef"><b>Definition</b> <a href="HierarchyComponent_8ixx_source.html#l00015">HierarchyComponent.ixx:15</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1engine_1_1ecs_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1ecs.html">helios::engine::ecs</a></div><div class="ttdoc">Core Entity-Component-System architecture.</div><div class="ttdef"><b>Definition</b> <a href="ComponentOps_8ixx_source.html#l00011">ComponentOps.ixx:11</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html">helios::engine::mechanics::gamestate::types</a></div><div class="ttdoc">Core types for game state management.</div><div class="ttdef"><b>Definition</b> <a href="GameState_8ixx_source.html#l00013">GameState.ixx:13</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types.html">helios::engine::mechanics::match::types</a></div><div class="ttdoc">Core types for match state management.</div><div class="ttdef"><b>Definition</b> <a href="MatchState_8ixx_source.html#l00013">MatchState.ixx:13</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components.html">helios::engine::modules::ui::widgets::components</a></div><div class="ttdoc">UI widget state components.</div><div class="ttdef"><b>Definition</b> <a href="MenuComponent_8ixx_source.html#l00016">MenuComponent.ixx:16</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems.html">helios::engine::modules::ui::widgets::systems</a></div><div class="ttdoc">UI widget processing systems.</div><div class="ttdef"><b>Definition</b> <a href="#l00033">MenuDisplaySystem.ixx:33</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1engine_1_1state_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1state.html">helios::engine::state</a></div><div class="ttdoc">Generic, template-based state management system.</div><div class="ttdef"><b>Definition</b> <a href="GameStateTransitionId_8ixx_source.html#l00049">GameStateTransitionId.ixx:49</a></div></div>
+<div class="ttc" id="astructhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiFocusComponent_html"><div class="ttname"><a href="structhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiFocusComponent.html">helios::engine::modules::ui::widgets::components::UiFocusComponent</a></div><div class="ttdoc">Tagging struct for the UI-component that currently has the focus.</div><div class="ttdef"><b>Definition</b> <a href="UiFocusComponent_8ixx_source.html#l00022">UiFocusComponent.ixx:22</a></div></div>
 <div class="ttc" id="astructhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_html"><div class="ttname"><a href="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a></div><div class="ttdoc">Context passed to systems and components during per-frame updates.</div><div class="ttdef"><b>Definition</b> <a href="UpdateContext_8ixx_source.html#l00059">UpdateContext.ixx:59</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

@@ -133,13 +133,13 @@ Files</h2></td></tr>
 <tr class="memdesc:SpawnScheduler_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scheduler that evaluates spawn rules and produces spawn plans. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md668"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md632"></a>
 helios::engine::runtime::spawn::scheduling</h1>
 <p>Spawn scheduling and plan management.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md669"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md633"></a>
 Overview</h1>
 <p>This module provides the scheduling layer for the spawn system. Schedulers evaluate spawn rules and produce ScheduledSpawnPlan instances that are processed by the command pipeline. The architecture separates scheduling strategies from rule processing logic.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md670"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md634"></a>
 Key Classes</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -161,7 +161,7 @@ Key Classes</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">RuleConfig</span>  </td><td class="markdownTableBodyNone">Configuration pairing profile ID with a rule  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md671"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md635"></a>
 Architecture</h1>
 <div class="fragment"><div class="line">┌─────────────────────────────────────────────────────────────────────────┐</div>
 <div class="line">│                        SpawnScheduler (abstract)                        │</div>
@@ -183,9 +183,9 @@ Architecture</h1>
 <div class="line">                    │   DefaultRuleProcessor │</div>
 <div class="line">                    │   (shared logic)       │</div>
 <div class="line">                    └────────────────────────┘</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md672"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md636"></a>
 Scheduler Strategies</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md673"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md637"></a>
 DefaultSpawnScheduler</h2>
 <p>Evaluates <b>all registered rules</b> every frame. Best for independent spawn sources that should trigger simultaneously.</p>
 <div class="fragment"><div class="line">DefaultSpawnScheduler scheduler;</div>
@@ -195,7 +195,7 @@ DefaultSpawnScheduler</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Both rules evaluated each frame</span></div>
 <div class="line">scheduler.evaluate(updateContext, spawnContext);</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md674"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md638"></a>
 CyclicSpawnScheduler</h2>
 <p>Evaluates the <b>current rule</b> each frame and advances to the next rule <b>only after a spawn was successfull committed</b>. The same rule is re-evaluated until its conditions are met. Best for sequential wave patterns where each wave must complete before the next begins.</p>
 <div class="fragment"><div class="line">CyclicSpawnScheduler&lt;3&gt; scheduler;</div>
@@ -207,11 +207,11 @@ CyclicSpawnScheduler</h2>
 <div class="line"><span class="comment">// Evaluates wave1 until spawn occurs, then advances to wave2, etc.</span></div>
 <div class="line"><span class="comment">// Cycle: Wave1 → Wave2 → Boss → Wave1 → ...</span></div>
 <div class="line">scheduler.evaluate(updateContext, spawnContext);</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md675"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md639"></a>
 Workflow</h1>
 <div class="fragment"><div class="line">SpawnRule::evaluate() → SpawnPlan → ScheduledSpawnPlan → Command → SpawnManager</div>
 </div><!-- fragment --><p>1. <b>Registration:</b> Rules added via <span class="tt">addRule()</span> with profile IDs 2. <b>Evaluation:</b> <span class="tt">evaluate()</span> called each frame by GameObjectSpawnSystem 3. <b>Processing:</b> RuleProcessor evaluates rules, updates state 4. <b>Scheduling:</b> Rules that pass produce ScheduledSpawnPlans 5. <b>Draining:</b> <span class="tt">drainScheduledPlans()</span> returns pending plans 6. <b>Commit:</b> <span class="tt">commit()</span> called after spawns to update rule state</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md676"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md640"></a>
 Rule Processing</h1>
 <p>The <span class="tt">RuleProcessor</span> abstraction separates evaluation logic from scheduling strategy:</p>
 <div class="fragment"><div class="line"><span class="keyword">class </span>RuleProcessor {</div>
@@ -225,7 +225,7 @@ Rule Processing</h1>
 <div class="line">    ) <span class="keyword">noexcept</span> = 0;</div>
 <div class="line">};</div>
 </div><!-- fragment --><p><span class="tt">DefaultRuleProcessor</span> provides the standard implementation: 1. Retrieve pool snapshot from GameObjectPoolManager 2. Update rule state with delta time 3. Evaluate rule conditions 4. Return SpawnPlan with spawn amount</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md677"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md641"></a>
 Related Modules</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">

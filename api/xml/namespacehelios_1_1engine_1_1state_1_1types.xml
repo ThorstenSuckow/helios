@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="namespacehelios_1_1engine_1_1state_1_1types" kind="namespace" language="C++">
+    <compoundname>helios::engine::state::types</compoundname>
+    <innerclass refid="structhelios_1_1engine_1_1state_1_1types_1_1StateTransitionId_3_01helios_1_1engine_1_1mechanics_45d1fe060e024a568800acdb9ff2360e" prot="public">helios::engine::state::types::StateTransitionId&lt; helios::engine::mechanics::gamestate::types::GameState &gt;</innerclass>
+    <innerclass refid="structhelios_1_1engine_1_1state_1_1types_1_1StateTransitionId_3_01helios_1_1engine_1_1mechanics_c728608f128895f4489bedfff494ec28" prot="public">helios::engine::state::types::StateTransitionId&lt; helios::engine::mechanics::match::types::MatchState &gt;</innerclass>
+    <innerclass refid="classhelios_1_1engine_1_1state_1_1types_1_1StateTransitionContext" prot="public">helios::engine::state::types::StateTransitionContext</innerclass>
+    <innerclass refid="structhelios_1_1engine_1_1state_1_1types_1_1InvalidStateTransitionId" prot="public">helios::engine::state::types::InvalidStateTransitionId</innerclass>
+    <innerclass refid="structhelios_1_1engine_1_1state_1_1types_1_1StateTransitionId" prot="public">helios::engine::state::types::StateTransitionId</innerclass>
+    <innerclass refid="classhelios_1_1engine_1_1state_1_1types_1_1StateTransitionRequest" prot="public">helios::engine::state::types::StateTransitionRequest</innerclass>
+    <innerclass refid="classhelios_1_1engine_1_1state_1_1types_1_1StateTransitionRule" prot="public">helios::engine::state::types::StateTransitionRule</innerclass>
+    <innerclass refid="structhelios_1_1engine_1_1state_1_1types_1_1StateTransitionType" prot="public">helios::engine::state::types::StateTransitionType</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacehelios_1_1engine_1_1state_1_1types_1a8206d62c7b5bc68fb20729209b2eb542" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class StateType</type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structhelios_1_1engine_1_1state_1_1types_1_1StateTransitionId" kindref="compound">StateTransitionId</ref>&lt; StateType &gt;::Type</type>
+        <definition>using helios::engine::state::types::StateTransitionIdType =  typename StateTransitionId&lt;StateType&gt;::Type</definition>
+        <argsstring></argsstring>
+        <name>StateTransitionIdType</name>
+        <qualifiedname>helios::engine::state::types::StateTransitionIdType</qualifiedname>
+        <briefdescription>
+<para>Convenience alias for transition ID type lookup. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>StateType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state enum type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/state/types/StateTransitionId.ixx" line="57" column="5" bodyfile="/tmp/h/include/helios/engine/state/types/StateTransitionId.ixx" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacehelios_1_1engine_1_1state_1_1types_1a986f42a21af7d0f881b117dc03ef7b2e" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename StateType</type>
+          </param>
+        </templateparamlist>
+        <type>bool(*)( <ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;, const <ref refid="classhelios_1_1engine_1_1state_1_1types_1_1StateTransitionRequest" kindref="compound">StateTransitionRequest</ref>&lt; StateType &gt;)</type>
+        <definition>using helios::engine::state::types::GuardCallback =  bool(*)(
+        helios::engine::runtime::world::UpdateContext&amp;,
+        const StateTransitionRequest&lt;StateType&gt;
+    )</definition>
+        <argsstring></argsstring>
+        <name>GuardCallback</name>
+        <qualifiedname>helios::engine::state::types::GuardCallback</qualifiedname>
+        <briefdescription>
+<para>Function pointer type for transition guards. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Guards are called before a transition executes. If the guard returns false, the transition is blocked.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>StateType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state enum type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/state/types/StateTransitionRule.ixx" line="29" column="5" bodyfile="/tmp/h/include/helios/engine/state/types/StateTransitionRule.ixx" bodystart="29" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="namespacehelios_1_1engine_1_1state_1_1types_1a65e3bfab69f20855e37dcbff14c1fbf9" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool helios::engine::state::types::dependent_false_v</definition>
+        <argsstring></argsstring>
+        <name>dependent_false_v</name>
+        <qualifiedname>helios::engine::state::types::dependent_false_v</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>Helper for dependent false in static_assert. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/state/types/StateTransitionId.ixx" line="20" column="27" bodyfile="/tmp/h/include/helios/engine/state/types/StateTransitionId.ixx" bodystart="20" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Type definitions for state transitions. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Provides type traits, context classes, and rule definitions used by the state management system. </para>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/mechanics/gamestate/types/GameStateTransitionId.ixx" line="49" column="1"/>
+  </compounddef>
+</doxygen>

@@ -9,5 +9,5 @@ var classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiStateCo
     [ "setFocused", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiStateComponent.html#a14449333026e9e268ebb2cda39de2db3", null ],
     [ "setHovered", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiStateComponent.html#a9c804fe93b51000e98883861d0dfa2ba", null ],
     [ "setPressed", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiStateComponent.html#a7a31750b5e8b18bdadb53a0eabc3fe70", null ],
-    [ "setSelected", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiStateComponent.html#ae3ebaf57e468563237ea8ce4671c5940", null ]
+    [ "setSelected", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiStateComponent.html#ae3a10f92e3aa51d74a725c46e112de98", null ]
 ];

@@ -3,6 +3,70 @@
   <compounddef id="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuNavigationSystem" kind="class" language="C++" prot="public">
     <compoundname>helios::engine::modules::ui::widgets::systems::MenuNavigationSystem</compoundname>
     <basecompoundref refid="classhelios_1_1engine_1_1ecs_1_1System" prot="public" virt="non-virtual">helios::engine::ecs::System</basecompoundref>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuNavigationSystem_1a673fd643992cd9f819977e18dc0f1593" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::ui::widgets::systems::MenuNavigationSystem::updateMenu</definition>
+        <argsstring>(helios::engine::runtime::world::UpdateContext &amp;updateContext, MenuComponent *mc, const size_t index)</argsstring>
+        <name>updateMenu</name>
+        <qualifiedname>helios::engine::modules::ui::widgets::systems::MenuNavigationSystem::updateMenu</qualifiedname>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1MenuComponent" kindref="compound">MenuComponent</ref> *</type>
+          <declname>mc</declname>
+        </param>
+        <param>
+          <type>const size_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>Updates menu selection state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Moves focus to the new index, updates <ref refid="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiStateComponent" kindref="compound">UiStateComponent</ref> selection flags, and clears the dirty flag.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current frame&apos;s update context. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The menu component to update. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new selected index. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>gamepadState</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current gamepad state. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuNavigationSystem.ixx" line="78" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuNavigationSystem.ixx" bodystart="78" bodyend="105"/>
+      </memberdef>
+    </sectiondef>
     <sectiondef kind="public-func">
       <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuNavigationSystem_1a91a710a4f26f25df573afdad02d17ecd" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>void</type>
@@ -19,6 +83,7 @@
 <para>Processes menu navigation input. </para>
         </briefdescription>
         <detaileddescription>
+<para>Finds the currently focused menu item, handles Up/Down navigation, and triggers UiActionCommand when the A button is pressed on an item with a <ref refid="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiActionComponent" kindref="compound">UiActionComponent</ref>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>updateContext</parametername>
@@ -32,11 +97,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuNavigationSystem.ixx" line="53" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuNavigationSystem.ixx" bodystart="53" bodyend="119"/>
+        <location file="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuNavigationSystem.ixx" line="119" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuNavigationSystem.ixx" bodystart="119" bodyend="170"/>
         <references refid="namespacehelios_1_1input_1_1types_1a4ca7a325d1231e8ec2688156eac9de98a7fc56270e7a70fa81a5935b72eacbe29" compoundref="Gamepad_8ixx" startline="32">helios::input::types::A</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1ae86242f86c27014387f22b448112dd81" compoundref="CommandBuffer_8ixx" startline="218" endline="224">helios::engine::runtime::messaging::command::CommandBuffer::add</references>
+        <references refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a006a361316386a5d08617793cb358355" compoundref="UpdateContext_8ixx" startline="217" endline="219">helios::engine::runtime::world::UpdateContext::commandBuffer</references>
         <references refid="namespacehelios_1_1input_1_1types_1a4ca7a325d1231e8ec2688156eac9de98a08a38277b0309070706f6652eeae9a53" compoundref="Gamepad_8ixx" startline="67">helios::input::types::Down</references>
+        <references refid="classhelios_1_1input_1_1InputSnapshot_1a5ff8aba18168b8843329886e68a7ee99" compoundref="InputSnapshot_8ixx" startline="75" endline="77">helios::input::InputSnapshot::gamepadState</references>
         <references refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" compoundref="System_8ixx" startline="48">helios::engine::ecs::System::gameWorld_</references>
-        <references refid="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1MenuComponent_1ac0ba479d7abdf11dd40d8e8e258dd444" compoundref="MenuComponent_8ixx" startline="95" endline="97">helios::engine::modules::ui::widgets::components::MenuComponent::menuItems</references>
+        <references refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a1c9a47461e487485eeeaaf442510dd68" compoundref="UpdateContext_8ixx" startline="208" endline="210">helios::engine::runtime::world::UpdateContext::inputSnapshot</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1MenuComponent_1ac0ba479d7abdf11dd40d8e8e258dd444" compoundref="MenuComponent_8ixx" startline="126" endline="128">helios::engine::modules::ui::widgets::components::MenuComponent::menuItems</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1MenuComponent_1a3145233a81e194fba402c4904a12293f" compoundref="MenuComponent_8ixx" startline="106" endline="108">helios::engine::modules::ui::widgets::components::MenuComponent::selectedIndex</references>
         <references refid="namespacehelios_1_1input_1_1types_1a4ca7a325d1231e8ec2688156eac9de98a258f49887ef8d14ac268c92b02503aaa" compoundref="Gamepad_8ixx" startline="62">helios::input::types::Up</references>
       </memberdef>
     </sectiondef>
@@ -44,7 +114,20 @@
 <para>Handles gamepad input for menu navigation. </para>
     </briefdescription>
     <detaileddescription>
-<para>Processes Up/Down input to change selection and A button to activate the selected menu item. Updates UiStateComponent selection state and issues UiActionCommand on activation. </para>
+<para>Processes Up/Down input to change selection and A button to activate the selected menu item. Updates <ref refid="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiStateComponent" kindref="compound">UiStateComponent</ref> selection state and issues UiActionCommand on activation.</para>
+<para>## Input Handling</para>
+<para><itemizedlist>
+<listitem><para>**Up/Down**: Navigate through menu items</para>
+</listitem><listitem><para>**A Button**: Activate selected item (triggers UiActionCommand)</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1MenuComponent" kindref="compound">MenuComponent</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem" kindref="compound">MenuDisplaySystem</ref> </para>
+</simplesect>
+<simplesect kind="see"><para>UiActionCommand </para>
+</simplesect>
+</para>
     </detaileddescription>
     <inheritancegraph>
       <node id="2">
@@ -65,11 +148,11 @@
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="12">
+      <node id="10">
         <label>helios::engine::ecs::EntityManager</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1EntityManager"/>
       </node>
-      <node id="11">
+      <node id="9">
         <label>helios::engine::ecs::EntityRegistry</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry"/>
       </node>
@@ -86,19 +169,11 @@
         <label>helios::engine::ecs::Updatable</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1Updatable"/>
       </node>
-      <node id="7">
-        <label>helios::engine::mechanics::gamestate::GameStateCommandHandler</label>
-        <link refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1GameStateCommandHandler"/>
-      </node>
-      <node id="8">
-        <label>helios::engine::mechanics::match::MatchStateCommandHandler</label>
-        <link refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1MatchStateCommandHandler"/>
-      </node>
       <node id="6">
         <label>helios::engine::mechanics::scoring::ScoreCommandHandler</label>
         <link refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler"/>
       </node>
-      <node id="9">
+      <node id="7">
         <label>helios::engine::modules::ui::UiActionCommandHandler</label>
         <link refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandHandler"/>
       </node>
@@ -108,7 +183,7 @@
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="10">
+      <node id="8">
         <label>helios::engine::runtime::spawn::SpawnCommandHandlerRegistry</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandlerRegistry"/>
       </node>
@@ -122,28 +197,22 @@
           <edgelabel>scoreCommandHandler_</edgelabel>
         </childnode>
         <childnode refid="7" relation="usage">
-          <edgelabel>gameStateCommandHandler_</edgelabel>
-        </childnode>
-        <childnode refid="8" relation="usage">
-          <edgelabel>matchStateCommandHandler_</edgelabel>
-        </childnode>
-        <childnode refid="9" relation="usage">
           <edgelabel>uiActionCommandHandler_</edgelabel>
         </childnode>
-        <childnode refid="10" relation="usage">
+        <childnode refid="8" relation="usage">
           <edgelabel>spawnCommandHandlerRegistry_</edgelabel>
         </childnode>
-        <childnode refid="11" relation="usage">
+        <childnode refid="9" relation="usage">
           <edgelabel>entityRegistry_</edgelabel>
         </childnode>
-        <childnode refid="12" relation="usage">
+        <childnode refid="10" relation="usage">
           <edgelabel>em_</edgelabel>
         </childnode>
-        <childnode refid="13" relation="usage">
+        <childnode refid="11" relation="usage">
           <edgelabel>session_</edgelabel>
         </childnode>
       </node>
-      <node id="13">
+      <node id="11">
         <label>helios::engine::runtime::world::Session</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session"/>
       </node>
@@ -152,12 +221,13 @@
         <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
       </node>
     </collaborationgraph>
-    <location file="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuNavigationSystem.ixx" line="43" column="5" bodyfile="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuNavigationSystem.ixx" bodystart="43" bodyend="121"/>
+    <location file="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuNavigationSystem.ixx" line="65" column="5" bodyfile="/tmp/h/include/helios/engine/modules/ui/widgets/systems/MenuNavigationSystem.ixx" bodystart="65" bodyend="174"/>
     <listofallmembers>
       <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" prot="protected" virt="non-virtual"><scope>helios::engine::modules::ui::widgets::systems::MenuNavigationSystem</scope><name>gameWorld_</name></member>
       <member refid="classhelios_1_1engine_1_1ecs_1_1System_1ae0464c1668e257439243a4f25979a7ff" prot="public" virt="virtual"><scope>helios::engine::modules::ui::widgets::systems::MenuNavigationSystem</scope><name>init</name></member>
       <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a26d81abcda05fe8b12a1ddb4ed6099a3" prot="public" virt="non-virtual"><scope>helios::engine::modules::ui::widgets::systems::MenuNavigationSystem</scope><name>Updatable</name></member>
       <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuNavigationSystem_1a91a710a4f26f25df573afdad02d17ecd" prot="public" virt="virtual"><scope>helios::engine::modules::ui::widgets::systems::MenuNavigationSystem</scope><name>update</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuNavigationSystem_1a673fd643992cd9f819977e18dc0f1593" prot="private" virt="non-virtual"><scope>helios::engine::modules::ui::widgets::systems::MenuNavigationSystem</scope><name>updateMenu</name></member>
       <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a937c99bfacd777c53e0f811ab9d335a6" prot="public" virt="virtual"><scope>helios::engine::modules::ui::widgets::systems::MenuNavigationSystem</scope><name>~System</name></member>
       <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a0f54f92a2a8d6c8dc2fc2ebed41d5a85" prot="public" virt="virtual"><scope>helios::engine::modules::ui::widgets::systems::MenuNavigationSystem</scope><name>~Updatable</name></member>
     </listofallmembers>

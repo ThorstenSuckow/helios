@@ -2,44 +2,46 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="dir_65d165468c717c67bace063bdb86ff73" kind="dir">
     <compoundname>match</compoundname>
-    <innerdir refid="dir_82c0e5f2466dbad6335583ffce9c996a">commands</innerdir>
-    <innerdir refid="dir_aa6a3dd4ed48a30c8a77c0ae3ea7750b">components</innerdir>
-    <innerdir refid="dir_0f1722f86276c8a09cbfccf41430b534">dispatcher</innerdir>
-    <innerdir refid="dir_f9a8cd8fd3995795dc04f45f6888faba">listeners</innerdir>
     <innerdir refid="dir_c709f84978d2d66f31b50c8123d67a14">rules</innerdir>
     <innerdir refid="dir_c15260370b6d31e4f1b37eb15587b087">systems</innerdir>
     <innerdir refid="dir_cb33ccb71eb51ab476530a91930975dc">types</innerdir>
     <innerfile refid="helios_2engine_2mechanics_2match_2__module_8ixx">helios/engine/mechanics/match/_module.ixx</innerfile>
-    <innerfile refid="MatchStateCommandHandler_8ixx">MatchStateCommandHandler.ixx</innerfile>
     <innerfile refid="MatchStateManager_8ixx">MatchStateManager.ixx</innerfile>
-    <innerfile refid="MatchStateTransitionListener_8ixx">MatchStateTransitionListener.ixx</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_65d165468c717c67bace063bdb86ff73_1autotoc_md285">
-<title>helios::engine::mechanics::match</title><para>Match state management system for the helios engine.</para>
-<para>This module provides a rule-based state machine for managing match states (e.g., Warmup, PlayerSpawn, Playing) with transitions, listeners, and command-driven state changes.</para>
+<sect1 id="dir_65d165468c717c67bace063bdb86ff73_1autotoc_md252">
+<title>helios::engine::mechanics::match</title><para>Match state management for the helios engine.</para>
+<para>This module provides domain-specific types and bindings for managing match states (Warmup, PlayerSpawn, Playing). It uses the generic <computeroutput><ref refid="namespacehelios_1_1engine_1_1state" kindref="compound">helios::engine::state</ref></computeroutput> framework.</para>
 </sect1>
-<sect1 id="dir_65d165468c717c67bace063bdb86ff73_1autotoc_md286">
-<title>Submodules</title><para><table rows="7" cols="2"><row>
+<sect1 id="dir_65d165468c717c67bace063bdb86ff73_1autotoc_md253">
+<title>Components</title><para><table rows="4" cols="2"><row>
+<entry thead="yes"><para>Component  </para>
+</entry><entry thead="yes"><para>Description  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>MatchStateManager</computeroutput>  </para>
+</entry><entry thead="no"><para>Type alias for <computeroutput>StateManager&lt;MatchState&gt;</computeroutput>  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>MatchState</computeroutput>  </para>
+</entry><entry thead="no"><para>Enum defining match/round lifecycle states  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>MatchStateTransitionId</computeroutput>  </para>
+</entry><entry thead="no"><para>Enum defining valid transition triggers  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_65d165468c717c67bace063bdb86ff73_1autotoc_md254">
+<title>Submodules</title><para><table rows="4" cols="2"><row>
 <entry thead="yes"><para>Submodule  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
 </entry></row>
 <row>
-<entry thead="no"><para><computeroutput>commands/</computeroutput>  </para>
-</entry><entry thead="no"><para>Commands for requesting state transitions  </para>
-</entry></row>
-<row>
-<entry thead="no"><para><computeroutput>components/</computeroutput>  </para>
-</entry><entry thead="no"><para>Components for storing match state and timer  </para>
-</entry></row>
-<row>
-<entry thead="no"><para><computeroutput>dispatcher/</computeroutput>  </para>
-</entry><entry thead="no"><para>Dispatchers for routing state commands  </para>
-</entry></row>
-<row>
-<entry thead="no"><para><computeroutput>listeners/</computeroutput>  </para>
-</entry><entry thead="no"><para>Listeners for reacting to state transitions  </para>
+<entry thead="no"><para><computeroutput>rules/</computeroutput>  </para>
+</entry><entry thead="no"><para>Default transition rules and guards  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>systems/</computeroutput>  </para>
@@ -47,15 +49,23 @@
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>types/</computeroutput>  </para>
-</entry><entry thead="no"><para>Core types, enums, and data structures  </para>
+</entry><entry thead="no"><para>Core types, enums, and type trait specializations  </para>
 </entry></row>
 </table>
 </para>
 </sect1>
-<sect1 id="dir_65d165468c717c67bace063bdb86ff73_1autotoc_md287">
-<title>Architecture</title><para>1. <bold>MatchStateManager</bold> holds the transition rules and processes state commands 2. <bold>MatchStateCommand</bold> encapsulates a transition request 3. <bold>MatchStateTransitionRule</bold> defines valid from -&gt; to transitions with optional guards 4. <bold>MatchStateTransitionListener</bold> implementations react to state changes</para>
+<sect1 id="dir_65d165468c717c67bace063bdb86ff73_1autotoc_md255">
+<title>Architecture</title><para><computeroutput>MatchStateManager</computeroutput> is a type alias for <computeroutput>StateManager&lt;MatchState&gt;</computeroutput>:</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1a151fc4e8d8a8f2eb87866789883eda39" kindref="member">MatchStateManager</ref><sp/>=<sp/><ref refid="classhelios_1_1engine_1_1state_1_1StateManager" kindref="compound">helios::engine::state::StateManager&lt;types::MatchState&gt;</ref>;</highlight></codeline>
+</programlisting></para>
+<para>The generic <computeroutput>StateManager</computeroutput> provides:<itemizedlist>
+<listitem><para>Rule-based transitions with optional guards</para>
+</listitem><listitem><para>Listener notifications on state changes</para>
+</listitem><listitem><para>Command-driven state changes via <computeroutput>StateCommand&lt;MatchState&gt;</computeroutput></para>
+</listitem></itemizedlist>
+</para>
 </sect1>
-<sect1 id="dir_65d165468c717c67bace063bdb86ff73_1autotoc_md288">
+<sect1 id="dir_65d165468c717c67bace063bdb86ff73_1autotoc_md256">
 <title>Match Flow</title><para><programlisting><codeline><highlight class="normal">┌───────────────┐<sp/><sp/><sp/>WarmupRequested<sp/><sp/><sp/>┌───────────────┐</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>Undefined<sp/><sp/><sp/>│<sp/>──────────────────►<sp/>│<sp/><sp/><sp/><sp/>Warmup<sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal">└───────────────┘<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>└───────────────┘</highlight></codeline>
@@ -75,16 +85,25 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>└───────────────┘</highlight></codeline>
 </programlisting></para>
 </sect1>
-<sect1 id="dir_65d165468c717c67bace063bdb86ff73_1autotoc_md289">
-<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Create<sp/>manager</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>manager<sp/>=<sp/>std::make_unique&lt;MatchStateManager&gt;();</highlight></codeline>
+<sect1 id="dir_65d165468c717c67bace063bdb86ff73_1autotoc_md257">
+<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1mechanics_1_1match" kindref="compound">helios::engine::mechanics::match</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1state" kindref="compound">helios::engine::state</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1state_1_1commands" kindref="compound">helios::engine::state::commands</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Create<sp/>manager<sp/>with<sp/>rules</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>manager<sp/>=<sp/>std::make_unique&lt;MatchStateManager&gt;(matchStateRules);</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Add<sp/>listeners</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal">manager-&gt;addMatchStateListener(std::make_unique&lt;PlayerSpawnListener&gt;(playerObject));</highlight></codeline>
+<codeline><highlight class="normal">manager-&gt;addStateListener(std::make_unique&lt;LambdaStateListener&lt;types::MatchState&gt;&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>onExit,<sp/>onTransition,<sp/>onEnter<sp/>callbacks<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">));</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Submit<sp/>transition<sp/>via<sp/>command</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal">commandBuffer.add&lt;MatchStateCommand&gt;(</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>MatchStateTransitionRequest(MatchState::Warmup,<sp/>MatchStateTransitionId::PlayerSpawnRequested)</highlight></codeline>
+<codeline><highlight class="normal">commandBuffer.add&lt;<ref refid="classhelios_1_1engine_1_1state_1_1commands_1_1StateCommand" kindref="compound">StateCommand&lt;types::MatchState&gt;</ref>&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1engine_1_1state_1_1types_1_1StateTransitionRequest" kindref="compound">StateTransitionRequest&lt;types::MatchState&gt;</ref>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9ba89be10c310ee8cfe640aba66e7368c6c" kindref="member">types::MatchState::Warmup</ref>,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70aaa03a010fa4886c60875a71f37b22f15" kindref="member">types::MatchStateTransitionId::PlayerSpawnRequested</ref></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline><highlight class="normal">);</highlight></codeline>
 </programlisting></para>
 <para><hruler/>

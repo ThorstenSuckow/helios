@@ -5,5 +5,6 @@ var dir_446c3279719b350ae96e237b7ddd8259 =
     [ "GameLoop.ixx", "GameLoop_8ixx.html", "GameLoop_8ixx" ],
     [ "Pass.ixx", "Pass_8ixx.html", "Pass_8ixx" ],
     [ "PassCommitListener.ixx", "PassCommitListener_8ixx.html", "PassCommitListener_8ixx" ],
-    [ "Phase.ixx", "Phase_8ixx.html", "Phase_8ixx" ]
+    [ "Phase.ixx", "Phase_8ixx.html", "Phase_8ixx" ],
+    [ "TypedPass.ixx", "TypedPass_8ixx.html", "TypedPass_8ixx" ]
 ];

@@ -5,7 +5,7 @@ var searchData=
   ['uiactioncommandhandler_2',['UiActionCommandHandler',['../classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandHandler.html',1,'helios::engine::modules::ui']]],
   ['uiactioncommandmanager_3',['UiActionCommandManager',['../classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager.html',1,'helios::engine::modules::ui']]],
   ['uiactioncomponent_4',['UiActionComponent',['../classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiActionComponent.html',1,'helios::engine::modules::ui::widgets::components']]],
-  ['uifocuscomponent_5',['UiFocusComponent',['../classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiFocusComponent.html',1,'helios::engine::modules::ui::widgets::components']]],
+  ['uifocuscomponent_5',['UiFocusComponent',['../structhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiFocusComponent.html',1,'helios::engine::modules::ui::widgets::components']]],
   ['uistatecomponent_6',['UiStateComponent',['../classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiStateComponent.html',1,'helios::engine::modules::ui::widgets::components']]],
   ['uistylecomponent_7',['UiStyleComponent',['../classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiStyleComponent.html',1,'helios::engine::modules::ui::widgets::components']]],
   ['uistyleupdatesystem_8',['UiStyleUpdateSystem',['../classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1UiStyleUpdateSystem.html',1,'helios::engine::modules::ui::widgets::systems']]],

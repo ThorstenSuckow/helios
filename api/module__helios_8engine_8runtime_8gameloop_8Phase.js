@@ -8,6 +8,6 @@ var module__helios_8engine_8runtime_8gameloop_8Phase =
     ] ],
     [ "helios::engine::runtime::gameloop::Phase::Phase", "module__helios_8engine_8runtime_8gameloop_8Phase.html#a1c22609dfb21151cb2c60db9c1a4c196", null ],
     [ "helios::engine::runtime::gameloop::Phase::addPassCommitListener", "module__helios_8engine_8runtime_8gameloop_8Phase.html#a6b4a1f29d5eafcbb8f86e6bc867d3d11", null ],
-    [ "helios::engine::runtime::gameloop::Phase::addPass", "module__helios_8engine_8runtime_8gameloop_8Phase.html#a14ac55084488132a02512a95cf79585a", null ],
+    [ "helios::engine::runtime::gameloop::Phase::addPass", "module__helios_8engine_8runtime_8gameloop_8Phase.html#a88638a425d6afe3141de12474f6ea52d", null ],
     [ "helios::engine::runtime::gameloop::Phase::gameLoop", "module__helios_8engine_8runtime_8gameloop_8Phase.html#aa478fd5c979d7b3454afd1a4a9521851", null ]
 ];

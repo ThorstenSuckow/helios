@@ -1,5 +1,6 @@
 var MatchStateTransitionId_8ixx =
 [
+    [ "helios::engine::state::types::StateTransitionId&lt; helios::engine::mechanics::match::types::MatchState &gt;", "structhelios_1_1engine_1_1state_1_1types_1_1StateTransitionId_3_01helios_1_1engine_1_1mechanics_c728608f128895f4489bedfff494ec28.html", "structhelios_1_1engine_1_1state_1_1types_1_1StateTransitionId_3_01helios_1_1engine_1_1mechanics_c728608f128895f4489bedfff494ec28" ],
     [ "helios::engine::mechanics::match::types::MatchStateTransitionId", "namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types.html#a582a1deeeb0b47612daff20c822fad70", [
       [ "helios::engine::mechanics::match::types::MatchStateTransitionId::Undefined", "namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types.html#a582a1deeeb0b47612daff20c822fad70aec0fc0100c4fc1ce4eea230c3dc10360", null ],
       [ "helios::engine::mechanics::match::types::MatchStateTransitionId::WarmupRequested", "namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types.html#a582a1deeeb0b47612daff20c822fad70a3badd370a329294628d42d1a06d298ff", null ],

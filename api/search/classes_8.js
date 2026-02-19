@@ -10,5 +10,6 @@ var searchData=
   ['inputadapter_7',['InputAdapter',['../classhelios_1_1input_1_1InputAdapter.html',1,'helios::input']]],
   ['inputmanager_8',['InputManager',['../classhelios_1_1input_1_1InputManager.html',1,'helios::input']]],
   ['inputsnapshot_9',['InputSnapshot',['../classhelios_1_1input_1_1InputSnapshot.html',1,'helios::input']]],
-  ['iterator_10',['Iterator',['../structhelios_1_1engine_1_1ecs_1_1SparseSet_1_1Iterator.html',1,'helios::engine::ecs::SparseSet&lt; T &gt;::Iterator'],['../structhelios_1_1engine_1_1ecs_1_1View_1_1Iterator.html',1,'helios::engine::ecs::View&lt; Components &gt;::Iterator']]]
+  ['invalidstatetransitionid_10',['InvalidStateTransitionId',['../structhelios_1_1engine_1_1state_1_1types_1_1InvalidStateTransitionId.html',1,'helios::engine::state::types']]],
+  ['iterator_11',['Iterator',['../structhelios_1_1engine_1_1ecs_1_1SparseSet_1_1Iterator.html',1,'helios::engine::ecs::SparseSet&lt; T &gt;::Iterator'],['../structhelios_1_1engine_1_1ecs_1_1View_1_1Iterator.html',1,'helios::engine::ecs::View&lt; Components &gt;::Iterator']]]
 ];

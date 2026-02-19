@@ -12,26 +12,28 @@
         <name>gameObject_</name>
         <qualifiedname>helios::engine::runtime::world::Session::gameObject_</qualifiedname>
         <briefdescription>
+<para>The underlying GameObject storing session components. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="53" column="25" bodyfile="/tmp/h/include/helios/engine/runtime/world/Session.ixx" bodystart="53" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="67" column="25" bodyfile="/tmp/h/include/helios/engine/runtime/world/Session.ixx" bodystart="67" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1aac42cc3c322f3c003d22daff1c358b6b" prot="private" static="no" mutable="no">
-        <type>std::optional&lt; ecs::GameObject &gt;</type>
-        <definition>std::optional&lt;ecs::GameObject&gt; helios::engine::runtime::world::Session::playerEntity_</definition>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a06371479d0895b2ea58be757a99f3acd" prot="private" static="no" mutable="no">
+        <type>ecs::EntityHandle</type>
+        <definition>ecs::EntityHandle helios::engine::runtime::world::Session::playerEntity_</definition>
         <argsstring></argsstring>
         <name>playerEntity_</name>
         <qualifiedname>helios::engine::runtime::world::Session::playerEntity_</qualifiedname>
         <briefdescription>
+<para>Handle to the player entity. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="55" column="23" bodyfile="/tmp/h/include/helios/engine/runtime/world/Session.ixx" bodystart="55" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="72" column="27" bodyfile="/tmp/h/include/helios/engine/runtime/world/Session.ixx" bodystart="72" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -49,7 +51,7 @@
 <para>Constructs a session with the given GameObject. </para>
         </briefdescription>
         <detaileddescription>
-<para>Automatically adds <ref refid="structhelios_1_1engine_1_1mechanics_1_1gamestate_1_1components_1_1GameStateComponent" kindref="compound">GameStateComponent</ref>, UiFocusComponent, and <ref refid="structhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1MatchStateComponent" kindref="compound">MatchStateComponent</ref> to the GameObject.</para>
+<para>Automatically adds <ref refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1viewport_1_1components_1_1ActiveViewportIdsStateComponent" kindref="compound">ActiveViewportIdsStateComponent</ref>. State types must be registered separately via <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a16a1563a9b807088e812aed53948ffb8" kindref="member">trackState&lt;T&gt;()</ref>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>go</parametername>
@@ -63,20 +65,20 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="67" column="18" bodyfile="/tmp/h/include/helios/engine/runtime/world/Session.ixx" bodystart="67" bodyend="74"/>
+        <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="84" column="18" bodyfile="/tmp/h/include/helios/engine/runtime/world/Session.ixx" bodystart="84" bodyend="86"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1afe22b9be122e41c030aa46b02a5771e7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a482e5c107c64c7296602fb1aeaaec102" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
-        <definition>void helios::engine::runtime::world::Session::setPlayerEntity</definition>
-        <argsstring>(const ecs::GameObject go) noexcept</argsstring>
-        <name>setPlayerEntity</name>
-        <qualifiedname>helios::engine::runtime::world::Session::setPlayerEntity</qualifiedname>
+        <definition>void helios::engine::runtime::world::Session::setPlayerEntityHandle</definition>
+        <argsstring>(const ecs::EntityHandle go) noexcept</argsstring>
+        <name>setPlayerEntityHandle</name>
+        <qualifiedname>helios::engine::runtime::world::Session::setPlayerEntityHandle</qualifiedname>
         <param>
-          <type>const ecs::GameObject</type>
+          <type>const ecs::EntityHandle</type>
           <declname>go</declname>
         </param>
         <briefdescription>
-<para>Sets the player entity for this session. </para>
+<para>Sets the player entity handle. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -84,7 +86,7 @@
 <parametername>go</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The GameObject representing the player. </para>
+<para>The player&apos;s entity handle. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -92,27 +94,27 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="81" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/world/Session.ixx" bodystart="81" bodyend="83"/>
+        <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="93" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/world/Session.ixx" bodystart="93" bodyend="95"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1ab07431cac027af95207f118b0daac59c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>std::optional&lt; ecs::GameObject &gt;</type>
-        <definition>std::optional&lt; ecs::GameObject &gt; helios::engine::runtime::world::Session::playerEntity</definition>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1ab2f104f45234dde94a94c7ed19603794" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>ecs::EntityHandle</type>
+        <definition>ecs::EntityHandle helios::engine::runtime::world::Session::playerEntityHandle</definition>
         <argsstring>() const noexcept</argsstring>
-        <name>playerEntity</name>
-        <qualifiedname>helios::engine::runtime::world::Session::playerEntity</qualifiedname>
+        <name>playerEntityHandle</name>
+        <qualifiedname>helios::engine::runtime::world::Session::playerEntityHandle</qualifiedname>
         <briefdescription>
-<para>Returns the player entity if set. </para>
+<para>Returns the player entity handle. </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>Optional containing the player GameObject, or nullopt. </para>
+<para><simplesect kind="return"><para>The player&apos;s entity handle. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="90" column="24" bodyfile="/tmp/h/include/helios/engine/runtime/world/Session.ixx" bodystart="90" bodyend="92"/>
-        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1rules_1_1guards_1_1DefaultMatchStateTransitionGuards_1abefba094d049e7b51bfd09bdf4a94650" compoundref="DefaultMatchStateTransitionGuards_8ixx" startline="42" endline="48">helios::engine::mechanics::match::rules::guards::DefaultMatchStateTransitionGuards::isPlayerActive</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1rules_1_1guards_1_1DefaultMatchStateTransitionGuards_1aa400f94669e213ad779cbbb4cadac03f" compoundref="DefaultMatchStateTransitionGuards_8ixx" startline="58" endline="64">helios::engine::mechanics::match::rules::guards::DefaultMatchStateTransitionGuards::isPlayerInactive</referencedby>
+        <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="102" column="28" bodyfile="/tmp/h/include/helios/engine/runtime/world/Session.ixx" bodystart="102" bodyend="104"/>
+        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1rules_1_1guards_1_1DefaultMatchStateTransitionGuards_1a01c761773a5709e9d85b57e050a146dd" compoundref="DefaultMatchStateTransitionGuards_8ixx" startline="47" endline="54">helios::engine::mechanics::match::rules::guards::DefaultMatchStateTransitionGuards::isPlayerActive</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1rules_1_1guards_1_1DefaultMatchStateTransitionGuards_1acd3a0f438f7415d464e9b40813bed226" compoundref="DefaultMatchStateTransitionGuards_8ixx" startline="64" endline="71">helios::engine::mechanics::match::rules::guards::DefaultMatchStateTransitionGuards::isPlayerInactive</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a5054ee6de251227e98c95d5d0ce05834" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -127,48 +129,43 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="98" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/world/Session.ixx" bodystart="98" bodyend="101"/>
+        <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="109" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/world/Session.ixx" bodystart="109" bodyend="111"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a67672ffe281619280d5a6ab951aeaf34" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool helios::engine::runtime::world::Session::isPaused</definition>
-        <argsstring>() const noexcept</argsstring>
-        <name>isPaused</name>
-        <qualifiedname>helios::engine::runtime::world::Session::isPaused</qualifiedname>
-        <briefdescription>
-<para>Checks if the game is currently paused. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><simplesect kind="return"><para>True if the game state is Paused. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="108" column="15" bodyfile="/tmp/h/include/helios/engine/runtime/world/Session.ixx" bodystart="108" bodyend="112"/>
-        <references refid="structhelios_1_1engine_1_1mechanics_1_1gamestate_1_1components_1_1GameStateComponent_1aed103bcc0fb5089cbdd1f2309799c5ab" compoundref="GameStateComponent_8ixx" startline="24">helios::engine::mechanics::gamestate::components::GameStateComponent::gameState</references>
-        <references refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beae99180abf47a8b3a856e0bcb2656990a" compoundref="GameState_8ixx" startline="37">helios::engine::mechanics::gamestate::types::Paused</references>
-      </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1adaca8883984a4a7db10afbcaad2bc73f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a66812a7325b8775911c39a96fdbffb42" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename StateType</type>
+          </param>
+        </templateparamlist>
         <type>void</type>
-        <definition>void helios::engine::runtime::world::Session::setGameState</definition>
-        <argsstring>(const GameState gameState) noexcept</argsstring>
-        <name>setGameState</name>
-        <qualifiedname>helios::engine::runtime::world::Session::setGameState</qualifiedname>
+        <definition>void helios::engine::runtime::world::Session::setStateFrom</definition>
+        <argsstring>(const StateTransitionContext&lt; StateType &gt; stateTransitionContext) noexcept</argsstring>
+        <name>setStateFrom</name>
+        <qualifiedname>helios::engine::runtime::world::Session::setStateFrom</qualifiedname>
         <param>
-          <type>const GameState</type>
-          <declname>gameState</declname>
+          <type>const StateTransitionContext&lt; StateType &gt;</type>
+          <declname>stateTransitionContext</declname>
         </param>
         <briefdescription>
-<para>Sets the current game state. </para>
+<para>Updates state from a transition context. </para>
         </briefdescription>
         <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
+<para>Called by StateManager after a successful transition.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
-<parametername>gameState</parametername>
+<parametername>StateType</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The new game state. </para>
+<para>The state enum type.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stateTransitionContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The completed transition context. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -176,29 +173,96 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="119" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/world/Session.ixx" bodystart="119" bodyend="125"/>
-        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a3d90212518e0d571e1c2986fa720d198" compoundref="Session_8ixx" startline="144" endline="148">helios::engine::runtime::world::Session::gameState</references>
+        <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="123" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/world/Session.ixx" bodystart="123" bodyend="128"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a71be904a5fcadadfd5d72efe5e26e8e2" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>void</type>
-        <definition>void helios::engine::runtime::world::Session::setMatchStateFrom</definition>
-        <argsstring>(const MatchStateTransitionContext matchStateTransitionContext) noexcept</argsstring>
-        <name>setMatchStateFrom</name>
-        <qualifiedname>helios::engine::runtime::world::Session::setMatchStateFrom</qualifiedname>
-        <param>
-          <type>const MatchStateTransitionContext</type>
-          <declname>matchStateTransitionContext</declname>
-        </param>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a26784a3e90f2a97ca31cfa2ece4f41c9" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename StateType</type>
+          </param>
+        </templateparamlist>
+        <type>StateType</type>
+        <definition>StateType helios::engine::runtime::world::Session::state</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>state</name>
+        <qualifiedname>helios::engine::runtime::world::Session::state</qualifiedname>
         <briefdescription>
-<para>Sets the current match state. </para>
+<para>Returns the current state for a given state type. </para>
         </briefdescription>
         <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
+<para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
-<parametername>matchStateTransitionContext</parametername>
+<parametername>StateType</parametername>
 </parameternamelist>
 <parameterdescription>
-<para></para>
+<para>The state enum type.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The current state, or StateType::Undefined if not found. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="138" column="20" bodyfile="/tmp/h/include/helios/engine/runtime/world/Session.ixx" bodystart="138" bodyend="142"/>
+        <references refid="classhelios_1_1engine_1_1state_1_1components_1_1StateComponent_1a7601e23fab908350fd99ca7c705311b8" compoundref="StateComponent_8ixx" startline="48" endline="50">helios::engine::state::components::StateComponent&lt; StateType &gt;::state</references>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1TypedPass_1a7733ed1cd17abc4a3c85da27684b6c2b" compoundref="TypedPass_8ixx" startline="175" endline="182">helios::engine::runtime::gameloop::TypedPass&lt; StateType &gt;::shouldRun</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1ac1af4b2a7d4f75188d58591deafcacac" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename StateType</type>
+          </param>
+        </templateparamlist>
+        <type>StateTransitionIdType&lt; StateType &gt;</type>
+        <definition>StateTransitionIdType&lt; StateType &gt; helios::engine::runtime::world::Session::stateTransitionId</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>stateTransitionId</name>
+        <qualifiedname>helios::engine::runtime::world::Session::stateTransitionId</qualifiedname>
+        <briefdescription>
+<para>Returns the last transition ID for a given state type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>StateType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state enum type.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The transition ID, or Undefined if not found. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="152" column="32" bodyfile="/tmp/h/include/helios/engine/runtime/world/Session.ixx" bodystart="152" bodyend="156"/>
+        <references refid="classhelios_1_1engine_1_1state_1_1components_1_1StateComponent_1a77ca84a25d37303deccb76d414d83267" compoundref="StateComponent_8ixx" startline="67" endline="69">helios::engine::state::components::StateComponent&lt; StateType &gt;::transitionId</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a16a1563a9b807088e812aed53948ffb8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename StateType</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void helios::engine::runtime::world::Session::trackState</definition>
+        <argsstring>()</argsstring>
+        <name>trackState</name>
+        <qualifiedname>helios::engine::runtime::world::Session::trackState</qualifiedname>
+        <briefdescription>
+<para>Lets this session track the specified StateType. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>StateType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state enum type. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -206,128 +270,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="132" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/world/Session.ixx" bodystart="132" bodyend="137"/>
+        <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="164" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/world/Session.ixx" bodystart="164" bodyend="166"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a3d90212518e0d571e1c2986fa720d198" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>GameState</type>
-        <definition>GameState helios::engine::runtime::world::Session::gameState</definition>
-        <argsstring>() const noexcept</argsstring>
-        <name>gameState</name>
-        <qualifiedname>helios::engine::runtime::world::Session::gameState</qualifiedname>
-        <briefdescription>
-<para>Returns the current game state. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><simplesect kind="return"><para>The current game state, or Undefined if not available. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="144" column="20" bodyfile="/tmp/h/include/helios/engine/runtime/world/Session.ixx" bodystart="144" bodyend="148"/>
-        <references refid="structhelios_1_1engine_1_1mechanics_1_1gamestate_1_1components_1_1GameStateComponent_1aed103bcc0fb5089cbdd1f2309799c5ab" compoundref="GameStateComponent_8ixx" startline="24">helios::engine::mechanics::gamestate::components::GameStateComponent::gameState</references>
-        <references refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beaec0fc0100c4fc1ce4eea230c3dc10360" compoundref="GameState_8ixx" startline="29">helios::engine::mechanics::gamestate::types::Undefined</references>
-        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1adaca8883984a4a7db10afbcaad2bc73f" compoundref="Session_8ixx" startline="119" endline="125">helios::engine::runtime::world::Session::setGameState</referencedby>
-      </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a5bee0f224aafeb19af5f586748f6dbe5" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>MatchState</type>
-        <definition>MatchState helios::engine::runtime::world::Session::matchState</definition>
-        <argsstring>() const noexcept</argsstring>
-        <name>matchState</name>
-        <qualifiedname>helios::engine::runtime::world::Session::matchState</qualifiedname>
-        <briefdescription>
-<para>Returns the current match state. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><simplesect kind="return"><para>The current match state, or Undefined if not available. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="155" column="21" bodyfile="/tmp/h/include/helios/engine/runtime/world/Session.ixx" bodystart="155" bodyend="159"/>
-        <references refid="structhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1MatchStateComponent_1a7c054a0c16083a14884b30d4cc608d3e" compoundref="MatchStateComponent_8ixx" startline="44" endline="46">helios::engine::mechanics::match::components::MatchStateComponent::matchState</references>
-        <references refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9baec0fc0100c4fc1ce4eea230c3dc10360" compoundref="MatchState_8ixx" startline="29">helios::engine::mechanics::match::types::Undefined</references>
-      </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a65e93b174448b5e5ef0388f079b00efc" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>MatchStateTransitionId</type>
-        <definition>MatchStateTransitionId helios::engine::runtime::world::Session::matchStateTransitionId</definition>
-        <argsstring>() const noexcept</argsstring>
-        <name>matchStateTransitionId</name>
-        <qualifiedname>helios::engine::runtime::world::Session::matchStateTransitionId</qualifiedname>
-        <briefdescription>
-<para>Returns the current match state transition ID. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><simplesect kind="return"><para>The transition ID, or Undefined if not available. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="166" column="33" bodyfile="/tmp/h/include/helios/engine/runtime/world/Session.ixx" bodystart="166" bodyend="170"/>
-        <references refid="structhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1MatchStateComponent_1adb7e43ecf616f0befd9c25ae7c664fb4" compoundref="MatchStateComponent_8ixx" startline="67" endline="69">helios::engine::mechanics::match::components::MatchStateComponent::matchStateTransitionId</references>
-        <references refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70aec0fc0100c4fc1ce4eea230c3dc10360" compoundref="MatchStateTransitionId_8ixx" startline="20">helios::engine::mechanics::match::types::Undefined</references>
-      </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a4e466e5da1ed9b1c684961571b9cd4d8" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a47209315dab5adb5c3ecd96b7bfcdf0f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
-        <definition>void helios::engine::runtime::world::Session::setFocusedEntity</definition>
-        <argsstring>(std::optional&lt; helios::engine::ecs::GameObject &gt; gameObject) noexcept</argsstring>
-        <name>setFocusedEntity</name>
-        <qualifiedname>helios::engine::runtime::world::Session::setFocusedEntity</qualifiedname>
+        <definition>void helios::engine::runtime::world::Session::setViewportIds</definition>
+        <argsstring>(std::span&lt; const helios::engine::core::data::ViewportId &gt; &amp;viewportIds) noexcept</argsstring>
+        <name>setViewportIds</name>
+        <qualifiedname>helios::engine::runtime::world::Session::setViewportIds</qualifiedname>
         <param>
-          <type>std::optional&lt; <ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> &gt;</type>
-          <declname>gameObject</declname>
-        </param>
-        <briefdescription>
-<para>Sets the currently focused UI entity. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>gameObject</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The entity to focus, or nullopt to clear focus. </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="178" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/world/Session.ixx" bodystart="178" bodyend="180"/>
-        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a4e466e5da1ed9b1c684961571b9cd4d8" compoundref="Session_8ixx" startline="178" endline="180">helios::engine::runtime::world::Session::setFocusedEntity</references>
-        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a4e466e5da1ed9b1c684961571b9cd4d8" compoundref="Session_8ixx" startline="178" endline="180">helios::engine::runtime::world::Session::setFocusedEntity</referencedby>
-      </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1acb65e289e41ff4571ed6356ff5161075" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>std::optional&lt; <ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> &gt;</type>
-        <definition>std::optional&lt; helios::engine::ecs::GameObject &gt; helios::engine::runtime::world::Session::focusedEntity</definition>
-        <argsstring>() noexcept</argsstring>
-        <name>focusedEntity</name>
-        <qualifiedname>helios::engine::runtime::world::Session::focusedEntity</qualifiedname>
-        <briefdescription>
-<para>Returns the currently focused UI entity. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><simplesect kind="return"><para>The focused entity, or nullopt if none is focused. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="187" column="23" bodyfile="/tmp/h/include/helios/engine/runtime/world/Session.ixx" bodystart="187" bodyend="189"/>
-        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1acb65e289e41ff4571ed6356ff5161075" compoundref="Session_8ixx" startline="187" endline="189">helios::engine::runtime::world::Session::focusedEntity</references>
-        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1acb65e289e41ff4571ed6356ff5161075" compoundref="Session_8ixx" startline="187" endline="189">helios::engine::runtime::world::Session::focusedEntity</referencedby>
-      </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a0fd68e2269627863bd53c73a1124f0bd" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>void</type>
-        <definition>void helios::engine::runtime::world::Session::addViewportIds</definition>
-        <argsstring>(const std::vector&lt; helios::engine::core::data::ViewportId &gt; &amp;viewportIds) noexcept</argsstring>
-        <name>addViewportIds</name>
-        <qualifiedname>helios::engine::runtime::world::Session::addViewportIds</qualifiedname>
-        <param>
-          <type>const std::vector&lt; <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId" kindref="compound">helios::engine::core::data::ViewportId</ref> &gt; &amp;</type>
+          <type>std::span&lt; const <ref refid="namespacehelios_1_1engine_1_1core_1_1data_1ad7a3a4de437b171216482e5f1853a90e" kindref="member">helios::engine::core::data::ViewportId</ref> &gt; &amp;</type>
           <declname>viewportIds</declname>
         </param>
         <briefdescription>
@@ -347,13 +299,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="196" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/world/Session.ixx" bodystart="196" bodyend="198"/>
-        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a0fd68e2269627863bd53c73a1124f0bd" compoundref="Session_8ixx" startline="196" endline="198">helios::engine::runtime::world::Session::addViewportIds</references>
-        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1aa887660c0c257dab191c68c39ddfc243" compoundref="Session_8ixx" startline="205" endline="207">helios::engine::runtime::world::Session::viewportIds</references>
-        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a0fd68e2269627863bd53c73a1124f0bd" compoundref="Session_8ixx" startline="196" endline="198">helios::engine::runtime::world::Session::addViewportIds</referencedby>
+        <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="173" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/world/Session.ixx" bodystart="173" bodyend="175"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a47209315dab5adb5c3ecd96b7bfcdf0f" compoundref="Session_8ixx" startline="173" endline="175">helios::engine::runtime::world::Session::setViewportIds</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1aa887660c0c257dab191c68c39ddfc243" compoundref="Session_8ixx" startline="182" endline="184">helios::engine::runtime::world::Session::viewportIds</references>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a47209315dab5adb5c3ecd96b7bfcdf0f" compoundref="Session_8ixx" startline="173" endline="175">helios::engine::runtime::world::Session::setViewportIds</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1aa887660c0c257dab191c68c39ddfc243" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>std::span&lt; const <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId" kindref="compound">helios::engine::core::data::ViewportId</ref> &gt;</type>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1aa887660c0c257dab191c68c39ddfc243" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::span&lt; const <ref refid="namespacehelios_1_1engine_1_1core_1_1data_1ad7a3a4de437b171216482e5f1853a90e" kindref="member">helios::engine::core::data::ViewportId</ref> &gt;</type>
         <definition>std::span&lt; const helios::engine::core::data::ViewportId &gt; helios::engine::runtime::world::Session::viewportIds</definition>
         <argsstring>() const noexcept</argsstring>
         <name>viewportIds</name>
@@ -368,10 +320,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="205" column="19" bodyfile="/tmp/h/include/helios/engine/runtime/world/Session.ixx" bodystart="205" bodyend="207"/>
-        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1aa887660c0c257dab191c68c39ddfc243" compoundref="Session_8ixx" startline="205" endline="207">helios::engine::runtime::world::Session::viewportIds</references>
-        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a0fd68e2269627863bd53c73a1124f0bd" compoundref="Session_8ixx" startline="196" endline="198">helios::engine::runtime::world::Session::addViewportIds</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1aa887660c0c257dab191c68c39ddfc243" compoundref="Session_8ixx" startline="205" endline="207">helios::engine::runtime::world::Session::viewportIds</referencedby>
+        <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="182" column="20" bodyfile="/tmp/h/include/helios/engine/runtime/world/Session.ixx" bodystart="182" bodyend="184"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1aa887660c0c257dab191c68c39ddfc243" compoundref="Session_8ixx" startline="182" endline="184">helios::engine::runtime::world::Session::viewportIds</references>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a47209315dab5adb5c3ecd96b7bfcdf0f" compoundref="Session_8ixx" startline="173" endline="175">helios::engine::runtime::world::Session::setViewportIds</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1aa887660c0c257dab191c68c39ddfc243" compoundref="Session_8ixx" startline="182" endline="184">helios::engine::runtime::world::Session::viewportIds</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a15cf530762d33f60c00ddabdaec92bf7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -386,13 +338,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="212" column="13" bodyfile="/tmp/h/include/helios/engine/runtime/world/Session.ixx" bodystart="212" bodyend="214"/>
+        <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="189" column="13" bodyfile="/tmp/h/include/helios/engine/runtime/world/Session.ixx" bodystart="189" bodyend="191"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="11" column="15"/>
+    <location file="/tmp/h/include/helios/engine/runtime/world/Session.ixx" line="12" column="15"/>
   </compounddef>
 </doxygen>

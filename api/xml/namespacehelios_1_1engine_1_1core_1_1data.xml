@@ -6,13 +6,14 @@
     <innerclass refid="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId" prot="public">helios::engine::core::data::ComponentTypeId</innerclass>
     <innerclass refid="structhelios_1_1engine_1_1core_1_1data_1_1FontId" prot="public">helios::engine::core::data::FontId</innerclass>
     <innerclass refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" prot="public">helios::engine::core::data::GameObjectPoolId</innerclass>
-    <innerclass refid="structhelios_1_1engine_1_1core_1_1data_1_1MenuId" prot="public">helios::engine::core::data::MenuId</innerclass>
+    <innerclass refid="structhelios_1_1engine_1_1core_1_1data_1_1MenuIdTag" prot="public">helios::engine::core::data::MenuIdTag</innerclass>
     <innerclass refid="structhelios_1_1engine_1_1core_1_1data_1_1SceneId" prot="public">helios::engine::core::data::SceneId</innerclass>
     <innerclass refid="structhelios_1_1engine_1_1core_1_1data_1_1ScorePoolId" prot="public">helios::engine::core::data::ScorePoolId</innerclass>
     <innerclass refid="classhelios_1_1engine_1_1core_1_1data_1_1ScoreTypeId" prot="public">helios::engine::core::data::ScoreTypeId</innerclass>
     <innerclass refid="structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId" prot="public">helios::engine::core::data::SpawnProfileId</innerclass>
     <innerclass refid="structhelios_1_1engine_1_1core_1_1data_1_1SpawnRuleId" prot="public">helios::engine::core::data::SpawnRuleId</innerclass>
-    <innerclass refid="structhelios_1_1engine_1_1core_1_1data_1_1ViewportId" prot="public">helios::engine::core::data::ViewportId</innerclass>
+    <innerclass refid="classhelios_1_1engine_1_1core_1_1data_1_1StateTypeId" prot="public">helios::engine::core::data::StateTypeId</innerclass>
+    <innerclass refid="structhelios_1_1engine_1_1core_1_1data_1_1ViewportIdTag" prot="public">helios::engine::core::data::ViewportIdTag</innerclass>
     <sectiondef kind="typedef">
       <memberdef kind="typedef" id="namespacehelios_1_1engine_1_1core_1_1data_1a7886ef44eabe7b1a1f109e6c5fe971ca" prot="public" static="no">
         <type>uint32_t</type>
@@ -53,6 +54,25 @@
         </inbodydescription>
         <location file="/tmp/h/include/helios/engine/core/data/EntityId.ixx" line="26" column="5" bodyfile="/tmp/h/include/helios/engine/core/data/EntityId.ixx" bodystart="26" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="typedef" id="namespacehelios_1_1engine_1_1core_1_1data_1aeed72402625b875cba0952c656aebfa4" prot="public" static="no">
+        <type><ref refid="structhelios_1_1core_1_1data_1_1StrongId" kindref="compound">helios::core::data::StrongId</ref>&lt; <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1MenuIdTag" kindref="compound">MenuIdTag</ref>, uint32_t &gt;</type>
+        <definition>using helios::engine::core::data::MenuId =  helios::core::data::StrongId&lt;MenuIdTag, uint32_t&gt;</definition>
+        <argsstring></argsstring>
+        <name>MenuId</name>
+        <qualifiedname>helios::engine::core::data::MenuId</qualifiedname>
+        <briefdescription>
+<para>Strongly-typed identifier for menus. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Used to uniquely identify menus across the rendering system. Supports compile-time string-based construction via FNV-1a hashing.</para>
+<para><simplesect kind="see"><para><ref refid="structhelios_1_1core_1_1data_1_1StrongId" kindref="compound">helios::core::data::StrongId</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/core/data/MenuId.ixx" line="32" column="5" bodyfile="/tmp/h/include/helios/engine/core/data/MenuId.ixx" bodystart="32" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="typedef" id="namespacehelios_1_1engine_1_1core_1_1data_1a64dc3794b3b3f72af16a0c2a4cab2763" prot="public" static="no">
         <type>uint32_t</type>
         <definition>using helios::engine::core::data::VersionId =  uint32_t</definition>
@@ -76,6 +96,25 @@
         <inbodydescription>
         </inbodydescription>
         <location file="/tmp/h/include/helios/engine/core/data/VersionId.ixx" line="29" column="5" bodyfile="/tmp/h/include/helios/engine/core/data/VersionId.ixx" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacehelios_1_1engine_1_1core_1_1data_1ad7a3a4de437b171216482e5f1853a90e" prot="public" static="no">
+        <type><ref refid="structhelios_1_1core_1_1data_1_1StrongId" kindref="compound">helios::core::data::StrongId</ref>&lt; <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1ViewportIdTag" kindref="compound">ViewportIdTag</ref>, uint32_t &gt;</type>
+        <definition>using helios::engine::core::data::ViewportId =  helios::core::data::StrongId&lt;ViewportIdTag, uint32_t&gt;</definition>
+        <argsstring></argsstring>
+        <name>ViewportId</name>
+        <qualifiedname>helios::engine::core::data::ViewportId</qualifiedname>
+        <briefdescription>
+<para>Strongly-typed identifier for viewports. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Used to uniquely identify viewports across the rendering system. Supports compile-time string-based construction via FNV-1a hashing.</para>
+<para><simplesect kind="see"><para><ref refid="structhelios_1_1core_1_1data_1_1StrongId" kindref="compound">helios::core::data::StrongId</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/core/data/ViewportId.ixx" line="32" column="5" bodyfile="/tmp/h/include/helios/engine/core/data/ViewportId.ixx" bodystart="32" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">

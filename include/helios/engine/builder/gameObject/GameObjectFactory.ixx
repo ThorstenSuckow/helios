@@ -412,7 +412,7 @@ export namespace helios::engine::builder::gameObject {
              * @return Reference to this prototype for chaining.
              */
             GameObjectPrototype& asPlayerEntity() noexcept {
-                gameWorld_.session().setPlayerEntity(gameObject_);
+                gameWorld_.session().setPlayerEntityHandle(gameObject_.entityHandle());
                 return *this;
             }
 

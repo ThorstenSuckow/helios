@@ -25,10 +25,8 @@ import helios.engine.runtime.spawn.SpawnCommandHandler;
 import helios.engine.modules.ui.UiActionCommandHandler;
 
 import helios.engine.mechanics.scoring.ScoreCommandHandler;
-import helios.engine.mechanics.gamestate.components;
-import helios.engine.mechanics.gamestate.GameStateCommandHandler;
-
-import helios.engine.mechanics.match.MatchStateCommandHandler;
+import helios.engine.state.StateCommandHandler;
+import helios.engine.state.TypedStateCommandHandler;
 
 import helios.util.Guid;
 import helios.util.log.Logger;
@@ -173,14 +171,13 @@ export namespace helios::engine::runtime::world {
         helios::engine::mechanics::scoring::ScoreCommandHandler* scoreCommandHandler_ = nullptr;
 
         /**
-         * @brief Registered handler for game state commands.
+         * @brief Registered handlers for state commands, indexed by StateTypeId.
+         *
+         * @details Stores pointers to TypedStateCommandHandler instances. Each
+         * state type (GameState, MatchState, etc.) has a unique index computed
+         * from StateTypeId.
          */
-        helios::engine::mechanics::gamestate::GameStateCommandHandler* gameStateCommandHandler_ = nullptr;
-
-        /**
-         * @brief Registered handler for match state commands.
-         */
-        helios::engine::mechanics::match::MatchStateCommandHandler* matchStateCommandHandler_ = nullptr;
+        std::vector<helios::engine::state::StateCommandHandler*> stateCommandHandlers_;
 
         /**
          * @brief Registered handler for UI action commands.
@@ -430,55 +427,58 @@ export namespace helios::engine::runtime::world {
         }
 
         /**
-         * @brief Registers a handler for game state commands.
+         * @brief Registers a handler for state commands of a specific type.
          *
-         * @param gameStateCommandHandler Reference to the handler to register.
+         * @details Associates a TypedStateCommandHandler with the given state type.
+         * The handler receives state transition commands and routes them to the
+         * appropriate StateManager.
          *
-         * @return True if registration succeeded.
+         * @tparam T The state enum type (e.g., GameState, MatchState).
+         *
+         * @param stateCommandHandler Reference to the handler to register.
+         *
+         * @return True if registration succeeded, false if already registered.
+         *
+         * @see StateManager
+         * @see TypedStateCommandHandler
          */
-        bool registerGameStateCommandHandler(
-            helios::engine::mechanics::gamestate::GameStateCommandHandler& gameStateCommandHandler
+        template<typename T>
+        bool registerStateCommandHandler(
+            helios::engine::state::TypedStateCommandHandler<T>& stateCommandHandler
         ) {
-            assert(!gameStateCommandHandler_ && "GameStateCommandHandler already registered");
+            const auto typeId = helios::engine::core::data::StateTypeId::id<T>();
+            const auto idx = typeId.value();
 
-            gameStateCommandHandler_ = &gameStateCommandHandler;
+            if (idx >= stateCommandHandlers_.size()) {
+                stateCommandHandlers_.resize(idx + 1);
+            }
+
+
+            assert(!stateCommandHandlers_[idx] && "stateCommandHandler already registered");
+
+            stateCommandHandlers_[idx] = &stateCommandHandler;
 
             return true;
         }
 
         /**
-         * @brief Retrieves the registered game state command handler.
+         * @brief Retrieves the registered state command handler for a type.
+         *
+         * @tparam T The state enum type to look up.
          *
          * @return Pointer to the handler, or nullptr if not registered.
          */
-        [[nodiscard]] helios::engine::mechanics::gamestate::GameStateCommandHandler* gameStateCommandHandler() {
-            return gameStateCommandHandler_;
-        }
+        template<typename T>
+        [[nodiscard]] helios::engine::state::TypedStateCommandHandler<T>* stateCommandHandler() {
+            const auto typeId = helios::engine::core::data::StateTypeId::id<T>();
 
-        /**
-         * @brief Registers a handler for match state commands.
-         *
-         * @param matchStateCommandHandler Reference to the handler to register.
-         *
-         * @return True if registration succeeded.
-         */
-        bool registerMatchStateCommandHandler(
-            helios::engine::mechanics::match::MatchStateCommandHandler& matchStateCommandHandler
-        ) {
-            assert(!matchStateCommandHandler_ && "MatchStateCommandHandler already registered");
+            const auto idx = typeId.value();
 
-            matchStateCommandHandler_ = &matchStateCommandHandler;
+            if (idx >= stateCommandHandlers_.size()) {
+                return nullptr;
+            }
 
-            return true;
-        }
-
-        /**
-         * @brief Retrieves the registered match state command handler.
-         *
-         * @return Pointer to the handler, or nullptr if not registered.
-         */
-        [[nodiscard]] helios::engine::mechanics::match::MatchStateCommandHandler* matchStateCommandHandler() {
-            return matchStateCommandHandler_;
+            return static_cast< helios::engine::state::TypedStateCommandHandler<T>*>(stateCommandHandlers_[idx]);
         }
 
         /**

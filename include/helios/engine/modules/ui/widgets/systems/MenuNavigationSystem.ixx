@@ -75,27 +75,17 @@ export namespace helios::engine::modules::ui::widgets::systems {
          * @param index The new selected index.
          * @param gamepadState The current gamepad state.
          */
-        void updateMenu(helios::engine::runtime::world::UpdateContext& updateContext, MenuComponent* mc, const size_t index, const GamepadState& gamepadState) {
+        void updateMenu(helios::engine::runtime::world::UpdateContext& updateContext, MenuComponent* mc, const size_t index) {
 
             auto menuItems = mc->menuItems();
 
-            const auto prevIndex = mc->selectedIndex();
+            const auto prevIndex = mc->previousSelectedIndex();
 
-            mc->setSelectedIndex(index);
-            if (!mc->isDirty()) {
+            if (prevIndex == index && !mc->isDirty()) {
                 return;
             }
-            mc->clearDirty();
 
-            auto prev = gameWorld_->find(menuItems[prevIndex]);
-            prev->remove<UiFocusComponent>();
-
-            // update ui state
-            auto* usc = gameWorld_->find(menuItems[index])->get<UiStateComponent>();
-            if (usc) {
-                usc->setSelected(true);
-                prev->add<UiFocusComponent>();
-            }
+            UiStateComponent* usc = nullptr;
 
             if (index != prevIndex) {
                 usc = gameWorld_->find(menuItems[prevIndex])->get<UiStateComponent>();
@@ -103,8 +93,15 @@ export namespace helios::engine::modules::ui::widgets::systems {
                     usc->setSelected(false);
                 }
             }
+            mc->setSelectedIndex(index);
 
+            // update ui state
+            usc = gameWorld_->find(menuItems[index])->get<UiStateComponent>();
+            if (usc) {
+                usc->setSelected(true);
+            }
 
+            mc->clearDirty();
         }
 
 
@@ -142,21 +139,21 @@ export namespace helios::engine::modules::ui::widgets::systems {
             if (gamepadState.isButtonPressed(GamepadInput::Up)) {
 
                 if (focusedMenu->selectedIndex() >= 1) {
-                    updateMenu(updateContext, focusedMenu, focusedMenu->selectedIndex() - 1, gamepadState);
+                    updateMenu(updateContext, focusedMenu, focusedMenu->selectedIndex() - 1);
                 } else {
-                    updateMenu(updateContext, focusedMenu, 0, gamepadState);
+                    updateMenu(updateContext, focusedMenu, 0);
                 }
 
             } else if (gamepadState.isButtonPressed(GamepadInput::Down)) {
 
                 if (focusedMenu->selectedIndex() + 1 < size) {
-                    updateMenu(updateContext, focusedMenu, focusedMenu->selectedIndex() + 1, gamepadState);
+                    updateMenu(updateContext, focusedMenu, focusedMenu->selectedIndex() + 1);
                 } else {
-                    updateMenu(updateContext, focusedMenu, size - 1, gamepadState);
+                    updateMenu(updateContext, focusedMenu, size - 1);
                 }
 
             } else {
-                updateMenu(updateContext, focusedMenu, focusedMenu->selectedIndex(), gamepadState);
+                updateMenu(updateContext, focusedMenu, focusedMenu->selectedIndex());
             }
 
             if (gamepadState.isButtonPressed(GamepadInput::A)) {
@@ -170,8 +167,6 @@ export namespace helios::engine::modules::ui::widgets::systems {
                     );
                 }
             }
-
-
         }
 
 

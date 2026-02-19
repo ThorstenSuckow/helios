@@ -330,6 +330,9 @@ int main() {
     helios::engine::runtime::gameloop::GameLoop gameLoop{};
     helios::engine::runtime::world::GameWorld gameWorld{};
 
+    gameWorld.session().trackState<helios::engine::mechanics::gamestate::types::GameState>();
+    gameWorld.session().trackState<helios::engine::mechanics::match::types::MatchState>();
+
     auto level = std::make_unique<helios::engine::runtime::world::Level>(&(scene.get()->root()));
     auto* levelPtr = level.get();
     level->setBounds(
@@ -1117,37 +1120,44 @@ int main() {
     auto& poolManager      = gameWorld.addManager<helios::engine::runtime::pooling::GameObjectPoolManager>();
     auto& scorePoolManager = gameWorld.addManager<helios::engine::mechanics::scoring::ScorePoolManager>();
     auto& spawnManager     = gameWorld.addManager<helios::engine::runtime::spawn::SpawnManager>();
-    auto& gameStateManager = gameWorld.addManager<helios::engine::mechanics::gamestate::GameStateManager>();
-    auto& matchStateManager = gameWorld.addManager<helios::engine::mechanics::match::MatchStateManager>();
+    auto& gameStateManager = gameWorld.addManager<helios::engine::mechanics::gamestate::GameStateManager>(
+        helios::engine::mechanics::gamestate::rules::DefaultGameStateTransitionRules::rules());
+    auto& matchStateManager = gameWorld.addManager<helios::engine::mechanics::match::MatchStateManager>(
+        helios::engine::mechanics::match::rules::DefaultMatchStateTransitionRules::rules());
     auto& uiActionCommandManager = gameWorld.addManager<helios::engine::modules::ui::UiActionCommandManager>();
 
-    matchStateManager.addMatchStateListener(
-        std::make_unique<helios::engine::mechanics::match::listeners::PlayerSpawnListener>(shipGameObject)
-    );
-
-    matchStateManager.addMatchStateListener(
-        std::make_unique<helios::engine::mechanics::match::listeners::LambdaMatchStateListener>(
+    matchStateManager.addStateListener(
+        std::make_unique<helios::engine::state::listeners::LambdaStateListener<helios::engine::mechanics::match::types::MatchState>>(
         [](helios::engine::runtime::world::UpdateContext& updateContext,
-                const helios::engine::mechanics::match::MatchState from)->void {
+                const helios::engine::mechanics::match::types::MatchState from)->void {
 
         },
         [](helios::engine::runtime::world::UpdateContext& updateContext,
-             const helios::engine::mechanics::match::MatchStateTransitionContext transitionContext)->void {
+             const helios::engine::state::types::StateTransitionContext<helios::engine::mechanics::match::types::MatchState> transitionContext)->void {
 
-                if (transitionContext.to() == helios::engine::mechanics::match::MatchState::PlayerDeath &&
-                    transitionContext.transitionId() == helios::engine::mechanics::match::MatchStateTransitionId::QuitRequested) {
+                if (transitionContext.to() == helios::engine::mechanics::match::types::MatchState::PlayerDeath &&
+                    transitionContext.transitionId() == helios::engine::mechanics::match::types::MatchStateTransitionId::QuitRequested) {
 
-                    updateContext.commandBuffer().add<helios::engine::mechanics::gamestate::commands::GameStateCommand>(
-                        helios::engine::mechanics::gamestate::types::GameStateTransitionRequest(
-                        helios::engine::mechanics::gamestate::types::GameState::Paused,
+                    updateContext.commandBuffer().add<helios::engine::state::commands::StateCommand<helios::engine::mechanics::gamestate::types::GameState>>(
+                        helios::engine::state::types::StateTransitionRequest<helios::engine::mechanics::gamestate::types::GameState>(
+                            helios::engine::mechanics::gamestate::types::GameState::Paused,
                             helios::engine::mechanics::gamestate::types::GameStateTransitionId::TogglePause
                         )
                     );
                 }
         },
         [](helios::engine::runtime::world::UpdateContext& updateContext,
-             const helios::engine::mechanics::match::MatchState to)->void {
-
+            const helios::engine::mechanics::match::types::MatchState to)->void {
+                if (to == helios::engine::mechanics::match::types::MatchState::PlayerSpawn) {
+                    if (auto player = updateContext.gameWorld().find(updateContext.session().playerEntityHandle())) {
+                        if (player) player->setActive(true);
+                    }
+                }
+                if (to == helios::engine::mechanics::match::types::MatchState::PlayerDeath || to == helios::engine::mechanics::match::types::MatchState::GameOver) {
+                    if (auto player = updateContext.gameWorld().find(updateContext.session().playerEntityHandle())) {
+                        if (player) player->setActive(false);
+                    }
+                }
         })
     );
 
@@ -1158,8 +1168,8 @@ int main() {
         [](
             helios::engine::runtime::world::UpdateContext& updateContext,
             const helios::engine::modules::ui::commands::UiActionCommand& actionCommand) noexcept -> void {
-            updateContext.commandBuffer().add<helios::engine::mechanics::gamestate::commands::GameStateCommand>(
-                helios::engine::mechanics::gamestate::types::GameStateTransitionRequest(
+            updateContext.commandBuffer().add<helios::engine::state::commands::StateCommand<helios::engine::mechanics::gamestate::types::GameState>>(
+              helios::engine::state::types::StateTransitionRequest<helios::engine::mechanics::gamestate::types::GameState>(
                     helios::engine::mechanics::gamestate::types::GameState::Paused,
                     helios::engine::mechanics::gamestate::types::GameStateTransitionId::TogglePause
                 )
@@ -1171,8 +1181,8 @@ int main() {
             helios::engine::runtime::world::UpdateContext& updateContext,
             const helios::engine::modules::ui::commands::UiActionCommand& actionCommand) noexcept -> void {
 
-            updateContext.commandBuffer().add<helios::engine::mechanics::match::commands::MatchStateCommand>(
-                helios::engine::mechanics::match::types::MatchStateTransitionRequest(
+            updateContext.commandBuffer().add<helios::engine::state::commands::StateCommand<helios::engine::mechanics::match::types::MatchState>>(
+                helios::engine::state::types::StateTransitionRequest<helios::engine::mechanics::match::types::MatchState>(
                     helios::engine::mechanics::match::types::MatchState::Playing,
                     helios::engine::mechanics::match::types::MatchStateTransitionId::QuitRequested
                 )
@@ -1185,8 +1195,8 @@ int main() {
         [](
             helios::engine::runtime::world::UpdateContext& updateContext,
             const helios::engine::modules::ui::commands::UiActionCommand& actionCommand) noexcept -> void {
-            updateContext.commandBuffer().add<helios::engine::mechanics::gamestate::commands::GameStateCommand>(
-                helios::engine::mechanics::gamestate::types::GameStateTransitionRequest(
+            updateContext.commandBuffer().add<helios::engine::state::commands::StateCommand<helios::engine::mechanics::gamestate::types::GameState>>(
+                helios::engine::state::types::StateTransitionRequest<helios::engine::mechanics::gamestate::types::GameState>(
                     helios::engine::mechanics::gamestate::types::GameState::Paused,
                     helios::engine::mechanics::gamestate::types::GameStateTransitionId::RestartRequested
                 )
@@ -1197,8 +1207,8 @@ int main() {
             [](
                 helios::engine::runtime::world::UpdateContext& updateContext,
                 const helios::engine::modules::ui::commands::UiActionCommand& actionCommand) noexcept -> void {
-                updateContext.commandBuffer().add<helios::engine::mechanics::gamestate::commands::GameStateCommand>(
-                    helios::engine::mechanics::gamestate::types::GameStateTransitionRequest(
+                updateContext.commandBuffer().add<helios::engine::state::commands::StateCommand<helios::engine::mechanics::gamestate::types::GameState>>(
+                helios::engine::state::types::StateTransitionRequest<helios::engine::mechanics::gamestate::types::GameState>(
                         helios::engine::mechanics::gamestate::types::GameState::Running,
                         helios::engine::mechanics::gamestate::types::GameStateTransitionId::RestartRequested
                     )
@@ -1209,8 +1219,8 @@ int main() {
             [](
                 helios::engine::runtime::world::UpdateContext& updateContext,
                 const helios::engine::modules::ui::commands::UiActionCommand& actionCommand) noexcept -> void {
-                updateContext.commandBuffer().add<helios::engine::mechanics::gamestate::commands::GameStateCommand>(
-                    helios::engine::mechanics::gamestate::types::GameStateTransitionRequest(
+                updateContext.commandBuffer().add<helios::engine::state::commands::StateCommand<helios::engine::mechanics::gamestate::types::GameState>>(
+                helios::engine::state::types::StateTransitionRequest<helios::engine::mechanics::gamestate::types::GameState>(
                         helios::engine::mechanics::gamestate::types::GameState::Running,
                         helios::engine::mechanics::gamestate::types::GameStateTransitionId::TitleRequested
                     )
@@ -1218,50 +1228,61 @@ int main() {
             }
         );
 
-    gameStateManager.addGameStateListener(
-        std::make_unique<helios::engine::mechanics::gamestate::listeners::LambdaGameStateListener>(
+    gameStateManager.addStateListener(
+        std::make_unique<helios::engine::state::listeners::LambdaStateListener<helios::engine::mechanics::gamestate::types::GameState>>(
         [](helios::engine::runtime::world::UpdateContext& updateContext,
-                const helios::engine::mechanics::gamestate::GameState from)->void {
+                const helios::engine::mechanics::gamestate::types::GameState from)->void {
                     },
         [](helios::engine::runtime::world::UpdateContext& updateContext,
-             const helios::engine::mechanics::gamestate::GameStateTransitionContext transitionContext)->void {
+             const helios::engine::state::types::StateTransitionContext<helios::engine::mechanics::gamestate::types::GameState> transitionContext)->void {
 
-                if (transitionContext.to() == helios::engine::mechanics::gamestate::GameState::Title &&
-                    transitionContext.transitionId() == helios::engine::mechanics::gamestate::GameStateTransitionId::TitleRequested) {
-                    updateContext.commandBuffer().add<helios::engine::mechanics::match::commands::MatchStateCommand>(
-                        helios::engine::mechanics::match::types::MatchStateTransitionRequest(
-                        helios::engine::mechanics::match::types::MatchState::GameOver,
-                            helios::engine::mechanics::match::MatchStateTransitionId::RestartRequested
+                using namespace helios::engine::mechanics::gamestate::types;
+                using namespace helios::engine::mechanics::match::types;
+
+                const auto from = transitionContext.from();
+                const auto to = transitionContext.to();
+                const auto transitionId = transitionContext.transitionId();
+
+                bool reset = (from == GameState::Title && to == GameState::Running)   ||
+                             (from == GameState::Paused && to == GameState::Title)    ||
+                             ((from == GameState::Paused || from == GameState::Running) &&
+                                 transitionId == GameStateTransitionId::RestartRequested &&
+                                 to == GameState::Running) ||
+                             (from == GameState::Running && to == GameState::Title) ;
+
+                if (reset) {
+                    updateContext.gameWorld().reset();
+                }
+
+                if (to == GameState::Title && transitionId== GameStateTransitionId::TitleRequested) {
+                    updateContext.commandBuffer().add<helios::engine::state::commands::StateCommand<MatchState>>(
+                        helios::engine::state::types::StateTransitionRequest<MatchState>(
+                        MatchState::GameOver,
+                            MatchStateTransitionId::RestartRequested
                         )
                     );
                 }
-                if (transitionContext.from() == helios::engine::mechanics::gamestate::GameState::Running &&
-                    transitionContext.transitionId() == helios::engine::mechanics::gamestate::GameStateTransitionId::TitleRequested) {
-                    updateContext.commandBuffer().add<helios::engine::mechanics::match::commands::MatchStateCommand>(
-                        helios::engine::mechanics::match::types::MatchStateTransitionRequest(
-                        helios::engine::mechanics::match::types::MatchState::GameOver,
-                            helios::engine::mechanics::match::MatchStateTransitionId::QuitRequested
+                if (from == GameState::Running && transitionId == GameStateTransitionId::TitleRequested) {
+                    updateContext.commandBuffer().add<helios::engine::state::commands::StateCommand<MatchState>>(
+                        helios::engine::state::types::StateTransitionRequest<MatchState>(
+                            MatchState::GameOver, MatchStateTransitionId::QuitRequested
                         )
                     );
                 }
-                if (transitionContext.from() == helios::engine::mechanics::gamestate::GameState::Running &&
-                    transitionContext.transitionId() == helios::engine::mechanics::gamestate::GameStateTransitionId::RestartRequested) {
-                    updateContext.commandBuffer().add<helios::engine::mechanics::match::commands::MatchStateCommand>(
-                        helios::engine::mechanics::match::types::MatchStateTransitionRequest(
-                        helios::engine::mechanics::match::types::MatchState::GameOver,
-                            helios::engine::mechanics::match::MatchStateTransitionId::RestartRequested
+                if (from == GameState::Running && transitionId == GameStateTransitionId::RestartRequested) {
+                    updateContext.commandBuffer().add<helios::engine::state::commands::StateCommand<MatchState>>(
+                        helios::engine::state::types::StateTransitionRequest<MatchState>(
+                        MatchState::GameOver,
+                            MatchStateTransitionId::RestartRequested
                         )
                     );
                 }
         },
         [](helios::engine::runtime::world::UpdateContext& updateContext,
-             const helios::engine::mechanics::gamestate::GameState to)->void {
+             const helios::engine::mechanics::gamestate::types::GameState to)->void {
         })
     );
 
-    gameStateManager.addGameStateListener(
-        std::make_unique<helios::engine::mechanics::gamestate::listeners::WorldResetListener>()
-    );
 
     scorePoolManager.addScorePool(helios::engine::core::data::ScorePoolId{"playerOneScorePool"});
 
@@ -1512,12 +1533,12 @@ int main() {
      std::make_unique<helios::engine::runtime::spawn::dispatcher::DespawnCommandDispatcher>()
     ).addDispatcher<helios::engine::mechanics::scoring::commands::UpdateScoreCommand>(
         std::make_unique<helios::engine::mechanics::scoring::ScoreCommandDispatcher>()
-    ).addDispatcher<helios::engine::mechanics::gamestate::commands::GameStateCommand>(
-        std::make_unique<helios::engine::mechanics::gamestate::dispatcher::GameStateCommandDispatcher>()
+    ).addDispatcher<helios::engine::state::commands::StateCommand<helios::engine::mechanics::gamestate::types::GameState>>(
+    std::make_unique<helios::engine::state::dispatcher::StateCommandDispatcher<helios::engine::mechanics::gamestate::types::GameState>>()
+    ).addDispatcher<helios::engine::state::commands::StateCommand<helios::engine::mechanics::match::types::MatchState>>(
+        std::make_unique<helios::engine::state::dispatcher::StateCommandDispatcher<helios::engine::mechanics::match::types::MatchState>>()
     ).addDispatcher<helios::engine::modules::ui::commands::UiActionCommand>(
         std::make_unique<helios::engine::modules::ui::commands::UiActionCommandDispatcher>()
-    ).addDispatcher<helios::engine::mechanics::match::commands::MatchStateCommand>(
-        std::make_unique<helios::engine::mechanics::match::dispatcher::MatchStateCommandDispatcher>()
     );
 
     using namespace helios::engine::mechanics::gamestate::types;
@@ -1559,39 +1580,39 @@ int main() {
     // | PRE PHASE: Input, Spawning, Movement
     // +----------------------------------------------
 
-    auto Any = helios::engine::mechanics::gamestate::GameState::Any;
-    auto Running = helios::engine::mechanics::gamestate::GameState::Running;
-    auto Paused = helios::engine::mechanics::gamestate::GameState::Paused;
-    auto Title = helios::engine::mechanics::gamestate::GameState::Title;
+    auto Any = GameState::Any;
+    auto Running = GameState::Running;
+    auto Paused = GameState::Paused;
+    auto Title = GameState::Title;
 
-    auto RunningOrTitle = helios::engine::mechanics::gamestate::GameState::Running |
-                          helios::engine::mechanics::gamestate::GameState::Title;
-    auto RunningOrPaused = helios::engine::mechanics::gamestate::GameState::Running |
-                          helios::engine::mechanics::gamestate::GameState::Paused;
+    auto RunningOrTitle = GameState::Running |
+                          GameState::Title;
+    auto RunningOrPaused = GameState::Running |
+                          GameState::Paused;
 
 
     gameLoop.phase(helios::engine::runtime::gameloop::PhaseType::Pre)
-            .addPass(helios::engine::mechanics::gamestate::GameState::Any)
+            .addPass<GameState>(GameState::Any)
             .addSystem<helios::engine::mechanics::gamestate::systems::GameStateInputResponseSystem>()
             .addSystem<helios::engine::mechanics::scoring::systems::ScoreObserverSystem>()
             .addSystem<helios::engine::mechanics::input::systems::TwinStickInputSystem>(shipGameObject)
             .addCommitPoint(helios::engine::runtime::gameloop::CommitPoint::Structural)
 
-            .addPass(Running | Paused)
-            .addSystem<helios::engine::modules::ui::widgets::systems::MenuDisplaySystem>(stateToMenuMap)
+            .addPass<GameState>(Running | Paused)
+            .addSystem<helios::engine::modules::ui::widgets::systems::MenuDisplaySystem<GameState, MatchState>>(stateToMenuMap)
             .addSystem<helios::engine::mechanics::match::systems::MatchFlowSystem>()
             .addCommitPoint(helios::engine::runtime::gameloop::CommitPoint::PassEvents)
 
-            .addPass(Running | Title)
+            .addPass<GameState>(Running | Title)
             .addSystem<helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem>(spawnManager)
             .addSystem<helios::engine::mechanics::combat::systems::ProjectileSpawnSystem>(ProjectileSpawnSpawnProfileId)
             .addCommitPoint(helios::engine::runtime::gameloop::CommitPoint::Structural)
 
-            .addPass(Running | Title | Paused)
+            .addPass<GameState>(Running | Title | Paused)
             .addSystem<helios::engine::modules::spatial::transform::systems::ScaleSystem>()
             .addCommitPoint(helios::engine::runtime::gameloop::CommitPoint::PassEvents)
 
-            .addPass(Running | Title)
+            .addPass<GameState>(Running | Title)
             .addSystem<helios::engine::modules::ai::systems::ChaseSystem>()
             .addSystem<helios::engine::modules::physics::motion::systems::SteeringSystem>()
             .addSystem<helios::engine::modules::physics::motion::systems::SpinSystem>()
@@ -1602,23 +1623,23 @@ int main() {
     // +----------------------------------------------
     // +---------------------------------------------
     gameLoop.phase(helios::engine::runtime::gameloop::PhaseType::Main)
-            .addPass(helios::engine::mechanics::gamestate::GameState::Any)
+            .addPass(GameState::Any)
             .addSystem<helios::engine::ecs::systems::HierarchyPropagationSystem>()
             .addSystem<helios::engine::modules::physics::collision::systems::BoundsUpdateSystem>()
             .addCommitPoint()
 
-            .addPass(Running | Title)
+            .addPass<GameState>(Running | Title)
             .addSystem<helios::engine::mechanics::bounds::systems::LevelBoundsBehaviorSystem>()
             .addSystem<helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem>(
                 levelPtr->bounds(), CELL_LENGTH/2.0f
              )
             .addCommitPoint()
 
-            .addPass(Running | Title)
+            .addPass<GameState>(Running | Title)
             .addSystem<helios::engine::modules::physics::collision::systems::CollisionStateResponseSystem>()
             .addCommitPoint(helios::engine::runtime::gameloop::CommitPoint::PassEvents)
 
-            .addPass(Running | Title)
+            .addPass<GameState>(Running | Title)
             .addSystem<helios::engine::mechanics::damage::systems::DamageOnCollisionSystem>()
             .addSystem<helios::engine::mechanics::health::systems::HealthUpdateSystem>();
 
@@ -1626,12 +1647,12 @@ int main() {
     // | POST PHASE: Transform Composition and Cleanup
     // +----------------------------------------------
     gameLoop.phase(helios::engine::runtime::gameloop::PhaseType::Post)
-             .addPass(Running | Paused)
-             .addSystem<helios::engine::modules::ui::widgets::systems::UiStyleUpdateSystem>()
+             .addPass<GameState>(Running | Paused)
              .addSystem<helios::engine::modules::ui::widgets::systems::MenuNavigationSystem>()
+             .addSystem<helios::engine::modules::ui::widgets::systems::UiStyleUpdateSystem>()
              .addCommitPoint()
 
-             .addPass(helios::engine::mechanics::gamestate::GameState::Any)
+             .addPass<GameState>(GameState::Any)
              .addSystem<helios::engine::modules::ui::binding::systems::Score2UiTextUpdateSystem>()
              .addSystem<helios::engine::mechanics::scoring::systems::CombatScoringSystem>()
 
@@ -1640,8 +1661,9 @@ int main() {
 
              .addSystem<helios::engine::modules::spatial::transform::systems::ComposeTransformSystem>()
 
-             .addSystem<helios::engine::modules::rendering::viewport::systems::StateToViewportPolicyUpdateSystem>(
-                 stateToViewportMap)
+             .addSystem<
+                 helios::engine::modules::rendering::viewport::systems::StateToViewportPolicyUpdateSystem
+                    <GameState, MatchState>>(stateToViewportMap)
              .addSystem<helios::engine::modules::scene::systems::SceneSyncSystem>(sceneToViewportMap)
              .addSystem<helios::engine::modules::scene::systems::SceneRenderingSystem>(
                  app->renderingDevice(), sceneToViewportMap)
@@ -1688,10 +1710,10 @@ int main() {
     bool showImgui = false;
     bool tilde = false;
 
-    gameLoop.commandBuffer().add<helios::engine::mechanics::gamestate::commands::GameStateCommand>(
-        helios::engine::mechanics::gamestate::types::GameStateTransitionRequest(
-            helios::engine::mechanics::gamestate::types::GameState::Undefined,
-            helios::engine::mechanics::gamestate::types::GameStateTransitionId::TitleRequested
+    gameLoop.commandBuffer().add<helios::engine::state::commands::StateCommand<GameState>>(
+        helios::engine::state::types::StateTransitionRequest<GameState>(
+            GameState::Undefined,
+            GameStateTransitionId::TitleRequested
         )
     );
     while (!win->shouldClose()) {
@@ -1725,8 +1747,6 @@ int main() {
 
         const auto viewportSnapshots = win->viewportSnapshots();
         gameLoop.update(gameWorld, DELTA_TIME, inputSnapshot, viewportSnapshots);
-
-        const auto gameState = gameWorld.session().gameState();
 
 
         // ----------------------------------------

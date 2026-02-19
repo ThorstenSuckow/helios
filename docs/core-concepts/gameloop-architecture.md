@@ -38,55 +38,58 @@ For detailed event propagation rules, see [Event System](event-system.md).
 
 ## State-Based Pass Filtering
 
-Passes can be configured to run only during specific game states. This allows gameplay systems to be automatically disabled during menus or paused states without explicit checks in each system.
+Passes can be configured to run only during specific states. This allows gameplay systems to be automatically disabled during menus or paused states without explicit checks in each system.
 
-### GameState Parameter
+### TypedPass Architecture
 
-When adding a pass, you can specify which `GameState` it should run in:
+Passes are implemented via the `TypedPass<StateType>` template class, which wraps state-based filtering around the `Pass` interface. The state type can be any enum (e.g., `GameState`, `MatchState`).
 
 ```cpp
-// This pass only runs when game is Running
+// Pass filtered by GameState
 gameLoop.phase(PhaseType::Main)
-    .addPass(GameState::Running)
+    .addPass<GameState>(GameState::Running)
         .addSystem<MovementSystem>()
         .addSystem<CollisionSystem>();
 
-// This pass runs in all states (default)
-gameLoop.phase(PhaseType::Pre)
-    .addPass(GameState::Any)
-        .addSystem<InputSystem>();
+// Pass filtered by MatchState
+gameLoop.phase(PhaseType::Main)
+    .addPass<MatchState>(MatchState::Playing)
+        .addSystem<ScoringSystem>();
+```
 
-// This pass runs when paused OR running
+### State Mask (Bitwise OR)
+
+Multiple states can be combined using bitwise OR. The pass runs if the current state matches any bit in the mask:
+
+```cpp
+// Runs when Running OR Paused
 gameLoop.phase(PhaseType::Post)
-    .addPass(GameState::Running | GameState::Paused)
+    .addPass<GameState>(GameState::Running | GameState::Paused)
         .addSystem<SceneSyncSystem>();
 ```
 
-### Available States
-
-| State | Description |
-|-------|-------------|
-| `GameState::Title` | Main menu / title screen |
-| `GameState::Running` | Active gameplay |
-| `GameState::Paused` | Game is paused |
-| `GameState::Any` | Runs in all states (default) |
-
 ### Evaluation
 
-During `Phase::update()`, each pass checks if its configured state matches the current session state:
+During `Phase::update()`, each pass's `shouldRun()` method is called. For `TypedPass<StateType>`, this queries the current state from the Session and compares it against the configured mask:
 
 ```cpp
-void update(UpdateContext& ctx, GameState currentState) {
-    for (auto& pass : passes_) {
-        if (hasFlag(pass->runsIn(), currentState)) {
-            pass->update(ctx);
-            // ... commit point handling
-        }
-    }
+[[nodiscard]] bool shouldRun(UpdateContext& ctx) const noexcept override {
+    auto state = ctx.session().state<StateType>();
+    return hasFlag(mask_, state);  // bitwise AND check
 }
 ```
 
-For the complete state management system including GameStateManager and MatchStateManager, see [State Management](state-management.md).
+### Important: Session State Registration
+
+State types must be registered with the Session before passes can filter on them:
+
+```cpp
+auto& session = gameWorld.session();
+session.trackState<GameState>();
+session.trackState<MatchState>();
+```
+
+For the complete state management system, see [State Management](state-management.md).
 
 ## Practical Example: Twin-Stick Shooter
 
@@ -96,6 +99,11 @@ The following example demonstrates how to configure a complete game loop for a t
 // Create core objects
 helios::engine::runtime::gameloop::GameLoop gameLoop{};
 helios::engine::runtime::world::GameWorld gameWorld{};
+
+// Register state types with session
+auto& session = gameWorld.session();
+session.trackState<GameState>();
+session.trackState<MatchState>();
 
 // Register command dispatchers
 gameLoop.commandBuffer()
@@ -111,54 +119,54 @@ gameLoop.commandBuffer()
 // ═══════════════════════════════════════════════════════════════════
 gameLoop.phase(PhaseType::Pre)
     // Pass 1: Input handling (runs in all states)
-    .addPass(GameState::Any)
-    .addSystem<TwinStickInputSystem>(*playerGameObject)
+    .addPass<GameState>(GameState::Any)
+        .addSystem<TwinStickInputSystem>(*playerGameObject)
     
     // Commit Point: Structural changes (spawn/despawn) execute here
     .addCommitPoint(CommitPoint::Structural)
     
     // Pass 2: Spawn scheduling (only when Running)
-    .addPass(GameState::Running)
-    .addSystem<GameObjectSpawnSystem>(spawnSchedulers)
+    .addPass<GameState>(GameState::Running)
+        .addSystem<GameObjectSpawnSystem>(spawnSchedulers)
     
     // Commit Point: New entities are now active
     .addCommitPoint(CommitPoint::Structural)
     
     // Pass 3: Motion systems (only when Running)
-    .addPass(GameState::Running)
-    .addSystem<ScaleSystem>()
-    .addSystem<SteeringSystem>()
-    .addSystem<SpinSystem>()
-    .addSystem<Move2DSystem>();
+    .addPass<GameState>(GameState::Running)
+        .addSystem<ScaleSystem>()
+        .addSystem<SteeringSystem>()
+        .addSystem<SpinSystem>()
+        .addSystem<Move2DSystem>();
 
 // ═══════════════════════════════════════════════════════════════════
 // MAIN PHASE: Gameplay Logic, Collision, AI
 // ═══════════════════════════════════════════════════════════════════
 gameLoop.phase(PhaseType::Main)
     // Pass 1: Update bounds and check collisions (only when Running)
-    .addPass(GameState::Running)
-    .addSystem<BoundsUpdateSystem>()
-    .addSystem<LevelBoundsBehaviorSystem>()
-    .addSystem<GridCollisionDetectionSystem>(cellSize, levelBounds)
+    .addPass<GameState>(GameState::Running)
+        .addSystem<BoundsUpdateSystem>()
+        .addSystem<LevelBoundsBehaviorSystem>()
+        .addSystem<GridCollisionDetectionSystem>(cellSize, levelBounds)
     
     // Commit Point: Collision events become readable
     .addCommitPoint()
     
     // Pass 2: React to collisions (only when Running)
-    .addPass(GameState::Running)
-    .addSystem<ProjectileCollisionSystem>()
-    .addSystem<EnemyCollisionSystem>();
+    .addPass<GameState>(GameState::Running)
+        .addSystem<ProjectileCollisionSystem>()
+        .addSystem<EnemyCollisionSystem>();
 
 // ═══════════════════════════════════════════════════════════════════
 // POST PHASE: Scene Sync, Transform Cleanup
 // ═══════════════════════════════════════════════════════════════════
 gameLoop.phase(PhaseType::Post)
     // Scene sync runs in all states (needed for UI updates while paused)
-    .addPass(GameState::Any)
-    .addSystem<ComposeTransformSystem>()
-    .addSystem<SceneSyncSystem>(scene.get())
-    .addSystem<TransformClearSystem>()
-    .addSystem<DelayedComponentEnablerSystem>();
+    .addPass<GameState>(GameState::Any)
+        .addSystem<ComposeTransformSystem>()
+        .addSystem<SceneSyncSystem>(scene.get())
+        .addSystem<TransformClearSystem>()
+        .addSystem<DelayedComponentEnablerSystem>();
 
 // Initialize and run
 gameWorld.init();

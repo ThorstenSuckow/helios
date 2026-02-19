@@ -18,44 +18,57 @@ import helios.engine.state.StateToIdMapPair;
 import helios.engine.ecs.System;
 import helios.engine.runtime.world.UpdateContext;
 
-import helios.engine.mechanics.gamestate.types;
-import helios.engine.mechanics.match.types;
-
 import helios.engine.core.data;
 
 export namespace helios::engine::modules::rendering::viewport::systems {
 
-
-    using namespace helios::engine::mechanics::match::types;
-    using namespace helios::engine::mechanics::gamestate::types;
     using namespace helios::engine::state;
 
     /**
      * @brief Updates the session's active viewport list based on state policy.
      *
-     * @details Queries the current GameState and MatchState from the session,
-     * then uses the configured StateToIdMapPair to determine which viewports
+     * @details Queries the current states from the session using the configured
+     * template parameters, then uses StateToIdMapPair to determine which viewports
      * should be active. The resulting viewport IDs are stored in the session
      * for use by the rendering system.
+     *
+     * ## Usage
+     *
+     * ```cpp
+     * StateToIdMapPair<GameState, MatchState, ViewportId> policy;
+     * policy.add(GameState::Running, ViewportId("game"));
+     * policy.add(MatchState::GameOver, ViewportId("game_over"));
+     * policy.freeze();
+     *
+     * gameLoop.phase(PhaseType::Pre)
+     *     .addPass<GameState>(GameState::Any)
+     *         .addSystem<StateToViewportPolicyUpdateSystem<GameState, MatchState>>(
+     *             std::move(policy)
+     *         );
+     * ```
+     *
+     * @tparam StateLft The left/primary state type (e.g., GameState).
+     * @tparam StateRgt The right/secondary state type (e.g., MatchState).
      *
      * @see StateToIdMapPair
      * @see Session
      */
+    template<typename StateLft, typename StateRgt>
     class StateToViewportPolicyUpdateSystem : public helios::engine::ecs::System {
 
         /**
          * @brief Policy defining viewport-to-state mappings.
          */
-        StateToIdMapPair<GameState, MatchState, ViewportId> stateToIdMapPair_;
+        StateToIdMapPair<StateLft, StateRgt, ViewportId> stateToIdMapPair_;
 
     public:
 
         /**
          * @brief Constructs the system with a state-to-ID map pair.
          *
-         * @param stateToIdMapPair Policy mapping game/match states to viewport IDs.
+         * @param stateToIdMapPair Policy mapping states to viewport IDs.
          */
-        explicit StateToViewportPolicyUpdateSystem(StateToIdMapPair<GameState, MatchState, ViewportId> stateToIdMapPair)
+        explicit StateToViewportPolicyUpdateSystem(StateToIdMapPair<StateLft, StateRgt, ViewportId> stateToIdMapPair)
             : stateToIdMapPair_(std::move(stateToIdMapPair)){}
 
         /**
@@ -70,8 +83,8 @@ export namespace helios::engine::modules::rendering::viewport::systems {
 
             auto& session = updateContext.session();
 
-            auto gameState  = session.gameState();
-            auto matchState = session.matchState();
+            auto gameState  = session.state<StateLft>();
+            auto matchState = session.state<StateRgt>();
 
             session.clearViewportIds();
 

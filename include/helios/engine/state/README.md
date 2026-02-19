@@ -1,74 +1,125 @@
 # helios::engine::state
 
-State-to-ID mapping utilities for policy-driven viewport activation.
+Generic, template-based state management system with rule-based transitions.
 
 ## Overview
 
-This module provides generic mapping utilities that associate state enum values with lists of IDs. The primary use case is determining which viewports should be active based on the current game and match state.
+This module provides a complete state management framework including:
 
-## Components
+- **State machines** with rule-based transitions and guards
+- **Commands and dispatchers** for requesting state changes
+- **Listeners** for reacting to state transitions
+- **ID mapping utilities** for associating states with viewports/menus
+
+All components are parameterized by state type, enabling reuse for different state enums (e.g., GameState, MatchState).
+
+## Core Components
+
+### State Management
+
+| Class | Description |
+|-------|-------------|
+| `StateManager<StateType>` | Rule-based state machine with listener support |
+| `StateTransitionRule<StateType>` | Defines valid transitions with optional guards |
+| `StateTransitionListener<StateType>` | Interface for transition observers |
+| `LambdaStateListener<StateType>` | Lambda-based listener implementation |
+| `StateCommand<StateType>` | Command for requesting transitions |
+| `StateCommandDispatcher<StateType>` | Routes commands to handlers |
+| `StateComponent<StateType>` | Stores current state on entities |
+
+### ID Mapping
 
 | Class | Description |
 |-------|-------------|
 | `StateToIdMap<TState, TId>` | Maps a single state type to ID lists |
-| `StateToIdMapPair<LState, RState, TId>` | Combines two state maps, returns union at lookup |
-| `CombinedStateToIdMapPair<LState, RState, TId>` | Maps state pairs directly to ID lists |
+| `StateToIdMapPair<LState, RState, TId>` | Combines two state maps, returns union |
+| `CombinedStateToIdMapPair<LState, RState, TId>` | Maps state pairs directly |
 
-## StateToIdMapPair vs CombinedStateToIdMapPair
+## Type Trait Specialization
 
-- **StateToIdMapPair**: Associates IDs with individual states (left or right). At lookup, returns the sorted union of both states' ID lists. Use when IDs should appear for a state regardless of the other state.
+To use `StateManager<YourState>`, you must specialize `StateTransitionId`:
 
-- **CombinedStateToIdMapPair**: Associates IDs with specific state combinations. Uses a 2D matrix indexed by both states. Use when IDs should only appear for exact state pairs. Supports fallback to the left state when the right state has no registered IDs.
+```cpp
+// In your bindings module:
+template<>
+struct helios::engine::state::types::StateTransitionId<GameState> {
+    using Type = GameStateTransitionId;
+};
+```
 
 ## Usage
 
-### StateToIdMapPair (Union Semantics)
+### Defining Rules
 
 ```cpp
 using namespace helios::engine::state;
-using namespace helios::engine::core::data;
+using namespace helios::engine::state::types;
 
-StateToIdMapPair<GameState, MatchState, ViewportId> policy;
-
-// IDs associated with individual states
-policy.add(GameState::Running, ViewportId("game"));
-policy.add(GameState::Paused, ViewportId("pause_menu"));
-policy.add(MatchState::GameOver, ViewportId("game_over"));
-
-policy.freeze();
-
-// Returns union: {"game", "game_over"} if both states match
-auto ids = policy.ids(GameState::Running, MatchState::GameOver);
+constexpr StateTransitionRule<GameState> gameStateRules[] = {
+    {GameState::MainMenu, GameStateTransitionId::StartGame, GameState::Running},
+    {GameState::Running, GameStateTransitionId::Pause, GameState::Paused},
+    {GameState::Paused, GameStateTransitionId::Resume, GameState::Running},
+    {GameState::Running, GameStateTransitionId::GameOver, GameState::MainMenu,
+        // Optional guard:
+        [](auto& ctx, auto& req) { return ctx.session().lives() == 0; }
+    }
+};
 ```
 
-### CombinedStateToIdMapPair (Exact Combination)
+### Creating the Manager
 
 ```cpp
-CombinedStateToIdMapPair<GameState, MatchState, ViewportId> policy;
+auto gameStateManager = std::make_unique<StateManager<GameState>>(gameStateRules);
 
-// IDs for specific state combinations
-policy.add(GameState::Running, MatchState::Playing, ViewportId("game"));
-policy.add(GameState::Running, MatchState::GameOver, ViewportId("game_over"));
-policy.add(GameState::Paused, MatchState::Undefined, ViewportId("pause_menu"));
+gameStateManager->addStateListener(
+    std::make_unique<LambdaStateListener<GameState>>(
+        [](auto& ctx, GameState from) { /* onExit */ },
+        [](auto& ctx, auto transitionCtx) { /* onTransition */ },
+        [](auto& ctx, GameState to) { /* onEnter */ }
+    )
+);
 
-policy.freeze();
-
-// Returns only IDs for the exact combination
-auto ids = policy.ids(GameState::Running, MatchState::Playing);
+gameLoop.addManager(std::move(gameStateManager));
 ```
 
-## Design
+### Requesting Transitions
 
-- **Bit-indexed storage:** States must be power-of-two values. The map uses bit position as the index for O(1) lookup.
-- **Freeze pattern:** Maps support a `freeze()` operation that finalizes, sorts, and shrinks internal storage.
-- **Union semantics (StateToIdMapPair):** Returns the sorted union of IDs from both maps.
-- **Fallback semantics (CombinedStateToIdMapPair):** Falls back to index 0 (undefined right state) when specific combination has no IDs.
+```cpp
+updateContext.commandBuffer().add<StateCommand<GameState>>(
+    StateTransitionRequest<GameState>{
+        GameState::Running,
+        GameStateTransitionId::Pause
+    }
+);
+```
+
+## Transition Flow
+
+1. `StateCommand` is submitted to the command buffer
+2. `StateCommandDispatcher` routes it to `StateManager`
+3. `StateManager::flush()` processes pending commands
+4. Matching rule is found and guard is evaluated
+5. Listeners are notified: `onStateExit` → `onStateTransition` → `onStateEnter`
+6. Session state is updated
+
+## ID Mapping
+
+For viewport/menu activation based on state:
+
+```cpp
+CombinedStateToIdMapPair<GameState, MatchState, ViewportId> viewportPolicy;
+
+viewportPolicy.add(GameState::Running, MatchState::Playing, ViewportId("game"));
+viewportPolicy.add(GameState::Paused, MatchState::Undefined, ViewportId("pause"));
+
+viewportPolicy.freeze();
+```
 
 ---
 <details>
 <summary>Doxygen</summary><p>
 @namespace helios::engine::state
-@brief State-to-ID mapping utilities.
-@details Provides generic mapping templates for associating state enum values with lists of IDs. Used by StateToViewportPolicyUpdateSystem to determine active viewports based on game/match state.
+@brief Generic, template-based state management system.
+@details Provides a complete framework for managing application state with rule-based transitions, guards, listeners, and ID mapping utilities. All components are parameterized by state type for maximum reuse.
 </p></details>
 

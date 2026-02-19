@@ -103,6 +103,20 @@ helios supports hierarchical state management where lower-level states (e.g., Ma
 └───────────────────┘       └───────────────────┘
 ```
 
+## Session State Registration
+
+Before using any state type with the state management system, it must be explicitly registered with the Session via `trackState<T>()`. This adds the corresponding `StateComponent<T>` to the session entity, enabling systems to read and write the state.
+
+```cpp
+auto& session = gameWorld.session();
+
+// Register state types before use
+session.trackState<GameState>();
+session.trackState<MatchState>();
+```
+
+Explicit registration avoids hard-coded state types in the Session class. It enables custom state types without modifying engine code and ensures that StateComponent exists before StateManager attempts to update it. Furthermore, it makes state dependencies visible at initialization time.
+
 ## Type Trait Specialization
 
 To use `StateManager<YourState>`, you must specialize `StateTransitionId`:
@@ -216,6 +230,11 @@ stateManager->addStateListener(std::move(listener));
 
 ```cpp
 using namespace helios::engine::state;
+
+// Register state types with session (required before managers are flushed)
+auto& session = gameWorld.session();
+session.trackState<GameState>();
+session.trackState<MatchState>();
 
 // Create managers with rules
 auto gameStateManager = std::make_unique<StateManager<GameState>>(gameStateRules);

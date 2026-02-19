@@ -1,172 +1,180 @@
 /**
  * @file Session.ixx
- * @brief Session state container for game and match state.
+ * @brief Session state container for game-wide state.
  */
 module;
 
 #include <optional>
 #include <vector>
 #include <span>
+#include <cassert>
 
 export module helios.engine.runtime.world.Session;
 
 import helios.engine.mechanics.gamestate.types;
-
 import helios.engine.mechanics.match.types;
-import helios.engine.mechanics.match.components;
+
+import helios.engine.state.types;
+import helios.engine.state.components;
+import helios.engine.state.types.StateTransitionId;
 
 import helios.engine.core.data;
 
-import helios.engine.mechanics.gamestate.components;
 import helios.engine.ecs.GameObject;
+import helios.engine.ecs.EntityHandle;
 
 import helios.engine.core.data.ViewportId;
 
 import helios.engine.modules.rendering.viewport.components.ActiveViewportIdsStateComponent;
 
-import helios.engine.mechanics.match.components;
-
 export namespace helios::engine::runtime::world {
 
     using namespace helios::engine::mechanics::match::types;
-    using namespace helios::engine::mechanics::match::components;
-
     using namespace helios::engine::mechanics::gamestate::types;
-    using namespace helios::engine::mechanics::gamestate::components;
+
+    using namespace helios::engine::state::types;
+    using namespace helios::engine::state::components;
 
     using namespace helios::engine::modules::rendering::viewport::components;
 
     /**
      * @brief Holds session-level state for the current game instance.
      *
-     * The Session wraps a GameObject that stores session-related components
-     * such as GameStateComponent, MatchStateComponent, and UiFocusComponent.
-     * It provides convenient accessors for game state, match state, and UI focus.
+     * @details The Session wraps a GameObject that stores session-related
+     * components using the template-based state system. It provides type-safe
+     * accessors for any registered state type (e.g., GameState, MatchState).
      *
-     * @see GameStateComponent
-     * @see MatchStateComponent
+     * State types must be registered via trackState<T>() before use:
+     *
+     * ```cpp
+     * session.trackState<GameState>();
+     * session.trackState<MatchState>();
+     * ```
+     *
+     * ## Stored Components
+     *
+     * - `StateComponent<T>` — Registered via trackState<T>()
+     * - `ActiveViewportIdsStateComponent` — Active viewport list (auto-added)
+     *
+     * @see StateComponent
+     * @see StateManager
      */
     class Session {
 
+        /**
+         * @brief The underlying GameObject storing session components.
+         */
         ecs::GameObject gameObject_;
 
-        std::optional<ecs::GameObject> playerEntity_;
+        /**
+         * @brief Handle to the player entity.
+         */
+        ecs::EntityHandle playerEntity_;
 
     public:
 
         /**
          * @brief Constructs a session with the given GameObject.
          *
-         * Automatically adds GameStateComponent, UiFocusComponent, and
-         * MatchStateComponent to the GameObject.
+         * @details Automatically adds ActiveViewportIdsStateComponent.
+         * State types must be registered separately via trackState<T>().
          *
          * @param go The GameObject to use as the session entity.
          */
         explicit Session(const ecs::GameObject go) : gameObject_(go) {
-
-            gameObject_.add<GameStateComponent>();
             gameObject_.add<ActiveViewportIdsStateComponent>();
-            gameObject_.add<MatchStateComponent>();
-
         }
 
         /**
-         * @brief Sets the player entity for this session.
+         * @brief Sets the player entity handle.
          *
-         * @param go The GameObject representing the player.
+         * @param go The player's entity handle.
          */
-        void setPlayerEntity(const ecs::GameObject go) noexcept {
+        void setPlayerEntityHandle(const ecs::EntityHandle go) noexcept {
             playerEntity_ = go;
         }
 
         /**
-         * @brief Returns the player entity if set.
+         * @brief Returns the player entity handle.
          *
-         * @return Optional containing the player GameObject, or nullopt.
+         * @return The player's entity handle.
          */
-        [[nodiscard]] std::optional<ecs::GameObject> playerEntity() const noexcept {
+        [[nodiscard]] ecs::EntityHandle playerEntityHandle() const noexcept {
             return playerEntity_;
         }
-
 
         /**
          * @brief Resets the session state.
          */
         void reset() {
-
-
+            assert(false && "TBD");
         }
 
         /**
          * @brief Checks if the game is currently paused.
          *
-         * @return True if the game state is Paused.
+         * @return True if GameState is Paused.
          */
         [[nodiscard]] bool isPaused() const noexcept {
-            auto* gpc = gameObject_.get<GameStateComponent>();
+            auto* gpc = gameObject_.get<StateComponent<GameState>>();
 
-            return gpc && gpc->gameState == GameState::Paused;
+            return gpc && gpc->state() == GameState::Paused;
         }
 
         /**
-         * @brief Sets the current game state.
+         * @brief Updates state from a transition context.
          *
-         * @param gameState The new game state.
+         * @details Called by StateManager after a successful transition.
+         *
+         * @tparam StateType The state enum type.
+         *
+         * @param stateTransitionContext The completed transition context.
          */
-        void setGameState(const GameState gameState) noexcept {
-            auto* gpc = gameObject_.get<GameStateComponent>();
+        template<typename StateType>
+        void setStateFrom(const StateTransitionContext<StateType> stateTransitionContext) noexcept {
 
-            if (gpc) {
-                gpc->gameState = gameState;
+            if (auto* msc = gameObject_.get<StateComponent<StateType>>()) {
+                msc->setStateFromTransitionContext(stateTransitionContext);
             }
         }
 
         /**
-         * @brief Sets the current match state.
+         * @brief Returns the current state for a given state type.
          *
-         * @param matchStateTransitionContext
+         * @tparam StateType The state enum type.
+         *
+         * @return The current state, or StateType::Undefined if not found.
          */
-        void setMatchStateFrom(const MatchStateTransitionContext matchStateTransitionContext) noexcept {
+        template<typename StateType>
+        [[nodiscard]] StateType state() const noexcept {
+            auto* sc = gameObject_.get<StateComponent<StateType>>();
 
-            if (auto* msc = gameObject_.get<MatchStateComponent>()) {
-                msc->setMatchState(matchStateTransitionContext);
-            }
+            return sc ? sc->state() : StateType::Undefined;
         }
 
         /**
-         * @brief Returns the current game state.
+         * @brief Returns the last transition ID for a given state type.
          *
-         * @return The current game state, or Undefined if not available.
+         * @tparam StateType The state enum type.
+         *
+         * @return The transition ID, or Undefined if not found.
          */
-        [[nodiscard]] GameState gameState() const noexcept {
-            auto* gpc = gameObject_.get<GameStateComponent>();
+        template<typename StateType>
+        [[nodiscard]] StateTransitionIdType<StateType> stateTransitionId() const noexcept {
+            auto* ms = gameObject_.get<StateComponent<StateType>>();
 
-            return gpc ? gpc->gameState : GameState::Undefined;
+            return ms ? ms->transitionId() : StateTransitionIdType<StateType>::Undefined;
         }
 
         /**
-         * @brief Returns the current match state.
+         * @brief Lets this session track the specified StateType.
          *
-         * @return The current match state, or Undefined if not available.
+         * @tparam StateType The state enum type.
          */
-        [[nodiscard]] MatchState matchState() const noexcept {
-            auto* ms = gameObject_.get<MatchStateComponent>();
-
-            return ms ? ms->matchState() : MatchState::Undefined;
+        template<typename StateType>
+        void trackState() {
+            gameObject_.getOrAdd<StateComponent<StateType>>();
         }
-
-        /**
-         * @brief Returns the current match state transition ID.
-         *
-         * @return The transition ID, or Undefined if not available.
-         */
-        [[nodiscard]] MatchStateTransitionId matchStateTransitionId() const noexcept {
-            auto* ms = gameObject_.get<MatchStateComponent>();
-
-            return ms ? ms->matchStateTransitionId() : MatchStateTransitionId::Undefined;
-        }
-
-
 
         /**
          * @brief Replaces the active viewport IDs with the provided list.
@@ -182,7 +190,7 @@ export namespace helios::engine::runtime::world {
          *
          * @return Read-only span of viewport identifiers.
          */
-        std::span<const helios::engine::core::data::ViewportId> viewportIds() const noexcept {
+        [[nodiscard]] std::span<const helios::engine::core::data::ViewportId> viewportIds() const noexcept {
             return gameObject_.get<ActiveViewportIdsStateComponent>()->viewportIds();
         }
 

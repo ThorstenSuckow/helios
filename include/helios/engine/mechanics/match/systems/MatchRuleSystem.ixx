@@ -7,7 +7,7 @@ module;
 
 export module helios.engine.mechanics.match.systems.MatchRuleSystem;
 
-import helios.engine.mechanics.match.components;
+
 import helios.engine.mechanics.match.types.MatchState;
 
 import helios.input.types.Gamepad;

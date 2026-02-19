@@ -7,8 +7,15 @@ module;
 export module helios.engine.mechanics.match.systems.MatchFlowSystem;
 
 import helios.engine.mechanics.match.types;
-import helios.engine.mechanics.match.commands;
 
+
+import helios.engine.mechanics.match.types.MatchState;
+import helios.engine.mechanics.match.types.MatchStateTransitionId;
+
+import helios.engine.state.commands.StateCommand;
+import helios.engine.state.types.StateTransitionRequest;
+
+import helios.engine.state.types;
 import helios.engine.mechanics.gamestate.types;
 
 import helios.engine.ecs;
@@ -16,9 +23,10 @@ import helios.engine.runtime;
 
 export namespace helios::engine::mechanics::match::systems {
 
+    using namespace helios::engine::state::commands;
+    using namespace helios::engine::state::types;
     using namespace helios::engine::mechanics::gamestate;
     using namespace helios::engine::mechanics::match::types;
-    using namespace helios::engine::mechanics::match::commands;
 
     /**
      * @brief Automatically advances the match through its state phases.
@@ -30,7 +38,7 @@ export namespace helios::engine::mechanics::match::systems {
     class MatchFlowSystem : public helios::engine::ecs::System {
 
         MatchState prevMatchSate_ = MatchState::Undefined;
-        MatchStateTransitionId prevMatchStateTransitionId_ = MatchStateTransitionId::Undefined;
+        StateTransitionIdType<MatchState> prevMatchStateTransitionId_ = StateTransitionIdType<MatchState>::Undefined;
 
 
     public:
@@ -46,8 +54,8 @@ export namespace helios::engine::mechanics::match::systems {
 
 
             auto& commandBuffer = updateContext.commandBuffer();
-            const auto matchState = session.matchState();
-            const auto matchStateTransitionId = session.matchStateTransitionId();
+            const auto matchState = session.state<MatchState>();
+            auto matchStateTransitionId = session.stateTransitionId<MatchState>();
 
             if (matchState != MatchState::Undefined && prevMatchSate_ == matchState && prevMatchStateTransitionId_ == matchStateTransitionId) {
                 return;
@@ -59,37 +67,37 @@ export namespace helios::engine::mechanics::match::systems {
             switch (matchState) {
 
                 case MatchState::Finished: {
-                    commandBuffer.add<MatchStateCommand>(
-                        MatchStateTransitionRequest(matchState, MatchStateTransitionId::WarmupRequested)
+                    commandBuffer.add<StateCommand<MatchState>>(
+                        StateTransitionRequest<MatchState>(matchState, MatchStateTransitionId::WarmupRequested)
                     );
                     break;
                 }
 
                 case MatchState::Undefined: {
-                    commandBuffer.add<MatchStateCommand>(
-                        MatchStateTransitionRequest(matchState, MatchStateTransitionId::WarmupRequested)
+                    commandBuffer.add<StateCommand<MatchState>>(
+                        StateTransitionRequest<MatchState>(matchState, MatchStateTransitionId::WarmupRequested)
                     );
                     break;
                 }
 
                 case MatchState::Warmup: {
-                    commandBuffer.add<MatchStateCommand>(
-                        MatchStateTransitionRequest(matchState, MatchStateTransitionId::PlayerSpawnRequested)
+                    commandBuffer.add<StateCommand<MatchState>>(
+                        StateTransitionRequest<MatchState>(matchState, MatchStateTransitionId::PlayerSpawnRequested)
                     );
                     break;
                 }
 
                 case MatchState::PlayerSpawn: {
-                    commandBuffer.add<MatchStateCommand>(
-                        MatchStateTransitionRequest(matchState, MatchStateTransitionId::StartRequested)
+                    commandBuffer.add<StateCommand<MatchState>>(
+                        StateTransitionRequest<MatchState>(matchState, MatchStateTransitionId::StartRequested)
                     );
                     break;
                 }
 
                 case MatchState::PlayerDeath: {
                     if (matchStateTransitionId == MatchStateTransitionId::QuitRequested) {
-                        commandBuffer.add<MatchStateCommand>(
-                            MatchStateTransitionRequest(MatchState::PlayerDeath, MatchStateTransitionId::QuitRequested)
+                        commandBuffer.add<StateCommand<MatchState>>(
+                            StateTransitionRequest<MatchState>(MatchState::PlayerDeath, MatchStateTransitionId::QuitRequested)
                         );
                     }
 

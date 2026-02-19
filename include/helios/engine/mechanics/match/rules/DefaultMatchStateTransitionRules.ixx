@@ -8,12 +8,14 @@ module;
 
 export module helios.engine.mechanics.match.rules.DefaultMatchStateTransitionRules;
 
+import helios.engine.state.types;
 import helios.engine.mechanics.match.types;
 import helios.engine.mechanics.match.rules.guards;
 
 
 export namespace helios::engine::mechanics::match::rules {
 
+    using namespace helios::engine::state::types;
     using namespace helios::engine::mechanics::match::types;
     using namespace helios::engine::mechanics::match::rules::guards;
 
@@ -22,106 +24,93 @@ export namespace helios::engine::mechanics::match::rules {
      */
     class DefaultMatchStateTransitionRules {
 
-        static constexpr MatchStateTransitionRule rules_[] = {
+        static constexpr StateTransitionRule<MatchState> rules_[] = {
 
-            MatchStateTransitionRule(
+            StateTransitionRule<MatchState>(
                 MatchState::Undefined,
                 MatchStateTransitionId::WarmupRequested,
-                MatchState::Warmup,
-                MatchStateTransitionType::Standard
+                MatchState::Warmup
             ),
 
-            MatchStateTransitionRule(
+            StateTransitionRule<MatchState>(
                 MatchState::Warmup,
                 MatchStateTransitionId::PlayerSpawnRequested,
-                MatchState::PlayerSpawn,
-                MatchStateTransitionType::Standard
+                MatchState::PlayerSpawn
             ),
 
-            MatchStateTransitionRule(
+            StateTransitionRule<MatchState>(
                 MatchState::PlayerSpawn,
                 MatchStateTransitionId::IntroRequested,
                 MatchState::Intro,
-                MatchStateTransitionType::Standard,
                 &DefaultMatchStateTransitionGuards::isPlayerActive
             ),
 
-            MatchStateTransitionRule(
+            StateTransitionRule<MatchState>(
                 MatchState::PlayerSpawn,
                 MatchStateTransitionId::CountdownRequested,
                 MatchState::Countdown,
-                MatchStateTransitionType::Standard,
                 &DefaultMatchStateTransitionGuards::isPlayerActive
             ),
 
-            MatchStateTransitionRule(
+            StateTransitionRule<MatchState>(
                MatchState::PlayerSpawn,
                MatchStateTransitionId::StartRequested,
                MatchState::Playing,
-               MatchStateTransitionType::Standard,
                &DefaultMatchStateTransitionGuards::isPlayerActive
            ),
 
 
-            MatchStateTransitionRule(
+            StateTransitionRule<MatchState>(
                 MatchState::Intro,
                 MatchStateTransitionId::CountdownRequested,
-                MatchState::Countdown,
-                MatchStateTransitionType::Standard
+                MatchState::Countdown
             ),
 
 
-            MatchStateTransitionRule(
+            StateTransitionRule<MatchState>(
                 MatchState::Countdown,
                 MatchStateTransitionId::StartRequested,
-                MatchState::Playing,
-                MatchStateTransitionType::Standard
+                MatchState::Playing
             ),
 
-            MatchStateTransitionRule(
+            StateTransitionRule<MatchState>(
                 MatchState::Playing,
                 MatchStateTransitionId::PlayerDied,
-                MatchState::PlayerDeath,
-                MatchStateTransitionType::Standard
+                MatchState::PlayerDeath
             ),
 
-            MatchStateTransitionRule(
+            StateTransitionRule<MatchState>(
                MatchState::PlayerDeath,
                MatchStateTransitionId::PlayerSpawnRequested,
                MatchState::PlayerSpawn,
-               MatchStateTransitionType::Standard,
                 &DefaultMatchStateTransitionGuards::isPlayerInactive
            ),
 
-            MatchStateTransitionRule(
+            StateTransitionRule<MatchState>(
                MatchState::Playing,
                MatchStateTransitionId::QuitRequested,
-               MatchState::PlayerDeath,
-               MatchStateTransitionType::Standard
+               MatchState::PlayerDeath
            ),
 
 
-            MatchStateTransitionRule(
+            StateTransitionRule<MatchState>(
                MatchState::PlayerDeath,
                MatchStateTransitionId::QuitRequested,
                MatchState::GameOver,
-               MatchStateTransitionType::Standard,
                &DefaultMatchStateTransitionGuards::isPlayerInactive
            ),
 
-            MatchStateTransitionRule(
+            StateTransitionRule<MatchState>(
         MatchState::GameOver,
            MatchStateTransitionId::RestartRequested,
            MatchState::Warmup,
-           MatchStateTransitionType::Standard,
             &DefaultMatchStateTransitionGuards::isPlayerInactive
         ),
 
-        MatchStateTransitionRule(
+            StateTransitionRule<MatchState>(
         MatchState::GameOver,
         MatchStateTransitionId::QuitRequested,
-        MatchState::Undefined,
-        MatchStateTransitionType::Standard
+        MatchState::Undefined
         )
 
 
@@ -136,7 +125,7 @@ export namespace helios::engine::mechanics::match::rules {
          *
          * @return A span of the predefined transition rules.
          */
-        [[nodiscard]] static std::span<const MatchStateTransitionRule> rules() {
+        [[nodiscard]] static std::span<const StateTransitionRule<MatchState>> rules() {
             return rules_;
         }
 

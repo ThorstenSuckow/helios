@@ -10,9 +10,14 @@ export module helios.engine.mechanics.gamestate.rules.DefaultGameStateTransition
 
 import helios.engine.mechanics.gamestate.types;
 
+import helios.engine.state.types.StateTransitionRule;
+import helios.engine.state.types.StateTransitionId;
+
+
 export namespace helios::engine::mechanics::gamestate::rules {
 
     using namespace helios::engine::mechanics::gamestate::types;
+    using namespace helios::engine::state::types;
 
     /**
      * @brief Provides the default set of game state transition rules.
@@ -26,63 +31,62 @@ export namespace helios::engine::mechanics::gamestate::rules {
      */
     class DefaultGameStateTransitionRules {
 
-        static constexpr GameStateTransitionRule rules_[] = {
+        static constexpr StateTransitionRule<GameState> rules_[] = {
 
-            GameStateTransitionRule(
+            StateTransitionRule<GameState>(
                 GameState::Undefined,
-                GameStateTransitionId::TitleRequested,
-                GameState::Title,
-                GameStateTransitionType::Standard
+                StateTransitionIdType<GameState>::TitleRequested,
+                GameState::Title
             ),
 
-            GameStateTransitionRule(
+            StateTransitionRule<GameState>(
+
                 GameState::Title,
                 GameStateTransitionId::StartRequested,
-                GameState::Running,
-                GameStateTransitionType::Standard
+                GameState::Running
             ),
 
-            GameStateTransitionRule(
+            StateTransitionRule<GameState>(
+
                 GameState::Running,
                 GameStateTransitionId::TogglePause,
-                GameState::Paused,
-                GameStateTransitionType::Standard
+                GameState::Paused
             ),
 
-            GameStateTransitionRule(
+            StateTransitionRule<GameState>(
+
                 GameState::Paused,
                 GameStateTransitionId::TogglePause,
-                GameState::Running,
-                GameStateTransitionType::Standard
-            ),
+                GameState::Running
+                ),
 
-            GameStateTransitionRule(
+            StateTransitionRule<GameState>(
+
                 GameState::Paused,
                 GameStateTransitionId::RestartRequested,
-                GameState::Running,
-                GameStateTransitionType::Standard
+                GameState::Running
             ),
 
-            GameStateTransitionRule(
+            StateTransitionRule<GameState>(
+
                 GameState::Running,
                 GameStateTransitionId::RestartRequested,
-                GameState::Running,
-                GameStateTransitionType::Standard
+                GameState::Running
             ),
 
-            GameStateTransitionRule(
+            StateTransitionRule<GameState>(
+
                GameState::Paused,
                GameStateTransitionId::RestartRequested,
-               GameState::Running,
-               GameStateTransitionType::Standard
+               GameState::Running
            ),
 
-            GameStateTransitionRule(
+            StateTransitionRule<GameState>(
+
                 GameState::Running,
                 GameStateTransitionId::TitleRequested,
-                GameState::Title,
-                GameStateTransitionType::Standard
-            ),
+                GameState::Title
+            )
 
         };
 
@@ -93,7 +97,7 @@ export namespace helios::engine::mechanics::gamestate::rules {
          *
          * @return A span of the predefined transition rules.
          */
-        [[nodiscard]] static std::span<const GameStateTransitionRule> rules() {
+        [[nodiscard]] static std::span<const StateTransitionRule<GameState>> rules() {
             return rules_;
         }
 

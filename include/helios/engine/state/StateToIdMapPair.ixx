@@ -16,7 +16,7 @@ export module helios.engine.state.StateToIdMapPair;
 
 import helios.engine.state.StateToIdMap;
 
-import helios.engine.mechanics.gamestate.types;
+import helios.engine.state.types;
 import helios.engine.mechanics.match.types;
 
 import helios.engine.core.data.ViewportId;
@@ -25,7 +25,7 @@ import helios.core.types;
 export namespace helios::engine::state {
 
     using namespace helios::engine::core::data;
-    using namespace helios::engine::mechanics::gamestate::types;
+    using namespace helios::engine::state::types;
     using namespace helios::engine::mechanics::match::types;
 
     /**

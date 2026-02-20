@@ -68,7 +68,7 @@ TEST(GamepadStateTest, UpdateAxesSetsValuesAndButtons) {
     EXPECT_FALSE(s.buttonB());
     EXPECT_TRUE(s.buttonX());
     EXPECT_FALSE(s.buttonY());
-    EXPECT_TRUE(s.buttonStart());
+    EXPECT_TRUE(s.buttonPressedStart());
     EXPECT_FALSE(s.buttonBack());
     EXPECT_TRUE(s.buttonGuide());
     EXPECT_TRUE(s.buttonLeftBumper());

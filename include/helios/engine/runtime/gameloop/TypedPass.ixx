@@ -121,9 +121,9 @@ export namespace helios::engine::runtime::gameloop {
          * which only synchronizes pass-level events.
          *
          * Available CommitPoint flags:
-         * - `PassEvents` — Events pushed via `UpdateContext::pushPass()` become readable.
-         * - `FlushCommands` — Pending commands from the CommandBuffer are executed.
-         * - `FlushManagers` — Managers process their queued requests.
+         * - `PassEvents` - Events pushed via `UpdateContext::pushPass()` become readable.
+         * - `FlushCommands` - Pending commands from the CommandBuffer are executed.
+         * - `FlushManagers` - Managers process their queued requests.
          * - `Structural` — Combines all three flags.
          *
          * Flags can be combined using bitwise OR:

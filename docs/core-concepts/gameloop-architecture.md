@@ -255,11 +255,11 @@ POST PHASE
 
 ## Commands and CommandBuffer
 
-Systems can write Commands into the CommandBuffer during any phase. At each **Phase Commit**, the CommandBuffer is flushed — i.e., their `execute()` method is invoked. This method contains the logic that mutates the world state (e.g., spawning, despawning, health changes, component changes).
+Systems can write Commands into the CommandBuffer during any phase. At each **Phase Commit**, the CommandBuffer is flushed - i.e., their `execute()` method is invoked. This method contains the logic that mutates the world state (e.g., spawning, despawning, health changes, component changes).
 
 This means commands added during the Pre Phase are executed at the Pre Phase Commit, commands added during Main Phase at Main Phase Commit, and so on. This allows for responsive gameplay where actions taken in one phase are immediately visible in the next.
 
-Commands are "bare metal" and therefore the lowest level in the game-loop layer — no further preparation of a Command is required. The system should therefore also be able to commit Commands coming directly from a developer console into the GameWorld (optionally delegating them to their respective managers — see below).
+Commands are "bare metal" and therefore the lowest level in the game-loop layer - no further preparation of a Command is required. The system should therefore also be able to commit Commands coming directly from a developer console into the GameWorld (optionally delegating them to their respective managers - see below).
 
 For detailed command handling, dispatchers, and manager integration, see [Command System](command-system.md).
 
@@ -326,8 +326,8 @@ Immediate events should be processed within the same frame without additional do
 
 ## Related Documentation
 
-- [Command System](command-system.md) — Command pattern, dispatchers, managers
-- [Event System](event-system.md) — Phase/Pass event propagation with double-buffered buses
-- [State Management](state-management.md) — Game and match state transitions
-- [Component System](component-system.md) — ECS-style composition architecture
-- [Spawn System](spawn-system.md) — Entity lifecycle with spawn scheduling and pooling
+- [Command System](command-system.md) - Command pattern, dispatchers, managers
+- [Event System](event-system.md) - Phase/Pass event propagation with double-buffered buses
+- [State Management](state-management.md) - Game and match state transitions
+- [Component System](component-system.md) - ECS-style composition architecture
+- [Spawn System](spawn-system.md) - Entity lifecycle with spawn scheduling and pooling

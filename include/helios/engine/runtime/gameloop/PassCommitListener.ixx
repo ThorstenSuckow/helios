@@ -76,9 +76,9 @@ export namespace helios::engine::runtime::gameloop {
          * Implementations should check the CommitPoint flags and perform the
          * appropriate synchronization actions. The order of operations should be:
          *
-         * 1. **PassEvents** — Swap event buffers first so subsequent actions can emit events.
-         * 2. **FlushCommands** — Execute commands before managers to generate spawn requests.
-         * 3. **FlushManagers** — Process requests after commands have been executed.
+         * 1. **PassEvents** - Swap event buffers first so subsequent actions can emit events.
+         * 2. **FlushCommands** - Execute commands before managers to generate spawn requests.
+         * 3. **FlushManagers** - Process requests after commands have been executed.
          *
          * @param commitPoint The flags specifying which synchronization actions to perform.
          * @param updateContext The current frame's update context.

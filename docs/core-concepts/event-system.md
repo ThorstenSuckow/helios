@@ -276,7 +276,7 @@ void phaseCommit(GameWorld& gameWorld, UpdateContext& updateContext) {
 ### Event Design
 
 - Events should be **immutable** data structs
-- Keep events **lightweight** — store only essential data (IDs, not full objects)
+- Keep events **lightweight** - store only essential data (IDs, not full objects)
 - Use **value types** rather than pointers in events
 
 ### Choosing pushPass vs pushPhase vs pushFrame
@@ -335,17 +335,17 @@ for (phase : {Pre, Main, Post}) {
 
 ## Related Modules
 
-- `helios.engine.runtime.messaging.event.GameLoopEventBus` — Double-buffered event bus
-- `helios.engine.runtime.world.UpdateContext` — Event push/read methods
-- `helios.engine.runtime.gameloop.GameLoop` — Phase/pass orchestration
-- `helios.engine.runtime.gameloop.Phase` — Phase container
-- `helios.engine.runtime.gameloop.Pass` — Pass container with optional commit point
-- `helios.core.buffer.TypeIndexedDoubleBuffer` — Underlying buffer implementation
+- `helios.engine.runtime.messaging.event.GameLoopEventBus` - Double-buffered event bus
+- `helios.engine.runtime.world.UpdateContext` - Event push/read methods
+- `helios.engine.runtime.gameloop.GameLoop` - Phase/pass orchestration
+- `helios.engine.runtime.gameloop.Phase` - Phase container
+- `helios.engine.runtime.gameloop.Pass` - Pass container with optional commit point
+- `helios.core.buffer.TypeIndexedDoubleBuffer` - Underlying buffer implementation
 
 ## Related Documentation
 
-- [Command System](command-system.md) — Command pattern for world mutations
-- [Game Loop Architecture](gameloop-architecture.md) — Overall frame structure
-- [Component System](component-system.md) — GameObject, Component, System architecture
-- [Spawn System](spawn-system.md) — Entity lifecycle with spawn events
+- [Command System](command-system.md) - Command pattern for world mutations
+- [Game Loop Architecture](gameloop-architecture.md) - Overall frame structure
+- [Component System](component-system.md) - GameObject, Component, System architecture
+- [Spawn System](spawn-system.md) - Entity lifecycle with spawn events
 

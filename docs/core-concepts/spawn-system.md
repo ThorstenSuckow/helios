@@ -100,7 +100,7 @@ Determines **where** entities spawn. Built-in implementations:
 class RandomSpawnPlacer : public SpawnPlacer {
 public:
     vec3f getPosition(const SpawnContext& ctx) const override {
-        const auto& bounds = ctx.level().bounds();
+        const auto& bounds = ctx.level()->bounds();
         return vec3f{
             Random::range(bounds.min()[0], bounds.max()[0]),
             Random::range(bounds.min()[1], bounds.max()[1]),
@@ -329,13 +329,13 @@ SpawnSystemFactory::configure(poolManager, spawnManager)  →  SpawnSystemConfig
          └─ commitProfilesOnly()  →  SpawnSystemConfigurator (no schedulers)
 ```
 
-`commit()`, `commitCyclic<N>()`, and `commitProfilesOnly()` all return a `SpawnSystemConfigurator` — a lightweight handle holding the manager references. This enables **chained pool configuration** without intermediate variables.
+`commit()`, `commitCyclic<N>()`, and `commitProfilesOnly()` all return a `SpawnSystemConfigurator` - a lightweight handle holding the manager references. This enables **chained pool configuration** without intermediate variables.
 
 ### Design: Callbacks vs. done()-Chaining
 
 The `SpawnSystemFactory` uses **done()-chaining** rather than the callback pattern used by `GameObjectFactory`. This is because spawn configuration has a **natural hierarchy** (pool → profile → rule), where done()-chaining expresses parent-child relationships clearly.
 
-The `GameObjectFactory` uses callbacks because its domains (motion, collision, rendering) are **flat and independent** — callbacks scope each domain without implying hierarchy. See [GameObject Builder](gameobject-builder.md) for details.
+The `GameObjectFactory` uses callbacks because its domains (motion, collision, rendering) are **flat and independent** - callbacks scope each domain without implying hierarchy. See [GameObject Builder](gameobject-builder.md) for details.
 
 | Pattern | Best For | Used By |
 |---------|----------|---------|
@@ -361,14 +361,14 @@ using namespace helios::engine::builder::spawnSystem;
 
 SpawnSystemFactory::configure(poolManager, spawnManager)
 
-    // 1. Projectile pool — emitter-relative, no scheduling
+    // 1. Projectile pool - emitter-relative, no scheduling
     .pool(ProjectilePoolId, projectilePrefab, 50)
         .profile(ProjectileProfileId)
             .emitterPlacement()
             .done()
         .commit()
 
-    // 2. Enemy pool — random placement, timer-scheduled
+    // 2. Enemy pool - random placement, timer-scheduled
     .pool(EnemyPoolId, enemyPrefab, 200)
         .profile(EnemyProfileId)
             .randomPlacement()
@@ -380,7 +380,7 @@ SpawnSystemFactory::configure(poolManager, spawnManager)
             .done()
         .commit()
 
-    // 3. Boss pool — mass spawn with custom placer/initializer
+    // 3. Boss pool - mass spawn with custom placer/initializer
     .pool(BossPoolId, bossPrefab, 10)
         .profile(BossProfileId)
             .placer(std::make_unique<DistributedSpawnPlacer<2>>(left, right))
@@ -395,7 +395,7 @@ SpawnSystemFactory::configure(poolManager, spawnManager)
             .done()
         .commit()
 
-    // 4. Edge enemy pool — cyclic 4-direction spawning
+    // 4. Edge enemy pool - cyclic 4-direction spawning
     .pool(EdgeEnemyPoolId, edgePrefab, 100)
         .profile(LeftProfileId)
             .axisPlacement(vec3f(0, -1, 0).normalize(), topLeft)
@@ -453,7 +453,7 @@ SpawnSystemFactory::configure(poolManager, spawnManager)
             .done()
         .commitProfilesOnly();
 
-// 2. Attach scheduling independently — can vary by level/difficulty
+// 2. Attach scheduling independently - can vary by level/difficulty
 builders::SchedulerBuilder sb(spawnManager);
 sb.cyclicScheduler(
     SchedulerConfig(LeftProfileId, LeftRuleId)
@@ -608,8 +608,8 @@ helios.engine.builder.spawnSystem/
 
 ## See Also
 
-- [GameObject Builder](gameobject-builder.md) — Fluent builder for GameObjects (callback-based)
-- [Object Pooling](object-pooling.md) — Pool lifecycle and configuration
-- [Component System](component-system.md) — Components used by spawned entities
-- [Game Loop Architecture](gameloop-architecture.md) — How spawning integrates with phases
-- [Command System](command-system.md) — Command pipeline for spawn commands
+- [GameObject Builder](gameobject-builder.md) - Fluent builder for GameObjects (callback-based)
+- [Object Pooling](object-pooling.md) - Pool lifecycle and configuration
+- [Component System](component-system.md) - Components used by spawned entities
+- [Game Loop Architecture](gameloop-architecture.md) - How spawning integrates with phases
+- [Command System](command-system.md) - Command pipeline for spawn commands

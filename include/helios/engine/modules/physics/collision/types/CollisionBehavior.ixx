@@ -23,9 +23,9 @@ export namespace helios::engine::modules::physics::collision::types {
      * two entities collide based on their layer configuration.
      *
      * @note Not all behaviors are currently fully implemented. Currently supported:
-     * - `Reflect` — Fully supported
-     * - `Bounce` — Fully supported
-     * - `Despawn` — Fully supported
+     * - `Reflect` - Fully supported
+     * - `Bounce` - Fully supported
+     * - `Despawn` - Fully supported
      */
     enum class CollisionBehavior : uint16_t {
 

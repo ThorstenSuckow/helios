@@ -57,7 +57,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - **BREAKING**: Reorganized `helios.engine` into distinct submodules: `core`, `ecs`, `runtime`, `modules`, `mechanics`, `tooling`
 - **BREAKING**: Systems are now registered with `GameLoop` phases/passes instead of `GameWorld`
-- **BREAKING**: `GameWorld` no longer manages System instances — use `GameLoop::phase().addPass().addSystem<T>()`
+- **BREAKING**: `GameWorld` no longer manages System instances - use `GameLoop::phase().addPass().addSystem<T>()`
 - **BREAKING**: Spawn infrastructure moved from `mechanics/spawn` to `runtime/spawn`
 - **BREAKING**: Removed `GameObjectFactory`, `GameObjectPoolFacade`, `PoolRequestHandler`, `PoolRequestHandlerRegistry`
 - Moved ECS base classes from `helios.engine.game` to `helios.engine.ecs`
@@ -95,7 +95,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `spaceship_shooting` demo showcasing twin-stick shooter mechanics
 
 ### Changed
-- **BREAKING**: `SceneNodeComponent::setSize()` removed — use `ScaleStateComponent` instead
+- **BREAKING**: `SceneNodeComponent::setSize()` removed - use `ScaleStateComponent` instead
 - **BREAKING**: `GameWorld` constructor no longer requires `Scene*` parameter
 - **BREAKING**: `Move2DComponent::position()` removed (transforms managed by `ComposeTransformComponent`)
 - **BREAKING**: `Move2DComponent::rotationAngle()` renamed to `currentRotationAngle()`

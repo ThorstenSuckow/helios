@@ -149,7 +149,7 @@ moon->rotate(moonRotation);
 
 ## See Also
 
-- [Component System](component-system.md) — ECS architecture with SceneNodeComponent
-- [Conventions](conventions.md) — Coordinate systems and matrix storage
-- [Spawn System](spawn-system.md) — Entity lifecycle with pooling
+- [Component System](component-system.md) - ECS architecture with SceneNodeComponent
+- [Conventions](conventions.md) - Coordinate systems and matrix storage
+- [Spawn System](spawn-system.md) - Entity lifecycle with pooling
 

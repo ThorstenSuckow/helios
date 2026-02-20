@@ -8,11 +8,11 @@ The `gameloop` module provides the core infrastructure for managing the game upd
 
 The game loop follows a three-phase architecture:
 
-**Pre Phase** — Processes input and generates commands. Systems in this phase read player input and enqueue commands into the CommandBuffer.
+**Pre Phase** - Processes input and generates commands. Systems in this phase read player input and enqueue commands into the CommandBuffer.
 
-**Main Phase** — Executes core gameplay simulation. This includes physics, AI, game logic, and collision detection systems.
+**Main Phase** - Executes core gameplay simulation. This includes physics, AI, game logic, and collision detection systems.
 
-**Post Phase** — Handles cleanup and synchronization. Systems in this phase synchronize the gameplay state with the scene graph and clear dirty flags.
+**Post Phase** - Handles cleanup and synchronization. Systems in this phase synchronize the gameplay state with the scene graph and clear dirty flags.
 
 Each phase contains one or more passes. A pass groups related systems and can optionally define a commit point for event synchronization within the phase.
 
@@ -27,8 +27,8 @@ Commands can be enqueued into the CommandBuffer during any phase, not just the P
 **Pass** contains a registry of systems that execute sequentially. Passes support commit points to synchronize pass-level events before the next pass begins.
 
 **CommitPoint** is a flag enum that specifies which synchronization actions occur at the end of a pass. Available flags include:
-- `PassEvents` — Synchronizes pass-level events for the next pass.
-- `FlushCommands` — Executes pending commands from the CommandBuffer.
+- `PassEvents` - Synchronizes pass-level events for the next pass.
+- `FlushCommands` - Executes pending commands from the CommandBuffer.
 - `FlushManagers` — Processes manager requests (e.g., spawning from pools).
 - `Structural` — Combines all three flags for a full structural commit.
 

@@ -185,9 +185,9 @@ The sparse array grows to accommodate the maximum EntityId used. For application
 
 ## Related Modules
 
-- `helios.engine.core.data.EntityId` — Entity identifier type
-- `helios.engine.core.data.EntityTombstone` — Sentinel value for empty slots
-- `helios.engine.core.data.EntityHandle` — Versioned entity reference
+- `helios.engine.core.data.EntityId` - Entity identifier type
+- `helios.engine.core.data.EntityTombstone` - Sentinel value for empty slots
+- `helios.engine.core.data.EntityHandle` - Versioned entity reference
 
 ## See Also
 

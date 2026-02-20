@@ -190,7 +190,7 @@ spawns.pool(GameObjectPoolId{"enemies"}, enemyPrefab, 50)
     .commit();
 ```
 
-This registers the pool with `GameObjectPoolManager`, the profile with `SpawnManager`, and creates a `DefaultSpawnScheduler` — all in one fluent call.
+This registers the pool with `GameObjectPoolManager`, the profile with `SpawnManager`, and creates a `DefaultSpawnScheduler` - all in one fluent call.
 
 ### Manual Integration
 

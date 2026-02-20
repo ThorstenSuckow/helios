@@ -24,12 +24,12 @@ export namespace helios::engine::builder::spawnSystem {
      *
      * ```cpp
      * SpawnSystemFactory::configure(poolManager, spawnManager)
-     *     .pool(ProjectilePoolId, projectilePrefab, 50)
+     *     .pool(ProjectilePoolId, ProjectilePrefabId, 50)
      *         .profile(ProjectileProfileId)
      *             .emitterPlacement()
      *             .done()
      *         .commit()
-     *     .pool(EnemyPoolId, enemyPrefab, 200)
+     *     .pool(EnemyPoolId, EnemyPrefabId, 200)
      *         .profile(EnemyProfileId)
      *             .randomPlacement()
      *             .scheduledBy(EnemyRuleId)

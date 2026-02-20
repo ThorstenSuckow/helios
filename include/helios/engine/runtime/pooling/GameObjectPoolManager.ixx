@@ -6,6 +6,7 @@ module;
 
 #include <cassert>
 #include <memory>
+#include <optional>
 #include <stdexcept>
 #include <unordered_map>
 #include <optional>
@@ -23,6 +24,7 @@ import helios.engine.runtime.pooling.GameObjectPool;
 import helios.engine.runtime.pooling.GameObjectPoolRegistry;
 
 import helios.engine.runtime.pooling.GameObjectPoolConfig;
+import helios.engine.runtime.pooling.components.PrefabIdComponent;
 
 import helios.engine.ecs.EntityHandle;
 import helios.core.types;
@@ -304,7 +306,14 @@ export namespace helios::engine::runtime::pooling {
                     poolConfig->amount);
 
                 pools_.addPool(gameObjectPoolId, std::move(pool));
-                fillPool(gameObjectPoolId, poolConfig->prefab);
+
+                for (auto [entity, pic] : gameWorld.view<helios::engine::runtime::pooling::components::PrefabIdComponent>().whereEnabled()) {
+                    if (pic->prefabId() == poolConfig->prefabId) {
+                        fillPool(gameObjectPoolId, entity);
+                        break;
+                    }
+                }
+
             }
 
         };

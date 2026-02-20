@@ -1,6 +1,6 @@
 /**
-* @file PrefabId.ixx
- * @brief Strongly-typed identifier for UI menus.
+ * @file PrefabId.ixx
+ * @brief Strongly-typed identifier for prefab templates.
  */
 module;
 

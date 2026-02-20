@@ -4,6 +4,8 @@
  */
 export module helios.engine.runtime.pooling;
 
+export import helios.engine.runtime.pooling.components;
+
 export import helios.engine.runtime.pooling.GameObjectPool;
 export import helios.engine.runtime.pooling.GameObjectPoolConfig;
 export import helios.engine.runtime.pooling.GameObjectPoolManager;

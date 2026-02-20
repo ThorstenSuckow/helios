@@ -106,7 +106,7 @@ sb.cyclicScheduler(
 
 ## Design Decisions
 
-- **ID-centric**: Pool ID is the root of all related config — no mismatched IDs possible
+- **ID-centric**: Pool ID is the root of all related config - no mismatched IDs possible
 - **No GameLoop dependency**: Dispatcher registration is the caller's responsibility
 - **commit() vs commitCyclic\<N\>()**: `commit()` creates per-profile DefaultSpawnSchedulers; `commitCyclic<N>()` bundles all rules into a single CyclicSpawnScheduler
 - **commitProfilesOnly()**: Registers pool and profiles without schedulers, enabling separate scheduling via `SchedulerBuilder`
@@ -115,9 +115,9 @@ sb.cyclicScheduler(
 
 ## See Also
 
-- [GameObjectFactory](../gameObject/README.md) — analogous builder for GameObjects
-- [SpawnManager](../../runtime/spawn/README.md) — processes spawn/despawn commands
-- [GameObjectPoolManager](../../runtime/pooling/README.md) — manages pre-allocated pools
+- [GameObjectFactory](../gameObject/README.md) - analogous builder for GameObjects
+- [SpawnManager](../../runtime/spawn/README.md) - processes spawn/despawn commands
+- [GameObjectPoolManager](../../runtime/pooling/README.md) - manages pre-allocated pools
 
 
 

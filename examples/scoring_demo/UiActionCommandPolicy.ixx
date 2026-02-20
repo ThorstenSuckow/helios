@@ -1,3 +1,7 @@
+/**
+ * @file UiActionCommandPolicy.ixx
+ * @brief UI action command policy registration for the scoring demo.
+ */
 module;
 
 #include <memory>
@@ -5,33 +9,18 @@ module;
 export module helios.examples.scoring.UiActionCommandPolicy;
 
 import helios;
-import helios.ext;
-
-
-import helios.examples.scoring.IdConfig;
-import helios.examples.scoring.ArenaConfig;
-import helios.examples.scoring.CollisionId;
 
 export namespace helios::examples::scoring {
 
-    using namespace helios::engine::runtime::world;
-    using namespace helios::engine::builder::gameObject;
-    using namespace helios::engine::ecs;
-    using namespace helios::ext::opengl::rendering::shader;
-    using namespace helios::ext::opengl::rendering;
-    using namespace helios::ext::opengl;
-    using namespace helios::scene;
-    using namespace helios::rendering;
-
-    class UiActionCommandPolicy {
-
-
-    public:
-
-        static void applyPolicies(helios::engine::modules::ui::UiActionCommandManager& uiActionCommandManager) {
-
-
-            uiActionCommandManager.addPolicy(
+    /**
+     * @brief Registers UI action command policies for menu interactions.
+     *
+     * @param uiActionCommandManager The manager to register policies with.
+     */
+    inline void applyUiActionCommandPolicies(
+        helios::engine::modules::ui::UiActionCommandManager& uiActionCommandManager
+    ) {
+        uiActionCommandManager.addPolicy(
                 helios::engine::core::data::ActionId{"continueGame"},
                 [](
                     helios::engine::runtime::world::UpdateContext& updateContext,
@@ -95,15 +84,7 @@ export namespace helios::examples::scoring {
                         );
                     }
                 );
-
-
-        }
-
-
-
-    };
-
-
-
+    }
 
 }
+

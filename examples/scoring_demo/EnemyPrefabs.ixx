@@ -1,3 +1,7 @@
+/**
+ * @file EnemyPrefabs.ixx
+ * @brief Enemy prefab creation for the scoring demo.
+ */
 module;
 
 #include <memory>
@@ -24,23 +28,27 @@ import helios.util.Colors;
 
 import helios.rendering;
 
-import helios.engine.runtime.world.GameWorld;
 import helios.engine.builder.gameObject.GameObjectFactory;
 
 export namespace helios::examples::scoring {
 
-    using namespace helios::engine::runtime::world;
-    using namespace helios::engine::builder::gameObject;
-    using namespace helios::engine::ecs;
-    using namespace helios::ext::opengl::rendering::shader;
+    /**
+     * @brief Creates and registers all enemy prefab GameObjects.
+     *
+     * @param gameWorld The game world to create prefabs in.
+     * @param playerGameObject The player entity (used for AI targeting and speed reference).
+     * @param defaultShader The shared mesh shader.
+     */
+    inline void createEnemyPrefabs(
+        helios::engine::runtime::world::GameWorld& gameWorld,
+        helios::engine::ecs::GameObject playerGameObject,
+        std::shared_ptr<helios::ext::opengl::rendering::shader::OpenGLShader> defaultShader
+    ) {
+        using namespace helios::engine::runtime::world;
+        using namespace helios::engine::builder::gameObject;
+        using namespace helios::engine::ecs;
+        using namespace helios::ext::opengl::rendering::shader;
 
-    class EnemyPrefabs {
-
-
-    public:
-
-        static void make(helios::engine::runtime::world::GameWorld& gameWorld, GameObject playerGameObject, std::shared_ptr<OpenGLShader> defaultShader) {
-            
             auto level = gameWorld.level();
              // purple enemy
             auto purpleEnemyPrefab = GameObjectFactory::instance()
@@ -241,16 +249,6 @@ export namespace helios::examples::scoring {
                 })
                 .make();
 
-                    
-                    
-                
-        }
-
-
-
-    };
-
-
-
+    }
 
 }

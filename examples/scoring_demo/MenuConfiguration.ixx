@@ -1,3 +1,7 @@
+/**
+ * @file MenuConfiguration.ixx
+ * @brief Menu and UI element configuration for the scoring demo.
+ */
 module;
 
 #include <memory>
@@ -6,34 +10,40 @@ export module helios.examples.scoring.MenuConfiguration;
 
 import helios;
 import helios.ext;
-
-
 import helios.examples.scoring.IdConfig;
-import helios.examples.scoring.ArenaConfig;
 import helios.examples.scoring.CollisionId;
 
 export namespace helios::examples::scoring {
 
-    using namespace helios::engine::runtime::world;
-    using namespace helios::engine::builder::gameObject;
-    using namespace helios::engine::ecs;
-    using namespace helios::ext::opengl::rendering::shader;
-    using namespace helios::ext::opengl::rendering;
-    using namespace helios::ext::opengl;
-    using namespace helios::scene;
-    using namespace helios::rendering;
+    /**
+     * @brief Creates all menu, title, HUD, and game-over UI elements.
+     *
+     * @param gameWorld The game world to create UI GameObjects in.
+     * @param renderingDevice The rendering device for font loading.
+     * @param glyphShader The shared text shader.
+     * @param defaultShader The shared mesh shader.
+     * @param titleScene Scene for title screen elements.
+     * @param menuScene Scene for pause menu elements.
+     * @param hudScene Scene for HUD elements.
+     */
+    inline void configureMenus(
+        helios::engine::runtime::world::GameWorld& gameWorld,
+        helios::rendering::RenderingDevice& renderingDevice,
+        std::shared_ptr<helios::ext::opengl::rendering::shader::OpenGLShader> glyphShader,
+        std::shared_ptr<helios::ext::opengl::rendering::shader::OpenGLShader> defaultShader,
+        helios::scene::Scene& titleScene,
+        helios::scene::Scene& menuScene,
+        helios::scene::Scene& hudScene
+    ) {
+        using namespace helios::engine::runtime::world;
+        using namespace helios::engine::builder::gameObject;
+        using namespace helios::engine::ecs;
+        using namespace helios::ext::opengl::rendering::shader;
+        using namespace helios::ext::opengl::rendering;
+        using namespace helios::ext::opengl;
+        using namespace helios::scene;
+        using namespace helios::rendering;
 
-    class MenuConfiguration {
-
-
-    public:
-
-        static void make(
-            helios::engine::runtime::world::GameWorld& gameWorld,
-            RenderingDevice& renderingDevice,
-            std::shared_ptr<OpenGLShader> glyphShader,
-            std::shared_ptr<OpenGLShader> defaultShader,
-            Scene& titleScene, Scene& menuScene, Scene& hudScene) {
 
             auto* level = gameWorld.level();
 
@@ -463,13 +473,7 @@ export namespace helios::examples::scoring {
             titleText.setActive(true);
             pressStartText.setActive(true);
 
-        }
-
-
-
-    };
-
-
+    }
 
 
 }

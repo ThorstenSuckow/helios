@@ -1,3 +1,7 @@
+/**
+ * @file SpawnConfiguration.ixx
+ * @brief Spawn system configuration for the scoring demo.
+ */
 module;
 
 #include <memory>
@@ -10,20 +14,24 @@ import helios.examples.scoring.IdConfig;
 
 export namespace helios::examples::scoring {
 
-    using namespace helios::engine::builder::spawnSystem;
-    using namespace helios::engine::runtime::pooling;
-    using namespace helios::engine::runtime::spawn;
-    using namespace helios::engine::core::data;
+    /**
+     * @brief Configures the spawn system with all pool, profile, and scheduler registrations.
+     *
+     * @param poolManager The pool manager for pool registration.
+     * @param spawnManager The spawn manager for profile and scheduler registration.
+     */
+    inline void configureSpawns(
+        helios::engine::runtime::pooling::GameObjectPoolManager& poolManager,
+        helios::engine::runtime::spawn::SpawnManager& spawnManager
+    ) {
+        using namespace helios::engine::builder::spawnSystem;
+        using namespace helios::engine::runtime::pooling;
+        using namespace helios::engine::runtime::spawn;
+        using namespace helios::engine::core::data;
 
+        constexpr size_t OBJECT_AMOUNT_X = ArenaConfig::GRID_X * ArenaConfig::CELL_LENGTH / ArenaConfig::SPACESHIP_LENGTH;
+        constexpr size_t OBJECT_AMOUNT_Y = ArenaConfig::GRID_Y * ArenaConfig::CELL_LENGTH / ArenaConfig::SPACESHIP_LENGTH;
 
-    constexpr size_t OBJECT_AMOUNT_X = ArenaConfig::GRID_X * ArenaConfig::CELL_LENGTH / ArenaConfig::SPACESHIP_LENGTH;
-    constexpr size_t OBJECT_AMOUNT_Y = ArenaConfig::GRID_Y * ArenaConfig::CELL_LENGTH / ArenaConfig::SPACESHIP_LENGTH;
-
-    class SpawnConfiguration {
-
-
-    public:
-        static void make(GameObjectPoolManager& poolManager, SpawnManager& spawnManager) {
         SpawnSystemFactory::configure(poolManager, spawnManager)
             // Projectile pool: emitter-relative placement, no scheduling
             .pool(IdConfig::ProjectilePoolId, IdConfig::ProjectilePrefab, 50)
@@ -103,8 +111,7 @@ export namespace helios::examples::scoring {
                         .done()
                     .done()
                 .commitCyclic<4>();
-            }
+    }
 
-        };
 
 }

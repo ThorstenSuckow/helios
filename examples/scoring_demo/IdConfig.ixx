@@ -1,3 +1,7 @@
+/**
+ * @file IdConfig.ixx
+ * @brief Centralized ID constants for the scoring demo.
+ */
 module;
 
 

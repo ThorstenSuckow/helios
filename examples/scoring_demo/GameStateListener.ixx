@@ -1,3 +1,7 @@
+/**
+ * @file GameStateListener.ixx
+ * @brief Game state listener installation for the scoring demo.
+ */
 module;
 
 #include <memory>
@@ -5,32 +9,18 @@ module;
 export module helios.examples.scoring.GameStateListener;
 
 import helios;
-import helios.ext;
-
-
-import helios.examples.scoring.IdConfig;
-import helios.examples.scoring.ArenaConfig;
-import helios.examples.scoring.CollisionId;
 
 export namespace helios::examples::scoring {
 
-    using namespace helios::engine::runtime::world;
-    using namespace helios::engine::builder::gameObject;
-    using namespace helios::engine::ecs;
-    using namespace helios::ext::opengl::rendering::shader;
-    using namespace helios::ext::opengl::rendering;
-    using namespace helios::ext::opengl;
-    using namespace helios::scene;
-    using namespace helios::rendering;
-
-    class GameStateListener {
-
-
-    public:
-
-        static void installListeners(helios::engine::state::StateManager<helios::engine::mechanics::gamestate::types::GameState>& gameStateManager) {
-
-            gameStateManager.addStateListener(
+    /**
+     * @brief Installs game state transition listeners.
+     *
+     * @param gameStateManager The game state manager to register listeners with.
+     */
+    inline void installGameStateListeners(
+        helios::engine::state::StateManager<helios::engine::mechanics::gamestate::types::GameState>& gameStateManager
+    ) {
+        gameStateManager.addStateListener(
             std::make_unique<helios::engine::state::listeners::LambdaStateListener<helios::engine::mechanics::gamestate::types::GameState>>(
             [](helios::engine::runtime::world::UpdateContext& updateContext,
                     const helios::engine::mechanics::gamestate::types::GameState from)->void {
@@ -84,15 +74,6 @@ export namespace helios::examples::scoring {
                  const helios::engine::mechanics::gamestate::types::GameState to)->void {
             })
         );
-
-
-        }
-
-
-
-    };
-
-
-
+    }
 
 }

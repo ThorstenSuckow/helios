@@ -8,20 +8,16 @@
 #include <iostream>
 #include <numbers>
 
-
 // ============================================================================
 // Module Imports
 // ============================================================================
-
 import helios;
 import helios.ext;
 import helios.examples.scoring;
 
-
 // ============================================================================
 // Using Declarations
 // ============================================================================
-
 using namespace helios::ext::glfw::app;
 using namespace helios::rendering;
 using namespace helios::rendering::mesh;
@@ -47,11 +43,10 @@ using namespace helios::engine::state;
 
 int main() {
 
-
     using namespace helios::examples::scoring;
 
     // ========================================
-    // Constants
+    // 1. Constants
     // ========================================
     constexpr float SCREEN_WIDTH  = 1980;
     constexpr float SCREEN_HEIGHT = 1080;
@@ -60,10 +55,8 @@ int main() {
     constexpr float ASPECT_RATIO_DENOM = 9.0f;
 
     // ========================================
-    // 1. Application and Window Setup
+    // 2. Application and Window Setup
     // ========================================
-
-    // bootstrap the components
     helios::engine::bootstrap::registerAllComponents();
 
     const auto app = GLFWFactory::makeOpenGLApp(
@@ -80,35 +73,27 @@ int main() {
                   .setClearColor(vec4f(0.051f, 0.051f, 0.153f, 1.0f));
     win->addViewport(mainViewport);
 
-    // Get the InputManager for handling keyboard input
     helios::input::InputManager& inputManager = app->inputManager();
-    // register the gamepads
     unsigned int mask = inputManager.registerGamepads(Gamepad::ONE);
 
     const auto basicStringFileReader = BasicStringFileReader();
 
-    // ui related config
-
-    // +----------------------------
-    // | Title
-    // +----------------------------
+    // ----------------------------------------
+    // 2.1 Title Viewport
+    // ----------------------------------------
     auto titleScene = std::make_unique<helios::scene::Scene>(
        std::make_unique<helios::scene::CullNoneStrategy>(),
        helios::engine::core::data::SceneId{"titleScene"}
     );
 
-    // Create a viewport for UI rendering.
     auto titleViewport = std::make_shared<helios::rendering::Viewport>(
-        // move the viewport to the upper right
         0.0f, 0.0f, 1.0f, 1.0f, helios::engine::core::data::ViewportId{"titleViewport"}
     );
     sceneToViewportMap.add(titleScene.get(), titleViewport.get());
 
     titleViewport->setClearFlags(std::to_underlying(helios::rendering::ClearFlags::Depth));
 
-
-    // Configure orthographic camera for 2D text rendering.
-    // Origin (0,0) is at the bottom-left corner of the screen.
+    // Orthographic camera for 2D title rendering (origin at bottom-left).
     auto titleCamera = std::make_unique<helios::scene::Camera>();
     auto titleCameraSceneNode = std::make_unique<helios::scene::CameraSceneNode>(std::move(titleCamera));
     auto* titleCameraSceneNode_ptr = titleCameraSceneNode.get();
@@ -123,31 +108,26 @@ int main() {
         helios::math::vec3f(0.0f, 1.0f, 0.0f)
     );
 
-    // add camera first, then add the viewport - the camera needs the render target's size,
-    // so the proper order is important.
+    // Camera must be attached before the viewport is added to the window.
     win->addViewport(titleViewport);
     std::ignore = titleScene->addNode(std::move(titleCameraSceneNode));
 
-    // +----------------------------
-    // | HUD
-    // +----------------------------
+    // ----------------------------------------
+    // 2.2 HUD Viewport
+    // ----------------------------------------
     auto hudScene = std::make_unique<helios::scene::Scene>(
        std::make_unique<helios::scene::CullNoneStrategy>(),
        helios::engine::core::data::SceneId{"hudScene"}
     );
 
-    // Create a viewport for UI rendering.
     auto hudViewport = std::make_shared<helios::rendering::Viewport>(
-        // move the viewport to the upper right
         0.0f, 0.0f, 1.0f, 1.0f, helios::engine::core::data::ViewportId{"hudViewport"}
     );
     sceneToViewportMap.add(hudScene.get(), hudViewport.get());
 
     hudViewport->setClearFlags(std::to_underlying(helios::rendering::ClearFlags::Depth));
 
-
-    // Configure orthographic camera for 2D text rendering.
-    // Origin (0,0) is at the bottom-left corner of the screen.
+    // Orthographic camera for HUD rendering (origin at bottom-left).
     auto hudCamera = std::make_unique<helios::scene::Camera>();
     auto hudCameraSceneNode = std::make_unique<helios::scene::CameraSceneNode>(std::move(hudCamera));
     auto* hudCameraSceneNode_ptr = hudCameraSceneNode.get();
@@ -162,21 +142,17 @@ int main() {
         helios::math::vec3f(0.0f, 1.0f, 0.0f)
     );
 
-    // add camera first, then add the viewport - the camera needs the render target's size,
-    // so the proper order is important.
     win->addViewport(hudViewport);
     std::ignore = hudScene->addNode(std::move(hudCameraSceneNode));
 
-
-    // +----------------------------
-    // | MENU
-    // +----------------------------
+    // ----------------------------------------
+    // 2.3 Menu Viewport
+    // ----------------------------------------
     auto menuScene = std::make_unique<helios::scene::Scene>(
        std::make_unique<helios::scene::CullNoneStrategy>(),
        helios::engine::core::data::SceneId{"menuScene"}
     );
 
-    // Create a viewport for UI rendering.
     auto menuViewport = std::make_shared<helios::rendering::Viewport>(
         0.0f, 0.0f, 1.0f, 1.0f, helios::engine::core::data::ViewportId{"menuViewport"}
     );
@@ -184,9 +160,7 @@ int main() {
 
     menuViewport->setClearFlags(std::to_underlying(helios::rendering::ClearFlags::Depth));
 
-
-    // Configure orthographic camera for 2D text rendering.
-    // Origin (0,0) is at the bottom-left corner of the screen.
+    // Orthographic camera for menu rendering (origin at bottom-left).
     auto menuCamera = std::make_unique<helios::scene::Camera>();
     auto menuCameraSceneNode = std::make_unique<helios::scene::CameraSceneNode>(std::move(menuCamera));
     auto* menuCameraSceneNode_ptr = menuCameraSceneNode.get();
@@ -201,24 +175,17 @@ int main() {
         helios::math::vec3f(0.0f, 1.0f, 0.0f)
     );
 
-    // add camera first, then add the viewport - the camera needs the render target's size,
-    // so the proper order is important.
     win->addViewport(menuViewport);
     std::ignore = menuScene->addNode(std::move(menuCameraSceneNode));
 
-
-
-    // ========================================
-    // 1.2. ImGui & Tooling Setup
-    // ========================================
-    // Get native GLFW window
-    // GLFWwindow* nativeWindow = win->nativeHandle();
+    // ----------------------------------------
+    // 2.4 ImGui and Debug Tooling
+    // ----------------------------------------
     auto imguiBackend = helios::ext::imgui::ImGuiGlfwOpenGLBackend(win->nativeHandle());
     auto imguiOverlay = helios::ext::imgui::ImGuiOverlay::forBackend(&imguiBackend);
     auto fpsMetrics = helios::engine::tooling::FpsMetrics();
     auto stopwatch = std::make_unique<helios::util::time::Stopwatch>();
     auto framePacer = helios::engine::tooling::FramePacer(std::move(stopwatch));
-    // set target framerate
     framePacer.setTargetFps(0.0f);
     helios::engine::tooling::FrameStats frameStats{};
     auto menu = new helios::ext::imgui::widgets::MainMenuWidget();
@@ -232,22 +199,21 @@ int main() {
     imguiOverlay.addWidget(logWidget);
     imguiOverlay.addWidget(cameraWidget);
 
-    // ========================================
-    // 1.3 Logger Configuration
-    // ========================================
+    // ----------------------------------------
+    // 2.5 Logger Configuration
+    // ----------------------------------------
     helios::util::log::LogManager::getInstance().enableLogging(true);
     auto imguiLogSink = std::make_shared<helios::ext::imgui::ImGuiLogSink>(logWidget);
     helios::util::log::LogManager::getInstance().enableSink(imguiLogSink);
 
     // ========================================
-    // 2. Shader Creation
+    // 3. Shader Creation
     // ========================================
     auto defaultShader =
             std::make_shared<OpenGLShader>(
     "./resources/cube.vert",
     "./resources/cube.frag", basicStringFileReader);
 
-    // Map the ModelMatrix uniform to location 1 in the shader
     auto uniformLocationMap = std::make_unique<OpenGLUniformLocationMap>();
     bool mapping = uniformLocationMap->set(UniformSemantics::ModelMatrix, 1);
     mapping = uniformLocationMap->set(UniformSemantics::ViewMatrix, 2);
@@ -256,10 +222,9 @@ int main() {
 
     defaultShader->setUniformLocationMap(std::move(uniformLocationMap));
 
-    // ========================================================================
-    // 2.1. Text Shader Setup
-    // ========================================================================
-    // Configure uniform locations for the text shader.
+    // ----------------------------------------
+    // 3.1 Text Shader
+    // ----------------------------------------
     auto glyphUniformLocationMap = std::make_unique<
         helios::ext::opengl::rendering::shader::OpenGLUniformLocationMap
     >();
@@ -269,7 +234,6 @@ int main() {
     glyphUniformLocationMap->set(helios::rendering::shader::UniformSemantics::ModelMatrix, 8);
     glyphUniformLocationMap->set(helios::rendering::shader::UniformSemantics::ViewMatrix, 9);
 
-    // Create the text shader from vertex and fragment shader files.
     auto glyphShader = std::make_shared<helios::ext::opengl::rendering::shader::OpenGLShader>(
         "resources/font_shader.vert",
         "resources/font_shader.frag",
@@ -278,16 +242,13 @@ int main() {
     glyphShader->setUniformLocationMap(std::move(glyphUniformLocationMap));
 
     // ========================================
-    // 3. Scene Graph Setup
+    // 4. Scene Graph and Camera Setup
     // ========================================
     auto frustumCullingStrategy = std::make_unique<CullNoneStrategy>();
     auto scene = std::make_unique<helios::scene::Scene>(
         std::move(frustumCullingStrategy), helios::engine::core::data::SceneId{"mainScene"});
     sceneToViewportMap.add(scene.get(), mainViewport.get());
 
-    // ========================================
-    // 4. Camera Setup
-    // ========================================
     auto mainViewportCam = std::make_unique<helios::scene::Camera>();
     auto cameraSceneNode = std::make_unique<helios::scene::CameraSceneNode>(std::move(mainViewportCam));
     auto cameraSceneNode_ptr = cameraSceneNode.get();
@@ -297,7 +258,7 @@ int main() {
     );
     mainViewport->setCameraSceneNode(cameraSceneNode_ptr);
     cameraSceneNode_ptr->setTranslation(
-        helios::math::vec3f(0.0f, 0.0f, -100.0f)//-(GRID_Y*CELL_LENGTH / 2.0f)/tan(FOVY/2))
+        helios::math::vec3f(0.0f, 0.0f, -100.0f)
     );
     cameraSceneNode_ptr->camera().setPerspective(
         FOVY,
@@ -314,7 +275,6 @@ int main() {
     // ========================================
     // 5. GameWorld and Level Setup
     // ========================================
-
     helios::engine::runtime::gameloop::GameLoop gameLoop{};
     helios::engine::runtime::world::GameWorld gameWorld{};
 
@@ -332,20 +292,17 @@ int main() {
     );
     gameWorld.setLevel(std::move(level));
 
-    // ========================================================================
-    // 5.5 Font Loading
-    // ========================================================================
-    // Load the font via the rendering device's font resource provider.
-
-    MenuConfiguration::make(gameWorld, app->renderingDevice(), glyphShader, defaultShader, *titleScene, *menuScene, *hudScene);
+    // ----------------------------------------
+    // 5.1 Menu and UI Configuration
+    // ----------------------------------------
+    configureMenus(gameWorld, app->renderingDevice(), glyphShader, defaultShader, *titleScene, *menuScene, *hudScene);
 
 
     // ========================================
-    // 6. GameObject Prefabs
+    // 6. GameObjects
     // ========================================
 
-
-    // THE GRID
+    // Grid
     auto theGrid = helios::engine::builder::gameObject::GameObjectFactory::instance()
         .gameObject(gameWorld)
         .withRendering([&defaultShader, &root = *levelPtr->rootNode()](auto& rnb) {
@@ -367,9 +324,7 @@ int main() {
         })
         .make();
 
-
-    
-    // ship game object
+    // Player ship
     auto shipGameObject = helios::engine::builder::gameObject::GameObjectFactory::instance()
         .gameObject(gameWorld)
         .asPlayerEntity()
@@ -403,7 +358,7 @@ int main() {
         })
         .withCombat([](auto& ccb) {
             ccb.weapon()
-               .fireRate(5.0f);//15.0f);//5.0f;
+               .fireRate(5.0f);
         })
         .withScoring([](auto& sb) {
             sb.scorePool()
@@ -423,7 +378,7 @@ int main() {
         })
         .make();
 
-    // GIZMO Left stick
+    // Debug gizmos (input visualization)
     auto leftStickGizmo = helios::engine::builder::gameObject::GameObjectFactory::instance()
         .gameObject(gameWorld)
         .withRendering([&defaultShader, shipGameObject](auto& rnb) {
@@ -471,18 +426,13 @@ int main() {
         })
         .make();
 
-
-    EnemyPrefabs::make(gameWorld, shipGameObject, defaultShader);
-
-
-    using namespace helios::engine::runtime::spawn;
+    // Enemy prefabs
+    createEnemyPrefabs(gameWorld, shipGameObject, defaultShader);
 
     // ========================================
-    // 7. Spawn System Configuration
+    // 7. Manager Registration
     // ========================================
 
-
-    // register the managers.
     auto& poolManager      = gameWorld.addManager<helios::engine::runtime::pooling::GameObjectPoolManager>();
     auto& scorePoolManager = gameWorld.addManager<helios::engine::mechanics::scoring::ScorePoolManager>();
     auto& spawnManager     = gameWorld.addManager<helios::engine::runtime::spawn::SpawnManager>();
@@ -492,18 +442,15 @@ int main() {
         helios::engine::mechanics::match::rules::DefaultMatchStateTransitionRules::rules());
     auto& uiActionCommandManager = gameWorld.addManager<helios::engine::modules::ui::UiActionCommandManager>();
 
-    MatchStateListener::installListeners(matchStateManager);
-    GameStateListener::installListeners(gameStateManager);
-    UiActionCommandPolicy::applyPolicies(uiActionCommandManager);
-
+    // State listeners and UI action policies
+    installMatchStateListeners(matchStateManager);
+    installGameStateListeners(gameStateManager);
+    applyUiActionCommandPolicies(uiActionCommandManager);
 
     scorePoolManager.addScorePool(helios::engine::core::data::ScorePoolId{"playerOneScorePool"});
 
-    // +------------------------------------------------
-    // | Spawn System via SpawnSystemFactory
-    // +------------------------------------------------
-    helios::examples::scoring::SpawnConfiguration::make(poolManager, spawnManager);
-
+    // Spawn system
+    configureSpawns(poolManager, spawnManager);
 
 
     // ========================================
@@ -529,8 +476,9 @@ int main() {
     using namespace helios::engine::mechanics::match::types;
     using namespace helios::engine::core::data;
 
-
-
+    // ----------------------------------------
+    // 8.1 State-to-ID Mappings
+    // ----------------------------------------
     auto stateToViewportMap = helios::engine::state::StateToIdMapPair<
         GameState, MatchState, ViewportId
     >();
@@ -549,20 +497,16 @@ int main() {
                   .add(GameState::Running, MatchState::GameOver, MenuId{"GameOverMenu"});
     stateToMenuMap.freeze();
 
-
     // ========================================
     // 9. GameLoop Phase Configuration
     // ========================================
     //
-    //                   +----------+
-    //                   |  FRAME N |
-    //                   +----------+
+    //              +----------+
+    //              |  FRAME N |
+    //              +----------+
     //
-    //           PRE    -    MAIN   -    POST
-    //         UPDATE      RESOLVE      CLEANUP
-    // +----------------------------------------------
-    // | PRE PHASE: Input, Spawning, Movement
-    // +----------------------------------------------
+    //      PRE    -    MAIN   -    POST
+    //    UPDATE      RESOLVE      CLEANUP
 
     auto Any = GameState::Any;
     auto Running = GameState::Running;
@@ -575,7 +519,9 @@ int main() {
     auto RunningOrPaused = GameState::Running |
                           GameState::Paused;
 
-
+    // ----------------------------------------
+    // 9.1 Pre Phase: Input, Spawning, Movement
+    // ----------------------------------------
     gameLoop.phase(helios::engine::runtime::gameloop::PhaseType::Pre)
             .addPass<GameState>(GameState::Any)
             .addSystem<helios::engine::mechanics::gamestate::systems::GameFlowSystem>()
@@ -607,10 +553,9 @@ int main() {
             .addSystem<helios::engine::modules::physics::motion::systems::SpinSystem>()
             .addSystem<helios::engine::modules::physics::motion::systems::Move2DSystem>();
 
-    // +----------------------------------------------
-    // | MAIN PHASE: Collision Detection and Response
-    // +----------------------------------------------
-    // +---------------------------------------------
+    // ----------------------------------------
+    // 9.2 Main Phase: Collision Detection and Response
+    // ----------------------------------------
     gameLoop.phase(helios::engine::runtime::gameloop::PhaseType::Main)
             .addPass(GameState::Any)
             .addSystem<helios::engine::ecs::systems::HierarchyPropagationSystem>()
@@ -632,9 +577,9 @@ int main() {
             .addSystem<helios::engine::mechanics::damage::systems::DamageOnCollisionSystem>()
             .addSystem<helios::engine::mechanics::health::systems::HealthUpdateSystem>();
 
-    // +----------------------------------------------
-    // | POST PHASE: Transform Composition and Cleanup
-    // +----------------------------------------------
+    // ----------------------------------------
+    // 9.3 Post Phase: UI, Transform, Rendering, Cleanup
+    // ----------------------------------------
     gameLoop.phase(helios::engine::runtime::gameloop::PhaseType::Post)
              .addPass<GameState>(Running | Paused)
              .addSystem<helios::engine::modules::ui::widgets::systems::MenuNavigationSystem>()
@@ -663,31 +608,18 @@ int main() {
              .addSystem<helios::engine::modules::physics::collision::systems::CollisionStateClearSystem>()
              .addSystem<helios::engine::mechanics::scoring::systems::ScoreObserverClearSystem>();
 
-
-
+    // ========================================
+    // 10. Initialization and Game Loop
+    // ========================================
     float DELTA_TIME = 0.0f;
-
-
-
-    // ========================================
-    // 10. Main Game Loop
-    // ========================================
 
     theGrid.setActive(true);
     std::ignore = scene->addNode(std::move(cameraSceneNode));
-
-    //std::ignore = shipGameObject.get<helios::engine::modules::scene::components::SceneNodeComponent>()->sceneNode()->addNode(std::move(cameraSceneNode));
-
 
     auto* leftStickGizmoNode = leftStickGizmo.get<helios::engine::modules::scene::components::SceneNodeComponent>()->sceneNode();
     auto* rightStickGizmoNode = rightStickGizmo.get<helios::engine::modules::scene::components::SceneNodeComponent>()->sceneNode();
     auto* shipDirectionGizmoNode = shipDirectionGizmo.get<helios::engine::modules::scene::components::SceneNodeComponent>()->sceneNode();
 
-
-
-
-    // warm up world!
-    // ENGINE INIT
     gameWorld.init();
     gameLoop.init(gameWorld);
 
@@ -701,13 +633,10 @@ int main() {
     while (!win->shouldClose()) {
         framePacer.beginFrame();
 
-        // ----------------------------------------
         // 10.1 Event and Input Processing
-        // ----------------------------------------
         app->eventManager().dispatchAll();
         inputManager.poll(0.0f);
 
-        // Check for ESC key to close the application
         if (inputManager.isKeyPressed(Key::ESC)) {
             std::cout << "Key Pressed [ESC] - Exiting..." << std::endl;
             win->setShouldClose(true);
@@ -721,19 +650,14 @@ int main() {
             tilde = false;
         }
 
-        // ----------------------------------------
         // 10.2 Game Logic Update
-        // ----------------------------------------
         const GamepadState& gamepadState = inputManager.gamepadState(Gamepad::ONE);
         const auto inputSnapshot = helios::input::InputSnapshot(gamepadState);
 
         const auto viewportSnapshots = win->viewportSnapshots();
         gameLoop.update(gameWorld, DELTA_TIME, inputSnapshot, viewportSnapshots);
 
-
-        // ----------------------------------------
-        // 10.3 Gizmo / Debug Visualization Update
-        // ----------------------------------------
+        // 10.3 Debug Gizmo Update
         const auto* mcLft = shipGameObject.get<helios::engine::modules::physics::motion::components::Move2DComponent>();
         if (mcLft) {
             leftStickGizmoNode->setScale((mcLft->direction() * mcLft->throttle()  * 4.0f).toVec3());
@@ -744,18 +668,12 @@ int main() {
             rightStickGizmoNode->setScale((mcRgt->direction() * mcRgt->frequency()  * 4.0f).toVec3());
         }
 
-
-        // ----------------------------------------
-        // 10.5 ImGui Overlay Rendering
-        // ----------------------------------------
+        // 10.4 ImGui Overlay
         if (showImgui) {
             imguiOverlay.render();
         }
 
-        // ----------------------------------------
-        // 10.6 Frame Synchronization
-        // ----------------------------------------
-        // swap time / idle time should be read out here
+        // 10.5 Frame Synchronization
         win->swapBuffers();
 
         frameStats = framePacer.sync();

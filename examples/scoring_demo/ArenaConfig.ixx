@@ -1,3 +1,7 @@
+/**
+ * @file ArenaConfig.ixx
+ * @brief Arena geometry constants for the scoring demo.
+ */
 module;
 
 

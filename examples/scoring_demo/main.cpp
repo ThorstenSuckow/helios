@@ -38,6 +38,7 @@ using namespace helios::ext::glfw::window;
 using namespace helios::util::io;
 using namespace helios::scene;
 using namespace helios::math;
+using namespace helios::engine::state;
 
 
 // ============================================================================
@@ -1584,6 +1585,7 @@ int main() {
     auto Running = GameState::Running;
     auto Paused = GameState::Paused;
     auto Title = GameState::Title;
+    auto Start = GameState::Start;
 
     auto RunningOrTitle = GameState::Running |
                           GameState::Title;
@@ -1593,26 +1595,30 @@ int main() {
 
     gameLoop.phase(helios::engine::runtime::gameloop::PhaseType::Pre)
             .addPass<GameState>(GameState::Any)
+            .addSystem<helios::engine::mechanics::gamestate::systems::GameFlowSystem>()
+            .addCommitPoint(helios::engine::runtime::gameloop::CommitPoint::Structural)
+
+            .addPass<GameState>(Running | Paused)
+            .addSystem<helios::engine::mechanics::match::systems::MatchFlowSystem>()
+            .addCommitPoint(helios::engine::runtime::gameloop::CommitPoint::Structural)
+
+            .addPass<GameState>(GameState::Any)
             .addSystem<helios::engine::mechanics::gamestate::systems::GameStateInputResponseSystem>()
             .addSystem<helios::engine::mechanics::scoring::systems::ScoreObserverSystem>()
             .addSystem<helios::engine::mechanics::input::systems::TwinStickInputSystem>(shipGameObject)
             .addCommitPoint(helios::engine::runtime::gameloop::CommitPoint::Structural)
 
-            .addPass<GameState>(Running | Paused)
-            .addSystem<helios::engine::modules::ui::widgets::systems::MenuDisplaySystem<GameState, MatchState>>(stateToMenuMap)
-            .addSystem<helios::engine::mechanics::match::systems::MatchFlowSystem>()
-            .addCommitPoint(helios::engine::runtime::gameloop::CommitPoint::PassEvents)
-
-            .addPass<GameState>(Running | Title)
+            .addPass<GameState>(Running | Start | Title)
             .addSystem<helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem>(spawnManager)
             .addSystem<helios::engine::mechanics::combat::systems::ProjectileSpawnSystem>(ProjectileSpawnSpawnProfileId)
             .addCommitPoint(helios::engine::runtime::gameloop::CommitPoint::Structural)
 
-            .addPass<GameState>(Running | Title | Paused)
+            .addPass<GameState>(Running | Start | Title | Paused)
+            .addSystem<helios::engine::modules::ui::widgets::systems::MenuDisplaySystem<GameState, MatchState>>(stateToMenuMap)
             .addSystem<helios::engine::modules::spatial::transform::systems::ScaleSystem>()
             .addCommitPoint(helios::engine::runtime::gameloop::CommitPoint::PassEvents)
 
-            .addPass<GameState>(Running | Title)
+            .addPass<GameState>(Running | Start | Title)
             .addSystem<helios::engine::modules::ai::systems::ChaseSystem>()
             .addSystem<helios::engine::modules::physics::motion::systems::SteeringSystem>()
             .addSystem<helios::engine::modules::physics::motion::systems::SpinSystem>()
@@ -1628,18 +1634,18 @@ int main() {
             .addSystem<helios::engine::modules::physics::collision::systems::BoundsUpdateSystem>()
             .addCommitPoint()
 
-            .addPass<GameState>(Running | Title)
+            .addPass<GameState>(Running | Start | Title)
             .addSystem<helios::engine::mechanics::bounds::systems::LevelBoundsBehaviorSystem>()
             .addSystem<helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem>(
                 levelPtr->bounds(), CELL_LENGTH/2.0f
              )
             .addCommitPoint()
 
-            .addPass<GameState>(Running | Title)
+            .addPass<GameState>(Running | Start |Title)
             .addSystem<helios::engine::modules::physics::collision::systems::CollisionStateResponseSystem>()
             .addCommitPoint(helios::engine::runtime::gameloop::CommitPoint::PassEvents)
 
-            .addPass<GameState>(Running | Title)
+            .addPass<GameState>(Running | Start | Title)
             .addSystem<helios::engine::mechanics::damage::systems::DamageOnCollisionSystem>()
             .addSystem<helios::engine::mechanics::health::systems::HealthUpdateSystem>();
 
@@ -1710,12 +1716,10 @@ int main() {
     bool showImgui = false;
     bool tilde = false;
 
-    gameLoop.commandBuffer().add<helios::engine::state::commands::StateCommand<GameState>>(
-        helios::engine::state::types::StateTransitionRequest<GameState>(
-            GameState::Undefined,
-            GameStateTransitionId::TitleRequested
-        )
+    gameWorld.session().setStateFrom<GameState>(
+        StateTransitionContext<GameState>(GameState::Undefined, GameState::Start, GameStateTransitionId::StartRequested)
     );
+
     while (!win->shouldClose()) {
         framePacer.beginFrame();
 
@@ -1761,8 +1765,6 @@ int main() {
         if (mcRgt) {
             rightStickGizmoNode->setScale((mcRgt->direction() * mcRgt->frequency()  * 4.0f).toVec3());
         }
-
-
 
 
         // ----------------------------------------

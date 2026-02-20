@@ -7,3 +7,4 @@ module;
 export module helios.engine.builder;
 
 export import helios.engine.builder.gameObject;
+export import helios.engine.builder.spawnSystem;

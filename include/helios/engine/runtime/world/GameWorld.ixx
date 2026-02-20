@@ -284,8 +284,8 @@ export namespace helios::engine::runtime::world {
          *
          * @warning Calling this method when hasLevel() returns false results in undefined behavior.
          */
-        [[nodiscard]] const helios::engine::runtime::world::Level& level() const noexcept{
-            return *level_;
+        [[nodiscard]] const helios::engine::runtime::world::Level* level() const noexcept{
+            return level_.get();
         }
 
         /**

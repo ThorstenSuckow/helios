@@ -14,6 +14,7 @@
 import helios;
 import helios.ext;
 import helios.examples.scoring;
+import helios.examples.scoring.SpaceshipWidget;
 
 // ============================================================================
 // Using Declarations
@@ -193,11 +194,13 @@ int main() {
     auto gamepadWidget = new helios::ext::imgui::widgets::GamepadWidget(&inputManager);
     auto logWidget = new helios::ext::imgui::widgets::LogWidget();
     auto cameraWidget = new helios::ext::imgui::widgets::CameraWidget();
+    auto spaceshipWidget = new helios::examples::scoring::SpaceshipWidget();
     imguiOverlay.addWidget(menu);
     imguiOverlay.addWidget(fpsWidget);
     imguiOverlay.addWidget(gamepadWidget);
     imguiOverlay.addWidget(logWidget);
     imguiOverlay.addWidget(cameraWidget);
+    imguiOverlay.addWidget(spaceshipWidget);
 
     // ----------------------------------------
     // 2.5 Logger Configuration
@@ -619,6 +622,8 @@ int main() {
     auto* leftStickGizmoNode = leftStickGizmo.get<helios::engine::modules::scene::components::SceneNodeComponent>()->sceneNode();
     auto* rightStickGizmoNode = rightStickGizmo.get<helios::engine::modules::scene::components::SceneNodeComponent>()->sceneNode();
     auto* shipDirectionGizmoNode = shipDirectionGizmo.get<helios::engine::modules::scene::components::SceneNodeComponent>()->sceneNode();
+
+    spaceshipWidget->addGameObject("Player 1", shipGameObject);
 
     gameWorld.init();
     gameLoop.init(gameWorld);

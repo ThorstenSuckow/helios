@@ -237,6 +237,16 @@ The builder module follows these principles:
 4. **Separation of Concerns**: Each builder focuses on a single domain
 5. **Cloning Support**: Template-based entity spawning with customization
 
+### Why Callbacks Instead of done()-Chaining?
+
+The `GameObjectFactory` uses **callbacks** (`withMotion([](auto&) { ... })`) rather than the done()-chaining pattern used by `SpawnSystemFactory`. The rationale:
+
+- **Flat domains**: Motion, collision, rendering are independent and equal — there is no parent-child hierarchy to express.
+- **Scoped grouping**: The callback visually groups related configs (e.g., `collision()` and `levelBoundsCollision()` inside the same `withCollision` block).
+- **External captures**: Callbacks naturally capture external state (`[&shader, &root]`), which would require parameter threading in done()-chaining.
+
+The `SpawnSystemFactory` uses done()-chaining because its configuration has a natural **tree structure** (pool → profile → rule). See [Spawn System](spawn-system.md#spawnsystemfactory-builder) for details.
+
 ## Related Modules
 
 | Module | Purpose |
@@ -249,5 +259,6 @@ The builder module follows these principles:
 ## Related Concepts
 
 - [Component System](component-system.md) — Understanding Components and Systems
-- [Spawn System](spawn-system.md) — Using builders with object pooling
+- [Spawn System](spawn-system.md) — Spawn scheduling, profiles, and the SpawnSystemFactory builder
+- [Object Pooling](object-pooling.md) — Pool lifecycle for spawned entities
 - [Conventions](conventions.md) — Units and coordinate systems

@@ -28,6 +28,8 @@ export namespace helios::engine::mechanics::gamestate::types {
 
         Undefined = 0,
 
+        Start = 1 << 0,
+
         Loading = 1 << 1,
 
         Title = 1 << 2,
@@ -41,7 +43,7 @@ export namespace helios::engine::mechanics::gamestate::types {
         /**
          * @brief Bitmask representing all defined states.
          */
-        Any = Loading | Title | Menu | Paused | Running
+        Any = Start | Loading | Title | Menu | Paused | Running
 
 
     };

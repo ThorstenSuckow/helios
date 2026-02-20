@@ -174,11 +174,7 @@ export namespace helios::engine::runtime::gameloop {
          */
         [[nodiscard]] bool shouldRun(helios::engine::runtime::world::UpdateContext& updateContext) const noexcept override {
             auto state = updateContext.session().state<StateType>();
-            bool runs = hasFlag(mask_, state);
-            if (!runs) {
-                return false;
-            }
-            return runs;
+            return hasFlag(mask_, state);
         }
 
         /**

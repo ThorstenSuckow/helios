@@ -1,29 +1,31 @@
 # Enemy Spawn Example
 
-This example demonstrates the spawn system with timed enemy spawning, object pooling, and movement behaviors using the helios game loop architecture.
+This example demonstrates the spawn system with timed enemy spawning, object pooling, and movement behaviors using the helios game loop architecture with typed passes and state management.
 
 ## Features
 
-- **GameLoop Architecture** - Phase-based game loop with Pre/Main/Post phases and commit points
-- **Spawn System** - Timed spawning with `SpawnScheduler`, `SpawnProfile`, and `SpawnRule`
-- **Object Pooling** - Efficient enemy management via `GameObjectPoolManager`
+- **GameLoop Architecture** - Phase-based game loop with Pre/Main/Post phases, typed passes, and commit points
+- **SpawnSystemFactory DSL** - Declarative spawn configuration with fluent builder API
+- **Object Pooling** - Efficient enemy management via `GameObjectPoolManager` with `PrefabId`
 - **Random Placement** - Enemies spawn at random positions within level bounds
 - **MoveInitializer** - Random initial movement direction for spawned entities
 - **SpinComponent** - Visual rotation effect on enemies
 - **Level Bounds** - Enemies reflect off arena boundaries
 - **GameObjectFactory** - Fluent builder pattern for creating GameObjects
+- **State Management** - Game state tracking via `Session`
+- **Automated Rendering** - `SceneRenderingSystem` handles viewport-based rendering
 
 ## Building
 
 ```bash
 cmake -S . -B build
-cmake --build build --target enemy_spawn
+cmake --build build --target enemy_spawnmain
 ```
 
 ## Running
 
 ```bash
-./build/bin/enemy_spawn
+./build/examples/enemy_spawn/main
 ```
 
 ## Controls
@@ -32,6 +34,7 @@ cmake --build build --target enemy_spawn
 |-------|--------|
 | Left Stick | Move spaceship / Rotate |
 | ESC | Exit application |
+| ~ (Tilde) | Toggle ImGui overlay |
 
 ## Code Structure
 
@@ -45,12 +48,14 @@ cmake --build build --target enemy_spawn
 |-----------|---------|
 | `SceneNodeComponent` | Links GameObject to scene graph |
 | `Move2DComponent` | 2D physics with velocity and acceleration |
-| `DirectionComponent` | Movement direction vector |
 | `SpinComponent` | Continuous rotation animation |
 | `ComposeTransformComponent` | Local/world transform composition |
 | `ScaleStateComponent` | Unit-based sizing (meters) |
 | `LevelBoundsBehaviorComponent` | Reflect behavior at arena boundaries |
 | `AabbColliderComponent` | World-space collision bounds |
+| `SpawnedByProfileComponent` | Links entity to spawn profile |
+| `PrefabIdComponent` | Identifies prefab type for pooling |
+| `Active` / `Inactive` | Entity activation state tags |
 
 ### Systems Used
 
@@ -64,59 +69,25 @@ cmake --build build --target enemy_spawn
 | `BoundsUpdateSystem` | Updates AABB colliders from transforms |
 | `LevelBoundsBehaviorSystem` | Handles boundary reflections |
 | `ComposeTransformSystem` | Computes final transforms |
+| `StateToViewportPolicyUpdateSystem` | Activates viewports based on game state |
 | `SceneSyncSystem` | Syncs transforms to scene graph |
+| `SceneRenderingSystem` | Renders scenes to associated viewports |
 | `TransformClearSystem` | Clears dirty flags post-frame |
 
-## Spawn System Architecture
-
-The example demonstrates the complete spawn pipeline:
+## Spawn System Configuration (DSL)
 
 ```cpp
-// 1. Create prefab with GameObjectFactory
-auto enemyPrefab = GameObjectFactory::instance()
-    .gameObject(gameWorld)
-    .withRendering([&](auto& rnb) { /* ... */ })
-    .withMotion([](auto& mcb) {
-        mcb.move2D().speed(5.0f).instantAcceleration(true);
-    })
-    .withEffects([](auto& eb) {
-        eb.gfx().spin(270.0f, helios::math::Z_AXISf);
-    })
-    .withSpawn([](auto& sb) {
-        sb.spawn().useSpawnProfile();
-    })
-    .make();
-
-// 2. Configure pool manager
-auto& poolManager = gameWorld.addManager<GameObjectPoolManager>();
-poolManager.addPoolConfig(std::make_unique<GameObjectPoolConfig>(
-    PoolId, std::move(enemyPrefab), 200
-));
-
-// 3. Create spawn profile with placement and initialization
-auto spawnProfile = std::make_unique<SpawnProfile>(
-    PoolId,
-    std::make_unique<RandomSpawnPlacer>(),
-    std::make_unique<MoveInitializer>(DirectionType::Random)
-);
-
-// 4. Configure spawn scheduler with rules
-auto scheduler = std::make_unique<SpawnScheduler>();
-auto spawnRule = std::make_unique<SpawnRule>(
-    std::make_unique<TimerSpawnCondition>(5.0f),  // Every 5 seconds
-    std::make_unique<FixedSpawnAmount>(1),        // Spawn 1 enemy
-    RuleId
-);
-scheduler->addRule(ProfileId, std::move(spawnRule));
-
-// 5. Register dispatchers and add spawn system
-gameLoop.commandBuffer().addDispatcher<ScheduledSpawnPlanCommand>(/*...*/);
-gameLoop.commandBuffer().addDispatcher<SpawnCommand>(/*...*/);
-gameLoop.commandBuffer().addDispatcher<DespawnCommand>(/*...*/);
-
-gameLoop.phase(PhaseType::Pre)
-    .addPass()
-    .addSystem<GameObjectSpawnSystem>(spawnSchedulers);
+SpawnSystemFactory::configure(poolManager, spawnManager)
+    .pool(EnemyPoolId, EnemyPrefabId, 200)
+        .profile(RandomSpawnProfileId)
+            .randomPlacement()
+            .randomDirectionInitializer()
+            .scheduledBy(SpawnRuleId)
+                .timerCondition(5.0f)
+                .fixedAmount(1)
+                .done()
+            .done()
+        .commit();
 ```
 
 ## GameLoop Phase Configuration
@@ -124,13 +95,13 @@ gameLoop.phase(PhaseType::Pre)
 ```cpp
 // Pre-Phase: Input, Spawning, Physics
 gameLoop.phase(PhaseType::Pre)
-    .addPass()
+    .addPass<GameState>(GameState::Any)
     .addSystem<TwinStickInputSystem>(shipGameObject)
     .addCommitPoint(CommitPoint::Structural)
-    .addPass()
-    .addSystem<GameObjectSpawnSystem>(spawnSchedulers)
+    .addPass<GameState>(GameState::Any)
+    .addSystem<GameObjectSpawnSystem>(spawnManager)
     .addCommitPoint(CommitPoint::Structural)
-    .addPass()
+    .addPass<GameState>(GameState::Any)
     .addSystem<ScaleSystem>()
     .addSystem<SteeringSystem>()
     .addSystem<SpinSystem>()
@@ -138,31 +109,25 @@ gameLoop.phase(PhaseType::Pre)
 
 // Main-Phase: Collision Detection
 gameLoop.phase(PhaseType::Main)
-    .addPass()
+    .addPass<GameState>(GameState::Any)
     .addSystem<BoundsUpdateSystem>()
     .addSystem<LevelBoundsBehaviorSystem>()
     .addCommitPoint();
 
-// Post-Phase: Transform Composition and Scene Sync
+// Post-Phase: Transform and Rendering
 gameLoop.phase(PhaseType::Post)
-    .addPass()
+    .addPass<GameState>(GameState::Any)
     .addSystem<ComposeTransformSystem>()
-    .addSystem<SceneSyncSystem>(scene.get())
+    .addSystem<StateToViewportPolicyUpdateSystem<GameState, MatchState>>(stateToViewportMap)
+    .addSystem<SceneSyncSystem>(sceneToViewportMap)
+    .addSystem<SceneRenderingSystem>(renderingDevice, sceneToViewportMap)
     .addSystem<TransformClearSystem>();
 ```
 
-## ImGui Integration
+## See Also
 
-The example includes debug widgets for:
-- FPS monitoring and frame pacing control
-- Gamepad state visualization
-- Log console with scope filtering
-- Camera manipulation
-
-```cpp
-imguiOverlay.addWidget(new MainMenuWidget());
-imguiOverlay.addWidget(new FpsWidget(&metrics, &framePacer));
-imguiOverlay.addWidget(new GamepadWidget(&inputManager));
-imguiOverlay.addWidget(new LogWidget());
-imguiOverlay.addWidget(new CameraWidget());
-```
+- [Spawn System](../../docs/core-concepts/spawn-system.md) - Spawn pipeline and DSL builder
+- [Object Pooling](../../docs/core-concepts/object-pooling.md) - Entity pooling system
+- [Game Loop Architecture](../../docs/core-concepts/gameloop-architecture.md) - Phase-based game loop
+- [Collision Detection Example](../collision_detection/README.md) - Grid-based collision
+- [Scoring Demo](../scoring_demo/README.md) - Full gameplay with scoring and menus

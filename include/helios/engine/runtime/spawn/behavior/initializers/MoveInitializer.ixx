@@ -79,10 +79,10 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
      * ## Required Components
      *
      * Spawned entities must have:
-     * - `DirectionComponent` — receives the calculated direction.
-     * - `Move2DComponent` — receives the move command with direction.
-     * - `SteeringComponent` (Optional) — receives the rotation looking at direction.
-     * - `TranslationStateComponent` (Required for `Point` strategy) — provides current position.
+     * - `DirectionComponent` - receives the calculated direction.
+     * - `Move2DComponent` - receives the move command with direction.
+     * - `SteeringComponent` (Optional) - receives the rotation looking at direction.
+     * - `TranslationStateComponent` (Required for `Point` strategy) - provides current position.
      *
      * ## Usage Examples
      *

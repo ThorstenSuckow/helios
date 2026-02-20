@@ -121,9 +121,9 @@ export namespace helios::engine::runtime::gameloop {
          * which only synchronizes pass-level events.
          *
          * Available CommitPoint flags:
-         * - `PassEvents` — Events pushed via `UpdateContext::pushPass()` become readable.
-         * - `FlushCommands` — Pending commands from the CommandBuffer are executed.
-         * - `FlushManagers` — Managers process their queued requests.
+         * - `PassEvents` - Events pushed via `UpdateContext::pushPass()` become readable.
+         * - `FlushCommands` - Pending commands from the CommandBuffer are executed.
+         * - `FlushManagers` - Managers process their queued requests.
          * - `Structural` — Combines all three flags.
          *
          * Flags can be combined using bitwise OR:
@@ -174,11 +174,7 @@ export namespace helios::engine::runtime::gameloop {
          */
         [[nodiscard]] bool shouldRun(helios::engine::runtime::world::UpdateContext& updateContext) const noexcept override {
             auto state = updateContext.session().state<StateType>();
-            bool runs = hasFlag(mask_, state);
-            if (!runs) {
-                return false;
-            }
-            return runs;
+            return hasFlag(mask_, state);
         }
 
         /**

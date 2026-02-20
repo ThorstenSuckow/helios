@@ -11,6 +11,13 @@ This document summarizes the coding style and module organization conventions us
 
 
 ### Modules / file formats
+
+### File organization
+- **One public class per file.** Each exported class or struct gets its own `.ixx` file named after the type (PascalCase).
+- **Exception - cyclic done()-chaining builders:** When fluent builder types form a cyclic dependency chain (e.g. `Rule::done() → Profile&`, `Profile::done() → Pool&`, `Pool::commit() → Configurator`, `Configurator::pool() → Pool`), they may reside in a single file because C++ modules do not support forward declarations across module boundaries. Document the reason in the file header.
+- Private or implementation-only helper types (e.g. internal iterators, CRTP bases used only within one file) may co-locate with their owning class.
+
+### Module interface files
 - Interface files (exported modules) live under `include/helios/...` and use the `.ixx` extension (e.g. `include/helios/window/Window.ixx`).
   - Structure of an interface file:
     - Global module fragment (optional) with `module;` and any required `#include` directives for standard/third-party headers.

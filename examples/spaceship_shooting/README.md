@@ -1,29 +1,33 @@
 # Spaceship Shooting Example
 
-This example extends the spaceship control demo with a complete twin-stick shooting system, demonstrating projectile spawning via the spawn system, aiming components, and level bounds collision.
+This example extends the spaceship control demo with a complete twin-stick shooting system, demonstrating projectile spawning via the `SpawnSystemFactory` DSL, aiming components, level bounds collision, and state management.
 
 ## Features
 
 - **Twin-Stick Shooter Controls** - Left stick for movement, right stick for aiming and shooting
-- **GameLoop Architecture** - Phase-based execution with Pre/Main/Post phases and commit points
+- **GameLoop Architecture** - Phase-based execution with Pre/Main/Post phases, typed passes, and commit points
 - **GameObjectFactory** - Fluent builder pattern for creating player, projectiles, and grid
+- **SpawnSystemFactory DSL** - Declarative spawn configuration for projectile pooling
 - **Projectile Spawning** - `ProjectileSpawnSystem` with spawn profiles and pooling
 - **Level Bounds System** - Arena boundaries with bounce/despawn behavior
+- **State Management** - Game state tracking via `Session` with typed `GameState` transitions
+- **Automated Rendering** - `SceneRenderingSystem` handles viewport-based rendering
 - **ShootComponent** - Configurable fire rate and projectile speed
 - **Aim2DComponent** - Direction tracking and firing frequency management
 - **Object Pooling** - Efficient projectile management via `GameObjectPoolManager`
+- **PrefabId** - Strongly-typed prefab identification for pooled entities
 
 ## Building
 
 ```bash
 cmake -S . -B build
-cmake --build build --target spaceship_shooting
+cmake --build build --target spaceship_shootingmain
 ```
 
 ## Running
 
 ```bash
-./build/bin/spaceship_shooting
+./build/examples/spaceship_shooting/main
 ```
 
 ## Controls
@@ -33,13 +37,14 @@ cmake --build build --target spaceship_shooting
 | Left Stick | Move spaceship / Rotate |
 | Right Stick | Aim direction / Fire projectiles |
 | ESC | Exit application |
+| ~ (Tilde) | Toggle ImGui overlay |
 
 ## Code Structure
 
 | File | Purpose |
 |------|---------|
 | `main.cpp` | Application entry point and game loop |
-| `SpaceshipWidget.ixx` | ImGui widget for physics parameter tuning |
+| `SpaceshipWidget.ixx` | ImGui widget for physics and fire rate parameter tuning |
 
 ### Components Used
 
@@ -52,7 +57,9 @@ cmake --build build --target spaceship_shooting
 | `ShootComponent` | Manages projectile firing with cooldown |
 | `LevelBoundsBehaviorComponent` | Bounce/despawn at arena boundaries |
 | `AabbColliderComponent` | World-space collision bounds |
-| `SpawnProfileComponent` | Links entity to spawn profile |
+| `SpawnedByProfileComponent` | Links entity to spawn profile |
+| `PrefabIdComponent` | Identifies prefab type for pooling |
+| `Active` / `Inactive` | Entity activation state tags |
 
 ### Systems Used
 
@@ -60,85 +67,27 @@ cmake --build build --target spaceship_shooting
 |--------|---------|
 | `TwinStickInputSystem` | Dual analog stick input handling |
 | `ProjectileSpawnSystem` | Spawns projectiles from ShootComponent |
+| `HierarchyPropagationSystem` | Propagates transforms through entity hierarchies |
 | `ScaleSystem` | Applies ScaleStateComponent sizing |
 | `SteeringSystem` | Rotation and direction updates |
 | `Move2DSystem` | Physics simulation (velocity integration) |
 | `BoundsUpdateSystem` | Updates AABB colliders from transforms |
 | `LevelBoundsBehaviorSystem` | Handles boundary collisions |
 | `ComposeTransformSystem` | Computes final transforms |
+| `StateToViewportPolicyUpdateSystem` | Activates viewports based on game state |
 | `SceneSyncSystem` | Syncs transforms to scene graph |
+| `SceneRenderingSystem` | Renders scenes to associated viewports |
 | `TransformClearSystem` | Clears dirty flags post-frame |
 
-## Projectile Spawn System
-
-The example demonstrates the spawn pipeline for projectiles:
+## Spawn System Configuration (DSL)
 
 ```cpp
-// 1. Create projectile prefab
-auto projectilePrefab = GameObjectFactory::instance()
-    .gameObject(gameWorld)
-    .withRendering([&](auto& rnb) {
-        rnb.meshRenderable()
-           .shader(shader)
-           .color(Colors::Yellow)
-           .primitiveType(PrimitiveType::LineLoop)
-           .shape(std::make_shared<Ellipse>(0.5f, 0.2f, 8))
-           .attachTo(&root);
-    })
-    .withCollision([](auto& cb) {
-        cb.collision().useBoundingBox();
-        cb.levelBoundsCollision()
-          .onCollision(CollisionBehavior::Despawn);
-    })
-    .withMotion([](auto& mcb) {
-        mcb.move2D()
-           .speed(80.0f)
-           .instantAcceleration(true);
-    })
-    .withSpawn([](auto& sb) {
-        sb.spawn().useSpawnProfile();
-    })
-    .make();
-
-// 2. Configure pool manager
-auto& poolManager = gameWorld.addManager<GameObjectPoolManager>();
-poolManager.addPoolConfig(std::make_unique<GameObjectPoolConfig>(
-    ProjectilePoolId, std::move(projectilePrefab), 50
-));
-
-// 3. Create spawn profile with emitter placement
-auto spawnProfile = std::make_unique<SpawnProfile>(
-    ProjectilePoolId,
-    std::make_unique<EmitterSpawnPlacer>(),
-    std::make_unique<EmitterInitializer>()
-);
-spawnManager.addSpawnProfile(ProfileId, std::move(spawnProfile));
-
-// 4. Add ProjectileSpawnSystem
-gameLoop.phase(PhaseType::Pre)
-    .addPass()
-    .addSystem<ProjectileSpawnSystem>(ProfileId);
-```
-
-## Ship with Shooting Components
-
-```cpp
-auto shipGameObject = GameObjectFactory::instance()
-    .gameObject(gameWorld)
-    .withRendering([&](auto& rnb) { /* ... */ })
-    .withCollision([](auto& cb) {
-        cb.collision().useBoundingBox();
-        cb.levelBoundsCollision()
-          .onCollision(CollisionBehavior::Bounce);
-    })
-    .withCombat([](auto& ccb) {
-        ccb.weapon().fireRate(5.0f);  // 5 shots per second
-    })
-    .withMotion([](auto& mcb) {
-        mcb.move2D().speed(30.0f).instantAcceleration(false);
-        mcb.steering().steeringSetsDirection(true);
-    })
-    .make();
+SpawnSystemFactory::configure(poolManager, spawnManager)
+    .pool(ProjectilePoolId, ProjectilePrefabId, 50)
+        .profile(ProjectileSpawnProfileId)
+            .emitterPlacement()
+            .done()
+        .commit();
 ```
 
 ## GameLoop Phase Configuration
@@ -146,29 +95,32 @@ auto shipGameObject = GameObjectFactory::instance()
 ```cpp
 // Pre-Phase: Input, Spawning, Physics
 gameLoop.phase(PhaseType::Pre)
-    .addPass()
+    .addPass<GameState>(GameState::Any)
     .addSystem<TwinStickInputSystem>(shipGameObject)
     .addCommitPoint(CommitPoint::Structural)
-    .addPass()
+    .addPass<GameState>(GameState::Any)
     .addSystem<ProjectileSpawnSystem>(ProjectileSpawnProfileId)
     .addCommitPoint(CommitPoint::Structural)
-    .addPass()
+    .addPass<GameState>(GameState::Any)
     .addSystem<ScaleSystem>()
     .addSystem<SteeringSystem>()
     .addSystem<Move2DSystem>();
 
 // Main-Phase: Collision and Bounds
 gameLoop.phase(PhaseType::Main)
-    .addPass()
+    .addPass<GameState>(GameState::Any)
+    .addSystem<HierarchyPropagationSystem>()
     .addSystem<BoundsUpdateSystem>()
     .addSystem<LevelBoundsBehaviorSystem>()
     .addCommitPoint();
 
 // Post-Phase: Transform and Rendering
 gameLoop.phase(PhaseType::Post)
-    .addPass()
+    .addPass<GameState>(GameState::Any)
     .addSystem<ComposeTransformSystem>()
-    .addSystem<SceneSyncSystem>(scene.get())
+    .addSystem<StateToViewportPolicyUpdateSystem<GameState, MatchState>>(stateToViewportMap)
+    .addSystem<SceneSyncSystem>(sceneToViewportMap)
+    .addSystem<SceneRenderingSystem>(renderingDevice, sceneToViewportMap)
     .addSystem<TransformClearSystem>();
 ```
 
@@ -177,23 +129,15 @@ gameLoop.phase(PhaseType::Post)
 The spawn system uses commands for deferred entity creation:
 
 ```cpp
-gameLoop.commandBuffer().addDispatcher<SpawnCommand>(
-    std::make_unique<SpawnCommandDispatcher>()
-);
-gameLoop.commandBuffer().addDispatcher<DespawnCommand>(
-    std::make_unique<DespawnCommandDispatcher>()
-);
+gameLoop.commandBuffer()
+    .addDispatcher<SpawnCommand>(std::make_unique<SpawnCommandDispatcher>())
+    .addDispatcher<DespawnCommand>(std::make_unique<DespawnCommandDispatcher>());
 ```
 
-## ImGui Integration
+## See Also
 
-The example includes debug widgets for physics tuning:
-
-```cpp
-imguiOverlay.addWidget(new MainMenuWidget());
-imguiOverlay.addWidget(new FpsWidget(&metrics, &framePacer));
-imguiOverlay.addWidget(new GamepadWidget(&inputManager));
-imguiOverlay.addWidget(new LogWidget());
-imguiOverlay.addWidget(new CameraWidget());
-imguiOverlay.addWidget(new SpaceshipWidget());
-```
+- [Spawn System](../../docs/core-concepts/spawn-system.md) - Spawn pipeline and DSL builder
+- [Game Loop Architecture](../../docs/core-concepts/gameloop-architecture.md) - Phase-based game loop
+- [Spaceship Control Example](../spaceship_control/README.md) - Basic movement controls
+- [Collision Detection Example](../collision_detection/README.md) - Grid-based collision
+- [Scoring Demo](../scoring_demo/README.md) - Full gameplay with scoring and menus

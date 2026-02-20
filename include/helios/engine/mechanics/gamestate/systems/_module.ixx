@@ -5,3 +5,4 @@
 export module helios.engine.mechanics.gamestate.systems;
 
 export import helios.engine.mechanics.gamestate.systems.GameStateInputResponseSystem;
+export import helios.engine.mechanics.gamestate.systems.GameFlowSystem;

@@ -35,10 +35,15 @@ export namespace helios::engine::mechanics::gamestate::rules {
 
             StateTransitionRule<GameState>(
                 GameState::Undefined,
+                StateTransitionIdType<GameState>::StartRequested,
+                GameState::Start
+            ),
+
+            StateTransitionRule<GameState>(
+                GameState::Start,
                 StateTransitionIdType<GameState>::TitleRequested,
                 GameState::Title
             ),
-
             StateTransitionRule<GameState>(
 
                 GameState::Title,

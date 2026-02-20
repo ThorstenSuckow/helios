@@ -99,7 +99,7 @@ export namespace helios::engine::mechanics::bounds::systems {
 
 
                 auto& objectBounds = bc->bounds();
-                auto levelBounds  = gameWorld_->level().bounds();
+                auto levelBounds  = gameWorld_->level()->bounds();
 
                 if (!levelBounds.contains(objectBounds)) {
 

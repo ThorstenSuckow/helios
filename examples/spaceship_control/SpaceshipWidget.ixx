@@ -14,9 +14,11 @@ import helios.ext.imgui.ImGuiWidget;
 import helios.engine.ecs.GameObject;
 import helios.engine.modules.physics.motion.components.Move2DComponent;
 import helios.engine.modules.physics.motion.components.SteeringComponent;
+import helios.engine.mechanics.combat.components.ShootComponent;
 
 using namespace helios::ext::imgui;
 using namespace helios::engine::modules::physics::motion::components;
+using namespace helios::engine::mechanics::combat::components;
 
 export namespace helios::examples::spaceshipControl {
 
@@ -60,6 +62,16 @@ export namespace helios::examples::spaceshipControl {
                 selectedIndex_ = 0;
             }
             return gameObjects_[selectedIndex_].gameObject.get<SteeringComponent>();
+        }
+
+        [[nodiscard]] ShootComponent* getSelectedShoot() noexcept {
+            if (gameObjects_.empty()) {
+                return nullptr;
+            }
+            if (selectedIndex_ < 0 || selectedIndex_ >= static_cast<int>(gameObjects_.size())) {
+                selectedIndex_ = 0;
+            }
+            return gameObjects_[selectedIndex_].gameObject.get<ShootComponent>();
         }
 
     public:
@@ -116,6 +128,7 @@ export namespace helios::examples::spaceshipControl {
 
             auto* move2D = getSelectedMove2D();
             auto* heading = getSelectedHeading();
+            auto* shoot = getSelectedShoot();
 
             ImGui::SameLine();
             if (ImGui::Button("Reset")) {
@@ -123,8 +136,8 @@ export namespace helios::examples::spaceshipControl {
                 if (heading) heading->resetToDefaults();
             }
 
-            if (!move2D && !heading) {
-                ImGui::TextDisabled("Selected object has no Move2DComponent or SteeringComponent.");
+            if (!move2D && !heading && !shoot) {
+                ImGui::TextDisabled("Selected object has no Move2DComponent, SteeringComponent, or ShootComponent.");
                 ImGui::End();
                 return;
             }
@@ -187,6 +200,24 @@ export namespace helios::examples::spaceshipControl {
                 float rotationThreshold = heading->rotationSpeedThreshold();
                 if (ImGui::SliderFloat("Stop Threshold##Rot", &rotationThreshold, 0.01f, 1.0f, "%.3f")) {
                     heading->setRotationSpeedThreshold(rotationThreshold);
+                }
+
+                ImGui::Separator();
+                ImGui::Spacing();
+            }
+
+            // ========================================
+            // Combat Parameters (ShootComponent)
+            // ========================================
+            if (shoot) {
+                ImGui::Text("Combat");
+
+                float fireRate = shoot->fireRate();
+                if (ImGui::SliderFloat("Fire Rate", &fireRate, 0.5f, 30.0f, "%.1f /s")) {
+                    shoot->setFireRate(fireRate);
+                }
+                if (ImGui::IsItemHovered()) {
+                    ImGui::SetTooltip("Projectiles per second.\nCooldown: %.3f s", 1.0f / fireRate);
                 }
 
                 ImGui::Separator();

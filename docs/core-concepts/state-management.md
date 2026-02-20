@@ -325,8 +325,8 @@ gameLoop.phase(PhaseType::Pre)
 
 ## Related Topics
 
-- [Game Loop Architecture](gameloop-architecture.md) — Phase/Pass structure
-- [Command System](command-system.md) — Command-driven state changes
-- [Event System](event-system.md) — Event propagation
+- [Game Loop Architecture](gameloop-architecture.md) - Phase/Pass structure
+- [Command System](command-system.md) - Command-driven state changes
+- [Event System](event-system.md) - Event propagation
 
 

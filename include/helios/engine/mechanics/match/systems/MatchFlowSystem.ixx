@@ -37,7 +37,7 @@ export namespace helios::engine::mechanics::match::systems {
      */
     class MatchFlowSystem : public helios::engine::ecs::System {
 
-        MatchState prevMatchSate_ = MatchState::Undefined;
+        MatchState prevMatchState_ = MatchState::Undefined;
         StateTransitionIdType<MatchState> prevMatchStateTransitionId_ = StateTransitionIdType<MatchState>::Undefined;
 
 
@@ -57,11 +57,11 @@ export namespace helios::engine::mechanics::match::systems {
             const auto matchState = session.state<MatchState>();
             auto matchStateTransitionId = session.stateTransitionId<MatchState>();
 
-            if (matchState != MatchState::Undefined && prevMatchSate_ == matchState && prevMatchStateTransitionId_ == matchStateTransitionId) {
+            if (matchState != MatchState::Undefined && prevMatchState_ == matchState && prevMatchStateTransitionId_ == matchStateTransitionId) {
                 return;
             }
 
-            prevMatchSate_= matchState;
+            prevMatchState_= matchState;
             prevMatchStateTransitionId_ = matchStateTransitionId;
 
             switch (matchState) {

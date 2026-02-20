@@ -260,8 +260,8 @@ For detailed phase/pass event handling, see [Game Loop Architecture](gameloop-ar
 ### Command Design
 
 - Commands should be **immutable** after construction
-- `execute()` must be **noexcept** — handle errors internally
-- Keep commands **lightweight** — store only essential data
+- `execute()` must be **noexcept** - handle errors internally
+- Keep commands **lightweight** - store only essential data
 - Use `WorldCommand` for spawning; use `TargetedCommand` for entity mutations
 
 ### Dispatcher Usage
@@ -278,18 +278,18 @@ For detailed phase/pass event handling, see [Game Loop Architecture](gameloop-ar
 
 ## Related Modules
 
-- `helios.engine.runtime.messaging.command.CommandBuffer` — Central command queue
-- `helios.engine.runtime.messaging.command.TargetedCommand` — Per-entity command base
-- `helios.engine.runtime.messaging.command.WorldCommand` — World-wide command base
-- `helios.engine.runtime.messaging.command.TypedTargetedCommandDispatcher` — Type-safe entity command dispatch
-- `helios.engine.runtime.messaging.command.TypedWorldCommandDispatcher` — Type-safe world command dispatch
-- `helios.engine.runtime.world.Manager` — Base class for deferred processing managers
-- `helios.engine.runtime.world.GameWorld` — Manager registration and flushing
+- `helios.engine.runtime.messaging.command.CommandBuffer` - Central command queue
+- `helios.engine.runtime.messaging.command.TargetedCommand` - Per-entity command base
+- `helios.engine.runtime.messaging.command.WorldCommand` - World-wide command base
+- `helios.engine.runtime.messaging.command.TypedTargetedCommandDispatcher` - Type-safe entity command dispatch
+- `helios.engine.runtime.messaging.command.TypedWorldCommandDispatcher` - Type-safe world command dispatch
+- `helios.engine.runtime.world.Manager` - Base class for deferred processing managers
+- `helios.engine.runtime.world.GameWorld` - Manager registration and flushing
 
 ## Related Documentation
 
-- [Event System](event-system.md) — Phase/pass event propagation
-- [Game Loop Architecture](gameloop-architecture.md) — Overall frame structure
-- [Component System](component-system.md) — GameObject, Component, System architecture
-- [Spawn System](spawn-system.md) — Entity lifecycle with spawn scheduling and pooling
+- [Event System](event-system.md) - Phase/pass event propagation
+- [Game Loop Architecture](gameloop-architecture.md) - Overall frame structure
+- [Component System](component-system.md) - GameObject, Component, System architecture
+- [Spawn System](spawn-system.md) - Entity lifecycle with spawn scheduling and pooling
 

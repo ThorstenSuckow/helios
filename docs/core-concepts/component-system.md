@@ -17,7 +17,7 @@ This design allows you to build complex entities by mixing and matching componen
 
 ### Components
 
-Components are **plain data classes** — they store state but should not contain complex update logic. Unlike traditional ECS frameworks, helios components do **not** inherit from a base class.
+Components are **plain data classes** - they store state but should not contain complex update logic. Unlike traditional ECS frameworks, helios components do **not** inherit from a base class.
 
 ```cpp
 class HealthComponent {
@@ -478,7 +478,7 @@ player->add<TwinStickInputComponent>();
 
 ## Related Documentation
 
-- [Game Loop Architecture](gameloop-architecture.md) — Phase/Pass structure, commit points
-- [Command System](command-system.md) — Deferred action execution
-- [Event System](event-system.md) — Phase/pass event propagation
-- [Spawn System](spawn-system.md) — Entity lifecycle and object pooling
+- [Game Loop Architecture](gameloop-architecture.md) - Phase/Pass structure, commit points
+- [Command System](command-system.md) - Deferred action execution
+- [Event System](event-system.md) - Phase/pass event propagation
+- [Spawn System](spawn-system.md) - Entity lifecycle and object pooling

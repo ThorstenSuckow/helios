@@ -1,3 +1,7 @@
+/**
+ * @file CollisionId.ixx
+ * @brief Collision layer bitmask for the scoring demo.
+ */
 module;
 
 #include <cstdint>

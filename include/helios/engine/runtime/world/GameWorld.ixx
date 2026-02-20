@@ -280,12 +280,12 @@ export namespace helios::engine::runtime::world {
         /**
          * @brief Retrieves the currently loaded level.
          *
-         * @return Reference to the active Level.
+         * @return Const pointer to the active Level.
          *
          * @warning Calling this method when hasLevel() returns false results in undefined behavior.
          */
-        [[nodiscard]] const helios::engine::runtime::world::Level& level() const noexcept{
-            return *level_;
+        [[nodiscard]] const helios::engine::runtime::world::Level* level() const noexcept{
+            return level_.get();
         }
 
         /**

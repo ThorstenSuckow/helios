@@ -1,27 +1,31 @@
 # Scoring Demo
 
-This example demonstrates the **scoring system** in helios, including score pools, score observers, UI text rendering, and integration with the combat/health mechanics.
+This example demonstrates the **scoring system** in helios, including score pools, score observers, UI text rendering, state management, and integration with the combat/health/spawn mechanics.
 
 ## Features
 
 - **Score Pool Management** - Centralized score tracking with `ScorePoolManager`
 - **Score Attribution** - Kill scoring via `LastAttackerComponent` and `ScorePoolComponent`
-- **UI Text Rendering** - Dynamic score display with `OpenGLGlyphTextRenderer`
+- **UI Text Rendering** - Dynamic score display with `OpenGLGlyphTextRenderer` and `TextMesh`
 - **Score Observers** - Data binding between score pools and UI components
 - **Health & Damage System** - Enemy health tracking with `HealthComponent`
-- **Complete Twin-Stick Gameplay** - Player movement, aiming, and shooting
+- **Game / Match State Management** - Hierarchical state machine with `GameState` and `MatchState`
+- **Menu System** - Title screen, pause menu, and game over menu with gamepad navigation
+- **SpawnSystemFactory DSL** - Declarative spawn configuration with fluent builder API
+- **Multiple Viewports** - Separate viewports for game world, HUD, title screen, and menus
+- **Complete Twin-Stick Gameplay** - Player movement, aiming, shooting, and scoring
 
 ## Building
 
 ```bash
 cmake -S . -B build
-cmake --build build --target scoring_demo
+cmake --build build --target scoring_demomain
 ```
 
 ## Running
 
 ```bash
-./build/bin/scoring_demo
+./build/examples/scoring_demo/main
 ```
 
 ## Controls
@@ -30,7 +34,10 @@ cmake --build build --target scoring_demo
 |-------|--------|
 | Left Stick | Move spaceship |
 | Right Stick | Aim and fire projectiles |
+| D-Pad Up/Down | Navigate menus |
+| A Button | Confirm menu selection |
 | ESC | Exit application |
+| ~ (Tilde) | Toggle ImGui overlay |
 
 ## Architecture
 
@@ -76,9 +83,18 @@ cmake --build build --target scoring_demo
 
 | File | Purpose |
 |------|---------|
-| `main.cpp` | Application entry point with scoring setup |
-| `CollisionId.ixx` | Collision layer identifiers |
+| `main.cpp` | Application entry point with game loop and phase configuration |
 | `_module.ixx` | Module aggregation |
+| `ArenaConfig.ixx` | Arena constants (grid size, coordinates, cell length) |
+| `IdConfig.ixx` | Centralized typed identifiers (pool, prefab, spawn, collision IDs) |
+| `CollisionId.ixx` | Collision layer identifiers |
+| `EnemyPrefabs.ixx` | Enemy prefab definitions (purple, orange, blue) |
+| `SpawnConfiguration.ixx` | `SpawnSystemFactory` DSL configuration for all spawn pools |
+| `MenuConfiguration.ixx` | Title, pause, and game over menu setup |
+| `GameStateListener.ixx` | Game state transition listeners |
+| `MatchStateListener.ixx` | Match state transition listeners |
+| `UiActionCommandPolicy.ixx` | UI action command handling |
+| `SpaceshipWidget.ixx` | ImGui widget for physics and fire rate tuning |
 
 ### Key Components
 
@@ -89,7 +105,9 @@ cmake --build build --target scoring_demo
 | `ScoreObserverComponent` | Observes a score pool for UI updates |
 | `LastAttackerComponent` | Tracks who dealt the killing blow |
 | `HealthComponent` | Entity health and damage tracking |
-| `TextMeshComponent` | Renders dynamic text |
+| `MatchStateComponent` | Per-entity match state tracking |
+| `MenuComponent` | Menu state and item configuration |
+| `UiTextComponent` | Text rendering in UI context |
 
 ### Key Systems
 
@@ -97,128 +115,89 @@ cmake --build build --target scoring_demo
 |--------|---------|
 | `HealthDepletedSystem` | Detects entity death, triggers score award |
 | `ScoreObserverSystem` | Updates observers when pools change |
-| `TextMeshUpdateSystem` | Updates text mesh from bound data |
 | `DamageApplicationSystem` | Applies collision damage |
+| `GameFlowSystem` | Manages game state transitions |
+| `MatchFlowSystem` | Manages match state transitions |
+| `MenuDisplaySystem` | State-driven menu visibility |
+| `MenuNavigationSystem` | Gamepad-based menu navigation |
+| `StateToViewportPolicyUpdateSystem` | Activates viewports based on state |
+| `SceneRenderingSystem` | Renders scenes to their associated viewports |
 
-## Score Pool Setup
+## Spawn System Configuration (DSL)
 
 ```cpp
-// Create score pool manager
-auto& scorePoolManager = gameWorld.addManager<ScorePoolManager>();
+SpawnSystemFactory::configure(poolManager, spawnManager)
+    .pool(ProjectilePoolId, ProjectilePrefabId, 50)
+        .profile(ProjectileSpawnProfileId)
+            .emitterPlacement()
+            .done()
+        .commit()
 
-// Create a score pool for player one
-scorePoolManager.addScorePool(ScorePoolId{"playerOneScorePool"});
+    .pool(PurpleEnemyPoolId, PurpleEnemyPrefabId, 50)
+        .profile(RandomSpawnProfileId)
+            .randomPlacement()
+            .randomDirectionInitializer()
+            .scheduledBy(PurpleSpawnRuleId)
+                .timerCondition(5.0f)
+                .fixedAmount(1)
+                .done()
+            .done()
+        .commit()
 
-// Register score command handler
-gameWorld.registerScoreCommandHandler(scorePoolManager);
+    .pool(OrangeEnemyPoolId, OrangeEnemyPrefabId, OBJECT_AMOUNT_X)
+        .profile(LeftColumnProfileId)
+            .axisPlacement(vec3f(0, -1, 0).normalize(), TOP_LEFT)
+            .moveInitializer(X_AXISf)
+            .scheduledBy(LeftColumnRuleId)
+                .timerWithAvailabilityCondition(15.0f)
+                .fixedAmount(OBJECT_AMOUNT_Y)
+                .done()
+            .done()
+        // ... additional profiles for other edges
+        .commitCyclic<4>();
 ```
 
-## Player Configuration
+## GameLoop Phase Configuration
 
 ```cpp
-// Associate player with score pool
-auto player = GameObjectFactory::gameObject(gameWorld)
-    .withScoring([](auto& scoring) {
-        scoring.scorePool()
-               .poolId(ScorePoolId{"playerOneScorePool"});
-    })
-    .withCombat([](auto& combat) {
-        combat.attacker();  // Enables LastAttackerComponent tracking
-    })
-    .make(true);
-```
+// Pre-Phase: Input, Spawning, Physics
+gameLoop.phase(PhaseType::Pre)
+    .addPass<GameState>(GameState::Running)
+    .addSystem<TwinStickInputSystem>(shipGameObject)
+    .addCommitPoint(CommitPoint::Structural)
+    .addPass<GameState>(GameState::Running)
+    .addSystem<GameObjectSpawnSystem>(spawnManager)
+    .addSystem<ProjectileSpawnSystem>(ProjectileSpawnProfileId)
+    .addCommitPoint(CommitPoint::Structural);
 
-## Enemy Configuration
-
-```cpp
-// Configure enemy with score value
-auto enemy = GameObjectFactory::gameObject(gameWorld)
-    .withHealth([](auto& health) {
-        health.health()
-              .maxHealth(100.0f);
-    })
-    .withScoring([](auto& scoring) {
-        scoring.scoreValue<EnemyScore>()
-               .points(100);
-    })
-    .withCombat([](auto& combat) {
-        combat.trackLastAttacker();  // Track who kills this enemy
-    })
-    .make(true);
-```
-
-## Score UI Setup
-
-```cpp
-// Create score text display
-auto scoreText = GameObjectFactory::gameObject(gameWorld)
-    .withRendering([&](auto& r) {
-        r.textRenderable()
-         .font(fontId)
-         .text("Score: 0")
-         .build();
-    })
-    .withUiTransform([&](auto& ui) {
-        ui.transform()
-          .anchor(Anchor::TopLeft)
-          .offsets({10.0f, 10.0f, 0.0f, 0.0f})
-          .viewportId(mainViewportId);
-    })
-    .withObserver([](auto& obs) {
-        obs.scoreObserver()
-           .poolId(ScorePoolId{"playerOneScorePool"})
-           .formatter([](double score) {
-               return std::format("Score: {}", static_cast<int>(score));
-           });
-    })
-    .make(true);
-```
-
-## GameLoop Configuration
-
-```cpp
-// Main Phase: Combat and Scoring
+// Main-Phase: Collision Detection and Response
 gameLoop.phase(PhaseType::Main)
-    .addPass()
-    .addSystem<DamageApplicationSystem>()
-    .addSystem<HealthDepletedSystem>()
-    .addCommitPoint()
-    .addPass()
-    .addSystem<ScoreObserverSystem>(&scorePoolManager);
+    .addPass<GameState>(GameState::Running)
+    .addSystem<GridCollisionDetectionSystem>(bounds, cellSize)
+    .addCommitPoint();
 
-// Post Phase: UI Updates
+// Post-Phase: Transform, Rendering, UI
 gameLoop.phase(PhaseType::Post)
-    .addPass()
-    .addSystem<TextMeshUpdateSystem>()
-    .addSystem<UiTransformSystem>();
+    .addPass<GameState>(GameState::Any)
+    .addSystem<ComposeTransformSystem>()
+    .addSystem<StateToViewportPolicyUpdateSystem<GameState, MatchState>>(stateToViewportMap)
+    .addSystem<SceneRenderingSystem>(renderingDevice, sceneToViewportMap)
+    .addSystem<TransformClearSystem>();
 ```
 
-## Score Types
+## State Management
 
-Define custom score types for different point values:
+The demo uses a hierarchical state machine:
 
-```cpp
-// Custom score type
-struct EnemyScore : public Score {
-    int points = 100;
-    
-    ScoreTypeId typeId() const override {
-        return ScoreTypeId{"enemy"};
-    }
-    
-    double value() const override {
-        return static_cast<double>(points);
-    }
-};
+- **GameState**: `Undefined` → `Start` → `Running` → `Paused` / `GameOver`
+- **MatchState**: `Undefined` → `WaitingForPlayers` → `Playing` → `GameOver`
 
-// Use with ScoreValueComponent
-entity.add<ScoreValueComponent<EnemyScore>>(100);
-```
+State transitions drive viewport visibility, system execution, and menu display.
 
 ## See Also
 
-- [Text Rendering](../../docs/core-concepts/text-rendering.md) - FreeType-based text rendering
-- [Component Lifecycle](../../docs/core-concepts/component-lifecycle.md) - Lifecycle hooks (onAcquire, onRelease)
+- [State Management](../../docs/core-concepts/state-management.md) - Hierarchical state machine architecture
+- [Spawn System](../../docs/core-concepts/spawn-system.md) - Spawn pipeline and DSL builder
 - [Object Pooling](../../docs/core-concepts/object-pooling.md) - Entity pooling system
-- [Collision Detection Example](../collision_detection/README.md) - Grid-based collision with damage
+- [Collision Detection Example](../collision_detection/README.md) - Grid-based collision
 - [Enemy Spawn Example](../enemy_spawn/README.md) - Spawn system with pooling

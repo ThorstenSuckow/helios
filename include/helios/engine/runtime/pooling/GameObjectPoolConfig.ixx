@@ -9,7 +9,7 @@ module;
 export module helios.engine.runtime.pooling.GameObjectPoolConfig;
 
 import helios.engine.ecs.GameObject;
-import helios.engine.core.data.GameObjectPoolId;
+import helios.engine.core.data;
 
 export namespace helios::engine::runtime::pooling {
 
@@ -17,31 +17,34 @@ export namespace helios::engine::runtime::pooling {
      * @brief Configuration structure for creating a GameObjectPool.
      *
      * @details GameObjectPoolConfig bundles all information required to initialize
-     * a GameObjectPool: a unique identifier, a prefab template for cloning, and
-     * the initial pool size. This configuration is typically passed to the
-     * GameObjectPoolManager responsible for this pool config.
+     * a GameObjectPool: a unique pool identifier, a PrefabId referencing the
+     * prefab template, and the initial pool size.
      *
-     * The prefab serves as the archetype from which all pooled instances are cloned.
-     * Components attached to the prefab will be duplicated to each pooled object.
+     * The PrefabId identifies the prefab GameObject that serves as the archetype
+     * from which all pooled instances are cloned. The prefab is registered
+     * separately via GameObjectFactory::withPrefabId() and looked up by the
+     * pool system at initialization time.
      *
      * Example usage:
      * ```cpp
-     * // Create prefab via GameWorld
-     * auto enemyPrefab = gameWorld.addGameObject();
-     * enemyPrefab.add<RenderableComponent>(mesh, material);
-     * enemyPrefab.add<Move2DComponent>();
-     * enemyPrefab.add<HealthComponent>(100.0f);
-     * enemyPrefab.setActive(false);  // Prefabs should be inactive
+     * // Create and tag prefab
+     * auto enemyPrefab = GameObjectFactory::instance()
+     *     .gameObject(gameWorld)
+     *     .withPrefabId(EnemyPrefabId)
+     *     // ... component configuration ...
+     *     .make();
      *
      * auto config = std::make_unique<GameObjectPoolConfig>(
-     *     GameObjectPoolId{1},
-     *     enemyPrefab,
+     *     EnemyPoolId,
+     *     EnemyPrefabId,
      *     50  // Pre-allocate 50 clones
      * );
      *
      * poolManager.addPoolConfig(std::move(config));
      * ```
      *
+     * @see PrefabId
+     * @see PrefabIdComponent
      * @see GameObjectPool
      * @see GameObjectPoolId
      * @see GameObjectPoolManager
@@ -56,13 +59,13 @@ export namespace helios::engine::runtime::pooling {
         const helios::engine::core::data::GameObjectPoolId gameObjectPoolId;
 
         /**
-         * @brief Template object used for cloning pooled instances.
+         * @brief Identifier of the prefab template used for cloning.
          *
-         * @details The prefab defines the component configuration for all objects
-         * created by this pool. Since GameObject is lightweight (~16 bytes),
-         * it is stored by value. The prefab should be inactive.
+         * References the prefab GameObject tagged with the matching
+         * PrefabIdComponent. The pool system resolves this ID to the
+         * actual entity at initialization time.
          */
-        const helios::engine::ecs::GameObject prefab;
+        const helios::engine::core::data::PrefabId prefabId;
 
         /**
          * @brief Initial number of objects to pre-allocate in the pool.

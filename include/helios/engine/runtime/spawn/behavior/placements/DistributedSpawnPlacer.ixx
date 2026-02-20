@@ -7,6 +7,7 @@ module;
 #include <cassert>
 #include <cmath>
 #include <algorithm>
+#include <array>
 
 export module helios.engine.runtime.spawn.behavior.placements.DistributedSpawnPlacer;
 

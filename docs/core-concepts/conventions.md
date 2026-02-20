@@ -287,17 +287,17 @@ constexpr float HELIOS_UNITS_PER_METER = 1.0f;
 
 ## Related Modules
 
-- `helios.core.units.Unit` — Unit conversion and constants
-- `helios.math.types` — Core vector and matrix types (`vec3f`, `mat4f`)
-- `helios.math.utils` — Mathematical utility functions (`perspective`, `radians`, `degrees`)
-- `helios.scene.Transform` — Encapsulates translation, rotation, and scale
-- `helios.scene.Camera` — Projection matrix management
-- `helios.scene.CameraSceneNode` — View matrix computation and scene graph integration
-- `helios.scene.InheritTransform` — Selective transform inheritance flags
+- `helios.core.units.Unit` - Unit conversion and constants
+- `helios.math.types` - Core vector and matrix types (`vec3f`, `mat4f`)
+- `helios.math.utils` - Mathematical utility functions (`perspective`, `radians`, `degrees`)
+- `helios.scene.Transform` - Encapsulates translation, rotation, and scale
+- `helios.scene.Camera` - Projection matrix management
+- `helios.scene.CameraSceneNode` - View matrix computation and scene graph integration
+- `helios.scene.InheritTransform` - Selective transform inheritance flags
 
 ## Related Documentation
 
-- [Scene Graph](scene-graph.md) — Hierarchical scene organization
-- [Component System](component-system.md) — ECS-style composition
-- [Spawn System](spawn-system.md) — Entity lifecycle with pooling
+- [Scene Graph](scene-graph.md) - Hierarchical scene organization
+- [Component System](component-system.md) - ECS-style composition
+- [Spawn System](spawn-system.md) - Entity lifecycle with pooling
 

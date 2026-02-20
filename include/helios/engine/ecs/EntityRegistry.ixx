@@ -41,7 +41,7 @@ export namespace helios::engine::ecs {
      * ## Versioning
      *
      * Each entity slot maintains a version number. When an entity is destroyed, its
-     * version is incremented. This allows the registry to detect **stale handles** —
+     * version is incremented. This allows the registry to detect **stale handles** -
      * handles that reference an entity that has been destroyed and potentially replaced
      * by a new entity at the same index.
      *

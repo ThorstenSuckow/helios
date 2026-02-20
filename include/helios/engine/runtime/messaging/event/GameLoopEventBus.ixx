@@ -94,8 +94,8 @@ export namespace helios::engine::runtime::messaging::event {
      *          events that must survive into subsequent phases.
      *
      * @see helios::core::buffer::TypeIndexedDoubleBuffer
-     * @see UpdateContext — Provides access to the event bus in systems
-     * @see GameLoop — Manages event bus lifecycle and commit points
+     * @see UpdateContext - Provides access to the event bus in systems
+     * @see GameLoop - Manages event bus lifecycle and commit points
      */
     using GameLoopEventBus = helios::core::buffer::TypeIndexedDoubleBuffer<
         helios::core::data::TypeIndexer<GameLoopEventBusGroup>

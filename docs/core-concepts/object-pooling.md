@@ -171,18 +171,41 @@ All prefab clones are created upfront during `init()`, which may cause a startup
 
 ## Integration with Spawn System
 
-The pooling system integrates with the [Spawn System](./spawn-system.md) through `SpawnManager`:
+The pooling system integrates with the [Spawn System](./spawn-system.md) through `SpawnManager`. The recommended way to configure both pool and spawn system together is via the `SpawnSystemFactory` builder, which co-locates pool and profile configuration under a single pool ID:
+
+```cpp
+using namespace helios::engine::builder::spawnSystem;
+
+auto spawns = SpawnSystemFactory::configure(poolManager, spawnManager);
+
+spawns.pool(GameObjectPoolId{"enemies"}, enemyPrefab, 50)
+    .profile(SpawnProfileId{"enemy_random"})
+        .randomPlacement()
+        .randomDirectionInitializer()
+        .scheduledBy(SpawnRuleId{"enemy_timer"})
+            .timerCondition(3.0f)
+            .fixedAmount(2)
+            .done()
+        .done()
+    .commit();
+```
+
+This registers the pool with `GameObjectPoolManager`, the profile with `SpawnManager`, and creates a `DefaultSpawnScheduler` - all in one fluent call.
+
+### Manual Integration
+
+For cases where the builder is not suitable:
 
 ```cpp
 // SpawnProfile references a pool
 SpawnProfile profile{
-    .poolId = GameObjectPoolId{"enemies"},
-    .placer = std::make_unique<RandomSpawnPlacer>(),
-    .initializer = std::make_unique<EnemyInitializer>()
+    .gameObjectPoolId = GameObjectPoolId{"enemies"},
+    .spawnPlacer = std::make_unique<RandomSpawnPlacer>(),
+    .spawnInitializer = std::make_unique<MoveInitializer>(DirectionType::Random)
 };
 
 // SpawnManager uses pools internally
-spawnManager.registerProfile(SpawnProfileId{"enemy_spawn"}, std::move(profile));
+spawnManager.addSpawnProfile(SpawnProfileId{"enemy_spawn"}, std::move(profile));
 ```
 
 When a spawn is requested, the SpawnManager:

@@ -53,8 +53,8 @@ export namespace helios::engine::runtime::world {
      *
      * ## Stored Components
      *
-     * - `StateComponent<T>` — Registered via trackState<T>()
-     * - `ActiveViewportIdsStateComponent` — Active viewport list (auto-added)
+     * - `StateComponent<T>` - Registered via trackState<T>()
+     * - `ActiveViewportIdsStateComponent` - Active viewport list (auto-added)
      *
      * @see StateComponent
      * @see StateManager

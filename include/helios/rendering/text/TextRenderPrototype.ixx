@@ -60,7 +60,7 @@ export namespace helios::rendering::text {
      * - Avoid copying `TextRenderPrototype` shared_ptrs in tight loops. The prototype
      *   getters return references, which is the correct pattern.
      * - The `fontResourceProvider_` uses a raw pointer intentionally to avoid circular
-     *   references and unnecessary ref-counting—this is the preferred pattern for
+     *   references and unnecessary ref-counting-this is the preferred pattern for
      *   service-like dependencies with well-defined lifetimes.
      *
      * @see TextRenderable

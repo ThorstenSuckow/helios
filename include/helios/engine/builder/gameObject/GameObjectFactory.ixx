@@ -15,10 +15,13 @@ import helios.engine.builder.gameObject.builders;
 
 import helios.engine.runtime.world.GameWorld;
 
+import helios.engine.runtime.pooling.components.PrefabIdComponent;
+
 import helios.engine.modules;
 import helios.engine.mechanics;
 import helios.util.Guid;
 import helios.engine.core.units;
+import helios.engine.core.data;
 import helios.math;
 
 export namespace helios::engine::builder::gameObject {
@@ -416,6 +419,10 @@ export namespace helios::engine::builder::gameObject {
                 return *this;
             }
 
+            GameObjectPrototype& withPrefabId(const helios::engine::core::data::PrefabId prefabId) {
+                gameObject_.add<helios::engine::runtime::pooling::components::PrefabIdComponent>(prefabId);
+                return *this;
+            }
         };
 
     public:

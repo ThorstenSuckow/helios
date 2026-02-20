@@ -45,7 +45,7 @@ export namespace helios::engine::mechanics::gamestate::systems {
         /**
          * @brief The previously observed game state.
          */
-        GameState prevMatchSate_ = GameState::Undefined;
+        GameState prevMatchState_ = GameState::Undefined;
 
         /**
          * @brief The previously observed state transition ID.
@@ -71,11 +71,11 @@ export namespace helios::engine::mechanics::gamestate::systems {
             const auto gameState = session.state<GameState>();
             auto gameStateTransitionId = session.stateTransitionId<GameState>();
 
-            if (gameState != GameState::Undefined && prevMatchSate_ == gameState && prevGameStateTransitionId_ == gameStateTransitionId) {
+            if (gameState != GameState::Undefined && prevMatchState_ == gameState && prevGameStateTransitionId_ == gameStateTransitionId) {
                 return;
             }
 
-            prevMatchSate_= gameState;
+            prevMatchState_= gameState;
             prevGameStateTransitionId_ = gameStateTransitionId;
 
             switch (gameState) {

@@ -11,6 +11,7 @@
     <innerfile refid="FontId_8ixx">FontId.ixx</innerfile>
     <innerfile refid="GameObjectPoolId_8ixx">GameObjectPoolId.ixx</innerfile>
     <innerfile refid="MenuId_8ixx">MenuId.ixx</innerfile>
+    <innerfile refid="PrefabId_8ixx">PrefabId.ixx</innerfile>
     <innerfile refid="SceneId_8ixx">SceneId.ixx</innerfile>
     <innerfile refid="ScorePoolId_8ixx">ScorePoolId.ixx</innerfile>
     <innerfile refid="ScoreTypeId_8ixx">ScoreTypeId.ixx</innerfile>
@@ -22,11 +23,11 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md102">
+<sect1 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md111">
 <title>helios::engine::core::data</title><para>Data structures for efficient entity management and querying.</para>
 <para>This module provides core data structures used for managing GameObjects within the helios engine.</para>
 </sect1>
-<sect1 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md103">
+<sect1 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md112">
 <title>Components</title><para><itemizedlist>
 <listitem><para><bold>CollisionLayer</bold> - Strongly-typed identifier for collision layers.</para>
 </listitem><listitem><para><bold>ComponentTypeId</bold> - Compile-time type identifier for O(1) component indexing within GameObject.</para>
@@ -47,8 +48,8 @@
 </listitem></itemizedlist>
 </para>
 </sect1>
-<sect1 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md104">
-<title>Strongly-Typed IDs</title><sect2 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md105">
+<sect1 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md113">
+<title>Strongly-Typed IDs</title><sect2 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md114">
 <title>String-Based IDs (FNV-1a Hashing)</title><para>The ID types <computeroutput>FontId</computeroutput>, <computeroutput>GameObjectPoolId</computeroutput>, <computeroutput>ScorePoolId</computeroutput>, <computeroutput>SpawnProfileId</computeroutput>, <computeroutput>SpawnRuleId</computeroutput>, and <computeroutput>ViewportId</computeroutput> provide type-safe identifiers constructed from string literals using FNV-1a hashing:</para>
 <para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Compile-time<sp/>constant<sp/>IDs<sp/>from<sp/>strings</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>GameObjectPoolId<sp/>ENEMY_POOL{</highlight><highlight class="stringliteral">&quot;enemies&quot;</highlight><highlight class="normal">};</highlight></codeline>
@@ -63,7 +64,7 @@
 <codeline><highlight class="normal">scheduler.addRule(ENEMY_PROFILE,<sp/>std::make_unique&lt;TimerSpawnRule&gt;(WAVE_RULE,<sp/>2.0f,<sp/>5));</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md106">
+<sect2 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md115">
 <title>Type-Based IDs (TypeIndexer)</title><para><computeroutput>ComponentTypeId</computeroutput> and <computeroutput>ScoreTypeId</computeroutput> use <computeroutput>TypeIndexer</computeroutput> to generate unique, monotonically increasing IDs for each type at compile time:</para>
 <para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Get<sp/>unique<sp/>ID<sp/>for<sp/>a<sp/>component<sp/>type</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>typeId<sp/>=<sp/>ComponentTypeId::id&lt;HealthComponent&gt;();</highlight></codeline>
@@ -72,7 +73,7 @@
 <codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>scoreId<sp/>=<sp/>ScoreTypeId::id&lt;KillScore&gt;();</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md107">
+<sect2 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md116">
 <title>Entity IDs (EntityPool)</title><para><computeroutput>EntityId</computeroutput> and <computeroutput>VersionId</computeroutput> are used together in <computeroutput>EntityHandle</computeroutput> for safe entity references within an <computeroutput>EntityPool</computeroutput>:</para>
 <para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>EntityHandle<sp/>combines<sp/>EntityId<sp/>+<sp/>VersionId</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">EntityHandle<sp/>{</highlight></codeline>

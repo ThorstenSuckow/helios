@@ -18,11 +18,11 @@
 <codeline></codeline>
 <codeline><highlight class="normal">The<sp/>game<sp/>loop<sp/>follows<sp/>a<sp/>three-phase<sp/>architecture:</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">**Pre<sp/>Phase**<sp/>—<sp/>Processes<sp/>input<sp/>and<sp/>generates<sp/>commands.<sp/>Systems<sp/>in<sp/>this<sp/>phase<sp/>read<sp/>player<sp/>input<sp/>and<sp/>enqueue<sp/>commands<sp/>into<sp/>the<sp/>CommandBuffer.</highlight></codeline>
+<codeline><highlight class="normal">**Pre<sp/>Phase**<sp/>-<sp/>Processes<sp/>input<sp/>and<sp/>generates<sp/>commands.<sp/>Systems<sp/>in<sp/>this<sp/>phase<sp/>read<sp/>player<sp/>input<sp/>and<sp/>enqueue<sp/>commands<sp/>into<sp/>the<sp/>CommandBuffer.</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">**Main<sp/>Phase**<sp/>—<sp/>Executes<sp/>core<sp/>gameplay<sp/>simulation.<sp/>This<sp/>includes<sp/>physics,<sp/>AI,<sp/>game<sp/>logic,<sp/>and<sp/>collision<sp/>detection<sp/>systems.</highlight></codeline>
+<codeline><highlight class="normal">**Main<sp/>Phase**<sp/>-<sp/>Executes<sp/>core<sp/>gameplay<sp/>simulation.<sp/>This<sp/>includes<sp/>physics,<sp/>AI,<sp/>game<sp/>logic,<sp/>and<sp/>collision<sp/>detection<sp/>systems.</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">**Post<sp/>Phase**<sp/>—<sp/>Handles<sp/>cleanup<sp/>and<sp/>synchronization.<sp/>Systems<sp/>in<sp/>this<sp/>phase<sp/>synchronize<sp/>the<sp/>gameplay<sp/>state<sp/>with<sp/>the<sp/>scene<sp/>graph<sp/>and<sp/>clear<sp/>dirty<sp/>flags.</highlight></codeline>
+<codeline><highlight class="normal">**Post<sp/>Phase**<sp/>-<sp/>Handles<sp/>cleanup<sp/>and<sp/>synchronization.<sp/>Systems<sp/>in<sp/>this<sp/>phase<sp/>synchronize<sp/>the<sp/>gameplay<sp/>state<sp/>with<sp/>the<sp/>scene<sp/>graph<sp/>and<sp/>clear<sp/>dirty<sp/>flags.</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">Each<sp/>phase<sp/>contains<sp/>one<sp/>or<sp/>more<sp/>passes.<sp/>A<sp/>pass<sp/>groups<sp/>related<sp/>systems<sp/>and<sp/>can<sp/>optionally<sp/>define<sp/>a<sp/>commit<sp/>point<sp/>for<sp/>event<sp/>synchronization<sp/>within<sp/>the<sp/>phase.</highlight></codeline>
 <codeline></codeline>
@@ -37,8 +37,8 @@
 <codeline><highlight class="normal">**Pass**<sp/>contains<sp/>a<sp/>registry<sp/>of<sp/>systems<sp/>that<sp/>execute<sp/>sequentially.<sp/>Passes<sp/>support<sp/>commit<sp/>points<sp/>to<sp/>synchronize<sp/>pass-level<sp/>events<sp/>before<sp/>the<sp/>next<sp/>pass<sp/>begins.</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">**CommitPoint**<sp/>is<sp/>a<sp/>flag<sp/>enum<sp/>that<sp/>specifies<sp/>which<sp/>synchronization<sp/>actions<sp/>occur<sp/>at<sp/>the<sp/>end<sp/>of<sp/>a<sp/>pass.<sp/>Available<sp/>flags<sp/>include:</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>`PassEvents`<sp/>—<sp/>Synchronizes<sp/>pass-level<sp/>events<sp/>for<sp/>the<sp/>next<sp/>pass.</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>`FlushCommands`<sp/>—<sp/>Executes<sp/>pending<sp/>commands<sp/>from<sp/>the<sp/>CommandBuffer.</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`PassEvents`<sp/>-<sp/>Synchronizes<sp/>pass-level<sp/>events<sp/>for<sp/>the<sp/>next<sp/>pass.</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`FlushCommands`<sp/>-<sp/>Executes<sp/>pending<sp/>commands<sp/>from<sp/>the<sp/>CommandBuffer.</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>`FlushManagers`<sp/>—<sp/>Processes<sp/>manager<sp/>requests<sp/>(e.g.,<sp/>spawning<sp/>from<sp/>pools).</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>`Structural`<sp/>—<sp/>Combines<sp/>all<sp/>three<sp/>flags<sp/>for<sp/>a<sp/>full<sp/>structural<sp/>commit.</highlight></codeline>
 <codeline></codeline>

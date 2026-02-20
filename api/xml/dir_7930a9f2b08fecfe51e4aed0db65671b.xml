@@ -13,13 +13,13 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_7930a9f2b08fecfe51e4aed0db65671b_1autotoc_md632">
+<sect1 id="dir_7930a9f2b08fecfe51e4aed0db65671b_1autotoc_md641">
 <title>helios::engine::runtime::spawn::scheduling</title><para>Spawn scheduling and plan management.</para>
 </sect1>
-<sect1 id="dir_7930a9f2b08fecfe51e4aed0db65671b_1autotoc_md633">
+<sect1 id="dir_7930a9f2b08fecfe51e4aed0db65671b_1autotoc_md642">
 <title>Overview</title><para>This module provides the scheduling layer for the spawn system. Schedulers evaluate spawn rules and produce ScheduledSpawnPlan instances that are processed by the command pipeline. The architecture separates scheduling strategies from rule processing logic.</para>
 </sect1>
-<sect1 id="dir_7930a9f2b08fecfe51e4aed0db65671b_1autotoc_md634">
+<sect1 id="dir_7930a9f2b08fecfe51e4aed0db65671b_1autotoc_md643">
 <title>Key Classes</title><para><table rows="9" cols="2"><row>
 <entry thead="yes"><para>Class  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
@@ -59,7 +59,7 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_7930a9f2b08fecfe51e4aed0db65671b_1autotoc_md635">
+<sect1 id="dir_7930a9f2b08fecfe51e4aed0db65671b_1autotoc_md644">
 <title>Architecture</title><para><programlisting><codeline><highlight class="normal">┌─────────────────────────────────────────────────────────────────────────┐</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SpawnScheduler<sp/>(abstract)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/>┌───────────────────────────────────────────────────────────────────┐<sp/><sp/>│</highlight></codeline>
@@ -82,8 +82,8 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>└────────────────────────┘</highlight></codeline>
 </programlisting></para>
 </sect1>
-<sect1 id="dir_7930a9f2b08fecfe51e4aed0db65671b_1autotoc_md636">
-<title>Scheduler Strategies</title><sect2 id="dir_7930a9f2b08fecfe51e4aed0db65671b_1autotoc_md637">
+<sect1 id="dir_7930a9f2b08fecfe51e4aed0db65671b_1autotoc_md645">
+<title>Scheduler Strategies</title><sect2 id="dir_7930a9f2b08fecfe51e4aed0db65671b_1autotoc_md646">
 <title>DefaultSpawnScheduler</title><para>Evaluates <bold>all registered rules</bold> every frame. Best for independent spawn sources that should trigger simultaneously.</para>
 <para><programlisting filename=".cpp"><codeline><highlight class="normal">DefaultSpawnScheduler<sp/>scheduler;</highlight></codeline>
 <codeline><highlight class="normal">scheduler</highlight></codeline>
@@ -94,7 +94,7 @@
 <codeline><highlight class="normal">scheduler.evaluate(updateContext,<sp/>spawnContext);</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="dir_7930a9f2b08fecfe51e4aed0db65671b_1autotoc_md638">
+<sect2 id="dir_7930a9f2b08fecfe51e4aed0db65671b_1autotoc_md647">
 <title>CyclicSpawnScheduler</title><para>Evaluates the <bold>current rule</bold> each frame and advances to the next rule <bold>only after a spawn was successfull committed</bold>. The same rule is re-evaluated until its conditions are met. Best for sequential wave patterns where each wave must complete before the next begins.</para>
 <para><programlisting filename=".cpp"><codeline><highlight class="normal">CyclicSpawnScheduler&lt;3&gt;<sp/>scheduler;</highlight></codeline>
 <codeline><highlight class="normal">scheduler</highlight></codeline>
@@ -108,12 +108,12 @@
 </programlisting></para>
 </sect2>
 </sect1>
-<sect1 id="dir_7930a9f2b08fecfe51e4aed0db65671b_1autotoc_md639">
+<sect1 id="dir_7930a9f2b08fecfe51e4aed0db65671b_1autotoc_md648">
 <title>Workflow</title><para><programlisting><codeline><highlight class="normal">SpawnRule::evaluate()<sp/>→<sp/>SpawnPlan<sp/>→<sp/>ScheduledSpawnPlan<sp/>→<sp/>Command<sp/>→<sp/>SpawnManager</highlight></codeline>
 </programlisting></para>
 <para>1. <bold>Registration:</bold> Rules added via <computeroutput>addRule()</computeroutput> with profile IDs 2. <bold>Evaluation:</bold> <computeroutput>evaluate()</computeroutput> called each frame by GameObjectSpawnSystem 3. <bold>Processing:</bold> RuleProcessor evaluates rules, updates state 4. <bold>Scheduling:</bold> Rules that pass produce ScheduledSpawnPlans 5. <bold>Draining:</bold> <computeroutput>drainScheduledPlans()</computeroutput> returns pending plans 6. <bold>Commit:</bold> <computeroutput>commit()</computeroutput> called after spawns to update rule state</para>
 </sect1>
-<sect1 id="dir_7930a9f2b08fecfe51e4aed0db65671b_1autotoc_md640">
+<sect1 id="dir_7930a9f2b08fecfe51e4aed0db65671b_1autotoc_md649">
 <title>Rule Processing</title><para>The <computeroutput>RuleProcessor</computeroutput> abstraction separates evaluation logic from scheduling strategy:</para>
 <para><programlisting filename=".cpp"><codeline><highlight class="keyword">class<sp/></highlight><highlight class="normal">RuleProcessor<sp/>{</highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
@@ -128,7 +128,7 @@
 </programlisting></para>
 <para><computeroutput>DefaultRuleProcessor</computeroutput> provides the standard implementation: 1. Retrieve pool snapshot from GameObjectPoolManager 2. Update rule state with delta time 3. Evaluate rule conditions 4. Return SpawnPlan with spawn amount</para>
 </sect1>
-<sect1 id="dir_7930a9f2b08fecfe51e4aed0db65671b_1autotoc_md641">
+<sect1 id="dir_7930a9f2b08fecfe51e4aed0db65671b_1autotoc_md650">
 <title>Related Modules</title><para><table rows="4" cols="2"><row>
 <entry thead="yes"><para>Module  </para>
 </entry><entry thead="yes"><para>Purpose  </para>

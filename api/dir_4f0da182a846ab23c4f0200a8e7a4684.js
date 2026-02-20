@@ -9,6 +9,7 @@ var dir_4f0da182a846ab23c4f0200a8e7a4684 =
     [ "FontId.ixx", "FontId_8ixx.html", "FontId_8ixx" ],
     [ "GameObjectPoolId.ixx", "GameObjectPoolId_8ixx.html", "GameObjectPoolId_8ixx" ],
     [ "MenuId.ixx", "MenuId_8ixx.html", "MenuId_8ixx" ],
+    [ "PrefabId.ixx", "PrefabId_8ixx.html", "PrefabId_8ixx" ],
     [ "SceneId.ixx", "SceneId_8ixx.html", "SceneId_8ixx" ],
     [ "ScorePoolId.ixx", "ScorePoolId_8ixx.html", "ScorePoolId_8ixx" ],
     [ "ScoreTypeId.ixx", "ScoreTypeId_8ixx.html", "ScoreTypeId_8ixx" ],

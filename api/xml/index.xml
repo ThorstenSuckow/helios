@@ -984,6 +984,11 @@
     <member refid="classhelios_1_1scene_1_1FrustumCullingStrategy_1a6132bcbaab01c563b08a97036f985e5a" kind="function"><name>FrustumCullingStrategy</name></member>
     <member refid="classhelios_1_1scene_1_1FrustumCullingStrategy_1a12f23b3d9ecc16858fedf7483d9890ae" kind="function"><name>cull</name></member>
   </compound>
+  <compound refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1systems_1_1GameFlowSystem" kind="class"><name>helios::engine::mechanics::gamestate::systems::GameFlowSystem</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1systems_1_1GameFlowSystem_1a69db253e5c21437ab4c2a0576fc1cd54" kind="variable"><name>prevMatchState_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1systems_1_1GameFlowSystem_1a60efa49fe9ca694c009f05e88ce3ad5a" kind="variable"><name>prevGameStateTransitionId_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1systems_1_1GameFlowSystem_1a04de078f55276760cf903d4d818711dd" kind="function"><name>update</name></member>
+  </compound>
   <compound refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop" kind="class"><name>helios::engine::runtime::gameloop::GameLoop</name>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a4cff6e4e7cab7702132062e1a3025a2c" kind="variable"><name>initialized_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a8abc8cce8e4faa1a54d61531b10781bd" kind="variable"><name>logger_</name></member>
@@ -1057,7 +1062,7 @@
   </compound>
   <compound refid="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig" kind="struct"><name>helios::engine::runtime::pooling::GameObjectPoolConfig</name>
     <member refid="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig_1a0bc086fe931274b62ec9d9d855691cd8" kind="variable"><name>gameObjectPoolId</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig_1ac1b68e03d5380f3f33efd16bace7bc28" kind="variable"><name>prefab</name></member>
+    <member refid="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig_1ac07418f07ea0128f340e6673ce45f4fe" kind="variable"><name>prefabId</name></member>
     <member refid="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig_1aa78c442cfcaea88e7d267ff43fd2d39c" kind="variable"><name>amount</name></member>
   </compound>
   <compound refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" kind="struct"><name>helios::engine::core::data::GameObjectPoolId</name>
@@ -1146,6 +1151,7 @@
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory_1_1GameObjectPrototype_1ac1f716852dc4789a6ef01b7c7c00e35a" kind="function"><name>withObserver</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory_1_1GameObjectPrototype_1aeaf071df5235c0465714985e78daf438" kind="function"><name>withMenu</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory_1_1GameObjectPrototype_1a7e827ae72378ea7fc9c29489a33a81ac" kind="function"><name>asPlayerEntity</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory_1_1GameObjectPrototype_1ab481ef277102dde8ad7f785213abccb3" kind="function"><name>withPrefabId</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem" kind="class"><name>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem_1ae9fa6db7063a540a89af9ec34261cb7a" kind="variable"><name>spawnManager_</name></member>
@@ -1284,7 +1290,7 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aae71c0fe187189d167cb967181831740" kind="function"><name>init</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a8d76de93fc524c7cfe07d506a79130db" kind="function"><name>setLevel</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a03d2275138a928e04c4bb527ba41830a" kind="function"><name>hasLevel</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a49f6a9068ec4cc0408ded2c8bd60f1ba" kind="function"><name>level</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a130d018f6ce51f8e8d75eac3e6ef3561" kind="function"><name>level</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ab53994280aeec233c1dd91f02a09e589" kind="function"><name>hasManager</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a7c60c2fdaba967d2415a3d8b253a425d" kind="function"><name>addManager</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a035f7979ac9743fceecaeea93204cd37" kind="function"><name>registerSpawnCommandHandler</name></member>
@@ -1883,7 +1889,7 @@
     <member refid="structhelios_1_1math_1_1mat4_1ad856b4652346ff475b653e257d64428d" kind="function"><name>identity</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1systems_1_1MatchFlowSystem" kind="class"><name>helios::engine::mechanics::match::systems::MatchFlowSystem</name>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1systems_1_1MatchFlowSystem_1aff53f5d39dfb8120a16851d714bc8d83" kind="variable"><name>prevMatchSate_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1systems_1_1MatchFlowSystem_1a34924e063f3949cb441a2f41ac08f402" kind="variable"><name>prevMatchState_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1systems_1_1MatchFlowSystem_1a2088e518b3a09efe84fce5f63448e774" kind="variable"><name>prevMatchStateTransitionId_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1systems_1_1MatchFlowSystem_1a9c84d303c34a6518dac0a75931a0e0a9" kind="function"><name>update</name></member>
   </compound>
@@ -2273,6 +2279,18 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase_1a6b4a1f29d5eafcbb8f86e6bc867d3d11" kind="function"><name>addPassCommitListener</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase_1a88638a425d6afe3141de12474f6ea52d" kind="function"><name>addPass</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase_1aa478fd5c979d7b3454afd1a4a9521851" kind="function"><name>gameLoop</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1components_1_1PrefabIdComponent" kind="class"><name>helios::engine::runtime::pooling::components::PrefabIdComponent</name>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1components_1_1PrefabIdComponent_1a927233f8dd0de190cbdc19170897e416" kind="variable"><name>prefabId_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1components_1_1PrefabIdComponent_1a798c786ac0abd5bb0fa12fe5d7639216" kind="function"><name>~PrefabIdComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1components_1_1PrefabIdComponent_1aea7f415387cfa91f28d4cd33f1c8f78b" kind="function"><name>PrefabIdComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1components_1_1PrefabIdComponent_1a0d8293ba05b3ce1c60447a531bb7bc5f" kind="function"><name>operator=</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1components_1_1PrefabIdComponent_1af077edd2075ad775aa46e5ecf5cc83d2" kind="function"><name>PrefabIdComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1components_1_1PrefabIdComponent_1a4ad4fcde2ac8ac408f9fd5d38cb4fbfd" kind="function"><name>operator=</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1components_1_1PrefabIdComponent_1a561b17b3c122504cd6d0914ecd4a8a53" kind="function"><name>PrefabIdComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1components_1_1PrefabIdComponent_1ac5b8e8a7aab9940c31a2322706f3b6a9" kind="function"><name>prefabId</name></member>
+  </compound>
+  <compound refid="structhelios_1_1engine_1_1core_1_1data_1_1PrefabIdTag" kind="struct"><name>helios::engine::core::data::PrefabIdTag</name>
   </compound>
   <compound refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1systems_1_1ProjectileSpawnSystem" kind="class"><name>helios::engine::mechanics::combat::systems::ProjectileSpawnSystem</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1systems_1_1ProjectileSpawnSystem_1a8d5e884eff9de5d3e20c0c757ebdbf05" kind="variable"><name>spawnProfileId_</name></member>
@@ -2683,6 +2701,28 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1ScheduledSpawnPlanCommandDispatcher_1ad2f498d542d4f6364552373cd93d0d7a" kind="function"><name>dispatchTyped</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1ScheduledSpawnPlanCommandDispatcher_1adba3d6f1bb3b956a0e2a555887f44e2b" kind="function"><name>ScheduledSpawnPlanCommandDispatcher</name></member>
   </compound>
+  <compound refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1SchedulerBuilder" kind="class"><name>helios::engine::builder::spawnSystem::builders::SchedulerBuilder</name>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1SchedulerBuilder_1a7da6bbb6d217975404b476c4867e2878" kind="variable"><name>spawnManager_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1SchedulerBuilder_1a12606dcd7decbb1d99e20137119d5383" kind="function"><name>addRules</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1SchedulerBuilder_1a334203ab0663347d94c29012e1f53753" kind="function"><name>SchedulerBuilder</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1SchedulerBuilder_1ae43a863da4bb93bd23785b69061b9772" kind="function"><name>defaultScheduler</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1SchedulerBuilder_1a77878edc9dcd832c4b7bf393de52e1b2" kind="function"><name>cyclicScheduler</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1SchedulerBuilder_1a6d237234acaad63c7bfefef9015997b9" kind="function"><name>customScheduler</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SchedulerConfig" kind="class"><name>helios::engine::builder::spawnSystem::builders::configs::SchedulerConfig</name>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SchedulerConfig_1aca4eec64acb0a58cb28f77bf76024029" kind="variable"><name>profileId_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SchedulerConfig_1a15968e3718165a3c39a008589fe57b8d" kind="variable"><name>ruleId_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SchedulerConfig_1a1543193eff39ee4f5b5339119388f8af" kind="variable"><name>condition_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SchedulerConfig_1a8bec742518433500179adab6f3ba1626" kind="variable"><name>amountProvider_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SchedulerConfig_1afc59891f007f8b322f371853c2251ffc" kind="function"><name>SchedulerConfig</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SchedulerConfig_1a4764f1dd212f7a011ef25767a944a34b" kind="function"><name>timerCondition</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SchedulerConfig_1a6ace31ffe1b7a8a78bd4539f95dafd4b" kind="function"><name>timerWithAvailabilityCondition</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SchedulerConfig_1a095ab36bd387168f822947ed5b8dfe95" kind="function"><name>condition</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SchedulerConfig_1a9b11478bdce9ef5fc2d5cfc77f4bd2e4" kind="function"><name>fixedAmount</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SchedulerConfig_1afd73450df407cbfedc3a266c1cd8c804" kind="function"><name>amount</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SchedulerConfig_1af8e48562d6395729feb143447331c150" kind="function"><name>profileId</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SchedulerConfig_1a0ef424bec519a854f9bd24ac13f7db6e" kind="function"><name>build</name></member>
+  </compound>
   <compound refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1types_1_1Score" kind="class"><name>helios::engine::mechanics::scoring::types::Score</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1types_1_1Score_1a237c2d4de96b81224d760c6d28404037" kind="variable"><name>value_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1types_1_1Score_1ad6ce115b5c9287fbac4b5639dffa0b63" kind="function"><name>~Score</name></member>
@@ -3076,10 +3116,46 @@
     <member refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnPlanCursor_1aa90b7dfe55938a408966953c93535a1b" kind="variable"><name>spawnCount</name></member>
     <member refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnPlanCursor_1ab711dfa48564030e6738b6632910a7f4" kind="variable"><name>position</name></member>
   </compound>
+  <compound refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnPoolConfig" kind="class"><name>helios::engine::builder::spawnSystem::builders::configs::SpawnPoolConfig</name>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnPoolConfig_1a85b1dbbc66ec98e95d43d9956ea233f3" kind="variable"><name>poolManager_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnPoolConfig_1a6b07a1330ddb6e619512ead72d3c46b9" kind="variable"><name>spawnManager_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnPoolConfig_1aa2b88fe470efbcd778b2359f7c3f502c" kind="variable"><name>poolId_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnPoolConfig_1ae60a6562e18d18039f121869a5d77f00" kind="variable"><name>prefabId_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnPoolConfig_1a76647ea073ce16cdaa7529f1394f3e60" kind="variable"><name>size_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnPoolConfig_1af5ed43613239663d45637a312c93a96f" kind="variable"><name>profiles_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnPoolConfig_1a634e82fe2adcae87218f6215c1407e8e" kind="function"><name>SpawnPoolConfig</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnPoolConfig_1a0baa47c26f6eefec70edcb2511541fad" kind="function"><name>profile</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnPoolConfig_1abf8f0ca6b5a68d682eaa47e378e8ec22" kind="function"><name>commit</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnPoolConfig_1a0729790b96a0701244e75db88be27337" kind="function"><name>commitProfilesOnly</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnPoolConfig_1aceb3c4adfaecf10007a10a993f4e0bc5" kind="function"><name>commitCyclic</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnPoolConfig_1a16c6143258997d91d47af29f7a1a8dd6" kind="function"><name>commitPool</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnPoolConfig_1a2d07b42f0dd9b513c79555377a759ec8" kind="function"><name>commitProfiles</name></member>
+  </compound>
   <compound refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnProfile" kind="struct"><name>helios::engine::runtime::spawn::SpawnProfile</name>
     <member refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnProfile_1a52e221efa800ca806f3f31828bbc8504" kind="variable"><name>gameObjectPoolId</name></member>
     <member refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnProfile_1a31ff9ddd311915656e1e92bfcdc3807f" kind="variable"><name>spawnPlacer</name></member>
     <member refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnProfile_1a94c707d0499fe9773d0ed8617678d36f" kind="variable"><name>spawnInitializer</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig" kind="class"><name>helios::engine::builder::spawnSystem::builders::configs::SpawnProfileConfig</name>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1abffce1162a089c4465af3b5ce664ce9d" kind="variable"><name>parent_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1a9483bc9b6c53a118108542938385aa90" kind="variable"><name>spawnManager_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1a80f7729c52aea8d7085de33ee8b36821" kind="variable"><name>profileId_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1a724b1b6a10106f11b8d9c0e70246032d" kind="variable"><name>poolId_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1a6a30d20f45b1f7cba0229ff714eae79d" kind="variable"><name>placer_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1ad710b381c5e0db9e86ea2339a7a0234a" kind="variable"><name>initializer_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1aa25626a7e73766d69213c69d9f6faf13" kind="variable"><name>rules_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1a135b071c244f2199f34dbd419d2c6d40" kind="function"><name>SpawnProfileConfig</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1ae14c34095b4f11eda0b2f17a90174b96" kind="function"><name>emitterPlacement</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1a069c18becae5338ef8a2c83d62a7d425" kind="function"><name>randomPlacement</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1aa5b491e905c4ea71cce00e81ef8ca9bc" kind="function"><name>axisPlacement</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1adbc39cbe4c96715f3b5234f0447bb497" kind="function"><name>placer</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1a571c0ef3a583b716b7d21d77fdf16a05" kind="function"><name>randomDirectionInitializer</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1a16194d38a633d0092aeab030046d9943" kind="function"><name>moveInitializer</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1ad809cde0361af9e29f625a10226a399c" kind="function"><name>initializer</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1abe54f0b84ab6b149388074963147a5fa" kind="function"><name>scheduledBy</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1a68870b2c8d55e57c91e433c12f915f8f" kind="function"><name>profileId</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1af9ca0bc96412b23c2ddc3d05e27e6a09" kind="function"><name>commit</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1ae3fefee7c96598c1dea7ad4d88231711" kind="function"><name>done</name></member>
   </compound>
   <compound refid="structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId" kind="struct"><name>helios::engine::core::data::SpawnProfileId</name>
     <member refid="structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId_1a7d14d8d398aada607ef139d5bab903d7" kind="variable"><name>id_</name></member>
@@ -3101,6 +3177,20 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRule_1a05b2dc8dd44e1145e09ec3a572c75027" kind="function"><name>spawnCondition</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRule_1a71619bd915eb81db9506579596b96cb8" kind="function"><name>evaluate</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRule_1a998bf175aa56f604fb180d52f98686f1" kind="function"><name>spawnRuleId</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnRuleConfig" kind="class"><name>helios::engine::builder::spawnSystem::builders::configs::SpawnRuleConfig</name>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnRuleConfig_1a89cee2fad5a6fca13e90ec9fac8ee3e1" kind="variable"><name>parent_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnRuleConfig_1aa401f260fa741d17bde9859402341c26" kind="variable"><name>ruleId_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnRuleConfig_1a69d084e0e3993a14441441ff88a9045b" kind="variable"><name>condition_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnRuleConfig_1a6dcd1391db5525e5d1a945ab39253acb" kind="variable"><name>amountProvider_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnRuleConfig_1a9db1498014d09c1c87c81dd4b927003c" kind="function"><name>SpawnRuleConfig</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnRuleConfig_1a744512d1839e04a9eae162e72277be16" kind="function"><name>timerCondition</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnRuleConfig_1a513fc39a8e375892b6f4686219c701cd" kind="function"><name>timerWithAvailabilityCondition</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnRuleConfig_1a4f2b61a05447bff6b31bfcf2a86a6fff" kind="function"><name>condition</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnRuleConfig_1accf621083f8953af5eea0839b1483b6d" kind="function"><name>fixedAmount</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnRuleConfig_1a49d47fef74c9135ad2e5d5058b726117" kind="function"><name>amount</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnRuleConfig_1ac20d0db187522f668794cfeb28e9ad0f" kind="function"><name>build</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnRuleConfig_1a346a571df51202d47ab2afcb0fb2f38b" kind="function"><name>done</name></member>
   </compound>
   <compound refid="structhelios_1_1engine_1_1core_1_1data_1_1SpawnRuleId" kind="struct"><name>helios::engine::core::data::SpawnRuleId</name>
     <member refid="structhelios_1_1engine_1_1core_1_1data_1_1SpawnRuleId_1a88c00742559771f82ceb7aa2e5f484f6" kind="variable"><name>id_</name></member>
@@ -3126,6 +3216,15 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler_1a61670b5004b39c53a0de3d59c1b10f8a" kind="function"><name>drainScheduledPlans</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler_1a7a7feaf2f36c3e38b880e183e3458749" kind="function"><name>commit</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler_1aa8939dcb68a9af4e835f73e3ea986e3f" kind="function"><name>reset</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnSystemConfigurator" kind="class"><name>helios::engine::builder::spawnSystem::builders::configs::SpawnSystemConfigurator</name>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnSystemConfigurator_1ae4573c13bde537cbc3fc885af20e4ca6" kind="variable"><name>poolManager_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnSystemConfigurator_1a270d5668a05f6ad6be036eb55d01d33b" kind="variable"><name>spawnManager_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnSystemConfigurator_1a98513efc8c274441f9c9c56185062645" kind="function"><name>SpawnSystemConfigurator</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnSystemConfigurator_1a421b8540a2e70bf18c90566584afd178" kind="function"><name>pool</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1SpawnSystemFactory" kind="class"><name>helios::engine::builder::spawnSystem::SpawnSystemFactory</name>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1SpawnSystemFactory_1a82a9bc4bbd9718c1158e6bb37c763c54" kind="function"><name>configure</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1modules_1_1effects_1_1gfx_1_1components_1_1SpinComponent" kind="class"><name>helios::engine::modules::effects::gfx::components::SpinComponent</name>
     <member refid="classhelios_1_1engine_1_1modules_1_1effects_1_1gfx_1_1components_1_1SpinComponent_1a12fba3c55de95581a79e5e210021e569" kind="variable"><name>rotationSpeed_</name></member>
@@ -4087,12 +4186,19 @@
   </compound>
   <compound refid="namespacehelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs" kind="namespace"><name>helios::engine::builder::gameObject::builders::configs</name>
   </compound>
+  <compound refid="namespacehelios_1_1engine_1_1builder_1_1spawnSystem" kind="namespace"><name>helios::engine::builder::spawnSystem</name>
+  </compound>
+  <compound refid="namespacehelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders" kind="namespace"><name>helios::engine::builder::spawnSystem::builders</name>
+  </compound>
+  <compound refid="namespacehelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs" kind="namespace"><name>helios::engine::builder::spawnSystem::builders::configs</name>
+  </compound>
   <compound refid="namespacehelios_1_1engine_1_1core" kind="namespace"><name>helios::engine::core</name>
   </compound>
   <compound refid="namespacehelios_1_1engine_1_1core_1_1data" kind="namespace"><name>helios::engine::core::data</name>
     <member refid="namespacehelios_1_1engine_1_1core_1_1data_1a7886ef44eabe7b1a1f109e6c5fe971ca" kind="typedef"><name>CollisionLayer</name></member>
     <member refid="namespacehelios_1_1engine_1_1core_1_1data_1a1876d5539fc6b911fbe54f8b56fd2ec0" kind="typedef"><name>EntityId</name></member>
     <member refid="namespacehelios_1_1engine_1_1core_1_1data_1aeed72402625b875cba0952c656aebfa4" kind="typedef"><name>MenuId</name></member>
+    <member refid="namespacehelios_1_1engine_1_1core_1_1data_1a1be4caf596302dfde2390532552f2478" kind="typedef"><name>PrefabId</name></member>
     <member refid="namespacehelios_1_1engine_1_1core_1_1data_1a64dc3794b3b3f72af16a0c2a4cab2763" kind="typedef"><name>VersionId</name></member>
     <member refid="namespacehelios_1_1engine_1_1core_1_1data_1ad7a3a4de437b171216482e5f1853a90e" kind="typedef"><name>ViewportId</name></member>
     <member refid="namespacehelios_1_1engine_1_1core_1_1data_1ae64ec2be155f406b8b8f557354c66efb" kind="variable"><name>MAX_COLLISION_LAYERS</name></member>
@@ -4149,6 +4255,7 @@
   <compound refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types" kind="namespace"><name>helios::engine::mechanics::gamestate::types</name>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80be" kind="enum"><name>GameState</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beaec0fc0100c4fc1ce4eea230c3dc10360" kind="enumvalue"><name>Undefined</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beaa6122a65eaa676f700ae68d393054a37" kind="enumvalue"><name>Start</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80bea16bfbf9c462762cf1cba4134ec53c504" kind="enumvalue"><name>Loading</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beab78a3223503896721cca1303f776159b" kind="enumvalue"><name>Title</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beab61541208db7fa7dba42c85224405911" kind="enumvalue"><name>Menu</name></member>
@@ -4426,6 +4533,8 @@
     <member refid="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1event_1a59b7e7d4204d917672591bc8a383d9b4" kind="typedef"><name>GameLoopEventBus</name></member>
   </compound>
   <compound refid="namespacehelios_1_1engine_1_1runtime_1_1pooling" kind="namespace"><name>helios::engine::runtime::pooling</name>
+  </compound>
+  <compound refid="namespacehelios_1_1engine_1_1runtime_1_1pooling_1_1components" kind="namespace"><name>helios::engine::runtime::pooling::components</name>
   </compound>
   <compound refid="namespacehelios_1_1engine_1_1runtime_1_1spawn" kind="namespace"><name>helios::engine::runtime::spawn</name>
   </compound>
@@ -4746,6 +4855,12 @@
   </compound>
   <compound refid="helios_2engine_2builder_2gameObject_2builders_2configs_2__module_8ixx" kind="file"><name>helios/engine/builder/gameObject/builders/configs/_module.ixx</name>
   </compound>
+  <compound refid="helios_2engine_2builder_2spawnSystem_2__module_8ixx" kind="file"><name>helios/engine/builder/spawnSystem/_module.ixx</name>
+  </compound>
+  <compound refid="helios_2engine_2builder_2spawnSystem_2builders_2__module_8ixx" kind="file"><name>helios/engine/builder/spawnSystem/builders/_module.ixx</name>
+  </compound>
+  <compound refid="helios_2engine_2builder_2spawnSystem_2builders_2configs_2__module_8ixx" kind="file"><name>helios/engine/builder/spawnSystem/builders/configs/_module.ixx</name>
+  </compound>
   <compound refid="helios_2engine_2core_2__module_8ixx" kind="file"><name>helios/engine/core/_module.ixx</name>
   </compound>
   <compound refid="helios_2engine_2core_2data_2__module_8ixx" kind="file"><name>helios/engine/core/data/_module.ixx</name>
@@ -4936,6 +5051,8 @@
   </compound>
   <compound refid="helios_2engine_2runtime_2pooling_2__module_8ixx" kind="file"><name>helios/engine/runtime/pooling/_module.ixx</name>
   </compound>
+  <compound refid="helios_2engine_2runtime_2pooling_2components_2__module_8ixx" kind="file"><name>helios/engine/runtime/pooling/components/_module.ixx</name>
+  </compound>
   <compound refid="helios_2engine_2runtime_2spawn_2__module_8ixx" kind="file"><name>helios/engine/runtime/spawn/_module.ixx</name>
   </compound>
   <compound refid="helios_2engine_2runtime_2spawn_2behavior_2__module_8ixx" kind="file"><name>helios/engine/runtime/spawn/behavior/_module.ixx</name>
@@ -5071,6 +5188,8 @@
   <compound refid="helios_2engine_2builder_2gameObject_2README_8md" kind="file"><name>helios/engine/builder/gameObject/README.md</name>
   </compound>
   <compound refid="helios_2engine_2builder_2README_8md" kind="file"><name>helios/engine/builder/README.md</name>
+  </compound>
+  <compound refid="helios_2engine_2builder_2spawnSystem_2README_8md" kind="file"><name>helios/engine/builder/spawnSystem/README.md</name>
   </compound>
   <compound refid="helios_2engine_2core_2data_2README_8md" kind="file"><name>helios/engine/core/data/README.md</name>
   </compound>
@@ -5487,6 +5606,14 @@
   </compound>
   <compound refid="GameObjectFactory_8ixx" kind="file"><name>GameObjectFactory.ixx</name>
   </compound>
+  <compound refid="SchedulerConfig_8ixx" kind="file"><name>SchedulerConfig.ixx</name>
+  </compound>
+  <compound refid="SpawnPoolConfig_8ixx" kind="file"><name>SpawnPoolConfig.ixx</name>
+  </compound>
+  <compound refid="SchedulerBuilder_8ixx" kind="file"><name>SchedulerBuilder.ixx</name>
+  </compound>
+  <compound refid="SpawnSystemFactory_8ixx" kind="file"><name>SpawnSystemFactory.ixx</name>
+  </compound>
   <compound refid="ActionId_8ixx" kind="file"><name>ActionId.ixx</name>
   </compound>
   <compound refid="CollisionLayer_8ixx" kind="file"><name>CollisionLayer.ixx</name>
@@ -5502,6 +5629,8 @@
   <compound refid="GameObjectPoolId_8ixx" kind="file"><name>GameObjectPoolId.ixx</name>
   </compound>
   <compound refid="MenuId_8ixx" kind="file"><name>MenuId.ixx</name>
+  </compound>
+  <compound refid="PrefabId_8ixx" kind="file"><name>PrefabId.ixx</name>
   </compound>
   <compound refid="SceneId_8ixx" kind="file"><name>SceneId.ixx</name>
   </compound>
@@ -5575,6 +5704,8 @@
   <compound refid="GameStateManager_8ixx" kind="file"><name>GameStateManager.ixx</name>
   </compound>
   <compound refid="DefaultGameStateTransitionRules_8ixx" kind="file"><name>DefaultGameStateTransitionRules.ixx</name>
+  </compound>
+  <compound refid="GameFlowSystem_8ixx" kind="file"><name>GameFlowSystem.ixx</name>
   </compound>
   <compound refid="GameStateInputResponseSystem_8ixx" kind="file"><name>GameStateInputResponseSystem.ixx</name>
   </compound>
@@ -5849,6 +5980,8 @@
   <compound refid="WorldCommandDispatcher_8ixx" kind="file"><name>WorldCommandDispatcher.ixx</name>
   </compound>
   <compound refid="GameLoopEventBus_8ixx" kind="file"><name>GameLoopEventBus.ixx</name>
+  </compound>
+  <compound refid="PrefabIdComponent_8ixx" kind="file"><name>PrefabIdComponent.ixx</name>
   </compound>
   <compound refid="GameObjectPool_8ixx" kind="file"><name>GameObjectPool.ixx</name>
   </compound>
@@ -6227,6 +6360,8 @@
   </compound>
   <compound refid="dir_918a2537f64cade110d64935620958ab" kind="dir"><name>builders</name>
   </compound>
+  <compound refid="dir_de2a909892e2b3e84af40ec15e13a004" kind="dir"><name>builders</name>
+  </compound>
   <compound refid="dir_236484ddeaee6e9ef038329dc0f2f448" kind="dir"><name>collision</name>
   </compound>
   <compound refid="dir_d368ce8d6920c000d21f916ca5b7e02f" kind="dir"><name>combat</name>
@@ -6283,6 +6418,8 @@
   </compound>
   <compound refid="dir_e9da0b62584c6eecb1a84f8213bdf7a4" kind="dir"><name>components</name>
   </compound>
+  <compound refid="dir_11b76823d843ebc113ffccbf22529fdf" kind="dir"><name>components</name>
+  </compound>
   <compound refid="dir_7a23a44b7b02552993267eb30c5e34a1" kind="dir"><name>components</name>
   </compound>
   <compound refid="dir_c6030577ed3776a07e72e0b3676e97ac" kind="dir"><name>concepts</name>
@@ -6290,6 +6427,8 @@
   <compound refid="dir_b5d4d16eb8a35bef91bda898d9a12dca" kind="dir"><name>conditions</name>
   </compound>
   <compound refid="dir_c01646dfa756089b07ac7b4e7ae63e35" kind="dir"><name>configs</name>
+  </compound>
+  <compound refid="dir_e032e354aea16855b4e7bc284c9279b1" kind="dir"><name>configs</name>
   </compound>
   <compound refid="dir_0a9303f85d55dc12484d040508d85f85" kind="dir"><name>controller</name>
   </compound>
@@ -6436,6 +6575,8 @@
   <compound refid="dir_bbe960beed295ed1307a81c8b31ebd37" kind="dir"><name>spawn</name>
   </compound>
   <compound refid="dir_920d0445133e8943cdb9dc7f8f55cbd5" kind="dir"><name>spawn</name>
+  </compound>
+  <compound refid="dir_1b0fbe5df8695f68df77faff1a12338c" kind="dir"><name>spawnSystem</name>
   </compound>
   <compound refid="dir_94b0c4fb82528c4245604725780b49de" kind="dir"><name>state</name>
   </compound>
@@ -7368,8 +7509,90 @@
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory_1_1GameObjectPrototype_1ac1f716852dc4789a6ef01b7c7c00e35a" kind="function"><name>withObserver</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory_1_1GameObjectPrototype_1aeaf071df5235c0465714985e78daf438" kind="function"><name>withMenu</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory_1_1GameObjectPrototype_1a7e827ae72378ea7fc9c29489a33a81ac" kind="function"><name>asPlayerEntity</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory_1_1GameObjectPrototype_1ab481ef277102dde8ad7f785213abccb3" kind="function"><name>withPrefabId</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory_1a3e1f2fd66b4f091ccbaa98b494240d64" kind="function"><name>instance</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory_1ac6d64b614d8d67bce93033dbcb1fd58d" kind="function"><name>gameObject</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8builder_8spawnSystem" kind="module"><name>helios.engine.builder.spawnSystem</name>
+  </compound>
+  <compound refid="module__helios_8engine_8builder_8spawnSystem_8builders" kind="module"><name>helios.engine.builder.spawnSystem.builders</name>
+  </compound>
+  <compound refid="module__helios_8engine_8builder_8spawnSystem_8builders_8configs" kind="module"><name>helios.engine.builder.spawnSystem.builders.configs</name>
+  </compound>
+  <compound refid="module__helios_8engine_8builder_8spawnSystem_8builders_8configs_8SchedulerConfig" kind="module"><name>helios.engine.builder.spawnSystem.builders.configs.SchedulerConfig</name>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SchedulerConfig_1aca4eec64acb0a58cb28f77bf76024029" kind="variable"><name>profileId_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SchedulerConfig_1a15968e3718165a3c39a008589fe57b8d" kind="variable"><name>ruleId_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SchedulerConfig_1a1543193eff39ee4f5b5339119388f8af" kind="variable"><name>condition_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SchedulerConfig_1a8bec742518433500179adab6f3ba1626" kind="variable"><name>amountProvider_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SchedulerConfig_1afc59891f007f8b322f371853c2251ffc" kind="function"><name>SchedulerConfig</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SchedulerConfig_1a4764f1dd212f7a011ef25767a944a34b" kind="function"><name>timerCondition</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SchedulerConfig_1a6ace31ffe1b7a8a78bd4539f95dafd4b" kind="function"><name>timerWithAvailabilityCondition</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SchedulerConfig_1a095ab36bd387168f822947ed5b8dfe95" kind="function"><name>condition</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SchedulerConfig_1a9b11478bdce9ef5fc2d5cfc77f4bd2e4" kind="function"><name>fixedAmount</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SchedulerConfig_1afd73450df407cbfedc3a266c1cd8c804" kind="function"><name>amount</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SchedulerConfig_1af8e48562d6395729feb143447331c150" kind="function"><name>profileId</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SchedulerConfig_1a0ef424bec519a854f9bd24ac13f7db6e" kind="function"><name>build</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8builder_8spawnSystem_8builders_8configs_8SpawnPoolConfig" kind="module"><name>helios.engine.builder.spawnSystem.builders.configs.SpawnPoolConfig</name>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnSystemConfigurator_1ae4573c13bde537cbc3fc885af20e4ca6" kind="variable"><name>poolManager_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnSystemConfigurator_1a270d5668a05f6ad6be036eb55d01d33b" kind="variable"><name>spawnManager_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnRuleConfig_1a89cee2fad5a6fca13e90ec9fac8ee3e1" kind="variable"><name>parent_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnRuleConfig_1aa401f260fa741d17bde9859402341c26" kind="variable"><name>ruleId_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnRuleConfig_1a69d084e0e3993a14441441ff88a9045b" kind="variable"><name>condition_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnRuleConfig_1a6dcd1391db5525e5d1a945ab39253acb" kind="variable"><name>amountProvider_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1abffce1162a089c4465af3b5ce664ce9d" kind="variable"><name>parent_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1a9483bc9b6c53a118108542938385aa90" kind="variable"><name>spawnManager_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1a80f7729c52aea8d7085de33ee8b36821" kind="variable"><name>profileId_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1a724b1b6a10106f11b8d9c0e70246032d" kind="variable"><name>poolId_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1a6a30d20f45b1f7cba0229ff714eae79d" kind="variable"><name>placer_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1ad710b381c5e0db9e86ea2339a7a0234a" kind="variable"><name>initializer_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1aa25626a7e73766d69213c69d9f6faf13" kind="variable"><name>rules_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnPoolConfig_1a85b1dbbc66ec98e95d43d9956ea233f3" kind="variable"><name>poolManager_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnPoolConfig_1a6b07a1330ddb6e619512ead72d3c46b9" kind="variable"><name>spawnManager_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnPoolConfig_1aa2b88fe470efbcd778b2359f7c3f502c" kind="variable"><name>poolId_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnPoolConfig_1ae60a6562e18d18039f121869a5d77f00" kind="variable"><name>prefabId_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnPoolConfig_1a76647ea073ce16cdaa7529f1394f3e60" kind="variable"><name>size_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnPoolConfig_1af5ed43613239663d45637a312c93a96f" kind="variable"><name>profiles_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnSystemConfigurator_1a98513efc8c274441f9c9c56185062645" kind="function"><name>SpawnSystemConfigurator</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnSystemConfigurator_1a421b8540a2e70bf18c90566584afd178" kind="function"><name>pool</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnRuleConfig_1a9db1498014d09c1c87c81dd4b927003c" kind="function"><name>SpawnRuleConfig</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnRuleConfig_1a744512d1839e04a9eae162e72277be16" kind="function"><name>timerCondition</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnRuleConfig_1a513fc39a8e375892b6f4686219c701cd" kind="function"><name>timerWithAvailabilityCondition</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnRuleConfig_1a4f2b61a05447bff6b31bfcf2a86a6fff" kind="function"><name>condition</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnRuleConfig_1accf621083f8953af5eea0839b1483b6d" kind="function"><name>fixedAmount</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnRuleConfig_1a49d47fef74c9135ad2e5d5058b726117" kind="function"><name>amount</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnRuleConfig_1ac20d0db187522f668794cfeb28e9ad0f" kind="function"><name>build</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnRuleConfig_1a346a571df51202d47ab2afcb0fb2f38b" kind="function"><name>done</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1a135b071c244f2199f34dbd419d2c6d40" kind="function"><name>SpawnProfileConfig</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1ae14c34095b4f11eda0b2f17a90174b96" kind="function"><name>emitterPlacement</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1a069c18becae5338ef8a2c83d62a7d425" kind="function"><name>randomPlacement</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1aa5b491e905c4ea71cce00e81ef8ca9bc" kind="function"><name>axisPlacement</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1adbc39cbe4c96715f3b5234f0447bb497" kind="function"><name>placer</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1a571c0ef3a583b716b7d21d77fdf16a05" kind="function"><name>randomDirectionInitializer</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1a16194d38a633d0092aeab030046d9943" kind="function"><name>moveInitializer</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1ad809cde0361af9e29f625a10226a399c" kind="function"><name>initializer</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1abe54f0b84ab6b149388074963147a5fa" kind="function"><name>scheduledBy</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1a68870b2c8d55e57c91e433c12f915f8f" kind="function"><name>profileId</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1af9ca0bc96412b23c2ddc3d05e27e6a09" kind="function"><name>commit</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig_1ae3fefee7c96598c1dea7ad4d88231711" kind="function"><name>done</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnPoolConfig_1a634e82fe2adcae87218f6215c1407e8e" kind="function"><name>SpawnPoolConfig</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnPoolConfig_1a0baa47c26f6eefec70edcb2511541fad" kind="function"><name>profile</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnPoolConfig_1abf8f0ca6b5a68d682eaa47e378e8ec22" kind="function"><name>commit</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnPoolConfig_1a0729790b96a0701244e75db88be27337" kind="function"><name>commitProfilesOnly</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnPoolConfig_1aceb3c4adfaecf10007a10a993f4e0bc5" kind="function"><name>commitCyclic</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnPoolConfig_1a16c6143258997d91d47af29f7a1a8dd6" kind="function"><name>commitPool</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnPoolConfig_1a2d07b42f0dd9b513c79555377a759ec8" kind="function"><name>commitProfiles</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8builder_8spawnSystem_8builders_8SchedulerBuilder" kind="module"><name>helios.engine.builder.spawnSystem.builders.SchedulerBuilder</name>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1SchedulerBuilder_1a7da6bbb6d217975404b476c4867e2878" kind="variable"><name>spawnManager_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1SchedulerBuilder_1a12606dcd7decbb1d99e20137119d5383" kind="function"><name>addRules</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1SchedulerBuilder_1a334203ab0663347d94c29012e1f53753" kind="function"><name>SchedulerBuilder</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1SchedulerBuilder_1ae43a863da4bb93bd23785b69061b9772" kind="function"><name>defaultScheduler</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1SchedulerBuilder_1a77878edc9dcd832c4b7bf393de52e1b2" kind="function"><name>cyclicScheduler</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1SchedulerBuilder_1a6d237234acaad63c7bfefef9015997b9" kind="function"><name>customScheduler</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8builder_8spawnSystem_8SpawnSystemFactory" kind="module"><name>helios.engine.builder.spawnSystem.SpawnSystemFactory</name>
+    <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1SpawnSystemFactory_1a82a9bc4bbd9718c1158e6bb37c763c54" kind="function"><name>configure</name></member>
   </compound>
   <compound refid="module__helios_8engine_8core" kind="module"><name>helios.engine.core</name>
   </compound>
@@ -7426,6 +7649,9 @@
   </compound>
   <compound refid="module__helios_8engine_8core_8data_8MenuId" kind="module"><name>helios.engine.core.data.MenuId</name>
     <member refid="namespacehelios_1_1engine_1_1core_1_1data_1aeed72402625b875cba0952c656aebfa4" kind="typedef"><name>MenuId</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8core_8data_8PrefabId" kind="module"><name>helios.engine.core.data.PrefabId</name>
+    <member refid="namespacehelios_1_1engine_1_1core_1_1data_1a1be4caf596302dfde2390532552f2478" kind="typedef"><name>PrefabId</name></member>
   </compound>
   <compound refid="module__helios_8engine_8core_8data_8SceneId" kind="module"><name>helios.engine.core.data.SceneId</name>
     <member refid="structhelios_1_1engine_1_1core_1_1data_1_1SceneId_1a1b4c9198eab8f06cb88bd4fa1a61051e" kind="variable"><name>id_</name></member>
@@ -7915,6 +8141,11 @@
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8gamestate_8systems" kind="module"><name>helios.engine.mechanics.gamestate.systems</name>
   </compound>
+  <compound refid="module__helios_8engine_8mechanics_8gamestate_8systems_8GameFlowSystem" kind="module"><name>helios.engine.mechanics.gamestate.systems.GameFlowSystem</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1systems_1_1GameFlowSystem_1a69db253e5c21437ab4c2a0576fc1cd54" kind="variable"><name>prevMatchState_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1systems_1_1GameFlowSystem_1a60efa49fe9ca694c009f05e88ce3ad5a" kind="variable"><name>prevGameStateTransitionId_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1systems_1_1GameFlowSystem_1a04de078f55276760cf903d4d818711dd" kind="function"><name>update</name></member>
+  </compound>
   <compound refid="module__helios_8engine_8mechanics_8gamestate_8systems_8GameStateInputResponseSystem" kind="module"><name>helios.engine.mechanics.gamestate.systems.GameStateInputResponseSystem</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1systems_1_1GameStateInputResponseSystem_1a41cb7a88c7f222cbfc3254da8cc52bf8" kind="function"><name>update</name></member>
   </compound>
@@ -7923,6 +8154,7 @@
   <compound refid="module__helios_8engine_8mechanics_8gamestate_8types_8GameState" kind="module"><name>helios.engine.mechanics.gamestate.types.GameState</name>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80be" kind="enum"><name>GameState</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beaec0fc0100c4fc1ce4eea230c3dc10360" kind="enumvalue"><name>Undefined</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beaa6122a65eaa676f700ae68d393054a37" kind="enumvalue"><name>Start</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80bea16bfbf9c462762cf1cba4134ec53c504" kind="enumvalue"><name>Loading</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beab78a3223503896721cca1303f776159b" kind="enumvalue"><name>Title</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beab61541208db7fa7dba42c85224405911" kind="enumvalue"><name>Menu</name></member>
@@ -8060,7 +8292,7 @@
   <compound refid="module__helios_8engine_8mechanics_8match_8systems" kind="module"><name>helios.engine.mechanics.match.systems</name>
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8match_8systems_8MatchFlowSystem" kind="module"><name>helios.engine.mechanics.match.systems.MatchFlowSystem</name>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1systems_1_1MatchFlowSystem_1aff53f5d39dfb8120a16851d714bc8d83" kind="variable"><name>prevMatchSate_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1systems_1_1MatchFlowSystem_1a34924e063f3949cb441a2f41ac08f402" kind="variable"><name>prevMatchState_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1systems_1_1MatchFlowSystem_1a2088e518b3a09efe84fce5f63448e774" kind="variable"><name>prevMatchStateTransitionId_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1systems_1_1MatchFlowSystem_1a9c84d303c34a6518dac0a75931a0e0a9" kind="function"><name>update</name></member>
   </compound>
@@ -9305,6 +9537,18 @@
   </compound>
   <compound refid="module__helios_8engine_8runtime_8pooling" kind="module"><name>helios.engine.runtime.pooling</name>
   </compound>
+  <compound refid="module__helios_8engine_8runtime_8pooling_8components" kind="module"><name>helios.engine.runtime.pooling.components</name>
+  </compound>
+  <compound refid="module__helios_8engine_8runtime_8pooling_8components_8PrefabIdComponent" kind="module"><name>helios.engine.runtime.pooling.components.PrefabIdComponent</name>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1components_1_1PrefabIdComponent_1a927233f8dd0de190cbdc19170897e416" kind="variable"><name>prefabId_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1components_1_1PrefabIdComponent_1a798c786ac0abd5bb0fa12fe5d7639216" kind="function"><name>~PrefabIdComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1components_1_1PrefabIdComponent_1aea7f415387cfa91f28d4cd33f1c8f78b" kind="function"><name>PrefabIdComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1components_1_1PrefabIdComponent_1a0d8293ba05b3ce1c60447a531bb7bc5f" kind="function"><name>operator=</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1components_1_1PrefabIdComponent_1af077edd2075ad775aa46e5ecf5cc83d2" kind="function"><name>PrefabIdComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1components_1_1PrefabIdComponent_1a4ad4fcde2ac8ac408f9fd5d38cb4fbfd" kind="function"><name>operator=</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1components_1_1PrefabIdComponent_1a561b17b3c122504cd6d0914ecd4a8a53" kind="function"><name>PrefabIdComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1components_1_1PrefabIdComponent_1ac5b8e8a7aab9940c31a2322706f3b6a9" kind="function"><name>prefabId</name></member>
+  </compound>
   <compound refid="module__helios_8engine_8runtime_8pooling_8GameObjectPool" kind="module"><name>helios.engine.runtime.pooling.GameObjectPool</name>
     <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1afaf63b9e180dc22177ebe038923c23d1" kind="variable"><name>activeIndex_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1aad4858b225d850bd70aa2a7e9f8d7c09" kind="variable"><name>versionIndex_</name></member>
@@ -9332,7 +9576,7 @@
   </compound>
   <compound refid="module__helios_8engine_8runtime_8pooling_8GameObjectPoolConfig" kind="module"><name>helios.engine.runtime.pooling.GameObjectPoolConfig</name>
     <member refid="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig_1a0bc086fe931274b62ec9d9d855691cd8" kind="variable"><name>gameObjectPoolId</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig_1ac1b68e03d5380f3f33efd16bace7bc28" kind="variable"><name>prefab</name></member>
+    <member refid="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig_1ac07418f07ea0128f340e6673ce45f4fe" kind="variable"><name>prefabId</name></member>
     <member refid="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig_1aa78c442cfcaea88e7d267ff43fd2d39c" kind="variable"><name>amount</name></member>
   </compound>
   <compound refid="module__helios_8engine_8runtime_8pooling_8GameObjectPoolManager" kind="module"><name>helios.engine.runtime.pooling.GameObjectPoolManager</name>
@@ -9683,7 +9927,7 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aae71c0fe187189d167cb967181831740" kind="function"><name>init</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a8d76de93fc524c7cfe07d506a79130db" kind="function"><name>setLevel</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a03d2275138a928e04c4bb527ba41830a" kind="function"><name>hasLevel</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a49f6a9068ec4cc0408ded2c8bd60f1ba" kind="function"><name>level</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a130d018f6ce51f8e8d75eac3e6ef3561" kind="function"><name>level</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ab53994280aeec233c1dd91f02a09e589" kind="function"><name>hasManager</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a7c60c2fdaba967d2415a3d8b253a425d" kind="function"><name>addManager</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a035f7979ac9743fceecaeea93204cd37" kind="function"><name>registerSpawnCommandHandler</name></member>

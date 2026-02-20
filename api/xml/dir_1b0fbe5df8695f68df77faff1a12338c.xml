@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_1b0fbe5df8695f68df77faff1a12338c" kind="dir">
+    <compoundname>spawnSystem</compoundname>
+    <innerdir refid="dir_de2a909892e2b3e84af40ec15e13a004">builders</innerdir>
+    <innerfile refid="helios_2engine_2builder_2spawnSystem_2__module_8ixx">helios/engine/builder/spawnSystem/_module.ixx</innerfile>
+    <innerfile refid="SpawnSystemFactory_8ixx">SpawnSystemFactory.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_1b0fbe5df8695f68df77faff1a12338c_1autotoc_md102">
+<title>helios.engine.builder.spawnSystem</title><para>Fluent, ID-centric builder API for configuring the spawn system: pools, profiles, and schedulers.</para>
+</sect1>
+<sect1 id="dir_1b0fbe5df8695f68df77faff1a12338c_1autotoc_md103">
+<title>Overview</title><para><computeroutput>SpawnSystemFactory</computeroutput> provides an API where each <bold>pool ID</bold> is the entry point for all related configuration. Profiles and scheduling rules are nested under their pool, ensuring co-location of related IDs and reducing configuration errors.</para>
+</sect1>
+<sect1 id="dir_1b0fbe5df8695f68df77faff1a12338c_1autotoc_md104">
+<title>Architecture</title><para><programlisting><codeline><highlight class="normal">spawnSystem/</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>_module.ixx<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Module<sp/>facade</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>SpawnSystemFactory.ixx<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Entry<sp/>point<sp/>(analog<sp/>to<sp/>GameObjectFactory)</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>README.md</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>builders/</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>_module.ixx</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>SchedulerBuilder.ixx<sp/><sp/><sp/><sp/><sp/>#<sp/>Standalone<sp/>scheduler<sp/>registration</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>configs/</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/>├──<sp/>_module.ixx</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/>├──<sp/>SpawnPoolConfig.ixx<sp/><sp/>#<sp/>ID-centric:<sp/>pool<sp/>→<sp/>profiles<sp/>→<sp/>rules</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/>└──<sp/>SchedulerConfig.ixx<sp/><sp/>#<sp/>Standalone<sp/>rule<sp/>config<sp/>(for<sp/>SchedulerBuilder)</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_1b0fbe5df8695f68df77faff1a12338c_1autotoc_md105">
+<title>Usage</title><sect2 id="dir_1b0fbe5df8695f68df77faff1a12338c_1autotoc_md106">
+<title>ID-centric API (recommended)</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1builder_1_1spawnSystem" kindref="compound">helios::engine::builder::spawnSystem</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1SpawnSystemFactory_1a82a9bc4bbd9718c1158e6bb37c763c54" kindref="member">SpawnSystemFactory::configure</ref>(poolManager,<sp/>spawnManager)</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Simple<sp/>pool:<sp/>no<sp/>scheduling</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.pool(ProjectilePoolId,<sp/>projectilePrefab,<sp/>50)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.profile(ProjectileProfileId)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.emitterPlacement()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.done()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.commit()</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Pool<sp/>with<sp/>scheduled<sp/>spawning</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.pool(EnemyPoolId,<sp/>enemyPrefab,<sp/>200)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.profile(EnemyProfileId)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.randomPlacement()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.randomDirectionInitializer()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.scheduledBy(EnemyRuleId)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.timerCondition(5.0f)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.fixedAmount(1)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.done()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.done()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.commit()</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Multiple<sp/>profiles<sp/>with<sp/>cyclic<sp/>scheduling</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.pool(OrangePoolId,<sp/>orangePrefab,<sp/>100)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.profile(LeftProfileId)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.axisPlacement(leftAxis,<sp/>leftOrigin)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.moveInitializer(rightDir)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.scheduledBy(LeftRuleId)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.timerWithAvailabilityCondition(15.0f)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.fixedAmount(10)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.done()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.done()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.profile(RightProfileId)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.axisPlacement(rightAxis,<sp/>rightOrigin)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.moveInitializer(leftDir)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.scheduledBy(RightRuleId)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.timerWithAvailabilityCondition(15.0f)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.fixedAmount(10)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.done()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.done()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.commitCyclic&lt;2&gt;();</highlight></codeline>
+</programlisting></para>
+</sect2>
+<sect2 id="dir_1b0fbe5df8695f68df77faff1a12338c_1autotoc_md107">
+<title>Chained Pool Configuration</title><para><computeroutput>commit()</computeroutput> and <computeroutput>commitCyclic&lt;N&gt;()</computeroutput> return a <computeroutput>SpawnSystemConfigurator</computeroutput> that provides <computeroutput>pool()</computeroutput> for starting the next pool configuration:</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1SpawnSystemFactory_1a82a9bc4bbd9718c1158e6bb37c763c54" kindref="member">SpawnSystemFactory::configure</ref>(poolManager,<sp/>spawnManager)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.pool(ProjectilePoolId,<sp/>prefab1,<sp/>50)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.profile(ProjectileProfileId).emitterPlacement().done()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.commit()<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>←<sp/>returns<sp/>configurator</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.pool(EnemyPoolId,<sp/>prefab2,<sp/>200)<sp/></highlight><highlight class="comment">//<sp/>←<sp/>next<sp/>pool<sp/>on<sp/>the<sp/>return<sp/>value</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.profile(EnemyProfileId).randomPlacement().done()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.commit();</highlight></codeline>
+</programlisting></para>
+</sect2>
+<sect2 id="dir_1b0fbe5df8695f68df77faff1a12338c_1autotoc_md108">
+<title>Separate Scheduling with commitProfilesOnly()</title><para>When the same profiles need different scheduling strategies (e.g., in different levels), commit profiles without rules and attach schedulers separately:</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Register<sp/>pool<sp/>+<sp/>profiles<sp/>(no<sp/>schedulers<sp/>created)</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">spawns.pool(OrangePoolId,<sp/>orangePrefab,<sp/>100)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.profile(LeftProfileId).axisPlacement(leftAxis,<sp/>leftOrigin).moveInitializer(rightDir).done()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.profile(RightProfileId).axisPlacement(rightAxis,<sp/>rightOrigin).moveInitializer(leftDir).done()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.commitProfilesOnly();</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Attach<sp/>scheduling<sp/>independently<sp/>via<sp/>SchedulerBuilder</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">SchedulerBuilder<sp/>sb(spawnManager);</highlight></codeline>
+<codeline><highlight class="normal">sb.cyclicScheduler(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>SchedulerConfig(LeftProfileId,<sp/>LeftRuleId).timerCondition(5.0f).fixedAmount(10),</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>SchedulerConfig(RightProfileId,<sp/>RightRuleId).timerCondition(5.0f).fixedAmount(10)</highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+</programlisting></para>
+</sect2>
+</sect1>
+<sect1 id="dir_1b0fbe5df8695f68df77faff1a12338c_1autotoc_md109">
+<title>Design Decisions</title><para><itemizedlist>
+<listitem><para><bold>ID-centric</bold>: Pool ID is the root of all related config - no mismatched IDs possible</para>
+</listitem><listitem><para><bold>No GameLoop dependency</bold>: Dispatcher registration is the caller&apos;s responsibility</para>
+</listitem><listitem><para><bold>commit() vs commitCyclic&lt;N&gt;()</bold>: <computeroutput>commit()</computeroutput> creates per-profile DefaultSpawnSchedulers; <computeroutput>commitCyclic&lt;N&gt;()</computeroutput> bundles all rules into a single CyclicSpawnScheduler</para>
+</listitem><listitem><para><bold>commitProfilesOnly()</bold>: Registers pool and profiles without schedulers, enabling separate scheduling via <computeroutput>SchedulerBuilder</computeroutput></para>
+</listitem><listitem><para><bold>done() chaining</bold>: Nested configs return to their parent via <computeroutput>done()</computeroutput>, enabling natural indentation</para>
+</listitem><listitem><para><bold>Move-only configs</bold>: SpawnPoolConfig is not copyable (unique_ptr members). For reusable profile setups with different scheduling, use <computeroutput>commitProfilesOnly()</computeroutput> + <computeroutput>SchedulerBuilder</computeroutput></para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="dir_1b0fbe5df8695f68df77faff1a12338c_1autotoc_md110">
+<title>See Also</title><para><itemizedlist>
+<listitem><para><ref refid="dir_a108d9e19c5aa79c49bc6bd27980ebb3" kindref="compound">GameObjectFactory</ref> - analogous builder for GameObjects</para>
+</listitem><listitem><para><ref refid="dir_920d0445133e8943cdb9dc7f8f55cbd5" kindref="compound">SpawnManager</ref> - processes spawn/despawn commands</para>
+</listitem><listitem><para><ref refid="dir_50a13eed33dcd9f476e4986821866285" kindref="compound">GameObjectPoolManager</ref> - manages pre-allocated pools </para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/builder/spawnSystem/"/>
+  </compounddef>
+</doxygen>

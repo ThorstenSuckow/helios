@@ -150,13 +150,13 @@ Files</h2></td></tr>
 <tr class="memdesc:View_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lightweight view for iterating entities with specific components. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md123"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md132"></a>
 helios::engine::ecs</h1>
 <p>Core Entity-Component-System architecture for the helios game engine.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md124"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md133"></a>
 Overview</h1>
 <p>This module provides the foundational classes for the composition-based game architecture. It separates data (Components) from behavior (Systems). Entity lifecycle and world management are provided by <span class="tt"><a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1world.html" title="World state management and per-frame update context.">helios.engine.runtime.world</a></span>.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md125"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md134"></a>
 Key Classes</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -188,7 +188,7 @@ Key Classes</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">Traits</span>  </td><td class="markdownTableBodyNone">Compile-time concepts for component lifecycle hooks  </td></tr>
 </table>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md126"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md135"></a>
 Submodules</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -198,7 +198,7 @@ Submodules</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">systems/</span>  </td><td class="markdownTableBodyNone">Core ECS systems (e.g., <span class="tt">HierarchyPropagationSystem</span>)  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md127"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md136"></a>
 Component Storage Model</h1>
 <p><span class="tt">GameObject</span> uses a <b>type-indexed storage</b> system for components. Instead of a hash-based lookup, components are stored in a contiguous vector where the index corresponds to the component's compile-time <span class="tt">ComponentTypeId</span>.</p>
 <p><b>Performance Characteristics:</b></p>
@@ -224,7 +224,7 @@ Component Storage Model</h1>
 <div class="line"><span class="comment">// Content:  nullptr  Transform  nullptr   Move2D    ...</span></div>
 <div class="line"><span class="comment">//                       ↑                    ↑</span></div>
 <div class="line"><span class="comment">//           ComponentTypeId::id&lt;Transform&gt;()  ComponentTypeId::id&lt;Move2D&gt;()</span></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md128"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md137"></a>
 EntityRegistry and EntityManager</h1>
 <p>The <b>EntityRegistry</b> is the single source of truth for entity lifecycle. It manages handle allocation, version tracking, and entity validation.</p>
 <p>The <b>EntityManager</b> provides a high-level API combining registry and component storage:</p>
@@ -261,7 +261,7 @@ EntityRegistry and EntityManager</h1>
 <div class="line">│                          │  [2] SparseSet&lt;Health&gt;        │ │</div>
 <div class="line">│                          └───────────────────────────────┘ │</div>
 <div class="line">└────────────────────────────────────────────────────────────┘</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md129"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md138"></a>
 EntityPool</h1>
 <p><span class="tt">EntityPool&lt;T&gt;</span> is a sparse-set based data structure for storing entities with versioned handles. It provides O(1) insertion, lookup, and cache-friendly iteration.</p>
 <p><b>Data Structure:</b></p>
@@ -285,9 +285,9 @@ EntityPool</h1>
 <div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; e : pool.entities()) {</div>
 <div class="line">    <span class="comment">// process entity</span></div>
 <div class="line">}</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md130"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md139"></a>
 Submodules</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md131"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md140"></a>
 Traits</h2>
 <p>Compile-time concepts for component lifecycle hooks:</p>
 <table class="markdownTable">
@@ -309,7 +309,7 @@ Traits</h2>
 <div class="line"> </div>
 <div class="line"><span class="keyword">static_assert</span>(<a class="code hl_concept" href="concepthelios_1_1engine_1_1ecs_1_1traits_1_1HasOnRemove.html">helios::engine::ecs::traits::HasOnRemove&lt;ResourceComponent&gt;</a>);</div>
 <div class="ttc" id="aconcepthelios_1_1engine_1_1ecs_1_1traits_1_1HasOnRemove_html"><div class="ttname"><a href="concepthelios_1_1engine_1_1ecs_1_1traits_1_1HasOnRemove.html">helios::engine::ecs::traits::HasOnRemove</a></div><div class="ttdoc">Trait for components that support removal interception.</div><div class="ttdef"><b>Definition</b> <a href="Traits_8ixx_source.html#l00039">Traits.ixx:39</a></div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md132"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md141"></a>
 query/</h2>
 <p>Entity query utilities for filtering and iterating GameObjects:</p>
 <table class="markdownTable">
@@ -320,7 +320,7 @@ query/</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">GameObjectView</span>  </td><td class="markdownTableBodyNone">Lazy range for component-based iteration  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md133"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md142"></a>
 Related Modules</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -330,7 +330,7 @@ Related Modules</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html" title="Central game loop orchestration module.">helios.engine.runtime.gameloop</a></span>  </td><td class="markdownTableBodyNone">GameLoop, Phase, Pass  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md134"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md143"></a>
 Architecture</h1>
 <div class="fragment"><div class="line">┌─────────────────────────────────────────────────────────────┐</div>
 <div class="line">│                        GameWorld                            │</div>
@@ -351,7 +351,7 @@ Architecture</h1>
 <div class="line">│       ▼            ▼            ▼                           │</div>
 <div class="line">│    Systems      Systems      Systems     (execute in order) │</div>
 <div class="line">└─────────────────────────────────────────────────────────────┘</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md135"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md144"></a>
 Usage Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8ecs.html">helios.engine.ecs</a>;</div>
 <div class="line"><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8runtime_8world_8GameWorld.html">helios.engine.runtime.world.GameWorld</a>;</div>

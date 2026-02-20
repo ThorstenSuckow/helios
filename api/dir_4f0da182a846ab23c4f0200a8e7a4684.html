@@ -133,6 +133,8 @@ Files</h2></td></tr>
 <tr class="memdesc:GameObjectPoolId_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Strongly-typed identifier for GameObjectPool instances. <br /></td></tr>
 <tr class="memitem:MenuId_2Eixx" id="r_MenuId_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="MenuId_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MenuId_8ixx.html">MenuId.ixx</a></td></tr>
 <tr class="memdesc:MenuId_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Strongly-typed identifier for UI menus. <br /></td></tr>
+<tr class="memitem:PrefabId_2Eixx" id="r_PrefabId_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="PrefabId_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="PrefabId_8ixx.html">PrefabId.ixx</a></td></tr>
+<tr class="memdesc:PrefabId_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Strongly-typed identifier for prefab templates. <br /></td></tr>
 <tr class="memitem:SceneId_2Eixx" id="r_SceneId_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="SceneId_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SceneId_8ixx.html">SceneId.ixx</a></td></tr>
 <tr class="memdesc:SceneId_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Strongly-typed identifier for scenes. <br /></td></tr>
 <tr class="memitem:ScorePoolId_2Eixx" id="r_ScorePoolId_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="ScorePoolId_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ScorePoolId_8ixx.html">ScorePoolId.ixx</a></td></tr>
@@ -150,11 +152,11 @@ Files</h2></td></tr>
 <tr class="memdesc:ViewportId_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Strongly-typed identifier for viewports. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md102"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md111"></a>
 helios::engine::core::data</h1>
 <p>Data structures for efficient entity management and querying.</p>
 <p>This module provides core data structures used for managing GameObjects within the helios engine.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md103"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md112"></a>
 Components</h1>
 <ul>
 <li><b>CollisionLayer</b> - Strongly-typed identifier for collision layers.</li>
@@ -174,9 +176,9 @@ Components</h1>
 <li><b>VersionId</b> - Version number for stale entity handle detection.</li>
 <li><b>ViewportId</b> - Strongly-typed identifier for viewports.</li>
 </ul>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md104"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md113"></a>
 Strongly-Typed IDs</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md105"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md114"></a>
 String-Based IDs (FNV-1a Hashing)</h2>
 <p>The ID types <span class="tt">FontId</span>, <span class="tt">GameObjectPoolId</span>, <span class="tt">ScorePoolId</span>, <span class="tt">SpawnProfileId</span>, <span class="tt">SpawnRuleId</span>, and <span class="tt">ViewportId</span> provide type-safe identifiers constructed from string literals using FNV-1a hashing:</p>
 <div class="fragment"><div class="line"><span class="comment">// Compile-time constant IDs from strings</span></div>
@@ -190,7 +192,7 @@ String-Based IDs (FNV-1a Hashing)</h2>
 <div class="line">poolManager.createPool(ENEMY_POOL, 100);</div>
 <div class="line">spawnManager.registerProfile(ENEMY_PROFILE, profile);</div>
 <div class="line">scheduler.addRule(ENEMY_PROFILE, std::make_unique&lt;TimerSpawnRule&gt;(WAVE_RULE, 2.0f, 5));</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md106"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md115"></a>
 Type-Based IDs (TypeIndexer)</h2>
 <p><span class="tt">ComponentTypeId</span> and <span class="tt">ScoreTypeId</span> use <span class="tt">TypeIndexer</span> to generate unique, monotonically increasing IDs for each type at compile time:</p>
 <div class="fragment"><div class="line"><span class="comment">// Get unique ID for a component type</span></div>
@@ -198,7 +200,7 @@ Type-Based IDs (TypeIndexer)</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Get unique ID for a score type</span></div>
 <div class="line"><span class="keyword">auto</span> scoreId = ScoreTypeId::id&lt;KillScore&gt;();</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md107"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md116"></a>
 Entity IDs (EntityPool)</h2>
 <p><span class="tt">EntityId</span> and <span class="tt">VersionId</span> are used together in <span class="tt">EntityHandle</span> for safe entity references within an <span class="tt">EntityPool</span>:</p>
 <div class="fragment"><div class="line"><span class="comment">// EntityHandle combines EntityId + VersionId</span></div>

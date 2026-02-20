@@ -123,6 +123,19 @@ var annotated_dup =
               [ "UiTransformBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1UiTransformBuilder.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1UiTransformBuilder" ]
             ] ],
             [ "GameObjectFactory", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory.html", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory" ]
+          ] ],
+          [ "spawnSystem", "namespacehelios_1_1engine_1_1builder_1_1spawnSystem.html", [
+            [ "builders", "namespacehelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders.html", [
+              [ "configs", "namespacehelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs.html", [
+                [ "SchedulerConfig", "classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SchedulerConfig.html", "classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SchedulerConfig" ],
+                [ "SpawnSystemConfigurator", "classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnSystemConfigurator.html", "classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnSystemConfigurator" ],
+                [ "SpawnRuleConfig", "classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnRuleConfig.html", "classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnRuleConfig" ],
+                [ "SpawnProfileConfig", "classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig.html", "classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig" ],
+                [ "SpawnPoolConfig", "classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnPoolConfig.html", "classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnPoolConfig" ]
+              ] ],
+              [ "SchedulerBuilder", "classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1SchedulerBuilder.html", "classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1SchedulerBuilder" ]
+            ] ],
+            [ "SpawnSystemFactory", "classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1SpawnSystemFactory.html", "classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1SpawnSystemFactory" ]
           ] ]
         ] ],
         [ "core", "namespacehelios_1_1engine_1_1core.html", [
@@ -132,6 +145,7 @@ var annotated_dup =
             [ "FontId", "structhelios_1_1engine_1_1core_1_1data_1_1FontId.html", "structhelios_1_1engine_1_1core_1_1data_1_1FontId" ],
             [ "GameObjectPoolId", "structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId.html", "structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" ],
             [ "MenuIdTag", "structhelios_1_1engine_1_1core_1_1data_1_1MenuIdTag.html", null ],
+            [ "PrefabIdTag", "structhelios_1_1engine_1_1core_1_1data_1_1PrefabIdTag.html", null ],
             [ "SceneId", "structhelios_1_1engine_1_1core_1_1data_1_1SceneId.html", "structhelios_1_1engine_1_1core_1_1data_1_1SceneId" ],
             [ "ScorePoolId", "structhelios_1_1engine_1_1core_1_1data_1_1ScorePoolId.html", "structhelios_1_1engine_1_1core_1_1data_1_1ScorePoolId" ],
             [ "ScoreTypeId", "classhelios_1_1engine_1_1core_1_1data_1_1ScoreTypeId.html", "classhelios_1_1engine_1_1core_1_1data_1_1ScoreTypeId" ],
@@ -200,6 +214,7 @@ var annotated_dup =
               [ "DefaultGameStateTransitionRules", "classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1rules_1_1DefaultGameStateTransitionRules.html", "classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1rules_1_1DefaultGameStateTransitionRules" ]
             ] ],
             [ "systems", "namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1systems.html", [
+              [ "GameFlowSystem", "classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1systems_1_1GameFlowSystem.html", "classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1systems_1_1GameFlowSystem" ],
               [ "GameStateInputResponseSystem", "classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1systems_1_1GameStateInputResponseSystem.html", "classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1systems_1_1GameStateInputResponseSystem" ]
             ] ]
           ] ],
@@ -477,6 +492,9 @@ var annotated_dup =
             [ "UpdateContext", "structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html", "structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" ]
           ] ],
           [ "pooling", "namespacehelios_1_1engine_1_1runtime_1_1pooling.html", [
+            [ "components", "namespacehelios_1_1engine_1_1runtime_1_1pooling_1_1components.html", [
+              [ "PrefabIdComponent", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1components_1_1PrefabIdComponent.html", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1components_1_1PrefabIdComponent" ]
+            ] ],
             [ "GameObjectPool", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool" ],
             [ "GameObjectPoolConfig", "structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig.html", "structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig" ],
             [ "GameObjectPoolManager", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager.html", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager" ],

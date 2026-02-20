@@ -113,7 +113,7 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig__coll__graph.svg" width="366" height="162"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig__coll__graph.svg" width="611" height="131"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -121,27 +121,31 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a0bc086fe931274b62ec9d9d855691cd8" id="r_a0bc086fe931274b62ec9d9d855691cd8"><td class="memItemLeft" align="right" valign="top"><a id="a0bc086fe931274b62ec9d9d855691cd8" name="a0bc086fe931274b62ec9d9d855691cd8"></a>
 const <a class="el" href="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId.html">helios::engine::core::data::GameObjectPoolId</a>&#160;</td><td class="memItemRight" valign="bottom"><b>gameObjectPoolId</b></td></tr>
 <tr class="memdesc:a0bc086fe931274b62ec9d9d855691cd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unique identifier for the pool. <br /></td></tr>
-<tr class="memitem:ac1b68e03d5380f3f33efd16bace7bc28" id="r_ac1b68e03d5380f3f33efd16bace7bc28"><td class="memItemLeft" align="right" valign="top"><a id="ac1b68e03d5380f3f33efd16bace7bc28" name="ac1b68e03d5380f3f33efd16bace7bc28"></a>
-const <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html">helios::engine::ecs::GameObject</a>&#160;</td><td class="memItemRight" valign="bottom"><b>prefab</b></td></tr>
-<tr class="memdesc:ac1b68e03d5380f3f33efd16bace7bc28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template object used for cloning pooled instances. <br /></td></tr>
+<tr class="memitem:ac07418f07ea0128f340e6673ce45f4fe" id="r_ac07418f07ea0128f340e6673ce45f4fe"><td class="memItemLeft" align="right" valign="top"><a id="ac07418f07ea0128f340e6673ce45f4fe" name="ac07418f07ea0128f340e6673ce45f4fe"></a>
+const <a class="el" href="namespacehelios_1_1engine_1_1core_1_1data.html#a1be4caf596302dfde2390532552f2478">helios::engine::core::data::PrefabId</a>&#160;</td><td class="memItemRight" valign="bottom"><b>prefabId</b></td></tr>
+<tr class="memdesc:ac07418f07ea0128f340e6673ce45f4fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Identifier of the prefab template used for cloning. <br /></td></tr>
 <tr class="memitem:aa78c442cfcaea88e7d267ff43fd2d39c" id="r_aa78c442cfcaea88e7d267ff43fd2d39c"><td class="memItemLeft" align="right" valign="top"><a id="aa78c442cfcaea88e7d267ff43fd2d39c" name="aa78c442cfcaea88e7d267ff43fd2d39c"></a>
 const size_t&#160;</td><td class="memItemRight" valign="bottom"><b>amount</b></td></tr>
 <tr class="memdesc:aa78c442cfcaea88e7d267ff43fd2d39c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initial number of objects to pre-allocate in the pool. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Configuration structure for creating a <a class="el" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html" title="Object pool for efficient GameObject lifecycle management.">GameObjectPool</a>. </p>
-<p><a class="el" href="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig.html" title="Configuration structure for creating a GameObjectPool.">GameObjectPoolConfig</a> bundles all information required to initialize a <a class="el" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html" title="Object pool for efficient GameObject lifecycle management.">GameObjectPool</a>: a unique identifier, a prefab template for cloning, and the initial pool size. This configuration is typically passed to the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager.html" title="High-level manager for GameObject pooling operations.">GameObjectPoolManager</a> responsible for this pool config.</p>
-<p>The prefab serves as the archetype from which all pooled instances are cloned. Components attached to the prefab will be duplicated to each pooled object.</p>
-<p>Example usage: ```cpp // Create prefab via GameWorld auto enemyPrefab = gameWorld.addGameObject(); enemyPrefab.add&lt;RenderableComponent&gt;(mesh, material); enemyPrefab.add&lt;Move2DComponent&gt;(); enemyPrefab.add&lt;HealthComponent&gt;(100.0f); enemyPrefab.setActive(false); // Prefabs should be inactive</p>
-<p>auto config = std::make_unique&lt;GameObjectPoolConfig&gt;( GameObjectPoolId{1}, enemyPrefab, 50 // Pre-allocate 50 clones );</p>
+<p><a class="el" href="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig.html" title="Configuration structure for creating a GameObjectPool.">GameObjectPoolConfig</a> bundles all information required to initialize a <a class="el" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html" title="Object pool for efficient GameObject lifecycle management.">GameObjectPool</a>: a unique pool identifier, a PrefabId referencing the prefab template, and the initial pool size.</p>
+<p>The PrefabId identifies the prefab GameObject that serves as the archetype from which all pooled instances are cloned. The prefab is registered separately via GameObjectFactory::withPrefabId() and looked up by the pool system at initialization time.</p>
+<p>Example usage: ```cpp // Create and tag prefab auto enemyPrefab = GameObjectFactory::instance() .gameObject(gameWorld) .withPrefabId(EnemyPrefabId) // ... component configuration ... .make();</p>
+<p>auto config = std::make_unique&lt;GameObjectPoolConfig&gt;( EnemyPoolId, EnemyPrefabId, 50 // Pre-allocate 50 clones );</p>
 <p>poolManager.addPoolConfig(std::move(config)); ```</p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html" title="Object pool for efficient GameObject lifecycle management.">GameObjectPool</a> </dd>
+<dl class="section see"><dt>See also</dt><dd>PrefabId </dd>
+<dd>
+PrefabIdComponent </dd>
+<dd>
+<a class="el" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html" title="Object pool for efficient GameObject lifecycle management.">GameObjectPool</a> </dd>
 <dd>
 GameObjectPoolId </dd>
 <dd>
 <a class="el" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager.html" title="High-level manager for GameObject pooling operations.">GameObjectPoolManager</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPoolConfig_8ixx_source.html#l00049">49</a> of file <a class="el" href="GameObjectPoolConfig_8ixx_source.html">GameObjectPoolConfig.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPoolConfig_8ixx_source.html#l00052">52</a> of file <a class="el" href="GameObjectPoolConfig_8ixx_source.html">GameObjectPoolConfig.ixx</a>.</p>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li><a class="el" href="GameObjectPoolConfig_8ixx_source.html">GameObjectPoolConfig.ixx</a></li>
 </ul>

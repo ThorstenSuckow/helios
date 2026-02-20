@@ -126,15 +126,15 @@ Files</h2></td></tr>
 <tr class="memdesc:modules_2ai_2registry_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Component registration for AI module. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md326"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md335"></a>
 helios::engine::modules::ai</h1>
 <p>AI behavior modules for game entities in the helios engine.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md327"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md336"></a>
 Overview</h1>
 <p>This module provides components and systems for artificial intelligence behaviors. Currently focused on simple pursuit/chase mechanics, with architecture designed for expansion to more complex AI patterns.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md328"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md337"></a>
 Submodules</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md329"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md338"></a>
 components/</h2>
 <p>Data components storing AI behavior state:</p>
 <table class="markdownTable">
@@ -143,7 +143,7 @@ components/</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">ChaseComponent</span>  </td><td class="markdownTableBodyNone">Tracks a target entity and controls pursuit timing  </td></tr>
 </table>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md330"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md339"></a>
 systems/</h2>
 <p>Systems that process AI components:</p>
 <table class="markdownTable">
@@ -152,9 +152,9 @@ systems/</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">ChaseSystem</span>  </td><td class="markdownTableBodyNone">Steers entities towards their chase targets  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md331"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md340"></a>
 Usage</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md332"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md341"></a>
 Basic Chase Behavior</h2>
 <div class="fragment"><div class="line"><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8modules_8ai.html">helios.engine.modules.ai</a>;</div>
 <div class="line"> </div>
@@ -168,7 +168,7 @@ Basic Chase Behavior</h2>
 <div class="line">enemy-&gt;add&lt;SteeringComponent&gt;();</div>
 <div class="line">enemy-&gt;add&lt;TranslationStateComponent&gt;();</div>
 <div class="ttc" id="amodule__helios_8engine_8modules_8ai_html"><div class="ttname"><a href="module__helios_8engine_8modules_8ai.html">helios.engine.modules.ai</a></div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md333"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md342"></a>
 Using with GameObjectFactory</h2>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> enemy = GameObjectFactory::gameObject()</div>
 <div class="line">    .withAi([&amp;](<span class="keyword">auto</span>&amp; ai) {</div>
@@ -181,7 +181,7 @@ Using with GameObjectFactory</h2>
 <div class="line">        m.move2D().speed(3.0f);</div>
 <div class="line">    })</div>
 <div class="line">    .make(<span class="keyword">true</span>);</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md334"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md343"></a>
 Chase Behavior Details</h1>
 <p>The <span class="tt">ChaseSystem</span> operates as follows:</p>
 <p>1. <b>Target Lookup</b>: Finds target entity by handle in GameWorld 2. <b>Cooldown Check</b>: Only updates direction after cooldown expires 3. <b>Direction Calculation</b>: Computes normalized vector from entity to target 4. <b>Steering Update</b>: Sets steering intent to face target direction</p>
@@ -201,7 +201,7 @@ Chase Behavior Details</h1>
 <div class="line">│  │    - Reset timer                                        ││</div>
 <div class="line">│  └─────────────────────────────────────────────────────────┘│</div>
 <div class="line">└─────────────────────────────────────────────────────────────┘</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md335"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md344"></a>
 Component Dependencies</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -209,7 +209,7 @@ Component Dependencies</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">ChaseComponent</span>  </td><td class="markdownTableBodyNone"><span class="tt">SteeringComponent</span>, <span class="tt">TranslationStateComponent</span>  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md336"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md345"></a>
 Related Modules</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">

@@ -57,7 +57,7 @@
         </inbodydescription>
         <location file="/tmp/h/include/helios/engine/runtime/world/GameWorld.ixx" line="163" column="25" bodyfile="/tmp/h/include/helios/engine/runtime/world/GameWorld.ixx" bodystart="163" bodyend="-1"/>
         <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a03d2275138a928e04c4bb527ba41830a" compoundref="GameWorld_8ixx" startline="276" endline="278">hasLevel</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a49f6a9068ec4cc0408ded2c8bd60f1ba" compoundref="GameWorld_8ixx" startline="287" endline="289">level</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a130d018f6ce51f8e8d75eac3e6ef3561" compoundref="GameWorld_8ixx" startline="287" endline="289">level</referencedby>
         <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a8d76de93fc524c7cfe07d506a79130db" compoundref="GameWorld_8ixx" startline="267" endline="269">setLevel</referencedby>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ad19913ff20f7cf576045de7124483f77" prot="protected" static="no" mutable="no">
@@ -375,7 +375,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="/tmp/h/include/helios/engine/runtime/world/GameWorld.ixx" line="267" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/world/GameWorld.ixx" bodystart="267" bodyend="269"/>
-        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a49f6a9068ec4cc0408ded2c8bd60f1ba" compoundref="GameWorld_8ixx" startline="287" endline="289">level</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a130d018f6ce51f8e8d75eac3e6ef3561" compoundref="GameWorld_8ixx" startline="287" endline="289">level</references>
         <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a70d324aa0446f3bc86e89b0774bdd963" compoundref="GameWorld_8ixx" startline="163">level_</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a03d2275138a928e04c4bb527ba41830a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
@@ -397,9 +397,9 @@
         <location file="/tmp/h/include/helios/engine/runtime/world/GameWorld.ixx" line="276" column="15" bodyfile="/tmp/h/include/helios/engine/runtime/world/GameWorld.ixx" bodystart="276" bodyend="278"/>
         <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a70d324aa0446f3bc86e89b0774bdd963" compoundref="GameWorld_8ixx" startline="163">level_</references>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a49f6a9068ec4cc0408ded2c8bd60f1ba" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Level" kindref="compound">helios::engine::runtime::world::Level</ref> &amp;</type>
-        <definition>const helios::engine::runtime::world::Level &amp; helios::engine::runtime::world::GameWorld::level</definition>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a130d018f6ce51f8e8d75eac3e6ef3561" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Level" kindref="compound">helios::engine::runtime::world::Level</ref> *</type>
+        <definition>const helios::engine::runtime::world::Level * helios::engine::runtime::world::GameWorld::level</definition>
         <argsstring>() const noexcept</argsstring>
         <name>level</name>
         <qualifiedname>helios::engine::runtime::world::GameWorld::level</qualifiedname>
@@ -407,7 +407,7 @@
 <para>Retrieves the currently loaded level. </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>Reference to the active <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Level" kindref="compound">Level</ref>.</para>
+<para><simplesect kind="return"><para>Const pointer to the active <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Level" kindref="compound">Level</ref>.</para>
 </simplesect>
 <simplesect kind="warning"><para>Calling this method when <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a03d2275138a928e04c4bb527ba41830a" kindref="member">hasLevel()</ref> returns false results in undefined behavior. </para>
 </simplesect>
@@ -932,6 +932,7 @@
         </inbodydescription>
         <location file="/tmp/h/include/helios/engine/runtime/world/GameWorld.ixx" line="559" column="15" bodyfile="/tmp/h/include/helios/engine/runtime/world/GameWorld.ixx" bodystart="559" bodyend="561"/>
         <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1acfdf128e6c02f892f7be4a863887f357" compoundref="GameWorld_8ixx" startline="212">em_</references>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a7f5ef214b56eba5241a20de5d964eff2" compoundref="GameObjectPoolManager_8ixx" startline="299" endline="319">helios::engine::runtime::pooling::GameObjectPoolManager::init</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a768b8b5bc3cdffd15fb8c6b3d9cd54e7" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1205,7 +1206,7 @@
       <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a03d2275138a928e04c4bb527ba41830a" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::GameWorld</scope><name>hasLevel</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ab53994280aeec233c1dd91f02a09e589" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::GameWorld</scope><name>hasManager</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aae71c0fe187189d167cb967181831740" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::GameWorld</scope><name>init</name></member>
-      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a49f6a9068ec4cc0408ded2c8bd60f1ba" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::GameWorld</scope><name>level</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a130d018f6ce51f8e8d75eac3e6ef3561" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::GameWorld</scope><name>level</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a70d324aa0446f3bc86e89b0774bdd963" prot="protected" virt="non-virtual"><scope>helios::engine::runtime::world::GameWorld</scope><name>level_</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a5cc257dd2ebbd269a60b9891889f4b50" prot="protected" virt="non-virtual"><scope>helios::engine::runtime::world::GameWorld</scope><name>logger_</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aae88d3ee210e2e4ed03cbba46419734d" prot="protected" virt="non-virtual"><scope>helios::engine::runtime::world::GameWorld</scope><name>managers_</name></member>

@@ -6,6 +6,7 @@ var namespacehelios_1_1engine_1_1mechanics_1_1gamestate =
       [ "GameStateType", "namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a73b150e7583e97e71959b2f58fe4b9b1", null ],
       [ "GameState", "namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a8e0bcae228fdf9f4cb489e7f912d80be", [
         [ "Undefined", "namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a8e0bcae228fdf9f4cb489e7f912d80beaec0fc0100c4fc1ce4eea230c3dc10360", null ],
+        [ "Start", "namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a8e0bcae228fdf9f4cb489e7f912d80beaa6122a65eaa676f700ae68d393054a37", null ],
         [ "Loading", "namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a8e0bcae228fdf9f4cb489e7f912d80bea16bfbf9c462762cf1cba4134ec53c504", null ],
         [ "Title", "namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a8e0bcae228fdf9f4cb489e7f912d80beab78a3223503896721cca1303f776159b", null ],
         [ "Menu", "namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a8e0bcae228fdf9f4cb489e7f912d80beab61541208db7fa7dba42c85224405911", null ],

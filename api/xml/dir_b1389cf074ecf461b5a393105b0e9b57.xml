@@ -7,13 +7,13 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_b1389cf074ecf461b5a393105b0e9b57_1autotoc_md246">
+<sect1 id="dir_b1389cf074ecf461b5a393105b0e9b57_1autotoc_md255">
 <title>helios::engine::mechanics::lifecycle::systems</title><para>Systems for processing entity lifecycle transitions.</para>
 </sect1>
-<sect1 id="dir_b1389cf074ecf461b5a393105b0e9b57_1autotoc_md247">
+<sect1 id="dir_b1389cf074ecf461b5a393105b0e9b57_1autotoc_md256">
 <title>Overview</title><para>This module provides systems that process lifecycle-related components each frame. The primary system handles delayed component activation by decrementing timers and enabling components when their delay expires.</para>
 </sect1>
-<sect1 id="dir_b1389cf074ecf461b5a393105b0e9b57_1autotoc_md248">
+<sect1 id="dir_b1389cf074ecf461b5a393105b0e9b57_1autotoc_md257">
 <title>Key Classes</title><para><table rows="2" cols="2"><row>
 <entry thead="yes"><para>Class  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
@@ -25,10 +25,10 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_b1389cf074ecf461b5a393105b0e9b57_1autotoc_md249">
+<sect1 id="dir_b1389cf074ecf461b5a393105b0e9b57_1autotoc_md258">
 <title>System Behavior</title><para>Each frame, the system: 1. Iterates all entities with <computeroutput>DelayedComponentEnabler</computeroutput> 2. Decrements each deferred component&apos;s timer by <computeroutput>deltaTime</computeroutput> 3. Enables components whose timers reach zero 4. Removes activated entries from the deferred list</para>
 </sect1>
-<sect1 id="dir_b1389cf074ecf461b5a393105b0e9b57_1autotoc_md250">
+<sect1 id="dir_b1389cf074ecf461b5a393105b0e9b57_1autotoc_md259">
 <title>Scheduling</title><para>Schedule in the gameplay phase after spawn systems but before collision/physics:</para>
 <para><programlisting filename=".cpp"><codeline><highlight class="normal">gameLoop.addSystem&lt;DelayedComponentEnablerSystem&gt;(Phase::Gameplay);</highlight></codeline>
 </programlisting></para>

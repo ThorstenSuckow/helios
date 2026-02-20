@@ -197,7 +197,7 @@
 <para>The `shader_` and `textProperties_` members use `std::shared_ptr`. Since prototypes are typically long-lived and shared across many renderables, the ref-counting overhead is amortized. However:</para>
 <para><itemizedlist>
 <listitem><para>Avoid copying `TextRenderPrototype` shared_ptrs in tight loops. The prototype getters return references, which is the correct pattern.</para>
-</listitem><listitem><para>The `fontResourceProvider_` uses a raw pointer intentionally to avoid circular references and unnecessary ref-counting—this is the preferred pattern for service-like dependencies with well-defined lifetimes.</para>
+</listitem><listitem><para>The `fontResourceProvider_` uses a raw pointer intentionally to avoid circular references and unnecessary ref-counting-this is the preferred pattern for service-like dependencies with well-defined lifetimes.</para>
 </listitem></itemizedlist>
 </para>
 <para><simplesect kind="see"><para><ref refid="classhelios_1_1rendering_1_1text_1_1TextRenderable" kindref="compound">TextRenderable</ref> </para>

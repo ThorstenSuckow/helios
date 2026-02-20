@@ -189,6 +189,8 @@ var hierarchy =
       [ "helios::engine::runtime::gameloop::GameLoop", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html", null ]
     ] ],
     [ "helios::engine::runtime::gameloop::Phase", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html", null ],
+    [ "helios::engine::runtime::pooling::components::PrefabIdComponent", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1components_1_1PrefabIdComponent.html", null ],
+    [ "helios::engine::core::data::PrefabIdTag", "structhelios_1_1engine_1_1core_1_1data_1_1PrefabIdTag.html", null ],
     [ "helios::util::Random", "classhelios_1_1util_1_1Random.html", null ],
     [ "helios::core::buffer::ReadBuffer&lt; T &gt;", "classhelios_1_1core_1_1buffer_1_1ReadBuffer.html", null ],
     [ "helios::core::buffer::TypeIndexedDoubleBuffer&lt; Indexer &gt;::ReadSource", "classhelios_1_1core_1_1buffer_1_1TypeIndexedDoubleBuffer_1_1ReadSource.html", null ],
@@ -223,6 +225,8 @@ var hierarchy =
     [ "helios::engine::builder::gameObject::builders::configs::SceneNodeConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1SceneNodeConfig.html", null ],
     [ "helios::engine::modules::scene::types::SceneToViewportMap", "classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap.html", null ],
     [ "helios::engine::runtime::spawn::scheduling::ScheduledSpawnPlan", "structhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1ScheduledSpawnPlan.html", null ],
+    [ "helios::engine::builder::spawnSystem::builders::SchedulerBuilder", "classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1SchedulerBuilder.html", null ],
+    [ "helios::engine::builder::spawnSystem::builders::configs::SchedulerConfig", "classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SchedulerConfig.html", null ],
     [ "helios::engine::mechanics::scoring::types::Score", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1types_1_1Score.html", [
       [ "helios::engine::mechanics::scoring::types::KillReward", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1types_1_1KillReward.html", null ]
     ] ],
@@ -297,15 +301,20 @@ var hierarchy =
     [ "helios::engine::runtime::spawn::scheduling::SpawnPlan", "structhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnPlan.html", null ],
     [ "helios::engine::runtime::spawn::events::SpawnPlanCommandExecutedEvent", "structhelios_1_1engine_1_1runtime_1_1spawn_1_1events_1_1SpawnPlanCommandExecutedEvent.html", null ],
     [ "helios::engine::runtime::spawn::SpawnPlanCursor", "structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnPlanCursor.html", null ],
+    [ "helios::engine::builder::spawnSystem::builders::configs::SpawnPoolConfig", "classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnPoolConfig.html", null ],
     [ "helios::engine::runtime::spawn::SpawnProfile", "structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnProfile.html", null ],
+    [ "helios::engine::builder::spawnSystem::builders::configs::SpawnProfileConfig", "classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnProfileConfig.html", null ],
     [ "helios::engine::core::data::SpawnProfileId", "structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId.html", null ],
     [ "helios::engine::runtime::spawn::policy::SpawnRule", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRule.html", null ],
+    [ "helios::engine::builder::spawnSystem::builders::configs::SpawnRuleConfig", "classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnRuleConfig.html", null ],
     [ "helios::engine::core::data::SpawnRuleId", "structhelios_1_1engine_1_1core_1_1data_1_1SpawnRuleId.html", null ],
     [ "helios::engine::runtime::spawn::policy::SpawnRuleState", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRuleState.html", null ],
     [ "helios::engine::runtime::spawn::scheduling::SpawnScheduler", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler.html", [
       [ "helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler< N >", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler.html", null ],
       [ "helios::engine::runtime::spawn::scheduling::DefaultSpawnScheduler", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1DefaultSpawnScheduler.html", null ]
     ] ],
+    [ "helios::engine::builder::spawnSystem::builders::configs::SpawnSystemConfigurator", "classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnSystemConfigurator.html", null ],
+    [ "helios::engine::builder::spawnSystem::SpawnSystemFactory", "classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1SpawnSystemFactory.html", null ],
     [ "helios::engine::modules::effects::gfx::components::SpinComponent", "classhelios_1_1engine_1_1modules_1_1effects_1_1gfx_1_1components_1_1SpinComponent.html", null ],
     [ "helios::engine::state::StateCommandHandler", "classhelios_1_1engine_1_1state_1_1StateCommandHandler.html", [
       [ "helios::engine::state::TypedStateCommandHandler< StateType >", "classhelios_1_1engine_1_1state_1_1TypedStateCommandHandler.html", [
@@ -382,6 +391,7 @@ var hierarchy =
         [ "helios::engine::mechanics::bounds::systems::LevelBoundsBehaviorSystem", "classhelios_1_1engine_1_1mechanics_1_1bounds_1_1systems_1_1LevelBoundsBehaviorSystem.html", null ],
         [ "helios::engine::mechanics::combat::systems::ProjectileSpawnSystem", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1systems_1_1ProjectileSpawnSystem.html", null ],
         [ "helios::engine::mechanics::damage::systems::DamageOnCollisionSystem", "classhelios_1_1engine_1_1mechanics_1_1damage_1_1systems_1_1DamageOnCollisionSystem.html", null ],
+        [ "helios::engine::mechanics::gamestate::systems::GameFlowSystem", "classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1systems_1_1GameFlowSystem.html", null ],
         [ "helios::engine::mechanics::gamestate::systems::GameStateInputResponseSystem", "classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1systems_1_1GameStateInputResponseSystem.html", null ],
         [ "helios::engine::mechanics::health::systems::HealthUpdateSystem", "classhelios_1_1engine_1_1mechanics_1_1health_1_1systems_1_1HealthUpdateSystem.html", null ],
         [ "helios::engine::mechanics::input::systems::TwinStickInputSystem", "classhelios_1_1engine_1_1mechanics_1_1input_1_1systems_1_1TwinStickInputSystem.html", null ],

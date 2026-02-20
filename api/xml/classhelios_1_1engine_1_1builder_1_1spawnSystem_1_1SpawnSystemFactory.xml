@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1SpawnSystemFactory" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::builder::spawnSystem::SpawnSystemFactory</compoundname>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1SpawnSystemFactory_1a82a9bc4bbd9718c1158e6bb37c763c54" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs_1_1SpawnSystemConfigurator" kindref="compound">helios::engine::builder::spawnSystem::builders::configs::SpawnSystemConfigurator</ref></type>
+        <definition>static helios::engine::builder::spawnSystem::builders::configs::SpawnSystemConfigurator helios::engine::builder::spawnSystem::SpawnSystemFactory::configure</definition>
+        <argsstring>(helios::engine::runtime::pooling::GameObjectPoolManager &amp;poolManager, helios::engine::runtime::spawn::SpawnManager &amp;spawnManager)</argsstring>
+        <name>configure</name>
+        <qualifiedname>helios::engine::builder::spawnSystem::SpawnSystemFactory::configure</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager" kindref="compound">helios::engine::runtime::pooling::GameObjectPoolManager</ref> &amp;</type>
+          <declname>poolManager</declname>
+        </param>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" kindref="compound">helios::engine::runtime::spawn::SpawnManager</ref> &amp;</type>
+          <declname>spawnManager</declname>
+        </param>
+        <briefdescription>
+<para>Creates a configurator for fluent spawn system setup. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>poolManager</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The pool manager for pool registration. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>spawnManager</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The spawn manager for profile and scheduler registration.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A SpawnSystemConfigurator for chained pool() calls. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/builder/spawnSystem/SpawnSystemFactory.ixx" line="60" column="97" bodyfile="/tmp/h/include/helios/engine/builder/spawnSystem/SpawnSystemFactory.ixx" bodystart="60" bodyend="67"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Factory for ID-centric spawn system configuration. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Entry point for fluent spawn system setup. Returns a SpawnSystemConfigurator whose pool() calls can be chained via commit() / commitCyclic() return values:</para>
+<para>## Usage</para>
+<para>```cpp SpawnSystemFactory::configure(poolManager, spawnManager) .pool(ProjectilePoolId, ProjectilePrefabId, 50) .profile(ProjectileProfileId) .emitterPlacement() .done() .commit() .pool(EnemyPoolId, EnemyPrefabId, 200) .profile(EnemyProfileId) .randomPlacement() .scheduledBy(EnemyRuleId) .timerCondition(5.0f) .fixedAmount(1) .done() .done() .commit(); ```</para>
+<para><simplesect kind="see"><para>SpawnPoolConfig </para>
+</simplesect>
+<simplesect kind="see"><para>SpawnProfileConfig </para>
+</simplesect>
+<simplesect kind="see"><para>SpawnRuleConfig </para>
+</simplesect>
+<simplesect kind="see"><para>SpawnSystemConfigurator </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/builder/spawnSystem/SpawnSystemFactory.ixx" line="48" column="5" bodyfile="/tmp/h/include/helios/engine/builder/spawnSystem/SpawnSystemFactory.ixx" bodystart="48" bodyend="68"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1SpawnSystemFactory_1a82a9bc4bbd9718c1158e6bb37c763c54" prot="public" virt="non-virtual"><scope>helios::engine::builder::spawnSystem::SpawnSystemFactory</scope><name>configure</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -136,7 +136,7 @@ Public Member Functions</h2></td></tr>
 <li>**Destruction:** Marks entities as destroyed by incrementing their version and recycling the index for future use.</li>
 </ul>
 <p>## Versioning</p>
-<p>Each entity slot maintains a version number. When an entity is destroyed, its version is incremented. This allows the registry to detect **stale handles** — handles that reference an entity that has been destroyed and potentially replaced by a new entity at the same index.</p>
+<p>Each entity slot maintains a version number. When an entity is destroyed, its version is incremented. This allows the registry to detect **stale handles** - handles that reference an entity that has been destroyed and potentially replaced by a new entity at the same index.</p>
 <p>## Index Recycling</p>
 <p>Destroyed entity indices are added to a free list and reused when creating new entities. This keeps the dense version array compact and minimizes memory growth.</p>
 <p>## Usage Example</p>

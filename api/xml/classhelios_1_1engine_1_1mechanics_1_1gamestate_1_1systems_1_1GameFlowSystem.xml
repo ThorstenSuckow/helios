@@ -1,0 +1,195 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1systems_1_1GameFlowSystem" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::mechanics::gamestate::systems::GameFlowSystem</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1ecs_1_1System" prot="public" virt="non-virtual">helios::engine::ecs::System</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1systems_1_1GameFlowSystem_1a69db253e5c21437ab4c2a0576fc1cd54" prot="private" static="no" mutable="no">
+        <type><ref refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80be" kindref="member">GameState</ref></type>
+        <definition>GameState helios::engine::mechanics::gamestate::systems::GameFlowSystem::prevMatchState_</definition>
+        <argsstring></argsstring>
+        <name>prevMatchState_</name>
+        <qualifiedname>helios::engine::mechanics::gamestate::systems::GameFlowSystem::prevMatchState_</qualifiedname>
+        <initializer>= GameState::Undefined</initializer>
+        <briefdescription>
+<para>The previously observed game state. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/systems/GameFlowSystem.ixx" line="48" column="19" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/systems/GameFlowSystem.ixx" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1systems_1_1GameFlowSystem_1a60efa49fe9ca694c009f05e88ce3ad5a" prot="private" static="no" mutable="no">
+        <type><ref refid="namespacehelios_1_1engine_1_1state_1_1types_1a8206d62c7b5bc68fb20729209b2eb542" kindref="member">StateTransitionIdType</ref>&lt; <ref refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80be" kindref="member">GameState</ref> &gt;</type>
+        <definition>StateTransitionIdType&lt;GameState&gt; helios::engine::mechanics::gamestate::systems::GameFlowSystem::prevGameStateTransitionId_</definition>
+        <argsstring></argsstring>
+        <name>prevGameStateTransitionId_</name>
+        <qualifiedname>helios::engine::mechanics::gamestate::systems::GameFlowSystem::prevGameStateTransitionId_</qualifiedname>
+        <initializer>= <ref refid="namespacehelios_1_1engine_1_1state_1_1types_1a8206d62c7b5bc68fb20729209b2eb542" kindref="member">StateTransitionIdType</ref>&lt;<ref refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80be" kindref="member">GameState</ref>&gt;::Undefined</initializer>
+        <briefdescription>
+<para>The previously observed state transition ID. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/systems/GameFlowSystem.ixx" line="53" column="31" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/systems/GameFlowSystem.ixx" bodystart="53" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1systems_1_1GameFlowSystem_1a04de078f55276760cf903d4d818711dd" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::mechanics::gamestate::systems::GameFlowSystem::update</definition>
+        <argsstring>(helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept override</argsstring>
+        <name>update</name>
+        <qualifiedname>helios::engine::mechanics::gamestate::systems::GameFlowSystem::update</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1ecs_1_1System_1a4e9969641985fa04db6214332c88605b">update</reimplements>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Updates the game flow and emits state transition commands. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Checks the current <ref refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80be" kindref="member">GameState</ref> from the session and compares it with the previously observed state. If a transition is required, a <ref refid="classhelios_1_1engine_1_1state_1_1commands_1_1StateCommand" kindref="compound">StateCommand</ref> is added to the command buffer.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The update context providing session and command buffer access. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/systems/GameFlowSystem.ixx" line="66" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/systems/GameFlowSystem.ixx" bodystart="66" bodyend="101"/>
+        <references refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beaa6122a65eaa676f700ae68d393054a37" compoundref="GameState_8ixx" startline="31">helios::engine::mechanics::gamestate::types::Start</references>
+        <references refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4a098b846b8fb78489d3e9cc558a565f2b" compoundref="GameStateTransitionId_8ixx" startline="28">helios::engine::mechanics::gamestate::types::StartRequested</references>
+        <references refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4a14401b636e7a97ceab91c643463e4d65" compoundref="GameStateTransitionId_8ixx" startline="25">helios::engine::mechanics::gamestate::types::TitleRequested</references>
+        <references refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beaec0fc0100c4fc1ce4eea230c3dc10360" compoundref="GameState_8ixx" startline="29">helios::engine::mechanics::gamestate::types::Undefined</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>System that drives automatic game state transitions. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1systems_1_1GameFlowSystem" kindref="compound">GameFlowSystem</ref> monitors the current <ref refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80be" kindref="member">GameState</ref> and issues StateCommands to advance the state machine when appropriate. It tracks the previous state and transition ID to avoid emitting duplicate commands.</para>
+<para>Typical flow: Undefined -&gt; Start -&gt; Title.</para>
+<para><simplesect kind="see"><para><ref refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80be" kindref="member">GameState</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4" kindref="member">GameStateTransitionId</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1state_1_1commands_1_1StateCommand" kindref="compound">StateCommand</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::ecs::System</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1System"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::ecs::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Updatable"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::mechanics::gamestate::systems::GameFlowSystem</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1systems_1_1GameFlowSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="10">
+        <label>helios::engine::ecs::EntityManager</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1EntityManager"/>
+      </node>
+      <node id="9">
+        <label>helios::engine::ecs::EntityRegistry</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry"/>
+      </node>
+      <node id="2">
+        <label>helios::engine::ecs::System</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1System"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>gameWorld_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::ecs::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Updatable"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::mechanics::gamestate::systems::GameFlowSystem</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1systems_1_1GameFlowSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>helios::engine::mechanics::scoring::ScoreCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler"/>
+      </node>
+      <node id="7">
+        <label>helios::engine::modules::ui::UiActionCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandHandler"/>
+      </node>
+      <node id="8">
+        <label>helios::engine::runtime::spawn::SpawnCommandHandlerRegistry</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandlerRegistry"/>
+      </node>
+      <node id="4">
+        <label>helios::engine::runtime::world::GameWorld</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>logger_</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>scoreCommandHandler_</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>uiActionCommandHandler_</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>spawnCommandHandlerRegistry_</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>entityRegistry_</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>em_</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>session_</edgelabel>
+        </childnode>
+      </node>
+      <node id="11">
+        <label>helios::engine::runtime::world::Session</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session"/>
+      </node>
+      <node id="5">
+        <label>helios::util::log::Logger</label>
+        <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
+      </node>
+    </collaborationgraph>
+    <location file="/tmp/h/include/helios/engine/mechanics/gamestate/systems/GameFlowSystem.ixx" line="43" column="5" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/systems/GameFlowSystem.ixx" bodystart="43" bodyend="102"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" prot="protected" virt="non-virtual"><scope>helios::engine::mechanics::gamestate::systems::GameFlowSystem</scope><name>gameWorld_</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1ae0464c1668e257439243a4f25979a7ff" prot="public" virt="virtual"><scope>helios::engine::mechanics::gamestate::systems::GameFlowSystem</scope><name>init</name></member>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1systems_1_1GameFlowSystem_1a60efa49fe9ca694c009f05e88ce3ad5a" prot="private" virt="non-virtual"><scope>helios::engine::mechanics::gamestate::systems::GameFlowSystem</scope><name>prevGameStateTransitionId_</name></member>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1systems_1_1GameFlowSystem_1a69db253e5c21437ab4c2a0576fc1cd54" prot="private" virt="non-virtual"><scope>helios::engine::mechanics::gamestate::systems::GameFlowSystem</scope><name>prevMatchState_</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a26d81abcda05fe8b12a1ddb4ed6099a3" prot="public" virt="non-virtual"><scope>helios::engine::mechanics::gamestate::systems::GameFlowSystem</scope><name>Updatable</name></member>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1systems_1_1GameFlowSystem_1a04de078f55276760cf903d4d818711dd" prot="public" virt="virtual"><scope>helios::engine::mechanics::gamestate::systems::GameFlowSystem</scope><name>update</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a937c99bfacd777c53e0f811ab9d335a6" prot="public" virt="virtual"><scope>helios::engine::mechanics::gamestate::systems::GameFlowSystem</scope><name>~System</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a0f54f92a2a8d6c8dc2fc2ebed41d5a85" prot="public" virt="virtual"><scope>helios::engine::mechanics::gamestate::systems::GameFlowSystem</scope><name>~Updatable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

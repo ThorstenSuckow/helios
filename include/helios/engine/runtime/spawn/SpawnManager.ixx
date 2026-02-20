@@ -60,9 +60,9 @@ export namespace helios::engine::runtime::spawn {
      * ## Command Processing Order
      *
      * During flush(), commands are processed in this order:
-     * 1. **Despawn commands** — Entities are returned to their pools
-     * 2. **Spawn commands** — Single entities are acquired and initialized
-     * 3. **Scheduled spawn plan commands** — Batch spawns from scheduler
+     * 1. **Despawn commands** - Entities are returned to their pools
+     * 2. **Spawn commands** - Single entities are acquired and initialized
+     * 3. **Scheduled spawn plan commands** - Batch spawns from scheduler
      *
      * ## Spawn Profiles
      *
@@ -242,7 +242,7 @@ export namespace helios::engine::runtime::spawn {
                         const auto position = spawnProfile->spawnPlacer->getPosition(
                             go->entityHandle(),
                             bounds,
-                            gameWorld_->level().bounds(),
+                            gameWorld_->level()->bounds(),
                             spawnCursor,
                             spawnContext
 
@@ -317,7 +317,7 @@ export namespace helios::engine::runtime::spawn {
                     const auto position = spawnProfile->spawnPlacer->getPosition(
                         go->entityHandle(),
                         bounds,
-                        gameWorld_->level().bounds(),
+                        gameWorld_->level()->bounds(),
                         {1, 1},
                         spawnContext
 

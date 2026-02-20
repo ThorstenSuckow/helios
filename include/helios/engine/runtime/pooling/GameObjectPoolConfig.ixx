@@ -73,7 +73,7 @@ export namespace helios::engine::runtime::pooling {
          * Determines how many clones of the prefab are created upfront.
          * Higher values reduce runtime allocations but increase memory usage.
          */
-        size_t amount;
+        const size_t amount;
 
     };
 

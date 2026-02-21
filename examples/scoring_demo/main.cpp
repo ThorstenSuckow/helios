@@ -537,6 +537,7 @@ int main() {
             .addPass<GameState>(GameState::Any)
             .addSystem<helios::engine::mechanics::gamestate::systems::GameStateInputResponseSystem>()
             .addSystem<helios::engine::mechanics::scoring::systems::ScoreObserverSystem>()
+            .addSystem<helios::engine::mechanics::scoring::systems::MaxScoreObserverSystem>()
             .addSystem<helios::engine::mechanics::input::systems::TwinStickInputSystem>(shipGameObject)
             .addCommitPoint(helios::engine::runtime::gameloop::CommitPoint::Structural)
 
@@ -591,6 +592,7 @@ int main() {
 
              .addPass<GameState>(GameState::Any)
              .addSystem<helios::engine::modules::ui::binding::systems::Score2UiTextUpdateSystem>()
+             .addSystem<helios::engine::modules::ui::binding::systems::MaxScore2UiTextUpdateSystem>()
              .addSystem<helios::engine::mechanics::scoring::systems::CombatScoringSystem>()
 
              .addSystem<helios::engine::modules::ui::widgets::systems::UiTextBoundsUpdateSystem>()
@@ -609,7 +611,8 @@ int main() {
              .addSystem<helios::engine::modules::spatial::transform::systems::TransformClearSystem>()
              .addSystem<helios::engine::mechanics::lifecycle::systems::DelayedComponentEnablerSystem>()
              .addSystem<helios::engine::modules::physics::collision::systems::CollisionStateClearSystem>()
-             .addSystem<helios::engine::mechanics::scoring::systems::ScoreObserverClearSystem>();
+             .addSystem<helios::engine::mechanics::scoring::systems::ScoreObserverClearSystem>()
+             .addSystem<helios::engine::mechanics::scoring::systems::MaxScoreObserverClearSystem>();
 
     // ========================================
     // 10. Initialization and Game Loop

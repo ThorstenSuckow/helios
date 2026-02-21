@@ -386,7 +386,7 @@ export namespace helios::examples::scoring {
                 })
                 .withObserver([&](auto& ob) {
                    ob.observe()
-                     .scorePool(helios::engine::core::data::ScorePoolId{"playerOneScorePool"});
+                     .runningScore(helios::engine::core::data::ScorePoolId{"playerOneScorePool"});
                })
                 .withUiTransform([](auto& tb) {
                     tb.transform()
@@ -402,7 +402,8 @@ export namespace helios::examples::scoring {
                 .gameObject(gameWorld)
                 .withRendering([&](auto& rnb) {
                     rnb.textRenderable()
-                       .text("Highscore: 00000000")
+                       .text("Highscore: 0")
+                       .asUiText("Highscore: {:.0f}")
                        .fontId(uiTextFont)
                        .fontScale(0.8f)
                        .fontResourceProvider(renderingDevice.fontResourceProvider())
@@ -410,6 +411,10 @@ export namespace helios::examples::scoring {
                        .color(helios::util::Colors::LightGray)
                        .attachTo(&hudScene.root());
                 })
+               .withObserver([&](auto& ob) {
+                   ob.observe()
+                      .maxScore(helios::engine::core::data::ScorePoolId{"playerOneScorePool"});
+               })
                 .withUiTransform([](auto& tb) {
                     tb.transform()
                       .pivot(helios::engine::modules::ui::layout::Anchor::TopRight)

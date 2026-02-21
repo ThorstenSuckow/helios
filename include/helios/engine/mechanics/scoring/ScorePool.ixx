@@ -11,6 +11,7 @@ module;
 export module helios.engine.mechanics.scoring.ScorePool;
 
 import helios.engine.mechanics.scoring.ScorePoolSnapshot;
+import helios.engine.mechanics.scoring.MaxScorePoolSnapshot;
 
 import helios.engine.mechanics.scoring.types;
 
@@ -51,6 +52,16 @@ export namespace helios::engine::mechanics::scoring {
          * @brief Running total of all scores in this pool.
          */
         double totalScore_{};
+
+        /**
+         * @brief The highest total score observed so far.
+         */
+        double maxScore_{};
+
+        /**
+         * @brief Revision counter for maxScore changes.
+         */
+        helios::engine::mechanics::scoring::types::ScorePoolRevision  maxScoreRevision_{};
 
         /**
          * @brief Adds to the running total.
@@ -115,6 +126,7 @@ export namespace helios::engine::mechanics::scoring {
                 revision_++;
             }
             addTotal(scoreContext.value);
+            updateMaxScore();
         }
 
         /**
@@ -169,6 +181,49 @@ export namespace helios::engine::mechanics::scoring {
             return {.scorePoolId = scorePoolId_, .totalScore = totalScore_, .revision = revision_};
         }
 
+
+        /**
+         * @brief Recalculates the high score from the current total.
+         *
+         * Increments maxScoreRevision if the high score changes.
+         * Called automatically by addScore().
+         */
+        void updateMaxScore() noexcept {
+            const auto tmpScore = std::max(totalScore_, maxScore_);
+            if (tmpScore != maxScore_) {
+                maxScoreRevision_++;
+                maxScore_ = tmpScore;
+            }
+        }
+
+        /**
+         * @brief Returns the highest total score observed.
+         *
+         * @return The maximum score value.
+         */
+        [[nodiscard]] double maxScore() const noexcept {
+            return maxScore_;
+        }
+
+        /**
+         * @brief Returns the revision counter for maxScore changes.
+         *
+         * @return The current max score revision.
+         */
+        [[nodiscard]] helios::engine::mechanics::scoring::types::ScorePoolRevision maxScoreRevision() const noexcept {
+            return maxScoreRevision_;
+        }
+
+        /**
+         * @brief Returns a snapshot of the current high score state.
+         *
+         * @return A MaxScorePoolSnapshot with current values.
+         *
+         * @see MaxScorePoolSnapshot
+         */
+        [[nodiscard]] helios::engine::mechanics::scoring::MaxScorePoolSnapshot maxScoreSnapshot() const noexcept {
+            return {.scorePoolId = scorePoolId_, .maxScore = maxScore_, .revision = maxScoreRevision_};
+        }
 
 
     };

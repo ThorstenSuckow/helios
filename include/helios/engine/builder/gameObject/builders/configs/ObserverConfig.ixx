@@ -12,7 +12,7 @@ import helios.engine.ecs.GameObject;
 
 import helios.engine.core.data;
 
-import helios.engine.mechanics.scoring.components.ScoreObserverComponent;
+import helios.engine.mechanics.scoring.components;
 
 
 export namespace helios::engine::builder::gameObject::builders::configs {
@@ -48,14 +48,46 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @param scorePoolId The ID of the score pool to observe.
          *
          * @return Reference to this config for chaining.
+         *
+         * @deprecated use runningScore()
          */
         ObserverConfig& scorePool(const helios::engine::core::data::ScorePoolId scorePoolId) {
+            return runningScore(scorePoolId);
+        }
+
+        /**
+         * @brief Adds a ScoreObserverComponent bound to the specified pool.
+         *
+         * @param scorePoolId The ID of the score pool to observe.
+         *
+         * @return Reference to this config for chaining.
+         */
+        ObserverConfig& runningScore(const helios::engine::core::data::ScorePoolId scorePoolId) {
 
             auto* soc = gameObject_.get<helios::engine::mechanics::scoring::components::ScoreObserverComponent>();
 
             assert(!soc && "ScoreObserverComponent already available.");
 
             gameObject_.add<helios::engine::mechanics::scoring::components::ScoreObserverComponent>()
+                       .setScorePoolId(scorePoolId);
+            return *this;
+        }
+
+
+        /**
+         * @brief Adds a RunningMaxScoreObserverComponent bound to the specified pool.
+         *
+         * @param scorePoolId The ID of the score pool to observe.
+         *
+         * @return Reference to this config for chaining.
+         */
+        ObserverConfig& maxScore(const helios::engine::core::data::ScorePoolId scorePoolId) {
+
+            auto* soc = gameObject_.get<helios::engine::mechanics::scoring::components::MaxScoreObserverComponent>();
+
+            assert(!soc && "RunningMaxScoreObserverComponent already available.");
+
+            gameObject_.add<helios::engine::mechanics::scoring::components::MaxScoreObserverComponent>()
                        .setScorePoolId(scorePoolId);
             return *this;
         }

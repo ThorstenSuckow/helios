@@ -12,5 +12,8 @@ export import helios.examples.scoring.SpawnConfiguration;
 export import helios.examples.scoring.EnemyPrefabs;
 export import helios.examples.scoring.MenuConfiguration;
 export import helios.examples.scoring.MatchStateListener;
+export import helios.examples.scoring.DemoTimerListener;
 export import helios.examples.scoring.GameStateListener;
 export import helios.examples.scoring.UiActionCommandPolicy;
+export import helios.examples.scoring.GameTimerConfiguration;
+

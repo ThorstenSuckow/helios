@@ -438,6 +438,7 @@ int main() {
 
     auto& poolManager      = gameWorld.addManager<helios::engine::runtime::pooling::GameObjectPoolManager>();
     auto& scorePoolManager = gameWorld.addManager<helios::engine::mechanics::scoring::ScorePoolManager>();
+    auto& timerManager = gameWorld.addManager<helios::engine::mechanics::timing::TimerManager>();
     auto& spawnManager     = gameWorld.addManager<helios::engine::runtime::spawn::SpawnManager>();
     auto& gameStateManager = gameWorld.addManager<helios::engine::mechanics::gamestate::GameStateManager>(
         helios::engine::mechanics::gamestate::rules::DefaultGameStateTransitionRules::rules());
@@ -448,6 +449,7 @@ int main() {
     // State listeners and UI action policies
     installMatchStateListeners(matchStateManager);
     installGameStateListeners(gameStateManager);
+    installDemoTimeListeners(gameStateManager, matchStateManager);
     applyUiActionCommandPolicies(uiActionCommandManager);
 
     scorePoolManager.addScorePool(helios::engine::core::data::ScorePoolId{"playerOneScorePool"});
@@ -455,6 +457,7 @@ int main() {
     // Spawn system
     configureSpawns(poolManager, spawnManager);
 
+    configureTimer(timerManager);
 
     // ========================================
     // 8. Command Dispatchers
@@ -473,6 +476,8 @@ int main() {
         std::make_unique<helios::engine::state::dispatcher::StateCommandDispatcher<helios::engine::mechanics::match::types::MatchState>>()
     ).addDispatcher<helios::engine::modules::ui::commands::UiActionCommand>(
         std::make_unique<helios::engine::modules::ui::commands::UiActionCommandDispatcher>()
+    ).addDispatcher<helios::engine::mechanics::timing::commands::TimerControlCommand>(
+        std::make_unique<helios::engine::mechanics::timing::TimerCommandDispatcher>()
     );
 
     using namespace helios::engine::mechanics::gamestate::types;
@@ -536,7 +541,8 @@ int main() {
 
             .addPass<GameState>(GameState::Any)
             .addSystem<helios::engine::mechanics::gamestate::systems::GameStateInputResponseSystem>()
-            .addSystem<helios::engine::mechanics::scoring::systems::ScoreObserverSystem>()
+            .addSystem<helios::engine::mechanics::scoring::systems::ScoreObserverSystem>(scorePoolManager)
+            .addSystem<helios::engine::mechanics::scoring::systems::MaxScoreObserverSystem>(scorePoolManager)
             .addSystem<helios::engine::mechanics::input::systems::TwinStickInputSystem>(shipGameObject)
             .addCommitPoint(helios::engine::runtime::gameloop::CommitPoint::Structural)
 
@@ -585,12 +591,15 @@ int main() {
     // ----------------------------------------
     gameLoop.phase(helios::engine::runtime::gameloop::PhaseType::Post)
              .addPass<GameState>(Running | Paused)
+             .addSystem<helios::engine::mechanics::timing::systems::GameTimerUpdateSystem>(timerManager)
              .addSystem<helios::engine::modules::ui::widgets::systems::MenuNavigationSystem>()
              .addSystem<helios::engine::modules::ui::widgets::systems::UiStyleUpdateSystem>()
+             .addSystem<helios::engine::modules::ui::binding::systems::GameTimer2UiTextUpdateSystem>(timerManager)
              .addCommitPoint()
 
              .addPass<GameState>(GameState::Any)
              .addSystem<helios::engine::modules::ui::binding::systems::Score2UiTextUpdateSystem>()
+             .addSystem<helios::engine::modules::ui::binding::systems::MaxScore2UiTextUpdateSystem>()
              .addSystem<helios::engine::mechanics::scoring::systems::CombatScoringSystem>()
 
              .addSystem<helios::engine::modules::ui::widgets::systems::UiTextBoundsUpdateSystem>()
@@ -609,7 +618,8 @@ int main() {
              .addSystem<helios::engine::modules::spatial::transform::systems::TransformClearSystem>()
              .addSystem<helios::engine::mechanics::lifecycle::systems::DelayedComponentEnablerSystem>()
              .addSystem<helios::engine::modules::physics::collision::systems::CollisionStateClearSystem>()
-             .addSystem<helios::engine::mechanics::scoring::systems::ScoreObserverClearSystem>();
+             .addSystem<helios::engine::mechanics::scoring::systems::ScoreObserverClearSystem>()
+             .addSystem<helios::engine::mechanics::scoring::systems::MaxScoreObserverClearSystem>();
 
     // ========================================
     // 10. Initialization and Game Loop

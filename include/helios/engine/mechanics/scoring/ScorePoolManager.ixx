@@ -161,7 +161,7 @@ export namespace helios::engine::mechanics::scoring {
          * @details Iterates through all registered pools and calls their reset()
          * method, clearing all scores and resetting totals.
          */
-        virtual void reset() {
+        void reset() override {
             for (auto& pool : pools_) {
                 pool.reset();
             }

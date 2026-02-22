@@ -21,13 +21,19 @@ namespace helios::engine::mechanics::scoring::systems {
 
 export namespace helios::engine::mechanics::scoring::components {
 
+    using namespace helios::engine::mechanics::scoring::types;
 
     /**
      * @brief Component that observes and caches the score value from a ScorePool.
      *
-     * Attached to UI entities to display score values. The ScoreObserverSystem
-     * updates this component's value from the referenced ScorePool each frame.
-     * The hasUpdate flag indicates when the value has changed.
+     * Attached to UI entities to display score values. The
+     * ScoreObserverUpdateSystem updates this component's snapshot from the
+     * referenced ScorePool each frame. The hasUpdate flag indicates when the
+     * value has changed.
+     *
+     * @see ScoreObserverUpdateSystem
+     * @see ScoreObserverClearSystem
+     * @see ScorePoolSnapshot
      */
     class ScoreObserverComponent {
 
@@ -129,14 +135,23 @@ export namespace helios::engine::mechanics::scoring::components {
          *
          * Sets hasUpdate to true if the value changes.
          *
-         * @param snapshot The snapshot to use for the next update..
+         * @param snapshot The snapshot to use for the next update.
          */
-        void update(const helios::engine::mechanics::scoring::ScorePoolSnapshot& snapshot) noexcept {
+        void setScorePoolSnapshot(const helios::engine::mechanics::scoring::ScorePoolSnapshot& snapshot) noexcept {
             if (snapshot_.revision == snapshot.revision) {
                 return;
             }
             snapshot_ = snapshot;
             hasUpdate_ = true;
+        }
+
+        /**
+         * @brief Returns the cached score pool revision.
+         *
+         * @return The revision of the last observed snapshot.
+         */
+        [[nodiscard]] ScorePoolRevision scorePoolRevision() const noexcept {
+            return snapshot_.revision;
         }
 
         /**

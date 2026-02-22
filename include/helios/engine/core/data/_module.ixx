@@ -21,3 +21,4 @@ export import helios.engine.core.data.ActionId;
 export import helios.engine.core.data.SceneId;
 export import helios.engine.core.data.StateTypeId;
 export import helios.engine.core.data.PrefabId;
+export import helios.engine.core.data.GameTimerId;

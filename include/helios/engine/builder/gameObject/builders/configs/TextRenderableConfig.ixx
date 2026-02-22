@@ -18,7 +18,8 @@ import helios.ext.opengl;
 import helios.engine.modules.rendering;
 import helios.math.types;
 import helios.scene.SceneNode;
-import helios.engine.modules.ui.widgets.components.UiTextComponent;
+import helios.engine.modules.ui;
+
 
 
 import helios.engine.builder.gameObject.builders.configs.SceneNodeConfig;
@@ -65,9 +66,9 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         float fontScale_;
 
         /**
-         * @brief Format template for UI text binding.
+         * @brief Format string for number display (std::vformat syntax).
          */
-        std::string template_ = "";
+        std::string numberFormat_ = "{:0.f}";
 
         /**
          * @brief Whether this text should be configured as UI text.
@@ -78,6 +79,26 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @brief The font identifier.
          */
         helios::engine::core::data::FontId fontId_{helios::core::types::no_init};
+
+        /**
+         * @brief Format string for timestamp display (std::vformat syntax).
+         */
+        std::string timestampFormat_;
+
+        /**
+         * @brief Whether a TimeFormatterComponent should be attached.
+         */
+        bool usesTimeFormatter_;
+
+        /**
+         * @brief Whether a NumberFormatterComponent should be attached.
+         */
+        bool usesNumberFormatter_;
+
+        /**
+         * @brief Whether the timer should display remaining instead of elapsed time.
+         */
+        bool displayRemaining_;
 
     public:
 
@@ -165,17 +186,57 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         }
 
         /**
-         * @brief Configures this text as UI text with optional template.
-         *
-         * @param templateTxt The format template (uses std::format syntax).
+         * @brief Configures this text as a UI text component.
          *
          * @return Reference to this config for method chaining.
          */
-        TextRenderableConfig& asUiText(std::string templateTxt = "") {
-            template_ = std::move(templateTxt);
+        TextRenderableConfig& asUiText() {
             isUiText_ = true;
             return *this;
         }
+
+        /**
+         * @brief Attaches a NumberFormatterComponent with the given format.
+         *
+         * Implicitly enables UI text mode.
+         *
+         * @param numberFormat A std::vformat-compatible string. Defaults to "{:.0f}".
+         *
+         * @return Reference to this config for method chaining.
+         */
+        TextRenderableConfig& formattedAsNumber(std::string numberFormat = "{:.0f}") {
+            numberFormat_ = std::move(numberFormat);
+            usesNumberFormatter_ = true;
+            return *this;
+        }
+
+        /**
+         * @brief Attaches a TimeFormatterComponent with the given format.
+         *
+         * Implicitly enables UI text mode.
+         *
+         * @param timestampFormat A std::vformat-compatible string expecting minutes and seconds.
+         *
+         * @return Reference to this config for method chaining.
+         */
+        TextRenderableConfig& formattedAsTimestamp(std::string timestampFormat) {
+            timestampFormat_ = std::move(timestampFormat);
+            usesTimeFormatter_ = true;
+            return *this;
+        }
+
+        /**
+         * @brief Switches the time formatter to display remaining time.
+         *
+         * Only effective when formattedAsTimestamp() has been called.
+         *
+         * @return Reference to this config for method chaining.
+         */
+        TextRenderableConfig& displayRemaining() {
+            displayRemaining_ = true;
+            return *this;
+        }
+
 
         /**
          * @brief Sets the text content.
@@ -242,12 +303,27 @@ export namespace helios::engine::builder::gameObject::builders::configs {
             auto& msc = gameObject_.getOrAdd<helios::engine::modules::rendering::model::components::ModelAabbComponent>();
             msc.setAabb(renderable->localAABB());
 
-            if (isUiText_) {
-                gameObject_.add<helios::engine::modules::ui::widgets::components::UiTextComponent>(renderable.get())
-                            .setTemplate(template_);
-
+            if (isUiText_ || usesNumberFormatter_ || usesTimeFormatter_) {
+                gameObject_.add<helios::engine::modules::ui::widgets::components::UiTextComponent>(renderable.get());
                 isUiText_ = false;
             }
+
+            if (usesTimeFormatter_) {
+                gameObject_.add<helios::engine::modules::ui::layout::components::TimeFormatterComponent>()
+                            .setFormat(
+                                timestampFormat_,
+                                displayRemaining_ ? modules::ui::layout::types::TimeDisplayMode::Remaining
+                                                  : modules::ui::layout::types::TimeDisplayMode::Elapsed
+                            );
+                usesTimeFormatter_ = false;
+            }
+
+            if (usesNumberFormatter_) {
+                gameObject_.add<helios::engine::modules::ui::layout::components::NumberFormatterComponent>()
+                            .setFormat(numberFormat_);
+                usesNumberFormatter_ = false;
+            }
+
 
             return *this;
         }

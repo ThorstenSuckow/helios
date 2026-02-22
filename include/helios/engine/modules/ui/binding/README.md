@@ -15,6 +15,8 @@ This namespace provides systems that bind game data to UI components, enabling a
 | Class | Purpose |
 |-------|---------|
 | `Score2UiTextUpdateSystem` | Binds score values to text display components |
+| `MaxScore2UiTextUpdateSystem` | Binds high score values to text display components |
+| `GameTimer2UiTextUpdateSystem` | Binds game timer values to text display components |
 
 ---
 
@@ -22,5 +24,5 @@ This namespace provides systems that bind game data to UI components, enabling a
 <summary>Doxygen</summary><p>
 @namespace helios::engine::modules::ui::binding
 @brief Data binding systems for UI components.
-@details This namespace contains systems that observe game state changes and propagate them to UI widget components, enabling reactive UI updates.
+@details This namespace contains systems that observe game state changes (scores, high scores, timers) and propagate them to UI widget components, enabling reactive UI updates.
 </p></details>

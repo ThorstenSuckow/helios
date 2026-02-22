@@ -22,7 +22,7 @@ export namespace helios::engine::mechanics::timing {
      * a revision counter that observers can use to detect changes.
      *
      * @see TimerManager
-     * @see GameTimerObserverComponent
+     * @see GameTimerBindingComponent
      */
     class GameTimer {
 

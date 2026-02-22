@@ -29,7 +29,7 @@ This module provides timers, commands, components, and systems for tracking elap
 3. **TimerCommandDispatcher** routes the command to the **TimerManager** via the Visitor pattern
 4. **TimerManager** collects pending commands and applies them during `flush()`
 5. **GameTimerUpdateSystem** advances all timers by the current delta time each frame
-6. **GameTimerObserverComponent** allows entities to track a specific timer's revision
+6. **GameTimerBindingComponent** allows entities to track a specific timer's revision
 
 ## Integration
 

@@ -8,6 +8,7 @@ var dir_4f0da182a846ab23c4f0200a8e7a4684 =
     [ "EntityTombstone.ixx", "EntityTombstone_8ixx.html", "EntityTombstone_8ixx" ],
     [ "FontId.ixx", "FontId_8ixx.html", "FontId_8ixx" ],
     [ "GameObjectPoolId.ixx", "GameObjectPoolId_8ixx.html", "GameObjectPoolId_8ixx" ],
+    [ "GameTimerId.ixx", "GameTimerId_8ixx.html", "GameTimerId_8ixx" ],
     [ "MenuId.ixx", "MenuId_8ixx.html", "MenuId_8ixx" ],
     [ "PrefabId.ixx", "PrefabId_8ixx.html", "PrefabId_8ixx" ],
     [ "SceneId.ixx", "SceneId_8ixx.html", "SceneId_8ixx" ],

@@ -54,7 +54,7 @@
 </para>
 </sect2>
 <sect2 id="dir_c01646dfa756089b07ac7b4e7ae63e35_1autotoc_md62">
-<title>Rendering</title><para><table rows="3" cols="3"><row>
+<title>Rendering</title><para><table rows="4" cols="3"><row>
 <entry thead="yes"><para>Config  </para>
 </entry><entry thead="yes"><para>Components Added  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
@@ -63,6 +63,11 @@
 <entry thead="no"><para><computeroutput>MeshRenderableConfig</computeroutput>  </para>
 </entry><entry thead="no"><para><computeroutput>RenderableComponent</computeroutput>  </para>
 </entry><entry thead="no"><para>Mesh, material, shader setup  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>TextRenderableConfig</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>RenderableComponent</computeroutput>, <computeroutput>ModelAabbComponent</computeroutput>, optionally <computeroutput>UiTextComponent</computeroutput>, <computeroutput>NumberFormatterComponent</computeroutput>, <computeroutput>TimeFormatterComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Text rendering with optional UI binding  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>SceneNodeConfig</computeroutput>  </para>
@@ -157,8 +162,22 @@
 </table>
 </para>
 </sect2>
+<sect2 id="dir_c01646dfa756089b07ac7b4e7ae63e35_1autotoc_md68">
+<title>Observer</title><para><table rows="2" cols="3"><row>
+<entry thead="yes"><para>Config  </para>
+</entry><entry thead="yes"><para>Components Added  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ObserverConfig</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>ScoreObserverComponent</computeroutput>, <computeroutput>MaxScoreObserverComponent</computeroutput>, <computeroutput>GameTimerBindingComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Binds entities to score pools and game timers  </para>
+</entry></row>
+</table>
+</para>
+</sect2>
 </sect1>
-<sect1 id="dir_c01646dfa756089b07ac7b4e7ae63e35_1autotoc_md68">
+<sect1 id="dir_c01646dfa756089b07ac7b4e7ae63e35_1autotoc_md69">
 <title>Usage Pattern</title><para>All configs follow the fluent builder pattern:</para>
 <para><programlisting filename=".cpp"><codeline><highlight class="normal">Move2DConfig{gameObject}</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.speed(5.0f)</highlight></codeline>
@@ -166,11 +185,11 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.instantAcceleration(</highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
 </programlisting></para>
 </sect1>
-<sect1 id="dir_c01646dfa756089b07ac7b4e7ae63e35_1autotoc_md69">
+<sect1 id="dir_c01646dfa756089b07ac7b4e7ae63e35_1autotoc_md70">
 <title>Automatic Dependencies</title><para>Configs automatically add required dependent components using <computeroutput>getOrAdd()</computeroutput>. This prevents duplicates when multiple configs share dependencies.</para>
 <para>Example: Both <computeroutput>Move2DConfig</computeroutput> and <computeroutput>SteeringConfig</computeroutput> require <computeroutput>ComposeTransformComponent</computeroutput>. If both are used, only one instance is created.</para>
 </sect1>
-<sect1 id="dir_c01646dfa756089b07ac7b4e7ae63e35_1autotoc_md70">
+<sect1 id="dir_c01646dfa756089b07ac7b4e7ae63e35_1autotoc_md71">
 <title>Related Modules</title><para><table rows="6" cols="2"><row>
 <entry thead="yes"><para>Module  </para>
 </entry><entry thead="yes"><para>Purpose  </para>

@@ -32,15 +32,20 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/mechanics/scoring/systems/ScoreObserverClearSystem.ixx" line="46" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/scoring/systems/ScoreObserverClearSystem.ixx" bodystart="46" bodyend="57"/>
+        <location file="/tmp/h/include/helios/engine/mechanics/scoring/systems/ScoreObserverClearSystem.ixx" line="50" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/scoring/systems/ScoreObserverClearSystem.ixx" bodystart="50" bodyend="61"/>
         <references refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" compoundref="System_8ixx" startline="48">helios::engine::ecs::System::gameWorld_</references>
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>System that clears the hasUpdate flag on ScoreObserverComponents. </para>
+<para>System that resets the hasUpdate flag on all ScoreObserverComponents. </para>
     </briefdescription>
     <detaileddescription>
-<para>Should run at the end of the frame (post-phase) after all systems that need the hasUpdate flag have processed it. </para>
+<para>Scheduled after the UI binding systems have consumed the update. This ensures that ScoreObserverComponent::hasUpdate() returns true for exactly one frame after a score change.</para>
+<para><simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1ScoreObserverSystem" kindref="compound">ScoreObserverSystem</ref> </para>
+</simplesect>
+<simplesect kind="see"><para>ScoreObserverComponent </para>
+</simplesect>
+</para>
     </detaileddescription>
     <inheritancegraph>
       <node id="2">
@@ -61,11 +66,11 @@
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="10">
+      <node id="11">
         <label>helios::engine::ecs::EntityManager</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1EntityManager"/>
       </node>
-      <node id="9">
+      <node id="10">
         <label>helios::engine::ecs::EntityRegistry</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry"/>
       </node>
@@ -93,10 +98,14 @@
         </childnode>
       </node>
       <node id="7">
+        <label>helios::engine::mechanics::timing::TimerCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerCommandHandler"/>
+      </node>
+      <node id="8">
         <label>helios::engine::modules::ui::UiActionCommandHandler</label>
         <link refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandHandler"/>
       </node>
-      <node id="8">
+      <node id="9">
         <label>helios::engine::runtime::spawn::SpawnCommandHandlerRegistry</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandlerRegistry"/>
       </node>
@@ -110,22 +119,25 @@
           <edgelabel>scoreCommandHandler_</edgelabel>
         </childnode>
         <childnode refid="7" relation="usage">
-          <edgelabel>uiActionCommandHandler_</edgelabel>
+          <edgelabel>timerCommandHandler_</edgelabel>
         </childnode>
         <childnode refid="8" relation="usage">
-          <edgelabel>spawnCommandHandlerRegistry_</edgelabel>
+          <edgelabel>uiActionCommandHandler_</edgelabel>
         </childnode>
         <childnode refid="9" relation="usage">
-          <edgelabel>entityRegistry_</edgelabel>
+          <edgelabel>spawnCommandHandlerRegistry_</edgelabel>
         </childnode>
         <childnode refid="10" relation="usage">
-          <edgelabel>em_</edgelabel>
+          <edgelabel>entityRegistry_</edgelabel>
         </childnode>
         <childnode refid="11" relation="usage">
+          <edgelabel>em_</edgelabel>
+        </childnode>
+        <childnode refid="12" relation="usage">
           <edgelabel>session_</edgelabel>
         </childnode>
       </node>
-      <node id="11">
+      <node id="12">
         <label>helios::engine::runtime::world::Session</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session"/>
       </node>

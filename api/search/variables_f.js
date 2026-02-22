@@ -6,7 +6,7 @@ var searchData=
   ['renderingdevice_5f_3',['renderingDevice_',['../classhelios_1_1app_1_1Application.html#aa04eb0a14f12afe4323122a4698c04f7',1,'helios::app::Application']]],
   ['renderprototype_5f_4',['renderPrototype_',['../classhelios_1_1rendering_1_1mesh_1_1MeshRenderable.html#a098f014f84e869ab44ea76ecb97d6aac',1,'helios::rendering::mesh::MeshRenderable']]],
   ['rendertarget_5f_5',['renderTarget_',['../classhelios_1_1window_1_1Window.html#a3aadafde86d1cf52080eda7a8209b8ba',1,'helios::window::Window']]],
-  ['revision_6',['revision',['../structhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolSnapshot.html#a931ccebcc9b58be245a905b73c39a306',1,'helios::engine::mechanics::scoring::ScorePoolSnapshot']]],
+  ['revision_6',['revision',['../structhelios_1_1engine_1_1mechanics_1_1scoring_1_1MaxScorePoolSnapshot.html#ac997d2985e8a8e54a40c66905d9d290d',1,'helios::engine::mechanics::scoring::MaxScorePoolSnapshot::revision'],['../structhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolSnapshot.html#a931ccebcc9b58be245a905b73c39a306',1,'helios::engine::mechanics::scoring::ScorePoolSnapshot::revision']]],
   ['right_5f_7',['right_',['../classhelios_1_1scene_1_1Camera.html#aeee258fdd9a5e0e41b647115bcbf30bd',1,'helios::scene::Camera']]],
   ['rotationangledelta_5f_8',['rotationAngleDelta_',['../classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent.html#a39f978b479f41f6c5a7f1539132e23ab',1,'helios::engine::modules::physics::motion::components::SteeringComponent']]],
   ['rotationaxis_5f_9',['rotationAxis_',['../classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent.html#afd181512ba623155d8d7e140ed128806',1,'helios::engine::modules::physics::motion::components::SteeringComponent']]],

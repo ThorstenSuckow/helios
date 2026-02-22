@@ -19,10 +19,20 @@
 <codeline><highlight class="normal">|<sp/>System<sp/>|<sp/>Description<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|--------|-------------|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`Score2UiTextUpdateSystem`<sp/>|<sp/>Updates<sp/>text<sp/>components<sp/>when<sp/>observed<sp/>score<sp/>values<sp/>change<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`MaxScore2UiTextUpdateSystem`<sp/>|<sp/>Updates<sp/>text<sp/>components<sp/>when<sp/>observed<sp/>high<sp/>score<sp/>values<sp/>change<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`GameTimer2UiTextUpdateSystem`<sp/>|<sp/>Updates<sp/>text<sp/>components<sp/>when<sp/>observed<sp/>game<sp/>timer<sp/>values<sp/>change<sp/>|</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Score2UiTextUpdateSystem</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">Queries<sp/>entities<sp/>with<sp/>both<sp/>`ScoreObserverComponent`<sp/>and<sp/>`UiTextComponent`.<sp/>When<sp/>the<sp/>score<sp/>observer<sp/>signals<sp/>an<sp/>update,<sp/>the<sp/>system<sp/>propagates<sp/>the<sp/>new<sp/>total<sp/>score<sp/>to<sp/>the<sp/>text<sp/>component.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>MaxScore2UiTextUpdateSystem</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Queries<sp/>entities<sp/>with<sp/>both<sp/>`MaxScoreObserverComponent`<sp/>and<sp/>`UiTextComponent`.<sp/>When<sp/>the<sp/>max<sp/>score<sp/>observer<sp/>signals<sp/>an<sp/>update,<sp/>the<sp/>system<sp/>propagates<sp/>the<sp/>new<sp/>high<sp/>score<sp/>to<sp/>the<sp/>text<sp/>component.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>GameTimer2UiTextUpdateSystem</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Queries<sp/>entities<sp/>with<sp/>`GameTimerBindingComponent`,<sp/>`TimeFormatterComponent`,<sp/>and<sp/>`UiTextComponent`.<sp/>When<sp/>the<sp/>observed<sp/>timer&apos;s<sp/>revision<sp/>changes,<sp/>the<sp/>system<sp/>formats<sp/>the<sp/>current<sp/>time<sp/>via<sp/>the<sp/>`TimeFormatterComponent`<sp/>and<sp/>updates<sp/>the<sp/>text<sp/>component.</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>
 <codeline></codeline>
@@ -30,7 +40,7 @@
 <codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
 <codeline><highlight class="normal">@namespace<sp/>helios::engine::modules::ui::binding::systems</highlight></codeline>
 <codeline><highlight class="normal">@brief<sp/>UI<sp/>data<sp/>binding<sp/>systems.</highlight></codeline>
-<codeline><highlight class="normal">@details<sp/>Contains<sp/>systems<sp/>that<sp/>observe<sp/>game<sp/>state<sp/>and<sp/>update<sp/>UI<sp/>widgets<sp/>accordingly.<sp/>Score2UiTextUpdateSystem<sp/>provides<sp/>score-to-text<sp/>binding.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Contains<sp/>systems<sp/>that<sp/>observe<sp/>game<sp/>state<sp/>and<sp/>update<sp/>UI<sp/>widgets<sp/>accordingly.<sp/>Provides<sp/>score-to-text,<sp/>high-score-to-text,<sp/>and<sp/>game-timer-to-text<sp/>binding.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
     </programlisting>
     <location file="/tmp/h/include/helios/engine/modules/ui/binding/systems/README.md"/>

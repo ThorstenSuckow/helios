@@ -1,5 +1,5 @@
 var ScorePoolId_8ixx =
 [
-    [ "helios::engine::core::data::ScorePoolId", "structhelios_1_1engine_1_1core_1_1data_1_1ScorePoolId.html", "structhelios_1_1engine_1_1core_1_1data_1_1ScorePoolId" ],
-    [ "std::hash&lt; helios::engine::core::data::ScorePoolId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ScorePoolId_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ScorePoolId_01_4" ]
+    [ "helios::engine::core::data::ScorePoolIdTag", "structhelios_1_1engine_1_1core_1_1data_1_1ScorePoolIdTag.html", null ],
+    [ "helios::engine::core::data::ScorePoolId", "namespacehelios_1_1engine_1_1core_1_1data.html#a6a6b7374e7ac2be23cfffbe3b0714d73", null ]
 ];

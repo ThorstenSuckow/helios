@@ -10,5 +10,6 @@ var namespacehelios_1_1engine_1_1mechanics =
     [ "match", "namespacehelios_1_1engine_1_1mechanics_1_1match.html", "namespacehelios_1_1engine_1_1mechanics_1_1match" ],
     [ "scoring", "namespacehelios_1_1engine_1_1mechanics_1_1scoring.html", "namespacehelios_1_1engine_1_1mechanics_1_1scoring" ],
     [ "spawn", "namespacehelios_1_1engine_1_1mechanics_1_1spawn.html", "namespacehelios_1_1engine_1_1mechanics_1_1spawn" ],
+    [ "timing", "namespacehelios_1_1engine_1_1mechanics_1_1timing.html", "namespacehelios_1_1engine_1_1mechanics_1_1timing" ],
     [ "registerComponents", "namespacehelios_1_1engine_1_1mechanics.html#a2b966e819ea3d411b6ca89097a5c855f", null ]
 ];

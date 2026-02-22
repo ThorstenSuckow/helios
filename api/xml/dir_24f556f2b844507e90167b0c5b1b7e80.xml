@@ -7,10 +7,10 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_24f556f2b844507e90167b0c5b1b7e80_1autotoc_md669">
+<sect1 id="dir_24f556f2b844507e90167b0c5b1b7e80_1autotoc_md702">
 <title>helios::engine::state::listeners</title><para>Listeners for observing state transitions.</para>
 </sect1>
-<sect1 id="dir_24f556f2b844507e90167b0c5b1b7e80_1autotoc_md670">
+<sect1 id="dir_24f556f2b844507e90167b0c5b1b7e80_1autotoc_md703">
 <title>Components</title><para><table rows="2" cols="2"><row>
 <entry thead="yes"><para>Class  </para>
 </entry><entry thead="yes"><para>Description  </para>
@@ -22,8 +22,9 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_24f556f2b844507e90167b0c5b1b7e80_1autotoc_md671">
-<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1state_1_1listeners" kindref="compound">helios::engine::state::listeners</ref>;</highlight></codeline>
+<sect1 id="dir_24f556f2b844507e90167b0c5b1b7e80_1autotoc_md704">
+<title>Usage</title><sect2 id="dir_24f556f2b844507e90167b0c5b1b7e80_1autotoc_md705">
+<title>Full listener (exit, transition, enter)</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1state_1_1listeners" kindref="compound">helios::engine::state::listeners</ref>;</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>listener<sp/>=<sp/>std::make_unique&lt;LambdaStateListener&lt;GameState&gt;&gt;(</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>onExit</highlight><highlight class="normal"></highlight></codeline>
@@ -42,10 +43,27 @@
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal">stateManager.addStateListener(std::move(listener));</highlight></codeline>
 </programlisting></para>
+</sect2>
+<sect2 id="dir_24f556f2b844507e90167b0c5b1b7e80_1autotoc_md706">
+<title>Enter-only listener</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>enterListener<sp/>=<sp/>std::make_unique&lt;LambdaStateListener&lt;GameState&gt;&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>[](</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>ctx,<sp/><ref refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80be" kindref="member">GameState</ref><sp/>to)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Handle<sp/>state<sp/>entry</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+</programlisting></para>
+</sect2>
+<sect2 id="dir_24f556f2b844507e90167b0c5b1b7e80_1autotoc_md707">
+<title>Transition-only listener</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>transitionListener<sp/>=<sp/>std::make_unique&lt;LambdaStateListener&lt;GameState&gt;&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>[](</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>ctx,<sp/><ref refid="classhelios_1_1engine_1_1state_1_1types_1_1StateTransitionContext" kindref="compound">StateTransitionContext&lt;GameState&gt;</ref><sp/>transitionCtx)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Handle<sp/>transition</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+</programlisting></para>
 <para><hruler/>
  <details><summary>Doxygen</summary><para></para>
 <para></para>
 </details></para>
+</sect2>
 </sect1>
     </detaileddescription>
     <location file="/tmp/h/include/helios/engine/state/listeners/"/>

@@ -89,6 +89,9 @@ var hierarchy =
     [ "helios::engine::runtime::pooling::GameObjectPoolSnapshot", "structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolSnapshot.html", null ],
     [ "helios::input::gamepad::GamepadSettings", "classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html", null ],
     [ "helios::input::gamepad::GamepadState", "classhelios_1_1input_1_1gamepad_1_1GamepadState.html", null ],
+    [ "helios::engine::mechanics::timing::GameTimer", "classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer.html", null ],
+    [ "helios::engine::mechanics::timing::components::GameTimerBindingComponent", "classhelios_1_1engine_1_1mechanics_1_1timing_1_1components_1_1GameTimerBindingComponent.html", null ],
+    [ "helios::engine::core::data::GameTimerIdTag", "structhelios_1_1engine_1_1core_1_1data_1_1GameTimerIdTag.html", null ],
     [ "helios::engine::runtime::world::GameWorld", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html", null ],
     [ "helios::engine::builder::gameObject::builders::configs::GfxEffectsConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1GfxEffectsConfig.html", null ],
     [ "helios::ext::glfw::app::GLFWFactory", "classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWFactory.html", null ],
@@ -102,7 +105,6 @@ var hierarchy =
     [ "std::hash&lt; helios::engine::core::data::FontId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1FontId_01_4.html", null ],
     [ "std::hash&lt; helios::engine::core::data::GameObjectPoolId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId_01_4.html", null ],
     [ "std::hash&lt; helios::engine::core::data::SceneId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1SceneId_01_4.html", null ],
-    [ "std::hash&lt; helios::engine::core::data::ScorePoolId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ScorePoolId_01_4.html", null ],
     [ "std::hash&lt; helios::engine::core::data::ScoreTypeId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ScoreTypeId_01_4.html", null ],
     [ "std::hash&lt; helios::engine::core::data::SpawnProfileId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1SpawnProfileId_01_4.html", null ],
     [ "std::hash&lt; helios::engine::core::data::SpawnRuleId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1SpawnRuleId_01_4.html", null ],
@@ -151,6 +153,7 @@ var hierarchy =
       [ "helios::engine::state::StateManager< types::GameState >", "classhelios_1_1engine_1_1state_1_1StateManager.html", null ],
       [ "helios::engine::state::StateManager< helios::engine::mechanics::match::types::MatchState >", "classhelios_1_1engine_1_1state_1_1StateManager.html", null ],
       [ "helios::engine::mechanics::scoring::ScorePoolManager", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager.html", null ],
+      [ "helios::engine::mechanics::timing::TimerManager", "classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager.html", null ],
       [ "helios::engine::modules::ui::UiActionCommandManager", "classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager.html", null ],
       [ "helios::engine::runtime::pooling::GameObjectPoolManager", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager.html", null ],
       [ "helios::engine::runtime::spawn::SpawnManager", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html", null ],
@@ -160,6 +163,8 @@ var hierarchy =
     [ "helios::rendering::material::Material", "classhelios_1_1rendering_1_1material_1_1Material.html", null ],
     [ "helios::rendering::material::MaterialShaderProperties", "classhelios_1_1rendering_1_1material_1_1MaterialShaderProperties.html", null ],
     [ "helios::rendering::material::MaterialShaderPropertiesOverride", "structhelios_1_1rendering_1_1material_1_1MaterialShaderPropertiesOverride.html", null ],
+    [ "helios::engine::mechanics::scoring::components::MaxScoreObserverComponent", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1MaxScoreObserverComponent.html", null ],
+    [ "helios::engine::mechanics::scoring::MaxScorePoolSnapshot", "structhelios_1_1engine_1_1mechanics_1_1scoring_1_1MaxScorePoolSnapshot.html", null ],
     [ "helios::engine::builder::gameObject::builders::MenuBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1MenuBuilder.html", null ],
     [ "helios::engine::modules::ui::widgets::components::MenuComponent", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1MenuComponent.html", null ],
     [ "helios::engine::builder::gameObject::builders::configs::MenuConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1MenuConfig.html", null ],
@@ -179,6 +184,7 @@ var hierarchy =
     [ "helios::engine::modules::physics::motion::components::Move2DComponent", "classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent.html", null ],
     [ "helios::engine::builder::gameObject::builders::configs::Move2DConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1Move2DConfig.html", null ],
     [ "helios::core::types::no_init_t", "structhelios_1_1core_1_1types_1_1no__init__t.html", null ],
+    [ "helios::engine::modules::ui::layout::components::NumberFormatterComponent", "classhelios_1_1engine_1_1modules_1_1ui_1_1layout_1_1components_1_1NumberFormatterComponent.html", null ],
     [ "helios::engine::builder::gameObject::builders::ObserverBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1ObserverBuilder.html", null ],
     [ "helios::engine::builder::gameObject::builders::configs::ObserverConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ObserverConfig.html", null ],
     [ "helios::ext::opengl::rendering::shader::OpenGLUniformLocationMap", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLUniformLocationMap.html", null ],
@@ -237,7 +243,7 @@ var hierarchy =
     [ "helios::engine::mechanics::scoring::ScorePool", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePool.html", null ],
     [ "helios::engine::mechanics::scoring::components::ScorePoolComponent", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScorePoolComponent.html", null ],
     [ "helios::engine::builder::gameObject::builders::configs::ScorePoolConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ScorePoolConfig.html", null ],
-    [ "helios::engine::core::data::ScorePoolId", "structhelios_1_1engine_1_1core_1_1data_1_1ScorePoolId.html", null ],
+    [ "helios::engine::core::data::ScorePoolIdTag", "structhelios_1_1engine_1_1core_1_1data_1_1ScorePoolIdTag.html", null ],
     [ "helios::engine::mechanics::scoring::ScorePoolSnapshot", "structhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolSnapshot.html", null ],
     [ "helios::engine::core::data::ScoreTypeId", "classhelios_1_1engine_1_1core_1_1data_1_1ScoreTypeId.html", null ],
     [ "helios::engine::mechanics::scoring::components::ScoreValueComponent&lt; T &gt;", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScoreValueComponent.html", null ],
@@ -364,6 +370,11 @@ var hierarchy =
     [ "helios::rendering::text::TextRenderPrototype", "classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html", null ],
     [ "helios::rendering::text::TextShaderProperties", "classhelios_1_1rendering_1_1text_1_1TextShaderProperties.html", null ],
     [ "helios::rendering::text::TextShaderPropertiesOverride", "structhelios_1_1rendering_1_1text_1_1TextShaderPropertiesOverride.html", null ],
+    [ "helios::engine::modules::ui::layout::components::TimeFormatterComponent", "classhelios_1_1engine_1_1modules_1_1ui_1_1layout_1_1components_1_1TimeFormatterComponent.html", null ],
+    [ "helios::engine::mechanics::timing::TimerCommandHandler", "classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerCommandHandler.html", [
+      [ "helios::engine::mechanics::timing::TimerManager", "classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager.html", null ]
+    ] ],
+    [ "helios::engine::mechanics::timing::types::TimerControlContext", "structhelios_1_1engine_1_1mechanics_1_1timing_1_1types_1_1TimerControlContext.html", null ],
     [ "helios::core::spatial::Transform", "classhelios_1_1core_1_1spatial_1_1Transform.html", null ],
     [ "helios::engine::builder::gameObject::builders::TransformBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1TransformBuilder.html", null ],
     [ "helios::engine::builder::gameObject::builders::configs::TransformConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TransformConfig.html", null ],
@@ -399,9 +410,12 @@ var hierarchy =
         [ "helios::engine::mechanics::match::systems::MatchFlowSystem", "classhelios_1_1engine_1_1mechanics_1_1match_1_1systems_1_1MatchFlowSystem.html", null ],
         [ "helios::engine::mechanics::match::systems::MatchRuleSystem", "classhelios_1_1engine_1_1mechanics_1_1match_1_1systems_1_1MatchRuleSystem.html", null ],
         [ "helios::engine::mechanics::scoring::systems::CombatScoringSystem", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1CombatScoringSystem.html", null ],
+        [ "helios::engine::mechanics::scoring::systems::MaxScoreObserverClearSystem", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1MaxScoreObserverClearSystem.html", null ],
+        [ "helios::engine::mechanics::scoring::systems::MaxScoreObserverSystem", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1MaxScoreObserverSystem.html", null ],
         [ "helios::engine::mechanics::scoring::systems::ScoreObserverClearSystem", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1ScoreObserverClearSystem.html", null ],
         [ "helios::engine::mechanics::scoring::systems::ScoreObserverSystem", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1ScoreObserverSystem.html", null ],
         [ "helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem.html", null ],
+        [ "helios::engine::mechanics::timing::systems::GameTimerUpdateSystem", "classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerUpdateSystem.html", null ],
         [ "helios::engine::modules::ai::systems::ChaseSystem", "classhelios_1_1engine_1_1modules_1_1ai_1_1systems_1_1ChaseSystem.html", null ],
         [ "helios::engine::modules::physics::collision::systems::BoundsUpdateSystem", "classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1BoundsUpdateSystem.html", null ],
         [ "helios::engine::modules::physics::collision::systems::CollisionStateClearSystem", "classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1CollisionStateClearSystem.html", null ],
@@ -416,6 +430,8 @@ var hierarchy =
         [ "helios::engine::modules::spatial::transform::systems::ComposeTransformSystem", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1systems_1_1ComposeTransformSystem.html", null ],
         [ "helios::engine::modules::spatial::transform::systems::ScaleSystem", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1systems_1_1ScaleSystem.html", null ],
         [ "helios::engine::modules::spatial::transform::systems::TransformClearSystem", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1systems_1_1TransformClearSystem.html", null ],
+        [ "helios::engine::modules::ui::binding::systems::GameTimer2UiTextUpdateSystem", "classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1GameTimer2UiTextUpdateSystem.html", null ],
+        [ "helios::engine::modules::ui::binding::systems::MaxScore2UiTextUpdateSystem", "classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1MaxScore2UiTextUpdateSystem.html", null ],
         [ "helios::engine::modules::ui::binding::systems::Score2UiTextUpdateSystem", "classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1Score2UiTextUpdateSystem.html", null ],
         [ "helios::engine::modules::ui::transform::systems::UiTransformSystem", "classhelios_1_1engine_1_1modules_1_1ui_1_1transform_1_1systems_1_1UiTransformSystem.html", null ],
         [ "helios::engine::modules::ui::widgets::systems::MenuDisplaySystem< StateLft, StateRgt >", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuDisplaySystem.html", null ],
@@ -443,6 +459,7 @@ var hierarchy =
     ] ],
     [ "helios::engine::runtime::messaging::command::WorldCommand", "classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand.html", [
       [ "helios::engine::mechanics::scoring::commands::UpdateScoreCommand", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1commands_1_1UpdateScoreCommand.html", null ],
+      [ "helios::engine::mechanics::timing::commands::TimerControlCommand", "classhelios_1_1engine_1_1mechanics_1_1timing_1_1commands_1_1TimerControlCommand.html", null ],
       [ "helios::engine::modules::ui::commands::UiActionCommand", "classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand.html", null ],
       [ "helios::engine::runtime::spawn::commands::DespawnCommand", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1DespawnCommand.html", null ],
       [ "helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand.html", null ],
@@ -452,6 +469,9 @@ var hierarchy =
     [ "helios::engine::runtime::messaging::command::WorldCommandDispatcher", "classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher.html", [
       [ "helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher< helios::engine::mechanics::scoring::commands::UpdateScoreCommand >", "classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher.html", [
         [ "helios::engine::mechanics::scoring::ScoreCommandDispatcher", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandDispatcher.html", null ]
+      ] ],
+      [ "helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher< TimerControlCommand >", "classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher.html", [
+        [ "helios::engine::mechanics::timing::TimerCommandDispatcher", "classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerCommandDispatcher.html", null ]
       ] ],
       [ "helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher< helios::engine::modules::ui::commands::UiActionCommand >", "classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher.html", [
         [ "helios::engine::modules::ui::commands::UiActionCommandDispatcher", "classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommandDispatcher.html", null ]

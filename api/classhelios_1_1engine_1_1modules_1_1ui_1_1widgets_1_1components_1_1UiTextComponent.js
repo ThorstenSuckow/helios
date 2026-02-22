@@ -15,13 +15,12 @@ var classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiTextCom
     [ "renderable", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiTextComponent.html#a83d32272df2f16ac5b58ec59d5292e11", null ],
     [ "reset", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiTextComponent.html#a98cbe97a3109c14b10f3512141147c1c", null ],
     [ "resizeComplete", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiTextComponent.html#a51194fb56af3bb1705c93df80dc6fed0", null ],
-    [ "setDouble", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiTextComponent.html#a37f5eb1a094012d4f17be8c4a2f4999e", null ],
-    [ "setTemplate", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiTextComponent.html#ad45a884c0ddfdd97aea0cac63594223c", null ],
+    [ "setText", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiTextComponent.html#a0cbddc9f0c796d3167a7cc8be8617a69", null ],
+    [ "setText", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiTextComponent.html#a666dd3c2243085c084489ab7f1219cec", null ],
     [ "update", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiTextComponent.html#ab341134fc3ea3f11257d09eda77db7fb", null ],
-    [ "doubleValue_", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiTextComponent.html#ad6593f775c1bb994b5c98c471d31605c", null ],
     [ "isDirty_", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiTextComponent.html#a4869554c41143ac5ee33b44b88bb6a43", null ],
     [ "isEnabled_", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiTextComponent.html#a73240d4b197cb66a5c60f079d6d592ee", null ],
     [ "needsResize_", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiTextComponent.html#a61c34d3beef78cd268a0db3b422104de", null ],
     [ "renderable_", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiTextComponent.html#a3cadf23c78913bd41503da6d2f50ac52", null ],
-    [ "template_", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiTextComponent.html#ab25131414d1deaa236c068b8ae406e88", null ]
+    [ "text_", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiTextComponent.html#a1cccdf8571d03e926d43d607f692d27c", null ]
 ];

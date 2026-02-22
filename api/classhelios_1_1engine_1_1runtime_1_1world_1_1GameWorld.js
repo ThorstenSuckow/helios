@@ -19,6 +19,7 @@ var classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld =
     [ "registerScoreCommandHandler", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#a37b8248fc6f250140046bd81401853ef", null ],
     [ "registerSpawnCommandHandler", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#a035f7979ac9743fceecaeea93204cd37", null ],
     [ "registerStateCommandHandler", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#ae2255ceebca281c53e7a7d69f8e56131", null ],
+    [ "registerTimerCommandHandler", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#a537be803bd263137818146cb029af9a6", null ],
     [ "registerUiActionCommandHandler", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#ac523efad82188ea088f155da87765594", null ],
     [ "reset", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#aa134c91f1cff94cb3e708d7908e2a291", null ],
     [ "scoreCommandHandler", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#a462d7a1e1252eb4c2b274c2e253a8da4", null ],
@@ -26,6 +27,7 @@ var classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld =
     [ "setLevel", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#a8d76de93fc524c7cfe07d506a79130db", null ],
     [ "spawnCommandHandler", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#a81250d5cb4d49746a9702d9f4a66d6ec", null ],
     [ "stateCommandHandler", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#ad1501c0217ada774e439dfa060b89053", null ],
+    [ "timerCommandHandler", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#a09eea946cb57eccfa71964d18414bd97", null ],
     [ "uiActionCommandHandler", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#ac54de3822d847ebd5ac050d2225c216f", null ],
     [ "view", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#a16e96750ec7af95732a904982a24b2f9", null ],
     [ "view", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#a768b8b5bc3cdffd15fb8c6b3d9cd54e7", null ],
@@ -39,5 +41,6 @@ var classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld =
     [ "session_", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#a4618852a927c5feac102c549ffe3adcf", null ],
     [ "spawnCommandHandlerRegistry_", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#ae3bae7b84d6f67f747d4129f2e7101ec", null ],
     [ "stateCommandHandlers_", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#a6ebb8c28f0db121085c0c2bad8b4128d", null ],
+    [ "timerCommandHandler_", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#aec14cc722c3044953d7434d88f64b463", null ],
     [ "uiActionCommandHandler_", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#aebbb01a9cefc8258d7c8b507e8299718", null ]
 ];

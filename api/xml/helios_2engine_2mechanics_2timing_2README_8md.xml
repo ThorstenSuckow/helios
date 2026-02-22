@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="helios_2engine_2mechanics_2timing_2README_8md" kind="file" language="Markdown">
+    <compoundname>helios/engine/mechanics/timing/README.md</compoundname>
+    <innernamespace refid="namespacehelios_1_1engine_1_1mechanics_1_1timing">helios::engine::mechanics::timing</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>helios::engine::mechanics::timing</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Game<sp/>timer<sp/>management<sp/>system.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>timers,<sp/>commands,<sp/>components,<sp/>and<sp/>systems<sp/>for<sp/>tracking<sp/>elapsed<sp/>time,<sp/>controlling<sp/>timer<sp/>state<sp/>transitions,<sp/>and<sp/>observing<sp/>timer<sp/>updates<sp/>from<sp/>within<sp/>the<sp/>ECS.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Submodules</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Submodule<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-----------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`types/`<sp/>|<sp/>Core<sp/>type<sp/>definitions<sp/>(`TimerState`,<sp/>`TimerRevision`,<sp/>`TimerControlContext`)<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`commands/`<sp/>|<sp/>Command<sp/>classes<sp/>for<sp/>requesting<sp/>timer<sp/>state<sp/>transitions<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`components/`<sp/>|<sp/>ECS<sp/>components<sp/>for<sp/>observing<sp/>timers<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`systems/`<sp/>|<sp/>Systems<sp/>that<sp/>advance<sp/>timers<sp/>each<sp/>frame<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Key<sp/>Classes</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Description<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|-------------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`GameTimer`<sp/>|<sp/>A<sp/>named<sp/>timer<sp/>that<sp/>tracks<sp/>elapsed<sp/>time<sp/>while<sp/>in<sp/>the<sp/>Started<sp/>state<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`TimerManager`<sp/>|<sp/>Manager<sp/>that<sp/>owns<sp/>timers<sp/>and<sp/>processes<sp/>pending<sp/>control<sp/>commands<sp/>during<sp/>flush<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`TimerCommandHandler`<sp/>|<sp/>Abstract<sp/>handler<sp/>interface<sp/>for<sp/>timer<sp/>control<sp/>commands<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`TimerCommandDispatcher`<sp/>|<sp/>Routes<sp/>`TimerControlCommand`<sp/>to<sp/>the<sp/>registered<sp/>handler<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Architecture</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">1.<sp/>**GameTimer**<sp/>accumulates<sp/>elapsed<sp/>time<sp/>and<sp/>increments<sp/>a<sp/>revision<sp/>counter<sp/>on<sp/>each<sp/>update</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>**TimerControlCommand**<sp/>is<sp/>written<sp/>into<sp/>the<sp/>command<sp/>buffer<sp/>to<sp/>request<sp/>state<sp/>transitions<sp/>(start,<sp/>pause,<sp/>stop)</highlight></codeline>
+<codeline><highlight class="normal">3.<sp/>**TimerCommandDispatcher**<sp/>routes<sp/>the<sp/>command<sp/>to<sp/>the<sp/>**TimerManager**<sp/>via<sp/>the<sp/>Visitor<sp/>pattern</highlight></codeline>
+<codeline><highlight class="normal">4.<sp/>**TimerManager**<sp/>collects<sp/>pending<sp/>commands<sp/>and<sp/>applies<sp/>them<sp/>during<sp/>`flush()`</highlight></codeline>
+<codeline><highlight class="normal">5.<sp/>**GameTimerUpdateSystem**<sp/>advances<sp/>all<sp/>timers<sp/>by<sp/>the<sp/>current<sp/>delta<sp/>time<sp/>each<sp/>frame</highlight></codeline>
+<codeline><highlight class="normal">6.<sp/>**GameTimerBindingComponent**<sp/>allows<sp/>entities<sp/>to<sp/>track<sp/>a<sp/>specific<sp/>timer&apos;s<sp/>revision</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Integration</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>timing<sp/>system<sp/>integrates<sp/>with:</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Command<sp/>system**<sp/>-<sp/>timer<sp/>state<sp/>transitions<sp/>are<sp/>requested<sp/>via<sp/>`TimerControlCommand`</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Manager<sp/>system**<sp/>-<sp/>`TimerManager`<sp/>participates<sp/>in<sp/>the<sp/>game<sp/>loop<sp/>flush<sp/>cycle</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Game<sp/>state<sp/>listeners**<sp/>-<sp/>can<sp/>issue<sp/>timer<sp/>commands<sp/>in<sp/>response<sp/>to<sp/>state<sp/>changes</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::engine::mechanics::timing</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Game<sp/>timer<sp/>management<sp/>system.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Provides<sp/>timers,<sp/>commands,<sp/>components<sp/>and<sp/>systems<sp/>for<sp/>tracking<sp/>elapsed<sp/>time<sp/>and<sp/>controlling<sp/>timer<sp/>state<sp/>transitions<sp/>through<sp/>the<sp/>engine&apos;s<sp/>command<sp/>system.</highlight></codeline>
+<codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
+<codeline></codeline>
+    </programlisting>
+    <location file="/tmp/h/include/helios/engine/mechanics/timing/README.md"/>
+  </compounddef>
+</doxygen>

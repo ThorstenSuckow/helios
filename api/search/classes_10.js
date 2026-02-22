@@ -27,7 +27,7 @@ var searchData=
   ['scorepool_24',['ScorePool',['../classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePool.html',1,'helios::engine::mechanics::scoring']]],
   ['scorepoolcomponent_25',['ScorePoolComponent',['../classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScorePoolComponent.html',1,'helios::engine::mechanics::scoring::components']]],
   ['scorepoolconfig_26',['ScorePoolConfig',['../classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ScorePoolConfig.html',1,'helios::engine::builder::gameObject::builders::configs']]],
-  ['scorepoolid_27',['ScorePoolId',['../structhelios_1_1engine_1_1core_1_1data_1_1ScorePoolId.html',1,'helios::engine::core::data']]],
+  ['scorepoolidtag_27',['ScorePoolIdTag',['../structhelios_1_1engine_1_1core_1_1data_1_1ScorePoolIdTag.html',1,'helios::engine::core::data']]],
   ['scorepoolmanager_28',['ScorePoolManager',['../classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager.html',1,'helios::engine::mechanics::scoring']]],
   ['scorepoolsnapshot_29',['ScorePoolSnapshot',['../structhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolSnapshot.html',1,'helios::engine::mechanics::scoring']]],
   ['scoretypeid_30',['ScoreTypeId',['../classhelios_1_1engine_1_1core_1_1data_1_1ScoreTypeId.html',1,'helios::engine::core::data']]],
@@ -111,9 +111,11 @@ var searchData=
   ['stopwatch_108',['Stopwatch',['../classhelios_1_1util_1_1time_1_1Stopwatch.html',1,'helios::util::time']]],
   ['stringfilereader_109',['StringFileReader',['../classhelios_1_1util_1_1io_1_1StringFileReader.html',1,'helios::util::io']]],
   ['strongid_110',['StrongId',['../structhelios_1_1core_1_1data_1_1StrongId.html',1,'helios::core::data']]],
-  ['strongid_3c_20menuidtag_2c_20uint32_5ft_20_3e_111',['StrongId&lt; MenuIdTag, uint32_t &gt;',['../structhelios_1_1core_1_1data_1_1StrongId.html',1,'helios::core::data']]],
-  ['strongid_3c_20prefabidtag_2c_20uint32_5ft_20_3e_112',['StrongId&lt; PrefabIdTag, uint32_t &gt;',['../structhelios_1_1core_1_1data_1_1StrongId.html',1,'helios::core::data']]],
-  ['strongid_3c_20viewportidtag_2c_20uint32_5ft_20_3e_113',['StrongId&lt; ViewportIdTag, uint32_t &gt;',['../structhelios_1_1core_1_1data_1_1StrongId.html',1,'helios::core::data']]],
-  ['system_114',['System',['../classhelios_1_1engine_1_1ecs_1_1System.html',1,'helios::engine::ecs']]],
-  ['systemregistry_115',['SystemRegistry',['../classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry.html',1,'helios::engine::runtime::world']]]
+  ['strongid_3c_20gametimeridtag_2c_20uint32_5ft_20_3e_111',['StrongId&lt; GameTimerIdTag, uint32_t &gt;',['../structhelios_1_1core_1_1data_1_1StrongId.html',1,'helios::core::data']]],
+  ['strongid_3c_20menuidtag_2c_20uint32_5ft_20_3e_112',['StrongId&lt; MenuIdTag, uint32_t &gt;',['../structhelios_1_1core_1_1data_1_1StrongId.html',1,'helios::core::data']]],
+  ['strongid_3c_20prefabidtag_2c_20uint32_5ft_20_3e_113',['StrongId&lt; PrefabIdTag, uint32_t &gt;',['../structhelios_1_1core_1_1data_1_1StrongId.html',1,'helios::core::data']]],
+  ['strongid_3c_20scorepoolidtag_2c_20uint32_5ft_20_3e_114',['StrongId&lt; ScorePoolIdTag, uint32_t &gt;',['../structhelios_1_1core_1_1data_1_1StrongId.html',1,'helios::core::data']]],
+  ['strongid_3c_20viewportidtag_2c_20uint32_5ft_20_3e_115',['StrongId&lt; ViewportIdTag, uint32_t &gt;',['../structhelios_1_1core_1_1data_1_1StrongId.html',1,'helios::core::data']]],
+  ['system_116',['System',['../classhelios_1_1engine_1_1ecs_1_1System.html',1,'helios::engine::ecs']]],
+  ['systemregistry_117',['SystemRegistry',['../classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry.html',1,'helios::engine::runtime::world']]]
 ];

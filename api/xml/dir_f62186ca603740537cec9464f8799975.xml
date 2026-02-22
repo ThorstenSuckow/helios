@@ -4,17 +4,19 @@
     <compoundname>systems</compoundname>
     <innerfile refid="helios_2engine_2mechanics_2scoring_2systems_2__module_8ixx">helios/engine/mechanics/scoring/systems/_module.ixx</innerfile>
     <innerfile refid="CombatScoringSystem_8ixx">CombatScoringSystem.ixx</innerfile>
+    <innerfile refid="MaxScoreObserverClearSystem_8ixx">MaxScoreObserverClearSystem.ixx</innerfile>
+    <innerfile refid="MaxScoreObserverSystem_8ixx">MaxScoreObserverSystem.ixx</innerfile>
     <innerfile refid="ScoreObserverClearSystem_8ixx">ScoreObserverClearSystem.ixx</innerfile>
     <innerfile refid="ScoreObserverSystem_8ixx">ScoreObserverSystem.ixx</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_f62186ca603740537cec9464f8799975_1autotoc_md302">
-<title>helios::engine::mechanics::scoring::systems</title><para>Systems for score processing and observation.</para>
-<para>This namespace contains systems that handle scoring events, update score observers, and manage score state lifecycle.</para>
-</sect1>
 <sect1 id="dir_f62186ca603740537cec9464f8799975_1autotoc_md303">
-<title>Systems</title><para><table rows="4" cols="3"><row>
+<title>helios::engine::mechanics::scoring::systems</title><para>Systems for score processing and observation.</para>
+<para>This namespace contains systems that handle scoring events, update score and high score observers, and manage observer state lifecycle.</para>
+</sect1>
+<sect1 id="dir_f62186ca603740537cec9464f8799975_1autotoc_md304">
+<title>Systems</title><para><table rows="6" cols="3"><row>
 <entry thead="yes"><para>System  </para>
 </entry><entry thead="yes"><para>Phase  </para>
 </entry><entry thead="yes"><para>Description  </para>
@@ -27,18 +29,28 @@
 <row>
 <entry thead="no"><para><computeroutput>ScoreObserverSystem</computeroutput>  </para>
 </entry><entry thead="no"><para>Update  </para>
-</entry><entry thead="no"><para>Syncs ScoreObserverComponent values from ScorePools  </para>
+</entry><entry thead="no"><para>Propagates score snapshots from ScorePools to ScoreObserverComponents  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>MaxScoreObserverSystem</computeroutput>  </para>
+</entry><entry thead="no"><para>Update  </para>
+</entry><entry thead="no"><para>Propagates high score snapshots from ScorePools to MaxScoreObserverComponents  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>ScoreObserverClearSystem</computeroutput>  </para>
 </entry><entry thead="no"><para>Post  </para>
-</entry><entry thead="no"><para>Clears hasUpdate flags on ScoreObserverComponents  </para>
+</entry><entry thead="no"><para>Resets hasUpdate flags on ScoreObserverComponents  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>MaxScoreObserverClearSystem</computeroutput>  </para>
+</entry><entry thead="no"><para>Post  </para>
+</entry><entry thead="no"><para>Resets hasUpdate flags on MaxScoreObserverComponents  </para>
 </entry></row>
 </table>
 </para>
 </sect1>
-<sect1 id="dir_f62186ca603740537cec9464f8799975_1autotoc_md304">
-<title>Execution Order</title><para>1. <bold>CombatScoringSystem</bold> - Listens for <computeroutput>DeathEvent</computeroutput>, checks for <computeroutput>ScoreValueComponent</computeroutput>, issues <computeroutput>UpdateScoreCommand</computeroutput> 2. <bold>ScoreObserverSystem</bold> - Reads from <computeroutput>ScorePool</computeroutput> and updates <computeroutput>ScoreObserverComponent.value</computeroutput> 3. <bold>ScoreObserverClearSystem</bold> - Clears <computeroutput>hasUpdate</computeroutput> flag after UI systems have processed changes</para>
+<sect1 id="dir_f62186ca603740537cec9464f8799975_1autotoc_md305">
+<title>Execution Order</title><para>1. <bold>CombatScoringSystem</bold> - Listens for <computeroutput>DeathEvent</computeroutput>, checks for <computeroutput>ScoreValueComponent</computeroutput>, issues <computeroutput>UpdateScoreCommand</computeroutput> 2. <bold>ScoreObserverSystem</bold> - Compares revision, propagates <computeroutput>ScorePoolSnapshot</computeroutput> to <computeroutput>ScoreObserverComponent</computeroutput> 3. <bold>MaxScoreObserverSystem</bold> - Compares revision, propagates <computeroutput>MaxScorePoolSnapshot</computeroutput> to <computeroutput>MaxScoreObserverComponent</computeroutput> 4. <bold>ScoreObserverClearSystem</bold> - Clears <computeroutput>hasUpdate</computeroutput> flag after UI systems have processed score changes 5. <bold>MaxScoreObserverClearSystem</bold> - Clears <computeroutput>hasUpdate</computeroutput> flag after UI systems have processed high score changes</para>
 <para><hruler/>
 </para>
 <para><details><summary>Doxygen</summary><para></para>

@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_04e46b302a6aadc7f23a11997ed7852b" kind="dir">
+    <compoundname>timing</compoundname>
+    <innerdir refid="dir_e5090bf757e2582e2690780840c48cfe">commands</innerdir>
+    <innerdir refid="dir_eecf9752a36b077531052d23563b112d">components</innerdir>
+    <innerdir refid="dir_d00b166f8af3f0127800a82b83f56c7d">systems</innerdir>
+    <innerdir refid="dir_53e433fa7cbef8c1ea8cd2fd638e1c02">types</innerdir>
+    <innerfile refid="helios_2engine_2mechanics_2timing_2__module_8ixx">helios/engine/mechanics/timing/_module.ixx</innerfile>
+    <innerfile refid="GameTimer_8ixx">GameTimer.ixx</innerfile>
+    <innerfile refid="TimerCommandDispatcher_8ixx">TimerCommandDispatcher.ixx</innerfile>
+    <innerfile refid="TimerCommandHandler_8ixx">TimerCommandHandler.ixx</innerfile>
+    <innerfile refid="TimerManager_8ixx">TimerManager.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_04e46b302a6aadc7f23a11997ed7852b_1autotoc_md336">
+<title>helios::engine::mechanics::timing</title><para>Game timer management system.</para>
+<para>This module provides timers, commands, components, and systems for tracking elapsed time, controlling timer state transitions, and observing timer updates from within the ECS.</para>
+</sect1>
+<sect1 id="dir_04e46b302a6aadc7f23a11997ed7852b_1autotoc_md337">
+<title>Submodules</title><para><table rows="5" cols="2"><row>
+<entry thead="yes"><para>Submodule  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>types/</computeroutput>  </para>
+</entry><entry thead="no"><para>Core type definitions (<computeroutput>TimerState</computeroutput>, <computeroutput>TimerRevision</computeroutput>, <computeroutput>TimerControlContext</computeroutput>)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>commands/</computeroutput>  </para>
+</entry><entry thead="no"><para>Command classes for requesting timer state transitions  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>components/</computeroutput>  </para>
+</entry><entry thead="no"><para>ECS components for observing timers  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>systems/</computeroutput>  </para>
+</entry><entry thead="no"><para>Systems that advance timers each frame  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_04e46b302a6aadc7f23a11997ed7852b_1autotoc_md338">
+<title>Key Classes</title><para><table rows="5" cols="2"><row>
+<entry thead="yes"><para>Class  </para>
+</entry><entry thead="yes"><para>Description  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>GameTimer</computeroutput>  </para>
+</entry><entry thead="no"><para>A named timer that tracks elapsed time while in the Started state  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>TimerManager</computeroutput>  </para>
+</entry><entry thead="no"><para>Manager that owns timers and processes pending control commands during flush  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>TimerCommandHandler</computeroutput>  </para>
+</entry><entry thead="no"><para>Abstract handler interface for timer control commands  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>TimerCommandDispatcher</computeroutput>  </para>
+</entry><entry thead="no"><para>Routes <computeroutput>TimerControlCommand</computeroutput> to the registered handler  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_04e46b302a6aadc7f23a11997ed7852b_1autotoc_md339">
+<title>Architecture</title><para>1. <bold>GameTimer</bold> accumulates elapsed time and increments a revision counter on each update 2. <bold>TimerControlCommand</bold> is written into the command buffer to request state transitions (start, pause, stop) 3. <bold>TimerCommandDispatcher</bold> routes the command to the <bold>TimerManager</bold> via the Visitor pattern 4. <bold>TimerManager</bold> collects pending commands and applies them during <computeroutput>flush()</computeroutput> 5. <bold>GameTimerUpdateSystem</bold> advances all timers by the current delta time each frame 6. <bold>GameTimerBindingComponent</bold> allows entities to track a specific timer&apos;s revision</para>
+</sect1>
+<sect1 id="dir_04e46b302a6aadc7f23a11997ed7852b_1autotoc_md340">
+<title>Integration</title><para>The timing system integrates with:<itemizedlist>
+<listitem><para><bold>Command system</bold> - timer state transitions are requested via <computeroutput>TimerControlCommand</computeroutput></para>
+</listitem><listitem><para><bold>Manager system</bold> - <computeroutput>TimerManager</computeroutput> participates in the game loop flush cycle</para>
+</listitem><listitem><para><bold>Game state listeners</bold> - can issue timer commands in response to state changes</para>
+</listitem></itemizedlist>
+</para>
+<para><hruler/>
+</para>
+<para><details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/mechanics/timing/"/>
+  </compounddef>
+</doxygen>

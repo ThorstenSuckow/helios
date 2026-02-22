@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/ui/binding/systems/Score2UiTextUpdateSystem.ixx" line="44" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ui/binding/systems/Score2UiTextUpdateSystem.ixx" bodystart="44" bodyend="56"/>
+        <location file="/tmp/h/include/helios/engine/modules/ui/binding/systems/Score2UiTextUpdateSystem.ixx" line="49" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ui/binding/systems/Score2UiTextUpdateSystem.ixx" bodystart="49" bodyend="64"/>
         <references refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" compoundref="System_8ixx" startline="48">helios::engine::ecs::System::gameWorld_</references>
       </memberdef>
     </sectiondef>
@@ -40,7 +40,12 @@
 <para>System for binding score values to UI text components. </para>
     </briefdescription>
     <detaileddescription>
-<para>Queries entities with both ScoreObserverComponent and UiTextComponent. When the score observer signals an update, the new total score is propagated to the text component for display. </para>
+<para>Queries entities with ScoreObserverComponent, NumberFormatterComponent, and UiTextComponent. When the score observer signals an update, the formatted total score is propagated to the text component for display.</para>
+<para><simplesect kind="see"><para>ScoreObserverComponent </para>
+</simplesect>
+<simplesect kind="see"><para>NumberFormatterComponent </para>
+</simplesect>
+</para>
     </detaileddescription>
     <inheritancegraph>
       <node id="2">
@@ -61,11 +66,11 @@
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="10">
+      <node id="11">
         <label>helios::engine::ecs::EntityManager</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1EntityManager"/>
       </node>
-      <node id="9">
+      <node id="10">
         <label>helios::engine::ecs::EntityRegistry</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry"/>
       </node>
@@ -87,6 +92,10 @@
         <link refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler"/>
       </node>
       <node id="7">
+        <label>helios::engine::mechanics::timing::TimerCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerCommandHandler"/>
+      </node>
+      <node id="8">
         <label>helios::engine::modules::ui::UiActionCommandHandler</label>
         <link refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandHandler"/>
       </node>
@@ -96,7 +105,7 @@
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="8">
+      <node id="9">
         <label>helios::engine::runtime::spawn::SpawnCommandHandlerRegistry</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandlerRegistry"/>
       </node>
@@ -110,22 +119,25 @@
           <edgelabel>scoreCommandHandler_</edgelabel>
         </childnode>
         <childnode refid="7" relation="usage">
-          <edgelabel>uiActionCommandHandler_</edgelabel>
+          <edgelabel>timerCommandHandler_</edgelabel>
         </childnode>
         <childnode refid="8" relation="usage">
-          <edgelabel>spawnCommandHandlerRegistry_</edgelabel>
+          <edgelabel>uiActionCommandHandler_</edgelabel>
         </childnode>
         <childnode refid="9" relation="usage">
-          <edgelabel>entityRegistry_</edgelabel>
+          <edgelabel>spawnCommandHandlerRegistry_</edgelabel>
         </childnode>
         <childnode refid="10" relation="usage">
-          <edgelabel>em_</edgelabel>
+          <edgelabel>entityRegistry_</edgelabel>
         </childnode>
         <childnode refid="11" relation="usage">
+          <edgelabel>em_</edgelabel>
+        </childnode>
+        <childnode refid="12" relation="usage">
           <edgelabel>session_</edgelabel>
         </childnode>
       </node>
-      <node id="11">
+      <node id="12">
         <label>helios::engine::runtime::world::Session</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session"/>
       </node>
@@ -134,7 +146,7 @@
         <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
       </node>
     </collaborationgraph>
-    <location file="/tmp/h/include/helios/engine/modules/ui/binding/systems/Score2UiTextUpdateSystem.ixx" line="34" column="5" bodyfile="/tmp/h/include/helios/engine/modules/ui/binding/systems/Score2UiTextUpdateSystem.ixx" bodystart="34" bodyend="58"/>
+    <location file="/tmp/h/include/helios/engine/modules/ui/binding/systems/Score2UiTextUpdateSystem.ixx" line="39" column="5" bodyfile="/tmp/h/include/helios/engine/modules/ui/binding/systems/Score2UiTextUpdateSystem.ixx" bodystart="39" bodyend="66"/>
     <listofallmembers>
       <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" prot="protected" virt="non-virtual"><scope>helios::engine::modules::ui::binding::systems::Score2UiTextUpdateSystem</scope><name>gameWorld_</name></member>
       <member refid="classhelios_1_1engine_1_1ecs_1_1System_1ae0464c1668e257439243a4f25979a7ff" prot="public" virt="virtual"><scope>helios::engine::modules::ui::binding::systems::Score2UiTextUpdateSystem</scope><name>init</name></member>

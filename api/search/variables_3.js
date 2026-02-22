@@ -27,6 +27,5 @@ var searchData=
   ['directionfromsteering_5f_24',['directionFromSteering_',['../classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent.html#a1debcd0dc1919c2de3499a076314aeb9',1,'helios::engine::modules::physics::motion::components::SteeringComponent']]],
   ['disable_25',['disable',['../structhelios_1_1engine_1_1ecs_1_1ComponentOps.html#ad04ffbe7a069fe77bab127744350dce9',1,'helios::engine::ecs::ComponentOps']]],
   ['dispatcher_5f_26',['dispatcher_',['../classhelios_1_1event_1_1EventManager.html#a1deac9e3799c2f473fdb16bddb4dada8',1,'helios::event::EventManager']]],
-  ['dodgerblue_27',['DodgerBlue',['../structhelios_1_1util_1_1Colors.html#a92a058bf66d6e8b1980c1c0b481fcc9b',1,'helios::util::Colors']]],
-  ['doublevalue_5f_28',['doubleValue_',['../classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiTextComponent.html#ad6593f775c1bb994b5c98c471d31605c',1,'helios::engine::modules::ui::widgets::components::UiTextComponent']]]
+  ['dodgerblue_27',['DodgerBlue',['../structhelios_1_1util_1_1Colors.html#a92a058bf66d6e8b1980c1c0b481fcc9b',1,'helios::util::Colors']]]
 ];

@@ -3,17 +3,18 @@
   <compounddef id="dir_2e322012c304bd84ecea0543a8b62f92" kind="dir">
     <compoundname>components</compoundname>
     <innerfile refid="helios_2engine_2mechanics_2scoring_2components_2__module_8ixx">helios/engine/mechanics/scoring/components/_module.ixx</innerfile>
+    <innerfile refid="MaxScoreObserverComponent_8ixx">MaxScoreObserverComponent.ixx</innerfile>
     <innerfile refid="ScoreObserverComponent_8ixx">ScoreObserverComponent.ixx</innerfile>
     <innerfile refid="ScorePoolComponent_8ixx">ScorePoolComponent.ixx</innerfile>
     <innerfile refid="ScoreValueComponent_8ixx">ScoreValueComponent.ixx</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_2e322012c304bd84ecea0543a8b62f92_1autotoc_md290">
+<sect1 id="dir_2e322012c304bd84ecea0543a8b62f92_1autotoc_md291">
 <title>helios::engine::mechanics::scoring::components</title><para>Score-related ECS components.</para>
 <para>This namespace contains components for associating entities with score pools, storing score values, and observing score changes.</para>
 </sect1>
-<sect1 id="dir_2e322012c304bd84ecea0543a8b62f92_1autotoc_md291">
+<sect1 id="dir_2e322012c304bd84ecea0543a8b62f92_1autotoc_md292">
 <title>Components</title><para><table rows="4" cols="2"><row>
 <entry thead="yes"><para>Component  </para>
 </entry><entry thead="yes"><para>Description  </para>
@@ -33,17 +34,17 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_2e322012c304bd84ecea0543a8b62f92_1autotoc_md292">
-<title>Usage</title><sect2 id="dir_2e322012c304bd84ecea0543a8b62f92_1autotoc_md293">
+<sect1 id="dir_2e322012c304bd84ecea0543a8b62f92_1autotoc_md293">
+<title>Usage</title><sect2 id="dir_2e322012c304bd84ecea0543a8b62f92_1autotoc_md294">
 <title>Attaching score pool to player</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>poolComp<sp/>=<sp/>player.add&lt;ScorePoolComponent&gt;();</highlight></codeline>
 <codeline><highlight class="normal">poolComp.setScorePoolId(ScorePoolId{</highlight><highlight class="stringliteral">&quot;player1&quot;</highlight><highlight class="normal">});</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="dir_2e322012c304bd84ecea0543a8b62f92_1autotoc_md294">
+<sect2 id="dir_2e322012c304bd84ecea0543a8b62f92_1autotoc_md295">
 <title>Defining kill reward on enemy</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>scoreValue<sp/>=<sp/>enemy.add&lt;ScoreValueComponent&lt;KillReward&gt;&gt;(100.0);</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="dir_2e322012c304bd84ecea0543a8b62f92_1autotoc_md295">
+<sect2 id="dir_2e322012c304bd84ecea0543a8b62f92_1autotoc_md296">
 <title>Observing score for UI</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>observer<sp/>=<sp/>scoreText.add&lt;ScoreObserverComponent&gt;();</highlight></codeline>
 <codeline><highlight class="normal">observer.setScorePoolId(ScorePoolId{</highlight><highlight class="stringliteral">&quot;player1&quot;</highlight><highlight class="normal">});</highlight></codeline>
 </programlisting></para>

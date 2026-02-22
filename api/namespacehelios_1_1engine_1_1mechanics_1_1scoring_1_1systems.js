@@ -1,6 +1,8 @@
 var namespacehelios_1_1engine_1_1mechanics_1_1scoring_1_1systems =
 [
+    [ "MaxScoreObserverClearSystem", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1MaxScoreObserverClearSystem.html", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1MaxScoreObserverClearSystem" ],
     [ "ScoreObserverClearSystem", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1ScoreObserverClearSystem.html", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1ScoreObserverClearSystem" ],
     [ "CombatScoringSystem", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1CombatScoringSystem.html", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1CombatScoringSystem" ],
+    [ "MaxScoreObserverSystem", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1MaxScoreObserverSystem.html", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1MaxScoreObserverSystem" ],
     [ "ScoreObserverSystem", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1ScoreObserverSystem.html", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1ScoreObserverSystem" ]
 ];

@@ -8,5 +8,9 @@ var module__helios_8engine_8mechanics_8scoring_8ScorePool =
     [ "helios::engine::mechanics::scoring::ScorePool::totalScore", "module__helios_8engine_8mechanics_8scoring_8ScorePool.html#a0f43e06fd5537933ca2116db5f1f33e0", null ],
     [ "helios::engine::mechanics::scoring::ScorePool::scorePoolId", "module__helios_8engine_8mechanics_8scoring_8ScorePool.html#a1f1ed090f94aa46578848238bb3697fa", null ],
     [ "helios::engine::mechanics::scoring::ScorePool::revision", "module__helios_8engine_8mechanics_8scoring_8ScorePool.html#ad1e123fa54d72bb3d7a011174fbbf870", null ],
-    [ "helios::engine::mechanics::scoring::ScorePool::snapshot", "module__helios_8engine_8mechanics_8scoring_8ScorePool.html#ac81c66195df3daf4e10c283005b7fa7c", null ]
+    [ "helios::engine::mechanics::scoring::ScorePool::snapshot", "module__helios_8engine_8mechanics_8scoring_8ScorePool.html#ac81c66195df3daf4e10c283005b7fa7c", null ],
+    [ "helios::engine::mechanics::scoring::ScorePool::updateMaxScore", "module__helios_8engine_8mechanics_8scoring_8ScorePool.html#a6d6e771afc7c24e3184383f01eed1cb7", null ],
+    [ "helios::engine::mechanics::scoring::ScorePool::maxScore", "module__helios_8engine_8mechanics_8scoring_8ScorePool.html#af352f2c30f2864bcf8d7c65e3bfd8336", null ],
+    [ "helios::engine::mechanics::scoring::ScorePool::maxScoreRevision", "module__helios_8engine_8mechanics_8scoring_8ScorePool.html#af5effd7d5d50b5f93fb79df455fccb84", null ],
+    [ "helios::engine::mechanics::scoring::ScorePool::maxScoreSnapshot", "module__helios_8engine_8mechanics_8scoring_8ScorePool.html#a4cf06a277b7e39b3a3cbcf4f63e31c09", null ]
 ];

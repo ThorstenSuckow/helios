@@ -1,0 +1,206 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerUpdateSystem" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::mechanics::timing::systems::GameTimerUpdateSystem</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1ecs_1_1System" prot="public" virt="non-virtual">helios::engine::ecs::System</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerUpdateSystem_1a256317707ef24962c52408e87bfb4841" prot="private" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager" kindref="compound">TimerManager</ref> &amp;</type>
+        <definition>TimerManager&amp; helios::engine::mechanics::timing::systems::GameTimerUpdateSystem::timerManager_</definition>
+        <argsstring></argsstring>
+        <name>timerManager_</name>
+        <qualifiedname>helios::engine::mechanics::timing::systems::GameTimerUpdateSystem::timerManager_</qualifiedname>
+        <briefdescription>
+<para>Reference to the <ref refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager" kindref="compound">TimerManager</ref> owning the timers. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/mechanics/timing/systems/GameTimerUpdateSystem.ixx" line="43" column="22" bodyfile="/tmp/h/include/helios/engine/mechanics/timing/systems/GameTimerUpdateSystem.ixx" bodystart="43" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerUpdateSystem_1a954aff22c5ec427ce067f7de37a1d2df" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::mechanics::timing::systems::GameTimerUpdateSystem::GameTimerUpdateSystem</definition>
+        <argsstring>(TimerManager &amp;timerManager)</argsstring>
+        <name>GameTimerUpdateSystem</name>
+        <qualifiedname>helios::engine::mechanics::timing::systems::GameTimerUpdateSystem::GameTimerUpdateSystem</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager" kindref="compound">TimerManager</ref> &amp;</type>
+          <declname>timerManager</declname>
+        </param>
+        <briefdescription>
+<para>Constructs the system with a reference to the <ref refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager" kindref="compound">TimerManager</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>timerManager</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The manager whose timers are updated. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/mechanics/timing/systems/GameTimerUpdateSystem.ixx" line="52" column="18" bodyfile="/tmp/h/include/helios/engine/mechanics/timing/systems/GameTimerUpdateSystem.ixx" bodystart="52" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerUpdateSystem_1ab3ac7a7318db66c36c1a8f14f0710801" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::mechanics::timing::systems::GameTimerUpdateSystem::update</definition>
+        <argsstring>(helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept override</argsstring>
+        <name>update</name>
+        <qualifiedname>helios::engine::mechanics::timing::systems::GameTimerUpdateSystem::update</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1ecs_1_1System_1a4e9969641985fa04db6214332c88605b">update</reimplements>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Advances all game timers by the current delta time. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current frame&apos;s update context. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/mechanics/timing/systems/GameTimerUpdateSystem.ixx" line="60" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/timing/systems/GameTimerUpdateSystem.ixx" bodystart="60" bodyend="66"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Updates all game timers managed by the <ref refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager" kindref="compound">TimerManager</ref>. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Each frame, this system iterates over all registered timers and advances their elapsed time by the current delta time.</para>
+<para><simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager" kindref="compound">TimerManager</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer" kindref="compound">GameTimer</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::ecs::System</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1System"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::ecs::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Updatable"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::mechanics::timing::systems::GameTimerUpdateSystem</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerUpdateSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="11">
+        <label>helios::engine::ecs::EntityManager</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1EntityManager"/>
+      </node>
+      <node id="10">
+        <label>helios::engine::ecs::EntityRegistry</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry"/>
+      </node>
+      <node id="2">
+        <label>helios::engine::ecs::System</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1System"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>gameWorld_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::ecs::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Updatable"/>
+      </node>
+      <node id="6">
+        <label>helios::engine::mechanics::scoring::ScoreCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler"/>
+      </node>
+      <node id="7">
+        <label>helios::engine::mechanics::timing::TimerCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerCommandHandler"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::mechanics::timing::systems::GameTimerUpdateSystem</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerUpdateSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>helios::engine::modules::ui::UiActionCommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandHandler"/>
+      </node>
+      <node id="9">
+        <label>helios::engine::runtime::spawn::SpawnCommandHandlerRegistry</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandlerRegistry"/>
+      </node>
+      <node id="4">
+        <label>helios::engine::runtime::world::GameWorld</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>logger_</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>scoreCommandHandler_</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>timerCommandHandler_</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>uiActionCommandHandler_</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>spawnCommandHandlerRegistry_</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>entityRegistry_</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>em_</edgelabel>
+        </childnode>
+        <childnode refid="12" relation="usage">
+          <edgelabel>session_</edgelabel>
+        </childnode>
+      </node>
+      <node id="12">
+        <label>helios::engine::runtime::world::Session</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session"/>
+      </node>
+      <node id="5">
+        <label>helios::util::log::Logger</label>
+        <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
+      </node>
+    </collaborationgraph>
+    <location file="/tmp/h/include/helios/engine/mechanics/timing/systems/GameTimerUpdateSystem.ixx" line="38" column="5" bodyfile="/tmp/h/include/helios/engine/mechanics/timing/systems/GameTimerUpdateSystem.ixx" bodystart="38" bodyend="68"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerUpdateSystem_1a954aff22c5ec427ce067f7de37a1d2df" prot="public" virt="non-virtual"><scope>helios::engine::mechanics::timing::systems::GameTimerUpdateSystem</scope><name>GameTimerUpdateSystem</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" prot="protected" virt="non-virtual"><scope>helios::engine::mechanics::timing::systems::GameTimerUpdateSystem</scope><name>gameWorld_</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1ae0464c1668e257439243a4f25979a7ff" prot="public" virt="virtual"><scope>helios::engine::mechanics::timing::systems::GameTimerUpdateSystem</scope><name>init</name></member>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerUpdateSystem_1a256317707ef24962c52408e87bfb4841" prot="private" virt="non-virtual"><scope>helios::engine::mechanics::timing::systems::GameTimerUpdateSystem</scope><name>timerManager_</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a26d81abcda05fe8b12a1ddb4ed6099a3" prot="public" virt="non-virtual"><scope>helios::engine::mechanics::timing::systems::GameTimerUpdateSystem</scope><name>Updatable</name></member>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerUpdateSystem_1ab3ac7a7318db66c36c1a8f14f0710801" prot="public" virt="virtual"><scope>helios::engine::mechanics::timing::systems::GameTimerUpdateSystem</scope><name>update</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a937c99bfacd777c53e0f811ab9d335a6" prot="public" virt="virtual"><scope>helios::engine::mechanics::timing::systems::GameTimerUpdateSystem</scope><name>~System</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a0f54f92a2a8d6c8dc2fc2ebed41d5a85" prot="public" virt="virtual"><scope>helios::engine::mechanics::timing::systems::GameTimerUpdateSystem</scope><name>~Updatable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -51,7 +51,20 @@ export namespace helios::engine::mechanics::scoring::systems {
      */
     class MaxScoreObserverSystem : public helios::engine::ecs::System {
 
+        /**
+         * @brief Reference to the ScorePoolManager that owns the score pools.
+         */
+        ScorePoolManager& scorePoolManager_;
+
     public:
+
+        /**
+         * @brief Constructs the system with a reference to the ScorePoolManager.
+         *
+         * @param scorePoolManager The ScorePoolManager providing score pool state.
+         */
+        explicit MaxScoreObserverSystem(ScorePoolManager& scorePoolManager)
+        : scorePoolManager_(scorePoolManager) {}
 
         /**
          * @brief Updates all active MaxScoreObserverComponents with current high score data.
@@ -65,20 +78,18 @@ export namespace helios::engine::mechanics::scoring::systems {
                 helios::engine::mechanics::lifecycle::components::Active
             >().whereEnabled()) {
 
-                auto* scorePoolManager = gameWorld_->getManager<helios::engine::mechanics::scoring::ScorePoolManager>();
-
-                if (!scorePoolManager) {
-                    continue;
-                }
 
                 const auto scorePoolId = soc->scorePoolId();
-                auto* scorePool = scorePoolManager->scorePool(scorePoolId);
+                auto* scorePool = scorePoolManager_.scorePool(scorePoolId);
 
                 if (!scorePool) {
                     continue;
                 }
 
-                soc->update(scorePool->maxScoreSnapshot());
+                if (soc->scorePoolRevision() != scorePool->revision()) {
+                    soc->setMaxScorePoolSnapshot(scorePool->maxScoreSnapshot());
+                }
+
 
             }
 

@@ -11,9 +11,6 @@ import helios.engine.mechanics.timing.types;
 import helios.engine.core.data;
 import helios.core.types;
 
-namespace helios::engine::mechanics::timing::systems {
-    class GameTimerObserverClearSystem {};
-}
 
 export namespace helios::engine::mechanics::timing::components {
 
@@ -31,8 +28,6 @@ export namespace helios::engine::mechanics::timing::components {
      * @see GameTimerUpdateSystem
      */
     class GameTimerBindingComponent {
-
-        friend class helios::engine::mechanics::timing::systems::GameTimerObserverClearSystem;
 
     private:
 

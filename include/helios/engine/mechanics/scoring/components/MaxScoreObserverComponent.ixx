@@ -19,13 +19,19 @@ namespace helios::engine::mechanics::scoring::systems {
 
 export namespace helios::engine::mechanics::scoring::components {
 
+    using namespace helios::engine::mechanics::scoring::types;
 
     /**
      * @brief Component that observes and caches the high score value from a ScorePool.
      *
-     * Attached to UI entities to display score values. The ScoreObserverSystem
-     * updates this component's value from the referenced ScorePool each frame.
-     * The hasUpdate flag indicates when the value has changed.
+     * Attached to UI entities to display high score values. The
+     * MaxScoreObserverUpdateSystem updates this component's snapshot from the
+     * referenced ScorePool each frame. The hasUpdate flag indicates when the
+     * value has changed.
+     *
+     * @see MaxScoreObserverUpdateSystem
+     * @see MaxScoreObserverClearSystem
+     * @see MaxScorePoolSnapshot
      */
     class MaxScoreObserverComponent {
 
@@ -43,7 +49,7 @@ export namespace helios::engine::mechanics::scoring::components {
         /**
          * @brief Flag indicating whether the value changed this frame.
          *
-         * Cleared by ScoreObserverClearSystem at frame end.
+         * Cleared by MaxScoreObserverClearSystem at frame end.
          */
         bool hasUpdate_ = true;
 
@@ -60,7 +66,7 @@ export namespace helios::engine::mechanics::scoring::components {
         /**
          * @brief Clears the update flag.
          *
-         * Called by ScoreObserverClearSystem.
+         * Called by MaxScoreObserverClearSystem.
          */
         void clearUpdate() {
             hasUpdate_ = false;
@@ -128,9 +134,9 @@ export namespace helios::engine::mechanics::scoring::components {
          *
          * Sets hasUpdate to true if the value changes.
          *
-         * @param snapshot The snapshot to use for the next update..
+         * @param snapshot The snapshot to use for the next update.
          */
-        void update(const helios::engine::mechanics::scoring::MaxScorePoolSnapshot& snapshot) noexcept {
+        void setMaxScorePoolSnapshot(const helios::engine::mechanics::scoring::MaxScorePoolSnapshot& snapshot) noexcept {
             if (snapshot_.revision == snapshot.revision) {
                 return;
             }
@@ -139,9 +145,18 @@ export namespace helios::engine::mechanics::scoring::components {
         }
 
         /**
+         * @brief Returns the cached score pool revision.
+         *
+         * @return The revision of the last observed snapshot.
+         */
+        [[nodiscard]] ScorePoolRevision scorePoolRevision() const noexcept {
+            return snapshot_.revision;
+        }
+
+        /**
          * @brief Returns the cached max score.
          *
-         * @return The current score value.
+         * @return The current high score value.
          */
         [[nodiscard]] double maxScore() const noexcept {
             return snapshot_.maxScore;

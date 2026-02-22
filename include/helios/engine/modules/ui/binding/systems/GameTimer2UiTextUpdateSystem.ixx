@@ -31,12 +31,12 @@ export namespace helios::engine::modules::ui::binding::systems {
     /**
      * @brief System for binding game timer values to UI text components.
      *
-     * Queries entities with GameTimerObserverComponent, TimeFormatterComponent,
+     * Queries entities with GameTimerBindingComponent, TimeFormatterComponent,
      * and UiTextComponent. When the observed timer's revision changes, the
      * formatted time string is propagated to the text component for display.
      *
      * @see TimerManager
-     * @see GameTimerObserverComponent
+     * @see GameTimerBindingComponent
      * @see TimeFormatterComponent
      */
     class GameTimer2UiTextUpdateSystem : public helios::engine::ecs::System {
@@ -70,7 +70,7 @@ export namespace helios::engine::modules::ui::binding::systems {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
             for (auto [entity, gtc, dfc, txt, active] : gameWorld_->view<
-                helios::engine::mechanics::timing::components::GameTimerObserverComponent,
+                helios::engine::mechanics::timing::components::GameTimerBindingComponent,
                 helios::engine::modules::ui::layout::components::TimeFormatterComponent,
                 helios::engine::modules::ui::widgets::components::UiTextComponent,
                 helios::engine::mechanics::lifecycle::components::Active

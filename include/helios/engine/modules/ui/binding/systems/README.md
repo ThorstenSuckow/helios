@@ -22,7 +22,7 @@ Queries entities with both `MaxScoreObserverComponent` and `UiTextComponent`. Wh
 
 ## GameTimer2UiTextUpdateSystem
 
-Queries entities with `GameTimerObserverComponent`, `TimeFormatterComponent`, and `UiTextComponent`. When the observed timer's revision changes, the system formats the current time via the `TimeFormatterComponent` and updates the text component.
+Queries entities with `GameTimerBindingComponent`, `TimeFormatterComponent`, and `UiTextComponent`. When the observed timer's revision changes, the system formats the current time via the `TimeFormatterComponent` and updates the text component.
 
 ---
 

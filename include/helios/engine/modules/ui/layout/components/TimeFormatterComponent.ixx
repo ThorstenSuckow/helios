@@ -71,14 +71,14 @@ export namespace helios::engine::modules::ui::layout::components {
 
             switch (displayMode_) {
                 case TimeDisplayMode::Elapsed: {
-                    const auto minutes = static_cast<int>(elapsed) / 60;
-                    const auto seconds = static_cast<int>(elapsed) % 60;
+                    const auto minutes = static_cast<unsigned int>(std::max(0.0f, elapsed)) / 60;
+                    const auto seconds = static_cast<unsigned int>(std::max(0.0f, elapsed)) % 60;
                     return std::vformat(format_, std::make_format_args(minutes, seconds));
                 }
 
                 case TimeDisplayMode::Remaining: {
-                    const auto minutes = static_cast<int>(duration - elapsed) / 60;
-                    const auto seconds = static_cast<int>(duration - elapsed) % 60;
+                    const auto minutes = static_cast<unsigned int>(std::max(0.0f, duration - elapsed)) / 60;
+                    const auto seconds = static_cast<unsigned int>(std::max(0.0f, duration - elapsed)) % 60;
                     return std::vformat(format_, std::make_format_args(minutes, seconds));
                 }
             }

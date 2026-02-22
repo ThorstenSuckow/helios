@@ -1,6 +1,6 @@
 /**
- * @file MenuConfiguration.ixx
- * @brief Menu and UI element configuration for the scoring demo.
+ * @file GameTimerConfiguration.ixx
+ * @brief Timer configuration for the scoring demo.
  */
 module;
 

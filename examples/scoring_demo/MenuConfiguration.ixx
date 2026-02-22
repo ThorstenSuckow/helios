@@ -375,12 +375,12 @@ export namespace helios::examples::scoring {
                 .withRendering([&](auto& rnb) {
                     rnb.textRenderable()
                        .text("0")
+                       .formattedAsNumber()
                        .fontId(uiTextFont)
                        .fontScale(1.0f)
                        .fontResourceProvider(renderingDevice.fontResourceProvider())
                        .shader(glyphShader)
                        .color(helios::util::Colors::WhiteSmoke)
-                       .asUiText("{:.0f}")
                        .attachTo(&hudScene.root());
 
                 })
@@ -402,8 +402,7 @@ export namespace helios::examples::scoring {
                 .gameObject(gameWorld)
                 .withRendering([&](auto& rnb) {
                     rnb.textRenderable()
-                       .text("Highscore: 0")
-                       .asUiText("Highscore: {:.0f}")
+                       .formattedAsNumber("Highscore: {:.0f}")
                        .fontId(uiTextFont)
                        .fontScale(0.8f)
                        .fontResourceProvider(renderingDevice.fontResourceProvider())
@@ -417,12 +416,38 @@ export namespace helios::examples::scoring {
                })
                 .withUiTransform([](auto& tb) {
                     tb.transform()
-                      .pivot(helios::engine::modules::ui::layout::Anchor::TopRight)
+                      .pivot(helios::engine::modules::ui::layout::Anchor::TopLeft)
                       .viewport(helios::engine::core::data::ViewportId{"hudViewport"})
-                      .anchor(helios::engine::modules::ui::layout::Anchor::TopRight)
-                      .offsets({25.0f, 50.0f, 0.0f, 0.0f});
+                      .anchor(helios::engine::modules::ui::layout::Anchor::TopLeft)
+                      .offsets({19.0f, 0.0f, 0.0f, 50.0f});
                 })
                 .make();
+
+        auto countdownTimerText = helios::engine::builder::gameObject::GameObjectFactory::instance()
+            .gameObject(gameWorld)
+            .withRendering([&](auto& rnb) {
+                rnb.textRenderable()
+                   .formattedAsTimestamp("{0:02}:{1:02}")
+                   .displayRemaining()
+                   .fontId(uiTextFont)
+                   .fontScale(0.8f)
+                   .fontResourceProvider(renderingDevice.fontResourceProvider())
+                   .shader(glyphShader)
+                   .color(helios::util::Colors::LightGray)
+                   .attachTo(&hudScene.root());
+            })
+           .withObserver([&](auto& ob) {
+               ob.observe()
+                  .time(IdConfig::DemoTimerId);
+           })
+            .withUiTransform([](auto& tb) {
+                tb.transform()
+                  .pivot(helios::engine::modules::ui::layout::Anchor::TopRight)
+                  .viewport(helios::engine::core::data::ViewportId{"hudViewport"})
+                  .anchor(helios::engine::modules::ui::layout::Anchor::TopRight)
+                  .offsets({25.0f, 50.0f, 0.0f, 0.0f});
+            })
+            .make();
 
             // projectile game object
             auto projectilePrefab = helios::engine::builder::gameObject::GameObjectFactory::instance()
@@ -474,6 +499,7 @@ export namespace helios::examples::scoring {
 
 
             scoreText.setActive(true);
+            countdownTimerText.setActive(true);
             highScoreText.setActive(true);
             titleText.setActive(true);
             pressStartText.setActive(true);

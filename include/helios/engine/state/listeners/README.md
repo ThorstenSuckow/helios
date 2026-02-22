@@ -10,6 +10,8 @@ Listeners for observing state transitions.
 
 ## Usage
 
+### Full listener (exit, transition, enter)
+
 ```cpp
 using namespace helios::engine::state::listeners;
 
@@ -29,6 +31,26 @@ auto listener = std::make_unique<LambdaStateListener<GameState>>(
 );
 
 stateManager.addStateListener(std::move(listener));
+```
+
+### Enter-only listener
+
+```cpp
+auto enterListener = std::make_unique<LambdaStateListener<GameState>>(
+    [](auto& ctx, GameState to) {
+        // Handle state entry
+    }
+);
+```
+
+### Transition-only listener
+
+```cpp
+auto transitionListener = std::make_unique<LambdaStateListener<GameState>>(
+    [](auto& ctx, StateTransitionContext<GameState> transitionCtx) {
+        // Handle transition
+    }
+);
 ```
 
 ---

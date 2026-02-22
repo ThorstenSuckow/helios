@@ -55,17 +55,17 @@ export namespace helios::engine::state::listeners {
         /**
          * @brief Callback invoked when entering a state.
          */
-        OnEnterCallback onEnterCallback_;
+        OnEnterCallback onEnterCallback_ = nullptr;
 
         /**
          * @brief Callback invoked during state transition.
          */
-        OnTransitionCallback onTransitionCallback_;
+        OnTransitionCallback onTransitionCallback_= nullptr;
 
         /**
          * @brief Callback invoked when exiting a state.
          */
-        OnExitCallback onExitCallback_;
+        OnExitCallback onExitCallback_= nullptr;
 
 
     public:
@@ -86,13 +86,35 @@ export namespace helios::engine::state::listeners {
             onEnterCallback_(std::move(onEnterCallback)) {}
 
         /**
+         * @brief Constructs a listener with only an enter callback.
+         *
+         * @param onEnterCallback Called when entering a state.
+         */
+        explicit LambdaStateListener(
+           OnExitCallback onEnterCallback
+         ) : onEnterCallback_(std::move(onEnterCallback)) {}
+
+        /**
+         * @brief Constructs a listener with only a transition callback.
+         *
+         * @param onTransitionCallback Called during the transition.
+         */
+        explicit LambdaStateListener(
+            OnTransitionCallback onTransitionCallback
+         ) : onTransitionCallback_(std::move(onTransitionCallback)) {}
+
+
+
+        /**
          * @copydoc StateTransitionListener::onStateExit
          */
         void onStateExit(
             helios::engine::runtime::world::UpdateContext& updateContext,
             const StateType from
         ) noexcept override {
-            onExitCallback_(updateContext, from);
+            if (onExitCallback_) {
+                onExitCallback_(updateContext, from);
+            }
         }
 
         /**
@@ -102,8 +124,9 @@ export namespace helios::engine::state::listeners {
             helios::engine::runtime::world::UpdateContext& updateContext,
             const StateType to
         ) noexcept override {
-
-            onEnterCallback_(updateContext, to);
+            if (onEnterCallback_) {
+                onEnterCallback_(updateContext, to);
+            }
         }
 
         /**
@@ -113,7 +136,9 @@ export namespace helios::engine::state::listeners {
             helios::engine::runtime::world::UpdateContext& updateContext,
             const StateTransitionContext<StateType> transitionCtx
         ) noexcept override {
-            onTransitionCallback_(updateContext, transitionCtx);
+            if (onTransitionCallback_) {
+                onTransitionCallback_(updateContext, transitionCtx);
+            }
         };
 
 

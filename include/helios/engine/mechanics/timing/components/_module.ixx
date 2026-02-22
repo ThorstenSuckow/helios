@@ -4,4 +4,4 @@
  */
 export module helios.engine.mechanics.timing.components;
 
-export import helios.engine.mechanics.timing.components.GameTimerObserverComponent;
+export import helios.engine.mechanics.timing.components.GameTimerBindingComponent;

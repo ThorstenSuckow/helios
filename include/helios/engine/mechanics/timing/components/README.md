@@ -6,7 +6,7 @@ ECS components for the timing module.
 
 | Component | Description |
 |-----------|-------------|
-| `GameTimerObserverComponent` | Tracks the revision of a specific GameTimer for change detection |
+| `GameTimerBindingComponent` | Tracks the revision of a specific GameTimer for change detection |
 
 ---
 

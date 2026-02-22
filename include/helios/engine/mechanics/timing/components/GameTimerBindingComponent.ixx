@@ -1,10 +1,10 @@
 /**
- * @file GameTimerObserverComponent.ixx
+ * @file GameTimerBindingComponent.ixx
  * @brief Component that observes a specific game timer.
  */
 module;
 
-export module helios.engine.mechanics.timing.components.GameTimerObserverComponent;
+export module helios.engine.mechanics.timing.components.GameTimerBindingComponent;
 
 import helios.engine.mechanics.timing.types;
 
@@ -30,7 +30,7 @@ export namespace helios::engine::mechanics::timing::components {
      * @see GameTimer
      * @see GameTimerUpdateSystem
      */
-    class GameTimerObserverComponent {
+    class GameTimerBindingComponent {
 
         friend class helios::engine::mechanics::timing::systems::GameTimerObserverClearSystem;
 
@@ -42,45 +42,27 @@ export namespace helios::engine::mechanics::timing::components {
         GameTimerId gameTimerId_;
 
         /**
-         * @brief Cached elapsed time from the last observation.
-         */
-        float elapsed_;
-
-        /**
          * @brief Last known revision of the observed timer.
          */
         TimerRevision timerRevision_;
 
-        /**
-         * @brief True if the observed timer revision changed since the last clear.
-         */
-        bool hasUpdate_ = false;
-
-        /**
-         * @brief Resets the update flag.
-         *
-         * Called by GameTimerObserverClearSystem after the update has been consumed.
-         */
-        void clearUpdate() noexcept {
-            hasUpdate_ = false;
-        }
 
     public:
 
 
-        GameTimerObserverComponent() = default;
+        GameTimerBindingComponent() = default;
 
         /**
          * @brief Copy constructor.
          *
          * @param other The component to copy from.
          */
-        GameTimerObserverComponent(const GameTimerObserverComponent& other) :
+        GameTimerBindingComponent(const GameTimerBindingComponent& other) :
             gameTimerId_(other.gameTimerId_) {}
 
-        GameTimerObserverComponent& operator=(const GameTimerObserverComponent&) = default;
-        GameTimerObserverComponent(GameTimerObserverComponent&&) noexcept = default;
-        GameTimerObserverComponent& operator=(GameTimerObserverComponent&&) noexcept = default;
+        GameTimerBindingComponent& operator=(const GameTimerBindingComponent&) = default;
+        GameTimerBindingComponent(GameTimerBindingComponent&&) noexcept = default;
+        GameTimerBindingComponent& operator=(GameTimerBindingComponent&&) noexcept = default;
 
         /**
          * @brief Sets the id of the game timer to observe.
@@ -112,7 +94,6 @@ export namespace helios::engine::mechanics::timing::components {
             if (timerRevision_ == timerRevision) {
                 return;
             }
-            hasUpdate_ = true;
             timerRevision_ = timerRevision;
         }
 
@@ -123,15 +104,6 @@ export namespace helios::engine::mechanics::timing::components {
          */
         [[nodiscard]] TimerRevision timerRevision() const noexcept {
             return timerRevision_;
-        }
-
-        /**
-         * @brief Indicates whether the observed timer revision has changed.
-         *
-         * @return True if the revision changed since the last clear.
-         */
-        [[nodiscard]] bool hasUpdate() const noexcept {
-            return hasUpdate_;
         }
 
     };

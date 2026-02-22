@@ -19,6 +19,8 @@ import helios.engine.ecs.System;
 
 import helios.engine.modules.ui.widgets.components.UiTextComponent;
 
+import helios.engine.modules.ui.layout.components.NumberFormatterComponent;
+
 import helios.engine.mechanics.lifecycle.components.Active;
 
 
@@ -27,9 +29,12 @@ export namespace helios::engine::modules::ui::binding::systems {
     /**
      * @brief System for binding score values to UI text components.
      *
-     * Queries entities with both ScoreObserverComponent and UiTextComponent.
-     * When the score observer signals an update, the new total score is
-     * propagated to the text component for display.
+     * Queries entities with ScoreObserverComponent, NumberFormatterComponent,
+     * and UiTextComponent. When the score observer signals an update, the
+     * formatted total score is propagated to the text component for display.
+     *
+     * @see ScoreObserverComponent
+     * @see NumberFormatterComponent
      */
     class Score2UiTextUpdateSystem : public helios::engine::ecs::System {
 
@@ -43,15 +48,18 @@ export namespace helios::engine::modules::ui::binding::systems {
          */
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
-            for (auto [entity, soc, txt, active] : gameWorld_->view<
+            for (auto [entity, soc, nfc, txt, active] : gameWorld_->view<
                 helios::engine::mechanics::scoring::components::ScoreObserverComponent,
+                helios::engine::modules::ui::layout::components::NumberFormatterComponent,
                 helios::engine::modules::ui::widgets::components::UiTextComponent,
                 helios::engine::mechanics::lifecycle::components::Active
             >().whereEnabled()) {
 
-                if (soc->hasUpdate()) {
-                    txt->setDouble(soc->totalScore());
+                if (!soc->hasUpdate()) {
+                    continue;
                 }
+
+                txt->setText(nfc->format(soc->totalScore()));
             }
         }
 

@@ -1,5 +1,5 @@
 /**
- * @file TimeFormatterComponents.ixx
+ * @file TimeFormatterComponent.ixx
  * @brief Component that formats time values for UI display.
  */
 module;

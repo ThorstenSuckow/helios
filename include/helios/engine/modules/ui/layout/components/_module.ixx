@@ -5,4 +5,4 @@
 export module helios.engine.modules.ui.layout.components;
 
 export import helios.engine.modules.ui.layout.components.TimeFormatterComponent;
-
+export import helios.engine.modules.ui.layout.components.NumberFormatterComponent;

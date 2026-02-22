@@ -36,19 +36,14 @@ class UiTextComponent {
     protected:
 
         /**
-         * @brief Format template using std::format syntax.
-         */
-        std::string template_ = "{0}";
-
-        /**
          * @brief Pointer to the underlying text renderable. Not owned.
          */
         helios::rendering::text::TextRenderable* renderable_;
 
         /**
-         * @brief Current numeric value to display.
+         * @brief The current text content.
          */
-        double doubleValue_ = {0.0f};
+        std::string text_;
 
         /**
          * @brief True if the text content needs to be updated.
@@ -64,6 +59,7 @@ class UiTextComponent {
          * @brief Whether this component is enabled.
          */
         bool isEnabled_ = true;
+
 
     public:
 
@@ -106,7 +102,7 @@ class UiTextComponent {
          *
          * @param other The component to copy from.
          */
-        UiTextComponent(const UiTextComponent& other) : template_(other.template_), renderable_(other.renderable_) {
+        UiTextComponent(const UiTextComponent& other) :renderable_(other.renderable_) {
             assert(renderable_ != nullptr && "TextRenderable must not be nullptr");
         }
 
@@ -133,29 +129,26 @@ class UiTextComponent {
         }
 
         /**
-         * @brief Sets the format template.
-         *
-         * Uses std::format syntax. The value is inserted at `{0}`.
-         *
-         * @param templateTxt The format template string.
-         */
-        void setTemplate(std::string templateTxt) {
-            template_ = std::move(templateTxt);
-        }
-
-
-        /**
          * @brief Resets the component to its initial state.
          */
         void reset() noexcept {
             isDirty_ = true;
-            doubleValue_ = 0.0f;
         }
 
+        /**
+         * @brief Called when the component is acquired from an object pool.
+         *
+         * Resets the component to its initial dirty state.
+         */
         void onAcquire() noexcept {
             reset();
         }
 
+        /**
+         * @brief Called when the component is released back to an object pool.
+         *
+         * Resets the component to its initial dirty state.
+         */
         void onRelease() noexcept {
             reset();
         }
@@ -171,16 +164,41 @@ class UiTextComponent {
                 return;
             }
 
-            if (template_ == "{0}" || template_.empty()) {
-                renderable_->setText(std::to_string(doubleValue_));
-                needsResize_ = true;
-                isDirty_ = false;
-                return;
-            }
+            renderable_->setText(text_);
 
-            renderable_->setText(std::vformat(std::string_view(template_), std::make_format_args(doubleValue_)));
             needsResize_ = true;
             isDirty_ = false;
+        }
+
+        /**
+         * @brief Sets the text content and immediately updates the renderable.
+         *
+         * No-op if the new text is identical to the current content.
+         * Otherwise marks the component as dirty and calls update().
+         *
+         * @param text The new text content.
+         */
+        void setText(const std::string& text) {
+            if (text == text_) {
+                return;
+            }
+            text_ = text;
+            isDirty_ = true;
+            update();
+        }
+
+        /**
+         * @brief Sets the text content by move and immediately updates the renderable.
+         *
+         * @copydoc setText(const std::string&)
+         */
+        void setText(std::string&& text) {
+            if (text == text_) {
+                return;
+            }
+            text_ = std::move(text);
+            isDirty_ = true;
+            update();
         }
 
         /**
@@ -199,24 +217,6 @@ class UiTextComponent {
             needsResize_ = false;
         }
 
-
-        /**
-         * @brief Sets the numeric value to display.
-         *
-         * Triggers an update if the value has changed.
-         *
-         * @param value The value to display.
-         */
-        void setDouble(const double value)  {
-
-            if (doubleValue_ == value) {
-                return;
-            }
-            isDirty_ = true;
-            doubleValue_ = value;
-
-            update();
-        }
     };
 
 }

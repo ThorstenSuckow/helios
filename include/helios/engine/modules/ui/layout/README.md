@@ -1,14 +1,14 @@
 # helios::engine::modules::ui::layout
 
-Layout primitives for UI positioning and time formatting.
+Layout primitives for UI positioning and value formatting.
 
-This namespace provides fundamental layout types used by the UI system to position elements relative to their parent viewport or container, as well as components for formatting time values.
+This namespace provides fundamental layout types used by the UI system to position elements relative to their parent viewport or container, as well as components for formatting time and numeric values.
 
 ## Submodules
 
 | Submodule | Purpose |
 |-----------|---------|
-| `components/` | Layout-related components (e.g. time formatting) |
+| `components/` | Layout-related components (time and number formatting) |
 | `types/` | Layout type definitions (anchors, display modes) |
 
 ## Types
@@ -23,6 +23,7 @@ This namespace provides fundamental layout types used by the UI system to positi
 | Component | Description |
 |-----------|-------------|
 | `TimeFormatterComponent` | Formats elapsed or remaining time into a display string via `std::vformat` |
+| `NumberFormatterComponent` | Formats arithmetic values into a display string via `std::vformat` |
 
 ## Anchor Values
 
@@ -38,6 +39,6 @@ This namespace provides fundamental layout types used by the UI system to positi
 <details>
 <summary>Doxygen</summary><p>
 @namespace helios::engine::modules::ui::layout
-@brief Layout primitives for UI positioning and time formatting.
-@details This namespace contains fundamental types for UI layout, including anchor points that define how UI elements are positioned relative to their parent viewport, as well as time formatting components and display mode types.
+@brief Layout primitives for UI positioning and value formatting.
+@details This namespace contains fundamental types for UI layout, including anchor points that define how UI elements are positioned relative to their parent viewport, as well as time and number formatting components and display mode types.
 </p></details>

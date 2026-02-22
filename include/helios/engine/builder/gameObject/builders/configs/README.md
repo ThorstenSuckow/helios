@@ -20,6 +20,7 @@ Config classes provide a fluent interface for adding and configuring specific co
 | Config | Components Added | Purpose |
 |--------|------------------|---------|
 | `MeshRenderableConfig` | `RenderableComponent` | Mesh, material, shader setup |
+| `TextRenderableConfig` | `RenderableComponent`, `ModelAabbComponent`, optionally `UiTextComponent`, `NumberFormatterComponent`, `TimeFormatterComponent` | Text rendering with optional UI binding |
 | `SceneNodeConfig` | `SceneNodeComponent` | Scene graph integration |
 
 ### Spatial
@@ -54,6 +55,12 @@ Config classes provide a fluent interface for adding and configuring specific co
 | Config | Components Added | Purpose |
 |--------|------------------|---------|
 | `LifecycleConfig` | `DelayedComponentEnabler` | Delayed component activation |
+
+### Observer
+
+| Config | Components Added | Purpose |
+|--------|------------------|---------|
+| `ObserverConfig` | `ScoreObserverComponent`, `MaxScoreObserverComponent`, `GameTimerBindingComponent` | Binds entities to score pools and game timers |
 
 ## Usage Pattern
 

@@ -28,10 +28,14 @@ import helios.engine.mechanics.lifecycle.components.Active;
 export namespace helios::engine::mechanics::scoring::systems {
 
     /**
-     * @brief System that clears the hasUpdate flag on ScoreObserverComponents.
+     * @brief System that resets the hasUpdate flag on all ScoreObserverComponents.
      *
-     * Should run at the end of the frame (post-phase) after all systems
-     * that need the hasUpdate flag have processed it.
+     * Scheduled after the UI binding systems have consumed the update.
+     * This ensures that ScoreObserverComponent::hasUpdate() returns true
+     * for exactly one frame after a score change.
+     *
+     * @see ScoreObserverSystem
+     * @see ScoreObserverComponent
      */
     class ScoreObserverClearSystem : public helios::engine::ecs::System {
 

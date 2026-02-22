@@ -25,6 +25,8 @@ import helios.engine.runtime.spawn.SpawnCommandHandler;
 import helios.engine.modules.ui.UiActionCommandHandler;
 
 import helios.engine.mechanics.scoring.ScoreCommandHandler;
+import helios.engine.mechanics.timing.TimerCommandHandler;
+
 import helios.engine.state.StateCommandHandler;
 import helios.engine.state.TypedStateCommandHandler;
 
@@ -128,12 +130,12 @@ export namespace helios::engine::runtime::world {
 
 
         /**
-         * @brief Hash map storing all active GameObjects, indexed by their Guid.
+         * @brief Legacy storage for GameObjects indexed by Guid.
          *
-         * @details Uses `std::unordered_map` for amortized O(1) average-case lookup.
-         * The map owns all GameObjects via `std::unique_ptr`. Worst-case lookup is O(n)
-         * in case of hash collisions, but the sequential Guid generation ensures good
-         * hash distribution in practice.
+         * @details Unused since the migration to EntityRegistry/EntityManager.
+         * Retained for backward compatibility during the transition period.
+         *
+         * @deprecated Superseded by EntityRegistry and EntityManager.
          */
         std::unordered_map<helios::util::Guid, std::unique_ptr<helios::engine::ecs::GameObject>> gameObjects_;
 
@@ -169,6 +171,14 @@ export namespace helios::engine::runtime::world {
          * according to the scoring system logic.
          */
         helios::engine::mechanics::scoring::ScoreCommandHandler* scoreCommandHandler_ = nullptr;
+
+        /**
+         * @brief Registered handler for timer commands.
+         *
+         * @details Receives timer commands and routes them to the
+         * TimerManager for processing.
+         */
+        helios::engine::mechanics::timing::TimerCommandHandler* timerCommandHandler_ = nullptr;
 
         /**
          * @brief Registered handlers for state commands, indexed by StateTypeId.
@@ -221,12 +231,10 @@ export namespace helios::engine::runtime::world {
     public:
 
         /**
-         * @brief Central registry for game entities, managers, pools, and the active level.
+         * @brief Constructs the GameWorld.
          *
-         * @details
-         * The GameWorld serves as the primary container for managing the game state and its subsystems.
-         * It facilitates the lifecycle of entities, oversees component-based management, coordinates Managers,
-         * and holds a reference to the active Level instance.
+         * @details Initializes the EntityManager with the internal EntityRegistry
+         * and creates a Session backed by a dedicated GameObject.
          */
         explicit GameWorld() : em_(helios::engine::ecs::EntityManager(entityRegistry_)), session_(Session(addGameObject())) { };
 
@@ -424,6 +432,35 @@ export namespace helios::engine::runtime::world {
          */
         [[nodiscard]] helios::engine::mechanics::scoring::ScoreCommandHandler* scoreCommandHandler() {
             return scoreCommandHandler_;
+        }
+
+        /**
+         * @brief Registers a handler for timer commands.
+         *
+         * @details Associates a TimerCommandHandler with this GameWorld.
+         * Only one handler can be registered at a time.
+         *
+         * @param timerCommandHandler Reference to the handler to register.
+         *
+         * @return True if registration succeeded, false if already registered.
+         */
+        bool registerTimerCommandHandler(
+            helios::engine::mechanics::timing::TimerCommandHandler& timerCommandHandler
+        ) {
+            assert(!timerCommandHandler_ && "TimerCommandHandler already registered");
+
+            timerCommandHandler_ = &timerCommandHandler;
+
+            return true;
+        }
+
+        /**
+         * @brief Retrieves the registered TimerCommandHandler.
+         *
+         * @return Pointer to the handler, or nullptr if not registered.
+         */
+        [[nodiscard]] helios::engine::mechanics::timing::TimerCommandHandler* timerCommandHandler() {
+            return timerCommandHandler_;
         }
 
         /**

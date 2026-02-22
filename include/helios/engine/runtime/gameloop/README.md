@@ -29,8 +29,8 @@ Commands can be enqueued into the CommandBuffer during any phase, not just the P
 **CommitPoint** is a flag enum that specifies which synchronization actions occur at the end of a pass. Available flags include:
 - `PassEvents` - Synchronizes pass-level events for the next pass.
 - `FlushCommands` - Executes pending commands from the CommandBuffer.
-- `FlushManagers` — Processes manager requests (e.g., spawning from pools).
-- `Structural` — Combines all three flags for a full structural commit.
+- `FlushManagers` - Processes manager requests (e.g., spawning from pools).
+- `Structural` - Combines all three flags for a full structural commit.
 
 Flags can be combined using bitwise OR to trigger multiple actions at once.
 

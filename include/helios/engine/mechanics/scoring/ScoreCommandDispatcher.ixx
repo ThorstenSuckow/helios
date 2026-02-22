@@ -39,8 +39,6 @@ export namespace helios::engine::mechanics::scoring {
             const helios::engine::mechanics::scoring::commands::UpdateScoreCommand& command
         ) noexcept override {
 
-            auto scoreContext = command.scoreContext();
-
             if (auto* scoreCommandHandler = gameWorld.scoreCommandHandler()) {
                 scoreCommandHandler->submit(command);
             }

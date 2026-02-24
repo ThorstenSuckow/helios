@@ -14,7 +14,10 @@ export module helios.engine.mechanics.scoring.ScorePoolManager;
 import helios.engine.mechanics.scoring.ScorePool;
 import helios.engine.mechanics.scoring.types.ScoreValueContext;
 
-import helios.engine.mechanics.scoring.ScoreCommandHandler;
+import helios.engine.runtime.messaging.command.TypedCommandHandler;
+import helios.engine.runtime.messaging.command.CommandHandler;
+
+import helios.engine.mechanics.scoring.commands;
 
 import helios.engine.core.data.ScorePoolId;
 
@@ -30,6 +33,8 @@ import helios.util.Guid;
 
 export namespace helios::engine::mechanics::scoring {
 
+    using namespace helios::engine::mechanics::scoring::commands;
+    using namespace helios::engine::runtime::messaging::command;
 
     /**
      * @brief Manages score pools and processes score commands.
@@ -47,7 +52,7 @@ export namespace helios::engine::mechanics::scoring {
      * @see Manager
      */
     class ScorePoolManager : public helios::engine::runtime::world::Manager,
-                             public helios::engine::mechanics::scoring::ScoreCommandHandler {
+                             public TypedCommandHandler<UpdateScoreCommand>{
 
         /**
          * @brief Collection of score pools managed by this manager.
@@ -111,7 +116,6 @@ export namespace helios::engine::mechanics::scoring {
          * @param update_context Reference to the update context.
          */
         void flush(
-            helios::engine::runtime::world::GameWorld& gameWorld,
             helios::engine::runtime::world::UpdateContext& update_context
         ) noexcept override {
 
@@ -138,7 +142,7 @@ export namespace helios::engine::mechanics::scoring {
          * @return True if the command was accepted.
          */
         bool submit(
-            const helios::engine::mechanics::scoring::commands::UpdateScoreCommand& updateScoreCommand
+            UpdateScoreCommand updateScoreCommand
         ) noexcept override {
             scores_.push_back(std::move(updateScoreCommand).scoreContext());
 
@@ -151,7 +155,7 @@ export namespace helios::engine::mechanics::scoring {
          * @param gameWorld Reference to the game world.
          */
         void init(helios::engine::runtime::world::GameWorld& gameWorld) override {
-            gameWorld.registerScoreCommandHandler(*this);
+            gameWorld.registerCommandHandler<TypedCommandHandler<UpdateScoreCommand> >(*this);
         }
 
 

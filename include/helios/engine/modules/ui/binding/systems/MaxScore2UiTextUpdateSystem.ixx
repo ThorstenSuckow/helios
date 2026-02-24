@@ -67,7 +67,7 @@ export namespace helios::engine::modules::ui::binding::systems {
                     continue;
                 }
 
-                txt->setText(nfc->format(soc->maxScore()));
+                txt->setText(nfc->format<double>(soc->maxScore()));
             }
         }
 

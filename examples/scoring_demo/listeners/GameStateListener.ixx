@@ -4,10 +4,12 @@
  */
 module;
 
+#include <cassert>
 #include <memory>
 
 export module helios.examples.scoring.GameStateListener;
 
+import helios.engine.state.Bindings;
 import helios;
 
 export namespace helios::examples::scoring {
@@ -30,6 +32,7 @@ export namespace helios::examples::scoring {
 
                     using namespace helios::engine::mechanics::gamestate::types;
                     using namespace helios::engine::mechanics::match::types;
+                    using namespace helios::engine::runtime::world::commands;
 
                     const auto from = transitionContext.from();
                     const auto to = transitionContext.to();
@@ -43,7 +46,7 @@ export namespace helios::examples::scoring {
                                  (from == GameState::Running && to == GameState::Title) ;
 
                     if (reset) {
-                        updateContext.gameWorld().reset();
+                        updateContext.commandBuffer().add<WorldLifecycleCommand>(WorldLifecycleAction::Reset);
                     }
 
                     if (to == GameState::Title && transitionId== GameStateTransitionId::TitleRequested) {

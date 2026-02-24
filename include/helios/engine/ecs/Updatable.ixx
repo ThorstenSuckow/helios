@@ -11,7 +11,6 @@ import helios.engine.runtime.world.UpdateContext;
 
 export namespace helios::engine::ecs {
 
-    struct UpdateContext;
 
     /**
      * @brief Interface for components that require per-frame updates.

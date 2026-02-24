@@ -22,7 +22,6 @@ import helios.util.Guid;
 
 import helios.engine.ecs.EntityManager;
 import helios.engine.ecs.components.HierarchyComponent;
-import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.ecs.ComponentOpsRegistry;
 

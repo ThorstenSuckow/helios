@@ -9,14 +9,12 @@ module;
 
 export module helios.engine.runtime.spawn.commands.DespawnCommand;
 
-import helios.engine.runtime.messaging.command.WorldCommand;
 import helios.engine.ecs.EntityHandle;
 
 
 
 import helios.engine.core.data.SpawnProfileId;
 
-import helios.engine.runtime.messaging.command.WorldCommandDispatcher;
 
 export namespace helios::engine::runtime::spawn::commands {
 
@@ -34,7 +32,7 @@ export namespace helios::engine::runtime::spawn::commands {
      * @see DespawnCommandDispatcher
      * @see SpawnManager
      */
-    class DespawnCommand : public helios::engine::runtime::messaging::command::WorldCommand {
+    class DespawnCommand {
 
         /**
          * @brief The handle of the entity to despawn.
@@ -59,29 +57,6 @@ export namespace helios::engine::runtime::spawn::commands {
             const helios::engine::core::data::SpawnProfileId spawnProfileId) :
             entityHandle_(entityHandle), spawnProfileId_(spawnProfileId) {}
 
-        /**
-         * @brief Direct execution is not supported; requires a dispatcher.
-         *
-         * @param gameWorld The game world (unused).
-         *
-         * @note Asserts in debug builds if called directly.
-         */
-        void execute(helios::engine::runtime::world::GameWorld& gameWorld) const noexcept override {
-            assert(false && "Unexpected execute() for despawn, needs dispatcher");
-        }
-
-        /**
-         * @brief Accepts a dispatcher for command routing.
-         *
-         * @param gameWorld The game world.
-         * @param dispatcher The dispatcher to route this command to.
-         */
-        void accept(
-            helios::engine::runtime::world::GameWorld& gameWorld,
-            helios::engine::runtime::messaging::command::WorldCommandDispatcher& dispatcher
-        ) const noexcept override {
-            dispatcher.dispatch(gameWorld, *this);
-        }
 
         /**
          * @brief Returns the handle of the entity to despawn.

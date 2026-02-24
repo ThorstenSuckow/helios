@@ -20,7 +20,7 @@ Commands can be enqueued into the CommandBuffer during any phase, not just the P
 
 ## Key Components
 
-**GameLoop** is the central orchestrator that owns the three phases, the CommandBuffer, and the event buses. It drives the frame update by iterating through all phases and committing events and commands after each phase.
+**GameLoop** is the central orchestrator that owns the three phases and the event buses. The EngineCommandBuffer and Managers are owned by the GameWorld's ResourceRegistry and accessed via UpdateContext at commit points. The GameLoop drives the frame update by iterating through all phases and committing events and commands after each phase.
 
 **Phase** represents a distinct stage in the update cycle. Phases contain passes and are executed in fixed order (Pre → Main → Post).
 
@@ -37,40 +37,47 @@ Flags can be combined using bitwise OR to trigger multiple actions at once.
 ## Usage
 
 ```cpp
-#include "helios/engine/gameloop/GameLoop.ixx"
+import helios.engine.runtime.gameloop.GameLoop;
+import helios.engine.runtime.world.GameWorld;
 
-helios.engine.runtime.gameloop.GameLoop gameLoop;
+helios::engine::runtime::gameloop::GameLoop gameLoop;
+helios::engine::runtime::world::GameWorld gameWorld;
 
-// Configure Pre phase
-gameLoop.phase(PhaseType.Pre)
-    .addPass()
-        .add<InputSystem>(&inputManager);
+// Register state types with session
+gameWorld.session().trackState<GameState>();
 
-// Configure Main phase with custom commit points
-gameLoop.phase(PhaseType.Main)
-    .addPass()
-        .add<MovementSystem>(&gameWorld)
-        .add<HeadingSystem>(&gameWorld)
-        // Commit pass events and flush commands, but defer manager flush
-        .addCommitPoint(CommitPoint::PassEvents | CommitPoint::FlushCommands)
-    .addPass()
-        // CollisionSystem can now read events from the previous pass
-        .add<CollisionSystem>(&gameWorld)
-        // Full structural commit: events, commands, and managers
-        .addCommitPoint(CommitPoint::Structural); 
+// Configure Pre phase (state-filtered passes)
+gameLoop.phase(PhaseType::Pre)
+    .addPass<GameState>(GameState::Any)
+        .addSystem<InputSystem>()
+    .addCommitPoint(CommitPoint::Structural)
+    .addPass<GameState>(GameState::Running)
+        .addSystem<MovementSystem>()
+        .addSystem<SteeringSystem>();
+
+// Configure Main phase with commit points
+gameLoop.phase(PhaseType::Main)
+    .addPass<GameState>(GameState::Running)
+        .addSystem<CollisionDetectionSystem>()
+    // Commit pass events so collision responses can read them
+    .addCommitPoint()
+    .addPass<GameState>(GameState::Running)
+        .addSystem<CollisionResponseSystem>()
+    // Full structural commit: events, commands, and managers
+    .addCommitPoint(CommitPoint::Structural);
 
 // Configure Post phase
-gameLoop.phase(PhaseType.Post)
-    .addPass()
-        .add<SceneSyncSystem>(&gameWorld, &scene)
-        .add<TransformClearSystem>(&gameWorld);
+gameLoop.phase(PhaseType::Post)
+    .addPass<GameState>(GameState::Any)
+        .addSystem<SceneSyncSystem>()
+        .addSystem<TransformClearSystem>();
 
-// Initialize once before the first update
+// Initialize and run
+gameWorld.init();
 gameLoop.init(gameWorld);
 
-// In your main loop
 while (running) {
-    gameLoop.update(gameWorld, deltaTime, inputSnapshot);
+    gameLoop.update(gameWorld, deltaTime, inputSnapshot, viewportSnapshots);
     renderer.render(scene);
 }
 ```

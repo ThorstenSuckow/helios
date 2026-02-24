@@ -257,7 +257,7 @@ using namespace helios::engine::state::commands;
 using namespace helios::engine::state::types;
 
 // Request game start
-updateContext.resourceRegistry().resource<helios::engine::runtime::messaging::command::EngineCommandBuffer>().add<StateCommand<GameState>>(
+updateContext.commandBuffer().add<StateCommand<GameState>>(
     StateTransitionRequest<GameState>{
         GameState::Title,
         GameStateTransitionId::StartRequested
@@ -265,7 +265,7 @@ updateContext.resourceRegistry().resource<helios::engine::runtime::messaging::co
 );
 
 // Request player spawn in match
-updateContext.resourceRegistry().resource<helios::engine::runtime::messaging::command::EngineCommandBuffer>().add<StateCommand<MatchState>>(
+updateContext.commandBuffer().add<StateCommand<MatchState>>(
     StateTransitionRequest<MatchState>{
         MatchState::Warmup,
         MatchStateTransitionId::PlayerSpawnRequested

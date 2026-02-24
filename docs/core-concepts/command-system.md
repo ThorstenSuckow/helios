@@ -255,6 +255,7 @@ The Command System integrates with the Phase/Pass game loop architecture. Comman
 
 ## Related Documentation
 
+- [Resource Registry](resource-registry.md) — Type-indexed resource storage and handler lookup
 - [Event System](event-system.md) — Phase/pass event propagation
 - [Game Loop Architecture](gameloop-architecture.md) — Overall frame structure
 - [Component System](component-system.md) — GameObject, Component, System architecture

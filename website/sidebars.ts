@@ -39,6 +39,7 @@ const sidebars: SidebarsConfig = {
         'core-concepts/state-management',
         'core-concepts/gameobject-builder',
         'core-concepts/command-system',
+        'core-concepts/resource-registry',
         'core-concepts/event-system',
         'core-concepts/spawn-system',
         'core-concepts/object-pooling',

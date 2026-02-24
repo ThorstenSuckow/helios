@@ -26,6 +26,7 @@ All components are parameterized by state type, enabling reuse for different sta
 | `StateCommand<StateType>` | Command for requesting transitions |
 | `StateCommandDispatcher<StateType>` | Routes commands to handlers |
 | `StateComponent<StateType>` | Stores current state on entities |
+| `Bindings` | Compile-time specializations mapping state types to transition ID types |
 
 ### ID Mapping
 

@@ -11,7 +11,10 @@ export module helios.engine.mechanics.health.systems.HealthUpdateSystem;
 
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
-import helios.engine.runtime.messaging.command.CommandBuffer;
+
+import helios.engine.state.Bindings;
+import helios.engine.runtime.messaging.command.EngineCommandBuffer;
+
 import helios.engine.ecs.System;
 
 import helios.engine.mechanics.health.events.DeathEvent;

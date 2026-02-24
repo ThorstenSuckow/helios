@@ -10,6 +10,8 @@ import helios.engine.runtime.world.UpdateContext;
 import helios.engine.runtime.world.Session;
 import helios.engine.runtime.world.GameWorld;
 
+import helios.engine.state.Bindings;
+
 import helios.engine.mechanics.match.types;
 import helios.engine.state.types;
 
@@ -48,7 +50,7 @@ export namespace helios::engine::mechanics::match::rules::guards {
             helios::engine::runtime::world::UpdateContext& updateContext,
             const StateTransitionRequest<MatchState> transitionRequest
         ) {
-            auto playerOpt = updateContext.gameWorld().find(updateContext.session().playerEntityHandle());
+            auto playerOpt = updateContext.find(updateContext.session().playerEntityHandle());
             return playerOpt.has_value() && playerOpt->isActive();
 
         }
@@ -65,7 +67,7 @@ export namespace helios::engine::mechanics::match::rules::guards {
             helios::engine::runtime::world::UpdateContext& updateContext,
             const StateTransitionRequest<MatchState> transitionRequest
         ) {
-            auto playerOpt = updateContext.gameWorld().find(updateContext.session().playerEntityHandle());
+            auto playerOpt = updateContext.find(updateContext.session().playerEntityHandle());
             return playerOpt.has_value() && !playerOpt->isActive();
 
         }

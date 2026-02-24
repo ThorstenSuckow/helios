@@ -116,7 +116,7 @@ export namespace helios::engine::runtime::pooling {
          * @return True if the pool exists, false otherwise.
          */
         [[nodiscard]] bool has(const helios::engine::core::data::GameObjectPoolId id) const noexcept {
-            return pools_.find(id) != pools_.end();
+            return pools_.contains(id);
         }
 
 

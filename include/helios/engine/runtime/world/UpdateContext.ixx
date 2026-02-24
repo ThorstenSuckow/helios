@@ -1,62 +1,77 @@
 /**
  * @file UpdateContext.ixx
- * @brief Context struct passed to components during per-frame updates.
+ * @brief Per-frame context passed to systems during game loop updates.
  */
 module;
 
 #include <span>
-
+#include <optional>
 
 export module helios.engine.runtime.world.UpdateContext;
 
 import helios.input.InputSnapshot;
 import helios.rendering.ViewportSnapshot;
 
+import helios.engine.runtime.world.Level;
 import helios.engine.runtime.messaging.event.GameLoopEventBus;
 
-export namespace helios::engine::runtime::messaging::command {
-    class CommandBuffer;
-}
+import helios.engine.runtime.world.ResourceRegistry;
 
+import helios.engine.ecs.EntityResolver;
+import helios.engine.ecs.GameObject;
+import helios.engine.ecs.EntityHandle;
+
+export namespace helios::engine::runtime::messaging::command  {
+    class EngineCommandBuffer;
+}
+;
 
 export namespace helios::engine::runtime::world {
 
+    using namespace helios::engine::runtime::messaging::command;
+
     class Session;
 
-    class GameWorld;
 
     /**
-     * @brief Context passed to systems and components during per-frame updates.
+     * @brief Per-frame context passed to systems during game loop updates.
      *
-     * @details Provides all necessary state for systems to perform their update logic,
-     * including frame timing, input state, command buffer access, and event propagation.
+     * @details UpdateContext bundles all state that systems need for a single
+     * frame update: timing, input, resource access, entity resolution, event
+     * buses, and the active level. It is constructed by the GameLoop each
+     * frame and passed to every System::update() call.
      *
-     * The UpdateContext serves as the central communication hub within the game loop,
-     * offering three levels of event propagation:
+     * ## Resource Access
      *
-     * ## Event Levels
+     * - `commandBuffer()` — returns the EngineCommandBuffer for submitting
+     *   engine-defined commands (shortcut for `resourceRegistry().resource<EngineCommandBuffer>()`)
+     * - `resourceRegistry()` — O(1) lookup for Managers, CommandBuffers,
+     *   CommandHandlers, and other registered resources
+     * - `session()` — cross-frame state (tracked game/match states)
+     * - `level()` — current Level with arena bounds
      *
-     * | Level | Push Method | Read Method | Scope |
-     * |-------|-------------|-------------|-------|
+     * ## Entity Access
+     *
+     * - `find(handle)` — resolves an EntityHandle to a GameObject (validates
+     *   the handle's version via the EntityResolver)
+     * - `entityResolver()` — direct access to the callable resolver
+     *
+     * ## Event Propagation
+     *
+     * | Level | Push | Read | Scope |
+     * |-------|------|------|-------|
      * | Pass  | `pushPass()` | `readPass()` | Within same phase, after commit point |
      * | Phase | `pushPhase()` | `readPhase()` | Across phases within same frame |
      * | Frame | `pushFrame()` | `readFrame()` | Across frames |
      *
-     * **Pass-level events** are pushed via `pushPass()` and become readable in subsequent
-     * passes within the same phase after a commit point is reached. Cleared at phase end.
-     *
-     * **Phase-level events** are pushed via `pushPhase()` and become readable in subsequent
-     * phases after the current phase commits. Cleared at frame end.
-     *
-     * **Frame-level events** are pushed via `pushFrame()` and become readable in the next
-     * frame. Useful for cross-frame communication (e.g., collision responses, spawn confirmations).
-     *
      * @see GameLoop
-     * @see Pass
-     * @see CommandBuffer
+     * @see ResourceRegistry
+     * @see EngineCommandBuffer
+     * @see Session
+     * @see EntityResolver
      * @see InputSnapshot
      */
-    struct UpdateContext {
+    class UpdateContext {
 
     private:
         /**
@@ -75,16 +90,8 @@ export namespace helios::engine::runtime::world {
         const helios::input::InputSnapshot& inputSnapshot_;
 
         /**
-         * @brief Buffer for queueing commands to be executed at end of frame.
+         * @brief Reference to the current game session for state tracking.
          */
-        helios::engine::runtime::messaging::command::CommandBuffer& commandBuffer_;
-
-        /**
-         * @brief Reference to the game world for entity lookups.
-         */
-        helios::engine::runtime::world::GameWorld& gameWorld_;
-
-
         helios::engine::runtime::world::Session& session_;
 
         /**
@@ -132,32 +139,53 @@ export namespace helios::engine::runtime::world {
          */
         std::span<const helios::rendering::ViewportSnapshot> viewportSnapshots_;
 
+        /**
+         * @brief Reference to the ResourceRegistry for O(1) resource lookup.
+         */
+        helios::engine::runtime::world::ResourceRegistry& resourceRegistry_;
+
+        /**
+         * @brief Callable for resolving EntityHandles to GameObjects.
+         */
+        helios::engine::ecs::EntityResolver entityResolver_;
+
+        /**
+         * @brief Pointer to the active Level, or nullptr if no level is loaded.
+         */
+        const Level* level_;
+
     public:
 
 
         /**
-         * @brief Constructs an UpdateContext with required dependencies.
+         * @brief Constructs an UpdateContext with all per-frame dependencies.
          *
-         * @param commandBuffer Reference to the command buffer for queueing commands.
-         * @param gameWorld Reference to the game world for entity lookups.
-         * @param deltaTime Time since last frame / update in seconds.
-         * @param phaseEventBus Reference to the phase-level event bus for cross-phase communication.
-         * @param passEventBus Reference to the pass-level event bus for cross-pass communication.
-         * @param frameEventBus Reference to the frame-level event bus for cross-frame communication.
-         * @param inputSnapshot The input snapshot for this frame.
+         * @param resourceRegistry Reference to the ResourceRegistry for resource lookup.
+         * @param entityResolver Callable for resolving EntityHandles to GameObjects.
+         * @param session Reference to the current game session.
+         * @param deltaTime Time since last frame in seconds.
+         * @param phaseEventBus Reference to the phase-level event bus.
+         * @param passEventBus Reference to the pass-level event bus.
+         * @param frameEventBus Reference to the frame-level event bus.
+         * @param inputSnapshot Immutable input state for this frame.
          * @param viewportSnapshots Immutable snapshot of viewport states.
+         * @param level Pointer to the active Level, or nullptr.
          */
         UpdateContext(
-            helios::engine::runtime::messaging::command::CommandBuffer& commandBuffer,
-            helios::engine::runtime::world::GameWorld& gameWorld,
+            helios::engine::runtime::world::ResourceRegistry& resourceRegistry,
+            helios::engine::ecs::EntityResolver entityResolver,
             helios::engine::runtime::world::Session& session,
             const float deltaTime,
             helios::engine::runtime::messaging::event::GameLoopEventBus& phaseEventBus,
             helios::engine::runtime::messaging::event::GameLoopEventBus& passEventBus,
             helios::engine::runtime::messaging::event::GameLoopEventBus& frameEventBus,
             const helios::input::InputSnapshot& inputSnapshot,
-            std::span<const helios::rendering::ViewportSnapshot> viewportSnapshots
-        ) : commandBuffer_(commandBuffer), gameWorld_(gameWorld), session_(session),
+            std::span<const helios::rendering::ViewportSnapshot> viewportSnapshots,
+            const Level* level
+        ) :
+        resourceRegistry_(resourceRegistry),
+        entityResolver_(entityResolver),
+        session_(session),
         deltaTime_(deltaTime),
         totalTime_(totalTime_ + deltaTime),
         phaseEventSink_(phaseEventBus.writeSink()),
@@ -167,7 +195,8 @@ export namespace helios::engine::runtime::world {
         frameEventSink_(frameEventBus.writeSink()),
         frameEventSource_(frameEventBus.readSource()),
         inputSnapshot_(inputSnapshot),
-        viewportSnapshots_(viewportSnapshots)
+        viewportSnapshots_(viewportSnapshots),
+        level_(level)
         {
 
         }
@@ -210,12 +239,65 @@ export namespace helios::engine::runtime::world {
         }
 
         /**
-         * @brief Returns the command buffer for queueing commands.
+         * @brief Returns the ResourceRegistry for resource lookup.
          *
-         * @return Ref to the CommandBuffer used with this UpdateContext.
+         * @return Reference to the ResourceRegistry.
          */
-        [[nodiscard]] helios::engine::runtime::messaging::command::CommandBuffer& commandBuffer() const noexcept {
-            return commandBuffer_;
+        [[nodiscard]] helios::engine::runtime::world::ResourceRegistry& resourceRegistry() noexcept {
+            return resourceRegistry_;
+        }
+
+        /**
+         * @copydoc resourceRegistry()
+         */
+        [[nodiscard]] const helios::engine::runtime::world::ResourceRegistry& resourceRegistry() const noexcept {
+            return resourceRegistry_;
+        }
+
+        /**
+         * @brief Resolves an EntityHandle to a GameObject.
+         *
+         * @details Validates the handle via the EntityResolver and returns
+         * a lightweight GameObject wrapper if the entity is still alive.
+         *
+         * @param handle The entity handle to resolve.
+         *
+         * @return A GameObject if the handle is valid, std::nullopt otherwise.
+         */
+        [[nodiscard]] std::optional<helios::engine::ecs::GameObject> find(helios::engine::ecs::EntityHandle handle) const noexcept {
+            return entityResolver_(handle);
+        }
+
+
+        /**
+         * @brief Returns the EntityResolver for direct handle validation.
+         *
+         * @return Reference to the EntityResolver.
+         */
+        [[nodiscard]] helios::engine::ecs::EntityResolver& entityResolver() noexcept {
+            return entityResolver_;
+        }
+
+        /**
+         * @brief Returns the active Level.
+         *
+         * @return Pointer to the Level, or nullptr if no level is loaded.
+         */
+        [[nodiscard]] const Level* level() noexcept {
+            return level_;
+        }
+
+        /**
+         * @brief Returns the EngineCommandBuffer for submitting commands.
+         *
+         * @details Shortcut for `resourceRegistry().resource<EngineCommandBuffer>()`.
+         * Only accepts engine-defined command types. For custom commands, look up
+         * the appropriate handler or buffer via `resourceRegistry()` directly.
+         *
+         * @return Reference to the EngineCommandBuffer.
+         */
+        [[nodiscard]] EngineCommandBuffer& commandBuffer () const noexcept {
+            return resourceRegistry_.resource<EngineCommandBuffer>();
         }
 
         /**
@@ -227,14 +309,6 @@ export namespace helios::engine::runtime::world {
             return session_;
         }
 
-        /**
-         * @brief Returns the game world for entity lookups.
-         *
-         * @return Ref to the GameWorld used with this UpdateContext.
-         */
-        [[nodiscard]] helios::engine::runtime::world::GameWorld& gameWorld() const noexcept {
-            return gameWorld_;
-        }
 
         /**
          * @brief Pushes an event to the pass-level event bus.

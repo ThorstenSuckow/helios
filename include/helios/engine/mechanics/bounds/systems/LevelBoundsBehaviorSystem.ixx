@@ -12,7 +12,8 @@ export module helios.engine.mechanics.bounds.systems.LevelBoundsBehaviorSystem;
 import helios.engine.ecs.System;
 import helios.math;
 
-import helios.engine.runtime.messaging.command.CommandBuffer;
+import helios.engine.state.Bindings;
+import helios.engine.runtime.messaging.command.EngineCommandBuffer;
 
 import helios.engine.modules.physics.collision.types.CollisionBehavior;
 import helios.engine.modules.physics.collision.types.CollisionResponse;
@@ -28,7 +29,6 @@ import helios.engine.mechanics.bounds.components.LevelBoundsBehaviorComponent;
 import helios.engine.modules.physics.collision.components.AabbColliderComponent;
 import helios.engine.modules.spatial.transform.components.RotationStateComponent;
 import helios.engine.modules.rendering.model.components.ModelAabbComponent;
-import helios.engine.modules.spatial.transform.components.RotationStateComponent;
 import helios.scene.SceneNode;
 import helios.engine.modules.scene.components.SceneNodeComponent;
 
@@ -128,7 +128,9 @@ export namespace helios::engine::mechanics::bounds::systems {
                         auto* sbp = entity.get<helios::engine::mechanics::spawn::components::SpawnedByProfileComponent>();
                         assert(sbp && "Unexpected missing SpawnProfile");
 
-                        updateContext.commandBuffer().add<helios::engine::runtime::spawn::commands::DespawnCommand>(
+                        updateContext.resourceRegistry().resource<
+                            helios::engine::runtime::messaging::command::EngineCommandBuffer
+                        >().add<helios::engine::runtime::spawn::commands::DespawnCommand>(
                             entity.entityHandle(), sbp->spawnProfileId()
                         );
 

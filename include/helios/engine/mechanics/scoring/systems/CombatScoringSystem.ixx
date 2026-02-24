@@ -21,7 +21,10 @@ import helios.engine.mechanics.scoring.types;
 
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
-import helios.engine.runtime.messaging.command.CommandBuffer;
+
+import helios.engine.state.Bindings;
+import helios.engine.runtime.messaging.command.EngineCommandBuffer;
+
 import helios.engine.ecs.System;
 
 import helios.engine.mechanics.health.events.DeathEvent;
@@ -67,9 +70,9 @@ export namespace helios::engine::mechanics::scoring::systems {
 
                 auto& attackContext = event.attackContext().value();
 
-                const auto enemy = updateContext.gameWorld().find(event.source());
+                const auto enemy = updateContext.find(event.source());
 
-                const auto hitman = updateContext.gameWorld().find(attackContext.source);
+                const auto hitman = updateContext.find(attackContext.source);
 
                 if (!enemy || ! hitman) {
                     continue;

@@ -4,11 +4,12 @@
  */
 module;
 
-export module helios.engine.Bootstrap;
+export module helios.engine.bootstrap;
 
 import helios.engine.mechanics.registry;
 import helios.engine.modules.registry;
 import helios.engine.ecs.registry;
+
 
 export namespace helios::engine::bootstrap {
 

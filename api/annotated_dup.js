@@ -143,20 +143,20 @@ var annotated_dup =
         ] ],
         [ "core", "namespacehelios_1_1engine_1_1core.html", [
           [ "data", "namespacehelios_1_1engine_1_1core_1_1data.html", [
-            [ "ActionId", "structhelios_1_1engine_1_1core_1_1data_1_1ActionId.html", "structhelios_1_1engine_1_1core_1_1data_1_1ActionId" ],
+            [ "ActionIdTag", "structhelios_1_1engine_1_1core_1_1data_1_1ActionIdTag.html", null ],
             [ "CommandTypeId", "classhelios_1_1engine_1_1core_1_1data_1_1CommandTypeId.html", "classhelios_1_1engine_1_1core_1_1data_1_1CommandTypeId" ],
             [ "ComponentTypeId", "classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId.html", "classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId" ],
-            [ "FontId", "structhelios_1_1engine_1_1core_1_1data_1_1FontId.html", "structhelios_1_1engine_1_1core_1_1data_1_1FontId" ],
-            [ "GameObjectPoolId", "structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId.html", "structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" ],
+            [ "FontIdTag", "structhelios_1_1engine_1_1core_1_1data_1_1FontIdTag.html", null ],
+            [ "GameObjectPoolIdTag", "structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolIdTag.html", null ],
             [ "GameTimerIdTag", "structhelios_1_1engine_1_1core_1_1data_1_1GameTimerIdTag.html", null ],
             [ "MenuIdTag", "structhelios_1_1engine_1_1core_1_1data_1_1MenuIdTag.html", null ],
             [ "PrefabIdTag", "structhelios_1_1engine_1_1core_1_1data_1_1PrefabIdTag.html", null ],
             [ "ResourceTypeId", "classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId.html", "classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId" ],
-            [ "SceneId", "structhelios_1_1engine_1_1core_1_1data_1_1SceneId.html", "structhelios_1_1engine_1_1core_1_1data_1_1SceneId" ],
+            [ "SceneIdTag", "structhelios_1_1engine_1_1core_1_1data_1_1SceneIdTag.html", null ],
             [ "ScorePoolIdTag", "structhelios_1_1engine_1_1core_1_1data_1_1ScorePoolIdTag.html", null ],
             [ "ScoreTypeId", "classhelios_1_1engine_1_1core_1_1data_1_1ScoreTypeId.html", "classhelios_1_1engine_1_1core_1_1data_1_1ScoreTypeId" ],
-            [ "SpawnProfileId", "structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId.html", "structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId" ],
-            [ "SpawnRuleId", "structhelios_1_1engine_1_1core_1_1data_1_1SpawnRuleId.html", "structhelios_1_1engine_1_1core_1_1data_1_1SpawnRuleId" ],
+            [ "SpawnProfileIdTag", "structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileIdTag.html", null ],
+            [ "SpawnRuleIdTag", "structhelios_1_1engine_1_1core_1_1data_1_1SpawnRuleIdTag.html", null ],
             [ "StateTypeId", "classhelios_1_1engine_1_1core_1_1data_1_1StateTypeId.html", "classhelios_1_1engine_1_1core_1_1data_1_1StateTypeId" ],
             [ "ViewportIdTag", "structhelios_1_1engine_1_1core_1_1data_1_1ViewportIdTag.html", null ]
           ] ]

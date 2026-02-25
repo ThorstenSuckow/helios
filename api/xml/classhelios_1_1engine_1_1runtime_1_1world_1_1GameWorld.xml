@@ -53,7 +53,7 @@
 <para>Type-indexed registry for Managers, CommandBuffers, and CommandHandlers. </para>
         </briefdescription>
         <detaileddescription>
-<para>Provides O(1) type-based access via <ref refid="classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId" kindref="compound">ResourceTypeId</ref>. Owns all registered <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> and <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer" kindref="compound">CommandBuffer</ref> instances via <ref refid="structhelios_1_1core_1_1memory_1_1ErasedUnique" kindref="compound">ErasedUnique</ref>. </para>
+<para>Provides O(1) type-based access via ResourceTypeId. Owns all registered <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> and CommandBuffer instances via ErasedUnique. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -467,7 +467,7 @@
         </param>
     <requiresclause>std::is_base_of_v&lt;<ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler" kindref="compound">helios::engine::runtime::messaging::command::CommandHandler</ref>, T&gt;    </requiresclause>
         <briefdescription>
-<para>Registers a non-owning <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler" kindref="compound">CommandHandler</ref> reference. </para>
+<para>Registers a non-owning CommandHandler reference. </para>
         </briefdescription>
         <detaileddescription>
 <para>The handler must outlive the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> (typically guaranteed because the handler is a <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> already owned by the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry" kindref="compound">ResourceRegistry</ref>).</para>
@@ -476,7 +476,7 @@
 <parametername>T</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler" kindref="compound">CommandHandler</ref> type. Must derive from <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler" kindref="compound">CommandHandler</ref>.</para>
+<para>The CommandHandler type. Must derive from CommandHandler.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -501,7 +501,7 @@
         <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ac670c2a5ffd16ed5500955a9bc01e12a" compoundref="GameWorld_8ixx" startline="154">resourceRegistry_</references>
         <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1WorldLifecycleManager_1ac913e707aa847a82959ee708582b5cee" compoundref="WorldLifecycleManager_8ixx" startline="74" endline="77">helios::engine::mechanics::lifecycle::WorldLifecycleManager::init</referencedby>
         <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a04f62fb1b24bfc389acaa48fdd31293e" compoundref="ScorePoolManager_8ixx" startline="157" endline="159">helios::engine::mechanics::scoring::ScorePoolManager::init</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager_1a376734356261cdf9d67af7bc03b15698" compoundref="UiActionCommandManager_8ixx" startline="123" endline="125">helios::engine::modules::ui::UiActionCommandManager::init</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager_1a376734356261cdf9d67af7bc03b15698" compoundref="UiActionCommandManager_8ixx" startline="122" endline="124">helios::engine::modules::ui::UiActionCommandManager::init</referencedby>
         <referencedby refid="classhelios_1_1engine_1_1state_1_1StateManager_1a176a52f4173536aa3fde8324f1f72cb6" compoundref="StateManager_8ixx" startline="240" endline="242">helios::engine::state::StateManager&lt; types::GameState &gt;::init</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a187d5dfbdb99b5a31917776688d88355" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -614,7 +614,7 @@
 <para>Flushes all registered Managers. </para>
         </briefdescription>
         <detaileddescription>
-<para>Iterates over all Managers in registration order and invokes `flush(updateContext)` on each. Called by the GameLoop at commit points after the <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer" kindref="compound">CommandBuffer</ref> has been flushed.</para>
+<para>Iterates over all Managers in registration order and invokes `flush(updateContext)` on each. Called by the GameLoop at commit points after the CommandBuffer has been flushed.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>updateContext</parametername>
@@ -891,7 +891,7 @@
 </listitem></itemizedlist>
 </para>
 <para>## Usage with GameLoop</para>
-<para>Systems access the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> via <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">UpdateContext</ref>. Entity queries use views, while mutations are performed through Commands flushed by the <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer" kindref="compound">EngineCommandBuffer</ref>.</para>
+<para>Systems access the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> via <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">UpdateContext</ref>. Entity queries use views, while mutations are performed through Commands flushed by the EngineCommandBuffer.</para>
 <para>```cpp void update(UpdateContext&amp; ctx) noexcept override { for (auto [entity, transform, velocity, active] : gameWorld_-&gt;view&lt; TransformComponent, VelocityComponent, Active &gt;().whereEnabled()) { // Process matching entities } } ```</para>
 <para>## Resource Registration</para>
 <para>```cpp auto&amp; poolMgr = gameWorld.resourceRegistry() .<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a187d5dfbdb99b5a31917776688d88355" kindref="member">registerResource&lt;GameObjectPoolManager&gt;()</ref>; auto&amp; spawnMgr = gameWorld.resourceRegistry() .<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a187d5dfbdb99b5a31917776688d88355" kindref="member">registerResource&lt;SpawnManager&gt;()</ref>;</para>

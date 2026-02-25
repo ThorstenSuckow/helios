@@ -102,6 +102,7 @@ var menudata={children:[
 {text:"y",url:"modulemembers_vars_y.html#index_y"},
 {text:"z",url:"modulemembers_vars_z.html#index_z"}]},
 {text:"Typedefs",url:"modulemembers_type.html",children:[
+{text:"a",url:"modulemembers_type.html#index_a"},
 {text:"c",url:"modulemembers_type.html#index_c"},
 {text:"d",url:"modulemembers_type.html#index_d"},
 {text:"e",url:"modulemembers_type.html#index_e"},

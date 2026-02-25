@@ -85,7 +85,7 @@
         <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" line="139" column="65" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="139" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a4dd482abce2d7e87a3998d534bc76116" prot="private" static="no" mutable="no">
-        <type>std::unordered_map&lt; <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId" kindref="compound">helios::engine::core::data::SpawnProfileId</ref>, std::unique_ptr&lt; const <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnProfile" kindref="compound">helios::engine::runtime::spawn::SpawnProfile</ref> &gt; &gt;</type>
+        <type>std::unordered_map&lt; <ref refid="namespacehelios_1_1engine_1_1core_1_1data_1a1bb1078074b84d8536a3d74c2d29d150" kindref="member">helios::engine::core::data::SpawnProfileId</ref>, std::unique_ptr&lt; const <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnProfile" kindref="compound">helios::engine::runtime::spawn::SpawnProfile</ref> &gt; &gt;</type>
         <definition>std::unordered_map&lt; helios::engine::core::data::SpawnProfileId, std::unique_ptr&lt;const helios::engine::runtime::spawn::SpawnProfile&gt; &gt; helios::engine::runtime::spawn::SpawnManager::spawnProfiles_</definition>
         <argsstring></argsstring>
         <name>spawnProfiles_</name>
@@ -481,7 +481,7 @@
         <name>addSpawnProfile</name>
         <qualifiedname>helios::engine::runtime::spawn::SpawnManager::addSpawnProfile</qualifiedname>
         <param>
-          <type>const <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId" kindref="compound">helios::engine::core::data::SpawnProfileId</ref> &amp;</type>
+          <type>const <ref refid="namespacehelios_1_1engine_1_1core_1_1data_1a1bb1078074b84d8536a3d74c2d29d150" kindref="member">helios::engine::core::data::SpawnProfileId</ref> &amp;</type>
           <declname>spawnProfileId</declname>
         </param>
         <param>
@@ -529,7 +529,7 @@
         <name>spawnProfile</name>
         <qualifiedname>helios::engine::runtime::spawn::SpawnManager::spawnProfile</qualifiedname>
         <param>
-          <type>const <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId" kindref="compound">helios::engine::core::data::SpawnProfileId</ref> &amp;</type>
+          <type>const <ref refid="namespacehelios_1_1engine_1_1core_1_1data_1a1bb1078074b84d8536a3d74c2d29d150" kindref="member">helios::engine::core::data::SpawnProfileId</ref> &amp;</type>
           <declname>spawnProfileId</declname>
         </param>
         <briefdescription>
@@ -622,10 +622,10 @@
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> for processing spawn and despawn commands. </para>
+<para>Manager for processing spawn and despawn commands. </para>
     </briefdescription>
     <detaileddescription>
-<para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" kindref="compound">SpawnManager</ref> is a <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> that handles the lifecycle of pooled GameObjects. It receives commands via <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler_1ac7719f245fd62da47761b10c9d947033" kindref="member">SpawnCommandHandler::submit()</ref> and queues them for deferred processing during the manager flush phase.</para>
+<para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" kindref="compound">SpawnManager</ref> is a Manager that handles the lifecycle of pooled GameObjects. It receives commands via <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler_1ac7719f245fd62da47761b10c9d947033" kindref="member">SpawnCommandHandler::submit()</ref> and queues them for deferred processing during the manager flush phase.</para>
 <para>## Command Processing Order</para>
 <para>During <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1afb6ace98d74da9ed313c6811142f5d3d" kindref="member">flush()</ref>, commands are processed in this order: 1. **Despawn commands** - Entities are returned to their pools 2. **Spawn commands** - Single entities are acquired and initialized 3. **Scheduled spawn plan commands** - Batch spawns from scheduler</para>
 <para>## Spawn Profiles</para>
@@ -636,7 +636,7 @@
 </listitem></itemizedlist>
 </para>
 <para>## Integration</para>
-<para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" kindref="compound">SpawnManager</ref> registers itself with the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> for each profile ID, allowing commands to route to the correct handler.</para>
+<para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" kindref="compound">SpawnManager</ref> registers itself with the GameWorld for each profile ID, allowing commands to route to the correct handler.</para>
 <para>Example: ```cpp auto spawnManager = std::make_unique&lt;SpawnManager&gt;();</para>
 <para>spawnManager-&gt;addSpawnProfile(bulletProfileId, std::make_unique&lt;SpawnProfile&gt;( <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnProfile" kindref="compound">SpawnProfile</ref>{ .gameObjectPoolId = bulletPoolId, .spawnPlacer = std::make_unique&lt;EmitterSpawnPlacer&gt;(), .spawnInitializer = std::make_unique&lt;EmitterInitializer&gt;() } ));</para>
 <para>gameWorld.addManager(std::move(spawnManager)); ```</para>

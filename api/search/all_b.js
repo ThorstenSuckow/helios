@@ -100,7 +100,7 @@ var searchData=
   ['combatscoringsystem_2eixx_97',['CombatScoringSystem.ixx',['../CombatScoringSystem_8ixx.html',1,'']]],
   ['combinedstatetoidmappair_98',['CombinedStateToIdMapPair',['../classhelios_1_1engine_1_1state_1_1CombinedStateToIdMapPair.html',1,'helios::engine::state']]],
   ['combinedstatetoidmappair_2eixx_99',['CombinedStateToIdMapPair.ixx',['../CombinedStateToIdMapPair_8ixx.html',1,'']]],
-  ['combinedstatetoidmappair_3c_20statelft_2c_20statergt_2c_20helios_3a_3acore_3a_3adata_3a_3astrongid_3c_20menuidtag_2c_20uint32_5ft_20_3e_20_3e_100',['CombinedStateToIdMapPair&lt; StateLft, StateRgt, helios::core::data::StrongId&lt; MenuIdTag, uint32_t &gt; &gt;',['../classhelios_1_1engine_1_1state_1_1CombinedStateToIdMapPair.html',1,'helios::engine::state']]],
+  ['combinedstatetoidmappair_3c_20statelft_2c_20statergt_2c_20menuid_20_3e_100',['CombinedStateToIdMapPair&lt; StateLft, StateRgt, MenuId &gt;',['../classhelios_1_1engine_1_1state_1_1CombinedStateToIdMapPair.html',1,'helios::engine::state']]],
   ['command_101',['Command',['../dir_3c2debfdd2bfc5d375ae885ec56c77d2.html#autotoc_md618',1,'']]],
   ['commandbuffer_102',['CommandBuffer',['../classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html',1,'helios::engine::runtime::messaging::command']]],
   ['commandbuffer_103',['commandBuffer',['../classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#acca71a785767cdcd326787dedba216b9',1,'helios::engine::runtime::world::UpdateContext']]],

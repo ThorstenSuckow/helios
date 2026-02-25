@@ -133,7 +133,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a053488fdbe36259adf10bd51474677a6" id="r_a053488fdbe36259adf10bd51474677a6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a053488fdbe36259adf10bd51474677a6">submit</a> (const <a class="el" href="classhelios_1_1engine_1_1state_1_1commands_1_1StateCommand.html">StateCommand</a>&lt; StateType &gt; stateCommand) noexcept override</td></tr>
 <tr class="memdesc:a053488fdbe36259adf10bd51474677a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submits a state command for processing.  <br /></td></tr>
 <tr class="memitem:a176a52f4173536aa3fde8324f1f72cb6" id="r_a176a52f4173536aa3fde8324f1f72cb6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a176a52f4173536aa3fde8324f1f72cb6">init</a> (<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">helios::engine::runtime::world::GameWorld</a> &amp;gameWorld) override</td></tr>
-<tr class="memdesc:a176a52f4173536aa3fde8324f1f72cb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the manager and registers with <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html" title="Central game state container for entities, resources, and the active level.">GameWorld</a>.  <br /></td></tr>
+<tr class="memdesc:a176a52f4173536aa3fde8324f1f72cb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the manager and registers with GameWorld.  <br /></td></tr>
 <tr class="memitem:abd21bd2f4c2738a52d1854d3389f3488" id="r_abd21bd2f4c2738a52d1854d3389f3488"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abd21bd2f4c2738a52d1854d3389f3488">reset</a> () override</td></tr>
 <tr class="memdesc:abd21bd2f4c2738a52d1854d3389f3488"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all pending commands.  <br /></td></tr>
 <tr class="inherit_header pub_methods_classhelios_1_1engine_1_1runtime_1_1world_1_1Manager"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classhelios_1_1engine_1_1runtime_1_1world_1_1Manager')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public Member Functions inherited from <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html">helios::engine::runtime::world::Manager</a></td></tr>
@@ -148,9 +148,9 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename StateType&gt;<br />
 class helios::engine::state::StateManager&lt; StateType &gt;</div><p>Manages state transitions using a rule-based system. </p>
-<p>Implements both <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html" title="Abstract base class for managers that process deferred operations.">Manager</a> and <a class="el" href="classhelios_1_1engine_1_1state_1_1TypedStateCommandHandler.html" title="Typed interface for handling state commands.">TypedStateCommandHandler</a> interfaces. Processes state transition commands by matching against registered rules, executing guards, and notifying listeners.</p>
+<p>Implements both Manager and <a class="el" href="classhelios_1_1engine_1_1state_1_1TypedStateCommandHandler.html" title="Typed interface for handling state commands.">TypedStateCommandHandler</a> interfaces. Processes state transition commands by matching against registered rules, executing guards, and notifying listeners.</p>
 <p>## Transition Flow</p>
-<p>1. Commands are submitted via <a class="el" href="#a053488fdbe36259adf10bd51474677a6" title="Submits a state command for processing.">submit()</a> and queued 2. During <a class="el" href="#a7b16869a9d0d8b511b76ac568339fea1" title="Processes pending state commands.">flush()</a>, the last pending command is processed 3. Rules are checked to find a matching transition 4. If a guard is present, it must return true 5. Listeners are notified: onStateExit -&gt; onStateTransition -&gt; onStateEnter 6. <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Session.html" title="Holds session-level state for the current game instance.">Session</a> state is updated</p>
+<p>1. Commands are submitted via <a class="el" href="#a053488fdbe36259adf10bd51474677a6" title="Submits a state command for processing.">submit()</a> and queued 2. During <a class="el" href="#a7b16869a9d0d8b511b76ac568339fea1" title="Processes pending state commands.">flush()</a>, the last pending command is processed 3. Rules are checked to find a matching transition 4. If a guard is present, it must return true 5. Listeners are notified: onStateExit -&gt; onStateTransition -&gt; onStateEnter 6. Session state is updated</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">StateType</td><td>The state enum type.</td></tr>
@@ -306,7 +306,7 @@ template&lt;typename StateType&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Initializes the manager and registers with <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html" title="Central game state container for entities, resources, and the active level.">GameWorld</a>. </p>
+<p>Initializes the manager and registers with GameWorld. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">gameWorld</td><td>The game world to register with. </td></tr>

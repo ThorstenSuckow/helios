@@ -1,10 +1,6 @@
 var module__helios_8engine_8core_8data_8SpawnProfileId =
 [
-    [ "SpawnProfileId", "structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId.html", "structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId" ],
-    [ "helios::engine::core::data::SpawnProfileId::SpawnProfileId", "module__helios_8engine_8core_8data_8SpawnProfileId.html#a9ad974e12ac33302cb03db42ea75ae6c", null ],
-    [ "helios::engine::core::data::SpawnProfileId::SpawnProfileId", "module__helios_8engine_8core_8data_8SpawnProfileId.html#a577730c89b83e4e404574dc17247dadf", null ],
-    [ "helios::engine::core::data::SpawnProfileId::value", "module__helios_8engine_8core_8data_8SpawnProfileId.html#a5dc649f7110f90280110c4c857a60e00", null ],
-    [ "helios::engine::core::data::SpawnProfileId::operator<", "module__helios_8engine_8core_8data_8SpawnProfileId.html#aec34e1a274d9cf0850e24db6bc41b55a", null ],
-    [ "helios::engine::core::data::SpawnProfileId::operator>", "module__helios_8engine_8core_8data_8SpawnProfileId.html#ac3c1983c904051c71fa71ca6d61853fd", null ],
+    [ "SpawnProfileIdTag", "structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileIdTag.html", null ],
+    [ "helios::engine::core::data::SpawnProfileId", "module__helios_8engine_8core_8data_8SpawnProfileId.html#a1bb1078074b84d8536a3d74c2d29d150", null ],
     [ "std::hash< helios::engine::core::data::SpawnProfileId >::operator()", "module__helios_8engine_8core_8data_8SpawnProfileId.html#af96e180e6affa5533b14d73152125896", null ]
 ];

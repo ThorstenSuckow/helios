@@ -7,7 +7,7 @@ var searchData=
   ['gameobjectfactory_4',['GameObjectFactory',['../classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory.html',1,'helios::engine::builder::gameObject']]],
   ['gameobjectpool_5',['GameObjectPool',['../classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html',1,'helios::engine::runtime::pooling']]],
   ['gameobjectpoolconfig_6',['GameObjectPoolConfig',['../structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig.html',1,'helios::engine::runtime::pooling']]],
-  ['gameobjectpoolid_7',['GameObjectPoolId',['../structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId.html',1,'helios::engine::core::data']]],
+  ['gameobjectpoolidtag_7',['GameObjectPoolIdTag',['../structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolIdTag.html',1,'helios::engine::core::data']]],
   ['gameobjectpoolmanager_8',['GameObjectPoolManager',['../classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager.html',1,'helios::engine::runtime::pooling']]],
   ['gameobjectpoolregistry_9',['GameObjectPoolRegistry',['../classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolRegistry.html',1,'helios::engine::runtime::pooling']]],
   ['gameobjectpoolsnapshot_10',['GameObjectPoolSnapshot',['../structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolSnapshot.html',1,'helios::engine::runtime::pooling']]],

@@ -147,7 +147,7 @@ requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1runti
 <tr class="memitem:a8b291cc60aa4ef02932747235c0fc64d" id="r_a8b291cc60aa4ef02932747235c0fc64d"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; <br />
 requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler.html">helios::engine::runtime::messaging::command::CommandHandler</a>, T&gt;</td></tr>
 <tr class="memitem:a8b291cc60aa4ef02932747235c0fc64d template"><td class="memItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8b291cc60aa4ef02932747235c0fc64d">registerCommandHandler</a> (T &amp;cmdHandler)</td></tr>
-<tr class="memdesc:a8b291cc60aa4ef02932747235c0fc64d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a non-owning <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler.html" title="Abstract base for type-erased command handler storage.">CommandHandler</a> reference.  <br /></td></tr>
+<tr class="memdesc:a8b291cc60aa4ef02932747235c0fc64d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a non-owning CommandHandler reference.  <br /></td></tr>
 <tr class="memitem:a187d5dfbdb99b5a31917776688d88355" id="r_a187d5dfbdb99b5a31917776688d88355"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... Args&gt; </td></tr>
 <tr class="memitem:a187d5dfbdb99b5a31917776688d88355 template"><td class="memItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a187d5dfbdb99b5a31917776688d88355">registerResource</a> (Args &amp;&amp;... args)</td></tr>
 <tr class="memdesc:a187d5dfbdb99b5a31917776688d88355"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers an owning resource of arbitrary type.  <br /></td></tr>
@@ -214,7 +214,7 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 <li>**Level Management:** Holds the active <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Level.html" title="Represents a game level containing the scene graph and world boundaries.">Level</a> with arena bounds.</li>
 </ul>
 <p>## Usage with GameLoop</p>
-<p>Systems access the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html" title="Central game state container for entities, resources, and the active level.">GameWorld</a> via <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html" title="Per-frame context passed to systems during game loop updates.">UpdateContext</a>. Entity queries use views, while mutations are performed through Commands flushed by the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer.html" title="Concrete command buffer pre-configured with all engine command types.">EngineCommandBuffer</a>.</p>
+<p>Systems access the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html" title="Central game state container for entities, resources, and the active level.">GameWorld</a> via <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html" title="Per-frame context passed to systems during game loop updates.">UpdateContext</a>. Entity queries use views, while mutations are performed through Commands flushed by the EngineCommandBuffer.</p>
 <p>```cpp void update(UpdateContext&amp; ctx) noexcept override { for (auto [entity, transform, velocity, active] : gameWorld_-&gt;view&lt; TransformComponent, VelocityComponent, Active &gt;().whereEnabled()) { // Process matching entities } } ```</p>
 <p>## Resource Registration</p>
 <p>```cpp auto&amp; poolMgr = gameWorld.resourceRegistry() .<a class="el" href="#a187d5dfbdb99b5a31917776688d88355" title="Registers an owning resource of arbitrary type.">registerResource&lt;GameObjectPoolManager&gt;()</a>; auto&amp; spawnMgr = gameWorld.resourceRegistry() .<a class="el" href="#a187d5dfbdb99b5a31917776688d88355" title="Registers an owning resource of arbitrary type.">registerResource&lt;SpawnManager&gt;()</a>;</p>
@@ -579,7 +579,7 @@ EntityManager::create </dd></dl>
 </div><div class="memdoc">
 
 <p>Flushes all registered Managers. </p>
-<p>Iterates over all Managers in registration order and invokes `flush(updateContext)` on each. Called by the GameLoop at commit points after the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Abstract base for command buffers that collect and flush commands.">CommandBuffer</a> has been flushed.</p>
+<p>Iterates over all Managers in registration order and invokes `flush(updateContext)` on each. Called by the GameLoop at commit points after the CommandBuffer has been flushed.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">updateContext</td><td>The current frame's update context. </td></tr>
@@ -881,11 +881,11 @@ requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1runti
 </table>
 </div><div class="memdoc">
 
-<p>Registers a non-owning <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler.html" title="Abstract base for type-erased command handler storage.">CommandHandler</a> reference. </p>
+<p>Registers a non-owning CommandHandler reference. </p>
 <p>The handler must outlive the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html" title="Central game state container for entities, resources, and the active level.">GameWorld</a> (typically guaranteed because the handler is a <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html" title="Abstract base class for managers that process deferred operations.">Manager</a> already owned by the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html" title="Type-indexed registry for engine resources with O(1) lookup.">ResourceRegistry</a>).</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td>The <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler.html" title="Abstract base for type-erased command handler storage.">CommandHandler</a> type. Must derive from <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler.html" title="Abstract base for type-erased command handler storage.">CommandHandler</a>.</td></tr>
+    <tr><td class="paramname">T</td><td>The CommandHandler type. Must derive from CommandHandler.</td></tr>
   </table>
   </dd>
 </dl>
@@ -902,7 +902,7 @@ requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1runti
 
 <p class="reference">References <a class="el" href="GameWorld_8ixx_source.html#l00154">resourceRegistry_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="WorldLifecycleManager_8ixx_source.html#l00074">helios::engine::mechanics::lifecycle::WorldLifecycleManager::init()</a>, <a class="el" href="ScorePoolManager_8ixx_source.html#l00157">helios::engine::mechanics::scoring::ScorePoolManager::init()</a>, <a class="el" href="UiActionCommandManager_8ixx_source.html#l00123">helios::engine::modules::ui::UiActionCommandManager::init()</a>, and <a class="el" href="StateManager_8ixx_source.html#l00240">helios::engine::state::StateManager&lt; types::GameState &gt;::init()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="WorldLifecycleManager_8ixx_source.html#l00074">helios::engine::mechanics::lifecycle::WorldLifecycleManager::init()</a>, <a class="el" href="ScorePoolManager_8ixx_source.html#l00157">helios::engine::mechanics::scoring::ScorePoolManager::init()</a>, <a class="el" href="UiActionCommandManager_8ixx_source.html#l00122">helios::engine::modules::ui::UiActionCommandManager::init()</a>, and <a class="el" href="StateManager_8ixx_source.html#l00240">helios::engine::state::StateManager&lt; types::GameState &gt;::init()</a>.</p>
 <div id="dynsection-11" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-11-summary" class="dynsummary" style="display:block;">
 </div>

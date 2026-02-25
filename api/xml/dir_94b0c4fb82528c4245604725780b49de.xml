@@ -120,7 +120,7 @@
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal">gameStateManager-&gt;addStateListener(</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>std::make_unique&lt;LambdaStateListener&lt;GameState&gt;&gt;(</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[](</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>ctx,<sp/><ref refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80be" kindref="member">GameState</ref><sp/>from)<sp/>{<sp/></highlight><highlight class="comment">/*<sp/>onExit<sp/>*/</highlight><highlight class="normal"><sp/>},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[](</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>ctx,<sp/>GameState<sp/>from)<sp/>{<sp/></highlight><highlight class="comment">/*<sp/>onExit<sp/>*/</highlight><highlight class="normal"><sp/>},</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[](</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>ctx,<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>transitionCtx)<sp/>{<sp/></highlight><highlight class="comment">/*<sp/>onTransition<sp/>*/</highlight><highlight class="normal"><sp/>},</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[](</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>ctx,<sp/><ref refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80be" kindref="member">GameState</ref><sp/>to)<sp/>{<sp/></highlight><highlight class="comment">/*<sp/>onEnter<sp/>*/</highlight><highlight class="normal"><sp/>}</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>)</highlight></codeline>
@@ -130,7 +130,7 @@
 </programlisting></para>
 </sect2>
 <sect2 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md727">
-<title>Requesting Transitions</title><para><programlisting filename=".cpp"><codeline><highlight class="normal">updateContext.commandBuffer().add&lt;<ref refid="classhelios_1_1engine_1_1state_1_1commands_1_1StateCommand" kindref="compound">StateCommand&lt;GameState&gt;</ref>&gt;(</highlight></codeline>
+<title>Requesting Transitions</title><para><programlisting filename=".cpp"><codeline><highlight class="normal">updateContext.commandBuffer().add&lt;StateCommand&lt;GameState&gt;&gt;(</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1engine_1_1state_1_1types_1_1StateTransitionRequest" kindref="compound">StateTransitionRequest&lt;GameState&gt;</ref>{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GameState::Running,</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GameStateTransitionId::Pause</highlight></codeline>

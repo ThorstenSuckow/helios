@@ -116,7 +116,7 @@
 <para>Interface for handlers that process spawn and despawn commands. </para>
     </briefdescription>
     <detaileddescription>
-<para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler" kindref="compound">SpawnCommandHandler</ref> defines the contract for managers that handle entity lifecycle operations for GameObjectPools. Each handler is registered with a <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId" kindref="compound">SpawnProfileId</ref> via `GameWorld::registerSpawnCommandHandler()`.</para>
+<para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler" kindref="compound">SpawnCommandHandler</ref> defines the contract for managers that handle entity lifecycle operations for GameObjectPools. Each handler is registered with a SpawnProfileId via `GameWorld::registerSpawnCommandHandler()`.</para>
 <para>When a pooled entity needs to spawn or despawn, the appropriate handler is looked up by profile ID and receives the command for deferred processing.</para>
 <para>## Command Types</para>
 <para><itemizedlist>
@@ -126,13 +126,13 @@
 </listitem></itemizedlist>
 </para>
 <para>## Implementation Notes</para>
-<para>Handlers typically also implement the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> interface to receive flush() calls for deferred command processing during the manager flush phase.</para>
-<para>Example: ```cpp class MyPoolManager : public <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref>, public <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler" kindref="compound">SpawnCommandHandler</ref> { bool <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler_1a93568a4d9d3f1e1fb63e9b8febb5bd4a" kindref="member">submit(const SpawnCommand&amp; cmd)</ref> noexcept override { spawnQueue_.push(cmd); return true; } bool <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler_1ac7719f245fd62da47761b10c9d947033" kindref="member">submit(const DespawnCommand&amp; cmd)</ref> noexcept override { despawnQueue_.push(cmd); return true; } bool <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler_1a0e17a21616e4d27710ecbfca3e48baef" kindref="member">submit(const ScheduledSpawnPlanCommand&amp; cmd)</ref> noexcept override { planQueue_.push(cmd); return true; } void flush(GameWorld&amp; world, UpdateContext&amp; ctx) noexcept override { // Process queued commands } }; ```</para>
-<para><simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1SpawnCommand" kindref="compound">SpawnCommand</ref> </para>
+<para>Handlers typically also implement the Manager interface to receive flush() calls for deferred command processing during the manager flush phase.</para>
+<para>Example: ```cpp class MyPoolManager : public Manager, public <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler" kindref="compound">SpawnCommandHandler</ref> { bool submit(const SpawnCommand&amp; cmd) noexcept override { spawnQueue_.push(cmd); return true; } bool submit(const DespawnCommand&amp; cmd) noexcept override { despawnQueue_.push(cmd); return true; } bool submit(const ScheduledSpawnPlanCommand&amp; cmd) noexcept override { planQueue_.push(cmd); return true; } void flush(GameWorld&amp; world, UpdateContext&amp; ctx) noexcept override { // Process queued commands } }; ```</para>
+<para><simplesect kind="see"><para>SpawnCommand </para>
 </simplesect>
-<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1DespawnCommand" kindref="compound">DespawnCommand</ref> </para>
+<simplesect kind="see"><para>DespawnCommand </para>
 </simplesect>
-<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand" kindref="compound">ScheduledSpawnPlanCommand</ref> </para>
+<simplesect kind="see"><para>ScheduledSpawnPlanCommand </para>
 </simplesect>
 <simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" kindref="compound">SpawnManager</ref> </para>
 </simplesect>

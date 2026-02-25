@@ -388,7 +388,7 @@
           <declname>gameWorld</declname>
         </param>
         <briefdescription>
-<para>Initializes the manager and registers with <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref>. </para>
+<para>Initializes the manager and registers with GameWorld. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -427,9 +427,9 @@
 <para>Manages state transitions using a rule-based system. </para>
     </briefdescription>
     <detaileddescription>
-<para>Implements both <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> and <ref refid="classhelios_1_1engine_1_1state_1_1TypedStateCommandHandler" kindref="compound">TypedStateCommandHandler</ref> interfaces. Processes state transition commands by matching against registered rules, executing guards, and notifying listeners.</para>
+<para>Implements both Manager and <ref refid="classhelios_1_1engine_1_1state_1_1TypedStateCommandHandler" kindref="compound">TypedStateCommandHandler</ref> interfaces. Processes state transition commands by matching against registered rules, executing guards, and notifying listeners.</para>
 <para>## Transition Flow</para>
-<para>1. Commands are submitted via <ref refid="classhelios_1_1engine_1_1state_1_1StateManager_1a053488fdbe36259adf10bd51474677a6" kindref="member">submit()</ref> and queued 2. During <ref refid="classhelios_1_1engine_1_1state_1_1StateManager_1a7b16869a9d0d8b511b76ac568339fea1" kindref="member">flush()</ref>, the last pending command is processed 3. Rules are checked to find a matching transition 4. If a guard is present, it must return true 5. Listeners are notified: onStateExit -&gt; onStateTransition -&gt; onStateEnter 6. <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session" kindref="compound">Session</ref> state is updated</para>
+<para>1. Commands are submitted via <ref refid="classhelios_1_1engine_1_1state_1_1StateManager_1a053488fdbe36259adf10bd51474677a6" kindref="member">submit()</ref> and queued 2. During <ref refid="classhelios_1_1engine_1_1state_1_1StateManager_1a7b16869a9d0d8b511b76ac568339fea1" kindref="member">flush()</ref>, the last pending command is processed 3. Rules are checked to find a matching transition 4. If a guard is present, it must return true 5. Listeners are notified: onStateExit -&gt; onStateTransition -&gt; onStateEnter 6. Session state is updated</para>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
 <parametername>StateType</parametername>

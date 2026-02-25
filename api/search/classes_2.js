@@ -20,7 +20,7 @@ var searchData=
   ['combatconfig_17',['CombatConfig',['../classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1CombatConfig.html',1,'helios::engine::builder::gameObject::builders::configs']]],
   ['combatscoringsystem_18',['CombatScoringSystem',['../classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1CombatScoringSystem.html',1,'helios::engine::mechanics::scoring::systems']]],
   ['combinedstatetoidmappair_19',['CombinedStateToIdMapPair',['../classhelios_1_1engine_1_1state_1_1CombinedStateToIdMapPair.html',1,'helios::engine::state']]],
-  ['combinedstatetoidmappair_3c_20statelft_2c_20statergt_2c_20helios_3a_3acore_3a_3adata_3a_3astrongid_3c_20menuidtag_2c_20uint32_5ft_20_3e_20_3e_20',['CombinedStateToIdMapPair&lt; StateLft, StateRgt, helios::core::data::StrongId&lt; MenuIdTag, uint32_t &gt; &gt;',['../classhelios_1_1engine_1_1state_1_1CombinedStateToIdMapPair.html',1,'helios::engine::state']]],
+  ['combinedstatetoidmappair_3c_20statelft_2c_20statergt_2c_20menuid_20_3e_20',['CombinedStateToIdMapPair&lt; StateLft, StateRgt, MenuId &gt;',['../classhelios_1_1engine_1_1state_1_1CombinedStateToIdMapPair.html',1,'helios::engine::state']]],
   ['commandbuffer_21',['CommandBuffer',['../classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html',1,'helios::engine::runtime::messaging::command']]],
   ['commandhandler_22',['CommandHandler',['../classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler.html',1,'helios::engine::runtime::messaging::command']]],
   ['commandtypeid_23',['CommandTypeId',['../classhelios_1_1engine_1_1core_1_1data_1_1CommandTypeId.html',1,'helios::engine::core::data']]],

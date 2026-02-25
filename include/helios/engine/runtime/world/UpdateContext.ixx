@@ -24,7 +24,6 @@ import helios.engine.ecs.EntityHandle;
 export namespace helios::engine::runtime::messaging::command  {
     class EngineCommandBuffer;
 }
-;
 
 export namespace helios::engine::runtime::world {
 
@@ -164,6 +163,7 @@ export namespace helios::engine::runtime::world {
          * @param entityResolver Callable for resolving EntityHandles to GameObjects.
          * @param session Reference to the current game session.
          * @param deltaTime Time since last frame in seconds.
+         * @param totalTime Accumulated time since the first frame in seconds.
          * @param phaseEventBus Reference to the phase-level event bus.
          * @param passEventBus Reference to the pass-level event bus.
          * @param frameEventBus Reference to the frame-level event bus.
@@ -176,6 +176,7 @@ export namespace helios::engine::runtime::world {
             helios::engine::ecs::EntityResolver entityResolver,
             helios::engine::runtime::world::Session& session,
             const float deltaTime,
+            const float totalTime,
             helios::engine::runtime::messaging::event::GameLoopEventBus& phaseEventBus,
             helios::engine::runtime::messaging::event::GameLoopEventBus& passEventBus,
             helios::engine::runtime::messaging::event::GameLoopEventBus& frameEventBus,
@@ -187,7 +188,7 @@ export namespace helios::engine::runtime::world {
         entityResolver_(entityResolver),
         session_(session),
         deltaTime_(deltaTime),
-        totalTime_(totalTime_ + deltaTime),
+        totalTime_(totalTime),
         phaseEventSink_(phaseEventBus.writeSink()),
         phaseEventSource_(phaseEventBus.readSource()),
         passEventSink_(passEventBus.writeSink()),

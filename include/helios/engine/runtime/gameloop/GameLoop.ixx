@@ -165,6 +165,11 @@ export namespace helios::engine::runtime::gameloop {
          */
         helios::engine::runtime::messaging::event::GameLoopEventBus frameEventBus_{};
 
+        /**
+         * @brief Accumulated total time since the first frame, in seconds.
+         */
+        float totalTime_ = 0.0f;
+
 
         /**
          * @brief Commits pass-level state based on the specified CommitPoint flags.
@@ -200,7 +205,9 @@ export namespace helios::engine::runtime::gameloop {
 
             // commands must be executed before Managers
             if ((commitPoint & CommitPoint::FlushCommands) == CommitPoint::FlushCommands) {
-                updateContext.commandBuffer().flush(updateContext);
+                for (auto& cb : updateContext.resourceRegistry().commandBuffers()) {
+                    cb->flush(updateContext);
+                }
             }
 
             if ((commitPoint & CommitPoint::FlushManagers) == CommitPoint::FlushManagers) {
@@ -232,8 +239,10 @@ export namespace helios::engine::runtime::gameloop {
             phaseEventBus_.swapBuffers();
             passEventBus_.clearAll();
 
-            // command buffer generates request for managers, so this comes first
-            updateContext.commandBuffer().flush(updateContext);
+            // command buffers generate requests for managers, so this comes first
+            for (auto& cb : updateContext.resourceRegistry().commandBuffers()) {
+                cb->flush(updateContext);
+            }
 
             // managers process requests
             gameWorld.flushManagers(updateContext);
@@ -361,11 +370,14 @@ export namespace helios::engine::runtime::gameloop {
 
             assert(initialized_ && "GameLoop not initialized");
 
+            totalTime_ += deltaTime;
+
             auto updateContext = helios::engine::runtime::world::UpdateContext(
                   gameWorld.resourceRegistry(),
                   helios::engine::ecs::EntityResolver(&gameWorld.entityManager()),
                   gameWorld.session(),
                   deltaTime,
+                  totalTime_,
                   phaseEventBus_,
                   passEventBus_,
                   frameEventBus_,

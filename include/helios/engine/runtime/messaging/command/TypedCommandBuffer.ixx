@@ -19,9 +19,9 @@ import helios.engine.runtime.world.UpdateContext;
 import helios.engine.runtime.messaging.command.CommandBuffer;
 import helios.engine.runtime.messaging.command.TypedCommandHandler;
 
-export namespace helios::engine::runtime::messaging::command {
+using namespace helios::engine::runtime::world;
 
-    using namespace helios::engine::runtime::world;
+export namespace helios::engine::runtime::messaging::command {
 
     /**
      * @brief Concept constraining commands that can self-execute.

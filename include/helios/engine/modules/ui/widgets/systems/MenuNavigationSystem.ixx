@@ -36,16 +36,16 @@ import helios.engine.ecs.components.HierarchyComponent;
 
 import helios.engine.modules.rendering.model.components.ModelAabbComponent;
 
-export namespace helios::engine::modules::ui::widgets::systems {
+using namespace helios::input::types;
+using namespace helios::engine::ecs::components;
+using namespace helios::engine::core::data;
+using namespace helios::engine::ecs;
+using namespace helios::engine::runtime::world;
+using namespace helios::engine::modules::ui::widgets::components;
+using namespace helios::engine::mechanics::lifecycle::components;
+using namespace helios::input::gamepad;
 
-    using namespace helios::input::types;
-    using namespace helios::engine::ecs::components;
-    using namespace helios::engine::core::data;
-    using namespace helios::engine::ecs;
-    using namespace helios::engine::runtime::world;
-    using namespace helios::engine::modules::ui::widgets::components;
-    using namespace helios::engine::mechanics::lifecycle::components;
-    using namespace helios::input::gamepad;
+export namespace helios::engine::modules::ui::widgets::systems {
 
     /**
      * @brief Handles gamepad input for menu navigation.

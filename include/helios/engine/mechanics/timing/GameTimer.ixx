@@ -10,10 +10,10 @@ import helios.engine.core.data;
 
 import helios.engine.mechanics.timing.types;
 
-export namespace helios::engine::mechanics::timing {
+using namespace helios::engine::core::data;
+using namespace helios::engine::mechanics::timing::types;
 
-    using namespace helios::engine::core::data;
-    using namespace helios::engine::mechanics::timing::types;
+export namespace helios::engine::mechanics::timing {
 
     /**
      * @brief A game timer identified by a GameTimerId.

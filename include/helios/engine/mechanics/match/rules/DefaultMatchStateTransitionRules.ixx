@@ -14,12 +14,11 @@ import helios.engine.state.types;
 import helios.engine.mechanics.match.types;
 import helios.engine.mechanics.match.rules.guards;
 
+using namespace helios::engine::state::types;
+using namespace helios::engine::mechanics::match::types;
+using namespace helios::engine::mechanics::match::rules::guards;
 
 export namespace helios::engine::mechanics::match::rules {
-
-    using namespace helios::engine::state::types;
-    using namespace helios::engine::mechanics::match::types;
-    using namespace helios::engine::mechanics::match::rules::guards;
 
     /**
      * @brief Provides the default set of match state transition rules.

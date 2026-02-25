@@ -35,11 +35,11 @@ import helios.engine.runtime.world.Session;
 import helios.core.types;
 import helios.util.Guid;
 
-export namespace helios::engine::state {
+using namespace helios::engine::state::types;
+using namespace helios::engine::state::commands;
+using namespace helios::engine::runtime::messaging::command;
 
-    using namespace helios::engine::state::types;
-    using namespace helios::engine::state::commands;
-    using namespace helios::engine::runtime::messaging::command;
+export namespace helios::engine::state {
 
 
     /**

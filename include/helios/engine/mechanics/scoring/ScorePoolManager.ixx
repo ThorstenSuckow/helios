@@ -31,10 +31,10 @@ import helios.engine.runtime.pooling.GameObjectPool;
 import helios.core.types;
 import helios.util.Guid;
 
-export namespace helios::engine::mechanics::scoring {
+using namespace helios::engine::mechanics::scoring::commands;
+using namespace helios::engine::runtime::messaging::command;
 
-    using namespace helios::engine::mechanics::scoring::commands;
-    using namespace helios::engine::runtime::messaging::command;
+export namespace helios::engine::mechanics::scoring {
 
     /**
      * @brief Manages score pools and processes score commands.

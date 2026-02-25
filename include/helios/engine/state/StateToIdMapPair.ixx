@@ -22,11 +22,11 @@ import helios.engine.mechanics.match.types;
 import helios.engine.core.data.ViewportId;
 import helios.core.types;
 
-export namespace helios::engine::state {
+using namespace helios::engine::core::data;
+using namespace helios::engine::state::types;
+using namespace helios::engine::mechanics::match::types;
 
-    using namespace helios::engine::core::data;
-    using namespace helios::engine::state::types;
-    using namespace helios::engine::mechanics::match::types;
+export namespace helios::engine::state {
 
     /**
      * @brief Combines two StateToIdMap instances for dual-state lookups.

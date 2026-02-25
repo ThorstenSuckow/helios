@@ -14,6 +14,8 @@ import helios.examples.scoring.IdConfig;
 
 import helios.engine.mechanics.timing;
 
+using namespace helios::engine::mechanics::timing::types;
+
 export namespace helios::examples::scoring {
 
     inline void configureTimer(

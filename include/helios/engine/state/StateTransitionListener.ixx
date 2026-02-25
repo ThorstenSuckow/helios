@@ -11,10 +11,9 @@ import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.state.types;
 
+using namespace helios::engine::state::types;
 
 export namespace helios::engine::state {
-
-    using namespace helios::engine::state::types;
 
     /**
      * @brief Interface for observing state transitions.

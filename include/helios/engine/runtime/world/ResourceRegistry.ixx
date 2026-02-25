@@ -22,14 +22,11 @@ import helios.engine.runtime.messaging.command.CommandBuffer;
 
 import helios.engine.core.data.ResourceTypeId;
 
+using namespace helios::engine::runtime::messaging::command;
+using namespace helios::engine::core::data;
+using namespace helios::core::memory;
 
 export namespace helios::engine::runtime::world {
-
-
-
-    using namespace helios::engine::runtime::messaging::command;
-    using namespace helios::engine::core::data;
-    using namespace helios::core::memory;
 
     /**
      * @brief Concept constraining types that derive from Manager.

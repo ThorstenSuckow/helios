@@ -20,11 +20,9 @@ import helios.engine.runtime.world.GameWorld;
 import helios.engine.mechanics.lifecycle.components.Active;
 import helios.engine.mechanics.timing.components;
 
-
+using namespace helios::engine::mechanics::timing;
 
 export namespace helios::engine::mechanics::timing::systems {
-
-    using namespace helios::engine::mechanics::timing;
 
     /**
      * @brief Updates all game timers managed by the TimerManager.

@@ -15,10 +15,9 @@ import helios.input.types.Gamepad;
 import helios.engine.ecs;
 import helios.engine.runtime;
 
+using namespace helios::input::types;
 
 export namespace helios::engine::mechanics::match::systems {
-
-    using namespace helios::input::types;
 
     /**
      * @brief Evaluates match rules and conditions.

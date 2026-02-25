@@ -7,7 +7,7 @@ Generic, template-based state management system with rule-based transitions.
 This module provides a complete state management framework including:
 
 - **State machines** with rule-based transitions and guards
-- **Commands and dispatchers** for requesting state changes
+- **Commands** for requesting state changes via the TypedCommandBuffer
 - **Listeners** for reacting to state transitions
 - **ID mapping utilities** for associating states with viewports/menus
 
@@ -24,7 +24,6 @@ All components are parameterized by state type, enabling reuse for different sta
 | `StateTransitionListener<StateType>` | Interface for transition observers |
 | `LambdaStateListener<StateType>` | Lambda-based listener implementation |
 | `StateCommand<StateType>` | Command for requesting transitions |
-| `StateCommandDispatcher<StateType>` | Routes commands to handlers |
 | `StateComponent<StateType>` | Stores current state on entities |
 | `Bindings` | Compile-time specializations mapping state types to transition ID types |
 
@@ -96,8 +95,8 @@ updateContext.commandBuffer().add<StateCommand<GameState>>(
 
 ## Transition Flow
 
-1. `StateCommand` is submitted to the command buffer
-2. `StateCommandDispatcher` routes it to `StateManager`
+1. `StateCommand` is submitted to the EngineCommandBuffer
+2. `TypedCommandHandler<StateCommand<T>>` routes it to `StateManager`
 3. `StateManager::flush()` processes pending commands
 4. Matching rule is found and guard is evaluated
 5. Listeners are notified: `onStateExit` → `onStateTransition` → `onStateEnter`

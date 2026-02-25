@@ -61,8 +61,8 @@ struct StateCommand {
 
 ```cpp
 // Systems add commands via UpdateContext
-ctx.commandBuffer().add<Move2DCommand>(direction, speed);
-ctx.commandBuffer().add<DespawnCommand>(profileId, entityHandle);
+ctx.commandBuffer().add<Move2DCommand>(entityHandle, direction, speed);
+ctx.commandBuffer().add<DespawnCommand>(entityHandle, profileId);
 ```
 
 ### Flush Routing

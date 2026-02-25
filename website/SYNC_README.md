@@ -22,6 +22,7 @@ The following files are **automatically copied** from the repository during the 
 | `docs/core-concepts/component-system.md` | `docs/core-concepts/component-system.md` | Composition-based entity design |
 | `docs/core-concepts/gameloop-architecture.md` | `docs/core-concepts/gameloop-architecture.md` | Game loop phases and passes |
 | `docs/core-concepts/command-system.md` | `docs/core-concepts/command-system.md` | Command pattern, dispatchers, managers |
+| `docs/core-concepts/resource-registry.md` | `docs/core-concepts/resource-registry.md` | Type-indexed resource registry |
 | `docs/core-concepts/event-system.md` | `docs/core-concepts/event-system.md` | Phase/pass event propagation |
 | `docs/core-concepts/spawn-system.md` | `docs/core-concepts/spawn-system.md` | Spawn scheduling and profiles |
 | `docs/core-concepts/object-pooling.md` | `docs/core-concepts/object-pooling.md` | Entity pooling system |

@@ -8,13 +8,12 @@ export module helios.engine.mechanics.gamestate.systems.GameFlowSystem;
 
 import helios.engine.mechanics.gamestate.types;
 
-import helios.engine.mechanics.gamestate.types.GameState;
-import helios.engine.mechanics.gamestate.types.GameStateTransitionId;
+import helios.engine.state.Bindings;
+import helios.engine.runtime.messaging.command.EngineCommandBuffer;
 
-import helios.engine.state.commands.StateCommand;
+import helios.engine.state.commands;
 import helios.engine.state.types.StateTransitionRequest;
 
-import helios.engine.state.types;
 import helios.engine.mechanics.gamestate.types;
 
 import helios.engine.ecs;

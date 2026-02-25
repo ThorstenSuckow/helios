@@ -9,8 +9,6 @@ module;
 
 export module helios.engine.mechanics.timing.commands.TimerControlCommand;
 
-import helios.engine.runtime.messaging.command.WorldCommandDispatcher;
-import helios.engine.runtime.messaging.command.WorldCommand;
 
 import helios.engine.mechanics.timing.types;
 
@@ -27,7 +25,7 @@ export namespace helios::engine::mechanics::timing::commands {
      * @see helios::engine::mechanics::timing::types::TimerControlContext
      * @see helios::engine::mechanics::timing::TimerCommandDispatcher
      */
-    class TimerControlCommand : public helios::engine::runtime::messaging::command::WorldCommand {
+    class TimerControlCommand  {
 
         /**
          * @brief The timer control context describing the requested state transition.
@@ -45,16 +43,6 @@ export namespace helios::engine::mechanics::timing::commands {
             helios::engine::mechanics::timing::types::TimerControlContext timerContext
         ) : timerContext_(std::move(timerContext)) { }
 
-        /**
-         * @brief Direct execution is not supported for this command.
-         *
-         * @param gameWorld The game world (unused).
-         *
-         * @note Always asserts. Use accept() for proper dispatch.
-         */
-        virtual void execute(helios::engine::runtime::world::GameWorld& gameWorld) const noexcept {
-            assert(false && "Unexpected execute() on TimerControlCommand");
-        }
 
         /**
          * @brief Returns the timer control context.
@@ -65,15 +53,6 @@ export namespace helios::engine::mechanics::timing::commands {
             return timerContext_;
         }
 
-        /**
-         * @copydoc WorldCommand::accept()
-         */
-        virtual void accept(
-            helios::engine::runtime::world::GameWorld& gameWorld,
-            helios::engine::runtime::messaging::command::WorldCommandDispatcher& dispatcher) const noexcept {
-
-            dispatcher.dispatch(gameWorld, *this);
-        }
 
     };
 

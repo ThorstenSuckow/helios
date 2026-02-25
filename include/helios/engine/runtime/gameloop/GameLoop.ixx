@@ -17,13 +17,20 @@ import helios.engine.runtime.world.UpdateContext;
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
 
-import helios.engine.runtime.messaging.command.CommandBuffer;
+import helios.engine.state.Bindings;
+import helios.engine.runtime.messaging.command.EngineCommandBuffer;
+
 import helios.engine.runtime.messaging.event.GameLoopEventBus;
+
+import helios.engine.state.Bindings;
+
+import helios.engine.mechanics.gamestate.types;
+import helios.engine.mechanics.match.types;
 
 import helios.engine.runtime.gameloop.CommitPoint;
 import helios.engine.runtime.gameloop.Phase;
 
-import helios.engine.mechanics.gamestate.types;
+import helios.engine.runtime.world.Manager;
 
 import helios.input.InputSnapshot;
 import helios.rendering.ViewportSnapshot;
@@ -45,11 +52,13 @@ export namespace helios::engine::runtime::gameloop {
      *
      * The GameLoop owns:
      * - **Three phases** (Pre, Main, Post), each containing passes with registered systems.
-     * - **A CommandBuffer** for deferred command execution.
      * - **Three event buses** for different propagation scopes:
      *   - `phaseEventBus_`: Events readable in the next phase.
      *   - `passEventBus_`: Events readable in subsequent passes (within the same phase).
      *   - `frameEventBus_`: Events readable in the next frame.
+     *
+     * The EngineCommandBuffer and Managers are owned by the GameWorld's
+     * ResourceRegistry and accessed via UpdateContext during commit points.
      *
      * ## Commit Points
      *
@@ -74,7 +83,8 @@ export namespace helios::engine::runtime::gameloop {
      * @see Phase
      * @see Pass
      * @see CommitPoint
-     * @see CommandBuffer
+     * @see ResourceRegistry
+     * @see EngineCommandBuffer
      * @see PassCommitListener
      */
     class GameLoop : public helios::engine::runtime::gameloop::PassCommitListener {
@@ -113,10 +123,6 @@ export namespace helios::engine::runtime::gameloop {
          */
         helios::engine::runtime::gameloop::Phase postPhase_{*this};
 
-        /**
-         * @brief Buffer for deferred command execution.
-         */
-        helios::engine::runtime::messaging::command::CommandBuffer commandBuffer_{};
 
         /**
          * @brief Event bus for phase-level event propagation.
@@ -159,6 +165,11 @@ export namespace helios::engine::runtime::gameloop {
          */
         helios::engine::runtime::messaging::event::GameLoopEventBus frameEventBus_{};
 
+        /**
+         * @brief Accumulated total time since the first frame, in seconds.
+         */
+        float totalTime_ = 0.0f;
+
 
         /**
          * @brief Commits pass-level state based on the specified CommitPoint flags.
@@ -194,11 +205,15 @@ export namespace helios::engine::runtime::gameloop {
 
             // commands must be executed before Managers
             if ((commitPoint & CommitPoint::FlushCommands) == CommitPoint::FlushCommands) {
-                commandBuffer_.flush(updateContext.gameWorld());
+                for (auto& cb : updateContext.resourceRegistry().commandBuffers()) {
+                    cb->flush(updateContext);
+                }
             }
 
             if ((commitPoint & CommitPoint::FlushManagers) == CommitPoint::FlushManagers) {
-                updateContext.gameWorld().flushManagers(updateContext);
+                for (auto& mgr : updateContext.resourceRegistry().managers()) {
+                    mgr->flush(updateContext);
+                }
             }
 
         }
@@ -224,8 +239,10 @@ export namespace helios::engine::runtime::gameloop {
             phaseEventBus_.swapBuffers();
             passEventBus_.clearAll();
 
-            // command buffer generates request for managers, so this comes first
-            commandBuffer_.flush(updateContext.gameWorld());
+            // command buffers generate requests for managers, so this comes first
+            for (auto& cb : updateContext.resourceRegistry().commandBuffers()) {
+                cb->flush(updateContext);
+            }
 
             // managers process requests
             gameWorld.flushManagers(updateContext);
@@ -269,14 +286,6 @@ export namespace helios::engine::runtime::gameloop {
 
         }
 
-        /**
-         * @brief Returns a reference to the command buffer.
-         *
-         * @return Reference to the CommandBuffer owned by this GameLoop.
-         */
-        [[nodiscard]] helios::engine::runtime::messaging::command::CommandBuffer& commandBuffer() noexcept {
-            return commandBuffer_;
-        }
 
         /**
          * @brief Initializes the GameLoop and all registered phases and passes.
@@ -361,16 +370,20 @@ export namespace helios::engine::runtime::gameloop {
 
             assert(initialized_ && "GameLoop not initialized");
 
+            totalTime_ += deltaTime;
+
             auto updateContext = helios::engine::runtime::world::UpdateContext(
-                  commandBuffer_,
-                  gameWorld,
+                  gameWorld.resourceRegistry(),
+                  helios::engine::ecs::EntityResolver(&gameWorld.entityManager()),
                   gameWorld.session(),
                   deltaTime,
+                  totalTime_,
                   phaseEventBus_,
                   passEventBus_,
                   frameEventBus_,
                   inputSnapshot,
-                  viewportSnapshots
+                  viewportSnapshots,
+                  gameWorld.level()
               );
 
             auto& session = gameWorld.session();

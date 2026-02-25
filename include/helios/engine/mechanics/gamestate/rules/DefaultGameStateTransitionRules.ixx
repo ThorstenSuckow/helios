@@ -8,6 +8,9 @@ module;
 
 export module helios.engine.mechanics.gamestate.rules.DefaultGameStateTransitionRules;
 
+
+import helios.engine.state.Bindings;
+
 import helios.engine.mechanics.gamestate.types;
 
 import helios.engine.state.types.StateTransitionRule;

@@ -10,12 +10,9 @@ module;
 export module helios.engine.state.commands.StateCommand;
 
 
+import helios.engine.state.Bindings;
+
 import helios.engine.state.types;
-
-
-import helios.engine.runtime.messaging.command.WorldCommand;
-import helios.engine.runtime.messaging.command.WorldCommandDispatcher;
-
 
 
 export namespace helios::engine::state::commands {
@@ -37,7 +34,7 @@ export namespace helios::engine::state::commands {
      * @see StateManager
      */
     template<typename StateType>
-    class StateCommand : public helios::engine::runtime::messaging::command::WorldCommand {
+    class StateCommand {
 
         /**
          * @brief The transition request to process.
@@ -63,31 +60,6 @@ export namespace helios::engine::state::commands {
         [[nodiscard]] types::StateTransitionRequest<StateType> transitionRequest() const noexcept {
             return transitionRequest_;
         }
-
-        /**
-         * @brief Direct execution is not supported.
-         *
-         * @details State commands must be dispatched via accept().
-         *
-         * @param gameWorld The game world (unused).
-         */
-        void execute(helios::engine::runtime::world::GameWorld& gameWorld) const noexcept override {
-            assert(false && "Unexpected execute() on StateCommand");
-        }
-
-        /**
-         * @brief Dispatches this command through the visitor.
-         *
-         * @param gameWorld The game world.
-         * @param dispatcher The command dispatcher.
-         */
-        virtual void accept(
-            helios::engine::runtime::world::GameWorld& gameWorld,
-            helios::engine::runtime::messaging::command::WorldCommandDispatcher& dispatcher) const noexcept override {
-
-            dispatcher.dispatch(gameWorld, *this);
-
-        };
 
 
     };

@@ -7,11 +7,11 @@ export module helios.engine.state;
 
 export import helios.engine.state.commands;
 export import helios.engine.state.components;
-export import helios.engine.state.dispatcher;
 export import helios.engine.state.listeners;
 export import helios.engine.state.types;
 
 
+export import helios.engine.state.Bindings;
 export import helios.engine.state.StateToIdMap;
 export import helios.engine.state.StateToIdMapPair;
 export import helios.engine.state.CombinedStateToIdMapPair;

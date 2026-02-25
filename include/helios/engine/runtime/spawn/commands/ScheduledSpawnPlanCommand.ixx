@@ -10,8 +10,7 @@ module;
 export module helios.engine.runtime.spawn.commands.ScheduledSpawnPlanCommand;
 
 import helios.engine.runtime.spawn.scheduling.ScheduledSpawnPlan;
-import helios.engine.runtime.messaging.command.WorldCommand;
-import helios.engine.runtime.messaging.command.WorldCommandDispatcher;
+
 
 import helios.engine.runtime.spawn.SpawnContext;
 import helios.engine.runtime.spawn.scheduling.SpawnPlan;
@@ -39,7 +38,7 @@ export namespace helios::engine::runtime::spawn::commands {
      * @see ScheduledSpawnPlanCommandDispatcher
      * @see SpawnManager
      */
-    class ScheduledSpawnPlanCommand : public helios::engine::runtime::messaging::command::WorldCommand {
+    class ScheduledSpawnPlanCommand {
 
         helios::engine::core::data::SpawnProfileId spawnProfileId_;
 
@@ -67,34 +66,6 @@ export namespace helios::engine::runtime::spawn::commands {
         {}
 
         /**
-         * @brief Direct execution is a no-op; dispatching is required.
-         *
-         * @details This command requires a dispatcher to route it to the
-         * SpawnManager. Direct execution does nothing.
-         *
-         * @param gameWorld The game world (unused).
-         */
-        void execute(helios::engine::runtime::world::GameWorld& gameWorld) const noexcept override {
-            assert(false && "Unexpected execute() on ScheduledSpawnPlanCommand");
-        }
-
-        /**
-         * @brief Accepts a dispatcher for command routing.
-         *
-         * @details Invokes the dispatcher's dispatch method, allowing it to
-         * handle this command type appropriately (typically routing to SpawnManager).
-         *
-         * @param gameWorld The game world.
-         * @param dispatcher The dispatcher to route this command to.
-         */
-        void accept(
-            helios::engine::runtime::world::GameWorld& gameWorld,
-            helios::engine::runtime::messaging::command::WorldCommandDispatcher& dispatcher
-        ) const noexcept override {
-            dispatcher.dispatch(gameWorld, *this);
-        }
-
-        /**
          * @brief Retrieves the spawn profile identifier associated with the command.
          *
          * @return The spawn profile identifier encapsulated within the ScheduledSpawnPlanCommand.
@@ -111,7 +82,6 @@ export namespace helios::engine::runtime::spawn::commands {
         [[nodiscard]] helios::engine::runtime::spawn::scheduling::SpawnPlan spawnPlan() const noexcept {
             return spawnPlan_;
         }
-
 
         /**
          * @brief Retrieves the spawn context associated with this instance.

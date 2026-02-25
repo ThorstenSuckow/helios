@@ -280,6 +280,7 @@ if (!entity) {
 
 ## See Also
 
+- [Resource Registry](./resource-registry.md) - GameObjectPoolManager as a registered Manager
 - [Spawn System](./spawn-system.md) - Entity spawning and despawning
 - [Command System](./command-system.md) - Command-based spawn requests
 - [Component System](./component-system.md) - CloneableComponent lifecycle

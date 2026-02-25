@@ -10,7 +10,7 @@ export module helios.engine.mechanics.match.types.MatchStateTransitionId;
 
 import helios.engine.mechanics.match.types.MatchState;
 
-import helios.engine.state.types.StateTransitionId;
+
 
 export namespace helios::engine::mechanics::match::types {
 
@@ -54,17 +54,3 @@ export namespace helios::engine::mechanics::match::types {
 
 }
 
-
-export namespace helios::engine::state::types {
-
-    /**
-     * @brief Type trait specialization for MatchState.
-     *
-     * @details Maps MatchState to its corresponding transition ID type,
-     * enabling the generic StateManager to work with MatchState.
-     */
-    template<>
-    struct StateTransitionId<helios::engine::mechanics::match::types::MatchState> {
-        using Type = helios::engine::mechanics::match::types::MatchStateTransitionId;
-    };
-}

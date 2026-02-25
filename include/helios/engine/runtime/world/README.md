@@ -1,16 +1,18 @@
 # helios::engine::runtime::world
 
-World state management and per-frame update context.
+World state management, resource registry, and per-frame update context.
 
 ## Overview
 
-This module provides the core classes for managing game state during runtime. The `GameWorld` class serves as the central registry for all GameObjects, while `UpdateContext` provides the frame context passed to systems during updates.
+This module provides the core classes for managing runtime game state. `GameWorld` is the root container owning the entity system, the `ResourceRegistry` for type-indexed O(1) resource access, the current `Level`, and the `Session`. `UpdateContext` provides the per-frame context passed to systems during updates.
 
 ## Key Classes
 
 | Class | Purpose |
 |-------|---------|
-| `GameWorld` | Central registry for GameObjects, managers, and pool access |
+| `GameWorld` | Central game state container for entities, resources, and the active level |
+| `ResourceRegistry` | Type-indexed store for Managers, CommandBuffers, and CommandHandlers with O(1) lookup |
+| `Session` | Cross-frame state tracking (game/match states, scores) |
 | `Level` | Game level with world bounds and root scene node |
 | `UpdateContext` | Per-frame context with delta time, event buses, and command buffer |
 | `SystemRegistry` | Container for System instances within a pass |
@@ -19,16 +21,24 @@ This module provides the core classes for managing game state during runtime. Th
 ## Usage
 
 ```cpp
-import helios.engine.runtime.world.GameWorld;
-import helios.engine.runtime.world.UpdateContext;
+// Create world and register resources
+helios::engine::runtime::world::GameWorld gameWorld;
+auto& poolMgr = gameWorld.resourceRegistry()
+    .registerResource<GameObjectPoolManager>();
+auto& spawnMgr = gameWorld.resourceRegistry()
+    .registerResource<SpawnManager>();
 
-// Create world and add entities
-helios::engine::runtime::world::GameWorld world;
-auto entity = std::make_unique<GameObject>();
-world.addGameObject(std::move(entity));
+gameWorld.init(); // Initializes all Managers in registration order
 
-// Query entities by component
-for (auto* obj : world.find<ComposeTransformComponent>()) {
+// Create entities
+auto player = gameWorld.addGameObject();
+player.add<TransformComponent>(position);
+player.setActive(true);
+
+// Query entities via views
+for (auto [entity, transform, active] : gameWorld.view<
+    TransformComponent, Active
+>().whereEnabled()) {
     // Process matching entities
 }
 ```
@@ -37,7 +47,7 @@ for (auto* obj : world.find<ComposeTransformComponent>()) {
 <details>
 <summary>Doxygen</summary><p>
 @namespace helios::engine::runtime::world
-@brief World state management and per-frame update context.
-@details Provides GameWorld for entity management, UpdateContext for frame state, Level for world bounds, and SystemRegistry for system organization.
+@brief World state management, resource registry, and per-frame update context.
+@details Provides GameWorld as the root game state container, ResourceRegistry for type-indexed O(1) resource access, UpdateContext for frame state, Session for cross-frame state, Level for world bounds, and SystemRegistry for system organization.
 </p></details>
 

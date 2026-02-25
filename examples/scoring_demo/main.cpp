@@ -60,6 +60,10 @@ int main() {
     // ========================================
     helios::engine::bootstrap::registerAllComponents();
 
+    auto [gameWorldPtr, gameLoopPtr] = helios::engine::bootstrap::makeGameWorld();
+    auto& gameWorld = *gameWorldPtr;
+    auto& gameLoop = *gameLoopPtr;
+
     const auto app = GLFWFactory::makeOpenGLApp(
         "helios - Scoring Demo", SCREEN_WIDTH, SCREEN_HEIGHT, ASPECT_RATIO_NUMER, ASPECT_RATIO_DENOM
     );
@@ -278,11 +282,6 @@ int main() {
     // ========================================
     // 5. GameWorld and Level Setup
     // ========================================
-    helios::engine::runtime::gameloop::GameLoop gameLoop{};
-    helios::engine::runtime::world::GameWorld gameWorld{};
-
-    gameWorld.session().trackState<helios::engine::mechanics::gamestate::types::GameState>();
-    gameWorld.session().trackState<helios::engine::mechanics::match::types::MatchState>();
 
     auto level = std::make_unique<helios::engine::runtime::world::Level>(&(scene.get()->root()));
     auto* levelPtr = level.get();
@@ -351,10 +350,10 @@ int main() {
               .hitPolicy(helios::engine::modules::physics::collision::types::HitPolicy::OneHit)
               .reportCollisions(true)
               .solidCollisionMask(helios::examples::scoring::CollisionId::Enemy)
-              .onSolidCollision(
+              /*.onSolidCollision(
                   helios::examples::scoring::CollisionId::Enemy,
                   helios::engine::modules::physics::collision::types::CollisionBehavior::Despawn
-              );
+              )*/;
 
             cb.levelBoundsCollision()
               .onCollision(helios::engine::modules::physics::collision::types::CollisionBehavior::Bounce);
@@ -436,15 +435,14 @@ int main() {
     // 7. Manager Registration
     // ========================================
 
-    auto& poolManager      = gameWorld.addManager<helios::engine::runtime::pooling::GameObjectPoolManager>();
-    auto& scorePoolManager = gameWorld.addManager<helios::engine::mechanics::scoring::ScorePoolManager>();
-    auto& timerManager = gameWorld.addManager<helios::engine::mechanics::timing::TimerManager>();
-    auto& spawnManager     = gameWorld.addManager<helios::engine::runtime::spawn::SpawnManager>();
-    auto& gameStateManager = gameWorld.addManager<helios::engine::mechanics::gamestate::GameStateManager>(
-        helios::engine::mechanics::gamestate::rules::DefaultGameStateTransitionRules::rules());
-    auto& matchStateManager = gameWorld.addManager<helios::engine::mechanics::match::MatchStateManager>(
-        helios::engine::mechanics::match::rules::DefaultMatchStateTransitionRules::rules());
-    auto& uiActionCommandManager = gameWorld.addManager<helios::engine::modules::ui::UiActionCommandManager>();
+    auto& poolManager      = gameWorld.registerManager<helios::engine::runtime::pooling::GameObjectPoolManager>();
+    auto& scorePoolManager = gameWorld.registerManager<helios::engine::mechanics::scoring::ScorePoolManager>();
+    auto& timerManager = gameWorld.registerManager<helios::engine::mechanics::timing::TimerManager>();
+    auto& spawnManager     = gameWorld.registerManager<helios::engine::runtime::spawn::SpawnManager>();
+    auto& uiActionCommandManager = gameWorld.registerManager<helios::engine::modules::ui::UiActionCommandManager>();
+
+    auto& gameStateManager = gameWorld.manager<helios::engine::mechanics::gamestate::GameStateManager>();
+    auto& matchStateManager = gameWorld.manager<helios::engine::mechanics::match::MatchStateManager>();
 
     // State listeners and UI action policies
     installMatchStateListeners(matchStateManager);
@@ -459,26 +457,7 @@ int main() {
 
     configureTimer(timerManager);
 
-    // ========================================
-    // 8. Command Dispatchers
-    // ========================================
-    gameLoop.commandBuffer().addDispatcher<helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand>(
-        std::make_unique<helios::engine::runtime::spawn::dispatcher::ScheduledSpawnPlanCommandDispatcher>()
-    ).addDispatcher<helios::engine::runtime::spawn::commands::SpawnCommand>(
-        std::make_unique<helios::engine::runtime::spawn::dispatcher::SpawnCommandDispatcher>()
-    ).addDispatcher<helios::engine::runtime::spawn::commands::DespawnCommand>(
-     std::make_unique<helios::engine::runtime::spawn::dispatcher::DespawnCommandDispatcher>()
-    ).addDispatcher<helios::engine::mechanics::scoring::commands::UpdateScoreCommand>(
-        std::make_unique<helios::engine::mechanics::scoring::ScoreCommandDispatcher>()
-    ).addDispatcher<helios::engine::state::commands::StateCommand<helios::engine::mechanics::gamestate::types::GameState>>(
-    std::make_unique<helios::engine::state::dispatcher::StateCommandDispatcher<helios::engine::mechanics::gamestate::types::GameState>>()
-    ).addDispatcher<helios::engine::state::commands::StateCommand<helios::engine::mechanics::match::types::MatchState>>(
-        std::make_unique<helios::engine::state::dispatcher::StateCommandDispatcher<helios::engine::mechanics::match::types::MatchState>>()
-    ).addDispatcher<helios::engine::modules::ui::commands::UiActionCommand>(
-        std::make_unique<helios::engine::modules::ui::commands::UiActionCommandDispatcher>()
-    ).addDispatcher<helios::engine::mechanics::timing::commands::TimerControlCommand>(
-        std::make_unique<helios::engine::mechanics::timing::TimerCommandDispatcher>()
-    );
+
 
     using namespace helios::engine::mechanics::gamestate::types;
     using namespace helios::engine::mechanics::match::types;

@@ -9,6 +9,9 @@ export module helios.engine.ecs.System;
 
 import helios.engine.ecs.Updatable;
 
+import helios.engine.runtime.world.UpdateContext;
+import helios.engine.runtime.world.GameWorld;
+
 export namespace helios::engine::ecs {
 
     class GameWorld;

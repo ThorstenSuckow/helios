@@ -15,6 +15,8 @@ import helios.engine.modules.ui.commands;
 import helios.engine.core.data;
 
 import helios.engine.modules.ui.UiActionCommandHandler;
+import helios.engine.runtime.messaging.command.TypedCommandHandler;
+import helios.engine.runtime.messaging.command.CommandHandler;
 
 import helios.engine.ecs.GameObject;
 
@@ -25,6 +27,8 @@ import helios.engine.runtime.world.GameWorld;
 
 
 export namespace helios::engine::modules::ui {
+
+    using namespace helios::engine::runtime::messaging::command;
 
     /**
      * @brief Manages and processes UI action commands with policy-based dispatch.
@@ -37,7 +41,7 @@ export namespace helios::engine::modules::ui {
      * @see UiActionCommand
      */
     class UiActionCommandManager : public helios::engine::runtime::world::Manager,
-                             public UiActionCommandHandler {
+                             public TypedCommandHandler<commands::UiActionCommand> {
 
         using ActionCallback = std::function<void(
             helios::engine::runtime::world::UpdateContext& updateContext,
@@ -65,7 +69,6 @@ export namespace helios::engine::modules::ui {
          * @param update_context The current update context.
          */
         void flush(
-            helios::engine::runtime::world::GameWorld& gameWorld,
             helios::engine::runtime::world::UpdateContext& update_context
         ) noexcept override {
 
@@ -118,7 +121,7 @@ export namespace helios::engine::modules::ui {
          * @param gameWorld The game world to register with.
          */
         void init(helios::engine::runtime::world::GameWorld& gameWorld) override {
-            gameWorld.registerUiActionCommandHandler(*this);
+            gameWorld.registerCommandHandler<TypedCommandHandler<commands::UiActionCommand>>(*this);
         }
 
     };

@@ -7,6 +7,7 @@ This module provides core data structures used for managing GameObjects within t
 ## Components
 
 - **CollisionLayer** - Strongly-typed identifier for collision layers.
+- **CommandTypeId** - Compile-time type identifier for command types.
 - **ComponentTypeId** - Compile-time type identifier for O(1) component indexing within GameObject.
 - **EntityId** - Unique identifier for an entity within an EntityPool.
 - **EntityTombstone** - Sentinel value for invalid sparse array indices.
@@ -16,6 +17,7 @@ This module provides core data structures used for managing GameObjects within t
 - **GameObjectPoolRegistry** - Central registry managing multiple pools by ID.
 - **GameObjectFilter** - Bitmask enum for filtering entities by active/inactive state and component state.
 - **GameObjectView** - Lazy range adapter for component-filtered iteration with structured binding support.
+- **ResourceTypeId** - Compile-time type identifier for engine resources (Managers, CommandBuffers).
 - **ScorePoolId** - Strongly-typed identifier for score pools.
 - **ScoreTypeId** - Strongly-typed identifier for score types.
 - **SpawnProfileId** - Strongly-typed identifier for spawn profiles.
@@ -45,7 +47,7 @@ scheduler.addRule(ENEMY_PROFILE, std::make_unique<TimerSpawnRule>(WAVE_RULE, 2.0
 
 ### Type-Based IDs (TypeIndexer)
 
-`ComponentTypeId` and `ScoreTypeId` use `TypeIndexer` to generate unique, monotonically increasing IDs for each type at compile time:
+`ComponentTypeId`, `ScoreTypeId`, `CommandTypeId`, and `ResourceTypeId` use `TypeIndexer` to generate unique, monotonically increasing IDs for each type at compile time:
 
 ```cpp
 // Get unique ID for a component type
@@ -53,6 +55,12 @@ auto typeId = ComponentTypeId::id<HealthComponent>();
 
 // Get unique ID for a score type
 auto scoreId = ScoreTypeId::id<KillScore>();
+
+// Get unique ID for a resource type (used by ResourceRegistry)
+auto resId = ResourceTypeId::id<SpawnManager>();
+
+// Get unique ID for a command type
+auto cmdId = CommandTypeId::id<DespawnCommand>();
 ```
 
 ### Entity IDs (EntityPool)

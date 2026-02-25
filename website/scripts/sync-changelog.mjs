@@ -195,7 +195,12 @@ async function main() {
     {
       src: path.join(repoRoot, 'docs', 'core-concepts', 'command-system.md'),
       dest: path.join(websiteRoot, 'docs', 'core-concepts', 'command-system.md'),
-      meta: { title: 'Command System', description: 'Command pattern implementation with CommandBuffer, Dispatchers, and Manager integration for deferred action execution.', slug: '/core-concepts/command-system', tags: ['gameplay', 'architecture', 'commands'], keywords: ['helios', 'command pattern', 'CommandBuffer', 'dispatcher', 'manager', 'deferred execution'], sidebar_label: 'Command System', sidebar_position: 5 }
+      meta: { title: 'Command System', description: 'Compile-time typed command buffering with TypedCommandHandler routing and Manager integration for deferred action execution.', slug: '/core-concepts/command-system', tags: ['gameplay', 'architecture', 'commands'], keywords: ['helios', 'command pattern', 'TypedCommandBuffer', 'TypedCommandHandler', 'EngineCommandBuffer', 'manager', 'deferred execution'], sidebar_label: 'Command System', sidebar_position: 5 }
+    },
+    {
+      src: path.join(repoRoot, 'docs', 'core-concepts', 'resource-registry.md'),
+      dest: path.join(websiteRoot, 'docs', 'core-concepts', 'resource-registry.md'),
+      meta: { title: 'Resource Registry', description: 'Type-indexed service locator with O(1) access for Managers, CommandBuffers, and CommandHandlers.', slug: '/core-concepts/resource-registry', tags: ['architecture', 'runtime'], keywords: ['helios', 'ResourceRegistry', 'ResourceTypeId', 'ErasedUnique', 'service locator', 'type-indexed', 'Manager'], sidebar_label: 'Resource Registry', sidebar_position: 6 }
     },
     {
       src: path.join(repoRoot, 'docs', 'core-concepts', 'event-system.md'),

@@ -6,8 +6,12 @@ module;
 
 export module helios.engine.modules.physics.motion.commands.Move2DCommand;
 
-import helios.engine.runtime.messaging.command.TargetedCommand;
-import helios.engine.ecs.GameObject;
+import helios.engine.ecs;
+
+import helios.engine.runtime.world.UpdateContext;
+import helios.engine.runtime.world.GameWorld;
+
+
 import helios.math.types;
 import helios.engine.modules.physics.motion.components.Move2DComponent;
 import helios.engine.modules.physics.motion.components.DirectionComponent;
@@ -28,7 +32,7 @@ export namespace helios::engine::modules::physics::motion::commands {
      * @see helios::engine::runtime::messaging::command::Command
      * @see helios::engine::modules::physics::motion::components::Move2DComponent
      */
-    class Move2DCommand : public helios::engine::runtime::messaging::command::TargetedCommand {
+    class Move2DCommand {
 
         /**
          * @brief The analog stick magnitude determining movement intensity.
@@ -40,6 +44,8 @@ export namespace helios::engine::modules::physics::motion::commands {
          */
         const helios::math::vec2f direction_;
 
+        const helios::engine::ecs::EntityHandle entityHandle_;
+
     public:
 
         /**
@@ -49,9 +55,11 @@ export namespace helios::engine::modules::physics::motion::commands {
          * @param speedFactor Magnitude of the stick input (0.0 to 1.0).
          */
         explicit Move2DCommand(
+            const helios::engine::ecs::EntityHandle entityHandle,
             const helios::math::vec2f direction,
             const float speedFactor
         ) :
+            entityHandle_(entityHandle),
             direction_(direction),
             speedFactor_(speedFactor)
         {}
@@ -61,9 +69,15 @@ export namespace helios::engine::modules::physics::motion::commands {
          *
          * @param gameObject The target entity with a Move2DComponent.
          */
-        void execute(helios::engine::ecs::GameObject gameObject) const noexcept override {
+        void execute(helios::engine::runtime::world::UpdateContext& updateContext) const noexcept {
 
-            auto* moveComponent2D = gameObject.get<helios::engine::modules::physics::motion::components::Move2DComponent>();
+            auto gameObject = updateContext.find(entityHandle_);
+
+            if (!gameObject) {
+                return;
+            }
+
+            auto* moveComponent2D = gameObject->get<helios::engine::modules::physics::motion::components::Move2DComponent>();
 
             if (moveComponent2D) {
                 moveComponent2D->move(direction_.toVec3(), speedFactor_);

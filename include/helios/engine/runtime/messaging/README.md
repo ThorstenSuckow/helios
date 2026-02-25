@@ -2,13 +2,13 @@
 
 Communication infrastructure for commands and events within the game loop.
 
-This module provides the messaging backbone for the helios engine. It includes the Command pattern implementation for buffering and executing game actions, as well as event buses for decoupled inter-system communication.
+This module provides the messaging backbone for the helios engine. It includes the compile-time typed Command system for buffering and routing game actions to handlers, as well as event buses for decoupled inter-system communication.
 
 ## Submodules
 
 | Submodule | Purpose |
 |-----------|---------|
-| `command/` | Command buffer, dispatchers, and command types |
+| `command/` | Compile-time typed command buffer, handler routing, and EngineCommandBuffer |
 | `event/` | Game loop event bus for phase/pass/frame events |
 
 ## Key Classes
@@ -17,11 +17,11 @@ This module provides the messaging backbone for the helios engine. It includes t
 
 | Class | Purpose |
 |-------|---------|
-| `CommandBuffer` | Collects commands and flushes to dispatchers |
-| `WorldCommand` | Command operating on GameWorld state |
-| `TargetedCommand` | Command targeting a specific GameObject |
-| `WorldCommandDispatcher` | Routes world commands to handlers |
-| `TargetedCommandDispatcher` | Routes targeted commands to handlers |
+| `CommandBuffer` | Abstract base for command buffers |
+| `CommandHandler` | Abstract base for type-erased handler storage |
+| `TypedCommandHandler<T>` | Type-safe handler for a specific command type |
+| `TypedCommandBuffer<...Cmds>` | Compile-time typed buffer with per-type queues |
+| `EngineCommandBuffer` | Concrete facade with all engine command types |
 
 ### Event
 
@@ -35,7 +35,7 @@ This module provides the messaging backbone for the helios engine. It includes t
 <summary>Doxygen</summary><p>
 @namespace helios::engine::runtime::messaging
 @brief Communication infrastructure for commands and events.
-@details This module provides the messaging backbone for the game loop, including command buffering for deferred action execution and event buses for inter-system communication.
+@details Provides compile-time typed command buffering with handler routing, and double-buffered event buses for decoupled inter-system communication within the game loop.
 </p></details>
 
 

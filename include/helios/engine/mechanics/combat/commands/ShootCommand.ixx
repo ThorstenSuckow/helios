@@ -6,14 +6,15 @@ module;
 
 export module helios.engine.mechanics.combat.commands.ShootCommand;
 
-import helios.engine.runtime.messaging.command.TargetedCommand;
-import helios.engine.ecs.GameObject;
+import helios.engine.ecs;
 import helios.math.types;
 import helios.engine.mechanics.combat.components.ShootComponent;
 import helios.engine.modules.physics.motion.components.Move2DComponent;
 
-import helios.engine.runtime.messaging.command.TypedTargetedCommandDispatcher;
-import helios.engine.runtime.messaging.command.TargetedCommandDispatcher;
+
+import helios.engine.runtime.world.UpdateContext;
+import helios.engine.runtime.world.GameWorld;
+
 
 export namespace helios::engine::mechanics::combat::commands {
 
@@ -48,7 +49,7 @@ export namespace helios::engine::mechanics::combat::commands {
      * @see TargetedCommand
      * @see TwinStickInputSystem
      */
-    class ShootCommand : public helios::engine::runtime::messaging::command::TargetedCommand {
+    class ShootCommand {
 
         /**
          * @brief The fire intensity factor (0.0 to 1.0).
@@ -57,6 +58,9 @@ export namespace helios::engine::mechanics::combat::commands {
          * Higher values may affect fire rate or projectile properties.
          */
         const float intensity_;
+
+
+        const helios::engine::ecs::EntityHandle entityHandle_;
 
     public:
 
@@ -67,8 +71,10 @@ export namespace helios::engine::mechanics::combat::commands {
          *                  Typically from gamepad trigger pressure.
          */
         explicit ShootCommand(
+            const helios::engine::ecs::EntityHandle entityHandle,
             float intensity
         ) :
+           entityHandle_(entityHandle),
             intensity_(intensity)
         {}
 
@@ -90,12 +96,18 @@ export namespace helios::engine::mechanics::combat::commands {
          *
          * @param gameObject The target entity with a ShootComponent.
          */
-        void execute(helios::engine::ecs::GameObject gameObject) const noexcept override {
+        void execute(helios::engine::runtime::world::UpdateContext& updateContext) const noexcept {
 
-            auto* shootComponent = gameObject.get<helios::engine::mechanics::combat::components::ShootComponent>();
+            auto gameObject = updateContext.find(entityHandle_);
+
+            if (!gameObject) {
+                return;
+            }
+
+            auto* shootComponent = gameObject->get<helios::engine::mechanics::combat::components::ShootComponent>();
 
             if (shootComponent) {
-                auto* m2d = gameObject.get<helios::engine::modules::physics::motion::components::Move2DComponent>();
+                auto* m2d = gameObject->get<helios::engine::modules::physics::motion::components::Move2DComponent>();
 
                 shootComponent->shoot(
                     intensity_,

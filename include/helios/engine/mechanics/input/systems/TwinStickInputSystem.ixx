@@ -14,7 +14,9 @@ import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.ecs.System;
 
-import helios.engine.runtime.messaging.command.CommandBuffer;
+import helios.engine.state.Bindings;
+import helios.engine.runtime.messaging.command.EngineCommandBuffer;
+
 import helios.engine.modules.physics.motion.commands.Move2DCommand;
 import helios.engine.modules.physics.motion.commands.SteeringCommand;
 import helios.engine.mechanics.combat.commands.Aim2DCommand;

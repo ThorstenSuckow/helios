@@ -6,10 +6,12 @@ module;
 
 export module helios.engine.mechanics.combat.commands.Aim2DCommand;
 
-import helios.engine.runtime.messaging.command.TargetedCommand;
-import helios.engine.ecs.GameObject;
+import helios.engine.ecs;
 import helios.math.types;
 import helios.engine.mechanics.combat.components.Aim2DComponent;
+
+import helios.engine.runtime.world.UpdateContext;
+import helios.engine.runtime.world.GameWorld;
 
 export namespace helios::engine::mechanics::combat::commands {
 
@@ -27,7 +29,7 @@ export namespace helios::engine::mechanics::combat::commands {
      * @see helios::engine::runtime::messaging::command::Command
      * @see helios::engine::mechanics::components::Aim2DComponent
      */
-    class Aim2DCommand : public helios::engine::runtime::messaging::command::TargetedCommand {
+    class Aim2DCommand {
 
         /**
          * @brief The analog stick magnitude determining fire frequency.
@@ -39,6 +41,7 @@ export namespace helios::engine::mechanics::combat::commands {
          */
         const helios::math::vec2f direction_;
 
+        const helios::engine::ecs::EntityHandle entityHandle_;
     public:
 
         /**
@@ -48,9 +51,11 @@ export namespace helios::engine::mechanics::combat::commands {
          * @param freqFactor Magnitude of the stick input (0.0 to 1.0).
          */
         explicit Aim2DCommand(
+            const helios::engine::ecs::EntityHandle entityHandle,
             const helios::math::vec2f direction,
             const float freqFactor
         ) :
+        entityHandle_(entityHandle),
             direction_(direction),
             freqFactor_(freqFactor)
         {}
@@ -61,9 +66,15 @@ export namespace helios::engine::mechanics::combat::commands {
          *
          * @param gameObject The target entity with an Aim2DComponent.
          */
-        void execute(helios::engine::ecs::GameObject gameObject) const noexcept override {
+        void execute(helios::engine::runtime::world::UpdateContext& updateContext) const noexcept {
 
-            auto* aimComponent = gameObject.get<helios::engine::mechanics::combat::components::Aim2DComponent>();
+            auto gameObject = updateContext.find(entityHandle_);
+
+            if (!gameObject) {
+                return;
+            }
+
+            auto* aimComponent = gameObject->get<helios::engine::mechanics::combat::components::Aim2DComponent>();
 
             if (aimComponent) {
                 aimComponent->aim(direction_, freqFactor_);

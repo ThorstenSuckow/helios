@@ -14,4 +14,3 @@ export import helios.engine.mechanics.timing.components;
 export import helios.engine.mechanics.timing.GameTimer;
 export import helios.engine.mechanics.timing.TimerManager;
 export import helios.engine.mechanics.timing.TimerCommandHandler;
-export import helios.engine.mechanics.timing.TimerCommandDispatcher;

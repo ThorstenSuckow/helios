@@ -156,11 +156,9 @@ int main() {
     // ========================================
     // 5. GameWorld and Level Setup
     // ========================================
-    helios::engine::runtime::gameloop::GameLoop gameLoop{};
-    helios::engine::runtime::world::GameWorld gameWorld{};
-
-    gameWorld.session().trackState<helios::engine::mechanics::gamestate::types::GameState>();
-    gameWorld.session().trackState<helios::engine::mechanics::match::types::MatchState>();
+    auto [gameWorldPtr, gameLoopPtr] = helios::engine::bootstrap::makeGameWorld();
+    auto& gameWorld = *gameWorldPtr;
+    auto& gameLoop = *gameLoopPtr;
 
     auto level = std::make_unique<helios::engine::runtime::world::Level>(&(scene.get()->root()));
     auto* levelPtr = level.get();
@@ -304,8 +302,8 @@ int main() {
     // ========================================
     // 7. Manager Registration
     // ========================================
-    auto& poolManager = gameWorld.addManager<helios::engine::runtime::pooling::GameObjectPoolManager>();
-    auto& spawnManager = gameWorld.addManager<helios::engine::runtime::spawn::SpawnManager>();
+    auto& poolManager = gameWorld.registerManager<helios::engine::runtime::pooling::GameObjectPoolManager>();
+    auto& spawnManager = gameWorld.registerManager<helios::engine::runtime::spawn::SpawnManager>();
 
     // Spawn system
     helios::engine::builder::spawnSystem::SpawnSystemFactory::configure(poolManager, spawnManager)
@@ -320,16 +318,6 @@ int main() {
                 .done()
             .commit();
 
-    // ========================================
-    // 8. Command Dispatchers
-    // ========================================
-    gameLoop.commandBuffer().addDispatcher<helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand>(
-            std::make_unique<helios::engine::runtime::spawn::dispatcher::ScheduledSpawnPlanCommandDispatcher>()
-        ).addDispatcher<helios::engine::runtime::spawn::commands::SpawnCommand>(
-            std::make_unique<helios::engine::runtime::spawn::dispatcher::SpawnCommandDispatcher>()
-        ).addDispatcher<helios::engine::runtime::spawn::commands::DespawnCommand>(
-            std::make_unique<helios::engine::runtime::spawn::dispatcher::DespawnCommandDispatcher>()
-        );
 
     using namespace helios::engine::mechanics::gamestate::types;
     using namespace helios::engine::mechanics::match::types;

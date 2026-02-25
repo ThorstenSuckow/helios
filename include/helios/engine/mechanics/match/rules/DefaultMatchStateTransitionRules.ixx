@@ -8,6 +8,8 @@ module;
 
 export module helios.engine.mechanics.match.rules.DefaultMatchStateTransitionRules;
 
+
+import helios.engine.state.Bindings;
 import helios.engine.state.types;
 import helios.engine.mechanics.match.types;
 import helios.engine.mechanics.match.rules.guards;

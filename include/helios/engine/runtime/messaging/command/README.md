@@ -1,55 +1,109 @@
 # helios::engine::runtime::messaging::command
 
-Command pattern implementation for deferred action execution.
+Compile-time typed command buffering and handler routing infrastructure.
 
-This module provides the Command pattern implementation for the helios engine. Commands encapsulate game actions that can be buffered and executed at a later point in the game loop, enabling decoupled input handling and action processing.
+## Overview
+
+This module implements the Command pattern for deferred action execution within the game loop. Commands are enqueued during system updates and flushed at defined commit points, ensuring deterministic and reproducible world mutations.
+
+The system is built around **compile-time type safety**: command types are declared as template parameters, eliminating virtual dispatch overhead for queue access and enabling the compiler to verify command routing at build time.
+
+## Architecture
+
+```
+┌──────────────────────────────────────────────────────────────────────┐
+│                     COMMAND PIPELINE                                 │
+├──────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│  SYSTEMS (producers)                                                 │
+│  ┌────────────────────────────────────────────────────────────┐      │
+│  │  ctx.commandBuffer().add<MoveCommand>(entityHandle, dir);  │      │
+│  │  ctx.commandBuffer().add<DespawnCommand>(eh, profileId);   │      │
+│  └───────────────────────────┬────────────────────────────────┘      │
+│                              │                                       │
+│                              ▼                                       │
+│  BUFFER (EngineCommandBuffer wrapping TypedCommandBuffer)            │
+│  ┌────────────────────────────────────────────────────────────┐      │
+│  │  tuple< vector<Aim2DCmd>, vector<ShootCmd>, ... >          │      │
+│  └───────────────────────────┬────────────────────────────────┘      │
+│                              │ flush()                               │
+│                              ▼                                       │
+│  ROUTING (per command type)                                          │
+│  ┌────────────────────────────────────────────────────────────┐      │
+│  │  Handler registered?                                       │      │
+│  │    YES → TypedCommandHandler<Cmd>::submit(cmd)             │      │
+│  │    NO  → cmd.execute(updateContext)  [if ExecutableCommand]│      │
+│  └───────────────────────────┬────────────────────────────────┘      │
+│                              │                                       │
+│                              ▼                                       │
+│  MANAGERS (consumers)                                                │
+│  ┌────────────────────────────────────────────────────────────┐      │
+│  │  SpawnManager, ScorePoolManager, TimerManager, ...         │      │
+│  │  → Manager::flush() processes queued requests              │      │
+│  └────────────────────────────────────────────────────────────┘      │
+│                                                                      │
+└──────────────────────────────────────────────────────────────────────┘
+```
 
 ## Key Classes
 
 | Class | Purpose |
 |-------|---------|
-| `TargetedCommand` | Abstract base for commands targeting a specific GameObject |
-| `WorldCommand` | Abstract base for commands operating on the entire GameWorld |
-| `CommandBuffer` | Queue for buffering and batch-executing commands |
-| `TargetedCommandDispatcher` | Abstract dispatcher interface for TargetedCommand handling |
-| `WorldCommandDispatcher` | Abstract dispatcher interface for WorldCommand handling |
+| `CommandBuffer` | Abstract base for command buffers |
+| `CommandHandler` | Abstract base for type-erased handler storage |
+| `TypedCommandHandler<T>` | Type-safe handler interface for a specific command type |
+| `TypedCommandBuffer<...Cmds>` | Compile-time typed buffer with per-type queues |
+| `EngineCommandBuffer` | Concrete facade pre-configured with all engine command types |
 
-## Execution Order
+## Flush Routing
 
-During `CommandBuffer::flush()`:
-1. **WorldCommands** are processed first (global actions like spawning)
-2. **TargetedCommands** are processed second (per-entity actions like movement)
+During `TypedCommandBuffer::flush()`, each command type is processed in template parameter order:
+
+1. **Handler route:** If a `TypedCommandHandler<Cmd>` is registered in the ResourceRegistry, each queued command is submitted to the handler via `submit()`.
+2. **Direct execution:** If no handler is registered and the command satisfies the `ExecutableCommand` concept (provides a noexcept `execute(UpdateContext&)` method), it is executed directly.
+3. **Assertion:** If neither condition holds, an assertion fires (misconfiguration).
 
 ## Usage
 
 ```cpp
-// 1. Create command and enqueue via UpdateContext
-auto moveCmd = std::make_unique<Move2DCommand>(
-    playerGuid,
-    helios::math::vec2f{1.0f, 0.0f},  // direction
-    1.0f  // throttle
-);
-updateContext.commandBuffer().enqueue(std::move(moveCmd));
+// Systems enqueue commands via UpdateContext
+void update(UpdateContext& ctx) noexcept override {
+    ctx.commandBuffer().add<DespawnCommand>(entityHandle, profileId);
+}
 
-// 2. Register dispatcher for command type
-auto moveDispatcher = std::make_unique<TypedTargetedCommandDispatcher<Move2DCommand>>(
-    [&](const Move2DCommand& cmd, GameObject target) {
-        auto* move = target->get<Move2DComponent>();
-        move->setDirection(cmd.direction());
-        move->setThrottle(cmd.throttle());
+// Managers implement TypedCommandHandler for commands they process
+class SpawnManager : public Manager,
+                     public TypedCommandHandler<SpawnCommand>,
+                     public TypedCommandHandler<DespawnCommand> {
+
+    bool submit(SpawnCommand cmd) noexcept override {
+        spawnQueue_.push_back(cmd);
+        return true;
     }
-);
-commandBuffer.registerDispatcher(std::move(moveDispatcher));
 
-// 3. Commands are automatically flushed at phase boundaries
+    bool submit(DespawnCommand cmd) noexcept override {
+        despawnQueue_.push_back(cmd);
+        return true;
+    }
+};
+```
+
+## Game Loop Integration
+
+Commands are flushed at each commit point in the game loop:
+
+```cpp
+// Phase commit sequence
+commandBuffer.flush(updateContext);   // Commands route to handlers
+gameWorld.flushManagers(updateContext); // Managers process queued requests
 ```
 
 ---
+
 <details>
 <summary>Doxygen</summary><p>
 @namespace helios::engine::runtime::messaging::command
-@brief Command pattern implementation for deferred action execution.
-@details Provides TargetedCommand and WorldCommand base classes for encapsulating game actions. Commands are buffered in CommandBuffer and executed during the game loop update phase. Dispatchers enable type-safe routing to specialized handlers via the Visitor pattern.
+@brief Compile-time typed command buffering and handler routing.
+@details Provides deferred command execution with type-safe queues, handler-or-execute routing, and integration with the Manager flush cycle.
 </p></details>
-
 

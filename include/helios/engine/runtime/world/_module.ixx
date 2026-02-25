@@ -10,4 +10,7 @@ export import helios.engine.runtime.world.UpdateContext;
 export import helios.engine.runtime.world.SystemRegistry;
 export import helios.engine.runtime.world.Manager;
 export import helios.engine.runtime.world.Session;
+export import helios.engine.runtime.world.ResourceRegistry;
+export import helios.engine.runtime.world.WorldLifecycleManager;
+export import helios.engine.runtime.world.commands.WorldLifecycleCommand;
 

@@ -9,6 +9,9 @@ export module helios.engine.mechanics.gamestate.systems.GameStateInputResponseSy
 
 import helios.engine.state;
 
+import helios.engine.state.Bindings;
+import helios.engine.runtime.messaging.command.EngineCommandBuffer;
+
 import helios.engine.mechanics.gamestate.types;
 
 import helios.input.types.Gamepad;
@@ -43,7 +46,7 @@ export namespace helios::engine::mechanics::gamestate::systems {
          */
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
-            auto gameState = updateContext.gameWorld().session().state<GameState>();
+            auto gameState = updateContext.session().state<GameState>();
 
             if (updateContext.inputSnapshot().gamepadState().isButtonPressed(GamepadInput::Start)) {
 

@@ -328,7 +328,6 @@ export namespace helios::engine::runtime::pooling {
          * @param update_context The current frame's update context.
          */
         void flush(
-            helios::engine::runtime::world::GameWorld& gameWorld,
             helios::engine::runtime::world::UpdateContext& update_context
         ) noexcept override {
 

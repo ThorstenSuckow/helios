@@ -59,7 +59,7 @@ export namespace helios::engine::modules::ui::binding::systems {
                     continue;
                 }
 
-                txt->setText(nfc->format(soc->totalScore()));
+                txt->setText(nfc->format<double>(soc->totalScore()));
             }
         }
 

@@ -1,6 +1,6 @@
 /**
  * @file GameWorld.ixx
- * @brief Central registry for managing game entities.
+ * @brief Central game state container for entities, resources, and the active level.
  */
 module;
 
@@ -17,18 +17,14 @@ export module helios.engine.runtime.world.GameWorld;
 
 import helios.engine.runtime.world.Session;
 
+import helios.engine.runtime.messaging.command.CommandHandler;
+import helios.engine.runtime.messaging.command.TypedCommandHandler;
+
+import helios.engine.runtime.world.ResourceRegistry;
+
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.Manager;
-import helios.engine.runtime.spawn.SpawnCommandHandler;
-
-import helios.engine.modules.ui.UiActionCommandHandler;
-
-import helios.engine.mechanics.scoring.ScoreCommandHandler;
-import helios.engine.mechanics.timing.TimerCommandHandler;
-
-import helios.engine.state.StateCommandHandler;
-import helios.engine.state.TypedStateCommandHandler;
 
 import helios.util.Guid;
 import helios.util.log.Logger;
@@ -42,8 +38,6 @@ import helios.engine.ecs.View;
 
 import helios.engine.core.data;
 
-import helios.engine.runtime.spawn.SpawnCommandHandlerRegistry;
-
 
 
 #define HELIOS_LOG_SCOPE "helios::engine::runtime::world::GameWorld"
@@ -51,75 +45,81 @@ export namespace helios::engine::runtime::world {
 
 
     /**
-     * @brief Central registry for game entities, managers, pools, and the active level.
+     * @brief Central game state container for entities, resources, and the active level.
      *
      * @details
-     * The GameWorld is the root container for the game state. It manages the lifecycle
-     * of entities via EntityRegistry/EntityManager, coordinates Managers, and holds
-     * the current Level.
+     * GameWorld is the root container for all runtime game state. It owns the
+     * EntityRegistry/EntityManager for entity lifecycle, a ResourceRegistry for
+     * type-indexed O(1) access to Managers, CommandBuffers, and CommandHandlers,
+     * a Session for cross-frame state tracking, and the current Level.
      *
      * ## Key Responsibilities
      *
-     * - **Entity Management:** Creates entities via `addGameObject()` which returns
+     * - **Entity Management:** Creates entities via `addGameObject()` returning
      *   lightweight (~16 bytes) `GameObject` wrappers. Entities are identified by
      *   versioned `EntityHandle` for stale reference detection.
-     * - **Component Queries:** Efficient iteration over entities with specific components
-     *   via `view<Components...>()` with optional filtering via `.whereEnabled()` and
-     *   `.exclude<T>()`.
-     * - **Entity Cloning:** Deep-copy entities with all components via `clone()`.
-     * - **Pool Management:** Registers and provides access to SpawnCommandHandlers for
-     *   entity recycling.
-     * - **Manager Coordination:** Holds Managers that handle cross-cutting concerns
-     *   (spawning, projectile pooling) and flushes them each frame.
-     * - **Level Management:** Holds the active Level instance with arena bounds.
+     * - **Resource Registry:** Provides `resourceRegistry()` for registering and
+     *   looking up Managers, CommandBuffers, and CommandHandlers with O(1) access.
+     * - **Component Queries:** Efficient iteration via `view<Components...>()`
+     *   with optional `.whereEnabled()` and `.exclude<T>()` filtering.
+     * - **Entity Cloning:** Deep-copies entities with all components via `clone()`.
+     * - **Manager Coordination:** Initializes, flushes, and resets Managers that
+     *   handle cross-cutting concerns (spawning, scoring, pooling).
+     * - **Session:** Holds per-run state (tracked game/match states, scores).
+     * - **Level Management:** Holds the active Level with arena bounds.
      *
      * ## Usage with GameLoop
      *
-     * The GameWorld is passed to Systems via UpdateContext. Systems query entities
-     * using views, while mutations are typically performed through Commands
-     * that are flushed by the CommandBuffer.
+     * Systems access the GameWorld via UpdateContext. Entity queries use views,
+     * while mutations are performed through Commands flushed by the
+     * EngineCommandBuffer.
      *
      * ```cpp
-     * // In a System
      * void update(UpdateContext& ctx) noexcept override {
      *     for (auto [entity, transform, velocity, active] : gameWorld_->view<
      *         TransformComponent,
      *         VelocityComponent,
      *         Active
      *     >().whereEnabled()) {
-     *         // Process entities with both components
+     *         // Process matching entities
      *     }
      * }
+     * ```
+     *
+     * ## Resource Registration
+     *
+     * ```cpp
+     * auto& poolMgr = gameWorld.resourceRegistry()
+     *     .registerResource<GameObjectPoolManager>();
+     * auto& spawnMgr = gameWorld.resourceRegistry()
+     *     .registerResource<SpawnManager>();
+     *
+     * gameWorld.init(); // Calls init() on all Managers in registration order
      * ```
      *
      * ## Entity Lifecycle
      *
      * ```cpp
-     * // Create entity
      * auto player = gameWorld.addGameObject();
-     *
-     * // Add components
      * player.add<TransformComponent>(position);
      * player.add<HealthComponent>(100.0f);
-     *
-     * // Activate
      * player.setActive(true);
      *
-     * // Find by handle
      * if (auto entity = gameWorld.find(handle)) {
      *     entity->get<HealthComponent>()->takeDamage(10.0f);
      * }
      *
-     * // Clone
      * auto clone = gameWorld.clone(player);
      * ```
      *
+     * @see ResourceRegistry
      * @see GameObject
      * @see EntityHandle
      * @see EntityManager
      * @see View
      * @see UpdateContext
      * @see Manager
+     * @see Session
      * @see Level
      */
     class GameWorld {
@@ -127,17 +127,6 @@ export namespace helios::engine::runtime::world {
 
 
     protected:
-
-
-        /**
-         * @brief Legacy storage for GameObjects indexed by Guid.
-         *
-         * @details Unused since the migration to EntityRegistry/EntityManager.
-         * Retained for backward compatibility during the transition period.
-         *
-         * @deprecated Superseded by EntityRegistry and EntityManager.
-         */
-        std::unordered_map<helios::util::Guid, std::unique_ptr<helios::engine::ecs::GameObject>> gameObjects_;
 
 
         /**
@@ -149,60 +138,21 @@ export namespace helios::engine::runtime::world {
             HELIOS_LOG_SCOPE);
 
         /**
-         * @brief Collection of registered Manager instances.
-         *
-         * @details Managers handle cross-cutting concerns such as object pooling,
-         * spawn management, and projectile lifecycle. They are initialized via init()
-         * and flushed each frame via flushManagers().
-         */
-        std::vector<std::unique_ptr<helios::engine::runtime::world::Manager>> managers_;
-
-        /**
          * @brief The current level loaded in the game world.
          *
          * @details Can be null if no level is currently active.
          */
         std::unique_ptr<helios::engine::runtime::world::Level> level_ = nullptr;
 
-        /**
-         * @brief Registered handler for score commands.
-         *
-         * @details Receives score update commands and processes them
-         * according to the scoring system logic.
-         */
-        helios::engine::mechanics::scoring::ScoreCommandHandler* scoreCommandHandler_ = nullptr;
 
         /**
-         * @brief Registered handler for timer commands.
+         * @brief Type-indexed registry for Managers, CommandBuffers, and CommandHandlers.
          *
-         * @details Receives timer commands and routes them to the
-         * TimerManager for processing.
+         * @details Provides O(1) type-based access via ResourceTypeId. Owns all
+         * registered Manager and CommandBuffer instances via ErasedUnique.
          */
-        helios::engine::mechanics::timing::TimerCommandHandler* timerCommandHandler_ = nullptr;
+        ResourceRegistry resourceRegistry_;
 
-        /**
-         * @brief Registered handlers for state commands, indexed by StateTypeId.
-         *
-         * @details Stores pointers to TypedStateCommandHandler instances. Each
-         * state type (GameState, MatchState, etc.) has a unique index computed
-         * from StateTypeId.
-         */
-        std::vector<helios::engine::state::StateCommandHandler*> stateCommandHandlers_;
-
-        /**
-         * @brief Registered handler for UI action commands.
-         */
-        helios::engine::modules::ui::UiActionCommandHandler* uiActionCommandHandler_ = nullptr;
-
-        /**
-         * @brief Registry for mapping spawn profiles to their command handlers.
-         *
-         * @details
-         * Stores the association between SpawnProfileIds and their corresponding
-         * SpawnCommandHandlers. This allows the system to look up the correct handler
-         * (e.g., a specific object pool) when processing spawn commands.
-         */
-        helios::engine::runtime::spawn::SpawnCommandHandlerRegistry spawnCommandHandlerRegistry_{};
 
         /**
          * @brief Entity registry for handle allocation and validation.
@@ -253,6 +203,14 @@ export namespace helios::engine::runtime::world {
             return session_;
         }
 
+        /**
+         * @brief Returns a reference to the underlying EntityManager.
+         *
+         * @return Reference to the EntityManager.
+         */
+        [[nodiscard]] helios::engine::ecs::EntityManager& entityManager() {
+            return em_;
+        }
 
         /**
          * @brief Initializes all registered managers.
@@ -262,7 +220,7 @@ export namespace helios::engine::runtime::world {
          * reference to this GameWorld.
          */
         void init() {
-            for (auto& mgr :  managers_) {
+            for (auto& mgr :  resourceRegistry_.managers()) {
                 mgr->init(*this);
             }
         }
@@ -306,249 +264,98 @@ export namespace helios::engine::runtime::world {
         template<typename T>
         requires std::is_base_of_v<helios::engine::runtime::world::Manager, T>
         [[nodiscard]] bool hasManager() const {
-            return getManager<T>() != nullptr;
+            return resourceRegistry_.has<T>();
         }
 
         /**
-         * @brief Adds and registers a Manager of the specified type.
+         * @brief Registers a Manager of the specified type.
          *
-         * @details Creates a new Manager instance and adds it to the world.
-         * The manager's onAdd() callback is invoked after registration.
+         * @details Creates a new Manager instance via the ResourceRegistry.
+         * The Manager's `init()` is called later during `GameWorld::init()`.
          *
-         * @tparam T The Manager type to add. Must derive from Manager.
+         * @tparam T The Manager type. Must derive from Manager.
          * @tparam Args Constructor argument types.
          *
          * @param args Arguments forwarded to the Manager constructor.
          *
-         * @return Reference to the newly added Manager.
+         * @return Reference to the newly registered Manager.
          *
          * @pre No Manager of type T is already registered.
          */
         template<typename T, typename... Args>
         requires std::is_base_of_v<helios::engine::runtime::world::Manager, T>
-        T& addManager(Args&&... args) {
-
-            assert(!hasManager<T>() && "Manager already registered.");
-
-            auto manager = std::make_unique<T>(std::forward<Args>(args)...);
-            auto* manager_ptr = manager.get();
-
-            managers_.push_back(std::move(manager));
-
-            manager_ptr->onAdd(*this);
-            return *manager_ptr;
+        T& registerManager(Args&&... args) {
+            assert(!resourceRegistry_.has<T>() && "Manager already registered.");
+            return resourceRegistry_.registerResource<T>(std::forward<Args>(args)...);
         }
 
         /**
-         * @brief Registers a SpawnCommandHandler for a specific spawn profile.
+         * @brief Registers a non-owning CommandHandler reference.
          *
-         * @details Associates a handler with a spawn profile ID. The handler processes
-         * spawn and despawn requests for entities associated with that profile.
+         * @details The handler must outlive the GameWorld (typically guaranteed
+         * because the handler is a Manager already owned by the ResourceRegistry).
          *
-         * @param spawnProfileId The spawn profile identifier to associate with the handler.
-         * @param poolManager Reference to the handler to register.
+         * @tparam T The CommandHandler type. Must derive from CommandHandler.
          *
-         * @return True if registration succeeded, false if already registered.
-         */
-        bool registerSpawnCommandHandler(
-            const helios::engine::core::data::SpawnProfileId spawnProfileId,
-            helios::engine::runtime::spawn::SpawnCommandHandler& poolManager
-        ) {
-            bool added = spawnCommandHandlerRegistry_.add(spawnProfileId, poolManager);
-
-            assert(added && "PoolManager already registered");
-
-            return added;
-        }
-
-        /**
-         * @brief Registers a handler for UI action commands.
+         * @param cmdHandler Reference to the handler.
          *
-         * @param uiActionCommandHandler Reference to the handler to register.
+         * @return Reference to the registered handler.
          *
-         * @return True if registration succeeded.
-         */
-        bool registerUiActionCommandHandler(
-            helios::engine::modules::ui::UiActionCommandHandler& uiActionCommandHandler
-        ) {
-            assert(!uiActionCommandHandler_ && "uiActionCommandHandler already registered");
-
-            uiActionCommandHandler_ = &uiActionCommandHandler;
-
-            return true;
-        }
-
-        /**
-         * @brief Retrieves the registered UI action command handler.
-         *
-         * @return Pointer to the handler, or nullptr if not registered.
-         */
-        [[nodiscard]] helios::engine::modules::ui::UiActionCommandHandler* uiActionCommandHandler() {
-            return uiActionCommandHandler_;
-        }
-
-        /**
-         * @brief Retrieves a SpawnCommandHandler for a specific spawn profile.
-         *
-         * @details Used to submit spawn/despawn commands to the handler responsible
-         * for a particular spawn profile (e.g., bullet pool, enemy pool).
-         *
-         * @param spawnProfileId The spawn profile identifier to look up.
-         *
-         * @return Pointer to the handler, or nullptr if not registered.
-         *
-         * @see registerSpawnCommandHandler()
-         * @see SpawnCommandHandler
-         */
-        [[nodiscard]] helios::engine::runtime::spawn::SpawnCommandHandler* spawnCommandHandler(
-            const helios::engine::core::data::SpawnProfileId spawnProfileId) {
-            return spawnCommandHandlerRegistry_.get(spawnProfileId);
-        }
-
-        /**
-         * @brief Registers a handler for score commands.
-         *
-         * @details Associates a ScoreCommandHandler with this GameWorld.
-         * Only one handler can be registered at a time.
-         *
-         * @param scoreCommandHandler Reference to the handler to register.
-         *
-         * @return True if registration succeeded, false if already registered.
-         */
-        bool registerScoreCommandHandler(
-            helios::engine::mechanics::scoring::ScoreCommandHandler& scoreCommandHandler
-        ) {
-            assert(!scoreCommandHandler_ && "ScoreCommandHandler already registered");
-
-            scoreCommandHandler_ = &scoreCommandHandler;
-
-            return true;
-        }
-
-        /**
-         * @brief Retrieves the registered ScoreCommandHandler.
-         *
-         * @return Pointer to the handler, or nullptr if not registered.
-         */
-        [[nodiscard]] helios::engine::mechanics::scoring::ScoreCommandHandler* scoreCommandHandler() {
-            return scoreCommandHandler_;
-        }
-
-        /**
-         * @brief Registers a handler for timer commands.
-         *
-         * @details Associates a TimerCommandHandler with this GameWorld.
-         * Only one handler can be registered at a time.
-         *
-         * @param timerCommandHandler Reference to the handler to register.
-         *
-         * @return True if registration succeeded, false if already registered.
-         */
-        bool registerTimerCommandHandler(
-            helios::engine::mechanics::timing::TimerCommandHandler& timerCommandHandler
-        ) {
-            assert(!timerCommandHandler_ && "TimerCommandHandler already registered");
-
-            timerCommandHandler_ = &timerCommandHandler;
-
-            return true;
-        }
-
-        /**
-         * @brief Retrieves the registered TimerCommandHandler.
-         *
-         * @return Pointer to the handler, or nullptr if not registered.
-         */
-        [[nodiscard]] helios::engine::mechanics::timing::TimerCommandHandler* timerCommandHandler() {
-            return timerCommandHandler_;
-        }
-
-        /**
-         * @brief Registers a handler for state commands of a specific type.
-         *
-         * @details Associates a TypedStateCommandHandler with the given state type.
-         * The handler receives state transition commands and routes them to the
-         * appropriate StateManager.
-         *
-         * @tparam T The state enum type (e.g., GameState, MatchState).
-         *
-         * @param stateCommandHandler Reference to the handler to register.
-         *
-         * @return True if registration succeeded, false if already registered.
-         *
-         * @see StateManager
-         * @see TypedStateCommandHandler
+         * @pre No handler of type T is already registered.
          */
         template<typename T>
-        bool registerStateCommandHandler(
-            helios::engine::state::TypedStateCommandHandler<T>& stateCommandHandler
-        ) {
-            const auto typeId = helios::engine::core::data::StateTypeId::id<T>();
-            const auto idx = typeId.value();
-
-            if (idx >= stateCommandHandlers_.size()) {
-                stateCommandHandlers_.resize(idx + 1);
-            }
-
-
-            assert(!stateCommandHandlers_[idx] && "stateCommandHandler already registered");
-
-            stateCommandHandlers_[idx] = &stateCommandHandler;
-
-            return true;
+        requires std::is_base_of_v<helios::engine::runtime::messaging::command::CommandHandler, T>
+        T& registerCommandHandler(T& cmdHandler) {
+            assert(!resourceRegistry_.has<T>() && "CommandHandler already registered.");
+            return resourceRegistry_.registerResource<T>(cmdHandler);
         }
 
         /**
-         * @brief Retrieves the registered state command handler for a type.
+         * @brief Registers an owning resource of arbitrary type.
          *
-         * @tparam T The state enum type to look up.
+         * @details Delegates to ResourceRegistry::registerResource. The resource
+         * is heap-allocated and owned by the registry.
          *
-         * @return Pointer to the handler, or nullptr if not registered.
+         * @tparam T The resource type.
+         * @tparam Args Constructor argument types.
+         *
+         * @param args Arguments forwarded to the T constructor.
+         *
+         * @return Reference to the newly created resource.
+         */
+        template<typename T, typename... Args>
+        T& registerResource(Args&&... args) {
+            return resourceRegistry_.registerResource<T>(std::forward<Args>(args)...);
+        }
+
+        /**
+         * @brief Returns a reference to a registered Manager.
+         *
+         * @tparam T The Manager type. Must derive from Manager.
+         *
+         * @return Reference to the Manager.
+         *
+         * @pre A Manager of type T must be registered.
          */
         template<typename T>
-        [[nodiscard]] helios::engine::state::TypedStateCommandHandler<T>* stateCommandHandler() {
-            const auto typeId = helios::engine::core::data::StateTypeId::id<T>();
-
-            const auto idx = typeId.value();
-
-            if (idx >= stateCommandHandlers_.size()) {
-                return nullptr;
-            }
-
-            return static_cast< helios::engine::state::TypedStateCommandHandler<T>*>(stateCommandHandlers_[idx]);
+        requires std::is_base_of_v<Manager, T>
+        T& manager() {
+            return resourceRegistry_.resource<T>();
         }
 
-        /**
-         * @brief Retrieves a registered Manager by type.
-         *
-         * @tparam T The Manager type to retrieve. Must derive from Manager.
-         *
-         * @return Pointer to the Manager if found, nullptr otherwise.
-         */
-        template<typename T>
-        requires std::is_base_of_v<helios::engine::runtime::world::Manager, T>
-        [[nodiscard]] T* getManager() const {
-
-            for (auto& mgr : managers_) {
-                if (auto* c = dynamic_cast<T*>(mgr.get())) {
-                    return c;
-                }
-            }
-
-            return nullptr;
-        }
 
         /**
-         * @brief Flushes all registered managers.
+         * @brief Flushes all registered Managers.
          *
-         * @details Called during the game loop to allow managers to process
-         * their queued requests (e.g., spawn requests, pool returns).
+         * @details Iterates over all Managers in registration order and invokes
+         * `flush(updateContext)` on each. Called by the GameLoop at commit points
+         * after the CommandBuffer has been flushed.
          *
          * @param updateContext The current frame's update context.
          */
         void flushManagers(helios::engine::runtime::world::UpdateContext& updateContext) {
-            for (auto& mgr :  managers_) {
-                mgr->flush(*this, updateContext);
+            for (auto& mgr : resourceRegistry_.managers()) {
+                mgr->flush(updateContext);
             }
         }
 
@@ -676,7 +483,7 @@ export namespace helios::engine::runtime::world {
          */
         void reset() {
 
-            for (auto& mgr : managers_) {
+            for (auto& mgr : resourceRegistry_.managers()) {
                 mgr->reset();
             }
 
@@ -684,6 +491,18 @@ export namespace helios::engine::runtime::world {
 
         }
 
+        /**
+         * @brief Returns a reference to the ResourceRegistry.
+         *
+         * @details Use for direct resource registration and lookup. Prefer the
+         * convenience methods `registerManager()`, `registerCommandHandler()`,
+         * and `manager()` for type-constrained access.
+         *
+         * @return Reference to the ResourceRegistry.
+         */
+        ResourceRegistry& resourceRegistry() noexcept {
+            return resourceRegistry_;
+        }
 
 
     };

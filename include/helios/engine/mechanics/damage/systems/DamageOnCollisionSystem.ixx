@@ -65,7 +65,7 @@ export namespace helios::engine::mechanics::damage::systems {
 
             for (const auto& event : eventPass) {
 
-                auto go = updateContext.gameWorld().find(event.collisionContext().source);
+                auto go = updateContext.find(event.collisionContext().source);
 
                 if (!go) {
                     continue;
@@ -81,7 +81,7 @@ export namespace helios::engine::mechanics::damage::systems {
                     continue;
                 }
 
-                auto target = updateContext.gameWorld().find(other.value());
+                auto target = updateContext.find(other.value());
                 if (!target) {
                     continue;
                 }

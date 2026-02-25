@@ -9,9 +9,6 @@ module;
 
 export module helios.engine.mechanics.scoring.commands.UpdateScoreCommand;
 
-import helios.engine.runtime.messaging.command.WorldCommandDispatcher;
-
-import helios.engine.runtime.messaging.command.WorldCommand;
 import helios.engine.mechanics.scoring.types;
 
 
@@ -25,7 +22,7 @@ export namespace helios::engine::mechanics::scoring::commands {
      * Processed by ScoreCommandDispatcher and ultimately handled by
      * ScorePoolManager.
      */
-    class UpdateScoreCommand : public helios::engine::runtime::messaging::command::WorldCommand {
+    class UpdateScoreCommand  {
 
         /**
          * @brief The score context containing type, pool, and value.
@@ -45,13 +42,6 @@ export namespace helios::engine::mechanics::scoring::commands {
         ) : scoreContext_(std::move(scoreContext)) { }
 
         /**
-         * @copydoc WorldCommand::execute()
-         */
-        virtual void execute(helios::engine::runtime::world::GameWorld& gameWorld) const noexcept {
-            assert(false && "Unexpected execute() on UpdateScoreCommand");
-        }
-
-        /**
          * @brief Returns the score context (lvalue reference).
          *
          * @return Const reference to the score context.
@@ -69,15 +59,6 @@ export namespace helios::engine::mechanics::scoring::commands {
             return std::move(scoreContext_);
         }
 
-        /**
-         * @copydoc WorldCommand::accept()
-         */
-        virtual void accept(
-            helios::engine::runtime::world::GameWorld& gameWorld,
-            helios::engine::runtime::messaging::command::WorldCommandDispatcher& dispatcher) const noexcept {
-
-            dispatcher.dispatch(gameWorld, *this);
-        }
 
     };
 

@@ -12,9 +12,6 @@ export module helios.engine.runtime.spawn.commands.SpawnCommand;
 
 import helios.engine.runtime.spawn.SpawnContext;
 
-import helios.engine.runtime.messaging.command.WorldCommand;
-import helios.engine.runtime.messaging.command.WorldCommandDispatcher;
-
 import helios.math.types;
 
 import helios.engine.core.data.SpawnProfileId;
@@ -37,7 +34,7 @@ export namespace helios::engine::runtime::spawn::commands {
      * @see SpawnManager
      * @see GameObjectSpawnSystem
      */
-    class SpawnCommand : public helios::engine::runtime::messaging::command::WorldCommand {
+    class SpawnCommand {
 
         /**
          * @brief The number of GameObjects to spawn.
@@ -62,28 +59,6 @@ export namespace helios::engine::runtime::spawn::commands {
         spawnBudget_(spawnBudget)
         {}
 
-        /**
-         * @brief Direct execution is a no-op; dispatching is required.
-         *
-         * @param gameWorld The game world (unused).
-         */
-        void execute(helios::engine::runtime::world::GameWorld& gameWorld) const noexcept override {
-            assert(false && "Unexpected execute() on SpawnCommand");
-        }
-
-        /**
-         * @brief Accepts a dispatcher for command routing.
-         *
-         * @param gameWorld The game world.
-         * @param dispatcher The dispatcher to route this command to.
-         */
-        virtual void accept(
-            helios::engine::runtime::world::GameWorld& gameWorld,
-            helios::engine::runtime::messaging::command::WorldCommandDispatcher& dispatcher) const noexcept override {
-
-            dispatcher.dispatch(gameWorld, *this);
-
-        };
 
         /**
          * @brief Returns the target pool ID.

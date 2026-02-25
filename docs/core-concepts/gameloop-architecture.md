@@ -105,14 +105,9 @@ auto& session = gameWorld.session();
 session.trackState<GameState>();
 session.trackState<MatchState>();
 
-// Register command dispatchers
-gameLoop.commandBuffer()
-    .addDispatcher<SpawnCommand>(
-        std::make_unique<SpawnCommandDispatcher>())
-    .addDispatcher<DespawnCommand>(
-        std::make_unique<DespawnCommandDispatcher>())
-    .addDispatcher<ScheduledSpawnPlanCommand>(
-        std::make_unique<ScheduledSpawnPlanCommandDispatcher>());
+// Register managers and command handlers via ResourceRegistry
+auto& poolMgr = gameWorld.registerManager<GameObjectPoolManager>();
+auto& spawnMgr = gameWorld.registerManager<SpawnManager>();
 
 // ═══════════════════════════════════════════════════════════════════
 // PRE PHASE: Input, Spawning, Motion Preparation
@@ -176,8 +171,7 @@ gameLoop.init(gameWorld);
 while (running) {
     float deltaTime = /* calculate delta */;
     
-    UpdateContext ctx{deltaTime, gameWorld, /* ... */};
-    gameLoop.update(ctx);
+    gameLoop.update(gameWorld, deltaTime, inputSnapshot, viewportSnapshots);
     
     render();
 }
@@ -300,13 +294,16 @@ Overall frame execution:
 for (phase : {Pre, Main, Post}) {
     
     for (pass : phase.passes()) {
+        if (!pass.shouldRun(updateContext)) continue;
+        
         for (system : pass.systems()) {
             system.update(updateContext);
         }
         
-        if (pass.commitPoint() == CommitPoint::PassEvents) {
-            passEventBus.swapBuffers();  // Pass events readable
-        }
+        // Commit point actions (bitwise flags):
+        if (commitPoint & PassEvents)   passEventBus.swapBuffers();
+        if (commitPoint & FlushCommands) commandBuffer.flush();
+        if (commitPoint & FlushManagers) managers.flush();
     }
     
     phaseCommit();  // Phase boundary
@@ -327,6 +324,7 @@ Immediate events should be processed within the same frame without additional do
 ## Related Documentation
 
 - [Command System](command-system.md) - Command pattern, dispatchers, managers
+- [Resource Registry](resource-registry.md) - Type-indexed resource storage for managers and handlers
 - [Event System](event-system.md) - Phase/Pass event propagation with double-buffered buses
 - [State Management](state-management.md) - Game and match state transitions
 - [Component System](component-system.md) - ECS-style composition architecture

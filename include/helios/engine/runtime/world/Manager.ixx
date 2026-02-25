@@ -7,11 +7,13 @@ module;
 
 export module helios.engine.runtime.world.Manager;
 
-import helios.engine.runtime.world.UpdateContext;
+
 
 export namespace helios::engine::runtime::world {
 
+    class UpdateContext;
     class GameWorld;
+
 
     /**
      * @brief Abstract base class for managers that process deferred operations.
@@ -52,28 +54,10 @@ export namespace helios::engine::runtime::world {
 
     protected:
 
-        /**
-         * @brief Pointer to the owning GameWorld.
-         *
-         * @details Set during onAdd() and remains valid for the Manager's lifetime.
-         */
-        helios::engine::runtime::world::GameWorld* gameWorld_ = nullptr;
 
     public:
 
         virtual ~Manager() = default;
-
-        /**
-         * @brief Called when the manager is added to a GameWorld.
-         *
-         * @details Stores a reference to the GameWorld for later use.
-         * Override to perform additional registration logic.
-         *
-         * @param gameWorld The GameWorld this manager was added to.
-         */
-        virtual void onAdd(helios::engine::runtime::world::GameWorld& gameWorld) {
-            gameWorld_ = &gameWorld;
-        }
 
         /**
          * @brief Initializes the manager before the game loop starts.
@@ -100,7 +84,6 @@ export namespace helios::engine::runtime::world {
          * @param update_context The current frame's update context.
          */
         virtual void flush(
-            helios::engine::runtime::world::GameWorld& gameWorld,
             helios::engine::runtime::world::UpdateContext& update_context
         ) noexcept = 0;
 

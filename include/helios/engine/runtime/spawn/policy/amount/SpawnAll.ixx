@@ -47,8 +47,8 @@ export namespace helios::engine::runtime::spawn::policy::amount {
             const SpawnRuleState& spawnRuleState,
             const helios::engine::runtime::world::UpdateContext& updateContext
         ) const override {
-            const auto manager = updateContext.gameWorld().getManager<helios::engine::runtime::pooling::GameObjectPoolManager>();
-            return manager->poolSnapshot(gameObjectPoolId).inactiveCount;
+            const auto& manager = updateContext.resourceRegistry().resource<helios::engine::runtime::pooling::GameObjectPoolManager>();
+            return manager.poolSnapshot(gameObjectPoolId).inactiveCount;
         }
 
     };

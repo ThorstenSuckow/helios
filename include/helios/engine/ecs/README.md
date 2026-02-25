@@ -22,6 +22,7 @@ This module provides the foundational classes for the composition-based game arc
 | `ComponentOps` | Function pointers for lifecycle callbacks |
 | `ComponentOpsRegistry` | Global registry mapping type IDs to ComponentOps |
 | `ComponentReflector` | Compile-time type registration |
+| `EntityResolver` | Callable for resolving EntityHandles to GameObjects |
 | `Traits` | Compile-time concepts for component lifecycle hooks |
 
 ### Submodules

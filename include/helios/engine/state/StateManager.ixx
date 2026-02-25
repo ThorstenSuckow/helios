@@ -22,6 +22,8 @@ import helios.engine.state.types;
 
 import helios.engine.ecs.GameObject;
 
+import helios.engine.runtime.messaging.command;
+
 import helios.engine.runtime.world.Manager;
 import helios.engine.runtime.world.UpdateContext;
 
@@ -37,6 +39,8 @@ export namespace helios::engine::state {
 
     using namespace helios::engine::state::types;
     using namespace helios::engine::state::commands;
+    using namespace helios::engine::runtime::messaging::command;
+
 
     /**
      * @brief Manages state transitions using a rule-based system.
@@ -62,7 +66,7 @@ export namespace helios::engine::state {
      */
     template <typename StateType>
     class StateManager : public helios::engine::runtime::world::Manager,
-                             public TypedStateCommandHandler<StateType> {
+                             public TypedCommandHandler<StateCommand<StateType>> {
 
         /**
          * @brief Queue of pending state commands.
@@ -169,11 +173,9 @@ export namespace helios::engine::state {
          * @details Processes the last pending command, finds matching rules,
          * executes guards, and triggers the transition if valid.
          *
-         * @param gameWorld The game world.
          * @param updateContext The current frame's update context.
          */
         void flush(
-            helios::engine::runtime::world::GameWorld& gameWorld,
             helios::engine::runtime::world::UpdateContext& updateContext
         ) noexcept override {
 
@@ -185,7 +187,7 @@ export namespace helios::engine::state {
 
             auto transitionRequest = command.transitionRequest();
 
-            auto& session = gameWorld.session();
+            auto& session = updateContext.session();
             auto currentFrom = session.state<StateType>();
             auto from = transitionRequest.from();
             auto transitionId = transitionRequest.transitionId();
@@ -224,7 +226,7 @@ export namespace helios::engine::state {
          * @return True (always accepts commands).
          */
         bool submit(
-            const StateCommand<StateType>& stateCommand
+            const StateCommand<StateType> stateCommand
         ) noexcept override {
             pending_.push_back(stateCommand);
             return true;
@@ -236,7 +238,7 @@ export namespace helios::engine::state {
          * @param gameWorld The game world to register with.
          */
         void init(helios::engine::runtime::world::GameWorld& gameWorld) override {
-            gameWorld.registerStateCommandHandler<StateType>(*this);
+            gameWorld.registerCommandHandler<TypedCommandHandler<StateCommand<StateType>>>(*this);
         }
 
         /**

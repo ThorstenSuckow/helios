@@ -10,4 +10,5 @@ export import helios.core.data;
 export import helios.core.spatial;
 export import helios.core.types;
 export import helios.core.algorithms;
+export import helios.core.memory;
 

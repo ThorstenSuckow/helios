@@ -14,4 +14,4 @@ export import helios.engine.tooling;
 export import helios.engine.builder;
 export import helios.engine.state;
 
-export import helios.engine.Bootstrap;
+export import helios.engine.bootstrap;

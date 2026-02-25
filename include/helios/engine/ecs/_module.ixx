@@ -21,5 +21,6 @@ export import helios.engine.ecs.ComponentOpsRegistry;
 export import helios.engine.ecs.ComponentOps;
 export import helios.engine.ecs.ComponentReflector;
 export import helios.engine.ecs.View;
+export import helios.engine.ecs.EntityResolver;
 
 

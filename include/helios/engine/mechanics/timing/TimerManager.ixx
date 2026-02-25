@@ -16,7 +16,7 @@ export module helios.engine.mechanics.timing.TimerManager;
 import helios.engine.mechanics.timing.types;
 import helios.engine.mechanics.timing.commands;
 
-import helios.engine.mechanics.timing.TimerCommandHandler;
+import helios.engine.runtime.messaging.command.TypedCommandHandler;
 import helios.engine.mechanics.timing.GameTimer;
 
 import helios.engine.core.data.GameTimerId;
@@ -35,6 +35,7 @@ export namespace helios::engine::mechanics::timing {
     using namespace helios::engine::mechanics::timing::types;
     using namespace helios::engine::core::data;
     using namespace helios::engine::runtime::world;
+    using namespace helios::engine::runtime::messaging::command;
 
     /**
      * @brief Manager that owns game timers and processes timer control commands.
@@ -50,7 +51,7 @@ export namespace helios::engine::mechanics::timing {
      * @see TimerCommandHandler
      * @see Manager
      */
-    class TimerManager : public Manager, public TimerCommandHandler {
+    class TimerManager : public Manager, public TypedCommandHandler<TimerControlCommand> {
 
         /**
          * @brief Collection of game timers managed by this manager.
@@ -153,7 +154,6 @@ export namespace helios::engine::mechanics::timing {
          * @param update_context Reference to the current update context.
          */
         void flush(
-            helios::engine::runtime::world::GameWorld& gameWorld,
             helios::engine::runtime::world::UpdateContext& update_context
         ) noexcept override {
 
@@ -174,7 +174,7 @@ export namespace helios::engine::mechanics::timing {
          * @return True if the command was accepted.
          */
         bool submit(
-            const TimerControlCommand& timerControlCommand
+            const TimerControlCommand timerControlCommand
         ) noexcept override {
             pendingControlContexts_.push_back(timerControlCommand.timerControlContext());
             return true;
@@ -186,7 +186,7 @@ export namespace helios::engine::mechanics::timing {
          * @param gameWorld The game world to register with.
          */
         void init(helios::engine::runtime::world::GameWorld& gameWorld) override {
-            gameWorld.registerTimerCommandHandler(*this);
+            gameWorld.template registerCommandHandler<TypedCommandHandler<TimerControlCommand> >(*this);
         }
 
         /**

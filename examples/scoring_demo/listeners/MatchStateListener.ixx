@@ -43,12 +43,12 @@ export namespace helios::examples::scoring {
             [](helios::engine::runtime::world::UpdateContext& updateContext,
                 const helios::engine::mechanics::match::types::MatchState to)->void {
                     if (to == helios::engine::mechanics::match::types::MatchState::PlayerSpawn) {
-                        if (auto player = updateContext.gameWorld().find(updateContext.session().playerEntityHandle())) {
+                        if (auto player = updateContext.find(updateContext.session().playerEntityHandle())) {
                             if (player) player->setActive(true);
                         }
                     }
                     if (to == helios::engine::mechanics::match::types::MatchState::PlayerDeath || to == helios::engine::mechanics::match::types::MatchState::GameOver) {
-                        if (auto player = updateContext.gameWorld().find(updateContext.session().playerEntityHandle())) {
+                        if (auto player = updateContext.find(updateContext.session().playerEntityHandle())) {
                             if (player) player->setActive(false);
                         }
                     }

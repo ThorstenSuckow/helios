@@ -26,7 +26,8 @@ import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.mechanics.lifecycle.components.Active;
 
-import helios.engine.runtime.messaging.command.CommandBuffer;
+import helios.engine.state.Bindings;
+import helios.engine.runtime.messaging.command.EngineCommandBuffer;
 
 import helios.input.types.Gamepad;
 import helios.input.gamepad.GamepadState;

@@ -9,12 +9,10 @@ module;
 
 export module helios.engine.modules.ui.commands.UiActionCommand;
 
-import helios.engine.runtime.messaging.command.WorldCommand;
 import helios.engine.ecs.EntityHandle;
 
 import helios.engine.core.data;
 
-import helios.engine.runtime.messaging.command.WorldCommandDispatcher;
 
 export namespace helios::engine::modules::ui::commands {
 
@@ -28,7 +26,7 @@ export namespace helios::engine::modules::ui::commands {
      * @see UiActionCommandManager
      * @see UiActionComponent
      */
-    class UiActionCommand : public helios::engine::runtime::messaging::command::WorldCommand {
+    class UiActionCommand  {
 
 
         helios::engine::ecs::EntityHandle source_;
@@ -49,27 +47,6 @@ export namespace helios::engine::modules::ui::commands {
             const helios::engine::core::data::ActionId actionId) :
             source_(source), actionId_(actionId) {}
 
-        /**
-         * @brief Direct execution is a no-op; dispatching is required.
-         *
-         * @param gameWorld The game world (unused).
-         */
-        void execute(helios::engine::runtime::world::GameWorld& gameWorld) const noexcept override {
-            assert(false && "Unexpected execute() for UiActionCommand, needs dispatcher");
-        }
-
-        /**
-         * @brief Accepts a dispatcher for command routing.
-         *
-         * @param gameWorld The game world.
-         * @param dispatcher The dispatcher to route this command to.
-         */
-        void accept(
-            helios::engine::runtime::world::GameWorld& gameWorld,
-            helios::engine::runtime::messaging::command::WorldCommandDispatcher& dispatcher
-        ) const noexcept override {
-            dispatcher.dispatch(gameWorld, *this);
-        }
 
         /**
          * @brief Returns the source entity that triggered the action.

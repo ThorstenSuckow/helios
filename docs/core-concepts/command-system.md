@@ -1,198 +1,191 @@
 # Command System
 
-This document describes the Command pattern implementation in helios, including command buffering, dispatching, and integration with the game loop.
+This document describes the Command pattern implementation in helios, including compile-time typed command buffering, handler routing, and integration with the game loop.
 
 ## Overview
 
-The Command System provides a mechanism for **deferred action execution**. Instead of immediately modifying game state, actions are encapsulated as Command objects, buffered, and executed in a controlled batch during the game loop. This decouples input handling from action processing and enables deterministic, reproducible game logic.
+The Command System provides a mechanism for **deferred action execution**. Instead of immediately modifying game state, actions are encapsulated as lightweight command structs, buffered in compile-time typed queues, and executed in a controlled batch during the game loop. This decouples input handling from action processing and enables deterministic, reproducible game logic.
 
 ```
-┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
-│  Input System   │────>│  CommandBuffer  │────>│    GameWorld    │
-│  (produces)     │     │  (queues)       │     │  (receives)     │
-└─────────────────┘     └─────────────────┘     └─────────────────┘
-                              │
-                              │ flush()
-                              ▼
-                        ┌─────────────────┐
-                        │   Dispatchers   │
-                        │   (route)       │
-                        └─────────────────┘
-                              │
-                              ▼
-                        ┌─────────────────┐
-                        │    Managers     │
-                        │   (execute)     │
-                        └─────────────────┘
+┌─────────────────┐     ┌──────────────────────┐     ┌─────────────────┐
+│  Input / Systems│────>│ EngineCommandBuffer  │────>│   Managers      │
+│  (produce cmds) │     │ (typed queues)       │     │  (process)      │
+└─────────────────┘     └──────────────────────┘     └─────────────────┘
+                               │ flush()
+                               ▼
+                        ┌──────────────────────┐
+                        │  TypedCommandHandler │
+                        │  (route to manager)  │
+                        └──────────────────────┘
 ```
 
 ## Command Types
 
-### TargetedCommand
+Commands are plain structs (value types) that carry the data needed for a specific action. They do not inherit from a common base class — instead, the compile-time typed buffer ensures type safety.
 
-A `TargetedCommand` operates on a **specific entity** identified by its `EntityHandle`. Use this for per-entity actions like movement, attacks, or state changes.
+### Handler-Routed Commands
+
+Most commands are routed to a Manager's `TypedCommandHandler<T>` during flush:
 
 ```cpp
-class MoveCommand : public TargetedCommand {
-    helios::math::vec3f direction_;
-    float speed_;
-    
-public:
-    MoveCommand(helios::math::vec3f dir, float speed)
-        : direction_(dir), speed_(speed) {}
+struct DespawnCommand {
+    SpawnProfileId spawnProfileId_;
+    EntityHandle entityHandle_;
 
-    void execute(helios::engine::ecs::GameObject entity) const noexcept override {
-        auto* move = entity.get<Move2DComponent>();
-        if (move) {
-            move->setMoveIntent(direction_, speed_);
-        }
+    SpawnProfileId spawnProfileId() const noexcept { return spawnProfileId_; }
+    EntityHandle entityHandle() const noexcept { return entityHandle_; }
+};
+```
+
+### Self-Executing Commands
+
+Commands can also execute themselves if they satisfy the `ExecutableCommand` concept:
+
+```cpp
+struct StateCommand {
+    StateTransitionContext context_;
+
+    void execute(UpdateContext& ctx) const noexcept {
+        auto& manager = ctx.resourceRegistry()
+            .resource<StateManager>();
+        manager.transition(context_);
     }
 };
 ```
 
-### WorldCommand
+## TypedCommandBuffer
 
-A `WorldCommand` operates on the **entire GameWorld** rather than a specific entity. Use this for global actions like spawning entities, level transitions, or world-wide effects.
-
-```cpp
-class SpawnEnemyCommand : public WorldCommand {
-    helios::math::vec3f position_;
-    
-public:
-    explicit SpawnEnemyCommand(helios::math::vec3f pos) : position_(pos) {}
-
-    void execute(helios::engine::runtime::world::GameWorld& world) const noexcept override {
-        auto enemy = world.addGameObject();
-        enemy.add<Move2DComponent>(5.0f);
-        enemy.add<TranslationStateComponent>(position_);
-        enemy.setActive(true);
-    }
-};
-```
-
-## CommandBuffer
-
-The `CommandBuffer` is a queue that collects commands during the frame and executes them in batch via `flush()`.
+`TypedCommandBuffer<...CommandTypes>` is the core of the system. It stores commands in a `std::tuple<std::vector<CommandType>...>`, providing one contiguous queue per command type.
 
 ### Adding Commands
 
 ```cpp
-CommandBuffer cmdBuffer;
-
-// Add a TargetedCommand (requires Guid)
-cmdBuffer.add<MoveCommand>(player.guid(), direction, speed);
-
-// Add a WorldCommand
-cmdBuffer.add<SpawnEnemyCommand>(spawnPosition);
+// Systems add commands via UpdateContext
+ctx.commandBuffer().add<Move2DCommand>(entityHandle, direction, speed);
+ctx.commandBuffer().add<DespawnCommand>(entityHandle, profileId);
 ```
 
-### Flushing Commands
+### Flush Routing
 
-During `flush()`, commands are executed in a defined order:
+During `flush()`, each command type is processed in template parameter order:
 
-1. **WorldCommands** are processed first (global state changes)
-2. **TargetedCommands** are processed second (per-entity changes)
-
-```cpp
-// At end of input phase or before simulation
-cmdBuffer.flush(gameWorld);
-```
-
-After flush, the buffer is automatically cleared.
-
-## Dispatchers
-
-Dispatchers enable the **Visitor pattern** for type-safe command routing. Instead of executing commands directly, dispatchers route them to specialized handlers (e.g., Managers).
-
-### Registering Dispatchers
+1. **Handler route:** If a `TypedCommandHandler<Cmd>` is registered in the `ResourceRegistry`, all queued commands are submitted to the handler
+2. **Direct execution:** Otherwise, if the command satisfies `ExecutableCommand`, it executes itself
+3. **Assertion:** If neither applies, an assertion fires (misconfiguration)
 
 ```cpp
-// Create a typed dispatcher for DespawnCommand
-class DespawnDispatcher : public TypedWorldCommandDispatcher<DespawnCommand> {
-    SpawnManager& manager_;
-public:
-    explicit DespawnDispatcher(SpawnManager& mgr) : manager_(mgr) {}
-
-    void dispatchTyped(GameWorld& world, const DespawnCommand& cmd) noexcept override {
-        manager_.submit(cmd);
+// Pseudocode for flush routing (per command type):
+if (registry.has<TypedCommandHandler<Cmd>>()) {
+    auto& handler = registry.resource<TypedCommandHandler<Cmd>>();
+    for (auto& cmd : queue) {
+        handler.submit(cmd);
     }
-};
-
-// Register with CommandBuffer
-cmdBuffer.addDispatcher<DespawnCommand>(
-    std::make_unique<DespawnDispatcher>(spawnManager)
-);
+} else if constexpr (ExecutableCommand<Cmd>) {
+    for (auto& cmd : queue) {
+        cmd.execute(updateContext);
+    }
+}
+queue.clear();
 ```
 
-### Dispatch Flow
+### Deterministic Ordering
 
-When `flush()` encounters a command with a registered dispatcher:
+Commands are flushed in the order of the template parameter list. The `EngineCommandBuffer` defines this order:
 
-1. The command's `accept()` method is called with the dispatcher
-2. The dispatcher's `dispatch()` method receives the command
-3. `TypedDispatcher` downcasts and calls `dispatchTyped()` with full type info
+1. Combat commands (Aim2D, Shoot)
+2. Motion commands (Move2D, Steering)
+3. Scoring commands (UpdateScore)
+4. Spawn commands (ScheduledSpawnPlan, Spawn, Despawn)
+5. State commands (GameState, MatchState)
+6. UI commands (UiAction)
+7. Timing commands (TimerControl)
 
-```
-Command.accept(dispatcher)
-    │
-    ▼
-Dispatcher.dispatch(command)
-    │
-    ▼
-TypedDispatcher.dispatchTyped(typedCommand)
-    │
-    ▼
-Manager.queueRequest(...)
-```
+## TypedCommandHandler
 
-## Managers
-
-Managers handle cross-cutting concerns that require deferred or batched processing. Commands route to Managers via Dispatchers.
-
-### Manager Lifecycle
+`TypedCommandHandler<T>` provides the interface for receiving commands of a specific type. Managers implement this for each command type they handle:
 
 ```cpp
-class SpawnManager : public Manager, public SpawnCommandHandler {
-    std::vector<SpawnCommand> spawnCommands_;
-    std::vector<DespawnCommand> despawnCommands_;
+class SpawnManager : public Manager,
+                     public TypedCommandHandler<SpawnCommand>,
+                     public TypedCommandHandler<DespawnCommand>,
+                     public TypedCommandHandler<ScheduledSpawnPlanCommand> {
 
-public:
-    bool submit(const SpawnCommand& cmd) noexcept override {
+    bool submit(SpawnCommand cmd) noexcept override {
         spawnCommands_.push_back(cmd);
         return true;
     }
 
-    bool submit(const DespawnCommand& cmd) noexcept override {
+    bool submit(DespawnCommand cmd) noexcept override {
         despawnCommands_.push_back(cmd);
         return true;
     }
 
-    // Called after CommandBuffer::flush()
-    void flush(GameWorld& world, UpdateContext& ctx) noexcept override {
-        for (const auto& cmd : spawnCommands_) {
-            // Acquire from pool and initialize
-        }
-        for (const auto& cmd : despawnCommands_) {
-            // Return to pool
-        }
-        spawnCommands_.clear();
-        despawnCommands_.clear();
+    bool submit(ScheduledSpawnPlanCommand cmd) noexcept override {
+        scheduledCommands_.push_back(cmd);
+        return true;
     }
 };
 ```
 
-### Registration
-
-Managers are registered with the GameWorld:
+Handlers are registered with the `ResourceRegistry` during `Manager::init()`:
 
 ```cpp
-auto spawnManager = std::make_unique<SpawnManager>();
-gameWorld.addManager(std::move(spawnManager));
+void init(GameWorld& gameWorld) noexcept override {
+    gameWorld.registerCommandHandler<TypedCommandHandler<SpawnCommand>>(*this);
+    gameWorld.registerCommandHandler<TypedCommandHandler<DespawnCommand>>(*this);
+}
+```
+
+## EngineCommandBuffer
+
+`EngineCommandBuffer` is a thin facade over `TypedCommandBuffer` instantiated with all engine command types. It is registered as a resource and accessed via `UpdateContext::commandBuffer()`.
+
+```cpp
+class EngineCommandBuffer : public CommandBuffer {
+    using BufferImpl = TypedCommandBuffer<
+        Aim2DCommand, ShootCommand,
+        Move2DCommand, SteeringCommand,
+        UpdateScoreCommand,
+        ScheduledSpawnPlanCommand, SpawnCommand, DespawnCommand,
+        StateCommand<GameState>, StateCommand<MatchState>,
+        UiActionCommand,
+        TimerControlCommand
+    >;
+
+    BufferImpl impl_;
+
+public:
+    template<class T, class... Args>
+    void add(Args&&... args) {
+        impl_.add<T>(std::forward<Args>(args)...);
+    }
+
+    void flush(UpdateContext& ctx) noexcept override { impl_.flush(ctx); }
+    void clear() noexcept override { impl_.clear(); }
+};
+```
+
+## Managers
+
+Managers handle cross-cutting concerns that require deferred or batched processing. Commands route to Managers via `TypedCommandHandler::submit()` during the buffer flush, and Managers process their queues during `Manager::flush()`.
+
+### Manager Lifecycle
+
+1. **Registration:** Manager is added via `GameWorld::addManager<T>()` or `resourceRegistry().registerResource<T>()`
+2. **init():** Called during `GameWorld::init()`. Registers `TypedCommandHandler` instances with the `ResourceRegistry`.
+3. **submit():** Receives commands during `CommandBuffer::flush()`
+4. **flush():** Processes queued commands during `GameWorld::flushManagers()`
+
+### Registration
+
+```cpp
+auto& spawnManager = gameWorld.resourceRegistry()
+    .registerResource<SpawnManager>();
 ```
 
 ## Game Loop Integration
 
-The Command System integrates with the Phase/Pass game loop architecture. Commands can be added during **any phase**, and are flushed at each **Phase Commit**.
+The Command System integrates with the Phase/Pass game loop architecture. Commands can be added during **any phase**, and are flushed at each **commit point**.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
@@ -200,22 +193,17 @@ The Command System integrates with the Phase/Pass game loop architecture. Comman
 ├─────────────────────────────────────────────────────────────────────┤
 │                                                                     │
 │  PRE PHASE ──────────────────────────────────────────────────────   │
-│    Pass 1 (Input): Systems read input, add Commands                 │
-│        cmdBuffer.add<MoveCommand>(guid, dir, spd);                  │
+│    Pass 1 (Input): Systems read input, add commands                 │
+│        ctx.commandBuffer().add<Move2DCommand>(dir, spd);            │
 │    Pass 2, Pass 3, ...                                              │
 │  ────────────────────────────────────────────────── Phase Commit    │
-│       │  1. phaseEventBus.swapBuffers()                             │
-│       │  2. passEventBus.clearAll()                                 │
-│       │  3. commandBuffer.flush()      ◄── Commands execute here    │
-│       │  4. gameWorld.flushManagers()  ◄── Managers process queues  │
+│       │  1. eventBus.swapBuffers()                                  │
+│       │  2. commandBuffer.flush()      ◄── Commands route here      │
+│       │  3. gameWorld.flushManagers()  ◄── Managers process queues  │
 │       ▼                                                             │
 │  MAIN PHASE ─────────────────────────────────────────────────────   │
 │    Pass 1 (Gameplay): Movement, Physics systems                     │
 │    Pass 2 (Collision): Collision detection                          │
-│           Pass 2 commit!                                            │
-│    Pass 3 (AI): AI systems                                          │
-│           (Access to events from Pass 1/2                           │
-│           due to Pass 2 commit)                                     │
 │        Commands can still be added here!                            │
 │  ────────────────────────────────────────────────── Phase Commit    │
 │       │  commandBuffer.flush() + gameWorld.flushManagers()          │
@@ -232,64 +220,43 @@ The Command System integrates with the Phase/Pass game loop architecture. Comman
 
 ### Key Points
 
-Commands are **not** limited to the Pre Phase. Systems in any phase can add commands:
-
-```cpp
-void update(UpdateContext& ctx) noexcept override {
-    // Add command during any phase
-    ctx.commandBuffer().add<DespawnCommand>(entity.guid(), poolId);
-}
-```
-
-At each Phase Commit, the following sequence occurs:
-
-```cpp
-// Phase Commit sequence
-phaseEventBus.swapBuffers();    // Phase events become readable
-passEventBus.clearAll();         // Pass events are cleared
-commandBuffer.flush();           // Commands execute (world mutations)
-gameWorld.flushManagers();       // Managers process queued requests
-```
-
-This means spawns and despawns triggered in one phase are visible to systems in the next phase.
-
-For detailed phase/pass event handling, see [Game Loop Architecture](gameloop-architecture.md).
+- Commands are **not** limited to the Pre Phase. Systems in any phase can add commands.
+- At each commit point, commands are flushed **before** managers, ensuring handlers receive all commands before processing.
+- Spawns and despawns triggered in one phase are visible to systems in the next phase.
 
 ## Best Practices
 
 ### Command Design
 
-- Commands should be **immutable** after construction
-- `execute()` must be **noexcept** - handle errors internally
-- Keep commands **lightweight** - store only essential data
-- Use `WorldCommand` for spawning; use `TargetedCommand` for entity mutations
+- Commands should be **immutable value types** (structs with const accessors)
+- Keep commands **lightweight** — store only essential data (IDs, handles, values)
+- Use handler-routed commands for operations that require Manager coordination
+- Use self-executing commands for simple state transitions
 
-### Dispatcher Usage
+### Handler Registration
 
-- Register dispatchers for commands that require **external handling**
-- Use dispatchers to route to **Managers** for pooled entity lifecycle
-- Direct `execute()` is fine for simple, self-contained commands
+- Register handlers in `Manager::init()`, not in constructors
+- Ensure the Manager is registered in the `ResourceRegistry` before dependent Managers call `init()`
+- A single Manager can implement multiple `TypedCommandHandler` specializations
 
-### Manager Integration
+### Ordering
 
-- Managers **queue** requests during command dispatch
-- Managers **execute** requests during `flushManagers()`
-- This ensures all commands are processed before entities are spawned/despawned
+- The template parameter order of `EngineCommandBuffer` determines flush order
+- Design command ordering to avoid dependencies (e.g., despawns before spawns)
 
 ## Related Modules
 
-- `helios.engine.runtime.messaging.command.CommandBuffer` - Central command queue
-- `helios.engine.runtime.messaging.command.TargetedCommand` - Per-entity command base
-- `helios.engine.runtime.messaging.command.WorldCommand` - World-wide command base
-- `helios.engine.runtime.messaging.command.TypedTargetedCommandDispatcher` - Type-safe entity command dispatch
-- `helios.engine.runtime.messaging.command.TypedWorldCommandDispatcher` - Type-safe world command dispatch
-- `helios.engine.runtime.world.Manager` - Base class for deferred processing managers
-- `helios.engine.runtime.world.GameWorld` - Manager registration and flushing
+- `helios.engine.runtime.messaging.command.CommandBuffer` — Abstract buffer base
+- `helios.engine.runtime.messaging.command.TypedCommandBuffer` — Compile-time typed buffer
+- `helios.engine.runtime.messaging.command.TypedCommandHandler` — Type-safe handler interface
+- `helios.engine.runtime.messaging.command.EngineCommandBuffer` — Concrete engine buffer
+- `helios.engine.runtime.world.Manager` — Base class for deferred processing managers
+- `helios.engine.runtime.world.ResourceRegistry` — Handler lookup and resource storage
 
 ## Related Documentation
 
-- [Event System](event-system.md) - Phase/pass event propagation
-- [Game Loop Architecture](gameloop-architecture.md) - Overall frame structure
-- [Component System](component-system.md) - GameObject, Component, System architecture
-- [Spawn System](spawn-system.md) - Entity lifecycle with spawn scheduling and pooling
-
+- [Resource Registry](resource-registry.md) — Type-indexed resource storage and handler lookup
+- [Event System](event-system.md) — Phase/pass event propagation
+- [Game Loop Architecture](gameloop-architecture.md) — Overall frame structure
+- [Component System](component-system.md) — GameObject, Component, System architecture
+- [Spawn System](spawn-system.md) — Entity lifecycle with spawn scheduling and pooling

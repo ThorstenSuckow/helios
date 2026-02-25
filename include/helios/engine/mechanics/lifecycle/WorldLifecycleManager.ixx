@@ -6,19 +6,22 @@ module;
 
 #include <vector>
 
-export module helios.engine.runtime.world.WorldLifecycleManager;
+export module helios.engine.mechanics.lifecycle.WorldLifecycleManager;
 
 import helios.engine.runtime.world.Manager;
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
 
+import helios.engine.mechanics.lifecycle.types;
 import helios.engine.runtime.messaging.command.TypedCommandHandler;
-import helios.engine.runtime.world.commands.WorldLifecycleCommand;
+import helios.engine.mechanics.lifecycle.commands.WorldLifecycleCommand;
 
-export namespace helios::engine::runtime::world {
+using namespace helios::engine::runtime::world;
+using namespace helios::engine::runtime::messaging::command;
+using namespace helios::engine::mechanics::lifecycle::commands;
+using namespace helios::engine::mechanics::lifecycle::types;
 
-    using namespace helios::engine::runtime::messaging::command;
-    using namespace helios::engine::runtime::world::commands;
+export namespace helios::engine::mechanics::lifecycle {
 
     /**
      * @brief Manager that processes deferred world lifecycle commands.

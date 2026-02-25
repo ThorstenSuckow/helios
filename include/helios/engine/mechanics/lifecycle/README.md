@@ -1,10 +1,10 @@
 # helios::engine::mechanics::lifecycle
 
-Lifecycle management for entity components with delayed activation support.
+Lifecycle management for entity components and world-level lifecycle operations.
 
 ## Overview
 
-This module provides mechanisms for controlling when components become active during an entity's lifecycle. The primary use case is delaying component activation after spawn, enabling patterns like collision immunity, staggered wave spawns, and effect sequencing.
+This module provides mechanisms for controlling when components become active during an entity's lifecycle, as well as world-level lifecycle operations such as resetting the game world. The primary use cases are delayed component activation after spawn (collision immunity, staggered wave spawns, effect sequencing) and deferred world reset via the command pipeline.
 
 ## Key Classes
 
@@ -12,6 +12,9 @@ This module provides mechanisms for controlling when components become active du
 |-------|---------|
 | `DelayedComponentEnabler` | Component that tracks pending activations with timers |
 | `DelayedComponentEnablerSystem` | System that decrements timers and enables components |
+| `WorldLifecycleManager` | Manager that processes deferred world lifecycle commands |
+| `WorldLifecycleCommand` | Command carrying a `WorldLifecycleAction` |
+| `WorldLifecycleAction` | Enum defining available lifecycle operations (e.g. `Reset`) |
 
 ## Architecture
 
@@ -62,10 +65,21 @@ DelayedComponentEnablerInitializer<CollisionComponent>(0.2f)
 DelayedComponentEnablerInitializer<RenderableComponent, AIComponent>(0.5f, 10)
 ```
 
+## World Lifecycle
+
+The `WorldLifecycleManager` enables deferred world-level operations through the command pipeline. Systems and state listeners submit `WorldLifecycleCommand` instances instead of calling `GameWorld` methods directly.
+
+```cpp
+// Request a world reset (e.g. from a game-over state listener)
+updateContext.commandBuffer().add<WorldLifecycleCommand>(WorldLifecycleAction::Reset);
+```
+
+The manager is auto-registered by `bootstrap::makeGameWorld()` and processes pending commands during its flush cycle. A `Reset` action calls `GameWorld::reset()`, which reinitializes all managers and the session.
+
 ---
 <details>
 <summary>Doxygen</summary><p>
 @namespace helios::engine::mechanics::lifecycle
-@brief Lifecycle management for entity components.
-@details Provides delayed component activation mechanisms for spawn immunity, staggered effects, and sequenced initialization patterns.
+@brief Lifecycle management for entity components and world-level operations.
+@details Provides delayed component activation mechanisms for spawn immunity, staggered effects, and sequenced initialization patterns. Also includes world-level lifecycle management for deferred reset operations through the command pipeline.
 </p></details>

@@ -12,6 +12,12 @@ export module helios.examples.scoring.GameStateListener;
 import helios.engine.state.Bindings;
 import helios;
 
+
+using namespace helios::engine::mechanics::lifecycle::types;
+using namespace helios::engine::mechanics::gamestate::types;
+using namespace helios::engine::mechanics::match::types;
+using namespace helios::engine::mechanics::lifecycle::commands;
+
 export namespace helios::examples::scoring {
 
     /**
@@ -29,10 +35,6 @@ export namespace helios::examples::scoring {
                         },
             [](helios::engine::runtime::world::UpdateContext& updateContext,
                  const helios::engine::state::types::StateTransitionContext<helios::engine::mechanics::gamestate::types::GameState> transitionContext)->void {
-
-                    using namespace helios::engine::mechanics::gamestate::types;
-                    using namespace helios::engine::mechanics::match::types;
-                    using namespace helios::engine::runtime::world::commands;
 
                     const auto from = transitionContext.from();
                     const auto to = transitionContext.to();

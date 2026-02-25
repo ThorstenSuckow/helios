@@ -4,21 +4,14 @@
  */
 module;
 
-#include <cstdint>
+export module helios.engine.mechanics.lifecycle.commands.WorldLifecycleCommand;
 
-export module helios.engine.runtime.world.commands.WorldLifecycleCommand;
 
-export namespace helios::engine::runtime::world::commands {
+import helios.engine.mechanics.lifecycle.types;
 
-    /**
-     * @brief Actions that can be requested via WorldLifecycleCommand.
-     */
-    enum class WorldLifecycleAction : uint8_t {
-        /**
-         * @brief Resets all managers and the session to their initial state.
-         */
-        Reset = 0
-    };
+using namespace helios::engine::mechanics::lifecycle::types;
+
+export namespace helios::engine::mechanics::lifecycle::commands {
 
     /**
      * @brief Command for requesting a world-level lifecycle operation.

@@ -26,7 +26,7 @@ import helios.engine.mechanics.timing.commands;
 import helios.engine.mechanics.combat.commands;
 import helios.engine.mechanics.scoring.commands;
 import helios.engine.modules.physics.motion.commands;
-import helios.engine.runtime.world.commands.WorldLifecycleCommand;
+import helios.engine.mechanics.lifecycle.commands.WorldLifecycleCommand;
 
 
 static_assert(requires {
@@ -89,7 +89,7 @@ export namespace helios::engine::runtime::messaging::command {
             helios::engine::state::commands::StateCommand<helios::engine::mechanics::match::types::MatchState>,
             helios::engine::modules::ui::commands::UiActionCommand,
             helios::engine::mechanics::timing::commands::TimerControlCommand,
-            helios::engine::runtime::world::commands::WorldLifecycleCommand
+            helios::engine::mechanics::lifecycle::commands::WorldLifecycleCommand
         >;
 
         /**

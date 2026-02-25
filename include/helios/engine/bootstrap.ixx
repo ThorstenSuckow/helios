@@ -15,6 +15,7 @@ import helios.engine.runtime.world;
 import helios.engine.state.Bindings;
 import helios.engine.runtime.messaging.command;
 
+import helios.engine.mechanics.lifecycle;
 import helios.engine.mechanics.gamestate;
 import helios.engine.mechanics.match;
 
@@ -110,7 +111,7 @@ export namespace helios::engine::bootstrap {
 
         gameWorld->registerResource<helios::engine::runtime::messaging::command::EngineCommandBuffer>();
 
-        gameWorld->registerManager<helios::engine::runtime::world::WorldLifecycleManager>();
+        gameWorld->registerManager<helios::engine::mechanics::lifecycle::WorldLifecycleManager>();
         gameWorld->registerManager<helios::engine::mechanics::gamestate::GameStateManager>(
         helios::engine::mechanics::gamestate::rules::DefaultGameStateTransitionRules::rules());
         gameWorld->registerManager<helios::engine::mechanics::match::MatchStateManager>(

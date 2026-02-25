@@ -114,31 +114,31 @@ $(function() {
 <code>#include &lt;span&gt;</code><br />
 <code>#include &lt;unordered_map&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
-<code>import <a class="el" href="helios_2math_2__module_8ixx_source.html">helios.math</a>;</code><br />
-<code>import <a class="el" href="AabbColliderComponent_8ixx_source.html">helios.engine.modules.physics.collision.components.AabbColliderComponent</a>;</code><br />
 <code>import <a class="el" href="SpawnedByProfileComponent_8ixx_source.html">helios.engine.mechanics.spawn.components.SpawnedByProfileComponent</a>;</code><br />
-<code>import <a class="el" href="GameObject_8ixx_source.html">helios.engine.ecs.GameObject</a>;</code><br />
-<code>import <a class="el" href="SpawnProfileId_8ixx_source.html">helios.engine.core.data.SpawnProfileId</a>;</code><br />
-<code>import <a class="el" href="GameWorld_8ixx_source.html">helios.engine.runtime.world.GameWorld</a>;</code><br />
-<code>import <a class="el" href="Bounds_8ixx_source.html">helios.engine.modules.physics.collision.Bounds</a>;</code><br />
-<code>import <a class="el" href="SpawnCommandHandler_8ixx_source.html">helios.engine.runtime.spawn.SpawnCommandHandler</a>;</code><br />
-<code>import <a class="el" href="SpawnPlanCursor_8ixx_source.html">helios.engine.runtime.spawn.SpawnPlanCursor</a>;</code><br />
-<code>import <a class="el" href="ModelAabbComponent_8ixx_source.html">helios.engine.modules.rendering.model.components.ModelAabbComponent</a>;</code><br />
-<code>import <a class="el" href="GameObjectPoolManager_8ixx_source.html">helios.engine.runtime.pooling.GameObjectPoolManager</a>;</code><br />
-<code>import <a class="el" href="SpawnScheduler_8ixx_source.html">helios.engine.runtime.spawn.scheduling.SpawnScheduler</a>;</code><br />
-<code>import <a class="el" href="SpawnContext_8ixx_source.html">helios.engine.runtime.spawn.SpawnContext</a>;</code><br />
-<code>import <a class="el" href="SpawnProfile_8ixx_source.html">helios.engine.runtime.spawn.SpawnProfile</a>;</code><br />
-<code>import <a class="el" href="SpawnPlanCommandExecutedEvent_8ixx_source.html">helios.engine.runtime.spawn.events.SpawnPlanCommandExecutedEvent</a>;</code><br />
-<code>import <a class="el" href="CommandBuffer_8ixx_source.html">helios.engine.runtime.messaging.command.CommandBuffer</a>;</code><br />
-<code>import <a class="el" href="EmittedByComponent_8ixx_source.html">helios.engine.mechanics.spawn.components.EmittedByComponent</a>;</code><br />
-<code>import <a class="el" href="UpdateContext_8ixx_source.html">helios.engine.runtime.world.UpdateContext</a>;</code><br />
-<code>import <a class="el" href="ScheduledSpawnPlanCommand_8ixx_source.html">helios.engine.runtime.spawn.commands.ScheduledSpawnPlanCommand</a>;</code><br />
 <code>import <a class="el" href="TranslationStateComponent_8ixx_source.html">helios.engine.modules.spatial.transform.components.TranslationStateComponent</a>;</code><br />
-<code>import <a class="el" href="SpawnCommand_8ixx_source.html">helios.engine.runtime.spawn.commands.SpawnCommand</a>;</code><br />
-<code>import <a class="el" href="DespawnCommand_8ixx_source.html">helios.engine.runtime.spawn.commands.DespawnCommand</a>;</code><br />
-<code>import <a class="el" href="ScaleStateComponent_8ixx_source.html">helios.engine.modules.spatial.transform.components.ScaleStateComponent</a>;</code><br />
+<code>import <a class="el" href="CommandHandler_8ixx_source.html">helios.engine.runtime.messaging.command.CommandHandler</a>;</code><br />
+<code>import <a class="el" href="UpdateContext_8ixx_source.html">helios.engine.runtime.world.UpdateContext</a>;</code><br />
+<code>import <a class="el" href="AabbColliderComponent_8ixx_source.html">helios.engine.modules.physics.collision.components.AabbColliderComponent</a>;</code><br />
 <code>import <a class="el" href="Manager_8ixx_source.html">helios.engine.runtime.world.Manager</a>;</code><br />
 <code>import <a class="el" href="SceneNodeComponent_8ixx_source.html">helios.engine.modules.scene.components.SceneNodeComponent</a>;</code><br />
+<code>import <a class="el" href="TypedCommandHandler_8ixx_source.html">helios.engine.runtime.messaging.command.TypedCommandHandler</a>;</code><br />
+<code>import <a class="el" href="SpawnPlanCursor_8ixx_source.html">helios.engine.runtime.spawn.SpawnPlanCursor</a>;</code><br />
+<code>import <a class="el" href="ModelAabbComponent_8ixx_source.html">helios.engine.modules.rendering.model.components.ModelAabbComponent</a>;</code><br />
+<code>import <a class="el" href="ScaleStateComponent_8ixx_source.html">helios.engine.modules.spatial.transform.components.ScaleStateComponent</a>;</code><br />
+<code>import <a class="el" href="SpawnContext_8ixx_source.html">helios.engine.runtime.spawn.SpawnContext</a>;</code><br />
+<code>import <a class="el" href="SpawnScheduler_8ixx_source.html">helios.engine.runtime.spawn.scheduling.SpawnScheduler</a>;</code><br />
+<code>import <a class="el" href="SpawnProfile_8ixx_source.html">helios.engine.runtime.spawn.SpawnProfile</a>;</code><br />
+<code>import <a class="el" href="SpawnPlanCommandExecutedEvent_8ixx_source.html">helios.engine.runtime.spawn.events.SpawnPlanCommandExecutedEvent</a>;</code><br />
+<code>import <a class="el" href="Bounds_8ixx_source.html">helios.engine.modules.physics.collision.Bounds</a>;</code><br />
+<code>import <a class="el" href="GameObject_8ixx_source.html">helios.engine.ecs.GameObject</a>;</code><br />
+<code>import <a class="el" href="EmittedByComponent_8ixx_source.html">helios.engine.mechanics.spawn.components.EmittedByComponent</a>;</code><br />
+<code>import <a class="el" href="helios_2math_2__module_8ixx_source.html">helios.math</a>;</code><br />
+<code>import <a class="el" href="GameObjectPoolManager_8ixx_source.html">helios.engine.runtime.pooling.GameObjectPoolManager</a>;</code><br />
+<code>import <a class="el" href="DespawnCommand_8ixx_source.html">helios.engine.runtime.spawn.commands.DespawnCommand</a>;</code><br />
+<code>import <a class="el" href="GameWorld_8ixx_source.html">helios.engine.runtime.world.GameWorld</a>;</code><br />
+<code>import <a class="el" href="SpawnCommand_8ixx_source.html">helios.engine.runtime.spawn.commands.SpawnCommand</a>;</code><br />
+<code>import <a class="el" href="SpawnProfileId_8ixx_source.html">helios.engine.core.data.SpawnProfileId</a>;</code><br />
+<code>import <a class="el" href="ScheduledSpawnPlanCommand_8ixx_source.html">helios.engine.runtime.spawn.commands.ScheduledSpawnPlanCommand</a>;</code><br />
 <code>import <a class="el" href="RotationStateComponent_8ixx_source.html">helios.engine.modules.spatial.transform.components.RotationStateComponent</a>;</code><br />
 </div><div class="textblock"><div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Include dependency graph for SpawnManager.ixx:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -152,7 +152,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:helios_3A_3Aengine_3A_3Aruntime_3A_3Aspawn_3A_3ASpawnManager" id="r_helios_3A_3Aengine_3A_3Aruntime_3A_3Aspawn_3A_3ASpawnManager"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html">helios::engine::runtime::spawn::SpawnManager</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manager for processing spawn and despawn commands.  <a href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html" title="Abstract base class for managers that process deferred operations.">Manager</a> for processing spawn and despawn commands.  <a href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>

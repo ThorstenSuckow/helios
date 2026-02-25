@@ -14,9 +14,8 @@ var searchData=
   ['delayedcomponentenablersystem_2eixx_11',['DelayedComponentEnablerSystem.ixx',['../DelayedComponentEnablerSystem_8ixx.html',1,'']]],
   ['dequeeventqueue_2eixx_12',['DequeEventQueue.ixx',['../DequeEventQueue_8ixx.html',1,'']]],
   ['despawncommand_2eixx_13',['DespawnCommand.ixx',['../DespawnCommand_8ixx.html',1,'']]],
-  ['despawncommanddispatcher_2eixx_14',['DespawnCommandDispatcher.ixx',['../DespawnCommandDispatcher_8ixx.html',1,'']]],
-  ['directioncomponent_2eixx_15',['DirectionComponent.ixx',['../DirectionComponent_8ixx.html',1,'']]],
-  ['dispatcher_2eixx_16',['Dispatcher.ixx',['../Dispatcher_8ixx.html',1,'']]],
-  ['distributedspawnplacer_2eixx_17',['DistributedSpawnPlacer.ixx',['../DistributedSpawnPlacer_8ixx.html',1,'']]],
-  ['doublebuffer_2eixx_18',['DoubleBuffer.ixx',['../DoubleBuffer_8ixx.html',1,'']]]
+  ['directioncomponent_2eixx_14',['DirectionComponent.ixx',['../DirectionComponent_8ixx.html',1,'']]],
+  ['dispatcher_2eixx_15',['Dispatcher.ixx',['../Dispatcher_8ixx.html',1,'']]],
+  ['distributedspawnplacer_2eixx_16',['DistributedSpawnPlacer.ixx',['../DistributedSpawnPlacer_8ixx.html',1,'']]],
+  ['doublebuffer_2eixx_17',['DoubleBuffer.ixx',['../DoubleBuffer_8ixx.html',1,'']]]
 ];

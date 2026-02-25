@@ -109,12 +109,6 @@ $(function() {
 
 <p>Interface for handlers that process spawn and despawn commands.  
  <a href="#details">More...</a></p>
-<div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Inheritance diagram for helios::engine::runtime::spawn::SpawnCommandHandler:</div>
-<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler__inherit__graph.svg" width="252" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -129,7 +123,7 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Interface for handlers that process spawn and despawn commands. </p>
-<p><a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler.html" title="Interface for handlers that process spawn and despawn commands.">SpawnCommandHandler</a> defines the contract for managers that handle entity lifecycle operations for GameObjectPools. Each handler is registered with a SpawnProfileId via `GameWorld::registerSpawnCommandHandler()`.</p>
+<p><a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler.html" title="Interface for handlers that process spawn and despawn commands.">SpawnCommandHandler</a> defines the contract for managers that handle entity lifecycle operations for GameObjectPools. Each handler is registered with a <a class="el" href="structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId.html" title="Strongly-typed identifier for SpawnProfile instances.">SpawnProfileId</a> via `GameWorld::registerSpawnCommandHandler()`.</p>
 <p>When a pooled entity needs to spawn or despawn, the appropriate handler is looked up by profile ID and receives the command for deferred processing.</p>
 <p>## Command Types</p>
 <ul>
@@ -138,13 +132,13 @@ Public Member Functions</h2></td></tr>
 <li>**ScheduledSpawnPlanCommand:** Commands batch spawning from scheduler</li>
 </ul>
 <p>## Implementation Notes</p>
-<p>Handlers typically also implement the Manager interface to receive flush() calls for deferred command processing during the manager flush phase.</p>
-<p>Example: ```cpp class MyPoolManager : public Manager, public <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler.html" title="Interface for handlers that process spawn and despawn commands.">SpawnCommandHandler</a> { bool submit(const SpawnCommand&amp; cmd) noexcept override { spawnQueue_.push(cmd); return true; } bool submit(const DespawnCommand&amp; cmd) noexcept override { despawnQueue_.push(cmd); return true; } bool submit(const ScheduledSpawnPlanCommand&amp; cmd) noexcept override { planQueue_.push(cmd); return true; } void flush(GameWorld&amp; world, UpdateContext&amp; ctx) noexcept override { // Process queued commands } }; ```</p>
-<dl class="section see"><dt>See also</dt><dd>SpawnCommand </dd>
+<p>Handlers typically also implement the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html" title="Abstract base class for managers that process deferred operations.">Manager</a> interface to receive flush() calls for deferred command processing during the manager flush phase.</p>
+<p>Example: ```cpp class MyPoolManager : public <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html" title="Abstract base class for managers that process deferred operations.">Manager</a>, public <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler.html" title="Interface for handlers that process spawn and despawn commands.">SpawnCommandHandler</a> { bool <a class="el" href="#a93568a4d9d3f1e1fb63e9b8febb5bd4a" title="Submits a spawn command to acquire an entity from the pool.">submit(const SpawnCommand&amp; cmd)</a> noexcept override { spawnQueue_.push(cmd); return true; } bool <a class="el" href="#ac7719f245fd62da47761b10c9d947033" title="Submits a despawn command to return an entity to its pool.">submit(const DespawnCommand&amp; cmd)</a> noexcept override { despawnQueue_.push(cmd); return true; } bool <a class="el" href="#a0e17a21616e4d27710ecbfca3e48baef" title="Submits a scheduled spawn plan command for batch spawning.">submit(const ScheduledSpawnPlanCommand&amp; cmd)</a> noexcept override { planQueue_.push(cmd); return true; } void flush(GameWorld&amp; world, UpdateContext&amp; ctx) noexcept override { // Process queued commands } }; ```</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1SpawnCommand.html" title="Command to request spawning of GameObjects from a pool.">SpawnCommand</a> </dd>
 <dd>
-DespawnCommand </dd>
+<a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1DespawnCommand.html" title="Command to request despawning of a GameObject.">DespawnCommand</a> </dd>
 <dd>
-ScheduledSpawnPlanCommand </dd>
+<a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand.html" title="Command for executing a scheduled spawn plan.">ScheduledSpawnPlanCommand</a> </dd>
 <dd>
 <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html" title="Manager for processing spawn and despawn commands.">SpawnManager</a> </dd>
 <dd>
@@ -212,8 +206,6 @@ PoolManagerRegistry </dd></dl>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if the command was accepted, false otherwise. </dd></dl>
 
-<p>Implemented in <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html#a5896ba755340affff00edcd3757068c7">helios::engine::runtime::spawn::SpawnManager</a>.</p>
-
 </div>
 </div>
 <a id="a0e17a21616e4d27710ecbfca3e48baef" name="a0e17a21616e4d27710ecbfca3e48baef"></a>
@@ -248,8 +240,6 @@ PoolManagerRegistry </dd></dl>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if the command was accepted, false otherwise. </dd></dl>
 
-<p>Implemented in <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html#ab2c6562cae1e34f6e90068710044f085">helios::engine::runtime::spawn::SpawnManager</a>.</p>
-
 </div>
 </div>
 <a id="a93568a4d9d3f1e1fb63e9b8febb5bd4a" name="a93568a4d9d3f1e1fb63e9b8febb5bd4a"></a>
@@ -283,8 +273,6 @@ PoolManagerRegistry </dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if the command was accepted, false otherwise. </dd></dl>
-
-<p>Implemented in <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html#a68c1e1c5bc8e28061333e50e7d5836bc">helios::engine::runtime::spawn::SpawnManager</a>.</p>
 
 </div>
 </div>

@@ -10,11 +10,11 @@
     <programlisting>
 <codeline><highlight class="normal">#<sp/>helios::engine::mechanics::lifecycle</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">Lifecycle<sp/>management<sp/>for<sp/>entity<sp/>components<sp/>with<sp/>delayed<sp/>activation<sp/>support.</highlight></codeline>
+<codeline><highlight class="normal">Lifecycle<sp/>management<sp/>for<sp/>entity<sp/>components<sp/>and<sp/>world-level<sp/>lifecycle<sp/>operations.</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>mechanisms<sp/>for<sp/>controlling<sp/>when<sp/>components<sp/>become<sp/>active<sp/>during<sp/>an<sp/>entity&apos;s<sp/>lifecycle.<sp/>The<sp/>primary<sp/>use<sp/>case<sp/>is<sp/>delaying<sp/>component<sp/>activation<sp/>after<sp/>spawn,<sp/>enabling<sp/>patterns<sp/>like<sp/>collision<sp/>immunity,<sp/>staggered<sp/>wave<sp/>spawns,<sp/>and<sp/>effect<sp/>sequencing.</highlight></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>mechanisms<sp/>for<sp/>controlling<sp/>when<sp/>components<sp/>become<sp/>active<sp/>during<sp/>an<sp/>entity&apos;s<sp/>lifecycle,<sp/>as<sp/>well<sp/>as<sp/>world-level<sp/>lifecycle<sp/>operations<sp/>such<sp/>as<sp/>resetting<sp/>the<sp/>game<sp/>world.<sp/>The<sp/>primary<sp/>use<sp/>cases<sp/>are<sp/>delayed<sp/>component<sp/>activation<sp/>after<sp/>spawn<sp/>(collision<sp/>immunity,<sp/>staggered<sp/>wave<sp/>spawns,<sp/>effect<sp/>sequencing)<sp/>and<sp/>deferred<sp/>world<sp/>reset<sp/>via<sp/>the<sp/>command<sp/>pipeline.</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Key<sp/>Classes</highlight></codeline>
 <codeline></codeline>
@@ -22,6 +22,9 @@
 <codeline><highlight class="normal">|-------|---------|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`DelayedComponentEnabler`<sp/>|<sp/>Component<sp/>that<sp/>tracks<sp/>pending<sp/>activations<sp/>with<sp/>timers<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`DelayedComponentEnablerSystem`<sp/>|<sp/>System<sp/>that<sp/>decrements<sp/>timers<sp/>and<sp/>enables<sp/>components<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`WorldLifecycleManager`<sp/>|<sp/>Manager<sp/>that<sp/>processes<sp/>deferred<sp/>world<sp/>lifecycle<sp/>commands<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`WorldLifecycleCommand`<sp/>|<sp/>Command<sp/>carrying<sp/>a<sp/>`WorldLifecycleAction`<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`WorldLifecycleAction`<sp/>|<sp/>Enum<sp/>defining<sp/>available<sp/>lifecycle<sp/>operations<sp/>(e.g.<sp/>`Reset`)<sp/>|</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Architecture</highlight></codeline>
 <codeline></codeline>
@@ -72,12 +75,23 @@
 <codeline><highlight class="normal">DelayedComponentEnablerInitializer&lt;RenderableComponent,<sp/>AIComponent&gt;(0.5f,<sp/>10)</highlight></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>
 <codeline></codeline>
+<codeline><highlight class="normal">##<sp/>World<sp/>Lifecycle</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>`WorldLifecycleManager`<sp/>enables<sp/>deferred<sp/>world-level<sp/>operations<sp/>through<sp/>the<sp/>command<sp/>pipeline.<sp/>Systems<sp/>and<sp/>state<sp/>listeners<sp/>submit<sp/>`WorldLifecycleCommand`<sp/>instances<sp/>instead<sp/>of<sp/>calling<sp/>`GameWorld`<sp/>methods<sp/>directly.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Request<sp/>a<sp/>world<sp/>reset<sp/>(e.g.<sp/>from<sp/>a<sp/>game-over<sp/>state<sp/>listener)</highlight></codeline>
+<codeline><highlight class="normal">updateContext.commandBuffer().add&lt;WorldLifecycleCommand&gt;(WorldLifecycleAction::Reset);</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>manager<sp/>is<sp/>auto-registered<sp/>by<sp/>`bootstrap::makeGameWorld()`<sp/>and<sp/>processes<sp/>pending<sp/>commands<sp/>during<sp/>its<sp/>flush<sp/>cycle.<sp/>A<sp/>`Reset`<sp/>action<sp/>calls<sp/>`GameWorld::reset()`,<sp/>which<sp/>reinitializes<sp/>all<sp/>managers<sp/>and<sp/>the<sp/>session.</highlight></codeline>
+<codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>
 <codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
 <codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
 <codeline><highlight class="normal">@namespace<sp/>helios::engine::mechanics::lifecycle</highlight></codeline>
-<codeline><highlight class="normal">@brief<sp/>Lifecycle<sp/>management<sp/>for<sp/>entity<sp/>components.</highlight></codeline>
-<codeline><highlight class="normal">@details<sp/>Provides<sp/>delayed<sp/>component<sp/>activation<sp/>mechanisms<sp/>for<sp/>spawn<sp/>immunity,<sp/>staggered<sp/>effects,<sp/>and<sp/>sequenced<sp/>initialization<sp/>patterns.</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Lifecycle<sp/>management<sp/>for<sp/>entity<sp/>components<sp/>and<sp/>world-level<sp/>operations.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Provides<sp/>delayed<sp/>component<sp/>activation<sp/>mechanisms<sp/>for<sp/>spawn<sp/>immunity,<sp/>staggered<sp/>effects,<sp/>and<sp/>sequenced<sp/>initialization<sp/>patterns.<sp/>Also<sp/>includes<sp/>world-level<sp/>lifecycle<sp/>management<sp/>for<sp/>deferred<sp/>reset<sp/>operations<sp/>through<sp/>the<sp/>command<sp/>pipeline.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
     </programlisting>
     <location file="/tmp/h/include/helios/engine/mechanics/lifecycle/README.md"/>

@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandHandler" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>helios::engine::runtime::messaging::command::TypedCommandHandler</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler" prot="public" virt="non-virtual">helios::engine::runtime::messaging::command::CommandHandler</basecompoundref>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1state_1_1StateManager" prot="public" virt="non-virtual">helios::engine::state::StateManager&lt; types::GameState &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1state_1_1StateManager" prot="public" virt="non-virtual">helios::engine::state::StateManager&lt; helios::engine::mechanics::match::types::MatchState &gt;</derivedcompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename CommandType</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandHandler_1a3cf2e3f0015a0b59d91fdfd3112b7ab3" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool helios::engine::runtime::messaging::command::TypedCommandHandler&lt; CommandType &gt;::submit</definition>
+        <argsstring>(CommandType cmd) noexcept=0</argsstring>
+        <name>submit</name>
+        <qualifiedname>helios::engine::runtime::messaging::command::TypedCommandHandler::submit</qualifiedname>
+        <param>
+          <type>CommandType</type>
+          <declname>cmd</declname>
+        </param>
+        <briefdescription>
+<para>Submits a command for deferred processing. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Called by the <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer" kindref="compound">TypedCommandBuffer</ref> during flush when a handler is registered for this command type. The handler typically enqueues the command for batch processing during <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a4a530617ca6c546b21b23795347e6384" kindref="member">Manager::flush()</ref>.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cmd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The command to process.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the command was accepted. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandHandler.ixx" line="57" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Type-safe handler for a specific command type. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandHandler" kindref="compound">TypedCommandHandler</ref> provides the interface for receiving commands of a specific type during the <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer" kindref="compound">TypedCommandBuffer</ref> flush. Managers that process commands implement this for each command type they handle.</para>
+<para>A single <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> may implement multiple <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandHandler" kindref="compound">TypedCommandHandler</ref> specializations:</para>
+<para>```cpp class SpawnManager : public <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref>, public <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandHandler" kindref="compound">TypedCommandHandler&lt;SpawnCommand&gt;</ref>, public <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandHandler" kindref="compound">TypedCommandHandler&lt;DespawnCommand&gt;</ref> { bool submit(SpawnCommand cmd) noexcept override { ... } bool submit(DespawnCommand cmd) noexcept override { ... } }; ```</para>
+<para>Handlers are registered with the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry" kindref="compound">ResourceRegistry</ref> during <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ae7e2cd7531de5ce1fdc1f4a179b70929" kindref="member">Manager::init()</ref> and looked up by the <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer" kindref="compound">TypedCommandBuffer</ref> at flush time.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CommandType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The command type this handler accepts.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler" kindref="compound">CommandHandler</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer" kindref="compound">TypedCommandBuffer</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::runtime::messaging::command::CommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::runtime::messaging::command::TypedCommandHandler&lt; CommandType &gt;</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandHandler"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>helios::engine::state::StateManager&lt; helios::engine::mechanics::match::types::MatchState &gt;</label>
+        <link refid="classhelios_1_1engine_1_1state_1_1StateManager"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::state::StateManager&lt; types::GameState &gt;</label>
+        <link refid="classhelios_1_1engine_1_1state_1_1StateManager"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>helios::engine::runtime::messaging::command::CommandHandler</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::runtime::messaging::command::TypedCommandHandler&lt; CommandType &gt;</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandHandler"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandHandler.ixx" line="42" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandHandler.ixx" bodystart="42" bodyend="59"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandHandler_1a3cf2e3f0015a0b59d91fdfd3112b7ab3" prot="public" virt="pure-virtual"><scope>helios::engine::runtime::messaging::command::TypedCommandHandler</scope><name>submit</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler_1a410bedb175238cfe3f9c5062cd934ebe" prot="public" virt="virtual"><scope>helios::engine::runtime::messaging::command::TypedCommandHandler</scope><name>~CommandHandler</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

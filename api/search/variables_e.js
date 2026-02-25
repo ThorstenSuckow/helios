@@ -18,5 +18,6 @@ var searchData=
   ['progid_5f_15',['progId_',['../classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader.html#a8026bd0761ea2fcf7a95a180dd04c6da',1,'helios::ext::opengl::rendering::shader::OpenGLShader']]],
   ['projectilespeed_5f_16',['projectileSpeed_',['../classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent.html#accb4b59ab1fecb6cab41ce51ab97b6ac',1,'helios::engine::mechanics::combat::components::ShootComponent']]],
   ['projectionmatrix_5f_17',['projectionMatrix_',['../classhelios_1_1scene_1_1Snapshot.html#a47dffe6969f2ed64915d1fd4599cd44a',1,'helios::scene::Snapshot']]],
-  ['purple_18',['Purple',['../structhelios_1_1util_1_1Colors.html#a2e4230f832ab139ed7ee932413de6540',1,'helios::util::Colors']]]
+  ['ptr_18',['ptr',['../structhelios_1_1core_1_1memory_1_1ErasedUnique.html#a64a2a2738febbddabe0cf1ac5e3f43a8',1,'helios::core::memory::ErasedUnique']]],
+  ['purple_19',['Purple',['../structhelios_1_1util_1_1Colors.html#a2e4230f832ab139ed7ee932413de6540',1,'helios::util::Colors']]]
 ];

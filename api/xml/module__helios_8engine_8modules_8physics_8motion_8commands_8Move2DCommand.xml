@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/physics/motion/commands/Move2DCommand.ixx" line="36" column="21" bodyfile="/tmp/h/include/helios/engine/modules/physics/motion/commands/Move2DCommand.ixx" bodystart="36" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/engine/modules/physics/motion/commands/Move2DCommand.ixx" line="40" column="21" bodyfile="/tmp/h/include/helios/engine/modules/physics/motion/commands/Move2DCommand.ixx" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1Move2DCommand_1a25ba1cf8e2bd3c7ad13b9c74f75f0870" prot="private" static="no" mutable="no">
         <type>const <ref refid="namespacehelios_1_1math_1aeab5c7e555a142f8f763a3317460d5c0" kindref="member">helios::math::vec2f</ref></type>
@@ -33,16 +33,34 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/physics/motion/commands/Move2DCommand.ixx" line="41" column="35" bodyfile="/tmp/h/include/helios/engine/modules/physics/motion/commands/Move2DCommand.ixx" bodystart="41" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/engine/modules/physics/motion/commands/Move2DCommand.ixx" line="45" column="35" bodyfile="/tmp/h/include/helios/engine/modules/physics/motion/commands/Move2DCommand.ixx" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1Move2DCommand_1afdf02a11218f72dcd48a4adc9d5b4759" prot="private" static="no" mutable="no">
+        <type>const <ref refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle" kindref="compound">helios::engine::ecs::EntityHandle</ref></type>
+        <definition>const helios::engine::ecs::EntityHandle helios::engine::modules::physics::motion::commands::Move2DCommand::entityHandle_</definition>
+        <argsstring></argsstring>
+        <name>entityHandle_</name>
+        <qualifiedname>helios::engine::modules::physics::motion::commands::Move2DCommand::entityHandle_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/physics/motion/commands/Move2DCommand.ixx" line="47" column="49" bodyfile="/tmp/h/include/helios/engine/modules/physics/motion/commands/Move2DCommand.ixx" bodystart="47" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1Move2DCommand_1a0802f5b633a00d2f12e4d4f64426dc0e" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1Move2DCommand_1a0e9bbf074a60567cbf4bcaffed519f83" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
         <definition>helios::engine::modules::physics::motion::commands::Move2DCommand::Move2DCommand</definition>
-        <argsstring>(const helios::math::vec2f direction, const float speedFactor)</argsstring>
+        <argsstring>(const helios::engine::ecs::EntityHandle entityHandle, const helios::math::vec2f direction, const float speedFactor)</argsstring>
         <name>Move2DCommand</name>
         <qualifiedname>helios::engine::modules::physics::motion::commands::Move2DCommand::Move2DCommand</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle" kindref="compound">helios::engine::ecs::EntityHandle</ref></type>
+          <declname>entityHandle</declname>
+        </param>
         <param>
           <type>const <ref refid="namespacehelios_1_1math_1aeab5c7e555a142f8f763a3317460d5c0" kindref="member">helios::math::vec2f</ref></type>
           <declname>direction</declname>
@@ -76,18 +94,17 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/physics/motion/commands/Move2DCommand.ixx" line="51" column="18" bodyfile="/tmp/h/include/helios/engine/modules/physics/motion/commands/Move2DCommand.ixx" bodystart="51" bodyend="57"/>
+        <location file="/tmp/h/include/helios/engine/modules/physics/motion/commands/Move2DCommand.ixx" line="57" column="18" bodyfile="/tmp/h/include/helios/engine/modules/physics/motion/commands/Move2DCommand.ixx" bodystart="57" bodyend="65"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1Move2DCommand_1a4cd5c2f5e4c9571d67f1e735d802dabf" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1Move2DCommand_1a001e7918a2fe76ebd9aa382c3f969aec" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
         <definition>void helios::engine::modules::physics::motion::commands::Move2DCommand::execute</definition>
-        <argsstring>(helios::engine::ecs::GameObject gameObject) const noexcept override</argsstring>
+        <argsstring>(helios::engine::runtime::world::UpdateContext &amp;updateContext) const noexcept</argsstring>
         <name>execute</name>
         <qualifiedname>helios::engine::modules::physics::motion::commands::Move2DCommand::execute</qualifiedname>
-        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand_1a7b06969ba22a31d99ea0b77732993ed7">execute</reimplements>
         <param>
-          <type><ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref></type>
-          <declname>gameObject</declname>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
         </param>
         <briefdescription>
 <para>Executes the movement command on a GameObject. </para>
@@ -106,7 +123,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/physics/motion/commands/Move2DCommand.ixx" line="64" column="14" bodyfile="/tmp/h/include/helios/engine/modules/physics/motion/commands/Move2DCommand.ixx" bodystart="64" bodyend="72"/>
+        <location file="/tmp/h/include/helios/engine/modules/physics/motion/commands/Move2DCommand.ixx" line="72" column="14" bodyfile="/tmp/h/include/helios/engine/modules/physics/motion/commands/Move2DCommand.ixx" bodystart="72" bodyend="86"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

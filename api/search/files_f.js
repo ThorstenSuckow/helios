@@ -19,7 +19,9 @@ var searchData=
   ['rendertarget_2eixx_16',['RenderTarget.ixx',['../RenderTarget_8ixx.html',1,'']]],
   ['rendertargetfwd_2eixx_17',['RenderTargetFwd.ixx',['../RenderTargetFwd_8ixx.html',1,'']]],
   ['requestedamountisavailablecondition_2eixx_18',['RequestedAmountIsAvailableCondition.ixx',['../RequestedAmountIsAvailableCondition_8ixx.html',1,'']]],
-  ['rhombus_2eixx_19',['Rhombus.ixx',['../Rhombus_8ixx.html',1,'']]],
-  ['rotationstatecomponent_2eixx_20',['RotationStateComponent.ixx',['../RotationStateComponent_8ixx.html',1,'']]],
-  ['ruleprocessor_2eixx_21',['RuleProcessor.ixx',['../RuleProcessor_8ixx.html',1,'']]]
+  ['resourceregistry_2eixx_19',['ResourceRegistry.ixx',['../ResourceRegistry_8ixx.html',1,'']]],
+  ['resourcetypeid_2eixx_20',['ResourceTypeId.ixx',['../ResourceTypeId_8ixx.html',1,'']]],
+  ['rhombus_2eixx_21',['Rhombus.ixx',['../Rhombus_8ixx.html',1,'']]],
+  ['rotationstatecomponent_2eixx_22',['RotationStateComponent.ixx',['../RotationStateComponent_8ixx.html',1,'']]],
+  ['ruleprocessor_2eixx_23',['RuleProcessor.ixx',['../RuleProcessor_8ixx.html',1,'']]]
 ];

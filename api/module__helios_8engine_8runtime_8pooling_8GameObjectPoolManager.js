@@ -6,7 +6,7 @@ var module__helios_8engine_8runtime_8pooling_8GameObjectPoolManager =
     [ "helios::engine::runtime::pooling::GameObjectPoolManager::release", "module__helios_8engine_8runtime_8pooling_8GameObjectPoolManager.html#a85c5d5ed93c6e22f4d09750273e77c73", null ],
     [ "helios::engine::runtime::pooling::GameObjectPoolManager::acquire", "module__helios_8engine_8runtime_8pooling_8GameObjectPoolManager.html#a965ef591bc25269837e5e95118cb52d2", null ],
     [ "helios::engine::runtime::pooling::GameObjectPoolManager::init", "module__helios_8engine_8runtime_8pooling_8GameObjectPoolManager.html#a7f5ef214b56eba5241a20de5d964eff2", null ],
-    [ "helios::engine::runtime::pooling::GameObjectPoolManager::flush", "module__helios_8engine_8runtime_8pooling_8GameObjectPoolManager.html#ab69a353b11e4ee5a834dca810f3239e9", null ],
+    [ "helios::engine::runtime::pooling::GameObjectPoolManager::flush", "module__helios_8engine_8runtime_8pooling_8GameObjectPoolManager.html#ab5c9788a67aee220c43f4c3f7b633bbd", null ],
     [ "helios::engine::runtime::pooling::GameObjectPoolManager::pool", "module__helios_8engine_8runtime_8pooling_8GameObjectPoolManager.html#a9cc0f690e30550d213698d06210f69a6", null ],
     [ "helios::engine::runtime::pooling::GameObjectPoolManager::reset", "module__helios_8engine_8runtime_8pooling_8GameObjectPoolManager.html#a1f3ad93fd926408196bca49a9707757e", null ]
 ];

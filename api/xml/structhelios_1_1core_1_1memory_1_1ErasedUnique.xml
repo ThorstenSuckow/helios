@@ -1,0 +1,230 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="structhelios_1_1core_1_1memory_1_1ErasedUnique" kind="struct" language="C++" prot="public">
+    <compoundname>helios::core::memory::ErasedUnique</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structhelios_1_1core_1_1memory_1_1ErasedUnique_1a64a2a2738febbddabe0cf1ac5e3f43a8" prot="public" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* helios::core::memory::ErasedUnique::ptr</definition>
+        <argsstring></argsstring>
+        <name>ptr</name>
+        <qualifiedname>helios::core::memory::ErasedUnique::ptr</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>Raw pointer to the owned object. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/memory/ErasedUnique.ixx" line="36" column="14" bodyfile="/tmp/h/include/helios/core/memory/ErasedUnique.ixx" bodystart="36" bodyend="-1"/>
+        <referencedby refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1acb4e619797fe16987ab5acc04fb73192" compoundref="ErasedUnique_8ixx" startline="80" endline="88">operator=</referencedby>
+        <referencedby refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1a29ea44e555a8bbe0725d41a0e477601f" compoundref="ErasedUnique_8ixx" startline="98" endline="104">reset</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structhelios_1_1core_1_1memory_1_1ErasedUnique_1a5dd7d498967d63f8d0e16888d7e8b4bd" prot="public" static="no" mutable="no">
+        <type>void(*</type>
+        <definition>void(* helios::core::memory::ErasedUnique::destroy) (void *) noexcept</definition>
+        <argsstring>)(void *) noexcept</argsstring>
+        <name>destroy</name>
+        <qualifiedname>helios::core::memory::ErasedUnique::destroy</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>Stateless deleter that knows the concrete type. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/memory/ErasedUnique.ixx" line="41" column="9" bodyfile="/tmp/h/include/helios/core/memory/ErasedUnique.ixx" bodystart="41" bodyend="-1"/>
+        <referencedby refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1acb4e619797fe16987ab5acc04fb73192" compoundref="ErasedUnique_8ixx" startline="80" endline="88">operator=</referencedby>
+        <referencedby refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1a29ea44e555a8bbe0725d41a0e477601f" compoundref="ErasedUnique_8ixx" startline="98" endline="104">reset</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structhelios_1_1core_1_1memory_1_1ErasedUnique_1ada7b198b62571d105d73de458dce6924" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::core::memory::ErasedUnique::ErasedUnique</definition>
+        <argsstring>()=default</argsstring>
+        <name>ErasedUnique</name>
+        <qualifiedname>helios::core::memory::ErasedUnique::ErasedUnique</qualifiedname>
+        <briefdescription>
+<para>Default constructor. Creates an empty (non-owning) instance. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/memory/ErasedUnique.ixx" line="46" column="9"/>
+        <referencedby refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1a093a209fb25f5bad93ce552eecb3f305" compoundref="ErasedUnique_8ixx" startline="68" endline="71">ErasedUnique</referencedby>
+        <referencedby refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1acb4e619797fe16987ab5acc04fb73192" compoundref="ErasedUnique_8ixx" startline="80" endline="88">operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1core_1_1memory_1_1ErasedUnique_1a0d994cf662abf84b02c4f3a4b1bf0be8" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>helios::core::memory::ErasedUnique::ErasedUnique</definition>
+        <argsstring>(std::unique_ptr&lt; T &gt; p) noexcept</argsstring>
+        <name>ErasedUnique</name>
+        <qualifiedname>helios::core::memory::ErasedUnique::ErasedUnique</qualifiedname>
+        <param>
+          <type>std::unique_ptr&lt; T &gt;</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>Constructs from a unique_ptr, taking ownership. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Releases the unique_ptr and captures a typed deleter.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The owned type.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unique_ptr to take ownership from. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/memory/ErasedUnique.ixx" line="58" column="18" bodyfile="/tmp/h/include/helios/core/memory/ErasedUnique.ixx" bodystart="58" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1core_1_1memory_1_1ErasedUnique_1a093a209fb25f5bad93ce552eecb3f305" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::core::memory::ErasedUnique::ErasedUnique</definition>
+        <argsstring>(ErasedUnique &amp;&amp;obj) noexcept</argsstring>
+        <name>ErasedUnique</name>
+        <qualifiedname>helios::core::memory::ErasedUnique::ErasedUnique</qualifiedname>
+        <param>
+          <type>ErasedUnique &amp;&amp;</type>
+          <declname>obj</declname>
+        </param>
+        <briefdescription>
+<para>Move constructor. Transfers ownership. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>obj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The source instance (nulled after move). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/memory/ErasedUnique.ixx" line="68" column="9" bodyfile="/tmp/h/include/helios/core/memory/ErasedUnique.ixx" bodystart="68" bodyend="71"/>
+        <references refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1ada7b198b62571d105d73de458dce6924">ErasedUnique</references>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1core_1_1memory_1_1ErasedUnique_1acb4e619797fe16987ab5acc04fb73192" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1ada7b198b62571d105d73de458dce6924" kindref="member">ErasedUnique</ref> &amp;</type>
+        <definition>ErasedUnique &amp; helios::core::memory::ErasedUnique::operator=</definition>
+        <argsstring>(ErasedUnique &amp;&amp;obj) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>helios::core::memory::ErasedUnique::operator=</qualifiedname>
+        <param>
+          <type><ref refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1ada7b198b62571d105d73de458dce6924" kindref="member">ErasedUnique</ref> &amp;&amp;</type>
+          <declname>obj</declname>
+        </param>
+        <briefdescription>
+<para>Move assignment. Transfers ownership after releasing current. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>obj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The source instance (nulled after move).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to this instance. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/memory/ErasedUnique.ixx" line="80" column="22" bodyfile="/tmp/h/include/helios/core/memory/ErasedUnique.ixx" bodystart="80" bodyend="88"/>
+        <references refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1a5dd7d498967d63f8d0e16888d7e8b4bd" compoundref="ErasedUnique_8ixx" startline="41">destroy</references>
+        <references refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1ada7b198b62571d105d73de458dce6924">ErasedUnique</references>
+        <references refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1a64a2a2738febbddabe0cf1ac5e3f43a8" compoundref="ErasedUnique_8ixx" startline="36">ptr</references>
+        <references refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1a29ea44e555a8bbe0725d41a0e477601f" compoundref="ErasedUnique_8ixx" startline="98" endline="104">reset</references>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1core_1_1memory_1_1ErasedUnique_1abd6c8163994585895a95fcf5696d20a9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::core::memory::ErasedUnique::~ErasedUnique</definition>
+        <argsstring>()</argsstring>
+        <name>~ErasedUnique</name>
+        <qualifiedname>helios::core::memory::ErasedUnique::~ErasedUnique</qualifiedname>
+        <briefdescription>
+<para>Destructor. Destroys the owned object if present. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/memory/ErasedUnique.ixx" line="93" column="9" bodyfile="/tmp/h/include/helios/core/memory/ErasedUnique.ixx" bodystart="93" bodyend="93"/>
+        <references refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1a29ea44e555a8bbe0725d41a0e477601f" compoundref="ErasedUnique_8ixx" startline="98" endline="104">reset</references>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1core_1_1memory_1_1ErasedUnique_1a29ea44e555a8bbe0725d41a0e477601f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::core::memory::ErasedUnique::reset</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>reset</name>
+        <qualifiedname>helios::core::memory::ErasedUnique::reset</qualifiedname>
+        <briefdescription>
+<para>Destroys the owned object and resets to empty. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/memory/ErasedUnique.ixx" line="98" column="14" bodyfile="/tmp/h/include/helios/core/memory/ErasedUnique.ixx" bodystart="98" bodyend="104"/>
+        <references refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1a5dd7d498967d63f8d0e16888d7e8b4bd" compoundref="ErasedUnique_8ixx" startline="41">destroy</references>
+        <references refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1a64a2a2738febbddabe0cf1ac5e3f43a8" compoundref="ErasedUnique_8ixx" startline="36">ptr</references>
+        <referencedby refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1acb4e619797fe16987ab5acc04fb73192" compoundref="ErasedUnique_8ixx" startline="80" endline="88">operator=</referencedby>
+        <referencedby refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1abd6c8163994585895a95fcf5696d20a9" compoundref="ErasedUnique_8ixx" startline="93" endline="93">~ErasedUnique</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Type-erased unique ownership wrapper. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="structhelios_1_1core_1_1memory_1_1ErasedUnique" kindref="compound">ErasedUnique</ref> provides `unique_ptr`-like ownership semantics without requiring a common base class or virtual destructor. It stores a `void*` and a stateless deleter function pointer, totaling 16 bytes.</para>
+<para>Used by ResourceRegistry to store heterogeneous resource types (Managers, CommandBuffers) in a single owning collection without vtable overhead for destruction.</para>
+<para>## Move-Only Semantics</para>
+<para><ref refid="structhelios_1_1core_1_1memory_1_1ErasedUnique" kindref="compound">ErasedUnique</ref> is move-only. Moving transfers ownership and nulls the source. Copy construction and assignment are implicitly deleted.</para>
+<para><simplesect kind="see"><para>ResourceRegistry </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/core/memory/ErasedUnique.ixx" line="31" column="5" bodyfile="/tmp/h/include/helios/core/memory/ErasedUnique.ixx" bodystart="31" bodyend="105"/>
+    <listofallmembers>
+      <member refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1a5dd7d498967d63f8d0e16888d7e8b4bd" prot="public" virt="non-virtual"><scope>helios::core::memory::ErasedUnique</scope><name>destroy</name></member>
+      <member refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1ada7b198b62571d105d73de458dce6924" prot="public" virt="non-virtual"><scope>helios::core::memory::ErasedUnique</scope><name>ErasedUnique</name></member>
+      <member refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1a0d994cf662abf84b02c4f3a4b1bf0be8" prot="public" virt="non-virtual"><scope>helios::core::memory::ErasedUnique</scope><name>ErasedUnique</name></member>
+      <member refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1a093a209fb25f5bad93ce552eecb3f305" prot="public" virt="non-virtual"><scope>helios::core::memory::ErasedUnique</scope><name>ErasedUnique</name></member>
+      <member refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1acb4e619797fe16987ab5acc04fb73192" prot="public" virt="non-virtual"><scope>helios::core::memory::ErasedUnique</scope><name>operator=</name></member>
+      <member refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1a64a2a2738febbddabe0cf1ac5e3f43a8" prot="public" virt="non-virtual"><scope>helios::core::memory::ErasedUnique</scope><name>ptr</name></member>
+      <member refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1a29ea44e555a8bbe0725d41a0e477601f" prot="public" virt="non-virtual"><scope>helios::core::memory::ErasedUnique</scope><name>reset</name></member>
+      <member refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1abd6c8163994585895a95fcf5696d20a9" prot="public" virt="non-virtual"><scope>helios::core::memory::ErasedUnique</scope><name>~ErasedUnique</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

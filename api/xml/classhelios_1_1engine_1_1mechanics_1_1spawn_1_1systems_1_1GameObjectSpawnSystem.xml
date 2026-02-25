@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" line="28" column="54" bodyfile="/tmp/h/include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" bodystart="28" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" line="31" column="54" bodyfile="/tmp/h/include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" bodystart="31" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -36,7 +36,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" line="33" column="18" bodyfile="/tmp/h/include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" bodystart="33" bodyend="34"/>
+        <location file="/tmp/h/include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" line="36" column="18" bodyfile="/tmp/h/include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" bodystart="36" bodyend="37"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem_1a69d47de2e4bae743dab2fc03349b3902" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>void</type>
@@ -46,7 +46,7 @@
         <qualifiedname>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem::update</qualifiedname>
         <reimplements refid="classhelios_1_1engine_1_1ecs_1_1System_1a4e9969641985fa04db6214332c88605b">update</reimplements>
         <param>
-          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
           <declname>updateContext</declname>
         </param>
         <briefdescription>
@@ -69,7 +69,7 @@
 <para><xrefsect id="todo_1_todo000010"><xreftitle>Todo</xreftitle><xrefdescription><para>this should be processed before iterating over all schedulers: A scheduler owns the rule, hence a rule that triggered the event&apos;s can be associated with the owning Scheduler, making it unneccesary to iterate over already processed events </para>
 </xrefdescription></xrefsect></para>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" line="48" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" bodystart="48" bodyend="78"/>
+        <location file="/tmp/h/include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" line="51" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" bodystart="51" bodyend="81"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -95,11 +95,11 @@
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="11">
+      <node id="8">
         <label>helios::engine::ecs::EntityManager</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1EntityManager"/>
       </node>
-      <node id="10">
+      <node id="7">
         <label>helios::engine::ecs::EntityRegistry</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry"/>
       </node>
@@ -116,27 +116,11 @@
         <label>helios::engine::ecs::Updatable</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1Updatable"/>
       </node>
-      <node id="6">
-        <label>helios::engine::mechanics::scoring::ScoreCommandHandler</label>
-        <link refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler"/>
-      </node>
       <node id="1">
         <label>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem</label>
         <link refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
-      </node>
-      <node id="7">
-        <label>helios::engine::mechanics::timing::TimerCommandHandler</label>
-        <link refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerCommandHandler"/>
-      </node>
-      <node id="8">
-        <label>helios::engine::modules::ui::UiActionCommandHandler</label>
-        <link refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandHandler"/>
-      </node>
-      <node id="9">
-        <label>helios::engine::runtime::spawn::SpawnCommandHandlerRegistry</label>
-        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandlerRegistry"/>
       </node>
       <node id="4">
         <label>helios::engine::runtime::world::GameWorld</label>
@@ -145,28 +129,23 @@
           <edgelabel>logger_</edgelabel>
         </childnode>
         <childnode refid="6" relation="usage">
-          <edgelabel>scoreCommandHandler_</edgelabel>
+          <edgelabel>resourceRegistry_</edgelabel>
         </childnode>
         <childnode refid="7" relation="usage">
-          <edgelabel>timerCommandHandler_</edgelabel>
-        </childnode>
-        <childnode refid="8" relation="usage">
-          <edgelabel>uiActionCommandHandler_</edgelabel>
-        </childnode>
-        <childnode refid="9" relation="usage">
-          <edgelabel>spawnCommandHandlerRegistry_</edgelabel>
-        </childnode>
-        <childnode refid="10" relation="usage">
           <edgelabel>entityRegistry_</edgelabel>
         </childnode>
-        <childnode refid="11" relation="usage">
+        <childnode refid="8" relation="usage">
           <edgelabel>em_</edgelabel>
         </childnode>
-        <childnode refid="12" relation="usage">
+        <childnode refid="9" relation="usage">
           <edgelabel>session_</edgelabel>
         </childnode>
       </node>
-      <node id="12">
+      <node id="6">
+        <label>helios::engine::runtime::world::ResourceRegistry</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry"/>
+      </node>
+      <node id="9">
         <label>helios::engine::runtime::world::Session</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session"/>
       </node>
@@ -175,7 +154,7 @@
         <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
       </node>
     </collaborationgraph>
-    <location file="/tmp/h/include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" line="25" column="5" bodyfile="/tmp/h/include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" bodystart="25" bodyend="80"/>
+    <location file="/tmp/h/include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" line="28" column="5" bodyfile="/tmp/h/include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" bodystart="28" bodyend="83"/>
     <listofallmembers>
       <member refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem_1a7c02d4c13cda557bf422015dad4f65d0" prot="public" virt="non-virtual"><scope>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem</scope><name>GameObjectSpawnSystem</name></member>
       <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" prot="protected" virt="non-virtual"><scope>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem</scope><name>gameWorld_</name></member>

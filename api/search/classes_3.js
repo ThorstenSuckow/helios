@@ -14,9 +14,8 @@ var searchData=
   ['delayedcomponentenablersystem_11',['DelayedComponentEnablerSystem',['../classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1DelayedComponentEnablerSystem.html',1,'helios::engine::mechanics::lifecycle::systems']]],
   ['dequeeventqueue_12',['DequeEventQueue',['../classhelios_1_1event_1_1DequeEventQueue.html',1,'helios::event']]],
   ['despawncommand_13',['DespawnCommand',['../classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1DespawnCommand.html',1,'helios::engine::runtime::spawn::commands']]],
-  ['despawncommanddispatcher_14',['DespawnCommandDispatcher',['../classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1DespawnCommandDispatcher.html',1,'helios::engine::runtime::spawn::dispatcher']]],
-  ['directioncomponent_15',['DirectionComponent',['../classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1DirectionComponent.html',1,'helios::engine::modules::physics::motion::components']]],
-  ['dispatcher_16',['Dispatcher',['../classhelios_1_1event_1_1Dispatcher.html',1,'helios::event']]],
-  ['distributedspawnplacer_17',['DistributedSpawnPlacer',['../classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1DistributedSpawnPlacer.html',1,'helios::engine::runtime::spawn::behavior::placements']]],
-  ['doublebuffer_18',['DoubleBuffer',['../classhelios_1_1core_1_1buffer_1_1DoubleBuffer.html',1,'helios::core::buffer']]]
+  ['directioncomponent_14',['DirectionComponent',['../classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1DirectionComponent.html',1,'helios::engine::modules::physics::motion::components']]],
+  ['dispatcher_15',['Dispatcher',['../classhelios_1_1event_1_1Dispatcher.html',1,'helios::event']]],
+  ['distributedspawnplacer_16',['DistributedSpawnPlacer',['../classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1DistributedSpawnPlacer.html',1,'helios::engine::runtime::spawn::behavior::placements']]],
+  ['doublebuffer_17',['DoubleBuffer',['../classhelios_1_1core_1_1buffer_1_1DoubleBuffer.html',1,'helios::core::buffer']]]
 ];

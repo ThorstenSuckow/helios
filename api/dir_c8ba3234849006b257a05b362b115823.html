@@ -110,29 +110,33 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="dir_c8ba3234849006b257a05b362b115823_dep.svg" width="336" height="314"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="dir_c8ba3234849006b257a05b362b115823_dep.svg" width="420" height="315"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-subdirs" class="groupheader"><a id="subdirs" name="subdirs"></a>
 Directories</h2></td></tr>
+<tr class="memitem:commands" id="r_commands"><td class="memItemLeft" align="right" valign="top"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_db86f11dedfd09ad096f192bbb7f0a5e.html">commands</a></td></tr>
 <tr class="memitem:components" id="r_components"><td class="memItemLeft" align="right" valign="top"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_9c6cd3e8e6e0499e50b91381009c10c7.html">components</a></td></tr>
 <tr class="memitem:systems" id="r_systems"><td class="memItemLeft" align="right" valign="top"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_b1389cf074ecf461b5a393105b0e9b57.html">systems</a></td></tr>
+<tr class="memitem:types" id="r_types"><td class="memItemLeft" align="right" valign="top"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_ada361f984e4a5be1a99b39ca6ecaff1.html">types</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-files" class="groupheader"><a id="files" name="files"></a>
 Files</h2></td></tr>
 <tr class="memitem:_5Fmodule_2Eixx" id="r__5Fmodule_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="helios_2engine_2mechanics_2lifecycle_2__module_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="helios_2engine_2mechanics_2lifecycle_2__module_8ixx.html">_module.ixx</a></td></tr>
-<tr class="memdesc:helios_2engine_2mechanics_2lifecycle_2__module_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aggregates lifecycle management modules for entity components. <br /></td></tr>
+<tr class="memdesc:helios_2engine_2mechanics_2lifecycle_2__module_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aggregates lifecycle management modules. <br /></td></tr>
 <tr class="memitem:registry_2Eixx" id="r_registry_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="mechanics_2lifecycle_2registry_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mechanics_2lifecycle_2registry_8ixx.html">registry.ixx</a></td></tr>
 <tr class="memdesc:mechanics_2lifecycle_2registry_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Component registration for lifecycle module. <br /></td></tr>
+<tr class="memitem:WorldLifecycleManager_2Eixx" id="r_WorldLifecycleManager_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="WorldLifecycleManager_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="WorldLifecycleManager_8ixx.html">WorldLifecycleManager.ixx</a></td></tr>
+<tr class="memdesc:WorldLifecycleManager_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manager for deferred world-level lifecycle operations. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md249"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md261"></a>
 helios::engine::mechanics::lifecycle</h1>
-<p>Lifecycle management for entity components with delayed activation support.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md250"></a>
+<p>Lifecycle management for entity components and world-level lifecycle operations.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md262"></a>
 Overview</h1>
-<p>This module provides mechanisms for controlling when components become active during an entity's lifecycle. The primary use case is delaying component activation after spawn, enabling patterns like collision immunity, staggered wave spawns, and effect sequencing.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md251"></a>
+<p>This module provides mechanisms for controlling when components become active during an entity's lifecycle, as well as world-level lifecycle operations such as resetting the game world. The primary use cases are delayed component activation after spawn (collision immunity, staggered wave spawns, effect sequencing) and deferred world reset via the command pipeline.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md263"></a>
 Key Classes</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -141,8 +145,14 @@ Key Classes</h1>
 <td class="markdownTableBodyNone"><span class="tt">DelayedComponentEnabler</span>  </td><td class="markdownTableBodyNone">Component that tracks pending activations with timers  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">DelayedComponentEnablerSystem</span>  </td><td class="markdownTableBodyNone">System that decrements timers and enables components  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">WorldLifecycleManager</span>  </td><td class="markdownTableBodyNone">Manager that processes deferred world lifecycle commands  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">WorldLifecycleCommand</span>  </td><td class="markdownTableBodyNone">Command carrying a <span class="tt">WorldLifecycleAction</span>  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">WorldLifecycleAction</span>  </td><td class="markdownTableBodyNone">Enum defining available lifecycle operations (e.g. <span class="tt">Reset</span>)  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md252"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md264"></a>
 Architecture</h1>
 <div class="fragment"><div class="line">DelayedComponentEnablerInitializer</div>
 <div class="line">        │</div>
@@ -160,7 +170,7 @@ Architecture</h1>
 <div class="line">│  - enable() when delta &lt;= 0    │</div>
 <div class="line">│  - sync() to remove completed  │</div>
 <div class="line">└────────────────────────────────┘</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md253"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md265"></a>
 Usage</h1>
 <div class="fragment"><div class="line"><span class="comment">// During spawn initialization, defer collision component by 0.5 seconds</span></div>
 <div class="line"><span class="keyword">auto</span>* enabler = entity.get&lt;DelayedComponentEnabler&gt;();</div>
@@ -171,13 +181,19 @@ Usage</h1>
 <div class="line">    CollisionComponent,</div>
 <div class="line">    RenderableComponent</div>
 <div class="line">&gt;&gt;(0.1f);  <span class="comment">// 0.1s delay between each entity in batch</span></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md254"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md266"></a>
 Common Patterns</h1>
 <p><b>Collision Immunity</b> </p><div class="fragment"><div class="line"><span class="comment">// Projectiles ignore collisions for 0.2s after spawn</span></div>
 <div class="line">DelayedComponentEnablerInitializer&lt;CollisionComponent&gt;(0.2f)</div>
 </div><!-- fragment --><p><b>Staggered Wave Spawns</b> </p><div class="fragment"><div class="line"><span class="comment">// 10 enemies appear one by one, 0.5s apart, then pattern repeats</span></div>
 <div class="line">DelayedComponentEnablerInitializer&lt;RenderableComponent, AIComponent&gt;(0.5f, 10)</div>
-</div><!-- fragment --><hr  />
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md267"></a>
+World Lifecycle</h1>
+<p>The <span class="tt">WorldLifecycleManager</span> enables deferred world-level operations through the command pipeline. Systems and state listeners submit <span class="tt">WorldLifecycleCommand</span> instances instead of calling <span class="tt">GameWorld</span> methods directly.</p>
+<div class="fragment"><div class="line"><span class="comment">// Request a world reset (e.g. from a game-over state listener)</span></div>
+<div class="line">updateContext.commandBuffer().add&lt;WorldLifecycleCommand&gt;(WorldLifecycleAction::Reset);</div>
+</div><!-- fragment --><p>The manager is auto-registered by <span class="tt">bootstrap::makeGameWorld()</span> and processes pending commands during its flush cycle. A <span class="tt">Reset</span> action calls <span class="tt">GameWorld::reset()</span>, which reinitializes all managers and the session.</p>
+<hr  />
  <details >
 <summary >
 Doxygen</summary>

@@ -1,0 +1,212 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8engine_8runtime_8messaging_8command_8TypedCommandBuffer" kind="module">
+    <compoundname>helios.engine.runtime.messaging.command.TypedCommandBuffer</compoundname>
+    <innerfile refid="TypedCommandBuffer_8ixx">TypedCommandBuffer.ixx</innerfile>
+    <innerclass refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer" prot="public">helios::engine::runtime::messaging::command::TypedCommandBuffer</innerclass>
+    <innerconcept refid="concepthelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1ExecutableCommand">helios::engine::runtime::messaging::command::ExecutableCommand</innerconcept>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a44375c2d4b706e04d8a0efa768d82317" prot="private" static="no" mutable="no">
+        <type>std::tuple&lt; std::vector&lt; CommandTypes &gt;... &gt;</type>
+        <definition>std::tuple&lt;std::vector&lt;CommandTypes&gt;...&gt; helios::engine::runtime::messaging::command::TypedCommandBuffer&lt; CommandTypes &gt;::commandQueues_</definition>
+        <argsstring></argsstring>
+        <name>commandQueues_</name>
+        <qualifiedname>helios::engine::runtime::messaging::command::TypedCommandBuffer::commandQueues_</qualifiedname>
+        <briefdescription>
+<para>Per-type command queues stored as a tuple of vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" line="75" column="20" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" bodystart="75" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a8c0798c8503d1e8bce1a299b02c84d79" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CommandType</type>
+          </param>
+        </templateparamlist>
+        <type>std::vector&lt; CommandType &gt; &amp;</type>
+        <definition>std::vector&lt; CommandType &gt; &amp; helios::engine::runtime::messaging::command::TypedCommandBuffer&lt; CommandTypes &gt;::commandQueue</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>commandQueue</name>
+        <qualifiedname>helios::engine::runtime::messaging::command::TypedCommandBuffer::commandQueue</qualifiedname>
+        <briefdescription>
+<para>Returns the queue for a specific command type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CommandType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The command type.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to the command queue. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" line="85" column="21" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" bodystart="85" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1ae28007881a7a5116688535261d5e8b9a" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CommandType</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void helios::engine::runtime::messaging::command::TypedCommandBuffer&lt; CommandTypes &gt;::flushCommandQueue</definition>
+        <argsstring>(helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept</argsstring>
+        <name>flushCommandQueue</name>
+        <qualifiedname>helios::engine::runtime::messaging::command::TypedCommandBuffer::flushCommandQueue</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Flushes a single command queue. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Routes each command to its registered handler, or executes it directly if no handler is registered and the command satisfies <ref refid="concepthelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1ExecutableCommand" kindref="compound">ExecutableCommand</ref>.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CommandType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The command type to flush.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current frame&apos;s update context. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" line="101" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" bodystart="101" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a35748f3c15d9e92098bed8d174cb7042" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void helios::engine::runtime::messaging::command::TypedCommandBuffer&lt; CommandTypes &gt;::add</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>add</name>
+        <qualifiedname>helios::engine::runtime::messaging::command::TypedCommandBuffer::add</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Enqueues a command of the specified type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The command type. Must be one of the CommandTypes. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Constructor argument types.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Arguments forwarded to the command constructor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" line="141" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" bodystart="141" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a8e0ac1bed42dc63df2b3f8c270e35758" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::messaging::command::TypedCommandBuffer&lt; CommandTypes &gt;::clear</definition>
+        <argsstring>() noexcept override</argsstring>
+        <name>clear</name>
+        <qualifiedname>helios::engine::runtime::messaging::command::TypedCommandBuffer::clear</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a79125d01f21544304762287af62d176a">clear</reimplements>
+        <briefdescription>
+<para>Discards all queued commands without executing them. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" line="152" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" bodystart="152" bodyend="155"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a1e035c4076ab5658d6cac38badec66ce" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::messaging::command::TypedCommandBuffer&lt; CommandTypes &gt;::flush</definition>
+        <argsstring>(helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept override</argsstring>
+        <name>flush</name>
+        <qualifiedname>helios::engine::runtime::messaging::command::TypedCommandBuffer::flush</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a8535f5c29283dac178b3b3d2449210d4">flush</reimplements>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Flushes all command queues in template parameter order. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Iterates through each command type using a fold expression, flushing queues in the order specified by the template parameters.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current frame&apos;s update context. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" line="165" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" bodystart="165" bodyend="167"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" line="12" column="15"/>
+  </compounddef>
+</doxygen>

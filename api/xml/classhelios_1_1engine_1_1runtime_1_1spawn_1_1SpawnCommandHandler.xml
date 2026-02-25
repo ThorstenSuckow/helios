@@ -2,7 +2,6 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>helios::engine::runtime::spawn::SpawnCommandHandler</compoundname>
-    <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" prot="public" virt="non-virtual">helios::engine::runtime::spawn::SpawnManager</derivedcompoundref>
     <sectiondef kind="public-func">
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler_1af8ec8360e7f6a91e46ce5207c98caea9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -25,7 +24,6 @@
         <argsstring>(const helios::engine::runtime::spawn::commands::DespawnCommand &amp;despawnCommand) noexcept=0</argsstring>
         <name>submit</name>
         <qualifiedname>helios::engine::runtime::spawn::SpawnCommandHandler::submit</qualifiedname>
-        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a5896ba755340affff00edcd3757068c7">submit</reimplementedby>
         <param>
           <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1DespawnCommand" kindref="compound">helios::engine::runtime::spawn::commands::DespawnCommand</ref> &amp;</type>
           <declname>despawnCommand</declname>
@@ -57,7 +55,6 @@
         <argsstring>(const helios::engine::runtime::spawn::commands::SpawnCommand &amp;spawnCommand) noexcept=0</argsstring>
         <name>submit</name>
         <qualifiedname>helios::engine::runtime::spawn::SpawnCommandHandler::submit</qualifiedname>
-        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a68c1e1c5bc8e28061333e50e7d5836bc">submit</reimplementedby>
         <param>
           <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1SpawnCommand" kindref="compound">helios::engine::runtime::spawn::commands::SpawnCommand</ref> &amp;</type>
           <declname>spawnCommand</declname>
@@ -89,7 +86,6 @@
         <argsstring>(const helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand &amp;scheduledSpawnPlanCommand) noexcept=0</argsstring>
         <name>submit</name>
         <qualifiedname>helios::engine::runtime::spawn::SpawnCommandHandler::submit</qualifiedname>
-        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1ab2c6562cae1e34f6e90068710044f085">submit</reimplementedby>
         <param>
           <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand" kindref="compound">helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand</ref> &amp;</type>
           <declname>scheduledSpawnPlanCommand</declname>
@@ -120,7 +116,7 @@
 <para>Interface for handlers that process spawn and despawn commands. </para>
     </briefdescription>
     <detaileddescription>
-<para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler" kindref="compound">SpawnCommandHandler</ref> defines the contract for managers that handle entity lifecycle operations for GameObjectPools. Each handler is registered with a SpawnProfileId via `GameWorld::registerSpawnCommandHandler()`.</para>
+<para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler" kindref="compound">SpawnCommandHandler</ref> defines the contract for managers that handle entity lifecycle operations for GameObjectPools. Each handler is registered with a <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId" kindref="compound">SpawnProfileId</ref> via `GameWorld::registerSpawnCommandHandler()`.</para>
 <para>When a pooled entity needs to spawn or despawn, the appropriate handler is looked up by profile ID and receives the command for deferred processing.</para>
 <para>## Command Types</para>
 <para><itemizedlist>
@@ -130,13 +126,13 @@
 </listitem></itemizedlist>
 </para>
 <para>## Implementation Notes</para>
-<para>Handlers typically also implement the Manager interface to receive flush() calls for deferred command processing during the manager flush phase.</para>
-<para>Example: ```cpp class MyPoolManager : public Manager, public <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler" kindref="compound">SpawnCommandHandler</ref> { bool submit(const SpawnCommand&amp; cmd) noexcept override { spawnQueue_.push(cmd); return true; } bool submit(const DespawnCommand&amp; cmd) noexcept override { despawnQueue_.push(cmd); return true; } bool submit(const ScheduledSpawnPlanCommand&amp; cmd) noexcept override { planQueue_.push(cmd); return true; } void flush(GameWorld&amp; world, UpdateContext&amp; ctx) noexcept override { // Process queued commands } }; ```</para>
-<para><simplesect kind="see"><para>SpawnCommand </para>
+<para>Handlers typically also implement the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> interface to receive flush() calls for deferred command processing during the manager flush phase.</para>
+<para>Example: ```cpp class MyPoolManager : public <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref>, public <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler" kindref="compound">SpawnCommandHandler</ref> { bool <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler_1a93568a4d9d3f1e1fb63e9b8febb5bd4a" kindref="member">submit(const SpawnCommand&amp; cmd)</ref> noexcept override { spawnQueue_.push(cmd); return true; } bool <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler_1ac7719f245fd62da47761b10c9d947033" kindref="member">submit(const DespawnCommand&amp; cmd)</ref> noexcept override { despawnQueue_.push(cmd); return true; } bool <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler_1a0e17a21616e4d27710ecbfca3e48baef" kindref="member">submit(const ScheduledSpawnPlanCommand&amp; cmd)</ref> noexcept override { planQueue_.push(cmd); return true; } void flush(GameWorld&amp; world, UpdateContext&amp; ctx) noexcept override { // Process queued commands } }; ```</para>
+<para><simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1SpawnCommand" kindref="compound">SpawnCommand</ref> </para>
 </simplesect>
-<simplesect kind="see"><para>DespawnCommand </para>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1DespawnCommand" kindref="compound">DespawnCommand</ref> </para>
 </simplesect>
-<simplesect kind="see"><para>ScheduledSpawnPlanCommand </para>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand" kindref="compound">ScheduledSpawnPlanCommand</ref> </para>
 </simplesect>
 <simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" kindref="compound">SpawnManager</ref> </para>
 </simplesect>
@@ -144,18 +140,6 @@
 </simplesect>
 </para>
     </detaileddescription>
-    <inheritancegraph>
-      <node id="1">
-        <label>helios::engine::runtime::spawn::SpawnCommandHandler</label>
-        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler"/>
-      </node>
-      <node id="2">
-        <label>helios::engine::runtime::spawn::SpawnManager</label>
-        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-    </inheritancegraph>
     <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnCommandHandler.ixx" line="63" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnCommandHandler.ixx" bodystart="63" bodyend="106"/>
     <listofallmembers>
       <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler_1ac7719f245fd62da47761b10c9d947033" prot="public" virt="pure-virtual"><scope>helios::engine::runtime::spawn::SpawnCommandHandler</scope><name>submit</name></member>

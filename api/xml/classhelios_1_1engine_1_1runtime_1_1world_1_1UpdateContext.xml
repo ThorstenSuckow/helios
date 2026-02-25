@@ -1,0 +1,984 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::runtime::world::UpdateContext</compoundname>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a1e3fa9c1dcdfaf13e5681ab4db47267f" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::runtime::world::UpdateContext::deltaTime_</definition>
+        <argsstring></argsstring>
+        <name>deltaTime_</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::deltaTime_</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+<para>Time elapsed since the last frame, in seconds. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="79" column="15" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1ad8635a324305a486e832080139c909d0" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::runtime::world::UpdateContext::totalTime_</definition>
+        <argsstring></argsstring>
+        <name>totalTime_</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::totalTime_</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+<para>Time elapsed since the first frame, in seconds. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="84" column="15" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a1ad9d6444e0838c8828d99e3af901bd9" prot="private" static="no" mutable="no">
+        <type>const <ref refid="classhelios_1_1input_1_1InputSnapshot" kindref="compound">helios::input::InputSnapshot</ref> &amp;</type>
+        <definition>const helios::input::InputSnapshot&amp; helios::engine::runtime::world::UpdateContext::inputSnapshot_</definition>
+        <argsstring></argsstring>
+        <name>inputSnapshot_</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::inputSnapshot_</qualifiedname>
+        <briefdescription>
+<para>Immutable snapshot of input state for the current frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="89" column="44" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a8982323be50e6d8531e6eb14c0686629" prot="private" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session" kindref="compound">helios::engine::runtime::world::Session</ref> &amp;</type>
+        <definition>helios::engine::runtime::world::Session&amp; helios::engine::runtime::world::UpdateContext::session_</definition>
+        <argsstring></argsstring>
+        <name>session_</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::session_</qualifiedname>
+        <briefdescription>
+<para>Reference to the current game session for state tracking. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="94" column="49" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1ad92be0e4a26acdf1127051c4de51101f" prot="private" static="no" mutable="no">
+        <type>helios::engine::runtime::messaging::event::GameLoopEventBus::WriteSink</type>
+        <definition>helios::engine::runtime::messaging::event::GameLoopEventBus::WriteSink helios::engine::runtime::world::UpdateContext::phaseEventSink_</definition>
+        <argsstring></argsstring>
+        <name>phaseEventSink_</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::phaseEventSink_</qualifiedname>
+        <briefdescription>
+<para>Sink for pushing phase-level events during update. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Used by systems and components to publish events (e.g., collision, spawn requests) that will be processed in the next phase of the game loop. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="102" column="80" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a8700d32762b0438d5fe669e51b91fea8" prot="private" static="no" mutable="no">
+        <type>const helios::engine::runtime::messaging::event::GameLoopEventBus::ReadSource</type>
+        <definition>const helios::engine::runtime::messaging::event::GameLoopEventBus::ReadSource helios::engine::runtime::world::UpdateContext::phaseEventSource_</definition>
+        <argsstring></argsstring>
+        <name>phaseEventSource_</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::phaseEventSource_</qualifiedname>
+        <briefdescription>
+<para>Source for reading phase-level events from the previous phase. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="107" column="87" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a908950ece5f0b4890fa37db4b5619e67" prot="private" static="no" mutable="no">
+        <type>helios::engine::runtime::messaging::event::GameLoopEventBus::WriteSink</type>
+        <definition>helios::engine::runtime::messaging::event::GameLoopEventBus::WriteSink helios::engine::runtime::world::UpdateContext::passEventSink_</definition>
+        <argsstring></argsstring>
+        <name>passEventSink_</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::passEventSink_</qualifiedname>
+        <briefdescription>
+<para>Sink for pushing pass-level events during update. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Used by systems and components to publish events that will be processed in subsequent passes within the same phase, after a commit point. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="115" column="80" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a3b6a639ea710a380f6ac18758aec89a3" prot="private" static="no" mutable="no">
+        <type>const helios::engine::runtime::messaging::event::GameLoopEventBus::ReadSource</type>
+        <definition>const helios::engine::runtime::messaging::event::GameLoopEventBus::ReadSource helios::engine::runtime::world::UpdateContext::passEventSource_</definition>
+        <argsstring></argsstring>
+        <name>passEventSource_</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::passEventSource_</qualifiedname>
+        <briefdescription>
+<para>Source for reading pass-level events from previous passes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="120" column="87" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1abb9f01425d1bd319565e8a2b8854b2d5" prot="private" static="no" mutable="no">
+        <type>helios::engine::runtime::messaging::event::GameLoopEventBus::WriteSink</type>
+        <definition>helios::engine::runtime::messaging::event::GameLoopEventBus::WriteSink helios::engine::runtime::world::UpdateContext::frameEventSink_</definition>
+        <argsstring></argsstring>
+        <name>frameEventSink_</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::frameEventSink_</qualifiedname>
+        <briefdescription>
+<para>Sink for pushing frame-level events during update. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Used by systems and components to publish events that will be processed in the next frame. Frame-level events persist across all phases and are swapped at the end of the Post phase. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="129" column="80" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="129" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a4b866110f44603ccda72bccb5d0c4f87" prot="private" static="no" mutable="no">
+        <type>const helios::engine::runtime::messaging::event::GameLoopEventBus::ReadSource</type>
+        <definition>const helios::engine::runtime::messaging::event::GameLoopEventBus::ReadSource helios::engine::runtime::world::UpdateContext::frameEventSource_</definition>
+        <argsstring></argsstring>
+        <name>frameEventSource_</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::frameEventSource_</qualifiedname>
+        <briefdescription>
+<para>Source for reading frame-level events from the previous frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="134" column="87" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a374ba20a00710abe05bf8d41150648f3" prot="private" static="no" mutable="no">
+        <type>std::span&lt; const <ref refid="structhelios_1_1rendering_1_1ViewportSnapshot" kindref="compound">helios::rendering::ViewportSnapshot</ref> &gt;</type>
+        <definition>std::span&lt;const helios::rendering::ViewportSnapshot&gt; helios::engine::runtime::world::UpdateContext::viewportSnapshots_</definition>
+        <argsstring></argsstring>
+        <name>viewportSnapshots_</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::viewportSnapshots_</qualifiedname>
+        <briefdescription>
+<para>Immutable snapshot of all viewport states for this frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="139" column="19" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="139" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1ae1ace27c91fa880cc8e26083ebbcd250" prot="private" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry" kindref="compound">helios::engine::runtime::world::ResourceRegistry</ref> &amp;</type>
+        <definition>helios::engine::runtime::world::ResourceRegistry&amp; helios::engine::runtime::world::UpdateContext::resourceRegistry_</definition>
+        <argsstring></argsstring>
+        <name>resourceRegistry_</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::resourceRegistry_</qualifiedname>
+        <briefdescription>
+<para>Reference to the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry" kindref="compound">ResourceRegistry</ref> for O(1) resource lookup. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="144" column="58" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="144" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a420048edb6bab64cef2d01930349571c" prot="private" static="no" mutable="no">
+        <type><ref refid="structhelios_1_1engine_1_1ecs_1_1EntityResolver" kindref="compound">helios::engine::ecs::EntityResolver</ref></type>
+        <definition>helios::engine::ecs::EntityResolver helios::engine::runtime::world::UpdateContext::entityResolver_</definition>
+        <argsstring></argsstring>
+        <name>entityResolver_</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::entityResolver_</qualifiedname>
+        <briefdescription>
+<para>Callable for resolving EntityHandles to GameObjects. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="149" column="45" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="149" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a532d3589c0f5507adb8abdc51f5b7d75" prot="private" static="no" mutable="no">
+        <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Level" kindref="compound">Level</ref> *</type>
+        <definition>const Level* helios::engine::runtime::world::UpdateContext::level_</definition>
+        <argsstring></argsstring>
+        <name>level_</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::level_</qualifiedname>
+        <briefdescription>
+<para>Pointer to the active <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Level" kindref="compound">Level</ref>, or nullptr if no level is loaded. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="154" column="21" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="154" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a186df1b69195b2e1b62baf532aadf252" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::runtime::world::UpdateContext::UpdateContext</definition>
+        <argsstring>(helios::engine::runtime::world::ResourceRegistry &amp;resourceRegistry, helios::engine::ecs::EntityResolver entityResolver, helios::engine::runtime::world::Session &amp;session, const float deltaTime, const float totalTime, helios::engine::runtime::messaging::event::GameLoopEventBus &amp;phaseEventBus, helios::engine::runtime::messaging::event::GameLoopEventBus &amp;passEventBus, helios::engine::runtime::messaging::event::GameLoopEventBus &amp;frameEventBus, const helios::input::InputSnapshot &amp;inputSnapshot, std::span&lt; const helios::rendering::ViewportSnapshot &gt; viewportSnapshots, const Level *level)</argsstring>
+        <name>UpdateContext</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::UpdateContext</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry" kindref="compound">helios::engine::runtime::world::ResourceRegistry</ref> &amp;</type>
+          <declname>resourceRegistry</declname>
+        </param>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1ecs_1_1EntityResolver" kindref="compound">helios::engine::ecs::EntityResolver</ref></type>
+          <declname>entityResolver</declname>
+        </param>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session" kindref="compound">helios::engine::runtime::world::Session</ref> &amp;</type>
+          <declname>session</declname>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>deltaTime</declname>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>totalTime</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1event_1a59b7e7d4204d917672591bc8a383d9b4" kindref="member">helios::engine::runtime::messaging::event::GameLoopEventBus</ref> &amp;</type>
+          <declname>phaseEventBus</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1event_1a59b7e7d4204d917672591bc8a383d9b4" kindref="member">helios::engine::runtime::messaging::event::GameLoopEventBus</ref> &amp;</type>
+          <declname>passEventBus</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1event_1a59b7e7d4204d917672591bc8a383d9b4" kindref="member">helios::engine::runtime::messaging::event::GameLoopEventBus</ref> &amp;</type>
+          <declname>frameEventBus</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1input_1_1InputSnapshot" kindref="compound">helios::input::InputSnapshot</ref> &amp;</type>
+          <declname>inputSnapshot</declname>
+        </param>
+        <param>
+          <type>std::span&lt; const <ref refid="structhelios_1_1rendering_1_1ViewportSnapshot" kindref="compound">helios::rendering::ViewportSnapshot</ref> &gt;</type>
+          <declname>viewportSnapshots</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Level" kindref="compound">Level</ref> *</type>
+          <declname>level</declname>
+        </param>
+        <briefdescription>
+<para>Constructs an <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">UpdateContext</ref> with all per-frame dependencies. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>resourceRegistry</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry" kindref="compound">ResourceRegistry</ref> for resource lookup. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>entityResolver</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Callable for resolving EntityHandles to GameObjects. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>session</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the current game session. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>deltaTime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time since last frame in seconds. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>totalTime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Accumulated time since the first frame in seconds. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>phaseEventBus</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the phase-level event bus. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>passEventBus</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the pass-level event bus. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>frameEventBus</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the frame-level event bus. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>inputSnapshot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Immutable input state for this frame. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>viewportSnapshots</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Immutable snapshot of viewport states. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the active <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Level" kindref="compound">Level</ref>, or nullptr. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="174" column="9" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="174" bodyend="203"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a0197c610dc51fc676bcde9b84545ed7b" compoundref="UpdateContext_8ixx" startline="220" endline="222">deltaTime</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a3fe9e7e3a39b27014a72342968e0a3b4" compoundref="UpdateContext_8ixx" startline="278" endline="280">entityResolver</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a1c9a47461e487485eeeaaf442510dd68" compoundref="UpdateContext_8ixx" startline="238" endline="240">inputSnapshot</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1ac28d2e3d69b43ef90a3a962a5bf3ef3c" compoundref="UpdateContext_8ixx" startline="287" endline="289">level</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1adaeb79c72c7affdd5c3197556c82665e" compoundref="UpdateContext_8ixx" startline="247" endline="249">resourceRegistry</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a538cadeb656147150f4a12261d67c7f7" compoundref="UpdateContext_8ixx" startline="309" endline="311">session</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1ad7f5caca30eb2409b98e21f48c5a0e45" compoundref="UpdateContext_8ixx" startline="229" endline="231">totalTime</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a47e89a8a5cf18618ffdc6caccd012100" compoundref="UpdateContext_8ixx" startline="210" endline="212">viewportSnapshots</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a47e89a8a5cf18618ffdc6caccd012100" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::span&lt; const <ref refid="structhelios_1_1rendering_1_1ViewportSnapshot" kindref="compound">helios::rendering::ViewportSnapshot</ref> &gt;</type>
+        <definition>std::span&lt; const helios::rendering::ViewportSnapshot &gt; helios::engine::runtime::world::UpdateContext::viewportSnapshots</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>viewportSnapshots</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::viewportSnapshots</qualifiedname>
+        <briefdescription>
+<para>Returns the viewport snapshots for this frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A span of const ViewportSnapshot objects. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="210" column="20" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="210" bodyend="212"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a186df1b69195b2e1b62baf532aadf252" compoundref="UpdateContext_8ixx" startline="174" endline="203">UpdateContext</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a0197c610dc51fc676bcde9b84545ed7b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::runtime::world::UpdateContext::deltaTime</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>deltaTime</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::deltaTime</qualifiedname>
+        <briefdescription>
+<para>Returns the time elapsed since the last frame, in seconds. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Delta time in seconds. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="220" column="16" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="220" bodyend="222"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a186df1b69195b2e1b62baf532aadf252" compoundref="UpdateContext_8ixx" startline="174" endline="203">UpdateContext</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1ad7f5caca30eb2409b98e21f48c5a0e45" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::runtime::world::UpdateContext::totalTime</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>totalTime</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::totalTime</qualifiedname>
+        <briefdescription>
+<para>Returns the time elapsed since the first frame, in seconds. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Total time in seconds. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="229" column="16" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="229" bodyend="231"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a186df1b69195b2e1b62baf532aadf252" compoundref="UpdateContext_8ixx" startline="174" endline="203">UpdateContext</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a1c9a47461e487485eeeaaf442510dd68" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classhelios_1_1input_1_1InputSnapshot" kindref="compound">helios::input::InputSnapshot</ref> &amp;</type>
+        <definition>const helios::input::InputSnapshot &amp; helios::engine::runtime::world::UpdateContext::inputSnapshot</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>inputSnapshot</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::inputSnapshot</qualifiedname>
+        <briefdescription>
+<para>Returns the immutable input snapshot for this frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Const ref to the current InputSnapshot. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="238" column="45" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="238" bodyend="240"/>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuNavigationSystem_1a91a710a4f26f25df573afdad02d17ecd" compoundref="MenuNavigationSystem_8ixx" startline="120" endline="171">helios::engine::modules::ui::widgets::systems::MenuNavigationSystem::update</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a186df1b69195b2e1b62baf532aadf252" compoundref="UpdateContext_8ixx" startline="174" endline="203">UpdateContext</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1adaeb79c72c7affdd5c3197556c82665e" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry" kindref="compound">helios::engine::runtime::world::ResourceRegistry</ref> &amp;</type>
+        <definition>helios::engine::runtime::world::ResourceRegistry &amp; helios::engine::runtime::world::UpdateContext::resourceRegistry</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>resourceRegistry</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::resourceRegistry</qualifiedname>
+        <briefdescription>
+<para>Returns the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry" kindref="compound">ResourceRegistry</ref> for resource lookup. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Reference to the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry" kindref="compound">ResourceRegistry</ref>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="247" column="59" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="247" bodyend="249"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAll_1a496fad85a648d7bc01515f613bf6b3cb" compoundref="SpawnAll_8ixx" startline="45" endline="52">helios::engine::runtime::spawn::policy::amount::SpawnAll::getAmount</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1aa8aeafec5ba655ccacde623ad32f40ec" compoundref="GameLoop_8ixx" startline="236" endline="249">helios::engine::runtime::gameloop::GameLoop::phaseCommit</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a186df1b69195b2e1b62baf532aadf252" compoundref="UpdateContext_8ixx" startline="174" endline="203">UpdateContext</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a00808c02ff76f7293914879b02b29509" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry" kindref="compound">helios::engine::runtime::world::ResourceRegistry</ref> &amp;</type>
+        <definition>const helios::engine::runtime::world::ResourceRegistry &amp; helios::engine::runtime::world::UpdateContext::resourceRegistry</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>resourceRegistry</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::resourceRegistry</qualifiedname>
+        <briefdescription>
+<para>Returns the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry" kindref="compound">ResourceRegistry</ref> for resource lookup.    </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Reference to the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry" kindref="compound">ResourceRegistry</ref>.    </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="254" column="65" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="254" bodyend="256"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1aba16db6e6b434f908f937e2a225d7337" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::optional&lt; <ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> &gt;</type>
+        <definition>std::optional&lt; helios::engine::ecs::GameObject &gt; helios::engine::runtime::world::UpdateContext::find</definition>
+        <argsstring>(helios::engine::ecs::EntityHandle handle) const noexcept</argsstring>
+        <name>find</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::find</qualifiedname>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle" kindref="compound">helios::engine::ecs::EntityHandle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Resolves an EntityHandle to a GameObject. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Validates the handle via the EntityResolver and returns a lightweight GameObject wrapper if the entity is still alive.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The entity handle to resolve.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A GameObject if the handle is valid, std::nullopt otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="268" column="24" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="268" bodyend="270"/>
+        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1rules_1_1guards_1_1DefaultMatchStateTransitionGuards_1a01c761773a5709e9d85b57e050a146dd" compoundref="DefaultMatchStateTransitionGuards_8ixx" startline="49" endline="56">helios::engine::mechanics::match::rules::guards::DefaultMatchStateTransitionGuards::isPlayerActive</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1rules_1_1guards_1_1DefaultMatchStateTransitionGuards_1acd3a0f438f7415d464e9b40813bed226" compoundref="DefaultMatchStateTransitionGuards_8ixx" startline="66" endline="73">helios::engine::mechanics::match::rules::guards::DefaultMatchStateTransitionGuards::isPlayerInactive</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a3fe9e7e3a39b27014a72342968e0a3b4" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structhelios_1_1engine_1_1ecs_1_1EntityResolver" kindref="compound">helios::engine::ecs::EntityResolver</ref> &amp;</type>
+        <definition>helios::engine::ecs::EntityResolver &amp; helios::engine::runtime::world::UpdateContext::entityResolver</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>entityResolver</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::entityResolver</qualifiedname>
+        <briefdescription>
+<para>Returns the EntityResolver for direct handle validation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Reference to the EntityResolver. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="278" column="46" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="278" bodyend="280"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a186df1b69195b2e1b62baf532aadf252" compoundref="UpdateContext_8ixx" startline="174" endline="203">UpdateContext</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1ac28d2e3d69b43ef90a3a962a5bf3ef3c" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Level" kindref="compound">Level</ref> *</type>
+        <definition>const Level * helios::engine::runtime::world::UpdateContext::level</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>level</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::level</qualifiedname>
+        <briefdescription>
+<para>Returns the active <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Level" kindref="compound">Level</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Pointer to the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Level" kindref="compound">Level</ref>, or nullptr if no level is loaded. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="287" column="22" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="287" bodyend="289"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a186df1b69195b2e1b62baf532aadf252" compoundref="UpdateContext_8ixx" startline="174" endline="203">UpdateContext</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1acca71a785767cdcd326787dedba216b9" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer" kindref="compound">EngineCommandBuffer</ref> &amp;</type>
+        <definition>EngineCommandBuffer &amp; helios::engine::runtime::world::UpdateContext::commandBuffer</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>commandBuffer</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::commandBuffer</qualifiedname>
+        <briefdescription>
+<para>Returns the <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer" kindref="compound">EngineCommandBuffer</ref> for submitting commands. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Shortcut for `resourceRegistry().resource&lt;EngineCommandBuffer&gt;()`. Only accepts engine-defined command types. For custom commands, look up the appropriate handler or buffer via `resourceRegistry()` directly.</para>
+<para><simplesect kind="return"><para>Reference to the <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer" kindref="compound">EngineCommandBuffer</ref>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="300" column="30" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="300" bodyend="302"/>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1MenuNavigationSystem_1a91a710a4f26f25df573afdad02d17ecd" compoundref="MenuNavigationSystem_8ixx" startline="120" endline="171">helios::engine::modules::ui::widgets::systems::MenuNavigationSystem::update</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a538cadeb656147150f4a12261d67c7f7" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session" kindref="compound">helios::engine::runtime::world::Session</ref> &amp;</type>
+        <definition>helios::engine::runtime::world::Session &amp; helios::engine::runtime::world::UpdateContext::session</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>session</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::session</qualifiedname>
+        <briefdescription>
+<para>Returns the session for game/match state access. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Ref to the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session" kindref="compound">Session</ref> used with this <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">UpdateContext</ref>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="309" column="50" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="309" bodyend="311"/>
+        <referencedby refid="classhelios_1_1engine_1_1state_1_1StateManager_1a7b16869a9d0d8b511b76ac568339fea1" compoundref="StateManager_8ixx" startline="178" endline="219">helios::engine::state::StateManager&lt; types::GameState &gt;::flush</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1rules_1_1guards_1_1DefaultMatchStateTransitionGuards_1a01c761773a5709e9d85b57e050a146dd" compoundref="DefaultMatchStateTransitionGuards_8ixx" startline="49" endline="56">helios::engine::mechanics::match::rules::guards::DefaultMatchStateTransitionGuards::isPlayerActive</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1rules_1_1guards_1_1DefaultMatchStateTransitionGuards_1acd3a0f438f7415d464e9b40813bed226" compoundref="DefaultMatchStateTransitionGuards_8ixx" startline="66" endline="73">helios::engine::mechanics::match::rules::guards::DefaultMatchStateTransitionGuards::isPlayerInactive</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1TypedPass_1a7733ed1cd17abc4a3c85da27684b6c2b" compoundref="TypedPass_8ixx" startline="175" endline="178">helios::engine::runtime::gameloop::TypedPass&lt; StateType &gt;::shouldRun</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a186df1b69195b2e1b62baf532aadf252" compoundref="UpdateContext_8ixx" startline="174" endline="203">UpdateContext</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a7308ea8a5fe81ac196b1501554d21d61" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename E</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void helios::engine::runtime::world::UpdateContext::pushPass</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>pushPass</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::pushPass</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Pushes an event to the pass-level event bus. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Events pushed here become readable in subsequent passes within the same phase, after a commit point is reached.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>E</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The event type to push. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Constructor argument types for the event.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Arguments forwarded to the event constructor.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a3e5fef71dad1d4fc531446a1138f8634" kindref="member">readPass()</ref> </para>
+</simplesect>
+<simplesect kind="see"><para>Pass::addCommitPoint() </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="329" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="329" bodyend="331"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a5a17fe1e9fb5409938ec9d9442887ffe" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename E</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void helios::engine::runtime::world::UpdateContext::pushPhase</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>pushPhase</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::pushPhase</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Pushes an event to the phase-level event bus. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Events pushed here become readable in subsequent phases, after the current phase commits.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>E</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The event type to push. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Constructor argument types for the event.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Arguments forwarded to the event constructor.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1af2268c3ee45b07619f013e4d81a05b83" kindref="member">readPhase()</ref> </para>
+</simplesect>
+<simplesect kind="see"><para>GameLoop </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="348" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="348" bodyend="350"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1af2268c3ee45b07619f013e4d81a05b83" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename E</type>
+          </param>
+        </templateparamlist>
+        <type>std::span&lt; const E &gt;</type>
+        <definition>std::span&lt; const E &gt; helios::engine::runtime::world::UpdateContext::readPhase</definition>
+        <argsstring>()</argsstring>
+        <name>readPhase</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::readPhase</qualifiedname>
+        <briefdescription>
+<para>Reads events from the phase-level event bus. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns events that were pushed during the previous phase via `pushPhase()`. The phase event bus is swapped at phase boundaries, configured in GameLoop::phaseCommit().</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>E</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The event type to read.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A span of const events of type E.</para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a5a17fe1e9fb5409938ec9d9442887ffe" kindref="member">pushPhase()</ref> </para>
+</simplesect>
+<simplesect kind="see"><para>GameLoop </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="367" column="19" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="367" bodyend="369"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a3e5fef71dad1d4fc531446a1138f8634" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename E</type>
+          </param>
+        </templateparamlist>
+        <type>std::span&lt; const E &gt;</type>
+        <definition>std::span&lt; const E &gt; helios::engine::runtime::world::UpdateContext::readPass</definition>
+        <argsstring>()</argsstring>
+        <name>readPass</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::readPass</qualifiedname>
+        <briefdescription>
+<para>Reads events from the pass-level event bus. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns events that were pushed during previous passes within the current phase via `pushPass()`. The pass event bus is swapped at commit points, configured via Pass::addCommitPoint().</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>E</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The event type to read.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A span of const events of type E.</para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a7308ea8a5fe81ac196b1501554d21d61" kindref="member">pushPass()</ref> </para>
+</simplesect>
+<simplesect kind="see"><para>Pass::addCommitPoint() </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="386" column="19" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="386" bodyend="388"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a5fa74f194fbee96f883d6964df940bef" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename E</type>
+          </param>
+        </templateparamlist>
+        <type>std::span&lt; const E &gt;</type>
+        <definition>std::span&lt; const E &gt; helios::engine::runtime::world::UpdateContext::readFrame</definition>
+        <argsstring>()</argsstring>
+        <name>readFrame</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::readFrame</qualifiedname>
+        <briefdescription>
+<para>Reads events from the frame-level event bus. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns events that were pushed during the previous frame via `pushFrame()`. The frame event bus is swapped at the end of the Post phase, making events readable in the subsequent frame.</para>
+<para>Frame-level events are useful for cross-frame communication, such as:<itemizedlist>
+<listitem><para>Collision events that trigger effects in the next frame</para>
+</listitem><listitem><para>Spawn confirmations for UI updates</para>
+</listitem><listitem><para>Audio/VFX triggers</para>
+</listitem></itemizedlist>
+</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>E</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The event type to read.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A span of const events of type E.</para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a7973f73a32e697f534ed311cef2f50d4" kindref="member">pushFrame()</ref> </para>
+</simplesect>
+<simplesect kind="see"><para>GameLoop </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="410" column="19" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="410" bodyend="412"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a7973f73a32e697f534ed311cef2f50d4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename E</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void helios::engine::runtime::world::UpdateContext::pushFrame</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>pushFrame</name>
+        <qualifiedname>helios::engine::runtime::world::UpdateContext::pushFrame</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Pushes an event to the frame-level event bus. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Events pushed here become readable in the next frame via `readFrame()`. The frame event bus is swapped at the end of the Post phase in GameLoop.</para>
+<para>Use frame-level events for cross-frame communication where events should persist beyond the current phase.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>E</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The event type to push. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Constructor argument types for the event.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Arguments forwarded to the event constructor.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a5fa74f194fbee96f883d6964df940bef" kindref="member">readFrame()</ref> </para>
+</simplesect>
+<simplesect kind="see"><para>GameLoop </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="433" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="433" bodyend="435"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Per-frame context passed to systems during game loop updates. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">UpdateContext</ref> bundles all state that systems need for a single frame update: timing, input, resource access, entity resolution, event buses, and the active level. It is constructed by the GameLoop each frame and passed to every System::update() call.</para>
+<para>## Resource Access</para>
+<para><itemizedlist>
+<listitem><para>`commandBuffer()` — returns the <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer" kindref="compound">EngineCommandBuffer</ref> for submitting engine-defined commands (shortcut for `resourceRegistry().resource&lt;EngineCommandBuffer&gt;()`)</para>
+</listitem><listitem><para>`resourceRegistry()` — O(1) lookup for Managers, CommandBuffers, CommandHandlers, and other registered resources</para>
+</listitem><listitem><para>`session()` — cross-frame state (tracked game/match states)</para>
+</listitem><listitem><para>`level()` — current <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Level" kindref="compound">Level</ref> with arena bounds</para>
+</listitem></itemizedlist>
+</para>
+<para>## Entity Access</para>
+<para><itemizedlist>
+<listitem><para>`find(handle)` — resolves an EntityHandle to a GameObject (validates the handle&apos;s version via the EntityResolver)</para>
+</listitem><listitem><para>`entityResolver()` — direct access to the callable resolver</para>
+</listitem></itemizedlist>
+</para>
+<para>## Event Propagation</para>
+<para>| <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Level" kindref="compound">Level</ref> | Push | Read | Scope | |-------|------|------|-------| | Pass | `pushPass()` | `readPass()` | Within same phase, after commit point | | Phase | `pushPhase()` | `readPhase()` | Across phases within same frame | | Frame | `pushFrame()` | `readFrame()` | Across frames |</para>
+<para><simplesect kind="see"><para>GameLoop </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry" kindref="compound">ResourceRegistry</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer" kindref="compound">EngineCommandBuffer</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session" kindref="compound">Session</ref> </para>
+</simplesect>
+<simplesect kind="see"><para>EntityResolver </para>
+</simplesect>
+<simplesect kind="see"><para>InputSnapshot </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" line="73" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/world/UpdateContext.ixx" bodystart="73" bodyend="436"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1acca71a785767cdcd326787dedba216b9" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>commandBuffer</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a0197c610dc51fc676bcde9b84545ed7b" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>deltaTime</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a1e3fa9c1dcdfaf13e5681ab4db47267f" prot="private" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>deltaTime_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a3fe9e7e3a39b27014a72342968e0a3b4" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>entityResolver</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a420048edb6bab64cef2d01930349571c" prot="private" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>entityResolver_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1aba16db6e6b434f908f937e2a225d7337" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>find</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1abb9f01425d1bd319565e8a2b8854b2d5" prot="private" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>frameEventSink_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a4b866110f44603ccda72bccb5d0c4f87" prot="private" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>frameEventSource_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a1c9a47461e487485eeeaaf442510dd68" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>inputSnapshot</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a1ad9d6444e0838c8828d99e3af901bd9" prot="private" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>inputSnapshot_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1ac28d2e3d69b43ef90a3a962a5bf3ef3c" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>level</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a532d3589c0f5507adb8abdc51f5b7d75" prot="private" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>level_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a908950ece5f0b4890fa37db4b5619e67" prot="private" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>passEventSink_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a3b6a639ea710a380f6ac18758aec89a3" prot="private" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>passEventSource_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1ad92be0e4a26acdf1127051c4de51101f" prot="private" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>phaseEventSink_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a8700d32762b0438d5fe669e51b91fea8" prot="private" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>phaseEventSource_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a7973f73a32e697f534ed311cef2f50d4" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>pushFrame</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a7308ea8a5fe81ac196b1501554d21d61" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>pushPass</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a5a17fe1e9fb5409938ec9d9442887ffe" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>pushPhase</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a5fa74f194fbee96f883d6964df940bef" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>readFrame</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a3e5fef71dad1d4fc531446a1138f8634" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>readPass</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1af2268c3ee45b07619f013e4d81a05b83" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>readPhase</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1adaeb79c72c7affdd5c3197556c82665e" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>resourceRegistry</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a00808c02ff76f7293914879b02b29509" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>resourceRegistry</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1ae1ace27c91fa880cc8e26083ebbcd250" prot="private" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>resourceRegistry_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a538cadeb656147150f4a12261d67c7f7" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>session</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a8982323be50e6d8531e6eb14c0686629" prot="private" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>session_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1ad7f5caca30eb2409b98e21f48c5a0e45" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>totalTime</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1ad8635a324305a486e832080139c909d0" prot="private" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>totalTime_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a186df1b69195b2e1b62baf532aadf252" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>UpdateContext</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a47e89a8a5cf18618ffdc6caccd012100" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>viewportSnapshots</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a374ba20a00710abe05bf8d41150648f3" prot="private" virt="non-virtual"><scope>helios::engine::runtime::world::UpdateContext</scope><name>viewportSnapshots_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

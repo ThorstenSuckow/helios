@@ -111,8 +111,68 @@ $(function() {
 Functions</h2></td></tr>
 <tr class="memitem:a3257760022dd7b0812185a03fb747d62" id="r_a3257760022dd7b0812185a03fb747d62"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3257760022dd7b0812185a03fb747d62">helios::engine::bootstrap::registerAllComponents</a> ()</td></tr>
 <tr class="memdesc:a3257760022dd7b0812185a03fb747d62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers all component types with the ComponentReflector.  <br /></td></tr>
+<tr class="memitem:afd4296fe1ce37cb2fc5812d6b87e4118" id="r_afd4296fe1ce37cb2fc5812d6b87e4118"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::unique_ptr&lt; <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">GameWorld</a> &gt;, std::unique_ptr&lt; <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html">GameLoop</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afd4296fe1ce37cb2fc5812d6b87e4118">helios::engine::bootstrap::makeGameWorld</a> ()</td></tr>
+<tr class="memdesc:afd4296fe1ce37cb2fc5812d6b87e4118"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a pre-configured <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html" title="Central game state container for entities, resources, and the active level.">GameWorld</a> and <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html" title="Central orchestrator for the game update cycle.">GameLoop</a> pair.  <br /></td></tr>
 </table>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="afd4296fe1ce37cb2fc5812d6b87e4118" name="afd4296fe1ce37cb2fc5812d6b87e4118"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd4296fe1ce37cb2fc5812d6b87e4118">&#9670;&#160;</a></span>makeGameWorld()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt; std::unique_ptr&lt; <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">GameWorld</a> &gt;, std::unique_ptr&lt; <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html">GameLoop</a> &gt; &gt; helios::engine::bootstrap::makeGameWorld </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a pre-configured <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html" title="Central game state container for entities, resources, and the active level.">GameWorld</a> and <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html" title="Central orchestrator for the game update cycle.">GameLoop</a> pair. </p>
+<p>The factory heap-allocates both objects and performs the minimal setup required before application-specific configuration:</p>
+<ul>
+<li>Registers the `EngineCommandBuffer` with the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html" title="Central game state container for entities, resources, and the active level.">GameWorld</a>'s <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html" title="Type-indexed registry for engine resources with O(1) lookup.">ResourceRegistry</a>.</li>
+<li>Tracks `GameState` and `MatchState` in the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Session.html" title="Holds session-level state for the current game instance.">Session</a> so that <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1TypedPass.html" title="State-filtered pass that only executes in specific states.">TypedPass</a> state filtering works out of the box.</li>
+</ul>
+<p>The caller receives ownership via `unique_ptr` and is responsible for registering Managers, configuring phases/passes, calling `GameWorld::init()` and `GameLoop::init()`, and driving the main loop.</p>
+<p>## Usage</p>
+<p>```cpp <a class="el" href="#a3257760022dd7b0812185a03fb747d62" title="Registers all component types with the ComponentReflector.">helios::engine::bootstrap::registerAllComponents()</a>;</p>
+<p>auto [gameWorldPtr, gameLoopPtr] = <a class="el" href="#afd4296fe1ce37cb2fc5812d6b87e4118" title="Creates a pre-configured GameWorld and GameLoop pair.">helios::engine::bootstrap::makeGameWorld()</a>; auto&amp; gameWorld = *gameWorldPtr; auto&amp; gameLoop = *gameLoopPtr;</p>
+<p>// Application-specific setup gameWorld.registerManager&lt;SpawnManager&gt;(); gameLoop.phase(PhaseType::Pre) .addPass&lt;GameState&gt;(GameState::Any) .addSystem&lt;InputSystem&gt;();</p>
+<p>gameWorld.init(); gameLoop.init(gameWorld); ```</p>
+<dl class="section return"><dt>Returns</dt><dd>A pair of (<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html" title="Central game state container for entities, resources, and the active level.">GameWorld</a>, <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html" title="Central orchestrator for the game update cycle.">GameLoop</a>) unique pointers.</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a3257760022dd7b0812185a03fb747d62" title="Registers all component types with the ComponentReflector.">registerAllComponents</a> </dd>
+<dd>
+<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html" title="Central game state container for entities, resources, and the active level.">GameWorld</a> </dd>
+<dd>
+<a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html" title="Central orchestrator for the game update cycle.">GameLoop</a> </dd>
+<dd>
+<a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer.html" title="Concrete command buffer pre-configured with all engine command types.">EngineCommandBuffer</a> </dd>
+<dd>
+<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Session.html#a16a1563a9b807088e812aed53948ffb8" title="Lets this session track the specified StateType.">Session::trackState</a> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="bootstrap_8ixx_source.html#l00108">108</a> of file <a class="el" href="bootstrap_8ixx_source.html">bootstrap.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="DefaultGameStateTransitionRules_8ixx_source.html#l00108">helios::engine::mechanics::gamestate::rules::DefaultGameStateTransitionRules::rules()</a>, and <a class="el" href="DefaultMatchStateTransitionRules_8ixx_source.html#l00130">helios::engine::mechanics::match::rules::DefaultMatchStateTransitionRules::rules()</a>.</p>
+<div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespacehelios_1_1engine_1_1bootstrap_afd4296fe1ce37cb2fc5812d6b87e4118_cgraph.svg" width="483" height="144"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
 <a id="a3257760022dd7b0812185a03fb747d62" name="a3257760022dd7b0812185a03fb747d62"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3257760022dd7b0812185a03fb747d62">&#9670;&#160;</a></span>registerAllComponents()</h2>
 
@@ -145,13 +205,13 @@ Functions</h2></td></tr>
 <dd>
 ComponentOpsRegistry </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="bootstrap_8ixx_source.html#l00035">35</a> of file <a class="el" href="bootstrap_8ixx_source.html">bootstrap.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bootstrap_8ixx_source.html#l00053">53</a> of file <a class="el" href="bootstrap_8ixx_source.html">bootstrap.ixx</a>.</p>
 
 <p class="reference">References <a class="el" href="ecs_2registry_8ixx_source.html#l00017">helios::engine::ecs::registerComponents()</a>, <a class="el" href="mechanics_2registry_8ixx_source.html#l00022">helios::engine::mechanics::registerComponents()</a>, and <a class="el" href="modules_2registry_8ixx_source.html#l00022">helios::engine::modules::registerComponents()</a>.</p>
-<div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespacehelios_1_1engine_1_1bootstrap_a3257760022dd7b0812185a03fb747d62_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 

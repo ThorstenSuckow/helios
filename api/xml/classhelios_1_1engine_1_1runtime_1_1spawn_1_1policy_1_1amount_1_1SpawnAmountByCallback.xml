@@ -5,7 +5,7 @@
     <basecompoundref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountProvider" prot="public" virt="non-virtual">helios::engine::runtime::spawn::policy::amount::SpawnAmountProvider</basecompoundref>
     <sectiondef kind="private-type">
       <memberdef kind="typedef" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountByCallback_1a4545aac365da81848a01ca42d1e0c31b" prot="private" static="no">
-        <type>std::function&lt; size_t( const <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" kindref="compound">helios::engine::core::data::GameObjectPoolId</ref>, const <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRuleState" kindref="compound">SpawnRuleState</ref> &amp;, const <ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;)&gt;</type>
+        <type>std::function&lt; size_t( const <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" kindref="compound">helios::engine::core::data::GameObjectPoolId</ref>, const <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRuleState" kindref="compound">SpawnRuleState</ref> &amp;, const <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;)&gt;</type>
         <definition>using helios::engine::runtime::spawn::policy::amount::SpawnAmountByCallback::AmountEvaluator =  std::function&lt;size_t(
             const helios::engine::core::data::GameObjectPoolId,
             const SpawnRuleState&amp;,
@@ -87,7 +87,7 @@
           <declname>spawnRuleState</declname>
         </param>
         <param>
-          <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
           <declname>updateContext</declname>
         </param>
         <briefdescription>
@@ -133,7 +133,7 @@
     </briefdescription>
     <detaileddescription>
 <para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountByCallback" kindref="compound">SpawnAmountByCallback</ref> allows dynamic spawn quantity calculation by delegating to a std::function. This enables complex logic based on game state, difficulty, pool availability, or other runtime factors.</para>
-<para>Example: ```cpp auto dynamicAmount = std::make_unique&lt;SpawnAmountByCallback&gt;( [&amp;DIFFICULTY_LEVEL](const GameObjectPoolId&amp; poolId, const <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRuleState" kindref="compound">SpawnRuleState</ref>&amp; state, const UpdateContext&amp; ctx) -&gt; size_t { // Scale spawn count with difficulty return 2 * DIFFICULTY_LEVEL; } ); ```</para>
+<para>Example: ```cpp auto dynamicAmount = std::make_unique&lt;SpawnAmountByCallback&gt;( [&amp;DIFFICULTY_LEVEL](const <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" kindref="compound">GameObjectPoolId</ref>&amp; poolId, const <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRuleState" kindref="compound">SpawnRuleState</ref>&amp; state, const <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">UpdateContext</ref>&amp; ctx) -&gt; size_t { // Scale spawn count with difficulty return 2 * DIFFICULTY_LEVEL; } ); ```</para>
 <para><simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountProvider" kindref="compound">SpawnAmountProvider</ref> </para>
 </simplesect>
 <simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1FixedSpawnAmount" kindref="compound">FixedSpawnAmount</ref> </para>

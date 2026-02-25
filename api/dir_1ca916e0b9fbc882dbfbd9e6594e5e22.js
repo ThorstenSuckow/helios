@@ -9,6 +9,7 @@ var dir_1ca916e0b9fbc882dbfbd9e6594e5e22 =
     [ "EntityHandle.ixx", "EntityHandle_8ixx.html", "EntityHandle_8ixx" ],
     [ "EntityManager.ixx", "EntityManager_8ixx.html", "EntityManager_8ixx" ],
     [ "EntityRegistry.ixx", "EntityRegistry_8ixx.html", "EntityRegistry_8ixx" ],
+    [ "EntityResolver.ixx", "EntityResolver_8ixx.html", "EntityResolver_8ixx" ],
     [ "GameObject.ixx", "GameObject_8ixx.html", "GameObject_8ixx" ],
     [ "registry.ixx", "ecs_2registry_8ixx.html", "ecs_2registry_8ixx" ],
     [ "SparseSet.ixx", "SparseSet_8ixx.html", "SparseSet_8ixx" ],

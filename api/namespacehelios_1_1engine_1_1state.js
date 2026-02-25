@@ -3,7 +3,6 @@ var namespacehelios_1_1engine_1_1state =
     [ "types", "namespacehelios_1_1engine_1_1state_1_1types.html", "namespacehelios_1_1engine_1_1state_1_1types" ],
     [ "commands", "namespacehelios_1_1engine_1_1state_1_1commands.html", "namespacehelios_1_1engine_1_1state_1_1commands" ],
     [ "components", "namespacehelios_1_1engine_1_1state_1_1components.html", "namespacehelios_1_1engine_1_1state_1_1components" ],
-    [ "dispatcher", "namespacehelios_1_1engine_1_1state_1_1dispatcher.html", "namespacehelios_1_1engine_1_1state_1_1dispatcher" ],
     [ "listeners", "namespacehelios_1_1engine_1_1state_1_1listeners.html", "namespacehelios_1_1engine_1_1state_1_1listeners" ],
     [ "CombinedStateToIdMapPair", "classhelios_1_1engine_1_1state_1_1CombinedStateToIdMapPair.html", "classhelios_1_1engine_1_1state_1_1CombinedStateToIdMapPair" ],
     [ "StateCommandHandler", "classhelios_1_1engine_1_1state_1_1StateCommandHandler.html", "classhelios_1_1engine_1_1state_1_1StateCommandHandler" ],

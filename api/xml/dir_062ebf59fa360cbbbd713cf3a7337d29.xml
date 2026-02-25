@@ -4,73 +4,119 @@
     <compoundname>command</compoundname>
     <innerfile refid="helios_2engine_2runtime_2messaging_2command_2__module_8ixx">helios/engine/runtime/messaging/command/_module.ixx</innerfile>
     <innerfile refid="CommandBuffer_8ixx">CommandBuffer.ixx</innerfile>
-    <innerfile refid="TargetedCommand_8ixx">TargetedCommand.ixx</innerfile>
-    <innerfile refid="TargetedCommandDispatcher_8ixx">TargetedCommandDispatcher.ixx</innerfile>
-    <innerfile refid="TypedTargetedCommandDispatcher_8ixx">TypedTargetedCommandDispatcher.ixx</innerfile>
-    <innerfile refid="TypedWorldCommandDispatcher_8ixx">TypedWorldCommandDispatcher.ixx</innerfile>
-    <innerfile refid="WorldCommand_8ixx">WorldCommand.ixx</innerfile>
-    <innerfile refid="WorldCommandDispatcher_8ixx">WorldCommandDispatcher.ixx</innerfile>
+    <innerfile refid="CommandHandler_8ixx">CommandHandler.ixx</innerfile>
+    <innerfile refid="EngineCommandBuffer_8ixx">EngineCommandBuffer.ixx</innerfile>
+    <innerfile refid="TypedCommandBuffer_8ixx">TypedCommandBuffer.ixx</innerfile>
+    <innerfile refid="TypedCommandHandler_8ixx">TypedCommandHandler.ixx</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_062ebf59fa360cbbbd713cf3a7337d29_1autotoc_md589">
-<title>helios::engine::runtime::messaging::command</title><para>Command pattern implementation for deferred action execution.</para>
-<para>This module provides the Command pattern implementation for the helios engine. Commands encapsulate game actions that can be buffered and executed at a later point in the game loop, enabling decoupled input handling and action processing.</para>
+<sect1 id="dir_062ebf59fa360cbbbd713cf3a7337d29_1autotoc_md605">
+<title>helios::engine::runtime::messaging::command</title><para>Compile-time typed command buffering and handler routing infrastructure.</para>
 </sect1>
-<sect1 id="dir_062ebf59fa360cbbbd713cf3a7337d29_1autotoc_md590">
+<sect1 id="dir_062ebf59fa360cbbbd713cf3a7337d29_1autotoc_md606">
+<title>Overview</title><para>This module implements the Command pattern for deferred action execution within the game loop. Commands are enqueued during system updates and flushed at defined commit points, ensuring deterministic and reproducible world mutations.</para>
+<para>The system is built around <bold>compile-time type safety</bold>: command types are declared as template parameters, eliminating virtual dispatch overhead for queue access and enabling the compiler to verify command routing at build time.</para>
+</sect1>
+<sect1 id="dir_062ebf59fa360cbbbd713cf3a7337d29_1autotoc_md607">
+<title>Architecture</title><para><programlisting><codeline><highlight class="normal">┌──────────────────────────────────────────────────────────────────────┐</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>COMMAND<sp/>PIPELINE<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">├──────────────────────────────────────────────────────────────────────┤</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>SYSTEMS<sp/>(producers)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>┌────────────────────────────────────────────────────────────┐<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>ctx.commandBuffer().add&lt;MoveCommand&gt;(entityHandle,<sp/>dir);<sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>ctx.commandBuffer().add&lt;DespawnCommand&gt;(eh,<sp/>profileId);<sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>└───────────────────────────┬────────────────────────────────┘<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>BUFFER<sp/>(EngineCommandBuffer<sp/>wrapping<sp/>TypedCommandBuffer)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>┌────────────────────────────────────────────────────────────┐<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>tuple&lt;<sp/>vector&lt;Aim2DCmd&gt;,<sp/>vector&lt;ShootCmd&gt;,<sp/>...<sp/>&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>└───────────────────────────┬────────────────────────────────┘<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/>flush()<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>ROUTING<sp/>(per<sp/>command<sp/>type)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>┌────────────────────────────────────────────────────────────┐<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>Handler<sp/>registered?<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/><sp/>YES<sp/>→<sp/>TypedCommandHandler&lt;Cmd&gt;::submit(cmd)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/><sp/>NO<sp/><sp/>→<sp/>cmd.execute(updateContext)<sp/><sp/>[if<sp/>ExecutableCommand]│<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>└───────────────────────────┬────────────────────────────────┘<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>MANAGERS<sp/>(consumers)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>┌────────────────────────────────────────────────────────────┐<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>SpawnManager,<sp/>ScorePoolManager,<sp/>TimerManager,<sp/>...<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>→<sp/>Manager::flush()<sp/>processes<sp/>queued<sp/>requests<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>└────────────────────────────────────────────────────────────┘<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">└──────────────────────────────────────────────────────────────────────┘</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_062ebf59fa360cbbbd713cf3a7337d29_1autotoc_md608">
 <title>Key Classes</title><para><table rows="6" cols="2"><row>
 <entry thead="yes"><para>Class  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
 </entry></row>
 <row>
-<entry thead="no"><para><computeroutput>TargetedCommand</computeroutput>  </para>
-</entry><entry thead="no"><para>Abstract base for commands targeting a specific GameObject  </para>
-</entry></row>
-<row>
-<entry thead="no"><para><computeroutput>WorldCommand</computeroutput>  </para>
-</entry><entry thead="no"><para>Abstract base for commands operating on the entire GameWorld  </para>
-</entry></row>
-<row>
 <entry thead="no"><para><computeroutput>CommandBuffer</computeroutput>  </para>
-</entry><entry thead="no"><para>Queue for buffering and batch-executing commands  </para>
+</entry><entry thead="no"><para>Abstract base for command buffers  </para>
 </entry></row>
 <row>
-<entry thead="no"><para><computeroutput>TargetedCommandDispatcher</computeroutput>  </para>
-</entry><entry thead="no"><para>Abstract dispatcher interface for TargetedCommand handling  </para>
+<entry thead="no"><para><computeroutput>CommandHandler</computeroutput>  </para>
+</entry><entry thead="no"><para>Abstract base for type-erased handler storage  </para>
 </entry></row>
 <row>
-<entry thead="no"><para><computeroutput>WorldCommandDispatcher</computeroutput>  </para>
-</entry><entry thead="no"><para>Abstract dispatcher interface for WorldCommand handling  </para>
+<entry thead="no"><para><computeroutput>TypedCommandHandler&lt;T&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para>Type-safe handler interface for a specific command type  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>TypedCommandBuffer&lt;...Cmds&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para>Compile-time typed buffer with per-type queues  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>EngineCommandBuffer</computeroutput>  </para>
+</entry><entry thead="no"><para>Concrete facade pre-configured with all engine command types  </para>
 </entry></row>
 </table>
 </para>
 </sect1>
-<sect1 id="dir_062ebf59fa360cbbbd713cf3a7337d29_1autotoc_md591">
-<title>Execution Order</title><para>During <computeroutput>CommandBuffer::flush()</computeroutput>: 1. <bold>WorldCommands</bold> are processed first (global actions like spawning) 2. <bold>TargetedCommands</bold> are processed second (per-entity actions like movement)</para>
+<sect1 id="dir_062ebf59fa360cbbbd713cf3a7337d29_1autotoc_md609">
+<title>Flush Routing</title><para>During <computeroutput>TypedCommandBuffer::flush()</computeroutput>, each command type is processed in template parameter order:</para>
+<para>1. <bold>Handler route:</bold> If a <computeroutput>TypedCommandHandler&lt;Cmd&gt;</computeroutput> is registered in the ResourceRegistry, each queued command is submitted to the handler via <computeroutput>submit()</computeroutput>. 2. <bold>Direct execution:</bold> If no handler is registered and the command satisfies the <computeroutput>ExecutableCommand</computeroutput> concept (provides a noexcept <computeroutput>execute(UpdateContext&amp;)</computeroutput> method), it is executed directly. 3. <bold>Assertion:</bold> If neither condition holds, an assertion fires (misconfiguration).</para>
 </sect1>
-<sect1 id="dir_062ebf59fa360cbbbd713cf3a7337d29_1autotoc_md592">
-<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>1.<sp/>Create<sp/>command<sp/>and<sp/>enqueue<sp/>via<sp/>UpdateContext</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>moveCmd<sp/>=<sp/>std::make_unique&lt;Move2DCommand&gt;(</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>playerGuid,</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1math_1aeab5c7e555a142f8f763a3317460d5c0" kindref="member">helios::math::vec2f</ref>{1.0f,<sp/>0.0f},<sp/><sp/></highlight><highlight class="comment">//<sp/>direction</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>1.0f<sp/><sp/></highlight><highlight class="comment">//<sp/>throttle</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal">);</highlight></codeline>
-<codeline><highlight class="normal">updateContext.commandBuffer().enqueue(std::move(moveCmd));</highlight></codeline>
+<sect1 id="dir_062ebf59fa360cbbbd713cf3a7337d29_1autotoc_md610">
+<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Systems<sp/>enqueue<sp/>commands<sp/>via<sp/>UpdateContext</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>update(UpdateContext&amp;<sp/>ctx)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>ctx.commandBuffer().add&lt;DespawnCommand&gt;(entityHandle,<sp/>profileId);</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>2.<sp/>Register<sp/>dispatcher<sp/>for<sp/>command<sp/>type</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>moveDispatcher<sp/>=<sp/>std::make_unique&lt;TypedTargetedCommandDispatcher&lt;Move2DCommand&gt;&gt;(</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>[&amp;](</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Move2DCommand&amp;<sp/>cmd,<sp/>GameObject<sp/>target)<sp/>{</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>move<sp/>=<sp/>target-&gt;get&lt;Move2DComponent&gt;();</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>move-&gt;setDirection(cmd.direction());</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>move-&gt;setThrottle(cmd.throttle());</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Managers<sp/>implement<sp/>TypedCommandHandler<sp/>for<sp/>commands<sp/>they<sp/>process</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">SpawnManager<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>Manager,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>TypedCommandHandler&lt;SpawnCommand&gt;,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>TypedCommandHandler&lt;DespawnCommand&gt;<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>submit(SpawnCommand<sp/>cmd)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spawnQueue_.push_back(cmd);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline><highlight class="normal">);</highlight></codeline>
-<codeline><highlight class="normal">commandBuffer.registerDispatcher(std::move(moveDispatcher));</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>3.<sp/>Commands<sp/>are<sp/>automatically<sp/>flushed<sp/>at<sp/>phase<sp/>boundaries</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>submit(DespawnCommand<sp/>cmd)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>despawnQueue_.push_back(cmd);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_062ebf59fa360cbbbd713cf3a7337d29_1autotoc_md611">
+<title>Game Loop Integration</title><para>Commands are flushed at each commit point in the game loop:</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Phase<sp/>commit<sp/>sequence</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">commandBuffer.flush(updateContext);<sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Commands<sp/>route<sp/>to<sp/>handlers</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">gameWorld.flushManagers(updateContext);<sp/></highlight><highlight class="comment">//<sp/>Managers<sp/>process<sp/>queued<sp/>requests</highlight></codeline>
 </programlisting></para>
 <para><hruler/>
- <details><summary>Doxygen</summary><para></para>
+</para>
+<para><details><summary>Doxygen</summary><para></para>
 <para></para>
 </details></para>
 </sect1>

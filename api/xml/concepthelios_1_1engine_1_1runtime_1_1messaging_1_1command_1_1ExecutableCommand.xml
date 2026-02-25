@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="concepthelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1ExecutableCommand" kind="concept">
+    <compoundname>helios::engine::runtime::messaging::command::ExecutableCommand</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename Cmd</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;typename Cmd&gt;
+concept <ref refid="concepthelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1ExecutableCommand" kindref="compound">helios::engine::runtime::messaging::command::ExecutableCommand</ref> =  requires(Cmd const&amp; c, <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">UpdateContext</ref>&amp; updateContext) {
+        {c.execute(updateContext) } noexcept;
+    }    </initializer>
+    <briefdescription>
+<para>Concept constraining commands that can self-execute. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>A command satisfies ExecutableCommand if it provides a noexcept `execute(UpdateContext&amp;)` method. Commands that do not satisfy this concept must have a registered TypedCommandHandler.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Cmd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The command type to check. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" line="36" column="5"/>
+  </compounddef>
+</doxygen>

@@ -9,6 +9,7 @@ var namespacehelios_1_1engine_1_1ecs =
     [ "EntityHandle", "structhelios_1_1engine_1_1ecs_1_1EntityHandle.html", "structhelios_1_1engine_1_1ecs_1_1EntityHandle" ],
     [ "EntityManager", "classhelios_1_1engine_1_1ecs_1_1EntityManager.html", "classhelios_1_1engine_1_1ecs_1_1EntityManager" ],
     [ "EntityRegistry", "classhelios_1_1engine_1_1ecs_1_1EntityRegistry.html", "classhelios_1_1engine_1_1ecs_1_1EntityRegistry" ],
+    [ "EntityResolver", "structhelios_1_1engine_1_1ecs_1_1EntityResolver.html", "structhelios_1_1engine_1_1ecs_1_1EntityResolver" ],
     [ "GameObject", "classhelios_1_1engine_1_1ecs_1_1GameObject.html", "classhelios_1_1engine_1_1ecs_1_1GameObject" ],
     [ "SparseSetBase", "classhelios_1_1engine_1_1ecs_1_1SparseSetBase.html", "classhelios_1_1engine_1_1ecs_1_1SparseSetBase" ],
     [ "SparseSet", "classhelios_1_1engine_1_1ecs_1_1SparseSet.html", "classhelios_1_1engine_1_1ecs_1_1SparseSet" ],

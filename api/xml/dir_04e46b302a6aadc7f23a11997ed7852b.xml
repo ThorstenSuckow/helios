@@ -8,17 +8,16 @@
     <innerdir refid="dir_53e433fa7cbef8c1ea8cd2fd638e1c02">types</innerdir>
     <innerfile refid="helios_2engine_2mechanics_2timing_2__module_8ixx">helios/engine/mechanics/timing/_module.ixx</innerfile>
     <innerfile refid="GameTimer_8ixx">GameTimer.ixx</innerfile>
-    <innerfile refid="TimerCommandDispatcher_8ixx">TimerCommandDispatcher.ixx</innerfile>
     <innerfile refid="TimerCommandHandler_8ixx">TimerCommandHandler.ixx</innerfile>
     <innerfile refid="TimerManager_8ixx">TimerManager.ixx</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_04e46b302a6aadc7f23a11997ed7852b_1autotoc_md336">
+<sect1 id="dir_04e46b302a6aadc7f23a11997ed7852b_1autotoc_md352">
 <title>helios::engine::mechanics::timing</title><para>Game timer management system.</para>
 <para>This module provides timers, commands, components, and systems for tracking elapsed time, controlling timer state transitions, and observing timer updates from within the ECS.</para>
 </sect1>
-<sect1 id="dir_04e46b302a6aadc7f23a11997ed7852b_1autotoc_md337">
+<sect1 id="dir_04e46b302a6aadc7f23a11997ed7852b_1autotoc_md353">
 <title>Submodules</title><para><table rows="5" cols="2"><row>
 <entry thead="yes"><para>Submodule  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
@@ -42,7 +41,7 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_04e46b302a6aadc7f23a11997ed7852b_1autotoc_md338">
+<sect1 id="dir_04e46b302a6aadc7f23a11997ed7852b_1autotoc_md354">
 <title>Key Classes</title><para><table rows="5" cols="2"><row>
 <entry thead="yes"><para>Class  </para>
 </entry><entry thead="yes"><para>Description  </para>
@@ -66,10 +65,10 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_04e46b302a6aadc7f23a11997ed7852b_1autotoc_md339">
+<sect1 id="dir_04e46b302a6aadc7f23a11997ed7852b_1autotoc_md355">
 <title>Architecture</title><para>1. <bold>GameTimer</bold> accumulates elapsed time and increments a revision counter on each update 2. <bold>TimerControlCommand</bold> is written into the command buffer to request state transitions (start, pause, stop) 3. <bold>TimerCommandDispatcher</bold> routes the command to the <bold>TimerManager</bold> via the Visitor pattern 4. <bold>TimerManager</bold> collects pending commands and applies them during <computeroutput>flush()</computeroutput> 5. <bold>GameTimerUpdateSystem</bold> advances all timers by the current delta time each frame 6. <bold>GameTimerBindingComponent</bold> allows entities to track a specific timer&apos;s revision</para>
 </sect1>
-<sect1 id="dir_04e46b302a6aadc7f23a11997ed7852b_1autotoc_md340">
+<sect1 id="dir_04e46b302a6aadc7f23a11997ed7852b_1autotoc_md356">
 <title>Integration</title><para>The timing system integrates with:<itemizedlist>
 <listitem><para><bold>Command system</bold> - timer state transitions are requested via <computeroutput>TimerControlCommand</computeroutput></para>
 </listitem><listitem><para><bold>Manager system</bold> - <computeroutput>TimerManager</computeroutput> participates in the game loop flush cycle</para>

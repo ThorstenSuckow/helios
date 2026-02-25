@@ -126,7 +126,7 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a76c6dd3443f09c1cc28d5ca3831a0b1c" id="r_a76c6dd3443f09c1cc28d5ca3831a0b1c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a76c6dd3443f09c1cc28d5ca3831a0b1c">TimerSpawnCondition</a> (const float interval)</td></tr>
 <tr class="memdesc:a76c6dd3443f09c1cc28d5ca3831a0b1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1conditions_1_1TimerSpawnCondition.html" title="A SpawnCondition that triggers spawning at fixed time intervals.">TimerSpawnCondition</a> with the specified interval.  <br /></td></tr>
-<tr class="memitem:a137d4f944a008bb75a522125b3a6167d" id="r_a137d4f944a008bb75a522125b3a6167d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a137d4f944a008bb75a522125b3a6167d">isSatisfied</a> (const size_t requestedAmount, const <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRuleState.html">SpawnRuleState</a> &amp;spawnState, const <a class="el" href="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolSnapshot.html">helios::engine::runtime::pooling::GameObjectPoolSnapshot</a> poolSnapshot, const <a class="el" href="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a> &amp;updateContext) const noexcept override</td></tr>
+<tr class="memitem:a137d4f944a008bb75a522125b3a6167d" id="r_a137d4f944a008bb75a522125b3a6167d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a137d4f944a008bb75a522125b3a6167d">isSatisfied</a> (const size_t requestedAmount, const <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRuleState.html">SpawnRuleState</a> &amp;spawnState, const <a class="el" href="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolSnapshot.html">helios::engine::runtime::pooling::GameObjectPoolSnapshot</a> poolSnapshot, const <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a> &amp;updateContext) const noexcept override</td></tr>
 <tr class="memdesc:a137d4f944a008bb75a522125b3a6167d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the timer interval has elapsed.  <br /></td></tr>
 <tr class="memitem:a2f1166b99782f2bbb37e06e0f1eb4dd8" id="r_a2f1166b99782f2bbb37e06e0f1eb4dd8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2f1166b99782f2bbb37e06e0f1eb4dd8">onCommit</a> (<a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRuleState.html">SpawnRuleState</a> &amp;spawnRuleState, const size_t spawnAmount) const override</td></tr>
 <tr class="memdesc:a2f1166b99782f2bbb37e06e0f1eb4dd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the spawn timer after a successful spawn.  <br /></td></tr>
@@ -145,7 +145,7 @@ Public Member Functions</h2></td></tr>
 <li>**onCommit():** Resets the `sinceLastSpawn` timer to 0</li>
 </ul>
 <p>Example: ```cpp // Spawn every 2 seconds auto condition = std::make_unique&lt;TimerSpawnCondition&gt;(2.0f);</p>
-<p>auto rule = std::make_unique&lt;SpawnRule&gt;( std::move(condition), std::make_unique&lt;FixedSpawnAmount&gt;(3), SpawnRuleId{1} ); ```</p>
+<p>auto rule = std::make_unique&lt;SpawnRule&gt;( std::move(condition), std::make_unique&lt;FixedSpawnAmount&gt;(3), <a class="el" href="structhelios_1_1engine_1_1core_1_1data_1_1SpawnRuleId.html" title="Strongly-typed identifier for SpawnRule instances.">SpawnRuleId</a>{1} ); ```</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition.html" title="Abstract interface for determining when spawning should occur.">SpawnCondition</a> </dd>
 <dd>
 <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRule.html" title="Combines a condition and amount provider into a complete spawn rule.">SpawnRule</a> </dd>
@@ -219,7 +219,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>updateContext</em></span>&#160;) const</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>updateContext</em></span>&#160;) const</td>
         </tr>
       </table>
   </td>

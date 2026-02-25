@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="helios_2core_2memory_2README_8md" kind="file" language="Markdown">
+    <compoundname>helios/core/memory/README.md</compoundname>
+    <innernamespace refid="namespacehelios_1_1core_1_1memory">helios::core::memory</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>helios::core::memory</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Low-level<sp/>memory<sp/>utilities<sp/>for<sp/>type-erased<sp/>ownership.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>foundational<sp/>memory<sp/>primitives<sp/>used<sp/>by<sp/>the<sp/>engine&apos;s<sp/>resource<sp/>management<sp/>layer.<sp/>The<sp/>primary<sp/>type<sp/>is<sp/>`ErasedUnique`,<sp/>a<sp/>lightweight<sp/>ownership<sp/>wrapper<sp/>that<sp/>enables<sp/>heterogeneous<sp/>collections<sp/>without<sp/>requiring<sp/>a<sp/>common<sp/>base<sp/>class.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Key<sp/>Classes</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ErasedUnique`<sp/>|<sp/>Type-erased<sp/>unique<sp/>ownership<sp/>wrapper<sp/>(16<sp/>bytes)<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>ErasedUnique</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">`ErasedUnique`<sp/>provides<sp/>`unique_ptr`-like<sp/>ownership<sp/>semantics<sp/>without<sp/>requiring<sp/>a<sp/>virtual<sp/>destructor<sp/>or<sp/>common<sp/>base<sp/>class.<sp/>It<sp/>stores<sp/>a<sp/>`void*`<sp/>and<sp/>a<sp/>typed<sp/>deleter<sp/>function<sp/>pointer:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">struct<sp/>ErasedUnique<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>void*<sp/>ptr<sp/>=<sp/>nullptr;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>void<sp/>(*destroy)(void*)<sp/>noexcept<sp/>=<sp/>nullptr;</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Construction</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Constructed<sp/>from<sp/>any<sp/>`std::unique_ptr&lt;T&gt;`.<sp/>The<sp/>deleter<sp/>captures<sp/>the<sp/>concrete<sp/>type<sp/>at<sp/>construction<sp/>time:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>obj<sp/>=<sp/>std::make_unique&lt;MyResource&gt;(args...);</highlight></codeline>
+<codeline><highlight class="normal">ErasedUnique<sp/>erased{std::move(obj)};</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>erased.ptr<sp/>→<sp/>raw<sp/>pointer</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>erased.destroy<sp/>→<sp/>calls<sp/>delete<sp/>static_cast&lt;MyResource*&gt;(ptr)</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Move-Only<sp/>Semantics</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">`ErasedUnique`<sp/>is<sp/>move-only.<sp/>Moving<sp/>transfers<sp/>ownership<sp/>and<sp/>nulls<sp/>the<sp/>source.<sp/>Copy<sp/>construction<sp/>and<sp/>assignment<sp/>are<sp/>implicitly<sp/>deleted.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">ErasedUnique<sp/>a{std::make_unique&lt;Foo&gt;()};</highlight></codeline>
+<codeline><highlight class="normal">ErasedUnique<sp/>b<sp/>=<sp/>std::move(a);<sp/>//<sp/>a<sp/>is<sp/>now<sp/>empty</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Primary<sp/>Consumer</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">`ErasedUnique`<sp/>is<sp/>used<sp/>by<sp/>`ResourceRegistry`<sp/>to<sp/>store<sp/>Managers,<sp/>CommandBuffers,<sp/>and<sp/>other<sp/>heterogeneous<sp/>resources<sp/>in<sp/>a<sp/>single<sp/>`std::vector&lt;ErasedUnique&gt;`<sp/>without<sp/>vtable<sp/>overhead<sp/>for<sp/>destruction.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+<codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::core::memory</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Low-level<sp/>memory<sp/>utilities<sp/>for<sp/>type-erased<sp/>ownership.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Provides<sp/>ErasedUnique,<sp/>a<sp/>16-byte<sp/>type-erased<sp/>unique<sp/>ownership<sp/>wrapper<sp/>used<sp/>by<sp/>ResourceRegistry<sp/>to<sp/>store<sp/>heterogeneous<sp/>resource<sp/>types<sp/>without<sp/>requiring<sp/>a<sp/>common<sp/>base<sp/>class<sp/>or<sp/>virtual<sp/>destructor.</highlight></codeline>
+<codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
+<codeline></codeline>
+    </programlisting>
+    <location file="/tmp/h/include/helios/core/memory/README.md"/>
+  </compounddef>
+</doxygen>

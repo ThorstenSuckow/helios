@@ -2,21 +2,24 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="dir_c8ba3234849006b257a05b362b115823" kind="dir">
     <compoundname>lifecycle</compoundname>
+    <innerdir refid="dir_db86f11dedfd09ad096f192bbb7f0a5e">commands</innerdir>
     <innerdir refid="dir_9c6cd3e8e6e0499e50b91381009c10c7">components</innerdir>
     <innerdir refid="dir_b1389cf074ecf461b5a393105b0e9b57">systems</innerdir>
+    <innerdir refid="dir_ada361f984e4a5be1a99b39ca6ecaff1">types</innerdir>
     <innerfile refid="helios_2engine_2mechanics_2lifecycle_2__module_8ixx">helios/engine/mechanics/lifecycle/_module.ixx</innerfile>
     <innerfile refid="mechanics_2lifecycle_2registry_8ixx">mechanics/lifecycle/registry.ixx</innerfile>
+    <innerfile refid="WorldLifecycleManager_8ixx">WorldLifecycleManager.ixx</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_c8ba3234849006b257a05b362b115823_1autotoc_md249">
-<title>helios::engine::mechanics::lifecycle</title><para>Lifecycle management for entity components with delayed activation support.</para>
+<sect1 id="dir_c8ba3234849006b257a05b362b115823_1autotoc_md261">
+<title>helios::engine::mechanics::lifecycle</title><para>Lifecycle management for entity components and world-level lifecycle operations.</para>
 </sect1>
-<sect1 id="dir_c8ba3234849006b257a05b362b115823_1autotoc_md250">
-<title>Overview</title><para>This module provides mechanisms for controlling when components become active during an entity&apos;s lifecycle. The primary use case is delaying component activation after spawn, enabling patterns like collision immunity, staggered wave spawns, and effect sequencing.</para>
+<sect1 id="dir_c8ba3234849006b257a05b362b115823_1autotoc_md262">
+<title>Overview</title><para>This module provides mechanisms for controlling when components become active during an entity&apos;s lifecycle, as well as world-level lifecycle operations such as resetting the game world. The primary use cases are delayed component activation after spawn (collision immunity, staggered wave spawns, effect sequencing) and deferred world reset via the command pipeline.</para>
 </sect1>
-<sect1 id="dir_c8ba3234849006b257a05b362b115823_1autotoc_md251">
-<title>Key Classes</title><para><table rows="3" cols="2"><row>
+<sect1 id="dir_c8ba3234849006b257a05b362b115823_1autotoc_md263">
+<title>Key Classes</title><para><table rows="6" cols="2"><row>
 <entry thead="yes"><para>Class  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
 </entry></row>
@@ -28,10 +31,22 @@
 <entry thead="no"><para><computeroutput>DelayedComponentEnablerSystem</computeroutput>  </para>
 </entry><entry thead="no"><para>System that decrements timers and enables components  </para>
 </entry></row>
+<row>
+<entry thead="no"><para><computeroutput>WorldLifecycleManager</computeroutput>  </para>
+</entry><entry thead="no"><para>Manager that processes deferred world lifecycle commands  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>WorldLifecycleCommand</computeroutput>  </para>
+</entry><entry thead="no"><para>Command carrying a <computeroutput>WorldLifecycleAction</computeroutput>  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>WorldLifecycleAction</computeroutput>  </para>
+</entry><entry thead="no"><para>Enum defining available lifecycle operations (e.g. <computeroutput>Reset</computeroutput>)  </para>
+</entry></row>
 </table>
 </para>
 </sect1>
-<sect1 id="dir_c8ba3234849006b257a05b362b115823_1autotoc_md252">
+<sect1 id="dir_c8ba3234849006b257a05b362b115823_1autotoc_md264">
 <title>Architecture</title><para><programlisting><codeline><highlight class="normal">DelayedComponentEnablerInitializer</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼<sp/>defer(ComponentTypeId,<sp/>delay)</highlight></codeline>
@@ -50,7 +65,7 @@
 <codeline><highlight class="normal">└────────────────────────────────┘</highlight></codeline>
 </programlisting></para>
 </sect1>
-<sect1 id="dir_c8ba3234849006b257a05b362b115823_1autotoc_md253">
+<sect1 id="dir_c8ba3234849006b257a05b362b115823_1autotoc_md265">
 <title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>During<sp/>spawn<sp/>initialization,<sp/>defer<sp/>collision<sp/>component<sp/>by<sp/>0.5<sp/>seconds</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>enabler<sp/>=<sp/>entity.get&lt;DelayedComponentEnabler&gt;();</highlight></codeline>
 <codeline><highlight class="normal">enabler-&gt;defer(ComponentTypeId::id&lt;CollisionComponent&gt;(),<sp/>0.5f);</highlight></codeline>
@@ -62,13 +77,20 @@
 <codeline><highlight class="normal">&gt;&gt;(0.1f);<sp/><sp/></highlight><highlight class="comment">//<sp/>0.1s<sp/>delay<sp/>between<sp/>each<sp/>entity<sp/>in<sp/>batch</highlight></codeline>
 </programlisting></para>
 </sect1>
-<sect1 id="dir_c8ba3234849006b257a05b362b115823_1autotoc_md254">
+<sect1 id="dir_c8ba3234849006b257a05b362b115823_1autotoc_md266">
 <title>Common Patterns</title><para><bold>Collision Immunity</bold> <programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Projectiles<sp/>ignore<sp/>collisions<sp/>for<sp/>0.2s<sp/>after<sp/>spawn</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal">DelayedComponentEnablerInitializer&lt;CollisionComponent&gt;(0.2f)</highlight></codeline>
 </programlisting></para>
 <para><bold>Staggered Wave Spawns</bold> <programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>10<sp/>enemies<sp/>appear<sp/>one<sp/>by<sp/>one,<sp/>0.5s<sp/>apart,<sp/>then<sp/>pattern<sp/>repeats</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal">DelayedComponentEnablerInitializer&lt;RenderableComponent,<sp/>AIComponent&gt;(0.5f,<sp/>10)</highlight></codeline>
 </programlisting></para>
+</sect1>
+<sect1 id="dir_c8ba3234849006b257a05b362b115823_1autotoc_md267">
+<title>World Lifecycle</title><para>The <computeroutput>WorldLifecycleManager</computeroutput> enables deferred world-level operations through the command pipeline. Systems and state listeners submit <computeroutput>WorldLifecycleCommand</computeroutput> instances instead of calling <computeroutput>GameWorld</computeroutput> methods directly.</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Request<sp/>a<sp/>world<sp/>reset<sp/>(e.g.<sp/>from<sp/>a<sp/>game-over<sp/>state<sp/>listener)</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">updateContext.commandBuffer().add&lt;WorldLifecycleCommand&gt;(WorldLifecycleAction::Reset);</highlight></codeline>
+</programlisting></para>
+<para>The manager is auto-registered by <computeroutput>bootstrap::makeGameWorld()</computeroutput> and processes pending commands during its flush cycle. A <computeroutput>Reset</computeroutput> action calls <computeroutput>GameWorld::reset()</computeroutput>, which reinitializes all managers and the session.</para>
 <para><hruler/>
  <details><summary>Doxygen</summary><para></para>
 <para></para>

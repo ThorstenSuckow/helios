@@ -30,7 +30,7 @@
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Key<sp/>Components</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">**GameLoop**<sp/>is<sp/>the<sp/>central<sp/>orchestrator<sp/>that<sp/>owns<sp/>the<sp/>three<sp/>phases,<sp/>the<sp/>CommandBuffer,<sp/>and<sp/>the<sp/>event<sp/>buses.<sp/>It<sp/>drives<sp/>the<sp/>frame<sp/>update<sp/>by<sp/>iterating<sp/>through<sp/>all<sp/>phases<sp/>and<sp/>committing<sp/>events<sp/>and<sp/>commands<sp/>after<sp/>each<sp/>phase.</highlight></codeline>
+<codeline><highlight class="normal">**GameLoop**<sp/>is<sp/>the<sp/>central<sp/>orchestrator<sp/>that<sp/>owns<sp/>the<sp/>three<sp/>phases<sp/>and<sp/>the<sp/>event<sp/>buses.<sp/>The<sp/>EngineCommandBuffer<sp/>and<sp/>Managers<sp/>are<sp/>owned<sp/>by<sp/>the<sp/>GameWorld&apos;s<sp/>ResourceRegistry<sp/>and<sp/>accessed<sp/>via<sp/>UpdateContext<sp/>at<sp/>commit<sp/>points.<sp/>The<sp/>GameLoop<sp/>drives<sp/>the<sp/>frame<sp/>update<sp/>by<sp/>iterating<sp/>through<sp/>all<sp/>phases<sp/>and<sp/>committing<sp/>events<sp/>and<sp/>commands<sp/>after<sp/>each<sp/>phase.</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">**Phase**<sp/>represents<sp/>a<sp/>distinct<sp/>stage<sp/>in<sp/>the<sp/>update<sp/>cycle.<sp/>Phases<sp/>contain<sp/>passes<sp/>and<sp/>are<sp/>executed<sp/>in<sp/>fixed<sp/>order<sp/>(Pre<sp/>→<sp/>Main<sp/>→<sp/>Post).</highlight></codeline>
 <codeline></codeline>
@@ -47,40 +47,47 @@
 <codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">```cpp</highlight></codeline>
-<codeline><highlight class="normal">#include<sp/>&quot;helios/engine/gameloop/GameLoop.ixx&quot;</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.engine.runtime.gameloop.GameLoop;</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.engine.runtime.world.GameWorld;</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">helios.engine.runtime.gameloop.GameLoop<sp/>gameLoop;</highlight></codeline>
+<codeline><highlight class="normal">helios::engine::runtime::gameloop::GameLoop<sp/>gameLoop;</highlight></codeline>
+<codeline><highlight class="normal">helios::engine::runtime::world::GameWorld<sp/>gameWorld;</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">//<sp/>Configure<sp/>Pre<sp/>phase</highlight></codeline>
-<codeline><highlight class="normal">gameLoop.phase(PhaseType.Pre)</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addPass()</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.add&lt;InputSystem&gt;(&amp;inputManager);</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Register<sp/>state<sp/>types<sp/>with<sp/>session</highlight></codeline>
+<codeline><highlight class="normal">gameWorld.session().trackState&lt;GameState&gt;();</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">//<sp/>Configure<sp/>Main<sp/>phase<sp/>with<sp/>custom<sp/>commit<sp/>points</highlight></codeline>
-<codeline><highlight class="normal">gameLoop.phase(PhaseType.Main)</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addPass()</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.add&lt;MovementSystem&gt;(&amp;gameWorld)</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.add&lt;HeadingSystem&gt;(&amp;gameWorld)</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Commit<sp/>pass<sp/>events<sp/>and<sp/>flush<sp/>commands,<sp/>but<sp/>defer<sp/>manager<sp/>flush</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.addCommitPoint(CommitPoint::PassEvents<sp/>|<sp/>CommitPoint::FlushCommands)</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addPass()</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>CollisionSystem<sp/>can<sp/>now<sp/>read<sp/>events<sp/>from<sp/>the<sp/>previous<sp/>pass</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.add&lt;CollisionSystem&gt;(&amp;gameWorld)</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Full<sp/>structural<sp/>commit:<sp/>events,<sp/>commands,<sp/>and<sp/>managers</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.addCommitPoint(CommitPoint::Structural);<sp/></highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Configure<sp/>Pre<sp/>phase<sp/>(state-filtered<sp/>passes)</highlight></codeline>
+<codeline><highlight class="normal">gameLoop.phase(PhaseType::Pre)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addPass&lt;GameState&gt;(GameState::Any)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.addSystem&lt;InputSystem&gt;()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addCommitPoint(CommitPoint::Structural)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addPass&lt;GameState&gt;(GameState::Running)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.addSystem&lt;MovementSystem&gt;()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.addSystem&lt;SteeringSystem&gt;();</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Configure<sp/>Main<sp/>phase<sp/>with<sp/>commit<sp/>points</highlight></codeline>
+<codeline><highlight class="normal">gameLoop.phase(PhaseType::Main)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addPass&lt;GameState&gt;(GameState::Running)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.addSystem&lt;CollisionDetectionSystem&gt;()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Commit<sp/>pass<sp/>events<sp/>so<sp/>collision<sp/>responses<sp/>can<sp/>read<sp/>them</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addCommitPoint()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addPass&lt;GameState&gt;(GameState::Running)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.addSystem&lt;CollisionResponseSystem&gt;()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Full<sp/>structural<sp/>commit:<sp/>events,<sp/>commands,<sp/>and<sp/>managers</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addCommitPoint(CommitPoint::Structural);</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">//<sp/>Configure<sp/>Post<sp/>phase</highlight></codeline>
-<codeline><highlight class="normal">gameLoop.phase(PhaseType.Post)</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addPass()</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.add&lt;SceneSyncSystem&gt;(&amp;gameWorld,<sp/>&amp;scene)</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.add&lt;TransformClearSystem&gt;(&amp;gameWorld);</highlight></codeline>
+<codeline><highlight class="normal">gameLoop.phase(PhaseType::Post)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addPass&lt;GameState&gt;(GameState::Any)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.addSystem&lt;SceneSyncSystem&gt;()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.addSystem&lt;TransformClearSystem&gt;();</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">//<sp/>Initialize<sp/>once<sp/>before<sp/>the<sp/>first<sp/>update</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Initialize<sp/>and<sp/>run</highlight></codeline>
+<codeline><highlight class="normal">gameWorld.init();</highlight></codeline>
 <codeline><highlight class="normal">gameLoop.init(gameWorld);</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">//<sp/>In<sp/>your<sp/>main<sp/>loop</highlight></codeline>
 <codeline><highlight class="normal">while<sp/>(running)<sp/>{</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>gameLoop.update(gameWorld,<sp/>deltaTime,<sp/>inputSnapshot);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>gameLoop.update(gameWorld,<sp/>deltaTime,<sp/>inputSnapshot,<sp/>viewportSnapshots);</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>renderer.render(scene);</highlight></codeline>
 <codeline><highlight class="normal">}</highlight></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>

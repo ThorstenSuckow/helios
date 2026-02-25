@@ -6,26 +6,35 @@
     <innerfile refid="GameWorld_8ixx">GameWorld.ixx</innerfile>
     <innerfile refid="Level_8ixx">Level.ixx</innerfile>
     <innerfile refid="Manager_8ixx">Manager.ixx</innerfile>
+    <innerfile refid="ResourceRegistry_8ixx">ResourceRegistry.ixx</innerfile>
     <innerfile refid="Session_8ixx">Session.ixx</innerfile>
     <innerfile refid="SystemRegistry_8ixx">SystemRegistry.ixx</innerfile>
     <innerfile refid="UpdateContext_8ixx">UpdateContext.ixx</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_271ebd1cecf9fce13500c2bd2d622746_1autotoc_md685">
-<title>helios::engine::runtime::world</title><para>World state management and per-frame update context.</para>
+<sect1 id="dir_271ebd1cecf9fce13500c2bd2d622746_1autotoc_md698">
+<title>helios::engine::runtime::world</title><para>World state management, resource registry, and per-frame update context.</para>
 </sect1>
-<sect1 id="dir_271ebd1cecf9fce13500c2bd2d622746_1autotoc_md686">
-<title>Overview</title><para>This module provides the core classes for managing game state during runtime. The <computeroutput>GameWorld</computeroutput> class serves as the central registry for all GameObjects, while <computeroutput>UpdateContext</computeroutput> provides the frame context passed to systems during updates.</para>
+<sect1 id="dir_271ebd1cecf9fce13500c2bd2d622746_1autotoc_md699">
+<title>Overview</title><para>This module provides the core classes for managing runtime game state. <computeroutput>GameWorld</computeroutput> is the root container owning the entity system, the <computeroutput>ResourceRegistry</computeroutput> for type-indexed O(1) resource access, the current <computeroutput>Level</computeroutput>, and the <computeroutput>Session</computeroutput>. <computeroutput>UpdateContext</computeroutput> provides the per-frame context passed to systems during updates.</para>
 </sect1>
-<sect1 id="dir_271ebd1cecf9fce13500c2bd2d622746_1autotoc_md687">
-<title>Key Classes</title><para><table rows="6" cols="2"><row>
+<sect1 id="dir_271ebd1cecf9fce13500c2bd2d622746_1autotoc_md700">
+<title>Key Classes</title><para><table rows="8" cols="2"><row>
 <entry thead="yes"><para>Class  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>GameWorld</computeroutput>  </para>
-</entry><entry thead="no"><para>Central registry for GameObjects, managers, and pool access  </para>
+</entry><entry thead="no"><para>Central game state container for entities, resources, and the active level  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ResourceRegistry</computeroutput>  </para>
+</entry><entry thead="no"><para>Type-indexed store for Managers, CommandBuffers, and CommandHandlers with O(1) lookup  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>Session</computeroutput>  </para>
+</entry><entry thead="no"><para>Cross-frame state tracking (game/match states, scores)  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>Level</computeroutput>  </para>
@@ -46,17 +55,25 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_271ebd1cecf9fce13500c2bd2d622746_1autotoc_md688">
-<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8runtime_8world_8GameWorld" kindref="compound">helios.engine.runtime.world.GameWorld</ref>;</highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8runtime_8world_8UpdateContext" kindref="compound">helios.engine.runtime.world.UpdateContext</ref>;</highlight></codeline>
+<sect1 id="dir_271ebd1cecf9fce13500c2bd2d622746_1autotoc_md701">
+<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Create<sp/>world<sp/>and<sp/>register<sp/>resources</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref><sp/>gameWorld;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>poolMgr<sp/>=<sp/>gameWorld.<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a05c8f51c63b7e923c228b034be4fc208" kindref="member">resourceRegistry</ref>()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a71c88e4711c542c493f9c41825f76a85" kindref="member">registerResource</ref>&lt;GameObjectPoolManager&gt;();</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>spawnMgr<sp/>=<sp/>gameWorld.<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a05c8f51c63b7e923c228b034be4fc208" kindref="member">resourceRegistry</ref>()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a71c88e4711c542c493f9c41825f76a85" kindref="member">registerResource</ref>&lt;SpawnManager&gt;();</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Create<sp/>world<sp/>and<sp/>add<sp/>entities</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref><sp/>world;</highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>entity<sp/>=<sp/>std::make_unique&lt;GameObject&gt;();</highlight></codeline>
-<codeline><highlight class="normal">world.<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a672057079d4cf81a8d05b07aa87fee3c" kindref="member">addGameObject</ref>(std::move(entity));</highlight></codeline>
+<codeline><highlight class="normal">gameWorld.<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aae71c0fe187189d167cb967181831740" kindref="member">init</ref>();<sp/></highlight><highlight class="comment">//<sp/>Initializes<sp/>all<sp/>Managers<sp/>in<sp/>registration<sp/>order</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Query<sp/>entities<sp/>by<sp/>component</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>obj<sp/>:<sp/>world.<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ac4319f3453e06ad04125c43b17047398" kindref="member">find</ref>&lt;ComposeTransformComponent&gt;())<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Create<sp/>entities</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>player<sp/>=<sp/>gameWorld.<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a672057079d4cf81a8d05b07aa87fee3c" kindref="member">addGameObject</ref>();</highlight></codeline>
+<codeline><highlight class="normal">player.<ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject_1a0447ff56cdd329a2db5436096f8353ae" kindref="member">add</ref>&lt;TransformComponent&gt;(position);</highlight></codeline>
+<codeline><highlight class="normal">player.setActive(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Query<sp/>entities<sp/>via<sp/>views</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>[entity,<sp/>transform,<sp/>active]<sp/>:<sp/>gameWorld.<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a16e96750ec7af95732a904982a24b2f9" kindref="member">view</ref>&lt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>TransformComponent,<sp/>Active</highlight></codeline>
+<codeline><highlight class="normal">&gt;().whereEnabled())<sp/>{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Process<sp/>matching<sp/>entities</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal">}</highlight></codeline>
 </programlisting></para>

@@ -4,26 +4,6 @@
     <compoundname>helios.engine.runtime.world.Manager</compoundname>
     <innerfile refid="Manager_8ixx">Manager.ixx</innerfile>
     <innerclass refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" prot="public">helios::engine::runtime::world::Manager</innerclass>
-    <sectiondef kind="var">
-      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1aaa2bc033955a07d4d97592eb2f817659" prot="protected" static="no" mutable="no">
-        <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> *</type>
-        <definition>helios::engine::runtime::world::GameWorld* helios::engine::runtime::world::Manager::gameWorld_</definition>
-        <argsstring></argsstring>
-        <name>gameWorld_</name>
-        <qualifiedname>helios::engine::runtime::world::Manager::gameWorld_</qualifiedname>
-        <initializer>= nullptr</initializer>
-        <briefdescription>
-<para>Pointer to the owning <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref>. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>Set during <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ab0f750d777e2368c08fc413188673622" kindref="member">onAdd()</ref> and remains valid for the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref>&apos;s lifetime. </para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" line="60" column="51" bodyfile="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" bodystart="60" bodyend="-1"/>
-        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ab0f750d777e2368c08fc413188673622" compoundref="Manager_8ixx" startline="74" endline="76">helios::engine::runtime::world::Manager::onAdd</referencedby>
-      </memberdef>
-    </sectiondef>
     <sectiondef kind="func">
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a116b5758bea5a39bbc0d24bc62bdcdd7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -37,38 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" line="64" column="17"/>
-      </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ab0f750d777e2368c08fc413188673622" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
-        <type>void</type>
-        <definition>virtual void helios::engine::runtime::world::Manager::onAdd</definition>
-        <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld)</argsstring>
-        <name>onAdd</name>
-        <qualifiedname>helios::engine::runtime::world::Manager::onAdd</qualifiedname>
-        <param>
-          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
-          <declname>gameWorld</declname>
-        </param>
-        <briefdescription>
-<para>Called when the manager is added to a <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref>. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>Stores a reference to the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> for later use. Override to perform additional registration logic.</para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>gameWorld</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> this manager was added to. </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" line="74" column="22" bodyfile="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" bodystart="74" bodyend="76"/>
-        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1aaa2bc033955a07d4d97592eb2f817659" compoundref="Manager_8ixx" startline="60">helios::engine::runtime::world::Manager::gameWorld_</references>
+        <location file="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" line="60" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ae7e2cd7531de5ce1fdc1f4a179b70929" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -76,6 +25,7 @@
         <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld)</argsstring>
         <name>init</name>
         <qualifiedname>helios::engine::runtime::world::Manager::init</qualifiedname>
+        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1WorldLifecycleManager_1ac913e707aa847a82959ee708582b5cee">init</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a04f62fb1b24bfc389acaa48fdd31293e">init</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1adf8ca10337b5b942ab184958c4dacabd">init</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager_1a376734356261cdf9d67af7bc03b15698">init</reimplementedby>
@@ -106,28 +56,25 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" line="86" column="22" bodyfile="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" bodystart="86" bodyend="90"/>
+        <location file="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" line="70" column="22" bodyfile="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" bodystart="70" bodyend="74"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a290b20a4d512d096650dc187f1f3e940" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a4a530617ca6c546b21b23795347e6384" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
         <type>void</type>
         <definition>virtual void helios::engine::runtime::world::Manager::flush</definition>
-        <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld, helios::engine::runtime::world::UpdateContext &amp;update_context) noexcept=0</argsstring>
+        <argsstring>(helios::engine::runtime::world::UpdateContext &amp;update_context) noexcept=0</argsstring>
         <name>flush</name>
         <qualifiedname>helios::engine::runtime::world::Manager::flush</qualifiedname>
-        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a05625cf859f18873e47f79e7e9f9816e">flush</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1a6c9d6e54b813c582e1b5e3857d3858d0">flush</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager_1aba013e3e716888f010cedcde9534e7cf">flush</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1ab69a353b11e4ee5a834dca810f3239e9">flush</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a345caf68f5d311a54f74a921b933705e">flush</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1state_1_1StateManager_1af596b7158c7753e319d8030c3faad9b1">flush</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1state_1_1StateManager_1af596b7158c7753e319d8030c3faad9b1">flush</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1state_1_1StateManager_1af596b7158c7753e319d8030c3faad9b1">flush</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1WorldLifecycleManager_1a8f1e202e0b123497f527630a1690402c">flush</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1abf528fe8904b38cf52f31df8edf4592c">flush</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1aef973149d954abaf1787fa74f4accf7d">flush</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager_1afeec7a0d76b53a2dfb60b7d2fe8c938a">flush</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1ab5c9788a67aee220c43f4c3f7b633bbd">flush</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1afb6ace98d74da9ed313c6811142f5d3d">flush</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1state_1_1StateManager_1a7b16869a9d0d8b511b76ac568339fea1">flush</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1state_1_1StateManager_1a7b16869a9d0d8b511b76ac568339fea1">flush</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1state_1_1StateManager_1a7b16869a9d0d8b511b76ac568339fea1">flush</reimplementedby>
         <param>
-          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
-          <declname>gameWorld</declname>
-        </param>
-        <param>
-          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
           <declname>update_context</declname>
         </param>
         <briefdescription>
@@ -156,7 +103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" line="102" column="22"/>
+        <location file="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" line="86" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a967a3375eca948be9ebeaca2e34c7475" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -164,6 +111,7 @@
         <argsstring>()</argsstring>
         <name>reset</name>
         <qualifiedname>helios::engine::runtime::world::Manager::reset</qualifiedname>
+        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1WorldLifecycleManager_1a636b9fca864cb0f6cb5c104d5320aa3d">reset</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1ae26e54f8314f7f412565e2b0ec5d2dd4">reset</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1a3cc30c28fb07d97665e83b372872e597">reset</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a1f3ad93fd926408196bca49a9707757e">reset</reimplementedby>
@@ -179,7 +127,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" line="114" column="22" bodyfile="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" bodystart="114" bodyend="117"/>
+        <location file="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" line="97" column="22" bodyfile="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" bodystart="97" bodyend="100"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

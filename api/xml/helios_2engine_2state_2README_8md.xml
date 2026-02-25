@@ -17,7 +17,7 @@
 <codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>a<sp/>complete<sp/>state<sp/>management<sp/>framework<sp/>including:</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">-<sp/>**State<sp/>machines**<sp/>with<sp/>rule-based<sp/>transitions<sp/>and<sp/>guards</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>**Commands<sp/>and<sp/>dispatchers**<sp/>for<sp/>requesting<sp/>state<sp/>changes</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Commands**<sp/>for<sp/>requesting<sp/>state<sp/>changes<sp/>via<sp/>the<sp/>TypedCommandBuffer</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**Listeners**<sp/>for<sp/>reacting<sp/>to<sp/>state<sp/>transitions</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**ID<sp/>mapping<sp/>utilities**<sp/>for<sp/>associating<sp/>states<sp/>with<sp/>viewports/menus</highlight></codeline>
 <codeline></codeline>
@@ -34,8 +34,8 @@
 <codeline><highlight class="normal">|<sp/>`StateTransitionListener&lt;StateType&gt;`<sp/>|<sp/>Interface<sp/>for<sp/>transition<sp/>observers<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`LambdaStateListener&lt;StateType&gt;`<sp/>|<sp/>Lambda-based<sp/>listener<sp/>implementation<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`StateCommand&lt;StateType&gt;`<sp/>|<sp/>Command<sp/>for<sp/>requesting<sp/>transitions<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`StateCommandDispatcher&lt;StateType&gt;`<sp/>|<sp/>Routes<sp/>commands<sp/>to<sp/>handlers<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`StateComponent&lt;StateType&gt;`<sp/>|<sp/>Stores<sp/>current<sp/>state<sp/>on<sp/>entities<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`Bindings`<sp/>|<sp/>Compile-time<sp/>specializations<sp/>mapping<sp/>state<sp/>types<sp/>to<sp/>transition<sp/>ID<sp/>types<sp/>|</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">###<sp/>ID<sp/>Mapping</highlight></codeline>
 <codeline></codeline>
@@ -105,8 +105,8 @@
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Transition<sp/>Flow</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">1.<sp/>`StateCommand`<sp/>is<sp/>submitted<sp/>to<sp/>the<sp/>command<sp/>buffer</highlight></codeline>
-<codeline><highlight class="normal">2.<sp/>`StateCommandDispatcher`<sp/>routes<sp/>it<sp/>to<sp/>`StateManager`</highlight></codeline>
+<codeline><highlight class="normal">1.<sp/>`StateCommand`<sp/>is<sp/>submitted<sp/>to<sp/>the<sp/>EngineCommandBuffer</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>`TypedCommandHandler&lt;StateCommand&lt;T&gt;&gt;`<sp/>routes<sp/>it<sp/>to<sp/>`StateManager`</highlight></codeline>
 <codeline><highlight class="normal">3.<sp/>`StateManager::flush()`<sp/>processes<sp/>pending<sp/>commands</highlight></codeline>
 <codeline><highlight class="normal">4.<sp/>Matching<sp/>rule<sp/>is<sp/>found<sp/>and<sp/>guard<sp/>is<sp/>evaluated</highlight></codeline>
 <codeline><highlight class="normal">5.<sp/>Listeners<sp/>are<sp/>notified:<sp/>`onStateExit`<sp/>→<sp/>`onStateTransition`<sp/>→<sp/>`onStateEnter`</highlight></codeline>

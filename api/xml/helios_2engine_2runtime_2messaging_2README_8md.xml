@@ -12,13 +12,13 @@
 <codeline></codeline>
 <codeline><highlight class="normal">Communication<sp/>infrastructure<sp/>for<sp/>commands<sp/>and<sp/>events<sp/>within<sp/>the<sp/>game<sp/>loop.</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>the<sp/>messaging<sp/>backbone<sp/>for<sp/>the<sp/>helios<sp/>engine.<sp/>It<sp/>includes<sp/>the<sp/>Command<sp/>pattern<sp/>implementation<sp/>for<sp/>buffering<sp/>and<sp/>executing<sp/>game<sp/>actions,<sp/>as<sp/>well<sp/>as<sp/>event<sp/>buses<sp/>for<sp/>decoupled<sp/>inter-system<sp/>communication.</highlight></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>the<sp/>messaging<sp/>backbone<sp/>for<sp/>the<sp/>helios<sp/>engine.<sp/>It<sp/>includes<sp/>the<sp/>compile-time<sp/>typed<sp/>Command<sp/>system<sp/>for<sp/>buffering<sp/>and<sp/>routing<sp/>game<sp/>actions<sp/>to<sp/>handlers,<sp/>as<sp/>well<sp/>as<sp/>event<sp/>buses<sp/>for<sp/>decoupled<sp/>inter-system<sp/>communication.</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Submodules</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">|<sp/>Submodule<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|-----------|---------|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`command/`<sp/>|<sp/>Command<sp/>buffer,<sp/>dispatchers,<sp/>and<sp/>command<sp/>types<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`command/`<sp/>|<sp/>Compile-time<sp/>typed<sp/>command<sp/>buffer,<sp/>handler<sp/>routing,<sp/>and<sp/>EngineCommandBuffer<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`event/`<sp/>|<sp/>Game<sp/>loop<sp/>event<sp/>bus<sp/>for<sp/>phase/pass/frame<sp/>events<sp/>|</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Key<sp/>Classes</highlight></codeline>
@@ -27,11 +27,11 @@
 <codeline></codeline>
 <codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|-------|---------|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`CommandBuffer`<sp/>|<sp/>Collects<sp/>commands<sp/>and<sp/>flushes<sp/>to<sp/>dispatchers<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`WorldCommand`<sp/>|<sp/>Command<sp/>operating<sp/>on<sp/>GameWorld<sp/>state<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`TargetedCommand`<sp/>|<sp/>Command<sp/>targeting<sp/>a<sp/>specific<sp/>GameObject<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`WorldCommandDispatcher`<sp/>|<sp/>Routes<sp/>world<sp/>commands<sp/>to<sp/>handlers<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`TargetedCommandDispatcher`<sp/>|<sp/>Routes<sp/>targeted<sp/>commands<sp/>to<sp/>handlers<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`CommandBuffer`<sp/>|<sp/>Abstract<sp/>base<sp/>for<sp/>command<sp/>buffers<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`CommandHandler`<sp/>|<sp/>Abstract<sp/>base<sp/>for<sp/>type-erased<sp/>handler<sp/>storage<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`TypedCommandHandler&lt;T&gt;`<sp/>|<sp/>Type-safe<sp/>handler<sp/>for<sp/>a<sp/>specific<sp/>command<sp/>type<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`TypedCommandBuffer&lt;...Cmds&gt;`<sp/>|<sp/>Compile-time<sp/>typed<sp/>buffer<sp/>with<sp/>per-type<sp/>queues<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`EngineCommandBuffer`<sp/>|<sp/>Concrete<sp/>facade<sp/>with<sp/>all<sp/>engine<sp/>command<sp/>types<sp/>|</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">###<sp/>Event</highlight></codeline>
 <codeline></codeline>
@@ -45,7 +45,7 @@
 <codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
 <codeline><highlight class="normal">@namespace<sp/>helios::engine::runtime::messaging</highlight></codeline>
 <codeline><highlight class="normal">@brief<sp/>Communication<sp/>infrastructure<sp/>for<sp/>commands<sp/>and<sp/>events.</highlight></codeline>
-<codeline><highlight class="normal">@details<sp/>This<sp/>module<sp/>provides<sp/>the<sp/>messaging<sp/>backbone<sp/>for<sp/>the<sp/>game<sp/>loop,<sp/>including<sp/>command<sp/>buffering<sp/>for<sp/>deferred<sp/>action<sp/>execution<sp/>and<sp/>event<sp/>buses<sp/>for<sp/>inter-system<sp/>communication.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Provides<sp/>compile-time<sp/>typed<sp/>command<sp/>buffering<sp/>with<sp/>handler<sp/>routing,<sp/>and<sp/>double-buffered<sp/>event<sp/>buses<sp/>for<sp/>decoupled<sp/>inter-system<sp/>communication<sp/>within<sp/>the<sp/>game<sp/>loop.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
 <codeline></codeline>
 <codeline></codeline>

@@ -11,6 +11,7 @@
     <innerfile refid="EntityHandle_8ixx">EntityHandle.ixx</innerfile>
     <innerfile refid="EntityManager_8ixx">EntityManager.ixx</innerfile>
     <innerfile refid="EntityRegistry_8ixx">EntityRegistry.ixx</innerfile>
+    <innerfile refid="EntityResolver_8ixx">EntityResolver.ixx</innerfile>
     <innerfile refid="GameObject_8ixx">GameObject.ixx</innerfile>
     <innerfile refid="ecs_2registry_8ixx">ecs/registry.ixx</innerfile>
     <innerfile refid="SparseSet_8ixx">SparseSet.ixx</innerfile>
@@ -21,14 +22,14 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md133">
+<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md141">
 <title>helios::engine::ecs</title><para>Core Entity-Component-System architecture for the helios game engine.</para>
 </sect1>
-<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md134">
+<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md142">
 <title>Overview</title><para>This module provides the foundational classes for the composition-based game architecture. It separates data (Components) from behavior (Systems). Entity lifecycle and world management are provided by <computeroutput><ref refid="namespacehelios_1_1engine_1_1runtime_1_1world" kindref="compound">helios.engine.runtime.world</ref></computeroutput>.</para>
 </sect1>
-<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md135">
-<title>Key Classes</title><para><table rows="14" cols="2"><row>
+<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md143">
+<title>Key Classes</title><para><table rows="15" cols="2"><row>
 <entry thead="yes"><para>Class  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
 </entry></row>
@@ -81,12 +82,16 @@
 </entry><entry thead="no"><para>Compile-time type registration  </para>
 </entry></row>
 <row>
+<entry thead="no"><para><computeroutput>EntityResolver</computeroutput>  </para>
+</entry><entry thead="no"><para>Callable for resolving EntityHandles to GameObjects  </para>
+</entry></row>
+<row>
 <entry thead="no"><para><computeroutput>Traits</computeroutput>  </para>
 </entry><entry thead="no"><para>Compile-time concepts for component lifecycle hooks  </para>
 </entry></row>
 </table>
 </para>
-<sect2 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md136">
+<sect2 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md144">
 <title>Submodules</title><para><table rows="3" cols="2"><row>
 <entry thead="yes"><para>Submodule  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
@@ -103,7 +108,7 @@
 </para>
 </sect2>
 </sect1>
-<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md137">
+<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md145">
 <title>Component Storage Model</title><para><computeroutput>GameObject</computeroutput> uses a <bold>type-indexed storage</bold> system for components. Instead of a hash-based lookup, components are stored in a contiguous vector where the index corresponds to the component&apos;s compile-time <computeroutput>ComponentTypeId</computeroutput>.</para>
 <para><bold>Performance Characteristics:</bold></para>
 <para><table rows="5" cols="3"><row>
@@ -146,7 +151,7 @@
 <codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ComponentTypeId::id&lt;Transform&gt;()<sp/><sp/>ComponentTypeId::id&lt;Move2D&gt;()</highlight></codeline>
 </programlisting></para>
 </sect1>
-<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md138">
+<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md146">
 <title>EntityRegistry and EntityManager</title><para>The <bold>EntityRegistry</bold> is the single source of truth for entity lifecycle. It manages handle allocation, version tracking, and entity validation.</para>
 <para>The <bold>EntityManager</bold> provides a high-level API combining registry and component storage:</para>
 <para><programlisting filename=".cpp"><codeline><highlight class="normal">EntityRegistry<sp/>registry;</highlight></codeline>
@@ -185,7 +190,7 @@
 <codeline><highlight class="normal">└────────────────────────────────────────────────────────────┘</highlight></codeline>
 </programlisting></para>
 </sect1>
-<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md139">
+<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md147">
 <title>EntityPool</title><para><computeroutput>EntityPool&lt;T&gt;</computeroutput> is a sparse-set based data structure for storing entities with versioned handles. It provides O(1) insertion, lookup, and cache-friendly iteration.</para>
 <para><bold>Data Structure:</bold></para>
 <para><programlisting><codeline><highlight class="normal">sparse_:<sp/><sp/>[0]<sp/><sp/>[1]<sp/><sp/>[2]<sp/><sp/>[3]<sp/><sp/>...<sp/><sp/><sp/><sp/><sp/>(maps<sp/>entity<sp/>ID<sp/>→<sp/>dense<sp/>index)</highlight></codeline>
@@ -211,8 +216,8 @@
 <codeline><highlight class="normal">}</highlight></codeline>
 </programlisting></para>
 </sect1>
-<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md140">
-<title>Submodules</title><sect2 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md141">
+<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md148">
+<title>Submodules</title><sect2 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md149">
 <title>Traits</title><para>Compile-time concepts for component lifecycle hooks:</para>
 <para><table rows="4" cols="2"><row>
 <entry thead="yes"><para>Trait  </para>
@@ -242,7 +247,7 @@
 <codeline><highlight class="normal"></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(<ref refid="concepthelios_1_1engine_1_1ecs_1_1traits_1_1HasOnRemove" kindref="compound">helios::engine::ecs::traits::HasOnRemove&lt;ResourceComponent&gt;</ref>);</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md142">
+<sect2 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md150">
 <title>query/</title><para>Entity query utilities for filtering and iterating GameObjects:</para>
 <para><table rows="3" cols="2"><row>
 <entry thead="yes"><para>Class  </para>
@@ -260,7 +265,7 @@
 </para>
 </sect2>
 </sect1>
-<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md143">
+<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md151">
 <title>Related Modules</title><para><table rows="3" cols="2"><row>
 <entry thead="yes"><para>Module  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
@@ -276,7 +281,7 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md144">
+<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md152">
 <title>Architecture</title><para><programlisting><codeline><highlight class="normal">┌─────────────────────────────────────────────────────────────┐</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GameWorld<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/>┌─────────────┐<sp/><sp/>┌─────────────┐<sp/><sp/>┌─────────────────────┐<sp/><sp/>│</highlight></codeline>
@@ -298,7 +303,7 @@
 <codeline><highlight class="normal">└─────────────────────────────────────────────────────────────┘</highlight></codeline>
 </programlisting></para>
 </sect1>
-<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md145">
+<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md153">
 <title>Usage Example</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8ecs" kindref="compound">helios.engine.ecs</ref>;</highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8runtime_8world_8GameWorld" kindref="compound">helios.engine.runtime.world.GameWorld</ref>;</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>

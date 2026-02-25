@@ -61,8 +61,9 @@
   <compound refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1Aim2DCommand" kind="class"><name>helios::engine::mechanics::combat::commands::Aim2DCommand</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1Aim2DCommand_1aa85e2cddb0d3a93c7787f31dd1dd6ed9" kind="variable"><name>freqFactor_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1Aim2DCommand_1a4b85a1fedee30c54b44534ec7025e924" kind="variable"><name>direction_</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1Aim2DCommand_1a1671b06743d4e0021b3249b41805aaab" kind="function"><name>Aim2DCommand</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1Aim2DCommand_1a861541234b341ec5191dde68cb887507" kind="function"><name>execute</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1Aim2DCommand_1a36bb7b04096117f8d58fa661ea004eb1" kind="variable"><name>entityHandle_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1Aim2DCommand_1a394a15ae52a7911c7f62f28096b31cff" kind="function"><name>Aim2DCommand</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1Aim2DCommand_1a8499d495cfa433d409eb8ba557130dab" kind="function"><name>execute</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1Aim2DComponent" kind="class"><name>helios::engine::mechanics::combat::components::Aim2DComponent</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1Aim2DComponent_1a3c0795d8c60eaa7f539c0dddea0db227" kind="variable"><name>direction_</name></member>
@@ -507,19 +508,21 @@
     <member refid="classhelios_1_1engine_1_1state_1_1CombinedStateToIdMapPair_1a2752025cb4292bc40adbf3a0e69d77a0" kind="function"><name>ids</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer" kind="class"><name>helios::engine::runtime::messaging::command::CommandBuffer</name>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a147ccfd4b63c97c74b262dfe5209b804" kind="variable"><name>targetedCommandBuffer_</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1af60d98d03fd1bd45ea9a78fa5db01e5c" kind="variable"><name>worldCommandBuffer_</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a33dddecec35850d1e25ff1d81ad97d1d" kind="variable"><name>targetedCommandDispatchers_</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a8e89f6c1f82f18a1bee07aebeda644c0" kind="variable"><name>worldCommandDispatchers_</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a801f74db90b3dd3daf9dd728b69ad922" kind="variable"><name>logger_</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1ab0123534ad152ae9688e781682aa879f" kind="function"><name>addDispatcher</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a222f4ebdac7a7530166f3350f14ae71e" kind="function"><name>hasDispatcher</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a71febda44a137e545cb260cea2d1b9b6" kind="function"><name>addDispatcher</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1ae38bd4c38ca9714e8d8b83e840929ca9" kind="function"><name>hasDispatcher</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1ae86242f86c27014387f22b448112dd81" kind="function"><name>add</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1aefadad69c3bb4d3dd76d627e1775bb0d" kind="function"><name>add</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1accac0953fe00e2fe4c480334bdd826ec" kind="function"><name>flush</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a550e52c6233fe6b04ccf66b984a07dce" kind="function"><name>clear</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1ad30a48c89c776560b95ce2e0c1244be4" kind="function"><name>~CommandBuffer</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a8535f5c29283dac178b3b3d2449210d4" kind="function"><name>flush</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a79125d01f21544304762287af62d176a" kind="function"><name>clear</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler" kind="class"><name>helios::engine::runtime::messaging::command::CommandHandler</name>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler_1a410bedb175238cfe3f9c5062cd934ebe" kind="function"><name>~CommandHandler</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1core_1_1data_1_1CommandTypeId" kind="class"><name>helios::engine::core::data::CommandTypeId</name>
+    <member refid="classhelios_1_1engine_1_1core_1_1data_1_1CommandTypeId_1af619f4179c0de0a0297c5f4e8f873327" kind="typedef"><name>ComponentType</name></member>
+    <member refid="classhelios_1_1engine_1_1core_1_1data_1_1CommandTypeId_1ab5ee40420ba0b059f7cb8aa5dbf17775" kind="variable"><name>id_</name></member>
+    <member refid="classhelios_1_1engine_1_1core_1_1data_1_1CommandTypeId_1ac3018ab416448e30ceb65a6f112b7ceb" kind="function"><name>CommandTypeId</name></member>
+    <member refid="classhelios_1_1engine_1_1core_1_1data_1_1CommandTypeId_1a4121f7770ffd53955ff1249a8def7683" kind="function"><name>CommandTypeId</name></member>
+    <member refid="classhelios_1_1engine_1_1core_1_1data_1_1CommandTypeId_1a02c7a149c90e32349a4ec2e462240f05" kind="function"><name>value</name></member>
+    <member refid="classhelios_1_1engine_1_1core_1_1data_1_1CommandTypeId_1a51593f84607abe91a3c42573bb0a5a87" kind="function"><name>id</name></member>
+    <member refid="classhelios_1_1engine_1_1core_1_1data_1_1CommandTypeId_1a11f99a4fd4b8186276e11f3a8c21aeb7" kind="friend"><name>operator==</name></member>
   </compound>
   <compound refid="structhelios_1_1engine_1_1ecs_1_1ComponentOps" kind="struct"><name>helios::engine::ecs::ComponentOps</name>
     <member refid="structhelios_1_1engine_1_1ecs_1_1ComponentOps_1a1386d6b1e0a1e44717e64c811709c3f4" kind="typedef"><name>OnAcquireFn</name></member>
@@ -737,14 +740,8 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1DespawnCommand_1a99504fb2fd5e02b366e678d7dabd34fb" kind="variable"><name>entityHandle_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1DespawnCommand_1a469929f42d6cbe2e23e6a51c475f2734" kind="variable"><name>spawnProfileId_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1DespawnCommand_1a9d5f7a1b3bb25a6a669ef6f3e360261a" kind="function"><name>DespawnCommand</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1DespawnCommand_1a27d6b601c1d80bd842c3d5b01b08bfad" kind="function"><name>execute</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1DespawnCommand_1a9345f2a9f35dcdf2398d3e787e657269" kind="function"><name>accept</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1DespawnCommand_1a6d593df631aa5d5d2688213f3c7adc5a" kind="function"><name>entityHandle</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1DespawnCommand_1a6078e9b0926d3fd2bca0f94a8c38565c" kind="function"><name>spawnProfileId</name></member>
-  </compound>
-  <compound refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1DespawnCommandDispatcher" kind="class"><name>helios::engine::runtime::spawn::dispatcher::DespawnCommandDispatcher</name>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1DespawnCommandDispatcher_1a0532ad79fe9cedca7ab082949c140d86" kind="function"><name>dispatchTyped</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1DespawnCommandDispatcher_1adaaecbd2c01c411701bb7f62798dc195" kind="function"><name>DespawnCommandDispatcher</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1DirectionComponent" kind="class"><name>helios::engine::modules::physics::motion::components::DirectionComponent</name>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1DirectionComponent_1a491eebd546816327dcbee4c475995330" kind="variable"><name>direction_</name></member>
@@ -817,6 +814,13 @@
   <compound refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1EmitterSpawnPlacer" kind="class"><name>helios::engine::runtime::spawn::behavior::placements::EmitterSpawnPlacer</name>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1EmitterSpawnPlacer_1a9a443dd8797148f4b30014de913836b1" kind="function"><name>getPosition</name></member>
   </compound>
+  <compound refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer" kind="class"><name>helios::engine::runtime::messaging::command::EngineCommandBuffer</name>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1af05f35df5b1257f3119cb29cbf0e3fde" kind="typedef"><name>BufferImpl</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1a0b3ddb0409bf4a07a4a8c12e6323f158" kind="variable"><name>impl_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1a661d0858913185ec6f6e35ef2b87c883" kind="function"><name>add</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1a4f2f838aa913f20181fc0cda507563ef" kind="function"><name>flush</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1a10b84b9f9d1099022f35fb8f839a4f90" kind="function"><name>clear</name></member>
+  </compound>
   <compound refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle" kind="struct"><name>helios::engine::ecs::EntityHandle</name>
     <member refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle_1a8ad3a3b2aa35d89579931f2914dcb2d0" kind="variable"><name>entityId</name></member>
     <member refid="structhelios_1_1engine_1_1ecs_1_1EntityHandle_1ae0ef80052fa02514dffb0fcc6d94765b" kind="variable"><name>versionId</name></member>
@@ -863,6 +867,21 @@
     <member refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry_1a2f3b3cd6bcecd7c8e04fe42fa1c25c7a" kind="function"><name>isValid</name></member>
     <member refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry_1aea6c94d2dcd58d3c97cc560375895c93" kind="function"><name>destroy</name></member>
     <member refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry_1a3c1886d46213cc275183edfd1c5ff6a1" kind="function"><name>version</name></member>
+  </compound>
+  <compound refid="structhelios_1_1engine_1_1ecs_1_1EntityResolver" kind="struct"><name>helios::engine::ecs::EntityResolver</name>
+    <member refid="structhelios_1_1engine_1_1ecs_1_1EntityResolver_1a23aa7ba43f22a2efec26a8e1cd5933aa" kind="variable"><name>em</name></member>
+    <member refid="structhelios_1_1engine_1_1ecs_1_1EntityResolver_1af99759e77125a4d40b11ddc9082cd9ad" kind="function"><name>operator()</name></member>
+    <member refid="structhelios_1_1engine_1_1ecs_1_1EntityResolver_1abacfbca33f58052df4073e120662d1d3" kind="function"><name>find</name></member>
+  </compound>
+  <compound refid="structhelios_1_1core_1_1memory_1_1ErasedUnique" kind="struct"><name>helios::core::memory::ErasedUnique</name>
+    <member refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1a64a2a2738febbddabe0cf1ac5e3f43a8" kind="variable"><name>ptr</name></member>
+    <member refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1a5dd7d498967d63f8d0e16888d7e8b4bd" kind="variable"><name>destroy</name></member>
+    <member refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1ada7b198b62571d105d73de458dce6924" kind="function"><name>ErasedUnique</name></member>
+    <member refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1a0d994cf662abf84b02c4f3a4b1bf0be8" kind="function"><name>ErasedUnique</name></member>
+    <member refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1a093a209fb25f5bad93ce552eecb3f305" kind="function"><name>ErasedUnique</name></member>
+    <member refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1acb4e619797fe16987ab5acc04fb73192" kind="function"><name>operator=</name></member>
+    <member refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1abd6c8163994585895a95fcf5696d20a9" kind="function"><name>~ErasedUnique</name></member>
+    <member refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1a29ea44e555a8bbe0725d41a0e477601f" kind="function"><name>reset</name></member>
   </compound>
   <compound refid="classhelios_1_1event_1_1Event" kind="class"><name>helios::event::Event</name>
     <member refid="classhelios_1_1event_1_1Event_1a5d230c911b7ce021871d0701e380007a" kind="variable"><name>guid_</name></member>
@@ -995,15 +1014,14 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a7d4eb13220ecd447c6af0914fd214921" kind="variable"><name>prePhase_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1adaff711d38a5a95c0494c527ae4a1714" kind="variable"><name>mainPhase_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a53abfe8e0aed479d00ec3867d5fd0412" kind="variable"><name>postPhase_</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a1ee2f3b652d9619f4f328b43862b15c2" kind="variable"><name>commandBuffer_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1aa4fa49a8c51021ff24404e84b20696b5" kind="variable"><name>phaseEventBus_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1abf5317ab24eb3c9dbfe5c0a827680699" kind="variable"><name>passEventBus_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1ae54b7c4d141a90c2fc65a0bbbe887426" kind="variable"><name>frameEventBus_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1ab178f78cbde82dd87b4391b4eed56859" kind="variable"><name>totalTime_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a4bf78e22f99e1d3028b50f4aa5ed9acd" kind="function"><name>onPassCommit</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1aa8aeafec5ba655ccacde623ad32f40ec" kind="function"><name>phaseCommit</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a41b297a4ee926ed2b989996ceb61bb7f" kind="function"><name>GameLoop</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a7649a22c062f81568c5d11d2a8148029" kind="function"><name>phase</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1ada0015b327377f0ce118369a904ceed7" kind="function"><name>commandBuffer</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a7915a98afe2de477625904422cf6d029" kind="function"><name>init</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a8dbc5c72e9d25b13933ccda14b0975d7" kind="function"><name>update</name></member>
   </compound>
@@ -1084,7 +1102,7 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a85c5d5ed93c6e22f4d09750273e77c73" kind="function"><name>release</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a965ef591bc25269837e5e95118cb52d2" kind="function"><name>acquire</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a7f5ef214b56eba5241a20de5d964eff2" kind="function"><name>init</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1ab69a353b11e4ee5a834dca810f3239e9" kind="function"><name>flush</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1ab5c9788a67aee220c43f4c3f7b633bbd" kind="function"><name>flush</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a9cc0f690e30550d213698d06210f69a6" kind="function"><name>pool</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a1f3ad93fd926408196bca49a9707757e" kind="function"><name>reset</name></member>
   </compound>
@@ -1313,41 +1331,28 @@
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerUpdateSystem_1ab3ac7a7318db66c36c1a8f14f0710801" kind="function"><name>update</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kind="class"><name>helios::engine::runtime::world::GameWorld</name>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ae6be15dea22ccb29caf122440d8021c7" kind="variable"><name>gameObjects_</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aae88d3ee210e2e4ed03cbba46419734d" kind="variable"><name>managers_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a5cc257dd2ebbd269a60b9891889f4b50" kind="variable"><name>logger_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a70d324aa0446f3bc86e89b0774bdd963" kind="variable"><name>level_</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ad19913ff20f7cf576045de7124483f77" kind="variable"><name>scoreCommandHandler_</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aec14cc722c3044953d7434d88f64b463" kind="variable"><name>timerCommandHandler_</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a6ebb8c28f0db121085c0c2bad8b4128d" kind="variable"><name>stateCommandHandlers_</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aebbb01a9cefc8258d7c8b507e8299718" kind="variable"><name>uiActionCommandHandler_</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ae3bae7b84d6f67f747d4129f2e7101ec" kind="variable"><name>spawnCommandHandlerRegistry_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ac670c2a5ffd16ed5500955a9bc01e12a" kind="variable"><name>resourceRegistry_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ab82b5eb9c54b2b750b635f2d8e6a168e" kind="variable"><name>entityRegistry_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1acfdf128e6c02f892f7be4a863887f357" kind="variable"><name>em_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a4618852a927c5feac102c549ffe3adcf" kind="variable"><name>session_</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a5cc257dd2ebbd269a60b9891889f4b50" kind="variable"><name>logger_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a8ad38df92f57b70abeb60bc82556f15b" kind="function"><name>GameWorld</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ac36313172a25b316147c1ecba9cfadae" kind="function"><name>GameWorld</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a9db65d4d44f4c271cf60e7803297c2aa" kind="function"><name>operator=</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ac004c6fdb4e8fcdd334c302f7cb0653c" kind="function"><name>GameWorld</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a8309cffe7fbad212831bb353f9bd78d8" kind="function"><name>operator=</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a2d6cce041856f53f9221b8127e064209" kind="function"><name>session</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a0f4f403f4d0667b252c87169e3c81cc1" kind="function"><name>entityManager</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aae71c0fe187189d167cb967181831740" kind="function"><name>init</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a8d76de93fc524c7cfe07d506a79130db" kind="function"><name>setLevel</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a03d2275138a928e04c4bb527ba41830a" kind="function"><name>hasLevel</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a130d018f6ce51f8e8d75eac3e6ef3561" kind="function"><name>level</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ab53994280aeec233c1dd91f02a09e589" kind="function"><name>hasManager</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a7c60c2fdaba967d2415a3d8b253a425d" kind="function"><name>addManager</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a035f7979ac9743fceecaeea93204cd37" kind="function"><name>registerSpawnCommandHandler</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ac523efad82188ea088f155da87765594" kind="function"><name>registerUiActionCommandHandler</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ac54de3822d847ebd5ac050d2225c216f" kind="function"><name>uiActionCommandHandler</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a81250d5cb4d49746a9702d9f4a66d6ec" kind="function"><name>spawnCommandHandler</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a37b8248fc6f250140046bd81401853ef" kind="function"><name>registerScoreCommandHandler</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a462d7a1e1252eb4c2b274c2e253a8da4" kind="function"><name>scoreCommandHandler</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a537be803bd263137818146cb029af9a6" kind="function"><name>registerTimerCommandHandler</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a09eea946cb57eccfa71964d18414bd97" kind="function"><name>timerCommandHandler</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ae2255ceebca281c53e7a7d69f8e56131" kind="function"><name>registerStateCommandHandler</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ad1501c0217ada774e439dfa060b89053" kind="function"><name>stateCommandHandler</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aa5461339dafdae850a4327e59a1ba112" kind="function"><name>getManager</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1affe7696dfe62c5de7b2d1cbd4cbd6fc7" kind="function"><name>registerManager</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a8b291cc60aa4ef02932747235c0fc64d" kind="function"><name>registerCommandHandler</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a187d5dfbdb99b5a31917776688d88355" kind="function"><name>registerResource</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aef708e6e8cdbf9023f76d18bff0054df" kind="function"><name>manager</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a72cd30e709f646b83f18c50c97f57b3c" kind="function"><name>flushManagers</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a672057079d4cf81a8d05b07aa87fee3c" kind="function"><name>addGameObject</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a16e96750ec7af95732a904982a24b2f9" kind="function"><name>view</name></member>
@@ -1356,6 +1361,7 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ac2dda75670b28086b1426d320b945db0" kind="function"><name>find</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1abcc2243a9cb4b493634a63932434bcaf" kind="function"><name>clone</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aa134c91f1cff94cb3e708d7908e2a291" kind="function"><name>reset</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a05c8f51c63b7e923c228b034be4fc208" kind="function"><name>resourceRegistry</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1GfxEffectsConfig" kind="class"><name>helios::engine::builder::gameObject::builders::configs::GfxEffectsConfig</name>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1GfxEffectsConfig_1a09dcc78dd6404d5b55bef38c946e12b2" kind="variable"><name>gameObject_</name></member>
@@ -1483,6 +1489,9 @@
   <compound refid="structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ActionId_01_4" kind="struct"><name>std::hash&lt; helios::engine::core::data::ActionId &gt;</name>
     <member refid="structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ActionId_01_4_1a738e622ef14a0d1a30f0e771b2a8811d" kind="function"><name>operator()</name></member>
   </compound>
+  <compound refid="structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1CommandTypeId_01_4" kind="struct"><name>std::hash&lt; helios::engine::core::data::CommandTypeId &gt;</name>
+    <member refid="structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1CommandTypeId_01_4_1a5730e6ab44c4e9e1da6dd786fbd4e3d4" kind="function"><name>operator()</name></member>
+  </compound>
   <compound refid="structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ComponentTypeId_01_4" kind="struct"><name>std::hash&lt; helios::engine::core::data::ComponentTypeId &gt;</name>
     <member refid="structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ComponentTypeId_01_4_1a077f45a9d00a3726326278c63b2cc5a8" kind="function"><name>operator()</name></member>
   </compound>
@@ -1491,6 +1500,9 @@
   </compound>
   <compound refid="structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId_01_4" kind="struct"><name>std::hash&lt; helios::engine::core::data::GameObjectPoolId &gt;</name>
     <member refid="structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId_01_4_1a30ce18512575595abc2daa2a0d1f01bf" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ResourceTypeId_01_4" kind="struct"><name>std::hash&lt; helios::engine::core::data::ResourceTypeId &gt;</name>
+    <member refid="structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ResourceTypeId_01_4_1a79f664bac14ee365f9ffc94a727a0000" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1SceneId_01_4" kind="struct"><name>std::hash&lt; helios::engine::core::data::SceneId &gt;</name>
     <member refid="structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1SceneId_01_4_1a7f0ba8685fd1dd25bdcfcea04a946fef" kind="function"><name>operator()</name></member>
@@ -1550,7 +1562,11 @@
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1systems_1_1HealthUpdateSystem_1a50656e68a950e206ca2bc38de5644f91" kind="variable"><name>logger_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1systems_1_1HealthUpdateSystem_1ac37bb8ba60abf58b11fa2317c43fb35a" kind="function"><name>update</name></member>
   </compound>
+  <compound refid="structhelios_1_1engine_1_1core_1_1data_1_1CommandTypeId_1_1helios__engine__core__data__CommandTypes" kind="struct"><name>helios::engine::core::data::CommandTypeId::helios_engine_core_data_CommandTypes</name>
+  </compound>
   <compound refid="structhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId_1_1helios__engine__core__data__ComponentTypes" kind="struct"><name>helios::engine::core::data::ComponentTypeId::helios_engine_core_data_ComponentTypes</name>
+  </compound>
+  <compound refid="structhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId_1_1helios__engine__core__data__ResourceTypes" kind="struct"><name>helios::engine::core::data::ResourceTypeId::helios_engine_core_data_ResourceTypes</name>
   </compound>
   <compound refid="structhelios_1_1engine_1_1core_1_1data_1_1ScoreTypeId_1_1helios__engine__core__data__ScoreTypes" kind="struct"><name>helios::engine::core::data::ScoreTypeId::helios_engine_core_data_ScoreTypes</name>
   </compound>
@@ -1904,11 +1920,9 @@
     <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1MainMenuWidget_1aace2f8284caeb15564e45d8b013ab114" kind="function"><name>draw</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kind="class"><name>helios::engine::runtime::world::Manager</name>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1aaa2bc033955a07d4d97592eb2f817659" kind="variable"><name>gameWorld_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a116b5758bea5a39bbc0d24bc62bdcdd7" kind="function"><name>~Manager</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ab0f750d777e2368c08fc413188673622" kind="function"><name>onAdd</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ae7e2cd7531de5ce1fdc1f4a179b70929" kind="function"><name>init</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a290b20a4d512d096650dc187f1f3e940" kind="function"><name>flush</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a4a530617ca6c546b21b23795347e6384" kind="function"><name>flush</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a967a3375eca948be9ebeaca2e34c7475" kind="function"><name>reset</name></member>
   </compound>
   <compound refid="structhelios_1_1math_1_1mat4" kind="struct"><name>helios::math::mat4</name>
@@ -2164,8 +2178,9 @@
   <compound refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1Move2DCommand" kind="class"><name>helios::engine::modules::physics::motion::commands::Move2DCommand</name>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1Move2DCommand_1a37bd362076f9d8951c87eb237b54c459" kind="variable"><name>speedFactor_</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1Move2DCommand_1a25ba1cf8e2bd3c7ad13b9c74f75f0870" kind="variable"><name>direction_</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1Move2DCommand_1a0802f5b633a00d2f12e4d4f64426dc0e" kind="function"><name>Move2DCommand</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1Move2DCommand_1a4cd5c2f5e4c9571d67f1e735d802dabf" kind="function"><name>execute</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1Move2DCommand_1afdf02a11218f72dcd48a4adc9d5b4759" kind="variable"><name>entityHandle_</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1Move2DCommand_1a0e9bbf074a60567cbf4bcaffed519f83" kind="function"><name>Move2DCommand</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1Move2DCommand_1a001e7918a2fe76ebd9aa382c3f969aec" kind="function"><name>execute</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent" kind="class"><name>helios::engine::modules::physics::motion::components::Move2DComponent</name>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1ae0e2288f37fa9f2acd8f0e1b1249b009" kind="variable"><name>DEFAULT_MOVEMENT_SPEED_THRESHOLD</name></member>
@@ -2559,6 +2574,33 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1conditions_1_1RequestedAmountIsAvailableCondition_1a50459fca1c9637963d296971ca5cef8a" kind="function"><name>onCommit</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1conditions_1_1RequestedAmountIsAvailableCondition_1ac1203da77ec268cc97b209fb67200259" kind="function"><name>onReset</name></member>
   </compound>
+  <compound refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry" kind="class"><name>helios::engine::runtime::world::ResourceRegistry</name>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1ab893cdc7b7dfc022f52b90baa196ae8b" kind="variable"><name>owned_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1adcdc3928d64eff4e225efef9fefaf241" kind="variable"><name>managers_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1ac1e0bebfcdedc77fc7da3a08fae81267" kind="variable"><name>commandBuffers_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1af9a80295a69dd62798bcd5de1feec7de" kind="variable"><name>commandHandlers_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a9828f4f10f6e1a8734c23bcd7e44bf74" kind="variable"><name>fastAccess_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a71c88e4711c542c493f9c41825f76a85" kind="function"><name>registerResource</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a9bab978496643ba428b8166184103cd8" kind="function"><name>registerResource</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a4a7fa60f4d0fb1925a0d8c78037c5b93" kind="function"><name>has</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a11562a65e70f32bf894460020bacf6de" kind="function"><name>resource</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1ad755b403ab228b91d906e9dc8547caa2" kind="function"><name>resource</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a36c02739412c272a7c6fab30e0a90d98" kind="function"><name>tryResource</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1ad4b7717b6f2445c9d234cb9fb0594658" kind="function"><name>tryResource</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a05e0269ef59954066304d444264ee133" kind="function"><name>managers</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1aea2adfeb9c3dccf20d0fa6aa8a2a5581" kind="function"><name>managers</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a8ccc085b30e324d32fcd8bcf1d5f338f" kind="function"><name>commandBuffers</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a6a3fbd714901feffe20c01fa7996956f" kind="function"><name>commandBuffers</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId" kind="class"><name>helios::engine::core::data::ResourceTypeId</name>
+    <member refid="classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId_1a95e6160f403d9f636cefbe40840afd52" kind="typedef"><name>ResourceType</name></member>
+    <member refid="classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId_1ad51ad9ff20e2e7c7e978e70b70bba900" kind="variable"><name>id_</name></member>
+    <member refid="classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId_1ac9309120d56b4f6dcc8538a47b41650b" kind="function"><name>ResourceTypeId</name></member>
+    <member refid="classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId_1afb80d387e656268705a85eef2a8712e3" kind="function"><name>ResourceTypeId</name></member>
+    <member refid="classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId_1a798d7c173ee476ac27e8101ec5bb257a" kind="function"><name>value</name></member>
+    <member refid="classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId_1a90dff317be585026a0516e6eb0dfc2e9" kind="function"><name>id</name></member>
+    <member refid="classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId_1ad86c3405b14df6ade01e67b92c76adf2" kind="friend"><name>operator==</name></member>
+  </compound>
   <compound refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Rhombus" kind="struct"><name>helios::rendering::asset::shape::basic::Rhombus</name>
     <member refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Rhombus_1a7e44b172592f9b3910330abd3ec936dd" kind="function"><name>Rhombus</name></member>
     <member refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Rhombus_1ac882e24588f46c1c035575a84237c590" kind="function"><name>primitiveType</name></member>
@@ -2782,15 +2824,9 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_1aa02b62de82ec5c6ac867ff8948c9a02a" kind="variable"><name>spawnPlan_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_1a4132d8998ae1d1fa0e056eb8b8133cb3" kind="variable"><name>spawnContext_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_1a0d20724300c2ecbf62cf8eca2f278b8d" kind="function"><name>ScheduledSpawnPlanCommand</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_1ac52d2b8e0f355b14e1a4777c9519b675" kind="function"><name>execute</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_1a78a32b69a8df38b4f4c543010467df0c" kind="function"><name>accept</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_1a39a05ef02b8449b0f3450c346a64640c" kind="function"><name>spawnProfileId</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_1a786debdfc118c8fff0ce790eece91a7a" kind="function"><name>spawnPlan</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_1a0c12f5f7424245590dc058d5f14f70c8" kind="function"><name>spawnContext</name></member>
-  </compound>
-  <compound refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1ScheduledSpawnPlanCommandDispatcher" kind="class"><name>helios::engine::runtime::spawn::dispatcher::ScheduledSpawnPlanCommandDispatcher</name>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1ScheduledSpawnPlanCommandDispatcher_1ad2f498d542d4f6364552373cd93d0d7a" kind="function"><name>dispatchTyped</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1ScheduledSpawnPlanCommandDispatcher_1adba3d6f1bb3b956a0e2a555887f44e2b" kind="function"><name>ScheduledSpawnPlanCommandDispatcher</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1SchedulerBuilder" kind="class"><name>helios::engine::builder::spawnSystem::builders::SchedulerBuilder</name>
     <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1SchedulerBuilder_1a7da6bbb6d217975404b476c4867e2878" kind="variable"><name>spawnManager_</name></member>
@@ -2823,10 +2859,6 @@
   </compound>
   <compound refid="classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1Score2UiTextUpdateSystem" kind="class"><name>helios::engine::modules::ui::binding::systems::Score2UiTextUpdateSystem</name>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1Score2UiTextUpdateSystem_1a42311d88dd1231b06cbd18b782469140" kind="function"><name>update</name></member>
-  </compound>
-  <compound refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandDispatcher" kind="class"><name>helios::engine::mechanics::scoring::ScoreCommandDispatcher</name>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandDispatcher_1ad61ed3888db1fb4368f766b38fffb598" kind="function"><name>dispatchTyped</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandDispatcher_1a2c87a83ecd307aae34d7cf9cc0c0e630" kind="function"><name>ScoreCommandDispatcher</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler" kind="class"><name>helios::engine::mechanics::scoring::ScoreCommandHandler</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler_1a57a07935f12d35eed7436d88933a3610" kind="function"><name>~ScoreCommandHandler</name></member>
@@ -2912,8 +2944,8 @@
     <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1aa34229b674e0da187b8c56c6cc90dfd0" kind="variable"><name>scores_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a055dd5eeddf3e34a2663fb0017b2f041" kind="function"><name>addScorePool</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a68108b524ba7d30d4c281c05c777e3c0" kind="function"><name>scorePool</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a05625cf859f18873e47f79e7e9f9816e" kind="function"><name>flush</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1ac30bf7894a4fd962ca9e67c4ca02f395" kind="function"><name>submit</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1abf528fe8904b38cf52f31df8edf4592c" kind="function"><name>flush</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1aa8a5216ee454dbdd0b8a69e519fdf977" kind="function"><name>submit</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a04f62fb1b24bfc389acaa48fdd31293e" kind="function"><name>init</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1ae26e54f8314f7f412565e2b0ec5d2dd4" kind="function"><name>reset</name></member>
   </compound>
@@ -2990,9 +3022,10 @@
   </compound>
   <compound refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1ShootCommand" kind="class"><name>helios::engine::mechanics::combat::commands::ShootCommand</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1ShootCommand_1a6e088a68b83817f3f6ef1cbe907f2e5d" kind="variable"><name>intensity_</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1ShootCommand_1a15feae0a07bfafee1b5b892751038937" kind="function"><name>ShootCommand</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1ShootCommand_1a17412b4ae8aa84eb00650e6cb9d137da" kind="variable"><name>entityHandle_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1ShootCommand_1a330e771be4c29ff5990966ac4831f9f9" kind="function"><name>ShootCommand</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1ShootCommand_1a533a83962b340b1c421241b82fcfee42" kind="function"><name>intensity</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1ShootCommand_1a405136175de8de53c1bd4417e0ee0e57" kind="function"><name>execute</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1ShootCommand_1aa76bf7345e2bb3a54b7dfc5d45fcb7a7" kind="function"><name>execute</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent" kind="class"><name>helios::engine::mechanics::combat::components::ShootComponent</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1a7571f57473bd46ce4be7be42c786802c" kind="variable"><name>intensity_</name></member>
@@ -3103,15 +3136,9 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1SpawnCommand_1af003a22a7f48d82adcdb41b8cd2894c1" kind="variable"><name>spawnProfileId_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1SpawnCommand_1a916a164cc53f4fa4555f4827da510972" kind="variable"><name>spawnContext_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1SpawnCommand_1a74fcd792de0dcc4b351aa5b579fd9010" kind="function"><name>SpawnCommand</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1SpawnCommand_1abb3d93337e9b64a12bdbb0d369282829" kind="function"><name>execute</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1SpawnCommand_1af74bbc5f5d852aa75b97fee99a9ffeb5" kind="function"><name>accept</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1SpawnCommand_1ac16caa6019600d74fd8a68b6fe1f11c2" kind="function"><name>spawnProfileId</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1SpawnCommand_1aaa87dc27a24e7e869eee99894e2ac839" kind="function"><name>spawnBudget</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1SpawnCommand_1a528d1c697493e6c3b9e77eae93beb57a" kind="function"><name>spawnContext</name></member>
-  </compound>
-  <compound refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1SpawnCommandDispatcher" kind="class"><name>helios::engine::runtime::spawn::dispatcher::SpawnCommandDispatcher</name>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1SpawnCommandDispatcher_1a5d5a34455ac34b80f18b01880527140b" kind="function"><name>dispatchTyped</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1SpawnCommandDispatcher_1a70ee851347452f9ab784eca0d42b1a53" kind="function"><name>SpawnCommandDispatcher</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler" kind="class"><name>helios::engine::runtime::spawn::SpawnCommandHandler</name>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler_1af8ec8360e7f6a91e46ce5207c98caea9" kind="function"><name>~SpawnCommandHandler</name></member>
@@ -3168,21 +3195,21 @@
   </compound>
   <compound refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" kind="class"><name>helios::engine::runtime::spawn::SpawnManager</name>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a13c47e1ad5e367d3d0df4cb5d4dfed0d" kind="variable"><name>spawnSchedulers_</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a78bfec2a2616bb6a3788f99362f87414" kind="variable"><name>spawnCommands_</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a8fa9d044ec944334d2d1f6db4395cbfe" kind="variable"><name>despawnCommands_</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a93a51b6d502195cc187ad7de5e0c362a" kind="variable"><name>scheduledSpawnPlanCommands_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a536e2121701a41aaf29489ab742f00a8" kind="variable"><name>spawnCommands_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1ae97d2d98155f9afc72e5ef77bcc6c80c" kind="variable"><name>despawnCommands_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a28ab040cbda4261446b0040d491b851f" kind="variable"><name>scheduledSpawnPlanCommands_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a89d55461036f73f89fe562b46ca7f384" kind="variable"><name>gameObjectPoolManager_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a4dd482abce2d7e87a3998d534bc76116" kind="variable"><name>spawnProfiles_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a1e1485ee793b24b4a6bcba470e397b20" kind="function"><name>ensureBounds</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1abd4a02937d8d6686cc432788692fd367" kind="function"><name>executeScheduledSpawnPlanCommands</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a3b4d91b8369332eea4a4b910b626fd3d" kind="function"><name>spawnObjects</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1af33cd04062d77fdd17f02751e6581931" kind="function"><name>despawnObjects</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a004673cfcf00dc080bddaeaae41d0b5b" kind="function"><name>executeScheduledSpawnPlanCommands</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a152cbca205840c0c91e878d2a6da0033" kind="function"><name>spawnObjects</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a53b8d398c249970b2346f236aade2504" kind="function"><name>despawnObjects</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a0ed05ecdafaaa1de8bfe0fe4a8540166" kind="function"><name>SpawnManager</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a68c1e1c5bc8e28061333e50e7d5836bc" kind="function"><name>submit</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a2c516006f6f2db8af0ee51a765cc69b1" kind="function"><name>submit</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a11b64df3f6da630ef18e0ce51adf7529" kind="function"><name>addScheduler</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a5896ba755340affff00edcd3757068c7" kind="function"><name>submit</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1ab2c6562cae1e34f6e90068710044f085" kind="function"><name>submit</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a345caf68f5d311a54f74a921b933705e" kind="function"><name>flush</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1aebf53bebeaf49e42b06d9f96817ee96a" kind="function"><name>submit</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a6d40be3a3b2ca2085397be98e18e1be6" kind="function"><name>submit</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1afb6ace98d74da9ed313c6811142f5d3d" kind="function"><name>flush</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1ac51fc20588ef7abf0d7e9b675bc6e0b3" kind="function"><name>addSpawnProfile</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1aa356bdd063bd2b7ca1f3548218e32411" kind="function"><name>spawnProfile</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1aeab1d9b1aabd174751fa20937a9841f2" kind="function"><name>init</name></member>
@@ -3342,12 +3369,6 @@
     <member refid="classhelios_1_1engine_1_1state_1_1commands_1_1StateCommand_1a987339f8584460de6304f8b053649dae" kind="variable"><name>transitionRequest_</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1commands_1_1StateCommand_1ace83f6aeefac821836ae3fd9cbcb099c" kind="function"><name>StateCommand</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1commands_1_1StateCommand_1a0668e1b654f07b3fb5c3eb2606961e25" kind="function"><name>transitionRequest</name></member>
-    <member refid="classhelios_1_1engine_1_1state_1_1commands_1_1StateCommand_1a4bfc45d9d244e6150d64573ba9ea6fd5" kind="function"><name>execute</name></member>
-    <member refid="classhelios_1_1engine_1_1state_1_1commands_1_1StateCommand_1a71c21f2e0e387d0251ca87d058a00c27" kind="function"><name>accept</name></member>
-  </compound>
-  <compound refid="classhelios_1_1engine_1_1state_1_1dispatcher_1_1StateCommandDispatcher" kind="class"><name>helios::engine::state::dispatcher::StateCommandDispatcher</name>
-    <member refid="classhelios_1_1engine_1_1state_1_1dispatcher_1_1StateCommandDispatcher_1ac088de7049af1199a3b757b1964f8bb2" kind="function"><name>dispatchTyped</name></member>
-    <member refid="classhelios_1_1engine_1_1state_1_1dispatcher_1_1StateCommandDispatcher_1ab73b00670ad5d386d29ca502715adc9e" kind="function"><name>StateCommandDispatcher</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1state_1_1StateCommandHandler" kind="class"><name>helios::engine::state::StateCommandHandler</name>
     <member refid="classhelios_1_1engine_1_1state_1_1StateCommandHandler_1a0e219522933348b745aed2adba19724d" kind="function"><name>~StateCommandHandler</name></member>
@@ -3369,8 +3390,8 @@
     <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a3080c1d2709031429bb557c11b4e843c" kind="function"><name>signalEnter</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a1123ae4a933d5b6a9da97b3ff91f624f" kind="function"><name>StateManager</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a2e7db1e0999cebc060246a224139fcdb" kind="function"><name>addStateListener</name></member>
-    <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1af596b7158c7753e319d8030c3faad9b1" kind="function"><name>flush</name></member>
-    <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a19df21f7ae037e26e5296abd4a03cc38" kind="function"><name>submit</name></member>
+    <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a7b16869a9d0d8b511b76ac568339fea1" kind="function"><name>flush</name></member>
+    <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a053488fdbe36259adf10bd51474677a6" kind="function"><name>submit</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a176a52f4173536aa3fde8324f1f72cb6" kind="function"><name>init</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1abd21bd2f4c2738a52d1854d3389f3488" kind="function"><name>reset</name></member>
   </compound>
@@ -3460,8 +3481,9 @@
   <compound refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1SteeringCommand" kind="class"><name>helios::engine::modules::physics::motion::commands::SteeringCommand</name>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1SteeringCommand_1a83e1b3fa3ecb6408b743bcbafabe5b6d" kind="variable"><name>turnFactor_</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1SteeringCommand_1a9528af8ba1a5a4215a6add3b054a0eaf" kind="variable"><name>direction_</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1SteeringCommand_1a2af51f7a73ab5223f28cd5b81fa33314" kind="function"><name>SteeringCommand</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1SteeringCommand_1a0c81ba64684234c619fd09dca98ab395" kind="function"><name>execute</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1SteeringCommand_1a7540d119ca2e27e39c1be933fea4d1b1" kind="variable"><name>entityHandle_</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1SteeringCommand_1ac7c137fab6972cd3e79b693c6fbd4193" kind="function"><name>SteeringCommand</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1SteeringCommand_1aab7d49249b1429755461841864570f8e" kind="function"><name>execute</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent" kind="class"><name>helios::engine::modules::physics::motion::components::SteeringComponent</name>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a7e2bd667c26624d657ed36b28cb83886" kind="variable"><name>DEFAULT_ROTATION_SPEED</name></member>
@@ -3565,20 +3587,6 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry_1a1faaf4789249106828fa02c91274b610" kind="function"><name>add</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry_1a3e879c017e4283b971b738f55a7b3e4a" kind="function"><name>hasSystem</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry_1ae0d6499790a83073e18ec91c5800fb4a" kind="function"><name>getSystem</name></member>
-  </compound>
-  <compound refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand" kind="class"><name>helios::engine::runtime::messaging::command::TargetedCommand</name>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand_1afdb2e242ce5c8d3d5a642529ba21f96f" kind="function"><name>~TargetedCommand</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand_1a7b06969ba22a31d99ea0b77732993ed7" kind="function"><name>execute</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand_1aaaecdfa3765611e2cf3452ef9e81951d" kind="function"><name>accept</name></member>
-  </compound>
-  <compound refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommandDispatcher" kind="class"><name>helios::engine::runtime::messaging::command::TargetedCommandDispatcher</name>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommandDispatcher_1a620b269a0fbb8e3d539df8d373aa4b0c" kind="function"><name>~TargetedCommandDispatcher</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommandDispatcher_1aef68b9b72ee196e69129c7efae1a406f" kind="function"><name>dispatch</name></member>
-  </compound>
-  <compound refid="structhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1_1TargetedCommandProxy" kind="struct"><name>helios::engine::runtime::messaging::command::CommandBuffer::TargetedCommandProxy</name>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1_1TargetedCommandProxy_1a14dec5066d801a3c74355b2245ccfc2c" kind="variable"><name>typeIdx</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1_1TargetedCommandProxy_1a2059b27bd5aaa5c1f0bd41e9236cd0f0" kind="variable"><name>entityHandle</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1_1TargetedCommandProxy_1a282ae6af4fc57b850af23dfc4ecf7170" kind="variable"><name>targetedCommand</name></member>
   </compound>
   <compound refid="structhelios_1_1rendering_1_1text_1_1TextLayout" kind="struct"><name>helios::rendering::text::TextLayout</name>
     <member refid="structhelios_1_1rendering_1_1text_1_1TextLayout_1a9068f8ba9afe42904b6b4a4c61f1f48b" kind="variable"><name>aabb</name></member>
@@ -3693,10 +3701,6 @@
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1layout_1_1components_1_1TimeFormatterComponent_1a0b017686db8e4ad13115f220dba846b7" kind="function"><name>setFormat</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1layout_1_1components_1_1TimeFormatterComponent_1aeb1b16b5171edb1c9add6dc54d7739ce" kind="function"><name>format</name></member>
   </compound>
-  <compound refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerCommandDispatcher" kind="class"><name>helios::engine::mechanics::timing::TimerCommandDispatcher</name>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerCommandDispatcher_1a4c44c52e73afda2bb8b29a8453bc2899" kind="function"><name>dispatchTyped</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerCommandDispatcher_1a390855c20ae1e2486ba6e2282059ac7b" kind="function"><name>TimerCommandDispatcher</name></member>
-  </compound>
   <compound refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerCommandHandler" kind="class"><name>helios::engine::mechanics::timing::TimerCommandHandler</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerCommandHandler_1a944836593561d443e9de3eab2a19f08d" kind="function"><name>~TimerCommandHandler</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerCommandHandler_1a951c49e5074210e377003ca27ffaada5" kind="function"><name>submit</name></member>
@@ -3704,9 +3708,7 @@
   <compound refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1commands_1_1TimerControlCommand" kind="class"><name>helios::engine::mechanics::timing::commands::TimerControlCommand</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1commands_1_1TimerControlCommand_1a5287355c5db58f2750d25809216519dd" kind="variable"><name>timerContext_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1commands_1_1TimerControlCommand_1ae002f183992704f00cf567696f365b57" kind="function"><name>TimerControlCommand</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1commands_1_1TimerControlCommand_1a959ab727760ebab511fac5b89d3fe813" kind="function"><name>execute</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1commands_1_1TimerControlCommand_1a9f1b350c470b596e09c6160051ced886" kind="function"><name>timerControlContext</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1commands_1_1TimerControlCommand_1af442b4480a3d71db23476425d9c5f5e2" kind="function"><name>accept</name></member>
   </compound>
   <compound refid="structhelios_1_1engine_1_1mechanics_1_1timing_1_1types_1_1TimerControlContext" kind="struct"><name>helios::engine::mechanics::timing::types::TimerControlContext</name>
     <member refid="structhelios_1_1engine_1_1mechanics_1_1timing_1_1types_1_1TimerControlContext_1a6736db6a0a720b3b08ee1ae0fe4a505e" kind="variable"><name>timerState</name></member>
@@ -3721,8 +3723,8 @@
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1a0c713f94b0de4a5b1035f25893829958" kind="function"><name>addGameTimer</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1a99dd425726dfa3dcfbe820b1ee30dd4d" kind="function"><name>gameTimer</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1ae5ff293b1c17995ae84f324ba19db4d2" kind="function"><name>gameTimers</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1a6c9d6e54b813c582e1b5e3857d3858d0" kind="function"><name>flush</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1a8320e5b50e975e424bbbc2e71723cc64" kind="function"><name>submit</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1aef973149d954abaf1787fa74f4accf7d" kind="function"><name>flush</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1a90d7a8cfce8f33a33694873baab543c9" kind="function"><name>submit</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1adf8ca10337b5b942ab184958c4dacabd" kind="function"><name>init</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1a3cc30c28fb07d97665e83b372872e597" kind="function"><name>reset</name></member>
   </compound>
@@ -3803,6 +3805,17 @@
     <member refid="classhelios_1_1engine_1_1mechanics_1_1input_1_1systems_1_1TwinStickInputSystem_1ac0e70131f79aad825821ff16a1be09c7" kind="function"><name>setUseDedicatedShootInput</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1input_1_1systems_1_1TwinStickInputSystem_1a302b13cea18ad671587d51093c0356d1" kind="function"><name>useDedicatedShootInput</name></member>
   </compound>
+  <compound refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer" kind="class"><name>helios::engine::runtime::messaging::command::TypedCommandBuffer</name>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a44375c2d4b706e04d8a0efa768d82317" kind="variable"><name>commandQueues_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a8c0798c8503d1e8bce1a299b02c84d79" kind="function"><name>commandQueue</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1ae28007881a7a5116688535261d5e8b9a" kind="function"><name>flushCommandQueue</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a35748f3c15d9e92098bed8d174cb7042" kind="function"><name>add</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a8e0ac1bed42dc63df2b3f8c270e35758" kind="function"><name>clear</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a1e035c4076ab5658d6cac38badec66ce" kind="function"><name>flush</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandHandler" kind="class"><name>helios::engine::runtime::messaging::command::TypedCommandHandler</name>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandHandler_1a3cf2e3f0015a0b59d91fdfd3112b7ab3" kind="function"><name>submit</name></member>
+  </compound>
   <compound refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1TypedPass" kind="class"><name>helios::engine::runtime::gameloop::TypedPass</name>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1TypedPass_1af8f0775327faeea59ae852fc781d44bf" kind="friend"><name>helios::engine::runtime::gameloop::Phase</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1TypedPass_1a1c68a9a1c6db2113ed67b88a3f5b8e5c" kind="variable"><name>owner_</name></member>
@@ -3818,14 +3831,6 @@
   </compound>
   <compound refid="classhelios_1_1engine_1_1state_1_1TypedStateCommandHandler" kind="class"><name>helios::engine::state::TypedStateCommandHandler</name>
     <member refid="classhelios_1_1engine_1_1state_1_1TypedStateCommandHandler_1afa3a4a4a4cfff7861f2c4ba73cce908d" kind="function"><name>submit</name></member>
-  </compound>
-  <compound refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedTargetedCommandDispatcher" kind="class"><name>helios::engine::runtime::messaging::command::TypedTargetedCommandDispatcher</name>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedTargetedCommandDispatcher_1a4fc5eb64c933a286f1892dd5d8e91a47" kind="function"><name>dispatchTyped</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedTargetedCommandDispatcher_1ad27f377b4d8aae7f4a9cc5157a6db601" kind="function"><name>dispatch</name></member>
-  </compound>
-  <compound refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher" kind="class"><name>helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher</name>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher_1ae99b8d4dc66acf8340000f97c0fdd16d" kind="function"><name>dispatchTyped</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher_1ada9b7af011e293a1d5712a1134bdf66d" kind="function"><name>dispatch</name></member>
   </compound>
   <compound refid="classhelios_1_1core_1_1buffer_1_1TypeIndexedDoubleBuffer" kind="class"><name>helios::core::buffer::TypeIndexedDoubleBuffer</name>
     <member refid="classhelios_1_1core_1_1buffer_1_1TypeIndexedDoubleBuffer_1a83ff4e8ce3d5c087afd608e803ffd7b7" kind="variable"><name>buffers_</name></member>
@@ -3865,14 +3870,8 @@
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand_1ab43c26a832c98b807aa1f2aa36ae0729" kind="variable"><name>source_</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand_1a9081412019474079f0d3cf5df5b52b5d" kind="variable"><name>actionId_</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand_1a4a1df9a180d3695bb4e285fee662e5a6" kind="function"><name>UiActionCommand</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand_1a433bee2f063a6be14555a0f7dfa00cde" kind="function"><name>execute</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand_1a41644a4b619d285edb6f831596ff0355" kind="function"><name>accept</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand_1a1616e9e485310b26a9966ff4dd902bd4" kind="function"><name>source</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand_1a9609c3fff597a204bc43dc2ed00fd979" kind="function"><name>actionId</name></member>
-  </compound>
-  <compound refid="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommandDispatcher" kind="class"><name>helios::engine::modules::ui::commands::UiActionCommandDispatcher</name>
-    <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommandDispatcher_1a26c101bbdc6a06026847f2d2078c7f3e" kind="function"><name>dispatchTyped</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommandDispatcher_1a57bde997c840fe400688f51c05b7f4a1" kind="function"><name>UiActionCommandDispatcher</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandHandler" kind="class"><name>helios::engine::modules::ui::UiActionCommandHandler</name>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandHandler_1a386717b5945eee31f50e228969983b81" kind="function"><name>~UiActionCommandHandler</name></member>
@@ -3883,7 +3882,7 @@
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager_1a433024395eab2559cec70e84ae1d25cd" kind="variable"><name>commands_</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager_1adaf6e5f718b8fd90d1e9e829a4230bef" kind="variable"><name>policies_</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager_1ad461ed59edc72412cd9ac466f1516b2e" kind="function"><name>UiActionCommandManager</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager_1aba013e3e716888f010cedcde9534e7cf" kind="function"><name>flush</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager_1afeec7a0d76b53a2dfb60b7d2fe8c938a" kind="function"><name>flush</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager_1ade81b75fe6945227c8dbff087b61228b" kind="function"><name>submit</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager_1a704e71eb1185fefa50a6e6107a95c2f7" kind="function"><name>addPolicy</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager_1a376734356261cdf9d67af7bc03b15698" kind="function"><name>init</name></member>
@@ -4023,42 +4022,45 @@
     <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a26d81abcda05fe8b12a1ddb4ed6099a3" kind="function"><name>Updatable</name></member>
     <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1ad3d6efe1251fc1784c5e55386fa8e8f7" kind="function"><name>update</name></member>
   </compound>
-  <compound refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kind="struct"><name>helios::engine::runtime::world::UpdateContext</name>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a1e3fa9c1dcdfaf13e5681ab4db47267f" kind="variable"><name>deltaTime_</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1ad8635a324305a486e832080139c909d0" kind="variable"><name>totalTime_</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a1ad9d6444e0838c8828d99e3af901bd9" kind="variable"><name>inputSnapshot_</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a31296936e3fa5c81e8d7943620abb31e" kind="variable"><name>commandBuffer_</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a9d63984ea0eaf2dffdd966c7732fdcac" kind="variable"><name>gameWorld_</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a8982323be50e6d8531e6eb14c0686629" kind="variable"><name>session_</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1ad92be0e4a26acdf1127051c4de51101f" kind="variable"><name>phaseEventSink_</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a8700d32762b0438d5fe669e51b91fea8" kind="variable"><name>phaseEventSource_</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a908950ece5f0b4890fa37db4b5619e67" kind="variable"><name>passEventSink_</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a3b6a639ea710a380f6ac18758aec89a3" kind="variable"><name>passEventSource_</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1abb9f01425d1bd319565e8a2b8854b2d5" kind="variable"><name>frameEventSink_</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a4b866110f44603ccda72bccb5d0c4f87" kind="variable"><name>frameEventSource_</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a374ba20a00710abe05bf8d41150648f3" kind="variable"><name>viewportSnapshots_</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a6e4557410fac459623c7c44b49a0005a" kind="function"><name>UpdateContext</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a47e89a8a5cf18618ffdc6caccd012100" kind="function"><name>viewportSnapshots</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a0197c610dc51fc676bcde9b84545ed7b" kind="function"><name>deltaTime</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1ad7f5caca30eb2409b98e21f48c5a0e45" kind="function"><name>totalTime</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a1c9a47461e487485eeeaaf442510dd68" kind="function"><name>inputSnapshot</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a006a361316386a5d08617793cb358355" kind="function"><name>commandBuffer</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a538cadeb656147150f4a12261d67c7f7" kind="function"><name>session</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a459e72fe47399985183cc6ca35531dfa" kind="function"><name>gameWorld</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a7308ea8a5fe81ac196b1501554d21d61" kind="function"><name>pushPass</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a5a17fe1e9fb5409938ec9d9442887ffe" kind="function"><name>pushPhase</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1af2268c3ee45b07619f013e4d81a05b83" kind="function"><name>readPhase</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a3e5fef71dad1d4fc531446a1138f8634" kind="function"><name>readPass</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a5fa74f194fbee96f883d6964df940bef" kind="function"><name>readFrame</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a7973f73a32e697f534ed311cef2f50d4" kind="function"><name>pushFrame</name></member>
+  <compound refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kind="class"><name>helios::engine::runtime::world::UpdateContext</name>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a1e3fa9c1dcdfaf13e5681ab4db47267f" kind="variable"><name>deltaTime_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1ad8635a324305a486e832080139c909d0" kind="variable"><name>totalTime_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a1ad9d6444e0838c8828d99e3af901bd9" kind="variable"><name>inputSnapshot_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a8982323be50e6d8531e6eb14c0686629" kind="variable"><name>session_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1ad92be0e4a26acdf1127051c4de51101f" kind="variable"><name>phaseEventSink_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a8700d32762b0438d5fe669e51b91fea8" kind="variable"><name>phaseEventSource_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a908950ece5f0b4890fa37db4b5619e67" kind="variable"><name>passEventSink_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a3b6a639ea710a380f6ac18758aec89a3" kind="variable"><name>passEventSource_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1abb9f01425d1bd319565e8a2b8854b2d5" kind="variable"><name>frameEventSink_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a4b866110f44603ccda72bccb5d0c4f87" kind="variable"><name>frameEventSource_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a374ba20a00710abe05bf8d41150648f3" kind="variable"><name>viewportSnapshots_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1ae1ace27c91fa880cc8e26083ebbcd250" kind="variable"><name>resourceRegistry_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a420048edb6bab64cef2d01930349571c" kind="variable"><name>entityResolver_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a532d3589c0f5507adb8abdc51f5b7d75" kind="variable"><name>level_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a186df1b69195b2e1b62baf532aadf252" kind="function"><name>UpdateContext</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a47e89a8a5cf18618ffdc6caccd012100" kind="function"><name>viewportSnapshots</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a0197c610dc51fc676bcde9b84545ed7b" kind="function"><name>deltaTime</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1ad7f5caca30eb2409b98e21f48c5a0e45" kind="function"><name>totalTime</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a1c9a47461e487485eeeaaf442510dd68" kind="function"><name>inputSnapshot</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1adaeb79c72c7affdd5c3197556c82665e" kind="function"><name>resourceRegistry</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a00808c02ff76f7293914879b02b29509" kind="function"><name>resourceRegistry</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1aba16db6e6b434f908f937e2a225d7337" kind="function"><name>find</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a3fe9e7e3a39b27014a72342968e0a3b4" kind="function"><name>entityResolver</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1ac28d2e3d69b43ef90a3a962a5bf3ef3c" kind="function"><name>level</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1acca71a785767cdcd326787dedba216b9" kind="function"><name>commandBuffer</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a538cadeb656147150f4a12261d67c7f7" kind="function"><name>session</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a7308ea8a5fe81ac196b1501554d21d61" kind="function"><name>pushPass</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a5a17fe1e9fb5409938ec9d9442887ffe" kind="function"><name>pushPhase</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1af2268c3ee45b07619f013e4d81a05b83" kind="function"><name>readPhase</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a3e5fef71dad1d4fc531446a1138f8634" kind="function"><name>readPass</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a5fa74f194fbee96f883d6964df940bef" kind="function"><name>readFrame</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a7973f73a32e697f534ed311cef2f50d4" kind="function"><name>pushFrame</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1commands_1_1UpdateScoreCommand" kind="class"><name>helios::engine::mechanics::scoring::commands::UpdateScoreCommand</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1commands_1_1UpdateScoreCommand_1a7bff4c8dcd7227e5a972eb36c739c58c" kind="variable"><name>scoreContext_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1commands_1_1UpdateScoreCommand_1a809743b21193743aeae46bde2b987f16" kind="function"><name>UpdateScoreCommand</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1commands_1_1UpdateScoreCommand_1af54e491def5a2ee658d9014cd8fd7ba1" kind="function"><name>execute</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1commands_1_1UpdateScoreCommand_1ae5707ec4faeac6143d54283730b52c96" kind="function"><name>scoreContext</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1commands_1_1UpdateScoreCommand_1aab5d433ec8497f58b8dec38f56477f4c" kind="function"><name>scoreContext</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1commands_1_1UpdateScoreCommand_1aaed0d900897ae2afef5e350dfc134a97" kind="function"><name>accept</name></member>
   </compound>
   <compound refid="structhelios_1_1math_1_1vec2" kind="struct"><name>helios::math::vec2</name>
     <member refid="structhelios_1_1math_1_1vec2_1a27c76024d0a33a2e8166abb8248352df" kind="variable"><name>v</name></member>
@@ -4225,18 +4227,18 @@
     <member refid="classhelios_1_1app_1_1controller_1_1WindowRenderingController_1a5ad51073d5249874f036abc437da1317" kind="variable"><name>logger_</name></member>
     <member refid="classhelios_1_1app_1_1controller_1_1WindowRenderingController_1ace819d72b524524ee6b8e596ae96b859" kind="function"><name>onFrameBufferResize</name></member>
   </compound>
-  <compound refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand" kind="class"><name>helios::engine::runtime::messaging::command::WorldCommand</name>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand_1a4d66424c22b64a9712778d6697d558b7" kind="function"><name>~WorldCommand</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand_1aca8697eac44a696ada96078626b0b103" kind="function"><name>execute</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand_1a5cbe95921020642bfef379ec1bf97c53" kind="function"><name>accept</name></member>
+  <compound refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1commands_1_1WorldLifecycleCommand" kind="class"><name>helios::engine::mechanics::lifecycle::commands::WorldLifecycleCommand</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1commands_1_1WorldLifecycleCommand_1ab337cf9ea917d8bb350674704165e9e9" kind="variable"><name>action_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1commands_1_1WorldLifecycleCommand_1afd6a5b1446982aa4af53825ad1bddcc7" kind="function"><name>WorldLifecycleCommand</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1commands_1_1WorldLifecycleCommand_1a6a7a8260c6f154987d76792cc01f36f6" kind="function"><name>action</name></member>
   </compound>
-  <compound refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher" kind="class"><name>helios::engine::runtime::messaging::command::WorldCommandDispatcher</name>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher_1a99cfdc9890b444664a9ae3a98e8b6d1f" kind="function"><name>~WorldCommandDispatcher</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher_1ad64b55eac8560337da958baeee49bbca" kind="function"><name>dispatch</name></member>
-  </compound>
-  <compound refid="structhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1_1WorldCommandProxy" kind="struct"><name>helios::engine::runtime::messaging::command::CommandBuffer::WorldCommandProxy</name>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1_1WorldCommandProxy_1ae9eae16715227850d4a46cc75f785be0" kind="variable"><name>typeIdx</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1_1WorldCommandProxy_1a24d0021e0ebedbc2c360d96a95f5eacd" kind="variable"><name>worldCommand</name></member>
+  <compound refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1WorldLifecycleManager" kind="class"><name>helios::engine::mechanics::lifecycle::WorldLifecycleManager</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1WorldLifecycleManager_1adcb9bb5e31973a60e406a9614fa8345b" kind="variable"><name>pending_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1WorldLifecycleManager_1ae0e2895b61f42b191677f22e88ce516a" kind="variable"><name>gameWorld_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1WorldLifecycleManager_1ac42bc551e792348f1e0f8f9271995a99" kind="function"><name>submit</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1WorldLifecycleManager_1ac913e707aa847a82959ee708582b5cee" kind="function"><name>init</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1WorldLifecycleManager_1a8f1e202e0b123497f527630a1690402c" kind="function"><name>flush</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1WorldLifecycleManager_1a636b9fca864cb0f6cb5c104d5320aa3d" kind="function"><name>reset</name></member>
   </compound>
   <compound refid="classhelios_1_1core_1_1buffer_1_1WriteBuffer" kind="class"><name>helios::core::buffer::WriteBuffer</name>
     <member refid="classhelios_1_1core_1_1buffer_1_1WriteBuffer_1ae9f54304116740e5e49b8c6811d153e3" kind="friend"><name>ReadWriteDoubleBuffer&lt; T &gt;</name></member>
@@ -4263,6 +4265,14 @@
   </compound>
   <compound refid="concepthelios_1_1engine_1_1ecs_1_1traits_1_1HasToggleable" kind="concept"><name>helios::engine::ecs::traits::HasToggleable</name>
   </compound>
+  <compound refid="concepthelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1ExecutableCommand" kind="concept"><name>helios::engine::runtime::messaging::command::ExecutableCommand</name>
+  </compound>
+  <compound refid="concepthelios_1_1engine_1_1runtime_1_1world_1_1IsCommandBuffer" kind="concept"><name>helios::engine::runtime::world::IsCommandBuffer</name>
+  </compound>
+  <compound refid="concepthelios_1_1engine_1_1runtime_1_1world_1_1IsCommandHandler" kind="concept"><name>helios::engine::runtime::world::IsCommandHandler</name>
+  </compound>
+  <compound refid="concepthelios_1_1engine_1_1runtime_1_1world_1_1IsManager" kind="concept"><name>helios::engine::runtime::world::IsManager</name>
+  </compound>
   <compound refid="concepthelios_1_1math_1_1Numeric" kind="concept"><name>helios::math::Numeric</name>
   </compound>
   <compound refid="namespace_0d351153372201050063257044073101122133116320136153" kind="namespace"><name>@351153372201050063257044073101122133116320136153</name>
@@ -4281,6 +4291,8 @@
   <compound refid="namespacehelios_1_1core_1_1buffer" kind="namespace"><name>helios::core::buffer</name>
   </compound>
   <compound refid="namespacehelios_1_1core_1_1data" kind="namespace"><name>helios::core::data</name>
+  </compound>
+  <compound refid="namespacehelios_1_1core_1_1memory" kind="namespace"><name>helios::core::memory</name>
   </compound>
   <compound refid="namespacehelios_1_1core_1_1spatial" kind="namespace"><name>helios::core::spatial</name>
   </compound>
@@ -4312,6 +4324,7 @@
   </compound>
   <compound refid="namespacehelios_1_1engine_1_1bootstrap" kind="namespace"><name>helios::engine::bootstrap</name>
     <member refid="namespacehelios_1_1engine_1_1bootstrap_1a3257760022dd7b0812185a03fb747d62" kind="function"><name>registerAllComponents</name></member>
+    <member refid="namespacehelios_1_1engine_1_1bootstrap_1afd4296fe1ce37cb2fc5812d6b87e4118" kind="function"><name>makeGameWorld</name></member>
   </compound>
   <compound refid="namespacehelios_1_1engine_1_1builder" kind="namespace"><name>helios::engine::builder</name>
   </compound>
@@ -4436,9 +4449,15 @@
   <compound refid="namespacehelios_1_1engine_1_1mechanics_1_1lifecycle" kind="namespace"><name>helios::engine::mechanics::lifecycle</name>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1lifecycle_1ac6a4be8f14d86717307ee5fb9345d6bc" kind="function"><name>registerComponents</name></member>
   </compound>
+  <compound refid="namespacehelios_1_1engine_1_1mechanics_1_1lifecycle_1_1commands" kind="namespace"><name>helios::engine::mechanics::lifecycle::commands</name>
+  </compound>
   <compound refid="namespacehelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components" kind="namespace"><name>helios::engine::mechanics::lifecycle::components</name>
   </compound>
   <compound refid="namespacehelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems" kind="namespace"><name>helios::engine::mechanics::lifecycle::systems</name>
+  </compound>
+  <compound refid="namespacehelios_1_1engine_1_1mechanics_1_1lifecycle_1_1types" kind="namespace"><name>helios::engine::mechanics::lifecycle::types</name>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1lifecycle_1_1types_1acc4c3b9f4335ec0d66162c41a69f71b8" kind="enum"><name>WorldLifecycleAction</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1lifecycle_1_1types_1acc4c3b9f4335ec0d66162c41a69f71b8a526d688f37a86d3c3f27d0c5016eb71d" kind="enumvalue"><name>Reset</name></member>
   </compound>
   <compound refid="namespacehelios_1_1engine_1_1mechanics_1_1match" kind="namespace"><name>helios::engine::mechanics::match</name>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1a151fc4e8d8a8f2eb87866789883eda39" kind="typedef"><name>MatchStateManager</name></member>
@@ -4712,8 +4731,6 @@
   </compound>
   <compound refid="namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1commands" kind="namespace"><name>helios::engine::runtime::spawn::commands</name>
   </compound>
-  <compound refid="namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher" kind="namespace"><name>helios::engine::runtime::spawn::dispatcher</name>
-  </compound>
   <compound refid="namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1events" kind="namespace"><name>helios::engine::runtime::spawn::events</name>
   </compound>
   <compound refid="namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1policy" kind="namespace"><name>helios::engine::runtime::spawn::policy</name>
@@ -4731,8 +4748,6 @@
   <compound refid="namespacehelios_1_1engine_1_1state_1_1commands" kind="namespace"><name>helios::engine::state::commands</name>
   </compound>
   <compound refid="namespacehelios_1_1engine_1_1state_1_1components" kind="namespace"><name>helios::engine::state::components</name>
-  </compound>
-  <compound refid="namespacehelios_1_1engine_1_1state_1_1dispatcher" kind="namespace"><name>helios::engine::state::dispatcher</name>
   </compound>
   <compound refid="namespacehelios_1_1engine_1_1state_1_1listeners" kind="namespace"><name>helios::engine::state::listeners</name>
   </compound>
@@ -5003,6 +5018,8 @@
   </compound>
   <compound refid="helios_2core_2data_2__module_8ixx" kind="file"><name>helios/core/data/_module.ixx</name>
   </compound>
+  <compound refid="helios_2core_2memory_2__module_8ixx" kind="file"><name>helios/core/memory/_module.ixx</name>
+  </compound>
   <compound refid="helios_2core_2spatial_2__module_8ixx" kind="file"><name>helios/core/spatial/_module.ixx</name>
   </compound>
   <compound refid="helios_2engine_2__module_8ixx" kind="file"><name>helios/engine/_module.ixx</name>
@@ -5079,9 +5096,13 @@
   </compound>
   <compound refid="helios_2engine_2mechanics_2lifecycle_2__module_8ixx" kind="file"><name>helios/engine/mechanics/lifecycle/_module.ixx</name>
   </compound>
+  <compound refid="helios_2engine_2mechanics_2lifecycle_2commands_2__module_8ixx" kind="file"><name>helios/engine/mechanics/lifecycle/commands/_module.ixx</name>
+  </compound>
   <compound refid="helios_2engine_2mechanics_2lifecycle_2components_2__module_8ixx" kind="file"><name>helios/engine/mechanics/lifecycle/components/_module.ixx</name>
   </compound>
   <compound refid="helios_2engine_2mechanics_2lifecycle_2systems_2__module_8ixx" kind="file"><name>helios/engine/mechanics/lifecycle/systems/_module.ixx</name>
+  </compound>
+  <compound refid="helios_2engine_2mechanics_2lifecycle_2types_2__module_8ixx" kind="file"><name>helios/engine/mechanics/lifecycle/types/_module.ixx</name>
   </compound>
   <compound refid="helios_2engine_2mechanics_2match_2__module_8ixx" kind="file"><name>helios/engine/mechanics/match/_module.ixx</name>
   </compound>
@@ -5237,8 +5258,6 @@
   </compound>
   <compound refid="helios_2engine_2runtime_2spawn_2commands_2__module_8ixx" kind="file"><name>helios/engine/runtime/spawn/commands/_module.ixx</name>
   </compound>
-  <compound refid="helios_2engine_2runtime_2spawn_2dispatcher_2__module_8ixx" kind="file"><name>helios/engine/runtime/spawn/dispatcher/_module.ixx</name>
-  </compound>
   <compound refid="helios_2engine_2runtime_2spawn_2events_2__module_8ixx" kind="file"><name>helios/engine/runtime/spawn/events/_module.ixx</name>
   </compound>
   <compound refid="helios_2engine_2runtime_2spawn_2policy_2__module_8ixx" kind="file"><name>helios/engine/runtime/spawn/policy/_module.ixx</name>
@@ -5256,8 +5275,6 @@
   <compound refid="helios_2engine_2state_2commands_2__module_8ixx" kind="file"><name>helios/engine/state/commands/_module.ixx</name>
   </compound>
   <compound refid="helios_2engine_2state_2components_2__module_8ixx" kind="file"><name>helios/engine/state/components/_module.ixx</name>
-  </compound>
-  <compound refid="helios_2engine_2state_2dispatcher_2__module_8ixx" kind="file"><name>helios/engine/state/dispatcher/_module.ixx</name>
   </compound>
   <compound refid="helios_2engine_2state_2listeners_2__module_8ixx" kind="file"><name>helios/engine/state/listeners/_module.ixx</name>
   </compound>
@@ -5351,6 +5368,8 @@
   </compound>
   <compound refid="helios_2core_2data_2README_8md" kind="file"><name>helios/core/data/README.md</name>
   </compound>
+  <compound refid="helios_2core_2memory_2README_8md" kind="file"><name>helios/core/memory/README.md</name>
+  </compound>
   <compound refid="helios_2core_2README_8md" kind="file"><name>helios/core/README.md</name>
   </compound>
   <compound refid="helios_2core_2spatial_2README_8md" kind="file"><name>helios/core/spatial/README.md</name>
@@ -5419,11 +5438,15 @@
   </compound>
   <compound refid="helios_2engine_2mechanics_2input_2systems_2README_8md" kind="file"><name>helios/engine/mechanics/input/systems/README.md</name>
   </compound>
+  <compound refid="helios_2engine_2mechanics_2lifecycle_2commands_2README_8md" kind="file"><name>helios/engine/mechanics/lifecycle/commands/README.md</name>
+  </compound>
   <compound refid="helios_2engine_2mechanics_2lifecycle_2components_2README_8md" kind="file"><name>helios/engine/mechanics/lifecycle/components/README.md</name>
   </compound>
   <compound refid="helios_2engine_2mechanics_2lifecycle_2README_8md" kind="file"><name>helios/engine/mechanics/lifecycle/README.md</name>
   </compound>
   <compound refid="helios_2engine_2mechanics_2lifecycle_2systems_2README_8md" kind="file"><name>helios/engine/mechanics/lifecycle/systems/README.md</name>
+  </compound>
+  <compound refid="helios_2engine_2mechanics_2lifecycle_2types_2README_8md" kind="file"><name>helios/engine/mechanics/lifecycle/types/README.md</name>
   </compound>
   <compound refid="helios_2engine_2mechanics_2match_2README_8md" kind="file"><name>helios/engine/mechanics/match/README.md</name>
   </compound>
@@ -5577,8 +5600,6 @@
   </compound>
   <compound refid="helios_2engine_2runtime_2spawn_2commands_2README_8md" kind="file"><name>helios/engine/runtime/spawn/commands/README.md</name>
   </compound>
-  <compound refid="helios_2engine_2runtime_2spawn_2dispatcher_2README_8md" kind="file"><name>helios/engine/runtime/spawn/dispatcher/README.md</name>
-  </compound>
   <compound refid="helios_2engine_2runtime_2spawn_2events_2README_8md" kind="file"><name>helios/engine/runtime/spawn/events/README.md</name>
   </compound>
   <compound refid="helios_2engine_2runtime_2spawn_2policy_2amount_2README_8md" kind="file"><name>helios/engine/runtime/spawn/policy/amount/README.md</name>
@@ -5596,8 +5617,6 @@
   <compound refid="helios_2engine_2state_2commands_2README_8md" kind="file"><name>helios/engine/state/commands/README.md</name>
   </compound>
   <compound refid="helios_2engine_2state_2components_2README_8md" kind="file"><name>helios/engine/state/components/README.md</name>
-  </compound>
-  <compound refid="helios_2engine_2state_2dispatcher_2README_8md" kind="file"><name>helios/engine/state/dispatcher/README.md</name>
   </compound>
   <compound refid="helios_2engine_2state_2listeners_2README_8md" kind="file"><name>helios/engine/state/listeners/README.md</name>
   </compound>
@@ -5714,6 +5733,8 @@
   </compound>
   <compound refid="TypeIndexer_8ixx" kind="file"><name>TypeIndexer.ixx</name>
   </compound>
+  <compound refid="ErasedUnique_8ixx" kind="file"><name>ErasedUnique.ixx</name>
+  </compound>
   <compound refid="Transform_8ixx" kind="file"><name>Transform.ixx</name>
   </compound>
   <compound refid="types_8ixx" kind="file"><name>types.ixx</name>
@@ -5806,6 +5827,8 @@
   </compound>
   <compound refid="CollisionLayer_8ixx" kind="file"><name>CollisionLayer.ixx</name>
   </compound>
+  <compound refid="CommandTypeId_8ixx" kind="file"><name>CommandTypeId.ixx</name>
+  </compound>
   <compound refid="ComponentTypeId_8ixx" kind="file"><name>ComponentTypeId.ixx</name>
   </compound>
   <compound refid="EntityId_8ixx" kind="file"><name>EntityId.ixx</name>
@@ -5821,6 +5844,8 @@
   <compound refid="MenuId_8ixx" kind="file"><name>MenuId.ixx</name>
   </compound>
   <compound refid="PrefabId_8ixx" kind="file"><name>PrefabId.ixx</name>
+  </compound>
+  <compound refid="ResourceTypeId_8ixx" kind="file"><name>ResourceTypeId.ixx</name>
   </compound>
   <compound refid="SceneId_8ixx" kind="file"><name>SceneId.ixx</name>
   </compound>
@@ -5853,6 +5878,8 @@
   <compound refid="EntityManager_8ixx" kind="file"><name>EntityManager.ixx</name>
   </compound>
   <compound refid="EntityRegistry_8ixx" kind="file"><name>EntityRegistry.ixx</name>
+  </compound>
+  <compound refid="EntityResolver_8ixx" kind="file"><name>EntityResolver.ixx</name>
   </compound>
   <compound refid="GameObject_8ixx" kind="file"><name>GameObject.ixx</name>
   </compound>
@@ -5912,6 +5939,8 @@
   </compound>
   <compound refid="TwinStickInputSystem_8ixx" kind="file"><name>TwinStickInputSystem.ixx</name>
   </compound>
+  <compound refid="WorldLifecycleCommand_8ixx" kind="file"><name>WorldLifecycleCommand.ixx</name>
+  </compound>
   <compound refid="Active_8ixx" kind="file"><name>Active.ixx</name>
   </compound>
   <compound refid="DelayedComponentEnabler_8ixx" kind="file"><name>DelayedComponentEnabler.ixx</name>
@@ -5919,6 +5948,10 @@
   <compound refid="Inactive_8ixx" kind="file"><name>Inactive.ixx</name>
   </compound>
   <compound refid="DelayedComponentEnablerSystem_8ixx" kind="file"><name>DelayedComponentEnablerSystem.ixx</name>
+  </compound>
+  <compound refid="WorldLifecycleAction_8ixx" kind="file"><name>WorldLifecycleAction.ixx</name>
+  </compound>
+  <compound refid="WorldLifecycleManager_8ixx" kind="file"><name>WorldLifecycleManager.ixx</name>
   </compound>
   <compound refid="MatchStateManager_8ixx" kind="file"><name>MatchStateManager.ixx</name>
   </compound>
@@ -5996,8 +6029,6 @@
   </compound>
   <compound refid="MaxScorePoolSnapshot_8ixx" kind="file"><name>MaxScorePoolSnapshot.ixx</name>
   </compound>
-  <compound refid="ScoreCommandDispatcher_8ixx" kind="file"><name>ScoreCommandDispatcher.ixx</name>
-  </compound>
   <compound refid="ScoreCommandHandler_8ixx" kind="file"><name>ScoreCommandHandler.ixx</name>
   </compound>
   <compound refid="ScorePool_8ixx" kind="file"><name>ScorePool.ixx</name>
@@ -6038,8 +6069,6 @@
   <compound refid="GameTimer_8ixx" kind="file"><name>GameTimer.ixx</name>
   </compound>
   <compound refid="GameTimerUpdateSystem_8ixx" kind="file"><name>GameTimerUpdateSystem.ixx</name>
-  </compound>
-  <compound refid="TimerCommandDispatcher_8ixx" kind="file"><name>TimerCommandDispatcher.ixx</name>
   </compound>
   <compound refid="TimerCommandHandler_8ixx" kind="file"><name>TimerCommandHandler.ixx</name>
   </compound>
@@ -6140,8 +6169,6 @@
   </compound>
   <compound refid="UiActionCommand_8ixx" kind="file"><name>UiActionCommand.ixx</name>
   </compound>
-  <compound refid="UiActionCommandDispatcher_8ixx" kind="file"><name>UiActionCommandDispatcher.ixx</name>
-  </compound>
   <compound refid="Anchor_8ixx" kind="file"><name>Anchor.ixx</name>
   </compound>
   <compound refid="NumberFormatterComponent_8ixx" kind="file"><name>NumberFormatterComponent.ixx</name>
@@ -6192,19 +6219,14 @@
   <compound refid="TypedPass_8ixx" kind="file"><name>TypedPass.ixx</name>
   </compound>
   <compound refid="CommandBuffer_8ixx" kind="file"><name>CommandBuffer.ixx</name>
-    <member refid="CommandBuffer_8ixx_1acbc04f24078582c7d42b2085be5d5750" kind="define"><name>HELIOS_LOG_SCOPE</name></member>
   </compound>
-  <compound refid="TargetedCommand_8ixx" kind="file"><name>TargetedCommand.ixx</name>
+  <compound refid="CommandHandler_8ixx" kind="file"><name>CommandHandler.ixx</name>
   </compound>
-  <compound refid="TargetedCommandDispatcher_8ixx" kind="file"><name>TargetedCommandDispatcher.ixx</name>
+  <compound refid="EngineCommandBuffer_8ixx" kind="file"><name>EngineCommandBuffer.ixx</name>
   </compound>
-  <compound refid="TypedTargetedCommandDispatcher_8ixx" kind="file"><name>TypedTargetedCommandDispatcher.ixx</name>
+  <compound refid="TypedCommandBuffer_8ixx" kind="file"><name>TypedCommandBuffer.ixx</name>
   </compound>
-  <compound refid="TypedWorldCommandDispatcher_8ixx" kind="file"><name>TypedWorldCommandDispatcher.ixx</name>
-  </compound>
-  <compound refid="WorldCommand_8ixx" kind="file"><name>WorldCommand.ixx</name>
-  </compound>
-  <compound refid="WorldCommandDispatcher_8ixx" kind="file"><name>WorldCommandDispatcher.ixx</name>
+  <compound refid="TypedCommandHandler_8ixx" kind="file"><name>TypedCommandHandler.ixx</name>
   </compound>
   <compound refid="GameLoopEventBus_8ixx" kind="file"><name>GameLoopEventBus.ixx</name>
   </compound>
@@ -6249,12 +6271,6 @@
   <compound refid="ScheduledSpawnPlanCommand_8ixx" kind="file"><name>ScheduledSpawnPlanCommand.ixx</name>
   </compound>
   <compound refid="SpawnCommand_8ixx" kind="file"><name>SpawnCommand.ixx</name>
-  </compound>
-  <compound refid="DespawnCommandDispatcher_8ixx" kind="file"><name>DespawnCommandDispatcher.ixx</name>
-  </compound>
-  <compound refid="ScheduledSpawnPlanCommandDispatcher_8ixx" kind="file"><name>ScheduledSpawnPlanCommandDispatcher.ixx</name>
-  </compound>
-  <compound refid="SpawnCommandDispatcher_8ixx" kind="file"><name>SpawnCommandDispatcher.ixx</name>
   </compound>
   <compound refid="EmitterContext_8ixx" kind="file"><name>EmitterContext.ixx</name>
   </compound>
@@ -6313,19 +6329,21 @@
   </compound>
   <compound refid="Manager_8ixx" kind="file"><name>Manager.ixx</name>
   </compound>
+  <compound refid="ResourceRegistry_8ixx" kind="file"><name>ResourceRegistry.ixx</name>
+  </compound>
   <compound refid="Session_8ixx" kind="file"><name>Session.ixx</name>
   </compound>
   <compound refid="SystemRegistry_8ixx" kind="file"><name>SystemRegistry.ixx</name>
   </compound>
   <compound refid="UpdateContext_8ixx" kind="file"><name>UpdateContext.ixx</name>
   </compound>
+  <compound refid="Bindings_8ixx" kind="file"><name>Bindings.ixx</name>
+  </compound>
   <compound refid="CombinedStateToIdMapPair_8ixx" kind="file"><name>CombinedStateToIdMapPair.ixx</name>
   </compound>
   <compound refid="StateCommand_8ixx" kind="file"><name>StateCommand.ixx</name>
   </compound>
   <compound refid="StateComponent_8ixx" kind="file"><name>StateComponent.ixx</name>
-  </compound>
-  <compound refid="StateCommandDispatcher_8ixx" kind="file"><name>StateCommandDispatcher.ixx</name>
   </compound>
   <compound refid="LambdaStateListener_8ixx" kind="file"><name>LambdaStateListener.ixx</name>
   </compound>
@@ -6597,6 +6615,8 @@
   </compound>
   <compound refid="dir_7d3bcdf99a77c1f991d9debddb7a154b" kind="dir"><name>commands</name>
   </compound>
+  <compound refid="dir_db86f11dedfd09ad096f192bbb7f0a5e" kind="dir"><name>commands</name>
+  </compound>
   <compound refid="dir_326351fd6fbd1ed4d80f0b2b180f7c49" kind="dir"><name>commands</name>
   </compound>
   <compound refid="dir_e5090bf757e2582e2690780840c48cfe" kind="dir"><name>commands</name>
@@ -6675,10 +6695,6 @@
   </compound>
   <compound refid="dir_4f0da182a846ab23c4f0200a8e7a4684" kind="dir"><name>data</name>
   </compound>
-  <compound refid="dir_5dc6246ab3eb4b7f43f53e4aa10504cc" kind="dir"><name>dispatcher</name>
-  </compound>
-  <compound refid="dir_1d18a8675d36aec09032e08314ab095c" kind="dir"><name>dispatcher</name>
-  </compound>
   <compound refid="dir_f3ff8561a820a5280cc5194bb71fb9ec" kind="dir"><name>docs</name>
   </compound>
   <compound refid="dir_1ca916e0b9fbc882dbfbd9e6594e5e22" kind="dir"><name>ecs</name>
@@ -6750,6 +6766,8 @@
   <compound refid="dir_268add6b94670641c68bb834cdcb4292" kind="dir"><name>math</name>
   </compound>
   <compound refid="dir_e1a38fd6dc0543c7f97fb1ccf1615de7" kind="dir"><name>mechanics</name>
+  </compound>
+  <compound refid="dir_7ac130d819a67a0b4cf4e0f9c1cae22c" kind="dir"><name>memory</name>
   </compound>
   <compound refid="dir_6cfb60a8d858d16723c0c9c27d5b0d0a" kind="dir"><name>mesh</name>
   </compound>
@@ -6878,6 +6896,8 @@
   <compound refid="dir_66f29c90d119077444d3c4255baff55d" kind="dir"><name>types</name>
   </compound>
   <compound refid="dir_c06739a7e81ea970219d6849a6b58298" kind="dir"><name>types</name>
+  </compound>
+  <compound refid="dir_ada361f984e4a5be1a99b39ca6ecaff1" kind="dir"><name>types</name>
   </compound>
   <compound refid="dir_cb33ccb71eb51ab476530a91930975dc" kind="dir"><name>types</name>
   </compound>
@@ -7414,6 +7434,14 @@
     <member refid="classhelios_1_1core_1_1data_1_1TypeIndexer_1a613d0231ae579f40c48a355758c67612" kind="variable"><name>counter_</name></member>
     <member refid="classhelios_1_1core_1_1data_1_1TypeIndexer_1a33aff035cb667c63fcd123a69a91b3cc" kind="function"><name>typeIndex</name></member>
   </compound>
+  <compound refid="module__helios_8core_8memory" kind="module"><name>helios.core.memory</name>
+  </compound>
+  <compound refid="module__helios_8core_8memory_8ErasedUnique" kind="module"><name>helios.core.memory.ErasedUnique</name>
+    <member refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1a64a2a2738febbddabe0cf1ac5e3f43a8" kind="variable"><name>ptr</name></member>
+    <member refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1a5dd7d498967d63f8d0e16888d7e8b4bd" kind="variable"><name>destroy</name></member>
+    <member refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1ada7b198b62571d105d73de458dce6924" kind="function"><name>ErasedUnique</name></member>
+    <member refid="structhelios_1_1core_1_1memory_1_1ErasedUnique_1a0d994cf662abf84b02c4f3a4b1bf0be8" kind="function"><name>ErasedUnique</name></member>
+  </compound>
   <compound refid="module__helios_8core_8spatial" kind="module"><name>helios.core.spatial</name>
   </compound>
   <compound refid="module__helios_8core_8spatial_8Transform" kind="module"><name>helios.core.spatial.Transform</name>
@@ -7440,8 +7468,9 @@
   </compound>
   <compound refid="module__helios_8engine" kind="module"><name>helios.engine</name>
   </compound>
-  <compound refid="module__helios_8engine_8Bootstrap" kind="module"><name>helios.engine.Bootstrap</name>
+  <compound refid="module__helios_8engine_8bootstrap" kind="module"><name>helios.engine.bootstrap</name>
     <member refid="namespacehelios_1_1engine_1_1bootstrap_1a3257760022dd7b0812185a03fb747d62" kind="function"><name>registerAllComponents</name></member>
+    <member refid="namespacehelios_1_1engine_1_1bootstrap_1afd4296fe1ce37cb2fc5812d6b87e4118" kind="function"><name>makeGameWorld</name></member>
   </compound>
   <compound refid="module__helios_8engine_8builder" kind="module"><name>helios.engine.builder</name>
   </compound>
@@ -7864,6 +7893,15 @@
     <member refid="namespacehelios_1_1engine_1_1core_1_1data_1a7886ef44eabe7b1a1f109e6c5fe971ca" kind="typedef"><name>CollisionLayer</name></member>
     <member refid="namespacehelios_1_1engine_1_1core_1_1data_1ae64ec2be155f406b8b8f557354c66efb" kind="variable"><name>MAX_COLLISION_LAYERS</name></member>
   </compound>
+  <compound refid="module__helios_8engine_8core_8data_8CommandTypeId" kind="module"><name>helios.engine.core.data.CommandTypeId</name>
+    <member refid="classhelios_1_1engine_1_1core_1_1data_1_1CommandTypeId_1af619f4179c0de0a0297c5f4e8f873327" kind="typedef"><name>ComponentType</name></member>
+    <member refid="classhelios_1_1engine_1_1core_1_1data_1_1CommandTypeId_1ab5ee40420ba0b059f7cb8aa5dbf17775" kind="variable"><name>id_</name></member>
+    <member refid="classhelios_1_1engine_1_1core_1_1data_1_1CommandTypeId_1ac3018ab416448e30ceb65a6f112b7ceb" kind="function"><name>CommandTypeId</name></member>
+    <member refid="classhelios_1_1engine_1_1core_1_1data_1_1CommandTypeId_1a4121f7770ffd53955ff1249a8def7683" kind="function"><name>CommandTypeId</name></member>
+    <member refid="classhelios_1_1engine_1_1core_1_1data_1_1CommandTypeId_1a02c7a149c90e32349a4ec2e462240f05" kind="function"><name>value</name></member>
+    <member refid="classhelios_1_1engine_1_1core_1_1data_1_1CommandTypeId_1a51593f84607abe91a3c42573bb0a5a87" kind="function"><name>id</name></member>
+    <member refid="structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1CommandTypeId_01_4_1a5730e6ab44c4e9e1da6dd786fbd4e3d4" kind="function"><name>operator()</name></member>
+  </compound>
   <compound refid="module__helios_8engine_8core_8data_8ComponentTypeId" kind="module"><name>helios.engine.core.data.ComponentTypeId</name>
     <member refid="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId_1a79acc85d86d19194b0e586e7955f39f9" kind="typedef"><name>ComponentType</name></member>
     <member refid="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId_1ab12d7ca4882c724450f550b09e673966" kind="variable"><name>id_</name></member>
@@ -7906,6 +7944,15 @@
   </compound>
   <compound refid="module__helios_8engine_8core_8data_8PrefabId" kind="module"><name>helios.engine.core.data.PrefabId</name>
     <member refid="namespacehelios_1_1engine_1_1core_1_1data_1a1be4caf596302dfde2390532552f2478" kind="typedef"><name>PrefabId</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8core_8data_8ResourceTypeId" kind="module"><name>helios.engine.core.data.ResourceTypeId</name>
+    <member refid="classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId_1a95e6160f403d9f636cefbe40840afd52" kind="typedef"><name>ResourceType</name></member>
+    <member refid="classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId_1ad51ad9ff20e2e7c7e978e70b70bba900" kind="variable"><name>id_</name></member>
+    <member refid="classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId_1ac9309120d56b4f6dcc8538a47b41650b" kind="function"><name>ResourceTypeId</name></member>
+    <member refid="classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId_1afb80d387e656268705a85eef2a8712e3" kind="function"><name>ResourceTypeId</name></member>
+    <member refid="classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId_1a798d7c173ee476ac27e8101ec5bb257a" kind="function"><name>value</name></member>
+    <member refid="classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId_1a90dff317be585026a0516e6eb0dfc2e9" kind="function"><name>id</name></member>
+    <member refid="structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ResourceTypeId_01_4_1a79f664bac14ee365f9ffc94a727a0000" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="module__helios_8engine_8core_8data_8SceneId" kind="module"><name>helios.engine.core.data.SceneId</name>
     <member refid="structhelios_1_1engine_1_1core_1_1data_1_1SceneId_1a1b4c9198eab8f06cb88bd4fa1a61051e" kind="variable"><name>id_</name></member>
@@ -8076,6 +8123,11 @@
     <member refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry_1a2f3b3cd6bcecd7c8e04fe42fa1c25c7a" kind="function"><name>isValid</name></member>
     <member refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry_1aea6c94d2dcd58d3c97cc560375895c93" kind="function"><name>destroy</name></member>
     <member refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry_1a3c1886d46213cc275183edfd1c5ff6a1" kind="function"><name>version</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8ecs_8EntityResolver" kind="module"><name>helios.engine.ecs.EntityResolver</name>
+    <member refid="structhelios_1_1engine_1_1ecs_1_1EntityResolver_1a23aa7ba43f22a2efec26a8e1cd5933aa" kind="variable"><name>em</name></member>
+    <member refid="structhelios_1_1engine_1_1ecs_1_1EntityResolver_1af99759e77125a4d40b11ddc9082cd9ad" kind="function"><name>operator()</name></member>
+    <member refid="structhelios_1_1engine_1_1ecs_1_1EntityResolver_1abacfbca33f58052df4073e120662d1d3" kind="function"><name>find</name></member>
   </compound>
   <compound refid="module__helios_8engine_8ecs_8GameObject" kind="module"><name>helios.engine.ecs.GameObject</name>
     <member refid="classhelios_1_1engine_1_1ecs_1_1GameObject_1a5e50e0779d5e5ed7b048bbd523025c28" kind="variable"><name>entityHandle_</name></member>
@@ -8258,14 +8310,16 @@
   <compound refid="module__helios_8engine_8mechanics_8combat_8commands_8Aim2DCommand" kind="module"><name>helios.engine.mechanics.combat.commands.Aim2DCommand</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1Aim2DCommand_1aa85e2cddb0d3a93c7787f31dd1dd6ed9" kind="variable"><name>freqFactor_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1Aim2DCommand_1a4b85a1fedee30c54b44534ec7025e924" kind="variable"><name>direction_</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1Aim2DCommand_1a1671b06743d4e0021b3249b41805aaab" kind="function"><name>Aim2DCommand</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1Aim2DCommand_1a861541234b341ec5191dde68cb887507" kind="function"><name>execute</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1Aim2DCommand_1a36bb7b04096117f8d58fa661ea004eb1" kind="variable"><name>entityHandle_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1Aim2DCommand_1a394a15ae52a7911c7f62f28096b31cff" kind="function"><name>Aim2DCommand</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1Aim2DCommand_1a8499d495cfa433d409eb8ba557130dab" kind="function"><name>execute</name></member>
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8combat_8commands_8ShootCommand" kind="module"><name>helios.engine.mechanics.combat.commands.ShootCommand</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1ShootCommand_1a6e088a68b83817f3f6ef1cbe907f2e5d" kind="variable"><name>intensity_</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1ShootCommand_1a15feae0a07bfafee1b5b892751038937" kind="function"><name>ShootCommand</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1ShootCommand_1a17412b4ae8aa84eb00650e6cb9d137da" kind="variable"><name>entityHandle_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1ShootCommand_1a330e771be4c29ff5990966ac4831f9f9" kind="function"><name>ShootCommand</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1ShootCommand_1a533a83962b340b1c421241b82fcfee42" kind="function"><name>intensity</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1ShootCommand_1a405136175de8de53c1bd4417e0ee0e57" kind="function"><name>execute</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1ShootCommand_1aa76bf7345e2bb3a54b7dfc5d45fcb7a7" kind="function"><name>execute</name></member>
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8combat_8components" kind="module"><name>helios.engine.mechanics.combat.components</name>
   </compound>
@@ -8429,7 +8483,6 @@
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4aa93bc97776e73ea2f4fef921f15b0bdc" kind="enumvalue"><name>QuittingGame</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4abedfd09a1d1fc1b855c549c441a37ebc" kind="enumvalue"><name>RestartRequested</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4a431dc808fe209d3c3e812991b46d40ef" kind="enumvalue"><name>Restarting</name></member>
-    <member refid="structhelios_1_1engine_1_1state_1_1types_1_1StateTransitionId_3_01helios_1_1engine_1_1mechanics_45d1fe060e024a568800acdb9ff2360e_1a4bc8c96734f1ef1fd6eee95914580eda" kind="typedef"><name>Type</name></member>
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8health" kind="module"><name>helios.engine.mechanics.health</name>
   </compound>
@@ -8490,6 +8543,13 @@
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8lifecycle" kind="module"><name>helios.engine.mechanics.lifecycle</name>
   </compound>
+  <compound refid="module__helios_8engine_8mechanics_8lifecycle_8commands" kind="module"><name>helios.engine.mechanics.lifecycle.commands</name>
+  </compound>
+  <compound refid="module__helios_8engine_8mechanics_8lifecycle_8commands_8WorldLifecycleCommand" kind="module"><name>helios.engine.mechanics.lifecycle.commands.WorldLifecycleCommand</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1commands_1_1WorldLifecycleCommand_1ab337cf9ea917d8bb350674704165e9e9" kind="variable"><name>action_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1commands_1_1WorldLifecycleCommand_1afd6a5b1446982aa4af53825ad1bddcc7" kind="function"><name>WorldLifecycleCommand</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1commands_1_1WorldLifecycleCommand_1a6a7a8260c6f154987d76792cc01f36f6" kind="function"><name>action</name></member>
+  </compound>
   <compound refid="module__helios_8engine_8mechanics_8lifecycle_8components" kind="module"><name>helios.engine.mechanics.lifecycle.components</name>
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8lifecycle_8components_8Active" kind="module"><name>helios.engine.mechanics.lifecycle.components.Active</name>
@@ -8517,6 +8577,20 @@
   <compound refid="module__helios_8engine_8mechanics_8lifecycle_8systems_8DelayedComponentEnablerSystem" kind="module"><name>helios.engine.mechanics.lifecycle.systems.DelayedComponentEnablerSystem</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1DelayedComponentEnablerSystem_1ade049e8cdc2be7c46fe982fb564015c9" kind="variable"><name>sync_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1DelayedComponentEnablerSystem_1ae7c5a33ae0ce9c8bfdf69a5b3a758bf6" kind="function"><name>update</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8mechanics_8lifecycle_8types" kind="module"><name>helios.engine.mechanics.lifecycle.types</name>
+  </compound>
+  <compound refid="module__helios_8engine_8mechanics_8lifecycle_8types_8WorldLifecycleAction" kind="module"><name>helios.engine.mechanics.lifecycle.types.WorldLifecycleAction</name>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1lifecycle_1_1types_1acc4c3b9f4335ec0d66162c41a69f71b8" kind="enum"><name>WorldLifecycleAction</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1lifecycle_1_1types_1acc4c3b9f4335ec0d66162c41a69f71b8a526d688f37a86d3c3f27d0c5016eb71d" kind="enumvalue"><name>Reset</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8mechanics_8lifecycle_8WorldLifecycleManager" kind="module"><name>helios.engine.mechanics.lifecycle.WorldLifecycleManager</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1WorldLifecycleManager_1adcb9bb5e31973a60e406a9614fa8345b" kind="variable"><name>pending_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1WorldLifecycleManager_1ae0e2895b61f42b191677f22e88ce516a" kind="variable"><name>gameWorld_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1WorldLifecycleManager_1ac42bc551e792348f1e0f8f9271995a99" kind="function"><name>submit</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1WorldLifecycleManager_1ac913e707aa847a82959ee708582b5cee" kind="function"><name>init</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1WorldLifecycleManager_1a8f1e202e0b123497f527630a1690402c" kind="function"><name>flush</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1WorldLifecycleManager_1a636b9fca864cb0f6cb5c104d5320aa3d" kind="function"><name>reset</name></member>
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8match" kind="module"><name>helios.engine.mechanics.match</name>
   </compound>
@@ -8581,7 +8655,6 @@
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70a6fe7fa1af6567da46b7f26f21a81c0e3" kind="enumvalue"><name>RespawnRequested</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70a894ce1b6075d9de36dec60cc22e20536" kind="enumvalue"><name>QuitRequested</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70abedfd09a1d1fc1b855c549c441a37ebc" kind="enumvalue"><name>RestartRequested</name></member>
-    <member refid="structhelios_1_1engine_1_1state_1_1types_1_1StateTransitionId_3_01helios_1_1engine_1_1mechanics_c728608f128895f4489bedfff494ec28_1a80ab0e0ff228ff55ced5694ed237ba76" kind="typedef"><name>Type</name></member>
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8registry" kind="module"><name>helios.engine.mechanics.registry</name>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1a2b966e819ea3d411b6ca89097a5c855f" kind="function"><name>registerComponents</name></member>
@@ -8593,10 +8666,8 @@
   <compound refid="module__helios_8engine_8mechanics_8scoring_8commands_8UpdateScoreCommand" kind="module"><name>helios.engine.mechanics.scoring.commands.UpdateScoreCommand</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1commands_1_1UpdateScoreCommand_1a7bff4c8dcd7227e5a972eb36c739c58c" kind="variable"><name>scoreContext_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1commands_1_1UpdateScoreCommand_1a809743b21193743aeae46bde2b987f16" kind="function"><name>UpdateScoreCommand</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1commands_1_1UpdateScoreCommand_1af54e491def5a2ee658d9014cd8fd7ba1" kind="function"><name>execute</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1commands_1_1UpdateScoreCommand_1ae5707ec4faeac6143d54283730b52c96" kind="function"><name>scoreContext</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1commands_1_1UpdateScoreCommand_1aab5d433ec8497f58b8dec38f56477f4c" kind="function"><name>scoreContext</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1commands_1_1UpdateScoreCommand_1aaed0d900897ae2afef5e350dfc134a97" kind="function"><name>accept</name></member>
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8scoring_8components" kind="module"><name>helios.engine.mechanics.scoring.components</name>
   </compound>
@@ -8679,10 +8750,6 @@
   <compound refid="module__helios_8engine_8mechanics_8scoring_8registry" kind="module"><name>helios.engine.mechanics.scoring.registry</name>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1scoring_1ab4c5f88fd823d42fdba6b3f26b0005fb" kind="function"><name>registerComponents</name></member>
   </compound>
-  <compound refid="module__helios_8engine_8mechanics_8scoring_8ScoreCommandDispatcher" kind="module"><name>helios.engine.mechanics.scoring.ScoreCommandDispatcher</name>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandDispatcher_1ad61ed3888db1fb4368f766b38fffb598" kind="function"><name>dispatchTyped</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandDispatcher_1a2c87a83ecd307aae34d7cf9cc0c0e630" kind="function"><name>ScoreCommandDispatcher</name></member>
-  </compound>
   <compound refid="module__helios_8engine_8mechanics_8scoring_8ScoreCommandHandler" kind="module"><name>helios.engine.mechanics.scoring.ScoreCommandHandler</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler_1a57a07935f12d35eed7436d88933a3610" kind="function"><name>~ScoreCommandHandler</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler_1afe94066de66d4fdde2a84b530c2cc8b5" kind="function"><name>submit</name></member>
@@ -8714,8 +8781,8 @@
     <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1aa34229b674e0da187b8c56c6cc90dfd0" kind="variable"><name>scores_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a055dd5eeddf3e34a2663fb0017b2f041" kind="function"><name>addScorePool</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a68108b524ba7d30d4c281c05c777e3c0" kind="function"><name>scorePool</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a05625cf859f18873e47f79e7e9f9816e" kind="function"><name>flush</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1ac30bf7894a4fd962ca9e67c4ca02f395" kind="function"><name>submit</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1abf528fe8904b38cf52f31df8edf4592c" kind="function"><name>flush</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1aa8a5216ee454dbdd0b8a69e519fdf977" kind="function"><name>submit</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a04f62fb1b24bfc389acaa48fdd31293e" kind="function"><name>init</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1ae26e54f8314f7f412565e2b0ec5d2dd4" kind="function"><name>reset</name></member>
   </compound>
@@ -8819,9 +8886,7 @@
   <compound refid="module__helios_8engine_8mechanics_8timing_8commands_8TimerControlCommand" kind="module"><name>helios.engine.mechanics.timing.commands.TimerControlCommand</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1commands_1_1TimerControlCommand_1a5287355c5db58f2750d25809216519dd" kind="variable"><name>timerContext_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1commands_1_1TimerControlCommand_1ae002f183992704f00cf567696f365b57" kind="function"><name>TimerControlCommand</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1commands_1_1TimerControlCommand_1a959ab727760ebab511fac5b89d3fe813" kind="function"><name>execute</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1commands_1_1TimerControlCommand_1a9f1b350c470b596e09c6160051ced886" kind="function"><name>timerControlContext</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1commands_1_1TimerControlCommand_1af442b4480a3d71db23476425d9c5f5e2" kind="function"><name>accept</name></member>
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8timing_8components" kind="module"><name>helios.engine.mechanics.timing.components</name>
   </compound>
@@ -8863,10 +8928,6 @@
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerUpdateSystem_1a954aff22c5ec427ce067f7de37a1d2df" kind="function"><name>GameTimerUpdateSystem</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerUpdateSystem_1ab3ac7a7318db66c36c1a8f14f0710801" kind="function"><name>update</name></member>
   </compound>
-  <compound refid="module__helios_8engine_8mechanics_8timing_8TimerCommandDispatcher" kind="module"><name>helios.engine.mechanics.timing.TimerCommandDispatcher</name>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerCommandDispatcher_1a4c44c52e73afda2bb8b29a8453bc2899" kind="function"><name>dispatchTyped</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerCommandDispatcher_1a390855c20ae1e2486ba6e2282059ac7b" kind="function"><name>TimerCommandDispatcher</name></member>
-  </compound>
   <compound refid="module__helios_8engine_8mechanics_8timing_8TimerCommandHandler" kind="module"><name>helios.engine.mechanics.timing.TimerCommandHandler</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerCommandHandler_1a944836593561d443e9de3eab2a19f08d" kind="function"><name>~TimerCommandHandler</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerCommandHandler_1a951c49e5074210e377003ca27ffaada5" kind="function"><name>submit</name></member>
@@ -8880,8 +8941,8 @@
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1a0c713f94b0de4a5b1035f25893829958" kind="function"><name>addGameTimer</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1a99dd425726dfa3dcfbe820b1ee30dd4d" kind="function"><name>gameTimer</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1ae5ff293b1c17995ae84f324ba19db4d2" kind="function"><name>gameTimers</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1a6c9d6e54b813c582e1b5e3857d3858d0" kind="function"><name>flush</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1a8320e5b50e975e424bbbc2e71723cc64" kind="function"><name>submit</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1aef973149d954abaf1787fa74f4accf7d" kind="function"><name>flush</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1a90d7a8cfce8f33a33694873baab543c9" kind="function"><name>submit</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1adf8ca10337b5b942ab184958c4dacabd" kind="function"><name>init</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1a3cc30c28fb07d97665e83b372872e597" kind="function"><name>reset</name></member>
   </compound>
@@ -9180,14 +9241,16 @@
   <compound refid="module__helios_8engine_8modules_8physics_8motion_8commands_8Move2DCommand" kind="module"><name>helios.engine.modules.physics.motion.commands.Move2DCommand</name>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1Move2DCommand_1a37bd362076f9d8951c87eb237b54c459" kind="variable"><name>speedFactor_</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1Move2DCommand_1a25ba1cf8e2bd3c7ad13b9c74f75f0870" kind="variable"><name>direction_</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1Move2DCommand_1a0802f5b633a00d2f12e4d4f64426dc0e" kind="function"><name>Move2DCommand</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1Move2DCommand_1a4cd5c2f5e4c9571d67f1e735d802dabf" kind="function"><name>execute</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1Move2DCommand_1afdf02a11218f72dcd48a4adc9d5b4759" kind="variable"><name>entityHandle_</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1Move2DCommand_1a0e9bbf074a60567cbf4bcaffed519f83" kind="function"><name>Move2DCommand</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1Move2DCommand_1a001e7918a2fe76ebd9aa382c3f969aec" kind="function"><name>execute</name></member>
   </compound>
   <compound refid="module__helios_8engine_8modules_8physics_8motion_8commands_8SteeringCommand" kind="module"><name>helios.engine.modules.physics.motion.commands.SteeringCommand</name>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1SteeringCommand_1a83e1b3fa3ecb6408b743bcbafabe5b6d" kind="variable"><name>turnFactor_</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1SteeringCommand_1a9528af8ba1a5a4215a6add3b054a0eaf" kind="variable"><name>direction_</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1SteeringCommand_1a2af51f7a73ab5223f28cd5b81fa33314" kind="function"><name>SteeringCommand</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1SteeringCommand_1a0c81ba64684234c619fd09dca98ab395" kind="function"><name>execute</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1SteeringCommand_1a7540d119ca2e27e39c1be933fea4d1b1" kind="variable"><name>entityHandle_</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1SteeringCommand_1ac7c137fab6972cd3e79b693c6fbd4193" kind="function"><name>SteeringCommand</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1SteeringCommand_1aab7d49249b1429755461841864570f8e" kind="function"><name>execute</name></member>
   </compound>
   <compound refid="module__helios_8engine_8modules_8physics_8motion_8components" kind="module"><name>helios.engine.modules.physics.motion.components</name>
   </compound>
@@ -9600,14 +9663,8 @@
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand_1ab43c26a832c98b807aa1f2aa36ae0729" kind="variable"><name>source_</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand_1a9081412019474079f0d3cf5df5b52b5d" kind="variable"><name>actionId_</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand_1a4a1df9a180d3695bb4e285fee662e5a6" kind="function"><name>UiActionCommand</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand_1a433bee2f063a6be14555a0f7dfa00cde" kind="function"><name>execute</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand_1a41644a4b619d285edb6f831596ff0355" kind="function"><name>accept</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand_1a1616e9e485310b26a9966ff4dd902bd4" kind="function"><name>source</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand_1a9609c3fff597a204bc43dc2ed00fd979" kind="function"><name>actionId</name></member>
-  </compound>
-  <compound refid="module__helios_8engine_8modules_8ui_8commands_8UiActionCommandDispatcher" kind="module"><name>helios.engine.modules.ui.commands.UiActionCommandDispatcher</name>
-    <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommandDispatcher_1a26c101bbdc6a06026847f2d2078c7f3e" kind="function"><name>dispatchTyped</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommandDispatcher_1a57bde997c840fe400688f51c05b7f4a1" kind="function"><name>UiActionCommandDispatcher</name></member>
   </compound>
   <compound refid="module__helios_8engine_8modules_8ui_8layout" kind="module"><name>helios.engine.modules.ui.layout</name>
   </compound>
@@ -9687,7 +9744,7 @@
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager_1a433024395eab2559cec70e84ae1d25cd" kind="variable"><name>commands_</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager_1adaf6e5f718b8fd90d1e9e829a4230bef" kind="variable"><name>policies_</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager_1ad461ed59edc72412cd9ac466f1516b2e" kind="function"><name>UiActionCommandManager</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager_1aba013e3e716888f010cedcde9534e7cf" kind="function"><name>flush</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager_1afeec7a0d76b53a2dfb60b7d2fe8c938a" kind="function"><name>flush</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager_1ade81b75fe6945227c8dbff087b61228b" kind="function"><name>submit</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager_1a704e71eb1185fefa50a6e6107a95c2f7" kind="function"><name>addPolicy</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager_1a376734356261cdf9d67af7bc03b15698" kind="function"><name>init</name></member>
@@ -9830,15 +9887,14 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a7d4eb13220ecd447c6af0914fd214921" kind="variable"><name>prePhase_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1adaff711d38a5a95c0494c527ae4a1714" kind="variable"><name>mainPhase_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a53abfe8e0aed479d00ec3867d5fd0412" kind="variable"><name>postPhase_</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a1ee2f3b652d9619f4f328b43862b15c2" kind="variable"><name>commandBuffer_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1aa4fa49a8c51021ff24404e84b20696b5" kind="variable"><name>phaseEventBus_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1abf5317ab24eb3c9dbfe5c0a827680699" kind="variable"><name>passEventBus_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1ae54b7c4d141a90c2fc65a0bbbe887426" kind="variable"><name>frameEventBus_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1ab178f78cbde82dd87b4391b4eed56859" kind="variable"><name>totalTime_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a4bf78e22f99e1d3028b50f4aa5ed9acd" kind="function"><name>onPassCommit</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1aa8aeafec5ba655ccacde623ad32f40ec" kind="function"><name>phaseCommit</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a41b297a4ee926ed2b989996ceb61bb7f" kind="function"><name>GameLoop</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a7649a22c062f81568c5d11d2a8148029" kind="function"><name>phase</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1ada0015b327377f0ce118369a904ceed7" kind="function"><name>commandBuffer</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a7915a98afe2de477625904422cf6d029" kind="function"><name>init</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a8dbc5c72e9d25b13933ccda14b0975d7" kind="function"><name>update</name></member>
   </compound>
@@ -9889,50 +9945,30 @@
   <compound refid="module__helios_8engine_8runtime_8messaging_8command" kind="module"><name>helios.engine.runtime.messaging.command</name>
   </compound>
   <compound refid="module__helios_8engine_8runtime_8messaging_8command_8CommandBuffer" kind="module"><name>helios.engine.runtime.messaging.command.CommandBuffer</name>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1_1TargetedCommandProxy_1a14dec5066d801a3c74355b2245ccfc2c" kind="variable"><name>typeIdx</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1_1TargetedCommandProxy_1a2059b27bd5aaa5c1f0bd41e9236cd0f0" kind="variable"><name>entityHandle</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1_1TargetedCommandProxy_1a282ae6af4fc57b850af23dfc4ecf7170" kind="variable"><name>targetedCommand</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1_1WorldCommandProxy_1ae9eae16715227850d4a46cc75f785be0" kind="variable"><name>typeIdx</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1_1WorldCommandProxy_1a24d0021e0ebedbc2c360d96a95f5eacd" kind="variable"><name>worldCommand</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a147ccfd4b63c97c74b262dfe5209b804" kind="variable"><name>targetedCommandBuffer_</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1af60d98d03fd1bd45ea9a78fa5db01e5c" kind="variable"><name>worldCommandBuffer_</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a801f74db90b3dd3daf9dd728b69ad922" kind="variable"><name>logger_</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a33dddecec35850d1e25ff1d81ad97d1d" kind="variable"><name>targetedCommandDispatchers_</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a8e89f6c1f82f18a1bee07aebeda644c0" kind="variable"><name>worldCommandDispatchers_</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1ab0123534ad152ae9688e781682aa879f" kind="function"><name>addDispatcher</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a222f4ebdac7a7530166f3350f14ae71e" kind="function"><name>hasDispatcher</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a71febda44a137e545cb260cea2d1b9b6" kind="function"><name>addDispatcher</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1ae38bd4c38ca9714e8d8b83e840929ca9" kind="function"><name>hasDispatcher</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1ae86242f86c27014387f22b448112dd81" kind="function"><name>add</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1aefadad69c3bb4d3dd76d627e1775bb0d" kind="function"><name>add</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1accac0953fe00e2fe4c480334bdd826ec" kind="function"><name>flush</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a550e52c6233fe6b04ccf66b984a07dce" kind="function"><name>clear</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1ad30a48c89c776560b95ce2e0c1244be4" kind="function"><name>~CommandBuffer</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a8535f5c29283dac178b3b3d2449210d4" kind="function"><name>flush</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a79125d01f21544304762287af62d176a" kind="function"><name>clear</name></member>
   </compound>
-  <compound refid="module__helios_8engine_8runtime_8messaging_8command_8TargetedCommand" kind="module"><name>helios.engine.runtime.messaging.command.TargetedCommand</name>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand_1afdb2e242ce5c8d3d5a642529ba21f96f" kind="function"><name>~TargetedCommand</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand_1a7b06969ba22a31d99ea0b77732993ed7" kind="function"><name>execute</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand_1aaaecdfa3765611e2cf3452ef9e81951d" kind="function"><name>accept</name></member>
+  <compound refid="module__helios_8engine_8runtime_8messaging_8command_8CommandHandler" kind="module"><name>helios.engine.runtime.messaging.command.CommandHandler</name>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler_1a410bedb175238cfe3f9c5062cd934ebe" kind="function"><name>~CommandHandler</name></member>
   </compound>
-  <compound refid="module__helios_8engine_8runtime_8messaging_8command_8TargetedCommandDispatcher" kind="module"><name>helios.engine.runtime.messaging.command.TargetedCommandDispatcher</name>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommandDispatcher_1a620b269a0fbb8e3d539df8d373aa4b0c" kind="function"><name>~TargetedCommandDispatcher</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommandDispatcher_1aef68b9b72ee196e69129c7efae1a406f" kind="function"><name>dispatch</name></member>
+  <compound refid="module__helios_8engine_8runtime_8messaging_8command_8EngineCommandBuffer" kind="module"><name>helios.engine.runtime.messaging.command.EngineCommandBuffer</name>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1af05f35df5b1257f3119cb29cbf0e3fde" kind="typedef"><name>BufferImpl</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1a0b3ddb0409bf4a07a4a8c12e6323f158" kind="variable"><name>impl_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1a661d0858913185ec6f6e35ef2b87c883" kind="function"><name>add</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1a4f2f838aa913f20181fc0cda507563ef" kind="function"><name>flush</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1a10b84b9f9d1099022f35fb8f839a4f90" kind="function"><name>clear</name></member>
   </compound>
-  <compound refid="module__helios_8engine_8runtime_8messaging_8command_8TypedTargetedCommandDispatcher" kind="module"><name>helios.engine.runtime.messaging.command.TypedTargetedCommandDispatcher</name>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedTargetedCommandDispatcher_1a4fc5eb64c933a286f1892dd5d8e91a47" kind="function"><name>dispatchTyped</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedTargetedCommandDispatcher_1ad27f377b4d8aae7f4a9cc5157a6db601" kind="function"><name>dispatch</name></member>
+  <compound refid="module__helios_8engine_8runtime_8messaging_8command_8TypedCommandBuffer" kind="module"><name>helios.engine.runtime.messaging.command.TypedCommandBuffer</name>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a44375c2d4b706e04d8a0efa768d82317" kind="variable"><name>commandQueues_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a8c0798c8503d1e8bce1a299b02c84d79" kind="function"><name>commandQueue</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1ae28007881a7a5116688535261d5e8b9a" kind="function"><name>flushCommandQueue</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a35748f3c15d9e92098bed8d174cb7042" kind="function"><name>add</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a8e0ac1bed42dc63df2b3f8c270e35758" kind="function"><name>clear</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a1e035c4076ab5658d6cac38badec66ce" kind="function"><name>flush</name></member>
   </compound>
-  <compound refid="module__helios_8engine_8runtime_8messaging_8command_8TypedWorldCommandDispatcher" kind="module"><name>helios.engine.runtime.messaging.command.TypedWorldCommandDispatcher</name>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher_1ae99b8d4dc66acf8340000f97c0fdd16d" kind="function"><name>dispatchTyped</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher_1ada9b7af011e293a1d5712a1134bdf66d" kind="function"><name>dispatch</name></member>
-  </compound>
-  <compound refid="module__helios_8engine_8runtime_8messaging_8command_8WorldCommand" kind="module"><name>helios.engine.runtime.messaging.command.WorldCommand</name>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand_1a4d66424c22b64a9712778d6697d558b7" kind="function"><name>~WorldCommand</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand_1aca8697eac44a696ada96078626b0b103" kind="function"><name>execute</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand_1a5cbe95921020642bfef379ec1bf97c53" kind="function"><name>accept</name></member>
-  </compound>
-  <compound refid="module__helios_8engine_8runtime_8messaging_8command_8WorldCommandDispatcher" kind="module"><name>helios.engine.runtime.messaging.command.WorldCommandDispatcher</name>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher_1a99cfdc9890b444664a9ae3a98e8b6d1f" kind="function"><name>~WorldCommandDispatcher</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher_1ad64b55eac8560337da958baeee49bbca" kind="function"><name>dispatch</name></member>
+  <compound refid="module__helios_8engine_8runtime_8messaging_8command_8TypedCommandHandler" kind="module"><name>helios.engine.runtime.messaging.command.TypedCommandHandler</name>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandHandler_1a3cf2e3f0015a0b59d91fdfd3112b7ab3" kind="function"><name>submit</name></member>
   </compound>
   <compound refid="module__helios_8engine_8runtime_8messaging_8event" kind="module"><name>helios.engine.runtime.messaging.event</name>
   </compound>
@@ -9993,7 +10029,7 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a85c5d5ed93c6e22f4d09750273e77c73" kind="function"><name>release</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a965ef591bc25269837e5e95118cb52d2" kind="function"><name>acquire</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a7f5ef214b56eba5241a20de5d964eff2" kind="function"><name>init</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1ab69a353b11e4ee5a834dca810f3239e9" kind="function"><name>flush</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1ab5c9788a67aee220c43f4c3f7b633bbd" kind="function"><name>flush</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a9cc0f690e30550d213698d06210f69a6" kind="function"><name>pool</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a1f3ad93fd926408196bca49a9707757e" kind="function"><name>reset</name></member>
   </compound>
@@ -10092,8 +10128,6 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1DespawnCommand_1a99504fb2fd5e02b366e678d7dabd34fb" kind="variable"><name>entityHandle_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1DespawnCommand_1a469929f42d6cbe2e23e6a51c475f2734" kind="variable"><name>spawnProfileId_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1DespawnCommand_1a9d5f7a1b3bb25a6a669ef6f3e360261a" kind="function"><name>DespawnCommand</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1DespawnCommand_1a27d6b601c1d80bd842c3d5b01b08bfad" kind="function"><name>execute</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1DespawnCommand_1a9345f2a9f35dcdf2398d3e787e657269" kind="function"><name>accept</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1DespawnCommand_1a6d593df631aa5d5d2688213f3c7adc5a" kind="function"><name>entityHandle</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1DespawnCommand_1a6078e9b0926d3fd2bca0f94a8c38565c" kind="function"><name>spawnProfileId</name></member>
   </compound>
@@ -10102,8 +10136,6 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_1aa02b62de82ec5c6ac867ff8948c9a02a" kind="variable"><name>spawnPlan_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_1a4132d8998ae1d1fa0e056eb8b8133cb3" kind="variable"><name>spawnContext_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_1a0d20724300c2ecbf62cf8eca2f278b8d" kind="function"><name>ScheduledSpawnPlanCommand</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_1ac52d2b8e0f355b14e1a4777c9519b675" kind="function"><name>execute</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_1a78a32b69a8df38b4f4c543010467df0c" kind="function"><name>accept</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_1a39a05ef02b8449b0f3450c346a64640c" kind="function"><name>spawnProfileId</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_1a786debdfc118c8fff0ce790eece91a7a" kind="function"><name>spawnPlan</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_1a0c12f5f7424245590dc058d5f14f70c8" kind="function"><name>spawnContext</name></member>
@@ -10113,25 +10145,9 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1SpawnCommand_1af003a22a7f48d82adcdb41b8cd2894c1" kind="variable"><name>spawnProfileId_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1SpawnCommand_1a916a164cc53f4fa4555f4827da510972" kind="variable"><name>spawnContext_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1SpawnCommand_1a74fcd792de0dcc4b351aa5b579fd9010" kind="function"><name>SpawnCommand</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1SpawnCommand_1abb3d93337e9b64a12bdbb0d369282829" kind="function"><name>execute</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1SpawnCommand_1af74bbc5f5d852aa75b97fee99a9ffeb5" kind="function"><name>accept</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1SpawnCommand_1ac16caa6019600d74fd8a68b6fe1f11c2" kind="function"><name>spawnProfileId</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1SpawnCommand_1aaa87dc27a24e7e869eee99894e2ac839" kind="function"><name>spawnBudget</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1SpawnCommand_1a528d1c697493e6c3b9e77eae93beb57a" kind="function"><name>spawnContext</name></member>
-  </compound>
-  <compound refid="module__helios_8engine_8runtime_8spawn_8dispatcher" kind="module"><name>helios.engine.runtime.spawn.dispatcher</name>
-  </compound>
-  <compound refid="module__helios_8engine_8runtime_8spawn_8dispatcher_8DespawnCommandDispatcher" kind="module"><name>helios.engine.runtime.spawn.dispatcher.DespawnCommandDispatcher</name>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1DespawnCommandDispatcher_1a0532ad79fe9cedca7ab082949c140d86" kind="function"><name>dispatchTyped</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1DespawnCommandDispatcher_1adaaecbd2c01c411701bb7f62798dc195" kind="function"><name>DespawnCommandDispatcher</name></member>
-  </compound>
-  <compound refid="module__helios_8engine_8runtime_8spawn_8dispatcher_8ScheduledSpawnPlanCommandDispatcher" kind="module"><name>helios.engine.runtime.spawn.dispatcher.ScheduledSpawnPlanCommandDispatcher</name>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1ScheduledSpawnPlanCommandDispatcher_1ad2f498d542d4f6364552373cd93d0d7a" kind="function"><name>dispatchTyped</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1ScheduledSpawnPlanCommandDispatcher_1adba3d6f1bb3b956a0e2a555887f44e2b" kind="function"><name>ScheduledSpawnPlanCommandDispatcher</name></member>
-  </compound>
-  <compound refid="module__helios_8engine_8runtime_8spawn_8dispatcher_8SpawnCommandDispatcher" kind="module"><name>helios.engine.runtime.spawn.dispatcher.SpawnCommandDispatcher</name>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1SpawnCommandDispatcher_1a5d5a34455ac34b80f18b01880527140b" kind="function"><name>dispatchTyped</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1SpawnCommandDispatcher_1a70ee851347452f9ab784eca0d42b1a53" kind="function"><name>SpawnCommandDispatcher</name></member>
   </compound>
   <compound refid="module__helios_8engine_8runtime_8spawn_8EmitterContext" kind="module"><name>helios.engine.runtime.spawn.EmitterContext</name>
     <member refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1EmitterContext_1a15c6989a605c98a6e7cde901d31d2ae6" kind="variable"><name>position</name></member>
@@ -10278,21 +10294,21 @@
   </compound>
   <compound refid="module__helios_8engine_8runtime_8spawn_8SpawnManager" kind="module"><name>helios.engine.runtime.spawn.SpawnManager</name>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a13c47e1ad5e367d3d0df4cb5d4dfed0d" kind="variable"><name>spawnSchedulers_</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a78bfec2a2616bb6a3788f99362f87414" kind="variable"><name>spawnCommands_</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a8fa9d044ec944334d2d1f6db4395cbfe" kind="variable"><name>despawnCommands_</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a93a51b6d502195cc187ad7de5e0c362a" kind="variable"><name>scheduledSpawnPlanCommands_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a536e2121701a41aaf29489ab742f00a8" kind="variable"><name>spawnCommands_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1ae97d2d98155f9afc72e5ef77bcc6c80c" kind="variable"><name>despawnCommands_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a28ab040cbda4261446b0040d491b851f" kind="variable"><name>scheduledSpawnPlanCommands_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a89d55461036f73f89fe562b46ca7f384" kind="variable"><name>gameObjectPoolManager_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a4dd482abce2d7e87a3998d534bc76116" kind="variable"><name>spawnProfiles_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a1e1485ee793b24b4a6bcba470e397b20" kind="function"><name>ensureBounds</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1abd4a02937d8d6686cc432788692fd367" kind="function"><name>executeScheduledSpawnPlanCommands</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a3b4d91b8369332eea4a4b910b626fd3d" kind="function"><name>spawnObjects</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1af33cd04062d77fdd17f02751e6581931" kind="function"><name>despawnObjects</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a004673cfcf00dc080bddaeaae41d0b5b" kind="function"><name>executeScheduledSpawnPlanCommands</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a152cbca205840c0c91e878d2a6da0033" kind="function"><name>spawnObjects</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a53b8d398c249970b2346f236aade2504" kind="function"><name>despawnObjects</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a0ed05ecdafaaa1de8bfe0fe4a8540166" kind="function"><name>SpawnManager</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a68c1e1c5bc8e28061333e50e7d5836bc" kind="function"><name>submit</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a2c516006f6f2db8af0ee51a765cc69b1" kind="function"><name>submit</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a11b64df3f6da630ef18e0ce51adf7529" kind="function"><name>addScheduler</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a5896ba755340affff00edcd3757068c7" kind="function"><name>submit</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1ab2c6562cae1e34f6e90068710044f085" kind="function"><name>submit</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a345caf68f5d311a54f74a921b933705e" kind="function"><name>flush</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1aebf53bebeaf49e42b06d9f96817ee96a" kind="function"><name>submit</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a6d40be3a3b2ca2085397be98e18e1be6" kind="function"><name>submit</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1afb6ace98d74da9ed313c6811142f5d3d" kind="function"><name>flush</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1ac51fc20588ef7abf0d7e9b675bc6e0b3" kind="function"><name>addSpawnProfile</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1aa356bdd063bd2b7ca1f3548218e32411" kind="function"><name>spawnProfile</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1aeab1d9b1aabd174751fa20937a9841f2" kind="function"><name>init</name></member>
@@ -10311,15 +10327,9 @@
   <compound refid="module__helios_8engine_8runtime_8world" kind="module"><name>helios.engine.runtime.world</name>
   </compound>
   <compound refid="module__helios_8engine_8runtime_8world_8GameWorld" kind="module"><name>helios.engine.runtime.world.GameWorld</name>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ae6be15dea22ccb29caf122440d8021c7" kind="variable"><name>gameObjects_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a5cc257dd2ebbd269a60b9891889f4b50" kind="variable"><name>logger_</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aae88d3ee210e2e4ed03cbba46419734d" kind="variable"><name>managers_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a70d324aa0446f3bc86e89b0774bdd963" kind="variable"><name>level_</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ad19913ff20f7cf576045de7124483f77" kind="variable"><name>scoreCommandHandler_</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aec14cc722c3044953d7434d88f64b463" kind="variable"><name>timerCommandHandler_</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a6ebb8c28f0db121085c0c2bad8b4128d" kind="variable"><name>stateCommandHandlers_</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aebbb01a9cefc8258d7c8b507e8299718" kind="variable"><name>uiActionCommandHandler_</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ae3bae7b84d6f67f747d4129f2e7101ec" kind="variable"><name>spawnCommandHandlerRegistry_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ac670c2a5ffd16ed5500955a9bc01e12a" kind="variable"><name>resourceRegistry_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ab82b5eb9c54b2b750b635f2d8e6a168e" kind="variable"><name>entityRegistry_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1acfdf128e6c02f892f7be4a863887f357" kind="variable"><name>em_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a4618852a927c5feac102c549ffe3adcf" kind="variable"><name>session_</name></member>
@@ -10329,23 +10339,16 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ac004c6fdb4e8fcdd334c302f7cb0653c" kind="function"><name>GameWorld</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a8309cffe7fbad212831bb353f9bd78d8" kind="function"><name>operator=</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a2d6cce041856f53f9221b8127e064209" kind="function"><name>session</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a0f4f403f4d0667b252c87169e3c81cc1" kind="function"><name>entityManager</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aae71c0fe187189d167cb967181831740" kind="function"><name>init</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a8d76de93fc524c7cfe07d506a79130db" kind="function"><name>setLevel</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a03d2275138a928e04c4bb527ba41830a" kind="function"><name>hasLevel</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a130d018f6ce51f8e8d75eac3e6ef3561" kind="function"><name>level</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ab53994280aeec233c1dd91f02a09e589" kind="function"><name>hasManager</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a7c60c2fdaba967d2415a3d8b253a425d" kind="function"><name>addManager</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a035f7979ac9743fceecaeea93204cd37" kind="function"><name>registerSpawnCommandHandler</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ac523efad82188ea088f155da87765594" kind="function"><name>registerUiActionCommandHandler</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ac54de3822d847ebd5ac050d2225c216f" kind="function"><name>uiActionCommandHandler</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a81250d5cb4d49746a9702d9f4a66d6ec" kind="function"><name>spawnCommandHandler</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a37b8248fc6f250140046bd81401853ef" kind="function"><name>registerScoreCommandHandler</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a462d7a1e1252eb4c2b274c2e253a8da4" kind="function"><name>scoreCommandHandler</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a537be803bd263137818146cb029af9a6" kind="function"><name>registerTimerCommandHandler</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a09eea946cb57eccfa71964d18414bd97" kind="function"><name>timerCommandHandler</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ae2255ceebca281c53e7a7d69f8e56131" kind="function"><name>registerStateCommandHandler</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ad1501c0217ada774e439dfa060b89053" kind="function"><name>stateCommandHandler</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aa5461339dafdae850a4327e59a1ba112" kind="function"><name>getManager</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1affe7696dfe62c5de7b2d1cbd4cbd6fc7" kind="function"><name>registerManager</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a8b291cc60aa4ef02932747235c0fc64d" kind="function"><name>registerCommandHandler</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a187d5dfbdb99b5a31917776688d88355" kind="function"><name>registerResource</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aef708e6e8cdbf9023f76d18bff0054df" kind="function"><name>manager</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a72cd30e709f646b83f18c50c97f57b3c" kind="function"><name>flushManagers</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a672057079d4cf81a8d05b07aa87fee3c" kind="function"><name>addGameObject</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a16e96750ec7af95732a904982a24b2f9" kind="function"><name>view</name></member>
@@ -10354,6 +10357,7 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ac2dda75670b28086b1426d320b945db0" kind="function"><name>find</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1abcc2243a9cb4b493634a63932434bcaf" kind="function"><name>clone</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aa134c91f1cff94cb3e708d7908e2a291" kind="function"><name>reset</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a05c8f51c63b7e923c228b034be4fc208" kind="function"><name>resourceRegistry</name></member>
   </compound>
   <compound refid="module__helios_8engine_8runtime_8world_8Level" kind="module"><name>helios.engine.runtime.world.Level</name>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Level_1a192633f3971116751ece9b8ff8b46b42" kind="variable"><name>rootNode_</name></member>
@@ -10364,12 +10368,28 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Level_1ae3cb77b499476902869cc345ab8a9809" kind="function"><name>bounds</name></member>
   </compound>
   <compound refid="module__helios_8engine_8runtime_8world_8Manager" kind="module"><name>helios.engine.runtime.world.Manager</name>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1aaa2bc033955a07d4d97592eb2f817659" kind="variable"><name>gameWorld_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a116b5758bea5a39bbc0d24bc62bdcdd7" kind="function"><name>~Manager</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ab0f750d777e2368c08fc413188673622" kind="function"><name>onAdd</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ae7e2cd7531de5ce1fdc1f4a179b70929" kind="function"><name>init</name></member>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a290b20a4d512d096650dc187f1f3e940" kind="function"><name>flush</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a4a530617ca6c546b21b23795347e6384" kind="function"><name>flush</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a967a3375eca948be9ebeaca2e34c7475" kind="function"><name>reset</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8runtime_8world_8ResourceRegistry" kind="module"><name>helios.engine.runtime.world.ResourceRegistry</name>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1ab893cdc7b7dfc022f52b90baa196ae8b" kind="variable"><name>owned_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1adcdc3928d64eff4e225efef9fefaf241" kind="variable"><name>managers_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1ac1e0bebfcdedc77fc7da3a08fae81267" kind="variable"><name>commandBuffers_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1af9a80295a69dd62798bcd5de1feec7de" kind="variable"><name>commandHandlers_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a9828f4f10f6e1a8734c23bcd7e44bf74" kind="variable"><name>fastAccess_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a71c88e4711c542c493f9c41825f76a85" kind="function"><name>registerResource</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a9bab978496643ba428b8166184103cd8" kind="function"><name>registerResource</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a4a7fa60f4d0fb1925a0d8c78037c5b93" kind="function"><name>has</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a11562a65e70f32bf894460020bacf6de" kind="function"><name>resource</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1ad755b403ab228b91d906e9dc8547caa2" kind="function"><name>resource</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a36c02739412c272a7c6fab30e0a90d98" kind="function"><name>tryResource</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1ad4b7717b6f2445c9d234cb9fb0594658" kind="function"><name>tryResource</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a05e0269ef59954066304d444264ee133" kind="function"><name>managers</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1aea2adfeb9c3dccf20d0fa6aa8a2a5581" kind="function"><name>managers</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a8ccc085b30e324d32fcd8bcf1d5f338f" kind="function"><name>commandBuffers</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a6a3fbd714901feffe20c01fa7996956f" kind="function"><name>commandBuffers</name></member>
   </compound>
   <compound refid="module__helios_8engine_8runtime_8world_8Session" kind="module"><name>helios.engine.runtime.world.Session</name>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a57bc0efa39e8ad9be0042a69522e8027" kind="variable"><name>gameObject_</name></member>
@@ -10394,35 +10414,44 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry_1ae0d6499790a83073e18ec91c5800fb4a" kind="function"><name>getSystem</name></member>
   </compound>
   <compound refid="module__helios_8engine_8runtime_8world_8UpdateContext" kind="module"><name>helios.engine.runtime.world.UpdateContext</name>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a1e3fa9c1dcdfaf13e5681ab4db47267f" kind="variable"><name>deltaTime_</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1ad8635a324305a486e832080139c909d0" kind="variable"><name>totalTime_</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a1ad9d6444e0838c8828d99e3af901bd9" kind="variable"><name>inputSnapshot_</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a31296936e3fa5c81e8d7943620abb31e" kind="variable"><name>commandBuffer_</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a9d63984ea0eaf2dffdd966c7732fdcac" kind="variable"><name>gameWorld_</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a8982323be50e6d8531e6eb14c0686629" kind="variable"><name>session_</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1ad92be0e4a26acdf1127051c4de51101f" kind="variable"><name>phaseEventSink_</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a8700d32762b0438d5fe669e51b91fea8" kind="variable"><name>phaseEventSource_</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a908950ece5f0b4890fa37db4b5619e67" kind="variable"><name>passEventSink_</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a3b6a639ea710a380f6ac18758aec89a3" kind="variable"><name>passEventSource_</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1abb9f01425d1bd319565e8a2b8854b2d5" kind="variable"><name>frameEventSink_</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a4b866110f44603ccda72bccb5d0c4f87" kind="variable"><name>frameEventSource_</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a374ba20a00710abe05bf8d41150648f3" kind="variable"><name>viewportSnapshots_</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a6e4557410fac459623c7c44b49a0005a" kind="function"><name>UpdateContext</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a47e89a8a5cf18618ffdc6caccd012100" kind="function"><name>viewportSnapshots</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a0197c610dc51fc676bcde9b84545ed7b" kind="function"><name>deltaTime</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1ad7f5caca30eb2409b98e21f48c5a0e45" kind="function"><name>totalTime</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a1c9a47461e487485eeeaaf442510dd68" kind="function"><name>inputSnapshot</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a006a361316386a5d08617793cb358355" kind="function"><name>commandBuffer</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a538cadeb656147150f4a12261d67c7f7" kind="function"><name>session</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a459e72fe47399985183cc6ca35531dfa" kind="function"><name>gameWorld</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a7308ea8a5fe81ac196b1501554d21d61" kind="function"><name>pushPass</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a5a17fe1e9fb5409938ec9d9442887ffe" kind="function"><name>pushPhase</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1af2268c3ee45b07619f013e4d81a05b83" kind="function"><name>readPhase</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a3e5fef71dad1d4fc531446a1138f8634" kind="function"><name>readPass</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a5fa74f194fbee96f883d6964df940bef" kind="function"><name>readFrame</name></member>
-    <member refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a7973f73a32e697f534ed311cef2f50d4" kind="function"><name>pushFrame</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a1e3fa9c1dcdfaf13e5681ab4db47267f" kind="variable"><name>deltaTime_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1ad8635a324305a486e832080139c909d0" kind="variable"><name>totalTime_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a1ad9d6444e0838c8828d99e3af901bd9" kind="variable"><name>inputSnapshot_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a8982323be50e6d8531e6eb14c0686629" kind="variable"><name>session_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1ad92be0e4a26acdf1127051c4de51101f" kind="variable"><name>phaseEventSink_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a8700d32762b0438d5fe669e51b91fea8" kind="variable"><name>phaseEventSource_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a908950ece5f0b4890fa37db4b5619e67" kind="variable"><name>passEventSink_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a3b6a639ea710a380f6ac18758aec89a3" kind="variable"><name>passEventSource_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1abb9f01425d1bd319565e8a2b8854b2d5" kind="variable"><name>frameEventSink_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a4b866110f44603ccda72bccb5d0c4f87" kind="variable"><name>frameEventSource_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a374ba20a00710abe05bf8d41150648f3" kind="variable"><name>viewportSnapshots_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1ae1ace27c91fa880cc8e26083ebbcd250" kind="variable"><name>resourceRegistry_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a420048edb6bab64cef2d01930349571c" kind="variable"><name>entityResolver_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a532d3589c0f5507adb8abdc51f5b7d75" kind="variable"><name>level_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a186df1b69195b2e1b62baf532aadf252" kind="function"><name>UpdateContext</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a47e89a8a5cf18618ffdc6caccd012100" kind="function"><name>viewportSnapshots</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a0197c610dc51fc676bcde9b84545ed7b" kind="function"><name>deltaTime</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1ad7f5caca30eb2409b98e21f48c5a0e45" kind="function"><name>totalTime</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a1c9a47461e487485eeeaaf442510dd68" kind="function"><name>inputSnapshot</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1adaeb79c72c7affdd5c3197556c82665e" kind="function"><name>resourceRegistry</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a00808c02ff76f7293914879b02b29509" kind="function"><name>resourceRegistry</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1aba16db6e6b434f908f937e2a225d7337" kind="function"><name>find</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a3fe9e7e3a39b27014a72342968e0a3b4" kind="function"><name>entityResolver</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1ac28d2e3d69b43ef90a3a962a5bf3ef3c" kind="function"><name>level</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1acca71a785767cdcd326787dedba216b9" kind="function"><name>commandBuffer</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a538cadeb656147150f4a12261d67c7f7" kind="function"><name>session</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a7308ea8a5fe81ac196b1501554d21d61" kind="function"><name>pushPass</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a5a17fe1e9fb5409938ec9d9442887ffe" kind="function"><name>pushPhase</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1af2268c3ee45b07619f013e4d81a05b83" kind="function"><name>readPhase</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a3e5fef71dad1d4fc531446a1138f8634" kind="function"><name>readPass</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a5fa74f194fbee96f883d6964df940bef" kind="function"><name>readFrame</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a7973f73a32e697f534ed311cef2f50d4" kind="function"><name>pushFrame</name></member>
   </compound>
   <compound refid="module__helios_8engine_8state" kind="module"><name>helios.engine.state</name>
+  </compound>
+  <compound refid="module__helios_8engine_8state_8Bindings" kind="module"><name>helios.engine.state.Bindings</name>
+    <member refid="structhelios_1_1engine_1_1state_1_1types_1_1StateTransitionId_3_01helios_1_1engine_1_1mechanics_45d1fe060e024a568800acdb9ff2360e_1a4bc8c96734f1ef1fd6eee95914580eda" kind="typedef"><name>Type</name></member>
+    <member refid="structhelios_1_1engine_1_1state_1_1types_1_1StateTransitionId_3_01helios_1_1engine_1_1mechanics_c728608f128895f4489bedfff494ec28_1a80ab0e0ff228ff55ced5694ed237ba76" kind="typedef"><name>Type</name></member>
   </compound>
   <compound refid="module__helios_8engine_8state_8CombinedStateToIdMapPair" kind="module"><name>helios.engine.state.CombinedStateToIdMapPair</name>
     <member refid="classhelios_1_1engine_1_1state_1_1CombinedStateToIdMapPair_1a5a8dde795b4e167c1360db796f1a8bfa" kind="variable"><name>states_</name></member>
@@ -10442,8 +10471,6 @@
     <member refid="classhelios_1_1engine_1_1state_1_1commands_1_1StateCommand_1a987339f8584460de6304f8b053649dae" kind="variable"><name>transitionRequest_</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1commands_1_1StateCommand_1ace83f6aeefac821836ae3fd9cbcb099c" kind="function"><name>StateCommand</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1commands_1_1StateCommand_1a0668e1b654f07b3fb5c3eb2606961e25" kind="function"><name>transitionRequest</name></member>
-    <member refid="classhelios_1_1engine_1_1state_1_1commands_1_1StateCommand_1a4bfc45d9d244e6150d64573ba9ea6fd5" kind="function"><name>execute</name></member>
-    <member refid="classhelios_1_1engine_1_1state_1_1commands_1_1StateCommand_1a71c21f2e0e387d0251ca87d058a00c27" kind="function"><name>accept</name></member>
   </compound>
   <compound refid="module__helios_8engine_8state_8components" kind="module"><name>helios.engine.state.components</name>
   </compound>
@@ -10454,12 +10481,6 @@
     <member refid="classhelios_1_1engine_1_1state_1_1components_1_1StateComponent_1a7601e23fab908350fd99ca7c705311b8" kind="function"><name>state</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1components_1_1StateComponent_1a5765623510c9707702fb22e3b9cf8788" kind="function"><name>setStateFromTransitionContext</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1components_1_1StateComponent_1a77ca84a25d37303deccb76d414d83267" kind="function"><name>transitionId</name></member>
-  </compound>
-  <compound refid="module__helios_8engine_8state_8dispatcher" kind="module"><name>helios.engine.state.dispatcher</name>
-  </compound>
-  <compound refid="module__helios_8engine_8state_8dispatcher_8StateCommandDispatcher" kind="module"><name>helios.engine.state.dispatcher.StateCommandDispatcher</name>
-    <member refid="classhelios_1_1engine_1_1state_1_1dispatcher_1_1StateCommandDispatcher_1ac088de7049af1199a3b757b1964f8bb2" kind="function"><name>dispatchTyped</name></member>
-    <member refid="classhelios_1_1engine_1_1state_1_1dispatcher_1_1StateCommandDispatcher_1ab73b00670ad5d386d29ca502715adc9e" kind="function"><name>StateCommandDispatcher</name></member>
   </compound>
   <compound refid="module__helios_8engine_8state_8listeners" kind="module"><name>helios.engine.state.listeners</name>
   </compound>
@@ -10489,8 +10510,8 @@
     <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a3080c1d2709031429bb557c11b4e843c" kind="function"><name>signalEnter</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a1123ae4a933d5b6a9da97b3ff91f624f" kind="function"><name>StateManager</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a2e7db1e0999cebc060246a224139fcdb" kind="function"><name>addStateListener</name></member>
-    <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1af596b7158c7753e319d8030c3faad9b1" kind="function"><name>flush</name></member>
-    <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a19df21f7ae037e26e5296abd4a03cc38" kind="function"><name>submit</name></member>
+    <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a7b16869a9d0d8b511b76ac568339fea1" kind="function"><name>flush</name></member>
+    <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a053488fdbe36259adf10bd51474677a6" kind="function"><name>submit</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a176a52f4173536aa3fde8324f1f72cb6" kind="function"><name>init</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1abd21bd2f4c2738a52d1854d3389f3488" kind="function"><name>reset</name></member>
   </compound>

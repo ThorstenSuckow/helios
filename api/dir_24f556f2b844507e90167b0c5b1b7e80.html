@@ -121,10 +121,10 @@ Files</h2></td></tr>
 <tr class="memdesc:LambdaStateListener_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lambda-based listener for state transitions. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md702"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md711"></a>
 helios::engine::state::listeners</h1>
 <p>Listeners for observing state transitions.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md703"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md712"></a>
 Components</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -132,15 +132,15 @@ Components</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">LambdaStateListener&lt;StateType&gt;</span>  </td><td class="markdownTableBodyNone">Lambda-based listener implementation  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md704"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md713"></a>
 Usage</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md705"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md714"></a>
 Full listener (exit, transition, enter)</h2>
 <div class="fragment"><div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacehelios_1_1engine_1_1state_1_1listeners.html">helios::engine::state::listeners</a>;</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">auto</span> listener = std::make_unique&lt;LambdaStateListener&lt;GameState&gt;&gt;(</div>
 <div class="line">    <span class="comment">// onExit</span></div>
-<div class="line">    [](<span class="keyword">auto</span>&amp; ctx, GameState from) {</div>
+<div class="line">    [](<span class="keyword">auto</span>&amp; ctx, <a class="code hl_enumeration" href="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a8e0bcae228fdf9f4cb489e7f912d80be">GameState</a> from) {</div>
 <div class="line">        <span class="comment">// Handle state exit</span></div>
 <div class="line">    },</div>
 <div class="line">    <span class="comment">// onTransition</span></div>
@@ -148,21 +148,22 @@ Full listener (exit, transition, enter)</h2>
 <div class="line">        <span class="comment">// Handle transition</span></div>
 <div class="line">    },</div>
 <div class="line">    <span class="comment">// onEnter</span></div>
-<div class="line">    [](<span class="keyword">auto</span>&amp; ctx, GameState to) {</div>
+<div class="line">    [](<span class="keyword">auto</span>&amp; ctx, <a class="code hl_enumeration" href="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a8e0bcae228fdf9f4cb489e7f912d80be">GameState</a> to) {</div>
 <div class="line">        <span class="comment">// Handle state entry</span></div>
 <div class="line">    }</div>
 <div class="line">);</div>
 <div class="line"> </div>
 <div class="line">stateManager.addStateListener(std::move(listener));</div>
+<div class="ttc" id="anamespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_html_a8e0bcae228fdf9f4cb489e7f912d80be"><div class="ttname"><a href="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a8e0bcae228fdf9f4cb489e7f912d80be">helios::engine::mechanics::gamestate::types::GameState</a></div><div class="ttdeci">GameState</div><div class="ttdoc">Enumeration of possible game states.</div><div class="ttdef"><b>Definition</b> <a href="GameState_8ixx_source.html#l00027">GameState.ixx:27</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1engine_1_1state_1_1listeners_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1state_1_1listeners.html">helios::engine::state::listeners</a></div><div class="ttdoc">State transition listeners.</div><div class="ttdef"><b>Definition</b> <a href="LambdaStateListener_8ixx_source.html#l00020">LambdaStateListener.ixx:20</a></div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md706"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md715"></a>
 Enter-only listener</h2>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> enterListener = std::make_unique&lt;LambdaStateListener&lt;GameState&gt;&gt;(</div>
-<div class="line">    [](<span class="keyword">auto</span>&amp; ctx, GameState to) {</div>
+<div class="line">    [](<span class="keyword">auto</span>&amp; ctx, <a class="code hl_enumeration" href="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a8e0bcae228fdf9f4cb489e7f912d80be">GameState</a> to) {</div>
 <div class="line">        <span class="comment">// Handle state entry</span></div>
 <div class="line">    }</div>
 <div class="line">);</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md707"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md716"></a>
 Transition-only listener</h2>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> transitionListener = std::make_unique&lt;LambdaStateListener&lt;GameState&gt;&gt;(</div>
 <div class="line">    [](<span class="keyword">auto</span>&amp; ctx, <a class="code hl_class" href="classhelios_1_1engine_1_1state_1_1types_1_1StateTransitionContext.html">StateTransitionContext&lt;GameState&gt;</a> transitionCtx) {</div>

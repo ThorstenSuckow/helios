@@ -5,6 +5,7 @@
     <innerfile refid="helios_2engine_2core_2data_2__module_8ixx">helios/engine/core/data/_module.ixx</innerfile>
     <innerfile refid="ActionId_8ixx">ActionId.ixx</innerfile>
     <innerfile refid="CollisionLayer_8ixx">CollisionLayer.ixx</innerfile>
+    <innerfile refid="CommandTypeId_8ixx">CommandTypeId.ixx</innerfile>
     <innerfile refid="ComponentTypeId_8ixx">ComponentTypeId.ixx</innerfile>
     <innerfile refid="EntityId_8ixx">EntityId.ixx</innerfile>
     <innerfile refid="EntityTombstone_8ixx">EntityTombstone.ixx</innerfile>
@@ -13,6 +14,7 @@
     <innerfile refid="GameTimerId_8ixx">GameTimerId.ixx</innerfile>
     <innerfile refid="MenuId_8ixx">MenuId.ixx</innerfile>
     <innerfile refid="PrefabId_8ixx">PrefabId.ixx</innerfile>
+    <innerfile refid="ResourceTypeId_8ixx">ResourceTypeId.ixx</innerfile>
     <innerfile refid="SceneId_8ixx">SceneId.ixx</innerfile>
     <innerfile refid="ScorePoolId_8ixx">ScorePoolId.ixx</innerfile>
     <innerfile refid="ScoreTypeId_8ixx">ScoreTypeId.ixx</innerfile>
@@ -24,13 +26,14 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md112">
+<sect1 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md120">
 <title>helios::engine::core::data</title><para>Data structures for efficient entity management and querying.</para>
 <para>This module provides core data structures used for managing GameObjects within the helios engine.</para>
 </sect1>
-<sect1 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md113">
+<sect1 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md121">
 <title>Components</title><para><itemizedlist>
 <listitem><para><bold>CollisionLayer</bold> - Strongly-typed identifier for collision layers.</para>
+</listitem><listitem><para><bold>CommandTypeId</bold> - Compile-time type identifier for command types.</para>
 </listitem><listitem><para><bold>ComponentTypeId</bold> - Compile-time type identifier for O(1) component indexing within GameObject.</para>
 </listitem><listitem><para><bold>EntityId</bold> - Unique identifier for an entity within an EntityPool.</para>
 </listitem><listitem><para><bold>EntityTombstone</bold> - Sentinel value for invalid sparse array indices.</para>
@@ -40,6 +43,7 @@
 </listitem><listitem><para><bold>GameObjectPoolRegistry</bold> - Central registry managing multiple pools by ID.</para>
 </listitem><listitem><para><bold>GameObjectFilter</bold> - Bitmask enum for filtering entities by active/inactive state and component state.</para>
 </listitem><listitem><para><bold>GameObjectView</bold> - Lazy range adapter for component-filtered iteration with structured binding support.</para>
+</listitem><listitem><para><bold>ResourceTypeId</bold> - Compile-time type identifier for engine resources (Managers, CommandBuffers).</para>
 </listitem><listitem><para><bold>ScorePoolId</bold> - Strongly-typed identifier for score pools.</para>
 </listitem><listitem><para><bold>ScoreTypeId</bold> - Strongly-typed identifier for score types.</para>
 </listitem><listitem><para><bold>SpawnProfileId</bold> - Strongly-typed identifier for spawn profiles.</para>
@@ -49,8 +53,8 @@
 </listitem></itemizedlist>
 </para>
 </sect1>
-<sect1 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md114">
-<title>Strongly-Typed IDs</title><sect2 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md115">
+<sect1 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md122">
+<title>Strongly-Typed IDs</title><sect2 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md123">
 <title>String-Based IDs (FNV-1a Hashing)</title><para>The ID types <computeroutput>FontId</computeroutput>, <computeroutput>GameObjectPoolId</computeroutput>, <computeroutput>ScorePoolId</computeroutput>, <computeroutput>SpawnProfileId</computeroutput>, <computeroutput>SpawnRuleId</computeroutput>, and <computeroutput>ViewportId</computeroutput> provide type-safe identifiers constructed from string literals using FNV-1a hashing:</para>
 <para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Compile-time<sp/>constant<sp/>IDs<sp/>from<sp/>strings</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>GameObjectPoolId<sp/>ENEMY_POOL{</highlight><highlight class="stringliteral">&quot;enemies&quot;</highlight><highlight class="normal">};</highlight></codeline>
@@ -65,16 +69,22 @@
 <codeline><highlight class="normal">scheduler.addRule(ENEMY_PROFILE,<sp/>std::make_unique&lt;TimerSpawnRule&gt;(WAVE_RULE,<sp/>2.0f,<sp/>5));</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md116">
-<title>Type-Based IDs (TypeIndexer)</title><para><computeroutput>ComponentTypeId</computeroutput> and <computeroutput>ScoreTypeId</computeroutput> use <computeroutput>TypeIndexer</computeroutput> to generate unique, monotonically increasing IDs for each type at compile time:</para>
+<sect2 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md124">
+<title>Type-Based IDs (TypeIndexer)</title><para><computeroutput>ComponentTypeId</computeroutput>, <computeroutput>ScoreTypeId</computeroutput>, <computeroutput>CommandTypeId</computeroutput>, and <computeroutput>ResourceTypeId</computeroutput> use <computeroutput>TypeIndexer</computeroutput> to generate unique, monotonically increasing IDs for each type at compile time:</para>
 <para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Get<sp/>unique<sp/>ID<sp/>for<sp/>a<sp/>component<sp/>type</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>typeId<sp/>=<sp/>ComponentTypeId::id&lt;HealthComponent&gt;();</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Get<sp/>unique<sp/>ID<sp/>for<sp/>a<sp/>score<sp/>type</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>scoreId<sp/>=<sp/>ScoreTypeId::id&lt;KillScore&gt;();</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Get<sp/>unique<sp/>ID<sp/>for<sp/>a<sp/>resource<sp/>type<sp/>(used<sp/>by<sp/>ResourceRegistry)</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>resId<sp/>=<sp/>ResourceTypeId::id&lt;SpawnManager&gt;();</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Get<sp/>unique<sp/>ID<sp/>for<sp/>a<sp/>command<sp/>type</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>cmdId<sp/>=<sp/>CommandTypeId::id&lt;DespawnCommand&gt;();</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md117">
+<sect2 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md125">
 <title>Entity IDs (EntityPool)</title><para><computeroutput>EntityId</computeroutput> and <computeroutput>VersionId</computeroutput> are used together in <computeroutput>EntityHandle</computeroutput> for safe entity references within an <computeroutput>EntityPool</computeroutput>:</para>
 <para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>EntityHandle<sp/>combines<sp/>EntityId<sp/>+<sp/>VersionId</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">EntityHandle<sp/>{</highlight></codeline>

@@ -19,8 +19,10 @@ var searchData=
   ['renderqueue_16',['RenderQueue',['../classhelios_1_1rendering_1_1RenderQueue.html',1,'helios::rendering']]],
   ['rendertarget_17',['RenderTarget',['../classhelios_1_1rendering_1_1RenderTarget.html',1,'helios::rendering']]],
   ['requestedamountisavailablecondition_18',['RequestedAmountIsAvailableCondition',['../classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1conditions_1_1RequestedAmountIsAvailableCondition.html',1,'helios::engine::runtime::spawn::policy::conditions']]],
-  ['rhombus_19',['Rhombus',['../structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Rhombus.html',1,'helios::rendering::asset::shape::basic']]],
-  ['rotationstatecomponent_20',['RotationStateComponent',['../classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent.html',1,'helios::engine::modules::spatial::transform::components']]],
-  ['ruleconfig_21',['RuleConfig',['../structhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1RuleConfig.html',1,'helios::engine::runtime::spawn::scheduling']]],
-  ['ruleprocessor_22',['RuleProcessor',['../classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1RuleProcessor.html',1,'helios::engine::runtime::spawn::scheduling']]]
+  ['resourceregistry_19',['ResourceRegistry',['../classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html',1,'helios::engine::runtime::world']]],
+  ['resourcetypeid_20',['ResourceTypeId',['../classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId.html',1,'helios::engine::core::data']]],
+  ['rhombus_21',['Rhombus',['../structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Rhombus.html',1,'helios::rendering::asset::shape::basic']]],
+  ['rotationstatecomponent_22',['RotationStateComponent',['../classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent.html',1,'helios::engine::modules::spatial::transform::components']]],
+  ['ruleconfig_23',['RuleConfig',['../structhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1RuleConfig.html',1,'helios::engine::runtime::spawn::scheduling']]],
+  ['ruleprocessor_24',['RuleProcessor',['../classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1RuleProcessor.html',1,'helios::engine::runtime::spawn::scheduling']]]
 ];

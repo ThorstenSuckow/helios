@@ -107,27 +107,38 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>World state management and per-frame update context.  
+<p>World state management, resource registry, and per-frame update context.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:GameWorld" id="r_GameWorld"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">GameWorld</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Central registry for game entities, managers, pools, and the active level.  <a href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Central game state container for entities, resources, and the active level.  <a href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Level" id="r_Level"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Level.html">Level</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a game level containing the scene graph and world boundaries.  <a href="classhelios_1_1engine_1_1runtime_1_1world_1_1Level.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Manager" id="r_Manager"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html">Manager</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract base class for managers that process deferred operations.  <a href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html#details">More...</a><br /></td></tr>
+<tr class="memitem:ResourceRegistry" id="r_ResourceRegistry"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html">ResourceRegistry</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-indexed registry for engine resources with O(1) lookup.  <a href="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Session" id="r_Session"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Session.html">Session</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Holds session-level state for the current game instance.  <a href="classhelios_1_1engine_1_1runtime_1_1world_1_1Session.html#details">More...</a><br /></td></tr>
 <tr class="memitem:SystemRegistry" id="r_SystemRegistry"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry.html">SystemRegistry</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Container for System instances within a game loop pass.  <a href="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry.html#details">More...</a><br /></td></tr>
-<tr class="memitem:UpdateContext" id="r_UpdateContext"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">UpdateContext</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Context passed to systems and components during per-frame updates.  <a href="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#details">More...</a><br /></td></tr>
+<tr class="memitem:UpdateContext" id="r_UpdateContext"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">UpdateContext</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Per-frame context passed to systems during game loop updates.  <a href="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#details">More...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-concepts" class="groupheader"><a id="concepts" name="concepts"></a>
+Concepts</h2></td></tr>
+<tr class="memitem:IsManager" id="r_IsManager"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1engine_1_1runtime_1_1world_1_1IsManager.html">IsManager</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept constraining types that derive from Manager. <br /></td></tr>
+<tr class="memitem:IsCommandBuffer" id="r_IsCommandBuffer"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1engine_1_1runtime_1_1world_1_1IsCommandBuffer.html">IsCommandBuffer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept constraining types that derive from CommandBuffer. <br /></td></tr>
+<tr class="memitem:IsCommandHandler" id="r_IsCommandHandler"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1engine_1_1runtime_1_1world_1_1IsCommandHandler.html">IsCommandHandler</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept constraining types that derive from CommandHandler. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>World state management and per-frame update context. </p>
-<p>Provides <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html" title="Central registry for game entities, managers, pools, and the active level.">GameWorld</a> for entity management, <a class="el" href="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html" title="Context passed to systems and components during per-frame updates.">UpdateContext</a> for frame state, <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Level.html" title="Represents a game level containing the scene graph and world boundaries.">Level</a> for world bounds, and <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry.html" title="Container for System instances within a game loop pass.">SystemRegistry</a> for system organization. </p>
+<div class="textblock"><p>World state management, resource registry, and per-frame update context. </p>
+<p>Provides <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html" title="Central game state container for entities, resources, and the active level.">GameWorld</a> as the root game state container, <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html" title="Type-indexed registry for engine resources with O(1) lookup.">ResourceRegistry</a> for type-indexed O(1) resource access, <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html" title="Per-frame context passed to systems during game loop updates.">UpdateContext</a> for frame state, <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Session.html" title="Holds session-level state for the current game instance.">Session</a> for cross-frame state, <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Level.html" title="Represents a game level containing the scene graph and world boundaries.">Level</a> for world bounds, and <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry.html" title="Container for System instances within a game loop pass.">SystemRegistry</a> for system organization. </p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

@@ -120,7 +120,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ac7faf345113488c83b07c5b7c381d0dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the rule's condition state.  <br /></td></tr>
 <tr class="memitem:a05b2dc8dd44e1145e09ec3a572c75027" id="r_a05b2dc8dd44e1145e09ec3a572c75027"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition.html">SpawnCondition</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a05b2dc8dd44e1145e09ec3a572c75027">spawnCondition</a> () const noexcept</td></tr>
 <tr class="memdesc:a05b2dc8dd44e1145e09ec3a572c75027"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the spawn condition.  <br /></td></tr>
-<tr class="memitem:a71619bd915eb81db9506579596b96cb8" id="r_a71619bd915eb81db9506579596b96cb8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnPlan.html">helios::engine::runtime::spawn::scheduling::SpawnPlan</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a71619bd915eb81db9506579596b96cb8">evaluate</a> (const <a class="el" href="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId.html">helios::engine::core::data::GameObjectPoolId</a> gameObjectPoolId, const <a class="el" href="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolSnapshot.html">helios::engine::runtime::pooling::GameObjectPoolSnapshot</a> &amp;poolSnapshot, const <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRuleState.html">SpawnRuleState</a> &amp;spawnRuleState, const <a class="el" href="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a> &amp;updateContext)</td></tr>
+<tr class="memitem:a71619bd915eb81db9506579596b96cb8" id="r_a71619bd915eb81db9506579596b96cb8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnPlan.html">helios::engine::runtime::spawn::scheduling::SpawnPlan</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a71619bd915eb81db9506579596b96cb8">evaluate</a> (const <a class="el" href="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId.html">helios::engine::core::data::GameObjectPoolId</a> gameObjectPoolId, const <a class="el" href="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolSnapshot.html">helios::engine::runtime::pooling::GameObjectPoolSnapshot</a> &amp;poolSnapshot, const <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRuleState.html">SpawnRuleState</a> &amp;spawnRuleState, const <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a> &amp;updateContext)</td></tr>
 <tr class="memdesc:a71619bd915eb81db9506579596b96cb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates the rule and returns a spawn plan.  <br /></td></tr>
 <tr class="memitem:a998bf175aa56f604fb180d52f98686f1" id="r_a998bf175aa56f604fb180d52f98686f1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structhelios_1_1engine_1_1core_1_1data_1_1SpawnRuleId.html">helios::engine::core::data::SpawnRuleId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a998bf175aa56f604fb180d52f98686f1">spawnRuleId</a> () const noexcept</td></tr>
 <tr class="memdesc:a998bf175aa56f604fb180d52f98686f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the rule's unique identifier.  <br /></td></tr>
@@ -133,7 +133,7 @@ Public Member Functions</h2></td></tr>
 <li>**SpawnAmountProvider:** Determines how many to spawn</li>
 </ul>
 <p>The SpawnScheduler evaluates rules each frame and creates SpawnPlans for rules whose conditions are satisfied.</p>
-<p>Example: ```cpp auto rule = std::make_unique&lt;SpawnRule&gt;( std::make_unique&lt;TimerSpawnCondition&gt;(2.0f), std::make_unique&lt;FixedSpawnAmount&gt;(3), SpawnRuleId{1} ); ```</p>
+<p>Example: ```cpp auto rule = std::make_unique&lt;SpawnRule&gt;( std::make_unique&lt;TimerSpawnCondition&gt;(2.0f), std::make_unique&lt;FixedSpawnAmount&gt;(3), <a class="el" href="structhelios_1_1engine_1_1core_1_1data_1_1SpawnRuleId.html" title="Strongly-typed identifier for SpawnRule instances.">SpawnRuleId</a>{1} ); ```</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition.html" title="Abstract interface for determining when spawning should occur.">SpawnCondition</a> </dd>
 <dd>
 SpawnAmountProvider </dd>
@@ -264,7 +264,7 @@ SpawnScheduler </dd></dl>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>updateContext</em></span>&#160;)</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>updateContext</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -387,7 +387,7 @@ SpawnScheduler </dd></dl>
 </div><div class="memdoc">
 
 <p>Returns the rule's unique identifier. </p>
-<dl class="section return"><dt>Returns</dt><dd>The SpawnRuleId. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="structhelios_1_1engine_1_1core_1_1data_1_1SpawnRuleId.html" title="Strongly-typed identifier for SpawnRule instances.">SpawnRuleId</a>. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="SpawnRule_8ixx_source.html#l00140">140</a> of file <a class="el" href="SpawnRule_8ixx_source.html">SpawnRule.ixx</a>.</p>
 

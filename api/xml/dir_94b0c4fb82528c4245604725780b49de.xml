@@ -4,10 +4,10 @@
     <compoundname>state</compoundname>
     <innerdir refid="dir_c533d1b00932fdf129a636cbef0bfb01">commands</innerdir>
     <innerdir refid="dir_7a23a44b7b02552993267eb30c5e34a1">components</innerdir>
-    <innerdir refid="dir_1d18a8675d36aec09032e08314ab095c">dispatcher</innerdir>
     <innerdir refid="dir_24f556f2b844507e90167b0c5b1b7e80">listeners</innerdir>
     <innerdir refid="dir_eb8c49aae6ff5f1b4e001fb64cc65036">types</innerdir>
     <innerfile refid="helios_2engine_2state_2__module_8ixx">helios/engine/state/_module.ixx</innerfile>
+    <innerfile refid="Bindings_8ixx">Bindings.ixx</innerfile>
     <innerfile refid="CombinedStateToIdMapPair_8ixx">CombinedStateToIdMapPair.ixx</innerfile>
     <innerfile refid="StateCommandHandler_8ixx">StateCommandHandler.ixx</innerfile>
     <innerfile refid="StateManager_8ixx">StateManager.ixx</innerfile>
@@ -18,22 +18,22 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md709">
+<sect1 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md718">
 <title>helios::engine::state</title><para>Generic, template-based state management system with rule-based transitions.</para>
 </sect1>
-<sect1 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md710">
+<sect1 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md719">
 <title>Overview</title><para>This module provides a complete state management framework including:</para>
 <para><itemizedlist>
 <listitem><para><bold>State machines</bold> with rule-based transitions and guards</para>
-</listitem><listitem><para><bold>Commands and dispatchers</bold> for requesting state changes</para>
+</listitem><listitem><para><bold>Commands</bold> for requesting state changes via the TypedCommandBuffer</para>
 </listitem><listitem><para><bold>Listeners</bold> for reacting to state transitions</para>
 </listitem><listitem><para><bold>ID mapping utilities</bold> for associating states with viewports/menus</para>
 </listitem></itemizedlist>
 </para>
 <para>All components are parameterized by state type, enabling reuse for different state enums (e.g., GameState, MatchState).</para>
 </sect1>
-<sect1 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md711">
-<title>Core Components</title><sect2 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md712">
+<sect1 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md720">
+<title>Core Components</title><sect2 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md721">
 <title>State Management</title><para><table rows="8" cols="2"><row>
 <entry thead="yes"><para>Class  </para>
 </entry><entry thead="yes"><para>Description  </para>
@@ -59,17 +59,17 @@
 </entry><entry thead="no"><para>Command for requesting transitions  </para>
 </entry></row>
 <row>
-<entry thead="no"><para><computeroutput>StateCommandDispatcher&lt;StateType&gt;</computeroutput>  </para>
-</entry><entry thead="no"><para>Routes commands to handlers  </para>
-</entry></row>
-<row>
 <entry thead="no"><para><computeroutput>StateComponent&lt;StateType&gt;</computeroutput>  </para>
 </entry><entry thead="no"><para>Stores current state on entities  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>Bindings</computeroutput>  </para>
+</entry><entry thead="no"><para>Compile-time specializations mapping state types to transition ID types  </para>
 </entry></row>
 </table>
 </para>
 </sect2>
-<sect2 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md713">
+<sect2 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md722">
 <title>ID Mapping</title><para><table rows="4" cols="2"><row>
 <entry thead="yes"><para>Class  </para>
 </entry><entry thead="yes"><para>Description  </para>
@@ -90,7 +90,7 @@
 </para>
 </sect2>
 </sect1>
-<sect1 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md714">
+<sect1 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md723">
 <title>Type Trait Specialization</title><para>To use <computeroutput>StateManager&lt;YourState&gt;</computeroutput>, you must specialize <computeroutput>StateTransitionId</computeroutput>:</para>
 <para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>In<sp/>your<sp/>bindings<sp/>module:</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;&gt;</highlight></codeline>
@@ -99,8 +99,8 @@
 <codeline><highlight class="normal">};</highlight></codeline>
 </programlisting></para>
 </sect1>
-<sect1 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md715">
-<title>Usage</title><sect2 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md716">
+<sect1 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md724">
+<title>Usage</title><sect2 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md725">
 <title>Defining Rules</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1state" kindref="compound">helios::engine::state</ref>;</highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1state_1_1types" kindref="compound">helios::engine::state::types</ref>;</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
@@ -115,12 +115,12 @@
 <codeline><highlight class="normal">};</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md717">
+<sect2 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md726">
 <title>Creating the Manager</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>gameStateManager<sp/>=<sp/>std::make_unique&lt;StateManager&lt;GameState&gt;&gt;(gameStateRules);</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal">gameStateManager-&gt;addStateListener(</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>std::make_unique&lt;LambdaStateListener&lt;GameState&gt;&gt;(</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[](</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>ctx,<sp/>GameState<sp/>from)<sp/>{<sp/></highlight><highlight class="comment">/*<sp/>onExit<sp/>*/</highlight><highlight class="normal"><sp/>},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[](</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>ctx,<sp/><ref refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80be" kindref="member">GameState</ref><sp/>from)<sp/>{<sp/></highlight><highlight class="comment">/*<sp/>onExit<sp/>*/</highlight><highlight class="normal"><sp/>},</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[](</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>ctx,<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>transitionCtx)<sp/>{<sp/></highlight><highlight class="comment">/*<sp/>onTransition<sp/>*/</highlight><highlight class="normal"><sp/>},</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[](</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>ctx,<sp/><ref refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80be" kindref="member">GameState</ref><sp/>to)<sp/>{<sp/></highlight><highlight class="comment">/*<sp/>onEnter<sp/>*/</highlight><highlight class="normal"><sp/>}</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>)</highlight></codeline>
@@ -129,7 +129,7 @@
 <codeline><highlight class="normal">gameLoop.addManager(std::move(gameStateManager));</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md718">
+<sect2 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md727">
 <title>Requesting Transitions</title><para><programlisting filename=".cpp"><codeline><highlight class="normal">updateContext.commandBuffer().add&lt;<ref refid="classhelios_1_1engine_1_1state_1_1commands_1_1StateCommand" kindref="compound">StateCommand&lt;GameState&gt;</ref>&gt;(</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1engine_1_1state_1_1types_1_1StateTransitionRequest" kindref="compound">StateTransitionRequest&lt;GameState&gt;</ref>{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GameState::Running,</highlight></codeline>
@@ -139,10 +139,10 @@
 </programlisting></para>
 </sect2>
 </sect1>
-<sect1 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md719">
-<title>Transition Flow</title><para>1. <computeroutput>StateCommand</computeroutput> is submitted to the command buffer 2. <computeroutput>StateCommandDispatcher</computeroutput> routes it to <computeroutput>StateManager</computeroutput> 3. <computeroutput>StateManager::flush()</computeroutput> processes pending commands 4. Matching rule is found and guard is evaluated 5. Listeners are notified: <computeroutput>onStateExit</computeroutput> → <computeroutput>onStateTransition</computeroutput> → <computeroutput>onStateEnter</computeroutput> 6. Session state is updated</para>
+<sect1 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md728">
+<title>Transition Flow</title><para>1. <computeroutput>StateCommand</computeroutput> is submitted to the EngineCommandBuffer 2. <computeroutput>TypedCommandHandler&lt;StateCommand&lt;T&gt;&gt;</computeroutput> routes it to <computeroutput>StateManager</computeroutput> 3. <computeroutput>StateManager::flush()</computeroutput> processes pending commands 4. Matching rule is found and guard is evaluated 5. Listeners are notified: <computeroutput>onStateExit</computeroutput> → <computeroutput>onStateTransition</computeroutput> → <computeroutput>onStateEnter</computeroutput> 6. Session state is updated</para>
 </sect1>
-<sect1 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md720">
+<sect1 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md729">
 <title>ID Mapping</title><para>For viewport/menu activation based on state:</para>
 <para><programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classhelios_1_1engine_1_1state_1_1CombinedStateToIdMapPair" kindref="compound">CombinedStateToIdMapPair&lt;GameState, MatchState, ViewportId&gt;</ref><sp/>viewportPolicy;</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>

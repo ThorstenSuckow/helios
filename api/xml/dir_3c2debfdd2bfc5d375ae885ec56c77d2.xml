@@ -8,18 +8,18 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_3c2debfdd2bfc5d375ae885ec56c77d2_1autotoc_md596">
+<sect1 id="dir_3c2debfdd2bfc5d375ae885ec56c77d2_1autotoc_md615">
 <title>helios::engine::runtime::messaging</title><para>Communication infrastructure for commands and events within the game loop.</para>
-<para>This module provides the messaging backbone for the helios engine. It includes the Command pattern implementation for buffering and executing game actions, as well as event buses for decoupled inter-system communication.</para>
+<para>This module provides the messaging backbone for the helios engine. It includes the compile-time typed Command system for buffering and routing game actions to handlers, as well as event buses for decoupled inter-system communication.</para>
 </sect1>
-<sect1 id="dir_3c2debfdd2bfc5d375ae885ec56c77d2_1autotoc_md597">
+<sect1 id="dir_3c2debfdd2bfc5d375ae885ec56c77d2_1autotoc_md616">
 <title>Submodules</title><para><table rows="3" cols="2"><row>
 <entry thead="yes"><para>Submodule  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>command/</computeroutput>  </para>
-</entry><entry thead="no"><para>Command buffer, dispatchers, and command types  </para>
+</entry><entry thead="no"><para>Compile-time typed command buffer, handler routing, and EngineCommandBuffer  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>event/</computeroutput>  </para>
@@ -28,36 +28,36 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_3c2debfdd2bfc5d375ae885ec56c77d2_1autotoc_md598">
-<title>Key Classes</title><sect2 id="dir_3c2debfdd2bfc5d375ae885ec56c77d2_1autotoc_md599">
+<sect1 id="dir_3c2debfdd2bfc5d375ae885ec56c77d2_1autotoc_md617">
+<title>Key Classes</title><sect2 id="dir_3c2debfdd2bfc5d375ae885ec56c77d2_1autotoc_md618">
 <title>Command</title><para><table rows="6" cols="2"><row>
 <entry thead="yes"><para>Class  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>CommandBuffer</computeroutput>  </para>
-</entry><entry thead="no"><para>Collects commands and flushes to dispatchers  </para>
+</entry><entry thead="no"><para>Abstract base for command buffers  </para>
 </entry></row>
 <row>
-<entry thead="no"><para><computeroutput>WorldCommand</computeroutput>  </para>
-</entry><entry thead="no"><para>Command operating on GameWorld state  </para>
+<entry thead="no"><para><computeroutput>CommandHandler</computeroutput>  </para>
+</entry><entry thead="no"><para>Abstract base for type-erased handler storage  </para>
 </entry></row>
 <row>
-<entry thead="no"><para><computeroutput>TargetedCommand</computeroutput>  </para>
-</entry><entry thead="no"><para>Command targeting a specific GameObject  </para>
+<entry thead="no"><para><computeroutput>TypedCommandHandler&lt;T&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para>Type-safe handler for a specific command type  </para>
 </entry></row>
 <row>
-<entry thead="no"><para><computeroutput>WorldCommandDispatcher</computeroutput>  </para>
-</entry><entry thead="no"><para>Routes world commands to handlers  </para>
+<entry thead="no"><para><computeroutput>TypedCommandBuffer&lt;...Cmds&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para>Compile-time typed buffer with per-type queues  </para>
 </entry></row>
 <row>
-<entry thead="no"><para><computeroutput>TargetedCommandDispatcher</computeroutput>  </para>
-</entry><entry thead="no"><para>Routes targeted commands to handlers  </para>
+<entry thead="no"><para><computeroutput>EngineCommandBuffer</computeroutput>  </para>
+</entry><entry thead="no"><para>Concrete facade with all engine command types  </para>
 </entry></row>
 </table>
 </para>
 </sect2>
-<sect2 id="dir_3c2debfdd2bfc5d375ae885ec56c77d2_1autotoc_md600">
+<sect2 id="dir_3c2debfdd2bfc5d375ae885ec56c77d2_1autotoc_md619">
 <title>Event</title><para><table rows="2" cols="2"><row>
 <entry thead="yes"><para>Class  </para>
 </entry><entry thead="yes"><para>Purpose  </para>

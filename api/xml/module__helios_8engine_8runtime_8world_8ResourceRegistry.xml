@@ -1,0 +1,458 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8engine_8runtime_8world_8ResourceRegistry" kind="module">
+    <compoundname>helios.engine.runtime.world.ResourceRegistry</compoundname>
+    <innerfile refid="ResourceRegistry_8ixx">ResourceRegistry.ixx</innerfile>
+    <innerclass refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry" prot="public">helios::engine::runtime::world::ResourceRegistry</innerclass>
+    <innerconcept refid="concepthelios_1_1engine_1_1runtime_1_1world_1_1IsManager">helios::engine::runtime::world::IsManager</innerconcept>
+    <innerconcept refid="concepthelios_1_1engine_1_1runtime_1_1world_1_1IsCommandBuffer">helios::engine::runtime::world::IsCommandBuffer</innerconcept>
+    <innerconcept refid="concepthelios_1_1engine_1_1runtime_1_1world_1_1IsCommandHandler">helios::engine::runtime::world::IsCommandHandler</innerconcept>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1ab893cdc7b7dfc022f52b90baa196ae8b" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; ErasedUnique &gt;</type>
+        <definition>std::vector&lt;ErasedUnique&gt; helios::engine::runtime::world::ResourceRegistry::owned_</definition>
+        <argsstring></argsstring>
+        <name>owned_</name>
+        <qualifiedname>helios::engine::runtime::world::ResourceRegistry::owned_</qualifiedname>
+        <briefdescription>
+<para>Owning storage for all heap-allocated resources. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" line="92" column="21" bodyfile="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1adcdc3928d64eff4e225efef9fefaf241" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; Manager * &gt;</type>
+        <definition>std::vector&lt;Manager*&gt; helios::engine::runtime::world::ResourceRegistry::managers_</definition>
+        <argsstring></argsstring>
+        <name>managers_</name>
+        <qualifiedname>helios::engine::runtime::world::ResourceRegistry::managers_</qualifiedname>
+        <briefdescription>
+<para>Non-owning pointers to registered Managers for iteration. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" line="97" column="21" bodyfile="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1ac1e0bebfcdedc77fc7da3a08fae81267" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; CommandBuffer * &gt;</type>
+        <definition>std::vector&lt;CommandBuffer*&gt; helios::engine::runtime::world::ResourceRegistry::commandBuffers_</definition>
+        <argsstring></argsstring>
+        <name>commandBuffers_</name>
+        <qualifiedname>helios::engine::runtime::world::ResourceRegistry::commandBuffers_</qualifiedname>
+        <briefdescription>
+<para>Non-owning pointers to registered CommandBuffers for iteration. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" line="102" column="21" bodyfile="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1af9a80295a69dd62798bcd5de1feec7de" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; CommandHandler * &gt;</type>
+        <definition>std::vector&lt;CommandHandler*&gt; helios::engine::runtime::world::ResourceRegistry::commandHandlers_</definition>
+        <argsstring></argsstring>
+        <name>commandHandlers_</name>
+        <qualifiedname>helios::engine::runtime::world::ResourceRegistry::commandHandlers_</qualifiedname>
+        <briefdescription>
+<para>Non-owning pointers to registered CommandHandlers. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" line="107" column="21" bodyfile="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a9828f4f10f6e1a8734c23bcd7e44bf74" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; void * &gt;</type>
+        <definition>std::vector&lt;void*&gt; helios::engine::runtime::world::ResourceRegistry::fastAccess_</definition>
+        <argsstring></argsstring>
+        <name>fastAccess_</name>
+        <qualifiedname>helios::engine::runtime::world::ResourceRegistry::fastAccess_</qualifiedname>
+        <briefdescription>
+<para>Flat array for O(1) type-indexed resource lookup. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Indexed by `ResourceTypeId::id&lt;T&gt;().value()`. Each slot holds a raw `void*` to the resource instance. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" line="115" column="21" bodyfile="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" bodystart="115" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a71c88e4711c542c493f9c41825f76a85" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>T &amp;</type>
+        <definition>T &amp; helios::engine::runtime::world::ResourceRegistry::registerResource</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>registerResource</name>
+        <qualifiedname>helios::engine::runtime::world::ResourceRegistry::registerResource</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Creates and registers an owning resource. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Heap-allocates a resource of type T, stores it in `owned_` via <ref refid="structhelios_1_1core_1_1memory_1_1ErasedUnique" kindref="compound">ErasedUnique</ref>, and indexes it in `fastAccess_`. If T derives from <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> or <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer" kindref="compound">CommandBuffer</ref>, it is additionally tracked in the corresponding iteration list.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The resource type. Must derive from <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> or <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer" kindref="compound">CommandBuffer</ref>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Constructor argument types.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Arguments forwarded to the T constructor.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to the newly created resource.</para>
+</simplesect>
+<simplesect kind="pre"><para>No resource of type T is already registered. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" line="138" column="7" bodyfile="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" bodystart="138" bodyend="164"/>
+        <references refid="classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId_1a90dff317be585026a0516e6eb0dfc2e9" compoundref="ResourceTypeId_8ixx" startline="87" endline="90">helios::engine::core::data::ResourceTypeId::id</references>
+        <references refid="classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId_1a798d7c173ee476ac27e8101ec5bb257a" compoundref="ResourceTypeId_8ixx" startline="71" endline="73">helios::engine::core::data::ResourceTypeId::value</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a9bab978496643ba428b8166184103cd8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>T &amp;</type>
+        <definition>T &amp; helios::engine::runtime::world::ResourceRegistry::registerResource</definition>
+        <argsstring>(T &amp;ref)</argsstring>
+        <name>registerResource</name>
+        <qualifiedname>helios::engine::runtime::world::ResourceRegistry::registerResource</qualifiedname>
+        <param>
+          <type>T &amp;</type>
+          <declname>ref</declname>
+        </param>
+    <requiresclause>std::derived_from&lt;T, <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler" kindref="compound">CommandHandler</ref>&gt;    </requiresclause>
+        <briefdescription>
+<para>Registers a non-owning <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler" kindref="compound">CommandHandler</ref> reference. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Stores a pointer to an externally owned <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler" kindref="compound">CommandHandler</ref> in `fastAccess_` and `commandHandlers_`. The handler must outlive this registry (typically guaranteed because the handler is a <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> that is already owned by this registry).</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler" kindref="compound">CommandHandler</ref> type. Must derive from <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler" kindref="compound">CommandHandler</ref>.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ref</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the handler to register.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to the registered handler.</para>
+</simplesect>
+<simplesect kind="pre"><para>No resource of type T is already registered. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" line="184" column="7" bodyfile="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" bodystart="184" bodyend="208"/>
+        <references refid="classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId_1a90dff317be585026a0516e6eb0dfc2e9" compoundref="ResourceTypeId_8ixx" startline="87" endline="90">helios::engine::core::data::ResourceTypeId::id</references>
+        <references refid="classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId_1a798d7c173ee476ac27e8101ec5bb257a" compoundref="ResourceTypeId_8ixx" startline="71" endline="73">helios::engine::core::data::ResourceTypeId::value</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a4a7fa60f4d0fb1925a0d8c78037c5b93" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool helios::engine::runtime::world::ResourceRegistry::has</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>has</name>
+        <qualifiedname>helios::engine::runtime::world::ResourceRegistry::has</qualifiedname>
+        <briefdescription>
+<para>Checks whether a resource of type T is registered. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The resource type to check.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if registered, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" line="218" column="10" bodyfile="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" bodystart="218" bodyend="221"/>
+        <references refid="classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId_1a90dff317be585026a0516e6eb0dfc2e9" compoundref="ResourceTypeId_8ixx" startline="87" endline="90">helios::engine::core::data::ResourceTypeId::id</references>
+        <references refid="classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId_1a798d7c173ee476ac27e8101ec5bb257a" compoundref="ResourceTypeId_8ixx" startline="71" endline="73">helios::engine::core::data::ResourceTypeId::value</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a11562a65e70f32bf894460020bacf6de" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>T &amp;</type>
+        <definition>T &amp; helios::engine::runtime::world::ResourceRegistry::resource</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>resource</name>
+        <qualifiedname>helios::engine::runtime::world::ResourceRegistry::resource</qualifiedname>
+        <briefdescription>
+<para>Returns a reference to a registered resource. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The resource type.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to the resource.</para>
+</simplesect>
+<simplesect kind="pre"><para>A resource of type T must be registered. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" line="233" column="7" bodyfile="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" bodystart="233" bodyend="237"/>
+        <references refid="classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId_1a90dff317be585026a0516e6eb0dfc2e9" compoundref="ResourceTypeId_8ixx" startline="87" endline="90">helios::engine::core::data::ResourceTypeId::id</references>
+        <references refid="classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId_1a798d7c173ee476ac27e8101ec5bb257a" compoundref="ResourceTypeId_8ixx" startline="71" endline="73">helios::engine::core::data::ResourceTypeId::value</references>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAll_1a496fad85a648d7bc01515f613bf6b3cb" compoundref="SpawnAll_8ixx" startline="45" endline="52">helios::engine::runtime::spawn::policy::amount::SpawnAll::getAmount</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1ad755b403ab228b91d906e9dc8547caa2" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>const T &amp;</type>
+        <definition>const T &amp; helios::engine::runtime::world::ResourceRegistry::resource</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>resource</name>
+        <qualifiedname>helios::engine::runtime::world::ResourceRegistry::resource</qualifiedname>
+        <briefdescription>
+<para>Returns a reference to a registered resource.    </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The resource type.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to the resource.</para>
+</simplesect>
+<simplesect kind="pre"><para>A resource of type T must be registered.    </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" line="243" column="13" bodyfile="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" bodystart="243" bodyend="247"/>
+        <references refid="classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId_1a90dff317be585026a0516e6eb0dfc2e9" compoundref="ResourceTypeId_8ixx" startline="87" endline="90">helios::engine::core::data::ResourceTypeId::id</references>
+        <references refid="classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId_1a798d7c173ee476ac27e8101ec5bb257a" compoundref="ResourceTypeId_8ixx" startline="71" endline="73">helios::engine::core::data::ResourceTypeId::value</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a36c02739412c272a7c6fab30e0a90d98" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>T *</type>
+        <definition>T * helios::engine::runtime::world::ResourceRegistry::tryResource</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>tryResource</name>
+        <qualifiedname>helios::engine::runtime::world::ResourceRegistry::tryResource</qualifiedname>
+        <briefdescription>
+<para>Returns a pointer to a registered resource, or nullptr. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The resource type.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to the resource, or nullptr if not registered. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" line="257" column="7" bodyfile="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" bodystart="257" bodyend="263"/>
+        <references refid="classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId_1a90dff317be585026a0516e6eb0dfc2e9" compoundref="ResourceTypeId_8ixx" startline="87" endline="90">helios::engine::core::data::ResourceTypeId::id</references>
+        <references refid="classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId_1a798d7c173ee476ac27e8101ec5bb257a" compoundref="ResourceTypeId_8ixx" startline="71" endline="73">helios::engine::core::data::ResourceTypeId::value</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1ad4b7717b6f2445c9d234cb9fb0594658" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>const T *</type>
+        <definition>const T * helios::engine::runtime::world::ResourceRegistry::tryResource</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>tryResource</name>
+        <qualifiedname>helios::engine::runtime::world::ResourceRegistry::tryResource</qualifiedname>
+        <briefdescription>
+<para>Returns a pointer to a registered resource, or nullptr.    </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The resource type.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to the resource, or nullptr if not registered.    </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" line="269" column="13" bodyfile="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" bodystart="269" bodyend="275"/>
+        <references refid="classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId_1a90dff317be585026a0516e6eb0dfc2e9" compoundref="ResourceTypeId_8ixx" startline="87" endline="90">helios::engine::core::data::ResourceTypeId::id</references>
+        <references refid="classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId_1a798d7c173ee476ac27e8101ec5bb257a" compoundref="ResourceTypeId_8ixx" startline="71" endline="73">helios::engine::core::data::ResourceTypeId::value</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a05e0269ef59954066304d444264ee133" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::span&lt; Manager *const &gt;</type>
+        <definition>std::span&lt; Manager *const  &gt; helios::engine::runtime::world::ResourceRegistry::managers</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>managers</name>
+        <qualifiedname>helios::engine::runtime::world::ResourceRegistry::managers</qualifiedname>
+        <briefdescription>
+<para>Returns a read-only span of registered Managers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Span of <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> pointers. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" line="283" column="15" bodyfile="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" bodystart="283" bodyend="285"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1aea2adfeb9c3dccf20d0fa6aa8a2a5581" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::span&lt; Manager * &gt;</type>
+        <definition>std::span&lt; Manager * &gt; helios::engine::runtime::world::ResourceRegistry::managers</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>managers</name>
+        <qualifiedname>helios::engine::runtime::world::ResourceRegistry::managers</qualifiedname>
+        <briefdescription>
+<para>Returns a mutable span of registered Managers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Span of <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> pointers. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" line="292" column="15" bodyfile="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" bodystart="292" bodyend="294"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a8ccc085b30e324d32fcd8bcf1d5f338f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::span&lt; CommandBuffer *const &gt;</type>
+        <definition>std::span&lt; CommandBuffer *const  &gt; helios::engine::runtime::world::ResourceRegistry::commandBuffers</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>commandBuffers</name>
+        <qualifiedname>helios::engine::runtime::world::ResourceRegistry::commandBuffers</qualifiedname>
+        <briefdescription>
+<para>Returns a read-only span of registered CommandBuffers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Span of <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer" kindref="compound">CommandBuffer</ref> pointers. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" line="301" column="15" bodyfile="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" bodystart="301" bodyend="303"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1aa8aeafec5ba655ccacde623ad32f40ec" compoundref="GameLoop_8ixx" startline="236" endline="249">helios::engine::runtime::gameloop::GameLoop::phaseCommit</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a6a3fbd714901feffe20c01fa7996956f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::span&lt; CommandBuffer * &gt;</type>
+        <definition>std::span&lt; CommandBuffer * &gt; helios::engine::runtime::world::ResourceRegistry::commandBuffers</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>commandBuffers</name>
+        <qualifiedname>helios::engine::runtime::world::ResourceRegistry::commandBuffers</qualifiedname>
+        <briefdescription>
+<para>Returns a mutable span of registered CommandBuffers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Span of <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer" kindref="compound">CommandBuffer</ref> pointers. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" line="310" column="15" bodyfile="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" bodystart="310" bodyend="312"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/runtime/world/ResourceRegistry.ixx" line="12" column="15"/>
+  </compounddef>
+</doxygen>

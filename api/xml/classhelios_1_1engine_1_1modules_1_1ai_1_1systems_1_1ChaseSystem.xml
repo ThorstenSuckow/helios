@@ -12,7 +12,7 @@
         <qualifiedname>helios::engine::modules::ai::systems::ChaseSystem::update</qualifiedname>
         <reimplements refid="classhelios_1_1engine_1_1ecs_1_1System_1a4e9969641985fa04db6214332c88605b">update</reimplements>
         <param>
-          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
           <declname>updateContext</declname>
         </param>
         <briefdescription>
@@ -34,7 +34,7 @@
         </inbodydescription>
         <location file="/tmp/h/include/helios/engine/modules/ai/systems/ChaseSystem.ixx" line="52" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ai/systems/ChaseSystem.ixx" bodystart="52" bodyend="92"/>
         <references refid="namespacehelios_1_1math_1af25d93f23f91acae02abfd7706b2e36d" compoundref="utils_8ixx" startline="22">helios::math::EPSILON_LENGTH</references>
-        <references refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" compoundref="System_8ixx" startline="48">helios::engine::ecs::System::gameWorld_</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" compoundref="System_8ixx" startline="51">helios::engine::ecs::System::gameWorld_</references>
         <references refid="structhelios_1_1math_1_1vec3_1a3bbdd06a78770b9dadc233e0acca4295" compoundref="vec3_8ixx" startline="434" endline="448">helios::math::vec3&lt; T &gt;::normalize</references>
         <references refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1TranslationStateComponent_1a1f7f42f2f5bca1af05e04db397d0634f" compoundref="TranslationStateComponent_8ixx" startline="137" endline="139">helios::engine::modules::spatial::transform::components::TranslationStateComponent::translation</references>
       </memberdef>
@@ -65,11 +65,11 @@
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="11">
+      <node id="8">
         <label>helios::engine::ecs::EntityManager</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1EntityManager"/>
       </node>
-      <node id="10">
+      <node id="7">
         <label>helios::engine::ecs::EntityRegistry</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry"/>
       </node>
@@ -86,27 +86,11 @@
         <label>helios::engine::ecs::Updatable</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1Updatable"/>
       </node>
-      <node id="6">
-        <label>helios::engine::mechanics::scoring::ScoreCommandHandler</label>
-        <link refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler"/>
-      </node>
-      <node id="7">
-        <label>helios::engine::mechanics::timing::TimerCommandHandler</label>
-        <link refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerCommandHandler"/>
-      </node>
       <node id="1">
         <label>helios::engine::modules::ai::systems::ChaseSystem</label>
         <link refid="classhelios_1_1engine_1_1modules_1_1ai_1_1systems_1_1ChaseSystem"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
-      </node>
-      <node id="8">
-        <label>helios::engine::modules::ui::UiActionCommandHandler</label>
-        <link refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandHandler"/>
-      </node>
-      <node id="9">
-        <label>helios::engine::runtime::spawn::SpawnCommandHandlerRegistry</label>
-        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandlerRegistry"/>
       </node>
       <node id="4">
         <label>helios::engine::runtime::world::GameWorld</label>
@@ -115,28 +99,23 @@
           <edgelabel>logger_</edgelabel>
         </childnode>
         <childnode refid="6" relation="usage">
-          <edgelabel>scoreCommandHandler_</edgelabel>
+          <edgelabel>resourceRegistry_</edgelabel>
         </childnode>
         <childnode refid="7" relation="usage">
-          <edgelabel>timerCommandHandler_</edgelabel>
-        </childnode>
-        <childnode refid="8" relation="usage">
-          <edgelabel>uiActionCommandHandler_</edgelabel>
-        </childnode>
-        <childnode refid="9" relation="usage">
-          <edgelabel>spawnCommandHandlerRegistry_</edgelabel>
-        </childnode>
-        <childnode refid="10" relation="usage">
           <edgelabel>entityRegistry_</edgelabel>
         </childnode>
-        <childnode refid="11" relation="usage">
+        <childnode refid="8" relation="usage">
           <edgelabel>em_</edgelabel>
         </childnode>
-        <childnode refid="12" relation="usage">
+        <childnode refid="9" relation="usage">
           <edgelabel>session_</edgelabel>
         </childnode>
       </node>
-      <node id="12">
+      <node id="6">
+        <label>helios::engine::runtime::world::ResourceRegistry</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry"/>
+      </node>
+      <node id="9">
         <label>helios::engine::runtime::world::Session</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session"/>
       </node>

@@ -103,444 +103,129 @@ $(function() {
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">helios::engine::runtime::messaging::command::CommandBuffer Class Reference<span class="mlabels"><span class="mlabel export">export</span></span><div class="ingroups">module <a class="el" href="module__helios_8engine_8runtime_8messaging_8command_8CommandBuffer.html">helios.engine.runtime.messaging.command.CommandBuffer</a></div></div></div>
+  <div class="headertitle"><div class="title">helios::engine::runtime::messaging::command::CommandBuffer Class Reference<span class="mlabels"><span class="mlabel abstract">abstract</span><span class="mlabel export">export</span></span><div class="ingroups">module <a class="el" href="module__helios_8engine_8runtime_8messaging_8command_8CommandBuffer.html">helios.engine.runtime.messaging.command.CommandBuffer</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Queue for deferred execution of game commands.  
+<p>Abstract base for command buffers that collect and flush commands.  
  <a href="#details">More...</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:ab0123534ad152ae9688e781682aa879f" id="r_ab0123534ad152ae9688e781682aa879f"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; <br />
-requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand.html">TargetedCommand</a>, T&gt;</td></tr>
-<tr class="memitem:ab0123534ad152ae9688e781682aa879f template"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html">CommandBuffer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab0123534ad152ae9688e781682aa879f">addDispatcher</a> (std::unique_ptr&lt; <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedTargetedCommandDispatcher.html">helios::engine::runtime::messaging::command::TypedTargetedCommandDispatcher</a>&lt; T &gt; &gt; d)</td></tr>
-<tr class="memdesc:ab0123534ad152ae9688e781682aa879f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a dispatcher for a specific <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand.html" title="Abstract base class for commands targeting a specific GameObject.">TargetedCommand</a> type.  <br /></td></tr>
-<tr class="memitem:a222f4ebdac7a7530166f3350f14ae71e" id="r_a222f4ebdac7a7530166f3350f14ae71e"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; <br />
-requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand.html">TargetedCommand</a>, T&gt;</td></tr>
-<tr class="memitem:a222f4ebdac7a7530166f3350f14ae71e template"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a222f4ebdac7a7530166f3350f14ae71e">hasDispatcher</a> () const</td></tr>
-<tr class="memdesc:a222f4ebdac7a7530166f3350f14ae71e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a dispatcher is registered for a specific <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand.html" title="Abstract base class for commands targeting a specific GameObject.">TargetedCommand</a> type.  <br /></td></tr>
-<tr class="memitem:a71febda44a137e545cb260cea2d1b9b6" id="r_a71febda44a137e545cb260cea2d1b9b6"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; <br />
-requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand.html">WorldCommand</a>, T&gt;</td></tr>
-<tr class="memitem:a71febda44a137e545cb260cea2d1b9b6 template"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html">CommandBuffer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a71febda44a137e545cb260cea2d1b9b6">addDispatcher</a> (std::unique_ptr&lt; <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher.html">helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher</a>&lt; T &gt; &gt; d)</td></tr>
-<tr class="memdesc:a71febda44a137e545cb260cea2d1b9b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a dispatcher for a specific <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand.html" title="Abstract base class for commands that operate on the entire GameWorld.">WorldCommand</a> type.  <br /></td></tr>
-<tr class="memitem:ae38bd4c38ca9714e8d8b83e840929ca9" id="r_ae38bd4c38ca9714e8d8b83e840929ca9"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; <br />
-requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand.html">WorldCommand</a>, T&gt;</td></tr>
-<tr class="memitem:ae38bd4c38ca9714e8d8b83e840929ca9 template"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae38bd4c38ca9714e8d8b83e840929ca9">hasDispatcher</a> () const</td></tr>
-<tr class="memdesc:ae38bd4c38ca9714e8d8b83e840929ca9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a dispatcher is registered for a specific <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand.html" title="Abstract base class for commands that operate on the entire GameWorld.">WorldCommand</a> type.  <br /></td></tr>
-<tr class="memitem:ae86242f86c27014387f22b448112dd81" id="r_ae86242f86c27014387f22b448112dd81"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... Args&gt; <br />
-requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand.html">TargetedCommand</a>, T&gt;</td></tr>
-<tr class="memitem:ae86242f86c27014387f22b448112dd81 template"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae86242f86c27014387f22b448112dd81">add</a> (const <a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a> &amp;entityHandle, Args &amp;&amp;...args)</td></tr>
-<tr class="memdesc:ae86242f86c27014387f22b448112dd81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a command targeting a GameObject identified by Guid.  <br /></td></tr>
-<tr class="memitem:aefadad69c3bb4d3dd76d627e1775bb0d" id="r_aefadad69c3bb4d3dd76d627e1775bb0d"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... Args&gt; <br />
-requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand.html">WorldCommand</a>, T&gt;</td></tr>
-<tr class="memitem:aefadad69c3bb4d3dd76d627e1775bb0d template"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aefadad69c3bb4d3dd76d627e1775bb0d">add</a> (Args &amp;&amp;...args)</td></tr>
-<tr class="memdesc:aefadad69c3bb4d3dd76d627e1775bb0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a world command to the buffer.  <br /></td></tr>
-<tr class="memitem:accac0953fe00e2fe4c480334bdd826ec" id="r_accac0953fe00e2fe4c480334bdd826ec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html">CommandBuffer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#accac0953fe00e2fe4c480334bdd826ec">flush</a> (<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">helios::engine::runtime::world::GameWorld</a> &amp;gameWorld)</td></tr>
-<tr class="memdesc:accac0953fe00e2fe4c480334bdd826ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes all buffered commands against the GameWorld and clears the buffer.  <br /></td></tr>
-<tr class="memitem:a550e52c6233fe6b04ccf66b984a07dce" id="r_a550e52c6233fe6b04ccf66b984a07dce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html">CommandBuffer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a550e52c6233fe6b04ccf66b984a07dce">clear</a> ()</td></tr>
-<tr class="memdesc:a550e52c6233fe6b04ccf66b984a07dce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all buffered commands without executing them.  <br /></td></tr>
-</table>
-<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Queue for deferred execution of game commands. </p>
-<p>The `CommandBuffer` provides a queue for game commands, decoupling their creation from their execution. Commands are buffered along with their target `GameObject` identifiers (`Guid`) and are executed in a single batch when `flush()` is called against a `GameWorld`.</p>
-<p>Typical usage pattern: ```cpp <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Queue for deferred execution of game commands.">helios::engine::runtime::messaging::command::CommandBuffer</a> cmdBuffer; <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html" title="Central registry for game entities, managers, pools, and the active level.">helios::engine::runtime::world::GameWorld</a> world;</p>
-<p>// Queue commands during input processing cmdBuffer.add(player.guid(), std::make_unique&lt;MoveCommand&gt;(direction, speed)); cmdBuffer.add(enemy.guid(), std::make_unique&lt;AttackCommand&gt;(target));</p>
-<p>// Execute all commands at end of frame cmdBuffer.flush(world); // Executes and clears buffer ```</p>
-<dl class="section note"><dt>Note</dt><dd>Commands targeting non-existent GameObjects are silently skipped during <a class="el" href="#accac0953fe00e2fe4c480334bdd826ec" title="Executes all buffered commands against the GameWorld and clears the buffer.">flush()</a>. This behavior will be logged once the logging system is available. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00061">61</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
-</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="aefadad69c3bb4d3dd76d627e1775bb0d" name="aefadad69c3bb4d3dd76d627e1775bb0d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aefadad69c3bb4d3dd76d627e1775bb0d">&#9670;&#160;</a></span>add() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T, typename... Args&gt; <br />
-requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand.html">WorldCommand</a>, T&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void helios::engine::runtime::messaging::command::CommandBuffer::add </td>
-          <td>(</td>
-          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Adds a world command to the buffer. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>The concrete <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand.html" title="Abstract base class for commands that operate on the entire GameWorld.">WorldCommand</a> type to create. </td></tr>
-    <tr><td class="paramname">Args</td><td>Constructor argument types for T.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">args</td><td>Arguments forwarded to the T constructor.</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>WorldCommands operate on the entire GameWorld rather than a specific GameObject. They are executed before TargetedCommands during <a class="el" href="#accac0953fe00e2fe4c480334bdd826ec" title="Executes all buffered commands against the GameWorld and clears the buffer.">flush()</a>. </p>
-
-<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00239">239</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
-
-</div>
-</div>
-<a id="ae86242f86c27014387f22b448112dd81" name="ae86242f86c27014387f22b448112dd81"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae86242f86c27014387f22b448112dd81">&#9670;&#160;</a></span>add() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T, typename... Args&gt; <br />
-requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand.html">TargetedCommand</a>, T&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void helios::engine::runtime::messaging::command::CommandBuffer::add </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>entityHandle</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Adds a command targeting a GameObject identified by Guid. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">guid</td><td>The unique identifier of the target GameObject. </td></tr>
-    <tr><td class="paramname">command</td><td>The command to execute. Ownership is transferred to the buffer.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section pre"><dt>Precondition</dt><dd>command must not be nullptr.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>If command is nullptr, the call is silently ignored (will be logged in future). </dd>
-<dd>
-This overload is useful when the GameObject instance is not directly available, such as in networked scenarios or when processing serialized commands. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00218">218</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="MenuNavigationSystem_8ixx_source.html#l00119">helios::engine::modules::ui::widgets::systems::MenuNavigationSystem::update()</a>.</p>
-<div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Inheritance diagram for helios::engine::runtime::messaging::command::CommandBuffer:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_ae86242f86c27014387f22b448112dd81_icgraph.svg" width="428" height="80"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
-</div>
-</div>
-<a id="ab0123534ad152ae9688e781682aa879f" name="ab0123534ad152ae9688e781682aa879f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab0123534ad152ae9688e781682aa879f">&#9670;&#160;</a></span>addDispatcher() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T&gt; <br />
-requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand.html">TargetedCommand</a>, T&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html">CommandBuffer</a> &amp; helios::engine::runtime::messaging::command::CommandBuffer::addDispatcher </td>
-          <td>(</td>
-          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedTargetedCommandDispatcher.html">helios::engine::runtime::messaging::command::TypedTargetedCommandDispatcher</a>&lt; T &gt; &gt;</td>          <td class="paramname"><span class="paramname"><em>d</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span></span>  </td>
-  </tr>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer__inherit__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ad30a48c89c776560b95ce2e0c1244be4" id="r_ad30a48c89c776560b95ce2e0c1244be4"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad30a48c89c776560b95ce2e0c1244be4">~CommandBuffer</a> ()=default</td></tr>
+<tr class="memdesc:ad30a48c89c776560b95ce2e0c1244be4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor for proper polymorphic cleanup.  <br /></td></tr>
+<tr class="memitem:a8535f5c29283dac178b3b3d2449210d4" id="r_a8535f5c29283dac178b3b3d2449210d4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8535f5c29283dac178b3b3d2449210d4">flush</a> (<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a> &amp;updateContext) noexcept=0</td></tr>
+<tr class="memdesc:a8535f5c29283dac178b3b3d2449210d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes all queued commands and clears the buffer.  <br /></td></tr>
+<tr class="memitem:a79125d01f21544304762287af62d176a" id="r_a79125d01f21544304762287af62d176a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a79125d01f21544304762287af62d176a">clear</a> () noexcept=0</td></tr>
+<tr class="memdesc:a79125d01f21544304762287af62d176a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Discards all queued commands without executing them.  <br /></td></tr>
 </table>
-</div><div class="memdoc">
-
-<p>Registers a dispatcher for a specific <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand.html" title="Abstract base class for commands targeting a specific GameObject.">TargetedCommand</a> type. </p>
-<p>When <a class="el" href="#accac0953fe00e2fe4c480334bdd826ec" title="Executes all buffered commands against the GameWorld and clears the buffer.">flush()</a> processes a command of type T, it will route the command through this dispatcher instead of calling execute() directly.</p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>The concrete <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand.html" title="Abstract base class for commands targeting a specific GameObject.">TargetedCommand</a> type to dispatch.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">d</td><td>The dispatcher instance to register. Ownership is transferred.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section pre"><dt>Precondition</dt><dd>No dispatcher for type T must already be registered.</dd></dl>
-<dl class="section return"><dt>Returns</dt><dd>A reference to **this** <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Queue for deferred execution of game commands.">CommandBuffer</a>. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00138">138</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
-
-<p class="reference">References <a class="el" href="CommandBuffer_8ixx_source.html#l00157">hasDispatcher()</a>.</p>
-<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_ab0123534ad152ae9688e781682aa879f_cgraph.svg" width="519" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
-</div>
-</div>
-<a id="a71febda44a137e545cb260cea2d1b9b6" name="a71febda44a137e545cb260cea2d1b9b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a71febda44a137e545cb260cea2d1b9b6">&#9670;&#160;</a></span>addDispatcher() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T&gt; <br />
-requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand.html">WorldCommand</a>, T&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html">CommandBuffer</a> &amp; helios::engine::runtime::messaging::command::CommandBuffer::addDispatcher </td>
-          <td>(</td>
-          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher.html">helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher</a>&lt; T &gt; &gt;</td>          <td class="paramname"><span class="paramname"><em>d</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Registers a dispatcher for a specific <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand.html" title="Abstract base class for commands that operate on the entire GameWorld.">WorldCommand</a> type. </p>
-<p>When <a class="el" href="#accac0953fe00e2fe4c480334bdd826ec" title="Executes all buffered commands against the GameWorld and clears the buffer.">flush()</a> processes a command of type T, it will route the command through this dispatcher instead of calling execute() directly.</p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>The concrete <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand.html" title="Abstract base class for commands that operate on the entire GameWorld.">WorldCommand</a> type to dispatch.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">d</td><td>The dispatcher instance to register. Ownership is transferred.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section pre"><dt>Precondition</dt><dd>No dispatcher for type T must already be registered.</dd></dl>
-<dl class="section return"><dt>Returns</dt><dd>A reference to **this** <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Queue for deferred execution of game commands.">CommandBuffer</a>. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00179">179</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
-
-<p class="reference">References <a class="el" href="CommandBuffer_8ixx_source.html#l00157">hasDispatcher()</a>.</p>
-<div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-2-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_a71febda44a137e545cb260cea2d1b9b6_cgraph.svg" width="519" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
-</div>
-</div>
-<a id="a550e52c6233fe6b04ccf66b984a07dce" name="a550e52c6233fe6b04ccf66b984a07dce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a550e52c6233fe6b04ccf66b984a07dce">&#9670;&#160;</a></span>clear()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html">CommandBuffer</a> &amp; helios::engine::runtime::messaging::command::CommandBuffer::clear </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Clears all buffered commands without executing them. </p>
-<dl class="section return"><dt>Returns</dt><dd>Reference to this <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Queue for deferred execution of game commands.">CommandBuffer</a> for method chaining.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>This destroys all buffered commands. Use this to discard commands without executing them (e.g., when reverting to a previous game state). </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00314">314</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
-
-<p class="reference">References <a class="el" href="CommandBuffer_8ixx_source.html#l00314">clear()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="CommandBuffer_8ixx_source.html#l00314">clear()</a>, and <a class="el" href="CommandBuffer_8ixx_source.html#l00269">flush()</a>.</p>
-<div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-3-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_a550e52c6233fe6b04ccf66b984a07dce_cgraph.svg" width="194" height="90"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-4-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_a550e52c6233fe6b04ccf66b984a07dce_icgraph.svg" width="424" height="90"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
-</div>
-</div>
-<a id="accac0953fe00e2fe4c480334bdd826ec" name="accac0953fe00e2fe4c480334bdd826ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#accac0953fe00e2fe4c480334bdd826ec">&#9670;&#160;</a></span>flush()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html">CommandBuffer</a> &amp; helios::engine::runtime::messaging::command::CommandBuffer::flush </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">helios::engine::runtime::world::GameWorld</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>gameWorld</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Executes all buffered commands against the GameWorld and clears the buffer. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">gameWorld</td><td>The world containing target GameObjects.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Reference to this <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Queue for deferred execution of game commands.">CommandBuffer</a> for method chaining.</dd></dl>
-<p>Execution proceeds in two phases: 1. **WorldCommands** are processed first. For each command, if a dispatcher is registered for its type, the command is routed via accept(). Otherwise, execute() is called directly. 2. **TargetedCommands** are processed second. Each command's target GameObject is resolved by Guid. If found and a dispatcher exists, the command is routed via accept(). Otherwise, execute() is called directly.</p>
-<dl class="section note"><dt>Note</dt><dd>Commands targeting non-existent GameObjects (i.e., find() returns nullptr) are skipped and a warning is logged. </dd>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Abstract base for command buffers that collect and flush commands. </p>
+<p><a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Abstract base for command buffers that collect and flush commands.">CommandBuffer</a> defines the interface for deferred command execution. Commands are accumulated during the frame and flushed at defined commit points in the game loop. Concrete implementations (e.g., <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer.html" title="Compile-time typed command buffer with per-type queues and handler routing.">TypedCommandBuffer</a>) provide type-safe storage and routing.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer.html" title="Compile-time typed command buffer with per-type queues and handler routing.">TypedCommandBuffer</a> </dd>
 <dd>
-All commands are cleared after execution, regardless of success or failure.</dd></dl>
-<dl class="section warning"><dt>Warning</dt><dd>Command execution should be noexcept. If execute() throws, the flush operation aborts and remaining commands are not executed. </dd></dl>
+<a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer.html" title="Concrete command buffer pre-configured with all engine command types.">EngineCommandBuffer</a> </dd>
+<dd>
+<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html" title="Abstract base class for managers that process deferred operations.">Manager</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00269">269</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
-
-<p class="reference">References <a class="el" href="CommandBuffer_8ixx_source.html#l00314">clear()</a>, and <a class="el" href="GameWorld_8ixx_source.html#l00622">helios::engine::runtime::world::GameWorld::find()</a>.</p>
-<div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-5-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_accac0953fe00e2fe4c480334bdd826ec_cgraph.svg" width="424" height="155"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
-</div>
-</div>
-<a id="ae38bd4c38ca9714e8d8b83e840929ca9" name="ae38bd4c38ca9714e8d8b83e840929ca9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae38bd4c38ca9714e8d8b83e840929ca9">&#9670;&#160;</a></span>hasDispatcher() <span class="overload">[1/2]</span></h2>
+<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00030">30</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ad30a48c89c776560b95ce2e0c1244be4" name="ad30a48c89c776560b95ce2e0c1244be4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad30a48c89c776560b95ce2e0c1244be4">&#9670;&#160;</a></span>~CommandBuffer()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename T&gt; <br />
-requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand.html">WorldCommand</a>, T&gt;</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool helios::engine::runtime::messaging::command::CommandBuffer::hasDispatcher </td>
+          <td class="memname">virtual helios::engine::runtime::messaging::command::CommandBuffer::~CommandBuffer </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const</td>
+          <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span></span>  </td>
+<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel virtual">virtual</span><span class="mlabel default">default</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Checks if a dispatcher is registered for a specific <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand.html" title="Abstract base class for commands that operate on the entire GameWorld.">WorldCommand</a> type. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>The concrete <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand.html" title="Abstract base class for commands that operate on the entire GameWorld.">WorldCommand</a> type to check.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if a dispatcher is registered for type T, false otherwise. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00198">198</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
+<p>Virtual destructor for proper polymorphic cleanup. </p>
 
 </div>
 </div>
-<a id="a222f4ebdac7a7530166f3350f14ae71e" name="a222f4ebdac7a7530166f3350f14ae71e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a222f4ebdac7a7530166f3350f14ae71e">&#9670;&#160;</a></span>hasDispatcher() <span class="overload">[2/2]</span></h2>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a79125d01f21544304762287af62d176a" name="a79125d01f21544304762287af62d176a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79125d01f21544304762287af62d176a">&#9670;&#160;</a></span>clear()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename T&gt; <br />
-requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand.html">TargetedCommand</a>, T&gt;</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool helios::engine::runtime::messaging::command::CommandBuffer::hasDispatcher </td>
+          <td class="memname">virtual void helios::engine::runtime::messaging::command::CommandBuffer::clear </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const</td>
+          <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span></span>  </td>
+<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel pure-virtual">pure virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Checks if a dispatcher is registered for a specific <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand.html" title="Abstract base class for commands targeting a specific GameObject.">TargetedCommand</a> type. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>The concrete <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand.html" title="Abstract base class for commands targeting a specific GameObject.">TargetedCommand</a> type to check.</td></tr>
+<p>Discards all queued commands without executing them. </p>
+
+<p>Implemented in <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer.html#a10b84b9f9d1099022f35fb8f839a4f90">helios::engine::runtime::messaging::command::EngineCommandBuffer</a>, <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer.html#a8e0ac1bed42dc63df2b3f8c270e35758">helios::engine::runtime::messaging::command::TypedCommandBuffer&lt; CommandTypes &gt;</a>, and <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer.html#a8e0ac1bed42dc63df2b3f8c270e35758">helios::engine::runtime::messaging::command::TypedCommandBuffer&lt; helios::engine::mechanics::combat::commands::Aim2DCommand, helios::engine::mechanics::combat::commands::ShootCommand, helios::engine::modules::physics::motion::commands::Move2DCommand, helios::engine::modules::physics::motion::commands::SteeringCommand, helios::engine::mechanics::scoring::commands::UpdateScoreCommand, helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand, helios::engine::runtime::spawn::commands::SpawnCommand, helios::engine::runtime::spawn::commands::DespawnCommand, helios::engine::state::commands::StateCommand&lt; helios::engine::mechanics::gamestate::types::GameState &gt;, helios::engine::state::commands::StateCommand&lt; helios::engine::mechanics::match::types::MatchState &gt;, helios::engine::modules::ui::commands::UiActionCommand, helios::engine::mechanics::timing::commands::TimerControlCommand, helios::engine::mechanics::lifecycle::commands::WorldLifecycleCommand &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a8535f5c29283dac178b3b3d2449210d4" name="a8535f5c29283dac178b3b3d2449210d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8535f5c29283dac178b3b3d2449210d4">&#9670;&#160;</a></span>flush()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void helios::engine::runtime::messaging::command::CommandBuffer::flush </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>updateContext</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel pure-virtual">pure virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Executes all queued commands and clears the buffer. </p>
+<p>Commands are routed to their registered <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandHandler.html" title="Type-safe handler for a specific command type.">TypedCommandHandler</a> if available, otherwise executed directly via their `execute()` method.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">updateContext</td><td>The current frame's update context. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true if a dispatcher is registered for type T, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00157">157</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="CommandBuffer_8ixx_source.html#l00138">addDispatcher()</a>, and <a class="el" href="CommandBuffer_8ixx_source.html#l00179">addDispatcher()</a>.</p>
-<div id="dynsection-6" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-6-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_a222f4ebdac7a7530166f3350f14ae71e_icgraph.svg" width="519" height="144"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p>Implemented in <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer.html#a4f2f838aa913f20181fc0cda507563ef">helios::engine::runtime::messaging::command::EngineCommandBuffer</a>, <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer.html#a1e035c4076ab5658d6cac38badec66ce">helios::engine::runtime::messaging::command::TypedCommandBuffer&lt; CommandTypes &gt;</a>, and <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer.html#a1e035c4076ab5658d6cac38badec66ce">helios::engine::runtime::messaging::command::TypedCommandBuffer&lt; helios::engine::mechanics::combat::commands::Aim2DCommand, helios::engine::mechanics::combat::commands::ShootCommand, helios::engine::modules::physics::motion::commands::Move2DCommand, helios::engine::modules::physics::motion::commands::SteeringCommand, helios::engine::mechanics::scoring::commands::UpdateScoreCommand, helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand, helios::engine::runtime::spawn::commands::SpawnCommand, helios::engine::runtime::spawn::commands::DespawnCommand, helios::engine::state::commands::StateCommand&lt; helios::engine::mechanics::gamestate::types::GameState &gt;, helios::engine::state::commands::StateCommand&lt; helios::engine::mechanics::match::types::MatchState &gt;, helios::engine::modules::ui::commands::UiActionCommand, helios::engine::mechanics::timing::commands::TimerControlCommand, helios::engine::mechanics::lifecycle::commands::WorldLifecycleCommand &gt;</a>.</p>
 
 </div>
 </div>

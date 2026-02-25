@@ -95,8 +95,8 @@ export namespace helios::engine::runtime::world {
                 switch (cmd.action()) {
                     case WorldLifecycleAction::Reset:
                         gameWorld_->reset();
-                        // resetted, do not process further.
-                        break;
+                        // reset complete, do not process further commands.
+                        return;
                 }
             }
 

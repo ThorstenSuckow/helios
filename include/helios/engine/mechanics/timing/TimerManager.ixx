@@ -29,13 +29,13 @@ import helios.engine.runtime.world.GameWorld;
 import helios.core.types;
 import helios.util.Guid;
 
-export namespace helios::engine::mechanics::timing {
+using namespace helios::engine::mechanics::timing::commands;
+using namespace helios::engine::mechanics::timing::types;
+using namespace helios::engine::core::data;
+using namespace helios::engine::runtime::world;
+using namespace helios::engine::runtime::messaging::command;
 
-    using namespace helios::engine::mechanics::timing::commands;
-    using namespace helios::engine::mechanics::timing::types;
-    using namespace helios::engine::core::data;
-    using namespace helios::engine::runtime::world;
-    using namespace helios::engine::runtime::messaging::command;
+export namespace helios::engine::mechanics::timing {
 
     /**
      * @brief Manager that owns game timers and processes timer control commands.

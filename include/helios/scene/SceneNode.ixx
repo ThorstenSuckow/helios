@@ -20,9 +20,9 @@ import helios.math.types;
 import helios.math.transform;
 import helios.math.TransformType;
 
-export namespace helios::scene {
+using namespace helios::core::spatial;
 
-    using namespace helios::core::spatial;
+export namespace helios::scene {
 
     /**
      * @brief SceneGraphKey as passkey idiom for accessing `setWorldTransform()`.

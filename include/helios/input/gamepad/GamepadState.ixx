@@ -18,9 +18,10 @@ import helios.input.types.Gamepad;
 
 
 #define HELIOS_LOG_SCOPE "helios::input::gamepad::GamepadState"
-export namespace helios::input::gamepad {
 
-    using namespace helios::input::types;
+using namespace helios::input::types;
+
+export namespace helios::input::gamepad {
 
     /**
      * @brief A lightweight class for transferring the state of a Gamepad.

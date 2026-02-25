@@ -25,10 +25,9 @@ import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.runtime.world.GameWorld;
 
+using namespace helios::engine::runtime::messaging::command;
 
 export namespace helios::engine::modules::ui {
-
-    using namespace helios::engine::runtime::messaging::command;
 
     /**
      * @brief Manages and processes UI action commands with policy-based dispatch.

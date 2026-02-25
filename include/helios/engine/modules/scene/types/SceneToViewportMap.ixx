@@ -16,11 +16,11 @@ import helios.engine.core.data;
 import helios.scene.Scene;
 import helios.rendering.Viewport;
 
-export namespace helios::engine::modules::scene::types {
+using namespace helios::engine::core::data;
+using namespace helios::scene;
+using namespace helios::rendering;
 
-    using namespace helios::engine::core::data;
-    using namespace helios::scene;
-    using namespace helios::rendering;
+export namespace helios::engine::modules::scene::types {
 
     /**
      * @brief Maps scenes to their associated viewports for rendering.

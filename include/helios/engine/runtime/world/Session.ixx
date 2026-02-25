@@ -27,15 +27,15 @@ import helios.engine.core.data.ViewportId;
 
 import helios.engine.modules.rendering.viewport.components.ActiveViewportIdsStateComponent;
 
+using namespace helios::engine::mechanics::match::types;
+using namespace helios::engine::mechanics::gamestate::types;
+
+using namespace helios::engine::state::types;
+using namespace helios::engine::state::components;
+
+using namespace helios::engine::modules::rendering::viewport::components;
+
 export namespace helios::engine::runtime::world {
-
-    using namespace helios::engine::mechanics::match::types;
-    using namespace helios::engine::mechanics::gamestate::types;
-
-    using namespace helios::engine::state::types;
-    using namespace helios::engine::state::components;
-
-    using namespace helios::engine::modules::rendering::viewport::components;
 
     /**
      * @brief Holds session-level state for the current game instance.

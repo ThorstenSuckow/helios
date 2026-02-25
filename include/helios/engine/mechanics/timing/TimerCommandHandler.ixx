@@ -8,10 +8,9 @@ export module helios.engine.mechanics.timing.TimerCommandHandler;
 
 import helios.engine.mechanics.timing.commands;
 
+using namespace helios::engine::mechanics::timing::commands;
 
 export namespace helios::engine::mechanics::timing {
-
-    using namespace helios::engine::mechanics::timing::commands;
 
     /**
      * @brief Abstract interface for handling TimerControlCommands.

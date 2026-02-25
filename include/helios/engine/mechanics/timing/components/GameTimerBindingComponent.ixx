@@ -11,11 +11,10 @@ import helios.engine.mechanics.timing.types;
 import helios.engine.core.data;
 import helios.core.types;
 
+using namespace helios::engine::core::data;
+using namespace helios::engine::mechanics::timing::types;
 
 export namespace helios::engine::mechanics::timing::components {
-
-    using namespace helios::engine::core::data;
-    using namespace helios::engine::mechanics::timing::types;
 
     /**
      * @brief Component that tracks the revision of a specific GameTimer.

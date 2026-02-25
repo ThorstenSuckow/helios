@@ -17,10 +17,10 @@ import helios.engine.state.types;
 
 import helios.engine.ecs.GameObject;
 
-export namespace helios::engine::state::listeners {
+using namespace helios::engine::state::types;
+using namespace helios::engine::ecs;
 
-    using namespace helios::engine::state::types;
-    using namespace helios::engine::ecs;
+export namespace helios::engine::state::listeners {
 
     /**
      * @brief Lambda-based implementation of StateTransitionListener.

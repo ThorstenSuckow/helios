@@ -20,9 +20,10 @@ import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.core.data;
 
-export namespace helios::engine::modules::rendering::viewport::systems {
+using namespace helios::engine::state;
+using namespace helios::engine::core::data;
 
-    using namespace helios::engine::state;
+export namespace helios::engine::modules::rendering::viewport::systems {
 
     /**
      * @brief Updates the session's active viewport list based on state policy.

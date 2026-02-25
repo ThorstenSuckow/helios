@@ -29,9 +29,9 @@ import helios.engine.modules.scene.types.SceneToViewportMap;
 import helios.engine.modules.scene.components.SceneNodeComponent;
 import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
 
-export namespace helios::engine::modules::scene::systems {
+using namespace helios::engine::modules::scene::types;
 
-    using namespace helios::engine::modules::scene::types;
+export namespace helios::engine::modules::scene::systems {
 
     /**
      * @brief Renders scenes through their configured viewports.

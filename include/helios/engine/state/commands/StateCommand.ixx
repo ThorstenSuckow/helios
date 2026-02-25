@@ -14,10 +14,9 @@ import helios.engine.state.Bindings;
 
 import helios.engine.state.types;
 
+using namespace helios::engine::state::types;
 
 export namespace helios::engine::state::commands {
-
-    using namespace helios::engine::state::types;
 
     /**
      * @brief Command that requests a state transition.

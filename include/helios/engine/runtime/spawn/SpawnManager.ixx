@@ -51,11 +51,11 @@ import helios.engine.modules.physics.collision.components.AabbColliderComponent;
 
 import helios.math;
 
+using namespace helios::engine::runtime::messaging::command;
+using namespace helios::engine::runtime::spawn::commands;
+
 export namespace helios::engine::runtime::spawn {
 
-    using namespace helios::engine::runtime::messaging::command;
-    using namespace helios::engine::runtime::spawn::commands;
-    
     /**
      * @brief Manager for processing spawn and despawn commands.
      *

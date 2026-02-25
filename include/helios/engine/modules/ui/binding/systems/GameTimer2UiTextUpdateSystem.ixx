@@ -23,10 +23,9 @@ import helios.engine.modules.ui.layout;
 
 import helios.engine.mechanics.lifecycle.components.Active;
 
+using namespace helios::engine::mechanics::timing;
 
 export namespace helios::engine::modules::ui::binding::systems {
-
-    using namespace helios::engine::mechanics::timing;
 
     /**
      * @brief System for binding game timer values to UI text components.

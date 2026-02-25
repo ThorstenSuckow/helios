@@ -25,9 +25,9 @@ export namespace helios::engine::runtime::messaging::command  {
     class EngineCommandBuffer;
 }
 
-export namespace helios::engine::runtime::world {
+using namespace helios::engine::runtime::messaging::command;
 
-    using namespace helios::engine::runtime::messaging::command;
+export namespace helios::engine::runtime::world {
 
     class Session;
 

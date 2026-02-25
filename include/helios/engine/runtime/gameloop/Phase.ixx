@@ -22,10 +22,9 @@ import helios.engine.runtime.gameloop.CommitPoint;
 
 import helios.engine.mechanics.gamestate.types;
 
+using namespace helios::engine::mechanics::gamestate::types;
 
 export namespace helios::engine::runtime::gameloop {
-
-    using namespace helios::engine::mechanics::gamestate::types;
     class GameLoop;
 
 

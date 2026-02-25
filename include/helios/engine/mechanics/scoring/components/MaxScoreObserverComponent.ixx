@@ -17,9 +17,9 @@ namespace helios::engine::mechanics::scoring::systems {
     class MaxScoreObserverClearSystem {};
 }
 
-export namespace helios::engine::mechanics::scoring::components {
+using namespace helios::engine::mechanics::scoring::types;
 
-    using namespace helios::engine::mechanics::scoring::types;
+export namespace helios::engine::mechanics::scoring::components {
 
     /**
      * @brief Component that observes and caches the high score value from a ScorePool.

@@ -15,11 +15,10 @@ import helios.engine.state.Bindings;
 import helios.engine.mechanics.match.types;
 import helios.engine.state.types;
 
-export namespace helios::engine::mechanics::match::rules::guards {
+using namespace helios::engine::mechanics::match::types;
+using namespace helios::engine::state::types;
 
-    using namespace helios::engine::mechanics::match::types;
-    using namespace helios::engine::state::types;
-    using namespace helios::engine::mechanics::match::types;
+export namespace helios::engine::mechanics::match::rules::guards {
 
     /**
      * @brief Provides default guard functions for match state transitions.

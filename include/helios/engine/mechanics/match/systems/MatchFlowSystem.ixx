@@ -23,12 +23,12 @@ import helios.engine.mechanics.gamestate.types;
 import helios.engine.ecs;
 import helios.engine.runtime;
 
-export namespace helios::engine::mechanics::match::systems {
+using namespace helios::engine::state::commands;
+using namespace helios::engine::state::types;
+using namespace helios::engine::mechanics::gamestate;
+using namespace helios::engine::mechanics::match::types;
 
-    using namespace helios::engine::state::commands;
-    using namespace helios::engine::state::types;
-    using namespace helios::engine::mechanics::gamestate;
-    using namespace helios::engine::mechanics::match::types;
+export namespace helios::engine::mechanics::match::systems {
 
     /**
      * @brief Automatically advances the match through its state phases.

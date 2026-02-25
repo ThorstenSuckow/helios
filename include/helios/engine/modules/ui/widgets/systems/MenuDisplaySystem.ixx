@@ -29,16 +29,14 @@ import helios.engine.mechanics.match.types;
 import helios.engine.modules.rendering.model.components.ModelAabbComponent;
 import helios.math;
 
+using namespace helios::engine::core::data;
+using namespace helios::engine::state;
+using namespace helios::engine::mechanics::gamestate::types;
+using namespace helios::engine::mechanics::match::types;
+using namespace helios::engine::ecs;
+using namespace helios::engine::modules::ui::widgets::components;
 
 export namespace helios::engine::modules::ui::widgets::systems {
-
-
-    using namespace helios::engine::core::data;
-    using namespace helios::engine::state;
-    using namespace helios::engine::mechanics::gamestate::types;
-    using namespace helios::engine::mechanics::match::types;
-    using namespace helios::engine::ecs;
-    using namespace helios::engine::modules::ui::widgets::components;
 
     /**
      * @brief Controls menu visibility based on game and match state.

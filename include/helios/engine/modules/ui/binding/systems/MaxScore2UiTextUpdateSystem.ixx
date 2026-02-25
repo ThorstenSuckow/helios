@@ -23,10 +23,9 @@ import helios.engine.modules.ui.widgets.components.UiTextComponent;
 
 import helios.engine.mechanics.lifecycle.components.Active;
 
+using namespace helios::engine::mechanics::scoring;
 
 export namespace helios::engine::modules::ui::binding::systems {
-
-    using namespace helios::engine::mechanics::scoring;
 
     /**
      * @brief System for binding high score values to UI text components.

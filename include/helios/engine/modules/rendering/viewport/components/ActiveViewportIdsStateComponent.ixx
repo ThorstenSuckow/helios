@@ -15,11 +15,11 @@ import helios.engine.core.data;
 import helios.engine.mechanics.gamestate.types;
 import helios.engine.mechanics.match.types;
 
-export namespace helios::engine::modules::rendering::viewport::components {
+using namespace helios::engine::mechanics::gamestate::types;
+using namespace helios::engine::mechanics::match::types;
+using namespace helios::engine::core::data;
 
-    using namespace helios::engine::mechanics::gamestate::types;
-    using namespace helios::engine::mechanics::match::types;
-    using namespace helios::engine::core::data;
+export namespace helios::engine::modules::rendering::viewport::components {
 
     /**
      * @brief Stores the currently active viewport IDs based on game/match state.

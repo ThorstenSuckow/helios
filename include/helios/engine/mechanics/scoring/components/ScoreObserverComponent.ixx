@@ -19,9 +19,9 @@ namespace helios::engine::mechanics::scoring::systems {
     class ScoreObserverClearSystem {};
 }
 
-export namespace helios::engine::mechanics::scoring::components {
+using namespace helios::engine::mechanics::scoring::types;
 
-    using namespace helios::engine::mechanics::scoring::types;
+export namespace helios::engine::mechanics::scoring::components {
 
     /**
      * @brief Component that observes and caches the score value from a ScorePool.

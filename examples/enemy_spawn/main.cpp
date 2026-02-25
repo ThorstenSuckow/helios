@@ -34,6 +34,7 @@ using namespace helios::util::io;
 using namespace helios::scene;
 using namespace helios::math;
 using namespace helios::engine::state;
+using namespace helios::engine::state::types;
 
 // ============================================================================
 // Entry Point

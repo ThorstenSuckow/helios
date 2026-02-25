@@ -11,9 +11,9 @@ export module helios.engine.modules.ui.layout.components.TimeFormatterComponent;
 
 import helios.engine.modules.ui.layout.types.TimeDisplayMode;
 
-export namespace helios::engine::modules::ui::layout::components {
+using namespace helios::engine::modules::ui::layout::types;
 
-    using namespace helios::engine::modules::ui::layout::types;
+export namespace helios::engine::modules::ui::layout::components {
 
     /**
      * @brief Component that formats elapsed or remaining time into a display string.

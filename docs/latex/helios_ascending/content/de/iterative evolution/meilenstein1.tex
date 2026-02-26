@@ -1,0 +1,22 @@
+\subsection{Meilenstein 1: Die Anwendungsschicht}
+
+Der erste Meilenstein beinhaltete das technische Fundament, in welches das spätere Spiel eingebettet werden sollte.\\
+
+\noindent
+Zu diesem Zeitpunkt lag der Fokus auf der Abstraktion der Rendering Engine, von Eventsystemen und des Window Systems sowie einem ersten Entwurf der Inputverarbeitung, ohne jedoch die durch das spätere Hinzufügen der Game Engine tieferen Schichten zu berücksichtigen.
+Aus diesem Grund finden sich auch in der derzitigen Version noch Designentscheidungen, die in tieferen Shcichten nicht mehr zu finden sind - hier geht es inbsesondere um einen stark fokussierten OOP Ansatz, der mit zunehmender Komplexität der untenliegenden Systeme einem Composition-over-Inheritance Ansatz weichen musste.\\
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\columnwidth]{content/de/iterative evolution/img/simplecuberendering}
+    \caption{Darstellung des ersten Rendering-Tests (\textit{Simple Cube Rendering}).
+    Die zugrundeliegende Architektur implementiert zentrale Komponenten der Anwendungsschicht, wie das Fenstermanagement sowie ein Event-System nach dem Publish-Subscribe-Entwurfsmuster. (Quelle: eigene Aufnahme)}
+    \label{fig:simplecuberendering}
+\end{figure}
+
+
+\noindent
+Mit der nachfolgenden Entwicklung der tiefer liegenden Schichten mussten wir die Architektur dieser Schicht nur geringfügig anpassen, um neue Anforderungen zu erfüllen.
+Die meisten Änderungen ergaben sich an dieser Stelle bei dem Handling von Viewports, die in meilenstein 1 als eine eineindeutiges Render-ZIel für doe Anwendung definiert wurden.
+Mit Meilenstein 2 erfolgte hier ein architektonischer uMbruch, der die Unterstützung von mehreren Viewports innerhalb eines \texttt{RenderTargets} (Abstraktion eines Framebuffers) und damit die Darstellung unterschiedlicher Szenen bzw. Szenenausschnitte in Zusammenhang mit unterschiedlichen Kameras ermöglichte.

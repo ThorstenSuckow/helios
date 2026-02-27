@@ -1,0 +1,68 @@
+\section{Meilenstein 3: Entities, Components and Systems - aber keine Entity Component System}
+
+Mit dem für Meilenstein 3 geplanten Feature waren Umsetzung von Spielphysik, Feuermechaniken und die Spielereingabe zur Steuerung des Schiffs angesetzt.\\
+
+\noindent
+Mit der in Meilenstein 2 umgesetzten Entwurf einer GameWorld mit darin befindlichen GameObjects war angedacht, zunächst die Gameworld als greoben Datencontainer für die in ihr befindlichen GameObjects zu verwenden.\\
+Ein einfaches Command-Pattern sollte die Interaktion zwischen den GameObjects und der GameWorld ermöglichen, um beispielsweise die Bewegung eines GameObjects durch die GameWorld zu steuern.\\
+
+\noindent
+Mit der Anforderung, Spielphysik umszusetzen, sowie Feuermechaniken zu implementieren, hatte sich schnell herausgestellt, dass ein Objekt Orientierter Entwurf hier zu sehr großen vererbungshierachien führen würde, was mit dem Ziel, auch eine möglichst perfromante ztu erreichen, durch die VTable Lookups nicht vertretbar war.\\
+Allerding war auch die in~\ref{lst:gameobject_v1} auszugweise dargestellte API für einen einfachen Prototyp, der wenig Anforderungen bis auf Transformatione aufweisen muss, für due Umsetzung eines einfachen Spiels vertretbar, allerdings, müssten mindestens für die Feuermehacniken dem Sehcema nach auch diese in diese Klasse untergebracht werden, was zu unnützem Code für GameObjekte spführen würde, die keine Feuermechaniken benötigen - wie die gheplanten Gegnertypen, die - dem Originalspiel entsprechend - keine Waffen haben sollen.\\
+
+
+\begin{lstlisting}[style=c++style,
+    caption={Auszug aus dem Interface für die GameObject \texttt{GameWorld} (Meilenstein 2). },
+    label=lst:gameobject_v1]
+
+/**
+* @brief Unique identifier for this GameObject.
+helios::util::Guid guid_;
+
+/**
+* @brief Pointer to the SceneNode's transform component.
+
+*/
+helios::scene::Transform* transform_;
+
+/**
+* @brief The current velocity-vector, if any.
+*/
+helios::math::vec3f velocity_{};
+
+/**
+* @brief The current position-vector in local coordinates (model space).
+*/
+helios::math::vec3f position_{};
+
+/**
+* @brief Updates the GameObject state for the current frame.
+*/
+virtual void update(float deltaTime) = 0;
+
+/**
+* @brief Applies a scaling transformation to the GameObject.
+* @warning If the SceneNode has been destroyed, this will cause undefined behavior.
+*/
+GameObject& setScale(const helios::math::vec3f& scale) noexcept;
+
+/**
+* @brief Applies a rotation transformation to the GameObject.
+* @warning If the SceneNode has been destroyed, this will cause undefined behavior.
+*/
+GameObject& setRotation(const helios::math::mat4f& rotation) noexcept;
+
+\end{lstlisting}
+
+\noindent
+Um keine zu große komplexitäöt zu diesem Zeitpunkt in das Projekt zu bringen und sich - dem in dem ersten Dokument beschriebenen Tracer Bullet Development den Anforderungen zu nähern, wurde die Entscheidung getroffen, die Physik-Komponenten und TRansformationslogiken aus dem GameObject zu entfernen und das GameObject selber zunächst als einfachen DatenContainer für Components zu betrachten, derer beliebig viele für eine Kompoennte definiert werden dürfte. Als wesentliche Funktionalität blieben bestehen:
+
+\begin{itemize}
+    \item Identifizierung aller GameObjects über eine GUIID, so dass Lookup und Zugriff über die GameWorld möglich sein sollte, unter Benutzung eines \texttt{std::unordered\_map<helios::util::Guid, std::unique\_ptr<GameObject>>}
+    \item Hinzufügen und entfernen von Komponenten auf den Game Objects selber über ein \texttt{        std::vector<std::unique\_ptr<Component>>;}
+    \item Eine \texttt{update()}-Methode, damit sich GameObjects selber per Frame aktualisieren können.
+\end{itemize}
+
+\noindent
+Physik und Feuermechaniken werden beginnen mit Meielnstein 3 als eigenständige System ebetrachtet, die in der Gameloop über einen einfachen Aufruf zu \texttt{Gameworld::update(float delta)} aktualisiert werden.\\
+Hierzu iterieren die Systeme in der update() mEthode nach allen GameObjects, fragen ab, ob diese Obekte eine bestimmte Kompoennete besitzen, un führen dann Aktualisierungen basierend auf dem Zustand der Objekte durch - auch deise Implementierung würde im späteren Verlauf durch einen idiomatischen Ansatz im KOntext Dataoriented programming ersetzet, da sich nicht nur die iteration über einen vektor mit unique ptr und dann die Abfrage, ob die Komponente vorhanden ist, als nicht performant erwies, sondern auch die Tatsache, dass die Komponenten selber als polymorphe Objekte mit virtuellen Methoden implementiert waren, was zu einem unerwünscheten Overhead durch VTable Lookups führte.

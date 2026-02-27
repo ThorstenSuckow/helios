@@ -211,33 +211,36 @@ $(function() {
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                    hc-&gt;health()</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                ));</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                <span class="keyword">auto</span> hitman = go-&gt;entityHandle();</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                <span class="keyword">auto</span>* ebc = go-&gt;get&lt;<a class="code hl_class" href="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1EmittedByComponent.html">helios::engine::mechanics::spawn::components::EmittedByComponent</a>&gt;();</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                <span class="keywordflow">if</span> (ebc) {</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                    hitman = ebc-&gt;source();</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>                }</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                <span class="keyword">auto</span>* lac = target-&gt;get&lt;<a class="code hl_class" href="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent.html">helios::engine::mechanics::combat::components::LastAttackerComponent</a>&gt;();</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                <span class="keywordflow">if</span> (lac) {</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>                    <span class="keyword">auto</span> attackContext = <a class="code hl_struct" href="structhelios_1_1engine_1_1mechanics_1_1combat_1_1types_1_1AttackContext.html">helios::engine::mechanics::combat::types::AttackContext</a>{</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                        .source = hitman,</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                        .contact = <span class="keyword">event</span>.collisionContext().contact,</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                        .damageApplied = damageApplied</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                    };</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>                    lac-&gt;setLastAttackContext(attackContext);</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>                }</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>            }</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        }</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                <span class="comment">// the go itself is the source</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                <span class="keyword">auto</span> hitman = go-&gt;entityHandle();</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                <span class="keyword">auto</span>* ebc = go-&gt;get&lt;<a class="code hl_class" href="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1EmittedByComponent.html">helios::engine::mechanics::spawn::components::EmittedByComponent</a>&gt;();</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                <span class="keywordflow">if</span> (ebc) {</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>                    <span class="comment">// else the source is assigned to the go emitted</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                    <span class="comment">// by the go</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                    hitman = ebc-&gt;source();</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                }</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                <span class="keyword">auto</span>* lac = target-&gt;get&lt;<a class="code hl_class" href="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent.html">helios::engine::mechanics::combat::components::LastAttackerComponent</a>&gt;();</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                <span class="keywordflow">if</span> (lac) {</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                    <span class="keyword">auto</span> attackContext = <a class="code hl_struct" href="structhelios_1_1engine_1_1mechanics_1_1combat_1_1types_1_1AttackContext.html">helios::engine::mechanics::combat::types::AttackContext</a>{</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                        .source = hitman,</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>                        .contact = <span class="keyword">event</span>.collisionContext().contact,</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>                        .damageApplied = damageApplied</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                    };</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>                    lac-&gt;setLastAttackContext(attackContext);</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                }</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>            }</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        }</div>
 </div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    };</div>
-</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>}</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    };</div>
+</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>}</div>
 </div>
 <div class="ttc" id="aOpenGLUniformLocationMap_8ixx_html_acbc04f24078582c7d42b2085be5d5750"><div class="ttname"><a href="OpenGLUniformLocationMap_8ixx.html#acbc04f24078582c7d42b2085be5d5750">HELIOS_LOG_SCOPE</a></div><div class="ttdeci">#define HELIOS_LOG_SCOPE</div><div class="ttdef"><b>Definition</b> <a href="OpenGLUniformLocationMap_8ixx_source.html#l00020">OpenGLUniformLocationMap.ixx:20</a></div></div>
 <div class="ttc" id="aclasshelios_1_1engine_1_1ecs_1_1System_html"><div class="ttname"><a href="classhelios_1_1engine_1_1ecs_1_1System.html">helios::engine::ecs::System</a></div><div class="ttdoc">Abstract base class for game systems.</div><div class="ttdef"><b>Definition</b> <a href="System_8ixx_source.html#l00041">System.ixx:41</a></div></div>

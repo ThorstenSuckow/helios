@@ -1,7 +1,7 @@
 \section{Einleitung}
 
-Der im Rahmen des Projektstudiums im Fernstudium Informatik zu erstellende Geometry Wars-Klon ist in~\cite{SH25} beschrieben.
-Wir gehen im Folgenden auf einige Zieldaten ein, um sie im späteren Verlauf referenzieren und vergleichen zu können.\\
+Der im Rahmen des Projektstudiums im Fernstudium Informatik zu erstellende \textit{Geometry Wars}-Klon ist in~\cite{SH25} beschrieben.
+Im Folgenden werden die wesentlichen Anforderungen und Spezifikationen erläutert, um diese im späteren Verlauf referenzieren und vergleichen zu können.\\
 
 \noindent
 Als zu realisierende Features wurden vereinbart:
@@ -9,22 +9,23 @@ Als zu realisierende Features wurden vereinbart:
 \begin{itemize}
     \itemsep0.5em
     \item Spielbares Level (2D-Grid)
-    \item Time-Attack Modus mit einer Dauer von 3 Minuten
+    \item Time-Attack-Modus mit einer Dauer von 3 Minuten
     \item Highscore-System
     \item Controller-Steuerung
     \item Stabile Framerate von mindestens 60 FPS bei gleichzeitiger Darstellung von über hundert Gegnern und Objekten
     \item Drei Gegnertypen mit einfacher KI (``Spawn and Chase``)
-    \item Aufwertung des Game Feels durch grafische Effekte
+    \item Aufwertung des \textit{Game Feels} durch grafische Effekte
     \item Kompilierbar und lauffähig unter Windows 11
 \end{itemize}
 
 \noindent
-Mit Veröffentlichung des o.a. Dokumentes war bereits Meilenstein 1 erreicht, welcher den Fokus auf das außenliegende Gerüst der Anwendung gelegt hat. \\
-In~\ref{tab:zeitplan} ist eine Übersicht der nachfolgenden Meilensteine 1 - 6 dargestellt, deren Fertigstellungstermine mit einer jeweiligen Verzögerung von 2 - 4 Wochen erreicht worden sind.
-Hier hat sich gezeigt, dass mit der zunehmenden Komplexität der umzusetzenden Features wie Input-System, Spawn-Systeme, Kollisionsabfrage und UI-Rendering auch immer wieder versteckte Anforderungen Anpassungen bereits existierender Systeme erfordert habe.
-So hat bspw, das Input-System auch die Berücksichtigung von Stick-Drift erfordert; Spawning von Gegnerobjekten hat ein Pool von wiederverwendbaren Objekten (\textit{prefabricated objects}, i.F. \textit{prefab}) erfordert; zusätzlich zu der Erkennung von Kollisionen haben sich komplexe Fragestellungen hinsichtlich der Verarbeitung der Kollisionen mit dem beteiligten Systemen ergeben; UI-Rendering hat eine Erweiterung der Rendering Engine um die Unterstützung von Texturen und UI-Elementen erfordert, sowie die Implementierung von hierarchischer endlicher Automaten, um das Spiel in verschiedene Zustände (z.B. ``Main Menu``, ``In Game``, ``Game Over``) sauber zu kapseln.\\
+Zum Zeitpunkt der Veröffentlichung des oben genannten Dokumentes war bereits Meilenstein 1 erreicht, welcher den Fokus auf das Anwendungsgerüst legte.
+In~\ref{tab:zeitplan} ist eine Übersicht der nachfolgenden Meilensteine 1--6 dargestellt. Deren Fertigstellungstermine wurden mit einer jeweiligen Verzögerung von zwei bis vier Wochen erreicht.
+Hierbei zeigte sich, dass die zunehmende Komplexität der Features - wie das Input-System, die Spawn-Logik, die Kollisionsabfrage und das UI-Rendering - wiederholt Anpassungen an bereits existierenden Systemen erforderten.
 
-
+So erforderte beispielsweise das Input-System die Berücksichtigung von Stick-Drift; das Spawning von Gegnerobjekten machte einen Pool wiederverwendbarer Objekte (\textit{prefabricated objects}, i.F. \textit{prefab}) notwendig.
+Zusätzlich zur reinen Kollisionserkennung ergaben sich komplexe Fragestellungen hinsichtlich der Verarbeitung dieser Kollisionen innerhalb der beteiligten Systeme.
+Das UI-Rendering bedingte eine Erweiterung der Rendering-Engine um die Unterstützung von Texturen und UI-Elementen sowie die Implementierung hierarchischer Zustandsautomaten (HFSM), um die verschiedenen Spielzustände (z.\,B. ``Main Menu``, ``In Game``, ``Game Over``) sauber zu kapseln.
 
 \setlength{\tabcolsep}{8pt}
 \begin{table}[t]
@@ -53,7 +54,3 @@ So hat bspw, das Input-System auch die Berücksichtigung von Stick-Drift erforde
     Zum Zeitpunkt der Veröffentlichung von~\cite{SH25} waren die Meilensteine 1-2 bereits abgeschlossen, Meilensteine 3-6 wurden mit leichter Verzögerung entsprechend der Anforderungen erreicht.}
     \label{tab:zeitplan}
 \end{table}
-
-
-
-

@@ -1,62 +1,68 @@
-\subsection{Meilenstein 2: Controller Input und GameObject}
+\subsection{Meilenstein 2: Controller-Input und die Evolution des GameObjects}
 
-Meilenstein 2 stellte die erste Erweiterung der Architektur dar, die das Rendering in Abhängigkeit von User Input ermöglichte. Hierfür wurde \texttt{GameWorld} und \texttt{GameObject} als Klassen eingeführt, deren Semantik sich auch ncoh ind er Abgabeversion findet, aber im Laufe der Arbeit zahlreiche Umbauten erfuhren, von Datencontainern hin zu Fassaden für den Zugriff auf ein ECS.\\
+Meilenstein 2 markierte die erste funktionale Erweiterung der Architektur, die das Rendering in Abhängigkeit von Benutzereingaben ermöglichte.
+Hierfür wurden die Klassen \texttt{GameWorld} und \texttt{GameObject} eingeführt.
+Deren Semantik blieb zwar bis zur finalen Version erhalten, sie durchliefen jedoch im Prozess eine signifikante strukturelle Transformation: von reinen Datencontainern hin zu Fassaden-Objekten für den Zugriff auf das ECS-Backend.\\
 
-\begin{figure}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=1\columnwidth]{content/de/iterative evolution/img/gamecontrollerinput}
-    \caption{Oberfläche der \textit{Game Controller Input Demo}. Der Szenegraph enthält verschiedene geometrische Figuren, deren Fabintensität bzw. Skalierung je nach betätigter Inputs variiert. (Quelle: eigene Aufnahme)}
+    \includegraphics[width=0.8\columnwidth]{content/de/iterative evolution/img/gamecontrollerinput}
+    \caption{Oberfläche der \textit{Game Controller Input Demo}. Der Szenengraph enthält verschiedene geometrische Primitiven, deren Farbintensität bzw. Skalierung in Abhängigkeit der Controller-Eingaben variiert. (Quelle: eigene Aufnahme)}
     \label{fig:gamecontrollerinput}
 \end{figure}
 
 \noindent
-Die in~\ref{fig:gamecontrollerinput} dargesteltle Demo zeigt die Funktionalität der Controller Input Verarbeitung, die über die \texttt{InputManager} Klasse realisiert wird.
-Hierbei werden sowohl Tastatureingaben als auch Gamepad-Inputs verarbeitet, um die Eigenschaften der dargestellten geometrischen Figuren zu verändern - dies geschieht zu diesem Zeitpunkt ohne weitere Abstraktion direkt über die Anpassungen der Szeneknoten mittels \texttt{setScale()} und \texttt{setTranslation()}.\\
-Farbänderungen der Figuren erfolgen über Aufrufe auf die Renderables, die an die Szeneknoten gebunden sind.
-Hier hatte sich gezeigt, dass der für den Prototypen ausgearbeitete ENtwurf einerseits zu komplex, andererseits zu unflexibel gewesen ist.
-Ein Umbau in weniger Objekte (siehe~\ref{fig:renderable}) erlaubt eine klarere Objekthierarchie von geteilten udn wiedervwerwendbaren Material, Mesh und Shader-Instanzen udnd vereint die Komposition in einem \texttt{RenderPrototype}, der von vielen \texttt{Renderables} geteilt werden kann. Zusätzliche optionale Overrides in form von PDOs erlauben eine individuelle Konfiguration der Renderables.\\
-Dies Entwurf hat sich als flexibel erwiesen und konnte auch für eine Spezialisierung von Renderables als UI-Text mit geringfügigen Anpassungen beibehalten werden.\\
+Die in Abbildung~\ref{fig:gamecontrollerinput} dargestellte Demonstration zeigt die Funktionalität der Eingabeverarbeitung, die über die Klasse \texttt{InputManager} realisiert wird. Dabei werden sowohl Tastatur- als auch Gamepad-Eingaben verarbeitet, um die Transformationen der dargestellten Objekte zu beeinflussen.
+Zu diesem Zeitpunkt geschah dies noch ohne weitere Abstraktionsebene durch direkte Manipulation der Szenenknoten mittels \texttt{setScale()} und \texttt{setTranslation()}.
+Farbänderungen wurden durch direkte Aufrufe auf die an die Knoten gebundenen \textit{Renderables} umgesetzt.\\
 
 \noindent
-Eingeführt wurde mit diesem Meilenstein außerdem das Modul \texttt{helios.engine.game} zusammen mit der Klasse \texttt{GameWorld}, die als Container für alle GameObjects fungiert, die wiederum die zentralen Akteure innerhalb der \texttt{GameWorld} darstellen.\\
-Die Umsetzung ist zu diesem Zeitpunkt noch stark von einem OOP-Ansatz geprägt und beinhaltete folgende Methode:
+In dieser Phase zeigte sich jedoch, dass der ursprüngliche Entwurf des Rendering-Systems einerseits zu komplex und andererseits zu unflexibel war.
+Eine Restrukturierung hin zu einer flacheren Hierarchie (siehe Abb.~\ref{fig:renderable}) ermöglichte eine effiziente Wiederverwendung von Material-, Mesh- und Shader-Instanzen.
+Diese Komponenten wurden in einem \texttt{RenderPrototype} vereint, der von mehreren \texttt{Renderables} geteilt werden kann.
+Optionale Konfigurationen der \texttt{Renderables} in Form von kleinen Konfigurationsstrukturen / DTOs erlauben dabei individuelle Overrides für einzelne Instanzen.
+Dieser Entwurf erwies sich als hinreichend flexibel, um später mit nur geringfügigen Anpassungen auch spezialisierte UI-Elemente und Text-Rendering zu unterstützen.\\
 
-\vspace{4mm}
+\noindent
+Mit diesem Meilenstein wurde zudem das Modul \texttt{helios.engine.game} zusammen mit der Klasse \texttt{GameWorld} eingeführt, welche als zentraler Container für alle \texttt{GameObjects} fungiert.
+Die Umsetzung war zu diesem Zeitpunkt noch stark vom klassischen OOP-Ansatz geprägt, wie das folgende Interface verdeutlicht:
+
+
+
 \begin{lstlisting}[style=c++style,
-    caption={.},
-    label=lst:cmake]
-
+    caption={Initiales Interface der \texttt{GameWorld} (Meilenstein 2).},
+    label=lst:gameworld_v1]
     /**
-     * @brief Updates all GameObjects in the world for
-     *        the current frame.
+     * @brief Updates all GameObjects in the world for the current frame.
      */
-   void update(float deltaTime) const noexcept;
+    void update(float deltaTime) noexcept;
 
     /**
      * @brief Adds a GameObject to the world.
      */
-   addGameObject(std::unique_ptr<GameObject> gameObject);
+    void addGameObject(std::unique_ptr<GameObject> gameObject);
 
     /**
      * @brief Finds a GameObject by its unique identifier.
      */
-   GameObject* find(const helios::util::Guid& guid)
-
+    GameObject* find(const helios::util::Guid& guid);
 \end{lstlisting}
 
+\noindent
+Obwohl die API auch im aktuellen Zustand ähnliche Methoden zur Erstellung und Suche von Objekten bietet, sind die internen Implementierungen - insb. hash-basierte Zugriffe auf \texttt{unordered\_map}s - einem \textit{Entity Handle}-basierten Zugriff auf das ECS-Backend gewichen.
+Infolgedessen ist die \texttt{update()}-Methode nicht länger Bestandteil der \texttt{GameWorld}.
+Die Logik wurde in die \texttt{GameLoop} überführt, welche die Update-Logik in individuelle Phasen unterteilt sowie vom Zustand der konfigurierten \textit{State Machines} abhängig macht, wodurch ein deterministisches Verhalten bzgl. weltverändernder Befehle realisiert wird, und sich Gameplay-spezifische Systeme gezielt in den einzelnen Frames aktivieren und deaktivieren lassen.\\
 
 \noindent
-Obwohl die API auch im aktuellen Zustand noch die Möglichkeit bietet, GameObjects zu erstellen, zu aktualisieren und zu suchen, sind die darunterliegenden Implementierungen einem hash-basierten Ansatz über die GUID de ECS-System gewichen.
-Dies bedeutet auch, dass die \texttt{update()}-Methode nicht länge bestandteil der Gameworld ist: Sie findet sich in der \texttt{GameLoop}, die in individuelle Phasen und ind er Durchführung abhängig vom Zustand der in der Engine konfigurierbaren State Machines sind.\\
+Zur Erleichterung des Debuggings und zur Laufzeit-Konfiguration der \texttt{GameObject}-Parameter wurde \textit{Dear ImGui} integriert.
+Ein besonderer Fokus lag dabei auf der Kamera-Steuerung: Durch die Einbindung von Kameras als spezialisierte Knoten in den Szenengraph können diese nun direkt an Spielobjekte gebunden werden.
+Um eine unerwünschte Übernahme aller Transformationen (wie z. B. die Rotation des Spielerschiffs) zu verhindern, wurde eine Bitmaske implementiert.
+Diese erlaubt es, explizit festzulegen, welche Eigenschaften (Translation, Rotation, Skalierung) vom Elternknoten geerbt werden sollen.
+Für die Verfolgekamera in \textit{helios ascending} ist hierbei primär die Translation relevant.
 
-\noindent
-Die o.a. Game Controller Input Demo wurde dann erweitert zur einer Steuerung eines Triangles.
-Zur leichteren Debugging und zum Testen der Parameter der GameObject wurde außerdem ImGui in die Engine integriert, um verschiedene Eigenschaften zur Laufzeit anpassen zu können - darunter auch die Steuerung für die Kameras, deren Konzept hinsichtlich Game Engine Idiomatio erweitert wurde: Mit SzeneNodes, die Kameras kapseln, können nun Kameras an zur VErfolgung von Spielobjekten direkt als Kindknoten im Szenegraph an die entsprechenden Knoten gebunden werden: Zusätzliche wurde eine Unterstützung implementiert, die ie Angabe der Eigenschaften erlaubt, die von der Affinen Transformationsmatrx des elternobjektes geerbet wrden soll. Als Bitmaske erlaubt dies die KOnfiguaration von Skalierung, Rotation udn Translation, wobei für die Kameraknoten die TRanslation die bevorzugte Option ist..
-
-
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=1\columnwidth]{content/de/iterative evolution/img/spaceshipcontrol}
-    \caption{Die Spaceship Control Demo beinhaltete neben der Steuerung des Schiffs Imgui Overlays zur Konfiguration verschiedener Welt- und Spielobjektparameter, wie Beschleunigugn und Geschwindigkeit des Spielerschiffes, Kamerapostion sowie eine Anzeige der aktuellen Controlelr Inputs,mit der Möglichkeit die Toleranz (Dead Zone) bzgl. Stick Drift einzustellen. (Quelle: eigene Aufnahme)}
+    \caption{Die \textit{Spaceship Control Demo} visualisiert die Schiffsteuerung sowie ImGui-Overlays zur Konfiguration von Parametern wie Beschleunigung, Geschwindigkeit und Kameraposition. Zudem ist die Einstellung der \textit{Dead Zone} zur Kompensation von Stick-Drift möglich. (Quelle: eigene Aufnahme)}
     \label{fig:spaceshipcontrol}
 \end{figure}

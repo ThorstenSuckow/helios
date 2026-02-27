@@ -4,6 +4,7 @@
  */
 module;
 
+#include <cassert>
 #include <format>
 
 
@@ -69,6 +70,8 @@ export namespace helios::engine::mechanics::health::systems {
                 }
 
                 logger_.info(std::format("Entity {0} killed.", entity.entityHandle().entityId));
+
+                assert(sbp->spawnProfileId().value() != 0 && "Entity has no SpawnProfileId.");
 
                 updateContext.commandBuffer().add<helios::engine::runtime::spawn::commands::DespawnCommand>(
                     entity.entityHandle(),

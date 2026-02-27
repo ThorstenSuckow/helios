@@ -91,9 +91,10 @@ export namespace helios::engine::mechanics::damage::components {
                const float damage,
                const uint32_t otherLayerId
         ) noexcept {
+            assert(otherLayerId != 0 && "Unexpected layer id, must not be 0");
+
             const auto idx = std::countr_zero(otherLayerId);
 
-            assert(idx != 0 && "Unexpected layer id, must not be 0");
             assert(idx < damageRegistry_.size() && "Unexpected otherLayerId, index larger than size");
 
             damageRegistry_[idx] = damage;
@@ -108,8 +109,10 @@ export namespace helios::engine::mechanics::damage::components {
          * @return The damage value for the specified layer.
          */
         [[nodiscard]] float damage(const uint32_t otherLayerId) const noexcept {
-            const auto idx = std::countr_zero(otherLayerId);
 
+            assert(otherLayerId != 0 && "Unexpected layer id, must not be 0");
+
+            const auto idx = std::countr_zero(otherLayerId);
             assert(idx != 0 && "Unexpected layer id, must not be 0");
             assert(idx < damageRegistry_.size() && "Unexpected layer id, index larger than size");
 

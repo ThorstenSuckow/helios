@@ -449,53 +449,6 @@ export namespace helios::examples::scoring {
             })
             .make();
 
-            // projectile game object
-            auto projectilePrefab = helios::engine::builder::gameObject::GameObjectFactory::instance()
-                .gameObject(gameWorld)
-                .withPrefabId(IdConfig::ProjectilePrefab)
-                .withRendering([&defaultShader, &root = *level->rootNode()](auto& rnb) {
-                    rnb.meshRenderable()
-                       .shader(defaultShader)
-                       .color(helios::util::Colors::Yellow)
-                       .primitiveType(helios::rendering::mesh::PrimitiveType::LineLoop)
-                       .shape(std::make_shared<helios::rendering::asset::shape::basic::Ellipse>(0.5f, 0.2f, 8))
-                       .attachTo(&root);
-                })
-                .withTransform([](auto& tb) {
-                    tb.transform()
-                      .scale(helios::math::vec3f(2.2f, 0.8f, 0.0f), helios::core::units::Unit::Meter);
-                })
-                .withCollision([](auto& cb) {
-                    cb.collision()
-                      .layerId(helios::examples::scoring::CollisionId::Projectile)
-                      .useBoundingBox()
-                      .hitPolicy(helios::engine::modules::physics::collision::types::HitPolicy::OneHit)
-                      .reportCollisions(true)
-                      .solidCollisionMask(helios::examples::scoring::CollisionId::Enemy)
-                      .onSolidCollision(
-                          helios::examples::scoring::CollisionId::Enemy,
-                          helios::engine::modules::physics::collision::types::CollisionBehavior::Despawn |
-                          helios::engine::modules::physics::collision::types::CollisionBehavior::PassEvent
-                      )
-                      .dealDamage(100.0f, helios::examples::scoring::CollisionId::Enemy);
-
-                    cb.levelBoundsCollision()
-                      .onCollision(helios::engine::modules::physics::collision::types::CollisionBehavior::Despawn);
-                })
-                .withMotion([](auto& mcb) {
-                    mcb.move2D()
-                       .speed(80.0f)
-                       .instantAcceleration(true);
-                    mcb.steering()
-                       .steeringSetsDirection(false)
-                       .instantSteering(true);
-                })
-                .withSpawn([](auto& sb) {
-                     sb.spawn()
-                       .useSpawnProfile()
-                       .trackEmitter();
-                 })
-                .make();
 
 
             scoreText.setActive(true);

@@ -100,10 +100,13 @@ export namespace helios::engine::mechanics::damage::systems {
                     hc->health()
                 ));
 
+                // the go itself is the source
                 auto hitman = go->entityHandle();
 
                 auto* ebc = go->get<helios::engine::mechanics::spawn::components::EmittedByComponent>();
                 if (ebc) {
+                    // else the source is assigned to the go emitted
+                    // by the go
                     hitman = ebc->source();
                 }
 

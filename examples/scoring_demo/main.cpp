@@ -314,6 +314,9 @@ int main() {
                .shape(std::make_shared<Triangle>())
                .attachTo(&root);
         })
+        .withHealth([](auto& hsb) {
+            hsb.health().maxHealth(100.0f);
+        })
         .withTransform([&](auto& tb) {
             tb.transform()
               .scale(ArenaConfig::SPACESHIP_SIZE)
@@ -350,11 +353,57 @@ int main() {
                .steeringSetsDirection(true)
                .instantSteering(false);
         })
-        .withSpawn([](auto& sb) {
-            sb.spawn()
-              .useSpawnProfile();
-        })
         .make();
+
+    // projectile game object
+    auto projectilePrefab = GameObjectFactory::instance()
+        .gameObject(gameWorld)
+        .withPrefabId(IdConfig::ProjectilePrefab)
+        .withRendering([&defaultShader, &root = *levelPtr->rootNode()](auto& rnb) {
+            rnb.meshRenderable()
+               .shader(defaultShader)
+               .color(Colors::Yellow)
+               .primitiveType(PrimitiveType::LineLoop)
+               .shape(std::make_shared<Ellipse>(0.5f, 0.2f, 8))
+               .attachTo(&root);
+        })
+        .withTransform([](auto& tb) {
+            tb.transform()
+              .scale(helios::math::vec3f(2.2f, 0.8f, 0.0f), Unit::Meter);
+        })
+        .withCollision([](auto& cb) {
+            cb.collision()
+              .layerId(Projectile)
+              .useBoundingBox()
+              .hitPolicy(HitPolicy::OneHit)
+              .reportCollisions(true)
+              .solidCollisionMask(CollisionId::Enemy)
+              .onSolidCollision(
+                  CollisionId::Enemy,
+                  CollisionBehavior::Despawn |
+                  CollisionBehavior::PassEvent
+              )
+              .dealDamage(100.0f, CollisionId::Enemy);
+
+            cb.levelBoundsCollision()
+              .onCollision(CollisionBehavior::Despawn);
+        })
+        .withMotion([](auto& mcb) {
+            mcb.move2D()
+               .speed(80.0f)
+               .instantAcceleration(true);
+            mcb.steering()
+               .steeringSetsDirection(false)
+               .instantSteering(true);
+        })
+        .withSpawn([](auto& sb) {
+             sb.spawn()
+               .useSpawnProfile()
+               .trackEmitter();
+         })
+        .make();
+
+
 
     // Debug gizmos (input visualization)
     auto leftStickGizmo = GameObjectFactory::instance()
@@ -534,7 +583,7 @@ int main() {
             .addSystem<CollisionStateResponseSystem>()
             .addCommitPoint(CommitPoint::PassEvents)
 
-            .addPass<GameState>(Running | Start | Title)
+            .addPass<GameState>(Running)//
             .addSystem<DamageOnCollisionSystem>()
             .addSystem<HealthUpdateSystem>();
 

@@ -1,0 +1,99 @@
+\section{Meilenstein 4: Spawn Systeme, Kollisionserkennung und GameLoop-Architektur}
+
+
+Meilenstein 4 sah  die Fertigstellung eines \textit{Vertical Slices} vor, in dem die wichtigsten Regeln und Mechaniken des Spiels implementiert sein sollten.\\
+
+\noindent
+Da sich die vorherigen Meilensteine vor allem auf die technische Umsetzung des Framework-Gerüsts konzentriert hatten, sah sich die Entwicklung zu diesem Zeitpunkt mit der Herausforderung konfrontiert, komplexe Spielmechaniken zu integrieren.
+Dies erforderte eine umfassende Umstrukturierung, um die Anforderungen an eine stabile GameLoop sowie die Interaktion der verschiedenen Subsysteme zu erfüllen.
+In diesem Zusammenhang wurden folgende Konzepte realisiert:
+
+\begin{itemize}
+    \itemsep0.5em
+    \item Einführung ressourcenverwalteter Manager innerhalb des \textit{helios} Frameworks.
+    \item Implementierung von \textit{CommandHandler}- und \textit{CommandBuffer}-Strukturen, die nach einem \textit{Push-Pull}-Prinzip in verschiedenen Phasen der GameLoop operieren.
+    \item Architektur einer phasenbasierten GameLoop, die über verschiedene \textit{Passes} und \textit{Commit Points} klare Schnittstellen für Systemübergänge definiert.
+\end{itemize}
+
+
+
+Diese Anforderungen führten zudem zu einer Neuausrichtung der Projektstruktur.
+Die strikte Trennung in \textit{Implementation}- und \textit{Interface}-Module-Units wurde zugunsten eines verbesserten Refactoring-Workflows aufgegeben; die Implementierungen wurden in die \textit{Interface Units} zurückgeführt.
+Dabei wurde das Modul \texttt{helios.engine} als zentraler Kern definiert, während das semantisch zu starre \texttt{game}-Modul verworfen wurde.\\
+
+
+Es erfolgte zudem eine logische Trennung zwischen engine-intrinsischen Funktionen (\texttt{runtime}) und spielmechanischen Modulen (\texttt{mechanics}).
+Letztere beinhalten unter anderem ein \textit{Policy}-basiertes \textit{SpawnSystem}.
+Dieses wurde im weiteren Verlauf zu einer \textit{Domain Specific Language} (DSL) ausgebaut, welche die semantische Konfiguration von Spawn-Logiken in direkter Verbindung mit \texttt{GameObject}-Pools erlaubt.\\
+
+\noindent
+In diesem Kontext wurde zusätzlich ein \textit{Object Builder} implementiert, um die Konfiguration der mittlerweile drei verschiedenen Gegnertypen sowie der Projektile und des Spielerschiffs zu vereinheitlichen und Redundanzen zu vermeiden (siehe Listing~\ref{lst:gameobjectdsl}).
+
+
+
+\begin{lstlisting}[style=c++style,
+    caption={Auszug aus dem Code zur Konfiguration des BlueEnemy, einem Gegnertyp, der nach ca. 30 Sekunden im \textit{Collision Detection Demo}  das erste mal spawnt und aus einer einfachen Chase-Komponente besteht.},
+    label=lst:gameobjectdsl]
+    auto blueEnemyPrefab = helios::engine::builder::gameObject::GameObjectFactory::instance()
+        .gameObject()
+        .withRendering([&defaultShader, &root = *levelPtr->rootNode()](auto& rnb) {
+            ...
+        })
+        .withTransform([BLUE_ENEMY_SCALE](auto& tb) {
+            tb.transform()
+              .scale(BLUE_ENEMY_SCALE);
+        })
+        .withCollision([](auto& cb) {
+            cb.collision()
+              .layerId(CollisionId::Enemy)
+              .useBoundingBox()
+              ...
+              .onSolidCollision(CollisionId::Player, CollisionBehavior::Despawn)
+              .onSolidCollision(CollisionId::Projectile, CollisionBehavior::Despawn);
+            ...
+        })
+        .withMotion([&](auto& mcb) {
+            ...
+        })
+        ...
+        .withAi([&](auto& aib) {
+            aib.chasing()
+               .target(shipGameObject->guid())
+               .seekInterval(0.05f);
+        })
+        .make();
+\end{lstlisting}
+
+\begin{lstlisting}[style=c++style,
+    caption={KOnfiguration eines gameObjects in Meilenstein 3. Die Menge an verschiedenen Komponenten in Meilenstein 4 machte ein Builder System notwendig, hiter dessen semantischen bezeichungen Komponenten klarer gruppiert werden konnten..},
+    label=lst:gameobjectcmpbased]
+auto shipGameObject = std::make_unique<helios::engine::game::GameObject>();
+shipGameObject->add<SceneNodeComponent>(spaceshipSceneNode);
+shipGameObject->add<TwinStickInputComponent>();
+shipGameObject->add<Move2DComponent>();
+shipGameObject->add<TransformComponent>();
+shipGameObject->add<ScaleComponent>(SPACESHIP_SIZE, SPACESHIP_SIZE, 0.0f, Unit::Meter);
+shipGameObject->add<Aim2DComponent>();
+shipGameObject->add<ShootComponent>();
+shipGameObject->add<LevelBoundsBehaviorComponent>();
+shipGameObject->add<AabbColliderComponent>();
+
+\end{lstlisting}
+
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\columnwidth]{content/de/iterative evolution/img/collisiondetection}
+    \caption{ (Quelle: eigene Aufnahme)}
+    \label{fig:collisiondetection}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\columnwidth]{content/de/iterative evolution/img/enemyspawn}
+    \caption{ (Quelle: eigene Aufnahme)}
+    \label{fig:enemyspawn}
+\end{figure}
+

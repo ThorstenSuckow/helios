@@ -65,7 +65,7 @@ export namespace helios::examples::scoring {
             );
 
 
-            auto titleText = helios::engine::builder::gameObject::GameObjectFactory::instance()
+            auto titleText = GameObjectFactory::instance()
                 .gameObject(gameWorld)
                 .withRendering([&](auto& rnb) {
                     rnb.textRenderable()
@@ -88,7 +88,7 @@ export namespace helios::examples::scoring {
                 })
                 .make();
 
-            auto pressStartText = helios::engine::builder::gameObject::GameObjectFactory::instance()
+            auto pressStartText = GameObjectFactory::instance()
                 .gameObject(gameWorld)
                 .withRendering([&](auto& rnb) {
                     rnb.textRenderable()
@@ -112,7 +112,7 @@ export namespace helios::examples::scoring {
                 .make();
 
 
-            auto menuBox = helios::engine::builder::gameObject::GameObjectFactory::instance()
+            auto menuBox = GameObjectFactory::instance()
                 .gameObject(gameWorld)
                 .withRendering([&](auto& rnb) {
                     rnb.meshRenderable()
@@ -140,7 +140,7 @@ export namespace helios::examples::scoring {
                 .make();
 
 
-            auto continueText = helios::engine::builder::gameObject::GameObjectFactory::instance()
+            auto continueText = GameObjectFactory::instance()
                 .gameObject(gameWorld)
                 .withRendering([&](auto& rnb) {
                     rnb.textRenderable()
@@ -176,7 +176,7 @@ export namespace helios::examples::scoring {
                 })
                 .make();
 
-            auto restartText = helios::engine::builder::gameObject::GameObjectFactory::instance()
+            auto restartText = GameObjectFactory::instance()
                 .gameObject(gameWorld)
                 .withRendering([&](auto& rnb) {
                     rnb.textRenderable()
@@ -211,7 +211,7 @@ export namespace helios::examples::scoring {
                 })
                 .make();
 
-            auto quitText = helios::engine::builder::gameObject::GameObjectFactory::instance()
+            auto quitText = GameObjectFactory::instance()
                 .gameObject(gameWorld)
                 .withRendering([&](auto& rnb) {
                     rnb.textRenderable()
@@ -246,7 +246,7 @@ export namespace helios::examples::scoring {
                 })
                 .make();
 
-            auto gameOverMenu = helios::engine::builder::gameObject::GameObjectFactory::instance()
+            auto gameOverMenu = GameObjectFactory::instance()
                 .gameObject(gameWorld)
                 .withRendering([&](auto& rnb) {
                     rnb.meshRenderable()
@@ -274,7 +274,7 @@ export namespace helios::examples::scoring {
                 .make();
 
 
-            auto gameOverText = helios::engine::builder::gameObject::GameObjectFactory::instance()
+            auto gameOverText = GameObjectFactory::instance()
                 .gameObject(gameWorld)
                 .withRendering([&](auto& rnb) {
                     rnb.textRenderable()
@@ -299,7 +299,7 @@ export namespace helios::examples::scoring {
                 })
                 .make();
 
-            auto gameOverRetryText = helios::engine::builder::gameObject::GameObjectFactory::instance()
+            auto gameOverRetryText = GameObjectFactory::instance()
                     .gameObject(gameWorld)
                     .withRendering([&](auto& rnb) {
                         rnb.textRenderable()
@@ -335,7 +335,7 @@ export namespace helios::examples::scoring {
                     .make();
 
 
-            auto gameOverQuitText = helios::engine::builder::gameObject::GameObjectFactory::instance()
+            auto gameOverQuitText = GameObjectFactory::instance()
                 .gameObject(gameWorld)
                 .withRendering([&](auto& rnb) {
                     rnb.textRenderable()
@@ -370,7 +370,54 @@ export namespace helios::examples::scoring {
                 })
                 .make();
 
-            auto scoreText = helios::engine::builder::gameObject::GameObjectFactory::instance()
+        auto shipSymbol = GameObjectFactory::instance()
+            .gameObject(gameWorld)
+            .withRendering([&](auto& rnb) {
+                rnb.meshRenderable()
+                   .shader(defaultShader)
+                   .color(helios::util::Colors::Yellow)
+                   .primitiveType(helios::rendering::mesh::PrimitiveType::LineLoop)
+                   .shape(std::make_shared<helios::rendering::asset::shape::basic::Triangle>())
+                   .attachTo(&hudScene.root());
+            })
+            .withTransform([&](auto& tb) {
+                tb.transform()
+                  .scale(helios::math::vec3f{12.0f, 12.0f, 0.0f})
+                  .rotate(90.0f, helios::math::Z_AXISf);
+            })
+            .withUiTransform([](auto& tb) {
+                tb.transform()
+                  .pivot(helios::engine::modules::ui::layout::Anchor::TopRight)
+                  .viewport(helios::engine::core::data::ViewportId{"hudViewport"})
+                  .anchor(helios::engine::modules::ui::layout::Anchor::TopRight)
+                  .offsets({108.0f, 94.0f, 0.0f, 0.0f});
+
+            })
+            .make();
+
+        auto livesText = GameObjectFactory::instance()
+            .gameObject(gameWorld)
+            .withRendering([&](auto& rnb) {
+                rnb.textRenderable()
+                   .text("x 3")
+                   .fontId(uiTextFont)
+                   .fontScale(0.8f)
+                   .fontResourceProvider(renderingDevice.fontResourceProvider())
+                   .shader(glyphShader)
+                   .color(helios::util::Colors::WhiteSmoke)
+                   .attachTo(&hudScene.root());
+            })
+            .withUiTransform([](auto& tb) {
+                tb.transform()
+                  .pivot(helios::engine::modules::ui::layout::Anchor::TopRight)
+                  .viewport(helios::engine::core::data::ViewportId{"hudViewport"})
+                  .anchor(helios::engine::modules::ui::layout::Anchor::TopRight)
+                  .offsets({100.0f, 50.0f, 0.0f, 0.0f});
+
+            })
+            .make();
+
+            auto scoreText = GameObjectFactory::instance()
                 .gameObject(gameWorld)
                 .withRendering([&](auto& rnb) {
                     rnb.textRenderable()
@@ -398,7 +445,7 @@ export namespace helios::examples::scoring {
                 })
                 .make();
 
-            auto highScoreText = helios::engine::builder::gameObject::GameObjectFactory::instance()
+            auto highScoreText = GameObjectFactory::instance()
                 .gameObject(gameWorld)
                 .withRendering([&](auto& rnb) {
                     rnb.textRenderable()
@@ -423,7 +470,7 @@ export namespace helios::examples::scoring {
                 })
                 .make();
 
-        auto countdownTimerText = helios::engine::builder::gameObject::GameObjectFactory::instance()
+        auto countdownTimerText = GameObjectFactory::instance()
             .gameObject(gameWorld)
             .withRendering([&](auto& rnb) {
                 rnb.textRenderable()
@@ -450,7 +497,8 @@ export namespace helios::examples::scoring {
             .make();
 
 
-
+            shipSymbol.setActive(true);
+            livesText.setActive(true);
             scoreText.setActive(true);
             countdownTimerText.setActive(true);
             highScoreText.setActive(true);

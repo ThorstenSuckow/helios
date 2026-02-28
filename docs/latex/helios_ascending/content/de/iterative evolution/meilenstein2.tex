@@ -11,19 +11,19 @@ Deren Semantik blieb zwar bis zur finalen Version erhalten, sie durchliefen jedo
     \label{fig:gamecontrollerinput}
 \end{figure}
 
-\noindent
+
 Die in Abbildung~\ref{fig:gamecontrollerinput} dargestellte Demonstration zeigt die Funktionalität der Eingabeverarbeitung, die über die Klasse \texttt{InputManager} realisiert wird. Dabei werden sowohl Tastatur- als auch Gamepad-Eingaben verarbeitet, um die Transformationen der dargestellten Objekte zu beeinflussen.
 Zu diesem Zeitpunkt geschah dies noch ohne weitere Abstraktionsebene durch direkte Manipulation der Szenenknoten mittels \texttt{setScale()} und \texttt{setTranslation()}.
 Farbänderungen wurden durch direkte Aufrufe auf die an die Knoten gebundenen \textit{Renderables} umgesetzt.\\
 
-\noindent
+
 In dieser Phase zeigte sich jedoch, dass der ursprüngliche Entwurf des Rendering-Systems einerseits zu komplex und andererseits zu unflexibel war.
 Eine Restrukturierung hin zu einer flacheren Hierarchie (siehe Abb.~\ref{fig:renderable}) ermöglichte eine effiziente Wiederverwendung von Material-, Mesh- und Shader-Instanzen.
 Diese Komponenten wurden in einem \texttt{RenderPrototype} vereint, der von mehreren \texttt{Renderables} geteilt werden kann.
 Optionale Konfigurationen der \texttt{Renderables} in Form von kleinen Konfigurationsstrukturen / DTOs erlauben dabei individuelle Overrides für einzelne Instanzen.
 Dieser Entwurf erwies sich als hinreichend flexibel, um später mit nur geringfügigen Anpassungen auch spezialisierte UI-Elemente und Text-Rendering zu unterstützen.\\
 
-\noindent
+
 Mit diesem Meilenstein wurde zudem das Modul \texttt{helios.engine.game} zusammen mit der Klasse \texttt{GameWorld} eingeführt, welche als zentraler Container für alle \texttt{GameObjects} fungiert.
 Die Umsetzung war zu diesem Zeitpunkt noch stark vom klassischen OOP-Ansatz geprägt, wie das folgende Interface verdeutlicht:
 
@@ -45,15 +45,14 @@ Die Umsetzung war zu diesem Zeitpunkt noch stark vom klassischen OOP-Ansatz gepr
     /**
      * @brief Finds a GameObject by its unique identifier.
      */
-    GameObject* find(const helios::util::Guid& guid);
+    GameObject* find(const Guid& guid);
 \end{lstlisting}
 
-\noindent
-Obwohl die API auch im aktuellen Zustand ähnliche Methoden zur Erstellung und Suche von Objekten bietet, sind die internen Implementierungen - insb. hash-basierte Zugriffe auf \texttt{unordered\_map}s - einem \textit{Entity Handle}-basierten Zugriff auf das ECS-Backend gewichen.
-Infolgedessen ist die \texttt{update()}-Methode nicht länger Bestandteil der \texttt{GameWorld}.
-Die Logik wurde in die \texttt{GameLoop} überführt, welche die Update-Logik in individuelle Phasen unterteilt sowie vom Zustand der konfigurierten \textit{State Machines} abhängig macht, wodurch ein deterministisches Verhalten bzgl. weltverändernder Befehle realisiert wird, und sich Gameplay-spezifische Systeme gezielt in den einzelnen Frames aktivieren und deaktivieren lassen.\\
 
-\noindent
+Obwohl die API auch im aktuellen Zustand ähnliche Methoden zur Erstellung und Suche von Objekten bietet, sind diese internen Implementierungen, die unter anderem hash-basierte Zugriffe auf \texttt{unordered\_map}s implementieren, mitterweile einem \textit{Entity Handle}-basierten Zugriff auf das ECS-Backend gewichen: Die \texttt{update()}-Methode ist nicht länger Bestandteil der \texttt{GameWorld}, wird aber vorerst in den nachfolgenden Meilensteinen eine Rolle spielen.
+Letztendlich wurde die Logik in die \texttt{GameLoop} überführt, welche die Update-Logik in individuelle Phasen unterteilt sowie vom Zustand der konfigurierten \textit{State Machines} abhängig macht.
+Dies erlaubt letztendlich deterministisches Verhalten bzgl. weltverändernder Befehle, sowie die durch die Anforderungen beötigte (De)Aktivierung Gameplay-spezifischer Systeme .\\
+
 Zur Erleichterung des Debuggings und zur Laufzeit-Konfiguration der \texttt{GameObject}-Parameter wurde \textit{Dear ImGui} integriert.
 Ein besonderer Fokus lag dabei auf der Kamera-Steuerung: Durch die Einbindung von Kameras als spezialisierte Knoten in den Szenengraph können diese nun direkt an Spielobjekte gebunden werden.
 Um eine unerwünschte Übernahme aller Transformationen (wie z. B. die Rotation des Spielerschiffs) zu verhindern, wurde eine Bitmaske implementiert.

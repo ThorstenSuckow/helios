@@ -1,68 +1,87 @@
-\section{Meilenstein 3: Entities, Components and Systems - aber keine Entity Component System}
+\section{Meilenstein 3: Entities, Components and Systems -- aber kein Entity Component System}
 
-Mit dem für Meilenstein 3 geplanten Feature waren Umsetzung von Spielphysik, Feuermechaniken und die Spielereingabe zur Steuerung des Schiffs angesetzt.\\
+Mit dem für Meilenstein 3 geplanten Funktionsumfang standen die Umsetzung der Spielphysik, die Feuermechaniken sowie die Spielereingabe zur Schiffssteuerung im Fokus.\\
 
-\noindent
-Mit der in Meilenstein 2 umgesetzten Entwurf einer GameWorld mit darin befindlichen GameObjects war angedacht, zunächst die Gameworld als greoben Datencontainer für die in ihr befindlichen GameObjects zu verwenden.\\
-Ein einfaches Command-Pattern sollte die Interaktion zwischen den GameObjects und der GameWorld ermöglichen, um beispielsweise die Bewegung eines GameObjects durch die GameWorld zu steuern.\\
 
-\noindent
-Mit der Anforderung, Spielphysik umszusetzen, sowie Feuermechaniken zu implementieren, hatte sich schnell herausgestellt, dass ein Objekt Orientierter Entwurf hier zu sehr großen vererbungshierachien führen würde, was mit dem Ziel, auch eine möglichst perfromante ztu erreichen, durch die VTable Lookups nicht vertretbar war.\\
-Allerding war auch die in~\ref{lst:gameobject_v1} auszugweise dargestellte API für einen einfachen Prototyp, der wenig Anforderungen bis auf Transformatione aufweisen muss, für due Umsetzung eines einfachen Spiels vertretbar, allerdings, müssten mindestens für die Feuermehacniken dem Sehcema nach auch diese in diese Klasse untergebracht werden, was zu unnützem Code für GameObjekte spführen würde, die keine Feuermechaniken benötigen - wie die gheplanten Gegnertypen, die - dem Originalspiel entsprechend - keine Waffen haben sollen.\\
+Basierend auf dem in Meilenstein 2 umgesetzten Entwurf war ursprünglich angedacht, die \texttt{GameWorld} als groben Datencontainer für die darin befindlichen \texttt{GameObjects} zu verwenden.
+Ein einfaches \textit{Command-Pattern} sollte dabei die Interaktion zwischen den Objekten und der Welt ermöglichen, um beispielsweise Bewegungsabläufe zentral zu steuern.\\
 
+
+Die Anforderungen zur Implementierung von Physik und Waffensystemen machten jedoch schnell deutlich, dass ein klassisch objektorientierter Entwurf zu tiefen Vererbungshierarchien führen würde.
+In Hinblick auf die angestrebte Performance waren die damit verbundenen Laufzeitkosten (virtuelle Funktionsaufrufe und schlechte Datenlokalität, Pointer Chasing, \textit{VTable-Lookups}) nicht vertretbar.\\
+
+Zwar war die in~\ref{lst:gameobject_v1} auszugsweise dargestellte API für einen einfachen Prototypen mit geringen Anforderungen (reine Transformationen) noch handhabbar; für die Umsetzung komplexerer Logiken wie der Feuermechanik hätten diese jedoch fest in die Basisklasse integriert werden müssen.
+Dies hätte unweigerlich zu dead code bei Objekten geführt, die diese Funktionalität gar nicht benötigen - wie etwa die geplanten Gegnertypen, die dem Originalspiel entsprechend keine Waffen führen sollen.\\
 
 \begin{lstlisting}[style=c++style,
-    caption={Auszug aus dem Interface für die GameObject \texttt{GameWorld} (Meilenstein 2). },
+    caption={Auszug aus dem Interface des \texttt{GameObject} (Stand Meilenstein 2). Die gleichzeitige Verwendung von einer spielweltbasierten \texttt{position} und der \texttt{translation} aus dem SceneGraph weist bereits auf eine doppelte Zustandsrepräsentation hin. Die nicht inkonsequent durchgeführte Trennung sorgte in späteren Meilensteinen für Synchronisations- und Zuständigkeitskonflikten beim Hinzufügen weiterer transformationsbasierter Systeme (Steuerung, Rotation, Kollision).},
     label=lst:gameobject_v1]
+    /** @brief Unique identifier for this GameObject. */
+    Guid guid_;
 
-/**
-* @brief Unique identifier for this GameObject.
-helios::util::Guid guid_;
+    /** @brief Pointer to the SceneNode's transform component. */
+   Transform* transform_;
 
-/**
-* @brief Pointer to the SceneNode's transform component.
+    /** @brief The current velocity-vector, if any. */
+   vec3f velocity_{};
 
-*/
-helios::scene::Transform* transform_;
+    /** @brief The current position-vector in local coordinates (model space). */
+    vec3f position_{};
 
-/**
-* @brief The current velocity-vector, if any.
-*/
-helios::math::vec3f velocity_{};
+    /** @brief Updates the GameObject state for the current frame. */
+    virtual void update(float deltaTime) = 0;
 
-/**
-* @brief The current position-vector in local coordinates (model space).
-*/
-helios::math::vec3f position_{};
-
-/**
-* @brief Updates the GameObject state for the current frame.
-*/
-virtual void update(float deltaTime) = 0;
-
-/**
-* @brief Applies a scaling transformation to the GameObject.
-* @warning If the SceneNode has been destroyed, this will cause undefined behavior.
-*/
-GameObject& setScale(const helios::math::vec3f& scale) noexcept;
-
-/**
-* @brief Applies a rotation transformation to the GameObject.
-* @warning If the SceneNode has been destroyed, this will cause undefined behavior.
-*/
-GameObject& setRotation(const helios::math::mat4f& rotation) noexcept;
-
+    /** @brief Applies a scaling/rotation transformation. */
+    GameObject& setScale(const vec3f& scale) noexcept;
+    GameObject& setRotation(const mat4f& rotation) noexcept;
 \end{lstlisting}
 
-\noindent
-Um keine zu große komplexitäöt zu diesem Zeitpunkt in das Projekt zu bringen und sich - dem in dem ersten Dokument beschriebenen Tracer Bullet Development den Anforderungen zu nähern, wurde die Entscheidung getroffen, die Physik-Komponenten und TRansformationslogiken aus dem GameObject zu entfernen und das GameObject selber zunächst als einfachen DatenContainer für Components zu betrachten, derer beliebig viele für eine Kompoennte definiert werden dürfte. Als wesentliche Funktionalität blieben bestehen:
+
+Um die Komplexität zu diesem Zeitpunkt beherrschbar zu halten und sich im Sinne des \textit{Tracer Bullet Development} schrittweise den Anforderungen zu nähern, wurde entschieden, Physik- und Transformationslogiken aus dem \texttt{GameObject}-Kern zu extrahieren. Das \texttt{GameObject} wurde fortan als reiner Komponenten-Container betrachtet.\footnote{
+Das die Terminologie also zu diesem Zeitpunkt zwar an ECS angelehnt, aber kein reines ECS darstellt, machen folgende Eigenschaften der Umsetzung deutlich: Components sind polymorphe Heap-Objekte, die eigentliche Entität existiert physisch als Owner Objekt statt als bloßes Handle; die Updates der Systeme basieren auf komponentenweiser Laufzeitprüfung. Eine Abgrenzugn zu einem reinen ECS-Design findet sich in Kapitel 3.
+}
+
+
+Als wesentliche Merkmale blieben bestehen:
 
 \begin{itemize}
-    \item Identifizierung aller GameObjects über eine GUIID, so dass Lookup und Zugriff über die GameWorld möglich sein sollte, unter Benutzung eines \texttt{std::unordered\_map<helios::util::Guid, std::unique\_ptr<GameObject>>}
-    \item Hinzufügen und entfernen von Komponenten auf den Game Objects selber über ein \texttt{        std::vector<std::unique\_ptr<Component>>;}
-    \item Eine \texttt{update()}-Methode, damit sich GameObjects selber per Frame aktualisieren können.
+    \itemsep0.5em
+    \item Identifizierung aller Objekte über eine \texttt{GUID}, wobei der Zugriff über die \texttt{GameWorld} mittels \texttt{std::unordered\_map<Guid, std::unique\_ptr<GameObject>>} realisiert wurde.
+    \item Dynamisches Hinzufügen und Entfernen von Komponenten über einen\\
+    \texttt{std::vector<std::unique\_ptr<Component>>}.
+    \item Eine \texttt{update()}-Methode zur individuellen Aktualisierung der Objekte pro Frame.
 \end{itemize}
 
-\noindent
-Physik und Feuermechaniken werden beginnen mit Meielnstein 3 als eigenständige System ebetrachtet, die in der Gameloop über einen einfachen Aufruf zu \texttt{Gameworld::update(float delta)} aktualisiert werden.\\
-Hierzu iterieren die Systeme in der update() mEthode nach allen GameObjects, fragen ab, ob diese Obekte eine bestimmte Kompoennete besitzen, un führen dann Aktualisierungen basierend auf dem Zustand der Objekte durch - auch deise Implementierung würde im späteren Verlauf durch einen idiomatischen Ansatz im KOntext Dataoriented programming ersetzet, da sich nicht nur die iteration über einen vektor mit unique ptr und dann die Abfrage, ob die Komponente vorhanden ist, als nicht performant erwies, sondern auch die Tatsache, dass die Komponenten selber als polymorphe Objekte mit virtuellen Methoden implementiert waren, was zu einem unerwünscheten Overhead durch VTable Lookups führte.
+
+
+
+Physik und Feuermechaniken wurden ab Meilenstein 3 als eigenständige Systeme betrachtet, die in der \textit{GameLoop} über einen zentralen Aufruf von \texttt{GameWorld::update(float delta)} aktualisiert werden.
+Die Systeme iterierten in ihrer Logik über alle \texttt{GameObjects}, prüften das Vorhandensein spezifischer Komponenten und führten basierend darauf Zustandsänderungen durch.\\
+
+Diese Implementierung wurde im späteren Verlauf durch einen idiomatischen Ansatz im Kontext des \textit{Data-Oriented Programming} ersetzt.
+Die Iteration über einen Vektor von \texttt{unique\_ptr} verbunden mit Typ-Prüfungen erwies sich nicht nur als performancekritisch, sondern der zusätzliche Overhead durch die polymorphe Natur der Komponenten (erneute \textit{VTable-Lookups}) verhinderte eine im Game Engine-Design selbstverständliche optimale Ausnutzung der Hardware-Ressourcen.\\
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\columnwidth]{content/de/iterative evolution/img/spaceshipshooting}
+    \caption{Screenshot der Spaceship-Shooting Demo aus Meilenstein 3. Projektile werden über Ellipsen realisiert, die im OpenGL GL\_LINE\_LOOP mode gerendert werden. (Quelle: eigene Aufnahme)}
+    \label{fig:spaceshipshooting}
+\end{figure}
+
+
+Für Meilenstein 3 wurde die \textit{Spaceship Shooting Demo} veröffentlicht (siehe Abbildung~\ref{fig:spaceshipshooting}).
+Diese beinhaltete bereits das in den Anforderungen aufgeführte \textit{Grid}, um eine visuelle Referenz für die Schiffsbewegung relativ zum Level zu schaffen.\\
+
+Um das Despawn von Projektilen aus der Spielwelt zu handhaben, wurde ein \textit{Levelbounds}-System implementiert.
+Dieses prüft kontinuierlich, ob sich Objekte innerhalb einer definierten Region befinden.
+Je nach konfiguriertem Verhalten (\textit{Despawn} oder \textit{Bounce}) ergeben sich unterschiedliche Konsequenzen: Projektile werden beim Verlassen der Bounds in der Regel entfernt (Despawn), während das Spielerschiff durch einen \textit{Bounce}-Effekt zurück in das Spielfeld geführt wird.
+Die Intensität dieses Abprall-Effekts lässt sich dabei über einen Elastizitätsparameter steuern.\\
+
+Um die Performance beim Feuern vieler Projektile zu stabilisieren, wurde ein frühes \textit{Pooling}-Verfahren eingeführt.
+Ein spezialisiertes \texttt{ProjectilePoolSystem} verwaltet dabei die Lebenszyklen der Projektile: Anstatt Objekte bei jedem Schuss neu zu instanziieren und beim Verlassen der Spielwelt zu zerstören, werden despawnte Projektile deaktiviert und für spätere Schussereignisse wiederverwendet.\\
+
+Dieser Ansatz findet sich auch in späteren Iterationen der Engine wieder, jedoch in stark abgewandelter und effizienterer Form.
+Während das initiale Pooling-System Projektile noch als vollständige \texttt{GameObjects} verwaltet, also $N$ Objekte mit jeweils $M$ Komponenten, die einzeln im Heap alloziert werden, basiert das spätere Verfahren auf dem \texttt{EntityManager} und \textit{Type-Erased Sparse Sets}.
+Hierdurch reduziert sich die Anzahl der Heap-Objekte in diesem Kontext linear auf die Anzahl der Komponententypen $M$, da die Daten der $N$ Entitäten innerhalb der Sparse-Sets in kontinuierlichen Arrays gespeichert werden.
+

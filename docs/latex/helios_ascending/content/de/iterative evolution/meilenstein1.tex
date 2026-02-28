@@ -5,7 +5,8 @@ Der erste Meilenstein umfasste das technische Fundament, in das das spätere Spi
 \noindent
 Zu diesem Zeitpunkt lag der Fokus auf der Abstraktion der Rendering-Engine, der Event- und Window-Systeme sowie einem ersten Entwurf der Input-Verarbeitung.
 Die tieferen Ebenen der späteren Game-Engine wurden dabei noch nicht explizit berücksichtigt.
-Aus diesem Grund finden sich in dieser frühen Phase Designentscheidungen, die in den darunterliegenden Schichten so nicht mehr zu finden sind - insbesondere betrifft dies einen stark objektorientierten Ansatz (OOP), der mit zunehmender Komplexität der Systeme zugunsten des Prinzips \textit{Composition over Inheritance} weichen musste.\\
+Aus diesem Grund finden sich in dieser frühen Phase Designentscheidungen, die in den darunterliegenden Schichten so nicht mehr zu finden sind - insbesondere der stark objektorientierte Ansatz (OOP) wurde aufgrund der zunehmenden Anzahl der Komponenten und damit verbundenen Komplexität der Systeme zugunsten des Prinzips \textit{Composition over Inheritance} verworfen.
+Dies mündete in Meilenstein 5 in einer ECS-Architektur.\\
 
 
 
@@ -16,7 +17,6 @@ Aus diesem Grund finden sich in dieser frühen Phase Designentscheidungen, die i
     \label{fig:simplecuberendering}
 \end{figure}
 
-\noindent
 Im Zuge der Entwicklung der tiefer liegenden Schichten musste die Architektur der Anwendungsschicht nur geringfügig angepasst werden, um neue Anforderungen zu erfüllen.
 Die signifikantesten Änderungen betrafen die Handhabung von Viewports: In Meilenstein 1 waren diese noch als statische, eins-zu-eins zum Fenster korrespondierende Render-Ziele definiert.
 Mit Meilenstein 2 erfolgte hier ein architektonischer Umbruch, der die Unterstützung mehrerer Viewports innerhalb eines \texttt{RenderTargets} (Abstraktion eines Framebuffers) ermöglichte.

@@ -101,8 +101,8 @@ export namespace helios::engine::modules::physics::collision::systems {
             bool bIsCollisionReporter = false;
             helios::engine::modules::physics::collision::types::CollisionBehavior aCollisionBehavior;
             helios::engine::modules::physics::collision::types::CollisionBehavior bCollisionBehavior;
-            uint32_t collisionLayer = 0;
-            uint32_t otherCollisionLayer = 0;
+            uint32_t aCollisionLayer = 0;
+            uint32_t bCollisionLayer = 0;
 
             [[nodiscard]] inline constexpr bool hasAnyInteraction() const noexcept {
                 return (isSolidCollision || isTriggerCollision) && (aIsCollisionReporter || bIsCollisionReporter);
@@ -306,8 +306,8 @@ export namespace helios::engine::modules::physics::collision::systems {
             bool bIsCollisionReporter = collisionStruct.bIsCollisionReporter;
             bool isSolidCollision     = collisionStruct.isSolidCollision;
             bool isTriggerCollision   = collisionStruct.isTriggerCollision;
-            uint32_t collisionLayer = collisionStruct.collisionLayer;
-            uint32_t otherCollisionLayer = collisionStruct.otherCollisionLayer;
+            uint32_t aCollisionLayer = collisionStruct.aCollisionLayer;
+            uint32_t bCollisionLayer = collisionStruct.bCollisionLayer;
 
             assert((isSolidCollision || isTriggerCollision)
                 && (aIsCollisionReporter || bIsCollisionReporter)
@@ -318,12 +318,14 @@ export namespace helios::engine::modules::physics::collision::systems {
                 csc_a->setState(
                     candidate,
                     contact, isSolidCollision, isTriggerCollision, collisionStruct.aCollisionBehavior,
-                    aIsCollisionReporter, match.entityHandle(), collisionLayer, otherCollisionLayer
+                    aIsCollisionReporter, match.entityHandle(), aCollisionLayer, bCollisionLayer
                 );
                 csc_b->setState(
                     match,
                     contact, isSolidCollision, isTriggerCollision, collisionStruct.bCollisionBehavior,
-                    bIsCollisionReporter, candidate.entityHandle(), collisionLayer, otherCollisionLayer
+                    bIsCollisionReporter, candidate.entityHandle(),
+                    // swap collision layer order
+                    bCollisionLayer, aCollisionLayer
                 );
             }
 

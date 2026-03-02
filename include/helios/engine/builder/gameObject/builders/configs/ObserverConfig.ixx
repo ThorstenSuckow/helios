@@ -12,6 +12,8 @@ import helios.engine.ecs.GameObject;
 
 import helios.engine.core.data;
 
+import helios.engine.mechanics.match.components;
+
 import helios.engine.mechanics.scoring.components;
 import helios.engine.mechanics.timing;
 
@@ -75,6 +77,27 @@ export namespace helios::engine::builder::gameObject::builders::configs {
 
             gameObject_.add<helios::engine::mechanics::scoring::components::ScoreObserverComponent>()
                        .setScorePoolId(scorePoolId);
+            return *this;
+        }
+
+        /**
+         * @brief Adds a LivesBindingComponent observing the given entity's lives.
+         *
+         * @param gameObject The entity whose LivesComponent is observed.
+         *
+         * @return Reference to this config for chaining.
+         */
+        ObserverConfig& lives(const helios::engine::ecs::GameObject gameObject) {
+
+            auto* loc = gameObject_.get<
+                helios::engine::mechanics::match::components::LivesBindingComponent
+            >();
+
+            assert(!loc && "LivesObserverComponent already available.");
+
+            gameObject_.add<helios::engine::mechanics::match::components::LivesBindingComponent>(
+                gameObject.entityHandle()
+            );
             return *this;
         }
 

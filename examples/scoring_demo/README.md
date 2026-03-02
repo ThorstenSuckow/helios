@@ -5,7 +5,7 @@ This example demonstrates the **scoring system** in helios, including score pool
 ## Features
 
 - **Score Pool Management** - Centralized score tracking with `ScorePoolManager`
-- **Score Attribution** - Kill scoring via `LastAttackerComponent` and `ScorePoolComponent`
+- **Score Attribution** - Kill scoring via `LastDamageComponent` and `ScorePoolComponent`
 - **UI Text Rendering** - Dynamic score display with `OpenGLGlyphTextRenderer` and `TextMesh`
 - **Score Observers** - Data binding between score pools and UI components
 - **Health & Damage System** - Enemy health tracking with `HealthComponent`
@@ -103,7 +103,7 @@ cmake --build build --target scoring_demomain
 | `ScorePoolComponent` | Associates player with a score pool |
 | `ScoreValueComponent` | Points awarded when entity is defeated |
 | `ScoreObserverComponent` | Observes a score pool for UI updates |
-| `LastAttackerComponent` | Tracks who dealt the killing blow |
+| `LastDamageComponent` | Tracks who dealt the killing blow |
 | `HealthComponent` | Entity health and damage tracking |
 | `MatchStateComponent` | Per-entity match state tracking |
 | `MenuComponent` | Menu state and item configuration |

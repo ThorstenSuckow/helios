@@ -182,7 +182,7 @@ export namespace helios::engine::runtime::gameloop {
          * - **FlushCommands:** Executes pending commands from the CommandBuffer.
          * - **FlushManagers:** Processes manager requests (e.g., spawning from pools).
          *
-         * The order is: PassEvents → FlushCommands → FlushManagers.
+         * The order is: FlushCommands → FlushManagers → PassEvents.
          * Commands must be flushed before managers to ensure spawn requests are
          * generated before being processed.
          *

@@ -22,9 +22,7 @@ Used by other systems (e.g., `CombatScoringSystem`, `GameObjectLifecycleSystem`)
 
 Published when an entity's health is modified (damage or healing). Contains:
 
-- `HealthChangeContext()` – A `HealthChangeContext` describing target, source, contact point, and amount
-
-Consumed by `HealthUpdateSystem` to apply damage/healing and trigger downstream events.
+- `HealthChangeContext()` – A `HealthChangeContext` describing target, source, contact point, and amount. Used for triggering health-based reactions (e.g., hit effects, UI updates) without needing to subscribe to the full health update process.
 
 ---
 

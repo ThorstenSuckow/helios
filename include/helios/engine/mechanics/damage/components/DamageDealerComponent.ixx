@@ -113,7 +113,6 @@ export namespace helios::engine::mechanics::damage::components {
             assert(otherLayerId != 0 && "Unexpected layer id, must not be 0");
 
             const auto idx = std::countr_zero(otherLayerId);
-            assert(idx != 0 && "Unexpected layer id, must not be 0");
             assert(idx < damageRegistry_.size() && "Unexpected layer id, index larger than size");
 
             return damageRegistry_[idx];

@@ -4,4 +4,5 @@
  */
 export module helios.engine.mechanics.health.events;
 
-export import helios.engine.mechanics.health.events.DeathEvent;
+export import helios.engine.mechanics.health.events.HealthDepletedEvent;
+export import helios.engine.mechanics.health.events.HealthChangedEvent;

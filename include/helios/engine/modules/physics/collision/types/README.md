@@ -25,7 +25,7 @@ Bitmask values that can be combined to define collision responses:
 | `Stick` | Attach entity to the collision surface |
 | `Despawn` | Remove entity from the game world |
 | `PassEvent` | Emit event without physical response |
-| `PushEvent` | Push event to double-buffered event bus |
+| `PhaseEvent` | Push event to double-buffered event bus |
 | `FrameEvent` | Process event in the current frame |
 
 ## CollisionContext

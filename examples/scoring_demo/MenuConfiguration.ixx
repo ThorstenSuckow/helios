@@ -27,6 +27,7 @@ export namespace helios::examples::scoring {
      * @param hudScene Scene for HUD elements.
      */
     inline void configureMenus(
+        helios::engine::ecs::GameObject& shipGameObject,
         helios::engine::runtime::world::GameWorld& gameWorld,
         helios::rendering::RenderingDevice& renderingDevice,
         std::shared_ptr<helios::ext::opengl::rendering::shader::OpenGLShader> glyphShader,
@@ -399,13 +400,17 @@ export namespace helios::examples::scoring {
             .gameObject(gameWorld)
             .withRendering([&](auto& rnb) {
                 rnb.textRenderable()
-                   .text("x 3")
                    .fontId(uiTextFont)
+                   .formattedAsNumber("x {0}")
                    .fontScale(0.8f)
                    .fontResourceProvider(renderingDevice.fontResourceProvider())
                    .shader(glyphShader)
                    .color(helios::util::Colors::WhiteSmoke)
                    .attachTo(&hudScene.root());
+            })
+            .withObserver([&](auto& ob) {
+               ob.observe()
+                 .lives(shipGameObject);
             })
             .withUiTransform([](auto& tb) {
                 tb.transform()

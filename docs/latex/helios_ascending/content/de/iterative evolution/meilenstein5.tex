@@ -1,19 +1,32 @@
 \subsection{Meilenstein 5: ECS und UI-Architektur}
 
-In Meilenstein 5 sollten die Systeme der Engine mit dem umzusetzenden Spiel verbunden werden.
 
-Da die Entwicklung der fundamentalen System der Engine zu diesem Zeitpunkt eine relativ stabile Strukturierung repräsenteirte, wurde zunächste die Datenhaltung der Spielobjekte der Gameworld auf eine idiomatischere ECS-Architektur umgestellt, was sich rückblickend als unkompliziert erwiesen hat.
-Gemäß dem OCP konztte dDie API der GameWorld soiwe der GameObjects konnte weitestgehend übernommen werden, und es musste nur der Unterbau zur Datenhaltung angeppasst werden.
-Mit Aufwand war in dieser HInsicht der Austausch der GUIDs verbunden, die in helios zur identifizierung der Spielobjekte genutzt wurde.\footnote{Eine GUID repräsentiert eine global eindeutige Identifikationsnummer, die intern als \texttt{uint\_64\_t} implementiert} ist.}.\\
+Für Meilenstein 5 war vorgesehen, die Enginesysteme mit dem umzusetzenden Gameplay zu verzahnen.
+Da die fundamentalen Enginesysteme zu diesem Zeitpunkt bereits eine stabile Struktur aufwiesen, wurde zunächst die Datenhaltung der Spielobjekte innerhalb der GameWorld auf eine idiomatischere ECS-Architektur umgestellt.
+Dabei beschränkten sich die notwendigen Änderungen weitgehend auf den Datenhaltungs-Unterbau; die APIs von \textit{GameWorld} und \textit{GameObject} konnten im Sinne des Open-Closed-Principle (OCP) (\cite[]{OCP}) größtenteils unverändert übernommen werden.
+Der größte Migrationsaufwand entstand durch den Austausch der bislang in \textit{helios} verwendeten GUIDs zur Identifikation von Spielobjekten.\footnote{Eine GUID ist eine global eindeutige Identifikationsnummer, die intern als \texttt{uint\_64\_t} implementiert ist.}\\
 
-Meilenstein 5 erfuhr außerdem eine Änderung im Handling des Surce Codes.
-Während helios bislang auf eine strikte TRennung von Module und INterface Units gesetzt hatten, wurde dieser Ansatz zugunsten direkter Implementierung in den Interface Units aufgegeben.
-Die kognitive Last, zwischen den beiden Ebenen zu wechseln, war für die Frühphase mit dem stark iterativ und durch Tiral und Error geprägten Ansatz zu hoch.
-Einen Vorteil in Compile-Time konnten wir imt dem Umfan g des Projektes auch nciht ausmachen.\\
+Mit dem Meilenstein wurde außerdem die Trennung von Interface und Implementation Units aufgehoben: Mit dem für einen iterativen Entwicklungsprozess typischen Refactoring-Aufwand ergab sich trotz ausreichender IDE-Unterstützung (CLion) eine spürbare kognitive Last durch die häufigen Kontextwechsel bei der Navigation durch die Quelldateien, was Verzögerung bei der konsistenten Anpassung von Schnittstellendefinition und zugehöriger Implementierung begünstigte.
+Die Auswirkungen auf die Kompilierzeit wurden als vernachlässigbar eingestuft.\\
 
-Mit Meilenstein 5 wurden auch einige weitere Idiome hinsichtlich C++ sowie Datenorientierter Programm erlernt.
-Zwar fiel es immer noch nicht leicht, das Mental Model auf Composition statt Inheritannce umzustellen, aber die Vorteile von Templatebasierten Komponenten war war bei der Einführung der verschiedenen Mechaniken schnell ersichtlich: Statt Basisklassen zur Verfügung zu stellen, aus denne andere Typen erben können, stellt helios wo möglich generische, parametrisierte Komponenten bereit.
-Außerdem werden, wo nötig und möglich, Komponenten über Type-Erasure in Vektoren oder Size-parametrisierten Arrays gehalten. Über TypeIndizes wird dabei versucht, Möglichst dicht gepackte Datencontainer zu erstellen, so dass nicht nur der Lookup in O(1), sondern auch möglichst die Iteration von N objekten, wobei der größe Index eines Objektes  $M > N$ ist,  in O(N) geschieht.\\
+Mit zunehmender Erfahrung mit C++ in diesem Projekt wuchs auch das Vertrauen in die eigene Codebasis.
+Die ursprünglich konsequente Verwendung von \texttt{unique\_ptr} und \texttt{shared\_ptr} zur Abbildung eindeutiger Besitzverhältnissen und Move-Smantik wurde in den tieferen Schichten der Engine schrittweise durch rohe Zeiger und Referenzen ersetzt.
+Vorkommen von Referenzen als Übergabeparameter sollen als Schnittstellendefinition eine an anderer Stelle vereinbarte Lebenszeitgarantie liefern, die in höheren Schichten durch \texttt{unique\_ptr} ausgedrückt wird.\\
+
+Mit Umstellung des \textit{Mental Models} auf \textit{composition over inheritance} wurde zudem die Template-Metaprogrammierung als idiomatischer Ansatz zur Bereitstellung generischer Komponenten und Systemen etabliert.
+Dies rmöglicht einen weitgehenden Verzicht auf Vererbung, virtuelle Funktionen und den damit verbundenen Laufzeitkosten.
+Ganz ohne Basisklassen kommt helios nicht aus.
+Diese beschränken sich jedoch überwiegend auf den Einsatz bei dem Type-Erasure-Idiom und bleiben in der Regel in einer flachen Vererbungshierarchie.
+Eine Ausnahme bilden spezialisierte Manager, die von \texttt{Manager} erben und durch die gleichzeitige Nutzung als \texttt{CommandHandler} die Schnittstelle mit der von \texttt{TypedCommandHandler<T>} kombinieren.
+Da Manager jedoch vergleichsweise selten in der GameLoop geflusht werden (hierzu sind individuell konfigurierbare \texttt{CommitPoints} sowie \textit{Phasenübergängen} vorgesehen), bewerten wir den Overhead durch die VTable-Lookups an dieser Stelle nicht als kritisch, wobei eine belastbare Messung aussteht.\\
+
+In Kombination mit Type-Erasure, das die Ablage spezialisierter Typen in einem als type-erased Vektor erlaubt, nutzen wir außerdem einen \texttt{TypeIndex}.
+Dieser wird mit einem \texttt{struct} initialisiert und erzeugt auf Basis der übergebenen Typen einen dichten Index.
+In entsprechenden Anwendungsfällen ermöglicht dies einen elementweisen Zugriff in $O(1)$, während sich dichte (\textit{dense}) Speicherlayouts, die eine Iteration in $O(N)$ erlauben.
+In den meisten Fällen entspricht $N$ der tatsächlichen Elementanzahl $M$, und nur in seltenen Fällen ist aufgrund der \textit{sparsity} $N > M$.
+
+
+
 
 Dies stellt nur einen kleinen Ausschnitt der Änderungen in der Datenhaltung dar, die mit Meilenstein 5 eingenagen sind.
 Auf einige Aspekte werden wir im späteren Verlauf noch näher eingehen, wie bspw den graduellen Verzicht auf Unique und shared ptr, was durch eine vertrauteren Umgang mit C++ durch die längere Lernphase bergründet ist (mehr Selbstverrtrauen, das nichts falsch ist).\\

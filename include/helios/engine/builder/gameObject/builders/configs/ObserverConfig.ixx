@@ -93,7 +93,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
                 helios::engine::mechanics::match::components::LivesBindingComponent
             >();
 
-            assert(!loc && "LivesObserverComponent already available.");
+            assert(!loc && "LivesBindingComponent already available.");
 
             gameObject_.add<helios::engine::mechanics::match::components::LivesBindingComponent>(
                 gameObject.entityHandle()

@@ -53,9 +53,8 @@ export namespace helios::engine::mechanics::damage::systems {
      * @brief Emits HealthChangedEvents when solid collisions involve damage dealers.
      *
      * Listens for SolidCollisionEvents and checks if the source entity has a
-     * DamageDealerComponent. If the target has a HealthComponent, emits a
-     * HealthChangedEvent through the channels selected by the target's
-     * HealthChangeBehavior flags. Resolves the true attacker via
+     * DamageDealerComponent. If the target has a HealthComponent, emits an
+     * ApplyDamageCommand. Resolves the true attacker (instigator) via
      * EmittedByComponent when applicable (e.g. projectiles).
      */
     class DamageOnCollisionSystem : public helios::engine::ecs::System {

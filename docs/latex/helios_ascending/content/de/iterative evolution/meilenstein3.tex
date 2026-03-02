@@ -8,10 +8,11 @@ Ein einfaches \textit{Command-Pattern} sollte dabei die Interaktion zwischen den
 
 
 Die Anforderungen zur Implementierung von Physik und Waffensystemen machten jedoch schnell deutlich, dass ein klassisch objektorientierter Entwurf zu tiefen Vererbungshierarchien führen würde.
-In Hinblick auf die angestrebte Performance waren die damit verbundenen Laufzeitkosten (virtuelle Funktionsaufrufe und schlechte Datenlokalität, Pointer Chasing, \textit{VTable-Lookups}) nicht vertretbar.\\
+In Hinblick auf die angestrebte Performance waren die damit verbundenen Laufzeitkosten (virtuelle Funktionsaufrufe und schlechte Datenlokalität, Pointer Chasing, \textit{VTable-Lookups}) mit dem angestrebten Ziel, neben einer sauberen Arhcitektur auch eine performante Lösung anzubieten, nicht vereinbar.\\
 
-Zwar war die in~\ref{lst:gameobject_v1} auszugsweise dargestellte API für einen einfachen Prototypen mit geringen Anforderungen (reine Transformationen) noch handhabbar; für die Umsetzung komplexerer Logiken wie der Feuermechanik hätten diese jedoch fest in die Basisklasse integriert werden müssen.
-Dies hätte unweigerlich zu dead code bei Objekten geführt, die diese Funktionalität gar nicht benötigen - wie etwa die geplanten Gegnertypen, die dem Originalspiel entsprechend keine Waffen führen sollen.\\
+Zwar war die in~\ref{lst:gameobject_v1} auszugsweise dargestellte API für einen einfachen Prototypen mit geringen Anforderungen wie reine Transformationen noch handhabbar.
+Für die Umsetzung komplexerer Logiken wie der Feuermechanik hätten diese jedoch entweder in die Basisklasse integriert werden müssen - was zu dead code bei Objekten geführt hätte, die diese Funktionalität nicht benötigen\footnote{wie etwa die geplanten Gegnertypen, die dem Originalspiel entsprechend keine Waffen führen sollen} - oder eine Spezialisierung hätte erfolgen müssen.
+Auch hier war zunächst unklar, wie in einem gewohnten OOP-Ansatz ein vernünftiger Schnitt zwischen Basisklasse und Spezialisierung hätte aussehen können.\\
 
 \begin{lstlisting}[style=c++style,
     caption={Auszug aus dem Interface des \texttt{GameObject} (Stand Meilenstein 2). Die gleichzeitige Verwendung von einer spielweltbasierten \texttt{position} und der \texttt{translation} aus dem SceneGraph weist bereits auf eine doppelte Zustandsrepräsentation hin. Die nicht inkonsequent durchgeführte Trennung sorgte in späteren Meilensteinen für Synchronisations- und Zuständigkeitskonflikten beim Hinzufügen weiterer transformationsbasierter Systeme (Steuerung, Rotation, Kollision).},
@@ -37,10 +38,10 @@ Dies hätte unweigerlich zu dead code bei Objekten geführt, die diese Funktiona
 \end{lstlisting}
 
 
-Um die Komplexität zu diesem Zeitpunkt beherrschbar zu halten und sich im Sinne des \textit{Tracer Bullet Development} schrittweise den Anforderungen zu nähern, wurde entschieden, Physik- und Transformationslogiken aus dem \texttt{GameObject}-Kern zu extrahieren. Das \texttt{GameObject} wurde fortan als reiner Komponenten-Container betrachtet.\footnote{
-Das die Terminologie also zu diesem Zeitpunkt zwar an ECS angelehnt, aber kein reines ECS darstellt, machen folgende Eigenschaften der Umsetzung deutlich: Components sind polymorphe Heap-Objekte, die eigentliche Entität existiert physisch als Owner Objekt statt als bloßes Handle; die Updates der Systeme basieren auf komponentenweiser Laufzeitprüfung. Eine Abgrenzugn zu einem reinen ECS-Design findet sich in Kapitel 3.
-}
-
+Um die Komplexität zu diesem Zeitpunkt beherrschbar zu halten und sich im Sinne des \textit{Tracer Bullet Development} schrittweise den Anforderungen zu nähern, wurde entschieden, Physik- und Transformationslogiken aus dem \texttt{GameObject}-Kern zu extrahieren.
+Das \texttt{GameObject} wurde fortan als reiner Komponenten-Container betrachtet.
+Dass die Terminologie zu diesem Zeitpunkt zwar an ECS angelehnt, aber kein reines ECS darstellt, machen folgende Eigenschaften der Umsetzung deutlich: Components sind polymorphe Heap-Objekte, die eigentliche Entität existiert physisch als Owner Object statt als bloßes Handle; die Updates der Systeme basieren auf komponentenweiser Laufzeitprüfung (siehe Abbildung~\ref{fig:gameobject_uml}.
+Die Abgrenzung zu einem reinen ECS-Design nehmen wir in Kapitel 3 wieder auf.\\
 
 Als wesentliche Merkmale blieben bestehen:
 
@@ -53,19 +54,17 @@ Als wesentliche Merkmale blieben bestehen:
 \end{itemize}
 
 
-
-
-Physik und Feuermechaniken wurden ab Meilenstein 3 als eigenständige Systeme betrachtet, die in der \textit{GameLoop} über einen zentralen Aufruf von \texttt{GameWorld::update(float delta)} aktualisiert werden.
+Physik und Feuermechaniken wurden ab Meilenstein 3 als eigenständige Systeme betrachtet, die in der \textit{GameLoop} - die zu diesem Zeitpunkt noch als einfache \texttt{while}-Schleife ohne eigene Logik implementiert war - über einen zentralen Aufruf von \texttt{GameWorld::update(float delta)} aktualisiert werden.
 Die Systeme iterierten in ihrer Logik über alle \texttt{GameObjects}, prüften das Vorhandensein spezifischer Komponenten und führten basierend darauf Zustandsänderungen durch.\\
 
 Diese Implementierung wurde im späteren Verlauf durch einen idiomatischen Ansatz im Kontext des \textit{Data-Oriented Programming} ersetzt.
-Die Iteration über einen Vektor von \texttt{unique\_ptr} verbunden mit Typ-Prüfungen erwies sich nicht nur als performancekritisch, sondern der zusätzliche Overhead durch die polymorphe Natur der Komponenten (erneute \textit{VTable-Lookups}) verhinderte eine im Game Engine-Design selbstverständliche optimale Ausnutzung der Hardware-Ressourcen.\\
+Die Iteration über einen Vektor von \texttt{unique\_ptr} verbunden mit Typ-Prüfungen erwies sich nicht nur als performancekritisch (nachweis - Benchmak? LIteratur), sondern der zusätzliche Overhead durch die polymorphe Natur der Komponenten (erneute \textit{VTable-Lookups}) verhinderte eine im Game Engine-Design selbstverständliche optimale Ausnutzung der Hardware-Ressourcen.\\
 
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\columnwidth]{content/de/iterative evolution/img/spaceshipshooting}
-    \caption{Screenshot der Spaceship-Shooting Demo aus Meilenstein 3. Projektile werden über Ellipsen realisiert, die im OpenGL GL\_LINE\_LOOP mode gerendert werden. (Quelle: eigene Aufnahme)}
+    \caption{Screenshot der Spaceship-Shooting Demo aus Meilenstein 3. Projektile werden über Ellipsen realisiert, die im OpenGL \texttt{GL\_LINE\_LOOP} mode gerendert werden. (Quelle: eigene Aufnahme)}
     \label{fig:spaceshipshooting}
 \end{figure}
 
@@ -78,10 +77,9 @@ Dieses prüft kontinuierlich, ob sich Objekte innerhalb einer definierten Region
 Je nach konfiguriertem Verhalten (\textit{Despawn} oder \textit{Bounce}) ergeben sich unterschiedliche Konsequenzen: Projektile werden beim Verlassen der Bounds in der Regel entfernt (Despawn), während das Spielerschiff durch einen \textit{Bounce}-Effekt zurück in das Spielfeld geführt wird.
 Die Intensität dieses Abprall-Effekts lässt sich dabei über einen Elastizitätsparameter steuern.\\
 
-Um die Performance beim Feuern vieler Projektile zu stabilisieren, wurde ein frühes \textit{Pooling}-Verfahren eingeführt.
+Um die Performance beim Feuern vieler Projektile zu stabilisieren, wurde ein frühes \textit{Pooling}-Verfahren eingeführt, damit nicht zur Laufzeit Heap-Allokationen für die Erstellung neuer Spielobjekte stattfinden.
 Ein spezialisiertes \texttt{ProjectilePoolSystem} verwaltet dabei die Lebenszyklen der Projektile: Anstatt Objekte bei jedem Schuss neu zu instanziieren und beim Verlassen der Spielwelt zu zerstören, werden despawnte Projektile deaktiviert und für spätere Schussereignisse wiederverwendet.\\
 
-Dieser Ansatz findet sich auch in späteren Iterationen der Engine wieder, jedoch in stark abgewandelter und effizienterer Form.
-Während das initiale Pooling-System Projektile noch als vollständige \texttt{GameObjects} verwaltet, also $N$ Objekte mit jeweils $M$ Komponenten, die einzeln im Heap alloziert werden, basiert das spätere Verfahren auf dem \texttt{EntityManager} und \textit{Type-Erased Sparse Sets}.
-Hierdurch reduziert sich die Anzahl der Heap-Objekte in diesem Kontext linear auf die Anzahl der Komponententypen $M$, da die Daten der $N$ Entitäten innerhalb der Sparse-Sets in kontinuierlichen Arrays gespeichert werden.
+Dieser Ansatz findet sich auch in späteren Iterationen der Engine wieder, wo helios das Pooling als eigenständiges, zentrales KKonzept versteht und entsprechende Systeme dafür bereitstellt:
+Während das initiale Pooling-System Projektile noch als vollständige \texttt{GameObjects} verwaltet, also $N$ Objekte mit jeweils $M$ Komponenten, die einzeln im Heap alloziert werden, basiert das spätere Verfahren auf dem \texttt{EntityManager} und \textit{Type-Erased Sparse Sets}: Hierdurch reduziert sich die Anzahl der Heap-Objekte in diesem Kontext linear auf die Anzahl der Komponententypen $M$, da die Daten der $N$ Entitäten innerhalb der Sparse-Sets in kontinuierlichen Arrays gespeichert werden.
 

@@ -1,5 +1,90 @@
 \subsection{Meilenstein 5: ECS und UI-Architektur}
 
-- so erfolgt die spätere Umsetzng der Menüsysteme über unterschiedliche Szenen und Viewports, diemittels ortografischer Projektion gerendertn und mit dem RenderPass der Hauptszene als obere Layer in den MainBuffer gerendert wirden.
+In Meilenstein 5 sollten die Systeme der Engine mit dem umzusetzenden Spiel verbunden werden.
 
-zeigen der projektstruktur, die mit 4 refactored wurde und 5 nun ecs enthielt
+Da die Entwicklung der fundamentalen System der Engine zu diesem Zeitpunkt eine relativ stabile Strukturierung repräsenteirte, wurde zunächste die Datenhaltung der Spielobjekte der Gameworld auf eine idiomatischere ECS-Architektur umgestellt, was sich rückblickend als unkompliziert erwiesen hat.
+Gemäß dem OCP konztte dDie API der GameWorld soiwe der GameObjects konnte weitestgehend übernommen werden, und es musste nur der Unterbau zur Datenhaltung angeppasst werden.
+Mit Aufwand war in dieser HInsicht der Austausch der GUIDs verbunden, die in helios zur identifizierung der Spielobjekte genutzt wurde.\footnote{Eine GUID repräsentiert eine global eindeutige Identifikationsnummer, die intern als \texttt{uint\_64\_t} implementiert} ist.}.\\
+
+Meilenstein 5 erfuhr außerdem eine Änderung im Handling des Surce Codes.
+Während helios bislang auf eine strikte TRennung von Module und INterface Units gesetzt hatten, wurde dieser Ansatz zugunsten direkter Implementierung in den Interface Units aufgegeben.
+Die kognitive Last, zwischen den beiden Ebenen zu wechseln, war für die Frühphase mit dem stark iterativ und durch Tiral und Error geprägten Ansatz zu hoch.
+Einen Vorteil in Compile-Time konnten wir imt dem Umfan g des Projektes auch nciht ausmachen.\\
+
+Mit Meilenstein 5 wurden auch einige weitere Idiome hinsichtlich C++ sowie Datenorientierter Programm erlernt.
+Zwar fiel es immer noch nicht leicht, das Mental Model auf Composition statt Inheritannce umzustellen, aber die Vorteile von Templatebasierten Komponenten war war bei der Einführung der verschiedenen Mechaniken schnell ersichtlich: Statt Basisklassen zur Verfügung zu stellen, aus denne andere Typen erben können, stellt helios wo möglich generische, parametrisierte Komponenten bereit.
+Außerdem werden, wo nötig und möglich, Komponenten über Type-Erasure in Vektoren oder Size-parametrisierten Arrays gehalten. Über TypeIndizes wird dabei versucht, Möglichst dicht gepackte Datencontainer zu erstellen, so dass nicht nur der Lookup in O(1), sondern auch möglichst die Iteration von N objekten, wobei der größe Index eines Objektes  $M > N$ ist,  in O(N) geschieht.\\
+
+Dies stellt nur einen kleinen Ausschnitt der Änderungen in der Datenhaltung dar, die mit Meilenstein 5 eingenagen sind.
+Auf einige Aspekte werden wir im späteren Verlauf noch näher eingehen, wie bspw den graduellen Verzicht auf Unique und shared ptr, was durch eine vertrauteren Umgang mit C++ durch die längere Lernphase bergründet ist (mehr Selbstverrtrauen, das nichts falsch ist).\\
+
+Mi den Änderungen der Codebasis musste nun auch eine UI her, damit das Spiel dem Anwender die Möglichkeit bietet, von einem Titel-Scrren hin zum Start des Spiel zu kommen, das Spiel zu pausieren, und von dort woieeraufzunehmen, neuzustarten oder zu beenden.\\
+
+Die Implementierung dieser Funktionen erwies sich als aufwändig, da wir zu dieser späten Phase des Projektes aus dem Gedankenmodells des Spiels Und Frame N+1 heraus mussten und uns über die Implementierung von UI Gedanken machen mussten, was letztendlich alelrdings auch über das ECS und Compoenents passiert sowiue der in den vorherigen Abschnitten angesprochenen Viewports, die mit orthografischer Projektion die UI Scenen  direkt über die Gameworld im Renderpass rendern.\\
+
+Für die Umsetzung der Texte wurde die Bibliothek \textit{freetype} eingebunden, um die benötigten Glyphen zu rendern, wo bei wir der Implementierung der Einfachheit halber deVires folgen. Ein einfaches Layouting-System, das als ECS-System in die GameLoop eingebunden wird, übernimmt die Berechnung der Position von UI Elementen.
+
+
+\begin{lstlisting}[style=c++style,
+caption={Implementierung eines einfachen Score-Textes, der die Punktzahl des Spielers anzeigt. Die UI-Elemente werden genau wie aktive, mit der Spielwelt verbundene Objekte betrachtet und entsprechend konfiguriert.},
+label=lst:gameobjectdsl]
+    auto scoreText = GameObjectFactory::instance()
+        .gameObject(gameWorld)
+        .withRendering([&](auto& rnb) {
+            rnb.textRenderable()
+               .text("0")
+               .formattedAsNumber()
+               .fontId(uiTextFont)
+               .fontScale(1.0f)
+               .fontResourceProvider(renderingDevice.fontResourceProvider())
+               .shader(glyphShader)
+               .color(helios::util::Colors::WhiteSmoke)
+               .attachTo(&hudScene.root());
+    })
+    .withObserver([&](auto& ob) {
+        ob.observe()
+          .runningScore(ScorePoolId{"playerOneScorePool"});
+    })
+    .withUiTransform([](auto& tb) {
+        tb.transform()
+          .pivot(Anchor::TopRight)
+          .viewport(ViewportId{"hudViewport"})
+          .anchor(Anchor::TopRight)
+          .offsets({60.0f, 50.0f, 0.0f, 0.0f});
+    })
+    .make();
+\end{lstlisting}
+
+
+Zur Steuerung der Spiels in in den verschiedenen Zuständen wurde außerdem ein einfaches, konfiguroerbares State Machine System auf Basis von templates implmentiert, was es erlaubt, eigene States und StateTransitions zu definieren.
+Als Default Implementierung liefert helios GameState udn MatchState, wobei GameState die Shell repräsentiert und allgemeine Systemzustände wie \texttt{Title}, \texttt{Running} und \texttt{Paused} definiert, und sich MatchState sich auf Logik eines einzelnen Spieldurchlaufs konzentiert mit Zuständen wie \texttt{Warmup}, \texttt{Playing} und \texttt{GameOver}.\\
+
+Eine Anpassung der nunmehr komplexeren GameLoop, die eine Unterteilugn in verschiedene Phasen \texttt{Pre}, \texttt{Main} und \texttt{Post} zur einfacheren Verortung von Spiellogik, Physik-Simulation, Kollisionserkennung und  Abgleich der Spielwelt mit dem Szenegraphn  erlaubt, bekam zusätzlich noch eine Anbsingund an die State Machnine, wodurch es möglich ist, pber einfache Angabe deer States als Parameter zu definieren, in welcher Phase ein System laufen soll.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\columnwidth]{content/de/iterative evolution/img/scoringdemo_title}
+\caption{Titelbildschirm der Scoring-Demo, die mit Meilenstein 5 veröffentlich wurde. (Quelle: eigene Aufnahme)}
+\label{fig:scoringdemo_title}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\columnwidth]{content/de/iterative evolution/img/scoringdemo_playing}
+\caption{Die Scoring-Demo enthält die wesentlichen für diesen Meilenstein festgesetzten Anforderungen, darunter Highscore-Anzeige sowie ein zeitbegrenztes Level. Dargestellt ist im UI außerdem die Anzeige der zur verfügbar stehenden Leben. (Quelle: eigene Aufnahme)}
+\label{fig:scoringdemo_running}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\columnwidth]{content/de/iterative evolution/img/scoringdemo_pause}
+\caption{Pause-Menü der Scoring-Demo. Von hier kann wieder in den Titelbildschirm gewechselt, das Spiel beendet oder entsprechend fortgesetzt werden. (Quelle: eigene Aufnahme)}
+\label{fig:scoringdemo_pause}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\columnwidth]{content/de/iterative evolution/img/scoringdemo_gameover}
+\caption{Gameover-Screen der Scoring-Demo. (Quelle: eigene Aufnahme)}
+\label{fig:scoringdemo_gameover}
+\end{figure}

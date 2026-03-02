@@ -67,7 +67,7 @@ export namespace helios::engine::mechanics::damage::components {
          *
          * @param other The component to copy from (state is not copied).
          */
-        LastDamageComponent(const LastDamageComponent& other) {}
+        LastDamageComponent(const LastDamageComponent& other) = default;
 
         LastDamageComponent& operator=(const LastDamageComponent&) = default;
         LastDamageComponent(LastDamageComponent&&) noexcept = default;

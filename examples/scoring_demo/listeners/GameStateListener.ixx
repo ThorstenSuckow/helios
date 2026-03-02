@@ -31,9 +31,6 @@ export namespace helios::examples::scoring {
         gameStateManager.addStateListener(
             std::make_unique<helios::engine::state::listeners::LambdaStateListener<helios::engine::mechanics::gamestate::types::GameState>>(
             [](helios::engine::runtime::world::UpdateContext& updateContext,
-                    const helios::engine::mechanics::gamestate::types::GameState from)->void {
-                        },
-            [](helios::engine::runtime::world::UpdateContext& updateContext,
                  const helios::engine::state::types::StateTransitionContext<helios::engine::mechanics::gamestate::types::GameState> transitionContext)->void {
 
                     const auto from = transitionContext.from();
@@ -51,7 +48,7 @@ export namespace helios::examples::scoring {
                         updateContext.commandBuffer().add<WorldLifecycleCommand>(WorldLifecycleAction::Reset);
                     }
 
-                    if (to == GameState::Title && transitionId== GameStateTransitionId::TitleRequested) {
+                   if (to == GameState::Title && transitionId == GameStateTransitionId::TitleRequested) {
                         updateContext.commandBuffer().add<helios::engine::state::commands::StateCommand<MatchState>>(
                             helios::engine::state::types::StateTransitionRequest<MatchState>(
                             MatchState::GameOver,
@@ -74,9 +71,6 @@ export namespace helios::examples::scoring {
                             )
                         );
                     }
-            },
-            [](helios::engine::runtime::world::UpdateContext& updateContext,
-                 const helios::engine::mechanics::gamestate::types::GameState to)->void {
             })
         );
     }

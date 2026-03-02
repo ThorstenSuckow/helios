@@ -2,7 +2,11 @@
 
 Meilenstein 2 markierte die erste funktionale Erweiterung der Architektur, die das Rendering in Abhängigkeit von Benutzereingaben ermöglichte.
 Hierfür wurden die Klassen \texttt{GameWorld} und \texttt{GameObject} eingeführt.
-Deren Semantik blieb zwar bis zur finalen Version erhalten, sie durchliefen jedoch im Prozess eine signifikante strukturelle Transformation: von reinen Datencontainern hin zu Fassaden-Objekten für den Zugriff auf das ECS-Backend.\\
+Deren Semantik blieb zwar bis zur finalen Version erhalten, sie durchliefen jedoch im Prozess eine signifikante strukturelle Transformation, nämlich von reinen Datencontainern hin zu Fassaden-Objekten für den Zugriff auf das ECS-Backend.\\
+
+
+Der im vorherigen Abschnitt angesprochene architektonische Umbruch des Rendering Systems, der auch die Unterstützung mehrerer Viewports innerhalb eines \texttt{RenderTargets} (Abstraktion eines Framebuffers) ermöglichte, erlaubte die Darstellung unterschiedlicher Szenen oder Szenenausschnitte unter Verwendung verschiedener Kameras.
+Dies erleichterte auch die Einführung von UI-Elementen mit Meilenstein 5.\\
 
 \begin{figure}[H]
     \centering
@@ -51,7 +55,7 @@ Die Umsetzung war zu diesem Zeitpunkt noch stark vom klassischen OOP-Ansatz gepr
 
 Obwohl die API auch im aktuellen Zustand ähnliche Methoden zur Erstellung und Suche von Objekten bietet, sind diese internen Implementierungen, die unter anderem hash-basierte Zugriffe auf \texttt{unordered\_map}s implementieren, mitterweile einem \textit{Entity Handle}-basierten Zugriff auf das ECS-Backend gewichen: Die \texttt{update()}-Methode ist nicht länger Bestandteil der \texttt{GameWorld}, wird aber vorerst in den nachfolgenden Meilensteinen eine Rolle spielen.
 Letztendlich wurde die Logik in die \texttt{GameLoop} überführt, welche die Update-Logik in individuelle Phasen unterteilt sowie vom Zustand der konfigurierten \textit{State Machines} abhängig macht.
-Dies erlaubt letztendlich deterministisches Verhalten bzgl. weltverändernder Befehle, sowie die durch die Anforderungen beötigte (De)Aktivierung Gameplay-spezifischer Systeme .\\
+Dies erlaubt letztendlich deterministisches Verhalten bzgl. weltverändernder Befehle, sowie die durch die Anforderungen beötigte (De)Aktivierung Gameplay-spezifischer Systeme, worauf wir in Abschnitt~\ref{sec:architektur_oder_so} näher eingehen.\\
 
 Zur Erleichterung des Debuggings und zur Laufzeit-Konfiguration der \texttt{GameObject}-Parameter wurde \textit{Dear ImGui} integriert.
 Ein besonderer Fokus lag dabei auf der Kamera-Steuerung: Durch die Einbindung von Kameras als spezialisierte Knoten in den Szenengraph können diese nun direkt an Spielobjekte gebunden werden.

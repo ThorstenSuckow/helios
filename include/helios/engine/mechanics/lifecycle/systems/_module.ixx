@@ -5,3 +5,4 @@
 export module helios.engine.mechanics.lifecycle.systems;
 
 export import helios.engine.mechanics.lifecycle.systems.DelayedComponentEnablerSystem;
+export import helios.engine.mechanics.lifecycle.systems.GameObjectLifecycleSystem;

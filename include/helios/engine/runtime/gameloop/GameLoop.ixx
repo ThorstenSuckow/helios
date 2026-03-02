@@ -182,7 +182,7 @@ export namespace helios::engine::runtime::gameloop {
          * - **FlushCommands:** Executes pending commands from the CommandBuffer.
          * - **FlushManagers:** Processes manager requests (e.g., spawning from pools).
          *
-         * The order is: PassEvents → FlushCommands → FlushManagers.
+         * The order is: FlushCommands → FlushManagers → PassEvents.
          * Commands must be flushed before managers to ensure spawn requests are
          * generated before being processed.
          *
@@ -198,11 +198,6 @@ export namespace helios::engine::runtime::gameloop {
             const CommitPoint commitPoint,
             helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
-
-            if ((commitPoint & CommitPoint::PassEvents) == CommitPoint::PassEvents)  {
-                passEventBus_.swapBuffers();
-            }
-
             // commands must be executed before Managers
             if ((commitPoint & CommitPoint::FlushCommands) == CommitPoint::FlushCommands) {
                 for (auto& cb : updateContext.resourceRegistry().commandBuffers()) {
@@ -214,6 +209,11 @@ export namespace helios::engine::runtime::gameloop {
                 for (auto& mgr : updateContext.resourceRegistry().managers()) {
                     mgr->flush(updateContext);
                 }
+            }
+
+            // managers might create pass events
+            if ((commitPoint & CommitPoint::PassEvents) == CommitPoint::PassEvents)  {
+                passEventBus_.swapBuffers();
             }
 
         }

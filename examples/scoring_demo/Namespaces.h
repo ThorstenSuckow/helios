@@ -77,8 +77,10 @@ using namespace helios::engine::mechanics::spawn::systems;
 using namespace helios::engine::mechanics::bounds::systems;
 using namespace helios::engine::mechanics::damage::systems;
 using namespace helios::engine::mechanics::health::systems;
+using namespace helios::engine::mechanics::health::types;
 using namespace helios::engine::mechanics::input::systems;
 using namespace helios::engine::mechanics::lifecycle::systems;
+using namespace helios::engine::mechanics::health;
 
 // Modules: physics
 using namespace helios::engine::modules::physics::collision::types;

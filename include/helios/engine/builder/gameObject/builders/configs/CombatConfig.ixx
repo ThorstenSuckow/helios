@@ -10,7 +10,9 @@ import helios.engine.ecs.GameObject;
 
 import helios.engine.modules.spatial.transform.components;
 
-import helios.engine.mechanics.combat.components;
+import helios.engine.mechanics.damage.components;
+
+using namespace helios::engine::mechanics::damage::components;
 
 export namespace helios::engine::builder::gameObject::builders::configs {
 
@@ -29,14 +31,12 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         }
 
         /**
-         * @brief Sets the weapon fire rate.
-         *
-         * @param fireRate Time in seconds between shots.
+         * @brief Tracks the last damage applied.
          *
          * @return Reference to this config for chaining.
          */
-        CombatConfig& trackLastAttacker() {
-            gameObject_.getOrAdd<helios::engine::mechanics::combat::components::LastAttackerComponent>();
+        CombatConfig& trackLastDamage() {
+            gameObject_.getOrAdd<LastDamageComponent>();
 
             return *this;
         }

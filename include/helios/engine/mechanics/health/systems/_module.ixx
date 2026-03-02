@@ -4,4 +4,5 @@
  */
 export module helios.engine.mechanics.health.systems;
 
-export import helios.engine.mechanics.health.systems.HealthUpdateSystem;
+
+export import helios.engine.mechanics.health.systems.HealthUpdateClearSystem;

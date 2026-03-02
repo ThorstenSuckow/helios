@@ -9,5 +9,7 @@ export import helios.engine.mechanics.match.systems;
 
 export import helios.engine.mechanics.match.types;
 export import helios.engine.mechanics.match.rules;
+export import helios.engine.mechanics.match.components;
+export import helios.engine.mechanics.match.events;
 
 export import helios.engine.mechanics.match.MatchStateManager;

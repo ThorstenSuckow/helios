@@ -26,7 +26,7 @@ This module provides the core building blocks for implementing game mechanics. I
 | `Active` / `Inactive` | Tag components for entity activation state |
 | `HealthComponent` | Tracks current/max health, alive status |
 | `DamageDealerComponent` | Stores layer-based damage values |
-| `LastAttackerComponent` | Tracks last entity that dealt damage |
+| `LastDamageComponent` | Tracks last entity that dealt damage |
 | `SpawnedByProfileComponent` | Links entity to spawn profile for pooling |
 | `EmittedByComponent` | Tracks source entity (e.g., player → projectile) |
 | `ScoreValueComponent` | Score awarded when entity is defeated |

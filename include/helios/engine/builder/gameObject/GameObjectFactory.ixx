@@ -415,6 +415,7 @@ export namespace helios::engine::builder::gameObject {
              * @return Reference to this prototype for chaining.
              */
             GameObjectPrototype& asPlayerEntity() noexcept {
+                gameObject_.getOrAdd<helios::engine::mechanics::match::components::PlayerComponent>();
                 gameWorld_.session().setPlayerEntityHandle(gameObject_.entityHandle());
                 return *this;
             }

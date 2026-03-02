@@ -270,12 +270,6 @@ int main() {
     );
     gameWorld.setLevel(std::move(level));
 
-    // ----------------------------------------
-    // 5.1 Menu and UI Configuration
-    // ----------------------------------------
-    configureMenus(gameWorld, app->renderingDevice(), glyphShader, defaultShader, *titleScene, *menuScene, *hudScene);
-
-
     // ========================================
     // 6. GameObjects
     // ========================================
@@ -315,7 +309,10 @@ int main() {
                .attachTo(&root);
         })
         .withHealth([](auto& hsb) {
-            hsb.health().maxHealth(100.0f);
+            hsb.health()
+               .maxHealth(100.0f)
+               .healthDepletedTriggers(HealthDepletedBehavior::DeadTag)
+               .lives(3);
         })
         .withTransform([&](auto& tb) {
             tb.transform()
@@ -327,12 +324,8 @@ int main() {
               .layerId(CollisionId::Player)
               .useBoundingBox()
               .hitPolicy(HitPolicy::OneHit)
-              .reportCollisions(true)
-              .solidCollisionMask(CollisionId::Enemy)
-              /*.onSolidCollision(
-                  CollisionId::Enemy,
-                  CollisionBehavior::Despawn
-              )*/;
+              .reportCollisions(false)
+              .solidCollisionMask(CollisionId::Enemy);
 
             cb.levelBoundsCollision()
               .onCollision(CollisionBehavior::Bounce);
@@ -456,6 +449,14 @@ int main() {
     // Enemy prefabs
     createEnemyPrefabs(gameWorld, shipGameObject, defaultShader);
 
+    // ----------------------------------------
+    // 6.1 Menu and UI Configuration
+    // ----------------------------------------
+    configureMenus(shipGameObject, gameWorld, app->renderingDevice(), glyphShader, defaultShader, *titleScene, *menuScene, *hudScene);
+
+
+
+
     // ========================================
     // 7. Manager Registration
     // ========================================
@@ -465,6 +466,7 @@ int main() {
     auto& timerManager = gameWorld.registerManager<TimerManager>();
     auto& spawnManager     = gameWorld.registerManager<SpawnManager>();
     auto& uiActionCommandManager = gameWorld.registerManager<UiActionCommandManager>();
+    auto& healthManager = gameWorld.registerManager<HealthManager>();
 
     auto& gameStateManager = gameWorld.manager<GameStateManager>();
     auto& matchStateManager = gameWorld.manager<MatchStateManager>();
@@ -582,17 +584,22 @@ int main() {
             .addPass<GameState>(Running | Start |Title)
             .addSystem<CollisionStateResponseSystem>()
             .addCommitPoint(CommitPoint::PassEvents)
-
             .addPass<GameState>(Running)//
             .addSystem<DamageOnCollisionSystem>()
-            .addSystem<HealthUpdateSystem>();
+            // makes sure manager generated passEvents are available in the next pass
+            .addCommitPoint(CommitPoint::Structural)
+
+            .addPass<GameState>(Running)
+            .addSystem<CombatScoringSystem>()
+            .addSystem<ScoringDemoRuleSystem>()
+            .addSystem<GameObjectLifecycleSystem>()
+            .addSystem<GameTimerUpdateSystem>(timerManager);
 
     // ----------------------------------------
     // 9.3 Post Phase: UI, Transform, Rendering, Cleanup
     // ----------------------------------------
     gameLoop.phase(PhaseType::Post)
              .addPass<GameState>(Running | Paused)
-             .addSystem<GameTimerUpdateSystem>(timerManager)
              .addSystem<MenuNavigationSystem>()
              .addSystem<UiStyleUpdateSystem>()
              .addSystem<GameTimer2UiTextUpdateSystem>(timerManager)
@@ -600,8 +607,9 @@ int main() {
 
              .addPass<GameState>(GameState::Any)
              .addSystem<Score2UiTextUpdateSystem>()
+             .addSystem<Lives2UiTextUpdateSystem>()
              .addSystem<MaxScore2UiTextUpdateSystem>()
-             .addSystem<CombatScoringSystem>()
+
 
              .addSystem<UiTextBoundsUpdateSystem>()
              .addSystem<UiTransformSystem>()
@@ -618,6 +626,7 @@ int main() {
              .addSystem<DelayedComponentEnablerSystem>()
              .addSystem<CollisionStateClearSystem>()
              .addSystem<ScoreObserverClearSystem>()
+             .addSystem<HealthUpdateClearSystem>()
              .addSystem<MaxScoreObserverClearSystem>();
 
     // ========================================

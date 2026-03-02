@@ -8,7 +8,12 @@ export module helios.engine.builder.gameObject.builders.configs.HealthConfig;
 
 import helios.engine.ecs.GameObject;
 
-import helios.engine.mechanics.health.components.HealthComponent;
+import helios.engine.mechanics.health;
+import helios.engine.mechanics.match.components;
+
+using namespace helios::engine::mechanics::health::components;
+using namespace helios::engine::mechanics::match::components;
+using namespace helios::engine::mechanics::health::types;
 
 export namespace helios::engine::builder::gameObject::builders::configs {
 
@@ -34,7 +39,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @param gameObject Target GameObject to configure.
          */
         explicit HealthConfig(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {
-            gameObject.add<helios::engine::mechanics::health::components::HealthComponent>();
+            gameObject.add<HealthComponent>();
         }
 
         /**
@@ -45,8 +50,41 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         HealthConfig& maxHealth(const float maxHealth) {
-            gameObject_.getOrAdd<helios::engine::mechanics::health::components::HealthComponent>()
+            gameObject_.getOrAdd<HealthComponent>()
                         .setMaxHealth(maxHealth);
+            gameObject_.getOrAdd<HealthComponent>()
+                       .heal(maxHealth);
+
+            return *this;
+        }
+
+        /**
+         * @brief Sets the initial number of lives.
+         *
+         * Adds or retrieves a LivesComponent with the given count.
+         *
+         * @param lives Initial life count.
+         *
+         * @return Reference to this config for chaining.
+         */
+        HealthConfig& lives(const size_t lives) {
+            gameObject_.getOrAdd<LivesComponent>(lives);
+
+            return *this;
+        }
+
+
+
+        /**
+         * @brief Configures the response when health reaches zero.
+         *
+         * @param behavior Bitmask of HealthDepletedBehavior flags.
+         *
+         * @return Reference to this config for chaining.
+         */
+        HealthConfig& healthDepletedTriggers(const HealthDepletedBehavior behavior) {
+            gameObject_.getOrAdd<HealthComponent>()
+                        .setHealthDepletedBehavior(behavior);
 
             return *this;
         }

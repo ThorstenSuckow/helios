@@ -30,6 +30,12 @@ import helios.rendering;
 
 import helios.engine.builder.gameObject.GameObjectFactory;
 
+import helios.engine.modules.physics.collision.types;
+
+using namespace helios::engine::modules::physics::collision::types;
+
+using namespace helios::engine::mechanics::health::types;
+
 export namespace helios::examples::scoring {
 
     /**
@@ -64,7 +70,8 @@ export namespace helios::examples::scoring {
                 })
                 .withHealth([](auto& hsb) {
                     hsb.health()
-                       .maxHealth(100.0f);
+                       .maxHealth(100.0f)
+                       .healthDepletedTriggers(HealthDepletedBehavior::Despawn);
                 })
                 .withScoring([](builders::ScoringBuilder& sb) {
                     sb.scoreValue()
@@ -72,7 +79,7 @@ export namespace helios::examples::scoring {
                 })
                 .withCombat([](auto& cb) {
                     cb.combat()
-                      .trackLastAttacker();
+                      .trackLastDamage();
                 })
                 .withTransform([](auto& tb) {
                     tb.transform()
@@ -80,22 +87,16 @@ export namespace helios::examples::scoring {
                 })
                 .withCollision([](auto& cb) {
                     cb.collision()
-                      .layerId(helios::examples::scoring::CollisionId::Enemy)
+                      .layerId(CollisionId::Enemy)
                       .useBoundingBox()
-                      .reportCollisions(false)
-                      .solidCollisionMask(
-                        helios::examples::scoring::CollisionId::Player | helios::examples::scoring::CollisionId::Projectile)
-                      /*.onSolidCollision(
-                          helios::examples::scoring::CollisionId::Player,
-                          helios::engine::modules::physics::collision::types::CollisionBehavior::Despawn
-                      )
-                      .onSolidCollision(
-                          helios::examples::scoring::CollisionId::Projectile,
-                          helios::engine::modules::physics::collision::types::CollisionBehavior::PassEvent
-                      )*/;
+                      .hitPolicy(HitPolicy::OneHit)
+                      .reportCollisions(true)
+                      .dealDamage(100.0f, CollisionId::Player)
+                      .solidCollisionMask(CollisionId::Player | CollisionId::Projectile)
+                      .onSolidCollision(CollisionId::Player, CollisionBehavior::PassEvent);
 
                     cb.levelBoundsCollision()
-                      .onCollision(helios::engine::modules::physics::collision::types::CollisionBehavior::Reflect);
+                      .onCollision(CollisionBehavior::Reflect);
                 })
                 .withMotion([](auto& mcb) {
                     mcb.move2D()
@@ -131,7 +132,8 @@ export namespace helios::examples::scoring {
                 })
                 .withHealth([](auto& hsb) {
                     hsb.health()
-                       .maxHealth(100.0f);
+                       .maxHealth(100.0f)
+                       .healthDepletedTriggers(HealthDepletedBehavior::Despawn);
                 })
                 .withScoring([](builders::ScoringBuilder& sb) {
                     sb.scoreValue()
@@ -139,28 +141,22 @@ export namespace helios::examples::scoring {
                 })
                 .withCombat([](auto& cb) {
                     cb.combat()
-                      .trackLastAttacker();
+                      .trackLastDamage();
                 })
                 .withCollision([](auto& cb) {
                     cb.collision()
-                      .layerId(helios::examples::scoring::CollisionId::Enemy)
+                      .layerId(CollisionId::Enemy)
                       .useBoundingBox()
-                      .reportCollisions(false)
-                      .solidCollisionMask(
-                        helios::examples::scoring::CollisionId::Player | helios::examples::scoring::CollisionId::Projectile)
-                      .onSolidCollision(
-                          helios::examples::scoring::CollisionId::Player,
-                          helios::engine::modules::physics::collision::types::CollisionBehavior::Despawn
-                      )
-                      .onSolidCollision(
-                          helios::examples::scoring::CollisionId::Projectile,
-                          helios::engine::modules::physics::collision::types::CollisionBehavior::Despawn
-                      );
+                      .hitPolicy(HitPolicy::OneHit)
+                      .reportCollisions(true)
+                      .dealDamage(100.0f, CollisionId::Player)
+                      .solidCollisionMask(CollisionId::Player | CollisionId::Projectile)
+                      .onSolidCollision(CollisionId::Player, CollisionBehavior::PassEvent);
 
                     cb.levelBoundsCollision()
                       .restitution(0.0001f)
-                      .onCollision(helios::engine::modules::physics::collision::types::CollisionBehavior::Bounce)
-                      .respondWith(helios::engine::modules::physics::collision::types::CollisionResponse::AlignHeadingToDirection);
+                      .onCollision(CollisionBehavior::Bounce)
+                      .respondWith(CollisionResponse::AlignHeadingToDirection);
                 })
                 .withMotion([](auto& mcb) {
                     mcb.move2D()
@@ -195,7 +191,8 @@ export namespace helios::examples::scoring {
                 })
                 .withHealth([](auto& hsb) {
                     hsb.health()
-                       .maxHealth(100.0f);
+                       .maxHealth(100.0f)
+                       .healthDepletedTriggers(HealthDepletedBehavior::Despawn);
                 })
                 .withScoring([](builders::ScoringBuilder& sb) {
                     sb.scoreValue()
@@ -203,27 +200,21 @@ export namespace helios::examples::scoring {
                 })
                 .withCombat([](auto& cb) {
                     cb.combat()
-                      .trackLastAttacker();
+                      .trackLastDamage();
                 })
                 .withCollision([](auto& cb) {
                     cb.collision()
-                      .layerId(helios::examples::scoring::CollisionId::Enemy)
+                      .layerId(CollisionId::Enemy)
                       .useBoundingBox()
-                      .reportCollisions(false)
-                      .solidCollisionMask(
-                        helios::examples::scoring::CollisionId::Player | helios::examples::scoring::CollisionId::Projectile)
-                      .onSolidCollision(
-                          helios::examples::scoring::CollisionId::Player,
-                          helios::engine::modules::physics::collision::types::CollisionBehavior::Despawn
-                      )
-                      .onSolidCollision(
-                          helios::examples::scoring::CollisionId::Projectile,
-                          helios::engine::modules::physics::collision::types::CollisionBehavior::Despawn
-                      );
+                      .hitPolicy(HitPolicy::OneHit)
+                      .reportCollisions(true)
+                      .dealDamage(100.0f, CollisionId::Player)
+                      .solidCollisionMask(CollisionId::Player | CollisionId::Projectile)
+                      .onSolidCollision(CollisionId::Player, CollisionBehavior::PassEvent);
 
                     cb.levelBoundsCollision()
-                      .onCollision(helios::engine::modules::physics::collision::types::CollisionBehavior::Reflect)
-                      .respondWith(helios::engine::modules::physics::collision::types::CollisionResponse::AlignHeadingToDirection);
+                      .onCollision(CollisionBehavior::Reflect)
+                      .respondWith(CollisionResponse::AlignHeadingToDirection);
                 })
                 .withMotion([&](auto& mcb) {
                    mcb.move2D()

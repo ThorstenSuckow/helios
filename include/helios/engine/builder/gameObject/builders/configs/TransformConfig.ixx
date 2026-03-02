@@ -69,6 +69,23 @@ export namespace helios::engine::builder::gameObject::builders::configs {
             return *this;
         }
 
+        /**
+         * @brief Sets the initial heading rotation of the entity.
+         *
+         * @param degrees Rotation angle in degrees.
+         * @param axis Rotation axis.
+         *
+         * @return Reference to this config for chaining.
+         */
+        TransformConfig& rotate(const float degrees, const helios::math::vec3f axis) {
+            auto& rsc = gameObject_.getOrAdd<helios::engine::modules::spatial::transform::components::RotationStateComponent>();
+
+            rsc.setHeadingRotationAngle(degrees);
+            rsc.setHeadingRotationAxis(axis);
+
+            return *this;
+        }
+
     };
 
 }

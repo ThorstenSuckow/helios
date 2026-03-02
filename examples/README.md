@@ -124,7 +124,7 @@ A complete scoring system example featuring:
 - ScorePoolManager for centralized score tracking
 - ScorePoolComponent and ScoreValueComponent for attribution
 - ScoreObserverComponent for UI data binding
-- Kill scoring via LastAttackerComponent
+- Kill scoring via LastDamageComponent
 - Health and damage system integration
 - Dynamic UI text updates
 

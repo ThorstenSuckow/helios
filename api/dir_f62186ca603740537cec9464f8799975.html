@@ -129,11 +129,11 @@ Files</h2></td></tr>
 <tr class="memdesc:ScoreObserverSystem_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">System that synchronizes ScoreObserverComponent with ScorePools. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md319"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md347"></a>
 helios::engine::mechanics::scoring::systems</h1>
 <p>Systems for score processing and observation.</p>
 <p>This namespace contains systems that handle scoring events, update score and high score observers, and manage observer state lifecycle.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md320"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md348"></a>
 Systems</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -149,9 +149,9 @@ Systems</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">MaxScoreObserverClearSystem</span>  </td><td class="markdownTableBodyNone">Post  </td><td class="markdownTableBodyNone">Resets hasUpdate flags on MaxScoreObserverComponents  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md321"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md349"></a>
 Execution Order</h1>
-<p>1. <b>CombatScoringSystem</b> - Listens for <span class="tt">DeathEvent</span>, checks for <span class="tt">ScoreValueComponent</span>, issues <span class="tt">UpdateScoreCommand</span> 2. <b>ScoreObserverSystem</b> - Compares revision, propagates <span class="tt">ScorePoolSnapshot</span> to <span class="tt">ScoreObserverComponent</span> 3. <b>MaxScoreObserverSystem</b> - Compares revision, propagates <span class="tt">MaxScorePoolSnapshot</span> to <span class="tt">MaxScoreObserverComponent</span> 4. <b>ScoreObserverClearSystem</b> - Clears <span class="tt">hasUpdate</span> flag after UI systems have processed score changes 5. <b>MaxScoreObserverClearSystem</b> - Clears <span class="tt">hasUpdate</span> flag after UI systems have processed high score changes</p>
+<p>1. <b>CombatScoringSystem</b> - Listens for <span class="tt">HealthDepletedEvent</span>, checks for <span class="tt">ScoreValueComponent</span>, issues <span class="tt">UpdateScoreCommand</span> 2. <b>ScoreObserverSystem</b> - Compares revision, propagates <span class="tt">ScorePoolSnapshot</span> to <span class="tt">ScoreObserverComponent</span> 3. <b>MaxScoreObserverSystem</b> - Compares revision, propagates <span class="tt">MaxScorePoolSnapshot</span> to <span class="tt">MaxScoreObserverComponent</span> 4. <b>ScoreObserverClearSystem</b> - Clears <span class="tt">hasUpdate</span> flag after UI systems have processed score changes 5. <b>MaxScoreObserverClearSystem</b> - Clears <span class="tt">hasUpdate</span> flag after UI systems have processed high score changes</p>
 <hr  />
 <details >
 <summary >

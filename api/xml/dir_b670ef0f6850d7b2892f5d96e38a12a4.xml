@@ -5,19 +5,25 @@
     <innerdir refid="dir_b2dc284bc44df997cbbb992175867665">components</innerdir>
     <innerdir refid="dir_fd5d3d54ac0a369cf6af2bf220932640">events</innerdir>
     <innerdir refid="dir_5205709783a7211c89208e8fb92d7bc9">systems</innerdir>
+    <innerdir refid="dir_73f976e4cfb02d3a04525286c98fa7b3">types</innerdir>
     <innerfile refid="helios_2engine_2mechanics_2health_2__module_8ixx">helios/engine/mechanics/health/_module.ixx</innerfile>
+    <innerfile refid="HealthManager_8ixx">HealthManager.ixx</innerfile>
     <innerfile refid="mechanics_2health_2registry_8ixx">mechanics/health/registry.ixx</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_b670ef0f6850d7b2892f5d96e38a12a4_1autotoc_md233">
+<sect1 id="dir_b670ef0f6850d7b2892f5d96e38a12a4_1autotoc_md242">
 <title>helios::engine::mechanics::health</title><para>Health management system for game entities.</para>
-<para>This module provides components, events, and systems for tracking entity health, processing damage, and handling death.</para>
+<para>This module provides components, events, types, systems, and a manager for tracking entity health, processing damage, and handling death.</para>
 </sect1>
-<sect1 id="dir_b670ef0f6850d7b2892f5d96e38a12a4_1autotoc_md234">
-<title>Submodules</title><para><table rows="4" cols="2"><row>
+<sect1 id="dir_b670ef0f6850d7b2892f5d96e38a12a4_1autotoc_md243">
+<title>Submodules</title><para><table rows="6" cols="2"><row>
 <entry thead="yes"><para>Submodule  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>HealthManager</computeroutput>  </para>
+</entry><entry thead="no"><para>Manager that processes <computeroutput>ApplyDamageCommand</computeroutput>s in batch during flush  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>components/</computeroutput>  </para>
@@ -25,27 +31,42 @@
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>events/</computeroutput>  </para>
-</entry><entry thead="no"><para>Health-related events (death)  </para>
+</entry><entry thead="no"><para>Health-related events (update, depletion)  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>systems/</computeroutput>  </para>
 </entry><entry thead="no"><para>Systems for health processing  </para>
 </entry></row>
+<row>
+<entry thead="no"><para><computeroutput>types/</computeroutput>  </para>
+</entry><entry thead="no"><para>Bitmask enums and context structs  </para>
+</entry></row>
 </table>
 </para>
 </sect1>
-<sect1 id="dir_b670ef0f6850d7b2892f5d96e38a12a4_1autotoc_md235">
-<title>Architecture</title><para>1. <bold>HealthComponent</bold> tracks current and maximum health 2. <bold>Combat systems</bold> call <computeroutput>takeDamage()</computeroutput> when damage is dealt 3. <bold>HealthUpdateSystem</bold> detects <computeroutput>health &lt;= 0</computeroutput> and:<itemizedlist>
-<listitem><para>Issues <computeroutput>DespawnCommand</computeroutput> to remove the entity</para>
-</listitem><listitem><para>Publishes <computeroutput>DeathEvent</computeroutput> for other systems (e.g., scoring)</para>
+<sect1 id="dir_b670ef0f6850d7b2892f5d96e38a12a4_1autotoc_md244">
+<title>Architecture</title><para>1. <bold>HealthComponent</bold> tracks current/maximum health and carries behaviour flags 2. <bold>HealthManager</bold> receives <computeroutput>ApplyDamageCommand</computeroutput>s via <computeroutput>submit()</computeroutput> and processes them in batch during the manager flush phase:<itemizedlist>
+<listitem><para>Applies damage to the target&apos;s <computeroutput>HealthComponent</computeroutput></para>
+</listitem><listitem><para>Pushes a <computeroutput>HealthChangedEvent</computeroutput> to the <bold>phase</bold> bus (available next phase)</para>
+</listitem><listitem><para>On health depletion, evaluates <computeroutput>HealthDepletedBehavior</computeroutput> flags and optionally attaches a <computeroutput>DeadTagComponent</computeroutput> (flag <computeroutput>DeadTag</computeroutput>)</para>
+</listitem><listitem><para>Pushes a <computeroutput>HealthDepletedEvent</computeroutput> to the <bold>pass</bold> bus (available after commit within the same pass) 3. <bold>HealthUpdateClearSystem</bold> resets the dirty flag after observers have run</para>
 </listitem></itemizedlist>
 </para>
 </sect1>
-<sect1 id="dir_b670ef0f6850d7b2892f5d96e38a12a4_1autotoc_md236">
+<sect1 id="dir_b670ef0f6850d7b2892f5d96e38a12a4_1autotoc_md245">
+<title>Key Types</title><para><itemizedlist>
+<listitem><para><computeroutput>HealthChangeBehavior</computeroutput> – selects the event bus for health-change reporting</para>
+</listitem><listitem><para><computeroutput>HealthDepletedBehavior</computeroutput> – selects actions on health depletion (event, despawn, dead-tag)</para>
+</listitem><listitem><para><computeroutput>HealthChangeContext</computeroutput> – carries target, source, contact point, and amount</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="dir_b670ef0f6850d7b2892f5d96e38a12a4_1autotoc_md246">
 <title>Integration</title><para>The health system integrates with:<itemizedlist>
-<listitem><para><bold>Combat system</bold> - receives damage via <computeroutput>takeDamage()</computeroutput></para>
-</listitem><listitem><para><bold>Scoring system</bold> - <computeroutput>DeathEvent</computeroutput> triggers score awards</para>
-</listitem><listitem><para><bold>Spawn system</bold> - dead entities are despawned via command</para>
+<listitem><para><bold>Combat system</bold> – <computeroutput>ApplyDamageCommand</computeroutput> is routed to <computeroutput>HealthManager</computeroutput></para>
+</listitem><listitem><para><bold>Scoring system</bold> – <computeroutput>HealthDepletedEvent</computeroutput> triggers score awards</para>
+</listitem><listitem><para><bold>Lifecycle system</bold> – <computeroutput>GameObjectLifecycleSystem</computeroutput> reads depletion events and despawns entities</para>
+</listitem><listitem><para><bold>Spawn system</bold> – dead entities are returned to pools via <computeroutput>DespawnCommand</computeroutput></para>
 </listitem></itemizedlist>
 </para>
 <para><hruler/>

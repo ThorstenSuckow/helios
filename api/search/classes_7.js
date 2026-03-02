@@ -15,9 +15,13 @@ var searchData=
   ['hash_3c_20helios_3a_3aengine_3a_3aecs_3a_3aentityhandle_20_3e_12',['hash&lt; helios::engine::ecs::EntityHandle &gt;',['../structstd_1_1hash_3_01helios_1_1engine_1_1ecs_1_1EntityHandle_01_4.html',1,'std']]],
   ['hash_3c_20helios_3a_3autil_3a_3aguid_20_3e_13',['hash&lt; helios::util::Guid &gt;',['../structstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4.html',1,'std']]],
   ['healthbuilder_14',['HealthBuilder',['../classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1HealthBuilder.html',1,'helios::engine::builder::gameObject::builders']]],
-  ['healthcomponent_15',['HealthComponent',['../classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent.html',1,'helios::engine::mechanics::health::components']]],
-  ['healthconfig_16',['HealthConfig',['../classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1HealthConfig.html',1,'helios::engine::builder::gameObject::builders::configs']]],
-  ['healthupdatesystem_17',['HealthUpdateSystem',['../classhelios_1_1engine_1_1mechanics_1_1health_1_1systems_1_1HealthUpdateSystem.html',1,'helios::engine::mechanics::health::systems']]],
-  ['hierarchycomponent_18',['HierarchyComponent',['../classhelios_1_1engine_1_1ecs_1_1components_1_1HierarchyComponent.html',1,'helios::engine::ecs::components']]],
-  ['hierarchypropagationsystem_19',['HierarchyPropagationSystem',['../classhelios_1_1engine_1_1ecs_1_1systems_1_1HierarchyPropagationSystem.html',1,'helios::engine::ecs::systems']]]
+  ['healthchangecontext_15',['HealthChangeContext',['../structhelios_1_1engine_1_1mechanics_1_1health_1_1types_1_1HealthChangeContext.html',1,'helios::engine::mechanics::health::types']]],
+  ['healthchangedevent_16',['HealthChangedEvent',['../classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1HealthChangedEvent.html',1,'helios::engine::mechanics::health::events']]],
+  ['healthcomponent_17',['HealthComponent',['../classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent.html',1,'helios::engine::mechanics::health::components']]],
+  ['healthconfig_18',['HealthConfig',['../classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1HealthConfig.html',1,'helios::engine::builder::gameObject::builders::configs']]],
+  ['healthdepletedevent_19',['HealthDepletedEvent',['../classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1HealthDepletedEvent.html',1,'helios::engine::mechanics::health::events']]],
+  ['healthmanager_20',['HealthManager',['../classhelios_1_1engine_1_1mechanics_1_1health_1_1HealthManager.html',1,'helios::engine::mechanics::health']]],
+  ['healthupdateclearsystem_21',['HealthUpdateClearSystem',['../classhelios_1_1engine_1_1mechanics_1_1health_1_1systems_1_1HealthUpdateClearSystem.html',1,'helios::engine::mechanics::health::systems']]],
+  ['hierarchycomponent_22',['HierarchyComponent',['../classhelios_1_1engine_1_1ecs_1_1components_1_1HierarchyComponent.html',1,'helios::engine::ecs::components']]],
+  ['hierarchypropagationsystem_23',['HierarchyPropagationSystem',['../classhelios_1_1engine_1_1ecs_1_1systems_1_1HierarchyPropagationSystem.html',1,'helios::engine::ecs::systems']]]
 ];

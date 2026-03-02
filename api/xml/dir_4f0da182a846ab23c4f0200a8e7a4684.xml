@@ -26,11 +26,11 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md120">
+<sect1 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md129">
 <title>helios::engine::core::data</title><para>Data structures for efficient entity management and querying.</para>
 <para>This module provides core data structures used for managing GameObjects within the helios engine.</para>
 </sect1>
-<sect1 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md121">
+<sect1 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md130">
 <title>Components</title><para><itemizedlist>
 <listitem><para><bold>CollisionLayer</bold> - Strongly-typed identifier for collision layers.</para>
 </listitem><listitem><para><bold>CommandTypeId</bold> - Compile-time type identifier for command types.</para>
@@ -53,8 +53,8 @@
 </listitem></itemizedlist>
 </para>
 </sect1>
-<sect1 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md122">
-<title>Strongly-Typed IDs</title><sect2 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md123">
+<sect1 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md131">
+<title>Strongly-Typed IDs</title><sect2 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md132">
 <title>String-Based IDs (FNV-1a Hashing)</title><para>The ID types <computeroutput>FontId</computeroutput>, <computeroutput>GameObjectPoolId</computeroutput>, <computeroutput>ScorePoolId</computeroutput>, <computeroutput>SpawnProfileId</computeroutput>, <computeroutput>SpawnRuleId</computeroutput>, and <computeroutput>ViewportId</computeroutput> provide type-safe identifiers constructed from string literals using FNV-1a hashing:</para>
 <para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Compile-time<sp/>constant<sp/>IDs<sp/>from<sp/>strings</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1engine_1_1core_1_1data_1a7d2c0aea5d6ad4509188da62579429d6" kindref="member">GameObjectPoolId</ref><sp/>ENEMY_POOL{</highlight><highlight class="stringliteral">&quot;enemies&quot;</highlight><highlight class="normal">};</highlight></codeline>
@@ -69,7 +69,7 @@
 <codeline><highlight class="normal">scheduler.addRule(ENEMY_PROFILE,<sp/>std::make_unique&lt;TimerSpawnRule&gt;(WAVE_RULE,<sp/>2.0f,<sp/>5));</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md124">
+<sect2 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md133">
 <title>Type-Based IDs (TypeIndexer)</title><para><computeroutput>ComponentTypeId</computeroutput>, <computeroutput>ScoreTypeId</computeroutput>, <computeroutput>CommandTypeId</computeroutput>, and <computeroutput>ResourceTypeId</computeroutput> use <computeroutput>TypeIndexer</computeroutput> to generate unique, monotonically increasing IDs for each type at compile time:</para>
 <para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Get<sp/>unique<sp/>ID<sp/>for<sp/>a<sp/>component<sp/>type</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>typeId<sp/>=<sp/>ComponentTypeId::id&lt;HealthComponent&gt;();</highlight></codeline>
@@ -84,7 +84,7 @@
 <codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>cmdId<sp/>=<sp/>CommandTypeId::id&lt;DespawnCommand&gt;();</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md125">
+<sect2 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md134">
 <title>Entity IDs (EntityPool)</title><para><computeroutput>EntityId</computeroutput> and <computeroutput>VersionId</computeroutput> are used together in <computeroutput>EntityHandle</computeroutput> for safe entity references within an <computeroutput>EntityPool</computeroutput>:</para>
 <para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>EntityHandle<sp/>combines<sp/>EntityId<sp/>+<sp/>VersionId</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">EntityHandle<sp/>{</highlight></codeline>

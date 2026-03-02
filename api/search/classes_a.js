@@ -1,7 +1,7 @@
 var searchData=
 [
   ['lambdastatelistener_0',['LambdaStateListener',['../classhelios_1_1engine_1_1state_1_1listeners_1_1LambdaStateListener.html',1,'helios::engine::state::listeners']]],
-  ['lastattackercomponent_1',['LastAttackerComponent',['../classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent.html',1,'helios::engine::mechanics::combat::components']]],
+  ['lastdamagecomponent_1',['LastDamageComponent',['../classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent.html',1,'helios::engine::mechanics::damage::components']]],
   ['level_2',['Level',['../classhelios_1_1engine_1_1runtime_1_1world_1_1Level.html',1,'helios::engine::runtime::world']]],
   ['levelboundsbehaviorcomponent_3',['LevelBoundsBehaviorComponent',['../classhelios_1_1engine_1_1mechanics_1_1bounds_1_1components_1_1LevelBoundsBehaviorComponent.html',1,'helios::engine::mechanics::bounds::components']]],
   ['levelboundsbehaviorsystem_4',['LevelBoundsBehaviorSystem',['../classhelios_1_1engine_1_1mechanics_1_1bounds_1_1systems_1_1LevelBoundsBehaviorSystem.html',1,'helios::engine::mechanics::bounds::systems']]],
@@ -9,9 +9,12 @@ var searchData=
   ['lifecyclebuilder_6',['LifecycleBuilder',['../classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1LifecycleBuilder.html',1,'helios::engine::builder::gameObject::builders']]],
   ['lifecycleconfig_7',['LifecycleConfig',['../classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1LifecycleConfig.html',1,'helios::engine::builder::gameObject::builders::configs']]],
   ['line_8',['Line',['../structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Line.html',1,'helios::rendering::asset::shape::basic']]],
-  ['logentry_9',['LogEntry',['../structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry.html',1,'helios::ext::imgui::widgets']]],
-  ['logger_10',['Logger',['../classhelios_1_1util_1_1log_1_1Logger.html',1,'helios::util::log']]],
-  ['logmanager_11',['LogManager',['../classhelios_1_1util_1_1log_1_1LogManager.html',1,'helios::util::log']]],
-  ['logsink_12',['LogSink',['../classhelios_1_1util_1_1log_1_1LogSink.html',1,'helios::util::log']]],
-  ['logwidget_13',['LogWidget',['../classhelios_1_1ext_1_1imgui_1_1widgets_1_1LogWidget.html',1,'helios::ext::imgui::widgets']]]
+  ['lives2uitextupdatesystem_9',['Lives2UiTextUpdateSystem',['../classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1Lives2UiTextUpdateSystem.html',1,'helios::engine::modules::ui::binding::systems']]],
+  ['livesbindingcomponent_10',['LivesBindingComponent',['../classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesBindingComponent.html',1,'helios::engine::mechanics::match::components']]],
+  ['livescomponent_11',['LivesComponent',['../classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent.html',1,'helios::engine::mechanics::match::components']]],
+  ['logentry_12',['LogEntry',['../structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry.html',1,'helios::ext::imgui::widgets']]],
+  ['logger_13',['Logger',['../classhelios_1_1util_1_1log_1_1Logger.html',1,'helios::util::log']]],
+  ['logmanager_14',['LogManager',['../classhelios_1_1util_1_1log_1_1LogManager.html',1,'helios::util::log']]],
+  ['logsink_15',['LogSink',['../classhelios_1_1util_1_1log_1_1LogSink.html',1,'helios::util::log']]],
+  ['logwidget_16',['LogWidget',['../classhelios_1_1ext_1_1imgui_1_1widgets_1_1LogWidget.html',1,'helios::ext::imgui::widgets']]]
 ];

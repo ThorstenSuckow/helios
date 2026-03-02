@@ -18,6 +18,7 @@
 <codeline></codeline>
 <codeline><highlight class="normal">|<sp/>Submodule<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|-----------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`commands/`<sp/>|<sp/>Commands<sp/>for<sp/>requesting<sp/>damage<sp/>application<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`components/`<sp/>|<sp/>Damage-related<sp/>ECS<sp/>components<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`systems/`<sp/>|<sp/>Systems<sp/>for<sp/>damage<sp/>processing<sp/>|</highlight></codeline>
 <codeline></codeline>
@@ -25,15 +26,16 @@
 <codeline></codeline>
 <codeline><highlight class="normal">1.<sp/>**DamageDealerComponent**<sp/>defines<sp/>damage<sp/>values<sp/>per<sp/>collision<sp/>layer</highlight></codeline>
 <codeline><highlight class="normal">2.<sp/>**DamageOnCollisionSystem**<sp/>listens<sp/>for<sp/>`SolidCollisionEvent`</highlight></codeline>
-<codeline><highlight class="normal">3.<sp/>When<sp/>collision<sp/>occurs,<sp/>damage<sp/>is<sp/>applied<sp/>to<sp/>the<sp/>target&apos;s<sp/>`HealthComponent`</highlight></codeline>
-<codeline><highlight class="normal">4.<sp/>**LastAttackerComponent**<sp/>is<sp/>updated<sp/>with<sp/>attack<sp/>context<sp/>for<sp/>attribution</highlight></codeline>
+<codeline><highlight class="normal">3.<sp/>When<sp/>collision<sp/>occurs,<sp/>an<sp/>`ApplyDamageCommand`<sp/>is<sp/>issued<sp/>with<sp/>a<sp/>`DamageContext`</highlight></codeline>
+<codeline><highlight class="normal">4.<sp/>**HealthManager**<sp/>receives<sp/>the<sp/>command<sp/>and<sp/>applies<sp/>damage<sp/>to<sp/>the<sp/>target</highlight></codeline>
+<codeline><highlight class="normal">5.<sp/>**LastDamageComponent**<sp/>is<sp/>updated<sp/>with<sp/>the<sp/>damage<sp/>context<sp/>for<sp/>attribution</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Integration</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">The<sp/>damage<sp/>system<sp/>integrates<sp/>with:</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**Collision<sp/>system**<sp/>-<sp/>receives<sp/>`SolidCollisionEvent`<sp/>for<sp/>damage<sp/>triggers</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**Health<sp/>system**<sp/>-<sp/>applies<sp/>damage<sp/>via<sp/>`HealthComponent.takeDamage()`</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>**Combat<sp/>system**<sp/>-<sp/>updates<sp/>`LastAttackerComponent`<sp/>for<sp/>kill<sp/>attribution</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Combat<sp/>system**<sp/>-<sp/>updates<sp/>`LastDamageComponent`<sp/>for<sp/>kill<sp/>attribution</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**Spawn<sp/>system**<sp/>-<sp/>uses<sp/>`EmittedByComponent`<sp/>to<sp/>track<sp/>projectile<sp/>sources</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>

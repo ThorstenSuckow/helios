@@ -107,7 +107,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>System that processes solid collision events and applies damage.  
+<p>Emits HealthChangedEvents when solid collisions involve damage dealers.  
  <a href="#details">More...</a></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Inheritance diagram for helios::engine::mechanics::damage::systems::DamageOnCollisionSystem:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -143,11 +143,10 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:a1b71da2e3fb9d2effca00a1ecdfca1f5 inherit pro_attribs_classhelios_1_1engine_1_1ecs_1_1System"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the GameWorld this system belongs to. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>System that processes solid collision events and applies damage. </p>
-<p>Listens for SolidCollisionEvent and checks if the source entity has a DamageDealerComponent. If the target has a HealthComponent, applies the appropriate damage based on the target's collision layer.</p>
-<p>Also updates the target's LastAttackerComponent with the attack context for attribution in death events and scoring. </p>
+<div class="textblock"><p>Emits HealthChangedEvents when solid collisions involve damage dealers. </p>
+<p>Listens for SolidCollisionEvents and checks if the source entity has a <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1DamageDealerComponent.html" title="Component that stores damage values per collision layer.">DamageDealerComponent</a>. If the target has a <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent.html" title="Component for tracking entity health and damage.">HealthComponent</a>, emits an <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1damage_1_1commands_1_1ApplyDamageCommand.html" title="Command that carries a DamageContext for deferred damage processing.">ApplyDamageCommand</a>. Resolves the true attacker (instigator) via <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1EmittedByComponent.html" title="Component that tracks which entity emitted/spawned this object.">EmittedByComponent</a> when applicable (e.g. projectiles). </p>
 
-<p class="definition">Definition at line <a class="el" href="DamageOnCollisionSystem_8ixx_source.html#l00047">47</a> of file <a class="el" href="DamageOnCollisionSystem_8ixx_source.html">DamageOnCollisionSystem.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DamageOnCollisionSystem_8ixx_source.html#l00060">60</a> of file <a class="el" href="DamageOnCollisionSystem_8ixx_source.html">DamageOnCollisionSystem.ixx</a>.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="aa9b25e1aafffadc743831a6d451f57b5" name="aa9b25e1aafffadc743831a6d451f57b5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa9b25e1aafffadc743831a6d451f57b5">&#9670;&#160;</a></span>update()</h2>
@@ -182,15 +181,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classhelios_1_1engine_1_1ecs_1_1System.html#a4e9969641985fa04db6214332c88605b">helios::engine::ecs::System</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="DamageOnCollisionSystem_8ixx_source.html#l00061">61</a> of file <a class="el" href="DamageOnCollisionSystem_8ixx_source.html">DamageOnCollisionSystem.ixx</a>.</p>
-
-<p class="reference">References <a class="el" href="HealthComponent_8ixx_source.html#l00099">helios::engine::mechanics::health::components::HealthComponent::takeDamage()</a>.</p>
-<div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-2-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1mechanics_1_1damage_1_1systems_1_1DamageOnCollisionSystem_aa9b25e1aafffadc743831a6d451f57b5_cgraph.svg" width="627" height="90"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p class="definition">Definition at line <a class="el" href="DamageOnCollisionSystem_8ixx_source.html#l00074">74</a> of file <a class="el" href="DamageOnCollisionSystem_8ixx_source.html">DamageOnCollisionSystem.ixx</a>.</p>
 
 </div>
 </div>

@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_aa6a3dd4ed48a30c8a77c0ae3ea7750b" kind="dir">
+    <compoundname>components</compoundname>
+    <innerfile refid="helios_2engine_2mechanics_2match_2components_2__module_8ixx">helios/engine/mechanics/match/components/_module.ixx</innerfile>
+    <innerfile refid="LivesBindingComponent_8ixx">LivesBindingComponent.ixx</innerfile>
+    <innerfile refid="LivesComponent_8ixx">LivesComponent.ixx</innerfile>
+    <innerfile refid="PlayerComponent_8ixx">PlayerComponent.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_aa6a3dd4ed48a30c8a77c0ae3ea7750b_1autotoc_md296">
+<title>helios::engine::mechanics::match::components</title><para>Components for match rule tracking.</para>
+</sect1>
+<sect1 id="dir_aa6a3dd4ed48a30c8a77c0ae3ea7750b_1autotoc_md297">
+<title>Components</title><para><table rows="4" cols="2"><row>
+<entry thead="yes"><para>Component  </para>
+</entry><entry thead="yes"><para>Description  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>PlayerComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Marker identifying the player entity  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>LivesComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Tracks remaining lives with revision-based change detection  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>LivesBindingComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Binds a UI entity to a target&apos;s LivesComponent  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_aa6a3dd4ed48a30c8a77c0ae3ea7750b_1autotoc_md298">
+<title>LivesComponent</title><para>Maintains a life counter and a monotonically increasing <computeroutput>LivesRevision</computeroutput>. Each call to <computeroutput>decrease()</computeroutput> or <computeroutput>increase()</computeroutput> bumps the revision so observer systems can detect changes without polling.</para>
+</sect1>
+<sect1 id="dir_aa6a3dd4ed48a30c8a77c0ae3ea7750b_1autotoc_md299">
+<title>LivesBindingComponent</title><para>Stores a target <computeroutput>EntityHandle</computeroutput> and a cached <computeroutput>LivesRevision</computeroutput>. The <computeroutput>Lives2UiTextUpdateSystem</computeroutput> compares the cached revision against the target&apos;s current revision to update the bound UI text on change.</para>
+</sect1>
+<sect1 id="dir_aa6a3dd4ed48a30c8a77c0ae3ea7750b_1autotoc_md300">
+<title>PlayerComponent</title><para>Empty marker component. Systems query for it to apply player-specific logic (input handling, camera, UI).</para>
+<para><hruler/>
+</para>
+<para><details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/mechanics/match/components/"/>
+  </compounddef>
+</doxygen>

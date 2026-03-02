@@ -1,8 +1,11 @@
 var namespacehelios_1_1engine_1_1mechanics_1_1match =
 [
+    [ "components", "namespacehelios_1_1engine_1_1mechanics_1_1match_1_1components.html", "namespacehelios_1_1engine_1_1mechanics_1_1match_1_1components" ],
+    [ "events", "namespacehelios_1_1engine_1_1mechanics_1_1match_1_1events.html", "namespacehelios_1_1engine_1_1mechanics_1_1match_1_1events" ],
     [ "rules", "namespacehelios_1_1engine_1_1mechanics_1_1match_1_1rules.html", "namespacehelios_1_1engine_1_1mechanics_1_1match_1_1rules" ],
     [ "systems", "namespacehelios_1_1engine_1_1mechanics_1_1match_1_1systems.html", "namespacehelios_1_1engine_1_1mechanics_1_1match_1_1systems" ],
     [ "types", "namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types.html", [
+      [ "LivesRevision", "namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types.html#a5a9b40b91cd49d24dffc892db68cfd6c", null ],
       [ "MatchStateType", "namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types.html#a4c35aad58be5d0fe9bb4f2ba77da7827", null ],
       [ "MatchState", "namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types.html#a1653c2c3089f7cf95480f5379f2bcf9b", [
         [ "Undefined", "namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types.html#a1653c2c3089f7cf95480f5379f2bcf9baec0fc0100c4fc1ce4eea230c3dc10360", null ],

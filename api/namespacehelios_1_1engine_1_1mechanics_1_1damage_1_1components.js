@@ -1,4 +1,5 @@
 var namespacehelios_1_1engine_1_1mechanics_1_1damage_1_1components =
 [
-    [ "DamageDealerComponent", "classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1DamageDealerComponent.html", "classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1DamageDealerComponent" ]
+    [ "DamageDealerComponent", "classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1DamageDealerComponent.html", "classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1DamageDealerComponent" ],
+    [ "LastDamageComponent", "classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent.html", "classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent" ]
 ];

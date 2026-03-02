@@ -92,10 +92,10 @@
     <member refid="classhelios_1_1app_1_1Application_1a13d126308f1b5b61d9b87fc4dde57530" kind="function"><name>renderingDevice</name></member>
     <member refid="classhelios_1_1app_1_1Application_1a6ea14c8bd591020cbd5d2baef551a804" kind="function"><name>eventManager</name></member>
   </compound>
-  <compound refid="structhelios_1_1engine_1_1mechanics_1_1combat_1_1types_1_1AttackContext" kind="struct"><name>helios::engine::mechanics::combat::types::AttackContext</name>
-    <member refid="structhelios_1_1engine_1_1mechanics_1_1combat_1_1types_1_1AttackContext_1a70fe56beec10d754b2e5bb0b5d70fa6c" kind="variable"><name>source</name></member>
-    <member refid="structhelios_1_1engine_1_1mechanics_1_1combat_1_1types_1_1AttackContext_1aa71623d3fcc1dccb6cf21e607bbf00b5" kind="variable"><name>contact</name></member>
-    <member refid="structhelios_1_1engine_1_1mechanics_1_1combat_1_1types_1_1AttackContext_1aad7e5ece311ec81b2fcc3cec1410b753" kind="variable"><name>damageApplied</name></member>
+  <compound refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1commands_1_1ApplyDamageCommand" kind="class"><name>helios::engine::mechanics::damage::commands::ApplyDamageCommand</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1commands_1_1ApplyDamageCommand_1a280d3faf88ec02974b4d5635eb39f09a" kind="variable"><name>damageContext_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1commands_1_1ApplyDamageCommand_1ac263df8678dd70a1d3e8d4abdda62e75" kind="function"><name>ApplyDamageCommand</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1commands_1_1ApplyDamageCommand_1a14b6e1124ff4894f99ca620d4afccef5" kind="function"><name>damageContext</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1AxisSpawnPlacer" kind="class"><name>helios::engine::runtime::spawn::behavior::placements::AxisSpawnPlacer</name>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1AxisSpawnPlacer_1a266b0d80e998926d760e7cdf508997c2" kind="variable"><name>axis_</name></member>
@@ -369,8 +369,8 @@
     <member refid="structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1_1CollisionStruct_1a96192badb04dc5a3764ba11fe6e92ff2" kind="variable"><name>bIsCollisionReporter</name></member>
     <member refid="structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1_1CollisionStruct_1a7b5bb8ee4c153957c09bc52611bb8dda" kind="variable"><name>aCollisionBehavior</name></member>
     <member refid="structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1_1CollisionStruct_1affa87cbfb0e35ad228032a051c918951" kind="variable"><name>bCollisionBehavior</name></member>
-    <member refid="structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1_1CollisionStruct_1ac01face9a515b7891f1f2bd6a7c2febb" kind="variable"><name>collisionLayer</name></member>
-    <member refid="structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1_1CollisionStruct_1a271b81d0891e950d23850f10173fd6d4" kind="variable"><name>otherCollisionLayer</name></member>
+    <member refid="structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1_1CollisionStruct_1a77c200d6ff9784c92bff79f003431666" kind="variable"><name>aCollisionLayer</name></member>
+    <member refid="structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1_1CollisionStruct_1aaf13c3c48bfd397273aa388024a2241f" kind="variable"><name>bCollisionLayer</name></member>
     <member refid="structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1_1CollisionStruct_1acc2da62d93838b4f8319ad54a27d3107" kind="function"><name>hasAnyInteraction</name></member>
   </compound>
   <compound refid="structhelios_1_1util_1_1Colors" kind="struct"><name>helios::util::Colors</name>
@@ -480,7 +480,7 @@
   <compound refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1CombatConfig" kind="class"><name>helios::engine::builder::gameObject::builders::configs::CombatConfig</name>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1CombatConfig_1a2adb9f6d5076da0a80cca5878b8b7710" kind="variable"><name>gameObject_</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1CombatConfig_1ad90e5a82c15afd6d18270d721224e35c" kind="function"><name>CombatConfig</name></member>
-    <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1CombatConfig_1af3373edc0021bdd1fbc65ac919ee7738" kind="function"><name>trackLastAttacker</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1CombatConfig_1af69d0a7eafe32f78bf02fb6182c57f68" kind="function"><name>trackLastDamage</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1CombatScoringSystem" kind="class"><name>helios::engine::mechanics::scoring::systems::CombatScoringSystem</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1CombatScoringSystem_1a10671acf5a9ffb4918933b05c663214d" kind="variable"><name>logger_</name></member>
@@ -634,6 +634,10 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler_1a49245e938da1b02443555ffdd2b57c53" kind="function"><name>commit</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler_1a78aaa4935e379c7339cd01939a70c0d0" kind="function"><name>reset</name></member>
   </compound>
+  <compound refid="structhelios_1_1engine_1_1common_1_1types_1_1DamageContext" kind="struct"><name>helios::engine::common::types::DamageContext</name>
+    <member refid="structhelios_1_1engine_1_1common_1_1types_1_1DamageContext_1ac9e274cbda810f43f5fd5a9dc144efad" kind="variable"><name>interactionContext</name></member>
+    <member refid="structhelios_1_1engine_1_1common_1_1types_1_1DamageContext_1af08494dfb9c14789721a51655a1c6f3a" kind="variable"><name>damage</name></member>
+  </compound>
   <compound refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1DamageDealerComponent" kind="class"><name>helios::engine::mechanics::damage::components::DamageDealerComponent</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1DamageDealerComponent_1a9fe57af25f5f43544386376af9b9611a" kind="variable"><name>damageRegistry_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1DamageDealerComponent_1a2d73e5e8ae3cc2131da9f09017a27e56" kind="variable"><name>isEnabled_</name></member>
@@ -652,6 +656,13 @@
     <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1systems_1_1DamageOnCollisionSystem_1aa45f321c12630f5f45b12bd8bbef47cd" kind="variable"><name>logger_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1systems_1_1DamageOnCollisionSystem_1aa9b25e1aafffadc743831a6d451f57b5" kind="function"><name>update</name></member>
   </compound>
+  <compound refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1DeadTagComponent" kind="class"><name>helios::engine::mechanics::lifecycle::components::DeadTagComponent</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1DeadTagComponent_1a7162ae7dc7c39d8c7553041198396f54" kind="function"><name>DeadTagComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1DeadTagComponent_1ac964707c8a7fe660ca2b9b3c473a2deb" kind="function"><name>DeadTagComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1DeadTagComponent_1a55b5c8b5248fd06aa8e9ab7550b797b5" kind="function"><name>operator=</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1DeadTagComponent_1ad7d3714825f29a6e634f83c21130d7d5" kind="function"><name>operator=</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1DeadTagComponent_1aa5200199e8bef4f11fbccc98be162b7a" kind="function"><name>DeadTagComponent</name></member>
+  </compound>
   <compound refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy" kind="class"><name>helios::input::gamepad::DeadzoneStrategy</name>
     <member refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a3762bc530d61b887b87757ccc156db99" kind="variable"><name>stickNoiseThreshold_</name></member>
     <member refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1ab2d601fa84b631f66270f28f2fed9e06" kind="variable"><name>DEFAULT_STICK_NOISE_THRESHOLD</name></member>
@@ -661,13 +672,6 @@
     <member refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1ad4a87c7ee4ec5b7f08210aae95cac8a1" kind="function"><name>normalize</name></member>
     <member refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a6c01ef746af11b99c2122617c6f36820" kind="function"><name>stickNoiseThreshold</name></member>
     <member refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a9df5a94dd6bf37d477dd6fd7a73c709c" kind="function"><name>setStickNoiseThreshold</name></member>
-  </compound>
-  <compound refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1DeathEvent" kind="class"><name>helios::engine::mechanics::health::events::DeathEvent</name>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1DeathEvent_1a5a99b9b0f390c894520756292010342c" kind="variable"><name>source_</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1DeathEvent_1ad6b1966a89ed62e5d544bdb3f26cfe1d" kind="variable"><name>attackContext_</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1DeathEvent_1aea0dadc78cb70ca3a986ac97099475b1" kind="function"><name>DeathEvent</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1DeathEvent_1a2329def6e63c8008c9a431d19246ca0f" kind="function"><name>attackContext</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1DeathEvent_1a7066baf6f13a2c166f03114996107c8f" kind="function"><name>source</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1rules_1_1DefaultGameStateTransitionRules" kind="class"><name>helios::engine::mechanics::gamestate::rules::DefaultGameStateTransitionRules</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1rules_1_1DefaultGameStateTransitionRules_1ad5fc27d7dd2ce03198fa7631a9b8145a" kind="variable"><name>rules_</name></member>
@@ -806,7 +810,7 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1EmitterSpawnPlacer_1a9a443dd8797148f4b30014de913836b1" kind="function"><name>getPosition</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer" kind="class"><name>helios::engine::runtime::messaging::command::EngineCommandBuffer</name>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1af05f35df5b1257f3119cb29cbf0e3fde" kind="typedef"><name>BufferImpl</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1a30dc758d40c73100ec710956a2b857eb" kind="typedef"><name>BufferImpl</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1a0b3ddb0409bf4a07a4a8c12e6323f158" kind="variable"><name>impl_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1a661d0858913185ec6f6e35ef2b87c883" kind="function"><name>add</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1a4f2f838aa913f20181fc0cda507563ef" kind="function"><name>flush</name></member>
@@ -1035,6 +1039,9 @@
   <compound refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory" kind="class"><name>helios::engine::builder::gameObject::GameObjectFactory</name>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory_1a3e1f2fd66b4f091ccbaa98b494240d64" kind="function"><name>instance</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1GameObjectFactory_1ac6d64b614d8d67bce93033dbcb1fd58d" kind="function"><name>gameObject</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1GameObjectLifecycleSystem" kind="class"><name>helios::engine::mechanics::lifecycle::systems::GameObjectLifecycleSystem</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1GameObjectLifecycleSystem_1a7045049452d02a2e51ba461beb82df7c" kind="function"><name>update</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool" kind="class"><name>helios::engine::runtime::pooling::GameObjectPool</name>
     <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1afaf63b9e180dc22177ebe038923c23d1" kind="variable"><name>activeIndex_</name></member>
@@ -1506,10 +1513,21 @@
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1HealthBuilder_1af17f4dd6aaecc4757d711b20168131a9" kind="function"><name>HealthBuilder</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1HealthBuilder_1a13f865be0be720d44470de0e3503292e" kind="function"><name>health</name></member>
   </compound>
+  <compound refid="structhelios_1_1engine_1_1mechanics_1_1health_1_1types_1_1HealthChangeContext" kind="struct"><name>helios::engine::mechanics::health::types::HealthChangeContext</name>
+    <member refid="structhelios_1_1engine_1_1mechanics_1_1health_1_1types_1_1HealthChangeContext_1a9a05818d3790a06d86aaa0a3d6b44b4a" kind="variable"><name>interactionContext</name></member>
+    <member refid="structhelios_1_1engine_1_1mechanics_1_1health_1_1types_1_1HealthChangeContext_1a54ecf629b9b28f50b0de374227574cf1" kind="variable"><name>delta</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1HealthChangedEvent" kind="class"><name>helios::engine::mechanics::health::events::HealthChangedEvent</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1HealthChangedEvent_1a50303b3104b18835005e8a514a463250" kind="variable"><name>healthChangeContext_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1HealthChangedEvent_1aa05d2ee20ee665c06b0ec5f3f53033b3" kind="function"><name>HealthChangedEvent</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1HealthChangedEvent_1ac506dd62dcf3c21b43466521691d02c9" kind="function"><name>HealthChangeContext</name></member>
+  </compound>
   <compound refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent" kind="class"><name>helios::engine::mechanics::health::components::HealthComponent</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a402fe3027d2e7192c35809b0264fc71d" kind="variable"><name>maxHealth_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a87690e29febb78fe677ba06738596674" kind="variable"><name>health_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1ac7ba7f684d46cf2e33d61306ee3e0565" kind="variable"><name>isEnabled_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1aba1c0f55ebd6e87b15cbfef603ad430b" kind="variable"><name>healthDepletedBehavior_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a81d1333050e4d2a39687ab63f2f332a0" kind="variable"><name>isDirty_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a40d60b85223884e4e2164e2752e315a1" kind="function"><name>isEnabled</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a1fa7d28fe941675862901438b2ade3e2" kind="function"><name>enable</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a52fb8de256224f01acaf3b839b6cb2b0" kind="function"><name>disable</name></member>
@@ -1519,12 +1537,16 @@
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a0741bf6217379fcb1dcec66dbcd58938" kind="function"><name>operator=</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a58b034dedf78c765328b6e21ccafee62" kind="function"><name>HealthComponent</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a6383e76a044b34e140b8d1786900dbbd" kind="function"><name>operator=</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1ac0737fe265f0add7f91c510f260ae2d9" kind="function"><name>setHealthDepletedBehavior</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a6201ca81355b5ce4a172f9b043fa9f30" kind="function"><name>healthDepletedBehavior</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1ae9e8d4e019cb22caa654e1182dd366f3" kind="function"><name>takeDamage</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a716b6262b38e939d5ea17a286e77bc9f" kind="function"><name>heal</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a64b2f2eaf15189133d58c0962bbafdc4" kind="function"><name>setMaxHealth</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a3efd7bfb510d90c01d5c5cfa5711cf46" kind="function"><name>isAlive</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a4ea567a37ce85c77060339f640360117" kind="function"><name>health</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a3ef7c4856ce37a6bd92709ac2df9d5ee" kind="function"><name>maxHealth</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a828cee0f47a0562121f784ed693ecb94" kind="function"><name>isDirty</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a3fc81eef5db8f3d9056b2398490228c7" kind="function"><name>clearDirty</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a7802d3f0097f02386ad3e69c82cb7a81" kind="function"><name>reset</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a101c0fbf8ce19699fea76830e44f0b41" kind="function"><name>onAcquire</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a4608228eca907471486254b9df3faee7" kind="function"><name>onRelease</name></member>
@@ -1533,10 +1555,26 @@
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1HealthConfig_1ab0e8ebdc78de181ed3eb5080740a8e06" kind="variable"><name>gameObject_</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1HealthConfig_1a191253013e1a51450fded2233c8de28f" kind="function"><name>HealthConfig</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1HealthConfig_1a71c30ec664eb876b52a88433c3e499db" kind="function"><name>maxHealth</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1HealthConfig_1a7dade8815526f4c82e4d47669a2d1f20" kind="function"><name>lives</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1HealthConfig_1a2408b7804a64d0b3e26d8a7ecd7f4f2e" kind="function"><name>healthDepletedTriggers</name></member>
   </compound>
-  <compound refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1systems_1_1HealthUpdateSystem" kind="class"><name>helios::engine::mechanics::health::systems::HealthUpdateSystem</name>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1systems_1_1HealthUpdateSystem_1a50656e68a950e206ca2bc38de5644f91" kind="variable"><name>logger_</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1systems_1_1HealthUpdateSystem_1ac37bb8ba60abf58b11fa2317c43fb35a" kind="function"><name>update</name></member>
+  <compound refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1HealthDepletedEvent" kind="class"><name>helios::engine::mechanics::health::events::HealthDepletedEvent</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1HealthDepletedEvent_1a17dd2ccc7be59014d6a2ef1f0bdd8b2b" kind="variable"><name>source_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1HealthDepletedEvent_1a6b9f8783652765576d30be4597fca38c" kind="variable"><name>damageContext_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1HealthDepletedEvent_1a8f25111a18cca122dff6839f8b8efed3" kind="function"><name>HealthDepletedEvent</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1HealthDepletedEvent_1a4b8c26b570172ace4807fa868a78346b" kind="function"><name>damageContext</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1HealthDepletedEvent_1ae5f5a255c505948945ff6b17b1b7c249" kind="function"><name>source</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1HealthManager" kind="class"><name>helios::engine::mechanics::health::HealthManager</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1HealthManager_1a89c7bff7ac12905765297f75a340a734" kind="variable"><name>logger_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1HealthManager_1ace2aace3b2102cca8de9224cdea6096c" kind="variable"><name>damageContexts_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1HealthManager_1a09a3a9b1c6903875df52dfacc0279dea" kind="function"><name>flush</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1HealthManager_1a40e97480d6b060def1129212720259b8" kind="function"><name>submit</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1HealthManager_1ae2172a3f5f21938f17f811c0ebb0cd6d" kind="function"><name>init</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1HealthManager_1af584e64dbdf0b1fb99054d467144b88d" kind="function"><name>reset</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1systems_1_1HealthUpdateClearSystem" kind="class"><name>helios::engine::mechanics::health::systems::HealthUpdateClearSystem</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1systems_1_1HealthUpdateClearSystem_1a25483e86ab960b9c6760cffb4995b651" kind="function"><name>update</name></member>
   </compound>
   <compound refid="structhelios_1_1engine_1_1core_1_1data_1_1CommandTypeId_1_1helios__engine__core__data__CommandTypes" kind="struct"><name>helios::engine::core::data::CommandTypeId::helios_engine_core_data_CommandTypes</name>
   </compound>
@@ -1648,6 +1686,12 @@
     <member refid="classhelios_1_1input_1_1InputSnapshot_1a399a0d9b40195ad8470ee73ff44fd113" kind="function"><name>InputSnapshot</name></member>
     <member refid="classhelios_1_1input_1_1InputSnapshot_1a5ff8aba18168b8843329886e68a7ee99" kind="function"><name>gamepadState</name></member>
   </compound>
+  <compound refid="structhelios_1_1engine_1_1common_1_1types_1_1InteractionContext" kind="struct"><name>helios::engine::common::types::InteractionContext</name>
+    <member refid="structhelios_1_1engine_1_1common_1_1types_1_1InteractionContext_1aae38539672fa695861c4e7d1f51d10a9" kind="variable"><name>target</name></member>
+    <member refid="structhelios_1_1engine_1_1common_1_1types_1_1InteractionContext_1ae81c6a788c3c7bf0ecca6d0739536d9a" kind="variable"><name>instigator</name></member>
+    <member refid="structhelios_1_1engine_1_1common_1_1types_1_1InteractionContext_1af817f2df791da30902c825621bc037f5" kind="variable"><name>causer</name></member>
+    <member refid="structhelios_1_1engine_1_1common_1_1types_1_1InteractionContext_1ae4ea1689e6d567fa394e7091e81b56d0" kind="variable"><name>contact</name></member>
+  </compound>
   <compound refid="structhelios_1_1engine_1_1state_1_1types_1_1InvalidStateTransitionId" kind="struct"><name>helios::engine::state::types::InvalidStateTransitionId</name>
   </compound>
   <compound refid="structhelios_1_1engine_1_1ecs_1_1SparseSet_1_1Iterator" kind="struct"><name>helios::engine::ecs::SparseSet::Iterator</name>
@@ -1702,22 +1746,22 @@
     <member refid="classhelios_1_1engine_1_1state_1_1listeners_1_1LambdaStateListener_1a3b128d63ab6e7dd205398b6e5ad1f4c2" kind="function"><name>onStateEnter</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1listeners_1_1LambdaStateListener_1afdd718639197f8fb98ae5cbc9f08a2d9" kind="function"><name>onStateTransition</name></member>
   </compound>
-  <compound refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent" kind="class"><name>helios::engine::mechanics::combat::components::LastAttackerComponent</name>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1af47b18f96f329e3f3e0fbf435d72a5bb" kind="variable"><name>lastAttackContext_</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1a8e1092967a2fa9a2ec52a59eca8b1574" kind="variable"><name>isEnabled_</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1a133056e9a56a3a9571f895504580a5f7" kind="function"><name>isEnabled</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1ad78e59fdc33dbfc1fb5def44a185eb40" kind="function"><name>enable</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1a9979bc950053a88baacf0c19875ee2c3" kind="function"><name>disable</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1a9fe388df335a4ffb7833fe8a7f9cac19" kind="function"><name>LastAttackerComponent</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1abeb7ab8ddb452f8202959c1f96c1838d" kind="function"><name>LastAttackerComponent</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1af0ce05c9b6bdd9258c4a48f8fd138886" kind="function"><name>operator=</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1a01cfa1c1ff9d887d6beec233cd8d8757" kind="function"><name>LastAttackerComponent</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1adb82e551f9b19f0b9a35a15900d1bb61" kind="function"><name>operator=</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1ad6ab43b5a23ded93e826fd41ffcc4d43" kind="function"><name>setLastAttackContext</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1a376e66befb1b20f4654c979b6746573d" kind="function"><name>lastAttackContext</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1a2eca84031d3fa453c072c1f686405dbf" kind="function"><name>reset</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1a45396e841a3afff980d5f376ffe129cd" kind="function"><name>onAcquire</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1a66553285bc50025e22a46f2a9b798ebc" kind="function"><name>onRelease</name></member>
+  <compound refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent" kind="class"><name>helios::engine::mechanics::damage::components::LastDamageComponent</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent_1a0063c962d3909c3ff0a7ae4ecf772667" kind="variable"><name>damageContext_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent_1ab5fbdfa92774be3067d718c8aa8d80ea" kind="variable"><name>isEnabled_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent_1a9419c4bb08effb4442a79f242890bc22" kind="function"><name>isEnabled</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent_1a112ac5b77e77b58dbe69a73be44bbe2e" kind="function"><name>enable</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent_1a880db242361aadaa59d4091d04529222" kind="function"><name>disable</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent_1a57bdc419aada13c7dd91f12b53214ac1" kind="function"><name>LastDamageComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent_1a495103dbe932b79a9151edd20b6c7a78" kind="function"><name>LastDamageComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent_1a003a354ac31cdaac924d27db0196e0a2" kind="function"><name>operator=</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent_1a5081f5c56db8f2c561ccf8403ffdf9de" kind="function"><name>LastDamageComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent_1a1b5c3e7b038a84a93023bd1b6931fb61" kind="function"><name>operator=</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent_1aa2103274d188fc4a9956dbc754b9deb4" kind="function"><name>setDamageContext</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent_1a49a8e5dd671f065dab1e9e57027e90dc" kind="function"><name>damageContext</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent_1a291a6751b51d9ad083a95c0fee2a0112" kind="function"><name>reset</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent_1a84055d1fea57497c505513eb2ced2a40" kind="function"><name>onAcquire</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent_1afd79d5e30bb666dbe254bbd764b4c456" kind="function"><name>onRelease</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Level" kind="class"><name>helios::engine::runtime::world::Level</name>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Level_1a192633f3971116751ece9b8ff8b46b42" kind="variable"><name>rootNode_</name></member>
@@ -1774,6 +1818,26 @@
   <compound refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Line" kind="struct"><name>helios::rendering::asset::shape::basic::Line</name>
     <member refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Line_1a427210e20dc07acf0a3d765892d66074" kind="function"><name>Line</name></member>
     <member refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Line_1ae778de05eb924f01bf3e5eb7a68ca1d6" kind="function"><name>primitiveType</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1Lives2UiTextUpdateSystem" kind="class"><name>helios::engine::modules::ui::binding::systems::Lives2UiTextUpdateSystem</name>
+    <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1Lives2UiTextUpdateSystem_1a9bd52ce9ef773e802c0d2abaac883571" kind="function"><name>update</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesBindingComponent" kind="class"><name>helios::engine::mechanics::match::components::LivesBindingComponent</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesBindingComponent_1a2f297f81fd5359311217c4799981d48d" kind="variable"><name>entityHandle_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesBindingComponent_1abf92245e9456b4df06f2757e25d76778" kind="variable"><name>livesRevision_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesBindingComponent_1aa16e14b15eedf00d768b4242fd9c340e" kind="function"><name>LivesBindingComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesBindingComponent_1a3664fe3f9b8431770e309319bec14a23" kind="function"><name>target</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesBindingComponent_1a570e87b8d6f41b2bb7e93cefeec14e13" kind="function"><name>setLivesRevision</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesBindingComponent_1a687c907bf91f93aa03ba980d9ac3d653" kind="function"><name>livesRevision</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent" kind="class"><name>helios::engine::mechanics::match::components::LivesComponent</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent_1adb6746126f254f52123b5c97747069f8" kind="variable"><name>lives_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent_1a0f0d0635d9dcb1a9395b5c57ec45e4f7" kind="variable"><name>livesRevision_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent_1aefd73d433fa4d21d313390c5c1edc2fe" kind="function"><name>LivesComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent_1ad13996c90b4c3560b4a83ead1f041032" kind="function"><name>lives</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent_1a1f09c97065c303d5b2bde8c9a0622f65" kind="function"><name>decrease</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent_1a6daaf38c1abf3c05bd7dd6a1805e1946" kind="function"><name>increase</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent_1a60abc3d81b1dbc03759bf2d82e373380" kind="function"><name>livesRevision</name></member>
   </compound>
   <compound refid="structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry" kind="struct"><name>helios::ext::imgui::widgets::LogEntry</name>
     <member refid="structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry_1a1604578016d00a484fa9a2d97629d384" kind="variable"><name>level</name></member>
@@ -2253,6 +2317,7 @@
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ObserverConfig_1a8ef24734f3bfeb1778d168a9bad421aa" kind="function"><name>ObserverConfig</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ObserverConfig_1abbbfa6a2b22c1849a00ef3a168a722dd" kind="function"><name>scorePool</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ObserverConfig_1a0204797c55a823da9234eaecd0f517fd" kind="function"><name>runningScore</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ObserverConfig_1a6c9fdc12ec1a24c8221ab696aa00b203" kind="function"><name>lives</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ObserverConfig_1af09cb508af8eb3854e7d6f0dd5d796d3" kind="function"><name>maxScore</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ObserverConfig_1a5b05eb774f75b54386708137a946f1c6" kind="function"><name>time</name></member>
   </compound>
@@ -2361,6 +2426,13 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase_1a6b4a1f29d5eafcbb8f86e6bc867d3d11" kind="function"><name>addPassCommitListener</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase_1a88638a425d6afe3141de12474f6ea52d" kind="function"><name>addPass</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase_1aa478fd5c979d7b3454afd1a4a9521851" kind="function"><name>gameLoop</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1PlayerComponent" kind="class"><name>helios::engine::mechanics::match::components::PlayerComponent</name>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1events_1_1PlayerDiedEvent" kind="class"><name>helios::engine::mechanics::match::events::PlayerDiedEvent</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1events_1_1PlayerDiedEvent_1ab06380cadfcba90f9022a58c97919092" kind="variable"><name>source_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1events_1_1PlayerDiedEvent_1a6095918432d79d185141c55d46937da5" kind="function"><name>PlayerDiedEvent</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1events_1_1PlayerDiedEvent_1a052f3b7860faef964f4b01274e6aa36b" kind="function"><name>source</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1components_1_1PrefabIdComponent" kind="class"><name>helios::engine::runtime::pooling::components::PrefabIdComponent</name>
     <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1components_1_1PrefabIdComponent_1a927233f8dd0de190cbdc19170897e416" kind="variable"><name>prefabId_</name></member>
@@ -3719,6 +3791,7 @@
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TransformConfig_1a37d4ee1a21f53c1756a4fcbe22de4d99" kind="function"><name>TransformConfig</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TransformConfig_1a28e5b916f38df0a8e0654467fb142b21" kind="function"><name>scale</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TransformConfig_1a69f9ed55c2564468f51d2d82f7d4f001" kind="function"><name>translate</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TransformConfig_1a41bc7aa8f243bf3cfe41a528dfd79259" kind="function"><name>rotate</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1TranslationStateComponent" kind="class"><name>helios::engine::modules::spatial::transform::components::TranslationStateComponent</name>
     <member refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1TranslationStateComponent_1aee87dd9a4a4848e22b997d8ebaa1b6e9" kind="variable"><name>translation_</name></member>
@@ -4292,6 +4365,10 @@
   </compound>
   <compound refid="namespacehelios_1_1engine_1_1builder_1_1spawnSystem_1_1builders_1_1configs" kind="namespace"><name>helios::engine::builder::spawnSystem::builders::configs</name>
   </compound>
+  <compound refid="namespacehelios_1_1engine_1_1common" kind="namespace"><name>helios::engine::common</name>
+  </compound>
+  <compound refid="namespacehelios_1_1engine_1_1common_1_1types" kind="namespace"><name>helios::engine::common::types</name>
+  </compound>
   <compound refid="namespacehelios_1_1engine_1_1core" kind="namespace"><name>helios::engine::core</name>
   </compound>
   <compound refid="namespacehelios_1_1engine_1_1core_1_1data" kind="namespace"><name>helios::engine::core::data</name>
@@ -4344,10 +4421,10 @@
   </compound>
   <compound refid="namespacehelios_1_1engine_1_1mechanics_1_1combat_1_1systems" kind="namespace"><name>helios::engine::mechanics::combat::systems</name>
   </compound>
-  <compound refid="namespacehelios_1_1engine_1_1mechanics_1_1combat_1_1types" kind="namespace"><name>helios::engine::mechanics::combat::types</name>
-  </compound>
   <compound refid="namespacehelios_1_1engine_1_1mechanics_1_1damage" kind="namespace"><name>helios::engine::mechanics::damage</name>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1damage_1a1daf202893774766c8e7b3655664a4c0" kind="function"><name>registerComponents</name></member>
+  </compound>
+  <compound refid="namespacehelios_1_1engine_1_1mechanics_1_1damage_1_1commands" kind="namespace"><name>helios::engine::mechanics::damage::commands</name>
   </compound>
   <compound refid="namespacehelios_1_1engine_1_1mechanics_1_1damage_1_1components" kind="namespace"><name>helios::engine::mechanics::damage::components</name>
   </compound>
@@ -4400,6 +4477,15 @@
   </compound>
   <compound refid="namespacehelios_1_1engine_1_1mechanics_1_1health_1_1systems" kind="namespace"><name>helios::engine::mechanics::health::systems</name>
   </compound>
+  <compound refid="namespacehelios_1_1engine_1_1mechanics_1_1health_1_1types" kind="namespace"><name>helios::engine::mechanics::health::types</name>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1health_1_1types_1a9743835a1d9bdeab71ea28ed3603b3fd" kind="enum"><name>HealthDepletedBehavior</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1health_1_1types_1a9743835a1d9bdeab71ea28ed3603b3fda6adf97f83acf6453d4a6a4b1070f3754" kind="enumvalue"><name>None</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1health_1_1types_1a9743835a1d9bdeab71ea28ed3603b3fda573a38c8ee30e1c0d6ad84ce4f965cf0" kind="enumvalue"><name>Despawn</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1health_1_1types_1a9743835a1d9bdeab71ea28ed3603b3fda946f37e7b742f900aa87689aa76d7fb2" kind="enumvalue"><name>DeadTag</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1health_1_1types_1a5f91a4bddebda46a2ebf68bb5b602616" kind="function"><name>operator|</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1health_1_1types_1abdbad17fb864258b146c12dc0143bffc" kind="function"><name>operator&amp;</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1health_1_1types_1a9de10cca74b3ddf61842ebf52bf0fc58" kind="function"><name>hasHealthDepletedFlag</name></member>
+  </compound>
   <compound refid="namespacehelios_1_1engine_1_1mechanics_1_1input" kind="namespace"><name>helios::engine::mechanics::input</name>
   </compound>
   <compound refid="namespacehelios_1_1engine_1_1mechanics_1_1input_1_1systems" kind="namespace"><name>helios::engine::mechanics::input::systems</name>
@@ -4419,6 +4505,10 @@
   </compound>
   <compound refid="namespacehelios_1_1engine_1_1mechanics_1_1match" kind="namespace"><name>helios::engine::mechanics::match</name>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1a151fc4e8d8a8f2eb87866789883eda39" kind="typedef"><name>MatchStateManager</name></member>
+  </compound>
+  <compound refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1components" kind="namespace"><name>helios::engine::mechanics::match::components</name>
+  </compound>
+  <compound refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1events" kind="namespace"><name>helios::engine::mechanics::match::events</name>
   </compound>
   <compound refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1rules" kind="namespace"><name>helios::engine::mechanics::match::rules</name>
   </compound>
@@ -4453,6 +4543,7 @@
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70a6fe7fa1af6567da46b7f26f21a81c0e3" kind="enumvalue"><name>RespawnRequested</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70a894ce1b6075d9de36dec60cc22e20536" kind="enumvalue"><name>QuitRequested</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70abedfd09a1d1fc1b855c549c441a37ebc" kind="enumvalue"><name>RestartRequested</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a5a9b40b91cd49d24dffc892db68cfd6c" kind="typedef"><name>LivesRevision</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a4c35aad58be5d0fe9bb4f2ba77da7827" kind="typedef"><name>MatchStateType</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a179e9980957fc0d478a2735e3e202e27" kind="variable"><name>MatchStateTypeSize</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a01aada80a63984ca8fbea2ba97de0c05" kind="function"><name>operator|</name></member>
@@ -4984,6 +5075,10 @@
   </compound>
   <compound refid="helios_2engine_2builder_2spawnSystem_2builders_2configs_2__module_8ixx" kind="file"><name>helios/engine/builder/spawnSystem/builders/configs/_module.ixx</name>
   </compound>
+  <compound refid="helios_2engine_2common_2__module_8ixx" kind="file"><name>helios/engine/common/_module.ixx</name>
+  </compound>
+  <compound refid="helios_2engine_2common_2types_2__module_8ixx" kind="file"><name>helios/engine/common/types/_module.ixx</name>
+  </compound>
   <compound refid="helios_2engine_2core_2__module_8ixx" kind="file"><name>helios/engine/core/_module.ixx</name>
   </compound>
   <compound refid="helios_2engine_2core_2data_2__module_8ixx" kind="file"><name>helios/engine/core/data/_module.ixx</name>
@@ -5012,9 +5107,9 @@
   </compound>
   <compound refid="helios_2engine_2mechanics_2combat_2systems_2__module_8ixx" kind="file"><name>helios/engine/mechanics/combat/systems/_module.ixx</name>
   </compound>
-  <compound refid="helios_2engine_2mechanics_2combat_2types_2__module_8ixx" kind="file"><name>helios/engine/mechanics/combat/types/_module.ixx</name>
-  </compound>
   <compound refid="helios_2engine_2mechanics_2damage_2__module_8ixx" kind="file"><name>helios/engine/mechanics/damage/_module.ixx</name>
+  </compound>
+  <compound refid="helios_2engine_2mechanics_2damage_2commands_2__module_8ixx" kind="file"><name>helios/engine/mechanics/damage/commands/_module.ixx</name>
   </compound>
   <compound refid="helios_2engine_2mechanics_2damage_2components_2__module_8ixx" kind="file"><name>helios/engine/mechanics/damage/components/_module.ixx</name>
   </compound>
@@ -5036,6 +5131,8 @@
   </compound>
   <compound refid="helios_2engine_2mechanics_2health_2systems_2__module_8ixx" kind="file"><name>helios/engine/mechanics/health/systems/_module.ixx</name>
   </compound>
+  <compound refid="helios_2engine_2mechanics_2health_2types_2__module_8ixx" kind="file"><name>helios/engine/mechanics/health/types/_module.ixx</name>
+  </compound>
   <compound refid="helios_2engine_2mechanics_2input_2__module_8ixx" kind="file"><name>helios/engine/mechanics/input/_module.ixx</name>
   </compound>
   <compound refid="helios_2engine_2mechanics_2input_2systems_2__module_8ixx" kind="file"><name>helios/engine/mechanics/input/systems/_module.ixx</name>
@@ -5051,6 +5148,10 @@
   <compound refid="helios_2engine_2mechanics_2lifecycle_2types_2__module_8ixx" kind="file"><name>helios/engine/mechanics/lifecycle/types/_module.ixx</name>
   </compound>
   <compound refid="helios_2engine_2mechanics_2match_2__module_8ixx" kind="file"><name>helios/engine/mechanics/match/_module.ixx</name>
+  </compound>
+  <compound refid="helios_2engine_2mechanics_2match_2components_2__module_8ixx" kind="file"><name>helios/engine/mechanics/match/components/_module.ixx</name>
+  </compound>
+  <compound refid="helios_2engine_2mechanics_2match_2events_2__module_8ixx" kind="file"><name>helios/engine/mechanics/match/events/_module.ixx</name>
   </compound>
   <compound refid="helios_2engine_2mechanics_2match_2rules_2__module_8ixx" kind="file"><name>helios/engine/mechanics/match/rules/_module.ixx</name>
   </compound>
@@ -5371,6 +5472,10 @@
   </compound>
   <compound refid="helios_2engine_2builder_2spawnSystem_2README_8md" kind="file"><name>helios/engine/builder/spawnSystem/README.md</name>
   </compound>
+  <compound refid="helios_2engine_2common_2README_8md" kind="file"><name>helios/engine/common/README.md</name>
+  </compound>
+  <compound refid="helios_2engine_2common_2types_2README_8md" kind="file"><name>helios/engine/common/types/README.md</name>
+  </compound>
   <compound refid="helios_2engine_2core_2data_2README_8md" kind="file"><name>helios/engine/core/data/README.md</name>
   </compound>
   <compound refid="helios_2engine_2core_2README_8md" kind="file"><name>helios/engine/core/README.md</name>
@@ -5397,7 +5502,7 @@
   </compound>
   <compound refid="helios_2engine_2mechanics_2combat_2systems_2README_8md" kind="file"><name>helios/engine/mechanics/combat/systems/README.md</name>
   </compound>
-  <compound refid="helios_2engine_2mechanics_2combat_2types_2README_8md" kind="file"><name>helios/engine/mechanics/combat/types/README.md</name>
+  <compound refid="helios_2engine_2mechanics_2damage_2commands_2README_8md" kind="file"><name>helios/engine/mechanics/damage/commands/README.md</name>
   </compound>
   <compound refid="helios_2engine_2mechanics_2damage_2components_2README_8md" kind="file"><name>helios/engine/mechanics/damage/components/README.md</name>
   </compound>
@@ -5421,6 +5526,8 @@
   </compound>
   <compound refid="helios_2engine_2mechanics_2health_2systems_2README_8md" kind="file"><name>helios/engine/mechanics/health/systems/README.md</name>
   </compound>
+  <compound refid="helios_2engine_2mechanics_2health_2types_2README_8md" kind="file"><name>helios/engine/mechanics/health/types/README.md</name>
+  </compound>
   <compound refid="helios_2engine_2mechanics_2input_2README_8md" kind="file"><name>helios/engine/mechanics/input/README.md</name>
   </compound>
   <compound refid="helios_2engine_2mechanics_2input_2systems_2README_8md" kind="file"><name>helios/engine/mechanics/input/systems/README.md</name>
@@ -5434,6 +5541,10 @@
   <compound refid="helios_2engine_2mechanics_2lifecycle_2systems_2README_8md" kind="file"><name>helios/engine/mechanics/lifecycle/systems/README.md</name>
   </compound>
   <compound refid="helios_2engine_2mechanics_2lifecycle_2types_2README_8md" kind="file"><name>helios/engine/mechanics/lifecycle/types/README.md</name>
+  </compound>
+  <compound refid="helios_2engine_2mechanics_2match_2components_2README_8md" kind="file"><name>helios/engine/mechanics/match/components/README.md</name>
+  </compound>
+  <compound refid="helios_2engine_2mechanics_2match_2events_2README_8md" kind="file"><name>helios/engine/mechanics/match/events/README.md</name>
   </compound>
   <compound refid="helios_2engine_2mechanics_2match_2README_8md" kind="file"><name>helios/engine/mechanics/match/README.md</name>
   </compound>
@@ -5781,6 +5892,10 @@
   </compound>
   <compound refid="SpawnSystemFactory_8ixx" kind="file"><name>SpawnSystemFactory.ixx</name>
   </compound>
+  <compound refid="DamageContext_8ixx" kind="file"><name>DamageContext.ixx</name>
+  </compound>
+  <compound refid="InteractionContext_8ixx" kind="file"><name>InteractionContext.ixx</name>
+  </compound>
   <compound refid="ActionId_8ixx" kind="file"><name>ActionId.ixx</name>
   </compound>
   <compound refid="CollisionLayer_8ixx" kind="file"><name>CollisionLayer.ixx</name>
@@ -5863,15 +5978,15 @@
   </compound>
   <compound refid="Aim2DComponent_8ixx" kind="file"><name>Aim2DComponent.ixx</name>
   </compound>
-  <compound refid="LastAttackerComponent_8ixx" kind="file"><name>LastAttackerComponent.ixx</name>
-  </compound>
   <compound refid="ShootComponent_8ixx" kind="file"><name>ShootComponent.ixx</name>
   </compound>
   <compound refid="ProjectileSpawnSystem_8ixx" kind="file"><name>ProjectileSpawnSystem.ixx</name>
   </compound>
-  <compound refid="AttackContext_8ixx" kind="file"><name>AttackContext.ixx</name>
+  <compound refid="ApplyDamageCommand_8ixx" kind="file"><name>ApplyDamageCommand.ixx</name>
   </compound>
   <compound refid="DamageDealerComponent_8ixx" kind="file"><name>DamageDealerComponent.ixx</name>
+  </compound>
+  <compound refid="LastDamageComponent_8ixx" kind="file"><name>LastDamageComponent.ixx</name>
   </compound>
   <compound refid="DamageOnCollisionSystem_8ixx" kind="file"><name>DamageOnCollisionSystem.ixx</name>
     <member refid="DamageOnCollisionSystem_8ixx_1acbc04f24078582c7d42b2085be5d5750" kind="define"><name>HELIOS_LOG_SCOPE</name></member>
@@ -5890,16 +6005,26 @@
   </compound>
   <compound refid="HealthComponent_8ixx" kind="file"><name>HealthComponent.ixx</name>
   </compound>
-  <compound refid="DeathEvent_8ixx" kind="file"><name>DeathEvent.ixx</name>
+  <compound refid="HealthChangedEvent_8ixx" kind="file"><name>HealthChangedEvent.ixx</name>
   </compound>
-  <compound refid="HealthUpdateSystem_8ixx" kind="file"><name>HealthUpdateSystem.ixx</name>
-    <member refid="HealthUpdateSystem_8ixx_1acbc04f24078582c7d42b2085be5d5750" kind="define"><name>HELIOS_LOG_SCOPE</name></member>
+  <compound refid="HealthDepletedEvent_8ixx" kind="file"><name>HealthDepletedEvent.ixx</name>
+  </compound>
+  <compound refid="HealthManager_8ixx" kind="file"><name>HealthManager.ixx</name>
+    <member refid="HealthManager_8ixx_1acbc04f24078582c7d42b2085be5d5750" kind="define"><name>HELIOS_LOG_SCOPE</name></member>
+  </compound>
+  <compound refid="HealthUpdateClearSystem_8ixx" kind="file"><name>HealthUpdateClearSystem.ixx</name>
+  </compound>
+  <compound refid="HealthChangeContext_8ixx" kind="file"><name>HealthChangeContext.ixx</name>
+  </compound>
+  <compound refid="HealthDepletedBehavior_8ixx" kind="file"><name>HealthDepletedBehavior.ixx</name>
   </compound>
   <compound refid="TwinStickInputSystem_8ixx" kind="file"><name>TwinStickInputSystem.ixx</name>
   </compound>
   <compound refid="WorldLifecycleCommand_8ixx" kind="file"><name>WorldLifecycleCommand.ixx</name>
   </compound>
   <compound refid="Active_8ixx" kind="file"><name>Active.ixx</name>
+  </compound>
+  <compound refid="DeadTagComponent_8ixx" kind="file"><name>DeadTagComponent.ixx</name>
   </compound>
   <compound refid="DelayedComponentEnabler_8ixx" kind="file"><name>DelayedComponentEnabler.ixx</name>
   </compound>
@@ -5957,9 +6082,19 @@
   </compound>
   <compound refid="DelayedComponentEnablerSystem_8ixx" kind="file"><name>DelayedComponentEnablerSystem.ixx</name>
   </compound>
+  <compound refid="GameObjectLifecycleSystem_8ixx" kind="file"><name>GameObjectLifecycleSystem.ixx</name>
+  </compound>
   <compound refid="WorldLifecycleAction_8ixx" kind="file"><name>WorldLifecycleAction.ixx</name>
   </compound>
   <compound refid="WorldLifecycleManager_8ixx" kind="file"><name>WorldLifecycleManager.ixx</name>
+  </compound>
+  <compound refid="LivesBindingComponent_8ixx" kind="file"><name>LivesBindingComponent.ixx</name>
+  </compound>
+  <compound refid="LivesComponent_8ixx" kind="file"><name>LivesComponent.ixx</name>
+  </compound>
+  <compound refid="PlayerComponent_8ixx" kind="file"><name>PlayerComponent.ixx</name>
+  </compound>
+  <compound refid="PlayerDiedEvent_8ixx" kind="file"><name>PlayerDiedEvent.ixx</name>
   </compound>
   <compound refid="MatchStateManager_8ixx" kind="file"><name>MatchStateManager.ixx</name>
   </compound>
@@ -5970,6 +6105,8 @@
   <compound refid="MatchFlowSystem_8ixx" kind="file"><name>MatchFlowSystem.ixx</name>
   </compound>
   <compound refid="MatchRuleSystem_8ixx" kind="file"><name>MatchRuleSystem.ixx</name>
+  </compound>
+  <compound refid="LivesRevision_8ixx" kind="file"><name>LivesRevision.ixx</name>
   </compound>
   <compound refid="MatchState_8ixx" kind="file"><name>MatchState.ixx</name>
   </compound>
@@ -6120,6 +6257,8 @@
   <compound refid="TransformClearSystem_8ixx" kind="file"><name>TransformClearSystem.ixx</name>
   </compound>
   <compound refid="GameTimer2UiTextUpdateSystem_8ixx" kind="file"><name>GameTimer2UiTextUpdateSystem.ixx</name>
+  </compound>
+  <compound refid="Lives2UiTextUpdateSystem_8ixx" kind="file"><name>Lives2UiTextUpdateSystem.ixx</name>
   </compound>
   <compound refid="MaxScore2UiTextUpdateSystem_8ixx" kind="file"><name>MaxScore2UiTextUpdateSystem.ixx</name>
   </compound>
@@ -6573,6 +6712,8 @@
   </compound>
   <compound refid="dir_7d3bcdf99a77c1f991d9debddb7a154b" kind="dir"><name>commands</name>
   </compound>
+  <compound refid="dir_aca174411ef9649e45d3a1395b0cacb3" kind="dir"><name>commands</name>
+  </compound>
   <compound refid="dir_db86f11dedfd09ad096f192bbb7f0a5e" kind="dir"><name>commands</name>
   </compound>
   <compound refid="dir_326351fd6fbd1ed4d80f0b2b180f7c49" kind="dir"><name>commands</name>
@@ -6587,6 +6728,8 @@
   </compound>
   <compound refid="dir_c533d1b00932fdf129a636cbef0bfb01" kind="dir"><name>commands</name>
   </compound>
+  <compound refid="dir_1a83b528599da40ca3e2005a9bc9336b" kind="dir"><name>common</name>
+  </compound>
   <compound refid="dir_8bbfdb3074aa5394e722af7d9f4cad42" kind="dir"><name>components</name>
   </compound>
   <compound refid="dir_c6483a69d8044e8cd0979f3e8cae52db" kind="dir"><name>components</name>
@@ -6598,6 +6741,8 @@
   <compound refid="dir_b2dc284bc44df997cbbb992175867665" kind="dir"><name>components</name>
   </compound>
   <compound refid="dir_9c6cd3e8e6e0499e50b91381009c10c7" kind="dir"><name>components</name>
+  </compound>
+  <compound refid="dir_aa6a3dd4ed48a30c8a77c0ae3ea7750b" kind="dir"><name>components</name>
   </compound>
   <compound refid="dir_2e322012c304bd84ecea0543a8b62f92" kind="dir"><name>components</name>
   </compound>
@@ -6668,6 +6813,8 @@
   <compound refid="dir_e021a7b6d7780cf049a59f6ed951b06e" kind="dir"><name>event</name>
   </compound>
   <compound refid="dir_fd5d3d54ac0a369cf6af2bf220932640" kind="dir"><name>events</name>
+  </compound>
+  <compound refid="dir_1a4540f1defede2df620a14ba6a94413" kind="dir"><name>events</name>
   </compound>
   <compound refid="dir_aca6b06171d3710cdcd51681b6e59d2d" kind="dir"><name>events</name>
   </compound>
@@ -6851,9 +6998,11 @@
   </compound>
   <compound refid="dir_33cd47729dc1f03ba9a5328b1ca2a965" kind="dir"><name>transform</name>
   </compound>
-  <compound refid="dir_66f29c90d119077444d3c4255baff55d" kind="dir"><name>types</name>
+  <compound refid="dir_d622a35e7403102787f31ec94282d34f" kind="dir"><name>types</name>
   </compound>
   <compound refid="dir_c06739a7e81ea970219d6849a6b58298" kind="dir"><name>types</name>
+  </compound>
+  <compound refid="dir_73f976e4cfb02d3a04525286c98fa7b3" kind="dir"><name>types</name>
   </compound>
   <compound refid="dir_ada361f984e4a5be1a99b39ca6ecaff1" kind="dir"><name>types</name>
   </compound>
@@ -7476,7 +7625,7 @@
   <compound refid="module__helios_8engine_8builder_8gameObject_8builders_8configs_8CombatConfig" kind="module"><name>helios.engine.builder.gameObject.builders.configs.CombatConfig</name>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1CombatConfig_1a2adb9f6d5076da0a80cca5878b8b7710" kind="variable"><name>gameObject_</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1CombatConfig_1ad90e5a82c15afd6d18270d721224e35c" kind="function"><name>CombatConfig</name></member>
-    <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1CombatConfig_1af3373edc0021bdd1fbc65ac919ee7738" kind="function"><name>trackLastAttacker</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1CombatConfig_1af69d0a7eafe32f78bf02fb6182c57f68" kind="function"><name>trackLastDamage</name></member>
   </compound>
   <compound refid="module__helios_8engine_8builder_8gameObject_8builders_8configs_8GfxEffectsConfig" kind="module"><name>helios.engine.builder.gameObject.builders.configs.GfxEffectsConfig</name>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1GfxEffectsConfig_1a09dcc78dd6404d5b55bef38c946e12b2" kind="variable"><name>gameObject_</name></member>
@@ -7487,6 +7636,8 @@
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1HealthConfig_1ab0e8ebdc78de181ed3eb5080740a8e06" kind="variable"><name>gameObject_</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1HealthConfig_1a191253013e1a51450fded2233c8de28f" kind="function"><name>HealthConfig</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1HealthConfig_1a71c30ec664eb876b52a88433c3e499db" kind="function"><name>maxHealth</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1HealthConfig_1a7dade8815526f4c82e4d47669a2d1f20" kind="function"><name>lives</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1HealthConfig_1a2408b7804a64d0b3e26d8a7ecd7f4f2e" kind="function"><name>healthDepletedTriggers</name></member>
   </compound>
   <compound refid="module__helios_8engine_8builder_8gameObject_8builders_8configs_8LevelBoundsCollisionConfig" kind="module"><name>helios.engine.builder.gameObject.builders.configs.LevelBoundsCollisionConfig</name>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1LevelBoundsCollisionConfig_1a98b3b3167fb016fd0a2c3eb07a32b480" kind="variable"><name>gameObject_</name></member>
@@ -7549,6 +7700,7 @@
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ObserverConfig_1a8ef24734f3bfeb1778d168a9bad421aa" kind="function"><name>ObserverConfig</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ObserverConfig_1abbbfa6a2b22c1849a00ef3a168a722dd" kind="function"><name>scorePool</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ObserverConfig_1a0204797c55a823da9234eaecd0f517fd" kind="function"><name>runningScore</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ObserverConfig_1a6c9fdc12ec1a24c8221ab696aa00b203" kind="function"><name>lives</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ObserverConfig_1af09cb508af8eb3854e7d6f0dd5d796d3" kind="function"><name>maxScore</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ObserverConfig_1a5b05eb774f75b54386708137a946f1c6" kind="function"><name>time</name></member>
   </compound>
@@ -7617,6 +7769,7 @@
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TransformConfig_1a37d4ee1a21f53c1756a4fcbe22de4d99" kind="function"><name>TransformConfig</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TransformConfig_1a28e5b916f38df0a8e0654467fb142b21" kind="function"><name>scale</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TransformConfig_1a69f9ed55c2564468f51d2d82f7d4f001" kind="function"><name>translate</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TransformConfig_1a41bc7aa8f243bf3cfe41a528dfd79259" kind="function"><name>rotate</name></member>
   </compound>
   <compound refid="module__helios_8engine_8builder_8gameObject_8builders_8configs_8UiTransformConfig" kind="module"><name>helios.engine.builder.gameObject.builders.configs.UiTransformConfig</name>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1UiTransformConfig_1a4e9858ed4a2a8715ae7205b4f42b5a4f" kind="variable"><name>gameObject_</name></member>
@@ -7831,6 +7984,20 @@
   </compound>
   <compound refid="module__helios_8engine_8builder_8spawnSystem_8SpawnSystemFactory" kind="module"><name>helios.engine.builder.spawnSystem.SpawnSystemFactory</name>
     <member refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1SpawnSystemFactory_1a82a9bc4bbd9718c1158e6bb37c763c54" kind="function"><name>configure</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8common" kind="module"><name>helios.engine.common</name>
+  </compound>
+  <compound refid="module__helios_8engine_8common_8types" kind="module"><name>helios.engine.common.types</name>
+  </compound>
+  <compound refid="module__helios_8engine_8common_8types_8DamageContext" kind="module"><name>helios.engine.common.types.DamageContext</name>
+    <member refid="structhelios_1_1engine_1_1common_1_1types_1_1DamageContext_1ac9e274cbda810f43f5fd5a9dc144efad" kind="variable"><name>interactionContext</name></member>
+    <member refid="structhelios_1_1engine_1_1common_1_1types_1_1DamageContext_1af08494dfb9c14789721a51655a1c6f3a" kind="variable"><name>damage</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8common_8types_8InteractionContext" kind="module"><name>helios.engine.common.types.InteractionContext</name>
+    <member refid="structhelios_1_1engine_1_1common_1_1types_1_1InteractionContext_1aae38539672fa695861c4e7d1f51d10a9" kind="variable"><name>target</name></member>
+    <member refid="structhelios_1_1engine_1_1common_1_1types_1_1InteractionContext_1ae81c6a788c3c7bf0ecca6d0739536d9a" kind="variable"><name>instigator</name></member>
+    <member refid="structhelios_1_1engine_1_1common_1_1types_1_1InteractionContext_1af817f2df791da30902c825621bc037f5" kind="variable"><name>causer</name></member>
+    <member refid="structhelios_1_1engine_1_1common_1_1types_1_1InteractionContext_1ae4ea1689e6d567fa394e7091e81b56d0" kind="variable"><name>contact</name></member>
   </compound>
   <compound refid="module__helios_8engine_8core" kind="module"><name>helios.engine.core</name>
   </compound>
@@ -8261,23 +8428,6 @@
     <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1Aim2DComponent_1aaf6c3ad095f473814e3dde532153bda2" kind="function"><name>direction</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1Aim2DComponent_1a4228b66722d776d82dd81983e6a7ac06" kind="function"><name>frequency</name></member>
   </compound>
-  <compound refid="module__helios_8engine_8mechanics_8combat_8components_8LastAttackerComponent" kind="module"><name>helios.engine.mechanics.combat.components.LastAttackerComponent</name>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1af47b18f96f329e3f3e0fbf435d72a5bb" kind="variable"><name>lastAttackContext_</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1a8e1092967a2fa9a2ec52a59eca8b1574" kind="variable"><name>isEnabled_</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1a133056e9a56a3a9571f895504580a5f7" kind="function"><name>isEnabled</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1ad78e59fdc33dbfc1fb5def44a185eb40" kind="function"><name>enable</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1a9979bc950053a88baacf0c19875ee2c3" kind="function"><name>disable</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1a9fe388df335a4ffb7833fe8a7f9cac19" kind="function"><name>LastAttackerComponent</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1abeb7ab8ddb452f8202959c1f96c1838d" kind="function"><name>LastAttackerComponent</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1af0ce05c9b6bdd9258c4a48f8fd138886" kind="function"><name>operator=</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1a01cfa1c1ff9d887d6beec233cd8d8757" kind="function"><name>LastAttackerComponent</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1adb82e551f9b19f0b9a35a15900d1bb61" kind="function"><name>operator=</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1ad6ab43b5a23ded93e826fd41ffcc4d43" kind="function"><name>setLastAttackContext</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1a376e66befb1b20f4654c979b6746573d" kind="function"><name>lastAttackContext</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1a2eca84031d3fa453c072c1f686405dbf" kind="function"><name>reset</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1a45396e841a3afff980d5f376ffe129cd" kind="function"><name>onAcquire</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent_1a66553285bc50025e22a46f2a9b798ebc" kind="function"><name>onRelease</name></member>
-  </compound>
   <compound refid="module__helios_8engine_8mechanics_8combat_8components_8ShootComponent" kind="module"><name>helios.engine.mechanics.combat.components.ShootComponent</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1a7571f57473bd46ce4be7be42c786802c" kind="variable"><name>intensity_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1a4a9163802f6ee046ac0fd62e7ac091dd" kind="variable"><name>cooldownDelta_</name></member>
@@ -8316,14 +8466,14 @@
     <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1systems_1_1ProjectileSpawnSystem_1ab0dfd311a620ac58e1d6254bd91d6609" kind="function"><name>ProjectileSpawnSystem</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1systems_1_1ProjectileSpawnSystem_1a95de32d6e0fcd39c83f620f53444884b" kind="function"><name>update</name></member>
   </compound>
-  <compound refid="module__helios_8engine_8mechanics_8combat_8types" kind="module"><name>helios.engine.mechanics.combat.types</name>
-  </compound>
-  <compound refid="module__helios_8engine_8mechanics_8combat_8types_8AttackContext" kind="module"><name>helios.engine.mechanics.combat.types.AttackContext</name>
-    <member refid="structhelios_1_1engine_1_1mechanics_1_1combat_1_1types_1_1AttackContext_1a70fe56beec10d754b2e5bb0b5d70fa6c" kind="variable"><name>source</name></member>
-    <member refid="structhelios_1_1engine_1_1mechanics_1_1combat_1_1types_1_1AttackContext_1aa71623d3fcc1dccb6cf21e607bbf00b5" kind="variable"><name>contact</name></member>
-    <member refid="structhelios_1_1engine_1_1mechanics_1_1combat_1_1types_1_1AttackContext_1aad7e5ece311ec81b2fcc3cec1410b753" kind="variable"><name>damageApplied</name></member>
-  </compound>
   <compound refid="module__helios_8engine_8mechanics_8damage" kind="module"><name>helios.engine.mechanics.damage</name>
+  </compound>
+  <compound refid="module__helios_8engine_8mechanics_8damage_8commands" kind="module"><name>helios.engine.mechanics.damage.commands</name>
+  </compound>
+  <compound refid="module__helios_8engine_8mechanics_8damage_8commands_8ApplyDamageCommand" kind="module"><name>helios.engine.mechanics.damage.commands.ApplyDamageCommand</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1commands_1_1ApplyDamageCommand_1a280d3faf88ec02974b4d5635eb39f09a" kind="variable"><name>damageContext_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1commands_1_1ApplyDamageCommand_1ac263df8678dd70a1d3e8d4abdda62e75" kind="function"><name>ApplyDamageCommand</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1commands_1_1ApplyDamageCommand_1a14b6e1124ff4894f99ca620d4afccef5" kind="function"><name>damageContext</name></member>
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8damage_8components" kind="module"><name>helios.engine.mechanics.damage.components</name>
   </compound>
@@ -8340,6 +8490,23 @@
     <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1DamageDealerComponent_1ab8f7702f347217e2208855b9cfca6bfe" kind="function"><name>operator=</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1DamageDealerComponent_1a80ed725da8bf647e468bdd8778f5a9a2" kind="function"><name>setDamage</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1DamageDealerComponent_1ab9b3f9fa361221cceb384422c78854c5" kind="function"><name>damage</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8mechanics_8damage_8components_8LastDamageComponent" kind="module"><name>helios.engine.mechanics.damage.components.LastDamageComponent</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent_1a0063c962d3909c3ff0a7ae4ecf772667" kind="variable"><name>damageContext_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent_1ab5fbdfa92774be3067d718c8aa8d80ea" kind="variable"><name>isEnabled_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent_1a9419c4bb08effb4442a79f242890bc22" kind="function"><name>isEnabled</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent_1a112ac5b77e77b58dbe69a73be44bbe2e" kind="function"><name>enable</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent_1a880db242361aadaa59d4091d04529222" kind="function"><name>disable</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent_1a57bdc419aada13c7dd91f12b53214ac1" kind="function"><name>LastDamageComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent_1a495103dbe932b79a9151edd20b6c7a78" kind="function"><name>LastDamageComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent_1a003a354ac31cdaac924d27db0196e0a2" kind="function"><name>operator=</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent_1a5081f5c56db8f2c561ccf8403ffdf9de" kind="function"><name>LastDamageComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent_1a1b5c3e7b038a84a93023bd1b6931fb61" kind="function"><name>operator=</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent_1aa2103274d188fc4a9956dbc754b9deb4" kind="function"><name>setDamageContext</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent_1a49a8e5dd671f065dab1e9e57027e90dc" kind="function"><name>damageContext</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent_1a291a6751b51d9ad083a95c0fee2a0112" kind="function"><name>reset</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent_1a84055d1fea57497c505513eb2ced2a40" kind="function"><name>onAcquire</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent_1afd79d5e30bb666dbe254bbd764b4c456" kind="function"><name>onRelease</name></member>
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8damage_8registry" kind="module"><name>helios.engine.mechanics.damage.registry</name>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1damage_1a1daf202893774766c8e7b3655664a4c0" kind="function"><name>registerComponents</name></member>
@@ -8414,6 +8581,8 @@
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a402fe3027d2e7192c35809b0264fc71d" kind="variable"><name>maxHealth_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a87690e29febb78fe677ba06738596674" kind="variable"><name>health_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1ac7ba7f684d46cf2e33d61306ee3e0565" kind="variable"><name>isEnabled_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1aba1c0f55ebd6e87b15cbfef603ad430b" kind="variable"><name>healthDepletedBehavior_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a81d1333050e4d2a39687ab63f2f332a0" kind="variable"><name>isDirty_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a40d60b85223884e4e2164e2752e315a1" kind="function"><name>isEnabled</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a1fa7d28fe941675862901438b2ade3e2" kind="function"><name>enable</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a52fb8de256224f01acaf3b839b6cb2b0" kind="function"><name>disable</name></member>
@@ -8423,33 +8592,64 @@
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a0741bf6217379fcb1dcec66dbcd58938" kind="function"><name>operator=</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a58b034dedf78c765328b6e21ccafee62" kind="function"><name>HealthComponent</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a6383e76a044b34e140b8d1786900dbbd" kind="function"><name>operator=</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1ac0737fe265f0add7f91c510f260ae2d9" kind="function"><name>setHealthDepletedBehavior</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a6201ca81355b5ce4a172f9b043fa9f30" kind="function"><name>healthDepletedBehavior</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1ae9e8d4e019cb22caa654e1182dd366f3" kind="function"><name>takeDamage</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a716b6262b38e939d5ea17a286e77bc9f" kind="function"><name>heal</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a64b2f2eaf15189133d58c0962bbafdc4" kind="function"><name>setMaxHealth</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a3efd7bfb510d90c01d5c5cfa5711cf46" kind="function"><name>isAlive</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a4ea567a37ce85c77060339f640360117" kind="function"><name>health</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a3ef7c4856ce37a6bd92709ac2df9d5ee" kind="function"><name>maxHealth</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a828cee0f47a0562121f784ed693ecb94" kind="function"><name>isDirty</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a3fc81eef5db8f3d9056b2398490228c7" kind="function"><name>clearDirty</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a7802d3f0097f02386ad3e69c82cb7a81" kind="function"><name>reset</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a101c0fbf8ce19699fea76830e44f0b41" kind="function"><name>onAcquire</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent_1a4608228eca907471486254b9df3faee7" kind="function"><name>onRelease</name></member>
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8health_8events" kind="module"><name>helios.engine.mechanics.health.events</name>
   </compound>
-  <compound refid="module__helios_8engine_8mechanics_8health_8events_8DeathEvent" kind="module"><name>helios.engine.mechanics.health.events.DeathEvent</name>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1DeathEvent_1a5a99b9b0f390c894520756292010342c" kind="variable"><name>source_</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1DeathEvent_1ad6b1966a89ed62e5d544bdb3f26cfe1d" kind="variable"><name>attackContext_</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1DeathEvent_1aea0dadc78cb70ca3a986ac97099475b1" kind="function"><name>DeathEvent</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1DeathEvent_1a2329def6e63c8008c9a431d19246ca0f" kind="function"><name>attackContext</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1DeathEvent_1a7066baf6f13a2c166f03114996107c8f" kind="function"><name>source</name></member>
+  <compound refid="module__helios_8engine_8mechanics_8health_8events_8HealthChangedEvent" kind="module"><name>helios.engine.mechanics.health.events.HealthChangedEvent</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1HealthChangedEvent_1a50303b3104b18835005e8a514a463250" kind="variable"><name>healthChangeContext_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1HealthChangedEvent_1aa05d2ee20ee665c06b0ec5f3f53033b3" kind="function"><name>HealthChangedEvent</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1HealthChangedEvent_1ac506dd62dcf3c21b43466521691d02c9" kind="function"><name>HealthChangeContext</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8mechanics_8health_8events_8HealthDepletedEvent" kind="module"><name>helios.engine.mechanics.health.events.HealthDepletedEvent</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1HealthDepletedEvent_1a17dd2ccc7be59014d6a2ef1f0bdd8b2b" kind="variable"><name>source_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1HealthDepletedEvent_1a6b9f8783652765576d30be4597fca38c" kind="variable"><name>damageContext_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1HealthDepletedEvent_1a8f25111a18cca122dff6839f8b8efed3" kind="function"><name>HealthDepletedEvent</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1HealthDepletedEvent_1a4b8c26b570172ace4807fa868a78346b" kind="function"><name>damageContext</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1HealthDepletedEvent_1ae5f5a255c505948945ff6b17b1b7c249" kind="function"><name>source</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8mechanics_8health_8HealthManager" kind="module"><name>helios.engine.mechanics.health.HealthManager</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1HealthManager_1a89c7bff7ac12905765297f75a340a734" kind="variable"><name>logger_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1HealthManager_1ace2aace3b2102cca8de9224cdea6096c" kind="variable"><name>damageContexts_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1HealthManager_1a09a3a9b1c6903875df52dfacc0279dea" kind="function"><name>flush</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1HealthManager_1a40e97480d6b060def1129212720259b8" kind="function"><name>submit</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1HealthManager_1ae2172a3f5f21938f17f811c0ebb0cd6d" kind="function"><name>init</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1HealthManager_1af584e64dbdf0b1fb99054d467144b88d" kind="function"><name>reset</name></member>
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8health_8registry" kind="module"><name>helios.engine.mechanics.health.registry</name>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1health_1addd86c1513766492364e86dbaf1a609f" kind="function"><name>registerComponents</name></member>
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8health_8systems" kind="module"><name>helios.engine.mechanics.health.systems</name>
   </compound>
-  <compound refid="module__helios_8engine_8mechanics_8health_8systems_8HealthUpdateSystem" kind="module"><name>helios.engine.mechanics.health.systems.HealthUpdateSystem</name>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1systems_1_1HealthUpdateSystem_1a50656e68a950e206ca2bc38de5644f91" kind="variable"><name>logger_</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1systems_1_1HealthUpdateSystem_1ac37bb8ba60abf58b11fa2317c43fb35a" kind="function"><name>update</name></member>
+  <compound refid="module__helios_8engine_8mechanics_8health_8systems_8HealthUpdateClearSystem" kind="module"><name>helios.engine.mechanics.health.systems.HealthUpdateClearSystem</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1systems_1_1HealthUpdateClearSystem_1a25483e86ab960b9c6760cffb4995b651" kind="function"><name>update</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8mechanics_8health_8types" kind="module"><name>helios.engine.mechanics.health.types</name>
+  </compound>
+  <compound refid="module__helios_8engine_8mechanics_8health_8types_8HealthChangeContext" kind="module"><name>helios.engine.mechanics.health.types.HealthChangeContext</name>
+    <member refid="structhelios_1_1engine_1_1mechanics_1_1health_1_1types_1_1HealthChangeContext_1a9a05818d3790a06d86aaa0a3d6b44b4a" kind="variable"><name>interactionContext</name></member>
+    <member refid="structhelios_1_1engine_1_1mechanics_1_1health_1_1types_1_1HealthChangeContext_1a54ecf629b9b28f50b0de374227574cf1" kind="variable"><name>delta</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8mechanics_8health_8types_8HealthDepletedBehavior" kind="module"><name>helios.engine.mechanics.health.types.HealthDepletedBehavior</name>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1health_1_1types_1a9743835a1d9bdeab71ea28ed3603b3fd" kind="enum"><name>HealthDepletedBehavior</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1health_1_1types_1a9743835a1d9bdeab71ea28ed3603b3fda6adf97f83acf6453d4a6a4b1070f3754" kind="enumvalue"><name>None</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1health_1_1types_1a9743835a1d9bdeab71ea28ed3603b3fda573a38c8ee30e1c0d6ad84ce4f965cf0" kind="enumvalue"><name>Despawn</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1health_1_1types_1a9743835a1d9bdeab71ea28ed3603b3fda946f37e7b742f900aa87689aa76d7fb2" kind="enumvalue"><name>DeadTag</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1health_1_1types_1a5f91a4bddebda46a2ebf68bb5b602616" kind="function"><name>operator|</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1health_1_1types_1abdbad17fb864258b146c12dc0143bffc" kind="function"><name>operator&amp;</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1health_1_1types_1a9de10cca74b3ddf61842ebf52bf0fc58" kind="function"><name>hasHealthDepletedFlag</name></member>
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8input" kind="module"><name>helios.engine.mechanics.input</name>
   </compound>
@@ -8476,6 +8676,13 @@
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8lifecycle_8components_8Active" kind="module"><name>helios.engine.mechanics.lifecycle.components.Active</name>
   </compound>
+  <compound refid="module__helios_8engine_8mechanics_8lifecycle_8components_8DeadTagComponent" kind="module"><name>helios.engine.mechanics.lifecycle.components.DeadTagComponent</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1DeadTagComponent_1a7162ae7dc7c39d8c7553041198396f54" kind="function"><name>DeadTagComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1DeadTagComponent_1ac964707c8a7fe660ca2b9b3c473a2deb" kind="function"><name>DeadTagComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1DeadTagComponent_1a55b5c8b5248fd06aa8e9ab7550b797b5" kind="function"><name>operator=</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1DeadTagComponent_1ad7d3714825f29a6e634f83c21130d7d5" kind="function"><name>operator=</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1DeadTagComponent_1aa5200199e8bef4f11fbccc98be162b7a" kind="function"><name>DeadTagComponent</name></member>
+  </compound>
   <compound refid="module__helios_8engine_8mechanics_8lifecycle_8components_8DelayedComponentEnabler" kind="module"><name>helios.engine.mechanics.lifecycle.components.DelayedComponentEnabler</name>
     <member refid="structhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1DelayedComponentEnabler_1_1DeferredComponent_1a921fd7ae88bc07414fe71ebda7bbbae4" kind="variable"><name>delta</name></member>
     <member refid="structhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1DelayedComponentEnabler_1_1DeferredComponent_1aded50bc4140550f3024a0a5d156361c2" kind="variable"><name>componentTypeId</name></member>
@@ -8500,6 +8707,9 @@
     <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1DelayedComponentEnablerSystem_1ade049e8cdc2be7c46fe982fb564015c9" kind="variable"><name>sync_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1DelayedComponentEnablerSystem_1ae7c5a33ae0ce9c8bfdf69a5b3a758bf6" kind="function"><name>update</name></member>
   </compound>
+  <compound refid="module__helios_8engine_8mechanics_8lifecycle_8systems_8GameObjectLifecycleSystem" kind="module"><name>helios.engine.mechanics.lifecycle.systems.GameObjectLifecycleSystem</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1GameObjectLifecycleSystem_1a7045049452d02a2e51ba461beb82df7c" kind="function"><name>update</name></member>
+  </compound>
   <compound refid="module__helios_8engine_8mechanics_8lifecycle_8types" kind="module"><name>helios.engine.mechanics.lifecycle.types</name>
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8lifecycle_8types_8WorldLifecycleAction" kind="module"><name>helios.engine.mechanics.lifecycle.types.WorldLifecycleAction</name>
@@ -8515,6 +8725,34 @@
     <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1WorldLifecycleManager_1a636b9fca864cb0f6cb5c104d5320aa3d" kind="function"><name>reset</name></member>
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8match" kind="module"><name>helios.engine.mechanics.match</name>
+  </compound>
+  <compound refid="module__helios_8engine_8mechanics_8match_8components" kind="module"><name>helios.engine.mechanics.match.components</name>
+  </compound>
+  <compound refid="module__helios_8engine_8mechanics_8match_8components_8LivesBindingComponent" kind="module"><name>helios.engine.mechanics.match.components.LivesBindingComponent</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesBindingComponent_1a2f297f81fd5359311217c4799981d48d" kind="variable"><name>entityHandle_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesBindingComponent_1abf92245e9456b4df06f2757e25d76778" kind="variable"><name>livesRevision_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesBindingComponent_1aa16e14b15eedf00d768b4242fd9c340e" kind="function"><name>LivesBindingComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesBindingComponent_1a3664fe3f9b8431770e309319bec14a23" kind="function"><name>target</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesBindingComponent_1a570e87b8d6f41b2bb7e93cefeec14e13" kind="function"><name>setLivesRevision</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesBindingComponent_1a687c907bf91f93aa03ba980d9ac3d653" kind="function"><name>livesRevision</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8mechanics_8match_8components_8LivesComponent" kind="module"><name>helios.engine.mechanics.match.components.LivesComponent</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent_1adb6746126f254f52123b5c97747069f8" kind="variable"><name>lives_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent_1a0f0d0635d9dcb1a9395b5c57ec45e4f7" kind="variable"><name>livesRevision_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent_1aefd73d433fa4d21d313390c5c1edc2fe" kind="function"><name>LivesComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent_1ad13996c90b4c3560b4a83ead1f041032" kind="function"><name>lives</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent_1a1f09c97065c303d5b2bde8c9a0622f65" kind="function"><name>decrease</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent_1a6daaf38c1abf3c05bd7dd6a1805e1946" kind="function"><name>increase</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent_1a60abc3d81b1dbc03759bf2d82e373380" kind="function"><name>livesRevision</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8mechanics_8match_8components_8PlayerComponent" kind="module"><name>helios.engine.mechanics.match.components.PlayerComponent</name>
+  </compound>
+  <compound refid="module__helios_8engine_8mechanics_8match_8events" kind="module"><name>helios.engine.mechanics.match.events</name>
+  </compound>
+  <compound refid="module__helios_8engine_8mechanics_8match_8events_8PlayerDiedEvent" kind="module"><name>helios.engine.mechanics.match.events.PlayerDiedEvent</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1events_1_1PlayerDiedEvent_1ab06380cadfcba90f9022a58c97919092" kind="variable"><name>source_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1events_1_1PlayerDiedEvent_1a6095918432d79d185141c55d46937da5" kind="function"><name>PlayerDiedEvent</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1events_1_1PlayerDiedEvent_1a052f3b7860faef964f4b01274e6aa36b" kind="function"><name>source</name></member>
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8match_8MatchStateManager" kind="module"><name>helios.engine.mechanics.match.MatchStateManager</name>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1a151fc4e8d8a8f2eb87866789883eda39" kind="typedef"><name>MatchStateManager</name></member>
@@ -8542,6 +8780,9 @@
     <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1systems_1_1MatchRuleSystem_1a3480d13a06caf68b789b07c8e3a9cd76" kind="function"><name>update</name></member>
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8match_8types" kind="module"><name>helios.engine.mechanics.match.types</name>
+  </compound>
+  <compound refid="module__helios_8engine_8mechanics_8match_8types_8LivesRevision" kind="module"><name>helios.engine.mechanics.match.types.LivesRevision</name>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a5a9b40b91cd49d24dffc892db68cfd6c" kind="typedef"><name>LivesRevision</name></member>
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8match_8types_8MatchState" kind="module"><name>helios.engine.mechanics.match.types.MatchState</name>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9b" kind="enum"><name>MatchState</name></member>
@@ -9084,8 +9325,8 @@
     <member refid="structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1_1CollisionStruct_1a96192badb04dc5a3764ba11fe6e92ff2" kind="variable"><name>bIsCollisionReporter</name></member>
     <member refid="structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1_1CollisionStruct_1a7b5bb8ee4c153957c09bc52611bb8dda" kind="variable"><name>aCollisionBehavior</name></member>
     <member refid="structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1_1CollisionStruct_1affa87cbfb0e35ad228032a051c918951" kind="variable"><name>bCollisionBehavior</name></member>
-    <member refid="structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1_1CollisionStruct_1ac01face9a515b7891f1f2bd6a7c2febb" kind="variable"><name>collisionLayer</name></member>
-    <member refid="structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1_1CollisionStruct_1a271b81d0891e950d23850f10173fd6d4" kind="variable"><name>otherCollisionLayer</name></member>
+    <member refid="structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1_1CollisionStruct_1a77c200d6ff9784c92bff79f003431666" kind="variable"><name>aCollisionLayer</name></member>
+    <member refid="structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1_1CollisionStruct_1aaf13c3c48bfd397273aa388024a2241f" kind="variable"><name>bCollisionLayer</name></member>
     <member refid="structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1_1CollisionCandidate_1a75e2ed938605e0b1f560bf7acda9ceac" kind="variable"><name>gameObject</name></member>
     <member refid="structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1_1CollisionCandidate_1ab1594e0bff7160f69c4d9cf07def5516" kind="variable"><name>aabbColliderComponent</name></member>
     <member refid="structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1_1CollisionCandidate_1a33b19d1d1148eee1382ae59703b74169" kind="variable"><name>collisionComponent</name></member>
@@ -9573,6 +9814,9 @@
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1GameTimer2UiTextUpdateSystem_1a36de69672daf151d6565d5cb9dd9ae82" kind="function"><name>GameTimer2UiTextUpdateSystem</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1GameTimer2UiTextUpdateSystem_1ad4621d807ee4ba23b50f0fbe28e4c736" kind="function"><name>update</name></member>
   </compound>
+  <compound refid="module__helios_8engine_8modules_8ui_8binding_8systems_8Lives2UiTextUpdateSystem" kind="module"><name>helios.engine.modules.ui.binding.systems.Lives2UiTextUpdateSystem</name>
+    <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1Lives2UiTextUpdateSystem_1a9bd52ce9ef773e802c0d2abaac883571" kind="function"><name>update</name></member>
+  </compound>
   <compound refid="module__helios_8engine_8modules_8ui_8binding_8systems_8MaxScore2UiTextUpdateSystem" kind="module"><name>helios.engine.modules.ui.binding.systems.MaxScore2UiTextUpdateSystem</name>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1MaxScore2UiTextUpdateSystem_1a8de5f4e4a3bb8b64193142d75fa28781" kind="function"><name>update</name></member>
   </compound>
@@ -9875,7 +10119,7 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler_1a410bedb175238cfe3f9c5062cd934ebe" kind="function"><name>~CommandHandler</name></member>
   </compound>
   <compound refid="module__helios_8engine_8runtime_8messaging_8command_8EngineCommandBuffer" kind="module"><name>helios.engine.runtime.messaging.command.EngineCommandBuffer</name>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1af05f35df5b1257f3119cb29cbf0e3fde" kind="typedef"><name>BufferImpl</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1a30dc758d40c73100ec710956a2b857eb" kind="typedef"><name>BufferImpl</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1a0b3ddb0409bf4a07a4a8c12e6323f158" kind="variable"><name>impl_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1a661d0858913185ec6f6e35ef2b87c883" kind="function"><name>add</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1a4f2f838aa913f20181fc0cda507563ef" kind="function"><name>flush</name></member>

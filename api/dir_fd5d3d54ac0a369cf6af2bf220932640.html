@@ -110,36 +110,42 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="dir_fd5d3d54ac0a369cf6af2bf220932640_dep.svg" width="372" height="156"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="dir_fd5d3d54ac0a369cf6af2bf220932640_dep.svg" width="490" height="178"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-files" class="groupheader"><a id="files" name="files"></a>
 Files</h2></td></tr>
 <tr class="memitem:_5Fmodule_2Eixx" id="r__5Fmodule_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="helios_2engine_2mechanics_2health_2events_2__module_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="helios_2engine_2mechanics_2health_2events_2__module_8ixx.html">_module.ixx</a></td></tr>
 <tr class="memdesc:helios_2engine_2mechanics_2health_2events_2__module_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Module facade for health events. <br /></td></tr>
-<tr class="memitem:DeathEvent_2Eixx" id="r_DeathEvent_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="DeathEvent_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="DeathEvent_8ixx.html">DeathEvent.ixx</a></td></tr>
-<tr class="memdesc:DeathEvent_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event emitted when an entity dies. <br /></td></tr>
+<tr class="memitem:HealthChangedEvent_2Eixx" id="r_HealthChangedEvent_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="HealthChangedEvent_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="HealthChangedEvent_8ixx.html">HealthChangedEvent.ixx</a></td></tr>
+<tr class="memdesc:HealthChangedEvent_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event emitted when an entity's health changes. <br /></td></tr>
+<tr class="memitem:HealthDepletedEvent_2Eixx" id="r_HealthDepletedEvent_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="HealthDepletedEvent_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="HealthDepletedEvent_8ixx.html">HealthDepletedEvent.ixx</a></td></tr>
+<tr class="memdesc:HealthDepletedEvent_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event emitted when an entity dies. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md229"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md237"></a>
 helios::engine::mechanics::health::events</h1>
 <p>Health-related events.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md230"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md238"></a>
 Events</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Event  </th><th class="markdownTableHeadNone">Description  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">DeathEvent</span>  </td><td class="markdownTableBodyNone">Emitted when an entity's health reaches zero  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">HealthDepletedEvent</span>  </td><td class="markdownTableBodyNone">Emitted when an entity's health reaches zero  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">HealthChangedEvent</span>  </td><td class="markdownTableBodyNone">Emitted when an entity's health changes  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md231"></a>
-DeathEvent</h1>
-<p>Published by <span class="tt">HealthUpdateSystem</span> when an entity dies. Contains:</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md239"></a>
+HealthDepletedEvent</h1>
+<p>Published by <span class="tt">HealthManager</span> when an entity dies.</p>
+<p>Used by other systems (e.g., <span class="tt">CombatScoringSystem</span>, <span class="tt">GameObjectLifecycleSystem</span>) to react to entity deaths.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md240"></a>
+HealthChangedEvent</h1>
+<p>Published when an entity's health is modified (damage or healing). Contains:</p>
 <ul>
-<li><span class="tt">source()</span> - Handle of the deceased entity</li>
-<li><span class="tt">attackContext()</span> - Optional combat context if death was from damage</li>
+<li><span class="tt">HealthChangeContext()</span> – A <span class="tt">HealthChangeContext</span> describing target, source, contact point, and amount. Used for triggering health-based reactions (e.g., hit effects, UI updates) without needing to subscribe to the full health update process.</li>
 </ul>
-<p>Used by other systems (e.g., <span class="tt">CombatScoringSystem</span>) to react to entity deaths.</p>
 <hr  />
 <details >
 <summary >

@@ -11,14 +11,14 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_062ebf59fa360cbbbd713cf3a7337d29_1autotoc_md605">
+<sect1 id="dir_062ebf59fa360cbbbd713cf3a7337d29_1autotoc_md633">
 <title>helios::engine::runtime::messaging::command</title><para>Compile-time typed command buffering and handler routing infrastructure.</para>
 </sect1>
-<sect1 id="dir_062ebf59fa360cbbbd713cf3a7337d29_1autotoc_md606">
+<sect1 id="dir_062ebf59fa360cbbbd713cf3a7337d29_1autotoc_md634">
 <title>Overview</title><para>This module implements the Command pattern for deferred action execution within the game loop. Commands are enqueued during system updates and flushed at defined commit points, ensuring deterministic and reproducible world mutations.</para>
 <para>The system is built around <bold>compile-time type safety</bold>: command types are declared as template parameters, eliminating virtual dispatch overhead for queue access and enabling the compiler to verify command routing at build time.</para>
 </sect1>
-<sect1 id="dir_062ebf59fa360cbbbd713cf3a7337d29_1autotoc_md607">
+<sect1 id="dir_062ebf59fa360cbbbd713cf3a7337d29_1autotoc_md635">
 <title>Architecture</title><para><programlisting><codeline><highlight class="normal">┌──────────────────────────────────────────────────────────────────────┐</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>COMMAND<sp/>PIPELINE<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal">├──────────────────────────────────────────────────────────────────────┤</highlight></codeline>
@@ -53,7 +53,7 @@
 <codeline><highlight class="normal">└──────────────────────────────────────────────────────────────────────┘</highlight></codeline>
 </programlisting></para>
 </sect1>
-<sect1 id="dir_062ebf59fa360cbbbd713cf3a7337d29_1autotoc_md608">
+<sect1 id="dir_062ebf59fa360cbbbd713cf3a7337d29_1autotoc_md636">
 <title>Key Classes</title><para><table rows="6" cols="2"><row>
 <entry thead="yes"><para>Class  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
@@ -81,11 +81,11 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_062ebf59fa360cbbbd713cf3a7337d29_1autotoc_md609">
+<sect1 id="dir_062ebf59fa360cbbbd713cf3a7337d29_1autotoc_md637">
 <title>Flush Routing</title><para>During <computeroutput>TypedCommandBuffer::flush()</computeroutput>, each command type is processed in template parameter order:</para>
 <para>1. <bold>Handler route:</bold> If a <computeroutput>TypedCommandHandler&lt;Cmd&gt;</computeroutput> is registered in the ResourceRegistry, each queued command is submitted to the handler via <computeroutput>submit()</computeroutput>. 2. <bold>Direct execution:</bold> If no handler is registered and the command satisfies the <computeroutput>ExecutableCommand</computeroutput> concept (provides a noexcept <computeroutput>execute(UpdateContext&amp;)</computeroutput> method), it is executed directly. 3. <bold>Assertion:</bold> If neither condition holds, an assertion fires (misconfiguration).</para>
 </sect1>
-<sect1 id="dir_062ebf59fa360cbbbd713cf3a7337d29_1autotoc_md610">
+<sect1 id="dir_062ebf59fa360cbbbd713cf3a7337d29_1autotoc_md638">
 <title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Systems<sp/>enqueue<sp/>commands<sp/>via<sp/>UpdateContext</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>update(UpdateContext&amp;<sp/>ctx)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>ctx.commandBuffer().add&lt;DespawnCommand&gt;(entityHandle,<sp/>profileId);</highlight></codeline>
@@ -108,7 +108,7 @@
 <codeline><highlight class="normal">};</highlight></codeline>
 </programlisting></para>
 </sect1>
-<sect1 id="dir_062ebf59fa360cbbbd713cf3a7337d29_1autotoc_md611">
+<sect1 id="dir_062ebf59fa360cbbbd713cf3a7337d29_1autotoc_md639">
 <title>Game Loop Integration</title><para>Commands are flushed at each commit point in the game loop:</para>
 <para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Phase<sp/>commit<sp/>sequence</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal">commandBuffer.flush(updateContext);<sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Commands<sp/>route<sp/>to<sp/>handlers</highlight><highlight class="normal"></highlight></codeline>

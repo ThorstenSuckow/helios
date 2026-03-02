@@ -319,7 +319,7 @@ System::init() </dd></dl>
 <li>**FlushCommands:** Executes pending commands from the CommandBuffer.</li>
 <li>**FlushManagers:** Processes manager requests (e.g., spawning from pools).</li>
 </ul>
-<p>The order is: PassEvents → FlushCommands → FlushManagers. Commands must be flushed before managers to ensure spawn requests are generated before being processed.</p>
+<p>The order is: FlushCommands → FlushManagers → PassEvents. Commands must be flushed before managers to ensure spawn requests are generated before being processed.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">commitPoint</td><td>The flags specifying which actions to perform. </td></tr>

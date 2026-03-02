@@ -16,16 +16,20 @@
 <codeline></codeline>
 <codeline><highlight class="normal">|<sp/>Event<sp/>|<sp/>Description<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|-------|-------------|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`DeathEvent`<sp/>|<sp/>Emitted<sp/>when<sp/>an<sp/>entity&apos;s<sp/>health<sp/>reaches<sp/>zero<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`HealthDepletedEvent`<sp/>|<sp/>Emitted<sp/>when<sp/>an<sp/>entity&apos;s<sp/>health<sp/>reaches<sp/>zero<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`HealthChangedEvent`<sp/>|<sp/>Emitted<sp/>when<sp/>an<sp/>entity&apos;s<sp/>health<sp/>changes<sp/>|</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">##<sp/>DeathEvent</highlight></codeline>
+<codeline><highlight class="normal">##<sp/>HealthDepletedEvent</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">Published<sp/>by<sp/>`HealthUpdateSystem`<sp/>when<sp/>an<sp/>entity<sp/>dies.<sp/>Contains:</highlight></codeline>
+<codeline><highlight class="normal">Published<sp/>by<sp/>`HealthManager`<sp/>when<sp/>an<sp/>entity<sp/>dies.<sp/></highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">-<sp/>`source()`<sp/>-<sp/>Handle<sp/>of<sp/>the<sp/>deceased<sp/>entity</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>`attackContext()`<sp/>-<sp/>Optional<sp/>combat<sp/>context<sp/>if<sp/>death<sp/>was<sp/>from<sp/>damage</highlight></codeline>
+<codeline><highlight class="normal">Used<sp/>by<sp/>other<sp/>systems<sp/>(e.g.,<sp/>`CombatScoringSystem`,<sp/>`GameObjectLifecycleSystem`)<sp/>to<sp/>react<sp/>to<sp/>entity<sp/>deaths.</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">Used<sp/>by<sp/>other<sp/>systems<sp/>(e.g.,<sp/>`CombatScoringSystem`)<sp/>to<sp/>react<sp/>to<sp/>entity<sp/>deaths.</highlight></codeline>
+<codeline><highlight class="normal">##<sp/>HealthChangedEvent</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Published<sp/>when<sp/>an<sp/>entity&apos;s<sp/>health<sp/>is<sp/>modified<sp/>(damage<sp/>or<sp/>healing).<sp/>Contains:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>`HealthChangeContext()`<sp/>–<sp/>A<sp/>`HealthChangeContext`<sp/>describing<sp/>target,<sp/>source,<sp/>contact<sp/>point,<sp/>and<sp/>amount.<sp/>Used<sp/>for<sp/>triggering<sp/>health-based<sp/>reactions<sp/>(e.g.,<sp/>hit<sp/>effects,<sp/>UI<sp/>updates)<sp/>without<sp/>needing<sp/>to<sp/>subscribe<sp/>to<sp/>the<sp/>full<sp/>health<sp/>update<sp/>process.</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>
 <codeline></codeline>
@@ -33,7 +37,7 @@
 <codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
 <codeline><highlight class="normal">@namespace<sp/>helios::engine::mechanics::health::events</highlight></codeline>
 <codeline><highlight class="normal">@brief<sp/>Health-related<sp/>events.</highlight></codeline>
-<codeline><highlight class="normal">@details<sp/>Contains<sp/>event<sp/>classes<sp/>for<sp/>health<sp/>state<sp/>changes<sp/>like<sp/>death.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Contains<sp/>event<sp/>classes<sp/>for<sp/>health<sp/>state<sp/>changes<sp/>and<sp/>depletion.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
     </programlisting>
     <location file="/tmp/h/include/helios/engine/mechanics/health/events/README.md"/>

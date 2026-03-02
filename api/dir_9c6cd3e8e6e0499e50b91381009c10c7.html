@@ -119,39 +119,56 @@ Files</h2></td></tr>
 <tr class="memdesc:helios_2engine_2mechanics_2lifecycle_2components_2__module_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aggregates lifecycle-related component modules. <br /></td></tr>
 <tr class="memitem:Active_2Eixx" id="r_Active_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="Active_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Active_8ixx.html">Active.ixx</a></td></tr>
 <tr class="memdesc:Active_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag component indicating an active entity. <br /></td></tr>
+<tr class="memitem:DeadTagComponent_2Eixx" id="r_DeadTagComponent_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="DeadTagComponent_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="DeadTagComponent_8ixx.html">DeadTagComponent.ixx</a></td></tr>
+<tr class="memdesc:DeadTagComponent_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag component marking an entity as dead. <br /></td></tr>
 <tr class="memitem:DelayedComponentEnabler_2Eixx" id="r_DelayedComponentEnabler_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="DelayedComponentEnabler_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="DelayedComponentEnabler_8ixx.html">DelayedComponentEnabler.ixx</a></td></tr>
 <tr class="memdesc:DelayedComponentEnabler_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Component for scheduling delayed activation of other components. <br /></td></tr>
 <tr class="memitem:Inactive_2Eixx" id="r_Inactive_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="Inactive_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Inactive_8ixx.html">Inactive.ixx</a></td></tr>
 <tr class="memdesc:Inactive_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag component indicating an inactive entity. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md256"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md271"></a>
 helios::engine::mechanics::lifecycle::components</h1>
 <p>Components for managing entity lifecycle states.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md257"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md272"></a>
 Overview</h1>
-<p>This module provides components that track and manage the activation state of other components on an entity. The primary use case is delayed activation after spawn.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md258"></a>
-Key Classes</h1>
+<p>This module provides tag components for entity activation state, a marker for dead entities, and a component for scheduling delayed activation of other components after spawn.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md273"></a>
+Components</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Class  </th><th class="markdownTableHeadNone">Purpose  </th></tr>
+<th class="markdownTableHeadNone">Component  </th><th class="markdownTableHeadNone">Description  </th></tr>
 <tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">Active</span>  </td><td class="markdownTableBodyNone">Tag component added to active entities; used as a view filter  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">Inactive</span>  </td><td class="markdownTableBodyNone">Tag component added to inactive entities; used as a view filter  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">DeadTagComponent</span>  </td><td class="markdownTableBodyNone">Marker component attached when health is depleted; move-only  </td></tr>
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">DelayedComponentEnabler</span>  </td><td class="markdownTableBodyNone">Tracks components pending delayed activation with countdown timers  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md259"></a>
-Usage</h1>
-<div class="fragment"><div class="line"><span class="comment">// Defer collision component activation by 0.5 seconds</span></div>
-<div class="line"><span class="keyword">auto</span>* enabler = entity.get&lt;DelayedComponentEnabler&gt;();</div>
-<div class="line">enabler-&gt;defer(ComponentTypeId::id&lt;CollisionComponent&gt;(), 0.5f);</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Check currently deferred components</span></div>
-<div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; deferred : enabler-&gt;deferredComponents()) {</div>
-<div class="line">    <span class="comment">// deferred.delta - remaining time</span></div>
-<div class="line">    <span class="comment">// deferred.componentTypeId - which component</span></div>
-<div class="line">}</div>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md274"></a>
+Active / Inactive</h1>
+<p>Managed automatically by <span class="tt">GameObject::setActive()</span>:</p>
+<ul>
+<li><span class="tt">setActive(true)</span> → adds <span class="tt">Active</span>, removes <span class="tt">Inactive</span>, calls <span class="tt">onActivate()</span> on components</li>
+<li><span class="tt">setActive(false)</span> → adds <span class="tt">Inactive</span>, removes <span class="tt">Active</span>, calls <span class="tt">onDeactivate()</span> on components</li>
+</ul>
+<p>Systems filter on these tags via views:</p>
+<div class="fragment"><div class="line"><span class="comment">// Only process active entities</span></div>
+<div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span> [entity, health, active] : gameWorld-&gt;view&lt;</div>
+<div class="line">    HealthComponent, Active</div>
+<div class="line">&gt;().whereEnabled()) { ... }</div>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md275"></a>
+DeadTagComponent</h1>
+<p>Attached by <span class="tt">HealthManager</span> when an entity's health reaches zero and the <span class="tt">HealthDepletedBehavior::DeadTag</span> flag is set. Systems can query for this tag to apply death-related logic (scoring, VFX, cleanup) without re-checking health values. Move-only; copying is not permitted.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md276"></a>
+DelayedComponentEnabler</h1>
+<p>Schedules delayed activation of other components. Works in conjunction with <span class="tt">DelayedComponentEnablerSystem</span>.</p>
+<div class="fragment"><div class="line"><span class="keyword">auto</span>* enabler = entity.get&lt;DelayedComponentEnabler&gt;();</div>
+<div class="line">enabler-&gt;defer(entity, ComponentTypeId::id&lt;CollisionComponent&gt;(), 0.5f);</div>
 </div><!-- fragment --><hr  />
- <details >
+<details >
 <summary >
 Doxygen</summary>
 <p></p>

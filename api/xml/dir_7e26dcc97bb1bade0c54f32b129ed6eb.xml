@@ -4,25 +4,30 @@
     <compoundname>components</compoundname>
     <innerfile refid="helios_2engine_2mechanics_2damage_2components_2__module_8ixx">helios/engine/mechanics/damage/components/_module.ixx</innerfile>
     <innerfile refid="DamageDealerComponent_8ixx">DamageDealerComponent.ixx</innerfile>
+    <innerfile refid="LastDamageComponent_8ixx">LastDamageComponent.ixx</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_7e26dcc97bb1bade0c54f32b129ed6eb_1autotoc_md192">
+<sect1 id="dir_7e26dcc97bb1bade0c54f32b129ed6eb_1autotoc_md199">
 <title>helios::engine::mechanics::damage::components</title><para>Damage-related ECS components.</para>
 </sect1>
-<sect1 id="dir_7e26dcc97bb1bade0c54f32b129ed6eb_1autotoc_md193">
-<title>Components</title><para><table rows="2" cols="2"><row>
+<sect1 id="dir_7e26dcc97bb1bade0c54f32b129ed6eb_1autotoc_md200">
+<title>Components</title><para><table rows="3" cols="2"><row>
 <entry thead="yes"><para>Component  </para>
 </entry><entry thead="yes"><para>Description  </para>
 </entry></row>
 <row>
-<entry thead="no"><para><computeroutput>DamageDealerComponent&lt;N&gt;</computeroutput>  </para>
-</entry><entry thead="no"><para>Template component storing damage values per collision layer  </para>
+<entry thead="no"><para><computeroutput>DamageDealerComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Component storing damage values per collision layer  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>LastDamageComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Component storing last damage applied  </para>
 </entry></row>
 </table>
 </para>
 </sect1>
-<sect1 id="dir_7e26dcc97bb1bade0c54f32b129ed6eb_1autotoc_md194">
+<sect1 id="dir_7e26dcc97bb1bade0c54f32b129ed6eb_1autotoc_md201">
 <title>DamageDealerComponent</title><para>Stores damage values indexed by collision layer for O(1) lookup:</para>
 <para><itemizedlist>
 <listitem><para><computeroutput>setDamage(float, uint32_t)</computeroutput> - Sets damage for a specific layer</para>
@@ -30,6 +35,9 @@
 </listitem></itemizedlist>
 </para>
 <para>Layer IDs must be powers of 2 (bitmask values).</para>
+</sect1>
+<sect1 id="dir_7e26dcc97bb1bade0c54f32b129ed6eb_1autotoc_md202">
+<title>LastDamageComponent</title><para>Stores the last damage applied to an entity.</para>
 <para><hruler/>
 </para>
 <para><details><summary>Doxygen</summary><para></para>

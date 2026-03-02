@@ -14,20 +14,15 @@
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Systems</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">|<sp/>System<sp/>|<sp/>Phase<sp/>|<sp/>Description<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|--------|-------|-------------|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`HealthUpdateSystem`<sp/>|<sp/>Update<sp/>|<sp/>Detects<sp/>dead<sp/>entities,<sp/>issues<sp/>despawn<sp/>commands,<sp/>emits<sp/>death<sp/>events<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>System<sp/>|<sp/>Description<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|--------|-------------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`HealthUpdateClearSystem`<sp/>|<sp/>Clears<sp/>the<sp/>dirty<sp/>flag<sp/>on<sp/>all<sp/>active<sp/>HealthComponents<sp/>|</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">##<sp/>HealthUpdateSystem</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">Processes<sp/>entities<sp/>with<sp/>`HealthComponent`<sp/>and<sp/>`SpawnedByProfileComponent`:</highlight></codeline>
+<codeline><highlight class="normal">##<sp/>HealthUpdateClearSystem</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">1.<sp/>Queries<sp/>all<sp/>entities<sp/>with<sp/>health<sp/>components</highlight></codeline>
-<codeline><highlight class="normal">2.<sp/>Checks<sp/>if<sp/>`isAlive()`<sp/>returns<sp/>false</highlight></codeline>
-<codeline><highlight class="normal">3.<sp/>Issues<sp/>`DespawnCommand`<sp/>to<sp/>return<sp/>entity<sp/>to<sp/>pool</highlight></codeline>
-<codeline><highlight class="normal">4.<sp/>Publishes<sp/>`DeathEvent`<sp/>with<sp/>optional<sp/>`AttackContext`</highlight></codeline>
-<codeline></codeline>
-<codeline><highlight class="normal">The<sp/>attack<sp/>context<sp/>is<sp/>retrieved<sp/>from<sp/>`LastAttackerComponent`<sp/>if<sp/>present.</highlight></codeline>
+<codeline><highlight class="normal">Iterates<sp/>all<sp/>active<sp/>`HealthComponent`s<sp/>and<sp/>calls<sp/>`clearDirty()`,<sp/>ensuring</highlight></codeline>
+<codeline><highlight class="normal">stale<sp/>change<sp/>notifications<sp/>are<sp/>discarded<sp/>after<sp/>observers<sp/>have<sp/>processed<sp/>them.</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>
 <codeline></codeline>
@@ -35,7 +30,7 @@
 <codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
 <codeline><highlight class="normal">@namespace<sp/>helios::engine::mechanics::health::systems</highlight></codeline>
 <codeline><highlight class="normal">@brief<sp/>Systems<sp/>for<sp/>health<sp/>processing.</highlight></codeline>
-<codeline><highlight class="normal">@details<sp/>Contains<sp/>systems<sp/>that<sp/>monitor<sp/>health<sp/>state<sp/>and<sp/>handle<sp/>entity<sp/>death.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Contains<sp/>systems<sp/>that<sp/>clear<sp/>dirty<sp/>state.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
     </programlisting>
     <location file="/tmp/h/include/helios/engine/mechanics/health/systems/README.md"/>

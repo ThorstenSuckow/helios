@@ -14,36 +14,48 @@
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>systems<sp/>that<sp/>process<sp/>lifecycle-related<sp/>components<sp/>each<sp/>frame.<sp/>The<sp/>primary<sp/>system<sp/>handles<sp/>delayed<sp/>component<sp/>activation<sp/>by<sp/>decrementing<sp/>timers<sp/>and<sp/>enabling<sp/>components<sp/>when<sp/>their<sp/>delay<sp/>expires.</highlight></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>systems<sp/>that<sp/>handle<sp/>lifecycle-related<sp/>logic<sp/>each</highlight></codeline>
+<codeline><highlight class="normal">frame:<sp/>delayed<sp/>component<sp/>activation<sp/>and<sp/>entity<sp/>death<sp/>processing.</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">##<sp/>Key<sp/>Classes</highlight></codeline>
+<codeline><highlight class="normal">##<sp/>Systems</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|-------|---------|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`DelayedComponentEnablerSystem`<sp/>|<sp/>Processes<sp/>delayed<sp/>activations<sp/>each<sp/>frame<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>System<sp/>|<sp/>Description<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|--------|-------------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`DelayedComponentEnablerSystem`<sp/>|<sp/>Decrements<sp/>delay<sp/>timers<sp/>and<sp/>enables<sp/>components<sp/>when<sp/>expired<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`GameObjectLifecycleSystem`<sp/>|<sp/>Reacts<sp/>to<sp/>`HealthDepletedEvent`<sp/>and<sp/>despawns<sp/>or<sp/>deactivates<sp/>entities<sp/>|</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">##<sp/>System<sp/>Behavior</highlight></codeline>
+<codeline><highlight class="normal">##<sp/>DelayedComponentEnablerSystem</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">Each<sp/>frame,<sp/>the<sp/>system:</highlight></codeline>
-<codeline><highlight class="normal">1.<sp/>Iterates<sp/>all<sp/>entities<sp/>with<sp/>`DelayedComponentEnabler`</highlight></codeline>
+<codeline><highlight class="normal">1.<sp/>Iterates<sp/>all<sp/>active<sp/>entities<sp/>with<sp/>`DelayedComponentEnabler`</highlight></codeline>
 <codeline><highlight class="normal">2.<sp/>Decrements<sp/>each<sp/>deferred<sp/>component&apos;s<sp/>timer<sp/>by<sp/>`deltaTime`</highlight></codeline>
-<codeline><highlight class="normal">3.<sp/>Enables<sp/>components<sp/>whose<sp/>timers<sp/>reach<sp/>zero</highlight></codeline>
+<codeline><highlight class="normal">3.<sp/>Enables<sp/>components<sp/>whose<sp/>timers<sp/>reach<sp/>zero<sp/>via<sp/>`ComponentOpsRegistry`</highlight></codeline>
 <codeline><highlight class="normal">4.<sp/>Removes<sp/>activated<sp/>entries<sp/>from<sp/>the<sp/>deferred<sp/>list</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>GameObjectLifecycleSystem</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Reads<sp/>`HealthDepletedEvent`s<sp/>from<sp/>the<sp/>pass<sp/>bus.<sp/>For<sp/>each<sp/>affected<sp/>entity:</highlight></codeline>
+<codeline><highlight class="normal">1.<sp/>Inspects<sp/>the<sp/>`HealthDepletedBehavior`<sp/>flags<sp/>on<sp/>the<sp/>`HealthComponent`</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>If<sp/>`Despawn`<sp/>is<sp/>set<sp/>and<sp/>the<sp/>entity<sp/>has<sp/>a<sp/>`SpawnedByProfileComponent`,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>a<sp/>`DespawnCommand`<sp/>is<sp/>enqueued<sp/>via<sp/>the<sp/>command<sp/>buffer</highlight></codeline>
+<codeline><highlight class="normal">3.<sp/>Otherwise<sp/>the<sp/>entity<sp/>is<sp/>deactivated<sp/>via<sp/>`setActive(false)`</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Scheduling</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">Schedule<sp/>in<sp/>the<sp/>gameplay<sp/>phase<sp/>after<sp/>spawn<sp/>systems<sp/>but<sp/>before<sp/>collision/physics:</highlight></codeline>
+<codeline><highlight class="normal">Both<sp/>systems<sp/>should<sp/>be<sp/>scheduled<sp/>in<sp/>the<sp/>gameplay<sp/>phase:</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">```cpp</highlight></codeline>
-<codeline><highlight class="normal">gameLoop.addSystem&lt;DelayedComponentEnablerSystem&gt;(Phase::Gameplay);</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">DelayedComponentEnablerSystem<sp/><sp/>→<sp/>after<sp/>spawn,<sp/>before<sp/>collision</highlight></codeline>
+<codeline><highlight class="normal">GameObjectLifecycleSystem<sp/><sp/><sp/><sp/><sp/><sp/>→<sp/>after<sp/>health<sp/>manager<sp/>flush</highlight></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>
+<codeline></codeline>
 <codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
 <codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
 <codeline><highlight class="normal">@namespace<sp/>helios::engine::mechanics::lifecycle::systems</highlight></codeline>
 <codeline><highlight class="normal">@brief<sp/>Systems<sp/>for<sp/>processing<sp/>entity<sp/>lifecycle<sp/>transitions.</highlight></codeline>
-<codeline><highlight class="normal">@details<sp/>Provides<sp/>frame-based<sp/>processing<sp/>of<sp/>delayed<sp/>activations<sp/>and<sp/>lifecycle<sp/>state<sp/>changes.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Provides<sp/>frame-based<sp/>processing<sp/>of<sp/>delayed<sp/>activations,<sp/>health-depletion<sp/>reactions,<sp/>and<sp/>entity<sp/>despawning.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
     </programlisting>
     <location file="/tmp/h/include/helios/engine/mechanics/lifecycle/systems/README.md"/>

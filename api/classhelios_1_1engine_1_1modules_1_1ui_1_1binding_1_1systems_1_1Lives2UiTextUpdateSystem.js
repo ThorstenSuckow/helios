@@ -1,0 +1,4 @@
+var classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1Lives2UiTextUpdateSystem =
+[
+    [ "update", "classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1Lives2UiTextUpdateSystem.html#a9bd52ce9ef773e802c0d2abaac883571", null ]
+];

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['damageapplied_0',['damageApplied',['../structhelios_1_1engine_1_1mechanics_1_1combat_1_1types_1_1AttackContext.html#aad7e5ece311ec81b2fcc3cec1410b753',1,'helios::engine::mechanics::combat::types::AttackContext']]],
+  ['damage_0',['damage',['../structhelios_1_1engine_1_1common_1_1types_1_1DamageContext.html#af08494dfb9c14789721a51655a1c6f3a',1,'helios::engine::common::types::DamageContext']]],
   ['darkblue_1',['DarkBlue',['../structhelios_1_1util_1_1Colors.html#af4ae094e2fb1c1a9f088af78ecf56a09',1,'helios::util::Colors']]],
   ['darkcyan_2',['DarkCyan',['../structhelios_1_1util_1_1Colors.html#a49eb2d8c040ebfaf886d4c81041ffa52',1,'helios::util::Colors']]],
   ['darkgray_3',['DarkGray',['../structhelios_1_1util_1_1Colors.html#ac8d73358cbd5e51510e2e85219ad1b70',1,'helios::util::Colors']]],
@@ -21,12 +21,13 @@ var searchData=
   ['default_5frotation_5fspeed_18',['DEFAULT_ROTATION_SPEED',['../classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent.html#a7e2bd667c26624d657ed36b28cb83886',1,'helios::engine::modules::physics::motion::components::SteeringComponent']]],
   ['default_5frotation_5fspeed_5fthreshold_19',['DEFAULT_ROTATION_SPEED_THRESHOLD',['../classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent.html#a386fc8d239cade1231982c391202080c',1,'helios::engine::modules::physics::motion::components::SteeringComponent']]],
   ['default_5fstick_5fnoise_5fthreshold_20',['DEFAULT_STICK_NOISE_THRESHOLD',['../classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy.html#ab2d601fa84b631f66270f28f2fed9e06',1,'helios::input::gamepad::DeadzoneStrategy']]],
-  ['delta_5f_21',['delta_',['../classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#ad239e54f9f8d46f7e3452809f991747f',1,'helios::engine::runtime::pooling::GameObjectPool']]],
-  ['dependent_5ffalse_5fv_22',['dependent_false_v',['../namespacehelios_1_1engine_1_1state_1_1types.html#a65e3bfab69f20855e37dcbff14c1fbf9',1,'helios::engine::state::types']]],
-  ['destroy_23',['destroy',['../structhelios_1_1core_1_1memory_1_1ErasedUnique.html#a5dd7d498967d63f8d0e16888d7e8b4bd',1,'helios::core::memory::ErasedUnique']]],
-  ['direction_5f_24',['direction_',['../classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1Aim2DComponent.html#a3c0795d8c60eaa7f539c0dddea0db227',1,'helios::engine::mechanics::combat::components::Aim2DComponent::direction_'],['../classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent.html#a202ab576c20ceecdb563e4ffc42d4e23',1,'helios::engine::modules::physics::motion::components::Move2DComponent::direction_']]],
-  ['directionfromsteering_5f_25',['directionFromSteering_',['../classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent.html#a1debcd0dc1919c2de3499a076314aeb9',1,'helios::engine::modules::physics::motion::components::SteeringComponent']]],
-  ['disable_26',['disable',['../structhelios_1_1engine_1_1ecs_1_1ComponentOps.html#ad04ffbe7a069fe77bab127744350dce9',1,'helios::engine::ecs::ComponentOps']]],
-  ['dispatcher_5f_27',['dispatcher_',['../classhelios_1_1event_1_1EventManager.html#a1deac9e3799c2f473fdb16bddb4dada8',1,'helios::event::EventManager']]],
-  ['dodgerblue_28',['DodgerBlue',['../structhelios_1_1util_1_1Colors.html#a92a058bf66d6e8b1980c1c0b481fcc9b',1,'helios::util::Colors']]]
+  ['delta_21',['delta',['../structhelios_1_1engine_1_1mechanics_1_1health_1_1types_1_1HealthChangeContext.html#a54ecf629b9b28f50b0de374227574cf1',1,'helios::engine::mechanics::health::types::HealthChangeContext']]],
+  ['delta_5f_22',['delta_',['../classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#ad239e54f9f8d46f7e3452809f991747f',1,'helios::engine::runtime::pooling::GameObjectPool']]],
+  ['dependent_5ffalse_5fv_23',['dependent_false_v',['../namespacehelios_1_1engine_1_1state_1_1types.html#a65e3bfab69f20855e37dcbff14c1fbf9',1,'helios::engine::state::types']]],
+  ['destroy_24',['destroy',['../structhelios_1_1core_1_1memory_1_1ErasedUnique.html#a5dd7d498967d63f8d0e16888d7e8b4bd',1,'helios::core::memory::ErasedUnique']]],
+  ['direction_5f_25',['direction_',['../classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1Aim2DComponent.html#a3c0795d8c60eaa7f539c0dddea0db227',1,'helios::engine::mechanics::combat::components::Aim2DComponent::direction_'],['../classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent.html#a202ab576c20ceecdb563e4ffc42d4e23',1,'helios::engine::modules::physics::motion::components::Move2DComponent::direction_']]],
+  ['directionfromsteering_5f_26',['directionFromSteering_',['../classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent.html#a1debcd0dc1919c2de3499a076314aeb9',1,'helios::engine::modules::physics::motion::components::SteeringComponent']]],
+  ['disable_27',['disable',['../structhelios_1_1engine_1_1ecs_1_1ComponentOps.html#ad04ffbe7a069fe77bab127744350dce9',1,'helios::engine::ecs::ComponentOps']]],
+  ['dispatcher_5f_28',['dispatcher_',['../classhelios_1_1event_1_1EventManager.html#a1deac9e3799c2f473fdb16bddb4dada8',1,'helios::event::EventManager']]],
+  ['dodgerblue_29',['DodgerBlue',['../structhelios_1_1util_1_1Colors.html#a92a058bf66d6e8b1980c1c0b481fcc9b',1,'helios::util::Colors']]]
 ];

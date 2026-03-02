@@ -14,34 +14,57 @@
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>components<sp/>that<sp/>track<sp/>and<sp/>manage<sp/>the<sp/>activation<sp/>state<sp/>of<sp/>other<sp/>components<sp/>on<sp/>an<sp/>entity.<sp/>The<sp/>primary<sp/>use<sp/>case<sp/>is<sp/>delayed<sp/>activation<sp/>after<sp/>spawn.</highlight></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>tag<sp/>components<sp/>for<sp/>entity<sp/>activation<sp/>state,<sp/>a<sp/>marker<sp/>for<sp/>dead<sp/>entities,<sp/>and<sp/>a<sp/>component<sp/>for<sp/>scheduling<sp/>delayed<sp/>activation<sp/>of<sp/>other<sp/>components<sp/>after<sp/>spawn.</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">##<sp/>Key<sp/>Classes</highlight></codeline>
+<codeline><highlight class="normal">##<sp/>Components</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|-------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>Component<sp/>|<sp/>Description<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-----------|-------------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`Active`<sp/>|<sp/>Tag<sp/>component<sp/>added<sp/>to<sp/>active<sp/>entities;<sp/>used<sp/>as<sp/>a<sp/>view<sp/>filter<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`Inactive`<sp/>|<sp/>Tag<sp/>component<sp/>added<sp/>to<sp/>inactive<sp/>entities;<sp/>used<sp/>as<sp/>a<sp/>view<sp/>filter<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`DeadTagComponent`<sp/>|<sp/>Marker<sp/>component<sp/>attached<sp/>when<sp/>health<sp/>is<sp/>depleted;<sp/>move-only<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`DelayedComponentEnabler`<sp/>|<sp/>Tracks<sp/>components<sp/>pending<sp/>delayed<sp/>activation<sp/>with<sp/>countdown<sp/>timers<sp/>|</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
+<codeline><highlight class="normal">##<sp/>Active<sp/>/<sp/>Inactive</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Managed<sp/>automatically<sp/>by<sp/>`GameObject::setActive()`:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>`setActive(true)`<sp/>→<sp/>adds<sp/>`Active`,<sp/>removes<sp/>`Inactive`,<sp/>calls<sp/>`onActivate()`<sp/>on<sp/>components</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`setActive(false)`<sp/>→<sp/>adds<sp/>`Inactive`,<sp/>removes<sp/>`Active`,<sp/>calls<sp/>`onDeactivate()`<sp/>on<sp/>components</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Systems<sp/>filter<sp/>on<sp/>these<sp/>tags<sp/>via<sp/>views:</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">```cpp</highlight></codeline>
-<codeline><highlight class="normal">//<sp/>Defer<sp/>collision<sp/>component<sp/>activation<sp/>by<sp/>0.5<sp/>seconds</highlight></codeline>
-<codeline><highlight class="normal">auto*<sp/>enabler<sp/>=<sp/>entity.get&lt;DelayedComponentEnabler&gt;();</highlight></codeline>
-<codeline><highlight class="normal">enabler-&gt;defer(ComponentTypeId::id&lt;CollisionComponent&gt;(),<sp/>0.5f);</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Only<sp/>process<sp/>active<sp/>entities</highlight></codeline>
+<codeline><highlight class="normal">for<sp/>(auto<sp/>[entity,<sp/>health,<sp/>active]<sp/>:<sp/>gameWorld-&gt;view&lt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>HealthComponent,<sp/>Active</highlight></codeline>
+<codeline><highlight class="normal">&gt;().whereEnabled())<sp/>{<sp/>...<sp/>}</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">//<sp/>Check<sp/>currently<sp/>deferred<sp/>components</highlight></codeline>
-<codeline><highlight class="normal">for<sp/>(auto&amp;<sp/>deferred<sp/>:<sp/>enabler-&gt;deferredComponents())<sp/>{</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>deferred.delta<sp/>-<sp/>remaining<sp/>time</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>deferred.componentTypeId<sp/>-<sp/>which<sp/>component</highlight></codeline>
-<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal">##<sp/>DeadTagComponent</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Attached<sp/>by<sp/>`HealthManager`<sp/>when<sp/>an<sp/>entity&apos;s<sp/>health<sp/>reaches<sp/>zero<sp/>and<sp/>the</highlight></codeline>
+<codeline><highlight class="normal">`HealthDepletedBehavior::DeadTag`<sp/>flag<sp/>is<sp/>set.<sp/>Systems<sp/>can<sp/>query<sp/>for<sp/>this</highlight></codeline>
+<codeline><highlight class="normal">tag<sp/>to<sp/>apply<sp/>death-related<sp/>logic<sp/>(scoring,<sp/>VFX,<sp/>cleanup)<sp/>without</highlight></codeline>
+<codeline><highlight class="normal">re-checking<sp/>health<sp/>values.<sp/>Move-only;<sp/>copying<sp/>is<sp/>not<sp/>permitted.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>DelayedComponentEnabler</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Schedules<sp/>delayed<sp/>activation<sp/>of<sp/>other<sp/>components.<sp/>Works<sp/>in<sp/>conjunction</highlight></codeline>
+<codeline><highlight class="normal">with<sp/>`DelayedComponentEnablerSystem`.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">auto*<sp/>enabler<sp/>=<sp/>entity.get&lt;DelayedComponentEnabler&gt;();</highlight></codeline>
+<codeline><highlight class="normal">enabler-&gt;defer(entity,<sp/>ComponentTypeId::id&lt;CollisionComponent&gt;(),<sp/>0.5f);</highlight></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>
+<codeline></codeline>
 <codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
 <codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
 <codeline><highlight class="normal">@namespace<sp/>helios::engine::mechanics::lifecycle::components</highlight></codeline>
 <codeline><highlight class="normal">@brief<sp/>Components<sp/>for<sp/>managing<sp/>entity<sp/>lifecycle<sp/>states.</highlight></codeline>
-<codeline><highlight class="normal">@details<sp/>Provides<sp/>data<sp/>containers<sp/>for<sp/>tracking<sp/>delayed<sp/>component<sp/>activations<sp/>and<sp/>lifecycle<sp/>transitions.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Provides<sp/>tag<sp/>components<sp/>for<sp/>activation<sp/>state,<sp/>a<sp/>dead-entity<sp/>marker,<sp/>and<sp/>a<sp/>component<sp/>for<sp/>tracking<sp/>delayed<sp/>component<sp/>activations.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
     </programlisting>
     <location file="/tmp/h/include/helios/engine/mechanics/lifecycle/components/README.md"/>

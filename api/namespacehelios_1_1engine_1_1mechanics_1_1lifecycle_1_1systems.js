@@ -1,4 +1,5 @@
 var namespacehelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems =
 [
-    [ "DelayedComponentEnablerSystem", "classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1DelayedComponentEnablerSystem.html", "classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1DelayedComponentEnablerSystem" ]
+    [ "DelayedComponentEnablerSystem", "classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1DelayedComponentEnablerSystem.html", "classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1DelayedComponentEnablerSystem" ],
+    [ "GameObjectLifecycleSystem", "classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1GameObjectLifecycleSystem.html", "classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1GameObjectLifecycleSystem" ]
 ];

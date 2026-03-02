@@ -12,30 +12,44 @@
 <codeline></codeline>
 <codeline><highlight class="normal">Health<sp/>management<sp/>system<sp/>for<sp/>game<sp/>entities.</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>components,<sp/>events,<sp/>and<sp/>systems<sp/>for<sp/>tracking<sp/>entity<sp/>health,<sp/>processing<sp/>damage,<sp/>and<sp/>handling<sp/>death.</highlight></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>components,<sp/>events,<sp/>types,<sp/>systems,<sp/>and<sp/>a<sp/>manager<sp/>for<sp/>tracking<sp/>entity<sp/>health,<sp/>processing<sp/>damage,<sp/>and<sp/>handling<sp/>death.</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Submodules</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">|<sp/>Submodule<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|-----------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`HealthManager`<sp/>|<sp/>Manager<sp/>that<sp/>processes<sp/>`ApplyDamageCommand`s<sp/>in<sp/>batch<sp/>during<sp/>flush<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`components/`<sp/>|<sp/>Health-related<sp/>ECS<sp/>components<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`events/`<sp/>|<sp/>Health-related<sp/>events<sp/>(death)<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`events/`<sp/>|<sp/>Health-related<sp/>events<sp/>(update,<sp/>depletion)<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`systems/`<sp/>|<sp/>Systems<sp/>for<sp/>health<sp/>processing<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`types/`<sp/>|<sp/>Bitmask<sp/>enums<sp/>and<sp/>context<sp/>structs<sp/>|</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Architecture</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">1.<sp/>**HealthComponent**<sp/>tracks<sp/>current<sp/>and<sp/>maximum<sp/>health</highlight></codeline>
-<codeline><highlight class="normal">2.<sp/>**Combat<sp/>systems**<sp/>call<sp/>`takeDamage()`<sp/>when<sp/>damage<sp/>is<sp/>dealt</highlight></codeline>
-<codeline><highlight class="normal">3.<sp/>**HealthUpdateSystem**<sp/>detects<sp/>`health<sp/>&lt;=<sp/>0`<sp/>and:</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>Issues<sp/>`DespawnCommand`<sp/>to<sp/>remove<sp/>the<sp/>entity</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>Publishes<sp/>`DeathEvent`<sp/>for<sp/>other<sp/>systems<sp/>(e.g.,<sp/>scoring)</highlight></codeline>
+<codeline><highlight class="normal">1.<sp/>**HealthComponent**<sp/>tracks<sp/>current/maximum<sp/>health<sp/>and<sp/>carries<sp/>behaviour<sp/>flags</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>**HealthManager**<sp/>receives<sp/>`ApplyDamageCommand`s<sp/>via<sp/>`submit()`<sp/>and<sp/>processes</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>them<sp/>in<sp/>batch<sp/>during<sp/>the<sp/>manager<sp/>flush<sp/>phase:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>Applies<sp/>damage<sp/>to<sp/>the<sp/>target&apos;s<sp/>`HealthComponent`</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>Pushes<sp/>a<sp/>`HealthChangedEvent`<sp/>to<sp/>the<sp/>**phase**<sp/>bus<sp/>(available<sp/>next<sp/>phase)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>On<sp/>health<sp/>depletion,<sp/>evaluates<sp/>`HealthDepletedBehavior`<sp/>flags<sp/>and<sp/>optionally</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/>attaches<sp/>a<sp/>`DeadTagComponent`<sp/>(flag<sp/>`DeadTag`)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>Pushes<sp/>a<sp/>`HealthDepletedEvent`<sp/>to<sp/>the<sp/>**pass**<sp/>bus<sp/>(available<sp/>after<sp/>commit</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/>within<sp/>the<sp/>same<sp/>pass)</highlight></codeline>
+<codeline><highlight class="normal">3.<sp/>**HealthUpdateClearSystem**<sp/>resets<sp/>the<sp/>dirty<sp/>flag<sp/>after<sp/>observers<sp/>have<sp/>run</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Key<sp/>Types</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>`HealthChangeBehavior`<sp/>–<sp/>selects<sp/>the<sp/>event<sp/>bus<sp/>for<sp/>health-change<sp/>reporting</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`HealthDepletedBehavior`<sp/>–<sp/>selects<sp/>actions<sp/>on<sp/>health<sp/>depletion<sp/>(event,<sp/>despawn,<sp/>dead-tag)</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`HealthChangeContext`<sp/>–<sp/>carries<sp/>target,<sp/>source,<sp/>contact<sp/>point,<sp/>and<sp/>amount</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Integration</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">The<sp/>health<sp/>system<sp/>integrates<sp/>with:</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>**Combat<sp/>system**<sp/>-<sp/>receives<sp/>damage<sp/>via<sp/>`takeDamage()`</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>**Scoring<sp/>system**<sp/>-<sp/>`DeathEvent`<sp/>triggers<sp/>score<sp/>awards</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>**Spawn<sp/>system**<sp/>-<sp/>dead<sp/>entities<sp/>are<sp/>despawned<sp/>via<sp/>command</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Combat<sp/>system**<sp/>–<sp/>`ApplyDamageCommand`<sp/>is<sp/>routed<sp/>to<sp/>`HealthManager`</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Scoring<sp/>system**<sp/>–<sp/>`HealthDepletedEvent`<sp/>triggers<sp/>score<sp/>awards</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Lifecycle<sp/>system**<sp/>–<sp/>`GameObjectLifecycleSystem`<sp/>reads<sp/>depletion<sp/>events<sp/>and<sp/>despawns<sp/>entities</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Spawn<sp/>system**<sp/>–<sp/>dead<sp/>entities<sp/>are<sp/>returned<sp/>to<sp/>pools<sp/>via<sp/>`DespawnCommand`</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>
 <codeline></codeline>

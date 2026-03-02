@@ -4,21 +4,34 @@
     <compoundname>components</compoundname>
     <innerfile refid="helios_2engine_2mechanics_2lifecycle_2components_2__module_8ixx">helios/engine/mechanics/lifecycle/components/_module.ixx</innerfile>
     <innerfile refid="Active_8ixx">Active.ixx</innerfile>
+    <innerfile refid="DeadTagComponent_8ixx">DeadTagComponent.ixx</innerfile>
     <innerfile refid="DelayedComponentEnabler_8ixx">DelayedComponentEnabler.ixx</innerfile>
     <innerfile refid="Inactive_8ixx">Inactive.ixx</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_9c6cd3e8e6e0499e50b91381009c10c7_1autotoc_md256">
+<sect1 id="dir_9c6cd3e8e6e0499e50b91381009c10c7_1autotoc_md271">
 <title>helios::engine::mechanics::lifecycle::components</title><para>Components for managing entity lifecycle states.</para>
 </sect1>
-<sect1 id="dir_9c6cd3e8e6e0499e50b91381009c10c7_1autotoc_md257">
-<title>Overview</title><para>This module provides components that track and manage the activation state of other components on an entity. The primary use case is delayed activation after spawn.</para>
+<sect1 id="dir_9c6cd3e8e6e0499e50b91381009c10c7_1autotoc_md272">
+<title>Overview</title><para>This module provides tag components for entity activation state, a marker for dead entities, and a component for scheduling delayed activation of other components after spawn.</para>
 </sect1>
-<sect1 id="dir_9c6cd3e8e6e0499e50b91381009c10c7_1autotoc_md258">
-<title>Key Classes</title><para><table rows="2" cols="2"><row>
-<entry thead="yes"><para>Class  </para>
-</entry><entry thead="yes"><para>Purpose  </para>
+<sect1 id="dir_9c6cd3e8e6e0499e50b91381009c10c7_1autotoc_md273">
+<title>Components</title><para><table rows="5" cols="2"><row>
+<entry thead="yes"><para>Component  </para>
+</entry><entry thead="yes"><para>Description  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>Active</computeroutput>  </para>
+</entry><entry thead="no"><para>Tag component added to active entities; used as a view filter  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>Inactive</computeroutput>  </para>
+</entry><entry thead="no"><para>Tag component added to inactive entities; used as a view filter  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>DeadTagComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Marker component attached when health is depleted; move-only  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>DelayedComponentEnabler</computeroutput>  </para>
@@ -27,19 +40,31 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_9c6cd3e8e6e0499e50b91381009c10c7_1autotoc_md259">
-<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Defer<sp/>collision<sp/>component<sp/>activation<sp/>by<sp/>0.5<sp/>seconds</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>enabler<sp/>=<sp/>entity.get&lt;DelayedComponentEnabler&gt;();</highlight></codeline>
-<codeline><highlight class="normal">enabler-&gt;defer(ComponentTypeId::id&lt;CollisionComponent&gt;(),<sp/>0.5f);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Check<sp/>currently<sp/>deferred<sp/>components</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>deferred<sp/>:<sp/>enabler-&gt;deferredComponents())<sp/>{</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>deferred.delta<sp/>-<sp/>remaining<sp/>time</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>deferred.componentTypeId<sp/>-<sp/>which<sp/>component</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal">}</highlight></codeline>
+<sect1 id="dir_9c6cd3e8e6e0499e50b91381009c10c7_1autotoc_md274">
+<title>Active / Inactive</title><para>Managed automatically by <computeroutput>GameObject::setActive()</computeroutput>:</para>
+<para><itemizedlist>
+<listitem><para><computeroutput>setActive(true)</computeroutput> → adds <computeroutput>Active</computeroutput>, removes <computeroutput>Inactive</computeroutput>, calls <computeroutput>onActivate()</computeroutput> on components</para>
+</listitem><listitem><para><computeroutput>setActive(false)</computeroutput> → adds <computeroutput>Inactive</computeroutput>, removes <computeroutput>Active</computeroutput>, calls <computeroutput>onDeactivate()</computeroutput> on components</para>
+</listitem></itemizedlist>
+</para>
+<para>Systems filter on these tags via views:</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Only<sp/>process<sp/>active<sp/>entities</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>[entity,<sp/>health,<sp/>active]<sp/>:<sp/>gameWorld-&gt;view&lt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>HealthComponent,<sp/>Active</highlight></codeline>
+<codeline><highlight class="normal">&gt;().whereEnabled())<sp/>{<sp/>...<sp/>}</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_9c6cd3e8e6e0499e50b91381009c10c7_1autotoc_md275">
+<title>DeadTagComponent</title><para>Attached by <computeroutput>HealthManager</computeroutput> when an entity&apos;s health reaches zero and the <computeroutput>HealthDepletedBehavior::DeadTag</computeroutput> flag is set. Systems can query for this tag to apply death-related logic (scoring, VFX, cleanup) without re-checking health values. Move-only; copying is not permitted.</para>
+</sect1>
+<sect1 id="dir_9c6cd3e8e6e0499e50b91381009c10c7_1autotoc_md276">
+<title>DelayedComponentEnabler</title><para>Schedules delayed activation of other components. Works in conjunction with <computeroutput>DelayedComponentEnablerSystem</computeroutput>.</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>enabler<sp/>=<sp/>entity.get&lt;DelayedComponentEnabler&gt;();</highlight></codeline>
+<codeline><highlight class="normal">enabler-&gt;defer(entity,<sp/>ComponentTypeId::id&lt;CollisionComponent&gt;(),<sp/>0.5f);</highlight></codeline>
 </programlisting></para>
 <para><hruler/>
- <details><summary>Doxygen</summary><para></para>
+</para>
+<para><details><summary>Doxygen</summary><para></para>
 <para></para>
 </details></para>
 </sect1>

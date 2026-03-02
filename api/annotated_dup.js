@@ -141,6 +141,12 @@ var annotated_dup =
             [ "SpawnSystemFactory", "classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1SpawnSystemFactory.html", "classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1SpawnSystemFactory" ]
           ] ]
         ] ],
+        [ "common", "namespacehelios_1_1engine_1_1common.html", [
+          [ "types", "namespacehelios_1_1engine_1_1common_1_1types.html", [
+            [ "DamageContext", "structhelios_1_1engine_1_1common_1_1types_1_1DamageContext.html", "structhelios_1_1engine_1_1common_1_1types_1_1DamageContext" ],
+            [ "InteractionContext", "structhelios_1_1engine_1_1common_1_1types_1_1InteractionContext.html", "structhelios_1_1engine_1_1common_1_1types_1_1InteractionContext" ]
+          ] ]
+        ] ],
         [ "core", "namespacehelios_1_1engine_1_1core.html", [
           [ "data", "namespacehelios_1_1engine_1_1core_1_1data.html", [
             [ "ActionIdTag", "structhelios_1_1engine_1_1core_1_1data_1_1ActionIdTag.html", null ],
@@ -198,19 +204,19 @@ var annotated_dup =
             ] ],
             [ "components", "namespacehelios_1_1engine_1_1mechanics_1_1combat_1_1components.html", [
               [ "Aim2DComponent", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1Aim2DComponent.html", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1Aim2DComponent" ],
-              [ "LastAttackerComponent", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent.html", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1LastAttackerComponent" ],
               [ "ShootComponent", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent.html", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent" ]
             ] ],
             [ "systems", "namespacehelios_1_1engine_1_1mechanics_1_1combat_1_1systems.html", [
               [ "ProjectileSpawnSystem", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1systems_1_1ProjectileSpawnSystem.html", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1systems_1_1ProjectileSpawnSystem" ]
-            ] ],
-            [ "types", "namespacehelios_1_1engine_1_1mechanics_1_1combat_1_1types.html", [
-              [ "AttackContext", "structhelios_1_1engine_1_1mechanics_1_1combat_1_1types_1_1AttackContext.html", "structhelios_1_1engine_1_1mechanics_1_1combat_1_1types_1_1AttackContext" ]
             ] ]
           ] ],
           [ "damage", "namespacehelios_1_1engine_1_1mechanics_1_1damage.html", [
+            [ "commands", "namespacehelios_1_1engine_1_1mechanics_1_1damage_1_1commands.html", [
+              [ "ApplyDamageCommand", "classhelios_1_1engine_1_1mechanics_1_1damage_1_1commands_1_1ApplyDamageCommand.html", "classhelios_1_1engine_1_1mechanics_1_1damage_1_1commands_1_1ApplyDamageCommand" ]
+            ] ],
             [ "components", "namespacehelios_1_1engine_1_1mechanics_1_1damage_1_1components.html", [
-              [ "DamageDealerComponent", "classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1DamageDealerComponent.html", "classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1DamageDealerComponent" ]
+              [ "DamageDealerComponent", "classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1DamageDealerComponent.html", "classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1DamageDealerComponent" ],
+              [ "LastDamageComponent", "classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent.html", "classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent" ]
             ] ],
             [ "systems", "namespacehelios_1_1engine_1_1mechanics_1_1damage_1_1systems.html", [
               [ "DamageOnCollisionSystem", "classhelios_1_1engine_1_1mechanics_1_1damage_1_1systems_1_1DamageOnCollisionSystem.html", "classhelios_1_1engine_1_1mechanics_1_1damage_1_1systems_1_1DamageOnCollisionSystem" ]
@@ -230,11 +236,16 @@ var annotated_dup =
               [ "HealthComponent", "classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent.html", "classhelios_1_1engine_1_1mechanics_1_1health_1_1components_1_1HealthComponent" ]
             ] ],
             [ "events", "namespacehelios_1_1engine_1_1mechanics_1_1health_1_1events.html", [
-              [ "DeathEvent", "classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1DeathEvent.html", "classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1DeathEvent" ]
+              [ "HealthChangedEvent", "classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1HealthChangedEvent.html", "classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1HealthChangedEvent" ],
+              [ "HealthDepletedEvent", "classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1HealthDepletedEvent.html", "classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1HealthDepletedEvent" ]
             ] ],
             [ "systems", "namespacehelios_1_1engine_1_1mechanics_1_1health_1_1systems.html", [
-              [ "HealthUpdateSystem", "classhelios_1_1engine_1_1mechanics_1_1health_1_1systems_1_1HealthUpdateSystem.html", "classhelios_1_1engine_1_1mechanics_1_1health_1_1systems_1_1HealthUpdateSystem" ]
-            ] ]
+              [ "HealthUpdateClearSystem", "classhelios_1_1engine_1_1mechanics_1_1health_1_1systems_1_1HealthUpdateClearSystem.html", "classhelios_1_1engine_1_1mechanics_1_1health_1_1systems_1_1HealthUpdateClearSystem" ]
+            ] ],
+            [ "types", "namespacehelios_1_1engine_1_1mechanics_1_1health_1_1types.html", [
+              [ "HealthChangeContext", "structhelios_1_1engine_1_1mechanics_1_1health_1_1types_1_1HealthChangeContext.html", "structhelios_1_1engine_1_1mechanics_1_1health_1_1types_1_1HealthChangeContext" ]
+            ] ],
+            [ "HealthManager", "classhelios_1_1engine_1_1mechanics_1_1health_1_1HealthManager.html", "classhelios_1_1engine_1_1mechanics_1_1health_1_1HealthManager" ]
           ] ],
           [ "input", "namespacehelios_1_1engine_1_1mechanics_1_1input.html", [
             [ "systems", "namespacehelios_1_1engine_1_1mechanics_1_1input_1_1systems.html", [
@@ -247,15 +258,25 @@ var annotated_dup =
             ] ],
             [ "components", "namespacehelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components.html", [
               [ "Active", "structhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1Active.html", null ],
+              [ "DeadTagComponent", "classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1DeadTagComponent.html", "classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1DeadTagComponent" ],
               [ "DelayedComponentEnabler", "classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1DelayedComponentEnabler.html", "classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1DelayedComponentEnabler" ],
               [ "Inactive", "structhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1Inactive.html", null ]
             ] ],
             [ "systems", "namespacehelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems.html", [
-              [ "DelayedComponentEnablerSystem", "classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1DelayedComponentEnablerSystem.html", "classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1DelayedComponentEnablerSystem" ]
+              [ "DelayedComponentEnablerSystem", "classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1DelayedComponentEnablerSystem.html", "classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1DelayedComponentEnablerSystem" ],
+              [ "GameObjectLifecycleSystem", "classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1GameObjectLifecycleSystem.html", "classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1GameObjectLifecycleSystem" ]
             ] ],
             [ "WorldLifecycleManager", "classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1WorldLifecycleManager.html", "classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1WorldLifecycleManager" ]
           ] ],
           [ "match", "namespacehelios_1_1engine_1_1mechanics_1_1match.html", [
+            [ "components", "namespacehelios_1_1engine_1_1mechanics_1_1match_1_1components.html", [
+              [ "LivesBindingComponent", "classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesBindingComponent.html", "classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesBindingComponent" ],
+              [ "LivesComponent", "classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent.html", "classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent" ],
+              [ "PlayerComponent", "classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1PlayerComponent.html", null ]
+            ] ],
+            [ "events", "namespacehelios_1_1engine_1_1mechanics_1_1match_1_1events.html", [
+              [ "PlayerDiedEvent", "classhelios_1_1engine_1_1mechanics_1_1match_1_1events_1_1PlayerDiedEvent.html", "classhelios_1_1engine_1_1mechanics_1_1match_1_1events_1_1PlayerDiedEvent" ]
+            ] ],
             [ "rules", "namespacehelios_1_1engine_1_1mechanics_1_1match_1_1rules.html", [
               [ "guards", "namespacehelios_1_1engine_1_1mechanics_1_1match_1_1rules_1_1guards.html", [
                 [ "DefaultMatchStateTransitionGuards", "classhelios_1_1engine_1_1mechanics_1_1match_1_1rules_1_1guards_1_1DefaultMatchStateTransitionGuards.html", "classhelios_1_1engine_1_1mechanics_1_1match_1_1rules_1_1guards_1_1DefaultMatchStateTransitionGuards" ]
@@ -427,6 +448,7 @@ var annotated_dup =
             [ "binding", "namespacehelios_1_1engine_1_1modules_1_1ui_1_1binding.html", [
               [ "systems", "namespacehelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems.html", [
                 [ "GameTimer2UiTextUpdateSystem", "classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1GameTimer2UiTextUpdateSystem.html", "classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1GameTimer2UiTextUpdateSystem" ],
+                [ "Lives2UiTextUpdateSystem", "classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1Lives2UiTextUpdateSystem.html", "classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1Lives2UiTextUpdateSystem" ],
                 [ "MaxScore2UiTextUpdateSystem", "classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1MaxScore2UiTextUpdateSystem.html", "classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1MaxScore2UiTextUpdateSystem" ],
                 [ "Score2UiTextUpdateSystem", "classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1Score2UiTextUpdateSystem.html", "classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1Score2UiTextUpdateSystem" ]
               ] ]

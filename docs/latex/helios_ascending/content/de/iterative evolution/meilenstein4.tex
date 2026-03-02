@@ -16,11 +16,9 @@ In diesem Zusammenhang wurden folgende Konzepte realisiert:
 \end{itemize}
 
 
-
 Diese Anforderungen führten zudem zu einer Neuausrichtung der Projektstruktur.
 Die strikte Trennung in \textit{Implementation}- und \textit{Interface}-Module-Units wurde zugunsten eines verbesserten Refactoring-Workflows aufgegeben; die Implementierungen wurden in die \textit{Interface Units} zurückgeführt.
-Dabei wurde das Modul \texttt{helios.engine} als zentraler Kern definiert, während das semantisch zu starre \texttt{game}-Modul verworfen wurde.\\
-
+Dabei wurde das Modul \texttt{helios.engine} als zentraler Kern der Engine definiert, während das semantisch zu starre \texttt{game}-Modul verworfen wurde.\\
 
 Es erfolgte zudem eine logische Trennung zwischen engine-intrinsischen Funktionen (\texttt{runtime}) und spielmechanischen Modulen (\texttt{mechanics}).
 Letztere beinhalten unter anderem ein \textit{Policy}-basiertes \textit{SpawnSystem}.
@@ -28,7 +26,6 @@ Dieses wurde im weiteren Verlauf zu einer \textit{Domain Specific Language} (DSL
 
 \noindent
 In diesem Kontext wurde zusätzlich ein \textit{Object Builder} implementiert, um die Konfiguration der mittlerweile drei verschiedenen Gegnertypen sowie der Projektile und des Spielerschiffs zu vereinheitlichen und Redundanzen zu vermeiden (siehe Listing~\ref{lst:gameobjectdsl}).
-
 
 
 \begin{lstlisting}[style=c++style,

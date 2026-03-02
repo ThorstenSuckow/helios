@@ -4,9 +4,10 @@ Damage-related ECS components.
 
 ## Components
 
-| Component | Description |
-|-----------|-------------|
-| `DamageDealerComponent<N>` | Template component storing damage values per collision layer |
+| Component                | Description                                        |
+|--------------------------|----------------------------------------------------|
+| `DamageDealerComponent`  | Component storing damage values per collision layer |
+| `LastDamageComponent` | Component storing last damage applied              |
 
 ## DamageDealerComponent
 
@@ -16,6 +17,9 @@ Stores damage values indexed by collision layer for O(1) lookup:
 - `damage(uint32_t)` - Returns damage for a specific layer
 
 Layer IDs must be powers of 2 (bitmask values).
+
+## LastDamageComponent
+Stores the last damage applied to an entity.
 
 ---
 

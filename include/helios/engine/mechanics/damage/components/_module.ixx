@@ -5,3 +5,4 @@
 export module helios.engine.mechanics.damage.components;
 
 export import helios.engine.mechanics.damage.components.DamageDealerComponent;
+export import helios.engine.mechanics.damage.components.LastDamageComponent;

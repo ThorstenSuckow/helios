@@ -111,6 +111,8 @@ jobs:
       - name: Build website
         working-directory: ./website
         run: npm run build
+        env:
+          NODE_OPTIONS: --max-old-space-size=6144
 
       - name: Merge API docs and website
         run: |

@@ -98,7 +98,6 @@ export namespace helios::engine::mechanics::health {
                 auto interactionContext = damageContext.interactionContext;
 
                 auto target = updateContext.find(interactionContext.target);
-                auto damageDealer = updateContext.find(interactionContext.instigator);
 
                 auto* hc = target->get<HealthComponent>();
                 if (!hc) {

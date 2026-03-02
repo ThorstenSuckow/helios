@@ -44,12 +44,17 @@ export namespace helios::examples::scoring {
                 const helios::engine::mechanics::match::types::MatchState to)->void {
                     if (to == helios::engine::mechanics::match::types::MatchState::PlayerSpawn) {
                         if (auto player = updateContext.find(updateContext.session().playerEntityHandle())) {
-                            if (player) player->setActive(true);
+                            if (player) {
+                                player->setActive(true);
+                            }
                         }
                     }
-                    if (to == helios::engine::mechanics::match::types::MatchState::PlayerDeath || to == helios::engine::mechanics::match::types::MatchState::GameOver) {
+                    if (to == helios::engine::mechanics::match::types::MatchState::PlayerDeath
+                        || to == helios::engine::mechanics::match::types::MatchState::GameOver) {
                         if (auto player = updateContext.find(updateContext.session().playerEntityHandle())) {
-                            if (player) player->setActive(false);
+                            if (player) {
+                                player->setActive(false);
+                            }
                         }
                     }
             })

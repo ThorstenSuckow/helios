@@ -19,11 +19,6 @@ import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.ecs.System;
 
-import helios.engine.mechanics.health.events.DeathEvent;
-
-import helios.engine.mechanics.combat.types.AttackContext;
-import helios.engine.mechanics.combat.components.LastAttackerComponent;
-
 import helios.engine.modules.physics.collision.events;
 
 import helios.engine.mechanics.lifecycle.components.Active;

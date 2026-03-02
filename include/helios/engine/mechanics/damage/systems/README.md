@@ -17,7 +17,7 @@ Processes `SolidCollisionEvent` and applies damage:
 3. Checks if target entity has `HealthComponent`
 4. Looks up damage value by target's collision layer
 5. Calls `takeDamage()` on target's health component
-6. Updates `LastAttackerComponent` with attack context
+6. Updates `LastDamageComponent` with attack context
 
 The attack source is resolved through `EmittedByComponent` if present (e.g., projectile → player).
 

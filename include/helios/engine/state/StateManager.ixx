@@ -245,7 +245,8 @@ export namespace helios::engine::state {
          * @brief Clears all pending commands.
          */
         void reset() override {
-            pending_.clear();
+            // intentionally left empty. Clearing the pending queue would also mean
+            // that any pending state transisions **required by the reset** are nuked.
         }
 
     };

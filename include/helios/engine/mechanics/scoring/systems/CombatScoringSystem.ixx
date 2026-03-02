@@ -26,16 +26,22 @@ import helios.engine.state.Bindings;
 import helios.engine.runtime.messaging.command.EngineCommandBuffer;
 
 import helios.engine.ecs.System;
+import helios.engine.core.data;
 
-import helios.engine.mechanics.health.events.DeathEvent;
+import helios.engine.mechanics.health.events.HealthDepletedEvent;
 
-import helios.engine.mechanics.combat.types.AttackContext;
-import helios.engine.mechanics.combat.components.LastAttackerComponent;
 
 import helios.engine.modules.physics.collision.events;
 
 
 import helios.util.log;
+
+
+using namespace helios::engine::mechanics::scoring::components;
+using namespace helios::engine::mechanics::scoring::types;
+using namespace helios::engine::mechanics::scoring::commands;
+using namespace helios::engine::mechanics::health::events;
+using namespace helios::engine::core::data;
 
 #define HELIOS_LOG_SCOPE "helios::engine::mechanics::scoring::systems::CombatScoringSystem"
 export namespace helios::engine::mechanics::scoring::systems {
@@ -43,7 +49,7 @@ export namespace helios::engine::mechanics::scoring::systems {
     /**
      * @brief System that processes death events and awards scores.
      *
-     * Listens for DeathEvent and checks if the killed entity has a
+     * Listens for HealthDepletedEvent and checks if the killed entity has a
      * ScoreValueComponent. If so, issues an UpdateScoreCommand to
      * credit the attacker's score pool.
      */
@@ -62,47 +68,46 @@ export namespace helios::engine::mechanics::scoring::systems {
          */
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
-            for (auto& event : updateContext.readPhase<helios::engine::mechanics::health::events::DeathEvent>()) {
+            for (auto& event : updateContext.readPass<HealthDepletedEvent>()) {
 
-                if (!event.attackContext().has_value()) {
+                if (!event.damageContext()) {
                     continue;
                 }
 
-                auto& attackContext = event.attackContext().value();
+                const auto& attackContext = event.damageContext();
+
+                const auto interactionContext = attackContext->interactionContext;
 
                 const auto enemy = updateContext.find(event.source());
+                const auto instigator = updateContext.find(interactionContext.instigator);
 
-                const auto hitman = updateContext.find(attackContext.source);
-
-                if (!enemy || ! hitman) {
+                if (!enemy || !instigator) {
                     continue;
                 }
 
-                auto* svc = enemy->get<
-                    helios::engine::mechanics::scoring::components::ScoreValueComponent<
-                        helios::engine::mechanics::scoring::types::KillReward>>();
+                auto* svc = enemy->get<ScoreValueComponent<KillReward>>();
                 if (!svc) {
                     continue;
                 }
 
-                auto* scc = hitman->get<helios::engine::mechanics::scoring::components::ScorePoolComponent>();
+                auto* scc = instigator->get<ScorePoolComponent>();
                 if (!scc) {
                     continue;
                 }
 
-                auto scoreContext = helios::engine::mechanics::scoring::types::ScoreValueContext{
-                    .scoreTypeId = helios::engine::core::data::ScoreTypeId::id<helios::engine::mechanics::scoring::types::KillReward>(),
+                auto scoreContext = ScoreValueContext{
+                    .scoreTypeId = ScoreTypeId::id<KillReward>(),
                     .scorePoolId = scc->scorePoolId(),
                     .value = svc->score().value()
                 };
 
                 logger_.info(
                     std::format("Entity {0} killed. Reward: {1}",
-                    hitman->entityHandle().entityId,
+                    instigator->entityHandle().entityId,
                     svc->score().value())
                 );
 
-                updateContext.commandBuffer().add<helios::engine::mechanics::scoring::commands::UpdateScoreCommand>(
+                updateContext.commandBuffer().add<UpdateScoreCommand>(
                     std::move(scoreContext)
                 );
             }

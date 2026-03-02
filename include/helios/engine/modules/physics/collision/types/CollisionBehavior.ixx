@@ -80,7 +80,7 @@ export namespace helios::engine::modules::physics::collision::types {
          * @details Pushes the collision event to the double-buffered event bus
          * for processing in the next frame. Used for deferred collision handling.
          */
-        PushEvent   = 1 << 5,
+        PhaseEvent   = 1 << 5,
 
         /**
          * @brief Process collision event in the current frame.

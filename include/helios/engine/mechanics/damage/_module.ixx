@@ -6,3 +6,4 @@ export module helios.engine.mechanics.damage;
 
 export import helios.engine.mechanics.damage.components;
 export import helios.engine.mechanics.damage.systems;
+export import helios.engine.mechanics.damage.commands;

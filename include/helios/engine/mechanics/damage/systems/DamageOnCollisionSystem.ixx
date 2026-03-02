@@ -16,33 +16,46 @@ import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.runtime.world.GameWorld;
 
+import helios.engine.state.Bindings;
+import helios.engine.runtime.messaging.command.EngineCommandBuffer;
+
 import helios.engine.modules.physics.collision.events.SolidCollisionEvent;
 
 import helios.engine.mechanics.damage.components.DamageDealerComponent;
+import helios.engine.common.types;
 
 import helios.engine.mechanics.spawn.components.EmittedByComponent;
 
-import helios.engine.mechanics.combat.types.AttackContext;
-import helios.engine.mechanics.combat.components.LastAttackerComponent;
+import helios.engine.mechanics.damage.components.LastDamageComponent;
+import helios.engine.mechanics.damage.commands.ApplyDamageCommand;
 
 import helios.engine.mechanics.health.components.HealthComponent;
+import helios.engine.mechanics.health.types;
+import helios.engine.mechanics.health.events;
 
 import helios.math;
 import helios.util;
+
+using namespace helios::engine::mechanics::health::types;
+using namespace helios::engine::mechanics::health::events;
+using namespace helios::engine::mechanics::health::components;
+using namespace helios::engine::mechanics::damage::components;
+using namespace helios::engine::mechanics::damage::commands;
+using namespace helios::engine::mechanics::spawn::components;
+
+using namespace helios::engine::common::types;
 
 #define HELIOS_LOG_SCOPE "helios::engine::mechanics::damage::systems::DamageOnCollisionSystem"
 export namespace helios::engine::mechanics::damage::systems {
 
 
     /**
-     * @brief System that processes solid collision events and applies damage.
+     * @brief Emits HealthChangedEvents when solid collisions involve damage dealers.
      *
-     * Listens for SolidCollisionEvent and checks if the source entity has a
-     * DamageDealerComponent. If the target has a HealthComponent, applies the
-     * appropriate damage based on the target's collision layer.
-     *
-     * Also updates the target's LastAttackerComponent with the attack context
-     * for attribution in death events and scoring.
+     * Listens for SolidCollisionEvents and checks if the source entity has a
+     * DamageDealerComponent. If the target has a HealthComponent, emits an
+     * ApplyDamageCommand. Resolves the true attacker (instigator) via
+     * EmittedByComponent when applicable (e.g. projectiles).
      */
     class DamageOnCollisionSystem : public helios::engine::ecs::System {
 
@@ -71,7 +84,7 @@ export namespace helios::engine::mechanics::damage::systems {
                     continue;
                 }
 
-                auto* ddc = go->get<helios::engine::mechanics::damage::components::DamageDealerComponent>();
+                auto* ddc = go->get<DamageDealerComponent>();
                 if (!ddc) {
                     continue;
                 }
@@ -85,37 +98,42 @@ export namespace helios::engine::mechanics::damage::systems {
                 if (!target) {
                     continue;
                 }
-                auto* hc = target->get<helios::engine::mechanics::health::components::HealthComponent>();
+                auto* hc = target->get<HealthComponent>();
                 if (!hc) {
                     continue;
                 }
 
 
                 const auto damageApplied = ddc->damage(event.collisionContext().otherCollisionLayerId);
-                hc->takeDamage(damageApplied);
+
                 logger_.info(std::format(
-                    "Hitting entity {0} with {1} damage! {2} health left ",
-                    other.value().entityId,
-                    damageApplied,
-                    hc->health()
+                    "Hitting entity {0} with {1} damage!", other.value().entityId, damageApplied
                 ));
 
-                auto hitman = go->entityHandle();
+                // the go itself is the source
+                auto instigator= go->entityHandle();
+                auto causer = go->entityHandle();
 
-                auto* ebc = go->get<helios::engine::mechanics::spawn::components::EmittedByComponent>();
+                auto* ebc = go->get<EmittedByComponent>();
                 if (ebc) {
-                    hitman = ebc->source();
+                    // else the source is assigned to the go emitted
+                    // by the go
+                    instigator = ebc->source();
                 }
 
-                auto* lac = target->get<helios::engine::mechanics::combat::components::LastAttackerComponent>();
-                if (lac) {
-                    auto attackContext = helios::engine::mechanics::combat::types::AttackContext{
-                        .source = hitman,
-                        .contact = event.collisionContext().contact,
-                        .damageApplied = damageApplied
-                    };
-                    lac->setLastAttackContext(attackContext);
-                }
+                const auto interactionContext = InteractionContext{
+                    .target = other.value(),
+                    .instigator = instigator,
+                    .causer = causer,
+                    .contact = event.collisionContext().contact,
+                };
+
+                auto dc = DamageContext{
+                    .interactionContext = interactionContext,
+                    .damage = damageApplied
+                };
+
+                updateContext.commandBuffer().add<ApplyDamageCommand>(dc);
 
             }
 

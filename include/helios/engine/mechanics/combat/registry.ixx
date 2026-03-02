@@ -18,7 +18,6 @@ export namespace helios::engine::mechanics::combat {
         using R = helios::engine::ecs::ComponentReflector;
 
         R::registerType<components::ShootComponent>();
-        R::registerType<components::LastAttackerComponent>();
         R::registerType<components::Aim2DComponent>();
     }
 

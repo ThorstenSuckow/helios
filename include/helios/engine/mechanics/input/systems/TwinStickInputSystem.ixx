@@ -17,10 +17,14 @@ import helios.engine.ecs.System;
 import helios.engine.state.Bindings;
 import helios.engine.runtime.messaging.command.EngineCommandBuffer;
 
+import helios.engine.mechanics.lifecycle.components.DeadTagComponent;
+
 import helios.engine.modules.physics.motion.commands.Move2DCommand;
 import helios.engine.modules.physics.motion.commands.SteeringCommand;
 import helios.engine.mechanics.combat.commands.Aim2DCommand;
 import helios.engine.mechanics.combat.commands.ShootCommand;
+
+using namespace helios::engine::mechanics::lifecycle::components;
 
 export namespace helios::engine::mechanics::input::systems {
 
@@ -79,6 +83,22 @@ export namespace helios::engine::mechanics::input::systems {
             float speed = leftStick.length();
             auto ldir = helios::math::vec2f{0.0f, 0.0f};
 
+            // Right stick: aiming
+            const auto rightStick = inputSnapshot.gamepadState().right();
+            float freq = rightStick.length();
+            float finalFreq = 0.0f;
+            auto rdir = helios::math::vec2f{0.0f, 0.0f};
+
+            if (gameObject_.has<DeadTagComponent>()) {
+                commandBuffer.add<helios::engine::modules::physics::motion::commands::Move2DCommand>(
+                    gameObject_.entityHandle(), ldir, finalSpeed
+                );
+                commandBuffer.add<helios::engine::mechanics::combat::commands::Aim2DCommand>(
+                    gameObject_.entityHandle(), rdir, finalFreq
+                );
+                return;
+            }
+
             if (speed > helios::math::EPSILON_LENGTH) {
                 ldir = leftStick.normalize();
                 finalSpeed = speed;
@@ -94,12 +114,6 @@ export namespace helios::engine::mechanics::input::systems {
             commandBuffer.add<helios::engine::modules::physics::motion::commands::SteeringCommand>(
                 gameObject_.entityHandle(), ldir, finalSpeed
             );
-
-            // Right stick: aiming
-            const auto rightStick = inputSnapshot.gamepadState().right();
-            float freq = rightStick.length();
-            float finalFreq = 0.0f;
-            auto rdir = helios::math::vec2f{0.0f, 0.0f};
 
             if (freq > helios::math::EPSILON_LENGTH) {
                 rdir = rightStick.normalize();

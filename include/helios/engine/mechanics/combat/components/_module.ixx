@@ -6,4 +6,3 @@ export module helios.engine.mechanics.combat.components;
 
 export import helios.engine.mechanics.combat.components.Aim2DComponent;
 export import helios.engine.mechanics.combat.components.ShootComponent;
-export import helios.engine.mechanics.combat.components.LastAttackerComponent;

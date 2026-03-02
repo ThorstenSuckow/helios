@@ -1,32 +1,34 @@
 /**
- * @file LastAttackerComponent.ixx
+ * @file LastDamageComponent.ixx
  * @brief Component for tracking the last entity that attacked this entity.
  */
 module;
 
-export module helios.engine.mechanics.combat.components.LastAttackerComponent;
+export module helios.engine.mechanics.damage.components.LastDamageComponent;
 
 
 
-import helios.engine.mechanics.combat.types.AttackContext;
+import helios.engine.common.types.DamageContext;
 
-export namespace helios::engine::mechanics::combat::components {
+using namespace helios::engine::common::types;
+
+export namespace helios::engine::mechanics::damage::components {
 
     /**
-     * @brief Component that stores information about the last attack received.
+     * @brief Component that stores information about the last damage received.
      *
      * Used to track which entity last dealt damage to this entity. This enables
-     * attribution of kills for scoring and other game logic. The attack context
+     * attribution of kills for scoring and other game logic. The damage context
      * is updated by the damage system when damage is applied.
      */
-    class LastAttackerComponent {
+    class LastDamageComponent {
 
     private:
 
         /**
-         * @brief Context of the most recent attack received.
+         * @brief Context of the most recent damage received.
          */
-        helios::engine::mechanics::combat::types::AttackContext lastAttackContext_{};
+        helios::engine::common::types::DamageContext damageContext_{};
 
         /**
          * @brief Whether this component is enabled.
@@ -58,48 +60,48 @@ export namespace helios::engine::mechanics::combat::components {
             isEnabled_ = false;
         }
 
-        LastAttackerComponent() = default;
+        LastDamageComponent() = default;
 
         /**
          * @brief Copy constructor (creates empty state).
          *
          * @param other The component to copy from (state is not copied).
          */
-        LastAttackerComponent(const LastAttackerComponent& other) {}
+        LastDamageComponent(const LastDamageComponent& other) = default;
 
-        LastAttackerComponent& operator=(const LastAttackerComponent&) = default;
-        LastAttackerComponent(LastAttackerComponent&&) noexcept = default;
-        LastAttackerComponent& operator=(LastAttackerComponent&&) noexcept = default;
+        LastDamageComponent& operator=(const LastDamageComponent&) = default;
+        LastDamageComponent(LastDamageComponent&&) noexcept = default;
+        LastDamageComponent& operator=(LastDamageComponent&&) noexcept = default;
 
         /**
-         * @brief Sets the last attack context.
+         * @brief Sets the last damage context.
          *
-         * @param lastAttackContext The attack context to store.
+         * @param damageContext The damage context to store.
          */
-        void setLastAttackContext(const helios::engine::mechanics::combat::types::AttackContext lastAttackContext) noexcept {
-            lastAttackContext_ = lastAttackContext;
+        void setDamageContext(const DamageContext& damageContext) noexcept {
+            damageContext_ = damageContext;
         }
 
         /**
-         * @brief Returns the last attack context.
+         * @brief Returns the last damage context.
          *
          * @return The stored AttackContext.
          */
-        [[nodiscard]] helios::engine::mechanics::combat::types::AttackContext lastAttackContext() const noexcept {
-            return lastAttackContext_;
+        [[nodiscard]] DamageContext damageContext() const noexcept {
+            return damageContext_;
         }
 
         /**
          * @brief Resets the component to its initial state.
          */
         void reset() {
-            lastAttackContext_ = {};
+            damageContext_ = {};
         }
 
         /**
          * @brief Called when this entity is acquired from a pool.
          *
-         * @details Resets the attack context to ensure no stale data.
+         * @details Resets the damage context to ensure no stale data.
          */
         void onAcquire() noexcept {
             reset();
@@ -108,7 +110,7 @@ export namespace helios::engine::mechanics::combat::components {
         /**
          * @brief Called when this entity is released back to a pool.
          *
-         * @details Resets the attack context to ensure no stale data.
+         * @details Resets the damage context to ensure no stale data.
          */
         void onRelease() noexcept {
             reset();

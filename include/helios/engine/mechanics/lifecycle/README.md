@@ -10,8 +10,12 @@ This module provides mechanisms for controlling when components become active du
 
 | Class | Purpose |
 |-------|---------|
+| `Active` | Tag component marking an entity as active |
+| `Inactive` | Tag component marking an entity as inactive |
+| `DeadTagComponent` | Marker component attached on health depletion |
 | `DelayedComponentEnabler` | Component that tracks pending activations with timers |
 | `DelayedComponentEnablerSystem` | System that decrements timers and enables components |
+| `GameObjectLifecycleSystem` | System that reacts to health depletion and despawns entities |
 | `WorldLifecycleManager` | Manager that processes deferred world lifecycle commands |
 | `WorldLifecycleCommand` | Command carrying a `WorldLifecycleAction` |
 | `WorldLifecycleAction` | Enum defining available lifecycle operations (e.g. `Reset`) |

@@ -4,20 +4,15 @@ Systems for health processing.
 
 ## Systems
 
-| System | Phase | Description |
-|--------|-------|-------------|
-| `HealthUpdateSystem` | Update | Detects dead entities, issues despawn commands, emits death events |
+| System | Description |
+|--------|-------------|
+| `HealthUpdateClearSystem` | Clears the dirty flag on all active HealthComponents |
 
-## HealthUpdateSystem
 
-Processes entities with `HealthComponent` and `SpawnedByProfileComponent`:
+## HealthUpdateClearSystem
 
-1. Queries all entities with health components
-2. Checks if `isAlive()` returns false
-3. Issues `DespawnCommand` to return entity to pool
-4. Publishes `DeathEvent` with optional `AttackContext`
-
-The attack context is retrieved from `LastAttackerComponent` if present.
+Iterates all active `HealthComponent`s and calls `clearDirty()`, ensuring
+stale change notifications are discarded after observers have processed them.
 
 ---
 
@@ -25,5 +20,5 @@ The attack context is retrieved from `LastAttackerComponent` if present.
 <summary>Doxygen</summary><p>
 @namespace helios::engine::mechanics::health::systems
 @brief Systems for health processing.
-@details Contains systems that monitor health state and handle entity death.
+@details Contains systems that clear dirty state.
 </p></details>

@@ -18,6 +18,7 @@ export namespace helios::engine::mechanics::damage {
         using R = helios::engine::ecs::ComponentReflector;
 
         R::registerType<components::DamageDealerComponent>();
+        R::registerType<components::LastDamageComponent>();
     }
 
 }

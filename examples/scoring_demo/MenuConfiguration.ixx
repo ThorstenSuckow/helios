@@ -27,6 +27,7 @@ export namespace helios::examples::scoring {
      * @param hudScene Scene for HUD elements.
      */
     inline void configureMenus(
+        helios::engine::ecs::GameObject& shipGameObject,
         helios::engine::runtime::world::GameWorld& gameWorld,
         helios::rendering::RenderingDevice& renderingDevice,
         std::shared_ptr<helios::ext::opengl::rendering::shader::OpenGLShader> glyphShader,
@@ -65,7 +66,7 @@ export namespace helios::examples::scoring {
             );
 
 
-            auto titleText = helios::engine::builder::gameObject::GameObjectFactory::instance()
+            auto titleText = GameObjectFactory::instance()
                 .gameObject(gameWorld)
                 .withRendering([&](auto& rnb) {
                     rnb.textRenderable()
@@ -88,7 +89,7 @@ export namespace helios::examples::scoring {
                 })
                 .make();
 
-            auto pressStartText = helios::engine::builder::gameObject::GameObjectFactory::instance()
+            auto pressStartText = GameObjectFactory::instance()
                 .gameObject(gameWorld)
                 .withRendering([&](auto& rnb) {
                     rnb.textRenderable()
@@ -112,7 +113,7 @@ export namespace helios::examples::scoring {
                 .make();
 
 
-            auto menuBox = helios::engine::builder::gameObject::GameObjectFactory::instance()
+            auto menuBox = GameObjectFactory::instance()
                 .gameObject(gameWorld)
                 .withRendering([&](auto& rnb) {
                     rnb.meshRenderable()
@@ -140,7 +141,7 @@ export namespace helios::examples::scoring {
                 .make();
 
 
-            auto continueText = helios::engine::builder::gameObject::GameObjectFactory::instance()
+            auto continueText = GameObjectFactory::instance()
                 .gameObject(gameWorld)
                 .withRendering([&](auto& rnb) {
                     rnb.textRenderable()
@@ -176,7 +177,7 @@ export namespace helios::examples::scoring {
                 })
                 .make();
 
-            auto restartText = helios::engine::builder::gameObject::GameObjectFactory::instance()
+            auto restartText = GameObjectFactory::instance()
                 .gameObject(gameWorld)
                 .withRendering([&](auto& rnb) {
                     rnb.textRenderable()
@@ -211,7 +212,7 @@ export namespace helios::examples::scoring {
                 })
                 .make();
 
-            auto quitText = helios::engine::builder::gameObject::GameObjectFactory::instance()
+            auto quitText = GameObjectFactory::instance()
                 .gameObject(gameWorld)
                 .withRendering([&](auto& rnb) {
                     rnb.textRenderable()
@@ -246,7 +247,7 @@ export namespace helios::examples::scoring {
                 })
                 .make();
 
-            auto gameOverMenu = helios::engine::builder::gameObject::GameObjectFactory::instance()
+            auto gameOverMenu = GameObjectFactory::instance()
                 .gameObject(gameWorld)
                 .withRendering([&](auto& rnb) {
                     rnb.meshRenderable()
@@ -274,7 +275,7 @@ export namespace helios::examples::scoring {
                 .make();
 
 
-            auto gameOverText = helios::engine::builder::gameObject::GameObjectFactory::instance()
+            auto gameOverText = GameObjectFactory::instance()
                 .gameObject(gameWorld)
                 .withRendering([&](auto& rnb) {
                     rnb.textRenderable()
@@ -299,7 +300,7 @@ export namespace helios::examples::scoring {
                 })
                 .make();
 
-            auto gameOverRetryText = helios::engine::builder::gameObject::GameObjectFactory::instance()
+            auto gameOverRetryText = GameObjectFactory::instance()
                     .gameObject(gameWorld)
                     .withRendering([&](auto& rnb) {
                         rnb.textRenderable()
@@ -335,7 +336,7 @@ export namespace helios::examples::scoring {
                     .make();
 
 
-            auto gameOverQuitText = helios::engine::builder::gameObject::GameObjectFactory::instance()
+            auto gameOverQuitText = GameObjectFactory::instance()
                 .gameObject(gameWorld)
                 .withRendering([&](auto& rnb) {
                     rnb.textRenderable()
@@ -370,7 +371,58 @@ export namespace helios::examples::scoring {
                 })
                 .make();
 
-            auto scoreText = helios::engine::builder::gameObject::GameObjectFactory::instance()
+        auto shipSymbol = GameObjectFactory::instance()
+            .gameObject(gameWorld)
+            .withRendering([&](auto& rnb) {
+                rnb.meshRenderable()
+                   .shader(defaultShader)
+                   .color(helios::util::Colors::Yellow)
+                   .primitiveType(helios::rendering::mesh::PrimitiveType::LineLoop)
+                   .shape(std::make_shared<helios::rendering::asset::shape::basic::Triangle>())
+                   .attachTo(&hudScene.root());
+            })
+            .withTransform([&](auto& tb) {
+                tb.transform()
+                  .scale(helios::math::vec3f{12.0f, 12.0f, 0.0f})
+                  .rotate(90.0f, helios::math::Z_AXISf);
+            })
+            .withUiTransform([](auto& tb) {
+                tb.transform()
+                  .pivot(helios::engine::modules::ui::layout::Anchor::TopRight)
+                  .viewport(helios::engine::core::data::ViewportId{"hudViewport"})
+                  .anchor(helios::engine::modules::ui::layout::Anchor::TopRight)
+                  .offsets({108.0f, 94.0f, 0.0f, 0.0f});
+
+            })
+            .make();
+
+        auto livesText = GameObjectFactory::instance()
+            .gameObject(gameWorld)
+            .withRendering([&](auto& rnb) {
+                rnb.textRenderable()
+                   .fontId(uiTextFont)
+                   .formattedAsNumber("x {0}")
+                   .fontScale(0.8f)
+                   .fontResourceProvider(renderingDevice.fontResourceProvider())
+                   .shader(glyphShader)
+                   .color(helios::util::Colors::WhiteSmoke)
+                   .attachTo(&hudScene.root());
+            })
+            .withObserver([&](auto& ob) {
+               ob.observe()
+                 .lives(shipGameObject);
+            })
+            .withUiTransform([](auto& tb) {
+                tb.transform()
+                  .pivot(helios::engine::modules::ui::layout::Anchor::TopRight)
+                  .viewport(helios::engine::core::data::ViewportId{"hudViewport"})
+                  .anchor(helios::engine::modules::ui::layout::Anchor::TopRight)
+                  .offsets({100.0f, 50.0f, 0.0f, 0.0f});
+
+            })
+            .make();
+
+            auto scoreText = GameObjectFactory::instance()
                 .gameObject(gameWorld)
                 .withRendering([&](auto& rnb) {
                     rnb.textRenderable()
@@ -398,7 +450,7 @@ export namespace helios::examples::scoring {
                 })
                 .make();
 
-            auto highScoreText = helios::engine::builder::gameObject::GameObjectFactory::instance()
+            auto highScoreText = GameObjectFactory::instance()
                 .gameObject(gameWorld)
                 .withRendering([&](auto& rnb) {
                     rnb.textRenderable()
@@ -423,7 +475,7 @@ export namespace helios::examples::scoring {
                 })
                 .make();
 
-        auto countdownTimerText = helios::engine::builder::gameObject::GameObjectFactory::instance()
+        auto countdownTimerText = GameObjectFactory::instance()
             .gameObject(gameWorld)
             .withRendering([&](auto& rnb) {
                 rnb.textRenderable()
@@ -449,55 +501,9 @@ export namespace helios::examples::scoring {
             })
             .make();
 
-            // projectile game object
-            auto projectilePrefab = helios::engine::builder::gameObject::GameObjectFactory::instance()
-                .gameObject(gameWorld)
-                .withPrefabId(IdConfig::ProjectilePrefab)
-                .withRendering([&defaultShader, &root = *level->rootNode()](auto& rnb) {
-                    rnb.meshRenderable()
-                       .shader(defaultShader)
-                       .color(helios::util::Colors::Yellow)
-                       .primitiveType(helios::rendering::mesh::PrimitiveType::LineLoop)
-                       .shape(std::make_shared<helios::rendering::asset::shape::basic::Ellipse>(0.5f, 0.2f, 8))
-                       .attachTo(&root);
-                })
-                .withTransform([](auto& tb) {
-                    tb.transform()
-                      .scale(helios::math::vec3f(2.2f, 0.8f, 0.0f), helios::core::units::Unit::Meter);
-                })
-                .withCollision([](auto& cb) {
-                    cb.collision()
-                      .layerId(helios::examples::scoring::CollisionId::Projectile)
-                      .useBoundingBox()
-                      .hitPolicy(helios::engine::modules::physics::collision::types::HitPolicy::OneHit)
-                      .reportCollisions(true)
-                      .solidCollisionMask(helios::examples::scoring::CollisionId::Enemy)
-                      .onSolidCollision(
-                          helios::examples::scoring::CollisionId::Enemy,
-                          helios::engine::modules::physics::collision::types::CollisionBehavior::Despawn |
-                          helios::engine::modules::physics::collision::types::CollisionBehavior::PassEvent
-                      )
-                      .dealDamage(100.0f, helios::examples::scoring::CollisionId::Enemy);
 
-                    cb.levelBoundsCollision()
-                      .onCollision(helios::engine::modules::physics::collision::types::CollisionBehavior::Despawn);
-                })
-                .withMotion([](auto& mcb) {
-                    mcb.move2D()
-                       .speed(80.0f)
-                       .instantAcceleration(true);
-                    mcb.steering()
-                       .steeringSetsDirection(false)
-                       .instantSteering(true);
-                })
-                .withSpawn([](auto& sb) {
-                     sb.spawn()
-                       .useSpawnProfile()
-                       .trackEmitter();
-                 })
-                .make();
-
-
+            shipSymbol.setActive(true);
+            livesText.setActive(true);
             scoreText.setActive(true);
             countdownTimerText.setActive(true);
             highScoreText.setActive(true);

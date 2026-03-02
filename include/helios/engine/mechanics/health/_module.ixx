@@ -4,6 +4,10 @@
  */
 export module helios.engine.mechanics.health;
 
+
+export import helios.engine.mechanics.health.HealthManager;
+
 export import helios.engine.mechanics.health.components;
 export import helios.engine.mechanics.health.events;
 export import helios.engine.mechanics.health.systems;
+export import helios.engine.mechanics.health.types;

@@ -16,4 +16,5 @@ export import helios.examples.scoring.DemoTimerListener;
 export import helios.examples.scoring.GameStateListener;
 export import helios.examples.scoring.UiActionCommandPolicy;
 export import helios.examples.scoring.GameTimerConfiguration;
+export import helios.examples.scoring.ScoringDemoRuleSystem;
 

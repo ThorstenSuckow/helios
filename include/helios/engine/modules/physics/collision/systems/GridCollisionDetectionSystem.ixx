@@ -20,7 +20,7 @@ import helios.engine.runtime.world.UpdateContext;
 import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.GameWorld;
 
-import helios.engine.mechanics.lifecycle.components.Active;
+import helios.engine.mechanics.lifecycle.components;
 
 import helios.engine.modules.physics.collision.events.TriggerCollisionEvent;
 import helios.engine.modules.physics.collision.events.SolidCollisionEvent;
@@ -41,6 +41,7 @@ import helios.util.log;
 
 using namespace helios::engine::modules::physics::collision::components;
 using namespace helios::engine::modules::physics::collision::events;
+using namespace helios::engine::mechanics::lifecycle::components;
 
 #define HELIOS_LOG_SCOPE "helios::engine::modules::physics::systems::GridCollisionDetectionSystem"
 export namespace helios::engine::modules::physics::collision::systems {
@@ -441,7 +442,7 @@ export namespace helios::engine::modules::physics::collision::systems {
                 CollisionStateComponent,
                 AabbColliderComponent,
                 helios::engine::mechanics::lifecycle::components::Active
-            >().whereEnabled()) {
+            >().whereEnabled().exclude<DeadTagComponent>()) {
 
                 if (!acc->boundsInitialized()) {
                     continue;

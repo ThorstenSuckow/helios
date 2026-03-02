@@ -24,6 +24,9 @@ import helios.engine.modules.spatial.transform.components.TranslationStateCompon
 
 import helios.engine.mechanics.lifecycle.components.Active;
 
+import helios.engine.mechanics.lifecycle.components;
+
+using namespace helios::engine::mechanics::lifecycle::components;
 
 export namespace helios::engine::modules::ai::systems {
 
@@ -60,9 +63,9 @@ export namespace helios::engine::modules::ai::systems {
 
                 const auto entityHandle = cc->target();
 
-                const auto go = gameWorld_->find(entityHandle);
+                auto go = gameWorld_->find(entityHandle);
 
-                if (!go || !go->isActive()) {
+                if (!go || !go->isActive() || go->has<DeadTagComponent>()) {
                     continue;
                 }
 

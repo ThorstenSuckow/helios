@@ -28,7 +28,7 @@ export namespace helios::engine::mechanics::health::events {
         /**
          * @brief Context describing the health change.
          */
-        helios::engine::mechanics::health::types::HealthChangeContext HealthChangeContext_;
+        helios::engine::mechanics::health::types::HealthChangeContext healthChangeContext_;
 
     public:
 
@@ -39,7 +39,7 @@ export namespace helios::engine::mechanics::health::events {
          */
         explicit HealthChangedEvent(
                 const helios::engine::mechanics::health::types::HealthChangeContext& HealthChangeContext
-        ) : HealthChangeContext_(HealthChangeContext) {}
+        ) : healthChangeContext_(HealthChangeContext) {}
 
         /**
          * @brief Returns the health update context.
@@ -47,7 +47,7 @@ export namespace helios::engine::mechanics::health::events {
          * @return The HealthChangeContext for this event.
          */
         [[nodiscard]] helios::engine::mechanics::health::types::HealthChangeContext HealthChangeContext() const noexcept {
-            return HealthChangeContext_;
+            return healthChangeContext_;
         }
 
 

@@ -13,7 +13,6 @@ Type definitions for the health system.
 
 Bitmask enum with values:
 - `None` – No action
-- `PassEvent` / `PhaseEvent` / `FrameEvent` – Emit depleted events
 - `Despawn` – Queue the entity for despawning
 - `DeadTag` – Attach a DeadTagComponent
 

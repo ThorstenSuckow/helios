@@ -16,7 +16,7 @@ This namespace contains systems that handle scoring events, update score and hig
 
 ## Execution Order
 
-1. **CombatScoringSystem** - Listens for `DeathEvent`, checks for `ScoreValueComponent`, issues `UpdateScoreCommand`
+1. **CombatScoringSystem** - Listens for `HealthDepletedEvent`, checks for `ScoreValueComponent`, issues `UpdateScoreCommand`
 2. **ScoreObserverSystem** - Compares revision, propagates `ScorePoolSnapshot` to `ScoreObserverComponent`
 3. **MaxScoreObserverSystem** - Compares revision, propagates `MaxScorePoolSnapshot` to `MaxScoreObserverComponent`
 4. **ScoreObserverClearSystem** - Clears `hasUpdate` flag after UI systems have processed score changes

@@ -57,14 +57,14 @@ export namespace helios::engine::modules::ui::binding::systems {
                 auto go = updateContext.find(lbc->target());
 
                 if (!go) {
-                    return;
+                    continue;
                 }
 
-                if (auto* lc = go->get<LivesComponent>())
-
-                if (lbc->livesRevision() != lc->livesRevision()) {
-                    txt->setText(dfc->format(lc->lives()));
-                    lbc->setLivesRevision(lc->livesRevision());
+                if (auto* lc = go->get<LivesComponent>()) {
+                    if (lbc->livesRevision() != lc->livesRevision()) {
+                        txt->setText(dfc->format(lc->lives()));
+                        lbc->setLivesRevision(lc->livesRevision());
+                    }
                 }
 
             }

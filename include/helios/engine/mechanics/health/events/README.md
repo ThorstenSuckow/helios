@@ -11,10 +11,7 @@ Health-related events.
 
 ## HealthDepletedEvent
 
-Published by `HealthUpdateSystem` when an entity dies. Contains:
-
-- `source()` – Handle of the deceased entity
-- `attackContext()` – Optional combat context if death was from damage
+Published by `HealthManager` when an entity dies. 
 
 Used by other systems (e.g., `CombatScoringSystem`, `GameObjectLifecycleSystem`) to react to entity deaths.
 

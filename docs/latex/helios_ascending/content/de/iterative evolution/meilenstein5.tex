@@ -1,52 +1,61 @@
 \subsection{Meilenstein 5: ECS und UI-Architektur}
 
-
-Für Meilenstein 5 war vorgesehen, die Enginesysteme mit dem umzusetzenden Gameplay zu verzahnen.
-Da die fundamentalen Enginesysteme zu diesem Zeitpunkt bereits eine stabile Struktur aufwiesen, wurde zunächst die Datenhaltung der Spielobjekte innerhalb der GameWorld auf eine idiomatischere ECS-Architektur umgestellt.
-Dabei beschränkten sich die notwendigen Änderungen weitgehend auf den Datenhaltungs-Unterbau; die APIs von \textit{GameWorld} und \textit{GameObject} konnten durch die Kapselung der Datenverwaltung weitgehend unverändert bleiben (Zitat Information Hiding Parnas).
+Für Meilenstein~5 war vorgesehen, die Enginesysteme mit dem umzusetzenden Gameplay zu verzahnen.
+Da die fundamentalen Enginesysteme zu diesem Zeitpunkt bereits eine stabile Struktur aufwiesen, wurde zunächst die Datenhaltung der Spielobjekte innerhalb der GameWorld auf eine idiomatischere ECS-Architektur umgestellt.\footnote{
+    Wir verwenden hier den Begriff ``idiomatisch'' im Sinne einer für Game-Engines typischen, datenorientierten Architekturentscheidung, die insbesondere auf Laufzeiteffizienz abzielt.
+Zwar vereinfacht ein Objekt-Orientiertes-Design (OOD) das Abstrahieren hierarchischer Strukturen und kann deshalb gerade in frühen Entwurfsphasen hilfreich sein.
+Unter dem Blickwinkel einer Game Engine als Echtzeitsystem (\cite[525]{Gre19}), dem nur begrenzte Ressourcen zur Verfügung stehen, ist ein Daten-Orientiertes Design (DOD) mit den dafür typischen dichten Speicherlayouts und der Vermeidung tiefer Vererbungshierarchien allerdings ein geeigneterer Ansatz.
+Empirische Studien, die dies unterstreichen, finden sich beispielsweise bei~\cite{FAUM20}.
+}
+Die notwendigen Änderungen beschränkten sich dabei weitgehend auf den Datenhaltungs-Unterbau; die APIs von \textit{GameWorld} und \textit{GameObject} konnten durch die Kapselung der Datenverwaltung weitgehend unverändert bleiben (\cite{Par72}).
 Der größte Migrationsaufwand entstand durch den Austausch der bislang in \textit{helios} verwendeten GUIDs zur Identifikation von Spielobjekten.\footnote{Eine GUID ist eine global eindeutige Identifikationsnummer, die intern als \texttt{uint\_64\_t} implementiert ist.}\\
 
-Mit dem Meilenstein wurde außerdem die Trennung von Interface und Implementation Units aufgehoben: Mit dem für einen iterativen Entwicklungsprozess typischen Refactoring-Aufwand ergab sich trotz ausreichender IDE-Unterstützung (CLion) eine spürbare kognitive Last durch die häufigen Kontextwechsel bei der Navigation durch die Quelldateien, was Verzögerung bei der konsistenten Anpassung von Schnittstellendefinition und zugehöriger Implementierung begünstigte.
-Die Auswirkungen auf die Kompilierzeit wurden als vernachlässigbar eingestuft.\\
+Mit dem Meilenstein wurde außerdem die Trennung von Interface- und Implementation-Units aufgehoben.
+Im Rahmen des für iterative Entwicklungsprozesse typischen Refactorings führte diese Aufteilung trotz ausreichender IDE-Unterstützung (CLion) zu einer spürbaren kognitiven Last.
+Häufige Kontextwechsel bei der Navigation durch die Quelldateien begünstigten Verzögerungen bei der konsistenten Anpassung von Schnittstellendefinition und zugehöriger Implementierung.
+Die Auswirkungen auf die Kompilierzeit wurden im Projektkontext als vernachlässigbar eingestuft.\\
+Mit zunehmender Erfahrung mit C++ im Rahmen dieses Projekts wuchs das Vertrauen in die eigene Codebasis.
+Die ursprünglich konsequente Verwendung von \texttt{unique\_ptr} und \texttt{shared\_ptr} zur Abbildung eindeutiger Besitzverhältnisse sowie zur Unterstützung move-basierter (Besitz)Übergaben wurde in tieferen Schichten der Engine schrittweise durch rohe Zeiger und Referenzen ersetzt.
+Referenzen als Übergabeparameter sollen dabei auch eine an anderer Stelle vereinbarte Lebenszeitgarantie sicherstellen, die in höheren Schichten  modelliert wird.\\
 
-Mit zunehmender Erfahrung mit C++ in diesem Projekt wuchs auch das Vertrauen in die eigene Codebasis.
-Die ursprünglich konsequente Verwendung von \texttt{unique\_ptr} und \texttt{shared\_ptr} zur Abbildung eindeutiger Besitzverhältnissen und Move-Semantik wurde in den tieferen Schichten der Engine schrittweise durch rohe Zeiger und Referenzen ersetzt.
-Vorkommen von Referenzen als Übergabeparameter sollen als Schnittstellendefinition eine an anderer Stelle vereinbarte Lebenszeitgarantie liefern, die in höheren Schichten durch \texttt{unique\_ptr} ausgedrückt wird.\\
+Mit der Umstellung des \textit{Mental Models}\footnote{
+``Mature programmers know that the idea that everything is an object \textit{is a myth}. Sometimes you really \textit{do} want simple data structures with procedures operating on them``.~\cite[97, Hervorhebung i.O.]{Mar08}
+} auf \textit{composition over inheritance} wurde zudem Template-Metaprogrammierung als idiomatischer Ansatz zur Bereitstellung generischer Komponenten und Systeme etabliert.
+Dies ermöglichte einen weitgehenden Verzicht auf Vererbung, virtuelle Funktionen und die damit verbundenen Laufzeitkosten (\cite[S. 55]{agnerfog}).
+Ohne Vererbung und Basisklassen kommt \textit{helios} nicht aus, allerdings wurde diese mit zunehmendem Projektfortschritt mit mehr bedacht und gezielter eingesetzt, beispielsweise im Rahmen des Type-Erasure-Idioms (\cite[S. 318-328]{Ban22}).\footnote{
+Auch \textit{Bayliss} weist darauf hin, dass DOD zwar Gründe liefern kann, auf Vererbung und Polymorphie in zu verzichten, es in der Praxis aber kein striktes Regelwerk darstellt, und führt den Gebrauch von Interfaces in \textit{Unity DOTS} als Beispiel~\cite[38]{Bay22}.
+}
+Die umgesetzten Vererbungshierarchie bleiben allesamt flach.
+Eine Ausnahme bilden spezialisierte Manager, die von \texttt{Manager} erben und durch die gleichzeitige Nutzung als \texttt{CommandHandler} die Schnittstelle mit \texttt{TypedCommandHandler<T>} kombinieren.
+Da das Leeren der Buffer dieser Objekte jedoch vergleichsweise selten in der GameLoop geschieht,\footnote{ hierfür sind individuell konfigurierbare \texttt{CommitPoints} sowie \textit{Phasenübergänge} vorgesehen} wird der Overhead durch VTable-Lookups hier als nicht kritisch bewertet - eine belastbare Messung steht jedoch aus.\\
 
-Mit Umstellung des \textit{Mental Models} auf \textit{composition over inheritance} wurde zudem die Template-Metaprogrammierung als idiomatischer Ansatz zur Bereitstellung generischer Komponenten und Systemen etabliert.
-Dies rmöglicht einen weitgehenden Verzicht auf Vererbung, virtuelle Funktionen und den damit verbundenen Laufzeitkosten.
-Ganz ohne Basisklassen kommt helios nicht aus.
-Diese beschränken sich jedoch überwiegend auf den Einsatz bei dem Type-Erasure-Idiom und bleiben in der Regel in einer flachen Vererbungshierarchie.
-Eine Ausnahme bilden spezialisierte Manager, die von \texttt{Manager} erben und durch die gleichzeitige Nutzung als \texttt{CommandHandler} die Schnittstelle mit der von \texttt{TypedCommandHandler<T>} kombinieren.
-Da Manager jedoch vergleichsweise selten in der GameLoop geflusht werden (hierzu sind individuell konfigurierbare \texttt{CommitPoints} sowie \textit{Phasenübergängen} vorgesehen), bewerten wir den Overhead durch die VTable-Lookups an dieser Stelle nicht als kritisch, wobei eine belastbare Messung aussteht.\\
+Zur Realisierung dichter Speicherlayouts wird außerdem ein \textit{Dense Type Index} (\texttt{TypeIndex}) verwendet.
+Dieser wird über ein \texttt{struct} initialisiert und erzeugt auf Basis der übergebenen Typen einen dichten Index.
+In entsprechenden Anwendungsfällen ermöglicht dies einen elementweisen Zugriff in $O(1)$, während sich dichte (\textit{dense}) Speicherlayouts ergeben, die eine Iteration in $O(N)$ erlauben.
+In den meisten Fällen entspricht $N$ der tatsächlichen Elementanzahl $M$; nur selten gilt aufgrund der \textit{sparsity} solcher Container $N > M$.\\
 
-In Kombination mit Type-Erasure, das die Ablage spezialisierter Typen in einem als type-erased Vektor erlaubt, nutzen wir außerdem einen \texttt{TypeIndex}.
-Dieser wird mit einem \texttt{struct} initialisiert und erzeugt auf Basis der übergebenen Typen einen dichten Index.
-In entsprechenden Anwendungsfällen ermöglicht dies einen elementweisen Zugriff in $O(1)$, während sich dichte (\textit{dense}) Speicherlayouts, die eine Iteration in $O(N)$ erlauben.
-In den meisten Fällen entspricht $N$ der tatsächlichen Elementanzahl $M$, und nur in seltenen Fällen ist aufgrund der \textit{sparsity} $N > M$.\\
+Für die Steuerung des Spiels war zudem die Einführung eines User Interfaces notwendig, damit der Anwender neben spielspezifischen Informationen auf einem Heads-Up-Display (\textit{HUD}) auch Menüoptionen zum Starten, Pausieren, Neustarten und Beenden des Spiels erhält.
 
-Für die Steuerung des Spiels war auch die Einführung eines User Interfaces notwendig, damit der Anwender neben spielspezifischen Informationen auf einem Heads-Up-Display (\textit{Hud}) auch Menüoptionen zur Verfügung hat, um das Spiel zu starten, zu pausieren, neuzustarten und zu beenden.
+Die Umsetzung erwies sich dabei als Domänenbruch gegenüber den parallel fertigzustellenden Spielmechaniken; diese Zusatzkomplexität wurde in der Meilensteinplanung nicht ausreichend berücksichtigt, die Fertigstellung  hat sich dabei wesentlich verzögert.\\
 
-Die Umsetzung erwies sich als kompletter Domänenbruch mit den fertigzustellenden Spielmechaniken, und die Planung für den Meilenstein hat dies nicht ausreichend berücksichtigt, so dass die Fertigstellung des Meilensteins in Verzug gekommen ist.
-
-Dabei folgten wir de Vries~\cite[S. 449-457]{Vri20} und haben die Textanzeige als einfaches Glyph-Rendering mittels Freetype implementiert und berücksichtigen das Rendering in einem separaten Durchlauf in der Render Pipeline, nach dem Mesh-Rendering.
-
-Texte selber behandeln wir dabei als spezialisierte Renderables, die neben der Zuordnung der Font Ressource auch die Konfiguration von Skalierungsfaktor sowie Textfarbe erlauben.
-Ein semantischer Bruch entsteht durch die Behandlung der Texte als Game Objects, die - genauso wie die aktiv an dem Gameplay teilnehmenden Objekte - in der GameWorld verankert sind (siehe~\ref{lst:gameobject_text}).
-Komponenten, welche die für die Anzeige benötigten Daten vorhalten (Anzahl Spielerleben, ScorePool-Ids, Timer) werden über ein einfaches Binding-System in einer GameLoop-Iteration nach Aktualisierungen abgefragt und zur Anzeige gebracht.
+Für die Textdarstellung folgen wir de~Vries~\cite[S.~449--457]{Vri20} und haben die Anzeige als Glyph-Rendering mittels FreeType (\cite{freetype}) umgesetzt.
+Das Text-Rendering wird in der Render-Pipeline in einem separaten Durchlauf nach dem Mesh-Rendering berücksichtigt.
+Texte werden dabei als spezialisierte Renderables behandelt, die neben der Zuordnung der Font-Ressource auch die Konfiguration von Skalierungsfaktor und Textfarbe erlauben.
+Ein weiterer Bruch - in semantischer Hinsicht - entsteht durch die Behandlung von Texten als GameObjects, die - analog zu aktiv am Gameplay teilnehmenden Objekten - in der GameWorld verankert sind (siehe~\ref{lst:gameobject_text}) - was gleichzeitig Implementierungsaufwand eingespart hat:
+Komponenten, welche die für die Anzeige benötigten Daten vorhalten (z.\,B.~Anzahl Spielerleben, ScorePool-Ids, Timer), werden über ein einfaches Binding-System pro GameLoop-Iteration abgefragt und zur Anzeige gebracht.
 
 \begin{lstlisting}[style=c++style,
-caption={Implementierung eines einfachen Score-Textes, der die Punktzahl des Spielers anzeigt. Die UI-Elemente werden genau wie aktive, mit der Spielwelt verbundene Objekte betrachtet und entsprechend konfiguriert.},
-label=lst:gameobject_text]
-    auto scoreText = GameObjectFactory::instance()
-        .gameObject(gameWorld)
-        .withRendering([&](auto& rnb) {
-            rnb.textRenderable()
-               .formattedAsNumber("Score: {:.0f}")
-               .fontScale(1.0f)
-               ...
-               .color(helios::util::Colors::WhiteSmoke)
-               .attachTo(&hudScene.root());
+  caption={Implementierung eines einfachen Score-Textes, der die Punktzahl des Spielers anzeigt. UI-Elemente werden analog zu aktiven, mit der Spielwelt verbundenen Objekten modelliert und entsprechend konfiguriert.},
+  label=lst:gameobject_text]
+auto scoreText = GameObjectFactory::instance()
+    .gameObject(gameWorld)
+    .withRendering([&](auto& rnb) {
+        rnb.textRenderable()
+           .formattedAsNumber("Score: {:.0f}")
+           .fontScale(1.0f)
+           ...
+           .color(helios::util::Colors::WhiteSmoke)
+           .attachTo(&hudScene.root());
     })
     .withObserver([&](auto& ob) {
         ob.observe()
@@ -62,43 +71,47 @@ label=lst:gameobject_text]
     .make();
 \end{lstlisting}
 
-Neben der Textanzeige erforderte die Umsetzung der Spielmenüs außerdem eine Evaluierung von Spielzuständen, die wir relativ flexibel als Endlichen Automaten mit in das Ökosystem der Engine integrieren konnten.
-Die Implementierung des Moduls \texttt{helios.engine.state} ist hierbei Template-basiert und erlaubt die Definition weiterer Zustandsautomaten, um bspw. Hierarchische Automaten für eine komplexere Spielsteuerung zu realisieren.
+Neben der Textanzeige erforderte die Umsetzung der Spielmenüs außerdem eine Evaluierung von Spielzuständen, welches in helios über endliche Automaten realisiert wurde.
+Die Implementierung des Moduls \texttt{helios.engine.state} ist template-basiert und erlaubt die Definition weiterer Zustandsautomaten, um beispielsweise hierarchische Automaten für komplexere Spielsteuerung zu realisieren.
+Als Basis-Implementierung liefert \textit{helios} die Automaten \texttt{GameState} und \texttt{MatchState}.
+\texttt{GameState} repräsentiert dabei eine übergeordnete ``\textit{Shell}'' und definiert allgemeine Systemzustände wie \texttt{Title}, \texttt{Running} und \texttt{Paused}.
+\texttt{MatchState} ist als eingebetteter Automat ausgeführt und übernimmt die Zustandssteuerung einzelner Spieldurchläufe mit Zuständen wie \texttt{Warmup}, \texttt{Playing} und \texttt{GameOver}.\\
+Erwähnenswert sind in diesem Kontext die Anpassungen an die \texttt{GameLoop}, die in die Phasen \texttt{Pre}, \texttt{Main} und \texttt{Post} unterteilt ist.
+Dies erlaubt eine klare Verortung von Spiellogik, Physik-Simulation, Kollisionserkennung, Synchronisation des Szenegraphen sowie weiterer für die Spielmechanik relevanter Systeme.
+\texttt{CommitPoints} ermöglichen hierbei eine feingranulare Konfiguration der Verarbeitungsschritte:
+Neben den vordefinierten Phasen- und Framewechseln können innerhalb einer Phase mehrere \texttt{Pass}es definiert werden, die jeweils die als Double-Buffer realisierten MessageBuffer swappen (Kopie Write $\rightarrow$ Read, Löschen von Write).
 
-Als Basis-Implementierung liefert helios die Module \texttt{GameState} und \texttt{MatchState}, wobei \texttt{GameState} die Umsetzung einer übergeordneten ``\textit{Shell}`` repräsentiert und allgemeine Systemzustände wie \texttt{Title}, \texttt{Running} und \texttt{Paused} definiert.
-\textt{MatchState} ist eine Basisimplementierung eines eingebetteten Automaten und übernimmt Zustands(steuerung) von individuellen Spieldurchläufen, mit Zuständen wie \texttt{Warmup}, \texttt{Playing} und \texttt{GameOver}.\\
+Alle Systeme lesen dabei aus einem Nachrichtenausgang und schreiben in einen Nachrichtenausgang:
+Auf diese Weise bleibt der gewünschte Determinismus erhalten, wonach nach einem \texttt{CommitPoint} ein wohldefinierter Nachrichtenstand an die Systeme im darauffolgenden Pass übergeben wird.
+Dies führt das Konzept der Datensnapshots fort, die bereits an anderer Stelle in helios klar voneinander abgegrenzte Verarbeitungsschritte erlauben, wie der SceneGraph-Snapshot, der Gamepad-Snapshot oder Snapshots von Objekt-Pools.
 
-Erwähnenswert sind in diesem Kontext die Anpassungen an die \texttt{GameLoop}, die in verschiedene Phasen unterteilt ist: \texttt{Pre}, \texttt{Main} und \texttt{Post}.
-Dies erlaubt eine einfache Verortung von Spiellogik, Physik-Simulation, Kollisionserkennung, Synchronisation des Szenegraphen und weiterer, für die Spielmechanik wichtige Systeme.
-\textt{CommitPoint}s erlauben hierbei die individuelle Konfiguration von Systemübergängen: So können neben den vordefinierten Phasen- und Framewechseln auch mehrere ``Pässe`` (\texttt{Pass}es) definiert werden, die innerhalb einer Phase verschiedene MessageBuffer - die allesamt als Double Buffer realisiert sind - swappen und damit klar abgegrenzte Verarbeitungsschirtte bilden.
-Wir folgen hiermit auf einer feingranularen Ebene dem KOnzeot der Datensnapshots, die wir zuerst in dem Szenegraphen implementiert haben, um einen Ausschnitt der zu rendernden Szeneknoten zu erhalten, mit den Snapshots der InputDaten und Objekt-Pools weitergeführt haben und letztendlich auch bei dem Messaging-System wiederfinden: Dies erlaubt die Erstellugn klar abgegrenzter Verarbeitungsschritte.
-Dadurch können mehrere Systeme, die alle in einer Phase laufen, entsprechend Nachrichten senden und empfangen, ohne, dass das Konzept des Double-Bufferings aufgebrochen wird, was ansonsten den gewünschten Determinismus aufweicht, dass nach einem Commit-Point ein fest definierter Stand an nachrichten an die Systeme in dem darauffolgenden Pass geleitet werden, ohne, dass durch ein ``interweaving`` diese Nachrichten-Queue um eigene zusätzliche Nachrichten anreichert.
-Mit Einführung der State Machines wurde die GameLoop dann um die Möglichkeit erweitert, die einzelnen Pässe über eine Bitmaske den Zuständen zuzuordnen, in denen sie laufen sollen.
+Mit Einführung der State Machines wurde die GameLoop zusätzlich um die Möglichkeit erweitert, Pässe über eine Bitmaske den Zuständen zuzuordnen, in denen sie ausgeführt werden sollen.
+
 
 \begin{figure}[H]
-\centering
-\includegraphics[width=0.8\columnwidth]{content/de/iterative evolution/img/scoringdemo_title}
-\caption{Titelbildschirm der Scoring-Demo, die mit Meilenstein 5 veröffentlich wurde. (Quelle: eigene Aufnahme)}
-\label{fig:scoringdemo_title}
+  \centering
+  \includegraphics[width=0.8\columnwidth]{content/de/iterative evolution/img/scoringdemo_title}
+  \caption{Titelbildschirm der Scoring-Demo, die mit Meilenstein 5 veröffentlich wurde. (Quelle: eigene Aufnahme)}
+  \label{fig:scoringdemo_title}
 \end{figure}
 
 \begin{figure}[H]
-\centering
-\includegraphics[width=0.8\columnwidth]{content/de/iterative evolution/img/scoringdemo_playing}
-\caption{Die Scoring-Demo enthält die wesentlichen für diesen Meilenstein festgesetzten Anforderungen, darunter Highscore-Anzeige sowie ein zeitbegrenztes Level. Dargestellt ist im UI außerdem die Anzeige der zur verfügbar stehenden Leben. (Quelle: eigene Aufnahme)}
-\label{fig:scoringdemo_running}
+  \centering
+  \includegraphics[width=0.8\columnwidth]{content/de/iterative evolution/img/scoringdemo_playing}
+  \caption{Die Scoring-Demo enthält die wesentlichen für diesen Meilenstein festgesetzten Anforderungen, darunter Highscore-Anzeige sowie ein zeitbegrenztes Level. Dargestellt ist im UI außerdem die Anzeige der zur verfügbar stehenden Leben. (Quelle: eigene Aufnahme)}
+  \label{fig:scoringdemo_running}
 \end{figure}
 
 \begin{figure}[H]
-\centering
-\includegraphics[width=0.8\columnwidth]{content/de/iterative evolution/img/scoringdemo_pause}
-\caption{Pause-Menü der Scoring-Demo. Von hier kann wieder in den Titelbildschirm gewechselt, das Spiel beendet oder entsprechend fortgesetzt werden. (Quelle: eigene Aufnahme)}
-\label{fig:scoringdemo_pause}
+  \centering
+  \includegraphics[width=0.8\columnwidth]{content/de/iterative evolution/img/scoringdemo_pause}
+  \caption{Pause-Menü der Scoring-Demo. Von hier kann wieder in den Titelbildschirm gewechselt, das Spiel beendet oder entsprechend fortgesetzt werden. (Quelle: eigene Aufnahme)}
+  \label{fig:scoringdemo_pause}
 \end{figure}
 
 \begin{figure}[H]
-\centering
-\includegraphics[width=0.8\columnwidth]{content/de/iterative evolution/img/scoringdemo_gameover}
-\caption{Gameover-Screen der Scoring-Demo. (Quelle: eigene Aufnahme)}
-\label{fig:scoringdemo_gameover}
+  \centering
+  \includegraphics[width=0.8\columnwidth]{content/de/iterative evolution/img/scoringdemo_gameover}
+  \caption{Gameover-Screen der Scoring-Demo. (Quelle: eigene Aufnahme)}
+  \label{fig:scoringdemo_gameover}
 \end{figure}

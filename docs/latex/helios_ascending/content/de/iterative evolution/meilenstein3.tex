@@ -40,7 +40,9 @@ Auch hier war zunächst unklar, wie in einem gewohnten OOP-Ansatz ein vernünfti
 
 Um die Komplexität zu diesem Zeitpunkt beherrschbar zu halten und sich im Sinne des \textit{Tracer Bullet Development} schrittweise den Anforderungen zu nähern, wurde entschieden, Physik- und Transformationslogiken aus dem \texttt{GameObject}-Kern zu extrahieren.
 Das \texttt{GameObject} wurde fortan als reiner Komponenten-Container betrachtet.
-Dass die Terminologie zu diesem Zeitpunkt zwar an ECS angelehnt, aber kein reines ECS darstellt, machen folgende Eigenschaften der Umsetzung deutlich: Components sind polymorphe Heap-Objekte, die eigentliche Entität existiert physisch als Owner Object statt als bloßes Handle; die Updates der Systeme basieren auf komponentenweiser Laufzeitprüfung (siehe Abbildung~\ref{fig:gameobject_uml}.
+Dass die Terminologie zu diesem Zeitpunkt zwar an ECS angelehnt, aber kein reines ECS darstellt, machen folgende Eigenschaften der Umsetzung deutlich: Components sind polymorphe Heap-Objekte, die eigentliche Entität existiert physisch als Owner Object statt als bloßes Handle; die Updates der Systeme basieren auf komponentenweiser Laufzeitprüfung (siehe Abbildung~\ref{fig:gameobject_uml}.\footnote{
+Damit ähnelte die Umsetzung eher einem ``compound object``~\cite[S. 88]{Fab18}, wie es bspw. in Unity zu finden ist~\cite{UnityGameObject}
+}
 Die Abgrenzung zu einem reinen ECS-Design nehmen wir in Kapitel 3 wieder auf.\\
 
 Als wesentliche Merkmale blieben bestehen:
@@ -77,7 +79,7 @@ Dieses prüft kontinuierlich, ob sich Objekte innerhalb einer definierten Region
 Je nach konfiguriertem Verhalten (\textit{Despawn} oder \textit{Bounce}) ergeben sich unterschiedliche Konsequenzen: Projektile werden beim Verlassen der Bounds in der Regel entfernt (Despawn), während das Spielerschiff durch einen \textit{Bounce}-Effekt zurück in das Spielfeld geführt wird.
 Die Intensität dieses Abprall-Effekts lässt sich dabei über einen Elastizitätsparameter steuern.\\
 
-Um die Performance beim Feuern vieler Projektile zu stabilisieren, wurde ein frühes \textit{Pooling}-Verfahren eingeführt, damit nicht zur Laufzeit Heap-Allokationen für die Erstellung neuer Spielobjekte stattfinden.
+Um die Performance beim Feuern vieler Projektile zu stabilisieren, wurde ein frühes \textit{Pooling}-Verfahren eingeführt, damit nicht zur Laufzeit Heap-Allokationen für die Erstellung neuer Spielobjekte stattfinden (\cite[S. 1074-1079]{Gre24}).
 Ein spezialisiertes \texttt{ProjectilePoolSystem} verwaltet dabei die Lebenszyklen der Projektile: Anstatt Objekte bei jedem Schuss neu zu instanziieren und beim Verlassen der Spielwelt zu zerstören, werden despawnte Projektile deaktiviert und für spätere Schussereignisse wiederverwendet.\\
 
 Dieser Ansatz findet sich auch in späteren Iterationen der Engine wieder, wo helios das Pooling als eigenständiges, zentrales KKonzept versteht und entsprechende Systeme dafür bereitstellt:

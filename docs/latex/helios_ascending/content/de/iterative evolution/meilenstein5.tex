@@ -3,7 +3,7 @@
 
 Für Meilenstein 5 war vorgesehen, die Enginesysteme mit dem umzusetzenden Gameplay zu verzahnen.
 Da die fundamentalen Enginesysteme zu diesem Zeitpunkt bereits eine stabile Struktur aufwiesen, wurde zunächst die Datenhaltung der Spielobjekte innerhalb der GameWorld auf eine idiomatischere ECS-Architektur umgestellt.
-Dabei beschränkten sich die notwendigen Änderungen weitgehend auf den Datenhaltungs-Unterbau; die APIs von \textit{GameWorld} und \textit{GameObject} konnten im Sinne des Open-Closed-Principle (OCP) (\cite[]{OCP}) größtenteils unverändert übernommen werden.
+Dabei beschränkten sich die notwendigen Änderungen weitgehend auf den Datenhaltungs-Unterbau; die APIs von \textit{GameWorld} und \textit{GameObject} konnten durch die Kapselung der Datenverwaltung weitestgehend unverändert bleiben (Zitat Information Hiding Parnas).
 Der größte Migrationsaufwand entstand durch den Austausch der bislang in \textit{helios} verwendeten GUIDs zur Identifikation von Spielobjekten.\footnote{Eine GUID ist eine global eindeutige Identifikationsnummer, die intern als \texttt{uint\_64\_t} implementiert ist.}\\
 
 Mit dem Meilenstein wurde außerdem die Trennung von Interface und Implementation Units aufgehoben: Mit dem für einen iterativen Entwicklungsprozess typischen Refactoring-Aufwand ergab sich trotz ausreichender IDE-Unterstützung (CLion) eine spürbare kognitive Last durch die häufigen Kontextwechsel bei der Navigation durch die Quelldateien, was Verzögerung bei der konsistenten Anpassung von Schnittstellendefinition und zugehöriger Implementierung begünstigte.

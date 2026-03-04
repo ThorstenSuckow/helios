@@ -145,14 +145,14 @@
 <para>Abstract base class for managers that process deferred operations. </para>
     </briefdescription>
     <detaileddescription>
-<para>Managers handle cross-cutting concerns that require deferred processing separate from the System update cycle. They are registered with the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> and receive lifecycle callbacks for initialization and per-frame flushing.</para>
+<para>Managers handle cross-cutting concerns that require deferred processing separate from the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System" kindref="compound">System</ref> update cycle. They are registered with the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> and receive lifecycle callbacks for initialization and per-frame flushing.</para>
 <para>## Lifecycle</para>
 <para>1. **Registration:** <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> is added via `GameWorld::addManager&lt;T&gt;()` 2. **onAdd():** Called immediately after registration 3. **init():** Called during <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> initialization (before game loop starts) 4. **flush():** Called each frame after Systems complete, to process queued requests</para>
 <para>## Use Cases</para>
 <para><itemizedlist>
 <listitem><para>**GameObjectPoolManager:** Manages entity pooling and acquire/release lifecycle</para>
 </listitem><listitem><para>**SpawnManager:** Handles spawn request processing and entity initialization</para>
-</listitem><listitem><para>**Custom Managers:** Any deferred processing that doesn&apos;t fit the System model</para>
+</listitem><listitem><para>**Custom Managers:** Any deferred processing that doesn&apos;t fit the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System" kindref="compound">System</ref> model</para>
 </listitem></itemizedlist>
 </para>
 <para>Example implementation: ```cpp class MyManager : public <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> { public: void <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ae7e2cd7531de5ce1fdc1f4a179b70929" kindref="member">init(GameWorld&amp; gw)</ref> override { ... } void flush(GameWorld&amp; gw, UpdateContext&amp; ctx) noexcept override { // Process queued requests } }; ```</para>
@@ -160,7 +160,7 @@
 </simplesect>
 <simplesect kind="see"><para>GameObjectPoolManager </para>
 </simplesect>
-<simplesect kind="see"><para>System </para>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System" kindref="compound">System</ref> </para>
 </simplesect>
 </para>
     </detaileddescription>

@@ -13,8 +13,6 @@ var namespacehelios_1_1engine_1_1ecs =
     [ "GameObject", "classhelios_1_1engine_1_1ecs_1_1GameObject.html", "classhelios_1_1engine_1_1ecs_1_1GameObject" ],
     [ "SparseSetBase", "classhelios_1_1engine_1_1ecs_1_1SparseSetBase.html", "classhelios_1_1engine_1_1ecs_1_1SparseSetBase" ],
     [ "SparseSet", "classhelios_1_1engine_1_1ecs_1_1SparseSet.html", "classhelios_1_1engine_1_1ecs_1_1SparseSet" ],
-    [ "System", "classhelios_1_1engine_1_1ecs_1_1System.html", "classhelios_1_1engine_1_1ecs_1_1System" ],
-    [ "Updatable", "classhelios_1_1engine_1_1ecs_1_1Updatable.html", "classhelios_1_1engine_1_1ecs_1_1Updatable" ],
     [ "View", "classhelios_1_1engine_1_1ecs_1_1View.html", "classhelios_1_1engine_1_1ecs_1_1View" ],
     [ "registerComponents", "namespacehelios_1_1engine_1_1ecs.html#a46def7b8919354ac4b12a5cff7ed1793", null ],
     [ "InitialVersion", "namespacehelios_1_1engine_1_1ecs.html#acf98fa4115bdfac0977ffa728809bf19", null ],

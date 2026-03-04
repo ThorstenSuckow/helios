@@ -6,6 +6,8 @@ var dir_271ebd1cecf9fce13500c2bd2d622746 =
     [ "Manager.ixx", "Manager_8ixx.html", "Manager_8ixx" ],
     [ "ResourceRegistry.ixx", "ResourceRegistry_8ixx.html", "ResourceRegistry_8ixx" ],
     [ "Session.ixx", "Session_8ixx.html", "Session_8ixx" ],
+    [ "System.ixx", "System_8ixx.html", "System_8ixx" ],
     [ "SystemRegistry.ixx", "SystemRegistry_8ixx.html", "SystemRegistry_8ixx" ],
+    [ "TypedSystem.ixx", "TypedSystem_8ixx.html", "TypedSystem_8ixx" ],
     [ "UpdateContext.ixx", "UpdateContext_8ixx.html", "UpdateContext_8ixx" ]
 ];

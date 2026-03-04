@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1runtime_1_1world_1_1System" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>helios::engine::runtime::world::System</compoundname>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1TypedSystem" prot="public" virt="non-virtual">helios::engine::runtime::world::TypedSystem&lt; T &gt;</derivedcompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1ac1b7dd052c6ff43e828af33dd808f19d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual helios::engine::runtime::world::System::~System</definition>
+        <argsstring>()=default</argsstring>
+        <name>~System</name>
+        <qualifiedname>helios::engine::runtime::world::System::~System</qualifiedname>
+        <briefdescription>
+<para>Virtual destructor for proper cleanup of derived systems. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/System.ixx" line="37" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1a0d9b1da4a025e82299d29da00172e291" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void helios::engine::runtime::world::System::initSystem</definition>
+        <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld) noexcept=0</argsstring>
+        <name>initSystem</name>
+        <qualifiedname>helios::engine::runtime::world::System::initSystem</qualifiedname>
+        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1TypedSystem_1a00872d526b8dedc33c51d8c94e9dbd3f">initSystem</reimplementedby>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <briefdescription>
+<para>Called when the system is initialized by the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> this system is being added to. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/System.ixx" line="44" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1a2b3e724197c9bdeae0348cd5ed88e667" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void helios::engine::runtime::world::System::updateSystem</definition>
+        <argsstring>(helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept=0</argsstring>
+        <name>updateSystem</name>
+        <qualifiedname>helios::engine::runtime::world::System::updateSystem</qualifiedname>
+        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1TypedSystem_1a9a5e55a0ef4812c426c86e2dafad9c47">updateSystem</reimplementedby>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Called each frame to update the system. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Context containing deltaTime, input state, and references to CommandBuffer and <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/System.ixx" line="52" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Abstract base class for game systems. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Systems are global game logic processors that operate on the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> rather than individual GameObjects — ideal for cross-cutting concerns like physics, collision detection, or object pooling.</para>
+<para>Concrete systems are plain classes that provide `update(<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">UpdateContext</ref>&amp;)` (required) and optionally `init(<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref>&amp;)`. They are wrapped automatically by <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1TypedSystem" kindref="compound">TypedSystem&lt;T&gt;</ref> when registered via <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry" kindref="compound">SystemRegistry</ref>.</para>
+<para><simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1TypedSystem" kindref="compound">TypedSystem</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry" kindref="compound">SystemRegistry</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>helios::engine::runtime::world::System</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System"/>
+      </node>
+      <node id="2">
+        <label>helios::engine::runtime::world::TypedSystem&lt; T &gt;</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1TypedSystem"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="/tmp/h/include/helios/engine/runtime/world/System.ixx" line="30" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/world/System.ixx" bodystart="30" bodyend="54"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1a0d9b1da4a025e82299d29da00172e291" prot="public" virt="pure-virtual"><scope>helios::engine::runtime::world::System</scope><name>initSystem</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1a2b3e724197c9bdeae0348cd5ed88e667" prot="public" virt="pure-virtual"><scope>helios::engine::runtime::world::System</scope><name>updateSystem</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1ac1b7dd052c6ff43e828af33dd808f19d" prot="public" virt="virtual"><scope>helios::engine::runtime::world::System</scope><name>~System</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

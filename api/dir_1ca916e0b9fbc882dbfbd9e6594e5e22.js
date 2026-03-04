@@ -13,8 +13,6 @@ var dir_1ca916e0b9fbc882dbfbd9e6594e5e22 =
     [ "GameObject.ixx", "GameObject_8ixx.html", "GameObject_8ixx" ],
     [ "registry.ixx", "ecs_2registry_8ixx.html", "ecs_2registry_8ixx" ],
     [ "SparseSet.ixx", "SparseSet_8ixx.html", "SparseSet_8ixx" ],
-    [ "System.ixx", "System_8ixx.html", "System_8ixx" ],
     [ "Traits.ixx", "Traits_8ixx.html", "Traits_8ixx" ],
-    [ "Updatable.ixx", "Updatable_8ixx.html", "Updatable_8ixx" ],
     [ "View.ixx", "View_8ixx.html", "View_8ixx" ]
 ];

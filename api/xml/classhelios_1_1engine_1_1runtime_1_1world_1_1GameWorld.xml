@@ -892,7 +892,7 @@
 </para>
 <para>## Usage with GameLoop</para>
 <para>Systems access the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> via <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">UpdateContext</ref>. Entity queries use views, while mutations are performed through Commands flushed by the EngineCommandBuffer.</para>
-<para>```cpp void update(UpdateContext&amp; ctx) noexcept override { for (auto [entity, transform, velocity, active] : gameWorld_-&gt;view&lt; TransformComponent, VelocityComponent, Active &gt;().whereEnabled()) { // Process matching entities } } ```</para>
+<para>```cpp void update(UpdateContext&amp; ctx) noexcept override { for (auto [entity, transform, velocity, active] : updateContext.view&lt; TransformComponent, VelocityComponent, Active &gt;().whereEnabled()) { // Process matching entities } } ```</para>
 <para>## Resource Registration</para>
 <para>```cpp auto&amp; poolMgr = gameWorld.resourceRegistry() .<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a187d5dfbdb99b5a31917776688d88355" kindref="member">registerResource&lt;GameObjectPoolManager&gt;()</ref>; auto&amp; spawnMgr = gameWorld.resourceRegistry() .<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a187d5dfbdb99b5a31917776688d88355" kindref="member">registerResource&lt;SpawnManager&gt;()</ref>;</para>
 <para>gameWorld.init(); // Calls <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aae71c0fe187189d167cb967181831740" kindref="member">init()</ref> on all Managers in registration order ```</para>

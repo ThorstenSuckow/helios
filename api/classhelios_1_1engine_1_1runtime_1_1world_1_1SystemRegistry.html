@@ -107,53 +107,43 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Container for System instances within a game loop pass.  
+<p>Type-indexed registry for managing <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1System.html" title="Abstract base class for game systems.">System</a> instances within a game loop pass.  
  <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5f0d708775beb14b77c95304b7c1a333" id="r_a5f0d708775beb14b77c95304b7c1a333"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::unique_ptr&lt; <a class="el" href="classhelios_1_1engine_1_1ecs_1_1System.html">helios::engine::ecs::System</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5f0d708775beb14b77c95304b7c1a333">systems</a> () noexcept</td></tr>
-<tr class="memdesc:a5f0d708775beb14b77c95304b7c1a333"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a reference to the system collection.  <br /></td></tr>
-<tr class="memitem:a1faaf4789249106828fa02c91274b610" id="r_a1faaf4789249106828fa02c91274b610"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... Args&gt; <br />
-requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1ecs_1_1System.html">helios::engine::ecs::System</a>, T&gt;</td></tr>
-<tr class="memitem:a1faaf4789249106828fa02c91274b610 template"><td class="memItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1faaf4789249106828fa02c91274b610">add</a> (Args &amp;&amp;... args)</td></tr>
-<tr class="memdesc:a1faaf4789249106828fa02c91274b610"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a new System of type T to the registry.  <br /></td></tr>
-<tr class="memitem:a3e879c017e4283b971b738f55a7b3e4a" id="r_a3e879c017e4283b971b738f55a7b3e4a"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; <br />
-requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1ecs_1_1System.html">helios::engine::ecs::System</a>, T&gt;</td></tr>
-<tr class="memitem:a3e879c017e4283b971b738f55a7b3e4a template"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3e879c017e4283b971b738f55a7b3e4a">hasSystem</a> () const</td></tr>
-<tr class="memdesc:a3e879c017e4283b971b738f55a7b3e4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a System of type T is registered.  <br /></td></tr>
-<tr class="memitem:ae0d6499790a83073e18ec91c5800fb4a" id="r_ae0d6499790a83073e18ec91c5800fb4a"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; <br />
-requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1ecs_1_1System.html">helios::engine::ecs::System</a>, T&gt;</td></tr>
-<tr class="memitem:ae0d6499790a83073e18ec91c5800fb4a template"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae0d6499790a83073e18ec91c5800fb4a">getSystem</a> () const</td></tr>
-<tr class="memdesc:ae0d6499790a83073e18ec91c5800fb4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves a System by type.  <br /></td></tr>
+<tr class="memitem:a5faea93de64b18a405c6f182e8eed8d7" id="r_a5faea93de64b18a405c6f182e8eed8d7"><td class="memItemLeft" align="right" valign="top">std::span&lt; <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1System.html">System</a> *const &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5faea93de64b18a405c6f182e8eed8d7">systems</a> () noexcept</td></tr>
+<tr class="memdesc:a5faea93de64b18a405c6f182e8eed8d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a span of all registered systems for iteration.  <br /></td></tr>
+<tr class="memitem:ad24230789f1e1df985357401c5499a5c" id="r_ad24230789f1e1df985357401c5499a5c"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... Args&gt; <br />
+requires <a class="el" href="concepthelios_1_1engine_1_1runtime_1_1world_1_1HasUpdate.html">helios::engine::runtime::world::HasUpdate</a>&lt;T&gt;</td></tr>
+<tr class="memitem:ad24230789f1e1df985357401c5499a5c template"><td class="memItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad24230789f1e1df985357401c5499a5c">add</a> (Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:ad24230789f1e1df985357401c5499a5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a new system of type T.  <br /></td></tr>
+<tr class="memitem:acdef35bf48f40029992c7a7a2048d9f4" id="r_acdef35bf48f40029992c7a7a2048d9f4"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:acdef35bf48f40029992c7a7a2048d9f4 template"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acdef35bf48f40029992c7a7a2048d9f4">hasSystem</a> () const</td></tr>
+<tr class="memdesc:acdef35bf48f40029992c7a7a2048d9f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether a system of type T is registered.  <br /></td></tr>
+<tr class="memitem:a9b67224348ea0f4765132a8542bc7129" id="r_a9b67224348ea0f4765132a8542bc7129"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a9b67224348ea0f4765132a8542bc7129 template"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9b67224348ea0f4765132a8542bc7129">getSystem</a> () const</td></tr>
+<tr class="memdesc:a9b67224348ea0f4765132a8542bc7129"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a pointer to the underlying system of type T.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Container for System instances within a game loop pass. </p>
-<p><a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry.html" title="Container for System instances within a game loop pass.">SystemRegistry</a> manages a collection of Systems that execute together within a single pass of the game loop. It provides type-safe registration, lookup, and iteration over Systems.</p>
-<p>## Ownership</p>
-<p>The registry owns all registered Systems via `std::unique_ptr`. Systems are destroyed when the registry is destroyed.</p>
-<p>## Type-Safe Access</p>
-<p>Systems can be retrieved by type using `getSystem&lt;T&gt;()`, enabling inter-system communication when necessary.</p>
-<p>Example: ```cpp <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry.html" title="Container for System instances within a game loop pass.">SystemRegistry</a> registry;</p>
-<p>// Add systems registry.add&lt;Move2DSystem&gt;(gameWorld); registry.add&lt;CollisionSystem&gt;(gameWorld);</p>
-<p>// Check for system if (registry.hasSystem&lt;CollisionSystem&gt;()) { auto* collision = registry.getSystem&lt;CollisionSystem&gt;(); }</p>
-<p>// Iterate all systems for (auto&amp; system : registry.systems()) { system-&gt;update(ctx); } ```</p>
-<dl class="section see"><dt>See also</dt><dd>System </dd>
+<div class="textblock"><p>Type-indexed registry for managing <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1System.html" title="Abstract base class for game systems.">System</a> instances within a game loop pass. </p>
+<p><a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry.html" title="Type-indexed registry for managing System instances within a game loop pass.">SystemRegistry</a> owns <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1TypedSystem.html" title="Type-erasing wrapper that adapts a plain system type to the System interface.">TypedSystem&lt;T&gt;</a> wrappers internally and provides O(1) access to the underlying concrete system via <a class="el" href="classhelios_1_1engine_1_1core_1_1data_1_1SystemTypeId.html">SystemTypeId</a>. Systems are registered once via `add&lt;T&gt;()` and then iterated each frame through the `systems()` span.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1System.html" title="Abstract base class for game systems.">System</a> </dd>
 <dd>
-GameLoop </dd>
+<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1TypedSystem.html" title="Type-erasing wrapper that adapts a plain system type to the System interface.">TypedSystem</a> </dd>
 <dd>
-GameLoopPhase </dd></dl>
+<a class="el" href="classhelios_1_1engine_1_1core_1_1data_1_1SystemTypeId.html">SystemTypeId</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SystemRegistry_8ixx_source.html#l00059">59</a> of file <a class="el" href="SystemRegistry_8ixx_source.html">SystemRegistry.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SystemRegistry_8ixx_source.html#l00035">35</a> of file <a class="el" href="SystemRegistry_8ixx_source.html">SystemRegistry.ixx</a>.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a1faaf4789249106828fa02c91274b610" name="a1faaf4789249106828fa02c91274b610"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1faaf4789249106828fa02c91274b610">&#9670;&#160;</a></span>add()</h2>
+<a id="ad24230789f1e1df985357401c5499a5c" name="ad24230789f1e1df985357401c5499a5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad24230789f1e1df985357401c5499a5c">&#9670;&#160;</a></span>add()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename T, typename... Args&gt; <br />
-requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1ecs_1_1System.html">helios::engine::ecs::System</a>, T&gt;</div>
+requires <a class="el" href="concepthelios_1_1engine_1_1runtime_1_1world_1_1HasUpdate.html">helios::engine::runtime::world::HasUpdate</a>&lt;T&gt;</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -172,43 +162,44 @@ requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1ecs_1
 </table>
 </div><div class="memdoc">
 
-<p>Adds a new System of type T to the registry. </p>
+<p>Registers a new system of type T. </p>
+<p>Creates a <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1TypedSystem.html" title="Type-erasing wrapper that adapts a plain system type to the System interface.">TypedSystem&lt;T&gt;</a> wrapper, stores it in the registry indexed by <a class="el" href="classhelios_1_1engine_1_1core_1_1data_1_1SystemTypeId.html">SystemTypeId</a>, and returns a reference to the underlying T instance.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td>The System type to add. Must derive from System. </td></tr>
-    <tr><td class="paramname">Args</td><td>Constructor argument types.</td></tr>
+    <tr><td class="paramname">T</td><td>The concrete system type. Must satisfy <a class="el" href="concepthelios_1_1engine_1_1runtime_1_1world_1_1HasUpdate.html" title="Concept requiring a `update(UpdateContext&amp;)` method.">HasUpdate</a>. </td></tr>
+    <tr><td class="paramname">Args</td><td>Constructor argument types for T.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">args</td><td>Arguments forwarded to the System constructor.</td></tr>
+    <tr><td class="paramname">args</td><td>Arguments forwarded to the T constructor.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Reference to the newly added System.</dd></dl>
-<dl class="section pre"><dt>Precondition</dt><dd>No System of type T is already registered. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the registered system instance.</dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>No system of type T is already registered. </dd></dl>
+<p>SystemsView returns systems in the order they were registered. The game loop guarantees this: calling addSystem() on a pass preserves deterministic execution by maintaining the insertion order. Once removeSystem() is implemented, updating systemsView_ must be reviewed.</p>
 
-<p class="definition">Definition at line <a class="el" href="SystemRegistry_8ixx_source.html#l00091">91</a> of file <a class="el" href="SystemRegistry_8ixx_source.html">SystemRegistry.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SystemRegistry_8ixx_source.html#l00082">82</a> of file <a class="el" href="SystemRegistry_8ixx_source.html">SystemRegistry.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="SystemRegistry_8ixx_source.html#l00108">hasSystem()</a>.</p>
+<p class="reference">References <a class="el" href="SystemRegistry_8ixx_source.html#l00122">hasSystem()</a>, <a class="el" href="SystemTypeId_8ixx_source.html#l00072">helios::engine::core::data::SystemTypeId::id()</a>, and <a class="el" href="SystemTypeId_8ixx_source.html#l00056">helios::engine::core::data::SystemTypeId::value()</a>.</p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry_a1faaf4789249106828fa02c91274b610_cgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry_ad24230789f1e1df985357401c5499a5c_cgraph.svg" width="100%" height="416"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
 </div>
-<a id="ae0d6499790a83073e18ec91c5800fb4a" name="ae0d6499790a83073e18ec91c5800fb4a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae0d6499790a83073e18ec91c5800fb4a">&#9670;&#160;</a></span>getSystem()</h2>
+<a id="a9b67224348ea0f4765132a8542bc7129" name="a9b67224348ea0f4765132a8542bc7129"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b67224348ea0f4765132a8542bc7129">&#9670;&#160;</a></span>getSystem()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; <br />
-requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1ecs_1_1System.html">helios::engine::ecs::System</a>, T&gt;</div>
+template&lt;typename T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -227,36 +218,42 @@ requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1ecs_1
 </table>
 </div><div class="memdoc">
 
-<p>Retrieves a System by type. </p>
+<p>Returns a pointer to the underlying system of type T. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td>The System type to retrieve.</td></tr>
+    <tr><td class="paramname">T</td><td>The system type to retrieve.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Pointer to the System if found, nullptr otherwise.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>Uses dynamic_cast for type checking. O(n) complexity. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to the system, or nullptr if not registered. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SystemRegistry_8ixx_source.html#l00123">123</a> of file <a class="el" href="SystemRegistry_8ixx_source.html">SystemRegistry.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SystemRegistry_8ixx_source.html#l00134">134</a> of file <a class="el" href="SystemRegistry_8ixx_source.html">SystemRegistry.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="SystemRegistry_8ixx_source.html#l00108">hasSystem()</a>.</p>
-<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<p class="reference">References <a class="el" href="SystemTypeId_8ixx_source.html#l00072">helios::engine::core::data::SystemTypeId::id()</a>, and <a class="el" href="SystemTypeId_8ixx_source.html#l00056">helios::engine::core::data::SystemTypeId::value()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="SystemRegistry_8ixx_source.html#l00122">hasSystem()</a>.</p>
+<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry_ae0d6499790a83073e18ec91c5800fb4a_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry_a9b67224348ea0f4765132a8542bc7129_cgraph.svg" width="644" height="155"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry_a9b67224348ea0f4765132a8542bc7129_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
 </div>
-<a id="a3e879c017e4283b971b738f55a7b3e4a" name="a3e879c017e4283b971b738f55a7b3e4a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3e879c017e4283b971b738f55a7b3e4a">&#9670;&#160;</a></span>hasSystem()</h2>
+<a id="acdef35bf48f40029992c7a7a2048d9f4" name="acdef35bf48f40029992c7a7a2048d9f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdef35bf48f40029992c7a7a2048d9f4">&#9670;&#160;</a></span>hasSystem()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; <br />
-requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1ecs_1_1System.html">helios::engine::ecs::System</a>, T&gt;</div>
+template&lt;typename T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -275,37 +272,37 @@ requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1ecs_1
 </table>
 </div><div class="memdoc">
 
-<p>Checks if a System of type T is registered. </p>
+<p>Checks whether a system of type T is registered. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td>The System type to check for.</td></tr>
+    <tr><td class="paramname">T</td><td>The system type to check.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>True if the System exists, false otherwise. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>True if registered, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SystemRegistry_8ixx_source.html#l00108">108</a> of file <a class="el" href="SystemRegistry_8ixx_source.html">SystemRegistry.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SystemRegistry_8ixx_source.html#l00122">122</a> of file <a class="el" href="SystemRegistry_8ixx_source.html">SystemRegistry.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="SystemRegistry_8ixx_source.html#l00123">getSystem()</a>.</p>
+<p class="reference">References <a class="el" href="SystemRegistry_8ixx_source.html#l00134">getSystem()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="SystemRegistry_8ixx_source.html#l00091">add()</a>.</p>
-<div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-2-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry_a3e879c017e4283b971b738f55a7b3e4a_cgraph.svg" width="414" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<p class="reference">Referenced by <a class="el" href="SystemRegistry_8ixx_source.html#l00082">add()</a>.</p>
+<div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-3-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry_a3e879c017e4283b971b738f55a7b3e4a_icgraph.svg" width="444" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry_acdef35bf48f40029992c7a7a2048d9f4_cgraph.svg" width="100%" height="416"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-4-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry_acdef35bf48f40029992c7a7a2048d9f4_icgraph.svg" width="444" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
-<a id="a5f0d708775beb14b77c95304b7c1a333" name="a5f0d708775beb14b77c95304b7c1a333"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5f0d708775beb14b77c95304b7c1a333">&#9670;&#160;</a></span>systems()</h2>
+<a id="a5faea93de64b18a405c6f182e8eed8d7" name="a5faea93de64b18a405c6f182e8eed8d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5faea93de64b18a405c6f182e8eed8d7">&#9670;&#160;</a></span>systems()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -314,7 +311,7 @@ requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1ecs_1
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; std::unique_ptr&lt; <a class="el" href="classhelios_1_1engine_1_1ecs_1_1System.html">helios::engine::ecs::System</a> &gt; &gt; &amp; helios::engine::runtime::world::SystemRegistry::systems </td>
+          <td class="memname">std::span&lt; <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1System.html">System</a> *const  &gt; helios::engine::runtime::world::SystemRegistry::systems </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -327,10 +324,10 @@ requires std::is_base_of_v&lt;<a class="el" href="classhelios_1_1engine_1_1ecs_1
 </table>
 </div><div class="memdoc">
 
-<p>Returns a reference to the system collection. </p>
-<dl class="section return"><dt>Returns</dt><dd>Reference to the vector of System unique_ptrs. </dd></dl>
+<p>Returns a span of all registered systems for iteration. </p>
+<dl class="section return"><dt>Returns</dt><dd>Span of <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1System.html" title="Abstract base class for game systems.">System</a> pointers. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SystemRegistry_8ixx_source.html#l00073">73</a> of file <a class="el" href="SystemRegistry_8ixx_source.html">SystemRegistry.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SystemRegistry_8ixx_source.html#l00060">60</a> of file <a class="el" href="SystemRegistry_8ixx_source.html">SystemRegistry.ixx</a>.</p>
 
 </div>
 </div>

@@ -37,9 +37,10 @@ var searchData=
   ['typedcommandhandler_3c_20worldlifecyclecommand_20_3e_34',['TypedCommandHandler&lt; WorldLifecycleCommand &gt;',['../classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandHandler.html',1,'helios::engine::runtime::messaging::command']]],
   ['typedpass_35',['TypedPass',['../classhelios_1_1engine_1_1runtime_1_1gameloop_1_1TypedPass.html',1,'helios::engine::runtime::gameloop']]],
   ['typedstatecommandhandler_36',['TypedStateCommandHandler',['../classhelios_1_1engine_1_1state_1_1TypedStateCommandHandler.html',1,'helios::engine::state']]],
-  ['typeindexeddoublebuffer_37',['TypeIndexedDoubleBuffer',['../classhelios_1_1core_1_1buffer_1_1TypeIndexedDoubleBuffer.html',1,'helios::core::buffer']]],
-  ['typeindexeddoublebuffer_3c_20helios_3a_3acore_3a_3adata_3a_3atypeindexer_3c_20gameloopeventbusgroup_20_3e_20_3e_38',['TypeIndexedDoubleBuffer&lt; helios::core::data::TypeIndexer&lt; GameLoopEventBusGroup &gt; &gt;',['../classhelios_1_1core_1_1buffer_1_1TypeIndexedDoubleBuffer.html',1,'helios::core::buffer']]],
-  ['typeindexedreadwritebuffer_39',['TypeIndexedReadWriteBuffer',['../classhelios_1_1core_1_1buffer_1_1TypeIndexedReadWriteBuffer.html',1,'helios::core::buffer']]],
-  ['typeindexer_40',['TypeIndexer',['../classhelios_1_1core_1_1data_1_1TypeIndexer.html',1,'helios::core::data']]],
-  ['typesetter_41',['TypeSetter',['../classhelios_1_1rendering_1_1text_1_1TypeSetter.html',1,'helios::rendering::text']]]
+  ['typedsystem_37',['TypedSystem',['../classhelios_1_1engine_1_1runtime_1_1world_1_1TypedSystem.html',1,'helios::engine::runtime::world']]],
+  ['typeindexeddoublebuffer_38',['TypeIndexedDoubleBuffer',['../classhelios_1_1core_1_1buffer_1_1TypeIndexedDoubleBuffer.html',1,'helios::core::buffer']]],
+  ['typeindexeddoublebuffer_3c_20helios_3a_3acore_3a_3adata_3a_3atypeindexer_3c_20gameloopeventbusgroup_20_3e_20_3e_39',['TypeIndexedDoubleBuffer&lt; helios::core::data::TypeIndexer&lt; GameLoopEventBusGroup &gt; &gt;',['../classhelios_1_1core_1_1buffer_1_1TypeIndexedDoubleBuffer.html',1,'helios::core::buffer']]],
+  ['typeindexedreadwritebuffer_40',['TypeIndexedReadWriteBuffer',['../classhelios_1_1core_1_1buffer_1_1TypeIndexedReadWriteBuffer.html',1,'helios::core::buffer']]],
+  ['typeindexer_41',['TypeIndexer',['../classhelios_1_1core_1_1data_1_1TypeIndexer.html',1,'helios::core::data']]],
+  ['typesetter_42',['TypeSetter',['../classhelios_1_1rendering_1_1text_1_1TypeSetter.html',1,'helios::rendering::text']]]
 ];

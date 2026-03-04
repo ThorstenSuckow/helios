@@ -16,7 +16,9 @@ var concepts =
           [ "world", "namespacehelios_1_1engine_1_1runtime_1_1world.html", [
             [ "IsManager", "concepthelios_1_1engine_1_1runtime_1_1world_1_1IsManager.html", null ],
             [ "IsCommandBuffer", "concepthelios_1_1engine_1_1runtime_1_1world_1_1IsCommandBuffer.html", null ],
-            [ "IsCommandHandler", "concepthelios_1_1engine_1_1runtime_1_1world_1_1IsCommandHandler.html", null ]
+            [ "IsCommandHandler", "concepthelios_1_1engine_1_1runtime_1_1world_1_1IsCommandHandler.html", null ],
+            [ "HasInit", "concepthelios_1_1engine_1_1runtime_1_1world_1_1HasInit.html", null ],
+            [ "HasUpdate", "concepthelios_1_1engine_1_1runtime_1_1world_1_1HasUpdate.html", null ]
           ] ],
           [ "messaging", "namespacehelios_1_1engine_1_1runtime_1_1messaging.html", [
             [ "command", "namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1command.html", [

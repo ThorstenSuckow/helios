@@ -15,6 +15,7 @@ var namespacehelios_1_1engine_1_1core_1_1data =
     [ "SpawnProfileIdTag", "structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileIdTag.html", null ],
     [ "SpawnRuleIdTag", "structhelios_1_1engine_1_1core_1_1data_1_1SpawnRuleIdTag.html", null ],
     [ "StateTypeId", "classhelios_1_1engine_1_1core_1_1data_1_1StateTypeId.html", "classhelios_1_1engine_1_1core_1_1data_1_1StateTypeId" ],
+    [ "SystemTypeId", "classhelios_1_1engine_1_1core_1_1data_1_1SystemTypeId.html", "classhelios_1_1engine_1_1core_1_1data_1_1SystemTypeId" ],
     [ "ViewportIdTag", "structhelios_1_1engine_1_1core_1_1data_1_1ViewportIdTag.html", null ],
     [ "ActionId", "namespacehelios_1_1engine_1_1core_1_1data.html#acd5d09816591ed837d38aee2c8bcf4c3", null ],
     [ "CollisionLayer", "namespacehelios_1_1engine_1_1core_1_1data.html#a7886ef44eabe7b1a1f109e6c5fe971ca", null ],

@@ -128,21 +128,21 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Abstract base class for managers that process deferred operations. </p>
-<p>Managers handle cross-cutting concerns that require deferred processing separate from the System update cycle. They are registered with the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html" title="Central game state container for entities, resources, and the active level.">GameWorld</a> and receive lifecycle callbacks for initialization and per-frame flushing.</p>
+<p>Managers handle cross-cutting concerns that require deferred processing separate from the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1System.html" title="Abstract base class for game systems.">System</a> update cycle. They are registered with the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html" title="Central game state container for entities, resources, and the active level.">GameWorld</a> and receive lifecycle callbacks for initialization and per-frame flushing.</p>
 <p>## Lifecycle</p>
 <p>1. **Registration:** <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html" title="Abstract base class for managers that process deferred operations.">Manager</a> is added via `GameWorld::addManager&lt;T&gt;()` 2. **onAdd():** Called immediately after registration 3. **init():** Called during <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html" title="Central game state container for entities, resources, and the active level.">GameWorld</a> initialization (before game loop starts) 4. **flush():** Called each frame after Systems complete, to process queued requests</p>
 <p>## Use Cases</p>
 <ul>
 <li>**GameObjectPoolManager:** Manages entity pooling and acquire/release lifecycle</li>
 <li>**SpawnManager:** Handles spawn request processing and entity initialization</li>
-<li>**Custom Managers:** Any deferred processing that doesn't fit the System model</li>
+<li>**Custom Managers:** Any deferred processing that doesn't fit the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1System.html" title="Abstract base class for game systems.">System</a> model</li>
 </ul>
 <p>Example implementation: ```cpp class MyManager : public <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html" title="Abstract base class for managers that process deferred operations.">Manager</a> { public: void <a class="el" href="#ae7e2cd7531de5ce1fdc1f4a179b70929" title="Initializes the manager before the game loop starts.">init(GameWorld&amp; gw)</a> override { ... } void flush(GameWorld&amp; gw, UpdateContext&amp; ctx) noexcept override { // Process queued requests } }; ```</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html" title="Central game state container for entities, resources, and the active level.">GameWorld</a> </dd>
 <dd>
 GameObjectPoolManager </dd>
 <dd>
-System </dd></dl>
+<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1System.html" title="Abstract base class for game systems.">System</a> </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="Manager_8ixx_source.html#l00053">53</a> of file <a class="el" href="Manager_8ixx_source.html">Manager.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>

@@ -19,6 +19,7 @@ var dir_4f0da182a846ab23c4f0200a8e7a4684 =
     [ "SpawnProfileId.ixx", "SpawnProfileId_8ixx.html", "SpawnProfileId_8ixx" ],
     [ "SpawnRuleId.ixx", "SpawnRuleId_8ixx.html", "SpawnRuleId_8ixx" ],
     [ "StateTypeId.ixx", "StateTypeId_8ixx.html", "StateTypeId_8ixx" ],
+    [ "SystemTypeId.ixx", "SystemTypeId_8ixx.html", "SystemTypeId_8ixx" ],
     [ "VersionId.ixx", "VersionId_8ixx.html", "VersionId_8ixx" ],
     [ "ViewportId.ixx", "ViewportId_8ixx.html", "ViewportId_8ixx" ]
 ];

@@ -2,7 +2,6 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1CombatScoringSystem" kind="class" language="C++" prot="public">
     <compoundname>helios::engine::mechanics::scoring::systems::CombatScoringSystem</compoundname>
-    <basecompoundref refid="classhelios_1_1engine_1_1ecs_1_1System" prot="public" virt="non-virtual">helios::engine::ecs::System</basecompoundref>
     <sectiondef kind="private-static-attrib">
       <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1CombatScoringSystem_1a10671acf5a9ffb4918933b05c663214d" prot="private" static="yes" mutable="no">
         <type>const <ref refid="classhelios_1_1util_1_1log_1_1Logger" kindref="compound">helios::util::log::Logger</ref> &amp;</type>
@@ -22,13 +21,12 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1CombatScoringSystem_1a7e1d376e92e0b4232c34a3428edc5aa3" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1CombatScoringSystem_1a4ff9e68f7ba9e7a603929480c6a73449" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
         <definition>void helios::engine::mechanics::scoring::systems::CombatScoringSystem::update</definition>
-        <argsstring>(helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept override</argsstring>
+        <argsstring>(helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept</argsstring>
         <name>update</name>
         <qualifiedname>helios::engine::mechanics::scoring::systems::CombatScoringSystem::update</qualifiedname>
-        <reimplements refid="classhelios_1_1engine_1_1ecs_1_1System_1a4e9969641985fa04db6214332c88605b">update</reimplements>
         <param>
           <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
           <declname>updateContext</declname>
@@ -61,93 +59,10 @@
     <detaileddescription>
 <para>Listens for <ref refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1HealthDepletedEvent" kindref="compound">HealthDepletedEvent</ref> and checks if the killed entity has a <ref refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScoreValueComponent" kindref="compound">ScoreValueComponent</ref>. If so, issues an <ref refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1commands_1_1UpdateScoreCommand" kindref="compound">UpdateScoreCommand</ref> to credit the attacker&apos;s score pool. </para>
     </detaileddescription>
-    <inheritancegraph>
-      <node id="2">
-        <label>helios::engine::ecs::System</label>
-        <link refid="classhelios_1_1engine_1_1ecs_1_1System"/>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="3">
-        <label>helios::engine::ecs::Updatable</label>
-        <link refid="classhelios_1_1engine_1_1ecs_1_1Updatable"/>
-      </node>
-      <node id="1">
-        <label>helios::engine::mechanics::scoring::systems::CombatScoringSystem</label>
-        <link refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1CombatScoringSystem"/>
-        <childnode refid="2" relation="public-inheritance">
-        </childnode>
-      </node>
-    </inheritancegraph>
-    <collaborationgraph>
-      <node id="8">
-        <label>helios::engine::ecs::EntityManager</label>
-        <link refid="classhelios_1_1engine_1_1ecs_1_1EntityManager"/>
-      </node>
-      <node id="7">
-        <label>helios::engine::ecs::EntityRegistry</label>
-        <link refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry"/>
-      </node>
-      <node id="2">
-        <label>helios::engine::ecs::System</label>
-        <link refid="classhelios_1_1engine_1_1ecs_1_1System"/>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
-        <childnode refid="4" relation="usage">
-          <edgelabel>gameWorld_</edgelabel>
-        </childnode>
-      </node>
-      <node id="3">
-        <label>helios::engine::ecs::Updatable</label>
-        <link refid="classhelios_1_1engine_1_1ecs_1_1Updatable"/>
-      </node>
-      <node id="1">
-        <label>helios::engine::mechanics::scoring::systems::CombatScoringSystem</label>
-        <link refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1CombatScoringSystem"/>
-        <childnode refid="2" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="4">
-        <label>helios::engine::runtime::world::GameWorld</label>
-        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld"/>
-        <childnode refid="5" relation="usage">
-          <edgelabel>logger_</edgelabel>
-        </childnode>
-        <childnode refid="6" relation="usage">
-          <edgelabel>resourceRegistry_</edgelabel>
-        </childnode>
-        <childnode refid="7" relation="usage">
-          <edgelabel>entityRegistry_</edgelabel>
-        </childnode>
-        <childnode refid="8" relation="usage">
-          <edgelabel>em_</edgelabel>
-        </childnode>
-        <childnode refid="9" relation="usage">
-          <edgelabel>session_</edgelabel>
-        </childnode>
-      </node>
-      <node id="6">
-        <label>helios::engine::runtime::world::ResourceRegistry</label>
-        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry"/>
-      </node>
-      <node id="9">
-        <label>helios::engine::runtime::world::Session</label>
-        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session"/>
-      </node>
-      <node id="5">
-        <label>helios::util::log::Logger</label>
-        <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
-      </node>
-    </collaborationgraph>
     <location file="/tmp/h/include/helios/engine/mechanics/scoring/systems/CombatScoringSystem.ixx" line="56" column="5" bodyfile="/tmp/h/include/helios/engine/mechanics/scoring/systems/CombatScoringSystem.ixx" bodystart="56" bodyend="117"/>
     <listofallmembers>
-      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" prot="protected" virt="non-virtual"><scope>helios::engine::mechanics::scoring::systems::CombatScoringSystem</scope><name>gameWorld_</name></member>
-      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1ae0464c1668e257439243a4f25979a7ff" prot="public" virt="virtual"><scope>helios::engine::mechanics::scoring::systems::CombatScoringSystem</scope><name>init</name></member>
       <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1CombatScoringSystem_1a10671acf5a9ffb4918933b05c663214d" prot="private" virt="non-virtual"><scope>helios::engine::mechanics::scoring::systems::CombatScoringSystem</scope><name>logger_</name></member>
-      <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a26d81abcda05fe8b12a1ddb4ed6099a3" prot="public" virt="non-virtual"><scope>helios::engine::mechanics::scoring::systems::CombatScoringSystem</scope><name>Updatable</name></member>
-      <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1CombatScoringSystem_1a7e1d376e92e0b4232c34a3428edc5aa3" prot="public" virt="virtual"><scope>helios::engine::mechanics::scoring::systems::CombatScoringSystem</scope><name>update</name></member>
-      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a937c99bfacd777c53e0f811ab9d335a6" prot="public" virt="virtual"><scope>helios::engine::mechanics::scoring::systems::CombatScoringSystem</scope><name>~System</name></member>
-      <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a0f54f92a2a8d6c8dc2fc2ebed41d5a85" prot="public" virt="virtual"><scope>helios::engine::mechanics::scoring::systems::CombatScoringSystem</scope><name>~Updatable</name></member>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1systems_1_1CombatScoringSystem_1a4ff9e68f7ba9e7a603929480c6a73449" prot="public" virt="non-virtual"><scope>helios::engine::mechanics::scoring::systems::CombatScoringSystem</scope><name>update</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

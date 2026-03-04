@@ -164,6 +164,7 @@ var annotated_dup =
             [ "SpawnProfileIdTag", "structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileIdTag.html", null ],
             [ "SpawnRuleIdTag", "structhelios_1_1engine_1_1core_1_1data_1_1SpawnRuleIdTag.html", null ],
             [ "StateTypeId", "classhelios_1_1engine_1_1core_1_1data_1_1StateTypeId.html", "classhelios_1_1engine_1_1core_1_1data_1_1StateTypeId" ],
+            [ "SystemTypeId", "classhelios_1_1engine_1_1core_1_1data_1_1SystemTypeId.html", "classhelios_1_1engine_1_1core_1_1data_1_1SystemTypeId" ],
             [ "ViewportIdTag", "structhelios_1_1engine_1_1core_1_1data_1_1ViewportIdTag.html", null ]
           ] ]
         ] ],
@@ -184,8 +185,6 @@ var annotated_dup =
           [ "GameObject", "classhelios_1_1engine_1_1ecs_1_1GameObject.html", "classhelios_1_1engine_1_1ecs_1_1GameObject" ],
           [ "SparseSetBase", "classhelios_1_1engine_1_1ecs_1_1SparseSetBase.html", "classhelios_1_1engine_1_1ecs_1_1SparseSetBase" ],
           [ "SparseSet", "classhelios_1_1engine_1_1ecs_1_1SparseSet.html", "classhelios_1_1engine_1_1ecs_1_1SparseSet" ],
-          [ "System", "classhelios_1_1engine_1_1ecs_1_1System.html", "classhelios_1_1engine_1_1ecs_1_1System" ],
-          [ "Updatable", "classhelios_1_1engine_1_1ecs_1_1Updatable.html", "classhelios_1_1engine_1_1ecs_1_1Updatable" ],
           [ "View", "classhelios_1_1engine_1_1ecs_1_1View.html", "classhelios_1_1engine_1_1ecs_1_1View" ]
         ] ],
         [ "mechanics", "namespacehelios_1_1engine_1_1mechanics.html", [
@@ -504,7 +503,9 @@ var annotated_dup =
             [ "Manager", "classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html", "classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" ],
             [ "ResourceRegistry", "classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html", "classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry" ],
             [ "Session", "classhelios_1_1engine_1_1runtime_1_1world_1_1Session.html", "classhelios_1_1engine_1_1runtime_1_1world_1_1Session" ],
+            [ "System", "classhelios_1_1engine_1_1runtime_1_1world_1_1System.html", "classhelios_1_1engine_1_1runtime_1_1world_1_1System" ],
             [ "SystemRegistry", "classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry.html", "classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry" ],
+            [ "TypedSystem", "classhelios_1_1engine_1_1runtime_1_1world_1_1TypedSystem.html", "classhelios_1_1engine_1_1runtime_1_1world_1_1TypedSystem" ],
             [ "UpdateContext", "classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html", "classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" ]
           ] ],
           [ "messaging", "namespacehelios_1_1engine_1_1runtime_1_1messaging.html", [
@@ -759,6 +760,7 @@ var annotated_dup =
       [ "hash&lt; helios::engine::core::data::SpawnProfileId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1SpawnProfileId_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1SpawnProfileId_01_4" ],
       [ "hash&lt; helios::engine::core::data::SpawnRuleId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1SpawnRuleId_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1SpawnRuleId_01_4" ],
       [ "hash&lt; helios::engine::core::data::StateTypeId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1StateTypeId_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1StateTypeId_01_4" ],
+      [ "hash&lt; helios::engine::core::data::SystemTypeId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1SystemTypeId_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1SystemTypeId_01_4" ],
       [ "hash&lt; helios::engine::ecs::EntityHandle &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1ecs_1_1EntityHandle_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1ecs_1_1EntityHandle_01_4" ],
       [ "hash&lt; helios::util::Guid &gt;", "structstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4.html", "structstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4" ]
     ] ]

@@ -118,6 +118,7 @@ var searchData=
   ['strongid_3c_20spawnprofileidtag_2c_20uint32_5ft_20_3e_115',['StrongId&lt; SpawnProfileIdTag, uint32_t &gt;',['../structhelios_1_1core_1_1data_1_1StrongId.html',1,'helios::core::data']]],
   ['strongid_3c_20spawnruleidtag_2c_20uint32_5ft_20_3e_116',['StrongId&lt; SpawnRuleIdTag, uint32_t &gt;',['../structhelios_1_1core_1_1data_1_1StrongId.html',1,'helios::core::data']]],
   ['strongid_3c_20viewportidtag_2c_20uint32_5ft_20_3e_117',['StrongId&lt; ViewportIdTag, uint32_t &gt;',['../structhelios_1_1core_1_1data_1_1StrongId.html',1,'helios::core::data']]],
-  ['system_118',['System',['../classhelios_1_1engine_1_1ecs_1_1System.html',1,'helios::engine::ecs']]],
-  ['systemregistry_119',['SystemRegistry',['../classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry.html',1,'helios::engine::runtime::world']]]
+  ['system_118',['System',['../classhelios_1_1engine_1_1runtime_1_1world_1_1System.html',1,'helios::engine::runtime::world']]],
+  ['systemregistry_119',['SystemRegistry',['../classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry.html',1,'helios::engine::runtime::world']]],
+  ['systemtypeid_120',['SystemTypeId',['../classhelios_1_1engine_1_1core_1_1data_1_1SystemTypeId.html',1,'helios::engine::core::data']]]
 ];

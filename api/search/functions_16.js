@@ -65,7 +65,7 @@ var searchData=
   ['_7estatecommandhandler_62',['~StateCommandHandler',['../classhelios_1_1engine_1_1state_1_1StateCommandHandler.html#a0e219522933348b745aed2adba19724d',1,'helios::engine::state::StateCommandHandler']]],
   ['_7estatetransitionlistener_63',['~StateTransitionListener',['../classhelios_1_1engine_1_1state_1_1StateTransitionListener.html#a56626b2117426c99c27f5335e93b594f',1,'helios::engine::state::StateTransitionListener']]],
   ['_7estringfilereader_64',['~StringFileReader',['../classhelios_1_1util_1_1io_1_1StringFileReader.html#a4ba4553c81cc82a40278d3ecd02088fa',1,'helios::util::io::StringFileReader']]],
-  ['_7esystem_65',['~System',['../classhelios_1_1engine_1_1ecs_1_1System.html#a937c99bfacd777c53e0f811ab9d335a6',1,'helios::engine::ecs::System']]],
+  ['_7esystem_65',['~System',['../classhelios_1_1engine_1_1runtime_1_1world_1_1System.html#ac1b7dd052c6ff43e828af33dd808f19d',1,'helios::engine::runtime::world::System']]],
   ['_7etextrendercommand_66',['~TextRenderCommand',['../classhelios_1_1rendering_1_1text_1_1TextRenderCommand.html#a59cbf8dc0f51e560279dcb038ea3f72b',1,'helios::rendering::text::TextRenderCommand']]],
   ['_7etextrenderer_67',['~TextRenderer',['../classhelios_1_1rendering_1_1text_1_1TextRenderer.html#a374aec940343b0a76338d808e9bae0c4',1,'helios::rendering::text::TextRenderer']]],
   ['_7etimercommandhandler_68',['~TimerCommandHandler',['../classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerCommandHandler.html#a944836593561d443e9de3eab2a19f08d',1,'helios::engine::mechanics::timing::TimerCommandHandler']]],
@@ -74,7 +74,6 @@ var searchData=
   ['_7etypeindexedreadwritebuffer_71',['~TypeIndexedReadWriteBuffer',['../classhelios_1_1core_1_1buffer_1_1TypeIndexedReadWriteBuffer.html#a0ea2d758024de9a216dba62287c50dde',1,'helios::core::buffer::TypeIndexedReadWriteBuffer']]],
   ['_7euiactioncommandhandler_72',['~UiActionCommandHandler',['../classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandHandler.html#a386717b5945eee31f50e228969983b81',1,'helios::engine::modules::ui::UiActionCommandHandler']]],
   ['_7euniformvaluemap_73',['~UniformValueMap',['../classhelios_1_1rendering_1_1shader_1_1UniformValueMap.html#a8b461f354660a3b58e432b7fc3c5aae6',1,'helios::rendering::shader::UniformValueMap']]],
-  ['_7eupdatable_74',['~Updatable',['../classhelios_1_1engine_1_1ecs_1_1Updatable.html#a0f54f92a2a8d6c8dc2fc2ebed41d5a85',1,'helios::engine::ecs::Updatable']]],
-  ['_7ewindow_75',['~Window',['../classhelios_1_1window_1_1Window.html#a42e441b82a4e44295864f7919d958355',1,'helios::window::Window']]],
-  ['_7ewindowconfig_76',['~WindowConfig',['../structhelios_1_1window_1_1WindowConfig.html#a0dcd226f963cf9976b19e0a0a894b4d8',1,'helios::window::WindowConfig']]]
+  ['_7ewindow_74',['~Window',['../classhelios_1_1window_1_1Window.html#a42e441b82a4e44295864f7919d958355',1,'helios::window::Window']]],
+  ['_7ewindowconfig_75',['~WindowConfig',['../structhelios_1_1window_1_1WindowConfig.html#a0dcd226f963cf9976b19e0a0a894b4d8',1,'helios::window::WindowConfig']]]
 ];

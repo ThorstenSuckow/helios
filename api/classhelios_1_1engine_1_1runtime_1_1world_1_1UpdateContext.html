@@ -154,6 +154,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7973f73a32e697f534ed311cef2f50d4" id="r_a7973f73a32e697f534ed311cef2f50d4"><td class="memTemplParams" colspan="2">template&lt;typename E, typename... Args&gt; </td></tr>
 <tr class="memitem:a7973f73a32e697f534ed311cef2f50d4 template"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7973f73a32e697f534ed311cef2f50d4">pushFrame</a> (Args &amp;&amp;... args)</td></tr>
 <tr class="memdesc:a7973f73a32e697f534ed311cef2f50d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pushes an event to the frame-level event bus.  <br /></td></tr>
+<tr class="memitem:a5748f227bfab7fe248186fe4d54b6444" id="r_a5748f227bfab7fe248186fe4d54b6444"><td class="memTemplParams" colspan="2">template&lt;typename... Components&gt; </td></tr>
+<tr class="memitem:a5748f227bfab7fe248186fe4d54b6444 template"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5748f227bfab7fe248186fe4d54b6444">view</a> ()</td></tr>
+<tr class="memdesc:a5748f227bfab7fe248186fe4d54b6444"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a View for querying entities with the given component types.  <br /></td></tr>
+<tr class="memitem:aec00780522aeb5cf6fb932b251da9a5b" id="r_aec00780522aeb5cf6fb932b251da9a5b"><td class="memTemplParams" colspan="2">template&lt;typename... Components&gt; </td></tr>
+<tr class="memitem:aec00780522aeb5cf6fb932b251da9a5b template"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aec00780522aeb5cf6fb932b251da9a5b">view</a> () const</td></tr>
+<tr class="memdesc:aec00780522aeb5cf6fb932b251da9a5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a View for querying entities with the given component types.     <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Per-frame context passed to systems during game loop updates. </p>
@@ -184,7 +190,7 @@ EntityResolver </dd>
 <dd>
 InputSnapshot </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00073">73</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00075">75</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a186df1b69195b2e1b62baf532aadf252" name="a186df1b69195b2e1b62baf532aadf252"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a186df1b69195b2e1b62baf532aadf252">&#9670;&#160;</a></span>UpdateContext()</h2>
@@ -276,9 +282,9 @@ InputSnapshot </dd></dl>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00174">174</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00176">176</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="UpdateContext_8ixx_source.html#l00220">deltaTime()</a>, <a class="el" href="UpdateContext_8ixx_source.html#l00278">entityResolver()</a>, <a class="el" href="UpdateContext_8ixx_source.html#l00238">inputSnapshot()</a>, <a class="el" href="UpdateContext_8ixx_source.html#l00287">level()</a>, <a class="el" href="UpdateContext_8ixx_source.html#l00247">resourceRegistry()</a>, <a class="el" href="UpdateContext_8ixx_source.html#l00309">session()</a>, <a class="el" href="UpdateContext_8ixx_source.html#l00229">totalTime()</a>, and <a class="el" href="UpdateContext_8ixx_source.html#l00210">viewportSnapshots()</a>.</p>
+<p class="reference">References <a class="el" href="UpdateContext_8ixx_source.html#l00222">deltaTime()</a>, <a class="el" href="UpdateContext_8ixx_source.html#l00280">entityResolver()</a>, <a class="el" href="UpdateContext_8ixx_source.html#l00240">inputSnapshot()</a>, <a class="el" href="UpdateContext_8ixx_source.html#l00289">level()</a>, <a class="el" href="UpdateContext_8ixx_source.html#l00249">resourceRegistry()</a>, <a class="el" href="UpdateContext_8ixx_source.html#l00311">session()</a>, <a class="el" href="UpdateContext_8ixx_source.html#l00231">totalTime()</a>, and <a class="el" href="UpdateContext_8ixx_source.html#l00212">viewportSnapshots()</a>.</p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
@@ -316,7 +322,7 @@ InputSnapshot </dd></dl>
 <p>Shortcut for `resourceRegistry().resource&lt;EngineCommandBuffer&gt;()`. Only accepts engine-defined command types. For custom commands, look up the appropriate handler or buffer via `resourceRegistry()` directly.</p>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer.html" title="Concrete command buffer pre-configured with all engine command types.">EngineCommandBuffer</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00300">300</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00302">302</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="MenuNavigationSystem_8ixx_source.html#l00120">helios::engine::modules::ui::widgets::systems::MenuNavigationSystem::update()</a>.</p>
 <div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
@@ -354,9 +360,9 @@ InputSnapshot </dd></dl>
 <p>Returns the time elapsed since the last frame, in seconds. </p>
 <dl class="section return"><dt>Returns</dt><dd>Delta time in seconds. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00220">220</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00222">222</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="UpdateContext_8ixx_source.html#l00174">UpdateContext()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="UpdateContext_8ixx_source.html#l00176">UpdateContext()</a>.</p>
 <div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
@@ -392,9 +398,9 @@ InputSnapshot </dd></dl>
 <p>Returns the EntityResolver for direct handle validation. </p>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the EntityResolver. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00278">278</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00280">280</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="UpdateContext_8ixx_source.html#l00174">UpdateContext()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="UpdateContext_8ixx_source.html#l00176">UpdateContext()</a>.</p>
 <div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
@@ -437,14 +443,14 @@ InputSnapshot </dd></dl>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A GameObject if the handle is valid, std::nullopt otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00268">268</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00270">270</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="DefaultMatchStateTransitionGuards_8ixx_source.html#l00048">helios::engine::mechanics::match::rules::guards::DefaultMatchStateTransitionGuards::isPlayerActive()</a>, and <a class="el" href="DefaultMatchStateTransitionGuards_8ixx_source.html#l00065">helios::engine::mechanics::match::rules::guards::DefaultMatchStateTransitionGuards::isPlayerInactive()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MenuDisplaySystem_8ixx_source.html#l00101">helios::engine::modules::ui::widgets::systems::MenuDisplaySystem&lt; StateLft, StateRgt &gt;::focusMenu()</a>, <a class="el" href="DefaultMatchStateTransitionGuards_8ixx_source.html#l00048">helios::engine::mechanics::match::rules::guards::DefaultMatchStateTransitionGuards::isPlayerActive()</a>, <a class="el" href="DefaultMatchStateTransitionGuards_8ixx_source.html#l00065">helios::engine::mechanics::match::rules::guards::DefaultMatchStateTransitionGuards::isPlayerInactive()</a>, and <a class="el" href="MenuNavigationSystem_8ixx_source.html#l00120">helios::engine::modules::ui::widgets::systems::MenuNavigationSystem::update()</a>.</p>
 <div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-4-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_aba16db6e6b434f908f937e2a225d7337_icgraph.svg" width="524" height="174"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_aba16db6e6b434f908f937e2a225d7337_icgraph.svg" width="100%" height="560"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -475,9 +481,9 @@ InputSnapshot </dd></dl>
 <p>Returns the immutable input snapshot for this frame. </p>
 <dl class="section return"><dt>Returns</dt><dd>Const ref to the current InputSnapshot. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00238">238</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00240">240</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MenuNavigationSystem_8ixx_source.html#l00120">helios::engine::modules::ui::widgets::systems::MenuNavigationSystem::update()</a>, and <a class="el" href="UpdateContext_8ixx_source.html#l00174">UpdateContext()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MenuNavigationSystem_8ixx_source.html#l00120">helios::engine::modules::ui::widgets::systems::MenuNavigationSystem::update()</a>, and <a class="el" href="UpdateContext_8ixx_source.html#l00176">UpdateContext()</a>.</p>
 <div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-5-summary" class="dynsummary" style="display:block;">
 </div>
@@ -513,9 +519,9 @@ InputSnapshot </dd></dl>
 <p>Returns the active <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Level.html" title="Represents a game level containing the scene graph and world boundaries.">Level</a>. </p>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Level.html" title="Represents a game level containing the scene graph and world boundaries.">Level</a>, or nullptr if no level is loaded. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00287">287</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00289">289</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="UpdateContext_8ixx_source.html#l00174">UpdateContext()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="UpdateContext_8ixx_source.html#l00176">UpdateContext()</a>.</p>
 <div id="dynsection-6" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-6-summary" class="dynsummary" style="display:block;">
 </div>
@@ -570,7 +576,7 @@ template&lt;typename E, typename... Args&gt; </div>
 <dd>
 GameLoop </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00433">433</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00435">435</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
 
 </div>
 </div>
@@ -618,7 +624,7 @@ template&lt;typename E, typename... Args&gt; </div>
 <dd>
 Pass::addCommitPoint() </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00329">329</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00331">331</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
 
 </div>
 </div>
@@ -666,7 +672,7 @@ template&lt;typename E, typename... Args&gt; </div>
 <dd>
 GameLoop </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00348">348</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00350">350</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
 
 </div>
 </div>
@@ -713,7 +719,7 @@ template&lt;typename E&gt; </div>
 <dd>
 GameLoop </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00410">410</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00412">412</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
 
 </div>
 </div>
@@ -755,7 +761,7 @@ template&lt;typename E&gt; </div>
 <dd>
 Pass::addCommitPoint() </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00386">386</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00388">388</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
 
 </div>
 </div>
@@ -797,7 +803,7 @@ template&lt;typename E&gt; </div>
 <dd>
 GameLoop </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00367">367</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00369">369</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
 
 </div>
 </div>
@@ -827,7 +833,7 @@ GameLoop </dd></dl>
 <p>Returns the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html" title="Type-indexed registry for engine resources with O(1) lookup.">ResourceRegistry</a> for resource lookup.    </p>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html" title="Type-indexed registry for engine resources with O(1) lookup.">ResourceRegistry</a>.    </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00254">254</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00256">256</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
 
 </div>
 </div>
@@ -857,9 +863,9 @@ GameLoop </dd></dl>
 <p>Returns the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html" title="Type-indexed registry for engine resources with O(1) lookup.">ResourceRegistry</a> for resource lookup. </p>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html" title="Type-indexed registry for engine resources with O(1) lookup.">ResourceRegistry</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00247">247</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00249">249</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="SpawnAll_8ixx_source.html#l00045">helios::engine::runtime::spawn::policy::amount::SpawnAll::getAmount()</a>, <a class="el" href="GameLoop_8ixx_source.html#l00236">helios::engine::runtime::gameloop::GameLoop::phaseCommit()</a>, and <a class="el" href="UpdateContext_8ixx_source.html#l00174">UpdateContext()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="SpawnAll_8ixx_source.html#l00045">helios::engine::runtime::spawn::policy::amount::SpawnAll::getAmount()</a>, <a class="el" href="GameLoop_8ixx_source.html#l00236">helios::engine::runtime::gameloop::GameLoop::phaseCommit()</a>, and <a class="el" href="UpdateContext_8ixx_source.html#l00176">UpdateContext()</a>.</p>
 <div id="dynsection-7" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-7-summary" class="dynsummary" style="display:block;">
 </div>
@@ -895,9 +901,9 @@ GameLoop </dd></dl>
 <p>Returns the session for game/match state access. </p>
 <dl class="section return"><dt>Returns</dt><dd>Ref to the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Session.html" title="Holds session-level state for the current game instance.">Session</a> used with this <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html" title="Per-frame context passed to systems during game loop updates.">UpdateContext</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00309">309</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00311">311</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="StateManager_8ixx_source.html#l00178">helios::engine::state::StateManager&lt; types::GameState &gt;::flush()</a>, <a class="el" href="DefaultMatchStateTransitionGuards_8ixx_source.html#l00048">helios::engine::mechanics::match::rules::guards::DefaultMatchStateTransitionGuards::isPlayerActive()</a>, <a class="el" href="DefaultMatchStateTransitionGuards_8ixx_source.html#l00065">helios::engine::mechanics::match::rules::guards::DefaultMatchStateTransitionGuards::isPlayerInactive()</a>, <a class="el" href="TypedPass_8ixx_source.html#l00175">helios::engine::runtime::gameloop::TypedPass&lt; StateType &gt;::shouldRun()</a>, and <a class="el" href="UpdateContext_8ixx_source.html#l00174">UpdateContext()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="StateManager_8ixx_source.html#l00178">helios::engine::state::StateManager&lt; types::GameState &gt;::flush()</a>, <a class="el" href="DefaultMatchStateTransitionGuards_8ixx_source.html#l00048">helios::engine::mechanics::match::rules::guards::DefaultMatchStateTransitionGuards::isPlayerActive()</a>, <a class="el" href="DefaultMatchStateTransitionGuards_8ixx_source.html#l00065">helios::engine::mechanics::match::rules::guards::DefaultMatchStateTransitionGuards::isPlayerInactive()</a>, <a class="el" href="TypedPass_8ixx_source.html#l00175">helios::engine::runtime::gameloop::TypedPass&lt; StateType &gt;::shouldRun()</a>, and <a class="el" href="UpdateContext_8ixx_source.html#l00176">UpdateContext()</a>.</p>
 <div id="dynsection-8" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-8-summary" class="dynsummary" style="display:block;">
 </div>
@@ -933,15 +939,103 @@ GameLoop </dd></dl>
 <p>Returns the time elapsed since the first frame, in seconds. </p>
 <dl class="section return"><dt>Returns</dt><dd>Total time in seconds. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00229">229</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00231">231</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="UpdateContext_8ixx_source.html#l00174">UpdateContext()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="UpdateContext_8ixx_source.html#l00176">UpdateContext()</a>.</p>
 <div id="dynsection-9" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-9-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-9-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_ad7f5caca30eb2409b98e21f48c5a0e45_icgraph.svg" width="403" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
+
+</div>
+</div>
+<a id="a5748f227bfab7fe248186fe4d54b6444" name="a5748f227bfab7fe248186fe4d54b6444"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5748f227bfab7fe248186fe4d54b6444">&#9670;&#160;</a></span>view() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Components&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::engine::runtime::world::UpdateContext::view </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a View for querying entities with the given component types. </p>
+<p>Convenience shortcut that avoids accessing the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html" title="Central game state container for entities, resources, and the active level.">GameWorld</a> directly. Delegates to the EntityManager owned by the EntityResolver.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Components</td><td>The component types to query.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A View over all entities possessing every requested component.</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1ecs_1_1View.html" title="A view class to iterate over entities having specific components.">helios::engine::ecs::View</a> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00454">454</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="HierarchyPropagationSystem_8ixx_source.html#l00080">helios::engine::ecs::systems::HierarchyPropagationSystem::update()</a>, <a class="el" href="GridCollisionDetectionSystem_8ixx_source.html#l00436">helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::update()</a>, and <a class="el" href="MenuNavigationSystem_8ixx_source.html#l00120">helios::engine::modules::ui::widgets::systems::MenuNavigationSystem::update()</a>.</p>
+<div id="dynsection-10" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-10-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-10-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_a5748f227bfab7fe248186fe4d54b6444_icgraph.svg" width="504" height="254"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="aec00780522aeb5cf6fb932b251da9a5b" name="aec00780522aeb5cf6fb932b251da9a5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec00780522aeb5cf6fb932b251da9a5b">&#9670;&#160;</a></span>view() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Components&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::engine::runtime::world::UpdateContext::view </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a View for querying entities with the given component types.    </p>
+<p>Convenience shortcut that avoids accessing the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html" title="Central game state container for entities, resources, and the active level.">GameWorld</a> directly. Delegates to the EntityManager owned by the EntityResolver.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Components</td><td>The component types to query.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A View over all entities possessing every requested component.</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1ecs_1_1View.html" title="A view class to iterate over entities having specific components.">helios::engine::ecs::View</a>    </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00462">462</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
 
 </div>
 </div>
@@ -971,13 +1065,13 @@ GameLoop </dd></dl>
 <p>Returns the viewport snapshots for this frame. </p>
 <dl class="section return"><dt>Returns</dt><dd>A span of const ViewportSnapshot objects. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00210">210</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="UpdateContext_8ixx_source.html#l00212">212</a> of file <a class="el" href="UpdateContext_8ixx_source.html">UpdateContext.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="UpdateContext_8ixx_source.html#l00174">UpdateContext()</a>.</p>
-<div id="dynsection-10" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-10-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="UpdateContext_8ixx_source.html#l00176">UpdateContext()</a>.</p>
+<div id="dynsection-11" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-11-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-10-content" class="dyncontent" style="display:none;">
+<div id="dynsection-11-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_a47e89a8a5cf18618ffdc6caccd012100_icgraph.svg" width="403" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 

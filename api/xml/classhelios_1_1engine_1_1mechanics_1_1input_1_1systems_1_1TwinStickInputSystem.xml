@@ -2,7 +2,6 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classhelios_1_1engine_1_1mechanics_1_1input_1_1systems_1_1TwinStickInputSystem" kind="class" language="C++" prot="public">
     <compoundname>helios::engine::mechanics::input::systems::TwinStickInputSystem</compoundname>
-    <basecompoundref refid="classhelios_1_1engine_1_1ecs_1_1System" prot="public" virt="non-virtual">helios::engine::ecs::System</basecompoundref>
     <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1input_1_1systems_1_1TwinStickInputSystem_1afe3dda6ce2193e0694916a482f904a80" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -67,13 +66,12 @@
         </inbodydescription>
         <location file="/tmp/h/include/helios/engine/mechanics/input/systems/TwinStickInputSystem.ixx" line="67" column="18" bodyfile="/tmp/h/include/helios/engine/mechanics/input/systems/TwinStickInputSystem.ixx" bodystart="67" bodyend="68"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1input_1_1systems_1_1TwinStickInputSystem_1acca47c4456273d89230d78679270eef9" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1input_1_1systems_1_1TwinStickInputSystem_1a5b1360edadf5b78dcf11e0f936082914" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
         <definition>void helios::engine::mechanics::input::systems::TwinStickInputSystem::update</definition>
-        <argsstring>(helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept override</argsstring>
+        <argsstring>(helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept</argsstring>
         <name>update</name>
         <qualifiedname>helios::engine::mechanics::input::systems::TwinStickInputSystem::update</qualifiedname>
-        <reimplements refid="classhelios_1_1engine_1_1ecs_1_1System_1a4e9969641985fa04db6214332c88605b">update</reimplements>
         <param>
           <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
           <declname>updateContext</declname>
@@ -158,97 +156,14 @@
 </simplesect>
 </para>
     </detaileddescription>
-    <inheritancegraph>
-      <node id="2">
-        <label>helios::engine::ecs::System</label>
-        <link refid="classhelios_1_1engine_1_1ecs_1_1System"/>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="3">
-        <label>helios::engine::ecs::Updatable</label>
-        <link refid="classhelios_1_1engine_1_1ecs_1_1Updatable"/>
-      </node>
-      <node id="1">
-        <label>helios::engine::mechanics::input::systems::TwinStickInputSystem</label>
-        <link refid="classhelios_1_1engine_1_1mechanics_1_1input_1_1systems_1_1TwinStickInputSystem"/>
-        <childnode refid="2" relation="public-inheritance">
-        </childnode>
-      </node>
-    </inheritancegraph>
-    <collaborationgraph>
-      <node id="8">
-        <label>helios::engine::ecs::EntityManager</label>
-        <link refid="classhelios_1_1engine_1_1ecs_1_1EntityManager"/>
-      </node>
-      <node id="7">
-        <label>helios::engine::ecs::EntityRegistry</label>
-        <link refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry"/>
-      </node>
-      <node id="2">
-        <label>helios::engine::ecs::System</label>
-        <link refid="classhelios_1_1engine_1_1ecs_1_1System"/>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
-        <childnode refid="4" relation="usage">
-          <edgelabel>gameWorld_</edgelabel>
-        </childnode>
-      </node>
-      <node id="3">
-        <label>helios::engine::ecs::Updatable</label>
-        <link refid="classhelios_1_1engine_1_1ecs_1_1Updatable"/>
-      </node>
-      <node id="1">
-        <label>helios::engine::mechanics::input::systems::TwinStickInputSystem</label>
-        <link refid="classhelios_1_1engine_1_1mechanics_1_1input_1_1systems_1_1TwinStickInputSystem"/>
-        <childnode refid="2" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="4">
-        <label>helios::engine::runtime::world::GameWorld</label>
-        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld"/>
-        <childnode refid="5" relation="usage">
-          <edgelabel>logger_</edgelabel>
-        </childnode>
-        <childnode refid="6" relation="usage">
-          <edgelabel>resourceRegistry_</edgelabel>
-        </childnode>
-        <childnode refid="7" relation="usage">
-          <edgelabel>entityRegistry_</edgelabel>
-        </childnode>
-        <childnode refid="8" relation="usage">
-          <edgelabel>em_</edgelabel>
-        </childnode>
-        <childnode refid="9" relation="usage">
-          <edgelabel>session_</edgelabel>
-        </childnode>
-      </node>
-      <node id="6">
-        <label>helios::engine::runtime::world::ResourceRegistry</label>
-        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry"/>
-      </node>
-      <node id="9">
-        <label>helios::engine::runtime::world::Session</label>
-        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session"/>
-      </node>
-      <node id="5">
-        <label>helios::util::log::Logger</label>
-        <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
-      </node>
-    </collaborationgraph>
     <location file="/tmp/h/include/helios/engine/mechanics/input/systems/TwinStickInputSystem.ixx" line="45" column="5" bodyfile="/tmp/h/include/helios/engine/mechanics/input/systems/TwinStickInputSystem.ixx" bodystart="45" bodyend="166"/>
     <listofallmembers>
       <member refid="classhelios_1_1engine_1_1mechanics_1_1input_1_1systems_1_1TwinStickInputSystem_1ac246d66a130e6a439f5cba81207d5f66" prot="private" virt="non-virtual"><scope>helios::engine::mechanics::input::systems::TwinStickInputSystem</scope><name>gameObject_</name></member>
-      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" prot="protected" virt="non-virtual"><scope>helios::engine::mechanics::input::systems::TwinStickInputSystem</scope><name>gameWorld_</name></member>
-      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1ae0464c1668e257439243a4f25979a7ff" prot="public" virt="virtual"><scope>helios::engine::mechanics::input::systems::TwinStickInputSystem</scope><name>init</name></member>
       <member refid="classhelios_1_1engine_1_1mechanics_1_1input_1_1systems_1_1TwinStickInputSystem_1ac0e70131f79aad825821ff16a1be09c7" prot="public" virt="non-virtual"><scope>helios::engine::mechanics::input::systems::TwinStickInputSystem</scope><name>setUseDedicatedShootInput</name></member>
       <member refid="classhelios_1_1engine_1_1mechanics_1_1input_1_1systems_1_1TwinStickInputSystem_1aaaf0bd635c750a4bb4a6752fc5fadc20" prot="public" virt="non-virtual"><scope>helios::engine::mechanics::input::systems::TwinStickInputSystem</scope><name>TwinStickInputSystem</name></member>
-      <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a26d81abcda05fe8b12a1ddb4ed6099a3" prot="public" virt="non-virtual"><scope>helios::engine::mechanics::input::systems::TwinStickInputSystem</scope><name>Updatable</name></member>
-      <member refid="classhelios_1_1engine_1_1mechanics_1_1input_1_1systems_1_1TwinStickInputSystem_1acca47c4456273d89230d78679270eef9" prot="public" virt="virtual"><scope>helios::engine::mechanics::input::systems::TwinStickInputSystem</scope><name>update</name></member>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1input_1_1systems_1_1TwinStickInputSystem_1a5b1360edadf5b78dcf11e0f936082914" prot="public" virt="non-virtual"><scope>helios::engine::mechanics::input::systems::TwinStickInputSystem</scope><name>update</name></member>
       <member refid="classhelios_1_1engine_1_1mechanics_1_1input_1_1systems_1_1TwinStickInputSystem_1a302b13cea18ad671587d51093c0356d1" prot="public" virt="non-virtual"><scope>helios::engine::mechanics::input::systems::TwinStickInputSystem</scope><name>useDedicatedShootInput</name></member>
       <member refid="classhelios_1_1engine_1_1mechanics_1_1input_1_1systems_1_1TwinStickInputSystem_1afe3dda6ce2193e0694916a482f904a80" prot="private" virt="non-virtual"><scope>helios::engine::mechanics::input::systems::TwinStickInputSystem</scope><name>useDedicatedShootInput_</name></member>
-      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a937c99bfacd777c53e0f811ab9d335a6" prot="public" virt="virtual"><scope>helios::engine::mechanics::input::systems::TwinStickInputSystem</scope><name>~System</name></member>
-      <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a0f54f92a2a8d6c8dc2fc2ebed41d5a85" prot="public" virt="virtual"><scope>helios::engine::mechanics::input::systems::TwinStickInputSystem</scope><name>~Updatable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

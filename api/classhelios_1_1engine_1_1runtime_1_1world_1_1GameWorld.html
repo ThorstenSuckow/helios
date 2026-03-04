@@ -215,7 +215,7 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 </ul>
 <p>## Usage with GameLoop</p>
 <p>Systems access the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html" title="Central game state container for entities, resources, and the active level.">GameWorld</a> via <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html" title="Per-frame context passed to systems during game loop updates.">UpdateContext</a>. Entity queries use views, while mutations are performed through Commands flushed by the EngineCommandBuffer.</p>
-<p>```cpp void update(UpdateContext&amp; ctx) noexcept override { for (auto [entity, transform, velocity, active] : gameWorld_-&gt;view&lt; TransformComponent, VelocityComponent, Active &gt;().whereEnabled()) { // Process matching entities } } ```</p>
+<p>```cpp void update(UpdateContext&amp; ctx) noexcept override { for (auto [entity, transform, velocity, active] : updateContext.view&lt; TransformComponent, VelocityComponent, Active &gt;().whereEnabled()) { // Process matching entities } } ```</p>
 <p>## Resource Registration</p>
 <p>```cpp auto&amp; poolMgr = gameWorld.resourceRegistry() .<a class="el" href="#a187d5dfbdb99b5a31917776688d88355" title="Registers an owning resource of arbitrary type.">registerResource&lt;GameObjectPoolManager&gt;()</a>; auto&amp; spawnMgr = gameWorld.resourceRegistry() .<a class="el" href="#a187d5dfbdb99b5a31917776688d88355" title="Registers an owning resource of arbitrary type.">registerResource&lt;SpawnManager&gt;()</a>;</p>
 <p>gameWorld.init(); // Calls <a class="el" href="#aae71c0fe187189d167cb967181831740" title="Initializes all registered managers.">init()</a> on all Managers in registration order ```</p>

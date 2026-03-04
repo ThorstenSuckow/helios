@@ -17,5 +17,7 @@ var classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext =
     [ "resourceRegistry", "classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#adaeb79c72c7affdd5c3197556c82665e", null ],
     [ "session", "classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#a538cadeb656147150f4a12261d67c7f7", null ],
     [ "totalTime", "classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#ad7f5caca30eb2409b98e21f48c5a0e45", null ],
+    [ "view", "classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#a5748f227bfab7fe248186fe4d54b6444", null ],
+    [ "view", "classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#aec00780522aeb5cf6fb932b251da9a5b", null ],
     [ "viewportSnapshots", "classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#a47e89a8a5cf18618ffdc6caccd012100", null ]
 ];

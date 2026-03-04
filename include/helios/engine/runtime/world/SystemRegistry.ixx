@@ -1,133 +1,160 @@
 /**
  * @file SystemRegistry.ixx
- * @brief Registry for managing System instances within a game loop phase.
+ * @brief Type-indexed registry for managing System instances within a game loop pass.
  */
 module;
 
-#include <memory>
-#include <vector>
 #include <cassert>
+#include <memory>
+#include <span>
+#include <vector>
 
 
 export module helios.engine.runtime.world.SystemRegistry;
 
-import helios.engine.ecs.System;
+import helios.engine.core.data;
+import helios.engine.runtime.world.System;
+import helios.engine.runtime.world.TypedSystem;
 
+using namespace helios::engine::core::data;
 
 export namespace helios::engine::runtime::world {
 
     /**
-     * @brief Container for System instances within a game loop pass.
+     * @brief Type-indexed registry for managing System instances within a game loop pass.
      *
-     * @details SystemRegistry manages a collection of Systems that execute
-     * together within a single pass of the game loop. It provides type-safe
-     * registration, lookup, and iteration over Systems.
-     *
-     * ## Ownership
-     *
-     * The registry owns all registered Systems via `std::unique_ptr`. Systems
-     * are destroyed when the registry is destroyed.
-     *
-     * ## Type-Safe Access
-     *
-     * Systems can be retrieved by type using `getSystem<T>()`, enabling
-     * inter-system communication when necessary.
-     *
-     * Example:
-     * ```cpp
-     * SystemRegistry registry;
-     *
-     * // Add systems
-     * registry.add<Move2DSystem>(gameWorld);
-     * registry.add<CollisionSystem>(gameWorld);
-     *
-     * // Check for system
-     * if (registry.hasSystem<CollisionSystem>()) {
-     *     auto* collision = registry.getSystem<CollisionSystem>();
-     * }
-     *
-     * // Iterate all systems
-     * for (auto& system : registry.systems()) {
-     *     system->update(ctx);
-     * }
-     * ```
+     * @details SystemRegistry owns TypedSystem<T> wrappers internally and
+     * provides O(1) access to the underlying concrete system via
+     * SystemTypeId. Systems are registered once via `add<T>()` and then
+     * iterated each frame through the `systems()` span.
      *
      * @see System
-     * @see GameLoop
-     * @see GameLoopPhase
+     * @see TypedSystem
+     * @see SystemTypeId
      */
     class SystemRegistry {
 
         /**
-         * @brief Collection of owned System instances.
+         * @brief Owning storage for wrapped System instances, indexed by SystemTypeId.
          */
-        std::vector<std::unique_ptr<helios::engine::ecs::System>> systems_;
+        std::vector<std::unique_ptr<System>> systems_;
+
+        /**
+         * @brief Raw pointers to the underlying T instances for O(1) typed access.
+         */
+        std::vector<void*> underlyingSystems_;
+
+        /**
+         * @brief Cached non-owning view for iteration; rebuilt when dirty.
+         */
+        std::vector<System*> systemsView_;
+
+        /**
+         * @brief Dirty flag indicating the cache needs rebuilding.
+         */
+        bool needsUpdate_ = true;
+
+        /**
+         * @brief Rebuilds the systems view cache from the owning storage.
+         */
+        void updateCache() {
+            if (!needsUpdate_) {
+                return;
+            }
+
+            systemsView_.clear();
+            systemsView_.reserve(systems_.size());
+
+            for (const auto& system : systems_) {
+                if (system) {
+                    systemsView_.push_back(system.get());
+                }
+            }
+
+
+            needsUpdate_ = false;
+        }
 
     public:
 
         /**
-         * @brief Returns a reference to the system collection.
+         * @brief Returns a span of all registered systems for iteration.
          *
-         * @return Reference to the vector of System unique_ptrs.
+         * @return Span of System pointers.
          */
-        [[nodiscard]] std::vector<std::unique_ptr<helios::engine::ecs::System>>& systems() noexcept {
-            return systems_;
+        [[nodiscard]] std::span<System* const> systems() noexcept {
+            updateCache();
+            return systemsView_;
         }
 
         /**
-         * @brief Adds a new System of type T to the registry.
+         * @brief Registers a new system of type T.
          *
-         * @tparam T The System type to add. Must derive from System.
-         * @tparam Args Constructor argument types.
+         * @details Creates a TypedSystem<T> wrapper, stores it in the
+         * registry indexed by SystemTypeId, and returns a reference to the
+         * underlying T instance.
          *
-         * @param args Arguments forwarded to the System constructor.
+         * @tparam T The concrete system type. Must satisfy HasUpdate.
+         * @tparam Args Constructor argument types for T.
          *
-         * @return Reference to the newly added System.
+         * @param args Arguments forwarded to the T constructor.
          *
-         * @pre No System of type T is already registered.
+         * @return Reference to the registered system instance.
+         *
+         * @pre No system of type T is already registered.
          */
         template<typename T, typename... Args>
-        requires std::is_base_of_v<helios::engine::ecs::System, T>
         T& add(Args&&... args) {
             assert(!hasSystem<T>() && "System already registered with GameLoopPhase");
-            auto system_ptr = std::make_unique<T>(std::forward<Args>(args)...);
-            T* raw_ptr = system_ptr.get();
-            systems_.push_back(std::move(system_ptr));
-            return *raw_ptr;
+            auto system_ptr = std::make_unique<helios::engine::runtime::world::TypedSystem<T>>(
+                    std::forward<Args>(args)...
+            );
+
+            const auto idx = SystemTypeId::id<T>().value();
+
+            if (systems_.size() <= idx) {
+                systems_.resize(idx + 1);
+            }
+            if (underlyingSystems_.size() <= idx) {
+                underlyingSystems_.resize(idx + 1);
+            }
+
+            T& underlying = system_ptr->underlying();
+            needsUpdate_ = true;
+            underlyingSystems_[idx] = &underlying;
+            systems_[idx] = std::move(system_ptr);
+
+            return underlying;
         }
 
         /**
-         * @brief Checks if a System of type T is registered.
+         * @brief Checks whether a system of type T is registered.
          *
-         * @tparam T The System type to check for.
+         * @tparam T The system type to check.
          *
-         * @return True if the System exists, false otherwise.
+         * @return True if registered, false otherwise.
          */
         template<typename T>
-        requires std::is_base_of_v<helios::engine::ecs::System, T>
         [[nodiscard]] bool hasSystem() const {
             return getSystem<T>() != nullptr;
         }
 
         /**
-         * @brief Retrieves a System by type.
+         * @brief Returns a pointer to the underlying system of type T.
          *
-         * @tparam T The System type to retrieve.
+         * @tparam T The system type to retrieve.
          *
-         * @return Pointer to the System if found, nullptr otherwise.
-         *
-         * @note Uses dynamic_cast for type checking. O(n) complexity.
+         * @return Pointer to the system, or nullptr if not registered.
          */
         template<typename T>
-        requires std::is_base_of_v<helios::engine::ecs::System, T>
         [[nodiscard]] T* getSystem() const {
-            for (const auto& system : systems_) {
-                if (auto* sys = dynamic_cast<T*>(system.get())) {
-                    return sys;
-                }
+
+            const auto idx = SystemTypeId::id<T>().value();
+            if (systems_.size() <= idx || underlyingSystems_.size() <= idx) {
+                return nullptr;
             }
 
-            return nullptr;
+            return underlyingSystems_[idx] ? static_cast<T*>(underlyingSystems_[idx]) : nullptr;
         }
 
     };

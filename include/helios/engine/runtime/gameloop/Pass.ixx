@@ -6,12 +6,13 @@ module;
 
 #include <type_traits>
 #include <utility>
+#include <memory>
 
 export module helios.engine.runtime.gameloop.Pass;
 
 import helios.engine.runtime.gameloop.CommitPoint;
 
-import helios.engine.ecs.System;
+
 import helios.engine.runtime.world.SystemRegistry;
 
 import helios.engine.runtime.world.UpdateContext;
@@ -104,9 +105,10 @@ export namespace helios::engine::runtime::gameloop {
          * @return Reference to this Pass for method chaining.
          */
         template<typename T, typename... Args>
-        requires std::is_base_of_v<helios::engine::ecs::System, T>
         Pass& addSystem(Args&&... args) {
-            systemRegistry_.add<T>(std::forward<Args>(args)...);
+            systemRegistry_.template add<T>(
+                std::forward<Args>(args)...
+            );
 
             return *this;
         }

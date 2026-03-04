@@ -17,7 +17,7 @@ import helios.engine.mechanics.scoring.types;
 
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
-import helios.engine.ecs.System;
+
 
 import helios.engine.modules.physics.collision.events;
 
@@ -42,15 +42,15 @@ export namespace helios::engine::mechanics::scoring::systems {
      * @see ScoreObserverComponent
      * @see ScorePoolManager
      */
-    class ScoreObserverSystem : public helios::engine::ecs::System {
+    class ScoreObserverSystem {
 
         /**
          * @brief Reference to the ScorePoolManager that owns the score pools.
          */
         ScorePoolManager& scorePoolManager_;
 
-    public:
 
+    public:
         /**
          * @brief Constructs the system with a reference to the ScorePoolManager.
          *
@@ -67,9 +67,9 @@ export namespace helios::engine::mechanics::scoring::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
-            for (auto [entity, soc, active] : gameWorld_->view<
+            for (auto [entity, soc, active] : updateContext.view<
                 helios::engine::mechanics::scoring::components::ScoreObserverComponent,
                 helios::engine::mechanics::lifecycle::components::Active
             >().whereEnabled()) {

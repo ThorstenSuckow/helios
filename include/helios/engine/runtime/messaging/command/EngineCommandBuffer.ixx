@@ -22,9 +22,9 @@ import helios.engine.runtime.messaging.command.CommandBuffer;
 import helios.engine.runtime.messaging.command.TypedCommandBuffer;
 
 import helios.engine.modules.ui.commands;
-import helios.engine.mechanics.damage.commands;
 import helios.engine.mechanics.timing.commands;
 import helios.engine.mechanics.combat.commands;
+import helios.engine.mechanics.damage.commands;
 import helios.engine.mechanics.scoring.commands;
 import helios.engine.modules.physics.motion.commands;
 import helios.engine.mechanics.lifecycle.commands.WorldLifecycleCommand;
@@ -52,6 +52,18 @@ export namespace helios::engine::runtime::messaging::command {
      * instantiated with the full set of command types used by the engine.
      * It is registered as a resource in the GameWorld and accessed by systems
      * via `UpdateContext::commandBuffer()`.
+     *
+     * ## Registered Command Types
+     *
+     * | Domain | Commands |
+     * |--------|----------|
+     * | Combat | `Aim2DCommand`, `ShootCommand`, `ApplyDamageCommand` |
+     * | Motion | `Move2DCommand`, `SteeringCommand` |
+     * | Scoring | `UpdateScoreCommand` |
+     * | Spawn | `ScheduledSpawnPlanCommand`, `SpawnCommand`, `DespawnCommand` |
+     * | State | `StateCommand<GameState>`, `StateCommand<MatchState>` |
+     * | UI | `UiActionCommand` |
+     * | Timing | `TimerControlCommand` |
      *
      * @see TypedCommandBuffer
      * @see CommandBuffer

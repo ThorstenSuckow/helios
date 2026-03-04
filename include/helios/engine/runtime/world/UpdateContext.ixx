@@ -21,6 +21,8 @@ import helios.engine.ecs.EntityResolver;
 import helios.engine.ecs.GameObject;
 import helios.engine.ecs.EntityHandle;
 
+import helios.engine.ecs.View;
+
 export namespace helios::engine::runtime::messaging::command  {
     class EngineCommandBuffer;
 }
@@ -433,5 +435,33 @@ export namespace helios::engine::runtime::world {
         void pushFrame(Args&&... args) {
             frameEventSink_.template push<E>(std::forward<Args>(args)...);
         }
+
+
+        /**
+         * @brief Creates a View for querying entities with the given component types.
+         *
+         * @details Convenience shortcut that avoids accessing the GameWorld
+         * directly. Delegates to the EntityManager owned by the
+         * EntityResolver.
+         *
+         * @tparam Components The component types to query.
+         *
+         * @return A View over all entities possessing every requested component.
+         *
+         * @see helios::engine::ecs::View
+         */
+        template <typename... Components>
+        [[nodiscard]] auto view() {
+            return helios::engine::ecs::View<Components...>(entityResolver_.em);
+        }
+
+        /**
+         * @copydoc view()
+         */
+        template <typename... Components>
+        [[nodiscard]] auto view() const {
+            return helios::engine::ecs::View<const Components...>(entityResolver_.em);
+        }
+
     };
 }

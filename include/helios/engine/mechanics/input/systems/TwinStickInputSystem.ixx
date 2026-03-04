@@ -12,7 +12,7 @@ import helios.math.types;
 import helios.math.utils;
 import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.UpdateContext;
-import helios.engine.ecs.System;
+
 
 import helios.engine.state.Bindings;
 import helios.engine.runtime.messaging.command.EngineCommandBuffer;
@@ -42,7 +42,7 @@ export namespace helios::engine::mechanics::input::systems {
      * @note Requires the owning GameObject to have Move2DComponent and Aim2DComponent
      *       attached for the generated commands to have any effect.
      */
-    class TwinStickInputSystem : public helios::engine::ecs::System {
+    class TwinStickInputSystem {
 
         /**
          * @brief Flag to indicate whether shoot commands should be derived
@@ -72,7 +72,7 @@ export namespace helios::engine::mechanics::input::systems {
          *
          * @param updateContext Context containing input snapshot and command buffer.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             auto& inputSnapshot = updateContext.inputSnapshot();
             auto& commandBuffer = updateContext.commandBuffer();

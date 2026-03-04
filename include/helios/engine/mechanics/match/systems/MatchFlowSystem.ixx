@@ -37,7 +37,7 @@ export namespace helios::engine::mechanics::match::systems {
      * transition commands to progress through: Undefined -> Warmup ->
      * PlayerSpawn -> Playing.
      */
-    class MatchFlowSystem : public helios::engine::ecs::System {
+    class MatchFlowSystem {
 
         MatchState prevMatchState_ = MatchState::Undefined;
         StateTransitionIdType<MatchState> prevMatchStateTransitionId_ = StateTransitionIdType<MatchState>::Undefined;
@@ -50,7 +50,7 @@ export namespace helios::engine::mechanics::match::systems {
          *
          * @param updateContext The current update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             auto& session = updateContext.session();
 

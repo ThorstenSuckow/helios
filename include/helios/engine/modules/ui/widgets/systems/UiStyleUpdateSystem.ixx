@@ -7,7 +7,7 @@ module;
 
 
 export module helios.engine.modules.ui.widgets.systems.UiStyleUpdateSystem;
-import helios.engine.ecs.System;
+
 
 import helios.engine.modules.ui.widgets.components.UiTextComponent;
 import helios.engine.modules.ui.widgets.components.UiStyleComponent;
@@ -30,8 +30,7 @@ export namespace helios::engine::modules::ui::widgets::systems {
      * Monitors UiTextComponent for resize requests and updates the associated
      * ModelAabbComponent with the new text bounds from the underlying TextRenderable.
      */
-    class UiStyleUpdateSystem : public helios::engine::ecs::System {
-
+    class UiStyleUpdateSystem {
 
     public:
 
@@ -40,9 +39,9 @@ export namespace helios::engine::modules::ui::widgets::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
-            for (auto [entity, txt, usy, usc, active] : gameWorld_->view<
+            for (auto [entity, txt, usy, usc, active] : updateContext.view<
                 helios::engine::modules::ui::widgets::components::UiTextComponent,
                 helios::engine::modules::ui::widgets::components::UiStyleComponent,
                 helios::engine::modules::ui::widgets::components::UiStateComponent,

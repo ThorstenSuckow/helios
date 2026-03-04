@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.modules.physics.collision.Bounds;
 
-import helios.engine.ecs.System;
+
 import helios.math;
 
 import helios.core.units.Unit;

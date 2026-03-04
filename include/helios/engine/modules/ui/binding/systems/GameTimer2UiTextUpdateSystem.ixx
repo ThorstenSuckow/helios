@@ -16,7 +16,7 @@ import helios.engine.mechanics.timing.components;
 
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
-import helios.engine.ecs.System;
+
 
 import helios.engine.modules.ui.widgets;
 import helios.engine.modules.ui.layout;
@@ -38,7 +38,7 @@ export namespace helios::engine::modules::ui::binding::systems {
      * @see GameTimerBindingComponent
      * @see TimeFormatterComponent
      */
-    class GameTimer2UiTextUpdateSystem : public helios::engine::ecs::System {
+    class GameTimer2UiTextUpdateSystem {
 
         /**
          * @brief Reference to the TimerManager that owns the game timers.
@@ -46,7 +46,6 @@ export namespace helios::engine::modules::ui::binding::systems {
         TimerManager& timerManager_;
 
     public:
-
         /**
          * @brief Constructs the system with a reference to the TimerManager.
          *
@@ -66,9 +65,9 @@ export namespace helios::engine::modules::ui::binding::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
-            for (auto [entity, gtc, dfc, txt, active] : gameWorld_->view<
+            for (auto [entity, gtc, dfc, txt, active] : updateContext.view<
                 helios::engine::mechanics::timing::components::GameTimerBindingComponent,
                 helios::engine::modules::ui::layout::components::TimeFormatterComponent,
                 helios::engine::modules::ui::widgets::components::UiTextComponent,

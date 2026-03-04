@@ -9,8 +9,6 @@ export import helios.engine.ecs.systems;
 
 
 export import helios.engine.ecs.GameObject;
-export import helios.engine.ecs.System;
-export import helios.engine.ecs.Updatable;
 
 export import helios.engine.ecs.EntityHandle;
 export import helios.engine.ecs.EntityRegistry;

@@ -76,7 +76,7 @@ export namespace helios::engine::runtime::world {
      *
      * ```cpp
      * void update(UpdateContext& ctx) noexcept override {
-     *     for (auto [entity, transform, velocity, active] : gameWorld_->view<
+     *     for (auto [entity, transform, velocity, active] : updateContext.view<
      *         TransformComponent,
      *         VelocityComponent,
      *         Active
@@ -413,7 +413,7 @@ export namespace helios::engine::runtime::world {
          */
         template <typename... Components>
         [[nodiscard]] auto view() const {
-            return helios::engine::ecs::View<Components...>(&em_);
+            return helios::engine::ecs::View<const Components...>(&em_);
         }
 
         /**

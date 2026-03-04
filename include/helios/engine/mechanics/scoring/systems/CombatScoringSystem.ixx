@@ -25,7 +25,7 @@ import helios.engine.runtime.world.UpdateContext;
 import helios.engine.state.Bindings;
 import helios.engine.runtime.messaging.command.EngineCommandBuffer;
 
-import helios.engine.ecs.System;
+
 import helios.engine.core.data;
 
 import helios.engine.mechanics.health.events.HealthDepletedEvent;
@@ -53,7 +53,7 @@ export namespace helios::engine::mechanics::scoring::systems {
      * ScoreValueComponent. If so, issues an UpdateScoreCommand to
      * credit the attacker's score pool.
      */
-    class CombatScoringSystem : public helios::engine::ecs::System {
+    class CombatScoringSystem {
 
         inline static const helios::util::log::Logger& logger_ = helios::util::log::LogManager::loggerForScope(
             HELIOS_LOG_SCOPE);
@@ -66,7 +66,7 @@ export namespace helios::engine::mechanics::scoring::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto& event : updateContext.readPass<HealthDepletedEvent>()) {
 

@@ -13,7 +13,7 @@ export module helios.engine.mechanics.lifecycle.systems.GameObjectLifecycleSyste
 import helios.engine.state.Bindings;
 import helios.engine.runtime.messaging.command.EngineCommandBuffer;
 
-import helios.engine.ecs.System;
+
 
 import helios.engine.runtime.world.Manager;
 import helios.engine.runtime.world.GameWorld;
@@ -52,7 +52,7 @@ export namespace helios::engine::mechanics::lifecycle::systems {
      *   a DespawnCommand is enqueued.
      * - Otherwise the entity is deactivated.
      */
-    class GameObjectLifecycleSystem : public helios::engine::ecs::System {
+    class GameObjectLifecycleSystem {
 
     public:
 
@@ -61,7 +61,7 @@ export namespace helios::engine::mechanics::lifecycle::systems {
          *
          * @param updateContext Current frame context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             auto events = updateContext.readPass<HealthDepletedEvent>();
 

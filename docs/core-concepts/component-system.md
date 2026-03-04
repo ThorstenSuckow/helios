@@ -101,13 +101,13 @@ Components are stored in type-specific `SparseSet<T>` containers managed by `Ent
 Global logic processors that operate on the entire GameWorld. Systems are registered with the **GameLoop** and executed within Phases and Passes.
 
 ```cpp
-import helios.engine.ecs.System;
+import helios.engine.runtime.world.UpdateContext;
 
-class PhysicsSystem : public helios::engine::ecs::System {
+class PhysicsSystem {
 public:
-    void update(UpdateContext& ctx) noexcept override {
+    void update(UpdateContext& ctx) noexcept {
         // Iterate all active entities with required components
-        for (auto [entity, move, transform, active] : gameWorld_->view<
+        for (auto [entity, move, transform, active] : ctx.view<
             Move2DComponent,
             TranslationStateComponent,
             Active
@@ -301,22 +301,18 @@ public:
 
 ## Creating Custom Systems
 
-Define a class inheriting from `System`. Systems are registered with the GameLoop and operate on the GameWorld:
+Define a plain class with an `update(UpdateContext&)` method. Systems are registered with the GameLoop via `addSystem<T>()`:
 
 ```cpp
 export module myproject.systems.Spawner;
 
-import helios.engine.ecs.System;
-import helios.engine.runtime.world.GameWorld;
+import helios.engine.runtime.world.UpdateContext;
 
-export class SpawnerSystem : public helios::engine::ecs::System {
+export class SpawnerSystem {
     float timer_ = 0.0f;
-    
+
 public:
-    explicit SpawnerSystem(helios::engine::runtime::world::GameWorld& world) 
-        : System(world) {}
-    
-    void update(helios::engine::runtime::world::UpdateContext& ctx) noexcept override {
+    void update(helios::engine::runtime::world::UpdateContext& ctx) noexcept {
         timer_ += ctx.deltaTime();
         if (timer_ > 5.0f) {
             timer_ = 0.0f;
@@ -382,10 +378,10 @@ for (auto* obj : gameWorld.find<CollisionComponent>(filter)) {
 **Active GameObjects with enabled components:**
 
 ```cpp
-void update(UpdateContext& ctx) noexcept override {
+void update(UpdateContext& ctx) noexcept {
     auto filter = GameObjectFilter::Active | GameObjectFilter::ComponentEnabled;
     
-    for (auto [obj, move, collision] : gameWorld_->find<Move2DComponent, CollisionComponent>(filter).each()) {
+    for (auto [obj, move, collision] : ctx.view<Move2DComponent, CollisionComponent>(filter).each()) {
         // Both GameObject is active AND components are enabled
         // No manual checks required
     }
@@ -395,8 +391,8 @@ void update(UpdateContext& ctx) noexcept override {
 **Manual filtering (alternative approach):**
 
 ```cpp
-void update(UpdateContext& ctx) noexcept override {
-    for (auto [obj, move, collision] : gameWorld_->find<Move2DComponent, CollisionComponent>().each()) {
+void update(UpdateContext& ctx) noexcept {
+    for (auto [obj, move, collision] : ctx.view<Move2DComponent, CollisionComponent>().each()) {
         
         // Skip inactive GameObjects
         if (!obj->isActive()) {

@@ -49,31 +49,6 @@ export namespace helios::engine::runtime::world {
          */
         std::vector<System*> systemsView_;
 
-        /**
-         * @brief Dirty flag indicating the cache needs rebuilding.
-         */
-        bool needsUpdate_ = true;
-
-        /**
-         * @brief Rebuilds the systems view cache from the owning storage.
-         */
-        void updateCache() {
-            if (!needsUpdate_) {
-                return;
-            }
-
-            systemsView_.clear();
-            systemsView_.reserve(systems_.size());
-
-            for (const auto& system : systems_) {
-                if (system) {
-                    systemsView_.push_back(system.get());
-                }
-            }
-
-
-            needsUpdate_ = false;
-        }
 
     public:
 
@@ -83,7 +58,6 @@ export namespace helios::engine::runtime::world {
          * @return Span of System pointers.
          */
         [[nodiscard]] std::span<System* const> systems() noexcept {
-            updateCache();
             return systemsView_;
         }
 
@@ -104,6 +78,7 @@ export namespace helios::engine::runtime::world {
          * @pre No system of type T is already registered.
          */
         template<typename T, typename... Args>
+        requires helios::engine::runtime::world::HasUpdate<T>
         T& add(Args&&... args) {
             assert(!hasSystem<T>() && "System already registered with GameLoopPhase");
             auto system_ptr = std::make_unique<helios::engine::runtime::world::TypedSystem<T>>(
@@ -120,9 +95,18 @@ export namespace helios::engine::runtime::world {
             }
 
             T& underlying = system_ptr->underlying();
-            needsUpdate_ = true;
+
             underlyingSystems_[idx] = &underlying;
+            /**
+             * SystemsView returns systems in the order they were registered.
+             * The game loop guarantees this: calling addSystem() on a pass preserves
+             * deterministic execution by maintaining the insertion order.
+             * Once removeSystem() is implemented, updating systemsView_ must be
+             * reviewed.
+             */
+            systemsView_.push_back(system_ptr.get());
             systems_[idx] = std::move(system_ptr);
+
 
             return underlying;
         }

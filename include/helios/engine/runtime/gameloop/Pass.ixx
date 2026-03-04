@@ -97,7 +97,7 @@ export namespace helios::engine::runtime::gameloop {
         /**
          * @brief Adds a system of type T to this pass.
          *
-         * @tparam T The system type to add. Must derive from System.
+         * @tparam T The system type to add.
          * @tparam Args Constructor argument types for the system.
          *
          * @param args Arguments forwarded to the system constructor.

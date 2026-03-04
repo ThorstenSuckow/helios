@@ -1,0 +1,38 @@
+\subsection{Übersicht}
+
+Mit der Beschreibung in dem vorherigen Abschnitt haben wir einige relevante Punkte der Entwicklung bereits angeschnitten.
+
+Im Folgenden geben wir einen Überblick über die Architektur sowie der Kernkonzepte, die in helios zur Konfiguration, Kommunikation und Ressourcenverwaltung der in der GameWorld aktiven GameObjects und Systeme implementiert wurden.
+
+\subection{Strukturierung der engine-Schicht}
+
+Die Strukturierung der engine Schicht folgt der im ersten Dokument beschriebenen Unterteilung in Module und folgt wie in dem dem Dokument weitestgehend einer ``by-feature, by-layer``-Strukturierung und ist in Abbildung~\ref{fig:engine_struktur} dargestellt.
+
+\begin{figure}[htbp]
+    \setlength{\DTbaselineskip}{18pt}
+    \dirtree{%
+        .1 ./engine
+        .2 builder/.
+        .2 common/.
+        .2 ecs/.
+        .2 mechanics/.
+        .2 modules/.
+        .2 runtime/.
+        .2 state/.
+        .2 tooling/.
+    }
+    \caption{Struktur des engine-Moduls von helios.}
+    \label{fig:engine_struktur}
+\end{figure}
+
+Hierbei gestaltet sich die Unterteilung in Module wie folgt:
+
+\begin{itemize}
+    \itemsep0.5em
+    \item \texttt{builder/}: Stellt Builder-Klassen für Spawn-Systeme und GameObjects-bereit, auf Basis von Fluent Interface sowie einer Domain-Specific Language (DSL), um die Erstellung von Fachobjekten von einem hohen Abstraktionsgrad in einen zugänglichen semantischen Kontext zu überführen.
+    \item \texttt{common/}: Enthält allgemeine Hilfsklassen, die vor allem von \texttt{mechanics} und \texttt{modules} genutzt werden, darunter spielspezifische Kontextklassen, die für verschiedene Systeme und Komponenten relevante Informationen über die aktuelle Spielsituation bereitstellen.
+    \item \texttt{core/}: Stellt fundamentale Datentypen und -Objekte zur Verfügung, die für den Betrieb der engine benötigt werden, darunter bspw. \texttt{Units}, die das metrische System für die helios bereitstellt.
+    \item \texttt{ecs/}: Implementiert die Kernkomponenten der ECS-Architektur, darunter den \texttt{EntityManager}, die \texttt{GameObject}-Fassade und die \texttt{SparseSet}-Datenstruktur.
+    \item \texttt{mechanics/}: Implementiert Komponenten, Systeme, Datentypen und Nachrichten-Objekte für verschiedene Spielmechaniken, beispielsweise für Eingabeverarbeitung, Gesundheits- und Schadenszustände sowie Punktesysteme.
+    \item
+\end{itemize}

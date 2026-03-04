@@ -33,6 +33,8 @@ Zur Realisierung dichter Speicherlayouts wird außerdem ein \textit{Dense Type I
 Dieser wird über ein \texttt{struct} initialisiert und erzeugt auf Basis der übergebenen Typen einen dichten Index.
 In entsprechenden Anwendungsfällen ermöglicht dies einen elementweisen Zugriff in $O(1)$, während sich dichte (\textit{dense}) Speicherlayouts ergeben, die eine Iteration in $O(N)$ erlauben.
 In den meisten Fällen entspricht $N$ der tatsächlichen Elementanzahl $M$; nur selten gilt aufgrund der \textit{sparsity} solcher Container $N > M$.\\
+Mit dem vorherigen Design von GameObject als compound object, bei dem jedes einzelne ein Heap-Objekt darstellt und zusätzlich einen Speicherbereich für $L$ Komponenten benötigt, ergeben sich statt einem dichten Speicherbereich $N$ Speicherbereiche der Größe $L$, die zusätzlich bei nicht-ausreichender Größe neuen Speicherbereich anfordern und gegebenenfalls die existierenden Speicherinhalte verschieben müssen, was nicht optimal bei den einzelnen Iterationen der GameLoop ist, die bei 120 fps nur ca. $16 ms$ Zeit für alle Operationen und Berechnungen der verschiedenen Systeme hat.\\
+
 
 Für die Steuerung des Spiels war zudem die Einführung eines User Interfaces notwendig, damit der Anwender neben spielspezifischen Informationen auf einem Heads-Up-Display (\textit{HUD}) auch Menüoptionen zum Starten, Pausieren, Neustarten und Beenden des Spiels erhält.
 

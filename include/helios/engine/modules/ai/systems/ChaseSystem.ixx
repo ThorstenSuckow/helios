@@ -8,7 +8,7 @@ module;
 
 export module helios.engine.modules.ai.systems.ChaseSystem;
 
-import helios.engine.ecs.System;
+
 import helios.math;
 
 import helios.core.units.Unit;
@@ -43,18 +43,18 @@ export namespace helios::engine::modules::ai::systems {
      * 3. Calculates direction from entity to target
      * 4. Sets steering intent to face that direction
      */
-    class ChaseSystem : public helios::engine::ecs::System {
+    class ChaseSystem {
+
 
     public:
-
         /**
          * @brief Updates steering for all chasing entities.
          *
          * @param updateContext Context providing delta time and game world access.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
-            for (auto [entity, sc, cc, tsc, active] : gameWorld_->view<
+            for (auto [entity, sc, cc, tsc, active] : updateContext.view<
                 helios::engine::modules::physics::motion::components::SteeringComponent,
                 helios::engine::modules::ai::components::ChaseComponent,
                 helios::engine::modules::spatial::transform::components::TranslationStateComponent,
@@ -63,7 +63,7 @@ export namespace helios::engine::modules::ai::systems {
 
                 const auto entityHandle = cc->target();
 
-                auto go = gameWorld_->find(entityHandle);
+                auto go = updateContext.find(entityHandle);
 
                 if (!go || !go->isActive() || go->has<DeadTagComponent>()) {
                     continue;

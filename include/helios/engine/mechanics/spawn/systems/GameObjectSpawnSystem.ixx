@@ -10,7 +10,7 @@ module;
 
 export module helios.engine.mechanics.spawn.systems.GameObjectSpawnSystem;
 
-import helios.engine.ecs.System;
+
 
 import helios.engine.state.Bindings;
 import helios.engine.runtime.messaging.command.EngineCommandBuffer;
@@ -25,7 +25,7 @@ import helios.engine.runtime.spawn.events.SpawnPlanCommandExecutedEvent;
 export namespace helios::engine::mechanics::spawn::systems {
 
 
-    class GameObjectSpawnSystem : public helios::engine::ecs::System {
+    class GameObjectSpawnSystem {
 
 
         helios::engine::runtime::spawn::SpawnManager& spawnManager_;
@@ -48,7 +48,7 @@ export namespace helios::engine::mechanics::spawn::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             const auto& events = updateContext.readFrame<
                 helios::engine::runtime::spawn::events::SpawnPlanCommandExecutedEvent

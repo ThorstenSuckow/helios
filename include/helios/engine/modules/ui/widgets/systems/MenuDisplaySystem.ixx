@@ -35,6 +35,7 @@ using namespace helios::engine::mechanics::gamestate::types;
 using namespace helios::engine::mechanics::match::types;
 using namespace helios::engine::ecs;
 using namespace helios::engine::modules::ui::widgets::components;
+using namespace helios::engine::runtime::world;
 
 export namespace helios::engine::modules::ui::widgets::systems {
 
@@ -57,7 +58,8 @@ export namespace helios::engine::modules::ui::widgets::systems {
      * @see MenuNavigationSystem
      */
     template<typename StateLft, typename StateRgt>
-    class MenuDisplaySystem : public helios::engine::ecs::System {
+    class MenuDisplaySystem {
+
 
         /**
          * @brief Previously active menu IDs for change detection.
@@ -89,27 +91,28 @@ export namespace helios::engine::modules::ui::widgets::systems {
             }
         }
 
+    protected:
         /**
          * @brief Focuses the first item of a menu.
          *
          * @param menuId The menu to focus.
          * @param components View of all MenuComponent entities.
          */
-        void focusMenu(const MenuId menuId, View<MenuComponent>& components) {
+        void focusMenu(helios::engine::runtime::world::UpdateContext& updateContext, const MenuId menuId, View<MenuComponent>& components) {
             for (auto [entity, mc] : components) {
                 if (mc->menuId() == menuId) {
                     mc->selectDefaultIndex();
 
                     if (mc->menuItems().size() > mc->selectedIndex()) {
-                        auto menuItem = gameWorld_->find(mc->menuItems()[mc->selectedIndex()]);
+                        auto menuItem = updateContext.find(mc->menuItems()[mc->selectedIndex()]);
                         menuItem->getOrAdd<UiFocusComponent>();
                     }
                     break;
                 }
             }
         }
-        
-        
+
+
     public:
 
         /**
@@ -133,7 +136,7 @@ export namespace helios::engine::modules::ui::widgets::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
 
             auto& session = updateContext.session();
@@ -147,7 +150,7 @@ export namespace helios::engine::modules::ui::widgets::systems {
                 return;
             }
 
-            View<MenuComponent> components = gameWorld_->view<MenuComponent>().whereEnabled();
+            View<MenuComponent> components = updateContext.view<MenuComponent>().whereEnabled();
 
 
             for (auto& prevMenuId : prevMenuIds_) {
@@ -169,7 +172,7 @@ export namespace helios::engine::modules::ui::widgets::systems {
             bool hasFocus = false;
             inactiveItems_.clear();
 
-            for (auto [entity, fc] :  gameWorld_->view<UiFocusComponent>().whereEnabled()) {
+            for (auto [entity, fc] :  updateContext.view<UiFocusComponent>().whereEnabled()) {
 
                 /**
                  * @todo Check if item is child element of menu?
@@ -192,7 +195,7 @@ export namespace helios::engine::modules::ui::widgets::systems {
 
             // focus an item from the first menu
             if (!hasFocus) {
-                focusMenu(menuIds[0], components);
+                focusMenu(updateContext, menuIds[0], components);
             }
 
         }

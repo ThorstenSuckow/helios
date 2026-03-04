@@ -10,7 +10,7 @@ module;
 
 export module helios.engine.mechanics.damage.systems.DamageOnCollisionSystem;
 
-import helios.engine.ecs.System;
+
 import helios.engine.ecs.GameObject;
 
 import helios.engine.runtime.world.UpdateContext;
@@ -57,7 +57,7 @@ export namespace helios::engine::mechanics::damage::systems {
      * ApplyDamageCommand. Resolves the true attacker (instigator) via
      * EmittedByComponent when applicable (e.g. projectiles).
      */
-    class DamageOnCollisionSystem : public helios::engine::ecs::System {
+    class DamageOnCollisionSystem {
 
 
         inline static const helios::util::log::Logger& logger_ = helios::util::log::LogManager::loggerForScope(
@@ -71,7 +71,7 @@ export namespace helios::engine::mechanics::damage::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             auto eventPass = updateContext.readPass<
                 helios::engine::modules::physics::collision::events::SolidCollisionEvent>();

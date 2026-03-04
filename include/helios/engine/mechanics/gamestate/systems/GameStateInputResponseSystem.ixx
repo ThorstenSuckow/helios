@@ -33,7 +33,7 @@ export namespace helios::engine::mechanics::gamestate::systems {
      * Listens for the Start button and triggers appropriate state transitions
      * based on the current game state (e.g., Title -> Running, Running -> Paused).
      */
-    class GameStateInputResponseSystem : public helios::engine::ecs::System {
+    class GameStateInputResponseSystem {
 
 
 
@@ -44,7 +44,7 @@ export namespace helios::engine::mechanics::gamestate::systems {
          *
          * @param updateContext The current update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             auto gameState = updateContext.session().state<GameState>();
 

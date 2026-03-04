@@ -8,7 +8,7 @@ module;
 
 export module helios.engine.mechanics.combat.systems.ProjectileSpawnSystem;
 
-import helios.engine.ecs.System;
+
 
 import helios.engine.state.Bindings;
 import helios.engine.runtime.messaging.command.EngineCommandBuffer;
@@ -68,7 +68,7 @@ export namespace helios::engine::mechanics::combat::systems {
      * @see SpawnCommand
      * @see EmitterContext
      */
-    class ProjectileSpawnSystem : public helios::engine::ecs::System {
+    class ProjectileSpawnSystem {
 
         /**
          * @brief The spawn profile ID used for projectile creation.
@@ -107,9 +107,9 @@ export namespace helios::engine::mechanics::combat::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
-            for (auto [entity, tsc, ac, sc, active] : gameWorld_->view<
+            for (auto [entity, tsc, ac, sc, active] : updateContext.view<
                 helios::engine::modules::spatial::transform::components::TranslationStateComponent,
                 helios::engine::mechanics::combat::components::Aim2DComponent,
                 helios::engine::mechanics::combat::components::ShootComponent,

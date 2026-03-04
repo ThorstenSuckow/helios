@@ -39,7 +39,7 @@ export namespace helios::engine::mechanics::gamestate::systems {
      * @see GameStateTransitionId
      * @see StateCommand
      */
-    class GameFlowSystem : public helios::engine::ecs::System {
+    class GameFlowSystem {
 
         /**
          * @brief The previously observed game state.
@@ -62,7 +62,7 @@ export namespace helios::engine::mechanics::gamestate::systems {
          *
          * @param updateContext The update context providing session and command buffer access.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             auto& session = updateContext.session();
 

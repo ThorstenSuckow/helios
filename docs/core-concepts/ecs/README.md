@@ -29,8 +29,8 @@ The **Entity-Component-System (ECS)** architecture in helios separates data (Com
 ┌───────────────────┐   ┌───────────────────────────────────┐
 │     Systems       │   │     Component Reflection          │
 │  ┌──────────────┐ │   │  ┌─────────────┐ ┌─────────────┐  │
-│  │   System     │ │   │  │ComponentOps │ │  Traits     │  │
-│  │  (Updatable) │ │   │  │  Registry   │ │ (concepts)  │  │
+│  │ TypedSystem<>│ │   │  │ComponentOps │ │  Traits     │  │
+│  │  (wrapper)   │ │   │  │  Registry   │ │ (concepts)  │  │
 │  └──────────────┘ │   │  └─────────────┘ └─────────────┘  │
 └───────────────────┘   └───────────────────────────────────┘
 ```
@@ -47,8 +47,9 @@ The `helios.engine.ecs` module exports the following classes:
 | [EntityRegistry](entity-registry.md) | Handle allocation & validation | 
 | [EntityManager](entity-manager.md) | Component storage via SparseSets | 
 | [View](view.md) | Component-based entity queries | 
-| [System](system.md) | Game logic processor base class | 
-| [Updatable](updatable.md) | Interface for per-frame updates | 
+| [System](system.md) | Abstract base class (internal infrastructure) |
+| [TypedSystem](system.md#typedsystem-composition-wrapper--internal) | Composition wrapper adapting plain systems |
+| [SystemRegistry](system.md#systemregistry) | Type-indexed registry for system instances |
 | [SparseSet](../sparse-set.md) | O(1) component storage | 
 | [Traits](traits.md) | Compile-time lifecycle hook detection | 
 | [ComponentOps](component-ops.md) | Function pointers for lifecycle callbacks | 
@@ -127,8 +128,7 @@ if constexpr (traits::HasOnAcquire<T>) {
 
 ### Querying & Processing
 - [View](view.md) - Efficient component queries
-- [System](system.md) - Writing game logic
-- [Updatable](updatable.md) - Per-frame update interface
+- [System & TypedSystem](system.md) - Writing game logic
 
 ### Storage & Reflection
 - [SparseSet](../sparse-set.md) - The underlying data structure

@@ -17,7 +17,7 @@ import helios.rendering.RenderingDevice;
 import helios.engine.runtime.world.Session;
 
 import helios.engine.runtime.world.GameWorld;
-import helios.engine.ecs.System;
+
 import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.mechanics.lifecycle.components.Active;
@@ -47,7 +47,7 @@ export namespace helios::engine::modules::scene::systems {
      * @see RenderingDevice
      * @see RenderPassFactory
      */
-    class SceneRenderingSystem : public helios::engine::ecs::System {
+    class SceneRenderingSystem {
 
         /**
          * @brief Reference to the rendering device for draw call submission.
@@ -82,7 +82,7 @@ export namespace helios::engine::modules::scene::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
 
             auto& session = updateContext.session();

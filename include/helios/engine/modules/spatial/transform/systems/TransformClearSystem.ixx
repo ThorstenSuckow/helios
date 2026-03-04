@@ -9,7 +9,7 @@ module;
 export module helios.engine.modules.spatial.transform.systems.TransformClearSystem;
 
 import helios.engine.runtime.world.GameWorld;
-import helios.engine.ecs.System;
+
 import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.modules.scene.components.SceneNodeComponent;
@@ -29,7 +29,8 @@ export namespace helios::engine::modules::spatial::transform::systems {
      * TransformComponents and resets their dirty flag if it was set. This ensures that
      * changes are only processed once per frame by other systems (like SceneSyncSystem).
      */
-    class TransformClearSystem : public helios::engine::ecs::System {
+    class TransformClearSystem {
+
 
 
     public:
@@ -39,16 +40,16 @@ export namespace helios::engine::modules::spatial::transform::systems {
          *
          * @param updateContext The update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
-            for (auto [entity, tc, active] : gameWorld_->view<
+            for (auto [entity, tc, active] : updateContext.view<
                 helios::engine::modules::spatial::transform::components::ComposeTransformComponent,
                 helios::engine::mechanics::lifecycle::components::Active
                 >().whereEnabled()) {
                 tc->clearDirty();
             }
 
-            for (auto [entity, sc, active] : gameWorld_->view<
+            for (auto [entity, sc, active] : updateContext.view<
                 helios::engine::modules::spatial::transform::components::ScaleStateComponent,
                 helios::engine::mechanics::lifecycle::components::Active
             >().whereEnabled()) {

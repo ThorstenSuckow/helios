@@ -166,9 +166,9 @@ Systems use the `View` API to filter for active entities with enabled components
 ```cpp
 import helios.engine.mechanics.lifecycle.components.Active;
 
-void update(UpdateContext& ctx) noexcept override {
+void update(UpdateContext& ctx) noexcept {
     // Filter for active entities with enabled components
-    for (auto [entity, component, active] : gameWorld_->view<
+    for (auto [entity, component, active] : ctx.view<
         MyComponent,
         Active
     >().whereEnabled()) {
@@ -184,8 +184,8 @@ Alternatively, exclude inactive entities:
 ```cpp
 import helios.engine.mechanics.lifecycle.components.Inactive;
 
-void update(UpdateContext& ctx) noexcept override {
-    for (auto [entity, component] : gameWorld_->view<MyComponent>()
+void update(UpdateContext& ctx) noexcept {
+    for (auto [entity, component] : ctx.view<MyComponent>()
         .exclude<Inactive>()) {
         // All entities except those with Inactive tag
         if (!component->isEnabled()) {

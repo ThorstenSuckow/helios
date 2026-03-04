@@ -9,7 +9,7 @@ module;
 
 export module helios.engine.mechanics.lifecycle.systems.DelayedComponentEnablerSystem;
 
-import helios.engine.ecs.System;
+
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.mechanics.lifecycle.components.DelayedComponentEnabler;
@@ -38,15 +38,15 @@ export namespace helios::engine::mechanics::lifecycle::systems {
      * @see DelayedComponentEnabler
      * @see DelayedComponentEnablerInitializer
      */
-    class DelayedComponentEnablerSystem : public helios::engine::ecs::System {
+    class DelayedComponentEnablerSystem {
 
         /**
          * @brief Temporary buffer for components that completed their delay.
          */
         std::vector<helios::engine::core::data::ComponentTypeId> sync_;
 
-    public:
 
+    public:
         /**
          * @brief Processes all deferred components and activates expired ones.
          *
@@ -57,11 +57,11 @@ export namespace helios::engine::mechanics::lifecycle::systems {
          *
          * @param updateContext Provides deltaTime for timer updates.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             const float delta = updateContext.deltaTime();
 
-            for (auto [entity, dce, active] : gameWorld_->view<
+            for (auto [entity, dce, active] : updateContext.view<
                 helios::engine::mechanics::lifecycle::components::DelayedComponentEnabler,
                 helios::engine::mechanics::lifecycle::components::Active
             >().whereEnabled()) {

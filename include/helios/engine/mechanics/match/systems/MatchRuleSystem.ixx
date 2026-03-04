@@ -25,7 +25,7 @@ export namespace helios::engine::mechanics::match::systems {
      * Placeholder system for match rule logic (e.g., win/lose conditions,
      * time limits, score thresholds).
      */
-    class MatchRuleSystem : public helios::engine::ecs::System {
+    class MatchRuleSystem {
 
 
 
@@ -36,7 +36,7 @@ export namespace helios::engine::mechanics::match::systems {
          *
          * @param updateContext The current update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
         }
 

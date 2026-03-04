@@ -285,12 +285,12 @@ async function main() {
     {
       src: path.join(repoRoot, 'docs', 'core-concepts', 'ecs', 'system.md'),
       dest: path.join(websiteRoot, 'docs', 'core-concepts', 'ecs', 'system.md'),
-      meta: { title: 'System', description: 'Abstract base class for game logic processors operating on the GameWorld.', slug: '/core-concepts/ecs/system', tags: ['ecs', 'architecture', 'system'], keywords: ['helios', 'System', 'ECS', 'game logic', 'Updatable'], sidebar_label: 'System', sidebar_position: 6 }
+      meta: { title: 'System & TypedSystem', description: 'Abstract base class and composition wrapper for game systems operating on the GameWorld.', slug: '/core-concepts/ecs/system', tags: ['ecs', 'architecture', 'system'], keywords: ['helios', 'System', 'TypedSystem', 'SystemRegistry', 'ECS', 'game logic'], sidebar_label: 'System & TypedSystem', sidebar_position: 6 }
     },
     {
       src: path.join(repoRoot, 'docs', 'core-concepts', 'ecs', 'updatable.md'),
       dest: path.join(websiteRoot, 'docs', 'core-concepts', 'ecs', 'updatable.md'),
-      meta: { title: 'Updatable', description: 'Interface for objects requiring per-frame updates in the game loop.', slug: '/core-concepts/ecs/updatable', tags: ['ecs', 'architecture', 'interface'], keywords: ['helios', 'Updatable', 'ECS', 'update', 'game loop'], sidebar_label: 'Updatable', sidebar_position: 7 }
+      meta: { title: 'Updatable (Removed)', description: 'The Updatable interface has been removed. See System & TypedSystem.', slug: '/core-concepts/ecs/updatable', tags: ['ecs', 'architecture', 'migration'], keywords: ['helios', 'Updatable', 'removed', 'migration'], sidebar_label: 'Updatable (Removed)', sidebar_position: 7 }
     },
     {
       src: path.join(repoRoot, 'docs', 'core-concepts', 'ecs', 'traits.md'),

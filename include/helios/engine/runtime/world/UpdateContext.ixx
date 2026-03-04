@@ -460,7 +460,7 @@ export namespace helios::engine::runtime::world {
          */
         template <typename... Components>
         [[nodiscard]] auto view() const {
-            return helios::engine::ecs::View<Components...>(entityResolver_.em);
+            return helios::engine::ecs::View<const Components...>(entityResolver_.em);
         }
 
     };

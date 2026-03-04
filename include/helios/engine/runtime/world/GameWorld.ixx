@@ -413,7 +413,7 @@ export namespace helios::engine::runtime::world {
          */
         template <typename... Components>
         [[nodiscard]] auto view() const {
-            return helios::engine::ecs::View<Components...>(&em_);
+            return helios::engine::ecs::View<const Components...>(&em_);
         }
 
         /**

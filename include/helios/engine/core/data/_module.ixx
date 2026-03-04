@@ -24,3 +24,4 @@ export import helios.engine.core.data.PrefabId;
 export import helios.engine.core.data.GameTimerId;
 export import helios.engine.core.data.CommandTypeId;
 export import helios.engine.core.data.ResourceTypeId;
+export import helios.engine.core.data.SystemTypeId;

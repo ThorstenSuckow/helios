@@ -1,104 +1,214 @@
 /**
  * @file Manager.ixx
- * @brief Abstract base class for game world managers.
+ * @brief Type-erased manager wrapper using the Concept/Model pattern.
  */
 module;
 
+#include <cassert>
+#include <memory>
 
 export module helios.engine.runtime.world.Manager;
 
+import helios.engine.common.concepts.IsManager;
 
+using namespace helios::engine::common::concepts;
 
 export namespace helios::engine::runtime::world {
 
     class UpdateContext;
     class GameWorld;
 
+    /**
+     * @brief Concept detecting an optional `init(GameWorld&)` method on a manager.
+     *
+     * @tparam T The manager type to inspect.
+     */
+    template<typename T>
+    concept HasInit = requires(T& t, GameWorld& gameWorld) {
+        {t.init(gameWorld) } -> std::same_as<void>;
+    };
 
     /**
-     * @brief Abstract base class for managers that process deferred operations.
+     * @brief Concept detecting an optional `reset()` method on a manager.
      *
-     * @details Managers handle cross-cutting concerns that require deferred processing
-     * separate from the System update cycle. They are registered with the GameWorld
-     * and receive lifecycle callbacks for initialization and per-frame flushing.
+     * @tparam T The manager type to inspect.
+     */
+    template<typename T>
+    concept HasReset = requires(T& t) {
+            {t.reset() } -> std::same_as<void>;
+    };
+
+
+
+    /**
+     * @brief Type-erased wrapper for game world managers.
      *
-     * ## Lifecycle
+     * @details Manager uses the Concept/Model pattern to erase the concrete
+     * manager type. Concrete managers are plain classes that satisfy
+     * `IsManager<T>` (i.e. provide `flush(UpdateContext&)` and declare
+     * `using EngineRoleTag = ManagerTag;`).
      *
-     * 1. **Registration:** Manager is added via `GameWorld::addManager<T>()`
-     * 2. **onAdd():** Called immediately after registration
-     * 3. **init():** Called during GameWorld initialization (before game loop starts)
-     * 4. **flush():** Called each frame after Systems complete, to process queued requests
+     * The internal `Concept` base defines the virtual interface, and
+     * `Model<T>` adapts the concrete type T, owning it by value.
+     * `init()` and `reset()` are conditionally forwarded if the concrete
+     * type satisfies `HasInit<T>` or `HasReset<T>` respectively.
      *
-     * ## Use Cases
+     * Manager is move-only (non-copyable).
      *
-     * - **GameObjectPoolManager:** Manages entity pooling and acquire/release lifecycle
-     * - **SpawnManager:** Handles spawn request processing and entity initialization
-     * - **Custom Managers:** Any deferred processing that doesn't fit the System model
-     *
-     * Example implementation:
-     * ```cpp
-     * class MyManager : public Manager {
-     * public:
-     *     void init(GameWorld& gw) override { ... }
-     *     void flush(GameWorld& gw, UpdateContext& ctx) noexcept override {
-     *         // Process queued requests
-     *     }
-     * };
-     * ```
-     *
-     * @see GameWorld
-     * @see GameObjectPoolManager
-     * @see System
+     * @see IsManager
+     * @see ManagerTag
+     * @see ManagerRegistry
+     * @see ConceptModelRegistry
      */
     class Manager {
 
-    protected:
-
-
-    public:
-
-        virtual ~Manager() = default;
-
+    private:
         /**
-         * @brief Initializes the manager before the game loop starts.
-         *
-         * @details Override to perform one-time setup such as pool retrieval,
-         * handler registration, or resource allocation.
-         *
-         * @param gameWorld The GameWorld to initialize with.
+         * @brief Internal virtual interface for type erasure.
          */
-        virtual void init(
-            helios::engine::runtime::world::GameWorld& gameWorld
-        ) {
-            // template method
+        class Concept {
+        public:
+            virtual ~Concept() = default;
+            virtual void flush(UpdateContext& updateContext) noexcept = 0;
+            virtual void init(GameWorld& gameWorld) noexcept = 0;
+            virtual void reset() noexcept = 0;
+
+            [[nodiscard]] virtual void* underlying() noexcept = 0;
+            [[nodiscard]] virtual const void* underlying() const noexcept = 0;
         };
 
         /**
-         * @brief Processes queued requests each frame.
+         * @brief Typed wrapper that adapts a concrete manager to the Concept interface.
          *
-         * @details Called during the game loop's manager flush phase, after all
-         * Systems have completed their updates. Override to process any queued
-         * operations (spawn requests, despawn requests, etc.).
-         *
-         * @param gameWorld The GameWorld for entity access.
-         * @param update_context The current frame's update context.
+         * @tparam T The concrete manager type, must satisfy `IsManager<T>`.
          */
-        virtual void flush(
-            helios::engine::runtime::world::UpdateContext& update_context
-        ) noexcept = 0;
+        template<typename T>
+        class Model final : public Concept {
+            T manager_;
+
+            public:
+
+            explicit Model(T sys) :  manager_(std::move(sys)) {}
+
+            void flush(UpdateContext& updateContext) noexcept override {
+                manager_.flush(updateContext);
+            }
+            void init(GameWorld& gameWorld) noexcept override {
+                if constexpr (HasInit<T>) {
+                    manager_.init(gameWorld);
+                }
+            }
+            void reset() noexcept override {
+                if constexpr (HasReset<T>) {
+                    manager_.reset();
+                }
+            }
+
+            void* underlying() noexcept override {
+                return &manager_;
+            }
+
+            const void* underlying() const noexcept override {
+                return &manager_;
+            }
+        };
+
+        std::unique_ptr<Concept> pimpl_;
+
+    public:
 
         /**
-         * @brief Resets the manager to its initial state.
-         *
-         * @details Called during level transitions or game restarts to clear
-         * any accumulated state. Override to reset queues, counters, or other
-         * runtime data. The default implementation is a no-op.
+         * @brief Default constructor creating an empty Manager.
          */
-        virtual void reset() {
+        Manager() = default;
 
-            //noop
+        /**
+         * @brief Wraps a concrete manager in a type-erased Manager.
+         *
+         * @tparam T The concrete manager type, must satisfy `IsManager<T>`.
+         *
+         * @param manager The concrete manager instance to wrap (moved into internal storage).
+         */
+        template<typename T>
+        requires IsManager<T>
+        explicit Manager(T manager) : pimpl_(std::make_unique<Model<T>>(std::move(manager))) {}
+
+        Manager(const Manager&) = delete;
+        Manager& operator=(const Manager&) = delete;
+
+        Manager& operator=(Manager&&) = default;
+        Manager(Manager&&) noexcept = default;
+
+
+        /**
+         * @brief Delegates to the wrapped manager's `flush()` method.
+         *
+         * @details Called by the GameLoop at each commit point after
+         * CommandBuffers have been flushed. Managers process their
+         * accumulated requests in batch.
+         *
+         * @param updateContext The current frame's update context.
+         *
+         * @pre Manager must be initialized (pimpl_ != nullptr).
+         */
+        void flush(UpdateContext& updateContext) noexcept {
+            assert(pimpl_ && "Manager not initialized");
+            pimpl_->flush(updateContext);
         }
+
+
+        /**
+         * @brief Delegates to the wrapped manager's `init()` method, if present.
+         *
+         * @details If the concrete type satisfies `HasInit<T>`, its `init()` is
+         * called. Otherwise this is a no-op. Typically used by managers to
+         * register their TypedCommandHandlers with the GameWorld.
+         *
+         * @param gameWorld The GameWorld for one-time initialization.
+         *
+         * @pre Manager must be initialized (pimpl_ != nullptr).
+         */
+        void init(GameWorld& gameWorld) noexcept {
+            assert(pimpl_ && "Manager not initialized");
+            pimpl_->init(gameWorld);
+        }
+
+        /**
+         * @brief Delegates to the wrapped manager's `reset()` method, if present.
+         *
+         * @details If the concrete type satisfies `HasReset<T>`, its `reset()` is
+         * called. Otherwise this is a no-op. Used during level transitions or
+         * game restarts to clear accumulated state.
+         *
+         * @pre Manager must be initialized (pimpl_ != nullptr).
+         */
+        void reset() noexcept {
+            assert(pimpl_ && "Manager not initialized");
+            pimpl_->reset();
+        }
+
+        /**
+         * @brief Returns a type-erased pointer to the wrapped manager instance.
+         *
+         * @return Pointer to the underlying concrete manager.
+         *
+         * @pre Manager must be initialized (pimpl_ != nullptr).
+         */
+        [[nodiscard]] void* underlying() noexcept {
+            assert(pimpl_ && "Manager not initialized");
+            return pimpl_->underlying();
+        }
+
+        /**
+         * @copydoc underlying()
+         */
+        [[nodiscard]] const void* underlying() const noexcept {
+            assert(pimpl_ && "Manager not initialized");
+            return pimpl_->underlying();
+        }
+
     };
 
 
 }
+

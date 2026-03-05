@@ -37,8 +37,9 @@ import helios.engine.ecs.EntityRegistry;
 import helios.engine.ecs.View;
 
 import helios.engine.core.data;
+import helios.engine.common.concepts;
 
-
+using namespace helios::engine::common::concepts;
 
 #define HELIOS_LOG_SCOPE "GameWorld"
 export namespace helios::engine::runtime::world {
@@ -262,7 +263,7 @@ export namespace helios::engine::runtime::world {
          * @return True if a Manager of type T is registered, false otherwise.
          */
         template<typename T>
-        requires std::is_base_of_v<Manager, T>
+        requires IsManager<T>
         [[nodiscard]] bool hasManager() const {
             return resourceRegistry_.has<T>();
         }
@@ -283,7 +284,7 @@ export namespace helios::engine::runtime::world {
          * @pre No Manager of type T is already registered.
          */
         template<typename T, typename... Args>
-        requires std::is_base_of_v<Manager, T>
+        requires IsManager<T>
         T& registerManager(Args&&... args) {
             assert(!resourceRegistry_.has<T>() && "Manager already registered.");
             return resourceRegistry_.registerResource<T>(std::forward<Args>(args)...);
@@ -304,7 +305,7 @@ export namespace helios::engine::runtime::world {
          * @pre No handler of type T is already registered.
          */
         template<typename T>
-        requires std::is_base_of_v<helios::engine::runtime::messaging::command::CommandHandler, T>
+        requires IsCommandHandler<T>
         T& registerCommandHandler(T& cmdHandler) {
             assert(!resourceRegistry_.has<T>() && "CommandHandler already registered.");
             return resourceRegistry_.registerResource<T>(cmdHandler);
@@ -338,7 +339,7 @@ export namespace helios::engine::runtime::world {
          * @pre A Manager of type T must be registered.
          */
         template<typename T>
-        requires std::is_base_of_v<Manager, T>
+        requires IsManager<T>
         T& manager() {
             return resourceRegistry_.resource<T>();
         }

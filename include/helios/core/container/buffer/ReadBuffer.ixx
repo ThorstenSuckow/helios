@@ -7,9 +7,9 @@ module;
 #include <span>
 #include <vector>
 
-export module helios.core.buffer.ReadBuffer;
+export module helios.core.container.buffer.ReadBuffer;
 
-export namespace helios::core::buffer {
+export namespace helios::core::container::buffer {
 
     template <typename T>
     class ReadWriteDoubleBuffer{};

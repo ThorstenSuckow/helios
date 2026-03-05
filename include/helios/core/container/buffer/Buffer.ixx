@@ -8,10 +8,10 @@ module;
 #include <span>
 #include <vector>
 
-export module helios.core.buffer.Buffer;
+export module helios.core.container.buffer.Buffer;
 
 
-export namespace helios::core::buffer {
+export namespace helios::core::container::buffer {
 
     /**
      * @brief Abstract base class for type-erased buffer implementations.

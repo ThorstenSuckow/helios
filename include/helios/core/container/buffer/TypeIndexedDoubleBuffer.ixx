@@ -8,17 +8,17 @@ module;
 #include <span>
 #include <vector>
 
-export module helios.core.buffer.TypeIndexedDoubleBuffer;
+export module helios.core.container.buffer.TypeIndexedDoubleBuffer;
 
 import helios.core.data.TypeIndexer;
 
-import helios.core.buffer.DoubleBuffer;
-import helios.core.buffer.WriteBuffer;
-import helios.core.buffer.ReadBuffer;
-import helios.core.buffer.ReadWriteDoubleBuffer;
+import helios.core.container.buffer.DoubleBuffer;
+import helios.core.container.buffer.WriteBuffer;
+import helios.core.container.buffer.ReadBuffer;
+import helios.core.container.buffer.ReadWriteDoubleBuffer;
 
 
-export namespace helios::core::buffer {
+export namespace helios::core::container::buffer {
 
 
 

@@ -6,11 +6,11 @@ module;
 
 #include <vector>
 
-export module helios.core.buffer.WriteBuffer;
+export module helios.core.container.buffer.WriteBuffer;
 
-import helios.core.buffer.ReadBuffer;
+import helios.core.container.buffer.ReadBuffer;
 
-export namespace helios::core::buffer {
+export namespace helios::core::container::buffer {
 
     template <typename T>
     class ReadWriteDoubleBuffer{};

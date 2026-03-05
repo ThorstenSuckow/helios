@@ -8,14 +8,14 @@ module;
 #include <span>
 #include <vector>
 
-export module helios.core.buffer.ReadWriteDoubleBuffer;
+export module helios.core.container.buffer.ReadWriteDoubleBuffer;
 
-import helios.core.buffer.DoubleBuffer;
-import helios.core.buffer.WriteBuffer;
-import helios.core.buffer.ReadBuffer;
+import helios.core.container.buffer.DoubleBuffer;
+import helios.core.container.buffer.WriteBuffer;
+import helios.core.container.buffer.ReadBuffer;
 
 
-export namespace helios::core::buffer {
+export namespace helios::core::container::buffer {
     /**
      * @class ReadWriteDoubleBuffer
      * @brief Type-safe double-buffered container for messages of type T.

@@ -8,15 +8,15 @@ module;
 #include <span>
 #include <vector>
 
-export module helios.core.buffer.TypeIndexedReadWriteBuffer;
+export module helios.core.container.buffer.TypeIndexedReadWriteBuffer;
 
 import helios.core.data.TypeIndexer;
 
-import helios.core.buffer.Buffer;
-import helios.core.buffer.ReadWriteBuffer;
+import helios.core.container.buffer.Buffer;
+import helios.core.container.buffer.ReadWriteBuffer;
 
 
-export namespace helios::core::buffer {
+export namespace helios::core::container::buffer {
 
     /**
      * @brief Type-indexed container for immediate-access message buffers.

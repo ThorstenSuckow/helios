@@ -102,7 +102,7 @@ export namespace helios::engine::modules::physics::collision::systems {
 
 
                 if (hasFlag(collisionBehavior, CollisionBehavior::Despawn)) {
-                    updateContext.commandBuffer().add<DespawnCommand>(
+                    updateContext.queueCommand<DespawnCommand>(
                         entity.entityHandle(), sbp->spawnProfileId());
                 }
             }

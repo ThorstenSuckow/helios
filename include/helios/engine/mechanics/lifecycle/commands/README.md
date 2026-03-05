@@ -17,7 +17,7 @@ This namespace contains command classes used to request world-level lifecycle op
 Commands are typically issued by state listeners when the game world needs to be reset:
 
 ```cpp
-updateContext.commandBuffer().add<WorldLifecycleCommand>(WorldLifecycleAction::Reset);
+updateContext.queueCommand<WorldLifecycleCommand>(WorldLifecycleAction::Reset);
 ```
 
 The command is routed through the `EngineCommandBuffer` to the `WorldLifecycleManager`, which executes the requested action during its flush cycle.

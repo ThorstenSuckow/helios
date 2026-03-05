@@ -75,7 +75,7 @@ The `WorldLifecycleManager` enables deferred world-level operations through the 
 
 ```cpp
 // Request a world reset (e.g. from a game-over state listener)
-updateContext.commandBuffer().add<WorldLifecycleCommand>(WorldLifecycleAction::Reset);
+updateContext.queueCommand<WorldLifecycleCommand>(WorldLifecycleAction::Reset);
 ```
 
 The manager is auto-registered by `bootstrap::makeGameWorld()` and processes pending commands during its flush cycle. A `Reset` action calls `GameWorld::reset()`, which reinitializes all managers and the session.

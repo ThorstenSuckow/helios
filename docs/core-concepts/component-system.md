@@ -134,14 +134,15 @@ helios::engine::runtime::world::GameWorld world;
 auto player = world.addGameObject();
 player.add<Move2DComponent>(speed);
 
-// Add managers for deferred processing
-world.addManager<SpawnManager>();
+// Register managers for deferred processing
+world.registerManager<SpawnManager>();
 
 // Query entities by component using views
-for (auto [entity, move, collision] : world.view<
+for (auto [entity, move, collision, active] : world.view<
     Move2DComponent,
-    CollisionComponent
->()) {
+    CollisionComponent,
+    Active
+>().whereEnabled()) {
     // Process matching entities
 }
 ```
@@ -264,40 +265,31 @@ Systems are organized by their typical Phase placement:
 
 ## Creating Custom Components
 
-Define a class inheriting from `Component`. Components should be placed in your project's modules namespace:
+Components are plain data classes — they do not inherit from a base class. Components should be placed in your project's modules namespace:
 
 ```cpp
 export module myproject.components.Inventory;
 
-import helios.engine.ecs.Component;
-
-export class InventoryComponent : public helios::engine::ecs::Component {
+export class InventoryComponent {
     std::vector<Item> items_;
-    
+    bool isEnabled_ = true;
+
 public:
+    // Required: Copy and Move constructors
+    InventoryComponent(const InventoryComponent&) = default;
+    InventoryComponent(InventoryComponent&&) noexcept = default;
+
+    // Optional: Enable/Disable for view filtering
+    [[nodiscard]] bool isEnabled() const noexcept { return isEnabled_; }
+    void enable() noexcept { isEnabled_ = true; }
+    void disable() noexcept { isEnabled_ = false; }
+
     void addItem(Item item) { items_.push_back(std::move(item)); }
-    const std::vector<Item>& items() const { return items_; }
+    [[nodiscard]] const std::vector<Item>& items() const { return items_; }
 };
 ```
 
-For components that need cloning (e.g., for object pools), implement `CloneableComponent`:
-
-```cpp
-
-
-class HealthComponent : public helios::engine::ecs::CloneableComponent {
-    int maxHealth_ = 100;
-    int currentHealth_ = 100;
-    
-public:
-    std::unique_ptr<Component> clone() const override {
-        auto copy = std::make_unique<HealthComponent>();
-        copy->maxHealth_ = maxHealth_;
-        copy->currentHealth_ = maxHealth_;  // Reset to max on clone
-        return copy;
-    }
-};
-```
+> **Note:** Components must provide both a copy constructor (used by the blueprint/pool system) and a `noexcept` move constructor for efficient storage in SparseSets. See [Component Structure](ecs/component-structure.md) for full requirements.
 
 ## Creating Custom Systems
 
@@ -316,107 +308,85 @@ public:
         timer_ += ctx.deltaTime();
         if (timer_ > 5.0f) {
             timer_ = 0.0f;
-            // Queue spawn via CommandBuffer
-            ctx.commandBuffer().add<SpawnCommand>(position, enemyType);
+            // Queue spawn command
+            ctx.queueCommand<SpawnCommand>(position, enemyType);
         }
     }
 };
 ```
 
-## Querying GameObjects
+## Querying Entities
 
-GameWorld provides efficient component-based queries:
-
-```cpp
-// Find all GameObjects with specific components
-for (auto* obj : gameWorld.find<Move2DComponent, SceneNodeComponent>()) {
-    // obj has both components
-}
-
-// Using structured bindings for direct component access
-for (auto [obj, move, node] : gameWorld.find<Move2DComponent, SceneNodeComponent>().each()) {
-    // move and node are references to the components
-}
-
-// Filter by active state
-for (auto* obj : gameWorld.find<HealthComponent>(GameObjectFilter::Active)) {
-    // Only active GameObjects
-}
-```
-
-### GameObjectFilter
-
-The `GameObjectFilter` enum controls which GameObjects are included in query results:
+Systems query entities via `UpdateContext::view<>()`, which returns a `View` over all entities possessing the requested components. The `Active` tag component and `.whereEnabled()` filter replace the former `GameObjectFilter` API.
 
 ```cpp
-import helios.engine.ecs.query.GameObjectFilter;
+import helios.engine.runtime.world.UpdateContext;
+import helios.engine.mechanics.lifecycle.components.Active;
 
-using helios::engine::ecs::query::GameObjectFilter;
-```
-
-| Filter | Meaning |
-|--------|---------|
-| `GameObjectFilter::None` | No filtering (default) |
-| `GameObjectFilter::Active` | Only `obj->isActive() == true` |
-| `GameObjectFilter::Inactive` | Only `obj->isActive() == false` |
-| `GameObjectFilter::ComponentEnabled` | Only objects with enabled queried components |
-| `GameObjectFilter::ComponentDisabled` | Only objects with disabled queried components |
-| `GameObjectFilter::All` | All GameObjects regardless of state |
-
-Filters can be combined using bitwise OR:
-
-```cpp
-// Find inactive objects with disabled components
-auto filter = GameObjectFilter::Inactive | GameObjectFilter::ComponentDisabled;
-for (auto* obj : gameWorld.find<CollisionComponent>(filter)) {
-    // Process matching objects
-}
-```
-
-### Filtering Examples
-
-**Active GameObjects with enabled components:**
-
-```cpp
+// In a system's update():
 void update(UpdateContext& ctx) noexcept {
-    auto filter = GameObjectFilter::Active | GameObjectFilter::ComponentEnabled;
-    
-    for (auto [obj, move, collision] : ctx.view<Move2DComponent, CollisionComponent>(filter).each()) {
-        // Both GameObject is active AND components are enabled
-        // No manual checks required
+
+    // Iterate all active entities with specific components
+    for (auto [entity, move, node, active] : ctx.view<
+        Move2DComponent,
+        SceneNodeComponent,
+        Active
+    >().whereEnabled()) {
+        // entity is the EntityHandle
+        // move, node are pointers to the components
     }
 }
 ```
 
-**Manual filtering (alternative approach):**
+### Active Filtering
+
+Include the `Active` tag component in the view to restrict results to active entities. Call `.whereEnabled()` to additionally skip entities whose components report `isEnabled() == false`:
 
 ```cpp
-void update(UpdateContext& ctx) noexcept {
-    for (auto [obj, move, collision] : ctx.view<Move2DComponent, CollisionComponent>().each()) {
-        
-        // Skip inactive GameObjects
-        if (!obj->isActive()) {
-            continue;
-        }
-        
-        // Skip disabled components
-        if (collision.isDisabled()) {
-            continue;  // Movement still applies, but no collision
-        }
-        
-        // Process with collision enabled...
-    }
+// Active entities with enabled components
+for (auto [entity, health, active] : ctx.view<
+    HealthComponent,
+    Active
+>().whereEnabled()) {
+    // Only entities that are active AND whose components are enabled
 }
 ```
 
-**Finding disabled components (e.g., for re-enabling):**
+### Unfiltered Iteration
+
+Omitting the `Active` tag and `.whereEnabled()` iterates **all** entities with the requested components, regardless of activation state:
 
 ```cpp
-// Find objects where invulnerability expired
-for (auto [obj, invuln] : gameWorld_->find<InvulnerabilityComponent>(
-        GameObjectFilter::Active | GameObjectFilter::ComponentDisabled).each()) {
-    // Re-enable collision after invulnerability ends
-    obj->get<CollisionComponent>()->enable();
+// All entities (active or inactive)
+for (auto [entity, collision] : ctx.view<CollisionComponent>()) {
+    // Includes inactive entities and disabled components
+}
+```
+
+### Excluding Components
+
+Use `.exclude<T>()` to skip entities that have a specific component:
+
+```cpp
+for (auto [entity, move, active] : ctx.view<
+    Move2DComponent,
+    Active
+>().exclude<FrozenTag>().whereEnabled()) {
+    // Entities with Move2DComponent but without FrozenTag
+}
+```
+
+### Initialization-Time Queries
+
+Outside of a system's `update()` (e.g. during setup), queries go through `GameWorld::view<>()` directly:
+
+```cpp
+for (auto [entity, transform, velocity, active] : gameWorld.view<
+    TransformComponent,
+    VelocityComponent,
+    Active
+>().whereEnabled()) {
+    transform->position += velocity->direction * deltaTime;
 }
 ```
 
@@ -459,15 +429,15 @@ See [Game Loop Architecture](gameloop-architecture.md) for detailed phase/pass e
 **Prefer Composition:** Configure entities by attaching different component combinations rather than creating specialized subclasses.
 
 ```cpp
-// Instead of: class Player : public GameObject { ... }
+// Instead of deep inheritance hierarchies:
 
 // Do this:
-auto player = std::make_unique<GameObject>();
-player->add<SceneNodeComponent>(node);
-player->add<Move2DComponent>();
-player->add<HeadingComponent>();
-player->add<HealthComponent>();
-player->add<TwinStickInputComponent>();
+auto player = gameWorld.addGameObject();
+player.add<SceneNodeComponent>(node);
+player.add<Move2DComponent>();
+player.add<HeadingComponent>();
+player.add<HealthComponent>();
+player.add<TwinStickInputComponent>();
 ```
 
 **Use Commands for State Mutations:** Instead of mutating state directly in Systems, emit Commands to the CommandBuffer for deterministic execution.

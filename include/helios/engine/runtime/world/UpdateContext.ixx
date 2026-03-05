@@ -44,10 +44,7 @@ export namespace helios::engine::runtime::world {
      *
      * ## Resource Access
      *
-     * - `commandBuffer()` — returns the EngineCommandBuffer for submitting
-     *   engine-defined commands (shortcut for `resourceRegistry().resource<EngineCommandBuffer>()`)
-     * - `resourceRegistry()` — O(1) lookup for Managers, CommandBuffers,
-     *   CommandHandlers, and other registered resources
+     * - `queueCommand<T>(args...)` — submits a command to the EngineCommandBuffer
      * - `session()` — cross-frame state (tracked game/match states)
      * - `level()` — current Level with arena bounds
      *
@@ -242,22 +239,6 @@ export namespace helios::engine::runtime::world {
         }
 
         /**
-         * @brief Returns the ResourceRegistry for resource lookup.
-         *
-         * @return Reference to the ResourceRegistry.
-         */
-        [[nodiscard]] helios::engine::runtime::world::ResourceRegistry& resourceRegistry() noexcept {
-            return resourceRegistry_;
-        }
-
-        /**
-         * @copydoc resourceRegistry()
-         */
-        [[nodiscard]] const helios::engine::runtime::world::ResourceRegistry& resourceRegistry() const noexcept {
-            return resourceRegistry_;
-        }
-
-        /**
          * @brief Resolves an EntityHandle to a GameObject.
          *
          * @details Validates the handle via the EntityResolver and returns
@@ -290,17 +271,21 @@ export namespace helios::engine::runtime::world {
             return level_;
         }
 
+
         /**
-         * @brief Returns the EngineCommandBuffer for submitting commands.
+         * @brief Submits a command to the EngineCommandBuffer.
          *
-         * @details Shortcut for `resourceRegistry().resource<EngineCommandBuffer>()`.
-         * Only accepts engine-defined command types. For custom commands, look up
-         * the appropriate handler or buffer via `resourceRegistry()` directly.
+         * @details Constructs and enqueues a command of type T. The command
+         * will be executed during the next commit point (phase or pass boundary).
          *
-         * @return Reference to the EngineCommandBuffer.
+         * @tparam T The command type to submit.
+         * @tparam Args Constructor argument types for T.
+         *
+         * @param args Arguments forwarded to the command constructor.
          */
-        [[nodiscard]] EngineCommandBuffer& commandBuffer () const noexcept {
-            return resourceRegistry_.resource<EngineCommandBuffer>();
+        template<typename T, typename ...Args>
+        void queueCommand(Args&&...args) const noexcept {
+            resourceRegistry_.resource<EngineCommandBuffer>().add<T>(std::forward<Args>(args)...);
         }
 
         /**

@@ -128,9 +128,7 @@ export namespace helios::engine::mechanics::bounds::systems {
                         auto* sbp = entity.get<helios::engine::mechanics::spawn::components::SpawnedByProfileComponent>();
                         assert(sbp && "Unexpected missing SpawnProfile");
 
-                        updateContext.resourceRegistry().resource<
-                            helios::engine::runtime::messaging::command::EngineCommandBuffer
-                        >().add<helios::engine::runtime::spawn::commands::DespawnCommand>(
+                        updateContext.queueCommand<helios::engine::runtime::spawn::commands::DespawnCommand>(
                             entity.entityHandle(), sbp->spawnProfileId()
                         );
 

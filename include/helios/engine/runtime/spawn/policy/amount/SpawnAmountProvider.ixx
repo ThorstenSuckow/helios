@@ -9,6 +9,7 @@ export module helios.engine.runtime.spawn.policy.amount.SpawnAmountProvider;
 import helios.engine.runtime.spawn.policy.SpawnRuleState;
 import helios.engine.core.data.GameObjectPoolId;
 import helios.engine.runtime.world.UpdateContext;
+import helios.engine.runtime.world.GameWorld;
 
 export namespace helios::engine::runtime::spawn::policy::amount {
 
@@ -37,6 +38,7 @@ export namespace helios::engine::runtime::spawn::policy::amount {
          *
          * @param gameObjectPoolId The pool to spawn from.
          * @param spawnRuleState The rule's current runtime state.
+         * @param gameWorld The game world in which the spawn occurs.
          * @param updateContext The current frame's context.
          *
          * @return Number of entities to spawn.
@@ -44,6 +46,7 @@ export namespace helios::engine::runtime::spawn::policy::amount {
         [[nodiscard]] virtual size_t getAmount(
             const helios::engine::core::data::GameObjectPoolId gameObjectPoolId,
             const SpawnRuleState& spawnRuleState,
+            const helios::engine::runtime::world::GameWorld& gameWorld,
             const helios::engine::runtime::world::UpdateContext& updateContext
         ) const = 0;
 

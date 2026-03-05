@@ -67,13 +67,15 @@ player.add<TransformComponent>(position);
 player.add<HealthComponent>(100.0f);
 player.add<VelocityComponent>();
 
-// 3. Query entities in systems
-for (auto [entity, transform, velocity, active] : gameWorld.view<
-    TransformComponent,
-    VelocityComponent,
-    Active
->().whereEnabled()) {
-    transform->position += velocity->direction * deltaTime;
+// 3. Query entities in a system
+void update(UpdateContext& ctx) noexcept {
+    for (auto [entity, transform, velocity, active] : ctx.view<
+        TransformComponent,
+        VelocityComponent,
+        Active
+    >().whereEnabled()) {
+        transform->position += velocity->direction * ctx.deltaTime();
+    }
 }
 ```
 

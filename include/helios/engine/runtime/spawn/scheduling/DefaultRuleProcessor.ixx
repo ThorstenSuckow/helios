@@ -52,6 +52,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
          * @details Retrieves pool state, updates the rule's timer/state,
          * and evaluates the rule to produce a spawn plan.
          *
+         * @param gameWorld The game world where the rule is processed.
          * @param updateContext Current frame context.
          * @param spawnContext Context for the spawn operation.
          * @param spawnProfileId Profile ID to look up spawn configuration.
@@ -61,14 +62,15 @@ export namespace helios::engine::runtime::spawn::scheduling {
          * @return SpawnPlan indicating how many entities to spawn.
          */
         SpawnPlan processRule(
+            const helios::engine::runtime::world::GameWorld& gameWorld,
             const helios::engine::runtime::world::UpdateContext& updateContext,
             const helios::engine::runtime::spawn::SpawnContext& spawnContext,
             const helios::engine::core::data::SpawnProfileId spawnProfileId,
             helios::engine::runtime::spawn::policy::SpawnRule& spawnRule,
             helios::engine::runtime::spawn::policy::SpawnRuleState& spawnRuleState
         ) noexcept override {
-            const auto& poolManager  = updateContext.resourceRegistry().resource<helios::engine::runtime::pooling::GameObjectPoolManager>();
-            const auto& spawnManager = updateContext.resourceRegistry().resource<helios::engine::runtime::spawn::SpawnManager>();
+            const auto& poolManager  = gameWorld.resourceRegistry().resource<helios::engine::runtime::pooling::GameObjectPoolManager>();
+            const auto& spawnManager = gameWorld.resourceRegistry().resource<helios::engine::runtime::spawn::SpawnManager>();
 
 
             const auto* spawnProfile = spawnManager.spawnProfile(spawnProfileId);
@@ -84,6 +86,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
             return spawnRule.evaluate(
                 gameObjectPoolId, poolSnapshot,
                 spawnRuleState,
+                gameWorld,
                 updateContext
             );
         }

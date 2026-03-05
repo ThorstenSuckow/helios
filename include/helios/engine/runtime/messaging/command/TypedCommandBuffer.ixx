@@ -13,7 +13,7 @@ export module helios.engine.runtime.messaging.command.TypedCommandBuffer;
 
 import helios.engine.state.components;
 
-
+import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.runtime.messaging.command.CommandBuffer;
@@ -95,18 +95,19 @@ export namespace helios::engine::runtime::messaging::command {
          *
          * @tparam CommandType The command type to flush.
          *
+         * @param gameWorld The game world for which the queue should be flushed.
          * @param updateContext The current frame's update context.
          */
         template<typename CommandType>
-        void flushCommandQueue(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void flushCommandQueue(GameWorld& gameWorld, UpdateContext& updateContext) noexcept {
 
             auto& queue = commandQueue<CommandType>();
             if (queue.empty()) {
                 return;
             }
 
-           if (updateContext.resourceRegistry().has<TypedCommandHandler<CommandType>>()) {
-                auto& handler = updateContext.resourceRegistry().resource<TypedCommandHandler<CommandType>>();
+           if (gameWorld.resourceRegistry().has<TypedCommandHandler<CommandType>>()) {
+                auto& handler = gameWorld.resourceRegistry().resource<TypedCommandHandler<CommandType>>();
                 for (auto& cmd : queue) {
                     handler.submit(cmd);
                 }
@@ -145,13 +146,11 @@ export namespace helios::engine::runtime::messaging::command {
 
         }
 
-
         /**
          * @brief Discards all queued commands without executing them.
          */
         void clear() noexcept override {
             std::apply([](auto&... queue) { (queue.clear(), ...); }, commandQueues_);
-
         }
 
         /**
@@ -160,10 +159,11 @@ export namespace helios::engine::runtime::messaging::command {
          * @details Iterates through each command type using a fold expression,
          * flushing queues in the order specified by the template parameters.
          *
+         * @param gameWorld The game world for which the queue should be flushed.
          * @param updateContext The current frame's update context.
          */
-        void flush(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
-            (flushCommandQueue<CommandTypes>(updateContext), ...);
+        void flush(GameWorld& gameWorld,  UpdateContext& updateContext) noexcept override {
+            (flushCommandQueue<CommandTypes>(gameWorld, updateContext), ...);
         }
 
 

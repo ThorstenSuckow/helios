@@ -25,7 +25,7 @@ auto ctx = DamageContext{
     .damage = 10.0f
 };
 
-updateContext.commandBuffer().add<ApplyDamageCommand>(ctx);
+updateContext.queueCommand<ApplyDamageCommand>(ctx);
 ```
 
 The command is routed to `HealthManager` via its `TypedCommandHandler<ApplyDamageCommand>` interface and processed during the manager flush phase.

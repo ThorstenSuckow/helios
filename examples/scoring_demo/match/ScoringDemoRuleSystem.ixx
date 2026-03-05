@@ -73,7 +73,7 @@ export namespace helios::examples::scoring {
                 if (lc->lives() > 0) {
                     lc->decrease();
                     return true;
-                    updateContext.commandBuffer().add<StateCommand<MatchState>>(
+                    updateContext.queueCommand<StateCommand<MatchState>>(
                         StateTransitionRequest<MatchState>(
                             MatchState::Playing, MatchStateTransitionId::PlayerDied
                         )

@@ -208,10 +208,9 @@ for (int i = 0; i < 10; ++i) {
 
 When cloning with `GameObjectFactory::from()`:
 
-1. Only components implementing `CloneableComponent` are copied
-2. Each cloneable component's `clone()` method is invoked
-3. Additional configuration can be applied before `make()`
-4. Component dependencies are resolved via `getOrAdd()` to prevent duplicates
+1. Components are copied using their copy constructor (blueprint pattern)
+2. Additional configuration can be applied before `make()`
+3. Component dependencies are resolved via `getOrAdd()` to prevent duplicates
 
 ## Automatic Dependencies
 
@@ -251,7 +250,7 @@ The `SpawnSystemFactory` uses done()-chaining because its configuration has a na
 
 | Module | Purpose |
 |--------|---------|
-| `helios.engine.ecs` | GameObject, Component, CloneableComponent |
+| `helios.engine.ecs` | GameObject, Component |
 | `helios.engine.modules` | Component implementations |
 | `helios.engine.mechanics` | Gameplay-specific components |
 | `helios.engine.runtime.world` | GameWorld entity management |

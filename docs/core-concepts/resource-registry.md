@@ -109,10 +109,10 @@ CommandHandlers are registered **by reference** — the registry does not own th
 
 ## Integration with GameWorld
 
-The ResourceRegistry is a member of `GameWorld` and accessed via `gameWorld.resourceRegistry()`:
+The ResourceRegistry is a member of `GameWorld` and accessed via `gameWorld.resourceRegistry()`. Note that `UpdateContext` does **not** expose the ResourceRegistry — systems interact with it indirectly through `queueCommand<T>()` and other typed accessors.
 
 ```cpp
-// Direct registry access
+// Direct registry access (initialization time only)
 auto& poolMgr = gameWorld.resourceRegistry()
     .registerResource<GameObjectPoolManager>();
 
@@ -125,17 +125,17 @@ T& mgr = gameWorld.manager<SpawnManager>();
 
 1. **Registration:** Resources are registered via `registerResource()` or `registerManager()`.
 2. **init():** `GameWorld::init()` iterates `managers_` and calls `init(gameWorld)` on each. Managers use `init()` to register their CommandHandlers.
-3. **Runtime:** Systems access resources via `UpdateContext::resourceRegistry()`.
-4. **Flush:** At each commit point, `GameWorld::flushManagers()` iterates `managers_` and calls `flush(updateContext)`.
+3. **Runtime:** Systems submit commands via `UpdateContext::queueCommand<T>()`. The `TypedCommandBuffer` resolves handlers internally through the `ResourceRegistry`.
+4. **Flush:** At each commit point, `commandBuffer.flush(gameWorld, ctx)` routes commands, then `flushManagers(ctx)` calls `flush(updateContext)` on each manager.
 5. **Reset:** `GameWorld::reset()` iterates `managers_` and calls `reset()` for level transitions.
 
 ```
-Registration  →  init()  →  Runtime Loop  →  reset()
-    │               │            │                │
-    ▼               ▼            ▼                ▼
-registerResource  mgr.init()  resource<T>()    mgr.reset()
-                  (registers   tryResource<T>()
-                   handlers)   flushManagers()
+Registration  →  init()  →  Runtime Loop        →  reset()
+    │               │            │                      │
+    ▼               ▼            ▼                      ▼
+registerResource  mgr.init()  queueCommand<T>()     mgr.reset()
+                  (registers   (routed internally
+                   handlers)    via ResourceRegistry)
 ```
 
 ## Integration with Command System
@@ -261,15 +261,18 @@ auto& coinMgr = gameWorld.registerManager<myapp::CoinManager>();
 gameWorld.init(); // Calls CoinManager::init() → registers handler
 ```
 
-At runtime, systems submit commands by looking up the handler via the ResourceRegistry. Note that `ctx.commandBuffer()` returns the `EngineCommandBuffer`, which only accepts engine-defined command types. Custom commands must be submitted directly to their handler:
+At runtime, systems submit engine-defined commands via `ctx.queueCommand<T>()`, which internally routes to the `EngineCommandBuffer`. For custom commands not covered by the engine buffer, the handler must be looked up via the `GameWorld`'s `ResourceRegistry` during initialization and stored as a reference:
 
 ```cpp
-auto& handler = ctx.resourceRegistry()
+// During initialization (e.g., system constructor or init())
+auto& handler = gameWorld.resourceRegistry()
     .resource<TypedCommandHandler<myapp::commands::CoinPickupCommand>>();
+
+// At runtime (in update())
 handler.submit(myapp::commands::CoinPickupCommand{collectorHandle, coinValue});
 ```
 
-The Manager collects these submissions and processes them during `gameWorld.flushManagers()`.
+The Manager collects these submissions and processes them during the GameLoop's flush cycle (`flushManagers(ctx)`).
 
 Alternatively, if you have a [custom CommandBuffer](#custom-commandbuffers) that manages your application-specific commands, systems submit to that buffer instead, and it flushes alongside the engine buffers.
 
@@ -294,7 +297,7 @@ export namespace myapp {
         void addUndo(UndoCommand cmd) { undoQueue_.push_back(cmd); }
         void addRedo(RedoCommand cmd) { redoQueue_.push_back(cmd); }
 
-        void flush(UpdateContext& ctx) noexcept override {
+        void flush(GameWorld& gameWorld, UpdateContext& ctx) noexcept override {
             for (auto& cmd : undoQueue_) { cmd.execute(ctx); }
             for (auto& cmd : redoQueue_) { cmd.execute(ctx); }
             clear();
@@ -315,14 +318,15 @@ auto& editorBuf = gameWorld.resourceRegistry()
     .registerResource<myapp::EditorCommandBuffer>();
 ```
 
-Because `EditorCommandBuffer` derives from `CommandBuffer`, it is automatically tracked in the `commandBuffers_` iteration list. Systems can look it up at runtime:
+Because `EditorCommandBuffer` derives from `CommandBuffer`, it is automatically tracked in the `commandBuffers_` iteration list. Since `UpdateContext` does not expose the `ResourceRegistry`, systems must capture a reference during initialization:
 
 ```cpp
-auto* editorBuf = ctx.resourceRegistry()
-    .tryResource<myapp::EditorCommandBuffer>();
-if (editorBuf) {
-    editorBuf->addUndo(UndoCommand{...});
-}
+// During system initialization
+auto& editorBuf = gameWorld.resourceRegistry()
+    .resource<myapp::EditorCommandBuffer>();
+
+// At runtime (stored reference)
+editorBuf.addUndo(UndoCommand{...});
 ```
 
 ### Registering Plain Resources
@@ -333,8 +337,8 @@ Not every resource needs to be a Manager or CommandBuffer. Any type can be regis
 auto& config = gameWorld.resourceRegistry()
     .registerResource<GameConfig>(configPath);
 
-// Later, in any system:
-auto& cfg = ctx.resourceRegistry().resource<GameConfig>();
+// Later, during system initialization (not at runtime via UpdateContext):
+auto& cfg = gameWorld.resourceRegistry().resource<GameConfig>();
 ```
 
 Plain resources are heap-allocated and owned by the registry via `ErasedUnique`, but they are not iterated during `init()`, `flush()`, or `reset()` — they are purely passive stores.

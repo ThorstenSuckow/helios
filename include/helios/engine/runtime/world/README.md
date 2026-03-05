@@ -14,7 +14,7 @@ This module provides the core classes for managing runtime game state. `GameWorl
 | `ResourceRegistry` | Type-indexed store for Managers, CommandBuffers, and CommandHandlers with O(1) lookup |
 | `Session` | Cross-frame state tracking (game/match states, scores) |
 | `Level` | Game level with world bounds and root scene node |
-| `UpdateContext` | Per-frame context with delta time, event buses, and command buffer |
+| `UpdateContext` | Per-frame context with delta time, event buses, and `queueCommand<T>()` |
 | `SystemRegistry` | Container for System instances within a pass |
 | `Manager` | Abstract base for deferred operation handlers |
 
@@ -23,10 +23,8 @@ This module provides the core classes for managing runtime game state. `GameWorl
 ```cpp
 // Create world and register resources
 helios::engine::runtime::world::GameWorld gameWorld;
-auto& poolMgr = gameWorld.resourceRegistry()
-    .registerResource<GameObjectPoolManager>();
-auto& spawnMgr = gameWorld.resourceRegistry()
-    .registerResource<SpawnManager>();
+auto& poolMgr = gameWorld.registerManager<GameObjectPoolManager>();
+auto& spawnMgr = gameWorld.registerManager<SpawnManager>();
 
 gameWorld.init(); // Initializes all Managers in registration order
 

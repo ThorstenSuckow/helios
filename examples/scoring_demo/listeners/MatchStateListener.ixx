@@ -32,7 +32,7 @@ export namespace helios::examples::scoring {
                     if (transitionContext.to() == helios::engine::mechanics::match::types::MatchState::PlayerDeath &&
                         transitionContext.transitionId() == helios::engine::mechanics::match::types::MatchStateTransitionId::QuitRequested) {
 
-                        updateContext.commandBuffer().add<helios::engine::state::commands::StateCommand<helios::engine::mechanics::gamestate::types::GameState>>(
+                        updateContext.queueCommand<helios::engine::state::commands::StateCommand<helios::engine::mechanics::gamestate::types::GameState>>(
                             helios::engine::state::types::StateTransitionRequest<helios::engine::mechanics::gamestate::types::GameState>(
                                 helios::engine::mechanics::gamestate::types::GameState::Paused,
                                 helios::engine::mechanics::gamestate::types::GameStateTransitionId::TogglePause

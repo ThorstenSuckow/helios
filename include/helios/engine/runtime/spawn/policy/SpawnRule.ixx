@@ -13,7 +13,7 @@ import helios.engine.runtime.spawn.policy.amount.SpawnAmountProvider;
 import helios.engine.runtime.spawn.policy.SpawnRuleState;
 import helios.engine.runtime.spawn.scheduling.SpawnPlan;
 import helios.engine.runtime.pooling.GameObjectPoolSnapshot;
-import helios.engine.runtime.world.UpdateContext;
+import helios.engine.runtime.world;
 import helios.engine.core.data.GameObjectPoolId;
 import helios.engine.core.data.SpawnRuleId;
 
@@ -113,6 +113,7 @@ export namespace helios::engine::runtime::spawn::policy {
          * @param gameObjectPoolId The pool to spawn from.
          * @param poolSnapshot Current pool state.
          * @param spawnRuleState The rule's runtime state.
+         * @param gameWorld The game world where the spawn plan is executed.
          * @param updateContext The current frame's context.
          *
          * @return A SpawnPlan with amount > 0 if condition satisfied, 0 otherwise.
@@ -121,9 +122,10 @@ export namespace helios::engine::runtime::spawn::policy {
             const helios::engine::core::data::GameObjectPoolId gameObjectPoolId,
             const helios::engine::runtime::pooling::GameObjectPoolSnapshot& poolSnapshot,
             const SpawnRuleState& spawnRuleState,
+            const helios::engine::runtime::world::GameWorld& gameWorld,
             const helios::engine::runtime::world::UpdateContext& updateContext
         ) {
-            auto amount = spawnAmountProvider_->getAmount(gameObjectPoolId, spawnRuleState, updateContext);
+            auto amount = spawnAmountProvider_->getAmount(gameObjectPoolId, spawnRuleState, gameWorld, updateContext);
 
             if (spawnCondition_->isSatisfied(amount, spawnRuleState, poolSnapshot, updateContext)) {
                 return helios::engine::runtime::spawn::scheduling::SpawnPlan{spawnRuleId_, amount};

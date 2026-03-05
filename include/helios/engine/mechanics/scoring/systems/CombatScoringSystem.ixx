@@ -107,7 +107,7 @@ export namespace helios::engine::mechanics::scoring::systems {
                     svc->score().value())
                 );
 
-                updateContext.commandBuffer().add<UpdateScoreCommand>(
+                updateContext.queueCommand<UpdateScoreCommand>(
                     std::move(scoreContext)
                 );
             }

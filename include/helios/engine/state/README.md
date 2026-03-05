@@ -85,7 +85,7 @@ gameLoop.addManager(std::move(gameStateManager));
 ### Requesting Transitions
 
 ```cpp
-updateContext.commandBuffer().add<StateCommand<GameState>>(
+updateContext.queueCommand<StateCommand<GameState>>(
     StateTransitionRequest<GameState>{
         GameState::Running,
         GameStateTransitionId::Pause

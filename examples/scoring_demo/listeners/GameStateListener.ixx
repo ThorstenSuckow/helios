@@ -45,11 +45,11 @@ export namespace helios::examples::scoring {
                                  (from == GameState::Running && to == GameState::Title) ;
 
                     if (reset) {
-                        updateContext.commandBuffer().add<WorldLifecycleCommand>(WorldLifecycleAction::Reset);
+                        updateContext.queueCommand<WorldLifecycleCommand>(WorldLifecycleAction::Reset);
                     }
 
                    if (to == GameState::Title && transitionId == GameStateTransitionId::TitleRequested) {
-                        updateContext.commandBuffer().add<helios::engine::state::commands::StateCommand<MatchState>>(
+                        updateContext.queueCommand<helios::engine::state::commands::StateCommand<MatchState>>(
                             helios::engine::state::types::StateTransitionRequest<MatchState>(
                             MatchState::GameOver,
                                 MatchStateTransitionId::RestartRequested
@@ -57,14 +57,14 @@ export namespace helios::examples::scoring {
                         );
                     }
                     if (from == GameState::Running && transitionId == GameStateTransitionId::TitleRequested) {
-                        updateContext.commandBuffer().add<helios::engine::state::commands::StateCommand<MatchState>>(
+                        updateContext.queueCommand<helios::engine::state::commands::StateCommand<MatchState>>(
                             helios::engine::state::types::StateTransitionRequest<MatchState>(
                                 MatchState::GameOver, MatchStateTransitionId::QuitRequested
                             )
                         );
                     }
                     if (from == GameState::Running && transitionId == GameStateTransitionId::RestartRequested) {
-                        updateContext.commandBuffer().add<helios::engine::state::commands::StateCommand<MatchState>>(
+                        updateContext.queueCommand<helios::engine::state::commands::StateCommand<MatchState>>(
                             helios::engine::state::types::StateTransitionRequest<MatchState>(
                             MatchState::GameOver,
                                 MatchStateTransitionId::RestartRequested

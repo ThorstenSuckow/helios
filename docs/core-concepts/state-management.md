@@ -216,7 +216,9 @@ auto listener = std::make_unique<LambdaStateListener<GameState>>(
     // onEnter
     [](auto& ctx, GameState to) {
         if (to == GameState::Running) {
-            ctx.gameWorld().reset();
+            ctx.queueCommand<WorldLifecycleCommand>(
+                WorldLifecycleAction::Reset
+            );
         }
     }
 );
@@ -236,18 +238,14 @@ auto& session = gameWorld.session();
 session.trackState<GameState>();
 session.trackState<MatchState>();
 
-// Create managers with rules
-auto gameStateManager = std::make_unique<StateManager<GameState>>(gameStateRules);
-auto matchStateManager = std::make_unique<StateManager<MatchState>>(matchStateRules);
+// Register managers with rules via GameWorld
+auto& gameStateManager = gameWorld.registerManager<StateManager<GameState>>(gameStateRules);
+auto& matchStateManager = gameWorld.registerManager<StateManager<MatchState>>(matchStateRules);
 
 // Add listeners
-gameStateManager->addStateListener(std::make_unique<LambdaStateListener<GameState>>(
+gameStateManager.addStateListener(std::make_unique<LambdaStateListener<GameState>>(
     /* callbacks */
 ));
-
-// Register with GameLoop (managers are initialized and flushed automatically)
-gameLoop.addManager(std::move(gameStateManager));
-gameLoop.addManager(std::move(matchStateManager));
 ```
 
 ### Requesting State Transitions
@@ -257,7 +255,7 @@ using namespace helios::engine::state::commands;
 using namespace helios::engine::state::types;
 
 // Request game start
-updateContext.commandBuffer().add<StateCommand<GameState>>(
+updateContext.queueCommand<StateCommand<GameState>>(
     StateTransitionRequest<GameState>{
         GameState::Title,
         GameStateTransitionId::StartRequested
@@ -265,7 +263,7 @@ updateContext.commandBuffer().add<StateCommand<GameState>>(
 );
 
 // Request player spawn in match
-updateContext.commandBuffer().add<StateCommand<MatchState>>(
+updateContext.queueCommand<StateCommand<MatchState>>(
     StateTransitionRequest<MatchState>{
         MatchState::Warmup,
         MatchStateTransitionId::PlayerSpawnRequested

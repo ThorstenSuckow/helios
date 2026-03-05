@@ -54,8 +54,6 @@ export namespace helios::engine::mechanics::match::systems {
 
             auto& session = updateContext.session();
 
-
-            auto& commandBuffer = updateContext.commandBuffer();
             const auto matchState = session.state<MatchState>();
             auto matchStateTransitionId = session.stateTransitionId<MatchState>();
 
@@ -69,28 +67,28 @@ export namespace helios::engine::mechanics::match::systems {
             switch (matchState) {
 
                 case MatchState::Finished: {
-                    commandBuffer.add<StateCommand<MatchState>>(
+                    updateContext.queueCommand<StateCommand<MatchState>>(
                         StateTransitionRequest<MatchState>(matchState, MatchStateTransitionId::WarmupRequested)
                     );
                     break;
                 }
 
                 case MatchState::Undefined: {
-                    commandBuffer.add<StateCommand<MatchState>>(
+                    updateContext.queueCommand<StateCommand<MatchState>>(
                         StateTransitionRequest<MatchState>(matchState, MatchStateTransitionId::WarmupRequested)
                     );
                     break;
                 }
 
                 case MatchState::Warmup: {
-                    commandBuffer.add<StateCommand<MatchState>>(
+                    updateContext.queueCommand<StateCommand<MatchState>>(
                         StateTransitionRequest<MatchState>(matchState, MatchStateTransitionId::PlayerSpawnRequested)
                     );
                     break;
                 }
 
                 case MatchState::PlayerSpawn: {
-                    commandBuffer.add<StateCommand<MatchState>>(
+                    updateContext.queueCommand<StateCommand<MatchState>>(
                         StateTransitionRequest<MatchState>(matchState, MatchStateTransitionId::StartRequested)
                     );
                     break;
@@ -98,7 +96,7 @@ export namespace helios::engine::mechanics::match::systems {
 
                 case MatchState::PlayerDeath: {
                     if (matchStateTransitionId == MatchStateTransitionId::QuitRequested) {
-                        commandBuffer.add<StateCommand<MatchState>>(
+                        updateContext.queueCommand<StateCommand<MatchState>>(
                             StateTransitionRequest<MatchState>(MatchState::PlayerDeath, MatchStateTransitionId::QuitRequested)
                         );
                     }

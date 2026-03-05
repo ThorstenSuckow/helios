@@ -26,7 +26,7 @@ Direct execution via `execute()` is a no-op; commands must be dispatched.
 
 ```cpp
 // Issue a UI action command when menu item is activated
-updateContext.commandBuffer().add<UiActionCommand>(
+updateContext.queueCommand<UiActionCommand>(
     menuItemEntity.entityHandle(),
     ActionId::StartGame
 );

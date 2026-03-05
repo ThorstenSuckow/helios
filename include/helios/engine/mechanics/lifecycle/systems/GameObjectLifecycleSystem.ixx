@@ -76,7 +76,7 @@ export namespace helios::engine::mechanics::lifecycle::systems {
                         if (hasHealthDepletedFlag(healthDepletedBehavior, HealthDepletedBehavior::Despawn)) {
                             if (auto* sbp = go->get<SpawnedByProfileComponent>()) {
                                 assert(sbp->spawnProfileId().value() != 0 && "Entity has no SpawnProfileId.");
-                                updateContext.commandBuffer().add<DespawnCommand>(go->entityHandle(), sbp->spawnProfileId());
+                                updateContext.queueCommand<DespawnCommand>(go->entityHandle(), sbp->spawnProfileId());
                             } else {
                                 go->setActive(false);
                                 /**

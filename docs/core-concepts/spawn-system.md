@@ -195,7 +195,8 @@ Determines **how many** entities to spawn:
 auto dynamicAmount = std::make_unique<SpawnAmountByCallback>(
     [](const GameObjectPoolId& poolId, const SpawnRuleState& state,
        const UpdateContext& ctx) -> size_t {
-        return ctx.gameWorld().difficultyLevel() + 1;
+        // Access session or resources via ctx
+        return ctx.session().state<DifficultyLevel>() + 1;
     }
 );
 ```
@@ -287,14 +288,11 @@ The `SpawnManager` processes spawn/despawn commands:
 ```cpp
 import helios.engine.runtime.spawn.SpawnManager;
 
-auto spawnManager = std::make_unique<SpawnManager>();
+auto& spawnManager = gameWorld.registerManager<SpawnManager>();
 
 // Register profiles
-spawnManager->addSpawnProfile(enemyProfileId, std::move(enemyProfile));
-spawnManager->addSpawnProfile(bulletProfileId, std::move(bulletProfile));
-
-// Add to GameWorld
-gameWorld.addManager(std::move(spawnManager));
+spawnManager.addSpawnProfile(enemyProfileId, std::move(enemyProfile));
+spawnManager.addSpawnProfile(bulletProfileId, std::move(bulletProfile));
 ```
 
 ## SpawnSystemFactory (Builder)
@@ -476,8 +474,8 @@ For cases where the builder is not suitable, the spawn system can be configured 
 
 ```cpp
 // 1. Register managers
-auto& poolManager  = gameWorld.addManager<GameObjectPoolManager>();
-auto& spawnManager = gameWorld.addManager<SpawnManager>();
+auto& poolManager  = gameWorld.registerManager<GameObjectPoolManager>();
+auto& spawnManager = gameWorld.registerManager<SpawnManager>();
 
 // 2. Configure pool
 poolManager.addPoolConfig(std::make_unique<GameObjectPoolConfig>(
@@ -526,7 +524,7 @@ void fire(const UpdateContext& ctx, const vec3f& position, const vec3f& directio
         .velocity = direction * bulletSpeed_
     };
     
-    ctx.commandBuffer().add<SpawnCommand>(bulletProfileId, spawnCtx, 1);
+    ctx.queueCommand<SpawnCommand>(bulletProfileId, spawnCtx, 1);
 }
 ```
 
@@ -546,7 +544,7 @@ To return entities to their pool, use `DespawnCommand`:
 
 ```cpp
 // When entity should be removed (e.g., out of bounds, destroyed)
-ctx.commandBuffer().add<DespawnCommand>(entity->guid(), profileId);
+ctx.queueCommand<DespawnCommand>(entity->guid(), profileId);
 ```
 
 The `LevelBoundsBehaviorComponent` with `BoundsBehavior::Despawn` handles this automatically for entities leaving the level bounds.

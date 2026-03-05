@@ -75,7 +75,6 @@ export namespace helios::engine::mechanics::input::systems {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             auto& inputSnapshot = updateContext.inputSnapshot();
-            auto& commandBuffer = updateContext.commandBuffer();
 
             // Left stick: movement
             const auto leftStick = inputSnapshot.gamepadState().left();
@@ -90,10 +89,10 @@ export namespace helios::engine::mechanics::input::systems {
             auto rdir = helios::math::vec2f{0.0f, 0.0f};
 
             if (gameObject_.has<DeadTagComponent>()) {
-                commandBuffer.add<helios::engine::modules::physics::motion::commands::Move2DCommand>(
+                updateContext.queueCommand<helios::engine::modules::physics::motion::commands::Move2DCommand>(
                     gameObject_.entityHandle(), ldir, finalSpeed
                 );
-                commandBuffer.add<helios::engine::mechanics::combat::commands::Aim2DCommand>(
+                updateContext.queueCommand<helios::engine::mechanics::combat::commands::Aim2DCommand>(
                     gameObject_.entityHandle(), rdir, finalFreq
                 );
                 return;
@@ -107,11 +106,11 @@ export namespace helios::engine::mechanics::input::systems {
              * @todo DO NOT POST IF input is already inactive in shootComponent
              * and no input was detected (after normalizing)
              */
-            commandBuffer.add<helios::engine::modules::physics::motion::commands::Move2DCommand>(
+            updateContext.queueCommand<helios::engine::modules::physics::motion::commands::Move2DCommand>(
                 gameObject_.entityHandle(), ldir, finalSpeed
             );
 
-            commandBuffer.add<helios::engine::modules::physics::motion::commands::SteeringCommand>(
+            updateContext.queueCommand<helios::engine::modules::physics::motion::commands::SteeringCommand>(
                 gameObject_.entityHandle(), ldir, finalSpeed
             );
 
@@ -120,7 +119,7 @@ export namespace helios::engine::mechanics::input::systems {
                 finalFreq = freq;
             }
 
-            commandBuffer.add<helios::engine::mechanics::combat::commands::Aim2DCommand>(
+            updateContext.queueCommand<helios::engine::mechanics::combat::commands::Aim2DCommand>(
                 gameObject_.entityHandle(), rdir, finalFreq
             );
 
@@ -128,13 +127,13 @@ export namespace helios::engine::mechanics::input::systems {
                 // right trigger: shooting
                 const auto rightTrigger = inputSnapshot.gamepadState().triggerRight();
                 if (rightTrigger > 0.0f) {
-                    commandBuffer.add<helios::engine::mechanics::combat::commands::ShootCommand>(
+                    updateContext.queueCommand<helios::engine::mechanics::combat::commands::ShootCommand>(
                        gameObject_.entityHandle(), rightTrigger
                    );
                 }
             } else {
                 if (finalFreq > 0.0f) {
-                    commandBuffer.add<helios::engine::mechanics::combat::commands::ShootCommand>(
+                    updateContext.queueCommand<helios::engine::mechanics::combat::commands::ShootCommand>(
                        gameObject_.entityHandle(), finalFreq
                    );
                 }

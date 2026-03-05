@@ -22,6 +22,8 @@ import helios.engine.runtime.spawn.SpawnManager;
 import helios.engine.runtime.spawn.scheduling.SpawnScheduler;
 import helios.engine.runtime.spawn.events.SpawnPlanCommandExecutedEvent;
 
+using namespace helios::engine::runtime::world;
+
 export namespace helios::engine::mechanics::spawn::systems {
 
 
@@ -30,12 +32,18 @@ export namespace helios::engine::mechanics::spawn::systems {
 
         helios::engine::runtime::spawn::SpawnManager& spawnManager_;
 
+       GameWorld* gameWorld_;
+
     public:
 
 
         explicit GameObjectSpawnSystem(helios::engine::runtime::spawn::SpawnManager& spawnManager) noexcept
         : spawnManager_{spawnManager} {}
 
+
+        void init(GameWorld& gameWorld) noexcept {
+            gameWorld_ = &gameWorld;
+        }
 
         /**
          * @brief Processes spawn scheduling and enqueues spawn commands.
@@ -65,12 +73,12 @@ export namespace helios::engine::mechanics::spawn::systems {
                     spawnScheduler->commit(event.spawnRuleId, event.spawnCount);
                 }
 
-                spawnScheduler->evaluate(updateContext);
+                spawnScheduler->evaluate(*gameWorld_, updateContext);
 
                 auto scheduledPlans = spawnScheduler->drainScheduledPlans();
 
                 for (auto& plan : scheduledPlans) {
-                    updateContext.commandBuffer().add<
+                    updateContext.queueCommand<
                         helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand
                     >(
                         plan.spawnProfileId, plan.spawnPlan, plan.spawnContext

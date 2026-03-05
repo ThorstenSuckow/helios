@@ -40,7 +40,7 @@ import helios.engine.core.data;
 
 
 
-#define HELIOS_LOG_SCOPE "helios::engine::runtime::world::GameWorld"
+#define HELIOS_LOG_SCOPE "GameWorld"
 export namespace helios::engine::runtime::world {
 
 
@@ -70,29 +70,29 @@ export namespace helios::engine::runtime::world {
      *
      * ## Usage with GameLoop
      *
-     * Systems access the GameWorld via UpdateContext. Entity queries use views,
-     * while mutations are performed through Commands flushed by the
-     * EngineCommandBuffer.
+     * Systems access the GameWorld indirectly via UpdateContext. Entity queries
+     * use views, while mutations are performed through commands submitted via
+     * `UpdateContext::queueCommand<T>()`.
      *
      * ```cpp
-     * void update(UpdateContext& ctx) noexcept override {
-     *     for (auto [entity, transform, velocity, active] : updateContext.view<
+     * void update(UpdateContext& ctx) noexcept {
+     *     for (auto [entity, transform, velocity, active] : ctx.view<
      *         TransformComponent,
      *         VelocityComponent,
      *         Active
      *     >().whereEnabled()) {
      *         // Process matching entities
      *     }
+     *
+     *     ctx.queueCommand<DespawnCommand>(handle, profileId);
      * }
      * ```
      *
      * ## Resource Registration
      *
      * ```cpp
-     * auto& poolMgr = gameWorld.resourceRegistry()
-     *     .registerResource<GameObjectPoolManager>();
-     * auto& spawnMgr = gameWorld.resourceRegistry()
-     *     .registerResource<SpawnManager>();
+     * auto& poolMgr  = gameWorld.registerManager<GameObjectPoolManager>();
+     * auto& spawnMgr = gameWorld.registerManager<SpawnManager>();
      *
      * gameWorld.init(); // Calls init() on all Managers in registration order
      * ```
@@ -142,7 +142,7 @@ export namespace helios::engine::runtime::world {
          *
          * @details Can be null if no level is currently active.
          */
-        std::unique_ptr<helios::engine::runtime::world::Level> level_ = nullptr;
+        std::unique_ptr<Level> level_ = nullptr;
 
 
         /**
@@ -230,7 +230,7 @@ export namespace helios::engine::runtime::world {
          *
          * @param level Unique pointer to the Level instance. Ownership is transferred to the GameWorld.
          */
-        void setLevel(std::unique_ptr<helios::engine::runtime::world::Level> level) noexcept {
+        void setLevel(std::unique_ptr<Level> level) noexcept {
             level_ = std::move(level);
         }
 
@@ -250,7 +250,7 @@ export namespace helios::engine::runtime::world {
          *
          * @warning Calling this method when hasLevel() returns false results in undefined behavior.
          */
-        [[nodiscard]] const helios::engine::runtime::world::Level* level() const noexcept{
+        [[nodiscard]] const Level* level() const noexcept{
             return level_.get();
         }
 
@@ -262,7 +262,7 @@ export namespace helios::engine::runtime::world {
          * @return True if a Manager of type T is registered, false otherwise.
          */
         template<typename T>
-        requires std::is_base_of_v<helios::engine::runtime::world::Manager, T>
+        requires std::is_base_of_v<Manager, T>
         [[nodiscard]] bool hasManager() const {
             return resourceRegistry_.has<T>();
         }
@@ -283,7 +283,7 @@ export namespace helios::engine::runtime::world {
          * @pre No Manager of type T is already registered.
          */
         template<typename T, typename... Args>
-        requires std::is_base_of_v<helios::engine::runtime::world::Manager, T>
+        requires std::is_base_of_v<Manager, T>
         T& registerManager(Args&&... args) {
             assert(!resourceRegistry_.has<T>() && "Manager already registered.");
             return resourceRegistry_.registerResource<T>(std::forward<Args>(args)...);
@@ -353,9 +353,24 @@ export namespace helios::engine::runtime::world {
          *
          * @param updateContext The current frame's update context.
          */
-        void flushManagers(helios::engine::runtime::world::UpdateContext& updateContext) {
+        void flushManagers(UpdateContext& updateContext) {
             for (auto& mgr : resourceRegistry_.managers()) {
                 mgr->flush(updateContext);
+            }
+        }
+
+        /**
+         * @brief Flushes all registered CommandBuffers.
+         *
+         * @details Iterates over all CommandBuffers in registration order and
+         * invokes `flush(*this, updateContext)` on each. Called by the GameLoop
+         * at commit points before Managers are flushed.
+         *
+         * @param updateContext The current frame's update context.
+         */
+        void flushCommandBuffers(UpdateContext& updateContext) {
+            for (auto& buff : resourceRegistry_.commandBuffers()) {
+                buff->flush(*this, updateContext);
             }
         }
 
@@ -501,6 +516,10 @@ export namespace helios::engine::runtime::world {
          * @return Reference to the ResourceRegistry.
          */
         ResourceRegistry& resourceRegistry() noexcept {
+            return resourceRegistry_;
+        }
+
+        const ResourceRegistry& resourceRegistry() const noexcept {
             return resourceRegistry_;
         }
 

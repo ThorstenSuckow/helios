@@ -52,13 +52,13 @@ export namespace helios::engine::mechanics::gamestate::systems {
 
                 switch (gameState) {
                     case GameState::Title:
-                        updateContext.commandBuffer().add<StateCommand<GameState>>(
+                        updateContext.queueCommand<StateCommand<GameState>>(
                             StateTransitionRequest<GameState>(GameState::Title, GameStateTransitionId::StartRequested)
                         );
                         break;
 
                     case GameState::Running:
-                        updateContext.commandBuffer().add<StateCommand<GameState>>(
+                        updateContext.queueCommand<StateCommand<GameState>>(
                             StateTransitionRequest<GameState>(GameState::Running, GameStateTransitionId::TogglePause)
                         );
                         break;

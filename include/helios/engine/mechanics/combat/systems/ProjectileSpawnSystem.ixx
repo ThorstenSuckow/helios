@@ -151,7 +151,7 @@ export namespace helios::engine::mechanics::combat::systems {
                 assert(aimDirection.isNormalized() && "Unexpected aimDirection.length()");
 
                 for (unsigned int i = 0; i < amount; i++) {
-                    updateContext.commandBuffer().add<
+                    updateContext.queueCommand<
                         helios::engine::runtime::spawn::commands::SpawnCommand
                     >(
                         spawnProfileId_,

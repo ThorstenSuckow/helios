@@ -102,10 +102,12 @@ export namespace helios::engine::runtime::spawn::scheduling {
          * @details Iterates through all rules, processes each one, and
          * collects spawn plans for rules whose conditions are met.
          *
+         * @param gameWorld The game world where evaluation takes place.
          * @param updateContext Current frame context with delta time and world.
          * @param spawnContext Context for spawn operations.
          */
         void evaluate(
+            const helios::engine::runtime::world::GameWorld& gameWorld,
             const helios::engine::runtime::world::UpdateContext& updateContext,
             const helios::engine::runtime::spawn::SpawnContext& spawnContext) noexcept override{
 
@@ -114,7 +116,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
             for (auto& [spawnProfileId, rule] : spawnRules_) {
 
                 auto spawnPlan = ruleProcessor_.processRule(
-                    updateContext, spawnContext, spawnProfileId, *rule,
+                    gameWorld, updateContext, spawnContext, spawnProfileId, *rule,
                     spawnRuleStates_[rule->spawnRuleId()]
                 );
 

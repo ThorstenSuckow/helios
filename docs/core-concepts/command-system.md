@@ -39,16 +39,15 @@ struct DespawnCommand {
 
 ### Self-Executing Commands
 
-Commands can also execute themselves if they satisfy the `ExecutableCommand` concept:
+Commands can also execute themselves if they satisfy the `ExecutableCommand` concept. During `flush()`, the `TypedCommandBuffer` resolves the handler via the `GameWorld`'s `ResourceRegistry` internally — self-executing commands receive the `UpdateContext` directly:
 
 ```cpp
 struct StateCommand {
     StateTransitionContext context_;
 
     void execute(UpdateContext& ctx) const noexcept {
-        auto& manager = ctx.resourceRegistry()
-            .resource<StateManager>();
-        manager.transition(context_);
+        // Self-executing commands receive the UpdateContext;
+        // handler routing is resolved internally by TypedCommandBuffer
     }
 };
 ```
@@ -60,9 +59,9 @@ struct StateCommand {
 ### Adding Commands
 
 ```cpp
-// Systems add commands via UpdateContext
-ctx.commandBuffer().add<Move2DCommand>(entityHandle, direction, speed);
-ctx.commandBuffer().add<DespawnCommand>(entityHandle, profileId);
+// Systems add commands via UpdateContext::queueCommand<T>()
+ctx.queueCommand<Move2DCommand>(entityHandle, direction, speed);
+ctx.queueCommand<DespawnCommand>(entityHandle, profileId);
 ```
 
 ### Flush Routing
@@ -138,7 +137,7 @@ void init(GameWorld& gameWorld) noexcept override {
 
 ## EngineCommandBuffer
 
-`EngineCommandBuffer` is a thin facade over `TypedCommandBuffer` instantiated with all engine command types. It is registered as a resource and accessed via `UpdateContext::commandBuffer()`.
+`EngineCommandBuffer` is a thin facade over `TypedCommandBuffer` instantiated with all engine command types. It is registered as a resource in the `GameWorld` and used internally by `UpdateContext::queueCommand<T>()`.
 
 ```cpp
 class EngineCommandBuffer : public CommandBuffer {
@@ -160,7 +159,9 @@ public:
         impl_.add<T>(std::forward<Args>(args)...);
     }
 
-    void flush(UpdateContext& ctx) noexcept override { impl_.flush(ctx); }
+    void flush(GameWorld& gameWorld, UpdateContext& ctx) noexcept override {
+        impl_.flush(gameWorld, ctx);
+    }
     void clear() noexcept override { impl_.clear(); }
 };
 ```
@@ -171,7 +172,7 @@ Managers handle cross-cutting concerns that require deferred or batched processi
 
 ### Manager Lifecycle
 
-1. **Registration:** Manager is added via `GameWorld::addManager<T>()` or `resourceRegistry().registerResource<T>()`
+1. **Registration:** Manager is added via `GameWorld::registerManager<T>()`
 2. **init():** Called during `GameWorld::init()`. Registers `TypedCommandHandler` instances with the `ResourceRegistry`.
 3. **submit():** Receives commands during `CommandBuffer::flush()`
 4. **flush():** Processes queued commands during `GameWorld::flushManagers()`
@@ -179,8 +180,7 @@ Managers handle cross-cutting concerns that require deferred or batched processi
 ### Registration
 
 ```cpp
-auto& spawnManager = gameWorld.resourceRegistry()
-    .registerResource<SpawnManager>();
+auto& spawnManager = gameWorld.registerManager<SpawnManager>();
 ```
 
 ## Game Loop Integration
@@ -194,25 +194,25 @@ The Command System integrates with the Phase/Pass game loop architecture. Comman
 │                                                                     │
 │  PRE PHASE ──────────────────────────────────────────────────────   │
 │    Pass 1 (Input): Systems read input, add commands                 │
-│        ctx.commandBuffer().add<Move2DCommand>(dir, spd);            │
+│        ctx.queueCommand<Move2DCommand>(dir, spd);                    │
 │    Pass 2, Pass 3, ...                                              │
 │  ────────────────────────────────────────────────── Phase Commit    │
 │       │  1. eventBus.swapBuffers()                                  │
-│       │  2. commandBuffer.flush()      ◄── Commands route here      │
-│       │  3. gameWorld.flushManagers()  ◄── Managers process queues  │
+│       │  2. commandBuffer.flush(gameWorld, ctx)  ◄── Commands route here │
+│       │  3. flushManagers(ctx)                   ◄── Managers process   │
 │       ▼                                                             │
 │  MAIN PHASE ─────────────────────────────────────────────────────   │
 │    Pass 1 (Gameplay): Movement, Physics systems                     │
 │    Pass 2 (Collision): Collision detection                          │
 │        Commands can still be added here!                            │
 │  ────────────────────────────────────────────────── Phase Commit    │
-│       │  commandBuffer.flush() + gameWorld.flushManagers()          │
+│       │  commandBuffer.flush(gameWorld, ctx) + flushManagers(ctx)  │
 │       ▼                                                             │
 │  POST PHASE ─────────────────────────────────────────────────────   │
 │    Pass 1 (Scene Sync): Sync transforms to scene graph              │
 │    Pass 2 (Cleanup): Clear dirty flags                              │
 │  ────────────────────────────────────────────────── Phase Commit    │
-│       │  commandBuffer.flush() + gameWorld.flushManagers()          │
+│       │  commandBuffer.flush(gameWorld, ctx) + flushManagers(ctx)  │
 │       ▼                                                             │
 │                          RENDER                                     │
 └─────────────────────────────────────────────────────────────────────┘

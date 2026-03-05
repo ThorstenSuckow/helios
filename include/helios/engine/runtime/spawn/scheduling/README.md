@@ -98,6 +98,7 @@ The `RuleProcessor` abstraction separates evaluation logic from scheduling strat
 class RuleProcessor {
 public:
     virtual SpawnPlan processRule(
+        const GameWorld& gameWorld,
         const UpdateContext& updateContext,
         const SpawnContext& spawnContext,
         SpawnProfileId spawnProfileId,

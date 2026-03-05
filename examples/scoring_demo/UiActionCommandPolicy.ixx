@@ -25,7 +25,7 @@ export namespace helios::examples::scoring {
                 [](
                     helios::engine::runtime::world::UpdateContext& updateContext,
                     const helios::engine::modules::ui::commands::UiActionCommand& actionCommand) noexcept -> void {
-                    updateContext.commandBuffer().add<helios::engine::state::commands::StateCommand<helios::engine::mechanics::gamestate::types::GameState>>(
+                    updateContext.queueCommand<helios::engine::state::commands::StateCommand<helios::engine::mechanics::gamestate::types::GameState>>(
                       helios::engine::state::types::StateTransitionRequest<helios::engine::mechanics::gamestate::types::GameState>(
                             helios::engine::mechanics::gamestate::types::GameState::Paused,
                             helios::engine::mechanics::gamestate::types::GameStateTransitionId::TogglePause
@@ -38,7 +38,7 @@ export namespace helios::examples::scoring {
                     helios::engine::runtime::world::UpdateContext& updateContext,
                     const helios::engine::modules::ui::commands::UiActionCommand& actionCommand) noexcept -> void {
 
-                    updateContext.commandBuffer().add<helios::engine::state::commands::StateCommand<helios::engine::mechanics::match::types::MatchState>>(
+                    updateContext.queueCommand<helios::engine::state::commands::StateCommand<helios::engine::mechanics::match::types::MatchState>>(
                         helios::engine::state::types::StateTransitionRequest<helios::engine::mechanics::match::types::MatchState>(
                             helios::engine::mechanics::match::types::MatchState::Playing,
                             helios::engine::mechanics::match::types::MatchStateTransitionId::QuitRequested
@@ -52,7 +52,7 @@ export namespace helios::examples::scoring {
                 [](
                     helios::engine::runtime::world::UpdateContext& updateContext,
                     const helios::engine::modules::ui::commands::UiActionCommand& actionCommand) noexcept -> void {
-                    updateContext.commandBuffer().add<helios::engine::state::commands::StateCommand<helios::engine::mechanics::gamestate::types::GameState>>(
+                    updateContext.queueCommand<helios::engine::state::commands::StateCommand<helios::engine::mechanics::gamestate::types::GameState>>(
                         helios::engine::state::types::StateTransitionRequest<helios::engine::mechanics::gamestate::types::GameState>(
                             helios::engine::mechanics::gamestate::types::GameState::Paused,
                             helios::engine::mechanics::gamestate::types::GameStateTransitionId::RestartRequested
@@ -64,7 +64,7 @@ export namespace helios::examples::scoring {
                     [](
                         helios::engine::runtime::world::UpdateContext& updateContext,
                         const helios::engine::modules::ui::commands::UiActionCommand& actionCommand) noexcept -> void {
-                        updateContext.commandBuffer().add<helios::engine::state::commands::StateCommand<helios::engine::mechanics::gamestate::types::GameState>>(
+                        updateContext.queueCommand<helios::engine::state::commands::StateCommand<helios::engine::mechanics::gamestate::types::GameState>>(
                         helios::engine::state::types::StateTransitionRequest<helios::engine::mechanics::gamestate::types::GameState>(
                                 helios::engine::mechanics::gamestate::types::GameState::Running,
                                 helios::engine::mechanics::gamestate::types::GameStateTransitionId::RestartRequested
@@ -76,7 +76,7 @@ export namespace helios::examples::scoring {
                     [](
                         helios::engine::runtime::world::UpdateContext& updateContext,
                         const helios::engine::modules::ui::commands::UiActionCommand& actionCommand) noexcept -> void {
-                        updateContext.commandBuffer().add<helios::engine::state::commands::StateCommand<helios::engine::mechanics::gamestate::types::GameState>>(
+                        updateContext.queueCommand<helios::engine::state::commands::StateCommand<helios::engine::mechanics::gamestate::types::GameState>>(
                         helios::engine::state::types::StateTransitionRequest<helios::engine::mechanics::gamestate::types::GameState>(
                                 helios::engine::mechanics::gamestate::types::GameState::Running,
                                 helios::engine::mechanics::gamestate::types::GameStateTransitionId::TitleRequested

@@ -8,6 +8,7 @@ module;
 export module helios.engine.runtime.spawn.scheduling.RuleProcessor;
 
 import helios.engine.runtime.world.UpdateContext;
+import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.spawn.SpawnContext;
 import helios.engine.runtime.spawn.scheduling.SpawnPlan;
 import helios.engine.core.data.SpawnProfileId;
@@ -51,6 +52,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
          * produces a SpawnPlan indicating how many entities should be spawned.
          * A plan with `amount == 0` indicates the rule's conditions were not met.
          *
+         * @param gameWorld The game world where the rule is processed.
          * @param updateContext Current frame context with delta time and world access.
          * @param spawnContext Context information for the spawn operation.
          * @param spawnProfileId The profile ID associated with this rule.
@@ -60,6 +62,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
          * @return SpawnPlan with amount > 0 if spawn should occur, otherwise amount == 0.
          */
         virtual SpawnPlan processRule(
+            const helios::engine::runtime::world::GameWorld& gameWorld,
             const helios::engine::runtime::world::UpdateContext& updateContext,
             const helios::engine::runtime::spawn::SpawnContext& spawnContext,
             const helios::engine::core::data::SpawnProfileId spawnProfileId,

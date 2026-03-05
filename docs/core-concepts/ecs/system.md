@@ -187,7 +187,7 @@ public:
 
         if (spawnTimer_ >= spawnInterval_) {
             spawnTimer_ = 0.0f;
-            ctx.commandBuffer().add<SpawnCommand>(position, enemyType);
+            ctx.queueCommand<SpawnCommand>(position, enemyType);
         }
     }
 };
@@ -251,7 +251,7 @@ void update(UpdateContext& ctx) noexcept {
         HealthComponent, Active
     >().whereEnabled()) {
         if (health->isDead()) {
-            ctx.commandBuffer().add<DespawnCommand>(entity.entityHandle());
+            ctx.queueCommand<DespawnCommand>(entity.entityHandle());
         }
     }
 }

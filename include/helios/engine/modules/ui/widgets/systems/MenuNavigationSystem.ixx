@@ -163,7 +163,7 @@ export namespace helios::engine::modules::ui::widgets::systems {
                 >();
 
                 if (uac) {
-                    updateContext.commandBuffer().add<helios::engine::modules::ui::commands::UiActionCommand>(
+                    updateContext.queueCommand<helios::engine::modules::ui::commands::UiActionCommand>(
                         focusedMenu->menuItems()[focusedMenu->selectedIndex()], uac->actionId()
                     );
                 }

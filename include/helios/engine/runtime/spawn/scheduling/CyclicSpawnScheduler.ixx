@@ -128,10 +128,12 @@ export namespace helios::engine::runtime::spawn::scheduling {
          * If the rule produces a spawn plan, the cursor advances to the next rule.
          * Otherwise, the same rule is evaluated again next frame.
          *
+         * @param gameWorld The game world where evaluation takes place.
          * @param updateContext Current frame context.
          * @param spawnContext Context for spawn operations.
          */
         void evaluate(
+            const helios::engine::runtime::world::GameWorld& gameWorld,
             const helios::engine::runtime::world::UpdateContext& updateContext,
             const helios::engine::runtime::spawn::SpawnContext& spawnContext ) noexcept override {
 
@@ -140,7 +142,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
             // Process queue
             auto& [spawnProfileId, spawnRule] = ringBuffer_[cursor_];
             auto spawnPlan = ruleProcessor_.processRule(
-                updateContext, spawnContext, spawnProfileId, *spawnRule,
+                gameWorld, updateContext, spawnContext, spawnProfileId, *spawnRule,
                 spawnRuleStates_[spawnRule->spawnRuleId()]);
 
             if (spawnPlan.amount  > 0) {

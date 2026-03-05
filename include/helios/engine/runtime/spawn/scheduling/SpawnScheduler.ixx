@@ -76,10 +76,12 @@ export namespace helios::engine::runtime::spawn::scheduling {
          * strategy. Produces ScheduledSpawnPlan instances for rules whose
          * conditions are met.
          *
+         * @param gameWorld The game world where evaluation takes place.
          * @param updateContext Current frame context with delta time and world.
          * @param spawnContext Optional spawn context for the operation.
          */
         virtual void evaluate(
+            const helios::engine::runtime::world::GameWorld& gameWorld,
             const helios::engine::runtime::world::UpdateContext& updateContext,
             const helios::engine::runtime::spawn::SpawnContext& spawnContext = {})  noexcept = 0;
 

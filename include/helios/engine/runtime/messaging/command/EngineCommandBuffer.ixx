@@ -42,6 +42,7 @@ static_assert(requires {
   >::Type;
 }, "Bindings not visible in EngineCommandBuffer TU");
 
+using namespace helios::engine::runtime::world;
 
 export namespace helios::engine::runtime::messaging::command {
 
@@ -51,7 +52,7 @@ export namespace helios::engine::runtime::messaging::command {
      * @details EngineCommandBuffer is a thin facade over a TypedCommandBuffer
      * instantiated with the full set of command types used by the engine.
      * It is registered as a resource in the GameWorld and accessed by systems
-     * via `UpdateContext::commandBuffer()`.
+     * via `UpdateContext::queueCommand<T>()`.
      *
      * ## Registered Command Types
      *
@@ -118,10 +119,11 @@ export namespace helios::engine::runtime::messaging::command {
         /**
          * @brief Flushes all command queues via the underlying TypedCommandBuffer.
          *
+         * @param gameWorld The game world where the commands are flushed.
          * @param updateContext The current frame's update context.
          */
-        void flush(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
-            impl_.flush(updateContext);
+        void flush(GameWorld& gameWorld, UpdateContext& updateContext) noexcept override {
+            impl_.flush(gameWorld, updateContext);
         }
 
         /**

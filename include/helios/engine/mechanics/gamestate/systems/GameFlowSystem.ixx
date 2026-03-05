@@ -66,7 +66,6 @@ export namespace helios::engine::mechanics::gamestate::systems {
 
             auto& session = updateContext.session();
 
-            auto& commandBuffer = updateContext.commandBuffer();
             const auto gameState = session.state<GameState>();
             auto gameStateTransitionId = session.stateTransitionId<GameState>();
 
@@ -80,14 +79,14 @@ export namespace helios::engine::mechanics::gamestate::systems {
             switch (gameState) {
 
                 case GameState::Undefined: {
-                    commandBuffer.add<StateCommand<GameState>>(
+                    updateContext.queueCommand<StateCommand<GameState>>(
                         StateTransitionRequest<GameState>(gameState, GameStateTransitionId::StartRequested)
                     );
                     break;
                 }
 
                 case GameState::Start: {
-                    commandBuffer.add<StateCommand<GameState>>(
+                    updateContext.queueCommand<StateCommand<GameState>>(
                         StateTransitionRequest<GameState>(gameState, GameStateTransitionId::TitleRequested)
                     );
                     break;

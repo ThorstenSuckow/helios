@@ -133,7 +133,7 @@ export namespace helios::engine::mechanics::damage::systems {
                     .damage = damageApplied
                 };
 
-                updateContext.commandBuffer().add<ApplyDamageCommand>(dc);
+                updateContext.queueCommand<ApplyDamageCommand>(dc);
 
             }
 

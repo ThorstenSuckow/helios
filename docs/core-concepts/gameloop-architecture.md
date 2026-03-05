@@ -281,8 +281,8 @@ At each phase boundary, the following commit sequence occurs:
 // After each phase completes
 phaseEventBus.swapBuffers();    // Phase events become readable
 passEventBus.clearAll();         // Pass events are cleared
-commandBuffer.flush();           // Commands execute (mutations)
-gameWorld.flushManagers();       // Managers process queued requests
+commandBuffer.flush(gameWorld, ctx); // Commands execute (mutations)
+flushManagers(ctx);              // Managers process queued requests
 
 // Additionally, at the end of Post phase:
 frameEventBus.swapBuffers();     // Frame events become readable in next frame
@@ -302,8 +302,8 @@ for (phase : {Pre, Main, Post}) {
         
         // Commit point actions (bitwise flags):
         if (commitPoint & PassEvents)   passEventBus.swapBuffers();
-        if (commitPoint & FlushCommands) commandBuffer.flush();
-        if (commitPoint & FlushManagers) managers.flush();
+        if (commitPoint & FlushCommands) commandBuffer.flush(gameWorld, ctx);
+        if (commitPoint & FlushManagers) managers.flush(ctx);
     }
     
     phaseCommit();  // Phase boundary

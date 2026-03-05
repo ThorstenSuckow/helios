@@ -11,7 +11,10 @@ export module helios.engine.runtime.messaging.command.CommandBuffer;
 
 export namespace helios::engine::runtime::world {
     class UpdateContext;
+    class GameWorld;
 }
+
+using namespace helios::engine::runtime::world;
 
 export namespace helios::engine::runtime::messaging::command {
 
@@ -43,9 +46,10 @@ export namespace helios::engine::runtime::messaging::command {
          * @details Commands are routed to their registered TypedCommandHandler
          * if available, otherwise executed directly via their `execute()` method.
          *
+         * @param gameWorld The game world where the commands are flushed.
          * @param updateContext The current frame's update context.
          */
-        virtual void flush(helios::engine::runtime::world::UpdateContext& updateContext) noexcept = 0;
+        virtual void flush(GameWorld& gameWorld, UpdateContext& updateContext) noexcept = 0;
 
         /**
          * @brief Discards all queued commands without executing them.

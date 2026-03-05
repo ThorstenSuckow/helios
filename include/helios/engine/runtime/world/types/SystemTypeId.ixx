@@ -6,12 +6,12 @@ module;
 
 #include <functional>
 
-export module helios.engine.core.data.SystemTypeId;
+export module helios.engine.runtime.world.types.SystemTypeId;
 
 import helios.core.data.TypeIndexer;
 import helios.core.types;
 
-export namespace helios::engine::core::data {
+export namespace helios::engine::runtime::world::types {
 
 
     class SystemTypeId {
@@ -85,8 +85,8 @@ export namespace helios::engine::core::data {
  * @brief Hash specialization for SystemTypeId.
  */
 template<>
-struct std::hash<helios::engine::core::data::SystemTypeId> {
-   std::size_t operator()(const helios::engine::core::data::SystemTypeId& id) const noexcept {
+struct std::hash<helios::engine::runtime::world::types::SystemTypeId> {
+   std::size_t operator()(const helios::engine::runtime::world::types::SystemTypeId& id) const noexcept {
         return id.value();
     }
 

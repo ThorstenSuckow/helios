@@ -4,6 +4,8 @@
  */
 export module helios.engine.runtime.world;
 
+export import helios.engine.runtime.world.types;
+
 export import helios.engine.runtime.world.GameWorld;
 export import helios.engine.runtime.world.Level;
 export import helios.engine.runtime.world.UpdateContext;

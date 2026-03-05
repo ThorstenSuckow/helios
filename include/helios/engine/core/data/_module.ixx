@@ -23,6 +23,4 @@ export import helios.engine.core.data.StateTypeId;
 export import helios.engine.core.data.PrefabId;
 export import helios.engine.core.data.GameTimerId;
 export import helios.engine.core.data.CommandTypeId;
-export import helios.engine.core.data.ResourceTypeId;
-export import helios.engine.core.data.SystemTypeId;
-export import helios.engine.core.data.ConceptModelRegistry;
+export import helios.core.container.ConceptModelRegistry;

@@ -6,12 +6,12 @@ module;
 
 #include <functional>
 
-export module helios.engine.core.data.ResourceTypeId;
+export module helios.engine.runtime.world.types.ResourceTypeId;
 
 import helios.core.data.TypeIndexer;
 import helios.core.types;
 
-export namespace helios::engine::core::data {
+export namespace helios::engine::runtime::world::types {
 
     /**
      * @brief Unique type identifier for engine resources.
@@ -100,8 +100,8 @@ export namespace helios::engine::core::data {
  * @brief Hash specialization for ResourceTypeId.
  */
 template<>
-struct std::hash<helios::engine::core::data::ResourceTypeId> {
-   std::size_t operator()(const helios::engine::core::data::ResourceTypeId& id) const noexcept {
+struct std::hash<helios::engine::runtime::world::types::ResourceTypeId> {
+   std::size_t operator()(const helios::engine::runtime::world::types::ResourceTypeId& id) const noexcept {
         return id.value();
     }
 

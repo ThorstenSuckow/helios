@@ -10,13 +10,13 @@ module;
 #include <vector>
 
 
-export module helios.engine.core.data.ConceptModelRegistry;
+export module helios.core.container.ConceptModelRegistry;
 ;
 import helios.engine.common.concepts;
 
 using namespace helios::engine::common::concepts;
 
-export namespace helios::engine::core::data {
+export namespace helios::core::container {
 
     /**
      * @brief Generic type-indexed registry for type-erased wrapper instances.

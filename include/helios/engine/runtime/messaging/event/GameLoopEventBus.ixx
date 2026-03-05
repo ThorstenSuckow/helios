@@ -7,7 +7,7 @@ module;
 export module helios.engine.runtime.messaging.event.GameLoopEventBus;
 
 import helios.core.data.TypeIndexer;
-import helios.core.buffer.TypeIndexedDoubleBuffer;
+import helios.core.container.buffer.TypeIndexedDoubleBuffer;
 
 
 export namespace helios::engine::runtime::messaging::event {
@@ -93,11 +93,11 @@ export namespace helios::engine::runtime::messaging::event {
      *          They are NOT available in subsequent phases. Use `phasePush()` for
      *          events that must survive into subsequent phases.
      *
-     * @see helios::core::buffer::TypeIndexedDoubleBuffer
+     * @see helios::core::container::buffer::TypeIndexedDoubleBuffer
      * @see UpdateContext - Provides access to the event bus in systems
      * @see GameLoop - Manages event bus lifecycle and commit points
      */
-    using GameLoopEventBus = helios::core::buffer::TypeIndexedDoubleBuffer<
+    using GameLoopEventBus = helios::core::container::buffer::TypeIndexedDoubleBuffer<
         helios::core::data::TypeIndexer<GameLoopEventBusGroup>
     >;
 

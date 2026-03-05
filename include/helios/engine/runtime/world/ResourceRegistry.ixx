@@ -23,10 +23,10 @@ import helios.engine.runtime.world.ManagerRegistry;
 
 import helios.engine.common.concepts;
 
-import helios.engine.core.data.ResourceTypeId;
+import helios.engine.runtime.world.types.ResourceTypeId;
 
 using namespace helios::engine::runtime::messaging::command;
-using namespace helios::engine::core::data;
+using namespace helios::engine::runtime::world::types;
 using namespace helios::core::memory;
 using namespace helios::engine::common::concepts;
 

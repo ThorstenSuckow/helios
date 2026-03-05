@@ -12,13 +12,13 @@ module;
 
 export module helios.engine.runtime.world.SystemRegistry;
 
-import helios.engine.core.data;
+import helios.core.container.ConceptModelRegistry;
 import helios.engine.runtime.world.System;
-import helios.engine.common.concepts;
+import helios.engine.runtime.world.types.SystemTypeId;
 
 
-using namespace helios::engine::core::data;
-using namespace helios::engine::common::concepts;
+using namespace helios::core::container;
+using namespace helios::engine::runtime::world::types;
 
 export namespace helios::engine::runtime::world {
 

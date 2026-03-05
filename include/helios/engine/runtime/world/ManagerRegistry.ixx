@@ -12,11 +12,13 @@ module;
 
 export module helios.engine.runtime.world.ManagerRegistry;
 
-import helios.engine.core.data;
+import helios.core.container;
 import helios.engine.runtime.world.Manager;
 import helios.engine.common.concepts;
+import helios.engine.runtime.world.types;
 
-using namespace helios::engine::core::data;
+using namespace helios::core::container;
+using namespace helios::engine::runtime::world::types;
 
 export namespace helios::engine::runtime::world {
 

@@ -15,8 +15,8 @@ import helios.engine.runtime.spawn.SpawnContext;
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.spawn.scheduling.SpawnPlan;
 import helios.engine.runtime.spawn.scheduling.ScheduledSpawnPlan;
-import helios.engine.core.data.SpawnProfileId;
-import helios.engine.core.data.SpawnRuleId;
+import helios.engine.mechanics.spawn.types.SpawnProfileId;
+import helios.engine.mechanics.spawn.types.SpawnRuleId;
 import helios.engine.runtime.spawn.policy.SpawnRule;
 import helios.engine.runtime.spawn.policy.SpawnRuleState;
 import helios.engine.runtime.pooling.GameObjectPoolManager;
@@ -119,7 +119,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
          * @param spawnRuleId The rule that triggered the spawn.
          * @param spawnCount The number of entities actually spawned.
          */
-        virtual void commit(const helios::engine::core::data::SpawnRuleId spawnRuleId, const size_t spawnCount) noexcept = 0;
+        virtual void commit(const helios::engine::mechanics::spawn::types::SpawnRuleId spawnRuleId, const size_t spawnCount) noexcept = 0;
 
         /**
          * @brief Resets all rule states to their initial values.

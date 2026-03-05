@@ -54,8 +54,8 @@ int main() {
 
     constexpr helios::engine::core::data::PrefabId PurpleEnemyPrefabId{"purple_enemy"};
     constexpr helios::engine::core::data::GameObjectPoolId PurpleEnemyPoolId{"purple_pool_1"};
-    constexpr helios::engine::core::data::SpawnProfileId RandomSpawnProfileId{"random_spawn_1"};
-    constexpr helios::engine::core::data::SpawnRuleId PurpleEnemySpawnRuleId{"purple_enemy_spawn_1"};
+    constexpr helios::engine::mechanics::spawn::types::SpawnProfileId RandomSpawnProfileId{"random_spawn_1"};
+    constexpr helios::engine::mechanics::spawn::types::SpawnRuleId PurpleEnemySpawnRuleId{"purple_enemy_spawn_1"};
 
     // ========================================
     // 2. Application and Window Setup

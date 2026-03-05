@@ -8,7 +8,7 @@ export module helios.engine.runtime.spawn.scheduling.ScheduledSpawnPlan;
 
 import helios.engine.runtime.spawn.SpawnContext;
 import helios.engine.runtime.spawn.scheduling.SpawnPlan;
-import helios.engine.core.data.SpawnProfileId;
+import helios.engine.mechanics.spawn.types.SpawnProfileId;
 
 export namespace helios::engine::runtime::spawn::scheduling {
 
@@ -30,7 +30,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
         /**
          * @brief The profile defining spawn behavior (placer, initializer).
          */
-        const helios::engine::core::data::SpawnProfileId spawnProfileId;
+        const helios::engine::mechanics::spawn::types::SpawnProfileId spawnProfileId;
 
         /**
          * @brief The spawn plan with rule, amount, and pool information.

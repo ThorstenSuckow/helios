@@ -11,7 +11,7 @@ module;
 export module helios.engine.runtime.spawn.SpawnCommandHandlerRegistry;
 
 import helios.engine.runtime.spawn.SpawnCommandHandler;
-import helios.engine.core.data.SpawnProfileId;
+import helios.engine.mechanics.spawn.types.SpawnProfileId;
 
 
 export namespace helios::engine::runtime::spawn  {
@@ -45,7 +45,7 @@ export namespace helios::engine::runtime::spawn  {
          * this registry.
          */
         std::unordered_map<
-            helios::engine::core::data::SpawnProfileId,
+            helios::engine::mechanics::spawn::types::SpawnProfileId,
             helios::engine::runtime::spawn::SpawnCommandHandler*> registry_{};
 
 
@@ -62,7 +62,7 @@ export namespace helios::engine::runtime::spawn  {
          * @return True if registration succeeded, false if the ID was already registered.
          */
         [[nodiscard]] bool add(
-            const helios::engine::core::data::SpawnProfileId spawnProfileId,
+            const helios::engine::mechanics::spawn::types::SpawnProfileId spawnProfileId,
             helios::engine::runtime::spawn::SpawnCommandHandler& poolManager
         ) {
             if (registry_.contains(spawnProfileId)) {
@@ -82,7 +82,7 @@ export namespace helios::engine::runtime::spawn  {
          * @return Pointer to the handler if found, nullptr otherwise.
          */
         [[nodiscard]] helios::engine::runtime::spawn::SpawnCommandHandler* get(
-            helios::engine::core::data::SpawnProfileId spawnProfileId) {
+            helios::engine::mechanics::spawn::types::SpawnProfileId spawnProfileId) {
             auto it = registry_.find(spawnProfileId);
 
             if (it == registry_.end()) {

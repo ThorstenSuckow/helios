@@ -15,7 +15,7 @@ import helios.engine.runtime.spawn.scheduling.SpawnPlan;
 import helios.engine.runtime.pooling.GameObjectPoolSnapshot;
 import helios.engine.runtime.world;
 import helios.engine.core.data.GameObjectPoolId;
-import helios.engine.core.data.SpawnRuleId;
+import helios.engine.mechanics.spawn.types.SpawnRuleId;
 
 export namespace helios::engine::runtime::spawn::policy {
 
@@ -59,7 +59,7 @@ export namespace helios::engine::runtime::spawn::policy {
         /**
          * @brief Unique identifier for this rule.
          */
-        const helios::engine::core::data::SpawnRuleId spawnRuleId_;
+        const helios::engine::mechanics::spawn::types::SpawnRuleId spawnRuleId_;
 
     public:
 
@@ -73,7 +73,7 @@ export namespace helios::engine::runtime::spawn::policy {
         explicit SpawnRule(
             std::unique_ptr<const SpawnCondition> spawnCondition,
             std::unique_ptr<const amount::SpawnAmountProvider> spawnAmountProvider,
-            const helios::engine::core::data::SpawnRuleId spawnRuleId
+            const helios::engine::mechanics::spawn::types::SpawnRuleId spawnRuleId
         ) :
             spawnCondition_(std::move(spawnCondition)),
             spawnAmountProvider_(std::move(spawnAmountProvider)),
@@ -139,7 +139,7 @@ export namespace helios::engine::runtime::spawn::policy {
          *
          * @return The SpawnRuleId.
          */
-        [[nodiscard]] helios::engine::core::data::SpawnRuleId spawnRuleId() const noexcept {
+        [[nodiscard]] helios::engine::mechanics::spawn::types::SpawnRuleId spawnRuleId() const noexcept {
             return spawnRuleId_;
         }
 

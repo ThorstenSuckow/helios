@@ -75,6 +75,7 @@ using namespace helios::engine::mechanics::combat::systems;
 
 // Mechanics: spawn, bounds, damage, health, input, lifecycle
 using namespace helios::engine::mechanics::spawn::systems;
+using namespace helios::engine::mechanics::spawn::types;
 using namespace helios::engine::mechanics::bounds::systems;
 using namespace helios::engine::mechanics::damage::systems;
 using namespace helios::engine::mechanics::health::systems;

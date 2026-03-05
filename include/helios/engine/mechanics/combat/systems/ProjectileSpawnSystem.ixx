@@ -20,7 +20,7 @@ import helios.engine.modules.spatial.transform.components.TranslationStateCompon
 import helios.engine.runtime.spawn.commands.SpawnCommand;
 import helios.engine.runtime.spawn.SpawnContext;
 import helios.engine.runtime.spawn.EmitterContext;
-import helios.engine.core.data.SpawnProfileId;
+import helios.engine.mechanics.spawn.types.SpawnProfileId;
 
 import helios.math;
 
@@ -78,7 +78,7 @@ export namespace helios::engine::mechanics::combat::systems {
          * References a SpawnProfile in the spawn system that defines how
          * projectiles are placed and initialized.
          */
-        const helios::engine::core::data::SpawnProfileId spawnProfileId_;
+        const helios::engine::mechanics::spawn::types::SpawnProfileId spawnProfileId_;
 
 
     public:
@@ -91,7 +91,7 @@ export namespace helios::engine::mechanics::combat::systems {
          * @param spawnProfileId The ID of the spawn profile to use for projectiles.
          */
         explicit ProjectileSpawnSystem(
-            const helios::engine::core::data::SpawnProfileId& spawnProfileId
+            const helios::engine::mechanics::spawn::types::SpawnProfileId& spawnProfileId
         ) :
             spawnProfileId_(spawnProfileId)
         {}

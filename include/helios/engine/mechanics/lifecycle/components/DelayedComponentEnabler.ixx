@@ -15,7 +15,7 @@ export module helios.engine.mechanics.lifecycle.components.DelayedComponentEnabl
 
 
 import helios.engine.ecs.GameObject;
-import helios.engine.core.data.SpawnProfileId;
+import helios.engine.mechanics.spawn.types.SpawnProfileId;
 import helios.engine.core.data.ComponentTypeId;
 import helios.core.types;
 

@@ -18,8 +18,8 @@ import helios.engine.runtime.spawn.SpawnContext;
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.spawn.scheduling.SpawnPlan;
 import helios.engine.runtime.spawn.scheduling.ScheduledSpawnPlan;
-import helios.engine.core.data.SpawnProfileId;
-import helios.engine.core.data.SpawnRuleId;
+import helios.engine.mechanics.spawn.types.SpawnProfileId;
+import helios.engine.mechanics.spawn.types.SpawnRuleId;
 import helios.engine.runtime.spawn.policy.SpawnRule;
 import helios.engine.runtime.spawn.policy.SpawnRuleState;
 import helios.engine.runtime.pooling.GameObjectPoolManager;
@@ -65,7 +65,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
             const helios::engine::runtime::world::GameWorld& gameWorld,
             const helios::engine::runtime::world::UpdateContext& updateContext,
             const helios::engine::runtime::spawn::SpawnContext& spawnContext,
-            const helios::engine::core::data::SpawnProfileId spawnProfileId,
+            const helios::engine::mechanics::spawn::types::SpawnProfileId spawnProfileId,
             helios::engine::runtime::spawn::policy::SpawnRule& spawnRule,
             helios::engine::runtime::spawn::policy::SpawnRuleState& spawnRuleState
         ) noexcept override {

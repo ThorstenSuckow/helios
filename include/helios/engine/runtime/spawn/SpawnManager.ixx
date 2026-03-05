@@ -40,7 +40,7 @@ import helios.engine.runtime.pooling.GameObjectPoolManager;
 import helios.engine.runtime.messaging.command.TypedCommandHandler;
 import helios.engine.runtime.messaging.command.CommandHandler;
 
-import helios.engine.core.data.SpawnProfileId;
+import helios.engine.mechanics.spawn.types.SpawnProfileId;
 import helios.engine.ecs.GameObject;
 
 import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
@@ -143,7 +143,7 @@ export namespace helios::engine::runtime::spawn {
          * @brief Map from profile IDs to their spawn profiles.
          */
         std::unordered_map<
-            helios::engine::core::data::SpawnProfileId,
+            helios::engine::mechanics::spawn::types::SpawnProfileId,
             std::unique_ptr<const helios::engine::runtime::spawn::SpawnProfile>> spawnProfiles_;
 
         /**
@@ -469,7 +469,7 @@ export namespace helios::engine::runtime::spawn {
          * @pre No profile is already registered for this ID.
          */
         SpawnManager& addSpawnProfile(
-            const helios::engine::core::data::SpawnProfileId& spawnProfileId,
+            const helios::engine::mechanics::spawn::types::SpawnProfileId& spawnProfileId,
             std::unique_ptr<const helios::engine::runtime::spawn::SpawnProfile> spawnProfile) {
 
             assert(!spawnProfiles_.contains(spawnProfileId) && "SpawnProfileId already added");
@@ -487,7 +487,7 @@ export namespace helios::engine::runtime::spawn {
          * @return Pointer to the profile, or nullptr if not found.
          */
         [[nodiscard]] const helios::engine::runtime::spawn::SpawnProfile* spawnProfile(
-            const helios::engine::core::data::SpawnProfileId& spawnProfileId) const {
+            const helios::engine::mechanics::spawn::types::SpawnProfileId& spawnProfileId) const {
 
             if (!spawnProfiles_.contains(spawnProfileId)) {
                 return nullptr;

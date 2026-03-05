@@ -23,8 +23,8 @@ import helios.engine.runtime.spawn.SpawnContext;
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.spawn.scheduling.SpawnPlan;
 import helios.engine.runtime.spawn.scheduling.ScheduledSpawnPlan;
-import helios.engine.core.data.SpawnProfileId;
-import helios.engine.core.data.SpawnRuleId;
+import helios.engine.mechanics.spawn.types.SpawnProfileId;
+import helios.engine.mechanics.spawn.types.SpawnRuleId;
 import helios.engine.runtime.spawn.policy.SpawnRule;
 import helios.engine.runtime.spawn.policy.SpawnRuleState;
 import helios.engine.runtime.pooling.GameObjectPoolManager;
@@ -70,7 +70,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
          /**
           * @brief Map from spawn profile IDs to their spawn rules.
           */
-         std::unordered_map<helios::engine::core::data::SpawnProfileId,
+         std::unordered_map<helios::engine::mechanics::spawn::types::SpawnProfileId,
                             std::unique_ptr<helios::engine::runtime::spawn::policy::SpawnRule>>
                  spawnRules_;
 
@@ -78,7 +78,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
          * @brief Map from spawn rule IDs to their runtime state.
          */
         std::unordered_map<
-            helios::engine::core::data::SpawnRuleId,
+            helios::engine::mechanics::spawn::types::SpawnRuleId,
             helios::engine::runtime::spawn::policy::SpawnRuleState
         > spawnRuleStates_;
 
@@ -141,7 +141,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
          * @pre No rule is already registered for this profile ID.
          */
         DefaultSpawnScheduler& addRule(
-            const helios::engine::core::data::SpawnProfileId spawnProfileId,
+            const helios::engine::mechanics::spawn::types::SpawnProfileId spawnProfileId,
             std::unique_ptr<helios::engine::runtime::spawn::policy::SpawnRule> spawnRule
         ) {
             assert(!spawnRules_.contains(spawnProfileId) && "Duplicate SpawnProfile entry");
@@ -163,7 +163,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
          * @param spawnRuleId The rule that triggered the spawn.
          * @param spawnCount Number of entities actually spawned.
          */
-        void commit(const helios::engine::core::data::SpawnRuleId spawnRuleId, const size_t spawnCount) noexcept override{
+        void commit(const helios::engine::mechanics::spawn::types::SpawnRuleId spawnRuleId, const size_t spawnCount) noexcept override{
 
             for (auto& spawnRule : spawnRules_ | std::views::values) {
 

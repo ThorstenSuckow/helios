@@ -14,7 +14,7 @@ import helios.engine.runtime.spawn.scheduling.ScheduledSpawnPlan;
 
 import helios.engine.runtime.spawn.SpawnContext;
 import helios.engine.runtime.spawn.scheduling.SpawnPlan;
-import helios.engine.core.data.SpawnProfileId;
+import helios.engine.mechanics.spawn.types.SpawnProfileId;
 
 export namespace helios::engine::runtime::spawn::commands {
 
@@ -40,7 +40,7 @@ export namespace helios::engine::runtime::spawn::commands {
      */
     class ScheduledSpawnPlanCommand {
 
-        helios::engine::core::data::SpawnProfileId spawnProfileId_;
+        helios::engine::mechanics::spawn::types::SpawnProfileId spawnProfileId_;
 
         helios::engine::runtime::spawn::scheduling::SpawnPlan spawnPlan_;
 
@@ -56,7 +56,7 @@ export namespace helios::engine::runtime::spawn::commands {
          * @param spawnContext The context for spawn operations.
          */
         explicit ScheduledSpawnPlanCommand(
-            const helios::engine::core::data::SpawnProfileId spawnProfileId,
+            const helios::engine::mechanics::spawn::types::SpawnProfileId spawnProfileId,
             const helios::engine::runtime::spawn::scheduling::SpawnPlan spawnPlan,
             const helios::engine::runtime::spawn::SpawnContext& spawnContext
         ) :
@@ -70,7 +70,7 @@ export namespace helios::engine::runtime::spawn::commands {
          *
          * @return The spawn profile identifier encapsulated within the ScheduledSpawnPlanCommand.
          */
-        [[nodiscard]] helios::engine::core::data::SpawnProfileId spawnProfileId() const noexcept {
+        [[nodiscard]] helios::engine::mechanics::spawn::types::SpawnProfileId spawnProfileId() const noexcept {
             return spawnProfileId_;
         }
 

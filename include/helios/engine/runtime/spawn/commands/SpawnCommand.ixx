@@ -14,7 +14,7 @@ import helios.engine.runtime.spawn.SpawnContext;
 
 import helios.math.types;
 
-import helios.engine.core.data.SpawnProfileId;
+import helios.engine.mechanics.spawn.types.SpawnProfileId;
 
 
 export namespace helios::engine::runtime::spawn::commands {
@@ -42,7 +42,7 @@ export namespace helios::engine::runtime::spawn::commands {
         size_t spawnBudget_;
 
 
-        helios::engine::core::data::SpawnProfileId spawnProfileId_;
+        helios::engine::mechanics::spawn::types::SpawnProfileId spawnProfileId_;
 
         helios::engine::runtime::spawn::SpawnContext spawnContext_;
 
@@ -50,7 +50,7 @@ export namespace helios::engine::runtime::spawn::commands {
 
 
         explicit SpawnCommand(
-            const helios::engine::core::data::SpawnProfileId spawnProfileId,
+            const helios::engine::mechanics::spawn::types::SpawnProfileId spawnProfileId,
             const helios::engine::runtime::spawn::SpawnContext& spawnContext,
             const size_t spawnBudget = 1
         ) :
@@ -65,7 +65,7 @@ export namespace helios::engine::runtime::spawn::commands {
          *
          * @return The GameObjectPoolId to spawn from.
          */
-        [[nodiscard]] helios::engine::core::data::SpawnProfileId spawnProfileId() const noexcept {
+        [[nodiscard]] helios::engine::mechanics::spawn::types::SpawnProfileId spawnProfileId() const noexcept {
             return spawnProfileId_;
         }
 

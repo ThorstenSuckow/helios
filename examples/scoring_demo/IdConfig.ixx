@@ -13,7 +13,8 @@ import helios.engine.core.data;
 
 export namespace helios::examples::scoring::IdConfig {
 
-   using namespace helios::engine::core::data;
+    using namespace helios::engine::core::data;
+    using namespace helios::engine::mechanics::spawn::types;
 
     constexpr PrefabId BlueEnemyPrefab("BlueEnemy");
     constexpr PrefabId OrangeEnemyPrefab("OrangeEnemy");

@@ -54,7 +54,7 @@ int main() {
 
     constexpr helios::engine::core::data::PrefabId ProjectilePrefabId{"projectile"};
     constexpr helios::engine::core::data::GameObjectPoolId ProjectilePoolId{"projectile_pool"};
-    constexpr helios::engine::core::data::SpawnProfileId ProjectileSpawnSpawnProfileId{"projectile_spawn"};
+    constexpr helios::engine::mechanics::spawn::types::SpawnProfileId ProjectileSpawnSpawnProfileId{"projectile_spawn"};
 
     // ========================================
     // 2. Application and Window Setup

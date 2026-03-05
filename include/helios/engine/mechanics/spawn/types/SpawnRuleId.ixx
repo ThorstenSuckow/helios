@@ -7,13 +7,13 @@ module;
 #include <cstdint>
 #include <string_view>
 
-export module helios.engine.core.data.SpawnRuleId;
+export module helios.engine.mechanics.spawn.types.SpawnRuleId;
 
 import helios.core.algorithms;
 import helios.core.types;
 import helios.core.data;
 
-export namespace helios::engine::core::data {
+export namespace helios::engine::mechanics::spawn::types {
 
     /**
      * @brief Tag type for SpawnRuleId.
@@ -40,8 +40,8 @@ export namespace helios::engine::core::data {
  * @brief Hash specialization for SpawnRuleId.
  */
 template<>
-struct std::hash<helios::engine::core::data::SpawnRuleId> {
-    std::size_t operator()(const helios::engine::core::data::SpawnRuleId& id) const noexcept {
+struct std::hash<helios::engine::mechanics::spawn::types::SpawnRuleId> {
+    std::size_t operator()(const helios::engine::mechanics::spawn::types::SpawnRuleId& id) const noexcept {
         return id.value();
     }
 

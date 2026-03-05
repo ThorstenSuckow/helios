@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.modules.ui.UiActionCommandHandler;
 
-import helios.engine.modules.ui.commands.UiActionCommand;
+import helios.engine.modules.ui.widgets.commands.UiActionCommand;
 
 export namespace helios::engine::modules::ui {
 
@@ -32,7 +32,7 @@ export namespace helios::engine::modules::ui {
          * @return True if the command was accepted.
          */
         virtual bool submit(
-            const helios::engine::modules::ui::commands::UiActionCommand uiActionCommand
+            const helios::engine::modules::ui::widgets::commands::UiActionCommand uiActionCommand
         ) noexcept = 0;
 
     };

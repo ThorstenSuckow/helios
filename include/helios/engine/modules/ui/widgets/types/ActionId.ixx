@@ -7,13 +7,13 @@ module;
 #include <cstdint>
 #include <string_view>
 
-export module helios.engine.core.data.ActionId;
+export module helios.engine.modules.ui.widgets.types.ActionId;
 
 import helios.core.algorithms;
 import helios.core.types;
 import helios.core.data;
 
-export namespace helios::engine::core::data {
+export namespace helios::engine::modules::ui::widgets::types {
 
     /**
      * @brief Tag type for ActionId.
@@ -36,8 +36,8 @@ export namespace helios::engine::core::data {
  * @brief Hash specialization for ActionId.
  */
 template<>
-struct std::hash<helios::engine::core::data::ActionId> {
-    std::size_t operator()(const helios::engine::core::data::ActionId& id) const noexcept {
+struct std::hash<helios::engine::modules::ui::widgets::types::ActionId> {
+    std::size_t operator()(const helios::engine::modules::ui::widgets::types::ActionId& id) const noexcept {
         return id.value();
     }
 

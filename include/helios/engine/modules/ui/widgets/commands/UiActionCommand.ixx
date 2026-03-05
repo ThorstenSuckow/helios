@@ -7,14 +7,16 @@ module;
 #include <cassert>
 #include <optional>
 
-export module helios.engine.modules.ui.commands.UiActionCommand;
+export module helios.engine.modules.ui.widgets.commands.UiActionCommand;
+
+import helios.engine.modules.ui.widgets.types;
 
 import helios.engine.ecs.EntityHandle;
 
 import helios.engine.core.data;
 
 
-export namespace helios::engine::modules::ui::commands {
+export namespace helios::engine::modules::ui::widgets::commands {
 
     /**
      * @brief A command that encapsulates a UI action request.
@@ -31,7 +33,7 @@ export namespace helios::engine::modules::ui::commands {
 
         helios::engine::ecs::EntityHandle source_;
 
-        helios::engine::core::data::ActionId actionId_;
+        helios::engine::modules::ui::widgets::types::ActionId actionId_;
 
 
     public:
@@ -44,7 +46,7 @@ export namespace helios::engine::modules::ui::commands {
          */
         explicit UiActionCommand(
             const helios::engine::ecs::EntityHandle source,
-            const helios::engine::core::data::ActionId actionId) :
+            const helios::engine::modules::ui::widgets::types::ActionId actionId) :
             source_(source), actionId_(actionId) {}
 
 
@@ -58,7 +60,7 @@ export namespace helios::engine::modules::ui::commands {
         /**
          * @brief Returns the action identifier.
          */
-        [[nodiscard]] helios::engine::core::data::ActionId actionId() const noexcept {
+        [[nodiscard]] helios::engine::modules::ui::widgets::types::ActionId actionId() const noexcept {
             return actionId_;
         }
 

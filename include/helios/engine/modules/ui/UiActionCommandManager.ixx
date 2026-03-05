@@ -11,7 +11,8 @@ module;
 
 export module helios.engine.modules.ui.UiActionCommandManager;
 
-import helios.engine.modules.ui.commands;
+import helios.engine.modules.ui.widgets.commands;
+import helios.engine.modules.ui.widgets.types;
 import helios.engine.core.data;
 
 import helios.engine.modules.ui.UiActionCommandHandler;
@@ -27,6 +28,8 @@ import helios.engine.runtime.world.GameWorld;
 import helios.engine.common;
 
 using namespace helios::engine::runtime::messaging::command;
+using namespace helios::engine::modules::ui::widgets::types;
+using namespace helios::engine::modules::ui::widgets::commands;
 
 export namespace helios::engine::modules::ui {
 
@@ -40,17 +43,14 @@ export namespace helios::engine::modules::ui {
      * @see UiActionCommandHandler
      * @see UiActionCommand
      */
-    class UiActionCommandManager : public TypedCommandHandler<commands::UiActionCommand> {
+    class UiActionCommandManager : public TypedCommandHandler<UiActionCommand> {
 
         using ActionCallback = std::function<void(
-            helios::engine::runtime::world::UpdateContext& updateContext,
-            const helios::engine::modules::ui::commands::UiActionCommand& command)>;
+            helios::engine::runtime::world::UpdateContext& updateContext, const UiActionCommand& command)>;
 
-        std::vector<helios::engine::modules::ui::commands::UiActionCommand> commands_;
+        std::vector<UiActionCommand> commands_;
 
-        std::unordered_map<
-            helios::engine::core::data::ActionId, ActionCallback
-        > policies_;
+        std::unordered_map<ActionId, ActionCallback> policies_;
 
     public:
         using EngineRoleTag = helios::engine::common::tags::ManagerTag;
@@ -89,9 +89,7 @@ export namespace helios::engine::modules::ui {
          * @param uiActionCommand The command to submit.
          * @return True if the command was accepted.
          */
-        bool submit(
-            commands::UiActionCommand uiActionCommand
-        ) noexcept {
+        bool submit(UiActionCommand uiActionCommand) noexcept {
 
             commands_.push_back(std::move(uiActionCommand));
 
@@ -106,7 +104,7 @@ export namespace helios::engine::modules::ui {
          * @return Reference to this manager for method chaining.
          */
         UiActionCommandManager& addPolicy(
-            const helios::engine::core::data::ActionId actionId,
+            const ActionId actionId,
             ActionCallback callback
         ) {
             assert(policies_.find(actionId) == policies_.end() && "Action already registered");
@@ -121,7 +119,7 @@ export namespace helios::engine::modules::ui {
          * @param gameWorld The game world to register with.
          */
         void init(helios::engine::runtime::world::GameWorld& gameWorld) {
-            gameWorld.registerCommandHandler<TypedCommandHandler<commands::UiActionCommand>>(*this);
+            gameWorld.registerCommandHandler<TypedCommandHandler<UiActionCommand>>(*this);
         }
 
     };

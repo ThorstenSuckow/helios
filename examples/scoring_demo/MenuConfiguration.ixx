@@ -13,6 +13,8 @@ import helios.ext;
 import helios.examples.scoring.IdConfig;
 import helios.examples.scoring.CollisionId;
 
+using namespace helios::engine::modules::ui::widgets::types;
+
 export namespace helios::examples::scoring {
 
     /**
@@ -162,7 +164,7 @@ export namespace helios::examples::scoring {
                       .index(0)
                       .normalScale(1.0f)
                       .selectedScale(1.2f)
-                      .actionId(helios::engine::core::data::ActionId{"continueGame"})
+                      .actionId(ActionId{"continueGame"})
                       .normalColor(helios::util::Colors::LightGray)
                       .selectedColor(helios::util::Colors::White)
                       .selected(true);
@@ -197,7 +199,7 @@ export namespace helios::examples::scoring {
                        .index(1)
                        .normalScale(1.0f)
                        .selectedScale(1.2f)
-                       .actionId(helios::engine::core::data::ActionId{"restartGame"})
+                       .actionId(ActionId{"restartGame"})
                        .normalColor(helios::util::Colors::LightGray)
                        .selectedColor(helios::util::Colors::White)
                        .selected(false);
@@ -232,7 +234,7 @@ export namespace helios::examples::scoring {
                       .normalColor(helios::util::Colors::LightGray)
                       .normalScale(1.0f)
                       .selectedScale(1.2f)
-                      .actionId(helios::engine::core::data::ActionId{"quitGame"})
+                      .actionId(ActionId{"quitGame"})
                       .selectedColor(helios::util::Colors::White)
                       .index(2)
                       .selected(false);
@@ -320,7 +322,7 @@ export namespace helios::examples::scoring {
                           .normalColor(helios::util::Colors::LightGray)
                           .normalScale(1.0f)
                           .selectedScale(1.2f)
-                          .actionId(helios::engine::core::data::ActionId{"gameOverRetry"})
+                          .actionId(ActionId{"gameOverRetry"})
                           .selectedColor(helios::util::Colors::White)
                           .index(0)
                           .selected(true);
@@ -356,7 +358,7 @@ export namespace helios::examples::scoring {
                       .normalColor(helios::util::Colors::LightGray)
                       .normalScale(1.0f)
                       .selectedScale(1.2f)
-                      .actionId(helios::engine::core::data::ActionId{"gameOverQuitGame"})
+                      .actionId(ActionId{"gameOverQuitGame"})
                       .selectedColor(helios::util::Colors::White)
                       .index(1)
                       .selected(false);

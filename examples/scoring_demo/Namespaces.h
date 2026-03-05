@@ -96,6 +96,8 @@ using namespace helios::engine::modules::scene::types;
 using namespace helios::engine::modules::rendering::viewport::systems;
 using namespace helios::engine::modules::ui;
 using namespace helios::engine::modules::ui::widgets::systems;
+using namespace helios::engine::modules::ui::widgets::commands;
+using namespace helios::engine::modules::ui::widgets::types;
 using namespace helios::engine::modules::ui::binding::systems;
 using namespace helios::engine::modules::ui::transform::systems;
 using namespace helios::engine::modules::ai::systems;

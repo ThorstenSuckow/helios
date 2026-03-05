@@ -1,4 +1,4 @@
-# helios::engine::modules::ui::commands
+# helios::engine::modules::ui::widgets::commands
 
 UI action commands and dispatchers.
 
@@ -36,7 +36,7 @@ updateContext.queueCommand<UiActionCommand>(
 
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::engine::modules::ui::commands
+@namespace helios::engine::modules::ui::widgets::commands
 @brief UI action commands and dispatchers.
 @details Contains commands for triggering UI actions and dispatchers that route them to registered handlers.
 </p></details>

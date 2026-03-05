@@ -19,7 +19,7 @@ import helios.engine.modules.ui.widgets.components.UiFocusComponent;
 import helios.engine.modules.ui.widgets.components.UiStateComponent;
 import helios.engine.modules.ui.widgets.components.UiActionComponent;
 
-import helios.engine.modules.ui.commands.UiActionCommand;
+import helios.engine.modules.ui.widgets.commands.UiActionCommand;
 
 import helios.engine.runtime.world;
 
@@ -168,7 +168,7 @@ export namespace helios::engine::modules::ui::widgets::systems {
                 >();
 
                 if (uac) {
-                    updateContext.queueCommand<helios::engine::modules::ui::commands::UiActionCommand>(
+                    updateContext.queueCommand<helios::engine::modules::ui::widgets::commands::UiActionCommand>(
                         focusedMenu->menuItems()[focusedMenu->selectedIndex()], uac->actionId()
                     );
                 }

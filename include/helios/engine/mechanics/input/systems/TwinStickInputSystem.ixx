@@ -26,6 +26,8 @@ import helios.engine.mechanics.combat.commands.ShootCommand;
 
 using namespace helios::engine::mechanics::lifecycle::components;
 
+import helios.engine.common.tags.SystemTag;
+
 export namespace helios::engine::mechanics::input::systems {
 
     /**
@@ -58,6 +60,8 @@ export namespace helios::engine::mechanics::input::systems {
         helios::engine::ecs::GameObject gameObject_;
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemTag;
 
         /**
          * @brief Constructs a TwinStickInputSystem for the specified GameObject.

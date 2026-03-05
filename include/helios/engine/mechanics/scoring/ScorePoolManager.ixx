@@ -22,7 +22,6 @@ import helios.engine.mechanics.scoring.commands;
 import helios.engine.core.data.ScorePoolId;
 
 import helios.engine.ecs.GameObject;
-import helios.engine.runtime.world.Manager;
 import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.runtime.world.GameWorld;
@@ -30,6 +29,7 @@ import helios.engine.runtime.pooling.GameObjectPool;
 
 import helios.core.types;
 import helios.util.Guid;
+import helios.engine.common;
 
 using namespace helios::engine::mechanics::scoring::commands;
 using namespace helios::engine::runtime::messaging::command;
@@ -51,8 +51,7 @@ export namespace helios::engine::mechanics::scoring {
      * @see ScoreCommandHandler
      * @see Manager
      */
-    class ScorePoolManager : public helios::engine::runtime::world::Manager,
-                             public TypedCommandHandler<UpdateScoreCommand>{
+    class ScorePoolManager : public TypedCommandHandler<UpdateScoreCommand>{
 
         /**
          * @brief Collection of score pools managed by this manager.
@@ -67,6 +66,7 @@ export namespace helios::engine::mechanics::scoring {
 
     public:
 
+        using EngineRoleTag = helios::engine::common::tags::ManagerTag;
 
         /**
          * @brief Creates and registers a new score pool.
@@ -117,7 +117,7 @@ export namespace helios::engine::mechanics::scoring {
          */
         void flush(
             helios::engine::runtime::world::UpdateContext& update_context
-        ) noexcept override {
+        ) noexcept {
 
             for (const auto& scoreContext : scores_) {
 
@@ -154,7 +154,7 @@ export namespace helios::engine::mechanics::scoring {
          *
          * @param gameWorld Reference to the game world.
          */
-        void init(helios::engine::runtime::world::GameWorld& gameWorld) override {
+        void init(helios::engine::runtime::world::GameWorld& gameWorld) {
             gameWorld.registerCommandHandler<TypedCommandHandler<UpdateScoreCommand> >(*this);
         }
 
@@ -165,7 +165,7 @@ export namespace helios::engine::mechanics::scoring {
          * @details Iterates through all registered pools and calls their reset()
          * method, clearing all scores and resetting totals.
          */
-        void reset() override {
+        void reset() {
             for (auto& pool : pools_) {
                 pool.reset();
             }

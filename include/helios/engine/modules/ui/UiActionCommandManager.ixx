@@ -20,10 +20,11 @@ import helios.engine.runtime.messaging.command.CommandHandler;
 
 import helios.engine.ecs.GameObject;
 
-import helios.engine.runtime.world.Manager;
 import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.runtime.world.GameWorld;
+
+import helios.engine.common;
 
 using namespace helios::engine::runtime::messaging::command;
 
@@ -39,8 +40,7 @@ export namespace helios::engine::modules::ui {
      * @see UiActionCommandHandler
      * @see UiActionCommand
      */
-    class UiActionCommandManager : public helios::engine::runtime::world::Manager,
-                             public TypedCommandHandler<commands::UiActionCommand> {
+    class UiActionCommandManager : public TypedCommandHandler<commands::UiActionCommand> {
 
         using ActionCallback = std::function<void(
             helios::engine::runtime::world::UpdateContext& updateContext,
@@ -53,6 +53,7 @@ export namespace helios::engine::modules::ui {
         > policies_;
 
     public:
+        using EngineRoleTag = helios::engine::common::tags::ManagerTag;
 
         /**
          * @brief Constructs the manager with default capacity.
@@ -69,7 +70,7 @@ export namespace helios::engine::modules::ui {
          */
         void flush(
             helios::engine::runtime::world::UpdateContext& update_context
-        ) noexcept override {
+        ) noexcept {
 
             for (auto cmd : commands_) {
                 if (policies_.contains(cmd.actionId())) {
@@ -90,7 +91,7 @@ export namespace helios::engine::modules::ui {
          */
         bool submit(
             commands::UiActionCommand uiActionCommand
-        ) noexcept override {
+        ) noexcept {
 
             commands_.push_back(std::move(uiActionCommand));
 
@@ -119,7 +120,7 @@ export namespace helios::engine::modules::ui {
          *
          * @param gameWorld The game world to register with.
          */
-        void init(helios::engine::runtime::world::GameWorld& gameWorld) override {
+        void init(helios::engine::runtime::world::GameWorld& gameWorld) {
             gameWorld.registerCommandHandler<TypedCommandHandler<commands::UiActionCommand>>(*this);
         }
 

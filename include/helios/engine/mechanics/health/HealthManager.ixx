@@ -10,7 +10,6 @@ export module helios.engine.mechanics.health.HealthManager;
 
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
-import helios.engine.runtime.world.Manager;
 import helios.engine.runtime.messaging.command.TypedCommandHandler;
 
 import helios.engine.mechanics.damage.commands.ApplyDamageCommand;
@@ -24,6 +23,8 @@ import helios.engine.mechanics.health.events;
 import helios.engine.mechanics.lifecycle.components;
 
 import helios.util.log;
+
+import helios.engine.common.tags;
 
 using namespace helios::engine::mechanics::health::types;
 using namespace helios::engine::mechanics::health::components;
@@ -61,7 +62,7 @@ export namespace helios::engine::mechanics::health {
      * @see HealthDepletedEvent
      * @see Manager
      */
-    class HealthManager : public Manager, public TypedCommandHandler<ApplyDamageCommand> {
+    class HealthManager : public TypedCommandHandler<ApplyDamageCommand> {
 
         /**
          * @brief Logger scoped to HealthManager.
@@ -75,6 +76,7 @@ export namespace helios::engine::mechanics::health {
         std::vector<DamageContext> damageContexts_;
 
     public:
+        using EngineRoleTag = helios::engine::common::tags::ManagerTag;
 
         /**
          * @brief Applies all queued damage and emits health events.
@@ -91,7 +93,7 @@ export namespace helios::engine::mechanics::health {
          *
          * @param updateContext The current frame's update context.
          */
-        void flush(UpdateContext& updateContext) noexcept override {
+        void flush(UpdateContext& updateContext) noexcept  {
 
             for (const auto& damageContext : damageContexts_) {
 
@@ -153,14 +155,14 @@ export namespace helios::engine::mechanics::health {
          *
          * @param gameWorld The game world to register with.
          */
-        void init(GameWorld& gameWorld) override {
+        void init(GameWorld& gameWorld) {
             gameWorld.template registerCommandHandler<TypedCommandHandler<ApplyDamageCommand>>(*this);
         }
 
         /**
          * @brief Clears all pending damage contexts.
          */
-        void reset() override {
+        void reset() {
             damageContexts_.clear();
         }
 

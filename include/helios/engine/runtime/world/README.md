@@ -15,8 +15,9 @@ This module provides the core classes for managing runtime game state. `GameWorl
 | `Session` | Cross-frame state tracking (game/match states, scores) |
 | `Level` | Game level with world bounds and root scene node |
 | `UpdateContext` | Per-frame context with delta time, event buses, and `queueCommand<T>()` |
-| `SystemRegistry` | Container for System instances within a pass |
-| `Manager` | Abstract base for deferred operation handlers |
+| `SystemRegistry` | `ConceptModelRegistry<System, SystemTypeId>` alias for system storage |
+| `ManagerRegistry` | `ConceptModelRegistry<Manager, ResourceTypeId>` alias for manager storage |
+| `Manager` | Type-erased wrapper for deferred operation handlers (Concept/Model pattern) |
 
 ## Usage
 

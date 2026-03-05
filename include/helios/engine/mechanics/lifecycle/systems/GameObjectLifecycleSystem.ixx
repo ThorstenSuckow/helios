@@ -41,6 +41,8 @@ using namespace helios::engine::mechanics::health::events;
 using namespace helios::engine::mechanics::spawn::components;
 using namespace helios::engine::runtime::spawn::commands;
 
+import helios.engine.common.tags.SystemTag;
+
 export namespace helios::engine::mechanics::lifecycle::systems {
 
     /**
@@ -55,6 +57,8 @@ export namespace helios::engine::mechanics::lifecycle::systems {
     class GameObjectLifecycleSystem {
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemTag;
 
         /**
          * @brief Processes health depletion events and enqueues despawn commands.

@@ -44,6 +44,8 @@ using namespace helios::engine::mechanics::health::events;
 using namespace helios::engine::core::data;
 
 #define HELIOS_LOG_SCOPE "helios::engine::mechanics::scoring::systems::CombatScoringSystem"
+import helios.engine.common.tags.SystemTag;
+
 export namespace helios::engine::mechanics::scoring::systems {
 
     /**
@@ -59,6 +61,8 @@ export namespace helios::engine::mechanics::scoring::systems {
             HELIOS_LOG_SCOPE);
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemTag;
 
 
         /**

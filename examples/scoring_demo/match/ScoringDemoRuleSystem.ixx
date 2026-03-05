@@ -34,6 +34,8 @@ import helios.engine.mechanics.match.components;
 import helios.engine.mechanics.match.events;
 import helios.engine.mechanics.lifecycle.components;
 
+import helios.engine.common.tags;
+
 using namespace helios::engine::ecs;
 
 using namespace helios::engine::runtime::world;
@@ -84,6 +86,8 @@ export namespace helios::examples::scoring {
         }
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemTag;
 
         /**
          * @brief Reads health depletion events and triggers life loss for the player.

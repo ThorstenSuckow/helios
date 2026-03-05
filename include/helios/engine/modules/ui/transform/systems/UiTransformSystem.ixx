@@ -29,6 +29,8 @@ import helios.math;
 
 import helios.engine.ecs.components.HierarchyComponent;
 
+import helios.engine.common.tags.SystemTag;
+
 export namespace helios::engine::modules::ui::transform::systems {
 
 
@@ -105,6 +107,9 @@ export namespace helios::engine::modules::ui::transform::systems {
         }
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemTag;
+
 
         /**
          * @brief Computes and applies screen positions for all UI elements.

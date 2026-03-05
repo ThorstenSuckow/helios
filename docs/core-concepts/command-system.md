@@ -101,13 +101,14 @@ Commands are flushed in the order of the template parameter list. The `EngineCom
 
 ## TypedCommandHandler
 
-`TypedCommandHandler<T>` provides the interface for receiving commands of a specific type. Managers implement this for each command type they handle:
+`TypedCommandHandler<T>` provides the interface for receiving commands of a specific type. Managers implement this for each command type they handle. Concrete managers are plain classes — they do not inherit from `Manager`. Instead, they declare `using EngineRoleTag = ManagerTag;` to opt in:
 
 ```cpp
-class SpawnManager : public Manager,
-                     public TypedCommandHandler<SpawnCommand>,
+class SpawnManager : public TypedCommandHandler<SpawnCommand>,
                      public TypedCommandHandler<DespawnCommand>,
                      public TypedCommandHandler<ScheduledSpawnPlanCommand> {
+public:
+    using EngineRoleTag = helios::engine::common::tags::ManagerTag;
 
     bool submit(SpawnCommand cmd) noexcept override {
         spawnCommands_.push_back(cmd);
@@ -123,13 +124,15 @@ class SpawnManager : public Manager,
         scheduledCommands_.push_back(cmd);
         return true;
     }
+
+    void flush(UpdateContext& ctx) noexcept { /* batch processing */ }
 };
 ```
 
-Handlers are registered with the `ResourceRegistry` during `Manager::init()`:
+Handlers are registered with the `ResourceRegistry` during `init()`:
 
 ```cpp
-void init(GameWorld& gameWorld) noexcept override {
+void init(GameWorld& gameWorld) {
     gameWorld.registerCommandHandler<TypedCommandHandler<SpawnCommand>>(*this);
     gameWorld.registerCommandHandler<TypedCommandHandler<DespawnCommand>>(*this);
 }

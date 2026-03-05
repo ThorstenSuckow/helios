@@ -20,6 +20,8 @@ import helios.engine.ecs;
 import helios.engine.runtime;
 
 
+import helios.engine.common.tags.SystemTag;
+
 export namespace helios::engine::mechanics::gamestate::systems {
 
     using namespace helios::input::types;
@@ -38,6 +40,8 @@ export namespace helios::engine::mechanics::gamestate::systems {
 
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemTag;
 
         /**
          * @brief Processes input and submits state transition commands.

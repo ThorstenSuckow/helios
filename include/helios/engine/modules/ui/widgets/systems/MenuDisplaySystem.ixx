@@ -37,6 +37,8 @@ using namespace helios::engine::ecs;
 using namespace helios::engine::modules::ui::widgets::components;
 using namespace helios::engine::runtime::world;
 
+import helios.engine.common.tags.SystemTag;
+
 export namespace helios::engine::modules::ui::widgets::systems {
 
     /**
@@ -114,6 +116,9 @@ export namespace helios::engine::modules::ui::widgets::systems {
 
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemTag;
+
 
         /**
          * @brief Constructs the system with a state-to-menu policy.

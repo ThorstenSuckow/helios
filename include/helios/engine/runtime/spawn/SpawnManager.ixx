@@ -33,7 +33,6 @@ import helios.engine.modules.spatial.transform.components.RotationStateComponent
 import helios.engine.modules.physics.collision.Bounds;
 import helios.engine.modules.scene.components.SceneNodeComponent;
 
-import helios.engine.runtime.world.Manager;
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.runtime.pooling.GameObjectPoolManager;
@@ -50,6 +49,8 @@ import helios.engine.mechanics.spawn.components.SpawnedByProfileComponent;
 import helios.engine.modules.physics.collision.components.AabbColliderComponent;
 
 import helios.math;
+
+import helios.engine.common.tags.ManagerTag;
 
 using namespace helios::engine::runtime::messaging::command;
 using namespace helios::engine::runtime::spawn::commands;
@@ -103,10 +104,10 @@ export namespace helios::engine::runtime::spawn {
      * @see SpawnProfile
      * @see SpawnCommandHandler
      */
-    class SpawnManager : public helios::engine::runtime::world::Manager,
-                         public TypedCommandHandler<SpawnCommand>,
+    class SpawnManager : public TypedCommandHandler<SpawnCommand>,
                          public TypedCommandHandler<DespawnCommand>,
                          public TypedCommandHandler<ScheduledSpawnPlanCommand> {
+
 
         /**
          * @brief Collection of schedulers that manage spawn rules and conditions.
@@ -368,6 +369,7 @@ export namespace helios::engine::runtime::spawn {
 
 
     public:
+        using EngineRoleTag = helios::engine::common::tags::ManagerTag;
 
         /**
          * @brief Default constructor.
@@ -434,7 +436,7 @@ export namespace helios::engine::runtime::spawn {
          */
         void flush(
             helios::engine::runtime::world::UpdateContext& updateContext
-        ) noexcept override {
+        ) noexcept {
             if (!despawnCommands_.empty()) {
                 despawnObjects(despawnCommands_, updateContext);
                 despawnCommands_.clear();
@@ -503,7 +505,7 @@ export namespace helios::engine::runtime::spawn {
          *
          * @param gameWorld The game world to initialize with.
          */
-        void init(helios::engine::runtime::world::GameWorld& gameWorld) noexcept override {
+        void init(helios::engine::runtime::world::GameWorld& gameWorld) noexcept {
 
             assert(gameWorld.hasManager<helios::engine::runtime::pooling::GameObjectPoolManager>() && "Unexpected missing GameObjectPoolManager");
             gameObjectPoolManager_ = &gameWorld.manager<helios::engine::runtime::pooling::GameObjectPoolManager>();
@@ -521,7 +523,7 @@ export namespace helios::engine::runtime::spawn {
          * all spawn state. Resets each scheduler, calls `onReset()` on all
          * placers and initializers, and clears all pending command queues.
          */
-        void reset() override {
+        void reset() {
 
             for (auto& scheduler: spawnSchedulers_) {
                 scheduler->reset();

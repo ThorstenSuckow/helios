@@ -24,7 +24,6 @@ import helios.engine.ecs.GameObject;
 
 import helios.engine.runtime.messaging.command;
 
-import helios.engine.runtime.world.Manager;
 import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.runtime.world.GameWorld;
@@ -34,6 +33,7 @@ import helios.engine.runtime.world.Session;
 
 import helios.core.types;
 import helios.util.Guid;
+import helios.engine.common;
 
 using namespace helios::engine::state::types;
 using namespace helios::engine::state::commands;
@@ -65,8 +65,7 @@ export namespace helios::engine::state {
      * @see StateCommand
      */
     template <typename StateType>
-    class StateManager : public helios::engine::runtime::world::Manager,
-                             public TypedCommandHandler<StateCommand<StateType>> {
+    class StateManager :    public TypedCommandHandler<StateCommand<StateType>> {
 
         /**
          * @brief Queue of pending state commands.
@@ -146,6 +145,7 @@ export namespace helios::engine::state {
 
 
     public:
+        using EngineRoleTag = helios::engine::common::tags::ManagerTag;
 
         /**
          * @brief Constructs a state manager with transition rules.
@@ -177,7 +177,7 @@ export namespace helios::engine::state {
          */
         void flush(
             helios::engine::runtime::world::UpdateContext& updateContext
-        ) noexcept override {
+        ) noexcept {
 
             if (pending_.empty()) {
                 return;
@@ -237,14 +237,14 @@ export namespace helios::engine::state {
          *
          * @param gameWorld The game world to register with.
          */
-        void init(helios::engine::runtime::world::GameWorld& gameWorld) override {
+        void init(helios::engine::runtime::world::GameWorld& gameWorld) {
             gameWorld.registerCommandHandler<TypedCommandHandler<StateCommand<StateType>>>(*this);
         }
 
         /**
          * @brief Clears all pending commands.
          */
-        void reset() override {
+        void reset() {
             // intentionally left empty. Clearing the pending queue would also mean
             // that any pending state transisions **required by the reset** are nuked.
         }

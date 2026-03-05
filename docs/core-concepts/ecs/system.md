@@ -107,26 +107,22 @@ namespace helios::engine::runtime::world {
 
 ### SystemRegistry
 
+`SystemRegistry` is a type alias for `ConceptModelRegistry<System, SystemTypeId>`:
+
 ```cpp
 namespace helios::engine::runtime::world {
 
-    class SystemRegistry {
-    public:
-        template<typename T, typename... Args>
-        T& add(Args&&... args);
+    using SystemRegistry = ConceptModelRegistry<System, SystemTypeId>;
 
-        template<typename T>
-        [[nodiscard]] T* getSystem() const;
-
-        template<typename T>
-        [[nodiscard]] bool hasSystem() const;
-
-        [[nodiscard]] std::span<System* const> systems() noexcept;
-    };
+    // Inherited API from ConceptModelRegistry:
+    // template<typename T, typename... Args> T& add(Args&&...);
+    // template<typename T> [[nodiscard]] T* item() const;
+    // template<typename T> [[nodiscard]] bool has() const;
+    // [[nodiscard]] std::span<System* const> items() const noexcept;
 }
 ```
 
-`SystemRegistry` creates and owns `System` wrappers. `add<T>()` returns a reference to the underlying T instance.
+`SystemRegistry` creates and owns `System` wrappers. `add<T>()` returns a reference to the underlying T instance. `items()` returns a span in insertion order for deterministic iteration.
 
 ### Required: update()
 

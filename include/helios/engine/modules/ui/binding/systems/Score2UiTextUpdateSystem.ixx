@@ -24,6 +24,8 @@ import helios.engine.modules.ui.layout.components.NumberFormatterComponent;
 import helios.engine.mechanics.lifecycle.components.Active;
 
 
+import helios.engine.common.tags.SystemTag;
+
 export namespace helios::engine::modules::ui::binding::systems {
 
     /**
@@ -39,6 +41,9 @@ export namespace helios::engine::modules::ui::binding::systems {
     class Score2UiTextUpdateSystem {
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemTag;
+
         /**
          * @brief Updates text components with current score values.
          *

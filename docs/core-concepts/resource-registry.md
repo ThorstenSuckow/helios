@@ -13,20 +13,20 @@ During startup, the application registers Managers (e.g., `SpawnManager`, `GameO
 │                                                                     │
 │  REGISTRATION (startup)                                             │
 │  ┌───────────────────────────────────────────────────────────────┐  │
+│  │  gameWorld.registerManager<GameObjectPoolManager>()           │  │
+│  │  gameWorld.registerManager<SpawnManager>()                    │  │
+│  │  gameWorld.registerManager<ScorePoolManager>()                │  │
 │  │  gameWorld.resourceRegistry()                                 │  │
-│  │      .registerResource<GameObjectPoolManager>()               │  │
-│  │      .registerResource<SpawnManager>()                        │  │
-│  │      .registerResource<ScorePoolManager>()                    │  │
 │  │      .registerResource<EngineCommandBuffer>()                 │  │
 │  └───────────────────────────────────────────────────────────────┘  │
 │                                                                     │
 │  STORAGE                                                            │
 │  ┌───────────────────────────────────────────────────────────────┐  │
-│  │  owned_       [ErasedUnique, ErasedUnique, ...]  (ownership)  │  │
-│  │  fastAccess_  [void*, void*, void*, ...]         (O(1) lookup)│  │
-│  │  managers_    [Manager*, Manager*, ...]           (iteration) │  │
-│  │  cmdBuffers_  [CommandBuffer*, ...]               (iteration) │  │
-│  │  cmdHandlers_ [CommandHandler*, ...]              (routing)   │  │
+│  │  owned_           [ErasedUnique, ...]             (ownership) │  │
+│  │  fastAccess_      [void*, void*, ...]            (O(1) lookup)│  │
+│  │  managerRegistry_ ConceptModelRegistry<Manager>   (iteration) │  │
+│  │  cmdBuffers_      [CommandBuffer*, ...]           (iteration) │  │
+│  │  cmdHandlers_     [CommandHandler*, ...]          (routing)   │  │
 │  └───────────────────────────────────────────────────────────────┘  │
 │                                                                     │
 │  LOOKUP (hot path)                                                  │
@@ -62,9 +62,12 @@ T& resource() noexcept {
 
 No hash computation, no virtual dispatch — just an array index.
 
-### Ownership via ErasedUnique
+### Ownership
 
-Resources are heap-allocated and owned through `ErasedUnique`, a type-erased unique ownership wrapper (16 bytes: `void*` + function pointer deleter):
+Resources are owned through two mechanisms:
+
+- **Managers** are owned by the `ManagerRegistry` (`ConceptModelRegistry<Manager, ResourceTypeId>`), which wraps each concrete manager in a type-erased `Manager` value and stores it in a dense vector.
+- **CommandBuffers and other resources** are heap-allocated and owned through `ErasedUnique`, a type-erased unique ownership wrapper (16 bytes: `void*` + function pointer deleter):
 
 ```cpp
 struct ErasedUnique {
@@ -73,7 +76,7 @@ struct ErasedUnique {
 };
 ```
 
-This avoids requiring a common base class or virtual destructor for all resource types. The deleter captures the concrete type at registration time and invokes `delete static_cast<T*>(ptr)` on destruction.
+The deleter captures the concrete type at registration time and invokes `delete static_cast<T*>(ptr)` on destruction.
 
 ### Dual-Access Pattern
 
@@ -82,7 +85,7 @@ Resources are stored in parallel data structures, optimized for different access
 | Structure | Purpose | Access Pattern |
 |-----------|---------|----------------|
 | `fastAccess_` | O(1) type-based lookup | Hot path: every system, every frame |
-| `managers_` | Linear iteration over Managers | `init()`, `flushManagers()`, `reset()` |
+| `managerRegistry_` | Type-erased Manager storage (`ConceptModelRegistry`) | `init()`, `flushManagers()`, `reset()` |
 | `commandBuffers_` | Linear iteration over CommandBuffers | `flush()` at commit points |
 | `commandHandlers_` | CommandHandler lookup | TypedCommandBuffer flush routing |
 | `owned_` | Lifetime management | Destruction only |
@@ -93,11 +96,22 @@ The same raw pointer appears in multiple vectors. This trades a few extra bytes 
 
 #### 1. Owning Registration (Managers, CommandBuffers)
 
+Managers are registered via the `IsManager<T>` overload:
+
 ```cpp
-auto& spawnMgr = registry.registerResource<SpawnManager>(args...);
+auto& spawnMgr = gameWorld.registerManager<SpawnManager>(args...);
+// → delegates to ResourceRegistry::registerResource<T>() (IsManager overload)
+// → stored in managerRegistry_ (ConceptModelRegistry<Manager>)
+// → indexed in fastAccess_
 ```
 
-The registry heap-allocates the resource, stores it in `owned_`, and indexes it in `fastAccess_`. If T derives from `Manager` or `CommandBuffer`, it is automatically added to the corresponding iteration list.
+CommandBuffers and other non-Manager resources use the general overload:
+
+```cpp
+auto& cmdBuf = registry.registerResource<EngineCommandBuffer>();
+// → heap-allocated via std::make_unique, owned by ErasedUnique in owned_
+// → indexed in fastAccess_ + appended to commandBuffers_ if CommandBuffer-derived
+```
 
 #### 2. Non-Owning Registration (CommandHandlers)
 
@@ -124,10 +138,10 @@ T& mgr = gameWorld.manager<SpawnManager>();
 ### Initialization Sequence
 
 1. **Registration:** Resources are registered via `registerResource()` or `registerManager()`.
-2. **init():** `GameWorld::init()` iterates `managers_` and calls `init(gameWorld)` on each. Managers use `init()` to register their CommandHandlers.
+2. **init():** `GameWorld::init()` iterates `managerRegistry_.items()` and calls `init(gameWorld)` on each. Managers use `init()` to register their CommandHandlers.
 3. **Runtime:** Systems submit commands via `UpdateContext::queueCommand<T>()`. The `TypedCommandBuffer` resolves handlers internally through the `ResourceRegistry`.
 4. **Flush:** At each commit point, `commandBuffer.flush(gameWorld, ctx)` routes commands, then `flushManagers(ctx)` calls `flush(updateContext)` on each manager.
-5. **Reset:** `GameWorld::reset()` iterates `managers_` and calls `reset()` for level transitions.
+5. **Reset:** `GameWorld::reset()` iterates `managerRegistry_.items()` and calls `reset()` for level transitions.
 
 ```
 Registration  →  init()  →  Runtime Loop        →  reset()
@@ -159,7 +173,7 @@ if (registry.has<TypedCommandHandler<Cmd>>()) {
 A Manager registers itself as handler during `init()`:
 
 ```cpp
-void SpawnManager::init(GameWorld& gameWorld) noexcept override {
+void SpawnManager::init(GameWorld& gameWorld) {
     gameWorld.registerCommandHandler<TypedCommandHandler<SpawnCommand>>(*this);
     gameWorld.registerCommandHandler<TypedCommandHandler<DespawnCommand>>(*this);
 }
@@ -183,7 +197,7 @@ The ResourceRegistry is designed for extensibility. Applications register their 
 
 ### Custom Managers
 
-A custom Manager derives from `Manager`, implements `flush()`, and optionally overrides `init()` and `reset()`. If the Manager also handles commands, it additionally derives from `TypedCommandHandler<T>` for each command type.
+A custom Manager is a plain class that provides `flush(UpdateContext&)`, declares `using EngineRoleTag = ManagerTag;`, and optionally implements `init(GameWorld&)` and `reset()`. If the Manager also handles commands, it derives from `TypedCommandHandler<T>` for each command type.
 
 #### Step 1: Define the Command (if needed)
 
@@ -206,10 +220,10 @@ export namespace myapp::commands {
 ```cpp
 export module myapp.CoinManager;
 
-import helios.engine.runtime.world.Manager;
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.messaging.command.TypedCommandHandler;
+import helios.engine.common.tags.ManagerTag;
 import myapp.commands;
 
 export namespace myapp {
@@ -217,12 +231,13 @@ export namespace myapp {
     using namespace helios::engine::runtime::world;
     using namespace helios::engine::runtime::messaging::command;
 
-    class CoinManager : public Manager,
-                        public TypedCommandHandler<commands::CoinPickupCommand> {
+    class CoinManager : public TypedCommandHandler<commands::CoinPickupCommand> {
 
         std::vector<commands::CoinPickupCommand> pending_;
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::ManagerTag;
 
         // Called by TypedCommandBuffer during flush
         bool submit(commands::CoinPickupCommand cmd) noexcept override {
@@ -231,21 +246,21 @@ export namespace myapp {
         }
 
         // Register this handler so the TypedCommandBuffer can route to it
-        void init(GameWorld& gameWorld) override {
+        void init(GameWorld& gameWorld) {
             gameWorld.registerCommandHandler<
                 TypedCommandHandler<commands::CoinPickupCommand>
             >(*this);
         }
 
         // Process queued commands (called after CommandBuffer::flush)
-        void flush(UpdateContext& ctx) noexcept override {
+        void flush(UpdateContext& ctx) noexcept {
             for (const auto& cmd : pending_) {
                 // award coins, update score, etc.
             }
             pending_.clear();
         }
 
-        void reset() override {
+        void reset() {
             pending_.clear();
         }
     };

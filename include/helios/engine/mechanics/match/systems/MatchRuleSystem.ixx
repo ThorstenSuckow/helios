@@ -17,6 +17,8 @@ import helios.engine.runtime;
 
 using namespace helios::input::types;
 
+import helios.engine.common.tags.SystemTag;
+
 export namespace helios::engine::mechanics::match::systems {
 
     /**
@@ -30,6 +32,8 @@ export namespace helios::engine::mechanics::match::systems {
 
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemTag;
 
         /**
          * @brief Evaluates match rules.

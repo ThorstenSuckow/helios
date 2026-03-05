@@ -25,6 +25,8 @@ import helios.engine.mechanics.lifecycle.components.Inactive;
 
 
 
+import helios.engine.common.tags.SystemTag;
+
 export namespace helios::engine::ecs::systems {
 
 
@@ -72,6 +74,8 @@ export namespace helios::engine::ecs::systems {
 
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemTag;
         /**
          * @brief Processes hierarchy propagation for dirty root entities.
          *

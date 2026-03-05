@@ -44,6 +44,8 @@ using namespace helios::engine::modules::ui::widgets::components;
 using namespace helios::engine::mechanics::lifecycle::components;
 using namespace helios::input::gamepad;
 
+import helios.engine.common.tags.SystemTag;
+
 export namespace helios::engine::modules::ui::widgets::systems {
 
     /**
@@ -107,6 +109,9 @@ export namespace helios::engine::modules::ui::widgets::systems {
 
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemTag;
+
 
         /**
          * @brief Processes menu navigation input.

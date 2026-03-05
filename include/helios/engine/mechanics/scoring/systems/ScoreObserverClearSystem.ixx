@@ -24,6 +24,8 @@ import helios.engine.mechanics.lifecycle.components.Active;
 
 
 
+import helios.engine.common.tags.SystemTag;
+
 export namespace helios::engine::mechanics::scoring::systems {
 
     /**
@@ -40,6 +42,8 @@ export namespace helios::engine::mechanics::scoring::systems {
 
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemTag;
 
         /**
          * @brief Clears update flags on all ScoreObserverComponents.

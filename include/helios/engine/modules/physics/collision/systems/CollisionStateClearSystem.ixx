@@ -34,6 +34,8 @@ using namespace helios::engine::runtime::spawn::commands;
 
 
 
+import helios.engine.common.tags.SystemTag;
+
 export namespace helios::engine::modules::physics::collision::systems {
 
     /**
@@ -49,6 +51,8 @@ export namespace helios::engine::modules::physics::collision::systems {
     class CollisionStateClearSystem {
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemTag;
         /**
          * @brief Resets collision state for all entities with CollisionStateComponent.
          *

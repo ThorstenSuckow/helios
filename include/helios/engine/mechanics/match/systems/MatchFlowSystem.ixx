@@ -28,6 +28,8 @@ using namespace helios::engine::state::types;
 using namespace helios::engine::mechanics::gamestate;
 using namespace helios::engine::mechanics::match::types;
 
+import helios.engine.common.tags.SystemTag;
+
 export namespace helios::engine::mechanics::match::systems {
 
     /**
@@ -44,6 +46,8 @@ export namespace helios::engine::mechanics::match::systems {
 
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemTag;
 
         /**
          * @brief Processes match state and issues transition commands.

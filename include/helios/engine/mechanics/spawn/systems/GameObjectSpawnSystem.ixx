@@ -24,6 +24,8 @@ import helios.engine.runtime.spawn.events.SpawnPlanCommandExecutedEvent;
 
 using namespace helios::engine::runtime::world;
 
+import helios.engine.common.tags.SystemTag;
+
 export namespace helios::engine::mechanics::spawn::systems {
 
 
@@ -36,6 +38,8 @@ export namespace helios::engine::mechanics::spawn::systems {
 
     public:
 
+
+        using EngineRoleTag = helios::engine::common::tags::SystemTag;
 
         explicit GameObjectSpawnSystem(helios::engine::runtime::spawn::SpawnManager& spawnManager) noexcept
         : spawnManager_{spawnManager} {}

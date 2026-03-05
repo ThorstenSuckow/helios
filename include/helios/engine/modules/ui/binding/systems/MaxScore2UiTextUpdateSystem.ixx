@@ -25,6 +25,8 @@ import helios.engine.mechanics.lifecycle.components.Active;
 
 using namespace helios::engine::mechanics::scoring;
 
+import helios.engine.common.tags.SystemTag;
+
 export namespace helios::engine::modules::ui::binding::systems {
 
     /**
@@ -41,6 +43,8 @@ export namespace helios::engine::modules::ui::binding::systems {
 
     public:
 
+
+        using EngineRoleTag = helios::engine::common::tags::SystemTag;
         /**
          * @brief Updates text components with current high score values.
          *

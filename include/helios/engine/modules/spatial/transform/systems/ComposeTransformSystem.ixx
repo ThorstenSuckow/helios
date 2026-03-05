@@ -23,6 +23,8 @@ import helios.engine.mechanics.lifecycle.components.Active;
 
 import helios.math;
 
+import helios.engine.common.tags.SystemTag;
+
 export namespace helios::engine::modules::spatial::transform::systems {
 
     /**
@@ -37,6 +39,8 @@ export namespace helios::engine::modules::spatial::transform::systems {
     class ComposeTransformSystem {
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemTag;
 
         /**
          * @brief Updates TransformComponents based on state components.

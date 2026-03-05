@@ -36,6 +36,8 @@ import helios.engine.mechanics.health.events;
 import helios.math;
 import helios.util;
 
+import helios.engine.common.tags.SystemTag;
+
 using namespace helios::engine::mechanics::health::types;
 using namespace helios::engine::mechanics::health::events;
 using namespace helios::engine::mechanics::health::components;
@@ -64,6 +66,8 @@ export namespace helios::engine::mechanics::damage::systems {
             HELIOS_LOG_SCOPE);
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemTag;
 
 
         /**

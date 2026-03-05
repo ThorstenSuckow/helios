@@ -21,6 +21,8 @@ import helios.rendering.text.TextShaderPropertiesOverride;
 import helios.engine.mechanics.lifecycle.components.Active;
 
 
+import helios.engine.common.tags.SystemTag;
+
 export namespace helios::engine::modules::ui::widgets::systems {
 
 
@@ -33,6 +35,9 @@ export namespace helios::engine::modules::ui::widgets::systems {
     class UiStyleUpdateSystem {
 
     public:
+
+
+        using EngineRoleTag = helios::engine::common::tags::SystemTag;
 
         /**
          * @brief Updates AABB bounds for text components that need resizing.

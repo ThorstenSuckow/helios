@@ -21,13 +21,13 @@ import helios.engine.mechanics.timing.GameTimer;
 
 import helios.engine.core.data.GameTimerId;
 
-import helios.engine.runtime.world.Manager;
 import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.runtime.world.GameWorld;
 
 import helios.core.types;
 import helios.util.Guid;
+import helios.engine.common;
 
 using namespace helios::engine::mechanics::timing::commands;
 using namespace helios::engine::mechanics::timing::types;
@@ -51,7 +51,7 @@ export namespace helios::engine::mechanics::timing {
      * @see TimerCommandHandler
      * @see Manager
      */
-    class TimerManager : public Manager, public TypedCommandHandler<TimerControlCommand> {
+    class TimerManager : public TypedCommandHandler<TimerControlCommand> {
 
         /**
          * @brief Collection of game timers managed by this manager.
@@ -108,6 +108,7 @@ export namespace helios::engine::mechanics::timing {
         }
 
     public:
+        using EngineRoleTag = helios::engine::common::tags::ManagerTag;
 
         /**
          * @brief Registers a new game timer.
@@ -155,7 +156,7 @@ export namespace helios::engine::mechanics::timing {
          */
         void flush(
             helios::engine::runtime::world::UpdateContext& update_context
-        ) noexcept override {
+        ) noexcept {
 
             for (const auto& controlContext : pendingControlContexts_) {
                 auto* timer = gameTimer(controlContext.gameTimerId);
@@ -185,14 +186,14 @@ export namespace helios::engine::mechanics::timing {
          *
          * @param gameWorld The game world to register with.
          */
-        void init(helios::engine::runtime::world::GameWorld& gameWorld) override {
+        void init(helios::engine::runtime::world::GameWorld& gameWorld) {
             gameWorld.template registerCommandHandler<TypedCommandHandler<TimerControlCommand> >(*this);
         }
 
         /**
          * @brief Resets all managed timers.
          */
-        void reset() override {
+        void reset() {
             for (auto& gameTimer : gameTimers_) {
                 gameTimer.reset();
             }

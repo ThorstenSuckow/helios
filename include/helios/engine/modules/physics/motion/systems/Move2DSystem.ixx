@@ -24,6 +24,8 @@ import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.mechanics.lifecycle.components.Active;
 
+import helios.engine.common.tags.SystemTag;
+
 export namespace helios::engine::modules::physics::motion::systems {
 
     /**
@@ -113,6 +115,8 @@ export namespace helios::engine::modules::physics::motion::systems {
 
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemTag;
         /**
          * @brief Updates movement for all applicable entities.
          *

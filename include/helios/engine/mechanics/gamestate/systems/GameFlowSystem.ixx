@@ -19,6 +19,8 @@ import helios.engine.mechanics.gamestate.types;
 import helios.engine.ecs;
 import helios.engine.runtime;
 
+import helios.engine.common.tags.SystemTag;
+
 export namespace helios::engine::mechanics::gamestate::systems {
 
     using namespace helios::engine::state::commands;
@@ -52,6 +54,8 @@ export namespace helios::engine::mechanics::gamestate::systems {
         StateTransitionIdType<GameState> prevGameStateTransitionId_ = StateTransitionIdType<GameState>::Undefined;
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemTag;
 
         /**
          * @brief Updates the game flow and emits state transition commands.

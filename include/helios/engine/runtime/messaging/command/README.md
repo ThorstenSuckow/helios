@@ -67,14 +67,15 @@ During `TypedCommandBuffer::flush()`, each command type is processed in template
 
 ```cpp
 // Systems enqueue commands via UpdateContext
-void update(UpdateContext& ctx) noexcept override {
+void update(UpdateContext& ctx) noexcept {
     ctx.queueCommand<DespawnCommand>(entityHandle, profileId);
 }
 
 // Managers implement TypedCommandHandler for commands they process
-class SpawnManager : public Manager,
-                     public TypedCommandHandler<SpawnCommand>,
+class SpawnManager : public TypedCommandHandler<SpawnCommand>,
                      public TypedCommandHandler<DespawnCommand> {
+public:
+    using EngineRoleTag = helios::engine::common::tags::ManagerTag;
 
     bool submit(SpawnCommand cmd) noexcept override {
         spawnQueue_.push_back(cmd);
@@ -85,6 +86,8 @@ class SpawnManager : public Manager,
         despawnQueue_.push_back(cmd);
         return true;
     }
+
+    void flush(UpdateContext& ctx) noexcept { /* batch processing */ }
 };
 ```
 
@@ -94,8 +97,8 @@ Commands are flushed at each commit point in the game loop:
 
 ```cpp
 // Phase commit sequence
-commandBuffer.flush(updateContext);   // Commands route to handlers
-gameWorld.flushManagers(updateContext); // Managers process queued requests
+commandBuffer.flush(gameWorld, updateContext); // Commands route to handlers
+gameWorld.flushManagers(updateContext);         // Managers process queued requests
 ```
 
 ---

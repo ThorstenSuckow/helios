@@ -72,6 +72,7 @@ export namespace helios::engine::runtime::messaging::command {
      */
     class EngineCommandBuffer : public CommandBuffer {
 
+
         /**
          * @brief The underlying typed buffer with all engine command types.
          */

@@ -14,7 +14,6 @@ export module helios.engine.runtime.world.SystemRegistry;
 
 import helios.engine.core.data;
 import helios.engine.runtime.world.System;
-import helios.engine.runtime.world.TypedSystem;
 
 using namespace helios::engine::core::data;
 
@@ -23,13 +22,13 @@ export namespace helios::engine::runtime::world {
     /**
      * @brief Type-indexed registry for managing System instances within a game loop pass.
      *
-     * @details SystemRegistry owns TypedSystem<T> wrappers internally and
+     * @details SystemRegistry owns System<T> wrappers internally and
      * provides O(1) access to the underlying concrete system via
      * SystemTypeId. Systems are registered once via `add<T>()` and then
      * iterated each frame through the `systems()` span.
      *
      * @see System
-     * @see TypedSystem
+     * @see System
      * @see SystemTypeId
      */
     class SystemRegistry {
@@ -37,7 +36,7 @@ export namespace helios::engine::runtime::world {
         /**
          * @brief Owning storage for wrapped System instances, indexed by SystemTypeId.
          */
-        std::vector<std::unique_ptr<System>> systems_;
+        std::vector<System> systems_;
 
         /**
          * @brief Raw pointers to the underlying T instances for O(1) typed access.
@@ -45,9 +44,29 @@ export namespace helios::engine::runtime::world {
         std::vector<void*> underlyingSystems_;
 
         /**
-         * @brief Cached non-owning view for iteration; rebuilt when dirty.
+         * @brief Stores the insertion order for the systems.
          */
+        std::vector<size_t> insertionOrder_;
+
         std::vector<System*> systemsView_;
+
+
+        bool needsUpdate_ = false;
+
+        void update() {
+
+            if (!needsUpdate_) {
+                return;
+            }
+
+            systemsView_.clear();
+            systemsView_.reserve(insertionOrder_.size());
+
+            for (const auto insertionIndex : insertionOrder_) {
+                systemsView_.push_back(&systems_[insertionIndex]);
+            }
+
+        }
 
 
     public:
@@ -58,32 +77,18 @@ export namespace helios::engine::runtime::world {
          * @return Span of System pointers.
          */
         [[nodiscard]] std::span<System* const> systems() noexcept {
+            update();
             return systemsView_;
         }
 
-        /**
-         * @brief Registers a new system of type T.
-         *
-         * @details Creates a TypedSystem<T> wrapper, stores it in the
-         * registry indexed by SystemTypeId, and returns a reference to the
-         * underlying T instance.
-         *
-         * @tparam T The concrete system type. Must satisfy HasUpdate.
-         * @tparam Args Constructor argument types for T.
-         *
-         * @param args Arguments forwarded to the T constructor.
-         *
-         * @return Reference to the registered system instance.
-         *
-         * @pre No system of type T is already registered.
-         */
+
         template<typename T, typename... Args>
         requires helios::engine::runtime::world::HasUpdate<T>
         T& add(Args&&... args) {
+
             assert(!hasSystem<T>() && "System already registered with GameLoopPhase");
-            auto system_ptr = std::make_unique<helios::engine::runtime::world::TypedSystem<T>>(
-                    std::forward<Args>(args)...
-            );
+
+            System system{T{std::forward<Args>(args)...}};
 
             const auto idx = SystemTypeId::id<T>().value();
 
@@ -94,21 +99,14 @@ export namespace helios::engine::runtime::world {
                 underlyingSystems_.resize(idx + 1);
             }
 
-            T& underlying = system_ptr->underlying();
+            void* rawUnderlying = system.underlying();
 
-            underlyingSystems_[idx] = &underlying;
-            /**
-             * SystemsView returns systems in the order they were registered.
-             * The game loop guarantees this: calling addSystem() on a pass preserves
-             * deterministic execution by maintaining the insertion order.
-             * Once removeSystem() is implemented, updating systemsView_ must be
-             * reviewed.
-             */
-            systemsView_.push_back(system_ptr.get());
-            systems_[idx] = std::move(system_ptr);
+            underlyingSystems_[idx] = rawUnderlying;
+            systems_[idx] = std::move(system);
+            insertionOrder_.push_back(idx);
 
-
-            return underlying;
+            needsUpdate_ = true;
+            return *static_cast<T*>(rawUnderlying);
         }
 
         /**

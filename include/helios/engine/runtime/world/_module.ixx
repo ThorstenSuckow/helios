@@ -12,6 +12,5 @@ export import helios.engine.runtime.world.Manager;
 export import helios.engine.runtime.world.Session;
 export import helios.engine.runtime.world.ResourceRegistry;
 export import helios.engine.runtime.world.System;
-export import helios.engine.runtime.world.TypedSystem;
 
 

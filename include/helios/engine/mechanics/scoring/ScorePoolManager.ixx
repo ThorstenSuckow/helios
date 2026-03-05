@@ -19,7 +19,7 @@ import helios.engine.runtime.messaging.command.CommandHandler;
 
 import helios.engine.mechanics.scoring.commands;
 
-import helios.engine.core.data.ScorePoolId;
+import helios.engine.mechanics.scoring.types.ScorePoolId;
 
 import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.UpdateContext;
@@ -75,7 +75,7 @@ export namespace helios::engine::mechanics::scoring {
          *
          * @return Reference to the newly created ScorePool.
          */
-        ScorePool& addScorePool(helios::engine::core::data::ScorePoolId scorePoolId) noexcept {
+        ScorePool& addScorePool(helios::engine::mechanics::scoring::types::ScorePoolId scorePoolId) noexcept {
 
             assert(!scorePool(scorePoolId) && "Score with scorePoolId already registered");
 
@@ -92,7 +92,7 @@ export namespace helios::engine::mechanics::scoring {
          *
          * @return Pointer to the ScorePool, or nullptr if not found.
          */
-        [[nodiscard]] ScorePool* scorePool(const helios::engine::core::data::ScorePoolId scorePoolId) noexcept {
+        [[nodiscard]] ScorePool* scorePool(const helios::engine::mechanics::scoring::types::ScorePoolId scorePoolId) noexcept {
 
             const auto it = std::ranges::find_if(pools_, [&scorePoolId](const auto& scorePool) -> bool {
                 return scorePool.scorePoolId() == scorePoolId;

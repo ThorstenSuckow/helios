@@ -440,7 +440,7 @@ export namespace helios::examples::scoring {
                 })
                 .withObserver([&](auto& ob) {
                    ob.observe()
-                     .runningScore(helios::engine::core::data::ScorePoolId{"playerOneScorePool"});
+                     .runningScore(helios::engine::mechanics::scoring::types::ScorePoolId{"playerOneScorePool"});
                })
                 .withUiTransform([](auto& tb) {
                     tb.transform()
@@ -466,7 +466,7 @@ export namespace helios::examples::scoring {
                 })
                .withObserver([&](auto& ob) {
                    ob.observe()
-                      .maxScore(helios::engine::core::data::ScorePoolId{"playerOneScorePool"});
+                      .maxScore(helios::engine::mechanics::scoring::types::ScorePoolId{"playerOneScorePool"});
                })
                 .withUiTransform([](auto& tb) {
                     tb.transform()

@@ -67,6 +67,7 @@ using namespace helios::engine::mechanics::match::systems;
 // Mechanics: scoring, timing, combat
 using namespace helios::engine::mechanics::scoring;
 using namespace helios::engine::mechanics::scoring::systems;
+using namespace helios::engine::mechanics::scoring::types;
 using namespace helios::engine::mechanics::timing;
 using namespace helios::engine::mechanics::timing::systems;
 using namespace helios::engine::mechanics::combat::components;

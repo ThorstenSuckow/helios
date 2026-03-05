@@ -10,6 +10,7 @@ import helios.engine.ecs.GameObject;
 
 import helios.engine.core.data;
 
+import helios.engine.mechanics.scoring.types;
 import helios.engine.mechanics.scoring.components.ScorePoolComponent;
 
 export namespace helios::engine::builder::gameObject::builders::configs {
@@ -46,7 +47,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @return Reference to this config for chaining.
          */
-        ScorePoolConfig& poolId(const helios::engine::core::data::ScorePoolId scorePoolId) {
+        ScorePoolConfig& poolId(const helios::engine::mechanics::scoring::types::ScorePoolId scorePoolId) {
             gameObject_.get<helios::engine::mechanics::scoring::components::ScorePoolComponent>()
                        ->setScorePoolId(scorePoolId);
             return *this;

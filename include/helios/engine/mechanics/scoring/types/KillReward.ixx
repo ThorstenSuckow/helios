@@ -35,8 +35,8 @@ export namespace helios::engine::mechanics::scoring::types {
         /**
          * @copydoc Score::typeId()
          */
-        [[nodiscard]] helios::engine::core::data::ScoreTypeId typeId() const noexcept override {
-            return helios::engine::core::data::ScoreTypeId::id<KillReward>();
+        [[nodiscard]] helios::engine::mechanics::scoring::types::ScoreTypeId typeId() const noexcept override {
+            return helios::engine::mechanics::scoring::types::ScoreTypeId::id<KillReward>();
         };
 
     };

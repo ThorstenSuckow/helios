@@ -6,12 +6,12 @@ module;
 
 #include <functional>
 
-export module helios.engine.core.data.ScoreTypeId;
+export module helios.engine.mechanics.scoring.types.ScoreTypeId;
 
 import helios.core.data.TypeIndexer;
 import helios.core.types;
 
-export namespace helios::engine::core::data {
+export namespace helios::engine::mechanics::scoring::types {
 
     /**
      * @brief Strongly-typed identifier for score types.
@@ -87,8 +87,8 @@ export namespace helios::engine::core::data {
  * @details Enables use of ScoreTypeId as a key in unordered containers.
  */
 template<>
-struct std::hash<helios::engine::core::data::ScoreTypeId> {
-   std::size_t operator()(const helios::engine::core::data::ScoreTypeId& id) const noexcept {
+struct std::hash<helios::engine::mechanics::scoring::types::ScoreTypeId> {
+   std::size_t operator()(const helios::engine::mechanics::scoring::types::ScoreTypeId& id) const noexcept {
         return id.value();
     }
 

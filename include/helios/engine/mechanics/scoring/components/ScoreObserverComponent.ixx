@@ -8,9 +8,7 @@ module;
 export module helios.engine.mechanics.scoring.components.ScoreObserverComponent;
 
 import helios.engine.mechanics.scoring.ScorePoolSnapshot;
-import helios.engine.mechanics.scoring.types.ScorePoolRevision;
-
-
+import helios.engine.mechanics.scoring.types;
 
 import helios.engine.core.data;
 import helios.core.types;
@@ -44,7 +42,7 @@ export namespace helios::engine::mechanics::scoring::components {
         /**
          * @brief ID of the score pool to observe.
          */
-        helios::engine::core::data::ScorePoolId scorePoolId_{helios::core::types::no_init};
+        helios::engine::mechanics::scoring::types::ScorePoolId scorePoolId_{helios::core::types::no_init};
 
 
         /**
@@ -117,7 +115,7 @@ export namespace helios::engine::mechanics::scoring::components {
          *
          * @param scorePoolId The ID of the pool to observe.
          */
-        void setScorePoolId(const helios::engine::core::data::ScorePoolId scorePoolId) noexcept {
+        void setScorePoolId(const helios::engine::mechanics::scoring::types::ScorePoolId scorePoolId) noexcept {
             scorePoolId_ = scorePoolId;
         }
 
@@ -126,7 +124,7 @@ export namespace helios::engine::mechanics::scoring::components {
          *
          * @return The ScorePoolId.
          */
-        [[nodiscard]] helios::engine::core::data::ScorePoolId scorePoolId() const noexcept {
+        [[nodiscard]] helios::engine::mechanics::scoring::types::ScorePoolId scorePoolId() const noexcept {
             return scorePoolId_;
         }
 

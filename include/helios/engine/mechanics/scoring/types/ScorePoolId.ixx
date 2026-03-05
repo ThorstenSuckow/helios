@@ -7,13 +7,13 @@ module;
 #include <cstdint>
 #include <string_view>
 
-export module helios.engine.core.data.ScorePoolId;
+export module helios.engine.mechanics.scoring.types.ScorePoolId;
 
 import helios.core.algorithms;
 import helios.core.types;
 import helios.core.data;
 
-export namespace helios::engine::core::data {
+export namespace helios::engine::mechanics::scoring::types {
 
     /**
      * @brief Tag type for ScorePoolId.

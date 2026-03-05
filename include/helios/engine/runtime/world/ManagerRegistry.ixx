@@ -1,0 +1,35 @@
+/**
+ * @file ManagerRegistry.ixx
+ * @brief Type-indexed registry for managing Manager instances.
+ */
+module;
+
+#include <cassert>
+#include <memory>
+#include <span>
+#include <vector>
+
+
+export module helios.engine.runtime.world.ManagerRegistry;
+
+import helios.engine.core.data;
+import helios.engine.runtime.world.Manager;
+import helios.engine.common.concepts;
+
+using namespace helios::engine::core::data;
+
+export namespace helios::engine::runtime::world {
+
+    /**
+     * @brief Type alias for a ConceptModelRegistry specialized for Managers.
+     *
+     * @details Stores type-erased Manager wrappers indexed by ResourceTypeId,
+     * providing O(1) lookup by concrete Manager type and insertion-order
+     * iteration for deterministic init/flush/reset cycles.
+     *
+     * @see ConceptModelRegistry
+     * @see Manager
+     */
+    using ManagerRegistry = ConceptModelRegistry<Manager, ResourceTypeId>;
+
+}

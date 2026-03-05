@@ -19,38 +19,18 @@ import helios.engine.runtime.messaging.command.TypedCommandHandler;
 import helios.engine.runtime.messaging.command.CommandHandler;
 import helios.engine.runtime.messaging.command.CommandBuffer;
 
+import helios.engine.runtime.world.ManagerRegistry;
+
+import helios.engine.common.concepts;
 
 import helios.engine.core.data.ResourceTypeId;
 
 using namespace helios::engine::runtime::messaging::command;
 using namespace helios::engine::core::data;
 using namespace helios::core::memory;
+using namespace helios::engine::common::concepts;
 
 export namespace helios::engine::runtime::world {
-
-    /**
-     * @brief Concept constraining types that derive from Manager.
-     *
-     * @tparam T The type to check.
-     */
-    template<typename T>
-    concept IsManager = std::derived_from<T, Manager>;
-
-    /**
-     * @brief Concept constraining types that derive from CommandBuffer.
-     *
-     * @tparam T The type to check.
-     */
-    template<typename T>
-    concept IsCommandBuffer = std::derived_from<T, CommandBuffer>;
-
-    /**
-     * @brief Concept constraining types that derive from CommandHandler.
-     *
-     * @tparam T The type to check.
-     */
-    template<typename T>
-    concept IsCommandHandler = std::derived_from<T, CommandHandler>;
 
 
     /**
@@ -89,9 +69,12 @@ export namespace helios::engine::runtime::world {
         std::vector<ErasedUnique> owned_;
 
         /**
-         * @brief Non-owning pointers to registered Managers for iteration.
+         * @brief Type-indexed registry for Manager instances.
+         *
+         * @details Delegates to ConceptModelRegistry for type-erased storage,
+         * O(1) lookup, and insertion-order iteration.
          */
-        std::vector<Manager*> managers_;
+        ManagerRegistry managerRegistry_;
 
         /**
          * @brief Non-owning pointers to registered CommandBuffers for iteration.
@@ -115,19 +98,55 @@ export namespace helios::engine::runtime::world {
 public:
 
     /**
-     * @brief Creates and registers an owning resource.
+     * @brief Registers an owning Manager resource.
      *
-     * @details Heap-allocates a resource of type T, stores it in `owned_`
-     * via ErasedUnique, and indexes it in `fastAccess_`. If T derives from
-     * Manager or CommandBuffer, it is additionally tracked in the
-     * corresponding iteration list.
+     * @details Constructs T in the ManagerRegistry (which wraps it in a
+     * type-erased Manager) and stores a raw pointer in `fastAccess_` for
+     * O(1) lookup. The ManagerRegistry owns the instance and provides
+     * insertion-order iteration for batch init/flush/reset.
      *
-     * @tparam T The resource type. Must derive from Manager or CommandBuffer.
-     * @tparam Args Constructor argument types.
+     * @tparam T The Manager type. Must satisfy `IsManager<T>`.
+     * @tparam Args Constructor argument types for T.
      *
      * @param args Arguments forwarded to the T constructor.
      *
-     * @return Reference to the newly created resource.
+     * @return Reference to the registered T instance.
+     *
+     * @pre No resource of type T is already registered.
+     */
+    template<class T, class... Args>
+    requires IsManager<T>
+    T& registerResource(Args&&... args) {
+
+        auto& managerRef = managerRegistry_.template add<T>(std::forward<Args>(args)...);
+
+        const size_t idx = ResourceTypeId::id<T>().value();
+
+        if (idx >= fastAccess_.size()) {
+            fastAccess_.resize(idx + 1, nullptr);
+        }
+
+        assert(fastAccess_[idx] == nullptr && "Resource already registered");
+        fastAccess_[idx] = &managerRef;
+
+        return managerRef;
+    }
+
+
+    /**
+     * @brief Registers an owning CommandBuffer or plain resource.
+     *
+     * @details Heap-allocates T via `std::make_unique`, stores a raw pointer
+     * in `fastAccess_` for O(1) lookup, and transfers ownership to `owned_`.
+     * If T derives from CommandBuffer, the pointer is also appended to
+     * `commandBuffers_` for batch flushing.
+     *
+     * @tparam T The resource type. Must not satisfy `IsManager`.
+     * @tparam Args Constructor argument types for T.
+     *
+     * @param args Arguments forwarded to the T constructor.
+     *
+     * @return Reference to the registered T instance.
      *
      * @pre No resource of type T is already registered.
      */
@@ -146,10 +165,6 @@ public:
         assert(fastAccess_[idx] == nullptr && "Resource already registered");
 
         fastAccess_[idx] = raw;
-
-        if constexpr (std::derived_from<T, Manager>) {
-            managers_.push_back(static_cast<Manager*>(raw));
-        }
 
         if constexpr (std::derived_from<T, CommandBuffer>) {
             commandBuffers_.push_back(static_cast<CommandBuffer*>(raw));
@@ -177,9 +192,8 @@ public:
      * @pre No resource of type T is already registered.
      */
     template<class T>
-    requires std::derived_from<T, CommandHandler>
+    requires IsCommandHandler<T>
     T& registerResource(T& ref) {
-
 
         const size_t idx = ResourceTypeId::id<T>().value();
 
@@ -277,8 +291,8 @@ public:
      *
      * @return Span of Manager pointers.
      */
-    std::span<Manager* const> managers() const noexcept {
-        return managers_;
+    [[nodiscard]] std::span<Manager* const> managers() const noexcept {
+        return managerRegistry_.items();
     }
 
     /**
@@ -287,7 +301,7 @@ public:
      * @return Span of Manager pointers.
      */
     std::span<Manager*> managers() noexcept {
-        return managers_;
+        return managerRegistry_.items();
     }
 
     /**

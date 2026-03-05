@@ -13,29 +13,12 @@ export module helios.engine.runtime.world.System;
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.runtime.world.GameWorld;
 
+import helios.engine.common.concepts;
+
 using namespace helios::engine::runtime::world;
+using namespace helios::engine::common::concepts;
 
 export namespace helios::engine::runtime::world {
-
-    /**
-     * @brief Concept detecting an optional `init(GameWorld&)` method.
-     *
-     * @tparam T The system type to check.
-     */
-    template<typename T>
-    concept HasInit = requires(T& t, helios::engine::runtime::world::GameWorld& gameWorld) {
-        {t.init(gameWorld) } -> std::same_as<void>;
-    };
-
-    /**
-     * @brief Concept requiring an `update(UpdateContext&)` method.
-     *
-     * @tparam T The system type to check.
-     */
-    template<typename T>
-    concept HasUpdate = requires(T& t, helios::engine::runtime::world::UpdateContext& updateContext) {
-        {t.update(updateContext) } -> std::same_as<void>;
-    };
 
 
     /**

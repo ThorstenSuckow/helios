@@ -52,9 +52,9 @@ int main() {
     constexpr float ASPECT_RATIO_NUMER = 16.0f;
     constexpr float ASPECT_RATIO_DENOM = 9.0f;
 
-    constexpr helios::engine::core::data::PrefabId ProjectilePrefabId{"projectile"};
-    constexpr helios::engine::core::data::GameObjectPoolId ProjectilePoolId{"projectile_pool"};
-    constexpr helios::engine::core::data::SpawnProfileId ProjectileSpawnSpawnProfileId{"projectile_spawn"};
+    constexpr helios::engine::common::types::PrefabId ProjectilePrefabId{"projectile"};
+    constexpr helios::engine::runtime::pooling::types::GameObjectPoolId ProjectilePoolId{"projectile_pool"};
+    constexpr helios::engine::runtime::spawn::types::SpawnProfileId ProjectileSpawnSpawnProfileId{"projectile_spawn"};
 
     // ========================================
     // 2. Application and Window Setup
@@ -69,7 +69,7 @@ int main() {
     auto win = dynamic_cast<GLFWWindow*>(app->current());
     auto mainViewport = std::make_shared<Viewport>(
         0.0f, 0.0f, 1.0f, 1.0f,
-        helios::engine::core::data::ViewportId{"mainViewport"});
+        helios::engine::common::types::ViewportId{"mainViewport"});
 
     mainViewport->setClearFlags(std::to_underlying(ClearFlags::Color))
                   .setClearColor(vec4f(0.051f, 0.051f, 0.153f, 1.0f));
@@ -129,7 +129,7 @@ int main() {
     // ========================================
     auto frustumCullingStrategy = std::make_unique<CullNoneStrategy>();
     auto scene = std::make_unique<helios::scene::Scene>(
-        std::move(frustumCullingStrategy), helios::engine::core::data::SceneId{"mainScene"});
+        std::move(frustumCullingStrategy), helios::engine::modules::scene::types::SceneId{"mainScene"});
     sceneToViewportMap.add(scene.get(), mainViewport.get());
 
     auto mainViewportCam = std::make_unique<helios::scene::Camera>();
@@ -317,8 +317,8 @@ int main() {
     // ========================================
     // 7. Manager Registration
     // ========================================
-    auto& poolManager = gameWorld.registerManager<helios::engine::runtime::pooling::GameObjectPoolManager>();
-    auto& spawnManager = gameWorld.registerManager<helios::engine::runtime::spawn::SpawnManager>();
+    auto& poolManager = gameWorld.registerResource<helios::engine::runtime::pooling::GameObjectPoolManager>();
+    auto& spawnManager = gameWorld.registerResource<helios::engine::runtime::spawn::SpawnManager>();
 
     // Spawn system
     helios::engine::builder::spawnSystem::SpawnSystemFactory::configure(poolManager, spawnManager)
@@ -332,7 +332,9 @@ int main() {
 
     using namespace helios::engine::mechanics::gamestate::types;
     using namespace helios::engine::mechanics::match::types;
-    using namespace helios::engine::core::data;
+    using namespace helios::engine::common::types;
+    using namespace helios::engine::modules::scene::types;
+    using namespace helios::engine::runtime::pooling::types;
 
     // ----------------------------------------
     // 8.1 State-to-Viewport Mapping

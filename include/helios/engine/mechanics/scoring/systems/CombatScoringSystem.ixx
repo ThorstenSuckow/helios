@@ -26,7 +26,7 @@ import helios.engine.state.Bindings;
 import helios.engine.runtime.messaging.command.EngineCommandBuffer;
 
 
-import helios.engine.core.data;
+import helios.engine.ecs.types.EntityId;
 
 import helios.engine.mechanics.health.events.HealthDepletedEvent;
 
@@ -41,9 +41,11 @@ using namespace helios::engine::mechanics::scoring::components;
 using namespace helios::engine::mechanics::scoring::types;
 using namespace helios::engine::mechanics::scoring::commands;
 using namespace helios::engine::mechanics::health::events;
-using namespace helios::engine::core::data;
+using namespace helios::engine::ecs::types;
 
 #define HELIOS_LOG_SCOPE "helios::engine::mechanics::scoring::systems::CombatScoringSystem"
+import helios.engine.common.tags.SystemRole;
+
 export namespace helios::engine::mechanics::scoring::systems {
 
     /**
@@ -59,6 +61,8 @@ export namespace helios::engine::mechanics::scoring::systems {
             HELIOS_LOG_SCOPE);
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
 
 
         /**
@@ -107,7 +111,7 @@ export namespace helios::engine::mechanics::scoring::systems {
                     svc->score().value())
                 );
 
-                updateContext.commandBuffer().add<UpdateScoreCommand>(
+                updateContext.queueCommand<UpdateScoreCommand>(
                     std::move(scoreContext)
                 );
             }

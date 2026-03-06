@@ -9,10 +9,8 @@ export module helios.engine.mechanics.match.components.LivesBindingComponent;
 import helios.engine.mechanics.match.types;
 
 import helios.engine.ecs;
-import helios.engine.core.data;
 import helios.core.types;
 
-using namespace helios::engine::core::data;
 using namespace helios::engine::ecs;
 using namespace helios::engine::mechanics::match::types;
 

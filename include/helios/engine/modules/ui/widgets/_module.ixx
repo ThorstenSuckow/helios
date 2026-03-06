@@ -6,3 +6,5 @@ export module helios.engine.modules.ui.widgets;
 
 export import helios.engine.modules.ui.widgets.components;
 export import helios.engine.modules.ui.widgets.systems;
+export import helios.engine.modules.ui.widgets.types;
+export import helios.engine.modules.ui.widgets.commands;

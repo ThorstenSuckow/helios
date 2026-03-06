@@ -21,6 +21,8 @@ import helios.engine.modules.spatial.transform.components.RotationStateComponent
 
 import helios.engine.mechanics.lifecycle.components.Active;
 
+import helios.engine.common.tags.SystemRole;
+
 export namespace helios::engine::modules::physics::motion::systems {
     
     /**
@@ -39,6 +41,8 @@ export namespace helios::engine::modules::physics::motion::systems {
         inline static const helios::math::mat4f identity = helios::math::mat4f::identity();
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
 
         /**
          * @brief Updates spin rotation for all applicable entities.

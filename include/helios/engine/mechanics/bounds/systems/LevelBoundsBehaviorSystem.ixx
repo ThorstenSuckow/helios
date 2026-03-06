@@ -43,6 +43,8 @@ import helios.engine.mechanics.spawn.components.SpawnedByProfileComponent;
 import helios.engine.mechanics.lifecycle.components.Active;
 
 
+import helios.engine.common.tags.SystemRole;
+
 export namespace helios::engine::mechanics::bounds::systems {
 
     /**
@@ -73,6 +75,9 @@ export namespace helios::engine::mechanics::bounds::systems {
 
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+
         /**
          * @brief Updates all entities that may have left level bounds.
          *
@@ -128,9 +133,7 @@ export namespace helios::engine::mechanics::bounds::systems {
                         auto* sbp = entity.get<helios::engine::mechanics::spawn::components::SpawnedByProfileComponent>();
                         assert(sbp && "Unexpected missing SpawnProfile");
 
-                        updateContext.resourceRegistry().resource<
-                            helios::engine::runtime::messaging::command::EngineCommandBuffer
-                        >().add<helios::engine::runtime::spawn::commands::DespawnCommand>(
+                        updateContext.queueCommand<helios::engine::runtime::spawn::commands::DespawnCommand>(
                             entity.entityHandle(), sbp->spawnProfileId()
                         );
 

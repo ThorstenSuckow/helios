@@ -1,7 +1,7 @@
 # Updatable (Removed)
 
 The `Updatable` interface has been removed. Systems are now plain classes that provide
-`update(UpdateContext&)` and are wrapped by `TypedSystem<T>` internally.
+`update(UpdateContext&)` and are wrapped by the type-erased `System` class internally.
 
 ## Migration
 
@@ -14,5 +14,5 @@ The `Updatable` interface has been removed. Systems are now plain classes that p
 
 ## See Also
 
-- [System & TypedSystem](system.md) — Current system architecture
+- [System](system.md) — Current system architecture
 - [Game Loop Architecture](../gameloop-architecture.md) — How systems execute

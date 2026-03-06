@@ -15,11 +15,12 @@ import helios.engine.modules.ui.widgets.components.MenuComponent;
 
 import helios.engine.mechanics.lifecycle.components.Active;
 
+import helios.engine.modules.ui.widgets.types;
 import helios.engine.modules.ui.widgets.components.UiFocusComponent;
 import helios.engine.modules.ui.widgets.components.UiStateComponent;
 import helios.engine.modules.ui.widgets.components.UiActionComponent;
 
-import helios.engine.modules.ui.commands.UiActionCommand;
+import helios.engine.modules.ui.widgets.commands.UiActionCommand;
 
 import helios.engine.runtime.world;
 
@@ -37,12 +38,14 @@ import helios.engine.modules.rendering.model.components.ModelAabbComponent;
 
 using namespace helios::input::types;
 using namespace helios::engine::ecs::components;
-using namespace helios::engine::core::data;
+using namespace helios::engine::modules::ui::widgets::types;
 using namespace helios::engine::ecs;
 using namespace helios::engine::runtime::world;
 using namespace helios::engine::modules::ui::widgets::components;
 using namespace helios::engine::mechanics::lifecycle::components;
 using namespace helios::input::gamepad;
+
+import helios.engine.common.tags.SystemRole;
 
 export namespace helios::engine::modules::ui::widgets::systems {
 
@@ -108,6 +111,9 @@ export namespace helios::engine::modules::ui::widgets::systems {
 
     public:
 
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+
+
         /**
          * @brief Processes menu navigation input.
          *
@@ -163,7 +169,7 @@ export namespace helios::engine::modules::ui::widgets::systems {
                 >();
 
                 if (uac) {
-                    updateContext.commandBuffer().add<helios::engine::modules::ui::commands::UiActionCommand>(
+                    updateContext.queueCommand<helios::engine::modules::ui::widgets::commands::UiActionCommand>(
                         focusedMenu->menuItems()[focusedMenu->selectedIndex()], uac->actionId()
                     );
                 }

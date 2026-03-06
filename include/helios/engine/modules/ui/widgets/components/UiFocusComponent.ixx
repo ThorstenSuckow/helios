@@ -8,7 +8,7 @@ module;
 
 export module helios.engine.modules.ui.widgets.components.UiFocusComponent;
 
-import helios.engine.core.data.MenuId;
+import helios.engine.modules.ui.widgets.types.MenuId;
 
 import helios.engine.ecs.GameObject;
 

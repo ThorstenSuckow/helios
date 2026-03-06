@@ -10,13 +10,12 @@ module;
 
 export module helios.engine.runtime.spawn.commands.SpawnCommand;
 
-import helios.engine.runtime.spawn.SpawnContext;
+import helios.engine.runtime.spawn.types;
 
 import helios.math.types;
 
-import helios.engine.core.data.SpawnProfileId;
 
-
+using namespace helios::engine::runtime::spawn::types;
 export namespace helios::engine::runtime::spawn::commands {
 
     /**
@@ -41,17 +40,28 @@ export namespace helios::engine::runtime::spawn::commands {
          */
         size_t spawnBudget_;
 
+        /**
+         * @brief Profile identifying the spawn configuration.
+         */
+        SpawnProfileId spawnProfileId_;
 
-        helios::engine::core::data::SpawnProfileId spawnProfileId_;
-
-        helios::engine::runtime::spawn::SpawnContext spawnContext_;
+        /**
+         * @brief Context providing spawn-time information (e.g., emitter).
+         */
+        SpawnContext spawnContext_;
 
     public:
 
-
+        /**
+         * @brief Constructs a SpawnCommand.
+         *
+         * @param spawnProfileId The profile identifying the spawn configuration.
+         * @param spawnContext Context providing spawn-time information.
+         * @param spawnBudget Number of objects to spawn (default: 1).
+         */
         explicit SpawnCommand(
-            const helios::engine::core::data::SpawnProfileId spawnProfileId,
-            const helios::engine::runtime::spawn::SpawnContext& spawnContext,
+            const SpawnProfileId spawnProfileId,
+            const SpawnContext& spawnContext,
             const size_t spawnBudget = 1
         ) :
         spawnProfileId_(spawnProfileId),
@@ -65,7 +75,7 @@ export namespace helios::engine::runtime::spawn::commands {
          *
          * @return The GameObjectPoolId to spawn from.
          */
-        [[nodiscard]] helios::engine::core::data::SpawnProfileId spawnProfileId() const noexcept {
+        [[nodiscard]] SpawnProfileId spawnProfileId() const noexcept {
             return spawnProfileId_;
         }
 
@@ -83,7 +93,7 @@ export namespace helios::engine::runtime::spawn::commands {
          *
          * @return The spawn context of this command.
          */
-        [[nodiscard]] helios::engine::runtime::spawn::SpawnContext spawnContext() const noexcept {
+        [[nodiscard]] SpawnContext spawnContext() const noexcept {
             return spawnContext_;
         }
     };

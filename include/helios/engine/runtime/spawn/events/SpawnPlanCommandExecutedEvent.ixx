@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.runtime.spawn.events.SpawnPlanCommandExecutedEvent;
 
-import helios.engine.core.data.SpawnRuleId;
+import helios.engine.runtime.spawn.types.SpawnRuleId;
 
 export namespace helios::engine::runtime::spawn::events {
 
@@ -25,7 +25,7 @@ export namespace helios::engine::runtime::spawn::events {
         /**
          * @brief The rule that triggered the spawn.
          */
-        const helios::engine::core::data::SpawnRuleId spawnRuleId;
+        const helios::engine::runtime::spawn::types::SpawnRuleId spawnRuleId;
 
         /**
          * @brief Number of entities actually spawned.

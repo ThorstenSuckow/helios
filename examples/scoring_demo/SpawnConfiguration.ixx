@@ -27,7 +27,6 @@ export namespace helios::examples::scoring {
         using namespace helios::engine::builder::spawnSystem;
         using namespace helios::engine::runtime::pooling;
         using namespace helios::engine::runtime::spawn;
-        using namespace helios::engine::core::data;
 
         constexpr size_t OBJECT_AMOUNT_X = ArenaConfig::GRID_X * ArenaConfig::CELL_LENGTH / ArenaConfig::SPACESHIP_LENGTH;
         constexpr size_t OBJECT_AMOUNT_Y = ArenaConfig::GRID_Y * ArenaConfig::CELL_LENGTH / ArenaConfig::SPACESHIP_LENGTH;

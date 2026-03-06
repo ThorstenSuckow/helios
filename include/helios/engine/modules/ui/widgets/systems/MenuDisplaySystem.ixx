@@ -15,7 +15,7 @@ export module helios.engine.modules.ui.widgets.systems.MenuDisplaySystem;
 
 import helios.engine.ecs;
 import helios.engine.runtime.world;
-import helios.engine.core.data;
+import helios.engine.modules.ui.widgets.types.MenuId;
 
 import helios.engine.modules.ui.widgets.components.UiFocusComponent;
 
@@ -29,13 +29,15 @@ import helios.engine.mechanics.match.types;
 import helios.engine.modules.rendering.model.components.ModelAabbComponent;
 import helios.math;
 
-using namespace helios::engine::core::data;
+using namespace helios::engine::modules::ui::widgets::types;
 using namespace helios::engine::state;
 using namespace helios::engine::mechanics::gamestate::types;
 using namespace helios::engine::mechanics::match::types;
 using namespace helios::engine::ecs;
 using namespace helios::engine::modules::ui::widgets::components;
 using namespace helios::engine::runtime::world;
+
+import helios.engine.common.tags.SystemRole;
 
 export namespace helios::engine::modules::ui::widgets::systems {
 
@@ -114,6 +116,9 @@ export namespace helios::engine::modules::ui::widgets::systems {
 
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+
 
         /**
          * @brief Constructs the system with a state-to-menu policy.

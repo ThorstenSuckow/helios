@@ -46,7 +46,7 @@ helios
 │   │   ├── world         # GameWorld, Level, UpdateContext, Manager
 │   │   ├── gameloop      # GameLoop, Phase, Pass
 │   │   ├── pooling       # GameObjectPool, PoolManager, PoolRegistry
-│   │   ├── messaging     # CommandBuffer, Dispatchers, EventBus
+│   │   ├── messaging     # CommandBuffer, EventBus
 │   │   └── spawn         # SpawnManager, SpawnScheduler, behaviors, policies
 │   ├── modules       # Domain-specific components and systems
 │   │   ├── physics       # Collision, motion systems

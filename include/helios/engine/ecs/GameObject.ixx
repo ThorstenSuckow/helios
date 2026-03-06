@@ -25,7 +25,7 @@ import helios.engine.ecs.components.HierarchyComponent;
 
 import helios.engine.ecs.ComponentOpsRegistry;
 
-import helios.engine.core.data.ComponentTypeId;
+import helios.engine.ecs.types.ComponentTypeId;
 import helios.core.data;
 
 
@@ -116,7 +116,7 @@ export namespace helios::engine::ecs {
          *
          * @return Generator yielding ComponentTypeId for each attached component.
          */
-        [[nodiscard]] std::generator<helios::engine::core::data::ComponentTypeId>
+        [[nodiscard]] std::generator<helios::engine::ecs::types::ComponentTypeId>
         componentTypeIds() const {
             return entityManager_->componentTypeIds(entityHandle_);
         }
@@ -165,7 +165,7 @@ export namespace helios::engine::ecs {
 
             auto* cmp = entityManager_->emplace<T>(entityHandle_, std::forward<Args>(args)...);
 
-            auto typeId = helios::engine::core::data::ComponentTypeId::id<T>();
+            auto typeId = helios::engine::ecs::types::ComponentTypeId::id<T>();
             const auto ops = helios::engine::ecs::ComponentOpsRegistry::ops(typeId);
             void* raw = entityManager_->raw(entityHandle_, typeId);
 
@@ -215,7 +215,7 @@ export namespace helios::engine::ecs {
          *
          * @return Raw void pointer to the component, or nullptr if not found.
          */
-        void* raw(const helios::engine::core::data::ComponentTypeId typeId) {
+        void* raw(const helios::engine::ecs::types::ComponentTypeId typeId) {
             return entityManager_->raw(entityHandle_, typeId);
         }
 
@@ -262,7 +262,7 @@ export namespace helios::engine::ecs {
          *
          * @return True if the component is attached, false otherwise.
          */
-        bool has(helios::engine::core::data::ComponentTypeId typeId) {
+        bool has(helios::engine::ecs::types::ComponentTypeId typeId) {
             return entityManager_->has(entityHandle_, typeId);
         }
 
@@ -271,7 +271,7 @@ export namespace helios::engine::ecs {
          *
          * @param typeId The component type identifier.
          */
-        void enableComponent(const helios::engine::core::data::ComponentTypeId typeId) {
+        void enableComponent(const helios::engine::ecs::types::ComponentTypeId typeId) {
             entityManager_->enable(entityHandle_, typeId);
         }
 
@@ -280,7 +280,7 @@ export namespace helios::engine::ecs {
          *
          * @param typeId The component type identifier.
          */
-        void disableComponent(const helios::engine::core::data::ComponentTypeId typeId) {
+        void disableComponent(const helios::engine::ecs::types::ComponentTypeId typeId) {
             entityManager_->disable(entityHandle_, typeId);
         }
 

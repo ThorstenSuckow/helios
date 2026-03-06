@@ -18,10 +18,12 @@ import helios.engine.state.StateToIdMapPair;
 
 import helios.engine.runtime.world.UpdateContext;
 
-import helios.engine.core.data;
+import helios.engine.common.types.ViewportId;
 
 using namespace helios::engine::state;
-using namespace helios::engine::core::data;
+using namespace helios::engine::common::types;
+
+import helios.engine.common.tags.SystemRole;
 
 export namespace helios::engine::modules::rendering::viewport::systems {
 
@@ -63,6 +65,8 @@ export namespace helios::engine::modules::rendering::viewport::systems {
         StateToIdMapPair<StateLft, StateRgt, ViewportId> stateToIdMapPair_;
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
 
         /**
          * @brief Constructs the system with a state-to-ID map pair.

@@ -73,30 +73,30 @@ int main() {
     constexpr size_t OBJECT_AMOUNT_X = GRID_X * CELL_LENGTH / SPACESHIP_LENGTH;
     constexpr size_t OBJECT_AMOUNT_Y = GRID_Y * CELL_LENGTH / SPACESHIP_LENGTH;
 
-    constexpr helios::engine::core::data::PrefabId ProjectilePrefabId{"projectile"};
-    constexpr helios::engine::core::data::PrefabId PurpleEnemyPrefabId{"purple_enemy"};
-    constexpr helios::engine::core::data::PrefabId OrangeEnemyPrefabId{"orange_enemy"};
-    constexpr helios::engine::core::data::PrefabId BlueEnemyPrefabId{"blue_enemy"};
+    constexpr helios::engine::common::types::PrefabId ProjectilePrefabId{"projectile"};
+    constexpr helios::engine::common::types::PrefabId PurpleEnemyPrefabId{"purple_enemy"};
+    constexpr helios::engine::common::types::PrefabId OrangeEnemyPrefabId{"orange_enemy"};
+    constexpr helios::engine::common::types::PrefabId BlueEnemyPrefabId{"blue_enemy"};
 
-    constexpr helios::engine::core::data::GameObjectPoolId ProjectilePoolId{"projectile_pool"};
-    constexpr helios::engine::core::data::GameObjectPoolId PurpleEnemyPoolId{"purple_pool"};
-    constexpr helios::engine::core::data::GameObjectPoolId OrangeEnemyPoolId{"orange_pool"};
-    constexpr helios::engine::core::data::GameObjectPoolId BlueEnemyPoolId{"blue_pool"};
+    constexpr helios::engine::runtime::pooling::types::GameObjectPoolId ProjectilePoolId{"projectile_pool"};
+    constexpr helios::engine::runtime::pooling::types::GameObjectPoolId PurpleEnemyPoolId{"purple_pool"};
+    constexpr helios::engine::runtime::pooling::types::GameObjectPoolId OrangeEnemyPoolId{"orange_pool"};
+    constexpr helios::engine::runtime::pooling::types::GameObjectPoolId BlueEnemyPoolId{"blue_pool"};
 
-    constexpr helios::engine::core::data::SpawnProfileId ProjectileSpawnSpawnProfileId{"projectile_spawn"};
-    constexpr helios::engine::core::data::SpawnProfileId RandomSpawnSpawnProfileId{"random_spawn"};
-    constexpr helios::engine::core::data::SpawnProfileId BlueMassSpawnProfileId{"blue_spawn_profile1"};
-    constexpr helios::engine::core::data::SpawnProfileId LeftColumnSpawnProfileId{"orange_left_spawn1"};
-    constexpr helios::engine::core::data::SpawnProfileId RightColumnSpawnProfileId{"orange_right_spawn_1"};
-    constexpr helios::engine::core::data::SpawnProfileId TopRowSpawnProfileId{"orange_top_spawn_1"};
-    constexpr helios::engine::core::data::SpawnProfileId BottomRowSpawnProfileId{"orange_bottom_spawn_1"};
+    constexpr helios::engine::runtime::spawn::types::SpawnProfileId ProjectileSpawnSpawnProfileId{"projectile_spawn"};
+    constexpr helios::engine::runtime::spawn::types::SpawnProfileId RandomSpawnSpawnProfileId{"random_spawn"};
+    constexpr helios::engine::runtime::spawn::types::SpawnProfileId BlueMassSpawnProfileId{"blue_spawn_profile1"};
+    constexpr helios::engine::runtime::spawn::types::SpawnProfileId LeftColumnSpawnProfileId{"orange_left_spawn1"};
+    constexpr helios::engine::runtime::spawn::types::SpawnProfileId RightColumnSpawnProfileId{"orange_right_spawn_1"};
+    constexpr helios::engine::runtime::spawn::types::SpawnProfileId TopRowSpawnProfileId{"orange_top_spawn_1"};
+    constexpr helios::engine::runtime::spawn::types::SpawnProfileId BottomRowSpawnProfileId{"orange_bottom_spawn_1"};
 
-    constexpr helios::engine::core::data::SpawnRuleId PurpleEnemySpawnConditionId{"purple_spawn_rule"};
-    constexpr helios::engine::core::data::SpawnRuleId BlueMassSpawnConditionId{"blue_mass_spawn1"};
-    constexpr helios::engine::core::data::SpawnRuleId OrangeSpawnRuleLeftColumn{"orange_spawn_rule_1"};
-    constexpr helios::engine::core::data::SpawnRuleId OrangeSpawnRuleTopRow{"orange_spawn_rule_3"};
-    constexpr helios::engine::core::data::SpawnRuleId OrangeSpawnRuleRightColumn{"orange_spawn_rule_2"};
-    constexpr helios::engine::core::data::SpawnRuleId OrangeSpawnRuleBottomRow{"orange_spawn_rule_4"};
+    constexpr helios::engine::runtime::spawn::types::SpawnRuleId PurpleEnemySpawnConditionId{"purple_spawn_rule"};
+    constexpr helios::engine::runtime::spawn::types::SpawnRuleId BlueMassSpawnConditionId{"blue_mass_spawn1"};
+    constexpr helios::engine::runtime::spawn::types::SpawnRuleId OrangeSpawnRuleLeftColumn{"orange_spawn_rule_1"};
+    constexpr helios::engine::runtime::spawn::types::SpawnRuleId OrangeSpawnRuleTopRow{"orange_spawn_rule_3"};
+    constexpr helios::engine::runtime::spawn::types::SpawnRuleId OrangeSpawnRuleRightColumn{"orange_spawn_rule_2"};
+    constexpr helios::engine::runtime::spawn::types::SpawnRuleId OrangeSpawnRuleBottomRow{"orange_spawn_rule_4"};
 
     // ========================================
     // 2. Application and Window Setup
@@ -111,7 +111,7 @@ int main() {
     auto win = dynamic_cast<GLFWWindow*>(app->current());
     auto mainViewport = std::make_shared<Viewport>(
         0.0f, 0.0f, 1.0f, 1.0f,
-        helios::engine::core::data::ViewportId{"mainViewport"});
+        helios::engine::common::types::ViewportId{"mainViewport"});
 
     mainViewport->setClearFlags(std::to_underlying(ClearFlags::Color))
                   .setClearColor(vec4f(0.051f, 0.051f, 0.153f, 1.0f));
@@ -169,7 +169,7 @@ int main() {
     // ========================================
     auto frustumCullingStrategy = std::make_unique<CullNoneStrategy>();
     auto scene = std::make_unique<helios::scene::Scene>(
-        std::move(frustumCullingStrategy), helios::engine::core::data::SceneId{"mainScene"});
+        std::move(frustumCullingStrategy), helios::engine::modules::scene::types::SceneId{"mainScene"});
     sceneToViewportMap.add(scene.get(), mainViewport.get());
 
     auto mainViewportCam = std::make_unique<helios::scene::Camera>();
@@ -536,8 +536,8 @@ int main() {
     // ========================================
     // 7. Manager Registration
     // ========================================
-    auto& poolManager = gameWorld.registerManager<helios::engine::runtime::pooling::GameObjectPoolManager>();
-    auto& spawnManager = gameWorld.registerManager<helios::engine::runtime::spawn::SpawnManager>();
+    auto& poolManager = gameWorld.registerResource<helios::engine::runtime::pooling::GameObjectPoolManager>();
+    auto& spawnManager = gameWorld.registerResource<helios::engine::runtime::spawn::SpawnManager>();
 
     // Spawn system
     helios::engine::builder::spawnSystem::SpawnSystemFactory::configure(poolManager, spawnManager)
@@ -623,7 +623,9 @@ int main() {
 
     using namespace helios::engine::mechanics::gamestate::types;
     using namespace helios::engine::mechanics::match::types;
-    using namespace helios::engine::core::data;
+    using namespace helios::engine::common::types;
+    using namespace helios::engine::modules::scene::types;
+    using namespace helios::engine::runtime::pooling::types;
 
     // ----------------------------------------
     // 8.1 State-to-Viewport Mapping

@@ -16,14 +16,17 @@ export module helios.engine.builder.spawnSystem.builders.configs.SpawnPoolConfig
 
 import helios.engine.ecs;
 
-import helios.engine.core.data;
+import helios.engine.runtime.pooling.types.GameObjectPoolId;
+import helios.engine.common.types.PrefabId;
 
 import helios.engine.runtime.pooling;
 
 import helios.engine.runtime.spawn;
+import helios.engine.runtime.spawn.types;
 
 import helios.math;
 
+using namespace helios::engine::runtime::spawn::types;
 export namespace helios::engine::builder::spawnSystem::builders::configs {
 
     // Forward declarations for nested builder return types.
@@ -72,8 +75,8 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          * @return SpawnPoolConfig for fluent configuration.
          */
         [[nodiscard]] SpawnPoolConfig pool(
-            helios::engine::core::data::GameObjectPoolId poolId,
-            helios::engine::core::data::PrefabId prefabId,
+            helios::engine::runtime::pooling::types::GameObjectPoolId poolId,
+            helios::engine::common::types::PrefabId prefabId,
             size_t poolSize
         );
     };
@@ -94,7 +97,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
         /**
          * @brief Unique identifier for this rule.
          */
-        helios::engine::core::data::SpawnRuleId ruleId_;
+        helios::engine::runtime::spawn::types::SpawnRuleId ruleId_;
 
         /**
          * @brief Condition determining when to spawn.
@@ -116,7 +119,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          */
         SpawnRuleConfig(
             SpawnProfileConfig& parent,
-            helios::engine::core::data::SpawnRuleId ruleId
+            helios::engine::runtime::spawn::types::SpawnRuleId ruleId
         ) : parent_(parent), ruleId_(ruleId),
             condition_(nullptr), amountProvider_(nullptr) {}
 
@@ -234,12 +237,12 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
         /**
          * @brief Profile identifier.
          */
-        helios::engine::core::data::SpawnProfileId profileId_;
+        helios::engine::runtime::spawn::types::SpawnProfileId profileId_;
 
         /**
          * @brief Pool to acquire entities from.
          */
-        helios::engine::core::data::GameObjectPoolId poolId_;
+        helios::engine::runtime::pooling::types::GameObjectPoolId poolId_;
 
         /**
          * @brief Placement strategy for spawned entities.
@@ -269,8 +272,8 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
         SpawnProfileConfig(
             SpawnPoolConfig& parent,
             helios::engine::runtime::spawn::SpawnManager& spawnManager,
-            helios::engine::core::data::SpawnProfileId profileId,
-            helios::engine::core::data::GameObjectPoolId poolId
+            helios::engine::runtime::spawn::types::SpawnProfileId profileId,
+            helios::engine::runtime::pooling::types::GameObjectPoolId poolId
         ) : parent_(parent), spawnManager_(spawnManager),
             profileId_(profileId), poolId_(poolId) {}
 
@@ -375,7 +378,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          *
          * @return Reference to the new rule config for chaining.
          */
-        SpawnRuleConfig& scheduledBy(helios::engine::core::data::SpawnRuleId ruleId) {
+        SpawnRuleConfig& scheduledBy(helios::engine::runtime::spawn::types::SpawnRuleId ruleId) {
             rules_.push_back(std::make_unique<SpawnRuleConfig>(*this, ruleId));
             return *rules_.back();
         }
@@ -385,7 +388,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          *
          * @return The spawn profile ID.
          */
-        [[nodiscard]] helios::engine::core::data::SpawnProfileId profileId() const noexcept {
+        [[nodiscard]] helios::engine::runtime::spawn::types::SpawnProfileId profileId() const noexcept {
             return profileId_;
         }
 
@@ -394,13 +397,13 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          *
          * @return Vector of built spawn rules (may be empty).
          */
-        std::vector<std::pair<helios::engine::core::data::SpawnProfileId,
+        std::vector<std::pair<helios::engine::runtime::spawn::types::SpawnProfileId,
                               std::unique_ptr<helios::engine::runtime::spawn::policy::SpawnRule>>>
         commit() {
             spawnManager_.addSpawnProfile(
                 profileId_,
-                std::make_unique<helios::engine::runtime::spawn::SpawnProfile>(
-                    helios::engine::runtime::spawn::SpawnProfile{
+                std::make_unique<SpawnProfile>(
+                    SpawnProfile{
                         .gameObjectPoolId = poolId_,
                         .spawnPlacer = std::move(placer_),
                         .spawnInitializer = std::move(initializer_)
@@ -408,7 +411,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
                 )
             );
 
-            std::vector<std::pair<helios::engine::core::data::SpawnProfileId,
+            std::vector<std::pair<helios::engine::runtime::spawn::types::SpawnProfileId,
                                   std::unique_ptr<helios::engine::runtime::spawn::policy::SpawnRule>>> result;
             for (auto& rule : rules_) {
                 result.emplace_back(profileId_, rule->build());
@@ -451,12 +454,12 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
         /**
          * @brief Pool identifier.
          */
-        helios::engine::core::data::GameObjectPoolId poolId_;
+        helios::engine::runtime::pooling::types::GameObjectPoolId poolId_;
 
         /**
          * @brief Identifier of the prefab template for cloning.
          */
-        helios::engine::core::data::PrefabId prefabId_;
+        helios::engine::common::types::PrefabId prefabId_;
 
         /**
          * @brief Number of instances to pre-allocate.
@@ -484,8 +487,8 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
         SpawnPoolConfig(
             helios::engine::runtime::pooling::GameObjectPoolManager& poolManager,
             helios::engine::runtime::spawn::SpawnManager& spawnManager,
-            helios::engine::core::data::GameObjectPoolId poolId,
-            helios::engine::core::data::PrefabId prefabId,
+            helios::engine::runtime::pooling::types::GameObjectPoolId poolId,
+            helios::engine::common::types::PrefabId prefabId,
             size_t poolSize
         ) : poolManager_(poolManager), spawnManager_(spawnManager),
             poolId_(poolId), prefabId_(prefabId), size_(poolSize) {}
@@ -498,7 +501,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          *
          * @return Reference to the new profile config for chaining.
          */
-        SpawnProfileConfig& profile(helios::engine::core::data::SpawnProfileId profileId) {
+        SpawnProfileConfig& profile(helios::engine::runtime::spawn::types::SpawnProfileId profileId) {
             profiles_.push_back(std::make_unique<SpawnProfileConfig>(
                 *this, spawnManager_, profileId, poolId_
             ));
@@ -626,8 +629,8 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
     }
 
     inline SpawnPoolConfig SpawnSystemConfigurator::pool(
-        helios::engine::core::data::GameObjectPoolId poolId,
-        helios::engine::core::data::PrefabId prefabId,
+        helios::engine::runtime::pooling::types::GameObjectPoolId poolId,
+        helios::engine::common::types::PrefabId prefabId,
         size_t poolSize
     ) {
         return SpawnPoolConfig{poolManager_, spawnManager_, poolId, prefabId, poolSize};

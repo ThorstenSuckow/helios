@@ -1,6 +1,6 @@
-# System & TypedSystem
+# System
 
-**System** is the abstract base class for game logic processors. **TypedSystem\<T\>** is an internal wrapper that adapts plain system classes to the System interface via composition. Concrete systems are plain classes — they do not inherit from System.
+**System** is a type-erased wrapper for game logic processors. Concrete systems are plain classes that provide an `update(UpdateContext&)` method — they do not inherit from `System`. The wrapper uses the Concept/Model pattern to erase the concrete type at compile time.
 
 ## Overview
 
@@ -24,7 +24,7 @@ public:
 };
 ```
 
-Systems are registered via `SystemRegistry::add<T>()` which wraps them in a `TypedSystem<T>` internally.
+Systems are registered via `SystemRegistry::add<T>()` which wraps them in a `System` internally.
 
 ## Architecture
 
@@ -32,7 +32,7 @@ Systems are registered via `SystemRegistry::add<T>()` which wraps them in a `Typ
 ┌────────────────────────────────────────────────────────────────┐
 │                       SystemRegistry                           │
 │  ┌──────────────────┐  ┌──────────────────┐                    │
-│  │ TypedSystem<Phys>│  │ TypedSystem<Coll>│  ...               │
+│  │ System           │  │ System           │  ...               │
 │  │  ┌────────────┐  │  │  ┌────────────┐  │                    │
 │  │  │PhysicsSys  │  │  │  │CollisionSys│  │  (plain classes)   │
 │  │  └────────────┘  │  │  └────────────┘  │                    │
@@ -45,36 +45,20 @@ Systems are registered via `SystemRegistry::add<T>()` which wraps them in a `Typ
 └────────────────────────────────────────────────────────────────┘
 ```
 
-## Class Hierarchy
+## Type Erasure Design
 
 ```
-System                           (abstract, internal infrastructure)
-  └── TypedSystem<T>             (composition wrapper, owns T by value)
-        └── T: PhysicsSystem     (plain class, provides update())
-        └── T: CollisionSystem   (plain class, provides update() + init())
+System (value type, owns erased Concept via unique_ptr)
+  └── Concept              (internal virtual interface)
+        └── Model<T>       (typed wrapper, owns T by value)
+              └── T        (plain class, provides update())
 ```
 
-User code defines plain classes. `TypedSystem<T>` and `System` are infrastructure-only.
+User code defines plain classes. `System` is infrastructure-only and erases the concrete type.
 
 ## API Reference
 
-### System (Abstract Base — Internal)
-
-```cpp
-namespace helios::engine::runtime::world {
-
-    class System {
-    public:
-        virtual ~System() = default;
-        virtual void initSystem(GameWorld& gameWorld) noexcept = 0;
-        virtual void updateSystem(UpdateContext& updateContext) noexcept = 0;
-    };
-}
-```
-
-`System` defines the virtual interface used by the game loop. User code does **not** derive from it.
-
-### TypedSystem (Composition Wrapper — Internal)
+### System (Type-Erased Wrapper)
 
 ```cpp
 namespace helios::engine::runtime::world {
@@ -89,49 +73,60 @@ namespace helios::engine::runtime::world {
         { t.update(ctx) } -> std::same_as<void>;
     };
 
-    template<typename T>
-    class TypedSystem : public System {
-        T system_;                              // owned by value
+    class System {
+        class Concept { /* virtual update(), init(), underlying() */ };
 
-        void initSystem(GameWorld&) noexcept final;
-        void updateSystem(UpdateContext&) noexcept final;
+        template<typename T>
+        class Model final : public Concept {
+            T system_;   // owned by value
+        };
+
+        std::unique_ptr<Concept> pimpl_;
 
     public:
-        T& underlying() noexcept;
-        const T& underlying() const noexcept;
+        template<typename T>
+        requires HasUpdate<T>
+        explicit System(T system);
+
+        void update(UpdateContext&) noexcept;
+        void init(GameWorld&) noexcept;
+
+        [[nodiscard]] void* underlying() noexcept;
+        [[nodiscard]] const void* underlying() const noexcept;
     };
 }
 ```
 
-`TypedSystem<T>` bridges `System` and the concrete type T:
+`System` erases the concrete type via the Concept/Model pattern:
 
-- **`initSystem()`** conditionally calls `T::init(GameWorld&)` if `HasInit<T>` is satisfied.
-- **`updateSystem()`** delegates to `T::update(UpdateContext&)` (enforced via `static_assert`).
+- **`update()`** delegates to `T::update(UpdateContext&)` (required via `HasUpdate<T>`).
+- **`init()`** conditionally calls `T::init(GameWorld&)` if `HasInit<T>` is satisfied.
+- **`underlying()`** returns a type-erased pointer to the owned system instance.
 
-Both overrides are `final`.
+`System` is move-only (non-copyable).
 
 ### SystemRegistry
 
+`SystemRegistry` is a type alias for `ConceptModelRegistry<System, SystemTypeId>` (from `helios.core.container`):
+
 ```cpp
+import helios.core.container.ConceptModelRegistry;
+import helios.engine.runtime.world.System;
+import helios.engine.runtime.world.types.SystemTypeId;
+
 namespace helios::engine::runtime::world {
 
-    class SystemRegistry {
-    public:
-        template<typename T, typename... Args>
-        T& add(Args&&... args);
+    using SystemRegistry = helios::core::container::ConceptModelRegistry<System, types::SystemTypeId>;
 
-        template<typename T>
-        [[nodiscard]] T* getSystem() const;
-
-        template<typename T>
-        [[nodiscard]] bool hasSystem() const;
-
-        [[nodiscard]] std::span<System* const> systems() noexcept;
-    };
+    // Inherited API from ConceptModelRegistry:
+    // template<typename T, typename... Args> T& add(Args&&...);
+    // template<typename T> [[nodiscard]] T* item() const;
+    // template<typename T> [[nodiscard]] bool has() const;
+    // [[nodiscard]] std::span<System* const> items() const noexcept;
 }
 ```
 
-`SystemRegistry` creates and owns `TypedSystem<T>` wrappers. `add<T>()` returns a reference to the underlying T instance.
+`SystemRegistry` creates and owns `System` wrappers. `add<T>()` returns a reference to the underlying T instance. `items()` returns a span in insertion order for deterministic iteration.
 
 ### Required: update()
 
@@ -187,7 +182,7 @@ public:
 
         if (spawnTimer_ >= spawnInterval_) {
             spawnTimer_ = 0.0f;
-            ctx.commandBuffer().add<SpawnCommand>(position, enemyType);
+            ctx.queueCommand<SpawnCommand>(position, enemyType);
         }
     }
 };
@@ -251,7 +246,7 @@ void update(UpdateContext& ctx) noexcept {
         HealthComponent, Active
     >().whereEnabled()) {
         if (health->isDead()) {
-            ctx.commandBuffer().add<DespawnCommand>(entity.entityHandle());
+            ctx.queueCommand<DespawnCommand>(entity.entityHandle());
         }
     }
 }

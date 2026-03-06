@@ -40,7 +40,7 @@ using namespace helios::util::time;
 
 // Engine core
 using namespace helios::engine::bootstrap;
-using namespace helios::engine::core::data;
+using namespace helios::engine::common::types;
 using namespace helios::engine::state;
 using namespace helios::engine::tooling;
 
@@ -67,6 +67,7 @@ using namespace helios::engine::mechanics::match::systems;
 // Mechanics: scoring, timing, combat
 using namespace helios::engine::mechanics::scoring;
 using namespace helios::engine::mechanics::scoring::systems;
+using namespace helios::engine::mechanics::scoring::types;
 using namespace helios::engine::mechanics::timing;
 using namespace helios::engine::mechanics::timing::systems;
 using namespace helios::engine::mechanics::combat::components;
@@ -74,6 +75,7 @@ using namespace helios::engine::mechanics::combat::systems;
 
 // Mechanics: spawn, bounds, damage, health, input, lifecycle
 using namespace helios::engine::mechanics::spawn::systems;
+using namespace helios::engine::runtime::spawn::types;
 using namespace helios::engine::mechanics::bounds::systems;
 using namespace helios::engine::mechanics::damage::systems;
 using namespace helios::engine::mechanics::health::systems;
@@ -96,6 +98,8 @@ using namespace helios::engine::modules::scene::types;
 using namespace helios::engine::modules::rendering::viewport::systems;
 using namespace helios::engine::modules::ui;
 using namespace helios::engine::modules::ui::widgets::systems;
+using namespace helios::engine::modules::ui::widgets::commands;
+using namespace helios::engine::modules::ui::widgets::types;
 using namespace helios::engine::modules::ui::binding::systems;
 using namespace helios::engine::modules::ui::transform::systems;
 using namespace helios::engine::modules::ai::systems;

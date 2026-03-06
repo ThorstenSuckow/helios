@@ -29,8 +29,8 @@ The **Entity-Component-System (ECS)** architecture in helios separates data (Com
 ┌───────────────────┐   ┌───────────────────────────────────┐
 │     Systems       │   │     Component Reflection          │
 │  ┌──────────────┐ │   │  ┌─────────────┐ ┌─────────────┐  │
-│  │ TypedSystem<>│ │   │  │ComponentOps │ │  Traits     │  │
-│  │  (wrapper)   │ │   │  │  Registry   │ │ (concepts)  │  │
+│  │   System     │ │   │  │ComponentOps │ │  Traits     │  │
+│  │ (type-erased)│ │   │  │  Registry   │ │ (concepts)  │  │
 │  └──────────────┘ │   │  └─────────────┘ └─────────────┘  │
 └───────────────────┘   └───────────────────────────────────┘
 ```
@@ -47,8 +47,7 @@ The `helios.engine.ecs` module exports the following classes:
 | [EntityRegistry](entity-registry.md) | Handle allocation & validation | 
 | [EntityManager](entity-manager.md) | Component storage via SparseSets | 
 | [View](view.md) | Component-based entity queries | 
-| [System](system.md) | Abstract base class (internal infrastructure) |
-| [TypedSystem](system.md#typedsystem-composition-wrapper--internal) | Composition wrapper adapting plain systems |
+| [System](system.md) | Type-erased wrapper for game logic processors |
 | [SystemRegistry](system.md#systemregistry) | Type-indexed registry for system instances |
 | [SparseSet](../sparse-set.md) | O(1) component storage | 
 | [Traits](traits.md) | Compile-time lifecycle hook detection | 
@@ -67,13 +66,15 @@ player.add<TransformComponent>(position);
 player.add<HealthComponent>(100.0f);
 player.add<VelocityComponent>();
 
-// 3. Query entities in systems
-for (auto [entity, transform, velocity, active] : gameWorld.view<
-    TransformComponent,
-    VelocityComponent,
-    Active
->().whereEnabled()) {
-    transform->position += velocity->direction * deltaTime;
+// 3. Query entities in a system
+void update(UpdateContext& ctx) noexcept {
+    for (auto [entity, transform, velocity, active] : ctx.view<
+        TransformComponent,
+        VelocityComponent,
+        Active
+    >().whereEnabled()) {
+        transform->position += velocity->direction * ctx.deltaTime();
+    }
 }
 ```
 
@@ -128,7 +129,7 @@ if constexpr (traits::HasOnAcquire<T>) {
 
 ### Querying & Processing
 - [View](view.md) - Efficient component queries
-- [System & TypedSystem](system.md) - Writing game logic
+- [System](system.md) - Writing game logic
 
 ### Storage & Reflection
 - [SparseSet](../sparse-set.md) - The underlying data structure

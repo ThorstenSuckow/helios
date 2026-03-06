@@ -49,7 +49,6 @@ This module provides a complete spawning pipeline for managing entity lifecycle 
 |-----------|---------|
 | `behavior/` | SpawnPlacer and SpawnInitializer interfaces with implementations |
 | `commands/` | Spawn and despawn commands for deferred execution |
-| `dispatcher/` | Command dispatchers routing to managers |
 | `events/` | Frame-level events for spawn confirmation |
 | `policy/` | Spawn rules, conditions, and amount providers |
 | `scheduling/` | SpawnScheduler and SpawnPlan management |

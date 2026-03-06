@@ -12,10 +12,13 @@ export module helios.engine.runtime.spawn.commands.ScheduledSpawnPlanCommand;
 import helios.engine.runtime.spawn.scheduling.ScheduledSpawnPlan;
 
 
-import helios.engine.runtime.spawn.SpawnContext;
+import helios.engine.runtime.spawn.types.SpawnContext;
 import helios.engine.runtime.spawn.scheduling.SpawnPlan;
-import helios.engine.core.data.SpawnProfileId;
+import helios.engine.runtime.spawn.types.SpawnProfileId;
 
+
+using namespace helios::engine::runtime::spawn::types;
+using namespace helios::engine::runtime::spawn::scheduling;
 export namespace helios::engine::runtime::spawn::commands {
 
     /**
@@ -40,11 +43,20 @@ export namespace helios::engine::runtime::spawn::commands {
      */
     class ScheduledSpawnPlanCommand {
 
-        helios::engine::core::data::SpawnProfileId spawnProfileId_;
+        /**
+         * @brief Profile identifying the spawn configuration.
+         */
+        helios::engine::runtime::spawn::types::SpawnProfileId spawnProfileId_;
 
+        /**
+         * @brief The spawn plan containing rule ID and amount.
+         */
         helios::engine::runtime::spawn::scheduling::SpawnPlan spawnPlan_;
 
-        helios::engine::runtime::spawn::SpawnContext spawnContext_;
+        /**
+         * @brief Context providing spawn-time information.
+         */
+        SpawnContext spawnContext_;
 
     public:
 
@@ -56,9 +68,9 @@ export namespace helios::engine::runtime::spawn::commands {
          * @param spawnContext The context for spawn operations.
          */
         explicit ScheduledSpawnPlanCommand(
-            const helios::engine::core::data::SpawnProfileId spawnProfileId,
-            const helios::engine::runtime::spawn::scheduling::SpawnPlan spawnPlan,
-            const helios::engine::runtime::spawn::SpawnContext& spawnContext
+            const SpawnProfileId spawnProfileId,
+            const SpawnPlan spawnPlan,
+            const SpawnContext& spawnContext
         ) :
             spawnProfileId_(spawnProfileId),
             spawnPlan_(spawnPlan),
@@ -70,7 +82,7 @@ export namespace helios::engine::runtime::spawn::commands {
          *
          * @return The spawn profile identifier encapsulated within the ScheduledSpawnPlanCommand.
          */
-        [[nodiscard]] helios::engine::core::data::SpawnProfileId spawnProfileId() const noexcept {
+        [[nodiscard]] SpawnProfileId spawnProfileId() const noexcept {
             return spawnProfileId_;
         }
 
@@ -79,7 +91,7 @@ export namespace helios::engine::runtime::spawn::commands {
          *
          * @return A structured plan that can be executed by the spawn management system.
          */
-        [[nodiscard]] helios::engine::runtime::spawn::scheduling::SpawnPlan spawnPlan() const noexcept {
+        [[nodiscard]] SpawnPlan spawnPlan() const noexcept {
             return spawnPlan_;
         }
 
@@ -88,7 +100,7 @@ export namespace helios::engine::runtime::spawn::commands {
          *
          * @return The spawn context.
          */
-        [[nodiscard]] helios::engine::runtime::spawn::SpawnContext spawnContext() const noexcept {
+        [[nodiscard]] SpawnContext spawnContext() const noexcept {
             return spawnContext_;
         }
 

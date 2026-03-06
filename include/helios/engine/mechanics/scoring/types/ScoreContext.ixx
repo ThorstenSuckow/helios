@@ -1,12 +1,14 @@
 /**
- * @file ScoreValueContext.ixx
+ * @file ScoreContext.ixx
  * @brief Data structure for score update information.
  */
 module;
 
 export module helios.engine.mechanics.scoring.types.ScoreValueContext;
 
-import helios.engine.core.data;
+
+import helios.engine.mechanics.scoring.types.ScoreTypeId;
+import helios.engine.mechanics.scoring.types.ScorePoolId;
 import helios.core.types;
 
 export namespace helios::engine::mechanics::scoring::types {
@@ -22,12 +24,12 @@ export namespace helios::engine::mechanics::scoring::types {
         /**
          * @brief Type identifier for the score (e.g., KillReward).
          */
-        helios::engine::core::data::ScoreTypeId scoreTypeId;
+        ScoreTypeId scoreTypeId;
 
         /**
          * @brief Target score pool to receive this score.
          */
-        helios::engine::core::data::ScorePoolId scorePoolId;
+        ScorePoolId scorePoolId;
 
         /**
          * @brief The score value to add.

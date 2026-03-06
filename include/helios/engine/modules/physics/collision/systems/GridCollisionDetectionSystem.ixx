@@ -44,6 +44,8 @@ using namespace helios::engine::modules::physics::collision::events;
 using namespace helios::engine::mechanics::lifecycle::components;
 
 #define HELIOS_LOG_SCOPE "helios::engine::modules::physics::systems::GridCollisionDetectionSystem"
+import helios.engine.common.tags.SystemRole;
+
 export namespace helios::engine::modules::physics::collision::systems {
 
     /**
@@ -396,6 +398,8 @@ export namespace helios::engine::modules::physics::collision::systems {
         }
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
 
         /**
          * @brief Constructs a GridCollisionDetectionSystem with specified bounds and cell size.

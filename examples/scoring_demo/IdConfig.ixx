@@ -8,12 +8,14 @@ module;
 
 export module helios.examples.scoring.IdConfig;
 
-import helios.math;
-import helios.engine.core.data;
+import helios;
 
 export namespace helios::examples::scoring::IdConfig {
 
-   using namespace helios::engine::core::data;
+    using namespace helios::engine::common::types;
+    using namespace helios::engine::mechanics::timing::types;
+    using namespace helios::engine::runtime::pooling::types;
+    using namespace helios::engine::runtime::spawn::types;
 
     constexpr PrefabId BlueEnemyPrefab("BlueEnemy");
     constexpr PrefabId OrangeEnemyPrefab("OrangeEnemy");

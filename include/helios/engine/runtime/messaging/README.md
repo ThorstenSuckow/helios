@@ -18,10 +18,9 @@ This module provides the messaging backbone for the helios engine. It includes t
 | Class | Purpose |
 |-------|---------|
 | `CommandBuffer` | Abstract base for command buffers |
-| `CommandHandler` | Abstract base for type-erased handler storage |
-| `TypedCommandHandler<T>` | Type-safe handler for a specific command type |
 | `TypedCommandBuffer<...Cmds>` | Compile-time typed buffer with per-type queues |
 | `EngineCommandBuffer` | Concrete facade with all engine command types |
+| `CommandHandlerRegistry` | Registry storing typed submit functions |
 
 ### Event
 

@@ -11,7 +11,7 @@ export module helios.engine.ecs.ComponentReflector;
 import helios.engine.ecs.EntityHandle;
 import helios.engine.ecs.ComponentOps;
 import helios.engine.ecs.Traits;
-import helios.engine.core.data.ComponentTypeId;
+import helios.engine.ecs.types.ComponentTypeId;
 import helios.engine.ecs.ComponentOpsRegistry;
 import helios.engine.ecs.EntityManager;
 
@@ -140,7 +140,7 @@ export namespace helios::engine::ecs {
 
             };
 
-            const auto typeId = helios::engine::core::data::ComponentTypeId::id<T>();
+            const auto typeId = helios::engine::ecs::types::ComponentTypeId::id<T>();
 
             ComponentOpsRegistry::setOps(typeId, ops);
 

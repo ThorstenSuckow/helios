@@ -16,7 +16,7 @@ import helios.engine.ecs.SparseSet;
 import helios.engine.ecs.EntityManager;
 import helios.engine.ecs.GameObject;
 import helios.engine.ecs.EntityHandle;
-import helios.engine.core.data.EntityId;
+import helios.engine.ecs.types.EntityId;
 
 export namespace helios::engine::ecs {
 

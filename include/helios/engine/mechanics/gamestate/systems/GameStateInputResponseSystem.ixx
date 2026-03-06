@@ -20,6 +20,8 @@ import helios.engine.ecs;
 import helios.engine.runtime;
 
 
+import helios.engine.common.tags.SystemRole;
+
 export namespace helios::engine::mechanics::gamestate::systems {
 
     using namespace helios::input::types;
@@ -39,6 +41,8 @@ export namespace helios::engine::mechanics::gamestate::systems {
 
     public:
 
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+
         /**
          * @brief Processes input and submits state transition commands.
          *
@@ -52,13 +56,13 @@ export namespace helios::engine::mechanics::gamestate::systems {
 
                 switch (gameState) {
                     case GameState::Title:
-                        updateContext.commandBuffer().add<StateCommand<GameState>>(
+                        updateContext.queueCommand<StateCommand<GameState>>(
                             StateTransitionRequest<GameState>(GameState::Title, GameStateTransitionId::StartRequested)
                         );
                         break;
 
                     case GameState::Running:
-                        updateContext.commandBuffer().add<StateCommand<GameState>>(
+                        updateContext.queueCommand<StateCommand<GameState>>(
                             StateTransitionRequest<GameState>(GameState::Running, GameStateTransitionId::TogglePause)
                         );
                         break;

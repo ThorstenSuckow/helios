@@ -13,11 +13,13 @@ export module helios.engine.mechanics.lifecycle.systems.DelayedComponentEnablerS
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.mechanics.lifecycle.components.DelayedComponentEnabler;
-import helios.engine.core.data.ComponentTypeId;
+import helios.engine.ecs.types.ComponentTypeId;
 
 import helios.engine.ecs.ComponentOpsRegistry;
 
 import helios.engine.mechanics.lifecycle.components.Active;
+
+import helios.engine.common.tags.SystemRole;
 
 export namespace helios::engine::mechanics::lifecycle::systems {
 
@@ -43,10 +45,12 @@ export namespace helios::engine::mechanics::lifecycle::systems {
         /**
          * @brief Temporary buffer for components that completed their delay.
          */
-        std::vector<helios::engine::core::data::ComponentTypeId> sync_;
+        std::vector<helios::engine::ecs::types::ComponentTypeId> sync_;
 
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
         /**
          * @brief Processes all deferred components and activates expired ones.
          *

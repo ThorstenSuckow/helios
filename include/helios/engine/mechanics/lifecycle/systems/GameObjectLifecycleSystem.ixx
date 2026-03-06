@@ -41,6 +41,8 @@ using namespace helios::engine::mechanics::health::events;
 using namespace helios::engine::mechanics::spawn::components;
 using namespace helios::engine::runtime::spawn::commands;
 
+import helios.engine.common.tags.SystemRole;
+
 export namespace helios::engine::mechanics::lifecycle::systems {
 
     /**
@@ -55,6 +57,8 @@ export namespace helios::engine::mechanics::lifecycle::systems {
     class GameObjectLifecycleSystem {
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
 
         /**
          * @brief Processes health depletion events and enqueues despawn commands.
@@ -76,7 +80,7 @@ export namespace helios::engine::mechanics::lifecycle::systems {
                         if (hasHealthDepletedFlag(healthDepletedBehavior, HealthDepletedBehavior::Despawn)) {
                             if (auto* sbp = go->get<SpawnedByProfileComponent>()) {
                                 assert(sbp->spawnProfileId().value() != 0 && "Entity has no SpawnProfileId.");
-                                updateContext.commandBuffer().add<DespawnCommand>(go->entityHandle(), sbp->spawnProfileId());
+                                updateContext.queueCommand<DespawnCommand>(go->entityHandle(), sbp->spawnProfileId());
                             } else {
                                 go->setActive(false);
                                 /**

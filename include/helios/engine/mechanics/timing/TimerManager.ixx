@@ -16,22 +16,21 @@ export module helios.engine.mechanics.timing.TimerManager;
 import helios.engine.mechanics.timing.types;
 import helios.engine.mechanics.timing.commands;
 
-import helios.engine.runtime.messaging.command.TypedCommandHandler;
 import helios.engine.mechanics.timing.GameTimer;
 
-import helios.engine.core.data.GameTimerId;
+import helios.engine.mechanics.timing.types.GameTimerId;
 
-import helios.engine.runtime.world.Manager;
 import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.runtime.world.GameWorld;
 
 import helios.core.types;
 import helios.util.Guid;
+import helios.engine.common;
 
 using namespace helios::engine::mechanics::timing::commands;
 using namespace helios::engine::mechanics::timing::types;
-using namespace helios::engine::core::data;
+using namespace helios::engine::mechanics::timing::types;
 using namespace helios::engine::runtime::world;
 using namespace helios::engine::runtime::messaging::command;
 
@@ -40,9 +39,6 @@ export namespace helios::engine::mechanics::timing {
     /**
      * @brief Manager that owns game timers and processes timer control commands.
      *
-     * TimerManager implements the Manager interface for integration into the
-     * game loop flush cycle, and the TimerCommandHandler interface so that
-     * TimerCommandDispatcher can route TimerControlCommands to it.
      *
      * Pending control commands are collected via submit() and applied during
      * flush() at the beginning of each frame.
@@ -51,7 +47,7 @@ export namespace helios::engine::mechanics::timing {
      * @see TimerCommandHandler
      * @see Manager
      */
-    class TimerManager : public Manager, public TypedCommandHandler<TimerControlCommand> {
+    class TimerManager {
 
         /**
          * @brief Collection of game timers managed by this manager.
@@ -108,6 +104,7 @@ export namespace helios::engine::mechanics::timing {
         }
 
     public:
+        using EngineRoleTag = helios::engine::common::tags::ManagerRole;
 
         /**
          * @brief Registers a new game timer.
@@ -155,7 +152,7 @@ export namespace helios::engine::mechanics::timing {
          */
         void flush(
             helios::engine::runtime::world::UpdateContext& update_context
-        ) noexcept override {
+        ) noexcept {
 
             for (const auto& controlContext : pendingControlContexts_) {
                 auto* timer = gameTimer(controlContext.gameTimerId);
@@ -173,9 +170,7 @@ export namespace helios::engine::mechanics::timing {
          *
          * @return True if the command was accepted.
          */
-        bool submit(
-            const TimerControlCommand timerControlCommand
-        ) noexcept override {
+        bool submit(const TimerControlCommand timerControlCommand) noexcept {
             pendingControlContexts_.push_back(timerControlCommand.timerControlContext());
             return true;
         };
@@ -185,14 +180,14 @@ export namespace helios::engine::mechanics::timing {
          *
          * @param gameWorld The game world to register with.
          */
-        void init(helios::engine::runtime::world::GameWorld& gameWorld) override {
-            gameWorld.template registerCommandHandler<TypedCommandHandler<TimerControlCommand> >(*this);
+        void init(helios::engine::runtime::world::GameWorld& gameWorld) {
+            gameWorld.template registerCommandHandler<TimerControlCommand>(*this);
         }
 
         /**
          * @brief Resets all managed timers.
          */
-        void reset() override {
+        void reset() {
             for (auto& gameTimer : gameTimers_) {
                 gameTimer.reset();
             }

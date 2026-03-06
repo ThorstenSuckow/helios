@@ -20,6 +20,8 @@ import helios.engine.mechanics.lifecycle.components.Active;
 import helios.engine.mechanics.health.components;
 
 
+import helios.engine.common.tags.SystemRole;
+
 export namespace helios::engine::mechanics::health::systems {
 
     /**
@@ -31,6 +33,8 @@ export namespace helios::engine::mechanics::health::systems {
     class HealthUpdateClearSystem {
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
         /**
          * @brief Iterates all active HealthComponents and resets their dirty state.
          *

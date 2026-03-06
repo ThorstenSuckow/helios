@@ -16,7 +16,7 @@ import helios.rendering.ViewportSnapshot;
 
 import helios.rendering.ClearFlags;
 import helios.core.types;
-import helios.engine.core.data.ViewportId;
+import helios.engine.common.types.ViewportId;
 import helios.math.types;
 import helios.scene.CameraSceneNode;
 import :RenderTargetFwd;
@@ -132,7 +132,7 @@ export namespace helios::rendering {
         /**
          * @brief Unique identifier for this viewport.
          */
-        const helios::engine::core::data::ViewportId viewportId_{helios::core::types::no_init};
+        const helios::engine::common::types::ViewportId viewportId_{helios::core::types::no_init};
 
         /**
          * @brief Cached absolute bounds [x, y, width, height] in pixels.
@@ -212,7 +212,7 @@ export namespace helios::rendering {
          */
         explicit Viewport(
             float x, float y, float width, float height,
-            const helios::engine::core::data::ViewportId viewportId = helios::engine::core::data::ViewportId{helios::core::types::no_init},
+            const helios::engine::common::types::ViewportId viewportId = helios::engine::common::types::ViewportId{helios::core::types::no_init},
             const int zIndex = 0
         ) noexcept
             :
@@ -237,7 +237,7 @@ export namespace helios::rendering {
          *
          * @return The ViewportId assigned to this viewport.
          */
-        [[nodiscard]] helios::engine::core::data::ViewportId viewportId() const noexcept {
+        [[nodiscard]] helios::engine::common::types::ViewportId viewportId() const noexcept {
             return viewportId_;
         }
 

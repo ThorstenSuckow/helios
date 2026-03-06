@@ -31,6 +31,8 @@ import helios.engine.modules.spatial.transform.components.ComposeTransformCompon
 
 using namespace helios::engine::modules::scene::types;
 
+import helios.engine.common.tags.SystemRole;
+
 export namespace helios::engine::modules::scene::systems {
 
     /**
@@ -60,6 +62,8 @@ export namespace helios::engine::modules::scene::systems {
         helios::engine::modules::scene::types::SceneToViewportMap& sceneToViewportMap_;
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
 
         /**
          * @brief Constructs the system with required dependencies.

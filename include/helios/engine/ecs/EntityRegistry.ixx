@@ -13,8 +13,8 @@ module;
 export module helios.engine.ecs.EntityRegistry;
 
 import helios.engine.ecs.EntityHandle;
-import helios.engine.core.data;
-
+import helios.engine.ecs.types;
+import helios.engine.common.types.VersionId;
 
 export namespace helios::engine::ecs {
 
@@ -25,7 +25,7 @@ export namespace helios::engine::ecs {
      * Versions start at 1 to distinguish valid handles from default-initialized handles
      * that may have a version of 0.
      */
-    constexpr auto InitialVersion = helios::engine::core::data::VersionId{1};
+    constexpr auto InitialVersion = helios::engine::common::types::VersionId{1};
 
     /**
      * @brief Central registry for creating and managing entity handles.
@@ -71,15 +71,15 @@ export namespace helios::engine::ecs {
      * ```
      *
      * @see EntityHandle
-     * @see helios::engine::core::data::EntityId
-     * @see helios::engine::core::data::VersionId
+     * @see helios::engine::ecs::types::EntityId
+     * @see helios::engine::common::types::VersionId
      */
     class EntityRegistry {
 
         /**
          * @brief Free list of recycled entity indices available for reuse.
          */
-        std::vector<helios::engine::core::data::EntityId> freeList_;
+        std::vector<helios::engine::ecs::types::EntityId> freeList_;
 
         /**
          * @brief Version numbers for each entity slot.
@@ -87,7 +87,7 @@ export namespace helios::engine::ecs {
          * The version is incremented when an entity at that index is destroyed,
          * allowing detection of stale handles.
          */
-        std::vector<helios::engine::core::data::VersionId> versions_;
+        std::vector<helios::engine::common::types::VersionId> versions_;
 
     public:
 
@@ -118,8 +118,8 @@ export namespace helios::engine::ecs {
          */
         EntityHandle create() {
 
-            helios::engine::core::data::EntityId idx;
-            helios::engine::core::data::VersionId version;
+            helios::engine::ecs::types::EntityId idx;
+            helios::engine::common::types::VersionId version;
 
             if (freeList_.empty()) {
                 idx = versions_.size();
@@ -150,7 +150,7 @@ export namespace helios::engine::ecs {
          *
          * @return The version for the EntityId, or 0 if not found.
          */
-        [[nodiscard]] helios::engine::core::data::VersionId version(const helios::engine::core::data::EntityId entityId) const {
+        [[nodiscard]] helios::engine::common::types::VersionId version(const helios::engine::ecs::types::EntityId entityId) const {
             if (entityId >= versions_.size()) {
                 return 0;
             }
@@ -214,7 +214,7 @@ export namespace helios::engine::ecs {
          *
          * @return A span over the version vector.
          */
-        std::span<helios::engine::core::data::VersionId> version() noexcept {
+        std::span<helios::engine::common::types::VersionId> version() noexcept {
             return versions_;
         }
 

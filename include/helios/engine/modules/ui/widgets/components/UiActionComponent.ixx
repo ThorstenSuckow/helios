@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.modules.ui.widgets.components.UiActionComponent;
 
-import helios.engine.core.data.ActionId;
+import helios.engine.modules.ui.widgets.types;
 
 export namespace helios::engine::modules::ui::widgets::components {
 
@@ -18,7 +18,10 @@ export namespace helios::engine::modules::ui::widgets::components {
      */
     class UiActionComponent {
 
-        helios::engine::core::data::ActionId actionId_;
+        /**
+         * @brief The action identifier associated with this UI element.
+         */
+        helios::engine::modules::ui::widgets::types::ActionId actionId_;
 
     public:
 
@@ -28,13 +31,15 @@ export namespace helios::engine::modules::ui::widgets::components {
          * @param actionId The action identifier to associate.
          */
         explicit UiActionComponent(
-            const helios::engine::core::data::ActionId actionId
+            const helios::engine::modules::ui::widgets::types::ActionId actionId
         ) noexcept : actionId_{actionId} {}
 
         /**
          * @brief Returns the associated action identifier.
+         *
+         * @return The ActionId.
          */
-        [[nodiscard]] helios::engine::core::data::ActionId actionId() const noexcept {
+        [[nodiscard]] helios::engine::modules::ui::widgets::types::ActionId actionId() const noexcept {
             return actionId_;
         }
 

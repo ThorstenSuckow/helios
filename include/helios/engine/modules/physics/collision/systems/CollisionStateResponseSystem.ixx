@@ -38,6 +38,8 @@ using namespace helios::engine::modules::physics::collision::types;
 using namespace helios::engine::runtime::spawn::commands;
 
 
+import helios.engine.common.tags.SystemRole;
+
 export namespace helios::engine::modules::physics::collision::systems {
 
     /**
@@ -59,6 +61,8 @@ export namespace helios::engine::modules::physics::collision::systems {
     class CollisionStateResponseSystem {
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
 
         /**
          * @brief Processes collision states and issues response commands.
@@ -102,7 +106,7 @@ export namespace helios::engine::modules::physics::collision::systems {
 
 
                 if (hasFlag(collisionBehavior, CollisionBehavior::Despawn)) {
-                    updateContext.commandBuffer().add<DespawnCommand>(
+                    updateContext.queueCommand<DespawnCommand>(
                         entity.entityHandle(), sbp->spawnProfileId());
                 }
             }

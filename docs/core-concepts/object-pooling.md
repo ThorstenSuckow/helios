@@ -58,8 +58,8 @@ The pooling system follows a strict lifecycle:
 3. **Runtime:** Use `acquire()` and `release()` to manage entity lifecycle
 
 ```cpp
-// 1. Create manager and configure pools
-GameObjectPoolManager poolManager;
+// 1. Register manager and configure pools
+auto& poolManager = gameWorld.registerManager<GameObjectPoolManager>();
 
 // Create prefab via GameWorld
 auto bulletPrefab = gameWorld.addGameObject();
@@ -75,8 +75,7 @@ auto bulletConfig = std::make_unique<GameObjectPoolConfig>(
 );
 poolManager.addPoolConfig(std::move(bulletConfig));
 
-// 2. Initialize (clones prefabs, locks pools)
-poolManager.init(gameWorld);
+// 2. Initialize (clones prefabs, locks pools — called by GameWorld::init())
 
 // 3. Runtime operations - acquire returns std::optional<GameObject>
 if (auto bullet = poolManager.acquire(GameObjectPoolId{"bullets"})) {
@@ -233,20 +232,29 @@ auto config = std::make_unique<GameObjectPoolConfig>(poolId, prefab, 100);
 
 ### 2. Implement onAcquire/onRelease
 
-Components should implement lifecycle callbacks for proper state reset:
+Components should implement lifecycle callbacks for proper state reset. These are detected at compile time via traits (see [Traits](ecs/traits.md)):
 
 ```cpp
-class ProjectileComponent : public CloneableComponent<ProjectileComponent> {
+class ProjectileComponent {
+    bool isEnabled_ = true;
+
 public:
+    ProjectileComponent(const ProjectileComponent&) = default;
+    ProjectileComponent(ProjectileComponent&&) noexcept = default;
+
     void onAcquire() noexcept {
-        // Reset to initial state
+        // Reset to initial state when acquired from pool
         velocity_ = vec3f{0, 0, 0};
         damage_ = defaultDamage_;
     }
 
     void onRelease() noexcept {
-        // Cleanup if needed
+        // Cleanup when returned to pool
     }
+
+    [[nodiscard]] bool isEnabled() const noexcept { return isEnabled_; }
+    void enable() noexcept { isEnabled_ = true; }
+    void disable() noexcept { isEnabled_ = false; }
 };
 ```
 
@@ -283,5 +291,5 @@ if (!entity) {
 - [Resource Registry](./resource-registry.md) - GameObjectPoolManager as a registered Manager
 - [Spawn System](./spawn-system.md) - Entity spawning and despawning
 - [Command System](./command-system.md) - Command-based spawn requests
-- [Component System](./component-system.md) - CloneableComponent lifecycle
+- [Component System](./component-system.md) - Component lifecycle and structure
 

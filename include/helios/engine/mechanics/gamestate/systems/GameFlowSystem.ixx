@@ -19,6 +19,8 @@ import helios.engine.mechanics.gamestate.types;
 import helios.engine.ecs;
 import helios.engine.runtime;
 
+import helios.engine.common.tags.SystemRole;
+
 export namespace helios::engine::mechanics::gamestate::systems {
 
     using namespace helios::engine::state::commands;
@@ -53,6 +55,8 @@ export namespace helios::engine::mechanics::gamestate::systems {
 
     public:
 
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+
         /**
          * @brief Updates the game flow and emits state transition commands.
          *
@@ -66,7 +70,6 @@ export namespace helios::engine::mechanics::gamestate::systems {
 
             auto& session = updateContext.session();
 
-            auto& commandBuffer = updateContext.commandBuffer();
             const auto gameState = session.state<GameState>();
             auto gameStateTransitionId = session.stateTransitionId<GameState>();
 
@@ -80,14 +83,14 @@ export namespace helios::engine::mechanics::gamestate::systems {
             switch (gameState) {
 
                 case GameState::Undefined: {
-                    commandBuffer.add<StateCommand<GameState>>(
+                    updateContext.queueCommand<StateCommand<GameState>>(
                         StateTransitionRequest<GameState>(gameState, GameStateTransitionId::StartRequested)
                     );
                     break;
                 }
 
                 case GameState::Start: {
-                    commandBuffer.add<StateCommand<GameState>>(
+                    updateContext.queueCommand<StateCommand<GameState>>(
                         StateTransitionRequest<GameState>(gameState, GameStateTransitionId::TitleRequested)
                     );
                     break;

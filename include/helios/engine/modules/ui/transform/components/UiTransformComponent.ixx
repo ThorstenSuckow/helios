@@ -12,7 +12,8 @@ export module helios.engine.modules.ui.transform.components.UiTransformComponent
 
 import helios.engine.modules.ui.layout.Anchor;
 
-import helios.engine.core.data.ComponentTypeId;
+import helios.engine.ecs.types.ComponentTypeId;
+import helios.engine.common.types;
 
 import helios.math;
 
@@ -44,7 +45,7 @@ export namespace helios::engine::modules::ui::transform::components {
         /**
          * @brief ID of the viewport this element is positioned relative to.
          */
-        helios::engine::core::data::ViewportId viewportId_{helios::core::types::no_init};
+        helios::engine::common::types::ViewportId viewportId_{helios::core::types::no_init};
 
         /**
          * @brief Offsets from anchor point (top, right, bottom, left).
@@ -130,7 +131,7 @@ export namespace helios::engine::modules::ui::transform::components {
          *
          * @param viewportId The ID of the viewport for positioning.
          */
-        void setViewportId(const helios::engine::core::data::ViewportId viewportId) noexcept {
+        void setViewportId(const helios::engine::common::types::ViewportId viewportId) noexcept {
             viewportId_ = viewportId;
         }
 
@@ -175,7 +176,7 @@ export namespace helios::engine::modules::ui::transform::components {
          *
          * @return The ID of the viewport this element is positioned relative to.
          */
-        [[nodiscard]] helios::engine::core::data::ViewportId viewportId() const noexcept {
+        [[nodiscard]] helios::engine::common::types::ViewportId viewportId() const noexcept {
             return viewportId_;
         }
 

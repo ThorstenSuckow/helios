@@ -7,20 +7,23 @@ A **View** provides lightweight, efficient iteration over entities that have spe
 Views enable component-based queries using a fluent API:
 
 ```cpp
-// Iterate all entities with Transform and Velocity
-for (auto [entity, transform, velocity] : gameWorld->view<
-    TransformComponent,
-    VelocityComponent
->()) {
-    velocity->position += velocity->direction * deltaTime;
-}
+// In a system's update():
+void update(UpdateContext& ctx) noexcept {
+    // Iterate all entities with Transform and Velocity
+    for (auto [entity, transform, velocity] : ctx.view<
+        TransformComponent,
+        VelocityComponent
+    >()) {
+        transform->position += velocity->direction * ctx.deltaTime();
+    }
 
-// With filters
-for (auto [entity, health, active] : gameWorld->view<
-    HealthComponent,
-    Active
->().whereEnabled().exclude<Invincible>()) {
-    // Process only enabled, non-invincible entities
+    // With filters
+    for (auto [entity, health, active] : ctx.view<
+        HealthComponent,
+        Active
+    >().whereEnabled().exclude<Invincible>()) {
+        // Process only enabled, non-invincible entities
+    }
 }
 ```
 
@@ -46,10 +49,14 @@ Result:                   [E0, E2, E7]
 
 ### Construction
 
-Views are typically obtained from `GameWorld`:
+Views are typically obtained from `UpdateContext` (in systems) or `GameWorld` (during initialization):
 
 ```cpp
-auto view = gameWorld->view<ComponentA, ComponentB, ComponentC>();
+// In a system (preferred)
+auto view = ctx.view<ComponentA, ComponentB, ComponentC>();
+
+// During initialization (outside system update)
+auto view = gameWorld.view<ComponentA, ComponentB, ComponentC>();
 ```
 
 Or directly from `EntityManager`:
@@ -66,7 +73,7 @@ Excludes entities that have a specific component:
 
 ```cpp
 // Skip entities with Shield component
-for (auto [e, health] : world->view<HealthComponent>()
+for (auto [e, health] : ctx.view<HealthComponent>()
     .exclude<ShieldComponent>()) {
     // Only unshielded entities
 }
@@ -77,7 +84,7 @@ for (auto [e, health] : world->view<HealthComponent>()
 Filters to only include entities where all queried components are enabled:
 
 ```cpp
-for (auto [e, move, active] : world->view<
+for (auto [e, move, active] : ctx.view<
     Move2DComponent,
     Active
 >().whereEnabled()) {
@@ -108,7 +115,7 @@ The tuple contains:
 ### Basic Query
 
 ```cpp
-for (auto [entity, transform] : world->view<TransformComponent>()) {
+for (auto [entity, transform] : ctx.view<TransformComponent>()) {
     transform->setPosition(newPos);
 }
 ```
@@ -116,7 +123,7 @@ for (auto [entity, transform] : world->view<TransformComponent>()) {
 ### Multi-Component Query
 
 ```cpp
-for (auto [entity, transform, velocity, gravity] : world->view<
+for (auto [entity, transform, velocity, gravity] : ctx.view<
     TransformComponent,
     VelocityComponent,
     GravityComponent
@@ -130,7 +137,7 @@ for (auto [entity, transform, velocity, gravity] : world->view<
 
 ```cpp
 // Common pattern: include Active tag to skip inactive entities
-for (auto [entity, health, damage, active] : world->view<
+for (auto [entity, health, damage, active] : ctx.view<
     HealthComponent,
     DamageDealerComponent,
     Active
@@ -143,7 +150,7 @@ for (auto [entity, health, damage, active] : world->view<
 
 ```cpp
 // Find all enemies without AI (for debugging)
-for (auto [entity, enemy] : world->view<EnemyComponent>()
+for (auto [entity, enemy] : ctx.view<EnemyComponent>()
     .exclude<AIComponent>()) {
     LOG_WARN("Enemy {} has no AI!", entity.entityHandle().entityId);
 }
@@ -152,7 +159,7 @@ for (auto [entity, enemy] : world->view<EnemyComponent>()
 ### Chained Filters
 
 ```cpp
-for (auto [e, h, a] : world->view<HealthComponent, Active>()
+for (auto [e, h, a] : ctx.view<HealthComponent, Active>()
     .whereEnabled()
     .exclude<Invincible>()
     .exclude<Dead>()) {
@@ -168,7 +175,7 @@ The first component type determines iteration order. Choose the **smallest set**
 
 ```cpp
 // If few entities have RareComponent, put it first
-for (auto [e, rare, common] : world->view<
+for (auto [e, rare, common] : ctx.view<
     RareComponent,    // Lead - smallest set
     CommonComponent
 >()) { }

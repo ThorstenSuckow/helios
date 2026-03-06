@@ -12,7 +12,7 @@ export module helios.engine.runtime.pooling.GameObjectPoolRegistry;
 
 
 import helios.engine.runtime.pooling.GameObjectPool;
-import helios.engine.core.data.GameObjectPoolId;
+import helios.engine.runtime.pooling.types.GameObjectPoolId;
 
 
 export namespace helios::engine::runtime::pooling {
@@ -49,7 +49,7 @@ export namespace helios::engine::runtime::pooling {
         /**
          * @brief Maps pool IDs to their corresponding GameObjectPool instances.
          */
-        std::unordered_map<helios::engine::core::data::GameObjectPoolId, std::unique_ptr<GameObjectPool>> pools_;
+        std::unordered_map<helios::engine::runtime::pooling::types::GameObjectPoolId, std::unique_ptr<GameObjectPool>> pools_;
 
     public:
 
@@ -70,7 +70,7 @@ export namespace helios::engine::runtime::pooling {
          * @return Raw pointer to the added pool for immediate use.
          */
         GameObjectPool* addPool(
-            const helios::engine::core::data::GameObjectPoolId id,
+            const helios::engine::runtime::pooling::types::GameObjectPoolId id,
             std::unique_ptr<GameObjectPool> gameObjectPool
         ) noexcept {
             pools_[id] = std::move(gameObjectPool);
@@ -85,7 +85,7 @@ export namespace helios::engine::runtime::pooling {
          *
          * @return Reference to the pool map.
          */
-        [[nodiscard]]std::unordered_map<helios::engine::core::data::GameObjectPoolId, std::unique_ptr<GameObjectPool>>& pools() {
+        [[nodiscard]]std::unordered_map<helios::engine::runtime::pooling::types::GameObjectPoolId, std::unique_ptr<GameObjectPool>>& pools() {
             return pools_;
         }
 
@@ -97,7 +97,7 @@ export namespace helios::engine::runtime::pooling {
          *
          * @return Pointer to the pool, or nullptr if not found.
          */
-        [[nodiscard]] GameObjectPool* pool(const helios::engine::core::data::GameObjectPoolId id) const {
+        [[nodiscard]] GameObjectPool* pool(const helios::engine::runtime::pooling::types::GameObjectPoolId id) const {
 
             const auto& it = pools_.find(id);
 
@@ -115,7 +115,7 @@ export namespace helios::engine::runtime::pooling {
          *
          * @return True if the pool exists, false otherwise.
          */
-        [[nodiscard]] bool has(const helios::engine::core::data::GameObjectPoolId id) const noexcept {
+        [[nodiscard]] bool has(const helios::engine::runtime::pooling::types::GameObjectPoolId id) const noexcept {
             return pools_.contains(id);
         }
 

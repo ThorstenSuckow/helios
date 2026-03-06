@@ -30,7 +30,7 @@ import helios.ext.opengl.rendering.FreeTypeFontResourceManager;
 
 
 import helios.rendering.shader.UniformSemantics;
-import helios.engine.core.data.FontId;
+import helios.engine.modules.ui.widgets.types.FontId;
 import helios.rendering.text.TextRenderCommand;
 
 import helios.rendering.RenderPass;
@@ -129,7 +129,7 @@ export namespace helios::ext::opengl::rendering {
          */
         void renderText(
             const std::string_view text,
-            const helios::engine::core::data::FontId fontId,
+            const helios::engine::modules::ui::widgets::types::FontId fontId,
             std::span<helios::math::vec4f> vertices,
             helios::rendering::text::FontResourceProvider* fontResourceProvider
         )  noexcept {

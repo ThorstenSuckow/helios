@@ -8,8 +8,8 @@ module;
 export module helios.engine.mechanics.scoring.types.KillReward;
 
 import helios.engine.mechanics.scoring.types.Score;
+import helios.engine.mechanics.scoring.types.ScoreTypeId;
 
-import helios.engine.core.data;
 
 export namespace helios::engine::mechanics::scoring::types {
 
@@ -35,8 +35,8 @@ export namespace helios::engine::mechanics::scoring::types {
         /**
          * @copydoc Score::typeId()
          */
-        [[nodiscard]] helios::engine::core::data::ScoreTypeId typeId() const noexcept override {
-            return helios::engine::core::data::ScoreTypeId::id<KillReward>();
+        [[nodiscard]] ScoreTypeId typeId() const noexcept override {
+            return ScoreTypeId::id<KillReward>();
         };
 
     };

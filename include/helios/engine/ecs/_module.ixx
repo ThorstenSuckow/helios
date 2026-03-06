@@ -6,6 +6,7 @@ export module helios.engine.ecs;
 
 export import helios.engine.ecs.components;
 export import helios.engine.ecs.systems;
+export import helios.engine.ecs.types;
 
 
 export import helios.engine.ecs.GameObject;

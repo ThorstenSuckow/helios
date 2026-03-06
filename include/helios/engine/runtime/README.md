@@ -12,7 +12,7 @@ This module provides the core runtime components that manage game execution. It 
 |-----------|---------|
 | `gameloop/` | Phase-based game loop with configurable passes |
 | `world/` | GameWorld, Level, UpdateContext, and system registration |
-| `messaging/` | Command buffer, dispatchers, and event buses |
+| `messaging/` | Command buffer, and event buses |
 | `pooling/` | GameObject pools and request handlers for object recycling |
 | `factory/` | GameObject creation from prefab templates |
 | `api/` | (Planned) Stable runtime entry points |

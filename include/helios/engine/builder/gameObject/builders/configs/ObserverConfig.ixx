@@ -10,11 +10,11 @@ export module helios.engine.builder.gameObject.builders.configs.ObserverConfig;
 
 import helios.engine.ecs.GameObject;
 
-import helios.engine.core.data;
 
 import helios.engine.mechanics.match.components;
 
 import helios.engine.mechanics.scoring.components;
+import helios.engine.mechanics.scoring.types;
 import helios.engine.mechanics.timing;
 
 
@@ -58,7 +58,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @deprecated use runningScore()
          */
-        ObserverConfig& scorePool(const helios::engine::core::data::ScorePoolId scorePoolId) {
+        ObserverConfig& scorePool(const helios::engine::mechanics::scoring::types::ScorePoolId scorePoolId) {
             return runningScore(scorePoolId);
         }
 
@@ -69,7 +69,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @return Reference to this config for chaining.
          */
-        ObserverConfig& runningScore(const helios::engine::core::data::ScorePoolId scorePoolId) {
+        ObserverConfig& runningScore(const helios::engine::mechanics::scoring::types::ScorePoolId scorePoolId) {
 
             auto* soc = gameObject_.get<helios::engine::mechanics::scoring::components::ScoreObserverComponent>();
 
@@ -108,7 +108,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @return Reference to this config for chaining.
          */
-        ObserverConfig& maxScore(const helios::engine::core::data::ScorePoolId scorePoolId) {
+        ObserverConfig& maxScore(const helios::engine::mechanics::scoring::types::ScorePoolId scorePoolId) {
 
             auto* soc = gameObject_.get<helios::engine::mechanics::scoring::components::MaxScoreObserverComponent>();
 
@@ -126,7 +126,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @return Reference to this config for chaining.
          */
-        ObserverConfig& time(const helios::engine::core::data::GameTimerId gameTimerId) {
+        ObserverConfig& time(const helios::engine::mechanics::timing::types::GameTimerId gameTimerId) {
 
             auto* toc = gameObject_.get<helios::engine::mechanics::timing::components::GameTimerBindingComponent>();
 

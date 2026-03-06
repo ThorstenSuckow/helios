@@ -7,8 +7,7 @@ module;
 export module helios.engine.mechanics.scoring.ScorePoolSnapshot;
 
 import helios.core;
-import helios.engine.core.data;
-import helios.engine.mechanics.scoring.types.ScorePoolRevision;
+import helios.engine.mechanics.scoring.types;
 
 
 
@@ -30,7 +29,7 @@ export namespace helios::engine::mechanics::scoring {
         /**
          * @brief Unique identifier of the score pool.
          */
-        helios::engine::core::data::ScorePoolId scorePoolId{helios::core::types::no_init};
+        helios::engine::mechanics::scoring::types::ScorePoolId scorePoolId{helios::core::types::no_init};
 
         /**
          * @brief The total score value at the time of the snapshot.

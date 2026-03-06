@@ -13,7 +13,6 @@ import helios.engine.runtime.gameloop.CommitPoint;
 
 import helios.engine.runtime.gameloop.Pass;
 
-import helios.engine.runtime.world.TypedSystem;
 import helios.engine.runtime.world.SystemRegistry;
 
 import helios.engine.runtime.world.UpdateContext;
@@ -78,8 +77,8 @@ export namespace helios::engine::runtime::gameloop {
          * @param updateContext The current update context.
          */
         void update(helios::engine::runtime::world::UpdateContext& updateContext) override {
-            for (auto& sys : systemRegistry_.systems()) {
-                sys->updateSystem(updateContext);
+            for (auto& sys : systemRegistry_.items()) {
+                sys->update(updateContext);
             }
         }
 
@@ -90,8 +89,8 @@ export namespace helios::engine::runtime::gameloop {
          * @param gameWorld Reference to the game world.
          */
         void init(helios::engine::runtime::world::GameWorld& gameWorld) override {
-            for (auto& sys : systemRegistry_.systems()) {
-                sys->initSystem(gameWorld);
+            for (auto& sys : systemRegistry_.items()) {
+                sys->init(gameWorld);
             }
         }
 

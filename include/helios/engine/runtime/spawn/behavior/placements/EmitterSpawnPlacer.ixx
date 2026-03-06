@@ -8,12 +8,13 @@ module;
 
 export module helios.engine.runtime.spawn.behavior.placements.EmitterSpawnPlacer;
 
-import helios.engine.runtime.spawn.SpawnPlanCursor;
-import helios.engine.runtime.spawn.SpawnContext;
+import helios.engine.runtime.spawn.types.SpawnPlanCursor;
+import helios.engine.runtime.spawn.types.SpawnContext;
 import helios.engine.runtime.spawn.behavior.SpawnPlacer;
 import helios.math;
 import helios.engine.ecs.EntityHandle;
 
+using namespace helios::engine::runtime::spawn::types;
 export namespace helios::engine::runtime::spawn::behavior::placements {
 
     /**

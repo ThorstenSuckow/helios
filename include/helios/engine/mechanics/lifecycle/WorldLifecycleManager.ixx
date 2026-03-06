@@ -8,13 +8,12 @@ module;
 
 export module helios.engine.mechanics.lifecycle.WorldLifecycleManager;
 
-import helios.engine.runtime.world.Manager;
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.mechanics.lifecycle.types;
-import helios.engine.runtime.messaging.command.TypedCommandHandler;
 import helios.engine.mechanics.lifecycle.commands.WorldLifecycleCommand;
+import helios.engine.common;
 
 using namespace helios::engine::runtime::world;
 using namespace helios::engine::runtime::messaging::command;
@@ -39,8 +38,7 @@ export namespace helios::engine::mechanics::lifecycle {
      * @see WorldLifecycleAction
      * @see GameWorld::reset
      */
-    class WorldLifecycleManager : public Manager,
-                                  public TypedCommandHandler<WorldLifecycleCommand> {
+    class WorldLifecycleManager {
 
         /**
          * @brief Pending commands queued for the next flush.
@@ -54,6 +52,8 @@ export namespace helios::engine::mechanics::lifecycle {
 
     public:
 
+        using EngineRoleTag = helios::engine::common::tags::ManagerRole;
+
         /**
          * @brief Enqueues a lifecycle command for deferred processing.
          *
@@ -61,7 +61,7 @@ export namespace helios::engine::mechanics::lifecycle {
          *
          * @return True if the command was accepted.
          */
-        bool submit(WorldLifecycleCommand cmd) noexcept override {
+        bool submit(WorldLifecycleCommand cmd) noexcept {
             pending_.push_back(cmd);
             return true;
         }
@@ -71,9 +71,9 @@ export namespace helios::engine::mechanics::lifecycle {
          *
          * @param gameWorld The GameWorld to register with.
          */
-        void init(GameWorld& gameWorld) override {
+        void init(GameWorld& gameWorld)  {
             gameWorld_ = &gameWorld;
-            gameWorld.registerCommandHandler<TypedCommandHandler<WorldLifecycleCommand>>(*this);
+            gameWorld.registerCommandHandler<WorldLifecycleCommand>(*this);
         }
 
         /**
@@ -86,7 +86,7 @@ export namespace helios::engine::mechanics::lifecycle {
          *
          * @param updateContext The current frame's update context.
          */
-        void flush(UpdateContext& updateContext) noexcept override {
+        void flush(UpdateContext& updateContext) noexcept  {
             if (pending_.empty() || gameWorld_ == nullptr) {
                 return;
             }
@@ -108,7 +108,7 @@ export namespace helios::engine::mechanics::lifecycle {
         /**
          * @brief Clears all pending commands.
          */
-        void reset() override {
+        void reset()  {
             pending_.clear();
         }
     };

@@ -10,8 +10,8 @@ module;
 
 export module helios.engine.builder.spawnSystem.builders.SchedulerBuilder;
 
-import helios.engine.mechanics.spawn.types.SpawnProfileId;
-import helios.engine.mechanics.spawn.types.SpawnRuleId;
+import helios.engine.runtime.spawn.types.SpawnProfileId;
+import helios.engine.runtime.spawn.types.SpawnRuleId;
 import helios.engine.runtime.spawn.SpawnManager;
 import helios.engine.runtime.spawn.scheduling.SpawnScheduler;
 import helios.engine.runtime.spawn.scheduling.DefaultSpawnScheduler;

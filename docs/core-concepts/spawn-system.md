@@ -66,7 +66,7 @@ The spawn system consists of several layers working together:
 A `SpawnProfile` bundles together everything needed to spawn entities of a particular type:
 
 ```cpp
-import helios.engine.runtime.spawn.SpawnProfile;
+import helios.engine.runtime.spawn.types.SpawnProfile;
 import helios.engine.runtime.spawn.behavior.placements.RandomSpawnPlacer;
 import helios.engine.runtime.spawn.behavior.initializers.RandomDirectionInitializer;
 

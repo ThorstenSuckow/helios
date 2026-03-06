@@ -7,7 +7,7 @@ module;
 export module helios.engine.runtime.spawn.scheduling.SpawnPlan;
 
 import helios.engine.runtime.pooling.types.GameObjectPoolId;
-import helios.engine.mechanics.spawn.types.SpawnRuleId;
+import helios.engine.runtime.spawn.types.SpawnRuleId;
 
 export namespace helios::engine::runtime::spawn::scheduling {
 
@@ -27,7 +27,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
         /**
          * @brief The spawn rule that triggered this plan.
          */
-        const helios::engine::mechanics::spawn::types::SpawnRuleId spawnRuleId;
+        const helios::engine::runtime::spawn::types::SpawnRuleId spawnRuleId;
 
         /**
          * @brief Number of entities to spawn.

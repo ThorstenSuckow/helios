@@ -83,20 +83,20 @@ int main() {
     constexpr helios::engine::runtime::pooling::types::GameObjectPoolId OrangeEnemyPoolId{"orange_pool"};
     constexpr helios::engine::runtime::pooling::types::GameObjectPoolId BlueEnemyPoolId{"blue_pool"};
 
-    constexpr helios::engine::mechanics::spawn::types::SpawnProfileId ProjectileSpawnSpawnProfileId{"projectile_spawn"};
-    constexpr helios::engine::mechanics::spawn::types::SpawnProfileId RandomSpawnSpawnProfileId{"random_spawn"};
-    constexpr helios::engine::mechanics::spawn::types::SpawnProfileId BlueMassSpawnProfileId{"blue_spawn_profile1"};
-    constexpr helios::engine::mechanics::spawn::types::SpawnProfileId LeftColumnSpawnProfileId{"orange_left_spawn1"};
-    constexpr helios::engine::mechanics::spawn::types::SpawnProfileId RightColumnSpawnProfileId{"orange_right_spawn_1"};
-    constexpr helios::engine::mechanics::spawn::types::SpawnProfileId TopRowSpawnProfileId{"orange_top_spawn_1"};
-    constexpr helios::engine::mechanics::spawn::types::SpawnProfileId BottomRowSpawnProfileId{"orange_bottom_spawn_1"};
+    constexpr helios::engine::runtime::spawn::types::SpawnProfileId ProjectileSpawnSpawnProfileId{"projectile_spawn"};
+    constexpr helios::engine::runtime::spawn::types::SpawnProfileId RandomSpawnSpawnProfileId{"random_spawn"};
+    constexpr helios::engine::runtime::spawn::types::SpawnProfileId BlueMassSpawnProfileId{"blue_spawn_profile1"};
+    constexpr helios::engine::runtime::spawn::types::SpawnProfileId LeftColumnSpawnProfileId{"orange_left_spawn1"};
+    constexpr helios::engine::runtime::spawn::types::SpawnProfileId RightColumnSpawnProfileId{"orange_right_spawn_1"};
+    constexpr helios::engine::runtime::spawn::types::SpawnProfileId TopRowSpawnProfileId{"orange_top_spawn_1"};
+    constexpr helios::engine::runtime::spawn::types::SpawnProfileId BottomRowSpawnProfileId{"orange_bottom_spawn_1"};
 
-    constexpr helios::engine::mechanics::spawn::types::SpawnRuleId PurpleEnemySpawnConditionId{"purple_spawn_rule"};
-    constexpr helios::engine::mechanics::spawn::types::SpawnRuleId BlueMassSpawnConditionId{"blue_mass_spawn1"};
-    constexpr helios::engine::mechanics::spawn::types::SpawnRuleId OrangeSpawnRuleLeftColumn{"orange_spawn_rule_1"};
-    constexpr helios::engine::mechanics::spawn::types::SpawnRuleId OrangeSpawnRuleTopRow{"orange_spawn_rule_3"};
-    constexpr helios::engine::mechanics::spawn::types::SpawnRuleId OrangeSpawnRuleRightColumn{"orange_spawn_rule_2"};
-    constexpr helios::engine::mechanics::spawn::types::SpawnRuleId OrangeSpawnRuleBottomRow{"orange_spawn_rule_4"};
+    constexpr helios::engine::runtime::spawn::types::SpawnRuleId PurpleEnemySpawnConditionId{"purple_spawn_rule"};
+    constexpr helios::engine::runtime::spawn::types::SpawnRuleId BlueMassSpawnConditionId{"blue_mass_spawn1"};
+    constexpr helios::engine::runtime::spawn::types::SpawnRuleId OrangeSpawnRuleLeftColumn{"orange_spawn_rule_1"};
+    constexpr helios::engine::runtime::spawn::types::SpawnRuleId OrangeSpawnRuleTopRow{"orange_spawn_rule_3"};
+    constexpr helios::engine::runtime::spawn::types::SpawnRuleId OrangeSpawnRuleRightColumn{"orange_spawn_rule_2"};
+    constexpr helios::engine::runtime::spawn::types::SpawnRuleId OrangeSpawnRuleBottomRow{"orange_spawn_rule_4"};
 
     // ========================================
     // 2. Application and Window Setup

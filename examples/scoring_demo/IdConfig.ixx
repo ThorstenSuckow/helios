@@ -15,7 +15,7 @@ export namespace helios::examples::scoring::IdConfig {
     using namespace helios::engine::common::types;
     using namespace helios::engine::mechanics::timing::types;
     using namespace helios::engine::runtime::pooling::types;
-    using namespace helios::engine::mechanics::spawn::types;
+    using namespace helios::engine::runtime::spawn::types;
 
     constexpr PrefabId BlueEnemyPrefab("BlueEnemy");
     constexpr PrefabId OrangeEnemyPrefab("OrangeEnemy");

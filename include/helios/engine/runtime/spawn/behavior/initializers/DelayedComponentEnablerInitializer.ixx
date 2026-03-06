@@ -12,13 +12,14 @@ export module helios.engine.runtime.spawn.behavior.initializers.DelayedComponent
 
 
 import helios.engine.runtime.spawn.behavior.SpawnInitializer;
-import helios.engine.runtime.spawn.SpawnPlanCursor;
-import helios.engine.runtime.spawn.SpawnContext;
+import helios.engine.runtime.spawn.types.SpawnPlanCursor;
+import helios.engine.runtime.spawn.types.SpawnContext;
 import helios.engine.ecs.GameObject;
 
 import helios.engine.mechanics.lifecycle.components.DelayedComponentEnabler;
 import helios.engine.ecs.types.ComponentTypeId;
 
+using namespace helios::engine::runtime::spawn::types;
 export namespace helios::engine::runtime::spawn::behavior::initializers {
 
     /**

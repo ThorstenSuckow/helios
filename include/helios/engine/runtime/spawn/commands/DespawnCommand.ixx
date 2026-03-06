@@ -13,7 +13,7 @@ import helios.engine.ecs.EntityHandle;
 
 
 
-import helios.engine.mechanics.spawn.types.SpawnProfileId;
+import helios.engine.runtime.spawn.types.SpawnProfileId;
 
 
 export namespace helios::engine::runtime::spawn::commands {
@@ -42,7 +42,7 @@ export namespace helios::engine::runtime::spawn::commands {
         /**
          * @brief The spawn profile ID for pool return.
          */
-        helios::engine::mechanics::spawn::types::SpawnProfileId spawnProfileId_;
+        helios::engine::runtime::spawn::types::SpawnProfileId spawnProfileId_;
 
     public:
 
@@ -54,7 +54,7 @@ export namespace helios::engine::runtime::spawn::commands {
          */
         explicit DespawnCommand(
             const helios::engine::ecs::EntityHandle entityHandle,
-            const helios::engine::mechanics::spawn::types::SpawnProfileId spawnProfileId) :
+            const helios::engine::runtime::spawn::types::SpawnProfileId spawnProfileId) :
             entityHandle_(entityHandle), spawnProfileId_(spawnProfileId) {}
 
 
@@ -72,7 +72,7 @@ export namespace helios::engine::runtime::spawn::commands {
          *
          * @return The spawn profile ID associated with this command.
          */
-        [[nodiscard]] helios::engine::mechanics::spawn::types::SpawnProfileId spawnProfileId() const noexcept {
+        [[nodiscard]] helios::engine::runtime::spawn::types::SpawnProfileId spawnProfileId() const noexcept {
             return spawnProfileId_;
         }
 

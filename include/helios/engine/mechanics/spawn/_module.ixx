@@ -6,5 +6,4 @@ export module helios.engine.mechanics.spawn;
 
 export import helios.engine.mechanics.spawn.components;
 export import helios.engine.mechanics.spawn.systems;
-export import helios.engine.mechanics.spawn.types;
 

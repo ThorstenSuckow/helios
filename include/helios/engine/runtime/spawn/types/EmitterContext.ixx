@@ -4,14 +4,14 @@
  */
 module;
 
-export module helios.engine.runtime.spawn.EmitterContext;
+export module helios.engine.runtime.spawn.types.EmitterContext;
 
 import helios.math;
 import helios.util;
 
 import helios.engine.ecs.EntityHandle;
 
-export namespace helios::engine::runtime::spawn {
+export namespace helios::engine::runtime::spawn::types {
 
     /**
      * @brief Context data from the entity that triggered a spawn operation.

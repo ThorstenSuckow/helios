@@ -19,18 +19,18 @@ import helios.engine.runtime.spawn.scheduling.DefaultRuleProcessor;
 
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.runtime.spawn.SpawnManager;
-import helios.engine.runtime.spawn.SpawnContext;
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.spawn.scheduling.SpawnPlan;
 import helios.engine.runtime.spawn.scheduling.ScheduledSpawnPlan;
-import helios.engine.mechanics.spawn.types.SpawnProfileId;
-import helios.engine.mechanics.spawn.types.SpawnRuleId;
+import helios.engine.runtime.spawn.types;
 import helios.engine.runtime.spawn.policy.SpawnRule;
 import helios.engine.runtime.spawn.policy.SpawnRuleState;
 import helios.engine.runtime.pooling.GameObjectPoolManager;
 
 import helios.core.types;
 
+using namespace helios::engine::runtime::spawn::types;
+using namespace helios::engine::runtime::world;
 export namespace helios::engine::runtime::spawn::scheduling {
 
     /**
@@ -41,7 +41,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
         /**
          * @brief The spawn profile ID for this rule.
          */
-        helios::engine::mechanics::spawn::types::SpawnProfileId spawnProfileId{helios::core::types::no_init};
+        helios::engine::runtime::spawn::types::SpawnProfileId spawnProfileId{helios::core::types::no_init};
 
         /**
          * @brief The spawn rule controlling when spawns occur.
@@ -110,7 +110,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
          * @brief Map from spawn rule IDs to their runtime state.
          */
         std::unordered_map<
-            helios::engine::mechanics::spawn::types::SpawnRuleId,
+            helios::engine::runtime::spawn::types::SpawnRuleId,
             helios::engine::runtime::spawn::policy::SpawnRuleState
         > spawnRuleStates_;
 
@@ -133,9 +133,9 @@ export namespace helios::engine::runtime::spawn::scheduling {
          * @param spawnContext Context for spawn operations.
          */
         void evaluate(
-            const helios::engine::runtime::world::GameWorld& gameWorld,
-            const helios::engine::runtime::world::UpdateContext& updateContext,
-            const helios::engine::runtime::spawn::SpawnContext& spawnContext ) noexcept override {
+            const GameWorld& gameWorld,
+            const UpdateContext& updateContext,
+            const SpawnContext& spawnContext ) noexcept override {
 
             scheduledSpawnPlans_.clear();
 
@@ -171,7 +171,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
          * @pre No duplicate profile IDs or rule IDs.
          */
         CyclicSpawnScheduler& addRule(
-            const helios::engine::mechanics::spawn::types::SpawnProfileId spawnProfileId,
+            const helios::engine::runtime::spawn::types::SpawnProfileId spawnProfileId,
             std::unique_ptr<helios::engine::runtime::spawn::policy::SpawnRule> spawnRule
         ) {
             assert(count_ < N);
@@ -200,7 +200,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
          * @param spawnRuleId The rule that triggered the spawn.
          * @param spawnCount Number of entities actually spawned.
          */
-        void commit(const helios::engine::mechanics::spawn::types::SpawnRuleId spawnRuleId, const size_t spawnCount) noexcept override{
+        void commit(const helios::engine::runtime::spawn::types::SpawnRuleId spawnRuleId, const size_t spawnCount) noexcept override{
 
             for (auto& ruleConfig : ringBuffer_) {
 

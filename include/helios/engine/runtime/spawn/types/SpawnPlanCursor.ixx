@@ -4,9 +4,9 @@
  */
 module;
 
-export module helios.engine.runtime.spawn.SpawnPlanCursor;
+export module helios.engine.runtime.spawn.types.SpawnPlanCursor;
 
-export namespace helios::engine::runtime::spawn {
+export namespace helios::engine::runtime::spawn::types {
 
     /**
      * @brief Tracks the current position within a spawn batch.

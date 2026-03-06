@@ -6,11 +6,11 @@ module;
 
 #include <optional>
 
-export module helios.engine.runtime.spawn.SpawnContext;
+export module helios.engine.runtime.spawn.types.SpawnContext;
 
-import helios.engine.runtime.spawn.EmitterContext;
+import helios.engine.runtime.spawn.types.EmitterContext;
 
-export namespace helios::engine::runtime::spawn {
+export namespace helios::engine::runtime::spawn::types {
 
     /**
      * @brief Context data passed to spawn behaviors during entity initialization.

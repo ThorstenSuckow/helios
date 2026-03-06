@@ -7,7 +7,7 @@ module;
 export module helios.engine.mechanics.spawn.components.EmittedByComponent;
 
 
-import helios.engine.mechanics.spawn.types.SpawnProfileId;
+import helios.engine.runtime.spawn.types.SpawnProfileId;
 import helios.core.types;
 import helios.util;
 

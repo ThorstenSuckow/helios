@@ -7,13 +7,13 @@ module;
 #include <cstdint>
 #include <string_view>
 
-export module helios.engine.mechanics.spawn.types.SpawnProfileId;
+export module helios.engine.runtime.spawn.types.SpawnProfileId;
 
 import helios.core.algorithms;
 import helios.core.types;
 import helios.core.data;
 
-export namespace helios::engine::mechanics::spawn::types {
+export namespace helios::engine::runtime::spawn::types {
 
     /**
      * @brief Tag type for SpawnProfileId.
@@ -40,8 +40,8 @@ export namespace helios::engine::mechanics::spawn::types {
  * @brief Hash specialization for SpawnProfileId.
  */
 template<>
-struct std::hash<helios::engine::mechanics::spawn::types::SpawnProfileId> {
-    std::size_t operator()(const helios::engine::mechanics::spawn::types::SpawnProfileId& id) const noexcept {
+struct std::hash<helios::engine::runtime::spawn::types::SpawnProfileId> {
+    std::size_t operator()(const helios::engine::runtime::spawn::types::SpawnProfileId& id) const noexcept {
         return id.value();
     }
 

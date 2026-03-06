@@ -6,13 +6,13 @@ module;
 
 #include <memory>
 
-export module helios.engine.runtime.spawn.SpawnProfile;
+export module helios.engine.runtime.spawn.types.SpawnProfile;
 
 import helios.engine.runtime.spawn.behavior.SpawnPlacer;
 import helios.engine.runtime.spawn.behavior.SpawnInitializer;
 import helios.engine.runtime.pooling.types.GameObjectPoolId;
 
-export namespace helios::engine::runtime::spawn {
+export namespace helios::engine::runtime::spawn::types {
 
     /**
      * @brief Configuration profile defining spawn behavior for a pool.

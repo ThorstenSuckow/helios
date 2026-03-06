@@ -12,9 +12,9 @@ module;
 
 export module helios.engine.runtime.spawn.SpawnManager;
 
-import helios.engine.runtime.spawn.SpawnPlanCursor;
-import helios.engine.runtime.spawn.SpawnProfile;
-import helios.engine.runtime.spawn.SpawnContext;
+import helios.engine.runtime.spawn.types.SpawnPlanCursor;
+import helios.engine.runtime.spawn.types.SpawnProfile;
+import helios.engine.runtime.spawn.types.SpawnContext;
 import helios.engine.runtime.spawn.events.SpawnPlanCommandExecutedEvent;
 
 
@@ -38,7 +38,7 @@ import helios.engine.runtime.world.UpdateContext;
 import helios.engine.runtime.pooling.GameObjectPoolManager;
 
 
-import helios.engine.mechanics.spawn.types.SpawnProfileId;
+import helios.engine.runtime.spawn.types;
 import helios.engine.ecs.GameObject;
 
 import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
@@ -52,7 +52,7 @@ import helios.engine.common.tags.ManagerRole;
 
 using namespace helios::engine::runtime::messaging::command;
 using namespace helios::engine::runtime::spawn::commands;
-
+using namespace helios::engine::runtime::spawn::types;
 export namespace helios::engine::runtime::spawn {
 
     /**
@@ -139,8 +139,8 @@ export namespace helios::engine::runtime::spawn {
          * @brief Map from profile IDs to their spawn profiles.
          */
         std::unordered_map<
-            helios::engine::mechanics::spawn::types::SpawnProfileId,
-            std::unique_ptr<const helios::engine::runtime::spawn::SpawnProfile>> spawnProfiles_;
+            helios::engine::runtime::spawn::types::SpawnProfileId,
+            std::unique_ptr<const SpawnProfile>> spawnProfiles_;
 
         /**
          * @brief Ensures that the bounds are properly computed..
@@ -229,7 +229,7 @@ export namespace helios::engine::runtime::spawn {
                     auto* aabb = go->get<helios::engine::modules::physics::collision::components::AabbColliderComponent>();
                     assert(aabb && "unexpected missing AabbColliderComponent");
 
-                    auto spawnCursor = helios::engine::runtime::spawn::SpawnPlanCursor{spawnCount, i};
+                    auto spawnCursor = SpawnPlanCursor{spawnCount, i};
                     const auto& spawnContext =  scheduledSpawnPlanCommand.spawnContext();
 
                     const auto& emitter = spawnContext.emitterContext;
@@ -465,8 +465,8 @@ export namespace helios::engine::runtime::spawn {
          * @pre No profile is already registered for this ID.
          */
         SpawnManager& addSpawnProfile(
-            const helios::engine::mechanics::spawn::types::SpawnProfileId& spawnProfileId,
-            std::unique_ptr<const helios::engine::runtime::spawn::SpawnProfile> spawnProfile) {
+            const SpawnProfileId& spawnProfileId,
+            std::unique_ptr<const SpawnProfile> spawnProfile) {
 
             assert(!spawnProfiles_.contains(spawnProfileId) && "SpawnProfileId already added");
 
@@ -482,8 +482,8 @@ export namespace helios::engine::runtime::spawn {
          *
          * @return Pointer to the profile, or nullptr if not found.
          */
-        [[nodiscard]] const helios::engine::runtime::spawn::SpawnProfile* spawnProfile(
-            const helios::engine::mechanics::spawn::types::SpawnProfileId& spawnProfileId) const {
+        [[nodiscard]] const SpawnProfile* spawnProfile(
+            const SpawnProfileId& spawnProfileId) const {
 
             if (!spawnProfiles_.contains(spawnProfileId)) {
                 return nullptr;

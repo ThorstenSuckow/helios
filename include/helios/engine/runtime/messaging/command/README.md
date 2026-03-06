@@ -75,7 +75,7 @@ void update(UpdateContext& ctx) noexcept {
 // Managers provide submit() methods for commands they process
 class SpawnManager {
 public:
-    using EngineRoleTag = helios::engine::common::tags::ManagerTag;
+    using EngineRoleTag = helios::engine::common::tags::ManagerRole;
 
     bool submit(const SpawnCommand& cmd) noexcept {
         spawnQueue_.push_back(cmd);

@@ -28,7 +28,7 @@ import helios.engine.mechanics.lifecycle.components;
 
 using namespace helios::engine::mechanics::lifecycle::components;
 
-import helios.engine.common.tags.SystemTag;
+import helios.engine.common.tags.SystemRole;
 
 export namespace helios::engine::modules::ai::systems {
 
@@ -50,7 +50,7 @@ export namespace helios::engine::modules::ai::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemTag;
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
         /**
          * @brief Updates steering for all chasing entities.
          *

@@ -66,7 +66,7 @@ export namespace helios::engine::runtime::messaging::command {
      * @see ExecutableCommand
      */
     template <typename... CommandTypes>
-    class TypedCommandBuffer : public CommandBuffer {
+    class TypedCommandBuffer {
 
         /**
          * @brief Per-type command queues stored as a tuple of vectors.
@@ -107,7 +107,7 @@ export namespace helios::engine::runtime::messaging::command {
 
             auto& commandHandlerRegistry = gameWorld.commandHandlerRegistry();
 
-            if (gameWorld.commandHandlerRegistry().has<CommandType>()) {
+            if (commandHandlerRegistry.has<CommandType>()) {
                 for (auto& cmd : queue) {
                     commandHandlerRegistry.submit<CommandType>(cmd);
                 }
@@ -127,7 +127,6 @@ export namespace helios::engine::runtime::messaging::command {
 
     public:
 
-
         /**
          * @brief Enqueues a command of the specified type.
          *
@@ -138,16 +137,14 @@ export namespace helios::engine::runtime::messaging::command {
          */
         template<typename T, typename... Args>
         void add(Args&&... args) {
-
             auto& queue = std::get<std::vector<T>>(commandQueues_);
             queue.emplace_back(std::forward<Args>(args)...);
-
         }
 
         /**
          * @brief Discards all queued commands without executing them.
          */
-        void clear() noexcept override {
+        void clear() noexcept {
             std::apply([](auto&... queue) { (queue.clear(), ...); }, commandQueues_);
         }
 
@@ -160,7 +157,7 @@ export namespace helios::engine::runtime::messaging::command {
          * @param gameWorld The game world for which the queue should be flushed.
          * @param updateContext The current frame's update context.
          */
-        void flush(GameWorld& gameWorld,  UpdateContext& updateContext) noexcept override {
+        void flush(GameWorld& gameWorld,  UpdateContext& updateContext) noexcept {
             (flushCommandQueue<CommandTypes>(gameWorld, updateContext), ...);
         }
 

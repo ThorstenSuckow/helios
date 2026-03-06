@@ -43,7 +43,7 @@ import helios.engine.mechanics.spawn.components.SpawnedByProfileComponent;
 import helios.engine.mechanics.lifecycle.components.Active;
 
 
-import helios.engine.common.tags.SystemTag;
+import helios.engine.common.tags.SystemRole;
 
 export namespace helios::engine::mechanics::bounds::systems {
 
@@ -76,7 +76,7 @@ export namespace helios::engine::mechanics::bounds::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemTag;
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
 
         /**
          * @brief Updates all entities that may have left level bounds.

@@ -12,8 +12,8 @@ for role classification, and tag types for the opt-in registration pattern.
 
 | Submodule | Purpose |
 |-----------|---------|
-| `concepts/` | C++20 concepts for engine role constraints (IsManager, IsSystem, ...) |
-| `tags/` | Empty tag structs for compile-time role identification (ManagerTag, SystemTag) |
+| `concepts/` | C++20 concepts for engine role constraints (IsManagerLike, IsSystemLike, ...) |
+| `tags/` | Empty tag structs for compile-time role identification (ManagerRole, SystemRole) |
 | `types/` | Context structs for entity interactions and damage |
 
 ---

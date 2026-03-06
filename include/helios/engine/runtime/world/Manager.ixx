@@ -9,7 +9,7 @@ module;
 
 export module helios.engine.runtime.world.Manager;
 
-import helios.engine.common.concepts.IsManager;
+import helios.engine.common.concepts.IsManagerLike;
 
 using namespace helios::engine::common::concepts;
 
@@ -45,8 +45,8 @@ export namespace helios::engine::runtime::world {
      *
      * @details Manager uses the Concept/Model pattern to erase the concrete
      * manager type. Concrete managers are plain classes that satisfy
-     * `IsManager<T>` (i.e. provide `flush(UpdateContext&)` and declare
-     * `using EngineRoleTag = ManagerTag;`).
+     * `IsManagerLike<T>` (i.e. provide `flush(UpdateContext&)` and declare
+     * `using EngineRoleTag = ManagerRole;`).
      *
      * The internal `Concept` base defines the virtual interface, and
      * `Model<T>` adapts the concrete type T, owning it by value.
@@ -55,8 +55,8 @@ export namespace helios::engine::runtime::world {
      *
      * Manager is move-only (non-copyable).
      *
-     * @see IsManager
-     * @see ManagerTag
+     * @see IsManagerLike
+     * @see ManagerRole
      * @see ManagerRegistry
      * @see ConceptModelRegistry
      */
@@ -80,7 +80,7 @@ export namespace helios::engine::runtime::world {
         /**
          * @brief Typed wrapper that adapts a concrete manager to the Concept interface.
          *
-         * @tparam T The concrete manager type, must satisfy `IsManager<T>`.
+         * @tparam T The concrete manager type, must satisfy `IsManagerLike<T>`.
          */
         template<typename T>
         class Model final : public Concept {
@@ -125,12 +125,12 @@ export namespace helios::engine::runtime::world {
         /**
          * @brief Wraps a concrete manager in a type-erased Manager.
          *
-         * @tparam T The concrete manager type, must satisfy `IsManager<T>`.
+         * @tparam T The concrete manager type, must satisfy `IsManagerLike<T>`.
          *
          * @param manager The concrete manager instance to wrap (moved into internal storage).
          */
         template<typename T>
-        requires IsManager<T>
+        requires IsManagerLike<T>
         explicit Manager(T manager) : pimpl_(std::make_unique<Model<T>>(std::move(manager))) {}
 
         Manager(const Manager&) = delete;

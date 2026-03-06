@@ -75,7 +75,7 @@ export namespace helios::engine::mechanics::health {
         std::vector<DamageContext> damageContexts_;
 
     public:
-        using EngineRoleTag = helios::engine::common::tags::ManagerTag;
+        using EngineRoleTag = helios::engine::common::tags::ManagerRole;
 
         /**
          * @brief Applies all queued damage and emits health events.

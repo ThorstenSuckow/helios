@@ -52,7 +52,7 @@ export namespace helios::engine::mechanics::lifecycle {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::ManagerTag;
+        using EngineRoleTag = helios::engine::common::tags::ManagerRole;
 
         /**
          * @brief Enqueues a lifecycle command for deferred processing.

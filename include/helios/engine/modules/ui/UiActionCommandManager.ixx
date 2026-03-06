@@ -56,7 +56,7 @@ export namespace helios::engine::modules::ui {
         std::unordered_map<ActionId, ActionCallback> policies_;
 
     public:
-        using EngineRoleTag = helios::engine::common::tags::ManagerTag;
+        using EngineRoleTag = helios::engine::common::tags::ManagerRole;
 
         /**
          * @brief Constructs the manager with default capacity.

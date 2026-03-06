@@ -23,7 +23,7 @@ import helios.engine.mechanics.lifecycle.components.Active;
 import helios.engine.modules.scene.components.SceneNodeComponent;
 import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
 
-import helios.engine.common.tags.SystemTag;
+import helios.engine.common.tags.SystemRole;
 
 export namespace helios::engine::modules::scene::systems {
 
@@ -48,7 +48,7 @@ export namespace helios::engine::modules::scene::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemTag;
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
 
         /**
          * @brief Reference to the scene-to-viewport mapping for scene iteration.

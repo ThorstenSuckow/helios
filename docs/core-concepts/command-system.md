@@ -101,12 +101,12 @@ Commands are flushed in the order of the template parameter list. The `EngineCom
 
 ## Command Handlers
 
-Most of the Managers in helios process commands by providing a `submit` method for each command type they handle. Concrete managers are plain classes — they do not inherit from any handler interface. Instead, they declare `using EngineRoleTag = ManagerTag;` to opt in:
+Most of the Managers in helios process commands by providing a `submit` method for each command type they handle. Concrete managers are plain classes — they do not inherit from any handler interface. Instead, they declare `using EngineRoleTag = ManagerRole;` to opt in:
 
 ```cpp
 class SpawnManager {
 public:
-    using EngineRoleTag = helios::engine::common::tags::ManagerTag;
+    using EngineRoleTag = helios::engine::common::tags::ManagerRole;
 
     bool submit(const SpawnCommand& cmd) noexcept {
         spawnCommands_.push_back(cmd);
@@ -138,18 +138,19 @@ void init(GameWorld& gameWorld) {
 
 ## EngineCommandBuffer
 
-`EngineCommandBuffer` is a thin facade over `TypedCommandBuffer` instantiated with all engine command types. It is registered as a resource in the `GameWorld` and used internally by `UpdateContext::queueCommand<T>()`.
+`EngineCommandBuffer` is a thin facade over `TypedCommandBuffer` instantiated with all engine command types. It is registered as a resource in the `GameWorld` and wrapped by a type-erased `CommandBuffer` via the Concept/Model pattern. Systems access it via `UpdateContext::queueCommand<T>()`.
 
 ```cpp
-class EngineCommandBuffer : public CommandBuffer {
+class EngineCommandBuffer {
     using BufferImpl = TypedCommandBuffer<
-        Aim2DCommand, ShootCommand,
+        Aim2DCommand, ShootCommand, ApplyDamageCommand,
         Move2DCommand, SteeringCommand,
         UpdateScoreCommand,
         ScheduledSpawnPlanCommand, SpawnCommand, DespawnCommand,
         StateCommand<GameState>, StateCommand<MatchState>,
         UiActionCommand,
-        TimerControlCommand
+        TimerControlCommand,
+        WorldLifecycleCommand
     >;
 
     BufferImpl impl_;
@@ -247,12 +248,13 @@ The Command System integrates with the Phase/Pass game loop architecture. Comman
 
 ## Related Modules
 
-- `helios.engine.runtime.messaging.command.CommandBuffer` — Abstract buffer base
+- `helios.engine.runtime.messaging.command.CommandBuffer` — Type-erased buffer wrapper (Concept/Model)
 - `helios.engine.runtime.messaging.command.TypedCommandBuffer` — Compile-time typed buffer
+- `helios.engine.runtime.messaging.command.CommandBufferRegistry` — Type-indexed registry for CommandBuffer instances
 - `helios.engine.runtime.messaging.command.CommandHandlerRegistry` — Function-pointer based registry for command handlers
-- `helios.engine.runtime.messaging.command.EngineCommandBuffer` — Concrete engine buffer
-- `helios.engine.runtime.world.Manager` — Base class for deferred processing managers
-- `helios.engine.runtime.world.ResourceRegistry` — Resource storage
+- `helios.engine.runtime.messaging.command.EngineCommandBuffer` — Concrete engine buffer facade
+- `helios.engine.runtime.world.Manager` — Type-erased wrapper for managers
+- `helios.engine.runtime.world.ResourceRegistry` — Unified resource storage for Managers and CommandBuffers
 
 ## Related Documentation
 

@@ -23,7 +23,7 @@ import helios.engine.core.data;
 using namespace helios::engine::state;
 using namespace helios::engine::core::data;
 
-import helios.engine.common.tags.SystemTag;
+import helios.engine.common.tags.SystemRole;
 
 export namespace helios::engine::modules::rendering::viewport::systems {
 
@@ -66,7 +66,7 @@ export namespace helios::engine::modules::rendering::viewport::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemTag;
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
 
         /**
          * @brief Constructs the system with a state-to-ID map pair.

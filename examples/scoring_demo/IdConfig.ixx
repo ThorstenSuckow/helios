@@ -8,8 +8,7 @@ module;
 
 export module helios.examples.scoring.IdConfig;
 
-import helios.math;
-import helios.engine.core.data;
+import helios;
 
 export namespace helios::examples::scoring::IdConfig {
 

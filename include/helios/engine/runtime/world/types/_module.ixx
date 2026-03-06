@@ -6,3 +6,4 @@ export module helios.engine.runtime.world.types;
 
 export import helios.engine.runtime.world.types.ResourceTypeId;
 export import helios.engine.runtime.world.types.SystemTypeId;
+export import helios.engine.runtime.world.types.ManagerTypeId;

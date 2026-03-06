@@ -24,8 +24,8 @@ This module provides the core classes for managing runtime game state. `GameWorl
 ```cpp
 // Create world and register resources
 helios::engine::runtime::world::GameWorld gameWorld;
-auto& poolMgr = gameWorld.registerManager<GameObjectPoolManager>();
-auto& spawnMgr = gameWorld.registerManager<SpawnManager>();
+auto& poolMgr = gameWorld.registerResource<GameObjectPoolManager>();
+auto& spawnMgr = gameWorld.registerResource<SpawnManager>();
 
 gameWorld.init(); // Initializes all Managers in registration order
 

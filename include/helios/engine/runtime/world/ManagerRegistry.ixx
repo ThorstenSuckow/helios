@@ -25,13 +25,13 @@ export namespace helios::engine::runtime::world {
     /**
      * @brief Type alias for a ConceptModelRegistry specialized for Managers.
      *
-     * @details Stores type-erased Manager wrappers indexed by ResourceTypeId,
+     * @details Stores type-erased Manager wrappers indexed by ManagerTypeId,
      * providing O(1) lookup by concrete Manager type and insertion-order
      * iteration for deterministic init/flush/reset cycles.
      *
      * @see ConceptModelRegistry
      * @see Manager
      */
-    using ManagerRegistry = ConceptModelRegistry<Manager, ResourceTypeId>;
+    using ManagerRegistry = ConceptModelRegistry<Manager, ManagerTypeId>;
 
 }

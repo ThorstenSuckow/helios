@@ -145,7 +145,7 @@ export namespace helios::engine::state {
 
 
     public:
-        using EngineRoleTag = helios::engine::common::tags::ManagerTag;
+        using EngineRoleTag = helios::engine::common::tags::ManagerRole;
 
         /**
          * @brief Constructs a state manager with transition rules.

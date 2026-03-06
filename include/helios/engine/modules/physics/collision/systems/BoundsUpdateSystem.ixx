@@ -29,7 +29,7 @@ import helios.engine.modules.rendering.model.components.ModelAabbComponent;
 
 import helios.engine.mechanics.lifecycle.components.Active;
 
-import helios.engine.common.tags.SystemTag;
+import helios.engine.common.tags.SystemRole;
 
 export namespace helios::engine::modules::physics::collision::systems {
 
@@ -55,7 +55,7 @@ export namespace helios::engine::modules::physics::collision::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemTag;
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
 
         /**
          * @brief Updates collider bounds for all applicable entities.

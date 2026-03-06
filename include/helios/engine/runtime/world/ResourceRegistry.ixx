@@ -16,12 +16,14 @@ import helios.engine.runtime.world.Manager;
 import helios.core.memory.ErasedUnique;
 
 import helios.engine.runtime.messaging.command.CommandBuffer;
+import helios.engine.runtime.messaging.command.CommandBufferRegistry;
+import helios.engine.runtime.messaging.command.CommandHandlerRegistry;
 
 import helios.engine.runtime.world.ManagerRegistry;
 
 import helios.engine.common.concepts;
 
-import helios.engine.runtime.world.types.ResourceTypeId;
+import helios.engine.runtime.world.types;
 
 using namespace helios::engine::runtime::messaging::command;
 using namespace helios::engine::runtime::world::types;
@@ -32,244 +34,157 @@ export namespace helios::engine::runtime::world {
 
 
     /**
-     * @brief Type-indexed registry for engine resources with O(1) lookup.
+     * @brief Unified type-indexed registry for all engine resources.
      *
-     * @details ResourceRegistry provides a central store for Managers and
-     * CommandBuffers.. Each resource type receives a
-     * unique compile-time index via ResourceTypeId, enabling O(1) access
-     * through a flat `void*` array (`fastAccess_`).
+     * @details ResourceRegistry acts as the central access point for Managers
+     * and CommandBuffers. It delegates to a ManagerRegistry and a
+     * CommandBufferRegistry internally, routing registration and lookup
+     * based on compile-time concept checks (IsManagerLike / IsCommandBufferLike).
      *
-     * ## Ownership Model
-     *
-     * - **Managers and CommandBuffers** are heap-allocated and owned via
-     *   `ErasedUnique` (type-erased unique ownership, 16 bytes per entry).
-     *
-     * ## Dual-Access Pattern
-     *
-     * Resources are stored in two parallel structures:
-     * - `fastAccess_[idx]` — O(1) type-based lookup (hot path)
-     * - `managers_` / `commandBuffers_` — linear iteration for batch operations
-     *   (e.g., `GameWorld::flushManagers()`, `GameWorld::init()`)
-     *
-     * @see ResourceTypeId
-     * @see ErasedUnique
-     * @see Manager
-     * @see CommandBuffer
+     * @see ManagerRegistry
+     * @see CommandBufferRegistry
+     * @see GameWorld
      */
    class ResourceRegistry {
 
         /**
-         * @brief Owning storage for all heap-allocated resources.
-         */
-        std::vector<ErasedUnique> owned_;
-
-        /**
-         * @brief Type-indexed registry for Manager instances.
-         *
-         * @details Delegates to ConceptModelRegistry for type-erased storage,
-         * O(1) lookup, and insertion-order iteration.
+         * @brief Registry for Manager instances.
          */
         ManagerRegistry managerRegistry_;
 
         /**
-         * @brief Non-owning pointers to registered CommandBuffers for iteration.
+         * @brief Registry for CommandBuffer instances.
          */
-        std::vector<CommandBuffer*> commandBuffers_;
+        CommandBufferRegistry commandBufferRegistry_;
+
+        public:
 
         /**
-         * @brief Flat array for O(1) type-indexed resource lookup.
+         * @brief Registers and constructs a resource of type T.
          *
-         * @details Indexed by `ResourceTypeId::id<T>().value()`. Each slot
-         * holds a raw `void*` to the resource instance.
+         * @details Routes to ManagerRegistry or CommandBufferRegistry based
+         * on whether T satisfies IsManagerLike or IsCommandBufferLike. The resource
+         * is constructed in-place with forwarded arguments.
+         *
+         * @tparam T The resource type. Must satisfy IsManagerLike or IsCommandBufferLike.
+         * @tparam Args Constructor argument types.
+         *
+         * @param args Arguments forwarded to the T constructor.
+         *
+         * @return Reference to the newly registered resource.
          */
-        std::vector<void*> fastAccess_;
+        template<class T, class... Args>
+        requires IsManagerLike<T> || IsCommandBufferLike<T>
+        T& emplace(Args&&... args) {
 
+            if constexpr (IsManagerLike<T>) {
+                return managerRegistry_.template add<T>(std::forward<Args>(args)...);
+            }
 
-public:
+            if constexpr (IsCommandBufferLike<T>) {
+                return  commandBufferRegistry_.template add<T>(std::forward<Args>(args)...);
+            }
 
-    /**
-     * @brief Registers an owning Manager resource.
-     *
-     * @details Constructs T in the ManagerRegistry (which wraps it in a
-     * type-erased Manager) and stores a raw pointer in `fastAccess_` for
-     * O(1) lookup. The ManagerRegistry owns the instance and provides
-     * insertion-order iteration for batch init/flush/reset.
-     *
-     * @tparam T The Manager type. Must satisfy `IsManager<T>`.
-     * @tparam Args Constructor argument types for T.
-     *
-     * @param args Arguments forwarded to the T constructor.
-     *
-     * @return Reference to the registered T instance.
-     *
-     * @pre No resource of type T is already registered.
-     */
-    template<class T, class... Args>
-    requires IsManager<T>
-    T& registerResource(Args&&... args) {
-
-        auto& managerRef = managerRegistry_.template add<T>(std::forward<Args>(args)...);
-
-        const size_t idx = ResourceTypeId::id<T>().value();
-
-        if (idx >= fastAccess_.size()) {
-            fastAccess_.resize(idx + 1, nullptr);
+            assert(false);
         }
 
-        assert(fastAccess_[idx] == nullptr && "Resource already registered");
-        fastAccess_[idx] = &managerRef;
+        /**
+         * @brief Checks if a resource of type T is registered.
+         *
+         * @tparam T The resource type.
+         *
+         * @return True if the resource is registered.
+         */
+        template<class T>
+        bool has() const noexcept {
+            if constexpr (IsManagerLike<T>) {
+                return managerRegistry_.has<T>();
+            }
 
-        return managerRef;
-    }
+            if constexpr (IsCommandBufferLike<T>) {
+                return commandBufferRegistry_.has<T>();
+            }
 
-
-    /**
-     * @brief Registers an owning CommandBuffer or plain resource.
-     *
-     * @details Heap-allocates T via `std::make_unique`, stores a raw pointer
-     * in `fastAccess_` for O(1) lookup, and transfers ownership to `owned_`.
-     * If T derives from CommandBuffer, the pointer is also appended to
-     * `commandBuffers_` for batch flushing.
-     *
-     * @tparam T The resource type. Must not satisfy `IsManager`.
-     * @tparam Args Constructor argument types for T.
-     *
-     * @param args Arguments forwarded to the T constructor.
-     *
-     * @return Reference to the registered T instance.
-     *
-     * @pre No resource of type T is already registered.
-     */
-    template<class T, class... Args>
-    T& registerResource(Args&&... args) {
-
-        auto uniquePtr = std::make_unique<T>(std::forward<Args>(args)...);
-        T* raw = uniquePtr.get();
-
-        const size_t idx = ResourceTypeId::id<T>().value();
-
-        if (idx >= fastAccess_.size()) {
-            fastAccess_.resize(idx + 1, nullptr);
+            return false;
         }
 
-        assert(fastAccess_[idx] == nullptr && "Resource already registered");
+        /**
+         * @brief Retrieves a registered resource by type.
+         *
+         * @tparam T The resource type.
+         *
+         * @return Pointer to the resource, or nullptr if not registered.
+         */
+        template<class T>
+        T* tryGet() const noexcept {
+            if constexpr (IsManagerLike<T>) {
+                return managerRegistry_.item<T>();
+            }
 
-        fastAccess_[idx] = raw;
+            if constexpr (IsCommandBufferLike<T>) {
+                return commandBufferRegistry_.item<T>();
+            }
 
-        if constexpr (std::derived_from<T, CommandBuffer>) {
-            commandBuffers_.push_back(static_cast<CommandBuffer*>(raw));
+            return nullptr;
         }
 
-        owned_.emplace_back(ErasedUnique{std::move(uniquePtr)});
 
-        return *raw;
-    }
+        /**
+         * @brief Retrieves a registered resource by type (checked).
+         *
+         * @details Asserts that the resource is registered before returning.
+         *
+         * @tparam T The resource type.
+         *
+         * @return Reference to the resource.
+         *
+         * @pre The resource must be registered.
+         */
+        template<class T>
+        T& get() const noexcept {
+            assert(has<T>() && "Resource not found");
+            if constexpr (IsManagerLike<T>) {
+                return *managerRegistry_.item<T>();
+            }
 
+            if constexpr (IsCommandBufferLike<T>) {
+                return *commandBufferRegistry_.item<T>();
+            }
 
-
-    /**
-     * @brief Checks whether a resource of type T is registered.
-     *
-     * @tparam T The resource type to check.
-     *
-     * @return True if registered, false otherwise.
-     */
-    template<class T>
-    bool has() const noexcept {
-        const size_t idx = ResourceTypeId::id<T>().value();
-        return idx < fastAccess_.size() && fastAccess_[idx] != nullptr;
-    }
-
-    /**
-     * @brief Returns a reference to a registered resource.
-     *
-     * @tparam T The resource type.
-     *
-     * @return Reference to the resource.
-     *
-     * @pre A resource of type T must be registered.
-     */
-    template<class T>
-    T& resource() noexcept {
-        const size_t idx = ResourceTypeId::id<T>().value();
-        assert(idx < fastAccess_.size() && fastAccess_[idx] != nullptr);
-        return *static_cast<T*>(fastAccess_[idx]);
-    }
-
-    /**
-     * @copydoc resource()
-     */
-    template<class T>
-    const T& resource() const noexcept {
-        const size_t idx = ResourceTypeId::id<T>().value();
-        assert(idx < fastAccess_.size() && fastAccess_[idx] != nullptr);
-        return *static_cast<const T*>(fastAccess_[idx]);
-    }
-
-    /**
-     * @brief Returns a pointer to a registered resource, or nullptr.
-     *
-     * @tparam T The resource type.
-     *
-     * @return Pointer to the resource, or nullptr if not registered.
-     */
-    template<class T>
-    T* tryResource() noexcept {
-        const size_t idx = ResourceTypeId::id<T>().value();
-        if (idx < fastAccess_.size() && fastAccess_[idx] != nullptr) {
-            return static_cast<T*>(fastAccess_[idx]);
+            assert(false);
         }
-        return nullptr;
-    }
 
-    /**
-     * @copydoc tryResource()
-     */
-    template<class T>
-    const T* tryResource() const noexcept {
-        const size_t idx = ResourceTypeId::id<T>().value();
-        if (idx < fastAccess_.size() && fastAccess_[idx] != nullptr) {
-            return static_cast<const T*>(fastAccess_[idx]);
+        /**
+         * @brief Returns a read-only span of all registered Managers.
+         *
+         * @return Span of Manager pointers in registration order.
+         */
+        [[nodiscard]] std::span<Manager* const> managers() const noexcept {
+            return managerRegistry_.items();
         }
-        return nullptr;
-    }
 
+        /**
+         * @copydoc managers() const
+         */
+        std::span<Manager*> managers() noexcept {
+            return managerRegistry_.items();
+        }
 
-    /**
-     * @brief Returns a read-only span of registered Managers.
-     *
-     * @return Span of Manager pointers.
-     */
-    [[nodiscard]] std::span<Manager* const> managers() const noexcept {
-        return managerRegistry_.items();
-    }
+        /**
+         * @brief Returns a read-only span of all registered CommandBuffers.
+         *
+         * @return Span of CommandBuffer pointers in registration order.
+         */
+        std::span<CommandBuffer* const> commandBuffers() const noexcept {
+            return commandBufferRegistry_.items();
+        }
 
-    /**
-     * @brief Returns a mutable span of registered Managers.
-     *
-     * @return Span of Manager pointers.
-     */
-    std::span<Manager*> managers() noexcept {
-        return managerRegistry_.items();
-    }
-
-    /**
-     * @brief Returns a read-only span of registered CommandBuffers.
-     *
-     * @return Span of CommandBuffer pointers.
-     */
-    std::span<CommandBuffer* const> commandBuffers() const noexcept {
-        return commandBuffers_;
-    }
-
-    /**
-     * @brief Returns a mutable span of registered CommandBuffers.
-     *
-     * @return Span of CommandBuffer pointers.
-     */
-    std::span<CommandBuffer*> commandBuffers() noexcept {
-        return commandBuffers_;
-    }
-};
+        /**
+         * @copydoc commandBuffers() const
+         */
+        std::span<CommandBuffer*> commandBuffers() noexcept {
+            return commandBufferRegistry_.items();
+        }
+    };
 }
 

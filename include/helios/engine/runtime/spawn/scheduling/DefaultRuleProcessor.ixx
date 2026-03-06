@@ -69,16 +69,15 @@ export namespace helios::engine::runtime::spawn::scheduling {
             helios::engine::runtime::spawn::policy::SpawnRule& spawnRule,
             helios::engine::runtime::spawn::policy::SpawnRuleState& spawnRuleState
         ) noexcept override {
-            const auto& poolManager  = gameWorld.resourceRegistry().resource<helios::engine::runtime::pooling::GameObjectPoolManager>();
-            const auto& spawnManager = gameWorld.resourceRegistry().resource<helios::engine::runtime::spawn::SpawnManager>();
+            const auto* poolManager  = gameWorld.tryManager<helios::engine::runtime::pooling::GameObjectPoolManager>();
+            const auto* spawnManager = gameWorld.tryManager<helios::engine::runtime::spawn::SpawnManager>();
 
-
-            const auto* spawnProfile = spawnManager.spawnProfile(spawnProfileId);
+            const auto* spawnProfile = spawnManager->spawnProfile(spawnProfileId);
             assert(spawnProfile != nullptr);
 
             const auto& [gameObjectPoolId, _, __] = *spawnProfile;
 
-            const auto poolSnapshot = poolManager.poolSnapshot(gameObjectPoolId);
+            const auto poolSnapshot = poolManager->poolSnapshot(gameObjectPoolId);
 
             // tick the rule state
             spawnRuleState.update(updateContext.deltaTime());

@@ -8,7 +8,7 @@ Tag types are empty structs used as compile-time markers. A class declares
 its engine role by adding a nested type alias:
 
 ```cpp
-using EngineRoleTag = helios::engine::common::tags::SystemTag;
+using EngineRoleTag = helios::engine::common::tags::SystemRole;
 ```
 
 The [concepts](../concepts/README.md) module detects this alias via `HasTag`
@@ -19,15 +19,15 @@ types that happen to have matching method signatures.
 
 | Tag | Role | Detected by |
 |-----|------|-------------|
-| `ManagerTag` | Batch-processing manager | `IsManager<T>` |
-| `SystemTag` | Per-frame game logic processor | `IsSystem<T>` |
+| `ManagerRole` | Batch-processing manager | `IsManagerLike<T>` |
+| `SystemRole` | Per-frame game logic processor | `IsSystemLike<T>` |
 
 ## Usage
 
 ```cpp
 class MySystem {
 public:
-    using EngineRoleTag = helios::engine::common::tags::SystemTag;
+    using EngineRoleTag = helios::engine::common::tags::SystemRole;
 
     void update(UpdateContext& ctx) noexcept {
         // per-frame logic

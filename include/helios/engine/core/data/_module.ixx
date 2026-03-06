@@ -6,8 +6,6 @@ export module helios.engine.core.data;
 
 export import helios.engine.core.data.ComponentTypeId;
 export import helios.engine.core.data.GameObjectPoolId;
-export import helios.engine.mechanics.spawn.types.SpawnRuleId;
-export import helios.engine.mechanics.spawn.types.SpawnProfileId;
 export import helios.engine.core.data.FontId;
 export import helios.engine.core.data.ViewportId;
 export import helios.engine.core.data.CollisionLayer;
@@ -19,6 +17,5 @@ export import helios.engine.core.data.SceneId;
 export import helios.engine.core.data.StateTypeId;
 export import helios.engine.core.data.PrefabId;
 export import helios.engine.core.data.GameTimerId;
-export import helios.engine.core.data.CommandTypeId;
 export import helios.core.container.ConceptModelRegistry;
 

@@ -29,7 +29,7 @@ import helios.math;
 
 import helios.engine.ecs.components.HierarchyComponent;
 
-import helios.engine.common.tags.SystemTag;
+import helios.engine.common.tags.SystemRole;
 
 export namespace helios::engine::modules::ui::transform::systems {
 
@@ -108,7 +108,7 @@ export namespace helios::engine::modules::ui::transform::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemTag;
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
 
 
         /**

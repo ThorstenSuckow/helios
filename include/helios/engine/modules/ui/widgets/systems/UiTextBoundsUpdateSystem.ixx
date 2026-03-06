@@ -17,7 +17,7 @@ import helios.engine.mechanics.lifecycle.components.Active;
 
 import helios.engine.modules.rendering.model.components.ModelAabbComponent;
 
-import helios.engine.common.tags.SystemTag;
+import helios.engine.common.tags.SystemRole;
 
 export namespace helios::engine::modules::ui::widgets::systems {
 
@@ -33,7 +33,7 @@ export namespace helios::engine::modules::ui::widgets::systems {
     public:
 
 
-        using EngineRoleTag = helios::engine::common::tags::SystemTag;
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
 
 
         /**

@@ -48,7 +48,7 @@ import helios.engine.modules.physics.collision.components.AabbColliderComponent;
 
 import helios.math;
 
-import helios.engine.common.tags.ManagerTag;
+import helios.engine.common.tags.ManagerRole;
 
 using namespace helios::engine::runtime::messaging::command;
 using namespace helios::engine::runtime::spawn::commands;
@@ -365,7 +365,7 @@ export namespace helios::engine::runtime::spawn {
 
 
     public:
-        using EngineRoleTag = helios::engine::common::tags::ManagerTag;
+        using EngineRoleTag = helios::engine::common::tags::ManagerRole;
 
         /**
          * @brief Default constructor.
@@ -504,8 +504,7 @@ export namespace helios::engine::runtime::spawn {
         void init(helios::engine::runtime::world::GameWorld& gameWorld) noexcept {
 
             assert(gameWorld.hasManager<helios::engine::runtime::pooling::GameObjectPoolManager>() && "Unexpected missing GameObjectPoolManager");
-            gameObjectPoolManager_ = &gameWorld.manager<helios::engine::runtime::pooling::GameObjectPoolManager>();
-
+            gameObjectPoolManager_ = gameWorld.tryManager<helios::engine::runtime::pooling::GameObjectPoolManager>();
 
             gameWorld.registerCommandHandler<SpawnCommand, DespawnCommand, ScheduledSpawnPlanCommand>(*this);
         }

@@ -22,7 +22,7 @@ import helios.engine.mechanics.timing.components;
 
 using namespace helios::engine::mechanics::timing;
 
-import helios.engine.common.tags.SystemTag;
+import helios.engine.common.tags.SystemRole;
 
 export namespace helios::engine::mechanics::timing::systems {
 
@@ -45,7 +45,7 @@ export namespace helios::engine::mechanics::timing::systems {
     public:
 
 
-        using EngineRoleTag = helios::engine::common::tags::SystemTag;
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
         /**
          * @brief Constructs the system with a reference to the TimerManager.
          *

@@ -26,7 +26,7 @@ import helios.engine.mechanics.lifecycle.components.Active;
 using namespace helios::engine::mechanics::match::components;
 using namespace helios::engine::mechanics::match::types;
 
-import helios.engine.common.tags.SystemTag;
+import helios.engine.common.tags.SystemRole;
 
 export namespace helios::engine::modules::ui::binding::systems {
 
@@ -42,7 +42,7 @@ export namespace helios::engine::modules::ui::binding::systems {
     public:
 
 
-        using EngineRoleTag = helios::engine::common::tags::SystemTag;
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
         /**
          * @brief Synchronises bound text elements with their target lives values.
          *

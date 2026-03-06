@@ -96,6 +96,7 @@ export namespace helios::engine::runtime::world {
      * ```cpp
      * auto& poolMgr  = gameWorld.registerManager<GameObjectPoolManager>();
      * auto& spawnMgr = gameWorld.registerManager<SpawnManager>();
+     * auto& cmdBuf   = gameWorld.registerCommandBuffer<EngineCommandBuffer>();
      *
      * gameWorld.init(); // Calls init() on all Managers in registration order
      * ```
@@ -149,10 +150,11 @@ export namespace helios::engine::runtime::world {
 
 
         /**
-         * @brief Type-indexed registry for Managers, CommandBuffers, and CommandHandlers.
+         * @brief Type-indexed registry for Managers and CommandBuffers.
          *
-         * @details Provides O(1) type-based access via ResourceTypeId. Owns all
-         * registered Manager and CommandBuffer instances via ErasedUnique.
+         * @details Provides O(1) type-based access via ManagerRegistry and
+         * CommandBufferRegistry. Owns all registered Manager and CommandBuffer
+         * instances via ConceptModelRegistry.
          */
         ResourceRegistry resourceRegistry_;
 
@@ -199,10 +201,14 @@ export namespace helios::engine::runtime::world {
          */
         explicit GameWorld() : em_(helios::engine::ecs::EntityManager(entityRegistry_)), session_(Session(addGameObject())) { };
 
+        /// @brief Non-copyable.
         GameWorld(const GameWorld&) = delete;
+        /// @brief Non-copyable.
         GameWorld operator=(const GameWorld&) = delete;
 
+        /// @brief Non-movable.
         GameWorld(const GameWorld&&) = delete;
+        /// @brief Non-movable.
         GameWorld operator=(const GameWorld&&) = delete;
 
         /**
@@ -266,38 +272,111 @@ export namespace helios::engine::runtime::world {
         }
 
         /**
-         * @brief Checks if a Manager of the specified type is registered.
+         * @brief Checks whether a Manager of type T is registered.
          *
-         * @tparam T The Manager type to check for.
+         * @tparam T The Manager type. Must satisfy IsManagerLike.
          *
-         * @return True if a Manager of type T is registered, false otherwise.
+         * @return True if the Manager is registered.
          */
         template<typename T>
-        requires IsManager<T>
+        requires IsManagerLike<T>
         [[nodiscard]] bool hasManager() const {
             return resourceRegistry_.has<T>();
         }
 
         /**
-         * @brief Registers a Manager of the specified type.
+         * @brief Checks whether a CommandBuffer of type T is registered.
          *
-         * @details Creates a new Manager instance via the ResourceRegistry.
-         * The Manager's `init()` is called later during `GameWorld::init()`.
+         * @tparam T The CommandBuffer type. Must satisfy IsCommandBufferLike.
          *
-         * @tparam T The Manager type. Must derive from Manager.
+         * @return True if the CommandBuffer is registered.
+         */
+        template<typename T>
+        requires IsCommandBufferLike<T>
+        [[nodiscard]] bool hasCommandBuffer() const {
+            return resourceRegistry_.has<T>();
+        }
+
+        /**
+         * @brief Registers and constructs a Manager of type T.
+         *
+         * @details Delegates to ResourceRegistry::emplace. The Manager is
+         * constructed in-place with forwarded arguments and owned by the
+         * ManagerRegistry.
+         *
+         * @tparam T The Manager type. Must satisfy IsManagerLike.
          * @tparam Args Constructor argument types.
          *
-         * @param args Arguments forwarded to the Manager constructor.
+         * @param args Arguments forwarded to the T constructor.
          *
          * @return Reference to the newly registered Manager.
-         *
-         * @pre No Manager of type T is already registered.
          */
         template<typename T, typename... Args>
-        requires IsManager<T>
+        requires IsManagerLike<T>
         T& registerManager(Args&&... args) {
-            assert(!resourceRegistry_.has<T>() && "Manager already registered.");
-            return resourceRegistry_.registerResource<T>(std::forward<Args>(args)...);
+            return resourceRegistry_.emplace<T>(std::forward<Args>(args)...);
+        }
+
+        /**
+         * @brief Registers and constructs a CommandBuffer of type T.
+         *
+         * @details Delegates to ResourceRegistry::emplace. The buffer is
+         * constructed in-place with forwarded arguments and owned by the
+         * CommandBufferRegistry.
+         *
+         * @tparam T The CommandBuffer type. Must satisfy IsCommandBufferLike.
+         * @tparam Args Constructor argument types.
+         *
+         * @param args Arguments forwarded to the T constructor.
+         *
+         * @return Reference to the newly registered CommandBuffer.
+         */
+        template<typename T, typename... Args>
+        requires IsCommandBufferLike<T>
+        T& registerCommandBuffer(Args&&... args) {
+            return resourceRegistry_.emplace<T>(std::forward<Args>(args)...);
+        }
+
+        /**
+         * @brief Retrieves a registered Manager by type.
+         *
+         * @tparam T The Manager type. Must satisfy IsManagerLike.
+         *
+         * @return Reference to the Manager.
+         *
+         * @pre A Manager of type T must be registered.
+         */
+        template<typename T>
+        requires IsManagerLike<T>
+        T& manager() const noexcept {
+            assert(resourceRegistry_.has<T>(), "Manager not registered");
+            return resourceRegistry_.get<T>();
+        }
+
+        /**
+         * @brief Retrieves a registered Manager by type, or nullptr if not found.
+         *
+         * @tparam T The Manager type. Must satisfy IsManagerLike.
+         *
+         * @return Pointer to the Manager, or nullptr if not registered.
+         */
+        template<typename T>
+        requires IsManagerLike<T>
+        T* tryManager() const noexcept {
+            return resourceRegistry_.tryGet<T>();
+        }
+
+        /**
+         * @brief Retrieves a registered CommandBuffer by type, or nullptr if not found.
+         *
+         * @tparam T The CommandBuffer type. Must satisfy IsCommandBufferLike.
+         *
+         * @return Pointer to the CommandBuffer, or nullptr if not registered.
+         */
+        template<typename T>
+        requires IsCommandBufferLike<T>
+        T* tryCommandBuffer() const noexcept {
+            return resourceRegistry_.tryGet<T>();
         }
 
 
@@ -310,14 +389,14 @@ export namespace helios::engine::runtime::world {
          * queued commands to the registered handler.
          *
          * @tparam CommandType The command types to register handlers for.
-         * @tparam OwningT The handler type. Must satisfy IsCommandHandler.
+         * @tparam OwningT The handler type. Must satisfy IsCommandHandlerLike.
          *
          * @param owner Reference to the handler instance. Must outlive the GameWorld.
          *
          * @see CommandHandlerRegistry
          */
         template<typename... CommandType, typename OwningT>
-        requires IsCommandHandler<OwningT, CommandType...>
+        requires IsCommandHandlerLike<OwningT, CommandType...>
         void registerCommandHandler(OwningT& owner) {
             (commandHandlerRegistry_.template registerHandler<CommandType>(owner), ...);
         }
@@ -330,40 +409,6 @@ export namespace helios::engine::runtime::world {
         [[nodiscard]] CommandHandlerRegistry& commandHandlerRegistry() noexcept {
             return commandHandlerRegistry_;
         }
-
-        /**
-         * @brief Registers an owning resource of arbitrary type.
-         *
-         * @details Delegates to ResourceRegistry::registerResource. The resource
-         * is heap-allocated and owned by the registry.
-         *
-         * @tparam T The resource type.
-         * @tparam Args Constructor argument types.
-         *
-         * @param args Arguments forwarded to the T constructor.
-         *
-         * @return Reference to the newly created resource.
-         */
-        template<typename T, typename... Args>
-        T& registerResource(Args&&... args) {
-            return resourceRegistry_.registerResource<T>(std::forward<Args>(args)...);
-        }
-
-        /**
-         * @brief Returns a reference to a registered Manager.
-         *
-         * @tparam T The Manager type. Must derive from Manager.
-         *
-         * @return Reference to the Manager.
-         *
-         * @pre A Manager of type T must be registered.
-         */
-        template<typename T>
-        requires IsManager<T>
-        T& manager() {
-            return resourceRegistry_.resource<T>();
-        }
-
 
         /**
          * @brief Flushes all registered Managers.
@@ -530,9 +575,9 @@ export namespace helios::engine::runtime::world {
         /**
          * @brief Returns a reference to the ResourceRegistry.
          *
-         * @details Use for direct resource registration and lookup. Prefer the
-         * convenience methods `registerManager()`, `registerCommandHandler()`,
-         * and `manager()` for type-constrained access.
+         * @details Use for direct resource access. Prefer the convenience methods
+         * `registerManager()`, `registerCommandBuffer()`, `manager()`,
+         * `tryManager()`, and `tryCommandBuffer()` for type-constrained access.
          *
          * @return Reference to the ResourceRegistry.
          */

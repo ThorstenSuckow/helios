@@ -27,7 +27,7 @@ import helios.math;
 import helios.engine.mechanics.lifecycle.components.Active;
 
 
-import helios.engine.common.tags.SystemTag;
+import helios.engine.common.tags.SystemRole;
 
 export namespace helios::engine::mechanics::combat::systems {
 
@@ -83,7 +83,7 @@ export namespace helios::engine::mechanics::combat::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemTag;
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
 
         /**
          * @brief Constructs a ProjectileSpawnSystem with the specified spawn profile.

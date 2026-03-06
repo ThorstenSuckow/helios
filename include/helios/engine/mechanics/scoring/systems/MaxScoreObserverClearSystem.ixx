@@ -21,7 +21,7 @@ import helios.engine.mechanics.lifecycle.components.Active;
 
 
 
-import helios.engine.common.tags.SystemTag;
+import helios.engine.common.tags.SystemRole;
 
 export namespace helios::engine::mechanics::scoring::systems {
 
@@ -41,7 +41,7 @@ export namespace helios::engine::mechanics::scoring::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemTag;
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
         /**
          * @brief Clears update flags on all active MaxScoreObserverComponents.
          *

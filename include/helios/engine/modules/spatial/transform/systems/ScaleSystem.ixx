@@ -24,7 +24,7 @@ import helios.engine.modules.rendering.model.components.ModelAabbComponent;
 
 import helios.engine.mechanics.lifecycle.components.Active;
 
-import helios.engine.common.tags.SystemTag;
+import helios.engine.common.tags.SystemRole;
 
 export namespace helios::engine::modules::spatial::transform::systems {
 
@@ -46,7 +46,7 @@ export namespace helios::engine::modules::spatial::transform::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemTag;
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
         /**
          * @brief Updates scale for all entities with dirty ScaleComponents.
          *

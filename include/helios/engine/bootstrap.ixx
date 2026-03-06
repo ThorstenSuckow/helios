@@ -88,7 +88,7 @@ export namespace helios::engine::bootstrap {
      * auto& gameLoop  = *gameLoopPtr;
      *
      * // Application-specific setup
-     * gameWorld.registerManager<SpawnManager>();
+     * gameWorld.registerResource<SpawnManager>();
      * gameLoop.phase(PhaseType::Pre)
      *     .addPass<GameState>(GameState::Any)
      *         .addSystem<InputSystem>();
@@ -109,7 +109,7 @@ export namespace helios::engine::bootstrap {
         auto gameLoop = std::make_unique<helios::engine::runtime::gameloop::GameLoop>();
         auto gameWorld = std::make_unique<helios::engine::runtime::world::GameWorld>();
 
-        gameWorld->registerResource<helios::engine::runtime::messaging::command::EngineCommandBuffer>();
+        gameWorld->registerCommandBuffer<helios::engine::runtime::messaging::command::EngineCommandBuffer>();
 
         gameWorld->registerManager<helios::engine::mechanics::lifecycle::WorldLifecycleManager>();
         gameWorld->registerManager<helios::engine::mechanics::gamestate::GameStateManager>(

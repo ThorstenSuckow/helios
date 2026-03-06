@@ -13,15 +13,15 @@ export namespace helios::engine::common::concepts {
     /**
      * @brief Detects whether T declares a nested `EngineRoleTag` alias equal to Tag.
      *
-     * @details Used by role-specific concepts (IsManager, IsSystem) to verify
+     * @details Used by role-specific concepts (IsManagerLike, IsSystemLike) to verify
      * that a type has been explicitly tagged for a particular engine role.
      * The tag must be declared as `using EngineRoleTag = Tag;` inside the class.
      *
      * @tparam T The type to inspect.
-     * @tparam Tag The expected tag type (e.g. ManagerTag, SystemTag).
+     * @tparam Tag The expected tag type (e.g. ManagerRole, SystemRole).
      *
-     * @see ManagerTag
-     * @see SystemTag
+     * @see ManagerRole
+     * @see SystemRole
      */
     template<class T, class Tag>
     concept HasTag = requires { typename T::EngineRoleTag; } &&

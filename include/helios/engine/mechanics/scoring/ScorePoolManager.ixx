@@ -63,7 +63,7 @@ export namespace helios::engine::mechanics::scoring {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::ManagerTag;
+        using EngineRoleTag = helios::engine::common::tags::ManagerRole;
 
         /**
          * @brief Creates and registers a new score pool.

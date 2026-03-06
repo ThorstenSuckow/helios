@@ -172,7 +172,7 @@ export namespace helios::engine::runtime::pooling {
         }
         
     public:
-        using EngineRoleTag = helios::engine::common::tags::ManagerTag;
+        using EngineRoleTag = helios::engine::common::tags::ManagerRole;
 
         /**
          * @brief Registers a pool configuration for later initialization.

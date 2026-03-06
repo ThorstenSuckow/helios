@@ -285,7 +285,7 @@ export namespace helios::engine::runtime::world {
          */
         template<typename T, typename ...Args>
         void queueCommand(Args&&...args) const noexcept {
-            resourceRegistry_.resource<EngineCommandBuffer>().add<T>(std::forward<Args>(args)...);
+            resourceRegistry_.tryGet<EngineCommandBuffer>()->add<T>(std::forward<Args>(args)...);
         }
 
         /**

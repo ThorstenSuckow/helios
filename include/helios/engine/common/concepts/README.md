@@ -17,10 +17,10 @@ types that happen to have matching method signatures.
 | `HasTag<T, Tag>` | `T::EngineRoleTag == Tag` | Detects compile-time role tag |
 | `HasInit<T>` | `T::init(GameWorld&)` | Detects optional one-time initialization |
 | `HasUpdate<T>` | `T::update(UpdateContext&)` | Detects per-frame update capability |
-| `IsManager<T>` | `flush(UpdateContext&)` + `ManagerTag` | Gates `GameWorld::registerManager<T>()` |
-| `IsSystem<T>` | `update(UpdateContext&)` + `SystemTag` | Gates `SystemRegistry::add<T>()` |
-| `IsCommandBuffer<T>` | Derives from `CommandBuffer` | Gates command buffer registration |
-| `IsCommandHandler<T>` | Derives from `CommandHandler` | Gates command handler registration |
+| `IsManagerLike<T>` | `flush(UpdateContext&)` + `ManagerRole` | Gates `GameWorld::registerResource<T>()` |
+| `IsSystemLike<T>` | `update(UpdateContext&)` + `SystemRole` | Gates `SystemRegistry::add<T>()` |
+| `IsCommandBufferLike<T>` | Derives from `CommandBuffer` | Gates command buffer registration |
+| `IsCommandHandlerLike<T>` | Derives from `CommandHandler` | Gates command handler registration |
 
 ## Tag-Based Opt-In
 
@@ -28,13 +28,13 @@ Role concepts combine structural checks with a tag requirement:
 
 ```cpp
 template<class T>
-concept IsManager = requires(T& t, UpdateContext& ctx) {
+concept IsManagerLike = requires(T& t, UpdateContext& ctx) {
     { t.flush(ctx) } -> std::same_as<void>;
-} && HasTag<T, ManagerTag>;
+} && HasTag<T, ManagerRole>;
 ```
 
 This means a type must both implement the required interface **and** declare
-`using EngineRoleTag = ManagerTag;` to be eligible for registration.
+`using EngineRoleTag = ManagerRole;` to be eligible for registration.
 
 ## See Also
 

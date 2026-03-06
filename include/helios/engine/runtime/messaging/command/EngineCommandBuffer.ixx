@@ -29,6 +29,7 @@ import helios.engine.mechanics.scoring.commands;
 import helios.engine.modules.physics.motion.commands;
 import helios.engine.mechanics.lifecycle.commands.WorldLifecycleCommand;
 
+import helios.engine.common.tags.CommandBufferRole;
 
 static_assert(requires {
   typename helios::engine::state::types::StateTransitionId<
@@ -42,6 +43,11 @@ static_assert(requires {
   >::Type;
 }, "Bindings not visible in EngineCommandBuffer TU");
 
+export namespace helios::engine::runtime::world {
+    class UpdateContext;
+    class GameWorld;
+}
+
 using namespace helios::engine::runtime::world;
 
 export namespace helios::engine::runtime::messaging::command {
@@ -51,8 +57,9 @@ export namespace helios::engine::runtime::messaging::command {
      *
      * @details EngineCommandBuffer is a thin facade over a TypedCommandBuffer
      * instantiated with the full set of command types used by the engine.
-     * It is registered as a resource in the GameWorld and accessed by systems
-     * via `UpdateContext::queueCommand<T>()`.
+     * It is registered as a resource in the GameWorld and wrapped by
+     * a type-erased CommandBuffer via the Concept/Model pattern.
+     * Systems access it via `UpdateContext::queueCommand<T>()`.
      *
      * ## Registered Command Types
      *
@@ -71,7 +78,7 @@ export namespace helios::engine::runtime::messaging::command {
      * @see CommandBuffer
      * @see UpdateContext
      */
-    class EngineCommandBuffer : public CommandBuffer {
+    class EngineCommandBuffer {
 
 
         /**
@@ -105,6 +112,11 @@ export namespace helios::engine::runtime::messaging::command {
     public:
 
         /**
+         * @brief Tag identifying this type as a command buffer for ResourceRegistry.
+         */
+        using EngineRoleTag = helios::engine::common::tags::CommandBufferRole;
+
+        /**
          * @brief Enqueues a command of the specified type.
          *
          * @tparam T The command type. Must be one of the registered command types.
@@ -113,7 +125,7 @@ export namespace helios::engine::runtime::messaging::command {
          * @param args Arguments forwarded to the command constructor.
          */
         template<class T, class... Args>
-           void add(Args&&... args) {
+        void add(Args&&... args) {
             impl_.template add<T>(std::forward<Args>(args)...);
         }
 
@@ -124,14 +136,14 @@ export namespace helios::engine::runtime::messaging::command {
          * @param gameWorld The game world where the commands are flushed.
          * @param updateContext The current frame's update context.
          */
-        void flush(GameWorld& gameWorld, UpdateContext& updateContext) noexcept override {
+        void flush(GameWorld& gameWorld, UpdateContext& updateContext) noexcept {
             impl_.flush(gameWorld, updateContext);
         }
 
         /**
          * @brief Discards all queued commands without executing them.
          */
-        void clear() noexcept override {
+        void clear() noexcept {
             impl_.clear();
         }
     };

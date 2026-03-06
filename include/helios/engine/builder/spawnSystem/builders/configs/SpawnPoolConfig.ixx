@@ -21,6 +21,7 @@ import helios.engine.core.data;
 import helios.engine.runtime.pooling;
 
 import helios.engine.runtime.spawn;
+import helios.engine.mechanics.spawn.types;
 
 import helios.math;
 

@@ -87,7 +87,7 @@ export namespace helios::examples::scoring {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemTag;
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
 
         /**
          * @brief Reads health depletion events and triggers life loss for the player.

@@ -42,8 +42,11 @@ export namespace helios::engine::runtime::spawn::policy::amount {
             const helios::engine::runtime::world::GameWorld& gameWorld,
             const helios::engine::runtime::world::UpdateContext& updateContext
         ) const override {
-            const auto& manager = gameWorld.resourceRegistry().resource<helios::engine::runtime::pooling::GameObjectPoolManager>();
-            return manager.poolSnapshot(gameObjectPoolId).inactiveCount;
+            const auto* manager = gameWorld.tryManager<helios::engine::runtime::pooling::GameObjectPoolManager>();
+            if (!manager) {
+                return 0;
+            }
+            return manager->poolSnapshot(gameObjectPoolId).inactiveCount;
         }
 
     };

@@ -21,11 +21,10 @@ import helios.engine.runtime.spawn.commands.ScheduledSpawnPlanCommand;
 import helios.engine.runtime.spawn.SpawnManager;
 import helios.engine.runtime.spawn.scheduling.SpawnScheduler;
 import helios.engine.runtime.spawn.events.SpawnPlanCommandExecutedEvent;
-
-using namespace helios::engine::runtime::world;
-
 import helios.engine.common.tags.SystemRole;
 
+
+using namespace helios::engine::runtime::world;
 export namespace helios::engine::mechanics::spawn::systems {
 
 
@@ -34,7 +33,7 @@ export namespace helios::engine::mechanics::spawn::systems {
 
         helios::engine::runtime::spawn::SpawnManager& spawnManager_;
 
-       GameWorld* gameWorld_;
+       GameWorld* gameWorld_ = nullptr;
 
     public:
 

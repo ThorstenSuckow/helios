@@ -269,7 +269,7 @@ helios provides three event buses with different visibility scopes:
 | **Phase** | `pushPhase<E>()` | `readPhase<E>()` | Next phase |
 | **Frame** | `pushFrame<E>()` | `readFrame<E>()` | Next frame |
 
-All buses are double-buffered (`helios.core.buffer.TypeIndexedDoubleBuffer`): events are written into the write buffer and become visible in the read buffer only after a buffer swap.
+All buses are double-buffered (`helios.core.container.buffer.TypeIndexedDoubleBuffer`): events are written into the write buffer and become visible in the read buffer only after a buffer swap.
 
 For detailed event propagation rules and commit points, see [Event System](event-system.md).
 

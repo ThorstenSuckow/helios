@@ -107,12 +107,16 @@ namespace helios::engine::runtime::world {
 
 ### SystemRegistry
 
-`SystemRegistry` is a type alias for `ConceptModelRegistry<System, SystemTypeId>`:
+`SystemRegistry` is a type alias for `ConceptModelRegistry<System, SystemTypeId>` (from `helios.core.container`):
 
 ```cpp
+import helios.core.container.ConceptModelRegistry;
+import helios.engine.runtime.world.System;
+import helios.engine.runtime.world.types.SystemTypeId;
+
 namespace helios::engine::runtime::world {
 
-    using SystemRegistry = ConceptModelRegistry<System, SystemTypeId>;
+    using SystemRegistry = helios::core::container::ConceptModelRegistry<System, types::SystemTypeId>;
 
     // Inherited API from ConceptModelRegistry:
     // template<typename T, typename... Args> T& add(Args&&...);

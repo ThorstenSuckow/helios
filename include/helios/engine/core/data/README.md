@@ -1,100 +1,76 @@
 # helios::engine::core::data
 
-Data structures for efficient entity management and querying.
+Strongly-typed identifiers and entity primitives for the helios engine.
 
-This module provides core data structures used for managing GameObjects within the helios engine.
+## Overview
 
-## Components
+This module provides compile-time type-safe IDs used across the engine.
+All IDs are lightweight value types supporting hashing, comparison, and
+equality. Types that were previously in this module (GameObjectPool,
+GameObjectView, ResourceTypeId, SystemTypeId) have been moved to their
+respective subsystem modules.
 
-- **CollisionLayer** - Strongly-typed identifier for collision layers.
-- **CommandTypeId** - Compile-time type identifier for command types.
-- **ComponentTypeId** - Compile-time type identifier for O(1) component indexing within GameObject.
-- **EntityId** - Unique identifier for an entity within an EntityPool.
-- **EntityTombstone** - Sentinel value for invalid sparse array indices.
-- **FontId** - Strongly-typed identifier for referencing fonts.
-- **GameObjectPool** - Low-level O(1) object pooling for entity recycling.
-- **GameObjectPoolId** - Strongly-typed identifier for referencing pools.
-- **GameObjectPoolRegistry** - Central registry managing multiple pools by ID.
-- **GameObjectFilter** - Bitmask enum for filtering entities by active/inactive state and component state.
-- **GameObjectView** - Lazy range adapter for component-filtered iteration with structured binding support.
-- **ResourceTypeId** - Compile-time type identifier for engine resources (Managers, CommandBuffers).
-- **ScorePoolId** - Strongly-typed identifier for score pools.
-- **ScoreTypeId** - Strongly-typed identifier for score types.
-- **SpawnProfileId** - Strongly-typed identifier for spawn profiles.
-- **SpawnRuleId** - Strongly-typed identifier for spawn rules.
-- **VersionId** - Version number for stale entity handle detection.
-- **ViewportId** - Strongly-typed identifier for viewports.
+## Contents
 
-## Strongly-Typed IDs
+### String-Based IDs (StrongId / FNV-1a Hashing)
 
-### String-Based IDs (FNV-1a Hashing)
-
-The ID types `FontId`, `GameObjectPoolId`, `ScorePoolId`, `SpawnProfileId`, `SpawnRuleId`, and `ViewportId` provide type-safe identifiers constructed from string literals using FNV-1a hashing:
-
-```cpp
-// Compile-time constant IDs from strings
-constexpr GameObjectPoolId ENEMY_POOL{"enemies"};
-constexpr SpawnProfileId ENEMY_PROFILE{"enemy_spawn"};
-constexpr SpawnRuleId WAVE_RULE{"wave_spawn"};
-constexpr ScorePoolId PLAYER_SCORE{"player"};
-constexpr ViewportId UI_VIEWPORT{"Ui"};
-
-// Use in registries and schedulers
-poolManager.createPool(ENEMY_POOL, 100);
-spawnManager.registerProfile(ENEMY_PROFILE, profile);
-scheduler.addRule(ENEMY_PROFILE, std::make_unique<TimerSpawnRule>(WAVE_RULE, 2.0f, 5));
-```
+| Type | Purpose |
+|------|---------|
+| `CollisionLayer` | Strongly-typed identifier for collision layers |
+| `FontId` | Identifier for referencing fonts |
+| `GameObjectPoolId` | Identifier for referencing entity pools |
+| `GameTimerId` | Identifier for game timers |
+| `MenuId` | Identifier for menu instances |
+| `PrefabId` | Identifier for prefab templates |
+| `SceneId` | Identifier for scenes |
+| `ViewportId` | Identifier for viewports |
 
 ### Type-Based IDs (TypeIndexer)
 
-`ComponentTypeId`, `ScoreTypeId`, `CommandTypeId`, and `ResourceTypeId` use `TypeIndexer` to generate unique, monotonically increasing IDs for each type at compile time:
+| Type | Purpose |
+|------|---------|
+| `CommandTypeId` | Compile-time type identifier for command types |
+| `ComponentTypeId` | Compile-time type identifier for O(1) component indexing |
+| `StateTypeId` | Compile-time type identifier for state types |
+
+### Entity Primitives
+
+| Type | Purpose |
+|------|---------|
+| `EntityId` | Unique identifier for an entity within the ECS |
+| `VersionId` | Version number for stale entity handle detection |
+| `EntityTombstone` | Sentinel value for invalid sparse array indices |
+
+## Usage
 
 ```cpp
-// Get unique ID for a component type
+// Compile-time constant IDs from strings (FNV-1a)
+constexpr GameObjectPoolId ENEMY_POOL{"enemies"};
+constexpr ViewportId UI_VIEWPORT{"Ui"};
+constexpr FontId MAIN_FONT{"arial"};
+
+// Type-based IDs (monotonically increasing)
 auto typeId = ComponentTypeId::id<HealthComponent>();
-
-// Get unique ID for a score type
-auto scoreId = ScoreTypeId::id<KillScore>();
-
-// Get unique ID for a resource type (used by ResourceRegistry)
-auto resId = ResourceTypeId::id<SpawnManager>();
-
-// Get unique ID for a command type
-auto cmdId = CommandTypeId::id<DespawnCommand>();
+auto cmdId  = CommandTypeId::id<DespawnCommand>();
 ```
 
-### Entity IDs (EntityPool)
+## Relocated Types
 
-`EntityId` and `VersionId` are used together in `EntityHandle` for safe entity references within an `EntityPool`:
+The following types were moved out of `engine.core.data`:
 
-```cpp
-// EntityHandle combines EntityId + VersionId
-struct EntityHandle {
-    EntityId entityId;   // Index into sparse array
-    VersionId versionId; // Detects stale references
-};
-
-// Pool operations return handles
-EntityPool<GameObject> pool;
-EntityHandle handle = pool.emplace(std::make_unique<GameObject>());
-
-// Handle validation detects removed entities
-auto* entity = pool.get(handle);  // nullptr if handle is stale
-```
-
-All ID types support:
-- Hashing for `std::unordered_map` / `std::unordered_set`
-- Comparison operators for `std::map` / `std::set`
-- Equality comparison
-
-> **Note:** `GameObjectView.h` is intentionally a .h header instead of a .ixx module interface due to MSVC ICE issues with structured bindings.
-
-> **Tip:** Use `GameObjectPoolFacade` (in `helios.engine.facade`) to coordinate pool operations with the GameWorld. The facade validates entities, handles stale pool entries, and deactivates released objects automatically.
+| Type | New Location |
+|------|-------------|
+| `ConceptModelRegistry` | `helios.core.container` |
+| `ResourceTypeId` | `helios.engine.runtime.world.types` |
+| `SystemTypeId` | `helios.engine.runtime.world.types` |
+| `ScorePoolId`, `ScoreTypeId` | `helios.engine.mechanics.scoring` |
+| `SpawnProfileId`, `SpawnRuleId` | `helios.engine.runtime.spawn` |
+| `GameObjectPool`, `GameObjectPoolRegistry` | `helios.engine.runtime.pooling` |
+| `GameObjectFilter`, `GameObjectView` | `helios.engine.ecs` |
 
 ---
 <details>
 <summary>Doxygen</summary><p>
 @namespace helios::engine::core::data
-@brief Data structures for efficient entity management.
-@details This namespace provides core data structures for managing GameObjects, including object pools for memory-efficient entity recycling (GameObjectPool, GameObjectPoolId, GameObjectPoolRegistry), filtered views for querying entities based on state or components (GameObjectFilter, GameObjectView). For coordinated pool/world operations, see GameObjectPoolFacade.
+@brief Strongly-typed identifiers and entity primitives for the helios engine.
 </p></details>

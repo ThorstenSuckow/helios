@@ -341,7 +341,7 @@ for (phase : {Pre, Main, Post}) {
 - `helios.engine.runtime.gameloop.GameLoop` - Phase/pass orchestration
 - `helios.engine.runtime.gameloop.Phase` - Phase container
 - `helios.engine.runtime.gameloop.Pass` - Pass container with optional commit point
-- `helios.core.buffer.TypeIndexedDoubleBuffer` - Underlying buffer implementation
+- `helios.core.container.buffer.TypeIndexedDoubleBuffer` - Underlying buffer implementation
 
 ## Related Documentation
 

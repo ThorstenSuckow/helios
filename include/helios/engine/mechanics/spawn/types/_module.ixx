@@ -6,3 +6,4 @@ export module helios.engine.mechanics.spawn.types;
 
 export import helios.engine.mechanics.spawn.types.SpawnProfileId;
 export import helios.engine.mechanics.spawn.types.SpawnRuleId;
+

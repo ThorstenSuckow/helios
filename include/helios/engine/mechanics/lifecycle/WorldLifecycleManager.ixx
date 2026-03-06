@@ -12,7 +12,6 @@ import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.mechanics.lifecycle.types;
-import helios.engine.runtime.messaging.command.TypedCommandHandler;
 import helios.engine.mechanics.lifecycle.commands.WorldLifecycleCommand;
 import helios.engine.common;
 
@@ -39,7 +38,7 @@ export namespace helios::engine::mechanics::lifecycle {
      * @see WorldLifecycleAction
      * @see GameWorld::reset
      */
-    class WorldLifecycleManager : public TypedCommandHandler<WorldLifecycleCommand> {
+    class WorldLifecycleManager {
 
         /**
          * @brief Pending commands queued for the next flush.
@@ -62,7 +61,7 @@ export namespace helios::engine::mechanics::lifecycle {
          *
          * @return True if the command was accepted.
          */
-        bool submit(WorldLifecycleCommand cmd) noexcept override {
+        bool submit(WorldLifecycleCommand cmd) noexcept {
             pending_.push_back(cmd);
             return true;
         }
@@ -74,7 +73,7 @@ export namespace helios::engine::mechanics::lifecycle {
          */
         void init(GameWorld& gameWorld)  {
             gameWorld_ = &gameWorld;
-            gameWorld.registerCommandHandler<TypedCommandHandler<WorldLifecycleCommand>>(*this);
+            gameWorld.registerCommandHandler<WorldLifecycleCommand>(*this);
         }
 
         /**

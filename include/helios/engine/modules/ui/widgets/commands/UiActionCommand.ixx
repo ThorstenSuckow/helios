@@ -30,9 +30,14 @@ export namespace helios::engine::modules::ui::widgets::commands {
      */
     class UiActionCommand  {
 
-
+        /**
+         * @brief Handle of the entity that triggered the action.
+         */
         helios::engine::ecs::EntityHandle source_;
 
+        /**
+         * @brief Identifier of the action to execute.
+         */
         helios::engine::modules::ui::widgets::types::ActionId actionId_;
 
 
@@ -52,6 +57,8 @@ export namespace helios::engine::modules::ui::widgets::commands {
 
         /**
          * @brief Returns the source entity that triggered the action.
+         *
+         * @return The entity handle.
          */
         [[nodiscard]] helios::engine::ecs::EntityHandle source() const noexcept {
             return source_;
@@ -59,6 +66,8 @@ export namespace helios::engine::modules::ui::widgets::commands {
 
         /**
          * @brief Returns the action identifier.
+         *
+         * @return The ActionId.
          */
         [[nodiscard]] helios::engine::modules::ui::widgets::types::ActionId actionId() const noexcept {
             return actionId_;

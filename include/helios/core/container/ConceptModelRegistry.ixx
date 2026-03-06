@@ -11,7 +11,7 @@ module;
 
 
 export module helios.core.container.ConceptModelRegistry;
-;
+
 import helios.engine.common.concepts;
 
 using namespace helios::engine::common::concepts;

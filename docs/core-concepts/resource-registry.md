@@ -1,6 +1,6 @@
 # Resource Registry
 
-The ResourceRegistry is the central **type-indexed service locator** for all engine-level resources. It provides O(1) access to Managers, CommandBuffers, and CommandHandlers, and owns the lifetime of all heap-allocated resources.
+The ResourceRegistry is the central **type-indexed service locator** for all engine-level resources. It provides O(1) access to Managers and CommandBuffers.
 
 ## Overview
 
@@ -26,7 +26,6 @@ During startup, the application registers Managers (e.g., `SpawnManager`, `GameO
 │  │  fastAccess_      [void*, void*, ...]            (O(1) lookup)│  │
 │  │  managerRegistry_ ConceptModelRegistry<Manager>   (iteration) │  │
 │  │  cmdBuffers_      [CommandBuffer*, ...]           (iteration) │  │
-│  │  cmdHandlers_     [CommandHandler*, ...]          (routing)   │  │
 │  └───────────────────────────────────────────────────────────────┘  │
 │                                                                     │
 │  LOOKUP (hot path)                                                  │
@@ -87,7 +86,6 @@ Resources are stored in parallel data structures, optimized for different access
 | `fastAccess_` | O(1) type-based lookup | Hot path: every system, every frame |
 | `managerRegistry_` | Type-erased Manager storage (`ConceptModelRegistry`) | `init()`, `flushManagers()`, `reset()` |
 | `commandBuffers_` | Linear iteration over CommandBuffers | `flush()` at commit points |
-| `commandHandlers_` | CommandHandler lookup | TypedCommandBuffer flush routing |
 | `owned_` | Lifetime management | Destruction only |
 
 The same raw pointer appears in multiple vectors. This trades a few extra bytes of redundant pointers for zero-cost access in each use case.
@@ -115,11 +113,7 @@ auto& cmdBuf = registry.registerResource<EngineCommandBuffer>();
 
 #### 2. Non-Owning Registration (CommandHandlers)
 
-```cpp
-registry.registerResource<TypedCommandHandler<SpawnCommand>>(spawnManager);
-```
-
-CommandHandlers are registered **by reference** — the registry does not own them. The handler typically lives as part of a Manager that is already owned. This is the mechanism Managers use to advertise which command types they handle: during `Manager::init()`, a Manager registers itself as a `TypedCommandHandler<T>` for each command type it processes.
+Command handlers are registered via `GameWorld::registerCommandHandler<Cmd>(owner)` which delegates to the `CommandHandlerRegistry` (stored on the GameWorld). Handlers are not stored in the ResourceRegistry itself.
 
 ## Integration with GameWorld
 
@@ -154,14 +148,14 @@ registerResource  mgr.init()  queueCommand<T>()     mgr.reset()
 
 ## Integration with Command System
 
-The TypedCommandBuffer uses the ResourceRegistry to route commands to handlers at flush time:
+The TypedCommandBuffer uses the `CommandHandlerRegistry` to route commands to handlers at flush time:
 
 ```cpp
 // During TypedCommandBuffer::flush():
-if (registry.has<TypedCommandHandler<Cmd>>()) {
-    auto& handler = registry.resource<TypedCommandHandler<Cmd>>();
+if (registry.has<Cmd>()) {
+    auto& handlerRef = registry.tryHandler<Cmd>();
     for (auto& cmd : queue) {
-        handler.submit(cmd);
+        handlerRef.submit(cmd);
     }
 } else if constexpr (ExecutableCommand<Cmd>) {
     for (auto& cmd : queue) {
@@ -174,8 +168,8 @@ A Manager registers itself as handler during `init()`:
 
 ```cpp
 void SpawnManager::init(GameWorld& gameWorld) {
-    gameWorld.registerCommandHandler<TypedCommandHandler<SpawnCommand>>(*this);
-    gameWorld.registerCommandHandler<TypedCommandHandler<DespawnCommand>>(*this);
+    gameWorld.registerCommandHandler<SpawnCommand>(*this);
+    gameWorld.registerCommandHandler<DespawnCommand>(*this);
 }
 ```
 
@@ -197,7 +191,7 @@ The ResourceRegistry is designed for extensibility. Applications register their 
 
 ### Custom Managers
 
-A custom Manager is a plain class that provides `flush(UpdateContext&)`, declares `using EngineRoleTag = ManagerTag;`, and optionally implements `init(GameWorld&)` and `reset()`. If the Manager also handles commands, it derives from `TypedCommandHandler<T>` for each command type.
+A custom Manager is a plain class that provides `flush(UpdateContext&)`, declares `using EngineRoleTag = ManagerTag;`, and optionally implements `init(GameWorld&)` and `reset()`. If the Manager also handles commands, it provides a `submit(const Cmd&)` method for each command type and registers these in `init()`.
 
 #### Step 1: Define the Command (if needed)
 
@@ -222,7 +216,6 @@ export module myapp.CoinManager;
 
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.runtime.world.GameWorld;
-import helios.engine.runtime.messaging.command.TypedCommandHandler;
 import helios.engine.common.tags.ManagerTag;
 import myapp.commands;
 
@@ -231,7 +224,7 @@ export namespace myapp {
     using namespace helios::engine::runtime::world;
     using namespace helios::engine::runtime::messaging::command;
 
-    class CoinManager : public TypedCommandHandler<commands::CoinPickupCommand> {
+    class CoinManager {
 
         std::vector<commands::CoinPickupCommand> pending_;
 
@@ -240,16 +233,14 @@ export namespace myapp {
         using EngineRoleTag = helios::engine::common::tags::ManagerTag;
 
         // Called by TypedCommandBuffer during flush
-        bool submit(commands::CoinPickupCommand cmd) noexcept override {
+        bool submit(commands::CoinPickupCommand cmd) noexcept {
             pending_.push_back(cmd);
             return true;
         }
 
         // Register this handler so the TypedCommandBuffer can route to it
         void init(GameWorld& gameWorld) {
-            gameWorld.registerCommandHandler<
-                TypedCommandHandler<commands::CoinPickupCommand>
-            >(*this);
+            gameWorld.registerCommandHandler<commands::CoinPickupCommand>(*this);
         }
 
         // Process queued commands (called after CommandBuffer::flush)
@@ -276,102 +267,4 @@ auto& coinMgr = gameWorld.registerManager<myapp::CoinManager>();
 gameWorld.init(); // Calls CoinManager::init() → registers handler
 ```
 
-At runtime, systems submit engine-defined commands via `ctx.queueCommand<T>()`, which internally routes to the `EngineCommandBuffer`. For custom commands not covered by the engine buffer, the handler must be looked up via the `GameWorld`'s `ResourceRegistry` during initialization and stored as a reference:
-
-```cpp
-// During initialization (e.g., system constructor or init())
-auto& handler = gameWorld.resourceRegistry()
-    .resource<TypedCommandHandler<myapp::commands::CoinPickupCommand>>();
-
-// At runtime (in update())
-handler.submit(myapp::commands::CoinPickupCommand{collectorHandle, coinValue});
-```
-
-The Manager collects these submissions and processes them during the GameLoop's flush cycle (`flushManagers(ctx)`).
-
-Alternatively, if you have a [custom CommandBuffer](#custom-commandbuffers) that manages your application-specific commands, systems submit to that buffer instead, and it flushes alongside the engine buffers.
-
-### Custom CommandBuffers
-
-A custom CommandBuffer derives from `CommandBuffer` and implements `flush()` and `clear()`. This is useful for domain-specific command sets that should not pollute the engine-level `EngineCommandBuffer`.
-
-```cpp
-export module myapp.EditorCommandBuffer;
-
-import helios.engine.runtime.messaging.command.CommandBuffer;
-import helios.engine.runtime.world.UpdateContext;
-
-export namespace myapp {
-
-    class EditorCommandBuffer : public CommandBuffer {
-        std::vector<UndoCommand> undoQueue_;
-        std::vector<RedoCommand> redoQueue_;
-
-    public:
-
-        void addUndo(UndoCommand cmd) { undoQueue_.push_back(cmd); }
-        void addRedo(RedoCommand cmd) { redoQueue_.push_back(cmd); }
-
-        void flush(GameWorld& gameWorld, UpdateContext& ctx) noexcept override {
-            for (auto& cmd : undoQueue_) { cmd.execute(ctx); }
-            for (auto& cmd : redoQueue_) { cmd.execute(ctx); }
-            clear();
-        }
-
-        void clear() noexcept override {
-            undoQueue_.clear();
-            redoQueue_.clear();
-        }
-    };
-}
-```
-
-Register it alongside the EngineCommandBuffer:
-
-```cpp
-auto& editorBuf = gameWorld.resourceRegistry()
-    .registerResource<myapp::EditorCommandBuffer>();
-```
-
-Because `EditorCommandBuffer` derives from `CommandBuffer`, it is automatically tracked in the `commandBuffers_` iteration list. Since `UpdateContext` does not expose the `ResourceRegistry`, systems must capture a reference during initialization:
-
-```cpp
-// During system initialization
-auto& editorBuf = gameWorld.resourceRegistry()
-    .resource<myapp::EditorCommandBuffer>();
-
-// At runtime (stored reference)
-editorBuf.addUndo(UndoCommand{...});
-```
-
-### Registering Plain Resources
-
-Not every resource needs to be a Manager or CommandBuffer. Any type can be registered for O(1) lookup:
-
-```cpp
-auto& config = gameWorld.resourceRegistry()
-    .registerResource<GameConfig>(configPath);
-
-// Later, during system initialization (not at runtime via UpdateContext):
-auto& cfg = gameWorld.resourceRegistry().resource<GameConfig>();
-```
-
-Plain resources are heap-allocated and owned by the registry via `ErasedUnique`, but they are not iterated during `init()`, `flush()`, or `reset()` — they are purely passive stores.
-
-## Best Practices
-
-- **Registration order matters:** Managers are initialized in registration order. Register dependencies first (e.g., `GameObjectPoolManager` before `SpawnManager`).
-- **Use `tryResource()` for optional dependencies:** If a system can work without a resource, use `tryResource()` to check availability without asserting.
-- **Register handlers in `init()`, not constructors:** The ResourceRegistry may not be fully populated during construction. `init()` is called after all resources are registered.
-- **Single registration per type:** Each type can only be registered once. Attempting to register a duplicate triggers an assertion.
-
-## Related Documentation
-
-- [Command System](command-system.md) — TypedCommandBuffer flush routing via handlers
-- [Game Loop Architecture](gameloop-architecture.md) — Commit points where managers are flushed
-- [Object Pooling](object-pooling.md) — GameObjectPoolManager as a registered Manager
-- [Spawn System](spawn-system.md) — SpawnManager as a registered Manager with CommandHandlers
-- [State Management](state-management.md) — StateManagers as registered resources
-
-
-
+At runtime, systems submit engine-defined commands via `ctx.queueCommand<T>()`, which internally routes to the `EngineCommandBuffer`. For custom commands not covered by the engine buffer, the logic would reside in a custom command buffer or a specific handler lookup (though usually handled via `EngineCommandBuffer` if type is added to it, otherwise via specific buffer).

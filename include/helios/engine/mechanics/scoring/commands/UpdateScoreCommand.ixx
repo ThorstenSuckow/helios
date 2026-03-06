@@ -19,8 +19,6 @@ export namespace helios::engine::mechanics::scoring::commands {
      * @brief Command that carries score update information.
      *
      * Contains a ScoreValueContext with the score type, pool ID, and value.
-     * Processed by ScoreCommandDispatcher and ultimately handled by
-     * ScorePoolManager.
      */
     class UpdateScoreCommand  {
 

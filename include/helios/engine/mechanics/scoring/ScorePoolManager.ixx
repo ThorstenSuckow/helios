@@ -14,9 +14,6 @@ export module helios.engine.mechanics.scoring.ScorePoolManager;
 import helios.engine.mechanics.scoring.ScorePool;
 import helios.engine.mechanics.scoring.types.ScoreValueContext;
 
-import helios.engine.runtime.messaging.command.TypedCommandHandler;
-import helios.engine.runtime.messaging.command.CommandHandler;
-
 import helios.engine.mechanics.scoring.commands;
 
 import helios.engine.mechanics.scoring.types.ScorePoolId;
@@ -51,7 +48,7 @@ export namespace helios::engine::mechanics::scoring {
      * @see ScoreCommandHandler
      * @see Manager
      */
-    class ScorePoolManager : public TypedCommandHandler<UpdateScoreCommand>{
+    class ScorePoolManager {
 
         /**
          * @brief Collection of score pools managed by this manager.
@@ -143,7 +140,7 @@ export namespace helios::engine::mechanics::scoring {
          */
         bool submit(
             UpdateScoreCommand updateScoreCommand
-        ) noexcept override {
+        ) noexcept {
             scores_.push_back(std::move(updateScoreCommand).scoreContext());
 
             return true;
@@ -155,7 +152,7 @@ export namespace helios::engine::mechanics::scoring {
          * @param gameWorld Reference to the game world.
          */
         void init(helios::engine::runtime::world::GameWorld& gameWorld) {
-            gameWorld.registerCommandHandler<TypedCommandHandler<UpdateScoreCommand> >(*this);
+            gameWorld.registerCommandHandler<UpdateScoreCommand>(*this);
         }
 
 

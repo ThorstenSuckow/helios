@@ -15,8 +15,6 @@ import helios.engine.runtime.world.Manager;
 
 import helios.core.memory.ErasedUnique;
 
-import helios.engine.runtime.messaging.command.TypedCommandHandler;
-import helios.engine.runtime.messaging.command.CommandHandler;
 import helios.engine.runtime.messaging.command.CommandBuffer;
 
 import helios.engine.runtime.world.ManagerRegistry;
@@ -36,8 +34,8 @@ export namespace helios::engine::runtime::world {
     /**
      * @brief Type-indexed registry for engine resources with O(1) lookup.
      *
-     * @details ResourceRegistry provides a central store for Managers,
-     * CommandBuffers, and CommandHandlers. Each resource type receives a
+     * @details ResourceRegistry provides a central store for Managers and
+     * CommandBuffers.. Each resource type receives a
      * unique compile-time index via ResourceTypeId, enabling O(1) access
      * through a flat `void*` array (`fastAccess_`).
      *
@@ -45,8 +43,6 @@ export namespace helios::engine::runtime::world {
      *
      * - **Managers and CommandBuffers** are heap-allocated and owned via
      *   `ErasedUnique` (type-erased unique ownership, 16 bytes per entry).
-     * - **CommandHandlers** are registered by reference (non-owning). They
-     *   typically live as part of a Manager that is already owned.
      *
      * ## Dual-Access Pattern
      *
@@ -59,7 +55,6 @@ export namespace helios::engine::runtime::world {
      * @see ErasedUnique
      * @see Manager
      * @see CommandBuffer
-     * @see TypedCommandHandler
      */
    class ResourceRegistry {
 
@@ -80,11 +75,6 @@ export namespace helios::engine::runtime::world {
          * @brief Non-owning pointers to registered CommandBuffers for iteration.
          */
         std::vector<CommandBuffer*> commandBuffers_;
-
-        /**
-         * @brief Non-owning pointers to registered CommandHandlers.
-         */
-        std::vector<CommandHandler*> commandHandlers_;
 
         /**
          * @brief Flat array for O(1) type-indexed resource lookup.
@@ -175,48 +165,7 @@ public:
         return *raw;
     }
 
-    /**
-     * @brief Registers a non-owning CommandHandler reference.
-     *
-     * @details Stores a pointer to an externally owned CommandHandler in
-     * `fastAccess_` and `commandHandlers_`. The handler must outlive this
-     * registry (typically guaranteed because the handler is a Manager that
-     * is already owned by this registry).
-     *
-     * @tparam T The CommandHandler type. Must derive from CommandHandler.
-     *
-     * @param ref Reference to the handler to register.
-     *
-     * @return Reference to the registered handler.
-     *
-     * @pre No resource of type T is already registered.
-     */
-    template<class T>
-    requires IsCommandHandler<T>
-    T& registerResource(T& ref) {
 
-        const size_t idx = ResourceTypeId::id<T>().value();
-
-        if (idx >= fastAccess_.size()) {
-            fastAccess_.resize(idx + 1, nullptr);
-        }
-
-        assert(fastAccess_[idx] == nullptr && "Resource already registered");
-
-        fastAccess_[idx] = &ref;
-
-
-        if constexpr (std::derived_from<T, CommandHandler>) {
-
-            if (idx >= commandHandlers_.size()) {
-                commandHandlers_.resize(idx + 1, nullptr);
-            }
-
-            commandHandlers_[idx] = static_cast<CommandHandler*>(&ref);
-        }
-
-        return ref;
-    }
 
     /**
      * @brief Checks whether a resource of type T is registered.

@@ -15,9 +15,6 @@ import helios.engine.modules.ui.widgets.commands;
 import helios.engine.modules.ui.widgets.types;
 import helios.engine.core.data;
 
-import helios.engine.modules.ui.UiActionCommandHandler;
-import helios.engine.runtime.messaging.command.TypedCommandHandler;
-import helios.engine.runtime.messaging.command.CommandHandler;
 
 import helios.engine.ecs.GameObject;
 
@@ -40,16 +37,22 @@ export namespace helios::engine::modules::ui {
      * action callbacks based on ActionId. Supports policy registration for
      * handling different action types.
      *
-     * @see UiActionCommandHandler
      * @see UiActionCommand
+     * @see CommandHandlerRegistry
      */
-    class UiActionCommandManager : public TypedCommandHandler<UiActionCommand> {
+    class UiActionCommandManager {
 
         using ActionCallback = std::function<void(
             helios::engine::runtime::world::UpdateContext& updateContext, const UiActionCommand& command)>;
 
+        /**
+         * @brief Queue of pending UI action commands.
+         */
         std::vector<UiActionCommand> commands_;
 
+        /**
+         * @brief Map from ActionId to their handling callbacks.
+         */
         std::unordered_map<ActionId, ActionCallback> policies_;
 
     public:
@@ -87,7 +90,8 @@ export namespace helios::engine::modules::ui {
          * @brief Submits a UI action command for processing.
          *
          * @param uiActionCommand The command to submit.
-         * @return True if the command was accepted.
+         *
+         * @return Always returns true.
          */
         bool submit(UiActionCommand uiActionCommand) noexcept {
 
@@ -101,6 +105,7 @@ export namespace helios::engine::modules::ui {
          *
          * @param actionId The action ID to register.
          * @param callback The callback to invoke when the action is triggered.
+         *
          * @return Reference to this manager for method chaining.
          */
         UiActionCommandManager& addPolicy(
@@ -119,7 +124,7 @@ export namespace helios::engine::modules::ui {
          * @param gameWorld The game world to register with.
          */
         void init(helios::engine::runtime::world::GameWorld& gameWorld) {
-            gameWorld.registerCommandHandler<TypedCommandHandler<UiActionCommand>>(*this);
+            gameWorld.registerCommandHandler<UiActionCommand>(*this);
         }
 
     };

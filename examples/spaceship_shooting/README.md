@@ -126,12 +126,12 @@ gameLoop.phase(PhaseType::Post)
 
 ## Command Routing
 
-The spawn system uses `TypedCommandHandler` instances registered by Managers during `init()`. Commands submitted via `ctx.queueCommand<T>()` are routed automatically during the commit phase:
+The spawn system uses command handlers registered by Managers during `init()`. Commands submitted via `ctx.queueCommand<T>()` are routed automatically during the commit phase:
 
 ```cpp
 // SpawnManager registers itself as handler during init():
-// gameWorld.registerCommandHandler<TypedCommandHandler<SpawnCommand>>(*this);
-// gameWorld.registerCommandHandler<TypedCommandHandler<DespawnCommand>>(*this);
+gameWorld.registerCommandHandler<SpawnCommand>(*this);
+gameWorld.registerCommandHandler<DespawnCommand>(*this);
 ```
 
 ## See Also

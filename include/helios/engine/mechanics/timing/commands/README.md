@@ -20,7 +20,6 @@ auto context = TimerControlContext{TimerState::Started, myTimerId};
 updateContext.queueCommand<TimerControlCommand>(std::move(context));
 ```
 
-The command is dispatched via the Visitor pattern - `accept()` delegates to `TimerCommandDispatcher`, which forwards the request to `TimerManager`.
 
 ---
 

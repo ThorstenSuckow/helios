@@ -1,6 +1,6 @@
 /**
  * @file _module.ixx
- * @brief Module facade for UI widget components and systems.
+ * @brief Aggregate module for UI widget type identifiers.
  */
 export module helios.engine.modules.ui.widgets.types;
 

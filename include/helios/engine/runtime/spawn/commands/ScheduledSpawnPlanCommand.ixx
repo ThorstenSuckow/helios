@@ -40,10 +40,19 @@ export namespace helios::engine::runtime::spawn::commands {
      */
     class ScheduledSpawnPlanCommand {
 
+        /**
+         * @brief Profile identifying the spawn configuration.
+         */
         helios::engine::mechanics::spawn::types::SpawnProfileId spawnProfileId_;
 
+        /**
+         * @brief The spawn plan containing rule ID and amount.
+         */
         helios::engine::runtime::spawn::scheduling::SpawnPlan spawnPlan_;
 
+        /**
+         * @brief Context providing spawn-time information.
+         */
         helios::engine::runtime::spawn::SpawnContext spawnContext_;
 
     public:

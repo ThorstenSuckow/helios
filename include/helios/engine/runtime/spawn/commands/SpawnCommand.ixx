@@ -41,14 +41,25 @@ export namespace helios::engine::runtime::spawn::commands {
          */
         size_t spawnBudget_;
 
-
+        /**
+         * @brief Profile identifying the spawn configuration.
+         */
         helios::engine::mechanics::spawn::types::SpawnProfileId spawnProfileId_;
 
+        /**
+         * @brief Context providing spawn-time information (e.g., emitter).
+         */
         helios::engine::runtime::spawn::SpawnContext spawnContext_;
 
     public:
 
-
+        /**
+         * @brief Constructs a SpawnCommand.
+         *
+         * @param spawnProfileId The profile identifying the spawn configuration.
+         * @param spawnContext Context providing spawn-time information.
+         * @param spawnBudget Number of objects to spawn (default: 1).
+         */
         explicit SpawnCommand(
             const helios::engine::mechanics::spawn::types::SpawnProfileId spawnProfileId,
             const helios::engine::runtime::spawn::SpawnContext& spawnContext,

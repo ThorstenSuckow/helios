@@ -20,15 +20,13 @@ This module provides components, systems, and infrastructure for tracking and ma
 | `ScorePoolManager` | Manager that owns score pools and handles score commands |
 | `ScorePool` | Container accumulating scores by type with running total |
 | `ScorePoolSnapshot` | Immutable snapshot of pool state |
-| `ScoreCommandHandler` | Abstract interface for score command processing |
-| `ScoreCommandDispatcher` | Routes score commands to the handler |
 
 ## Architecture
 
 The scoring system follows a command-based architecture:
 
 1. **Combat events** trigger `UpdateScoreCommand` via `CombatScoringSystem`
-2. **Commands** are dispatched to `ScorePoolManager` via `ScoreCommandDispatcher`
+2. **Commands** are dispatched to `ScorePoolManager`
 3. **Scores** are accumulated in `ScorePool` instances
 4. **UI** observes pools via `ScoreObserverComponent` + `ScoreObserverSystem`
 

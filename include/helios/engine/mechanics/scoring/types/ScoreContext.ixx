@@ -1,5 +1,5 @@
 /**
- * @file ScoreValueContext.ixx
+ * @file ScoreContext.ixx
  * @brief Data structure for score update information.
  */
 module;

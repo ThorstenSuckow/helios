@@ -8,5 +8,3 @@ export module helios.engine.runtime.messaging.command;
 
 export import helios.engine.runtime.messaging.command.EngineCommandBuffer;
 export import helios.engine.runtime.messaging.command.TypedCommandBuffer;
-export import helios.engine.runtime.messaging.command.CommandHandler;
-export import helios.engine.runtime.messaging.command.TypedCommandHandler;

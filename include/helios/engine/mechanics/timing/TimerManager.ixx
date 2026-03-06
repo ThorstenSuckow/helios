@@ -16,7 +16,6 @@ export module helios.engine.mechanics.timing.TimerManager;
 import helios.engine.mechanics.timing.types;
 import helios.engine.mechanics.timing.commands;
 
-import helios.engine.runtime.messaging.command.TypedCommandHandler;
 import helios.engine.mechanics.timing.GameTimer;
 
 import helios.engine.core.data.GameTimerId;
@@ -40,9 +39,6 @@ export namespace helios::engine::mechanics::timing {
     /**
      * @brief Manager that owns game timers and processes timer control commands.
      *
-     * TimerManager implements the Manager interface for integration into the
-     * game loop flush cycle, and the TimerCommandHandler interface so that
-     * TimerCommandDispatcher can route TimerControlCommands to it.
      *
      * Pending control commands are collected via submit() and applied during
      * flush() at the beginning of each frame.
@@ -51,7 +47,7 @@ export namespace helios::engine::mechanics::timing {
      * @see TimerCommandHandler
      * @see Manager
      */
-    class TimerManager : public TypedCommandHandler<TimerControlCommand> {
+    class TimerManager {
 
         /**
          * @brief Collection of game timers managed by this manager.
@@ -174,9 +170,7 @@ export namespace helios::engine::mechanics::timing {
          *
          * @return True if the command was accepted.
          */
-        bool submit(
-            const TimerControlCommand timerControlCommand
-        ) noexcept override {
+        bool submit(const TimerControlCommand timerControlCommand) noexcept {
             pendingControlContexts_.push_back(timerControlCommand.timerControlContext());
             return true;
         };
@@ -187,7 +181,7 @@ export namespace helios::engine::mechanics::timing {
          * @param gameWorld The game world to register with.
          */
         void init(helios::engine::runtime::world::GameWorld& gameWorld) {
-            gameWorld.template registerCommandHandler<TypedCommandHandler<TimerControlCommand> >(*this);
+            gameWorld.template registerCommandHandler<TimerControlCommand>(*this);
         }
 
         /**

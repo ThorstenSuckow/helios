@@ -8,9 +8,8 @@ The spawn system consists of several layers working together:
 
 - **SpawnScheduler:** Evaluates rules and determines when spawning should occur
 - **SpawnProfile:** Defines how entities are spawned (pool, placer, initializer)
-- **SpawnManager:** Processes spawn/despawn commands via pools
-- **Commands & Dispatchers:** Route commands through the command pipeline
-- **SpawnCommandHandler:** Interface for managers that process spawn commands
+- **SpawnManager:** Processes spawn/despawn commands (registered handler)
+- **Commands:** Encapsulate spawn operations for deferred execution
 - **SpawnSystemFactory:** Fluent builder for ID-centric spawn configuration
 
 ```
@@ -267,20 +266,6 @@ Spawn operations are represented as commands for deferred execution:
 | `DespawnCommand` | Request to return an entity to its pool |
 | `ScheduledSpawnPlanCommand` | Execute a scheduled spawn plan |
 
-### Dispatchers
-
-Commands are routed to managers via typed dispatchers:
-
-```cpp
-import helios.engine.runtime.spawn.dispatcher.SpawnCommandDispatcher;
-import helios.engine.runtime.spawn.dispatcher.DespawnCommandDispatcher;
-import helios.engine.runtime.spawn.dispatcher.ScheduledSpawnPlanCommandDispatcher;
-
-commandBuffer.addDispatcher<SpawnCommandDispatcher>();
-commandBuffer.addDispatcher<DespawnCommandDispatcher>();
-commandBuffer.addDispatcher<ScheduledSpawnPlanCommandDispatcher>();
-```
-
 ### SpawnManager
 
 The `SpawnManager` processes spawn/despawn commands:
@@ -499,12 +484,7 @@ scheduler->addRule(enemyProfileId, std::make_unique<SpawnRule>(
 ));
 spawnManager.addScheduler(std::move(scheduler));
 
-// 5. Register dispatchers (always required)
-commandBuffer.addDispatcher<ScheduledSpawnPlanCommandDispatcher>();
-commandBuffer.addDispatcher<SpawnCommandDispatcher>();
-commandBuffer.addDispatcher<DespawnCommandDispatcher>();
-
-// 6. Add spawn system to game loop
+// 5. Add spawn system to game loop
 gameLoop.phase(PhaseType::Pre)
     .addPass<GameState>(GameState::Running)
     .addSystem<GameObjectSpawnSystem>(spawnManager);
@@ -557,8 +537,6 @@ helios.engine.runtime.spawn/
 ├── SpawnProfile.ixx               # Profile configuration
 ├── SpawnContext.ixx               # Context for spawn operations
 ├── EmitterContext.ixx             # Emitter state for projectiles
-├── SpawnCommandHandler.ixx        # Interface for command handlers
-├── SpawnCommandHandlerRegistry.ixx # Registry mapping profiles to handlers
 ├── behavior/
 │   ├── SpawnPlacer.ixx            # Placement interface
 │   ├── SpawnInitializer.ixx       # Initialization interface
@@ -592,7 +570,6 @@ helios.engine.runtime.spawn/
 │   ├── SpawnPlan.ixx              # Planned spawn data
 │   └── ScheduledSpawnPlan.ixx     # Plan with profile ID
 ├── commands/                      # Spawn/Despawn commands
-├── dispatcher/                    # Command dispatchers
 └── events/                        # Frame events
 
 helios.engine.builder.spawnSystem/

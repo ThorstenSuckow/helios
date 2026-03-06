@@ -139,7 +139,7 @@ struct helios::engine::state::types::StateTransitionId<MatchState> {
 When a state transition is requested:
 
 1. `StateCommand<T>` is submitted to the command buffer
-2. `StateCommandDispatcher<T>` routes it to the registered `StateManager<T>`
+2. The command is routed to the registered `StateManager<T>` (via `CommandHandlerRegistry`)
 3. During `flush()`, the manager processes pending commands
 4. Matching rule is found and guard is evaluated (if present)
 5. Listeners are notified in order:
@@ -326,5 +326,4 @@ gameLoop.phase(PhaseType::Pre)
 - [Game Loop Architecture](gameloop-architecture.md) - Phase/Pass structure
 - [Command System](command-system.md) - Command-driven state changes
 - [Event System](event-system.md) - Event propagation
-
 

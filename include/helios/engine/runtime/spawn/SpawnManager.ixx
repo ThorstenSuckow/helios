@@ -37,8 +37,6 @@ import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.runtime.pooling.GameObjectPoolManager;
 
-import helios.engine.runtime.messaging.command.TypedCommandHandler;
-import helios.engine.runtime.messaging.command.CommandHandler;
 
 import helios.engine.mechanics.spawn.types.SpawnProfileId;
 import helios.engine.ecs.GameObject;
@@ -104,9 +102,7 @@ export namespace helios::engine::runtime::spawn {
      * @see SpawnProfile
      * @see SpawnCommandHandler
      */
-    class SpawnManager : public TypedCommandHandler<SpawnCommand>,
-                         public TypedCommandHandler<DespawnCommand>,
-                         public TypedCommandHandler<ScheduledSpawnPlanCommand> {
+    class SpawnManager {
 
 
         /**
@@ -383,7 +379,7 @@ export namespace helios::engine::runtime::spawn {
          *
          * @return Always returns true.
          */
-        bool submit(const SpawnCommand command) noexcept override {
+        bool submit(const SpawnCommand command) noexcept {
             spawnCommands_.push_back(command);
             return true;
         }
@@ -408,7 +404,7 @@ export namespace helios::engine::runtime::spawn {
          *
          * @return Always returns true.
          */
-        bool submit(const DespawnCommand command) noexcept override {
+        bool submit(const DespawnCommand command) noexcept {
             despawnCommands_.push_back(command);
             return true;
         }
@@ -423,7 +419,7 @@ export namespace helios::engine::runtime::spawn {
          */
         bool submit(
             const ScheduledSpawnPlanCommand scheduledSpawnPlanCommand
-        ) noexcept override {
+        ) noexcept {
             scheduledSpawnPlanCommands_.push_back(scheduledSpawnPlanCommand);
             return true;
         }
@@ -511,9 +507,7 @@ export namespace helios::engine::runtime::spawn {
             gameObjectPoolManager_ = &gameWorld.manager<helios::engine::runtime::pooling::GameObjectPoolManager>();
 
 
-            gameWorld.registerCommandHandler<TypedCommandHandler<SpawnCommand> >(*this);
-            gameWorld.registerCommandHandler<TypedCommandHandler<DespawnCommand> >(*this);
-            gameWorld.registerCommandHandler<TypedCommandHandler<ScheduledSpawnPlanCommand> >(*this);
+            gameWorld.registerCommandHandler<SpawnCommand, DespawnCommand, ScheduledSpawnPlanCommand>(*this);
         }
 
         /**

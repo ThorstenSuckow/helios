@@ -10,7 +10,6 @@ export module helios.engine.mechanics.health.HealthManager;
 
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
-import helios.engine.runtime.messaging.command.TypedCommandHandler;
 
 import helios.engine.mechanics.damage.commands.ApplyDamageCommand;
 import helios.engine.common.types;
@@ -43,7 +42,7 @@ export namespace helios::engine::mechanics::health {
      * @brief Manager that processes damage commands and updates entity health.
      *
      * HealthManager implements the Manager interface for integration into the
-     * game loop flush cycle, and the TypedCommandHandler interface for
+     * game loop flush cycle, and provides a registered submit function for
      * ApplyDamageCommand so that incoming damage is queued and applied in batch.
      *
      * During flush(), each queued DamageContext is resolved: the target's
@@ -62,7 +61,7 @@ export namespace helios::engine::mechanics::health {
      * @see HealthDepletedEvent
      * @see Manager
      */
-    class HealthManager : public TypedCommandHandler<ApplyDamageCommand> {
+    class HealthManager {
 
         /**
          * @brief Logger scoped to HealthManager.
@@ -145,7 +144,7 @@ export namespace helios::engine::mechanics::health {
          */
         bool submit(
             const ApplyDamageCommand applyDamageCommand
-        ) noexcept override {
+        ) noexcept {
             damageContexts_.push_back(applyDamageCommand.damageContext());
             return true;
         };
@@ -156,7 +155,7 @@ export namespace helios::engine::mechanics::health {
          * @param gameWorld The game world to register with.
          */
         void init(GameWorld& gameWorld) {
-            gameWorld.template registerCommandHandler<TypedCommandHandler<ApplyDamageCommand>>(*this);
+            gameWorld.template registerCommandHandler<ApplyDamageCommand>(*this);
         }
 
         /**

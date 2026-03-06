@@ -1,8 +1,8 @@
 # helios::engine::modules::ui::widgets::commands
 
-UI action commands and dispatchers.
+UI action commands.
 
-This namespace contains commands for triggering UI actions and the dispatchers that route them to handlers.
+This namespace contains commands for triggering UI actions.
 
 ## Commands
 
@@ -10,17 +10,13 @@ This namespace contains commands for triggering UI actions and the dispatchers t
 |---------|-------------|
 | `UiActionCommand` | Encapsulates a UI action request with source entity and action ID |
 
-## Dispatchers
 
-| Dispatcher | Description |
-|------------|-------------|
-| `UiActionCommandDispatcher` | Routes UI action commands to the registered handler |
 
 ## UiActionCommand
 
 A world command created when a UI element is activated (e.g., button pressed, menu item selected). Carries the source entity and an `ActionId` that identifies the action to execute.
 
-Direct execution via `execute()` is a no-op; commands must be dispatched.
+Commands are routed through the `CommandHandlerRegistry` to the registered `UiActionCommandManager`.
 
 ## Usage
 
@@ -37,7 +33,7 @@ updateContext.queueCommand<UiActionCommand>(
 <details>
 <summary>Doxygen</summary><p>
 @namespace helios::engine::modules::ui::widgets::commands
-@brief UI action commands and dispatchers.
-@details Contains commands for triggering UI actions and dispatchers that route them to registered handlers.
+@brief UI action commands.
+@details Contains commands for triggering UI actions that route them to registered handlers.
 </p></details>
 

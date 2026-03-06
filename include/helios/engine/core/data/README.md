@@ -63,7 +63,8 @@ The following types were moved out of `engine.core.data`:
 | `ConceptModelRegistry` | `helios.core.container` |
 | `ResourceTypeId` | `helios.engine.runtime.world.types` |
 | `SystemTypeId` | `helios.engine.runtime.world.types` |
-| `ScorePoolId`, `ScoreTypeId` | `helios.engine.mechanics.scoring` |
+| `ActionId` | `helios.engine.modules.ui.widgets.types` |
+| `ScorePoolId`, `ScoreTypeId` | `helios.engine.mechanics.scoring.types` |
 | `SpawnProfileId`, `SpawnRuleId` | `helios.engine.runtime.spawn` |
 | `GameObjectPool`, `GameObjectPoolRegistry` | `helios.engine.runtime.pooling` |
 | `GameObjectFilter`, `GameObjectView` | `helios.engine.ecs` |

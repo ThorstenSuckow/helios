@@ -13,7 +13,17 @@ import helios.core.types;
 
 export namespace helios::engine::runtime::world::types {
 
-
+    /**
+     * @brief Unique type identifier for system types.
+     *
+     * @details SystemTypeId assigns a unique, monotonically increasing
+     * integer ID to each system type at compile time. Used by
+     * SystemRegistry as an index for O(1) type-based system lookup.
+     *
+     * @see SystemRegistry
+     * @see TypeIndexer
+     * @see ResourceTypeId
+     */
     class SystemTypeId {
 
         /**

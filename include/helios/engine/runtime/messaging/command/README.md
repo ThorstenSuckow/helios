@@ -30,8 +30,8 @@ The system is built around **compile-time type safety**: command types are decla
 │                              ▼                                       │
 │  ROUTING (per command type)                                          │
 │  ┌────────────────────────────────────────────────────────────┐      │
-│  │  Handler registered?                                       │      │
-│  │    YES → TypedCommandHandler<Cmd>::submit(cmd)             │      │
+│  │  Handler registered in CommandHandlerRegistry?             │      │
+│  │    YES → registry.submit<Cmd>(cmd) via function pointer    │      │
 │  │    NO  → cmd.execute(updateContext)  [if ExecutableCommand]│      │
 │  └───────────────────────────┬────────────────────────────────┘      │
 │                              │                                       │
@@ -50,8 +50,9 @@ The system is built around **compile-time type safety**: command types are decla
 | Class | Purpose |
 |-------|---------|
 | `CommandBuffer` | Abstract base for command buffers |
-| `CommandHandler` | Abstract base for type-erased handler storage |
-| `TypedCommandHandler<T>` | Type-safe handler interface for a specific command type |
+| `CommandHandlerRegistry` | Function-pointer based registry for command handlers |
+| `CommandHandlerEntry` | Type-erased entry storing owner pointer and submit function |
+| `CommandHandlerRef<T>` | Typed reference wrapper for invoking registered handlers |
 | `TypedCommandBuffer<...Cmds>` | Compile-time typed buffer with per-type queues |
 | `EngineCommandBuffer` | Concrete facade pre-configured with all engine command types |
 
@@ -59,7 +60,7 @@ The system is built around **compile-time type safety**: command types are decla
 
 During `TypedCommandBuffer::flush()`, each command type is processed in template parameter order:
 
-1. **Handler route:** If a `TypedCommandHandler<Cmd>` is registered in the ResourceRegistry, each queued command is submitted to the handler via `submit()`.
+1. **Handler route:** If a handler is registered in the `CommandHandlerRegistry`, each queued command is submitted via the stored function pointer.
 2. **Direct execution:** If no handler is registered and the command satisfies the `ExecutableCommand` concept (provides a noexcept `execute(UpdateContext&)` method), it is executed directly.
 3. **Assertion:** If neither condition holds, an assertion fires (misconfiguration).
 
@@ -71,20 +72,25 @@ void update(UpdateContext& ctx) noexcept {
     ctx.queueCommand<DespawnCommand>(entityHandle, profileId);
 }
 
-// Managers implement TypedCommandHandler for commands they process
-class SpawnManager : public TypedCommandHandler<SpawnCommand>,
-                     public TypedCommandHandler<DespawnCommand> {
+// Managers provide submit() methods for commands they process
+class SpawnManager {
 public:
     using EngineRoleTag = helios::engine::common::tags::ManagerTag;
 
-    bool submit(SpawnCommand cmd) noexcept override {
+    bool submit(const SpawnCommand& cmd) noexcept {
         spawnQueue_.push_back(cmd);
         return true;
     }
 
-    bool submit(DespawnCommand cmd) noexcept override {
+    bool submit(const DespawnCommand& cmd) noexcept {
         despawnQueue_.push_back(cmd);
         return true;
+    }
+
+    // Register handlers during init()
+    void init(GameWorld& gameWorld) {
+        gameWorld.registerCommandHandler<SpawnCommand>(*this);
+        gameWorld.registerCommandHandler<DespawnCommand>(*this);
     }
 
     void flush(UpdateContext& ctx) noexcept { /* batch processing */ }

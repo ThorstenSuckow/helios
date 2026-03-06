@@ -14,8 +14,8 @@ The Command System provides a mechanism for **deferred action execution**. Inste
                                │ flush()
                                ▼
                         ┌──────────────────────┐
-                        │  TypedCommandHandler │
-                        │  (route to manager)  │
+                        │   Registered Handler │
+                        │  (via function ptr)  │
                         └──────────────────────┘
 ```
 
@@ -25,7 +25,7 @@ Commands are plain structs (value types) that carry the data needed for a specif
 
 ### Handler-Routed Commands
 
-Most commands are routed to a Manager's `TypedCommandHandler<T>` during flush:
+Most commands are routed to a Manager's registered submit function during flush:
 
 ```cpp
 struct DespawnCommand {
@@ -68,16 +68,16 @@ ctx.queueCommand<DespawnCommand>(entityHandle, profileId);
 
 During `flush()`, each command type is processed in template parameter order:
 
-1. **Handler route:** If a `TypedCommandHandler<Cmd>` is registered in the `ResourceRegistry`, all queued commands are submitted to the handler
+1. **Handler route:** If a handler for `Cmd` is registered in the `CommandHandlerRegistry`, all queued commands are submitted to the handler via the stored function pointer.
 2. **Direct execution:** Otherwise, if the command satisfies `ExecutableCommand`, it executes itself
 3. **Assertion:** If neither applies, an assertion fires (misconfiguration)
 
 ```cpp
 // Pseudocode for flush routing (per command type):
-if (registry.has<TypedCommandHandler<Cmd>>()) {
-    auto& handler = registry.resource<TypedCommandHandler<Cmd>>();
+if (registry.has<Cmd>()) {
+    auto& handlerRef = registry.tryHandler<Cmd>();
     for (auto& cmd : queue) {
-        handler.submit(cmd);
+        handlerRef.submit(cmd);
     }
 } else if constexpr (ExecutableCommand<Cmd>) {
     for (auto& cmd : queue) {
@@ -99,28 +99,26 @@ Commands are flushed in the order of the template parameter list. The `EngineCom
 6. UI commands (UiAction)
 7. Timing commands (TimerControl)
 
-## TypedCommandHandler
+## Command Handlers
 
-`TypedCommandHandler<T>` provides the interface for receiving commands of a specific type. Managers implement this for each command type they handle. Concrete managers are plain classes — they do not inherit from `Manager`. Instead, they declare `using EngineRoleTag = ManagerTag;` to opt in:
+Most of the Managers in helios process commands by providing a `submit` method for each command type they handle. Concrete managers are plain classes — they do not inherit from any handler interface. Instead, they declare `using EngineRoleTag = ManagerTag;` to opt in:
 
 ```cpp
-class SpawnManager : public TypedCommandHandler<SpawnCommand>,
-                     public TypedCommandHandler<DespawnCommand>,
-                     public TypedCommandHandler<ScheduledSpawnPlanCommand> {
+class SpawnManager {
 public:
     using EngineRoleTag = helios::engine::common::tags::ManagerTag;
 
-    bool submit(SpawnCommand cmd) noexcept override {
+    bool submit(const SpawnCommand& cmd) noexcept {
         spawnCommands_.push_back(cmd);
         return true;
     }
 
-    bool submit(DespawnCommand cmd) noexcept override {
+    bool submit(const DespawnCommand& cmd) noexcept {
         despawnCommands_.push_back(cmd);
         return true;
     }
 
-    bool submit(ScheduledSpawnPlanCommand cmd) noexcept override {
+    bool submit(ScheduledSpawnPlanCommand cmd) noexcept {
         scheduledCommands_.push_back(cmd);
         return true;
     }
@@ -129,12 +127,12 @@ public:
 };
 ```
 
-Handlers are registered with the `ResourceRegistry` during `init()`:
+Handlers are registered with the `ResourceRegistry` (via `GameWorld` convenience methods) during `init()`:
 
 ```cpp
 void init(GameWorld& gameWorld) {
-    gameWorld.registerCommandHandler<TypedCommandHandler<SpawnCommand>>(*this);
-    gameWorld.registerCommandHandler<TypedCommandHandler<DespawnCommand>>(*this);
+    gameWorld.registerCommandHandler<SpawnCommand>(*this);
+    gameWorld.registerCommandHandler<DespawnCommand>(*this);
 }
 ```
 
@@ -171,12 +169,12 @@ public:
 
 ## Managers
 
-Managers handle cross-cutting concerns that require deferred or batched processing. Commands route to Managers via `TypedCommandHandler::submit()` during the buffer flush, and Managers process their queues during `Manager::flush()`.
+Managers handle cross-cutting concerns that require deferred or batched processing. Commands route to Managers via registered submit functions during the buffer flush, and Managers process their queues during `Manager::flush()`.
 
 ### Manager Lifecycle
 
 1. **Registration:** Manager is added via `GameWorld::registerManager<T>()`
-2. **init():** Called during `GameWorld::init()`. Registers `TypedCommandHandler` instances with the `ResourceRegistry`.
+2. **init():** Called during `GameWorld::init()`. Registers command handlers with the `GameWorld`.
 3. **submit():** Receives commands during `CommandBuffer::flush()`
 4. **flush():** Processes queued commands during `GameWorld::flushManagers()`
 
@@ -197,25 +195,25 @@ The Command System integrates with the Phase/Pass game loop architecture. Comman
 │                                                                     │
 │  PRE PHASE ──────────────────────────────────────────────────────   │
 │    Pass 1 (Input): Systems read input, add commands                 │
-│        ctx.queueCommand<Move2DCommand>(dir, spd);                    │
+│        ctx.queueCommand<Move2DCommand>(dir, spd);                   │
 │    Pass 2, Pass 3, ...                                              │
 │  ────────────────────────────────────────────────── Phase Commit    │
 │       │  1. eventBus.swapBuffers()                                  │
-│       │  2. commandBuffer.flush(gameWorld, ctx)  ◄── Commands route here │
-│       │  3. flushManagers(ctx)                   ◄── Managers process   │
-│       ▼                                                             │
+│       │  2. commandBuffer.flush(gameWorld, ctx) ◄─ Commands         │
+│       │  3. flushManagers(ctx)                  ◄─ Managers process │
+│       ▼                                            commands         │
 │  MAIN PHASE ─────────────────────────────────────────────────────   │
 │    Pass 1 (Gameplay): Movement, Physics systems                     │
 │    Pass 2 (Collision): Collision detection                          │
 │        Commands can still be added here!                            │
 │  ────────────────────────────────────────────────── Phase Commit    │
-│       │  commandBuffer.flush(gameWorld, ctx) + flushManagers(ctx)  │
+│       │  commandBuffer.flush(gameWorld, ctx) + flushManagers(ctx)   │
 │       ▼                                                             │
 │  POST PHASE ─────────────────────────────────────────────────────   │
 │    Pass 1 (Scene Sync): Sync transforms to scene graph              │
 │    Pass 2 (Cleanup): Clear dirty flags                              │
 │  ────────────────────────────────────────────────── Phase Commit    │
-│       │  commandBuffer.flush(gameWorld, ctx) + flushManagers(ctx)  │
+│       │  commandBuffer.flush(gameWorld, ctx) + flushManagers(ctx)   │
 │       ▼                                                             │
 │                          RENDER                                     │
 └─────────────────────────────────────────────────────────────────────┘
@@ -240,7 +238,7 @@ The Command System integrates with the Phase/Pass game loop architecture. Comman
 
 - Register handlers in `Manager::init()`, not in constructors
 - Ensure the Manager is registered in the `ResourceRegistry` before dependent Managers call `init()`
-- A single Manager can implement multiple `TypedCommandHandler` specializations
+- A single Manager can register handlers for multiple command types
 
 ### Ordering
 
@@ -251,10 +249,10 @@ The Command System integrates with the Phase/Pass game loop architecture. Comman
 
 - `helios.engine.runtime.messaging.command.CommandBuffer` — Abstract buffer base
 - `helios.engine.runtime.messaging.command.TypedCommandBuffer` — Compile-time typed buffer
-- `helios.engine.runtime.messaging.command.TypedCommandHandler` — Type-safe handler interface
+- `helios.engine.runtime.messaging.command.CommandHandlerRegistry` — Function-pointer based registry for command handlers
 - `helios.engine.runtime.messaging.command.EngineCommandBuffer` — Concrete engine buffer
 - `helios.engine.runtime.world.Manager` — Base class for deferred processing managers
-- `helios.engine.runtime.world.ResourceRegistry` — Handler lookup and resource storage
+- `helios.engine.runtime.world.ResourceRegistry` — Resource storage
 
 ## Related Documentation
 

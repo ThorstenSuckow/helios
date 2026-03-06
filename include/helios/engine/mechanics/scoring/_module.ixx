@@ -14,4 +14,3 @@ export import helios.engine.mechanics.scoring.ScorePoolManager;
 export import helios.engine.mechanics.scoring.ScorePool;
 export import helios.engine.mechanics.scoring.ScorePoolSnapshot;
 export import helios.engine.mechanics.scoring.MaxScorePoolSnapshot;
-export import helios.engine.mechanics.scoring.ScoreCommandHandler;

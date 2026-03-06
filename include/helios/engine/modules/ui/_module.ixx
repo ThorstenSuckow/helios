@@ -10,5 +10,4 @@ export import helios.engine.modules.ui.binding;
 export import helios.engine.modules.ui.widgets;
 export import helios.engine.modules.ui.widgets.commands;
 
-export import helios.engine.modules.ui.UiActionCommandHandler;
 export import helios.engine.modules.ui.UiActionCommandManager;

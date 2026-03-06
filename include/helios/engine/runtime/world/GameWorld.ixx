@@ -17,8 +17,7 @@ export module helios.engine.runtime.world.GameWorld;
 
 import helios.engine.runtime.world.Session;
 
-import helios.engine.runtime.messaging.command.CommandHandler;
-import helios.engine.runtime.messaging.command.TypedCommandHandler;
+import helios.engine.runtime.messaging.command.CommandHandlerRegistry;
 
 import helios.engine.runtime.world.ResourceRegistry;
 
@@ -39,7 +38,10 @@ import helios.engine.ecs.View;
 import helios.engine.core.data;
 import helios.engine.common.concepts;
 
+
+
 using namespace helios::engine::common::concepts;
+using namespace helios::engine::runtime::messaging::command;
 
 #define HELIOS_LOG_SCOPE "GameWorld"
 export namespace helios::engine::runtime::world {
@@ -154,6 +156,14 @@ export namespace helios::engine::runtime::world {
          */
         ResourceRegistry resourceRegistry_;
 
+        /**
+         * @brief Registry mapping command types to their handler function pointers.
+         *
+         * @details Used by TypedCommandBuffer during flush to route commands
+         * to the correct handler. Handlers are registered via
+         * `registerCommandHandler<CommandTypes...>(owner)`.
+         */
+        CommandHandlerRegistry commandHandlerRegistry_;
 
         /**
          * @brief Entity registry for handle allocation and validation.
@@ -290,25 +300,35 @@ export namespace helios::engine::runtime::world {
             return resourceRegistry_.registerResource<T>(std::forward<Args>(args)...);
         }
 
+
         /**
-         * @brief Registers a non-owning CommandHandler reference.
+         * @brief Registers a command handler for one or more command types.
          *
-         * @details The handler must outlive the GameWorld (typically guaranteed
-         * because the handler is a Manager already owned by the ResourceRegistry).
+         * @details Stores a type-erased function pointer for each CommandType
+         * that routes to `owner.submit(cmd)`. During flush, the
+         * TypedCommandBuffer uses the CommandHandlerRegistry to dispatch
+         * queued commands to the registered handler.
          *
-         * @tparam T The CommandHandler type. Must derive from CommandHandler.
+         * @tparam CommandType The command types to register handlers for.
+         * @tparam OwningT The handler type. Must satisfy IsCommandHandler.
          *
-         * @param cmdHandler Reference to the handler.
+         * @param owner Reference to the handler instance. Must outlive the GameWorld.
          *
-         * @return Reference to the registered handler.
-         *
-         * @pre No handler of type T is already registered.
+         * @see CommandHandlerRegistry
          */
-        template<typename T>
-        requires IsCommandHandler<T>
-        T& registerCommandHandler(T& cmdHandler) {
-            assert(!resourceRegistry_.has<T>() && "CommandHandler already registered.");
-            return resourceRegistry_.registerResource<T>(cmdHandler);
+        template<typename... CommandType, typename OwningT>
+        requires IsCommandHandler<OwningT, CommandType...>
+        void registerCommandHandler(OwningT& owner) {
+            (commandHandlerRegistry_.template registerHandler<CommandType>(owner), ...);
+        }
+
+        /**
+         * @brief Returns a reference to the CommandHandlerRegistry.
+         *
+         * @return Reference to the CommandHandlerRegistry.
+         */
+        [[nodiscard]] CommandHandlerRegistry& commandHandlerRegistry() noexcept {
+            return commandHandlerRegistry_;
         }
 
         /**
@@ -520,6 +540,9 @@ export namespace helios::engine::runtime::world {
             return resourceRegistry_;
         }
 
+        /**
+         * @copydoc resourceRegistry()
+         */
         const ResourceRegistry& resourceRegistry() const noexcept {
             return resourceRegistry_;
         }

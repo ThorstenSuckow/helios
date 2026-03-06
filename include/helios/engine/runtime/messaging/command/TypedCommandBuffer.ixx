@@ -17,7 +17,6 @@ import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.runtime.messaging.command.CommandBuffer;
-import helios.engine.runtime.messaging.command.TypedCommandHandler;
 
 using namespace helios::engine::runtime::world;
 
@@ -28,7 +27,7 @@ export namespace helios::engine::runtime::messaging::command {
      *
      * @details A command satisfies ExecutableCommand if it provides a
      * noexcept `execute(UpdateContext&)` method. Commands that do not
-     * satisfy this concept must have a registered TypedCommandHandler.
+     * satisfy this concept must have a registered handler.
      *
      * @tparam Cmd The command type to check.
      */
@@ -49,20 +48,20 @@ export namespace helios::engine::runtime::messaging::command {
      * - **Deterministic ordering:** Commands are flushed in the order of the
      *   template parameter list, ensuring reproducible execution.
      * - **Handler-or-execute routing:** During flush, each command is either
-     *   routed to a registered TypedCommandHandler or executed directly via
+     *   routed to a registered handler or executed directly via
      *   its `execute()` method (if it satisfies ExecutableCommand).
      *
      * ## Flush Routing
      *
      * For each command type in the parameter pack:
-     * 1. If a `TypedCommandHandler<Cmd>` is registered → `handler.submit(cmd)`
+     * 1. If a handler for `Cmd` is registered → `handler.submit(cmd)`
      * 2. Else if `Cmd` satisfies `ExecutableCommand` → `cmd.execute(ctx)`
      * 3. Else → assertion failure (misconfiguration)
      *
      * @tparam CommandTypes The command types this buffer manages.
      *
      * @see CommandBuffer
-     * @see TypedCommandHandler
+     * @see CommandHandlerRegistry
      * @see EngineCommandBuffer
      * @see ExecutableCommand
      */
@@ -106,12 +105,13 @@ export namespace helios::engine::runtime::messaging::command {
                 return;
             }
 
-           if (gameWorld.resourceRegistry().has<TypedCommandHandler<CommandType>>()) {
-                auto& handler = gameWorld.resourceRegistry().resource<TypedCommandHandler<CommandType>>();
+            auto& commandHandlerRegistry = gameWorld.commandHandlerRegistry();
+
+            if (gameWorld.commandHandlerRegistry().has<CommandType>()) {
                 for (auto& cmd : queue) {
-                    handler.submit(cmd);
+                    commandHandlerRegistry.submit<CommandType>(cmd);
                 }
-           } else {
+            } else {
                if constexpr (ExecutableCommand<CommandType>) {
                    for (auto& cmd : queue) {
                        cmd.execute(updateContext);
@@ -119,8 +119,6 @@ export namespace helios::engine::runtime::messaging::command {
                } else {
                    assert(false &&  "Command type is not executable");
                }
-
-
 
             }
 

@@ -65,6 +65,7 @@ export namespace helios::engine::runtime::messaging::command {
      * | State | `StateCommand<GameState>`, `StateCommand<MatchState>` |
      * | UI | `UiActionCommand` |
      * | Timing | `TimerControlCommand` |
+     * | Lifecycle | `WorldLifecycleCommand` |
      *
      * @see TypedCommandBuffer
      * @see CommandBuffer
@@ -134,11 +135,6 @@ export namespace helios::engine::runtime::messaging::command {
             impl_.clear();
         }
     };
-
-
-    ;
-
-
 
 
 }

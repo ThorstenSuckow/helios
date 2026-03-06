@@ -65,7 +65,7 @@ export namespace helios::engine::state {
      * @see StateCommand
      */
     template <typename StateType>
-    class StateManager :    public TypedCommandHandler<StateCommand<StateType>> {
+    class StateManager {
 
         /**
          * @brief Queue of pending state commands.
@@ -227,7 +227,7 @@ export namespace helios::engine::state {
          */
         bool submit(
             const StateCommand<StateType> stateCommand
-        ) noexcept override {
+        ) noexcept {
             pending_.push_back(stateCommand);
             return true;
         };
@@ -238,7 +238,7 @@ export namespace helios::engine::state {
          * @param gameWorld The game world to register with.
          */
         void init(helios::engine::runtime::world::GameWorld& gameWorld) {
-            gameWorld.registerCommandHandler<TypedCommandHandler<StateCommand<StateType>>>(*this);
+            gameWorld.registerCommandHandler<StateCommand<StateType>>(*this);
         }
 
         /**

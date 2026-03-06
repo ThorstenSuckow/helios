@@ -18,6 +18,9 @@ export namespace helios::engine::modules::ui::widgets::components {
      */
     class UiActionComponent {
 
+        /**
+         * @brief The action identifier associated with this UI element.
+         */
         helios::engine::modules::ui::widgets::types::ActionId actionId_;
 
     public:
@@ -33,6 +36,8 @@ export namespace helios::engine::modules::ui::widgets::components {
 
         /**
          * @brief Returns the associated action identifier.
+         *
+         * @return The ActionId.
          */
         [[nodiscard]] helios::engine::modules::ui::widgets::types::ActionId actionId() const noexcept {
             return actionId_;

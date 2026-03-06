@@ -82,7 +82,9 @@ export namespace helios::engine::runtime::spawn::scheduling {
             helios::engine::runtime::spawn::policy::SpawnRuleState
         > spawnRuleStates_;
 
-
+        /**
+         * @brief Processor for evaluating individual rules.
+         */
         DefaultRuleProcessor ruleProcessor_{};
 
     public:

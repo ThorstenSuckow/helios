@@ -43,7 +43,7 @@ export namespace helios::engine::runtime::messaging::command {
         /**
          * @brief Executes all queued commands and clears the buffer.
          *
-         * @details Commands are routed to their registered TypedCommandHandler
+         * @details Commands are routed to their registered handler
          * if available, otherwise executed directly via their `execute()` method.
          *
          * @param gameWorld The game world where the commands are flushed.
@@ -61,4 +61,3 @@ export namespace helios::engine::runtime::messaging::command {
 
 
 }
-

@@ -1,6 +1,7 @@
 var module__helios_8engine_8modules_8physics_8collision_8systems_8GridCollisionDetectionSystem =
 [
     [ "GridCollisionDetectionSystem", "classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem.html", "classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem" ],
+    [ "helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::EngineRoleTag", "module__helios_8engine_8modules_8physics_8collision_8systems_8GridCollisionDetectionSystem.html#ada3063d8d7409b0186f42a5147a8d736", null ],
     [ "helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::GridCollisionDetectionSystem", "module__helios_8engine_8modules_8physics_8collision_8systems_8GridCollisionDetectionSystem.html#a5379dffaf0d365df1ae82498bc563a4c", null ],
     [ "helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::update", "module__helios_8engine_8modules_8physics_8collision_8systems_8GridCollisionDetectionSystem.html#a9f3dd44018f495fec63fada5ea0dcdc1", null ],
     [ "helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::worldBoundsToGridBounds", "module__helios_8engine_8modules_8physics_8collision_8systems_8GridCollisionDetectionSystem.html#ad1eb770b6a4aac11036603232ece927e", null ],

@@ -10,5 +10,9 @@ var searchData=
   ['inputadapter_2eixx_7',['InputAdapter.ixx',['../InputAdapter_8ixx.html',1,'']]],
   ['inputmanager_2eixx_8',['InputManager.ixx',['../InputManager_8ixx.html',1,'']]],
   ['inputsnapshot_2eixx_9',['InputSnapshot.ixx',['../InputSnapshot_8ixx.html',1,'']]],
-  ['interactioncontext_2eixx_10',['InteractionContext.ixx',['../InteractionContext_8ixx.html',1,'']]]
+  ['interactioncontext_2eixx_10',['InteractionContext.ixx',['../InteractionContext_8ixx.html',1,'']]],
+  ['iscommandbufferlike_2eixx_11',['IsCommandBufferLike.ixx',['../IsCommandBufferLike_8ixx.html',1,'']]],
+  ['iscommandhandlerlike_2eixx_12',['IsCommandHandlerLike.ixx',['../IsCommandHandlerLike_8ixx.html',1,'']]],
+  ['ismanagerlike_2eixx_13',['IsManagerLike.ixx',['../IsManagerLike_8ixx.html',1,'']]],
+  ['issystemlike_2eixx_14',['IsSystemLike.ixx',['../IsSystemLike_8ixx.html',1,'']]]
 ];

@@ -1,5 +1,6 @@
 var classhelios_1_1engine_1_1mechanics_1_1input_1_1systems_1_1TwinStickInputSystem =
 [
+    [ "EngineRoleTag", "classhelios_1_1engine_1_1mechanics_1_1input_1_1systems_1_1TwinStickInputSystem.html#af39aeb3b4b136325bec14a3700128d24", null ],
     [ "TwinStickInputSystem", "classhelios_1_1engine_1_1mechanics_1_1input_1_1systems_1_1TwinStickInputSystem.html#aaaf0bd635c750a4bb4a6752fc5fadc20", null ],
     [ "setUseDedicatedShootInput", "classhelios_1_1engine_1_1mechanics_1_1input_1_1systems_1_1TwinStickInputSystem.html#ac0e70131f79aad825821ff16a1be09c7", null ],
     [ "update", "classhelios_1_1engine_1_1mechanics_1_1input_1_1systems_1_1TwinStickInputSystem.html#a5b1360edadf5b78dcf11e0f936082914", null ],

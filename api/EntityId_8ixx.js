@@ -1,4 +1,4 @@
 var EntityId_8ixx =
 [
-    [ "helios::engine::core::data::EntityId", "namespacehelios_1_1engine_1_1core_1_1data.html#a1876d5539fc6b911fbe54f8b56fd2ec0", null ]
+    [ "helios::engine::ecs::types::EntityId", "namespacehelios_1_1engine_1_1ecs_1_1types.html#ae84533c67f73dee28dde0ce536ecf85e", null ]
 ];

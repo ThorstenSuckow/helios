@@ -119,7 +119,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ad5514051aaafea0f164769d695a96991" id="r_ad5514051aaafea0f164769d695a96991"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad5514051aaafea0f164769d695a96991">~SpawnInitializer</a> ()=default</td></tr>
-<tr class="memitem:a6580de8b02f9ba339a0466b2b76c5084" id="r_a6580de8b02f9ba339a0466b2b76c5084"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6580de8b02f9ba339a0466b2b76c5084">initialize</a> (<a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html">helios::engine::ecs::GameObject</a> gameObject, const <a class="el" href="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnPlanCursor.html">SpawnPlanCursor</a> &amp;cursor, const <a class="el" href="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnContext.html">SpawnContext</a> &amp;spawnContext)=0</td></tr>
+<tr class="memitem:a6580de8b02f9ba339a0466b2b76c5084" id="r_a6580de8b02f9ba339a0466b2b76c5084"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6580de8b02f9ba339a0466b2b76c5084">initialize</a> (<a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html">helios::engine::ecs::GameObject</a> gameObject, const <a class="el" href="structhelios_1_1engine_1_1runtime_1_1spawn_1_1types_1_1SpawnPlanCursor.html">SpawnPlanCursor</a> &amp;cursor, const <a class="el" href="structhelios_1_1engine_1_1runtime_1_1spawn_1_1types_1_1SpawnContext.html">SpawnContext</a> &amp;spawnContext)=0</td></tr>
 <tr class="memdesc:a6580de8b02f9ba339a0466b2b76c5084"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a spawned entity's state.  <br /></td></tr>
 <tr class="memitem:a361663aa22bbaa8053eb83b0adee8223" id="r_a361663aa22bbaa8053eb83b0adee8223"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a361663aa22bbaa8053eb83b0adee8223">onReset</a> () noexcept</td></tr>
 <tr class="memdesc:a361663aa22bbaa8053eb83b0adee8223"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when the spawn system is reset.  <br /></td></tr>
@@ -136,13 +136,13 @@ Public Member Functions</h2></td></tr>
 <p>Example implementation: ```cpp class ProjectileInitializer : public <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer.html" title="Abstract interface for initializing spawned entity state.">SpawnInitializer</a> { float speed_; public: explicit ProjectileInitializer(float speed) : speed_(speed) {}</p>
 <p>void initialize(const GameObject go, const SpawnPlanCursor&amp; cursor,
                     const SpawnContext&amp; ctx) override { if (auto* dir = go.get&lt;DirectionComponent&gt;()) { dir-&gt;setDirection(ctx.emitterContext-&gt;velocity.normalized()); } if (auto* move = go.get&lt;Move2DComponent&gt;()) { move-&gt;setSpeed(speed_); } } }; ```</p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnProfile.html" title="Configuration profile defining spawn behavior for a pool.">SpawnProfile</a> </dd>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="structhelios_1_1engine_1_1runtime_1_1spawn_1_1types_1_1SpawnProfile.html" title="Configuration profile defining spawn behavior for a pool.">SpawnProfile</a> </dd>
 <dd>
 <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer.html" title="Abstract interface for determining spawn positions.">SpawnPlacer</a> </dd>
 <dd>
-<a class="el" href="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnContext.html" title="Context data passed to spawn behaviors during entity initialization.">SpawnContext</a> </dd></dl>
+<a class="el" href="structhelios_1_1engine_1_1runtime_1_1spawn_1_1types_1_1SpawnContext.html" title="Context data passed to spawn behaviors during entity initialization.">SpawnContext</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SpawnInitializer_8ixx_source.html#l00051">51</a> of file <a class="el" href="SpawnInitializer_8ixx_source.html">SpawnInitializer.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SpawnInitializer_8ixx_source.html#l00052">52</a> of file <a class="el" href="SpawnInitializer_8ixx_source.html">SpawnInitializer.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad5514051aaafea0f164769d695a96991" name="ad5514051aaafea0f164769d695a96991"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad5514051aaafea0f164769d695a96991">&#9670;&#160;</a></span>~SpawnInitializer()</h2>
@@ -187,12 +187,12 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnPlanCursor.html">SpawnPlanCursor</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>cursor</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="structhelios_1_1engine_1_1runtime_1_1spawn_1_1types_1_1SpawnPlanCursor.html">SpawnPlanCursor</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>cursor</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnContext.html">SpawnContext</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>spawnContext</em></span>&#160;)</td>
+          <td class="paramtype">const <a class="el" href="structhelios_1_1engine_1_1runtime_1_1spawn_1_1types_1_1SpawnContext.html">SpawnContext</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>spawnContext</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -244,7 +244,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1MoveInitializer.html#a52da231cb8c38e7217bed1a9c3a4d423">helios::engine::runtime::spawn::behavior::initializers::MoveInitializer</a>, and <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1RandomDirectionInitializer.html#a0e904523f6d2fe97f2302a3d3c2d472e">helios::engine::runtime::spawn::behavior::initializers::RandomDirectionInitializer</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="SpawnInitializer_8ixx_source.html#l00076">76</a> of file <a class="el" href="SpawnInitializer_8ixx_source.html">SpawnInitializer.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SpawnInitializer_8ixx_source.html#l00077">77</a> of file <a class="el" href="SpawnInitializer_8ixx_source.html">SpawnInitializer.ixx</a>.</p>
 
 </div>
 </div>

@@ -1,4 +1,5 @@
 var classhelios_1_1engine_1_1mechanics_1_1health_1_1systems_1_1HealthUpdateClearSystem =
 [
+    [ "EngineRoleTag", "classhelios_1_1engine_1_1mechanics_1_1health_1_1systems_1_1HealthUpdateClearSystem.html#a52331aa983fb5f32f7588ff74bfce6b7", null ],
     [ "update", "classhelios_1_1engine_1_1mechanics_1_1health_1_1systems_1_1HealthUpdateClearSystem.html#ab7a4c03d250d898716be4741b6773870", null ]
 ];

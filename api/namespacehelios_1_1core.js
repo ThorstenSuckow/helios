@@ -3,7 +3,7 @@ var namespacehelios_1_1core =
     [ "algorithms", "namespacehelios_1_1core_1_1algorithms.html", [
       [ "fnv1a_hash", "namespacehelios_1_1core_1_1algorithms.html#a3df283d4b3d4c5006c1bb3c30e03ab1e", null ]
     ] ],
-    [ "buffer", "namespacehelios_1_1core_1_1buffer.html", "namespacehelios_1_1core_1_1buffer" ],
+    [ "container", "namespacehelios_1_1core_1_1container.html", "namespacehelios_1_1core_1_1container" ],
     [ "data", "namespacehelios_1_1core_1_1data.html", "namespacehelios_1_1core_1_1data" ],
     [ "memory", "namespacehelios_1_1core_1_1memory.html", "namespacehelios_1_1core_1_1memory" ],
     [ "spatial", "namespacehelios_1_1core_1_1spatial.html", "namespacehelios_1_1core_1_1spatial" ],

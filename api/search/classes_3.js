@@ -18,5 +18,5 @@ var searchData=
   ['directioncomponent_15',['DirectionComponent',['../classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1DirectionComponent.html',1,'helios::engine::modules::physics::motion::components']]],
   ['dispatcher_16',['Dispatcher',['../classhelios_1_1event_1_1Dispatcher.html',1,'helios::event']]],
   ['distributedspawnplacer_17',['DistributedSpawnPlacer',['../classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1DistributedSpawnPlacer.html',1,'helios::engine::runtime::spawn::behavior::placements']]],
-  ['doublebuffer_18',['DoubleBuffer',['../classhelios_1_1core_1_1buffer_1_1DoubleBuffer.html',1,'helios::core::buffer']]]
+  ['doublebuffer_18',['DoubleBuffer',['../classhelios_1_1core_1_1container_1_1buffer_1_1DoubleBuffer.html',1,'helios::core::container::buffer']]]
 ];

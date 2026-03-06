@@ -1,5 +1,5 @@
 var CollisionLayer_8ixx =
 [
-    [ "helios::engine::core::data::CollisionLayer", "namespacehelios_1_1engine_1_1core_1_1data.html#a7886ef44eabe7b1a1f109e6c5fe971ca", null ],
-    [ "helios::engine::core::data::MAX_COLLISION_LAYERS", "namespacehelios_1_1engine_1_1core_1_1data.html#ae64ec2be155f406b8b8f557354c66efb", null ]
+    [ "helios::engine::modules::physics::collision::types::CollisionLayer", "namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types.html#a9be6c24e485ad40733af21d5a8d44981", null ],
+    [ "helios::engine::modules::physics::collision::types::MAX_COLLISION_LAYERS", "namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types.html#a2ba60e350a463a692b2d02a35ceba56f", null ]
 ];

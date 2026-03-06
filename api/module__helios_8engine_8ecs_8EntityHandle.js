@@ -6,6 +6,6 @@ var module__helios_8engine_8ecs_8EntityHandle =
     [ "helios::engine::ecs::EntityHandle::operator>", "module__helios_8engine_8ecs_8EntityHandle.html#ab010b1ea7beb65f6833caa2aecdf2a7b", null ],
     [ "helios::engine::ecs::EntityHandle::isValid", "module__helios_8engine_8ecs_8EntityHandle.html#a73560bd425f091370d8ca7960175d177", null ],
     [ "std::hash< helios::engine::ecs::EntityHandle >::operator()", "module__helios_8engine_8ecs_8EntityHandle.html#a55a97c2f1cc1bef2674b684b25bea230", null ],
-    [ "helios::engine::ecs::EntityHandle::entityId", "module__helios_8engine_8ecs_8EntityHandle.html#a8ad3a3b2aa35d89579931f2914dcb2d0", null ],
-    [ "helios::engine::ecs::EntityHandle::versionId", "module__helios_8engine_8ecs_8EntityHandle.html#ae0ef80052fa02514dffb0fcc6d94765b", null ]
+    [ "helios::engine::ecs::EntityHandle::entityId", "module__helios_8engine_8ecs_8EntityHandle.html#abe242c470a3a2793119b92628f7d2358", null ],
+    [ "helios::engine::ecs::EntityHandle::versionId", "module__helios_8engine_8ecs_8EntityHandle.html#ac22b3a5efaa26c9f514f1d779ea90491", null ]
 ];

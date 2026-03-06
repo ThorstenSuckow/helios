@@ -115,6 +115,11 @@ Classes</h2></td></tr>
 <tr class="memitem:CollisionContext" id="r_CollisionContext"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1_1CollisionContext.html">CollisionContext</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Context data describing a collision event.  <a href="structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1_1CollisionContext.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a9be6c24e485ad40733af21d5a8d44981" id="r_a9be6c24e485ad40733af21d5a8d44981"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9be6c24e485ad40733af21d5a8d44981">helios::engine::modules::physics::collision::types::CollisionLayer</a> = uint32_t</td></tr>
+<tr class="memdesc:a9be6c24e485ad40733af21d5a8d44981"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for collision layer identifiers.  <br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
 <tr class="memitem:a3c17ab6bf5f5cf9dc514ff7c5bf91bdc" id="r_a3c17ab6bf5f5cf9dc514ff7c5bf91bdc"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3c17ab6bf5f5cf9dc514ff7c5bf91bdc">helios::engine::modules::physics::collision::types::CollisionBehavior</a> : uint16_t { <br />
@@ -153,11 +158,41 @@ Functions</h2></td></tr>
 Variables</h2></td></tr>
 <tr class="memitem:a619e92f878230f525a54d26f528a028e" id="r_a619e92f878230f525a54d26f528a028e"><td class="memItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a619e92f878230f525a54d26f528a028e">helios::engine::modules::physics::collision::types::CollisionBehaviorItemSize</a> = 8</td></tr>
 <tr class="memdesc:a619e92f878230f525a54d26f528a028e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of distinct <a class="el" href="#a3c17ab6bf5f5cf9dc514ff7c5bf91bdc" title="Defines how an entity responds to a collision event.">CollisionBehavior</a> flags.  <br /></td></tr>
+<tr class="memitem:a2ba60e350a463a692b2d02a35ceba56f" id="r_a2ba60e350a463a692b2d02a35ceba56f"><td class="memItemLeft" align="right" valign="top">constexpr std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2ba60e350a463a692b2d02a35ceba56f">helios::engine::modules::physics::collision::types::MAX_COLLISION_LAYERS</a> = std::numeric_limits&lt;<a class="el" href="#a9be6c24e485ad40733af21d5a8d44981">CollisionLayer</a>&gt;::digits</td></tr>
+<tr class="memdesc:a2ba60e350a463a692b2d02a35ceba56f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum number of distinct collision layers.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Type definitions for collision system behavior configuration. </p>
 <p>Provides enums and structs that configure collision detection and response behavior, including bitmask-based behavior flags and collision event context data. </p>
-</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
+</div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
+<a id="a9be6c24e485ad40733af21d5a8d44981" name="a9be6c24e485ad40733af21d5a8d44981"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9be6c24e485ad40733af21d5a8d44981">&#9670;&#160;</a></span>CollisionLayer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a9be6c24e485ad40733af21d5a8d44981">helios::engine::modules::physics::collision::types::CollisionLayer</a> = uint32_t</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Type alias for collision layer identifiers. </p>
+<p>Collision layers are represented as bitmask values where each layer is a single bit. This allows efficient layer masking operations. </p>
+
+<p class="definition">Definition at line <a class="el" href="CollisionLayer_8ixx_source.html#l00022">22</a> of file <a class="el" href="CollisionLayer_8ixx_source.html">CollisionLayer.ixx</a>.</p>
+
+</div>
+</div>
+<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
 <a id="a3c17ab6bf5f5cf9dc514ff7c5bf91bdc" name="a3c17ab6bf5f5cf9dc514ff7c5bf91bdc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3c17ab6bf5f5cf9dc514ff7c5bf91bdc">&#9670;&#160;</a></span>CollisionBehavior</h2>
 
@@ -342,7 +377,7 @@ GridCollisionDetectionSystem </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="CollisionBehavior_8ixx_source.html#l00135">135</a> of file <a class="el" href="CollisionBehavior_8ixx_source.html">CollisionBehavior.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="CollisionStateResponseSystem_8ixx_source.html#l00072">helios::engine::modules::physics::collision::systems::CollisionStateResponseSystem::update()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="CollisionStateResponseSystem_8ixx_source.html#l00076">helios::engine::modules::physics::collision::systems::CollisionStateResponseSystem::update()</a>.</p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
@@ -458,6 +493,33 @@ GridCollisionDetectionSystem </dd></dl>
 <p>Number of distinct <a class="el" href="#a3c17ab6bf5f5cf9dc514ff7c5bf91bdc" title="Defines how an entity responds to a collision event.">CollisionBehavior</a> flags. </p>
 
 <p class="definition">Definition at line <a class="el" href="CollisionBehavior_8ixx_source.html#l00097">97</a> of file <a class="el" href="CollisionBehavior_8ixx_source.html">CollisionBehavior.ixx</a>.</p>
+
+</div>
+</div>
+<a id="a2ba60e350a463a692b2d02a35ceba56f" name="a2ba60e350a463a692b2d02a35ceba56f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ba60e350a463a692b2d02a35ceba56f">&#9670;&#160;</a></span>MAX_COLLISION_LAYERS</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::size_t helios::engine::modules::physics::collision::types::MAX_COLLISION_LAYERS = std::numeric_limits&lt;<a class="el" href="#a9be6c24e485ad40733af21d5a8d44981">CollisionLayer</a>&gt;::digits</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Maximum number of distinct collision layers. </p>
+<p>Derived from the number of bits in <a class="el" href="#a9be6c24e485ad40733af21d5a8d44981" title="Type alias for collision layer identifiers.">CollisionLayer</a> (32 for uint32_t). </p>
+
+<p class="definition">Definition at line <a class="el" href="CollisionLayer_8ixx_source.html#l00029">29</a> of file <a class="el" href="CollisionLayer_8ixx_source.html">CollisionLayer.ixx</a>.</p>
 
 </div>
 </div>

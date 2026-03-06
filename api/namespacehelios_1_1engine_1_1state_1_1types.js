@@ -8,6 +8,7 @@ var namespacehelios_1_1engine_1_1state_1_1types =
     [ "StateTransitionRequest", "classhelios_1_1engine_1_1state_1_1types_1_1StateTransitionRequest.html", "classhelios_1_1engine_1_1state_1_1types_1_1StateTransitionRequest" ],
     [ "StateTransitionRule", "classhelios_1_1engine_1_1state_1_1types_1_1StateTransitionRule.html", "classhelios_1_1engine_1_1state_1_1types_1_1StateTransitionRule" ],
     [ "StateTransitionType", "structhelios_1_1engine_1_1state_1_1types_1_1StateTransitionType.html", null ],
+    [ "StateTypeId", "classhelios_1_1engine_1_1state_1_1types_1_1StateTypeId.html", "classhelios_1_1engine_1_1state_1_1types_1_1StateTypeId" ],
     [ "GuardCallback", "namespacehelios_1_1engine_1_1state_1_1types.html#a986f42a21af7d0f881b117dc03ef7b2e", null ],
     [ "StateTransitionIdType", "namespacehelios_1_1engine_1_1state_1_1types.html#a8206d62c7b5bc68fb20729209b2eb542", null ],
     [ "dependent_false_v", "namespacehelios_1_1engine_1_1state_1_1types.html#a65e3bfab69f20855e37dcbff14c1fbf9", null ]

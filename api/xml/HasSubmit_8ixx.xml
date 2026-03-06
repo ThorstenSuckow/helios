@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="HasSubmit_8ixx" kind="file" language="C++">
+    <compoundname>HasSubmit.ixx</compoundname>
+    <includes local="no">concepts</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>HasSubmit.ixx</label>
+        <link refid="HasSubmit_8ixx"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>concepts</label>
+      </node>
+    </incdepgraph>
+    <innerconcept refid="concepthelios_1_1engine_1_1common_1_1concepts_1_1HasSubmit">helios::engine::common::concepts::HasSubmit</innerconcept>
+    <innernamespace refid="namespacehelios">helios</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine">helios::engine</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1runtime">helios::engine::runtime</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1runtime_1_1world">helios::engine::runtime::world</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1common">helios::engine::common</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1common_1_1concepts">helios::engine::common::concepts</innernamespace>
+    <briefdescription>
+<para>Concept for types that can accept commands via submit(). </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/**</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>@file<sp/>HasSubmit.ixx</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>@brief<sp/>Concept<sp/>for<sp/>types<sp/>that<sp/>can<sp/>accept<sp/>commands<sp/>via<sp/>submit().</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">module</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;concepts&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8common_8concepts_8HasSubmit" kindref="compound">helios.engine.common.concepts.HasSubmit</ref>;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1runtime_1_1world" kindref="compound">helios::engine::runtime::world</ref><sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">UpdateContext</ref>;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1common_1_1concepts" kindref="compound">helios::engine::common::concepts</ref><sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Constrains<sp/>types<sp/>that<sp/>can<sp/>accept<sp/>a<sp/>command<sp/>via<sp/>a<sp/>noexcept<sp/>submit()<sp/>method.</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>Used<sp/>by<sp/>CommandHandlerRegistry<sp/>to<sp/>verify<sp/>that<sp/>a<sp/>handler<sp/>type</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>provides<sp/>the<sp/>required<sp/>`submit(const<sp/>CommandType&amp;)<sp/>noexcept<sp/>-&gt;<sp/>bool`</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>interface<sp/>before<sp/>registering<sp/>it<sp/>as<sp/>a<sp/>command<sp/>handler.</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@tparam<sp/>OwningT<sp/>The<sp/>handler<sp/>type.</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@tparam<sp/>CommandType<sp/>The<sp/>command<sp/>type<sp/>accepted<sp/>by<sp/>the<sp/>handler.</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>CommandHandlerRegistry</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>OwningT,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>CommandType&gt;</highlight></codeline>
+<codeline lineno="30" refid="concepthelios_1_1engine_1_1common_1_1concepts_1_1HasSubmit" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">concept<sp/></highlight><highlight class="normal"><ref refid="concepthelios_1_1engine_1_1common_1_1concepts_1_1HasSubmit" kindref="compound">HasSubmit</ref><sp/>=<sp/></highlight><highlight class="keyword">requires</highlight><highlight class="normal">(OwningT&amp;<sp/>owner,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>CommandType&amp;<sp/>cmd)<sp/>{</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>owner.submit(cmd)<sp/>}<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>-&gt;<sp/>std::same_as&lt;bool&gt;;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/tmp/h/include/helios/engine/common/concepts/HasSubmit.ixx"/>
+  </compounddef>
+</doxygen>

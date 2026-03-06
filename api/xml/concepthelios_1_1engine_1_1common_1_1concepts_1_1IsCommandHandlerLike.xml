@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="concepthelios_1_1engine_1_1common_1_1concepts_1_1IsCommandHandlerLike" kind="concept">
+    <compoundname>helios::engine::common::concepts::IsCommandHandlerLike</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename OwningT</type>
+      </param>
+      <param>
+        <type>typename...</type>
+        <declname>CommandType</declname>
+        <defname>CommandType</defname>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;typename OwningT, typename... CommandType&gt;
+concept <ref refid="concepthelios_1_1engine_1_1common_1_1concepts_1_1IsCommandHandlerLike" kindref="compound">helios::engine::common::concepts::IsCommandHandlerLike</ref> =  (requires(OwningT&amp; owner, const CommandType&amp; cmd) {
+          { owner.submit(cmd) } noexcept -&gt; std::same_as&lt;bool&gt;;} &amp;&amp; ...)    </initializer>
+    <briefdescription>
+<para>Constrains T to objects that provide a submit method for specified command types. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="see"><para>CommandHandlerRegistry </para>
+</simplesect>
+<simplesect kind="see"><para>ResourceRegistry </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/common/concepts/IsCommandHandlerLike.ixx" line="20" column="5"/>
+  </compounddef>
+</doxygen>

@@ -30,15 +30,13 @@
 <codeline><highlight class="normal">|<sp/>`ScorePoolManager`<sp/>|<sp/>Manager<sp/>that<sp/>owns<sp/>score<sp/>pools<sp/>and<sp/>handles<sp/>score<sp/>commands<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`ScorePool`<sp/>|<sp/>Container<sp/>accumulating<sp/>scores<sp/>by<sp/>type<sp/>with<sp/>running<sp/>total<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`ScorePoolSnapshot`<sp/>|<sp/>Immutable<sp/>snapshot<sp/>of<sp/>pool<sp/>state<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`ScoreCommandHandler`<sp/>|<sp/>Abstract<sp/>interface<sp/>for<sp/>score<sp/>command<sp/>processing<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`ScoreCommandDispatcher`<sp/>|<sp/>Routes<sp/>score<sp/>commands<sp/>to<sp/>the<sp/>handler<sp/>|</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Architecture</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">The<sp/>scoring<sp/>system<sp/>follows<sp/>a<sp/>command-based<sp/>architecture:</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">1.<sp/>**Combat<sp/>events**<sp/>trigger<sp/>`UpdateScoreCommand`<sp/>via<sp/>`CombatScoringSystem`</highlight></codeline>
-<codeline><highlight class="normal">2.<sp/>**Commands**<sp/>are<sp/>dispatched<sp/>to<sp/>`ScorePoolManager`<sp/>via<sp/>`ScoreCommandDispatcher`</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>**Commands**<sp/>are<sp/>dispatched<sp/>to<sp/>`ScorePoolManager`</highlight></codeline>
 <codeline><highlight class="normal">3.<sp/>**Scores**<sp/>are<sp/>accumulated<sp/>in<sp/>`ScorePool`<sp/>instances</highlight></codeline>
 <codeline><highlight class="normal">4.<sp/>**UI**<sp/>observes<sp/>pools<sp/>via<sp/>`ScoreObserverComponent`<sp/>+<sp/>`ScoreObserverSystem`</highlight></codeline>
 <codeline></codeline>

@@ -21,22 +21,21 @@
 <codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|-------|---------|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`GameWorld`<sp/>|<sp/>Central<sp/>game<sp/>state<sp/>container<sp/>for<sp/>entities,<sp/>resources,<sp/>and<sp/>the<sp/>active<sp/>level<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`ResourceRegistry`<sp/>|<sp/>Type-indexed<sp/>store<sp/>for<sp/>Managers,<sp/>CommandBuffers,<sp/>and<sp/>CommandHandlers<sp/>with<sp/>O(1)<sp/>lookup<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ResourceRegistry`<sp/>|<sp/>Type-indexed<sp/>store<sp/>for<sp/>Managers<sp/>and<sp/>CommandBuffers<sp/>with<sp/>O(1)<sp/>lookup<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`Session`<sp/>|<sp/>Cross-frame<sp/>state<sp/>tracking<sp/>(game/match<sp/>states,<sp/>scores)<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`Level`<sp/>|<sp/>Game<sp/>level<sp/>with<sp/>world<sp/>bounds<sp/>and<sp/>root<sp/>scene<sp/>node<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`UpdateContext`<sp/>|<sp/>Per-frame<sp/>context<sp/>with<sp/>delta<sp/>time,<sp/>event<sp/>buses,<sp/>and<sp/>command<sp/>buffer<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`SystemRegistry`<sp/>|<sp/>Container<sp/>for<sp/>System<sp/>instances<sp/>within<sp/>a<sp/>pass<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`Manager`<sp/>|<sp/>Abstract<sp/>base<sp/>for<sp/>deferred<sp/>operation<sp/>handlers<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`UpdateContext`<sp/>|<sp/>Per-frame<sp/>context<sp/>with<sp/>delta<sp/>time,<sp/>event<sp/>buses,<sp/>and<sp/>`queueCommand&lt;T&gt;()`<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SystemRegistry`<sp/>|<sp/>`ConceptModelRegistry&lt;System,<sp/>SystemTypeId&gt;`<sp/>alias<sp/>for<sp/>system<sp/>storage<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ManagerRegistry`<sp/>|<sp/>`ConceptModelRegistry&lt;Manager,<sp/>ResourceTypeId&gt;`<sp/>alias<sp/>for<sp/>manager<sp/>storage<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`Manager`<sp/>|<sp/>Type-erased<sp/>wrapper<sp/>for<sp/>deferred<sp/>operation<sp/>handlers<sp/>(Concept/Model<sp/>pattern)<sp/>|</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">```cpp</highlight></codeline>
 <codeline><highlight class="normal">//<sp/>Create<sp/>world<sp/>and<sp/>register<sp/>resources</highlight></codeline>
 <codeline><highlight class="normal">helios::engine::runtime::world::GameWorld<sp/>gameWorld;</highlight></codeline>
-<codeline><highlight class="normal">auto&amp;<sp/>poolMgr<sp/>=<sp/>gameWorld.resourceRegistry()</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.registerResource&lt;GameObjectPoolManager&gt;();</highlight></codeline>
-<codeline><highlight class="normal">auto&amp;<sp/>spawnMgr<sp/>=<sp/>gameWorld.resourceRegistry()</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.registerResource&lt;SpawnManager&gt;();</highlight></codeline>
+<codeline><highlight class="normal">auto&amp;<sp/>poolMgr<sp/>=<sp/>gameWorld.registerResource&lt;GameObjectPoolManager&gt;();</highlight></codeline>
+<codeline><highlight class="normal">auto&amp;<sp/>spawnMgr<sp/>=<sp/>gameWorld.registerResource&lt;SpawnManager&gt;();</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">gameWorld.init();<sp/>//<sp/>Initializes<sp/>all<sp/>Managers<sp/>in<sp/>registration<sp/>order</highlight></codeline>
 <codeline></codeline>
@@ -60,7 +59,6 @@
 <codeline><highlight class="normal">@brief<sp/>World<sp/>state<sp/>management,<sp/>resource<sp/>registry,<sp/>and<sp/>per-frame<sp/>update<sp/>context.</highlight></codeline>
 <codeline><highlight class="normal">@details<sp/>Provides<sp/>GameWorld<sp/>as<sp/>the<sp/>root<sp/>game<sp/>state<sp/>container,<sp/>ResourceRegistry<sp/>for<sp/>type-indexed<sp/>O(1)<sp/>resource<sp/>access,<sp/>UpdateContext<sp/>for<sp/>frame<sp/>state,<sp/>Session<sp/>for<sp/>cross-frame<sp/>state,<sp/>Level<sp/>for<sp/>world<sp/>bounds,<sp/>and<sp/>SystemRegistry<sp/>for<sp/>system<sp/>organization.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
-<codeline></codeline>
     </programlisting>
     <location file="/tmp/h/include/helios/engine/runtime/world/README.md"/>
   </compounddef>

@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="concepthelios_1_1engine_1_1common_1_1concepts_1_1HasReset" kind="concept">
+    <compoundname>helios::engine::common::concepts::HasReset</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;typename T&gt;
+concept <ref refid="concepthelios_1_1engine_1_1common_1_1concepts_1_1HasReset" kindref="compound">helios::engine::common::concepts::HasReset</ref> =  requires(T&amp; t) {
+        {t.reset() } -&gt; std::same_as&lt;void&gt;;
+    }    </initializer>
+    <briefdescription>
+<para>Constrains types that provide a `reset()` method returning void. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Used by the Manager type-erasure wrapper to conditionally call `reset()` on concrete managers during level transitions or game restarts.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type to constrain.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para>Manager </para>
+</simplesect>
+<simplesect kind="see"><para>GameWorld::reset </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/common/concepts/HasReset.ixx" line="26" column="5"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="helios_2engine_2common_2concepts_2README_8md" kind="file" language="Markdown">
+    <compoundname>helios/engine/common/concepts/README.md</compoundname>
+    <innernamespace refid="namespacehelios_1_1engine_1_1common_1_1concepts">helios::engine::common::concepts</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>helios::engine::common::concepts</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Compile-time<sp/>concepts<sp/>for<sp/>engine<sp/>role<sp/>classification<sp/>and<sp/>capability<sp/>detection.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>C++20<sp/>concepts<sp/>that<sp/>constrain<sp/>types<sp/>for<sp/>specific<sp/>engine</highlight></codeline>
+<codeline><highlight class="normal">roles<sp/>(System,<sp/>Manager,<sp/>CommandBuffer,<sp/>CommandHandler).<sp/>The<sp/>concepts<sp/>combine</highlight></codeline>
+<codeline><highlight class="normal">structural<sp/>requirements<sp/>(e.g.<sp/>`flush()`,<sp/>`update()`)<sp/>with<sp/>explicit<sp/>opt-in<sp/>via</highlight></codeline>
+<codeline><highlight class="normal">the<sp/>[tag<sp/>system](../tags/README.md),<sp/>preventing<sp/>accidental<sp/>registration<sp/>of</highlight></codeline>
+<codeline><highlight class="normal">types<sp/>that<sp/>happen<sp/>to<sp/>have<sp/>matching<sp/>method<sp/>signatures.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Concepts</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Concept<sp/>|<sp/>Requires<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|---------|----------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`HasTag&lt;T,<sp/>Tag&gt;`<sp/>|<sp/>`T::EngineRoleTag<sp/>==<sp/>Tag`<sp/>|<sp/>Detects<sp/>compile-time<sp/>role<sp/>tag<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`HasInit&lt;T&gt;`<sp/>|<sp/>`T::init(GameWorld&amp;)`<sp/>|<sp/>Detects<sp/>optional<sp/>one-time<sp/>initialization<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`HasUpdate&lt;T&gt;`<sp/>|<sp/>`T::update(UpdateContext&amp;)`<sp/>|<sp/>Detects<sp/>per-frame<sp/>update<sp/>capability<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`IsManagerLike&lt;T&gt;`<sp/>|<sp/>`flush(UpdateContext&amp;)`<sp/>+<sp/>`ManagerRole`<sp/>|<sp/>Gates<sp/>`GameWorld::registerResource&lt;T&gt;()`<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`IsSystemLike&lt;T&gt;`<sp/>|<sp/>`update(UpdateContext&amp;)`<sp/>+<sp/>`SystemRole`<sp/>|<sp/>Gates<sp/>`SystemRegistry::add&lt;T&gt;()`<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`IsCommandBufferLike&lt;T&gt;`<sp/>|<sp/>Derives<sp/>from<sp/>`CommandBuffer`<sp/>|<sp/>Gates<sp/>command<sp/>buffer<sp/>registration<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`IsCommandHandlerLike&lt;T&gt;`<sp/>|<sp/>Derives<sp/>from<sp/>`CommandHandler`<sp/>|<sp/>Gates<sp/>command<sp/>handler<sp/>registration<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Tag-Based<sp/>Opt-In</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Role<sp/>concepts<sp/>combine<sp/>structural<sp/>checks<sp/>with<sp/>a<sp/>tag<sp/>requirement:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">template&lt;class<sp/>T&gt;</highlight></codeline>
+<codeline><highlight class="normal">concept<sp/>IsManagerLike<sp/>=<sp/>requires(T&amp;<sp/>t,<sp/>UpdateContext&amp;<sp/>ctx)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{<sp/>t.flush(ctx)<sp/>}<sp/>-&gt;<sp/>std::same_as&lt;void&gt;;</highlight></codeline>
+<codeline><highlight class="normal">}<sp/>&amp;&amp;<sp/>HasTag&lt;T,<sp/>ManagerRole&gt;;</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>means<sp/>a<sp/>type<sp/>must<sp/>both<sp/>implement<sp/>the<sp/>required<sp/>interface<sp/>**and**<sp/>declare</highlight></codeline>
+<codeline><highlight class="normal">`using<sp/>EngineRoleTag<sp/>=<sp/>ManagerRole;`<sp/>to<sp/>be<sp/>eligible<sp/>for<sp/>registration.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>See<sp/>Also</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>[Tags](../tags/README.md)<sp/>—<sp/>Role<sp/>tag<sp/>types</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>[System](../../../../docs/core-concepts/ecs/system.md)<sp/>—<sp/>System<sp/>architecture</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>[Command<sp/>System](../../../../docs/core-concepts/command-system.md)<sp/>—<sp/>Manager<sp/>and<sp/>handler<sp/>registration</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+<codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::engine::common::concepts</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Compile-time<sp/>concepts<sp/>for<sp/>engine<sp/>role<sp/>classification<sp/>and<sp/>capability<sp/>detection.</highlight></codeline>
+<codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
+<codeline></codeline>
+    </programlisting>
+    <location file="/tmp/h/include/helios/engine/common/concepts/README.md"/>
+  </compounddef>
+</doxygen>

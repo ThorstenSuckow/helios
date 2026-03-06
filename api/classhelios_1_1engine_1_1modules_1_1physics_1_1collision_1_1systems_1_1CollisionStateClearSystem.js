@@ -1,4 +1,5 @@
 var classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1CollisionStateClearSystem =
 [
+    [ "EngineRoleTag", "classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1CollisionStateClearSystem.html#abe5045c12d13ea7009731d589f5c79e8", null ],
     [ "update", "classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1CollisionStateClearSystem.html#aaf7d8889b1e59038ad79b404bdcef714", null ]
 ];

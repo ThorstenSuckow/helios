@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="structhelios_1_1engine_1_1runtime_1_1spawn_1_1types_1_1SpawnPlanCursor" kind="struct" language="C++" prot="public">
+    <compoundname>helios::engine::runtime::spawn::types::SpawnPlanCursor</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structhelios_1_1engine_1_1runtime_1_1spawn_1_1types_1_1SpawnPlanCursor_1ad6f1e5f61c2b04146093fc1016e828c9" prot="public" static="no" mutable="no">
+        <type>const size_t</type>
+        <definition>const size_t helios::engine::runtime::spawn::types::SpawnPlanCursor::spawnCount</definition>
+        <argsstring></argsstring>
+        <name>spawnCount</name>
+        <qualifiedname>helios::engine::runtime::spawn::types::SpawnPlanCursor::spawnCount</qualifiedname>
+        <briefdescription>
+<para>Total number of entities to spawn in this batch. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/types/SpawnPlanCursor.ixx" line="35" column="22" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/types/SpawnPlanCursor.ixx" bodystart="35" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1AxisSpawnPlacer_1a63526dfb3c2d53b1b44ed3fb60b308b8" compoundref="AxisSpawnPlacer_8ixx" startline="106" endline="172">helios::engine::runtime::spawn::behavior::placements::AxisSpawnPlacer::getPosition</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1ColumnSpawnPlacer_1a34762adec8963ba02032845e2fc56462" compoundref="ColumnSpawnPlacer_8ixx" startline="61" endline="90">helios::engine::runtime::spawn::behavior::placements::ColumnSpawnPlacer::getPosition</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1DistributedSpawnPlacer_1aa6e025c79edad780945f135c5e3e7df8" compoundref="DistributedSpawnPlacer_8ixx" startline="104" endline="115">helios::engine::runtime::spawn::behavior::placements::DistributedSpawnPlacer&lt; N &gt;::getPosition</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structhelios_1_1engine_1_1runtime_1_1spawn_1_1types_1_1SpawnPlanCursor_1a7b2eeb474bd347bdcb8e868af560a704" prot="public" static="no" mutable="no">
+        <type>const size_t</type>
+        <definition>const size_t helios::engine::runtime::spawn::types::SpawnPlanCursor::position</definition>
+        <argsstring></argsstring>
+        <name>position</name>
+        <qualifiedname>helios::engine::runtime::spawn::types::SpawnPlanCursor::position</qualifiedname>
+        <briefdescription>
+<para>Zero-based index of the current spawn within the batch. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/types/SpawnPlanCursor.ixx" line="40" column="22" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/types/SpawnPlanCursor.ixx" bodystart="40" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1AxisSpawnPlacer_1a63526dfb3c2d53b1b44ed3fb60b308b8" compoundref="AxisSpawnPlacer_8ixx" startline="106" endline="172">helios::engine::runtime::spawn::behavior::placements::AxisSpawnPlacer::getPosition</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1ColumnSpawnPlacer_1a34762adec8963ba02032845e2fc56462" compoundref="ColumnSpawnPlacer_8ixx" startline="61" endline="90">helios::engine::runtime::spawn::behavior::placements::ColumnSpawnPlacer::getPosition</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1DistributedSpawnPlacer_1aa6e025c79edad780945f135c5e3e7df8" compoundref="DistributedSpawnPlacer_8ixx" startline="104" endline="115">helios::engine::runtime::spawn::behavior::placements::DistributedSpawnPlacer&lt; N &gt;::getPosition</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1DelayedComponentEnablerInitializer_1aa62271db362f6450fb7a9e53c9346313" compoundref="DelayedComponentEnablerInitializer_8ixx" startline="98" endline="125">helios::engine::runtime::spawn::behavior::initializers::DelayedComponentEnablerInitializer&lt; ComponentTypes &gt;::initialize</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Tracks the current position within a spawn batch. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1types_1_1SpawnPlanCursor" kindref="compound">SpawnPlanCursor</ref> provides context to SpawnPlacer and SpawnInitializer about where the current spawn is within its batch. This enables behaviors like distributing spawns in a formation or applying sequential variations.</para>
+<para>Example: ```cpp // Spawning 5 enemies in a row for (size_t i = 0; i &lt; spawnCount; ++i) { <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1types_1_1SpawnPlanCursor" kindref="compound">SpawnPlanCursor</ref> cursor{.spawnCount = spawnCount, .position = i}; auto pos = placer-&gt;getPosition(guid, bounds, cursor, ctx); } ```</para>
+<para><simplesect kind="see"><para>SpawnPlacer </para>
+</simplesect>
+<simplesect kind="see"><para>SpawnInitializer </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/runtime/spawn/types/SpawnPlanCursor.ixx" line="30" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/types/SpawnPlanCursor.ixx" bodystart="30" bodyend="42"/>
+    <listofallmembers>
+      <member refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1types_1_1SpawnPlanCursor_1a7b2eeb474bd347bdcb8e868af560a704" prot="public" virt="non-virtual"><scope>helios::engine::runtime::spawn::types::SpawnPlanCursor</scope><name>position</name></member>
+      <member refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1types_1_1SpawnPlanCursor_1ad6f1e5f61c2b04146093fc1016e828c9" prot="public" virt="non-virtual"><scope>helios::engine::runtime::spawn::types::SpawnPlanCursor</scope><name>spawnCount</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

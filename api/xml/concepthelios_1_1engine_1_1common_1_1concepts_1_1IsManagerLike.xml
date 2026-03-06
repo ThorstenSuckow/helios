@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="concepthelios_1_1engine_1_1common_1_1concepts_1_1IsManagerLike" kind="concept">
+    <compoundname>helios::engine::common::concepts::IsManagerLike</compoundname>
+    <templateparamlist>
+      <param>
+        <type>class T</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;class T&gt;
+concept <ref refid="concepthelios_1_1engine_1_1common_1_1concepts_1_1IsManagerLike" kindref="compound">helios::engine::common::concepts::IsManagerLike</ref> =  requires(T&amp; t, <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref>&amp; updateContext) {
+        {t.flush(updateContext) } -&gt; std::same_as&lt;void&gt;;
+    } &amp;&amp; HasTag&lt;T, <ref refid="structhelios_1_1engine_1_1common_1_1tags_1_1ManagerRole" kindref="compound">tags::ManagerRole</ref>&gt;    </initializer>
+    <briefdescription>
+<para>Constrains T to types that provide `flush(UpdateContext&amp;)` and declare `EngineRoleTag = ManagerRole`. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>A type satisfies IsManagerLike if it: 1. Provides a `void flush(UpdateContext&amp;)` method for batch processing. 2. Declares `using EngineRoleTag = ManagerRole;` to explicitly opt in.</para>
+<para>Used by `GameWorld::registerResource&lt;T&gt;()` to gate registration.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type to constrain.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para>ManagerRole </para>
+</simplesect>
+<simplesect kind="see"><para>HasTag </para>
+</simplesect>
+<simplesect kind="see"><para>Manager </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/common/concepts/IsManagerLike.ixx" line="37" column="5"/>
+  </compounddef>
+</doxygen>

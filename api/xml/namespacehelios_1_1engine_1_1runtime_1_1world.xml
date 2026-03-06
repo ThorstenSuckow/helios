@@ -8,20 +8,60 @@
     <innerclass refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry" prot="public">helios::engine::runtime::world::ResourceRegistry</innerclass>
     <innerclass refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session" prot="public">helios::engine::runtime::world::Session</innerclass>
     <innerclass refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System" prot="public">helios::engine::runtime::world::System</innerclass>
-    <innerclass refid="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry" prot="public">helios::engine::runtime::world::SystemRegistry</innerclass>
-    <innerclass refid="classhelios_1_1engine_1_1runtime_1_1world_1_1TypedSystem" prot="public">helios::engine::runtime::world::TypedSystem</innerclass>
     <innerclass refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" prot="public">helios::engine::runtime::world::UpdateContext</innerclass>
-    <innerconcept refid="concepthelios_1_1engine_1_1runtime_1_1world_1_1IsManager">helios::engine::runtime::world::IsManager</innerconcept>
-    <innerconcept refid="concepthelios_1_1engine_1_1runtime_1_1world_1_1IsCommandBuffer">helios::engine::runtime::world::IsCommandBuffer</innerconcept>
-    <innerconcept refid="concepthelios_1_1engine_1_1runtime_1_1world_1_1IsCommandHandler">helios::engine::runtime::world::IsCommandHandler</innerconcept>
     <innerconcept refid="concepthelios_1_1engine_1_1runtime_1_1world_1_1HasInit">helios::engine::runtime::world::HasInit</innerconcept>
-    <innerconcept refid="concepthelios_1_1engine_1_1runtime_1_1world_1_1HasUpdate">helios::engine::runtime::world::HasUpdate</innerconcept>
+    <innerconcept refid="concepthelios_1_1engine_1_1runtime_1_1world_1_1HasReset">helios::engine::runtime::world::HasReset</innerconcept>
+    <innernamespace refid="namespacehelios_1_1engine_1_1runtime_1_1world_1_1types">helios::engine::runtime::world::types</innernamespace>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacehelios_1_1engine_1_1runtime_1_1world_1a12c55c47caeb5dc7588c1b1e74f4992f" prot="public" static="no">
+        <type><ref refid="classhelios_1_1core_1_1container_1_1ConceptModelRegistry" kindref="compound">ConceptModelRegistry</ref>&lt; <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref>, <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1types_1_1ManagerTypeId" kindref="compound">ManagerTypeId</ref> &gt;</type>
+        <definition>using helios::engine::runtime::world::ManagerRegistry =  ConceptModelRegistry&lt;Manager, ManagerTypeId&gt;</definition>
+        <argsstring></argsstring>
+        <name>ManagerRegistry</name>
+        <qualifiedname>helios::engine::runtime::world::ManagerRegistry</qualifiedname>
+        <briefdescription>
+<para>Type alias for a <ref refid="classhelios_1_1core_1_1container_1_1ConceptModelRegistry" kindref="compound">ConceptModelRegistry</ref> specialized for Managers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Stores type-erased <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> wrappers indexed by <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1types_1_1ManagerTypeId" kindref="compound">ManagerTypeId</ref>, providing O(1) lookup by concrete <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> type and insertion-order iteration for deterministic init/flush/reset cycles.</para>
+<para><simplesect kind="see"><para><ref refid="classhelios_1_1core_1_1container_1_1ConceptModelRegistry" kindref="compound">ConceptModelRegistry</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/ManagerRegistry.ixx" line="35" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/world/ManagerRegistry.ixx" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacehelios_1_1engine_1_1runtime_1_1world_1ada19fc9a37afc91c5d10d92dac890b45" prot="public" static="no">
+        <type><ref refid="classhelios_1_1core_1_1container_1_1ConceptModelRegistry" kindref="compound">ConceptModelRegistry</ref>&lt; <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System" kindref="compound">System</ref>, <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1types_1_1SystemTypeId" kindref="compound">SystemTypeId</ref> &gt;</type>
+        <definition>using helios::engine::runtime::world::SystemRegistry =  ConceptModelRegistry&lt;System, SystemTypeId&gt;</definition>
+        <argsstring></argsstring>
+        <name>SystemRegistry</name>
+        <qualifiedname>helios::engine::runtime::world::SystemRegistry</qualifiedname>
+        <briefdescription>
+<para>Type alias for a <ref refid="classhelios_1_1core_1_1container_1_1ConceptModelRegistry" kindref="compound">ConceptModelRegistry</ref> specialized for Systems. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Stores type-erased <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System" kindref="compound">System</ref> wrappers indexed by <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1types_1_1SystemTypeId" kindref="compound">SystemTypeId</ref>, providing O(1) lookup by concrete system type and insertion-order iteration for deterministic update cycles within a game loop pass.</para>
+<para><simplesect kind="see"><para><ref refid="classhelios_1_1core_1_1container_1_1ConceptModelRegistry" kindref="compound">ConceptModelRegistry</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System" kindref="compound">System</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/SystemRegistry.ixx" line="35" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/world/SystemRegistry.ixx" bodystart="35" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
     <briefdescription>
 <para>World state management, resource registry, and per-frame update context. </para>
     </briefdescription>
     <detaileddescription>
-<para>Provides <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> as the root game state container, <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry" kindref="compound">ResourceRegistry</ref> for type-indexed O(1) resource access, <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">UpdateContext</ref> for frame state, <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session" kindref="compound">Session</ref> for cross-frame state, <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Level" kindref="compound">Level</ref> for world bounds, and <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry" kindref="compound">SystemRegistry</ref> for system organization. </para>
+<para>Provides <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> as the root game state container, <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry" kindref="compound">ResourceRegistry</ref> for type-indexed O(1) resource access, <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">UpdateContext</ref> for frame state, <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session" kindref="compound">Session</ref> for cross-frame state, <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Level" kindref="compound">Level</ref> for world bounds, and <ref refid="namespacehelios_1_1engine_1_1runtime_1_1world_1ada19fc9a37afc91c5d10d92dac890b45" kindref="member">SystemRegistry</ref> for system organization. </para>
     </detaileddescription>
-    <location file="/tmp/h/include/helios/engine/runtime/gameloop/Pass.ixx" line="22" column="1"/>
+    <location file="/tmp/h/include/helios/engine/common/concepts/HasInit.ixx" line="11" column="1"/>
   </compounddef>
 </doxygen>

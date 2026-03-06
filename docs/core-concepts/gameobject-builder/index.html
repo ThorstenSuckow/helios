@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">GameObject Builder | helios</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://helios.garagecraft.games/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://helios.garagecraft.games/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://helios.garagecraft.games/docs/core-concepts/gameobject-builder"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="GameObject Builder | helios"><meta data-rh="true" name="description" content="Fluent builder pattern for constructing GameObjects with their associated components."><meta data-rh="true" property="og:description" content="Fluent builder pattern for constructing GameObjects with their associated components."><meta data-rh="true" name="keywords" content="helios,builder pattern,GameObjectFactory,fluent API,entity construction"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://helios.garagecraft.games/docs/core-concepts/gameobject-builder"><link data-rh="true" rel="alternate" href="https://helios.garagecraft.games/docs/core-concepts/gameobject-builder" hreflang="en"><link data-rh="true" rel="alternate" href="https://helios.garagecraft.games/docs/core-concepts/gameobject-builder" hreflang="x-default"><link data-rh="true" rel="preconnect" href="https://LK14YGETTG-dsn.algolia.net" crossorigin="anonymous"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"GameObject Builder","item":"https://helios.garagecraft.games/docs/core-concepts/gameobject-builder"}]}</script><link rel="search" type="application/opensearchdescription+xml" title="helios" href="/opensearch.xml"><link rel="stylesheet" href="/assets/css/styles.d8266996.css">
-<script src="/assets/js/runtime~main.d3808bfd.js" defer="defer"></script>
-<script src="/assets/js/main.7100f440.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.51e69012.js" defer="defer"></script>
+<script src="/assets/js/main.406ce0ee.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -125,8 +125,7 @@
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="cloning-behavior">Cloning Behavior<a href="#cloning-behavior" class="hash-link" aria-label="Direct link to Cloning Behavior" title="Direct link to Cloning Behavior" translate="no">​</a></h3>
 <p>When cloning with <code>GameObjectFactory::from()</code>:</p>
 <ol>
-<li class="">Only components implementing <code>CloneableComponent</code> are copied</li>
-<li class="">Each cloneable component&#x27;s <code>clone()</code> method is invoked</li>
+<li class="">Components are copied using their copy constructor (blueprint pattern)</li>
 <li class="">Additional configuration can be applied before <code>make()</code></li>
 <li class="">Component dependencies are resolved via <code>getOrAdd()</code> to prevent duplicates</li>
 </ol>
@@ -206,7 +205,7 @@
 
 
 
-<table><thead><tr><th>Module</th><th>Purpose</th></tr></thead><tbody><tr><td><code>helios.engine.ecs</code></td><td>GameObject, Component, CloneableComponent</td></tr><tr><td><code>helios.engine.modules</code></td><td>Component implementations</td></tr><tr><td><code>helios.engine.mechanics</code></td><td>Gameplay-specific components</td></tr><tr><td><code>helios.engine.runtime.world</code></td><td>GameWorld entity management</td></tr></tbody></table>
+<table><thead><tr><th>Module</th><th>Purpose</th></tr></thead><tbody><tr><td><code>helios.engine.ecs</code></td><td>GameObject, Component</td></tr><tr><td><code>helios.engine.modules</code></td><td>Component implementations</td></tr><tr><td><code>helios.engine.mechanics</code></td><td>Gameplay-specific components</td></tr><tr><td><code>helios.engine.runtime.world</code></td><td>GameWorld entity management</td></tr></tbody></table>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="related-concepts">Related Concepts<a href="#related-concepts" class="hash-link" aria-label="Direct link to Related Concepts" title="Direct link to Related Concepts" translate="no">​</a></h2>
 <ul>
 <li class=""><a class="" href="/docs/core-concepts/component-system">Component System</a> - Understanding Components and Systems</li>

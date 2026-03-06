@@ -35,10 +35,10 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.damage<sp/>=<sp/>10.0f</highlight></codeline>
 <codeline><highlight class="normal">};</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">updateContext.commandBuffer().add&lt;ApplyDamageCommand&gt;(ctx);</highlight></codeline>
+<codeline><highlight class="normal">updateContext.queueCommand&lt;ApplyDamageCommand&gt;(ctx);</highlight></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">The<sp/>command<sp/>is<sp/>routed<sp/>to<sp/>`HealthManager`<sp/>via<sp/>its<sp/>`TypedCommandHandler&lt;ApplyDamageCommand&gt;`<sp/>interface<sp/>and<sp/>processed<sp/>during<sp/>the<sp/>manager<sp/>flush<sp/>phase.</highlight></codeline>
+<codeline><highlight class="normal">The<sp/>command<sp/>is<sp/>routed<sp/>to<sp/>`HealthManager`<sp/>via<sp/>the<sp/>registered<sp/>command<sp/>handler<sp/>`submit`<sp/>function<sp/>and<sp/>processed<sp/>during<sp/>the<sp/>manager<sp/>flush<sp/>phase.</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>
 <codeline></codeline>
@@ -48,7 +48,6 @@
 <codeline><highlight class="normal">@brief<sp/>Damage-related<sp/>commands<sp/>for<sp/>the<sp/>command<sp/>buffer.</highlight></codeline>
 <codeline><highlight class="normal">@details<sp/>Contains<sp/>command<sp/>classes<sp/>for<sp/>requesting<sp/>damage<sp/>application<sp/>through<sp/>the<sp/>engine&apos;s<sp/>command<sp/>system.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
-<codeline></codeline>
     </programlisting>
     <location file="/tmp/h/include/helios/engine/mechanics/damage/commands/README.md"/>
   </compounddef>

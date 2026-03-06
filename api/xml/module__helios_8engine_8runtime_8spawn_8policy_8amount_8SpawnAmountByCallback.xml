@@ -5,11 +5,12 @@
     <innerfile refid="SpawnAmountByCallback_8ixx">SpawnAmountByCallback.ixx</innerfile>
     <innerclass refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountByCallback" prot="public">helios::engine::runtime::spawn::policy::amount::SpawnAmountByCallback</innerclass>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountByCallback_1a4545aac365da81848a01ca42d1e0c31b" prot="private" static="no">
-        <type>std::function&lt; size_t( const <ref refid="namespacehelios_1_1engine_1_1core_1_1data_1a7d2c0aea5d6ad4509188da62579429d6" kindref="member">helios::engine::core::data::GameObjectPoolId</ref>, const SpawnRuleState &amp;, const <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;)&gt;</type>
+      <memberdef kind="typedef" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountByCallback_1a7f6cde9d64e1e56ac0c28328ab499d0f" prot="private" static="no">
+        <type>std::function&lt; size_t( const <ref refid="namespacehelios_1_1engine_1_1runtime_1_1pooling_1_1types_1a9eabad620f775312a5f29f77a73d31d1" kindref="member">helios::engine::runtime::pooling::types::GameObjectPoolId</ref>, const SpawnRuleState &amp;, const <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;gameWorld, const <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;)&gt;</type>
         <definition>using helios::engine::runtime::spawn::policy::amount::SpawnAmountByCallback::AmountEvaluator =  std::function&lt;size_t(
-            const helios::engine::core::data::GameObjectPoolId,
+            const helios::engine::runtime::pooling::types::GameObjectPoolId,
             const SpawnRuleState&amp;,
+            const helios::engine::runtime::world::GameWorld&amp; gameWorld,
             const helios::engine::runtime::world::UpdateContext&amp;
         )&gt;</definition>
         <argsstring></argsstring>
@@ -39,7 +40,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/SpawnAmountByCallback.ixx" line="53" column="25" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/SpawnAmountByCallback.ixx" bodystart="53" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/SpawnAmountByCallback.ixx" line="54" column="25" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/SpawnAmountByCallback.ixx" bodystart="54" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -70,17 +71,17 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/SpawnAmountByCallback.ixx" line="62" column="18" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/SpawnAmountByCallback.ixx" bodystart="62" bodyend="63"/>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/SpawnAmountByCallback.ixx" line="63" column="18" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/SpawnAmountByCallback.ixx" bodystart="63" bodyend="64"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountByCallback_1a59f1446d2ff418a3b680860f3f358da2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountByCallback_1ae7d020b802c94757ace132df697fd097" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>size_t</type>
         <definition>size_t helios::engine::runtime::spawn::policy::amount::SpawnAmountByCallback::getAmount</definition>
-        <argsstring>(const helios::engine::core::data::GameObjectPoolId gameObjectPoolId, const SpawnRuleState &amp;spawnRuleState, const helios::engine::runtime::world::UpdateContext &amp;updateContext) const override</argsstring>
+        <argsstring>(const helios::engine::runtime::pooling::types::GameObjectPoolId gameObjectPoolId, const SpawnRuleState &amp;spawnRuleState, const helios::engine::runtime::world::GameWorld &amp;gameWorld, const helios::engine::runtime::world::UpdateContext &amp;updateContext) const override</argsstring>
         <name>getAmount</name>
         <qualifiedname>helios::engine::runtime::spawn::policy::amount::SpawnAmountByCallback::getAmount</qualifiedname>
-        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountProvider_1ab8b6b69ca5a82526f73def529a375c90">getAmount</reimplements>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountProvider_1a597b2623083d8a184e1bb438de46276c">getAmount</reimplements>
         <param>
-          <type>const <ref refid="namespacehelios_1_1engine_1_1core_1_1data_1a7d2c0aea5d6ad4509188da62579429d6" kindref="member">helios::engine::core::data::GameObjectPoolId</ref></type>
+          <type>const <ref refid="namespacehelios_1_1engine_1_1runtime_1_1pooling_1_1types_1a9eabad620f775312a5f29f77a73d31d1" kindref="member">helios::engine::runtime::pooling::types::GameObjectPoolId</ref></type>
           <declname>gameObjectPoolId</declname>
         </param>
         <param>
@@ -88,11 +89,15 @@
           <declname>spawnRuleState</declname>
         </param>
         <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <param>
           <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
           <declname>updateContext</declname>
         </param>
         <briefdescription>
-<para>Returns the spawn amount by invoking the callback. </para>
+<para>Returns the number of entities to spawn.    </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -108,7 +113,15 @@
 <parametername>spawnRuleState</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The rule&apos;s runtime state. </para>
+<para>The rule&apos;s current runtime state. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The game world in which the spawn occurs. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -120,13 +133,13 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The calculated spawn amount. </para>
+<simplesect kind="return"><para>Number of entities to spawn.    </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/SpawnAmountByCallback.ixx" line="74" column="17" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/SpawnAmountByCallback.ixx" bodystart="74" bodyend="80"/>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/SpawnAmountByCallback.ixx" line="69" column="17" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/SpawnAmountByCallback.ixx" bodystart="69" bodyend="76"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

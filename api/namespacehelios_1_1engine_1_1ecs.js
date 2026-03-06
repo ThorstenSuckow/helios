@@ -3,6 +3,7 @@ var namespacehelios_1_1engine_1_1ecs =
     [ "components", "namespacehelios_1_1engine_1_1ecs_1_1components.html", "namespacehelios_1_1engine_1_1ecs_1_1components" ],
     [ "systems", "namespacehelios_1_1engine_1_1ecs_1_1systems.html", "namespacehelios_1_1engine_1_1ecs_1_1systems" ],
     [ "traits", "namespacehelios_1_1engine_1_1ecs_1_1traits.html", "namespacehelios_1_1engine_1_1ecs_1_1traits" ],
+    [ "types", "namespacehelios_1_1engine_1_1ecs_1_1types.html", "namespacehelios_1_1engine_1_1ecs_1_1types" ],
     [ "ComponentOps", "structhelios_1_1engine_1_1ecs_1_1ComponentOps.html", "structhelios_1_1engine_1_1ecs_1_1ComponentOps" ],
     [ "ComponentOpsRegistry", "classhelios_1_1engine_1_1ecs_1_1ComponentOpsRegistry.html", "classhelios_1_1engine_1_1ecs_1_1ComponentOpsRegistry" ],
     [ "ComponentReflector", "classhelios_1_1engine_1_1ecs_1_1ComponentReflector.html", "classhelios_1_1engine_1_1ecs_1_1ComponentReflector" ],

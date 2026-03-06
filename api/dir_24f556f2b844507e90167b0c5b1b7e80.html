@@ -121,10 +121,10 @@ Files</h2></td></tr>
 <tr class="memdesc:LambdaStateListener_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lambda-based listener for state transitions. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md739"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md751"></a>
 helios::engine::state::listeners</h1>
 <p>Listeners for observing state transitions.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md740"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md752"></a>
 Components</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -132,9 +132,9 @@ Components</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">LambdaStateListener&lt;StateType&gt;</span>  </td><td class="markdownTableBodyNone">Lambda-based listener implementation  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md741"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md753"></a>
 Usage</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md742"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md754"></a>
 Full listener (exit, transition, enter)</h2>
 <div class="fragment"><div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacehelios_1_1engine_1_1state_1_1listeners.html">helios::engine::state::listeners</a>;</div>
 <div class="line"> </div>
@@ -155,14 +155,14 @@ Full listener (exit, transition, enter)</h2>
 <div class="line"> </div>
 <div class="line">stateManager.addStateListener(std::move(listener));</div>
 <div class="ttc" id="anamespacehelios_1_1engine_1_1state_1_1listeners_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1state_1_1listeners.html">helios::engine::state::listeners</a></div><div class="ttdoc">State transition listeners.</div><div class="ttdef"><b>Definition</b> <a href="LambdaStateListener_8ixx_source.html#l00023">LambdaStateListener.ixx:23</a></div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md743"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md755"></a>
 Enter-only listener</h2>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> enterListener = std::make_unique&lt;LambdaStateListener&lt;GameState&gt;&gt;(</div>
 <div class="line">    [](<span class="keyword">auto</span>&amp; ctx, GameState to) {</div>
 <div class="line">        <span class="comment">// Handle state entry</span></div>
 <div class="line">    }</div>
 <div class="line">);</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md744"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md756"></a>
 Transition-only listener</h2>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> transitionListener = std::make_unique&lt;LambdaStateListener&lt;GameState&gt;&gt;(</div>
 <div class="line">    [](<span class="keyword">auto</span>&amp; ctx, StateTransitionContext&lt;GameState&gt; transitionCtx) {</div>

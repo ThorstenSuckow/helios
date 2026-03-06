@@ -1,6 +1,7 @@
 var namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types =
 [
     [ "CollisionContext", "structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1_1CollisionContext.html", "structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1_1CollisionContext" ],
+    [ "CollisionLayer", "namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types.html#a9be6c24e485ad40733af21d5a8d44981", null ],
     [ "CollisionBehavior", "namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types.html#a3c17ab6bf5f5cf9dc514ff7c5bf91bdc", [
       [ "None", "namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types.html#a3c17ab6bf5f5cf9dc514ff7c5bf91bdca6adf97f83acf6453d4a6a4b1070f3754", null ],
       [ "Reflect", "namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types.html#a3c17ab6bf5f5cf9dc514ff7c5bf91bdca74de3e45e4491e956e8dc18d841d9b00", null ],
@@ -23,5 +24,6 @@ var namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types =
     [ "hasFlag", "namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types.html#a64a83db4cb7e1f46e4c4713073081493", null ],
     [ "operator&", "namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types.html#a3b24a820cf47254e25f27921af338128", null ],
     [ "operator|", "namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types.html#a521770137593e0e96a1c38531d1da7a1", null ],
-    [ "CollisionBehaviorItemSize", "namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types.html#a619e92f878230f525a54d26f528a028e", null ]
+    [ "CollisionBehaviorItemSize", "namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types.html#a619e92f878230f525a54d26f528a028e", null ],
+    [ "MAX_COLLISION_LAYERS", "namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types.html#a2ba60e350a463a692b2d02a35ceba56f", null ]
 ];

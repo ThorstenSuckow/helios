@@ -110,7 +110,7 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="dir_c44faea763af7288aeca8677f94fea29_dep.svg" width="350" height="178"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="dir_c44faea763af7288aeca8677f94fea29_dep.svg" width="356" height="178"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-files" class="groupheader"><a id="files" name="files"></a>
@@ -125,42 +125,64 @@ Files</h2></td></tr>
 <tr class="memdesc:SpawnCommand_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command for requesting GameObject spawning from a pool. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md680"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md691"></a>
 helios::engine::runtime::spawn::commands</h1>
 <p>Commands for spawn and despawn operations.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md681"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md692"></a>
 Overview</h1>
 <p>This module contains command classes that represent spawn and despawn operations. These commands are emitted by systems and submitted directly to the SpawnCommandHandler during the command flush phase.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md682"></a>
+<p>The system is built around <b>compile-time type safety</b>: command types are declared as template parameters, eliminating virtual dispatch overhead for queue access and enabling the compiler to verify command routing at build time.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md693"></a>
+Architecture</h1>
+<div class="fragment"><div class="line">┌──────────────────────────────────────────────────────────────────────┐</div>
+<div class="line">│                     COMMAND PIPELINE                                 │</div>
+<div class="line">├──────────────────────────────────────────────────────────────────────┤</div>
+<div class="line">│                                                                      │</div>
+<div class="line">│  SYSTEMS (producers)                                                 │</div>
+<div class="line">│                                                                      │</div>
+<div class="line">│  - SpawnSystem                                                       │</div>
+<div class="line">│  - DespawnSystem                                                     │</div>
+<div class="line">│                                                                      │</div>
+<div class="line">├──────────────────────────────────────────────────────────────────────┤</div>
+<div class="line">│                                                                      │</div>
+<div class="line">│  COMMAND BUFFER (queue)                                             │</div>
+<div class="line">│                                                                      │</div>
+<div class="line">│  - CommandBuffer                                                     │</div>
+<div class="line">│  - TypedCommandBuffer&lt;...Cmds&gt;                                      │</div>
+<div class="line">│                                                                      │</div>
+<div class="line">├──────────────────────────────────────────────────────────────────────┤</div>
+<div class="line">│                                                                      │</div>
+<div class="line">│  DISPATCHER (consumer)                                              │</div>
+<div class="line">│                                                                      │</div>
+<div class="line">│  - Dispatcher                                                        │</div>
+<div class="line">│                                                                      │</div>
+<div class="line">├──────────────────────────────────────────────────────────────────────┤</div>
+<div class="line">│                                                                      │</div>
+<div class="line">│  HANDLER (execution)                                                │</div>
+<div class="line">│                                                                      │</div>
+<div class="line">│  - CommandHandlerRegistry                                            │</div>
+<div class="line">│  - EngineCommandBuffer                                               │</div>
+<div class="line">│                                                                      │</div>
+<div class="line">└──────────────────────────────────────────────────────────────────────┘</div>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md694"></a>
 Key Classes</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Command  </th><th class="markdownTableHeadNone">Purpose  </th></tr>
+<th class="markdownTableHeadNone">Class  </th><th class="markdownTableHeadNone">Purpose  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">SpawnCommand</span>  </td><td class="markdownTableBodyNone">Requests spawning of GameObjects from a pool with spawn context  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">CommandBuffer</span>  </td><td class="markdownTableBodyNone">Abstract base for command buffers  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt">DespawnCommand</span>  </td><td class="markdownTableBodyNone">Requests despawning and pool return of a GameObject  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">TypedCommandBuffer&lt;...Cmds&gt;</span>  </td><td class="markdownTableBodyNone">Compile-time typed buffer with per-type queues  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">ScheduledSpawnPlanCommand</span>  </td><td class="markdownTableBodyNone">Executes a scheduled spawn plan from the SpawnScheduler  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">CommandHandlerRegistry</span>  </td><td class="markdownTableBodyNone">Registry storing typed submit functions  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">EngineCommandBuffer</span>  </td><td class="markdownTableBodyNone">Concrete facade pre-configured with all engine command types  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md683"></a>
-Architecture</h1>
-<p>Commands follow the visitor pattern with dispatchers. Commands are submitted directly to the SpawnCommandHandler (typically SpawnManager):</p>
-<div class="fragment"><div class="line">┌─────────────────┐     ┌───────────────┐     ┌────────────────────┐</div>
-<div class="line">│ SpawnSystem     │────&gt;│ CommandBuffer │────&gt;│ Dispatcher         │</div>
-<div class="line">│                 │     │               │     │                    │</div>
-<div class="line">│ - SpawnCommand  │     │ flush()       │     │ dispatchTyped()    │</div>
-<div class="line">│ - DespawnCommand│     │               │     │                    │</div>
-<div class="line">└─────────────────┘     └───────────────┘     └─────────┬──────────┘</div>
-<div class="line">                                                        │</div>
-<div class="line">                                                        ▼</div>
-<div class="line">                                              ┌────────────────────┐</div>
-<div class="line">                                              │ SpawnCommandHandler│</div>
-<div class="line">                                              │ (SpawnManager)     │</div>
-<div class="line">                                              │                    │</div>
-<div class="line">                                              │ submit(Command)    │</div>
-<div class="line">                                              └────────────────────┘</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md684"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md695"></a>
+Flush Routing</h1>
+<p>During <span class="tt">TypedCommandBuffer::flush()</span>, each command type is processed in template parameter order:</p>
+<p>1. <b>Handler route:</b> If a handler for <span class="tt">Cmd</span> is registered in the <span class="tt">CommandHandlerRegistry</span>, all queued commands are submitted to the handler via the stored function pointer. 2. <b>Direct execution:</b> Otherwise, if the command satisfies <span class="tt">ExecutableCommand</span>, it executes itself 3. <b>Assertion:</b> If neither applies, an assertion fires (misconfiguration)</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md696"></a>
 Usage</h1>
 <div class="fragment"><div class="line"><span class="comment">// Spawn command with context</span></div>
 <div class="line">SpawnContext ctx;</div>

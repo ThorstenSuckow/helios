@@ -113,17 +113,19 @@ $(function() {
 <code>#include &lt;memory&gt;</code><br />
 <code>#include &lt;span&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
-<code>import <a class="el" href="ResourceTypeId_8ixx_source.html">helios.engine.core.data.ResourceTypeId</a>;</code><br />
-<code>import <a class="el" href="CommandHandler_8ixx_source.html">helios.engine.runtime.messaging.command.CommandHandler</a>;</code><br />
+<code>import <a class="el" href="helios_2engine_2runtime_2world_2types_2__module_8ixx_source.html">helios.engine.runtime.world.types</a>;</code><br />
+<code>import <a class="el" href="helios_2engine_2common_2concepts_2__module_8ixx_source.html">helios.engine.common.concepts</a>;</code><br />
+<code>import <a class="el" href="ManagerRegistry_8ixx_source.html">helios.engine.runtime.world.ManagerRegistry</a>;</code><br />
+<code>import <a class="el" href="CommandBufferRegistry_8ixx_source.html">helios.engine.runtime.messaging.command.CommandBufferRegistry</a>;</code><br />
+<code>import <a class="el" href="CommandHandlerRegistry_8ixx_source.html">helios.engine.runtime.messaging.command.CommandHandlerRegistry</a>;</code><br />
 <code>import <a class="el" href="CommandBuffer_8ixx_source.html">helios.engine.runtime.messaging.command.CommandBuffer</a>;</code><br />
-<code>import <a class="el" href="TypedCommandHandler_8ixx_source.html">helios.engine.runtime.messaging.command.TypedCommandHandler</a>;</code><br />
 <code>import <a class="el" href="ErasedUnique_8ixx_source.html">helios.core.memory.ErasedUnique</a>;</code><br />
 <code>import <a class="el" href="Manager_8ixx_source.html">helios.engine.runtime.world.Manager</a>;</code><br />
 </div><div class="textblock"><div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Include dependency graph for ResourceRegistry.ixx:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="ResourceRegistry_8ixx__incl.svg" width="100%" height="514"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="ResourceRegistry_8ixx__incl.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="ResourceRegistry_8ixx_source.html">Go to the source code of this file.</a></p>
@@ -131,7 +133,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:helios_3A_3Aengine_3A_3Aruntime_3A_3Aworld_3A_3AResourceRegistry" id="r_helios_3A_3Aengine_3A_3Aruntime_3A_3Aworld_3A_3AResourceRegistry"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html">helios::engine::runtime::world::ResourceRegistry</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-indexed registry for engine resources with O(1) lookup.  <a href="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unified type-indexed registry for all engine resources.  <a href="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
@@ -142,15 +144,6 @@ Namespaces</h2></td></tr>
 <tr class="memdesc:namespacehelios_1_1engine_1_1runtime"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runtime infrastructure for game execution and lifecycle orchestration. <br /></td></tr>
 <tr class="memitem:helios_3A_3Aengine_3A_3Aruntime_3A_3Aworld" id="r_helios_3A_3Aengine_3A_3Aruntime_3A_3Aworld"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1world.html">helios::engine::runtime::world</a></td></tr>
 <tr class="memdesc:namespacehelios_1_1engine_1_1runtime_1_1world"><td class="mdescLeft">&#160;</td><td class="mdescRight">World state management, resource registry, and per-frame update context. <br /></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-concepts" class="groupheader"><a id="concepts" name="concepts"></a>
-Concepts</h2></td></tr>
-<tr class="memitem:helios_3A_3Aengine_3A_3Aruntime_3A_3Aworld_3A_3AIsManager" id="r_helios_3A_3Aengine_3A_3Aruntime_3A_3Aworld_3A_3AIsManager"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1engine_1_1runtime_1_1world_1_1IsManager.html">helios::engine::runtime::world::IsManager</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept constraining types that derive from Manager. <br /></td></tr>
-<tr class="memitem:helios_3A_3Aengine_3A_3Aruntime_3A_3Aworld_3A_3AIsCommandBuffer" id="r_helios_3A_3Aengine_3A_3Aruntime_3A_3Aworld_3A_3AIsCommandBuffer"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1engine_1_1runtime_1_1world_1_1IsCommandBuffer.html">helios::engine::runtime::world::IsCommandBuffer</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept constraining types that derive from <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Abstract base for command buffers that collect and flush commands.">CommandBuffer</a>. <br /></td></tr>
-<tr class="memitem:helios_3A_3Aengine_3A_3Aruntime_3A_3Aworld_3A_3AIsCommandHandler" id="r_helios_3A_3Aengine_3A_3Aruntime_3A_3Aworld_3A_3AIsCommandHandler"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1engine_1_1runtime_1_1world_1_1IsCommandHandler.html">helios::engine::runtime::world::IsCommandHandler</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept constraining types that derive from <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler.html" title="Abstract base for type-erased command handler storage.">CommandHandler</a>. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Type-indexed registry for engine resources with O(1) lookup. </p>

@@ -95,7 +95,7 @@
 <codeline><highlight class="normal">###<sp/>Requesting<sp/>Transitions</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">```cpp</highlight></codeline>
-<codeline><highlight class="normal">updateContext.commandBuffer().add&lt;StateCommand&lt;GameState&gt;&gt;(</highlight></codeline>
+<codeline><highlight class="normal">updateContext.queueCommand&lt;StateCommand&lt;GameState&gt;&gt;(</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>StateTransitionRequest&lt;GameState&gt;{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GameState::Running,</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GameStateTransitionId::Pause</highlight></codeline>
@@ -106,7 +106,7 @@
 <codeline><highlight class="normal">##<sp/>Transition<sp/>Flow</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">1.<sp/>`StateCommand`<sp/>is<sp/>submitted<sp/>to<sp/>the<sp/>EngineCommandBuffer</highlight></codeline>
-<codeline><highlight class="normal">2.<sp/>`TypedCommandHandler&lt;StateCommand&lt;T&gt;&gt;`<sp/>routes<sp/>it<sp/>to<sp/>`StateManager`</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>The<sp/>command<sp/>is<sp/>routed<sp/>to<sp/>`StateManager`<sp/>via<sp/>the<sp/>registered<sp/>handler<sp/>in<sp/>`CommandHandlerRegistry`.</highlight></codeline>
 <codeline><highlight class="normal">3.<sp/>`StateManager::flush()`<sp/>processes<sp/>pending<sp/>commands</highlight></codeline>
 <codeline><highlight class="normal">4.<sp/>Matching<sp/>rule<sp/>is<sp/>found<sp/>and<sp/>guard<sp/>is<sp/>evaluated</highlight></codeline>
 <codeline><highlight class="normal">5.<sp/>Listeners<sp/>are<sp/>notified:<sp/>`onStateExit`<sp/>→<sp/>`onStateTransition`<sp/>→<sp/>`onStateEnter`</highlight></codeline>
@@ -132,7 +132,6 @@
 <codeline><highlight class="normal">@brief<sp/>Generic,<sp/>template-based<sp/>state<sp/>management<sp/>system.</highlight></codeline>
 <codeline><highlight class="normal">@details<sp/>Provides<sp/>a<sp/>complete<sp/>framework<sp/>for<sp/>managing<sp/>application<sp/>state<sp/>with<sp/>rule-based<sp/>transitions,<sp/>guards,<sp/>listeners,<sp/>and<sp/>ID<sp/>mapping<sp/>utilities.<sp/>All<sp/>components<sp/>are<sp/>parameterized<sp/>by<sp/>state<sp/>type<sp/>for<sp/>maximum<sp/>reuse.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
-<codeline></codeline>
     </programlisting>
     <location file="/tmp/h/include/helios/engine/state/README.md"/>
   </compounddef>

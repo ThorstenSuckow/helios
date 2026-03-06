@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/FixedSpawnAmount.ixx" line="30" column="16" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/FixedSpawnAmount.ixx" bodystart="30" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/FixedSpawnAmount.ixx" line="31" column="16" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/FixedSpawnAmount.ixx" bodystart="31" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -48,17 +48,17 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/FixedSpawnAmount.ixx" line="39" column="18" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/FixedSpawnAmount.ixx" bodystart="39" bodyend="40"/>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/FixedSpawnAmount.ixx" line="40" column="18" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/FixedSpawnAmount.ixx" bodystart="40" bodyend="41"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1FixedSpawnAmount_1ab96e7e7355b6937dfbd4a4ede9740008" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1FixedSpawnAmount_1a140169886aab1fae6f9b2773c061dd0b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>size_t</type>
         <definition>size_t helios::engine::runtime::spawn::policy::amount::FixedSpawnAmount::getAmount</definition>
-        <argsstring>(const helios::engine::core::data::GameObjectPoolId gameObjectPoolId, const SpawnRuleState &amp;spawnRuleState, const helios::engine::runtime::world::UpdateContext &amp;updateContext) const override</argsstring>
+        <argsstring>(const helios::engine::runtime::pooling::types::GameObjectPoolId gameObjectPoolId, const SpawnRuleState &amp;spawnRuleState, const helios::engine::runtime::world::GameWorld &amp;gameWorld, const helios::engine::runtime::world::UpdateContext &amp;updateContext) const override</argsstring>
         <name>getAmount</name>
         <qualifiedname>helios::engine::runtime::spawn::policy::amount::FixedSpawnAmount::getAmount</qualifiedname>
-        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountProvider_1ab8b6b69ca5a82526f73def529a375c90">getAmount</reimplements>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountProvider_1a597b2623083d8a184e1bb438de46276c">getAmount</reimplements>
         <param>
-          <type>const <ref refid="namespacehelios_1_1engine_1_1core_1_1data_1a7d2c0aea5d6ad4509188da62579429d6" kindref="member">helios::engine::core::data::GameObjectPoolId</ref></type>
+          <type>const <ref refid="namespacehelios_1_1engine_1_1runtime_1_1pooling_1_1types_1a9eabad620f775312a5f29f77a73d31d1" kindref="member">helios::engine::runtime::pooling::types::GameObjectPoolId</ref></type>
           <declname>gameObjectPoolId</declname>
         </param>
         <param>
@@ -66,11 +66,15 @@
           <declname>spawnRuleState</declname>
         </param>
         <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <param>
           <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
           <declname>updateContext</declname>
         </param>
         <briefdescription>
-<para>Returns the fixed spawn amount. </para>
+<para>Returns the number of entities to spawn.    </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -78,7 +82,7 @@
 <parametername>gameObjectPoolId</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The pool to spawn from (unused). </para>
+<para>The pool to spawn from. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -86,7 +90,15 @@
 <parametername>spawnRuleState</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The rule&apos;s runtime state (unused). </para>
+<para>The rule&apos;s current runtime state. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The game world in which the spawn occurs. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -94,17 +106,17 @@
 <parametername>updateContext</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The current frame&apos;s context (unused).</para>
+<para>The current frame&apos;s context.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The fixed spawn amount. </para>
+<simplesect kind="return"><para>Number of entities to spawn.    </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/FixedSpawnAmount.ixx" line="51" column="17" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/FixedSpawnAmount.ixx" bodystart="51" bodyend="57"/>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/FixedSpawnAmount.ixx" line="46" column="17" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/FixedSpawnAmount.ixx" bodystart="46" bodyend="53"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -140,11 +152,11 @@
         <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountProvider"/>
       </node>
     </collaborationgraph>
-    <location file="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/FixedSpawnAmount.ixx" line="25" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/FixedSpawnAmount.ixx" bodystart="25" bodyend="59"/>
+    <location file="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/FixedSpawnAmount.ixx" line="26" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/FixedSpawnAmount.ixx" bodystart="26" bodyend="55"/>
     <listofallmembers>
       <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1FixedSpawnAmount_1a33d7a3d0b03b33fa5e1ae906f75839c1" prot="private" virt="non-virtual"><scope>helios::engine::runtime::spawn::policy::amount::FixedSpawnAmount</scope><name>amount_</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1FixedSpawnAmount_1ae4efce69bd29bb589b1bc9ae96dee4b6" prot="public" virt="non-virtual"><scope>helios::engine::runtime::spawn::policy::amount::FixedSpawnAmount</scope><name>FixedSpawnAmount</name></member>
-      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1FixedSpawnAmount_1ab96e7e7355b6937dfbd4a4ede9740008" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::policy::amount::FixedSpawnAmount</scope><name>getAmount</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1FixedSpawnAmount_1a140169886aab1fae6f9b2773c061dd0b" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::policy::amount::FixedSpawnAmount</scope><name>getAmount</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountProvider_1a7ae43eddd23541bcfe12b67b8f493284" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::policy::amount::FixedSpawnAmount</scope><name>~SpawnAmountProvider</name></member>
     </listofallmembers>
   </compounddef>

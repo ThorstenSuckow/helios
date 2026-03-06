@@ -1,6 +1,7 @@
 var module__helios_8engine_8mechanics_8input_8systems_8TwinStickInputSystem =
 [
     [ "TwinStickInputSystem", "classhelios_1_1engine_1_1mechanics_1_1input_1_1systems_1_1TwinStickInputSystem.html", "classhelios_1_1engine_1_1mechanics_1_1input_1_1systems_1_1TwinStickInputSystem" ],
+    [ "helios::engine::mechanics::input::systems::TwinStickInputSystem::EngineRoleTag", "module__helios_8engine_8mechanics_8input_8systems_8TwinStickInputSystem.html#af39aeb3b4b136325bec14a3700128d24", null ],
     [ "helios::engine::mechanics::input::systems::TwinStickInputSystem::TwinStickInputSystem", "module__helios_8engine_8mechanics_8input_8systems_8TwinStickInputSystem.html#aaaf0bd635c750a4bb4a6752fc5fadc20", null ],
     [ "helios::engine::mechanics::input::systems::TwinStickInputSystem::update", "module__helios_8engine_8mechanics_8input_8systems_8TwinStickInputSystem.html#a5b1360edadf5b78dcf11e0f936082914", null ],
     [ "helios::engine::mechanics::input::systems::TwinStickInputSystem::setUseDedicatedShootInput", "module__helios_8engine_8mechanics_8input_8systems_8TwinStickInputSystem.html#ac0e70131f79aad825821ff16a1be09c7", null ],

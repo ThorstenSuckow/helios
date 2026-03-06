@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="concepthelios_1_1engine_1_1common_1_1concepts_1_1HasSubmit" kind="concept">
+    <compoundname>helios::engine::common::concepts::HasSubmit</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename OwningT</type>
+      </param>
+      <param>
+        <type>typename CommandType</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;typename OwningT, typename CommandType&gt;
+concept <ref refid="concepthelios_1_1engine_1_1common_1_1concepts_1_1HasSubmit" kindref="compound">helios::engine::common::concepts::HasSubmit</ref> =  requires(OwningT&amp; owner, const CommandType&amp; cmd) {
+            { owner.submit(cmd) } noexcept -&gt; std::same_as&lt;bool&gt;;
+        }    </initializer>
+    <briefdescription>
+<para>Constrains types that can accept a command via a noexcept submit() method. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Used by CommandHandlerRegistry to verify that a handler type provides the required `submit(const CommandType&amp;) noexcept -&gt; bool` interface before registering it as a command handler.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>OwningT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The handler type. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>CommandType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The command type accepted by the handler.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para>CommandHandlerRegistry </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/common/concepts/HasSubmit.ixx" line="30" column="5"/>
+  </compounddef>
+</doxygen>

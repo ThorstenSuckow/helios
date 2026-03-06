@@ -27,7 +27,7 @@
 <codeline><highlight class="normal">Commands<sp/>are<sp/>typically<sp/>issued<sp/>by<sp/>state<sp/>listeners<sp/>when<sp/>the<sp/>game<sp/>world<sp/>needs<sp/>to<sp/>be<sp/>reset:</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">```cpp</highlight></codeline>
-<codeline><highlight class="normal">updateContext.commandBuffer().add&lt;WorldLifecycleCommand&gt;(WorldLifecycleAction::Reset);</highlight></codeline>
+<codeline><highlight class="normal">updateContext.queueCommand&lt;WorldLifecycleCommand&gt;(WorldLifecycleAction::Reset);</highlight></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">The<sp/>command<sp/>is<sp/>routed<sp/>through<sp/>the<sp/>`EngineCommandBuffer`<sp/>to<sp/>the<sp/>`WorldLifecycleManager`,<sp/>which<sp/>executes<sp/>the<sp/>requested<sp/>action<sp/>during<sp/>its<sp/>flush<sp/>cycle.</highlight></codeline>

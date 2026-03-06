@@ -1,10 +1,11 @@
 var module__helios_8engine_8mechanics_8scoring_8ScorePoolManager =
 [
     [ "ScorePoolManager", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager.html", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager" ],
-    [ "helios::engine::mechanics::scoring::ScorePoolManager::addScorePool", "module__helios_8engine_8mechanics_8scoring_8ScorePoolManager.html#a055dd5eeddf3e34a2663fb0017b2f041", null ],
-    [ "helios::engine::mechanics::scoring::ScorePoolManager::scorePool", "module__helios_8engine_8mechanics_8scoring_8ScorePoolManager.html#a68108b524ba7d30d4c281c05c777e3c0", null ],
-    [ "helios::engine::mechanics::scoring::ScorePoolManager::flush", "module__helios_8engine_8mechanics_8scoring_8ScorePoolManager.html#abf528fe8904b38cf52f31df8edf4592c", null ],
-    [ "helios::engine::mechanics::scoring::ScorePoolManager::submit", "module__helios_8engine_8mechanics_8scoring_8ScorePoolManager.html#aa8a5216ee454dbdd0b8a69e519fdf977", null ],
-    [ "helios::engine::mechanics::scoring::ScorePoolManager::init", "module__helios_8engine_8mechanics_8scoring_8ScorePoolManager.html#a04f62fb1b24bfc389acaa48fdd31293e", null ],
-    [ "helios::engine::mechanics::scoring::ScorePoolManager::reset", "module__helios_8engine_8mechanics_8scoring_8ScorePoolManager.html#ae26e54f8314f7f412565e2b0ec5d2dd4", null ]
+    [ "helios::engine::mechanics::scoring::ScorePoolManager::EngineRoleTag", "module__helios_8engine_8mechanics_8scoring_8ScorePoolManager.html#ab7ee5170384515bcd1e10b9d0d3fb847", null ],
+    [ "helios::engine::mechanics::scoring::ScorePoolManager::addScorePool", "module__helios_8engine_8mechanics_8scoring_8ScorePoolManager.html#ab3b7ab8af7ee587c19f4b4ae06252575", null ],
+    [ "helios::engine::mechanics::scoring::ScorePoolManager::scorePool", "module__helios_8engine_8mechanics_8scoring_8ScorePoolManager.html#a024e2a3d9db1285eb1bdadb05f5b4d8e", null ],
+    [ "helios::engine::mechanics::scoring::ScorePoolManager::flush", "module__helios_8engine_8mechanics_8scoring_8ScorePoolManager.html#a464ce115f5c161150c9f8a05f94a5c8d", null ],
+    [ "helios::engine::mechanics::scoring::ScorePoolManager::submit", "module__helios_8engine_8mechanics_8scoring_8ScorePoolManager.html#a78ca4aebf8b217e4fc25566c18e36cfd", null ],
+    [ "helios::engine::mechanics::scoring::ScorePoolManager::init", "module__helios_8engine_8mechanics_8scoring_8ScorePoolManager.html#a11f0d99c112383eefa72c628eebce0b8", null ],
+    [ "helios::engine::mechanics::scoring::ScorePoolManager::reset", "module__helios_8engine_8mechanics_8scoring_8ScorePoolManager.html#af02bc22a6de3990ee71359432688246c", null ]
 ];

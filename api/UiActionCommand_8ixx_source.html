@@ -115,81 +115,93 @@ $(function() {
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;cassert&gt;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;optional&gt;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">export</span> <span class="keyword">module</span> <a class="code" href="module__helios_8engine_8modules_8ui_8commands_8UiActionCommand.html">helios.engine.modules.ui.commands.UiActionCommand</a>;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">export</span> <span class="keyword">module</span> <a class="code" href="module__helios_8engine_8modules_8ui_8widgets_8commands_8UiActionCommand.html">helios.engine.modules.ui.widgets.commands.UiActionCommand</a>;</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8ecs_8EntityHandle.html">helios.engine.ecs.EntityHandle</a>;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8modules_8ui_8widgets_8types.html">helios.engine.modules.ui.widgets.types</a>;</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8core_8data.html">helios.engine.core.data</a>;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8ecs_8EntityHandle.html">helios.engine.ecs.EntityHandle</a>;</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">export</span> <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1engine_1_1modules_1_1ui_1_1commands.html">helios::engine::modules::ui::commands</a> {</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"></span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">    /**</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">     * @brief A command that encapsulates a UI action request.</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">     * UiActionCommands are submitted when UI elements are activated</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">     * (e.g., button pressed, menu item selected). They carry the source</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">     * entity and the action identifier to execute.</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">     * @see UiActionCommandManager</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">     * @see UiActionComponent</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">     */</span></div>
-<div class="foldopen" id="foldopen00029" data-start="{" data-end="};">
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand.html">   29</a></span>    <span class="keyword">class </span><a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand.html#a4a1df9a180d3695bb4e285fee662e5a6">UiActionCommand</a>  {</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <a class="code hl_struct" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a> source_;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <a class="code hl_typedef" href="namespacehelios_1_1engine_1_1core_1_1data.html#acd5d09816591ed837d38aee2c8bcf4c3">helios::engine::core::data::ActionId</a> actionId_;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment"></span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">         * @brief Constructs a command with source entity and action ID.</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">         * @param source The entity that triggered the action.</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">         * @param actionId The identifier of the action to execute.</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00045" data-start="{" data-end="}">
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand.html#a4a1df9a180d3695bb4e285fee662e5a6">   45</a></span>        <span class="keyword">explicit</span> <a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand.html#a4a1df9a180d3695bb4e285fee662e5a6">UiActionCommand</a>(</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            <span class="keyword">const</span> <a class="code hl_struct" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a> <a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand.html#a1616e9e485310b26a9966ff4dd902bd4">source</a>,</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            <span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1engine_1_1core_1_1data.html#acd5d09816591ed837d38aee2c8bcf4c3">helios::engine::core::data::ActionId</a> <a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand.html#a9609c3fff597a204bc43dc2ed00fd979">actionId</a>) :</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>            source_(<a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand.html#a1616e9e485310b26a9966ff4dd902bd4">source</a>), actionId_(<a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand.html#a9609c3fff597a204bc43dc2ed00fd979">actionId</a>) {}</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8modules_8ui_8widgets_8types_8ActionId.html">helios.engine.modules.ui.widgets.types.ActionId</a>;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">export</span> <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1commands.html">helios::engine::modules::ui::widgets::commands</a> {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"></span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">    /**</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">     * @brief A command that encapsulates a UI action request.</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">     * UiActionCommands are submitted when UI elements are activated</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">     * (e.g., button pressed, menu item selected). They carry the source</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">     * entity and the action identifier to execute.</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">     * @see UiActionCommandManager</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">     * @see UiActionComponent</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">     */</span></div>
+<div class="foldopen" id="foldopen00031" data-start="{" data-end="};">
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1commands_1_1UiActionCommand.html">   31</a></span>    <span class="keyword">class </span><a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1commands_1_1UiActionCommand.html#aaa334b0194be65bd6883b4d6b4055077">UiActionCommand</a>  {</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment"></span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">         * @brief Handle of the entity that triggered the action.</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <a class="code hl_struct" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a> source_;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment"></span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">         * @brief Identifier of the action to execute.</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <a class="code hl_typedef" href="namespacehelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1types.html#abc04f3715a8d1cedcf00d313d804a7ee">helios::engine::modules::ui::widgets::types::ActionId</a> actionId_;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment"></span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">         * @brief Constructs a command with source entity and action ID.</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">         * @param source The entity that triggered the action.</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">         * @param actionId The identifier of the action to execute.</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00052" data-start="{" data-end="}">
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1commands_1_1UiActionCommand.html#aaa334b0194be65bd6883b4d6b4055077">   52</a></span>        <span class="keyword">explicit</span> <a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1commands_1_1UiActionCommand.html#aaa334b0194be65bd6883b4d6b4055077">UiActionCommand</a>(</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            <span class="keyword">const</span> <a class="code hl_struct" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a> <a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1commands_1_1UiActionCommand.html#a9a97729839db866d9e4c5624e03dc305">source</a>,</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            <span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1types.html#abc04f3715a8d1cedcf00d313d804a7ee">helios::engine::modules::ui::widgets::types::ActionId</a> <a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1commands_1_1UiActionCommand.html#a441c09939ce0b925217fcf2ccaa0c260">actionId</a>) :</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            source_(<a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1commands_1_1UiActionCommand.html#a9a97729839db866d9e4c5624e03dc305">source</a>), actionId_(<a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1commands_1_1UiActionCommand.html#a441c09939ce0b925217fcf2ccaa0c260">actionId</a>) {}</div>
 </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment"></span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">         * @brief Returns the source entity that triggered the action.</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00054" data-start="{" data-end="}">
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand.html#a1616e9e485310b26a9966ff4dd902bd4">   54</a></span>        [[nodiscard]] <a class="code hl_struct" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a> <a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand.html#a1616e9e485310b26a9966ff4dd902bd4">source</a>() const noexcept {</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            <span class="keywordflow">return</span> source_;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        }</div>
-</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment"></span> </div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">         * @brief Returns the action identifier.</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00061" data-start="{" data-end="}">
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand.html#a9609c3fff597a204bc43dc2ed00fd979">   61</a></span>        [[nodiscard]] <a class="code hl_typedef" href="namespacehelios_1_1engine_1_1core_1_1data.html#acd5d09816591ed837d38aee2c8bcf4c3">helios::engine::core::data::ActionId</a> <a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand.html#a9609c3fff597a204bc43dc2ed00fd979">actionId</a>() const noexcept {</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            <span class="keywordflow">return</span> actionId_;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        }</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">         * @brief Returns the source entity that triggered the action.</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">         * @return The entity handle.</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00063" data-start="{" data-end="}">
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1commands_1_1UiActionCommand.html#a9a97729839db866d9e4c5624e03dc305">   63</a></span>        [[nodiscard]] <a class="code hl_struct" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a> <a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1commands_1_1UiActionCommand.html#a9a97729839db866d9e4c5624e03dc305">source</a>() const noexcept {</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            <span class="keywordflow">return</span> source_;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        }</div>
 </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    };</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment"></span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">         * @brief Returns the action identifier.</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">         * @return The ActionId.</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00072" data-start="{" data-end="}">
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1commands_1_1UiActionCommand.html#a441c09939ce0b925217fcf2ccaa0c260">   72</a></span>        [[nodiscard]] <a class="code hl_typedef" href="namespacehelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1types.html#abc04f3715a8d1cedcf00d313d804a7ee">helios::engine::modules::ui::widgets::types::ActionId</a> <a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1commands_1_1UiActionCommand.html#a441c09939ce0b925217fcf2ccaa0c260">actionId</a>() const noexcept {</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            <span class="keywordflow">return</span> actionId_;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        }</div>
 </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>}</div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand_html_a1616e9e485310b26a9966ff4dd902bd4"><div class="ttname"><a href="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand.html#a1616e9e485310b26a9966ff4dd902bd4">helios::engine::modules::ui::commands::UiActionCommand::source</a></div><div class="ttdeci">helios::engine::ecs::EntityHandle source() const noexcept</div><div class="ttdoc">Returns the source entity that triggered the action.</div><div class="ttdef"><b>Definition</b> <a href="#l00054">UiActionCommand.ixx:54</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand_html_a4a1df9a180d3695bb4e285fee662e5a6"><div class="ttname"><a href="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand.html#a4a1df9a180d3695bb4e285fee662e5a6">helios::engine::modules::ui::commands::UiActionCommand::UiActionCommand</a></div><div class="ttdeci">UiActionCommand(const helios::engine::ecs::EntityHandle source, const helios::engine::core::data::ActionId actionId)</div><div class="ttdoc">Constructs a command with source entity and action ID.</div><div class="ttdef"><b>Definition</b> <a href="#l00045">UiActionCommand.ixx:45</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand_html_a9609c3fff597a204bc43dc2ed00fd979"><div class="ttname"><a href="classhelios_1_1engine_1_1modules_1_1ui_1_1commands_1_1UiActionCommand.html#a9609c3fff597a204bc43dc2ed00fd979">helios::engine::modules::ui::commands::UiActionCommand::actionId</a></div><div class="ttdeci">helios::engine::core::data::ActionId actionId() const noexcept</div><div class="ttdoc">Returns the action identifier.</div><div class="ttdef"><b>Definition</b> <a href="#l00061">UiActionCommand.ixx:61</a></div></div>
-<div class="ttc" id="amodule__helios_8engine_8core_8data_html"><div class="ttname"><a href="module__helios_8engine_8core_8data.html">helios.engine.core.data</a></div></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    };</div>
+</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>}</div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1commands_1_1UiActionCommand_html_a441c09939ce0b925217fcf2ccaa0c260"><div class="ttname"><a href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1commands_1_1UiActionCommand.html#a441c09939ce0b925217fcf2ccaa0c260">helios::engine::modules::ui::widgets::commands::UiActionCommand::actionId</a></div><div class="ttdeci">helios::engine::modules::ui::widgets::types::ActionId actionId() const noexcept</div><div class="ttdoc">Returns the action identifier.</div><div class="ttdef"><b>Definition</b> <a href="#l00072">UiActionCommand.ixx:72</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1commands_1_1UiActionCommand_html_a9a97729839db866d9e4c5624e03dc305"><div class="ttname"><a href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1commands_1_1UiActionCommand.html#a9a97729839db866d9e4c5624e03dc305">helios::engine::modules::ui::widgets::commands::UiActionCommand::source</a></div><div class="ttdeci">helios::engine::ecs::EntityHandle source() const noexcept</div><div class="ttdoc">Returns the source entity that triggered the action.</div><div class="ttdef"><b>Definition</b> <a href="#l00063">UiActionCommand.ixx:63</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1commands_1_1UiActionCommand_html_aaa334b0194be65bd6883b4d6b4055077"><div class="ttname"><a href="classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1commands_1_1UiActionCommand.html#aaa334b0194be65bd6883b4d6b4055077">helios::engine::modules::ui::widgets::commands::UiActionCommand::UiActionCommand</a></div><div class="ttdeci">UiActionCommand(const helios::engine::ecs::EntityHandle source, const helios::engine::modules::ui::widgets::types::ActionId actionId)</div><div class="ttdoc">Constructs a command with source entity and action ID.</div><div class="ttdef"><b>Definition</b> <a href="#l00052">UiActionCommand.ixx:52</a></div></div>
 <div class="ttc" id="amodule__helios_8engine_8ecs_8EntityHandle_html"><div class="ttname"><a href="module__helios_8engine_8ecs_8EntityHandle.html">helios.engine.ecs.EntityHandle</a></div></div>
-<div class="ttc" id="amodule__helios_8engine_8modules_8ui_8commands_8UiActionCommand_html"><div class="ttname"><a href="module__helios_8engine_8modules_8ui_8commands_8UiActionCommand.html">helios.engine.modules.ui.commands.UiActionCommand</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1engine_1_1core_1_1data_html_acd5d09816591ed837d38aee2c8bcf4c3"><div class="ttname"><a href="namespacehelios_1_1engine_1_1core_1_1data.html#acd5d09816591ed837d38aee2c8bcf4c3">helios::engine::core::data::ActionId</a></div><div class="ttdeci">helios::core::data::StrongId&lt; ActionIdTag, uint32_t &gt; ActionId</div><div class="ttdoc">Strongly-typed identifier for UI actions.</div><div class="ttdef"><b>Definition</b> <a href="ActionId_8ixx_source.html#l00031">ActionId.ixx:31</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1engine_1_1modules_1_1ui_1_1commands_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1modules_1_1ui_1_1commands.html">helios::engine::modules::ui::commands</a></div><div class="ttdoc">UI action commands and dispatchers.</div></div>
+<div class="ttc" id="amodule__helios_8engine_8modules_8ui_8widgets_8commands_8UiActionCommand_html"><div class="ttname"><a href="module__helios_8engine_8modules_8ui_8widgets_8commands_8UiActionCommand.html">helios.engine.modules.ui.widgets.commands.UiActionCommand</a></div></div>
+<div class="ttc" id="amodule__helios_8engine_8modules_8ui_8widgets_8types_8ActionId_html"><div class="ttname"><a href="module__helios_8engine_8modules_8ui_8widgets_8types_8ActionId.html">helios.engine.modules.ui.widgets.types.ActionId</a></div></div>
+<div class="ttc" id="amodule__helios_8engine_8modules_8ui_8widgets_8types_html"><div class="ttname"><a href="module__helios_8engine_8modules_8ui_8widgets_8types.html">helios.engine.modules.ui.widgets.types</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1commands_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1commands.html">helios::engine::modules::ui::widgets::commands</a></div><div class="ttdoc">UI action commands.</div></div>
+<div class="ttc" id="anamespacehelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1types_html_abc04f3715a8d1cedcf00d313d804a7ee"><div class="ttname"><a href="namespacehelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1types.html#abc04f3715a8d1cedcf00d313d804a7ee">helios::engine::modules::ui::widgets::types::ActionId</a></div><div class="ttdeci">helios::core::data::StrongId&lt; ActionIdTag, uint32_t &gt; ActionId</div><div class="ttdoc">Strongly-typed identifier for UI actions.</div><div class="ttdef"><b>Definition</b> <a href="ActionId_8ixx_source.html#l00031">ActionId.ixx:31</a></div></div>
 <div class="ttc" id="astructhelios_1_1engine_1_1ecs_1_1EntityHandle_html"><div class="ttname"><a href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a></div><div class="ttdoc">A versioned handle for referencing entities in an EntityPool.</div><div class="ttdef"><b>Definition</b> <a href="EntityHandle_8ixx_source.html#l00027">EntityHandle.ixx:27</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -197,7 +209,7 @@ $(function() {
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_8af83c0dc83a45a35ca6968cdc29a7af.html">tmp</a></li><li class="navelem"><a href="dir_25ba8c016aaabea63a88c40dc27775c8.html">h</a></li><li class="navelem"><a href="dir_b3f59628e993ded3576abd1cf1101eb8.html">include</a></li><li class="navelem"><a href="dir_1ac1243035b4576c146b8d2c8a6274f6.html">helios</a></li><li class="navelem"><a href="dir_1e46d961eb277b2583ee5b095f5b4c8e.html">engine</a></li><li class="navelem"><a href="dir_87b9f5c33f5a8f4d48db11d48f10a572.html">modules</a></li><li class="navelem"><a href="dir_bf15dcce3b0eb2b2bde353446d930b9c.html">ui</a></li><li class="navelem"><a href="dir_6f2112188f0c1ce958d999c9b794ddfc.html">commands</a></li><li class="navelem"><a href="UiActionCommand_8ixx.html">UiActionCommand.ixx</a></li>
+    <li class="navelem"><a href="dir_8af83c0dc83a45a35ca6968cdc29a7af.html">tmp</a></li><li class="navelem"><a href="dir_25ba8c016aaabea63a88c40dc27775c8.html">h</a></li><li class="navelem"><a href="dir_b3f59628e993ded3576abd1cf1101eb8.html">include</a></li><li class="navelem"><a href="dir_1ac1243035b4576c146b8d2c8a6274f6.html">helios</a></li><li class="navelem"><a href="dir_1e46d961eb277b2583ee5b095f5b4c8e.html">engine</a></li><li class="navelem"><a href="dir_87b9f5c33f5a8f4d48db11d48f10a572.html">modules</a></li><li class="navelem"><a href="dir_bf15dcce3b0eb2b2bde353446d930b9c.html">ui</a></li><li class="navelem"><a href="dir_6b8d22b47901fb001c79b00cc142bfba.html">widgets</a></li><li class="navelem"><a href="dir_e8c59bc533f7054ff6842c1de26aaf5a.html">commands</a></li><li class="navelem"><a href="UiActionCommand_8ixx.html">UiActionCommand.ixx</a></li>
     <li class="footer">Generated on <span class="timestamp"></span> for helios by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
   </ul>
 </div>

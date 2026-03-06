@@ -125,10 +125,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a10db7809d0fc54ea9f4bbd2ca50e1f55" id="r_a10db7809d0fc54ea9f4bbd2ca50e1f55"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a81a9c1e57d7c52783a9831ec97b85877">SpawnedByProfileComponent</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a10db7809d0fc54ea9f4bbd2ca50e1f55">operator=</a> (const <a class="el" href="#a81a9c1e57d7c52783a9831ec97b85877">SpawnedByProfileComponent</a> &amp;)=default</td></tr>
 <tr class="memitem:ac52c16982b3b96776db631aa8b19e119" id="r_ac52c16982b3b96776db631aa8b19e119"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac52c16982b3b96776db631aa8b19e119">SpawnedByProfileComponent</a> (SpawnedByProfileComponent &amp;&amp;) noexcept=default</td></tr>
 <tr class="memitem:a4e7f0cf69a30ca1a416d9fe8bd1527ce" id="r_a4e7f0cf69a30ca1a416d9fe8bd1527ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a81a9c1e57d7c52783a9831ec97b85877">SpawnedByProfileComponent</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4e7f0cf69a30ca1a416d9fe8bd1527ce">operator=</a> (<a class="el" href="#a81a9c1e57d7c52783a9831ec97b85877">SpawnedByProfileComponent</a> &amp;&amp;) noexcept=default</td></tr>
-<tr class="memitem:a082c05d0a17fed8a8423f263ff327a72" id="r_a082c05d0a17fed8a8423f263ff327a72"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1engine_1_1core_1_1data.html#a1bb1078074b84d8536a3d74c2d29d150">helios::engine::core::data::SpawnProfileId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a082c05d0a17fed8a8423f263ff327a72">spawnProfileId</a> () const noexcept</td></tr>
-<tr class="memdesc:a082c05d0a17fed8a8423f263ff327a72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the spawn profile ID.  <br /></td></tr>
-<tr class="memitem:a28bd8f94b1bbb3a9d433199d494bc982" id="r_a28bd8f94b1bbb3a9d433199d494bc982"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a28bd8f94b1bbb3a9d433199d494bc982">setSpawnProfileId</a> (const <a class="el" href="namespacehelios_1_1engine_1_1core_1_1data.html#a1bb1078074b84d8536a3d74c2d29d150">helios::engine::core::data::SpawnProfileId</a> &amp;<a class="el" href="#a082c05d0a17fed8a8423f263ff327a72">spawnProfileId</a>) noexcept</td></tr>
-<tr class="memdesc:a28bd8f94b1bbb3a9d433199d494bc982"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the spawn profile ID.  <br /></td></tr>
+<tr class="memitem:a99f8b28242c74ddad3152075a2798464" id="r_a99f8b28242c74ddad3152075a2798464"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1types.html#adbee7d14f4c127a65914c192c3e18162">helios::engine::runtime::spawn::types::SpawnProfileId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a99f8b28242c74ddad3152075a2798464">spawnProfileId</a> () const noexcept</td></tr>
+<tr class="memdesc:a99f8b28242c74ddad3152075a2798464"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the spawn profile ID.  <br /></td></tr>
+<tr class="memitem:a8bd7f4cdb5fd24e8726e18868823d99c" id="r_a8bd7f4cdb5fd24e8726e18868823d99c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8bd7f4cdb5fd24e8726e18868823d99c">setSpawnProfileId</a> (const <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1types.html#adbee7d14f4c127a65914c192c3e18162">helios::engine::runtime::spawn::types::SpawnProfileId</a> &amp;<a class="el" href="#a99f8b28242c74ddad3152075a2798464">spawnProfileId</a>) noexcept</td></tr>
+<tr class="memdesc:a8bd7f4cdb5fd24e8726e18868823d99c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the spawn profile ID.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Component that stores the spawn profile ID that created this GameObject. </p>
@@ -136,7 +136,7 @@ Public Member Functions</h2></td></tr>
 <p>The component is cloneable, allowing prefab-based pooling where the profile ID is set after cloning during the acquire phase.</p>
 <p>Example usage: ```cpp // During prefab setup auto prefab = gameWorld.addGameObject(); prefab.add&lt;SpawnedByProfileComponent&gt;();</p>
 <p>// During spawn (in SpawnManager) auto* comp = entity.get&lt;SpawnedByProfileComponent&gt;(); comp-&gt;setSpawnProfileId(profileId);</p>
-<p>// During despawn auto profileId = entity.get&lt;SpawnedByProfileComponent&gt;()-&gt;<a class="el" href="#a082c05d0a17fed8a8423f263ff327a72" title="Returns the spawn profile ID.">spawnProfileId()</a>; poolManager.release(profileId, entity.entityHandle()); ```</p>
+<p>// During despawn auto profileId = entity.get&lt;SpawnedByProfileComponent&gt;()-&gt;<a class="el" href="#a99f8b28242c74ddad3152075a2798464" title="Returns the spawn profile ID.">spawnProfileId()</a>; poolManager.release(profileId, entity.entityHandle()); ```</p>
 <dl class="section see"><dt>See also</dt><dd>SpawnProfileId </dd>
 <dd>
 GameObjectPoolManager </dd></dl>
@@ -409,8 +409,8 @@ GameObjectPoolManager </dd></dl>
 
 </div>
 </div>
-<a id="a28bd8f94b1bbb3a9d433199d494bc982" name="a28bd8f94b1bbb3a9d433199d494bc982"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a28bd8f94b1bbb3a9d433199d494bc982">&#9670;&#160;</a></span>setSpawnProfileId()</h2>
+<a id="a8bd7f4cdb5fd24e8726e18868823d99c" name="a8bd7f4cdb5fd24e8726e18868823d99c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bd7f4cdb5fd24e8726e18868823d99c">&#9670;&#160;</a></span>setSpawnProfileId()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -421,7 +421,7 @@ GameObjectPoolManager </dd></dl>
         <tr>
           <td class="memname">void helios::engine::mechanics::spawn::components::SpawnedByProfileComponent::setSpawnProfileId </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="namespacehelios_1_1engine_1_1core_1_1data.html#a1bb1078074b84d8536a3d74c2d29d150">helios::engine::core::data::SpawnProfileId</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>spawnProfileId</em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1types.html#adbee7d14f4c127a65914c192c3e18162">helios::engine::runtime::spawn::types::SpawnProfileId</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>spawnProfileId</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -448,13 +448,13 @@ GameObjectPoolManager </dd></dl>
 <div id="dynsection-5-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-5-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent_a28bd8f94b1bbb3a9d433199d494bc982_cgraph.svg" width="566" height="90"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent_a8bd7f4cdb5fd24e8726e18868823d99c_cgraph.svg" width="566" height="90"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
-<a id="a082c05d0a17fed8a8423f263ff327a72" name="a082c05d0a17fed8a8423f263ff327a72"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a082c05d0a17fed8a8423f263ff327a72">&#9670;&#160;</a></span>spawnProfileId()</h2>
+<a id="a99f8b28242c74ddad3152075a2798464" name="a99f8b28242c74ddad3152075a2798464"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99f8b28242c74ddad3152075a2798464">&#9670;&#160;</a></span>spawnProfileId()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -463,7 +463,7 @@ GameObjectPoolManager </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacehelios_1_1engine_1_1core_1_1data.html#a1bb1078074b84d8536a3d74c2d29d150">helios::engine::core::data::SpawnProfileId</a> helios::engine::mechanics::spawn::components::SpawnedByProfileComponent::spawnProfileId </td>
+          <td class="memname"><a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1types.html#adbee7d14f4c127a65914c192c3e18162">helios::engine::runtime::spawn::types::SpawnProfileId</a> helios::engine::mechanics::spawn::components::SpawnedByProfileComponent::spawnProfileId </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -488,13 +488,13 @@ GameObjectPoolManager </dd></dl>
 <div id="dynsection-6-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-6-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent_a082c05d0a17fed8a8423f263ff327a72_cgraph.svg" width="255" height="90"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent_a99f8b28242c74ddad3152075a2798464_cgraph.svg" width="255" height="90"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div id="dynsection-7" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-7-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-7-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent_a082c05d0a17fed8a8423f263ff327a72_icgraph.svg" width="566" height="90"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent_a99f8b28242c74ddad3152075a2798464_icgraph.svg" width="566" height="90"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>

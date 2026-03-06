@@ -1,5 +1,6 @@
 var module__helios_8engine_8modules_8ui_8binding_8systems_8MaxScore2UiTextUpdateSystem =
 [
     [ "MaxScore2UiTextUpdateSystem", "classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1MaxScore2UiTextUpdateSystem.html", "classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1MaxScore2UiTextUpdateSystem" ],
+    [ "helios::engine::modules::ui::binding::systems::MaxScore2UiTextUpdateSystem::EngineRoleTag", "module__helios_8engine_8modules_8ui_8binding_8systems_8MaxScore2UiTextUpdateSystem.html#ac9d866492620e3c56f3264940e7e1e6d", null ],
     [ "helios::engine::modules::ui::binding::systems::MaxScore2UiTextUpdateSystem::update", "module__helios_8engine_8modules_8ui_8binding_8systems_8MaxScore2UiTextUpdateSystem.html#add7e27a84f2dd4ba3432002380dfa078", null ]
 ];

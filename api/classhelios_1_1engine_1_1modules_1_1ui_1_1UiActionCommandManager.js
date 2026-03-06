@@ -1,8 +1,9 @@
 var classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager =
 [
+    [ "EngineRoleTag", "classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager.html#ab6ca01420502080522735abd6fa5f730", null ],
     [ "UiActionCommandManager", "classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager.html#ad461ed59edc72412cd9ac466f1516b2e", null ],
-    [ "addPolicy", "classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager.html#a704e71eb1185fefa50a6e6107a95c2f7", null ],
-    [ "flush", "classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager.html#afeec7a0d76b53a2dfb60b7d2fe8c938a", null ],
-    [ "init", "classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager.html#a376734356261cdf9d67af7bc03b15698", null ],
-    [ "submit", "classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager.html#ade81b75fe6945227c8dbff087b61228b", null ]
+    [ "addPolicy", "classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager.html#a3d536e77b91a2dff3c536d8d17a185ef", null ],
+    [ "flush", "classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager.html#ac39545161bc5c00327ecba2043260417", null ],
+    [ "init", "classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager.html#a985e5fb7043f6a945d05f87d474f620e", null ],
+    [ "submit", "classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager.html#a9dd1c0f59a158a5cd3e63200bd6f1a2b", null ]
 ];

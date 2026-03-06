@@ -8,11 +8,11 @@
       </param>
     </templateparamlist>
     <initializer>template&lt;typename T&gt;
-concept <ref refid="concepthelios_1_1engine_1_1runtime_1_1world_1_1HasInit" kindref="compound">helios::engine::runtime::world::HasInit</ref> =  requires(T&amp; t, <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref>&amp; gameWorld) {
+concept <ref refid="concepthelios_1_1engine_1_1runtime_1_1world_1_1HasInit" kindref="compound">helios::engine::runtime::world::HasInit</ref> =  requires(T&amp; t, <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref>&amp; gameWorld) {
         {t.init(gameWorld) } -&gt; std::same_as&lt;void&gt;;
     }    </initializer>
     <briefdescription>
-<para>Concept detecting an optional `init(GameWorld&amp;)` method. </para>
+<para>Concept detecting an optional `init(GameWorld&amp;)` method on a manager. </para>
     </briefdescription>
     <detaileddescription>
 <para><parameterlist kind="templateparam"><parameteritem>
@@ -20,12 +20,12 @@ concept <ref refid="concepthelios_1_1engine_1_1runtime_1_1world_1_1HasInit" kind
 <parametername>T</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The system type to check. </para>
+<para>The manager type to inspect. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/tmp/h/include/helios/engine/runtime/world/TypedSystem.ixx" line="24" column="5"/>
+    <location file="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" line="27" column="5"/>
   </compounddef>
 </doxygen>

@@ -123,13 +123,13 @@ Files</h2></td></tr>
 <tr class="memdesc:GameObjectLifecycleSystem_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">System that processes health depletion events and triggers despawning. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md286"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md298"></a>
 helios::engine::mechanics::lifecycle::systems</h1>
 <p>Systems for processing entity lifecycle transitions.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md287"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md299"></a>
 Overview</h1>
 <p>This module provides systems that handle lifecycle-related logic each frame: delayed component activation and entity death processing.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md288"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md300"></a>
 Systems</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -139,13 +139,13 @@ Systems</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">GameObjectLifecycleSystem</span>  </td><td class="markdownTableBodyNone">Reacts to <span class="tt">HealthDepletedEvent</span> and despawns or deactivates entities  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md289"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md301"></a>
 DelayedComponentEnablerSystem</h1>
 <p>Each frame, the system: 1. Iterates all active entities with <span class="tt">DelayedComponentEnabler</span> 2. Decrements each deferred component's timer by <span class="tt">deltaTime</span> 3. Enables components whose timers reach zero via <span class="tt">ComponentOpsRegistry</span> 4. Removes activated entries from the deferred list</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md290"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md302"></a>
 GameObjectLifecycleSystem</h1>
 <p>Reads <span class="tt">HealthDepletedEvent</span>s from the pass bus. For each affected entity: 1. Inspects the <span class="tt">HealthDepletedBehavior</span> flags on the <span class="tt">HealthComponent</span> 2. If <span class="tt">Despawn</span> is set and the entity has a <span class="tt">SpawnedByProfileComponent</span>, a <span class="tt">DespawnCommand</span> is enqueued via the command buffer 3. Otherwise the entity is deactivated via <span class="tt">setActive(false)</span></p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md291"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md303"></a>
 Scheduling</h1>
 <p>Both systems should be scheduled in the gameplay phase:</p>
 <div class="fragment"><div class="line">DelayedComponentEnablerSystem  → after spawn, before collision</div>

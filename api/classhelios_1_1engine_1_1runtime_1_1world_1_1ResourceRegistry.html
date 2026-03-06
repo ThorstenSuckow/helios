@@ -107,66 +107,43 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Type-indexed registry for engine resources with O(1) lookup.  
+<p>Unified type-indexed registry for all engine resources.  
  <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a71c88e4711c542c493f9c41825f76a85" id="r_a71c88e4711c542c493f9c41825f76a85"><td class="memTemplParams" colspan="2">template&lt;class T, class... Args&gt; </td></tr>
-<tr class="memitem:a71c88e4711c542c493f9c41825f76a85 template"><td class="memItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a71c88e4711c542c493f9c41825f76a85">registerResource</a> (Args &amp;&amp;... args)</td></tr>
-<tr class="memdesc:a71c88e4711c542c493f9c41825f76a85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates and registers an owning resource.  <br /></td></tr>
-<tr class="memitem:a9bab978496643ba428b8166184103cd8" id="r_a9bab978496643ba428b8166184103cd8"><td class="memTemplParams" colspan="2">template&lt;class T&gt; <br />
-requires std::derived_from&lt;T, <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler.html">CommandHandler</a>&gt;</td></tr>
-<tr class="memitem:a9bab978496643ba428b8166184103cd8 template"><td class="memItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9bab978496643ba428b8166184103cd8">registerResource</a> (T &amp;ref)</td></tr>
-<tr class="memdesc:a9bab978496643ba428b8166184103cd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a non-owning <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler.html" title="Abstract base for type-erased command handler storage.">CommandHandler</a> reference.  <br /></td></tr>
+<tr class="memitem:aac2623b7aa2ee718820526cc319e8d69" id="r_aac2623b7aa2ee718820526cc319e8d69"><td class="memTemplParams" colspan="2">template&lt;class T, class... Args&gt; <br />
+requires IsManagerLike&lt;T&gt; || IsCommandBufferLike&lt;T&gt;</td></tr>
+<tr class="memitem:aac2623b7aa2ee718820526cc319e8d69 template"><td class="memItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aac2623b7aa2ee718820526cc319e8d69">emplace</a> (Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:aac2623b7aa2ee718820526cc319e8d69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers and constructs a resource of type T.  <br /></td></tr>
 <tr class="memitem:a4a7fa60f4d0fb1925a0d8c78037c5b93" id="r_a4a7fa60f4d0fb1925a0d8c78037c5b93"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
 <tr class="memitem:a4a7fa60f4d0fb1925a0d8c78037c5b93 template"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4a7fa60f4d0fb1925a0d8c78037c5b93">has</a> () const noexcept</td></tr>
-<tr class="memdesc:a4a7fa60f4d0fb1925a0d8c78037c5b93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether a resource of type T is registered.  <br /></td></tr>
-<tr class="memitem:a11562a65e70f32bf894460020bacf6de" id="r_a11562a65e70f32bf894460020bacf6de"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
-<tr class="memitem:a11562a65e70f32bf894460020bacf6de template"><td class="memItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a11562a65e70f32bf894460020bacf6de">resource</a> () noexcept</td></tr>
-<tr class="memdesc:a11562a65e70f32bf894460020bacf6de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a reference to a registered resource.  <br /></td></tr>
-<tr class="memitem:ad755b403ab228b91d906e9dc8547caa2" id="r_ad755b403ab228b91d906e9dc8547caa2"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
-<tr class="memitem:ad755b403ab228b91d906e9dc8547caa2 template"><td class="memItemLeft" align="right" valign="top">const T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad755b403ab228b91d906e9dc8547caa2">resource</a> () const noexcept</td></tr>
-<tr class="memdesc:ad755b403ab228b91d906e9dc8547caa2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a reference to a registered resource.     <br /></td></tr>
-<tr class="memitem:a36c02739412c272a7c6fab30e0a90d98" id="r_a36c02739412c272a7c6fab30e0a90d98"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
-<tr class="memitem:a36c02739412c272a7c6fab30e0a90d98 template"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a36c02739412c272a7c6fab30e0a90d98">tryResource</a> () noexcept</td></tr>
-<tr class="memdesc:a36c02739412c272a7c6fab30e0a90d98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a pointer to a registered resource, or nullptr.  <br /></td></tr>
-<tr class="memitem:ad4b7717b6f2445c9d234cb9fb0594658" id="r_ad4b7717b6f2445c9d234cb9fb0594658"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
-<tr class="memitem:ad4b7717b6f2445c9d234cb9fb0594658 template"><td class="memItemLeft" align="right" valign="top">const T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad4b7717b6f2445c9d234cb9fb0594658">tryResource</a> () const noexcept</td></tr>
-<tr class="memdesc:ad4b7717b6f2445c9d234cb9fb0594658"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a pointer to a registered resource, or nullptr.     <br /></td></tr>
+<tr class="memdesc:a4a7fa60f4d0fb1925a0d8c78037c5b93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a resource of type T is registered.  <br /></td></tr>
+<tr class="memitem:aa0585d5041ea8f4e899cfe3f3c10abe7" id="r_aa0585d5041ea8f4e899cfe3f3c10abe7"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
+<tr class="memitem:aa0585d5041ea8f4e899cfe3f3c10abe7 template"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa0585d5041ea8f4e899cfe3f3c10abe7">tryGet</a> () const noexcept</td></tr>
+<tr class="memdesc:aa0585d5041ea8f4e899cfe3f3c10abe7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves a registered resource by type.  <br /></td></tr>
+<tr class="memitem:a52613c548b261c8841cd4212a0e40793" id="r_a52613c548b261c8841cd4212a0e40793"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
+<tr class="memitem:a52613c548b261c8841cd4212a0e40793 template"><td class="memItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a52613c548b261c8841cd4212a0e40793">get</a> () const noexcept</td></tr>
+<tr class="memdesc:a52613c548b261c8841cd4212a0e40793"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves a registered resource by type (checked).  <br /></td></tr>
 <tr class="memitem:a05e0269ef59954066304d444264ee133" id="r_a05e0269ef59954066304d444264ee133"><td class="memItemLeft" align="right" valign="top">std::span&lt; <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html">Manager</a> *const &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a05e0269ef59954066304d444264ee133">managers</a> () const noexcept</td></tr>
-<tr class="memdesc:a05e0269ef59954066304d444264ee133"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a read-only span of registered Managers.  <br /></td></tr>
+<tr class="memdesc:a05e0269ef59954066304d444264ee133"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a read-only span of all registered Managers.  <br /></td></tr>
 <tr class="memitem:aea2adfeb9c3dccf20d0fa6aa8a2a5581" id="r_aea2adfeb9c3dccf20d0fa6aa8a2a5581"><td class="memItemLeft" align="right" valign="top">std::span&lt; <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html">Manager</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aea2adfeb9c3dccf20d0fa6aa8a2a5581">managers</a> () noexcept</td></tr>
-<tr class="memdesc:aea2adfeb9c3dccf20d0fa6aa8a2a5581"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a mutable span of registered Managers.  <br /></td></tr>
+<tr class="memdesc:aea2adfeb9c3dccf20d0fa6aa8a2a5581"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a read-only span of all registered Managers.     <br /></td></tr>
 <tr class="memitem:a8ccc085b30e324d32fcd8bcf1d5f338f" id="r_a8ccc085b30e324d32fcd8bcf1d5f338f"><td class="memItemLeft" align="right" valign="top">std::span&lt; <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html">CommandBuffer</a> *const &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8ccc085b30e324d32fcd8bcf1d5f338f">commandBuffers</a> () const noexcept</td></tr>
-<tr class="memdesc:a8ccc085b30e324d32fcd8bcf1d5f338f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a read-only span of registered CommandBuffers.  <br /></td></tr>
+<tr class="memdesc:a8ccc085b30e324d32fcd8bcf1d5f338f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a read-only span of all registered CommandBuffers.  <br /></td></tr>
 <tr class="memitem:a6a3fbd714901feffe20c01fa7996956f" id="r_a6a3fbd714901feffe20c01fa7996956f"><td class="memItemLeft" align="right" valign="top">std::span&lt; <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html">CommandBuffer</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6a3fbd714901feffe20c01fa7996956f">commandBuffers</a> () noexcept</td></tr>
-<tr class="memdesc:a6a3fbd714901feffe20c01fa7996956f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a mutable span of registered CommandBuffers.  <br /></td></tr>
+<tr class="memdesc:a6a3fbd714901feffe20c01fa7996956f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a read-only span of all registered CommandBuffers.     <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Type-indexed registry for engine resources with O(1) lookup. </p>
-<p><a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html" title="Type-indexed registry for engine resources with O(1) lookup.">ResourceRegistry</a> provides a central store for Managers, CommandBuffers, and CommandHandlers. Each resource type receives a unique compile-time index via <a class="el" href="classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId.html" title="Unique type identifier for engine resources.">ResourceTypeId</a>, enabling O(1) access through a flat `void*` array (`fastAccess_`).</p>
-<p>## Ownership Model</p>
-<ul>
-<li>**Managers and CommandBuffers** are heap-allocated and owned via `ErasedUnique` (type-erased unique ownership, 16 bytes per entry).</li>
-<li>**CommandHandlers** are registered by reference (non-owning). They typically live as part of a <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html" title="Abstract base class for managers that process deferred operations.">Manager</a> that is already owned.</li>
-</ul>
-<p>## Dual-Access Pattern</p>
-<p>Resources are stored in two parallel structures:</p><ul>
-<li>`fastAccess_[idx]` — O(1) type-based lookup (hot path)</li>
-<li>`managers_` / `commandBuffers_` — linear iteration for batch operations (e.g., `GameWorld::flushManagers()`, `GameWorld::init()`)</li>
-</ul>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1core_1_1data_1_1ResourceTypeId.html" title="Unique type identifier for engine resources.">ResourceTypeId</a> </dd>
+<div class="textblock"><p>Unified type-indexed registry for all engine resources. </p>
+<p><a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html" title="Unified type-indexed registry for all engine resources.">ResourceRegistry</a> acts as the central access point for Managers and CommandBuffers. It delegates to a <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1world.html#a12c55c47caeb5dc7588c1b1e74f4992f" title="Type alias for a ConceptModelRegistry specialized for Managers.">ManagerRegistry</a> and a <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1command.html#a9db2b3babfcf5b63f64800f93e80e2ae" title="Type alias for a ConceptModelRegistry specialized for CommandBuffers.">CommandBufferRegistry</a> internally, routing registration and lookup based on compile-time concept checks (IsManagerLike / IsCommandBufferLike).</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1world.html#a12c55c47caeb5dc7588c1b1e74f4992f" title="Type alias for a ConceptModelRegistry specialized for Managers.">ManagerRegistry</a> </dd>
 <dd>
-<a class="el" href="structhelios_1_1core_1_1memory_1_1ErasedUnique.html" title="Type-erased unique ownership wrapper.">ErasedUnique</a> </dd>
+<a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1command.html#a9db2b3babfcf5b63f64800f93e80e2ae" title="Type alias for a ConceptModelRegistry specialized for CommandBuffers.">CommandBufferRegistry</a> </dd>
 <dd>
-<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html" title="Abstract base class for managers that process deferred operations.">Manager</a> </dd>
-<dd>
-<a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Abstract base for command buffers that collect and flush commands.">CommandBuffer</a> </dd>
-<dd>
-<a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandHandler.html" title="Type-safe handler for a specific command type.">TypedCommandHandler</a> </dd></dl>
+<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html" title="Central game state container for entities, resources, and the active level.">GameWorld</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ResourceRegistry_8ixx_source.html#l00084">84</a> of file <a class="el" href="ResourceRegistry_8ixx_source.html">ResourceRegistry.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ResourceRegistry_8ixx_source.html#l00048">48</a> of file <a class="el" href="ResourceRegistry_8ixx_source.html">ResourceRegistry.ixx</a>.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="a8ccc085b30e324d32fcd8bcf1d5f338f" name="a8ccc085b30e324d32fcd8bcf1d5f338f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8ccc085b30e324d32fcd8bcf1d5f338f">&#9670;&#160;</a></span>commandBuffers() <span class="overload">[1/2]</span></h2>
@@ -191,18 +168,10 @@ requires std::derived_from&lt;T, <a class="el" href="classhelios_1_1engine_1_1ru
 </table>
 </div><div class="memdoc">
 
-<p>Returns a read-only span of registered CommandBuffers. </p>
-<dl class="section return"><dt>Returns</dt><dd>Span of <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Abstract base for command buffers that collect and flush commands.">CommandBuffer</a> pointers. </dd></dl>
+<p>Returns a read-only span of all registered CommandBuffers. </p>
+<dl class="section return"><dt>Returns</dt><dd>Span of <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Type-erased wrapper for command buffers using the Concept/Model pattern.">CommandBuffer</a> pointers in registration order. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ResourceRegistry_8ixx_source.html#l00298">298</a> of file <a class="el" href="ResourceRegistry_8ixx_source.html">ResourceRegistry.ixx</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="GameLoop_8ixx_source.html#l00236">helios::engine::runtime::gameloop::GameLoop::phaseCommit()</a>.</p>
-<div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_a8ccc085b30e324d32fcd8bcf1d5f338f_icgraph.svg" width="658" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p class="definition">Definition at line <a class="el" href="ResourceRegistry_8ixx_source.html#l00178">178</a> of file <a class="el" href="ResourceRegistry_8ixx_source.html">ResourceRegistry.ixx</a>.</p>
 
 </div>
 </div>
@@ -229,10 +198,105 @@ requires std::derived_from&lt;T, <a class="el" href="classhelios_1_1engine_1_1ru
 </table>
 </div><div class="memdoc">
 
-<p>Returns a mutable span of registered CommandBuffers. </p>
-<dl class="section return"><dt>Returns</dt><dd>Span of <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Abstract base for command buffers that collect and flush commands.">CommandBuffer</a> pointers. </dd></dl>
+<p>Returns a read-only span of all registered CommandBuffers.    </p>
+<dl class="section return"><dt>Returns</dt><dd>Span of <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Type-erased wrapper for command buffers using the Concept/Model pattern.">CommandBuffer</a> pointers in registration order.    </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ResourceRegistry_8ixx_source.html#l00307">307</a> of file <a class="el" href="ResourceRegistry_8ixx_source.html">ResourceRegistry.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ResourceRegistry_8ixx_source.html#l00185">185</a> of file <a class="el" href="ResourceRegistry_8ixx_source.html">ResourceRegistry.ixx</a>.</p>
+
+</div>
+</div>
+<a id="aac2623b7aa2ee718820526cc319e8d69" name="aac2623b7aa2ee718820526cc319e8d69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac2623b7aa2ee718820526cc319e8d69">&#9670;&#160;</a></span>emplace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T, class... Args&gt; <br />
+requires IsManagerLike&lt;T&gt; || IsCommandBufferLike&lt;T&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T &amp; helios::engine::runtime::world::ResourceRegistry::emplace </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Registers and constructs a resource of type T. </p>
+<p>Routes to <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1world.html#a12c55c47caeb5dc7588c1b1e74f4992f" title="Type alias for a ConceptModelRegistry specialized for Managers.">ManagerRegistry</a> or <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1command.html#a9db2b3babfcf5b63f64800f93e80e2ae" title="Type alias for a ConceptModelRegistry specialized for CommandBuffers.">CommandBufferRegistry</a> based on whether T satisfies IsManagerLike or IsCommandBufferLike. The resource is constructed in-place with forwarded arguments.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The resource type. Must satisfy IsManagerLike or IsCommandBufferLike. </td></tr>
+    <tr><td class="paramname">Args</td><td>Constructor argument types.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>Arguments forwarded to the T constructor.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the newly registered resource. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="ResourceRegistry_8ixx_source.html#l00078">78</a> of file <a class="el" href="ResourceRegistry_8ixx_source.html">ResourceRegistry.ixx</a>.</p>
+
+</div>
+</div>
+<a id="a52613c548b261c8841cd4212a0e40793" name="a52613c548b261c8841cd4212a0e40793"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52613c548b261c8841cd4212a0e40793">&#9670;&#160;</a></span>get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T &amp; helios::engine::runtime::world::ResourceRegistry::get </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Retrieves a registered resource by type (checked). </p>
+<p>Asserts that the resource is registered before returning.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The resource type.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the resource.</dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>The resource must be registered. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="ResourceRegistry_8ixx_source.html#l00144">144</a> of file <a class="el" href="ResourceRegistry_8ixx_source.html">ResourceRegistry.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="ResourceRegistry_8ixx_source.html#l00099">has()</a>.</p>
+<div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_a52613c548b261c8841cd4212a0e40793_cgraph.svg" width="494" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 
 </div>
 </div>
@@ -261,23 +325,23 @@ template&lt;class T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Checks whether a resource of type T is registered. </p>
+<p>Checks if a resource of type T is registered. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td>The resource type to check.</td></tr>
+    <tr><td class="paramname">T</td><td>The resource type.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>True if registered, false otherwise. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the resource is registered. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ResourceRegistry_8ixx_source.html#l00215">215</a> of file <a class="el" href="ResourceRegistry_8ixx_source.html">ResourceRegistry.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ResourceRegistry_8ixx_source.html#l00099">99</a> of file <a class="el" href="ResourceRegistry_8ixx_source.html">ResourceRegistry.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="ResourceTypeId_8ixx_source.html#l00087">helios::engine::core::data::ResourceTypeId::id()</a>, and <a class="el" href="ResourceTypeId_8ixx_source.html#l00071">helios::engine::core::data::ResourceTypeId::value()</a>.</p>
-<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<p class="reference">Referenced by <a class="el" href="ResourceRegistry_8ixx_source.html#l00144">get()</a>.</p>
+<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_a4a7fa60f4d0fb1925a0d8c78037c5b93_cgraph.svg" width="100%" height="416"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_a4a7fa60f4d0fb1925a0d8c78037c5b93_icgraph.svg" width="494" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -300,15 +364,15 @@ template&lt;class T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Returns a read-only span of registered Managers. </p>
-<dl class="section return"><dt>Returns</dt><dd>Span of <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html" title="Abstract base class for managers that process deferred operations.">Manager</a> pointers. </dd></dl>
+<p>Returns a read-only span of all registered Managers. </p>
+<dl class="section return"><dt>Returns</dt><dd>Span of <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html" title="Type-erased wrapper for game world managers.">Manager</a> pointers in registration order. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ResourceRegistry_8ixx_source.html#l00280">280</a> of file <a class="el" href="ResourceRegistry_8ixx_source.html">ResourceRegistry.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ResourceRegistry_8ixx_source.html#l00162">162</a> of file <a class="el" href="ResourceRegistry_8ixx_source.html">ResourceRegistry.ixx</a>.</p>
 
 </div>
 </div>
@@ -335,125 +399,15 @@ template&lt;class T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Returns a mutable span of registered Managers. </p>
-<dl class="section return"><dt>Returns</dt><dd>Span of <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html" title="Abstract base class for managers that process deferred operations.">Manager</a> pointers. </dd></dl>
+<p>Returns a read-only span of all registered Managers.    </p>
+<dl class="section return"><dt>Returns</dt><dd>Span of <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html" title="Type-erased wrapper for game world managers.">Manager</a> pointers in registration order.    </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ResourceRegistry_8ixx_source.html#l00289">289</a> of file <a class="el" href="ResourceRegistry_8ixx_source.html">ResourceRegistry.ixx</a>.</p>
-
-</div>
-</div>
-<a id="a71c88e4711c542c493f9c41825f76a85" name="a71c88e4711c542c493f9c41825f76a85"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a71c88e4711c542c493f9c41825f76a85">&#9670;&#160;</a></span>registerResource() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T, class... Args&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">T &amp; helios::engine::runtime::world::ResourceRegistry::registerResource </td>
-          <td>(</td>
-          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Creates and registers an owning resource. </p>
-<p>Heap-allocates a resource of type T, stores it in `owned_` via <a class="el" href="structhelios_1_1core_1_1memory_1_1ErasedUnique.html" title="Type-erased unique ownership wrapper.">ErasedUnique</a>, and indexes it in `fastAccess_`. If T derives from <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html" title="Abstract base class for managers that process deferred operations.">Manager</a> or <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Abstract base for command buffers that collect and flush commands.">CommandBuffer</a>, it is additionally tracked in the corresponding iteration list.</p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>The resource type. Must derive from <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html" title="Abstract base class for managers that process deferred operations.">Manager</a> or <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Abstract base for command buffers that collect and flush commands.">CommandBuffer</a>. </td></tr>
-    <tr><td class="paramname">Args</td><td>Constructor argument types.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">args</td><td>Arguments forwarded to the T constructor.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Reference to the newly created resource.</dd></dl>
-<dl class="section pre"><dt>Precondition</dt><dd>No resource of type T is already registered. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="ResourceRegistry_8ixx_source.html#l00135">135</a> of file <a class="el" href="ResourceRegistry_8ixx_source.html">ResourceRegistry.ixx</a>.</p>
-
-<p class="reference">References <a class="el" href="ResourceTypeId_8ixx_source.html#l00087">helios::engine::core::data::ResourceTypeId::id()</a>, and <a class="el" href="ResourceTypeId_8ixx_source.html#l00071">helios::engine::core::data::ResourceTypeId::value()</a>.</p>
-<div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-2-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_a71c88e4711c542c493f9c41825f76a85_cgraph.svg" width="666" height="155"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p class="definition">Definition at line <a class="el" href="ResourceRegistry_8ixx_source.html#l00169">169</a> of file <a class="el" href="ResourceRegistry_8ixx_source.html">ResourceRegistry.ixx</a>.</p>
 
 </div>
 </div>
-<a id="a9bab978496643ba428b8166184103cd8" name="a9bab978496643ba428b8166184103cd8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9bab978496643ba428b8166184103cd8">&#9670;&#160;</a></span>registerResource() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T&gt; <br />
-requires std::derived_from&lt;T, <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler.html">CommandHandler</a>&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">T &amp; helios::engine::runtime::world::ResourceRegistry::registerResource </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;</td>          <td class="paramname"><span class="paramname"><em>ref</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Registers a non-owning <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler.html" title="Abstract base for type-erased command handler storage.">CommandHandler</a> reference. </p>
-<p>Stores a pointer to an externally owned <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler.html" title="Abstract base for type-erased command handler storage.">CommandHandler</a> in `fastAccess_` and `commandHandlers_`. The handler must outlive this registry (typically guaranteed because the handler is a <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html" title="Abstract base class for managers that process deferred operations.">Manager</a> that is already owned by this registry).</p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>The <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler.html" title="Abstract base for type-erased command handler storage.">CommandHandler</a> type. Must derive from <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler.html" title="Abstract base for type-erased command handler storage.">CommandHandler</a>.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ref</td><td>Reference to the handler to register.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Reference to the registered handler.</dd></dl>
-<dl class="section pre"><dt>Precondition</dt><dd>No resource of type T is already registered. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="ResourceRegistry_8ixx_source.html#l00181">181</a> of file <a class="el" href="ResourceRegistry_8ixx_source.html">ResourceRegistry.ixx</a>.</p>
-
-<p class="reference">References <a class="el" href="ResourceTypeId_8ixx_source.html#l00087">helios::engine::core::data::ResourceTypeId::id()</a>, and <a class="el" href="ResourceTypeId_8ixx_source.html#l00071">helios::engine::core::data::ResourceTypeId::value()</a>.</p>
-<div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-3-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_a9bab978496643ba428b8166184103cd8_cgraph.svg" width="666" height="155"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
-</div>
-</div>
-<a id="ad755b403ab228b91d906e9dc8547caa2" name="ad755b403ab228b91d906e9dc8547caa2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad755b403ab228b91d906e9dc8547caa2">&#9670;&#160;</a></span>resource() <span class="overload">[1/2]</span></h2>
+<a id="aa0585d5041ea8f4e899cfe3f3c10abe7" name="aa0585d5041ea8f4e899cfe3f3c10abe7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0585d5041ea8f4e899cfe3f3c10abe7">&#9670;&#160;</a></span>tryGet()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -464,7 +418,7 @@ template&lt;class T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const T &amp; helios::engine::runtime::world::ResourceRegistry::resource </td>
+          <td class="memname">T * helios::engine::runtime::world::ResourceRegistry::tryGet </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -477,155 +431,7 @@ template&lt;class T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Returns a reference to a registered resource.    </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>The resource type.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Reference to the resource.</dd></dl>
-<dl class="section pre"><dt>Precondition</dt><dd>A resource of type T must be registered.    </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="ResourceRegistry_8ixx_source.html#l00240">240</a> of file <a class="el" href="ResourceRegistry_8ixx_source.html">ResourceRegistry.ixx</a>.</p>
-
-<p class="reference">References <a class="el" href="ResourceTypeId_8ixx_source.html#l00087">helios::engine::core::data::ResourceTypeId::id()</a>, and <a class="el" href="ResourceTypeId_8ixx_source.html#l00071">helios::engine::core::data::ResourceTypeId::value()</a>.</p>
-<div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-4-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_ad755b403ab228b91d906e9dc8547caa2_cgraph.svg" width="666" height="155"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
-</div>
-</div>
-<a id="a11562a65e70f32bf894460020bacf6de" name="a11562a65e70f32bf894460020bacf6de"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a11562a65e70f32bf894460020bacf6de">&#9670;&#160;</a></span>resource() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">T &amp; helios::engine::runtime::world::ResourceRegistry::resource </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns a reference to a registered resource. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>The resource type.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Reference to the resource.</dd></dl>
-<dl class="section pre"><dt>Precondition</dt><dd>A resource of type T must be registered. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="ResourceRegistry_8ixx_source.html#l00230">230</a> of file <a class="el" href="ResourceRegistry_8ixx_source.html">ResourceRegistry.ixx</a>.</p>
-
-<p class="reference">References <a class="el" href="ResourceTypeId_8ixx_source.html#l00087">helios::engine::core::data::ResourceTypeId::id()</a>, and <a class="el" href="ResourceTypeId_8ixx_source.html#l00071">helios::engine::core::data::ResourceTypeId::value()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="SpawnAll_8ixx_source.html#l00045">helios::engine::runtime::spawn::policy::amount::SpawnAll::getAmount()</a>.</p>
-<div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-5-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_a11562a65e70f32bf894460020bacf6de_cgraph.svg" width="666" height="155"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-6" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-6-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_a11562a65e70f32bf894460020bacf6de_icgraph.svg" width="423" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
-</div>
-</div>
-<a id="ad4b7717b6f2445c9d234cb9fb0594658" name="ad4b7717b6f2445c9d234cb9fb0594658"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad4b7717b6f2445c9d234cb9fb0594658">&#9670;&#160;</a></span>tryResource() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const T * helios::engine::runtime::world::ResourceRegistry::tryResource </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns a pointer to a registered resource, or nullptr.    </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>The resource type.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Pointer to the resource, or nullptr if not registered.    </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="ResourceRegistry_8ixx_source.html#l00266">266</a> of file <a class="el" href="ResourceRegistry_8ixx_source.html">ResourceRegistry.ixx</a>.</p>
-
-<p class="reference">References <a class="el" href="ResourceTypeId_8ixx_source.html#l00087">helios::engine::core::data::ResourceTypeId::id()</a>, and <a class="el" href="ResourceTypeId_8ixx_source.html#l00071">helios::engine::core::data::ResourceTypeId::value()</a>.</p>
-<div id="dynsection-7" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-7-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_ad4b7717b6f2445c9d234cb9fb0594658_cgraph.svg" width="666" height="155"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
-</div>
-</div>
-<a id="a36c02739412c272a7c6fab30e0a90d98" name="a36c02739412c272a7c6fab30e0a90d98"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a36c02739412c272a7c6fab30e0a90d98">&#9670;&#160;</a></span>tryResource() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">T * helios::engine::runtime::world::ResourceRegistry::tryResource </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns a pointer to a registered resource, or nullptr. </p>
+<p>Retrieves a registered resource by type. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>The resource type.</td></tr>
@@ -634,15 +440,7 @@ template&lt;class T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the resource, or nullptr if not registered. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ResourceRegistry_8ixx_source.html#l00254">254</a> of file <a class="el" href="ResourceRegistry_8ixx_source.html">ResourceRegistry.ixx</a>.</p>
-
-<p class="reference">References <a class="el" href="ResourceTypeId_8ixx_source.html#l00087">helios::engine::core::data::ResourceTypeId::id()</a>, and <a class="el" href="ResourceTypeId_8ixx_source.html#l00071">helios::engine::core::data::ResourceTypeId::value()</a>.</p>
-<div id="dynsection-8" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-8-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_a36c02739412c272a7c6fab30e0a90d98_cgraph.svg" width="666" height="155"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p class="definition">Definition at line <a class="el" href="ResourceRegistry_8ixx_source.html#l00119">119</a> of file <a class="el" href="ResourceRegistry_8ixx_source.html">ResourceRegistry.ixx</a>.</p>
 
 </div>
 </div>

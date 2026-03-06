@@ -9,6 +9,6 @@ var module__helios_8engine_8mechanics_8spawn_8components_8SpawnedByProfileCompon
     [ "helios::engine::mechanics::spawn::components::SpawnedByProfileComponent::operator=", "module__helios_8engine_8mechanics_8spawn_8components_8SpawnedByProfileComponent.html#a10db7809d0fc54ea9f4bbd2ca50e1f55", null ],
     [ "helios::engine::mechanics::spawn::components::SpawnedByProfileComponent::SpawnedByProfileComponent", "module__helios_8engine_8mechanics_8spawn_8components_8SpawnedByProfileComponent.html#ac52c16982b3b96776db631aa8b19e119", null ],
     [ "helios::engine::mechanics::spawn::components::SpawnedByProfileComponent::operator=", "module__helios_8engine_8mechanics_8spawn_8components_8SpawnedByProfileComponent.html#a4e7f0cf69a30ca1a416d9fe8bd1527ce", null ],
-    [ "helios::engine::mechanics::spawn::components::SpawnedByProfileComponent::spawnProfileId", "module__helios_8engine_8mechanics_8spawn_8components_8SpawnedByProfileComponent.html#a082c05d0a17fed8a8423f263ff327a72", null ],
-    [ "helios::engine::mechanics::spawn::components::SpawnedByProfileComponent::setSpawnProfileId", "module__helios_8engine_8mechanics_8spawn_8components_8SpawnedByProfileComponent.html#a28bd8f94b1bbb3a9d433199d494bc982", null ]
+    [ "helios::engine::mechanics::spawn::components::SpawnedByProfileComponent::spawnProfileId", "module__helios_8engine_8mechanics_8spawn_8components_8SpawnedByProfileComponent.html#a99f8b28242c74ddad3152075a2798464", null ],
+    [ "helios::engine::mechanics::spawn::components::SpawnedByProfileComponent::setSpawnProfileId", "module__helios_8engine_8mechanics_8spawn_8components_8SpawnedByProfileComponent.html#a8bd7f4cdb5fd24e8726e18868823d99c", null ]
 ];

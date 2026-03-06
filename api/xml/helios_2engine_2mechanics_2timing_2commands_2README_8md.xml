@@ -27,10 +27,9 @@
 <codeline><highlight class="normal">```cpp</highlight></codeline>
 <codeline><highlight class="normal">auto<sp/>context<sp/>=<sp/>TimerControlContext{TimerState::Started,<sp/>myTimerId};</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">updateContext.commandBuffer().add&lt;TimerControlCommand&gt;(std::move(context));</highlight></codeline>
+<codeline><highlight class="normal">updateContext.queueCommand&lt;TimerControlCommand&gt;(std::move(context));</highlight></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">The<sp/>command<sp/>is<sp/>dispatched<sp/>via<sp/>the<sp/>Visitor<sp/>pattern<sp/>-<sp/>`accept()`<sp/>delegates<sp/>to<sp/>`TimerCommandDispatcher`,<sp/>which<sp/>forwards<sp/>the<sp/>request<sp/>to<sp/>`TimerManager`.</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>
 <codeline></codeline>

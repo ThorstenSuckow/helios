@@ -3,17 +3,44 @@
   <compounddef id="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1command" kind="namespace" language="C++">
     <compoundname>helios::engine::runtime::messaging::command</compoundname>
     <innerclass refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer" prot="public">helios::engine::runtime::messaging::command::CommandBuffer</innerclass>
-    <innerclass refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandler" prot="public">helios::engine::runtime::messaging::command::CommandHandler</innerclass>
+    <innerclass refid="structhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandlerEntry" prot="public">helios::engine::runtime::messaging::command::CommandHandlerEntry</innerclass>
+    <innerclass refid="structhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandlerRef" prot="public">helios::engine::runtime::messaging::command::CommandHandlerRef</innerclass>
+    <innerclass refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandlerRegistry" prot="public">helios::engine::runtime::messaging::command::CommandHandlerRegistry</innerclass>
     <innerclass refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer" prot="public">helios::engine::runtime::messaging::command::EngineCommandBuffer</innerclass>
     <innerclass refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer" prot="public">helios::engine::runtime::messaging::command::TypedCommandBuffer</innerclass>
-    <innerclass refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandHandler" prot="public">helios::engine::runtime::messaging::command::TypedCommandHandler</innerclass>
     <innerconcept refid="concepthelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1ExecutableCommand">helios::engine::runtime::messaging::command::ExecutableCommand</innerconcept>
+    <innernamespace refid="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1types">helios::engine::runtime::messaging::command::types</innernamespace>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1command_1a9db2b3babfcf5b63f64800f93e80e2ae" prot="public" static="no">
+        <type><ref refid="classhelios_1_1core_1_1container_1_1ConceptModelRegistry" kindref="compound">ConceptModelRegistry</ref>&lt; <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer" kindref="compound">CommandBuffer</ref>, <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1types_1_1CommandBufferTypeId" kindref="compound">CommandBufferTypeId</ref> &gt;</type>
+        <definition>using helios::engine::runtime::messaging::command::CommandBufferRegistry =  ConceptModelRegistry&lt;CommandBuffer, CommandBufferTypeId&gt;</definition>
+        <argsstring></argsstring>
+        <name>CommandBufferRegistry</name>
+        <qualifiedname>helios::engine::runtime::messaging::command::CommandBufferRegistry</qualifiedname>
+        <briefdescription>
+<para>Type alias for a <ref refid="classhelios_1_1core_1_1container_1_1ConceptModelRegistry" kindref="compound">ConceptModelRegistry</ref> specialized for CommandBuffers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Stores type-erased <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer" kindref="compound">CommandBuffer</ref> wrappers indexed by <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1types_1_1CommandBufferTypeId" kindref="compound">CommandBufferTypeId</ref>, providing O(1) lookup by concrete buffer type and insertion-order iteration for deterministic flush cycles.</para>
+<para><simplesect kind="see"><para><ref refid="classhelios_1_1core_1_1container_1_1ConceptModelRegistry" kindref="compound">ConceptModelRegistry</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer" kindref="compound">CommandBuffer</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1types_1_1CommandBufferTypeId" kindref="compound">CommandBufferTypeId</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/CommandBufferRegistry.ixx" line="37" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/CommandBufferRegistry.ixx" bodystart="37" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
     <briefdescription>
 <para>Compile-time typed command buffering and handler routing. </para>
     </briefdescription>
     <detaileddescription>
 <para>Provides deferred command execution with type-safe queues, handler-or-execute routing, and integration with the Manager flush cycle. </para>
     </detaileddescription>
-    <location file="/tmp/h/include/helios/engine/runtime/messaging/command/CommandBuffer.ixx" line="16" column="1"/>
+    <location file="/tmp/h/include/helios/engine/runtime/messaging/command/CommandBuffer.ixx" line="18" column="1"/>
   </compounddef>
 </doxygen>

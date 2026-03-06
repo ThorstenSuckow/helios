@@ -1,0 +1,270 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8core_8container_8ConceptModelRegistry" kind="module">
+    <compoundname>helios.core.container.ConceptModelRegistry</compoundname>
+    <innerfile refid="ConceptModelRegistry_8ixx">ConceptModelRegistry.ixx</innerfile>
+    <innerclass refid="classhelios_1_1core_1_1container_1_1ConceptModelRegistry" prot="public">helios::core::container::ConceptModelRegistry</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1core_1_1container_1_1ConceptModelRegistry_1a700ca2cb3fdad1862a473c22b3538d98" prot="private" static="no" mutable="yes">
+        <type>std::vector&lt; AnyT &gt;</type>
+        <definition>std::vector&lt;AnyT&gt; helios::core::container::ConceptModelRegistry&lt; AnyT, IdProvider &gt;::items_</definition>
+        <argsstring></argsstring>
+        <name>items_</name>
+        <qualifiedname>helios::core::container::ConceptModelRegistry::items_</qualifiedname>
+        <briefdescription>
+<para>Owning storage for wrapped AnyT instances, indexed by type ID. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/container/ConceptModelRegistry.ixx" line="58" column="29" bodyfile="/tmp/h/include/helios/core/container/ConceptModelRegistry.ixx" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1core_1_1container_1_1ConceptModelRegistry_1a70e81c59f6132f908a5d28ebc0d9fc1a" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; void * &gt;</type>
+        <definition>std::vector&lt;void*&gt; helios::core::container::ConceptModelRegistry&lt; AnyT, IdProvider &gt;::underlyingAnyT_</definition>
+        <argsstring></argsstring>
+        <name>underlyingAnyT_</name>
+        <qualifiedname>helios::core::container::ConceptModelRegistry::underlyingAnyT_</qualifiedname>
+        <briefdescription>
+<para>Cached raw pointers to the underlying concrete instances. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/container/ConceptModelRegistry.ixx" line="63" column="21" bodyfile="/tmp/h/include/helios/core/container/ConceptModelRegistry.ixx" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1core_1_1container_1_1ConceptModelRegistry_1a439952a934e7d05ad7b7c1a927ddec35" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; size_t &gt;</type>
+        <definition>std::vector&lt;size_t&gt; helios::core::container::ConceptModelRegistry&lt; AnyT, IdProvider &gt;::insertionOrder_</definition>
+        <argsstring></argsstring>
+        <name>insertionOrder_</name>
+        <qualifiedname>helios::core::container::ConceptModelRegistry::insertionOrder_</qualifiedname>
+        <briefdescription>
+<para>Records insertion order for deterministic iteration. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/container/ConceptModelRegistry.ixx" line="68" column="21" bodyfile="/tmp/h/include/helios/core/container/ConceptModelRegistry.ixx" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1core_1_1container_1_1ConceptModelRegistry_1a23ca1cb3f8b3b388636f3eabef7ca4f4" prot="private" static="no" mutable="yes">
+        <type>std::vector&lt; AnyT * &gt;</type>
+        <definition>std::vector&lt;AnyT*&gt; helios::core::container::ConceptModelRegistry&lt; AnyT, IdProvider &gt;::itemView_</definition>
+        <argsstring></argsstring>
+        <name>itemView_</name>
+        <qualifiedname>helios::core::container::ConceptModelRegistry::itemView_</qualifiedname>
+        <briefdescription>
+<para>Lazily-built view of AnyT pointers in insertion order. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/container/ConceptModelRegistry.ixx" line="73" column="29" bodyfile="/tmp/h/include/helios/core/container/ConceptModelRegistry.ixx" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1core_1_1container_1_1ConceptModelRegistry_1aade180def780bd3a56bf030fd70948dd" prot="private" static="no" mutable="yes">
+        <type>bool</type>
+        <definition>bool helios::core::container::ConceptModelRegistry&lt; AnyT, IdProvider &gt;::needsUpdate_</definition>
+        <argsstring></argsstring>
+        <name>needsUpdate_</name>
+        <qualifiedname>helios::core::container::ConceptModelRegistry::needsUpdate_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>Dirty flag indicating itemView_ needs rebuilding. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/container/ConceptModelRegistry.ixx" line="78" column="22" bodyfile="/tmp/h/include/helios/core/container/ConceptModelRegistry.ixx" bodystart="78" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1core_1_1container_1_1ConceptModelRegistry_1afeb40045c7bc1e17e047d9fdc444eb2e" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::core::container::ConceptModelRegistry&lt; AnyT, IdProvider &gt;::update</definition>
+        <argsstring>() const</argsstring>
+        <name>update</name>
+        <qualifiedname>helios::core::container::ConceptModelRegistry::update</qualifiedname>
+        <briefdescription>
+<para>Rebuilds the insertion-ordered view if dirty. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/container/ConceptModelRegistry.ixx" line="83" column="14" bodyfile="/tmp/h/include/helios/core/container/ConceptModelRegistry.ixx" bodystart="83" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1core_1_1container_1_1ConceptModelRegistry_1adf315ce872fd904bb8d80ea43399a326" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::span&lt; AnyT *const &gt;</type>
+        <definition>std::span&lt; AnyT *const  &gt; helios::core::container::ConceptModelRegistry&lt; AnyT, IdProvider &gt;::items</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>items</name>
+        <qualifiedname>helios::core::container::ConceptModelRegistry::items</qualifiedname>
+        <briefdescription>
+<para>Returns a read-only span of registered items in insertion order. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Span of const AnyT pointers. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/container/ConceptModelRegistry.ixx" line="108" column="20" bodyfile="/tmp/h/include/helios/core/container/ConceptModelRegistry.ixx" bodystart="108" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1core_1_1container_1_1ConceptModelRegistry_1a43e14dee4e5ee7e5f55e07ed991ba29a" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::span&lt; AnyT * &gt;</type>
+        <definition>std::span&lt; AnyT * &gt; helios::core::container::ConceptModelRegistry&lt; AnyT, IdProvider &gt;::items</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>items</name>
+        <qualifiedname>helios::core::container::ConceptModelRegistry::items</qualifiedname>
+        <briefdescription>
+<para>Returns a mutable span of registered items in insertion order. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Span of AnyT pointers. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/container/ConceptModelRegistry.ixx" line="118" column="20" bodyfile="/tmp/h/include/helios/core/container/ConceptModelRegistry.ixx" bodystart="118" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1core_1_1container_1_1ConceptModelRegistry_1a93e18f98925c2d56e8d0ecb37f15815a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>T &amp;</type>
+        <definition>T &amp; helios::core::container::ConceptModelRegistry&lt; AnyT, IdProvider &gt;::add</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>add</name>
+        <qualifiedname>helios::core::container::ConceptModelRegistry::add</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Registers and wraps a concrete instance of type T. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Constructs T in-place from the forwarded arguments, wraps it in an AnyT, and stores it at the index determined by `IdProvider::id&lt;T&gt;()`. Returns a reference to the underlying concrete T instance.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The concrete type to register. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Constructor argument types for T.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Arguments forwarded to the T constructor.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to the registered T instance.</para>
+</simplesect>
+<simplesect kind="pre"><para>T must not already be registered. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/container/ConceptModelRegistry.ixx" line="141" column="11" bodyfile="/tmp/h/include/helios/core/container/ConceptModelRegistry.ixx" bodystart="141" bodyend="165"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1core_1_1container_1_1ConceptModelRegistry_1aaf41fea3388dd62db673df3e642062e1" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool helios::core::container::ConceptModelRegistry&lt; AnyT, IdProvider &gt;::has</definition>
+        <argsstring>() const</argsstring>
+        <name>has</name>
+        <qualifiedname>helios::core::container::ConceptModelRegistry::has</qualifiedname>
+        <briefdescription>
+<para>Checks whether a concrete type T is registered. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type to check.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if T has been added. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/container/ConceptModelRegistry.ixx" line="176" column="15" bodyfile="/tmp/h/include/helios/core/container/ConceptModelRegistry.ixx" bodystart="176" bodyend="178"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1core_1_1container_1_1ConceptModelRegistry_1a1803615274ba222b285d0d86d7c76387" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T *</type>
+        <definition>T * helios::core::container::ConceptModelRegistry&lt; AnyT, IdProvider &gt;::item</definition>
+        <argsstring>() const</argsstring>
+        <name>item</name>
+        <qualifiedname>helios::core::container::ConceptModelRegistry::item</qualifiedname>
+        <briefdescription>
+<para>Returns a pointer to the registered instance of type T. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The concrete type to look up.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to T, or nullptr if not registered. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/container/ConceptModelRegistry.ixx" line="188" column="12" bodyfile="/tmp/h/include/helios/core/container/ConceptModelRegistry.ixx" bodystart="188" bodyend="196"/>
+        <referencedby refid="classhelios_1_1core_1_1container_1_1ConceptModelRegistry_1aaf41fea3388dd62db673df3e642062e1" compoundref="ConceptModelRegistry_8ixx" startline="176" endline="178">helios::core::container::ConceptModelRegistry&lt; CommandBuffer, CommandBufferTypeId &gt;::has</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/core/container/ConceptModelRegistry.ixx" line="13" column="15"/>
+  </compounddef>
+</doxygen>

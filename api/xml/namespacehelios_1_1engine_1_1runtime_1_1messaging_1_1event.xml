@@ -4,9 +4,9 @@
     <compoundname>helios::engine::runtime::messaging::event</compoundname>
     <innerclass refid="structhelios_1_1engine_1_1runtime_1_1messaging_1_1event_1_1GameLoopEventBusGroup" prot="public">helios::engine::runtime::messaging::event::GameLoopEventBusGroup</innerclass>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1event_1a59b7e7d4204d917672591bc8a383d9b4" prot="public" static="no">
-        <type><ref refid="classhelios_1_1core_1_1buffer_1_1TypeIndexedDoubleBuffer" kindref="compound">helios::core::buffer::TypeIndexedDoubleBuffer</ref>&lt; <ref refid="classhelios_1_1core_1_1data_1_1TypeIndexer" kindref="compound">helios::core::data::TypeIndexer</ref>&lt; <ref refid="structhelios_1_1engine_1_1runtime_1_1messaging_1_1event_1_1GameLoopEventBusGroup" kindref="compound">GameLoopEventBusGroup</ref> &gt; &gt;</type>
-        <definition>using helios::engine::runtime::messaging::event::GameLoopEventBus =  helios::core::buffer::TypeIndexedDoubleBuffer&lt;
+      <memberdef kind="typedef" id="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1event_1a7eea036689ad2da20a7959568413f622" prot="public" static="no">
+        <type><ref refid="classhelios_1_1core_1_1container_1_1buffer_1_1TypeIndexedDoubleBuffer" kindref="compound">helios::core::container::buffer::TypeIndexedDoubleBuffer</ref>&lt; <ref refid="classhelios_1_1core_1_1data_1_1TypeIndexer" kindref="compound">helios::core::data::TypeIndexer</ref>&lt; <ref refid="structhelios_1_1engine_1_1runtime_1_1messaging_1_1event_1_1GameLoopEventBusGroup" kindref="compound">GameLoopEventBusGroup</ref> &gt; &gt;</type>
+        <definition>using helios::engine::runtime::messaging::event::GameLoopEventBus =  helios::core::container::buffer::TypeIndexedDoubleBuffer&lt;
         helios::core::data::TypeIndexer&lt;GameLoopEventBusGroup&gt;
     &gt;</definition>
         <argsstring></argsstring>
@@ -16,7 +16,7 @@
 <para>Double-buffered event bus for decoupled inter-system communication. </para>
         </briefdescription>
         <detaileddescription>
-<para><ref refid="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1event_1a59b7e7d4204d917672591bc8a383d9b4" kindref="member">GameLoopEventBus</ref> is a type alias for TypeIndexedDoubleBuffer configured with a dedicated index space for game loop events. It enables systems to publish events during their update phase, which become available for consumption after the buffer swap.</para>
+<para><ref refid="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1event_1a7eea036689ad2da20a7959568413f622" kindref="member">GameLoopEventBus</ref> is a type alias for TypeIndexedDoubleBuffer configured with a dedicated index space for game loop events. It enables systems to publish events during their update phase, which become available for consumption after the buffer swap.</para>
 <para>## Phase/Pass Event Model</para>
 <para>The GameLoop uses multiple event buses to control event visibility:</para>
 <para><itemizedlist>
@@ -33,7 +33,7 @@
 <para>// For events needed in subsequent phases, use phasePush() eventBus.phasePush&lt;SpawnRequestEvent&gt;(poolId, position); ```</para>
 <para><simplesect kind="warning"><para>Pass events (`push()`) are **always cleared** at phase boundaries. They are NOT available in subsequent phases. Use `phasePush()` for events that must survive into subsequent phases.</para>
 </simplesect>
-<simplesect kind="see"><para><ref refid="classhelios_1_1core_1_1buffer_1_1TypeIndexedDoubleBuffer" kindref="compound">helios::core::buffer::TypeIndexedDoubleBuffer</ref> </para>
+<simplesect kind="see"><para><ref refid="classhelios_1_1core_1_1container_1_1buffer_1_1TypeIndexedDoubleBuffer" kindref="compound">helios::core::container::buffer::TypeIndexedDoubleBuffer</ref> </para>
 </simplesect>
 <simplesect kind="see"><para>UpdateContext - Provides access to the <ref refid="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1event" kindref="compound">event</ref> bus in systems </para>
 </simplesect>

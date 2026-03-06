@@ -121,11 +121,11 @@ Files</h2></td></tr>
 <tr class="memdesc:ApplyDamageCommand_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command for requesting damage application to an entity. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md195"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md207"></a>
 helios::engine::mechanics::damage::commands</h1>
 <p>Damage-related commands for the command buffer.</p>
 <p>This namespace contains command classes used to request damage application through the engine's command system.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md196"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md208"></a>
 Commands</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -133,7 +133,7 @@ Commands</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">ApplyDamageCommand</span>  </td><td class="markdownTableBodyNone">Carries a <span class="tt">DamageContext</span> to request damage application to a target entity  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md197"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md209"></a>
 Usage</h1>
 <p>Commands are typically issued by <span class="tt">DamageOnCollisionSystem</span> when a collision between damageable entities is detected:</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> ctx = DamageContext{</div>
@@ -146,8 +146,8 @@ Usage</h1>
 <div class="line">    .damage = 10.0f</div>
 <div class="line">};</div>
 <div class="line"> </div>
-<div class="line">updateContext.commandBuffer().add&lt;ApplyDamageCommand&gt;(ctx);</div>
-</div><!-- fragment --><p>The command is routed to <span class="tt">HealthManager</span> via its <span class="tt">TypedCommandHandler&lt;ApplyDamageCommand&gt;</span> interface and processed during the manager flush phase.</p>
+<div class="line">updateContext.queueCommand&lt;ApplyDamageCommand&gt;(ctx);</div>
+</div><!-- fragment --><p>The command is routed to <span class="tt">HealthManager</span> via the registered command handler <span class="tt">submit</span> function and processed during the manager flush phase.</p>
 <hr  />
 <details >
 <summary >

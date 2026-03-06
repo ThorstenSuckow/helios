@@ -5,12 +5,7 @@ var dir_920d0445133e8943cdb9dc7f8f55cbd5 =
     [ "events", "dir_2acd3dbde9e4306e7ed99cd763cdf058.html", "dir_2acd3dbde9e4306e7ed99cd763cdf058" ],
     [ "policy", "dir_38edcdf75352a1f7569b186257daa969.html", "dir_38edcdf75352a1f7569b186257daa969" ],
     [ "scheduling", "dir_7930a9f2b08fecfe51e4aed0db65671b.html", "dir_7930a9f2b08fecfe51e4aed0db65671b" ],
+    [ "types", "dir_53a6fe781d443d71a3320cc04c83f898.html", "dir_53a6fe781d443d71a3320cc04c83f898" ],
     [ "_module.ixx", "helios_2engine_2runtime_2spawn_2__module_8ixx.html", null ],
-    [ "EmitterContext.ixx", "EmitterContext_8ixx.html", "EmitterContext_8ixx" ],
-    [ "SpawnCommandHandler.ixx", "SpawnCommandHandler_8ixx.html", "SpawnCommandHandler_8ixx" ],
-    [ "SpawnCommandHandlerRegistry.ixx", "SpawnCommandHandlerRegistry_8ixx.html", "SpawnCommandHandlerRegistry_8ixx" ],
-    [ "SpawnContext.ixx", "SpawnContext_8ixx.html", "SpawnContext_8ixx" ],
-    [ "SpawnManager.ixx", "SpawnManager_8ixx.html", "SpawnManager_8ixx" ],
-    [ "SpawnPlanCursor.ixx", "SpawnPlanCursor_8ixx.html", "SpawnPlanCursor_8ixx" ],
-    [ "SpawnProfile.ixx", "SpawnProfile_8ixx.html", "SpawnProfile_8ixx" ]
+    [ "SpawnManager.ixx", "SpawnManager_8ixx.html", "SpawnManager_8ixx" ]
 ];

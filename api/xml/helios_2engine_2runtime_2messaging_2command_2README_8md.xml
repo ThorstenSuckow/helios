@@ -27,8 +27,8 @@
 <codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/>SYSTEMS<sp/>(producers)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/>┌────────────────────────────────────────────────────────────┐<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
-<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>ctx.commandBuffer().add&lt;MoveCommand&gt;(entityHandle,<sp/>dir);<sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
-<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>ctx.commandBuffer().add&lt;DespawnCommand&gt;(eh,<sp/>profileId);<sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>ctx.queueCommand&lt;MoveCommand&gt;(entityHandle,<sp/>dir);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>ctx.queueCommand&lt;DespawnCommand&gt;(eh,<sp/>profileId);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/>└───────────────────────────┬────────────────────────────────┘<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
@@ -40,8 +40,8 @@
 <codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/>ROUTING<sp/>(per<sp/>command<sp/>type)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/>┌────────────────────────────────────────────────────────────┐<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
-<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>Handler<sp/>registered?<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
-<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/><sp/>YES<sp/>→<sp/>TypedCommandHandler&lt;Cmd&gt;::submit(cmd)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>Handler<sp/>registered<sp/>in<sp/>CommandHandlerRegistry?<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/><sp/>YES<sp/>→<sp/>registry.submit&lt;Cmd&gt;(cmd)<sp/>via<sp/>function<sp/>pointer<sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/><sp/>NO<sp/><sp/>→<sp/>cmd.execute(updateContext)<sp/><sp/>[if<sp/>ExecutableCommand]│<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/>└───────────────────────────┬────────────────────────────────┘<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
@@ -60,8 +60,9 @@
 <codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|-------|---------|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`CommandBuffer`<sp/>|<sp/>Abstract<sp/>base<sp/>for<sp/>command<sp/>buffers<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`CommandHandler`<sp/>|<sp/>Abstract<sp/>base<sp/>for<sp/>type-erased<sp/>handler<sp/>storage<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`TypedCommandHandler&lt;T&gt;`<sp/>|<sp/>Type-safe<sp/>handler<sp/>interface<sp/>for<sp/>a<sp/>specific<sp/>command<sp/>type<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`CommandHandlerRegistry`<sp/>|<sp/>Function-pointer<sp/>based<sp/>registry<sp/>for<sp/>command<sp/>handlers<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`CommandHandlerEntry`<sp/>|<sp/>Type-erased<sp/>entry<sp/>storing<sp/>owner<sp/>pointer<sp/>and<sp/>submit<sp/>function<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`CommandHandlerRef&lt;T&gt;`<sp/>|<sp/>Typed<sp/>reference<sp/>wrapper<sp/>for<sp/>invoking<sp/>registered<sp/>handlers<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`TypedCommandBuffer&lt;...Cmds&gt;`<sp/>|<sp/>Compile-time<sp/>typed<sp/>buffer<sp/>with<sp/>per-type<sp/>queues<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`EngineCommandBuffer`<sp/>|<sp/>Concrete<sp/>facade<sp/>pre-configured<sp/>with<sp/>all<sp/>engine<sp/>command<sp/>types<sp/>|</highlight></codeline>
 <codeline></codeline>
@@ -69,7 +70,7 @@
 <codeline></codeline>
 <codeline><highlight class="normal">During<sp/>`TypedCommandBuffer::flush()`,<sp/>each<sp/>command<sp/>type<sp/>is<sp/>processed<sp/>in<sp/>template<sp/>parameter<sp/>order:</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">1.<sp/>**Handler<sp/>route:**<sp/>If<sp/>a<sp/>`TypedCommandHandler&lt;Cmd&gt;`<sp/>is<sp/>registered<sp/>in<sp/>the<sp/>ResourceRegistry,<sp/>each<sp/>queued<sp/>command<sp/>is<sp/>submitted<sp/>to<sp/>the<sp/>handler<sp/>via<sp/>`submit()`.</highlight></codeline>
+<codeline><highlight class="normal">1.<sp/>**Handler<sp/>route:**<sp/>If<sp/>a<sp/>handler<sp/>is<sp/>registered<sp/>in<sp/>the<sp/>`CommandHandlerRegistry`,<sp/>each<sp/>queued<sp/>command<sp/>is<sp/>submitted<sp/>via<sp/>the<sp/>stored<sp/>function<sp/>pointer.</highlight></codeline>
 <codeline><highlight class="normal">2.<sp/>**Direct<sp/>execution:**<sp/>If<sp/>no<sp/>handler<sp/>is<sp/>registered<sp/>and<sp/>the<sp/>command<sp/>satisfies<sp/>the<sp/>`ExecutableCommand`<sp/>concept<sp/>(provides<sp/>a<sp/>noexcept<sp/>`execute(UpdateContext&amp;)`<sp/>method),<sp/>it<sp/>is<sp/>executed<sp/>directly.</highlight></codeline>
 <codeline><highlight class="normal">3.<sp/>**Assertion:**<sp/>If<sp/>neither<sp/>condition<sp/>holds,<sp/>an<sp/>assertion<sp/>fires<sp/>(misconfiguration).</highlight></codeline>
 <codeline></codeline>
@@ -77,24 +78,32 @@
 <codeline></codeline>
 <codeline><highlight class="normal">```cpp</highlight></codeline>
 <codeline><highlight class="normal">//<sp/>Systems<sp/>enqueue<sp/>commands<sp/>via<sp/>UpdateContext</highlight></codeline>
-<codeline><highlight class="normal">void<sp/>update(UpdateContext&amp;<sp/>ctx)<sp/>noexcept<sp/>override<sp/>{</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>ctx.commandBuffer().add&lt;DespawnCommand&gt;(entityHandle,<sp/>profileId);</highlight></codeline>
+<codeline><highlight class="normal">void<sp/>update(UpdateContext&amp;<sp/>ctx)<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>ctx.queueCommand&lt;DespawnCommand&gt;(entityHandle,<sp/>profileId);</highlight></codeline>
 <codeline><highlight class="normal">}</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">//<sp/>Managers<sp/>implement<sp/>TypedCommandHandler<sp/>for<sp/>commands<sp/>they<sp/>process</highlight></codeline>
-<codeline><highlight class="normal">class<sp/>SpawnManager<sp/>:<sp/>public<sp/>Manager,</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>public<sp/>TypedCommandHandler&lt;SpawnCommand&gt;,</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>public<sp/>TypedCommandHandler&lt;DespawnCommand&gt;<sp/>{</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Managers<sp/>provide<sp/>submit()<sp/>methods<sp/>for<sp/>commands<sp/>they<sp/>process</highlight></codeline>
+<codeline><highlight class="normal">class<sp/>SpawnManager<sp/>{</highlight></codeline>
+<codeline><highlight class="normal">public:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>using<sp/>EngineRoleTag<sp/>=<sp/>helios::engine::common::tags::ManagerRole;</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>bool<sp/>submit(SpawnCommand<sp/>cmd)<sp/>noexcept<sp/>override<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>bool<sp/>submit(const<sp/>SpawnCommand&amp;<sp/>cmd)<sp/>noexcept<sp/>{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spawnQueue_.push_back(cmd);</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return<sp/>true;</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>bool<sp/>submit(DespawnCommand<sp/>cmd)<sp/>noexcept<sp/>override<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>bool<sp/>submit(const<sp/>DespawnCommand&amp;<sp/>cmd)<sp/>noexcept<sp/>{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>despawnQueue_.push_back(cmd);</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return<sp/>true;</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Register<sp/>handlers<sp/>during<sp/>init()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>void<sp/>init(GameWorld&amp;<sp/>gameWorld)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gameWorld.registerCommandHandler&lt;SpawnCommand&gt;(*this);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gameWorld.registerCommandHandler&lt;DespawnCommand&gt;(*this);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>void<sp/>flush(UpdateContext&amp;<sp/>ctx)<sp/>noexcept<sp/>{<sp/>/*<sp/>batch<sp/>processing<sp/>*/<sp/>}</highlight></codeline>
 <codeline><highlight class="normal">};</highlight></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>
 <codeline></codeline>
@@ -104,8 +113,8 @@
 <codeline></codeline>
 <codeline><highlight class="normal">```cpp</highlight></codeline>
 <codeline><highlight class="normal">//<sp/>Phase<sp/>commit<sp/>sequence</highlight></codeline>
-<codeline><highlight class="normal">commandBuffer.flush(updateContext);<sp/><sp/><sp/>//<sp/>Commands<sp/>route<sp/>to<sp/>handlers</highlight></codeline>
-<codeline><highlight class="normal">gameWorld.flushManagers(updateContext);<sp/>//<sp/>Managers<sp/>process<sp/>queued<sp/>requests</highlight></codeline>
+<codeline><highlight class="normal">commandBuffer.flush(gameWorld,<sp/>updateContext);<sp/>//<sp/>Commands<sp/>route<sp/>to<sp/>handlers</highlight></codeline>
+<codeline><highlight class="normal">gameWorld.flushManagers(updateContext);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Managers<sp/>process<sp/>queued<sp/>requests</highlight></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>

@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="helios_2engine_2common_2tags_2README_8md" kind="file" language="Markdown">
+    <compoundname>helios/engine/common/tags/README.md</compoundname>
+    <innernamespace refid="namespacehelios_1_1engine_1_1common_1_1tags">helios::engine::common::tags</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>helios::engine::common::tags</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Compile-time<sp/>tag<sp/>types<sp/>for<sp/>engine<sp/>role<sp/>classification.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Tag<sp/>types<sp/>are<sp/>empty<sp/>structs<sp/>used<sp/>as<sp/>compile-time<sp/>markers.<sp/>A<sp/>class<sp/>declares</highlight></codeline>
+<codeline><highlight class="normal">its<sp/>engine<sp/>role<sp/>by<sp/>adding<sp/>a<sp/>nested<sp/>type<sp/>alias:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>EngineRoleTag<sp/>=<sp/>helios::engine::common::tags::SystemRole;</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>[concepts](../concepts/README.md)<sp/>module<sp/>detects<sp/>this<sp/>alias<sp/>via<sp/>`HasTag`</highlight></codeline>
+<codeline><highlight class="normal">and<sp/>uses<sp/>it<sp/>to<sp/>gate<sp/>registration<sp/>APIs,<sp/>preventing<sp/>accidental<sp/>registration<sp/>of</highlight></codeline>
+<codeline><highlight class="normal">types<sp/>that<sp/>happen<sp/>to<sp/>have<sp/>matching<sp/>method<sp/>signatures.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Tags</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Tag<sp/>|<sp/>Role<sp/>|<sp/>Detected<sp/>by<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-----|------|-------------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ManagerRole`<sp/>|<sp/>Batch-processing<sp/>manager<sp/>|<sp/>`IsManagerLike&lt;T&gt;`<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SystemRole`<sp/>|<sp/>Per-frame<sp/>game<sp/>logic<sp/>processor<sp/>|<sp/>`IsSystemLike&lt;T&gt;`<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">class<sp/>MySystem<sp/>{</highlight></codeline>
+<codeline><highlight class="normal">public:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>using<sp/>EngineRoleTag<sp/>=<sp/>helios::engine::common::tags::SystemRole;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>void<sp/>update(UpdateContext&amp;<sp/>ctx)<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>per-frame<sp/>logic</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>See<sp/>Also</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>[Concepts](../concepts/README.md)<sp/>—<sp/>Role<sp/>concepts<sp/>consuming<sp/>these<sp/>tags</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>[System](../../../../docs/core-concepts/ecs/system.md)<sp/>—<sp/>System<sp/>architecture</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>[Command<sp/>System](../../../../docs/core-concepts/command-system.md)<sp/>—<sp/>Manager<sp/>registration</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+<codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::engine::common::tags</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Compile-time<sp/>tag<sp/>types<sp/>for<sp/>engine<sp/>role<sp/>classification.</highlight></codeline>
+<codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
+<codeline></codeline>
+    </programlisting>
+    <location file="/tmp/h/include/helios/engine/common/tags/README.md"/>
+  </compounddef>
+</doxygen>

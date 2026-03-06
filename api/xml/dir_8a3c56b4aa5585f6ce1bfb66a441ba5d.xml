@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d" kind="dir">
+    <compoundname>concepts</compoundname>
+    <innerfile refid="helios_2engine_2common_2concepts_2__module_8ixx">helios/engine/common/concepts/_module.ixx</innerfile>
+    <innerfile refid="HasClear_8ixx">HasClear.ixx</innerfile>
+    <innerfile refid="HasInit_8ixx">HasInit.ixx</innerfile>
+    <innerfile refid="HasReset_8ixx">HasReset.ixx</innerfile>
+    <innerfile refid="HasSubmit_8ixx">HasSubmit.ixx</innerfile>
+    <innerfile refid="HasTag_8ixx">HasTag.ixx</innerfile>
+    <innerfile refid="HasUpdate_8ixx">HasUpdate.ixx</innerfile>
+    <innerfile refid="IsCommandBufferLike_8ixx">IsCommandBufferLike.ixx</innerfile>
+    <innerfile refid="IsCommandHandlerLike_8ixx">IsCommandHandlerLike.ixx</innerfile>
+    <innerfile refid="IsManagerLike_8ixx">IsManagerLike.ixx</innerfile>
+    <innerfile refid="IsSystemLike_8ixx">IsSystemLike.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d_1autotoc_md127">
+<title>helios::engine::common::concepts</title><para>Compile-time concepts for engine role classification and capability detection.</para>
+</sect1>
+<sect1 id="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d_1autotoc_md128">
+<title>Overview</title><para>This module provides C++20 concepts that constrain types for specific engine roles (System, Manager, CommandBuffer, CommandHandler). The concepts combine structural requirements (e.g. <computeroutput>flush()</computeroutput>, <computeroutput>update()</computeroutput>) with explicit opt-in via the <ref refid="dir_e2e03a8bd11d187a90561967ca820988" kindref="compound">tag system</ref>, preventing accidental registration of types that happen to have matching method signatures.</para>
+</sect1>
+<sect1 id="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d_1autotoc_md129">
+<title>Concepts</title><para><table rows="8" cols="3"><row>
+<entry thead="yes"><para>Concept  </para>
+</entry><entry thead="yes"><para>Requires  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>HasTag&lt;T, Tag&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>T::EngineRoleTag == Tag</computeroutput>  </para>
+</entry><entry thead="no"><para>Detects compile-time role tag  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>HasInit&lt;T&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>T::init(GameWorld&amp;)</computeroutput>  </para>
+</entry><entry thead="no"><para>Detects optional one-time initialization  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>HasUpdate&lt;T&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>T::update(UpdateContext&amp;)</computeroutput>  </para>
+</entry><entry thead="no"><para>Detects per-frame update capability  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>IsManagerLike&lt;T&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>flush(UpdateContext&amp;)</computeroutput> + <computeroutput>ManagerRole</computeroutput>  </para>
+</entry><entry thead="no"><para>Gates <computeroutput>GameWorld::registerResource&lt;T&gt;()</computeroutput>  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>IsSystemLike&lt;T&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>update(UpdateContext&amp;)</computeroutput> + <computeroutput>SystemRole</computeroutput>  </para>
+</entry><entry thead="no"><para>Gates <computeroutput>SystemRegistry::add&lt;T&gt;()</computeroutput>  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>IsCommandBufferLike&lt;T&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para>Derives from <computeroutput>CommandBuffer</computeroutput>  </para>
+</entry><entry thead="no"><para>Gates command buffer registration  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>IsCommandHandlerLike&lt;T&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para>Derives from <computeroutput>CommandHandler</computeroutput>  </para>
+</entry><entry thead="no"><para>Gates command handler registration  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d_1autotoc_md130">
+<title>Tag-Based Opt-In</title><para>Role concepts combine structural checks with a tag requirement:</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">concept<sp/></highlight><highlight class="normal">IsManagerLike<sp/>=<sp/></highlight><highlight class="keyword">requires</highlight><highlight class="normal">(T&amp;<sp/>t,<sp/>UpdateContext&amp;<sp/>ctx)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{<sp/>t.flush(ctx)<sp/>}<sp/>-&gt;<sp/>std::same_as&lt;void&gt;;</highlight></codeline>
+<codeline><highlight class="normal">}<sp/>&amp;&amp;<sp/>HasTag&lt;T,<sp/>ManagerRole&gt;;</highlight></codeline>
+</programlisting></para>
+<para>This means a type must both implement the required interface <bold>and</bold> declare <computeroutput>using EngineRoleTag = ManagerRole;</computeroutput> to be eligible for registration.</para>
+</sect1>
+<sect1 id="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d_1autotoc_md131">
+<title>See Also</title><para><itemizedlist>
+<listitem><para><ref refid="dir_e2e03a8bd11d187a90561967ca820988" kindref="compound">Tags</ref> — Role tag types</para>
+</listitem><listitem><para>System — System architecture</para>
+</listitem><listitem><para>Command System — Manager and handler registration</para>
+</listitem></itemizedlist>
+</para>
+<para><hruler/>
+ <details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/common/concepts/"/>
+  </compounddef>
+</doxygen>

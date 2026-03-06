@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_e2e03a8bd11d187a90561967ca820988" kind="dir">
+    <compoundname>tags</compoundname>
+    <innerfile refid="helios_2engine_2common_2tags_2__module_8ixx">helios/engine/common/tags/_module.ixx</innerfile>
+    <innerfile refid="CommandBufferRole_8ixx">CommandBufferRole.ixx</innerfile>
+    <innerfile refid="ManagerRole_8ixx">ManagerRole.ixx</innerfile>
+    <innerfile refid="SystemRole_8ixx">SystemRole.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_e2e03a8bd11d187a90561967ca820988_1autotoc_md137">
+<title>helios::engine::common::tags</title><para>Compile-time tag types for engine role classification.</para>
+</sect1>
+<sect1 id="dir_e2e03a8bd11d187a90561967ca820988_1autotoc_md138">
+<title>Overview</title><para>Tag types are empty structs used as compile-time markers. A class declares its engine role by adding a nested type alias:</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="keyword">using<sp/></highlight><highlight class="normal">EngineRoleTag<sp/>=<sp/><ref refid="structhelios_1_1engine_1_1common_1_1tags_1_1SystemRole" kindref="compound">helios::engine::common::tags::SystemRole</ref>;</highlight></codeline>
+</programlisting></para>
+<para>The <ref refid="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d" kindref="compound">concepts</ref> module detects this alias via <computeroutput>HasTag</computeroutput> and uses it to gate registration APIs, preventing accidental registration of types that happen to have matching method signatures.</para>
+</sect1>
+<sect1 id="dir_e2e03a8bd11d187a90561967ca820988_1autotoc_md139">
+<title>Tags</title><para><table rows="3" cols="3"><row>
+<entry thead="yes"><para>Tag  </para>
+</entry><entry thead="yes"><para>Role  </para>
+</entry><entry thead="yes"><para>Detected by  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ManagerRole</computeroutput>  </para>
+</entry><entry thead="no"><para>Batch-processing manager  </para>
+</entry><entry thead="no"><para><computeroutput>IsManagerLike&lt;T&gt;</computeroutput>  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>SystemRole</computeroutput>  </para>
+</entry><entry thead="no"><para>Per-frame game logic processor  </para>
+</entry><entry thead="no"><para><computeroutput>IsSystemLike&lt;T&gt;</computeroutput>  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_e2e03a8bd11d187a90561967ca820988_1autotoc_md140">
+<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">class<sp/></highlight><highlight class="normal">MySystem<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">EngineRoleTag<sp/>=<sp/>helios::engine::common::tags::SystemRole;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>update(UpdateContext&amp;<sp/>ctx)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>per-frame<sp/>logic</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_e2e03a8bd11d187a90561967ca820988_1autotoc_md141">
+<title>See Also</title><para><itemizedlist>
+<listitem><para><ref refid="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d" kindref="compound">Concepts</ref> — Role concepts consuming these tags</para>
+</listitem><listitem><para>System — System architecture</para>
+</listitem><listitem><para>Command System — Manager registration</para>
+</listitem></itemizedlist>
+</para>
+<para><hruler/>
+ <details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/common/tags/"/>
+  </compounddef>
+</doxygen>

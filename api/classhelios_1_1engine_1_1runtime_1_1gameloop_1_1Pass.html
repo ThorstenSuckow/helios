@@ -115,12 +115,6 @@ $(function() {
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass__inherit__graph.svg" width="183" height="154"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
-<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Collaboration diagram for helios::engine::runtime::gameloop::Pass:</div>
-<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass__coll__graph.svg" width="218" height="162"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -135,14 +129,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a5d87f9a34e42378dfbdea76367416646"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the configured commit point.  <br /></td></tr>
 <tr class="memitem:ad67143a03191d6f19c182f1a0bb6a815" id="r_ad67143a03191d6f19c182f1a0bb6a815"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad67143a03191d6f19c182f1a0bb6a815">shouldRun</a> (<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a> &amp;updateContext) const noexcept=0</td></tr>
 <tr class="memdesc:ad67143a03191d6f19c182f1a0bb6a815"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines if this pass should execute.  <br /></td></tr>
-<tr class="memitem:aac3bde2e9f42130cb11d3706f77732e2" id="r_aac3bde2e9f42130cb11d3706f77732e2"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... Args&gt; </td></tr>
-<tr class="memitem:aac3bde2e9f42130cb11d3706f77732e2 template"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html">Pass</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aac3bde2e9f42130cb11d3706f77732e2">addSystem</a> (Args &amp;&amp;... args)</td></tr>
-<tr class="memdesc:aac3bde2e9f42130cb11d3706f77732e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a system of type T to this pass.  <br /></td></tr>
+<tr class="memitem:abf6a02ccd97e0d1c247ac64c5524ea68" id="r_abf6a02ccd97e0d1c247ac64c5524ea68"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... Args&gt; <br />
+requires <a class="el" href="concepthelios_1_1engine_1_1common_1_1concepts_1_1IsSystemLike.html">helios::engine::common::concepts::IsSystemLike</a>&lt;T&gt;</td></tr>
+<tr class="memitem:abf6a02ccd97e0d1c247ac64c5524ea68 template"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html">Pass</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abf6a02ccd97e0d1c247ac64c5524ea68">addSystem</a> (Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:abf6a02ccd97e0d1c247ac64c5524ea68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a system of type T to this pass.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a250ed9ad716af2b60d3af697cc4bd415" id="r_a250ed9ad716af2b60d3af697cc4bd415"><td class="memItemLeft" align="right" valign="top"><a id="a250ed9ad716af2b60d3af697cc4bd415" name="a250ed9ad716af2b60d3af697cc4bd415"></a>
-<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry.html">helios::engine::runtime::world::SystemRegistry</a>&#160;</td><td class="memItemRight" valign="bottom"><b>systemRegistry_</b> {}</td></tr>
+<a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1world.html#ada19fc9a37afc91c5d10d92dac890b45">helios::engine::runtime::world::SystemRegistry</a>&#160;</td><td class="memItemRight" valign="bottom"><b>systemRegistry_</b> {}</td></tr>
 <tr class="memdesc:a250ed9ad716af2b60d3af697cc4bd415"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registry holding all systems for this pass. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
@@ -150,7 +145,7 @@ Protected Attributes</h2></td></tr>
 <p>A <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html" title="Abstract base class for game loop passes.">Pass</a> represents a logical grouping of systems executed sequentially within a <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html" title="Represents a phase in the game loop containing multiple passes.">Phase</a>. Concrete implementations (<a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1TypedPass.html" title="State-filtered pass that only executes in specific states.">TypedPass</a>) add state-based filtering via <a class="el" href="#ad67143a03191d6f19c182f1a0bb6a815" title="Determines if this pass should execute.">shouldRun()</a>.</p>
 <p>## Key Features</p>
 <ul>
-<li>**System Registration:** Systems are added via <a class="el" href="#aac3bde2e9f42130cb11d3706f77732e2" title="Adds a system of type T to this pass.">addSystem&lt;T&gt;()</a></li>
+<li>**System Registration:** Systems are added via <a class="el" href="#abf6a02ccd97e0d1c247ac64c5524ea68" title="Adds a system of type T to this pass.">addSystem&lt;T&gt;()</a></li>
 <li>**Commit Points:** Control when events/commands are synchronized</li>
 <li>**State Filtering:** Passes can be skipped based on game state</li>
 </ul>
@@ -160,7 +155,7 @@ Protected Attributes</h2></td></tr>
 <dd>
 System </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Pass_8ixx_source.html#l00047">47</a> of file <a class="el" href="Pass_8ixx_source.html">Pass.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Pass_8ixx_source.html#l00049">49</a> of file <a class="el" href="Pass_8ixx_source.html">Pass.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae7a1dd86b9d60b2ff6e01e57da7e993a" name="ae7a1dd86b9d60b2ff6e01e57da7e993a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae7a1dd86b9d60b2ff6e01e57da7e993a">&#9670;&#160;</a></span>~Pass()</h2>
@@ -223,22 +218,23 @@ System </dd></dl>
 <p>Implemented in <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1TypedPass.html#a933636dcf64735eda8863e94b54b0e57">helios::engine::runtime::gameloop::TypedPass&lt; StateType &gt;</a>.</p>
 
 <p class="reference">References <a class="el" href="#a5d87f9a34e42378dfbdea76367416646">commitPoint()</a>, and <a class="el" href="CommitPoint_8ixx_source.html#l00049">helios::engine::runtime::gameloop::PassEvents</a>.</p>
-<div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass_a5c6fbf481a72dde9ce1836df322ce1a3_cgraph.svg" width="531" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
-<a id="aac3bde2e9f42130cb11d3706f77732e2" name="aac3bde2e9f42130cb11d3706f77732e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aac3bde2e9f42130cb11d3706f77732e2">&#9670;&#160;</a></span>addSystem()</h2>
+<a id="abf6a02ccd97e0d1c247ac64c5524ea68" name="abf6a02ccd97e0d1c247ac64c5524ea68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf6a02ccd97e0d1c247ac64c5524ea68">&#9670;&#160;</a></span>addSystem()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, typename... Args&gt; </div>
+template&lt;typename T, typename... Args&gt; <br />
+requires <a class="el" href="concepthelios_1_1engine_1_1common_1_1concepts_1_1IsSystemLike.html">helios::engine::common::concepts::IsSystemLike</a>&lt;T&gt;</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -273,22 +269,22 @@ template&lt;typename T, typename... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html" title="Abstract base class for game loop passes.">Pass</a> for method chaining. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Pass_8ixx_source.html#l00108">108</a> of file <a class="el" href="Pass_8ixx_source.html">Pass.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Pass_8ixx_source.html#l00111">111</a> of file <a class="el" href="Pass_8ixx_source.html">Pass.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="Pass_8ixx_source.html#l00108">addSystem()</a>, and <a class="el" href="Pass_8ixx_source.html#l00053">systemRegistry_</a>.</p>
+<p class="reference">References <a class="el" href="Pass_8ixx_source.html#l00111">addSystem()</a>, and <a class="el" href="Pass_8ixx_source.html#l00055">systemRegistry_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Pass_8ixx_source.html#l00108">addSystem()</a>.</p>
-<div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<p class="reference">Referenced by <a class="el" href="Pass_8ixx_source.html#l00111">addSystem()</a>.</p>
+<div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass_abf6a02ccd97e0d1c247ac64c5524ea68_cgraph.svg" width="224" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-3-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass_aac3bde2e9f42130cb11d3706f77732e2_cgraph.svg" width="224" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-4-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass_aac3bde2e9f42130cb11d3706f77732e2_icgraph.svg" width="224" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass_abf6a02ccd97e0d1c247ac64c5524ea68_icgraph.svg" width="224" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -322,10 +318,10 @@ template&lt;typename T, typename... Args&gt; </div>
 <p>Implemented in <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1TypedPass.html#afc727acdc585b51bf9d9284655ae76ff">helios::engine::runtime::gameloop::TypedPass&lt; StateType &gt;</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="#a5c6fbf481a72dde9ce1836df322ce1a3">addCommitPoint()</a>.</p>
-<div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div id="dynsection-4-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass_a5d87f9a34e42378dfbdea76367416646_icgraph.svg" width="531" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
@@ -401,16 +397,16 @@ template&lt;typename T, typename... Args&gt; </div>
 <p class="reference">References <a class="el" href="#ad67143a03191d6f19c182f1a0bb6a815">shouldRun()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="#ad67143a03191d6f19c182f1a0bb6a815">shouldRun()</a>.</p>
-<div id="dynsection-6" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass_ad67143a03191d6f19c182f1a0bb6a815_cgraph.svg" width="219" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div id="dynsection-6" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-6-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-6-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass_ad67143a03191d6f19c182f1a0bb6a815_cgraph.svg" width="219" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-7" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-7-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass_ad67143a03191d6f19c182f1a0bb6a815_icgraph.svg" width="219" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 

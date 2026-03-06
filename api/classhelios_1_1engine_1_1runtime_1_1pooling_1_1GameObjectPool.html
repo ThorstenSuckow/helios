@@ -162,12 +162,12 @@ std::vector&lt; <a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandl
 <tr class="memitem:a266a99fd8a31439417b7a1c4ed759c42" id="r_a266a99fd8a31439417b7a1c4ed759c42"><td class="memItemLeft" align="right" valign="top"><a id="a266a99fd8a31439417b7a1c4ed759c42" name="a266a99fd8a31439417b7a1c4ed759c42"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>poolSize_</b> = 0</td></tr>
 <tr class="memdesc:a266a99fd8a31439417b7a1c4ed759c42"><td class="mdescLeft">&#160;</td><td class="mdescRight">The maximum number of objects this pool manages. <br /></td></tr>
-<tr class="memitem:a236b70f08d7397dbb5ab1179e4ef7293" id="r_a236b70f08d7397dbb5ab1179e4ef7293"><td class="memItemLeft" align="right" valign="top"><a id="a236b70f08d7397dbb5ab1179e4ef7293" name="a236b70f08d7397dbb5ab1179e4ef7293"></a>
-<a class="el" href="namespacehelios_1_1engine_1_1core_1_1data.html#a1876d5539fc6b911fbe54f8b56fd2ec0">helios::engine::core::data::EntityId</a>&#160;</td><td class="memItemRight" valign="bottom"><b>minEntityId_</b> = std::numeric_limits&lt;<a class="el" href="namespacehelios_1_1engine_1_1core_1_1data.html#a1876d5539fc6b911fbe54f8b56fd2ec0">helios::engine::core::data::EntityId</a>&gt;::max()</td></tr>
-<tr class="memdesc:a236b70f08d7397dbb5ab1179e4ef7293"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum EntityId in the pool (used for sparse array offset). <br /></td></tr>
-<tr class="memitem:ae01936e92700e878ac3e0122cf43514d" id="r_ae01936e92700e878ac3e0122cf43514d"><td class="memItemLeft" align="right" valign="top"><a id="ae01936e92700e878ac3e0122cf43514d" name="ae01936e92700e878ac3e0122cf43514d"></a>
-<a class="el" href="namespacehelios_1_1engine_1_1core_1_1data.html#a1876d5539fc6b911fbe54f8b56fd2ec0">helios::engine::core::data::EntityId</a>&#160;</td><td class="memItemRight" valign="bottom"><b>maxEntityId_</b> = std::numeric_limits&lt;<a class="el" href="namespacehelios_1_1engine_1_1core_1_1data.html#a1876d5539fc6b911fbe54f8b56fd2ec0">helios::engine::core::data::EntityId</a>&gt;::lowest()</td></tr>
-<tr class="memdesc:ae01936e92700e878ac3e0122cf43514d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum EntityId in the pool (used for sparse array sizing). <br /></td></tr>
+<tr class="memitem:ad71e6c20a4db4b660e1573cc4c8dfb4d" id="r_ad71e6c20a4db4b660e1573cc4c8dfb4d"><td class="memItemLeft" align="right" valign="top"><a id="ad71e6c20a4db4b660e1573cc4c8dfb4d" name="ad71e6c20a4db4b660e1573cc4c8dfb4d"></a>
+<a class="el" href="namespacehelios_1_1engine_1_1ecs_1_1types.html#ae84533c67f73dee28dde0ce536ecf85e">helios::engine::ecs::types::EntityId</a>&#160;</td><td class="memItemRight" valign="bottom"><b>minEntityId_</b> = std::numeric_limits&lt;<a class="el" href="namespacehelios_1_1engine_1_1ecs_1_1types.html#ae84533c67f73dee28dde0ce536ecf85e">helios::engine::ecs::types::EntityId</a>&gt;::max()</td></tr>
+<tr class="memdesc:ad71e6c20a4db4b660e1573cc4c8dfb4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum EntityId in the pool (used for sparse array offset). <br /></td></tr>
+<tr class="memitem:acc5c5532ee334ef4e5fe6c3e88e28362" id="r_acc5c5532ee334ef4e5fe6c3e88e28362"><td class="memItemLeft" align="right" valign="top"><a id="acc5c5532ee334ef4e5fe6c3e88e28362" name="acc5c5532ee334ef4e5fe6c3e88e28362"></a>
+<a class="el" href="namespacehelios_1_1engine_1_1ecs_1_1types.html#ae84533c67f73dee28dde0ce536ecf85e">helios::engine::ecs::types::EntityId</a>&#160;</td><td class="memItemRight" valign="bottom"><b>maxEntityId_</b> = std::numeric_limits&lt;<a class="el" href="namespacehelios_1_1engine_1_1ecs_1_1types.html#ae84533c67f73dee28dde0ce536ecf85e">helios::engine::ecs::types::EntityId</a>&gt;::lowest()</td></tr>
+<tr class="memdesc:acc5c5532ee334ef4e5fe6c3e88e28362"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum EntityId in the pool (used for sparse array sizing). <br /></td></tr>
 <tr class="memitem:ad239e54f9f8d46f7e3452809f991747f" id="r_ad239e54f9f8d46f7e3452809f991747f"><td class="memItemLeft" align="right" valign="top"><a id="ad239e54f9f8d46f7e3452809f991747f" name="ad239e54f9f8d46f7e3452809f991747f"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>delta_</b> = 0</td></tr>
 <tr class="memdesc:ad239e54f9f8d46f7e3452809f991747f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Offset for sparse array indexing (equals minEntityId_ after lock). <br /></td></tr>
@@ -186,9 +186,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>locked_</b> = false</
 <li>**release**: Swap-and-pop removal from active list, push to inactive</li>
 </ul>
 <p>GameObjects themselves are owned by GameWorld; this pool only tracks their EntityHandles.</p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000017">Todo</a></b></dt><dd>Prevent duplicate EntityHandles from being added to the pool. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000018">Todo</a></b></dt><dd>Prevent duplicate EntityHandles from being added to the pool. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00044">44</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00045">45</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a7eef46f5767afbd4e92e38a7938c0750" name="a7eef46f5767afbd4e92e38a7938c0750"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7eef46f5767afbd4e92e38a7938c0750">&#9670;&#160;</a></span>GameObjectPool()</h2>
@@ -222,9 +222,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>locked_</b> = false</
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00114">114</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00115">115</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00066">activeGameObjects_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00096">guid_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00071">inactiveGameObjects_</a>, and <a class="el" href="GameObjectPool_8ixx_source.html#l00076">poolSize_</a>.</p>
+<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00067">activeGameObjects_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00097">guid_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00072">inactiveGameObjects_</a>, and <a class="el" href="GameObjectPool_8ixx_source.html#l00077">poolSize_</a>.</p>
 
 </div>
 </div>
@@ -262,9 +262,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>locked_</b> = false</
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if an object was acquired, false if the pool is exhausted. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00153">153</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00154">154</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00066">activeGameObjects_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00054">activeIndex_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00091">delta_</a>, <a class="el" href="EntityHandle_8ixx_source.html#l00032">helios::engine::ecs::EntityHandle::entityId</a>, <a class="el" href="EntityTombstone_8ixx_source.html#l00026">helios::engine::core::data::EntityTombstone</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00071">inactiveGameObjects_</a>, <a class="el" href="EntityHandle_8ixx_source.html#l00039">helios::engine::ecs::EntityHandle::versionId</a>, and <a class="el" href="GameObjectPool_8ixx_source.html#l00061">versionIndex_</a>.</p>
+<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00067">activeGameObjects_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00055">activeIndex_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00092">delta_</a>, <a class="el" href="EntityHandle_8ixx_source.html#l00032">helios::engine::ecs::EntityHandle::entityId</a>, <a class="el" href="EntityTombstone_8ixx_source.html#l00026">helios::engine::ecs::types::EntityTombstone</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00072">inactiveGameObjects_</a>, <a class="el" href="EntityHandle_8ixx_source.html#l00039">helios::engine::ecs::EntityHandle::versionId</a>, and <a class="el" href="GameObjectPool_8ixx_source.html#l00062">versionIndex_</a>.</p>
 
 </div>
 </div>
@@ -294,11 +294,11 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>locked_</b> = false</
 <p>Returns the number of active game objects. </p>
 <dl class="section return"><dt>Returns</dt><dd>The number of active game objects. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00335">335</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00336">336</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00066">activeGameObjects_</a>.</p>
+<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00067">activeGameObjects_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="GameObjectPool_8ixx_source.html#l00210">addInactive()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="GameObjectPool_8ixx_source.html#l00211">addInactive()</a>.</p>
 <div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
@@ -334,9 +334,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>locked_</b> = false</
 <p>Returns a span of all active EntityHandles. </p>
 <dl class="section return"><dt>Returns</dt><dd>Span of active EntityHandles. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00362">362</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00363">363</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00066">activeGameObjects_</a>.</p>
+<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00067">activeGameObjects_</a>.</p>
 
 </div>
 </div>
@@ -373,9 +373,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>locked_</b> = false</
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if added successfully, false if pool is full. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00210">210</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00211">211</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00335">activeCount()</a>, <a class="el" href="EntityHandle_8ixx_source.html#l00032">helios::engine::ecs::EntityHandle::entityId</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00344">inactiveCount()</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00071">inactiveGameObjects_</a>, <a class="el" href="EntityHandle_8ixx_source.html#l00073">helios::engine::ecs::EntityHandle::isValid()</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00101">locked_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00086">maxEntityId_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00081">minEntityId_</a>, and <a class="el" href="GameObjectPool_8ixx_source.html#l00138">size()</a>.</p>
+<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00336">activeCount()</a>, <a class="el" href="EntityHandle_8ixx_source.html#l00032">helios::engine::ecs::EntityHandle::entityId</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00345">inactiveCount()</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00072">inactiveGameObjects_</a>, <a class="el" href="EntityHandle_8ixx_source.html#l00073">helios::engine::ecs::EntityHandle::isValid()</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00102">locked_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00087">maxEntityId_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00082">minEntityId_</a>, and <a class="el" href="GameObjectPool_8ixx_source.html#l00139">size()</a>.</p>
 <div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
@@ -411,9 +411,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>locked_</b> = false</
 <p>Returns the unique identifier of this pool. </p>
 <dl class="section return"><dt>Returns</dt><dd>The Guid assigned to this pool instance. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00129">129</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00130">130</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00096">guid_</a>.</p>
+<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00097">guid_</a>.</p>
 
 </div>
 </div>
@@ -443,11 +443,11 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>locked_</b> = false</
 <p>Returns the number of inactive game objects. </p>
 <dl class="section return"><dt>Returns</dt><dd>The number of inactive game objects. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00344">344</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00345">345</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00071">inactiveGameObjects_</a>.</p>
+<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00072">inactiveGameObjects_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="GameObjectPool_8ixx_source.html#l00210">addInactive()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="GameObjectPool_8ixx_source.html#l00211">addInactive()</a>.</p>
 <div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
@@ -483,9 +483,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>locked_</b> = false</
 <p>Returns a span of all inactive EntityHandles. </p>
 <dl class="section return"><dt>Returns</dt><dd>Span of inactive EntityHandles. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00353">353</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00354">354</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00071">inactiveGameObjects_</a>.</p>
+<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00072">inactiveGameObjects_</a>.</p>
 
 </div>
 </div>
@@ -515,9 +515,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>locked_</b> = false</
 <p>Checks if the pool is locked. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if the pool is locked and ready for acquire/release operations. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00183">183</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00184">184</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00101">locked_</a>.</p>
+<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00102">locked_</a>.</p>
 
 </div>
 </div>
@@ -547,9 +547,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>locked_</b> = false</
 <p>Locks the pool for acquire/release operations. </p>
 <p>After locking, no more EntityHandles can be added via `addInactive()`. The sparse arrays are sized based on the min/max EntityIds added. </p>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00193">193</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00194">194</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00054">activeIndex_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00091">delta_</a>, <a class="el" href="EntityTombstone_8ixx_source.html#l00026">helios::engine::core::data::EntityTombstone</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00101">locked_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00086">maxEntityId_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00081">minEntityId_</a>, and <a class="el" href="GameObjectPool_8ixx_source.html#l00061">versionIndex_</a>.</p>
+<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00055">activeIndex_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00092">delta_</a>, <a class="el" href="EntityTombstone_8ixx_source.html#l00026">helios::engine::ecs::types::EntityTombstone</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00102">locked_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00087">maxEntityId_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00082">minEntityId_</a>, and <a class="el" href="GameObjectPool_8ixx_source.html#l00062">versionIndex_</a>.</p>
 
 </div>
 </div>
@@ -586,9 +586,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>locked_</b> = false</
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the object was successfully released, false if the EntityHandle was not found in the GameWorld or not tracked as active. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00243">243</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00244">244</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00066">activeGameObjects_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00054">activeIndex_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00091">delta_</a>, <a class="el" href="EntityHandle_8ixx_source.html#l00032">helios::engine::ecs::EntityHandle::entityId</a>, <a class="el" href="EntityTombstone_8ixx_source.html#l00026">helios::engine::core::data::EntityTombstone</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00071">inactiveGameObjects_</a>, <a class="el" href="EntityHandle_8ixx_source.html#l00073">helios::engine::ecs::EntityHandle::isValid()</a>, <a class="el" href="EntityHandle_8ixx_source.html#l00039">helios::engine::ecs::EntityHandle::versionId</a>, and <a class="el" href="GameObjectPool_8ixx_source.html#l00061">versionIndex_</a>.</p>
+<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00067">activeGameObjects_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00055">activeIndex_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00092">delta_</a>, <a class="el" href="EntityHandle_8ixx_source.html#l00032">helios::engine::ecs::EntityHandle::entityId</a>, <a class="el" href="EntityTombstone_8ixx_source.html#l00026">helios::engine::ecs::types::EntityTombstone</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00072">inactiveGameObjects_</a>, <a class="el" href="EntityHandle_8ixx_source.html#l00073">helios::engine::ecs::EntityHandle::isValid()</a>, <a class="el" href="EntityHandle_8ixx_source.html#l00039">helios::engine::ecs::EntityHandle::versionId</a>, and <a class="el" href="GameObjectPool_8ixx_source.html#l00062">versionIndex_</a>.</p>
 <div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
@@ -631,9 +631,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>locked_</b> = false</
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if removed successfully, false if EntityHandle was not active. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00297">297</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00298">298</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00066">activeGameObjects_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00054">activeIndex_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00091">delta_</a>, <a class="el" href="EntityHandle_8ixx_source.html#l00032">helios::engine::ecs::EntityHandle::entityId</a>, <a class="el" href="EntityTombstone_8ixx_source.html#l00026">helios::engine::core::data::EntityTombstone</a>, <a class="el" href="EntityHandle_8ixx_source.html#l00073">helios::engine::ecs::EntityHandle::isValid()</a>, <a class="el" href="EntityHandle_8ixx_source.html#l00039">helios::engine::ecs::EntityHandle::versionId</a>, and <a class="el" href="GameObjectPool_8ixx_source.html#l00061">versionIndex_</a>.</p>
+<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00067">activeGameObjects_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00055">activeIndex_</a>, <a class="el" href="GameObjectPool_8ixx_source.html#l00092">delta_</a>, <a class="el" href="EntityHandle_8ixx_source.html#l00032">helios::engine::ecs::EntityHandle::entityId</a>, <a class="el" href="EntityTombstone_8ixx_source.html#l00026">helios::engine::ecs::types::EntityTombstone</a>, <a class="el" href="EntityHandle_8ixx_source.html#l00073">helios::engine::ecs::EntityHandle::isValid()</a>, <a class="el" href="EntityHandle_8ixx_source.html#l00039">helios::engine::ecs::EntityHandle::versionId</a>, and <a class="el" href="GameObjectPool_8ixx_source.html#l00062">versionIndex_</a>.</p>
 <div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-5-summary" class="dynsummary" style="display:block;">
 </div>
@@ -669,11 +669,11 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>locked_</b> = false</
 <p>Returns the maximum capacity of this pool. </p>
 <dl class="section return"><dt>Returns</dt><dd>The pool size specified at construction. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00138">138</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPool_8ixx_source.html#l00139">139</a> of file <a class="el" href="GameObjectPool_8ixx_source.html">GameObjectPool.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00076">poolSize_</a>.</p>
+<p class="reference">References <a class="el" href="GameObjectPool_8ixx_source.html#l00077">poolSize_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="GameObjectPool_8ixx_source.html#l00210">addInactive()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="GameObjectPool_8ixx_source.html#l00211">addInactive()</a>.</p>
 <div id="dynsection-6" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-6-summary" class="dynsummary" style="display:block;">
 </div>

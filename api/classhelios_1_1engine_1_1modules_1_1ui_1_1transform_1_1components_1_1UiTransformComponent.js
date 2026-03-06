@@ -14,6 +14,6 @@ var classhelios_1_1engine_1_1modules_1_1ui_1_1transform_1_1components_1_1UiTrans
     [ "setAnchor", "classhelios_1_1engine_1_1modules_1_1ui_1_1transform_1_1components_1_1UiTransformComponent.html#acfdcc24db257ce971883f610f314b4a5", null ],
     [ "setOffsets", "classhelios_1_1engine_1_1modules_1_1ui_1_1transform_1_1components_1_1UiTransformComponent.html#af1bf881b9355621b0cfa408e9932ec64", null ],
     [ "setPivot", "classhelios_1_1engine_1_1modules_1_1ui_1_1transform_1_1components_1_1UiTransformComponent.html#aedbaf19d482b3a8e4a3d5ea573058fe2", null ],
-    [ "setViewportId", "classhelios_1_1engine_1_1modules_1_1ui_1_1transform_1_1components_1_1UiTransformComponent.html#a9cb6bb247a5e1e2f92a33b739b7471eb", null ],
-    [ "viewportId", "classhelios_1_1engine_1_1modules_1_1ui_1_1transform_1_1components_1_1UiTransformComponent.html#a1c5e102db6b0846e4e69c7c0e6fc98c0", null ]
+    [ "setViewportId", "classhelios_1_1engine_1_1modules_1_1ui_1_1transform_1_1components_1_1UiTransformComponent.html#adfbb2784724bad58b4cf399539c54240", null ],
+    [ "viewportId", "classhelios_1_1engine_1_1modules_1_1ui_1_1transform_1_1components_1_1UiTransformComponent.html#abc4bd5e5d76497566fa644bc03bb2a68", null ]
 ];

@@ -6,8 +6,8 @@ var module__helios_8engine_8mechanics_8timing_8components_8GameTimerBindingCompo
     [ "helios::engine::mechanics::timing::components::GameTimerBindingComponent::operator=", "module__helios_8engine_8mechanics_8timing_8components_8GameTimerBindingComponent.html#a0ddb70094440a2dfb4d823c5e09168b6", null ],
     [ "helios::engine::mechanics::timing::components::GameTimerBindingComponent::GameTimerBindingComponent", "module__helios_8engine_8mechanics_8timing_8components_8GameTimerBindingComponent.html#aaffabe91933d9a49f5cf1d3988ebed5a", null ],
     [ "helios::engine::mechanics::timing::components::GameTimerBindingComponent::operator=", "module__helios_8engine_8mechanics_8timing_8components_8GameTimerBindingComponent.html#a1774be431f8d0ed5dfde3e933edae7df", null ],
-    [ "helios::engine::mechanics::timing::components::GameTimerBindingComponent::setGameTimerId", "module__helios_8engine_8mechanics_8timing_8components_8GameTimerBindingComponent.html#a0aa148f8b7bdb2e855d910e19deee094", null ],
-    [ "helios::engine::mechanics::timing::components::GameTimerBindingComponent::gameTimerId", "module__helios_8engine_8mechanics_8timing_8components_8GameTimerBindingComponent.html#a01f797cd7d95a8aa7d6d2ecc7d230db3", null ],
+    [ "helios::engine::mechanics::timing::components::GameTimerBindingComponent::setGameTimerId", "module__helios_8engine_8mechanics_8timing_8components_8GameTimerBindingComponent.html#a0d4e3755d54caa6bbaa97248f46fb973", null ],
+    [ "helios::engine::mechanics::timing::components::GameTimerBindingComponent::gameTimerId", "module__helios_8engine_8mechanics_8timing_8components_8GameTimerBindingComponent.html#a9439005bd40f09e3698bd60616e9575a", null ],
     [ "helios::engine::mechanics::timing::components::GameTimerBindingComponent::setTimerRevision", "module__helios_8engine_8mechanics_8timing_8components_8GameTimerBindingComponent.html#ae28927e8c9525d9e609d6bd4cf9e1d47", null ],
     [ "helios::engine::mechanics::timing::components::GameTimerBindingComponent::timerRevision", "module__helios_8engine_8mechanics_8timing_8components_8GameTimerBindingComponent.html#a0e19e83a28af5df56cf837c70b9989ab", null ]
 ];

@@ -1,8 +1,8 @@
 var module__helios_8engine_8modules_8ui_8widgets_8components_8MenuComponent =
 [
     [ "MenuComponent", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1MenuComponent.html", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1MenuComponent" ],
-    [ "helios::engine::modules::ui::widgets::components::MenuComponent::setMenuId", "module__helios_8engine_8modules_8ui_8widgets_8components_8MenuComponent.html#af7f2fa6eb6b3e1859b287f70b94ad390", null ],
-    [ "helios::engine::modules::ui::widgets::components::MenuComponent::menuId", "module__helios_8engine_8modules_8ui_8widgets_8components_8MenuComponent.html#ac4a74bcfe4aa2861e4fedcf12cacd3fa", null ],
+    [ "helios::engine::modules::ui::widgets::components::MenuComponent::setMenuId", "module__helios_8engine_8modules_8ui_8widgets_8components_8MenuComponent.html#a5ed7c423b151b9b24c2ecc9d8fa65e16", null ],
+    [ "helios::engine::modules::ui::widgets::components::MenuComponent::menuId", "module__helios_8engine_8modules_8ui_8widgets_8components_8MenuComponent.html#a490ce6aeea46f06d0d67749df3566671", null ],
     [ "helios::engine::modules::ui::widgets::components::MenuComponent::setSelectedIndex", "module__helios_8engine_8modules_8ui_8widgets_8components_8MenuComponent.html#a7d80cb6aaeadf51fab05c6b485bd1dd7", null ],
     [ "helios::engine::modules::ui::widgets::components::MenuComponent::selectDefaultIndex", "module__helios_8engine_8modules_8ui_8widgets_8components_8MenuComponent.html#aee26a9b529b9ddd5bb43ce0b165d649a", null ],
     [ "helios::engine::modules::ui::widgets::components::MenuComponent::selectedIndex", "module__helios_8engine_8modules_8ui_8widgets_8components_8MenuComponent.html#a3145233a81e194fba402c4904a12293f", null ],

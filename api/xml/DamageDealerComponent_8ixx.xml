@@ -7,16 +7,8 @@
     <includes local="no">bit</includes>
     <includes local="no">cassert</includes>
     <includes local="no">helios/helios_config.h</includes>
-    <includes refid="CollisionLayer_8ixx" local="no">helios.engine.core.data.CollisionLayer</includes>
+    <includes refid="CollisionLayer_8ixx" local="no">helios.engine.modules.physics.collision.types.CollisionLayer</includes>
     <incdepgraph>
-      <node id="7">
-        <label>helios.engine.core.data.CollisionLayer</label>
-        <link refid="CollisionLayer_8ixx"/>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
-      </node>
       <node id="1">
         <label>DamageDealerComponent.ixx</label>
         <link refid="DamageDealerComponent_8ixx"/>
@@ -31,6 +23,14 @@
         <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>helios.engine.modules.physics.collision.types.CollisionLayer</label>
+        <link refid="CollisionLayer_8ixx"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
         </childnode>
       </node>
       <node id="2">
@@ -81,7 +81,7 @@
 <codeline lineno="12"><highlight class="normal"></highlight></codeline>
 <codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8mechanics_8damage_8components_8DamageDealerComponent" kindref="compound">helios.engine.mechanics.damage.components.DamageDealerComponent</ref>;</highlight></codeline>
 <codeline lineno="14"><highlight class="normal"></highlight></codeline>
-<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8core_8data_8CollisionLayer" kindref="compound">helios.engine.core.data.CollisionLayer</ref>;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8modules_8physics_8collision_8types_8CollisionLayer" kindref="compound">helios.engine.modules.physics.collision.types.CollisionLayer</ref>;</highlight></codeline>
 <codeline lineno="16"><highlight class="normal"></highlight></codeline>
 <codeline lineno="17"><highlight class="normal"></highlight></codeline>
 <codeline lineno="18"><highlight class="normal"></highlight></codeline>
@@ -103,7 +103,7 @@
 <codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
 <codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Damage<sp/>values<sp/>indexed<sp/>by<sp/>collision<sp/>layer.</highlight></codeline>
 <codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::array&lt;float,<sp/>helios::engine::core::data::MAX_COLLISION_LAYERS&gt;<sp/>damageRegistry_{};</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::array&lt;float,<sp/>helios::engine::modules::physics::collision::types::MAX_COLLISION_LAYERS&gt;<sp/>damageRegistry_{};</highlight></codeline>
 <codeline lineno="38"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="39"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
 <codeline lineno="40"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Whether<sp/>this<sp/>component<sp/>is<sp/>enabled.</highlight></codeline>

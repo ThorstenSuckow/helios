@@ -2,11 +2,11 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="GameLoopEventBus_8ixx" kind="file" language="C++">
     <compoundname>GameLoopEventBus.ixx</compoundname>
-    <includes refid="TypeIndexedDoubleBuffer_8ixx" local="no">helios.core.buffer.TypeIndexedDoubleBuffer</includes>
+    <includes refid="TypeIndexedDoubleBuffer_8ixx" local="no">helios.core.container.buffer.TypeIndexedDoubleBuffer</includes>
     <includes refid="TypeIndexer_8ixx" local="no">helios.core.data.TypeIndexer</includes>
     <incdepgraph>
       <node id="9">
-        <label>helios.core.buffer.DoubleBuffer</label>
+        <label>helios.core.container.buffer.DoubleBuffer</label>
         <link refid="DoubleBuffer_8ixx"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -15,16 +15,16 @@
         <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="6">
-        <label>helios.core.buffer.ReadBuffer</label>
+      <node id="7">
+        <label>helios.core.container.buffer.ReadBuffer</label>
         <link refid="ReadBuffer_8ixx"/>
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="8">
-        <label>helios.core.buffer.ReadWriteDoubleBuffer</label>
+      <node id="6">
+        <label>helios.core.container.buffer.ReadWriteDoubleBuffer</label>
         <link refid="ReadWriteDoubleBuffer_8ixx"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -34,13 +34,13 @@
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="6" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
       </node>
       <node id="2">
-        <label>helios.core.buffer.TypeIndexedDoubleBuffer</label>
+        <label>helios.core.container.buffer.TypeIndexedDoubleBuffer</label>
         <link refid="TypeIndexedDoubleBuffer_8ixx"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -59,12 +59,12 @@
         <childnode refid="10" relation="include">
         </childnode>
       </node>
-      <node id="7">
-        <label>helios.core.buffer.WriteBuffer</label>
+      <node id="8">
+        <label>helios.core.container.buffer.WriteBuffer</label>
         <link refid="WriteBuffer_8ixx"/>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="6" relation="include">
+        <childnode refid="7" relation="include">
         </childnode>
       </node>
       <node id="10">
@@ -115,7 +115,7 @@
 <codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8runtime_8messaging_8event_8GameLoopEventBus" kindref="compound">helios.engine.runtime.messaging.event.GameLoopEventBus</ref>;</highlight></codeline>
 <codeline lineno="8"><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8core_8data_8TypeIndexer" kindref="compound">helios.core.data.TypeIndexer</ref>;</highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8core_8buffer_8TypeIndexedDoubleBuffer" kindref="compound">helios.core.buffer.TypeIndexedDoubleBuffer</ref>;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8core_8container_8buffer_8TypeIndexedDoubleBuffer" kindref="compound">helios.core.container.buffer.TypeIndexedDoubleBuffer</ref>;</highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
 <codeline lineno="12"><highlight class="normal"></highlight></codeline>
 <codeline lineno="13" refid="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1event" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1event" kindref="compound">helios::engine::runtime::messaging::event</ref><sp/>{</highlight></codeline>
@@ -201,11 +201,11 @@
 <codeline lineno="93"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>They<sp/>are<sp/>NOT<sp/>available<sp/>in<sp/>subsequent<sp/>phases.<sp/>Use<sp/>`phasePush()`<sp/>for</highlight></codeline>
 <codeline lineno="94"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>events<sp/>that<sp/>must<sp/>survive<sp/>into<sp/>subsequent<sp/>phases.</highlight></codeline>
 <codeline lineno="95"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="96"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>helios::core::buffer::TypeIndexedDoubleBuffer</highlight></codeline>
+<codeline lineno="96"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>helios::core::container::buffer::TypeIndexedDoubleBuffer</highlight></codeline>
 <codeline lineno="97"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>UpdateContext<sp/>-<sp/>Provides<sp/>access<sp/>to<sp/>the<sp/>event<sp/>bus<sp/>in<sp/>systems</highlight></codeline>
 <codeline lineno="98"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>GameLoop<sp/>-<sp/>Manages<sp/>event<sp/>bus<sp/>lifecycle<sp/>and<sp/>commit<sp/>points</highlight></codeline>
 <codeline lineno="99"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="100" refid="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1event_1a59b7e7d4204d917672591bc8a383d9b4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1event_1a59b7e7d4204d917672591bc8a383d9b4" kindref="member">GameLoopEventBus</ref><sp/>=<sp/><ref refid="classhelios_1_1core_1_1buffer_1_1TypeIndexedDoubleBuffer" kindref="compound">helios::core::buffer::TypeIndexedDoubleBuffer</ref>&lt;</highlight></codeline>
+<codeline lineno="100" refid="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1event_1a7eea036689ad2da20a7959568413f622" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1event_1a7eea036689ad2da20a7959568413f622" kindref="member">GameLoopEventBus</ref><sp/>=<sp/><ref refid="classhelios_1_1core_1_1container_1_1buffer_1_1TypeIndexedDoubleBuffer" kindref="compound">helios::core::container::buffer::TypeIndexedDoubleBuffer</ref>&lt;</highlight></codeline>
 <codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1core_1_1data_1_1TypeIndexer" kindref="compound">helios::core::data::TypeIndexer&lt;GameLoopEventBusGroup&gt;</ref></highlight></codeline>
 <codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/>&gt;;</highlight></codeline>
 <codeline lineno="103"><highlight class="normal"></highlight></codeline>

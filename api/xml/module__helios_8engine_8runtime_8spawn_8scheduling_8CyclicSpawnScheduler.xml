@@ -6,9 +6,9 @@
     <innerclass refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1RuleConfig" prot="public">helios::engine::runtime::spawn::scheduling::RuleConfig</innerclass>
     <innerclass refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler" prot="public">helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler</innerclass>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="structhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1RuleConfig_1a221d6807202e36ca4fdae48c6fe4380a" prot="public" static="no" mutable="no">
-        <type><ref refid="namespacehelios_1_1engine_1_1core_1_1data_1a1bb1078074b84d8536a3d74c2d29d150" kindref="member">helios::engine::core::data::SpawnProfileId</ref></type>
-        <definition>helios::engine::core::data::SpawnProfileId helios::engine::runtime::spawn::scheduling::RuleConfig::spawnProfileId</definition>
+      <memberdef kind="variable" id="structhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1RuleConfig_1aeabc5fcda6144cf0e0a16bb5c12fa475" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1types_1adbee7d14f4c127a65914c192c3e18162" kindref="member">helios::engine::runtime::spawn::types::SpawnProfileId</ref></type>
+        <definition>helios::engine::runtime::spawn::types::SpawnProfileId helios::engine::runtime::spawn::scheduling::RuleConfig::spawnProfileId</definition>
         <argsstring></argsstring>
         <name>spawnProfileId</name>
         <qualifiedname>helios::engine::runtime::spawn::scheduling::RuleConfig::spawnProfileId</qualifiedname>
@@ -20,7 +20,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" line="44" column="52" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" bodystart="44" bodyend="44"/>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" line="44" column="63" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" bodystart="44" bodyend="44"/>
       </memberdef>
       <memberdef kind="variable" id="structhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1RuleConfig_1aa8e2a6b81e2fb9e726327703c7a5f484" prot="public" static="no" mutable="no">
         <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRule" kindref="compound">helios::engine::runtime::spawn::policy::SpawnRule</ref> &gt;</type>
@@ -85,9 +85,9 @@
         </inbodydescription>
         <location file="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" line="107" column="16" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" bodystart="107" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler_1a44a6fb7ab7ff69429316c6363036e6c8" prot="private" static="no" mutable="no">
-        <type>std::unordered_map&lt; <ref refid="namespacehelios_1_1engine_1_1core_1_1data_1ae2eb48185c65a0137373184da6ddda8e" kindref="member">helios::engine::core::data::SpawnRuleId</ref>, <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRuleState" kindref="compound">helios::engine::runtime::spawn::policy::SpawnRuleState</ref> &gt;</type>
-        <definition>std::unordered_map&lt; helios::engine::core::data::SpawnRuleId, helios::engine::runtime::spawn::policy::SpawnRuleState &gt; helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler&lt; N &gt;::spawnRuleStates_</definition>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler_1a1dd82740c853df3af47315e4a4663439" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; <ref refid="namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1types_1ae716aefdd419832a328bfaf9b2c45ae9" kindref="member">helios::engine::runtime::spawn::types::SpawnRuleId</ref>, <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRuleState" kindref="compound">helios::engine::runtime::spawn::policy::SpawnRuleState</ref> &gt;</type>
+        <definition>std::unordered_map&lt; helios::engine::runtime::spawn::types::SpawnRuleId, helios::engine::runtime::spawn::policy::SpawnRuleState &gt; helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler&lt; N &gt;::spawnRuleStates_</definition>
         <argsstring></argsstring>
         <name>spawnRuleStates_</name>
         <qualifiedname>helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler::spawnRuleStates_</qualifiedname>
@@ -117,19 +117,23 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler_1a103d5ca8b224b755d1f4754d584363e1" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler_1a1d31c5fcafe3553798f4854423ae6954" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>void</type>
         <definition>void helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler&lt; N &gt;::evaluate</definition>
-        <argsstring>(const helios::engine::runtime::world::UpdateContext &amp;updateContext, const helios::engine::runtime::spawn::SpawnContext &amp;spawnContext) noexcept override</argsstring>
+        <argsstring>(const GameWorld &amp;gameWorld, const UpdateContext &amp;updateContext, const SpawnContext &amp;spawnContext) noexcept override</argsstring>
         <name>evaluate</name>
         <qualifiedname>helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler::evaluate</qualifiedname>
-        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler_1acc88dc618b35159f8dbfee05b226b432">evaluate</reimplements>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler_1aa00a29bf0abed746968e65e8239cb772">evaluate</reimplements>
         <param>
-          <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">UpdateContext</ref> &amp;</type>
           <declname>updateContext</declname>
         </param>
         <param>
-          <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnContext" kindref="compound">helios::engine::runtime::spawn::SpawnContext</ref> &amp;</type>
+          <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1types_1_1SpawnContext" kindref="compound">SpawnContext</ref> &amp;</type>
           <declname>spawnContext</declname>
         </param>
         <briefdescription>
@@ -138,6 +142,14 @@
         <detaileddescription>
 <para>Processes only the rule at the current cursor position. If the rule produces a spawn plan, the cursor advances to the next rule. Otherwise, the same rule is evaluated again next frame.</para>
 <para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The game world where evaluation takes place. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
 <parameternamelist>
 <parametername>updateContext</parametername>
 </parameternamelist>
@@ -158,17 +170,17 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" line="134" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" bodystart="134" bodyend="155"/>
-        <references refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler_1a4aa1af1b90ed5cfe2413f88aa5b4f0e8" compoundref="SpawnScheduler_8ixx" startline="58">helios::engine::runtime::spawn::scheduling::SpawnScheduler::scheduledSpawnPlans_</references>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" line="135" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" bodystart="135" bodyend="157"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler_1a4aa1af1b90ed5cfe2413f88aa5b4f0e8" compoundref="SpawnScheduler_8ixx" startline="61">helios::engine::runtime::spawn::scheduling::SpawnScheduler::scheduledSpawnPlans_</references>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler_1a67a0468dc4047525b11d00dabd84f9e1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler_1a5090dd44cb9247f19c916bd21de149c3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>CyclicSpawnScheduler &amp;</type>
         <definition>CyclicSpawnScheduler &amp; helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler&lt; N &gt;::addRule</definition>
-        <argsstring>(const helios::engine::core::data::SpawnProfileId spawnProfileId, std::unique_ptr&lt; helios::engine::runtime::spawn::policy::SpawnRule &gt; spawnRule)</argsstring>
+        <argsstring>(const helios::engine::runtime::spawn::types::SpawnProfileId spawnProfileId, std::unique_ptr&lt; helios::engine::runtime::spawn::policy::SpawnRule &gt; spawnRule)</argsstring>
         <name>addRule</name>
         <qualifiedname>helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler::addRule</qualifiedname>
         <param>
-          <type>const <ref refid="namespacehelios_1_1engine_1_1core_1_1data_1a1bb1078074b84d8536a3d74c2d29d150" kindref="member">helios::engine::core::data::SpawnProfileId</ref></type>
+          <type>const <ref refid="namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1types_1adbee7d14f4c127a65914c192c3e18162" kindref="member">helios::engine::runtime::spawn::types::SpawnProfileId</ref></type>
           <declname>spawnProfileId</declname>
         </param>
         <param>
@@ -207,17 +219,17 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" line="171" column="30" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" bodystart="171" bodyend="190"/>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" line="173" column="30" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" bodystart="173" bodyend="192"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler_1a49245e938da1b02443555ffdd2b57c53" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler_1a5244f5c9bf0019ad74b98f34176610b7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>void</type>
         <definition>void helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler&lt; N &gt;::commit</definition>
-        <argsstring>(const helios::engine::core::data::SpawnRuleId spawnRuleId, const size_t spawnCount) noexcept override</argsstring>
+        <argsstring>(const helios::engine::runtime::spawn::types::SpawnRuleId spawnRuleId, const size_t spawnCount) noexcept override</argsstring>
         <name>commit</name>
         <qualifiedname>helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler::commit</qualifiedname>
-        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler_1a7a7feaf2f36c3e38b880e183e3458749">commit</reimplements>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler_1ab51ae6cb6c675ecd2dce5b91a748fb8c">commit</reimplements>
         <param>
-          <type>const <ref refid="namespacehelios_1_1engine_1_1core_1_1data_1ae2eb48185c65a0137373184da6ddda8e" kindref="member">helios::engine::core::data::SpawnRuleId</ref></type>
+          <type>const <ref refid="namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1types_1ae716aefdd419832a328bfaf9b2c45ae9" kindref="member">helios::engine::runtime::spawn::types::SpawnRuleId</ref></type>
           <declname>spawnRuleId</declname>
         </param>
         <param>
@@ -250,7 +262,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" line="201" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" bodystart="201" bodyend="213"/>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" line="203" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" bodystart="203" bodyend="215"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler_1a78aaa4935e379c7339cd01939a70c0d0" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>void</type>
@@ -267,7 +279,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" line="221" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" bodystart="221" bodyend="231"/>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" line="223" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" bodystart="223" bodyend="233"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

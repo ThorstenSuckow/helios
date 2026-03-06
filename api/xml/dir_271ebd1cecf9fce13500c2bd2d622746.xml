@@ -2,27 +2,28 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="dir_271ebd1cecf9fce13500c2bd2d622746" kind="dir">
     <compoundname>world</compoundname>
+    <innerdir refid="dir_df38970a8efac170832e6f74abc919d4">types</innerdir>
     <innerfile refid="helios_2engine_2runtime_2world_2__module_8ixx">helios/engine/runtime/world/_module.ixx</innerfile>
     <innerfile refid="GameWorld_8ixx">GameWorld.ixx</innerfile>
     <innerfile refid="Level_8ixx">Level.ixx</innerfile>
     <innerfile refid="Manager_8ixx">Manager.ixx</innerfile>
+    <innerfile refid="ManagerRegistry_8ixx">ManagerRegistry.ixx</innerfile>
     <innerfile refid="ResourceRegistry_8ixx">ResourceRegistry.ixx</innerfile>
     <innerfile refid="Session_8ixx">Session.ixx</innerfile>
     <innerfile refid="System_8ixx">System.ixx</innerfile>
     <innerfile refid="SystemRegistry_8ixx">SystemRegistry.ixx</innerfile>
-    <innerfile refid="TypedSystem_8ixx">TypedSystem.ixx</innerfile>
     <innerfile refid="UpdateContext_8ixx">UpdateContext.ixx</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_271ebd1cecf9fce13500c2bd2d622746_1autotoc_md726">
+<sect1 id="dir_271ebd1cecf9fce13500c2bd2d622746_1autotoc_md738">
 <title>helios::engine::runtime::world</title><para>World state management, resource registry, and per-frame update context.</para>
 </sect1>
-<sect1 id="dir_271ebd1cecf9fce13500c2bd2d622746_1autotoc_md727">
+<sect1 id="dir_271ebd1cecf9fce13500c2bd2d622746_1autotoc_md739">
 <title>Overview</title><para>This module provides the core classes for managing runtime game state. <computeroutput>GameWorld</computeroutput> is the root container owning the entity system, the <computeroutput>ResourceRegistry</computeroutput> for type-indexed O(1) resource access, the current <computeroutput>Level</computeroutput>, and the <computeroutput>Session</computeroutput>. <computeroutput>UpdateContext</computeroutput> provides the per-frame context passed to systems during updates.</para>
 </sect1>
-<sect1 id="dir_271ebd1cecf9fce13500c2bd2d622746_1autotoc_md728">
-<title>Key Classes</title><para><table rows="8" cols="2"><row>
+<sect1 id="dir_271ebd1cecf9fce13500c2bd2d622746_1autotoc_md740">
+<title>Key Classes</title><para><table rows="9" cols="2"><row>
 <entry thead="yes"><para>Class  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
 </entry></row>
@@ -32,7 +33,7 @@
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>ResourceRegistry</computeroutput>  </para>
-</entry><entry thead="no"><para>Type-indexed store for Managers, CommandBuffers, and CommandHandlers with O(1) lookup  </para>
+</entry><entry thead="no"><para>Type-indexed store for Managers and CommandBuffers with O(1) lookup  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>Session</computeroutput>  </para>
@@ -44,26 +45,28 @@
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>UpdateContext</computeroutput>  </para>
-</entry><entry thead="no"><para>Per-frame context with delta time, event buses, and command buffer  </para>
+</entry><entry thead="no"><para>Per-frame context with delta time, event buses, and <computeroutput>queueCommand&lt;T&gt;()</computeroutput>  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>SystemRegistry</computeroutput>  </para>
-</entry><entry thead="no"><para>Container for System instances within a pass  </para>
+</entry><entry thead="no"><para><computeroutput>ConceptModelRegistry&lt;System, SystemTypeId&gt;</computeroutput> alias for system storage  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ManagerRegistry</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>ConceptModelRegistry&lt;Manager, ResourceTypeId&gt;</computeroutput> alias for manager storage  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>Manager</computeroutput>  </para>
-</entry><entry thead="no"><para>Abstract base for deferred operation handlers  </para>
+</entry><entry thead="no"><para>Type-erased wrapper for deferred operation handlers (Concept/Model pattern)  </para>
 </entry></row>
 </table>
 </para>
 </sect1>
-<sect1 id="dir_271ebd1cecf9fce13500c2bd2d622746_1autotoc_md729">
+<sect1 id="dir_271ebd1cecf9fce13500c2bd2d622746_1autotoc_md741">
 <title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Create<sp/>world<sp/>and<sp/>register<sp/>resources</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref><sp/>gameWorld;</highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>poolMgr<sp/>=<sp/>gameWorld.<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a05c8f51c63b7e923c228b034be4fc208" kindref="member">resourceRegistry</ref>()</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a71c88e4711c542c493f9c41825f76a85" kindref="member">registerResource</ref>&lt;GameObjectPoolManager&gt;();</highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>spawnMgr<sp/>=<sp/>gameWorld.<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a05c8f51c63b7e923c228b034be4fc208" kindref="member">resourceRegistry</ref>()</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a71c88e4711c542c493f9c41825f76a85" kindref="member">registerResource</ref>&lt;SpawnManager&gt;();</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>poolMgr<sp/>=<sp/>gameWorld.registerResource&lt;GameObjectPoolManager&gt;();</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>spawnMgr<sp/>=<sp/>gameWorld.registerResource&lt;SpawnManager&gt;();</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal">gameWorld.<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aae71c0fe187189d167cb967181831740" kindref="member">init</ref>();<sp/></highlight><highlight class="comment">//<sp/>Initializes<sp/>all<sp/>Managers<sp/>in<sp/>registration<sp/>order</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>

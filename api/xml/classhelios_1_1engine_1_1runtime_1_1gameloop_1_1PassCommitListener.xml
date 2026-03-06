@@ -17,21 +17,25 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/gameloop/PassCommitListener.ixx" line="70" column="17"/>
+        <location file="/tmp/h/include/helios/engine/runtime/gameloop/PassCommitListener.ixx" line="73" column="17"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1PassCommitListener_1ad8b56d62719d7fd9849cc9eaa44b9679" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1PassCommitListener_1a5041b2ffdc873a7a569332a6ac7a25a5" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
         <type>void</type>
         <definition>virtual void helios::engine::runtime::gameloop::PassCommitListener::onPassCommit</definition>
-        <argsstring>(CommitPoint commitPoint, helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept=0</argsstring>
+        <argsstring>(CommitPoint commitPoint, GameWorld &amp;gameWorld, UpdateContext &amp;updateContext) noexcept=0</argsstring>
         <name>onPassCommit</name>
         <qualifiedname>helios::engine::runtime::gameloop::PassCommitListener::onPassCommit</qualifiedname>
-        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a4bf78e22f99e1d3028b50f4aa5ed9acd">onPassCommit</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a97acde952251d5e0eceffb3beb2a4f33">onPassCommit</reimplementedby>
         <param>
           <type><ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ec" kindref="member">CommitPoint</ref></type>
           <declname>commitPoint</declname>
         </param>
         <param>
-          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">UpdateContext</ref> &amp;</type>
           <declname>updateContext</declname>
         </param>
         <briefdescription>
@@ -46,6 +50,14 @@
 </parameternamelist>
 <parameterdescription>
 <para>The flags specifying which synchronization actions to perform. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The game world for which the pass occurred. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -67,7 +79,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/gameloop/PassCommitListener.ixx" line="92" column="22"/>
+        <location file="/tmp/h/include/helios/engine/runtime/gameloop/PassCommitListener.ixx" line="96" column="22"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -86,7 +98,7 @@
 <para><simplesect kind="par"><title>Integration with GameLoop</title><para></para>
 </simplesect>
 The <ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop" kindref="compound">GameLoop</ref> implements this interface and registers itself with each <ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase" kindref="compound">Phase</ref>. When a <ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass" kindref="compound">Pass</ref> with a commit point completes, the <ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase" kindref="compound">Phase</ref> calls `onPassCommit()`, allowing the <ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop" kindref="compound">GameLoop</ref> to perform the appropriate synchronization.</para>
-<para>```cpp // In <ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a4bf78e22f99e1d3028b50f4aa5ed9acd" kindref="member">GameLoop::onPassCommit()</ref>: if ((commitPoint &amp; <ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ecad42654403d0dfa55915ee7ba7fd7af0f" kindref="member">CommitPoint::PassEvents</ref>) == <ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ecad42654403d0dfa55915ee7ba7fd7af0f" kindref="member">CommitPoint::PassEvents</ref>) { passEventBus_.swapBuffers(); } if ((commitPoint &amp; <ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8eca7ce9ed9ce12e02385a7745e379e97ca8" kindref="member">CommitPoint::FlushCommands</ref>) == <ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8eca7ce9ed9ce12e02385a7745e379e97ca8" kindref="member">CommitPoint::FlushCommands</ref>) { commandBuffer_.flush(updateContext.gameWorld()); } if ((commitPoint &amp; <ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ecae58c90136fb14137d5f8d945b1b0db41" kindref="member">CommitPoint::FlushManagers</ref>) == <ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ecae58c90136fb14137d5f8d945b1b0db41" kindref="member">CommitPoint::FlushManagers</ref>) { updateContext.gameWorld().flushManagers(updateContext); } ```</para>
+<para>```cpp // In <ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a97acde952251d5e0eceffb3beb2a4f33" kindref="member">GameLoop::onPassCommit()</ref>: if ((commitPoint &amp; <ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ecad42654403d0dfa55915ee7ba7fd7af0f" kindref="member">CommitPoint::PassEvents</ref>) == <ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ecad42654403d0dfa55915ee7ba7fd7af0f" kindref="member">CommitPoint::PassEvents</ref>) { passEventBus_.swapBuffers(); } if ((commitPoint &amp; <ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8eca7ce9ed9ce12e02385a7745e379e97ca8" kindref="member">CommitPoint::FlushCommands</ref>) == <ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8eca7ce9ed9ce12e02385a7745e379e97ca8" kindref="member">CommitPoint::FlushCommands</ref>) { commandBuffer_.flush(updateContext.gameWorld()); } if ((commitPoint &amp; <ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ecae58c90136fb14137d5f8d945b1b0db41" kindref="member">CommitPoint::FlushManagers</ref>) == <ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ecae58c90136fb14137d5f8d945b1b0db41" kindref="member">CommitPoint::FlushManagers</ref>) { updateContext.gameWorld().flushManagers(updateContext); } ```</para>
 <para><simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop" kindref="compound">GameLoop</ref> </para>
 </simplesect>
 <simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase" kindref="compound">Phase</ref> </para>
@@ -109,9 +121,9 @@ The <ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop" kindre
         <link refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1PassCommitListener"/>
       </node>
     </inheritancegraph>
-    <location file="/tmp/h/include/helios/engine/runtime/gameloop/PassCommitListener.ixx" line="62" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/gameloop/PassCommitListener.ixx" bodystart="62" bodyend="95"/>
+    <location file="/tmp/h/include/helios/engine/runtime/gameloop/PassCommitListener.ixx" line="65" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/gameloop/PassCommitListener.ixx" bodystart="65" bodyend="100"/>
     <listofallmembers>
-      <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1PassCommitListener_1ad8b56d62719d7fd9849cc9eaa44b9679" prot="public" virt="pure-virtual"><scope>helios::engine::runtime::gameloop::PassCommitListener</scope><name>onPassCommit</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1PassCommitListener_1a5041b2ffdc873a7a569332a6ac7a25a5" prot="public" virt="pure-virtual"><scope>helios::engine::runtime::gameloop::PassCommitListener</scope><name>onPassCommit</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1PassCommitListener_1a0bf454935a73dcfd5273289d92f21c27" prot="public" virt="virtual"><scope>helios::engine::runtime::gameloop::PassCommitListener</scope><name>~PassCommitListener</name></member>
     </listofallmembers>
   </compounddef>

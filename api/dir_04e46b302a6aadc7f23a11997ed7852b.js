@@ -6,6 +6,5 @@ var dir_04e46b302a6aadc7f23a11997ed7852b =
     [ "types", "dir_53e433fa7cbef8c1ea8cd2fd638e1c02.html", "dir_53e433fa7cbef8c1ea8cd2fd638e1c02" ],
     [ "_module.ixx", "helios_2engine_2mechanics_2timing_2__module_8ixx.html", null ],
     [ "GameTimer.ixx", "GameTimer_8ixx.html", "GameTimer_8ixx" ],
-    [ "TimerCommandHandler.ixx", "TimerCommandHandler_8ixx.html", "TimerCommandHandler_8ixx" ],
     [ "TimerManager.ixx", "TimerManager_8ixx.html", "TimerManager_8ixx" ]
 ];

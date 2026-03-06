@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="concepthelios_1_1engine_1_1common_1_1concepts_1_1IsCommandBufferLike" kind="concept">
+    <compoundname>helios::engine::common::concepts::IsCommandBufferLike</compoundname>
+    <templateparamlist>
+      <param>
+        <type>class T</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;class T&gt;
+concept <ref refid="concepthelios_1_1engine_1_1common_1_1concepts_1_1IsCommandBufferLike" kindref="compound">helios::engine::common::concepts::IsCommandBufferLike</ref> =  requires(T&amp; t, <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref>&amp; gameWorld, <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">UpdateContext</ref>&amp; updateContext) {
+        {t.flush(gameWorld, updateContext) } -&gt; std::same_as&lt;void&gt;;
+    } &amp;&amp; HasClear&lt;T&gt;    </initializer>
+    <briefdescription>
+<para>Constrains types that can serve as concrete command buffers. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Requires `flush(<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref>&amp;, <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">UpdateContext</ref>&amp;) noexcept` and `clear() noexcept` (via HasClear). Types satisfying this concept can be wrapped by the type-erased CommandBuffer wrapper.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type to constrain.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para>CommandBuffer </para>
+</simplesect>
+<simplesect kind="see"><para>CommandBufferRole </para>
+</simplesect>
+<simplesect kind="see"><para>HasClear </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/common/concepts/IsCommandBufferLike.ixx" line="39" column="5"/>
+  </compounddef>
+</doxygen>

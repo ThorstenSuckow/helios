@@ -85,7 +85,7 @@
 <codeline></codeline>
 <codeline><highlight class="normal">```cpp</highlight></codeline>
 <codeline><highlight class="normal">//<sp/>Request<sp/>a<sp/>world<sp/>reset<sp/>(e.g.<sp/>from<sp/>a<sp/>game-over<sp/>state<sp/>listener)</highlight></codeline>
-<codeline><highlight class="normal">updateContext.commandBuffer().add&lt;WorldLifecycleCommand&gt;(WorldLifecycleAction::Reset);</highlight></codeline>
+<codeline><highlight class="normal">updateContext.queueCommand&lt;WorldLifecycleCommand&gt;(WorldLifecycleAction::Reset);</highlight></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">The<sp/>manager<sp/>is<sp/>auto-registered<sp/>by<sp/>`bootstrap::makeGameWorld()`<sp/>and<sp/>processes<sp/>pending<sp/>commands<sp/>during<sp/>its<sp/>flush<sp/>cycle.<sp/>A<sp/>`Reset`<sp/>action<sp/>calls<sp/>`GameWorld::reset()`,<sp/>which<sp/>reinitializes<sp/>all<sp/>managers<sp/>and<sp/>the<sp/>session.</highlight></codeline>

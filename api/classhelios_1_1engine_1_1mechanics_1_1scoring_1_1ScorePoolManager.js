@@ -1,9 +1,10 @@
 var classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager =
 [
-    [ "addScorePool", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager.html#a055dd5eeddf3e34a2663fb0017b2f041", null ],
-    [ "flush", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager.html#abf528fe8904b38cf52f31df8edf4592c", null ],
-    [ "init", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager.html#a04f62fb1b24bfc389acaa48fdd31293e", null ],
-    [ "reset", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager.html#ae26e54f8314f7f412565e2b0ec5d2dd4", null ],
-    [ "scorePool", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager.html#a68108b524ba7d30d4c281c05c777e3c0", null ],
-    [ "submit", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager.html#aa8a5216ee454dbdd0b8a69e519fdf977", null ]
+    [ "EngineRoleTag", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager.html#ab7ee5170384515bcd1e10b9d0d3fb847", null ],
+    [ "addScorePool", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager.html#ab3b7ab8af7ee587c19f4b4ae06252575", null ],
+    [ "flush", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager.html#a464ce115f5c161150c9f8a05f94a5c8d", null ],
+    [ "init", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager.html#a11f0d99c112383eefa72c628eebce0b8", null ],
+    [ "reset", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager.html#af02bc22a6de3990ee71359432688246c", null ],
+    [ "scorePool", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager.html#a024e2a3d9db1285eb1bdadb05f5b4d8e", null ],
+    [ "submit", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager.html#a78ca4aebf8b217e4fc25566c18e36cfd", null ]
 ];

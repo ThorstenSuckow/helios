@@ -116,22 +116,21 @@ $(function() {
 <code>#include &lt;span&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
 <code>#include &lt;unordered_map&gt;</code><br />
-<code>import <a class="el" href="helios_2engine_2core_2data_2__module_8ixx_source.html">helios.engine.core.data</a>;</code><br />
-<code>import <a class="el" href="EntityRegistry_8ixx_source.html">helios.engine.ecs.EntityRegistry</a>;</code><br />
-<code>import <a class="el" href="Session_8ixx_source.html">helios.engine.runtime.world.Session</a>;</code><br />
-<code>import <a class="el" href="EntityHandle_8ixx_source.html">helios.engine.ecs.EntityHandle</a>;</code><br />
-<code>import <a class="el" href="CommandHandler_8ixx_source.html">helios.engine.runtime.messaging.command.CommandHandler</a>;</code><br />
-<code>import <a class="el" href="TypedCommandHandler_8ixx_source.html">helios.engine.runtime.messaging.command.TypedCommandHandler</a>;</code><br />
-<code>import <a class="el" href="LogManager_8ixx_source.html">helios.util.log.LogManager</a>;</code><br />
-<code>import <a class="el" href="Logger_8ixx_source.html">helios.util.log.Logger</a>;</code><br />
+<code>import <a class="el" href="helios_2engine_2common_2concepts_2__module_8ixx_source.html">helios.engine.common.concepts</a>;</code><br />
 <code>import <a class="el" href="View_8ixx_source.html">helios.engine.ecs.View</a>;</code><br />
-<code>import <a class="el" href="GameObject_8ixx_source.html">helios.engine.ecs.GameObject</a>;</code><br />
-<code>import <a class="el" href="Manager_8ixx_source.html">helios.engine.runtime.world.Manager</a>;</code><br />
-<code>import <a class="el" href="ResourceRegistry_8ixx_source.html">helios.engine.runtime.world.ResourceRegistry</a>;</code><br />
-<code>import <a class="el" href="Guid_8ixx_source.html">helios.util.Guid</a>;</code><br />
-<code>import <a class="el" href="EntityManager_8ixx_source.html">helios.engine.ecs.EntityManager</a>;</code><br />
+<code>import <a class="el" href="Session_8ixx_source.html">helios.engine.runtime.world.Session</a>;</code><br />
 <code>import <a class="el" href="UpdateContext_8ixx_source.html">helios.engine.runtime.world.UpdateContext</a>;</code><br />
+<code>import <a class="el" href="EntityManager_8ixx_source.html">helios.engine.ecs.EntityManager</a>;</code><br />
+<code>import <a class="el" href="CommandHandlerRegistry_8ixx_source.html">helios.engine.runtime.messaging.command.CommandHandlerRegistry</a>;</code><br />
+<code>import <a class="el" href="ResourceRegistry_8ixx_source.html">helios.engine.runtime.world.ResourceRegistry</a>;</code><br />
+<code>import <a class="el" href="GameObject_8ixx_source.html">helios.engine.ecs.GameObject</a>;</code><br />
+<code>import <a class="el" href="EntityHandle_8ixx_source.html">helios.engine.ecs.EntityHandle</a>;</code><br />
+<code>import <a class="el" href="Manager_8ixx_source.html">helios.engine.runtime.world.Manager</a>;</code><br />
+<code>import <a class="el" href="Guid_8ixx_source.html">helios.util.Guid</a>;</code><br />
+<code>import <a class="el" href="LogManager_8ixx_source.html">helios.util.log.LogManager</a>;</code><br />
 <code>import <a class="el" href="Level_8ixx_source.html">helios.engine.runtime.world.Level</a>;</code><br />
+<code>import <a class="el" href="Logger_8ixx_source.html">helios.util.log.Logger</a>;</code><br />
+<code>import <a class="el" href="EntityRegistry_8ixx_source.html">helios.engine.ecs.EntityRegistry</a>;</code><br />
 </div><div class="textblock"><div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Include dependency graph for GameWorld.ixx:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
@@ -158,7 +157,7 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:acbc04f24078582c7d42b2085be5d5750" id="r_acbc04f24078582c7d42b2085be5d5750"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acbc04f24078582c7d42b2085be5d5750">HELIOS_LOG_SCOPE</a>&#160;&#160;&#160;&quot;helios::engine::runtime::world::GameWorld&quot;</td></tr>
+<tr class="memitem:acbc04f24078582c7d42b2085be5d5750" id="r_acbc04f24078582c7d42b2085be5d5750"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acbc04f24078582c7d42b2085be5d5750">HELIOS_LOG_SCOPE</a>&#160;&#160;&#160;&quot;GameWorld&quot;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Central game state container for entities, resources, and the active level. </p>
@@ -172,12 +171,12 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define HELIOS_LOG_SCOPE&#160;&#160;&#160;&quot;helios::engine::runtime::world::GameWorld&quot;</td>
+          <td class="memname">#define HELIOS_LOG_SCOPE&#160;&#160;&#160;&quot;GameWorld&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="GameWorld_8ixx_source.html#l00043">43</a> of file <a class="el" href="GameWorld_8ixx_source.html">GameWorld.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameWorld_8ixx_source.html#l00045">45</a> of file <a class="el" href="GameWorld_8ixx_source.html">GameWorld.ixx</a>.</p>
 
 </div>
 </div>

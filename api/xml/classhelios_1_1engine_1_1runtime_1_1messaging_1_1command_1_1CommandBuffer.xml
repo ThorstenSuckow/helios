@@ -1,50 +1,81 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
-  <compounddef id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer" kind="class" language="C++" prot="public" abstract="yes">
+  <compounddef id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer" kind="class" language="C++" prot="public">
     <compoundname>helios::engine::runtime::messaging::command::CommandBuffer</compoundname>
-    <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer" prot="public" virt="non-virtual">helios::engine::runtime::messaging::command::TypedCommandBuffer&lt; helios::engine::mechanics::combat::commands::Aim2DCommand, helios::engine::mechanics::combat::commands::ShootCommand, helios::engine::mechanics::damage::commands::ApplyDamageCommand, helios::engine::modules::physics::motion::commands::Move2DCommand, helios::engine::modules::physics::motion::commands::SteeringCommand, helios::engine::mechanics::scoring::commands::UpdateScoreCommand, helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand, helios::engine::runtime::spawn::commands::SpawnCommand, helios::engine::runtime::spawn::commands::DespawnCommand, helios::engine::state::commands::StateCommand&lt; helios::engine::mechanics::gamestate::types::GameState &gt;, helios::engine::state::commands::StateCommand&lt; helios::engine::mechanics::match::types::MatchState &gt;, helios::engine::modules::ui::commands::UiActionCommand, helios::engine::mechanics::timing::commands::TimerControlCommand, helios::engine::mechanics::lifecycle::commands::WorldLifecycleCommand &gt;</derivedcompoundref>
-    <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer" prot="public" virt="non-virtual">helios::engine::runtime::messaging::command::EngineCommandBuffer</derivedcompoundref>
-    <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer" prot="public" virt="non-virtual">helios::engine::runtime::messaging::command::TypedCommandBuffer&lt; CommandTypes &gt;</derivedcompoundref>
-    <sectiondef kind="public-func">
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1ad30a48c89c776560b95ce2e0c1244be4" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
-        <type></type>
-        <definition>virtual helios::engine::runtime::messaging::command::CommandBuffer::~CommandBuffer</definition>
-        <argsstring>()=default</argsstring>
-        <name>~CommandBuffer</name>
-        <qualifiedname>helios::engine::runtime::messaging::command::CommandBuffer::~CommandBuffer</qualifiedname>
+    <innerclass refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1_1Concept" prot="private">helios::engine::runtime::messaging::command::CommandBuffer::Concept</innerclass>
+    <innerclass refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1_1Model" prot="private">helios::engine::runtime::messaging::command::CommandBuffer::Model</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1af0d5ab615ba3a0f2ab48e63d45cb9d73" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; Concept &gt;</type>
+        <definition>std::unique_ptr&lt;Concept&gt; helios::engine::runtime::messaging::command::CommandBuffer::pimpl_</definition>
+        <argsstring></argsstring>
+        <name>pimpl_</name>
+        <qualifiedname>helios::engine::runtime::messaging::command::CommandBuffer::pimpl_</qualifiedname>
         <briefdescription>
-<para>Virtual destructor for proper polymorphic cleanup. </para>
+<para>Owning pointer to the type-erased command buffer. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/CommandBuffer.ixx" line="38" column="17"/>
+        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/CommandBuffer.ixx" line="100" column="25" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/CommandBuffer.ixx" bodystart="100" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a8535f5c29283dac178b3b3d2449210d4" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
-        <type>void</type>
-        <definition>virtual void helios::engine::runtime::messaging::command::CommandBuffer::flush</definition>
-        <argsstring>(helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept=0</argsstring>
-        <name>flush</name>
-        <qualifiedname>helios::engine::runtime::messaging::command::CommandBuffer::flush</qualifiedname>
-        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1a4f2f838aa913f20181fc0cda507563ef">flush</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a1e035c4076ab5658d6cac38badec66ce">flush</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a1e035c4076ab5658d6cac38badec66ce">flush</reimplementedby>
-        <param>
-          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
-          <declname>updateContext</declname>
-        </param>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a3e0a0b9e4826ed2f25f19e1f1b149049" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::runtime::messaging::command::CommandBuffer::CommandBuffer</definition>
+        <argsstring>()=default</argsstring>
+        <name>CommandBuffer</name>
+        <qualifiedname>helios::engine::runtime::messaging::command::CommandBuffer::CommandBuffer</qualifiedname>
         <briefdescription>
-<para>Executes all queued commands and clears the buffer. </para>
         </briefdescription>
         <detaileddescription>
-<para>Commands are routed to their registered <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandHandler" kindref="compound">TypedCommandHandler</ref> if available, otherwise executed directly via their `execute()` method.</para>
-<para><parameterlist kind="param"><parameteritem>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/CommandBuffer.ixx" line="104" column="9"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a20183b1dc9a8c3099fda8b4019fa46ea">CommandBuffer</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a0efa861c2a01c7787a8398a3b04b4be8">CommandBuffer</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1ad71fc2a68aa47d91d7ef64e723f9da71">operator=</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1aa332eb76d651e5e7e558f7ecf4010372">operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a36b8adf877bcfc2614d7ef8d5676ee26" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>helios::engine::runtime::messaging::command::CommandBuffer::CommandBuffer</definition>
+        <argsstring>(T cmdBuffer)</argsstring>
+        <name>CommandBuffer</name>
+        <qualifiedname>helios::engine::runtime::messaging::command::CommandBuffer::CommandBuffer</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>cmdBuffer</declname>
+        </param>
+    <requiresclause>IsCommandBufferLike&lt;T&gt;    </requiresclause>
+        <briefdescription>
+<para>Constructs a <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer" kindref="compound">CommandBuffer</ref> wrapping the given concrete buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Ownership of the buffer is transferred into a heap-allocated Model&lt;T&gt;. The concrete type is erased after construction.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
-<parametername>updateContext</parametername>
+<parametername>T</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The current frame&apos;s update context. </para>
+<para>The concrete buffer type. Must satisfy IsCommandBufferLike.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cmdBuffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The buffer instance to wrap. Moved into the wrapper. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -52,69 +83,217 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/CommandBuffer.ixx" line="48" column="22"/>
+        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/CommandBuffer.ixx" line="118" column="18" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/CommandBuffer.ixx" bodystart="118" bodyend="118"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a79125d01f21544304762287af62d176a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
-        <type>void</type>
-        <definition>virtual void helios::engine::runtime::messaging::command::CommandBuffer::clear</definition>
-        <argsstring>() noexcept=0</argsstring>
-        <name>clear</name>
-        <qualifiedname>helios::engine::runtime::messaging::command::CommandBuffer::clear</qualifiedname>
-        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1a10b84b9f9d1099022f35fb8f839a4f90">clear</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a8e0ac1bed42dc63df2b3f8c270e35758">clear</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a8e0ac1bed42dc63df2b3f8c270e35758">clear</reimplementedby>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a0efa861c2a01c7787a8398a3b04b4be8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::runtime::messaging::command::CommandBuffer::CommandBuffer</definition>
+        <argsstring>(const CommandBuffer &amp;)=delete</argsstring>
+        <name>CommandBuffer</name>
+        <qualifiedname>helios::engine::runtime::messaging::command::CommandBuffer::CommandBuffer</qualifiedname>
+        <param>
+          <type>const CommandBuffer &amp;</type>
+        </param>
         <briefdescription>
-<para>Discards all queued commands without executing them. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/CommandBuffer.ixx" line="53" column="22"/>
+        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/CommandBuffer.ixx" line="120" column="9"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a3e0a0b9e4826ed2f25f19e1f1b149049">CommandBuffer</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1aa332eb76d651e5e7e558f7ecf4010372" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a3e0a0b9e4826ed2f25f19e1f1b149049" kindref="member">CommandBuffer</ref> &amp;</type>
+        <definition>CommandBuffer &amp; helios::engine::runtime::messaging::command::CommandBuffer::operator=</definition>
+        <argsstring>(const CommandBuffer &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>helios::engine::runtime::messaging::command::CommandBuffer::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a3e0a0b9e4826ed2f25f19e1f1b149049" kindref="member">CommandBuffer</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/CommandBuffer.ixx" line="121" column="23"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a3e0a0b9e4826ed2f25f19e1f1b149049">CommandBuffer</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1ad71fc2a68aa47d91d7ef64e723f9da71" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a3e0a0b9e4826ed2f25f19e1f1b149049" kindref="member">CommandBuffer</ref> &amp;</type>
+        <definition>CommandBuffer &amp; helios::engine::runtime::messaging::command::CommandBuffer::operator=</definition>
+        <argsstring>(CommandBuffer &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>helios::engine::runtime::messaging::command::CommandBuffer::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a3e0a0b9e4826ed2f25f19e1f1b149049" kindref="member">CommandBuffer</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/CommandBuffer.ixx" line="123" column="23"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a3e0a0b9e4826ed2f25f19e1f1b149049">CommandBuffer</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a20183b1dc9a8c3099fda8b4019fa46ea" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::runtime::messaging::command::CommandBuffer::CommandBuffer</definition>
+        <argsstring>(CommandBuffer &amp;&amp;) noexcept=default</argsstring>
+        <name>CommandBuffer</name>
+        <qualifiedname>helios::engine::runtime::messaging::command::CommandBuffer::CommandBuffer</qualifiedname>
+        <param>
+          <type>CommandBuffer &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/CommandBuffer.ixx" line="124" column="9"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a3e0a0b9e4826ed2f25f19e1f1b149049">CommandBuffer</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a80128451f19c3de35198be2f2c19edcd" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::messaging::command::CommandBuffer::flush</definition>
+        <argsstring>(GameWorld &amp;gameWorld, UpdateContext &amp;updateContext) noexcept</argsstring>
+        <name>flush</name>
+        <qualifiedname>helios::engine::runtime::messaging::command::CommandBuffer::flush</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Executes all queued commands and clears the buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Delegates to the wrapped buffer&apos;s `flush()`. Commands are routed to their registered handler if available, otherwise executed directly.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The game world providing the <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandlerRegistry" kindref="compound">CommandHandlerRegistry</ref>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current frame&apos;s update context.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="pre"><para>The <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer" kindref="compound">CommandBuffer</ref> must be initialized (not default-constructed). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/CommandBuffer.ixx" line="138" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/CommandBuffer.ixx" bodystart="138" bodyend="141"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a80128451f19c3de35198be2f2c19edcd" compoundref="CommandBuffer_8ixx" startline="138" endline="141">flush</references>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a80128451f19c3de35198be2f2c19edcd" compoundref="CommandBuffer_8ixx" startline="138" endline="141">flush</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a5436e83c56965b0b7b104a260ce3fb06" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::messaging::command::CommandBuffer::clear</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>clear</name>
+        <qualifiedname>helios::engine::runtime::messaging::command::CommandBuffer::clear</qualifiedname>
+        <briefdescription>
+<para>Discards all queued commands without executing them. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="pre"><para>The <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer" kindref="compound">CommandBuffer</ref> must be initialized. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/CommandBuffer.ixx" line="148" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/CommandBuffer.ixx" bodystart="148" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a1f3d114eea4036a7372e0f8657b8c871" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void *</type>
+        <definition>void * helios::engine::runtime::messaging::command::CommandBuffer::underlying</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>underlying</name>
+        <qualifiedname>helios::engine::runtime::messaging::command::CommandBuffer::underlying</qualifiedname>
+        <briefdescription>
+<para>Returns a type-erased pointer to the owned buffer instance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Non-null void pointer to the underlying concrete buffer.</para>
+</simplesect>
+<simplesect kind="pre"><para>The <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer" kindref="compound">CommandBuffer</ref> must be initialized. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/CommandBuffer.ixx" line="160" column="15" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/CommandBuffer.ixx" bodystart="160" bodyend="163"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a3e3797e8096e25757a0540d14f9bb831" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const void *</type>
+        <definition>const void * helios::engine::runtime::messaging::command::CommandBuffer::underlying</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>underlying</name>
+        <qualifiedname>helios::engine::runtime::messaging::command::CommandBuffer::underlying</qualifiedname>
+        <briefdescription>
+<para>Returns a type-erased pointer to the owned buffer instance.    </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Non-null void pointer to the underlying concrete buffer.</para>
+</simplesect>
+<simplesect kind="pre"><para>The <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer" kindref="compound">CommandBuffer</ref> must be initialized.    </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/CommandBuffer.ixx" line="168" column="21" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/CommandBuffer.ixx" bodystart="168" bodyend="171"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>Abstract base for command buffers that collect and flush commands. </para>
+<para>Type-erased wrapper for command buffers using the Concept/Model pattern. </para>
     </briefdescription>
     <detaileddescription>
-<para><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer" kindref="compound">CommandBuffer</ref> defines the interface for deferred command execution. Commands are accumulated during the frame and flushed at defined commit points in the game loop. Concrete implementations (e.g., <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer" kindref="compound">TypedCommandBuffer</ref>) provide type-safe storage and routing.</para>
-<para><simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer" kindref="compound">TypedCommandBuffer</ref> </para>
+<para><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer" kindref="compound">CommandBuffer</ref> erases the concrete buffer type at construction time, allowing heterogeneous storage and polymorphic dispatch without requiring concrete buffers to inherit from a common base class.</para>
+<para>## Type Erasure</para>
+<para>``` <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer" kindref="compound">CommandBuffer</ref> (value type, owns erased Concept via unique_ptr) └── Concept (internal virtual interface) └── Model&lt;T&gt; (typed wrapper, owns T by value) └── T (plain class, provides <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a80128451f19c3de35198be2f2c19edcd" kindref="member">flush()</ref> / <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a5436e83c56965b0b7b104a260ce3fb06" kindref="member">clear()</ref>) ```</para>
+<para>The wrapped type must satisfy `IsCommandBufferLike&lt;T&gt;`, which requires `flush(<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref>&amp;, <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">UpdateContext</ref>&amp;) noexcept` and `clear() noexcept`.</para>
+<para><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer" kindref="compound">CommandBuffer</ref> is move-only (non-copyable).</para>
+<para><simplesect kind="see"><para>IsCommandBufferLike </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer" kindref="compound">TypedCommandBuffer</ref> </para>
 </simplesect>
 <simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer" kindref="compound">EngineCommandBuffer</ref> </para>
 </simplesect>
-<simplesect kind="see"><para>Manager </para>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry" kindref="compound">ResourceRegistry</ref> </para>
 </simplesect>
 </para>
     </detaileddescription>
-    <inheritancegraph>
-      <node id="1">
-        <label>helios::engine::runtime::messaging::command::CommandBuffer</label>
-        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer"/>
-      </node>
-      <node id="3">
-        <label>helios::engine::runtime::messaging::command::EngineCommandBuffer</label>
-        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="4">
-        <label>helios::engine::runtime::messaging::command::TypedCommandBuffer&lt; CommandTypes &gt;</label>
-        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="2">
-        <label>helios::engine::runtime::messaging::command::TypedCommandBuffer&lt; helios::engine::mechanics::combat::commands::Aim2DCommand, helios::engine::mechanics::combat::commands::ShootCommand, helios::engine::mechanics::damage::commands::ApplyDamageCommand, helios::engine::modules::physics::motion::commands::Move2DCommand, helios::engine::modules::physics::motion::commands::SteeringCommand, helios::engine::mechanics::scoring::commands::UpdateScoreCommand, helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand, helios::engine::runtime::spawn::commands::SpawnCommand, helios::engine::runtime::spawn::commands::DespawnCommand, helios::engine::state::commands::StateCommand&lt; helios::engine::mechanics::gamestate::types::GameState &gt;, helios::engine::state::commands::StateCommand&lt; helios::engine::mechanics::match::types::MatchState &gt;, helios::engine::modules::ui::commands::UiActionCommand, helios::engine::mechanics::timing::commands::TimerControlCommand, helios::engine::mechanics::lifecycle::commands::WorldLifecycleCommand &gt;</label>
-        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-    </inheritancegraph>
-    <location file="/tmp/h/include/helios/engine/runtime/messaging/command/CommandBuffer.ixx" line="30" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/CommandBuffer.ixx" bodystart="30" bodyend="54"/>
+    <location file="/tmp/h/include/helios/engine/runtime/messaging/command/CommandBuffer.ixx" line="46" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/CommandBuffer.ixx" bodystart="46" bodyend="173"/>
     <listofallmembers>
-      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a79125d01f21544304762287af62d176a" prot="public" virt="pure-virtual"><scope>helios::engine::runtime::messaging::command::CommandBuffer</scope><name>clear</name></member>
-      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a8535f5c29283dac178b3b3d2449210d4" prot="public" virt="pure-virtual"><scope>helios::engine::runtime::messaging::command::CommandBuffer</scope><name>flush</name></member>
-      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1ad30a48c89c776560b95ce2e0c1244be4" prot="public" virt="virtual"><scope>helios::engine::runtime::messaging::command::CommandBuffer</scope><name>~CommandBuffer</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a5436e83c56965b0b7b104a260ce3fb06" prot="public" virt="non-virtual"><scope>helios::engine::runtime::messaging::command::CommandBuffer</scope><name>clear</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a3e0a0b9e4826ed2f25f19e1f1b149049" prot="public" virt="non-virtual"><scope>helios::engine::runtime::messaging::command::CommandBuffer</scope><name>CommandBuffer</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a36b8adf877bcfc2614d7ef8d5676ee26" prot="public" virt="non-virtual"><scope>helios::engine::runtime::messaging::command::CommandBuffer</scope><name>CommandBuffer</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a0efa861c2a01c7787a8398a3b04b4be8" prot="public" virt="non-virtual"><scope>helios::engine::runtime::messaging::command::CommandBuffer</scope><name>CommandBuffer</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a20183b1dc9a8c3099fda8b4019fa46ea" prot="public" virt="non-virtual"><scope>helios::engine::runtime::messaging::command::CommandBuffer</scope><name>CommandBuffer</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a80128451f19c3de35198be2f2c19edcd" prot="public" virt="non-virtual"><scope>helios::engine::runtime::messaging::command::CommandBuffer</scope><name>flush</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1aa332eb76d651e5e7e558f7ecf4010372" prot="public" virt="non-virtual"><scope>helios::engine::runtime::messaging::command::CommandBuffer</scope><name>operator=</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1ad71fc2a68aa47d91d7ef64e723f9da71" prot="public" virt="non-virtual"><scope>helios::engine::runtime::messaging::command::CommandBuffer</scope><name>operator=</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1af0d5ab615ba3a0f2ab48e63d45cb9d73" prot="private" virt="non-virtual"><scope>helios::engine::runtime::messaging::command::CommandBuffer</scope><name>pimpl_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a1f3d114eea4036a7372e0f8657b8c871" prot="public" virt="non-virtual"><scope>helios::engine::runtime::messaging::command::CommandBuffer</scope><name>underlying</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a3e3797e8096e25757a0540d14f9bb831" prot="public" virt="non-virtual"><scope>helios::engine::runtime::messaging::command::CommandBuffer</scope><name>underlying</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

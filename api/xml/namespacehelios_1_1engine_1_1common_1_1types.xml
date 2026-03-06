@@ -4,6 +4,72 @@
     <compoundname>helios::engine::common::types</compoundname>
     <innerclass refid="structhelios_1_1engine_1_1common_1_1types_1_1DamageContext" prot="public">helios::engine::common::types::DamageContext</innerclass>
     <innerclass refid="structhelios_1_1engine_1_1common_1_1types_1_1InteractionContext" prot="public">helios::engine::common::types::InteractionContext</innerclass>
+    <innerclass refid="structhelios_1_1engine_1_1common_1_1types_1_1PrefabIdTag" prot="public">helios::engine::common::types::PrefabIdTag</innerclass>
+    <innerclass refid="structhelios_1_1engine_1_1common_1_1types_1_1ViewportIdTag" prot="public">helios::engine::common::types::ViewportIdTag</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacehelios_1_1engine_1_1common_1_1types_1a90a80f2256b6532057d678b8c02a1a00" prot="public" static="no">
+        <type><ref refid="structhelios_1_1core_1_1data_1_1StrongId" kindref="compound">helios::core::data::StrongId</ref>&lt; <ref refid="structhelios_1_1engine_1_1common_1_1types_1_1PrefabIdTag" kindref="compound">PrefabIdTag</ref>, uint32_t &gt;</type>
+        <definition>using helios::engine::common::types::PrefabId =  helios::core::data::StrongId&lt;PrefabIdTag, uint32_t&gt;</definition>
+        <argsstring></argsstring>
+        <name>PrefabId</name>
+        <qualifiedname>helios::engine::common::types::PrefabId</qualifiedname>
+        <briefdescription>
+<para>Strongly-typed identifier for prefabs. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Used to uniquely identify prefabs.</para>
+<para><simplesect kind="see"><para><ref refid="structhelios_1_1core_1_1data_1_1StrongId" kindref="compound">helios::core::data::StrongId</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/common/types/PrefabId.ixx" line="30" column="5" bodyfile="/tmp/h/include/helios/engine/common/types/PrefabId.ixx" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacehelios_1_1engine_1_1common_1_1types_1aca719bfaa89c70b354105a2d914e83b7" prot="public" static="no">
+        <type>uint32_t</type>
+        <definition>using helios::engine::common::types::VersionId =  uint32_t</definition>
+        <argsstring></argsstring>
+        <name>VersionId</name>
+        <qualifiedname>helios::engine::common::types::VersionId</qualifiedname>
+        <briefdescription>
+<para>Version number for detecting stale entity references. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Each entity slot in an EntityPool has an associated version that is incremented when the entity is removed. EntityHandles store both the EntityId and <ref refid="namespacehelios_1_1engine_1_1common_1_1types_1aca719bfaa89c70b354105a2d914e83b7" kindref="member">VersionId</ref>, allowing the pool to detect when a handle refers to a recycled slot.</para>
+<para>A valid version starts at 1 (uninitialized handles have version 0).</para>
+<para><simplesect kind="see"><para>EntityHandle </para>
+</simplesect>
+<simplesect kind="see"><para>EntityId </para>
+</simplesect>
+<simplesect kind="see"><para>EntityPool </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/common/types/VersionId.ixx" line="29" column="5" bodyfile="/tmp/h/include/helios/engine/common/types/VersionId.ixx" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacehelios_1_1engine_1_1common_1_1types_1a348f02d525fc051290ccabd8091e45f5" prot="public" static="no">
+        <type><ref refid="structhelios_1_1core_1_1data_1_1StrongId" kindref="compound">helios::core::data::StrongId</ref>&lt; <ref refid="structhelios_1_1engine_1_1common_1_1types_1_1ViewportIdTag" kindref="compound">ViewportIdTag</ref>, uint32_t &gt;</type>
+        <definition>using helios::engine::common::types::ViewportId =  helios::core::data::StrongId&lt;ViewportIdTag, uint32_t&gt;</definition>
+        <argsstring></argsstring>
+        <name>ViewportId</name>
+        <qualifiedname>helios::engine::common::types::ViewportId</qualifiedname>
+        <briefdescription>
+<para>Strongly-typed identifier for viewports. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Used to uniquely identify viewports across the rendering system. Supports compile-time string-based construction via FNV-1a hashing.</para>
+<para><simplesect kind="see"><para><ref refid="structhelios_1_1core_1_1data_1_1StrongId" kindref="compound">helios::core::data::StrongId</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/common/types/ViewportId.ixx" line="32" column="5" bodyfile="/tmp/h/include/helios/engine/common/types/ViewportId.ixx" bodystart="32" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
     <briefdescription>
 <para>Shared context structs for entity-to-entity interactions. </para>
     </briefdescription>

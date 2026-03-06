@@ -10,7 +10,7 @@
     <includes refid="helios_2math_2types_2__module_8ixx" local="no">helios.math.types</includes>
     <includes refid="Logger_8ixx" local="no">helios.util.log.Logger</includes>
     <includes refid="Viewport_8ixx" local="no">helios.rendering.Viewport:RenderTargetFwd</includes>
-    <includes refid="ViewportId_8ixx" local="no">helios.engine.core.data.ViewportId</includes>
+    <includes refid="ViewportId_8ixx" local="no">helios.engine.common.types.ViewportId</includes>
     <includes refid="types_8ixx" local="no">helios.core.types</includes>
     <includes refid="ClearFlags_8ixx" local="no">helios.rendering.ClearFlags</includes>
     <includes refid="ViewportSnapshot_8ixx" local="no">helios.rendering.ViewportSnapshot</includes>
@@ -61,9 +61,9 @@
         <label>helios.core.types</label>
         <link refid="types_8ixx"/>
       </node>
-      <node id="55">
-        <label>helios.engine.core.data.FontId</label>
-        <link refid="FontId_8ixx"/>
+      <node id="71">
+        <label>helios.engine.common.types.ViewportId</label>
+        <link refid="ViewportId_8ixx"/>
         <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="54" relation="include">
@@ -75,9 +75,9 @@
         <childnode refid="58" relation="include">
         </childnode>
       </node>
-      <node id="71">
-        <label>helios.engine.core.data.ViewportId</label>
-        <link refid="ViewportId_8ixx"/>
+      <node id="55">
+        <label>helios.engine.modules.ui.widgets.types.FontId</label>
+        <link refid="FontId_8ixx"/>
         <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="54" relation="include">
@@ -763,7 +763,7 @@
 <codeline lineno="16"><highlight class="normal"></highlight></codeline>
 <codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8rendering_8ClearFlags" kindref="compound">helios.rendering.ClearFlags</ref>;</highlight></codeline>
 <codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8core_8types" kindref="compound">helios.core.types</ref>;</highlight></codeline>
-<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8core_8data_8ViewportId" kindref="compound">helios.engine.core.data.ViewportId</ref>;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8common_8types_8ViewportId" kindref="compound">helios.engine.common.types.ViewportId</ref>;</highlight></codeline>
 <codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8math_8types" kindref="compound">helios.math.types</ref>;</highlight></codeline>
 <codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8scene_8CameraSceneNode" kindref="compound">helios.scene.CameraSceneNode</ref>;</highlight></codeline>
 <codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>:RenderTargetFwd;</highlight></codeline>
@@ -879,7 +879,7 @@
 <codeline lineno="132"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
 <codeline lineno="133"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Unique<sp/>identifier<sp/>for<sp/>this<sp/>viewport.</highlight></codeline>
 <codeline lineno="134"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1engine_1_1core_1_1data_1ad7a3a4de437b171216482e5f1853a90e" kindref="member">helios::engine::core::data::ViewportId</ref><sp/>viewportId_{<ref refid="namespacehelios_1_1core_1_1types_1a209d373c4d42ac831d2f6bfd1c4165ad" kindref="member">helios::core::types::no_init</ref>};</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1engine_1_1common_1_1types_1a348f02d525fc051290ccabd8091e45f5" kindref="member">helios::engine::common::types::ViewportId</ref><sp/>viewportId_{<ref refid="namespacehelios_1_1core_1_1types_1a209d373c4d42ac831d2f6bfd1c4165ad" kindref="member">helios::core::types::no_init</ref>};</highlight></codeline>
 <codeline lineno="136"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="137"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
 <codeline lineno="138"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Cached<sp/>absolute<sp/>bounds<sp/>[x,<sp/>y,<sp/>width,<sp/>height]<sp/>in<sp/>pixels.</highlight></codeline>
@@ -957,13 +957,13 @@
 <codeline lineno="210"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>height<sp/>The<sp/>normalized<sp/>height<sp/>[0,<sp/>1].</highlight></codeline>
 <codeline lineno="211"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>zIndex<sp/>The<sp/>z-index<sp/>that<sp/>determines<sp/>the<sp/>rendering<sp/>order.</highlight></codeline>
 <codeline lineno="212"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="213" refid="classhelios_1_1rendering_1_1Viewport_1a1d9d3a0ebdaff5c51d94a2f5546e4fa8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1rendering_1_1Viewport_1a1d9d3a0ebdaff5c51d94a2f5546e4fa8" kindref="member">Viewport</ref>(</highlight></codeline>
+<codeline lineno="213" refid="classhelios_1_1rendering_1_1Viewport_1a6ffa7f48fd9a3250c211e33036a00911" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1rendering_1_1Viewport_1a6ffa7f48fd9a3250c211e33036a00911" kindref="member">Viewport</ref>(</highlight></codeline>
 <codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>width,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>height,</highlight></codeline>
-<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1engine_1_1core_1_1data_1ad7a3a4de437b171216482e5f1853a90e" kindref="member">helios::engine::core::data::ViewportId</ref><sp/><ref refid="classhelios_1_1rendering_1_1Viewport_1a3c4849a82559b2bdfc48e9f592e75c20" kindref="member">viewportId</ref><sp/>=<sp/><ref refid="namespacehelios_1_1engine_1_1core_1_1data_1ad7a3a4de437b171216482e5f1853a90e" kindref="member">helios::engine::core::data::ViewportId</ref>{<ref refid="namespacehelios_1_1core_1_1types_1a209d373c4d42ac831d2f6bfd1c4165ad" kindref="member">helios::core::types::no_init</ref>},</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1engine_1_1common_1_1types_1a348f02d525fc051290ccabd8091e45f5" kindref="member">helios::engine::common::types::ViewportId</ref><sp/><ref refid="classhelios_1_1rendering_1_1Viewport_1afea2ea45329b6e1f1ad57326119030fb" kindref="member">viewportId</ref><sp/>=<sp/><ref refid="namespacehelios_1_1engine_1_1common_1_1types_1a348f02d525fc051290ccabd8091e45f5" kindref="member">helios::engine::common::types::ViewportId</ref>{<ref refid="namespacehelios_1_1core_1_1types_1a209d373c4d42ac831d2f6bfd1c4165ad" kindref="member">helios::core::types::no_init</ref>},</highlight></codeline>
 <codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>zIndex<sp/>=<sp/>0</highlight></codeline>
 <codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:</highlight></codeline>
-<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>viewportId_(<ref refid="classhelios_1_1rendering_1_1Viewport_1a3c4849a82559b2bdfc48e9f592e75c20" kindref="member">viewportId</ref>),</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>viewportId_(<ref refid="classhelios_1_1rendering_1_1Viewport_1afea2ea45329b6e1f1ad57326119030fb" kindref="member">viewportId</ref>),</highlight></codeline>
 <codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>zIndex_(zIndex)<sp/>{</highlight></codeline>
 <codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1rendering_1_1Viewport_1a1935d17a330f646b6033b31799d6e22f" kindref="member">setBounds</ref>(x,<sp/>y,<sp/>width,<sp/>height);</highlight></codeline>
 <codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
@@ -984,7 +984,7 @@
 <codeline lineno="237"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="238"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>The<sp/>ViewportId<sp/>assigned<sp/>to<sp/>this<sp/>viewport.</highlight></codeline>
 <codeline lineno="239"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="240" refid="classhelios_1_1rendering_1_1Viewport_1a3c4849a82559b2bdfc48e9f592e75c20" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="namespacehelios_1_1engine_1_1core_1_1data_1ad7a3a4de437b171216482e5f1853a90e" kindref="member">helios::engine::core::data::ViewportId</ref><sp/><ref refid="classhelios_1_1rendering_1_1Viewport_1a3c4849a82559b2bdfc48e9f592e75c20" kindref="member">viewportId</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="240" refid="classhelios_1_1rendering_1_1Viewport_1afea2ea45329b6e1f1ad57326119030fb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="namespacehelios_1_1engine_1_1common_1_1types_1a348f02d525fc051290ccabd8091e45f5" kindref="member">helios::engine::common::types::ViewportId</ref><sp/><ref refid="classhelios_1_1rendering_1_1Viewport_1afea2ea45329b6e1f1ad57326119030fb" kindref="member">viewportId</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
 <codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>viewportId_;</highlight></codeline>
 <codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="243"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>

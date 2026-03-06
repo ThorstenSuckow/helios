@@ -15,6 +15,7 @@ var modulemembers_func =
     [ "n", "modulemembers_func_n.html", null ],
     [ "o", "modulemembers_func_o.html", null ],
     [ "p", "modulemembers_func_p.html", null ],
+    [ "q", "modulemembers_func_q.html", null ],
     [ "r", "modulemembers_func_r.html", null ],
     [ "s", "modulemembers_func_s.html", null ],
     [ "t", "modulemembers_func_t.html", null ],

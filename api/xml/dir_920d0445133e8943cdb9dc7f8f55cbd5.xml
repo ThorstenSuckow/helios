@@ -7,24 +7,19 @@
     <innerdir refid="dir_2acd3dbde9e4306e7ed99cd763cdf058">events</innerdir>
     <innerdir refid="dir_38edcdf75352a1f7569b186257daa969">policy</innerdir>
     <innerdir refid="dir_7930a9f2b08fecfe51e4aed0db65671b">scheduling</innerdir>
+    <innerdir refid="dir_53a6fe781d443d71a3320cc04c83f898">types</innerdir>
     <innerfile refid="helios_2engine_2runtime_2spawn_2__module_8ixx">helios/engine/runtime/spawn/_module.ixx</innerfile>
-    <innerfile refid="EmitterContext_8ixx">EmitterContext.ixx</innerfile>
-    <innerfile refid="SpawnCommandHandler_8ixx">SpawnCommandHandler.ixx</innerfile>
-    <innerfile refid="SpawnCommandHandlerRegistry_8ixx">SpawnCommandHandlerRegistry.ixx</innerfile>
-    <innerfile refid="SpawnContext_8ixx">SpawnContext.ixx</innerfile>
     <innerfile refid="SpawnManager_8ixx">SpawnManager.ixx</innerfile>
-    <innerfile refid="SpawnPlanCursor_8ixx">SpawnPlanCursor.ixx</innerfile>
-    <innerfile refid="SpawnProfile_8ixx">SpawnProfile.ixx</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_920d0445133e8943cdb9dc7f8f55cbd5_1autotoc_md708">
+<sect1 id="dir_920d0445133e8943cdb9dc7f8f55cbd5_1autotoc_md720">
 <title>helios::engine::runtime::spawn</title><para>Entity spawning infrastructure for the helios engine.</para>
 </sect1>
-<sect1 id="dir_920d0445133e8943cdb9dc7f8f55cbd5_1autotoc_md709">
+<sect1 id="dir_920d0445133e8943cdb9dc7f8f55cbd5_1autotoc_md721">
 <title>Overview</title><para>This module provides a complete spawning pipeline for managing entity lifecycle at runtime. It separates concerns into scheduling (when/how many), behavior (where/how), and execution (pool integration).</para>
 </sect1>
-<sect1 id="dir_920d0445133e8943cdb9dc7f8f55cbd5_1autotoc_md710">
+<sect1 id="dir_920d0445133e8943cdb9dc7f8f55cbd5_1autotoc_md722">
 <title>Architecture</title><para><programlisting><codeline><highlight class="normal">┌─────────────────────────────────────────────────────────────────────┐</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SPAWN<sp/>PIPELINE<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal">├─────────────────────────────────────────────────────────────────────┤</highlight></codeline>
@@ -59,8 +54,8 @@
 <codeline><highlight class="normal">└─────────────────────────────────────────────────────────────────────┘</highlight></codeline>
 </programlisting></para>
 </sect1>
-<sect1 id="dir_920d0445133e8943cdb9dc7f8f55cbd5_1autotoc_md711">
-<title>Submodules</title><para><table rows="7" cols="2"><row>
+<sect1 id="dir_920d0445133e8943cdb9dc7f8f55cbd5_1autotoc_md723">
+<title>Submodules</title><para><table rows="6" cols="2"><row>
 <entry thead="yes"><para>Directory  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
 </entry></row>
@@ -71,10 +66,6 @@
 <row>
 <entry thead="no"><para><computeroutput>commands/</computeroutput>  </para>
 </entry><entry thead="no"><para>Spawn and despawn commands for deferred execution  </para>
-</entry></row>
-<row>
-<entry thead="no"><para><computeroutput>dispatcher/</computeroutput>  </para>
-</entry><entry thead="no"><para>Command dispatchers routing to managers  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>events/</computeroutput>  </para>
@@ -91,7 +82,7 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_920d0445133e8943cdb9dc7f8f55cbd5_1autotoc_md712">
+<sect1 id="dir_920d0445133e8943cdb9dc7f8f55cbd5_1autotoc_md724">
 <title>Key Classes</title><para><table rows="6" cols="2"><row>
 <entry thead="yes"><para>Class  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
@@ -119,7 +110,7 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_920d0445133e8943cdb9dc7f8f55cbd5_1autotoc_md713">
+<sect1 id="dir_920d0445133e8943cdb9dc7f8f55cbd5_1autotoc_md725">
 <title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>1.<sp/>Create<sp/>spawn<sp/>profile<sp/>with<sp/>behaviors</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>profile<sp/>=<sp/>std::make_unique&lt;SpawnProfile&gt;(SpawnProfile{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.gameObjectPoolId<sp/>=<sp/>bulletPoolId,</highlight></codeline>

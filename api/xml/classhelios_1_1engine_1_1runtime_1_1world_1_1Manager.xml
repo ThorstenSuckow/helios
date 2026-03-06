@@ -1,241 +1,318 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
-  <compounddef id="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kind="class" language="C++" prot="public" abstract="yes">
+  <compounddef id="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kind="class" language="C++" prot="public">
     <compoundname>helios::engine::runtime::world::Manager</compoundname>
-    <derivedcompoundref refid="classhelios_1_1engine_1_1state_1_1StateManager" prot="public" virt="non-virtual">helios::engine::state::StateManager&lt; types::GameState &gt;</derivedcompoundref>
-    <derivedcompoundref refid="classhelios_1_1engine_1_1state_1_1StateManager" prot="public" virt="non-virtual">helios::engine::state::StateManager&lt; helios::engine::mechanics::match::types::MatchState &gt;</derivedcompoundref>
-    <derivedcompoundref refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1HealthManager" prot="public" virt="non-virtual">helios::engine::mechanics::health::HealthManager</derivedcompoundref>
-    <derivedcompoundref refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1WorldLifecycleManager" prot="public" virt="non-virtual">helios::engine::mechanics::lifecycle::WorldLifecycleManager</derivedcompoundref>
-    <derivedcompoundref refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager" prot="public" virt="non-virtual">helios::engine::mechanics::scoring::ScorePoolManager</derivedcompoundref>
-    <derivedcompoundref refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager" prot="public" virt="non-virtual">helios::engine::mechanics::timing::TimerManager</derivedcompoundref>
-    <derivedcompoundref refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager" prot="public" virt="non-virtual">helios::engine::modules::ui::UiActionCommandManager</derivedcompoundref>
-    <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager" prot="public" virt="non-virtual">helios::engine::runtime::pooling::GameObjectPoolManager</derivedcompoundref>
-    <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" prot="public" virt="non-virtual">helios::engine::runtime::spawn::SpawnManager</derivedcompoundref>
-    <derivedcompoundref refid="classhelios_1_1engine_1_1state_1_1StateManager" prot="public" virt="non-virtual">helios::engine::state::StateManager&lt; StateType &gt;</derivedcompoundref>
-    <sectiondef kind="public-func">
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a116b5758bea5a39bbc0d24bc62bdcdd7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
-        <type></type>
-        <definition>virtual helios::engine::runtime::world::Manager::~Manager</definition>
-        <argsstring>()=default</argsstring>
-        <name>~Manager</name>
-        <qualifiedname>helios::engine::runtime::world::Manager::~Manager</qualifiedname>
+    <innerclass refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1_1Concept" prot="private">helios::engine::runtime::world::Manager::Concept</innerclass>
+    <innerclass refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1_1Model" prot="private">helios::engine::runtime::world::Manager::Model</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1aa1bde7f27b430136a0835d89d48bfa4f" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; Concept &gt;</type>
+        <definition>std::unique_ptr&lt;Concept&gt; helios::engine::runtime::world::Manager::pimpl_</definition>
+        <argsstring></argsstring>
+        <name>pimpl_</name>
+        <qualifiedname>helios::engine::runtime::world::Manager::pimpl_</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" line="60" column="17"/>
+        <location file="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" line="116" column="25" bodyfile="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" bodystart="116" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ae7e2cd7531de5ce1fdc1f4a179b70929" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a4d6f4382c7ba92d68ed864071f1f2dad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::runtime::world::Manager::Manager</definition>
+        <argsstring>()=default</argsstring>
+        <name>Manager</name>
+        <qualifiedname>helios::engine::runtime::world::Manager::Manager</qualifiedname>
+        <briefdescription>
+<para>Default constructor creating an empty <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" line="123" column="9"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ac0e22675fdee078efdbc5b35e314617e">Manager</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a5ce9334ff16b32ef991f606eeb07d39c">Manager</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a78a88a5fab8dfd1151cfcc7a8db2251e">operator=</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ad2741764d9418afcc573517700d36cbb">operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a0be96648af175c35cbdc97c79e8bb85c" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>helios::engine::runtime::world::Manager::Manager</definition>
+        <argsstring>(T manager)</argsstring>
+        <name>Manager</name>
+        <qualifiedname>helios::engine::runtime::world::Manager::Manager</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>manager</declname>
+        </param>
+    <requiresclause>IsManagerLike&lt;T&gt;    </requiresclause>
+        <briefdescription>
+<para>Wraps a concrete manager in a type-erased <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The concrete manager type, must satisfy `IsManagerLike&lt;T&gt;`.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>manager</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The concrete manager instance to wrap (moved into internal storage). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" line="134" column="18" bodyfile="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" bodystart="134" bodyend="134"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ac0e22675fdee078efdbc5b35e314617e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::runtime::world::Manager::Manager</definition>
+        <argsstring>(const Manager &amp;)=delete</argsstring>
+        <name>Manager</name>
+        <qualifiedname>helios::engine::runtime::world::Manager::Manager</qualifiedname>
+        <param>
+          <type>const Manager &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" line="136" column="9"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a4d6f4382c7ba92d68ed864071f1f2dad">Manager</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a78a88a5fab8dfd1151cfcc7a8db2251e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a4d6f4382c7ba92d68ed864071f1f2dad" kindref="member">Manager</ref> &amp;</type>
+        <definition>Manager &amp; helios::engine::runtime::world::Manager::operator=</definition>
+        <argsstring>(const Manager &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>helios::engine::runtime::world::Manager::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a4d6f4382c7ba92d68ed864071f1f2dad" kindref="member">Manager</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" line="137" column="17"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a4d6f4382c7ba92d68ed864071f1f2dad">Manager</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ad2741764d9418afcc573517700d36cbb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a4d6f4382c7ba92d68ed864071f1f2dad" kindref="member">Manager</ref> &amp;</type>
+        <definition>Manager &amp; helios::engine::runtime::world::Manager::operator=</definition>
+        <argsstring>(Manager &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>helios::engine::runtime::world::Manager::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a4d6f4382c7ba92d68ed864071f1f2dad" kindref="member">Manager</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" line="139" column="17"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a4d6f4382c7ba92d68ed864071f1f2dad">Manager</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a5ce9334ff16b32ef991f606eeb07d39c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::runtime::world::Manager::Manager</definition>
+        <argsstring>(Manager &amp;&amp;) noexcept=default</argsstring>
+        <name>Manager</name>
+        <qualifiedname>helios::engine::runtime::world::Manager::Manager</qualifiedname>
+        <param>
+          <type>Manager &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" line="140" column="9"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a4d6f4382c7ba92d68ed864071f1f2dad">Manager</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ab34ae7c20b44a57c694e14825c1fe29c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
-        <definition>virtual void helios::engine::runtime::world::Manager::init</definition>
-        <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld)</argsstring>
+        <definition>void helios::engine::runtime::world::Manager::flush</definition>
+        <argsstring>(UpdateContext &amp;updateContext) noexcept</argsstring>
+        <name>flush</name>
+        <qualifiedname>helios::engine::runtime::world::Manager::flush</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Delegates to the wrapped manager&apos;s `flush()` method. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Called by the GameLoop at each commit point after CommandBuffers have been flushed. Managers process their accumulated requests in batch.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current frame&apos;s update context.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="pre"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> must be initialized (pimpl_ != nullptr). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" line="154" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" bodystart="154" bodyend="157"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ab34ae7c20b44a57c694e14825c1fe29c" compoundref="Manager_8ixx" startline="154" endline="157">flush</references>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ab34ae7c20b44a57c694e14825c1fe29c" compoundref="Manager_8ixx" startline="154" endline="157">flush</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a0d5ef7e477b052ba9410dd3733047115" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::world::Manager::init</definition>
+        <argsstring>(GameWorld &amp;gameWorld) noexcept</argsstring>
         <name>init</name>
         <qualifiedname>helios::engine::runtime::world::Manager::init</qualifiedname>
-        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1HealthManager_1ae2172a3f5f21938f17f811c0ebb0cd6d">init</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1WorldLifecycleManager_1ac913e707aa847a82959ee708582b5cee">init</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1a04f62fb1b24bfc389acaa48fdd31293e">init</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1adf8ca10337b5b942ab184958c4dacabd">init</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager_1a376734356261cdf9d67af7bc03b15698">init</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a7f5ef214b56eba5241a20de5d964eff2">init</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1aeab1d9b1aabd174751fa20937a9841f2">init</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1state_1_1StateManager_1a176a52f4173536aa3fde8324f1f72cb6">init</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1state_1_1StateManager_1a176a52f4173536aa3fde8324f1f72cb6">init</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1state_1_1StateManager_1a176a52f4173536aa3fde8324f1f72cb6">init</reimplementedby>
         <param>
-          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> &amp;</type>
           <declname>gameWorld</declname>
         </param>
         <briefdescription>
-<para>Initializes the manager before the game loop starts. </para>
+<para>Delegates to the wrapped manager&apos;s `init()` method, if present. </para>
         </briefdescription>
         <detaileddescription>
-<para>Override to perform one-time setup such as pool retrieval, handler registration, or resource allocation.</para>
+<para>If the concrete type satisfies `HasInit&lt;T&gt;`, its `init()` is called. Otherwise this is a no-op. Typically used by managers to register their TypedCommandHandlers with the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>gameWorld</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> to initialize with. </para>
+<para>The <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> for one-time initialization.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
+<simplesect kind="pre"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> must be initialized (pimpl_ != nullptr). </para>
+</simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" line="70" column="22" bodyfile="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" bodystart="70" bodyend="74"/>
+        <location file="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" line="171" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" bodystart="171" bodyend="174"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a4a530617ca6c546b21b23795347e6384" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a954a574ffdede371b4bd90114b3cec30" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
-        <definition>virtual void helios::engine::runtime::world::Manager::flush</definition>
-        <argsstring>(helios::engine::runtime::world::UpdateContext &amp;update_context) noexcept=0</argsstring>
-        <name>flush</name>
-        <qualifiedname>helios::engine::runtime::world::Manager::flush</qualifiedname>
-        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1HealthManager_1a09a3a9b1c6903875df52dfacc0279dea">flush</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1WorldLifecycleManager_1a8f1e202e0b123497f527630a1690402c">flush</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1abf528fe8904b38cf52f31df8edf4592c">flush</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1aef973149d954abaf1787fa74f4accf7d">flush</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager_1afeec7a0d76b53a2dfb60b7d2fe8c938a">flush</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1ab5c9788a67aee220c43f4c3f7b633bbd">flush</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1afb6ace98d74da9ed313c6811142f5d3d">flush</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1state_1_1StateManager_1a7b16869a9d0d8b511b76ac568339fea1">flush</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1state_1_1StateManager_1a7b16869a9d0d8b511b76ac568339fea1">flush</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1state_1_1StateManager_1a7b16869a9d0d8b511b76ac568339fea1">flush</reimplementedby>
-        <param>
-          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
-          <declname>update_context</declname>
-        </param>
-        <briefdescription>
-<para>Processes queued requests each frame. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>Called during the game loop&apos;s manager flush phase, after all Systems have completed their updates. Override to process any queued operations (spawn requests, despawn requests, etc.).</para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>gameWorld</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> for entity access. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>update_context</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The current frame&apos;s update context. </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" line="86" column="22"/>
-      </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a967a3375eca948be9ebeaca2e34c7475" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
-        <type>void</type>
-        <definition>virtual void helios::engine::runtime::world::Manager::reset</definition>
-        <argsstring>()</argsstring>
+        <definition>void helios::engine::runtime::world::Manager::reset</definition>
+        <argsstring>() noexcept</argsstring>
         <name>reset</name>
         <qualifiedname>helios::engine::runtime::world::Manager::reset</qualifiedname>
-        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1HealthManager_1af584e64dbdf0b1fb99054d467144b88d">reset</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1WorldLifecycleManager_1a636b9fca864cb0f6cb5c104d5320aa3d">reset</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager_1ae26e54f8314f7f412565e2b0ec5d2dd4">reset</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1a3cc30c28fb07d97665e83b372872e597">reset</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a1f3ad93fd926408196bca49a9707757e">reset</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1afd3944ee30a76fd530a1d0e832269edf">reset</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1state_1_1StateManager_1abd21bd2f4c2738a52d1854d3389f3488">reset</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1state_1_1StateManager_1abd21bd2f4c2738a52d1854d3389f3488">reset</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1state_1_1StateManager_1abd21bd2f4c2738a52d1854d3389f3488">reset</reimplementedby>
         <briefdescription>
-<para>Resets the manager to its initial state. </para>
+<para>Delegates to the wrapped manager&apos;s `reset()` method, if present. </para>
         </briefdescription>
         <detaileddescription>
-<para>Called during level transitions or game restarts to clear any accumulated state. Override to reset queues, counters, or other runtime data. The default implementation is a no-op. </para>
+<para>If the concrete type satisfies `HasReset&lt;T&gt;`, its `reset()` is called. Otherwise this is a no-op. Used during level transitions or game restarts to clear accumulated state.</para>
+<para><simplesect kind="pre"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> must be initialized (pimpl_ != nullptr). </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" line="97" column="22" bodyfile="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" bodystart="97" bodyend="100"/>
+        <location file="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" line="185" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" bodystart="185" bodyend="188"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a686c815674e5b021cec6ecb1e0a5967e" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void *</type>
+        <definition>void * helios::engine::runtime::world::Manager::underlying</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>underlying</name>
+        <qualifiedname>helios::engine::runtime::world::Manager::underlying</qualifiedname>
+        <briefdescription>
+<para>Returns a type-erased pointer to the wrapped manager instance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Pointer to the underlying concrete manager.</para>
+</simplesect>
+<simplesect kind="pre"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> must be initialized (pimpl_ != nullptr). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" line="197" column="15" bodyfile="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" bodystart="197" bodyend="200"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a7b622c643722953d10891fb3d229b545" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const void *</type>
+        <definition>const void * helios::engine::runtime::world::Manager::underlying</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>underlying</name>
+        <qualifiedname>helios::engine::runtime::world::Manager::underlying</qualifiedname>
+        <briefdescription>
+<para>Returns a type-erased pointer to the wrapped manager instance.    </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Pointer to the underlying concrete manager.</para>
+</simplesect>
+<simplesect kind="pre"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> must be initialized (pimpl_ != nullptr).    </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" line="205" column="21" bodyfile="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" bodystart="205" bodyend="208"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>Abstract base class for managers that process deferred operations. </para>
+<para>Type-erased wrapper for game world managers. </para>
     </briefdescription>
     <detaileddescription>
-<para>Managers handle cross-cutting concerns that require deferred processing separate from the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System" kindref="compound">System</ref> update cycle. They are registered with the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> and receive lifecycle callbacks for initialization and per-frame flushing.</para>
-<para>## Lifecycle</para>
-<para>1. **Registration:** <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> is added via `GameWorld::addManager&lt;T&gt;()` 2. **onAdd():** Called immediately after registration 3. **init():** Called during <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> initialization (before game loop starts) 4. **flush():** Called each frame after Systems complete, to process queued requests</para>
-<para>## Use Cases</para>
-<para><itemizedlist>
-<listitem><para>**GameObjectPoolManager:** Manages entity pooling and acquire/release lifecycle</para>
-</listitem><listitem><para>**SpawnManager:** Handles spawn request processing and entity initialization</para>
-</listitem><listitem><para>**Custom Managers:** Any deferred processing that doesn&apos;t fit the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System" kindref="compound">System</ref> model</para>
-</listitem></itemizedlist>
-</para>
-<para>Example implementation: ```cpp class MyManager : public <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> { public: void <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ae7e2cd7531de5ce1fdc1f4a179b70929" kindref="member">init(GameWorld&amp; gw)</ref> override { ... } void flush(GameWorld&amp; gw, UpdateContext&amp; ctx) noexcept override { // Process queued requests } }; ```</para>
-<para><simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> </para>
+<para><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> uses the Concept/Model pattern to erase the concrete manager type. Concrete managers are plain classes that satisfy `IsManagerLike&lt;T&gt;` (i.e. provide `flush(<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">UpdateContext</ref>&amp;)` and declare `using EngineRoleTag = ManagerRole;`).</para>
+<para>The internal `Concept` base defines the virtual interface, and `Model&lt;T&gt;` adapts the concrete type T, owning it by value. `init()` and `reset()` are conditionally forwarded if the concrete type satisfies `HasInit&lt;T&gt;` or `HasReset&lt;T&gt;` respectively.</para>
+<para><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> is move-only (non-copyable).</para>
+<para><simplesect kind="see"><para>IsManagerLike </para>
 </simplesect>
-<simplesect kind="see"><para>GameObjectPoolManager </para>
+<simplesect kind="see"><para>ManagerRole </para>
 </simplesect>
-<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System" kindref="compound">System</ref> </para>
+<simplesect kind="see"><para><ref refid="namespacehelios_1_1engine_1_1runtime_1_1world_1a12c55c47caeb5dc7588c1b1e74f4992f" kindref="member">ManagerRegistry</ref> </para>
+</simplesect>
+<simplesect kind="see"><para>ConceptModelRegistry </para>
 </simplesect>
 </para>
     </detaileddescription>
-    <inheritancegraph>
-      <node id="4">
-        <label>helios::engine::mechanics::health::HealthManager</label>
-        <link refid="classhelios_1_1engine_1_1mechanics_1_1health_1_1HealthManager"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="5">
-        <label>helios::engine::mechanics::lifecycle::WorldLifecycleManager</label>
-        <link refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1WorldLifecycleManager"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="6">
-        <label>helios::engine::mechanics::scoring::ScorePoolManager</label>
-        <link refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="7">
-        <label>helios::engine::mechanics::timing::TimerManager</label>
-        <link refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="8">
-        <label>helios::engine::modules::ui::UiActionCommandManager</label>
-        <link refid="classhelios_1_1engine_1_1modules_1_1ui_1_1UiActionCommandManager"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="9">
-        <label>helios::engine::runtime::pooling::GameObjectPoolManager</label>
-        <link refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="10">
-        <label>helios::engine::runtime::spawn::SpawnManager</label>
-        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="1">
-        <label>helios::engine::runtime::world::Manager</label>
-        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager"/>
-      </node>
-      <node id="11">
-        <label>helios::engine::state::StateManager&lt; StateType &gt;</label>
-        <link refid="classhelios_1_1engine_1_1state_1_1StateManager"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="3">
-        <label>helios::engine::state::StateManager&lt; helios::engine::mechanics::match::types::MatchState &gt;</label>
-        <link refid="classhelios_1_1engine_1_1state_1_1StateManager"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="2">
-        <label>helios::engine::state::StateManager&lt; types::GameState &gt;</label>
-        <link refid="classhelios_1_1engine_1_1state_1_1StateManager"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-    </inheritancegraph>
-    <location file="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" line="53" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" bodystart="53" bodyend="101"/>
+    <location file="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" line="63" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/world/Manager.ixx" bodystart="63" bodyend="210"/>
     <listofallmembers>
-      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a4a530617ca6c546b21b23795347e6384" prot="public" virt="pure-virtual"><scope>helios::engine::runtime::world::Manager</scope><name>flush</name></member>
-      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ae7e2cd7531de5ce1fdc1f4a179b70929" prot="public" virt="virtual"><scope>helios::engine::runtime::world::Manager</scope><name>init</name></member>
-      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a967a3375eca948be9ebeaca2e34c7475" prot="public" virt="virtual"><scope>helios::engine::runtime::world::Manager</scope><name>reset</name></member>
-      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a116b5758bea5a39bbc0d24bc62bdcdd7" prot="public" virt="virtual"><scope>helios::engine::runtime::world::Manager</scope><name>~Manager</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ab34ae7c20b44a57c694e14825c1fe29c" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::Manager</scope><name>flush</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a0d5ef7e477b052ba9410dd3733047115" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::Manager</scope><name>init</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a4d6f4382c7ba92d68ed864071f1f2dad" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::Manager</scope><name>Manager</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a0be96648af175c35cbdc97c79e8bb85c" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::Manager</scope><name>Manager</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ac0e22675fdee078efdbc5b35e314617e" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::Manager</scope><name>Manager</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a5ce9334ff16b32ef991f606eeb07d39c" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::Manager</scope><name>Manager</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a78a88a5fab8dfd1151cfcc7a8db2251e" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::Manager</scope><name>operator=</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ad2741764d9418afcc573517700d36cbb" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::Manager</scope><name>operator=</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1aa1bde7f27b430136a0835d89d48bfa4f" prot="private" virt="non-virtual"><scope>helios::engine::runtime::world::Manager</scope><name>pimpl_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a954a574ffdede371b4bd90114b3cec30" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::Manager</scope><name>reset</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a686c815674e5b021cec6ecb1e0a5967e" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::Manager</scope><name>underlying</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a7b622c643722953d10891fb3d229b545" prot="public" virt="non-virtual"><scope>helios::engine::runtime::world::Manager</scope><name>underlying</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

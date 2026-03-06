@@ -120,8 +120,8 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a0bf454935a73dcfd5273289d92f21c27" id="r_a0bf454935a73dcfd5273289d92f21c27"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0bf454935a73dcfd5273289d92f21c27">~PassCommitListener</a> ()=default</td></tr>
 <tr class="memdesc:a0bf454935a73dcfd5273289d92f21c27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor for proper polymorphic cleanup.  <br /></td></tr>
-<tr class="memitem:ad8b56d62719d7fd9849cc9eaa44b9679" id="r_ad8b56d62719d7fd9849cc9eaa44b9679"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad8b56d62719d7fd9849cc9eaa44b9679">onPassCommit</a> (<a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8ec">CommitPoint</a> commitPoint, <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a> &amp;updateContext) noexcept=0</td></tr>
-<tr class="memdesc:ad8b56d62719d7fd9849cc9eaa44b9679"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when a pass reaches its commit point.  <br /></td></tr>
+<tr class="memitem:a5041b2ffdc873a7a569332a6ac7a25a5" id="r_a5041b2ffdc873a7a569332a6ac7a25a5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5041b2ffdc873a7a569332a6ac7a25a5">onPassCommit</a> (<a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8ec">CommitPoint</a> commitPoint, <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">GameWorld</a> &amp;gameWorld, <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">UpdateContext</a> &amp;updateContext) noexcept=0</td></tr>
+<tr class="memdesc:a5041b2ffdc873a7a569332a6ac7a25a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when a pass reaches its commit point.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Interface for receiving notifications when a pass reaches its commit point. </p>
@@ -135,7 +135,7 @@ Public Member Functions</h2></td></tr>
 <p>| Flag | Action | |------|--------| | `PassEvents` | Swaps pass event bus buffers | | `FlushCommands` | Executes pending commands | | `FlushManagers` | Processes manager requests | | `Structural` | Combines all three flags |</p>
 <dl class="section user"><dt>Integration with GameLoop</dt><dd></dd></dl>
 <p>The <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html" title="Central orchestrator for the game update cycle.">GameLoop</a> implements this interface and registers itself with each <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html" title="Represents a phase in the game loop containing multiple passes.">Phase</a>. When a <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html" title="Abstract base class for game loop passes.">Pass</a> with a commit point completes, the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html" title="Represents a phase in the game loop containing multiple passes.">Phase</a> calls `onPassCommit()`, allowing the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html" title="Central orchestrator for the game update cycle.">GameLoop</a> to perform the appropriate synchronization.</p>
-<p>```cpp // In <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html#a4bf78e22f99e1d3028b50f4aa5ed9acd" title="Commits pass-level state based on the specified CommitPoint flags.">GameLoop::onPassCommit()</a>: if ((commitPoint &amp; <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8ecad42654403d0dfa55915ee7ba7fd7af0f" title="Commits pass-level events.">CommitPoint::PassEvents</a>) == <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8ecad42654403d0dfa55915ee7ba7fd7af0f" title="Commits pass-level events.">CommitPoint::PassEvents</a>) { passEventBus_.swapBuffers(); } if ((commitPoint &amp; <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8eca7ce9ed9ce12e02385a7745e379e97ca8" title="Flushes the command buffer.">CommitPoint::FlushCommands</a>) == <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8eca7ce9ed9ce12e02385a7745e379e97ca8" title="Flushes the command buffer.">CommitPoint::FlushCommands</a>) { commandBuffer_.flush(updateContext.gameWorld()); } if ((commitPoint &amp; <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8ecae58c90136fb14137d5f8d945b1b0db41" title="Flushes all registered managers.">CommitPoint::FlushManagers</a>) == <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8ecae58c90136fb14137d5f8d945b1b0db41" title="Flushes all registered managers.">CommitPoint::FlushManagers</a>) { updateContext.gameWorld().flushManagers(updateContext); } ```</p>
+<p>```cpp // In <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html#a97acde952251d5e0eceffb3beb2a4f33" title="Commits pass-level state based on the specified CommitPoint flags.">GameLoop::onPassCommit()</a>: if ((commitPoint &amp; <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8ecad42654403d0dfa55915ee7ba7fd7af0f" title="Commits pass-level events.">CommitPoint::PassEvents</a>) == <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8ecad42654403d0dfa55915ee7ba7fd7af0f" title="Commits pass-level events.">CommitPoint::PassEvents</a>) { passEventBus_.swapBuffers(); } if ((commitPoint &amp; <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8eca7ce9ed9ce12e02385a7745e379e97ca8" title="Flushes the command buffer.">CommitPoint::FlushCommands</a>) == <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8eca7ce9ed9ce12e02385a7745e379e97ca8" title="Flushes the command buffer.">CommitPoint::FlushCommands</a>) { commandBuffer_.flush(updateContext.gameWorld()); } if ((commitPoint &amp; <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8ecae58c90136fb14137d5f8d945b1b0db41" title="Flushes all registered managers.">CommitPoint::FlushManagers</a>) == <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8ecae58c90136fb14137d5f8d945b1b0db41" title="Flushes all registered managers.">CommitPoint::FlushManagers</a>) { updateContext.gameWorld().flushManagers(updateContext); } ```</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html" title="Central orchestrator for the game update cycle.">GameLoop</a> </dd>
 <dd>
 <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html" title="Represents a phase in the game loop containing multiple passes.">Phase</a> </dd>
@@ -144,7 +144,7 @@ Public Member Functions</h2></td></tr>
 <dd>
 <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html#abdb94a899ecc215ffa46e24880ebd8ec" title="Flags defining synchronization actions at the end of a pass.">CommitPoint</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="PassCommitListener_8ixx_source.html#l00062">62</a> of file <a class="el" href="PassCommitListener_8ixx_source.html">PassCommitListener.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PassCommitListener_8ixx_source.html#l00065">65</a> of file <a class="el" href="PassCommitListener_8ixx_source.html">PassCommitListener.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a0bf454935a73dcfd5273289d92f21c27" name="a0bf454935a73dcfd5273289d92f21c27"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0bf454935a73dcfd5273289d92f21c27">&#9670;&#160;</a></span>~PassCommitListener()</h2>
@@ -174,8 +174,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="ad8b56d62719d7fd9849cc9eaa44b9679" name="ad8b56d62719d7fd9849cc9eaa44b9679"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad8b56d62719d7fd9849cc9eaa44b9679">&#9670;&#160;</a></span>onPassCommit()</h2>
+<a id="a5041b2ffdc873a7a569332a6ac7a25a5" name="a5041b2ffdc873a7a569332a6ac7a25a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5041b2ffdc873a7a569332a6ac7a25a5">&#9670;&#160;</a></span>onPassCommit()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -191,7 +191,12 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>updateContext</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">GameWorld</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>gameWorld</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">UpdateContext</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>updateContext</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -207,6 +212,7 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">commitPoint</td><td>The flags specifying which synchronization actions to perform. </td></tr>
+    <tr><td class="paramname">gameWorld</td><td>The game world for which the pass occurred. </td></tr>
     <tr><td class="paramname">updateContext</td><td>The current frame's update context.</td></tr>
   </table>
   </dd>
@@ -216,7 +222,7 @@ Public Member Functions</h2></td></tr>
 <dd>
 <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html#a5c6fbf481a72dde9ce1836df322ce1a3" title="Adds a commit point and returns the owning Phase.">Pass::addCommitPoint()</a> </dd></dl>
 
-<p>Implemented in <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html#a4bf78e22f99e1d3028b50f4aa5ed9acd">helios::engine::runtime::gameloop::GameLoop</a>.</p>
+<p>Implemented in <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html#a97acde952251d5e0eceffb3beb2a4f33">helios::engine::runtime::gameloop::GameLoop</a>.</p>
 
 </div>
 </div>

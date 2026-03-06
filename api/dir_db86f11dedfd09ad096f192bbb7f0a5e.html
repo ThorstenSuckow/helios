@@ -121,11 +121,11 @@ Files</h2></td></tr>
 <tr class="memdesc:WorldLifecycleCommand_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command for requesting world-level lifecycle operations. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md267"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md279"></a>
 helios::engine::mechanics::lifecycle::commands</h1>
 <p>World-level lifecycle commands for the command buffer.</p>
 <p>This namespace contains command classes used to request world-level lifecycle operations through the command system.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md268"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md280"></a>
 Commands</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -134,10 +134,10 @@ Commands</h1>
 <td class="markdownTableBodyNone"><span class="tt">WorldLifecycleCommand</span>  </td><td class="markdownTableBodyNone">Carries a <span class="tt">WorldLifecycleAction</span> to request a world-level operation (e.g. Reset)  </td></tr>
 </table>
 <p><span class="tt">WorldLifecycleAction</span> is defined in the sibling <span class="tt">types</span> submodule (<span class="tt"><a class="el" href="namespacehelios_1_1engine_1_1mechanics_1_1lifecycle_1_1types.html" title="Core type definitions for the lifecycle module.">helios.engine.mechanics.lifecycle.types</a></span>).</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md269"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md281"></a>
 Usage</h1>
 <p>Commands are typically issued by state listeners when the game world needs to be reset:</p>
-<div class="fragment"><div class="line">updateContext.commandBuffer().add&lt;WorldLifecycleCommand&gt;(WorldLifecycleAction::Reset);</div>
+<div class="fragment"><div class="line">updateContext.queueCommand&lt;WorldLifecycleCommand&gt;(WorldLifecycleAction::Reset);</div>
 </div><!-- fragment --><p>The command is routed through the <span class="tt">EngineCommandBuffer</span> to the <span class="tt">WorldLifecycleManager</span>, which executes the requested action during its flush cycle.</p>
 <hr  />
 <details >

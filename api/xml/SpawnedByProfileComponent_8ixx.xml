@@ -3,7 +3,7 @@
   <compounddef id="SpawnedByProfileComponent_8ixx" kind="file" language="C++">
     <compoundname>SpawnedByProfileComponent.ixx</compoundname>
     <includes refid="types_8ixx" local="no">helios.core.types</includes>
-    <includes refid="SpawnProfileId_8ixx" local="no">helios.engine.core.data.SpawnProfileId</includes>
+    <includes refid="SpawnProfileId_8ixx" local="no">helios.engine.runtime.spawn.types.SpawnProfileId</includes>
     <incdepgraph>
       <node id="8">
         <label>helios.core.algorithms</label>
@@ -43,26 +43,26 @@
         <label>helios.core.types</label>
         <link refid="types_8ixx"/>
       </node>
-      <node id="3">
-        <label>helios.engine.core.data.SpawnProfileId</label>
-        <link refid="SpawnProfileId_8ixx"/>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
-      </node>
       <node id="1">
         <label>SpawnedByProfileComponent.ixx</label>
         <link refid="SpawnedByProfileComponent_8ixx"/>
         <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios.engine.runtime.spawn.types.SpawnProfileId</label>
+        <link refid="SpawnProfileId_8ixx"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
         </childnode>
       </node>
       <node id="11">
@@ -99,7 +99,7 @@
 <codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8mechanics_8spawn_8components_8SpawnedByProfileComponent" kindref="compound">helios.engine.mechanics.spawn.components.SpawnedByProfileComponent</ref>;</highlight></codeline>
 <codeline lineno="8"><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8core_8data_8SpawnProfileId" kindref="compound">helios.engine.core.data.SpawnProfileId</ref>;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8runtime_8spawn_8types_8SpawnProfileId" kindref="compound">helios.engine.runtime.spawn.types.SpawnProfileId</ref>;</highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8core_8types" kindref="compound">helios.core.types</ref>;</highlight></codeline>
 <codeline lineno="12"><highlight class="normal"></highlight></codeline>
 <codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1mechanics_1_1spawn_1_1components" kindref="compound">helios::engine::mechanics::spawn::components</ref><sp/>{</highlight></codeline>
@@ -139,7 +139,7 @@
 <codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="48"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Default-initialized<sp/>to<sp/>0,<sp/>which<sp/>represents<sp/>an<sp/>invalid/unassigned<sp/>profile.</highlight></codeline>
 <codeline lineno="49"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1engine_1_1core_1_1data_1a1bb1078074b84d8536a3d74c2d29d150" kindref="member">helios::engine::core::data::SpawnProfileId</ref><sp/>spawnProfileId_{<ref refid="namespacehelios_1_1core_1_1types_1a209d373c4d42ac831d2f6bfd1c4165ad" kindref="member">helios::core::types::no_init</ref>};</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1types_1adbee7d14f4c127a65914c192c3e18162" kindref="member">helios::engine::runtime::spawn::types::SpawnProfileId</ref><sp/>spawnProfileId_{<ref refid="namespacehelios_1_1core_1_1types_1a209d373c4d42ac831d2f6bfd1c4165ad" kindref="member">helios::core::types::no_init</ref>};</highlight></codeline>
 <codeline lineno="51"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="52"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
 <codeline lineno="53"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Whether<sp/>this<sp/>component<sp/>is<sp/>enabled.</highlight></codeline>
@@ -193,7 +193,7 @@
 <codeline lineno="101"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="102"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>The<sp/>SpawnProfileId<sp/>assigned<sp/>to<sp/>this<sp/>entity.</highlight></codeline>
 <codeline lineno="103"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="104" refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent_1a082c05d0a17fed8a8423f263ff327a72" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="namespacehelios" kindref="compound">helios</ref>::<ref refid="namespacehelios_1_1engine" kindref="compound">engine</ref>::<ref refid="namespacehelios_1_1engine_1_1core" kindref="compound">core</ref>::data::SpawnProfileId<sp/><ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent_1a082c05d0a17fed8a8423f263ff327a72" kindref="member">spawnProfileId</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="104" refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent_1a99f8b28242c74ddad3152075a2798464" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="namespacehelios" kindref="compound">helios</ref>::<ref refid="namespacehelios_1_1engine" kindref="compound">engine</ref>::<ref refid="namespacehelios_1_1engine_1_1runtime" kindref="compound">runtime</ref>::<ref refid="namespacehelios_1_1engine_1_1mechanics_1_1spawn" kindref="compound">spawn</ref>::types::SpawnProfileId<sp/><ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent_1a99f8b28242c74ddad3152075a2798464" kindref="member">spawnProfileId</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
 <codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>spawnProfileId_;</highlight></codeline>
 <codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="107"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
@@ -205,8 +205,8 @@
 <codeline lineno="113"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="114"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>spawnProfileId<sp/>The<sp/>profile<sp/>ID<sp/>to<sp/>assign.</highlight></codeline>
 <codeline lineno="115"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="116" refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent_1a28bd8f94b1bbb3a9d433199d494bc982" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent_1a28bd8f94b1bbb3a9d433199d494bc982" kindref="member">setSpawnProfileId</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1engine_1_1core_1_1data_1a1bb1078074b84d8536a3d74c2d29d150" kindref="member">helios::engine::core::data::SpawnProfileId</ref>&amp;<sp/><ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent_1a082c05d0a17fed8a8423f263ff327a72" kindref="member">spawnProfileId</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spawnProfileId_<sp/>=<sp/><ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent_1a082c05d0a17fed8a8423f263ff327a72" kindref="member">spawnProfileId</ref>;</highlight></codeline>
+<codeline lineno="116" refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent_1a8bd7f4cdb5fd24e8726e18868823d99c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent_1a8bd7f4cdb5fd24e8726e18868823d99c" kindref="member">setSpawnProfileId</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1types_1adbee7d14f4c127a65914c192c3e18162" kindref="member">helios::engine::runtime::spawn::types::SpawnProfileId</ref>&amp;<sp/><ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent_1a99f8b28242c74ddad3152075a2798464" kindref="member">spawnProfileId</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spawnProfileId_<sp/>=<sp/><ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent_1a99f8b28242c74ddad3152075a2798464" kindref="member">spawnProfileId</ref>;</highlight></codeline>
 <codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="119"><highlight class="normal"></highlight></codeline>
 <codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>

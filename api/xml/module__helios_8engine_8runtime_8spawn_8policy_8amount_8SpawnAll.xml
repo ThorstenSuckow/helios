@@ -5,15 +5,15 @@
     <innerfile refid="SpawnAll_8ixx">SpawnAll.ixx</innerfile>
     <innerclass refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAll" prot="public">helios::engine::runtime::spawn::policy::amount::SpawnAll</innerclass>
     <sectiondef kind="func">
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAll_1a496fad85a648d7bc01515f613bf6b3cb" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAll_1ac928a33c3625f524340087d3e63a3a8a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>size_t</type>
         <definition>size_t helios::engine::runtime::spawn::policy::amount::SpawnAll::getAmount</definition>
-        <argsstring>(const helios::engine::core::data::GameObjectPoolId gameObjectPoolId, const SpawnRuleState &amp;spawnRuleState, const helios::engine::runtime::world::UpdateContext &amp;updateContext) const override</argsstring>
+        <argsstring>(const helios::engine::runtime::pooling::types::GameObjectPoolId gameObjectPoolId, const SpawnRuleState &amp;spawnRuleState, const helios::engine::runtime::world::GameWorld &amp;gameWorld, const helios::engine::runtime::world::UpdateContext &amp;updateContext) const override</argsstring>
         <name>getAmount</name>
         <qualifiedname>helios::engine::runtime::spawn::policy::amount::SpawnAll::getAmount</qualifiedname>
-        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountProvider_1ab8b6b69ca5a82526f73def529a375c90">getAmount</reimplements>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountProvider_1a597b2623083d8a184e1bb438de46276c">getAmount</reimplements>
         <param>
-          <type>const <ref refid="namespacehelios_1_1engine_1_1core_1_1data_1a7d2c0aea5d6ad4509188da62579429d6" kindref="member">helios::engine::core::data::GameObjectPoolId</ref></type>
+          <type>const <ref refid="namespacehelios_1_1engine_1_1runtime_1_1pooling_1_1types_1a9eabad620f775312a5f29f77a73d31d1" kindref="member">helios::engine::runtime::pooling::types::GameObjectPoolId</ref></type>
           <declname>gameObjectPoolId</declname>
         </param>
         <param>
@@ -21,11 +21,15 @@
           <declname>spawnRuleState</declname>
         </param>
         <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <param>
           <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
           <declname>updateContext</declname>
         </param>
         <briefdescription>
-<para>Returns the number of inactive objects in the pool. </para>
+<para>Returns the number of entities to spawn.    </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -33,7 +37,7 @@
 <parametername>gameObjectPoolId</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The pool to query. </para>
+<para>The pool to spawn from. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -41,7 +45,15 @@
 <parametername>spawnRuleState</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Current state of the spawn rule. </para>
+<para>The rule&apos;s current runtime state. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The game world in which the spawn occurs. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -49,21 +61,20 @@
 <parametername>updateContext</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Context providing access to GameWorld and managers.</para>
+<para>The current frame&apos;s context.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>Number of inactive (available) objects in the pool. </para>
+<simplesect kind="return"><para>Number of entities to spawn.    </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/SpawnAll.ixx" line="45" column="17" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/SpawnAll.ixx" bodystart="45" bodyend="52"/>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/SpawnAll.ixx" line="39" column="17" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/policy/amount/SpawnAll.ixx" bodystart="39" bodyend="50"/>
         <references refid="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolSnapshot_1af3461e09c8080818b67e7376f4441985" compoundref="GameObjectPoolSnapshot_8ixx" startline="43">helios::engine::runtime::pooling::GameObjectPoolSnapshot::inactiveCount</references>
-        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a8dd6b2a3a5252afb190ab22e0ddbc277" compoundref="GameObjectPoolManager_8ixx" startline="209" endline="217">helios::engine::runtime::pooling::GameObjectPoolManager::poolSnapshot</references>
-        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry_1a11562a65e70f32bf894460020bacf6de" compoundref="ResourceRegistry_8ixx" startline="230" endline="234">helios::engine::runtime::world::ResourceRegistry::resource</references>
-        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1adaeb79c72c7affdd5c3197556c82665e" compoundref="UpdateContext_8ixx" startline="249" endline="251">helios::engine::runtime::world::UpdateContext::resourceRegistry</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1adefe79820216fb38882703ec30fca781" compoundref="GameObjectPoolManager_8ixx" startline="210" endline="218">helios::engine::runtime::pooling::GameObjectPoolManager::poolSnapshot</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ac340d3409a822f52579b428696dded50" compoundref="GameWorld_8ixx" startline="364" endline="366">helios::engine::runtime::world::GameWorld::tryManager</references>
       </memberdef>
     </sectiondef>
     <briefdescription>

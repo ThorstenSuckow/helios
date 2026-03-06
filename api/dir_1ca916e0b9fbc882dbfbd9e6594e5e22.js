@@ -2,6 +2,7 @@ var dir_1ca916e0b9fbc882dbfbd9e6594e5e22 =
 [
     [ "components", "dir_8bbfdb3074aa5394e722af7d9f4cad42.html", "dir_8bbfdb3074aa5394e722af7d9f4cad42" ],
     [ "systems", "dir_332ee2fb83ffca0bb7838dea50093abe.html", "dir_332ee2fb83ffca0bb7838dea50093abe" ],
+    [ "types", "dir_aad4f61a2b7361b17137c4801ea7d46b.html", "dir_aad4f61a2b7361b17137c4801ea7d46b" ],
     [ "_module.ixx", "helios_2engine_2ecs_2__module_8ixx.html", null ],
     [ "ComponentOps.ixx", "ComponentOps_8ixx.html", "ComponentOps_8ixx" ],
     [ "ComponentOpsRegistry.ixx", "ComponentOpsRegistry_8ixx.html", "ComponentOpsRegistry_8ixx" ],

@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="concepthelios_1_1engine_1_1common_1_1concepts_1_1HasTag" kind="concept">
+    <compoundname>helios::engine::common::concepts::HasTag</compoundname>
+    <templateparamlist>
+      <param>
+        <type>class T</type>
+      </param>
+      <param>
+        <type>class Tag</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;class T, class Tag&gt;
+concept <ref refid="concepthelios_1_1engine_1_1common_1_1concepts_1_1HasTag" kindref="compound">helios::engine::common::concepts::HasTag</ref> =  requires { typename T::EngineRoleTag; } &amp;&amp;
+                 std::same_as&lt;typename T::EngineRoleTag, Tag&gt;    </initializer>
+    <briefdescription>
+<para>Detects whether T declares a nested `EngineRoleTag` alias equal to Tag. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Used by role-specific concepts (IsManagerLike, IsSystemLike) to verify that a type has been explicitly tagged for a particular engine role. The tag must be declared as `using EngineRoleTag = Tag;` inside the class.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type to inspect. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Tag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The expected tag type (e.g. ManagerRole, SystemRole).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para>ManagerRole </para>
+</simplesect>
+<simplesect kind="see"><para>SystemRole </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/common/concepts/HasTag.ixx" line="27" column="5"/>
+  </compounddef>
+</doxygen>

@@ -5,7 +5,6 @@ var namespacehelios_1_1engine_1_1mechanics_1_1scoring =
     [ "components", "namespacehelios_1_1engine_1_1mechanics_1_1scoring_1_1components.html", "namespacehelios_1_1engine_1_1mechanics_1_1scoring_1_1components" ],
     [ "types", "namespacehelios_1_1engine_1_1mechanics_1_1scoring_1_1types.html", "namespacehelios_1_1engine_1_1mechanics_1_1scoring_1_1types" ],
     [ "MaxScorePoolSnapshot", "structhelios_1_1engine_1_1mechanics_1_1scoring_1_1MaxScorePoolSnapshot.html", "structhelios_1_1engine_1_1mechanics_1_1scoring_1_1MaxScorePoolSnapshot" ],
-    [ "ScoreCommandHandler", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler.html", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScoreCommandHandler" ],
     [ "ScorePool", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePool.html", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePool" ],
     [ "ScorePoolManager", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager.html", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolManager" ],
     [ "ScorePoolSnapshot", "structhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolSnapshot.html", "structhelios_1_1engine_1_1mechanics_1_1scoring_1_1ScorePoolSnapshot" ],

@@ -103,41 +103,52 @@ $(function() {
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">helios::engine::runtime::messaging::command::CommandBuffer Class Reference<span class="mlabels"><span class="mlabel abstract">abstract</span><span class="mlabel export">export</span></span><div class="ingroups">module <a class="el" href="module__helios_8engine_8runtime_8messaging_8command_8CommandBuffer.html">helios.engine.runtime.messaging.command.CommandBuffer</a></div></div></div>
+  <div class="headertitle"><div class="title">helios::engine::runtime::messaging::command::CommandBuffer Class Reference<span class="mlabels"><span class="mlabel export">export</span></span><div class="ingroups">module <a class="el" href="module__helios_8engine_8runtime_8messaging_8command_8CommandBuffer.html">helios.engine.runtime.messaging.command.CommandBuffer</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Abstract base for command buffers that collect and flush commands.  
+<p>Type-erased wrapper for command buffers using the Concept/Model pattern.  
  <a href="#details">More...</a></p>
-<div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Inheritance diagram for helios::engine::runtime::messaging::command::CommandBuffer:</div>
-<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer__inherit__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad30a48c89c776560b95ce2e0c1244be4" id="r_ad30a48c89c776560b95ce2e0c1244be4"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad30a48c89c776560b95ce2e0c1244be4">~CommandBuffer</a> ()=default</td></tr>
-<tr class="memdesc:ad30a48c89c776560b95ce2e0c1244be4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor for proper polymorphic cleanup.  <br /></td></tr>
-<tr class="memitem:a8535f5c29283dac178b3b3d2449210d4" id="r_a8535f5c29283dac178b3b3d2449210d4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8535f5c29283dac178b3b3d2449210d4">flush</a> (<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a> &amp;updateContext) noexcept=0</td></tr>
-<tr class="memdesc:a8535f5c29283dac178b3b3d2449210d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes all queued commands and clears the buffer.  <br /></td></tr>
-<tr class="memitem:a79125d01f21544304762287af62d176a" id="r_a79125d01f21544304762287af62d176a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a79125d01f21544304762287af62d176a">clear</a> () noexcept=0</td></tr>
-<tr class="memdesc:a79125d01f21544304762287af62d176a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Discards all queued commands without executing them.  <br /></td></tr>
+<tr class="memitem:a3e0a0b9e4826ed2f25f19e1f1b149049" id="r_a3e0a0b9e4826ed2f25f19e1f1b149049"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3e0a0b9e4826ed2f25f19e1f1b149049">CommandBuffer</a> ()=default</td></tr>
+<tr class="memitem:a36b8adf877bcfc2614d7ef8d5676ee26" id="r_a36b8adf877bcfc2614d7ef8d5676ee26"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; <br />
+requires IsCommandBufferLike&lt;T&gt;</td></tr>
+<tr class="memitem:a36b8adf877bcfc2614d7ef8d5676ee26 template"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a36b8adf877bcfc2614d7ef8d5676ee26">CommandBuffer</a> (T cmdBuffer)</td></tr>
+<tr class="memdesc:a36b8adf877bcfc2614d7ef8d5676ee26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Type-erased wrapper for command buffers using the Concept/Model pattern.">CommandBuffer</a> wrapping the given concrete buffer.  <br /></td></tr>
+<tr class="memitem:a0efa861c2a01c7787a8398a3b04b4be8" id="r_a0efa861c2a01c7787a8398a3b04b4be8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0efa861c2a01c7787a8398a3b04b4be8">CommandBuffer</a> (const CommandBuffer &amp;)=delete</td></tr>
+<tr class="memitem:aa332eb76d651e5e7e558f7ecf4010372" id="r_aa332eb76d651e5e7e558f7ecf4010372"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a3e0a0b9e4826ed2f25f19e1f1b149049">CommandBuffer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa332eb76d651e5e7e558f7ecf4010372">operator=</a> (const <a class="el" href="#a3e0a0b9e4826ed2f25f19e1f1b149049">CommandBuffer</a> &amp;)=delete</td></tr>
+<tr class="memitem:ad71fc2a68aa47d91d7ef64e723f9da71" id="r_ad71fc2a68aa47d91d7ef64e723f9da71"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a3e0a0b9e4826ed2f25f19e1f1b149049">CommandBuffer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad71fc2a68aa47d91d7ef64e723f9da71">operator=</a> (<a class="el" href="#a3e0a0b9e4826ed2f25f19e1f1b149049">CommandBuffer</a> &amp;&amp;)=default</td></tr>
+<tr class="memitem:a20183b1dc9a8c3099fda8b4019fa46ea" id="r_a20183b1dc9a8c3099fda8b4019fa46ea"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a20183b1dc9a8c3099fda8b4019fa46ea">CommandBuffer</a> (CommandBuffer &amp;&amp;) noexcept=default</td></tr>
+<tr class="memitem:a80128451f19c3de35198be2f2c19edcd" id="r_a80128451f19c3de35198be2f2c19edcd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a80128451f19c3de35198be2f2c19edcd">flush</a> (<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">GameWorld</a> &amp;gameWorld, <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">UpdateContext</a> &amp;updateContext) noexcept</td></tr>
+<tr class="memdesc:a80128451f19c3de35198be2f2c19edcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes all queued commands and clears the buffer.  <br /></td></tr>
+<tr class="memitem:a5436e83c56965b0b7b104a260ce3fb06" id="r_a5436e83c56965b0b7b104a260ce3fb06"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5436e83c56965b0b7b104a260ce3fb06">clear</a> () noexcept</td></tr>
+<tr class="memdesc:a5436e83c56965b0b7b104a260ce3fb06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Discards all queued commands without executing them.  <br /></td></tr>
+<tr class="memitem:a1f3d114eea4036a7372e0f8657b8c871" id="r_a1f3d114eea4036a7372e0f8657b8c871"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1f3d114eea4036a7372e0f8657b8c871">underlying</a> () noexcept</td></tr>
+<tr class="memdesc:a1f3d114eea4036a7372e0f8657b8c871"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a type-erased pointer to the owned buffer instance.  <br /></td></tr>
+<tr class="memitem:a3e3797e8096e25757a0540d14f9bb831" id="r_a3e3797e8096e25757a0540d14f9bb831"><td class="memItemLeft" align="right" valign="top">const void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3e3797e8096e25757a0540d14f9bb831">underlying</a> () const noexcept</td></tr>
+<tr class="memdesc:a3e3797e8096e25757a0540d14f9bb831"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a type-erased pointer to the owned buffer instance.     <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Abstract base for command buffers that collect and flush commands. </p>
-<p><a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Abstract base for command buffers that collect and flush commands.">CommandBuffer</a> defines the interface for deferred command execution. Commands are accumulated during the frame and flushed at defined commit points in the game loop. Concrete implementations (e.g., <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer.html" title="Compile-time typed command buffer with per-type queues and handler routing.">TypedCommandBuffer</a>) provide type-safe storage and routing.</p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer.html" title="Compile-time typed command buffer with per-type queues and handler routing.">TypedCommandBuffer</a> </dd>
+<div class="textblock"><p>Type-erased wrapper for command buffers using the Concept/Model pattern. </p>
+<p><a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Type-erased wrapper for command buffers using the Concept/Model pattern.">CommandBuffer</a> erases the concrete buffer type at construction time, allowing heterogeneous storage and polymorphic dispatch without requiring concrete buffers to inherit from a common base class.</p>
+<p>## Type Erasure</p>
+<p>``` <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Type-erased wrapper for command buffers using the Concept/Model pattern.">CommandBuffer</a> (value type, owns erased Concept via unique_ptr) └── Concept (internal virtual interface) └── Model&lt;T&gt; (typed wrapper, owns T by value) └── T (plain class, provides <a class="el" href="#a80128451f19c3de35198be2f2c19edcd" title="Executes all queued commands and clears the buffer.">flush()</a> / <a class="el" href="#a5436e83c56965b0b7b104a260ce3fb06" title="Discards all queued commands without executing them.">clear()</a>) ```</p>
+<p>The wrapped type must satisfy `IsCommandBufferLike&lt;T&gt;`, which requires `flush(<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html" title="Central game state container for entities, resources, and the active level.">GameWorld</a>&amp;, <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html" title="Per-frame context passed to systems during game loop updates.">UpdateContext</a>&amp;) noexcept` and `clear() noexcept`.</p>
+<p><a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Type-erased wrapper for command buffers using the Concept/Model pattern.">CommandBuffer</a> is move-only (non-copyable).</p>
+<dl class="section see"><dt>See also</dt><dd>IsCommandBufferLike </dd>
+<dd>
+<a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer.html" title="Compile-time typed command buffer with per-type queues and handler routing.">TypedCommandBuffer</a> </dd>
 <dd>
 <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer.html" title="Concrete command buffer pre-configured with all engine command types.">EngineCommandBuffer</a> </dd>
 <dd>
-Manager </dd></dl>
+<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html" title="Unified type-indexed registry for all engine resources.">ResourceRegistry</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00030">30</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00046">46</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ad30a48c89c776560b95ce2e0c1244be4" name="ad30a48c89c776560b95ce2e0c1244be4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad30a48c89c776560b95ce2e0c1244be4">&#9670;&#160;</a></span>~CommandBuffer()</h2>
+<a id="a3e0a0b9e4826ed2f25f19e1f1b149049" name="a3e0a0b9e4826ed2f25f19e1f1b149049"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e0a0b9e4826ed2f25f19e1f1b149049">&#9670;&#160;</a></span>CommandBuffer() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -146,7 +157,7 @@ Manager </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual helios::engine::runtime::messaging::command::CommandBuffer::~CommandBuffer </td>
+          <td class="memname">helios::engine::runtime::messaging::command::CommandBuffer::CommandBuffer </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -154,18 +165,68 @@ Manager </dd></dl>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel virtual">virtual</span><span class="mlabel default">default</span></span>  </td>
+<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel default">default</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Virtual destructor for proper polymorphic cleanup. </p>
+<p class="reference">Referenced by <a class="el" href="#a20183b1dc9a8c3099fda8b4019fa46ea">CommandBuffer()</a>, <a class="el" href="#a0efa861c2a01c7787a8398a3b04b4be8">CommandBuffer()</a>, <a class="el" href="#ad71fc2a68aa47d91d7ef64e723f9da71">operator=()</a>, and <a class="el" href="#aa332eb76d651e5e7e558f7ecf4010372">operator=()</a>.</p>
+<div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_a3e0a0b9e4826ed2f25f19e1f1b149049_icgraph.svg" width="544" height="302"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 
 </div>
 </div>
-<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a79125d01f21544304762287af62d176a" name="a79125d01f21544304762287af62d176a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a79125d01f21544304762287af62d176a">&#9670;&#160;</a></span>clear()</h2>
+<a id="a36b8adf877bcfc2614d7ef8d5676ee26" name="a36b8adf877bcfc2614d7ef8d5676ee26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36b8adf877bcfc2614d7ef8d5676ee26">&#9670;&#160;</a></span>CommandBuffer() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; <br />
+requires IsCommandBufferLike&lt;T&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::engine::runtime::messaging::command::CommandBuffer::CommandBuffer </td>
+          <td>(</td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>cmdBuffer</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs a <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Type-erased wrapper for command buffers using the Concept/Model pattern.">CommandBuffer</a> wrapping the given concrete buffer. </p>
+<p>Ownership of the buffer is transferred into a heap-allocated Model&lt;T&gt;. The concrete type is erased after construction.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The concrete buffer type. Must satisfy IsCommandBufferLike.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cmdBuffer</td><td>The buffer instance to wrap. Moved into the wrapper. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00118">118</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
+
+</div>
+</div>
+<a id="a0efa861c2a01c7787a8398a3b04b4be8" name="a0efa861c2a01c7787a8398a3b04b4be8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0efa861c2a01c7787a8398a3b04b4be8">&#9670;&#160;</a></span>CommandBuffer() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -174,7 +235,74 @@ Manager </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void helios::engine::runtime::messaging::command::CommandBuffer::clear </td>
+          <td class="memname">helios::engine::runtime::messaging::command::CommandBuffer::CommandBuffer </td>
+          <td>(</td>
+          <td class="paramtype">const CommandBuffer &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel delete">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">References <a class="el" href="#a3e0a0b9e4826ed2f25f19e1f1b149049">CommandBuffer()</a>.</p>
+<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_a0efa861c2a01c7787a8398a3b04b4be8_cgraph.svg" width="544" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a20183b1dc9a8c3099fda8b4019fa46ea" name="a20183b1dc9a8c3099fda8b4019fa46ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20183b1dc9a8c3099fda8b4019fa46ea">&#9670;&#160;</a></span>CommandBuffer() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::engine::runtime::messaging::command::CommandBuffer::CommandBuffer </td>
+          <td>(</td>
+          <td class="paramtype">CommandBuffer &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel default">default</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">References <a class="el" href="#a3e0a0b9e4826ed2f25f19e1f1b149049">CommandBuffer()</a>.</p>
+<div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_a20183b1dc9a8c3099fda8b4019fa46ea_cgraph.svg" width="544" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a5436e83c56965b0b7b104a260ce3fb06" name="a5436e83c56965b0b7b104a260ce3fb06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5436e83c56965b0b7b104a260ce3fb06">&#9670;&#160;</a></span>clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::engine::runtime::messaging::command::CommandBuffer::clear </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -182,19 +310,20 @@ Manager </dd></dl>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel pure-virtual">pure virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Discards all queued commands without executing them. </p>
+<dl class="section pre"><dt>Precondition</dt><dd>The <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Type-erased wrapper for command buffers using the Concept/Model pattern.">CommandBuffer</a> must be initialized. </dd></dl>
 
-<p>Implemented in <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer.html#a10b84b9f9d1099022f35fb8f839a4f90">helios::engine::runtime::messaging::command::EngineCommandBuffer</a>, <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer.html#a8e0ac1bed42dc63df2b3f8c270e35758">helios::engine::runtime::messaging::command::TypedCommandBuffer&lt; CommandTypes &gt;</a>, and <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer.html#a8e0ac1bed42dc63df2b3f8c270e35758">helios::engine::runtime::messaging::command::TypedCommandBuffer&lt; helios::engine::mechanics::combat::commands::Aim2DCommand, helios::engine::mechanics::combat::commands::ShootCommand, helios::engine::mechanics::damage::commands::ApplyDamageCommand, helios::engine::modules::physics::motion::commands::Move2DCommand, helios::engine::modules::physics::motion::commands::SteeringCommand, helios::engine::mechanics::scoring::commands::UpdateScoreCommand, helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand, helios::engine::runtime::spawn::commands::SpawnCommand, helios::engine::runtime::spawn::commands::DespawnCommand, helios::engine::state::commands::StateCommand&lt; helios::engine::mechanics::gamestate::types::GameState &gt;, helios::engine::state::commands::StateCommand&lt; helios::engine::mechanics::match::types::MatchState &gt;, helios::engine::modules::ui::commands::UiActionCommand, helios::engine::mechanics::timing::commands::TimerControlCommand, helios::engine::mechanics::lifecycle::commands::WorldLifecycleCommand &gt;</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00148">148</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
 
 </div>
 </div>
-<a id="a8535f5c29283dac178b3b3d2449210d4" name="a8535f5c29283dac178b3b3d2449210d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8535f5c29283dac178b3b3d2449210d4">&#9670;&#160;</a></span>flush()</h2>
+<a id="a80128451f19c3de35198be2f2c19edcd" name="a80128451f19c3de35198be2f2c19edcd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80128451f19c3de35198be2f2c19edcd">&#9670;&#160;</a></span>flush()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -203,29 +332,179 @@ Manager </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void helios::engine::runtime::messaging::command::CommandBuffer::flush </td>
+          <td class="memname">void helios::engine::runtime::messaging::command::CommandBuffer::flush </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>updateContext</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">GameWorld</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>gameWorld</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">UpdateContext</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>updateContext</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel pure-virtual">pure virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Executes all queued commands and clears the buffer. </p>
-<p>Commands are routed to their registered <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandHandler.html" title="Type-safe handler for a specific command type.">TypedCommandHandler</a> if available, otherwise executed directly via their `execute()` method.</p>
+<p>Delegates to the wrapped buffer's `flush()`. Commands are routed to their registered handler if available, otherwise executed directly.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">updateContext</td><td>The current frame's update context. </td></tr>
+    <tr><td class="paramname">gameWorld</td><td>The game world providing the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandlerRegistry.html" title="Registry that maps CommandType types to handler instances via function pointers.">CommandHandlerRegistry</a>. </td></tr>
+    <tr><td class="paramname">updateContext</td><td>The current frame's update context.</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section pre"><dt>Precondition</dt><dd>The <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Type-erased wrapper for command buffers using the Concept/Model pattern.">CommandBuffer</a> must be initialized (not default-constructed). </dd></dl>
 
-<p>Implemented in <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer.html#a4f2f838aa913f20181fc0cda507563ef">helios::engine::runtime::messaging::command::EngineCommandBuffer</a>, <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer.html#a1e035c4076ab5658d6cac38badec66ce">helios::engine::runtime::messaging::command::TypedCommandBuffer&lt; CommandTypes &gt;</a>, and <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer.html#a1e035c4076ab5658d6cac38badec66ce">helios::engine::runtime::messaging::command::TypedCommandBuffer&lt; helios::engine::mechanics::combat::commands::Aim2DCommand, helios::engine::mechanics::combat::commands::ShootCommand, helios::engine::mechanics::damage::commands::ApplyDamageCommand, helios::engine::modules::physics::motion::commands::Move2DCommand, helios::engine::modules::physics::motion::commands::SteeringCommand, helios::engine::mechanics::scoring::commands::UpdateScoreCommand, helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand, helios::engine::runtime::spawn::commands::SpawnCommand, helios::engine::runtime::spawn::commands::DespawnCommand, helios::engine::state::commands::StateCommand&lt; helios::engine::mechanics::gamestate::types::GameState &gt;, helios::engine::state::commands::StateCommand&lt; helios::engine::mechanics::match::types::MatchState &gt;, helios::engine::modules::ui::commands::UiActionCommand, helios::engine::mechanics::timing::commands::TimerControlCommand, helios::engine::mechanics::lifecycle::commands::WorldLifecycleCommand &gt;</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00138">138</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="CommandBuffer_8ixx_source.html#l00138">flush()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="CommandBuffer_8ixx_source.html#l00138">flush()</a>.</p>
+<div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-3-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_a80128451f19c3de35198be2f2c19edcd_cgraph.svg" width="194" height="90"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-4-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_a80128451f19c3de35198be2f2c19edcd_icgraph.svg" width="194" height="90"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ad71fc2a68aa47d91d7ef64e723f9da71" name="ad71fc2a68aa47d91d7ef64e723f9da71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad71fc2a68aa47d91d7ef64e723f9da71">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a3e0a0b9e4826ed2f25f19e1f1b149049">CommandBuffer</a> &amp; helios::engine::runtime::messaging::command::CommandBuffer::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a3e0a0b9e4826ed2f25f19e1f1b149049">CommandBuffer</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel default">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">References <a class="el" href="#a3e0a0b9e4826ed2f25f19e1f1b149049">CommandBuffer()</a>.</p>
+<div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_ad71fc2a68aa47d91d7ef64e723f9da71_cgraph.svg" width="504" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="aa332eb76d651e5e7e558f7ecf4010372" name="aa332eb76d651e5e7e558f7ecf4010372"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa332eb76d651e5e7e558f7ecf4010372">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a3e0a0b9e4826ed2f25f19e1f1b149049">CommandBuffer</a> &amp; helios::engine::runtime::messaging::command::CommandBuffer::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a3e0a0b9e4826ed2f25f19e1f1b149049">CommandBuffer</a> &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel delete">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">References <a class="el" href="#a3e0a0b9e4826ed2f25f19e1f1b149049">CommandBuffer()</a>.</p>
+<div id="dynsection-6" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-6-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_aa332eb76d651e5e7e558f7ecf4010372_cgraph.svg" width="504" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a3e3797e8096e25757a0540d14f9bb831" name="a3e3797e8096e25757a0540d14f9bb831"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e3797e8096e25757a0540d14f9bb831">&#9670;&#160;</a></span>underlying() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const void * helios::engine::runtime::messaging::command::CommandBuffer::underlying </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns a type-erased pointer to the owned buffer instance.    </p>
+<dl class="section return"><dt>Returns</dt><dd>Non-null void pointer to the underlying concrete buffer.</dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>The <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Type-erased wrapper for command buffers using the Concept/Model pattern.">CommandBuffer</a> must be initialized.    </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00168">168</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
+
+</div>
+</div>
+<a id="a1f3d114eea4036a7372e0f8657b8c871" name="a1f3d114eea4036a7372e0f8657b8c871"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f3d114eea4036a7372e0f8657b8c871">&#9670;&#160;</a></span>underlying() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * helios::engine::runtime::messaging::command::CommandBuffer::underlying </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns a type-erased pointer to the owned buffer instance. </p>
+<dl class="section return"><dt>Returns</dt><dd>Non-null void pointer to the underlying concrete buffer.</dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>The <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Type-erased wrapper for command buffers using the Concept/Model pattern.">CommandBuffer</a> must be initialized. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="CommandBuffer_8ixx_source.html#l00160">160</a> of file <a class="el" href="CommandBuffer_8ixx_source.html">CommandBuffer.ixx</a>.</p>
 
 </div>
 </div>

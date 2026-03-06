@@ -8,6 +8,6 @@ var classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScorePoolComp
     [ "isEnabled", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScorePoolComponent.html#a42e4c782585aee0ff9f682a899122e28", null ],
     [ "operator=", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScorePoolComponent.html#a654b2e1353f1f2a4e4312aab2614fe3c", null ],
     [ "operator=", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScorePoolComponent.html#aafed477c9468f666c636c4c290da882b", null ],
-    [ "scorePoolId", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScorePoolComponent.html#a67de85ab06c8bd29807b221512a8d84c", null ],
-    [ "setScorePoolId", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScorePoolComponent.html#acdb892d91627499a69e3f7c79d39221c", null ]
+    [ "scorePoolId", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScorePoolComponent.html#afb0f18ced8126f92a6051651a59cc1e2", null ],
+    [ "setScorePoolId", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScorePoolComponent.html#a31549cd45e7a2c4829814344c7d1c269", null ]
 ];

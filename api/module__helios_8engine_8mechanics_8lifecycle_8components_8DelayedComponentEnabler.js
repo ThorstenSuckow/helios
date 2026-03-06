@@ -7,6 +7,6 @@ var module__helios_8engine_8mechanics_8lifecycle_8components_8DelayedComponentEn
     [ "helios::engine::mechanics::lifecycle::components::DelayedComponentEnabler::DelayedComponentEnabler", "module__helios_8engine_8mechanics_8lifecycle_8components_8DelayedComponentEnabler.html#a40c9909a62f663c2de63f0b4d3be5e19", null ],
     [ "helios::engine::mechanics::lifecycle::components::DelayedComponentEnabler::operator=", "module__helios_8engine_8mechanics_8lifecycle_8components_8DelayedComponentEnabler.html#a99baa36f865c55a34e09d02925591133", null ],
     [ "helios::engine::mechanics::lifecycle::components::DelayedComponentEnabler::deferredComponents", "module__helios_8engine_8mechanics_8lifecycle_8components_8DelayedComponentEnabler.html#ae24325031885aba9151586091fc33a08", null ],
-    [ "helios::engine::mechanics::lifecycle::components::DelayedComponentEnabler::sync", "module__helios_8engine_8mechanics_8lifecycle_8components_8DelayedComponentEnabler.html#af41ef39f3ad2d0f4f3c20f424769fd27", null ],
-    [ "helios::engine::mechanics::lifecycle::components::DelayedComponentEnabler::defer", "module__helios_8engine_8mechanics_8lifecycle_8components_8DelayedComponentEnabler.html#acdffc14071644f325c8c08bd999dc6b3", null ]
+    [ "helios::engine::mechanics::lifecycle::components::DelayedComponentEnabler::sync", "module__helios_8engine_8mechanics_8lifecycle_8components_8DelayedComponentEnabler.html#acfc81726a675daa9b9bd0c1202012265", null ],
+    [ "helios::engine::mechanics::lifecycle::components::DelayedComponentEnabler::defer", "module__helios_8engine_8mechanics_8lifecycle_8components_8DelayedComponentEnabler.html#ac5a40dbae65431fb2ec607c19b074c55", null ]
 ];

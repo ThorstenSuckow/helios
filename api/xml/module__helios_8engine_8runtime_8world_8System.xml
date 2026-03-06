@@ -4,43 +4,253 @@
     <compoundname>helios.engine.runtime.world.System</compoundname>
     <innerfile refid="System_8ixx">System.ixx</innerfile>
     <innerclass refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System" prot="public">helios::engine::runtime::world::System</innerclass>
-    <sectiondef kind="func">
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1ac1b7dd052c6ff43e828af33dd808f19d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
-        <type></type>
-        <definition>virtual helios::engine::runtime::world::System::~System</definition>
-        <argsstring>()=default</argsstring>
-        <name>~System</name>
-        <qualifiedname>helios::engine::runtime::world::System::~System</qualifiedname>
+    <innerclass refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1_1Concept" prot="private">helios::engine::runtime::world::System::Concept</innerclass>
+    <innerclass refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1_1Model" prot="private">helios::engine::runtime::world::System::Model</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1_1Model_1af06f240e68e7295ab350cbeb1978291d" prot="private" static="no" mutable="no">
+        <type>T</type>
+        <definition>T helios::engine::runtime::world::System::Model&lt; T &gt;::system_</definition>
+        <argsstring></argsstring>
+        <name>system_</name>
+        <qualifiedname>helios::engine::runtime::world::System::Model::system_</qualifiedname>
         <briefdescription>
-<para>Virtual destructor for proper cleanup of derived systems. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/world/System.ixx" line="37" column="17"/>
+        <location file="/tmp/h/include/helios/engine/runtime/world/System.ixx" line="66" column="15" bodyfile="/tmp/h/include/helios/engine/runtime/world/System.ixx" bodystart="66" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1a0d9b1da4a025e82299d29da00172e291" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1ae6d0f1527158cf7a82d762bd1e3e375f" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; Concept &gt;</type>
+        <definition>std::unique_ptr&lt;Concept&gt; helios::engine::runtime::world::System::pimpl_</definition>
+        <argsstring></argsstring>
+        <name>pimpl_</name>
+        <qualifiedname>helios::engine::runtime::world::System::pimpl_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/System.ixx" line="91" column="25" bodyfile="/tmp/h/include/helios/engine/runtime/world/System.ixx" bodystart="91" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1_1Concept_1a0c13b52db502dcac9abbeb89d453462e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual helios::engine::runtime::world::System::Concept::~Concept</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Concept</name>
+        <qualifiedname>helios::engine::runtime::world::System::Concept::~Concept</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/System.ixx" line="52" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1_1Concept_1a02530603510888c4eeb3c7ae37a0246d" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
         <type>void</type>
-        <definition>virtual void helios::engine::runtime::world::System::initSystem</definition>
-        <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld) noexcept=0</argsstring>
-        <name>initSystem</name>
-        <qualifiedname>helios::engine::runtime::world::System::initSystem</qualifiedname>
-        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1TypedSystem_1a00872d526b8dedc33c51d8c94e9dbd3f">initSystem</reimplementedby>
+        <definition>virtual void helios::engine::runtime::world::System::Concept::update</definition>
+        <argsstring>(UpdateContext &amp;updateContext) noexcept=0</argsstring>
+        <name>update</name>
+        <qualifiedname>helios::engine::runtime::world::System::Concept::update</qualifiedname>
         <param>
-          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/System.ixx" line="53" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1_1Concept_1aff79b42651aa90767288f8f4b0880683" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void helios::engine::runtime::world::System::Concept::init</definition>
+        <argsstring>(GameWorld &amp;gameWorld) noexcept=0</argsstring>
+        <name>init</name>
+        <qualifiedname>helios::engine::runtime::world::System::Concept::init</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> &amp;</type>
           <declname>gameWorld</declname>
         </param>
         <briefdescription>
-<para>Called when the system is initialized by the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref>. </para>
         </briefdescription>
         <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/System.ixx" line="54" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1_1Concept_1acc502b39fa3945f61c67dbb019d23a99" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>void *</type>
+        <definition>virtual void * helios::engine::runtime::world::System::Concept::underlying</definition>
+        <argsstring>() noexcept=0</argsstring>
+        <name>underlying</name>
+        <qualifiedname>helios::engine::runtime::world::System::Concept::underlying</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/System.ixx" line="55" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1_1Concept_1abcc15458b182fb1f57fdcf2e73ce44da" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>const void *</type>
+        <definition>virtual const void * helios::engine::runtime::world::System::Concept::underlying</definition>
+        <argsstring>() const noexcept=0</argsstring>
+        <name>underlying</name>
+        <qualifiedname>helios::engine::runtime::world::System::Concept::underlying</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/System.ixx" line="56" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1_1Model_1a0b84078e66fd47bf83e759db0079c33c" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::runtime::world::System::Model&lt; T &gt;::Model</definition>
+        <argsstring>(T sys)</argsstring>
+        <name>Model</name>
+        <qualifiedname>helios::engine::runtime::world::System::Model::Model</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>sys</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/System.ixx" line="71" column="22" bodyfile="/tmp/h/include/helios/engine/runtime/world/System.ixx" bodystart="71" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1_1Model_1a0bb33734b7f6618a45b6aad232bafca6" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::world::System::Model&lt; T &gt;::update</definition>
+        <argsstring>(UpdateContext &amp;updateContext) noexcept override</argsstring>
+        <name>update</name>
+        <qualifiedname>helios::engine::runtime::world::System::Model::update</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/System.ixx" line="73" column="18" bodyfile="/tmp/h/include/helios/engine/runtime/world/System.ixx" bodystart="73" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1_1Model_1a1a42e7636736f214af5a7d8e802bf5c8" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::world::System::Model&lt; T &gt;::init</definition>
+        <argsstring>(GameWorld &amp;gameWorld) noexcept override</argsstring>
+        <name>init</name>
+        <qualifiedname>helios::engine::runtime::world::System::Model::init</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/System.ixx" line="76" column="18" bodyfile="/tmp/h/include/helios/engine/runtime/world/System.ixx" bodystart="76" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1_1Model_1aa3bc0633b585f81c9d859590ce8ac4b3" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void *</type>
+        <definition>void * helios::engine::runtime::world::System::Model&lt; T &gt;::underlying</definition>
+        <argsstring>() noexcept override</argsstring>
+        <name>underlying</name>
+        <qualifiedname>helios::engine::runtime::world::System::Model::underlying</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/System.ixx" line="82" column="18" bodyfile="/tmp/h/include/helios/engine/runtime/world/System.ixx" bodystart="82" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1_1Model_1a7beb843ed707834c488fb1ea38f78cd2" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const void *</type>
+        <definition>const void * helios::engine::runtime::world::System::Model&lt; T &gt;::underlying</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>underlying</name>
+        <qualifiedname>helios::engine::runtime::world::System::Model::underlying</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/System.ixx" line="86" column="24" bodyfile="/tmp/h/include/helios/engine/runtime/world/System.ixx" bodystart="86" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1a43e771ceab54c8eebaaf1f5e83a971e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::runtime::world::System::System</definition>
+        <argsstring>()=default</argsstring>
+        <name>System</name>
+        <qualifiedname>helios::engine::runtime::world::System::System</qualifiedname>
+        <briefdescription>
+<para>Default constructor creating an empty <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System" kindref="compound">System</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/System.ixx" line="98" column="9"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1a902fe9d2704caa486cf92bd74faba871">helios::engine::runtime::world::System::operator=</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1a4e2099df8199f5e71d906803fa9cc504">helios::engine::runtime::world::System::operator=</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1a39a8d961bc7c09bdcf07ef9589a0bf6c">helios::engine::runtime::world::System::System</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1abbdd557dcac12839a263da21a1831964">helios::engine::runtime::world::System::System</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1ab232de65de4e1a4bc13bc06bf4afbb12" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>helios::engine::runtime::world::System::System</definition>
+        <argsstring>(T system)</argsstring>
+        <name>System</name>
+        <qualifiedname>helios::engine::runtime::world::System::System</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>system</declname>
+        </param>
+    <requiresclause>HasUpdate&lt;T&gt;    </requiresclause>
+        <briefdescription>
+<para>Wraps a concrete system in a type-erased <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System" kindref="compound">System</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
-<parametername>gameWorld</parametername>
+<parametername>T</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> this system is being added to. </para>
+<para>The concrete system type, must satisfy `HasUpdate&lt;T&gt;`.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>system</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The concrete system instance to wrap (moved into internal storage). </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -48,21 +258,92 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/world/System.ixx" line="44" column="22"/>
+        <location file="/tmp/h/include/helios/engine/runtime/world/System.ixx" line="109" column="18" bodyfile="/tmp/h/include/helios/engine/runtime/world/System.ixx" bodystart="109" bodyend="109"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1a2b3e724197c9bdeae0348cd5ed88e667" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
-        <type>void</type>
-        <definition>virtual void helios::engine::runtime::world::System::updateSystem</definition>
-        <argsstring>(helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept=0</argsstring>
-        <name>updateSystem</name>
-        <qualifiedname>helios::engine::runtime::world::System::updateSystem</qualifiedname>
-        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1TypedSystem_1a9a5e55a0ef4812c426c86e2dafad9c47">updateSystem</reimplementedby>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1a39a8d961bc7c09bdcf07ef9589a0bf6c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::runtime::world::System::System</definition>
+        <argsstring>(const System &amp;)=delete</argsstring>
+        <name>System</name>
+        <qualifiedname>helios::engine::runtime::world::System::System</qualifiedname>
         <param>
-          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System" kindref="compound">System</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/System.ixx" line="111" column="9"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1a43e771ceab54c8eebaaf1f5e83a971e6">helios::engine::runtime::world::System::System</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1a902fe9d2704caa486cf92bd74faba871" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System" kindref="compound">System</ref> &amp;</type>
+        <definition>System &amp; helios::engine::runtime::world::System::operator=</definition>
+        <argsstring>(const System &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>helios::engine::runtime::world::System::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System" kindref="compound">System</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/System.ixx" line="112" column="16"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1a43e771ceab54c8eebaaf1f5e83a971e6">helios::engine::runtime::world::System::System</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1a4e2099df8199f5e71d906803fa9cc504" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System" kindref="compound">System</ref> &amp;</type>
+        <definition>System &amp; helios::engine::runtime::world::System::operator=</definition>
+        <argsstring>(System &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>helios::engine::runtime::world::System::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System" kindref="compound">System</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/System.ixx" line="114" column="16"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1a43e771ceab54c8eebaaf1f5e83a971e6">helios::engine::runtime::world::System::System</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1abbdd557dcac12839a263da21a1831964" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::runtime::world::System::System</definition>
+        <argsstring>(System &amp;&amp;) noexcept=default</argsstring>
+        <name>System</name>
+        <qualifiedname>helios::engine::runtime::world::System::System</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System" kindref="compound">System</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/System.ixx" line="115" column="9"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1a43e771ceab54c8eebaaf1f5e83a971e6">helios::engine::runtime::world::System::System</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1a94878704825d0b6e87a4438a9ac19d04" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::world::System::update</definition>
+        <argsstring>(UpdateContext &amp;updateContext) noexcept</argsstring>
+        <name>update</name>
+        <qualifiedname>helios::engine::runtime::world::System::update</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">UpdateContext</ref> &amp;</type>
           <declname>updateContext</declname>
         </param>
         <briefdescription>
-<para>Called each frame to update the system. </para>
+<para>Delegates to the wrapped system&apos;s `update()` method. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -70,21 +351,97 @@
 <parametername>updateContext</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Context containing deltaTime, input state, and references to CommandBuffer and <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref>. </para>
+<para>The current frame&apos;s update context.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
+<simplesect kind="pre"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System" kindref="compound">System</ref> must be initialized (pimpl_ != nullptr). </para>
+</simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/world/System.ixx" line="52" column="22"/>
+        <location file="/tmp/h/include/helios/engine/runtime/world/System.ixx" line="125" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/world/System.ixx" bodystart="125" bodyend="128"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1a94878704825d0b6e87a4438a9ac19d04" compoundref="System_8ixx" startline="125" endline="128">helios::engine::runtime::world::System::update</references>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1a94878704825d0b6e87a4438a9ac19d04" compoundref="System_8ixx" startline="125" endline="128">helios::engine::runtime::world::System::update</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1a0cce4a6e55f7e80d6bff61e6fb45f420" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::world::System::init</definition>
+        <argsstring>(GameWorld &amp;gameWorld) noexcept</argsstring>
+        <name>init</name>
+        <qualifiedname>helios::engine::runtime::world::System::init</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <briefdescription>
+<para>Delegates to the wrapped system&apos;s `init()` method, if present. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the concrete type satisfies `HasInit&lt;T&gt;`, its `init()` is called. Otherwise this is a no-op.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> for one-time initialization.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="pre"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System" kindref="compound">System</ref> must be initialized (pimpl_ != nullptr). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/System.ixx" line="140" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/world/System.ixx" bodystart="140" bodyend="143"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1a9f25f5b7a26f8a3df3bcd0ae4d65f1ec" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void *</type>
+        <definition>void * helios::engine::runtime::world::System::underlying</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>underlying</name>
+        <qualifiedname>helios::engine::runtime::world::System::underlying</qualifiedname>
+        <briefdescription>
+<para>Returns a type-erased pointer to the wrapped system instance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Pointer to the underlying concrete system.</para>
+</simplesect>
+<simplesect kind="pre"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System" kindref="compound">System</ref> must be initialized (pimpl_ != nullptr). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/System.ixx" line="152" column="15" bodyfile="/tmp/h/include/helios/engine/runtime/world/System.ixx" bodystart="152" bodyend="155"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1System_1af5f39ccecadf768a6bb95709c84e711c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const void *</type>
+        <definition>const void * helios::engine::runtime::world::System::underlying</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>underlying</name>
+        <qualifiedname>helios::engine::runtime::world::System::underlying</qualifiedname>
+        <briefdescription>
+<para>Returns a type-erased pointer to the wrapped system instance.    </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Pointer to the underlying concrete system.</para>
+</simplesect>
+<simplesect kind="pre"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1System" kindref="compound">System</ref> must be initialized (pimpl_ != nullptr).    </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/world/System.ixx" line="160" column="21" bodyfile="/tmp/h/include/helios/engine/runtime/world/System.ixx" bodystart="160" bodyend="163"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/tmp/h/include/helios/engine/runtime/world/System.ixx" line="8" column="15"/>
+    <location file="/tmp/h/include/helios/engine/runtime/world/System.ixx" line="10" column="15"/>
   </compounddef>
 </doxygen>

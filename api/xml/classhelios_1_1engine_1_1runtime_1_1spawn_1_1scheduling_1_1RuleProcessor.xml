@@ -17,33 +17,37 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/spawn/scheduling/RuleProcessor.ixx" line="45" column="17"/>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/scheduling/RuleProcessor.ixx" line="50" column="17"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1RuleProcessor_1ad8ccb030827cb0a06e2f2da3c9c07892" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1RuleProcessor_1af6fa60e28a6f19bb01af2c5b19a0f8f3" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
         <type><ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnPlan" kindref="compound">SpawnPlan</ref></type>
         <definition>virtual SpawnPlan helios::engine::runtime::spawn::scheduling::RuleProcessor::processRule</definition>
-        <argsstring>(const helios::engine::runtime::world::UpdateContext &amp;updateContext, const helios::engine::runtime::spawn::SpawnContext &amp;spawnContext, const helios::engine::core::data::SpawnProfileId spawnProfileId, helios::engine::runtime::spawn::policy::SpawnRule &amp;spawnRule, helios::engine::runtime::spawn::policy::SpawnRuleState &amp;spawnRuleState) noexcept=0</argsstring>
+        <argsstring>(const GameWorld &amp;gameWorld, const UpdateContext &amp;updateContext, const SpawnContext &amp;spawnContext, const SpawnProfileId spawnProfileId, SpawnRule &amp;spawnRule, SpawnRuleState &amp;spawnRuleState) noexcept=0</argsstring>
         <name>processRule</name>
         <qualifiedname>helios::engine::runtime::spawn::scheduling::RuleProcessor::processRule</qualifiedname>
-        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1DefaultRuleProcessor_1afb88de8ac3fa275d038bd04e7b46af22">processRule</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1DefaultRuleProcessor_1a6f092f731086b99815778df231a9f59f">processRule</reimplementedby>
         <param>
-          <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">UpdateContext</ref> &amp;</type>
           <declname>updateContext</declname>
         </param>
         <param>
-          <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnContext" kindref="compound">helios::engine::runtime::spawn::SpawnContext</ref> &amp;</type>
+          <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1types_1_1SpawnContext" kindref="compound">SpawnContext</ref> &amp;</type>
           <declname>spawnContext</declname>
         </param>
         <param>
-          <type>const <ref refid="namespacehelios_1_1engine_1_1core_1_1data_1a1bb1078074b84d8536a3d74c2d29d150" kindref="member">helios::engine::core::data::SpawnProfileId</ref></type>
+          <type>const <ref refid="namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1types_1adbee7d14f4c127a65914c192c3e18162" kindref="member">SpawnProfileId</ref></type>
           <declname>spawnProfileId</declname>
         </param>
         <param>
-          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRule" kindref="compound">helios::engine::runtime::spawn::policy::SpawnRule</ref> &amp;</type>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRule" kindref="compound">SpawnRule</ref> &amp;</type>
           <declname>spawnRule</declname>
         </param>
         <param>
-          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRuleState" kindref="compound">helios::engine::runtime::spawn::policy::SpawnRuleState</ref> &amp;</type>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRuleState" kindref="compound">SpawnRuleState</ref> &amp;</type>
           <declname>spawnRuleState</declname>
         </param>
         <briefdescription>
@@ -52,6 +56,14 @@
         <detaileddescription>
 <para>Evaluates the given rule against current game state and produces a <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnPlan" kindref="compound">SpawnPlan</ref> indicating how many entities should be spawned. A plan with `amount == 0` indicates the rule&apos;s conditions were not met.</para>
 <para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The game world where the rule is processed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
 <parameternamelist>
 <parametername>updateContext</parametername>
 </parameternamelist>
@@ -98,7 +110,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/spawn/scheduling/RuleProcessor.ixx" line="62" column="27"/>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/scheduling/RuleProcessor.ixx" line="68" column="27"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -118,7 +130,7 @@
 </simplesect>
 <simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler" kindref="compound">SpawnScheduler</ref> </para>
 </simplesect>
-<simplesect kind="see"><para>SpawnRule </para>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRule" kindref="compound">SpawnRule</ref> </para>
 </simplesect>
 </para>
     </detaileddescription>
@@ -134,9 +146,9 @@
         <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1RuleProcessor"/>
       </node>
     </inheritancegraph>
-    <location file="/tmp/h/include/helios/engine/runtime/spawn/scheduling/RuleProcessor.ixx" line="38" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/scheduling/RuleProcessor.ixx" bodystart="38" bodyend="71"/>
+    <location file="/tmp/h/include/helios/engine/runtime/spawn/scheduling/RuleProcessor.ixx" line="43" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/scheduling/RuleProcessor.ixx" bodystart="43" bodyend="78"/>
     <listofallmembers>
-      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1RuleProcessor_1ad8ccb030827cb0a06e2f2da3c9c07892" prot="public" virt="pure-virtual"><scope>helios::engine::runtime::spawn::scheduling::RuleProcessor</scope><name>processRule</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1RuleProcessor_1af6fa60e28a6f19bb01af2c5b19a0f8f3" prot="public" virt="pure-virtual"><scope>helios::engine::runtime::spawn::scheduling::RuleProcessor</scope><name>processRule</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1RuleProcessor_1afe16d6c46e56ff056dae2d1921533c50" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::scheduling::RuleProcessor</scope><name>~RuleProcessor</name></member>
     </listofallmembers>
   </compounddef>

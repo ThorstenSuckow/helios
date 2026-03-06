@@ -19,8 +19,8 @@ var module__helios_8engine_8runtime_8pooling_8GameObjectPool =
     [ "helios::engine::runtime::pooling::GameObjectPool::activeGameObjects_", "module__helios_8engine_8runtime_8pooling_8GameObjectPool.html#a8b152814a37b5dd75e7fbbc3a21e0aa5", null ],
     [ "helios::engine::runtime::pooling::GameObjectPool::inactiveGameObjects_", "module__helios_8engine_8runtime_8pooling_8GameObjectPool.html#a6a00a5454d4b7e8087b0ae3e1bef4a1d", null ],
     [ "helios::engine::runtime::pooling::GameObjectPool::poolSize_", "module__helios_8engine_8runtime_8pooling_8GameObjectPool.html#a266a99fd8a31439417b7a1c4ed759c42", null ],
-    [ "helios::engine::runtime::pooling::GameObjectPool::minEntityId_", "module__helios_8engine_8runtime_8pooling_8GameObjectPool.html#a236b70f08d7397dbb5ab1179e4ef7293", null ],
-    [ "helios::engine::runtime::pooling::GameObjectPool::maxEntityId_", "module__helios_8engine_8runtime_8pooling_8GameObjectPool.html#ae01936e92700e878ac3e0122cf43514d", null ],
+    [ "helios::engine::runtime::pooling::GameObjectPool::minEntityId_", "module__helios_8engine_8runtime_8pooling_8GameObjectPool.html#ad71e6c20a4db4b660e1573cc4c8dfb4d", null ],
+    [ "helios::engine::runtime::pooling::GameObjectPool::maxEntityId_", "module__helios_8engine_8runtime_8pooling_8GameObjectPool.html#acc5c5532ee334ef4e5fe6c3e88e28362", null ],
     [ "helios::engine::runtime::pooling::GameObjectPool::delta_", "module__helios_8engine_8runtime_8pooling_8GameObjectPool.html#ad239e54f9f8d46f7e3452809f991747f", null ],
     [ "helios::engine::runtime::pooling::GameObjectPool::guid_", "module__helios_8engine_8runtime_8pooling_8GameObjectPool.html#a22a7227e1f59facdd4eeecc6de3f9ddc", null ],
     [ "helios::engine::runtime::pooling::GameObjectPool::locked_", "module__helios_8engine_8runtime_8pooling_8GameObjectPool.html#a333827a5d1929bf26f74b8745df309de", null ]

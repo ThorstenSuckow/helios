@@ -5,5 +5,6 @@ var dir_eb8c49aae6ff5f1b4e001fb64cc65036 =
     [ "StateTransitionId.ixx", "StateTransitionId_8ixx.html", "StateTransitionId_8ixx" ],
     [ "StateTransitionRequest.ixx", "StateTransitionRequest_8ixx.html", "StateTransitionRequest_8ixx" ],
     [ "StateTransitionRule.ixx", "StateTransitionRule_8ixx.html", "StateTransitionRule_8ixx" ],
-    [ "StateTransitionType.ixx", "StateTransitionType_8ixx.html", "StateTransitionType_8ixx" ]
+    [ "StateTransitionType.ixx", "StateTransitionType_8ixx.html", "StateTransitionType_8ixx" ],
+    [ "StateTypeId.ixx", "StateTypeId_8ixx.html", "StateTypeId_8ixx" ]
 ];

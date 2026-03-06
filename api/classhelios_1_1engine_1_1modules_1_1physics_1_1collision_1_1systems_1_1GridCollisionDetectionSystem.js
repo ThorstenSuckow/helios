@@ -1,5 +1,6 @@
 var classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem =
 [
+    [ "EngineRoleTag", "classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem.html#ada3063d8d7409b0186f42a5147a8d736", null ],
     [ "GridCollisionDetectionSystem", "classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem.html#a5379dffaf0d365df1ae82498bc563a4c", null ],
     [ "cell", "classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem.html#a7117db53bda939cdfe169476e3314e46", null ],
     [ "cellIndex", "classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem.html#adff842963a79ccee912444e3d444d1e4", null ],

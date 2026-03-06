@@ -4,5 +4,7 @@ var dir_c41b981364ff99795c8cb0d2362d5300 =
     [ "KillReward.ixx", "KillReward_8ixx.html", "KillReward_8ixx" ],
     [ "Score.ixx", "Score_8ixx.html", "Score_8ixx" ],
     [ "ScoreContext.ixx", "ScoreContext_8ixx.html", "ScoreContext_8ixx" ],
-    [ "ScorePoolRevision.ixx", "ScorePoolRevision_8ixx.html", "ScorePoolRevision_8ixx" ]
+    [ "ScorePoolId.ixx", "ScorePoolId_8ixx.html", "ScorePoolId_8ixx" ],
+    [ "ScorePoolRevision.ixx", "ScorePoolRevision_8ixx.html", "ScorePoolRevision_8ixx" ],
+    [ "ScoreTypeId.ixx", "ScoreTypeId_8ixx.html", "ScoreTypeId_8ixx" ]
 ];

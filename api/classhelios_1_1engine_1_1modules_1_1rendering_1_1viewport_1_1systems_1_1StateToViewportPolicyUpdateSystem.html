@@ -110,9 +110,14 @@ $(function() {
 <p>Updates the session's active viewport list based on state policy.  
  <a href="#details">More...</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:acec77f3fa0164a7121d09c0079fb8b27" id="r_acec77f3fa0164a7121d09c0079fb8b27"><td class="memItemLeft" align="right" valign="top"><a id="acec77f3fa0164a7121d09c0079fb8b27" name="acec77f3fa0164a7121d09c0079fb8b27"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>EngineRoleTag</b> = <a class="el" href="structhelios_1_1engine_1_1common_1_1tags_1_1SystemRole.html">helios::engine::common::tags::SystemRole</a></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a01fce5d6f2611e512122a656217d4601" id="r_a01fce5d6f2611e512122a656217d4601"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a01fce5d6f2611e512122a656217d4601">StateToViewportPolicyUpdateSystem</a> (<a class="el" href="classhelios_1_1engine_1_1state_1_1StateToIdMapPair.html">StateToIdMapPair</a>&lt; StateLft, StateRgt, <a class="el" href="namespacehelios_1_1engine_1_1core_1_1data.html#ad7a3a4de437b171216482e5f1853a90e">ViewportId</a> &gt; stateToIdMapPair)</td></tr>
+<tr class="memitem:a01fce5d6f2611e512122a656217d4601" id="r_a01fce5d6f2611e512122a656217d4601"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a01fce5d6f2611e512122a656217d4601">StateToViewportPolicyUpdateSystem</a> (<a class="el" href="classhelios_1_1engine_1_1state_1_1StateToIdMapPair.html">StateToIdMapPair</a>&lt; StateLft, StateRgt, <a class="el" href="namespacehelios_1_1engine_1_1common_1_1types.html#a348f02d525fc051290ccabd8091e45f5">ViewportId</a> &gt; stateToIdMapPair)</td></tr>
 <tr class="memdesc:a01fce5d6f2611e512122a656217d4601"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs the system with a state-to-ID map pair.  <br /></td></tr>
 <tr class="memitem:aae184db330f91d57989fabaf5ce85edb" id="r_aae184db330f91d57989fabaf5ce85edb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aae184db330f91d57989fabaf5ce85edb">update</a> (<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a> &amp;updateContext) noexcept</td></tr>
 <tr class="memdesc:aae184db330f91d57989fabaf5ce85edb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the session's active viewport IDs.  <br /></td></tr>
@@ -122,7 +127,7 @@ Public Member Functions</h2></td></tr>
 class helios::engine::modules::rendering::viewport::systems::StateToViewportPolicyUpdateSystem&lt; StateLft, StateRgt &gt;</div><p>Updates the session's active viewport list based on state policy. </p>
 <p>Queries the current states from the session using the configured template parameters, then uses <a class="el" href="classhelios_1_1engine_1_1state_1_1StateToIdMapPair.html" title="Combines two StateToIdMap instances for dual-state lookups.">StateToIdMapPair</a> to determine which viewports should be active. The resulting viewport IDs are stored in the session for use by the rendering system.</p>
 <p>## Usage</p>
-<p>```cpp <a class="el" href="classhelios_1_1engine_1_1state_1_1StateToIdMapPair.html" title="Combines two StateToIdMap instances for dual-state lookups.">StateToIdMapPair&lt;GameState, MatchState, ViewportId&gt;</a> policy; policy.add(GameState::Running, <a class="el" href="namespacehelios_1_1engine_1_1core_1_1data.html#ad7a3a4de437b171216482e5f1853a90e" title="Strongly-typed identifier for viewports.">ViewportId</a>("game")); policy.add(MatchState::GameOver, <a class="el" href="namespacehelios_1_1engine_1_1core_1_1data.html#ad7a3a4de437b171216482e5f1853a90e" title="Strongly-typed identifier for viewports.">ViewportId</a>("game_over")); policy.freeze();</p>
+<p>```cpp <a class="el" href="classhelios_1_1engine_1_1state_1_1StateToIdMapPair.html" title="Combines two StateToIdMap instances for dual-state lookups.">StateToIdMapPair&lt;GameState, MatchState, ViewportId&gt;</a> policy; policy.add(GameState::Running, <a class="el" href="namespacehelios_1_1engine_1_1common_1_1types.html#a348f02d525fc051290ccabd8091e45f5" title="Strongly-typed identifier for viewports.">ViewportId</a>("game")); policy.add(MatchState::GameOver, <a class="el" href="namespacehelios_1_1engine_1_1common_1_1types.html#a348f02d525fc051290ccabd8091e45f5" title="Strongly-typed identifier for viewports.">ViewportId</a>("game_over")); policy.freeze();</p>
 <p>gameLoop.phase(PhaseType::Pre) .addPass&lt;GameState&gt;(GameState::Any) .addSystem&lt;StateToViewportPolicyUpdateSystem&lt;GameState, MatchState&gt;&gt;(
             std::move(policy)
         ); ```</p>
@@ -137,7 +142,7 @@ class helios::engine::modules::rendering::viewport::systems::StateToViewportPoli
 <dd>
 Session </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="StateToViewportPolicyUpdateSystem_8ixx_source.html#l00058">58</a> of file <a class="el" href="StateToViewportPolicyUpdateSystem_8ixx_source.html">StateToViewportPolicyUpdateSystem.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="StateToViewportPolicyUpdateSystem_8ixx_source.html#l00060">60</a> of file <a class="el" href="StateToViewportPolicyUpdateSystem_8ixx_source.html">StateToViewportPolicyUpdateSystem.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a01fce5d6f2611e512122a656217d4601" name="a01fce5d6f2611e512122a656217d4601"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a01fce5d6f2611e512122a656217d4601">&#9670;&#160;</a></span>StateToViewportPolicyUpdateSystem()</h2>
@@ -153,7 +158,7 @@ template&lt;typename StateLft, typename StateRgt&gt; </div>
         <tr>
           <td class="memname"><a class="el" href="classhelios_1_1engine_1_1modules_1_1rendering_1_1viewport_1_1systems_1_1StateToViewportPolicyUpdateSystem.html">helios::engine::modules::rendering::viewport::systems::StateToViewportPolicyUpdateSystem</a>&lt; StateLft, StateRgt &gt;::StateToViewportPolicyUpdateSystem </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classhelios_1_1engine_1_1state_1_1StateToIdMapPair.html">StateToIdMapPair</a>&lt; StateLft, StateRgt, <a class="el" href="namespacehelios_1_1engine_1_1core_1_1data.html#ad7a3a4de437b171216482e5f1853a90e">ViewportId</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>stateToIdMapPair</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1engine_1_1state_1_1StateToIdMapPair.html">StateToIdMapPair</a>&lt; StateLft, StateRgt, <a class="el" href="namespacehelios_1_1engine_1_1common_1_1types.html#a348f02d525fc051290ccabd8091e45f5">ViewportId</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>stateToIdMapPair</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -172,7 +177,7 @@ template&lt;typename StateLft, typename StateRgt&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="StateToViewportPolicyUpdateSystem_8ixx_source.html#l00072">72</a> of file <a class="el" href="StateToViewportPolicyUpdateSystem_8ixx_source.html">StateToViewportPolicyUpdateSystem.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="StateToViewportPolicyUpdateSystem_8ixx_source.html#l00076">76</a> of file <a class="el" href="StateToViewportPolicyUpdateSystem_8ixx_source.html">StateToViewportPolicyUpdateSystem.ixx</a>.</p>
 
 </div>
 </div>
@@ -211,7 +216,7 @@ template&lt;typename StateLft, typename StateRgt&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="StateToViewportPolicyUpdateSystem_8ixx_source.html#l00083">83</a> of file <a class="el" href="StateToViewportPolicyUpdateSystem_8ixx_source.html">StateToViewportPolicyUpdateSystem.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="StateToViewportPolicyUpdateSystem_8ixx_source.html#l00087">87</a> of file <a class="el" href="StateToViewportPolicyUpdateSystem_8ixx_source.html">StateToViewportPolicyUpdateSystem.ixx</a>.</p>
 
 </div>
 </div>

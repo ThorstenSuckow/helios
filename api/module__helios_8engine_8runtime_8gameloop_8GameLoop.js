@@ -1,12 +1,12 @@
 var module__helios_8engine_8runtime_8gameloop_8GameLoop =
 [
     [ "GameLoop", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop" ],
-    [ "helios::engine::runtime::gameloop::GameLoop::onPassCommit", "module__helios_8engine_8runtime_8gameloop_8GameLoop.html#a4bf78e22f99e1d3028b50f4aa5ed9acd", null ],
-    [ "helios::engine::runtime::gameloop::GameLoop::phaseCommit", "module__helios_8engine_8runtime_8gameloop_8GameLoop.html#aa8aeafec5ba655ccacde623ad32f40ec", null ],
+    [ "helios::engine::runtime::gameloop::GameLoop::onPassCommit", "module__helios_8engine_8runtime_8gameloop_8GameLoop.html#a97acde952251d5e0eceffb3beb2a4f33", null ],
+    [ "helios::engine::runtime::gameloop::GameLoop::phaseCommit", "module__helios_8engine_8runtime_8gameloop_8GameLoop.html#afd0f0cde73adc0aa9b2e7cfa7e28badf", null ],
     [ "helios::engine::runtime::gameloop::GameLoop::GameLoop", "module__helios_8engine_8runtime_8gameloop_8GameLoop.html#a41b297a4ee926ed2b989996ceb61bb7f", null ],
     [ "helios::engine::runtime::gameloop::GameLoop::phase", "module__helios_8engine_8runtime_8gameloop_8GameLoop.html#a7649a22c062f81568c5d11d2a8148029", null ],
-    [ "helios::engine::runtime::gameloop::GameLoop::init", "module__helios_8engine_8runtime_8gameloop_8GameLoop.html#a7915a98afe2de477625904422cf6d029", null ],
-    [ "helios::engine::runtime::gameloop::GameLoop::update", "module__helios_8engine_8runtime_8gameloop_8GameLoop.html#a8dbc5c72e9d25b13933ccda14b0975d7", null ],
+    [ "helios::engine::runtime::gameloop::GameLoop::init", "module__helios_8engine_8runtime_8gameloop_8GameLoop.html#ae0eef4f9d4408a1b7ab175f2cc03c574", null ],
+    [ "helios::engine::runtime::gameloop::GameLoop::update", "module__helios_8engine_8runtime_8gameloop_8GameLoop.html#a035360c9f817b9cf6cf338a50ec396be", null ],
     [ "helios::engine::runtime::gameloop::GameLoop::logger_", "module__helios_8engine_8runtime_8gameloop_8GameLoop.html#a8abc8cce8e4faa1a54d61531b10781bd", null ],
     [ "helios::engine::runtime::gameloop::GameLoop::prePhase_", "module__helios_8engine_8runtime_8gameloop_8GameLoop.html#a7d4eb13220ecd447c6af0914fd214921", null ],
     [ "helios::engine::runtime::gameloop::GameLoop::mainPhase_", "module__helios_8engine_8runtime_8gameloop_8GameLoop.html#adaff711d38a5a95c0494c527ae4a1714", null ],

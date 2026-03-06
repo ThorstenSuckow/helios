@@ -7,11 +7,11 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_aca174411ef9649e45d3a1395b0cacb3_1autotoc_md195">
+<sect1 id="dir_aca174411ef9649e45d3a1395b0cacb3_1autotoc_md207">
 <title>helios::engine::mechanics::damage::commands</title><para>Damage-related commands for the command buffer.</para>
 <para>This namespace contains command classes used to request damage application through the engine&apos;s command system.</para>
 </sect1>
-<sect1 id="dir_aca174411ef9649e45d3a1395b0cacb3_1autotoc_md196">
+<sect1 id="dir_aca174411ef9649e45d3a1395b0cacb3_1autotoc_md208">
 <title>Commands</title><para><table rows="2" cols="2"><row>
 <entry thead="yes"><para>Command  </para>
 </entry><entry thead="yes"><para>Description  </para>
@@ -23,7 +23,7 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_aca174411ef9649e45d3a1395b0cacb3_1autotoc_md197">
+<sect1 id="dir_aca174411ef9649e45d3a1395b0cacb3_1autotoc_md209">
 <title>Usage</title><para>Commands are typically issued by <computeroutput>DamageOnCollisionSystem</computeroutput> when a collision between damageable entities is detected:</para>
 <para><programlisting filename=".cpp"><codeline><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>ctx<sp/>=<sp/>DamageContext{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.interactionContext<sp/>=<sp/>{</highlight></codeline>
@@ -35,9 +35,9 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.damage<sp/>=<sp/>10.0f</highlight></codeline>
 <codeline><highlight class="normal">};</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal">updateContext.commandBuffer().add&lt;ApplyDamageCommand&gt;(ctx);</highlight></codeline>
+<codeline><highlight class="normal">updateContext.queueCommand&lt;ApplyDamageCommand&gt;(ctx);</highlight></codeline>
 </programlisting></para>
-<para>The command is routed to <computeroutput>HealthManager</computeroutput> via its <computeroutput>TypedCommandHandler&lt;ApplyDamageCommand&gt;</computeroutput> interface and processed during the manager flush phase.</para>
+<para>The command is routed to <computeroutput>HealthManager</computeroutput> via the registered command handler <computeroutput>submit</computeroutput> function and processed during the manager flush phase.</para>
 <para><hruler/>
 </para>
 <para><details><summary>Doxygen</summary><para></para>

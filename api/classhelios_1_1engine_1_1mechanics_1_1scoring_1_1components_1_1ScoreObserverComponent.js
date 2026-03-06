@@ -11,9 +11,9 @@ var classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScoreObserver
     [ "onRelease", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScoreObserverComponent.html#ac61174db9d659b3b67935d68212be6f9", null ],
     [ "operator=", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScoreObserverComponent.html#a3a976d99d16b2288741c70932acbbe19", null ],
     [ "operator=", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScoreObserverComponent.html#a49727660a92125da1bcff6a866560ade", null ],
-    [ "scorePoolId", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScoreObserverComponent.html#a92a711a93784d5bbd462aece58da0dad", null ],
+    [ "scorePoolId", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScoreObserverComponent.html#ad466363718cf72608a9715ca3de8ecfe", null ],
     [ "scorePoolRevision", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScoreObserverComponent.html#a6e07e4de1be2ae2aa010c4d31ac5bbc6", null ],
-    [ "setScorePoolId", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScoreObserverComponent.html#a1571994d96790d16efe5e4611e1a97d2", null ],
+    [ "setScorePoolId", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScoreObserverComponent.html#a9f975a816e4c108ba9fc6c1834c5bb0c", null ],
     [ "setScorePoolSnapshot", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScoreObserverComponent.html#a1e24874ce468b712b48b8bea4673e73b", null ],
     [ "totalScore", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScoreObserverComponent.html#aa92c10a959ff82174b223f32c6cadea5", null ],
     [ "helios::engine::mechanics::scoring::systems::ScoreObserverClearSystem", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScoreObserverComponent.html#ac61ed4347036721e97541a07e2935973", null ]

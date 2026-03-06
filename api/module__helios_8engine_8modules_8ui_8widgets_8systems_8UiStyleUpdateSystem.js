@@ -1,5 +1,6 @@
 var module__helios_8engine_8modules_8ui_8widgets_8systems_8UiStyleUpdateSystem =
 [
     [ "UiStyleUpdateSystem", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1UiStyleUpdateSystem.html", "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1systems_1_1UiStyleUpdateSystem" ],
+    [ "helios::engine::modules::ui::widgets::systems::UiStyleUpdateSystem::EngineRoleTag", "module__helios_8engine_8modules_8ui_8widgets_8systems_8UiStyleUpdateSystem.html#a77f1d1f0333f75b82edc894fe56b9e83", null ],
     [ "helios::engine::modules::ui::widgets::systems::UiStyleUpdateSystem::update", "module__helios_8engine_8modules_8ui_8widgets_8systems_8UiStyleUpdateSystem.html#a7e25f7dae5688d3b12cffbbf19611c60", null ]
 ];

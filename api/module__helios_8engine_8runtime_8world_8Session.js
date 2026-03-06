@@ -9,7 +9,7 @@ var module__helios_8engine_8runtime_8world_8Session =
     [ "helios::engine::runtime::world::Session::state", "module__helios_8engine_8runtime_8world_8Session.html#a26784a3e90f2a97ca31cfa2ece4f41c9", null ],
     [ "helios::engine::runtime::world::Session::stateTransitionId", "module__helios_8engine_8runtime_8world_8Session.html#ac1af4b2a7d4f75188d58591deafcacac", null ],
     [ "helios::engine::runtime::world::Session::trackState", "module__helios_8engine_8runtime_8world_8Session.html#a16a1563a9b807088e812aed53948ffb8", null ],
-    [ "helios::engine::runtime::world::Session::setViewportIds", "module__helios_8engine_8runtime_8world_8Session.html#a47209315dab5adb5c3ecd96b7bfcdf0f", null ],
-    [ "helios::engine::runtime::world::Session::viewportIds", "module__helios_8engine_8runtime_8world_8Session.html#aa887660c0c257dab191c68c39ddfc243", null ],
+    [ "helios::engine::runtime::world::Session::setViewportIds", "module__helios_8engine_8runtime_8world_8Session.html#a1aa1d3987c7c0df347c3925fcdd74b76", null ],
+    [ "helios::engine::runtime::world::Session::viewportIds", "module__helios_8engine_8runtime_8world_8Session.html#a8fcb8aa4b37eedccb1dc311c9a9af538", null ],
     [ "helios::engine::runtime::world::Session::clearViewportIds", "module__helios_8engine_8runtime_8world_8Session.html#a15cf530762d33f60c00ddabdaec92bf7", null ]
 ];

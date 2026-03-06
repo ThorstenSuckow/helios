@@ -8,6 +8,6 @@ var classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfil
     [ "isEnabled", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent.html#a99ae7072460c98986c4213c2fed7d870", null ],
     [ "operator=", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent.html#a10db7809d0fc54ea9f4bbd2ca50e1f55", null ],
     [ "operator=", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent.html#a4e7f0cf69a30ca1a416d9fe8bd1527ce", null ],
-    [ "setSpawnProfileId", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent.html#a28bd8f94b1bbb3a9d433199d494bc982", null ],
-    [ "spawnProfileId", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent.html#a082c05d0a17fed8a8423f263ff327a72", null ]
+    [ "setSpawnProfileId", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent.html#a8bd7f4cdb5fd24e8726e18868823d99c", null ],
+    [ "spawnProfileId", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent.html#a99f8b28242c74ddad3152075a2798464", null ]
 ];

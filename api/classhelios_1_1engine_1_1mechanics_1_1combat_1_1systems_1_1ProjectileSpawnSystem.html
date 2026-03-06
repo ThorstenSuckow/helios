@@ -110,10 +110,15 @@ $(function() {
 <p>System that spawns projectiles for entities with active ShootComponents.  
  <a href="#details">More...</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a26c04be8f6fedacdeb09ae3c2f209add" id="r_a26c04be8f6fedacdeb09ae3c2f209add"><td class="memItemLeft" align="right" valign="top"><a id="a26c04be8f6fedacdeb09ae3c2f209add" name="a26c04be8f6fedacdeb09ae3c2f209add"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>EngineRoleTag</b> = <a class="el" href="structhelios_1_1engine_1_1common_1_1tags_1_1SystemRole.html">helios::engine::common::tags::SystemRole</a></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab0dfd311a620ac58e1d6254bd91d6609" id="r_ab0dfd311a620ac58e1d6254bd91d6609"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab0dfd311a620ac58e1d6254bd91d6609">ProjectileSpawnSystem</a> (const <a class="el" href="namespacehelios_1_1engine_1_1core_1_1data.html#a1bb1078074b84d8536a3d74c2d29d150">helios::engine::core::data::SpawnProfileId</a> &amp;spawnProfileId)</td></tr>
-<tr class="memdesc:ab0dfd311a620ac58e1d6254bd91d6609"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1combat_1_1systems_1_1ProjectileSpawnSystem.html" title="System that spawns projectiles for entities with active ShootComponents.">ProjectileSpawnSystem</a> with the specified spawn profile.  <br /></td></tr>
+<tr class="memitem:aa864858338d78cc29bfdafd87b1cf901" id="r_aa864858338d78cc29bfdafd87b1cf901"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa864858338d78cc29bfdafd87b1cf901">ProjectileSpawnSystem</a> (const <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1types.html#adbee7d14f4c127a65914c192c3e18162">helios::engine::runtime::spawn::types::SpawnProfileId</a> &amp;spawnProfileId)</td></tr>
+<tr class="memdesc:aa864858338d78cc29bfdafd87b1cf901"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1combat_1_1systems_1_1ProjectileSpawnSystem.html" title="System that spawns projectiles for entities with active ShootComponents.">ProjectileSpawnSystem</a> with the specified spawn profile.  <br /></td></tr>
 <tr class="memitem:aa43954698ad9ae11cf7ed1cee937493b" id="r_aa43954698ad9ae11cf7ed1cee937493b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa43954698ad9ae11cf7ed1cee937493b">update</a> (<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a> &amp;updateContext) noexcept</td></tr>
 <tr class="memdesc:aa43954698ad9ae11cf7ed1cee937493b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes all shooting entities and spawns projectiles.  <br /></td></tr>
 </table>
@@ -124,11 +129,11 @@ Public Member Functions</h2></td></tr>
 <p>The system implements an intensity-based fire rate: 1. Accumulates `deltaTime * intensity` into the cooldown timer 2. When timer &gt;= cooldownDelta, spawns `floor(timer / cooldownDelta)` projectiles 3. Reduces timer by spawned amount, preserving fractional remainder</p>
 <p>This allows continuous fire with variable intensity affecting the effective rate.</p>
 <p>## Spawn Context</p>
-<p>Each SpawnCommand includes an EmitterContext containing:</p><ul>
+<p>Each SpawnCommand includes an <a class="el" href="structhelios_1_1engine_1_1runtime_1_1spawn_1_1types_1_1EmitterContext.html" title="Context data from the entity that triggered a spawn operation.">EmitterContext</a> containing:</p><ul>
 <li>**position:** Current translation from TranslationStateComponent</li>
 <li>**velocity:** sourceVelocity + (aimDirection * projectileSpeed)</li>
 </ul>
-<p>Example setup: ```cpp auto projectileSpawnSystem = std::make_unique&lt;ProjectileSpawnSystem&gt;( SpawnProfileId{1} // ID of the projectile spawn profile ); mainPhase.addPass().add(std::move(projectileSpawnSystem)); ```</p>
+<p>Example setup: ```cpp auto projectileSpawnSystem = std::make_unique&lt;ProjectileSpawnSystem&gt;( <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1types.html#adbee7d14f4c127a65914c192c3e18162" title="Strongly-typed identifier for SpawnProfile instances.">SpawnProfileId</a>{1} // ID of the projectile spawn profile ); mainPhase.addPass().add(std::move(projectileSpawnSystem)); ```</p>
 <dl class="section note"><dt>Note</dt><dd>Entities must have ShootComponent, Aim2DComponent, and TranslationStateComponent to be processed.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd>ShootComponent </dd>
 <dd>
@@ -136,12 +141,12 @@ Aim2DComponent </dd>
 <dd>
 SpawnCommand </dd>
 <dd>
-EmitterContext </dd></dl>
+<a class="el" href="structhelios_1_1engine_1_1runtime_1_1spawn_1_1types_1_1EmitterContext.html" title="Context data from the entity that triggered a spawn operation.">EmitterContext</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ProjectileSpawnSystem_8ixx_source.html#l00071">71</a> of file <a class="el" href="ProjectileSpawnSystem_8ixx_source.html">ProjectileSpawnSystem.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ProjectileSpawnSystem_8ixx_source.html#l00073">73</a> of file <a class="el" href="ProjectileSpawnSystem_8ixx_source.html">ProjectileSpawnSystem.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ab0dfd311a620ac58e1d6254bd91d6609" name="ab0dfd311a620ac58e1d6254bd91d6609"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab0dfd311a620ac58e1d6254bd91d6609">&#9670;&#160;</a></span>ProjectileSpawnSystem()</h2>
+<a id="aa864858338d78cc29bfdafd87b1cf901" name="aa864858338d78cc29bfdafd87b1cf901"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa864858338d78cc29bfdafd87b1cf901">&#9670;&#160;</a></span>ProjectileSpawnSystem()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -152,7 +157,7 @@ EmitterContext </dd></dl>
         <tr>
           <td class="memname">helios::engine::mechanics::combat::systems::ProjectileSpawnSystem::ProjectileSpawnSystem </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="namespacehelios_1_1engine_1_1core_1_1data.html#a1bb1078074b84d8536a3d74c2d29d150">helios::engine::core::data::SpawnProfileId</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>spawnProfileId</em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1types.html#adbee7d14f4c127a65914c192c3e18162">helios::engine::runtime::spawn::types::SpawnProfileId</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>spawnProfileId</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -171,7 +176,7 @@ EmitterContext </dd></dl>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="ProjectileSpawnSystem_8ixx_source.html#l00089">89</a> of file <a class="el" href="ProjectileSpawnSystem_8ixx_source.html">ProjectileSpawnSystem.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ProjectileSpawnSystem_8ixx_source.html#l00093">93</a> of file <a class="el" href="ProjectileSpawnSystem_8ixx_source.html">ProjectileSpawnSystem.ixx</a>.</p>
 
 </div>
 </div>
@@ -201,7 +206,7 @@ EmitterContext </dd></dl>
 
 <p>Processes all shooting entities and spawns projectiles. </p>
 <p>For each entity with ShootComponent, Aim2DComponent, and TranslationStateComponent:</p>
-<p>1. Skips if aim frequency or intensity are near zero 2. Accumulates `deltaTime * intensity` into the cooldown timer 3. If timer &lt; cooldownDelta, updates timer and continues 4. Calculates projectile count as `floor(timer / cooldownDelta)` 5. Reduces timer by `count * cooldownDelta` 6. Enqueues SpawnCommands with EmitterContext for each projectile</p>
+<p>1. Skips if aim frequency or intensity are near zero 2. Accumulates `deltaTime * intensity` into the cooldown timer 3. If timer &lt; cooldownDelta, updates timer and continues 4. Calculates projectile count as `floor(timer / cooldownDelta)` 5. Reduces timer by `count * cooldownDelta` 6. Enqueues SpawnCommands with <a class="el" href="structhelios_1_1engine_1_1runtime_1_1spawn_1_1types_1_1EmitterContext.html" title="Context data from the entity that triggered a spawn operation.">EmitterContext</a> for each projectile</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">updateContext</td><td>The current frame's update context. </td></tr>
@@ -209,7 +214,7 @@ EmitterContext </dd></dl>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="ProjectileSpawnSystem_8ixx_source.html#l00110">110</a> of file <a class="el" href="ProjectileSpawnSystem_8ixx_source.html">ProjectileSpawnSystem.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ProjectileSpawnSystem_8ixx_source.html#l00114">114</a> of file <a class="el" href="ProjectileSpawnSystem_8ixx_source.html">ProjectileSpawnSystem.ixx</a>.</p>
 
 <p class="reference">References <a class="el" href="utils_8ixx_source.html#l00022">helios::math::EPSILON_LENGTH</a>.</p>
 

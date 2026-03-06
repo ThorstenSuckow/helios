@@ -1,7 +1,6 @@
 var classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext =
 [
     [ "UpdateContext", "classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#a186df1b69195b2e1b62baf532aadf252", null ],
-    [ "commandBuffer", "classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#acca71a785767cdcd326787dedba216b9", null ],
     [ "deltaTime", "classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#a0197c610dc51fc676bcde9b84545ed7b", null ],
     [ "entityResolver", "classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#a3fe9e7e3a39b27014a72342968e0a3b4", null ],
     [ "find", "classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#aba16db6e6b434f908f937e2a225d7337", null ],
@@ -10,11 +9,10 @@ var classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext =
     [ "pushFrame", "classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#a7973f73a32e697f534ed311cef2f50d4", null ],
     [ "pushPass", "classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#a7308ea8a5fe81ac196b1501554d21d61", null ],
     [ "pushPhase", "classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#a5a17fe1e9fb5409938ec9d9442887ffe", null ],
+    [ "queueCommand", "classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#a6a1c8408558f967c0c5993d6b0eb2fe5", null ],
     [ "readFrame", "classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#a5fa74f194fbee96f883d6964df940bef", null ],
     [ "readPass", "classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#a3e5fef71dad1d4fc531446a1138f8634", null ],
     [ "readPhase", "classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#af2268c3ee45b07619f013e4d81a05b83", null ],
-    [ "resourceRegistry", "classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#a00808c02ff76f7293914879b02b29509", null ],
-    [ "resourceRegistry", "classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#adaeb79c72c7affdd5c3197556c82665e", null ],
     [ "session", "classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#a538cadeb656147150f4a12261d67c7f7", null ],
     [ "totalTime", "classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#ad7f5caca30eb2409b98e21f48c5a0e45", null ],
     [ "view", "classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#a5748f227bfab7fe248186fe4d54b6444", null ],

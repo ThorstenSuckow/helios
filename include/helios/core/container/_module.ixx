@@ -1,6 +1,6 @@
 /**
  * @file _module.ixx
- * @brief Aggregate module for helios::core::container::buffer namespace.
+ * @brief Aggregate module for helios::core::container namespace.
  */
 
 export module helios.core.container;

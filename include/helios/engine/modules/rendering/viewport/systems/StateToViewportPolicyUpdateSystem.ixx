@@ -18,10 +18,10 @@ import helios.engine.state.StateToIdMapPair;
 
 import helios.engine.runtime.world.UpdateContext;
 
-import helios.engine.core.data;
+import helios.engine.common.types.ViewportId;
 
 using namespace helios::engine::state;
-using namespace helios::engine::core::data;
+using namespace helios::engine::common::types;
 
 import helios.engine.common.tags.SystemRole;
 

@@ -14,6 +14,7 @@ import helios.examples.scoring.IdConfig;
 import helios.examples.scoring.CollisionId;
 
 using namespace helios::engine::modules::ui::widgets::types;
+using namespace helios::engine::common::types;
 
 export namespace helios::examples::scoring {
 
@@ -50,11 +51,11 @@ export namespace helios::examples::scoring {
 
             auto* level = gameWorld.level();
 
-            auto gameTitleFont = helios::engine::core::data::FontId{"titleBig"};
+            auto gameTitleFont = FontId{"titleBig"};
             auto& fontResourceProvider = renderingDevice.fontResourceProvider();
             fontResourceProvider.loadFont(gameTitleFont, 96, "resources/Tiny5/Tiny5-Regular.ttf");//"Roboto-SemiBoldItalic.ttf");
 
-            auto uiTextFont = helios::engine::core::data::FontId{"uiMed"};
+            auto uiTextFont = FontId{"uiMed"};
             fontResourceProvider.loadFont(uiTextFont, 32, "resources/Tiny5/Tiny5-Regular.ttf");
 
             // ========================================================================
@@ -84,7 +85,7 @@ export namespace helios::examples::scoring {
                 .withUiTransform([](auto& tb) {
                     tb.transform()
                       .pivot(helios::engine::modules::ui::layout::Anchor::Center)
-                      .viewport(helios::engine::core::data::ViewportId{"titleViewport"})
+                      .viewport(helios::engine::common::types::ViewportId{"titleViewport"})
                       .anchor(helios::engine::modules::ui::layout::Anchor::Center)
                       .offsets({-100.0f, 0.0f, 0.0f, 0.0f});
 
@@ -107,7 +108,7 @@ export namespace helios::examples::scoring {
                 .withUiTransform([](auto& tb) {
                     tb.transform()
                       .pivot(helios::engine::modules::ui::layout::Anchor::Center)
-                      .viewport(helios::engine::core::data::ViewportId{"titleViewport"})
+                      .viewport(helios::engine::common::types::ViewportId{"titleViewport"})
                       .anchor(helios::engine::modules::ui::layout::Anchor::Center)
                       .offsets({40.0f, 0.0f, 0.0f, 0.0f});
 
@@ -127,7 +128,7 @@ export namespace helios::examples::scoring {
                 })
                 .withMenu([](auto& mb) {
                     mb.menu()
-                      .menuId(helios::engine::core::data::MenuId{"MainMenu"});
+                      .menuId(MenuId{"MainMenu"});
                 })
                 .withTransform([](auto& tb) {
                     tb.transform()
@@ -136,7 +137,7 @@ export namespace helios::examples::scoring {
                  .withUiTransform([](auto& tb) {
                     tb.transform()
                       .pivot(helios::engine::modules::ui::layout::Anchor::Center)
-                      .viewport(helios::engine::core::data::ViewportId{"menuViewport"})
+                      .viewport(helios::engine::common::types::ViewportId{"menuViewport"})
                       .anchor(helios::engine::modules::ui::layout::Anchor::Center)
                       .offsets({0.0f, 0.0f, 0.0f, 0.0f});
                 })
@@ -172,7 +173,7 @@ export namespace helios::examples::scoring {
                 .withUiTransform([](auto& tb) {
                     tb.transform()
                       .pivot(helios::engine::modules::ui::layout::Anchor::TopLeft)
-                      .viewport(helios::engine::core::data::ViewportId{"menuViewport"})
+                      .viewport(helios::engine::common::types::ViewportId{"menuViewport"})
                       .anchor(helios::engine::modules::ui::layout::Anchor::TopLeft)
                       .offsets({80.0f, 0.0f, 0.0f, 80.0f});
 
@@ -207,7 +208,7 @@ export namespace helios::examples::scoring {
                 .withUiTransform([](auto& tb) {
                     tb.transform()
                       .pivot(helios::engine::modules::ui::layout::Anchor::TopLeft)
-                      .viewport(helios::engine::core::data::ViewportId{"menuViewport"})
+                      .viewport(helios::engine::common::types::ViewportId{"menuViewport"})
                       .anchor(helios::engine::modules::ui::layout::Anchor::TopLeft)
                       .offsets({120.0f, 0.0f, 0.0f, 80.0f});
 
@@ -242,7 +243,7 @@ export namespace helios::examples::scoring {
                 .withUiTransform([](auto& tb) {
                     tb.transform()
                       .pivot(helios::engine::modules::ui::layout::Anchor::TopLeft)
-                      .viewport(helios::engine::core::data::ViewportId{"menuViewport"})
+                      .viewport(helios::engine::common::types::ViewportId{"menuViewport"})
                       .anchor(helios::engine::modules::ui::layout::Anchor::TopLeft)
                       .offsets({160.0f, 0.0f, 0.0f, 80.0f});
 
@@ -261,7 +262,7 @@ export namespace helios::examples::scoring {
                 })
                 .withMenu([](auto& mb) {
                     mb.menu()
-                      .menuId(helios::engine::core::data::MenuId{"GameOverMenu"});
+                      .menuId(MenuId{"GameOverMenu"});
                 })
                 .withTransform([](auto& tb) {
                     tb.transform()
@@ -270,7 +271,7 @@ export namespace helios::examples::scoring {
                  .withUiTransform([](auto& tb) {
                     tb.transform()
                       .pivot(helios::engine::modules::ui::layout::Anchor::Center)
-                      .viewport(helios::engine::core::data::ViewportId{"menuViewport"})
+                      .viewport(helios::engine::common::types::ViewportId{"menuViewport"})
                       .anchor(helios::engine::modules::ui::layout::Anchor::Center)
                       .offsets({0.0f, 0.0f, 0.0f, 0.0f});
                 })
@@ -295,7 +296,7 @@ export namespace helios::examples::scoring {
                 .withUiTransform([](auto& tb) {
                     tb.transform()
                       .pivot(helios::engine::modules::ui::layout::Anchor::Center)
-                      .viewport(helios::engine::core::data::ViewportId{"menuViewport"})
+                      .viewport(helios::engine::common::types::ViewportId{"menuViewport"})
                       .anchor(helios::engine::modules::ui::layout::Anchor::Center)
                       .offsets({-40.0f, 0.0f, 0.0f, 0.0f});
 
@@ -330,7 +331,7 @@ export namespace helios::examples::scoring {
                     .withUiTransform([](auto& tb) {
                         tb.transform()
                           .pivot(helios::engine::modules::ui::layout::Anchor::TopLeft)
-                          .viewport(helios::engine::core::data::ViewportId{"menuViewport"})
+                          .viewport(helios::engine::common::types::ViewportId{"menuViewport"})
                           .anchor(helios::engine::modules::ui::layout::Anchor::Center)
                           .offsets({20.0f, 0.0f, 0.0f, -40.0f});
 
@@ -366,7 +367,7 @@ export namespace helios::examples::scoring {
                 .withUiTransform([](auto& tb) {
                     tb.transform()
                       .pivot(helios::engine::modules::ui::layout::Anchor::TopLeft)
-                      .viewport(helios::engine::core::data::ViewportId{"menuViewport"})
+                      .viewport(helios::engine::common::types::ViewportId{"menuViewport"})
                       .anchor(helios::engine::modules::ui::layout::Anchor::Center)
                       .offsets({60.0f, 0.0f, 0.0f, 0.0f});
 
@@ -391,7 +392,7 @@ export namespace helios::examples::scoring {
             .withUiTransform([](auto& tb) {
                 tb.transform()
                   .pivot(helios::engine::modules::ui::layout::Anchor::TopRight)
-                  .viewport(helios::engine::core::data::ViewportId{"hudViewport"})
+                  .viewport(helios::engine::common::types::ViewportId{"hudViewport"})
                   .anchor(helios::engine::modules::ui::layout::Anchor::TopRight)
                   .offsets({108.0f, 94.0f, 0.0f, 0.0f});
 
@@ -417,7 +418,7 @@ export namespace helios::examples::scoring {
             .withUiTransform([](auto& tb) {
                 tb.transform()
                   .pivot(helios::engine::modules::ui::layout::Anchor::TopRight)
-                  .viewport(helios::engine::core::data::ViewportId{"hudViewport"})
+                  .viewport(helios::engine::common::types::ViewportId{"hudViewport"})
                   .anchor(helios::engine::modules::ui::layout::Anchor::TopRight)
                   .offsets({100.0f, 50.0f, 0.0f, 0.0f});
 
@@ -445,7 +446,7 @@ export namespace helios::examples::scoring {
                 .withUiTransform([](auto& tb) {
                     tb.transform()
                       .pivot(helios::engine::modules::ui::layout::Anchor::TopRight)
-                      .viewport(helios::engine::core::data::ViewportId{"hudViewport"})
+                      .viewport(helios::engine::common::types::ViewportId{"hudViewport"})
                       .anchor(helios::engine::modules::ui::layout::Anchor::TopRight)
                       .offsets({60.0f, 50.0f, 0.0f, 0.0f});
 
@@ -471,7 +472,7 @@ export namespace helios::examples::scoring {
                 .withUiTransform([](auto& tb) {
                     tb.transform()
                       .pivot(helios::engine::modules::ui::layout::Anchor::TopLeft)
-                      .viewport(helios::engine::core::data::ViewportId{"hudViewport"})
+                      .viewport(helios::engine::common::types::ViewportId{"hudViewport"})
                       .anchor(helios::engine::modules::ui::layout::Anchor::TopLeft)
                       .offsets({19.0f, 0.0f, 0.0f, 50.0f});
                 })
@@ -497,7 +498,7 @@ export namespace helios::examples::scoring {
             .withUiTransform([](auto& tb) {
                 tb.transform()
                   .pivot(helios::engine::modules::ui::layout::Anchor::TopRight)
-                  .viewport(helios::engine::core::data::ViewportId{"hudViewport"})
+                  .viewport(helios::engine::common::types::ViewportId{"hudViewport"})
                   .anchor(helios::engine::modules::ui::layout::Anchor::TopRight)
                   .offsets({25.0f, 50.0f, 0.0f, 0.0f});
             })

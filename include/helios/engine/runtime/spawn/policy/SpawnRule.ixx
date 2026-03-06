@@ -14,7 +14,7 @@ import helios.engine.runtime.spawn.policy.SpawnRuleState;
 import helios.engine.runtime.spawn.scheduling.SpawnPlan;
 import helios.engine.runtime.pooling.GameObjectPoolSnapshot;
 import helios.engine.runtime.world;
-import helios.engine.core.data.GameObjectPoolId;
+import helios.engine.runtime.pooling.types.GameObjectPoolId;
 import helios.engine.mechanics.spawn.types.SpawnRuleId;
 
 export namespace helios::engine::runtime::spawn::policy {
@@ -119,7 +119,7 @@ export namespace helios::engine::runtime::spawn::policy {
          * @return A SpawnPlan with amount > 0 if condition satisfied, 0 otherwise.
          */
         [[nodiscard]] helios::engine::runtime::spawn::scheduling::SpawnPlan evaluate(
-            const helios::engine::core::data::GameObjectPoolId gameObjectPoolId,
+            const helios::engine::runtime::pooling::types::GameObjectPoolId gameObjectPoolId,
             const helios::engine::runtime::pooling::GameObjectPoolSnapshot& poolSnapshot,
             const SpawnRuleState& spawnRuleState,
             const helios::engine::runtime::world::GameWorld& gameWorld,

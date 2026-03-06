@@ -10,7 +10,7 @@ export module helios.engine.builder.gameObject.builders.configs.MenuConfig;
 
 import helios.engine.ecs.GameObject;
 
-import helios.engine.core.data;
+import helios.engine.modules.ui.widgets.types.MenuId;
 
 import helios.engine.modules.ui.widgets.components.MenuComponent;
 
@@ -48,7 +48,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @return Reference to this config for method chaining.
          */
-        MenuConfig& menuId(const helios::engine::core::data::MenuId menuId) {
+        MenuConfig& menuId(const helios::engine::modules::ui::widgets::types::MenuId menuId) {
 
             gameObject_.getOrAdd<helios::engine::modules::ui::widgets::components::MenuComponent>()
                         .setMenuId(menuId);

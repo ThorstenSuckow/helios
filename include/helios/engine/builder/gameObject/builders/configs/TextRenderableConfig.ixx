@@ -12,7 +12,7 @@ export module helios.engine.builder.gameObject.builders.configs.TextRenderableCo
 
 import helios.engine.ecs.GameObject;
 import helios.rendering;
-import helios.engine.core.data;
+import helios.engine.modules.ui.widgets.types.FontId;
 import helios.core.types;
 import helios.ext.opengl;
 import helios.engine.modules.rendering;
@@ -78,7 +78,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         /**
          * @brief The font identifier.
          */
-        helios::engine::core::data::FontId fontId_{helios::core::types::no_init};
+        helios::engine::modules::ui::widgets::types::FontId fontId_{helios::core::types::no_init};
 
         /**
          * @brief Format string for timestamp display (std::vformat syntax).
@@ -257,7 +257,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @return Reference to this config for method chaining.
          */
-        TextRenderableConfig& fontId(helios::engine::core::data::FontId fontId) {
+        TextRenderableConfig& fontId(helios::engine::modules::ui::widgets::types::FontId fontId) {
             fontId_ = fontId;
             return *this;
         }

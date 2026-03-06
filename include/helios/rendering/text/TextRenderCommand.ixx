@@ -16,7 +16,7 @@ import helios.rendering.shader.UniformValueMap;
 import helios.rendering.text.TextRenderPrototype;
 import helios.rendering.text.TextMesh;
 
-import helios.engine.core.data.FontId;
+import helios.engine.modules.ui.widgets.types.FontId;
 
 export namespace helios::rendering::text {
 

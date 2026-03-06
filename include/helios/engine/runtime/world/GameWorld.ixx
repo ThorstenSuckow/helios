@@ -35,7 +35,6 @@ import helios.engine.ecs.EntityManager;
 import helios.engine.ecs.EntityRegistry;
 import helios.engine.ecs.View;
 
-import helios.engine.core.data;
 import helios.engine.common.concepts;
 
 

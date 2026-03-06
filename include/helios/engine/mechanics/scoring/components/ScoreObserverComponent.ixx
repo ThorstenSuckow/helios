@@ -10,7 +10,6 @@ export module helios.engine.mechanics.scoring.components.ScoreObserverComponent;
 import helios.engine.mechanics.scoring.ScorePoolSnapshot;
 import helios.engine.mechanics.scoring.types;
 
-import helios.engine.core.data;
 import helios.core.types;
 
 namespace helios::engine::mechanics::scoring::systems {

@@ -7,7 +7,7 @@ module;
 export module helios.engine.runtime.spawn.policy.amount.SpawnAmountProvider;
 
 import helios.engine.runtime.spawn.policy.SpawnRuleState;
-import helios.engine.core.data.GameObjectPoolId;
+import helios.engine.runtime.pooling.types.GameObjectPoolId;
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.runtime.world.GameWorld;
 
@@ -44,7 +44,7 @@ export namespace helios::engine::runtime::spawn::policy::amount {
          * @return Number of entities to spawn.
          */
         [[nodiscard]] virtual size_t getAmount(
-            const helios::engine::core::data::GameObjectPoolId gameObjectPoolId,
+            const helios::engine::runtime::pooling::types::GameObjectPoolId gameObjectPoolId,
             const SpawnRuleState& spawnRuleState,
             const helios::engine::runtime::world::GameWorld& gameWorld,
             const helios::engine::runtime::world::UpdateContext& updateContext

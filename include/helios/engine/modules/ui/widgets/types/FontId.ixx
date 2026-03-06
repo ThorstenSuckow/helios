@@ -7,13 +7,13 @@ module;
 #include <cstdint>
 #include <string_view>
 
-export module helios.engine.core.data.FontId;
+export module helios.engine.modules.ui.widgets.types.FontId;
 
 import helios.core.algorithms;
 import helios.core.types;
 import helios.core.data;
 
-export namespace helios::engine::core::data {
+export namespace helios::engine::modules::ui::widgets::types {
 
     /**
      * @brief Tag type for FontId.
@@ -36,8 +36,8 @@ export namespace helios::engine::core::data {
  * @brief Hash specialization for FontId.
  */
 template<>
-struct std::hash<helios::engine::core::data::FontId> {
-    std::size_t operator()(const helios::engine::core::data::FontId& id) const noexcept {
+struct std::hash<helios::engine::modules::ui::widgets::types::FontId> {
+    std::size_t operator()(const helios::engine::modules::ui::widgets::types::FontId& id) const noexcept {
         return id.value();
     }
 

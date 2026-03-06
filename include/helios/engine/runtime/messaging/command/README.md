@@ -17,8 +17,8 @@ The system is built around **compile-time type safety**: command types are decla
 │                                                                      │
 │  SYSTEMS (producers)                                                 │
 │  ┌────────────────────────────────────────────────────────────┐      │
-│  │  ctx.queueCommand<MoveCommand>(entityHandle, dir);  │      │
-│  │  ctx.queueCommand<DespawnCommand>(eh, profileId);   │      │
+│  │  ctx.queueCommand<MoveCommand>(entityHandle, dir);         │      │
+│  │  ctx.queueCommand<DespawnCommand>(eh, profileId);          │      │
 │  └───────────────────────────┬────────────────────────────────┘      │
 │                              │                                       │
 │                              ▼                                       │

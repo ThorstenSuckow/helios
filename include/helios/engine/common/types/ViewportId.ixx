@@ -7,13 +7,13 @@ module;
 #include <cstdint>
 #include <string_view>
 
-export module helios.engine.core.data.ViewportId;
+export module helios.engine.common.types.ViewportId;
 
 import helios.core.algorithms;
 import helios.core.types;
 import helios.core.data;
 
-export namespace helios::engine::core::data {
+export namespace helios::engine::common::types {
 
     /**
      * @brief Tag type for ViewportId.

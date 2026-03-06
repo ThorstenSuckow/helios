@@ -9,7 +9,8 @@ module;
 export module helios.engine.runtime.pooling.GameObjectPoolConfig;
 
 import helios.engine.ecs.GameObject;
-import helios.engine.core.data;
+import helios.engine.runtime.pooling.types.GameObjectPoolId;
+import helios.engine.common.types.PrefabId;
 
 export namespace helios::engine::runtime::pooling {
 
@@ -56,7 +57,7 @@ export namespace helios::engine::runtime::pooling {
          *
          * Used to reference and retrieve the pool from registries.
          */
-        const helios::engine::core::data::GameObjectPoolId gameObjectPoolId;
+        const helios::engine::runtime::pooling::types::GameObjectPoolId gameObjectPoolId;
 
         /**
          * @brief Identifier of the prefab template used for cloning.
@@ -65,7 +66,7 @@ export namespace helios::engine::runtime::pooling {
          * PrefabIdComponent. The pool system resolves this ID to the
          * actual entity at initialization time.
          */
-        const helios::engine::core::data::PrefabId prefabId;
+        const helios::engine::common::types::PrefabId prefabId;
 
         /**
          * @brief Initial number of objects to pre-allocate in the pool.

@@ -22,7 +22,7 @@ export module helios.ext.opengl.rendering.FreeTypeFontResourceManager;
 import helios.rendering.text.FontResourceProvider;
 import helios.rendering.text.Glyph;
 
-import helios.engine.core.data.FontId;
+import helios.engine.modules.ui.widgets.types.FontId;
 
 
 export namespace helios::ext::opengl::rendering {
@@ -73,7 +73,7 @@ export namespace helios::ext::opengl::rendering {
          * @brief Map of font IDs to their cached glyph data.
          */
         std::unordered_map<
-            helios::engine::core::data::FontId, FontCache
+            helios::engine::modules::ui::widgets::types::FontId, FontCache
         > fontCache_;
 
 
@@ -113,7 +113,7 @@ export namespace helios::ext::opengl::rendering {
          * @pre The font ID must not already be loaded (asserts in debug builds).
          */
         void loadFont(
-            const helios::engine::core::data::FontId fontId,
+            const helios::engine::modules::ui::widgets::types::FontId fontId,
             const unsigned int pixelHeight,
             const std::string_view pathToFont
         ) override {
@@ -199,7 +199,7 @@ export namespace helios::ext::opengl::rendering {
          */
         helios::rendering::text::Glyph glyph(
             const char c,
-            const helios::engine::core::data::FontId fontId
+            const helios::engine::modules::ui::widgets::types::FontId fontId
         ) override {
 
             assert(fontCache_.contains(fontId) && "Font cache entry not found for given FontId (font not loaded?)");

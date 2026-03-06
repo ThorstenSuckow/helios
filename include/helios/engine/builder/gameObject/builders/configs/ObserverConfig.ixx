@@ -10,7 +10,6 @@ export module helios.engine.builder.gameObject.builders.configs.ObserverConfig;
 
 import helios.engine.ecs.GameObject;
 
-import helios.engine.core.data;
 
 import helios.engine.mechanics.match.components;
 
@@ -127,7 +126,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @return Reference to this config for chaining.
          */
-        ObserverConfig& time(const helios::engine::core::data::GameTimerId gameTimerId) {
+        ObserverConfig& time(const helios::engine::mechanics::timing::types::GameTimerId gameTimerId) {
 
             auto* toc = gameObject_.get<helios::engine::mechanics::timing::components::GameTimerBindingComponent>();
 

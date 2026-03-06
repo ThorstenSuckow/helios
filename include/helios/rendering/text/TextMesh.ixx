@@ -20,7 +20,7 @@ import helios.rendering.text.TypeSetter;
 import helios.rendering.text.FontResourceProvider;
 
 import helios.rendering.shader.Shader;
-import helios.engine.core.data.FontId;
+import helios.engine.modules.ui.widgets.types.FontId;
 
 import helios.util.Colors;
 import helios.math;
@@ -64,7 +64,7 @@ export namespace helios::rendering::text {
         /**
          * @brief Font identifier for glyph lookup.
          */
-        helios::engine::core::data::FontId fontId_;
+        helios::engine::modules::ui::widgets::types::FontId fontId_;
 
         /**
          * @brief The text string to render.
@@ -119,7 +119,7 @@ export namespace helios::rendering::text {
         explicit TextMesh(
             std::string text,
             const float fontScale,
-            const helios::engine::core::data::FontId fontId
+            const helios::engine::modules::ui::widgets::types::FontId fontId
         ) noexcept
         :
             text_(std::move(text)),
@@ -214,7 +214,7 @@ export namespace helios::rendering::text {
          *
          * @return The font ID used for glyph lookup.
          */
-        [[nodiscard]] helios::engine::core::data::FontId fontId() const noexcept {
+        [[nodiscard]] helios::engine::modules::ui::widgets::types::FontId fontId() const noexcept {
             return fontId_;
         }
     };

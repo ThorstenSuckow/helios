@@ -7,13 +7,13 @@ module;
 #include <cstdint>
 #include <string_view>
 
-export module helios.engine.core.data.SceneId;
+export module helios.engine.modules.scene.types.SceneId;
 
 import helios.core.algorithms;
 import helios.core.types;
 import helios.core.data;
 
-export namespace helios::engine::core::data {
+export namespace helios::engine::modules::scene::types {
 
     /**
      * @brief Tag type for SceneId.
@@ -37,8 +37,8 @@ export namespace helios::engine::core::data {
  * @brief Hash specialization for SceneId.
  */
 template<>
-struct std::hash<helios::engine::core::data::SceneId> {
-    std::size_t operator()(const helios::engine::core::data::SceneId& id) const noexcept {
+struct std::hash<helios::engine::modules::scene::types::SceneId> {
+    std::size_t operator()(const helios::engine::modules::scene::types::SceneId& id) const noexcept {
         return id.value();
     }
 

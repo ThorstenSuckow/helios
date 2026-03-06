@@ -12,7 +12,9 @@ import helios;
 
 export namespace helios::examples::scoring::IdConfig {
 
-    using namespace helios::engine::core::data;
+    using namespace helios::engine::common::types;
+    using namespace helios::engine::mechanics::timing::types;
+    using namespace helios::engine::runtime::pooling::types;
     using namespace helios::engine::mechanics::spawn::types;
 
     constexpr PrefabId BlueEnemyPrefab("BlueEnemy");

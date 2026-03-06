@@ -20,7 +20,8 @@ export module helios.engine.runtime.pooling.GameObjectPool;
 
 import helios.util.Guid;
 import helios.engine.ecs.EntityHandle;
-import helios.engine.core.data;
+import helios.engine.ecs.types;
+import helios.engine.common.types.VersionId;
 
 export namespace helios::engine::runtime::pooling {
 
@@ -78,12 +79,12 @@ export namespace helios::engine::runtime::pooling {
         /**
          * @brief Minimum EntityId in the pool (used for sparse array offset).
          */
-        helios::engine::core::data::EntityId minEntityId_ = std::numeric_limits<helios::engine::core::data::EntityId>::max();
+        helios::engine::ecs::types::EntityId minEntityId_ = std::numeric_limits<helios::engine::ecs::types::EntityId>::max();
 
         /**
          * @brief Maximum EntityId in the pool (used for sparse array sizing).
          */
-        helios::engine::core::data::EntityId maxEntityId_ = std::numeric_limits<helios::engine::core::data::EntityId>::lowest();
+        helios::engine::ecs::types::EntityId maxEntityId_ = std::numeric_limits<helios::engine::ecs::types::EntityId>::lowest();
 
         /**
          * @brief Offset for sparse array indexing (equals minEntityId_ after lock).
@@ -163,8 +164,8 @@ export namespace helios::engine::runtime::pooling {
             auto idx = entityHandle.entityId - delta_;
 
             if (activeIndex_.size() <= idx) {
-                activeIndex_.resize(idx + 1, helios::engine::core::data::EntityTombstone);
-                versionIndex_.resize(idx + 1, helios::engine::core::data::EntityTombstone);
+                activeIndex_.resize(idx + 1, helios::engine::ecs::types::EntityTombstone);
+                versionIndex_.resize(idx + 1, helios::engine::ecs::types::EntityTombstone);
             }
 
             activeIndex_[idx] = activeGameObjects_.size();
@@ -193,8 +194,8 @@ export namespace helios::engine::runtime::pooling {
         void lock() noexcept {
             locked_ = true;
             delta_ = minEntityId_;
-            activeIndex_.resize(maxEntityId_ - delta_ + 1, helios::engine::core::data::EntityTombstone);
-            versionIndex_.resize(maxEntityId_ - delta_ + 1, helios::engine::core::data::EntityTombstone);
+            activeIndex_.resize(maxEntityId_ - delta_ + 1, helios::engine::ecs::types::EntityTombstone);
+            versionIndex_.resize(maxEntityId_ - delta_ + 1, helios::engine::ecs::types::EntityTombstone);
         }
 
         /**
@@ -251,7 +252,7 @@ export namespace helios::engine::runtime::pooling {
             assert(sparseIdx < activeIndex_.size() && "Unexpected sparse index");
 
             const auto denseIndex = activeIndex_[sparseIdx];
-            if (denseIndex == helios::engine::core::data::EntityTombstone) {
+            if (denseIndex == helios::engine::ecs::types::EntityTombstone) {
                 return false;
             }
 
@@ -275,8 +276,8 @@ export namespace helios::engine::runtime::pooling {
 
             // clear the queried entityHandle from active index and update
             // inactiveGameObjects
-            activeIndex_[sparseIdx] = helios::engine::core::data::EntityTombstone;
-            versionIndex_[sparseIdx] = helios::engine::core::data::EntityTombstone;
+            activeIndex_[sparseIdx] = helios::engine::ecs::types::EntityTombstone;
+            versionIndex_[sparseIdx] = helios::engine::ecs::types::EntityTombstone;
 
             inactiveGameObjects_.push_back(entityHandle);
 
@@ -304,7 +305,7 @@ export namespace helios::engine::runtime::pooling {
 
             const auto denseIndex = activeIndex_[sparseIdx];
 
-            if (denseIndex == helios::engine::core::data::EntityTombstone) {
+            if (denseIndex == helios::engine::ecs::types::EntityTombstone) {
                 return false;
             }
 
@@ -319,8 +320,8 @@ export namespace helios::engine::runtime::pooling {
 
             activeGameObjects_.pop_back();
 
-            activeIndex_[sparseIdx] = helios::engine::core::data::EntityTombstone;
-            versionIndex_[sparseIdx] = helios::engine::core::data::EntityTombstone;
+            activeIndex_[sparseIdx] = helios::engine::ecs::types::EntityTombstone;
+            versionIndex_[sparseIdx] = helios::engine::ecs::types::EntityTombstone;
 
             return true;
 

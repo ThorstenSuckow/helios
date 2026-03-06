@@ -8,10 +8,10 @@ module;
 #include <limits>
 
 
-export module helios.engine.core.data.EntityTombstone;
+export module helios.engine.ecs.types.EntityTombstone;
 
 
-export namespace helios::engine::core::data {
+export namespace helios::engine::ecs::types {
 
     /**
      * @brief Sentinel value indicating an invalid or removed sparse index.

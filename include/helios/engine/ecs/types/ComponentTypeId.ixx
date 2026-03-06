@@ -9,12 +9,12 @@ module;
 
 #include <functional>
 
-export module helios.engine.core.data.ComponentTypeId;
+export module helios.engine.ecs.types.ComponentTypeId;
 
 import helios.core.data.TypeIndexer;
 import helios.core.types;
 
-export namespace helios::engine::core::data {
+export namespace helios::engine::ecs::types {
 
     /**
      * @brief Unique type identifier for component types.
@@ -112,8 +112,8 @@ export namespace helios::engine::core::data {
  * @details Enables use of ComponentTypeId as a key in unordered containers.
  */
 template<>
-struct std::hash<helios::engine::core::data::ComponentTypeId> {
-   std::size_t operator()(const helios::engine::core::data::ComponentTypeId& id) const noexcept {
+struct std::hash<helios::engine::ecs::types::ComponentTypeId> {
+   std::size_t operator()(const helios::engine::ecs::types::ComponentTypeId& id) const noexcept {
         return id.value();
     }
 

@@ -40,7 +40,7 @@ using namespace helios::util::time;
 
 // Engine core
 using namespace helios::engine::bootstrap;
-using namespace helios::engine::core::data;
+using namespace helios::engine::common::types;
 using namespace helios::engine::state;
 using namespace helios::engine::tooling;
 

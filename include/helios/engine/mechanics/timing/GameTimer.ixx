@@ -6,11 +6,11 @@ module;
 
 export module helios.engine.mechanics.timing.GameTimer;
 
-import helios.engine.core.data;
+import helios.engine.mechanics.timing.types.GameTimerId;
 
 import helios.engine.mechanics.timing.types;
 
-using namespace helios::engine::core::data;
+using namespace helios::engine::mechanics::timing::types;
 using namespace helios::engine::mechanics::timing::types;
 
 export namespace helios::engine::mechanics::timing {
@@ -58,7 +58,7 @@ export namespace helios::engine::mechanics::timing {
          *
          * @param gameTimerId The unique identifier for this timer.
          */
-        explicit GameTimer(const helios::engine::core::data::GameTimerId gameTimerId)
+        explicit GameTimer(const helios::engine::mechanics::timing::types::GameTimerId gameTimerId)
             : gameTimerId_{gameTimerId} {}
 
         /**
@@ -66,7 +66,7 @@ export namespace helios::engine::mechanics::timing {
          *
          * @return The GameTimerId assigned to this timer.
          */
-        [[nodiscard]] helios::engine::core::data::GameTimerId gameTimerId() const noexcept {
+        [[nodiscard]] helios::engine::mechanics::timing::types::GameTimerId gameTimerId() const noexcept {
             return gameTimerId_;
         }
 

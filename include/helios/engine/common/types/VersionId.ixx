@@ -6,11 +6,11 @@ module;
 
 #include <cstdint>
 
-export module helios.engine.core.data.VersionId;
+export module helios.engine.common.types.VersionId;
 
 
 
-export namespace helios::engine::core::data {
+export namespace helios::engine::common::types {
 
     /**
      * @brief Version number for detecting stale entity references.

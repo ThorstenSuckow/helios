@@ -3,10 +3,9 @@
 
 
 import helios.engine.ecs;
-import helios.engine.core.data;
 
 using namespace helios::engine::ecs;
-using namespace helios::engine::core::data;
+using namespace helios::engine::ecs::types;
 
 class Entity {
 

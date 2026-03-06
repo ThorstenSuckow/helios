@@ -18,7 +18,7 @@ import helios.engine.mechanics.timing.commands;
 
 import helios.engine.mechanics.timing.GameTimer;
 
-import helios.engine.core.data.GameTimerId;
+import helios.engine.mechanics.timing.types.GameTimerId;
 
 import helios.engine.runtime.world.UpdateContext;
 
@@ -30,7 +30,7 @@ import helios.engine.common;
 
 using namespace helios::engine::mechanics::timing::commands;
 using namespace helios::engine::mechanics::timing::types;
-using namespace helios::engine::core::data;
+using namespace helios::engine::mechanics::timing::types;
 using namespace helios::engine::runtime::world;
 using namespace helios::engine::runtime::messaging::command;
 

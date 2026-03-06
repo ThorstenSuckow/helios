@@ -11,7 +11,7 @@ export module helios.engine.ecs.ComponentOpsRegistry;
 import helios.engine.ecs.EntityHandle;
 import helios.engine.ecs.ComponentOps;
 import helios.engine.ecs.Traits;
-import helios.engine.core.data.ComponentTypeId;
+import helios.engine.ecs.types.ComponentTypeId;
 
 
 export namespace helios::engine::ecs {
@@ -63,7 +63,7 @@ export namespace helios::engine::ecs {
          * @param typeId The unique identifier for the component type.
          * @param ops The lifecycle function pointers to register.
          */
-        static void setOps(const helios::engine::core::data::ComponentTypeId typeId, const ComponentOps& ops) {
+        static void setOps(const helios::engine::ecs::types::ComponentTypeId typeId, const ComponentOps& ops) {
 
             if (typeId.value() >= operations_.size()) {
                 operations_.resize(typeId.value() + 1);
@@ -79,7 +79,7 @@ export namespace helios::engine::ecs {
          *
          * @return Reference to the registered ComponentOps, or empty ops if not registered.
          */
-        static const ComponentOps& ops(const helios::engine::core::data::ComponentTypeId typeId) {
+        static const ComponentOps& ops(const helios::engine::ecs::types::ComponentTypeId typeId) {
 
             if (typeId.value() >= operations_.size()) {
                 return emptyOps_;

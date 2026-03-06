@@ -6,13 +6,13 @@ module;
 #include <cstdint>
 #include <string_view>
 
-export module helios.engine.core.data.GameObjectPoolId;
+export module helios.engine.runtime.pooling.types.GameObjectPoolId;
 
 import helios.core.algorithms;
 import helios.core.types;
 import helios.core.data;
 
-export namespace helios::engine::core::data {
+export namespace helios::engine::runtime::pooling::types {
 
     /**
      * @brief Tag type for GameObjectPoolId.
@@ -37,8 +37,8 @@ export namespace helios::engine::core::data {
  * @brief Hash specialization for GameObjectPoolId.
  */
 template<>
-struct std::hash<helios::engine::core::data::GameObjectPoolId> {
-    std::size_t operator()(const helios::engine::core::data::GameObjectPoolId& id) const noexcept {
+struct std::hash<helios::engine::runtime::pooling::types::GameObjectPoolId> {
+    std::size_t operator()(const helios::engine::runtime::pooling::types::GameObjectPoolId& id) const noexcept {
         return id.value();
     }
 };

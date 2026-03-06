@@ -7,6 +7,7 @@ module;
 export module helios.engine.builder.gameObject.builders.configs.UiTransformConfig;
 
 import helios.engine.ecs.GameObject;
+import helios.engine.common.types;
 
 import helios.engine.modules.ui;
 
@@ -67,7 +68,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @return Reference to this config for chaining.
          */
-        UiTransformConfig& viewport(const helios::engine::core::data::ViewportId viewportId) {
+        UiTransformConfig& viewport(const helios::engine::common::types::ViewportId viewportId) {
             gameObject_.get<helios::engine::modules::ui::transform::components::UiTransformComponent>()
                         ->setViewportId(viewportId);
             return *this;

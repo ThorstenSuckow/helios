@@ -10,14 +10,14 @@ module;
 export module helios.engine.modules.rendering.viewport.components.ActiveViewportIdsStateComponent;
 
 import helios.engine.ecs.EntityHandle;
-import helios.engine.core.data;
+import helios.engine.common.types.ViewportId;
 
 import helios.engine.mechanics.gamestate.types;
 import helios.engine.mechanics.match.types;
 
 using namespace helios::engine::mechanics::gamestate::types;
 using namespace helios::engine::mechanics::match::types;
-using namespace helios::engine::core::data;
+using namespace helios::engine::common::types;
 
 export namespace helios::engine::modules::rendering::viewport::components {
 

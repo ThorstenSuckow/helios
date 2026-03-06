@@ -17,7 +17,7 @@ import helios.engine.runtime.spawn.SpawnContext;
 import helios.engine.ecs.GameObject;
 
 import helios.engine.mechanics.lifecycle.components.DelayedComponentEnabler;
-import helios.engine.core.data.ComponentTypeId;
+import helios.engine.ecs.types.ComponentTypeId;
 
 export namespace helios::engine::runtime::spawn::behavior::initializers {
 
@@ -65,7 +65,7 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
         /**
          * @brief Type IDs of components whose activation should be deferred.
          */
-        std::vector<helios::engine::core::data::ComponentTypeId> deferredComponents_;
+        std::vector<helios::engine::ecs::types::ComponentTypeId> deferredComponents_;
 
     public:
 
@@ -79,7 +79,7 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
         DelayedComponentEnablerInitializer(const float delay, const size_t cycleLength = 0) :
             delay_(delay),
             cycleLength_(cycleLength),
-            deferredComponents_{helios::engine::core::data::ComponentTypeId::id<ComponentTypes>() ...}
+            deferredComponents_{helios::engine::ecs::types::ComponentTypeId::id<ComponentTypes>() ...}
         {}
 
         /**

@@ -16,7 +16,7 @@ export module helios.engine.mechanics.lifecycle.components.DelayedComponentEnabl
 
 import helios.engine.ecs.GameObject;
 import helios.engine.mechanics.spawn.types.SpawnProfileId;
-import helios.engine.core.data.ComponentTypeId;
+import helios.engine.ecs.types.ComponentTypeId;
 import helios.core.types;
 
 export namespace helios::engine::mechanics::lifecycle::components {
@@ -55,7 +55,7 @@ export namespace helios::engine::mechanics::lifecycle::components {
             /**
              * @brief Type identifier of the deferred component.
              */
-            helios::engine::core::data::ComponentTypeId componentTypeId;
+            helios::engine::ecs::types::ComponentTypeId componentTypeId;
         };
 
         /**
@@ -99,7 +99,7 @@ export namespace helios::engine::mechanics::lifecycle::components {
          *
          * @param removeList Component type IDs to remove from tracking.
          */
-        void sync(std::span<helios::engine::core::data::ComponentTypeId> removeList) {
+        void sync(std::span<helios::engine::ecs::types::ComponentTypeId> removeList) {
             std::erase_if(deferredComponents_, [&](const DeferredComponent& dc) {
                 return std::ranges::find(removeList, dc.componentTypeId) != removeList.end();
             });
@@ -119,7 +119,7 @@ export namespace helios::engine::mechanics::lifecycle::components {
          */
         void defer(
             helios::engine::ecs::GameObject gameObject,
-            helios::engine::core::data::ComponentTypeId componentTypeId, const float delta) {
+            helios::engine::ecs::types::ComponentTypeId componentTypeId, const float delta) {
             assert(delta > 0 && "delta must be greater than 0");
 
             const bool hasCmp  = gameObject.has(componentTypeId);

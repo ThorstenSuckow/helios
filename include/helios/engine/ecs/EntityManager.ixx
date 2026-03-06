@@ -13,7 +13,7 @@ module;
 
 export module helios.engine.ecs.EntityManager;
 
-import helios.engine.core.data;
+import helios.engine.ecs.types;
 import helios.core.data;
 import helios.engine.ecs.SparseSet;
 import helios.engine.ecs.Traits;
@@ -259,7 +259,7 @@ export namespace helios::engine::ecs {
          *
          * @return `true` if the entity has the component, `false` otherwise.
          */
-        [[nodiscard]] bool has(const EntityHandle handle, const helios::engine::core::data::ComponentTypeId typeId) const {
+        [[nodiscard]] bool has(const EntityHandle handle, const helios::engine::ecs::types::ComponentTypeId typeId) const {
             if (!registry_.isValid(handle)) {
                 return false;
             }
@@ -281,7 +281,7 @@ export namespace helios::engine::ecs {
          * @param handle The entity whose component to enable.
          * @param typeId The component type identifier.
          */
-        void enable(const EntityHandle handle, const helios::engine::core::data::ComponentTypeId typeId) const {
+        void enable(const EntityHandle handle, const helios::engine::ecs::types::ComponentTypeId typeId) const {
             enable(handle, typeId, true);
         }
 
@@ -293,7 +293,7 @@ export namespace helios::engine::ecs {
          * @param handle The entity whose component to disable.
          * @param typeId The component type identifier.
          */
-        void disable(const EntityHandle handle, const helios::engine::core::data::ComponentTypeId typeId) const {
+        void disable(const EntityHandle handle, const helios::engine::ecs::types::ComponentTypeId typeId) const {
             enable(handle, typeId, false);
         }
 
@@ -304,7 +304,7 @@ export namespace helios::engine::ecs {
          * @param typeId The component type identifier.
          * @param enable `true` to enable, `false` to disable.
          */
-        void enable(const EntityHandle handle, const helios::engine::core::data::ComponentTypeId typeId, const bool enable) const {
+        void enable(const EntityHandle handle, const helios::engine::ecs::types::ComponentTypeId typeId, const bool enable) const {
 
             if (!has(handle, typeId)) {
                 return;
@@ -441,7 +441,7 @@ export namespace helios::engine::ecs {
          *
          * @return Generator yielding ComponentTypeId for each attached component.
          */
-        std::generator<helios::engine::core::data::ComponentTypeId>
+        std::generator<helios::engine::ecs::types::ComponentTypeId>
         componentTypeIds(const EntityHandle handle) const {
             if (!registry_.isValid(handle)) {
                 co_return;
@@ -495,7 +495,7 @@ export namespace helios::engine::ecs {
          *
          * @return Raw pointer to the component, or `nullptr` if not found.
          */
-        [[nodiscard]] void* raw(const EntityHandle handle, const helios::engine::core::data::ComponentTypeId typeId ) const {
+        [[nodiscard]] void* raw(const EntityHandle handle, const helios::engine::ecs::types::ComponentTypeId typeId ) const {
             if (!has(handle, typeId)) {
                 return nullptr;
             }

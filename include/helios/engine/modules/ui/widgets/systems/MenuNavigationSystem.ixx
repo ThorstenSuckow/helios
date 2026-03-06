@@ -15,6 +15,7 @@ import helios.engine.modules.ui.widgets.components.MenuComponent;
 
 import helios.engine.mechanics.lifecycle.components.Active;
 
+import helios.engine.modules.ui.widgets.types;
 import helios.engine.modules.ui.widgets.components.UiFocusComponent;
 import helios.engine.modules.ui.widgets.components.UiStateComponent;
 import helios.engine.modules.ui.widgets.components.UiActionComponent;
@@ -37,7 +38,7 @@ import helios.engine.modules.rendering.model.components.ModelAabbComponent;
 
 using namespace helios::input::types;
 using namespace helios::engine::ecs::components;
-using namespace helios::engine::core::data;
+using namespace helios::engine::modules::ui::widgets::types;
 using namespace helios::engine::ecs;
 using namespace helios::engine::runtime::world;
 using namespace helios::engine::modules::ui::widgets::components;

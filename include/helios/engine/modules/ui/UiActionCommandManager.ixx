@@ -13,7 +13,7 @@ export module helios.engine.modules.ui.UiActionCommandManager;
 
 import helios.engine.modules.ui.widgets.commands;
 import helios.engine.modules.ui.widgets.types;
-import helios.engine.core.data;
+import helios.engine.modules.ui.widgets.types.ActionId;
 
 
 import helios.engine.ecs.GameObject;

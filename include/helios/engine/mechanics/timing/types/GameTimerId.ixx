@@ -7,13 +7,13 @@ module;
 #include <cstdint>
 #include <string_view>
 
-export module helios.engine.core.data.GameTimerId;
+export module helios.engine.mechanics.timing.types.GameTimerId;
 
 import helios.core.algorithms;
 import helios.core.types;
 import helios.core.data;
 
-export namespace helios::engine::core::data {
+export namespace helios::engine::mechanics::timing::types {
 
     /**
      * @brief Tag type for GameTimerId.

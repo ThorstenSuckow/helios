@@ -73,15 +73,15 @@ int main() {
     constexpr size_t OBJECT_AMOUNT_X = GRID_X * CELL_LENGTH / SPACESHIP_LENGTH;
     constexpr size_t OBJECT_AMOUNT_Y = GRID_Y * CELL_LENGTH / SPACESHIP_LENGTH;
 
-    constexpr helios::engine::core::data::PrefabId ProjectilePrefabId{"projectile"};
-    constexpr helios::engine::core::data::PrefabId PurpleEnemyPrefabId{"purple_enemy"};
-    constexpr helios::engine::core::data::PrefabId OrangeEnemyPrefabId{"orange_enemy"};
-    constexpr helios::engine::core::data::PrefabId BlueEnemyPrefabId{"blue_enemy"};
+    constexpr helios::engine::common::types::PrefabId ProjectilePrefabId{"projectile"};
+    constexpr helios::engine::common::types::PrefabId PurpleEnemyPrefabId{"purple_enemy"};
+    constexpr helios::engine::common::types::PrefabId OrangeEnemyPrefabId{"orange_enemy"};
+    constexpr helios::engine::common::types::PrefabId BlueEnemyPrefabId{"blue_enemy"};
 
-    constexpr helios::engine::core::data::GameObjectPoolId ProjectilePoolId{"projectile_pool"};
-    constexpr helios::engine::core::data::GameObjectPoolId PurpleEnemyPoolId{"purple_pool"};
-    constexpr helios::engine::core::data::GameObjectPoolId OrangeEnemyPoolId{"orange_pool"};
-    constexpr helios::engine::core::data::GameObjectPoolId BlueEnemyPoolId{"blue_pool"};
+    constexpr helios::engine::runtime::pooling::types::GameObjectPoolId ProjectilePoolId{"projectile_pool"};
+    constexpr helios::engine::runtime::pooling::types::GameObjectPoolId PurpleEnemyPoolId{"purple_pool"};
+    constexpr helios::engine::runtime::pooling::types::GameObjectPoolId OrangeEnemyPoolId{"orange_pool"};
+    constexpr helios::engine::runtime::pooling::types::GameObjectPoolId BlueEnemyPoolId{"blue_pool"};
 
     constexpr helios::engine::mechanics::spawn::types::SpawnProfileId ProjectileSpawnSpawnProfileId{"projectile_spawn"};
     constexpr helios::engine::mechanics::spawn::types::SpawnProfileId RandomSpawnSpawnProfileId{"random_spawn"};
@@ -111,7 +111,7 @@ int main() {
     auto win = dynamic_cast<GLFWWindow*>(app->current());
     auto mainViewport = std::make_shared<Viewport>(
         0.0f, 0.0f, 1.0f, 1.0f,
-        helios::engine::core::data::ViewportId{"mainViewport"});
+        helios::engine::common::types::ViewportId{"mainViewport"});
 
     mainViewport->setClearFlags(std::to_underlying(ClearFlags::Color))
                   .setClearColor(vec4f(0.051f, 0.051f, 0.153f, 1.0f));
@@ -169,7 +169,7 @@ int main() {
     // ========================================
     auto frustumCullingStrategy = std::make_unique<CullNoneStrategy>();
     auto scene = std::make_unique<helios::scene::Scene>(
-        std::move(frustumCullingStrategy), helios::engine::core::data::SceneId{"mainScene"});
+        std::move(frustumCullingStrategy), helios::engine::modules::scene::types::SceneId{"mainScene"});
     sceneToViewportMap.add(scene.get(), mainViewport.get());
 
     auto mainViewportCam = std::make_unique<helios::scene::Camera>();
@@ -623,7 +623,9 @@ int main() {
 
     using namespace helios::engine::mechanics::gamestate::types;
     using namespace helios::engine::mechanics::match::types;
-    using namespace helios::engine::core::data;
+    using namespace helios::engine::common::types;
+    using namespace helios::engine::modules::scene::types;
+    using namespace helios::engine::runtime::pooling::types;
 
     // ----------------------------------------
     // 8.1 State-to-Viewport Mapping

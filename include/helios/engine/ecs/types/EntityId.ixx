@@ -6,11 +6,11 @@ module;
 
 #include <cstdint>
 
-export module helios.engine.core.data.EntityId;
+export module helios.engine.ecs.types.EntityId;
 
 
 
-export namespace helios::engine::core::data {
+export namespace helios::engine::ecs::types {
 
     /**
      * @brief Unique identifier for an entity within an EntityPool.

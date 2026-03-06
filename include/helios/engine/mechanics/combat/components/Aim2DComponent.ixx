@@ -12,7 +12,7 @@ import helios.engine.runtime.world.UpdateContext;
 
 import helios.math;
 
-import helios.engine.core.data.ComponentTypeId;
+import helios.engine.ecs.types.ComponentTypeId;
 
 export namespace helios::engine::mechanics::combat::components {
 

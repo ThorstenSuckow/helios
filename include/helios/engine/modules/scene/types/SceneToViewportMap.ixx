@@ -12,11 +12,13 @@ module;
 
 export module helios.engine.modules.scene.types.SceneToViewportMap;
 
-import helios.engine.core.data;
+import helios.engine.common.types.ViewportId;
+import helios.engine.modules.scene.types.SceneId;
 import helios.scene.Scene;
 import helios.rendering.Viewport;
 
-using namespace helios::engine::core::data;
+using namespace helios::engine::common::types;
+using namespace helios::engine::modules::scene::types;
 using namespace helios::scene;
 using namespace helios::rendering;
 

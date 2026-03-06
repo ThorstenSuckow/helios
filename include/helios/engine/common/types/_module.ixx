@@ -7,3 +7,6 @@ export module helios.engine.common.types;
 
 export import helios.engine.common.types.InteractionContext;
 export import helios.engine.common.types.DamageContext;
+export import helios.engine.common.types.PrefabId;
+export import helios.engine.common.types.ViewportId;
+export import helios.engine.common.types.VersionId;

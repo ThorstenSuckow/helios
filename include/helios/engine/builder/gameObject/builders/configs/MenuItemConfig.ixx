@@ -11,7 +11,6 @@ export module helios.engine.builder.gameObject.builders.configs.MenuItemConfig;
 
 import helios.engine.ecs.GameObject;
 
-import helios.engine.core.data;
 
 import helios.engine.modules.ui.widgets.types;
 import helios.engine.modules.ui.widgets.components.MenuComponent;

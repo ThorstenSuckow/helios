@@ -120,7 +120,7 @@ int main() {
     // 6. Font Loading
     // ========================================================================
     // Load the font via the rendering device's font resource provider.
-    auto fontId = helios::engine::core::data::FontId{"roboto"};
+    auto fontId = helios::engine::modules::ui::widgets::types::FontId{"roboto"};
     auto& fontResourceProvider = app->renderingDevice().fontResourceProvider();
     fontResourceProvider.loadFont(fontId, 24, "resources/Roboto-SemiBoldItalic.ttf");
 

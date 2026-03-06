@@ -10,7 +10,6 @@ export module helios.engine.mechanics.scoring.components.ScorePoolComponent;
 
 import helios.engine.mechanics.scoring.types.ScorePoolId;
 
-import helios.engine.core.data;
 import helios.core.types;
 
 export namespace helios::engine::mechanics::scoring::components {

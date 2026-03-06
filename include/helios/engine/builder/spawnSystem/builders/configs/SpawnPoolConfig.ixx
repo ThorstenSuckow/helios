@@ -16,7 +16,8 @@ export module helios.engine.builder.spawnSystem.builders.configs.SpawnPoolConfig
 
 import helios.engine.ecs;
 
-import helios.engine.core.data;
+import helios.engine.runtime.pooling.types.GameObjectPoolId;
+import helios.engine.common.types.PrefabId;
 
 import helios.engine.runtime.pooling;
 
@@ -73,8 +74,8 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          * @return SpawnPoolConfig for fluent configuration.
          */
         [[nodiscard]] SpawnPoolConfig pool(
-            helios::engine::core::data::GameObjectPoolId poolId,
-            helios::engine::core::data::PrefabId prefabId,
+            helios::engine::runtime::pooling::types::GameObjectPoolId poolId,
+            helios::engine::common::types::PrefabId prefabId,
             size_t poolSize
         );
     };
@@ -240,7 +241,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
         /**
          * @brief Pool to acquire entities from.
          */
-        helios::engine::core::data::GameObjectPoolId poolId_;
+        helios::engine::runtime::pooling::types::GameObjectPoolId poolId_;
 
         /**
          * @brief Placement strategy for spawned entities.
@@ -271,7 +272,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
             SpawnPoolConfig& parent,
             helios::engine::runtime::spawn::SpawnManager& spawnManager,
             helios::engine::mechanics::spawn::types::SpawnProfileId profileId,
-            helios::engine::core::data::GameObjectPoolId poolId
+            helios::engine::runtime::pooling::types::GameObjectPoolId poolId
         ) : parent_(parent), spawnManager_(spawnManager),
             profileId_(profileId), poolId_(poolId) {}
 
@@ -452,12 +453,12 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
         /**
          * @brief Pool identifier.
          */
-        helios::engine::core::data::GameObjectPoolId poolId_;
+        helios::engine::runtime::pooling::types::GameObjectPoolId poolId_;
 
         /**
          * @brief Identifier of the prefab template for cloning.
          */
-        helios::engine::core::data::PrefabId prefabId_;
+        helios::engine::common::types::PrefabId prefabId_;
 
         /**
          * @brief Number of instances to pre-allocate.
@@ -485,8 +486,8 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
         SpawnPoolConfig(
             helios::engine::runtime::pooling::GameObjectPoolManager& poolManager,
             helios::engine::runtime::spawn::SpawnManager& spawnManager,
-            helios::engine::core::data::GameObjectPoolId poolId,
-            helios::engine::core::data::PrefabId prefabId,
+            helios::engine::runtime::pooling::types::GameObjectPoolId poolId,
+            helios::engine::common::types::PrefabId prefabId,
             size_t poolSize
         ) : poolManager_(poolManager), spawnManager_(spawnManager),
             poolId_(poolId), prefabId_(prefabId), size_(poolSize) {}
@@ -627,8 +628,8 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
     }
 
     inline SpawnPoolConfig SpawnSystemConfigurator::pool(
-        helios::engine::core::data::GameObjectPoolId poolId,
-        helios::engine::core::data::PrefabId prefabId,
+        helios::engine::runtime::pooling::types::GameObjectPoolId poolId,
+        helios::engine::common::types::PrefabId prefabId,
         size_t poolSize
     ) {
         return SpawnPoolConfig{poolManager_, spawnManager_, poolId, prefabId, poolSize};

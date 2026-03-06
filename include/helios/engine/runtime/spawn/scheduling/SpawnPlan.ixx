@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.runtime.spawn.scheduling.SpawnPlan;
 
-import helios.engine.core.data.GameObjectPoolId;
+import helios.engine.runtime.pooling.types.GameObjectPoolId;
 import helios.engine.mechanics.spawn.types.SpawnRuleId;
 
 export namespace helios::engine::runtime::spawn::scheduling {

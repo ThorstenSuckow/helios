@@ -10,7 +10,6 @@ export module helios.engine.mechanics.scoring.components.MaxScoreObserverCompone
 import helios.engine.mechanics.scoring.MaxScorePoolSnapshot;
 import helios.engine.mechanics.scoring.types;
 
-import helios.engine.core.data;
 import helios.core.types;
 
 namespace helios::engine::mechanics::scoring::systems {
@@ -43,7 +42,7 @@ export namespace helios::engine::mechanics::scoring::components {
         /**
          * @brief ID of the score pool to observe.
          */
-        helios::engine::mechanics::scoring::types::ScorePoolId scorePoolId_{helios::core::types::no_init};
+        ScorePoolId scorePoolId_{helios::core::types::no_init};
 
 
         /**
@@ -56,7 +55,7 @@ export namespace helios::engine::mechanics::scoring::components {
         /**
          * @brief the current snapshot saved by this observer component.
          */
-        helios::engine::mechanics::scoring::MaxScorePoolSnapshot snapshot_;
+        MaxScorePoolSnapshot snapshot_;
 
         /**
          * @brief Whether this component is enabled.
@@ -116,7 +115,7 @@ export namespace helios::engine::mechanics::scoring::components {
          *
          * @param scorePoolId The ID of the pool to observe.
          */
-        void setScorePoolId(const helios::engine::mechanics::scoring::types::ScorePoolId scorePoolId) noexcept {
+        void setScorePoolId(const ScorePoolId scorePoolId) noexcept {
             scorePoolId_ = scorePoolId;
         }
 
@@ -125,7 +124,7 @@ export namespace helios::engine::mechanics::scoring::components {
          *
          * @return The ScorePoolId.
          */
-        [[nodiscard]] helios::engine::mechanics::scoring::types::ScorePoolId scorePoolId() const noexcept {
+        [[nodiscard]] ScorePoolId scorePoolId() const noexcept {
             return scorePoolId_;
         }
 

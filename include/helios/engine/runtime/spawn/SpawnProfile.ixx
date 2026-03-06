@@ -10,7 +10,7 @@ export module helios.engine.runtime.spawn.SpawnProfile;
 
 import helios.engine.runtime.spawn.behavior.SpawnPlacer;
 import helios.engine.runtime.spawn.behavior.SpawnInitializer;
-import helios.engine.core.data.GameObjectPoolId;
+import helios.engine.runtime.pooling.types.GameObjectPoolId;
 
 export namespace helios::engine::runtime::spawn {
 
@@ -45,7 +45,7 @@ export namespace helios::engine::runtime::spawn {
         /**
          * @brief The pool from which entities are acquired.
          */
-        const helios::engine::core::data::GameObjectPoolId gameObjectPoolId;
+        const helios::engine::runtime::pooling::types::GameObjectPoolId gameObjectPoolId;
 
         /**
          * @brief Strategy for determining spawn positions.

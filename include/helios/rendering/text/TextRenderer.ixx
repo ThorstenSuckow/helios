@@ -10,7 +10,7 @@ export module helios.rendering.text.TextRenderer;
 
 import helios.rendering.text.TextRenderCommand;
 
-import helios.engine.core.data.FontId;
+import helios.engine.modules.ui.widgets.types.FontId;
 
 import helios.rendering.shader.UniformValueMap;
 

@@ -7,11 +7,11 @@ module;
 #include <cstdint>
 #include <limits>
 
-export module helios.engine.core.data.CollisionLayer;
+export module helios.engine.modules.physics.collision.types.CollisionLayer;
 
 
 
-export namespace helios::engine::core::data {
+export namespace helios::engine::modules::physics::collision::types {
 
     /**
      * @brief Type alias for collision layer identifiers.

@@ -1,0 +1,64 @@
+\subsection{Erst ECS, dann ECS - Evolution des Entity-Begriffs}
+
+Die Entwicklung von helios begann mit einem klassischen, objektorientierten Ansatz.\footnote{
+    Im Folgenden auch einfach \textit{OOD} (Object-Oriented Design). Das Kürzel \textit{DOD} verwenden wir entsprechend im Kontext des \textit{Data-Oriented Design}.
+}
+Erst mit zunehmender Komplexität des Projektes und mit den steigenden Anforderungen an möglichst flexible Datenstrukturen wurde das Compound Object, dass die GameObjects noch in Meilenstein 4 darstellten, verworfen und auf eine Datenorientierte Architektur umgestellt. Eine Illustartion der vorherigen Architektur und dem aktuellen Design findet sich in Abbildung~\ref{fig:ecs_evolution}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{content/de/architektur/ecs_evolution.png}
+    \caption{Evolution des Entity-Begriffs in der Entwicklung von helios.}
+    \label{fig:ecs_evolution}
+\end{figure}
+
+Die Grundlage des ECS liegt in der TRennung von Daten und Verhalten.
+Es ermöglichst ein typenloses Datenmanagement und spart durch den Verzicht auf tiefe Vererbungshierarchien VTable lookups zur Laufzeit ein.
+Die für die ECS systeme idiomatische speicherung der Daten erlaubt ein Cache-Freundliche Anordnung der Daten, was die Programme beim Zugriff auf die Daten über die in den modernen CPU Systemen unterschiedlichen Caches schneller macht.
+populäre ecs-Implementierungen finden sich bei den Open Source Projekte \texttt{EnTT}~\cite[]{EnTT} und \texttt{flecs}~\cite[]{flecs}.
+
+
+\subsubsection{SparseSet als Datenhaltung in helios.ecs}
+
+Der Zugriff auf den CPU-nahen Level-n Cache ist um ``etwa 10 bis 100 mal schneller als die Zugriffszeiten gängiger Hauptspeicher``~\cite[S. 5]{Man20}~\cite[79]{HP17}.
+Hierbei werden in der Regel Daten in Cache bewegt, auf die häufig zugegriffen wird - nicht als einzelne Speicherwörter, sondern in Form sogenannter \textit{cache lines}, die typischerweise 32-64 Byte große Blöcke umfassen~\cite[531]{TB23}.
+Gelingt es nun, Speicherbereiche so anzuordnen, dass häufig genutzte Daten dicht aneinanderliegen, ist die Wahrscheinlichkeit groß, dass diese in den Cache geladen werden, was einerseits die Zugriffszeiten bei einem Iterieren über diese Daten beschleunigt, andererseits auch den Einzelzugriff: Die formalen Zugriffszeiten von $O(n)$ und $O(1)$ können also nicht nur theoretisch erfüllt werden, sondern bewegen sich in der Praxis auf einem verschwindend geringen Nanosekundenbereich, zuzüglicher einer Taktzyklen, je nach Cache-nähe.\\
+
+\noinndet
+Wird ein angefordertes Speicherwort nicht im Cache gefunden, wird ein \textit{cache miss} ausgelöst.
+Die verursacht ein Invalidieren von Daten in dem Cache, und ein langsamer Zugriff auf den Hauptspeicher ist erforderlich, um Daten in den Cache zu laden.
+Die Wahrscheinlichkeit, dass viele von den in den früheren Versionen von helios genutzten Compound Objects einen Cache Miss verursachen, ist hoch: Von der GameWorld werden die GameObjects als \texttt{unique\_ptr<GameObject>} verwaltet.
+Diese Komponenten wiederum verwalten ihre Komponenten - in ihrer Rolle als \textit{Compound Objects} - wiederum in Vektoren, die \texttt{unique\_ptr<Component>} sepichern.
+Wird im HotPath nun ein System über alle GameObjects iterieren, die einen bestimmten KomponentenTypen A haben, dann muss das System zunächst alle Objekte von GameObject durchiterieren, und danach alle Komponenten auf den Typ A hin überprüfen.
+Ein Codebeispiel, der dies illustriert, findet sich in Listing~\ref{lst:gameobject_cache_miss}.
+
+
+
+\begin{lstlisting}[style=c++style,
+    caption={Codebeispiel für die Iteration über alle GameObjects, um Komponenten eines bestimmten Typs zu finden (Meilenstein 3). Der Zugriff verursacht durch dahäufige CacheMisses, da die abgefragten Daten nicht nach beieinander liegen: Die Komponenten der einzelnen GameObjekte liegen in unterschiedlichen Speicherbereichen. Daneben ist die Iteration durch das Pointer Chasing world -> gameobject adresse -> ganmeobject instanz -> component adresse -> ...  ~\cite{HKSN+16} und den RTTI\footnote{Runt-Time-Type-Information} cast nicht gut geeignet für einen Hot Path.},
+    label=lst:gameobject_cache_miss]
+    for (auto& go: gameWorld.gameObjects()) {
+         for (const auto& component : go->components()) {
+                if (auto* comp = dynamic_cast<T*>(component.get())) {
+                    return comp;
+                }
+            }
+    }
+\end{lstlisting}
+
+
+Komponenten kommt also nicht nur eine fachlicher sauberer Entwurf zu, sondern sollte auch so entworfen werden, dass sie im Speicher möglichst sinnvoll angelegt werden können (Pasdding)
+
+
+\chapter*{Scott Meyers - CPU Caches and Why You care} \url{https://vimeo.com/97337258}
+
+
+
+Function POinters A 18  Computer Architecture a quantitive approach
+
+In diesem Ansatz wurden die GameObjects als Instanzen von Klassen modelliert, die von einer gemeinsamen Basisklasse \texttt{GameObject} abgeleitet wurden. Diese Basisklasse enthielt allgemeine Eigenschaften und Methoden, die für alle GameObjects relevant waren, wie zum Beispiel Position, Rotation und Skalierung.
+helios
+
+\input{content/de/architektur/gameobject abstraktion und die rolle des ecs}
+
+https://skypjack.github.io/2020-08-02-ecs-baf-part-9/

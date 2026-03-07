@@ -8,9 +8,9 @@ module;
 export module helios.engine.mechanics.timing.types.TimerControlContext;
 
 import helios.engine.mechanics.timing.types.TimerState;
-import helios.engine.core.data;
+import helios.engine.mechanics.timing.types.GameTimerId;
 
-using namespace helios::engine::core::data;
+using namespace helios::engine::mechanics::timing::types;
 
 export namespace helios::engine::mechanics::timing::types {
 

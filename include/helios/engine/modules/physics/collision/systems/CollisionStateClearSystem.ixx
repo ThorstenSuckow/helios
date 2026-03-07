@@ -17,7 +17,7 @@ export module helios.engine.modules.physics.collision.systems.CollisionStateClea
 
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
-import helios.engine.ecs.System;
+
 
 
 import helios.engine.modules.physics.collision.types.CollisionBehavior;
@@ -34,6 +34,8 @@ using namespace helios::engine::runtime::spawn::commands;
 
 
 
+import helios.engine.common.tags.SystemRole;
+
 export namespace helios::engine::modules::physics::collision::systems {
 
     /**
@@ -46,17 +48,18 @@ export namespace helios::engine::modules::physics::collision::systems {
      * Running this system after collision response systems have processed their events
      * ensures a clean slate for the next collision detection pass.
      */
-    class CollisionStateClearSystem : public helios::engine::ecs::System {
+    class CollisionStateClearSystem {
 
     public:
 
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
         /**
          * @brief Resets collision state for all entities with CollisionStateComponent.
          *
          * @param updateContext Context containing frame data and world access.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
-            for (auto [entity, csc, active] : gameWorld_->view<
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+            for (auto [entity, csc, active] : updateContext.view<
                CollisionStateComponent,
                helios::engine::mechanics::lifecycle::components::Active
            >().whereEnabled()) {

@@ -11,8 +11,8 @@ export module helios.engine.builder.gameObject.builders.configs.MenuItemConfig;
 
 import helios.engine.ecs.GameObject;
 
-import helios.engine.core.data;
 
+import helios.engine.modules.ui.widgets.types;
 import helios.engine.modules.ui.widgets.components.MenuComponent;
 import helios.engine.modules.ui.widgets.components.UiStyleComponent;
 import helios.engine.modules.ui.widgets.components.UiStateComponent;
@@ -177,7 +177,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @return Reference to this config for method chaining.
          */
-        MenuItemConfig& actionId(const helios::engine::core::data::ActionId actionId) {
+        MenuItemConfig& actionId(const helios::engine::modules::ui::widgets::types::ActionId actionId) {
 
             gameObject_.add<helios::engine::modules::ui::widgets::components::UiActionComponent>(actionId);
 

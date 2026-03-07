@@ -21,7 +21,7 @@ import helios.engine.modules;
 import helios.engine.mechanics;
 import helios.util.Guid;
 import helios.engine.core.units;
-import helios.engine.core.data;
+import helios.engine.common.types.PrefabId;
 import helios.math;
 
 export namespace helios::engine::builder::gameObject {
@@ -420,7 +420,7 @@ export namespace helios::engine::builder::gameObject {
                 return *this;
             }
 
-            GameObjectPrototype& withPrefabId(const helios::engine::core::data::PrefabId prefabId) {
+            GameObjectPrototype& withPrefabId(const helios::engine::common::types::PrefabId prefabId) {
                 gameObject_.add<helios::engine::runtime::pooling::components::PrefabIdComponent>(prefabId);
                 return *this;
             }

@@ -23,6 +23,7 @@ import helios.engine.runtime.gameloop.CommitPoint;
 import helios.engine.mechanics.gamestate.types;
 
 using namespace helios::engine::mechanics::gamestate::types;
+using namespace helios::engine::runtime::world;
 
 export namespace helios::engine::runtime::gameloop {
     class GameLoop;
@@ -94,7 +95,7 @@ export namespace helios::engine::runtime::gameloop {
          *
          * @param gameWorld Reference to the game world.
          */
-        void init(helios::engine::runtime::world::GameWorld& gameWorld){
+        void init(GameWorld& gameWorld){
             for (auto& pass : passEntries_) {
                 // every pass contains systems that are updated here
                 pass->init(gameWorld);
@@ -112,6 +113,7 @@ export namespace helios::engine::runtime::gameloop {
          * Passes are conditionally executed based on their configured game state.
          * A pass is only updated if its `runsIn()` state matches the current game state.
          *
+         * @param gameWorld The game world where the update occurred.
          * @param updateContext The current update context.
          * @param gameState The current game state used to filter pass execution.
          *
@@ -119,13 +121,13 @@ export namespace helios::engine::runtime::gameloop {
          * @see Pass::addCommitPoint()
          * @see Pass::runsIn()
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext){
+        void update(GameWorld& gameWorld, UpdateContext& updateContext){
 
             for (auto& pass : passEntries_) {
 
                 if (pass->shouldRun(updateContext)) {
                     pass->update(updateContext);
-                    notifyPassCommitListeners(pass->commitPoint(), updateContext);
+                    notifyPassCommitListeners(pass->commitPoint(), gameWorld, updateContext);
                 }
 
             }
@@ -140,6 +142,7 @@ export namespace helios::engine::runtime::gameloop {
          * manager processing).
          *
          * @param commitPoint The CommitPoint flags from the completed pass.
+         * @param gameWorld The game world where the commit occured.
          * @param updateContext The current update context.
          *
          * @return Always returns true.
@@ -147,10 +150,10 @@ export namespace helios::engine::runtime::gameloop {
          * @see PassCommitListener::onPassCommit()
          * @see addPassCommitListener()
          */
-        bool notifyPassCommitListeners(CommitPoint commitPoint, helios::engine::runtime::world::UpdateContext& updateContext) {
+        bool notifyPassCommitListeners(CommitPoint commitPoint, GameWorld& gameWorld, UpdateContext& updateContext) {
 
-            for (const auto & passCommitListener : passCommitListeners_) {
-                passCommitListener->onPassCommit(commitPoint, updateContext);
+            for (const auto& passCommitListener : passCommitListeners_) {
+                passCommitListener->onPassCommit(commitPoint, gameWorld, updateContext);
             }
             return true;
         }

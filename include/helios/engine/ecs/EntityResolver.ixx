@@ -33,7 +33,7 @@ export namespace helios::engine::ecs {
         /**
          * @brief Non-owning pointer to the EntityManager used for validation.
          */
-        helios::engine::ecs::EntityManager* em;
+        helios::engine::ecs::EntityManager* const em;
 
         /**
          * @brief Resolves an EntityHandle to a GameObject.

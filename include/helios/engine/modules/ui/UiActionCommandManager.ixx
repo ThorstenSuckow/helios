@@ -11,21 +11,22 @@ module;
 
 export module helios.engine.modules.ui.UiActionCommandManager;
 
-import helios.engine.modules.ui.commands;
-import helios.engine.core.data;
+import helios.engine.modules.ui.widgets.commands;
+import helios.engine.modules.ui.widgets.types;
+import helios.engine.modules.ui.widgets.types.ActionId;
 
-import helios.engine.modules.ui.UiActionCommandHandler;
-import helios.engine.runtime.messaging.command.TypedCommandHandler;
-import helios.engine.runtime.messaging.command.CommandHandler;
 
 import helios.engine.ecs.GameObject;
 
-import helios.engine.runtime.world.Manager;
 import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.runtime.world.GameWorld;
 
+import helios.engine.common;
+
 using namespace helios::engine::runtime::messaging::command;
+using namespace helios::engine::modules::ui::widgets::types;
+using namespace helios::engine::modules::ui::widgets::commands;
 
 export namespace helios::engine::modules::ui {
 
@@ -36,23 +37,26 @@ export namespace helios::engine::modules::ui {
      * action callbacks based on ActionId. Supports policy registration for
      * handling different action types.
      *
-     * @see UiActionCommandHandler
      * @see UiActionCommand
+     * @see CommandHandlerRegistry
      */
-    class UiActionCommandManager : public helios::engine::runtime::world::Manager,
-                             public TypedCommandHandler<commands::UiActionCommand> {
+    class UiActionCommandManager {
 
         using ActionCallback = std::function<void(
-            helios::engine::runtime::world::UpdateContext& updateContext,
-            const helios::engine::modules::ui::commands::UiActionCommand& command)>;
+            helios::engine::runtime::world::UpdateContext& updateContext, const UiActionCommand& command)>;
 
-        std::vector<helios::engine::modules::ui::commands::UiActionCommand> commands_;
+        /**
+         * @brief Queue of pending UI action commands.
+         */
+        std::vector<UiActionCommand> commands_;
 
-        std::unordered_map<
-            helios::engine::core::data::ActionId, ActionCallback
-        > policies_;
+        /**
+         * @brief Map from ActionId to their handling callbacks.
+         */
+        std::unordered_map<ActionId, ActionCallback> policies_;
 
     public:
+        using EngineRoleTag = helios::engine::common::tags::ManagerRole;
 
         /**
          * @brief Constructs the manager with default capacity.
@@ -69,7 +73,7 @@ export namespace helios::engine::modules::ui {
          */
         void flush(
             helios::engine::runtime::world::UpdateContext& update_context
-        ) noexcept override {
+        ) noexcept {
 
             for (auto cmd : commands_) {
                 if (policies_.contains(cmd.actionId())) {
@@ -86,11 +90,10 @@ export namespace helios::engine::modules::ui {
          * @brief Submits a UI action command for processing.
          *
          * @param uiActionCommand The command to submit.
-         * @return True if the command was accepted.
+         *
+         * @return Always returns true.
          */
-        bool submit(
-            commands::UiActionCommand uiActionCommand
-        ) noexcept override {
+        bool submit(UiActionCommand uiActionCommand) noexcept {
 
             commands_.push_back(std::move(uiActionCommand));
 
@@ -102,10 +105,11 @@ export namespace helios::engine::modules::ui {
          *
          * @param actionId The action ID to register.
          * @param callback The callback to invoke when the action is triggered.
+         *
          * @return Reference to this manager for method chaining.
          */
         UiActionCommandManager& addPolicy(
-            const helios::engine::core::data::ActionId actionId,
+            const ActionId actionId,
             ActionCallback callback
         ) {
             assert(policies_.find(actionId) == policies_.end() && "Action already registered");
@@ -119,8 +123,8 @@ export namespace helios::engine::modules::ui {
          *
          * @param gameWorld The game world to register with.
          */
-        void init(helios::engine::runtime::world::GameWorld& gameWorld) override {
-            gameWorld.registerCommandHandler<TypedCommandHandler<commands::UiActionCommand>>(*this);
+        void init(helios::engine::runtime::world::GameWorld& gameWorld) {
+            gameWorld.registerCommandHandler<UiActionCommand>(*this);
         }
 
     };

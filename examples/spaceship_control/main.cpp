@@ -65,7 +65,7 @@ int main() {
     auto win = dynamic_cast<GLFWWindow*>(app->current());
     auto mainViewport = std::make_shared<Viewport>(
         0.0f, 0.0f, 1.0f, 1.0f,
-        helios::engine::core::data::ViewportId{"mainViewport"});
+        helios::engine::common::types::ViewportId{"mainViewport"});
 
     mainViewport->setClearFlags(std::to_underlying(ClearFlags::Color))
                   .setClearColor(vec4f(0.051f, 0.051f, 0.153f, 1.0f));
@@ -125,7 +125,7 @@ int main() {
     // ========================================
     auto frustumCullingStrategy = std::make_unique<CullNoneStrategy>();
     auto scene = std::make_unique<helios::scene::Scene>(
-        std::move(frustumCullingStrategy), helios::engine::core::data::SceneId{"mainScene"});
+        std::move(frustumCullingStrategy), helios::engine::modules::scene::types::SceneId{"mainScene"});
     sceneToViewportMap.add(scene.get(), mainViewport.get());
 
     auto mainViewportCam = std::make_unique<helios::scene::Camera>();
@@ -255,7 +255,7 @@ int main() {
     // ========================================
     using namespace helios::engine::mechanics::gamestate::types;
     using namespace helios::engine::mechanics::match::types;
-    using namespace helios::engine::core::data;
+    using namespace helios::engine::common::types;
 
     auto stateToViewportMap = helios::engine::state::StateToIdMapPair<
         GameState, MatchState, ViewportId

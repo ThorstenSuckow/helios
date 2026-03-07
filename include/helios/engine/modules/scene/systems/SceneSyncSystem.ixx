@@ -15,13 +15,15 @@ import helios.scene.Scene;
 import helios.engine.modules.scene.types.SceneToViewportMap;
 
 import helios.engine.runtime.world.GameWorld;
-import helios.engine.ecs.System;
+
 import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.mechanics.lifecycle.components.Active;
 
 import helios.engine.modules.scene.components.SceneNodeComponent;
 import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
+
+import helios.engine.common.tags.SystemRole;
 
 export namespace helios::engine::modules::scene::systems {
 
@@ -42,14 +44,16 @@ export namespace helios::engine::modules::scene::systems {
      * @see SceneNodeComponent
      * @see SceneToViewportMap
      */
-    class SceneSyncSystem : public helios::engine::ecs::System {
+    class SceneSyncSystem {
+
+    public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
 
         /**
          * @brief Reference to the scene-to-viewport mapping for scene iteration.
          */
         helios::engine::modules::scene::types::SceneToViewportMap& sceneToViewportMap_;
-
-    public:
 
         /**
          * @brief Constructs the system with the scene-to-viewport map.
@@ -69,9 +73,9 @@ export namespace helios::engine::modules::scene::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
-            for (auto [entity, tc, nc, active] : gameWorld_->view<
+            for (auto [entity, tc, nc, active] : updateContext.view<
                 helios::engine::modules::spatial::transform::components::ComposeTransformComponent,
                 helios::engine::modules::scene::components::SceneNodeComponent,
                 helios::engine::mechanics::lifecycle::components::Active
@@ -97,7 +101,7 @@ export namespace helios::engine::modules::scene::systems {
             }
 
             // Second pass: read back world transforms from SceneNode to ComposeTransformComponent
-            for (auto [entity, tc, nc, active] : gameWorld_->view<
+            for (auto [entity, tc, nc, active] : updateContext.view<
                helios::engine::modules::spatial::transform::components::ComposeTransformComponent,
                helios::engine::modules::scene::components::SceneNodeComponent,
                helios::engine::mechanics::lifecycle::components::Active

@@ -22,7 +22,6 @@ import helios.engine.ecs;
 import helios.engine.runtime.world.GameWorld;
 
 import helios.math;
-import helios.engine.core.data;
 
 import helios.util.Colors;
 

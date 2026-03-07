@@ -6,34 +6,59 @@ Commands for spawn and despawn operations.
 
 This module contains command classes that represent spawn and despawn operations. These commands are emitted by systems and submitted directly to the SpawnCommandHandler during the command flush phase.
 
-## Key Classes
-
-| Command | Purpose |
-|---------|---------|
-| `SpawnCommand` | Requests spawning of GameObjects from a pool with spawn context |
-| `DespawnCommand` | Requests despawning and pool return of a GameObject |
-| `ScheduledSpawnPlanCommand` | Executes a scheduled spawn plan from the SpawnScheduler |
+The system is built around **compile-time type safety**: command types are declared as template parameters, eliminating virtual dispatch overhead for queue access and enabling the compiler to verify command routing at build time.
 
 ## Architecture
 
-Commands follow the visitor pattern with dispatchers. Commands are submitted directly to the SpawnCommandHandler (typically SpawnManager):
+```
+┌──────────────────────────────────────────────────────────────────────┐
+│                     COMMAND PIPELINE                                 │
+├──────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│  SYSTEMS (producers)                                                 │
+│                                                                      │
+│  - SpawnSystem                                                       │
+│  - DespawnSystem                                                     │
+│                                                                      │
+├──────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│  COMMAND BUFFER (queue)                                             │
+│                                                                      │
+│  - CommandBuffer                                                     │
+│  - TypedCommandBuffer<...Cmds>                                      │
+│                                                                      │
+├──────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│  DISPATCHER (consumer)                                              │
+│                                                                      │
+│  - Dispatcher                                                        │
+│                                                                      │
+├──────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│  HANDLER (execution)                                                │
+│                                                                      │
+│  - CommandHandlerRegistry                                            │
+│  - EngineCommandBuffer                                               │
+│                                                                      │
+└──────────────────────────────────────────────────────────────────────┘
+```
 
-```
-┌─────────────────┐     ┌───────────────┐     ┌────────────────────┐
-│ SpawnSystem     │────>│ CommandBuffer │────>│ Dispatcher         │
-│                 │     │               │     │                    │
-│ - SpawnCommand  │     │ flush()       │     │ dispatchTyped()    │
-│ - DespawnCommand│     │               │     │                    │
-└─────────────────┘     └───────────────┘     └─────────┬──────────┘
-                                                        │
-                                                        ▼
-                                              ┌────────────────────┐
-                                              │ SpawnCommandHandler│
-                                              │ (SpawnManager)     │
-                                              │                    │
-                                              │ submit(Command)    │
-                                              └────────────────────┘
-```
+## Key Classes
+
+| Class | Purpose |
+|-------|---------|
+| `CommandBuffer` | Abstract base for command buffers |
+| `TypedCommandBuffer<...Cmds>` | Compile-time typed buffer with per-type queues |
+| `CommandHandlerRegistry` | Registry storing typed submit functions |
+| `EngineCommandBuffer` | Concrete facade pre-configured with all engine command types |
+
+## Flush Routing
+
+During `TypedCommandBuffer::flush()`, each command type is processed in template parameter order:
+
+1. **Handler route:** If a handler for `Cmd` is registered in the `CommandHandlerRegistry`, all queued commands are submitted to the handler via the stored function pointer.
+2. **Direct execution:** Otherwise, if the command satisfies `ExecutableCommand`, it executes itself
+3. **Assertion:** If neither applies, an assertion fires (misconfiguration)
 
 ## Usage
 
@@ -56,6 +81,5 @@ commandBuffer.add<ScheduledSpawnPlanCommand>(std::move(scheduledPlan));
 <summary>Doxygen</summary><p>
 @namespace helios::engine::runtime::spawn::commands
 @brief Commands for spawn and despawn operations.
-@details This namespace contains command classes for deferred spawn and despawn operations. Commands are submitted directly to SpawnCommandHandler during the command buffer flush phase via dispatchers.
+@details This namespace contains command classes for deferred spawn and despawn operations.
 </p></details>
-

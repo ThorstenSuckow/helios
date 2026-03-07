@@ -461,12 +461,12 @@ int main() {
     // 7. Manager Registration
     // ========================================
 
-    auto& poolManager      = gameWorld.registerManager<GameObjectPoolManager>();
-    auto& scorePoolManager = gameWorld.registerManager<ScorePoolManager>();
-    auto& timerManager = gameWorld.registerManager<TimerManager>();
-    auto& spawnManager     = gameWorld.registerManager<SpawnManager>();
+    auto& poolManager            = gameWorld.registerManager<GameObjectPoolManager>();
+    auto& scorePoolManager       = gameWorld.registerManager<ScorePoolManager>();
+    auto& timerManager           = gameWorld.registerManager<TimerManager>();
+    auto& spawnManager           = gameWorld.registerManager<SpawnManager>();
     auto& uiActionCommandManager = gameWorld.registerManager<UiActionCommandManager>();
-    auto& healthManager = gameWorld.registerManager<HealthManager>();
+    auto& healthManager          = gameWorld.registerManager<HealthManager>();
 
     auto& gameStateManager = gameWorld.manager<GameStateManager>();
     auto& matchStateManager = gameWorld.manager<MatchStateManager>();

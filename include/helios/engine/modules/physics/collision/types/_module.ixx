@@ -8,3 +8,4 @@ export import helios.engine.modules.physics.collision.types.CollisionBehavior;
 export import helios.engine.modules.physics.collision.types.CollisionResponse;
 export import helios.engine.modules.physics.collision.types.HitPolicy;
 export import helios.engine.modules.physics.collision.types.CollisionContext;
+export import helios.engine.modules.physics.collision.types.CollisionLayer;

@@ -21,7 +21,7 @@ auto scoreContext = types::ScoreValueContext{
     .value = 100.0
 };
 
-updateContext.commandBuffer().add<UpdateScoreCommand>(std::move(scoreValueContext));
+updateContext.queueCommand<UpdateScoreCommand>(std::move(scoreValueContext));
 ```
 
 ---

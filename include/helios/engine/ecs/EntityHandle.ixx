@@ -9,8 +9,8 @@ module;
 
 export module helios.engine.ecs.EntityHandle;
 
-import helios.engine.core.data;
-
+import helios.engine.ecs.types;
+import helios.engine.common.types.VersionId;
 
 
 export namespace helios::engine::ecs {
@@ -29,14 +29,14 @@ export namespace helios::engine::ecs {
         /**
          * @brief The unique identifier for the entity within the pool.
          */
-        helios::engine::core::data::EntityId entityId;
+        helios::engine::ecs::types::EntityId entityId;
 
         /**
          * @brief The version number for stale handle detection.
          *
          * Incremented when an entity is removed from the pool.
          */
-        helios::engine::core::data::VersionId versionId;
+        helios::engine::common::types::VersionId versionId;
 
         /**
          * @brief Compares two handles for equality.

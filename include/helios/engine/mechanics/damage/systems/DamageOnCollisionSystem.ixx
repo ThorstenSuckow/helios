@@ -10,7 +10,7 @@ module;
 
 export module helios.engine.mechanics.damage.systems.DamageOnCollisionSystem;
 
-import helios.engine.ecs.System;
+
 import helios.engine.ecs.GameObject;
 
 import helios.engine.runtime.world.UpdateContext;
@@ -36,6 +36,8 @@ import helios.engine.mechanics.health.events;
 import helios.math;
 import helios.util;
 
+import helios.engine.common.tags.SystemRole;
+
 using namespace helios::engine::mechanics::health::types;
 using namespace helios::engine::mechanics::health::events;
 using namespace helios::engine::mechanics::health::components;
@@ -57,7 +59,7 @@ export namespace helios::engine::mechanics::damage::systems {
      * ApplyDamageCommand. Resolves the true attacker (instigator) via
      * EmittedByComponent when applicable (e.g. projectiles).
      */
-    class DamageOnCollisionSystem : public helios::engine::ecs::System {
+    class DamageOnCollisionSystem {
 
 
         inline static const helios::util::log::Logger& logger_ = helios::util::log::LogManager::loggerForScope(
@@ -65,13 +67,15 @@ export namespace helios::engine::mechanics::damage::systems {
 
     public:
 
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+
 
         /**
          * @brief Processes collision events and applies damage to targets.
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             auto eventPass = updateContext.readPass<
                 helios::engine::modules::physics::collision::events::SolidCollisionEvent>();
@@ -133,7 +137,7 @@ export namespace helios::engine::mechanics::damage::systems {
                     .damage = damageApplied
                 };
 
-                updateContext.commandBuffer().add<ApplyDamageCommand>(dc);
+                updateContext.queueCommand<ApplyDamageCommand>(dc);
 
             }
 

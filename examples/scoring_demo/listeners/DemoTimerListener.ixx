@@ -36,10 +36,10 @@ export namespace helios::examples::scoring {
 
                     if (unpause) {
                         auto context = TimerControlContext{TimerState::Started, IdConfig::DemoTimerId};
-                        updateContext.commandBuffer().add<TimerControlCommand>(context);
+                        updateContext.queueCommand<TimerControlCommand>(context);
                     } else if (pause) {
                         auto context = TimerControlContext{TimerState::Paused, IdConfig::DemoTimerId};
-                        updateContext.commandBuffer().add<TimerControlCommand>(context);
+                        updateContext.queueCommand<TimerControlCommand>(context);
                     }
 
             })
@@ -63,10 +63,10 @@ export namespace helios::examples::scoring {
 
                     if (start) {
                         auto context = TimerControlContext{TimerState::Started, IdConfig::DemoTimerId};
-                        updateContext.commandBuffer().add<TimerControlCommand>(context);
+                        updateContext.queueCommand<TimerControlCommand>(context);
                     } else if (stop) {
                         auto context = TimerControlContext{TimerState::Stopped, IdConfig::DemoTimerId};
-                        updateContext.commandBuffer().add<TimerControlCommand>(context);
+                        updateContext.queueCommand<TimerControlCommand>(context);
                     }
 
             })

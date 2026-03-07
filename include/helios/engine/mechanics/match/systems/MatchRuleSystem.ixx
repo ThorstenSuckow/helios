@@ -17,6 +17,8 @@ import helios.engine.runtime;
 
 using namespace helios::input::types;
 
+import helios.engine.common.tags.SystemRole;
+
 export namespace helios::engine::mechanics::match::systems {
 
     /**
@@ -25,18 +27,20 @@ export namespace helios::engine::mechanics::match::systems {
      * Placeholder system for match rule logic (e.g., win/lose conditions,
      * time limits, score thresholds).
      */
-    class MatchRuleSystem : public helios::engine::ecs::System {
+    class MatchRuleSystem {
 
 
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
 
         /**
          * @brief Evaluates match rules.
          *
          * @param updateContext The current update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
         }
 

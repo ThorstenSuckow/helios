@@ -15,7 +15,7 @@ using namespace helios::engine::state::commands;
 using namespace helios::engine::state::types;
 
 // Request a state transition
-updateContext.commandBuffer().add<StateCommand<GameState>>(
+updateContext.queueCommand<StateCommand<GameState>>(
     StateTransitionRequest<GameState>{
         GameState::Running,
         GameStateTransitionId::Pause

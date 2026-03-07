@@ -16,7 +16,7 @@ import helios.engine.mechanics.match.types;
 
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
-import helios.engine.ecs.System;
+
 
 import helios.engine.modules.ui.widgets;
 import helios.engine.modules.ui.layout;
@@ -25,6 +25,8 @@ import helios.engine.mechanics.lifecycle.components.Active;
 
 using namespace helios::engine::mechanics::match::components;
 using namespace helios::engine::mechanics::match::types;
+
+import helios.engine.common.tags.SystemRole;
 
 export namespace helios::engine::modules::ui::binding::systems {
 
@@ -35,19 +37,20 @@ export namespace helios::engine::modules::ui::binding::systems {
      * binding against the target's current revision. On mismatch the
      * formatted lives value is written into the UiTextComponent.
      */
-    class Lives2UiTextUpdateSystem : public helios::engine::ecs::System {
-
+    class Lives2UiTextUpdateSystem {
 
     public:
 
+
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
         /**
          * @brief Synchronises bound text elements with their target lives values.
          *
          * @param updateContext Current frame context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
-            for (auto [entity, lbc, dfc, txt, active] : gameWorld_->view<
+            for (auto [entity, lbc, dfc, txt, active] : updateContext.view<
                 helios::engine::mechanics::match::components::LivesBindingComponent,
                 helios::engine::modules::ui::layout::components::NumberFormatterComponent,
                 helios::engine::modules::ui::widgets::components::UiTextComponent,

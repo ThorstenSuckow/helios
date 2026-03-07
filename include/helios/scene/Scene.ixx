@@ -26,7 +26,7 @@ import helios.scene.SnapshotItem;
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
 
-import helios.engine.core.data.SceneId;
+import helios.engine.modules.scene.types.SceneId;
 import helios.core.types;
 
 #define HELIOS_LOG_SCOPE "helios::scene::Scene"
@@ -78,7 +78,7 @@ export namespace helios::scene {
         /**
          * @brief Unique identifier for this scene.
          */
-        helios::engine::core::data::SceneId sceneId_{helios::core::types::no_init};
+        helios::engine::modules::scene::types::SceneId sceneId_{helios::core::types::no_init};
 
         /**
          * @brief Internal helper function to force-propagate the worldTransformation of SceneNodes to their child nodes.
@@ -199,7 +199,7 @@ export namespace helios::scene {
          */
         explicit Scene(
             std::unique_ptr<helios::scene::FrustumCullingStrategy> frustumCullingStrategy,
-                       const helios::engine::core::data::SceneId sceneId) :
+                       const helios::engine::modules::scene::types::SceneId sceneId) :
             Scene(std::move(frustumCullingStrategy))
              {
                  sceneId_ = sceneId;
@@ -237,7 +237,7 @@ export namespace helios::scene {
          *
          * @return The SceneId for this scene.
          */
-        [[nodiscard]] helios::engine::core::data::SceneId sceneId() const noexcept {
+        [[nodiscard]] helios::engine::modules::scene::types::SceneId sceneId() const noexcept {
             return sceneId_;
         }
 

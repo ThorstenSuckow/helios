@@ -18,12 +18,12 @@ import helios.engine.state.types;
 import helios.engine.state.components;
 import helios.engine.state.types.StateTransitionId;
 
-import helios.engine.core.data;
+import helios.engine.common.types.ViewportId;
 
 import helios.engine.ecs.GameObject;
 import helios.engine.ecs.EntityHandle;
 
-import helios.engine.core.data.ViewportId;
+import helios.engine.common.types.ViewportId;
 
 import helios.engine.modules.rendering.viewport.components.ActiveViewportIdsStateComponent;
 
@@ -170,7 +170,7 @@ export namespace helios::engine::runtime::world {
          *
          * @param viewportIds The new list of active viewport IDs.
          */
-        void setViewportIds(std::span<const helios::engine::core::data::ViewportId>& viewportIds) noexcept {
+        void setViewportIds(std::span<const helios::engine::common::types::ViewportId>& viewportIds) noexcept {
             gameObject_.get<ActiveViewportIdsStateComponent>()->setViewportIds(viewportIds);
         }
 
@@ -179,7 +179,7 @@ export namespace helios::engine::runtime::world {
          *
          * @return Read-only span of viewport identifiers.
          */
-        [[nodiscard]] std::span<const helios::engine::core::data::ViewportId> viewportIds() const noexcept {
+        [[nodiscard]] std::span<const helios::engine::common::types::ViewportId> viewportIds() const noexcept {
             return gameObject_.get<ActiveViewportIdsStateComponent>()->viewportIds();
         }
 

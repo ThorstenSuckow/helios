@@ -85,7 +85,7 @@ gameLoop.addManager(std::move(gameStateManager));
 ### Requesting Transitions
 
 ```cpp
-updateContext.commandBuffer().add<StateCommand<GameState>>(
+updateContext.queueCommand<StateCommand<GameState>>(
     StateTransitionRequest<GameState>{
         GameState::Running,
         GameStateTransitionId::Pause
@@ -96,7 +96,7 @@ updateContext.commandBuffer().add<StateCommand<GameState>>(
 ## Transition Flow
 
 1. `StateCommand` is submitted to the EngineCommandBuffer
-2. `TypedCommandHandler<StateCommand<T>>` routes it to `StateManager`
+2. The command is routed to `StateManager` via the registered handler in `CommandHandlerRegistry`.
 3. `StateManager::flush()` processes pending commands
 4. Matching rule is found and guard is evaluated
 5. Listeners are notified: `onStateExit` → `onStateTransition` → `onStateEnter`
@@ -122,4 +122,3 @@ viewportPolicy.freeze();
 @brief Generic, template-based state management system.
 @details Provides a complete framework for managing application state with rule-based transitions, guards, listeners, and ID mapping utilities. All components are parameterized by state type for maximum reuse.
 </p></details>
-

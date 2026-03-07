@@ -14,15 +14,18 @@ import helios.engine.runtime.spawn.scheduling.RuleProcessor;
 
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.runtime.spawn.SpawnManager;
-import helios.engine.runtime.spawn.SpawnContext;
+import helios.engine.runtime.spawn.types.SpawnContext;
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.spawn.scheduling.SpawnPlan;
 import helios.engine.runtime.spawn.scheduling.ScheduledSpawnPlan;
-import helios.engine.core.data.SpawnProfileId;
-import helios.engine.core.data.SpawnRuleId;
+import helios.engine.runtime.spawn.types;
 import helios.engine.runtime.spawn.policy.SpawnRule;
 import helios.engine.runtime.spawn.policy.SpawnRuleState;
 import helios.engine.runtime.pooling.GameObjectPoolManager;
+
+using namespace helios::engine::runtime::spawn::policy;
+using namespace helios::engine::runtime::spawn::types;
+using namespace helios::engine::runtime::world;
 
 export namespace helios::engine::runtime::spawn::scheduling {
 
@@ -52,6 +55,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
          * @details Retrieves pool state, updates the rule's timer/state,
          * and evaluates the rule to produce a spawn plan.
          *
+         * @param gameWorld The game world where the rule is processed.
          * @param updateContext Current frame context.
          * @param spawnContext Context for the spawn operation.
          * @param spawnProfileId Profile ID to look up spawn configuration.
@@ -61,22 +65,22 @@ export namespace helios::engine::runtime::spawn::scheduling {
          * @return SpawnPlan indicating how many entities to spawn.
          */
         SpawnPlan processRule(
-            const helios::engine::runtime::world::UpdateContext& updateContext,
-            const helios::engine::runtime::spawn::SpawnContext& spawnContext,
-            const helios::engine::core::data::SpawnProfileId spawnProfileId,
-            helios::engine::runtime::spawn::policy::SpawnRule& spawnRule,
-            helios::engine::runtime::spawn::policy::SpawnRuleState& spawnRuleState
+            const world::GameWorld& gameWorld,
+            const UpdateContext& updateContext,
+            const SpawnContext& spawnContext,
+            const SpawnProfileId spawnProfileId,
+            SpawnRule& spawnRule,
+            SpawnRuleState& spawnRuleState
         ) noexcept override {
-            const auto& poolManager  = updateContext.resourceRegistry().resource<helios::engine::runtime::pooling::GameObjectPoolManager>();
-            const auto& spawnManager = updateContext.resourceRegistry().resource<helios::engine::runtime::spawn::SpawnManager>();
+            const auto* poolManager  = gameWorld.tryManager<helios::engine::runtime::pooling::GameObjectPoolManager>();
+            const auto* spawnManager = gameWorld.tryManager<helios::engine::runtime::spawn::SpawnManager>();
 
-
-            const auto* spawnProfile = spawnManager.spawnProfile(spawnProfileId);
+            const auto* spawnProfile = spawnManager->spawnProfile(spawnProfileId);
             assert(spawnProfile != nullptr);
 
             const auto& [gameObjectPoolId, _, __] = *spawnProfile;
 
-            const auto poolSnapshot = poolManager.poolSnapshot(gameObjectPoolId);
+            const auto poolSnapshot = poolManager->poolSnapshot(gameObjectPoolId);
 
             // tick the rule state
             spawnRuleState.update(updateContext.deltaTime());
@@ -84,6 +88,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
             return spawnRule.evaluate(
                 gameObjectPoolId, poolSnapshot,
                 spawnRuleState,
+                gameWorld,
                 updateContext
             );
         }

@@ -10,3 +10,4 @@ export import helios.engine.state.types.StateTransitionRule;
 export import helios.engine.state.types.StateTransitionType;
 export import helios.engine.state.types.StateTransitionId;
 export import helios.engine.state.types.StateTransitionRequest;
+export import helios.engine.state.types.StateTypeId;

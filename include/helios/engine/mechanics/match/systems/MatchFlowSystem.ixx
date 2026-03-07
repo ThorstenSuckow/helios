@@ -28,6 +28,8 @@ using namespace helios::engine::state::types;
 using namespace helios::engine::mechanics::gamestate;
 using namespace helios::engine::mechanics::match::types;
 
+import helios.engine.common.tags.SystemRole;
+
 export namespace helios::engine::mechanics::match::systems {
 
     /**
@@ -37,7 +39,7 @@ export namespace helios::engine::mechanics::match::systems {
      * transition commands to progress through: Undefined -> Warmup ->
      * PlayerSpawn -> Playing.
      */
-    class MatchFlowSystem : public helios::engine::ecs::System {
+    class MatchFlowSystem {
 
         MatchState prevMatchState_ = MatchState::Undefined;
         StateTransitionIdType<MatchState> prevMatchStateTransitionId_ = StateTransitionIdType<MatchState>::Undefined;
@@ -45,17 +47,17 @@ export namespace helios::engine::mechanics::match::systems {
 
     public:
 
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+
         /**
          * @brief Processes match state and issues transition commands.
          *
          * @param updateContext The current update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             auto& session = updateContext.session();
 
-
-            auto& commandBuffer = updateContext.commandBuffer();
             const auto matchState = session.state<MatchState>();
             auto matchStateTransitionId = session.stateTransitionId<MatchState>();
 
@@ -69,28 +71,28 @@ export namespace helios::engine::mechanics::match::systems {
             switch (matchState) {
 
                 case MatchState::Finished: {
-                    commandBuffer.add<StateCommand<MatchState>>(
+                    updateContext.queueCommand<StateCommand<MatchState>>(
                         StateTransitionRequest<MatchState>(matchState, MatchStateTransitionId::WarmupRequested)
                     );
                     break;
                 }
 
                 case MatchState::Undefined: {
-                    commandBuffer.add<StateCommand<MatchState>>(
+                    updateContext.queueCommand<StateCommand<MatchState>>(
                         StateTransitionRequest<MatchState>(matchState, MatchStateTransitionId::WarmupRequested)
                     );
                     break;
                 }
 
                 case MatchState::Warmup: {
-                    commandBuffer.add<StateCommand<MatchState>>(
+                    updateContext.queueCommand<StateCommand<MatchState>>(
                         StateTransitionRequest<MatchState>(matchState, MatchStateTransitionId::PlayerSpawnRequested)
                     );
                     break;
                 }
 
                 case MatchState::PlayerSpawn: {
-                    commandBuffer.add<StateCommand<MatchState>>(
+                    updateContext.queueCommand<StateCommand<MatchState>>(
                         StateTransitionRequest<MatchState>(matchState, MatchStateTransitionId::StartRequested)
                     );
                     break;
@@ -98,7 +100,7 @@ export namespace helios::engine::mechanics::match::systems {
 
                 case MatchState::PlayerDeath: {
                     if (matchStateTransitionId == MatchStateTransitionId::QuitRequested) {
-                        commandBuffer.add<StateCommand<MatchState>>(
+                        updateContext.queueCommand<StateCommand<MatchState>>(
                             StateTransitionRequest<MatchState>(MatchState::PlayerDeath, MatchStateTransitionId::QuitRequested)
                         );
                     }

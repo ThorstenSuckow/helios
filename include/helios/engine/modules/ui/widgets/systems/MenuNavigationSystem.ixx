@@ -15,14 +15,14 @@ import helios.engine.modules.ui.widgets.components.MenuComponent;
 
 import helios.engine.mechanics.lifecycle.components.Active;
 
+import helios.engine.modules.ui.widgets.types;
 import helios.engine.modules.ui.widgets.components.UiFocusComponent;
 import helios.engine.modules.ui.widgets.components.UiStateComponent;
 import helios.engine.modules.ui.widgets.components.UiActionComponent;
 
-import helios.engine.modules.ui.commands.UiActionCommand;
+import helios.engine.modules.ui.widgets.commands.UiActionCommand;
 
-import helios.engine.runtime.world.GameWorld;
-import helios.engine.runtime.world.UpdateContext;
+import helios.engine.runtime.world;
 
 import helios.engine.mechanics.lifecycle.components.Active;
 
@@ -38,12 +38,14 @@ import helios.engine.modules.rendering.model.components.ModelAabbComponent;
 
 using namespace helios::input::types;
 using namespace helios::engine::ecs::components;
-using namespace helios::engine::core::data;
+using namespace helios::engine::modules::ui::widgets::types;
 using namespace helios::engine::ecs;
 using namespace helios::engine::runtime::world;
 using namespace helios::engine::modules::ui::widgets::components;
 using namespace helios::engine::mechanics::lifecycle::components;
 using namespace helios::input::gamepad;
+
+import helios.engine.common.tags.SystemRole;
 
 export namespace helios::engine::modules::ui::widgets::systems {
 
@@ -63,7 +65,8 @@ export namespace helios::engine::modules::ui::widgets::systems {
      * @see MenuDisplaySystem
      * @see UiActionCommand
      */
-    class MenuNavigationSystem : public helios::engine::ecs::System {
+    class MenuNavigationSystem {
+
 
         /**
          * @brief Updates menu selection state.
@@ -89,7 +92,7 @@ export namespace helios::engine::modules::ui::widgets::systems {
             UiStateComponent* usc = nullptr;
 
             if (index != prevIndex) {
-                usc = gameWorld_->find(menuItems[prevIndex])->get<UiStateComponent>();
+                usc = updateContext.find(menuItems[prevIndex])->get<UiStateComponent>();
                 if (usc) {
                     usc->setSelected(false);
                 }
@@ -97,7 +100,7 @@ export namespace helios::engine::modules::ui::widgets::systems {
             mc->setSelectedIndex(index);
 
             // update ui state
-            usc = gameWorld_->find(menuItems[index])->get<UiStateComponent>();
+            usc = updateContext.find(menuItems[index])->get<UiStateComponent>();
             if (usc) {
                 usc->setSelected(true);
             }
@@ -108,6 +111,9 @@ export namespace helios::engine::modules::ui::widgets::systems {
 
     public:
 
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+
+
         /**
          * @brief Processes menu navigation input.
          *
@@ -117,15 +123,15 @@ export namespace helios::engine::modules::ui::widgets::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             MenuComponent* focusedMenu = nullptr;
 
-            for (auto [entity, fc, hc, active] :  gameWorld_->view<
+            for (auto [entity, fc, hc, active] :  updateContext.view<
                 UiFocusComponent, HierarchyComponent, Active
             >().whereEnabled()) {
-                assert(hc->parent() && gameWorld_->find(*hc->parent()) && gameWorld_->find(*hc->parent())->get<MenuComponent>() && "Item expected to have parent menu component.");
-                focusedMenu = gameWorld_->find(*hc->parent())->get<MenuComponent>();
+                assert(hc->parent() && updateContext.find(*hc->parent()) && updateContext.find(*hc->parent())->get<MenuComponent>() && "Item expected to have parent menu component.");
+                focusedMenu = updateContext.find(*hc->parent())->get<MenuComponent>();
                 break;
             }
 
@@ -158,12 +164,12 @@ export namespace helios::engine::modules::ui::widgets::systems {
             }
 
             if (gamepadState.isButtonPressed(GamepadInput::A)) {
-                auto* uac = gameWorld_->find(focusedMenu->menuItems()[focusedMenu->selectedIndex()])->get<
+                auto* uac = updateContext.find(focusedMenu->menuItems()[focusedMenu->selectedIndex()])->get<
                     helios::engine::modules::ui::widgets::components::UiActionComponent
                 >();
 
                 if (uac) {
-                    updateContext.commandBuffer().add<helios::engine::modules::ui::commands::UiActionCommand>(
+                    updateContext.queueCommand<helios::engine::modules::ui::widgets::commands::UiActionCommand>(
                         focusedMenu->menuItems()[focusedMenu->selectedIndex()], uac->actionId()
                     );
                 }

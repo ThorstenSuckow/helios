@@ -8,8 +8,8 @@ module;
 
 export module helios.engine.builder.spawnSystem.builders.configs.SchedulerConfig;
 
-import helios.engine.core.data.SpawnProfileId;
-import helios.engine.core.data.SpawnRuleId;
+import helios.engine.runtime.spawn.types.SpawnProfileId;
+import helios.engine.runtime.spawn.types.SpawnRuleId;
 
 import helios.engine.runtime.spawn.policy.SpawnRule;
 import helios.engine.runtime.spawn.policy.SpawnCondition;
@@ -30,12 +30,12 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
         /**
          * @brief Profile this rule is bound to.
          */
-        helios::engine::core::data::SpawnProfileId profileId_;
+        helios::engine::runtime::spawn::types::SpawnProfileId profileId_;
 
         /**
          * @brief Unique identifier for the rule.
          */
-        helios::engine::core::data::SpawnRuleId ruleId_;
+        helios::engine::runtime::spawn::types::SpawnRuleId ruleId_;
 
         /**
          * @brief Condition determining when to spawn.
@@ -56,8 +56,8 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          * @param ruleId Unique identifier for this rule.
          */
         SchedulerConfig(
-            helios::engine::core::data::SpawnProfileId profileId,
-            helios::engine::core::data::SpawnRuleId ruleId
+            helios::engine::runtime::spawn::types::SpawnProfileId profileId,
+            helios::engine::runtime::spawn::types::SpawnRuleId ruleId
         ) : profileId_(profileId), ruleId_(ruleId), condition_(nullptr), amountProvider_(nullptr) {}
 
         /**
@@ -137,7 +137,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          *
          * @return The spawn profile ID.
          */
-        [[nodiscard]] helios::engine::core::data::SpawnProfileId profileId() const noexcept {
+        [[nodiscard]] helios::engine::runtime::spawn::types::SpawnProfileId profileId() const noexcept {
             return profileId_;
         }
 

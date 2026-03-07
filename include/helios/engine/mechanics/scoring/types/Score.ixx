@@ -7,7 +7,7 @@ module;
 
 export module helios.engine.mechanics.scoring.types.Score;
 
-import helios.engine.core.data;
+import helios.engine.mechanics.scoring.types.ScoreTypeId;
 
 export namespace helios::engine::mechanics::scoring::types {
 
@@ -52,7 +52,7 @@ export namespace helios::engine::mechanics::scoring::types {
          *
          * @return The ScoreTypeId for this concrete score type.
          */
-        [[nodiscard]] virtual helios::engine::core::data::ScoreTypeId typeId() const noexcept = 0;
+        [[nodiscard]] virtual helios::engine::mechanics::scoring::types::ScoreTypeId typeId() const noexcept = 0;
 
     };
 

@@ -124,14 +124,14 @@ gameLoop.phase(PhaseType::Post)
     .addSystem<TransformClearSystem>();
 ```
 
-## Command Dispatchers
+## Command Routing
 
-The spawn system uses commands for deferred entity creation:
+The spawn system uses command handlers registered by Managers during `init()`. Commands submitted via `ctx.queueCommand<T>()` are routed automatically during the commit phase:
 
 ```cpp
-gameLoop.commandBuffer()
-    .addDispatcher<SpawnCommand>(std::make_unique<SpawnCommandDispatcher>())
-    .addDispatcher<DespawnCommand>(std::make_unique<DespawnCommandDispatcher>());
+// SpawnManager registers itself as handler during init():
+gameWorld.registerCommandHandler<SpawnCommand>(*this);
+gameWorld.registerCommandHandler<DespawnCommand>(*this);
 ```
 
 ## See Also

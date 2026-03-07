@@ -25,8 +25,8 @@ import helios.engine.runtime.world.UpdateContext;
 import helios.engine.state.Bindings;
 import helios.engine.runtime.messaging.command.EngineCommandBuffer;
 
-import helios.engine.ecs.System;
-import helios.engine.core.data;
+
+import helios.engine.ecs.types.EntityId;
 
 import helios.engine.mechanics.health.events.HealthDepletedEvent;
 
@@ -41,9 +41,11 @@ using namespace helios::engine::mechanics::scoring::components;
 using namespace helios::engine::mechanics::scoring::types;
 using namespace helios::engine::mechanics::scoring::commands;
 using namespace helios::engine::mechanics::health::events;
-using namespace helios::engine::core::data;
+using namespace helios::engine::ecs::types;
 
 #define HELIOS_LOG_SCOPE "helios::engine::mechanics::scoring::systems::CombatScoringSystem"
+import helios.engine.common.tags.SystemRole;
+
 export namespace helios::engine::mechanics::scoring::systems {
 
     /**
@@ -53,12 +55,14 @@ export namespace helios::engine::mechanics::scoring::systems {
      * ScoreValueComponent. If so, issues an UpdateScoreCommand to
      * credit the attacker's score pool.
      */
-    class CombatScoringSystem : public helios::engine::ecs::System {
+    class CombatScoringSystem {
 
         inline static const helios::util::log::Logger& logger_ = helios::util::log::LogManager::loggerForScope(
             HELIOS_LOG_SCOPE);
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
 
 
         /**
@@ -66,7 +70,7 @@ export namespace helios::engine::mechanics::scoring::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto& event : updateContext.readPass<HealthDepletedEvent>()) {
 
@@ -107,7 +111,7 @@ export namespace helios::engine::mechanics::scoring::systems {
                     svc->score().value())
                 );
 
-                updateContext.commandBuffer().add<UpdateScoreCommand>(
+                updateContext.queueCommand<UpdateScoreCommand>(
                     std::move(scoreContext)
                 );
             }

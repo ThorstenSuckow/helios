@@ -10,7 +10,7 @@ export module helios.engine.modules.physics.collision.systems.BoundsUpdateSystem
 
 import helios.engine.modules.physics.collision.Bounds;
 
-import helios.engine.ecs.System;
+
 import helios.math;
 
 import helios.core.units.Unit;
@@ -28,6 +28,8 @@ import helios.engine.modules.physics.collision.components.AabbColliderComponent;
 import helios.engine.modules.rendering.model.components.ModelAabbComponent;
 
 import helios.engine.mechanics.lifecycle.components.Active;
+
+import helios.engine.common.tags.SystemRole;
 
 export namespace helios::engine::modules::physics::collision::systems {
 
@@ -49,9 +51,11 @@ export namespace helios::engine::modules::physics::collision::systems {
      *
      * @see helios::engine::modules::physics::collision::Bounds::computeWorldAabb()
      */
-    class BoundsUpdateSystem : public helios::engine::ecs::System {
+    class BoundsUpdateSystem {
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
 
         /**
          * @brief Updates collider bounds for all applicable entities.
@@ -63,9 +67,9 @@ export namespace helios::engine::modules::physics::collision::systems {
          *
          * @param updateContext Context containing deltaTime and other frame data.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
-            for (auto [entity, mab, sc, tsc, sca, rsc, bc, active] : gameWorld_->view<
+            for (auto [entity, mab, sc, tsc, sca, rsc, bc, active] : updateContext.view<
                 helios::engine::modules::rendering::model::components::ModelAabbComponent,
                 helios::engine::modules::scene::components::SceneNodeComponent,
                 helios::engine::modules::spatial::transform::components::TranslationStateComponent,

@@ -24,10 +24,7 @@ import helios.engine.mechanics.gamestate;
 import helios.engine.state;
 
 
-import helios.engine.runtime.world.Manager;
-import helios.engine.runtime.world.GameWorld;
-import helios.engine.runtime.world.UpdateContext;
-
+import helios.engine.runtime.world;
 import helios.engine.runtime.spawn;
 
 import helios.engine.mechanics.health.events;
@@ -36,6 +33,8 @@ import helios.engine.mechanics.health.types;
 import helios.engine.mechanics.match.components;
 import helios.engine.mechanics.match.events;
 import helios.engine.mechanics.lifecycle.components;
+
+import helios.engine.common.tags;
 
 using namespace helios::engine::ecs;
 
@@ -62,7 +61,7 @@ export namespace helios::examples::scoring {
      * Reads HealthDepletedEvents from the phase bus and, for the player
      * entity, decreases the remaining lives via LivesComponent.
      */
-    class ScoringDemoRuleSystem : public helios::engine::ecs::System {
+    class ScoringDemoRuleSystem  {
 
 
         /**
@@ -76,7 +75,7 @@ export namespace helios::examples::scoring {
                 if (lc->lives() > 0) {
                     lc->decrease();
                     return true;
-                    updateContext.commandBuffer().add<StateCommand<MatchState>>(
+                    updateContext.queueCommand<StateCommand<MatchState>>(
                         StateTransitionRequest<MatchState>(
                             MatchState::Playing, MatchStateTransitionId::PlayerDied
                         )
@@ -88,12 +87,14 @@ export namespace helios::examples::scoring {
 
     public:
 
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+
         /**
          * @brief Reads health depletion events and triggers life loss for the player.
          *
          * @param updateContext Current frame context.
          */
-        void update(UpdateContext& updateContext) noexcept override {
+        void update(UpdateContext& updateContext) noexcept {
 
 
             for (auto events = updateContext.readPass<HealthDepletedEvent>(); auto& event : events) {

@@ -15,7 +15,7 @@ import helios.engine.mechanics.scoring.components;
 
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
-import helios.engine.ecs.System;
+
 
 
 import helios.engine.modules.physics.collision.events;
@@ -23,6 +23,8 @@ import helios.engine.modules.physics.collision.events;
 import helios.engine.mechanics.lifecycle.components.Active;
 
 
+
+import helios.engine.common.tags.SystemRole;
 
 export namespace helios::engine::mechanics::scoring::systems {
 
@@ -36,19 +38,21 @@ export namespace helios::engine::mechanics::scoring::systems {
      * @see ScoreObserverSystem
      * @see ScoreObserverComponent
      */
-    class ScoreObserverClearSystem : public helios::engine::ecs::System {
+    class ScoreObserverClearSystem {
+
 
     public:
 
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
 
         /**
          * @brief Clears update flags on all ScoreObserverComponents.
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
-            for (auto [entity, soc, active] : gameWorld_->view<
+            for (auto [entity, soc, active] : updateContext.view<
                 helios::engine::mechanics::scoring::components::ScoreObserverComponent,
                 helios::engine::mechanics::lifecycle::components::Active
             >().whereEnabled()) {

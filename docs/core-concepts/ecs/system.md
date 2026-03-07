@@ -1,6 +1,6 @@
 # System
 
-A **System** is an abstract base class for game logic processors that operate on the GameWorld. Systems implement cross-cutting concerns like physics, collision detection, or AI.
+**System** is a type-erased wrapper for game logic processors. Concrete systems are plain classes that provide an `update(UpdateContext&)` method — they do not inherit from `System`. The wrapper uses the Concept/Model pattern to erase the concrete type at compile time.
 
 ## Overview
 
@@ -10,114 +10,160 @@ Systems follow the ECS pattern of separating behavior from data:
 - **Systems** implement behavior
 
 ```cpp
-class PhysicsSystem : public System {
+class PhysicsSystem {
 public:
-    void update(UpdateContext& ctx) noexcept override {
-        for (auto [entity, transform, velocity] : gameWorld_->view<
+    void update(UpdateContext& ctx) noexcept {
+        for (auto [entity, transform, velocity, active] : ctx.view<
             TransformComponent,
             VelocityComponent,
             Active
         >().whereEnabled()) {
-            transform->position += velocity->direction * ctx.deltaTime;
+            transform->position += velocity->direction * ctx.deltaTime();
         }
     }
 };
-
-// Register with GameWorld
-gameWorld.addSystem(std::make_unique<PhysicsSystem>());
 ```
+
+Systems are registered via `SystemRegistry::add<T>()` which wraps them in a `System` internally.
 
 ## Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                        GameWorld                            │
-│  ┌─────────────────────────────────────────────────────────┐│
-│  │                    Systems                              ││
-│  │  ┌──────────┐ ┌──────────┐ ┌──────────┐                 ││
-│  │  │ Physics  │ │Collision │ │    AI    │  ...            ││
-│  │  │ System   │ │  System  │ │  System  │                 ││
-│  │  └────┬─────┘ └────┬─────┘ └────┬─────┘                 ││
-│  │       │            │            │                       ││
-│  │       └────────────┼────────────┘                       ││
-│  │                    ▼                                    ││
-│  │              GameWorld Data                             ││
-│  │         (Entities, Components)                          ││
-│  └─────────────────────────────────────────────────────────┘│
-└─────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────┐
+│                       SystemRegistry                           │
+│  ┌──────────────────┐  ┌──────────────────┐                    │
+│  │ System           │  │ System           │  ...               │
+│  │  ┌────────────┐  │  │  ┌────────────┐  │                    │
+│  │  │PhysicsSys  │  │  │  │CollisionSys│  │  (plain classes)   │
+│  │  └────────────┘  │  │  └────────────┘  │                    │
+│  └──────────────────┘  └──────────────────┘                    │
+│           │                     │                              │
+│           └─────────┬───────────┘                              │
+│                     ▼                                          │
+│              GameWorld Data                                     │
+│         (Entities, Components)                                  │
+└────────────────────────────────────────────────────────────────┘
 ```
+
+## Type Erasure Design
+
+```
+System (value type, owns erased Concept via unique_ptr)
+  └── Concept              (internal virtual interface)
+        └── Model<T>       (typed wrapper, owns T by value)
+              └── T        (plain class, provides update())
+```
+
+User code defines plain classes. `System` is infrastructure-only and erases the concrete type.
 
 ## API Reference
 
-### Base Class
+### System (Type-Erased Wrapper)
 
 ```cpp
-class System : public Updatable {
-protected:
-    GameWorld* gameWorld_ = nullptr;
+namespace helios::engine::runtime::world {
 
-public:
-    virtual ~System() = default;
-    
-    virtual void init(GameWorld& gameWorld) noexcept;
-    void update(UpdateContext& updateContext) noexcept override = 0;
-};
-```
+    template<typename T>
+    concept HasInit = requires(T& t, GameWorld& gw) {
+        { t.init(gw) } -> std::same_as<void>;
+    };
 
-### init()
+    template<typename T>
+    concept HasUpdate = requires(T& t, UpdateContext& ctx) {
+        { t.update(ctx) } -> std::same_as<void>;
+    };
 
-Called once when the system is added to the GameWorld:
+    class System {
+        class Concept { /* virtual update(), init(), underlying() */ };
 
-```cpp
-void init(GameWorld& gameWorld) noexcept override {
-    System::init(gameWorld);  // Sets gameWorld_
-    
-    // Custom initialization
-    physicsWorld_ = createPhysicsWorld();
+        template<typename T>
+        class Model final : public Concept {
+            T system_;   // owned by value
+        };
+
+        std::unique_ptr<Concept> pimpl_;
+
+    public:
+        template<typename T>
+        requires HasUpdate<T>
+        explicit System(T system);
+
+        void update(UpdateContext&) noexcept;
+        void init(GameWorld&) noexcept;
+
+        [[nodiscard]] void* underlying() noexcept;
+        [[nodiscard]] const void* underlying() const noexcept;
+    };
 }
 ```
 
-### update()
+`System` erases the concrete type via the Concept/Model pattern:
 
-Called every frame with timing and context information:
+- **`update()`** delegates to `T::update(UpdateContext&)` (required via `HasUpdate<T>`).
+- **`init()`** conditionally calls `T::init(GameWorld&)` if `HasInit<T>` is satisfied.
+- **`underlying()`** returns a type-erased pointer to the owned system instance.
+
+`System` is move-only (non-copyable).
+
+### SystemRegistry
+
+`SystemRegistry` is a type alias for `ConceptModelRegistry<System, SystemTypeId>` (from `helios.core.container`):
 
 ```cpp
-void update(UpdateContext& ctx) noexcept override {
-    float dt = ctx.deltaTime;
-    
-    for (auto [entity, physics] : gameWorld_->view<PhysicsComponent>()) {
-        // Update physics simulation
-    }
+import helios.core.container.ConceptModelRegistry;
+import helios.engine.runtime.world.System;
+import helios.engine.runtime.world.types.SystemTypeId;
+
+namespace helios::engine::runtime::world {
+
+    using SystemRegistry = helios::core::container::ConceptModelRegistry<System, types::SystemTypeId>;
+
+    // Inherited API from ConceptModelRegistry:
+    // template<typename T, typename... Args> T& add(Args&&...);
+    // template<typename T> [[nodiscard]] T* item() const;
+    // template<typename T> [[nodiscard]] bool has() const;
+    // [[nodiscard]] std::span<System* const> items() const noexcept;
 }
 ```
 
-## UpdateContext
+`SystemRegistry` creates and owns `System` wrappers. `add<T>()` returns a reference to the underlying T instance. `items()` returns a span in insertion order for deterministic iteration.
 
-The `UpdateContext` provides frame-specific information:
+### Required: update()
+
+Every concrete system must provide:
 
 ```cpp
-struct UpdateContext {
-    float deltaTime;           // Time since last frame (seconds)
-    CommandBuffer* commands;   // For deferred operations
-    GameWorld* gameWorld;      // Reference to the world
-    // ... additional context
-};
+void update(UpdateContext& ctx) noexcept {
+    // Per-frame logic
+}
 ```
+
+### Optional: init()
+
+Systems that need one-time initialization can optionally define:
+
+```cpp
+void init(GameWorld& world) {
+    // Called once when the system is initialized
+}
+```
+
+Detection uses the `HasInit` concept — no runtime cost if omitted.
 
 ## Creating Systems
 
 ### Basic System
 
 ```cpp
-class GravitySystem : public System {
+class GravitySystem {
 public:
-    void update(UpdateContext& ctx) noexcept override {
-        for (auto [entity, velocity, gravity, active] : gameWorld_->view<
+    void update(UpdateContext& ctx) noexcept {
+        for (auto [entity, velocity, gravity, active] : ctx.view<
             VelocityComponent,
             GravityComponent,
             Active
         >().whereEnabled()) {
-            velocity->velocity.y -= gravity->strength * ctx.deltaTime;
+            velocity->velocity.y -= gravity->strength * ctx.deltaTime();
         }
     }
 };
@@ -126,17 +172,17 @@ public:
 ### System with State
 
 ```cpp
-class SpawnTimerSystem : public System {
+class SpawnTimerSystem {
     float spawnTimer_ = 0.0f;
     float spawnInterval_ = 2.0f;
 
 public:
-    void update(UpdateContext& ctx) noexcept override {
-        spawnTimer_ += ctx.deltaTime;
-        
+    void update(UpdateContext& ctx) noexcept {
+        spawnTimer_ += ctx.deltaTime();
+
         if (spawnTimer_ >= spawnInterval_) {
             spawnTimer_ = 0.0f;
-            ctx.commands->submit<SpawnEnemyCommand>();
+            ctx.queueCommand<SpawnCommand>(position, enemyType);
         }
     }
 };
@@ -145,38 +191,31 @@ public:
 ### System with Initialization
 
 ```cpp
-class CollisionSystem : public System {
+class CollisionSystem {
     std::unique_ptr<SpatialGrid> grid_;
 
 public:
-    void init(GameWorld& gameWorld) noexcept override {
-        System::init(gameWorld);
-        
-        // Create spatial partitioning grid
+    void init(GameWorld& gameWorld) {
         grid_ = std::make_unique<SpatialGrid>(worldBounds_, cellSize_);
     }
-    
-    void update(UpdateContext& ctx) noexcept override {
+
+    void update(UpdateContext& ctx) noexcept {
         grid_->clear();
-        
         // Populate grid and detect collisions
     }
 };
 ```
 
-## Updatable Interface
+## Registration
 
-`System` inherits from `Updatable`, which defines the update contract:
+Systems are added to game loop passes via `addSystem<T>()`:
 
 ```cpp
-class Updatable {
-public:
-    virtual ~Updatable() = default;
-    virtual void update(UpdateContext& updateContext) noexcept = 0;
-};
+gameLoop.addPhase("gameplay")
+    .addPass<AlwaysRunPass>()
+        .addSystem<GravitySystem>()
+        .addSystem<CollisionSystem>();
 ```
-
-This interface allows systems (and other updatable objects) to be processed uniformly by the game loop.
 
 ## Best Practices
 
@@ -186,26 +225,15 @@ Each system should have a single responsibility:
 
 ```cpp
 // Good: Focused systems
-class MovementSystem : public System { };
-class CollisionSystem : public System { };
-class DamageSystem : public System { };
-
-// Bad: God system
-class EverythingSystem : public System { };  // Avoid
+class MovementSystem { void update(UpdateContext&) noexcept; };
+class CollisionSystem { void update(UpdateContext&) noexcept; };
+class DamageSystem { void update(UpdateContext&) noexcept; };
 ```
 
 ### 2. Use Views for Queries
 
-Prefer views over manual iteration:
-
 ```cpp
-// Good: View-based query
-for (auto [e, t, v] : gameWorld_->view<Transform, Velocity>()) { }
-
-// Avoid: Manual iteration
-for (auto& entity : gameWorld_->entities()) {
-    if (entity.has<Transform>() && entity.has<Velocity>()) { }
-}
+for (auto [e, t, v, a] : ctx.view<Transform, Velocity, Active>().whereEnabled()) { }
 ```
 
 ### 3. Defer Structural Changes
@@ -213,13 +241,12 @@ for (auto& entity : gameWorld_->entities()) {
 Use commands for entity creation/destruction during update:
 
 ```cpp
-void update(UpdateContext& ctx) noexcept override {
-    for (auto [entity, health, active] : gameWorld_->view<
+void update(UpdateContext& ctx) noexcept {
+    for (auto [entity, health, active] : ctx.view<
         HealthComponent, Active
     >().whereEnabled()) {
         if (health->isDead()) {
-            // Don't destroy directly during iteration!
-            ctx.commands->submit<DespawnCommand>(entity.entityHandle());
+            ctx.queueCommand<DespawnCommand>(entity.entityHandle());
         }
     }
 }
@@ -227,20 +254,11 @@ void update(UpdateContext& ctx) noexcept override {
 
 ### 4. noexcept Guarantee
 
-System updates must not throw exceptions:
-
-```cpp
-void update(UpdateContext& ctx) noexcept override {
-    // All code paths must be exception-safe
-}
-```
+System updates must not throw exceptions.
 
 ## See Also
 
-- [Updatable](updatable.md) - Base interface for per-frame updates
 - [View](view.md) - Component-based entity queries
-- [GameWorld](../gameloop-architecture.md) - System registration and execution
+- [Game Loop Architecture](../gameloop-architecture.md) - How systems execute
 - [Command System](../command-system.md) - Deferred operations
 - [Component System](../component-system.md) - ECS overview
-
-

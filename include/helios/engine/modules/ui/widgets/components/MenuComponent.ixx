@@ -9,7 +9,7 @@ module;
 
 export module helios.engine.modules.ui.widgets.components.MenuComponent;
 
-import helios.engine.core.data.MenuId;
+import helios.engine.modules.ui.widgets.types.MenuId;
 import helios.engine.ecs.GameObject;
 import helios.engine.ecs.EntityHandle;
 
@@ -34,7 +34,7 @@ class MenuComponent {
     /**
      * @brief Unique identifier for this menu.
      */
-    helios::engine::core::data::MenuId menuId_{};
+    helios::engine::modules::ui::widgets::types::MenuId menuId_{};
 
     /**
      * @brief Currently selected item index.
@@ -63,7 +63,7 @@ public:
      *
      * @param id The menu ID.
      */
-    void setMenuId(helios::engine::core::data::MenuId id) noexcept {
+    void setMenuId(helios::engine::modules::ui::widgets::types::MenuId id) noexcept {
         menuId_ = id;
     }
 
@@ -72,7 +72,7 @@ public:
      *
      * @return The MenuId for this menu.
      */
-    [[nodiscard]] helios::engine::core::data::MenuId menuId() const noexcept {
+    [[nodiscard]] helios::engine::modules::ui::widgets::types::MenuId menuId() const noexcept {
         return menuId_;
     }
 

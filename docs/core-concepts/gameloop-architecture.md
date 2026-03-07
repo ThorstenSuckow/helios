@@ -105,7 +105,7 @@ auto& session = gameWorld.session();
 session.trackState<GameState>();
 session.trackState<MatchState>();
 
-// Register managers and command handlers via ResourceRegistry
+// Register managers
 auto& poolMgr = gameWorld.registerManager<GameObjectPoolManager>();
 auto& spawnMgr = gameWorld.registerManager<SpawnManager>();
 
@@ -249,13 +249,26 @@ POST PHASE
 
 ## Commands and CommandBuffer
 
-Systems can write Commands into the CommandBuffer during any phase. At each **Phase Commit**, the CommandBuffer is flushed - i.e., their `execute()` method is invoked. This method contains the logic that mutates the world state (e.g., spawning, despawning, health changes, component changes).
+Systems can write Commands into the CommandBuffer during any phase. At each **Phase Commit**, the CommandBuffer is flushed - i.e., they are routed to their handlers or executed. This method contains the logic that mutates the world state (e.g., spawning, despawning, health changes, component changes).
 
-This means commands added during the Pre Phase are executed at the Pre Phase Commit, commands added during Main Phase at Main Phase Commit, and so on. This allows for responsive gameplay where actions taken in one phase are immediately visible in the next.
+Example:
+
+    ```cpp
+    CommandBuffer::flush() {
+        for (auto& cmd : commands)
+            // route to handler or execute
+    }
+
+    Manager::flush() {
+        // manager processes accumulated commands
+    }
+    ```
+
+   This model allows Commands to be bundled, sorted, and processed deterministically (e.g. handle all spawns first, then all despawns).
 
 Commands are "bare metal" and therefore the lowest level in the game-loop layer - no further preparation of a Command is required. The system should therefore also be able to commit Commands coming directly from a developer console into the GameWorld (optionally delegating them to their respective managers - see below).
 
-For detailed command handling, dispatchers, and manager integration, see [Command System](command-system.md).
+For detailed command handling, manager integration, see [Command System](command-system.md).
 
 ## Events and double-buffered EventBus
 
@@ -269,7 +282,7 @@ helios provides three event buses with different visibility scopes:
 | **Phase** | `pushPhase<E>()` | `readPhase<E>()` | Next phase |
 | **Frame** | `pushFrame<E>()` | `readFrame<E>()` | Next frame |
 
-All buses are double-buffered (`helios.core.buffer.TypeIndexedDoubleBuffer`): events are written into the write buffer and become visible in the read buffer only after a buffer swap.
+All buses are double-buffered (`helios.core.container.buffer.TypeIndexedDoubleBuffer`): events are written into the write buffer and become visible in the read buffer only after a buffer swap.
 
 For detailed event propagation rules and commit points, see [Event System](event-system.md).
 
@@ -281,8 +294,8 @@ At each phase boundary, the following commit sequence occurs:
 // After each phase completes
 phaseEventBus.swapBuffers();    // Phase events become readable
 passEventBus.clearAll();         // Pass events are cleared
-commandBuffer.flush();           // Commands execute (mutations)
-gameWorld.flushManagers();       // Managers process queued requests
+commandBuffer.flush(gameWorld, ctx); // Commands execute (mutations)
+flushManagers(ctx);              // Managers process queued requests
 
 // Additionally, at the end of Post phase:
 frameEventBus.swapBuffers();     // Frame events become readable in next frame
@@ -302,8 +315,8 @@ for (phase : {Pre, Main, Post}) {
         
         // Commit point actions (bitwise flags):
         if (commitPoint & PassEvents)   passEventBus.swapBuffers();
-        if (commitPoint & FlushCommands) commandBuffer.flush();
-        if (commitPoint & FlushManagers) managers.flush();
+        if (commitPoint & FlushCommands) commandBuffer.flush(gameWorld, ctx);
+        if (commitPoint & FlushManagers) managers.flush(ctx);
     }
     
     phaseCommit();  // Phase boundary

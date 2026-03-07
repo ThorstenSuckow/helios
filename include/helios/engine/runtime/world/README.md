@@ -11,22 +11,21 @@ This module provides the core classes for managing runtime game state. `GameWorl
 | Class | Purpose |
 |-------|---------|
 | `GameWorld` | Central game state container for entities, resources, and the active level |
-| `ResourceRegistry` | Type-indexed store for Managers, CommandBuffers, and CommandHandlers with O(1) lookup |
+| `ResourceRegistry` | Type-indexed store for Managers and CommandBuffers with O(1) lookup |
 | `Session` | Cross-frame state tracking (game/match states, scores) |
 | `Level` | Game level with world bounds and root scene node |
-| `UpdateContext` | Per-frame context with delta time, event buses, and command buffer |
-| `SystemRegistry` | Container for System instances within a pass |
-| `Manager` | Abstract base for deferred operation handlers |
+| `UpdateContext` | Per-frame context with delta time, event buses, and `queueCommand<T>()` |
+| `SystemRegistry` | `ConceptModelRegistry<System, SystemTypeId>` alias for system storage |
+| `ManagerRegistry` | `ConceptModelRegistry<Manager, ResourceTypeId>` alias for manager storage |
+| `Manager` | Type-erased wrapper for deferred operation handlers (Concept/Model pattern) |
 
 ## Usage
 
 ```cpp
 // Create world and register resources
 helios::engine::runtime::world::GameWorld gameWorld;
-auto& poolMgr = gameWorld.resourceRegistry()
-    .registerResource<GameObjectPoolManager>();
-auto& spawnMgr = gameWorld.resourceRegistry()
-    .registerResource<SpawnManager>();
+auto& poolMgr = gameWorld.registerResource<GameObjectPoolManager>();
+auto& spawnMgr = gameWorld.registerResource<SpawnManager>();
 
 gameWorld.init(); // Initializes all Managers in registration order
 
@@ -50,4 +49,3 @@ for (auto [entity, transform, active] : gameWorld.view<
 @brief World state management, resource registry, and per-frame update context.
 @details Provides GameWorld as the root game state container, ResourceRegistry for type-indexed O(1) resource access, UpdateContext for frame state, Session for cross-frame state, Level for world bounds, and SystemRegistry for system organization.
 </p></details>
-

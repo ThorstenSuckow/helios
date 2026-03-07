@@ -15,8 +15,8 @@ export module helios.engine.mechanics.lifecycle.components.DeadTagComponent;
 
 
 import helios.engine.ecs.GameObject;
-import helios.engine.core.data.SpawnProfileId;
-import helios.engine.core.data.ComponentTypeId;
+import helios.engine.runtime.spawn.types.SpawnProfileId;
+import helios.engine.ecs.types.ComponentTypeId;
 import helios.core.types;
 
 export namespace helios::engine::mechanics::lifecycle::components {

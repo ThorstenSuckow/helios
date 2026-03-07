@@ -8,7 +8,7 @@ module;
 
 export module helios.rendering.ViewportSnapshot;
 
-import helios.engine.core.data.ViewportId;
+import helios.engine.common.types.ViewportId;
 import helios.math.types;
 import helios.core.types;
 
@@ -27,7 +27,7 @@ export namespace helios::rendering {
         /**
          * @brief Unique identifier for the viewport.
          */
-        helios::engine::core::data::ViewportId viewportId{helios::core::types::no_init};
+        helios::engine::common::types::ViewportId viewportId{helios::core::types::no_init};
 
         /**
          * @brief Normalized bounds [x, y, width, height] in range [0, 1].

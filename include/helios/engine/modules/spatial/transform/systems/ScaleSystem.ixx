@@ -8,7 +8,7 @@ module;
 
 export module helios.engine.modules.spatial.transform.systems.ScaleSystem;
 
-import helios.engine.ecs.System;
+
 import helios.math;
 
 import helios.core.units.Unit;
@@ -23,6 +23,8 @@ import helios.engine.modules.spatial.transform.components.ComposeTransformCompon
 import helios.engine.modules.rendering.model.components.ModelAabbComponent;
 
 import helios.engine.mechanics.lifecycle.components.Active;
+
+import helios.engine.common.tags.SystemRole;
 
 export namespace helios::engine::modules::spatial::transform::systems {
 
@@ -39,19 +41,12 @@ export namespace helios::engine::modules::spatial::transform::systems {
      * - ModelAabbComponent (original model bounds)
      * - ComposeTransformComponent (receives scale updates)
      */
-    class ScaleSystem : public helios::engine::ecs::System {
+    class ScaleSystem {
+
 
     public:
 
-        /**
-         * @brief Called when the system is added to a GameWorld.
-         *
-         * @param gameWorld Pointer to the GameWorld this system belongs to.
-         */
-        void init(helios::engine::runtime::world::GameWorld& gameWorld) noexcept override {
-            System::init(gameWorld);
-        }
-
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
         /**
          * @brief Updates scale for all entities with dirty ScaleComponents.
          *
@@ -61,9 +56,9 @@ export namespace helios::engine::modules::spatial::transform::systems {
          *
          * @param updateContext Context containing deltaTime and other frame data.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
-            for (auto [entity, mab, sc, tc, active] : gameWorld_->view<
+            for (auto [entity, mab, sc, tc, active] : updateContext.view<
                 helios::engine::modules::rendering::model::components::ModelAabbComponent,
                 helios::engine::modules::spatial::transform::components::ScaleStateComponent,
                 helios::engine::modules::spatial::transform::components::ComposeTransformComponent,

@@ -6,9 +6,10 @@ module;
 
 export module helios.engine.runtime.spawn.policy.amount.FixedSpawnAmount;
 
-import helios.engine.core.data.GameObjectPoolId;
+import helios.engine.runtime.pooling.types.GameObjectPoolId;
 import helios.engine.runtime.spawn.policy.amount.SpawnAmountProvider;
 import helios.engine.runtime.spawn.policy.SpawnRuleState;
+import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
 
 export namespace helios::engine::runtime::spawn::policy::amount {
@@ -40,17 +41,12 @@ export namespace helios::engine::runtime::spawn::policy::amount {
             : amount_(amount) {}
 
         /**
-         * @brief Returns the fixed spawn amount.
-         *
-         * @param gameObjectPoolId The pool to spawn from (unused).
-         * @param spawnRuleState The rule's runtime state (unused).
-         * @param updateContext The current frame's context (unused).
-         *
-         * @return The fixed spawn amount.
+         * @copydoc SpawnAmountProvider::getAmount
          */
         [[nodiscard]] size_t getAmount(
-            const helios::engine::core::data::GameObjectPoolId gameObjectPoolId,
+            const helios::engine::runtime::pooling::types::GameObjectPoolId gameObjectPoolId,
             const SpawnRuleState& spawnRuleState,
+            const helios::engine::runtime::world::GameWorld& gameWorld,
             const helios::engine::runtime::world::UpdateContext& updateContext
         ) const override {
             return amount_;

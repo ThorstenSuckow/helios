@@ -14,15 +14,11 @@ export module helios.engine.mechanics.scoring.ScorePoolManager;
 import helios.engine.mechanics.scoring.ScorePool;
 import helios.engine.mechanics.scoring.types.ScoreValueContext;
 
-import helios.engine.runtime.messaging.command.TypedCommandHandler;
-import helios.engine.runtime.messaging.command.CommandHandler;
-
 import helios.engine.mechanics.scoring.commands;
 
-import helios.engine.core.data.ScorePoolId;
+import helios.engine.mechanics.scoring.types.ScorePoolId;
 
 import helios.engine.ecs.GameObject;
-import helios.engine.runtime.world.Manager;
 import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.runtime.world.GameWorld;
@@ -30,6 +26,7 @@ import helios.engine.runtime.pooling.GameObjectPool;
 
 import helios.core.types;
 import helios.util.Guid;
+import helios.engine.common;
 
 using namespace helios::engine::mechanics::scoring::commands;
 using namespace helios::engine::runtime::messaging::command;
@@ -51,8 +48,7 @@ export namespace helios::engine::mechanics::scoring {
      * @see ScoreCommandHandler
      * @see Manager
      */
-    class ScorePoolManager : public helios::engine::runtime::world::Manager,
-                             public TypedCommandHandler<UpdateScoreCommand>{
+    class ScorePoolManager {
 
         /**
          * @brief Collection of score pools managed by this manager.
@@ -67,6 +63,7 @@ export namespace helios::engine::mechanics::scoring {
 
     public:
 
+        using EngineRoleTag = helios::engine::common::tags::ManagerRole;
 
         /**
          * @brief Creates and registers a new score pool.
@@ -75,7 +72,7 @@ export namespace helios::engine::mechanics::scoring {
          *
          * @return Reference to the newly created ScorePool.
          */
-        ScorePool& addScorePool(helios::engine::core::data::ScorePoolId scorePoolId) noexcept {
+        ScorePool& addScorePool(helios::engine::mechanics::scoring::types::ScorePoolId scorePoolId) noexcept {
 
             assert(!scorePool(scorePoolId) && "Score with scorePoolId already registered");
 
@@ -92,7 +89,7 @@ export namespace helios::engine::mechanics::scoring {
          *
          * @return Pointer to the ScorePool, or nullptr if not found.
          */
-        [[nodiscard]] ScorePool* scorePool(const helios::engine::core::data::ScorePoolId scorePoolId) noexcept {
+        [[nodiscard]] ScorePool* scorePool(const helios::engine::mechanics::scoring::types::ScorePoolId scorePoolId) noexcept {
 
             const auto it = std::ranges::find_if(pools_, [&scorePoolId](const auto& scorePool) -> bool {
                 return scorePool.scorePoolId() == scorePoolId;
@@ -117,7 +114,7 @@ export namespace helios::engine::mechanics::scoring {
          */
         void flush(
             helios::engine::runtime::world::UpdateContext& update_context
-        ) noexcept override {
+        ) noexcept {
 
             for (const auto& scoreContext : scores_) {
 
@@ -143,7 +140,7 @@ export namespace helios::engine::mechanics::scoring {
          */
         bool submit(
             UpdateScoreCommand updateScoreCommand
-        ) noexcept override {
+        ) noexcept {
             scores_.push_back(std::move(updateScoreCommand).scoreContext());
 
             return true;
@@ -154,8 +151,8 @@ export namespace helios::engine::mechanics::scoring {
          *
          * @param gameWorld Reference to the game world.
          */
-        void init(helios::engine::runtime::world::GameWorld& gameWorld) override {
-            gameWorld.registerCommandHandler<TypedCommandHandler<UpdateScoreCommand> >(*this);
+        void init(helios::engine::runtime::world::GameWorld& gameWorld) {
+            gameWorld.registerCommandHandler<UpdateScoreCommand>(*this);
         }
 
 
@@ -165,7 +162,7 @@ export namespace helios::engine::mechanics::scoring {
          * @details Iterates through all registered pools and calls their reset()
          * method, clearing all scores and resetting totals.
          */
-        void reset() override {
+        void reset() {
             for (auto& pool : pools_) {
                 pool.reset();
             }

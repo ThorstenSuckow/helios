@@ -11,7 +11,7 @@ module;
 export module helios.rendering.text.TextShaderProperties;
 
 import helios.rendering.shader.Shader;
-import helios.engine.core.data.FontId;
+import helios.engine.modules.ui.widgets.types.FontId;
 
 import helios.util.Colors;
 import helios.math;

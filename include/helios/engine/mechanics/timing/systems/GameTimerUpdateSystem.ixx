@@ -13,7 +13,7 @@ import helios.engine.mechanics.timing.GameTimer;
 import helios.engine.mechanics.timing.TimerManager;
 
 import helios.engine.runtime.world.UpdateContext;
-import helios.engine.ecs.System;
+
 
 import helios.engine.runtime.world.GameWorld;
 
@@ -21,6 +21,8 @@ import helios.engine.mechanics.lifecycle.components.Active;
 import helios.engine.mechanics.timing.components;
 
 using namespace helios::engine::mechanics::timing;
+
+import helios.engine.common.tags.SystemRole;
 
 export namespace helios::engine::mechanics::timing::systems {
 
@@ -33,7 +35,7 @@ export namespace helios::engine::mechanics::timing::systems {
      * @see TimerManager
      * @see GameTimer
      */
-    class GameTimerUpdateSystem : public helios::engine::ecs::System {
+    class GameTimerUpdateSystem {
 
         /**
          * @brief Reference to the TimerManager owning the timers.
@@ -42,6 +44,8 @@ export namespace helios::engine::mechanics::timing::systems {
 
     public:
 
+
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
         /**
          * @brief Constructs the system with a reference to the TimerManager.
          *
@@ -55,7 +59,7 @@ export namespace helios::engine::mechanics::timing::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto& gameTimer : timerManager_.gameTimers()) {
                 gameTimer.update(updateContext.deltaTime());

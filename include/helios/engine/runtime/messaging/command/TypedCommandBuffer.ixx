@@ -13,11 +13,10 @@ export module helios.engine.runtime.messaging.command.TypedCommandBuffer;
 
 import helios.engine.state.components;
 
-
+import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.runtime.messaging.command.CommandBuffer;
-import helios.engine.runtime.messaging.command.TypedCommandHandler;
 
 using namespace helios::engine::runtime::world;
 
@@ -28,7 +27,7 @@ export namespace helios::engine::runtime::messaging::command {
      *
      * @details A command satisfies ExecutableCommand if it provides a
      * noexcept `execute(UpdateContext&)` method. Commands that do not
-     * satisfy this concept must have a registered TypedCommandHandler.
+     * satisfy this concept must have a registered handler.
      *
      * @tparam Cmd The command type to check.
      */
@@ -49,25 +48,25 @@ export namespace helios::engine::runtime::messaging::command {
      * - **Deterministic ordering:** Commands are flushed in the order of the
      *   template parameter list, ensuring reproducible execution.
      * - **Handler-or-execute routing:** During flush, each command is either
-     *   routed to a registered TypedCommandHandler or executed directly via
+     *   routed to a registered handler or executed directly via
      *   its `execute()` method (if it satisfies ExecutableCommand).
      *
      * ## Flush Routing
      *
      * For each command type in the parameter pack:
-     * 1. If a `TypedCommandHandler<Cmd>` is registered → `handler.submit(cmd)`
+     * 1. If a handler for `Cmd` is registered → `handler.submit(cmd)`
      * 2. Else if `Cmd` satisfies `ExecutableCommand` → `cmd.execute(ctx)`
      * 3. Else → assertion failure (misconfiguration)
      *
      * @tparam CommandTypes The command types this buffer manages.
      *
      * @see CommandBuffer
-     * @see TypedCommandHandler
+     * @see CommandHandlerRegistry
      * @see EngineCommandBuffer
      * @see ExecutableCommand
      */
     template <typename... CommandTypes>
-    class TypedCommandBuffer : public CommandBuffer {
+    class TypedCommandBuffer {
 
         /**
          * @brief Per-type command queues stored as a tuple of vectors.
@@ -95,22 +94,24 @@ export namespace helios::engine::runtime::messaging::command {
          *
          * @tparam CommandType The command type to flush.
          *
+         * @param gameWorld The game world for which the queue should be flushed.
          * @param updateContext The current frame's update context.
          */
         template<typename CommandType>
-        void flushCommandQueue(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void flushCommandQueue(GameWorld& gameWorld, UpdateContext& updateContext) noexcept {
 
             auto& queue = commandQueue<CommandType>();
             if (queue.empty()) {
                 return;
             }
 
-           if (updateContext.resourceRegistry().has<TypedCommandHandler<CommandType>>()) {
-                auto& handler = updateContext.resourceRegistry().resource<TypedCommandHandler<CommandType>>();
+            auto& commandHandlerRegistry = gameWorld.commandHandlerRegistry();
+
+            if (commandHandlerRegistry.has<CommandType>()) {
                 for (auto& cmd : queue) {
-                    handler.submit(cmd);
+                    commandHandlerRegistry.submit<CommandType>(cmd);
                 }
-           } else {
+            } else {
                if constexpr (ExecutableCommand<CommandType>) {
                    for (auto& cmd : queue) {
                        cmd.execute(updateContext);
@@ -119,15 +120,12 @@ export namespace helios::engine::runtime::messaging::command {
                    assert(false &&  "Command type is not executable");
                }
 
-
-
             }
 
             queue.clear();
         }
 
     public:
-
 
         /**
          * @brief Enqueues a command of the specified type.
@@ -139,19 +137,15 @@ export namespace helios::engine::runtime::messaging::command {
          */
         template<typename T, typename... Args>
         void add(Args&&... args) {
-
             auto& queue = std::get<std::vector<T>>(commandQueues_);
             queue.emplace_back(std::forward<Args>(args)...);
-
         }
-
 
         /**
          * @brief Discards all queued commands without executing them.
          */
-        void clear() noexcept override {
+        void clear() noexcept {
             std::apply([](auto&... queue) { (queue.clear(), ...); }, commandQueues_);
-
         }
 
         /**
@@ -160,10 +154,11 @@ export namespace helios::engine::runtime::messaging::command {
          * @details Iterates through each command type using a fold expression,
          * flushing queues in the order specified by the template parameters.
          *
+         * @param gameWorld The game world for which the queue should be flushed.
          * @param updateContext The current frame's update context.
          */
-        void flush(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
-            (flushCommandQueue<CommandTypes>(updateContext), ...);
+        void flush(GameWorld& gameWorld,  UpdateContext& updateContext) noexcept {
+            (flushCommandQueue<CommandTypes>(gameWorld, updateContext), ...);
         }
 
 

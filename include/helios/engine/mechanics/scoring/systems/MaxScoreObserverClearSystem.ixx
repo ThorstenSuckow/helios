@@ -11,7 +11,7 @@ export module helios.engine.mechanics.scoring.systems.MaxScoreObserverClearSyste
 
 import helios.engine.mechanics.scoring.components;
 import helios.engine.runtime.world.UpdateContext;
-import helios.engine.ecs.System;
+
 
 import helios.engine.runtime.world.GameWorld;
 
@@ -20,6 +20,8 @@ import helios.engine.modules.physics.collision.events;
 import helios.engine.mechanics.lifecycle.components.Active;
 
 
+
+import helios.engine.common.tags.SystemRole;
 
 export namespace helios::engine::mechanics::scoring::systems {
 
@@ -34,19 +36,20 @@ export namespace helios::engine::mechanics::scoring::systems {
      * @see MaxScoreObserverSystem
      * @see MaxScoreObserverComponent
      */
-    class MaxScoreObserverClearSystem : public helios::engine::ecs::System {
+    class MaxScoreObserverClearSystem {
+
 
     public:
 
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
         /**
          * @brief Clears update flags on all active MaxScoreObserverComponents.
          *
          * @param updateContext The current frame's update context.
          */
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
-
-            for (auto [entity, soc, active] : gameWorld_->view<
+            for (auto [entity, soc, active] : updateContext.view<
                 helios::engine::mechanics::scoring::components::MaxScoreObserverComponent,
                 helios::engine::mechanics::lifecycle::components::Active
             >().whereEnabled()) {

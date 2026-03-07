@@ -6,3 +6,6 @@
 export module helios.engine.common;
 
 export import helios.engine.common.types;
+
+export import helios.engine.common.concepts;
+export import helios.engine.common.tags;

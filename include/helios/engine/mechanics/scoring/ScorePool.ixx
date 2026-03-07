@@ -15,7 +15,7 @@ import helios.engine.mechanics.scoring.MaxScorePoolSnapshot;
 
 import helios.engine.mechanics.scoring.types;
 
-import helios.engine.core.data.ScorePoolId;
+import helios.engine.mechanics.scoring.types.ScorePoolId;
 
 import helios.core.types;
 
@@ -41,7 +41,7 @@ export namespace helios::engine::mechanics::scoring {
         /**
          * @brief Unique identifier for this score pool.
          */
-        helios::engine::core::data::ScorePoolId scorePoolId_;
+        helios::engine::mechanics::scoring::types::ScorePoolId scorePoolId_;
 
         /**
          * @brief Per-type score values indexed by ScoreTypeId.
@@ -93,7 +93,7 @@ export namespace helios::engine::mechanics::scoring {
          *
          * @param scorePoolId Unique identifier for this pool.
          */
-        explicit ScorePool(const helios::engine::core::data::ScorePoolId scorePoolId)
+        explicit ScorePool(const helios::engine::mechanics::scoring::types::ScorePoolId scorePoolId)
             : scorePoolId_{scorePoolId} {}
 
         /**
@@ -101,7 +101,7 @@ export namespace helios::engine::mechanics::scoring {
          *
          * @return The ScorePoolId.
          */
-        [[nodiscard]] helios::engine::core::data::ScorePoolId id() const noexcept {
+        [[nodiscard]] helios::engine::mechanics::scoring::types::ScorePoolId id() const noexcept {
             return scorePoolId_;
         }
 
@@ -153,7 +153,7 @@ export namespace helios::engine::mechanics::scoring {
          *
          * @return The ScorePoolId.
          */
-        [[nodiscard]] helios::engine::core::data::ScorePoolId scorePoolId() const noexcept {
+        [[nodiscard]] helios::engine::mechanics::scoring::types::ScorePoolId scorePoolId() const noexcept {
             return scorePoolId_;
         }
 

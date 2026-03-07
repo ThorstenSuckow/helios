@@ -15,7 +15,7 @@ import helios.engine.mechanics.scoring.components;
 
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
-import helios.engine.ecs.System;
+
 
 import helios.engine.modules.ui.widgets.components.UiTextComponent;
 
@@ -23,6 +23,8 @@ import helios.engine.modules.ui.layout.components.NumberFormatterComponent;
 
 import helios.engine.mechanics.lifecycle.components.Active;
 
+
+import helios.engine.common.tags.SystemRole;
 
 export namespace helios::engine::modules::ui::binding::systems {
 
@@ -36,19 +38,20 @@ export namespace helios::engine::modules::ui::binding::systems {
      * @see ScoreObserverComponent
      * @see NumberFormatterComponent
      */
-    class Score2UiTextUpdateSystem : public helios::engine::ecs::System {
+    class Score2UiTextUpdateSystem {
 
     public:
 
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
 
         /**
          * @brief Updates text components with current score values.
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
-            for (auto [entity, soc, nfc, txt, active] : gameWorld_->view<
+            for (auto [entity, soc, nfc, txt, active] : updateContext.view<
                 helios::engine::mechanics::scoring::components::ScoreObserverComponent,
                 helios::engine::modules::ui::layout::components::NumberFormatterComponent,
                 helios::engine::modules::ui::widgets::components::UiTextComponent,

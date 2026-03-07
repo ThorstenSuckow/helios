@@ -17,10 +17,9 @@ Commands are typically issued by game-state listeners or systems when a timer ne
 ```cpp
 auto context = TimerControlContext{TimerState::Started, myTimerId};
 
-updateContext.commandBuffer().add<TimerControlCommand>(std::move(context));
+updateContext.queueCommand<TimerControlCommand>(std::move(context));
 ```
 
-The command is dispatched via the Visitor pattern - `accept()` delegates to `TimerCommandDispatcher`, which forwards the request to `TimerManager`.
 
 ---
 

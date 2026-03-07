@@ -10,7 +10,7 @@ module;
 
 export module helios.engine.ecs.systems.HierarchyPropagationSystem;
 
-import helios.engine.ecs.System;
+
 import helios.engine.ecs.EntityHandle;
 import helios.engine.ecs.GameObject;
 
@@ -24,6 +24,8 @@ import helios.engine.mechanics.lifecycle.components.Active;
 import helios.engine.mechanics.lifecycle.components.Inactive;
 
 
+
+import helios.engine.common.tags.SystemRole;
 
 export namespace helios::engine::ecs::systems {
 
@@ -42,7 +44,7 @@ export namespace helios::engine::ecs::systems {
      * - Active roots: propagate active state to children
      * - Inactive roots: propagate inactive state to children
      */
-    class HierarchyPropagationSystem : public helios::engine::ecs::System {
+    class HierarchyPropagationSystem {
 
         /**
          * @brief Recursively updates activation state for an entity and its children.
@@ -50,7 +52,7 @@ export namespace helios::engine::ecs::systems {
          * @param go The entity to update.
          * @param active The activation state to apply.
          */
-        void updateEntityHierarchy(GameObject go, bool active) {
+        void updateEntityHierarchy(GameObject go, helios::engine::runtime::world::UpdateContext& updateContext, bool active) {
 
             auto* hc = go.get<helios::engine::ecs::components::HierarchyComponent>();
             if (!hc) {
@@ -58,9 +60,9 @@ export namespace helios::engine::ecs::systems {
             }
             hc->clearDirty();
             for (auto child : hc->children()) {
-                if (auto ent = gameWorld_->find(child)) {
+                if (auto ent = updateContext.find(child)) {
                     ent->setActive(active);
-                    updateEntityHierarchy(ent.value(), active);
+                    updateEntityHierarchy(ent.value(), updateContext, active);
                 }
             }
         }
@@ -70,16 +72,18 @@ export namespace helios::engine::ecs::systems {
          */
         std::vector<GameObject> roots_;
 
+
     public:
 
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
         /**
          * @brief Processes hierarchy propagation for dirty root entities.
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
-            for (auto [entity, hc, active] : gameWorld_->view<
+            for (auto [entity, hc, active] : updateContext.view<
                 helios::engine::ecs::components::HierarchyComponent,
                 helios::engine::mechanics::lifecycle::components::Active
             >().whereEnabled()) {
@@ -90,11 +94,11 @@ export namespace helios::engine::ecs::systems {
             }
 
             for (auto& entity : roots_) {
-                updateEntityHierarchy(entity, true);
+                updateEntityHierarchy(entity, updateContext, true);
             }
             roots_.clear();
 
-            for (auto [entity, hc, active] : gameWorld_->view<
+            for (auto [entity, hc, active] : updateContext.view<
                 helios::engine::ecs::components::HierarchyComponent,
                 helios::engine::mechanics::lifecycle::components::Inactive
             >().whereEnabled()) {
@@ -105,7 +109,7 @@ export namespace helios::engine::ecs::systems {
             }
 
             for (auto& entity : roots_) {
-                updateEntityHierarchy(entity, false);
+                updateEntityHierarchy(entity, updateContext, false);
             }
             roots_.clear();
         }

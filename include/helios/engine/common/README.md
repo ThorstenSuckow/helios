@@ -1,17 +1,19 @@
 # helios::engine::common
 
-Shared type definitions used across multiple engine subsystems.
+Shared type definitions, compile-time concepts, and role tags used across multiple engine subsystems.
 
 ## Overview
 
-This module provides lightweight, system-agnostic data types that describe
-interactions between entities. These types are consumed by the combat,
-health, and scoring subsystems without introducing coupling between them.
+This module provides lightweight, system-agnostic infrastructure shared by
+all engine subsystems: interaction context structs, compile-time concepts
+for role classification, and tag types for the opt-in registration pattern.
 
 ## Submodules
 
 | Submodule | Purpose |
 |-----------|---------|
+| `concepts/` | C++20 concepts for engine role constraints (IsManagerLike, IsSystemLike, ...) |
+| `tags/` | Empty tag structs for compile-time role identification (ManagerRole, SystemRole) |
 | `types/` | Context structs for entity interactions and damage |
 
 ---
@@ -19,6 +21,6 @@ health, and scoring subsystems without introducing coupling between them.
 <details>
 <summary>Doxygen</summary><p>
 @namespace helios::engine::common
-@brief Shared type definitions used across multiple engine subsystems.
+@brief Shared type definitions, concepts, and tags used across engine subsystems.
 </p></details>
 

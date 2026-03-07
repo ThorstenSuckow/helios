@@ -10,7 +10,7 @@ module;
 
 export module helios.engine.ecs.SparseSet;
 
-import helios.engine.core.data;
+import helios.engine.ecs.types;
 import helios.engine.ecs.Traits;
 
 export namespace helios::engine::ecs {
@@ -43,7 +43,7 @@ export namespace helios::engine::ecs {
          * @return `true` if the element was removed, `false` if not found or
          *         removal was cancelled.
          */
-        virtual bool remove(helios::engine::core::data::EntityId id) = 0;
+        virtual bool remove(helios::engine::ecs::types::EntityId id) = 0;
 
         /**
          * @brief Checks whether an element exists for the specified EntityId.
@@ -52,7 +52,7 @@ export namespace helios::engine::ecs {
          *
          * @return `true` if the set contains the EntityId, `false` otherwise.
          */
-        [[nodiscard]] virtual bool contains(helios::engine::core::data::EntityId id) const = 0;
+        [[nodiscard]] virtual bool contains(helios::engine::ecs::types::EntityId id) const = 0;
 
         /**
          * @brief Returns a raw void pointer to the element at the given index.
@@ -61,18 +61,18 @@ export namespace helios::engine::ecs {
          *
          * @return Raw pointer to the element, or `nullptr` if not found.
          */
-        [[nodiscard]] virtual void* raw(helios::engine::core::data::EntityId id) = 0;
+        [[nodiscard]] virtual void* raw(helios::engine::ecs::types::EntityId id) = 0;
     };
 
 
     /**
      * @brief Sentinel value indicating an empty slot in the sparse array.
      *
-     * Aliased from `helios::engine::core::data::EntityTombstone`.
+     * Aliased from `helios::engine::ecs::types::EntityTombstone`.
      */
-    constexpr auto Tombstone = helios::engine::core::data::EntityTombstone;
+    constexpr auto Tombstone = helios::engine::ecs::types::EntityTombstone;
 
-    using namespace helios::engine::core::data;
+    using namespace helios::engine::ecs::types;
 
     /**
      * @brief A generic sparse set providing O(1) insertion, lookup, and removal.
@@ -367,7 +367,7 @@ export namespace helios::engine::ecs {
         /**
          * @copydoc SparseSetBase::raw
          */
-        [[nodiscard]] void* raw(const helios::engine::core::data::EntityId id) override {
+        [[nodiscard]] void* raw(const helios::engine::ecs::types::EntityId id) override {
 
             T* ptr = get(id);
             return static_cast<void*>(ptr);

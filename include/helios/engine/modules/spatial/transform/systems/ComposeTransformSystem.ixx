@@ -8,7 +8,7 @@ module;
 
 export module helios.engine.modules.spatial.transform.systems.ComposeTransformSystem;
 
-import helios.engine.ecs.System;
+
 
 import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
 import helios.engine.modules.spatial.transform.components.RotationStateComponent;
@@ -23,6 +23,8 @@ import helios.engine.mechanics.lifecycle.components.Active;
 
 import helios.math;
 
+import helios.engine.common.tags.SystemRole;
+
 export namespace helios::engine::modules::spatial::transform::systems {
 
     /**
@@ -34,20 +36,22 @@ export namespace helios::engine::modules::spatial::transform::systems {
      * It combines heading and spin rotations into a single rotation matrix
      * and updates the local translation.
      */
-    class ComposeTransformSystem : public helios::engine::ecs::System {
+    class ComposeTransformSystem {
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
 
         /**
          * @brief Updates TransformComponents based on state components.
          *
          * @param updateContext Context containing frame timing and game state.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             const float deltaTime = updateContext.deltaTime();
 
-            for (auto [entity, tc, tsc, active] : gameWorld_->view<
+            for (auto [entity, tc, tsc, active] : updateContext.view<
                 helios::engine::modules::spatial::transform::components::ComposeTransformComponent,
                 helios::engine::modules::spatial::transform::components::TranslationStateComponent,
                 helios::engine::mechanics::lifecycle::components::Active
@@ -55,7 +59,7 @@ export namespace helios::engine::modules::spatial::transform::systems {
                 tc->setLocalTranslation(tsc->translation());
             }
 
-            for (auto [entity, tc, rsc, active] : gameWorld_->view<
+            for (auto [entity, tc, rsc, active] : updateContext.view<
                 helios::engine::modules::spatial::transform::components::ComposeTransformComponent,
                 helios::engine::modules::spatial::transform::components::RotationStateComponent,
                 helios::engine::mechanics::lifecycle::components::Active

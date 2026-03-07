@@ -8,10 +8,10 @@ module;
 
 export module helios.engine.runtime.spawn.policy.amount.SpawnAmountByCallback;
 
-import helios.engine.core.data.GameObjectPoolId;
+import helios.engine.runtime.pooling.types.GameObjectPoolId;
 import helios.engine.runtime.spawn.policy.amount.SpawnAmountProvider;
 import helios.engine.runtime.spawn.policy.SpawnRuleState;
-import helios.engine.runtime.world.UpdateContext;
+import helios.engine.runtime.world;
 
 export namespace helios::engine::runtime::spawn::policy::amount {
 
@@ -42,8 +42,9 @@ export namespace helios::engine::runtime::spawn::policy::amount {
          * @brief Function signature for amount evaluation.
          */
         using AmountEvaluator = std::function<size_t(
-            const helios::engine::core::data::GameObjectPoolId,
+            const helios::engine::runtime::pooling::types::GameObjectPoolId,
             const SpawnRuleState&,
+            const helios::engine::runtime::world::GameWorld& gameWorld,
             const helios::engine::runtime::world::UpdateContext&
         )>;
 
@@ -63,20 +64,15 @@ export namespace helios::engine::runtime::spawn::policy::amount {
             : evaluator_(std::move(evaluator)) {}
 
         /**
-         * @brief Returns the spawn amount by invoking the callback.
-         *
-         * @param gameObjectPoolId The pool to spawn from.
-         * @param spawnRuleState The rule's runtime state.
-         * @param updateContext The current frame's context.
-         *
-         * @return The calculated spawn amount.
+         * @copydoc SpawnAmountProvider::getAmount
          */
         [[nodiscard]] size_t getAmount(
-            const helios::engine::core::data::GameObjectPoolId gameObjectPoolId,
+            const helios::engine::runtime::pooling::types::GameObjectPoolId gameObjectPoolId,
             const SpawnRuleState& spawnRuleState,
+            const helios::engine::runtime::world::GameWorld& gameWorld,
             const helios::engine::runtime::world::UpdateContext& updateContext
         ) const override {
-            return evaluator_(gameObjectPoolId, spawnRuleState, updateContext);
+            return evaluator_(gameObjectPoolId, spawnRuleState, gameWorld, updateContext);
         }
 
     };

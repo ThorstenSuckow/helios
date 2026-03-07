@@ -9,7 +9,7 @@ module;
 
 export module helios.engine.modules.ui.transform.systems.UiTransformSystem;
 
-import helios.engine.ecs.System;
+
 
 import helios.engine.modules.ui.transform.components.UiTransformComponent;
 import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
@@ -28,6 +28,8 @@ import helios.engine.mechanics.lifecycle.components.Active;
 import helios.math;
 
 import helios.engine.ecs.components.HierarchyComponent;
+
+import helios.engine.common.tags.SystemRole;
 
 export namespace helios::engine::modules::ui::transform::systems {
 
@@ -65,7 +67,7 @@ export namespace helios::engine::modules::ui::transform::systems {
      * @see Anchor
      * @see HierarchyComponent
      */
-    class UiTransformSystem : public helios::engine::ecs::System {
+    class UiTransformSystem {
 
         /**
          * @brief Adjusts position based on pivot point and element size.
@@ -106,6 +108,9 @@ export namespace helios::engine::modules::ui::transform::systems {
 
     public:
 
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+
+
         /**
          * @brief Computes and applies screen positions for all UI elements.
          *
@@ -120,9 +125,9 @@ export namespace helios::engine::modules::ui::transform::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
-            for (auto [entity, tc, tsc, ctc, mbc, snc, active] : gameWorld_->view<
+            for (auto [entity, tc, tsc, ctc, mbc, snc, active] : updateContext.view<
                 helios::engine::modules::ui::transform::components::UiTransformComponent,
                 helios::engine::modules::spatial::transform::components::TranslationStateComponent,
                 helios::engine::modules::spatial::transform::components::ComposeTransformComponent,
@@ -185,7 +190,7 @@ export namespace helios::engine::modules::ui::transform::systems {
                         }
 
                         // we rely on the parent entity so we do not have to wait for the SceneGraph sync
-                        if (auto parentGo = gameWorld_->find(hc->parent().value())) {
+                        if (auto parentGo = updateContext.find(hc->parent().value())) {
                             auto* pmaabbcc = parentGo->get<rendering::model::components::ModelAabbComponent>();
                             auto* pctc = parentGo->get<spatial::transform::components::ComposeTransformComponent>();
 

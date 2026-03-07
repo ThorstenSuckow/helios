@@ -14,7 +14,7 @@ import helios.engine.ecs.GameObject;
 import helios.engine.mechanics.combat.components.Aim2DComponent;
 import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
 
-import helios.engine.core.data.ComponentTypeId;
+import helios.engine.ecs.types.ComponentTypeId;
 
 export namespace helios::engine::mechanics::combat::components {
 

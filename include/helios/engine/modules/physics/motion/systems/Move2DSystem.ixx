@@ -12,7 +12,7 @@ module;
 export module helios.engine.modules.physics.motion.systems.Move2DSystem;
 
 
-import helios.engine.ecs.System;
+
 import helios.math;
 
 import helios.engine.runtime.world.GameWorld;
@@ -23,6 +23,8 @@ import helios.engine.modules.physics.motion.components.DirectionComponent;
 import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.mechanics.lifecycle.components.Active;
+
+import helios.engine.common.tags.SystemRole;
 
 export namespace helios::engine::modules::physics::motion::systems {
 
@@ -40,7 +42,7 @@ export namespace helios::engine::modules::physics::motion::systems {
      * - DirectionComponent (current movement direction)
      * - TranslationStateComponent (receives translation updates)
      */
-    class Move2DSystem : public helios::engine::ecs::System {
+    class Move2DSystem {
 
          private:
 
@@ -111,17 +113,10 @@ export namespace helios::engine::modules::physics::motion::systems {
             return (velocity + cmp->inheritedVelocity()) * deltaTime;
         }
 
+
     public:
 
-        /**
-         * @brief Called when the system is added to a GameWorld.
-         *
-         * @param gameWorld Pointer to the GameWorld this system belongs to.
-         */
-        void init(helios::engine::runtime::world::GameWorld& gameWorld) noexcept override {
-            System::init(gameWorld);
-        }
-
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
         /**
          * @brief Updates movement for all applicable entities.
          *
@@ -130,9 +125,9 @@ export namespace helios::engine::modules::physics::motion::systems {
          *
          * @param updateContext Context containing deltaTime and other frame data.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
-            for (auto [entity, m2d, dc, tsc, active] : gameWorld_->view<
+            for (auto [entity, m2d, dc, tsc, active] : updateContext.view<
                 helios::engine::modules::physics::motion::components::Move2DComponent,
                 helios::engine::modules::physics::motion::components::DirectionComponent,
                 helios::engine::modules::spatial::transform::components::TranslationStateComponent,

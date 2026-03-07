@@ -15,7 +15,7 @@ module;
 
 export module helios.engine.modules.physics.collision.systems.GridCollisionDetectionSystem;
 
-import helios.engine.ecs.System;
+
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.GameWorld;
@@ -44,6 +44,8 @@ using namespace helios::engine::modules::physics::collision::events;
 using namespace helios::engine::mechanics::lifecycle::components;
 
 #define HELIOS_LOG_SCOPE "helios::engine::modules::physics::systems::GridCollisionDetectionSystem"
+import helios.engine.common.tags.SystemRole;
+
 export namespace helios::engine::modules::physics::collision::systems {
 
     /**
@@ -89,7 +91,7 @@ export namespace helios::engine::modules::physics::collision::systems {
      *
      * @see [Eri05, Chapter 7]
      */
-    class GridCollisionDetectionSystem : public helios::engine::ecs::System {
+    class GridCollisionDetectionSystem {
 
         /**
          * @brief Helper-struct representing the properties and interaction state of a collision
@@ -397,6 +399,8 @@ export namespace helios::engine::modules::physics::collision::systems {
 
     public:
 
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+
         /**
          * @brief Constructs a GridCollisionDetectionSystem with specified bounds and cell size.
          *
@@ -433,11 +437,11 @@ export namespace helios::engine::modules::physics::collision::systems {
          *
          * @param updateContext The update context providing access to GameWorld and event queue.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             prepareCollisionDetection();
 
-            for (auto [entity, cc, csc, acc, active] : gameWorld_->view<
+            for (auto [entity, cc, csc, acc, active] : updateContext.view<
                 CollisionComponent,
                 CollisionStateComponent,
                 AabbColliderComponent,

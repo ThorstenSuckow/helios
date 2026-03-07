@@ -8,9 +8,8 @@ The spawn system consists of several layers working together:
 
 - **SpawnScheduler:** Evaluates rules and determines when spawning should occur
 - **SpawnProfile:** Defines how entities are spawned (pool, placer, initializer)
-- **SpawnManager:** Processes spawn/despawn commands via pools
-- **Commands & Dispatchers:** Route commands through the command pipeline
-- **SpawnCommandHandler:** Interface for managers that process spawn commands
+- **SpawnManager:** Processes spawn/despawn commands (registered handler)
+- **Commands:** Encapsulate spawn operations for deferred execution
 - **SpawnSystemFactory:** Fluent builder for ID-centric spawn configuration
 
 ```
@@ -67,7 +66,7 @@ The spawn system consists of several layers working together:
 A `SpawnProfile` bundles together everything needed to spawn entities of a particular type:
 
 ```cpp
-import helios.engine.runtime.spawn.SpawnProfile;
+import helios.engine.runtime.spawn.types.SpawnProfile;
 import helios.engine.runtime.spawn.behavior.placements.RandomSpawnPlacer;
 import helios.engine.runtime.spawn.behavior.initializers.RandomDirectionInitializer;
 
@@ -195,7 +194,8 @@ Determines **how many** entities to spawn:
 auto dynamicAmount = std::make_unique<SpawnAmountByCallback>(
     [](const GameObjectPoolId& poolId, const SpawnRuleState& state,
        const UpdateContext& ctx) -> size_t {
-        return ctx.gameWorld().difficultyLevel() + 1;
+        // Access session or resources via ctx
+        return ctx.session().state<DifficultyLevel>() + 1;
     }
 );
 ```
@@ -266,20 +266,6 @@ Spawn operations are represented as commands for deferred execution:
 | `DespawnCommand` | Request to return an entity to its pool |
 | `ScheduledSpawnPlanCommand` | Execute a scheduled spawn plan |
 
-### Dispatchers
-
-Commands are routed to managers via typed dispatchers:
-
-```cpp
-import helios.engine.runtime.spawn.dispatcher.SpawnCommandDispatcher;
-import helios.engine.runtime.spawn.dispatcher.DespawnCommandDispatcher;
-import helios.engine.runtime.spawn.dispatcher.ScheduledSpawnPlanCommandDispatcher;
-
-commandBuffer.addDispatcher<SpawnCommandDispatcher>();
-commandBuffer.addDispatcher<DespawnCommandDispatcher>();
-commandBuffer.addDispatcher<ScheduledSpawnPlanCommandDispatcher>();
-```
-
 ### SpawnManager
 
 The `SpawnManager` processes spawn/despawn commands:
@@ -287,14 +273,11 @@ The `SpawnManager` processes spawn/despawn commands:
 ```cpp
 import helios.engine.runtime.spawn.SpawnManager;
 
-auto spawnManager = std::make_unique<SpawnManager>();
+auto& spawnManager = gameWorld.registerManager<SpawnManager>();
 
 // Register profiles
-spawnManager->addSpawnProfile(enemyProfileId, std::move(enemyProfile));
-spawnManager->addSpawnProfile(bulletProfileId, std::move(bulletProfile));
-
-// Add to GameWorld
-gameWorld.addManager(std::move(spawnManager));
+spawnManager.addSpawnProfile(enemyProfileId, std::move(enemyProfile));
+spawnManager.addSpawnProfile(bulletProfileId, std::move(bulletProfile));
 ```
 
 ## SpawnSystemFactory (Builder)
@@ -476,8 +459,8 @@ For cases where the builder is not suitable, the spawn system can be configured 
 
 ```cpp
 // 1. Register managers
-auto& poolManager  = gameWorld.addManager<GameObjectPoolManager>();
-auto& spawnManager = gameWorld.addManager<SpawnManager>();
+auto& poolManager  = gameWorld.registerManager<GameObjectPoolManager>();
+auto& spawnManager = gameWorld.registerManager<SpawnManager>();
 
 // 2. Configure pool
 poolManager.addPoolConfig(std::make_unique<GameObjectPoolConfig>(
@@ -501,12 +484,7 @@ scheduler->addRule(enemyProfileId, std::make_unique<SpawnRule>(
 ));
 spawnManager.addScheduler(std::move(scheduler));
 
-// 5. Register dispatchers (always required)
-commandBuffer.addDispatcher<ScheduledSpawnPlanCommandDispatcher>();
-commandBuffer.addDispatcher<SpawnCommandDispatcher>();
-commandBuffer.addDispatcher<DespawnCommandDispatcher>();
-
-// 6. Add spawn system to game loop
+// 5. Add spawn system to game loop
 gameLoop.phase(PhaseType::Pre)
     .addPass<GameState>(GameState::Running)
     .addSystem<GameObjectSpawnSystem>(spawnManager);
@@ -526,7 +504,7 @@ void fire(const UpdateContext& ctx, const vec3f& position, const vec3f& directio
         .velocity = direction * bulletSpeed_
     };
     
-    ctx.commandBuffer().add<SpawnCommand>(bulletProfileId, spawnCtx, 1);
+    ctx.queueCommand<SpawnCommand>(bulletProfileId, spawnCtx, 1);
 }
 ```
 
@@ -546,7 +524,7 @@ To return entities to their pool, use `DespawnCommand`:
 
 ```cpp
 // When entity should be removed (e.g., out of bounds, destroyed)
-ctx.commandBuffer().add<DespawnCommand>(entity->guid(), profileId);
+ctx.queueCommand<DespawnCommand>(entity->guid(), profileId);
 ```
 
 The `LevelBoundsBehaviorComponent` with `BoundsBehavior::Despawn` handles this automatically for entities leaving the level bounds.
@@ -559,8 +537,6 @@ helios.engine.runtime.spawn/
 ├── SpawnProfile.ixx               # Profile configuration
 ├── SpawnContext.ixx               # Context for spawn operations
 ├── EmitterContext.ixx             # Emitter state for projectiles
-├── SpawnCommandHandler.ixx        # Interface for command handlers
-├── SpawnCommandHandlerRegistry.ixx # Registry mapping profiles to handlers
 ├── behavior/
 │   ├── SpawnPlacer.ixx            # Placement interface
 │   ├── SpawnInitializer.ixx       # Initialization interface
@@ -594,7 +570,6 @@ helios.engine.runtime.spawn/
 │   ├── SpawnPlan.ixx              # Planned spawn data
 │   └── ScheduledSpawnPlan.ixx     # Plan with profile ID
 ├── commands/                      # Spawn/Despawn commands
-├── dispatcher/                    # Command dispatchers
 └── events/                        # Frame events
 
 helios.engine.builder.spawnSystem/

@@ -8,7 +8,7 @@ module;
 
 export module helios.engine.mechanics.combat.systems.ProjectileSpawnSystem;
 
-import helios.engine.ecs.System;
+
 
 import helios.engine.state.Bindings;
 import helios.engine.runtime.messaging.command.EngineCommandBuffer;
@@ -18,15 +18,17 @@ import helios.engine.mechanics.combat.components.ShootComponent;
 import helios.engine.mechanics.combat.components.Aim2DComponent;
 import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
 import helios.engine.runtime.spawn.commands.SpawnCommand;
-import helios.engine.runtime.spawn.SpawnContext;
-import helios.engine.runtime.spawn.EmitterContext;
-import helios.engine.core.data.SpawnProfileId;
+import helios.engine.runtime.spawn.types.SpawnContext;
+import helios.engine.runtime.spawn.types.EmitterContext;
+import helios.engine.runtime.spawn.types.SpawnProfileId;
 
 import helios.math;
 
 import helios.engine.mechanics.lifecycle.components.Active;
 
+import helios.engine.common.tags.SystemRole;
 
+using namespace helios::engine::runtime::spawn::types;
 export namespace helios::engine::mechanics::combat::systems {
 
     /**
@@ -68,7 +70,7 @@ export namespace helios::engine::mechanics::combat::systems {
      * @see SpawnCommand
      * @see EmitterContext
      */
-    class ProjectileSpawnSystem : public helios::engine::ecs::System {
+    class ProjectileSpawnSystem {
 
         /**
          * @brief The spawn profile ID used for projectile creation.
@@ -76,10 +78,12 @@ export namespace helios::engine::mechanics::combat::systems {
          * References a SpawnProfile in the spawn system that defines how
          * projectiles are placed and initialized.
          */
-        const helios::engine::core::data::SpawnProfileId spawnProfileId_;
+        const helios::engine::runtime::spawn::types::SpawnProfileId spawnProfileId_;
 
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
 
         /**
          * @brief Constructs a ProjectileSpawnSystem with the specified spawn profile.
@@ -87,7 +91,7 @@ export namespace helios::engine::mechanics::combat::systems {
          * @param spawnProfileId The ID of the spawn profile to use for projectiles.
          */
         explicit ProjectileSpawnSystem(
-            const helios::engine::core::data::SpawnProfileId& spawnProfileId
+            const helios::engine::runtime::spawn::types::SpawnProfileId& spawnProfileId
         ) :
             spawnProfileId_(spawnProfileId)
         {}
@@ -107,9 +111,9 @@ export namespace helios::engine::mechanics::combat::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
-            for (auto [entity, tsc, ac, sc, active] : gameWorld_->view<
+            for (auto [entity, tsc, ac, sc, active] : updateContext.view<
                 helios::engine::modules::spatial::transform::components::TranslationStateComponent,
                 helios::engine::mechanics::combat::components::Aim2DComponent,
                 helios::engine::mechanics::combat::components::ShootComponent,
@@ -151,12 +155,12 @@ export namespace helios::engine::mechanics::combat::systems {
                 assert(aimDirection.isNormalized() && "Unexpected aimDirection.length()");
 
                 for (unsigned int i = 0; i < amount; i++) {
-                    updateContext.commandBuffer().add<
+                    updateContext.queueCommand<
                         helios::engine::runtime::spawn::commands::SpawnCommand
                     >(
                         spawnProfileId_,
-                        helios::engine::runtime::spawn::SpawnContext{
-                            helios::engine::runtime::spawn::EmitterContext{
+                        SpawnContext{
+                            EmitterContext{
                                 tsc->translation(),
                                 sc->sourceVelocity() + (aimDirection * sc->projectileSpeed()),
                                 entity.entityHandle()

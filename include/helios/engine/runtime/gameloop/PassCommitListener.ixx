@@ -9,7 +9,10 @@ export module helios.engine.runtime.gameloop.PassCommitListener;
 
 import helios.engine.runtime.gameloop.CommitPoint;
 
+import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
+
+using namespace helios::engine::runtime::world;
 
 export namespace helios::engine::runtime::gameloop {
 
@@ -81,6 +84,7 @@ export namespace helios::engine::runtime::gameloop {
          * 3. **FlushManagers** - Process requests after commands have been executed.
          *
          * @param commitPoint The flags specifying which synchronization actions to perform.
+         * @param gameWorld The game world for which the pass occurred.
          * @param updateContext The current frame's update context.
          *
          * @note This method is marked `noexcept` as it is called during the game loop
@@ -91,7 +95,8 @@ export namespace helios::engine::runtime::gameloop {
          */
         virtual void onPassCommit(
             CommitPoint commitPoint,
-            helios::engine::runtime::world::UpdateContext& updateContext) noexcept = 0;
+            GameWorld& gameWorld,
+            UpdateContext& updateContext) noexcept = 0;
     };
 
 

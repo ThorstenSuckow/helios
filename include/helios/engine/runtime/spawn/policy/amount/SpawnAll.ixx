@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.runtime.spawn.policy.amount.SpawnAll;
 
-import helios.engine.core.data.GameObjectPoolId;
+import helios.engine.runtime.pooling.types.GameObjectPoolId;
 
 import helios.engine.runtime.spawn.policy.amount.SpawnAmountProvider;
 import helios.engine.runtime.spawn.policy.SpawnRuleState;
@@ -34,21 +34,19 @@ export namespace helios::engine::runtime::spawn::policy::amount {
     public:
 
         /**
-         * @brief Returns the number of inactive objects in the pool.
-         *
-         * @param gameObjectPoolId The pool to query.
-         * @param spawnRuleState Current state of the spawn rule.
-         * @param updateContext Context providing access to GameWorld and managers.
-         *
-         * @return Number of inactive (available) objects in the pool.
+         * @copydoc SpawnAmountProvider::getAmount
          */
         [[nodiscard]] size_t getAmount(
-            const helios::engine::core::data::GameObjectPoolId gameObjectPoolId,
+            const helios::engine::runtime::pooling::types::GameObjectPoolId gameObjectPoolId,
             const SpawnRuleState& spawnRuleState,
+            const helios::engine::runtime::world::GameWorld& gameWorld,
             const helios::engine::runtime::world::UpdateContext& updateContext
         ) const override {
-            const auto& manager = updateContext.resourceRegistry().resource<helios::engine::runtime::pooling::GameObjectPoolManager>();
-            return manager.poolSnapshot(gameObjectPoolId).inactiveCount;
+            const auto* manager = gameWorld.tryManager<helios::engine::runtime::pooling::GameObjectPoolManager>();
+            if (!manager) {
+                return 0;
+            }
+            return manager->poolSnapshot(gameObjectPoolId).inactiveCount;
         }
 
     };

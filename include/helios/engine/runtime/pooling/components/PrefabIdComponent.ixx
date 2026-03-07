@@ -7,10 +7,10 @@ module;
 export module helios.engine.runtime.pooling.components.PrefabIdComponent;
 
 
-import helios.engine.core.data.PrefabId;
+import helios.engine.common.types.PrefabId;
 import helios.core.types;
 
-using namespace helios::engine::core::data;
+using namespace helios::engine::common::types;
 
 export namespace helios::engine::runtime::pooling::components {
 

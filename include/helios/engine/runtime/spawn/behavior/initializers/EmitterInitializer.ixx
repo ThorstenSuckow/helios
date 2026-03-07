@@ -9,13 +9,15 @@ module;
 export module helios.engine.runtime.spawn.behavior.initializers.EmitterInitializer;
 
 import helios.engine.runtime.spawn.behavior.SpawnInitializer;
-import helios.engine.runtime.spawn.SpawnPlanCursor;
-import helios.engine.runtime.spawn.SpawnContext;
+import helios.engine.runtime.spawn.types.SpawnPlanCursor;
+import helios.engine.runtime.spawn.types.SpawnContext;
 import helios.engine.ecs.GameObject;
 import helios.engine.modules.physics.motion.components.Move2DComponent;
 import helios.engine.modules.physics.motion.components.DirectionComponent;
 import helios.engine.modules.physics.motion.components.SteeringComponent;
 
+
+using namespace helios::engine::runtime::spawn::types;
 export namespace helios::engine::runtime::spawn::behavior::initializers {
 
     /**

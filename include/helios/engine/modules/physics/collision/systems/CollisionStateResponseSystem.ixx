@@ -17,7 +17,7 @@ export module helios.engine.modules.physics.collision.systems.CollisionStateResp
 
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
-import helios.engine.ecs.System;
+
 
 import helios.engine.state.Bindings;
 import helios.engine.runtime.messaging.command.EngineCommandBuffer;
@@ -38,6 +38,8 @@ using namespace helios::engine::modules::physics::collision::types;
 using namespace helios::engine::runtime::spawn::commands;
 
 
+import helios.engine.common.tags.SystemRole;
+
 export namespace helios::engine::modules::physics::collision::systems {
 
     /**
@@ -56,9 +58,11 @@ export namespace helios::engine::modules::physics::collision::systems {
      *
      * This system should run after collision detection but before collision state clearing.
      */
-    class CollisionStateResponseSystem : public helios::engine::ecs::System {
+    class CollisionStateResponseSystem {
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
 
         /**
          * @brief Processes collision states and issues response commands.
@@ -69,9 +73,9 @@ export namespace helios::engine::modules::physics::collision::systems {
          *
          * @param updateContext Context providing access to the command buffer and world.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
-            for (auto [entity, csc, sbp, active] : gameWorld_->view<
+            for (auto [entity, csc, sbp, active] : updateContext.view<
                 CollisionStateComponent,
                 helios::engine::mechanics::spawn::components::SpawnedByProfileComponent,
                 helios::engine::mechanics::lifecycle::components::Active
@@ -102,7 +106,7 @@ export namespace helios::engine::modules::physics::collision::systems {
 
 
                 if (hasFlag(collisionBehavior, CollisionBehavior::Despawn)) {
-                    updateContext.commandBuffer().add<DespawnCommand>(
+                    updateContext.queueCommand<DespawnCommand>(
                         entity.entityHandle(), sbp->spawnProfileId());
                 }
             }

@@ -9,7 +9,7 @@ module;
 export module helios.engine.mechanics.bounds.systems.LevelBoundsBehaviorSystem;
 
 
-import helios.engine.ecs.System;
+
 import helios.math;
 
 import helios.engine.state.Bindings;
@@ -43,6 +43,8 @@ import helios.engine.mechanics.spawn.components.SpawnedByProfileComponent;
 import helios.engine.mechanics.lifecycle.components.Active;
 
 
+import helios.engine.common.tags.SystemRole;
+
 export namespace helios::engine::mechanics::bounds::systems {
 
     /**
@@ -53,7 +55,7 @@ export namespace helios::engine::mechanics::bounds::systems {
      * When an entity leaves the bounds, it applies bounce behavior based on the
      * LevelBoundsBehaviorComponent's restitution coefficient.
      */
-    class LevelBoundsBehaviorSystem : public helios::engine::ecs::System {
+    class LevelBoundsBehaviorSystem {
 
         /**
          * @brief Result of a bounce calculation against level bounds.
@@ -71,7 +73,10 @@ export namespace helios::engine::mechanics::bounds::systems {
             helios::math::vec3f direction;
         };
 
+
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
 
         /**
          * @brief Updates all entities that may have left level bounds.
@@ -82,11 +87,11 @@ export namespace helios::engine::mechanics::bounds::systems {
          *
          * @param updateContext Context containing deltaTime and other frame data.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             using namespace helios::engine::modules::physics::collision::types;
 
-            for (auto [entity, m2d, ab, sc, dc, tsc, bc, bbc, active] : gameWorld_->view<
+            for (auto [entity, m2d, ab, sc, dc, tsc, bc, bbc, active] : updateContext.view<
                 helios::engine::modules::physics::motion::components::Move2DComponent,
                 helios::engine::modules::rendering::model::components::ModelAabbComponent,
                 helios::engine::modules::scene::components::SceneNodeComponent,
@@ -99,7 +104,7 @@ export namespace helios::engine::mechanics::bounds::systems {
 
 
                 auto& objectBounds = bc->bounds();
-                auto levelBounds  = gameWorld_->level()->bounds();
+                auto levelBounds  = updateContext.level()->bounds();
 
                 if (!levelBounds.contains(objectBounds)) {
 
@@ -128,9 +133,7 @@ export namespace helios::engine::mechanics::bounds::systems {
                         auto* sbp = entity.get<helios::engine::mechanics::spawn::components::SpawnedByProfileComponent>();
                         assert(sbp && "Unexpected missing SpawnProfile");
 
-                        updateContext.resourceRegistry().resource<
-                            helios::engine::runtime::messaging::command::EngineCommandBuffer
-                        >().add<helios::engine::runtime::spawn::commands::DespawnCommand>(
+                        updateContext.queueCommand<helios::engine::runtime::spawn::commands::DespawnCommand>(
                             entity.entityHandle(), sbp->spawnProfileId()
                         );
 

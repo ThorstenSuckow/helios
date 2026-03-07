@@ -1,10 +1,10 @@
-\subsection{Übersicht}
+
 
 Mit der Beschreibung in dem vorherigen Abschnitt haben wir einige relevante Punkte der Entwicklung bereits angeschnitten.
 
 Im Folgenden geben wir einen Überblick über die Architektur sowie der Kernkonzepte, die in helios zur Konfiguration, Kommunikation und Ressourcenverwaltung der in der GameWorld aktiven GameObjects und Systeme implementiert wurden.
 
-\subection{Strukturierung der engine-Schicht}
+\section{Strukturierung der engine-Schicht}
 
 Die Strukturierung der engine Schicht folgt der im ersten Dokument beschriebenen Unterteilung in Module und folgt wie in dem dem Dokument weitestgehend einer ``by-feature, by-layer``-Strukturierung und ist in Abbildung~\ref{fig:engine_struktur} dargestellt.
 
@@ -18,7 +18,6 @@ Die Strukturierung der engine Schicht folgt der im ersten Dokument beschriebenen
         .2 mechanics/.
         .2 modules/.
         .2 runtime/.
-        .2 state/.
         .2 tooling/.
     }
     \caption{Struktur des engine-Moduls von helios.}
@@ -34,5 +33,31 @@ Hierbei gestaltet sich die Unterteilung in Module wie folgt:
     \item \texttt{core/}: Stellt fundamentale Datentypen und -Objekte zur Verfügung, die für den Betrieb der engine benötigt werden, darunter bspw. \texttt{Units}, die das metrische System für die helios bereitstellt.
     \item \texttt{ecs/}: Implementiert die Kernkomponenten der ECS-Architektur, darunter den \texttt{EntityManager}, die \texttt{GameObject}-Fassade und die \texttt{SparseSet}-Datenstruktur.
     \item \texttt{mechanics/}: Implementiert Komponenten, Systeme, Datentypen und Nachrichten-Objekte für verschiedene Spielmechaniken, beispielsweise für Eingabeverarbeitung, Gesundheits- und Schadenszustände sowie Punktesysteme.
-    \item
+    \item \texttt{modules/}: Ähnlich wie mechanics stellt dieses Modul Spielmechaniken bereit.
+    \item Wir sehen hier aber eine Unterschediung in zu Mechanics bei den Domänen, die von diesen Modulen abgedeckt wird, darunter \texttt{ai}, \texttt{physics} und \texttt{rendering}, also Features, die eher nah am Kern der engine angelagert sind und grundlegende Unterstützung für die Entwicklung von Spielen bereitstellen.
+    \item \texttt{runtime/}: Stellt das Modul bereit, dass laufzeitnahe Systeme enthält, wie \texttt{messaging}, \texttt{gameloop} und \texttt{world}.
+    Die Module enthalten neben Datentrukturen auch Manager-Klassen zur Verarbeitung von Klassen.
+    DIe Implementierung ist generisch gehalten, darauf aufbauende Funktionalitäten sind in \texttt{mechanics} und \texttt{modules} ausgelagert.
+    \item \texttt{tooling/}: Vorgesehen für das Tooling-Layer der Engine, enthält momentan Hilfsklassen zur Messung der FPS, die als \texttt{FrameStats} pro Frame gespeichert und u.a. für die weitere Verarbeitung innderhalb eines Frames den beteiligten Systemen zur Verfügung gestellt werden.
 \end{itemize}
+
+Die Strukturierung folgt an dieser Stelle einem \textit{by-layer}-Konzept.
+Damit ergibt sich die Schichtenarchitektur für das engine-Modul, die in Abbildung~\ref{fig:engine_architektur} dargestellt ist.
+
+\subsection{Namenskonvention für tiefergeschachtelte Schichten}
+Innerhalb der Module nutzt helios zur einfachen Identifizierung der Schichten und einer technischen Zuordnung der darin enthaltenen Fachobjekte die folgenden Namen:
+
+\begin{itemize}
+    \itemsep0.5em
+    \item \texttt{commands}: Steuerkommandos, die von verschiedenen Systemen innerhalb eines Frames von Systemen und Managern generiert werden können.Die Verarbeitung von Commands wird über \texttt{CommandHandler} realisiert, die nur als Konzept existieren und auf die wir unter dem Abschnitt Kernkonzepte näher eingehen werden.
+    \item \texttt{components}: Fachobjekte, die den Zustand von GameObjects repräsentieren und von der engine verarbeitet und modifiziert werden.
+    \item \texttt{events}: Nachrichten, die einzelne Systeme in einem Frame generieren können, und die von nachgelagerten Systemen oder Frames verarbeitet werden können. Im Unterschied zu den Steuerkommandos kommt ihnen keine deterministische Rolle zu, sie existieren i.d.R. als Informationsträger, die eine bestimmte Reaktion auslösen können. Wird die Reaktion nciht ausgelöst, kann das Spiel trotzdem weiterlaufen
+    \item \texttt{systems}: Systeme, die das Verhalten von GameObjects modifzieren, indem sie Komponenten lesen und schreiben, sowie Commands und Events generieren.
+    \item \texttt{types}: Datentypen wie Kontextobjekte zum Transport von Informationen und Zuständen, sowie typisierte Ids zur Identifizierung von Daten zur Laufzeit.
+\end{itemize}
+
+Während \texttt{types}, \texttt{events} und \texttt{commands} aufgrund ihrer Semantik auch in anderen Schichten des Frameworks vorkommen, finden sich \texttt{commands} und \texttt{systems} überwiegend in den Modulen, die Spielmechaniken umsetzen, also \texttt{mechanics} und \texttt{modules}.
+Ihre Rolle ist stark mit dem in Helios implementierten ecs-System verbunden, der Zugriff auf diese Objekte findet überweigend durch die in \texttt{runtime} definierten Laufzeitsysteme statt.
+
+
+

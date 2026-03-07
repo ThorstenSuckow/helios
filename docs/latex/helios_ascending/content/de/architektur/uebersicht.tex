@@ -11,7 +11,7 @@ Die Strukturierung der engine Schicht folgt der im ersten Dokument beschriebenen
 \begin{figure}[htbp]
     \setlength{\DTbaselineskip}{18pt}
     \dirtree{%
-        .1 ./engine
+        .1 ./engine.
         .2 builder/.
         .2 common/.
         .2 ecs/.
@@ -50,11 +50,34 @@ Innerhalb der Module nutzt helios zur einfachen Identifizierung der Schichten un
 \begin{itemize}
     \itemsep0.5em
     \item \texttt{commands}: Steuerkommandos, die von verschiedenen Systemen innerhalb eines Frames von Systemen und Managern generiert werden können.Die Verarbeitung von Commands wird über \texttt{CommandHandler} realisiert, die nur als Konzept existieren und auf die wir unter dem Abschnitt Kernkonzepte näher eingehen werden.
-    \item \texttt{components}: Fachobjekte, die den Zustand von GameObjects repräsentieren und von der engine verarbeitet und modifiziert werden.
+    \item \texttt{components}: Fachobjekte, die den Zustand von GameObjects repräsentieren und von der engine verarbeitet und modifiziert werden. In der Regel handelt es sich um reine Datenstrukturen, die Invarianten (bspw. ein \textit{Clamping} auf einen gültigen Wertebereich) enthalten können, aber keine Logik, die über Getter und Setter hinausgeht.\footnote{
+    Damit grenzt sich das Komponentensystem von Unity ab, das seine Komponenten idiomatisch als reine Informationsträger in \texttt{structs} vorsieht~\cite{UnityComponentConcepts}.
+    }
     \item \texttt{events}: Nachrichten, die einzelne Systeme in einem Frame generieren können, und die von nachgelagerten Systemen oder Frames verarbeitet werden können. Im Unterschied zu den Steuerkommandos kommt ihnen keine deterministische Rolle zu, sie existieren i.d.R. als Informationsträger, die eine bestimmte Reaktion auslösen können. Wird die Reaktion nciht ausgelöst, kann das Spiel trotzdem weiterlaufen
     \item \texttt{systems}: Systeme, die das Verhalten von GameObjects modifzieren, indem sie Komponenten lesen und schreiben, sowie Commands und Events generieren.
     \item \texttt{types}: Datentypen wie Kontextobjekte zum Transport von Informationen und Zuständen, sowie typisierte Ids zur Identifizierung von Daten zur Laufzeit.
 \end{itemize}
+
+\begin{figure}[htbp]
+    \setlength{\DTbaselineskip}{18pt}
+        \dirtree{%
+          .1 ./mechanics/health/.
+          .2 components/.
+          .3 HealthComponent.ixx.
+          .2 events/.
+          .3 HealthChangedEvent.ixx.
+          .3 HealthDepletedEvent.ixx.
+          .2 systems/.
+          .3 HealthUpdateClearSystem.ixx.
+          .2 types/.
+          .3 HealthChangeContext.hpp.
+          .3 HealthDepletedBehavior.hpp.
+        }
+    \caption{Veranschaulichung der Namenskonventionen in helios anhand der \textit{health}-Spielmechanik.
+    Die \texttt{HealthComponent} beinhaltet Eigenschaften wie einen skalaren HP-Wert und Methoden. Invarianten werden dort über Methoden  Beispiel der Stukturierung Struktur des engine-Moduls von helios.}
+    \label{fig:engine_struktur}
+\end{figure}
+
 
 Während \texttt{types}, \texttt{events} und \texttt{commands} aufgrund ihrer Semantik auch in anderen Schichten des Frameworks vorkommen, finden sich \texttt{commands} und \texttt{systems} überwiegend in den Modulen, die Spielmechaniken umsetzen, also \texttt{mechanics} und \texttt{modules}.
 Ihre Rolle ist stark mit dem in Helios implementierten ecs-System verbunden, der Zugriff auf diese Objekte findet überweigend durch die in \texttt{runtime} definierten Laufzeitsysteme statt.

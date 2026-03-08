@@ -46,6 +46,18 @@ Ein Codebeispiel, der dies illustriert, findet sich in Listing~\ref{lst:gameobje
     }
 \end{lstlisting}
 
+Das Speicherlayout derselben Daten in dem ECS-System ist in Abbildung~\ref{fig:ecs_cache_friendly} dargestellt.
+Der Entity Manager verwaltet hierbei eine Vektor mit zeigern auf die SpareSets, die Compile-Time typisiert sind: Fpr jeden Komponenten gibt es also ein Sparse Set. In dem Vektor findet die Indexierung der SParse Sets nach der Typ-Id der Komponenten statt, die mit einem custom TyoeIndex realisiert sind.\footnote{
+    Die TypeIndex Klasse in Helios erlaubt ein mapping von Typen zu einem laufenden Index. Zur Vermeodung von Dubletten werden die TypeIndex-Klassen typisiert und mit eine Tag versehen, damit die Indexierung pro Tag erfolgt.
+}.
+Da Komponenten eines Typs immer in einem Sparse Set gespeichert werden, ist eine dichte Anordnung der Komponenten garantiert. Der Zugriff auf einen SParse Set mit dem Typ $T$ erfolgt dann in $O(1)$ über
+
+\begin{verbatim}
+    auto* sparseSet<T> = EntityManager::getSparseSet<T>()
+\end{verbatim}
+
+\noindent
+wobei der übergebene Template-Argument $T$ uz dem TypeIndex mit dem Tag \texttt{helios\_engine\_core_data_ComponentTypes}
 
 Komponenten kommt also nicht nur eine fachlicher sauberer Entwurf zu, sondern sollte auch so entworfen werden, dass sie im Speicher möglichst sinnvoll angelegt werden können (Pasdding)
 

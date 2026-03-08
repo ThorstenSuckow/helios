@@ -34,9 +34,9 @@ export namespace helios::engine::runtime::world::types {
         /**
          * @brief Tag type for the TypeIndexer domain.
          */
-        struct helios_engine_core_data_ResourceTypes{};
+        struct helios_engine_common_tag_ResourceTypes{};
 
-        using ResourceType = helios_engine_core_data_ResourceTypes;
+        using ResourceType = helios_engine_common_tag_ResourceTypes;
 
         /**
          * @brief The underlying ID value.

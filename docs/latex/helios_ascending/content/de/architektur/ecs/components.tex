@@ -1,0 +1,24 @@
+\subsection{Components - Komponenten als austauschbare Informationsträger}
+
+
+Komponenten in helios folgen in helios dem Ansatz, dass keine Basisklasse für Komponenten entsteht.
+Stattdessen obliegt es dem Entwickler, idiomatische Implementierungen auf Basis von \texttt{structs} oder \texttt{classes} zu erstellen, die als reine Informationsträger fungieren.
+In den für das Projekt umgesetzten Komponenten werden Invarianten durch Getter und Setter sichergestellt, die beispielsweise einen Wertebereich für die Lebenspunkte eines GameObjects garantieren.
+Weitere Zustands-relevante Logik kann auf Wunsch in \textit{Hooks} untergebracht werden, die bei verschiedenen Zustandswehcseln der GameObjects bzw. Komponenten von der Engine aufgerufen werden.
+Dabei wird über Concepts zur Kompilierungszeit festgestellt, ob eine Komponente Unterstützung für solche Hooks bietet.
+Dabei werden folgende Hooks vorgesehen:
+
+\begin{itemize}
+    \itemsep0.5em
+    \item \texttt{onAcquire} /  \texttt{onRelease}: Methoden, die aufgerufen werden, sobald eine Komponente aus einem \textit{Pool} erstmalig oder erneut angefordert wird.
+    Diese Hooks werden verwendet, um den Zustand der Komponenten auf einen entpsrechenden - meist initialen Zustand - zuückzusetzen.
+    \item \texttt {onActivate} / \texttt{onDeactivate}: Methoden, die aufgerufen werden, wenn das besitzende GameObject aktiviert bzw. deaktiviert wird.
+    Die Semantik spiegelt die aktive Teilnahme eines GameObjects in der GameWorld wider -  Systeme, die zur Laufzeit über diese KOmponenten iterieren, suchen entsprechend nach einer \texttt{Active}-tag Komponente, die aktive GameObjects besitzen.
+    \item \texttt{enable} / \texttt{disable}: Komponenten können über diese Hooks von außen gezielt ektiviert oder deaktiviert werden, ubnabhängig von der Beteiligung des besitzenden GameObjects an der GameWorld.
+     Dies ermöglicht beispielsweise die temporäre Deaktivierung von Komponenten, die erst oder wieder nach einer bestimmten Zeit aufgeschaltet werden sollen (Teilnahme an der Kollisionsabfrage, AI-Verhalten), ohne SparseSet Operationen im HotPath für diese Komponenten zu nutzen. Eine zusätzliche Methode \texttt{isEnabled} wird als \texttt{constexpr} zur Kompilierungszeit bei den verwendeten Komponenten gesucht und liefert die gewünschte Information über den Zustand.
+    \item \texttt{onClone}: Wenn de Copy-Construktor für eine Komponente nicht gelöscht wurde, bedeutet das für helios, dass die Komponente kopiert werden darf, bspw. für Prefabs, die als Vorlage eine Vielzahl von Komponenten als Template besitzen.
+    Die \texttt{onClone}-Methode wird nach dem jedem Aufurf des Copy-Constructors auf der Kopie aufgerufen.
+\end{itemize}
+
+
+

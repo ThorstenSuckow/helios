@@ -2,6 +2,8 @@
 
 
 Komponenten in helios folgen in helios dem Ansatz, dass keine Basisklasse für Komponenten entsteht.
+Da das Verhalten ohnehin in Systemen implementiert ist, die nicht an bestimmte KOmponenten gebunden sind, sind für die Komponenten eh nicht sinnvoll.
+Dies ermöglicht die Laufzeiteffizientere Anageb der Vektor Typen bei den SoA-Implementierungen über Templates, da die Komponenten nicht von einer gemeinsamen Basisklasse erben müssen, um in einem SparseSet gespeichert zu werden.
 Stattdessen obliegt es dem Entwickler, idiomatische Implementierungen auf Basis von \texttt{structs} oder \texttt{classes} zu erstellen, die als reine Informationsträger fungieren.
 In den für das Projekt umgesetzten Komponenten werden Invarianten durch Getter und Setter sichergestellt, die beispielsweise einen Wertebereich für die Lebenspunkte eines GameObjects garantieren.
 Weitere Zustands-relevante Logik kann auf Wunsch in \textit{Hooks} untergebracht werden, die bei verschiedenen Zustandswehcseln der GameObjects bzw. Komponenten von der Engine aufgerufen werden.

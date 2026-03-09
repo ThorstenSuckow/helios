@@ -1,0 +1,45 @@
+\subsections{Systems - Steuerung des Verhaltens der beteiligten Komponenten}
+
+In einem Frame werden die - über die GameLoop registrierten Systeme - in einer ebstimmten Reihenfolge aufgerufen. Systeme iterieren hierbei nicht nur über einzelne Komponenten, sondern können , je anch Abhängigkeiten und verantwortlichekeiten, auch über KLompositionen von Komponenten iterieren, da bspw. eine Skalierungskomponente in unterschiedlichen KOntexten angewendet wird (UI, aktives NPC- oder Spielerobjekt).\\
+
+\noindent
+helios drückt hierbei eine Rolle als ``System`` nicht über Verwerbung wie foglt aus
+
+\begin{verbatim}
+   class DamageOnCollisionSystem : public System {}
+\end{verbatim}
+
+\noindent
+sondern wie in Listing~\ref{lst:system_inheritance}, sondern über die Verwendung von Tags, die über Concepts zur Kompilierungszeit überprüft werden.
+Damit geht die über Vererbung vermittelte Semantik verloren, soll aber auch zum Ausdruck bringen, dass die Rolle eines System nichts an einen bestimmten Typen gebunden ist, sowie das Paradigma der compoisiton over inheritance bekräftigen und die Entwickler ermutigen, schlanke, leichgewichtige Implementierungen zu bevorzihen..
+Die \texttt{EngineRoleTags} werden auch in anderen kernkonzepten von helios verwendet, wie den managern und den CommandHandlern.
+
+\begin{lstlisting}[style=c++style,
+    caption={Auszug aus dem Quellcode der beteiligten Klassen  und Konzepte zur Erstellung von Systemen in helios. Systeme dürfen beliebige KLassen sein, müssen aber eine update-Methode besitzen, die einen UpdateContext als Argument erhält. Zusätzlich wird die Rolle eines Systems wird über die Verwendung von Tags ausgedrückt, die über Concepts zur Kompilierungszeit überprüft werden.},
+    label=lst:system_inheritance]
+
+    template<class T>
+    concept IsSystemLike = requires(T& t, UpdateContext& updateContext) {
+        {t.update(updateContext) } -> std::same_as<void>;
+    } && HasTag<T, tags::SystemRole>;
+
+    class DamageOnCollisionSystem {
+        using EngineRoleTag = SystemRole;
+    }
+
+    template<typename T, typename... Args>
+    requires helios::engine::common::concepts::IsSystemLike<T>
+    Pass& addSystem(Args&&... args) {
+        systemRegistry_.template add<T>(
+            std::forward<Args>(args)...
+        );
+
+        return *this;
+    }
+
+\end{lstlisting}
+
+Ein \texttt{Pass}, der Teil der \texttt{GameLoop} ist, nutzt das Concept als gateKeeeping für die Registrierung von Systemen. Das Concept selber stekllt sichr, dass die übergebene Klasse die entsprechende update-Methode besitzt, und ruft das System an der entsprechnden Stelle in einem Frame-Ddurchlauf auf.
+
+\noindent
+Hierbei wird über die GameWorld ein View auf den KomponentenKonstellationen erstellt, und die impementieren letztendlich die Logik, die zur Aktualisierung der Kompoeneten und zur Erstellung von Nachrichten innerhalb eines Frames oder an Nachgelagerte Fremes führt.

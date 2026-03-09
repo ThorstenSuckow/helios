@@ -13,8 +13,6 @@ Eine eindeutige Identifizierung solch eines GameObjects, das im Grunde genommen 
 Die Verwaltunf und Neuerstellung der EntityHandles verwaltet die EntityRegistry, die von dem EntityManager die Anforderungen zur Erstelung bzw. Löschung von EntityIds mit der einer entsprechenden Versions-ID erhält.
 In einer \texttt{freeLIst} werden hierbei gelöschte EntityIds verwaltet - wird dort eine id gefunden, wird für den entsprechenden index on dem vector, die Versionsnumemr inkrementiert, ansonsten wird einfach ein neuer Eintrag in dem Version-Vektor hinzugefügt.\\
 
-\noindent
-Mit dem Refactoring hin zu dem ECS-basierten Ansatz ist die GameObject-Klasse aerhalten geblieben, und auch an der Semantik hat sich ncihts geändert. Alelrdings ist das GameObject eine fassage, die nur eine Kopie des EntityHandles besitzt sowie einen Pointer auf den EntityManager. Dies erlaubt es, über das leichtgewichtieg Game-Object einzelne Komponenten für die entsprechende EntiytHandle hinzuufügen, zu entfernen - sofern ein Afruf erfolgt - die onActivate / deactivate hooks zutriggern, auf die wir im nächsten Abschnitt kurz eingehen.
 
 \noindent
 Mit einem Wertebereich von $2^{32}$  und unter der Annahme, das alle 16 ms Sekunden eine neue Version für eine EntityId erzeigt werden muss, kann man ein entsprechendes Spiel $2^{32} * 0.016$ Sekunden lang spielen, bevor es zu einem Wertüberlauf kommt. Dies entspricht kanpp 795 Tage. Es ist also ausreichend Puffer vorhanden - wobei in diesem Zusammenhang ohnehin ein Pool verwendet werden sollte, um die ständige neuerstellung der KOmponenten zur Laufzeit zu verhinden - odere in Ausweichen auf \texttt{uint64\_t}, wobei sich die mögliche Spieldauer dann auf ca. 9 Milliarden Jahre erstreckt.

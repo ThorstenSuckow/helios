@@ -17,7 +17,9 @@ Die Grundlage dieses SoA-basierten Ansatzes wird gemeinhin als \textit{Entity Co
 Die Idee hinter ECS liegt in der Trennung von Daten und Verhalten und hat in der Spieleentwicklung prominente Vertreter, darunter das bereits erwähnte Unity Dots sowie die Open Source Projekte Bevy (Rust)~\cite{BevyProject}, EnTT~\cite{EnttProject} und Flecs~\cite{FlecsProject} (beides C++).
 ECS wird aber auch in anderen Domänen in performancekritischen Bereichen eingesetzt, wie  bei GPU beschleunigter, nebenläufiger  Batch-Simulation zum Training von KI-Agenten ~\cite{SRXB+23}
 
-Es ermöglichst ein typenloses Datenmanagement und spart durch den Verzicht auf (tiefe) Vererbungshierarchien VTable-lookups zur Laufzeit ein.
+helios setzt dabei auf ein Datenmanagement unter Verzicht auf (tiefe) Vererbungshierarchien, was sich günstig auf die Laufzeit auswirkt, da VTable-lookups eingespart werden.
+Die Umsettlung auf ECS-typische Datenstrukturen geschah dabei nicht aus der Anforderung heraus, die Berechnung tausender Objekte pro Frame-Update zu realisieren, sondern aus der Motivation, integrative Aspekte bei der Umsetzung solcher Datenstrukturen zu eruieren.
+Andere Engines, wie Godot, verzichten auf den ECS Ansatz: ``The vast majority of games do not need this and Godot provides handy helpers to do the job for most cases when you do.``~\cite{GodotNoEcs}
 
 
 \subsubsection{SparseSet als Datenhaltung in helios.ecs}

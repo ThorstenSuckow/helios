@@ -1,0 +1,39 @@
+\subsection{gameloop}
+
+Die GameLoopp in helios integriert die verschiedenen Systeme, die das Verhalten der spielspezifischen GameObjects steuern.
+Sue verfügt darüber hinaus über die Möglichkeit, die Spielzustände in verschiedene Phasen zu unterteilen.
+Die Phasen selber sind noch einmal untergliedert in beliebig viele Passes.
+
+Jeder Pass kann einem bestimmten Spielzustand zugeordnet werden, so dass keine unnötoge Rechnezeit oder unebabsichtigte Aktualisierungen stattfinden, wenn das Spiel gerade pausiert ist.
+Ein paass kann mit einem CommitPoint von einem nächsten Pass abgekoppelt werden, was es der engine ermöglicht, Nachrichtenbuffer zu swappen und eventd  den nachgelagerten passes zur verfürgung zu stellen.
+Die Unterteilung der Gameloop in die Phasen Pre, Main und Post ist dabei eher erher konzeptionell und ermöglicht eine semantische Gruppierung der verschiedenen Systeme nach ihrer Grundfunktionalität, wie State-Verarbeitung, Physik und Kollisionsystem, Aktualisierung von Spielmechaniken, Rendering sowie nachgelagertem säubern von dirty states, damit Frame N+1 einzelne KOmponenten nach einer evtl. bearbeiotung wieder berücksichtigen kann.
+
+Das Konzept der GameLoop ist in Abbildung~\ref{fig:gameloop} skizziert.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{gameloop.png}
+    \caption{Skizze der Gameloop in helios, die die Unterteilung in Phasen und Passes sowie die Zuordnung von Systemen zu den verschiedenen Passes darstellt.}
+    \label{fig:gameloop}
+\end{figure}
+
+Ein wesentlicher bestandteild er Gameloop ist der \texttt{UpdateContext}, der bei jedem Aufruf der in einem Pass registrierten Systeme übergeben wird und folgende Informationen beinhaltet:
+
+\begin{itemize}
+    \itemsep0.5em
+    \item \texttt{ResourceRegistry}: Referenz auf die von der GameWorld verwalteten Systeme, um der Engine CommandBuffer COmmands hinzufügen zu können.
+    \item \texttt{EntityResolver}: Erlaubt die Validierung und Abfrage von GameObjects basierend auf EntityHandles.
+    \item \texttt{Session}: Eine Referenz auf das Session-GameObject, um Informationen über den derzeiigen State zu erhalten.
+    \item \texttt{DeltaTime}: Die vergangene Zeit seit dem letzten Frame.
+    \item \texttt{TotalTime}: Die vergangene Zeit seit Spielbeginn.
+    \item \texttt{PhaseEventBus}, \texttt{PassEventBus}, \texttt{FrameEventBus}: Lese-/Schreib-``Senken`` (ReadSink/WriteSink im Code, also Views für den Lese-/Schreibpuffer~\cite[S. 110]{Nys14}) der CommandBuffer eingeteilt nach Phase, Pass und Frame, um gezielt Kommandos weiterzuleiten.
+    \item \texttt{InputSnapshot} Der \texttt{InputSnapshot}, der Informationen über den Zustand des Eingabegeräts (hier: über \textttt{glfw} ausgewertetes Gamepad) beinhaltet.
+    Die Snapshots beinhalten bereits die Informationen, ob Eingaben edge-triggered, seit längerer Zeit oder gerade erst aktiviert worden sind.
+    \item \texttt{ViewportSnapshots}: Zustand der in dem aktuellen Frame angezeigten Viewports als Szenerepräsentanten. Diese werden u.a. von dem \texttt{UiTransformSystem} ausgewertet, um die Anker-spezifische Positionsangaben von Ui-Elementen auszuwerten.
+    \item \texttt{Level}: Ein Zeiger auf das \texttt{Level}, in dem u.a. die Bounds festgehalten sind; relevant für Kollisions- und Bewegungssysteme.
+\end{itemize}
+
+Die GameLoop berücksichtigt den von außem angegebenen Delta_Time, um die Aktualisierung von Spielmechaniken zu steuern, und verwaltet demnach weder synchronisation der Zeitschritte noch eine gekapselte interpolation bei den Framewechseln.
+Dies wird folgerichtig als Anti-Pattern angesehen, da es zu unvorhersehbaren Verhalten führen kann, wenn die Aktualisierung von Spielmechaniken von der Framerate abhängig ist~\cite[S. 136]{Nys14}: Der (negative) Seiteneffekt lässt sich nachvollziehen, wenn im Spiel die Animation im Titelscreen der NPC-Objekte läuft, und man das Fenster mit der Maus bewegt: Die Zeitmessung wird und alle Systeme werden angehalten, und nach erneuter Aktivierung des Fensters muss ein unverhältnismäßig großer Zeitschritt verarbeitet werden, was durch Sprünge in den Anoimationen und Positione der NPCs zu erklenne ist.
+
+Den durch die Architektur der Gamelopp gewünschten Determinuísmus in der Reihenfolge der VErabeitung von Commands geht hier zum derzeitigen Zeitpunkt also leider verloren.

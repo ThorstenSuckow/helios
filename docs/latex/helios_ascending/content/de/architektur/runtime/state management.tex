@@ -1,0 +1,20 @@
+\subsection{State Management - Von der Menüführung zum Match-Zyklus}
+
+Das StateManagement in helios wird von dem template-baiserten StateManager pübernommen, der es erlaubt, eigene States neben dem vorimplementierten GameState (globaler Systemzustand) und MatchState (spielspezifischer Zustand) zu definieren.
+
+Die interen Implementierung folgt einem Regelbasierten Ansatz, bei der ein Zustand erst in den nächsten Zustand übergeht, wenn eine optionale Bedingung erfüllt werden kann~\cite{Har87}.
+So kann bspw. nicht in den Zustand \texttt{Pla<ing} gewechselt werden, solange kein aktives Spielerobjekt in der Spielwelt existiert.
+
+Als Zustandsautomat wird der SateManager in jedem Frame aufgerufen. Bei Entsprechende Zustandswechsel benachrichtigt der StateManager interessierte Systeme über über \textt{onEnter}, \texttt{onExit} und \texttt{onTransition}.Hooks, die von den Systemen implementiert werden können, um auf die Zustandswechsel zu reagieren.
+
+Der GameState wird benutzt, um gloable, allegmein typische Zustände in Spielen sowie deren Zustandswechsel zu verwalten: TitleScreen, Paused, Running.
+MatchState hingegen ist spielspezifisch gebunden und bietet Zustaände für Warmup der Spielwelt, Countdown zum Spielstart und Spieler-Tod an.
+
+Die Zustaände sind in Abbildung~\ref{fig:state_management} dargestellt.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{state_management.png}
+    \caption{Zustände und Zustandswechsel des GameState und MatchState in helios.}
+    \label{fig:state_management}
+\end{figure}

@@ -1,0 +1,16 @@
+\chapter{GameWorld - Die Spielwelt als Ressourcenverwalter}
+
+Der GameWorld kommt in helios die Rolle als Datencontainer zu und besitzt den \texttt{EntityManager} sowie verschiedene Registries für den Zugriff auf \texttt{Manager}, \texttt{CommandHandler} und \texttt{CommandBuffer}.
+
+Damit ähnelt sie in Teilen einem ServiceLocator, da sie beteiligten Systemen den Zugriff auf die Klassen ermöglicht.
+
+GameWorld liegt in dem Modul \texttt{helios.engine.runtime} und bringt dabei auch ihre Rolle als laufzeitgebundenes Objekt zum Ausdruck.
+Da helios auf eine Typoindentifizierung über Vererbung veruzichtet, muss der Klassenname des des angefragten Ressource bekannst sein.
+Eine Ausnahme bilden die Views auf die verschiedenen Systeme, auf die von der GameWorld aus zugegriffen werden kann, wie \texttt{managers()} und \texttt{commandHandlers()}, die einen \texttt{std::span} auf die über die intern über TypeErasure gespeicherten INstanzen zurückliefern.
+
+Die GameWorld bietete ausserdem als Fassade Funktion zur Erstellung von GameObjects an sowie dei Erstellugn von Views auf GameObjecs, die bestimmte KOmponenten enthalten.
+
+Sie wird in verschiedenen MEthoden als Refernz angegeben, um eine Zuordnung der aufgerufenen Methode in den KOntext der aktiven GameWorld zu errmöglichem.
+
+Sie erstellt außerdem die \texttt{Session}, einem GameObject, den während  der Laufzeit des Spiels die Rolle eines Singletons zukommt, d.h., dieses GameObject verwaltet Komponenten, die nur einmal in der Spielwet existieren dürfen, wie z.B. die basierend auf dem derzeitigen GameState und MatchState aktiven ViewportIds.
+Außerdem kann über sie der Zugriff auf die derzeitig aktiven States abgefragt werden.

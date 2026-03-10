@@ -2,6 +2,9 @@
 
 Manager in helios diesen zur Orchestrierung von verschiedenen Aktionen innerhalb der GamLoop. Sie werden zum größten Teil auch als CommandHandler eingesetzt und sind dafür verantwortlich in einem Frame Commands zu sammen und zu einem bestimmten Zeitpunkt, der durch die Gameworld über flushManagers() ausgelöst wird, ihre Logik auszuführen bzw. die gesammteln Commands - wenn möglich gebatcht - zur Ausfürhung zu bringen.
 
+Manager in helios besitzen keinen Basistypen.
+Auch hier werden wieder \texttt{Concepts} (\texttt{IsManagerLike}) und \texttt{EngineRoleTags} (\texttt{ManagerRole}) zur Kennzeichungn von Klassen verwendet, die als Manager fungieren sollen.
+
 helios implementiert zur Zeit u.a. folgende manager:
 
 \begin{itemize}
@@ -11,5 +14,17 @@ helios implementiert zur Zeit u.a. folgende manager:
     \item \texttt{GameObjectPoolManager}: Verwaltete die verschiedenen Obejtkpool der GameObjects, um eine Erstellung von Spielobjeken zur Laufzeit mögkchst zu vermeiden. Der manager verwaltet hierbei eine LIste von PoolConfigurationen, die eine festgelegte Zahl von GameObjects basierend auf einem Prefab enthalten, und bietet Fassadenfunktionen zur Rückgabe und Bereitstellung der in dem Pool enthaletnen Objecte an.
     \item \texttt{Spawnmanager}: Entgegen vieler anderer Manager, die auch als CommandHandler fungieren, arebitet der  GameObjectPoolManager nicht als Befehlsverarbeiter zur Verwaltung der Objekte der Pools - diese Aufgabe übernimmt der SpawnManager, der von dem SpawnSystem auf Basis verschiedener Regeln und Bedingungen GameObjects in die Spielwelt spawnt (\texttt{SpawnCommand}) - oder sie aufräumt und zurück in die GamePools legt (\texttt{DespawnCommand}).
     Hierzu besitzt der Spawnmanager einen Zeiger auf den PoolManager, um die entsprechenden Funktionen zur Bereitstellung bzw. Rückgabe der GameObjects aufzurufen.
-    \item \texttt{StateManager}: Eine besondere Veranwtortung  besitzt der StateManager, der die Verwaltung der verschienden States übernimmt. Hierzu ist der StateManager teamplate-basiert implementiert und ist damit nicht an vordefinierte States gebunden. Die interen Implementierung folgt einem Regelbasierten Ansatz, bei der ein Zustand erst in den nächsten Zustand übergeht, wenn eine optionale Bedingung erfüllt werden kann. So kann bsopw. nicht in den Zustand \texttt{Plaing} gewechselt werden, solange kein aktives Spielerobjekt in der Spielwelt existiert. Als Zustandsautomat wird der SateManager in jedem Frame aufgerufen. Bei Entsprechende Zustandswechsel benachrichtigt der StateManager interessierte Systeme über
+    \item \texttt{StateManager}: Eine besondere Veranwtortung  besitzt der StateManager, der die Verwaltung der verschienden States übernimmt. Hierzu ist der StateManager teamplate-basiert implementiert und ist damit nicht an vordefinierte States gebunden. Auf das StateManagement gehen wir kurz als gesondertes Konzeot in Kapitel~\ref{sec:state_management} ein.
 \end{itemize}
+
+Daneben finden sich noch \texttt{WorldLifecycleManager} zur Verwaltung von Lifecycle-Commands wie einem \texttt{reset()} der GameWorld, \texttt{TimerManager} zur Verwaltung von Spielmechaniken, die eine Zeitmessung benötigen, \texttt{UiActionCommandManager} zur Verarbeitung von Ui-Commands (wie aktivierung von Menüoptionen).
+
+
+In Abbildung ist ein Ausschnitt eriner Spieszene gezeigt, in dem dargestellt wird, auf welche Features innerhalb des Spiels die Manager auswirkungen haben.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{assets/manager.png}
+    \caption{Ausschnitt einer Spielszenen, in der die Auswirkungen von verschiedenen Manager auf die Spielwelt dargestellt werden.}
+    \label{fig:manager_auswirkungen}
+    \end{figure}

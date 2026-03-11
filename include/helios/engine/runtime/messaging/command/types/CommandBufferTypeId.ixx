@@ -31,9 +31,9 @@ export namespace helios::engine::runtime::messaging::command::types {
         /**
          * @brief Tag type for the TypeIndexer domain.
          */
-        struct helios_engine_core_data_CommandTypes{};
+        struct helios_engine_common_tag_CommandTypes{};
 
-        using ComponentType = helios_engine_core_data_CommandTypes;
+        using ComponentType = helios_engine_common_tag_CommandTypes;
 
         /**
          * @brief The underlying ID value.

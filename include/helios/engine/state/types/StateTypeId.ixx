@@ -16,9 +16,9 @@ export namespace helios::engine::state::types {
         /**
          * @brief Tag type for the TypeIndexer domain.
          */
-        struct helios_engine_core_data_StateTypes{};
+        struct helios_engine_common_tag_StateTypes{};
 
-        using StateType = helios_engine_core_data_StateTypes;
+        using StateType = helios_engine_common_tag_StateTypes;
 
         /**
          * @brief The underlying ID value.

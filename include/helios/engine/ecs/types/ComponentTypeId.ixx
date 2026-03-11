@@ -43,9 +43,9 @@ export namespace helios::engine::ecs::types {
         /**
          * @brief Tag type for the TypeIndexer domain.
          */
-        struct helios_engine_core_data_ComponentTypes{};
+        struct helios_engine_common_tag_ComponentTypes{};
 
-        using ComponentType = helios_engine_core_data_ComponentTypes;
+        using ComponentType = helios_engine_common_tag_ComponentTypes;
 
         /**
          * @brief The underlying ID value.

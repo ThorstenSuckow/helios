@@ -1,7 +1,7 @@
 \chapter{Einleitung}
 
-Der im Rahmen des Projektstudiums im Fernstudium Informatik zu erstellende \textit{Geometry Wars}-Klon ist in~\cite{SH25} beschrieben.
-Im Folgenden werden die wesentlichen Anforderungen und Spezifikationen erläutert, um diese im späteren Verlauf referenzieren und vergleichen zu können.\\
+Der in diesem Dokument beschriebenen Software geht die Entwicklung eines Prototypen voraus, welcher in~\cite{SH25} beschrieben ist.
+Im Folgenden werden die darin beschriebenen Anforderungen und Spezifikationen wiederholt, da auf diese im weiteren Verlauf immer wieder zurückgegriffen wird.\\
 
 \noindent
 Als zu realisierende Features wurden vereinbart:
@@ -19,13 +19,28 @@ Als zu realisierende Features wurden vereinbart:
 \end{itemize}
 
 \noindent
-Zum Zeitpunkt der Veröffentlichung des oben genannten Dokumentes war bereits Meilenstein 1 erreicht, welcher den Fokus auf das Anwendungsgerüst legte.
-In~\ref{tab:zeitplan} ist eine Übersicht der nachfolgenden Meilensteine 1--6 dargestellt. Deren Fertigstellungstermine wurden mit einer jeweiligen Verzögerung von zwei bis vier Wochen erreicht.
-Hierbei zeigte sich, dass die zunehmende Komplexität der Features - wie das Input-System, die Spawn-Logik, die Kollisionsabfrage und das UI-Rendering - wiederholt Anpassungen an bereits existierenden Systemen erforderten.
+Zum Zeitpunkt der Veröffentlichung des erwähnten Prototyps war Meilenstein 1 bereits fertiggestellt; dieser stellte der weiteren Entwicklung das Anwendungsgerüst bereit.\\
 
-So erforderte beispielsweise das Input-System die Berücksichtigung von Stick-Drift; das Spawning von Gegnerobjekten machte einen Pool wiederverwendbarer Objekte (\textit{prefabricated objects}, i.F. \textit{prefab}) notwendig.
-Zusätzlich zur reinen Kollisionserkennung ergaben sich komplexe Fragestellungen hinsichtlich der Verarbeitung dieser Kollisionen innerhalb der beteiligten Systeme.
-Das UI-Rendering bedingte eine Erweiterung der Rendering-Engine um die Unterstützung von Texturen und UI-Elementen sowie die Implementierung hierarchischer Zustandsautomaten (HFSM), um die verschiedenen Spielzustände (z.\,B. ``Main Menu``, ``In Game``, ``Game Over``) sauber zu kapseln.
+In Tabelle~\ref{tab:zeitplan} ist eine Übersicht der nachfolgenden Meilensteine 2--6 dargestellt.
+Deren Fertigstellungstermine wurden mit einer jeweiligen Verzögerung von zwei bis vier Wochen erreicht.
+Meilenstein 6 ist mit Veröffentlichung dieses Dokuments erreicht.\\
+
+Bei den Anforderungen, die zwischen November 2025 und März 2026 umgesetzt wurden, zeigte sich aufgrund zunehmenden Integrationsaufwandes der fachlich verschiedenen Systeme eine erhöhte Komplexität, bedingt unter anderem aufgrund folgender Punkte:
+
+\begin{itemize}
+    \itemsep0.5em
+    \item Das Input-System musste zur genauen Steuerung Stick-Drift kompensieren.
+    \item Spawn\footnote{
+        \textit{to spawn}, engl.: etwas hervorbringen, sich vermehren.
+        Bei Computerspielen steht der Begriff für das Erzeugen bzw. Entstehen von Objekten innerhalb der Spielwelt, wie Gegner oder der Figur des Spielers.
+    } von Gegnerobjekten machte aus Gründen der Laufzeitoptimierung einen Pool von Prefabs\footnote{
+        Abkürzung für \textit{prefabricated objects}, in diesem Kontext eine Blaupause für ein Spielobjekt, aus dem viele gleichartige Spielobjekte abgeleitet werden.
+    } notwendig.
+    \item Bei der Kollisionserkennung ergaben sich komplexe Fragestellungen hinsichtlich der Weiterverarbeitung erkannter Kollisionen.
+    \item Das UI-Rendering bedingte eine Erweiterung der Rendering-Engine zur Unterstützung von Schriftdateien.
+    Außerdem musste Konzeption und Implementierung von UI-Elementen realisiert werden.
+    \item Spielstart, Pause und Spielende erforderte die Einführung von Zustandsautomaten, um - abhängig von den jeweiligen Zuständen - Aktionen zu erlauben oder zu verbieten.
+\end{itemize}
 
 \setlength{\tabcolsep}{8pt}
 \begin{table}[t]

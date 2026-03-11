@@ -1,22 +1,21 @@
 \section{Meilenstein 1: Die Anwendungsschicht}
 
-Der erste Meilenstein umfasste das technische Fundament, in das das spätere Spiel eingebettet werden sollte.\\
+Der erste Meilenstein umfasste das Anwendungsgrundgerüst, in welches das spätere Spiel eingebettet werden sollte.
+Zu diesem Zeitpunkt war es aufgrund vorhandener Erfahrung im Bereich Frontend- und UI-Entwicklung generisch implementiert, bekannte Entwurfsmuster und Paradigmen aus dem Objektorientierten Design (im Folgenden OOD) wurden umgesetzt.
+Ziel war es, ein robustes Fenstermanagement auf Basis von \textit{glfw}~\cite{glfwHomepage} zu implementieren, um den Fokus der nachfolgenden Meilensteine auf die Einbindung der Spielsysteme und -mechaniken zu legen.
+In diesem Meilenstein wurde außerdem die Abstraktion der Rendering-Engine eingeführt, aus dem eine Spezialisierung zur Anbindung an ein \textit{OpenGL}-Backend~\cite{OpenGLHomepage} entwuchs.\\
 
-\noindent
-Zu diesem Zeitpunkt lag der Fokus auf der Abstraktion der Rendering-Engine, der Event- und Window-Systeme sowie einem ersten Entwurf der Input-Verarbeitung.
-Die tieferen Ebenen der späteren Game-Engine wurden dabei noch nicht explizit berücksichtigt.
-Aus diesem Grund finden sich in dieser frühen Phase Designentscheidungen, die in den darunterliegenden Schichten so nicht mehr zu finden sind - insbesondere der stark objektorientierte Ansatz (OOP) wurde aufgrund der zunehmenden Anzahl der Komponenten und damit verbundenen Komplexität der Systeme zugunsten des Prinzips \textit{Composition over Inheritance} verworfen.
-Dies mündete in Meilenstein 5 in einer ECS-Architektur.\\
+In dieser frühen Phase wurden Designentscheidungen getroffen, die in den in späteren Meilensteinen entstandenen tieferen Schichten so nicht mehr zu finden sind.
+Insbesondere der stark objektorientierte Ansatz wurde mit zunehmenden Verständnis der Anforderungen leistungsfähiger Spiele-Engines zugunsten eines \textit{Composition over Inheritance}-Ansatzes~\cite[S. 20]{GHJV94} verworfen, der in Meilenstein 5 in einer ECS-Architektur mündete (siehe Abschnitt~\ref{sec:meilenstein_5}).\\
 
 
-
-\begin{figure}[H]
+\begin{figure}
     \centering
-    \includegraphics[width=0.8\columnwidth]{content/de/iterative evolution/img/simplecuberendering}
-    \caption{Darstellung des ersten Rendering-Tests (\textit{Simple Cube Rendering}). Die zugrundeliegende Architektur implementiert bereits wesentliche Komponenten der Anwendungsschicht, darunter das Fenstermanagement sowie ein Event-System nach dem \textit{Publish-Subscribe}-Entwurfsmuster. (Quelle: eigene Aufnahme)}
+    \includegraphics[width=0.4\columnwidth]{content/de/iterative evolution/img/simplecuberendering}
+    \caption{Screenshot der ersten lauffähigen Anwendung mit der helios Engine, der \textit{Simple Cube Rendering Demo}, die einen rotierenden Würfel darstellt.
+    Die zugrundeliegende Architektur implementiert bereits wesentliche Komponenten der Anwendungsschicht, darunter das Fenstermanagement sowie ein Event-System nach dem \textit{Publish-Subscribe}-Entwurfsmuster. (Quelle: eigene Aufnahme)}
     \label{fig:simplecuberendering}
 \end{figure}
 
-Im Zuge der Entwicklung der tiefer liegenden Schichten musste die Architektur der Anwendungsschicht nur geringfügig angepasst werden, um neue Anforderungen zu erfüllen.
-Die signifikantesten Änderungen betrafen das Rendering System und die Handhabung von Viewports: In Meilenstein 1 waren diese noch als statische, eins-zu-eins zum Fenster korrespondierende Render-Ziele definiert.
-Wir gehen im nachfolgenden Abschnitt näher auf diese Änderungen ein.
+Im Zuge der Entwicklung der tiefer liegenden Schichten musste die Anwendungsschicht nur geringfügig angepasst werden, größere Änderungen ergaben sich hauptsächlich durch die Umstrukturierung von Modulen.
+Signifikante Änderungen hinsichtlich der Funktionalität betrafen die Handhabung von Viewports, worauf wir im nächsten Abschnitt eingehen.

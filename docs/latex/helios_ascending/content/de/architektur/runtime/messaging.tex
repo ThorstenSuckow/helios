@@ -1,0 +1,18 @@
+\subsection{Messaging - Kommunikation zwischen Systemen und Komponenten}
+
+Für den nachrichtenaustausch der existierenden Systeme, Manager und Komponenten wird über den UpdateContext als zentraler Hub Schnittstellen exponiert, die das auslesen und das Ablegen von Nachrichten ermöglichen.
+
+Daneben existiert ein zentraler CommandBuffer, der - basierend auf zur CompileTime definierten CommandTypen - die engine relevanten Commands zur Verarbeitung ermöglicht. Hiermit erkaufen wir uns Performance zum nachteil von mehr bootstrapping und Wartungsaufwand bei der Pfelege neur Commands.
+
+Wie auch die Manager werden alle registrierten CommandBuffer zu bestiimmten CommitPoints geflusht - hierzu werden die vpn \texttt{enqueueCommand} abgelegten Commands iteriert und an die registrierten CommandHandler für den jeweiligen Typen gesendet (\texttt{submit()}). Die Registrierung der CommandHandler erfolgt dabei über einen Aufruf an die GameWorld mit
+
+\begin{verbatim}
+gameWorld.registerCommandHandler<SpawnCommand, DespawnCommand>(*handlerLike));
+\end{verbatim}
+
+Die GameWorld nutzt Variadic Templates zusammen mit Fold Expressions, um für die übergebenen CommandTypen den Handler zu registeiren. DerHandler wird wiederum anhand eines \texttt{IsCommandHandlerLike}-Concepts, überprüft, um  um sicherzustellen, dass für jeden angegebenen CommandTypen auch eine submit()-Funktionen implementiert ist.
+
+In der GameWorld registrierte CommandBuffer werden von der GameLoop in jedem Phasenwechsel geflusht.
+Darüber hinaus ist es möglich, über CommitPoints ein flushen der CommandBuffer innerhalb einer Phase zwischen zwei Passes zu veranlassen.
+
+Dabei wird allerdings der WriteBuffer der CommandBuffer mit dem ReadBuffer geswappt, was für einen nachfolgende Phase, die über den UpdateContext Comands dieses Typen erwartet, wichtig ist: Entsprechende Systeme müssen so angeordnet werden, dass die Reihenfolge der Verarbeitung von Commands den erfolgten BufgferSwaps berücksichtigt.

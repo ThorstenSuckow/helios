@@ -27,9 +27,7 @@ Auch \textit{Bayliss} weist darauf hin, dass DOD zwar Gründe liefern kann, auf 
 }
 Die umgesetzten Vererbungshierarchie bleiben allesamt flach.
 Eine Ausnahme bilden spezialisierte Manager, die von \texttt{Manager} erben und durch die gleichzeitige Nutzung als \texttt{CommandHandler} die Schnittstelle mit \texttt{TypedCommandHandler<T>} kombinieren.
-Da das Leeren der Buffer dieser Objekte jedoch vergleichsweise selten in der GameLoop geschieht,\footnote{ hierfür sind individuell konfigurierbare \texttt{CommitPoints} sowie \textit{Phasenübergänge} vorgesehen} wird der Overhead durch VTable-Lookups hier als nicht kritisch bewertet - eine belastbare Messung steht jedoch aus.\footnote{
-    Einen Überblick, wie sich Vererbung auf Speicherlayout und Laufzeit auswirkt, findet sich bei~\cite[161-164]{Gre19}
-}\\
+Da das Leeren der Buffer dieser Objekte jedoch vergleichsweise selten in der GameLoop geschieht,\footnote{ hierfür sind individuell konfigurierbare \texttt{CommitPoints} sowie \textit{Phasenübergänge} vorgesehen} wird der Overhead durch VTable-Lookups hier als nicht kritisch bewertet - eine belastbare Messung steht jedoch aus.\\
 
 Zur Realisierung dichter Speicherlayouts wird außerdem ein \textit{Dense Type Index} (\texttt{TypeIndex}) verwendet.
 Dieser wird über ein \texttt{struct} initialisiert und erzeugt auf Basis der übergebenen Typen einen dichten Index.

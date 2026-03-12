@@ -1,80 +1,69 @@
-\section{Meilenstein 4: Spawning, Kollisionen und $N+1$}
+\section{Meilenstein 4: Spawning, Kollisionen und $N+1$}\label{sec:meilenstein_4}
+
+Meilenstein 4 sah die Fertigstellung eines \textit{Vertical Slices} vor, in dem die wichtigsten Regeln und Mechaniken des Spiels implementiert werden.\\
 
 
-Meilenstein 4 sah  die Fertigstellung eines \textit{Vertical Slices} vor, in dem die wichtigsten Regeln und Mechaniken des Spiels implementiert sein sollten.\\
-
-\noindent
-Da sich die vorherigen Meilensteine vor allem auf die technische Umsetzung des Framework-Gerüsts konzentriert hatten, sah sich die Entwicklung zu diesem Zeitpunkt mit der Herausforderung konfrontiert, komplexe Spielmechaniken zu integrieren.
-Dies erforderte eine umfassende Umstrukturierung, um die Anforderungen an eine stabile GameLoop sowie die Interaktion der verschiedenen Subsysteme zu erfüllen.
-In diesem Zusammenhang wurden folgende Konzepte realisiert:
+Da sich vorherige Meilensteine vor allem auf die technische Umsetzung des Framework-Gerüsts konzentriert hatten, sah sich die Entwicklung zu diesem Zeitpunkt mit der Herausforderung konfrontiert, die mit Meilenstein 3 begonnenen und zunehmend komplexeren Spielmechaniken zu integrieren.
+Dies erforderte auch eine umfassende Umstrukturierung der Codebasis.
+Dafür konnte der Meilenstein mit einer API für die \textit{GameLoop} abgeschlossen werden, die eine klare Strukturierung der verschiedenen Systeme innerhalb einer Frame-Iteration erlaubte (siehe Abschnitt~\ref{sec:runtime_gameloop}).
+Insgesamt wurden mit diesem Meilenstein folgende Konzepte umgesetzt:
 
 \begin{itemize}
     \itemsep0.5em
-    \item Einführung ressourcenverwalteter Manager innerhalb des \textit{helios} Frameworks.
-    \item Implementierung von \textit{CommandHandler}- und \textit{CommandBuffer}-Strukturen, die nach einem \textit{Push-Pull}-Prinzip in verschiedenen Phasen der GameLoop operieren.
-    \item Architektur einer phasenbasierten GameLoop, die über verschiedene \textit{Passes} und \textit{Commit Points} klare Schnittstellen für Systemübergänge definiert.
+    \item Einführung des \texttt{Manager} Konzepts als Orchestrator spezifischer Subsysteme (siehe Abschnitt~\ref{sec:runtime_manager}).
+    \item Der Entwurf einer \textit{phasenbasierten} GameLoop, die mit verschiedenen \textit{Passes} und \textit{Commit Points} klare Schnittstellen für Systemübergänge definiert.
+    \item Implementierung von \texttt{CommandHandler} und \texttt{CommandBuffer}, die nach dem \textit{Push-Pull}-Prinzip verschiedenen Phasen der \textit{GameLoop} zum Nachrichtenaustausch nutzen können.
+
 \end{itemize}
 
 
-Diese Anforderungen führten zudem zu einer Neuausrichtung der Projektstruktur.
-Die strikte Trennung in \textit{Implementation}- und \textit{Interface}-Module-Units wurde zugunsten eines verbesserten Refactoring-Workflows aufgegeben; die Implementierungen wurden in die \textit{Interface Units} zurückgeführt.
-Dabei wurde das Modul \texttt{helios.engine} als zentraler Kern der Engine definiert, während das semantisch zu starre \texttt{game}-Modul verworfen wurde.\\
+Die bereits erwähnte Umstrukturierung der Codebasis hatte indes Auswirkungen auf den Entwicklungsprozess: Die in dem Prototypen-Dokument erwähnte strikte Trennung in \textit{Module Interface} und \textit{Implementation Units}~\cite[S. 211-213]{Str24}  wurde zugunsten eines verbesserten Refactoring-Workflows aufgegeben: Die Implementierungen wurden in die eigentlichen \textit{Interface Units} zurückgeführt (``header-only`` Ansatz~\cite[S. 279]{Wil05}).
+Dadurch wurde \texttt{helios.engine} als das zentrale Kernmodul der Engine definiert, während sich das bisher verwendete \texttt{game}-Modul als semantisch zu starr erwies und so nicht mehr im Projekt genutzt wird.\\
 
-Es erfolgte zudem eine logische Trennung zwischen engine-intrinsischen Funktionen (\texttt{runtime}) und spielmechanischen Modulen (\texttt{mechanics}).
-Letztere beinhalten unter anderem ein \textit{Policy}-basiertes \textit{SpawnSystem}.
-Dieses wurde im weiteren Verlauf zu einer \textit{Domain Specific Language} (DSL) ausgebaut, welche die semantische Konfiguration von Spawn-Logiken in direkter Verbindung mit \texttt{GameObject}-Pools erlaubt.\\
+\subsection{Expression Builder für das Spawn System}
+Außerdem erfolgte eine logische Trennung zwischen engine-intrinsischen Funktionen (der bereits zitierten \textit{Runtime}) und Modulen, die für Spielmechaniken verantwortlich sind und zu denen ein äußerst geringer Grad an Kopplung besteht, den (\texttt{mechanics}), die unter anderem  Implementierungen für Kampf- und Punktesysteme bereitstellen und außerdem ein \textit{Policy}-basiertes System für Spawning und Despawning, das auf dem in dem \texttt{runtime}-Modul platzierten Kern-Spawn-System aufsetzt: Dieses wurde im weiteren Verlauf ausgebaut und kann mit Hilfe einer \textit{Domain Specific Language} (DSL) konfiguriert werden, damit der Entwickler eine semantische Konfiguration von Spawn-Logiken in  Verbindung mit \textit{Prefab}-Pools vornehmen kann.\\
 
-\noindent
-In diesem Kontext wurde zusätzlich ein \textit{Object Builder} implementiert, um die Konfiguration der mittlerweile drei verschiedenen Gegnertypen sowie der Projektile und des Spielerschiffs zu vereinheitlichen und Redundanzen zu vermeiden (siehe Listing~\ref{lst:gameobjectdsl}).
+Der in diesem Zusammenhang implementierte \textit{Expression Builder}~\cite[S. 343-350]{FP11} erlaubt die Konfiguration von beispielsweise Spieler-Gegnern, Projektilen und Spielefigur.
+Mit dieser Factory kann Spielwelt-konfigurierender Code einfacher und lesbarer gehalten werden, ohne dass semantische Überfrachtungen in den abstrakteren Zielcode überschwappen (siehe Listing~\ref{lst:gameobjectdsl}).
 
 
 \begin{lstlisting}[style=c++style,
-    caption={Auszug aus dem Code zur Konfiguration des BlueEnemy, einem Gegnertyp, der nach ca. 30 Sekunden im \textit{Collision Detection Demo}  das erste mal spawnt und aus einer einfachen Chase-Komponente besteht.},
+    caption={Auszug aus dem Code zur Konfiguration des \textit{BlueEnemy}, einem Gegnertyp, der 30 Sekunden nach Spielbeginn in der \textit{Collision Detection Demo} spawnt und aus eine Chase-Komponente zum Verfolgen des Spielers besteht.},
     label=lst:gameobjectdsl]
-    auto blueEnemyPrefab = helios::engine::builder::gameObject::GameObjectFactory::instance()
+    auto blueEnemyPrefab = GameObjectFactory::instance()
         .gameObject()
-        .withRendering([&defaultShader, &root = *levelPtr->rootNode()](auto& rnb) {
-            ...
-        })
-        .withTransform([BLUE_ENEMY_SCALE](auto& tb) {
-            tb.transform()
-              .scale(BLUE_ENEMY_SCALE);
-        })
         .withCollision([](auto& cb) {
             cb.collision()
               .layerId(CollisionId::Enemy)
               .useBoundingBox()
-              ...
               .onSolidCollision(CollisionId::Player, CollisionBehavior::Despawn)
               .onSolidCollision(CollisionId::Projectile, CollisionBehavior::Despawn);
-            ...
         })
-        .withMotion([&](auto& mcb) {
-            ...
-        })
-        ...
         .withAi([&](auto& aib) {
             aib.chasing()
                .target(shipGameObject->guid())
                .seekInterval(0.05f);
         })
-        .make();
+       .make();
 \end{lstlisting}
 
+Dem gegenüber gestellt ist die Konfiguration eines \texttt{GameObjects} in Listing~\ref{lst:gameobjectcmpbased}.
+Die Menge den den verschiedenen Komponenten, über die sich ein GameObject sehr feingranular definieren lässt, erforderte eine Factory.
+Die Gruppierung von Komponenten hinter einfacher lesbaren Methoden, die über ein \textit{Fluent Interface}~\cite{FluentInterface} realisiert wurden, verringerte den Source Code nicht wesentlich, machte ihn aber intuitiv verständlicher.
+
 \begin{lstlisting}[style=c++style,
-    caption={KOnfiguration eines gameObjects in Meilenstein 3. Die Menge an verschiedenen Komponenten in Meilenstein 4 machte ein Builder System notwendig, hiter dessen semantischen bezeichungen Komponenten klarer gruppiert werden konnten..},
+    caption={Konfiguration eines Spieler-Objektes ohne DSL (Codebasis Meilenstein 4).},
     label=lst:gameobjectcmpbased]
-auto shipGameObject = std::make_unique<helios::engine::game::GameObject>();
+auto shipGameObject = std::make_unique<GameObject>();
 shipGameObject->add<SceneNodeComponent>(spaceshipSceneNode);
 shipGameObject->add<TwinStickInputComponent>();
 shipGameObject->add<Move2DComponent>();
 shipGameObject->add<TransformComponent>();
-shipGameObject->add<ScaleComponent>(SPACESHIP_SIZE, SPACESHIP_SIZE, 0.0f, Unit::Meter);
+shipGameObject->add<ScaleComponent>(5.0f, 5.0f, 0.0f, Unit::Meter);
 shipGameObject->add<Aim2DComponent>();
 shipGameObject->add<ShootComponent>();
 shipGameObject->add<LevelBoundsBehaviorComponent>();
 shipGameObject->add<AabbColliderComponent>();
-
 \end{lstlisting}
 
 
@@ -82,15 +71,31 @@ shipGameObject->add<AabbColliderComponent>();
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\columnwidth]{content/de/iterative evolution/img/collisiondetection}
-    \caption{ (Quelle: eigene Aufnahme)}
+    \caption{Meilenstein 4 beinhaltete die Veröffentlichung der \textit{Enemy Spawn} und \textit{Collision Detection Demo}, welche jeweils die Funktionalität des Spawn Systems und der Kollisionsbehandlung demonstrieren. Der Bildausschnitt zeigte die Spielerfigur (gelb) und die drei verschiedenen Gegnertypen des Spiels. Die Rhombusförmigen Gegner besitzen eine Chase Komponente und aktualisieren ihre Bewegungsrichtung abhängig von der Position des Spielers. (Quelle: eigene Aufnahme)}
     \label{fig:collisiondetection}
 \end{figure}
 
+\subsection{Grid-basierte Kollisionserkennung}
+Ein erneuter fachlicher Ausbruch fand in diesem Meilenstein mit der Implementierung des Kollisionssystems statt, das auf einem einfachen Grid-basierten Ansatz basiert, um die Anzahl der zu prüfenden Kollisionen zu reduzieren und für das umzusetzende Spiel sehr gut geeignet ist.
+Bei der Umsetzuung folgen wir hierbei Ericson, der in~\cite[Kapitel 4]{Eri04} das Prinzip des \textit{Spatial Partitioning} empfiehlt: Hierbei wird ein Spielfeld in eine vorher festgelegte Anzahl von Zellen unterteilt; in jedem Frame werden die Zellen durchiteriert und mögliche Kollisionspaare markiert (Broad Phase).\\
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\columnwidth]{content/de/iterative evolution/img/enemyspawn}
-    \caption{ (Quelle: eigene Aufnahme)}
-    \label{fig:enemyspawn}
-\end{figure}
+Da keine Kollisionserkennung von Gegnern oder Projektilen untereinander durchgeführt werden muss, kann die Anzahl der zu prüfenden Kollisionspaare reduziert werden auf die Zellen, in denen sich mindestens 1 Projektil und ein Gegnerobjekt oder die Spielerfigur und ein Gegnerobjekt befinden:
 
+
+\begin{displayquote}
+As only objects overlapping a common cell could possibly be in contact, in-depth tests are only performed against those objects found sharing cells with the object tested for collision.
+\par\hfill\cite[S.~285]{Eri04}
+\end{displayquote}
+
+Da die Koordinaten der Spielobjekte in der Welt jederzeit über die \texttt{TransformComponent} zugänglich sind, können die zu prüfenden Zellen also schnell identifiziert werden - und verworfen, falls die oben genannte Bedingung nicht zutrifft.
+
+Die möglichen Kollisionspaarungen werden über eine Bitmaske festgelegt - so kann ein Raumschiff, dass die Layer-ID $1 << 0$ besitzt, gleichzeitig mit Objekten kollidieren, die die Layer-ID $1 << 1$ (Gegner) oder $1 << 2$ (Hindernis) besitzen.\footnote{
+Das Verhalten bei einer Kollision kann über die \texttt{enum class} \texttt{CollisionBehavior} auf Grundlage der Layer-ID geschehen (bspw. Despawn bei Gegnerkollision, SolidCollisionEvent bei Hindernis-Kollision).
+}\\
+
+In einem nächsten Schritt werden die möglichen Kollisionspaare präziser auf eine tatsächliche Kollision geprüft (Narrow Phase).
+In unserer Umsetzung verwenden wir hierbei der Einfachheit halber die \textit{AABB} zur Ermittlung von Überschneidungen.
+Erkannte Kollisionen werden in einer \texttt{CollisionsStateComponent} gespeichert, die in einem späteren Schritt von dem \texttt{CollisionStateResponseSystem} ausgewertet werden: In Meilenstein 4 wurden die Kollisionen als einfacher \texttt{DespawnCommand} behandelt; Meilenstein 5 reiht hingegen \texttt{TriggerCollisionEvent} und/oder \texttt{SolidCollisionEvent} in als \textit{Pass-Event} (siehe Abschnitt~\ref{sec:runtime_messaging}) in den Nachrichtenpuffer.
+Damit kann die Entscheidung, welches Verhalten bei welchem Kollisionstypen anzuwenden ist (bzw. welche zusätzliche Aktion ausgeführt werden soll)   leichter an unterschiedliche Systemen delegiert werden: In Meilenstein 5 wertet ein \texttt{DamageOnCollisionSystem} die \texttt{SolidCollisionEvent}s aus und schreibt einen \texttt{ApplyDamageCommand} in den Engine-spezifischen Befehlspuffer, um Lebenspunkte der beteiligten Objekte anzupassen.\\
+
+Am Ende der GameLoop wird vorausgesetzt, dass alle in Frame $N$ erkannten Kollisionen behandelt wurden: Das \texttt{CollisionStateClearSystem} setzt alle \texttt{CollisionsStateComponent} zurück, damit Kollisionen in Frame $N+1$ neu erkannt werden können.\\

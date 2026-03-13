@@ -3,13 +3,14 @@
 
 Meilenstein 2 markierte die erste funktionale Erweiterung der Architektur, die ein Rendering in Abhängigkeit von Benutzereingaben (Gamepad-Input) ermöglichte.
 Hierfür wurden die Klassen \texttt{GameWorld} und \texttt{GameObject} eingeführt.
-Deren Semantik blieb zwar bis zur finalen Version erhalten, sie durchliefen jedoch im Prozess eine große strukturelle Transformation, von Datencontainern, die Geschäftslogik kapseln, hin zu leichtgewichtigen Fassaden-Objekten für den Zugriff auf darunterliegende, Template-basierte Registries und einem datenorientierten \textit{Entity Component System} (im Folgenden ``ECS``).\\
+Deren Semantik blieb zwar bis zur finalen Version erhalten, sie durchliefen jedoch im weiteren Verlauf eine tiefgreifende strukturelle Transformation: Von Datencontainern, die Geschäftslogik kapseln, hin zu
+leichtgewichtigen Fassaden-Objekten für den Zugriff auf darunterliegende, template-basierte Registries eines datenorientierten \textit{Entity Component System} (ECS).\\
 
+Der im vorherigen Abschnitt angesprochene architektonische Umbruch des Rendering-Systems betraf die Repräsentanten der Viewports~\cite[40]{SWH15}, welche ursprünglich als statische, eins-zu-eins mit dem Fenster korrespondierende Render-Ziele verstanden wurden.
+Diese wurden so angepasst, dass innerhalb der Engine die Unterstützung mehrerer Viewports über einen \texttt{RenderTarget} (Abstraktion eines Framebuffers~\cite[S. 329]{HDMS+14}) ermöglicht wurde.
+Dies vereinfachte die Darstellung unterschiedlicher Szenen oder Szenenausschnitte, die von verschiedenen Kameras beobachtet werden.
+Als positiver Seiteneffekt erleichterte diese Abstraktion die spätere Einführung von UI-Elementen in Meilenstein 5.
 
-Der im vorherigen Abschnitt angesprochene architektonische Umbruch des Rendering Systems betraf die Repräsentanten der Viewports~\cite[40]{SWH15}, welche als statische, eins-zu-eins zum Fenster korrespondierende Render-Ziele verstanden wurde.
-Diese wurden so angepasst, dass innerhalb der Engine die Unterstützung mehrerer Viewports über einen  \texttt{RenderTarget} (Abstraktion eines Framebuffers~\cite[S. 329]{HDMS+14}) ermöglicht wird.
-Dies vereinfacht die Darstellung unterschiedlicher Szenen oder Szenenausschnitte, die von verschiedenen  Kameras beobachtet werden.
-Als positiver Seiteneffekt erleichterte diese Abstraktion die Einführung von UI-Elementen in Meilenstein 5.\\
 
 \begin{figure}[H]
     \centering
@@ -20,12 +21,13 @@ Als positiver Seiteneffekt erleichterte diese Abstraktion die Einführung von UI
 
 
 Die in Abbildung~\ref{fig:gamecontrollerinput} dargestellte Demonstration zeigt die Funktionalität der Eingabeverarbeitung, die über die Klasse \texttt{InputManager} realisiert wird.
-Der \texttt{InputManager} liegt in der äußersten Anwendungsschicht und wird in der \textit{GameLoop} angefragt, damit Gamepad-Eingaben als Transformationen der dargestellten Objekte umgerechnet werden können.
-Weitere Abstraktionsebenen fehlten an dieser Stelle, Szenenknoten wurden mittels \texttt{setScale()} und \texttt{setTranslation()} direkt modifiziert, Farbänderungen durch direkte Aufrufe auf mit den Knoten verbundenen \textit{Renderables} realisiert.\\
+Der \texttt{InputManager} ist in der äußersten Anwendungsschicht angesiedelt und liefert der \texttt{GameLoop} Gamepad-Eingaben, die in Transformationen der dargestellten Objekte umgerechnet werden können.
+Weitere Abstraktionsebenen fehlten an dieser Stelle; Szenenknoten wurden mittels \texttt{setScale()} und \texttt{setTranslation()} direkt modifiziert, Farbänderungen durch direkte Aufrufe auf den mit den Knoten verbundenen \texttt{Renderables} realisiert.
 
 In dieser Phase zeigte sich auch, dass der ursprüngliche Entwurf des Rendering-Systems zu komplex war.
-Eine Restrukturierung hin zu einer flacheren Hierarchie (siehe Abbildung~\ref{fig:renderable}) ermöglichte eine effiziente Wiederverwendung von Material-, Mesh- und Shader-Instanzen, die in einem \texttt{RenderPrototype} als \textit{Aggregate Root}~\cite[S. 128]{Eva03} vereint wurden, teilbar von mehreren \texttt{Renderables}.
-Optionale Konfigurationen der \texttt{Renderables} in Form von kleinen Konfigurationsstrukturen / DTOs erlauben dabei individuelle Overrides für einzelne Instanzen, die damit konsequenterweise den \textit{extrinsischen Zustand} eines grafischen Objektes~\cite[S.196-197]{GHJV94} speichern.
+Eine Restrukturierung hin zu einer flacheren Hierarchie (siehe Abbildung~\ref{fig:renderable}) ermöglichte eine effiziente Wiederverwendung von Material-, Mesh- und Shader-Instanzen.
+Diese wurden in einem RenderPrototype als \textit{Aggregate Root}~\cite[S. 128]{Eva03} vereint und sind von mehreren Renderables teilbar.
+Optionale Konfigurationen der Renderables in Form von kleinen Strukturen bzw. \textit{Data Transfer Objects} (DTOs) erlauben dabei individuelle Overrides für einzelne Instanzen, die damit konsequenterweise den extrinsischen Zustand eines grafischen Objektes~\cite[S.196-197]{GHJV94} speichern.
 
 \begin{figure}[H]
     \centering
@@ -36,7 +38,8 @@ Optionale Konfigurationen der \texttt{Renderables} in Form von kleinen Konfigura
     \label{fig:renderable}
 \end{figure}
 
-Mit diesem Meilenstein wurde das Modul \texttt{helios.engine.game} zusammen mit der Klasse \texttt{GameWorld} eingeführt, welche als zentraler Container und zur Verwaltung alle in der Spielwelt befindlichen \texttt{GameObjects} verantwortlich gewesen ist, wobei die Umsetzung zu diesem Zeitpunkt noch stark von einem klassischen OOP-Ansatz geprägt ist, wie das in Listing~\ref{lst:gameobject_v1} dargestellte Interface auszugsweise verdeutlicht.
+Mit diesem Meilenstein wurde das Modul \texttt{helios.engine.game} zusammen mit der Klasse \texttt{GameWorld} eingeführt.
+Diese fungiert als zentraler Container für die Verwaltung aller in der Spielwelt befindlichen \texttt{GameObject}s, wobei die Umsetzung zu diesem Zeitpunkt noch stark von einem klassischen OOP-Ansatz geprägt war, wie das in Listing~\ref{lst:gameworld_v1} dargestellte Interface verdeutlicht.
 
 \vspace{5mm}
 \begin{lstlisting}[style=c++style,
@@ -64,15 +67,15 @@ Mit diesem Meilenstein wurde das Modul \texttt{helios.engine.game} zusammen mit 
 \end{lstlisting}
 \vspace{5mm}
 
-Obwohl die API auch im aktuellen, abgegebenen Zustand die gleiche Semantik benutzt, weicht die Implementierung sehr stark von der hier beschriebenen Umsetzung ab:
-Auf hash-basierte Zugriffe über \texttt{std::unordered\_map<T>} wird in dem Engine-Modul weitestgehend verzichtet, die Steuerung der in einem Frame aktiven Systeme erfolgt über eine Abstraktion des \textit{GameLoop}-Konzepts in zustandsabhängige Phasen und Pässe mit individuellen Commit-Points, um deterministische Nachrichtenverarbeitung zu realisieren (siehe Abschnitt~\ref{sec:meilenstein_4}).\\
+Obwohl die API auch im finalen Zustand eine ähnliche Semantik nutzt, weicht die interne Implementierung stark von der hier beschriebenen Umsetzung ab: Auf hash-basierte Zugriffe über \texttt{std::unordered\_map} wird im Engine-Modul nun weitestgehend verzichtet.
+Die Steuerung der in einem Frame aktiven Systeme erfolgt heute über eine Abstraktion des \textit{GameLoop}-Konzepts in zustandsabhängige Phasen und Pässe mit individuellen Commit-Points, um eine deterministische Nachrichtenverarbeitung zu realisieren (siehe Abschnitt~\ref{sec:meilenstein_4}).\\
 
 Weitere Implementierungen in diesem Meilenstein betrafen unter anderem:
 
 \begin{itemize}
     \itemsep0.5em
-    \item Tooling-Overlay mit Hilfe von \textit{Dear ImGui}~\cite{DearImgui} zur einfacheren Auswertung von Log-Nachrichten und der gezielten Konfiguration von \texttt{GameObject}-Parametern zur Laufzeit (siehe Abbildung~\ref{fig:spaceshipcontrol}).
-    \item \texttt{CameraSceneNode} als spezialisierte \textt{SceneNode} mit \texttt{lookAt()}-Implementierung~\cite[S. 128-129]{PJH23} sowie Bitmaske zur Spezifizierung der zu vererbenden Transformationsdaten in Eltern-Kind-Szeneknoten-Beziehungen.
+    \item Integration von Dear ImGui~\cite{DearImgui} zur einfacheren Auswertung von Log-Nachrichten und der gezielten Konfiguration von GameObject-Parametern zur Laufzeit (siehe Abbildung~\ref{fig:spaceshipcontrol}).
+    \item Die Einführung einer spezialisierten \texttt{SceneNode} mit \texttt{lookAt()}-Implementierung~\cite[S. 128-129]{PJH23} sowie einer Bitmaske zur Spezifizierung der zu vererbenden Transformationsdaten in Eltern-Kind-Beziehungen.
 \end{itemize}
 
 

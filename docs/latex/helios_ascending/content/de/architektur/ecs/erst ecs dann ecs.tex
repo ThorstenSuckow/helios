@@ -1,5 +1,18 @@
 \subsection{Erst ECS, dann ECS - Evolution des Entity-Begriffs}
 
+iff ``idiomatisch'' im Sinne einer für Game-Engines typischen, datenorientierten Architekturentscheidung, die insbesondere auf Laufzeiteffizienz abzielt.
+Zwar vereinfacht ein Objekt-Orientiertes-Design (OOD) das Abstrahieren hierarchischer Strukturen und kann deshalb gerade in frühen Entwurfsphasen hilfreich sein.
+Unter dem Blickwinkel einer Game Engine als Echtzeitsystem (\cite[525]{Gre19}), dem nur begrenzte Ressourcen zur Verfügung stehen, ist ein Daten-Orientiertes Design (DOD) mit den dafür typischen dichten Speicherlayouts und der Vermeidung tiefer Vererbungshierarchien allerdings ein geeigneterer Ansatz.
+Empirische Studien, die dies unterstreichen, finden sich beispielsweise bei~\cite{FAUM20}.
+}
+
+Zur Realisierung dichter Speicherlayouts wird außerdem ein \textit{Dense Type Index} (\texttt{TypeIndex}) verwendet.
+Dieser wird über ein \texttt{struct} initialisiert und erzeugt auf Basis der übergebenen Typen einen dichten Index.
+In entsprechenden Anwendungsfällen ermöglicht dies einen elementweisen Zugriff in $O(1)$, während sich dichte (\textit{dense}) Speicherlayouts ergeben, die eine Iteration in $O(N)$ erlauben.
+In den meisten Fällen entspricht $N$ der tatsächlichen Elementanzahl $M$; nur selten gilt aufgrund der \textit{sparsity} solcher Container $N > M$.\\
+Mit dem vorherigen Design von GameObject als compound object, bei dem jedes einzelne ein Heap-Objekt darstellt und zusätzlich einen Speicherbereich für $L$ Komponenten benötigt, ergeben sich statt einem dichten Speicherbereich $N$ Speicherbereiche der Größe $L$, die zusätzlich bei nicht-ausreichender Größe neuen Speicherbereich anfordern und gegebenenfalls die existierenden Speicherinhalte verschieben müssen, was nicht optimal bei den einzelnen Iterationen der GameLoop ist, die bei 120 fps nur ca. $16 ms$ Zeit für alle Operationen und Berechnungen der verschiedenen Systeme hat.\\
+
+
 Die Entwicklung von helios begann mit einem klassischen, objektorientierten Ansatz.\footnote{
     Im Folgenden auch einfach \textit{OOD} (Object-Oriented Design). Das Kürzel \textit{DOD} verwenden wir entsprechend im Kontext des \textit{Data-Oriented Design}.
 }

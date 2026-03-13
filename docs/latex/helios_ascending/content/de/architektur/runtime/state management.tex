@@ -1,4 +1,4 @@
-\subsection{State Management - Von der Menüführung zum Match-Zyklus}
+\subsection{State Management - Von der Menüführung zum Match-Zyklus}\label{sec:state_management}
 
 Das StateManagement in helios wird von dem template-baiserten StateManager pübernommen, der es erlaubt, eigene States neben dem vorimplementierten GameState (globaler Systemzustand) und MatchState (spielspezifischer Zustand) zu definieren.
 
@@ -18,3 +18,16 @@ Die Zustaände sind in Abbildung~\ref{fig:state_management} dargestellt.
     \caption{Zustände und Zustandswechsel des GameState und MatchState in helios.}
     \label{fig:state_management}
 \end{figure}
+
+Als Basis-Implementierung liefert \textit{helios} die Automaten \texttt{GameState} und \texttt{MatchState}.
+\texttt{GameState} repräsentiert dabei eine übergeordnete ``\textit{Shell}'' und definiert allgemeine Systemzustände wie \texttt{Title}, \texttt{Running} und \texttt{Paused}.
+\texttt{MatchState} ist als eingebetteter Automat ausgeführt und übernimmt die Zustandssteuerung einzelner Spieldurchläufe mit Zuständen wie \texttt{Warmup}, \texttt{Playing} und \texttt{GameOver}.\\
+Erwähnenswert sind in diesem Kontext die Anpassungen an die \texttt{GameLoop}, die in die Phasen \texttt{Pre}, \texttt{Main} und \texttt{Post} unterteilt ist.
+Dies erlaubt eine klare Verortung von Spiellogik, Physik-Simulation, Kollisionserkennung, Synchronisation des Szenegraphen sowie weiterer für die Spielmechanik relevanter Systeme.
+
+\texttt{CommitPoints} ermöglichen hierbei eine feingranulare Konfiguration der Verarbeitungsschritte:
+Neben den vordefinierten Phasen- und Framewechseln können innerhalb einer Phase mehrere \texttt{Pass}es definiert werden, die jeweils die als Double-Buffer realisierten MessageBuffer swappen (Kopie Write $\rightarrow$ Read, Löschen von Write).
+
+Alle Systeme lesen dabei aus einem Nachrichtenausgang und schreiben in einen Nachrichtenausgang:
+Auf diese Weise bleibt der gewünschte Determinismus erhalten, wonach nach einem \texttt{CommitPoint} ein wohldefinierter Nachrichtenstand an die Systeme im darauffolgenden Pass übergeben wird.
+Dies führt das Konzept der Datensnapshots fort, die bereits an anderer Stelle in helios klar voneinander abgegrenzte Verarbeitungsschritte erlauben, wie der SceneGraph-Snapshot, der Gamepad-Snapshot oder Snapshots von Objekt-Pools.

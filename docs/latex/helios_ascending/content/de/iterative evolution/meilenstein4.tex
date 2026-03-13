@@ -18,7 +18,11 @@ Insgesamt wurden mit diesem Meilenstein folgende Konzepte umgesetzt:
 
 
 Die bereits erwähnte Umstrukturierung der Codebasis hatte indes Auswirkungen auf den Entwicklungsprozess: Die in dem Prototypen-Dokument erwähnte strikte Trennung in \textit{Module Interface} und \textit{Implementation Units}~\cite[S. 211-213]{Str24}  wurde zugunsten eines verbesserten Refactoring-Workflows aufgegeben: Die Implementierungen wurden in die eigentlichen \textit{Interface Units} zurückgeführt (``header-only`` Ansatz~\cite[S. 279]{Wil05}).
-Dadurch wurde \texttt{helios.engine} als das zentrale Kernmodul der Engine definiert, während sich das bisher verwendete \texttt{game}-Modul als semantisch zu starr erwies und so nicht mehr im Projekt genutzt wird.\\
+Ein wesentlicher Grund hierfür waren die im Rahmen des für iterative Entwicklungsprozesse typischen Refactorings, bei der die Aufteilung trotz ausreichender IDE-Unterstützung\footnote{CLion \url{https://www.jetbrains.com/clion}, Abrufdatum 13.03.2026} zu einer spürbaren kognitiven Last führte: Häufige Kontextwechsel bei der Navigation durch die Quelldateien bedeuteten auch Verzögerungen bei der Anpassung von Schnittstellendefinition und der zugehörigen Implementierung.\footnote{
+Studien zu kognitiver Last in der Softwareentwicklung unter anderem bei Helgesson et al.~cite{HERB19}, die Entwicklerwerkzeuge als Belastungsfaktor identifiziert; ferner Gonçales et al.~\cite{GSFF19}, die Auswirkung kognitiver Belastung auf die Arbeitsqualität berücksichtigt.
+}
+Die Auswirkungen auf die Kompilierzeit wurden im Projektkontext als vernachlässigbar eingestuft, wobei eine belastbare Messung fehlt.\\
+
 
 \subsection{Expression Builder für das Spawn System}
 Außerdem erfolgte eine logische Trennung zwischen engine-intrinsischen Funktionen (der bereits zitierten \textit{Runtime}) und Modulen, die für Spielmechaniken verantwortlich sind und zu denen ein äußerst geringer Grad an Kopplung besteht, den (\texttt{mechanics}), die unter anderem  Implementierungen für Kampf- und Punktesysteme bereitstellen und außerdem ein \textit{Policy}-basiertes System für Spawning und Despawning, das auf dem in dem \texttt{runtime}-Modul platzierten Kern-Spawn-System aufsetzt: Dieses wurde im weiteren Verlauf ausgebaut und kann mit Hilfe einer \textit{Domain Specific Language} (DSL) konfiguriert werden, damit der Entwickler eine semantische Konfiguration von Spawn-Logiken in  Verbindung mit \textit{Prefab}-Pools vornehmen kann.\\

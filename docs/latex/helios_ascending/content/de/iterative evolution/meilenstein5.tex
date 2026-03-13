@@ -1,49 +1,37 @@
 \section{Meilenstein 5: ECS und UI-Architektur}\label{sec:meilenstein_5}
 
-Für Meilenstein~5 war vorgesehen, die Enginesysteme mit dem umzusetzenden Gameplay zu verzahnen.
-Da die fundamentalen Enginesysteme zu diesem Zeitpunkt bereits eine stabile Struktur aufwiesen, wurde zunächst die Datenhaltung der Spielobjekte innerhalb der GameWorld auf eine idiomatischere ECS-Architektur umgestellt.\footnote{
-    Wir verwenden hier den Begriff ``idiomatisch'' im Sinne einer für Game-Engines typischen, datenorientierten Architekturentscheidung, die insbesondere auf Laufzeiteffizienz abzielt.
-Zwar vereinfacht ein Objekt-Orientiertes-Design (OOD) das Abstrahieren hierarchischer Strukturen und kann deshalb gerade in frühen Entwurfsphasen hilfreich sein.
-Unter dem Blickwinkel einer Game Engine als Echtzeitsystem (\cite[525]{Gre19}), dem nur begrenzte Ressourcen zur Verfügung stehen, ist ein Daten-Orientiertes Design (DOD) mit den dafür typischen dichten Speicherlayouts und der Vermeidung tiefer Vererbungshierarchien allerdings ein geeigneterer Ansatz.
-Empirische Studien, die dies unterstreichen, finden sich beispielsweise bei~\cite{FAUM20}.
-}
-Die notwendigen Änderungen beschränkten sich dabei weitgehend auf den Datenhaltungs-Unterbau; die APIs von \textit{GameWorld} und \textit{GameObject} konnten durch die Kapselung der Datenverwaltung weitgehend unverändert bleiben (\cite{Par72}).
-Der größte Migrationsaufwand entstand durch den Austausch der bislang in \textit{helios} verwendeten GUIDs zur Identifikation von Spielobjekten.\footnote{Eine GUID ist eine global eindeutige Identifikationsnummer, die intern als \texttt{uint\_64\_t} implementiert ist.}\\
+Der Meilenstein sah die Implementierung des eigentlichen Gameplays auf Basis der Engine vor.
 
-Mit dem Meilenstein wurde außerdem die Trennung von Interface- und Implementation-Units aufgehoben.
-Im Rahmen des für iterative Entwicklungsprozesse typischen Refactorings führte diese Aufteilung trotz ausreichender IDE-Unterstützung (CLion) zu einer spürbaren kognitiven Last.
-Häufige Kontextwechsel bei der Navigation durch die Quelldateien begünstigten Verzögerungen bei der konsistenten Anpassung von Schnittstellendefinition und zugehöriger Implementierung.
-Die Auswirkungen auf die Kompilierzeit wurden im Projektkontext als vernachlässigbar eingestuft.\\
-Mit zunehmender Erfahrung mit C++ im Rahmen dieses Projekts wuchs das Vertrauen in die eigene Codebasis.
+Zu diesem Zeitpunkt bereits eine stabile Struktur aufwiesen, wurde zunächst die mit Meilenstein 3 gedanklich begonnene Umstellung auf eine ECS-Architektur praktisch durchgeführt.
+Wir sahen hier zunächst Bedarf an der Datenhaltungsschicht, die der GameWorld und den GameObjects mit seinen Komponenten zugrunde lag.
+Gemessen an dem konzeptionellen Bruch, den die Einführung von einem ``echten`` ECS in das Projekt bedeutete, musste vergleichsweise wenig der öffentlichen API angepasst werden: Die Änderungen beschränkten weitgehend auf die tieferen Schichten, öffentliche Schnittstellen von \textit{GameWorld} und \textit{GameObject} konnten durch die Kapselung der Datenverwaltung weitgehend unverändert bleiben (\cite{Par72}).
+Hoher Migrationsaufwand entstand durch den Austausch der bislang in \textit{helios} verwendeten GUIDs zur Identifikation von Spielobjekten, die sich durch alle Schichten der bisher umgesetzten Engine und ihrer Subsysteme zog.\\
+
+Mit zunehmender Erfahrung mit C++ im Rahmen dieses Projekts wuchs auch das Vertrauen in die Codebasis.
 Die ursprünglich konsequente Verwendung von \texttt{unique\_ptr} und \texttt{shared\_ptr} zur Abbildung eindeutiger Besitzverhältnisse sowie zur Unterstützung move-basierter (Besitz)Übergaben wurde in tieferen Schichten der Engine schrittweise durch rohe Zeiger und Referenzen ersetzt.
-Referenzen als Übergabeparameter sollen dabei auch eine an anderer Stelle vereinbarte Lebenszeitgarantie sicherstellen, die in höheren Schichten  modelliert wird.\\
+Referenzen als Übergabeparameter sollen dabei auch eine an anderer Stelle vereinbarte Lebenszeitgarantie sicherstellen, die in höheren Schichten modelliert wird.\\
 
 Mit der Umstellung des \textit{Mental Models}\footnote{
 ``Mature programmers know that the idea that everything is an object \textit{is a myth}. Sometimes you really \textit{do} want simple data structures with procedures operating on them``.~\cite[97, Hervorhebung i.O.]{Mar08}. Auch Fabian geht in~\cite[239-244]{Fab18} darauf ein, dass es zunächst leichter fällt, Problemstellungen in der ``objektorientierten Welt`` zu formulieren.
 } auf \textit{composition over inheritance} wurde zudem Template-Metaprogrammierung als idiomatischer Ansatz zur Bereitstellung generischer Komponenten und Systeme etabliert.
 Dies ermöglichte einen weitgehenden Verzicht auf Vererbung, virtuelle Funktionen und die damit verbundenen Laufzeitkosten (\cite[S. 55]{agnerfog}).
 Ohne Vererbung und Basisklassen kommt \textit{helios} nicht aus, allerdings wurde diese mit zunehmendem Projektfortschritt mit mehr bedacht und gezielter eingesetzt, beispielsweise im Rahmen des Type-Erasure-Idioms (\cite[S. 318-328]{Ban22}).\footnote{
-Auch \textit{Bayliss} weist darauf hin, dass DOD zwar Gründe liefern kann, auf Vererbung und Polymorphie in zu verzichten, es in der Praxis aber kein striktes Regelwerk darstellt, und führt den Gebrauch von Interfaces in \textit{Unity DOTS} als Beispiel~\cite[38]{Bay22}.
+Auch \textit{Bayliss} weist darauf hin, dass DOD zwar Gründe liefern kann, auf Vererbung und Polymorphie zu verzichten, es in der Praxis aber kein striktes Regelwerk darstellt, und führt den Gebrauch von Interfaces in \textit{Unity DOTS} als Beispiel an~\cite[38]{Bay22}.
 }
 Die umgesetzten Vererbungshierarchie bleiben allesamt flach.
 Eine Ausnahme bilden spezialisierte Manager, die von \texttt{Manager} erben und durch die gleichzeitige Nutzung als \texttt{CommandHandler} die Schnittstelle mit \texttt{TypedCommandHandler<T>} kombinieren.
-Da das Leeren der Buffer dieser Objekte jedoch vergleichsweise selten in der GameLoop geschieht,\footnote{ hierfür sind individuell konfigurierbare \texttt{CommitPoints} sowie \textit{Phasenübergänge} vorgesehen} wird der Overhead durch VTable-Lookups hier als nicht kritisch bewertet - eine belastbare Messung steht jedoch aus.\\
-
-Zur Realisierung dichter Speicherlayouts wird außerdem ein \textit{Dense Type Index} (\texttt{TypeIndex}) verwendet.
-Dieser wird über ein \texttt{struct} initialisiert und erzeugt auf Basis der übergebenen Typen einen dichten Index.
-In entsprechenden Anwendungsfällen ermöglicht dies einen elementweisen Zugriff in $O(1)$, während sich dichte (\textit{dense}) Speicherlayouts ergeben, die eine Iteration in $O(N)$ erlauben.
-In den meisten Fällen entspricht $N$ der tatsächlichen Elementanzahl $M$; nur selten gilt aufgrund der \textit{sparsity} solcher Container $N > M$.\\
-Mit dem vorherigen Design von GameObject als compound object, bei dem jedes einzelne ein Heap-Objekt darstellt und zusätzlich einen Speicherbereich für $L$ Komponenten benötigt, ergeben sich statt einem dichten Speicherbereich $N$ Speicherbereiche der Größe $L$, die zusätzlich bei nicht-ausreichender Größe neuen Speicherbereich anfordern und gegebenenfalls die existierenden Speicherinhalte verschieben müssen, was nicht optimal bei den einzelnen Iterationen der GameLoop ist, die bei 120 fps nur ca. $16 ms$ Zeit für alle Operationen und Berechnungen der verschiedenen Systeme hat.\\
+Da das Leeren der Buffer dieser Objekte jedoch vergleichsweise selten in der GameLoop geschieht,\footnote{ hierfür sind individuell konfigurierbare \texttt{CommitPoints} sowie \textit{Phasenübergänge} vorgesehen} wird der Overhead durch VTable-Lookups hier als nicht kritisch bewertet - auch bleiben wir einer belastbaren Messung schuldig.\\
 
 
 Für die Steuerung des Spiels war zudem die Einführung eines User Interfaces notwendig, damit der Anwender neben spielspezifischen Informationen auf einem Heads-Up-Display (\textit{HUD}) auch Menüoptionen zum Starten, Pausieren, Neustarten und Beenden des Spiels erhält.
 
-Die Umsetzung erwies sich dabei als Domänenbruch gegenüber den parallel fertigzustellenden Spielmechaniken; diese Zusatzkomplexität wurde in der Meilensteinplanung nicht ausreichend berücksichtigt, die Fertigstellung  hat sich dabei wesentlich verzögert.\\
+Die Umsetzung erwies sich dabei erneut als fachlicher Bruch im Entwicklungsprozess parallel fertigzustellenden Spielmechaniken -
+    Oder, im Kontext Requirements Engineering - \textit{Scope Creep}~\cite[S. 274]{Mou15}, wobei die Anforderung bei der Planung des Projektes entsprechender fachlicher Reife hätte klar sein sollen.
+Die Fertigstellung  hat sich dabei wesentlich verzögert: Für die Textdarstellung folgen wir der Einfachheit halber de~Vries~\cite[S.~449--457]{Vri20} und haben die Anzeige als Glyph-Rendering mittels FreeType (\cite{freetype}) umgesetzt, und berücksichtigen das Text-Rendering in der Render-Pipeline in einem auf das  Mesh-Rendering folgenden Durchlauf.
+Texte werden dabei als spezialisierte Renderables behandelt, die neben der Zuordnung der Font-Ressource auch die Konfiguration von Skalierungsfaktor und Textfarbe erlauben.\\
 
-Für die Textdarstellung folgen wir de~Vries~\cite[S.~449--457]{Vri20} und haben die Anzeige als Glyph-Rendering mittels FreeType (\cite{freetype}) umgesetzt.
-Das Text-Rendering wird in der Render-Pipeline in einem separaten Durchlauf nach dem Mesh-Rendering berücksichtigt.
-Texte werden dabei als spezialisierte Renderables behandelt, die neben der Zuordnung der Font-Ressource auch die Konfiguration von Skalierungsfaktor und Textfarbe erlauben.
-Ein weiterer Bruch - in semantischer Hinsicht - entsteht durch die Behandlung von Texten als GameObjects, die - analog zu aktiv am Gameplay teilnehmenden Objekten - in der GameWorld verankert sind (siehe~\ref{lst:gameobject_text}) - was gleichzeitig Implementierungsaufwand eingespart hat:
+Eine semantische Expansion des bisher als (inter)aktiven Begriff aufgefassten GameObject entsteht durch  durch die Behandlung von Texten - als GameObjects.
+Auch diese sind bei helios in der GameWorld verankert (siehe~\ref{lst:gameobject_text}), wodurch wir eine weitere Abstraktionsschicht eingespart haben.
 Komponenten, welche die für die Anzeige benötigten Daten vorhalten (z.\,B.~Anzahl Spielerleben, ScorePool-Ids, Timer), werden über ein einfaches Binding-System pro GameLoop-Iteration abgefragt und zur Anzeige gebracht.
 
 \begin{lstlisting}[style=c++style,
@@ -55,40 +43,28 @@ auto scoreText = GameObjectFactory::instance()
         rnb.textRenderable()
            .formattedAsNumber("Score: {:.0f}")
            .fontScale(1.0f)
-           ...
-           .color(helios::util::Colors::WhiteSmoke)
-           .attachTo(&hudScene.root());
+           .color(helios::util::Colors::WhiteSmoke);
     })
     .withObserver([&](auto& ob) {
         ob.observe()
-          .runningScore(ScorePoolId{"playerOneScorePool"});
+          .runningScore(ScorePoolId{"PlayerOne_ScorePool"});
     })
     .withUiTransform([](auto& tb) {
         tb.transform()
           .pivot(Anchor::TopRight)
-          .viewport(ViewportId{"hudViewport"})
           .anchor(Anchor::TopRight)
+          .viewport(ViewportId{"hudViewport"})
           .offsets({60.0f, 50.0f, 0.0f, 0.0f});
-    })
-    .make();
+    });
 \end{lstlisting}
 
 Neben der Textanzeige erforderte die Umsetzung der Spielmenüs außerdem eine Evaluierung von Spielzuständen, welches in helios über endliche Automaten realisiert wurde.
-Die Implementierung des Moduls \texttt{helios.engine.state} ist template-basiert und erlaubt die Definition weiterer Zustandsautomaten, um beispielsweise hierarchische Automaten für komplexere Spielsteuerung zu realisieren.
-Als Basis-Implementierung liefert \textit{helios} die Automaten \texttt{GameState} und \texttt{MatchState}.
-\texttt{GameState} repräsentiert dabei eine übergeordnete ``\textit{Shell}'' und definiert allgemeine Systemzustände wie \texttt{Title}, \texttt{Running} und \texttt{Paused}.
-\texttt{MatchState} ist als eingebetteter Automat ausgeführt und übernimmt die Zustandssteuerung einzelner Spieldurchläufe mit Zuständen wie \texttt{Warmup}, \texttt{Playing} und \texttt{GameOver}.\\
-Erwähnenswert sind in diesem Kontext die Anpassungen an die \texttt{GameLoop}, die in die Phasen \texttt{Pre}, \texttt{Main} und \texttt{Post} unterteilt ist.
-Dies erlaubt eine klare Verortung von Spiellogik, Physik-Simulation, Kollisionserkennung, Synchronisation des Szenegraphen sowie weiterer für die Spielmechanik relevanter Systeme.
-\texttt{CommitPoints} ermöglichen hierbei eine feingranulare Konfiguration der Verarbeitungsschritte:
-Neben den vordefinierten Phasen- und Framewechseln können innerhalb einer Phase mehrere \texttt{Pass}es definiert werden, die jeweils die als Double-Buffer realisierten MessageBuffer swappen (Kopie Write $\rightarrow$ Read, Löschen von Write).
+Die Implementierung des Moduls \texttt{helios.engine.state}  folgt einem generischen Muster auf Basis von Templates.
+Damit ist die Definition weiterer Zustandsautomaten möglich, um beispielsweise hierarchische Automaten für komplexere Spielsteuerung zu realisieren (siehe Abschnitt~\ref{sec:state_management}).\\
 
-Alle Systeme lesen dabei aus einem Nachrichtenausgang und schreiben in einen Nachrichtenausgang:
-Auf diese Weise bleibt der gewünschte Determinismus erhalten, wonach nach einem \texttt{CommitPoint} ein wohldefinierter Nachrichtenstand an die Systeme im darauffolgenden Pass übergeben wird.
-Dies führt das Konzept der Datensnapshots fort, die bereits an anderer Stelle in helios klar voneinander abgegrenzte Verarbeitungsschritte erlauben, wie der SceneGraph-Snapshot, der Gamepad-Snapshot oder Snapshots von Objekt-Pools.
+Mit der Unterstützung von endlichen Automaten wurde die \texttt{GameLoop} zusätzlich um die Möglichkeit erweitert, Pässe über eine Bitmaske den Zuständen zuzuordnen, in denen sie ausgeführt werden sollen.
 
-Mit Einführung der State Machines wurde die GameLoop zusätzlich um die Möglichkeit erweitert, Pässe über eine Bitmaske den Zuständen zuzuordnen, in denen sie ausgeführt werden sollen.
-
+Weitere Features, die in diesem Meilenstein hinzugefügt wurden, sind weniger architektonischer Natur, sondern betreffen übweigend Gameplay-Machiniken, unter anderem die Einführung von \textit{Timer}-Systemen, um ein zeitbasiertes Level zu ermöglichen, sowie die Umsetzung von \textit{Player Lives} in Anzeige und Regelsystem, mit entsprechendem \textit{Game Over}-Zustand.\\
 
 \begin{figure}[H]
   \centering

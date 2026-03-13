@@ -1,8 +1,8 @@
-\section{System-Layering und Modul Struktur}
+\section{System-Layering und Modulstruktur}
 
-\subsection{Strukturierung der engine-Schicht}
+\subsection{Strukturierung des Engine-Kerns}
 
-Die Strukturierung der engine Schicht folgt der im ersten Dokument beschriebenen Unterteilung in Module und folgt wie in dem dem Dokument weitestgehend einer ``by-feature, by-layer``-Strukturierung und ist in Abbildung~\ref{fig:engine_struktur} dargestellt.
+Die Strukturierung des Engine-Kerns folgt der im Prototypen-Dokument beschriebenen Unterteilung in Module und orientiert sich weitestgehend an einer ``by-feature, by-layer``-Strukturierung, wie sie in Abbildung~\ref{fig:engine_struktur} dargestellt ist.
 
 \begin{figure}[htbp]
     \setlength{\DTbaselineskip}{18pt}
@@ -10,6 +10,7 @@ Die Strukturierung der engine Schicht folgt der im ersten Dokument beschriebenen
         .1 ./engine.
         .2 builder/.
         .2 common/.
+        .2 core/.
         .2 ecs/.
         .2 mechanics/.
         .2 modules/.
@@ -20,63 +21,69 @@ Die Strukturierung der engine Schicht folgt der im ersten Dokument beschriebenen
     \label{fig:engine_struktur}
 \end{figure}
 
-Hierbei gestaltet sich die Unterteilung in Module wie folgt:
+Die Unterteilung der Module gestaltet sich dabei wie folgt:
 
 \begin{itemize}
-    \itemsep0.5em
-    \item \texttt{builder/}: Stellt Builder-Klassen für Spawn-Systeme und GameObjects-bereit, auf Basis von Fluent Interface sowie einer Domain-Specific Language (DSL), um die Erstellung von Fachobjekten von einem hohen Abstraktionsgrad in einen zugänglichen semantischen Kontext zu überführen.
-    \item \texttt{common/}: Enthält allgemeine Hilfsklassen, die vor allem von \texttt{mechanics} und \texttt{modules} genutzt werden, darunter spielspezifische Kontextklassen, die für verschiedene Systeme und Komponenten relevante Informationen über die aktuelle Spielsituation bereitstellen.
-    \item \texttt{core/}: Stellt fundamentale Datentypen und -Objekte zur Verfügung, die für den Betrieb der engine benötigt werden, darunter bspw. \texttt{Units}, die das metrische System für die helios bereitstellt.
-    \item \texttt{ecs/}: Implementiert die Kernkomponenten der ECS-Architektur, darunter den \texttt{EntityManager}, die \texttt{GameObject}-Fassade und die \texttt{SparseSet}-Datenstruktur.
-    \item \texttt{mechanics/}: Implementiert Komponenten, Systeme, Datentypen und Nachrichten-Objekte für verschiedene Spielmechaniken, beispielsweise für Eingabeverarbeitung, Gesundheits- und Schadenszustände sowie Punktesysteme.
-    \item \texttt{modules/}: Ähnlich wie mechanics stellt dieses Modul Spielmechaniken bereit.
-    \item Wir sehen hier aber eine Unterschediung in zu Mechanics bei den Domänen, die von diesen Modulen abgedeckt wird, darunter \texttt{ai}, \texttt{physics} und \texttt{rendering}, also Features, die eher nah am Kern der engine angelagert sind und grundlegende Unterstützung für die Entwicklung von Spielen bereitstellen.
-    \item \texttt{runtime/}: Stellt das Modul bereit, dass laufzeitnahe Systeme enthält, wie \texttt{messaging}, \texttt{gameloop} und \texttt{world}.
-    Die Module enthalten neben Datentrukturen auch Manager-Klassen zur Verarbeitung von Klassen.
-    DIe Implementierung ist generisch gehalten, darauf aufbauende Funktionalitäten sind in \texttt{mechanics} und \texttt{modules} ausgelagert.
-    \item \texttt{tooling/}: Vorgesehen für das Tooling-Layer der Engine, enthält momentan Hilfsklassen zur Messung der FPS, die als \texttt{FrameStats} pro Frame gespeichert und u.a. für die weitere Verarbeitung innderhalb eines Frames den beteiligten Systemen zur Verfügung gestellt werden.
+\itemsep0.5em
+\item \texttt{builder/}: Stellt \textit{Builder}-Klassen für Spawn-Systeme und \texttt{GameObject}s bereit.
+ Diese basieren auf \etxtit{Expression Builder}, \textit{Fluent Interfaces} sowie einer \textit{Domain-Specific Language} (DSL), um die Konfiguration von Fachobjekten von einem hohen Abstraktionsgrad in einen besser lesbaren Kontext zu überführen.
+\item \texttt{common/}: Enthält allgemeine Hilfsklassen, die vor allem von \texttt{mechanics} und \texttt{modules} genutzt werden, darunter spielspezifische Kontextklassen für systemübergreifende Informationen.
+\item \texttt{core/}: Stellt fundamentale Datentypen und Objekte zur Verfügung, die für den Betrieb der Engine benötigt werden, wie beispielsweise \texttt{Units}, die das metrische System für \textit{helios} definieren.
+\item \texttt{ecs/}: Implementiert die Kernkomponenten der ECS-Architektur, darunter den \texttt{EntityManager}, die \texttt{GameObject}-Fassade und die \texttt{SparseSet}-Datenstruktur.
+\item \texttt{mechanics/}: Implementiert Komponenten, Systeme, Datentypen und Nachrichten-Objekte für spezifische Spielmechaniken (z.B. Eingabeverarbeitung, Gesundheits- und Schadenslogik sowie Punktesysteme).
+\item \texttt{modules/}: Stellt Subsysteme mit einer höheren Nähe zum Engine-Kern bereits.
+Dazu zählen Domänen wie \texttt{ai}, \texttt{physics} und \texttt{rendering}, die hierdurch auch die Infrastruktur für Gameplay liefern.
+\item \texttt{runtime/}: Beinhaltet laufzeitnahe Kernsysteme wie \texttt{engine.messaging}, \texttt{engine.gameloop} und \texttt{engine.world}.
+Diese C++-Module enthalten neben Datenstrukturen auch \textit{Manager}-Klassen.
+Ihre Implementierung ist weitgehend generisch gehalten; darauf aufbauende Fachlogiken sind in \texttt{mechanics} und \texttt{modules} ausgelagert.
+\item \texttt{tooling/}: Das Tooling-Layer der Engine.
+Es enthält aktuell Hilfsklassen zur Erfassung von Performance-Metriken, darunter \texttt{FrameStats}: Diese werden pro Frame $N$ diskret aufgezeichnet und den Systemen zur weiteren Verarbeitung in Frame $N+1$ zur Verfügung gestellt.
 \end{itemize}
 
 Die Strukturierung folgt an dieser Stelle einem \textit{by-layer}-Konzept.
-Damit ergibt sich die Schichtenarchitektur für das engine-Modul, die in Abbildung~\ref{fig:engine_architektur} dargestellt ist.
+Damit ergibt sich für das \texttt{engine}-Modul die Schichtenarchitektur, die in Abbildung~\ref{fig:engine_architektur} dargestellt ist.
 
-\subsection{Namenskonvention für tiefergeschachtelte Schichten}
-Innerhalb der Module nutzt helios zur einfachen Identifizierung der Schichten und einer technischen Zuordnung der darin enthaltenen Fachobjekte die folgenden Namen:
+\subsection{Namenskonvention für tiefere Schichten}
+Innerhalb der Module nutzt \textit{helios} zur eindeutigen Identifizierung und technischen Zuordnung der Fachobjekte die folgenden Namenskonventionen zur Verortung von Implementierungen:
 
 \begin{itemize}
-    \itemsep0.5em
-    \item \texttt{commands}: Steuerkommandos, die von verschiedenen Systemen innerhalb eines Frames von Systemen und Managern generiert werden können.Die Verarbeitung von Commands wird über \texttt{CommandHandler} realisiert, die nur als Konzept existieren und auf die wir unter dem Abschnitt Kernkonzepte näher eingehen werden.
-    \item \texttt{components}: Fachobjekte, die den Zustand von GameObjects repräsentieren und von der engine verarbeitet und modifiziert werden. In der Regel handelt es sich um reine Datenstrukturen, die Invarianten (bspw. ein \textit{Clamping} auf einen gültigen Wertebereich) enthalten können, aber keine Logik, die über Getter und Setter hinausgeht.\footnote{
-    Damit grenzt sich das Komponentensystem von Unity ab, das seine Komponenten idiomatisch als reine Informationsträger in \texttt{structs} vorsieht~\cite{UnityComponentConcepts}.
-    }
-    \item \texttt{events}: Nachrichten, die einzelne Systeme in einem Frame generieren können, und die von nachgelagerten Systemen oder Frames verarbeitet werden können. Im Unterschied zu den Steuerkommandos kommt ihnen keine deterministische Rolle zu, sie existieren i.d.R. als Informationsträger, die eine bestimmte Reaktion auslösen können. Wird die Reaktion nciht ausgelöst, kann das Spiel trotzdem weiterlaufen
-    \item \texttt{systems}: Systeme, die das Verhalten von GameObjects modifzieren, indem sie Komponenten lesen und schreiben, sowie Commands und Events generieren.
-    \item \texttt{types}: Datentypen wie Kontextobjekte zum Transport von Informationen und Zuständen, sowie typisierte Ids zur Identifizierung von Daten zur Laufzeit.
+\itemsep0.5em
+\item \texttt{commands}: Steuerkommandos, die innerhalb eines Frames von Systemen und Managern generiert werden.
+Die Verarbeitung erfolgt über \texttt{CommandHandler}-Konzepte, auf die im Abschnitt~\ref{sec:runtime_messaging}  näher eingegangen wird.
+\item \texttt{components}: Objekte, die fachlich unterschiedliche Zustände eines \texttt{GameObject}s repräsentieren.
+Als primär datenhaltende \texttt{struct}s konzipiert, können diese Objekte auch Invarianten absichern, etwa durch \textit{Clamping} von Werten, sollten darüber hinaus jedoch kein Verhalten implementieren.\footnote{Im Gegensatz zu unserem Konzept, das Invarianten erlaubt, sehen andere ECS-Architekturen wie \textit{Unity DOTS} vor, dass Komponenten als reine Informationsträger fungieren~\cite{UnityComponentConcepts}.}
+\item \texttt{events}: Nachrichten, die Systeme in Frame $N$ generieren und die von nachgelagerten Systemen im selben Frame oder in Frame $N+1$ verarbeitet werden können.
+Im Gegensatz zu \texttt{Commands} sind \textit{Events} als Informationsträger konzipiert.
+Sind deterministische Aktionen gefragt, sollten \texttt{Command}s verwendet werden.
+Die Unterscheidung existiert in helios aber nur auf semantischer Ebene.
+\item \texttt{systems}: Logik-Einheiten, die das Verhalten von \texttt{GameObject}s modifizieren, indem sie Komponenten aktualisieren  sowie \texttt{Commands} und \texttt{Events} emittieren.
+\item \texttt{types}: Hilfstypen wie Kontextobjekte (DTOs) zum Datentransport sowie typisierte IDs zur sicheren Identifizierung von Ressourcen zur Laufzeit.
 \end{itemize}
 
 \begin{figure}[htbp]
     \setlength{\DTbaselineskip}{18pt}
-        \dirtree{%
-          .1 ./mechanics/health/.
-          .2 components/.
-          .3 HealthComponent.ixx.
-          .2 events/.
-          .3 HealthChangedEvent.ixx.
-          .3 HealthDepletedEvent.ixx.
-          .2 systems/.
-          .3 HealthUpdateClearSystem.ixx.
-          .2 types/.
-          .3 HealthChangeContext.hpp.
-          .3 HealthDepletedBehavior.hpp.
-        }
+    \dirtree{%
+        .1 ./mechanics/health/.
+        .2 components/.
+        .3 HealthComponent.ixx.
+        .2 events/.
+        .3 HealthChangedEvent.ixx.
+        .3 HealthDepletedEvent.ixx.
+        .2 systems/.
+        .3 HealthUpdateClearSystem.ixx.
+        .2 types/.
+        .3 HealthChangeContext.hpp.
+        .3 HealthDepletedBehavior.hpp.
+    }
     \caption{Veranschaulichung der Namenskonventionen in helios anhand der \textit{health}-Spielmechanik.
-    Die \texttt{HealthComponent} beinhaltet Eigenschaften wie einen skalaren HP-Wert und Methoden. Invarianten werden dort über Methoden  Beispiel der Stukturierung Struktur des engine-Moduls von helios.}
-    \label{fig:engine_struktur}
+    Die \texttt{HealthComponent} beinhaltet Eigenschaften wie einen skalaren HP-Wert und Methoden. Invarianten werden dort über Methoden zugesichert.}
+    \label{fig:health_struktur}
 \end{figure}
 
 
-Während \texttt{types}, \texttt{events} und \texttt{commands} aufgrund ihrer Semantik auch in anderen Schichten des Frameworks vorkommen, finden sich \texttt{commands} und \texttt{systems} überwiegend in den Modulen, die Spielmechaniken umsetzen, also \texttt{mechanics} und \texttt{modules}.
-Ihre Rolle ist stark mit dem in Helios implementierten ecs-System verbunden, der Zugriff auf diese Objekte findet überweigend durch die in \texttt{runtime} definierten Laufzeitsysteme statt.
+Während \texttt{types}, \texttt{events} und \texttt{commands} aufgrund ihrer universellen Semantik in verschiedenen Schichten vorkommen, finden sich \texttt{systems} überwiegend in den Modulen \texttt{mechanics} und \texttt{modules}.
+Ihre Rolle ist untrennbar mit dem ECS-Kern in helios verbunden; ihre Ausführung erfolgt primär über die in \texttt{runtime} definierten Laufzeitsysteme.
+
 
 
 

@@ -1,35 +1,38 @@
 \section{Meilenstein 5: ECS und UI-Architektur}\label{sec:meilenstein_5}
 
-Ziel von Meilenstein 5 war die Umsetzung und Integration von Gameplay-Mechaniken mit dem zugrundeliegenden Framework.\\
+Ziel von Meilenstein 5 war die Umsetzung und Integration von Gameplay-Mechaniken in das zugrundeliegende Framework.
+Da \textit{helios} zum Ende des vorangegangenen Meilensteins bereits sehr stabil lief, wurde zunächst die mit Meilenstein 3 eingeleitete gedankliche Umstellung auf eine ECS-Architektur nun auch praktisch vollzogen.
 
-Da helios mit Ende des vorangegangenen Meilensteins bereits sehr stabil lief, wurde zunächst die mit Meilenstein 3 einhergegangene gedankliche Umstellung auf eine ECS-Architektur auch praktisch durchgeführt.
-
-Wir sahen hier zunächst Bedarf, die Datenhaltungsschicht der GameWorld umzustellen, was ein Entkernen der direkt verwalteten \texttt{GameObject}s, der \texttt{Manager}-Klassen und der \texttt{CommandHandler} und \texttt{CommandBuffer} bedeutete.
-Gemessen an dem konzeptionellen Bruch, den die Einführung eines ``echten`` ECS in das Projekt mit sich brachte, musste vergleichsweise wenig der öffentlichen API angepasst werden: Die Änderungen beschränkten weitgehend auf die tiefere, gekapselte Schichten; öffentliche Schnittstellen von \textit{GameWorld} und \textit{GameObject} blieben weitestgehend unverändert~\cite{Par72}.
-Hoher Migrationsaufwand entstand durch den Austausch der bislang in \textit{helios} verwendeten GUIDs zur Identifikation von Spielobjekten, die sich durch alle Schichten der bisher umgesetzten Engine und ihrer Subsysteme zog - da diese GUIDS nun durch einen \texttt{EntityHandle} ersetzt wurde, der einem zusammengesetztenSchlüssel entsprach - waren die Änderungen aber überwiegend von syntaktischer Natur.\\
-
+Wir sahen hier zunächst Bedarf, die Datenhaltungsschicht der \textit{GameWorld} umzustrukturieren, was ein ``Entkernen`` der direkt verwalteten \texttt{GameObject}s, der \texttt{Manager}-Klassen sowie der \texttt{CommandHandler} und \texttt{CommandBuffer} bedeutete.
+Gemessen an dem konzeptionellen Bruch, den die Einführung eines ``echten`` ECS in das Projekt mit sich brachte, musste vergleichsweise wenig an der öffentlichen API angepasst werden: Die Änderungen beschränkten sich weitgehend auf die tieferen, gekapselten Schichten; die öffentlichen Schnittstellen von \textit{GameWorld} und \textit{GameObject} blieben weitestgehend unverändert~\cite{Par72}.
+Ein hoher Migrationsaufwand entstand jedoch durch den Austausch der bislang in \textit{helios} verwendeten GUIDs zur Identifikation von Spielobjekten, die sich durch alle Schichten der bisher umgesetzten Engine und ihrer Subsysteme zogen.
+Da diese GUIDs nun durch einen \texttt{EntityHandle} ersetzt wurden - der einem zusammengesetzten Schlüssel entsprach -, waren die Änderungen zwar zahlreich, aber überwiegend von syntaktischer Natur.
 
 Mit der Umstellung des \textit{Mental Models}\footnote{
     ``Mature programmers know that the idea that everything is an object \textit{is a myth}. Sometimes you really \textit{do} want simple data structures with procedures operating on them``.~\cite[97, Hervorhebung i.O.]{Mar08}. Auch Fabian geht in~\cite[239-244]{Fab18} darauf ein, dass es zunächst leichter fällt, Problemstellungen in der ``objektorientierten Welt`` zu formulieren.
-} zu dem \textit{composition over inheritance}-Konzept wurde zudem  Template-Metaprogrammierung~\cite[S. 112-114]{Str18} als idiomatischer Ansatz zur Bereitstellung generischer Komponenten und Systeme etabliert, deren großen Vorteil wir für helios insbesondere in der zur Kompilierungszeit garantierten Typsicherheit sehen.
-Das klassische \textit{Liskovsche Substitutionsprinzip}~\cite[S. 148]{LG01} wird dabei durch die Verwendung von \textit{C++-Concepts}~\cite[S. 107-112]{Str18} und statischer Introspektion ersetzt, die Validierung von Typeigenschaften wird vollständig in die Kompilierphase verlagert zugunsten reduzierter Typprüfung im \textit{Hot Path}.\\
+} hin zum Prinzip \textit{composition over inheritance} wurde zudem die Template-Metaprogrammierung~\cite[S. 112-114]{Str18} als idiomatischer Ansatz zur Bereitstellung generischer Komponenten und Systeme etabliert.
+Deren großer Vorteil für \textit{helios} liegt insbesondere in der zur Kompilierzeit abgesicherten Typsicherheit.
+Das klassische \textit{Liskovsche Substitutionsprinzip}~\cite[S.~148]{LG01} tritt dabei gegenüber der Verwendung von \textit{C++-Concepts}~\cite[S.~107--112]{Str18} und statischer Introspektion in den Hintergrund; die Validierung von Typeigenschaften wird weitgehend in die Kompilierphase verlagert, zugunsten reduzierter Typprüfung im \textit{Hot Path}.
+Damit erkauft sich \textit{helios} einen weitgehenden Verzicht auf Vererbung, virtuelle Funktionen und die damit verbundenen Laufzeitkosten~\cite[S. 55]{agnerfog} um den Preis eines aufwändigeren Bootstrappings.\footnote{Auch Auswirkungen dieses Ansatzes auf ein eventuelles Editor-System wären hier zu bedenken.}
+Ganz ohne Vererbung und Basisklassen kommt \textit{helios} zwar nicht aus, allerdings wurden diese mit zunehmendem Projektfortschritt gezielter eingesetzt, beispielsweise im Rahmen des \textit{Type-Erasure}-Idioms~\cite[S. 318-328]{Ban22}.\footnote{
+    \textit{Bayliss} weist darauf hin, dass DOD zwar Gründe liefern kann, auf Vererbung und Polymorphie zu verzichten, es in der Praxis aber kein striktes Regelwerk darstellt; er führt den Gebrauch von Interfaces in \textit{Unity DOTS} als Gegenbeispiel an~\cite[38]{Bay22}.
+} Vererbung findet sich nun überwiegend in den frühen Schichten der Architektur, die rückblickend als \textit{technical debt} verstanden werden können.\\
 
-Damit erkauft sich helios einen weitgehenden Verzicht auf Vererbung, virtuelle Funktionen und den damit verbundenen Laufzeitkosten (\cite[S. 55]{agnerfog}).
-Ohne Vererbung und Basisklassen kommt \textit{helios} nicht aus, allerdings wurde diese mit zunehmendem Projektfortschritt gezielter eingesetzt, beispielsweise im Rahmen des Type-Erasure-Idioms (\cite[S. 318-328]{Ban22}).\footnote{
-\textit{Bayliss} weist darauf hin, dass DOD zwar Gründe liefern kann, auf Vererbung und Polymorphie zu verzichten, es in der Praxis aber kein striktes Regelwerk darstellt, und führt den Gebrauch von Interfaces in \textit{Unity DOTS} als Gegenbeispiel an~\cite[38]{Bay22}.
-} Vererbung findet sich überweigend in den früheren Schichten der Architektur, die als \textit{technical debt} verstanden werden.
+Neben der Umstellung der Datenhaltung erwies sich in diesem Meilenstein die Integration eines User Interface als weitaus folgenreicher.
 
 \subsection{UI-Elemente als Scope Creep}
 Für die Steuerung des Spiels war zudem die Einführung eines User Interface notwendig, damit der Anwender neben spielspezifischen Informationen auf einem Heads-Up-Display (\textit{HUD}) auch Menüoptionen zum Starten, Pausieren, Neustarten und Beenden des Spiels erhält.
 
-Die Umsetzung erwies sich dabei erneut als Unterbrechung des Entwicklungsprozess der Spielmechaniken.
-Im Kontext Requirements Engineering - \textit{Scope Creep}~\cite[S. 274]{Mou15}, wobei die Anforderung bei der Planung des Projektes entsprechender fachlicher Reife hätte klar sein sollen.
-Die Fertigstellung  hat sich dabei wesentlich verzögert: Für die Textdarstellung folgen wir der Einfachheit halber de~Vries~\cite[S.~449--457]{Vri20} und haben die Anzeige als Glyph-Rendering mittels FreeType (\cite{freetype}) umgesetzt, und berücksichtigen das Text-Rendering in der Render-Pipeline in einem auf das  Mesh-Rendering folgenden Durchlauf.
-Texte werden dabei als spezialisierte Renderables behandelt, die neben der Zuordnung der Font-Ressource auch die Konfiguration von Skalierungsfaktor und Textfarbe erlauben.\\
+Die Umsetzung erwies sich dabei erneut als Unterbrechung des Entwicklungsprozesses der Spielmechaniken.
+Im Kontext des \textit{Requirements Engineering} lässt sich dies als \textit{Scope Creep}~\cite[S. 274]{Mou15} einordnen, wobei die Anforderung bei einer entsprechenden fachlichen Reife bereits bei der Planung des Projektes hätte klar sein müssen.
+Die Fertigstellung hat sich dadurch wesentlich verzögert: Für die Textdarstellung folgen wir der Einfachheit halber de~Vries~\cite[S.~449--457]{Vri20} und haben die Anzeige als Glyph-Rendering mittels FreeType~\cite{freetype} umgesetzt.
+Das Text-Rendering wird in der Render-Pipeline in einem auf das Mesh-Rendering folgenden Durchlauf berücksichtigt.
+Texte werden dabei als spezialisierte \textit{Renderables} behandelt, die neben der Zuordnung der Font-Ressource auch die Konfiguration von Skalierungsfaktor und Textfarbe erlauben.\\
 
-Eine semantische Expansion des bisher als (inter)aktiven Begriff aufgefassten GameObject entsteht durch  durch die Behandlung von Texten - als GameObjects.
-Auch diese sind bei helios in der GameWorld verankert (siehe~\ref{lst:gameobject_text}), wodurch wir eine weitere Abstraktionsschicht eingespart haben.
-Komponenten, welche die für die Anzeige benötigten Daten vorhalten (z.\,B.~Anzahl Spielerleben, ScorePool-Ids, Timer), werden über ein einfaches Binding-System pro GameLoop-Iteration abgefragt und zur Anzeige gebracht.
+Eine semantische Erweiterung des bisher primär als (inter-)aktiven verstandenen \textit{GameObject}-Begriffs ergibt sich durch die Behandlung von Texten als eben solche Objekte.
+Auch diese sind bei \textit{helios} in der \textit{GameWorld} verankert (siehe~\ref{lst:gameobject_text}), wodurch wir eine weitere Abstraktionsschicht eingespart haben.
+Komponenten, welche die für die Anzeige benötigten Daten vorhalten (z.,B.~Anzahl der Spielerleben, ScorePool-IDs, Timer), werden über ein einfaches Binding-System pro GameLoop-Iteration abgefragt und zur Anzeige gebracht.
+
 
 \begin{lstlisting}[style=c++style,
   caption={Implementierung eines einfachen Score-Textes, der die Punktzahl des Spielers anzeigt. UI-Elemente werden analog zu aktiven, mit der Spielwelt verbundenen Objekten modelliert und entsprechend konfiguriert.},
@@ -55,13 +58,13 @@ auto scoreText = GameObjectFactory::instance()
     });
 \end{lstlisting}
 
-Neben der Textanzeige erforderte die Umsetzung der Spielmenüs außerdem eine Evaluierung von Spielzuständen, welches in helios über endliche Automaten realisiert wurde.
-Die Implementierung des Moduls \texttt{helios.engine.state}  folgt einem generischen Muster auf Basis von Templates.
-Damit ist die Definition weiterer Zustandsautomaten möglich, um beispielsweise hierarchische Automaten für komplexere Spielsteuerung zu realisieren (siehe Abschnitt~\ref{sec:state_management}).\\
+Neben der Textanzeige erforderte die Umsetzung der Spielmenüs außerdem eine Evaluierung von Spielzuständen, die in \textit{helios} über endliche Automaten realisiert wurde.
+Die Implementierung des Moduls \texttt{helios.engine.state} folgt einem generischen Muster auf Basis von Templates.
+Damit ist die Definition weiterer Zustandsautomaten möglich, um beispielsweise hierarchische Automaten für komplexere Spielsteuerungen zu realisieren (siehe Abschnitt~\ref{sec:state_management}).\\
 
 Mit der Unterstützung von endlichen Automaten wurde die \texttt{GameLoop} zusätzlich um die Möglichkeit erweitert, Pässe über eine Bitmaske den Zuständen zuzuordnen, in denen sie ausgeführt werden sollen.
 
-Weitere Features, die in diesem Meilenstein hinzugefügt wurden, sind weniger architektonischer Natur, sondern betreffen übweigend Gameplay-Machiniken, unter anderem die Einführung von \textit{Timer}-Systemen, um ein zeitbasiertes Level zu ermöglichen, sowie die Umsetzung von \textit{Player Lives} in Anzeige und Regelsystem, mit entsprechendem \textit{Game Over}-Zustand.\\
+Weitere Features, die in diesem Meilenstein hinzugefügt wurden, sind weniger architektonischer Natur, sondern betreffen überwiegend Gameplay-Mechaniken, unter anderem die Einführung von \textit{Timer}-Systemen für zeitbasierte Level sowie die Umsetzung von \textit{Player Lives} zur Berücksichtigung in entsprechenden Regelsystemen und einem \textit{Game Over}-Zustand.
 
 \begin{figure}[H]
   \centering

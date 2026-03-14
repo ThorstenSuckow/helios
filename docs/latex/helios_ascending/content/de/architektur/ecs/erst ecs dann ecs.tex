@@ -7,18 +7,18 @@
 
 \subsection{Von Entities, Components und Systems zu einem Entity Component System}
 
+Objekt-Orientiertes-Design (OOD) erleichtert mit seinen Konzepten und Werkzeugen das Abstrahieren hierarchischer Strukturen, und erweist sich deshalb gerade in frühen Entwurfsphasen als hilfreich bei der Modellierung~\cite{BMEY07}.
+Betrachtet man eine Game Engine als Echtzeitsystem~\cite[525]{Gre19}, dem nur begrenzte Ressourcen zur Verfügung stehen, stellt ein datenorientiertes Design mit seinen dichten Speicherlayouts und der Vermeidung tiefer Vererbungshierarchien den geeigneteren Ansatz dar\footnote{
+    Empirische Studien, die dies unterstreichen, finden sich bei~\cite{FAUM20} und~\cite{WWM22}.
+}.
+Dies steht im Gegensatz zu Domänen, in denen steigende Laufzeitkosten aufgrund hochgradig abstrahierter Softwaremodelle durch die Bereitstellung zusätzlicher Hardware kompensiert werden kann.\\
 
-Objekt-Orientiertes-Design (OOD) erleichtert mit seinen Konzepten und Werkzeugen das Abstrahieren hierarchischer Strukturen , und ist deshalb gerade in frühen Entwurfsphasen hilfreich bei der Modellierung~\cite{BMEY07}.
+Dennoch muss der objektorientierte Entwurf unter dem Blickwinkel des DOD keineswegs verworfen werden, wie auch Fabian  in~\cite[239-244]{Fab18} feststellt.
+Allerdings bewegen wir uns dabei in einem Spannungsfeld, in dem die Konzeption von Fachobjekten und deren technische Umsetzung  stark divergieren.
+Daraus ergibt sich die Herausforderung, das in Abschnitt~\ref{sec:meilenstein_5} angesprochene \textit{Mental Model} konsequent umzustellen, von einem Ansatz, in dem die Funktion der Form folgt (\textit{function follows form}~\cite{TD01}), hin zu einem Design, bei dem die Form (das Datenlayout) durch die Funktion (die Performance-Anforderungen) bestimmt wird (\textit{form follows function}).\\
 
-Mit der Umstellung auf ein datenorientiertes Design sahen wir uns der Herausforderung gestellt, die Konzeption von Fachobjekten bei der Umsetzung in lose gekoppelte Komponenten zu zerlegen und das in Abschnitt~\ref{sec:meilenstein_5} angseprochene Mental Model umzustellen von dem gewohnten Prozess der Implementierung, die dem Design folgt.
-Auch Fabian geht in~\cite[239-244]{Fab18} darauf ein, dass - trotz der Vorteile auf einer sehr niedrigen Schicht durch DOD-  es zunächst leichter fällt, Problemstellungen in der ``objektorientierten Welt`` zu formulieren.
-
-Unter dem Blickwinkel einer Game Engine als Echtzeitsystem~\cite[525]{Gre19},  dem nur begrenzte Ressourcen zur Verfügung stehen, ist ein Daten-Orientiertes Design mit den dafür typischen dichten Speicherlayouts und der Vermeidung tiefer Vererbungshierarchien allerdings ein geeigneterer Ansatz\footnote{
-    Empirische Studien, die dies unterstreichen, finden sich beispielsweise bei~\cite{FAUM20}.
-} als die ein tief abstrahiertes Softwaremodell, dem im Einsatz im Betrieb Cluster und Server zur Verfügung gestellt werden, um performant zu sein.
-
-Die Entwicklung von helios begann mit einem klassischen, objektorientierten Ansatz.
-Erst mit zunehmender Komplexität des Projektes und der dadurch wachsenden Anzahl zu organisierender Komponenten und Systeme wurde das \textit{Compound Object} mit seinem \textit{Array-of-Structs}-Layout, dass ein \texttt{GameObject} noch in Meilenstein 4 darstellte, zugunsten eines datenorientierten Ansatz verworfen.
+helios begann mit einem klassischen, objektorientierten Ansatz.
+Erst mit zunehmender Komplexität des Projektes und der dadurch wachsenden Anzahl zu organisierender Komponenten und Systeme wurde das \textit{Compound Object} mit seinem \textit{Array-of-Structs}-Layout, dass ein \texttt{GameObject} noch in Meilenstein 4 darstellte, zugunsten eines datenorientierten Ansatz ersetzt:
 Dieser Ansatz basiert auf dem \textit{Structure-of-Arrays}-Layout\footnote{\textit{SoA}~\cite[162]{Fab18}} und ist dem SoA-Layout in Abbildung~\ref{fig:ecs_evolution} gegenübergestellt.
 
 \begin{figure}[htbp]

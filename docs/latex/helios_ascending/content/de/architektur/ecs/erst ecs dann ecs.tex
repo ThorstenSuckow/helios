@@ -1,22 +1,25 @@
-\subsection{Erst ECS, dann ECS - Evolution des Entity-Begriffs}
 
-iff ``idiomatisch'' im Sinne einer für Game-Engines typischen, datenorientierten Architekturentscheidung, die insbesondere auf Laufzeiteffizienz abzielt.
-Zwar vereinfacht ein Objekt-Orientiertes-Design (OOD) das Abstrahieren hierarchischer Strukturen und kann deshalb gerade in frühen Entwurfsphasen hilfreich sein.
-Unter dem Blickwinkel einer Game Engine als Echtzeitsystem (\cite[525]{Gre19}), dem nur begrenzte Ressourcen zur Verfügung stehen, ist ein Daten-Orientiertes Design (DOD) mit den dafür typischen dichten Speicherlayouts und der Vermeidung tiefer Vererbungshierarchien allerdings ein geeigneterer Ansatz.
-Empirische Studien, die dies unterstreichen, finden sich beispielsweise bei~\cite{FAUM20}.
-}
-
-Zur Realisierung dichter Speicherlayouts wird außerdem ein \textit{Dense Type Index} (\texttt{TypeIndex}) verwendet.
-Dieser wird über ein \texttt{struct} initialisiert und erzeugt auf Basis der übergebenen Typen einen dichten Index.
-In entsprechenden Anwendungsfällen ermöglicht dies einen elementweisen Zugriff in $O(1)$, während sich dichte (\textit{dense}) Speicherlayouts ergeben, die eine Iteration in $O(N)$ erlauben.
-In den meisten Fällen entspricht $N$ der tatsächlichen Elementanzahl $M$; nur selten gilt aufgrund der \textit{sparsity} solcher Container $N > M$.\\
-Mit dem vorherigen Design von GameObject als compound object, bei dem jedes einzelne ein Heap-Objekt darstellt und zusätzlich einen Speicherbereich für $L$ Komponenten benötigt, ergeben sich statt einem dichten Speicherbereich $N$ Speicherbereiche der Größe $L$, die zusätzlich bei nicht-ausreichender Größe neuen Speicherbereich anfordern und gegebenenfalls die existierenden Speicherinhalte verschieben müssen, was nicht optimal bei den einzelnen Iterationen der GameLoop ist, die bei 120 fps nur ca. $16 ms$ Zeit für alle Operationen und Berechnungen der verschiedenen Systeme hat.\\
+\begin{displayquote}
+    Mature programmers know that the idea that everything is an object \textit{is a myth}. Sometimes you really \textit{do} want simple data structures with procedures operating on them.
+    \par\hfill\cite[97, Hervorhebung i.O.]{Mar08}
+\end{displayquote}
 
 
-Die Entwicklung von helios begann mit einem klassischen, objektorientierten Ansatz.\footnote{
-    Im Folgenden auch einfach \textit{OOD} (Object-Oriented Design). Das Kürzel \textit{DOD} verwenden wir entsprechend im Kontext des \textit{Data-Oriented Design}.
-}
-Erst mit zunehmender Komplexität des Projektes und mit den steigenden Anforderungen an eine flexiblere Datenstruktur wurde das \textit{Compound Object} mit dem \textit{Array-of-Structs}-Layout, dass ein GameObject in Meilenstein 4 darstellt, zugunsten eines datenorientierten Ansatz verworfen, der auf dem \textit{Structure-of-Arrays}-Layout\footnote{\textit{SoA}~\cite[162]{Fab18}} basiert (ein Architekturvergleich ist in  Abbildung~\ref{fig:ecs_evolution} dargestellt).
+\subsection{Von Entities, Components und Systems zu einem Entity Component System}
+
+
+Objekt-Orientiertes-Design (OOD) erleichtert mit seinen Konzepten und Werkzeugen das Abstrahieren hierarchischer Strukturen , und ist deshalb gerade in frühen Entwurfsphasen hilfreich bei der Modellierung~\cite{BMEY07}.
+
+Mit der Umstellung auf ein datenorientiertes Design sahen wir uns der Herausforderung gestellt, die Konzeption von Fachobjekten bei der Umsetzung in lose gekoppelte Komponenten zu zerlegen und das in Abschnitt~\ref{sec:meilenstein_5} angseprochene Mental Model umzustellen von dem gewohnten Prozess der Implementierung, die dem Design folgt.
+Auch Fabian geht in~\cite[239-244]{Fab18} darauf ein, dass - trotz der Vorteile auf einer sehr niedrigen Schicht durch DOD-  es zunächst leichter fällt, Problemstellungen in der ``objektorientierten Welt`` zu formulieren.
+
+Unter dem Blickwinkel einer Game Engine als Echtzeitsystem~\cite[525]{Gre19},  dem nur begrenzte Ressourcen zur Verfügung stehen, ist ein Daten-Orientiertes Design mit den dafür typischen dichten Speicherlayouts und der Vermeidung tiefer Vererbungshierarchien allerdings ein geeigneterer Ansatz\footnote{
+    Empirische Studien, die dies unterstreichen, finden sich beispielsweise bei~\cite{FAUM20}.
+} als die ein tief abstrahiertes Softwaremodell, dem im Einsatz im Betrieb Cluster und Server zur Verfügung gestellt werden, um performant zu sein.
+
+Die Entwicklung von helios begann mit einem klassischen, objektorientierten Ansatz.
+Erst mit zunehmender Komplexität des Projektes und der dadurch wachsenden Anzahl zu organisierender Komponenten und Systeme wurde das \textit{Compound Object} mit seinem \textit{Array-of-Structs}-Layout, dass ein \texttt{GameObject} noch in Meilenstein 4 darstellte, zugunsten eines datenorientierten Ansatz verworfen.
+Dieser Ansatz basiert auf dem \textit{Structure-of-Arrays}-Layout\footnote{\textit{SoA}~\cite[162]{Fab18}} und ist dem SoA-Layout in Abbildung~\ref{fig:ecs_evolution} gegenübergestellt.
 
 \begin{figure}[htbp]
     \centering
@@ -25,27 +28,32 @@ Erst mit zunehmender Komplexität des Projektes und mit den steigenden Anforderu
     \label{fig:ecs_evolution}
 \end{figure}
 
-Die Grundlage dieses SoA-basierten Ansatzes wird gemeinhin als \textit{Entity Component System} (\textit{ECS}) bezeichnet.\footnote{\textit{Fabian} weist darauf hin, dass bereits ein Compound Object, das dem composition over inheritance Prinzip folgt und die Eigenschaften in einer AoS-Struktur soeichert, als ECS bezeichnet werden kann~\cite[84]{Fab18}. Wir verwenden den Begriff immer im Kontext eines SoA-Layouts, womit gleichzeitig der Schwerpunkt nicht allein auf der Konzeption von Objekten und Eigenschaften liegt, sondern auch auf einer möglichst effizienten Anordnung der Daten im Speicher.}
+Umfassende Anwendung findet der SoA-Ansatz in \textit{Entity Component Systems} (\textit{ECS}): Hier wird eine Entität als theoretisches Konzept behandelt und ist im Code ein virtuelles Aggregat von $N$ verschiedenen Komponenten, die gebündelt nach Komponententyp in Arrays gespeichert werden: Das in der Einleitung dieses Abschnittes angesprochen Konzept eines abstrakten Modells verwässert damit zu einer zunächst als lose erscheinenden, unzusammenhängenden Ansammpung verschiedener Komponenten, die ein System benötigen, damit eine konzeptuelle Integration der fachlichkeiten passieren kann.
 
-Die Idee hinter ECS liegt in der Trennung von Daten und Verhalten und hat in der Spieleentwicklung prominente Vertreter, darunter das bereits erwähnte Unity Dots sowie die Open Source Projekte Bevy (Rust)~\cite{BevyProject}, EnTT~\cite{EnttProject} und Flecs~\cite{FlecsProject} (beides C++).
-ECS wird aber auch in anderen Domänen in performancekritischen Bereichen eingesetzt, wie  bei GPU beschleunigter, nebenläufiger  Batch-Simulation zum Training von KI-Agenten ~\cite{SRXB+23}
+Als weitere Abgrenzung zu dem in Abschnitt~\ref{sec:meilenstein_3} eingeführten \textit{Compound Object} verweisen wir an dieser Stelle auf \textit{Fabian}, der in~\cite[84]{Fab18} darauf hinweist, dass bereits ein Compound Object, das dem \textit{composition over inheritance}-Prinzip folgt und die Eigenschaften in einer AoS-Struktur speichert, als ECS bezeichnet werden kann.
+Wir verwenden im Folgenden den Begriff immer im Kontext eines SoA-Layouts.
+Dies impliziert die Anforderungen, für verschiedene Zugriffsarten die Daten effizient im Spicher anzuordnen und geht damit über die Konzeption von Objekten und Eigenschaften hinaus.\\
 
-helios setzt dabei auf ein Datenmanagement unter Verzicht auf (tiefe) Vererbungshierarchien, was sich günstig auf die Laufzeit auswirkt, da VTable-lookups eingespart werden.
-Die Umsettlung auf ECS-typische Datenstrukturen geschah dabei nicht aus der Anforderung heraus, die Berechnung tausender Objekte pro Frame-Update zu realisieren, sondern aus der Motivation, integrative Aspekte bei der Umsetzung solcher Datenstrukturen zu eruieren.
-Andere Engines, wie Godot, verzichten auf den ECS Ansatz: ``The vast majority of games do not need this and Godot provides handy helpers to do the job for most cases when you do.``~\cite{GodotNoEcs}
+Die Idee hinter ECS liegt mit dieser Interpretation in der Trennung von Daten und Verhalten und hat in der Spieleentwicklung prominente Vertreter, darunter das bereits erwähnte Unity Dots sowie die Open Source Projekte Bevy (Rust)~\cite{BevyProject}, EnTT~\cite{EnttProject} und Flecs~\cite{FlecsProject} (beides C++).
+ECS wird aber auch in anderen Domänen eingesetzt, wo eine performante Verarbeitung von Daten und Eingabe relevant ist, wie beidpielsweise bei GPU-beschleunigter, nebenläufiger -Batch-Simulation zum Training von KI-Agenten~\cite{SRXB+23}.
+
+helios orientiert sich dabei an bewährten Implementierungen und verzichtet dort, wo tiefe Vererbungshierarchien für unnötigen Overhead sorgen, auf Polymorphie, und hat zum Ziel, alle System die innerhalb eines Frames angesteuert werden, ohne Vererbung zu implementieren, wenn Vererbung bedeutetn würde, dass (abstraktes) fachliches Verhalten in einer Elternklasse liegt.
+
+Es sei ergänzend darauf hingeweisen, dass die Umstellung auf ECS-typische Datenstrukturen dabei nicht aus den Projektanforderungen heraus geschehen ist, die Berechnung tausender Objekte pro Frame-Update zu realisieren, sondern auch aus der Motivation, mit helios als \textit{Game Framework built from first principles}  integrative Aspekte bei der Umsetzung solcher Datenstrukturen zu in der Praxis zu erproben.
+Das eine Game Engine populär sein kann, sowie performante Leistung liefern kann, ohne ein ECS anzubieten, zeigt unterdes \textit{Godot}, die den Verziecht auf eine solche Implementierung begründen mit: ``The vast majority of games do not need this and Godot provides handy helpers to do the job for most cases when you do.``~\cite{GodotNoEcs}
 
 
-\subsubsection{SparseSet als Datenhaltung in helios.ecs}
+\subsubsection{Strategien des Speicherlayouts zur Beschleunigung des Datenzugriffs}
 
-Der Zugriff auf den CPU-nahen Level-n Cache ist um ``etwa 10 bis 100 mal schneller als die Zugriffszeiten gängiger Hauptspeicher``~\cite[S. 5]{Man20}~\cite[79]{HP17}.
-In den Level-n Cache werden nach bestimmten Heuristiken Daten bewegt, auf die die CPU oft zugreifen muss (Instruktionen, Programmdaten).
-Dies erfolgt in Form zusammenhängender Speicheradressen - sogenannte \textit{cache lines}: Typischerweise umfassen diese 32-64 Byte große Blöcke~\cite[531]{TB23}.
-Gelingt es, zusammenhängende Daten auch in zusammenhängende Speicheradressen zu schreiben, und diese dicht aneinanderliegen, kann ein Programm davon profitieren, dass diese zusammenhängenden Speicherbereiche auch als CacheLine zur Verfügung stehen, was den Datenzugriff beschleunigt: Anstatt teure Zugriffe auf den Hauptspeicher durchführen zu müssen, können in performancekritischen Anwendungen (wie Echtzeitsystem) durch ein vom Entwickler intentionale Speicherlayout Zugriffe auf die Daten um ein Vielfaches beschleunigt werden.\\
+Der Zugriff auf den CPU-nahen Level-$n$ Cache ist um ``etwa 10 bis 100 mal schneller als die Zugriffszeiten gängiger Hauptspeicher``~\cite[S. 5]{Man20}~\cite[79]{HP17}:
+In den Level-$n$ Cache werden - unter anderem über bestimmte Heuristiken - auf die eine CPU während der Programmausführung oft zugreifen muss (dies betrifft neben Programmdaten auch die Instruktionen).
+Dies erfolgt in Form \textit{zusammenhängender Speicheradressen} - sogenannten \textit{Cache Lines}: Typischerweise umfassen diese 32-64 Byte große Blöcke~\cite[531]{TB23}.
+Gelingt es, konzeptionell zusammenhängende Daten auch unter physisch zusammenhängende Speicheradressen abzulegen, ist es wahrscheinlich, dass ein Programm von diesen dicht (\textit{dense}) angeordneten Layouts profitieren kann: Ein Programm, dass ein Datum an Speicheradresse $0x00000001$ anfordert, wird wahrscheinlich in einem darauffolgenden Verabrietungsschirtt ein zusammenhängendes Datu, an $0x00000002$ benötigen.
+Durch geschickte und von dem Entwickler intentional entworfene Speicherlayouts können in performancekritischen Anwendungen unnötigen Zugriff auf den Hauptspeicher vermeiden:
+Wird ein angefordertes Speicherwort nicht im Cache gefunden, wird ein \textit{cache miss} ausgelöst: In Folge dessen ist ein Zugriff auf den Hauptspeicher nötig, der um Größenordnungen langsamer ist.\\
 
-\noinndet
-Wird hingegen ein angefordertes Speicherwort nicht im Cache gefunden, wird ein \textit{cache miss} ausgelöst: In Folge dessen ist ein Zugriff auf den Hauptspeicher nötig.
-
-Erste Iterationen von Helios begünstigten diese Cache Misses, da die GameWorld die enthaltenen GameObjects als \texttt{std::vector<unique\_ptr<GameObject>>} verwaltet hat, und diese verwalteten wiederum - in einem Array-of-Structs-Ansatz als \textit{Compound Objects} - die assoziierten Komponenten als \texttt{std::vector<unique\_ptr<Component>>}.
+\subsubsubsection{Hierarchische Modellierung von Daten begünstigt Cache Misses}
+Erste Iterationen von helios begünstigten diese Cache Misses, da die \texttt{GameWorld} die enthaltenen \texttt{GameObject}s als \texttt{std::vector<unique\_ptr>} verwaltet hat: Ein \texttt{GameObject} wiederum verwaltete - in einem Array-of-Structs-Ansatz über besagtes \textit{Compound Object} - die assoziierten Komponenten als \texttt{std::vector<unique\_ptr>}.
 Iteriert ein System über alle GameObjects, um eine bestimmten Komponenten-Instanz vom Typ $\mathcal{A}$ zu aktualisieren, muss das System über alle Objekte vom Typ GameObject laufen, und gleichzeitig einen teuren RTTI-cast\footnote{\textit{Runtime-Type-Information}} auf den Komponententypen $\mathcal{A}$ ausführen.
 Ein illustratives Codebeispiel ist in Listing~\ref{lst:gameobject_cache_miss} dargestellt.
 
@@ -67,10 +75,13 @@ Für den performancekritischen Hot Path in GameEngines entstehen zudem durch das
     }
 \end{lstlisting}
 
+\subsubsubsection{Zugriffsfreundliche Strukturierung der Daten}
+
 Eine alternative Implementierung auf Basis von dem in helios implementierten ECS-System ist in Listing~\ref{fig:ecs_cache_friendly} dargestellt.
-Der \texttt{EntityManager} verwaltet einen Vektor mit Zeigern auf \texttt{SparseSets} die gemäß dem Structure-of-Arrays Ansatz jeweils Komponenten eines Typs vorhalten.
-Die Indexierung findet auf Grundlage eines eigens implementierten TypeIndex statt, der Indizes beginnend bei $0$ für die CompileTime-Typen liefert.
-Da Komponenten ohnehin ausschließlich in Sparse Sets über den EntityManager gespeichert werden, ist somit eine dichte Anordnung der Komponenten-Arrays garantiert, und der Zugriff auf einen Sparse Set des Typs $\mathcal{A}$ erfolgt konstanter Zeit $O(1)$:
+Der \texttt{EntityManager} verwaltet einen Vektor mit Zeigern auf \texttt{SparseSets}, die gemäß dem Structure-of-Arrays Ansatz jeweils Komponenten eines Typs $\mathcal{A}$ vorhalten.
+Die Indexierung findet auf Grundlage eines eigens implementierten \texttt{TypeIndex} statt, der Indizes beginnend bei $0$ für die während der Kompilierung registrierten Typen liefert.
+
+Da Komponenten ohnehin ausschließlich in Sparse Sets über den \texttt{EntityManager} gespeichert werden, ist somit eine dichte Anordnung der Komponenten-Arrays garantiert, und der Zugriff auf einen Sparse Set, der den Komponententypen $\mathcal{A}$ repräsentiert, erfolgt in konstanter Zeit $O(1)$:
 
 \begin{verbatim}
     auto* sparseSet<A> = EntityManager::getSparseSet<A>()
@@ -104,9 +115,18 @@ Typisch ist dies unter anderem für Physik-Systeme, die die Translation von den 
     }
 \end{lstlisting}
 
-Insgesamt ist ein ECS also nicht nur ein Paradigma für die Trennung von Verhalten und Daten und eine Anforderung an den Entwickler, fachlich saubere Entwürfe von Komponenten zu erstellen: Ihre Stärke spielen ECS-Implementierungen vor allem dann aus, wenn die Daten effizient im Speicher angeordnet werden, wie Cox et al. in~\cite{CWVW+25} zeigen.\footnote{
-Weitere Verfeinerungen von Speicherlayouts können über Archetypes / Chunks realisiert werden, die eine feste Anordnung von Komponenten vorsehen, um den Zugriff auf häufig benötigte Kombinationen von Komponenten zu beschleunigen, wie in Unity Dots~\cite{UnityChunks}.
+Zur Realisierung dichter Speicherlayouts wird außerdem ein \textit{Dense Type Index} (\texttt{TypeIndex}) verwendet.
+Dieser wird über ein \texttt{struct} initialisiert und erzeugt auf Basis der übergebenen Typen einen dichten Index.
+In entsprechenden Anwendungsfällen ermöglicht dies einen elementweisen Zugriff in $O(1)$, während sich dichte (\textit{dense}) Speicherlayouts ergeben, die eine Iteration in $O(N)$ erlauben.
+In den meisten Fällen entspricht $N$ der tatsächlichen Elementanzahl $M$; nur selten gilt aufgrund der \textit{sparsity} solcher Container $N > M$.\\
+Mit dem vorherigen Design von GameObject als compound object, bei dem jedes einzelne ein Heap-Objekt darstellt und zusätzlich einen Speicherbereich für $L$ Komponenten benötigt, ergeben sich statt einem dichten Speicherbereich $N$ Speicherbereiche der Größe $L$, die zusätzlich bei nicht-ausreichender Größe neuen Speicherbereich anfordern und gegebenenfalls die existierenden Speicherinhalte verschieben müssen, was nicht optimal bei den einzelnen Iterationen der GameLoop ist, die bei 120 fps nur ca. $16 ms$ Zeit für alle Operationen und Berechnungen der verschiedenen Systeme hat.\\
+
+
+Insgesamt ist ein ECS also nicht nur ein Paradigma für die Trennung von Verhalten und Daten und eine Anforderung an den Entwickler, fachlich saubere Entwürfe von Komponenten zu erstellen: Ihre Stärke spielen ECS-Implementierungen vor allem dann aus, wenn die Daten effizient im Speicher angeordnet werden, wie Cox et al. in~\cite{CWVW+25} zeigen.
+
+Weitere Verfeinerungen von Speicherlayouts können über Archetypes / Chunks realisiert werden, die eine feste Anordnung von Komponenten vorsehen, um den Zugriff auf häufig benötigte Kombinationen von Komponenten zu beschleunigen.
+Dies wird beispielsweise von Unity Dots realisiert~\cite{UnityChunks}.
 Weitere Optimierungen sind über die Anordnung der Daten innerhalb der Structs / Klassen zu erreichen, wie Gregory in ~\cite[159-161]{Gre19} darstellt.
-}
+
 
 

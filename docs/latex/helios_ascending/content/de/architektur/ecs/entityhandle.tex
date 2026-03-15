@@ -1,18 +1,42 @@
 \subsection{EntityHandle - Index und Versionsnummer als virtuelle GameObjects}
 
-Unter einem GameObject wird seit Meilenstein 5 in helios ein abstraktes Konzeot einer Entität vorhanden, die zu der laufzeit aktiv an den Spielmechaniken beteiligt ist.
-Dabei ist die Klasse \texttt{GameObject} nicht mehr als eine konkrete Klasse implementiert, sondern vielmehr als eine virtuelle Abstraktion, die die Kopie eines \texttt{EntityHandle}s speichert, dass 8 Byte groß ist: 4 Byte werden für die \texttt{uint32\_t} typisierte \texttt{EntityId} verwendet, die anderen 4 Byte für die \texttt{VersionId} gleichen Typs, die einen Generations-Index repräsentiert, um die Wiederverwendung von \texttt{EntityId}s zu erlauben, was notwendig ist, um den durch die \texttt{SparseSets} realisierten \textit{dense} Arrays zu garantieren.
-Diese zusammenegsetzter Schlüssel unterstützt das Konzept des sogenannten \textit{generational indexing} um, die Datencontainer werden auch als \texttt{slot\_maps} bezeichnet.~\cite{CppSlotMap}
-\\
+Mit der Einführung des ECS wird unter einem \texttt{GameObject} in \textit{helios} ein abstraktes Konzept einer Entität verstanden, die zur Laufzeit aktiv an den Spielmechaniken beteiligt ist.
+Dabei ist die Klasse \texttt{GameObject} nicht mehr als konkrete Datenstruktur implementiert, sondern fungiert als virtuelle Abstraktion, die lediglich ein 8 Byte großes \texttt{EntityHandle} kapselt.
+Von diesem Handle werden 4 Byte für die als \texttt{uint32\_t} typisierte \texttt{EntityId} verwendet, während die verbleibenden 4 Byte für eine \texttt{VersionId} gleichen Typs reserviert sind.
+Diese \texttt{VersionId} repräsentiert einen Generations-Index, der die sichere Wiederverwendung von \texttt{EntityId}s ermöglicht.
+Dies ist eine notwendige Voraussetzung, um die dichte Anordnung innerhalb der durch die \textit{Sparse Sets} realisierten Arrays zu ermöglichen.\\
+
+
+Der zusammengesetzte Schlüssel unterstützt das Konzept des sogenannten \textit{Generational Indexing}~\cite{RCCK25}.
+Datencontainer, die solche Daten speichern, werden auch als \textit{Slot Maps} bezeichnet werden~\cite{CppSlotMap}.\\
+
+Ein \texttt{GameObject} existiert somit lediglich als Abstraktion in Form eines \texttt{EntityHandle}s.
+Anschaulich ließe sich so eine Handle als Primärschlüssel in einem Relationalen Datenbanksystem vergleichen, der in einer Tabelle die Schlüssel der referenzierten Entitäten vorhält: Die eindeutige Identifizierung eines solchen Objekts, welches im Kern eine lose Sammlung von Komponenten darstellt, erfolgt zur Laufzeit ausschließlich über diesen zusammengesetzten Schlüssel, und die refernzierten KOmponenten sind nur so lange gültig, wie der zusammengesetzte Schlüssel in der \texttt{EntityRegistry} gültig ist.
+Ein Handle gilt als ungültig (\textit{stale}), sobald die im gespeicherte \texttt{VersionId} (siehe Abbildung~\ref{fig:entityhandle}) nicht mehr mit der aktuell in der Registry hinterlegten Version für die entsprechende \texttt{EntityId} übereinstimmt.
+Zur Markierung ungültiger Positionen in den SparseSets durch \textit{stale} Einträge werden sogenannte \textit{Tombstones} verwendet; dadurch kann eine Gültigkeitsprüfung effizient gestaltet werden.\footnote{
+    Ein \texttt{EntityTombstone} ist eine Konstante vom Typ \texttt{size\_t} und wird in helios mit dem Wert \texttt{std::numeric\_limits<size\_t>::max()} initialisiert.
+Das Konzept ist auch in anderen Bereichen der Software-Entwicklung bekannt, wie etwa bei Datenbanken, um gelöschte Einträge zu kennzeichnen, ohne sie physisch zu entfernen~\cite{TombstoneApacheCassandra}.
+}.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\columnwidth]{content/de/architektur/ecs/img/entityhandle}
+    \caption{UML der Klasse \texttt{EntityHandle}. (Quelle: eigene)}
+    \label{fig:entityhandle}
+\end{figure}
 
 \noindent
-Ein GameObject existiert tatächlich nur als Abstraktion als EntityHandle.
-Eine eindeutige Identifizierung solch eines GameObjects, das im Grunde genommen nur eine Sammlung von Komponenten darstelltm erfolgt zur Laufzeit alleine asu diesem zusammengesetzten Schlüssel, der als invalidiert gilt, sobald die VersionId für die zugehörige EntityId nicht mehr existiert.\\
+Verwaltung und Neuerstellung von Handles wird von der \texttt{EntityRegistry} nach Anfragen des \texttt{EntityManager}s realisiert.
+Dabei werden innerhalb einer \textit{Free List} bereits gelöschte IDs verwaltet, die in den Sparse Sets durch einen \textit{Tombstone} repräsentiert werden.
+Enthält eine Free List einen Eintrag, wird für den jeweiligen Index in der Registry die Versionsnummer inkrementiert, und als Handle bestehend aus Index und inkrementierter Versionsnummer zurückgegeben.
+So können zwar Indizes wiederverwendet werden, aber aufgrund der aktualisierten Versionsnummer von \textit{stale} Indizes unterschieden werden.
+Ist die Free List leer,wird der Vektor um einen neuen Eintrag erweitert.
 
-\noindent
-Die Verwaltunf und Neuerstellung der EntityHandles verwaltet die EntityRegistry, die von dem EntityManager die Anforderungen zur Erstelung bzw. Löschung von EntityIds mit der einer entsprechenden Versions-ID erhält.
-In einer \texttt{freeLIst} werden hierbei gelöschte EntityIds verwaltet - wird dort eine id gefunden, wird für den entsprechenden index on dem vector, die Versionsnumemr inkrementiert, ansonsten wird einfach ein neuer Eintrag in dem Version-Vektor hinzugefügt.\\
+\begin{tcolorbox}[tile={Wertebereich von EntityId}, colback=black!5, colframe=black, title={Wertebereich von EntityId}]
+    Bei einem Wertebereich von $2^{32}$ und unter der Annahme, dass theoretisch alle 16 ms eine neue Version für eine spezifische \texttt{EntityId} erzeugt werden müsste, könnte ein entsprechendes Spiel ca. $2^{32} \cdot 0{,}016$ Sekunden lang betrieben werden, bevor ein Wertüberlauf eintritt.
+    Dies entspricht einer Zeitspanne von knapp $795$ Tagen.
+    Damit ist ein ausreichender Puffer vorhanden - der sogar weitestgehend ignoriert werden kann, wenn \textit{Object Pooling} verwendet wird, um eine ständige Neuallokation von Objekten zur Laufzeit zu vermeiden.
+    Ein Ausweichen auf \texttt{uint64\_t} würde den theoretische Zeitraum bis zu einem Überlauf auf ca. 9 Milliarden Jahre ausdehnen.
+\end{tcolorbox}
 
 
-\noindent
-Mit einem Wertebereich von $2^{32}$  und unter der Annahme, das alle 16 ms Sekunden eine neue Version für eine EntityId erzeigt werden muss, kann man ein entsprechendes Spiel $2^{32} * 0.016$ Sekunden lang spielen, bevor es zu einem Wertüberlauf kommt. Dies entspricht kanpp 795 Tage. Es ist also ausreichend Puffer vorhanden - wobei in diesem Zusammenhang ohnehin ein Pool verwendet werden sollte, um die ständige neuerstellung der KOmponenten zur Laufzeit zu verhinden - odere in Ausweichen auf \texttt{uint64\_t}, wobei sich die mögliche Spieldauer dann auf ca. 9 Milliarden Jahre erstreckt.

@@ -1,36 +1,37 @@
-\subsection{Components - Komponenten als austauschbare Informationsträger}
+\subsection{Components - Komponenten als austauschbare Informationsträger}\label{sec:components}
 
-helios verfolgt das Entwurfsziel, keine Funktionalität von Akteuren, die am \textit{Hot Path} teilnehmen, in Basisklassen auszulagern (siehe Abschnitt~\ref{sec:ecs2ecs}).
+\textit{helios} verfolgt das Entwurfsziel, keine Funktionalität von Akteuren, die am \textit{Hot Path} teilnehmen, in Basisklassen auszulagern (siehe Abschnitt~\ref{sec:ecs2ecs}).
 Aus diesem Grund existiert auch für \textit{helios} keine Komponenten-Basisklasse.
 Ohnehin wäre dies nicht sinnvoll, da Verwaltung und Verantwortlichkeiten der Komponenten erst in den Systemen hinterlegt sind.
-Damit soll einer implementierenden API auch mehr Flexibilität geboten werden, außerdem hält dies den Abhängigkeitsgraphen schlank.\\
+Damit soll einer implementierenden API auch mehr Flexibilität geboten werden; außerdem hält dies den Abhängigkeitsgraphen schlank.\
 
 Die Speicherung der Komponenten erfolgt als SoA-Implementierung über die Klasse \texttt{SparseSet<}\mathcal{A}\texttt{>}, die vom \texttt{EntityManager} verwaltet wird und Zugriffe wie \texttt{get}, \texttt{emplace} und \texttt{remove} ermöglicht.
-
-Obwohl \textit{helios} nicht die Notwendigkeit sieht, von Methoden zur Sicherstellung von Invarianten in Komponenten abzuraten, sollte darüber hinausgehendes Verhalten nicht in Komponenten hinzugefügt werden, damit das \textit{Single-Source-of-Truth-Prinzip} nicht verletzt wird - die einzige Implementierung sollte in den Systemen stattfinden.\footnote{
-Im Kontext der Datenhaltung wird \textit{Single-Source-of-Truth} (\textit{SSOT}) als eindeutige, autoritative Datenquelle verstanden.
-In unserem Kontext erweitern wir den Begriff auf die Implementierung des Verhaltens.
+Obwohl \textit{helios} nicht die Notwendigkeit sieht, von Methoden zur Sicherstellung von Invarianten in Komponenten abzuraten, sollte darüber hinausgehendes Verhalten nicht in Komponenten hinzugefügt werden, damit das Single-Source-of-Truth-Prinzip nicht verletzt wird - die einzige Implementierung der Fachlogik sollte in den Systemen stattfinden.\footnote{
+Im Kontext der Datenhaltung wird Single-Source-of-Truth (SSOT) als eindeutige, autoritative Datenquelle verstanden.
+In unserem Kontext wird der Begriff auf die Verortung von Implementierung des Verhaltens erweitert.
 }
 
-Denno bietet helios die Möglichkeit, über \textit{Hooks}\footnote{
-    Ähneln der von der Gang of Four beschriebenen \textit{Template-Methode}~\cite[S.~325-330]{GHJV94}.
+Dennoch bietet \textit{helios} die Möglichkeit, über Hooks\footnote{
+Diese ähneln der von der Gang of Four beschriebenen Template-Methode~\cite[S.~325-330]{GHJV94}.
 } bei fest definierten Zustandswechseln zusätzlichen Code auszuführen.
-Dabei wird über \textit{Concepts} zur Kompilierungszeit festgestellt, ob eine Komponente Unterstützung für einen Hook bietet, sodass hierfür kein \textit{runtime dispatch} stattfinden muss.\\
+Dabei wird über Concepts zur Kompilierungszeit festgestellt, ob eine Komponente Unterstützung für einen Hook bietet, sodass hierfür kein runtime dispatch stattfinden muss.
 
 Folgende Hooks sind vorgesehen:
 
 \begin{itemize}
-    \itemsep0.5em
-    \item \texttt{onAcquire} / \texttt{onRelease}: Methoden, die aufgerufen werden, sobald eine Komponente aus einem \textit{Pool} erstmalig oder erneut angefordert wird.
-    Diese Hooks werden verwendet, um den Zustand der Komponenten auf einen für die Fachlichkeit sinnvollen initialen Zustand zurückzusetzen.
+\itemsep0.5em
+\item \texttt{onAcquire} / \texttt{onRelease}: Methoden, die aufgerufen werden, sobald eine Komponente aus einem Pool erstmalig oder erneut angefordert wird.
+Diese Hooks werden verwendet, um den Zustand der Komponenten auf einen für die Fachlichkeit sinnvollen initialen Zustand zurückzusetzen.
 
-    \item \texttt{onActivate} / \texttt{onDeactivate}: Methoden, die aufgerufen werden, wenn das besitzende \texttt{GameObject} aktiviert bzw. deaktiviert wird.
-    Die Semantik spiegelt die aktive Teilnahme eines \texttt{GameObject}s in der \textit{GameWorld} wider - Systeme, die zur Laufzeit über diese Komponenten iterieren, suchen entsprechend nach einer \texttt{Active}-Tag-Komponente, die aktive \texttt{GameObject}s besitzen.
+\item \texttt{onActivate} / \texttt{onDeactivate}: Methoden, die aufgerufen werden, wenn das besitzende \texttt{GameObject} aktiviert bzw. deaktiviert wird.
+Die Semantik spiegelt die aktive Teilnahme eines \texttt{GameObject}s in der \textit{GameWorld} wider.
+Systeme, die zur Laufzeit über diese Komponenten iterieren, suchen entsprechend nach einer \texttt{Active}-Tag-Komponente, die aktive \texttt{GameObject}s besitzen.
 
-    \item \texttt{enable} / \texttt{disable}: Komponenten können über diese Hooks von außen gezielt aktiviert oder deaktiviert werden, unabhängig von der Beteiligung des besitzenden \texttt{GameObject}s an der \textit{GameWorld}.
-    Dies ermöglicht beispielsweise die temporäre Deaktivierung von Komponenten, die erst oder wieder nach einer bestimmten Zeit aufgeschaltet werden sollen (Teilnahme an der Kollisionsabfrage, AI-Verhalten), ohne \texttt{SparseSet}-Operationen im \textit{Hot Path} für diese Komponenten zu nutzen.
-    Eine zusätzliche Methode \texttt{isEnabled} wird für die verwendeten Komponenten zur Kompilierungszeit gesucht und liefert die gewünschte Information über den Zustand.
-    \item \texttt{onClone}: Wenn der Copy-Constructor für eine Komponente nicht gelöscht wurde, bedeutet dies für \textit{helios}, dass die Komponente kopiert werden darf.
-    Sinnvoll ist das beispielsweise für \textit{Prefabs}, bei denen eine hohe Anzahl von Komponenten eine Automatisierung den Kopiervorgangs erleichtert.
-    Der \texttt{onClone}-Hook wird nach jedem Aufruf des Copy-Constructors auf der Kopie aufgerufen.
+\item \texttt{enable} / \texttt{disable}: Komponenten können über diese Hooks von außen gezielt aktiviert oder deaktiviert werden, unabhängig von der Beteiligung des besitzenden \texttt{GameObject}s an der \textit{GameWorld}.
+Dies ermöglicht beispielsweise die temporäre Deaktivierung von Komponenten, die erst nach einer bestimmten Zeit wieder aufgeschaltet werden sollen, ohne \texttt{SparseSet}-Operationen im \textit{Hot Path} für diese Komponenten zu nutzen.
+Eine zusätzliche Methode \texttt{isEnabled} wird für die verwendeten Komponenten zur Kompilierungszeit gesucht und liefert die gewünschte Information über den Zustand.
+
+\item \texttt{onClone}: Wenn der Copy-Constructor für eine Komponente nicht gelöscht wurde, bedeutet dies für \textit{helios}, dass die Komponente kopiert werden darf.
+Sinnvoll ist das beispielsweise für Prefabs, bei denen eine hohe Anzahl von Komponenten eine Automatisierung des Kopiervorgangs erleichtert.
+Der \texttt{onClone}-Hook wird nach jedem Aufruf des Copy-Constructors auf der Kopie aufgerufen.
 \end{itemize}

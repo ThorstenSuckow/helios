@@ -1,32 +1,43 @@
-\subsection{Systems - Steuerung des Verhaltens der beteiligten Komponenten}
+\subsection{Systems - Steuerung des Verhaltens der beteiligten Komponenten}\label{sec:systems}
 
-In einem Frame werden die - über die GameLoop registrierten Systeme - in einer ebstimmten Reihenfolge aufgerufen. Systeme iterieren hierbei nicht nur über einzelne Komponenten, sondern können , je anch Abhängigkeiten und verantwortlichekeiten, auch über KLompositionen von Komponenten iterieren, da bspw. eine Skalierungskomponente in unterschiedlichen KOntexten angewendet wird (UI, aktives NPC- oder Spielerobjekt).\\
+In einem Frame werden die über die \texttt{GameLoop} registrierten Systeme in einer bestimmten Reihenfolge aufgerufen.
+Systeme iterieren hierbei nicht nur über einzelne Komponenten, sondern können - je nach Aufgabe - auch über eine Komponenten-Komposition iterieren, da beispielsweise eine Skalierungskomponente in unterschiedlichen Kontexten angewendet wird (UI, aktives NPC- oder Spielerobjekt).\footnote{
+    Eine Komposition von Komponenten wird ausgedrückt durch das Vorhandensein einer Menge von verschiedenen Komponententypen.
+    Unity bezieht sich darauf in ähnlicher Weise über die bereits erwähnten \textit{Archetypes}- / \textit{Chunks}~\cite{UnityChunks}.
+}
 
-\noindent
-helios drückt hierbei eine Rolle als ``System`` nicht über Verwerbung wie foglt aus
+\subsubsection{Tags statt Vererbung}
+
+\textit{helios} drückt die Rolle eines Systems \textit{nicht} - entgegen der Implementierung in früheren Versionen - über Vererbung aus:
 
 \begin{verbatim}
-   class DamageOnCollisionSystem : public System {}
+    // veraltet: die Rolle eines Systems wird über
+    // Vererbung ausgedrückt
+    class DamageOnCollisionSystem : public System {}
 \end{verbatim}
 
 \noindent
-sondern wie in Listing~\ref{lst:system_inheritance}, sondern über die Verwendung von Tags, die über Concepts zur Kompilierungszeit überprüft werden.
-Damit geht die über Vererbung vermittelte Semantik verloren, soll aber auch zum Ausdruck bringen, dass die Rolle eines System nichts an einen bestimmten Typen gebunden ist, sowie das Paradigma der compoisiton over inheritance bekräftigen und die Entwickler ermutigen, schlanke, leichgewichtige Implementierungen zu bevorzihen..
-Die \texttt{EngineRoleTags} werden auch in anderen kernkonzepten von helios verwendet, wie den managern und den CommandHandlern.
+Stattdessen erfolgt die Kennzeichnung über \textit{Tags}, die zur Kompilierungszeit über \textit{Concepts} überprüft werden (siehe Listing~\ref{lst:system_inheritance}).
+Damit geht die über Vererbung vermittelte Rollensemantik verloren, um zum Ausdruck zu bringen, dass die Rolle eines Systems nicht an einen bestimmten Basistypen gebunden ist - was das Paradigma der \textit{composition over inheritance} bekräftigen und Entwickler ermutigen soll, schlanke, leichtgewichtige \textit{Systeme} zu bevorzugen, worauf in den vorherigen Abschnitten mit dem Entwurfsziel von helios schon Stellung bezogen wurde.
+Die hierbei genutzten \texttt{EngineRoleTags} werden auch in anderen Kernkonzepten von \textit{helios} verwendet, etwa bei \textit{Managern} und \textit{CommandHandlern} (siehe Abschnitte~\ref{sec:runtime_manager} und~\ref{sec:runtime_messaging}).
 
 \begin{lstlisting}[style=c++style,
-    caption={Auszug aus dem Quellcode der beteiligten Klassen  und Konzepte zur Erstellung von Systemen in helios. Systeme dürfen beliebige KLassen sein, müssen aber eine update-Methode besitzen, die einen UpdateContext als Argument erhält. Zusätzlich wird die Rolle eines Systems wird über die Verwendung von Tags ausgedrückt, die über Concepts zur Kompilierungszeit überprüft werden.},
+    caption={Auszug aus dem Quellcode der beteiligten Klassen und Concepts zur Erstellung von Systemen in \textit{helios}. Systeme müssen von keinem bestimmten Basistyp erben, dafür aber eine \texttt{update}-Methode besitzen, die einen \texttt{UpdateContext} als Argument erhält. Die Rolle eines Systems wird über Tags ausgedrückt, die über Concepts zur Kompilierungszeit überprüft werden.},
     label=lst:system_inheritance]
 
+    // concept
     template<class T>
     concept IsSystemLike = requires(T& t, UpdateContext& updateContext) {
         {t.update(updateContext) } -> std::same_as<void>;
     } && HasTag<T, tags::SystemRole>;
 
+    // umsetzende Klasse
     class DamageOnCollisionSystem {
         using EngineRoleTag = SystemRole;
+        void update(UpdateContext& updateContext) {...}
     }
 
+    // Compile-Time guard
     template<typename T, typename... Args>
     requires IsSystemLike<T>
     Pass& addSystem(Args&&... args) {
@@ -39,12 +50,28 @@ Die \texttt{EngineRoleTags} werden auch in anderen kernkonzepten von helios verw
 
 \end{lstlisting}
 
-Ein \texttt{Pass}, der Teil der \texttt{GameLoop} ist, nutzt das Concept als gateKeeeping für die Registrierung von Systemen. Das Concept selber stekllt sichr, dass die übergebene Klasse die entsprechende update-Methode besitzt, und ruft das System an der entsprechnden Stelle in einem Frame-Ddurchlauf auf.
+\subsubsection{Registrierung und Ausführung}
 
-\noindent
-Hierbei wird über die GameWorld ein View auf den KomponentenKonstellationen erstellt, und die impementieren letztendlich die Logik, die zur Aktualisierung der Kompoeneten und zur Erstellung von Nachrichten innerhalb eines Frames oder an Nachgelagerte Fremes führt.
+In dem Beispiel wurde die Implementierung eines \texttt{Pass} skizziert, der Teil der \texttt{GameLoop} ist, und das Concept \texttt{IsSystemLike} als Zulassungskriterium (\textit{Gatekeeping}) für die Registrierung von Systemen nutzt.
+Das Concept stellt sicher, dass die übergebene Klasse die entsprechende \texttt{update}-Methode besitzt; der \texttt{Pass} ruft das System dann an der vorgesehenen Stelle innerhalb eines Frames auf.\\
+
+Beim Aufruf erstellt die in Listing~\ref{lst:system_loop} gezeigte \texttt{update()}-Methode einen \textit{View} auf die erforderlichen Komponentenkonstellationen.
+Die Logik ist ein Implementierungsdetail und kann über eine benötigte Aktualisierung der Komponenten hinausgehen und beispielsweise Nachrichten an nachgelagerte Systeme in demselben oder in nachfolgenden Frames senden.
+
+\begin{lstlisting}[style=c++style,
+    caption={Skizze einer \texttt{update()}-Implementierung, die einen View über aussschließlich aktive \textit{GameObjects} erstellt, bei denen die aufgeführten Komponenten auch \textit{enabled} sind. Auf die Rolle von \texttt{UpdateContext} wird in Abschnitt~\ref{sec:runtime_gameloop} näher eingegangen.},
+    label=lst:system_loop]
+
+    void update(UpdateContext& updateContext) {
+        for (auto [go, cc, tsc, active] : updateContext.view<
+                    ChaseComponent,
+                    TranslationStateComponent,
+                    Active
+                >().whereEnabled()) {
+
+            // ... Verhalten ...
+        }
+    }
+\end{lstlisting}
 
 
-Frame $N$ ist ein Schnappschuss der Welt zum Zeitpunkt $t$. Frame $N+1$ ist der Schnappschuss zum Zeitpunkt $t + \Delta t$. Dazwischen existiert für die Engine nichts.
-
-Euler INtegration

@@ -3,7 +3,7 @@
     \par\hfill\cite[97, Hervorhebung i.O.]{Mar08}
 \end{displayquote}
 
-\subsection{Von Entities, Components und Systems zu einem Entity Component System}
+\subsection{Von Entities, Components und Systems zu einem Entity Component System}\label{sec:ecs2ecs}
 
 Das objektorientierte Design (OOD) erleichtert mit seinen Konzepten und Werkzeugen das Abstrahieren hierarchischer Strukturen und erweist sich deshalb gerade in frühen Entwurfsphasen als hilfreich bei der Modellierung~\cite{BMEY07}.
 Betrachtet man eine Game-Engine jedoch als Echtzeitsystem~\cite[525]{Gre19}, dem nur begrenzte Ressourcen zur Verfügung stehen, stellt ein datenorientiertes Design (DOD) mit seinen dichten Speicherlayouts und der Vermeidung tiefer Vererbungshierarchien den geeigneteren Ansatz bei der Implementierung dar.\footnote{
@@ -49,6 +49,7 @@ Die Entwickler begründen den Verzicht auf eine solche Implementierung damit, da
 \textit{helios} orientiert sich an bewährten Implementierungen und verzichtet dort auf Polymorphie, wo tiefe Vererbungshierarchien für unnötigen Overhead sorgen.
 Dies betrifft insbesondere Systeme, die innerhalb eines Frames angefragt und ausgeführt werden.
 Ziel ist es, alle Systeme, die innerhalb eines Frames angesteuert werden, ohne Vererbung zu implementieren, wenn Vererbung bedeuten würde, dass fachliches Verhalten in einer Elternklasse liegt.
+
 
 Dabei ist zu beachten, dass die Umstellung auf ECS-typische Datenstrukturen nicht primär aus der Projektanforderung heraus geschah, die Berechnung tausender Objekte pro Frame-Update zu realisieren.
 Vielmehr entsprang sie der Motivation, mit \textit{helios} als ``\textit{Game Framework built from first principles}``~\cite{HeliosProjectHome} integrative Aspekte bei der Umsetzung solcher Datenstrukturen in der Praxis zu erproben.

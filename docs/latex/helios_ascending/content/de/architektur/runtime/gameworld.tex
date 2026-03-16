@@ -54,4 +54,7 @@ Die \texttt{GameWorld} bietet außerdem Funktionen zur Erstellung von \texttt{Ga
 
 Als weitere Aufgabe verwaltet die \texttt{GameWorld} die \texttt{Session}.
 Hierbei handelt es sich um die semantische Definition eines \texttt{GameObject}s, dem während der Laufzeit des Spiels die Rolle zukommt, den Zugriff auf Komponenten zu bündeln, die für den globalen Spielzustand von Bedeutung sind.
-Hierzu gehören unter anderem \texttt{GameState}, \texttt{MatchState} und die aktiven \texttt{ViewportId}s.
+Hierzu gehören unter anderem \texttt{GameState}, \texttt{MatchState} und die aktiven \texttt{ViewportId}s.\\
+
+Als Orchestrator hat die \texttt{GameWorld} die Aufgabe, auf von außen eintretende Signale zu reagieren und die von ihr verwalteten Ressourcen dementsprechend zu koordinieren.
+Hierzu gehört beispielsweise das Leeren der Nachrichtenpuffer der \textit{Manager} und \textit{CommandHandler}, auf die in Abschnitt~\ref{sec:runtime_messaging} näher eingegangen wird.

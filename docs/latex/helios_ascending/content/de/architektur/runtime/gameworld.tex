@@ -1,17 +1,37 @@
 \subsection{GameWorld - Die Spielwelt als Ressourcenverwalter}
 
-Der GameWorld kommt in helios die Rolle als Datencontainer zu und besitzt den \texttt{EntityManager} sowie verschiedene Registries für den Zugriff auf \texttt{Manager}, \texttt{CommandHandler} und \texttt{CommandBuffer}.
+Der \texttt{GameWorld} kommt in helios die Rolle als Datencontainer zu und besitzt als zentraler Hub den \texttt{EntityManager} sowie verschiedene Registries für den Zugriff auf \texttt{Manager}, \texttt{CommandHandler} und \texttt{CommandBuffer}.
 
-Damit ähnelt sie in Teilen einem ServiceLocator, da sie beteiligten Systemen den Zugriff auf die Klassen ermöglicht.
+Da sie Zugriff auf die relevanten Systeme ermöglicht, ähnelt sie in Teilen einem \textit{ServiceLocator}~\cite[S. 315-340]{ACM03}, allerdings findet der Zugriff auf die beteiligten Ressourcen über klar definierte Schnittstellen statt: Beispielsweise registriert ein Spiel über die der \textit{Soft Architecture}-Schicht den \texttt{GameObjectPoolManager} über
 
-GameWorld liegt in dem Modul \texttt{helios.engine.runtime} und bringt dabei auch ihre Rolle als laufzeitgebundenes Objekt zum Ausdruck.
-Da helios auf eine Typoindentifizierung über Vererbung veruzichtet, muss der Klassenname des des angefragten Ressource bekannst sein.
-Eine Ausnahme bilden die Views auf die verschiedenen Systeme, auf die vo
-n der GameWorld aus zugegriffen werden kann, wie \texttt{managers()} und \texttt{commandHandlers()}, die einen \texttt{std::span} auf die über die intern über TypeErasure gespeicherten INstanzen zurückliefern.
+\begin{verbatim}
+    gameWorld.registerManager<GameObjectPoolManager>();
+\end{verbatim}
 
-Die GameWorld bietete ausserdem als Fassade Funktion zur Erstellung von GameObjects an sowie dei Erstellugn von Views auf GameObjecs, die bestimmte KOmponenten enthalten.
+und greift später über
 
-Sie wird in verschiedenen MEthoden als Refernz angegeben, um eine Zuordnung der aufgerufenen Methode in den KOntext der aktiven GameWorld zu errmöglichem.
+\begin{verbatim}
+    auto& manager = gameWorld.manager<GameObjectPoolManager>();
+\end{verbatim}
 
-Sie erstellt außerdem die \texttt{Session}, einem GameObject, den während  der Laufzeit des Spiels die Rolle eines Singletons zukommt, d.h., dieses GameObject verwaltet Komponenten, die nur einmal in der Spielwet existieren dürfen, wie z.B. die basierend auf dem derzeitigen GameState und MatchState aktiven ViewportIds.
-Außerdem kann über sie der Zugriff auf die derzeitig aktiven States abgefragt werden.
+oder wahlweise
+
+
+\begin{verbatim}
+    auto* manager = gameWorld.tryManager<GameObjectPoolManager>();
+\end{verbatim}
+
+darauf zu.
+Auch hier wird der Zugriff bzw. das Hinzufügen über \textit{Concepts} abgesichert (\texttt{IsManagerLike}).\\
+
+
+Da helios auf eine Typindentifizierung über Vererbung verzichtet, muss der Klassenname der angefragten Ressource bekannt sein, womit gleichzeitig sichergestellt wird, dass von den entsprechenden Typen nur eine Instanz zur Verfügung steht.
+
+\textit{Views}, die einen Zugriff auf eine Sammlung von Objektinstanzen ermöglichen, die unter einem bestimmten \texttt{EngineRoleTag} spezifiziert wurden, sind über semantische eindeutige und plurifizierende Methoden erreichbt, wie \texttt{managers()} und \texttt{commandHandlers()}.
+Diese liefern einen \texttt{std::span} auf die über die intern über das \textit{Type Erasure}-Idiom entworfene Instanzen zurückliefern.
+Die Implementierung in helios ist hier weitgehend angelehnt an~\cite{TypeErasure}.
+
+Die GameWorld bietet außerdem Funktionen zur Erstellung von \texttt{GameObject}s an sowie die Möglichkeit, einen gefilterten View auf solche Entitäten anzufragen, die über eine bestimmte Konstellation von Komponenten verfügen, was für die in Abschnitt~\label{sec:systems} beschriebenen \textit{Systeme} relevant ist.
+
+Als weitere Aufgabe verwaltet die \texttt{Session}.
+Hierbei handelt es sich um die semantische Definition eines \texttt{GameObject}s, dem während der Laufzeit des Spiels die Rolle zukommt, auf solche Komponenten Zugriff zu erlauben, die von besondeer Bedeutung für ein Spiel sind, um zentral den Zugriff auf diese Komponenten zu erlauben; hierzu gehören unter anderem \texttt{GameState}, \texttt{MatchState} und die aktiven \texttt{ViewportId}s.

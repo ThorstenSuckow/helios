@@ -1,37 +1,57 @@
 \subsection{GameWorld - Die Spielwelt als Ressourcenverwalter}
 
-Der \texttt{GameWorld} kommt in helios die Rolle als Datencontainer zu und besitzt als zentraler Hub den \texttt{EntityManager} sowie verschiedene Registries für den Zugriff auf \texttt{Manager}, \texttt{CommandHandler} und \texttt{CommandBuffer}.
+Der \texttt{GameWorld} kommt in \textit{helios} die Rolle eines Datencontainers zu.
+Sie besitzt als zentraler Hub den \texttt{EntityManager} sowie verschiedene Registries für den Zugriff auf \texttt{Manager}, \texttt{CommandHandler} und \texttt{CommandBuffer} (siehe Abbildung~\ef{fig:gameworld}).
 
-Da sie Zugriff auf die relevanten Systeme ermöglicht, ähnelt sie in Teilen einem \textit{ServiceLocator}~\cite[S. 315-340]{ACM03}, allerdings findet der Zugriff auf die beteiligten Ressourcen über klar definierte Schnittstellen statt: Beispielsweise registriert ein Spiel über die der \textit{Soft Architecture}-Schicht den \texttt{GameObjectPoolManager} über
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{content/de/architektur/runtime/img/gameworld.png}
+    \caption{Skizze des GameWorld-Konzepts in helios. (Quelle: eigene Darstellung)}
+    \label{fig:gameworld}
+\end{figure}
+
+
+Da sie den Zugriff auf die relevanten Systeme ermöglicht, ähnelt sie in Teilen einem \textit{Service Locator}~\cite[S. 315--340]{ACM03}, wobei der Zugriff auf die beteiligten Ressourcen über klar definierte Schnittstellen erfolgt.
+Beispielsweise registriert ein Spiel über die \textit{Soft Architecture}-Schicht~\cite[S 479-480]{RM04} den \texttt{GameObjectPoolManager} mittels
 
 \begin{verbatim}
-    gameWorld.registerManager<GameObjectPoolManager>();
+gameWorld.registerManager<GameObjectPoolManager>();
 \end{verbatim}
 
 und greift später über
 
 \begin{verbatim}
-    auto& manager = gameWorld.manager<GameObjectPoolManager>();
+gameWorld.manager<GameObjectPoolManager>();
 \end{verbatim}
 
 oder wahlweise
 
-
 \begin{verbatim}
-    auto* manager = gameWorld.tryManager<GameObjectPoolManager>();
+gameWorld.tryManager<GameObjectPoolManager>();.
 \end{verbatim}
 
 darauf zu.
-Auch hier wird der Zugriff bzw. das Hinzufügen über \textit{Concepts} abgesichert (\texttt{IsManagerLike}).\\
+Auch hier werden sowohl der Zugriff als auch das Hinzufügen über \textit{Concepts} (\texttt{IsManagerLike}) abgesichert.
+
+Da \textit{helios} auf eine Typidentifizierung über Vererbung verzichtet, muss der konkrete Typ der angefragten Ressource bekannt sein.
+Damit ist gleichzeitig sichergestellt, dass von jedem registrierten Typ nur eine Instanz zur Verfügung steht.
+
+\vspace{5mm}
+\begin{tcolorbox}[title={Die Verwendung von Singletons in helios}, colback=black!5, colframe=black]
+    Gregory verknüpft in~\cite[S. 418]{Gre19} den \textit{Manager} mit der Rolle einer \textit{Singleton}-Klasse.
+    \textit{helios} gibt für die von der \texttt{GameWorld} verwalteten Ressourcen keinen fachlichen Basistyp vor, solange die zur Kompilierzeit geforderten und über die \textit{Concepts} ausgedrückten Einschränkungen erfüllt sind.
+    Die Singleton-Rolle ist hier somit nicht an Vererbung oder eine bestimmte Klassenhierarchie gebunden, sondern ergibt sich aus der über einen bestimmten Typ stattgefundenen Registrierung.
+\end{tcolorbox}
+\vspace{5mm}
 
 
-Da helios auf eine Typindentifizierung über Vererbung verzichtet, muss der Klassenname der angefragten Ressource bekannt sein, womit gleichzeitig sichergestellt wird, dass von den entsprechenden Typen nur eine Instanz zur Verfügung steht.
+\textit{Views}, die einen Zugriff auf eine Sammlung von Objektinstanzen ermöglichen und unter einem bestimmten \texttt{EngineRoleTag} spezifiziert wurden, sind über semantisch eindeutige, pluralisierte Methoden wie \texttt{managers()} und \texttt{commandHandlers()} erreichbar.
+Diese liefern einen \texttt{std::span} auf die intern über das \textit{Type-Erasure}-Idiom verwalteten Instanzen zurück.\footnote{
+    Die Implementierung in \textit{helios} orientiert sich hierbei weitgehend an~\cite{TypeErasure}.
+}\\
 
-\textit{Views}, die einen Zugriff auf eine Sammlung von Objektinstanzen ermöglichen, die unter einem bestimmten \texttt{EngineRoleTag} spezifiziert wurden, sind über semantische eindeutige und plurifizierende Methoden erreichbt, wie \texttt{managers()} und \texttt{commandHandlers()}.
-Diese liefern einen \texttt{std::span} auf die über die intern über das \textit{Type Erasure}-Idiom entworfene Instanzen zurückliefern.
-Die Implementierung in helios ist hier weitgehend angelehnt an~\cite{TypeErasure}.
+Die \texttt{GameWorld} bietet außerdem Funktionen zur Erstellung von \texttt{GameObject}s sowie die Möglichkeit, einen gefilterten \textit{View} auf solche Entitäten anzufragen, die über eine bestimmte Konstellation von Komponenten verfügen, was für die in Abschnitt~\ref{sec:systems} beschriebenen Systeme von besonderer Relevanz ist.
 
-Die GameWorld bietet außerdem Funktionen zur Erstellung von \texttt{GameObject}s an sowie die Möglichkeit, einen gefilterten View auf solche Entitäten anzufragen, die über eine bestimmte Konstellation von Komponenten verfügen, was für die in Abschnitt~\label{sec:systems} beschriebenen \textit{Systeme} relevant ist.
-
-Als weitere Aufgabe verwaltet die \texttt{Session}.
-Hierbei handelt es sich um die semantische Definition eines \texttt{GameObject}s, dem während der Laufzeit des Spiels die Rolle zukommt, auf solche Komponenten Zugriff zu erlauben, die von besondeer Bedeutung für ein Spiel sind, um zentral den Zugriff auf diese Komponenten zu erlauben; hierzu gehören unter anderem \texttt{GameState}, \texttt{MatchState} und die aktiven \texttt{ViewportId}s.
+Als weitere Aufgabe verwaltet die \texttt{GameWorld} die \texttt{Session}.
+Hierbei handelt es sich um die semantische Definition eines \texttt{GameObject}s, dem während der Laufzeit des Spiels die Rolle zukommt, den Zugriff auf Komponenten zu bündeln, die für den globalen Spielzustand von Bedeutung sind.
+Hierzu gehören unter anderem \texttt{GameState}, \texttt{MatchState} und die aktiven \texttt{ViewportId}s.

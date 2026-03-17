@@ -24,7 +24,7 @@ Die Aufteilung führte trotz ausreichender IDE-Unterstützung\footnote{
 } Die Auswirkungen auf die Kompilierzeit wurden im Projektkontext als vernachlässigbar eingestuft, wobei eine belastbare Messung an dieser Stelle noch aussteht.
 
 
-\subsection{Expression Builder für das Spawn System}
+\subsubsection{Expression Builder für das Spawn System}
 Außerdem erfolgte eine logische Trennung zwischen engine-intrinsischen Funktionen (der bereits zitierten \textit{Runtime}) und Modulen, die für Spielmechaniken verantwortlich sind.
 Zwischen diesen (\texttt{mechanics}) besteht ein äußerst geringer Grad an Kopplung; sie stellen unter anderem Implementierungen für Kampf- und Punktesysteme bereit.
 Zudem wurde ein \textit{policy-basiertes} System für Spawning und Despawning eingeführt, das auf dem im \texttt{runtime}-Modul platzierten Spawn-System von helios aufsetzt.
@@ -64,13 +64,7 @@ Die Gruppierung von Komponenten hinter einfacher lesbaren Methoden, die über ei
 auto shipGameObject = std::make_unique<GameObject>();
 shipGameObject->add<SceneNodeComponent>(spaceshipSceneNode);
 shipGameObject->add<TwinStickInputComponent>();
-shipGameObject->add<Move2DComponent>();
-shipGameObject->add<TransformComponent>();
-shipGameObject->add<ScaleComponent>(5.0f, 5.0f, 0.0f, Unit::Meter);
-shipGameObject->add<Aim2DComponent>();
-shipGameObject->add<ShootComponent>();
-shipGameObject->add<LevelBoundsBehaviorComponent>();
-shipGameObject->add<AabbColliderComponent>();
+// ... weitere Komponenten hinzufügen
 \end{lstlisting}
 
 
@@ -83,29 +77,6 @@ shipGameObject->add<AabbColliderComponent>();
     \label{fig:collisiondetection}
 \end{figure}
 
-\subsection{Grid-basierte Kollisionserkennung}
+\subsubsection{Grid-basierte Kollisionserkennung}
 Eine weitere fachliche Vertiefung fand in diesem Meilenstein mit der Implementierung des Kollisionssystems statt.
-Dieses basiert auf einem Grid-basierten Ansatz (\textit{Spatial Partitioning}), um die Anzahl der zu prüfenden Kollisionen zu reduzieren.
-Bei der Umsetzung folgen wir Ericson, der in~\cite[Kapitel 4]{Eri04} dieses Prinzip beschreibt: Hierbei wird das Spielfeld in eine vorher festgelegte Anzahl von Zellen unterteilt; in jedem Frame werden Zellen nach möglichen Kollisionspaaren untersucht (\textit{Broad Phase}).
-
-Da in unserem Fall keine Kollisionserkennung von Gegnern oder Projektilen untereinander durchgeführt werden muss, kann die Anzahl der zu prüfenden Paare auf die Zellen reduziert werden, in denen sich mindestens ein Projektil und ein Gegnerobjekt oder die Spielerfigur und ein Gegnerobjekt befinden:
-
-\begin{displayquote}
-As only objects overlapping a common cell could possibly be in contact, in-depth tests are only performed against those objects found sharing cells with the object tested for collision.
-\par\hfill\cite[S.~285]{Eri04}
-\end{displayquote}
-
-Da die Koordinaten der Spielobjekte jederzeit über die \texttt{TransformComponent} zugänglich sind, können die zu prüfenden Zellen schnell identifiziert oder verworfen werden.
-Die möglichen Kollisionspaarungen werden über eine Bitmaske festgelegt - so kann ein Raumschiff mit der Layer-ID $1 \ll 0$ gleichzeitig mit Objekten kollidieren, die die Layer-ID $1 \ll 1$ (Gegner) oder $1 \ll 2$ (Hindernis) besitzen.\footnote{
-    Das Verhalten bei einer Kollision kann über die \texttt{enum class} \texttt{CollisionBehavior} auf Grundlage der Layer-ID definiert werden (beispielsweise \texttt{Despawn} bei Gegnerkollision, \texttt{SolidCollisionEvent} bei Hindernis-Kollision).
-}\\
-
-
-In einem nächsten Schritt werden die Paare in der \textit{Narrow Phase} präziser geprüft.
-In unserer Umsetzung verwenden wir hierbei der Einfachheit halber \textit{AABB} der Spielobjekte zur Ermittlung von Überschneidungen.
-Erkannte Kollisionen werden in einer \texttt{CollisionsStateComponent} gespeichert, die später vom \texttt{CollisionStateResponseSystem} ausgewertet wird.
-Während diese in Meilenstein 4 noch als einfacher \texttt{DespawnCommand} behandelt wurden, reiht Meilenstein 5 stattdessen \texttt{TriggerCollisionEvent}s oder \texttt{SolidCollisionEvent}s als \textit{Pass-Events} (siehe Abschnitt~\ref{sec:runtime_messaging}) in den Nachrichtenpuffer ein.
-Damit kann die Entscheidung, welches Verhalten bei welchem Kollisionstyp anzuwenden ist beziehungsweise welche zusätzliche Aktion auszuführen ist, leichter an unterschiedliche Systeme delegiert werden.
-In Meilenstein 5 wertet ein \texttt{DamageOnCollisionSystem} die \texttt{SolidCollisionEvent}s aus und schreibt einen \texttt{ApplyDamageCommand} in den Engine-spezifischen Befehlspuffer, um Lebenspunkte der beteiligten Objekte anzupassen.\\
-
-Am Ende der \textit{GameLoop} wird vorausgesetzt, dass alle in Frame $N$ erkannten Kollisionen behandelt wurden: Das \texttt{CollisionStateClearSystem} setzt alle \texttt{CollisionsStateComponent}s zurück, damit Kollisionen in Frame $N+1$ neu erkannt werden können.
+Dieses basiert auf einem Grid-basierten Ansatz (\textit{Spatial Partitioning}), um die Anzahl der zu prüfenden Kollisionen zu reduzieren, und wird in Abschnitt~\ref{sec:systems} beschrieben.

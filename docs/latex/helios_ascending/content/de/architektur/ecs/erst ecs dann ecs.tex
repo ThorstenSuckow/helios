@@ -3,19 +3,6 @@
     \par\hfill\cite[97, Hervorhebung i.O.]{Mar08}
 \end{displayquote}
 
-\subsection{Von Entities, Components und Systems zu einem Entity Component System}\label{sec:ecs2ecs}
-
-Das objektorientierte Design (OOD) erleichtert mit seinen Konzepten und Werkzeugen das Abstrahieren hierarchischer Strukturen und erweist sich deshalb gerade in frühen Entwurfsphasen als hilfreich bei der Modellierung~\cite{BMEY07}.
-Betrachtet man eine Game-Engine jedoch als Echtzeitsystem~\cite[525]{Gre19}, dem nur begrenzte Ressourcen zur Verfügung stehen, stellt ein datenorientiertes Design (DOD) mit seinen dichten Speicherlayouts und der Vermeidung tiefer Vererbungshierarchien den geeigneteren Ansatz bei der Implementierung dar.\footnote{
-    Empirische Studien, die dies unterstreichen, finden sich bei~\cite{FAUM20} und~\cite{WWM22}.
-}
-Dies steht im Gegensatz zu Domänen, in denen steigende Laufzeitkosten aufgrund hochgradig abstrahierter Softwaremodelle durch die Bereitstellung zusätzlicher Hardware kompensiert werden können.
-
-Unter dem Blickwinkel des DOD muss der objektorientierte Entwurf keineswegs verworfen werden, wie auch \textit{Fabian} in~\cite[239-244]{Fab18} feststellt.
-Allerdings bewegen wir uns dabei in einem Spannungsfeld, in dem die Konzeption von Fachobjekten und deren technische Umsetzung stark divergieren.
-Daraus ergibt sich die Herausforderung, das in Abschnitt~\ref{sec:meilenstein_5} angesprochene \textit{Mental Model} konsequent umzustellen: von einem Ansatz, in dem die Funktion der Form folgt (\textit{function follows form}~\cite{TD01}), hin zu einem Design, bei dem die Form - also das Datenlayout - durch die Funktion - also die Performance-Anforderungen - bestimmt wird (\textit{form follows function}).
-
-\subsubsection{Begriffsbestimmung und Abgrenzung des ECS-Begriffs}
 
 \textit{helios} begann mit einem klassischen, objektorientierten Ansatz.
 Erst mit zunehmender Komplexität des Projektes und der dadurch wachsenden Anzahl zu organisierender Komponenten und Systeme wurde das \textit{Compound Object} mit seinem \textit{Array-of-Structs}-Layout, welches ein \texttt{GameObject} noch in Meilenstein 4 darstellte, zugunsten eines datenorientierten Ansatzes ersetzt.
@@ -32,27 +19,27 @@ Dieser basiert auf dem \textit{Structure-of-Arrays}-Layout (\textit{SoA}~\cite[1
 Umfassende Anwendung findet der SoA-Ansatz in \textit{Entity Component Systems} (ECS).
 Hier wird eine Entität als theoretisches Konzept behandelt und ist im Code ein virtuelles Aggregat von $N$ verschiedenen Komponenten, die in Arrays - gruppiert nach Komponententypen - gespeichert werden.
 Der abstrahierende Archetyp löst sich damit zunächst in eine lose erscheinende Ansammlung unterschiedlicher Komponenten auf.
-Erst das \textit{System} ermöglicht eine konzeptuelle Integration der sich aus diesen Beziehungen ergebenden Fachlichkeit und Verantwortlichkeit.\\
+Erst das \textit{System} ermöglicht eine konzeptuelle Integration der sich aus diesen Beziehungen ergebenden Fachlichkeit und Verantwortlichkeit.
 
-Als weitere Abgrenzung zu dem in Abschnitt~\ref{sec:meilenstein_3} eingeführten \textit{Compound Object} weisen wir an dieser Stelle auf \textit{Fabian} hin, der in~\cite[84]{Fab18} erklärt, dass bereits ein \textit{Compound Object}, das dem \textit{composition over inheritance}-Prinzip folgt und die Eigenschaften in einer AoS-Struktur speichert, als ECS bezeichnet werden kann.
-Wir verwenden den Begriff im Folgenden jedoch im Kontext eines SoA-Layouts.
-Dies impliziert die Anforderung, die Daten für verschiedene Zugriffsarten effizient im Speicher anzuordnen, und geht damit über die reine Konzeption von Objekten und Eigenschaften hinaus.\\
+\vspace{5mm}
+\begin{tcolorbox}[title={Abgrenzung des ECS-Begriffs}, colback=black!5, colframe=black]
+    Als weitere Abgrenzung zu dem in Abschnitt~\ref{sec:meilenstein_3} eingeführten \textit{Compound Object} weisen wir an dieser Stelle auf \textit{Fabian} hin, der in~\cite[84]{Fab18} erklärt, dass bereits ein \textit{Compound Object}, das dem \textit{composition over inheritance}-Prinzip folgt und die Eigenschaften in einer AoS-Struktur speichert, als ECS bezeichnet werden kann.
+    Wir verwenden den Begriff im Folgenden jedoch im Kontext eines SoA-Layouts.
+    Dies impliziert die Anforderung, die Daten für verschiedene Zugriffsarten effizient im Speicher anzuordnen, und geht damit über die reine Konzeption von Objekten und Eigenschaften hinaus.
+\end{tcolorbox}
+\vspace{5mm}
 
-Die Idee hinter ECS liegt mit dieser Interpretation in der Trennung von Daten und Verhalten und hat in der Spieleentwicklung prominente Vertreter, darunter das bereits erwähnte \textit{Unity DOTS} sowie die Open-Source-Projekte \textit{Bevy} (Rust)~\cite{BevyProject}, \textit{EnTT}~\cite{EnttProject} und \textit{Flecs}~\cite{FlecsProject} (beide C++).
+Die Idee hinter ECS in der Trennung von Daten und Verhalten und hat in der Spieleentwicklung prominente Vertreter, darunter das bereits erwähnte \textit{Unity DOTS} sowie die Open-Source-Projekte \textit{Bevy} (Rust)~\cite{BevyProject}, \textit{EnTT}~\cite{EnttProject} und \textit{Flecs}~\cite{FlecsProject} (beide C++).
 ECS wird aber auch in anderen Domänen eingesetzt, in denen eine performante Verarbeitung von Daten relevant ist, etwa bei GPU-beschleunigten, nebenläufigen Batch-Simulationen zum Training von KI-Agenten~\cite{SRXB+23}.
 
 Dass eine Game-Engine auch ohne ECS populär und performant sein kann, zeigt unterdessen \textit{Godot}.
 Die Entwickler begründen den Verzicht auf eine solche Implementierung damit, dass die überwiegende Mehrheit der Spiele dies nicht benötige, die Engine aber entsprechende Hilfswerkzeuge bereitstelle, falls dieser Bedarf doch entstehen sollte: ``The vast majority of games do not need this and Godot provides handy helpers to do the job for most cases when you do.``~\cite{GodotNoECS}.
 
-\subsubsection{ECS als Entwurfsentscheidung in \textit{helios}}
+\subsubsection{ECS als Entwurfsentscheidung}
 
 \textit{helios} orientiert sich an bewährten Implementierungen und verzichtet dort auf Polymorphie, wo tiefe Vererbungshierarchien für unnötigen Overhead sorgen.
 Dies betrifft insbesondere Systeme, die innerhalb eines Frames angefragt und ausgeführt werden.
 Ziel ist es, alle Systeme, die innerhalb eines Frames angesteuert werden, ohne Vererbung zu implementieren, wenn Vererbung bedeuten würde, dass fachliches Verhalten in einer Elternklasse liegt.
-
-
-Dabei ist zu beachten, dass die Umstellung auf ECS-typische Datenstrukturen nicht primär aus der Projektanforderung heraus geschah, die Berechnung tausender Objekte pro Frame-Update zu realisieren.
-Vielmehr entsprang sie der Motivation, mit \textit{helios} als ``\textit{Game Framework built from first principles}``~\cite{HeliosProjectHome} integrative Aspekte bei der Umsetzung solcher Datenstrukturen in der Praxis zu erproben.
 
 \subsubsection{Sparse Sets als Speicherlayout-Strategie}
 
@@ -143,6 +130,80 @@ Dieser ermöglicht in entsprechenden Anwendungsfällen einen elementweisen Zugri
 
 Mit dem vorherigen Design von \texttt{GameObject} als \textit{Compound Object} ergaben sich statt eines dichten Speicherbereichs viele verstreute Speicherbereiche auf dem Heap.
 Dies ist für die einzelnen Iterationen der \textit{GameLoop} nicht optimal, da bei 120 FPS nur ca.~$8{,}3$\,ms für alle Operationen und Berechnungen der verschiedenen Systeme zur Verfügung stehen.
+
+Eine Gegenüberstellung der Implementierungen zeigen die Tabellen~\ref{tab:benchmark_meilenstein3} und~\ref{tab:benchmark_meilenstein5}, sowie die Abbildung~\ref{fig:benchmark_vergleich}.
+Es ist leicht erkennbar, dass die SoA-implementierung besser skaliert, was sich in einem nahezu konstanten Durchsatz widerspiegelt, während die AoS-Implementierung mit zunehmender Anzahl von Entitäten deutlich an Durchsatz verliert.
+
+
+Alle Messungen wurden auf demselben Testsystem\footnote{AMD Ryzen 9 9950X3D, 64\,GB RAM, Windows 11 Pro (x64), Build 26200.} durchgeführt.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{l r r r r}
+\toprule
+\textbf{Benchmark} & \textbf{$N$} & \textbf{Zeit [$\mu$s]} & \textbf{CPU [$\mu$s]} & \textbf{Durchsatz [M/s]} \\
+\midrule
+\texttt{HasComponent}           & 100    &   1,17 &   1,17 & 85,33 \\
+                                & 1\,000  &  14,30 &  13,50 & 74,09 \\
+                                & 10\,000 & 214,00 & 215,00 & 46,55 \\
+\addlinespace
+\texttt{GetComponent}           & 100    &   1,23 &   1,25 & 80,31 \\
+                                & 1\,000  &  14,20 &  14,10 & 70,80 \\
+                                & 10\,000 & 213,00 & 215,00 & 46,55 \\
+\addlinespace
+\texttt{GetMultipleComponents}  & 100    &   3,21 &   3,15 & 31,75 \\
+                                & 1\,000  &  33,80 &  33,80 & 29,62 \\
+                                & 10\,000 & 413,00 & 419,00 & 23,89 \\
+\addlinespace
+\texttt{HasComponent\_Absent}   & 100    &   1,61 &   1,60 & 62,33 \\
+                                & 1\,000  &  17,80 &  18,00 & 55,46 \\
+                                & 10\,000 & 255,00 & 255,00 & 39,22 \\
+\bottomrule
+\end{tabular}
+\caption{Benchmark-Ergebnisse der AoS-Implementierung (\textit{Compound Object}, Meilenstein~3).}
+\label{tab:benchmark_meilenstein3}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{l r r r r}
+\toprule
+\textbf{Benchmark} & \textbf{$N$} & \textbf{Zeit [$\mu$s]} & \textbf{CPU [$\mu$s]} & \textbf{Durchsatz [M/s]} \\
+\midrule
+\texttt{HasComponent}           & 100    &   0,43 &   0,43 & 232,73 \\
+                                & 1\,000  &   4,25 &   4,24 & 235,98 \\
+                                & 10\,000 &  43,70 &  43,00 & 232,73 \\
+\addlinespace
+\texttt{GetComponent}           & 100    &   0,56 &   0,56 & 179,20 \\
+                                & 1\,000  &   5,55 &   5,44 & 183,80 \\
+                                & 10\,000 &  57,10 &  57,20 & 174,83 \\
+\addlinespace
+\texttt{GetMultipleComponents}  & 100    &   1,91 &   1,84 &  54,30 \\
+                                & 1\,000  &  16,60 &  16,70 &  59,73 \\
+                                & 10\,000 & 163,00 & 164,00 &  61,00 \\
+\addlinespace
+\texttt{HasComponent\_Absent}   & 100    &   0,36 &   0,36 & 279,45 \\
+                                & 1\,000  &   2,65 &   2,61 & 383,32 \\
+                                & 10\,000 &  27,80 &  27,60 & 362,02 \\
+\bottomrule
+\end{tabular}
+\caption{Benchmark-Ergebnisse der SoA-Implementierung (\textit{Sparse Set}, Meilenstein~5).}
+\label{tab:benchmark_meilenstein5}
+\end{table}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\columnwidth]{content/de/architektur/ecs/img/benchmark_durchsatz}
+
+    \vspace{0.8em}
+
+    \includegraphics[width=1.0\columnwidth]{content/de/architektur/ecs/img/benchmark_dauer}
+    \caption{Vergleich der ECS-Benchmarks hinsichtlich Durchsatz und Laufzeit. Beim ``Durchsatz`` sind höhere Werte besser, bei der ``Dauer`` sind niedrigere Werte besser. Gemessen werden die Methoden \texttt{get<T>()}, \texttt{has<T>()} sowie die kombinierte Abfrage mehrere Komponenten sowie das Nichtvorhandensein einer Entität.
+    Die dargestellten Benchmarks entsprechend einer Objektgröße von 10.000 Entitäten (\textit{GameObject}. (Quelle: Eigene Darstellung)}
+    \label{fig:benchmark_vergleich}
+\end{figure}
+
 
 Insgesamt ist ein ECS also nicht nur ein Paradigma für die Trennung von Verhalten und Daten, sondern spielt seine Stärke vor allem dann aus, wenn die Daten effizient im Speicher angeordnet werden, wie \textit{Cox et al.} in~\cite{CWVW+25} zeigen.
 

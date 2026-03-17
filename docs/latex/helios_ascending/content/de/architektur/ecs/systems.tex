@@ -1,4 +1,4 @@
-\subsection{Systems - Steuerung des Verhaltens der beteiligten Komponenten}\label{sec:systems}
+\subsection{Systeme als Verhaltensträger}\label{sec:systems}
 
 In einem Frame werden die über die \texttt{GameLoop} registrierten Systeme in einer bestimmten Reihenfolge aufgerufen.
 Systeme iterieren hierbei nicht nur über einzelne Komponenten, sondern können - je nach Aufgabe - auch über eine Komponenten-Komposition iterieren, da beispielsweise eine Skalierungskomponente in unterschiedlichen Kontexten angewendet wird (UI, aktives NPC- oder Spielerobjekt).\footnote{
@@ -74,4 +74,32 @@ Die Logik ist ein Implementierungsdetail und kann über eine benötigte Aktualis
     }
 \end{lstlisting}
 
+
+\subsubsection{Beispiel: Kollisionserkennungsystem}
+
+In Meilenstein 4 (siehe Abschnitt~\ref{sec:meilenstein_4} fand eine fachliche Vertiefung in die Implementierung eines Kollisionssystem statt.
+Die Umsetzung basiert auf einem Grid-basierten Ansatz (\textit{Spatial Partitioning}), um die Anzahl der zu prüfenden Kollisionen zu reduzieren, und wird in Abschnitt~\ref{sec:systems} beschrieben.
+Bei der Umsetzung folgen wir Ericson, der in~\cite[Kapitel 4]{Eri04} dieses Prinzip beschreibt: Hierbei wird das Spielfeld in eine vorher festgelegte Anzahl von Zellen unterteilt; in jedem Frame werden Zellen nach möglichen Kollisionspaaren untersucht (\textit{Broad Phase}).
+
+Da in unserem Fall keine Kollisionserkennung von Gegnern oder Projektilen untereinander durchgeführt werden muss, kann die Anzahl der zu prüfenden Paare auf die Zellen reduziert werden, in denen sich mindestens ein Projektil und ein Gegnerobjekt oder die Spielerfigur und ein Gegnerobjekt befinden:
+
+\begin{displayquote}
+    As only objects overlapping a common cell could possibly be in contact, in-depth tests are only performed against those objects found sharing cells with the object tested for collision.
+    \par\hfill\cite[S.~285]{Eri04}
+\end{displayquote}
+
+Da die Koordinaten der Spielobjekte jederzeit über die \texttt{TransformComponent} zugänglich sind, können die zu prüfenden Zellen schnell identifiziert oder verworfen werden.
+Die möglichen Kollisionspaarungen werden über eine Bitmaske festgelegt - so kann ein Raumschiff mit der Layer-ID $1 \ll 0$ gleichzeitig mit Objekten kollidieren, die die Layer-ID $1 \ll 1$ (Gegner) oder $1 \ll 2$ (Hindernis) besitzen.\footnote{
+    Das Verhalten bei einer Kollision kann über die \texttt{enum class} \texttt{CollisionBehavior} auf Grundlage der Layer-ID definiert werden (beispielsweise \texttt{Despawn} bei Gegnerkollision, \texttt{SolidCollisionEvent} bei Hindernis-Kollision).
+}\\
+
+
+In einem nächsten Schritt werden die Paare in der \textit{Narrow Phase} präziser geprüft.
+In unserer Umsetzung verwenden wir hierbei der Einfachheit halber \textit{AABB} der Spielobjekte zur Ermittlung von Überschneidungen.
+Erkannte Kollisionen werden in einer \texttt{CollisionsStateComponent} gespeichert, die später vom \texttt{CollisionStateResponseSystem} ausgewertet wird.
+Während diese in Meilenstein 4 noch als einfacher \texttt{DespawnCommand} behandelt wurden, reiht Meilenstein 5 stattdessen \texttt{TriggerCollisionEvent}s oder \texttt{SolidCollisionEvent}s als \textit{Pass-Events} (siehe Abschnitt~\ref{sec:runtime_messaging}) in den Nachrichtenpuffer ein.
+Damit kann die Entscheidung, welches Verhalten bei welchem Kollisionstyp anzuwenden ist beziehungsweise welche zusätzliche Aktion auszuführen ist, leichter an unterschiedliche Systeme delegiert werden.
+In Meilenstein 5 wertet ein \texttt{DamageOnCollisionSystem} die \texttt{SolidCollisionEvent}s aus und schreibt einen \texttt{ApplyDamageCommand} in den Engine-spezifischen Befehlspuffer, um Lebenspunkte der beteiligten Objekte anzupassen.\\
+
+Am Ende der \textit{GameLoop} wird vorausgesetzt, dass alle in Frame $N$ erkannten Kollisionen behandelt wurden: Das \texttt{CollisionStateClearSystem} setzt alle \texttt{CollisionsStateComponent}s zurück, damit Kollisionen in Frame $N+1$ neu erkannt werden können.
 

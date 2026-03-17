@@ -3,8 +3,7 @@
 
 Meilenstein 2 markierte die erste funktionale Erweiterung der Architektur, die ein Rendering in Abhängigkeit von Benutzereingaben (Gamepad-Input) ermöglichte.
 Hierfür wurden die Klassen \texttt{GameWorld} und \texttt{GameObject} eingeführt.
-Deren Semantik blieb zwar bis zur finalen Version erhalten, sie durchliefen jedoch im weiteren Verlauf eine tiefgreifende strukturelle Transformation: Von Datencontainern, die Geschäftslogik kapseln, hin zu
-leichtgewichtigen Fassaden-Objekten für den Zugriff auf darunterliegende, template-basierte Registries eines datenorientierten \textit{Entity Component System} (ECS).\\
+Deren Semantik blieb zwar bis zur finalen Version erhalten, sie durchliefen jedoch im weiteren Verlauf eine tiefgreifende strukturelle Transformation: Von Datencontainern, die Geschäftslogik kapseln, hin zu leichtgewichtigen Fassaden-Objekten für den Zugriff auf darunterliegende, template-basierte Registries eines datenorientierten \textit{Entity Component System} (ECS).\\
 
 Der im vorherigen Abschnitt angesprochene architektonische Umbruch des Rendering-Systems betraf die Repräsentanten der Viewports~\cite[40]{SWH15}, welche ursprünglich als statische, eins-zu-eins mit dem Fenster korrespondierende Render-Ziele verstanden wurden.
 Diese wurden so angepasst, dass innerhalb der Engine die Unterstützung mehrerer Viewports über einen \texttt{RenderTarget} (Abstraktion eines Framebuffers~\cite[S. 329]{HDMS+14}) ermöglicht wurde.
@@ -49,26 +48,14 @@ Diese fungiert als zentraler Container für die Verwaltung aller in der Spielwel
         Der Zugriff auf die \texttt{GameObjects} erfolgte hashbasiert über ihre jeweilige GUID.
     },
     label=lst:gameworld_v1]
-    /**
-     * @brief Updates all GameObjects in the world for
-     *        the current frame.
-     */
     void update(float deltaTime) noexcept;
-
-    /**
-     * @brief Adds a GameObject to the world.
-     */
     void addGameObject(std::unique_ptr<GameObject> gameObject);
-
-    /**
-     * @brief Finds a GameObject by its unique identifier.
-     */
     GameObject* find(const Guid& guid);
 \end{lstlisting}
 \vspace{5mm}
 
 Obwohl die API auch im finalen Zustand eine ähnliche Semantik nutzt, weicht die interne Implementierung stark von der hier beschriebenen Umsetzung ab: Auf hash-basierte Zugriffe über \texttt{std::unordered\_map} wird im Engine-Modul nun weitestgehend verzichtet.
-Die Steuerung der in einem Frame aktiven Systeme erfolgt heute über eine Abstraktion des \textit{GameLoop}-Konzepts in zustandsabhängige Phasen und Pässe mit individuellen Commit-Points, um eine deterministische Nachrichtenverarbeitung zu realisieren (siehe Abschnitt~\ref{sec:meilenstein_4}).\\
+Die Steuerung der in einem Frame aktiven Systeme erfolgt aktuell über eine Abstraktion des \textit{GameLoop}-Konzepts in zustandsabhängige Phasen und Pässe mit individuellen Commit-Points, um eine deterministische Nachrichtenverarbeitung zu realisieren (siehe Abschnitt~\ref{sec:meilenstein_4}).\\
 
 Weitere Implementierungen in diesem Meilenstein betrafen unter anderem:
 

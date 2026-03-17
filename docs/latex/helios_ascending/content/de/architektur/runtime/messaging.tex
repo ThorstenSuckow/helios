@@ -1,18 +1,40 @@
-\subsection{Messaging - Kommunikation zwischen Systemen und Komponenten}\label{sec:runtime_messaging}
+\subsection{Das Messaging Konzept}\label{sec:runtime_messaging}
 
-Für den nachrichtenaustausch der existierenden Systeme, Manager und Komponenten wird über den UpdateContext als zentraler Hub Schnittstellen exponiert, die das auslesen und das Ablegen von Nachrichten ermöglichen.
+Der Nachrichtenaustausch zwischen Systemen, Managern und Komponenten erfolgt über den \texttt{UpdateContext}, der als zentraler Hub Schnittstellen zum Lesen und Ablegen von Nachrichten exponiert.
 
-Daneben existiert ein zentraler CommandBuffer, der - basierend auf zur CompileTime definierten CommandTypen - die engine relevanten Commands zur Verarbeitung ermöglicht. Hiermit erkaufen wir uns Performance zum nachteil von mehr bootstrapping und Wartungsaufwand bei der Pfelege neur Commands.
+Daneben existiert ein zentraler \texttt{CommandBuffer}, der - basierend auf zur Compile-Time definierten Command-Typen - die Engine-relevanten Commands zur Verarbeitung bereitstellt.\footnote{
+    Der dadurch gewonnene Performance-Gewinn erfolgt zum Nachteil von mehr Bootstrapping- und Wartungsaufwand bei der Pflege neuer \textit{Commands}, wie in Abschnitt~\ref{sec:meilenstein_5} beschrieben.
+}
 
-Wie auch die Manager werden alle registrierten CommandBuffer zu bestiimmten CommitPoints geflusht - hierzu werden die vpn \texttt{enqueueCommand} abgelegten Commands iteriert und an die registrierten CommandHandler für den jeweiligen Typen gesendet (\texttt{submit()}). Die Registrierung der CommandHandler erfolgt dabei über einen Aufruf an die GameWorld mit
+Die Command-Verarbeitung stützt sich auf die \texttt{CommandHandlerRegistry}: Beim Flushen des \texttt{TypedCommandBuffer} wird für jeden Command-Typ geprüft, ob ein registrierter Handler vorliegt.
+Ist dies der Fall, wird der Command an diesen delegiert; andernfalls wird - sofern der Command das \texttt{ExecutableCommand}-Concept erfüllt - dessen \texttt{execute()}-Methode direkt aufgerufen.\\
+
+Die Registrierung eines Handlers erfolgt über die \texttt{GameWorld}:
 
 \begin{verbatim}
-gameWorld.registerCommandHandler<SpawnCommand, DespawnCommand>(*handlerLike));
+gameWorld.registerCommandHandler<SpawnCommand, DespawnCommand>(handler);
 \end{verbatim}
 
-Die GameWorld nutzt Variadic Templates zusammen mit Fold Expressions, um für die übergebenen CommandTypen den Handler zu registeiren. DerHandler wird wiederum anhand eines \texttt{IsCommandHandlerLike}-Concepts, überprüft, um  um sicherzustellen, dass für jeden angegebenen CommandTypen auch eine submit()-Funktionen implementiert ist.
+Die \texttt{GameWorld} nutzt hierbei \textit{Variadic Templates} zusammen mit \textit{Fold Expressions}~\cite[82-118]{Ban22}, um für jeden übergebenen Command-Typ einen zugehörigen Handler-Eintrag in der \texttt{ResourceRegistry} der \texttt{GameWorld} anzulegen.
+Auch hier werden die Handler erneut von \textit{Concepts} (\texttt{IsCommandHandlerLike}) validiert, um sicherzustellen, dass für jeden angegebenen Typ eine passende \texttt{submit()}-Funktion implementiert ist.
+Intern speichert die Registry einen type-erased Funktionszeiger (\textit{Trampoline}), sodass der Handler ohne virtuelle Vererbung aufgerufen werden kann.\\
 
-In der GameWorld registrierte CommandBuffer werden von der GameLoop in jedem Phasenwechsel geflusht.
-Darüber hinaus ist es möglich, über CommitPoints ein flushen der CommandBuffer innerhalb einer Phase zwischen zwei Passes zu veranlassen.
+In der \texttt{GameWorld} registrierte \texttt{CommandBuffer} werden von der \texttt{GameLoop} bei jedem Phasenwechsel geflusht.
+Darüber hinaus ist es möglich, über \texttt{CommitPoints} ein Flushen innerhalb einer Phase zwischen zwei Passes auszulösen.
 
-Dabei wird allerdings der WriteBuffer der CommandBuffer mit dem ReadBuffer geswappt, was für einen nachfolgende Phase, die über den UpdateContext Comands dieses Typen erwartet, wichtig ist: Entsprechende Systeme müssen so angeordnet werden, dass die Reihenfolge der Verarbeitung von Commands den erfolgten BufgferSwaps berücksichtigt.
+Dabei wird der Write-Buffer des \texttt{CommandBuffer} mit dem Read-Buffer getauscht, was für nachfolgende Passes, die über den \texttt{UpdateContext} Commands eines bestimmten Typs erwarten, relevant ist: Systeme müssen so angeordnet werden, dass die Reihenfolge der Verarbeitung die erfolgten Buffer-Swaps berücksichtigt.\\
+
+Neben Commands steht mit den \textit{Events} ein zweiter Kommunikationskanal zur Verfügung.
+Die Unterteilung in Commands und Events ist dabei nicht strikt, sondern eher konzeptionell: Commands sind immer dann vorgesehen, denn der Weltzustand deterministisch verändert werden soll.
+Events hingegen sind Informationen, die eine Weiterverarbeitung von Zustandsänderungen erlauben sollen (beispielsweise visuelle / audible Effekte), und damit Fakten / Signale zwischen Systemen transportiert.\\
+
+Der \texttt{UpdateContext} bietet hierbei Zugriff auf drei Ebenen von EventBussen, die ebenfalls das als Double-Buffers realisiert sind (vgl.\ Abschnitt~\ref{sec:runtime_gameloop}):
+
+\begin{itemize}
+    \itemsep0.3em
+    \item \textbf{Pass-Events} (\texttt{pushPass}/\texttt{readPass}): Werden an \texttt{CommitPoints} innerhalb einer Phase geswappt und stehen nachfolgenden Passes derselben Phase zur Verfügung.
+    \item \textbf{Phase-Events} (\texttt{pushPhase}/\texttt{readPhase}): Werden an Phasengrenzen geswappt und sind in der jeweils nächsten Phase lesbar.
+    \item \textbf{Frame-Events} (\texttt{pushFrame}/\texttt{readFrame}): Werden am Ende eines Frames geswappt und erlauben eine frameübergreifende Kommunikation.
+\end{itemize}
+
+Durch die Aufteilung in diese drei Ebenen und eine entsprechende Unterteilung der \textit{GameLoop} lässt sich die Reichweite einer Nachricht gezielt eingrenzen.

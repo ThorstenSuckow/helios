@@ -1,0 +1,59 @@
+\chapter{Zusammenfassung und Ausblick}
+
+\subsubsection{Design- und Architekturentscheidungen}
+
+
+Das objektorientierte Design (OOD) erleichtert mit seinen Konzepten und Werkzeugen das Abstrahieren hierarchischer Strukturen und erweist sich deshalb gerade in frühen Entwurfsphasen als hilfreich bei der Modellierung~\cite{BMEY07}.
+Betrachtet man eine Game-Engine jedoch als Echtzeitsystem~\cite[525]{Gre19}, dem nur begrenzte Ressourcen zur Verfügung stehen, stellt ein datenorientiertes Design (DOD) mit seinen dichten Speicherlayouts und der Vermeidung tiefer Vererbungshierarchien den geeigneteren Ansatz bei der Implementierung dar.\footnote{
+    Empirische Studien, die dies unterstreichen, finden sich bei~\cite{FAUM20} und~\cite{WWM22}.
+}
+Dies steht im Gegensatz zu Domänen, in denen steigende Laufzeitkosten aufgrund hochgradig abstrahierter Softwaremodelle durch die Bereitstellung zusätzlicher Hardware kompensiert werden können.
+
+Unter dem Blickwinkel des DOD muss der objektorientierte Entwurf keineswegs verworfen werden, wie auch \textit{Fabian} in~\cite[239-244]{Fab18} feststellt.
+Allerdings bewegen wir uns dabei in einem Spannungsfeld, in dem die Konzeption von Fachobjekten und deren technische Umsetzung stark divergieren.
+Daraus ergibt sich die Herausforderung, das in Abschnitt~\ref{sec:meilenstein_5} angesprochene \textit{Mental Model} konsequent umzustellen: von einem Ansatz, in dem die Funktion der Form folgt (\textit{function follows form}~\cite{TD01}), hin zu einem Design, bei dem die Form - also das Datenlayout - durch die Funktion - also die Performance-Anforderungen - bestimmt wird (\textit{form follows function}).\\
+
+Mit dieser Umstellung wurde auch die Template-Metaprogrammierung~\cite[S. 112-114]{Str18} als idiomatischer Ansatz zur Bereitstellung generischer Komponenten und Systeme etabliert.
+Deren großer Vorteil für \textit{helios} sehen wir insbesondere in der zur Kompilierzeit abgesicherten Typsicherheit.
+Das klassische \textit{Liskovsche Substitutionsprinzip}~\cite[S.~148]{LG01} tritt dabei gegenüber der Verwendung von \textit{C++-Concepts}~\cite[S.~107-112]{Str18} und statischer Introspektion in den Hintergrund.
+Stattdessen wird die Validierung von Typeigenschaften weitgehend in die Kompilierphase verlagert, was dynamische Indirektionen im \textit{Hot Path} reduziert.
+Damit ergeben sich für \textit{helios} geringere Laufzeitkosten, allerdings um den Preis eines aufwändigeren Bootstrappings.
+Ein interessanter Aspekt, den es zu evaluieren gäbe, wären die Auswirkungen auf Untertsützungen eines Editor-Systems in helios.\\
+
+Ganz ohne Vererbung und Basisklassen kommt \textit{helios} dabei nicht aus.
+Allerdings wurden diese mit zunehmendem Projektfortschritt gezielter eingesetzt, beispielsweise im Rahmen des \textit{Type-Erasure}-Idioms~\cite[S. 318-328]{Ban22}.
+Dass in diesem Zusammenhang ein ECS Vererbung kein Stilbruch bedeutet, zeigt auch der Hinweis von \textit{Bayliss}: DOD kann zwar Gründe liefern, auf Vererbung und Polymorphie zu verzichten, aber in der Praxis stellt es aber eben kein striktes Regelwerk dar; er führt den Gebrauch von Interfaces in \textit{Unity DOTS} als Gegenbeispiel an~\cite[38]{Bay22}.
+
+ Vererbung findet sich nun überwiegend in den frühen Schichten der Architektur, die rückblickend als \textit{technical debt} verstanden werden können.
+
+Insgesamt muss berücksichtigt werden, dass die Umstellung auf ECS-typische Datenstrukturen nicht primär aus der Projektanforderung heraus geschah, die Berechnung tausender Objekte pro Frame-Update zu realisieren.
+Vielmehr entsprang sie der Motivation, mit \textit{helios} als ``\textit{Game Framework built from first principles}``~\cite{HeliosProjectHome} integrative Aspekte bei der Umsetzung solcher Datenstrukturen in der Praxis zu erproben, und dieser Wunsch ist erst bei der Durchdringung der Anforderungen und der Domäne erfolgt, wozu die Entwicklung von Meilenstein 3 beigetragen hat.
+Das Projekt fand sich an dieser Stelle durch die Programmierung der Engine-nahen Systeme an einem Scheideweg:
+Die konsequente Fortführung des objektorientierten Ansatzes hätte ein späteres Umstellen auf ein anderes Paradigma mit hohem Aufwand verbunden; im Gegensatz hätte der der populäre datenorientierte Ansatz~\cite{Bay22} dort zunächst Einarbeitung erfordert und die praktische Implementierung verzögert.\\
+
+Zwar war die in~\ref{lst:gameobject_v1} auszugsweise dargestellte API für einen einfachen Prototypen, der nur geringe Anforderungen (wie die Repräsentation lokaler Transformationen) erfüllen musste, durchaus handhabbar.
+Für die Umsetzung komplexerer Logiken wie der Feuermechanik hätten diese jedoch entweder in die Basisklasse integriert werden müssen - was zu \textit{Dead Code} bei Objekten geführt hätte, die diese Funktionalität nicht benötigen - wie etwa die geplanten Gegnertypen, die dem Originalspiel entsprechend keine Waffen führen sollen - oder eine Spezialisierung hätte erfolgen müssen.
+Auch hier war zunächst unklar, wie in einem gewohnten OOP-Ansatz ein vernünftiger Schnitt zwischen Basisklasse und Spezialisierung hätte aussehen können.\\
+
+Rückblickend lässt sich sagen, dass der praxisnahe Ansatz, zunächst nach den im Prototypen-Dokument eher vage formulierten Vorgaben zu entwickeln, mit der zu diesem Zeitpunkt noch begrenzten fachlichen Erfahrung der Entwickler kollidierte: Eine frühere Auseinandersetzung mit den fachlichen Anforderungen sowie eine Rücksprache mit der Projektbetreuung über Tragweite und architektonische Auswirkungen hätten spätere konzeptionelle Probleme bei der Trennung von Verantwortlichkeiten vermeiden können.
+Auch der durch das UI-System entstandene \textit{Scope Creep}~\cite[S. 274]{Mou15} in Meilesntein 5 hätte sich durch eine vorausschauendere Planung abfedern lassen.\\
+
+
+Mit zunehmender Erfahrung mit C++ im Rahmen dieses Projekts wuchs auch das Vertrauen in die Codebasis.
+Die ursprünglich konsequente Verwendung von \texttt{unique\_ptr} und \texttt{shared\_ptr} zur Abbildung eindeutiger Besitzverhältnisse sowie zur Unterstützung move-basierter (Besitz)Übergaben wurde in tieferen Schichten der Engine schrittweise durch rohe Zeiger und Referenzen ersetzt.
+Referenzen als Übergabeparameter sollen dabei auch eine an anderer Stelle vereinbarte Lebenszeitgarantie sicherstellen, die in höheren Schichten modelliert wird.\\
+
+
+beschäftigung mit hard architecture, dazu möglichkeit viele systeme zur wiederverwendung vorzubereiten, soft architecture wenig aufwand
+
+technische schulden
+
+threading?
+
+editor?
+wie sehr würde sich das auf die architektur auswirken
+
+
+faszination spieltrip nicht nur beim spielen, sondern auch zusammentsxkecn der systeme im baukaste wie im lego faszinieren
+
+ecs components nicht in anzahl der felder beschränkt wie uin unit ybspw

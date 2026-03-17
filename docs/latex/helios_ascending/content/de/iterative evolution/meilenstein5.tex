@@ -3,29 +3,20 @@
 Ziel von Meilenstein 5 war die Umsetzung und Integration von Gameplay-Mechaniken in das zugrundeliegende Framework.
 Da \textit{helios} zum Ende des vorangegangenen Meilensteins bereits sehr stabil lief, wurde zunächst die mit Meilenstein 3 eingeleitete gedankliche Umstellung auf eine ECS-Architektur nun auch praktisch vollzogen.
 
-Wir sahen hier zunächst Bedarf, die Datenhaltungsschicht der \textit{GameWorld} umzustrukturieren, was ein ``Entkernen`` der direkt verwalteten \texttt{GameObject}s, der \texttt{Manager}-Klassen sowie der \texttt{CommandHandler} und \texttt{CommandBuffer} bedeutete.
-Gemessen an dem konzeptionellen Bruch, den die Einführung eines ``echten`` ECS in das Projekt mit sich brachte, musste vergleichsweise wenig an der öffentlichen API angepasst werden: Die Änderungen beschränkten sich weitgehend auf die tieferen, gekapselten Schichten; die öffentlichen Schnittstellen von \textit{GameWorld} und \textit{GameObject} blieben weitestgehend unverändert~\cite{Par72}.
+Wir sahen hier zunächst Bedarf, die Datenhaltungsschicht der \textit{GameWorld} umzustrukturieren, was ein Entkernen der direkt verwalteten \texttt{GameObject}s, der \texttt{Manager}-Klassen sowie der \texttt{CommandHandler} und \texttt{CommandBuffer} bedeutete.
+Gemessen an dem konzeptionellen Bruch, den die Einführung des ECS-Konzepts in das Projekt mit sich brachte, musste vergleichsweise wenig an der öffentlichen API angepasst werden: Die Änderungen beschränkten sich weitgehend auf die tieferen, gekapselten Schichten; die öffentlichen Schnittstellen von \textit{GameWorld} und \textit{GameObject} blieben weitestgehend unverändert.\footnote{
+Die Stabilität der API führen wir an dieser Stelle auf die bereits im Prototypen-Dokument beschriebenen SOLID-Prinzipien und die konsequente Kapselung von Funktionalitäten zurück, ganz im Sinne des \textit{Information Hiding}~\cite{Par72}.
+}
+
 Ein hoher Migrationsaufwand entstand jedoch durch den Austausch der bislang in \textit{helios} verwendeten GUIDs zur Identifikation von Spielobjekten, die sich durch alle Schichten der bisher umgesetzten Engine und ihrer Subsysteme zogen.
 Da diese GUIDs nun durch einen \texttt{EntityHandle} ersetzt wurden - der einem zusammengesetzten Schlüssel entsprach -, waren die Änderungen zwar zahlreich, aber überwiegend von syntaktischer Natur.
 
-Mit der Umstellung des \textit{Mental Models}\footnote{
-    ``Mature programmers know that the idea that everything is an object \textit{is a myth}. Sometimes you really \textit{do} want simple data structures with procedures operating on them``.~\cite[97, Hervorhebung i.O.]{Mar08}. Auch Fabian geht in~\cite[239-244]{Fab18} darauf ein, dass es zunächst leichter fällt, Problemstellungen in der ``objektorientierten Welt`` zu formulieren.
-} hin zum Prinzip \textit{composition over inheritance} wurde zudem die Template-Metaprogrammierung~\cite[S. 112-114]{Str18} als idiomatischer Ansatz zur Bereitstellung generischer Komponenten und Systeme etabliert.
-Deren großer Vorteil für \textit{helios} liegt insbesondere in der zur Kompilierzeit abgesicherten Typsicherheit.
-Das klassische \textit{Liskovsche Substitutionsprinzip}~\cite[S.~148]{LG01} tritt dabei gegenüber der Verwendung von \textit{C++-Concepts}~\cite[S.~107--112]{Str18} und statischer Introspektion in den Hintergrund; die Validierung von Typeigenschaften wird weitgehend in die Kompilierphase verlagert, zugunsten reduzierter Typprüfung im \textit{Hot Path}.
-Damit erkauft sich \textit{helios} einen weitgehenden Verzicht auf Vererbung, virtuelle Funktionen und die damit verbundenen Laufzeitkosten~\cite[S. 55]{agnerfog} um den Preis eines aufwändigeren Bootstrappings.\footnote{Auch Auswirkungen dieses Ansatzes auf ein eventuelles Editor-System wären hier zu bedenken.}
-Ganz ohne Vererbung und Basisklassen kommt \textit{helios} zwar nicht aus, allerdings wurden diese mit zunehmendem Projektfortschritt gezielter eingesetzt, beispielsweise im Rahmen des \textit{Type-Erasure}-Idioms~\cite[S. 318-328]{Ban22}.\footnote{
-    \textit{Bayliss} weist darauf hin, dass DOD zwar Gründe liefern kann, auf Vererbung und Polymorphie zu verzichten, es in der Praxis aber kein striktes Regelwerk darstellt; er führt den Gebrauch von Interfaces in \textit{Unity DOTS} als Gegenbeispiel an~\cite[38]{Bay22}.
-} Vererbung findet sich nun überwiegend in den frühen Schichten der Architektur, die rückblickend als \textit{technical debt} verstanden werden können.\\
-
 Neben der Umstellung der Datenhaltung erwies sich in diesem Meilenstein die Integration eines User Interface als weitaus folgenreicher.
 
-\subsection{UI-Elemente als Scope Creep}
-Für die Steuerung des Spiels war zudem die Einführung eines User Interface notwendig, damit der Anwender neben spielspezifischen Informationen auf einem Heads-Up-Display (\textit{HUD}) auch Menüoptionen zum Starten, Pausieren, Neustarten und Beenden des Spiels erhält.
+\subsubsection{UI-Elemente als Scope Creep}
+Das für die Steuerung des Spiels notwendige User Interface in Form eines Heads-Up-Display (\textit{HUD}) sollte Menüoptionen zum Starten, Pausieren und Beenden des Spiels erhalten.
 
-Die Umsetzung erwies sich dabei erneut als Unterbrechung des Entwicklungsprozesses der Spielmechaniken.
-Im Kontext des \textit{Requirements Engineering} lässt sich dies als \textit{Scope Creep}~\cite[S. 274]{Mou15} einordnen, wobei die Anforderung bei einer entsprechenden fachlichen Reife bereits bei der Planung des Projektes hätte klar sein müssen.
-Die Fertigstellung hat sich dadurch wesentlich verzögert: Für die Textdarstellung folgen wir der Einfachheit halber de~Vries~\cite[S.~449--457]{Vri20} und haben die Anzeige als Glyph-Rendering mittels FreeType~\cite{freetype} umgesetzt.
+Die Fertigstellung hat sich dadurch wesentlich verzögert: Für die Textdarstellung folgen wir einer einfachen Umsetzung nach de~Vries~\cite[S.~449-457]{Vri20}, der die Anzeige von Text als Glyph-Rendering mittels FreeType~\cite{freetype} umsetzt.
 Das Text-Rendering wird in der Render-Pipeline in einem auf das Mesh-Rendering folgenden Durchlauf berücksichtigt.
 Texte werden dabei als spezialisierte \textit{Renderables} behandelt, die neben der Zuordnung der Font-Ressource auch die Konfiguration von Skalierungsfaktor und Textfarbe erlauben.\\
 

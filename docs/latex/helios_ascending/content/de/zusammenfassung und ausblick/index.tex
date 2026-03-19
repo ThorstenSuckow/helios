@@ -1,84 +1,103 @@
+
 \chapter{Zusammenfassung und Ausblick}
 
 \begin{displayquote}
-    A centipede was happy – quite!
-    Until a toad in fun
-    Said, ``Pray, which leg moves after which\?``
-    This raised her doubts to such a pitch,
-    She fell exhausted in the ditch
-    Not knowing how to run.
-    \par\hfill\cite[]{}
+A centipede was happy - quite!
+Until a toad in fun
+Said, Pray, which leg moves after which?
+This raised her doubts to such a pitch,
+She fell exhausted in the ditch
+Not knowing how to run.
+\par\hfill\cite{Cras1871}
 \end{displayquote}
 
 
-\subsubsection{You ain't gonna need it?}
-Das Projektstudium hatte zum Ziel, einen spielbaren Geometry Wars Klon zu entwickeln.
-Mit einem Zeitbudget von ca. 300 Stunden - was etwa 60 Manntagen entspricht - mag es etwas verwundern, dass das Ergebnis am Ende noch ungeschliffen wirkt.
-Festgehalten wurde in dem Prototypen-Dokument auch die Anforderung, dass ein wesentliches Hauptaugenmerk auf die Architektur gelegt werden sollte, und ohne dies weiter einzugrenzen, wäre im Rückblick ein Ergebnis, das mehr ``Pop`` aufweist - also den im Prototypen-Dokument formulierten Game Feel - sicherlich möglich gewesen.
+Das Projektstudium hatte zum Ziel, einen spielbaren \textit{Geometry Wars}-Klon zu entwickeln.
+Mit einem Zeitbudget von ca. 300 Stunden - was etwa 60 Manntagen entspricht - mag es etwas verwundern, dass das Ergebnis am Ende in Teilen noch ungeschliffen wirkt.
+Im Prototyp-Dokument wurde festgehalten, dass ein wesentliches Hauptaugenmerk auf die Architektur gelegt werden sollte.
+Mit der eher losen Formulierung dieser Anforderung wäre im Rückblick ein Ergebnis, das mehr \textit{Game Feel} aufweist, sicherlich möglich gewesen.\\
 
-Dass dies in der verbliebenen Zeit nicht mehr umgesetzt werden konnte, kag vor allem an der Umstellung auf ECS-typische Datenstrukturen.
-Dies geschah nicht primär aus den Projektanforderung, in denen eben keine konkrete Lastszenarien wie die Berechnung tausender Objekte pro Frame-Update aufführte.
-Vielmehr entsprang sie der Motivation, mit \textit{helios} als ``\textit{Game Framework built from first principles}``~\cite{HeliosProjectHome} integrative Aspekte bei der Umsetzung solcher Datenstrukturen in der Praxis zu erproben, und dieser Wunsch ist erst bei der Durchdringung der Anforderungen und der Domäne erfolgt, wozu die Entwicklung von Meilenstein 3 beigetragen hat (siehe Abschnitt~\ref{sec:meilenstein_3}.
-Das Projekt fand sich an dieser Stelle durch die Programmierung der Engine-nahen Systeme an einem Scheideweg:
-Die konsequente Fortführung des objektorientierten Ansatzes hätte ein späteres Umstellen auf ein anderes Paradigma mit hohem Aufwand verbunden; im Gegensatz dazu hätte zu diesem Zeitpunkt der datenorientierte Ansatz~\cite{Bay22} eine Einarbeitung erfordert und die praktische Implementierung verzögert.\\
-Stattdessen haben wir an der Stelle einen pragmatischeren Weg eingeschlagen und konnten uns damit mit Game-Engine-Entwicklung und der Programmersprache C++ weiter vertraut machen.\\
+Dass dies in der verbliebenen Zeit nicht mehr vollständig umgesetzt werden konnte, lag vor allem an der Umstellung auf ECS-typische Datenstrukturen.
+Dies geschah nicht primär aufgrund der Projektanforderungen, die keine konkreten Lastszenarien wie die Berechnung tausender Objekte pro Frame-Update aufführten.
+Vielmehr entsprang die Entscheidung der Motivation, mit \textit{helios} als ``\textit{Game Framework built from first principles}``~\cite{HeliosProjectHome} integrative Aspekte bei der Umsetzung solcher Datenstrukturen in der Praxis zu erproben.
+Dieser Wunsch ist erst während der Durchdringung der Anforderungen und der Domäne gereift, wozu die Entwicklung von Meilenstein 3 maßgeblich beigetragen hat (siehe Abschnitt~\ref{sec:meilenstein_3}).\\
 
-\subsubsection{OOD zur Kapselung von DOD}
+Das Projekt fand sich an dieser Stelle durch die Programmierung der Engine-nahen Systeme an einem Scheideweg.
+Die konsequente Fortführung des objektorientierten Ansatzes hätte ein späteres Umstellen auf ein anderes Paradigma mit hohem Aufwand verbunden, Klassenhierarchien wären unkontrolliert gewachsen.
+Im Gegensatz dazu hätte zum damaligen Zeitpunkt der datenorientierte Ansatz~\cite{Bay22} eine intensivere Einarbeitung erfordert und die praktische Implementierung verzögert.
+Stattdessen haben wir an dieser Stelle einen pragmatischen Weg mit dem \textit{Game Object} als \textit{Compound Object} eingeschlagen und konnten uns damit tiefer mit der Game-Engine-Entwicklung und der Programmiersprache C++ vertraut machen.
 
-Dabei trug die Erfahrung mit objektorientiertem Design (OOD) mit seinen Konzepten und Werkzeugen zum einfacheren Abstrahieren der geplanten Strukturen bei, und hat sich deshalb gerade in frühen Entwurfsphasen als hilfreich bei der Modellierung erwiesen~\cite{BMEY07}, allerdings zu Lasten von \textit{Over-Engineering}, wie es der Projektbetreuung aufgefallen ist und dem wir mit dem gewonnenen Erfahrungskontext rückblickend uneingeschränkt zustimmen.\\
+\subsubsection{Der objektorientierte Entwurf zur Kapselung der Datenorientierung}
 
-Dennoch sind wir der Meinung, mit der entstandenen Lösung einen guten Kompromiss gefunden zu haben, der die Vorteile eines hierarchischen Modells mit der Effizient einer datenorientierten Implementierung verbindet.
-Unter dem Blockwinkel einer Game-Engine als Echtzeitsystem~\cite[525]{Gre19}, dem nur begrenzte Ressourcen zur Verfügung stehen, stellt das datenorientierte Design (DOD) mit seinen dichten Speicherlayouts und der Vermeidung tiefer Vererbungshierarchien einen geeigneten Ansatz bei der Implementierung dar.\footnote{
+Die Erfahrung mit objektorientiertem Design (OOD) und die Anwendung von Analyse und Entwurf trug wesentlich zur Abstraktion angedachter Strukturen in dem Projekt bei.
+Dies hat sich in frühen Phasen dort als hilfreich erwiesen, wo zunächst konzeptionell modelliert werden musste~\cite{BMEY07}.
+Damit ging allerdings auch vergleichsweise viel \textit{Over-Engineering} einher, was von der  Projektbetreuung früh erkannt wurde. 
+Rückblickend stimmen wir dieser Einschätzung uneingeschränkt zu.
+
+Trotzdem verstehen wir die entstandene Lösung als einen guten Kompromiss, der die Vorteile eines hierarchischen Modells mit der Effizienz einer datenorientierten Implementierung unter dem Blickwinkel einer Game-Engine als Echtzeitsystem~\cite[S. 525]{Gre19}verbindet.
+Hier stellt das datenorientierte Design (DOD) mit seinen dichten Speicherlayouts und der Vermeidung tiefer Vererbungshierarchien einen geeigneten Ansatz dar.\footnote{
     Empirische Studien, die dies unterstreichen, finden sich bei~\cite{FAUM20} und~\cite{WWM22}.
-}.
-Dies steht aus unserem Erfahrungskontext im Gegensatz zu Domänen, in denen steigende Laufzeitkosten aufgrund hochgradig abstrahierter Softwaremodelle durch die Bereitstellung zusätzlicher Hardware kompensiert werden können.\\
+} und erweist sich in Umgebungen als wertvoll, in denen nur begrenzte Ressourcen zur Verfügung stehen.
+Dies steht nach unserem Erfahrungskontext im Gegensatz zu Domänen, in denen steigende Laufzeitkosten aufgrund hochgradig abstrahierter Softwaremodelle durch die Bereitstellung zusätzlicher Hardware kompensiert werden können.\\
 
-Das bei der Game-Engine-Entwicklung der objektorientierte Entwurf keineswegs verworfen werden muss, stellt auch \textit{Fabian} in~\cite[239-244]{Fab18} fest.
-Allerdings bewegen wir uns dabei in einem Spannungsfeld, in dem die Konzeption von Fachobjekten und deren technische Umsetzung stark divergieren, auch, wenn der Zugriff letztendlich geschickt über entsürechende Fassadenmuster diesen Umstand kaschiert.
-Aus dieser Divergenz ergibt sich die Herausforderung, das in Abschnitt~\ref{sec:meilenstein_5} angesprochene \textit{Mental Model} konsequent umzustellen: Von einem Ansatz, in dem die Funktion der Form folgt (\textit{function follows form}~\cite{TD01}), hin zu einem Design, bei dem die Form - also das Datenlayout - durch die Funktion - also die Performance-Anforderungen - bestimmt wird (\textit{form follows function}).\\
+Dass also bei der Game-Engine-Entwicklung der objektorientierte Entwurf keineswegs verworfen werden muss, stellt auch \textit{Fabian} fest~\cite[S. 239-244]{Fab18}.
+Allerdings haben wir uns dabei in einem Spannungsfeld wiedergefunden, in dem die \textit{Konzeption} von Fachobjekten und deren \textit{technische Umsetzung} stark divergieren, trotz dass der Zugriff über Fassadenmuster diesen Umstand geschickt kaschieren konnte.\\
+
+Aus dieser Divergenz ging die Herausforderung einher, das in Abschnitt~\ref{sec:meilenstein_5} angesprochene \textit{Mental Model} mit Implementierungsdetails in Verbindung zu bringen, die uns bislang in unserem gewohnten Projektumfeld nicht begegnet sind - und bedeutete einen Wechsel von einem Ansatz, in dem die Funktion der Form folgt~\cite{TD01}, hin zu einem Design, bei dem die Form - das Datenlayout - durch die Funktion - die Performance-Anforderungen - bestimmt wird.
 
 \subsubsection{Lernprozess führt unweigerlich zu Technical Debt}
 Mit zunehmender Erfahrung mit C++ im Rahmen dieses Projekts wuchs auch das Vertrauen in die Codebasis.
-Die ursprünglich konsequente Verwendung von \texttt{unique\_ptr} und \texttt{shared\_ptr} zur Abbildung eindeutiger Besitzverhältnisse sowie zur Unterstützung move-basierter (Besitz)Übergaben wurde in tieferen Schichten der Engine schrittweise durch rohe Zeiger und Referenzen ersetzt.
-Referenzen als Übergabeparameter sollen dabei auch eine an anderer Stelle vereinbarte Lebenszeitgarantie sicherstellen, die in höheren Schichten modelliert wird.\\
+Die ursprünglich konsequente Verwendung von \texttt{unique\_ptr} und \texttt{shared\_ptr} zur Abbildung eindeutiger Besitzverhältnisse wurde in den tieferen Schichten der Engine schrittweise durch rohe Zeiger und Referenzen ersetzt; Lebenszeitgarantien werden stattdessen per Dokumentation in höheren Schichten vereinbart.\\
 
-Mit der Umstellung zu einem ECS-basierten Ansatz wurde auch die Template-Metaprogrammierung~\cite[S. 112-114]{Str18} als idiomatischer Ansatz zur Bereitstellung generischer Komponenten und Systeme etabliert.
-Deren großer Vorteil für \textit{helios} sehen wir insbesondere in der zur Kompilierzeit abgesicherten Typsicherheit.
-Das klassische \textit{Liskovsche Substitutionsprinzip}~\cite[S.~148]{LG01} tritt dabei gegenüber der Verwendung von \textit{C++-Concepts}~\cite[S.~107-112]{Str18} und statischer Introspektion in den Hintergrund.
-Stattdessen wird die Validierung von Typeigenschaften weitgehend in die Kompilierphase verlagert, was dynamische Indirektionen im \textit{Hot Path} reduziert.
-Damit ergeben sich geringere Laufzeitkosten, allerdings um den Preis eines aufwändigeren \textit{Bootstrappings}.\footnote{
-    Inwieweit dies möglichen Erweiterungen im Wege steht - wie beispielsweise ein Editor-System - bleibt offen.\\
-}\\
+Mit der Umstellung auf einen ECS-basierten Ansatz wurde auch die Template- Metaprogrammierung \cite[S. 112-114]{Str18} als idiomatischer Ansatz zur Bereitstellung generischer Komponenten und Systeme etabliert.
+Deren großer Vorteil für \textit{helios} liegt insbesondere in der zur Kompilierzeit abgesicherten Typsicherheit.
+Das klassische \textit{Liskovsche Substitutionsprinzip}~\cite[S. 148]{LG01} tritt dabei gegenüber der Verwendung von \textit{C++-Concepts}~\cite[S. 107-112]{Str18} und statischer Introspektion in den Hintergrund.
+Dies ermöglicht die Validierung von Typeigenschaften in die Kompilierphase, was dynamische Indirektionen im \textit{Hot Path} reduziert.
+Damit ergeben sich geringere Laufzeitkosten, allerdings um den Preis eines aufwändigeren Bootstrappings - inwieweit diese Entscheidungen zu Lasten möglicher Erweiterungen gehen - wie beispielsweise einem Editor-System - bleibt zum jetzigen Zeitpunkt offen.\\
 
-Ganz ohne Vererbung und Basisklassen kommt \textit{helios} dabei nicht aus.
-Allerdings wurden diese mit zunehmendem Projektfortschritt gezielter eingesetzt, beispielsweise im Rahmen des \textit{Type-Erasure}-Idioms~\cite[S. 318-328]{Ban22}.
-Dass in diesem Zusammenhang ein ECS Vererbung kein Stilbruch bedeutet, zeigt auch der Hinweis von \textit{Bayliss}: DOD kann zwar Gründe liefern, auf Vererbung und Polymorphie zu verzichten, aber in der Praxis stellt es aber eben kein striktes Regelwerk dar; er führt den Gebrauch von Interfaces in \textit{Unity DOTS} als Gegenbeispiel an~\cite[38]{Bay22}.
+Natürlich verzichtet auch \textit{helios} nicht komplett auf Vererbung und Basisklassen.
+Allerdings wurde dies mit zunehmendem Projektfortschritt gezielter eingesetzt, beispielsweise im Rahmen des \textit{Type-Erasure}-Idioms~\cite[S. 318-328]{Ban22}.\\
 
- Vererbung findet sich nun überwiegend in den frühen Schichten der Architektur, die rückblickend als \textit{technical debt} verstanden werden können.
+Trotzdem muss darauf hingewiesen werden, dass die gemeinsame Verwendung von Vererbung und ECS keinen Stilbruch bedeuten, wie auch der Hinweis von \textit{Bayliss} zeigt: DOD kann zwar Gründe liefern, auf Vererbung und Polymorphie zu verzichten, aber es stellt in der Praxis eben kein striktes Regelwerk dar; er führt den Gebrauch von Interfaces in \textit{Unity DOTS} als Gegenbeispiel an~\cite[S. 38]{Bay22}.\\
+
+Klassische Vererbung findet sich nun überwiegend in den frühen Schichten der Architektur, die rückblickend in ihrer Ausprägung als \textit{Technical Debt} verstanden werden kann.
 
 \subsubsection{Fehlende fachliche Reife führt zu konzeptionellen Problemen}
-Der zwischen Meilenstein 3 und Meilenstein 5 genutzte Ansatz, das Game Object als \textit{Compound Object} umzusetzen, haben wir uns geschickt aus der Sackgasse manövriert, als es darum ging, komplexere Mechaniken und Verhalten für unterschiedliche Entitäten zu implementieren.
-So haben wir Basisklassen vermieden, die als fachliche Basisklassen aufgrund dort bbefindlicher, spärlicher generalisierter Informatioen keine Existenzberechtigung gehabt hätten, oder bei denen so viel fachliche Informationen hinterlegt werden müsste, dass unweigerlich \textit{Dead Code} entstanden wäre.
-Das wir erst an dieser Stelle den gewohnten OOP-Ansatz mit einem Schnitt zwischen Basisklasse und Spezialisierung verworfen haben, legt nahe, dass der Kern solcher Game-Engines gedanklich nicht weit genug ausgearbeitet gewesen ist.
 
-Damit lässt sich rückblickend auch konstatieren, dass der praxisnahe Ansatz, zunächst nach den im Prototypen-Dokument eher vage formulierten Vorgaben zu entwickeln, mit der zu diesem Zeitpunkt noch begrenzten fachlichen Erfahrung der Entwickler kollidierte: Eine frühere Auseinandersetzung mit den fachlichen Anforderungen sowie eine Rücksprache mit der Projektbetreuung über Tragweite und architektonische Auswirkungen hätten spätere konzeptionelle Probleme bei der Trennung von Verantwortlichkeiten vermeiden können: Damit hätte sich auch der durch das UI-System entstandene \textit{Scope Creep}~\cite[S. 274]{Mou15} in Meilesntein 5 durch eine vorausschauendere Planung abfedern lassen.\\
+Die bereits erwähnte Entscheidung, das \textit{GameObject} als \textit{Compound Object} umzusetzen, half uns dabei, uns aus der Sackgasse zu manövrieren, als es um die Implementierung komplexerer Mechaniken ging.
+So haben wir Basisklassen vermieden, die aufgrund spärlicher generalisierter Informationen keine Existenzberechtigung gehabt hätten oder bei denen so viel fachliche Information hinterlegt werden müsste, dass unweigerlich \textit{Dead Code} entstanden wäre.
+Dass wir erst an dieser Stelle den gewohnten OOP-Ansatz verworfen haben und der in dem Projekt schon fast typisch erscheinende große Umstrukturierung zum Ende eines jeden Meilensteins (siehe Abbildung~\ref{fig:heliosContributors} in Abschnitt~\ref{sec:ki}), legt nahe, dass sich die Kernkonzepte von Game-Engines erst erarbeitet werden musste.\\
 
+Damit lässt sich rückblickend feststellen, dass der praxisnahe Ansatz mit der zu diesem Zeitpunkt noch begrenzten fachlichen Erfahrung kollidierte.
+Eine frühere Auseinandersetzung mit den fachlichen Anforderungen sowie eine engere Rücksprache mit der Projektbetreuung über die architektonischen Auswirkungen hätten spätere konzeptionelle Probleme vermeiden können.
+Damit hätte sich auch der durch das UI-System entstandene \textit{Scope Creep}~\cite[S. 274]{Mou15} in Meilenstein 5 durch eine vorausschauendere Planung abfedern lassen.\\
 
-\subsubsection{Ki als Produktivitätsgewinn oder als zusätzlicher Aufwand?}
+Nicht unerwähnt sollte bei alldem bleiben, das diese Hürden durch das in dem Prototypen-Dokument beschriebene \textit{Tracer Bullet Development} durchaus bewusst in Kauf genommen wurden.
 
-Ob mit der in Abschnitt~\ref{sec:ki} beschriebenen und als unterstützend empfundene Einsatz durch Github Copilot auch eine messbare persönliche Produktivitätssteigerung einhergeht, konnten wir abschließend nur für die Arbeiten eindeutig bejahen, die wir eher im Bereich \textit{Boilerplate} verorten, wie beispielsweise das Aufsetzen der Projekt-Webseite, die mit Layouting und Integration von benötigten Funktionen nicht länger als einen Mannta in Anspruch genommen hat.
-Bei Code und Dokumentation ist der Eindruck etwas zwiegespaltener: Da die Verantwortung für fachliche Korrektheit und Integration weiter bei den Autoren liegt, müssen die von GitHub Copilot vorgeschlagenen Änderungen erneut einer Überprüfung unterzogen werden - ein Schritt, der die eigentliche Rolle der KI als ein fachlicher Assistent auf ein Werkzeug reduziert, das Vorschläge generiert - die autoritative Kontrolle, und damit der Aufwand, verbleibt beim Entwickler.
-Aus bisheriger Projekterfahrung fällt dieser zusätzliche Prüfaufwand bei Pair Programming mit einem menschlichen Gegenüber geringer aus, insbesondere wenn fachliche Qualifikation sowie hinreichende Erfahrung im Projektkontext gegeben ist.\\
-Diese zusätzliche Arbeitslast wird auch durch Studien belegt~\cite{METRStudy}.
-Hinweise, dass mit der Generierung von Dokumentation auch ein wesentlicher Teil der Retrospektive verloren geht, in der sich ein Entwickler üblicherweise mit dem erschaffenen Quellcodekonstrukt auseinandersetzt, finden sich beispielsweise bei Catalan et al.~\cite{CDMK26}.
+\subsubsection{KI als Produktivitätsgewinn oder als zusätzlicher Aufwand?}
+
+Ob mit dem in Abschnitt~\ref{sec:ki} beschriebenen Einsatz von GitHub Copilot auch eine messbare persönliche Produktivitätssteigerung einhergeht, konnten wir abschließend nur für Arbeiten in den Bereichen eindeutig bejahen, in denen die KI solche Aufgaben übernommen hat, von denen wir aus eigener Erfahrung um die anfallenden Aufwände wussten - so nahm beispielsweise das Aufsetzen der Projekt-Webseite in Summe nicht länger als einen Arbeitstag in Anspruch.
+Berücksichtigt sind hierbei auch Änderungen an Form und Inhalt während der Projektdauer.\\
+
+Bei Code und Dokumentation gestaltet sich der der Eindruck eher zweigeteilt.
+Da Verantwortung für fachliche Korrektheit und Integration weiterhin bei den Autoren liegt, müssen vorgeschlagene Änderungen einer erneuten Überprüfung unterzogen werden.
+Dieser Schritt reduzierte unserem Empfinden nach die Rolle der KI von einem fachlichen, autonomen Assistenten auf ein Werkzeug, dessen generierte Vorschläge durch eine autoritative Kontrolle abgenommen werden müssen - und diese obliegt dem Entwickler.\\
+
+Aus bisheriger Projekterfahrung fällt dieser zusätzliche Prüfaufwand bei Pair Programming mit einem menschlichen Gegenüber wesentlich geringer aus, insbesondere wenn fachliche Qualifikation und Projekterfahrung gegeben sind.
+Diese zusätzliche Arbeitslast durch KI-Tools wird auch in aktuellen Studien beobachtet~\cite{METRStudy}.
+Auch Hinweise, dass mit der Generierung von Dokumentation ein wesentlicher Teil der Retrospektive verloren geht, in der sich ein Entwickler intensiv mit dem Quellcode auseinandersetzt, finden sich in aktuellen Arbeiten, beispielsweise bei Catalan et al.~\cite{CDMK26}.
 
 \subsubsection{Ausblick}
 
+Das im Eingang erwähnte Zitat, dass die zu Projektbeginn persönlich befürchtete ``Analysis-Paralysis`` veranschaulichen soll, ist kein Motto für das Projekt geworden - im Gegenteil: Der Blick hinter die Kulissen hat der Faszination für Videospiele keinen Abbruch getan.
+Vielmehr wurde ein tiefes Verständnis dafür geschaffen, wie Echtzeitsysteme funktionieren und wie hardwarenahe Optimierungen durch die Wahl der richtigen Architektur erreicht werden können.
+Das Auseinandersetzen mit der \textit{GameLoop} und der Strukturierung der Systeme hat eine erste Ahnung davon gegeben, was Game-Engines wie Unreal Engine und Unity als Plattform für Triple-AAA-Spiele heute alles zu leisten imstande sind.\\
 
-Der Blick hinter die Kulissen hat der Faszination \textit{Videospiel} keinen Abbruch getan.
-Vielmehr wurde ein tieferes Verständnis geschaffen, wie Echtzeitsysteme wie Game-Engines funktionieren und wie die effiziente Nutzung von hardwarenahen Optimierungen durch die Wahl der richtigen Architektur und Datenstrukturen erreicht werden kann.
+Wir konnten uns außerdem einen Eindruck davon verschaffen, wie breitgefächert der Begriff Spielentwicklung ist und wie interdisziplinär er besetzt ist: Grafik-/Shaderprogrammierung, Hardwarenahe Optimierungen, Datenstrukturen, Metaprogrammierung, Simulation physikalischer Systeme, \ldots um nur einige zu nennen.\\
 
-Hierbei fühen wir uns längst nicht mehr wie jemand, der einem Zauberer unerlaubt in die Trickkiste schaut.
-Wir fühlen ncihts als Ehrfrucht gerade für die pinoeiere, die in den frühen Jahren durch ihre Kreativit und Schaffenswillen der Videospielindustrie ihren Weg ebnete, wie wir sie heute kennen.
+Auch wenn im im Endeffekt mit dem entstandenen Spiel das erhoffte \textit{Game Feel} nicht mehr umgesetzt wurde, hoffen wir, in Zukunft auf diesem Fundament aufbauen zu können.
+Ein nächster Schritt wäre beispielsweise die Teile zu generalisieren, die für das gedachte Spiel eher vereinfacht umgesetzt wurden: Anstatt der Darstellung der Spielobjekte als Projektion auf die $xy$-Ebene eine ``echte`` dreidimensionale Umgebung erschaffen; die Unterstützung von Framebuffern für Bloom-Effekte; die Integration eines Audio-Systems; die Unterstützung von Threading unter besonderer Berücksichtigung von Determinismus; eine Fixed-Timestep-Integration; die Implementierung eines Editor-Systems \ldots \\
 
-Und auch, wenn in dem geschaffenen Produkt das erhoffte Game-Feel ausgebliebien ist, hoffen wir, in Zukunft auf diesem Fundament aufbauen zu könenn - unserer Notizbbuch quillt über mit Spielideen, die wir gerne umsetzen möchten.
+Wir hoffen, die während der Umsetzung des Frameworks gesammelten Spielideen umzusetzen, und damit zu untersuchen, inwieweit sich helios als als Plattform für Spielentwicklung im Einsatz eignet.
+
+

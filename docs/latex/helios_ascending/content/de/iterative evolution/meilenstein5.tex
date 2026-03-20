@@ -1,33 +1,35 @@
 \section{Meilenstein 5: ECS und UI-Architektur}\label{sec:meilenstein_5}
 
-Ziel von Meilenstein 5 war die Umsetzung und Integration von Gameplay-Mechaniken in das zugrundeliegende Framework.
-Da \textit{helios} zum Ende des vorangegangenen Meilensteins bereits sehr stabil lief, wurde zunächst die mit Meilenstein 3 eingeleitete gedankliche Umstellung auf eine ECS-Architektur nun auch praktisch vollzogen.
+Ziel von Meilenstein 5 war die Umsetzung und Integration von Gameplay-Mechaniken in das zugrunde liegende Framework.\\
+
+Da \textit{helios} zum Ende des vorangegangenen Meilensteins bereits sehr stabil lief, wurde die mit Meilenstein 3 eingeleitete gedankliche Umstellung auf eine ECS-Architektur nun auch praktisch vollzogen.
 
 Wir sahen hier zunächst Bedarf, die Datenhaltungsschicht der \textit{GameWorld} umzustrukturieren, was ein Entkernen der direkt verwalteten \texttt{GameObject}s, der \texttt{Manager}-Klassen sowie der \texttt{CommandHandler} und \texttt{CommandBuffer} bedeutete.
-Gemessen an dem konzeptionellen Bruch, den die Einführung des ECS-Konzepts in das Projekt mit sich brachte, musste vergleichsweise wenig an der öffentlichen API angepasst werden: Die Änderungen beschränkten sich weitgehend auf die tieferen, gekapselten Schichten; die öffentlichen Schnittstellen von \textit{GameWorld} und \textit{GameObject} blieben weitestgehend unverändert.\footnote{
-Die Stabilität der API führen wir an dieser Stelle auf die bereits im Prototypen-Dokument beschriebenen SOLID-Prinzipien und die konsequente Kapselung von Funktionalitäten zurück, ganz im Sinne des \textit{Information Hiding}~\cite{Par72}.
+Gemessen an dem konzeptionellen Bruch, den die Einführung des ECS-Konzepts in das Projekt mit sich brachte, musste vergleichsweise wenig an der öffentlichen API angepasst werden:
+Die Änderungen beschränkten sich weitgehend auf die tieferen, gekapselten Schichten; die öffentlichen Schnittstellen von \textit{GameWorld} und \textit{GameObject} blieben weitestgehend unverändert.\footnote{
+    Die Stabilität der API führen wir an dieser Stelle auf die bereits im Prototyp-Dokument beschriebenen SOLID-Prinzipien und die konsequente Kapselung von Funktionalitäten zurück, ganz im Sinne des \textit{Information Hiding}~\cite{Par72}.
 }
 
 Ein hoher Migrationsaufwand entstand jedoch durch den Austausch der bislang in \textit{helios} verwendeten GUIDs zur Identifikation von Spielobjekten, die sich durch alle Schichten der bisher umgesetzten Engine und ihrer Subsysteme zogen.
-Da diese GUIDs nun durch einen \texttt{EntityHandle} ersetzt wurden - der einem zusammengesetzten Schlüssel entsprach -, waren die Änderungen zwar zahlreich, aber überwiegend von syntaktischer Natur.
+Da diese GUIDs nun durch einen \texttt{EntityHandle} ersetzt wurden - der einem zusammengesetzten Schlüssel entsprach -, waren die Änderungen zwar zahlreich, aber überwiegend syntaktischer Natur.
 
 Neben der Umstellung der Datenhaltung erwies sich in diesem Meilenstein die Integration eines User Interface als weitaus folgenreicher.
 
 \subsubsection{UI-Elemente als Scope Creep}
-Das für die Steuerung des Spiels notwendige User Interface in Form eines Heads-Up-Display (\textit{HUD}) sollte Menüoptionen zum Starten, Pausieren und Beenden des Spiels erhalten.
+Das für die Steuerung des Spiels notwendige User Interface in Form eines Heads-Up-Displays (\textit{HUD}) sollte Menüoptionen zum Starten, Pausieren und Beenden des Spiels erhalten.
 
-Die Fertigstellung hat sich dadurch wesentlich verzögert: Für die Textdarstellung folgen wir einer einfachen Umsetzung nach de~Vries~\cite[S.~449-457]{Vri20}, der die Anzeige von Text als Glyph-Rendering mittels FreeType~\cite{freetype} umsetzt.
-Das Text-Rendering wird in der Render-Pipeline in einem auf das Mesh-Rendering folgenden Durchlauf berücksichtigt.
+Die Fertigstellung verzögerte sich hierdurch wesentlich.
+Für die Textdarstellung haben wir deshalb den Ansatz von de~Vries~\cite[S. 449-457]{Vri20} implementiert, der die Anzeige von Text als Glyph-Rendering mittels FreeType~\cite{freetype} umsetzt.
+Das Text-Rendering wird in der Render-Pipeline in einem dem Mesh-Rendering folgenden Durchlauf berücksichtigt.
 Texte werden dabei als spezialisierte \textit{Renderables} behandelt, die neben der Zuordnung der Font-Ressource auch die Konfiguration von Skalierungsfaktor und Textfarbe erlauben.\\
 
-Eine semantische Erweiterung des bisher primär als (inter-)aktiven verstandenen \textit{GameObject}-Begriffs ergibt sich durch die Behandlung von Texten als eben solche Objekte.
-Auch diese sind bei \textit{helios} in der \textit{GameWorld} verankert (siehe~\ref{lst:gameobject_text}), wodurch wir eine weitere Abstraktionsschicht eingespart haben.
-Komponenten, welche die für die Anzeige benötigten Daten vorhalten (z.,B.~Anzahl der Spielerleben, ScorePool-IDs, Timer), werden über ein einfaches Binding-System pro GameLoop-Iteration abgefragt und zur Anzeige gebracht.
-
+Eine semantische Erweiterung des bisher primär als (inter-)aktiv verstandenen \textit{GameObject}-Begriffs ergibt sich durch die Behandlung von Texten als eben solche Objekte.
+Auch diese sind bei \textit{helios} in der \textit{GameWorld} verankert (siehe Listing~\ref{lst:gameobject_text}), wodurch wir eine weitere Abstraktionsschicht einsparen konnten.
+Komponenten, die für die Anzeige benötigten Daten vorhalten (z.\,B. Anzahl der Spielerleben, ScorePool-IDs oder Timer), werden über ein einfaches Binding-System pro \textit{GameLoop}-Iteration abgefragt und zur Anzeige gebracht.
 
 \begin{lstlisting}[style=c++style,
-  caption={Implementierung eines einfachen Score-Textes, der die Punktzahl des Spielers anzeigt. UI-Elemente werden analog zu aktiven, mit der Spielwelt verbundenen Objekten modelliert und entsprechend konfiguriert.},
-  label=lst:gameobject_text]
+    caption={Implementierung eines einfachen Score-Textes, der die Punktzahl des Spielers anzeigt. UI-Elemente werden analog zu aktiven, mit der Spielwelt verbundenen Objekten modelliert und entsprechend konfiguriert.},
+    label=lst:gameobject_text]
 auto scoreText = GameObjectFactory::instance()
     .gameObject(gameWorld)
     .withRendering([&](auto& rnb) {
@@ -51,36 +53,37 @@ auto scoreText = GameObjectFactory::instance()
 
 Neben der Textanzeige erforderte die Umsetzung der Spielmenüs außerdem eine Evaluierung von Spielzuständen, die in \textit{helios} über endliche Automaten realisiert wurde.
 Die Implementierung des Moduls \texttt{helios.engine.state} folgt einem generischen Muster auf Basis von Templates.
-Damit ist die Definition weiterer Zustandsautomaten möglich, um beispielsweise hierarchische Automaten für komplexere Spielsteuerungen zu realisieren (siehe Abschnitt~\ref{sec:state_management}).\\
+Damit ist die Definition weiterer Zustandsautomaten möglich, um beispielsweise hierarchische Automaten für komplexere Spielsteuerungen zu realisieren (siehe Abschnitt~\ref{sec:state_management}).
+Auch die \textit{GameLoop} wurde um die Möglichkeit erweitert, einzelne Systeme basierend auf den altuellen Zuständen zu aktivieren bzw. zu deaktivieren.\\
 
-Mit der Unterstützung von endlichen Automaten wurde die \texttt{GameLoop} zusätzlich um die Möglichkeit erweitert, Pässe über eine Bitmaske den Zuständen zuzuordnen, in denen sie ausgeführt werden sollen.
+Weitere in diesem Meilenstein hinzugefügte Features sind weniger architektonischer Natur, sondern betreffen überwiegend Gameplay-Mechaniken, unter anderem die Einführung von \textit{Timer}-Systemen für zeitbasierte Level sowie die Umsetzung von \textit{Player Lives} zur Berücksichtigung in entsprechenden Regelsystemen und einem \textit{Game Over}-Zustand.
 
-Weitere Features, die in diesem Meilenstein hinzugefügt wurden, sind weniger architektonischer Natur, sondern betreffen überwiegend Gameplay-Mechaniken, unter anderem die Einführung von \textit{Timer}-Systemen für zeitbasierte Level sowie die Umsetzung von \textit{Player Lives} zur Berücksichtigung in entsprechenden Regelsystemen und einem \textit{Game Over}-Zustand.
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.8\columnwidth]{content/de/iterative evolution/img/scoringdemo_title}
-  \caption{Titelbildschirm der Scoring-Demo, die mit Meilenstein 5 veröffentlich wurde. (Quelle: eigene Aufnahme)}
-  \label{fig:scoringdemo_title}
-\end{figure}
+\begin{figure}[!htbp]
+    \centering
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.8\columnwidth]{content/de/iterative evolution/img/scoringdemo_playing}
-  \caption{Die Scoring-Demo enthält die wesentlichen für diesen Meilenstein festgesetzten Anforderungen, darunter Highscore-Anzeige sowie ein zeitbegrenztes Level. Dargestellt ist im UI außerdem die Anzeige der zur verfügbar stehenden Leben. (Quelle: eigene Aufnahme)}
-  \label{fig:scoringdemo_running}
-\end{figure}
+    \begin{subfigure}{0.48\columnwidth}
+        \centering
+        \includegraphics[width=\linewidth]{content/de/iterative evolution/img/scoringdemo_title}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\columnwidth}
+        \centering
+        \includegraphics[width=\linewidth]{content/de/iterative evolution/img/scoringdemo_playing}
+    \end{subfigure}
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.8\columnwidth]{content/de/iterative evolution/img/scoringdemo_pause}
-  \caption{Pause-Menü der Scoring-Demo. Von hier kann wieder in den Titelbildschirm gewechselt, das Spiel beendet oder entsprechend fortgesetzt werden. (Quelle: eigene Aufnahme)}
-  \label{fig:scoringdemo_pause}
-\end{figure}
+    \vspace{2mm}
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.8\columnwidth]{content/de/iterative evolution/img/scoringdemo_gameover}
-  \caption{Gameover-Screen der Scoring-Demo. (Quelle: eigene Aufnahme)}
-  \label{fig:scoringdemo_gameover}
+    \begin{subfigure}{0.48\columnwidth}
+        \centering
+        \includegraphics[width=\linewidth]{content/de/iterative evolution/img/scoringdemo_pause}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\columnwidth}
+        \centering
+        \includegraphics[width=\linewidth]{content/de/iterative evolution/img/scoringdemo_gameover}
+    \end{subfigure}
+
+    \caption{Die verschiedenen Bildschirmansichten der \textit{Scoring Demo}: Titelbildschirm, In-Game-Ansicht mit HUD, Pause und \textit{Game Over} (von oben links im Uhrzeigersinn). (Quelle: eigene Aufnahme)}
+    \label{fig:scoringdemo_gameover}
 \end{figure}

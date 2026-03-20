@@ -24,9 +24,9 @@ export namespace helios::engine::mechanics::scoring::types {
         /**
          * @brief Tag type for the TypeIndexer domain.
          */
-        struct helios_engine_core_data_ScoreTypes{};
+        struct helios_engine_common_tag_ScoreTypes{};
 
-        using ScoreType = helios_engine_core_data_ScoreTypes;
+        using ScoreType = helios_engine_common_tag_ScoreTypes;
 
         /**
          * @brief The underlying ID value.

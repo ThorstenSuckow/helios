@@ -29,9 +29,9 @@ export namespace helios::engine::runtime::world::types {
         /**
          * @brief Tag type for the TypeIndexer domain.
          */
-        struct helios_engine_core_data_SystemTypes{};
+        struct helios_engine_common_tag_SystemTypes{};
 
-        using SystemType = helios_engine_core_data_SystemTypes;
+        using SystemType = helios_engine_common_tag_SystemTypes;
 
         /**
          * @brief The underlying ID value.

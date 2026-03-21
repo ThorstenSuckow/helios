@@ -2,9 +2,9 @@
 
 In der Spieleentwicklung werden endliche Automaten (\textit{Finite State Machines}, \textit{FSM}) in zahlreichen Bereichen verwendet, darunter die Animation~\cite[S. 786-805]{Gre19}, die Künstliche Intelligenz~\cite[S. 62-64]{YT25} sowie die Abbildung des Verhaltens von Spielobjekten~\cite[S. 87-104]{Nys14}.
 
-In \textit{helios} wurde das Konzept eines endlichen Automaten zur Verwaltung des globalen Anwendungszustands sowie zur Abbildung eines integrierten Spiels implementiert.
+In \textit{helios} wurde das Konzept eines endlichen Automaten zur Verwaltung des globalen Anwendungszustands sowie zur Abbildung des Zustands des Regelsystems eines integrierten Spiels implementiert.
 Der \texttt{StateManager} (siehe Abschnitt~\ref{sec:runtime_manager}) ist template-basiert entworfen und nicht an vordefinierte Zustände gebunden.
-Neben den vorimplementierten Zustandstypen \texttt{GameState} (globaler Systemzustand) und \texttt{MatchState} (spielspezifischer Zustand) können weitere, spielspezifische Zustände definiert werden.
+Neben den vorimplementierten Zustandstypen \texttt{GameState} (globaler Systemzustand) und \texttt{MatchState} (spielspezifischer Zustand) können weitere spielspezifische Zustände definiert werden.
 
 \subsubsection{Zustandswechsel und Guards}
 
@@ -17,7 +17,7 @@ Optional kann einer Regel eine \textit{Guard}-Funktion zugeordnet werden, die zu
 \subsubsection{Zustandswechsel und Hooks}
 
 Über die \texttt{GameWorld} wird der \texttt{StateManager} in jedem Frame aufgerufen, um mögliche Zustandswechsel zu verarbeiten (\texttt{flushManagers()}).
-Die Anforderungen zum Zustandswechsel werden dabei über einen \texttt{StateCommand} gekapselt, der Informationen über den gewünschten Zustandswechsel in Form des oben genannten Tripels enthält.
+Die Anforderungen an einen Zustandswechsel werden dabei über einen \texttt{StateCommand} gekapselt, der Informationen über den gewünschten Zustandswechsel in Form des oben genannten Tripels enthält.
 
 Wurde ein Zustandswechsel akzeptiert, informiert der \texttt{StateManager} registrierte Listener über die folgenden \textit{Hooks}:
 \begin{enumerate}
@@ -35,12 +35,11 @@ Er stellt den übergeordneten Automaten dar, der den Lebenszyklus der Anwendung 
 
 Dem \texttt{MatchState} liegt der Gedanke eines dem \texttt{GameState} hierarchisch untergeordneten Automaten zugrunde (\textit{Hierarchical State Machine}, \textit{HSM}~\cite{Hei04}).
 Er beschreibt den Ablauf innerhalb einer aktiven Spielsitzung über Zustände wie \texttt{Warmup}, \texttt{Countdown}, \texttt{Playing} oder \texttt{GameOver}.
-Zustandswechsel dieses Automaten erfolgen in der \textit{Scoring Demo} ausschließlich dann, wenn sich der \texttt{GameState} im Zustand \texttt{Running} befindet (aktive Zustandswechsel auf Basis des Regelsystems des Spiels) beziehungsweise \texttt{Paused} ist (Reaktion auf ``Spiel beenden``-Aktionen zum Abspielen einer Animation).
-
+Zustandswechsel dieses Automaten erfolgen in der \textit{Scoring Demo} ausschließlich dann, wenn sich der \texttt{GameState} im Zustand \texttt{Running} befindet - also bei aktiven Zustandswechseln auf Basis des Regelsystems des Spiels - beziehungsweise im Zustand \texttt{Paused}, etwa als Reaktion auf ``Spiel beenden''-Aktionen zum Abspielen einer Animation.
 
 Die Zustände und ihre Übergänge sind in Abbildung~\ref{fig:state_management} dargestellt.
 
-\begin{figure}[htbp]
+\begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{content/de/architektur/runtime/img/state_management.png}
     \caption{Zustände und Zustandswechsel des \texttt{GameState} und \texttt{MatchState} in \textit{helios}. (Quelle: eigene Darstellung)}
@@ -50,7 +49,7 @@ Die Zustände und ihre Übergänge sind in Abbildung~\ref{fig:state_management} 
 \subsubsection{Zustandsabhängiges Rendering}
 
 Um den aktiven Spielzustand mit der visuellen Darstellung zu verknüpfen, verwendet \textit{helios} ein Mapping von Zustandskombinationen auf \texttt{ViewportId}s und \texttt{MenuId}s.
-Damit können Tupel aus \texttt{GameState} und \texttt{MatchState} auf eine oder mehrere dieser IDs abgebildet werden, wodurch bspw. im Zustand \texttt{Paused} der \textit{MenuViewport} sowie ein \textit{PauseMenu} als Overlay angezeigt werden (siehe Listing~\ref{lst:statemapping}).
+Damit können Tupel aus \texttt{GameState} und \texttt{MatchState} auf eine oder mehrere dieser IDs abgebildet werden, wodurch beispielsweise im Zustand \texttt{Paused} der \textit{MenuViewport} sowie ein \textit{PauseMenu} als Overlay angezeigt werden (siehe Listing~\ref{lst:statemapping}).
 
 \vspace{5mm}
 \begin{lstlisting}[style=c++style,
@@ -59,14 +58,14 @@ Damit können Tupel aus \texttt{GameState} und \texttt{MatchState} auf eine oder
     stateToViewportMap
       .add(GameState::Any, ViewportId{"main"})
       .add(GameState::Title, ViewportId{"title"})
-      .add(GameState::Paused | GameState::Running, 
+      .add(GameState::Paused | GameState::Running,
            ViewportId{"menu"})
       .add(MatchState::Playing, ViewportId{"hud"});
 
     stateToMenuMap
-        .add(GameState::Paused, MatchState::Undefined, 
+        .add(GameState::Paused, MatchState::Undefined,
              MenuId{"main"})
-        .add(GameState::Running, MatchState::GameOver, 
+        .add(GameState::Running, MatchState::GameOver,
              MenuId{"gameOver"});
 \end{lstlisting}
 \vspace{5mm}
@@ -75,5 +74,5 @@ Damit können Tupel aus \texttt{GameState} und \texttt{MatchState} auf eine oder
 
 Die \texttt{GameLoop} nutzt die Zustandsinformationen, um die Ausführung von \textit{Passes} zu steuern.
 Jedem Pass kann ein bestimmter Zustand zugeordnet werden, sodass Systeme, die ausschließlich im laufenden Spiel relevant sind, nicht aktualisiert werden, wenn sich das Spiel im Titelscreen oder im Pausenzustand befindet.
-Dies vereinfacht den Ausschluss bestimmter Systeme, die in einem Zustand wie beispielsweise ``pausiert`` nicht laufen sollen (Animation, Physik), während die Verarbeitung anderer Systeme (Input, Rendering) weiterhin möglich ist.
-Auf die konkrete Konfiguration gehen wir in folgendem Abschnitt~\ref{sec:runtime_gameloop} ein.
+Dies vereinfacht den Ausschluss bestimmter Systeme, die in einem Zustand wie beispielsweise ``pausiert'' nicht laufen sollen (Animation, Physik), während die Verarbeitung anderer Systeme (Input, Rendering) weiterhin möglich ist.
+Auf die konkrete Konfiguration wird im folgenden Abschnitt~\ref{sec:runtime_gameloop} näher eingegangen.

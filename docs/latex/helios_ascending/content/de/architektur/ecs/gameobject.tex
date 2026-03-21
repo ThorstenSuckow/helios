@@ -1,9 +1,9 @@
 \subsection{GameObject als leichtgewichtige Fassade}\label{sec:gameobject}
 
-Mit dem Refactoring hin zu dem ECS-basierten Ansatz ist das \textit{GameObject} semantisch erhalten geblieben.
-Auch als Klasse findet sich das \texttt{GameObject} noch, allerdings wurde die Implementierung stark angepasst (siehe Abbildung~\ref{fig:gameobject}).\\
+Mit dem Refactoring hin zu einem ECS-basierten Ansatz ist das \textit{GameObject} semantisch erhalten geblieben.
+Auch als Klasse findet sich das \texttt{GameObject} weiterhin, allerdings wurde seine Implementierung stark angepasst (siehe Abbildung~\ref{fig:gameobject}).\\
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.8\columnwidth]{content/de/architektur/ecs/img/gameobject}
     \caption{UML der Klasse \texttt{GameObject}. (Quelle: eigene Darstellung)}
@@ -13,50 +13,53 @@ Auch als Klasse findet sich das \texttt{GameObject} noch, allerdings wurde die I
 Das \texttt{GameObject} ist eine leichtgewichtige Fassade, die einen Zeiger auf den \texttt{EntityManager} sowie eine Kopie des \texttt{EntityHandle} besitzt, der die Identität der zugrunde liegenden Entität repräsentiert.
 Daraus ergibt sich eine Größe von 16 Byte\footnote{
     $8$ Byte \texttt{EntityHandle} + $8$ Byte Pointer (64-bit)
-} und ist damit im Vergleich zur vorherigen Implementierung um ein Vielfaches schlanker (siehe Tabelle~\ref{tab:gameobject_size}).
+}, womit die Klasse im Vergleich zur vorherigen Implementierung um ein Vielfaches schlanker ist (siehe Tabelle~\ref{tab:gameobject_size}).
 
 \begin{table}[h]
     \centering
     \begin{tabular}{@{}lll@{}}
         \toprule
-        Feld & Typ & Größe (Bytes, geschätzt) \\ \midrule
+        Feld & Typ & Größe (Bytes) \\ \midrule
         \texttt{vptr} & virtueller Zeiger (\texttt{virtual} \texttt{\textasciitilde GameObject}) & 8 \\
         \texttt{guid\_} & \texttt{helios::util::Guid} (\texttt{uint64\_t}) & 8 \\
         \texttt{components\_} & \texttt{std::vector<std::unique\_ptr<Component>>} & 24 \\
         Flags & \texttt{bool isActive\_}, \texttt{bool needsUpdate\_} & 8 \\
         \texttt{componentView\_} & \texttt{std::vector<Component*>} & 24 \\
-        \texttt{componentConstView\_} & \texttt{std::vector<const Component*>}  & 24 \\ \midrule
+        \texttt{componentConstView\_} & \texttt{std::vector<const Component*>} & 24 \\ \midrule
         \textbf{Gesamt} & & \textbf{96} \\ \bottomrule
     \end{tabular}
-    \caption{Speicherlayout von \texttt{GameObject} in Meilenstein 4. Der \texttt{vptr} entstand aufgrund eines als \texttt{virtual} deklarierten Destruktors, der aus einem früheren Meilenstein stammt,  als das \texttt{GameObject} noch als Basisklasse entworfen wurde.
-    In späteren Iterationen wurde der Desktruktor übersehen. Die Anordnung der Felder ist nicht optimiert. Selbst bei einer günstigeren Anordnung würde sich aber die Größe einer Instanz nur begrenzt reduzieren ($\approx 88$ Bytes ohne Destruktor).}
+    \caption{Speicherlayout von \texttt{GameObject} in Meilenstein 4.
+    Der \texttt{vptr} entstand aufgrund eines als \texttt{virtual} deklarierten Destruktors, der aus einem früheren Meilenstein stammt, als das \texttt{GameObject} noch als Basisklasse entworfen wurde.
+    In späteren Iterationen wurde der Destruktor übersehen.
+    Die Anordnung der Felder ist nicht optimiert.
+    Selbst bei einer günstigeren Anordnung würde sich die Größe einer Instanz jedoch nur begrenzt reduzieren ($\approx 88$ Bytes ohne Destruktor).}
     \label{tab:gameobject_size}
 \end{table}
 
 \subsubsection{Komponentenzugriff über die Fassade}
 
-Systeme können oft benötigte Funktionalitäten direkt über das \texttt{GameObject} aufrufen, ohne den Umweg über die \texttt{GameWorld} und den von ihr verwalteten \texttt{EntityManager} nehmen zu müssen.\footnote{
-Ein verwandtes Architekturmuster aus anderen Domänen ist die \textit{Session Facade}~\cite[S. 341-356]{ACM03}, die als Schnittstelle zwischen einem Client und einer Subsystemstruktur fungiert, um Interaktionen zu vereinfachen und zu zentralisieren.
+Systeme können häufig benötigte Funktionalitäten direkt über das \texttt{GameObject} aufrufen, ohne den Umweg über die \texttt{GameWorld} und den von ihr verwalteten \texttt{EntityManager} nehmen zu müssen.\footnote{
+    Ein verwandtes Architekturmuster aus anderen Domänen ist die \textit{Session Facade}~\cite[S. 341-356]{ACM03}, die als Schnittstelle zwischen einem Client und einer Subsystemstruktur fungiert, um Interaktionen zu vereinfachen und zu zentralisieren.
 }
-Das erlaubt nicht nur die Abfrage, ob ein Komponententyp $\mathcal{A}$ für die Entität definiert wurde, sondern auch ein einfaches Hinzufügen bzw. Entfernen von Komponenten.\\
+Dies erlaubt nicht nur die Abfrage, ob ein Komponententyp $\mathcal{A}$ für die Entität definiert wurde, sondern auch das einfache Hinzufügen bzw. Entfernen von Komponenten.\\
 
-Darüber hinaus bietet die Fassade folgenden Funktionen:
+Darüber hinaus bietet die Fassade folgende Funktionen:
 
 \begin{itemize}
     \itemsep0.5em
-    \item \texttt{setActive}/ \texttt{isActive}: Aktivieren und Deaktivieren eines \texttt{GameObject}s.
-    Beim Deaktivieren wird die \texttt{Active}-Tag-Komponente durch eine \texttt{Inactive}-Tag-Komponente ersetzt (und umgekehrt), vorhandene Hooks der Komponenten werden aufgerufen (siehe Abschnitt~\ref{sec:components}).
-    \texttt{GameObject}s, die zusammen mit anderen eine Hierarchie bilden, werden über die \texttt{HierarchyComponent} als \textit{dirty} markiert, damit der ein entsprechendes System (\texttt{HierarchyPropagationSystem}) den Aktivierungszustand an alle Nachfahren propagieren kann.
-    \item \texttt{onAcquire()}/ \texttt{onRelease()}: Ermöglicht eine einfache Integration mit dem \textit{GameObject Pooling} (siehe Abschnitt~\ref{sec:runtime_manager}).
-    Der \texttt{GameObjectPoolManager} ruft die jeweilige Methode bei der Entnahme / dem Zurücklegen eines Objektes auf; intern erfolgt dann der Aufruf der entsprechenden Hooks, falls implementiert.
+    \item \texttt{setActive}/\texttt{isActive}: Aktivieren und Deaktivieren eines \texttt{GameObject}s.
+    Beim Deaktivieren wird die \texttt{Active}-Tag-Komponente durch eine \texttt{Inactive}-Tag-Komponente ersetzt (und umgekehrt); vorhandene Hooks der Komponenten werden aufgerufen (siehe Abschnitt~\ref{sec:components}).
+    \texttt{GameObject}s, die zusammen mit anderen eine Hierarchie bilden, werden über die \texttt{HierarchyComponent} als \textit{dirty} markiert, damit ein entsprechendes System (\texttt{HierarchyPropagationSystem}) den Aktivierungszustand an alle Nachfahren propagieren kann.
+    \item \texttt{onAcquire()}/\texttt{onRelease()}: Ermöglicht eine einfache Integration mit dem \textit{GameObject Pooling} (siehe Abschnitt~\ref{sec:runtime_manager}).
+    Der \texttt{GameObjectPoolManager} ruft die jeweilige Methode beim Entnehmen bzw. Zurücklegen eines Objekts auf; intern erfolgt dann der Aufruf der entsprechenden Hooks, falls implementiert.
 \end{itemize}
 
 \vspace{5mm}
 \begin{tcolorbox}[title={\texttt{HierarchyComponent}: Hierarchische GameObjects}, colback=black!5, colframe=black]
     Die \texttt{HierarchyComponent} wurde mit dem in Meilenstein 5 benötigten UI-System eingeführt.
     Die Komponente erlaubt eine vom Szenegraphen unabhängige hierarchische Anordnung von \texttt{GameObject}s.
-    Dadurch kann innerhalb eines Frames auf bereits aktualisierte Daten von Eltern-Entitäten zugegriffen werden, beispielsweise zur Berechnung von Positionsdaten relativ zu der Positionierung eines Elternelements.
+    Dadurch kann innerhalb eines Frames auf bereits aktualisierte Daten von Eltern-Entitäten zugegriffen werden, beispielsweise zur Berechnung von Positionsdaten relativ zur Positionierung eines Elternelements.
 \end{tcolorbox}
 \vspace{5mm}
 
-Weitere Funktionen sind unter anderem \texttt{enable()}/\texttt{disable()}, um gezielt Komponenten (basierend auf ihren \texttt{TypeId}s) zu aktivieren bzw. deaktivieren.
+Weitere Funktionen sind unter anderem \texttt{enable()}/\texttt{disable()}, um gezielt Komponenten - basierend auf ihren \texttt{TypeId}s - zu aktivieren bzw. zu deaktivieren.

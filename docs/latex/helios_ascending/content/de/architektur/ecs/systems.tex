@@ -1,9 +1,9 @@
 \subsection{Systeme als Verhaltensträger}\label{sec:systems}
 
 In einem Frame werden die über die \texttt{GameLoop} registrierten Systeme in einer bestimmten Reihenfolge aufgerufen.
-Systeme iterieren hierbei nicht nur über einzelne Komponenten, sondern können - je nach Aufgabe - auch über eine Komponenten-Komposition iterieren, da beispielsweise eine Skalierungskomponente in unterschiedlichen Kontexten angewendet wird (UI, aktives NPC- oder Spielerobjekt).\footnote{
-    Eine Komposition von Komponenten wird ausgedrückt durch das Vorhandensein einer Menge von verschiedenen Komponententypen.
-    Unity bezieht sich darauf in ähnlicher Weise über die bereits erwähnten \textit{Archetypes}- / \textit{Chunks}~\cite{UnityChunks}.
+Systeme iterieren hierbei nicht nur über einzelne Komponenten, sondern können - je nach Aufgabe - auch über eine Komposition von Komponenten iterieren, da beispielsweise eine Skalierungskomponente in unterschiedlichen Kontexten angewendet wird (UI, aktives NPC- oder Spielerobjekt).\footnote{
+    Eine Komposition von Komponenten wird durch das Vorhandensein einer Menge verschiedener Komponententypen ausgedrückt.
+    Unity bezieht sich darauf in ähnlicher Weise über die bereits erwähnten \textit{Archetypes} bzw. \textit{Chunks}~\cite{UnityChunks}.
 }
 
 \subsubsection{Tags statt Vererbung}
@@ -17,24 +17,25 @@ Systeme iterieren hierbei nicht nur über einzelne Komponenten, sondern können 
 \end{verbatim}
 
 \noindent
-Stattdessen erfolgt die Kennzeichnung über \textit{Tags}, die zur Kompilierungszeit über \textit{Concepts} überprüft werden (siehe Listing~\ref{lst:system_inheritance}).
-Damit geht die über Vererbung vermittelte Rollensemantik verloren, um zum Ausdruck zu bringen, dass die Rolle eines Systems nicht an einen bestimmten Basistypen gebunden ist - was das Paradigma der \textit{composition over inheritance} bekräftigen und Entwickler ermutigen soll, schlanke, leichtgewichtige \textit{Systeme} zu bevorzugen, worauf in den vorherigen Abschnitten mit dem Entwurfsziel von helios schon Stellung bezogen wurde.
+Stattdessen erfolgt die Kennzeichnung über \textit{Tags}, die zur Kompilierzeit über \textit{Concepts} überprüft werden (siehe Listing~\ref{lst:system_inheritance}).
+Damit geht die über Vererbung vermittelte Rollensemantik bewusst verloren, um zum Ausdruck zu bringen, dass die Rolle eines Systems nicht an einen bestimmten Basistyp gebunden ist.
+Dies soll das Paradigma der \textit{composition over inheritance} bekräftigen und Entwickler dazu ermutigen, schlanke, leichtgewichtige \textit{Systeme} zu bevorzugen, worauf in den vorherigen Abschnitten mit dem Entwurfsziel von \textit{helios} bereits Bezug genommen wurde.
 Die hierbei genutzten \texttt{EngineRoleTags} werden auch in anderen Kernkonzepten von \textit{helios} verwendet, etwa bei \textit{Managern} und \textit{CommandHandlern} (siehe Abschnitte~\ref{sec:runtime_manager} und~\ref{sec:runtime_messaging}).
 
 \begin{lstlisting}[style=c++style,
-    caption={Auszug aus dem Quellcode der beteiligten Klassen und Concepts zur Erstellung von Systemen in \textit{helios}. Systeme müssen von keinem bestimmten Basistyp erben, dafür aber eine \texttt{update}-Methode besitzen, die einen \texttt{UpdateContext} als Argument erhält. Die Rolle eines Systems wird über Tags ausgedrückt, die über Concepts zur Kompilierungszeit überprüft werden.},
+    caption={Auszug aus dem Quellcode der beteiligten Klassen und Concepts zur Erstellung von Systemen in \textit{helios}. Systeme müssen von keinem bestimmten Basistyp erben, dafür aber eine \texttt{update}-Methode besitzen, die einen \texttt{UpdateContext} als Argument erhält. Die Rolle eines Systems wird über Tags ausgedrückt, die über Concepts zur Kompilierzeit überprüft werden.},
     label=lst:system_inheritance]
 
     // concept
     template<class T>
     concept IsSystemLike = requires(T& t, UpdateContext& updateContext) {
-        {t.update(updateContext) } -> std::same_as<void>;
+        { t.update(updateContext) } -> std::same_as<void>;
     } && HasTag<T, tags::SystemRole>;
 
     // umsetzende Klasse
     class DamageOnCollisionSystem {
         using EngineRoleTag = SystemRole;
-        void update(UpdateContext& updateContext) {...}
+        void update(UpdateContext& updateContext) { ... }
     }
 
     // Compile-Time guard
@@ -52,14 +53,14 @@ Die hierbei genutzten \texttt{EngineRoleTags} werden auch in anderen Kernkonzept
 
 \subsubsection{Registrierung und Ausführung}
 
-In dem Beispiel wurde die Implementierung eines \texttt{Pass} skizziert, der Teil der \texttt{GameLoop} ist, und das Concept \texttt{IsSystemLike} als Zulassungskriterium (\textit{Gatekeeping}) für die Registrierung von Systemen nutzt.
-Das Concept stellt sicher, dass die übergebene Klasse die entsprechende \texttt{update}-Methode besitzt; der \texttt{Pass} ruft das System dann an der vorgesehenen Stelle innerhalb eines Frames auf.\\
+In dem Beispiel wurde die Implementierung eines \texttt{Pass} skizziert, der Teil der \texttt{GameLoop} ist und das Concept \texttt{IsSystemLike} als Zulassungskriterium (\textit{Gatekeeping}) für die Registrierung von Systemen nutzt.
+Das Concept stellt sicher, dass die übergebene Klasse über die entsprechende \texttt{update}-Methode verfügt; der \texttt{Pass} ruft das System dann an der vorgesehenen Stelle innerhalb eines Frames auf.\\
 
 Beim Aufruf erstellt die in Listing~\ref{lst:system_loop} gezeigte \texttt{update()}-Methode einen \textit{View} auf die erforderlichen Komponentenkonstellationen.
-Die Logik ist ein Implementierungsdetail und kann über eine benötigte Aktualisierung der Komponenten hinausgehen und beispielsweise Nachrichten an nachgelagerte Systeme in demselben oder in nachfolgenden Frames senden.
+Die Logik ist ein Implementierungsdetail und kann über eine bloße Aktualisierung der Komponenten hinausgehen sowie beispielsweise Nachrichten an nachgelagerte Systeme im selben oder in nachfolgenden Frames senden.
 
 \begin{lstlisting}[style=c++style,
-    caption={Skizze einer \texttt{update()}-Implementierung, die einen View über aussschließlich aktive \textit{GameObjects} erstellt, bei denen die aufgeführten Komponenten auch \textit{enabled} sind. Auf die Rolle von \texttt{UpdateContext} wird in Abschnitt~\ref{sec:runtime_gameloop} näher eingegangen.},
+    caption={Skizze einer \texttt{update()}-Implementierung, die einen View ausschließlich über aktive \textit{GameObjects} erstellt, bei denen die aufgeführten Komponenten auch \textit{enabled} sind. Auf die Rolle von \texttt{UpdateContext} wird in Abschnitt~\ref{sec:runtime_gameloop} näher eingegangen.},
     label=lst:system_loop]
 
     void update(UpdateContext& updateContext) {
@@ -74,32 +75,25 @@ Die Logik ist ein Implementierungsdetail und kann über eine benötigte Aktualis
     }
 \end{lstlisting}
 
+\begin{tcolorbox}[title={Exkurs: Kollisionserkennungssystem}, colback=black!5, colframe=black]
+    In Meilenstein 4 (siehe Abschnitt~\ref{sec:meilenstein_4}) fand eine fachliche Vertiefung in der Implementierung eines Kollisionssystems statt.
+Die Umsetzung basiert auf einem grid-basierten Ansatz (\textit{Spatial Partitioning}), um die Anzahl der zu prüfenden Kollisionen zu reduzieren, und wird in diesem Abschnitt beschrieben.
+Bei der Umsetzung folgen wir Ericson, der dieses Prinzip in~\cite[Kapitel 4]{Eri04} beschreibt:
+Hierbei wird das Spielfeld in eine vorab festgelegte Anzahl von Zellen unterteilt; in jedem Frame werden diese Zellen auf mögliche Kollisionspaare untersucht (\textit{Broad Phase}).
 
-\subsubsection{Beispiel: Kollisionserkennungsystem}
-
-In Meilenstein 4 (siehe Abschnitt~\ref{sec:meilenstein_4} fand eine fachliche Vertiefung in die Implementierung eines Kollisionssystem statt.
-Die Umsetzung basiert auf einem Grid-basierten Ansatz (\textit{Spatial Partitioning}), um die Anzahl der zu prüfenden Kollisionen zu reduzieren, und wird in Abschnitt~\ref{sec:systems} beschrieben.
-Bei der Umsetzung folgen wir Ericson, der in~\cite[Kapitel 4]{Eri04} dieses Prinzip beschreibt: Hierbei wird das Spielfeld in eine vorher festgelegte Anzahl von Zellen unterteilt; in jedem Frame werden Zellen nach möglichen Kollisionspaaren untersucht (\textit{Broad Phase}).
-
-Da in unserem Fall keine Kollisionserkennung von Gegnern oder Projektilen untereinander durchgeführt werden muss, kann die Anzahl der zu prüfenden Paare auf die Zellen reduziert werden, in denen sich mindestens ein Projektil und ein Gegnerobjekt oder die Spielerfigur und ein Gegnerobjekt befinden:
-
-\begin{displayquote}
-    As only objects overlapping a common cell could possibly be in contact, in-depth tests are only performed against those objects found sharing cells with the object tested for collision.
-    \par\hfill\cite[S.~285]{Eri04}
-\end{displayquote}
+Da in unserem Fall keine Kollisionserkennung von Gegnern oder Projektilen untereinander durchgeführt werden muss, kann die Anzahl der zu prüfenden Paare auf jene Zellen reduziert werden, in denen sich mindestens ein Projektil und ein Gegnerobjekt oder die Spielerfigur und ein Gegnerobjekt befinden.\cite[S.~285]{Eri04}
 
 Da die Koordinaten der Spielobjekte jederzeit über die \texttt{TransformComponent} zugänglich sind, können die zu prüfenden Zellen schnell identifiziert oder verworfen werden.
-Die möglichen Kollisionspaarungen werden über eine Bitmaske festgelegt - so kann ein Raumschiff mit der Layer-ID $1 \ll 0$ gleichzeitig mit Objekten kollidieren, die die Layer-ID $1 \ll 1$ (Gegner) oder $1 \ll 2$ (Hindernis) besitzen.\footnote{
-    Das Verhalten bei einer Kollision kann über die \texttt{enum class} \texttt{CollisionBehavior} auf Grundlage der Layer-ID definiert werden (beispielsweise \texttt{Despawn} bei Gegnerkollision, \texttt{SolidCollisionEvent} bei Hindernis-Kollision).
-}\\
-
+Die möglichen Kollisionspaarungen werden über eine Bitmaske festgelegt - so kann ein Objekt mit der Layer-ID $1 \ll 0$ gleichzeitig mit Objekten kollidieren, die die Layer-ID $1 \ll 1$ (Gegner) oder $1 \ll 2$ (Hindernis) besitzen.
+Weiterhin kann das Verhalten bei einer Kollision über die \texttt{enum class} \texttt{CollisionBehavior} auf Grundlage der Layer-ID definiert werden, beispielsweise \texttt{Despawn} bei Gegnerkollision oder \texttt{SolidCollisionEvent} bei Hindernis-Kollision.
 
 In einem nächsten Schritt werden die Paare in der \textit{Narrow Phase} präziser geprüft.
-In unserer Umsetzung verwenden wir hierbei der Einfachheit halber \textit{AABB} der Spielobjekte zur Ermittlung von Überschneidungen.
+In unserer Umsetzung verwenden wir hierbei der Einfachheit halber die \textit{AABB} der Spielobjekte zur Ermittlung von Überschneidungen.
 Erkannte Kollisionen werden in einer \texttt{CollisionsStateComponent} gespeichert, die später vom \texttt{CollisionStateResponseSystem} ausgewertet wird.
 Während diese in Meilenstein 4 noch als einfacher \texttt{DespawnCommand} behandelt wurden, reiht Meilenstein 5 stattdessen \texttt{TriggerCollisionEvent}s oder \texttt{SolidCollisionEvent}s als \textit{Pass-Events} (siehe Abschnitt~\ref{sec:runtime_messaging}) in den Nachrichtenpuffer ein.
-Damit kann die Entscheidung, welches Verhalten bei welchem Kollisionstyp anzuwenden ist beziehungsweise welche zusätzliche Aktion auszuführen ist, leichter an unterschiedliche Systeme delegiert werden.
-In Meilenstein 5 wertet ein \texttt{DamageOnCollisionSystem} die \texttt{SolidCollisionEvent}s aus und schreibt einen \texttt{ApplyDamageCommand} in den Engine-spezifischen Befehlspuffer, um Lebenspunkte der beteiligten Objekte anzupassen.\\
+Damit kann die Entscheidung, welches Verhalten bei welchem Kollisionstyp anzuwenden ist bzw.\ welche zusätzliche Aktion auszuführen ist, leichter an unterschiedliche Systeme delegiert werden.
+In Meilenstein 5 wertet ein \texttt{DamageOnCollisionSystem} die \texttt{SolidCollisionEvent}s aus und schreibt einen \texttt{ApplyDamageCommand} in den enginespezifischen Befehlspuffer, um die Lebenspunkte der beteiligten Objekte anzupassen.\\
 
-Am Ende der \textit{GameLoop} wird vorausgesetzt, dass alle in Frame $N$ erkannten Kollisionen behandelt wurden: Das \texttt{CollisionStateClearSystem} setzt alle \texttt{CollisionsStateComponent}s zurück, damit Kollisionen in Frame $N+1$ neu erkannt werden können.
-
+Am Ende der \textit{GameLoop} wird vorausgesetzt, dass alle in Frame $N$ erkannten Kollisionen behandelt wurden:
+Das \texttt{CollisionStateClearSystem} setzt alle \texttt{CollisionsStateComponent}s zurück, damit Kollisionen in Frame $N+1$ neu erkannt werden können.
+\end{tcolorbox}

@@ -14,22 +14,23 @@
     Die Verarbeitung erfolgt an definierten Synchronisationspunkten durch die jeweils zuständigen \texttt{CommandHandler}.
 
     \item[CommandHandler] Handler-Konzept zur Verarbeitung bestimmter Command-Typen.
-    Die Registrierung erfolgt in \textit{helios} typbasiert und nicht über Vererbung, \textit{Concepts} werden zur Kompilierzeit zur Validierung der Handler genutzt.
+    Die Registrierung erfolgt in \textit{helios} typbasiert und nicht über Vererbung; \textit{Concepts} werden zur Kompilierzeit zur Validierung der Handler genutzt.
 
-    \item[CommitPoint] Synchronisationspunkt innerhalb einer \textit{GameLoop}-Phase.
-    An einem \texttt{CommitPoint} werden Buffer-Swaps durchgeführt, sodass nachfolgende Passes einen wohldefinierten Nachrichtenstand lesen können.
+    \item[CommitPoint] Synchronisationspunkt innerhalb einer \texttt{GameLoop}-Phase.
+    An einem \texttt{CommitPoint} werden Buffer-Swaps durchgeführt, sodass nachfolgende \textit{Passes} einen wohldefinierten Nachrichtenstand lesen können.
 
     \item[Component] Datenhaltender Baustein eines \texttt{GameObject}s bzw. einer Entität.
-    Komponenten beschreiben in \textit{helios} fachliche Aspekte wie Position, Zustand oder Kollisionsform und werden in \textit{Sparse Sets} gespeichert.
+    Komponenten beschreiben in \textit{helios} fachliche Aspekte wie Position, Zustand oder Kollisionsform und werden in \texttt{SparseSet}s gespeichert.
 
-    \item[Concept] C++ Sprachfeature, mit dem sich Anforderungen an Typen in Template-Kontexten deklarativ formulieren und zur Kompilierzeit prüfen lassen.
-    In \textit{helios} werden \textit{Concepts} unter anderem dazu verwendet, um Rollen und Schnittstellen von Laufzeitkomponenten zu validieren.
+    \item[Concept] C++-Sprachfeature, mit dem sich Anforderungen an Typen in Template-Kontexten deklarativ formulieren und zur Kompilierzeit prüfen lassen.
+    In \textit{helios} werden \textit{Concepts} unter anderem dazu verwendet, Rollen und Schnittstellen von Laufzeitkomponenten zu validieren.
 \end{description}
 
 \section*{E}
 
 \begin{description}
-    \item[Entität (Entity)] Abstrakter Begriff für Objekte, die in der GameWorld zur Laufzeit existieren. Auch als \textit{GameObject} bezeichnet.
+    \item[Entität (Entity)] Abstrakter Begriff für Objekte, die in der \texttt{GameWorld} zur Laufzeit existieren.
+    Sie werden in \textit{helios} auch als \texttt{GameObject}s bezeichnet.
 
     \item[Entity Component System (ECS)] Architekturmuster, das Objekte nicht über Klassenhierarchien, sondern über die Zusammensetzung aus Komponenten und darauf operierenden Systemen beschreibt.
     In \textit{helios} bildet ECS das zentrale Ordnungsprinzip der Laufzeitarchitektur.
@@ -38,49 +39,59 @@
     Er dient in \textit{helios} zur eindeutigen Identifizierung von Entitäten und ermöglicht \textit{Generational Indexing}.
 
     \item[EntityManager] Klasse zur Verwaltung von Entitäten und ihren komponentenspezifischen Speicherstrukturen.
-    Der EntityManager koordiniert unter anderem die \textit{Sparse Sets} und den Lebenszyklus von \texttt{EntityHandle}s.
+    Der \texttt{EntityManager} koordiniert unter anderem die \texttt{SparseSet}s und den Lebenszyklus von \texttt{EntityHandle}s.
+
+    \item[EntityRegistry] Datenstruktur zur Lifecycle-Verwaltung von Entitäten.
+    Die \texttt{EntityRegistry} hält in \textit{helios} die Informationen zu \texttt{EntityHandle}s, die in der \texttt{GameWorld} existieren.
+    Hierzu gehören Versionsstände und freigegebene Indizes.
+    Auf Anfrage erzeugt sie neue \texttt{EntityHandle}s; dabei können auch freigewordene \texttt{EntityId}s wiederverwendet werden.
 
     \item[Event/EventBus] Nachrichten, die zwischen Systemen und Laufzeitkomponenten ausgetauscht werden.
     In \textit{helios} wird zwischen Pass-, Phase- und Frame-Events unterschieden.
+\end{description}
 
-    \item[EntityRegistry] Datenstruktur zur Lifecycle-Verwaltung von Entitäten.
-    Die EntityRegistry hält in \textit{helios} die Informationen zu \texttt{EntityHandle}s, die in er GameWorld existieren.
-    Hierzu gehören Versionsstände und freigegebene Indizes.
-    Auf Anfrage erzeugt sie neue EntityHandles, dabei können auch freigewordene \textit{EntityId}s wiederverwendet werden.
+\section*{F}
+
+\begin{description}
+    \itemsep0.5em
+    \item[Frame] Ein Frame bezeichnet eine vollständige Iteration innerhalb der \textit{GameLoop}, in der eine Aktualisierung des Spielzustands auf Basis eines diskreten Zeitschritts erfolgt.
+    Es wird in diesem Zusammenhang auch die Notation \textit{Frame} $N$ verwendet, wobei $N \in \mathbb{N}$ eine zeitliche Ordnungsnummer des Frames bezeichnet.
+    Die Notation \textbf{Frame $N+1$} beschreibt entsprechend die unmittelbar darauffolgende Iteration.
 \end{description}
 
 \section*{G}
 
 \begin{description}
     \item[GameLoop] Zeitliche Ordnungsinstanz der Engine.
-    In \textit{helios} ist die GameLoop in \textit{Phasen} und \textit{Passes} gegliedert und ermöglicht so die deterministische Ausführung von Systemen sowie den Austausch von Nachrichten über Systemgrenzen hinweg.
+    In \textit{helios} ist die \texttt{GameLoop} in \textit{Phasen} und \textit{Passes} gegliedert und ermöglicht so die deterministische Ausführung von Systemen sowie den Austausch von Nachrichten über Systemgrenzen hinweg.
 
-    \item[GameObject] Leichtgewichtige Fassade für den einfachen Zugriff auf ein in der GameWorld existierendes Entität.
-    In \textit{helios} kapselt ein \texttt{GameObject} im Wesentlichen ein \texttt{EntityHandle} sowie den Zugriff auf den \texttt{EntityManager} und bietet eine semantisch klare API für die Abfrage und Manipulation von Entitäten an.
+    \item[GameObject] Leichtgewichtige Fassade für den einfachen Zugriff auf eine in der \texttt{GameWorld} existierende Entität.
+    In \textit{helios} kapselt ein \texttt{GameObject} im Wesentlichen ein \texttt{EntityHandle} sowie den Zugriff auf den \texttt{EntityManager} und bietet eine semantisch klare API für die Abfrage und Manipulation von Entitäten.
 
     \item[GameState] Übergeordneter Zustandsautomat der Anwendung.
-    Der GameState beschreibt globale Zustände wie \texttt{Title}, \texttt{Running} oder \texttt{Paused}.
+    Der \texttt{GameState} beschreibt globale Zustände wie \texttt{Title}, \texttt{Running} oder \texttt{Paused}.
 
-    \item[GameWorld] Zentraler Container zur Verwaltung von Ressourcen udn Laufzeitkompoenenten.
-    Die GameWorld kapselt den Zugriff auf den \texttt{EntityManager}, besitzt die Registries für alle Manager und CommandHandler und bietet Zugriff auf Views und Session-Daten an.
+    \item[GameWorld] Zentraler Container zur Verwaltung von Ressourcen und Laufzeitkomponenten.
+    Die \texttt{GameWorld} kapselt den Zugriff auf den \texttt{EntityManager}, besitzt die Registries für Manager und \texttt{CommandHandler} und bietet Zugriff auf \textit{Views} und Session-Daten.
 
     \item[Generational Indexing] Technik zur sicheren Wiederverwendung von Entity-Indizes.
-    Durch die Kombination aus Entitätsindex und Versionsindex können veraltete EntityHandles (\textit{stale handles}) erkannt und bei Bedarf wiederverwendet werden.
-    Bildet die zentrale Grundlage zur Realisierung von dichten Speicherstrukturen (\textit{dense layout}).
+    Durch die Kombination aus Entitätsindex und Versionsindex können veraltete \texttt{EntityHandle}s (\textit{stale handles}) erkannt und sicher wiederverwendet werden.
+    Das Verfahren bildet in \textit{helios} eine zentrale Grundlage für die Realisierung dichter Speicherstrukturen (\textit{dense layout}).
 \end{description}
 
 \section*{H}
-    \begin{description}
-    \item[Hook] Erweiterungspunkt (\textit{Extension Point}) für den Aufruf innerhalb eines fest definierten Ablaufs.
-    Komponenten über Hooks wie \texttt{onAcquire}, \texttt{onRelease}, \texttt{onActivate} oder \texttt{onClone} auf bestimmte Zustandswechsel reagieren, ohne dass dafür eine gemeinsame Basisklasse erforderlich ist.
-    Wird in \textit{helios} auch als allgemeiner Begriff für die Methoden eines Listeners genutzt.
+
+\begin{description}
+    \item[Hook] Erweiterungspunkt (\textit{extension point}) innerhalb eines fest definierten Ablaufs.
+    Komponenten können über Hooks wie \texttt{onAcquire}, \texttt{onRelease}, \texttt{onActivate} oder \texttt{onClone} auf bestimmte Zustandswechsel reagieren, ohne dass dafür eine gemeinsame Basisklasse erforderlich ist.
+    Der Begriff wird in \textit{helios} darüber hinaus auch allgemein für die Methoden eines Listeners verwendet.
 \end{description}
 
 \section*{M}
 
 \begin{description}
     \item[Manager] Laufzeitkomponente zur Orchestrierung bestimmter Aufgabenbereiche.
-    Manager fungieren in \textit{helios} oft auch als \texttt{CommandHandler} und führen gesammelte Befehle zu definierten Zeitpunkten aus.
+    Manager fungieren in \textit{helios} häufig auch als \texttt{CommandHandler} und führen gesammelte Befehle zu definierten Zeitpunkten aus.
 
     \item[MatchState] Unterhalb des \texttt{GameState} angesiedelter Zustandsautomat, der den Ablauf eines konkreten Spieldurchlaufs beschreibt, etwa über Zustände wie \texttt{Warmup}, \texttt{Playing} oder \texttt{GameOver}.
 \end{description}
@@ -88,29 +99,29 @@
 \section*{P}
 
 \begin{description}
-    \item[Pass] Logische Untereinheit einer \textit{GameLoop}-Phase, in der ein bestimmter Satz von Systemen ausgeführt wird.
+    \item[Pass] Logische Untereinheit einer \texttt{GameLoop}-Phase, in der ein bestimmter Satz von Systemen ausgeführt wird.
 
-    \item[Phase] Übergeordnete Gliederung der \textit{GameLoop}.
-    In \textit{helios} wird zwischen \texttt{Pre}, \texttt{Main} und \texttt{Post} unterschieden.
+    \item[Phase] Übergeordnete Gliederung der \texttt{GameLoop}.
+    In \textit{helios} wird zwischen \texttt{Pre}, \texttt{Main} und \texttt{Post} unterschieden und soll so die logische Verortung von Systemen erleichtern.
 
     \item[Pooling / Object Pool] Technik zur Wiederverwendung bereits erzeugter Objekte.
     In \textit{helios} wird Pooling eingesetzt, um Speicherallokationen zur Laufzeit zu reduzieren und die Wiederverwendung von \texttt{GameObject}s zu ermöglichen, die über ein gemeinsames Prefab erstellt wurden.
 
     \item[Prefab] Blaupause für ein \texttt{GameObject}.
-    Ein Prefab beschreibt eine Objektvorlage aus einer Zusammensetzung verschiedener Komponenten.
+    Ein Prefab beschreibt eine Objektvorlage, die sich aus der Zusammensetzung verschiedener Komponenten ergibt.
     In \textit{helios} werden Prefabs über Builder- bzw. Factory-Mechanismen definiert und anschließend für Spawn- und Pooling-Prozesse wiederverwendet.
 \end{description}
 
 \section*{S}
 
 \begin{description}
-    \item[Session] Spezielles \texttt{GameObject}, das Komponenten für globale laufzeitbezogene und spielspezifische Informationen vorhält, wie Zustände oder aktive Viewports.
+    \item[Session] Spezielles \texttt{GameObject}, das Komponenten für globale laufzeitbezogene und spielspezifische Informationen vorhält, etwa Zustände oder aktive Viewports.
 
     \item[SparseSet] Zentrale Datenstruktur der ECS-Implementierung in \textit{helios}.
     Sie bildet einen spärlich besetzten (\textit{sparse}) diskreten Wertebereich auf ein dichtes Array ab und ermöglicht so effizienten Zugriff, Einfügen und Entfernen von Komponenten in $\mathcal{O}(1)$.
 
     \item[StateManager] Manager zur Verwaltung regelbasierter Zustandsautomaten.
-    Ein StateManager verarbeitet Zustandswechsel und benachrichtigt registrierte Listener über entsprechende Hooks.
+    Ein \texttt{StateManager} verarbeitet Zustandswechsel und benachrichtigt registrierte Listener über entsprechende Hooks.
 
     \item[Structure-of-Arrays (SoA)] Speicherlayout, bei dem gleichartige Daten in jeweils eigenen, dichten Arrays abgelegt werden.
     Dieses Layout bildet in \textit{helios} die Grundlage der komponentenorientierten Datenhaltung.
@@ -124,20 +135,20 @@
 \begin{description}
     \item[Tag Component] Komponente ohne fachliche Nutzdaten, die ausschließlich der Markierung dient, etwa \texttt{Active} oder \texttt{DeadTagComponent}.
 
-    \item[TypeIndex] Dichter Index zur Zuordnung einer Position zu einem Typen innerhalb einer vordefinierten Typmenge.
-    Der TypeIndex dient in \textit{helios} der effizienten Identifizierung von Typen genutzt und ermöglicht so einen Zugriff in $\mathcal{O}(1)$.
+    \item[TypeIndex] Dichter Index zur Zuordnung einer Position zu einem Typ innerhalb einer vordefinierten Typmenge.
+    Der \texttt{TypeIndex} dient in \textit{helios} der effizienten Identifizierung von Typen und ermöglicht so einen Zugriff in $\mathcal{O}(1)$.
 \end{description}
 
 \section*{U}
 
 \begin{description}
-    \item[UpdateContext] Kontextobjekt, das Systemen während der Ausführung in der \textit{GameLoop} übergeben wird.
-    Der UpdateContext wird in der GameLoop als Parameter in tiefere Schichten weitergegeben und vereint den Zugriff auf Ressourcen und Laufzeitkomponenten, Event-Busse, Session-Daten, Timing-Informationen und Views.
+    \item[UpdateContext] Kontextobjekt, das Systemen während der Ausführung in der \texttt{GameLoop} übergeben wird.
+    Der \texttt{UpdateContext} wird in der \texttt{GameLoop} als Parameter in tiefere Schichten weitergegeben und bündelt den Zugriff auf Ressourcen und Laufzeitkomponenten, Event-Busse, Session-Daten, Timing-Informationen und \textit{Views}.
 \end{description}
 
 \section*{V}
 
 \begin{description}
     \item[View] Sicht auf Entitäten mit einer bestimmten Komponenten-Konstellation.
-    Views werden in \textit{helios} von Systemen verwendet, um relevante \texttt{GameObject}s effizient zu iterieren.
+    \textit{Views} werden in \textit{helios} von Systemen verwendet, um relevante \texttt{GameObject}s effizient zu iterieren.
 \end{description}

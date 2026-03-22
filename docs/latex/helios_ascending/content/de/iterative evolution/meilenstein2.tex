@@ -1,12 +1,12 @@
-\section{Meilenstein 2: Controller-Input und die Evolution des GameObjects}
+\section{Meilenstein 2: Controller-Input und die Evolution des GameObjects}\label{sec:meilenstein_2}
 
 
 Meilenstein 2 markierte die erste funktionale Erweiterung der Architektur, die ein Rendering in Abhängigkeit von Benutzereingaben (Gamepad-Input) ermöglichte.\\
 
 In diesem Zusammenhang wurden die Klassen \texttt{GameWorld} und \texttt{GameObject} eingeführt.
-Deren Semantik blieb zwar bis zur finalen Version erhalten, sie durchliefen im weiteren Verlauf jedoch eine tiefgreifende strukturelle Transformation: Von Datencontainern, die Geschäftslogik kapseln, hin zu leichtgewichtigen Fassadenobjekten~\cite[S. 185-193]{GHJV94} für den Zugriff auf darunterliegende, template-basierte Registries eines datenorientierten ECS.\\
+Deren Semantik blieb zwar bis zur finalen Version erhalten, sie durchliefen im weiteren Verlauf des Projekts allerdings eine tiefgreifende strukturelle Transformation: Von Datencontainern, die Geschäftslogik kapseln, hin zu leichtgewichtigen Fassadenobjekten~\cite[S. 185-193]{GHJV94} für den Zugriff auf darunterliegende, template-basierte Registries eines datenorientierten ECS.\\
 
-Der im vorherigen Abschnitt angesprochene architektonische Umbruch des Rendering-Systems betraf die Repräsentanten der Viewports~\cite[40]{SWH15}, die ursprünglich als statische, eins-zu-eins mit dem Fenster korrespondierende Renderziele verstanden wurden.
+Der im vorherigen Abschnitt~\ref{sec:meilenstein_1} angesprochene architektonische Umbruch des Rendering-Systems betraf die Repräsentanten der Viewports~\cite[40]{SWH15}, die ursprünglich als statische, eins-zu-eins mit dem Fenster korrespondierende Renderziele verstanden wurden.
 Diese wurden so angepasst, dass innerhalb der Engine die Unterstützung mehrerer Viewports über ein \texttt{RenderTarget} - als Abstraktion eines Framebuffers~\cite[S. 329]{HDMS+14} - ermöglicht wurde.
 Dies vereinfachte die Darstellung unterschiedlicher Szenen oder Szenenausschnitte, die von verschiedenen Kameras beobachtet werden.
 Als positiver Seiteneffekt erleichterte diese Abstraktion die spätere Einführung von UI-Elementen in Meilenstein 5.\\
@@ -22,12 +22,12 @@ Als positiver Seiteneffekt erleichterte diese Abstraktion die spätere Einführu
 
 Die in Abbildung~\ref{fig:gamecontrollerinput} dargestellte Demonstration zeigt die Funktionalität der Eingabeverarbeitung, die über die Klasse \texttt{InputManager} realisiert wird, die für diesen Meilenstein erweitert wurde.
 Der \texttt{InputManager} ist in der äußersten Anwendungsschicht angesiedelt und liefert der \texttt{GameLoop} Informationen über Gamepad-Eingaben, die in Transformationen der hier dargestellten Objekte umgerechnet werden.
-Weitere Abstraktionsebenen fehlten an dieser Stelle; Szenenknoten wurden mittels \texttt{setScale()} und \texttt{setTranslation()} direkt modifiziert, Farbänderungen durch unmittelbare Aufrufe auf den mit den Knoten verbundenen \texttt{Renderables} realisiert.
+Weitere Abstraktionsebenen fehlten an dieser Stelle; Szenenknoten wurden mittels \texttt{setScale()} und \texttt{setTranslation()} direkt modifiziert, Farbänderungen durch unmittelbare Aufrufe auf den mit den Knoten verbundenen \texttt{Renderables} realisiert.\\
 
 In dieser Phase zeigte sich zudem, dass der ursprüngliche Entwurf des Rendering-Systems zu komplex war.
 Eine Restrukturierung hin zu einer flacheren Hierarchie (siehe Abbildung~\ref{fig:renderable}) ermöglichte eine effizientere Wiederverwendung von Material-, Mesh- und Shader-Instanzen.
 Diese wurden in einem \texttt{RenderPrototype} als \textit{Aggregate Root}~\cite[S. 128]{Eva03} vereint und können von mehreren \texttt{Renderables} geteilt werden.
-Optionale Konfigurationen der \texttt{Renderables} in Form kleiner \textit{Structs} bzw. \textit{Data Transfer Objects} (DTOs) erlauben individuelle Overrides für einzelne Instanzen, die damit konsequenterweise den extrinsischen Zustand eines Objekts zur Repräsentation grafischer Informationen speichern~\cite[S. 196-197]{GHJV94}.
+Optionale Konfigurationen der \texttt{Renderables} in Form kleiner \textit{structs} bzw. \textit{Data Transfer Objects} (DTOs) erlauben individuelle Overrides für einzelne Instanzen, die damit konsequenterweise den extrinsischen Zustand eines Objekts zur Repräsentation grafischer Informationen speichern~\cite[S. 196-197]{GHJV94}.
 
 \begin{figure}[!htbp]
     \centering

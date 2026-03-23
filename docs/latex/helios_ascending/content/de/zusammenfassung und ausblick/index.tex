@@ -36,25 +36,25 @@ Stattdessen haben wir an dieser Stelle einen pragmatischen Weg mit dem \textit{G
 
 Die Erfahrung mit objektorientiertem Design (OOD) und die Anwendung von Analyse und Entwurf trug wesentlich zur Abstraktion angedachter Strukturen in dem Projekt bei.
 Dies hat sich in frühen Phasen dort als hilfreich erwiesen, wo zunächst konzeptionell modelliert werden musste~\cite{BMEY07}.
-Damit ging allerdings auch vergleichsweise viel \textit{Over-Engineering} einher, was von der  Projektbetreuung früh erkannt wurde. 
+Damit ging allerdings auch vergleichsweise viel \textit{Over-Engineering} einher, was von der Projektbetreuung früh erkannt wurde.
 Rückblickend stimmen wir dieser Einschätzung uneingeschränkt zu.
 
-Trotzdem verstehen wir die entstandene Lösung als einen guten Kompromiss, der die Vorteile eines hierarchischen Modells mit der Effizienz einer datenorientierten Implementierung unter dem Blickwinkel einer Game-Engine als Echtzeitsystem~\cite[S. 525]{Gre19}verbindet.
+Trotzdem verstehen wir die entstandene Lösung als einen guten Kompromiss, der die Vorteile eines hierarchischen Modells mit der Effizienz einer datenorientierten Implementierung unter dem Blickwinkel einer Game-Engine als Echtzeitsystem~\cite[S. 525]{Gre19} verbindet.
 Hier stellt das datenorientierte Design (DOD) mit seinen dichten Speicherlayouts und der Vermeidung tiefer Vererbungshierarchien einen geeigneten Ansatz dar und erweist sich in Umgebungen als wertvoll, in denen nur begrenzte Ressourcen zur Verfügung stehen.\footnote{
     Empirische Studien, die dies unterstreichen, finden sich bei~\cite{FAUM20} und~\cite{WWM22}.
 }
 Dies steht nach unserem Erfahrungskontext im Gegensatz zu Domänen, in denen steigende Laufzeitkosten aufgrund hochgradig abstrahierter Softwaremodelle durch die Bereitstellung zusätzlicher Hardware kompensiert werden können.\\
 
 Dass also bei der Game-Engine-Entwicklung der objektorientierte Entwurf keineswegs verworfen werden muss, stellt auch \textit{Fabian} fest~\cite[S. 239-244]{Fab18}.
-Allerdings haben wir uns dabei in einem Spannungsfeld wiedergefunden, in dem die \textit{Konzeption} von Fachobjekten und deren \textit{technische Umsetzung} stark divergieren, trotz dass der Zugriff über Fassadenmuster diesen Umstand geschickt kaschieren konnte.\\
+Allerdings haben wir uns dabei in einem Spannungsfeld wiedergefunden, in dem die \textit{Konzeption} von Fachobjekten und deren \textit{technische Umsetzung} stark divergieren, obwohl der Zugriff über Fassadenmuster diesen Umstand geschickt kaschieren konnte.\\
 
-Aus dieser Divergenz ging die Herausforderung einher, das in Abschnitt~\ref{sec:meilenstein_5} angesprochene \textit{Mental Model} mit Implementierungsdetails in Verbindung zu bringen, die uns bislang in unserem gewohnten Projektumfeld nicht begegnet sind - und bedeutete einen Wechsel von einem Ansatz, in dem die Funktion der Form folgt~\cite{TD01}, hin zu einem Design, bei dem die Form - das Datenlayout - durch die Funktion - die Performance-Anforderungen - bestimmt wird.
+Mit dieser Divergenz ging die Herausforderung einher, das in Abschnitt~\ref{sec:meilenstein_5} angesprochene \textit{Mental Model} mit Implementierungsdetails in Verbindung zu bringen, die uns bislang in unserem gewohnten Projektumfeld nicht begegnet sind - und bedeutete einen Wechsel von einem Ansatz, in dem die Funktion der Form folgt~\cite{TD01}, hin zu einem Design, bei dem die Form - das Datenlayout - durch die Funktion - die Performance-Anforderungen - bestimmt wird.
 
 \subsubsection{Lernprozess führt unweigerlich zu Technical Debt}
 Mit zunehmender Erfahrung mit C++ im Rahmen dieses Projekts wuchs auch das Vertrauen in die Codebasis.
 Die ursprünglich konsequente Verwendung von \texttt{unique\_ptr} und \texttt{shared\_ptr} zur Abbildung eindeutiger Besitzverhältnisse wurde in den tieferen Schichten der Engine schrittweise durch rohe Zeiger und Referenzen ersetzt; Lebenszeitgarantien werden stattdessen per Dokumentation in höheren Schichten vereinbart.\\
 
-Mit der Umstellung auf einen ECS-basierten Ansatz wurde auch die Template- Metaprogrammierung \cite[S. 112-114]{Str18} als idiomatischer Ansatz zur Bereitstellung generischer Komponenten und Systeme etabliert.
+Mit der Umstellung auf einen ECS-basierten Ansatz wurde auch die Template-Metaprogrammierung \cite[S. 112-114]{Str18} als idiomatischer Ansatz zur Bereitstellung generischer Komponenten und Systeme etabliert.
 Deren großer Vorteil für \textit{helios} liegt insbesondere in der zur Kompilierzeit abgesicherten Typsicherheit.
 Das klassische \textit{Liskovsche Substitutionsprinzip}~\cite[S. 148]{LG01} tritt dabei gegenüber der Verwendung von \textit{C++-Concepts}~\cite[S. 107-112]{Str18} und statischer Introspektion in den Hintergrund.
 Dies ermöglicht die Validierung von Typeigenschaften in die Kompilierphase, was dynamische Indirektionen im \textit{Hot Path} reduziert.
@@ -71,20 +71,20 @@ Klassische Vererbung findet sich nun überwiegend in den frühen Schichten der A
 
 Die bereits erwähnte Entscheidung, das \textit{GameObject} als \textit{Compound Object} umzusetzen, half uns dabei, uns aus der Sackgasse zu manövrieren, als es um die Implementierung komplexerer Mechaniken ging.
 So haben wir Basisklassen vermieden, die aufgrund spärlicher generalisierter Informationen keine Existenzberechtigung gehabt hätten oder bei denen so viel fachliche Information hinterlegt werden müsste, dass unweigerlich \textit{Dead Code} entstanden wäre.
-Dass wir erst an dieser Stelle den gewohnten OOP-Ansatz verworfen haben und der in dem Projekt schon fast typisch erscheinende große Umstrukturierung zum Ende eines jeden Meilensteins (siehe Abbildung~\ref{fig:heliosContributors} in Abschnitt~\ref{sec:ki}), legt nahe, dass sich die Kernkonzepte von Game-Engines erst erarbeitet werden musste.\\
+Dass wir erst an dieser Stelle den gewohnten OOP-Ansatz verworfen haben und die in dem Projekt schon fast typisch erscheinende große Umstrukturierung zum Ende eines jeden Meilensteins (siehe Abbildung~\ref{fig:heliosContributors} in Abschnitt~\ref{sec:ki}), legt nahe, dass sich die Kernkonzepte von Game-Engines erst erarbeitet werden mussten.\\
 
 Damit lässt sich rückblickend feststellen, dass der praxisnahe Ansatz mit der zu diesem Zeitpunkt noch begrenzten fachlichen Erfahrung kollidierte.
 Eine frühere Auseinandersetzung mit den fachlichen Anforderungen sowie eine engere Rücksprache mit der Projektbetreuung über die architektonischen Auswirkungen hätten spätere konzeptionelle Probleme vermeiden können.
 Damit hätte sich auch der durch das UI-System entstandene \textit{Scope Creep}~\cite[S. 274]{Mou15} in Meilenstein 5 durch eine vorausschauendere Planung abfedern lassen.\\
 
-Nicht unerwähnt sollte bei alldem bleiben, das diese Hürden durch das in dem Prototyp-Dokument beschriebene \textit{Tracer Bullet Development} durchaus bewusst in Kauf genommen wurden.
+Nicht unerwähnt sollte bei alldem bleiben, dass diese Hürden durch das in dem Prototyp-Dokument beschriebene \textit{Tracer Bullet Development} durchaus bewusst in Kauf genommen wurden.
 
 \subsubsection{KI als Produktivitätsgewinn oder als zusätzlicher Aufwand?}
 
 Ob mit dem in Abschnitt~\ref{sec:ki} beschriebenen Einsatz von GitHub Copilot auch eine messbare persönliche Produktivitätssteigerung einhergeht, konnten wir abschließend nur für Arbeiten in den Bereichen eindeutig bejahen, in denen die KI solche Aufgaben übernommen hat, von denen wir aus eigener Erfahrung um die anfallenden Aufwände wussten - so nahm beispielsweise das Aufsetzen der Projekt-Webseite in Summe nicht länger als einen Arbeitstag in Anspruch.
 Berücksichtigt sind hierbei auch Änderungen an Form und Inhalt während der Projektdauer.\\
 
-Bei Code und Dokumentation gestaltet sich der der Eindruck eher zweigeteilt.
+Bei Code und Dokumentation gestaltet sich der Eindruck eher zweigeteilt.
 Da Verantwortung für fachliche Korrektheit und Integration weiterhin bei den Autoren liegt, müssen vorgeschlagene Änderungen einer erneuten Überprüfung unterzogen werden.
 Dieser Schritt reduzierte unserem Empfinden nach die Rolle der KI von einem fachlichen, autonomen Assistenten auf ein Werkzeug, dessen generierte Vorschläge durch eine autoritative Kontrolle abgenommen werden müssen - und diese obliegt dem Entwickler.\\
 

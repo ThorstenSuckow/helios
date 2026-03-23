@@ -4,17 +4,12 @@ Mit der Einführung des ECS wird unter einem \texttt{GameObject} in \textit{heli
 Die Klasse \texttt{GameObject} ist dabei nicht mehr als konkrete Datenstruktur implementiert, sondern fungiert als virtuelle Abstraktion, die lediglich ein 8 Byte großes \texttt{EntityHandle} kapselt.
 Von diesem Handle werden 4 Byte für die als \texttt{uint32\_t} typisierte \texttt{EntityId} verwendet, während die verbleibenden 4 Byte für eine ebenfalls so typisierte \texttt{VersionId} reserviert sind.
 Diese \texttt{VersionId} repräsentiert einen Generationsindex, der die sichere Wiederverwendung von \texttt{EntityId}s ermöglicht.
-Dies ist eine notwendige Voraussetzung, um die dichte Anordnung innerhalb der durch die \textit{Sparse Sets} realisierten Arrays zu ermöglichen.
+Dies ist eine notwendige Voraussetzung, um die dichte Anordnung innerhalb der durch die \textit{Sparse Sets} realisierten Arrays zu ermöglichen.\\
 
-\subsubsection{Generational Indexing als Identitätskonzept}
-
-Das \texttt{EntityHandle} als zusammengesetzter Schlüssel folgt dem Konzept des \textit{Generational Indexing}~\cite{RCCK25}.\footnote{
+Das \texttt{EntityHandle} als zusammengesetzter Schlüssel aus \texttt{EntityId} und \texttt{VersionId} folgt dem Konzept des \textit{Generational Indexing}~\cite{RCCK25}.\footnote{
     Datencontainer, die solche Daten speichern, werden auch als \textit{Slot Maps} bezeichnet~\cite{CppSlotMap}.
 }
-Anschaulich lässt sich ein solches Handle mit einem Primärschlüssel in einem relationalen Datenbanksystem vergleichen, der auf die zugehörigen Datensätze verweist, ohne deren Inhalte selbst zu enthalten.
-Die eindeutige Identifizierung eines solchen Objekts, das im Kern eine lose Sammlung von Komponenten darstellt, erfolgt zur Laufzeit ausschließlich über diesen zusammengesetzten Schlüssel.\footnote{
-Zur Veranschaulichung eignet sich das Schema einer Datenbank, in der eine Tabelle ausschließlich Fremdschlüssel zur Referenzierung von Einträgen anderer Tabellen enthält.
-}
+Anschaulich lässt sich ein solches Handle mit dem Schema einer Datenbank vergleichen, in der eine Tabelle ausschließlich Schlüssel (die \textit{EntityHandles}) zur Referenzierung von Einträgen anderer Tabellen (die \textit{Sparse Sets}) enthält.
 
 \subsubsection{Gültigkeit, \textit{stale} Handles und Tombstones}
 
@@ -44,13 +39,14 @@ Die Verwaltung und Neuerstellung von Handles wird durch die \texttt{EntityRegist
 Dabei werden innerhalb einer \textit{Free List} bereits gelöschte IDs verwaltet, deren Positionen in den \textit{Sparse Sets} durch einen \textit{Tombstone} repräsentiert werden.
 Enthält die \textit{Free List} einen Eintrag, wird für den jeweiligen Index in der Registry die Versionsnummer inkrementiert und anschließend ein neues Handle, bestehend aus Index und aktualisierter Versionsnummer, zurückgegeben.
 Auf diese Weise können Indizes wiederverwendet und aufgrund der aktualisierten Versionsnummer dennoch von \textit{stale} Indizes unterschieden werden.
-Sollte die \textit{Free List} keine Einträge enthalten, wird der zugrunde liegende Vektor um einen neuen Eintrag erweitert und mit der Versionsnummer $1$ versehen.
+Sollte die \textit{Free List} keine Einträge enthalten, wird der zugrunde liegende Vektor um einen neuen Eintrag erweitert und mit der Versionsnummer $1$ versehen; bei Wiedeverwendung der \textit{EntityId} wird die Versionsnummer inkrementiert.
 
 \vspace{5mm}
 \begin{tcolorbox}[colback=black!5, colframe=black, title={Wertebereich von \texttt{EntityId}}]
-    Bei einem Wertebereich von $2^{32}$ und unter der Annahme, dass theoretisch alle 16\,ms eine neue Version für eine spezifische \texttt{EntityId} erzeugt werden müsste, könnte ein entsprechendes Spiel etwa $2^{32} \cdot 0{,}016$ Sekunden lang betrieben werden, bevor ein Wertüberlauf eintritt.
+    Bei einem Wertebereich von $2^{32}$ und unter der Annahme, dass theoretisch alle 16\,ms ($\approx 60$ fps) eine neue Version für eine spezifische \texttt{EntityId} erzeugt werden müsste, könnte ein entsprechendes Spiel etwa $2^{32} \cdot 0{,}016$ Sekunden lang betrieben werden, bevor ein Wertüberlauf eintritt.
     Dies entspricht einer Zeitspanne von knapp 795 Tagen.
-    Damit ist ein ausreichender Puffer vorhanden, der weitgehend vernachlässigt werden kann, wenn \textit{Object Pooling} eingesetzt wird, um eine ständige Neuerzeugung von Objekten zur Laufzeit zu vermeiden.
     Ein Wechsel auf \texttt{uint64\_t} würde den theoretischen Zeitraum bis zu einem Überlauf auf etwa 9 Milliarden Jahre ausdehnen.
+
+    Damit ist ein ausreichender Puffer vorhanden, der weitgehend vernachlässigt werden kann, wenn \textit{Object Pooling} eingesetzt wird, um eine ständige Neuerzeugung von Objekten zur Laufzeit zu vermeiden.
 \end{tcolorbox}
 \vspace{5mm}

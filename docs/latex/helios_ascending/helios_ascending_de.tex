@@ -1,0 +1,132 @@
+\documentclass[a4paper,abstract=true]{scrreprt}
+
+% ----- Encoding & Fonts
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+
+\usepackage[english, ngerman]{babel}
+
+% ----- Zitate/Anführungen
+\usepackage{csquotes}
+
+% ----- Grafik & Layout
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tabularx,ragged2e}
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+
+% ----- URL/Links
+\usepackage[hyphens,spaces,obeyspaces]{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{orcidlink}
+
+\usepackage{cleveref}
+
+% ----- biblatex (nach babel, csquotes, hyperref)
+\usepackage[backend=biber,style=acmnumeric,doi=true,url=true,sorting=none]{biblatex}
+\addbibresource{helios_ascending.bib}
+
+
+
+
+% ----- Boxen, Listings etc.
+\usepackage[most]{tcolorbox}
+\newtcolorbox{summarybox}{
+    enhanced, breakable, sharp corners,
+    boxrule=0.3pt, colback=white, colframe=black!40,
+    coltitle=black, fonttitle=\bfseries,
+    toptitle=2mm, bottomtitle=2mm, colbacktitle=white,
+}
+\usepackage{listings}
+\usepackage{xcolor}
+\definecolor{codegray}{gray}{0.9}
+\definecolor{commentgreen}{rgb}{0,0.6,0}
+\definecolor{keywordblue}{rgb}{0.2,0.2,0.8}
+
+\lstdefinestyle{c++style}{
+    backgroundcolor=\color{white},
+    commentstyle=\color{commentgreen}\itshape,
+    keywordstyle=\color{keywordblue}\bfseries,
+    numberstyle=\tiny\color{gray},
+    stringstyle=\color{red},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false, showstringspaces=false, showtabs=false,
+    tabsize=2, language=C++
+}
+
+% ----- Anhang
+\usepackage[titletoc,title,page,header]{appendix}
+\renewcommand{\appendixname}{Anhang}
+\renewcommand{\appendixtocname}{Anhänge}
+\renewcommand{\appendixpagename}{Anhänge}
+
+% ----- Sonstiges
+\usepackage{dirtree}
+\renewcommand*\DTstyle{\ttfamily}
+
+% Silbentrennungen
+\hyphenation{
+  Ren-de-ring
+  Back-end
+  Game-Loop
+  Smart-Poin-ter
+  Kol-li-sions-be-hand-lung
+  er-stre-cken
+  Tem-plate
+  Me-ta-pro-gram-mie-rung
+}
+
+
+\begin{document}
+
+
+    \title{helios: Explorative Entwicklung einer ECS-basierten Game Engine}
+
+    \author{
+        Thorsten Suckow-Homberg\thanks{%
+            Projektdokumentation über die Entwicklung eines \textit{Geometry Wars}-Klons im Rahmen des Projektstudiums im Fernstudiengang Informatik,
+            Trier University of Applied Sciences, Fachbereich Informatik.
+            \newline
+            \textcopyright\ 2026 Thorsten Suckow-Homberg, \href{mailto:thorsten@suckow-homberg.de}{thorsten@suckow-homberg.de},
+            ORCID: \url{https://orcid.org/0009-0002-3389-8606}.
+            Dieses Werk ist lizenziert unter
+            \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0}.
+            \newline
+            \textit{Geometry Wars} ist ein Markenzeichen von Activision Publishing, Inc.
+            Diese Arbeit steht in keiner Verbindung zu Activision.
+            \newline
+            DOI: \href{https://doi.org/10.5281/zenodo.19161412}{10.5281/zenodo.19161412}
+        }%
+    }
+
+    \date{März 2026}
+
+
+    %2026-25-02: initial draft (0.0.0-alpha)%
+    \maketitle
+
+
+
+    \tableofcontents
+
+
+    \input{index_de}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \clearpage
+    \sloppy
+    \printbibliography
+    \fussy
+
+
+\end{document}

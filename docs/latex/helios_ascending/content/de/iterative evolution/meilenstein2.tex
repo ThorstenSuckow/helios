@@ -1,0 +1,76 @@
+\section{Meilenstein 2: Controller-Input und die Evolution des GameObjects}\label{sec:meilenstein_2}
+
+
+Meilenstein 2 markierte die erste funktionale Erweiterung der Architektur, die ein Rendering in Abhängigkeit von Benutzereingaben (Gamepad-Input) ermöglichte.\\
+
+In diesem Zusammenhang wurden die Klassen \texttt{GameWorld} und \texttt{GameObject} eingeführt.
+Deren Semantik blieb zwar bis zur finalen Version erhalten, sie durchliefen im weiteren Verlauf des Projekts allerdings eine tiefgreifende strukturelle Transformation: Von Datencontainern, die Geschäftslogik kapseln, hin zu leichtgewichtigen Fassadenobjekten~\cite[S. 185-193]{GHJV94} für den Zugriff auf darunterliegende, template-basierte Registries eines datenorientierten ECS.\\
+
+Der im vorherigen Abschnitt~\ref{sec:meilenstein_1} angesprochene architektonische Umbruch des Rendering-Systems betraf die Repräsentanten der Viewports~\cite[40]{SWH15}, die ursprünglich als statische, eins-zu-eins mit dem Fenster korrespondierende Renderziele verstanden wurden.
+Diese wurden so angepasst, dass innerhalb der Engine die Unterstützung mehrerer Viewports über ein \texttt{RenderTarget} - als Abstraktion eines Framebuffers~\cite[S. 329]{HDMS+14} - ermöglicht wurde.
+Dies vereinfachte die Darstellung unterschiedlicher Szenen oder Szenenausschnitte, die von verschiedenen Kameras beobachtet werden.
+Als positiver Seiteneffekt erleichterte diese Abstraktion die spätere Einführung von UI-Elementen in Meilenstein 5.\\
+
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.8\columnwidth]{content/de/iterative evolution/img/gamecontrollerinput}
+    \caption{Oberfläche der \textit{Game Controller Input Demo}. Der Szenengraph enthält verschiedene geometrische Primitive, deren Farbintensität bzw. Skalierung in Abhängigkeit von den Controller-Eingaben variiert. (Quelle: eigene Aufnahme)}
+    \label{fig:gamecontrollerinput}
+\end{figure}
+
+
+Die in Abbildung~\ref{fig:gamecontrollerinput} dargestellte Demonstration zeigt die Funktionalität der Eingabeverarbeitung, die über die Klasse \texttt{InputManager} realisiert wird, die für diesen Meilenstein erweitert wurde.
+Der \texttt{InputManager} ist in der äußersten Anwendungsschicht angesiedelt und liefert der \texttt{GameLoop} Informationen über Gamepad-Eingaben, die in Transformationen der hier dargestellten Objekte umgerechnet werden.
+Weitere Abstraktionsebenen fehlten an dieser Stelle; Szenenknoten wurden mittels \texttt{setScale} und \texttt{setTranslation} direkt modifiziert, Farbänderungen durch unmittelbare Aufrufe auf den mit den Knoten verbundenen \texttt{Renderables} realisiert.\\
+
+In dieser Phase zeigte sich, dass der ursprüngliche Entwurf des Rendering-Systems zu komplex war.
+Eine Restrukturierung hin zu einer flacheren Hierarchie (siehe Abbildung~\ref{fig:renderable}) ermöglichte eine effizientere Wiederverwendung von Material-, Mesh- und Shader-Instanzen.
+Diese wurden in einem \texttt{RenderPrototype} als \textit{Aggregate Root}~\cite[S. 128]{Eva03} vereint und können von mehreren \texttt{Renderables} geteilt werden.
+Optionale Konfigurationen der \texttt{Renderables} in Form kleiner \textit{structs} bzw. \textit{Data Transfer Objects} (DTOs) erlauben individuelle Overrides für einzelne Instanzen, die damit konsequenterweise den extrinsischen Zustand eines Objekts zur Repräsentation grafischer Informationen speichern~\cite[S. 196-197]{GHJV94}.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.8\columnwidth]{content/de/iterative evolution/img/renderable}
+    \caption{
+        Design des \texttt{Renderable} in Meilenstein 2 im Vergleich zum ersten Entwurf.
+        Die Idee, wiederverwendbare und zustandslose Basisobjekte zu nutzen, wurde beibehalten; die Hierarchie wurde jedoch mithilfe eines \texttt{RenderPrototype} flacher gestaltet. (Quelle: eigene Aufnahme)}
+    \label{fig:renderable}
+\end{figure}
+
+Mit diesem Meilenstein wurde das Modul \texttt{helios.engine.game} zusammen mit der Klasse \texttt{GameWorld} eingeführt.
+Diese fungiert als zentraler Container für die Verwaltung aller in der Spielwelt befindlichen \textit{GameObjects}, wobei die Umsetzung zu diesem Zeitpunkt noch stark von einem klassischen OOP-Ansatz geprägt war, wie das in Listing~\ref{lst:gameworld_v1} dargestellte Interface verdeutlicht.\\
+
+\vspace{5mm}
+\begin{lstlisting}[style=c++style,
+    caption={
+        Auszug aus dem Interface der \texttt{GameWorld} aus Meilenstein 2.
+        Die Aktualisierung der Spielobjekte erfolgte hier noch über eine zentrale \texttt{update}-Methode, die innerhalb der \textit{GameLoop} aufgerufen wurde.
+        Der Zugriff auf die \texttt{GameObjects} geschah hashbasiert über ihre jeweilige GUID.
+    },
+    label=lst:gameworld_v1]
+    void update(float deltaTime) noexcept;
+    void addGameObject(std::unique_ptr<GameObject> gameObject);
+    GameObject* find(const Guid& guid);
+\end{lstlisting}
+\vspace{5mm}
+
+Obwohl die API auch im finalen Zustand eine ähnliche Semantik beibehält, weicht deren interne Implementierung stark von der hier beschriebenen Umsetzung ab:
+Auf hashbasierte Zugriffe über \texttt{std::unordered\_map} wird im Engine-Modul inzwischen weitgehend verzichtet, und die Aktualisierung der \textit{GameObjects} wird über zustandsabhängige Phasen und Pässe mit individuellen Commit-Points über die \textit{GameLoop} realisiert (siehe Abschnitt~\ref{sec:meilenstein_4}).\\
+
+Weitere Implementierungen in diesem Meilenstein betrafen unter anderem:
+
+\begin{itemize}
+    \itemsep0.5em
+    \item die Integration von \textit{Dear ImGui}~\cite{DearImgui} zur einfacheren Auswertung von Log-Nachrichten und zur gezielten Konfiguration von \texttt{GameObject}-Parametern zur Laufzeit (siehe Abbildung~\ref{fig:spaceshipcontrol}),
+    \item die Einführung einer spezialisierten \texttt{SceneNode} mit \texttt{lookAt}-Implementierung~\cite[S. 128-129]{PJH23} sowie einer Bitmaske zur Spezifizierung der in Eltern-Kind-Beziehungen zu vererbenden 3D-Transformationsdaten.
+\end{itemize}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=1\columnwidth]{content/de/iterative evolution/img/spaceshipcontrol}
+    \caption{Die \textit{Spaceship Control Demo} aus Meilenstein 2 visualisiert die Schiffsteuerung.
+    Die ImGui-Overlays erlauben es, spielspezifische Parameter zur Laufzeit zu manipulieren, darunter Beschleunigung, Geschwindigkeit und die Kameraposition.
+    Zudem ist die Einstellung der \textit{Dead Zone} zur Kompensation von Stick-Drift eines angeschlossenen Gamepads möglich. In der aktuellen Version ist das Overlay mittels der \textit{Caret}-Taste (\texttt{U+005E $\ \hat{}$}) aktivierbar. (Quelle: eigene Aufnahme)}
+    \label{fig:spaceshipcontrol}
+\end{figure}

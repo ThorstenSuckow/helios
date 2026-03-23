@@ -1,0 +1,66 @@
+\chapter{Einleitung}
+
+Der in diesem Dokument beschriebenen Software geht die Entwicklung eines Prototypen voraus, welcher in~\cite{SH25} beschrieben ist.
+Im Folgenden werden die darin beschriebenen Anforderungen und Spezifikationen wiederholt, da auf diese im weiteren Verlauf immer wieder zurückgegriffen wird.\\
+
+\noindent
+Als zu realisierende Features wurden vereinbart:
+
+\begin{itemize}
+    \itemsep0.5em
+    \item Spielbares Level (2D-Grid)
+    \item Time-Attack-Modus mit einer Dauer von 3 Minuten
+    \item Highscore-System
+    \item Controller-Steuerung
+    \item Stabile Framerate von mindestens 60 FPS bei gleichzeitiger Darstellung von über hundert Gegnern und Objekten
+    \item Drei Gegnertypen mit einfacher KI (``Spawn and Chase``)
+    \item Aufwertung des \textit{Game Feels} durch grafische Effekte
+    \item Kompilierbar und lauffähig unter Windows 11
+\end{itemize}
+
+\noindent
+Zum Zeitpunkt der Veröffentlichung des erwähnten Prototyps war Meilenstein 1 bereits fertiggestellt; dieser stellte der weiteren Entwicklung das Anwendungsgerüst bereit.\\
+
+In Tabelle~\ref{tab:zeitplan} ist eine Übersicht der nachfolgenden Meilensteine 2-6 dargestellt.
+Deren Fertigstellungstermine wurden mit einer jeweiligen Verzögerung von zwei bis vier Wochen erreicht.
+Meilenstein 6 ist mit Veröffentlichung dieses Dokuments erreicht.\\
+
+Bei den Anforderungen, die zwischen November 2025 und März 2026 umgesetzt wurden, zeigte sich aufgrund zunehmenden Integrationsaufwandes der fachlich verschiedenen Systeme eine erhöhte Komplexität, bedingt unter anderem aufgrund folgender Punkte:
+
+\begin{itemize}
+    \itemsep0.5em
+    \item Das Input-System musste zur genauen Steuerung Stick-Drift kompensieren.
+    \item Spawn von Gegnerobjekten machte aus Gründen der Laufzeitoptimierung einen Pool von Prefabs notwendig.
+    \item Bei der Kollisionserkennung ergaben sich komplexe Fragestellungen hinsichtlich der Weiterverarbeitung erkannter Kollisionen.
+    \item Das UI-Rendering bedingte eine Erweiterung der Rendering-Engine zur Unterstützung von Schriftdateien.
+    Außerdem musste Konzeption und Implementierung von UI-Elementen realisiert werden.
+    \item Spielstart, Pause und Spielende erforderten die Einführung von Zustandsautomaten, um - abhängig von den jeweiligen Zuständen - Aktionen zu erlauben oder zu verbieten.
+\end{itemize}
+
+\setlength{\tabcolsep}{8pt}
+\begin{table}[t]
+    \centering
+    {\renewcommand{\arraystretch}{1.2}%
+        \begin{tabularx}{\textwidth}{@{} l l Y @{}}
+        \toprule
+        \textbf{Meilenstein} & \textbf{Datum} & \textbf{Inhalt} \\
+        \midrule
+        \texttt{milestone\_1} & 20.10.2025 &
+        Bereitstellung der Applikationsschicht inkl. Implementierung des Event-Systems,
+        des Input-Managers sowie Anbindung an das Low-Level-API-Subsystem. \\
+        \texttt{milestone\_2} & 17.11.2025 &
+        Bereitstellung der Rendering-Engine; erster Entwurf des Spielfelds samt Darstellung des Spielerschiffs. \\
+        \texttt{milestone\_3} & 22.12.2025 &
+        Umsetzung der Physik und Spielereingabe zur Steuerung des Schiffs; Feuermechaniken. \\
+        \texttt{milestone\_4} & 19.01.2026 &
+        Implementierung der wichtigsten Spielregeln und -mechaniken; spielfähiger Prototyp. \\
+        \texttt{milestone\_5} & 09.02.2026 &
+        Bereitstellung des Prototyps; Feinschliff. \\
+        \texttt{milestone\_6} & 16.03.2026 &
+        Abgabe der Dokumentation und Vorstellung des Projekts. \\
+        \bottomrule
+        \end{tabularx}}
+    \caption{Geplante Meilensteine zur Umsetzung des \textit{Geometry Wars}-Klon.
+    Zum Zeitpunkt der Veröffentlichung des Prototyp-Dokuments~\cite{SH25} war Meilenstein 1 bereits abgeschlossen, Meilensteine 2-5 wurden mit leichter Verzögerung entsprechend der Anforderungen erreicht. Meilenstein 6 endet mit der Veröffentlichung dieses Dokuments.}
+    \label{tab:zeitplan}
+\end{table}

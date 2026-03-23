@@ -3,7 +3,7 @@
 In einem Frame werden die über die \texttt{GameLoop} registrierten Systeme in einer bestimmten Reihenfolge aufgerufen.
 Systeme iterieren hierbei nicht nur über einzelne Komponenten, sondern können - je nach Aufgabe - auch über eine Komposition von Komponenten iterieren, da beispielsweise eine Skalierungskomponente in unterschiedlichen Kontexten angewendet wird (UI, aktives NPC- oder Spielerobjekt).\footnote{
     Eine Komposition von Komponenten wird durch das Vorhandensein einer Menge verschiedener Komponententypen ausgedrückt.
-    Unity bezieht sich darauf in ähnlicher Weise über die bereits erwähnten \textit{Archetypes} bzw. \textit{Chunks}~\cite{UnityChunks}.
+    Unity bezieht sich darauf in ähnlicher Weise über die bereits erwähnten \textit{Archetypes} bzw. \textit{Chunks}.
 }
 
 \subsubsection{Tags statt Vererbung}
@@ -56,11 +56,11 @@ Die hierbei genutzten \texttt{EngineRoleTags} werden auch in anderen Kernkonzept
 In dem Beispiel wurde die Implementierung eines \texttt{Pass} skizziert, der Teil der \texttt{GameLoop} ist und das Concept \texttt{IsSystemLike} als Zulassungskriterium (\textit{Gatekeeping}) für die Registrierung von Systemen nutzt.
 Das Concept stellt sicher, dass die übergebene Klasse über die entsprechende \texttt{update}-Methode verfügt; der \texttt{Pass} ruft das System dann an der vorgesehenen Stelle innerhalb eines Frames auf.\\
 
-Beim Aufruf erstellt die in Listing~\ref{lst:system_loop} gezeigte \texttt{update()}-Methode einen \textit{View} auf die erforderlichen Komponentenkonstellationen.
-Die Logik ist ein Implementierungsdetail und kann über eine bloße Aktualisierung der Komponenten hinausgehen sowie beispielsweise Nachrichten an nachgelagerte Systeme im selben oder in nachfolgenden Frames senden.
+Beim Aufruf erstellt die in Listing~\ref{lst:system_loop} gezeigte \texttt{update}-Methode einen \textit{View} auf die erforderlichen Komponentenkonstellationen.
+Die vom Entwickler hinterlegte Logik ist Implementierungsdetail und kann über eine bloße Aktualisierung der Komponenten hinausgehen, beispielsweise durch das Senden von Nachrichten an nachgelagerte Systeme.
 
 \begin{lstlisting}[style=c++style,
-    caption={Skizze einer \texttt{update()}-Implementierung, die einen View ausschließlich über aktive \textit{GameObjects} erstellt, bei denen die aufgeführten Komponenten auch \textit{enabled} sind. Auf die Rolle von \texttt{UpdateContext} wird in Abschnitt~\ref{sec:runtime_gameloop} näher eingegangen.},
+    caption={Skizze einer \texttt{update}-Implementierung, die einen View ausschließlich über aktive \textit{GameObjects} erstellt, bei denen die aufgeführten Komponenten auch \textit{enabled} sind. Auf die Rolle von \texttt{UpdateContext} wird in Abschnitt~\ref{sec:runtime_gameloop} näher eingegangen.},
     label=lst:system_loop]
 
     void update(UpdateContext& updateContext) {

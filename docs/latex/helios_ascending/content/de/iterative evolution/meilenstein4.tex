@@ -33,33 +33,36 @@ Zwischen diesen (\texttt{mechanics}) besteht ein äußerst geringer Grad an Kopp
 Zudem wurde ein \textit{policy-basiertes} System für Spawning und Despawning eingeführt, das auf dem im \texttt{runtime}-Modul platzierten Spawn-System von \textit{helios} aufsetzt.
 Dieses wurde im weiteren Verlauf ausgebaut und kann mithilfe einer \textit{Domain Specific Language} (DSL) konfiguriert werden, um eine semantische Konfiguration von Spawn-Logiken in Verbindung mit \textit{Prefab}-Pools vorzunehmen.\\
 
-Der in diesem Zusammenhang implementierte \textit{Expression Builder}~\cite[S. 343-350]{FP11} erlaubt die Konfiguration von \texttt{GameObject}s wie Spielern, Gegnern, Projektilen und Spielfiguren.
+Der in diesem Zusammenhang implementierte \textit{Expression Builder}~\cite[S. 343-350]{FP11} erlaubt die Konfiguration von \textit{GameObjects} wie Spielern, Gegnern, Projektilen und Spielfiguren.
 Mit dieser Factory lässt sich der Code zur Spielweltkonfiguration einfacher und lesbarer halten.
 Außerdem müssen semantische Details nicht in der abstrakteren Implementierung aufgenommen werden (siehe Listing~\ref{lst:gameobjectdsl}).\\
 
+\vspace{5mm}
 \begin{lstlisting}[style=c++style,
     caption={Auszug aus dem Code zur Konfiguration des \textit{BlueEnemy}, einem Gegnertyp, der 30 Sekunden nach Spielbeginn in der \textit{Collision Detection Demo} spawnt und aus einer Chase-Komponente zum Verfolgen des Spielers besteht.},
     label=lst:gameobjectdsl]
-    auto blueEnemyPrefab = GameObjectFactory::instance()
-        .gameObject()
-        .withCollision([](auto& cb) {
-            cb.collision()
-              .layerId(CollisionId::Enemy)
-              .useBoundingBox()
-              .onSolidCollision(CollisionId::Player, CollisionBehavior::Despawn)
-              .onSolidCollision(CollisionId::Projectile, CollisionBehavior::Despawn);
-        })
-        .withAi([&](auto& aib) {
-            aib.chasing()
-               .target(shipGameObject->guid())
-               .seekInterval(0.05f);
-        })
-       .make();
+auto blueEnemyPrefab = GameObjectFactory::instance()
+    .gameObject()
+    .withCollision([](auto& cb) {
+        cb.collision()
+          .layerId(CollisionId::Enemy)
+          .useBoundingBox()
+          .onSolidCollision(Player, Despawn)
+          .onSolidCollision(Projectile, Despawn);
+    })
+    .withAi([&](auto& aib) {
+        aib.chasing()
+           .target(shipGameObject.entityHandle())
+           .seekInterval(0.05f);
+    })
+   .make();
 \end{lstlisting}
+\vspace{5mm}
 
 Dem Code in Listing~\ref{lst:gameobjectdsl} ist die \textit{vanilla} Konfiguration eines \texttt{GameObject} gegenübergestellt (siehe Listing~\ref{lst:gameobjectcmpbased}).
 Im direkten Vergleich lässt sich erkennen, dass die Gruppierung von Komponenten hinter einfacher lesbaren Methoden, die über ein \textit{Fluent Interface}~\cite{FluentInterface} realisiert wurden, den Quellcode zwar nicht wesentlich reduziert, ihn aber intuitiv verständlicher macht.
 
+\vspace{5mm}
 \begin{lstlisting}[style=c++style,
     caption={Konfiguration eines Spieler-Objekts ohne DSL (Codebasis Meilenstein 4).},
     label=lst:gameobjectcmpbased]
@@ -68,6 +71,7 @@ shipGameObject->add<SceneNodeComponent>(spaceshipSceneNode);
 shipGameObject->add<TwinStickInputComponent>();
 // ... weitere Komponenten hinzufügen
 \end{lstlisting}
+\vspace{5mm}
 
 \begin{figure}[!htbp]
     \centering

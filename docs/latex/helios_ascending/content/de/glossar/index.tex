@@ -19,7 +19,7 @@
     \item[CommitPoint] Synchronisationspunkt innerhalb einer \texttt{GameLoop}-Phase.
     An einem \texttt{CommitPoint} werden Buffer-Swaps durchgeführt, sodass nachfolgende \textit{Passes} einen wohldefinierten Nachrichtenstand lesen können.
 
-    \item[Component] Datenhaltender Baustein eines \texttt{GameObject}s bzw. einer Entität.
+    \item[Component] Datenhaltender Baustein eines \textit{GameObjects} bzw. einer Entität.
     Komponenten beschreiben in \textit{helios} fachliche Aspekte wie Position, Zustand oder Kollisionsform und werden in \texttt{SparseSet}s gespeichert.
 
     \item[Concept] C++-Sprachfeature, mit dem sich Anforderungen an Typen in Template-Kontexten deklarativ formulieren und zur Kompilierzeit prüfen lassen.
@@ -30,7 +30,7 @@
 
 \begin{description}
     \item[Entität (Entity)] Abstrakter Begriff für Objekte, die in der \texttt{GameWorld} zur Laufzeit existieren.
-    Sie werden in \textit{helios} auch als \texttt{GameObject}s bezeichnet.
+    Sie werden in \textit{helios} auch als \textit{GameObjects} bezeichnet.
 
     \item[Entity Component System (ECS)] Architekturmuster, das Objekte nicht über Klassenhierarchien, sondern über die Zusammensetzung aus Komponenten und darauf operierenden Systemen beschreibt.
     In \textit{helios} bildet ECS das zentrale Ordnungsprinzip der Laufzeitarchitektur.
@@ -63,7 +63,7 @@
 
 \begin{description}
     \item[GameLoop] Zeitliche Ordnungsinstanz der Engine.
-    In \textit{helios} ist die \texttt{GameLoop} in \textit{Phasen} und \textit{Passes} gegliedert und ermöglicht so die deterministische Ausführung von Systemen sowie den Austausch von Nachrichten über Systemgrenzen hinweg.
+    In \textit{helios} ist die \texttt{GameLoop} als Taktgeber in \textit{Phasen} und \textit{Passes} gegliedert und ermöglicht so die deterministische Ausführung von Systemen sowie den Austausch von Nachrichten über Systemgrenzen hinweg.
 
     \item[GameObject] Leichtgewichtige Fassade für den einfachen Zugriff auf eine in der \texttt{GameWorld} existierende Entität.
     In \textit{helios} kapselt ein \texttt{GameObject} im Wesentlichen ein \texttt{EntityHandle} sowie den Zugriff auf den \texttt{EntityManager} und bietet eine semantisch klare API für die Abfrage und Manipulation von Entitäten.
@@ -105,7 +105,7 @@
     In \textit{helios} wird zwischen \texttt{Pre}, \texttt{Main} und \texttt{Post} unterschieden und soll so die logische Verortung von Systemen erleichtern.
 
     \item[Pooling / Object Pool] Technik zur Wiederverwendung bereits erzeugter Objekte.
-    In \textit{helios} wird Pooling eingesetzt, um Speicherallokationen zur Laufzeit zu reduzieren und die Wiederverwendung von \texttt{GameObject}s zu ermöglichen, die über ein gemeinsames Prefab erstellt wurden.
+    In \textit{helios} wird Pooling eingesetzt, um Speicherallokationen zur Laufzeit zu reduzieren und die Wiederverwendung von \textit{GameObjects} zu ermöglichen, die über ein gemeinsames Prefab erstellt wurden.
 
     \item[Prefab] Blaupause für ein \texttt{GameObject}.
     Ein Prefab beschreibt eine Objektvorlage, die sich aus der Zusammensetzung verschiedener Komponenten ergibt.
@@ -143,12 +143,12 @@
 
 \begin{description}
     \item[UpdateContext] Kontextobjekt, das Systemen während der Ausführung in der \texttt{GameLoop} übergeben wird.
-    Der \texttt{UpdateContext} wird in der \texttt{GameLoop} als Parameter in tiefere Schichten weitergegeben und bündelt den Zugriff auf Ressourcen und Laufzeitkomponenten, Event-Busse, Session-Daten, Timing-Informationen und \textit{Views}.
+    Der \texttt{UpdateContext} wird in der \texttt{GameLoop} als Parameter in tiefere Schichten weitergegeben und bietet Zugriff auf Ressourcen und Laufzeitkomponenten, Event-Busse, Session-Daten, Timing-Informationen und \textit{Views} an.
 \end{description}
 
 \section*{V}
 
 \begin{description}
     \item[View] Sicht auf Entitäten mit einer bestimmten Komponenten-Konstellation.
-    \textit{Views} werden in \textit{helios} von Systemen verwendet, um relevante \texttt{GameObject}s effizient zu iterieren.
+    \textit{Views} werden in \textit{helios} von Systemen verwendet, um relevante \textit{GameObjects} effizient zu iterieren.
 \end{description}

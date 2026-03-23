@@ -31,10 +31,14 @@ export namespace helios::engine::mechanics::timing::types {
         Paused = 2,
 
         /**
+         * @brief Timer is finished.
+         */
+        Finished = 3,
+
+        /**
          * @brief Timer is stopped.
          */
-        Stopped = 3
-
+        Stopped = 4
     };
 
 }

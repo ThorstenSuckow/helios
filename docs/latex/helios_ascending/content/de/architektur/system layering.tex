@@ -25,7 +25,7 @@ Die Unterteilung der Module gestaltet sich dabei wie folgt:
 
 \begin{itemize}
     \itemsep0.5em
-    \item \texttt{builder/}: Stellt \textit{Builder}-Klassen für Spawn-Systeme und \texttt{GameObject}s bereit.
+    \item \texttt{builder/}: Stellt \textit{Builder}-Klassen für Spawn-Systeme und \textit{GameObjects} bereit.
     Diese basieren auf \textit{Expression Builder}, \textit{Fluent Interfaces} sowie einer \textit{Domain-Specific Language} (DSL), um die Konfiguration von Fachobjekten aus einem hohen Abstraktionsgrad in einen besser lesbaren Kontext zu überführen.
     \item \texttt{common/}: Enthält allgemeine Hilfsklassen, die vor allem von \texttt{mechanics} und \texttt{modules} genutzt werden, darunter spielspezifische Kontextklassen für systemübergreifende Informationen.
     \item \texttt{core/}: Stellt fundamentale Datentypen und Objekte zur Verfügung, die für den Betrieb der Engine benötigt werden, wie beispielsweise \texttt{Units}, die das metrische System für \textit{helios} definieren.
@@ -59,13 +59,15 @@ Innerhalb der Module nutzt \textit{helios} zur eindeutigen Identifizierung und t
     \itemsep0.5em
     \item \texttt{commands}: Steuerkommandos, die innerhalb eines Frames von Systemen und Managern generiert werden.
     Die Verarbeitung erfolgt über \texttt{CommandHandler}-Konzepte, auf die in Abschnitt~\ref{sec:runtime_messaging} näher eingegangen wird.
-    \item \texttt{components}: Objekte, die fachlich unterschiedliche Zustände eines \texttt{GameObject}s repräsentieren.
-    Als primär datenhaltende \texttt{struct}s konzipiert, können diese Objekte auch Invarianten absichern, etwa durch \textit{Clamping} von Werten, sollten darüber hinaus jedoch kein Verhalten implementieren.\footnote{Im Gegensatz zu unserem Konzept, das Invarianten erlaubt, sehen andere ECS-Architekturen wie \textit{Unity DOTS} vor, dass Komponenten als reine Informationsträger fungieren~\cite{UnityComponentConcepts}.}
+    \item \texttt{components}: Objekte, die fachlich unterschiedliche Zustände eines \textit{GameObjects} repräsentieren.
+    Als primär datenhaltende \texttt{struct}s konzipiert, können diese Objekte auch Invarianten absichern, etwa durch \textit{Clamping} von Werten, sollten darüber hinaus jedoch kein Verhalten implementieren.\footnote{
+        Im Gegensatz zu unserem Konzept, das Invarianten erlaubt, sehen andere ECS-Architekturen wie \textit{Unity DOTS} vor, dass Komponenten als reine Informationsträger fungieren: Invarianten werden dort in den Systemen zugesichert.~\cite{UnityComponentConcepts}.
+    }
     \item \texttt{events}: Nachrichten, die Systeme in Frame $N$ generieren und die von nachgelagerten Systemen im selben Frame oder in Frame $N+1$ verarbeitet werden können.
     Im Gegensatz zu \texttt{Commands} sind \textit{Events} als Informationsträger konzipiert.
     Sind deterministische Aktionen gefragt, sollten \texttt{Commands} verwendet werden.
     Die Unterscheidung existiert in \textit{helios} jedoch nur auf semantischer Ebene.
-    \item \texttt{systems}: Logikeinheiten, die das Verhalten von \texttt{GameObject}s modifizieren, indem sie Komponenten aktualisieren sowie \texttt{Commands} und \texttt{Events} emittieren.
+    \item \texttt{systems}: Logikeinheiten, die das Verhalten von \textit{GameObjects} modifizieren, indem sie Komponenten aktualisieren sowie \texttt{Commands} und \texttt{Events} emittieren.
     \item \texttt{types}: Hilfstypen wie Kontextobjekte (DTOs) zum Datentransport sowie typisierte IDs zur sicheren Identifizierung von Ressourcen zur Laufzeit.
 \end{itemize}
 

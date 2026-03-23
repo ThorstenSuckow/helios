@@ -142,6 +142,20 @@ export namespace helios::engine::runtime::world {
         }
 
         /**
+         * @brief Returns the source state of the last transition.
+         *
+         * @tparam StateType The state enum type.
+         *
+         * @return The state that was transitioned from, or StateType::Undefined if not found.
+         */
+        template<typename StateType>
+        [[nodiscard]] StateType stateFrom() const noexcept {
+            auto* sc = gameObject_.get<StateComponent<StateType>>();
+
+            return sc ? sc->from() : StateType::Undefined;
+        }
+
+        /**
          * @brief Returns the last transition ID for a given state type.
          *
          * @tparam StateType The state enum type.

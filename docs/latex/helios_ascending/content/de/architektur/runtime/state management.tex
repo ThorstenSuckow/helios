@@ -1,15 +1,15 @@
 \subsection{State Management zur Verwaltung von Systemzuständen}\label{sec:state_management}
 
-In der Spieleentwicklung werden endliche Automaten (\textit{Finite State Machines}, \textit{FSM}) in zahlreichen Bereichen verwendet, darunter die Animation~\cite[S. 786-805]{Gre19}, die Künstliche Intelligenz~\cite[S. 62-64]{YT25} sowie die Abbildung des Verhaltens von Spielobjekten~\cite[S. 87-104]{Nys14}.
+In der Spieleentwicklung werden endliche Automaten (\textit{Finite State Machines}, \textit{FSM}) in zahlreichen Bereichen verwendet, darunter die Animation~\cite[S. 786-805]{Gre19}, Künstliche Intelligenz~\cite[S. 62-64]{YT25} sowie Abbildung des Verhaltens von Spielobjekten~\cite[S. 87-104]{Nys14}.
 
 In \textit{helios} wurde das Konzept eines endlichen Automaten zur Verwaltung des globalen Anwendungszustands sowie zur Abbildung des Zustands des Regelsystems eines integrierten Spiels implementiert.
 Der \texttt{StateManager} (siehe Abschnitt~\ref{sec:runtime_manager}) ist template-basiert entworfen und nicht an vordefinierte Zustände gebunden.
-Neben den vorimplementierten Zustandstypen \texttt{GameState} (globaler Systemzustand) und \texttt{MatchState} (spielspezifischer Zustand) können weitere spielspezifische Zustände definiert werden.
+Neben den vorimplementierten Zustandstypen \texttt{GameState} (globaler Systemzustand) und \texttt{MatchState} (spielspezifischer Zustand) können weitere individuelle Zustandsgruppen definiert werden.
 
 \subsubsection{Zustandswechsel und Guards}
 
 Die interne Implementierung folgt einem regelbasierten Ansatz~\cite{Har87}.
-Eine Regel wird als Tripel $(\text{From}, \text{TransitionId}, \text{To})$ definiert und beschreibt einen erlaubten Zustandsübergang.
+Eine Regel wird als Tripel $(\texttt{from}, \texttt{transitionId}, \texttt{to})$ definiert und beschreibt einen erlaubten Zustandsübergang.
 Optional kann einer Regel eine \textit{Guard}-Funktion zugeordnet werden, die zur Laufzeit ausgewertet wird und den Übergang nur dann zulässt, wenn die Bedingung erfüllt ist.\footnote{
     Beispielsweise kann über einen Guard verlangt werden, dass nur in den Zustand \texttt{Playing} gewechselt werden kann, wenn der Spielercharakter bereits gespawnt wurde.
 }
@@ -55,18 +55,18 @@ Damit können Tupel aus \texttt{GameState} und \texttt{MatchState} auf eine oder
 \begin{lstlisting}[style=c++style,
     caption={Codeausschnitt aus der \textit{Scoring Demo}. Die Einführung von Automaten in \textit{helios} erlaubt die Konfiguration zustandsspezifischer Anzeigen.},
     label=lst:statemapping]
-    stateToViewportMap
-      .add(GameState::Any, ViewportId{"main"})
-      .add(GameState::Title, ViewportId{"title"})
-      .add(GameState::Paused | GameState::Running,
-           ViewportId{"menu"})
-      .add(MatchState::Playing, ViewportId{"hud"});
+stateToViewportMap
+  .add(GameState::Any, ViewportId{"main"})
+  .add(GameState::Title, ViewportId{"title"})
+  .add(GameState::Paused | GameState::Running,
+       ViewportId{"menu"})
+  .add(MatchState::Playing, ViewportId{"hud"});
 
-    stateToMenuMap
-        .add(GameState::Paused, MatchState::Undefined,
-             MenuId{"main"})
-        .add(GameState::Running, MatchState::GameOver,
-             MenuId{"gameOver"});
+stateToMenuMap
+    .add(GameState::Paused, MatchState::Undefined,
+         MenuId{"main"})
+    .add(GameState::Running, MatchState::GameOver,
+         MenuId{"gameOver"});
 \end{lstlisting}
 \vspace{5mm}
 
@@ -75,4 +75,4 @@ Damit können Tupel aus \texttt{GameState} und \texttt{MatchState} auf eine oder
 Die \texttt{GameLoop} nutzt die Zustandsinformationen, um die Ausführung von \textit{Passes} zu steuern.
 Jedem Pass kann ein bestimmter Zustand zugeordnet werden, sodass Systeme, die ausschließlich im laufenden Spiel relevant sind, nicht aktualisiert werden, wenn sich das Spiel im Titelscreen oder im Pausenzustand befindet.
 Dies vereinfacht den Ausschluss bestimmter Systeme, die in einem Zustand wie beispielsweise ``pausiert'' nicht laufen sollen (Animation, Physik), während die Verarbeitung anderer Systeme (Input, Rendering) weiterhin möglich ist.
-Auf die konkrete Konfiguration wird im folgenden Abschnitt~\ref{sec:runtime_gameloop} näher eingegangen.
+Auf die konkrete Konfiguration wird in Abschnitt~\ref{sec:runtime_gameloop} eingegangen.

@@ -32,6 +32,21 @@ export namespace helios::engine::modules::ui::layout::components {
         std::string format_;
 
         /**
+         * @brief Label displayed instead of "00:00" when remaining time reaches zero.
+         */
+        std::string elapsedLabel_;
+
+        /**
+         * @brief True if an elapsed label has been configured.
+         */
+        bool hasElapsedLabel_ = false;
+
+        /**
+         * @brief True if the output should be empty when remaining time reaches zero.
+         */
+        bool hideWhenZero_ = false;
+
+        /**
          * @brief The active display mode (elapsed or remaining).
          *
          * Declared mutable because format() may fall back to Elapsed when
@@ -65,11 +80,10 @@ export namespace helios::engine::modules::ui::layout::components {
          */
         std::string format(const float elapsed, const float duration = 0) const {
 
-            if (duration == 0) {
-                displayMode_ = TimeDisplayMode::Elapsed;
-            }
+            const auto effectiveDisplayMode = duration == 0 ? TimeDisplayMode::Elapsed : displayMode_;
 
-            switch (displayMode_) {
+
+            switch (effectiveDisplayMode) {
                 case TimeDisplayMode::Elapsed: {
                     const auto minutes = static_cast<unsigned int>(std::max(0.0f, elapsed)) / 60;
                     const auto seconds = static_cast<unsigned int>(std::max(0.0f, elapsed)) % 60;
@@ -77,14 +91,79 @@ export namespace helios::engine::modules::ui::layout::components {
                 }
 
                 case TimeDisplayMode::Remaining: {
+
                     const auto minutes = static_cast<unsigned int>(std::max(0.0f, duration - elapsed)) / 60;
                     const auto seconds = static_cast<unsigned int>(std::max(0.0f, duration - elapsed)) % 60;
+
+                    if (hideWhenZero_ && std::max(0.0f, duration - elapsed) <= 0.0f) {
+                        return "";
+                    }
+
+                    if (hasElapsedLabel_ && std::max(1.0f, duration - elapsed) <= 1.0f) {
+                        return elapsedLabel_;
+                    }
+
+
                     return std::vformat(format_, std::make_format_args(minutes, seconds));
+
                 }
             }
 
             std::unreachable();
         }
+
+        /**
+         * @brief Sets the label shown in place of "00:00" when remaining time reaches zero.
+         *
+         * In Remaining mode, once the remaining time drops to one second or below,
+         * this label is returned by format() instead of the numeric output.
+         * Implicitly enables the elapsed label.
+         *
+         * @param label The label string to display (e.g. "TIME UP").
+         */
+        void setElapsedLabel(std::string label) {
+            elapsedLabel_ = std::move(label);
+            hasElapsedLabel_ = true;
+        }
+
+        /**
+         * @brief Returns the elapsed label.
+         *
+         * @return The configured elapsed label string.
+         */
+        std::string elapsedLabel() {
+            return elapsedLabel_;
+        }
+
+        /**
+         * @brief Returns whether an elapsed label is configured.
+         *
+         * @return True if an elapsed label has been set.
+         */
+        bool hasElapsedLabel() const {
+            return hasElapsedLabel_;
+        }
+
+        /**
+         * @brief Sets whether to hide the output when remaining time reaches zero.
+         *
+         * @param hideWhenZero True to return an empty string at zero remaining time.
+         */
+        void setHideWhenZero(const bool hideWhenZero) noexcept {
+            hideWhenZero_ = hideWhenZero;
+        }
+
+        /**
+         * @brief Returns whether the output is hidden at zero remaining time.
+         *
+         * @return True if hidden when zero.
+         */
+        bool hideWhenZero() const {
+            return hideWhenZero_;
+        }
+
+
+
     };
 
 

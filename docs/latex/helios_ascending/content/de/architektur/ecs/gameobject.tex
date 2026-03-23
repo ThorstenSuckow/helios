@@ -41,25 +41,25 @@ Daraus ergibt sich eine Größe von 16 Byte\footnote{
 Systeme können häufig benötigte Funktionalitäten direkt über das \texttt{GameObject} aufrufen, ohne den Umweg über die \texttt{GameWorld} und den von ihr verwalteten \texttt{EntityManager} nehmen zu müssen.\footnote{
     Ein verwandtes Architekturmuster aus anderen Domänen ist die \textit{Session Facade}~\cite[S. 341-356]{ACM03}, die als Schnittstelle zwischen einem Client und einer Subsystemstruktur fungiert, um Interaktionen zu vereinfachen und zu zentralisieren.
 }
-Dies erlaubt nicht nur die Abfrage, ob ein Komponententyp $\mathcal{A}$ für die Entität definiert wurde, sondern auch das einfache Hinzufügen bzw. Entfernen von Komponenten.\\
+Dies erlaubt nicht nur die Abfrage, ob ein Komponententyp $\mathcal{T}$ für die Entität definiert wurde, sondern auch das einfache Hinzufügen bzw. Entfernen von Komponenten.\\
 
 Darüber hinaus bietet die Fassade folgende Funktionen:
 
 \begin{itemize}
     \itemsep0.5em
-    \item \texttt{setActive}/\texttt{isActive}: Aktivieren und Deaktivieren eines \texttt{GameObject}s.
+    \item \texttt{setActive}/\texttt{isActive}: Aktivieren und Deaktivieren eines \textit{GameObjects}.
     Beim Deaktivieren wird die \texttt{Active}-Tag-Komponente durch eine \texttt{Inactive}-Tag-Komponente ersetzt (und umgekehrt); vorhandene Hooks der Komponenten werden aufgerufen (siehe Abschnitt~\ref{sec:components}).
-    \texttt{GameObject}s, die zusammen mit anderen eine Hierarchie bilden, werden über die \texttt{HierarchyComponent} als \textit{dirty} markiert, damit ein entsprechendes System (\texttt{HierarchyPropagationSystem}) den Aktivierungszustand an alle Nachfahren propagieren kann.
-    \item \texttt{onAcquire()}/\texttt{onRelease()}: Ermöglicht eine einfache Integration mit dem \textit{GameObject Pooling} (siehe Abschnitt~\ref{sec:runtime_manager}).
+    \textit{GameObjects}, die zusammen mit anderen eine Hierarchie bilden, werden über die \texttt{HierarchyComponent} als \textit{dirty} markiert, damit ein entsprechendes System (\texttt{HierarchyPropagationSystem}) den Aktivierungszustand an alle Nachfahren propagieren kann.
+    \item \texttt{onAcquire}/\texttt{onRelease}: Ermöglicht eine einfache Integration mit dem \textit{GameObject Pooling} (siehe Abschnitt~\ref{sec:runtime_manager}).
     Der \texttt{GameObjectPoolManager} ruft die jeweilige Methode beim Entnehmen bzw. Zurücklegen eines Objekts auf; intern erfolgt dann der Aufruf der entsprechenden Hooks, falls implementiert.
 \end{itemize}
 
 \vspace{5mm}
 \begin{tcolorbox}[title={\texttt{HierarchyComponent}: Hierarchische GameObjects}, colback=black!5, colframe=black]
     Die \texttt{HierarchyComponent} wurde mit dem in Meilenstein 5 benötigten UI-System eingeführt.
-    Die Komponente erlaubt eine vom Szenegraphen unabhängige hierarchische Anordnung von \texttt{GameObject}s.
+    Die Komponente erlaubt eine vom Szenegraphen unabhängige hierarchische Anordnung von \textit{GameObjects}.
     Dadurch kann innerhalb eines Frames auf bereits aktualisierte Daten von Eltern-Entitäten zugegriffen werden, beispielsweise zur Berechnung von Positionsdaten relativ zur Positionierung eines Elternelements.
 \end{tcolorbox}
 \vspace{5mm}
 
-Weitere Funktionen sind unter anderem \texttt{enable()}/\texttt{disable()}, um gezielt Komponenten - basierend auf ihren \texttt{TypeId}s - zu aktivieren bzw. zu deaktivieren.
+Weitere Funktionen sind unter anderem \texttt{enable}/\texttt{disable}, um gezielt Komponenten - basierend auf ihren \texttt{TypeId}s - zu aktivieren bzw. zu deaktivieren.

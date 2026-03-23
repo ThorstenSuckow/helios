@@ -22,9 +22,6 @@ import helios.engine.runtime.world.GameWorld;
 
 import helios.engine.mechanics.lifecycle.components;
 
-import helios.engine.modules.physics.collision.events.TriggerCollisionEvent;
-import helios.engine.modules.physics.collision.events.SolidCollisionEvent;
-
 import helios.engine.modules.physics.collision.components.CollisionComponent;
 import helios.engine.modules.physics.collision.components.CollisionStateComponent;
 import helios.engine.modules.physics.collision.components.AabbColliderComponent;
@@ -40,7 +37,6 @@ import helios.math;
 import helios.util.log;
 
 using namespace helios::engine::modules::physics::collision::components;
-using namespace helios::engine::modules::physics::collision::events;
 using namespace helios::engine::mechanics::lifecycle::components;
 
 #define HELIOS_LOG_SCOPE "helios::engine::modules::physics::systems::GridCollisionDetectionSystem"
@@ -66,7 +62,7 @@ export namespace helios::engine::modules::physics::collision::systems {
      *
      * ## Collision Types
      *
-     * Collision events are published to the `UpdateContext`'s event sink, distinguishing between:
+     * Collision state is updated in the `CollisionStateComponent`, distinguishing between:
      * - **Solid collisions:** Symmetric collisions where both entities can physically interact.
      * - **Trigger collisions:** Asymmetric collisions for gameplay logic (e.g., pickups, zones).
      *
@@ -85,8 +81,6 @@ export namespace helios::engine::modules::physics::collision::systems {
      *
      * @see CollisionComponent
      * @see AabbColliderComponent
-     * @see TriggerCollisionEvent
-     * @see SolidCollisionEvent
      * @see HitPolicy
      *
      * @see [Eri05, Chapter 7]
@@ -281,11 +275,10 @@ export namespace helios::engine::modules::physics::collision::systems {
         }
 
         /**
-         * @brief Posts collision events to the UpdateContext's event sink.
+         * @brief Updates the CollisionStateComponent for interacting entities.
          *
          * @details Updates the CollisionStateComponent of both entities with collision
          * information including contact point, collision type, behavior, and reporter status.
-         * An entity marked as collision reporter receives the event as the "source" entity.
          *
          * @param candidate First collision candidate (potential event source).
          * @param match Second collision candidate (collision partner).
@@ -433,7 +426,7 @@ export namespace helios::engine::modules::physics::collision::systems {
          * 2. Iterates all active GameObjects with CollisionComponent and AabbColliderComponent.
          * 3. Inserts each entity into all grid cells its AABB overlaps.
          * 4. For each cell with multiple candidates, runs narrow-phase AABB intersection tests.
-         * 5. Publishes collision events (TriggerCollisionEvent, SolidCollisionEvent) to the event queue.
+         * 5. Updates collision state components for detected collisions.
          *
          * @param updateContext The update context providing access to GameWorld and event queue.
          */

@@ -100,6 +100,23 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          */
         bool displayRemaining_;
 
+        /**
+         * @brief Label displayed instead of "00:00" when remaining time reaches zero.
+         */
+        std::string elapsedLabel_;
+
+        /**
+         * @brief True if an elapsed label has been configured.
+         */
+        bool showElapsedLabel_ = false;
+
+        /**
+         * @brief True if the output should be empty when remaining time reaches zero.
+         */
+        bool hideWhenZero_ = false;
+
+
+
     public:
 
         /**
@@ -226,6 +243,36 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         }
 
         /**
+         * @brief Sets the label shown instead of "00:00" when remaining time reaches zero.
+         *
+         * Only effective in Remaining mode. Once the remaining time drops to
+         * one second or below, format() returns this label instead of the
+         * numeric output.
+         *
+         * @param label The label string to display (e.g. "TIME UP").
+         *
+         * @return Reference to this config for method chaining.
+         */
+        TextRenderableConfig& useElapsedLabel(std::string label) {
+            elapsedLabel_ = std::move(label);
+            showElapsedLabel_ = true;
+            return *this;
+        }
+
+        /**
+         * @brief Hides the time output when remaining time reaches zero.
+         *
+         * Only effective in Remaining mode. When enabled, format() returns
+         * an empty string once the remaining time is exhausted.
+         *
+         * @return Reference to this config for method chaining.
+         */
+        TextRenderableConfig& hideWhenZero() {
+            hideWhenZero_ = true;
+            return *this;
+        }
+
+        /**
          * @brief Switches the time formatter to display remaining time.
          *
          * Only effective when formattedAsTimestamp() has been called.
@@ -309,12 +356,16 @@ export namespace helios::engine::builder::gameObject::builders::configs {
             }
 
             if (usesTimeFormatter_) {
-                gameObject_.add<helios::engine::modules::ui::layout::components::TimeFormatterComponent>()
-                            .setFormat(
-                                timestampFormat_,
-                                displayRemaining_ ? modules::ui::layout::types::TimeDisplayMode::Remaining
-                                                  : modules::ui::layout::types::TimeDisplayMode::Elapsed
-                            );
+                auto& tfc = gameObject_.add<helios::engine::modules::ui::layout::components::TimeFormatterComponent>();
+                tfc.setFormat(
+                    timestampFormat_,
+                    displayRemaining_ ? modules::ui::layout::types::TimeDisplayMode::Remaining
+                                      : modules::ui::layout::types::TimeDisplayMode::Elapsed
+                );
+                if (showElapsedLabel_) {
+                    tfc.setElapsedLabel(elapsedLabel_);
+                }
+                tfc.setHideWhenZero(hideWhenZero_);
                 usesTimeFormatter_ = false;
             }
 

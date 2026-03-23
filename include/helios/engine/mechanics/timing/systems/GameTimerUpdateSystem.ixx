@@ -12,17 +12,23 @@ export module helios.engine.mechanics.timing.systems.GameTimerUpdateSystem;
 import helios.engine.mechanics.timing.GameTimer;
 import helios.engine.mechanics.timing.TimerManager;
 
+import helios.engine.state.Bindings;
+import helios.engine.runtime.messaging.command.EngineCommandBuffer;
+
 import helios.engine.runtime.world.UpdateContext;
 
-
+import helios.engine.common.tags.SystemRole;
 import helios.engine.runtime.world.GameWorld;
 
 import helios.engine.mechanics.lifecycle.components.Active;
 import helios.engine.mechanics.timing.components;
+import helios.engine.mechanics.timing.types;
+import helios.engine.mechanics.timing.commands;
 
 using namespace helios::engine::mechanics::timing;
 
-import helios.engine.common.tags.SystemRole;
+using namespace helios::engine::mechanics::timing::types;
+using namespace helios::engine::mechanics::timing::commands;
 
 export namespace helios::engine::mechanics::timing::systems {
 
@@ -46,6 +52,8 @@ export namespace helios::engine::mechanics::timing::systems {
 
 
         using EngineRoleTag = helios::engine::common::tags::SystemRole;
+
+
         /**
          * @brief Constructs the system with a reference to the TimerManager.
          *
@@ -62,9 +70,16 @@ export namespace helios::engine::mechanics::timing::systems {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto& gameTimer : timerManager_.gameTimers()) {
-                gameTimer.update(updateContext.deltaTime());
-            }
+                if (gameTimer.state() == TimerState::Started) {
 
+                    gameTimer.update(updateContext.deltaTime());
+
+                    if (gameTimer.duration() != 0.0f && gameTimer.elapsed() >= gameTimer.duration()) {
+                        auto context = TimerControlContext{TimerState::Finished, gameTimer.gameTimerId()};
+                        updateContext.queueCommand<TimerControlCommand>(context);
+                    }
+                }
+            }
         }
 
     };

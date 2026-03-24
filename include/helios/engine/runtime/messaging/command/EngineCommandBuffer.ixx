@@ -69,7 +69,7 @@ export namespace helios::engine::runtime::messaging::command {
      * | Motion | `Move2DCommand`, `SteeringCommand` |
      * | Scoring | `UpdateScoreCommand` |
      * | Spawn | `ScheduledSpawnPlanCommand`, `SpawnCommand`, `DespawnCommand` |
-     * | State | `StateCommand<GameState>`, `StateCommand<MatchState>` |
+     * | State | `StateCommand<GameState>`, `DelayedStateCommand<GameState>`, `StateCommand<MatchState>`, `DelayedStateCommand<MatchState>` |
      * | UI | `UiActionCommand` |
      * | Timing | `TimerControlCommand` |
      * | Lifecycle | `WorldLifecycleCommand` |

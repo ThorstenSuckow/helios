@@ -16,6 +16,7 @@ import helios.engine.state.Bindings;
 import helios.engine.runtime.messaging.command;
 
 import helios.engine.mechanics.lifecycle;
+import helios.engine.mechanics.timing;
 import helios.engine.mechanics.gamestate;
 import helios.engine.mechanics.match;
 
@@ -109,16 +110,17 @@ export namespace helios::engine::bootstrap {
         auto gameLoop = std::make_unique<helios::engine::runtime::gameloop::GameLoop>();
         auto gameWorld = std::make_unique<helios::engine::runtime::world::GameWorld>();
 
-        gameWorld->registerCommandBuffer<helios::engine::runtime::messaging::command::EngineCommandBuffer>();
-
         gameWorld->registerManager<helios::engine::mechanics::lifecycle::WorldLifecycleManager>();
         gameWorld->registerManager<helios::engine::mechanics::gamestate::GameStateManager>(
         helios::engine::mechanics::gamestate::rules::DefaultGameStateTransitionRules::rules());
         gameWorld->registerManager<helios::engine::mechanics::match::MatchStateManager>(
             helios::engine::mechanics::match::rules::DefaultMatchStateTransitionRules::rules());
+        gameWorld->registerManager<helios::engine::mechanics::timing::TimerManager>();
 
         gameWorld->session().trackState<helios::engine::mechanics::gamestate::types::GameState>();
         gameWorld->session().trackState<helios::engine::mechanics::match::types::MatchState>();
+
+        gameWorld->registerCommandBuffer<helios::engine::runtime::messaging::command::EngineCommandBuffer>();
 
         return std::make_pair(std::move(gameWorld), std::move(gameLoop));
     }

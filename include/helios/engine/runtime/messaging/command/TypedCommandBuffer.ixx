@@ -241,7 +241,7 @@ export namespace helios::engine::runtime::messaging::command {
 
                            if (shouldDelayCommand(gameTimer->state())) {
                                delayed.push_back(std::move(cmd));
-                           } else if (isDelayedCommandRead(gameTimer->state())) {
+                           } else if (isDelayedCommandReady(gameTimer->state())) {
                                cmd.execute(updateContext);
                            }
                        } else {

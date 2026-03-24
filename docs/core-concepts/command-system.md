@@ -4,7 +4,7 @@ This document describes the Command pattern implementation in helios, including 
 
 ## Overview
 
-The Command System provides a mechanism for **deferred action execution**. Instead of immediately modifying game state, actions are encapsulated as lightweight command structs, buffered in compile-time typed queues, and executed in a controlled batch during the game loop. This decouples input handling from action processing and enables deterministic, reproducible game logic.
+The Command System provides a mechanism for **deferred action execution**. Instead of immediately modifying game state, actions are encapsulated as lightweight command structs, buffered in compile-time typed queues, and executed in a controlled batch during the game loop. This decouples input handling from action processing and enables deterministic, reproducible game logic. Commands can also be **timer-gated** — held in a scratch queue until an associated `GameTimer` finishes — enabling deferred transitions without polling.
 
 ```
 ┌─────────────────┐     ┌──────────────────────┐     ┌─────────────────┐
@@ -52,6 +52,48 @@ struct StateCommand {
 };
 ```
 
+### Timer-Gated Commands (DelayedCommandLike)
+
+Commands that satisfy the `DelayedCommandLike` concept carry a `GameTimerId` and are held in a scratch queue until their associated timer finishes. This enables timer-deferred actions without polling in systems.
+
+```cpp
+template<typename StateType>
+class DelayedStateCommand {
+    StateTransitionRequest<StateType> transitionRequest_;
+    GameTimerId timerId_;
+
+public:
+    explicit DelayedStateCommand(
+        StateTransitionRequest<StateType> transitionRequest,
+        GameTimerId timerId
+    );
+
+    [[nodiscard]] StateTransitionRequest<StateType> transitionRequest() const noexcept;
+    [[nodiscard]] GameTimerId gameTimerId() const noexcept;  // required by DelayedCommandLike
+};
+```
+
+During flush, the `TypedCommandBuffer` checks each delayed command's timer state:
+
+| Timer State | Action |
+|-------------|--------|
+| Running | Command is moved to a scratch queue and survives the flush cycle |
+| Finished | Command is dispatched normally (handler or self-execute) |
+| Undefined | Command is silently dropped (timer was removed) |
+
+Usage example:
+
+```cpp
+// Schedule a state transition gated by a countdown timer
+ctx.queueCommand<DelayedStateCommand<MatchState>>(
+    StateTransitionRequest<MatchState>{
+        MatchState::Countdown,
+        MatchStateTransitionId::CountdownComplete
+    },
+    GameTimerId::CountdownTimer
+);
+```
+
 ## TypedCommandBuffer
 
 `TypedCommandBuffer<...CommandTypes>` is the core of the system. It stores commands in a `std::tuple<std::vector<CommandType>...>`, providing one contiguous queue per command type.
@@ -72,32 +114,42 @@ During `flush()`, each command type is processed in template parameter order:
 2. **Direct execution:** Otherwise, if the command satisfies `ExecutableCommand`, it executes itself
 3. **Assertion:** If neither applies, an assertion fires (misconfiguration)
 
+In both branches, if `Cmd` satisfies `DelayedCommandLike`, each command undergoes an additional timer check before dispatch (see [Timer-Gated Commands](#timer-gated-commands-delayedcommandlike) above).
+
 ```cpp
 // Pseudocode for flush routing (per command type):
 if (registry.has<Cmd>()) {
-    auto& handlerRef = registry.tryHandler<Cmd>();
     for (auto& cmd : queue) {
-        handlerRef.submit(cmd);
+        if constexpr (DelayedCommandLike<Cmd>) {
+            auto* timer = timerManager.gameTimer(cmd.gameTimerId());
+            if (shouldDelay(timer))   { delayed.push_back(cmd); continue; }
+            if (!isReady(timer))      { continue; } // drop
+        }
+        registry.submit<Cmd>(cmd);
     }
 } else if constexpr (ExecutableCommand<Cmd>) {
     for (auto& cmd : queue) {
+        // same DelayedCommandLike check as above …
         cmd.execute(updateContext);
     }
 }
 queue.clear();
+queue.swap(delayed);   // surviving delayed commands become the new queue
+delayed.clear();
 ```
 
 ### Deterministic Ordering
 
 Commands are flushed in the order of the template parameter list. The `EngineCommandBuffer` defines this order:
 
-1. Combat commands (Aim2D, Shoot)
+1. Combat commands (Aim2D, Shoot, ApplyDamage)
 2. Motion commands (Move2D, Steering)
 3. Scoring commands (UpdateScore)
 4. Spawn commands (ScheduledSpawnPlan, Spawn, Despawn)
-5. State commands (GameState, MatchState)
+5. State commands (StateCommand\<GameState\>, DelayedStateCommand\<GameState\>, StateCommand\<MatchState\>, DelayedStateCommand\<MatchState\>)
 6. UI commands (UiAction)
 7. Timing commands (TimerControl)
+8. Lifecycle commands (WorldLifecycle)
 
 ## Command Handlers
 
@@ -147,7 +199,8 @@ class EngineCommandBuffer {
         Move2DCommand, SteeringCommand,
         UpdateScoreCommand,
         ScheduledSpawnPlanCommand, SpawnCommand, DespawnCommand,
-        StateCommand<GameState>, StateCommand<MatchState>,
+        StateCommand<GameState>, DelayedStateCommand<GameState>,
+        StateCommand<MatchState>, DelayedStateCommand<MatchState>,
         UiActionCommand,
         TimerControlCommand,
         WorldLifecycleCommand

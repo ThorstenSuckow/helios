@@ -77,7 +77,7 @@ export namespace helios::engine::mechanics::timing {
          */
         void reset(const TimerState state = TimerState::Undefined) noexcept {
             elapsed_ = 0.0f;
-            timerState_ = state;
+            setState(state);
         }
 
         /**

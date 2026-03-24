@@ -72,10 +72,12 @@ export namespace helios::engine::mechanics::timing {
 
         /**
          * @brief Resets the elapsed time to zero and sets timer state to Undefined.
+         *
+         * @param state The new TimerState the timer should be resetted to.
          */
-        void reset() noexcept {
+        void reset(const TimerState state = TimerState::Undefined) noexcept {
             elapsed_ = 0.0f;
-            timerState_ = TimerState::Undefined;
+            timerState_ = state;
         }
 
         /**

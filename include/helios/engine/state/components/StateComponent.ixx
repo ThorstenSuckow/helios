@@ -29,6 +29,11 @@ export namespace helios::engine::state::components {
         using StateTransitionIdType = helios::engine::state::types::StateTransitionIdType<StateType>;
 
         /**
+         * @brief The state that was transitioned from.
+         */
+        StateType from_ = StateType::Undefined;
+
+        /**
          * @brief The last transition that occurred.
          */
         StateTransitionIdType transitionId_ = StateTransitionIdType::Undefined;
@@ -36,7 +41,7 @@ export namespace helios::engine::state::components {
         /**
          * @brief The current state.
          */
-        StateType state_;
+        StateType state_ = StateType::Undefined;
 
     public:
 
@@ -50,11 +55,21 @@ export namespace helios::engine::state::components {
         }
 
         /**
+         * @brief Returns the source state of the last transition.
+         *
+         * @return The state that was transitioned from.
+         */
+        StateType from() const noexcept {
+            return from_;
+        }
+
+        /**
          * @brief Updates state from a transition context.
          *
          * @param stateTransitionContext The completed transition context.
          */
         void setStateFromTransitionContext(const helios::engine::state::types::StateTransitionContext<StateType> stateTransitionContext) noexcept {
+            from_         = stateTransitionContext.from();
             state_        = stateTransitionContext.to();
             transitionId_ = stateTransitionContext.transitionId();
         }

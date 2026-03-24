@@ -272,6 +272,19 @@ export namespace helios::engine::modules::physics::motion::components {
         }
 
         /**
+         * Resets this component to its default values.
+         */
+        void reset() noexcept {
+            currentRotationAngle_ = 0.0f;
+            targetRotationAngle_ = 0.0f;
+            rotationAngleDelta_ = 0.0f;
+            currentRotationSpeed_ = 0.0f;
+            stateChanged_ = true;
+            turnIntensity_ = 0.0f;
+            steeringInput_ = {0.0f, 0.0f, 0.0f};
+        }
+
+        /**
          * @brief Sets the current rotation speed.
          *
          * @param speed The new rotation speed.

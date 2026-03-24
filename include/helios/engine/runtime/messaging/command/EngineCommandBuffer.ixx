@@ -69,7 +69,7 @@ export namespace helios::engine::runtime::messaging::command {
      * | Motion | `Move2DCommand`, `SteeringCommand` |
      * | Scoring | `UpdateScoreCommand` |
      * | Spawn | `ScheduledSpawnPlanCommand`, `SpawnCommand`, `DespawnCommand` |
-     * | State | `StateCommand<GameState>`, `StateCommand<MatchState>` |
+     * | State | `StateCommand<GameState>`, `DelayedStateCommand<GameState>`, `StateCommand<MatchState>`, `DelayedStateCommand<MatchState>` |
      * | UI | `UiActionCommand` |
      * | Timing | `TimerControlCommand` |
      * | Lifecycle | `WorldLifecycleCommand` |
@@ -98,7 +98,9 @@ export namespace helios::engine::runtime::messaging::command {
             helios::engine::runtime::spawn::commands::SpawnCommand,
             helios::engine::runtime::spawn::commands::DespawnCommand,
             helios::engine::state::commands::StateCommand<helios::engine::mechanics::gamestate::types::GameState>,
+            helios::engine::state::commands::DelayedStateCommand<helios::engine::mechanics::gamestate::types::GameState>,
             helios::engine::state::commands::StateCommand<helios::engine::mechanics::match::types::MatchState>,
+            helios::engine::state::commands::DelayedStateCommand<helios::engine::mechanics::match::types::MatchState>,
             helios::engine::modules::ui::widgets::commands::UiActionCommand,
             helios::engine::mechanics::timing::commands::TimerControlCommand,
             helios::engine::mechanics::lifecycle::commands::WorldLifecycleCommand

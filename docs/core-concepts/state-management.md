@@ -11,7 +11,11 @@ The state management system uses a common architectural pattern for all state ty
 | `StateManager<StateType>` | Rule-based state machine with listener support |
 | `StateTransitionRule<StateType>` | Defines valid transitions with optional guards |
 | `StateTransitionListener<StateType>` | Interface for transition observers |
-| `StateCommand<StateType>` | Command for requesting transitions |
+| `LambdaStateListener<StateType>` | Lambda-based listener implementation |
+| `StateCommand<StateType>` | Command for requesting immediate transitions |
+| `DelayedStateCommand<StateType>` | Command for timer-deferred transitions |
+| `StateTransitionRequest<StateType>` | Encapsulates source state and transition ID |
+| `StateTransitionContext<StateType>` | Full context (from, to, transitionId) passed to listeners |
 | `StateComponent<StateType>` | Stores current state on entities |
 
 ### Example State Configurations
@@ -138,15 +142,18 @@ struct helios::engine::state::types::StateTransitionId<MatchState> {
 
 When a state transition is requested:
 
-1. `StateCommand<T>` is submitted to the command buffer
+1. `StateCommand<T>` (or `DelayedStateCommand<T>`) is submitted to the command buffer
 2. The command is routed to the registered `StateManager<T>` (via `CommandHandlerRegistry`)
-3. During `flush()`, the manager processes pending commands
-4. Matching rule is found and guard is evaluated (if present)
-5. Listeners are notified in order:
-   - `onStateExit(from)`
-   - `onStateTransition(context)`
-   - `onStateEnter(to)`
-6. Session state is updated via `StateComponent<T>`
+3. During `flush()`, the manager processes the **last** pending command (all earlier commands are discarded)
+4. The command's `from` state is validated against the current session state — if they differ, the command is dropped
+5. A matching rule is found and the guard is evaluated (if present)
+6. Listeners are notified and session state is updated in the following order:
+   - `onStateExit(from)` — listeners react to leaving the current state
+   - `onStateTransition(context)` — listeners observe the transition
+   - **Session state is updated** via `StateComponent<T>`
+   - `onStateEnter(to)` — listeners react to entering the new state (session already reflects the new state)
+
+> **Note:** Because the session state is updated *before* `onStateEnter`, listeners in the enter callback can read the new state from the session and issue further commands that reference it.
 
 ## Transition Rules
 
@@ -226,6 +233,43 @@ auto listener = std::make_unique<LambdaStateListener<GameState>>(
 stateManager->addStateListener(std::move(listener));
 ```
 
+## Delayed State Commands
+
+`DelayedStateCommand<StateType>` schedules a state transition that is triggered by a `GameTimerId`. When the timer expires, the command is submitted to the `StateManager` as a regular `StateCommand`:
+
+```cpp
+using namespace helios::engine::state::commands;
+using namespace helios::engine::mechanics::timing::types;
+
+// Schedule a transition when a timer expires
+updateContext.queueCommand<DelayedStateCommand<MatchState>>(
+    StateTransitionRequest<MatchState>{
+        MatchState::Countdown,
+        MatchStateTransitionId::CountdownComplete
+    },
+    GameTimerId::CountdownTimer
+);
+```
+
+Internally, the `StateManager` converts a `DelayedStateCommand` into a `StateCommand` on submission, extracting only the `StateTransitionRequest`.
+
+## Manager Lifecycle
+
+### Initialization
+
+`StateManager::init()` is called during setup and registers the manager as a command handler for both `StateCommand<StateType>` and `DelayedStateCommand<StateType>` with the `GameWorld`:
+
+```cpp
+void init(GameWorld& gameWorld) {
+    gameWorld.registerCommandHandler<StateCommand<StateType>>(*this);
+    gameWorld.registerCommandHandler<DelayedStateCommand<StateType>>(*this);
+}
+```
+
+### Reset Behavior
+
+`StateManager::reset()` is intentionally a no-op. Clearing the pending queue during a reset would discard state transitions that are required *by* the reset itself (e.g., transitioning back to a warmup state after a game-over reset).
+
 ## Usage Example
 
 ### Creating State Managers
@@ -244,7 +288,12 @@ auto& matchStateManager = gameWorld.registerManager<StateManager<MatchState>>(ma
 
 // Add listeners
 gameStateManager.addStateListener(std::make_unique<LambdaStateListener<GameState>>(
-    /* callbacks */
+    // onExit
+    [](auto& ctx, GameState from) { /* ... */ },
+    // onTransition
+    [](auto& ctx, auto transitionCtx) { /* ... */ },
+    // onEnter
+    [](auto& ctx, GameState to) { /* ... */ }
 ));
 ```
 

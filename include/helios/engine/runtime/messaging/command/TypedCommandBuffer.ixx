@@ -18,7 +18,15 @@ import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.runtime.messaging.command.CommandBuffer;
 
+import helios.engine.state.commands.DelayedStateCommand;
+
+import helios.engine.mechanics.timing.TimerManager;
+import helios.engine.mechanics.timing.types;
+
 using namespace helios::engine::runtime::world;
+using namespace helios::engine::state::commands;
+using namespace helios::engine::mechanics::timing;
+using namespace helios::engine::mechanics::timing::types;
 
 export namespace helios::engine::runtime::messaging::command {
 
@@ -36,6 +44,20 @@ export namespace helios::engine::runtime::messaging::command {
         {c.execute(updateContext) } noexcept;
     };
 
+    /**
+     * @brief Concept constraining commands that carry a timer gate.
+     *
+     * @details A command satisfies DelayedCommandLike if it provides a
+     * noexcept `gameTimerId()` accessor returning a GameTimerId. Such
+     * commands are held in a scratch queue until their associated timer
+     * reaches `TimerState::Finished`.
+     *
+     * @tparam Cmd The command type to check.
+     */
+    template<typename Cmd>
+    concept DelayedCommandLike = requires(Cmd const& c) {
+            {c.gameTimerId() } noexcept;
+    };
 
     /**
      * @brief Compile-time typed command buffer with per-type queues and handler routing.
@@ -74,6 +96,15 @@ export namespace helios::engine::runtime::messaging::command {
         std::tuple<std::vector<CommandTypes>...> commandQueues_;
 
         /**
+         * @brief Scratch queues for timer-gated commands surviving a flush cycle.
+         *
+         * @details Commands satisfying DelayedCommandLike whose timer has
+         * not yet finished are moved here during flush and swapped back
+         * into the primary queues afterwards.
+         */
+        std::tuple<std::vector<CommandTypes>...> delayedQueues_;
+
+        /**
          * @brief Returns the queue for a specific command type.
          *
          * @tparam CommandType The command type.
@@ -86,21 +117,88 @@ export namespace helios::engine::runtime::messaging::command {
         }
 
         /**
+         * @brief Returns the delayed scratch queue for a specific command type.
+         *
+         * @tparam CommandType The command type.
+         *
+         * @return Reference to the delayed scratch queue.
+         */
+        template<typename CommandType>
+        std::vector<CommandType>& delayedQueue() noexcept {
+            return std::get<std::vector<CommandType>>(delayedQueues_);
+        }
+
+        /**
+         * @brief Determines whether a delayed command should be deferred.
+         *
+         * @details Returns true when the timer is still running - i.e. its
+         * state is neither Finished nor Undefined.
+         *
+         * @param state The current timer state.
+         *
+         * @return True if the command must remain in the scratch queue.
+         */
+        [[nodiscard]] bool shouldDelayCommand(const TimerState state) const noexcept {
+            return state != TimerState::Finished && state != TimerState::Undefined;
+        }
+
+        /**
+         * @brief Determines whether a delayed command is ready for dispatch.
+         *
+         * @param state The current timer state.
+         *
+         * @return True if the associated timer has finished.
+         */
+        [[nodiscard]] bool isDelayedCommandReady(const TimerState state) const noexcept {
+            return state == TimerState::Finished;
+        }
+
+        /**
          * @brief Flushes a single command queue.
          *
-         * @details Routes each command to its registered handler, or
-         * executes it directly if no handler is registered and the
-         * command satisfies ExecutableCommand.
+         * @details Processing follows two branches depending on whether a
+         * handler is registered for `CommandType`:
+         *
+         * **Handler registered** (`CommandHandlerRegistry::has<CommandType>()`):
+         * - Each command is forwarded via `commandHandlerRegistry.submit<CommandType>(cmd)`.
+         *
+         * **No handler registered** (fallback):
+         * - The command must satisfy `ExecutableCommand`; otherwise an
+         *   assertion fires at runtime.
+         * - Each command is dispatched via `cmd.execute(updateContext)`.
+         *
+         * In both branches, if `CommandType` satisfies `DelayedCommandLike`,
+         * an additional timer check is performed per command:
+         *
+         * 1. The associated `GameTimer` is looked up via the command's
+         *    `gameTimerId()`.
+         * 2. If the timer is still running (`shouldDelayCommand` returns
+         *    true), the command is moved into the scratch queue and
+         *    survives the current flush cycle.
+         * 3. If the timer has finished (`isDelayedCommandReady` returns
+         *    true), the command is dispatched normally.
+         * 4. If the timer state is `Undefined` (e.g. timer was removed),
+         *    the command is silently dropped.
+         *
+         * After all commands have been processed the primary queue is
+         * cleared, the scratch queue contents are swapped back in as
+         * the new primary queue, and the scratch queue is cleared.
          *
          * @tparam CommandType The command type to flush.
          *
-         * @param gameWorld The game world for which the queue should be flushed.
+         * @param gameWorld The game world providing the CommandHandlerRegistry
+         *                  and TimerManager.
          * @param updateContext The current frame's update context.
          */
         template<typename CommandType>
         void flushCommandQueue(GameWorld& gameWorld, UpdateContext& updateContext) noexcept {
 
+            auto& timerManager = gameWorld.manager<TimerManager>();
+
             auto& queue = commandQueue<CommandType>();
+            auto& delayed = delayedQueue<CommandType>();
+            delayed.clear();
+
             if (queue.empty()) {
                 return;
             }
@@ -108,14 +206,50 @@ export namespace helios::engine::runtime::messaging::command {
             auto& commandHandlerRegistry = gameWorld.commandHandlerRegistry();
 
             if (commandHandlerRegistry.has<CommandType>()) {
+
                 for (auto& cmd : queue) {
-                    commandHandlerRegistry.submit<CommandType>(cmd);
+                    if constexpr (DelayedCommandLike<CommandType>)  {
+                        auto* gameTimer = timerManager.gameTimer(cmd.gameTimerId());
+                        if (!gameTimer) {
+                            assert(gameTimer && "Unexpected null game timer");
+                            commandHandlerRegistry.submit<CommandType>(cmd);
+                            continue;
+                        }
+
+                        if (shouldDelayCommand(gameTimer->state())) {
+                            delayed.push_back(std::move(cmd));
+                        } else if (isDelayedCommandReady(gameTimer->state())) {
+                            commandHandlerRegistry.submit<CommandType>(cmd);
+                        }
+                    } else {
+                        commandHandlerRegistry.submit<CommandType>(cmd);
+                    }
                 }
+
+
             } else {
                if constexpr (ExecutableCommand<CommandType>) {
+
                    for (auto& cmd : queue) {
-                       cmd.execute(updateContext);
+                      if constexpr (DelayedCommandLike<CommandType>)  {
+                           auto* gameTimer = timerManager.gameTimer(cmd.gameTimerId());
+                           if (!gameTimer) {
+                               assert(gameTimer && "Unexpected null game timer");
+                               cmd.execute(updateContext);
+                               continue;
+                           }
+
+                           if (shouldDelayCommand(gameTimer->state())) {
+                               delayed.push_back(std::move(cmd));
+                           } else if (isDelayedCommandReady(gameTimer->state())) {
+                               cmd.execute(updateContext);
+                           }
+                       } else {
+                           cmd.execute(updateContext);
+                       }
+
                    }
+
                } else {
                    assert(false &&  "Command type is not executable");
                }
@@ -123,6 +257,8 @@ export namespace helios::engine::runtime::messaging::command {
             }
 
             queue.clear();
+            queue.swap(delayed);
+            delayed.clear();
         }
 
     public:

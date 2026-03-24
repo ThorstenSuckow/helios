@@ -148,18 +148,6 @@ export namespace helios::engine::modules::physics::motion::components {
          */
         bool isEnabled_ = true;
 
-        /**
-         * @brief Resets this component's properties to default values.
-         */
-        void reset() {
-            currentMovementSpeed_ = 0.0f;
-            stateChanged_ = true;
-            throttle_ = 0.0f;
-            direction_ = {};
-            velocity_ = {};
-            inheritedVelocity_ = {};
-        }
-
     public:
 
         /**
@@ -269,6 +257,18 @@ export namespace helios::engine::modules::physics::motion::components {
             stateChanged_ = true;
 
             currentMovementSpeed_ = movementSpeed_ * throttle_;
+        }
+
+        /**
+         * @brief Resets this component's properties to default values.
+         */
+        void reset() {
+            currentMovementSpeed_ = 0.0f;
+            stateChanged_ = true;
+            throttle_ = 0.0f;
+            direction_ = {};
+            velocity_ = {};
+            inheritedVelocity_ = {};
         }
 
         /**

@@ -4,8 +4,6 @@
  */
 module;
 
-#include <span>
-
 
 export module helios.engine.mechanics.timing.systems.GameTimerUpdateSystem;
 
@@ -18,10 +16,7 @@ import helios.engine.runtime.messaging.command.EngineCommandBuffer;
 import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.common.tags.SystemRole;
-import helios.engine.runtime.world.GameWorld;
 
-import helios.engine.mechanics.lifecycle.components.Active;
-import helios.engine.mechanics.timing.components;
 import helios.engine.mechanics.timing.types;
 import helios.engine.mechanics.timing.commands;
 

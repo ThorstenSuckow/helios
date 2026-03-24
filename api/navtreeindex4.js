@@ -1,5 +1,9 @@
 var NAVTREEINDEX4 =
 {
+"classhelios_1_1app_1_1controller_1_1BasicWindowRenderingController.html#ae7ab29a6c78a6459308f9a58a69c695c":[4,0,0,1,0,0,2],
+"classhelios_1_1app_1_1controller_1_1BasicWindowRenderingController.html#ae7ab29a6c78a6459308f9a58a69c695c":[6,0,0,1,0,0,2],
+"classhelios_1_1app_1_1controller_1_1Controller.html":[3,0,44,0],
+"classhelios_1_1app_1_1controller_1_1Controller.html":[4,0,0,1,0,1],
 "classhelios_1_1app_1_1controller_1_1Controller.html":[6,0,0,1,0,1],
 "classhelios_1_1app_1_1controller_1_1Controller.html#a139f608987cdf6c04c9aaef03aaeecda":[3,0,44,0,0],
 "classhelios_1_1app_1_1controller_1_1Controller.html#a139f608987cdf6c04c9aaef03aaeecda":[4,0,0,1,0,1,0],
@@ -245,9 +249,5 @@ var NAVTREEINDEX4 =
 "classhelios_1_1core_1_1container_1_1buffer_1_1TypeIndexedReadWriteBuffer.html#a325e2b35fd157a4f49fea6019604c712":[4,0,0,2,1,0,6,1],
 "classhelios_1_1core_1_1container_1_1buffer_1_1TypeIndexedReadWriteBuffer.html#a325e2b35fd157a4f49fea6019604c712":[6,0,0,2,0,0,6,1],
 "classhelios_1_1core_1_1container_1_1buffer_1_1TypeIndexedReadWriteBuffer.html#a436b6be52d2bbd4217f70bf10cb50a79":[3,0,56,0,4],
-"classhelios_1_1core_1_1container_1_1buffer_1_1TypeIndexedReadWriteBuffer.html#a436b6be52d2bbd4217f70bf10cb50a79":[4,0,0,2,1,0,6,4],
-"classhelios_1_1core_1_1container_1_1buffer_1_1TypeIndexedReadWriteBuffer.html#a436b6be52d2bbd4217f70bf10cb50a79":[6,0,0,2,0,0,6,4],
-"classhelios_1_1core_1_1container_1_1buffer_1_1TypeIndexedReadWriteBuffer.html#a4f135567370e934cad9868f1db7cd534":[3,0,56,0,5],
-"classhelios_1_1core_1_1container_1_1buffer_1_1TypeIndexedReadWriteBuffer.html#a4f135567370e934cad9868f1db7cd534":[4,0,0,2,1,0,6,5],
-"classhelios_1_1core_1_1container_1_1buffer_1_1TypeIndexedReadWriteBuffer.html#a4f135567370e934cad9868f1db7cd534":[6,0,0,2,0,0,6,5]
+"classhelios_1_1core_1_1container_1_1buffer_1_1TypeIndexedReadWriteBuffer.html#a436b6be52d2bbd4217f70bf10cb50a79":[4,0,0,2,1,0,6,4]
 };

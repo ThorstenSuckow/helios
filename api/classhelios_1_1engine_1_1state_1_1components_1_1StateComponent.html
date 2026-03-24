@@ -114,6 +114,8 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a7601e23fab908350fd99ca7c705311b8" id="r_a7601e23fab908350fd99ca7c705311b8"><td class="memItemLeft" align="right" valign="top">StateType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7601e23fab908350fd99ca7c705311b8">state</a> () const noexcept</td></tr>
 <tr class="memdesc:a7601e23fab908350fd99ca7c705311b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current state.  <br /></td></tr>
+<tr class="memitem:ae03e030cbe638dea88365f31457eb3e7" id="r_ae03e030cbe638dea88365f31457eb3e7"><td class="memItemLeft" align="right" valign="top">StateType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae03e030cbe638dea88365f31457eb3e7">from</a> () const noexcept</td></tr>
+<tr class="memdesc:ae03e030cbe638dea88365f31457eb3e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the source state of the last transition.  <br /></td></tr>
 <tr class="memitem:a5765623510c9707702fb22e3b9cf8788" id="r_a5765623510c9707702fb22e3b9cf8788"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5765623510c9707702fb22e3b9cf8788">setStateFromTransitionContext</a> (const <a class="el" href="classhelios_1_1engine_1_1state_1_1types_1_1StateTransitionContext.html">helios::engine::state::types::StateTransitionContext</a>&lt; StateType &gt; stateTransitionContext) noexcept</td></tr>
 <tr class="memdesc:a5765623510c9707702fb22e3b9cf8788"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates state from a transition context.  <br /></td></tr>
 <tr class="memitem:a77ca84a25d37303deccb76d414d83267" id="r_a77ca84a25d37303deccb76d414d83267"><td class="memItemLeft" align="right" valign="top">StateTransitionIdType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a77ca84a25d37303deccb76d414d83267">transitionId</a> () const noexcept</td></tr>
@@ -135,6 +137,46 @@ StateTransitionContext </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="StateComponent_8ixx_source.html#l00027">27</a> of file <a class="el" href="StateComponent_8ixx_source.html">StateComponent.ixx</a>.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="ae03e030cbe638dea88365f31457eb3e7" name="ae03e030cbe638dea88365f31457eb3e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae03e030cbe638dea88365f31457eb3e7">&#9670;&#160;</a></span>from()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename StateType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">StateType <a class="el" href="classhelios_1_1engine_1_1state_1_1components_1_1StateComponent.html">helios::engine::state::components::StateComponent</a>&lt; StateType &gt;::from </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the source state of the last transition. </p>
+<dl class="section return"><dt>Returns</dt><dd>The state that was transitioned from. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="StateComponent_8ixx_source.html#l00062">62</a> of file <a class="el" href="StateComponent_8ixx_source.html">StateComponent.ixx</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Session_8ixx_source.html#l00152">helios::engine::runtime::world::Session::stateFrom()</a>.</p>
+<div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1state_1_1components_1_1StateComponent_ae03e030cbe638dea88365f31457eb3e7_icgraph.svg" width="524" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
 <a id="a5765623510c9707702fb22e3b9cf8788" name="a5765623510c9707702fb22e3b9cf8788"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5765623510c9707702fb22e3b9cf8788">&#9670;&#160;</a></span>setStateFromTransitionContext()</h2>
 
@@ -168,7 +210,7 @@ template&lt;typename StateType&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="StateComponent_8ixx_source.html#l00057">57</a> of file <a class="el" href="StateComponent_8ixx_source.html">StateComponent.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="StateComponent_8ixx_source.html#l00071">71</a> of file <a class="el" href="StateComponent_8ixx_source.html">StateComponent.ixx</a>.</p>
 
 </div>
 </div>
@@ -200,13 +242,13 @@ template&lt;typename StateType&gt; </div>
 <p>Returns the current state. </p>
 <dl class="section return"><dt>Returns</dt><dd>The current state value. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="StateComponent_8ixx_source.html#l00048">48</a> of file <a class="el" href="StateComponent_8ixx_source.html">StateComponent.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="StateComponent_8ixx_source.html#l00053">53</a> of file <a class="el" href="StateComponent_8ixx_source.html">StateComponent.ixx</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="Session_8ixx_source.html#l00138">helios::engine::runtime::world::Session::state()</a>.</p>
-<div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1state_1_1components_1_1StateComponent_a7601e23fab908350fd99ca7c705311b8_icgraph.svg" width="100%" height="408"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
@@ -240,13 +282,13 @@ template&lt;typename StateType&gt; </div>
 <p>Returns the last transition ID. </p>
 <dl class="section return"><dt>Returns</dt><dd>The transition that led to the current state. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="StateComponent_8ixx_source.html#l00067">67</a> of file <a class="el" href="StateComponent_8ixx_source.html">StateComponent.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="StateComponent_8ixx_source.html#l00082">82</a> of file <a class="el" href="StateComponent_8ixx_source.html">StateComponent.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Session_8ixx_source.html#l00152">helios::engine::runtime::world::Session::stateTransitionId()</a>.</p>
-<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="Session_8ixx_source.html#l00166">helios::engine::runtime::world::Session::stateTransitionId()</a>.</p>
+<div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1state_1_1components_1_1StateComponent_a77ca84a25d37303deccb76d414d83267_icgraph.svg" width="526" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 

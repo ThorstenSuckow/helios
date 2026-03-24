@@ -6,5 +6,6 @@ var classhelios_1_1engine_1_1state_1_1StateManager =
     [ "flush", "classhelios_1_1engine_1_1state_1_1StateManager.html#a9819c7a390fe2e1dc79aa03d3b36268d", null ],
     [ "init", "classhelios_1_1engine_1_1state_1_1StateManager.html#acff9516eecb50435b3b6bf991b7a4335", null ],
     [ "reset", "classhelios_1_1engine_1_1state_1_1StateManager.html#a3f1fc9a5ce6bf775e027ac1123303647", null ],
+    [ "submit", "classhelios_1_1engine_1_1state_1_1StateManager.html#a3c13c49ebbf2aed5855649a594639401", null ],
     [ "submit", "classhelios_1_1engine_1_1state_1_1StateManager.html#a5dbf046b7fd2a72a339d20fb0ef8f642", null ]
 ];

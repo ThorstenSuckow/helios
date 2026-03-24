@@ -1,7 +1,7 @@
 var searchData=
 [
   ['b_0',['B',['../namespacehelios_1_1input_1_1types.html#a4ca7a325d1231e8ec2688156eac9de98a9d5ed678fe57bcca610140957afab571',1,'helios::input::types']]],
-  ['backend_1',['Backend',['../dir_c65593c1e2ce5122a06a0735d96badb1.html#autotoc_md31',1,'Creating a New Backend'],['../index.html#autotoc_md847',1,'Custom Rendering Backend']]],
+  ['backend_1',['Backend',['../dir_c65593c1e2ce5122a06a0735d96badb1.html#autotoc_md31',1,'Creating a New Backend'],['../index.html#autotoc_md849',1,'Custom Rendering Backend']]],
   ['basecolor_2',['baseColor',['../structhelios_1_1rendering_1_1material_1_1MaterialShaderPropertiesOverride.html#a5ca7738cdc693512c58b20440323a418',1,'helios::rendering::material::MaterialShaderPropertiesOverride::baseColor'],['../structhelios_1_1rendering_1_1text_1_1TextShaderPropertiesOverride.html#acbab23ba23f54249355306ef51a72f05',1,'helios::rendering::text::TextShaderPropertiesOverride::baseColor']]],
   ['based_20opt_20in_3',['Tag-Based Opt-In',['../dir_8a3c56b4aa5585f6ce1bfb66a441ba5d.html#autotoc_md130',1,'']]],
   ['basic_20chase_20behavior_4',['Basic Chase Behavior',['../dir_40abc66e1b4db114e64ae16d6ae11ca0.html#autotoc_md417',1,'']]],
@@ -15,7 +15,7 @@ var searchData=
   ['begin_12',['begin',['../classhelios_1_1engine_1_1ecs_1_1SparseSet.html#a948007c3ff201e3b7bdac5b255794b06',1,'helios::engine::ecs::SparseSet::begin()'],['../classhelios_1_1engine_1_1ecs_1_1SparseSet.html#ac5b0d99fea0c67358ef32bb2319fa3c6',1,'helios::engine::ecs::SparseSet::begin() const'],['../classhelios_1_1engine_1_1ecs_1_1View.html#a36efde6cb4008bea0338dc7a4e3f8f32',1,'helios::engine::ecs::View::begin()']]],
   ['beginframe_13',['beginFrame',['../classhelios_1_1engine_1_1tooling_1_1FramePacer.html#a44ad35ea34434c3ce534ad032a49c409',1,'helios::engine::tooling::FramePacer']]],
   ['beginrenderpass_14',['beginRenderPass',['../classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice.html#a2f589946c2ca4029fc3d3f3ba7820c99',1,'helios::ext::opengl::rendering::OpenGLDevice::beginRenderPass()'],['../classhelios_1_1rendering_1_1RenderingDevice.html#a88169f8a968bce5a7d67446c61504d2f',1,'helios::rendering::RenderingDevice::beginRenderPass()']]],
-  ['behavior_15',['Behavior',['../dir_40abc66e1b4db114e64ae16d6ae11ca0.html#autotoc_md417',1,'Basic Chase Behavior'],['../dir_d085c729ee8a56dff1cc9d67ead9cf36.html#autotoc_md427',1,'Behavior'],['../dir_a108d9e19c5aa79c49bc6bd27980ebb3.html#autotoc_md101',1,'Cloning Behavior']]],
+  ['behavior_15',['Behavior',['../dir_40abc66e1b4db114e64ae16d6ae11ca0.html#autotoc_md417',1,'Basic Chase Behavior'],['../dir_d085c729ee8a56dff1cc9d67ead9cf36.html#autotoc_md427',1,'Behavior'],['../dir_a108d9e19c5aa79c49bc6bd27980ebb3.html#autotoc_md101',1,'Cloning Behavior'],['../dir_94b0c4fb82528c4245604725780b49de.html#autotoc_md770',1,'Reset Behavior']]],
   ['behavior_20details_16',['Chase Behavior Details',['../dir_40abc66e1b4db114e64ae16d6ae11ca0.html#autotoc_md419',1,'']]],
   ['behavior_20types_17',['Behavior Types',['../dir_2816aa6ce68bba06b579a19f4299ce30.html#autotoc_md188',1,'']]],
   ['beige_18',['Beige',['../structhelios_1_1util_1_1Colors.html#a51a3cacb710c054bf3cd41684f5bb1c4',1,'helios::util::Colors']]],

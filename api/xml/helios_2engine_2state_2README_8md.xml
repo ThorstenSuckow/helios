@@ -17,7 +17,7 @@
 <codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>a<sp/>complete<sp/>state<sp/>management<sp/>framework<sp/>including:</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">-<sp/>**State<sp/>machines**<sp/>with<sp/>rule-based<sp/>transitions<sp/>and<sp/>guards</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>**Commands**<sp/>for<sp/>requesting<sp/>state<sp/>changes<sp/>via<sp/>the<sp/>TypedCommandBuffer</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Commands**<sp/>for<sp/>requesting<sp/>immediate<sp/>or<sp/>timer-deferred<sp/>state<sp/>changes<sp/>via<sp/>the<sp/>command<sp/>buffer</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**Listeners**<sp/>for<sp/>reacting<sp/>to<sp/>state<sp/>transitions</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**ID<sp/>mapping<sp/>utilities**<sp/>for<sp/>associating<sp/>states<sp/>with<sp/>viewports/menus</highlight></codeline>
 <codeline></codeline>
@@ -33,8 +33,12 @@
 <codeline><highlight class="normal">|<sp/>`StateTransitionRule&lt;StateType&gt;`<sp/>|<sp/>Defines<sp/>valid<sp/>transitions<sp/>with<sp/>optional<sp/>guards<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`StateTransitionListener&lt;StateType&gt;`<sp/>|<sp/>Interface<sp/>for<sp/>transition<sp/>observers<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`LambdaStateListener&lt;StateType&gt;`<sp/>|<sp/>Lambda-based<sp/>listener<sp/>implementation<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`StateCommand&lt;StateType&gt;`<sp/>|<sp/>Command<sp/>for<sp/>requesting<sp/>transitions<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`StateCommand&lt;StateType&gt;`<sp/>|<sp/>Command<sp/>for<sp/>requesting<sp/>immediate<sp/>transitions<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`DelayedStateCommand&lt;StateType&gt;`<sp/>|<sp/>Timer-deferred<sp/>transition<sp/>command<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`StateTransitionRequest&lt;StateType&gt;`<sp/>|<sp/>Encapsulates<sp/>source<sp/>state<sp/>and<sp/>transition<sp/>ID<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`StateTransitionContext&lt;StateType&gt;`<sp/>|<sp/>Full<sp/>context<sp/>(from,<sp/>to,<sp/>transitionId)<sp/>passed<sp/>to<sp/>listeners<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`StateComponent&lt;StateType&gt;`<sp/>|<sp/>Stores<sp/>current<sp/>state<sp/>on<sp/>entities<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`StateTypeId`<sp/>|<sp/>Runtime<sp/>type<sp/>identifier<sp/>for<sp/>state<sp/>types<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`Bindings`<sp/>|<sp/>Compile-time<sp/>specializations<sp/>mapping<sp/>state<sp/>types<sp/>to<sp/>transition<sp/>ID<sp/>types<sp/>|</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">###<sp/>ID<sp/>Mapping</highlight></codeline>
@@ -79,17 +83,16 @@
 <codeline><highlight class="normal">###<sp/>Creating<sp/>the<sp/>Manager</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">```cpp</highlight></codeline>
-<codeline><highlight class="normal">auto<sp/>gameStateManager<sp/>=<sp/>std::make_unique&lt;StateManager&lt;GameState&gt;&gt;(gameStateRules);</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Register<sp/>manager<sp/>with<sp/>rules<sp/>via<sp/>GameWorld</highlight></codeline>
+<codeline><highlight class="normal">auto&amp;<sp/>gameStateManager<sp/>=<sp/>gameWorld.registerManager&lt;StateManager&lt;GameState&gt;&gt;(gameStateRules);</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">gameStateManager-&gt;addStateListener(</highlight></codeline>
+<codeline><highlight class="normal">gameStateManager.addStateListener(</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>std::make_unique&lt;LambdaStateListener&lt;GameState&gt;&gt;(</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[](auto&amp;<sp/>ctx,<sp/>GameState<sp/>from)<sp/>{<sp/>/*<sp/>onExit<sp/>*/<sp/>},</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[](auto&amp;<sp/>ctx,<sp/>auto<sp/>transitionCtx)<sp/>{<sp/>/*<sp/>onTransition<sp/>*/<sp/>},</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[](auto&amp;<sp/>ctx,<sp/>GameState<sp/>to)<sp/>{<sp/>/*<sp/>onEnter<sp/>*/<sp/>}</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>)</highlight></codeline>
 <codeline><highlight class="normal">);</highlight></codeline>
-<codeline></codeline>
-<codeline><highlight class="normal">gameLoop.addManager(std::move(gameStateManager));</highlight></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">###<sp/>Requesting<sp/>Transitions</highlight></codeline>
@@ -105,12 +108,34 @@
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Transition<sp/>Flow</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">1.<sp/>`StateCommand`<sp/>is<sp/>submitted<sp/>to<sp/>the<sp/>EngineCommandBuffer</highlight></codeline>
-<codeline><highlight class="normal">2.<sp/>The<sp/>command<sp/>is<sp/>routed<sp/>to<sp/>`StateManager`<sp/>via<sp/>the<sp/>registered<sp/>handler<sp/>in<sp/>`CommandHandlerRegistry`.</highlight></codeline>
-<codeline><highlight class="normal">3.<sp/>`StateManager::flush()`<sp/>processes<sp/>pending<sp/>commands</highlight></codeline>
-<codeline><highlight class="normal">4.<sp/>Matching<sp/>rule<sp/>is<sp/>found<sp/>and<sp/>guard<sp/>is<sp/>evaluated</highlight></codeline>
-<codeline><highlight class="normal">5.<sp/>Listeners<sp/>are<sp/>notified:<sp/>`onStateExit`<sp/>→<sp/>`onStateTransition`<sp/>→<sp/>`onStateEnter`</highlight></codeline>
-<codeline><highlight class="normal">6.<sp/>Session<sp/>state<sp/>is<sp/>updated</highlight></codeline>
+<codeline><highlight class="normal">1.<sp/>`StateCommand`<sp/>(or<sp/>`DelayedStateCommand`)<sp/>is<sp/>submitted<sp/>to<sp/>the<sp/>command<sp/>buffer</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>The<sp/>command<sp/>is<sp/>routed<sp/>to<sp/>`StateManager`<sp/>via<sp/>the<sp/>registered<sp/>handler<sp/>in<sp/>`CommandHandlerRegistry`</highlight></codeline>
+<codeline><highlight class="normal">3.<sp/>`StateManager::flush()`<sp/>processes<sp/>the<sp/>**last**<sp/>pending<sp/>command<sp/>(earlier<sp/>commands<sp/>are<sp/>discarded)</highlight></codeline>
+<codeline><highlight class="normal">4.<sp/>The<sp/>command&apos;s<sp/>`from`<sp/>state<sp/>is<sp/>validated<sp/>against<sp/>the<sp/>current<sp/>session<sp/>state</highlight></codeline>
+<codeline><highlight class="normal">5.<sp/>Matching<sp/>rule<sp/>is<sp/>found<sp/>and<sp/>guard<sp/>is<sp/>evaluated</highlight></codeline>
+<codeline><highlight class="normal">6.<sp/>Listeners<sp/>and<sp/>session<sp/>state<sp/>are<sp/>updated<sp/>in<sp/>order:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>`onStateExit(from)`</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>`onStateTransition(context)`</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>Session<sp/>state<sp/>updated<sp/>via<sp/>`StateComponent&lt;T&gt;`</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>`onStateEnter(to)`<sp/>(session<sp/>already<sp/>reflects<sp/>the<sp/>new<sp/>state)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Delayed<sp/>Transitions</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">`DelayedStateCommand&lt;StateType&gt;`<sp/>pairs<sp/>a<sp/>`StateTransitionRequest`<sp/>with<sp/>a<sp/>`GameTimerId`.<sp/>On<sp/>submission,<sp/>the<sp/>manager<sp/>extracts<sp/>the<sp/>request<sp/>and<sp/>processes<sp/>it<sp/>as<sp/>a<sp/>regular<sp/>`StateCommand`:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">updateContext.queueCommand&lt;DelayedStateCommand&lt;MatchState&gt;&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>StateTransitionRequest&lt;MatchState&gt;{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MatchState::Countdown,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MatchStateTransitionId::CountdownComplete</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>GameTimerId::CountdownTimer</highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Reset<sp/>Behavior</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">`StateManager::reset()`<sp/>is<sp/>intentionally<sp/>a<sp/>no-op<sp/>—<sp/>clearing<sp/>the<sp/>pending<sp/>queue<sp/>would<sp/>discard<sp/>transitions<sp/>required<sp/>*by*<sp/>the<sp/>reset<sp/>itself.</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>ID<sp/>Mapping</highlight></codeline>
 <codeline></codeline>

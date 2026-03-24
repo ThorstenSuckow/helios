@@ -25,7 +25,7 @@
 <title>Overview</title><para>This module provides a complete state management framework including:</para>
 <para><itemizedlist>
 <listitem><para><bold>State machines</bold> with rule-based transitions and guards</para>
-</listitem><listitem><para><bold>Commands</bold> for requesting state changes via the TypedCommandBuffer</para>
+</listitem><listitem><para><bold>Commands</bold> for requesting immediate or timer-deferred state changes via the command buffer</para>
 </listitem><listitem><para><bold>Listeners</bold> for reacting to state transitions</para>
 </listitem><listitem><para><bold>ID mapping utilities</bold> for associating states with viewports/menus</para>
 </listitem></itemizedlist>
@@ -34,7 +34,7 @@
 </sect1>
 <sect1 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md760">
 <title>Core Components</title><sect2 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md761">
-<title>State Management</title><para><table rows="8" cols="2"><row>
+<title>State Management</title><para><table rows="12" cols="2"><row>
 <entry thead="yes"><para>Class  </para>
 </entry><entry thead="yes"><para>Description  </para>
 </entry></row>
@@ -56,11 +56,27 @@
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>StateCommand&lt;StateType&gt;</computeroutput>  </para>
-</entry><entry thead="no"><para>Command for requesting transitions  </para>
+</entry><entry thead="no"><para>Command for requesting immediate transitions  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>DelayedStateCommand&lt;StateType&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para>Timer-deferred transition command  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>StateTransitionRequest&lt;StateType&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para>Encapsulates source state and transition ID  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>StateTransitionContext&lt;StateType&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para>Full context (from, to, transitionId) passed to listeners  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>StateComponent&lt;StateType&gt;</computeroutput>  </para>
 </entry><entry thead="no"><para>Stores current state on entities  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>StateTypeId</computeroutput>  </para>
+</entry><entry thead="no"><para>Runtime type identifier for state types  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>Bindings</computeroutput>  </para>
@@ -116,17 +132,16 @@
 </programlisting></para>
 </sect2>
 <sect2 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md766">
-<title>Creating the Manager</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>gameStateManager<sp/>=<sp/>std::make_unique&lt;StateManager&lt;GameState&gt;&gt;(gameStateRules);</highlight></codeline>
+<title>Creating the Manager</title><para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Register<sp/>manager<sp/>with<sp/>rules<sp/>via<sp/>GameWorld</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>gameStateManager<sp/>=<sp/>gameWorld.registerManager&lt;<ref refid="classhelios_1_1engine_1_1state_1_1StateManager" kindref="compound">StateManager&lt;GameState&gt;</ref>&gt;(gameStateRules);</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal">gameStateManager-&gt;addStateListener(</highlight></codeline>
+<codeline><highlight class="normal">gameStateManager.<ref refid="classhelios_1_1engine_1_1state_1_1StateManager_1a2e7db1e0999cebc060246a224139fcdb" kindref="member">addStateListener</ref>(</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>std::make_unique&lt;LambdaStateListener&lt;GameState&gt;&gt;(</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[](</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>ctx,<sp/>GameState<sp/>from)<sp/>{<sp/></highlight><highlight class="comment">/*<sp/>onExit<sp/>*/</highlight><highlight class="normal"><sp/>},</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[](</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>ctx,<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>transitionCtx)<sp/>{<sp/></highlight><highlight class="comment">/*<sp/>onTransition<sp/>*/</highlight><highlight class="normal"><sp/>},</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[](</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>ctx,<sp/><ref refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80be" kindref="member">GameState</ref><sp/>to)<sp/>{<sp/></highlight><highlight class="comment">/*<sp/>onEnter<sp/>*/</highlight><highlight class="normal"><sp/>}</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>)</highlight></codeline>
 <codeline><highlight class="normal">);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal">gameLoop.addManager(std::move(gameStateManager));</highlight></codeline>
 </programlisting></para>
 </sect2>
 <sect2 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md767">
@@ -140,9 +155,29 @@
 </sect2>
 </sect1>
 <sect1 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md768">
-<title>Transition Flow</title><para>1. <computeroutput>StateCommand</computeroutput> is submitted to the EngineCommandBuffer 2. The command is routed to <computeroutput>StateManager</computeroutput> via the registered handler in <computeroutput>CommandHandlerRegistry</computeroutput>. 3. <computeroutput>StateManager::flush()</computeroutput> processes pending commands 4. Matching rule is found and guard is evaluated 5. Listeners are notified: <computeroutput>onStateExit</computeroutput> → <computeroutput>onStateTransition</computeroutput> → <computeroutput>onStateEnter</computeroutput> 6. Session state is updated</para>
+<title>Transition Flow</title><para>1. <computeroutput>StateCommand</computeroutput> (or <computeroutput>DelayedStateCommand</computeroutput>) is submitted to the command buffer 2. The command is routed to <computeroutput>StateManager</computeroutput> via the registered handler in <computeroutput>CommandHandlerRegistry</computeroutput> 3. <computeroutput>StateManager::flush()</computeroutput> processes the <bold>last</bold> pending command (earlier commands are discarded) 4. The command&apos;s <computeroutput>from</computeroutput> state is validated against the current session state 5. Matching rule is found and guard is evaluated 6. Listeners and session state are updated in order:<itemizedlist>
+<listitem><para><computeroutput>onStateExit(from)</computeroutput></para>
+</listitem><listitem><para><computeroutput>onStateTransition(context)</computeroutput></para>
+</listitem><listitem><para>Session state updated via <computeroutput>StateComponent&lt;T&gt;</computeroutput></para>
+</listitem><listitem><para><computeroutput>onStateEnter(to)</computeroutput> (session already reflects the new state)</para>
+</listitem></itemizedlist>
+</para>
+<sect2 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md769">
+<title>Delayed Transitions</title><para><computeroutput>DelayedStateCommand&lt;StateType&gt;</computeroutput> pairs a <computeroutput>StateTransitionRequest</computeroutput> with a <computeroutput>GameTimerId</computeroutput>. On submission, the manager extracts the request and processes it as a regular <computeroutput>StateCommand</computeroutput>:</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal">updateContext.queueCommand&lt;DelayedStateCommand&lt;MatchState&gt;&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1engine_1_1state_1_1types_1_1StateTransitionRequest" kindref="compound">StateTransitionRequest&lt;MatchState&gt;</ref>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MatchState::Countdown,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MatchStateTransitionId::CountdownComplete</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>GameTimerId::CountdownTimer</highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+</programlisting></para>
+</sect2>
+<sect2 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md770">
+<title>Reset Behavior</title><para><computeroutput>StateManager::reset()</computeroutput> is intentionally a no-op — clearing the pending queue would discard transitions required <emphasis>by</emphasis> the reset itself.</para>
+</sect2>
 </sect1>
-<sect1 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md769">
+<sect1 id="dir_94b0c4fb82528c4245604725780b49de_1autotoc_md771">
 <title>ID Mapping</title><para>For viewport/menu activation based on state:</para>
 <para><programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classhelios_1_1engine_1_1state_1_1CombinedStateToIdMapPair" kindref="compound">CombinedStateToIdMapPair&lt;GameState, MatchState, ViewportId&gt;</ref><sp/>viewportPolicy;</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>

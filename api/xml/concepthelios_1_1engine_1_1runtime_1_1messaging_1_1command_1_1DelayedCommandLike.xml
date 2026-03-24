@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="concepthelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1DelayedCommandLike" kind="concept">
+    <compoundname>helios::engine::runtime::messaging::command::DelayedCommandLike</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename Cmd</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;typename Cmd&gt;
+concept <ref refid="concepthelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1DelayedCommandLike" kindref="compound">helios::engine::runtime::messaging::command::DelayedCommandLike</ref> =  requires(Cmd const&amp; c) {
+            {c.gameTimerId() } noexcept;
+    }    </initializer>
+    <briefdescription>
+<para>Concept constraining commands that carry a timer gate. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>A command satisfies DelayedCommandLike if it provides a noexcept `gameTimerId()` accessor returning a <ref refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1ab554d63c8c7c9aa028b0115c23ae01eb" kindref="member">GameTimerId</ref>. Such commands are held in a scratch queue until their associated timer reaches `TimerState::Finished`.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Cmd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The command type to check. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" line="58" column="5"/>
+  </compounddef>
+</doxygen>

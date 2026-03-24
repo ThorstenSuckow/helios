@@ -23,7 +23,8 @@ var concepts =
           ] ],
           [ "messaging", "namespacehelios_1_1engine_1_1runtime_1_1messaging.html", [
             [ "command", "namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1command.html", [
-              [ "ExecutableCommand", "concepthelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1ExecutableCommand.html", null ]
+              [ "ExecutableCommand", "concepthelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1ExecutableCommand.html", null ],
+              [ "DelayedCommandLike", "concepthelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1DelayedCommandLike.html", null ]
             ] ]
           ] ]
         ] ],

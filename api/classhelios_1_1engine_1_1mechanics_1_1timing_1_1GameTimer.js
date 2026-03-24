@@ -4,7 +4,7 @@ var classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer =
     [ "duration", "classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer.html#af13faade128501fa439084b68c5aeb0d", null ],
     [ "elapsed", "classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer.html#a153820d23667bc28e8574cd0a97c9224", null ],
     [ "gameTimerId", "classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer.html#ad6b866835b1abe74fddc84656b905b0b", null ],
-    [ "reset", "classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer.html#a922962ab881802e169b6054177505432", null ],
+    [ "reset", "classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer.html#ac67b9232d05fe125567cab91eb6001cb", null ],
     [ "setDuration", "classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer.html#a503aa0a8253842e7559cdb6311b037b7", null ],
     [ "setState", "classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer.html#a9e02b98ba6e73fd17cb7d716f3c6d18b", null ],
     [ "shouldUpdate", "classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer.html#ac8ea4f3f51ab7a06ac1bb7eacadea4e6", null ],

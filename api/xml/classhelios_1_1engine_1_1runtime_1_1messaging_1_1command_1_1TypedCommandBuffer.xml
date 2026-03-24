@@ -23,7 +23,23 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" line="74" column="20" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" bodystart="74" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" line="96" column="20" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a9871363c020d1b0aa9d51505f2f187c4" prot="private" static="no" mutable="no">
+        <type>std::tuple&lt; std::vector&lt; CommandTypes &gt;... &gt;</type>
+        <definition>std::tuple&lt;std::vector&lt;CommandTypes&gt;...&gt; helios::engine::runtime::messaging::command::TypedCommandBuffer&lt; CommandTypes &gt;::delayedQueues_</definition>
+        <argsstring></argsstring>
+        <name>delayedQueues_</name>
+        <qualifiedname>helios::engine::runtime::messaging::command::TypedCommandBuffer::delayedQueues_</qualifiedname>
+        <briefdescription>
+<para>Scratch queues for timer-gated commands surviving a flush cycle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Commands satisfying <ref refid="concepthelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1DelayedCommandLike" kindref="compound">DelayedCommandLike</ref> whose timer has not yet finished are moved here during flush and swapped back into the primary queues afterwards. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" line="105" column="20" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" bodystart="105" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -57,7 +73,102 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" line="84" column="21" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" bodystart="84" bodyend="86"/>
+        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" line="115" column="21" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" bodystart="115" bodyend="117"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a8b8587874be3065c9bf7b0f16e2a8d7b" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CommandType</type>
+          </param>
+        </templateparamlist>
+        <type>std::vector&lt; CommandType &gt; &amp;</type>
+        <definition>std::vector&lt; CommandType &gt; &amp; helios::engine::runtime::messaging::command::TypedCommandBuffer&lt; CommandTypes &gt;::delayedQueue</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>delayedQueue</name>
+        <qualifiedname>helios::engine::runtime::messaging::command::TypedCommandBuffer::delayedQueue</qualifiedname>
+        <briefdescription>
+<para>Returns the delayed scratch queue for a specific command type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CommandType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The command type.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to the delayed scratch queue. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" line="127" column="21" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" bodystart="127" bodyend="129"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a7231725a593fbecfffc902c09dde5eaa" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::runtime::messaging::command::TypedCommandBuffer&lt; CommandTypes &gt;::shouldDelayCommand</definition>
+        <argsstring>(const TimerState state) const noexcept</argsstring>
+        <name>shouldDelayCommand</name>
+        <qualifiedname>helios::engine::runtime::messaging::command::TypedCommandBuffer::shouldDelayCommand</qualifiedname>
+        <param>
+          <type>const <ref refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1a889d521962836a37d91f60af0f2d7134" kindref="member">TimerState</ref></type>
+          <declname>state</declname>
+        </param>
+        <briefdescription>
+<para>Determines whether a delayed command should be deferred. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns true when the timer is still running - i.e. its state is neither Finished nor Undefined.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current timer state.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the command must remain in the scratch queue. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" line="141" column="15" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" bodystart="141" bodyend="143"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a012ec5bd8e6d51a276ba0b4a16d834e8" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::runtime::messaging::command::TypedCommandBuffer&lt; CommandTypes &gt;::isDelayedCommandReady</definition>
+        <argsstring>(const TimerState state) const noexcept</argsstring>
+        <name>isDelayedCommandReady</name>
+        <qualifiedname>helios::engine::runtime::messaging::command::TypedCommandBuffer::isDelayedCommandReady</qualifiedname>
+        <param>
+          <type>const <ref refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1a889d521962836a37d91f60af0f2d7134" kindref="member">TimerState</ref></type>
+          <declname>state</declname>
+        </param>
+        <briefdescription>
+<para>Determines whether a delayed command is ready for dispatch. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current timer state.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the associated timer has finished. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" line="152" column="15" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" bodystart="152" bodyend="154"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a9f6210ee4446435ac1d3d6c54c4d28d0" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -82,7 +193,19 @@
 <para>Flushes a single command queue. </para>
         </briefdescription>
         <detaileddescription>
-<para>Routes each command to its registered handler, or executes it directly if no handler is registered and the command satisfies <ref refid="concepthelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1ExecutableCommand" kindref="compound">ExecutableCommand</ref>.</para>
+<para>Processing follows two branches depending on whether a handler is registered for `CommandType`:</para>
+<para>**Handler registered** (`CommandHandlerRegistry::has&lt;CommandType&gt;()`):<itemizedlist>
+<listitem><para>Each command is forwarded via `commandHandlerRegistry.submit&lt;CommandType&gt;(cmd)`.</para>
+</listitem></itemizedlist>
+</para>
+<para>**No handler registered** (fallback):<itemizedlist>
+<listitem><para>The command must satisfy `ExecutableCommand`; otherwise an assertion fires at runtime.</para>
+</listitem><listitem><para>Each command is dispatched via `cmd.execute(updateContext)`.</para>
+</listitem></itemizedlist>
+</para>
+<para>In both branches, if `CommandType` satisfies `DelayedCommandLike`, an additional timer check is performed per command:</para>
+<para>1. The associated `GameTimer` is looked up via the command&apos;s `gameTimerId()`. 2. If the timer is still running (`shouldDelayCommand` returns true), the command is moved into the scratch queue and survives the current flush cycle. 3. If the timer has finished (`isDelayedCommandReady` returns true), the command is dispatched normally. 4. If the timer state is `Undefined` (e.g. timer was removed), the command is silently dropped.</para>
+<para>After all commands have been processed the primary queue is cleared, the scratch queue contents are swapped back in as the new primary queue, and the scratch queue is cleared.</para>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
 <parametername>CommandType</parametername>
@@ -97,7 +220,7 @@
 <parametername>gameWorld</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The game world for which the queue should be flushed. </para>
+<para>The game world providing the <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandlerRegistry" kindref="compound">CommandHandlerRegistry</ref> and <ref refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager" kindref="compound">TimerManager</ref>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -113,7 +236,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" line="101" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" bodystart="101" bodyend="126"/>
+        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" line="194" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" bodystart="194" bodyend="262"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -171,7 +294,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" line="139" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" bodystart="139" bodyend="142"/>
+        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" line="275" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" bodystart="275" bodyend="278"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a0df59b0da67db0a31fb34a9ec6c2802e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -186,7 +309,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" line="147" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" bodystart="147" bodyend="149"/>
+        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" line="283" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" bodystart="283" bodyend="285"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1ab037bba2507b9a4402031b44ae756fef" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -228,7 +351,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" line="160" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" bodystart="160" bodyend="162"/>
+        <location file="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" line="296" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" bodystart="296" bodyend="298"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -263,14 +386,18 @@
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" line="69" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" bodystart="69" bodyend="165"/>
+    <location file="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" line="91" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/messaging/command/TypedCommandBuffer.ixx" bodystart="91" bodyend="301"/>
     <listofallmembers>
       <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a35748f3c15d9e92098bed8d174cb7042" prot="public" virt="non-virtual"><scope>helios::engine::runtime::messaging::command::TypedCommandBuffer</scope><name>add</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a0df59b0da67db0a31fb34a9ec6c2802e" prot="public" virt="non-virtual"><scope>helios::engine::runtime::messaging::command::TypedCommandBuffer</scope><name>clear</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a8c0798c8503d1e8bce1a299b02c84d79" prot="private" virt="non-virtual"><scope>helios::engine::runtime::messaging::command::TypedCommandBuffer</scope><name>commandQueue</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a44375c2d4b706e04d8a0efa768d82317" prot="private" virt="non-virtual"><scope>helios::engine::runtime::messaging::command::TypedCommandBuffer</scope><name>commandQueues_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a8b8587874be3065c9bf7b0f16e2a8d7b" prot="private" virt="non-virtual"><scope>helios::engine::runtime::messaging::command::TypedCommandBuffer</scope><name>delayedQueue</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a9871363c020d1b0aa9d51505f2f187c4" prot="private" virt="non-virtual"><scope>helios::engine::runtime::messaging::command::TypedCommandBuffer</scope><name>delayedQueues_</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1ab037bba2507b9a4402031b44ae756fef" prot="public" virt="non-virtual"><scope>helios::engine::runtime::messaging::command::TypedCommandBuffer</scope><name>flush</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a9f6210ee4446435ac1d3d6c54c4d28d0" prot="private" virt="non-virtual"><scope>helios::engine::runtime::messaging::command::TypedCommandBuffer</scope><name>flushCommandQueue</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a012ec5bd8e6d51a276ba0b4a16d834e8" prot="private" virt="non-virtual"><scope>helios::engine::runtime::messaging::command::TypedCommandBuffer</scope><name>isDelayedCommandReady</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a7231725a593fbecfffc902c09dde5eaa" prot="private" virt="non-virtual"><scope>helios::engine::runtime::messaging::command::TypedCommandBuffer</scope><name>shouldDelayCommand</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

@@ -12,6 +12,8 @@ var classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1Tex
     [ "fontScale", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig.html#a1c5c0b06cc239ee1a78e4be3755ed8f7", null ],
     [ "formattedAsNumber", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig.html#a885e4403a6f954cbf7210e11137ecf68", null ],
     [ "formattedAsTimestamp", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig.html#ac3a3564522f6184f32d7f18a99293885", null ],
+    [ "hideWhenZero", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig.html#aceca0762c971984dd42e5d5f7896a029", null ],
     [ "shader", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig.html#a66d6104e4b12ead26571a68ac3b81d32", null ],
-    [ "text", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig.html#a89c15f75356c5b16e99202aabbb1ae71", null ]
+    [ "text", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig.html#a89c15f75356c5b16e99202aabbb1ae71", null ],
+    [ "useElapsedLabel", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig.html#a3b0d0bce6313592bb883ca91f4ed6e18", null ]
 ];

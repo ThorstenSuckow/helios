@@ -8,5 +8,6 @@ var namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1command =
     [ "EngineCommandBuffer", "classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer.html", "classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer" ],
     [ "TypedCommandBuffer", "classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer.html", "classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer" ],
     [ "ExecutableCommand", "concepthelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1ExecutableCommand.html", null ],
+    [ "DelayedCommandLike", "concepthelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1DelayedCommandLike.html", null ],
     [ "CommandBufferRegistry", "namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1command.html#a9db2b3babfcf5b63f64800f93e80e2ae", null ]
 ];

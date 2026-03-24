@@ -12,7 +12,7 @@ var indexSectionsWithContent =
   9: "hor",
   10: "hl",
   11: "123456789abcdefghiklmnopqrstuvw",
-  12: "ehin",
+  12: "dehin",
   13: "h"
 };
 

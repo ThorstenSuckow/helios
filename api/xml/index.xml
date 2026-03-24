@@ -800,6 +800,13 @@
     <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1DelayedComponentEnablerSystem_1a00399949b0cfc0005ea9bf776d0284a3" kind="variable"><name>sync_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1DelayedComponentEnablerSystem_1a53fa895bc8edd1710b7656f92d400f50" kind="function"><name>update</name></member>
   </compound>
+  <compound refid="classhelios_1_1engine_1_1state_1_1commands_1_1DelayedStateCommand" kind="class"><name>helios::engine::state::commands::DelayedStateCommand</name>
+    <member refid="classhelios_1_1engine_1_1state_1_1commands_1_1DelayedStateCommand_1a8228ef6683652437621b4ceff3a7db1a" kind="variable"><name>transitionRequest_</name></member>
+    <member refid="classhelios_1_1engine_1_1state_1_1commands_1_1DelayedStateCommand_1aafd431beea41f668cdc46e19a1f82390" kind="variable"><name>timerId_</name></member>
+    <member refid="classhelios_1_1engine_1_1state_1_1commands_1_1DelayedStateCommand_1ad52cf7ea24b62c15cbf3adca90734186" kind="function"><name>DelayedStateCommand</name></member>
+    <member refid="classhelios_1_1engine_1_1state_1_1commands_1_1DelayedStateCommand_1a0abf98dde4b986395003eec6384f93ea" kind="function"><name>transitionRequest</name></member>
+    <member refid="classhelios_1_1engine_1_1state_1_1commands_1_1DelayedStateCommand_1a310101bd3ddb5a134f7989600294cc33" kind="function"><name>gameTimerId</name></member>
+  </compound>
   <compound refid="classhelios_1_1event_1_1DequeEventQueue" kind="class"><name>helios::event::DequeEventQueue</name>
     <member refid="classhelios_1_1event_1_1DequeEventQueue_1a7a7c941f59eece3f4e6ba9b2b3e6143f" kind="variable"><name>events</name></member>
     <member refid="classhelios_1_1event_1_1DequeEventQueue_1ab1224ebbf6fd85dbc31df77d05df1945" kind="function"><name>add</name></member>
@@ -886,7 +893,7 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1EmitterSpawnPlacer_1a9a443dd8797148f4b30014de913836b1" kind="function"><name>getPosition</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer" kind="class"><name>helios::engine::runtime::messaging::command::EngineCommandBuffer</name>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1a89c5598b09b411d5197da2dc11a500b6" kind="typedef"><name>BufferImpl</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1a5225cd62a1aa24d84d0458c7b1baab02" kind="typedef"><name>BufferImpl</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1a4b73850d5fd337edd57bb4442f9171e1" kind="typedef"><name>EngineRoleTag</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1a0b3ddb0409bf4a07a4a8c12e6323f158" kind="variable"><name>impl_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1a661d0858913185ec6f6e35ef2b87c883" kind="function"><name>add</name></member>
@@ -1362,7 +1369,7 @@
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1aee2323e31c6dab6d2e68dd9f3edfdf67" kind="variable"><name>duration_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1a7eb218ba32a8e67527669c59ae514c84" kind="function"><name>GameTimer</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1ad6b866835b1abe74fddc84656b905b0b" kind="function"><name>gameTimerId</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1a922962ab881802e169b6054177505432" kind="function"><name>reset</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1ac67b9232d05fe125567cab91eb6001cb" kind="function"><name>reset</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1a503aa0a8253842e7559cdb6311b037b7" kind="function"><name>setDuration</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1af13faade128501fa439084b68c5aeb0d" kind="function"><name>duration</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1a153820d23667bc28e8574cd0a97c9224" kind="function"><name>elapsed</name></member>
@@ -1390,6 +1397,12 @@
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1components_1_1GameTimerBindingComponent_1a9439005bd40f09e3698bd60616e9575a" kind="function"><name>gameTimerId</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1components_1_1GameTimerBindingComponent_1ae28927e8c9525d9e609d6bd4cf9e1d47" kind="function"><name>setTimerRevision</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1components_1_1GameTimerBindingComponent_1a0e19e83a28af5df56cf837c70b9989ab" kind="function"><name>timerRevision</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerClearFinishedSystem" kind="class"><name>helios::engine::mechanics::timing::systems::GameTimerClearFinishedSystem</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerClearFinishedSystem_1a0ea1c77795d3a6eb11ef872a0e7d6e92" kind="typedef"><name>EngineRoleTag</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerClearFinishedSystem_1ae3e2ec2affd8a9f163741d61486ac0e7" kind="variable"><name>timerManager_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerClearFinishedSystem_1abf8a8757f947b373ed572d2726b995af" kind="function"><name>GameTimerClearFinishedSystem</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerClearFinishedSystem_1a5ae60d03e8a12b23c54ff509b8375342" kind="function"><name>update</name></member>
   </compound>
   <compound refid="structhelios_1_1engine_1_1mechanics_1_1timing_1_1types_1_1GameTimerIdTag" kind="struct"><name>helios::engine::mechanics::timing::types::GameTimerIdTag</name>
   </compound>
@@ -2404,7 +2417,6 @@
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1aa1cc086a73e9e3ee325fb0d0e3a54ef9" kind="variable"><name>inheritedVelocity_</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1a3a74329608a528a5bde4efcee4520e95" kind="variable"><name>useInstantAcceleration_</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1abb9f103c839b961be988d3d50b5d678a" kind="variable"><name>isEnabled_</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1a745a8663a434c916e61e3bf63530cc34" kind="function"><name>reset</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1ab057f76bc262b7fb045a95dd35a96207" kind="function"><name>isEnabled</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1aa0bc3eddd551fe802442a935c6f376f3" kind="function"><name>enable</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1a8c6e0bbc5e718ec9f71cbde02740ec60" kind="function"><name>disable</name></member>
@@ -2417,6 +2429,7 @@
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1a877c4f40c7bc4d79307705b83e3348f9" kind="function"><name>operator=</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1ad0446785c240392406ac661bb3545615" kind="function"><name>move</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1aa1f4491a3cb463f1af0145b4e70815a7" kind="function"><name>setMoveIntent</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1a745a8663a434c916e61e3bf63530cc34" kind="function"><name>reset</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1abe54a149864a4a7f78b6d8c43042a38a" kind="function"><name>onAcquire</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1a832a95a1858e8529f1393802d0c6fd88" kind="function"><name>onRelease</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1a034585ef8aed5c20e14800a8e800a54e" kind="function"><name>useInstantAcceleration</name></member>
@@ -3202,6 +3215,7 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a5054ee6de251227e98c95d5d0ce05834" kind="function"><name>reset</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a66812a7325b8775911c39a96fdbffb42" kind="function"><name>setStateFrom</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a26784a3e90f2a97ca31cfa2ece4f41c9" kind="function"><name>state</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a796b5e0b53204fd9e26c971666fa8c97" kind="function"><name>stateFrom</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1ac1af4b2a7d4f75188d58591deafcacac" kind="function"><name>stateTransitionId</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a16a1563a9b807088e812aed53948ffb8" kind="function"><name>trackState</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a1aa1d3987c7c0df347c3925fcdd74b76" kind="function"><name>setViewportIds</name></member>
@@ -3551,9 +3565,11 @@
   </compound>
   <compound refid="classhelios_1_1engine_1_1state_1_1components_1_1StateComponent" kind="class"><name>helios::engine::state::components::StateComponent</name>
     <member refid="classhelios_1_1engine_1_1state_1_1components_1_1StateComponent_1a451ae1471cd16ab5a85e29409813029c" kind="typedef"><name>StateTransitionIdType</name></member>
+    <member refid="classhelios_1_1engine_1_1state_1_1components_1_1StateComponent_1ae9ffb83abc533cd782b612f714cbe9c6" kind="variable"><name>from_</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1components_1_1StateComponent_1a4fffafb60f1bc06a13a68c6723e432f1" kind="variable"><name>transitionId_</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1components_1_1StateComponent_1ab957da148203c539191d69b7c759d9e5" kind="variable"><name>state_</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1components_1_1StateComponent_1a7601e23fab908350fd99ca7c705311b8" kind="function"><name>state</name></member>
+    <member refid="classhelios_1_1engine_1_1state_1_1components_1_1StateComponent_1ae03e030cbe638dea88365f31457eb3e7" kind="function"><name>from</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1components_1_1StateComponent_1a5765623510c9707702fb22e3b9cf8788" kind="function"><name>setStateFromTransitionContext</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1components_1_1StateComponent_1a77ca84a25d37303deccb76d414d83267" kind="function"><name>transitionId</name></member>
   </compound>
@@ -3569,6 +3585,7 @@
     <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a2e7db1e0999cebc060246a224139fcdb" kind="function"><name>addStateListener</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a9819c7a390fe2e1dc79aa03d3b36268d" kind="function"><name>flush</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a5dbf046b7fd2a72a339d20fb0ef8f642" kind="function"><name>submit</name></member>
+    <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a3c13c49ebbf2aed5855649a594639401" kind="function"><name>submit</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1acff9516eecb50435b3b6bf991b7a4335" kind="function"><name>init</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a3f1fc9a5ce6bf775e027ac1123303647" kind="function"><name>reset</name></member>
   </compound>
@@ -3697,6 +3714,7 @@
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a7ce06db7df102652a6992e70a0de953f" kind="function"><name>setUseInstantRotation</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ae16cb98b0b4df5ac92ef2fa49ec1b498" kind="function"><name>setSteeringIntent</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ac9194439a950df5a8943a579eaf968fa" kind="function"><name>rotationAxis</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ab3fa810341f053248c69be9c4f35193f" kind="function"><name>reset</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ade0a4254510d8eb6f145f267683f7577" kind="function"><name>setCurrentRotationSpeed</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a0e95aecf39d77f15fc63d7fc0164cedc" kind="function"><name>currentRotationSpeed</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ad956a2d4066e0b66a0694db78c5fab7e" kind="function"><name>rotationAngleDelta</name></member>
@@ -3831,6 +3849,9 @@
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1af07492567e1702becbb18f8c6558c6fe" kind="variable"><name>usesTimeFormatter_</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1af1e1363244f69cadd63491943886b02c" kind="variable"><name>usesNumberFormatter_</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1a7216728b3add9ce35a83af11ac98ca3c" kind="variable"><name>displayRemaining_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1acad8e6c0760d2a57a856d63f876e0e39" kind="variable"><name>elapsedLabel_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1a03c27fd915ea21f48c937edc0cbedce3" kind="variable"><name>showElapsedLabel_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1afc36165ac450a0edf2e6eeedcbbc1a4d" kind="variable"><name>hideWhenZero_</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1a7f1df70d311469d84088585c6d87464c" kind="function"><name>TextRenderableConfig</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1a66d6104e4b12ead26571a68ac3b81d32" kind="function"><name>shader</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1a034f1916e01b6ed864829a719cd5b907" kind="function"><name>color</name></member>
@@ -3840,6 +3861,8 @@
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1a9926d2dc9bf427d311356be1688e5837" kind="function"><name>asUiText</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1a885e4403a6f954cbf7210e11137ecf68" kind="function"><name>formattedAsNumber</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1ac3a3564522f6184f32d7f18a99293885" kind="function"><name>formattedAsTimestamp</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1a3b0d0bce6313592bb883ca91f4ed6e18" kind="function"><name>useElapsedLabel</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1aceca0762c971984dd42e5d5f7896a029" kind="function"><name>hideWhenZero</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1a4a47ca4b0c2c05ba252fc13b9dee8183" kind="function"><name>displayRemaining</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1a89c15f75356c5b16e99202aabbb1ae71" kind="function"><name>text</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1a1b8245c901285d30dd2bea44b3da153e" kind="function"><name>fontId</name></member>
@@ -3887,9 +3910,17 @@
   </compound>
   <compound refid="classhelios_1_1engine_1_1modules_1_1ui_1_1layout_1_1components_1_1TimeFormatterComponent" kind="class"><name>helios::engine::modules::ui::layout::components::TimeFormatterComponent</name>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1layout_1_1components_1_1TimeFormatterComponent_1acb765b38685d48fa03231e53f28ff7e9" kind="variable"><name>format_</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1layout_1_1components_1_1TimeFormatterComponent_1ac6792fb5047157e10a76cf82a5516b45" kind="variable"><name>elapsedLabel_</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1layout_1_1components_1_1TimeFormatterComponent_1ac399bcf8271c747560c3bcff3061d050" kind="variable"><name>hasElapsedLabel_</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1layout_1_1components_1_1TimeFormatterComponent_1a2256846047b11785e00a873329320217" kind="variable"><name>hideWhenZero_</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1layout_1_1components_1_1TimeFormatterComponent_1a9ee8ae07e8a3e8bf113fa639047a4ec5" kind="variable"><name>displayMode_</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1layout_1_1components_1_1TimeFormatterComponent_1a0b017686db8e4ad13115f220dba846b7" kind="function"><name>setFormat</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1layout_1_1components_1_1TimeFormatterComponent_1aeb1b16b5171edb1c9add6dc54d7739ce" kind="function"><name>format</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1layout_1_1components_1_1TimeFormatterComponent_1a6e660095ad825b1e1eeab635f7c9a042" kind="function"><name>setElapsedLabel</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1layout_1_1components_1_1TimeFormatterComponent_1a73869105cf44415c083331ce6b393602" kind="function"><name>elapsedLabel</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1layout_1_1components_1_1TimeFormatterComponent_1a103bf3dcef3cdfb641eb105e9a99ae63" kind="function"><name>hasElapsedLabel</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1layout_1_1components_1_1TimeFormatterComponent_1a03c46ba524c4324783d04fda5907e9d5" kind="function"><name>setHideWhenZero</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1layout_1_1components_1_1TimeFormatterComponent_1ad6c064e76d34d2f3993ce50a86ee9f08" kind="function"><name>hideWhenZero</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1commands_1_1TimerControlCommand" kind="class"><name>helios::engine::mechanics::timing::commands::TimerControlCommand</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1commands_1_1TimerControlCommand_1a5287355c5db58f2750d25809216519dd" kind="variable"><name>timerContext_</name></member>
@@ -3997,7 +4028,11 @@
   </compound>
   <compound refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer" kind="class"><name>helios::engine::runtime::messaging::command::TypedCommandBuffer</name>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a44375c2d4b706e04d8a0efa768d82317" kind="variable"><name>commandQueues_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a9871363c020d1b0aa9d51505f2f187c4" kind="variable"><name>delayedQueues_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a8c0798c8503d1e8bce1a299b02c84d79" kind="function"><name>commandQueue</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a8b8587874be3065c9bf7b0f16e2a8d7b" kind="function"><name>delayedQueue</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a7231725a593fbecfffc902c09dde5eaa" kind="function"><name>shouldDelayCommand</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a012ec5bd8e6d51a276ba0b4a16d834e8" kind="function"><name>isDelayedCommandReady</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a9f6210ee4446435ac1d3d6c54c4d28d0" kind="function"><name>flushCommandQueue</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a35748f3c15d9e92098bed8d174cb7042" kind="function"><name>add</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a0df59b0da67db0a31fb34a9ec6c2802e" kind="function"><name>clear</name></member>
@@ -4468,6 +4503,8 @@
   </compound>
   <compound refid="concepthelios_1_1engine_1_1ecs_1_1traits_1_1HasToggleable" kind="concept"><name>helios::engine::ecs::traits::HasToggleable</name>
   </compound>
+  <compound refid="concepthelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1DelayedCommandLike" kind="concept"><name>helios::engine::runtime::messaging::command::DelayedCommandLike</name>
+  </compound>
   <compound refid="concepthelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1ExecutableCommand" kind="concept"><name>helios::engine::runtime::messaging::command::ExecutableCommand</name>
   </compound>
   <compound refid="concepthelios_1_1engine_1_1runtime_1_1world_1_1HasInit" kind="concept"><name>helios::engine::runtime::world::HasInit</name>
@@ -4754,6 +4791,7 @@
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1a889d521962836a37d91f60af0f2d7134aec0fc0100c4fc1ce4eea230c3dc10360" kind="enumvalue"><name>Undefined</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1a889d521962836a37d91f60af0f2d7134a8428552d86c0d262a542a528af490afa" kind="enumvalue"><name>Started</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1a889d521962836a37d91f60af0f2d7134ae99180abf47a8b3a856e0bcb2656990a" kind="enumvalue"><name>Paused</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1a889d521962836a37d91f60af0f2d7134a8f3d10eb21bd36347c258679eba9e92b" kind="enumvalue"><name>Finished</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1a889d521962836a37d91f60af0f2d7134ac23e2b09ebe6bf4cb5e2a9abe85c0be2" kind="enumvalue"><name>Stopped</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1ab554d63c8c7c9aa028b0115c23ae01eb" kind="typedef"><name>GameTimerId</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1a4ae687c1112aa406820d387d0874c62e" kind="typedef"><name>TimerRevision</name></member>
@@ -6376,6 +6414,8 @@
   </compound>
   <compound refid="GameTimer_8ixx" kind="file"><name>GameTimer.ixx</name>
   </compound>
+  <compound refid="GameTimerClearFinishedSystem_8ixx" kind="file"><name>GameTimerClearFinishedSystem.ixx</name>
+  </compound>
   <compound refid="GameTimerUpdateSystem_8ixx" kind="file"><name>GameTimerUpdateSystem.ixx</name>
   </compound>
   <compound refid="TimerManager_8ixx" kind="file"><name>TimerManager.ixx</name>
@@ -6674,6 +6714,8 @@
   <compound refid="Bindings_8ixx" kind="file"><name>Bindings.ixx</name>
   </compound>
   <compound refid="CombinedStateToIdMapPair_8ixx" kind="file"><name>CombinedStateToIdMapPair.ixx</name>
+  </compound>
+  <compound refid="DelayedStateCommand_8ixx" kind="file"><name>DelayedStateCommand.ixx</name>
   </compound>
   <compound refid="StateCommand_8ixx" kind="file"><name>StateCommand.ixx</name>
   </compound>
@@ -8019,6 +8061,9 @@
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1af07492567e1702becbb18f8c6558c6fe" kind="variable"><name>usesTimeFormatter_</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1af1e1363244f69cadd63491943886b02c" kind="variable"><name>usesNumberFormatter_</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1a7216728b3add9ce35a83af11ac98ca3c" kind="variable"><name>displayRemaining_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1acad8e6c0760d2a57a856d63f876e0e39" kind="variable"><name>elapsedLabel_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1a03c27fd915ea21f48c937edc0cbedce3" kind="variable"><name>showElapsedLabel_</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1afc36165ac450a0edf2e6eeedcbbc1a4d" kind="variable"><name>hideWhenZero_</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1a7f1df70d311469d84088585c6d87464c" kind="function"><name>TextRenderableConfig</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1a66d6104e4b12ead26571a68ac3b81d32" kind="function"><name>shader</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1a034f1916e01b6ed864829a719cd5b907" kind="function"><name>color</name></member>
@@ -8028,6 +8073,8 @@
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1a9926d2dc9bf427d311356be1688e5837" kind="function"><name>asUiText</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1a885e4403a6f954cbf7210e11137ecf68" kind="function"><name>formattedAsNumber</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1ac3a3564522f6184f32d7f18a99293885" kind="function"><name>formattedAsTimestamp</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1a3b0d0bce6313592bb883ca91f4ed6e18" kind="function"><name>useElapsedLabel</name></member>
+    <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1aceca0762c971984dd42e5d5f7896a029" kind="function"><name>hideWhenZero</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1a4a47ca4b0c2c05ba252fc13b9dee8183" kind="function"><name>displayRemaining</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1a89c15f75356c5b16e99202aabbb1ae71" kind="function"><name>text</name></member>
     <member refid="classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1TextRenderableConfig_1a1b8245c901285d30dd2bea44b3da153e" kind="function"><name>fontId</name></member>
@@ -9321,7 +9368,7 @@
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1aee2323e31c6dab6d2e68dd9f3edfdf67" kind="variable"><name>duration_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1a7eb218ba32a8e67527669c59ae514c84" kind="function"><name>GameTimer</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1ad6b866835b1abe74fddc84656b905b0b" kind="function"><name>gameTimerId</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1a922962ab881802e169b6054177505432" kind="function"><name>reset</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1ac67b9232d05fe125567cab91eb6001cb" kind="function"><name>reset</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1a503aa0a8253842e7559cdb6311b037b7" kind="function"><name>setDuration</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1af13faade128501fa439084b68c5aeb0d" kind="function"><name>duration</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1a153820d23667bc28e8574cd0a97c9224" kind="function"><name>elapsed</name></member>
@@ -9332,6 +9379,12 @@
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1adada69f1a2447d685949aaeab2d7c83e" kind="function"><name>update</name></member>
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8timing_8systems" kind="module"><name>helios.engine.mechanics.timing.systems</name>
+  </compound>
+  <compound refid="module__helios_8engine_8mechanics_8timing_8systems_8GameTimerClearFinishedSystem" kind="module"><name>helios.engine.mechanics.timing.systems.GameTimerClearFinishedSystem</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerClearFinishedSystem_1a0ea1c77795d3a6eb11ef872a0e7d6e92" kind="typedef"><name>EngineRoleTag</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerClearFinishedSystem_1ae3e2ec2affd8a9f163741d61486ac0e7" kind="variable"><name>timerManager_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerClearFinishedSystem_1abf8a8757f947b373ed572d2726b995af" kind="function"><name>GameTimerClearFinishedSystem</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerClearFinishedSystem_1a5ae60d03e8a12b23c54ff509b8375342" kind="function"><name>update</name></member>
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8timing_8systems_8GameTimerUpdateSystem" kind="module"><name>helios.engine.mechanics.timing.systems.GameTimerUpdateSystem</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerUpdateSystem_1a95f6a98a7892395a2f9fa779899f12cd" kind="typedef"><name>EngineRoleTag</name></member>
@@ -9371,6 +9424,7 @@
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1a889d521962836a37d91f60af0f2d7134aec0fc0100c4fc1ce4eea230c3dc10360" kind="enumvalue"><name>Undefined</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1a889d521962836a37d91f60af0f2d7134a8428552d86c0d262a542a528af490afa" kind="enumvalue"><name>Started</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1a889d521962836a37d91f60af0f2d7134ae99180abf47a8b3a856e0bcb2656990a" kind="enumvalue"><name>Paused</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1a889d521962836a37d91f60af0f2d7134a8f3d10eb21bd36347c258679eba9e92b" kind="enumvalue"><name>Finished</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1a889d521962836a37d91f60af0f2d7134ac23e2b09ebe6bf4cb5e2a9abe85c0be2" kind="enumvalue"><name>Stopped</name></member>
   </compound>
   <compound refid="module__helios_8engine_8modules" kind="module"><name>helios.engine.modules</name>
@@ -9706,7 +9760,6 @@
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1aa1cc086a73e9e3ee325fb0d0e3a54ef9" kind="variable"><name>inheritedVelocity_</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1a3a74329608a528a5bde4efcee4520e95" kind="variable"><name>useInstantAcceleration_</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1abb9f103c839b961be988d3d50b5d678a" kind="variable"><name>isEnabled_</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1a745a8663a434c916e61e3bf63530cc34" kind="function"><name>reset</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1ab057f76bc262b7fb045a95dd35a96207" kind="function"><name>isEnabled</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1aa0bc3eddd551fe802442a935c6f376f3" kind="function"><name>enable</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1a8c6e0bbc5e718ec9f71cbde02740ec60" kind="function"><name>disable</name></member>
@@ -9719,6 +9772,7 @@
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1a877c4f40c7bc4d79307705b83e3348f9" kind="function"><name>operator=</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1ad0446785c240392406ac661bb3545615" kind="function"><name>move</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1aa1f4491a3cb463f1af0145b4e70815a7" kind="function"><name>setMoveIntent</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1a745a8663a434c916e61e3bf63530cc34" kind="function"><name>reset</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1abe54a149864a4a7f78b6d8c43042a38a" kind="function"><name>onAcquire</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1a832a95a1858e8529f1393802d0c6fd88" kind="function"><name>onRelease</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1a034585ef8aed5c20e14800a8e800a54e" kind="function"><name>useInstantAcceleration</name></member>
@@ -9777,6 +9831,7 @@
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a7ce06db7df102652a6992e70a0de953f" kind="function"><name>setUseInstantRotation</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ae16cb98b0b4df5ac92ef2fa49ec1b498" kind="function"><name>setSteeringIntent</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ac9194439a950df5a8943a579eaf968fa" kind="function"><name>rotationAxis</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ab3fa810341f053248c69be9c4f35193f" kind="function"><name>reset</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ade0a4254510d8eb6f145f267683f7577" kind="function"><name>setCurrentRotationSpeed</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a0e95aecf39d77f15fc63d7fc0164cedc" kind="function"><name>currentRotationSpeed</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ad956a2d4066e0b66a0694db78c5fab7e" kind="function"><name>rotationAngleDelta</name></member>
@@ -10114,9 +10169,17 @@
   </compound>
   <compound refid="module__helios_8engine_8modules_8ui_8layout_8components_8TimeFormatterComponent" kind="module"><name>helios.engine.modules.ui.layout.components.TimeFormatterComponent</name>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1layout_1_1components_1_1TimeFormatterComponent_1acb765b38685d48fa03231e53f28ff7e9" kind="variable"><name>format_</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1layout_1_1components_1_1TimeFormatterComponent_1ac6792fb5047157e10a76cf82a5516b45" kind="variable"><name>elapsedLabel_</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1layout_1_1components_1_1TimeFormatterComponent_1ac399bcf8271c747560c3bcff3061d050" kind="variable"><name>hasElapsedLabel_</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1layout_1_1components_1_1TimeFormatterComponent_1a2256846047b11785e00a873329320217" kind="variable"><name>hideWhenZero_</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1layout_1_1components_1_1TimeFormatterComponent_1a9ee8ae07e8a3e8bf113fa639047a4ec5" kind="variable"><name>displayMode_</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1layout_1_1components_1_1TimeFormatterComponent_1a0b017686db8e4ad13115f220dba846b7" kind="function"><name>setFormat</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1layout_1_1components_1_1TimeFormatterComponent_1aeb1b16b5171edb1c9add6dc54d7739ce" kind="function"><name>format</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1layout_1_1components_1_1TimeFormatterComponent_1a6e660095ad825b1e1eeab635f7c9a042" kind="function"><name>setElapsedLabel</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1layout_1_1components_1_1TimeFormatterComponent_1a73869105cf44415c083331ce6b393602" kind="function"><name>elapsedLabel</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1layout_1_1components_1_1TimeFormatterComponent_1a103bf3dcef3cdfb641eb105e9a99ae63" kind="function"><name>hasElapsedLabel</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1layout_1_1components_1_1TimeFormatterComponent_1a03c46ba524c4324783d04fda5907e9d5" kind="function"><name>setHideWhenZero</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1layout_1_1components_1_1TimeFormatterComponent_1ad6c064e76d34d2f3993ce50a86ee9f08" kind="function"><name>hideWhenZero</name></member>
   </compound>
   <compound refid="module__helios_8engine_8modules_8ui_8layout_8types" kind="module"><name>helios.engine.modules.ui.layout.types</name>
   </compound>
@@ -10438,7 +10501,7 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandlerRegistry_1a5badec396bbaace0f760e6dd98e2bb59" kind="function"><name>submit</name></member>
   </compound>
   <compound refid="module__helios_8engine_8runtime_8messaging_8command_8EngineCommandBuffer" kind="module"><name>helios.engine.runtime.messaging.command.EngineCommandBuffer</name>
-    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1a89c5598b09b411d5197da2dc11a500b6" kind="typedef"><name>BufferImpl</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1a5225cd62a1aa24d84d0458c7b1baab02" kind="typedef"><name>BufferImpl</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1a4b73850d5fd337edd57bb4442f9171e1" kind="typedef"><name>EngineRoleTag</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1a0b3ddb0409bf4a07a4a8c12e6323f158" kind="variable"><name>impl_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1a661d0858913185ec6f6e35ef2b87c883" kind="function"><name>add</name></member>
@@ -10447,7 +10510,11 @@
   </compound>
   <compound refid="module__helios_8engine_8runtime_8messaging_8command_8TypedCommandBuffer" kind="module"><name>helios.engine.runtime.messaging.command.TypedCommandBuffer</name>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a44375c2d4b706e04d8a0efa768d82317" kind="variable"><name>commandQueues_</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a9871363c020d1b0aa9d51505f2f187c4" kind="variable"><name>delayedQueues_</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a8c0798c8503d1e8bce1a299b02c84d79" kind="function"><name>commandQueue</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a8b8587874be3065c9bf7b0f16e2a8d7b" kind="function"><name>delayedQueue</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a7231725a593fbecfffc902c09dde5eaa" kind="function"><name>shouldDelayCommand</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a012ec5bd8e6d51a276ba0b4a16d834e8" kind="function"><name>isDelayedCommandReady</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a9f6210ee4446435ac1d3d6c54c4d28d0" kind="function"><name>flushCommandQueue</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a35748f3c15d9e92098bed8d174cb7042" kind="function"><name>add</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a0df59b0da67db0a31fb34a9ec6c2802e" kind="function"><name>clear</name></member>
@@ -10934,6 +11001,7 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a5054ee6de251227e98c95d5d0ce05834" kind="function"><name>reset</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a66812a7325b8775911c39a96fdbffb42" kind="function"><name>setStateFrom</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a26784a3e90f2a97ca31cfa2ece4f41c9" kind="function"><name>state</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a796b5e0b53204fd9e26c971666fa8c97" kind="function"><name>stateFrom</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1ac1af4b2a7d4f75188d58591deafcacac" kind="function"><name>stateTransitionId</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a16a1563a9b807088e812aed53948ffb8" kind="function"><name>trackState</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Session_1a1aa1d3987c7c0df347c3925fcdd74b76" kind="function"><name>setViewportIds</name></member>
@@ -11050,6 +11118,13 @@
   </compound>
   <compound refid="module__helios_8engine_8state_8commands" kind="module"><name>helios.engine.state.commands</name>
   </compound>
+  <compound refid="module__helios_8engine_8state_8commands_8DelayedStateCommand" kind="module"><name>helios.engine.state.commands.DelayedStateCommand</name>
+    <member refid="classhelios_1_1engine_1_1state_1_1commands_1_1DelayedStateCommand_1a8228ef6683652437621b4ceff3a7db1a" kind="variable"><name>transitionRequest_</name></member>
+    <member refid="classhelios_1_1engine_1_1state_1_1commands_1_1DelayedStateCommand_1aafd431beea41f668cdc46e19a1f82390" kind="variable"><name>timerId_</name></member>
+    <member refid="classhelios_1_1engine_1_1state_1_1commands_1_1DelayedStateCommand_1ad52cf7ea24b62c15cbf3adca90734186" kind="function"><name>DelayedStateCommand</name></member>
+    <member refid="classhelios_1_1engine_1_1state_1_1commands_1_1DelayedStateCommand_1a0abf98dde4b986395003eec6384f93ea" kind="function"><name>transitionRequest</name></member>
+    <member refid="classhelios_1_1engine_1_1state_1_1commands_1_1DelayedStateCommand_1a310101bd3ddb5a134f7989600294cc33" kind="function"><name>gameTimerId</name></member>
+  </compound>
   <compound refid="module__helios_8engine_8state_8commands_8StateCommand" kind="module"><name>helios.engine.state.commands.StateCommand</name>
     <member refid="classhelios_1_1engine_1_1state_1_1commands_1_1StateCommand_1a987339f8584460de6304f8b053649dae" kind="variable"><name>transitionRequest_</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1commands_1_1StateCommand_1ace83f6aeefac821836ae3fd9cbcb099c" kind="function"><name>StateCommand</name></member>
@@ -11059,9 +11134,11 @@
   </compound>
   <compound refid="module__helios_8engine_8state_8components_8StateComponent" kind="module"><name>helios.engine.state.components.StateComponent</name>
     <member refid="classhelios_1_1engine_1_1state_1_1components_1_1StateComponent_1a451ae1471cd16ab5a85e29409813029c" kind="typedef"><name>StateTransitionIdType</name></member>
+    <member refid="classhelios_1_1engine_1_1state_1_1components_1_1StateComponent_1ae9ffb83abc533cd782b612f714cbe9c6" kind="variable"><name>from_</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1components_1_1StateComponent_1a4fffafb60f1bc06a13a68c6723e432f1" kind="variable"><name>transitionId_</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1components_1_1StateComponent_1ab957da148203c539191d69b7c759d9e5" kind="variable"><name>state_</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1components_1_1StateComponent_1a7601e23fab908350fd99ca7c705311b8" kind="function"><name>state</name></member>
+    <member refid="classhelios_1_1engine_1_1state_1_1components_1_1StateComponent_1ae03e030cbe638dea88365f31457eb3e7" kind="function"><name>from</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1components_1_1StateComponent_1a5765623510c9707702fb22e3b9cf8788" kind="function"><name>setStateFromTransitionContext</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1components_1_1StateComponent_1a77ca84a25d37303deccb76d414d83267" kind="function"><name>transitionId</name></member>
   </compound>
@@ -11096,6 +11173,7 @@
     <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a2e7db1e0999cebc060246a224139fcdb" kind="function"><name>addStateListener</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a9819c7a390fe2e1dc79aa03d3b36268d" kind="function"><name>flush</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a5dbf046b7fd2a72a339d20fb0ef8f642" kind="function"><name>submit</name></member>
+    <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a3c13c49ebbf2aed5855649a594639401" kind="function"><name>submit</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1acff9516eecb50435b3b6bf991b7a4335" kind="function"><name>init</name></member>
     <member refid="classhelios_1_1engine_1_1state_1_1StateManager_1a3f1fc9a5ce6bf775e027ac1123303647" kind="function"><name>reset</name></member>
   </compound>

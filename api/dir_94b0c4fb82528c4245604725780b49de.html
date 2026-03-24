@@ -150,7 +150,7 @@ Overview</h1>
 <p>This module provides a complete state management framework including:</p>
 <ul>
 <li><b>State machines</b> with rule-based transitions and guards</li>
-<li><b>Commands</b> for requesting state changes via the TypedCommandBuffer</li>
+<li><b>Commands</b> for requesting immediate or timer-deferred state changes via the command buffer</li>
 <li><b>Listeners</b> for reacting to state transitions</li>
 <li><b>ID mapping utilities</b> for associating states with viewports/menus</li>
 </ul>
@@ -171,9 +171,17 @@ State Management</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">LambdaStateListener&lt;StateType&gt;</span>  </td><td class="markdownTableBodyNone">Lambda-based listener implementation  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">StateCommand&lt;StateType&gt;</span>  </td><td class="markdownTableBodyNone">Command for requesting transitions  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">StateCommand&lt;StateType&gt;</span>  </td><td class="markdownTableBodyNone">Command for requesting immediate transitions  </td></tr>
 <tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">DelayedStateCommand&lt;StateType&gt;</span>  </td><td class="markdownTableBodyNone">Timer-deferred transition command  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">StateTransitionRequest&lt;StateType&gt;</span>  </td><td class="markdownTableBodyNone">Encapsulates source state and transition ID  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">StateTransitionContext&lt;StateType&gt;</span>  </td><td class="markdownTableBodyNone">Full context (from, to, transitionId) passed to listeners  </td></tr>
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">StateComponent&lt;StateType&gt;</span>  </td><td class="markdownTableBodyNone">Stores current state on entities  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">StateTypeId</span>  </td><td class="markdownTableBodyNone">Runtime type identifier for state types  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">Bindings</span>  </td><td class="markdownTableBodyNone">Compile-time specializations mapping state types to transition ID types  </td></tr>
 </table>
@@ -220,17 +228,18 @@ Defining Rules</h2>
 <div class="ttc" id="anamespacehelios_1_1engine_1_1state_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1state.html">helios::engine::state</a></div><div class="ttdoc">Generic, template-based state management system.</div><div class="ttdef"><b>Definition</b> <a href="Bindings_8ixx_source.html#l00017">Bindings.ixx:17</a></div></div>
 </div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md766"></a>
 Creating the Manager</h2>
-<div class="fragment"><div class="line"><span class="keyword">auto</span> gameStateManager = std::make_unique&lt;StateManager&lt;GameState&gt;&gt;(gameStateRules);</div>
+<div class="fragment"><div class="line"><span class="comment">// Register manager with rules via GameWorld</span></div>
+<div class="line"><span class="keyword">auto</span>&amp; gameStateManager = gameWorld.registerManager&lt;<a class="code hl_class" href="classhelios_1_1engine_1_1state_1_1StateManager.html">StateManager&lt;GameState&gt;</a>&gt;(gameStateRules);</div>
 <div class="line"> </div>
-<div class="line">gameStateManager-&gt;addStateListener(</div>
+<div class="line">gameStateManager.<a class="code hl_function" href="classhelios_1_1engine_1_1state_1_1StateManager.html#a2e7db1e0999cebc060246a224139fcdb">addStateListener</a>(</div>
 <div class="line">    std::make_unique&lt;LambdaStateListener&lt;GameState&gt;&gt;(</div>
 <div class="line">        [](<span class="keyword">auto</span>&amp; ctx, GameState from) { <span class="comment">/* onExit */</span> },</div>
 <div class="line">        [](<span class="keyword">auto</span>&amp; ctx, <span class="keyword">auto</span> transitionCtx) { <span class="comment">/* onTransition */</span> },</div>
 <div class="line">        [](<span class="keyword">auto</span>&amp; ctx, GameState to) { <span class="comment">/* onEnter */</span> }</div>
 <div class="line">    )</div>
 <div class="line">);</div>
-<div class="line"> </div>
-<div class="line">gameLoop.addManager(std::move(gameStateManager));</div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1state_1_1StateManager_html"><div class="ttname"><a href="classhelios_1_1engine_1_1state_1_1StateManager.html">helios::engine::state::StateManager</a></div><div class="ttdoc">Manages state transitions using a rule-based system.</div><div class="ttdef"><b>Definition</b> <a href="StateManager_8ixx_source.html#l00069">StateManager.ixx:69</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1state_1_1StateManager_html_a2e7db1e0999cebc060246a224139fcdb"><div class="ttname"><a href="classhelios_1_1engine_1_1state_1_1StateManager.html#a2e7db1e0999cebc060246a224139fcdb">helios::engine::state::StateManager::addStateListener</a></div><div class="ttdeci">StateManager &amp; addStateListener(std::unique_ptr&lt; StateTransitionListener&lt; StateType &gt; &gt; listener) noexcept</div><div class="ttdoc">Registers a state transition listener.</div><div class="ttdef"><b>Definition</b> <a href="StateManager_8ixx_source.html#l00166">StateManager.ixx:166</a></div></div>
 </div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md767"></a>
 Requesting Transitions</h2>
 <div class="fragment"><div class="line">updateContext.queueCommand&lt;StateCommand&lt;GameState&gt;&gt;(</div>
@@ -242,8 +251,26 @@ Requesting Transitions</h2>
 <div class="ttc" id="aclasshelios_1_1engine_1_1state_1_1types_1_1StateTransitionRequest_html"><div class="ttname"><a href="classhelios_1_1engine_1_1state_1_1types_1_1StateTransitionRequest.html">helios::engine::state::types::StateTransitionRequest</a></div><div class="ttdoc">Represents a request to perform a state transition.</div><div class="ttdef"><b>Definition</b> <a href="StateTransitionRequest_8ixx_source.html#l00028">StateTransitionRequest.ixx:28</a></div></div>
 </div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md768"></a>
 Transition Flow</h1>
-<p>1. <span class="tt">StateCommand</span> is submitted to the EngineCommandBuffer 2. The command is routed to <span class="tt">StateManager</span> via the registered handler in <span class="tt">CommandHandlerRegistry</span>. 3. <span class="tt">StateManager::flush()</span> processes pending commands 4. Matching rule is found and guard is evaluated 5. Listeners are notified: <span class="tt">onStateExit</span> → <span class="tt">onStateTransition</span> → <span class="tt">onStateEnter</span> 6. Session state is updated</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md769"></a>
+<p>1. <span class="tt">StateCommand</span> (or <span class="tt">DelayedStateCommand</span>) is submitted to the command buffer 2. The command is routed to <span class="tt">StateManager</span> via the registered handler in <span class="tt">CommandHandlerRegistry</span> 3. <span class="tt">StateManager::flush()</span> processes the <b>last</b> pending command (earlier commands are discarded) 4. The command's <span class="tt">from</span> state is validated against the current session state 5. Matching rule is found and guard is evaluated 6. Listeners and session state are updated in order:</p><ul>
+<li><span class="tt">onStateExit(from)</span></li>
+<li><span class="tt">onStateTransition(context)</span></li>
+<li>Session state updated via <span class="tt">StateComponent&lt;T&gt;</span></li>
+<li><span class="tt">onStateEnter(to)</span> (session already reflects the new state)</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md769"></a>
+Delayed Transitions</h2>
+<p><span class="tt">DelayedStateCommand&lt;StateType&gt;</span> pairs a <span class="tt">StateTransitionRequest</span> with a <span class="tt">GameTimerId</span>. On submission, the manager extracts the request and processes it as a regular <span class="tt">StateCommand</span>:</p>
+<div class="fragment"><div class="line">updateContext.queueCommand&lt;DelayedStateCommand&lt;MatchState&gt;&gt;(</div>
+<div class="line">    <a class="code hl_class" href="classhelios_1_1engine_1_1state_1_1types_1_1StateTransitionRequest.html">StateTransitionRequest&lt;MatchState&gt;</a>{</div>
+<div class="line">        MatchState::Countdown,</div>
+<div class="line">        MatchStateTransitionId::CountdownComplete</div>
+<div class="line">    },</div>
+<div class="line">    GameTimerId::CountdownTimer</div>
+<div class="line">);</div>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md770"></a>
+Reset Behavior</h2>
+<p><span class="tt">StateManager::reset()</span> is intentionally a no-op — clearing the pending queue would discard transitions required <em>by</em> the reset itself.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md771"></a>
 ID Mapping</h1>
 <p>For viewport/menu activation based on state:</p>
 <div class="fragment"><div class="line"><a class="code hl_class" href="classhelios_1_1engine_1_1state_1_1CombinedStateToIdMapPair.html">CombinedStateToIdMapPair&lt;GameState, MatchState, ViewportId&gt;</a> viewportPolicy;</div>

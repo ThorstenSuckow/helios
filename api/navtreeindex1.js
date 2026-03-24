@@ -1,5 +1,7 @@
 var NAVTREEINDEX1 =
 {
+"GameObjectLifecycleSystem_8ixx_source.html":[7,0,0,0,1,1,2,4,6,2,2],
+"GameObjectPoolConfig_8ixx.html":[7,0,0,0,1,1,2,6,2,4],
 "GameObjectPoolConfig_8ixx_source.html":[7,0,0,0,1,1,2,6,2,4],
 "GameObjectPoolId_8ixx.html":[7,0,0,0,1,1,2,6,2,1,1],
 "GameObjectPoolId_8ixx_source.html":[7,0,0,0,1,1,2,6,2,1,1],
@@ -27,10 +29,12 @@ var NAVTREEINDEX1 =
 "GameTimer2UiTextUpdateSystem_8ixx_source.html":[7,0,0,0,1,1,2,5,6,0,0,1],
 "GameTimerBindingComponent_8ixx.html":[7,0,0,0,1,1,2,4,10,1,1],
 "GameTimerBindingComponent_8ixx_source.html":[7,0,0,0,1,1,2,4,10,1,1],
+"GameTimerClearFinishedSystem_8ixx.html":[7,0,0,0,1,1,2,4,10,2,1],
+"GameTimerClearFinishedSystem_8ixx_source.html":[7,0,0,0,1,1,2,4,10,2,1],
 "GameTimerId_8ixx.html":[7,0,0,0,1,1,2,4,10,3,1],
 "GameTimerId_8ixx_source.html":[7,0,0,0,1,1,2,4,10,3,1],
-"GameTimerUpdateSystem_8ixx.html":[7,0,0,0,1,1,2,4,10,2,1],
-"GameTimerUpdateSystem_8ixx_source.html":[7,0,0,0,1,1,2,4,10,2,1],
+"GameTimerUpdateSystem_8ixx.html":[7,0,0,0,1,1,2,4,10,2,2],
+"GameTimerUpdateSystem_8ixx_source.html":[7,0,0,0,1,1,2,4,10,2,2],
 "GameTimer_8ixx.html":[7,0,0,0,1,1,2,4,10,5],
 "GameTimer_8ixx_source.html":[7,0,0,0,1,1,2,4,10,5],
 "GameWorld_8ixx.html":[7,0,0,0,1,1,2,6,4,2],
@@ -245,9 +249,5 @@ var NAVTREEINDEX1 =
 "Move2DSystem_8ixx_source.html":[7,0,0,0,1,1,2,5,2,1,2,1],
 "MoveInitializer_8ixx.html":[7,0,0,0,1,1,2,6,3,0,0,4],
 "MoveInitializer_8ixx_source.html":[7,0,0,0,1,1,2,6,3,0,0,4],
-"NumberFormatterComponent_8ixx.html":[7,0,0,0,1,1,2,5,6,1,0,1],
-"NumberFormatterComponent_8ixx_source.html":[7,0,0,0,1,1,2,5,6,1,0,1],
-"Numeric_8ixx.html":[7,0,0,0,1,1,5,0,1],
-"Numeric_8ixx_source.html":[7,0,0,0,1,1,5,0,1],
-"ObserverBuilder_8ixx.html":[7,0,0,0,1,1,2,0,0,0,10]
+"NumberFormatterComponent_8ixx.html":[7,0,0,0,1,1,2,5,6,1,0,1]
 };

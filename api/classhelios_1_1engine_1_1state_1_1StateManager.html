@@ -125,6 +125,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a9819c7a390fe2e1dc79aa03d3b36268d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes pending state commands.  <br /></td></tr>
 <tr class="memitem:a5dbf046b7fd2a72a339d20fb0ef8f642" id="r_a5dbf046b7fd2a72a339d20fb0ef8f642"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5dbf046b7fd2a72a339d20fb0ef8f642">submit</a> (const <a class="el" href="classhelios_1_1engine_1_1state_1_1commands_1_1StateCommand.html">StateCommand</a>&lt; StateType &gt; stateCommand) noexcept</td></tr>
 <tr class="memdesc:a5dbf046b7fd2a72a339d20fb0ef8f642"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submits a state command for processing.  <br /></td></tr>
+<tr class="memitem:a3c13c49ebbf2aed5855649a594639401" id="r_a3c13c49ebbf2aed5855649a594639401"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3c13c49ebbf2aed5855649a594639401">submit</a> (const <a class="el" href="classhelios_1_1engine_1_1state_1_1commands_1_1DelayedStateCommand.html">DelayedStateCommand</a>&lt; StateType &gt; stateCommand) noexcept</td></tr>
+<tr class="memdesc:a3c13c49ebbf2aed5855649a594639401"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submits a delayed state command for processing.  <br /></td></tr>
 <tr class="memitem:acff9516eecb50435b3b6bf991b7a4335" id="r_acff9516eecb50435b3b6bf991b7a4335"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acff9516eecb50435b3b6bf991b7a4335">init</a> (<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">helios::engine::runtime::world::GameWorld</a> &amp;gameWorld)</td></tr>
 <tr class="memdesc:acff9516eecb50435b3b6bf991b7a4335"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the manager and registers with GameWorld.  <br /></td></tr>
 <tr class="memitem:a3f1fc9a5ce6bf775e027ac1123303647" id="r_a3f1fc9a5ce6bf775e027ac1123303647"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3f1fc9a5ce6bf775e027ac1123303647">reset</a> ()</td></tr>
@@ -135,7 +137,7 @@ Public Member Functions</h2></td></tr>
 class helios::engine::state::StateManager&lt; StateType &gt;</div><p>Manages state transitions using a rule-based system. </p>
 <p>Implements both Manager and <a class="el" href="classhelios_1_1engine_1_1state_1_1TypedStateCommandHandler.html" title="Typed interface for handling state commands.">TypedStateCommandHandler</a> interfaces. Processes state transition commands by matching against registered rules, executing guards, and notifying listeners.</p>
 <p>## Transition Flow</p>
-<p>1. Commands are submitted via <a class="el" href="#a5dbf046b7fd2a72a339d20fb0ef8f642" title="Submits a state command for processing.">submit()</a> and queued 2. During <a class="el" href="#a9819c7a390fe2e1dc79aa03d3b36268d" title="Processes pending state commands.">flush()</a>, the last pending command is processed 3. Rules are checked to find a matching transition 4. If a guard is present, it must return true 5. Listeners are notified: onStateExit -&gt; onStateTransition -&gt; onStateEnter 6. Session state is updated</p>
+<p>1. Commands are submitted via <a class="el" href="#a5dbf046b7fd2a72a339d20fb0ef8f642" title="Submits a state command for processing.">submit()</a> and queued 2. During <a class="el" href="#a9819c7a390fe2e1dc79aa03d3b36268d" title="Processes pending state commands.">flush()</a>, the last pending command is processed 3. Rules are checked to find a matching transition 4. If a guard is present, it must return true 5. Listeners are notified: onStateExit -&gt; onStateTransition 6. Session state is updated via StateComponent 7. Listeners are notified: onStateEnter (session already reflects new state)</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">StateType</td><td>The state enum type.</td></tr>
@@ -148,7 +150,7 @@ class helios::engine::state::StateManager&lt; StateType &gt;</div><p>Manages sta
 <dd>
 <a class="el" href="classhelios_1_1engine_1_1state_1_1commands_1_1StateCommand.html" title="Command that requests a state transition.">StateCommand</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="StateManager_8ixx_source.html#l00068">68</a> of file <a class="el" href="StateManager_8ixx_source.html">StateManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="StateManager_8ixx_source.html#l00069">69</a> of file <a class="el" href="StateManager_8ixx_source.html">StateManager.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a1123ae4a933d5b6a9da97b3ff91f624f" name="a1123ae4a933d5b6a9da97b3ff91f624f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1123ae4a933d5b6a9da97b3ff91f624f">&#9670;&#160;</a></span>StateManager()</h2>
@@ -183,7 +185,7 @@ template&lt;typename StateType&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="StateManager_8ixx_source.html#l00155">155</a> of file <a class="el" href="StateManager_8ixx_source.html">StateManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="StateManager_8ixx_source.html#l00156">156</a> of file <a class="el" href="StateManager_8ixx_source.html">StateManager.ixx</a>.</p>
 
 </div>
 </div>
@@ -222,7 +224,7 @@ template&lt;typename StateType&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this manager for chaining. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="StateManager_8ixx_source.html#l00165">165</a> of file <a class="el" href="StateManager_8ixx_source.html">StateManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="StateManager_8ixx_source.html#l00166">166</a> of file <a class="el" href="StateManager_8ixx_source.html">StateManager.ixx</a>.</p>
 
 </div>
 </div>
@@ -260,7 +262,7 @@ template&lt;typename StateType&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="StateManager_8ixx_source.html#l00178">178</a> of file <a class="el" href="StateManager_8ixx_source.html">StateManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="StateManager_8ixx_source.html#l00179">179</a> of file <a class="el" href="StateManager_8ixx_source.html">StateManager.ixx</a>.</p>
 
 </div>
 </div>
@@ -297,7 +299,7 @@ template&lt;typename StateType&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="StateManager_8ixx_source.html#l00240">240</a> of file <a class="el" href="StateManager_8ixx_source.html">StateManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="StateManager_8ixx_source.html#l00261">261</a> of file <a class="el" href="StateManager_8ixx_source.html">StateManager.ixx</a>.</p>
 
 </div>
 </div>
@@ -328,12 +330,51 @@ template&lt;typename StateType&gt; </div>
 
 <p>Clears all pending commands. </p>
 
-<p class="definition">Definition at line <a class="el" href="StateManager_8ixx_source.html#l00247">247</a> of file <a class="el" href="StateManager_8ixx_source.html">StateManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="StateManager_8ixx_source.html#l00269">269</a> of file <a class="el" href="StateManager_8ixx_source.html">StateManager.ixx</a>.</p>
+
+</div>
+</div>
+<a id="a3c13c49ebbf2aed5855649a594639401" name="a3c13c49ebbf2aed5855649a594639401"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c13c49ebbf2aed5855649a594639401">&#9670;&#160;</a></span>submit() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename StateType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classhelios_1_1engine_1_1state_1_1StateManager.html">helios::engine::state::StateManager</a>&lt; StateType &gt;::submit </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1engine_1_1state_1_1commands_1_1DelayedStateCommand.html">DelayedStateCommand</a>&lt; StateType &gt;</td>          <td class="paramname"><span class="paramname"><em>stateCommand</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Submits a delayed state command for processing. </p>
+<p>Extracts the transition request from the delayed command and queues it as a regular <a class="el" href="classhelios_1_1engine_1_1state_1_1commands_1_1StateCommand.html" title="Command that requests a state transition.">StateCommand</a>. The timer ID is not retained by the manager. The delayed command is guaranteed to be ready for processing when submitted here.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stateCommand</td><td>The delayed command to queue.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True (always accepts commands). </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="StateManager_8ixx_source.html#l00249">249</a> of file <a class="el" href="StateManager_8ixx_source.html">StateManager.ixx</a>.</p>
 
 </div>
 </div>
 <a id="a5dbf046b7fd2a72a339d20fb0ef8f642" name="a5dbf046b7fd2a72a339d20fb0ef8f642"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5dbf046b7fd2a72a339d20fb0ef8f642">&#9670;&#160;</a></span>submit()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a5dbf046b7fd2a72a339d20fb0ef8f642">&#9670;&#160;</a></span>submit() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -366,7 +407,7 @@ template&lt;typename StateType&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True (always accepts commands). </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="StateManager_8ixx_source.html#l00228">228</a> of file <a class="el" href="StateManager_8ixx_source.html">StateManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="StateManager_8ixx_source.html#l00229">229</a> of file <a class="el" href="StateManager_8ixx_source.html">StateManager.ixx</a>.</p>
 
 </div>
 </div>

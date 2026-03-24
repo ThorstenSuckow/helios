@@ -7,7 +7,7 @@ Generic, template-based state management system with rule-based transitions.
 This module provides a complete state management framework including:
 
 - **State machines** with rule-based transitions and guards
-- **Commands** for requesting state changes via the TypedCommandBuffer
+- **Commands** for requesting immediate or timer-deferred state changes via the command buffer
 - **Listeners** for reacting to state transitions
 - **ID mapping utilities** for associating states with viewports/menus
 
@@ -23,8 +23,12 @@ All components are parameterized by state type, enabling reuse for different sta
 | `StateTransitionRule<StateType>` | Defines valid transitions with optional guards |
 | `StateTransitionListener<StateType>` | Interface for transition observers |
 | `LambdaStateListener<StateType>` | Lambda-based listener implementation |
-| `StateCommand<StateType>` | Command for requesting transitions |
+| `StateCommand<StateType>` | Command for requesting immediate transitions |
+| `DelayedStateCommand<StateType>` | Timer-deferred transition command |
+| `StateTransitionRequest<StateType>` | Encapsulates source state and transition ID |
+| `StateTransitionContext<StateType>` | Full context (from, to, transitionId) passed to listeners |
 | `StateComponent<StateType>` | Stores current state on entities |
+| `StateTypeId` | Runtime type identifier for state types |
 | `Bindings` | Compile-time specializations mapping state types to transition ID types |
 
 ### ID Mapping
@@ -69,17 +73,16 @@ constexpr StateTransitionRule<GameState> gameStateRules[] = {
 ### Creating the Manager
 
 ```cpp
-auto gameStateManager = std::make_unique<StateManager<GameState>>(gameStateRules);
+// Register manager with rules via GameWorld
+auto& gameStateManager = gameWorld.registerManager<StateManager<GameState>>(gameStateRules);
 
-gameStateManager->addStateListener(
+gameStateManager.addStateListener(
     std::make_unique<LambdaStateListener<GameState>>(
         [](auto& ctx, GameState from) { /* onExit */ },
         [](auto& ctx, auto transitionCtx) { /* onTransition */ },
         [](auto& ctx, GameState to) { /* onEnter */ }
     )
 );
-
-gameLoop.addManager(std::move(gameStateManager));
 ```
 
 ### Requesting Transitions
@@ -95,12 +98,34 @@ updateContext.queueCommand<StateCommand<GameState>>(
 
 ## Transition Flow
 
-1. `StateCommand` is submitted to the EngineCommandBuffer
-2. The command is routed to `StateManager` via the registered handler in `CommandHandlerRegistry`.
-3. `StateManager::flush()` processes pending commands
-4. Matching rule is found and guard is evaluated
-5. Listeners are notified: `onStateExit` → `onStateTransition` → `onStateEnter`
-6. Session state is updated
+1. `StateCommand` (or `DelayedStateCommand`) is submitted to the command buffer
+2. The command is routed to `StateManager` via the registered handler in `CommandHandlerRegistry`
+3. `StateManager::flush()` processes the **last** pending command (earlier commands are discarded)
+4. The command's `from` state is validated against the current session state
+5. Matching rule is found and guard is evaluated
+6. Listeners and session state are updated in order:
+   - `onStateExit(from)`
+   - `onStateTransition(context)`
+   - Session state updated via `StateComponent<T>`
+   - `onStateEnter(to)` (session already reflects the new state)
+
+### Delayed Transitions
+
+`DelayedStateCommand<StateType>` pairs a `StateTransitionRequest` with a `GameTimerId`. On submission, the manager extracts the request and processes it as a regular `StateCommand`:
+
+```cpp
+updateContext.queueCommand<DelayedStateCommand<MatchState>>(
+    StateTransitionRequest<MatchState>{
+        MatchState::Countdown,
+        MatchStateTransitionId::CountdownComplete
+    },
+    GameTimerId::CountdownTimer
+);
+```
+
+### Reset Behavior
+
+`StateManager::reset()` is intentionally a no-op — clearing the pending queue would discard transitions required *by* the reset itself.
 
 ## ID Mapping
 

@@ -55,8 +55,9 @@ export namespace helios::engine::state {
      * 2. During flush(), the last pending command is processed
      * 3. Rules are checked to find a matching transition
      * 4. If a guard is present, it must return true
-     * 5. Listeners are notified: onStateExit -> onStateTransition -> onStateEnter
-     * 6. Session state is updated
+     * 5. Listeners are notified: onStateExit -> onStateTransition
+     * 6. Session state is updated via StateComponent
+     * 7. Listeners are notified: onStateEnter (session already reflects new state)
      *
      * @tparam StateType The state enum type.
      *
@@ -233,12 +234,33 @@ export namespace helios::engine::state {
         };
 
         /**
+         * @brief Submits a delayed state command for processing.
+         *
+         * @details Extracts the transition request from the delayed command
+         * and queues it as a regular StateCommand. The timer ID is not
+         * retained by the manager.
+         * The delayed command is guaranteed to be ready for processing when
+         * submitted here.
+         *
+         * @param stateCommand The delayed command to queue.
+         *
+         * @return True (always accepts commands).
+         */
+        bool submit(
+            const DelayedStateCommand<StateType> stateCommand
+        ) noexcept {
+            pending_.push_back(StateCommand<StateType>(stateCommand.transitionRequest()));
+            return true;
+        };
+
+        /**
          * @brief Initializes the manager and registers with GameWorld.
          *
          * @param gameWorld The game world to register with.
          */
         void init(helios::engine::runtime::world::GameWorld& gameWorld) {
             gameWorld.registerCommandHandler<StateCommand<StateType>>(*this);
+            gameWorld.registerCommandHandler<DelayedStateCommand<StateType>>(*this);
         }
 
         /**

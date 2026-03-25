@@ -30,14 +30,30 @@ export namespace helios::engine::mechanics::match::components {
          */
         LivesRevision livesRevision_{1};
 
+        /**
+         * @brief Number of default lives this component starts with.
+         */
+        size_t defaultLives_;
+
         public:
 
         /**
          * @brief Constructs a LivesComponent with an initial life count.
          *
+        * @details Constructs a LivesComponent with an initial life count.
+        * The default lives for this component will be initially set to this value.
+         *
          * @param lives Initial number of lives.
          */
-        explicit LivesComponent(const size_t lives) noexcept : lives_(lives) {};
+        explicit LivesComponent(const size_t lives) noexcept : lives_(lives), defaultLives_(lives) {};
+
+        /**
+         * @brief Resets this component to an initial state.
+         */
+        void reset() noexcept {
+            livesRevision_++;
+            lives_ = defaultLives_;
+        }
 
         /**
          * @brief Returns the current life count.
@@ -54,6 +70,9 @@ export namespace helios::engine::mechanics::match::components {
          * @return The new life count after decrement.
          */
         size_t decrease() noexcept {
+            if (lives_ == 0) {
+                return 0;
+            }
             livesRevision_++;
             return --lives_;
         }

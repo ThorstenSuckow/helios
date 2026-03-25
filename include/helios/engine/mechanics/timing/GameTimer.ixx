@@ -18,7 +18,7 @@ export namespace helios::engine::mechanics::timing {
     /**
      * @brief A game timer identified by a GameTimerId.
      *
-     * Tracks elapsed time while in the Started state. Each update increments
+     * Tracks elapsed time while in the Running state. Each update increments
      * a revision counter that observers can use to detect changes.
      *
      * @see TimerManager
@@ -81,6 +81,25 @@ export namespace helios::engine::mechanics::timing {
         }
 
         /**
+         * @brief Resets timer by resetting its internal counter and
+         * setting its state to TimerState::Running.
+         *
+         * @see reset
+         */
+        void restart() noexcept {
+            reset(TimerState::Running);
+        }
+
+        /**
+         * @brief Cancels this timer by setting its state to TimerState::Cancelled.
+         *
+         * @see reset
+         */
+        void cancel() noexcept {
+            reset(TimerState::Cancelled);
+        }
+
+        /**
          * @brief Sets the duration limit.
          *
          * @param duration Duration in seconds.
@@ -129,10 +148,19 @@ export namespace helios::engine::mechanics::timing {
         /**
          * @brief Returns whether this timer should accumulate time.
          *
-         * @return True if the timer is in the Started state.
+         * @return True if the timer is in the Running state.
          */
         [[nodiscard]] bool shouldUpdate() const noexcept {
-            return (timerState_ == TimerState::Started);
+            return (timerState_ == TimerState::Running);
+        }
+
+        /**
+         * @brief Returns whether this timer's internal state represents the Finished-state.
+         *
+         * @return True if the timer is finished.
+         */
+        [[nodiscard]] bool isFinished() const noexcept {
+            return (timerState_ == TimerState::Finished);
         }
 
         /**
@@ -147,7 +175,7 @@ export namespace helios::engine::mechanics::timing {
         /**
          * @brief Advances the timer by the given frame time.
          *
-         * Only accumulates time when the timer is in the Started state.
+         * Only accumulates time when the timer is in the Running state.
          * Increments the revision counter on each successful update.
          *
          * @param ft Frame time in seconds.

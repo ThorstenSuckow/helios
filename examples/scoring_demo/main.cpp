@@ -15,6 +15,7 @@ import helios;
 import helios.ext;
 import helios.examples.scoring;
 import helios.examples.scoring.SpaceshipWidget;
+import helios.examples.scoring.StateOverlayWidget;
 
 // ============================================================================
 // Namespaces
@@ -181,12 +182,14 @@ int main() {
     auto logWidget = new LogWidget();
     auto cameraWidget = new CameraWidget();
     auto spaceshipWidget = new SpaceshipWidget();
+    auto stateOverlayWidget = new StateOverlayWidget();
     imguiOverlay.addWidget(menu);
     imguiOverlay.addWidget(fpsWidget);
     imguiOverlay.addWidget(gamepadWidget);
     imguiOverlay.addWidget(logWidget);
     imguiOverlay.addWidget(cameraWidget);
     imguiOverlay.addWidget(spaceshipWidget);
+    imguiOverlay.addWidget(stateOverlayWidget);
 
     // ----------------------------------------
     // 2.5 Logger Configuration
@@ -463,18 +466,19 @@ int main() {
 
     auto& poolManager            = gameWorld.registerManager<GameObjectPoolManager>();
     auto& scorePoolManager       = gameWorld.registerManager<ScorePoolManager>();
-    auto& timerManager           = gameWorld.registerManager<TimerManager>();
     auto& spawnManager           = gameWorld.registerManager<SpawnManager>();
     auto& uiActionCommandManager = gameWorld.registerManager<UiActionCommandManager>();
     auto& healthManager          = gameWorld.registerManager<HealthManager>();
 
-    auto& gameStateManager = gameWorld.manager<GameStateManager>();
+    auto& gameStateManager  = gameWorld.manager<GameStateManager>();
     auto& matchStateManager = gameWorld.manager<MatchStateManager>();
+    auto& timerManager      = gameWorld.manager<TimerManager>();
 
     // State listeners and UI action policies
-    installMatchStateListeners(matchStateManager);
-    installGameStateListeners(gameStateManager);
-    installDemoTimeListeners(gameStateManager, matchStateManager);
+    installMatchStateListeners(matchStateManager, timerManager);
+    installGameStateListeners(gameStateManager, timerManager);
+    installDemoTimeListeners(gameStateManager, matchStateManager, timerManager);
+    installCountdownTimeListeners(gameStateManager, matchStateManager, timerManager);
     applyUiActionCommandPolicies(uiActionCommandManager);
 
     scorePoolManager.addScorePool(ScorePoolId{"playerOneScorePool"});
@@ -497,7 +501,7 @@ int main() {
     stateToViewportMap.add(GameState::Any, ViewportId{"mainViewport"})
                       .add(GameState::Title, ViewportId{"titleViewport"})
                       .add(GameState::Paused | GameState::Running, ViewportId{"menuViewport"})
-                      .add(MatchState::Playing, ViewportId{"hudViewport"});
+                      .add(MatchState::Playing | MatchState::PlayerDefeated | MatchState::Countdown, ViewportId{"hudViewport"});
     stateToViewportMap.freeze();
 
     auto stateToMenuMap = CombinedStateToIdMapPair<
@@ -523,12 +527,6 @@ int main() {
     auto Running = GameState::Running;
     auto Paused = GameState::Paused;
     auto Title = GameState::Title;
-    auto Start = GameState::Start;
-
-    auto RunningOrTitle = GameState::Running |
-                          GameState::Title;
-    auto RunningOrPaused = GameState::Running |
-                          GameState::Paused;
 
     // ----------------------------------------
     // 9.1 Pre Phase: Input, Spawning, Movement
@@ -546,21 +544,29 @@ int main() {
             .addSystem<GameStateInputResponseSystem>()
             .addSystem<ScoreObserverSystem>(scorePoolManager)
             .addSystem<MaxScoreObserverSystem>(scorePoolManager)
+            .addCommitPoint(CommitPoint::Structural)
+
+            .addPass<MatchState>(MatchState::Playing | MatchState::PlayerDefeated)
             .addSystem<TwinStickInputSystem>(shipGameObject)
             .addCommitPoint(CommitPoint::Structural)
 
-            .addPass<GameState>(Running | Start | Title)
+            .addPass<GameState>(Title | Running)
             .addSystem<GameObjectSpawnSystem>(spawnManager)
             .addSystem<ProjectileSpawnSystem>(IdConfig::ProjectileSpawnSpawnProfileId)
             .addCommitPoint(CommitPoint::Structural)
 
-            .addPass<GameState>(Running | Start | Title | Paused)
+            // tech debt - should be an or condition: Runs in in GameState::Title OR MatchState::Playing
+            .addPass<MatchState>(MatchState::Playing)
+            .addSystem<ChaseSystem>()
+            .addCommitPoint(CommitPoint::Structural)
+
+
+            .addPass<GameState>(Running | Title | Paused)
             .addSystem<MenuDisplaySystem<GameState, MatchState>>(stateToMenuMap)
             .addSystem<ScaleSystem>()
             .addCommitPoint(CommitPoint::PassEvents)
 
-            .addPass<GameState>(Running | Start | Title)
-            .addSystem<ChaseSystem>()
+            .addPass<GameState>(Running | Title)
             .addSystem<SteeringSystem>()
             .addSystem<SpinSystem>()
             .addSystem<Move2DSystem>();
@@ -574,16 +580,17 @@ int main() {
             .addSystem<BoundsUpdateSystem>()
             .addCommitPoint()
 
-            .addPass<GameState>(Running | Start | Title)
+            .addPass<GameState>(Running | Title)
             .addSystem<LevelBoundsBehaviorSystem>()
             .addSystem<GridCollisionDetectionSystem>(
                 levelPtr->bounds(), ArenaConfig::CELL_LENGTH/2.0f
              )
             .addCommitPoint()
 
-            .addPass<GameState>(Running | Start |Title)
+            .addPass<GameState>(Running |Title)
             .addSystem<CollisionStateResponseSystem>()
             .addCommitPoint(CommitPoint::PassEvents)
+
             .addPass<GameState>(Running)//
             .addSystem<DamageOnCollisionSystem>()
             // makes sure manager generated passEvents are available in the next pass
@@ -591,25 +598,26 @@ int main() {
 
             .addPass<GameState>(Running)
             .addSystem<CombatScoringSystem>()
-            .addSystem<ScoringDemoRuleSystem>()
             .addSystem<GameObjectLifecycleSystem>()
+
             .addSystem<GameTimerUpdateSystem>(timerManager);
+
 
     // ----------------------------------------
     // 9.3 Post Phase: UI, Transform, Rendering, Cleanup
     // ----------------------------------------
     gameLoop.phase(PhaseType::Post)
              .addPass<GameState>(Running | Paused)
+             .addSystem<ScoringDemoRuleSystem>(timerManager)
              .addSystem<MenuNavigationSystem>()
              .addSystem<UiStyleUpdateSystem>()
              .addSystem<GameTimer2UiTextUpdateSystem>(timerManager)
              .addCommitPoint()
 
-             .addPass<GameState>(GameState::Any)
+             .addPass<GameState>(Any)
              .addSystem<Score2UiTextUpdateSystem>()
              .addSystem<Lives2UiTextUpdateSystem>()
              .addSystem<MaxScore2UiTextUpdateSystem>()
-
 
              .addSystem<UiTextBoundsUpdateSystem>()
              .addSystem<UiTransformSystem>()
@@ -620,13 +628,15 @@ int main() {
              .addSystem<SceneSyncSystem>(sceneToViewportMap)
              .addSystem<SceneRenderingSystem>(
                  app->renderingDevice(), sceneToViewportMap)
+             .addCommitPoint(CommitPoint::Structural)
 
-
+             .addPass<GameState>(Any)
              .addSystem<TransformClearSystem>()
              .addSystem<DelayedComponentEnablerSystem>()
              .addSystem<CollisionStateClearSystem>()
              .addSystem<ScoreObserverClearSystem>()
              .addSystem<HealthUpdateClearSystem>()
+             .addSystem<GameTimerClearSystem>(timerManager)
              .addSystem<MaxScoreObserverClearSystem>();
 
     // ========================================
@@ -642,6 +652,7 @@ int main() {
     auto* shipDirectionGizmoNode = shipDirectionGizmo.get<SceneNodeComponent>()->sceneNode();
 
     spaceshipWidget->addGameObject("Player 1", shipGameObject);
+    stateOverlayWidget->setSession(&gameWorld.session());
 
     gameWorld.init();
     gameLoop.init(gameWorld);
@@ -650,7 +661,7 @@ int main() {
     bool tilde = false;
 
     gameWorld.session().setStateFrom<GameState>(
-        StateTransitionContext<GameState>(GameState::Undefined, GameState::Start, GameStateTransitionId::StartRequested)
+        StateTransitionContext<GameState>(GameState::Undefined, GameState::Booted, GameStateTransitionId::BootRequest)
     );
 
     while (!win->shouldClose()) {

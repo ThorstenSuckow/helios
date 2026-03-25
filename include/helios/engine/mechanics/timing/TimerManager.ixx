@@ -148,16 +148,20 @@ export namespace helios::engine::mechanics::timing {
          * The pending list is cleared after processing.
          *
          * @param gameWorld Reference to the game world.
-         * @param update_context Reference to the current update context.
+         * @param updateContext Reference to the current update context.
          */
         void flush(
-            helios::engine::runtime::world::UpdateContext& update_context
+            helios::engine::runtime::world::UpdateContext& updateContext
         ) noexcept {
 
             for (const auto& controlContext : pendingControlContexts_) {
                 auto* timer = gameTimer(controlContext.gameTimerId);
                 if (timer) {
-                    timer->setState(controlContext.timerState);
+                    if (controlContext.resetElapsed) {
+                        timer->reset(controlContext.timerState);
+                    } else {
+                        timer->setState(controlContext.timerState);
+                    } 
                 }
             }
             pendingControlContexts_.clear();

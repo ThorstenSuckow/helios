@@ -28,22 +28,21 @@ export namespace helios::engine::mechanics::gamestate::types {
 
         Undefined = 0,
 
-        Start = 1 << 0,
+        Booted = 1 << 0,
 
-        Loading = 1 << 1,
+        Title = 1 << 1,
 
-        Title = 1 << 2,
+        MatchReady = 1 << 2,
 
-        Menu = 1 << 3,
+        Running = 1 << 3,
 
         Paused = 1 << 4,
 
-        Running = 1 << 5,
 
         /**
          * @brief Bitmask representing all defined states.
          */
-        Any = Start | Loading | Title | Menu | Paused | Running
+        Any = Booted | Running | MatchReady | Title | Paused
 
 
     };

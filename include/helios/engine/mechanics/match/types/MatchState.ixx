@@ -30,25 +30,15 @@ export namespace helios::engine::mechanics::match::types {
 
         Warmup = 1 << 0,
 
-        Intro = 1 << 1,
+        Start = 1 << 1,
 
         Countdown = 1 << 2,
 
-        PlayerSpawn = 1 << 3,
+        Playing = 1 << 3,
 
-        Playing = 1 << 4,
+        PlayerDefeated = 1 << 4,
 
-        PlayerDeath = 1 << 5,
-
-        GameOver = 1 << 6,
-
-        Finished = 1 << 7,
-
-
-        /**
-         * @brief Bitmask representing all defined states.
-         */
-        Any = Warmup | Intro | Countdown | Playing | PlayerDeath | PlayerSpawn | GameOver | Finished
+        GameOver = 1 << 5
 
     };
 

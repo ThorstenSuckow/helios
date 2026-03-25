@@ -26,14 +26,20 @@ export namespace helios::engine::mechanics::timing::types {
     struct TimerControlContext {
 
         /**
-         * @brief The target state for the timer.
-         */
-        const TimerState timerState = TimerState::Stopped;
+         * @brief The id of the timer to control.
+        */
+        const GameTimerId gameTimerId;
 
         /**
-         * @brief The id of the timer to control.
+         * @brief The target state for the timer.
          */
-        const GameTimerId gameTimerId;
+        const TimerState timerState;
+
+        /**
+         * @brief Indicates whether the timer's elapsed seconds should be reset to 0 before applying
+         * the new state.
+         */
+        const bool resetElapsed = false;
     };
 
 }

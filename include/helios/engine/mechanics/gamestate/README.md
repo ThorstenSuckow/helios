@@ -2,7 +2,7 @@
 
 Game state management for the helios engine.
 
-This module provides domain-specific types and bindings for managing game states (Title, Running, Paused). It uses the generic `helios::engine::state` framework.
+This module provides domain-specific types and bindings for managing game states (Booted, Title, MatchReady, Running, Paused). It uses the generic `helios::engine::state` framework.
 
 ## Components
 
@@ -36,16 +36,20 @@ The generic `StateManager` provides:
 ## State Flow
 
 ```
-┌─────────────┐   StartRequested   ┌─────────────┐
-│    Title    │ ─────────────────► │   Running   │
-└─────────────┘                    └─────────────┘
-                                         │
-                                   TogglePause
-                                         │
-                                         ▼
-                                   ┌─────────────┐
-                                   │   Paused    │
-                                   └─────────────┘
+┌──────────┐  BootRequest  ┌──────────┐  TitleRequest  ┌──────────┐
+│Undefined │ ────────────► │  Booted  │ ─────────────► │  Title   │
+└──────────┘               └──────────┘                └──────────┘
+                                                             │
+                                                    ReadyMatchRequest
+                                                             │
+                                                             ▼
+                                                       ┌────────────┐
+                           ┌─── TogglePause ────────── │  Running   │
+                           │                           └────────────┘
+                           ▼                                 ▲
+                     ┌──────────┐                            │
+                     │  Paused  │ ─── TogglePause ───────────┘
+                     └──────────┘
 ```
 
 ## Usage
@@ -67,7 +71,7 @@ manager->addStateListener(std::make_unique<LambdaStateListener<types::GameState>
 commandBuffer.add<StateCommand<types::GameState>>(
     StateTransitionRequest<types::GameState>{
         types::GameState::Title,
-        types::GameStateTransitionId::StartRequested
+        types::GameStateTransitionId::ReadyMatchRequest
     }
 );
 ```
@@ -80,4 +84,3 @@ commandBuffer.add<StateCommand<types::GameState>>(
 @brief Game state management for the helios engine.
 @details Provides domain-specific types and bindings for managing game states using the generic helios::engine::state framework.
 </p></details>
-

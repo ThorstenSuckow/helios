@@ -12,9 +12,13 @@ Systems for match state management.
 ## MatchFlowSystem
 
 Drives automatic state progression through:
-- Undefined → Warmup
-- Warmup → PlayerSpawn
-- PlayerSpawn → Playing
+- Undefined → Warmup (WarmupRequest)
+- Warmup → Start (StartRequest)
+- Start → Countdown (CountdownRequest, guarded: player must be active)
+- Countdown → Playing (PlayerSpawnRequest)
+- Playing → PlayerDefeated (PlayerDied)
+- PlayerDefeated → Countdown (CountdownRequest, guarded: has life left)
+- PlayerDefeated → GameOver (GameOverRequest, guarded: no life left)
 
 ## MatchRuleSystem
 
@@ -28,4 +32,3 @@ Placeholder system for evaluating match rules such as win/lose conditions, time 
 @brief Systems for match state management.
 @details Contains ECS systems that handle match flow and rule logic.
 </p></details>
-

@@ -79,6 +79,7 @@ During flush, the `TypedCommandBuffer` checks each delayed command's timer state
 |-------------|--------|
 | Running | Command is moved to a scratch queue and survives the flush cycle |
 | Finished | Command is dispatched normally (handler or self-execute) |
+| Cancelled | Command is silently dropped (timer was cancelled) |
 | Undefined | Command is silently dropped (timer was removed) |
 
 Usage example:
@@ -88,7 +89,7 @@ Usage example:
 ctx.queueCommand<DelayedStateCommand<MatchState>>(
     StateTransitionRequest<MatchState>{
         MatchState::Countdown,
-        MatchStateTransitionId::CountdownComplete
+        MatchStateTransitionId::PlayerSpawnRequest
     },
     GameTimerId::CountdownTimer
 );

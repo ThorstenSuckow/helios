@@ -16,9 +16,14 @@ Core types for game state management.
 ## GameState
 
 Bitmask enum with values:
-- `Undefined`, `Loading`, `Title`, `Menu`, `Paused`, `Running`, `Any`
+- `Undefined`, `Booted`, `Title`, `MatchReady`, `Running`, `Paused`, `Any`
 
 Supports bitwise operators for combining states.
+
+## GameStateTransitionId
+
+Transition identifiers:
+- `Undefined`, `BootRequest`, `ReadyMatchRequest`, `StartMatchRequest`, `TogglePause`, `TitleRequest`
 
 ## GameStateTransitionRule
 
@@ -26,7 +31,6 @@ Defines a valid transition with:
 - Source state (`from`)
 - Transition identifier (`transitionId`)
 - Target state (`to`)
-- Transition type
 - Optional guard callback
 
 ---
@@ -37,4 +41,3 @@ Defines a valid transition with:
 @brief Core types for game state management.
 @details Contains enums, structs, and classes for state machine operations.
 </p></details>
-

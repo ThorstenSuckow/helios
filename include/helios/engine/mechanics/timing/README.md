@@ -17,7 +17,7 @@ This module provides timers, commands, components, and systems for tracking elap
 
 | Class | Description |
 |-------|-------------|
-| `GameTimer` | A named timer that tracks elapsed time while in the Started state |
+| `GameTimer` | A named timer that tracks elapsed time while in the Running state |
 | `TimerManager` | Manager that owns timers and processes pending control commands during flush |
 | `TimerCommandHandler` | Abstract handler interface for timer control commands |
 

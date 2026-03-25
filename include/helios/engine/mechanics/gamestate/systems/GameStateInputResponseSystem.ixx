@@ -57,7 +57,7 @@ export namespace helios::engine::mechanics::gamestate::systems {
                 switch (gameState) {
                     case GameState::Title:
                         updateContext.queueCommand<StateCommand<GameState>>(
-                            StateTransitionRequest<GameState>(GameState::Title, GameStateTransitionId::StartRequested)
+                            StateTransitionRequest<GameState>(GameState::Title, GameStateTransitionId::ReadyMatchRequest)
                         );
                         break;
 

@@ -29,90 +29,101 @@ export namespace helios::engine::mechanics::match::rules {
 
             StateTransitionRule<MatchState>(
                 MatchState::Undefined,
-                MatchStateTransitionId::WarmupRequested,
+                MatchStateTransitionId::WarmupRequest,
                 MatchState::Warmup
             ),
 
             StateTransitionRule<MatchState>(
                 MatchState::Warmup,
-                MatchStateTransitionId::PlayerSpawnRequested,
-                MatchState::PlayerSpawn
+                MatchStateTransitionId::StartRequest,
+                MatchState::Start
             ),
 
             StateTransitionRule<MatchState>(
-                MatchState::PlayerSpawn,
-                MatchStateTransitionId::IntroRequested,
-                MatchState::Intro,
-                &DefaultMatchStateTransitionGuards::isPlayerActive
-            ),
-
-            StateTransitionRule<MatchState>(
-                MatchState::PlayerSpawn,
-                MatchStateTransitionId::CountdownRequested,
+                MatchState::Start,
+                MatchStateTransitionId::CountdownRequest,
                 MatchState::Countdown,
                 &DefaultMatchStateTransitionGuards::isPlayerActive
-            ),
-
-            StateTransitionRule<MatchState>(
-               MatchState::PlayerSpawn,
-               MatchStateTransitionId::StartRequested,
-               MatchState::Playing,
-               &DefaultMatchStateTransitionGuards::isPlayerActive
-           ),
-
-
-            StateTransitionRule<MatchState>(
-                MatchState::Intro,
-                MatchStateTransitionId::CountdownRequested,
-                MatchState::Countdown
             ),
 
 
             StateTransitionRule<MatchState>(
                 MatchState::Countdown,
-                MatchStateTransitionId::StartRequested,
+                MatchStateTransitionId::PlayerSpawnRequest,
                 MatchState::Playing
             ),
 
             StateTransitionRule<MatchState>(
                 MatchState::Playing,
                 MatchStateTransitionId::PlayerDied,
-                MatchState::PlayerDeath
+                MatchState::PlayerDefeated
             ),
 
             StateTransitionRule<MatchState>(
-               MatchState::PlayerDeath,
-               MatchStateTransitionId::PlayerSpawnRequested,
-               MatchState::PlayerSpawn,
-                &DefaultMatchStateTransitionGuards::isPlayerInactive
-           ),
-
-            StateTransitionRule<MatchState>(
-               MatchState::Playing,
-               MatchStateTransitionId::QuitRequested,
-               MatchState::PlayerDeath
-           ),
+               MatchState::PlayerDefeated,
+               MatchStateTransitionId::CountdownRequest,
+               MatchState::Countdown,
+                &DefaultMatchStateTransitionGuards::hasLifeLeft
+            ),
 
 
             StateTransitionRule<MatchState>(
-               MatchState::PlayerDeath,
-               MatchStateTransitionId::QuitRequested,
+               MatchState::PlayerDefeated,
+               MatchStateTransitionId::GameOverRequest,
                MatchState::GameOver,
-               &DefaultMatchStateTransitionGuards::isPlayerInactive
+                &DefaultMatchStateTransitionGuards::hasNoLifeLeft
            ),
 
             StateTransitionRule<MatchState>(
-        MatchState::GameOver,
-           MatchStateTransitionId::RestartRequested,
-           MatchState::Warmup,
-            &DefaultMatchStateTransitionGuards::isPlayerInactive
-        ),
+                MatchState::GameOver,
+                MatchStateTransitionId::WarmupRequest,
+                MatchState::Warmup
+            ),
 
             StateTransitionRule<MatchState>(
-        MatchState::GameOver,
-        MatchStateTransitionId::QuitRequested,
-        MatchState::Undefined
-        )
+                MatchState::GameOver,
+                MatchStateTransitionId::StartRequest,
+                MatchState::Start
+            ),
+
+
+            // cancel states
+            StateTransitionRule<MatchState>(
+                MatchState::Countdown,
+                MatchStateTransitionId::StartRequest,
+                MatchState::Start
+            ),
+            StateTransitionRule<MatchState>(
+                MatchState::Playing,
+                MatchStateTransitionId::StartRequest,
+                MatchState::Start
+            ),
+            StateTransitionRule<MatchState>(
+                MatchState::PlayerDefeated,
+                MatchStateTransitionId::StartRequest,
+                MatchState::Start
+            ),
+            StateTransitionRule<MatchState>(
+                MatchState::Playing,
+                MatchStateTransitionId::WarmupRequest,
+                MatchState::Warmup
+            ),
+            StateTransitionRule<MatchState>(
+                MatchState::Countdown,
+                MatchStateTransitionId::WarmupRequest,
+                MatchState::Warmup
+            ),
+            StateTransitionRule<MatchState>(
+                MatchState::PlayerDefeated,
+                MatchStateTransitionId::WarmupRequest,
+                MatchState::Warmup
+            ),
+
+            StateTransitionRule<MatchState>(
+                MatchState::Playing,
+                MatchStateTransitionId::GameOverRequest,
+                MatchState::GameOver
+            ),
 
 
 

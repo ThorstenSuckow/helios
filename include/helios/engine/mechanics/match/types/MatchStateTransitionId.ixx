@@ -23,32 +23,19 @@ export namespace helios::engine::mechanics::match::types {
 
         Undefined,
 
-        WarmupRequested,
+        WarmupRequest,
 
-        WarmupDone,
+        StartRequest,
 
-        IntroRequested,
+        QuitRequest,
 
-        IntroDone,
-
-        CountdownRequested,
-
-        CountdownDone,
-
-        PlayerSpawnRequested,
-
-        StartRequested,
-
-        TimeExpired,
+        CountdownRequest,
 
         PlayerDied,
 
-        RespawnRequested,
+        PlayerSpawnRequest,
 
-        QuitRequested,
-
-        RestartRequested
-
+        GameOverRequest
 
     };
 

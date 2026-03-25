@@ -22,25 +22,15 @@ export namespace helios::engine::mechanics::gamestate::types {
 
         Undefined = 0,
 
-        TitleRequested,
-        TitleShowing,
+        BootRequest,
 
-        StartRequested,
-        Starting,
+        ReadyMatchRequest,
 
-        ResumeRequested,
-        Resuming,
+        StartMatchRequest,
 
         TogglePause,
 
-        LoadRequested,
-        Loading,
-
-        QuitGameRequested,
-        QuittingGame,
-
-        RestartRequested,
-        Restarting
+        TitleRequest
 
     };
 

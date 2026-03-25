@@ -15,8 +15,11 @@ import helios.engine.state.Bindings;
 import helios.engine.mechanics.match.types;
 import helios.engine.state.types;
 
+import helios.engine.mechanics.match.components.LivesComponent;
+
 using namespace helios::engine::mechanics::match::types;
 using namespace helios::engine::state::types;
+using namespace helios::engine::mechanics::match::components;
 
 export namespace helios::engine::mechanics::match::rules::guards {
 
@@ -69,6 +72,44 @@ export namespace helios::engine::mechanics::match::rules::guards {
             auto playerOpt = updateContext.find(updateContext.session().playerEntityHandle());
             return playerOpt.has_value() && !playerOpt->isActive();
 
+        }
+
+        /**
+         * @brief Guard that allows transition only if the player has lives left.
+         *
+         * @param updateContext The current frame's update context.
+         * @param transitionRequest The requested state transition.
+         *
+         * @return True if the player entity has lives left.
+         */
+        static bool hasLifeLeft(
+            helios::engine::runtime::world::UpdateContext& updateContext,
+            const StateTransitionRequest<MatchState> transitionRequest
+        ) {
+            auto playerOpt = updateContext.find(updateContext.session().playerEntityHandle());
+            if (!playerOpt) {
+                return false;
+            }
+            auto* lc = playerOpt->get<LivesComponent>();
+            return lc && lc->lives() > 0;
+
+        }
+
+        /**
+         * @brief Guard that allows transition only if the player has no lives left.
+         *
+         * @param updateContext The current frame's update context.
+         * @param transitionRequest The requested state transition.
+         *
+         * @return True if the player entity has no lives left.
+         *
+         * @see hasLifeLeft
+         */
+        static bool hasNoLifeLeft(
+            helios::engine::runtime::world::UpdateContext& updateContext,
+            const StateTransitionRequest<MatchState> transitionRequest
+        ) {
+           return !hasLifeLeft(updateContext, transitionRequest);
         }
 
     };

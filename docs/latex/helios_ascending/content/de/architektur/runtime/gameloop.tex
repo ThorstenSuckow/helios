@@ -24,8 +24,8 @@ Das Konzept der \texttt{GameLoop} ist in Abbildung~\ref{fig:gameloop} skizziert.
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.8\textwidth]{content/de/architektur/runtime/img/gameloop.png}
-    \caption{Skizze der \texttt{GameLoop} in \textit{helios}, die die Unterteilung in Phasen und Passes sowie die Zuordnung von Systemen zu den verschiedenen Passes darstellt. (Quelle: eigene Darstellung)}
+    \includegraphics[width=1.0\textwidth]{content/de/architektur/runtime/img/gameloop}
+    \caption{Skizze der \texttt{GameLoop} in \textit{helios}, die die Unterteilung in Phasen und Passes sowie die Zuordnung von Systemen zu den verschiedenen Passes darstellt. Phasen besitzen implizite Synchronisationspunkte, an denen ein Austausch der Schreib-/Lesepuffer stattfindet und die \textit{Manager} und \textit{CommandBuffer} geflusht werden; in einem Pass wird ein Synchronisationspunkt über einen \textit{CommitPoint} explizit erzeugt. Jeder \texttt{Pass} kann einem beliebigen \texttt{GameState} oder \texttt{MatchState} zugeordnet werden, um Systeme gezielt zustandsabhängig laufen zu lassen.  (Quelle: eigene Darstellung)}
     \label{fig:gameloop}
 \end{figure}
 

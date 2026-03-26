@@ -536,7 +536,7 @@ int main() {
             .addSystem<GameFlowSystem>()
             .addCommitPoint(CommitPoint::Structural)
 
-            .addPass<GameState>(Running | Paused)
+            .addPass<GameState>(Running)
             .addSystem<MatchFlowSystem>()
             .addCommitPoint(CommitPoint::Structural)
 
@@ -599,7 +599,7 @@ int main() {
             .addPass<GameState>(Running)
             .addSystem<CombatScoringSystem>()
             .addSystem<GameObjectLifecycleSystem>()
-
+            .addSystem<ScoringDemoRuleSystem>(timerManager)
             .addSystem<GameTimerUpdateSystem>(timerManager);
 
 
@@ -608,7 +608,6 @@ int main() {
     // ----------------------------------------
     gameLoop.phase(PhaseType::Post)
              .addPass<GameState>(Running | Paused)
-             .addSystem<ScoringDemoRuleSystem>(timerManager)
              .addSystem<MenuNavigationSystem>()
              .addSystem<UiStyleUpdateSystem>()
              .addSystem<GameTimer2UiTextUpdateSystem>(timerManager)

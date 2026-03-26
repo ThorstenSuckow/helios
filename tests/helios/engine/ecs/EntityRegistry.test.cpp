@@ -1,9 +1,10 @@
 #include <gtest/gtest.h>
 #include <helios/helios_config.h>
 
-import helios.engine.ecs;
+import helios;
 
 using namespace helios::engine::ecs;
+using namespace helios::engine::common::types;
 using namespace helios::engine::ecs::types;
 
 

@@ -31,19 +31,26 @@ Damit können spielspezifische Reaktionen auf Zustandswechsel realisiert werden.
 \subsubsection{GameState und MatchState als vorimplementierte Zustandstypen}
 
 Der \texttt{GameState} dient der Verwaltung globaler Anwendungszustände wie \texttt{Title}, \texttt{Running} und \texttt{Paused}.
-Er stellt den übergeordneten Automaten dar, der den Lebenszyklus der Anwendung abbildet.\\
-
-Dem \texttt{MatchState} liegt der Gedanke eines dem \texttt{GameState} hierarchisch untergeordneten Automaten zugrunde (\textit{Hierarchical State Machine}, \textit{HSM}~\cite{Hei04}).
-Er beschreibt den Ablauf innerhalb einer aktiven Spielsitzung über Zustände wie \texttt{Warmup}, \texttt{Countdown}, \texttt{Playing} oder \texttt{GameOver}.
-Zustandswechsel dieses Automaten erfolgen in der \textit{Scoring Demo} ausschließlich dann, wenn sich der \texttt{GameState} im Zustand \texttt{Running} befindet - also bei aktiven Zustandswechseln auf Basis des Regelsystems des Spiels - beziehungsweise im Zustand \texttt{Paused}, etwa als Reaktion auf ``Spiel beenden''-Aktionen zum Abspielen einer Animation.
-
-Die Zustände und ihre Übergänge sind in Abbildung~\ref{fig:state_management} dargestellt.
+Sein Zweck besteht in der Kapselung anderer, spielspezifischer Automaten und der Repräsentation des Lebenszyklus der Anwendung.
+Die Modellierung ist in Abbildung~\ref{fig:game_state} dargestellt.\\
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.8\textwidth]{content/de/architektur/runtime/img/state_management.png}
-    \caption{Zustände und Zustandswechsel des \texttt{GameState} und \texttt{MatchState} in \textit{helios}. (Quelle: eigene Darstellung)}
-    \label{fig:state_management}
+    \includegraphics[width=1.0\textwidth]{content/de/architektur/runtime/img/game_state}
+    \caption{Zustände und Zustandswechsel des \texttt{GameStates}. Im Zustand \texttt{Running} läuft das \texttt{MatchFlowSystem}, ein Treiber für den \texttt{MatchState}-Automaten, der implizite Zustandswechsel ermöglicht. (Quelle: eigene Darstellung)}
+    \label{fig:game_state}
+\end{figure}
+
+Der \texttt{MatchState} beschreibt den Ablauf innerhalb einer aktiven Spielsitzung über Zustände wie \texttt{Warmup}, \texttt{Countdown}, \texttt{Playing} oder \texttt{GameOver}.
+Der Modellierung liegt der Gedanke einer dem \texttt{GameState} untergeordneten \textit{Hierarchical State Machine}~\cite{Hei04} zugrunde:
+Je nach Zuständen des \texttt{GameState}-Automaten (\texttt{Running}, \texttt{Paused}) sind in \texttt{MatchState} Zustandswechsel möglich.
+Eine Abbildung des Automaten ist in Abbildung~\ref{fig:match_state} dargestellt.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=1.0\textwidth]{content/de/architektur/runtime/img/match_state}
+    \caption{Zustände und Zustandswechsel des \texttt{MatchState}-Automaten, hier unter Berücksichtigung der \textit{Scoring Demo}-Implementierung. (Quelle: eigene Darstellung)}
+    \label{fig:match_state}
 \end{figure}
 
 \subsubsection{Zustandsabhängiges Rendering}

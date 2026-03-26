@@ -303,8 +303,8 @@ int main() {
     // ========================================
     // 7. Manager Registration
     // ========================================
-    auto& poolManager = gameWorld.registerResource<helios::engine::runtime::pooling::GameObjectPoolManager>();
-    auto& spawnManager = gameWorld.registerResource<helios::engine::runtime::spawn::SpawnManager>();
+    auto& poolManager = gameWorld.registerManager<helios::engine::runtime::pooling::GameObjectPoolManager>();
+    auto& spawnManager = gameWorld.registerManager<helios::engine::runtime::spawn::SpawnManager>();
 
     // Spawn system
     helios::engine::builder::spawnSystem::SpawnSystemFactory::configure(poolManager, spawnManager)
@@ -388,7 +388,7 @@ int main() {
     gameLoop.init(gameWorld);
 
     gameWorld.session().setStateFrom<GameState>(
-        StateTransitionContext<GameState>(GameState::Undefined, GameState::Start, GameStateTransitionId::StartRequested)
+        StateTransitionContext<GameState>(GameState::Undefined, GameState::Booted, GameStateTransitionId::BootRequest)
     );
 
     bool showImgui = false;

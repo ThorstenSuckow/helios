@@ -119,7 +119,7 @@ var hierarchy =
     [ "helios::engine::mechanics::timing::GameTimer", "classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer.html", null ],
     [ "helios::engine::modules::ui::binding::systems::GameTimer2UiTextUpdateSystem", "classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1GameTimer2UiTextUpdateSystem.html", null ],
     [ "helios::engine::mechanics::timing::components::GameTimerBindingComponent", "classhelios_1_1engine_1_1mechanics_1_1timing_1_1components_1_1GameTimerBindingComponent.html", null ],
-    [ "helios::engine::mechanics::timing::systems::GameTimerClearFinishedSystem", "classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerClearFinishedSystem.html", null ],
+    [ "helios::engine::mechanics::timing::systems::GameTimerClearSystem", "classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerClearSystem.html", null ],
     [ "helios::engine::mechanics::timing::types::GameTimerIdTag", "structhelios_1_1engine_1_1mechanics_1_1timing_1_1types_1_1GameTimerIdTag.html", null ],
     [ "helios::engine::mechanics::timing::systems::GameTimerUpdateSystem", "classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerUpdateSystem.html", null ],
     [ "helios::engine::runtime::world::GameWorld", "classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html", null ],

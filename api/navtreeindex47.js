@@ -1,5 +1,12 @@
 var NAVTREEINDEX47 =
 {
+"module__helios_8engine_8runtime_8spawn_8policy_8SpawnRuleState.html#a14793552dd821e0e8e6b16e9ba0e17cf":[3,0,493,2],
+"module__helios_8engine_8runtime_8spawn_8policy_8SpawnRuleState.html#a178a45b900a5b447525fa576f67a37f9":[3,0,493,3],
+"module__helios_8engine_8runtime_8spawn_8policy_8SpawnRuleState.html#a4bafae2ee2a3e98fed58dbe69d9c5af4":[3,0,493,1],
+"module__helios_8engine_8runtime_8spawn_8policy_8amount.html":[3,0,482],
+"module__helios_8engine_8runtime_8spawn_8policy_8amount_8FixedSpawnAmount.html":[3,0,483],
+"module__helios_8engine_8runtime_8spawn_8policy_8amount_8FixedSpawnAmount.html#a140169886aab1fae6f9b2773c061dd0b":[3,0,483,2],
+"module__helios_8engine_8runtime_8spawn_8policy_8amount_8FixedSpawnAmount.html#ae4efce69bd29bb589b1bc9ae96dee4b6":[3,0,483,1],
 "module__helios_8engine_8runtime_8spawn_8policy_8amount_8SpawnAll.html":[3,0,484],
 "module__helios_8engine_8runtime_8spawn_8policy_8amount_8SpawnAll.html#ac928a33c3625f524340087d3e63a3a8a":[3,0,484,1],
 "module__helios_8engine_8runtime_8spawn_8policy_8amount_8SpawnAmountByCallback.html":[3,0,485],
@@ -242,12 +249,5 @@ var NAVTREEINDEX47 =
 "module__helios_8engine_8state_8StateToIdMapPair.html#accdd22830a5936ede19a6454d2e3ce9a":[3,0,537,1],
 "module__helios_8engine_8state_8StateToIdMapPair.html#ae59062130e3e6a35dba9b90f30389b76":[3,0,537,3],
 "module__helios_8engine_8state_8StateTransitionListener.html":[3,0,538],
-"module__helios_8engine_8state_8StateTransitionListener.html#a42f8047151a45242fa8b3d951dbbdcde":[3,0,538,3],
-"module__helios_8engine_8state_8StateTransitionListener.html#a56626b2117426c99c27f5335e93b594f":[3,0,538,1],
-"module__helios_8engine_8state_8StateTransitionListener.html#a81d8f1528114249ab7e86b3214406c74":[3,0,538,2],
-"module__helios_8engine_8state_8StateTransitionListener.html#aa4da501bd83bdfb019d83abe4b000d11":[3,0,538,4],
-"module__helios_8engine_8state_8TypedStateCommandHandler.html":[3,0,539],
-"module__helios_8engine_8state_8TypedStateCommandHandler.html#afa3a4a4a4cfff7861f2c4ba73cce908d":[3,0,539,1],
-"module__helios_8engine_8state_8commands.html":[3,0,527],
-"module__helios_8engine_8state_8commands_8DelayedStateCommand.html":[3,0,528]
+"module__helios_8engine_8state_8StateTransitionListener.html#a42f8047151a45242fa8b3d951dbbdcde":[3,0,538,3]
 };

@@ -12,7 +12,32 @@
 <codeline></codeline>
 <codeline><highlight class="normal">Transition<sp/>rules<sp/>for<sp/>the<sp/>match<sp/>state<sp/>machine.</highlight></codeline>
 <codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Rules</highlight></codeline>
 <codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Description<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|-------------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`DefaultMatchStateTransitionRules`<sp/>|<sp/>Provides<sp/>the<sp/>default<sp/>set<sp/>of<sp/>match<sp/>state<sp/>transition<sp/>rules<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`DefaultMatchStateTransitionGuards`<sp/>|<sp/>Guard<sp/>callbacks<sp/>for<sp/>conditional<sp/>transitions<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>DefaultMatchStateTransitionRules</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Defines<sp/>standard<sp/>transitions:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>From<sp/>|<sp/>Transition<sp/>|<sp/>To<sp/>|<sp/>Guard<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|------|------------|-----|-------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>Undefined<sp/>|<sp/>WarmupRequest<sp/>|<sp/>Warmup<sp/>|<sp/>—<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>Warmup<sp/>|<sp/>StartRequest<sp/>|<sp/>Start<sp/>|<sp/>—<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>Start<sp/>|<sp/>CountdownRequest<sp/>|<sp/>Countdown<sp/>|<sp/>`isPlayerActive`<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>Countdown<sp/>|<sp/>PlayerSpawnRequest<sp/>|<sp/>Playing<sp/>|<sp/>—<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>Playing<sp/>|<sp/>PlayerDied<sp/>|<sp/>PlayerDefeated<sp/>|<sp/>—<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>PlayerDefeated<sp/>|<sp/>CountdownRequest<sp/>|<sp/>Countdown<sp/>|<sp/>`hasLifeLeft`<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>PlayerDefeated<sp/>|<sp/>GameOverRequest<sp/>|<sp/>GameOver<sp/>|<sp/>`hasNoLifeLeft`<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>GameOver<sp/>|<sp/>WarmupRequest<sp/>|<sp/>Warmup<sp/>|<sp/>—<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>GameOver<sp/>|<sp/>StartRequest<sp/>|<sp/>Start<sp/>|<sp/>—<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Additional<sp/>cancel/reset<sp/>transitions<sp/>allow<sp/>returning<sp/>to<sp/>earlier<sp/>states<sp/>from<sp/>most<sp/>active<sp/>states<sp/>(e.g.,<sp/>`Playing<sp/>→<sp/>Start`,<sp/>`Countdown<sp/>→<sp/>Warmup`).</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Custom<sp/>rules<sp/>can<sp/>be<sp/>provided<sp/>to<sp/>the<sp/>`MatchStateManager`<sp/>constructor.</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>
 <codeline></codeline>
@@ -22,7 +47,6 @@
 <codeline><highlight class="normal">@brief<sp/>Transition<sp/>rules<sp/>for<sp/>the<sp/>match<sp/>state<sp/>machine.</highlight></codeline>
 <codeline><highlight class="normal">@details<sp/>Contains<sp/>rule<sp/>definitions<sp/>for<sp/>valid<sp/>state<sp/>transitions.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
-<codeline></codeline>
     </programlisting>
     <location file="/tmp/h/include/helios/engine/mechanics/match/rules/README.md"/>
   </compounddef>

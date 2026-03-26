@@ -290,7 +290,7 @@ var modules_dup =
     [ "helios.engine.mechanics.timing.components.GameTimerBindingComponent", "module__helios_8engine_8mechanics_8timing_8components_8GameTimerBindingComponent.html", "module__helios_8engine_8mechanics_8timing_8components_8GameTimerBindingComponent" ],
     [ "helios.engine.mechanics.timing.GameTimer", "module__helios_8engine_8mechanics_8timing_8GameTimer.html", "module__helios_8engine_8mechanics_8timing_8GameTimer" ],
     [ "helios.engine.mechanics.timing.systems", "module__helios_8engine_8mechanics_8timing_8systems.html", null ],
-    [ "helios.engine.mechanics.timing.systems.GameTimerClearFinishedSystem", "module__helios_8engine_8mechanics_8timing_8systems_8GameTimerClearFinishedSystem.html", "module__helios_8engine_8mechanics_8timing_8systems_8GameTimerClearFinishedSystem" ],
+    [ "helios.engine.mechanics.timing.systems.GameTimerClearSystem", "module__helios_8engine_8mechanics_8timing_8systems_8GameTimerClearSystem.html", "module__helios_8engine_8mechanics_8timing_8systems_8GameTimerClearSystem" ],
     [ "helios.engine.mechanics.timing.systems.GameTimerUpdateSystem", "module__helios_8engine_8mechanics_8timing_8systems_8GameTimerUpdateSystem.html", "module__helios_8engine_8mechanics_8timing_8systems_8GameTimerUpdateSystem" ],
     [ "helios.engine.mechanics.timing.TimerManager", "module__helios_8engine_8mechanics_8timing_8TimerManager.html", "module__helios_8engine_8mechanics_8timing_8TimerManager" ],
     [ "helios.engine.mechanics.timing.types", "module__helios_8engine_8mechanics_8timing_8types.html", null ],

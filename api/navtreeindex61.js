@@ -1,13 +1,5 @@
 var NAVTREEINDEX61 =
 {
-"structhelios_1_1window_1_1WindowConfig.html#a5f0a9e4ccdf1e17187ebde121d6cf525":[6,0,0,10,2,3],
-"structhelios_1_1window_1_1WindowConfig.html#ab260764badd2ed71a573ac75bce658e3":[3,0,655,0,2],
-"structhelios_1_1window_1_1WindowConfig.html#ab260764badd2ed71a573ac75bce658e3":[4,0,0,10,2,2],
-"structhelios_1_1window_1_1WindowConfig.html#ab260764badd2ed71a573ac75bce658e3":[6,0,0,10,2,2],
-"structhelios_1_1window_1_1WindowConfig.html#abf59b6fbc306130ec84737dbe3498ffd":[3,0,655,0,1],
-"structhelios_1_1window_1_1WindowConfig.html#abf59b6fbc306130ec84737dbe3498ffd":[4,0,0,10,2,1],
-"structhelios_1_1window_1_1WindowConfig.html#abf59b6fbc306130ec84737dbe3498ffd":[6,0,0,10,2,1],
-"structhelios_1_1window_1_1WindowConfig.html#afeb2920257a14419637ebdb102a5c333":[3,0,655,0,5],
 "structhelios_1_1window_1_1WindowConfig.html#afeb2920257a14419637ebdb102a5c333":[4,0,0,10,2,5],
 "structhelios_1_1window_1_1WindowConfig.html#afeb2920257a14419637ebdb102a5c333":[6,0,0,10,2,5],
 "structstd_1_1hash_3_01helios_1_1core_1_1data_1_1StrongId_3_01Tag_00_01Underlying_01_4_01_4.html":[6,0,1,0],

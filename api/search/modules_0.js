@@ -251,7 +251,7 @@ var searchData=
   ['helios_2eengine_2emechanics_2etiming_2ecomponents_2egametimerbindingcomponent_248',['helios.engine.mechanics.timing.components.GameTimerBindingComponent',['../module__helios_8engine_8mechanics_8timing_8components_8GameTimerBindingComponent.html',1,'']]],
   ['helios_2eengine_2emechanics_2etiming_2egametimer_249',['helios.engine.mechanics.timing.GameTimer',['../module__helios_8engine_8mechanics_8timing_8GameTimer.html',1,'']]],
   ['helios_2eengine_2emechanics_2etiming_2esystems_250',['helios.engine.mechanics.timing.systems',['../module__helios_8engine_8mechanics_8timing_8systems.html',1,'']]],
-  ['helios_2eengine_2emechanics_2etiming_2esystems_2egametimerclearfinishedsystem_251',['helios.engine.mechanics.timing.systems.GameTimerClearFinishedSystem',['../module__helios_8engine_8mechanics_8timing_8systems_8GameTimerClearFinishedSystem.html',1,'']]],
+  ['helios_2eengine_2emechanics_2etiming_2esystems_2egametimerclearsystem_251',['helios.engine.mechanics.timing.systems.GameTimerClearSystem',['../module__helios_8engine_8mechanics_8timing_8systems_8GameTimerClearSystem.html',1,'']]],
   ['helios_2eengine_2emechanics_2etiming_2esystems_2egametimerupdatesystem_252',['helios.engine.mechanics.timing.systems.GameTimerUpdateSystem',['../module__helios_8engine_8mechanics_8timing_8systems_8GameTimerUpdateSystem.html',1,'']]],
   ['helios_2eengine_2emechanics_2etiming_2etimermanager_253',['helios.engine.mechanics.timing.TimerManager',['../module__helios_8engine_8mechanics_8timing_8TimerManager.html',1,'']]],
   ['helios_2eengine_2emechanics_2etiming_2etypes_254',['helios.engine.mechanics.timing.types',['../module__helios_8engine_8mechanics_8timing_8types.html',1,'']]],

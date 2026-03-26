@@ -1,5 +1,12 @@
 var NAVTREEINDEX44 =
 {
+"module__helios_8engine_8modules_8physics_8motion_8components_8DirectionComponent.html":[3,0,340],
+"module__helios_8engine_8modules_8physics_8motion_8components_8DirectionComponent.html#a141733adfa5f623df918e4c81a2178c0":[3,0,340,10],
+"module__helios_8engine_8modules_8physics_8motion_8components_8DirectionComponent.html#a28b0bb0cbf5fabd3babb449637def50f":[3,0,340,3],
+"module__helios_8engine_8modules_8physics_8motion_8components_8DirectionComponent.html#a648e0f776e7e3043ab8dbf3bdd1784eb":[3,0,340,1],
+"module__helios_8engine_8modules_8physics_8motion_8components_8DirectionComponent.html#a6cc839b8dcba184000ebc2580294b650":[3,0,340,4],
+"module__helios_8engine_8modules_8physics_8motion_8components_8DirectionComponent.html#aae6cc61d0e14dff65fc77178c1a0a2eb":[3,0,340,8],
+"module__helios_8engine_8modules_8physics_8motion_8components_8DirectionComponent.html#ab3d2b9c571f237e23d1a32b2d45011a4":[3,0,340,9],
 "module__helios_8engine_8modules_8physics_8motion_8components_8DirectionComponent.html#acd6d800727c5ec8a7823e82e911d0894":[3,0,340,6],
 "module__helios_8engine_8modules_8physics_8motion_8components_8DirectionComponent.html#aea2139d16bf31830e61d3a025ad50e85":[3,0,340,5],
 "module__helios_8engine_8modules_8physics_8motion_8components_8DirectionComponent.html#aef6ef78928918b3d3f37da7ec795cb0a":[3,0,340,7],
@@ -242,12 +249,5 @@ var NAVTREEINDEX44 =
 "module__helios_8engine_8modules_8spatial_8transform_8components_8ComposeTransformComponent.html#af32daf96d28b15c180f6f7eaea35e1c8":[3,0,378,22],
 "module__helios_8engine_8modules_8spatial_8transform_8components_8ComposeTransformComponent.html#af3f108e03c2407457556a02c4d67e926":[3,0,378,11],
 "module__helios_8engine_8modules_8spatial_8transform_8components_8ComposeTransformComponent.html#af57f0066968bf37bf51d29f483616b5d":[3,0,378,3],
-"module__helios_8engine_8modules_8spatial_8transform_8components_8RotationStateComponent.html":[3,0,379],
-"module__helios_8engine_8modules_8spatial_8transform_8components_8RotationStateComponent.html#a148d8193cfc4a9c06edb0cf2fe507f1c":[3,0,379,14],
-"module__helios_8engine_8modules_8spatial_8transform_8components_8RotationStateComponent.html#a27b9144ac994c1f98e733508ae633633":[3,0,379,5],
-"module__helios_8engine_8modules_8spatial_8transform_8components_8RotationStateComponent.html#a33c6574b155bf4eac28fa6e6417ba2a7":[3,0,379,9],
-"module__helios_8engine_8modules_8spatial_8transform_8components_8RotationStateComponent.html#a37dde665456f67228c6a9868478cfd45":[3,0,379,10],
-"module__helios_8engine_8modules_8spatial_8transform_8components_8RotationStateComponent.html#a3ea72c3c96673de403446debac67dd45":[3,0,379,19],
-"module__helios_8engine_8modules_8spatial_8transform_8components_8RotationStateComponent.html#a6143b75e1459b2b39e065f32d6ecae93":[3,0,379,11],
-"module__helios_8engine_8modules_8spatial_8transform_8components_8RotationStateComponent.html#a7e6ad15dab6abee9473a0a6aee698ea4":[3,0,379,17]
+"module__helios_8engine_8modules_8spatial_8transform_8components_8RotationStateComponent.html":[3,0,379]
 };

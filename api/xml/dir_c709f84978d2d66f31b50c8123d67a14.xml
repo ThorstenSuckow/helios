@@ -8,8 +8,91 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_c709f84978d2d66f31b50c8123d67a14_1autotoc_md325">
+<sect1 id="dir_c709f84978d2d66f31b50c8123d67a14_1autotoc_md326">
 <title>helios::engine::mechanics::match::rules</title><para>Transition rules for the match state machine.</para>
+</sect1>
+<sect1 id="dir_c709f84978d2d66f31b50c8123d67a14_1autotoc_md327">
+<title>Rules</title><para><table rows="3" cols="2"><row>
+<entry thead="yes"><para>Class  </para>
+</entry><entry thead="yes"><para>Description  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>DefaultMatchStateTransitionRules</computeroutput>  </para>
+</entry><entry thead="no"><para>Provides the default set of match state transition rules  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>DefaultMatchStateTransitionGuards</computeroutput>  </para>
+</entry><entry thead="no"><para>Guard callbacks for conditional transitions  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_c709f84978d2d66f31b50c8123d67a14_1autotoc_md328">
+<title>DefaultMatchStateTransitionRules</title><para>Defines standard transitions:</para>
+<para><table rows="10" cols="4"><row>
+<entry thead="yes"><para>From  </para>
+</entry><entry thead="yes"><para>Transition  </para>
+</entry><entry thead="yes"><para>To  </para>
+</entry><entry thead="yes"><para>Guard  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Undefined  </para>
+</entry><entry thead="no"><para>WarmupRequest  </para>
+</entry><entry thead="no"><para>Warmup  </para>
+</entry><entry thead="no"><para>—  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Warmup  </para>
+</entry><entry thead="no"><para>StartRequest  </para>
+</entry><entry thead="no"><para>Start  </para>
+</entry><entry thead="no"><para>—  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Start  </para>
+</entry><entry thead="no"><para>CountdownRequest  </para>
+</entry><entry thead="no"><para>Countdown  </para>
+</entry><entry thead="no"><para><computeroutput>isPlayerActive</computeroutput>  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Countdown  </para>
+</entry><entry thead="no"><para>PlayerSpawnRequest  </para>
+</entry><entry thead="no"><para>Playing  </para>
+</entry><entry thead="no"><para>—  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Playing  </para>
+</entry><entry thead="no"><para>PlayerDied  </para>
+</entry><entry thead="no"><para>PlayerDefeated  </para>
+</entry><entry thead="no"><para>—  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>PlayerDefeated  </para>
+</entry><entry thead="no"><para>CountdownRequest  </para>
+</entry><entry thead="no"><para>Countdown  </para>
+</entry><entry thead="no"><para><computeroutput>hasLifeLeft</computeroutput>  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>PlayerDefeated  </para>
+</entry><entry thead="no"><para>GameOverRequest  </para>
+</entry><entry thead="no"><para>GameOver  </para>
+</entry><entry thead="no"><para><computeroutput>hasNoLifeLeft</computeroutput>  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>GameOver  </para>
+</entry><entry thead="no"><para>WarmupRequest  </para>
+</entry><entry thead="no"><para>Warmup  </para>
+</entry><entry thead="no"><para>—  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>GameOver  </para>
+</entry><entry thead="no"><para>StartRequest  </para>
+</entry><entry thead="no"><para>Start  </para>
+</entry><entry thead="no"><para>—  </para>
+</entry></row>
+</table>
+</para>
+<para>Additional cancel/reset transitions allow returning to earlier states from most active states (e.g., <computeroutput>Playing → Start</computeroutput>, <computeroutput>Countdown → Warmup</computeroutput>).</para>
+<para>Custom rules can be provided to the <computeroutput>MatchStateManager</computeroutput> constructor.</para>
 <para><hruler/>
 </para>
 <para><details><summary>Doxygen</summary><para></para>

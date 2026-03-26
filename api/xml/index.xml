@@ -755,6 +755,8 @@
   <compound refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1rules_1_1guards_1_1DefaultMatchStateTransitionGuards" kind="class"><name>helios::engine::mechanics::match::rules::guards::DefaultMatchStateTransitionGuards</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1rules_1_1guards_1_1DefaultMatchStateTransitionGuards_1a01c761773a5709e9d85b57e050a146dd" kind="function"><name>isPlayerActive</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1rules_1_1guards_1_1DefaultMatchStateTransitionGuards_1acd3a0f438f7415d464e9b40813bed226" kind="function"><name>isPlayerInactive</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1rules_1_1guards_1_1DefaultMatchStateTransitionGuards_1a109553aa2c80973deac10b12b4c7512a" kind="function"><name>hasLifeLeft</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1rules_1_1guards_1_1DefaultMatchStateTransitionGuards_1ad00a2fd69fc2572571fd2aa43753f218" kind="function"><name>hasNoLifeLeft</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1rules_1_1DefaultMatchStateTransitionRules" kind="class"><name>helios::engine::mechanics::match::rules::DefaultMatchStateTransitionRules</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1rules_1_1DefaultMatchStateTransitionRules_1a6ef492c1e3b99ace5ea3dc6d8532efe5" kind="variable"><name>rules_</name></member>
@@ -1370,12 +1372,15 @@
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1a7eb218ba32a8e67527669c59ae514c84" kind="function"><name>GameTimer</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1ad6b866835b1abe74fddc84656b905b0b" kind="function"><name>gameTimerId</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1ac67b9232d05fe125567cab91eb6001cb" kind="function"><name>reset</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1a971450036637936108e37ed90179847d" kind="function"><name>restart</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1a26b404f3617287f61058c56eb4897494" kind="function"><name>cancel</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1a503aa0a8253842e7559cdb6311b037b7" kind="function"><name>setDuration</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1af13faade128501fa439084b68c5aeb0d" kind="function"><name>duration</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1a153820d23667bc28e8574cd0a97c9224" kind="function"><name>elapsed</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1ad6e0f8c4e930f0e4f9c20f957c10f1ed" kind="function"><name>state</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1a9e02b98ba6e73fd17cb7d716f3c6d18b" kind="function"><name>setState</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1ac8ea4f3f51ab7a06ac1bb7eacadea4e6" kind="function"><name>shouldUpdate</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1a37aa036cecfb2a2ff797fb93142488b1" kind="function"><name>isFinished</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1ae4a56025fa1b9964b72e9a04f0286ea2" kind="function"><name>timerRevision</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1adada69f1a2447d685949aaeab2d7c83e" kind="function"><name>update</name></member>
   </compound>
@@ -1398,11 +1403,11 @@
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1components_1_1GameTimerBindingComponent_1ae28927e8c9525d9e609d6bd4cf9e1d47" kind="function"><name>setTimerRevision</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1components_1_1GameTimerBindingComponent_1a0e19e83a28af5df56cf837c70b9989ab" kind="function"><name>timerRevision</name></member>
   </compound>
-  <compound refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerClearFinishedSystem" kind="class"><name>helios::engine::mechanics::timing::systems::GameTimerClearFinishedSystem</name>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerClearFinishedSystem_1a0ea1c77795d3a6eb11ef872a0e7d6e92" kind="typedef"><name>EngineRoleTag</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerClearFinishedSystem_1ae3e2ec2affd8a9f163741d61486ac0e7" kind="variable"><name>timerManager_</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerClearFinishedSystem_1abf8a8757f947b373ed572d2726b995af" kind="function"><name>GameTimerClearFinishedSystem</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerClearFinishedSystem_1a5ae60d03e8a12b23c54ff509b8375342" kind="function"><name>update</name></member>
+  <compound refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerClearSystem" kind="class"><name>helios::engine::mechanics::timing::systems::GameTimerClearSystem</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerClearSystem_1a2ca83f5ad0ca374085efcf9920217bdc" kind="typedef"><name>EngineRoleTag</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerClearSystem_1a1cb671be7be387d60f1996bc5fe1fe40" kind="variable"><name>timerManager_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerClearSystem_1a8d3c53d768d4007b660c7cc9e3cbae45" kind="function"><name>GameTimerClearSystem</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerClearSystem_1a4a4f6fda60b49e290baa07be684f8211" kind="function"><name>update</name></member>
   </compound>
   <compound refid="structhelios_1_1engine_1_1mechanics_1_1timing_1_1types_1_1GameTimerIdTag" kind="struct"><name>helios::engine::mechanics::timing::types::GameTimerIdTag</name>
   </compound>
@@ -1960,7 +1965,9 @@
   <compound refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent" kind="class"><name>helios::engine::mechanics::match::components::LivesComponent</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent_1adb6746126f254f52123b5c97747069f8" kind="variable"><name>lives_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent_1a0f0d0635d9dcb1a9395b5c57ec45e4f7" kind="variable"><name>livesRevision_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent_1ab567d1973076c4b4c49ee0ac8641be23" kind="variable"><name>defaultLives_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent_1aefd73d433fa4d21d313390c5c1edc2fe" kind="function"><name>LivesComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent_1a395e75af25544abe0c5af28c27952003" kind="function"><name>reset</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent_1ad13996c90b4c3560b4a83ead1f041032" kind="function"><name>lives</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent_1a1f09c97065c303d5b2bde8c9a0622f65" kind="function"><name>decrease</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent_1a6daaf38c1abf3c05bd7dd6a1805e1946" kind="function"><name>increase</name></member>
@@ -3928,8 +3935,9 @@
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1commands_1_1TimerControlCommand_1a9f1b350c470b596e09c6160051ced886" kind="function"><name>timerControlContext</name></member>
   </compound>
   <compound refid="structhelios_1_1engine_1_1mechanics_1_1timing_1_1types_1_1TimerControlContext" kind="struct"><name>helios::engine::mechanics::timing::types::TimerControlContext</name>
-    <member refid="structhelios_1_1engine_1_1mechanics_1_1timing_1_1types_1_1TimerControlContext_1a6736db6a0a720b3b08ee1ae0fe4a505e" kind="variable"><name>timerState</name></member>
     <member refid="structhelios_1_1engine_1_1mechanics_1_1timing_1_1types_1_1TimerControlContext_1a1ae9f48625c816ec9bb2650f9fb4b250" kind="variable"><name>gameTimerId</name></member>
+    <member refid="structhelios_1_1engine_1_1mechanics_1_1timing_1_1types_1_1TimerControlContext_1a6736db6a0a720b3b08ee1ae0fe4a505e" kind="variable"><name>timerState</name></member>
+    <member refid="structhelios_1_1engine_1_1mechanics_1_1timing_1_1types_1_1TimerControlContext_1a322f052e84cde41bd6101fd9e3318269" kind="variable"><name>resetElapsed</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager" kind="class"><name>helios::engine::mechanics::timing::TimerManager</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1a6fddda0223b09914c8cb9f4597018c90" kind="typedef"><name>EngineRoleTag</name></member>
@@ -3941,7 +3949,7 @@
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1a0c713f94b0de4a5b1035f25893829958" kind="function"><name>addGameTimer</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1a99dd425726dfa3dcfbe820b1ee30dd4d" kind="function"><name>gameTimer</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1ae5ff293b1c17995ae84f324ba19db4d2" kind="function"><name>gameTimers</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1ae2efde1b9444037cce66dec8a93b1d3e" kind="function"><name>flush</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1a01482fef660118570e45b9f5c401a73a" kind="function"><name>flush</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1a6b71cb6b06e69629fd4ad0e02740e705" kind="function"><name>submit</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1acee9edacbb3740279006bf53ee31b486" kind="function"><name>init</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1a82ac8640d101565fed163abeb4a1ae54" kind="function"><name>reset</name></member>
@@ -4032,6 +4040,7 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a8c0798c8503d1e8bce1a299b02c84d79" kind="function"><name>commandQueue</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a8b8587874be3065c9bf7b0f16e2a8d7b" kind="function"><name>delayedQueue</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a7231725a593fbecfffc902c09dde5eaa" kind="function"><name>shouldDelayCommand</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a5d980751a699ab8e22ec35dff21caf5b" kind="function"><name>shouldDiscardCommand</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a012ec5bd8e6d51a276ba0b4a16d834e8" kind="function"><name>isDelayedCommandReady</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a9f6210ee4446435ac1d3d6c54c4d28d0" kind="function"><name>flushCommandQueue</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a35748f3c15d9e92098bed8d174cb7042" kind="function"><name>add</name></member>
@@ -4648,28 +4657,19 @@
   <compound refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types" kind="namespace"><name>helios::engine::mechanics::gamestate::types</name>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80be" kind="enum"><name>GameState</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beaec0fc0100c4fc1ce4eea230c3dc10360" kind="enumvalue"><name>Undefined</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beaa6122a65eaa676f700ae68d393054a37" kind="enumvalue"><name>Start</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80bea16bfbf9c462762cf1cba4134ec53c504" kind="enumvalue"><name>Loading</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80bea21f45ef9bdfed8430be0b52bab6c3a99" kind="enumvalue"><name>Booted</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beab78a3223503896721cca1303f776159b" kind="enumvalue"><name>Title</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beab61541208db7fa7dba42c85224405911" kind="enumvalue"><name>Menu</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beae99180abf47a8b3a856e0bcb2656990a" kind="enumvalue"><name>Paused</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80bea165d53d9068b7a9f038a6023ae51ee97" kind="enumvalue"><name>MatchReady</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80bea5bda814c4aedb126839228f1a3d92f09" kind="enumvalue"><name>Running</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beae99180abf47a8b3a856e0bcb2656990a" kind="enumvalue"><name>Paused</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beaed36a1ef76a59ee3f15180e0441188ad" kind="enumvalue"><name>Any</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4" kind="enum"><name>GameStateTransitionId</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4aec0fc0100c4fc1ce4eea230c3dc10360" kind="enumvalue"><name>Undefined</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4a14401b636e7a97ceab91c643463e4d65" kind="enumvalue"><name>TitleRequested</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4aa3d98192160cc566e41d9d063177bce4" kind="enumvalue"><name>TitleShowing</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4a098b846b8fb78489d3e9cc558a565f2b" kind="enumvalue"><name>StartRequested</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4ac2efe4bbd13e6cb0db293e72884273c0" kind="enumvalue"><name>Starting</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4ae87d730ae1d867566901ff42863eaf0c" kind="enumvalue"><name>ResumeRequested</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4a69f55169cdb3caab27ba9f347bf05354" kind="enumvalue"><name>Resuming</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4a4f03ca19300ef12a6732174076992060" kind="enumvalue"><name>BootRequest</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4a16f0d7ac8bebb828d1b88da0ae96df30" kind="enumvalue"><name>ReadyMatchRequest</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4a243246fb21a19e24cefc7250e179df79" kind="enumvalue"><name>StartMatchRequest</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4aa755f6cef42bb1c48404ed8217e9e73e" kind="enumvalue"><name>TogglePause</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4ac29824e03ed4d23c7d723becd13058fe" kind="enumvalue"><name>LoadRequested</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4a16bfbf9c462762cf1cba4134ec53c504" kind="enumvalue"><name>Loading</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4a53ef1778dfd4fc16bed604a83f17b282" kind="enumvalue"><name>QuitGameRequested</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4aa93bc97776e73ea2f4fef921f15b0bdc" kind="enumvalue"><name>QuittingGame</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4abedfd09a1d1fc1b855c549c441a37ebc" kind="enumvalue"><name>RestartRequested</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4a431dc808fe209d3c3e812991b46d40ef" kind="enumvalue"><name>Restarting</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4acdde80fb9f9fc91777e43c0dd98320b1" kind="enumvalue"><name>TitleRequest</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73b150e7583e97e71959b2f58fe4b9b1" kind="typedef"><name>GameStateType</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a54ed1e4e41fc7a66768c28383874826a" kind="variable"><name>GameStateTypeSize</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1af65e991fd980093437a4316684efbf74" kind="function"><name>operator|</name></member>
@@ -4728,29 +4728,20 @@
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9b" kind="enum"><name>MatchState</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9baec0fc0100c4fc1ce4eea230c3dc10360" kind="enumvalue"><name>Undefined</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9ba89be10c310ee8cfe640aba66e7368c6c" kind="enumvalue"><name>Warmup</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9ba1cad35d4b3b9f624f82dbf237daaf188" kind="enumvalue"><name>Intro</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9baa6122a65eaa676f700ae68d393054a37" kind="enumvalue"><name>Start</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9bae64465da4a42d65847b321045b155602" kind="enumvalue"><name>Countdown</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9babd6d6eb309a4b95da66bef960b4810a6" kind="enumvalue"><name>PlayerSpawn</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9bac9dbb2b7c84159b632d71e512eba8428" kind="enumvalue"><name>Playing</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9bab9fbac179f1be377fe125f9deb1a4ba9" kind="enumvalue"><name>PlayerDeath</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9ba2e51472495b976bb3c0cce2c28ef9a25" kind="enumvalue"><name>PlayerDefeated</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9ba8f347bc7cebca9fa6d97e70c6bc29eb3" kind="enumvalue"><name>GameOver</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9ba8f3d10eb21bd36347c258679eba9e92b" kind="enumvalue"><name>Finished</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9baed36a1ef76a59ee3f15180e0441188ad" kind="enumvalue"><name>Any</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70" kind="enum"><name>MatchStateTransitionId</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70aec0fc0100c4fc1ce4eea230c3dc10360" kind="enumvalue"><name>Undefined</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70a3badd370a329294628d42d1a06d298ff" kind="enumvalue"><name>WarmupRequested</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70a32d9b0f0e100f7ebc400368cbe27b784" kind="enumvalue"><name>WarmupDone</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70a32b313f83f5910a10d55f16eb7d33b4c" kind="enumvalue"><name>IntroRequested</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70ad5b8a68276681bdb4ea6da5e7387a40a" kind="enumvalue"><name>IntroDone</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70ada040a2f3e81a12af9413725a742daab" kind="enumvalue"><name>CountdownRequested</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70a1f011f27311afe8823c70071914421cf" kind="enumvalue"><name>CountdownDone</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70aaa03a010fa4886c60875a71f37b22f15" kind="enumvalue"><name>PlayerSpawnRequested</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70a098b846b8fb78489d3e9cc558a565f2b" kind="enumvalue"><name>StartRequested</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70afcc8814df3a79bde2ed96492c8010b44" kind="enumvalue"><name>TimeExpired</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70ae030acb336d4af795043c35a30e86491" kind="enumvalue"><name>WarmupRequest</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70a464d4b1d71ab070c090ab9639a4e5ad4" kind="enumvalue"><name>StartRequest</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70ac981e681de438daec04a921807b230cd" kind="enumvalue"><name>QuitRequest</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70a33f600c8bdf5fd718c564f951925e873" kind="enumvalue"><name>CountdownRequest</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70aee1ded5ee510cf5f4c605debf346a9b2" kind="enumvalue"><name>PlayerDied</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70a6fe7fa1af6567da46b7f26f21a81c0e3" kind="enumvalue"><name>RespawnRequested</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70a894ce1b6075d9de36dec60cc22e20536" kind="enumvalue"><name>QuitRequested</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70abedfd09a1d1fc1b855c549c441a37ebc" kind="enumvalue"><name>RestartRequested</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70a6d39c01df2a4c556f33ab0b531da2f6e" kind="enumvalue"><name>PlayerSpawnRequest</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70ad3cc257e4841e4a0060965b73e01de40" kind="enumvalue"><name>GameOverRequest</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a5a9b40b91cd49d24dffc892db68cfd6c" kind="typedef"><name>LivesRevision</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a4c35aad58be5d0fe9bb4f2ba77da7827" kind="typedef"><name>MatchStateType</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a179e9980957fc0d478a2735e3e202e27" kind="variable"><name>MatchStateTypeSize</name></member>
@@ -4789,10 +4780,10 @@
   <compound refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types" kind="namespace"><name>helios::engine::mechanics::timing::types</name>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1a889d521962836a37d91f60af0f2d7134" kind="enum"><name>TimerState</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1a889d521962836a37d91f60af0f2d7134aec0fc0100c4fc1ce4eea230c3dc10360" kind="enumvalue"><name>Undefined</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1a889d521962836a37d91f60af0f2d7134a8428552d86c0d262a542a528af490afa" kind="enumvalue"><name>Started</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1a889d521962836a37d91f60af0f2d7134a5bda814c4aedb126839228f1a3d92f09" kind="enumvalue"><name>Running</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1a889d521962836a37d91f60af0f2d7134ae99180abf47a8b3a856e0bcb2656990a" kind="enumvalue"><name>Paused</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1a889d521962836a37d91f60af0f2d7134a8f3d10eb21bd36347c258679eba9e92b" kind="enumvalue"><name>Finished</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1a889d521962836a37d91f60af0f2d7134ac23e2b09ebe6bf4cb5e2a9abe85c0be2" kind="enumvalue"><name>Stopped</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1a889d521962836a37d91f60af0f2d7134aa149e85a44aeec9140e92733d9ed694e" kind="enumvalue"><name>Cancelled</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1ab554d63c8c7c9aa028b0115c23ae01eb" kind="typedef"><name>GameTimerId</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1a4ae687c1112aa406820d387d0874c62e" kind="typedef"><name>TimerRevision</name></member>
   </compound>
@@ -5254,6 +5245,57 @@
   </compound>
   <compound refid="GLFWRAIIGuard_8ixx" kind="file"><name>GLFWRAIIGuard.ixx</name>
   </compound>
+  <compound refid="GLFWGamepadLookup_8ixx" kind="file"><name>GLFWGamepadLookup.ixx</name>
+  </compound>
+  <compound refid="GLFWInputAdapter_8ixx" kind="file"><name>GLFWInputAdapter.ixx</name>
+  </compound>
+  <compound refid="GLFWKeyLookup_8ixx" kind="file"><name>GLFWKeyLookup.ixx</name>
+  </compound>
+  <compound refid="GLFWWindow_8ixx" kind="file"><name>GLFWWindow.ixx</name>
+  </compound>
+  <compound refid="GLFWWindowConfig_8ixx" kind="file"><name>GLFWWindowConfig.ixx</name>
+  </compound>
+  <compound refid="GLFWWindowUserPointer_8ixx" kind="file"><name>GLFWWindowUserPointer.ixx</name>
+  </compound>
+  <compound refid="ImGuiBackend_8ixx" kind="file"><name>ImGuiBackend.ixx</name>
+  </compound>
+  <compound refid="ImGuiGlfwOpenGLBackend_8ixx" kind="file"><name>ImGuiGlfwOpenGLBackend.ixx</name>
+  </compound>
+  <compound refid="ImGuiLogSink_8ixx" kind="file"><name>ImGuiLogSink.ixx</name>
+  </compound>
+  <compound refid="ImGuiOverlay_8ixx" kind="file"><name>ImGuiOverlay.ixx</name>
+  </compound>
+  <compound refid="ImGuiWidget_8ixx" kind="file"><name>ImGuiWidget.ixx</name>
+  </compound>
+  <compound refid="CameraWidget_8ixx" kind="file"><name>CameraWidget.ixx</name>
+  </compound>
+  <compound refid="FpsWidget_8ixx" kind="file"><name>FpsWidget.ixx</name>
+  </compound>
+  <compound refid="GamepadSettingsWidget_8ixx" kind="file"><name>GamepadSettingsWidget.ixx</name>
+  </compound>
+  <compound refid="GamepadWidget_8ixx" kind="file"><name>GamepadWidget.ixx</name>
+  </compound>
+  <compound refid="LogWidget_8ixx" kind="file"><name>LogWidget.ixx</name>
+  </compound>
+  <compound refid="MainMenuWidget_8ixx" kind="file"><name>MainMenuWidget.ixx</name>
+  </compound>
+  <compound refid="FreeTypeFontResourceManager_8ixx" kind="file"><name>FreeTypeFontResourceManager.ixx</name>
+  </compound>
+  <compound refid="OpenGLMesh_8ixx" kind="file"><name>OpenGLMesh.ixx</name>
+  </compound>
+  <compound refid="OpenGLDevice_8ixx" kind="file"><name>OpenGLDevice.ixx</name>
+  </compound>
+  <compound refid="OpenGLEnums_8ixx" kind="file"><name>OpenGLEnums.ixx</name>
+  </compound>
+  <compound refid="OpenGLGlyphTextRenderer_8ixx" kind="file"><name>OpenGLGlyphTextRenderer.ixx</name>
+  </compound>
+  <compound refid="OpenGLMeshRenderer_8ixx" kind="file"><name>OpenGLMeshRenderer.ixx</name>
+  </compound>
+  <compound refid="OpenGLShader_8ixx" kind="file"><name>OpenGLShader.ixx</name>
+  </compound>
+  <compound refid="OpenGLUniformLocationMap_8ixx" kind="file"><name>OpenGLUniformLocationMap.ixx</name>
+    <member refid="OpenGLUniformLocationMap_8ixx_1acbc04f24078582c7d42b2085be5d5750" kind="define"><name>HELIOS_LOG_SCOPE</name></member>
+  </compound>
   <compound refid="ext_2__module_8ixx" kind="file"><name>ext/_module.ixx</name>
   </compound>
   <compound refid="ext_2glfw_2__module_8ixx" kind="file"><name>ext/glfw/_module.ixx</name>
@@ -5624,56 +5666,748 @@
   </compound>
   <compound refid="helios_2window_2event_2__module_8ixx" kind="file"><name>helios/window/event/_module.ixx</name>
   </compound>
-  <compound refid="GLFWGamepadLookup_8ixx" kind="file"><name>GLFWGamepadLookup.ixx</name>
+  <compound refid="Application_8ixx" kind="file"><name>Application.ixx</name>
+    <member refid="Application_8ixx_1acbc04f24078582c7d42b2085be5d5750" kind="define"><name>HELIOS_LOG_SCOPE</name></member>
   </compound>
-  <compound refid="GLFWInputAdapter_8ixx" kind="file"><name>GLFWInputAdapter.ixx</name>
+  <compound refid="BasicWindowRenderingController_8ixx" kind="file"><name>BasicWindowRenderingController.ixx</name>
   </compound>
-  <compound refid="GLFWKeyLookup_8ixx" kind="file"><name>GLFWKeyLookup.ixx</name>
+  <compound refid="Controller_8ixx" kind="file"><name>Controller.ixx</name>
   </compound>
-  <compound refid="GLFWWindow_8ixx" kind="file"><name>GLFWWindow.ixx</name>
+  <compound refid="WindowRenderingController_8ixx" kind="file"><name>WindowRenderingController.ixx</name>
+    <member refid="WindowRenderingController_8ixx_1acbc04f24078582c7d42b2085be5d5750" kind="define"><name>HELIOS_LOG_SCOPE</name></member>
   </compound>
-  <compound refid="GLFWWindowConfig_8ixx" kind="file"><name>GLFWWindowConfig.ixx</name>
+  <compound refid="algorithms_8ixx" kind="file"><name>algorithms.ixx</name>
   </compound>
-  <compound refid="GLFWWindowUserPointer_8ixx" kind="file"><name>GLFWWindowUserPointer.ixx</name>
+  <compound refid="Buffer_8ixx" kind="file"><name>Buffer.ixx</name>
   </compound>
-  <compound refid="ImGuiBackend_8ixx" kind="file"><name>ImGuiBackend.ixx</name>
+  <compound refid="DoubleBuffer_8ixx" kind="file"><name>DoubleBuffer.ixx</name>
   </compound>
-  <compound refid="ImGuiGlfwOpenGLBackend_8ixx" kind="file"><name>ImGuiGlfwOpenGLBackend.ixx</name>
+  <compound refid="ReadBuffer_8ixx" kind="file"><name>ReadBuffer.ixx</name>
   </compound>
-  <compound refid="ImGuiLogSink_8ixx" kind="file"><name>ImGuiLogSink.ixx</name>
+  <compound refid="ReadWriteBuffer_8ixx" kind="file"><name>ReadWriteBuffer.ixx</name>
   </compound>
-  <compound refid="ImGuiOverlay_8ixx" kind="file"><name>ImGuiOverlay.ixx</name>
+  <compound refid="ReadWriteDoubleBuffer_8ixx" kind="file"><name>ReadWriteDoubleBuffer.ixx</name>
   </compound>
-  <compound refid="ImGuiWidget_8ixx" kind="file"><name>ImGuiWidget.ixx</name>
+  <compound refid="TypeIndexedDoubleBuffer_8ixx" kind="file"><name>TypeIndexedDoubleBuffer.ixx</name>
   </compound>
-  <compound refid="CameraWidget_8ixx" kind="file"><name>CameraWidget.ixx</name>
+  <compound refid="TypeIndexedReadWriteBuffer_8ixx" kind="file"><name>TypeIndexedReadWriteBuffer.ixx</name>
   </compound>
-  <compound refid="FpsWidget_8ixx" kind="file"><name>FpsWidget.ixx</name>
+  <compound refid="WriteBuffer_8ixx" kind="file"><name>WriteBuffer.ixx</name>
   </compound>
-  <compound refid="GamepadSettingsWidget_8ixx" kind="file"><name>GamepadSettingsWidget.ixx</name>
+  <compound refid="ConceptModelRegistry_8ixx" kind="file"><name>ConceptModelRegistry.ixx</name>
   </compound>
-  <compound refid="GamepadWidget_8ixx" kind="file"><name>GamepadWidget.ixx</name>
+  <compound refid="StrongId_8ixx" kind="file"><name>StrongId.ixx</name>
   </compound>
-  <compound refid="LogWidget_8ixx" kind="file"><name>LogWidget.ixx</name>
+  <compound refid="TypeIndexer_8ixx" kind="file"><name>TypeIndexer.ixx</name>
   </compound>
-  <compound refid="MainMenuWidget_8ixx" kind="file"><name>MainMenuWidget.ixx</name>
+  <compound refid="ErasedUnique_8ixx" kind="file"><name>ErasedUnique.ixx</name>
   </compound>
-  <compound refid="FreeTypeFontResourceManager_8ixx" kind="file"><name>FreeTypeFontResourceManager.ixx</name>
+  <compound refid="Transform_8ixx" kind="file"><name>Transform.ixx</name>
   </compound>
-  <compound refid="OpenGLMesh_8ixx" kind="file"><name>OpenGLMesh.ixx</name>
+  <compound refid="types_8ixx" kind="file"><name>types.ixx</name>
   </compound>
-  <compound refid="OpenGLDevice_8ixx" kind="file"><name>OpenGLDevice.ixx</name>
+  <compound refid="bootstrap_8ixx" kind="file"><name>bootstrap.ixx</name>
   </compound>
-  <compound refid="OpenGLEnums_8ixx" kind="file"><name>OpenGLEnums.ixx</name>
+  <compound refid="AiBuilder_8ixx" kind="file"><name>AiBuilder.ixx</name>
   </compound>
-  <compound refid="OpenGLGlyphTextRenderer_8ixx" kind="file"><name>OpenGLGlyphTextRenderer.ixx</name>
+  <compound refid="CollisionBuilder_8ixx" kind="file"><name>CollisionBuilder.ixx</name>
   </compound>
-  <compound refid="OpenGLMeshRenderer_8ixx" kind="file"><name>OpenGLMeshRenderer.ixx</name>
+  <compound refid="CombatBuilder_8ixx" kind="file"><name>CombatBuilder.ixx</name>
   </compound>
-  <compound refid="OpenGLShader_8ixx" kind="file"><name>OpenGLShader.ixx</name>
+  <compound refid="ChaseConfig_8ixx" kind="file"><name>ChaseConfig.ixx</name>
   </compound>
-  <compound refid="OpenGLUniformLocationMap_8ixx" kind="file"><name>OpenGLUniformLocationMap.ixx</name>
-    <member refid="OpenGLUniformLocationMap_8ixx_1acbc04f24078582c7d42b2085be5d5750" kind="define"><name>HELIOS_LOG_SCOPE</name></member>
+  <compound refid="CollisionConfig_8ixx" kind="file"><name>CollisionConfig.ixx</name>
+  </compound>
+  <compound refid="CombatConfig_8ixx" kind="file"><name>CombatConfig.ixx</name>
+  </compound>
+  <compound refid="GfxEffectsConfig_8ixx" kind="file"><name>GfxEffectsConfig.ixx</name>
+  </compound>
+  <compound refid="HealthConfig_8ixx" kind="file"><name>HealthConfig.ixx</name>
+  </compound>
+  <compound refid="LevelBoundsCollisionConfig_8ixx" kind="file"><name>LevelBoundsCollisionConfig.ixx</name>
+  </compound>
+  <compound refid="LifecycleConfig_8ixx" kind="file"><name>LifecycleConfig.ixx</name>
+  </compound>
+  <compound refid="MenuConfig_8ixx" kind="file"><name>MenuConfig.ixx</name>
+  </compound>
+  <compound refid="MenuItemConfig_8ixx" kind="file"><name>MenuItemConfig.ixx</name>
+  </compound>
+  <compound refid="MeshRenderableConfig_8ixx" kind="file"><name>MeshRenderableConfig.ixx</name>
+  </compound>
+  <compound refid="Move2DConfig_8ixx" kind="file"><name>Move2DConfig.ixx</name>
+  </compound>
+  <compound refid="ObserverConfig_8ixx" kind="file"><name>ObserverConfig.ixx</name>
+  </compound>
+  <compound refid="SceneNodeConfig_8ixx" kind="file"><name>SceneNodeConfig.ixx</name>
+  </compound>
+  <compound refid="ScorePoolConfig_8ixx" kind="file"><name>ScorePoolConfig.ixx</name>
+  </compound>
+  <compound refid="ScoreValueConfig_8ixx" kind="file"><name>ScoreValueConfig.ixx</name>
+  </compound>
+  <compound refid="SpawnConfig_8ixx" kind="file"><name>SpawnConfig.ixx</name>
+  </compound>
+  <compound refid="SteeringConfig_8ixx" kind="file"><name>SteeringConfig.ixx</name>
+  </compound>
+  <compound refid="TextRenderableConfig_8ixx" kind="file"><name>TextRenderableConfig.ixx</name>
+  </compound>
+  <compound refid="TransformConfig_8ixx" kind="file"><name>TransformConfig.ixx</name>
+  </compound>
+  <compound refid="UiTransformConfig_8ixx" kind="file"><name>UiTransformConfig.ixx</name>
+  </compound>
+  <compound refid="WeaponConfig_8ixx" kind="file"><name>WeaponConfig.ixx</name>
+  </compound>
+  <compound refid="EffectsBuilder_8ixx" kind="file"><name>EffectsBuilder.ixx</name>
+  </compound>
+  <compound refid="HealthBuilder_8ixx" kind="file"><name>HealthBuilder.ixx</name>
+  </compound>
+  <compound refid="LifecycleBuilder_8ixx" kind="file"><name>LifecycleBuilder.ixx</name>
+  </compound>
+  <compound refid="MenuBuilder_8ixx" kind="file"><name>MenuBuilder.ixx</name>
+  </compound>
+  <compound refid="MotionBuilder_8ixx" kind="file"><name>MotionBuilder.ixx</name>
+  </compound>
+  <compound refid="ObserverBuilder_8ixx" kind="file"><name>ObserverBuilder.ixx</name>
+  </compound>
+  <compound refid="RenderingBuilder_8ixx" kind="file"><name>RenderingBuilder.ixx</name>
+  </compound>
+  <compound refid="SceneBuilder_8ixx" kind="file"><name>SceneBuilder.ixx</name>
+  </compound>
+  <compound refid="ScoringBuilder_8ixx" kind="file"><name>ScoringBuilder.ixx</name>
+  </compound>
+  <compound refid="SpawnBuilder_8ixx" kind="file"><name>SpawnBuilder.ixx</name>
+  </compound>
+  <compound refid="TransformBuilder_8ixx" kind="file"><name>TransformBuilder.ixx</name>
+  </compound>
+  <compound refid="UiTransformBuilder_8ixx" kind="file"><name>UiTransformBuilder.ixx</name>
+  </compound>
+  <compound refid="GameObjectFactory_8ixx" kind="file"><name>GameObjectFactory.ixx</name>
+  </compound>
+  <compound refid="SchedulerConfig_8ixx" kind="file"><name>SchedulerConfig.ixx</name>
+  </compound>
+  <compound refid="SpawnPoolConfig_8ixx" kind="file"><name>SpawnPoolConfig.ixx</name>
+  </compound>
+  <compound refid="SchedulerBuilder_8ixx" kind="file"><name>SchedulerBuilder.ixx</name>
+  </compound>
+  <compound refid="SpawnSystemFactory_8ixx" kind="file"><name>SpawnSystemFactory.ixx</name>
+  </compound>
+  <compound refid="HasClear_8ixx" kind="file"><name>HasClear.ixx</name>
+  </compound>
+  <compound refid="HasInit_8ixx" kind="file"><name>HasInit.ixx</name>
+  </compound>
+  <compound refid="HasReset_8ixx" kind="file"><name>HasReset.ixx</name>
+  </compound>
+  <compound refid="HasSubmit_8ixx" kind="file"><name>HasSubmit.ixx</name>
+  </compound>
+  <compound refid="HasTag_8ixx" kind="file"><name>HasTag.ixx</name>
+  </compound>
+  <compound refid="HasUpdate_8ixx" kind="file"><name>HasUpdate.ixx</name>
+  </compound>
+  <compound refid="IsCommandBufferLike_8ixx" kind="file"><name>IsCommandBufferLike.ixx</name>
+  </compound>
+  <compound refid="IsCommandHandlerLike_8ixx" kind="file"><name>IsCommandHandlerLike.ixx</name>
+  </compound>
+  <compound refid="IsManagerLike_8ixx" kind="file"><name>IsManagerLike.ixx</name>
+  </compound>
+  <compound refid="IsSystemLike_8ixx" kind="file"><name>IsSystemLike.ixx</name>
+  </compound>
+  <compound refid="CommandBufferRole_8ixx" kind="file"><name>CommandBufferRole.ixx</name>
+  </compound>
+  <compound refid="ManagerRole_8ixx" kind="file"><name>ManagerRole.ixx</name>
+  </compound>
+  <compound refid="SystemRole_8ixx" kind="file"><name>SystemRole.ixx</name>
+  </compound>
+  <compound refid="DamageContext_8ixx" kind="file"><name>DamageContext.ixx</name>
+  </compound>
+  <compound refid="InteractionContext_8ixx" kind="file"><name>InteractionContext.ixx</name>
+  </compound>
+  <compound refid="PrefabId_8ixx" kind="file"><name>PrefabId.ixx</name>
+  </compound>
+  <compound refid="VersionId_8ixx" kind="file"><name>VersionId.ixx</name>
+  </compound>
+  <compound refid="ViewportId_8ixx" kind="file"><name>ViewportId.ixx</name>
+  </compound>
+  <compound refid="Unit_8ixx" kind="file"><name>Unit.ixx</name>
+  </compound>
+  <compound refid="ComponentOps_8ixx" kind="file"><name>ComponentOps.ixx</name>
+  </compound>
+  <compound refid="ComponentOpsRegistry_8ixx" kind="file"><name>ComponentOpsRegistry.ixx</name>
+  </compound>
+  <compound refid="ComponentReflector_8ixx" kind="file"><name>ComponentReflector.ixx</name>
+  </compound>
+  <compound refid="HierarchyComponent_8ixx" kind="file"><name>HierarchyComponent.ixx</name>
+  </compound>
+  <compound refid="EntityHandle_8ixx" kind="file"><name>EntityHandle.ixx</name>
+  </compound>
+  <compound refid="EntityManager_8ixx" kind="file"><name>EntityManager.ixx</name>
+  </compound>
+  <compound refid="EntityRegistry_8ixx" kind="file"><name>EntityRegistry.ixx</name>
+  </compound>
+  <compound refid="EntityResolver_8ixx" kind="file"><name>EntityResolver.ixx</name>
+  </compound>
+  <compound refid="GameObject_8ixx" kind="file"><name>GameObject.ixx</name>
+  </compound>
+  <compound refid="SparseSet_8ixx" kind="file"><name>SparseSet.ixx</name>
+  </compound>
+  <compound refid="HierarchyPropagationSystem_8ixx" kind="file"><name>HierarchyPropagationSystem.ixx</name>
+  </compound>
+  <compound refid="Traits_8ixx" kind="file"><name>Traits.ixx</name>
+  </compound>
+  <compound refid="ComponentTypeId_8ixx" kind="file"><name>ComponentTypeId.ixx</name>
+  </compound>
+  <compound refid="EntityId_8ixx" kind="file"><name>EntityId.ixx</name>
+  </compound>
+  <compound refid="EntityTombstone_8ixx" kind="file"><name>EntityTombstone.ixx</name>
+  </compound>
+  <compound refid="View_8ixx" kind="file"><name>View.ixx</name>
+  </compound>
+  <compound refid="LevelBoundsBehaviorComponent_8ixx" kind="file"><name>LevelBoundsBehaviorComponent.ixx</name>
+  </compound>
+  <compound refid="LevelBoundsBehaviorSystem_8ixx" kind="file"><name>LevelBoundsBehaviorSystem.ixx</name>
+  </compound>
+  <compound refid="Aim2DCommand_8ixx" kind="file"><name>Aim2DCommand.ixx</name>
+  </compound>
+  <compound refid="ShootCommand_8ixx" kind="file"><name>ShootCommand.ixx</name>
+  </compound>
+  <compound refid="Aim2DComponent_8ixx" kind="file"><name>Aim2DComponent.ixx</name>
+  </compound>
+  <compound refid="ShootComponent_8ixx" kind="file"><name>ShootComponent.ixx</name>
+  </compound>
+  <compound refid="ProjectileSpawnSystem_8ixx" kind="file"><name>ProjectileSpawnSystem.ixx</name>
+  </compound>
+  <compound refid="ApplyDamageCommand_8ixx" kind="file"><name>ApplyDamageCommand.ixx</name>
+  </compound>
+  <compound refid="DamageDealerComponent_8ixx" kind="file"><name>DamageDealerComponent.ixx</name>
+  </compound>
+  <compound refid="LastDamageComponent_8ixx" kind="file"><name>LastDamageComponent.ixx</name>
+  </compound>
+  <compound refid="DamageOnCollisionSystem_8ixx" kind="file"><name>DamageOnCollisionSystem.ixx</name>
+    <member refid="DamageOnCollisionSystem_8ixx_1acbc04f24078582c7d42b2085be5d5750" kind="define"><name>HELIOS_LOG_SCOPE</name></member>
+  </compound>
+  <compound refid="GameStateManager_8ixx" kind="file"><name>GameStateManager.ixx</name>
+  </compound>
+  <compound refid="DefaultGameStateTransitionRules_8ixx" kind="file"><name>DefaultGameStateTransitionRules.ixx</name>
+  </compound>
+  <compound refid="GameFlowSystem_8ixx" kind="file"><name>GameFlowSystem.ixx</name>
+  </compound>
+  <compound refid="GameStateInputResponseSystem_8ixx" kind="file"><name>GameStateInputResponseSystem.ixx</name>
+  </compound>
+  <compound refid="GameState_8ixx" kind="file"><name>GameState.ixx</name>
+  </compound>
+  <compound refid="GameStateTransitionId_8ixx" kind="file"><name>GameStateTransitionId.ixx</name>
+  </compound>
+  <compound refid="HealthComponent_8ixx" kind="file"><name>HealthComponent.ixx</name>
+  </compound>
+  <compound refid="HealthChangedEvent_8ixx" kind="file"><name>HealthChangedEvent.ixx</name>
+  </compound>
+  <compound refid="HealthDepletedEvent_8ixx" kind="file"><name>HealthDepletedEvent.ixx</name>
+  </compound>
+  <compound refid="HealthManager_8ixx" kind="file"><name>HealthManager.ixx</name>
+    <member refid="HealthManager_8ixx_1acbc04f24078582c7d42b2085be5d5750" kind="define"><name>HELIOS_LOG_SCOPE</name></member>
+  </compound>
+  <compound refid="HealthUpdateClearSystem_8ixx" kind="file"><name>HealthUpdateClearSystem.ixx</name>
+  </compound>
+  <compound refid="HealthChangeContext_8ixx" kind="file"><name>HealthChangeContext.ixx</name>
+  </compound>
+  <compound refid="HealthDepletedBehavior_8ixx" kind="file"><name>HealthDepletedBehavior.ixx</name>
+  </compound>
+  <compound refid="TwinStickInputSystem_8ixx" kind="file"><name>TwinStickInputSystem.ixx</name>
+  </compound>
+  <compound refid="WorldLifecycleCommand_8ixx" kind="file"><name>WorldLifecycleCommand.ixx</name>
+  </compound>
+  <compound refid="Active_8ixx" kind="file"><name>Active.ixx</name>
+  </compound>
+  <compound refid="DeadTagComponent_8ixx" kind="file"><name>DeadTagComponent.ixx</name>
+  </compound>
+  <compound refid="DelayedComponentEnabler_8ixx" kind="file"><name>DelayedComponentEnabler.ixx</name>
+  </compound>
+  <compound refid="Inactive_8ixx" kind="file"><name>Inactive.ixx</name>
+  </compound>
+  <compound refid="DelayedComponentEnablerSystem_8ixx" kind="file"><name>DelayedComponentEnablerSystem.ixx</name>
+  </compound>
+  <compound refid="GameObjectLifecycleSystem_8ixx" kind="file"><name>GameObjectLifecycleSystem.ixx</name>
+  </compound>
+  <compound refid="WorldLifecycleAction_8ixx" kind="file"><name>WorldLifecycleAction.ixx</name>
+  </compound>
+  <compound refid="WorldLifecycleManager_8ixx" kind="file"><name>WorldLifecycleManager.ixx</name>
+  </compound>
+  <compound refid="LivesBindingComponent_8ixx" kind="file"><name>LivesBindingComponent.ixx</name>
+  </compound>
+  <compound refid="LivesComponent_8ixx" kind="file"><name>LivesComponent.ixx</name>
+  </compound>
+  <compound refid="PlayerComponent_8ixx" kind="file"><name>PlayerComponent.ixx</name>
+  </compound>
+  <compound refid="PlayerDiedEvent_8ixx" kind="file"><name>PlayerDiedEvent.ixx</name>
+  </compound>
+  <compound refid="MatchStateManager_8ixx" kind="file"><name>MatchStateManager.ixx</name>
+  </compound>
+  <compound refid="DefaultMatchStateTransitionRules_8ixx" kind="file"><name>DefaultMatchStateTransitionRules.ixx</name>
+  </compound>
+  <compound refid="DefaultMatchStateTransitionGuards_8ixx" kind="file"><name>DefaultMatchStateTransitionGuards.ixx</name>
+  </compound>
+  <compound refid="MatchFlowSystem_8ixx" kind="file"><name>MatchFlowSystem.ixx</name>
+  </compound>
+  <compound refid="MatchRuleSystem_8ixx" kind="file"><name>MatchRuleSystem.ixx</name>
+  </compound>
+  <compound refid="LivesRevision_8ixx" kind="file"><name>LivesRevision.ixx</name>
+  </compound>
+  <compound refid="MatchState_8ixx" kind="file"><name>MatchState.ixx</name>
+  </compound>
+  <compound refid="MatchStateTransitionId_8ixx" kind="file"><name>MatchStateTransitionId.ixx</name>
+  </compound>
+  <compound refid="UpdateScoreCommand_8ixx" kind="file"><name>UpdateScoreCommand.ixx</name>
+  </compound>
+  <compound refid="MaxScoreObserverComponent_8ixx" kind="file"><name>MaxScoreObserverComponent.ixx</name>
+  </compound>
+  <compound refid="ScoreObserverComponent_8ixx" kind="file"><name>ScoreObserverComponent.ixx</name>
+  </compound>
+  <compound refid="ScorePoolComponent_8ixx" kind="file"><name>ScorePoolComponent.ixx</name>
+  </compound>
+  <compound refid="ScoreValueComponent_8ixx" kind="file"><name>ScoreValueComponent.ixx</name>
+  </compound>
+  <compound refid="MaxScorePoolSnapshot_8ixx" kind="file"><name>MaxScorePoolSnapshot.ixx</name>
+  </compound>
+  <compound refid="ScorePool_8ixx" kind="file"><name>ScorePool.ixx</name>
+  </compound>
+  <compound refid="ScorePoolManager_8ixx" kind="file"><name>ScorePoolManager.ixx</name>
+  </compound>
+  <compound refid="ScorePoolSnapshot_8ixx" kind="file"><name>ScorePoolSnapshot.ixx</name>
+  </compound>
+  <compound refid="CombatScoringSystem_8ixx" kind="file"><name>CombatScoringSystem.ixx</name>
+    <member refid="CombatScoringSystem_8ixx_1acbc04f24078582c7d42b2085be5d5750" kind="define"><name>HELIOS_LOG_SCOPE</name></member>
+  </compound>
+  <compound refid="MaxScoreObserverClearSystem_8ixx" kind="file"><name>MaxScoreObserverClearSystem.ixx</name>
+  </compound>
+  <compound refid="MaxScoreObserverSystem_8ixx" kind="file"><name>MaxScoreObserverSystem.ixx</name>
+  </compound>
+  <compound refid="ScoreObserverClearSystem_8ixx" kind="file"><name>ScoreObserverClearSystem.ixx</name>
+  </compound>
+  <compound refid="ScoreObserverSystem_8ixx" kind="file"><name>ScoreObserverSystem.ixx</name>
+  </compound>
+  <compound refid="KillReward_8ixx" kind="file"><name>KillReward.ixx</name>
+  </compound>
+  <compound refid="Score_8ixx" kind="file"><name>Score.ixx</name>
+  </compound>
+  <compound refid="ScoreContext_8ixx" kind="file"><name>ScoreContext.ixx</name>
+  </compound>
+  <compound refid="ScorePoolId_8ixx" kind="file"><name>ScorePoolId.ixx</name>
+  </compound>
+  <compound refid="ScorePoolRevision_8ixx" kind="file"><name>ScorePoolRevision.ixx</name>
+  </compound>
+  <compound refid="ScoreTypeId_8ixx" kind="file"><name>ScoreTypeId.ixx</name>
+  </compound>
+  <compound refid="EmittedByComponent_8ixx" kind="file"><name>EmittedByComponent.ixx</name>
+  </compound>
+  <compound refid="SpawnedByProfileComponent_8ixx" kind="file"><name>SpawnedByProfileComponent.ixx</name>
+  </compound>
+  <compound refid="GameObjectSpawnSystem_8ixx" kind="file"><name>GameObjectSpawnSystem.ixx</name>
+  </compound>
+  <compound refid="TimerControlCommand_8ixx" kind="file"><name>TimerControlCommand.ixx</name>
+  </compound>
+  <compound refid="GameTimerBindingComponent_8ixx" kind="file"><name>GameTimerBindingComponent.ixx</name>
+  </compound>
+  <compound refid="GameTimer_8ixx" kind="file"><name>GameTimer.ixx</name>
+  </compound>
+  <compound refid="GameTimerClearSystem_8ixx" kind="file"><name>GameTimerClearSystem.ixx</name>
+  </compound>
+  <compound refid="GameTimerUpdateSystem_8ixx" kind="file"><name>GameTimerUpdateSystem.ixx</name>
+  </compound>
+  <compound refid="TimerManager_8ixx" kind="file"><name>TimerManager.ixx</name>
+  </compound>
+  <compound refid="GameTimerId_8ixx" kind="file"><name>GameTimerId.ixx</name>
+  </compound>
+  <compound refid="TimerControlContext_8ixx" kind="file"><name>TimerControlContext.ixx</name>
+  </compound>
+  <compound refid="TimerRevision_8ixx" kind="file"><name>TimerRevision.ixx</name>
+  </compound>
+  <compound refid="TimerState_8ixx" kind="file"><name>TimerState.ixx</name>
+  </compound>
+  <compound refid="ChaseComponent_8ixx" kind="file"><name>ChaseComponent.ixx</name>
+  </compound>
+  <compound refid="ChaseSystem_8ixx" kind="file"><name>ChaseSystem.ixx</name>
+  </compound>
+  <compound refid="SpinComponent_8ixx" kind="file"><name>SpinComponent.ixx</name>
+  </compound>
+  <compound refid="SpinSystem_8ixx" kind="file"><name>SpinSystem.ixx</name>
+  </compound>
+  <compound refid="Bounds_8ixx" kind="file"><name>Bounds.ixx</name>
+  </compound>
+  <compound refid="AabbColliderComponent_8ixx" kind="file"><name>AabbColliderComponent.ixx</name>
+  </compound>
+  <compound refid="CollisionComponent_8ixx" kind="file"><name>CollisionComponent.ixx</name>
+  </compound>
+  <compound refid="CollisionStateComponent_8ixx" kind="file"><name>CollisionStateComponent.ixx</name>
+  </compound>
+  <compound refid="SolidCollisionEvent_8ixx" kind="file"><name>SolidCollisionEvent.ixx</name>
+  </compound>
+  <compound refid="TriggerCollisionEvent_8ixx" kind="file"><name>TriggerCollisionEvent.ixx</name>
+  </compound>
+  <compound refid="BoundsUpdateSystem_8ixx" kind="file"><name>BoundsUpdateSystem.ixx</name>
+  </compound>
+  <compound refid="CollisionStateClearSystem_8ixx" kind="file"><name>CollisionStateClearSystem.ixx</name>
+  </compound>
+  <compound refid="CollisionStateResponseSystem_8ixx" kind="file"><name>CollisionStateResponseSystem.ixx</name>
+  </compound>
+  <compound refid="GridCollisionDetectionSystem_8ixx" kind="file"><name>GridCollisionDetectionSystem.ixx</name>
+    <member refid="GridCollisionDetectionSystem_8ixx_1acbc04f24078582c7d42b2085be5d5750" kind="define"><name>HELIOS_LOG_SCOPE</name></member>
+  </compound>
+  <compound refid="CollisionBehavior_8ixx" kind="file"><name>CollisionBehavior.ixx</name>
+  </compound>
+  <compound refid="CollisionContext_8ixx" kind="file"><name>CollisionContext.ixx</name>
+  </compound>
+  <compound refid="CollisionLayer_8ixx" kind="file"><name>CollisionLayer.ixx</name>
+  </compound>
+  <compound refid="CollisionResponse_8ixx" kind="file"><name>CollisionResponse.ixx</name>
+  </compound>
+  <compound refid="HitPolicy_8ixx" kind="file"><name>HitPolicy.ixx</name>
+  </compound>
+  <compound refid="Move2DCommand_8ixx" kind="file"><name>Move2DCommand.ixx</name>
+  </compound>
+  <compound refid="SteeringCommand_8ixx" kind="file"><name>SteeringCommand.ixx</name>
+  </compound>
+  <compound refid="DirectionComponent_8ixx" kind="file"><name>DirectionComponent.ixx</name>
+  </compound>
+  <compound refid="Move2DComponent_8ixx" kind="file"><name>Move2DComponent.ixx</name>
+  </compound>
+  <compound refid="SteeringComponent_8ixx" kind="file"><name>SteeringComponent.ixx</name>
+  </compound>
+  <compound refid="Move2DSystem_8ixx" kind="file"><name>Move2DSystem.ixx</name>
+  </compound>
+  <compound refid="SteeringSystem_8ixx" kind="file"><name>SteeringSystem.ixx</name>
+  </compound>
+  <compound refid="ModelAabbComponent_8ixx" kind="file"><name>ModelAabbComponent.ixx</name>
+  </compound>
+  <compound refid="RenderableComponent_8ixx" kind="file"><name>RenderableComponent.ixx</name>
+  </compound>
+  <compound refid="ActiveViewportIdsStateComponent_8ixx" kind="file"><name>ActiveViewportIdsStateComponent.ixx</name>
+  </compound>
+  <compound refid="StateToViewportPolicyUpdateSystem_8ixx" kind="file"><name>StateToViewportPolicyUpdateSystem.ixx</name>
+  </compound>
+  <compound refid="SceneNodeComponent_8ixx" kind="file"><name>SceneNodeComponent.ixx</name>
+  </compound>
+  <compound refid="SceneRenderingSystem_8ixx" kind="file"><name>SceneRenderingSystem.ixx</name>
+  </compound>
+  <compound refid="SceneSyncSystem_8ixx" kind="file"><name>SceneSyncSystem.ixx</name>
+  </compound>
+  <compound refid="SceneId_8ixx" kind="file"><name>SceneId.ixx</name>
+  </compound>
+  <compound refid="SceneToViewportMap_8ixx" kind="file"><name>SceneToViewportMap.ixx</name>
+  </compound>
+  <compound refid="ComposeTransformComponent_8ixx" kind="file"><name>ComposeTransformComponent.ixx</name>
+  </compound>
+  <compound refid="RotationStateComponent_8ixx" kind="file"><name>RotationStateComponent.ixx</name>
+  </compound>
+  <compound refid="ScaleStateComponent_8ixx" kind="file"><name>ScaleStateComponent.ixx</name>
+  </compound>
+  <compound refid="TranslationStateComponent_8ixx" kind="file"><name>TranslationStateComponent.ixx</name>
+  </compound>
+  <compound refid="ecs_2registry_8ixx" kind="file"><name>ecs/registry.ixx</name>
+  </compound>
+  <compound refid="mechanics_2bounds_2registry_8ixx" kind="file"><name>mechanics/bounds/registry.ixx</name>
+  </compound>
+  <compound refid="mechanics_2combat_2registry_8ixx" kind="file"><name>mechanics/combat/registry.ixx</name>
+  </compound>
+  <compound refid="mechanics_2damage_2registry_8ixx" kind="file"><name>mechanics/damage/registry.ixx</name>
+  </compound>
+  <compound refid="mechanics_2health_2registry_8ixx" kind="file"><name>mechanics/health/registry.ixx</name>
+  </compound>
+  <compound refid="mechanics_2lifecycle_2registry_8ixx" kind="file"><name>mechanics/lifecycle/registry.ixx</name>
+  </compound>
+  <compound refid="mechanics_2registry_8ixx" kind="file"><name>mechanics/registry.ixx</name>
+  </compound>
+  <compound refid="mechanics_2scoring_2registry_8ixx" kind="file"><name>mechanics/scoring/registry.ixx</name>
+  </compound>
+  <compound refid="mechanics_2spawn_2registry_8ixx" kind="file"><name>mechanics/spawn/registry.ixx</name>
+  </compound>
+  <compound refid="modules_2ai_2registry_8ixx" kind="file"><name>modules/ai/registry.ixx</name>
+  </compound>
+  <compound refid="modules_2effects_2gfx_2registry_8ixx" kind="file"><name>modules/effects/gfx/registry.ixx</name>
+  </compound>
+  <compound refid="modules_2effects_2registry_8ixx" kind="file"><name>modules/effects/registry.ixx</name>
+  </compound>
+  <compound refid="modules_2physics_2collision_2registry_8ixx" kind="file"><name>modules/physics/collision/registry.ixx</name>
+  </compound>
+  <compound refid="modules_2physics_2motion_2registry_8ixx" kind="file"><name>modules/physics/motion/registry.ixx</name>
+  </compound>
+  <compound refid="modules_2physics_2registry_8ixx" kind="file"><name>modules/physics/registry.ixx</name>
+  </compound>
+  <compound refid="modules_2registry_8ixx" kind="file"><name>modules/registry.ixx</name>
+  </compound>
+  <compound refid="modules_2rendering_2model_2registry_8ixx" kind="file"><name>modules/rendering/model/registry.ixx</name>
+  </compound>
+  <compound refid="modules_2rendering_2registry_8ixx" kind="file"><name>modules/rendering/registry.ixx</name>
+  </compound>
+  <compound refid="modules_2rendering_2renderable_2registry_8ixx" kind="file"><name>modules/rendering/renderable/registry.ixx</name>
+  </compound>
+  <compound refid="modules_2scene_2registry_8ixx" kind="file"><name>modules/scene/registry.ixx</name>
+  </compound>
+  <compound refid="modules_2spatial_2registry_8ixx" kind="file"><name>modules/spatial/registry.ixx</name>
+  </compound>
+  <compound refid="modules_2spatial_2transform_2registry_8ixx" kind="file"><name>modules/spatial/transform/registry.ixx</name>
+  </compound>
+  <compound refid="modules_2ui_2registry_8ixx" kind="file"><name>modules/ui/registry.ixx</name>
+  </compound>
+  <compound refid="modules_2ui_2transform_2registry_8ixx" kind="file"><name>modules/ui/transform/registry.ixx</name>
+  </compound>
+  <compound refid="modules_2ui_2widgets_2registry_8ixx" kind="file"><name>modules/ui/widgets/registry.ixx</name>
+  </compound>
+  <compound refid="ComposeTransformSystem_8ixx" kind="file"><name>ComposeTransformSystem.ixx</name>
+  </compound>
+  <compound refid="ScaleSystem_8ixx" kind="file"><name>ScaleSystem.ixx</name>
+  </compound>
+  <compound refid="TransformClearSystem_8ixx" kind="file"><name>TransformClearSystem.ixx</name>
+  </compound>
+  <compound refid="GameTimer2UiTextUpdateSystem_8ixx" kind="file"><name>GameTimer2UiTextUpdateSystem.ixx</name>
+  </compound>
+  <compound refid="Lives2UiTextUpdateSystem_8ixx" kind="file"><name>Lives2UiTextUpdateSystem.ixx</name>
+  </compound>
+  <compound refid="MaxScore2UiTextUpdateSystem_8ixx" kind="file"><name>MaxScore2UiTextUpdateSystem.ixx</name>
+  </compound>
+  <compound refid="Score2UiTextUpdateSystem_8ixx" kind="file"><name>Score2UiTextUpdateSystem.ixx</name>
+  </compound>
+  <compound refid="Anchor_8ixx" kind="file"><name>Anchor.ixx</name>
+  </compound>
+  <compound refid="NumberFormatterComponent_8ixx" kind="file"><name>NumberFormatterComponent.ixx</name>
+  </compound>
+  <compound refid="TimeFormatterComponent_8ixx" kind="file"><name>TimeFormatterComponent.ixx</name>
+  </compound>
+  <compound refid="TimeDisplayMode_8ixx" kind="file"><name>TimeDisplayMode.ixx</name>
+  </compound>
+  <compound refid="UiTransformComponent_8ixx" kind="file"><name>UiTransformComponent.ixx</name>
+  </compound>
+  <compound refid="UiTransformSystem_8ixx" kind="file"><name>UiTransformSystem.ixx</name>
+  </compound>
+  <compound refid="UiActionCommandManager_8ixx" kind="file"><name>UiActionCommandManager.ixx</name>
+  </compound>
+  <compound refid="UiActionCommand_8ixx" kind="file"><name>UiActionCommand.ixx</name>
+  </compound>
+  <compound refid="MenuComponent_8ixx" kind="file"><name>MenuComponent.ixx</name>
+  </compound>
+  <compound refid="UiActionComponent_8ixx" kind="file"><name>UiActionComponent.ixx</name>
+  </compound>
+  <compound refid="UiFocusComponent_8ixx" kind="file"><name>UiFocusComponent.ixx</name>
+  </compound>
+  <compound refid="UiStateComponent_8ixx" kind="file"><name>UiStateComponent.ixx</name>
+  </compound>
+  <compound refid="UiStyleComponent_8ixx" kind="file"><name>UiStyleComponent.ixx</name>
+  </compound>
+  <compound refid="UiTextComponent_8ixx" kind="file"><name>UiTextComponent.ixx</name>
+  </compound>
+  <compound refid="MenuDisplaySystem_8ixx" kind="file"><name>MenuDisplaySystem.ixx</name>
+  </compound>
+  <compound refid="MenuNavigationSystem_8ixx" kind="file"><name>MenuNavigationSystem.ixx</name>
+  </compound>
+  <compound refid="UiStyleUpdateSystem_8ixx" kind="file"><name>UiStyleUpdateSystem.ixx</name>
+  </compound>
+  <compound refid="UiTextBoundsUpdateSystem_8ixx" kind="file"><name>UiTextBoundsUpdateSystem.ixx</name>
+  </compound>
+  <compound refid="ActionId_8ixx" kind="file"><name>ActionId.ixx</name>
+  </compound>
+  <compound refid="FontId_8ixx" kind="file"><name>FontId.ixx</name>
+  </compound>
+  <compound refid="MenuId_8ixx" kind="file"><name>MenuId.ixx</name>
+  </compound>
+  <compound refid="CommitPoint_8ixx" kind="file"><name>CommitPoint.ixx</name>
+  </compound>
+  <compound refid="GameLoop_8ixx" kind="file"><name>GameLoop.ixx</name>
+    <member refid="GameLoop_8ixx_1acbc04f24078582c7d42b2085be5d5750" kind="define"><name>HELIOS_LOG_SCOPE</name></member>
+  </compound>
+  <compound refid="Pass_8ixx" kind="file"><name>Pass.ixx</name>
+  </compound>
+  <compound refid="PassCommitListener_8ixx" kind="file"><name>PassCommitListener.ixx</name>
+  </compound>
+  <compound refid="Phase_8ixx" kind="file"><name>Phase.ixx</name>
+  </compound>
+  <compound refid="TypedPass_8ixx" kind="file"><name>TypedPass.ixx</name>
+  </compound>
+  <compound refid="CommandBuffer_8ixx" kind="file"><name>CommandBuffer.ixx</name>
+  </compound>
+  <compound refid="CommandBufferRegistry_8ixx" kind="file"><name>CommandBufferRegistry.ixx</name>
+  </compound>
+  <compound refid="CommandHandlerRegistry_8ixx" kind="file"><name>CommandHandlerRegistry.ixx</name>
+  </compound>
+  <compound refid="EngineCommandBuffer_8ixx" kind="file"><name>EngineCommandBuffer.ixx</name>
+  </compound>
+  <compound refid="TypedCommandBuffer_8ixx" kind="file"><name>TypedCommandBuffer.ixx</name>
+  </compound>
+  <compound refid="CommandBufferTypeId_8ixx" kind="file"><name>CommandBufferTypeId.ixx</name>
+  </compound>
+  <compound refid="CommandTypeId_8ixx" kind="file"><name>CommandTypeId.ixx</name>
+  </compound>
+  <compound refid="GameLoopEventBus_8ixx" kind="file"><name>GameLoopEventBus.ixx</name>
+  </compound>
+  <compound refid="PrefabIdComponent_8ixx" kind="file"><name>PrefabIdComponent.ixx</name>
+  </compound>
+  <compound refid="GameObjectPool_8ixx" kind="file"><name>GameObjectPool.ixx</name>
+  </compound>
+  <compound refid="GameObjectPoolConfig_8ixx" kind="file"><name>GameObjectPoolConfig.ixx</name>
+  </compound>
+  <compound refid="GameObjectPoolManager_8ixx" kind="file"><name>GameObjectPoolManager.ixx</name>
+  </compound>
+  <compound refid="GameObjectPoolRegistry_8ixx" kind="file"><name>GameObjectPoolRegistry.ixx</name>
+  </compound>
+  <compound refid="GameObjectPoolSnapshot_8ixx" kind="file"><name>GameObjectPoolSnapshot.ixx</name>
+  </compound>
+  <compound refid="GameObjectPoolId_8ixx" kind="file"><name>GameObjectPoolId.ixx</name>
+  </compound>
+  <compound refid="DelayedComponentEnablerInitializer_8ixx" kind="file"><name>DelayedComponentEnablerInitializer.ixx</name>
+  </compound>
+  <compound refid="EmitterInitializer_8ixx" kind="file"><name>EmitterInitializer.ixx</name>
+  </compound>
+  <compound refid="InitializerList_8ixx" kind="file"><name>InitializerList.ixx</name>
+  </compound>
+  <compound refid="MoveInitializer_8ixx" kind="file"><name>MoveInitializer.ixx</name>
+  </compound>
+  <compound refid="RandomDirectionInitializer_8ixx" kind="file"><name>RandomDirectionInitializer.ixx</name>
+  </compound>
+  <compound refid="AxisSpawnPlacer_8ixx" kind="file"><name>AxisSpawnPlacer.ixx</name>
+  </compound>
+  <compound refid="ColumnSpawnPlacer_8ixx" kind="file"><name>ColumnSpawnPlacer.ixx</name>
+  </compound>
+  <compound refid="DistributedSpawnPlacer_8ixx" kind="file"><name>DistributedSpawnPlacer.ixx</name>
+  </compound>
+  <compound refid="EmitterSpawnPlacer_8ixx" kind="file"><name>EmitterSpawnPlacer.ixx</name>
+  </compound>
+  <compound refid="RandomSpawnPlacer_8ixx" kind="file"><name>RandomSpawnPlacer.ixx</name>
+  </compound>
+  <compound refid="SpawnInitializer_8ixx" kind="file"><name>SpawnInitializer.ixx</name>
+  </compound>
+  <compound refid="SpawnPlacer_8ixx" kind="file"><name>SpawnPlacer.ixx</name>
+  </compound>
+  <compound refid="DespawnCommand_8ixx" kind="file"><name>DespawnCommand.ixx</name>
+  </compound>
+  <compound refid="ScheduledSpawnPlanCommand_8ixx" kind="file"><name>ScheduledSpawnPlanCommand.ixx</name>
+  </compound>
+  <compound refid="SpawnCommand_8ixx" kind="file"><name>SpawnCommand.ixx</name>
+  </compound>
+  <compound refid="SpawnPlanCommandExecutedEvent_8ixx" kind="file"><name>SpawnPlanCommandExecutedEvent.ixx</name>
+  </compound>
+  <compound refid="FixedSpawnAmount_8ixx" kind="file"><name>FixedSpawnAmount.ixx</name>
+  </compound>
+  <compound refid="SpawnAll_8ixx" kind="file"><name>SpawnAll.ixx</name>
+  </compound>
+  <compound refid="SpawnAmountByCallback_8ixx" kind="file"><name>SpawnAmountByCallback.ixx</name>
+  </compound>
+  <compound refid="SpawnAmountProvider_8ixx" kind="file"><name>SpawnAmountProvider.ixx</name>
+  </compound>
+  <compound refid="RequestedAmountIsAvailableCondition_8ixx" kind="file"><name>RequestedAmountIsAvailableCondition.ixx</name>
+  </compound>
+  <compound refid="TimerSpawnCondition_8ixx" kind="file"><name>TimerSpawnCondition.ixx</name>
+  </compound>
+  <compound refid="SpawnCondition_8ixx" kind="file"><name>SpawnCondition.ixx</name>
+  </compound>
+  <compound refid="SpawnConditionAll_8ixx" kind="file"><name>SpawnConditionAll.ixx</name>
+  </compound>
+  <compound refid="SpawnRule_8ixx" kind="file"><name>SpawnRule.ixx</name>
+  </compound>
+  <compound refid="SpawnRuleState_8ixx" kind="file"><name>SpawnRuleState.ixx</name>
+  </compound>
+  <compound refid="CyclicSpawnScheduler_8ixx" kind="file"><name>CyclicSpawnScheduler.ixx</name>
+  </compound>
+  <compound refid="DefaultRuleProcessor_8ixx" kind="file"><name>DefaultRuleProcessor.ixx</name>
+  </compound>
+  <compound refid="DefaultSpawnScheduler_8ixx" kind="file"><name>DefaultSpawnScheduler.ixx</name>
+  </compound>
+  <compound refid="RuleProcessor_8ixx" kind="file"><name>RuleProcessor.ixx</name>
+  </compound>
+  <compound refid="ScheduledSpawnPlan_8ixx" kind="file"><name>ScheduledSpawnPlan.ixx</name>
+  </compound>
+  <compound refid="SpawnPlan_8ixx" kind="file"><name>SpawnPlan.ixx</name>
+  </compound>
+  <compound refid="SpawnScheduler_8ixx" kind="file"><name>SpawnScheduler.ixx</name>
+  </compound>
+  <compound refid="SpawnManager_8ixx" kind="file"><name>SpawnManager.ixx</name>
+  </compound>
+  <compound refid="EmitterContext_8ixx" kind="file"><name>EmitterContext.ixx</name>
+  </compound>
+  <compound refid="SpawnContext_8ixx" kind="file"><name>SpawnContext.ixx</name>
+  </compound>
+  <compound refid="SpawnPlanCursor_8ixx" kind="file"><name>SpawnPlanCursor.ixx</name>
+  </compound>
+  <compound refid="SpawnProfile_8ixx" kind="file"><name>SpawnProfile.ixx</name>
+  </compound>
+  <compound refid="SpawnProfileId_8ixx" kind="file"><name>SpawnProfileId.ixx</name>
+  </compound>
+  <compound refid="SpawnRuleId_8ixx" kind="file"><name>SpawnRuleId.ixx</name>
+  </compound>
+  <compound refid="GameWorld_8ixx" kind="file"><name>GameWorld.ixx</name>
+    <member refid="GameWorld_8ixx_1acbc04f24078582c7d42b2085be5d5750" kind="define"><name>HELIOS_LOG_SCOPE</name></member>
+  </compound>
+  <compound refid="Level_8ixx" kind="file"><name>Level.ixx</name>
+  </compound>
+  <compound refid="Manager_8ixx" kind="file"><name>Manager.ixx</name>
+  </compound>
+  <compound refid="ManagerRegistry_8ixx" kind="file"><name>ManagerRegistry.ixx</name>
+  </compound>
+  <compound refid="ResourceRegistry_8ixx" kind="file"><name>ResourceRegistry.ixx</name>
+  </compound>
+  <compound refid="Session_8ixx" kind="file"><name>Session.ixx</name>
+  </compound>
+  <compound refid="System_8ixx" kind="file"><name>System.ixx</name>
+  </compound>
+  <compound refid="SystemRegistry_8ixx" kind="file"><name>SystemRegistry.ixx</name>
+  </compound>
+  <compound refid="ManagerTypeId_8ixx" kind="file"><name>ManagerTypeId.ixx</name>
+  </compound>
+  <compound refid="ResourceTypeId_8ixx" kind="file"><name>ResourceTypeId.ixx</name>
+  </compound>
+  <compound refid="SystemTypeId_8ixx" kind="file"><name>SystemTypeId.ixx</name>
+  </compound>
+  <compound refid="UpdateContext_8ixx" kind="file"><name>UpdateContext.ixx</name>
+  </compound>
+  <compound refid="Bindings_8ixx" kind="file"><name>Bindings.ixx</name>
+  </compound>
+  <compound refid="CombinedStateToIdMapPair_8ixx" kind="file"><name>CombinedStateToIdMapPair.ixx</name>
+  </compound>
+  <compound refid="DelayedStateCommand_8ixx" kind="file"><name>DelayedStateCommand.ixx</name>
+  </compound>
+  <compound refid="StateCommand_8ixx" kind="file"><name>StateCommand.ixx</name>
+  </compound>
+  <compound refid="StateComponent_8ixx" kind="file"><name>StateComponent.ixx</name>
+  </compound>
+  <compound refid="LambdaStateListener_8ixx" kind="file"><name>LambdaStateListener.ixx</name>
+  </compound>
+  <compound refid="StateCommandHandler_8ixx" kind="file"><name>StateCommandHandler.ixx</name>
+  </compound>
+  <compound refid="StateManager_8ixx" kind="file"><name>StateManager.ixx</name>
+  </compound>
+  <compound refid="StateToIdMap_8ixx" kind="file"><name>StateToIdMap.ixx</name>
+  </compound>
+  <compound refid="StateToIdMapPair_8ixx" kind="file"><name>StateToIdMapPair.ixx</name>
+  </compound>
+  <compound refid="StateTransitionListener_8ixx" kind="file"><name>StateTransitionListener.ixx</name>
+  </compound>
+  <compound refid="TypedStateCommandHandler_8ixx" kind="file"><name>TypedStateCommandHandler.ixx</name>
+  </compound>
+  <compound refid="StateTransitionContext_8ixx" kind="file"><name>StateTransitionContext.ixx</name>
+  </compound>
+  <compound refid="StateTransitionId_8ixx" kind="file"><name>StateTransitionId.ixx</name>
+  </compound>
+  <compound refid="StateTransitionRequest_8ixx" kind="file"><name>StateTransitionRequest.ixx</name>
+  </compound>
+  <compound refid="StateTransitionRule_8ixx" kind="file"><name>StateTransitionRule.ixx</name>
+  </compound>
+  <compound refid="StateTransitionType_8ixx" kind="file"><name>StateTransitionType.ixx</name>
+  </compound>
+  <compound refid="StateTypeId_8ixx" kind="file"><name>StateTypeId.ixx</name>
+  </compound>
+  <compound refid="FpsMetrics_8ixx" kind="file"><name>FpsMetrics.ixx</name>
+  </compound>
+  <compound refid="FramePacer_8ixx" kind="file"><name>FramePacer.ixx</name>
+  </compound>
+  <compound refid="FrameStats_8ixx" kind="file"><name>FrameStats.ixx</name>
+  </compound>
+  <compound refid="BasicEventManager_8ixx" kind="file"><name>BasicEventManager.ixx</name>
+  </compound>
+  <compound refid="DequeEventQueue_8ixx" kind="file"><name>DequeEventQueue.ixx</name>
+  </compound>
+  <compound refid="Dispatcher_8ixx" kind="file"><name>Dispatcher.ixx</name>
+  </compound>
+  <compound refid="Event_8ixx" kind="file"><name>Event.ixx</name>
+  </compound>
+  <compound refid="EventManager_8ixx" kind="file"><name>EventManager.ixx</name>
+    <member refid="EventManager_8ixx_1acbc04f24078582c7d42b2085be5d5750" kind="define"><name>HELIOS_LOG_SCOPE</name></member>
+  </compound>
+  <compound refid="EventQueue_8ixx" kind="file"><name>EventQueue.ixx</name>
   </compound>
   <compound refid="ext_2glfw_2app_2README_8md" kind="file"><name>ext/glfw/app/README.md</name>
   </compound>
@@ -6022,749 +6756,6 @@
   <compound refid="helios_2window_2event_2README_8md" kind="file"><name>helios/window/event/README.md</name>
   </compound>
   <compound refid="helios_2window_2README_8md" kind="file"><name>helios/window/README.md</name>
-  </compound>
-  <compound refid="Application_8ixx" kind="file"><name>Application.ixx</name>
-    <member refid="Application_8ixx_1acbc04f24078582c7d42b2085be5d5750" kind="define"><name>HELIOS_LOG_SCOPE</name></member>
-  </compound>
-  <compound refid="BasicWindowRenderingController_8ixx" kind="file"><name>BasicWindowRenderingController.ixx</name>
-  </compound>
-  <compound refid="Controller_8ixx" kind="file"><name>Controller.ixx</name>
-  </compound>
-  <compound refid="WindowRenderingController_8ixx" kind="file"><name>WindowRenderingController.ixx</name>
-    <member refid="WindowRenderingController_8ixx_1acbc04f24078582c7d42b2085be5d5750" kind="define"><name>HELIOS_LOG_SCOPE</name></member>
-  </compound>
-  <compound refid="algorithms_8ixx" kind="file"><name>algorithms.ixx</name>
-  </compound>
-  <compound refid="Buffer_8ixx" kind="file"><name>Buffer.ixx</name>
-  </compound>
-  <compound refid="DoubleBuffer_8ixx" kind="file"><name>DoubleBuffer.ixx</name>
-  </compound>
-  <compound refid="ReadBuffer_8ixx" kind="file"><name>ReadBuffer.ixx</name>
-  </compound>
-  <compound refid="ReadWriteBuffer_8ixx" kind="file"><name>ReadWriteBuffer.ixx</name>
-  </compound>
-  <compound refid="ReadWriteDoubleBuffer_8ixx" kind="file"><name>ReadWriteDoubleBuffer.ixx</name>
-  </compound>
-  <compound refid="TypeIndexedDoubleBuffer_8ixx" kind="file"><name>TypeIndexedDoubleBuffer.ixx</name>
-  </compound>
-  <compound refid="TypeIndexedReadWriteBuffer_8ixx" kind="file"><name>TypeIndexedReadWriteBuffer.ixx</name>
-  </compound>
-  <compound refid="WriteBuffer_8ixx" kind="file"><name>WriteBuffer.ixx</name>
-  </compound>
-  <compound refid="ConceptModelRegistry_8ixx" kind="file"><name>ConceptModelRegistry.ixx</name>
-  </compound>
-  <compound refid="StrongId_8ixx" kind="file"><name>StrongId.ixx</name>
-  </compound>
-  <compound refid="TypeIndexer_8ixx" kind="file"><name>TypeIndexer.ixx</name>
-  </compound>
-  <compound refid="ErasedUnique_8ixx" kind="file"><name>ErasedUnique.ixx</name>
-  </compound>
-  <compound refid="Transform_8ixx" kind="file"><name>Transform.ixx</name>
-  </compound>
-  <compound refid="types_8ixx" kind="file"><name>types.ixx</name>
-  </compound>
-  <compound refid="bootstrap_8ixx" kind="file"><name>bootstrap.ixx</name>
-  </compound>
-  <compound refid="AiBuilder_8ixx" kind="file"><name>AiBuilder.ixx</name>
-  </compound>
-  <compound refid="CollisionBuilder_8ixx" kind="file"><name>CollisionBuilder.ixx</name>
-  </compound>
-  <compound refid="CombatBuilder_8ixx" kind="file"><name>CombatBuilder.ixx</name>
-  </compound>
-  <compound refid="ChaseConfig_8ixx" kind="file"><name>ChaseConfig.ixx</name>
-  </compound>
-  <compound refid="CollisionConfig_8ixx" kind="file"><name>CollisionConfig.ixx</name>
-  </compound>
-  <compound refid="CombatConfig_8ixx" kind="file"><name>CombatConfig.ixx</name>
-  </compound>
-  <compound refid="GfxEffectsConfig_8ixx" kind="file"><name>GfxEffectsConfig.ixx</name>
-  </compound>
-  <compound refid="HealthConfig_8ixx" kind="file"><name>HealthConfig.ixx</name>
-  </compound>
-  <compound refid="LevelBoundsCollisionConfig_8ixx" kind="file"><name>LevelBoundsCollisionConfig.ixx</name>
-  </compound>
-  <compound refid="LifecycleConfig_8ixx" kind="file"><name>LifecycleConfig.ixx</name>
-  </compound>
-  <compound refid="MenuConfig_8ixx" kind="file"><name>MenuConfig.ixx</name>
-  </compound>
-  <compound refid="MenuItemConfig_8ixx" kind="file"><name>MenuItemConfig.ixx</name>
-  </compound>
-  <compound refid="MeshRenderableConfig_8ixx" kind="file"><name>MeshRenderableConfig.ixx</name>
-  </compound>
-  <compound refid="Move2DConfig_8ixx" kind="file"><name>Move2DConfig.ixx</name>
-  </compound>
-  <compound refid="ObserverConfig_8ixx" kind="file"><name>ObserverConfig.ixx</name>
-  </compound>
-  <compound refid="SceneNodeConfig_8ixx" kind="file"><name>SceneNodeConfig.ixx</name>
-  </compound>
-  <compound refid="ScorePoolConfig_8ixx" kind="file"><name>ScorePoolConfig.ixx</name>
-  </compound>
-  <compound refid="ScoreValueConfig_8ixx" kind="file"><name>ScoreValueConfig.ixx</name>
-  </compound>
-  <compound refid="SpawnConfig_8ixx" kind="file"><name>SpawnConfig.ixx</name>
-  </compound>
-  <compound refid="SteeringConfig_8ixx" kind="file"><name>SteeringConfig.ixx</name>
-  </compound>
-  <compound refid="TextRenderableConfig_8ixx" kind="file"><name>TextRenderableConfig.ixx</name>
-  </compound>
-  <compound refid="TransformConfig_8ixx" kind="file"><name>TransformConfig.ixx</name>
-  </compound>
-  <compound refid="UiTransformConfig_8ixx" kind="file"><name>UiTransformConfig.ixx</name>
-  </compound>
-  <compound refid="WeaponConfig_8ixx" kind="file"><name>WeaponConfig.ixx</name>
-  </compound>
-  <compound refid="EffectsBuilder_8ixx" kind="file"><name>EffectsBuilder.ixx</name>
-  </compound>
-  <compound refid="HealthBuilder_8ixx" kind="file"><name>HealthBuilder.ixx</name>
-  </compound>
-  <compound refid="LifecycleBuilder_8ixx" kind="file"><name>LifecycleBuilder.ixx</name>
-  </compound>
-  <compound refid="MenuBuilder_8ixx" kind="file"><name>MenuBuilder.ixx</name>
-  </compound>
-  <compound refid="MotionBuilder_8ixx" kind="file"><name>MotionBuilder.ixx</name>
-  </compound>
-  <compound refid="ObserverBuilder_8ixx" kind="file"><name>ObserverBuilder.ixx</name>
-  </compound>
-  <compound refid="RenderingBuilder_8ixx" kind="file"><name>RenderingBuilder.ixx</name>
-  </compound>
-  <compound refid="SceneBuilder_8ixx" kind="file"><name>SceneBuilder.ixx</name>
-  </compound>
-  <compound refid="ScoringBuilder_8ixx" kind="file"><name>ScoringBuilder.ixx</name>
-  </compound>
-  <compound refid="SpawnBuilder_8ixx" kind="file"><name>SpawnBuilder.ixx</name>
-  </compound>
-  <compound refid="TransformBuilder_8ixx" kind="file"><name>TransformBuilder.ixx</name>
-  </compound>
-  <compound refid="UiTransformBuilder_8ixx" kind="file"><name>UiTransformBuilder.ixx</name>
-  </compound>
-  <compound refid="GameObjectFactory_8ixx" kind="file"><name>GameObjectFactory.ixx</name>
-  </compound>
-  <compound refid="SchedulerConfig_8ixx" kind="file"><name>SchedulerConfig.ixx</name>
-  </compound>
-  <compound refid="SpawnPoolConfig_8ixx" kind="file"><name>SpawnPoolConfig.ixx</name>
-  </compound>
-  <compound refid="SchedulerBuilder_8ixx" kind="file"><name>SchedulerBuilder.ixx</name>
-  </compound>
-  <compound refid="SpawnSystemFactory_8ixx" kind="file"><name>SpawnSystemFactory.ixx</name>
-  </compound>
-  <compound refid="HasClear_8ixx" kind="file"><name>HasClear.ixx</name>
-  </compound>
-  <compound refid="HasInit_8ixx" kind="file"><name>HasInit.ixx</name>
-  </compound>
-  <compound refid="HasReset_8ixx" kind="file"><name>HasReset.ixx</name>
-  </compound>
-  <compound refid="HasSubmit_8ixx" kind="file"><name>HasSubmit.ixx</name>
-  </compound>
-  <compound refid="HasTag_8ixx" kind="file"><name>HasTag.ixx</name>
-  </compound>
-  <compound refid="HasUpdate_8ixx" kind="file"><name>HasUpdate.ixx</name>
-  </compound>
-  <compound refid="IsCommandBufferLike_8ixx" kind="file"><name>IsCommandBufferLike.ixx</name>
-  </compound>
-  <compound refid="IsCommandHandlerLike_8ixx" kind="file"><name>IsCommandHandlerLike.ixx</name>
-  </compound>
-  <compound refid="IsManagerLike_8ixx" kind="file"><name>IsManagerLike.ixx</name>
-  </compound>
-  <compound refid="IsSystemLike_8ixx" kind="file"><name>IsSystemLike.ixx</name>
-  </compound>
-  <compound refid="CommandBufferRole_8ixx" kind="file"><name>CommandBufferRole.ixx</name>
-  </compound>
-  <compound refid="ManagerRole_8ixx" kind="file"><name>ManagerRole.ixx</name>
-  </compound>
-  <compound refid="SystemRole_8ixx" kind="file"><name>SystemRole.ixx</name>
-  </compound>
-  <compound refid="DamageContext_8ixx" kind="file"><name>DamageContext.ixx</name>
-  </compound>
-  <compound refid="InteractionContext_8ixx" kind="file"><name>InteractionContext.ixx</name>
-  </compound>
-  <compound refid="PrefabId_8ixx" kind="file"><name>PrefabId.ixx</name>
-  </compound>
-  <compound refid="VersionId_8ixx" kind="file"><name>VersionId.ixx</name>
-  </compound>
-  <compound refid="ViewportId_8ixx" kind="file"><name>ViewportId.ixx</name>
-  </compound>
-  <compound refid="Unit_8ixx" kind="file"><name>Unit.ixx</name>
-  </compound>
-  <compound refid="ComponentOps_8ixx" kind="file"><name>ComponentOps.ixx</name>
-  </compound>
-  <compound refid="ComponentOpsRegistry_8ixx" kind="file"><name>ComponentOpsRegistry.ixx</name>
-  </compound>
-  <compound refid="ComponentReflector_8ixx" kind="file"><name>ComponentReflector.ixx</name>
-  </compound>
-  <compound refid="HierarchyComponent_8ixx" kind="file"><name>HierarchyComponent.ixx</name>
-  </compound>
-  <compound refid="EntityHandle_8ixx" kind="file"><name>EntityHandle.ixx</name>
-  </compound>
-  <compound refid="EntityManager_8ixx" kind="file"><name>EntityManager.ixx</name>
-  </compound>
-  <compound refid="EntityRegistry_8ixx" kind="file"><name>EntityRegistry.ixx</name>
-  </compound>
-  <compound refid="EntityResolver_8ixx" kind="file"><name>EntityResolver.ixx</name>
-  </compound>
-  <compound refid="GameObject_8ixx" kind="file"><name>GameObject.ixx</name>
-  </compound>
-  <compound refid="SparseSet_8ixx" kind="file"><name>SparseSet.ixx</name>
-  </compound>
-  <compound refid="HierarchyPropagationSystem_8ixx" kind="file"><name>HierarchyPropagationSystem.ixx</name>
-  </compound>
-  <compound refid="Traits_8ixx" kind="file"><name>Traits.ixx</name>
-  </compound>
-  <compound refid="ComponentTypeId_8ixx" kind="file"><name>ComponentTypeId.ixx</name>
-  </compound>
-  <compound refid="EntityId_8ixx" kind="file"><name>EntityId.ixx</name>
-  </compound>
-  <compound refid="EntityTombstone_8ixx" kind="file"><name>EntityTombstone.ixx</name>
-  </compound>
-  <compound refid="View_8ixx" kind="file"><name>View.ixx</name>
-  </compound>
-  <compound refid="LevelBoundsBehaviorComponent_8ixx" kind="file"><name>LevelBoundsBehaviorComponent.ixx</name>
-  </compound>
-  <compound refid="LevelBoundsBehaviorSystem_8ixx" kind="file"><name>LevelBoundsBehaviorSystem.ixx</name>
-  </compound>
-  <compound refid="Aim2DCommand_8ixx" kind="file"><name>Aim2DCommand.ixx</name>
-  </compound>
-  <compound refid="ShootCommand_8ixx" kind="file"><name>ShootCommand.ixx</name>
-  </compound>
-  <compound refid="Aim2DComponent_8ixx" kind="file"><name>Aim2DComponent.ixx</name>
-  </compound>
-  <compound refid="ShootComponent_8ixx" kind="file"><name>ShootComponent.ixx</name>
-  </compound>
-  <compound refid="ProjectileSpawnSystem_8ixx" kind="file"><name>ProjectileSpawnSystem.ixx</name>
-  </compound>
-  <compound refid="ApplyDamageCommand_8ixx" kind="file"><name>ApplyDamageCommand.ixx</name>
-  </compound>
-  <compound refid="DamageDealerComponent_8ixx" kind="file"><name>DamageDealerComponent.ixx</name>
-  </compound>
-  <compound refid="LastDamageComponent_8ixx" kind="file"><name>LastDamageComponent.ixx</name>
-  </compound>
-  <compound refid="DamageOnCollisionSystem_8ixx" kind="file"><name>DamageOnCollisionSystem.ixx</name>
-    <member refid="DamageOnCollisionSystem_8ixx_1acbc04f24078582c7d42b2085be5d5750" kind="define"><name>HELIOS_LOG_SCOPE</name></member>
-  </compound>
-  <compound refid="GameStateManager_8ixx" kind="file"><name>GameStateManager.ixx</name>
-  </compound>
-  <compound refid="DefaultGameStateTransitionRules_8ixx" kind="file"><name>DefaultGameStateTransitionRules.ixx</name>
-  </compound>
-  <compound refid="GameFlowSystem_8ixx" kind="file"><name>GameFlowSystem.ixx</name>
-  </compound>
-  <compound refid="GameStateInputResponseSystem_8ixx" kind="file"><name>GameStateInputResponseSystem.ixx</name>
-  </compound>
-  <compound refid="GameState_8ixx" kind="file"><name>GameState.ixx</name>
-  </compound>
-  <compound refid="GameStateTransitionId_8ixx" kind="file"><name>GameStateTransitionId.ixx</name>
-  </compound>
-  <compound refid="HealthComponent_8ixx" kind="file"><name>HealthComponent.ixx</name>
-  </compound>
-  <compound refid="HealthChangedEvent_8ixx" kind="file"><name>HealthChangedEvent.ixx</name>
-  </compound>
-  <compound refid="HealthDepletedEvent_8ixx" kind="file"><name>HealthDepletedEvent.ixx</name>
-  </compound>
-  <compound refid="HealthManager_8ixx" kind="file"><name>HealthManager.ixx</name>
-    <member refid="HealthManager_8ixx_1acbc04f24078582c7d42b2085be5d5750" kind="define"><name>HELIOS_LOG_SCOPE</name></member>
-  </compound>
-  <compound refid="HealthUpdateClearSystem_8ixx" kind="file"><name>HealthUpdateClearSystem.ixx</name>
-  </compound>
-  <compound refid="HealthChangeContext_8ixx" kind="file"><name>HealthChangeContext.ixx</name>
-  </compound>
-  <compound refid="HealthDepletedBehavior_8ixx" kind="file"><name>HealthDepletedBehavior.ixx</name>
-  </compound>
-  <compound refid="TwinStickInputSystem_8ixx" kind="file"><name>TwinStickInputSystem.ixx</name>
-  </compound>
-  <compound refid="WorldLifecycleCommand_8ixx" kind="file"><name>WorldLifecycleCommand.ixx</name>
-  </compound>
-  <compound refid="Active_8ixx" kind="file"><name>Active.ixx</name>
-  </compound>
-  <compound refid="DeadTagComponent_8ixx" kind="file"><name>DeadTagComponent.ixx</name>
-  </compound>
-  <compound refid="DelayedComponentEnabler_8ixx" kind="file"><name>DelayedComponentEnabler.ixx</name>
-  </compound>
-  <compound refid="Inactive_8ixx" kind="file"><name>Inactive.ixx</name>
-  </compound>
-  <compound refid="ecs_2registry_8ixx" kind="file"><name>ecs/registry.ixx</name>
-  </compound>
-  <compound refid="mechanics_2bounds_2registry_8ixx" kind="file"><name>mechanics/bounds/registry.ixx</name>
-  </compound>
-  <compound refid="mechanics_2combat_2registry_8ixx" kind="file"><name>mechanics/combat/registry.ixx</name>
-  </compound>
-  <compound refid="mechanics_2damage_2registry_8ixx" kind="file"><name>mechanics/damage/registry.ixx</name>
-  </compound>
-  <compound refid="mechanics_2health_2registry_8ixx" kind="file"><name>mechanics/health/registry.ixx</name>
-  </compound>
-  <compound refid="mechanics_2lifecycle_2registry_8ixx" kind="file"><name>mechanics/lifecycle/registry.ixx</name>
-  </compound>
-  <compound refid="mechanics_2registry_8ixx" kind="file"><name>mechanics/registry.ixx</name>
-  </compound>
-  <compound refid="mechanics_2scoring_2registry_8ixx" kind="file"><name>mechanics/scoring/registry.ixx</name>
-  </compound>
-  <compound refid="mechanics_2spawn_2registry_8ixx" kind="file"><name>mechanics/spawn/registry.ixx</name>
-  </compound>
-  <compound refid="modules_2ai_2registry_8ixx" kind="file"><name>modules/ai/registry.ixx</name>
-  </compound>
-  <compound refid="modules_2effects_2gfx_2registry_8ixx" kind="file"><name>modules/effects/gfx/registry.ixx</name>
-  </compound>
-  <compound refid="modules_2effects_2registry_8ixx" kind="file"><name>modules/effects/registry.ixx</name>
-  </compound>
-  <compound refid="modules_2physics_2collision_2registry_8ixx" kind="file"><name>modules/physics/collision/registry.ixx</name>
-  </compound>
-  <compound refid="modules_2physics_2motion_2registry_8ixx" kind="file"><name>modules/physics/motion/registry.ixx</name>
-  </compound>
-  <compound refid="modules_2physics_2registry_8ixx" kind="file"><name>modules/physics/registry.ixx</name>
-  </compound>
-  <compound refid="modules_2registry_8ixx" kind="file"><name>modules/registry.ixx</name>
-  </compound>
-  <compound refid="modules_2rendering_2model_2registry_8ixx" kind="file"><name>modules/rendering/model/registry.ixx</name>
-  </compound>
-  <compound refid="modules_2rendering_2registry_8ixx" kind="file"><name>modules/rendering/registry.ixx</name>
-  </compound>
-  <compound refid="modules_2rendering_2renderable_2registry_8ixx" kind="file"><name>modules/rendering/renderable/registry.ixx</name>
-  </compound>
-  <compound refid="modules_2scene_2registry_8ixx" kind="file"><name>modules/scene/registry.ixx</name>
-  </compound>
-  <compound refid="modules_2spatial_2registry_8ixx" kind="file"><name>modules/spatial/registry.ixx</name>
-  </compound>
-  <compound refid="modules_2spatial_2transform_2registry_8ixx" kind="file"><name>modules/spatial/transform/registry.ixx</name>
-  </compound>
-  <compound refid="modules_2ui_2registry_8ixx" kind="file"><name>modules/ui/registry.ixx</name>
-  </compound>
-  <compound refid="modules_2ui_2transform_2registry_8ixx" kind="file"><name>modules/ui/transform/registry.ixx</name>
-  </compound>
-  <compound refid="modules_2ui_2widgets_2registry_8ixx" kind="file"><name>modules/ui/widgets/registry.ixx</name>
-  </compound>
-  <compound refid="DelayedComponentEnablerSystem_8ixx" kind="file"><name>DelayedComponentEnablerSystem.ixx</name>
-  </compound>
-  <compound refid="GameObjectLifecycleSystem_8ixx" kind="file"><name>GameObjectLifecycleSystem.ixx</name>
-  </compound>
-  <compound refid="WorldLifecycleAction_8ixx" kind="file"><name>WorldLifecycleAction.ixx</name>
-  </compound>
-  <compound refid="WorldLifecycleManager_8ixx" kind="file"><name>WorldLifecycleManager.ixx</name>
-  </compound>
-  <compound refid="LivesBindingComponent_8ixx" kind="file"><name>LivesBindingComponent.ixx</name>
-  </compound>
-  <compound refid="LivesComponent_8ixx" kind="file"><name>LivesComponent.ixx</name>
-  </compound>
-  <compound refid="PlayerComponent_8ixx" kind="file"><name>PlayerComponent.ixx</name>
-  </compound>
-  <compound refid="PlayerDiedEvent_8ixx" kind="file"><name>PlayerDiedEvent.ixx</name>
-  </compound>
-  <compound refid="MatchStateManager_8ixx" kind="file"><name>MatchStateManager.ixx</name>
-  </compound>
-  <compound refid="DefaultMatchStateTransitionRules_8ixx" kind="file"><name>DefaultMatchStateTransitionRules.ixx</name>
-  </compound>
-  <compound refid="DefaultMatchStateTransitionGuards_8ixx" kind="file"><name>DefaultMatchStateTransitionGuards.ixx</name>
-  </compound>
-  <compound refid="MatchFlowSystem_8ixx" kind="file"><name>MatchFlowSystem.ixx</name>
-  </compound>
-  <compound refid="MatchRuleSystem_8ixx" kind="file"><name>MatchRuleSystem.ixx</name>
-  </compound>
-  <compound refid="LivesRevision_8ixx" kind="file"><name>LivesRevision.ixx</name>
-  </compound>
-  <compound refid="MatchState_8ixx" kind="file"><name>MatchState.ixx</name>
-  </compound>
-  <compound refid="MatchStateTransitionId_8ixx" kind="file"><name>MatchStateTransitionId.ixx</name>
-  </compound>
-  <compound refid="UpdateScoreCommand_8ixx" kind="file"><name>UpdateScoreCommand.ixx</name>
-  </compound>
-  <compound refid="MaxScoreObserverComponent_8ixx" kind="file"><name>MaxScoreObserverComponent.ixx</name>
-  </compound>
-  <compound refid="ScoreObserverComponent_8ixx" kind="file"><name>ScoreObserverComponent.ixx</name>
-  </compound>
-  <compound refid="ScorePoolComponent_8ixx" kind="file"><name>ScorePoolComponent.ixx</name>
-  </compound>
-  <compound refid="ScoreValueComponent_8ixx" kind="file"><name>ScoreValueComponent.ixx</name>
-  </compound>
-  <compound refid="MaxScorePoolSnapshot_8ixx" kind="file"><name>MaxScorePoolSnapshot.ixx</name>
-  </compound>
-  <compound refid="ScorePool_8ixx" kind="file"><name>ScorePool.ixx</name>
-  </compound>
-  <compound refid="ScorePoolManager_8ixx" kind="file"><name>ScorePoolManager.ixx</name>
-  </compound>
-  <compound refid="ScorePoolSnapshot_8ixx" kind="file"><name>ScorePoolSnapshot.ixx</name>
-  </compound>
-  <compound refid="CombatScoringSystem_8ixx" kind="file"><name>CombatScoringSystem.ixx</name>
-    <member refid="CombatScoringSystem_8ixx_1acbc04f24078582c7d42b2085be5d5750" kind="define"><name>HELIOS_LOG_SCOPE</name></member>
-  </compound>
-  <compound refid="MaxScoreObserverClearSystem_8ixx" kind="file"><name>MaxScoreObserverClearSystem.ixx</name>
-  </compound>
-  <compound refid="MaxScoreObserverSystem_8ixx" kind="file"><name>MaxScoreObserverSystem.ixx</name>
-  </compound>
-  <compound refid="ScoreObserverClearSystem_8ixx" kind="file"><name>ScoreObserverClearSystem.ixx</name>
-  </compound>
-  <compound refid="ScoreObserverSystem_8ixx" kind="file"><name>ScoreObserverSystem.ixx</name>
-  </compound>
-  <compound refid="KillReward_8ixx" kind="file"><name>KillReward.ixx</name>
-  </compound>
-  <compound refid="Score_8ixx" kind="file"><name>Score.ixx</name>
-  </compound>
-  <compound refid="ScoreContext_8ixx" kind="file"><name>ScoreContext.ixx</name>
-  </compound>
-  <compound refid="ScorePoolId_8ixx" kind="file"><name>ScorePoolId.ixx</name>
-  </compound>
-  <compound refid="ScorePoolRevision_8ixx" kind="file"><name>ScorePoolRevision.ixx</name>
-  </compound>
-  <compound refid="ScoreTypeId_8ixx" kind="file"><name>ScoreTypeId.ixx</name>
-  </compound>
-  <compound refid="EmittedByComponent_8ixx" kind="file"><name>EmittedByComponent.ixx</name>
-  </compound>
-  <compound refid="SpawnedByProfileComponent_8ixx" kind="file"><name>SpawnedByProfileComponent.ixx</name>
-  </compound>
-  <compound refid="GameObjectSpawnSystem_8ixx" kind="file"><name>GameObjectSpawnSystem.ixx</name>
-  </compound>
-  <compound refid="TimerControlCommand_8ixx" kind="file"><name>TimerControlCommand.ixx</name>
-  </compound>
-  <compound refid="GameTimerBindingComponent_8ixx" kind="file"><name>GameTimerBindingComponent.ixx</name>
-  </compound>
-  <compound refid="GameTimer_8ixx" kind="file"><name>GameTimer.ixx</name>
-  </compound>
-  <compound refid="GameTimerClearFinishedSystem_8ixx" kind="file"><name>GameTimerClearFinishedSystem.ixx</name>
-  </compound>
-  <compound refid="GameTimerUpdateSystem_8ixx" kind="file"><name>GameTimerUpdateSystem.ixx</name>
-  </compound>
-  <compound refid="TimerManager_8ixx" kind="file"><name>TimerManager.ixx</name>
-  </compound>
-  <compound refid="GameTimerId_8ixx" kind="file"><name>GameTimerId.ixx</name>
-  </compound>
-  <compound refid="TimerControlContext_8ixx" kind="file"><name>TimerControlContext.ixx</name>
-  </compound>
-  <compound refid="TimerRevision_8ixx" kind="file"><name>TimerRevision.ixx</name>
-  </compound>
-  <compound refid="TimerState_8ixx" kind="file"><name>TimerState.ixx</name>
-  </compound>
-  <compound refid="ChaseComponent_8ixx" kind="file"><name>ChaseComponent.ixx</name>
-  </compound>
-  <compound refid="ChaseSystem_8ixx" kind="file"><name>ChaseSystem.ixx</name>
-  </compound>
-  <compound refid="SpinComponent_8ixx" kind="file"><name>SpinComponent.ixx</name>
-  </compound>
-  <compound refid="SpinSystem_8ixx" kind="file"><name>SpinSystem.ixx</name>
-  </compound>
-  <compound refid="Bounds_8ixx" kind="file"><name>Bounds.ixx</name>
-  </compound>
-  <compound refid="AabbColliderComponent_8ixx" kind="file"><name>AabbColliderComponent.ixx</name>
-  </compound>
-  <compound refid="CollisionComponent_8ixx" kind="file"><name>CollisionComponent.ixx</name>
-  </compound>
-  <compound refid="CollisionStateComponent_8ixx" kind="file"><name>CollisionStateComponent.ixx</name>
-  </compound>
-  <compound refid="SolidCollisionEvent_8ixx" kind="file"><name>SolidCollisionEvent.ixx</name>
-  </compound>
-  <compound refid="TriggerCollisionEvent_8ixx" kind="file"><name>TriggerCollisionEvent.ixx</name>
-  </compound>
-  <compound refid="BoundsUpdateSystem_8ixx" kind="file"><name>BoundsUpdateSystem.ixx</name>
-  </compound>
-  <compound refid="CollisionStateClearSystem_8ixx" kind="file"><name>CollisionStateClearSystem.ixx</name>
-  </compound>
-  <compound refid="CollisionStateResponseSystem_8ixx" kind="file"><name>CollisionStateResponseSystem.ixx</name>
-  </compound>
-  <compound refid="GridCollisionDetectionSystem_8ixx" kind="file"><name>GridCollisionDetectionSystem.ixx</name>
-    <member refid="GridCollisionDetectionSystem_8ixx_1acbc04f24078582c7d42b2085be5d5750" kind="define"><name>HELIOS_LOG_SCOPE</name></member>
-  </compound>
-  <compound refid="CollisionBehavior_8ixx" kind="file"><name>CollisionBehavior.ixx</name>
-  </compound>
-  <compound refid="CollisionContext_8ixx" kind="file"><name>CollisionContext.ixx</name>
-  </compound>
-  <compound refid="CollisionLayer_8ixx" kind="file"><name>CollisionLayer.ixx</name>
-  </compound>
-  <compound refid="CollisionResponse_8ixx" kind="file"><name>CollisionResponse.ixx</name>
-  </compound>
-  <compound refid="HitPolicy_8ixx" kind="file"><name>HitPolicy.ixx</name>
-  </compound>
-  <compound refid="Move2DCommand_8ixx" kind="file"><name>Move2DCommand.ixx</name>
-  </compound>
-  <compound refid="SteeringCommand_8ixx" kind="file"><name>SteeringCommand.ixx</name>
-  </compound>
-  <compound refid="DirectionComponent_8ixx" kind="file"><name>DirectionComponent.ixx</name>
-  </compound>
-  <compound refid="Move2DComponent_8ixx" kind="file"><name>Move2DComponent.ixx</name>
-  </compound>
-  <compound refid="SteeringComponent_8ixx" kind="file"><name>SteeringComponent.ixx</name>
-  </compound>
-  <compound refid="Move2DSystem_8ixx" kind="file"><name>Move2DSystem.ixx</name>
-  </compound>
-  <compound refid="SteeringSystem_8ixx" kind="file"><name>SteeringSystem.ixx</name>
-  </compound>
-  <compound refid="ModelAabbComponent_8ixx" kind="file"><name>ModelAabbComponent.ixx</name>
-  </compound>
-  <compound refid="RenderableComponent_8ixx" kind="file"><name>RenderableComponent.ixx</name>
-  </compound>
-  <compound refid="ActiveViewportIdsStateComponent_8ixx" kind="file"><name>ActiveViewportIdsStateComponent.ixx</name>
-  </compound>
-  <compound refid="StateToViewportPolicyUpdateSystem_8ixx" kind="file"><name>StateToViewportPolicyUpdateSystem.ixx</name>
-  </compound>
-  <compound refid="SceneNodeComponent_8ixx" kind="file"><name>SceneNodeComponent.ixx</name>
-  </compound>
-  <compound refid="SceneRenderingSystem_8ixx" kind="file"><name>SceneRenderingSystem.ixx</name>
-  </compound>
-  <compound refid="SceneSyncSystem_8ixx" kind="file"><name>SceneSyncSystem.ixx</name>
-  </compound>
-  <compound refid="SceneId_8ixx" kind="file"><name>SceneId.ixx</name>
-  </compound>
-  <compound refid="SceneToViewportMap_8ixx" kind="file"><name>SceneToViewportMap.ixx</name>
-  </compound>
-  <compound refid="ComposeTransformComponent_8ixx" kind="file"><name>ComposeTransformComponent.ixx</name>
-  </compound>
-  <compound refid="RotationStateComponent_8ixx" kind="file"><name>RotationStateComponent.ixx</name>
-  </compound>
-  <compound refid="ScaleStateComponent_8ixx" kind="file"><name>ScaleStateComponent.ixx</name>
-  </compound>
-  <compound refid="TranslationStateComponent_8ixx" kind="file"><name>TranslationStateComponent.ixx</name>
-  </compound>
-  <compound refid="ComposeTransformSystem_8ixx" kind="file"><name>ComposeTransformSystem.ixx</name>
-  </compound>
-  <compound refid="ScaleSystem_8ixx" kind="file"><name>ScaleSystem.ixx</name>
-  </compound>
-  <compound refid="TransformClearSystem_8ixx" kind="file"><name>TransformClearSystem.ixx</name>
-  </compound>
-  <compound refid="GameTimer2UiTextUpdateSystem_8ixx" kind="file"><name>GameTimer2UiTextUpdateSystem.ixx</name>
-  </compound>
-  <compound refid="Lives2UiTextUpdateSystem_8ixx" kind="file"><name>Lives2UiTextUpdateSystem.ixx</name>
-  </compound>
-  <compound refid="MaxScore2UiTextUpdateSystem_8ixx" kind="file"><name>MaxScore2UiTextUpdateSystem.ixx</name>
-  </compound>
-  <compound refid="Score2UiTextUpdateSystem_8ixx" kind="file"><name>Score2UiTextUpdateSystem.ixx</name>
-  </compound>
-  <compound refid="Anchor_8ixx" kind="file"><name>Anchor.ixx</name>
-  </compound>
-  <compound refid="NumberFormatterComponent_8ixx" kind="file"><name>NumberFormatterComponent.ixx</name>
-  </compound>
-  <compound refid="TimeFormatterComponent_8ixx" kind="file"><name>TimeFormatterComponent.ixx</name>
-  </compound>
-  <compound refid="TimeDisplayMode_8ixx" kind="file"><name>TimeDisplayMode.ixx</name>
-  </compound>
-  <compound refid="UiTransformComponent_8ixx" kind="file"><name>UiTransformComponent.ixx</name>
-  </compound>
-  <compound refid="UiTransformSystem_8ixx" kind="file"><name>UiTransformSystem.ixx</name>
-  </compound>
-  <compound refid="UiActionCommandManager_8ixx" kind="file"><name>UiActionCommandManager.ixx</name>
-  </compound>
-  <compound refid="UiActionCommand_8ixx" kind="file"><name>UiActionCommand.ixx</name>
-  </compound>
-  <compound refid="MenuComponent_8ixx" kind="file"><name>MenuComponent.ixx</name>
-  </compound>
-  <compound refid="UiActionComponent_8ixx" kind="file"><name>UiActionComponent.ixx</name>
-  </compound>
-  <compound refid="UiFocusComponent_8ixx" kind="file"><name>UiFocusComponent.ixx</name>
-  </compound>
-  <compound refid="UiStateComponent_8ixx" kind="file"><name>UiStateComponent.ixx</name>
-  </compound>
-  <compound refid="UiStyleComponent_8ixx" kind="file"><name>UiStyleComponent.ixx</name>
-  </compound>
-  <compound refid="UiTextComponent_8ixx" kind="file"><name>UiTextComponent.ixx</name>
-  </compound>
-  <compound refid="MenuDisplaySystem_8ixx" kind="file"><name>MenuDisplaySystem.ixx</name>
-  </compound>
-  <compound refid="MenuNavigationSystem_8ixx" kind="file"><name>MenuNavigationSystem.ixx</name>
-  </compound>
-  <compound refid="UiStyleUpdateSystem_8ixx" kind="file"><name>UiStyleUpdateSystem.ixx</name>
-  </compound>
-  <compound refid="UiTextBoundsUpdateSystem_8ixx" kind="file"><name>UiTextBoundsUpdateSystem.ixx</name>
-  </compound>
-  <compound refid="ActionId_8ixx" kind="file"><name>ActionId.ixx</name>
-  </compound>
-  <compound refid="FontId_8ixx" kind="file"><name>FontId.ixx</name>
-  </compound>
-  <compound refid="MenuId_8ixx" kind="file"><name>MenuId.ixx</name>
-  </compound>
-  <compound refid="CommitPoint_8ixx" kind="file"><name>CommitPoint.ixx</name>
-  </compound>
-  <compound refid="GameLoop_8ixx" kind="file"><name>GameLoop.ixx</name>
-    <member refid="GameLoop_8ixx_1acbc04f24078582c7d42b2085be5d5750" kind="define"><name>HELIOS_LOG_SCOPE</name></member>
-  </compound>
-  <compound refid="Pass_8ixx" kind="file"><name>Pass.ixx</name>
-  </compound>
-  <compound refid="PassCommitListener_8ixx" kind="file"><name>PassCommitListener.ixx</name>
-  </compound>
-  <compound refid="Phase_8ixx" kind="file"><name>Phase.ixx</name>
-  </compound>
-  <compound refid="TypedPass_8ixx" kind="file"><name>TypedPass.ixx</name>
-  </compound>
-  <compound refid="CommandBuffer_8ixx" kind="file"><name>CommandBuffer.ixx</name>
-  </compound>
-  <compound refid="CommandBufferRegistry_8ixx" kind="file"><name>CommandBufferRegistry.ixx</name>
-  </compound>
-  <compound refid="CommandHandlerRegistry_8ixx" kind="file"><name>CommandHandlerRegistry.ixx</name>
-  </compound>
-  <compound refid="EngineCommandBuffer_8ixx" kind="file"><name>EngineCommandBuffer.ixx</name>
-  </compound>
-  <compound refid="TypedCommandBuffer_8ixx" kind="file"><name>TypedCommandBuffer.ixx</name>
-  </compound>
-  <compound refid="CommandBufferTypeId_8ixx" kind="file"><name>CommandBufferTypeId.ixx</name>
-  </compound>
-  <compound refid="CommandTypeId_8ixx" kind="file"><name>CommandTypeId.ixx</name>
-  </compound>
-  <compound refid="GameLoopEventBus_8ixx" kind="file"><name>GameLoopEventBus.ixx</name>
-  </compound>
-  <compound refid="PrefabIdComponent_8ixx" kind="file"><name>PrefabIdComponent.ixx</name>
-  </compound>
-  <compound refid="GameObjectPool_8ixx" kind="file"><name>GameObjectPool.ixx</name>
-  </compound>
-  <compound refid="GameObjectPoolConfig_8ixx" kind="file"><name>GameObjectPoolConfig.ixx</name>
-  </compound>
-  <compound refid="GameObjectPoolManager_8ixx" kind="file"><name>GameObjectPoolManager.ixx</name>
-  </compound>
-  <compound refid="GameObjectPoolRegistry_8ixx" kind="file"><name>GameObjectPoolRegistry.ixx</name>
-  </compound>
-  <compound refid="GameObjectPoolSnapshot_8ixx" kind="file"><name>GameObjectPoolSnapshot.ixx</name>
-  </compound>
-  <compound refid="GameObjectPoolId_8ixx" kind="file"><name>GameObjectPoolId.ixx</name>
-  </compound>
-  <compound refid="DelayedComponentEnablerInitializer_8ixx" kind="file"><name>DelayedComponentEnablerInitializer.ixx</name>
-  </compound>
-  <compound refid="EmitterInitializer_8ixx" kind="file"><name>EmitterInitializer.ixx</name>
-  </compound>
-  <compound refid="InitializerList_8ixx" kind="file"><name>InitializerList.ixx</name>
-  </compound>
-  <compound refid="MoveInitializer_8ixx" kind="file"><name>MoveInitializer.ixx</name>
-  </compound>
-  <compound refid="RandomDirectionInitializer_8ixx" kind="file"><name>RandomDirectionInitializer.ixx</name>
-  </compound>
-  <compound refid="AxisSpawnPlacer_8ixx" kind="file"><name>AxisSpawnPlacer.ixx</name>
-  </compound>
-  <compound refid="ColumnSpawnPlacer_8ixx" kind="file"><name>ColumnSpawnPlacer.ixx</name>
-  </compound>
-  <compound refid="DistributedSpawnPlacer_8ixx" kind="file"><name>DistributedSpawnPlacer.ixx</name>
-  </compound>
-  <compound refid="EmitterSpawnPlacer_8ixx" kind="file"><name>EmitterSpawnPlacer.ixx</name>
-  </compound>
-  <compound refid="RandomSpawnPlacer_8ixx" kind="file"><name>RandomSpawnPlacer.ixx</name>
-  </compound>
-  <compound refid="SpawnInitializer_8ixx" kind="file"><name>SpawnInitializer.ixx</name>
-  </compound>
-  <compound refid="SpawnPlacer_8ixx" kind="file"><name>SpawnPlacer.ixx</name>
-  </compound>
-  <compound refid="DespawnCommand_8ixx" kind="file"><name>DespawnCommand.ixx</name>
-  </compound>
-  <compound refid="ScheduledSpawnPlanCommand_8ixx" kind="file"><name>ScheduledSpawnPlanCommand.ixx</name>
-  </compound>
-  <compound refid="SpawnCommand_8ixx" kind="file"><name>SpawnCommand.ixx</name>
-  </compound>
-  <compound refid="SpawnPlanCommandExecutedEvent_8ixx" kind="file"><name>SpawnPlanCommandExecutedEvent.ixx</name>
-  </compound>
-  <compound refid="FixedSpawnAmount_8ixx" kind="file"><name>FixedSpawnAmount.ixx</name>
-  </compound>
-  <compound refid="SpawnAll_8ixx" kind="file"><name>SpawnAll.ixx</name>
-  </compound>
-  <compound refid="SpawnAmountByCallback_8ixx" kind="file"><name>SpawnAmountByCallback.ixx</name>
-  </compound>
-  <compound refid="SpawnAmountProvider_8ixx" kind="file"><name>SpawnAmountProvider.ixx</name>
-  </compound>
-  <compound refid="RequestedAmountIsAvailableCondition_8ixx" kind="file"><name>RequestedAmountIsAvailableCondition.ixx</name>
-  </compound>
-  <compound refid="TimerSpawnCondition_8ixx" kind="file"><name>TimerSpawnCondition.ixx</name>
-  </compound>
-  <compound refid="SpawnCondition_8ixx" kind="file"><name>SpawnCondition.ixx</name>
-  </compound>
-  <compound refid="SpawnConditionAll_8ixx" kind="file"><name>SpawnConditionAll.ixx</name>
-  </compound>
-  <compound refid="SpawnRule_8ixx" kind="file"><name>SpawnRule.ixx</name>
-  </compound>
-  <compound refid="SpawnRuleState_8ixx" kind="file"><name>SpawnRuleState.ixx</name>
-  </compound>
-  <compound refid="CyclicSpawnScheduler_8ixx" kind="file"><name>CyclicSpawnScheduler.ixx</name>
-  </compound>
-  <compound refid="DefaultRuleProcessor_8ixx" kind="file"><name>DefaultRuleProcessor.ixx</name>
-  </compound>
-  <compound refid="DefaultSpawnScheduler_8ixx" kind="file"><name>DefaultSpawnScheduler.ixx</name>
-  </compound>
-  <compound refid="RuleProcessor_8ixx" kind="file"><name>RuleProcessor.ixx</name>
-  </compound>
-  <compound refid="ScheduledSpawnPlan_8ixx" kind="file"><name>ScheduledSpawnPlan.ixx</name>
-  </compound>
-  <compound refid="SpawnPlan_8ixx" kind="file"><name>SpawnPlan.ixx</name>
-  </compound>
-  <compound refid="SpawnScheduler_8ixx" kind="file"><name>SpawnScheduler.ixx</name>
-  </compound>
-  <compound refid="SpawnManager_8ixx" kind="file"><name>SpawnManager.ixx</name>
-  </compound>
-  <compound refid="EmitterContext_8ixx" kind="file"><name>EmitterContext.ixx</name>
-  </compound>
-  <compound refid="SpawnContext_8ixx" kind="file"><name>SpawnContext.ixx</name>
-  </compound>
-  <compound refid="SpawnPlanCursor_8ixx" kind="file"><name>SpawnPlanCursor.ixx</name>
-  </compound>
-  <compound refid="SpawnProfile_8ixx" kind="file"><name>SpawnProfile.ixx</name>
-  </compound>
-  <compound refid="SpawnProfileId_8ixx" kind="file"><name>SpawnProfileId.ixx</name>
-  </compound>
-  <compound refid="SpawnRuleId_8ixx" kind="file"><name>SpawnRuleId.ixx</name>
-  </compound>
-  <compound refid="GameWorld_8ixx" kind="file"><name>GameWorld.ixx</name>
-    <member refid="GameWorld_8ixx_1acbc04f24078582c7d42b2085be5d5750" kind="define"><name>HELIOS_LOG_SCOPE</name></member>
-  </compound>
-  <compound refid="Level_8ixx" kind="file"><name>Level.ixx</name>
-  </compound>
-  <compound refid="Manager_8ixx" kind="file"><name>Manager.ixx</name>
-  </compound>
-  <compound refid="ManagerRegistry_8ixx" kind="file"><name>ManagerRegistry.ixx</name>
-  </compound>
-  <compound refid="ResourceRegistry_8ixx" kind="file"><name>ResourceRegistry.ixx</name>
-  </compound>
-  <compound refid="Session_8ixx" kind="file"><name>Session.ixx</name>
-  </compound>
-  <compound refid="System_8ixx" kind="file"><name>System.ixx</name>
-  </compound>
-  <compound refid="SystemRegistry_8ixx" kind="file"><name>SystemRegistry.ixx</name>
-  </compound>
-  <compound refid="ManagerTypeId_8ixx" kind="file"><name>ManagerTypeId.ixx</name>
-  </compound>
-  <compound refid="ResourceTypeId_8ixx" kind="file"><name>ResourceTypeId.ixx</name>
-  </compound>
-  <compound refid="SystemTypeId_8ixx" kind="file"><name>SystemTypeId.ixx</name>
-  </compound>
-  <compound refid="UpdateContext_8ixx" kind="file"><name>UpdateContext.ixx</name>
-  </compound>
-  <compound refid="Bindings_8ixx" kind="file"><name>Bindings.ixx</name>
-  </compound>
-  <compound refid="CombinedStateToIdMapPair_8ixx" kind="file"><name>CombinedStateToIdMapPair.ixx</name>
-  </compound>
-  <compound refid="DelayedStateCommand_8ixx" kind="file"><name>DelayedStateCommand.ixx</name>
-  </compound>
-  <compound refid="StateCommand_8ixx" kind="file"><name>StateCommand.ixx</name>
-  </compound>
-  <compound refid="StateComponent_8ixx" kind="file"><name>StateComponent.ixx</name>
-  </compound>
-  <compound refid="LambdaStateListener_8ixx" kind="file"><name>LambdaStateListener.ixx</name>
-  </compound>
-  <compound refid="StateCommandHandler_8ixx" kind="file"><name>StateCommandHandler.ixx</name>
-  </compound>
-  <compound refid="StateManager_8ixx" kind="file"><name>StateManager.ixx</name>
-  </compound>
-  <compound refid="StateToIdMap_8ixx" kind="file"><name>StateToIdMap.ixx</name>
-  </compound>
-  <compound refid="StateToIdMapPair_8ixx" kind="file"><name>StateToIdMapPair.ixx</name>
-  </compound>
-  <compound refid="StateTransitionListener_8ixx" kind="file"><name>StateTransitionListener.ixx</name>
-  </compound>
-  <compound refid="TypedStateCommandHandler_8ixx" kind="file"><name>TypedStateCommandHandler.ixx</name>
-  </compound>
-  <compound refid="StateTransitionContext_8ixx" kind="file"><name>StateTransitionContext.ixx</name>
-  </compound>
-  <compound refid="StateTransitionId_8ixx" kind="file"><name>StateTransitionId.ixx</name>
-  </compound>
-  <compound refid="StateTransitionRequest_8ixx" kind="file"><name>StateTransitionRequest.ixx</name>
-  </compound>
-  <compound refid="StateTransitionRule_8ixx" kind="file"><name>StateTransitionRule.ixx</name>
-  </compound>
-  <compound refid="StateTransitionType_8ixx" kind="file"><name>StateTransitionType.ixx</name>
-  </compound>
-  <compound refid="StateTypeId_8ixx" kind="file"><name>StateTypeId.ixx</name>
-  </compound>
-  <compound refid="FpsMetrics_8ixx" kind="file"><name>FpsMetrics.ixx</name>
-  </compound>
-  <compound refid="FramePacer_8ixx" kind="file"><name>FramePacer.ixx</name>
-  </compound>
-  <compound refid="FrameStats_8ixx" kind="file"><name>FrameStats.ixx</name>
-  </compound>
-  <compound refid="BasicEventManager_8ixx" kind="file"><name>BasicEventManager.ixx</name>
-  </compound>
-  <compound refid="DequeEventQueue_8ixx" kind="file"><name>DequeEventQueue.ixx</name>
-  </compound>
-  <compound refid="Dispatcher_8ixx" kind="file"><name>Dispatcher.ixx</name>
-  </compound>
-  <compound refid="Event_8ixx" kind="file"><name>Event.ixx</name>
-  </compound>
-  <compound refid="EventManager_8ixx" kind="file"><name>EventManager.ixx</name>
-    <member refid="EventManager_8ixx_1acbc04f24078582c7d42b2085be5d5750" kind="define"><name>HELIOS_LOG_SCOPE</name></member>
-  </compound>
-  <compound refid="EventQueue_8ixx" kind="file"><name>EventQueue.ixx</name>
   </compound>
   <compound refid="DeadzoneStrategy_8ixx" kind="file"><name>DeadzoneStrategy.ixx</name>
   </compound>
@@ -8812,12 +8803,11 @@
   <compound refid="module__helios_8engine_8mechanics_8gamestate_8types_8GameState" kind="module"><name>helios.engine.mechanics.gamestate.types.GameState</name>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80be" kind="enum"><name>GameState</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beaec0fc0100c4fc1ce4eea230c3dc10360" kind="enumvalue"><name>Undefined</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beaa6122a65eaa676f700ae68d393054a37" kind="enumvalue"><name>Start</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80bea16bfbf9c462762cf1cba4134ec53c504" kind="enumvalue"><name>Loading</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80bea21f45ef9bdfed8430be0b52bab6c3a99" kind="enumvalue"><name>Booted</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beab78a3223503896721cca1303f776159b" kind="enumvalue"><name>Title</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beab61541208db7fa7dba42c85224405911" kind="enumvalue"><name>Menu</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beae99180abf47a8b3a856e0bcb2656990a" kind="enumvalue"><name>Paused</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80bea165d53d9068b7a9f038a6023ae51ee97" kind="enumvalue"><name>MatchReady</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80bea5bda814c4aedb126839228f1a3d92f09" kind="enumvalue"><name>Running</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beae99180abf47a8b3a856e0bcb2656990a" kind="enumvalue"><name>Paused</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beaed36a1ef76a59ee3f15180e0441188ad" kind="enumvalue"><name>Any</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73b150e7583e97e71959b2f58fe4b9b1" kind="typedef"><name>GameStateType</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a54ed1e4e41fc7a66768c28383874826a" kind="variable"><name>GameStateTypeSize</name></member>
@@ -8828,19 +8818,11 @@
   <compound refid="module__helios_8engine_8mechanics_8gamestate_8types_8GameStateTransitionId" kind="module"><name>helios.engine.mechanics.gamestate.types.GameStateTransitionId</name>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4" kind="enum"><name>GameStateTransitionId</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4aec0fc0100c4fc1ce4eea230c3dc10360" kind="enumvalue"><name>Undefined</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4a14401b636e7a97ceab91c643463e4d65" kind="enumvalue"><name>TitleRequested</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4aa3d98192160cc566e41d9d063177bce4" kind="enumvalue"><name>TitleShowing</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4a098b846b8fb78489d3e9cc558a565f2b" kind="enumvalue"><name>StartRequested</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4ac2efe4bbd13e6cb0db293e72884273c0" kind="enumvalue"><name>Starting</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4ae87d730ae1d867566901ff42863eaf0c" kind="enumvalue"><name>ResumeRequested</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4a69f55169cdb3caab27ba9f347bf05354" kind="enumvalue"><name>Resuming</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4a4f03ca19300ef12a6732174076992060" kind="enumvalue"><name>BootRequest</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4a16f0d7ac8bebb828d1b88da0ae96df30" kind="enumvalue"><name>ReadyMatchRequest</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4a243246fb21a19e24cefc7250e179df79" kind="enumvalue"><name>StartMatchRequest</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4aa755f6cef42bb1c48404ed8217e9e73e" kind="enumvalue"><name>TogglePause</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4ac29824e03ed4d23c7d723becd13058fe" kind="enumvalue"><name>LoadRequested</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4a16bfbf9c462762cf1cba4134ec53c504" kind="enumvalue"><name>Loading</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4a53ef1778dfd4fc16bed604a83f17b282" kind="enumvalue"><name>QuitGameRequested</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4aa93bc97776e73ea2f4fef921f15b0bdc" kind="enumvalue"><name>QuittingGame</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4abedfd09a1d1fc1b855c549c441a37ebc" kind="enumvalue"><name>RestartRequested</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4a431dc808fe209d3c3e812991b46d40ef" kind="enumvalue"><name>Restarting</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a73539c0b43e1877f9c1e3fd329cc1fa4acdde80fb9f9fc91777e43c0dd98320b1" kind="enumvalue"><name>TitleRequest</name></member>
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8health" kind="module"><name>helios.engine.mechanics.health</name>
   </compound>
@@ -9014,7 +8996,9 @@
   <compound refid="module__helios_8engine_8mechanics_8match_8components_8LivesComponent" kind="module"><name>helios.engine.mechanics.match.components.LivesComponent</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent_1adb6746126f254f52123b5c97747069f8" kind="variable"><name>lives_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent_1a0f0d0635d9dcb1a9395b5c57ec45e4f7" kind="variable"><name>livesRevision_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent_1ab567d1973076c4b4c49ee0ac8641be23" kind="variable"><name>defaultLives_</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent_1aefd73d433fa4d21d313390c5c1edc2fe" kind="function"><name>LivesComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent_1a395e75af25544abe0c5af28c27952003" kind="function"><name>reset</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent_1ad13996c90b4c3560b4a83ead1f041032" kind="function"><name>lives</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent_1a1f09c97065c303d5b2bde8c9a0622f65" kind="function"><name>decrease</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent_1a6daaf38c1abf3c05bd7dd6a1805e1946" kind="function"><name>increase</name></member>
@@ -9043,6 +9027,8 @@
   <compound refid="module__helios_8engine_8mechanics_8match_8rules_8guards_8DefaultMatchStateTransitionGuards" kind="module"><name>helios.engine.mechanics.match.rules.guards.DefaultMatchStateTransitionGuards</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1rules_1_1guards_1_1DefaultMatchStateTransitionGuards_1a01c761773a5709e9d85b57e050a146dd" kind="function"><name>isPlayerActive</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1rules_1_1guards_1_1DefaultMatchStateTransitionGuards_1acd3a0f438f7415d464e9b40813bed226" kind="function"><name>isPlayerInactive</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1rules_1_1guards_1_1DefaultMatchStateTransitionGuards_1a109553aa2c80973deac10b12b4c7512a" kind="function"><name>hasLifeLeft</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1rules_1_1guards_1_1DefaultMatchStateTransitionGuards_1ad00a2fd69fc2572571fd2aa43753f218" kind="function"><name>hasNoLifeLeft</name></member>
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8match_8systems" kind="module"><name>helios.engine.mechanics.match.systems</name>
   </compound>
@@ -9065,14 +9051,11 @@
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9b" kind="enum"><name>MatchState</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9baec0fc0100c4fc1ce4eea230c3dc10360" kind="enumvalue"><name>Undefined</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9ba89be10c310ee8cfe640aba66e7368c6c" kind="enumvalue"><name>Warmup</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9ba1cad35d4b3b9f624f82dbf237daaf188" kind="enumvalue"><name>Intro</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9baa6122a65eaa676f700ae68d393054a37" kind="enumvalue"><name>Start</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9bae64465da4a42d65847b321045b155602" kind="enumvalue"><name>Countdown</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9babd6d6eb309a4b95da66bef960b4810a6" kind="enumvalue"><name>PlayerSpawn</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9bac9dbb2b7c84159b632d71e512eba8428" kind="enumvalue"><name>Playing</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9bab9fbac179f1be377fe125f9deb1a4ba9" kind="enumvalue"><name>PlayerDeath</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9ba2e51472495b976bb3c0cce2c28ef9a25" kind="enumvalue"><name>PlayerDefeated</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9ba8f347bc7cebca9fa6d97e70c6bc29eb3" kind="enumvalue"><name>GameOver</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9ba8f3d10eb21bd36347c258679eba9e92b" kind="enumvalue"><name>Finished</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a1653c2c3089f7cf95480f5379f2bcf9baed36a1ef76a59ee3f15180e0441188ad" kind="enumvalue"><name>Any</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a4c35aad58be5d0fe9bb4f2ba77da7827" kind="typedef"><name>MatchStateType</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a179e9980957fc0d478a2735e3e202e27" kind="variable"><name>MatchStateTypeSize</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a01aada80a63984ca8fbea2ba97de0c05" kind="function"><name>operator|</name></member>
@@ -9082,19 +9065,13 @@
   <compound refid="module__helios_8engine_8mechanics_8match_8types_8MatchStateTransitionId" kind="module"><name>helios.engine.mechanics.match.types.MatchStateTransitionId</name>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70" kind="enum"><name>MatchStateTransitionId</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70aec0fc0100c4fc1ce4eea230c3dc10360" kind="enumvalue"><name>Undefined</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70a3badd370a329294628d42d1a06d298ff" kind="enumvalue"><name>WarmupRequested</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70a32d9b0f0e100f7ebc400368cbe27b784" kind="enumvalue"><name>WarmupDone</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70a32b313f83f5910a10d55f16eb7d33b4c" kind="enumvalue"><name>IntroRequested</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70ad5b8a68276681bdb4ea6da5e7387a40a" kind="enumvalue"><name>IntroDone</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70ada040a2f3e81a12af9413725a742daab" kind="enumvalue"><name>CountdownRequested</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70a1f011f27311afe8823c70071914421cf" kind="enumvalue"><name>CountdownDone</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70aaa03a010fa4886c60875a71f37b22f15" kind="enumvalue"><name>PlayerSpawnRequested</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70a098b846b8fb78489d3e9cc558a565f2b" kind="enumvalue"><name>StartRequested</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70afcc8814df3a79bde2ed96492c8010b44" kind="enumvalue"><name>TimeExpired</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70ae030acb336d4af795043c35a30e86491" kind="enumvalue"><name>WarmupRequest</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70a464d4b1d71ab070c090ab9639a4e5ad4" kind="enumvalue"><name>StartRequest</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70ac981e681de438daec04a921807b230cd" kind="enumvalue"><name>QuitRequest</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70a33f600c8bdf5fd718c564f951925e873" kind="enumvalue"><name>CountdownRequest</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70aee1ded5ee510cf5f4c605debf346a9b2" kind="enumvalue"><name>PlayerDied</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70a6fe7fa1af6567da46b7f26f21a81c0e3" kind="enumvalue"><name>RespawnRequested</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70a894ce1b6075d9de36dec60cc22e20536" kind="enumvalue"><name>QuitRequested</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70abedfd09a1d1fc1b855c549c441a37ebc" kind="enumvalue"><name>RestartRequested</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70a6d39c01df2a4c556f33ab0b531da2f6e" kind="enumvalue"><name>PlayerSpawnRequest</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types_1a582a1deeeb0b47612daff20c822fad70ad3cc257e4841e4a0060965b73e01de40" kind="enumvalue"><name>GameOverRequest</name></member>
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8registry" kind="module"><name>helios.engine.mechanics.registry</name>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1a2b966e819ea3d411b6ca89097a5c855f" kind="function"><name>registerComponents</name></member>
@@ -9369,22 +9346,25 @@
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1a7eb218ba32a8e67527669c59ae514c84" kind="function"><name>GameTimer</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1ad6b866835b1abe74fddc84656b905b0b" kind="function"><name>gameTimerId</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1ac67b9232d05fe125567cab91eb6001cb" kind="function"><name>reset</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1a971450036637936108e37ed90179847d" kind="function"><name>restart</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1a26b404f3617287f61058c56eb4897494" kind="function"><name>cancel</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1a503aa0a8253842e7559cdb6311b037b7" kind="function"><name>setDuration</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1af13faade128501fa439084b68c5aeb0d" kind="function"><name>duration</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1a153820d23667bc28e8574cd0a97c9224" kind="function"><name>elapsed</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1ad6e0f8c4e930f0e4f9c20f957c10f1ed" kind="function"><name>state</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1a9e02b98ba6e73fd17cb7d716f3c6d18b" kind="function"><name>setState</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1ac8ea4f3f51ab7a06ac1bb7eacadea4e6" kind="function"><name>shouldUpdate</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1a37aa036cecfb2a2ff797fb93142488b1" kind="function"><name>isFinished</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1ae4a56025fa1b9964b72e9a04f0286ea2" kind="function"><name>timerRevision</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_1adada69f1a2447d685949aaeab2d7c83e" kind="function"><name>update</name></member>
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8timing_8systems" kind="module"><name>helios.engine.mechanics.timing.systems</name>
   </compound>
-  <compound refid="module__helios_8engine_8mechanics_8timing_8systems_8GameTimerClearFinishedSystem" kind="module"><name>helios.engine.mechanics.timing.systems.GameTimerClearFinishedSystem</name>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerClearFinishedSystem_1a0ea1c77795d3a6eb11ef872a0e7d6e92" kind="typedef"><name>EngineRoleTag</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerClearFinishedSystem_1ae3e2ec2affd8a9f163741d61486ac0e7" kind="variable"><name>timerManager_</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerClearFinishedSystem_1abf8a8757f947b373ed572d2726b995af" kind="function"><name>GameTimerClearFinishedSystem</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerClearFinishedSystem_1a5ae60d03e8a12b23c54ff509b8375342" kind="function"><name>update</name></member>
+  <compound refid="module__helios_8engine_8mechanics_8timing_8systems_8GameTimerClearSystem" kind="module"><name>helios.engine.mechanics.timing.systems.GameTimerClearSystem</name>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerClearSystem_1a2ca83f5ad0ca374085efcf9920217bdc" kind="typedef"><name>EngineRoleTag</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerClearSystem_1a1cb671be7be387d60f1996bc5fe1fe40" kind="variable"><name>timerManager_</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerClearSystem_1a8d3c53d768d4007b660c7cc9e3cbae45" kind="function"><name>GameTimerClearSystem</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerClearSystem_1a4a4f6fda60b49e290baa07be684f8211" kind="function"><name>update</name></member>
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8timing_8systems_8GameTimerUpdateSystem" kind="module"><name>helios.engine.mechanics.timing.systems.GameTimerUpdateSystem</name>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerUpdateSystem_1a95f6a98a7892395a2f9fa779899f12cd" kind="typedef"><name>EngineRoleTag</name></member>
@@ -9402,7 +9382,7 @@
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1a0c713f94b0de4a5b1035f25893829958" kind="function"><name>addGameTimer</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1a99dd425726dfa3dcfbe820b1ee30dd4d" kind="function"><name>gameTimer</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1ae5ff293b1c17995ae84f324ba19db4d2" kind="function"><name>gameTimers</name></member>
-    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1ae2efde1b9444037cce66dec8a93b1d3e" kind="function"><name>flush</name></member>
+    <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1a01482fef660118570e45b9f5c401a73a" kind="function"><name>flush</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1a6b71cb6b06e69629fd4ad0e02740e705" kind="function"><name>submit</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1acee9edacbb3740279006bf53ee31b486" kind="function"><name>init</name></member>
     <member refid="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager_1a82ac8640d101565fed163abeb4a1ae54" kind="function"><name>reset</name></member>
@@ -9413,8 +9393,9 @@
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1ab554d63c8c7c9aa028b0115c23ae01eb" kind="typedef"><name>GameTimerId</name></member>
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8timing_8types_8TimerControlContext" kind="module"><name>helios.engine.mechanics.timing.types.TimerControlContext</name>
-    <member refid="structhelios_1_1engine_1_1mechanics_1_1timing_1_1types_1_1TimerControlContext_1a6736db6a0a720b3b08ee1ae0fe4a505e" kind="variable"><name>timerState</name></member>
     <member refid="structhelios_1_1engine_1_1mechanics_1_1timing_1_1types_1_1TimerControlContext_1a1ae9f48625c816ec9bb2650f9fb4b250" kind="variable"><name>gameTimerId</name></member>
+    <member refid="structhelios_1_1engine_1_1mechanics_1_1timing_1_1types_1_1TimerControlContext_1a6736db6a0a720b3b08ee1ae0fe4a505e" kind="variable"><name>timerState</name></member>
+    <member refid="structhelios_1_1engine_1_1mechanics_1_1timing_1_1types_1_1TimerControlContext_1a322f052e84cde41bd6101fd9e3318269" kind="variable"><name>resetElapsed</name></member>
   </compound>
   <compound refid="module__helios_8engine_8mechanics_8timing_8types_8TimerRevision" kind="module"><name>helios.engine.mechanics.timing.types.TimerRevision</name>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1a4ae687c1112aa406820d387d0874c62e" kind="typedef"><name>TimerRevision</name></member>
@@ -9422,10 +9403,10 @@
   <compound refid="module__helios_8engine_8mechanics_8timing_8types_8TimerState" kind="module"><name>helios.engine.mechanics.timing.types.TimerState</name>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1a889d521962836a37d91f60af0f2d7134" kind="enum"><name>TimerState</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1a889d521962836a37d91f60af0f2d7134aec0fc0100c4fc1ce4eea230c3dc10360" kind="enumvalue"><name>Undefined</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1a889d521962836a37d91f60af0f2d7134a8428552d86c0d262a542a528af490afa" kind="enumvalue"><name>Started</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1a889d521962836a37d91f60af0f2d7134a5bda814c4aedb126839228f1a3d92f09" kind="enumvalue"><name>Running</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1a889d521962836a37d91f60af0f2d7134ae99180abf47a8b3a856e0bcb2656990a" kind="enumvalue"><name>Paused</name></member>
     <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1a889d521962836a37d91f60af0f2d7134a8f3d10eb21bd36347c258679eba9e92b" kind="enumvalue"><name>Finished</name></member>
-    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1a889d521962836a37d91f60af0f2d7134ac23e2b09ebe6bf4cb5e2a9abe85c0be2" kind="enumvalue"><name>Stopped</name></member>
+    <member refid="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types_1a889d521962836a37d91f60af0f2d7134aa149e85a44aeec9140e92733d9ed694e" kind="enumvalue"><name>Cancelled</name></member>
   </compound>
   <compound refid="module__helios_8engine_8modules" kind="module"><name>helios.engine.modules</name>
   </compound>
@@ -10514,6 +10495,7 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a8c0798c8503d1e8bce1a299b02c84d79" kind="function"><name>commandQueue</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a8b8587874be3065c9bf7b0f16e2a8d7b" kind="function"><name>delayedQueue</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a7231725a593fbecfffc902c09dde5eaa" kind="function"><name>shouldDelayCommand</name></member>
+    <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a5d980751a699ab8e22ec35dff21caf5b" kind="function"><name>shouldDiscardCommand</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a012ec5bd8e6d51a276ba0b4a16d834e8" kind="function"><name>isDelayedCommandReady</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a9f6210ee4446435ac1d3d6c54c4d28d0" kind="function"><name>flushCommandQueue</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a35748f3c15d9e92098bed8d174cb7042" kind="function"><name>add</name></member>

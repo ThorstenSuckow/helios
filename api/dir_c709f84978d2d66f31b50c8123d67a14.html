@@ -110,7 +110,7 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="dir_c709f84978d2d66f31b50c8123d67a14_dep.svg" width="311" height="262"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="dir_c709f84978d2d66f31b50c8123d67a14_dep.svg" width="395" height="262"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-subdirs" class="groupheader"><a id="subdirs" name="subdirs"></a>
@@ -125,9 +125,46 @@ Files</h2></td></tr>
 <tr class="memdesc:DefaultMatchStateTransitionRules_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default transition rules for the game state machine. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md325"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md326"></a>
 helios::engine::mechanics::match::rules</h1>
 <p>Transition rules for the match state machine.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md327"></a>
+Rules</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Class  </th><th class="markdownTableHeadNone">Description  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">DefaultMatchStateTransitionRules</span>  </td><td class="markdownTableBodyNone">Provides the default set of match state transition rules  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">DefaultMatchStateTransitionGuards</span>  </td><td class="markdownTableBodyNone">Guard callbacks for conditional transitions  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md328"></a>
+DefaultMatchStateTransitionRules</h1>
+<p>Defines standard transitions:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">From  </th><th class="markdownTableHeadNone">Transition  </th><th class="markdownTableHeadNone">To  </th><th class="markdownTableHeadNone">Guard  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Undefined  </td><td class="markdownTableBodyNone">WarmupRequest  </td><td class="markdownTableBodyNone">Warmup  </td><td class="markdownTableBodyNone">—  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Warmup  </td><td class="markdownTableBodyNone">StartRequest  </td><td class="markdownTableBodyNone">Start  </td><td class="markdownTableBodyNone">—  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Start  </td><td class="markdownTableBodyNone">CountdownRequest  </td><td class="markdownTableBodyNone">Countdown  </td><td class="markdownTableBodyNone"><span class="tt">isPlayerActive</span>  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Countdown  </td><td class="markdownTableBodyNone">PlayerSpawnRequest  </td><td class="markdownTableBodyNone">Playing  </td><td class="markdownTableBodyNone">—  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Playing  </td><td class="markdownTableBodyNone">PlayerDied  </td><td class="markdownTableBodyNone">PlayerDefeated  </td><td class="markdownTableBodyNone">—  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">PlayerDefeated  </td><td class="markdownTableBodyNone">CountdownRequest  </td><td class="markdownTableBodyNone">Countdown  </td><td class="markdownTableBodyNone"><span class="tt">hasLifeLeft</span>  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">PlayerDefeated  </td><td class="markdownTableBodyNone">GameOverRequest  </td><td class="markdownTableBodyNone">GameOver  </td><td class="markdownTableBodyNone"><span class="tt">hasNoLifeLeft</span>  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">GameOver  </td><td class="markdownTableBodyNone">WarmupRequest  </td><td class="markdownTableBodyNone">Warmup  </td><td class="markdownTableBodyNone">—  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">GameOver  </td><td class="markdownTableBodyNone">StartRequest  </td><td class="markdownTableBodyNone">Start  </td><td class="markdownTableBodyNone">—  </td></tr>
+</table>
+<p>Additional cancel/reset transitions allow returning to earlier states from most active states (e.g., <span class="tt">Playing → Start</span>, <span class="tt">Countdown → Warmup</span>).</p>
+<p>Custom rules can be provided to the <span class="tt">MatchStateManager</span> constructor.</p>
 <hr  />
 <details >
 <summary >

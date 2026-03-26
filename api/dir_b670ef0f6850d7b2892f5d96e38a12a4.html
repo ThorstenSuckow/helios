@@ -130,11 +130,11 @@ Files</h2></td></tr>
 <tr class="memdesc:mechanics_2health_2registry_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Component registration for health module. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md254"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md255"></a>
 helios::engine::mechanics::health</h1>
 <p>Health management system for game entities.</p>
 <p>This module provides components, events, types, systems, and a manager for tracking entity health, processing damage, and handling death.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md255"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md256"></a>
 Submodules</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -150,7 +150,7 @@ Submodules</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">types/</span>  </td><td class="markdownTableBodyNone">Bitmask enums and context structs  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md256"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md257"></a>
 Architecture</h1>
 <p>1. <b>HealthComponent</b> tracks current/maximum health and carries behaviour flags 2. <b>HealthManager</b> receives <span class="tt">ApplyDamageCommand</span>s via <span class="tt">submit()</span> and processes them in batch during the manager flush phase:</p><ul>
 <li>Applies damage to the target's <span class="tt">HealthComponent</span></li>
@@ -158,14 +158,14 @@ Architecture</h1>
 <li>On health depletion, evaluates <span class="tt">HealthDepletedBehavior</span> flags and optionally attaches a <span class="tt">DeadTagComponent</span> (flag <span class="tt">DeadTag</span>)</li>
 <li>Pushes a <span class="tt">HealthDepletedEvent</span> to the <b>pass</b> bus (available after commit within the same pass) 3. <b>HealthUpdateClearSystem</b> resets the dirty flag after observers have run</li>
 </ul>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md257"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md258"></a>
 Key Types</h1>
 <ul>
 <li><span class="tt">HealthChangeBehavior</span> – selects the event bus for health-change reporting</li>
 <li><span class="tt">HealthDepletedBehavior</span> – selects actions on health depletion (event, despawn, dead-tag)</li>
 <li><span class="tt">HealthChangeContext</span> – carries target, source, contact point, and amount</li>
 </ul>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md258"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md259"></a>
 Integration</h1>
 <p>The health system integrates with:</p><ul>
 <li><b>Combat system</b> – <span class="tt">ApplyDamageCommand</span> is routed to <span class="tt">HealthManager</span></li>

@@ -139,17 +139,25 @@ DefaultGameStateTransitionRules</h1>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">From  </th><th class="markdownTableHeadNone">Transition  </th><th class="markdownTableHeadNone">To  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Undefined  </td><td class="markdownTableBodyNone">TitleRequested  </td><td class="markdownTableBodyNone">Title  </td></tr>
+<td class="markdownTableBodyNone">Undefined  </td><td class="markdownTableBodyNone">BootRequest  </td><td class="markdownTableBodyNone">Booted  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Title  </td><td class="markdownTableBodyNone">StartRequested  </td><td class="markdownTableBodyNone">Running  </td></tr>
+<td class="markdownTableBodyNone">Booted  </td><td class="markdownTableBodyNone">TitleRequest  </td><td class="markdownTableBodyNone">Title  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Title  </td><td class="markdownTableBodyNone">ReadyMatchRequest  </td><td class="markdownTableBodyNone">MatchReady  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">MatchReady  </td><td class="markdownTableBodyNone">StartMatchRequest  </td><td class="markdownTableBodyNone">Running  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Running  </td><td class="markdownTableBodyNone">TogglePause  </td><td class="markdownTableBodyNone">Paused  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">Paused  </td><td class="markdownTableBodyNone">TogglePause  </td><td class="markdownTableBodyNone">Running  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Paused  </td><td class="markdownTableBodyNone">RestartRequested  </td><td class="markdownTableBodyNone">Running  </td></tr>
+<td class="markdownTableBodyNone">Paused  </td><td class="markdownTableBodyNone">TitleRequest  </td><td class="markdownTableBodyNone">Title  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Paused  </td><td class="markdownTableBodyNone">QuitGameRequested  </td><td class="markdownTableBodyNone">Title  </td></tr>
+<td class="markdownTableBodyNone">Paused  </td><td class="markdownTableBodyNone">ReadyMatchRequest  </td><td class="markdownTableBodyNone">MatchReady  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Running  </td><td class="markdownTableBodyNone">TitleRequest  </td><td class="markdownTableBodyNone">Title  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Running  </td><td class="markdownTableBodyNone">ReadyMatchRequest  </td><td class="markdownTableBodyNone">MatchReady  </td></tr>
 </table>
 <p>Custom rules can be provided to the <span class="tt">GameStateManager</span> constructor.</p>
 <hr  />

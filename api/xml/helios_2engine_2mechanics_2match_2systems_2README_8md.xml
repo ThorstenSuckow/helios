@@ -22,9 +22,13 @@
 <codeline><highlight class="normal">##<sp/>MatchFlowSystem</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">Drives<sp/>automatic<sp/>state<sp/>progression<sp/>through:</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>Undefined<sp/>→<sp/>Warmup</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>Warmup<sp/>→<sp/>PlayerSpawn</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>PlayerSpawn<sp/>→<sp/>Playing</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Undefined<sp/>→<sp/>Warmup<sp/>(WarmupRequest)</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Warmup<sp/>→<sp/>Start<sp/>(StartRequest)</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Start<sp/>→<sp/>Countdown<sp/>(CountdownRequest,<sp/>guarded:<sp/>player<sp/>must<sp/>be<sp/>active)</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Countdown<sp/>→<sp/>Playing<sp/>(PlayerSpawnRequest)</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Playing<sp/>→<sp/>PlayerDefeated<sp/>(PlayerDied)</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>PlayerDefeated<sp/>→<sp/>Countdown<sp/>(CountdownRequest,<sp/>guarded:<sp/>has<sp/>life<sp/>left)</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>PlayerDefeated<sp/>→<sp/>GameOver<sp/>(GameOverRequest,<sp/>guarded:<sp/>no<sp/>life<sp/>left)</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>MatchRuleSystem</highlight></codeline>
 <codeline></codeline>
@@ -38,7 +42,6 @@
 <codeline><highlight class="normal">@brief<sp/>Systems<sp/>for<sp/>match<sp/>state<sp/>management.</highlight></codeline>
 <codeline><highlight class="normal">@details<sp/>Contains<sp/>ECS<sp/>systems<sp/>that<sp/>handle<sp/>match<sp/>flow<sp/>and<sp/>rule<sp/>logic.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
-<codeline></codeline>
     </programlisting>
     <location file="/tmp/h/include/helios/engine/mechanics/match/systems/README.md"/>
   </compounddef>

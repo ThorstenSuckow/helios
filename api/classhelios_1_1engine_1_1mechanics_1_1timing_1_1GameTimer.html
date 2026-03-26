@@ -118,6 +118,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ad6b866835b1abe74fddc84656b905b0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the timer identifier.  <br /></td></tr>
 <tr class="memitem:ac67b9232d05fe125567cab91eb6001cb" id="r_ac67b9232d05fe125567cab91eb6001cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac67b9232d05fe125567cab91eb6001cb">reset</a> (const <a class="el" href="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types.html#a889d521962836a37d91f60af0f2d7134">TimerState</a> <a class="el" href="#ad6e0f8c4e930f0e4f9c20f957c10f1ed">state</a>=TimerState::Undefined) noexcept</td></tr>
 <tr class="memdesc:ac67b9232d05fe125567cab91eb6001cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the elapsed time to zero and sets timer state to Undefined.  <br /></td></tr>
+<tr class="memitem:a971450036637936108e37ed90179847d" id="r_a971450036637936108e37ed90179847d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a971450036637936108e37ed90179847d">restart</a> () noexcept</td></tr>
+<tr class="memdesc:a971450036637936108e37ed90179847d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets timer by resetting its internal counter and setting its state to TimerState::Running.  <br /></td></tr>
+<tr class="memitem:a26b404f3617287f61058c56eb4897494" id="r_a26b404f3617287f61058c56eb4897494"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a26b404f3617287f61058c56eb4897494">cancel</a> () noexcept</td></tr>
+<tr class="memdesc:a26b404f3617287f61058c56eb4897494"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cancels this timer by setting its state to TimerState::Cancelled.  <br /></td></tr>
 <tr class="memitem:a503aa0a8253842e7559cdb6311b037b7" id="r_a503aa0a8253842e7559cdb6311b037b7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a503aa0a8253842e7559cdb6311b037b7">setDuration</a> (float <a class="el" href="#af13faade128501fa439084b68c5aeb0d">duration</a>)</td></tr>
 <tr class="memdesc:a503aa0a8253842e7559cdb6311b037b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the duration limit.  <br /></td></tr>
 <tr class="memitem:af13faade128501fa439084b68c5aeb0d" id="r_af13faade128501fa439084b68c5aeb0d"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af13faade128501fa439084b68c5aeb0d">duration</a> () const noexcept</td></tr>
@@ -130,6 +134,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a9e02b98ba6e73fd17cb7d716f3c6d18b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the timer state.  <br /></td></tr>
 <tr class="memitem:ac8ea4f3f51ab7a06ac1bb7eacadea4e6" id="r_ac8ea4f3f51ab7a06ac1bb7eacadea4e6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac8ea4f3f51ab7a06ac1bb7eacadea4e6">shouldUpdate</a> () const noexcept</td></tr>
 <tr class="memdesc:ac8ea4f3f51ab7a06ac1bb7eacadea4e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether this timer should accumulate time.  <br /></td></tr>
+<tr class="memitem:a37aa036cecfb2a2ff797fb93142488b1" id="r_a37aa036cecfb2a2ff797fb93142488b1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a37aa036cecfb2a2ff797fb93142488b1">isFinished</a> () const noexcept</td></tr>
+<tr class="memdesc:a37aa036cecfb2a2ff797fb93142488b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether this timer's internal state represents the Finished-state.  <br /></td></tr>
 <tr class="memitem:ae4a56025fa1b9964b72e9a04f0286ea2" id="r_ae4a56025fa1b9964b72e9a04f0286ea2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types.html#a4ae687c1112aa406820d387d0874c62e">TimerRevision</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae4a56025fa1b9964b72e9a04f0286ea2">timerRevision</a> () const noexcept</td></tr>
 <tr class="memdesc:ae4a56025fa1b9964b72e9a04f0286ea2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current revision counter.  <br /></td></tr>
 <tr class="memitem:adada69f1a2447d685949aaeab2d7c83e" id="r_adada69f1a2447d685949aaeab2d7c83e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adada69f1a2447d685949aaeab2d7c83e">update</a> (const float ft)</td></tr>
@@ -137,7 +143,7 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A game timer identified by a <a class="el" href="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types.html#ab554d63c8c7c9aa028b0115c23ae01eb" title="Strongly-typed identifier for gameTimers.">GameTimerId</a>. </p>
-<p>Tracks elapsed time while in the Started state. Each update increments a revision counter that observers can use to detect changes.</p>
+<p>Tracks elapsed time while in the Running state. Each update increments a revision counter that observers can use to detect changes.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1mechanics_1_1timing_1_1TimerManager.html" title="Manager that owns game timers and processes timer control commands.">TimerManager</a> </dd>
 <dd>
 GameTimerBindingComponent </dd></dl>
@@ -188,6 +194,44 @@ GameTimerBindingComponent </dd></dl>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a26b404f3617287f61058c56eb4897494" name="a26b404f3617287f61058c56eb4897494"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26b404f3617287f61058c56eb4897494">&#9670;&#160;</a></span>cancel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::engine::mechanics::timing::GameTimer::cancel </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Cancels this timer by setting its state to TimerState::Cancelled. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#ac67b9232d05fe125567cab91eb6001cb" title="Resets the elapsed time to zero and sets timer state to Undefined.">reset</a> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="GameTimer_8ixx_source.html#l00098">98</a> of file <a class="el" href="GameTimer_8ixx_source.html">GameTimer.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="TimerState_8ixx_source.html#l00041">helios::engine::mechanics::timing::types::Cancelled</a>, and <a class="el" href="GameTimer_8ixx_source.html#l00078">reset()</a>.</p>
+<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_a26b404f3617287f61058c56eb4897494_cgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
 <a id="af13faade128501fa439084b68c5aeb0d" name="af13faade128501fa439084b68c5aeb0d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af13faade128501fa439084b68c5aeb0d">&#9670;&#160;</a></span>duration()</h2>
 
@@ -214,13 +258,13 @@ GameTimerBindingComponent </dd></dl>
 <p>Returns the duration limit. </p>
 <dl class="section return"><dt>Returns</dt><dd>The duration in seconds. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameTimer_8ixx_source.html#l00097">97</a> of file <a class="el" href="GameTimer_8ixx_source.html">GameTimer.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameTimer_8ixx_source.html#l00116">116</a> of file <a class="el" href="GameTimer_8ixx_source.html">GameTimer.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="GameTimer_8ixx_source.html#l00088">setDuration()</a>.</p>
-<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="GameTimer_8ixx_source.html#l00107">setDuration()</a>.</p>
+<div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_af13faade128501fa439084b68c5aeb0d_icgraph.svg" width="519" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
@@ -252,7 +296,7 @@ GameTimerBindingComponent </dd></dl>
 <p>Returns the accumulated elapsed time. </p>
 <dl class="section return"><dt>Returns</dt><dd>Elapsed time in seconds. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameTimer_8ixx_source.html#l00106">106</a> of file <a class="el" href="GameTimer_8ixx_source.html">GameTimer.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameTimer_8ixx_source.html#l00125">125</a> of file <a class="el" href="GameTimer_8ixx_source.html">GameTimer.ixx</a>.</p>
 
 </div>
 </div>
@@ -285,12 +329,44 @@ GameTimerBindingComponent </dd></dl>
 <p class="definition">Definition at line <a class="el" href="GameTimer_8ixx_source.html#l00069">69</a> of file <a class="el" href="GameTimer_8ixx_source.html">GameTimer.ixx</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="GameTimer_8ixx_source.html#l00061">GameTimer()</a>.</p>
-<div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div id="dynsection-3-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_ad6b866835b1abe74fddc84656b905b0b_icgraph.svg" width="554" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
+
+</div>
+</div>
+<a id="a37aa036cecfb2a2ff797fb93142488b1" name="a37aa036cecfb2a2ff797fb93142488b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37aa036cecfb2a2ff797fb93142488b1">&#9670;&#160;</a></span>isFinished()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::engine::mechanics::timing::GameTimer::isFinished </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns whether this timer's internal state represents the Finished-state. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if the timer is finished. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="GameTimer_8ixx_source.html#l00162">162</a> of file <a class="el" href="GameTimer_8ixx_source.html">GameTimer.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="TimerState_8ixx_source.html#l00036">helios::engine::mechanics::timing::types::Finished</a>.</p>
 
 </div>
 </div>
@@ -327,12 +403,58 @@ GameTimerBindingComponent </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="GameTimer_8ixx_source.html#l00078">78</a> of file <a class="el" href="GameTimer_8ixx_source.html">GameTimer.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameTimer_8ixx_source.html#l00124">setState()</a>, <a class="el" href="GameTimer_8ixx_source.html#l00115">state()</a>, and <a class="el" href="TimerState_8ixx_source.html#l00021">helios::engine::mechanics::timing::types::Undefined</a>.</p>
-<div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="GameTimer_8ixx_source.html#l00143">setState()</a>, <a class="el" href="GameTimer_8ixx_source.html#l00134">state()</a>, and <a class="el" href="TimerState_8ixx_source.html#l00021">helios::engine::mechanics::timing::types::Undefined</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="GameTimer_8ixx_source.html#l00098">cancel()</a>, and <a class="el" href="GameTimer_8ixx_source.html#l00089">restart()</a>.</p>
+<div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-3-content" class="dyncontent" style="display:none;">
+<div id="dynsection-4-content" class="dyncontent" style="display:none;">
 <div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_ac67b9232d05fe125567cab91eb6001cb_cgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_ac67b9232d05fe125567cab91eb6001cb_icgraph.svg" width="466" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a971450036637936108e37ed90179847d" name="a971450036637936108e37ed90179847d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a971450036637936108e37ed90179847d">&#9670;&#160;</a></span>restart()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::engine::mechanics::timing::GameTimer::restart </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Resets timer by resetting its internal counter and setting its state to TimerState::Running. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#ac67b9232d05fe125567cab91eb6001cb" title="Resets the elapsed time to zero and sets timer state to Undefined.">reset</a> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="GameTimer_8ixx_source.html#l00089">89</a> of file <a class="el" href="GameTimer_8ixx_source.html">GameTimer.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="GameTimer_8ixx_source.html#l00078">reset()</a>, and <a class="el" href="TimerState_8ixx_source.html#l00026">helios::engine::mechanics::timing::types::Running</a>.</p>
+<div id="dynsection-6" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-6-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_a971450036637936108e37ed90179847d_cgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -368,13 +490,13 @@ GameTimerBindingComponent </dd></dl>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="GameTimer_8ixx_source.html#l00088">88</a> of file <a class="el" href="GameTimer_8ixx_source.html">GameTimer.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameTimer_8ixx_source.html#l00107">107</a> of file <a class="el" href="GameTimer_8ixx_source.html">GameTimer.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameTimer_8ixx_source.html#l00097">duration()</a>.</p>
-<div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="GameTimer_8ixx_source.html#l00116">duration()</a>.</p>
+<div id="dynsection-7" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-4-content" class="dyncontent" style="display:none;">
+<div id="dynsection-7-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_a503aa0a8253842e7559cdb6311b037b7_cgraph.svg" width="519" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
@@ -411,22 +533,22 @@ GameTimerBindingComponent </dd></dl>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="GameTimer_8ixx_source.html#l00124">124</a> of file <a class="el" href="GameTimer_8ixx_source.html">GameTimer.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameTimer_8ixx_source.html#l00143">143</a> of file <a class="el" href="GameTimer_8ixx_source.html">GameTimer.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameTimer_8ixx_source.html#l00115">state()</a>.</p>
+<p class="reference">References <a class="el" href="GameTimer_8ixx_source.html#l00134">state()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="GameTimer_8ixx_source.html#l00078">reset()</a>.</p>
-<div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-8" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div id="dynsection-8-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_a9e02b98ba6e73fd17cb7d716f3c6d18b_cgraph.svg" width="476" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
-<div id="dynsection-6" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-9" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-6-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_a9e02b98ba6e73fd17cb7d716f3c6d18b_icgraph.svg" width="476" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-9-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_a9e02b98ba6e73fd17cb7d716f3c6d18b_icgraph.svg" width="100%" height="386"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -455,17 +577,17 @@ GameTimerBindingComponent </dd></dl>
 </div><div class="memdoc">
 
 <p>Returns whether this timer should accumulate time. </p>
-<dl class="section return"><dt>Returns</dt><dd>True if the timer is in the Started state. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the timer is in the Running state. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameTimer_8ixx_source.html#l00134">134</a> of file <a class="el" href="GameTimer_8ixx_source.html">GameTimer.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameTimer_8ixx_source.html#l00153">153</a> of file <a class="el" href="GameTimer_8ixx_source.html">GameTimer.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="TimerState_8ixx_source.html#l00026">helios::engine::mechanics::timing::types::Started</a>.</p>
+<p class="reference">References <a class="el" href="TimerState_8ixx_source.html#l00026">helios::engine::mechanics::timing::types::Running</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="GameTimer_8ixx_source.html#l00155">update()</a>.</p>
-<div id="dynsection-7" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="GameTimer_8ixx_source.html#l00183">update()</a>.</p>
+<div id="dynsection-10" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-10-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-7-content" class="dyncontent" style="display:none;">
+<div id="dynsection-10-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_ac8ea4f3f51ab7a06ac1bb7eacadea4e6_icgraph.svg" width="524" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
@@ -497,14 +619,14 @@ GameTimerBindingComponent </dd></dl>
 <p>Returns the current timer state. </p>
 <dl class="section return"><dt>Returns</dt><dd>The current <a class="el" href="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types.html#a889d521962836a37d91f60af0f2d7134" title="Represents the state of a GameTimer.">TimerState</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameTimer_8ixx_source.html#l00115">115</a> of file <a class="el" href="GameTimer_8ixx_source.html">GameTimer.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameTimer_8ixx_source.html#l00134">134</a> of file <a class="el" href="GameTimer_8ixx_source.html">GameTimer.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="GameTimer_8ixx_source.html#l00078">reset()</a>, and <a class="el" href="GameTimer_8ixx_source.html#l00124">setState()</a>.</p>
-<div id="dynsection-8" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="GameTimer_8ixx_source.html#l00078">reset()</a>, and <a class="el" href="GameTimer_8ixx_source.html#l00143">setState()</a>.</p>
+<div id="dynsection-11" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-11-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-8-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_ad6e0f8c4e930f0e4f9c20f957c10f1ed_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div id="dynsection-11-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_ad6e0f8c4e930f0e4f9c20f957c10f1ed_icgraph.svg" width="100%" height="386"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -535,7 +657,7 @@ GameTimerBindingComponent </dd></dl>
 <p>Returns the current revision counter. </p>
 <dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="namespacehelios_1_1engine_1_1mechanics_1_1timing_1_1types.html#a4ae687c1112aa406820d387d0874c62e" title="Monotonically increasing revision counter for GameTimer updates.">TimerRevision</a> value. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameTimer_8ixx_source.html#l00143">143</a> of file <a class="el" href="GameTimer_8ixx_source.html">GameTimer.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameTimer_8ixx_source.html#l00171">171</a> of file <a class="el" href="GameTimer_8ixx_source.html">GameTimer.ixx</a>.</p>
 
 </div>
 </div>
@@ -563,7 +685,7 @@ GameTimerBindingComponent </dd></dl>
 </div><div class="memdoc">
 
 <p>Advances the timer by the given frame time. </p>
-<p>Only accumulates time when the timer is in the Started state. Increments the revision counter on each successful update.</p>
+<p>Only accumulates time when the timer is in the Running state. Increments the revision counter on each successful update.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ft</td><td>Frame time in seconds. </td></tr>
@@ -571,13 +693,13 @@ GameTimerBindingComponent </dd></dl>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="GameTimer_8ixx_source.html#l00155">155</a> of file <a class="el" href="GameTimer_8ixx_source.html">GameTimer.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameTimer_8ixx_source.html#l00183">183</a> of file <a class="el" href="GameTimer_8ixx_source.html">GameTimer.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameTimer_8ixx_source.html#l00134">shouldUpdate()</a>.</p>
-<div id="dynsection-9" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="GameTimer_8ixx_source.html#l00153">shouldUpdate()</a>.</p>
+<div id="dynsection-12" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-12-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-9-content" class="dyncontent" style="display:none;">
+<div id="dynsection-12-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer_adada69f1a2447d685949aaeab2d7c83e_cgraph.svg" width="524" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 

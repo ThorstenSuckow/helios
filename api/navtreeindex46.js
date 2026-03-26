@@ -1,5 +1,12 @@
 var NAVTREEINDEX46 =
 {
+"module__helios_8engine_8runtime_8gameloop_8GameLoop.html#a41b297a4ee926ed2b989996ceb61bb7f":[3,0,432,3],
+"module__helios_8engine_8runtime_8gameloop_8GameLoop.html#a53abfe8e0aed479d00ec3867d5fd0412":[3,0,432,10],
+"module__helios_8engine_8runtime_8gameloop_8GameLoop.html#a7649a22c062f81568c5d11d2a8148029":[3,0,432,4],
+"module__helios_8engine_8runtime_8gameloop_8GameLoop.html#a7d4eb13220ecd447c6af0914fd214921":[3,0,432,8],
+"module__helios_8engine_8runtime_8gameloop_8GameLoop.html#a8abc8cce8e4faa1a54d61531b10781bd":[3,0,432,7],
+"module__helios_8engine_8runtime_8gameloop_8GameLoop.html#a97acde952251d5e0eceffb3beb2a4f33":[3,0,432,1],
+"module__helios_8engine_8runtime_8gameloop_8GameLoop.html#aa4fa49a8c51021ff24404e84b20696b5":[3,0,432,11],
 "module__helios_8engine_8runtime_8gameloop_8GameLoop.html#ab178f78cbde82dd87b4391b4eed56859":[3,0,432,14],
 "module__helios_8engine_8runtime_8gameloop_8GameLoop.html#abf5317ab24eb3c9dbfe5c0a827680699":[3,0,432,12],
 "module__helios_8engine_8runtime_8gameloop_8GameLoop.html#adaff711d38a5a95c0494c527ae4a1714":[3,0,432,9],
@@ -242,12 +249,5 @@ var NAVTREEINDEX46 =
 "module__helios_8engine_8runtime_8spawn_8policy_8SpawnRule.html#ac439634297f4b6c6874f66a65750dd5e":[3,0,492,2],
 "module__helios_8engine_8runtime_8spawn_8policy_8SpawnRule.html#ac7faf345113488c83b07c5b7c381d0dc":[3,0,492,3],
 "module__helios_8engine_8runtime_8spawn_8policy_8SpawnRule.html#ad42f09582128b510dee145c35b4e17b3":[3,0,492,1],
-"module__helios_8engine_8runtime_8spawn_8policy_8SpawnRuleState.html":[3,0,493],
-"module__helios_8engine_8runtime_8spawn_8policy_8SpawnRuleState.html#a14793552dd821e0e8e6b16e9ba0e17cf":[3,0,493,2],
-"module__helios_8engine_8runtime_8spawn_8policy_8SpawnRuleState.html#a178a45b900a5b447525fa576f67a37f9":[3,0,493,3],
-"module__helios_8engine_8runtime_8spawn_8policy_8SpawnRuleState.html#a4bafae2ee2a3e98fed58dbe69d9c5af4":[3,0,493,1],
-"module__helios_8engine_8runtime_8spawn_8policy_8amount.html":[3,0,482],
-"module__helios_8engine_8runtime_8spawn_8policy_8amount_8FixedSpawnAmount.html":[3,0,483],
-"module__helios_8engine_8runtime_8spawn_8policy_8amount_8FixedSpawnAmount.html#a140169886aab1fae6f9b2773c061dd0b":[3,0,483,2],
-"module__helios_8engine_8runtime_8spawn_8policy_8amount_8FixedSpawnAmount.html#ae4efce69bd29bb589b1bc9ae96dee4b6":[3,0,483,1]
+"module__helios_8engine_8runtime_8spawn_8policy_8SpawnRuleState.html":[3,0,493]
 };

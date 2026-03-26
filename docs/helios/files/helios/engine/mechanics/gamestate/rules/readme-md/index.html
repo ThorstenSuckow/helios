@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">helios-engine-mechanics-gamestate-rules-readme-md | helios</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://helios.garagecraft.games/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://helios.garagecraft.games/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://helios.garagecraft.games/docs/helios/files/helios/engine/mechanics/gamestate/rules/readme-md"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="helios-engine-mechanics-gamestate-rules-readme-md | helios"><meta data-rh="true" name="description" content="Namespaces Index"><meta data-rh="true" property="og:description" content="Namespaces Index"><meta data-rh="true" name="keywords" content="doxygen,reference,file"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://helios.garagecraft.games/docs/helios/files/helios/engine/mechanics/gamestate/rules/readme-md"><link data-rh="true" rel="alternate" href="https://helios.garagecraft.games/docs/helios/files/helios/engine/mechanics/gamestate/rules/readme-md" hreflang="en"><link data-rh="true" rel="alternate" href="https://helios.garagecraft.games/docs/helios/files/helios/engine/mechanics/gamestate/rules/readme-md" hreflang="x-default"><link data-rh="true" rel="preconnect" href="https://LK14YGETTG-dsn.algolia.net" crossorigin="anonymous"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"API Reference (Doxygen)","item":"https://helios.garagecraft.games/docs/helios/"},{"@type":"ListItem","position":2,"name":"Files","item":"https://helios.garagecraft.games/docs/helios/files"},{"@type":"ListItem","position":3,"name":"helios/engine/mechanics/gamestate/rules/README.md","item":"https://helios.garagecraft.games/docs/helios/files/helios/engine/mechanics/gamestate/rules/readme-md"}]}</script><link rel="search" type="application/opensearchdescription+xml" title="helios" href="/opensearch.xml"><link rel="stylesheet" href="/assets/css/styles.d8266996.css">
-<script src="/assets/js/runtime~main.41086647.js" defer="defer"></script>
-<script src="/assets/js/main.e38c14b7.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.2c689835.js" defer="defer"></script>
+<script src="/assets/js/main.03d6da08.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -38,12 +38,16 @@
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">| From | Transition | To |</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">|------|------------|-----|</span></span></div>
-<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">| Undefined | TitleRequested | Title |</span></span></div>
-<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">| Title | StartRequested | Running |</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">| Undefined | BootRequest | Booted |</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">| Booted | TitleRequest | Title |</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">| Title | ReadyMatchRequest | MatchReady |</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">| MatchReady | StartMatchRequest | Running |</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">| Running | TogglePause | Paused |</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">| Paused | TogglePause | Running |</span></span></div>
-<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">| Paused | RestartRequested | Running |</span></span></div>
-<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">| Paused | QuitGameRequested | Title |</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">| Paused | TitleRequest | Title |</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">| Paused | ReadyMatchRequest | MatchReady |</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">| Running | TitleRequest | Title |</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">| Running | ReadyMatchRequest | MatchReady |</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">Custom rules can be provided to the `GameStateManager` constructor.</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
@@ -55,7 +59,6 @@
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">@brief Transition rules for the game state machine.</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">@details Contains rule definitions for valid state transitions.</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">&lt;/p&gt;&lt;/details&gt;</span></span></div>
-<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
 </div>
 <hr>
 <p class="doxyGeneratedBy">Generated via <a href="https://xpack.github.io/doxygen2docusaurus" target="_blank" rel="noopener noreferrer" class="">doxygen2docusaurus</a> 2.0.0 by <a href="https://www.doxygen.nl" target="_blank" rel="noopener noreferrer" class="">Doxygen</a> 1.15.0.</p>

@@ -1,5 +1,12 @@
 var NAVTREEINDEX45 =
 {
+"module__helios_8engine_8modules_8spatial_8transform_8components_8RotationStateComponent.html#a148d8193cfc4a9c06edb0cf2fe507f1c":[3,0,379,14],
+"module__helios_8engine_8modules_8spatial_8transform_8components_8RotationStateComponent.html#a27b9144ac994c1f98e733508ae633633":[3,0,379,5],
+"module__helios_8engine_8modules_8spatial_8transform_8components_8RotationStateComponent.html#a33c6574b155bf4eac28fa6e6417ba2a7":[3,0,379,9],
+"module__helios_8engine_8modules_8spatial_8transform_8components_8RotationStateComponent.html#a37dde665456f67228c6a9868478cfd45":[3,0,379,10],
+"module__helios_8engine_8modules_8spatial_8transform_8components_8RotationStateComponent.html#a3ea72c3c96673de403446debac67dd45":[3,0,379,19],
+"module__helios_8engine_8modules_8spatial_8transform_8components_8RotationStateComponent.html#a6143b75e1459b2b39e065f32d6ecae93":[3,0,379,11],
+"module__helios_8engine_8modules_8spatial_8transform_8components_8RotationStateComponent.html#a7e6ad15dab6abee9473a0a6aee698ea4":[3,0,379,17],
 "module__helios_8engine_8modules_8spatial_8transform_8components_8RotationStateComponent.html#a889a159096e914bc4ce0c11642617704":[3,0,379,1],
 "module__helios_8engine_8modules_8spatial_8transform_8components_8RotationStateComponent.html#a8a20ffc4c6f497c429b8199998861554":[3,0,379,8],
 "module__helios_8engine_8modules_8spatial_8transform_8components_8RotationStateComponent.html#a94f0e2b3d6f8ed3a2cbe1f0202d3f82e":[3,0,379,4],
@@ -242,12 +249,5 @@ var NAVTREEINDEX45 =
 "module__helios_8engine_8runtime_8gameloop_8CommitPoint.html#abdb94a899ecc215ffa46e24880ebd8ecae58c90136fb14137d5f8d945b1b0db41":[3,0,431,0,3],
 "module__helios_8engine_8runtime_8gameloop_8CommitPoint.html#aeccfb837ed873bcca8d40f8312f36686":[3,0,431,2],
 "module__helios_8engine_8runtime_8gameloop_8GameLoop.html":[3,0,432],
-"module__helios_8engine_8runtime_8gameloop_8GameLoop.html#a035360c9f817b9cf6cf338a50ec396be":[3,0,432,6],
-"module__helios_8engine_8runtime_8gameloop_8GameLoop.html#a41b297a4ee926ed2b989996ceb61bb7f":[3,0,432,3],
-"module__helios_8engine_8runtime_8gameloop_8GameLoop.html#a53abfe8e0aed479d00ec3867d5fd0412":[3,0,432,10],
-"module__helios_8engine_8runtime_8gameloop_8GameLoop.html#a7649a22c062f81568c5d11d2a8148029":[3,0,432,4],
-"module__helios_8engine_8runtime_8gameloop_8GameLoop.html#a7d4eb13220ecd447c6af0914fd214921":[3,0,432,8],
-"module__helios_8engine_8runtime_8gameloop_8GameLoop.html#a8abc8cce8e4faa1a54d61531b10781bd":[3,0,432,7],
-"module__helios_8engine_8runtime_8gameloop_8GameLoop.html#a97acde952251d5e0eceffb3beb2a4f33":[3,0,432,1],
-"module__helios_8engine_8runtime_8gameloop_8GameLoop.html#aa4fa49a8c51021ff24404e84b20696b5":[3,0,432,11]
+"module__helios_8engine_8runtime_8gameloop_8GameLoop.html#a035360c9f817b9cf6cf338a50ec396be":[3,0,432,6]
 };

@@ -21,7 +21,7 @@ var searchData=
   ['gametimer_18',['GameTimer',['../classhelios_1_1engine_1_1mechanics_1_1timing_1_1GameTimer.html',1,'helios::engine::mechanics::timing']]],
   ['gametimer2uitextupdatesystem_19',['GameTimer2UiTextUpdateSystem',['../classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1GameTimer2UiTextUpdateSystem.html',1,'helios::engine::modules::ui::binding::systems']]],
   ['gametimerbindingcomponent_20',['GameTimerBindingComponent',['../classhelios_1_1engine_1_1mechanics_1_1timing_1_1components_1_1GameTimerBindingComponent.html',1,'helios::engine::mechanics::timing::components']]],
-  ['gametimerclearfinishedsystem_21',['GameTimerClearFinishedSystem',['../classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerClearFinishedSystem.html',1,'helios::engine::mechanics::timing::systems']]],
+  ['gametimerclearsystem_21',['GameTimerClearSystem',['../classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerClearSystem.html',1,'helios::engine::mechanics::timing::systems']]],
   ['gametimeridtag_22',['GameTimerIdTag',['../structhelios_1_1engine_1_1mechanics_1_1timing_1_1types_1_1GameTimerIdTag.html',1,'helios::engine::mechanics::timing::types']]],
   ['gametimerupdatesystem_23',['GameTimerUpdateSystem',['../classhelios_1_1engine_1_1mechanics_1_1timing_1_1systems_1_1GameTimerUpdateSystem.html',1,'helios::engine::mechanics::timing::systems']]],
   ['gameworld_24',['GameWorld',['../classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html',1,'helios::engine::runtime::world']]],

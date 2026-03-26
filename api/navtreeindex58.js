@@ -1,13 +1,5 @@
 var NAVTREEINDEX58 =
 {
-"structhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindowUserPointer.html":[6,0,0,0,0,2,2],
-"structhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindowUserPointer.html#a05a73095f2fe6739eb2a309c85d8d158":[3,0,13,0,1],
-"structhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindowUserPointer.html#a05a73095f2fe6739eb2a309c85d8d158":[4,0,0,0,0,2,2,1],
-"structhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindowUserPointer.html#a05a73095f2fe6739eb2a309c85d8d158":[6,0,0,0,0,2,2,1],
-"structhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindowUserPointer.html#a28b59f87a333dfccb031c08d642d7fc5":[3,0,13,0,0],
-"structhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindowUserPointer.html#a28b59f87a333dfccb031c08d642d7fc5":[4,0,0,0,0,2,2,0],
-"structhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindowUserPointer.html#a28b59f87a333dfccb031c08d642d7fc5":[6,0,0,0,0,2,2,0],
-"structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry.html":[3,0,25,0],
 "structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry.html":[4,0,0,0,1,0,4],
 "structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry.html":[6,0,0,0,1,0,4],
 "structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry.html#a1604578016d00a484fa9a2d97629d384":[3,0,25,0,0],
@@ -249,5 +241,13 @@ var NAVTREEINDEX58 =
 "structhelios_1_1math_1_1vec4.html#a7fed6e101b53f58cd98b24af3e7a8481":[6,0,0,6,4,7],
 "structhelios_1_1math_1_1vec4.html#a80329ce41bcee4317cae5b2d205c8c98":[3,0,575,3,3],
 "structhelios_1_1math_1_1vec4.html#a80329ce41bcee4317cae5b2d205c8c98":[4,0,0,6,7,3],
-"structhelios_1_1math_1_1vec4.html#a80329ce41bcee4317cae5b2d205c8c98":[6,0,0,6,4,3]
+"structhelios_1_1math_1_1vec4.html#a80329ce41bcee4317cae5b2d205c8c98":[6,0,0,6,4,3],
+"structhelios_1_1math_1_1vec4.html#aaa35ca824a53010bc2191cfa6a0ada9f":[3,0,575,3,6],
+"structhelios_1_1math_1_1vec4.html#aaa35ca824a53010bc2191cfa6a0ada9f":[4,0,0,6,7,6],
+"structhelios_1_1math_1_1vec4.html#aaa35ca824a53010bc2191cfa6a0ada9f":[6,0,0,6,4,6],
+"structhelios_1_1math_1_1vec4.html#af408aedb7aecfda24fe4b5377178ece6":[3,0,575,3,2],
+"structhelios_1_1math_1_1vec4.html#af408aedb7aecfda24fe4b5377178ece6":[4,0,0,6,7,2],
+"structhelios_1_1math_1_1vec4.html#af408aedb7aecfda24fe4b5377178ece6":[6,0,0,6,4,2],
+"structhelios_1_1rendering_1_1Vertex.html":[3,0,624,0],
+"structhelios_1_1rendering_1_1Vertex.html":[4,0,0,7,13]
 };

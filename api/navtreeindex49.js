@@ -1,5 +1,12 @@
 var NAVTREEINDEX49 =
 {
+"module__helios_8ext_8imgui_8widgets_8MainMenuWidget.html#a3963ddeca55c4a3d8968bbf8958b4148":[3,0,26,6],
+"module__helios_8ext_8imgui_8widgets_8MainMenuWidget.html#a49386a348d8547c894c6f19e966984a0":[3,0,26,7],
+"module__helios_8ext_8imgui_8widgets_8MainMenuWidget.html#a8f6ddd4eafcd90795ebd3bab0abeddd3":[3,0,26,5],
+"module__helios_8ext_8imgui_8widgets_8MainMenuWidget.html#a909776086beaff43e0fd7bc11127616d":[3,0,26,4],
+"module__helios_8ext_8imgui_8widgets_8MainMenuWidget.html#a99672a60e08616eb7272cc29ebe180c8":[3,0,26,2],
+"module__helios_8ext_8imgui_8widgets_8MainMenuWidget.html#a9ebc45f5d25cddfc5191db82671e20ac":[3,0,26,3],
+"module__helios_8ext_8imgui_8widgets_8MainMenuWidget.html#aace2f8284caeb15564e45d8b013ab114":[3,0,26,8],
 "module__helios_8ext_8opengl.html":[3,0,27],
 "module__helios_8ext_8opengl_8rendering.html":[3,0,28],
 "module__helios_8ext_8opengl_8rendering_8FreeTypeFontResourceManager.html":[3,0,29],
@@ -242,12 +249,5 @@ var NAVTREEINDEX49 =
 "module__helios_8math_8types.html#a6737f82dfb6d4b5afc3eee979715a500":[3,0,575,90],
 "module__helios_8math_8types.html#a6a604e51ca84090aa8e8d7f46bd02009":[3,0,575,55],
 "module__helios_8math_8types.html#a6bca908e940499722f0a3af6447ad719":[3,0,575,79],
-"module__helios_8math_8types.html#a6c51266bc7e6f142ce172b8c2022645a":[3,0,575,36],
-"module__helios_8math_8types.html#a6db16504ac2287d0bfb8909075248b49":[3,0,575,56],
-"module__helios_8math_8types.html#a71f1e40e636f47229c3122bdb63099d5":[3,0,575,12],
-"module__helios_8math_8types.html#a7523e1a120cccd29674cf428bfdeb86c":[3,0,575,54],
-"module__helios_8math_8types.html#a7550ffe108477acac430f4a3e97fab66":[3,0,575,74],
-"module__helios_8math_8types.html#a769b094f17ea9b06bee37f0dab69149f":[3,0,575,22],
-"module__helios_8math_8types.html#a78a0f495523b71681b549f098f994126":[3,0,575,16],
-"module__helios_8math_8types.html#a78c11f960ab2cd331e354bd274c85a27":[3,0,575,101]
+"module__helios_8math_8types.html#a6c51266bc7e6f142ce172b8c2022645a":[3,0,575,36]
 };

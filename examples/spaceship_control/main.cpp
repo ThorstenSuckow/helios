@@ -154,8 +154,9 @@ int main() {
     // ========================================
     // 5. GameWorld and Level Setup
     // ========================================
-    helios::engine::runtime::gameloop::GameLoop gameLoop{};
-    helios::engine::runtime::world::GameWorld gameWorld{};
+    auto [gameWorldPtr, gameLoopPtr] = helios::engine::bootstrap::makeGameWorld();
+    auto& gameWorld = *gameWorldPtr;
+    auto& gameLoop = *gameLoopPtr;
 
     gameWorld.session().trackState<helios::engine::mechanics::gamestate::types::GameState>();
     gameWorld.session().trackState<helios::engine::mechanics::match::types::MatchState>();
@@ -308,7 +309,7 @@ int main() {
     gameLoop.init(gameWorld);
 
     gameWorld.session().setStateFrom<GameState>(
-        StateTransitionContext<GameState>(GameState::Undefined, GameState::Start, GameStateTransitionId::StartRequested)
+        StateTransitionContext<GameState>(GameState::Undefined, GameState::Booted, GameStateTransitionId::BootRequest)
     );
 
     bool showImgui = true;

@@ -5,4 +5,4 @@
 export module helios.engine.mechanics.timing.systems;
 
 export import helios.engine.mechanics.timing.systems.GameTimerUpdateSystem;
-export import helios.engine.mechanics.timing.systems.GameTimerClearFinishedSystem;
+export import helios.engine.mechanics.timing.systems.GameTimerClearSystem;

@@ -139,7 +139,20 @@ export namespace helios::engine::runtime::messaging::command {
          * @return True if the command must remain in the scratch queue.
          */
         [[nodiscard]] bool shouldDelayCommand(const TimerState state) const noexcept {
-            return state != TimerState::Finished && state != TimerState::Undefined;
+            return state == TimerState::Running;
+        }
+
+        /**
+         * @brief Determines whether a delayed command should be discarded.
+         *
+         * @details Returns true when the timer is not in state Running or Finished..
+         *
+         * @param state The current timer state.
+         *
+         * @return True if the command should be discarded.
+         */
+        [[nodiscard]] bool shouldDiscardCommand(const TimerState state) const noexcept {
+            return state != TimerState::Running  && state != TimerState::Finished;;
         }
 
         /**
@@ -220,6 +233,8 @@ export namespace helios::engine::runtime::messaging::command {
                             delayed.push_back(std::move(cmd));
                         } else if (isDelayedCommandReady(gameTimer->state())) {
                             commandHandlerRegistry.submit<CommandType>(cmd);
+                        } else if (shouldDiscardCommand(gameTimer->state())) {
+                            // cancelled? Discard! intentionally noop
                         }
                     } else {
                         commandHandlerRegistry.submit<CommandType>(cmd);
@@ -243,6 +258,8 @@ export namespace helios::engine::runtime::messaging::command {
                                delayed.push_back(std::move(cmd));
                            } else if (isDelayedCommandReady(gameTimer->state())) {
                                cmd.execute(updateContext);
+                           } else if (shouldDiscardCommand(gameTimer->state())) {
+                               // cancelled? Discard! intentionally noop
                            }
                        } else {
                            cmd.execute(updateContext);

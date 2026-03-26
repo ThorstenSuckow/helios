@@ -22,8 +22,8 @@ The state management system uses a common architectural pattern for all state ty
 
 | State Type | Scope | Example States |
 |------------|-------|----------------|
-| `GameState` | Application lifecycle | Title, Running, Paused |
-| `MatchState` | Match/round lifecycle | Warmup, PlayerSpawn, Playing |
+| `GameState` | Application lifecycle | Booted, Title, MatchReady, Running, Paused |
+| `MatchState` | Match/round lifecycle | Warmup, Start, Countdown, Playing, PlayerDefeated, GameOver |
 
 ## Hierarchical State Machine
 
@@ -33,27 +33,37 @@ helios supports hierarchical state management where lower-level states (e.g., Ma
 ┌─────────────────────────────────────────────────────────────────────┐
 │                         GameState                                   │
 │                                                                     │
-│  ┌──────────┐      StartRequested      ┌──────────────────────────┐ │
+│  ┌──────────┐    ReadyMatchRequest     ┌──────────────────────────┐ │
 │  │  Title   │ ───────────────────────► │        Running           │ │
 │  └──────────┘                          │                          │ │
 │       ▲                                │  ┌────────────────────┐  │ │
 │       │                                │  │    MatchState      │  │ │
-│       │ ReturnToTitle                  │  │                    │  │ │
+│       │ TitleRequest                   │  │                    │  │ │
 │       │                                │  │ ┌────────┐         │  │ │
 │       │                                │  │ │Warmup  │         │  │ │
 │       │                                │  │ └───┬────┘         │  │ │
-│       │                                │  │     │ PlayerSpawn  │  │ │
+│       │                                │  │     │ StartRequest │  │ │
 │       │                                │  │     ▼              │  │ │
 │       │                                │  │ ┌────────┐         │  │ │
-│       │                                │  │ │Spawning│         │  │ │
+│       │                                │  │ │ Start  │         │  │ │
 │       │                                │  │ └───┬────┘         │  │ │
-│       │                                │  │     │ StartMatch   │  │ │
-│       │                                │  │     ▼              │  │ │
+│       │                                │  │     │ Countdown    │  │ │
+│       │                                │  │     ▼     Request  │  │ │
+│       │                                │  │ ┌──────────┐       │  │ │
+│       │                                │  │ │Countdown │       │  │ │
+│       │                                │  │ └───┬──────┘       │  │ │
+│       │                                │  │     │ PlayerSpawn  │  │ │
+│       │                                │  │     ▼   Request    │  │ │
 │       │                                │  │ ┌────────┐         │  │ │
 │       │                                │  │ │Playing │         │  │ │
 │       │                                │  │ └───┬────┘         │  │ │
-│       │                                │  │     │ GameOver     │  │ │
+│       │                                │  │     │ PlayerDied   │  │ │
 │       │                                │  │     ▼              │  │ │
+│       │                                │  │ ┌──────────────┐   │  │ │
+│       │                                │  │ │PlayerDefeated│   │  │ │
+│       │                                │  │ └───┬──────────┘   │  │ │
+│       │                                │  │     │ GameOver     │  │ │
+│       │                                │  │     ▼   Request    │  │ │
 │       │                                │  │ ┌────────┐         │  │ │
 │       └────────────────────────────────┼──┼─│GameOver│         │  │ │
 │                                        │  │ └────────┘         │  │ │
@@ -165,7 +175,8 @@ using namespace helios::engine::state::types;
 // Define rules as constexpr array
 constexpr StateTransitionRule<GameState> gameStateRules[] = {
     // from, transitionId, to
-    {GameState::Title, GameStateTransitionId::StartRequested, GameState::Running},
+    {GameState::Title, GameStateTransitionId::ReadyMatchRequest, GameState::MatchReady},
+    {GameState::MatchReady, GameStateTransitionId::StartMatchRequest, GameState::Running},
     {GameState::Running, GameStateTransitionId::TogglePause, GameState::Paused},
     {GameState::Paused, GameStateTransitionId::TogglePause, GameState::Running},
 };
@@ -245,13 +256,41 @@ using namespace helios::engine::mechanics::timing::types;
 updateContext.queueCommand<DelayedStateCommand<MatchState>>(
     StateTransitionRequest<MatchState>{
         MatchState::Countdown,
-        MatchStateTransitionId::CountdownComplete
+        MatchStateTransitionId::PlayerSpawnRequest
     },
     GameTimerId::CountdownTimer
 );
 ```
 
 Internally, the `StateManager` converts a `DelayedStateCommand` into a `StateCommand` on submission, extracting only the `StateTransitionRequest`.
+
+### Cancelling Delayed Commands via Timer
+
+A `DelayedStateCommand` can be prevented from executing by cancelling its associated `GameTimer`. When `GameTimer::cancel()` is called, the timer transitions to `TimerState::Cancelled`. During the next `TypedCommandBuffer::flush()`, the buffer inspects each delayed command's timer state:
+
+| Timer State | Action |
+|-------------|--------|
+| `Running` | Command survives the flush cycle (moved to scratch queue) |
+| `Finished` | Command is dispatched to the `StateManager` |
+| `Cancelled` | Command is silently discarded |
+| `Undefined` | Command is silently discarded |
+
+This allows external code (e.g., state listeners or systems) to abort a pending state transition without modifying the command buffer directly:
+
+```cpp
+// A countdown timer triggers a delayed transition to Playing
+updateContext.queueCommand<DelayedStateCommand<MatchState>>(
+    StateTransitionRequest<MatchState>{
+        MatchState::Countdown,
+        MatchStateTransitionId::PlayerSpawnRequest
+    },
+    countdownTimerId
+);
+
+// Later, if the transition must be aborted (e.g., player quit during countdown):
+timerManager.gameTimer(countdownTimerId)->cancel();
+// The DelayedStateCommand is discarded on the next flush — no transition occurs.
+```
 
 ## Manager Lifecycle
 
@@ -307,15 +346,15 @@ using namespace helios::engine::state::types;
 updateContext.queueCommand<StateCommand<GameState>>(
     StateTransitionRequest<GameState>{
         GameState::Title,
-        GameStateTransitionId::StartRequested
+        GameStateTransitionId::ReadyMatchRequest
     }
 );
 
-// Request player spawn in match
+// Request match start
 updateContext.queueCommand<StateCommand<MatchState>>(
     StateTransitionRequest<MatchState>{
         MatchState::Warmup,
-        MatchStateTransitionId::PlayerSpawnRequested
+        MatchStateTransitionId::StartRequest
     }
 );
 ```

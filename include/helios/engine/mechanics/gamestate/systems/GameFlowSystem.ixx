@@ -84,14 +84,21 @@ export namespace helios::engine::mechanics::gamestate::systems {
 
                 case GameState::Undefined: {
                     updateContext.queueCommand<StateCommand<GameState>>(
-                        StateTransitionRequest<GameState>(gameState, GameStateTransitionId::StartRequested)
+                        StateTransitionRequest<GameState>(gameState, GameStateTransitionId::BootRequest)
                     );
                     break;
                 }
 
-                case GameState::Start: {
+                case GameState::Booted: {
                     updateContext.queueCommand<StateCommand<GameState>>(
-                        StateTransitionRequest<GameState>(gameState, GameStateTransitionId::TitleRequested)
+                        StateTransitionRequest<GameState>(gameState, GameStateTransitionId::TitleRequest)
+                    );
+                    break;
+                }
+
+                case GameState::MatchReady: {
+                    updateContext.queueCommand<StateCommand<GameState>>(
+                        StateTransitionRequest<GameState>(gameState, GameStateTransitionId::StartMatchRequest)
                     );
                     break;
                 }

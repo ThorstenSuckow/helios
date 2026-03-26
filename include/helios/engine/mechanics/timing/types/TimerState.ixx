@@ -23,7 +23,7 @@ export namespace helios::engine::mechanics::timing::types {
         /**
          * @brief Timer is actively accumulating time.
          */
-        Started = 1,
+        Running = 1,
 
         /**
          * @brief Timer is paused; elapsed time is preserved.
@@ -36,9 +36,9 @@ export namespace helios::engine::mechanics::timing::types {
         Finished = 3,
 
         /**
-         * @brief Timer is stopped.
+         * @brief Timer was cancelled.
          */
-        Stopped = 4
+        Cancelled = 4
     };
 
 }

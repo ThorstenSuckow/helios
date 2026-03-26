@@ -12,11 +12,19 @@ export module helios.examples.scoring.GameStateListener;
 import helios.engine.state.Bindings;
 import helios;
 
+import helios.examples.scoring.IdConfig;
 
+using namespace helios::engine::state;
+using namespace helios::engine::state::types;
+using namespace helios::engine::state::listeners;
+using namespace helios::engine::state::commands;
+using namespace helios::engine::runtime::world;
 using namespace helios::engine::mechanics::lifecycle::types;
+using namespace helios::engine::mechanics::lifecycle::commands;
 using namespace helios::engine::mechanics::gamestate::types;
 using namespace helios::engine::mechanics::match::types;
-using namespace helios::engine::mechanics::lifecycle::commands;
+using namespace helios::engine::mechanics::timing;
+using namespace helios::engine::mechanics::timing::types;
 
 export namespace helios::examples::scoring {
 
@@ -26,51 +34,40 @@ export namespace helios::examples::scoring {
      * @param gameStateManager The game state manager to register listeners with.
      */
     inline void installGameStateListeners(
-        helios::engine::state::StateManager<helios::engine::mechanics::gamestate::types::GameState>& gameStateManager
+        StateManager<GameState>& gameStateManager,
+        TimerManager& timerManager
     ) {
         gameStateManager.addStateListener(
-            std::make_unique<helios::engine::state::listeners::LambdaStateListener<helios::engine::mechanics::gamestate::types::GameState>>(
-            [](helios::engine::runtime::world::UpdateContext& updateContext,
-                 const helios::engine::state::types::StateTransitionContext<helios::engine::mechanics::gamestate::types::GameState> transitionContext)->void {
+            std::make_unique<LambdaStateListener<GameState>>(
+            [&timerManager](UpdateContext& updateContext,
+                 const StateTransitionContext<GameState> transitionContext) -> void {
 
                     const auto from = transitionContext.from();
                     const auto to = transitionContext.to();
                     const auto transitionId = transitionContext.transitionId();
 
-                    bool reset = (from == GameState::Title && to == GameState::Running)   ||
-                                 (from == GameState::Paused && to == GameState::Title)    ||
-                                 ((from == GameState::Paused || from == GameState::Running) &&
-                                     transitionId == GameStateTransitionId::RestartRequested &&
-                                     to == GameState::Running) ||
-                                 (from == GameState::Running && to == GameState::Title) ;
+                    bool reset = (from == GameState::Title && to == GameState::MatchReady)   ||
+                                 (from == GameState::Paused && to == GameState::Title) ||
+                                 (from == GameState::Paused && to == GameState::MatchReady) ||
+                                 (from == GameState::Running && to == GameState::MatchReady) ||
+                                 (from == GameState::Running && to == GameState::Title);
 
                     if (reset) {
                         updateContext.queueCommand<WorldLifecycleCommand>(WorldLifecycleAction::Reset);
                     }
 
-                   if (to == GameState::Title && transitionId == GameStateTransitionId::TitleRequested) {
-                        updateContext.queueCommand<helios::engine::state::commands::StateCommand<MatchState>>(
-                            helios::engine::state::types::StateTransitionRequest<MatchState>(
-                            MatchState::GameOver,
-                                MatchStateTransitionId::RestartRequested
-                            )
-                        );
-                    }
-                    if (from == GameState::Running && transitionId == GameStateTransitionId::TitleRequested) {
-                        updateContext.queueCommand<helios::engine::state::commands::StateCommand<MatchState>>(
-                            helios::engine::state::types::StateTransitionRequest<MatchState>(
-                                MatchState::GameOver, MatchStateTransitionId::QuitRequested
-                            )
-                        );
-                    }
-                    if (from == GameState::Running && transitionId == GameStateTransitionId::RestartRequested) {
-                        updateContext.queueCommand<helios::engine::state::commands::StateCommand<MatchState>>(
-                            helios::engine::state::types::StateTransitionRequest<MatchState>(
-                            MatchState::GameOver,
-                                MatchStateTransitionId::RestartRequested
-                            )
-                        );
-                    }
+
+                if ((from == GameState::Paused || from == GameState::Running) &&
+                    (transitionId == GameStateTransitionId::TitleRequest ||
+                     transitionId == GameStateTransitionId::ReadyMatchRequest)) {
+                    updateContext.queueCommand<StateCommand<MatchState>>(
+                       StateTransitionRequest<MatchState>(
+                           updateContext.session().state<MatchState>(),
+                           MatchStateTransitionId::WarmupRequest
+                       )
+                    );
+                }
+
             })
         );
     }

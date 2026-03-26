@@ -10,9 +10,9 @@ Systems for game state management.
 
 ## GameStateInputResponseSystem
 
-Listens for the gamepad Start button and issues appropriate `GameStateCommand` based on the current state:
+Listens for the gamepad Start button and issues appropriate `StateCommand<GameState>` based on the current state:
 
-- **Title** + Start → `StartRequested` transition
+- **Title** + Start → `ReadyMatchRequest` transition
 - **Running** + Start → `TogglePause` transition
 
 ---
@@ -23,4 +23,3 @@ Listens for the gamepad Start button and issues appropriate `GameStateCommand` b
 @brief Systems for game state management.
 @details Contains ECS systems that handle game state logic.
 </p></details>
-

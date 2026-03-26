@@ -1,4 +1,3 @@
-
 module;
 
 #include <memory>
@@ -9,36 +8,47 @@ import helios;
 
 import helios.examples.scoring.IdConfig;
 
+using namespace helios::engine::state;
+using namespace helios::engine::state::types;
+using namespace helios::engine::state::listeners;
+using namespace helios::engine::runtime::world;
+using namespace helios::engine::mechanics::timing::types;
+using namespace helios::engine::mechanics::timing::commands;
+using namespace helios::engine::mechanics::gamestate::types;
+using namespace helios::engine::mechanics::match::types;
+using namespace helios::engine::mechanics::timing;
+using namespace helios::engine::mechanics::timing::types;
+
 export namespace helios::examples::scoring {
 
-    using namespace helios::engine::mechanics::timing::types;
-    using namespace helios::engine::mechanics::timing::commands;
-
-
     inline void installDemoTimeListeners(
-        helios::engine::state::StateManager<helios::engine::mechanics::gamestate::types::GameState>& gameStateManager,
-        helios::engine::state::StateManager<helios::engine::mechanics::match::types::MatchState>& matchStateManager
+        StateManager<GameState>& gameStateManager,
+        StateManager<MatchState>& matchStateManager,
+        TimerManager& timerManager
     ) {
         gameStateManager.addStateListener(
-            std::make_unique<helios::engine::state::listeners::LambdaStateListener<helios::engine::mechanics::gamestate::types::GameState>>(
-            [](helios::engine::runtime::world::UpdateContext& updateContext,
-                 const helios::engine::state::types::StateTransitionContext<helios::engine::mechanics::gamestate::types::GameState> transitionContext)->void {
+            std::make_unique<LambdaStateListener<GameState>>(
+            [&timerManager](UpdateContext& updateContext,
+                 const StateTransitionContext<GameState> transitionContext) -> void {
 
-                    using namespace helios::engine::mechanics::gamestate::types;
-                    using namespace helios::engine::mechanics::match::types;
-
+                    const auto current = timerManager.gameTimer(IdConfig::DemoTimerId);
                     const auto from = transitionContext.from();
                     const auto to = transitionContext.to();
-                    const auto transitionId = transitionContext.transitionId();
 
                     bool unpause = (from == GameState::Paused && to == GameState::Running);
                     bool pause = (from == GameState::Running && to == GameState::Paused);
 
                     if (unpause) {
-                        auto context = TimerControlContext{TimerState::Started, IdConfig::DemoTimerId};
+                        if (current->state() != TimerState::Paused) {
+                            return;
+                        }
+                        auto context = TimerControlContext{IdConfig::DemoTimerId, TimerState::Running};
                         updateContext.queueCommand<TimerControlCommand>(context);
                     } else if (pause) {
-                        auto context = TimerControlContext{TimerState::Paused, IdConfig::DemoTimerId};
+                        if (current->state() != TimerState::Running) {
+                            return;
+                        }
+                        auto context = TimerControlContext{IdConfig::DemoTimerId, TimerState::Paused};
                         updateContext.queueCommand<TimerControlCommand>(context);
                     }
 
@@ -47,25 +57,22 @@ export namespace helios::examples::scoring {
 
 
         matchStateManager.addStateListener(
-            std::make_unique<helios::engine::state::listeners::LambdaStateListener<helios::engine::mechanics::match::types::MatchState>>(
-            [](helios::engine::runtime::world::UpdateContext& updateContext,
-                 const helios::engine::state::types::StateTransitionContext<helios::engine::mechanics::match::types::MatchState> transitionContext)->void {
-
-                using namespace helios::engine::mechanics::gamestate::types;
-                    using namespace helios::engine::mechanics::match::types;
+            std::make_unique<LambdaStateListener<MatchState>>(
+            [&timerManager](UpdateContext& updateContext,
+                 const StateTransitionContext<MatchState> transitionContext) -> void {
 
                     const auto from = transitionContext.from();
                     const auto to = transitionContext.to();
                     const auto transitionId = transitionContext.transitionId();
 
-                    bool start = (transitionId == MatchStateTransitionId::StartRequested && to == MatchState::Playing);
-                    bool stop = (to == MatchState::GameOver);
+                    bool start = (transitionId == MatchStateTransitionId::PlayerSpawnRequest && to == MatchState::Playing);
+                    bool stop = (to == MatchState::GameOver || (from == MatchState::Start && to == MatchState::Countdown));
 
                     if (start) {
-                        auto context = TimerControlContext{TimerState::Started, IdConfig::DemoTimerId};
+                        auto context = TimerControlContext{IdConfig::DemoTimerId, TimerState::Running};
                         updateContext.queueCommand<TimerControlCommand>(context);
                     } else if (stop) {
-                        auto context = TimerControlContext{TimerState::Stopped, IdConfig::DemoTimerId};
+                        auto context = TimerControlContext{ IdConfig::DemoTimerId, TimerState::Cancelled};
                         updateContext.queueCommand<TimerControlCommand>(context);
                     }
 
@@ -74,4 +81,3 @@ export namespace helios::examples::scoring {
     }
 
 }
-

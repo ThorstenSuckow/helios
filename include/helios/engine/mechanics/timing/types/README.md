@@ -4,11 +4,11 @@ Core type definitions for the timing module.
 
 ## Types
 
-| Type | Description |
-|------|-------------|
-| `TimerState` | Enumeration of timer states: `Undefined`, `Started`, `Paused`, `Stopped` |
-| `TimerRevision` | Monotonically increasing revision counter (`uint32_t`) |
-| `TimerControlContext` | Context struct carrying a target `TimerState` and `GameTimerId` |
+| Type | Description                                                                |
+|------|----------------------------------------------------------------------------|
+| `TimerState` | Enumeration of timer states: `Undefined`, `Running`, `Paused`, `Cancelled` |
+| `TimerRevision` | Monotonically increasing revision counter (`uint32_t`)                     |
+| `TimerControlContext` | Context struct carrying a target `TimerState` and `GameTimerId`            |
 
 ---
 

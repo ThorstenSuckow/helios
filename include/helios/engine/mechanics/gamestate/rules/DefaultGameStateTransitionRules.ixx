@@ -38,19 +38,25 @@ export namespace helios::engine::mechanics::gamestate::rules {
 
             StateTransitionRule<GameState>(
                 GameState::Undefined,
-                StateTransitionIdType<GameState>::StartRequested,
-                GameState::Start
+                StateTransitionIdType<GameState>::BootRequest,
+                GameState::Booted
             ),
 
             StateTransitionRule<GameState>(
-                GameState::Start,
-                StateTransitionIdType<GameState>::TitleRequested,
+                GameState::Booted,
+                StateTransitionIdType<GameState>::TitleRequest,
                 GameState::Title
             ),
-            StateTransitionRule<GameState>(
 
+            StateTransitionRule<GameState>(
                 GameState::Title,
-                GameStateTransitionId::StartRequested,
+                GameStateTransitionId::ReadyMatchRequest,
+                GameState::MatchReady
+            ),
+
+            StateTransitionRule<GameState>(
+                GameState::MatchReady,
+                GameStateTransitionId::StartMatchRequest,
                 GameState::Running
             ),
 
@@ -68,32 +74,29 @@ export namespace helios::engine::mechanics::gamestate::rules {
                 GameState::Running
                 ),
 
-            StateTransitionRule<GameState>(
 
+            StateTransitionRule<GameState>(
                 GameState::Paused,
-                GameStateTransitionId::RestartRequested,
-                GameState::Running
-            ),
-
-            StateTransitionRule<GameState>(
-
-                GameState::Running,
-                GameStateTransitionId::RestartRequested,
-                GameState::Running
-            ),
-
-            StateTransitionRule<GameState>(
-
-               GameState::Paused,
-               GameStateTransitionId::RestartRequested,
-               GameState::Running
-           ),
-
-            StateTransitionRule<GameState>(
-
-                GameState::Running,
-                GameStateTransitionId::TitleRequested,
+                GameStateTransitionId::TitleRequest,
                 GameState::Title
+            ),
+
+            StateTransitionRule<GameState>(
+                GameState::Paused,
+                GameStateTransitionId::ReadyMatchRequest,
+                GameState::MatchReady
+            ),
+
+            StateTransitionRule<GameState>(
+                GameState::Running,
+                GameStateTransitionId::TitleRequest,
+                GameState::Title
+            ),
+
+            StateTransitionRule<GameState>(
+                GameState::Running,
+                GameStateTransitionId::ReadyMatchRequest,
+                GameState::MatchReady
             )
 
         };

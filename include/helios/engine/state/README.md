@@ -117,7 +117,7 @@ updateContext.queueCommand<StateCommand<GameState>>(
 updateContext.queueCommand<DelayedStateCommand<MatchState>>(
     StateTransitionRequest<MatchState>{
         MatchState::Countdown,
-        MatchStateTransitionId::CountdownComplete
+        MatchStateTransitionId::PlayerSpawnRequest
     },
     GameTimerId::CountdownTimer
 );

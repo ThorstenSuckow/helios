@@ -10,6 +10,15 @@ export module helios.examples.scoring.UiActionCommandPolicy;
 
 import helios;
 
+using namespace helios::engine::modules::ui;
+using namespace helios::engine::modules::ui::widgets::types;
+using namespace helios::engine::modules::ui::widgets::commands;
+using namespace helios::engine::runtime::world;
+using namespace helios::engine::state::commands;
+using namespace helios::engine::state::types;
+using namespace helios::engine::mechanics::gamestate::types;
+using namespace helios::engine::mechanics::match::types;
+
 export namespace helios::examples::scoring {
 
     /**
@@ -18,73 +27,59 @@ export namespace helios::examples::scoring {
      * @param uiActionCommandManager The manager to register policies with.
      */
     inline void applyUiActionCommandPolicies(
-        helios::engine::modules::ui::UiActionCommandManager& uiActionCommandManager
+        UiActionCommandManager& uiActionCommandManager
     ) {
         uiActionCommandManager.addPolicy(
-                helios::engine::modules::ui::widgets::types::ActionId{"continueGame"},
-                [](
-                    helios::engine::runtime::world::UpdateContext& updateContext,
-                    const helios::engine::modules::ui::widgets::commands::UiActionCommand& actionCommand) noexcept -> void {
-                    updateContext.queueCommand<helios::engine::state::commands::StateCommand<helios::engine::mechanics::gamestate::types::GameState>>(
-                      helios::engine::state::types::StateTransitionRequest<helios::engine::mechanics::gamestate::types::GameState>(
-                            helios::engine::mechanics::gamestate::types::GameState::Paused,
-                            helios::engine::mechanics::gamestate::types::GameStateTransitionId::TogglePause
+                ActionId{"continueGame"},
+                [](UpdateContext& updateContext, const UiActionCommand& actionCommand) noexcept -> void {
+                    updateContext.queueCommand<StateCommand<GameState>>(
+                        StateTransitionRequest<GameState>(
+                            GameState::Paused,
+                            GameStateTransitionId::TogglePause
                         )
                     );
                 }
             ).addPolicy(
-                helios::engine::modules::ui::widgets::types::ActionId{"quitGame"},
-                [](
-                    helios::engine::runtime::world::UpdateContext& updateContext,
-                    const helios::engine::modules::ui::widgets::commands::UiActionCommand& actionCommand) noexcept -> void {
-
-                    updateContext.queueCommand<helios::engine::state::commands::StateCommand<helios::engine::mechanics::match::types::MatchState>>(
-                        helios::engine::state::types::StateTransitionRequest<helios::engine::mechanics::match::types::MatchState>(
-                            helios::engine::mechanics::match::types::MatchState::Playing,
-                            helios::engine::mechanics::match::types::MatchStateTransitionId::QuitRequested
+                ActionId{"quitGame"},
+                [](UpdateContext& updateContext, const UiActionCommand& actionCommand) noexcept -> void {
+                    updateContext.queueCommand<StateCommand<GameState>>(
+                        StateTransitionRequest<GameState>(
+                            GameState::Paused,
+                            GameStateTransitionId::TitleRequest
                         )
                     );
-
-
                 }
             ).addPolicy(
-                helios::engine::modules::ui::widgets::types::ActionId{"restartGame"},
-                [](
-                    helios::engine::runtime::world::UpdateContext& updateContext,
-                    const helios::engine::modules::ui::widgets::commands::UiActionCommand& actionCommand) noexcept -> void {
-                    updateContext.queueCommand<helios::engine::state::commands::StateCommand<helios::engine::mechanics::gamestate::types::GameState>>(
-                        helios::engine::state::types::StateTransitionRequest<helios::engine::mechanics::gamestate::types::GameState>(
-                            helios::engine::mechanics::gamestate::types::GameState::Paused,
-                            helios::engine::mechanics::gamestate::types::GameStateTransitionId::RestartRequested
+                ActionId{"restartGame"},
+                [](UpdateContext& updateContext, const UiActionCommand& actionCommand) noexcept -> void {
+                    updateContext.queueCommand<StateCommand<GameState>>(
+                        StateTransitionRequest<GameState>(
+                            GameState::Paused,
+                            GameStateTransitionId::ReadyMatchRequest
                         )
                     );
                 }
-                ).addPolicy(
-                    helios::engine::modules::ui::widgets::types::ActionId{"gameOverRetry"},
-                    [](
-                        helios::engine::runtime::world::UpdateContext& updateContext,
-                        const helios::engine::modules::ui::widgets::commands::UiActionCommand& actionCommand) noexcept -> void {
-                        updateContext.queueCommand<helios::engine::state::commands::StateCommand<helios::engine::mechanics::gamestate::types::GameState>>(
-                        helios::engine::state::types::StateTransitionRequest<helios::engine::mechanics::gamestate::types::GameState>(
-                                helios::engine::mechanics::gamestate::types::GameState::Running,
-                                helios::engine::mechanics::gamestate::types::GameStateTransitionId::RestartRequested
-                            )
-                        );
-                    }
-                ).addPolicy(
-                    helios::engine::modules::ui::widgets::types::ActionId{"gameOverQuitGame"},
-                    [](
-                        helios::engine::runtime::world::UpdateContext& updateContext,
-                        const helios::engine::modules::ui::widgets::commands::UiActionCommand& actionCommand) noexcept -> void {
-                        updateContext.queueCommand<helios::engine::state::commands::StateCommand<helios::engine::mechanics::gamestate::types::GameState>>(
-                        helios::engine::state::types::StateTransitionRequest<helios::engine::mechanics::gamestate::types::GameState>(
-                                helios::engine::mechanics::gamestate::types::GameState::Running,
-                                helios::engine::mechanics::gamestate::types::GameStateTransitionId::TitleRequested
-                            )
-                        );
-                    }
-                );
+            ).addPolicy(
+                ActionId{"gameOverRetry"},
+                [](UpdateContext& updateContext, const UiActionCommand& actionCommand) noexcept -> void {
+                    updateContext.queueCommand<StateCommand<GameState>>(
+                        StateTransitionRequest<GameState>(
+                            GameState::Running,
+                            GameStateTransitionId::ReadyMatchRequest
+                        )
+                    );
+                }
+            ).addPolicy(
+                ActionId{"gameOverQuitGame"},
+                [](UpdateContext& updateContext, const UiActionCommand& actionCommand) noexcept -> void {
+                    updateContext.queueCommand<StateCommand<GameState>>(
+                        StateTransitionRequest<GameState>(
+                            GameState::Running,
+                            GameStateTransitionId::TitleRequest
+                        )
+                    );
+                }
+            );
     }
 
 }
-

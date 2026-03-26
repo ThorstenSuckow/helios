@@ -23,6 +23,8 @@ export namespace helios::examples::scoring::IdConfig {
     constexpr PrefabId ProjectilePrefab("Projectile");
 
     constexpr GameTimerId DemoTimerId{"demoTimer"};
+    constexpr GameTimerId CountdownTimerId{"countdownTimer"};
+    constexpr GameTimerId PlayerRespawnTimerId{"respawnTimer"};
 
     constexpr SpawnProfileId ProjectileSpawnSpawnProfileId{"projectile_spawn"};
     constexpr SpawnProfileId RandomSpawnSpawnProfileId{"random_spawn"};

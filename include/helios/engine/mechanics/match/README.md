@@ -2,7 +2,7 @@
 
 Match state management for the helios engine.
 
-This module provides domain-specific types and bindings for managing match states (Warmup, PlayerSpawn, Playing). It uses the generic `helios::engine::state` framework.
+This module provides domain-specific types and bindings for managing match states (Warmup, Start, Countdown, Playing, PlayerDefeated, GameOver). It uses the generic `helios::engine::state` framework.
 
 ## Components
 
@@ -36,23 +36,46 @@ The generic `StateManager` provides:
 ## Match Flow
 
 ```
-┌───────────────┐   WarmupRequested   ┌───────────────┐
-│   Undefined   │ ──────────────────► │    Warmup     │
-└───────────────┘                     └───────────────┘
-                                             │
-                                    PlayerSpawnRequested
-                                             │
-                                             ▼
-                                      ┌───────────────┐
-                                      │  PlayerSpawn  │
-                                      └───────────────┘
-                                             │
-                                       StartRequested
-                                             │
-                                             ▼
-                                      ┌───────────────┐
-                                      │    Playing    │
-                                      └───────────────┘
+┌───────────────┐   WarmupRequest    ┌───────────────┐
+│   Undefined   │ ─────────────────► │    Warmup     │
+└───────────────┘                    └───────────────┘
+                                            │
+                                      StartRequest
+                                            │
+                                            ▼
+                                     ┌───────────────┐
+                                     │     Start     │
+                                     └───────────────┘
+                                            │
+                                    CountdownRequest
+                                      (guarded)
+                                            │
+                                            ▼
+                                     ┌───────────────┐
+                                     │   Countdown   │
+                                     └───────────────┘
+                                            │
+                                   PlayerSpawnRequest
+                                            │
+                                            ▼
+                                     ┌───────────────┐
+                                     │    Playing    │
+                                     └───────────────┘
+                                            │
+                                       PlayerDied
+                                            │
+                                            ▼
+                                     ┌────────────────┐
+                                     │PlayerDefeated  │
+                                     └────────────────┘
+                                       │           │
+                              CountdownRequest  GameOverRequest
+                              (has life left)  (no life left)
+                                       │           │
+                                       ▼           ▼
+                                  Countdown    ┌──────────┐
+                                               │ GameOver │
+                                               └──────────┘
 ```
 
 ## Usage
@@ -74,7 +97,7 @@ manager->addStateListener(std::make_unique<LambdaStateListener<types::MatchState
 commandBuffer.add<StateCommand<types::MatchState>>(
     StateTransitionRequest<types::MatchState>{
         types::MatchState::Warmup,
-        types::MatchStateTransitionId::PlayerSpawnRequested
+        types::MatchStateTransitionId::StartRequest
     }
 );
 ```
@@ -87,4 +110,3 @@ commandBuffer.add<StateCommand<types::MatchState>>(
 @brief Match state management for the helios engine.
 @details Provides domain-specific types and bindings for managing match states using the generic helios::engine::state framework.
 </p></details>
-

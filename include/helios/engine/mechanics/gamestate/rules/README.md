@@ -14,12 +14,16 @@ Defines standard transitions:
 
 | From | Transition | To |
 |------|------------|-----|
-| Undefined | TitleRequested | Title |
-| Title | StartRequested | Running |
+| Undefined | BootRequest | Booted |
+| Booted | TitleRequest | Title |
+| Title | ReadyMatchRequest | MatchReady |
+| MatchReady | StartMatchRequest | Running |
 | Running | TogglePause | Paused |
 | Paused | TogglePause | Running |
-| Paused | RestartRequested | Running |
-| Paused | QuitGameRequested | Title |
+| Paused | TitleRequest | Title |
+| Paused | ReadyMatchRequest | MatchReady |
+| Running | TitleRequest | Title |
+| Running | ReadyMatchRequest | MatchReady |
 
 Custom rules can be provided to the `GameStateManager` constructor.
 
@@ -31,4 +35,3 @@ Custom rules can be provided to the `GameStateManager` constructor.
 @brief Transition rules for the game state machine.
 @details Contains rule definitions for valid state transitions.
 </p></details>
-

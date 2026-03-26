@@ -15,7 +15,7 @@ This namespace contains command classes used to request timer state transitions 
 Commands are typically issued by game-state listeners or systems when a timer needs to change state:
 
 ```cpp
-auto context = TimerControlContext{TimerState::Started, myTimerId};
+auto context = TimerControlContext{TimerState::Running, myTimerId};
 
 updateContext.queueCommand<TimerControlCommand>(std::move(context));
 ```

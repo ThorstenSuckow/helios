@@ -478,7 +478,7 @@ export namespace helios::examples::scoring {
                 })
                 .make();
 
-        auto countdownTimerText = GameObjectFactory::instance()
+        auto demoTimerText = GameObjectFactory::instance()
             .gameObject(gameWorld)
             .withRendering([&](auto& rnb) {
                 rnb.textRenderable()
@@ -504,10 +504,37 @@ export namespace helios::examples::scoring {
             })
             .make();
 
+        auto countdownTimerText = GameObjectFactory::instance()
+            .gameObject(gameWorld)
+            .withRendering([&](auto& rnb) {
+                rnb.textRenderable()
+                   .formattedAsTimestamp("{1}")
+                   .useElapsedLabel("GO!")
+                   .hideWhenZero()
+                   .displayRemaining()
+                   .fontId(uiTextFont)
+                   .fontScale(4.0f)
+                   .fontResourceProvider(renderingDevice.fontResourceProvider())
+                   .shader(glyphShader)
+                   .color(helios::util::Colors::White)
+                   .attachTo(&hudScene.root());
+            })
+           .withObserver([&](auto& ob) {
+               ob.observe()
+                  .time(IdConfig::CountdownTimerId);
+           })
+            .withUiTransform([](auto& tb) {
+                tb.transform()
+                  .pivot(helios::engine::modules::ui::layout::Anchor::Center)
+                  .viewport(helios::engine::common::types::ViewportId{"hudViewport"})
+                  .anchor(helios::engine::modules::ui::layout::Anchor::Center);
+            })
+            .make();
 
             shipSymbol.setActive(true);
             livesText.setActive(true);
             scoreText.setActive(true);
+            demoTimerText.setActive(true);
             countdownTimerText.setActive(true);
             highScoreText.setActive(true);
             titleText.setActive(true);

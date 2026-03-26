@@ -25,7 +25,15 @@ export namespace helios::examples::scoring {
 
         auto& demoGameTimer = timerManager.addGameTimer(IdConfig::DemoTimerId);
         demoGameTimer.setDuration(60 * 3);
-        demoGameTimer.setState(TimerState::Stopped);
+        demoGameTimer.setState(TimerState::Cancelled);
+
+        auto& countdownTimer = timerManager.addGameTimer(IdConfig::CountdownTimerId);
+        countdownTimer.setDuration(4);
+        countdownTimer.setState(TimerState::Cancelled);
+
+        auto& playerRespawnTimerId = timerManager.addGameTimer(IdConfig::PlayerRespawnTimerId);
+        playerRespawnTimerId.setDuration(3);
+        playerRespawnTimerId.setState(TimerState::Cancelled);
     }
 
 

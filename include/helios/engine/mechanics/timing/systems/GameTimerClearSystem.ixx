@@ -1,11 +1,11 @@
 /**
- * @file GameTimerClearFinishedSystem.ixx
+ * @file GameTimerClearSystem.ixx
  * @brief System that resets finished game timers each frame.
  */
 module;
 
 
-export module helios.engine.mechanics.timing.systems.GameTimerClearFinishedSystem;
+export module helios.engine.mechanics.timing.systems.GameTimerClearSystem;
 
 import helios.engine.mechanics.timing.GameTimer;
 import helios.engine.mechanics.timing.TimerManager;
@@ -34,7 +34,7 @@ export namespace helios::engine::mechanics::timing::systems {
      * @see TimerManager
      * @see GameTimer
      */
-    class GameTimerClearFinishedSystem {
+    class GameTimerClearSystem {
 
         /**
          * @brief Reference to the TimerManager owning the timers.
@@ -51,7 +51,7 @@ export namespace helios::engine::mechanics::timing::systems {
          *
          * @param timerManager The manager whose timers are cleared.
          */
-        explicit GameTimerClearFinishedSystem(TimerManager& timerManager)
+        explicit GameTimerClearSystem(TimerManager& timerManager)
         : timerManager_(timerManager) {}
 
         /**
@@ -62,7 +62,7 @@ export namespace helios::engine::mechanics::timing::systems {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto& gameTimer : timerManager_.gameTimers()) {
-                if (gameTimer.state() == TimerState::Finished) {
+                if (gameTimer.state() == TimerState::Finished || gameTimer.state() == TimerState::Cancelled) {
                     gameTimer.setState(TimerState::Undefined);
                 }
             }

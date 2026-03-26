@@ -70,43 +70,29 @@ export namespace helios::engine::mechanics::match::systems {
 
             switch (matchState) {
 
-                case MatchState::Finished: {
-                    updateContext.queueCommand<StateCommand<MatchState>>(
-                        StateTransitionRequest<MatchState>(matchState, MatchStateTransitionId::WarmupRequested)
-                    );
-                    break;
-                }
 
                 case MatchState::Undefined: {
                     updateContext.queueCommand<StateCommand<MatchState>>(
-                        StateTransitionRequest<MatchState>(matchState, MatchStateTransitionId::WarmupRequested)
+                        StateTransitionRequest<MatchState>(matchState, MatchStateTransitionId::WarmupRequest)
                     );
                     break;
                 }
 
                 case MatchState::Warmup: {
                     updateContext.queueCommand<StateCommand<MatchState>>(
-                        StateTransitionRequest<MatchState>(matchState, MatchStateTransitionId::PlayerSpawnRequested)
+                        StateTransitionRequest<MatchState>(matchState, MatchStateTransitionId::StartRequest)
                     );
                     break;
                 }
 
-                case MatchState::PlayerSpawn: {
+                case MatchState::Start: {
                     updateContext.queueCommand<StateCommand<MatchState>>(
-                        StateTransitionRequest<MatchState>(matchState, MatchStateTransitionId::StartRequested)
+                        StateTransitionRequest<MatchState>(matchState, MatchStateTransitionId::CountdownRequest)
                     );
                     break;
                 }
 
-                case MatchState::PlayerDeath: {
-                    if (matchStateTransitionId == MatchStateTransitionId::QuitRequested) {
-                        updateContext.queueCommand<StateCommand<MatchState>>(
-                            StateTransitionRequest<MatchState>(MatchState::PlayerDeath, MatchStateTransitionId::QuitRequested)
-                        );
-                    }
 
-                    break;
-                }
 
 
                 default:

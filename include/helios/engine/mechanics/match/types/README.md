@@ -16,9 +16,14 @@ Core types for match state management.
 ## MatchState
 
 Bitmask enum with values:
-- `Undefined`, `Warmup`, `Intro`, `Countdown`, `PlayerSpawn`, `Playing`, `PlayerDeath`, `Any`
+- `Undefined`, `Warmup`, `Start`, `Countdown`, `Playing`, `PlayerDefeated`, `GameOver`
 
 Supports bitwise operators for combining states.
+
+## MatchStateTransitionId
+
+Transition identifiers:
+- `Undefined`, `WarmupRequest`, `StartRequest`, `CountdownRequest`, `PlayerSpawnRequest`, `PlayerDied`, `GameOverRequest`, `QuitRequest`
 
 ## MatchStateTransitionRule
 

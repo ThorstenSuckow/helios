@@ -65,12 +65,12 @@ export namespace helios::engine::mechanics::timing::systems {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto& gameTimer : timerManager_.gameTimers()) {
-                if (gameTimer.state() == TimerState::Started) {
+                if (gameTimer.state() == TimerState::Running) {
 
                     gameTimer.update(updateContext.deltaTime());
 
                     if (gameTimer.duration() != 0.0f && gameTimer.elapsed() >= gameTimer.duration()) {
-                        auto context = TimerControlContext{TimerState::Finished, gameTimer.gameTimerId()};
+                        auto context = TimerControlContext{gameTimer.gameTimerId(), TimerState::Finished};
                         updateContext.queueCommand<TimerControlCommand>(context);
                     }
                 }

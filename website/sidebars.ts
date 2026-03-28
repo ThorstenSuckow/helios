@@ -85,6 +85,7 @@ const sidebars: SidebarsConfig = {
         'examples/collision-detection',
         'examples/render-text-demo',
         'examples/scoring-demo',
+        'examples/runtime-test',
       ],
     },
     'testing',

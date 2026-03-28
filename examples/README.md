@@ -135,6 +135,22 @@ A complete scoring system example featuring:
 
 ---
 
+### 9. Runtime Stress Test
+
+**Location:** `runtime_test/`
+
+An interactive performance test for measuring the framerate impact of increasing numbers of active GameObjects:
+- ImGui slider widget to dynamically control active object count (0 – 10 000)
+- Object pool acquire/release driven by slider target
+- Random placement and random movement for stress objects
+- Real-time FPS metrics to identify performance thresholds
+
+**Controls:**
+- `~` - Toggle ImGui overlay
+- `ESC` - Exit application
+
+---
+
 ## Building the Examples
 
 All examples are automatically built when you build the helios project.

@@ -189,13 +189,15 @@ public:
         ImGui::SameLine();
         if (ImGui::Button("100")) { targetCount_ = std::min(100, maxPoolSize_); }
         ImGui::SameLine();
-        if (ImGui::Button("500")) { targetCount_ = std::min(500, maxPoolSize_); }
-        ImGui::SameLine();
         if (ImGui::Button("1000")) { targetCount_ = std::min(1000, maxPoolSize_); }
         ImGui::SameLine();
-        if (ImGui::Button("2000")) { targetCount_ = std::min(2000, maxPoolSize_); }
+        if (ImGui::Button("2500")) { targetCount_ = std::min(2500, maxPoolSize_); }
         ImGui::SameLine();
         if (ImGui::Button("5000")) { targetCount_ = std::min(5000, maxPoolSize_); }
+        ImGui::SameLine();
+        if (ImGui::Button("10000")) { targetCount_ = std::min(10'000, maxPoolSize_); }
+        ImGui::SameLine();
+        if (ImGui::Button("25000")) { targetCount_ = std::min(25'000, maxPoolSize_); }
         ImGui::SameLine();
         if (ImGui::Button("Max")) { targetCount_ = maxPoolSize_; }
 
@@ -218,7 +220,7 @@ int main() {
     constexpr float FOVY               = radians(90.0f);
     constexpr float ASPECT_RATIO_NUMER = 16.0f;
     constexpr float ASPECT_RATIO_DENOM = 9.0f;
-    constexpr int   POOL_SIZE          = 10'000;
+    constexpr int   POOL_SIZE          = 50'000;
 
     constexpr PrefabId   StressObjectPrefabId{"stress_object"};
     constexpr GameObjectPoolId StressPoolId{"stress_pool"};

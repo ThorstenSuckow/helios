@@ -4,8 +4,10 @@
  */
 module;
 
-#include <utility>
+#include <cstddef>
+#include <helios/helios_config.h>
 #include <memory>
+#include <utility>
 
 export module helios.engine.bootstrap;
 
@@ -98,6 +100,10 @@ export namespace helios::engine::bootstrap {
      * gameLoop.init(gameWorld);
      * ```
      *
+     * @param capacity Initial capacity for the EntityManager's SparseSets.
+     *                 Must be large enough to accommodate all entities including
+     *                 pooled clones. Defaults to ENTITY_MANAGER_DEFAULT_CAPACITY.
+     *
      * @return A pair of (GameWorld, GameLoop) unique pointers.
      *
      * @see registerAllComponents
@@ -106,9 +112,11 @@ export namespace helios::engine::bootstrap {
      * @see EngineCommandBuffer
      * @see Session::trackState
      */
-    inline std::pair<std::unique_ptr<GameWorld>, std::unique_ptr<GameLoop>> makeGameWorld() {
+    inline std::pair<std::unique_ptr<GameWorld>, std::unique_ptr<GameLoop>> makeGameWorld(
+        const size_t capacity = ENTITY_MANAGER_DEFAULT_CAPACITY
+    ) {
         auto gameLoop = std::make_unique<helios::engine::runtime::gameloop::GameLoop>();
-        auto gameWorld = std::make_unique<helios::engine::runtime::world::GameWorld>();
+        auto gameWorld = std::make_unique<helios::engine::runtime::world::GameWorld>(capacity);
 
         gameWorld->registerManager<helios::engine::mechanics::lifecycle::WorldLifecycleManager>();
         gameWorld->registerManager<helios::engine::mechanics::gamestate::GameStateManager>(

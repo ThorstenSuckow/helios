@@ -347,6 +347,11 @@ async function main() {
       dest: path.join(websiteRoot, 'docs', 'examples', 'scoring-demo.md'),
       meta: { title: 'Scoring Demo', description: 'Example: Score pools, score observers, UI text rendering, and kill attribution with health/damage mechanics.', slug: '/examples/scoring-demo', tags: ['examples', 'scoring', 'ui', 'gameplay'], keywords: ['helios', 'scoring', 'score pool', 'UI', 'text rendering', 'health', 'damage'], sidebar_label: 'Scoring Demo' }
     },
+    {
+      src: path.join(repoRoot, 'examples', 'runtime_test', 'README.md'),
+      dest: path.join(websiteRoot, 'docs', 'examples', 'runtime-test.md'),
+      meta: { title: 'Runtime Stress Test', description: 'Interactive performance test for measuring framerate impact with dynamic object pooling.', slug: '/examples/runtime-test', tags: ['examples', 'performance', 'pooling', 'stress-test'], keywords: ['helios', 'runtime test', 'stress test', 'object pooling', 'FPS', 'performance', 'ImGui'], sidebar_label: 'Runtime Stress Test' }
+    },
   ];
 
   console.log('[sync-docs] Synchronizing repository documentation...');

@@ -7,6 +7,7 @@ module;
 
 #include <cassert>
 #include <format>
+#include <helios/helios_config.h>
 #include <memory>
 #include <optional>
 #include <span>
@@ -197,8 +198,16 @@ export namespace helios::engine::runtime::world {
          *
          * @details Initializes the EntityManager with the internal EntityRegistry
          * and creates a Session backed by a dedicated GameObject.
+         *
+         * @param capacity Initial capacity for the underlying SparseSets.
+         *                 Must be large enough to accommodate the total number of
+         *                 entities (including pooled clones) to avoid reallocation
+         *                 during cloning. Defaults to ENTITY_MANAGER_DEFAULT_CAPACITY.
          */
-        explicit GameWorld() : em_(helios::engine::ecs::EntityManager(entityRegistry_)), session_(Session(addGameObject())) { };
+        explicit GameWorld(const size_t capacity = ENTITY_MANAGER_DEFAULT_CAPACITY)
+        : em_(helios::engine::ecs::EntityManager(entityRegistry_, capacity)),
+          session_(Session(addGameObject()))
+        {};
 
         /// @brief Non-copyable.
         GameWorld(const GameWorld&) = delete;

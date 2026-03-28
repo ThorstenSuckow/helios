@@ -109,17 +109,19 @@ $(function() {
 
 <p>Engine bootstrap: component registration and GameWorld/GameLoop factory.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;utility&gt;</code><br />
+<div class="textblock"><code>#include &lt;cstddef&gt;</code><br />
+<code>#include &lt;helios/helios_config.h&gt;</code><br />
 <code>#include &lt;memory&gt;</code><br />
+<code>#include &lt;utility&gt;</code><br />
 <code>import <a class="el" href="ecs_2registry_8ixx_source.html">helios.engine.ecs.registry</a>;</code><br />
-<code>import <a class="el" href="mechanics_2registry_8ixx_source.html">helios.engine.mechanics.registry</a>;</code><br />
-<code>import <a class="el" href="helios_2engine_2mechanics_2match_2__module_8ixx_source.html">helios.engine.mechanics.match</a>;</code><br />
 <code>import <a class="el" href="helios_2engine_2mechanics_2gamestate_2__module_8ixx_source.html">helios.engine.mechanics.gamestate</a>;</code><br />
 <code>import <a class="el" href="helios_2engine_2mechanics_2timing_2__module_8ixx_source.html">helios.engine.mechanics.timing</a>;</code><br />
 <code>import <a class="el" href="helios_2engine_2mechanics_2lifecycle_2__module_8ixx_source.html">helios.engine.mechanics.lifecycle</a>;</code><br />
-<code>import <a class="el" href="helios_2engine_2runtime_2messaging_2command_2__module_8ixx_source.html">helios.engine.runtime.messaging.command</a>;</code><br />
-<code>import <a class="el" href="Bindings_8ixx_source.html">helios.engine.state.Bindings</a>;</code><br />
 <code>import <a class="el" href="modules_2registry_8ixx_source.html">helios.engine.modules.registry</a>;</code><br />
+<code>import <a class="el" href="helios_2engine_2runtime_2messaging_2command_2__module_8ixx_source.html">helios.engine.runtime.messaging.command</a>;</code><br />
+<code>import <a class="el" href="mechanics_2registry_8ixx_source.html">helios.engine.mechanics.registry</a>;</code><br />
+<code>import <a class="el" href="helios_2engine_2mechanics_2match_2__module_8ixx_source.html">helios.engine.mechanics.match</a>;</code><br />
+<code>import <a class="el" href="Bindings_8ixx_source.html">helios.engine.state.Bindings</a>;</code><br />
 <code>import <a class="el" href="helios_2engine_2runtime_2world_2__module_8ixx_source.html">helios.engine.runtime.world</a>;</code><br />
 <code>import <a class="el" href="helios_2engine_2runtime_2gameloop_2__module_8ixx_source.html">helios.engine.runtime.gameloop</a>;</code><br />
 </div><div class="textblock"><div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Include dependency graph for bootstrap.ixx:</div>
@@ -142,8 +144,8 @@ Namespaces</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a3257760022dd7b0812185a03fb747d62" id="r_a3257760022dd7b0812185a03fb747d62"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1engine_1_1bootstrap.html#a3257760022dd7b0812185a03fb747d62">helios::engine::bootstrap::registerAllComponents</a> ()</td></tr>
 <tr class="memdesc:a3257760022dd7b0812185a03fb747d62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers all component types with the ComponentReflector.  <br /></td></tr>
-<tr class="memitem:afd4296fe1ce37cb2fc5812d6b87e4118" id="r_afd4296fe1ce37cb2fc5812d6b87e4118"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::unique_ptr&lt; <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">GameWorld</a> &gt;, std::unique_ptr&lt; <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html">GameLoop</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1engine_1_1bootstrap.html#afd4296fe1ce37cb2fc5812d6b87e4118">helios::engine::bootstrap::makeGameWorld</a> ()</td></tr>
-<tr class="memdesc:afd4296fe1ce37cb2fc5812d6b87e4118"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a pre-configured <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html" title="Central game state container for entities, resources, and the active level.">GameWorld</a> and <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html" title="Central orchestrator for the game update cycle.">GameLoop</a> pair.  <br /></td></tr>
+<tr class="memitem:ad48535c507ab77a0517fe6c7641b35af" id="r_ad48535c507ab77a0517fe6c7641b35af"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::unique_ptr&lt; <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">GameWorld</a> &gt;, std::unique_ptr&lt; <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html">GameLoop</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1engine_1_1bootstrap.html#ad48535c507ab77a0517fe6c7641b35af">helios::engine::bootstrap::makeGameWorld</a> (const size_t capacity=ENTITY_MANAGER_DEFAULT_CAPACITY)</td></tr>
+<tr class="memdesc:ad48535c507ab77a0517fe6c7641b35af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a pre-configured <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html" title="Central game state container for entities, resources, and the active level.">GameWorld</a> and <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html" title="Central orchestrator for the game update cycle.">GameLoop</a> pair.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Engine bootstrap: component registration and GameWorld/GameLoop factory. </p>

@@ -27,17 +27,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/bootstrap.ixx" line="54" column="17" bodyfile="/tmp/h/include/helios/engine/bootstrap.ixx" bodystart="54" bodyend="64"/>
+        <location file="/tmp/h/include/helios/engine/bootstrap.ixx" line="56" column="17" bodyfile="/tmp/h/include/helios/engine/bootstrap.ixx" bodystart="56" bodyend="66"/>
         <references refid="namespacehelios_1_1engine_1_1ecs_1a46def7b8919354ac4b12a5cff7ed1793" compoundref="ecs_2registry_8ixx" startline="17" endline="21">helios::engine::ecs::registerComponents</references>
         <references refid="namespacehelios_1_1engine_1_1mechanics_1a2b966e819ea3d411b6ca89097a5c855f" compoundref="mechanics_2registry_8ixx" startline="22" endline="30">helios::engine::mechanics::registerComponents</references>
         <references refid="namespacehelios_1_1engine_1_1modules_1a6fc7ad052bdd868eb05e85478cd7d720" compoundref="modules_2registry_8ixx" startline="22" endline="30">helios::engine::modules::registerComponents</references>
       </memberdef>
-      <memberdef kind="function" id="namespacehelios_1_1engine_1_1bootstrap_1afd4296fe1ce37cb2fc5812d6b87e4118" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="namespacehelios_1_1engine_1_1bootstrap_1ad48535c507ab77a0517fe6c7641b35af" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>std::pair&lt; std::unique_ptr&lt; GameWorld &gt;, std::unique_ptr&lt; GameLoop &gt; &gt;</type>
         <definition>std::pair&lt; std::unique_ptr&lt; GameWorld &gt;, std::unique_ptr&lt; GameLoop &gt; &gt; helios::engine::bootstrap::makeGameWorld</definition>
-        <argsstring>()</argsstring>
+        <argsstring>(const size_t capacity=ENTITY_MANAGER_DEFAULT_CAPACITY)</argsstring>
         <name>makeGameWorld</name>
         <qualifiedname>helios::engine::bootstrap::makeGameWorld</qualifiedname>
+        <param>
+          <type>const size_t</type>
+          <declname>capacity</declname>
+          <defval>ENTITY_MANAGER_DEFAULT_CAPACITY</defval>
+        </param>
         <briefdescription>
 <para>Creates a pre-configured <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> and <ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop" kindref="compound">GameLoop</ref> pair. </para>
         </briefdescription>
@@ -51,10 +56,19 @@
 <para>The caller receives ownership via `unique_ptr` and is responsible for registering Managers, configuring phases/passes, calling `GameWorld::init()` and `GameLoop::init()`, and driving the main loop.</para>
 <para>## Usage</para>
 <para>```cpp <ref refid="namespacehelios_1_1engine_1_1bootstrap_1a3257760022dd7b0812185a03fb747d62" kindref="member">helios::engine::bootstrap::registerAllComponents()</ref>;</para>
-<para>auto [gameWorldPtr, gameLoopPtr] = <ref refid="namespacehelios_1_1engine_1_1bootstrap_1afd4296fe1ce37cb2fc5812d6b87e4118" kindref="member">helios::engine::bootstrap::makeGameWorld()</ref>; auto&amp; gameWorld = *gameWorldPtr; auto&amp; gameLoop = *gameLoopPtr;</para>
+<para>auto [gameWorldPtr, gameLoopPtr] = <ref refid="namespacehelios_1_1engine_1_1bootstrap_1ad48535c507ab77a0517fe6c7641b35af" kindref="member">helios::engine::bootstrap::makeGameWorld()</ref>; auto&amp; gameWorld = *gameWorldPtr; auto&amp; gameLoop = *gameLoopPtr;</para>
 <para>// Application-specific setup gameWorld.registerResource&lt;SpawnManager&gt;(); gameLoop.phase(PhaseType::Pre) .addPass&lt;GameState&gt;(GameState::Any) .addSystem&lt;InputSystem&gt;();</para>
 <para>gameWorld.init(); gameLoop.init(gameWorld); ```</para>
-<para><simplesect kind="return"><para>A pair of (<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref>, <ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop" kindref="compound">GameLoop</ref>) unique pointers.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>capacity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Initial capacity for the EntityManager&apos;s SparseSets. Must be large enough to accommodate all entities including pooled clones. Defaults to ENTITY_MANAGER_DEFAULT_CAPACITY.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A pair of (<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref>, <ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop" kindref="compound">GameLoop</ref>) unique pointers.</para>
 </simplesect>
 <simplesect kind="see"><para><ref refid="namespacehelios_1_1engine_1_1bootstrap_1a3257760022dd7b0812185a03fb747d62" kindref="member">registerAllComponents</ref> </para>
 </simplesect>
@@ -70,7 +84,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/bootstrap.ixx" line="109" column="22" bodyfile="/tmp/h/include/helios/engine/bootstrap.ixx" bodystart="109" bodyend="126"/>
+        <location file="/tmp/h/include/helios/engine/bootstrap.ixx" line="115" column="22" bodyfile="/tmp/h/include/helios/engine/bootstrap.ixx" bodystart="115" bodyend="134"/>
         <references refid="classhelios_1_1engine_1_1mechanics_1_1gamestate_1_1rules_1_1DefaultGameStateTransitionRules_1a045b490732bb66a724701bf0c53be95b" compoundref="DefaultGameStateTransitionRules_8ixx" startline="111" endline="113">helios::engine::mechanics::gamestate::rules::DefaultGameStateTransitionRules::rules</references>
         <references refid="classhelios_1_1engine_1_1mechanics_1_1match_1_1rules_1_1DefaultMatchStateTransitionRules_1a512eaecc58780e2254ae40096e27237c" compoundref="DefaultMatchStateTransitionRules_8ixx" startline="140" endline="142">helios::engine::mechanics::match::rules::DefaultMatchStateTransitionRules::rules</references>
       </memberdef>
@@ -79,6 +93,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/tmp/h/include/helios/engine/bootstrap.ixx" line="10" column="15"/>
+    <location file="/tmp/h/include/helios/engine/bootstrap.ixx" line="12" column="15"/>
   </compounddef>
 </doxygen>

@@ -7,14 +7,14 @@
 \end{displayquote}
 \vspace{25mm}
 
-Die in der Einleitung dieses Dokuments formulierten Kernanforderungen (siehe Abschnitt~\ref{sec:einleitung}) wurden mit Meilenstein 5 in der \textit{Scoring Demo} umgesetzt; offen geblieben sind grafische Effekte, die das \textit{Game Feel} zusätzlich aufwerten.\\
+Die in der Einleitung dieses Dokuments formulierten Kernanforderungen (siehe Abschnitt~\ref{sec:einleitung}) wurden mit Meilenstein 5 in der \textit{Scoring Demo} umgesetzt; offen geblieben sind lediglich grafische Effekte, die das \textit{Game Feel} zusätzlich aufwerten sollten.\\
 
-Im Folgenden geben wir einen Überblick über die Umsetzung des Spielkonzepts und Messungen der geforderten Lastkriterien.
+Im Folgenden geben wir einen Überblick über die Umsetzung des Spielkonzepts und die Messungen der geforderten Lastkriterien.
 
 \subsection*{Umgesetztes Spielkonzept}
 Die \textit{Scoring Demo} zählt nach dem Start des Spiels einen Countdown von 3 Minuten herunter.
 Der Spieler beginnt mit 3 Leben und muss in dieser Zeit versuchen, einen möglichst hohen Punktestand zu erreichen.
-Hierbei besteht die Schwierigkeit nicht bloß darin, sich geschickt einen Pfad durch die Gegnerwellen zu bahnen - sie wird auch durch verschiedene physikalische Effekte der Schiffsteuerung erhöht:
+Hierbei besteht die Schwierigkeit nicht bloß darin, sich geschickt einen Pfad durch die Gegnerwellen zu bahnen - sie wird zusätzlich durch verschiedene physikalische Effekte der Schiffsteuerung erhöht:
 Die Geschwindigkeit beeinflusst im Zusammenhang mit der Masse des Schiffs die Manövrierfähigkeit, so dass Richtungswechsel einer gewissen vorausschauenden Planung bedürfen.
 
 In diesem Zusammenhang wurde die Kamera entgegen einer früheren Phase nicht mehr an den Spieler gekoppelt, sondern beobachtet die Spielwelt nun statisch von oben, um die durch die Trägheitsmomente des Spielerschiffs erschwerte Steuerung zu kompensieren.
@@ -31,22 +31,21 @@ Ist die Zeit abgelaufen, endet das Spiel.
 Der Spieler erhält dann die Möglichkeit, das Spiel zu beenden und in den Titelbildschirm zurückzukehren oder den Lauf zu wiederholen.
 Gleiches gilt für den Fall, dass der Spieler alle Leben verliert.
 
-Um die durch Trägheit der Schiffssteuerung und der langsamen Feuerrate entstehende Schwierigkeit zu kompensieren, wird ein identischer \textit{Seed} für alle Pseudo-Zufallszahlengeneratoren über alle Läufe hinweg genutzt.
-Damit erhält der Spieler die Möglichkeit, Spawnpositionierung und Bewegungsabläufe der Gegner zu erlernen und sich so auf die Herausforderung einzustellen.\\
+Um die durch die Trägheit der Schiffssteuerung und die langsame Feuerrate entstehende Schwierigkeit zu kompensieren, wird für alle Pseudo-Zufallszahlengeneratoren über sämtliche Läufe hinweg ein identischer \textit{Seed} verwendet.
+Damit erhält der Spieler die Möglichkeit, Spawnpositionen und Bewegungsabläufe der Gegner zu erlernen und sich so auf die Herausforderung einzustellen.
 
 \subsection*{Umgesetzte Lastkriterien}
-Die Anforderungen bezüglich der Lastkriterien wurden im ursprünglichen Dokument eher allgemein formuliert und haben mit dem Kriterium ``Stabile Framerate von mindestens 60 FPS bei gleichzeitiger Darstellung von über hundert Gegnern und Objekten'' viel Spielraum bei der Umsetzung gelassen; die Anforderungen konnten jedoch auf den Testsystemen erfüllt werden (siehe Abbildung~\ref{fig:fps_balkengrafik}).\\
+Die Anforderungen bezüglich der Lastkriterien wurden im ursprünglichen Dokument eher allgemein formuliert und haben mit dem Kriterium ``Stabile Framerate von mindestens 60 FPS bei gleichzeitiger Darstellung von über hundert Gegnern und Objekten'' viel Spielraum bei der Umsetzung gelassen; insgesamt konnten die Anforderungen auf den Testsystemen deutlich erfüllt werden (siehe Abbildung~\ref{fig:fps_balkengrafik}).\\
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=1.0\columnwidth]{content/de/ergebnis/img/fps_balkengrafik}
     \caption{
-        Vergleich der FPS auf zwei unterschiedlichen Testsystemen \textit{AMD Ryzen 9 9950X3D, 64\,GB RAM, NVIDIA GeForce RTX 5090} sowie \textit{Intel Core i7-8750H, 16\,GB RAM, NVIDIA GeForce GTX 1070 Max-Q}.
-        Auf dem schwächeren Testsystem erfolgen Framerateeinbrüche auf unter 60 FPS ab ungefähr $2500$ gleichzeitig dargestellten Objekten.
+        Vergleich der FPS auf zwei unterschiedlichen Testsystemen: \textit{AMD Ryzen 9 9950X3D, 64\,GB RAM, NVIDIA GeForce RTX 5090} sowie \textit{Intel Core i7-8750H, 16\,GB RAM, NVIDIA GeForce GTX 1070 Max-Q}.
+        Auf dem schwächeren Testsystem treten Framerateeinbrüche auf unter 60 FPS ab ungefähr $2\,500$ gleichzeitig dargestellten Objekten auf. (Quelle: eigene Darstellung)
     }
     \label{fig:fps_balkengrafik}
 \end{figure}
-
 
 Die Validierung erfolgte über die mit Meilenstein 5 veröffentlichte \textit{Runtime Test Demo}, die eine spezielle Spielszene darstellt (siehe Abbildung~\ref{fig:lastkriterien}):
 Über einen vorkonfigurierten \textit{GameObject}-Pool mit einer Größe von $50\,000$ Objekten kann über einen Schieberegler die Anzahl der gleichzeitig darzustellenden Objekte ausgewählt werden.
@@ -77,29 +76,28 @@ Die Objekte werden über den \texttt{RandomSpawnPlacer} und den \texttt{MoveInit
         \includegraphics[width=\linewidth]{content/de/ergebnis/img/go50000}
     \end{subfigure}
 
-    \caption{Darstellung unterschiedlicher Anzahlen von Spielobjekten und ihrer Auswirkung auf die Performance, bei $2500$, $5000$, $25\,000$ und $50\,000$ gleichzeitig dargestellten Objekten (von oben links im Uhrzeigersinn, Testsystem Ryzen AMD 9950X3D, GeForce RTX 5090).
-    Der dargestellte ``CPU Work``-Wert schließt bei der Messung die CPU- und GPU-Zeit mit ein.
-    Aber ca. $4500$ Objekten sinkt die Framerate auf unter 120 FPS.
-    Bei $10\,000$ Objekten wird noch eine Framerate von über $60$ FPS erzielt, was die Anforderungen in diesem Kontext deutlich übertrifft.
+    \caption{
+        Darstellung unterschiedlicher Anzahlen von Spielobjekten und ihrer Auswirkung auf die Performance bei $2\,500$, $5\,000$, $25\,000$ und $50\,000$ gleichzeitig dargestellten Objekten (von oben links im Uhrzeigersinn; Testsystem AMD Ryzen 9 9950X3D, GeForce RTX 5090).
+        Der dargestellte ``CPU Work``-Wert schließt in der vorliegenden Messung CPU- und GPU-Zeit mit ein.
+        Ab etwa $4\,500$ Objekten sinkt die Framerate auf unter 120 FPS.
+        Bei $10\,000$ Objekten wird weiterhin eine Framerate von über 60 FPS erzielt, womit die Anforderungen in diesem Szenarium deutlich übertroffen werden. (Quelle: eigene Aufnahme)
     }
     \label{fig:lastkriterien}
 \end{figure}
 
-Auf dem leistungsfähigen Testsystem (AMD Ryzen 9 9950X3D, 64\,GB RAM, Asus ROG Astral GeForce RTX 5090) konnten Framerateeinbrüche auf unter 60 FPS ab etwa $10\,000$ Spielobjekten festgestellt werden.
+Auf dem leistungsfähigen Testsystem (AMD Ryzen 9 9950X3D) konnten Framerateeinbrüche auf unter 60 FPS erst jenseits einer Größenordnung von etwa $10\,000$ Spielobjekten festgestellt werden.
 Hierbei ist zu beachten, dass Optimierungen der Engine hauptsächlich CPU-seitig durch die in Abschnitt~\ref{sec:ecs} beschriebene ECS-Architektur ansetzen und keine Optimierungen hinsichtlich der GPU-Auslastung erfolgen:
 Es findet kein GPU-Instancing statt; stattdessen werden für alle $N$ dargestellten Spielobjekte auch $N$ Draw Calls ausgeführt.
-Dieser \textit{draw-call-bound} könnte durch \textit{Batching} kompensiert werden, damit die Ansteuerung des Grafik-Backends (hier: OpenGL) nicht zum Flaschenhals wird~\cite{Ceb04}.
-Außerdem werden die \textit{Uniform Values} bei jedem \textit{Draw Call} gesetzt; auch hier bietet sich Optimierungspotenzial an, da einige Werte pro Frame global wiederverwendet werden können.\\
+Dieser \textit{Draw-Call-Bound} könnte durch \textit{Batching} reduziert werden, damit die Ansteuerung des Grafik-Backends (hier: OpenGL) nicht zum Flaschenhals wird~\cite{Ceb04}.
+Außerdem setzt die derzeitige Implementierung die \textit{Uniform Values} bei jedem \textit{Draw Call} erneut; auch hier bietet sich Optimierungspotenzial an, da einige Werte pro Frame global wiederverwendet werden können.\\
 
-Ein weiterer Flaschenhals existiert bei dem \textit{Scene Graph}: So konnten wir durch Tests nachweisen, dass ein Befüllen des \textit{GameObject}-Pools mit $100\,000$ Prefabs zu deutlichen Einbrüchen der Framerate führt, während noch keine Objekte auf dem Bildschirm dargestellt werden.
-Dies ist auf den Umstand zurückzuführen, dass diese Objekte in den Szenegraph eingehangen werden und während der Programmausführun durchiteriert werden müssen, um die Teilnahme der Objekte im Rendering-Prozess zu bestimmen, was den in Abschnitt~\ref{sec:ecs} nachgewiesenen Laufzeitvorteil durch die ECS-Architektur relativiert.
-Auch hier bietet sich Optimierungspotential an, beispielsweise durch die Migration des Szene Graphen hin zu einem für die ECS-Architektur idiomatischeren Ansatz, oder der Speicherung nichtaktiver Szene-Knotene in einem separaten Container, damit die Iteration über die tatsächlich aktiven Objekte beschleunigt werden kann.
-Auch das \textit{Frustum Culling}~\cite[830]{AHHP+18} von Objekten sollte in späteren Iterationen berücksichtigt werden - momentan kommt es nicht zum Tragen, da die Spielszene in ihrer Gesamtheit dargestellt wird.\\
-
-
+Ein weiterer Flaschenhals existiert im \textit{Scene Graph}: So konnten wir durch Tests nachweisen, dass ein Befüllen des \textit{GameObject}-Pools mit $100\,000$ Prefabs zu deutlichen Einbrüchen der Framerate führt, obwohl noch keine Objekte auf dem Bildschirm dargestellt werden.
+Dies ist darauf zurückzuführen, dass diese Objekte in den Szenegraphen eingehängt werden und während der Programmausführung durchiteriert werden müssen, um ihre Teilnahme am Rendering-Prozess zu bestimmen, was den in Abschnitt~\ref{sec:ecs} nachgewiesenen Laufzeitvorteil durch die ECS-Architektur teilweise relativiert.
+Auch hier bietet sich Optimierungspotenzial an, beispielsweise durch die Migration des Szenegraphen hin zu einem für die ECS-Architektur idiomatischeren Ansatz oder durch die Speicherung nichtaktiver Szeneknoten in einem separaten Container, damit die Iteration über die tatsächlich aktiven Objekte beschleunigt werden kann.
+Auch das \textit{Frustum Culling}~\cite[830]{AHHP+18} von Objekten sollte in späteren Iterationen berücksichtigt werden; momentan kommt es nicht zum Tragen, da die Spielszene in ihrer Gesamtheit dargestellt wird.\\
 
 \subsection*{Aufwertung des Game Feel durch grafische Effekte}
 Mit der Konzentration auf die Umsetzung der Kernmechaniken und -features wurde die Anforderung zur zusätzlichen Aufwertung des \textit{Game Feel} durch grafische Effekte nicht umgesetzt.
-Hier ist der Einsatz von Partikeleffekten bei Kollisionen denkbar, und einer gleichzeitigen Verformung des Grids.
+Hier ist der Einsatz von Partikeleffekten bei Kollisionen sowie eine gleichzeitige Verformung des Grids denkbar.
 Damit könnten die Auswirkungen der Spielmechaniken auf die Spielwelt visualisiert werden.
-Auch optische Hinweise, wie beispielsweise ein Blinken des Spielerschiffs, während die Kollisionskomponente nach einem Respawn für einige Zeit deaktiviert ist, würde das Gameplay aufwerten.
+Auch optische Hinweise, wie beispielsweise ein Blinken des Spielerschiffs, während die Kollisionskomponente nach einem Respawn für einige Zeit deaktiviert ist, würden das Gameplay aufwerten.

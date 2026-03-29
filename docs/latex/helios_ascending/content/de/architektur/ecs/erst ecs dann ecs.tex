@@ -1,22 +1,23 @@
 \textit{helios} begann mit einem klassischen, objektorientierten Ansatz.
-Erst mit zunehmender Komplexität des Projekts und der dadurch wachsenden Anzahl zu organisierender Komponenten und Systeme wurde das \textit{Compound Object}-Design mit seinem \textit{Array-of-Structures}-Layout, das ein \texttt{GameObject} noch in Meilenstein 4 folgte, zugunsten eines datenorientierten Ansatzes ersetzt.
-Dieser basiert auf dem \textit{Structure-of-Arrays}-Layout (\textit{SoA}~\cite[162]{Fab18}) und ist in Abbildung~\ref{fig:ecs_evolution} der ursprünglichen Lösung gegenübergestellt.\\
+Erst mit zunehmender Komplexität des Projekts und der dadurch wachsenden Anzahl zu organisierender Komponenten und Systeme wurde das Compound Object mit seinem \textit{Array-of-Structures}-Layout, das ein \texttt{GameObject} noch in Meilenstein 4 darstellte, zugunsten eines datenorientierten Ansatzes ersetzt: Dieser basiert auf dem \textit{Structure-of-Arrays}-Layout (\textit{SoA}~\cite[162]{Fab18}) und ist in Abbildung~\ref{fig:ecs_evolution} der ursprünglichen Lösung gegenübergestellt.\\
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=1.0\textwidth]{content/de/architektur/ecs/img/ecs_evolution}
-    \caption{Konzeptionelle Darstellung der Evolution des \texttt{GameObject} als \textit{Compound Object} (oben) hin zu einem datenorientierten Ansatz in Meilenstein 5 (unten). Die obere Darstellung verdeutlicht die Vermengung der Verantwortlichkeiten von Speichern, Verwalten und Zugriff auf die \textit{GameObjects} sowie deren Komponenten. Mit der Einführung der ECS-Architektur konnte die Struktur in ein performantes Modell entkoppelt werden. (Quelle: eigene Darstellung)}
+    \caption{Konzeptionelle Darstellung der Evolution des \texttt{GameObject} als Compound Object (oben) hin zu einem datenorientierten Ansatz in Meilenstein 5 (unten). Die obere Darstellung verdeutlicht die Vermengung der Verantwortlichkeiten von Speichern, Verwalten und Zugriff auf die GameObjects sowie deren Komponenten. Mit der Einführung der ECS-Architektur konnte die Struktur in ein performantes Modell entkoppelt werden. (Quelle: eigene Darstellung)}
     \label{fig:ecs_evolution}
 \end{figure}
 
-Umfassende Anwendung findet der SoA-Ansatz in \textit{Entity Component Systems} (ECS).
+Umfassende Anwendung findet der SoA-Ansatz in \textit{Entity Component Systems}.\footnote{
+    Bei Gregory findet sich dieser Ansatz unter dem Begriff~\textit{property-centric view}~\cite[S. 1058]{Gre19}
+}
 Hier wird eine Entität als theoretisches Konzept behandelt und ist im Code ein virtuelles Aggregat aus $N$ verschiedenen Komponenten, die in nach Komponententypen gruppierten Arrays gespeichert werden.
 Der abstrahierende Archetyp löst sich damit zunächst in eine lose erscheinende Ansammlung unterschiedlicher Komponenten auf.
 Erst das ECS-\textit{System} ermöglicht eine konzeptuelle Integration der sich aus diesen Beziehungen ergebenden Fachlichkeit und Verantwortlichkeit.
 
 \vspace{5mm}
 \begin{tcolorbox}[title={Abgrenzung des ECS-Begriffs}, colback=black!5, colframe=black]
-    Als weitere Abgrenzung zu dem in Abschnitt~\ref{sec:meilenstein_3} eingeführten \textit{Compound Object} weisen wir an dieser Stelle auf \textit{Fabian} hin, der in~\cite[84]{Fab18} erklärt, dass bereits ein \textit{Compound Object}, das dem \textit{composition over inheritance}-Prinzip folgt und seine Eigenschaften in einer AoS-Struktur speichert, als ECS bezeichnet werden kann.
+    Als weitere Abgrenzung zu dem in Abschnitt~\ref{sec:meilenstein_3} eingeführten Compound Object weisen wir an dieser Stelle auf \textit{Fabian} hin, der in~\cite[84]{Fab18} erklärt, dass bereits ein Compound Object, das dem \textit{Composition over Inheritance}-Prinzip folgt und seine Eigenschaften in einer AoS-Struktur speichert, als ECS bezeichnet werden kann.
     Wir verwenden den Begriff im Folgenden jedoch im Kontext eines SoA-Layouts: Dies impliziert auch die Anforderung, die Daten für verschiedene Zugriffsarten effizient im Speicher anzuordnen, und geht damit über die reine Konzeption von Objekten und Eigenschaften hinaus.
 \end{tcolorbox}
 \vspace{5mm}
@@ -35,15 +36,19 @@ Ziel ist es, alle Systeme, die innerhalb eines Frames angesteuert werden, ohne V
 
 \subsubsection{Sparse Sets als Speicherlayout-Strategie}
 
-Prozessoren moderner Computersysteme verfügen über den CPU-nahen Level-$n$-Cache, auf den etwa 10- bis 100-mal schneller zugegriffen werden kann als auf den Hauptspeicher~\cite[S.~5]{Man20}~\cite[79]{HP17}.
+Prozessoren moderner Computersysteme verfügen über CPU-nahen Caches\footnote{
+    Unterteilt in sogenannte \textit{Level} (L1, L2, L3), um Cache-Hierarchien abzubilden.
+    Diese unterscheiden sich vor allem in der Zugriffsgeschwindigkeit.
+}, auf die etwa 10- bis 100-mal schneller zugegriffen werden kann als auf den Hauptspeicher~\cite[S.~5]{Man20}~\cite[79]{HP17}.
 Der Cache dient als Speicher für Daten, auf die eine CPU während der Programmausführung häufig zugreifen muss.
-Dies erfolgt in Form zusammenhängender Speicheradressen - sogenannter \textit{Cache Lines}, die typischerweise 32 bis 64 Byte große Blöcke umfassen~\cite[531]{TB23}.
+Dies erfolgt in Form zusammenhängender Speicheradressen, sogenannter \textit{Cache Lines}, die typischerweise 32 bis 64 Byte große Blöcke umfassen~\cite[531]{TB23}.
 Gelingt es, konzeptionell zusammenhängende Daten auch in physisch zusammenhängenden Speicheradressen abzulegen, profitiert ein Programm von diesen dichten (\textit{dense}) Layouts.
-Dem liegt die allgemeine Hypothese zugrunde, dass ein Programm, das auf Daten an Speicheradresse $0\times01$ zugreift, in einem darauffolgenden Verarbeitungsschritt auf zusammenhängende Daten an $0\times02$ zugreifen wird.
-Durch geschickte Speicherlayouts können performancekritische Anwendungen unnötige Zugriffe auf den Hauptspeicher vermeiden.
-Diese um Größenordnungen langsameren Zugriffe erfolgen dann, wenn ein angefordertes Speicherwort nicht im Cache gefunden wird und dadurch ein \textit{Cache Miss} ausgelöst wird.
+Dem liegt die allgemeine Hypothese zugrunde, dass ein Programm, das auf Daten an Speicheradresse $0\times01$ zugreift, in einem darauffolgenden Verarbeitungsschritt auf zusammenhängende Daten an Adresse $0\times02$ zugreifen wird.
 
-Erste Iterationen von \textit{helios} begünstigten diese \textit{Cache Misses}, da die \texttt{GameWorld} die enthaltenen \textit{GameObjects} als
+Durch geschickte Speicherlayouts können performancekritische Anwendungen unnötige Zugriffe auf den Hauptspeicher vermeiden.
+Diese um Größenordnungen langsameren Zugriffe erfolgen dann, wenn ein angefordertes Speicherwort nicht im Cache gefunden  und dadurch ein \textit{Cache Miss} ausgelöst wird.\\
+
+Erste Iterationen von \textit{helios} begünstigten diese \textit{Cache Misses}, da die \texttt{GameWorld} die enthaltenen GameObjects über
 
 \begin{verbatim}
     std::vector<std::unique_ptr<GameObject>>
@@ -51,18 +56,18 @@ Erste Iterationen von \textit{helios} begünstigten diese \textit{Cache Misses},
 
 \noindent
 verwaltete.
-Ein \texttt{GameObject} wiederum verwaltete die assoziierten Komponenten analog über
+Ein \texttt{GameObject} wiederum verwaltete seine assoziierten Komponenten analog über
 \begin{verbatim}
     std::vector<std::unique_ptr<Component>>
 \end{verbatim}
 
 \noindent
-Iteriert ein System über alle \textit{GameObjects}, um eine bestimmte Komponenteninstanz vom Typ $\mathcal{T}$ zu aktualisieren, muss das System über alle Objekte laufen und gleichzeitig einen teuren RTTI-Cast auf den Komponententyp $\mathcal{T}$ ausführen.
-Für den performancekritischen \textit{Hot Path} entstehen zudem durch das \textit{Pointer Chasing} (\texttt{world} $\rightarrow$ \texttt{gameobject} $\rightarrow$ \texttt{component})~\cite{HKSN+16} unverhältnismäßig teure Operationen (siehe Listing~\ref{lst:gameobject_cache_miss}).
+Iteriert nun ein System über alle GameObjects, um eine bestimmte Komponenteninstanz vom Typ $\mathcal{T}$ zu aktualisieren, muss das System über alle Objekte laufen und gleichzeitig einen teuren \textit{run-time type information}-Cast (\textit{RTTI}-Cast) auf den Komponententyp $\mathcal{T}$ ausführen.
+Für den performancekritischen \textit{Hot Path} entstehen zudem durch \textit{Pointer Chasing} (\texttt{world} $\rightarrow$ \texttt{gameobject} $\rightarrow$ \texttt{component})~\cite{HKSN+16} unverhältnismäßig teure Operationen (siehe Listing~\ref{lst:gameobject_cache_miss}).
 
 \vspace{5mm}
 \begin{lstlisting}[style=c++style,
-caption={Codebeispiel für die Iteration über alle \textit{GameObjects}, um Komponenten eines bestimmten Typs $\mathcal{T}$ zu finden (Meilenstein 3). Die Implementierung begünstigt \textit{Cache Misses}, da die angefragten Daten nicht in zusammenhängenden Speicherbereichen liegen.},
+caption={Codebeispiel für die Iteration über alle GameObjects, um Komponenten eines bestimmten Typs $\mathcal{T}$ zu finden (Meilenstein 3). Die Implementierung begünstigt \textit{Cache Misses}, da die angefragten Daten nicht in zusammenhängenden Speicherbereichen liegen.},
 label=lst:gameobject_cache_miss]
 for (auto& go : gameWorld.gameObjects()) {
     if (go->guid() != guid) {
@@ -77,34 +82,32 @@ for (auto& go : gameWorld.gameObjects()) {
 \end{lstlisting}
 \vspace{5mm}
 
-In \textit{helios} nutzt die finale Implementierung des ECS-Systems den \texttt{EntityManager}.
-Dieser verwaltet einen Vektor mit Zeigern auf \textit{Sparse Sets}, die gemäß dem SoA-Ansatz jeweils Komponenten eines Typs $\mathcal{T}$ vorhalten.
-Da Komponenten ausschließlich in \textit{Sparse Sets} gespeichert werden, ergibt sich eine dichte Anordnung der komponententypspezifischen Arrays.
-Der Zugriff auf ein \textit{Sparse Set}, das den Komponententyp $\mathcal{T}$ repräsentiert, erfolgt in konstanter Zeit $O(1)$:
+In \textit{helios} nutzt das ECS-System den \texttt{EntityManager}, der einen Vektor mit Zeigern auf Sparse Sets verwaltet, die gemäß dem SoA-Ansatz jeweils Komponenten eines Typs $\mathcal{T}$ vorhalten.
+Da Komponenten ausschließlich in diesen Strukturen gespeichert werden, ergibt sich eine dichte Anordnung innerhalb dieser komponententypspezifischen Arrays.
+Der Zugriff auf ein solches \textit{Sparse Set}, das den Komponententyp $\mathcal{T}$ repräsentiert, erfolgt in konstanter Zeit $\mathcal{O}(1)$:
 
 \begin{verbatim}
-auto* sparseSet = EntityManager::getSparseSet<A>()
+auto* sparseSet = EntityManager::getSparseSet<T>()
 \end{verbatim}
 
 \noindent
-Das übergebene Template-Argument wird intern über einen entsprechenden \texttt{TypeIndex} in einen \texttt{size\_t}-Wert umgewandelt.
+Das übergebene Template-Argument wird dabei intern über einen entsprechenden \texttt{TypeIndex} in einen \texttt{size\_t}-Wert umgewandelt.
 Insgesamt kann damit die oben dargestellte Implementierung wie in Listing~\ref{lst:gameobject_component_access} vereinfacht werden.
 
 \vspace{5mm}
 \begin{lstlisting}[style=c++style,
-caption={Zugriff auf eine Komponente eines \textit{GameObjects} mit der ECS-Implementierung in \textit{helios} (Meilenstein 5).},
+caption={Zugriff auf eine Komponente eines GameObjects mit der ECS-Implementierung in \textit{helios} (Meilenstein 5).},
 label=lst:gameobject_component_access]
 auto gameObject = gameWorld.find(entityHandle);
 if (!gameObject) {
     return nullptr;
 }
-return gameObject->get<A>();
+return gameObject->get<T>();
 \end{lstlisting}
 \vspace{5mm}
 
-Unter der Annahme, dass fortlaufende Speicherbereiche im Cache vorgehalten werden, kann auch der Zugriff während einer Iteration über Komponenten beschleunigt werden.
-Dies ist gerade bei Game-Engines in der \textit{GameLoop} von Bedeutung, wenn tausende Entitäten in einem Frame aktualisiert werden müssen (\textit{Hot Path}).
-Typisch ist dies unter anderem für Physiksysteme, die die Translation der beteiligten Objekte anhand einer \texttt{TransformComponent} aktualisieren.
+Da fortlaufende Speicherbereiche im Cache vorgehalten werden, kann auch die Iteration über Komponenten gleichen Typs beschleunigt werden.
+Dies ist gerade bei Game-Engines von Bedeutung, wenn tausende Objekte im Hot Path aktualisiert werden müssen, beispielsweise bei Physiksystemen, die die Translationen beteiligter Objekte anhand ihrer jeweiligen \texttt{TransformComponent} aktualisieren.
 
 \vspace{5mm}
 \begin{lstlisting}[style=c++style,
@@ -117,11 +120,22 @@ for (auto& cmp : *components) {
 \end{lstlisting}
 \vspace{5mm}
 
-Zur Realisierung dichter Speicherlayouts wird der oben angesprochene \textit{Dense Type Index} verwendet.
-Dieser ermöglicht in entsprechenden Anwendungsfällen einen elementweisen Zugriff in $O(1)$, während sich dichte Speicherlayouts ergeben, die eine Iteration in $O(N)$ erlauben, wobei $N$ der Anzahl der enthaltenen Komponenten entspricht.
+Zur Realisierung der hierzu notwendigen dichten Speicherlayouts wird innerhalb der Sparse Sets ein \textit{Sparse Array} und ein \textit{Dense Array} verwendet, wobei die Indizes des Sparse Arrays den Ids der eigentlich gespeicherten Objekte entsprechen.
+Ein Eintrag innerhalb des Sparse Arrays enthält den Index des zugehörigen Elements im \textit{Dense Array}, in dem die Nutzdaten - also die Komponente vom Typ $\mathcal{T}$ - gespeichert sind (siehe Abbildung~\ref{fig:sparsedense}).
 
-Mit dem vorherigen Design des \texttt{GameObject} als \textit{Compound Object} ergaben sich statt eines dichten Speicherbereichs viele verstreute Speicherbereiche auf dem Heap.
-Dies ist für die einzelnen Iterationen der \textit{GameLoop} nicht optimal, da bei 120 FPS nur ca.~$8{,}3$\,ms für alle Operationen und Berechnungen der verschiedenen Systeme zur Verfügung stehen, inklusive der Kommunikation mit der GPU.
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.8\columnwidth]{content/de/architektur/ecs/img/sparsedense}
+\caption{Prinzip der Sparse Set-Datenstruktur.
+Oben ist das Sparse Array dargestellt, das Einträge für GameObjects mit der Id $1, 3, 2, 42, 118, 119$ enthält (in dieser Einfügereihenfolge). Die in dem Array gespeicherten Werte entsprechen der Position im Dense Array (unten), an denen die eigentlichen Komponenten des Typs $\mathcal{T}$ gespeichert sind. Um den Speicherbereich in seiner dichten Anordnung auch beim Löschen zu erhalten und teure Move-Operationen zu vermeiden, wird hierbei das letzte Element des Dense Arrays an die Position des gelöschten Elements geschoben. Aufgrund der hierdurch notwendigen Neuzuordnung der Indizes benötigt das Sparse Set auch eine Abbildung von Dense-Indizes zu Sparse-Indizes, um die Änderungen korrekt zu propagieren (hier nicht dargestellt).  (Quelle: eigene Darstellung)}
+\label{fig:sparsedense}
+\end{figure}
+
+
+Dies erlaubt einen elementweisen Zugriff in $\mathcal{O}(1)$ für eine bestimmte Id, und durch die fortlaufende Indexierung ergeben sich die gewünschten dichten Speicherlayouts, die eine Iteration in $\mathcal{O}(N)$ ohne teure RTTI-Casts ermöglichen.\\
+
+Mit dem vorherigen Design des \texttt{GameObject} als Compound Object ergaben sich statt eines dichten Speicherbereichs viele verstreute Speicherbereiche auf dem Heap.
+Dies ist für die einzelnen Iterationen der GameLoop nicht optimal, da bei 120 FPS nur ca.~$8{,}3$\,ms für alle Operationen und Berechnungen der verschiedenen Systeme zur Verfügung stehen, inklusive der Kommunikation mit der GPU.
 
 Die Tabellen~\ref{tab:benchmark_meilenstein3} und~\ref{tab:benchmark_meilenstein5} sowie Abbildung~\ref{fig:benchmark_vergleich} stellen die beiden Implementierungen vergleichend gegenüber.
 Dabei zeigt sich deutlich, dass die SoA-Implementierung besser skaliert, was sich in einem über die verschiedenen Problemgrößen hinweg nahezu konstanten Durchsatz widerspiegelt, während die AoS-Implementierung mit wachsender Anzahl von Entitäten deutlich an Durchsatz verliert.\footnote{
@@ -152,7 +166,7 @@ Dabei zeigt sich deutlich, dass die SoA-Implementierung besser skaliert, was sic
 & 10\,000 & 255,00 & 255,00 & 39,22 \\
 \bottomrule
 \end{tabular}
-\caption{Benchmark-Ergebnisse der AoS-Implementierung (\textit{Compound Object}, Meilenstein~3).}
+\caption{Benchmark-Ergebnisse der AoS-Implementierung (Compound Object, Meilenstein~3).}
 \label{tab:benchmark_meilenstein3}
 \end{table}
 
@@ -196,5 +210,5 @@ Dabei zeigt sich deutlich, dass die SoA-Implementierung besser skaliert, was sic
 
 Insgesamt ist ein ECS somit nicht nur ein Paradigma zur Trennung von Verhalten und Daten, sondern entfaltet seine Stärke vor allem dann, wenn die Daten effizient im Speicher angeordnet werden, wie auch \textit{Cox et al.} in~\cite{CWVW+25} zeigen.\\
 
-Weitere Verfeinerungen von Speicherlayouts können über \textit{Archetypes} oder \textit{Chunks}~\cite{UnityChunks} realisiert werden, um den Zugriff auf häufig benötigte Kombinationen von Komponenten zu beschleunigen.
-Außerdem lassen sich über die Anordnung der Daten innerhalb der Strukturen Optimierungen erreichen, wie Gregory in~\cite[S. 159-161]{Gre19} beschreibt.
+Weitere Verbesserungen des Durchsatzes können über \textit{Archetypes} oder \textit{Chunks}~\cite{UnityChunks} erreicht werden, um den Zugriff auf häufig benötigte Kombinationen von Komponenten zu beschleunigen.
+Außerdem lassen sich über die Anordnung der Daten innerhalb der structs Verfeinerungen des Speicherlayouts erreichen, wie Gregory in~\cite[S. 159-161]{Gre19} beschreibt.

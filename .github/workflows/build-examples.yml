@@ -19,8 +19,12 @@ permissions:
 
 jobs:
   build-examples:
-    name: Build Examples (Windows MSVC)
+    name: Build Examples (Windows MSVC, ${{ matrix.build_type }})
     runs-on: windows-latest
+
+    strategy:
+      matrix:
+        build_type: [Debug, Release]
 
     steps:
       - name: Checkout code
@@ -40,11 +44,11 @@ jobs:
       - name: Setup CMake
         uses: lukka/get-cmake@latest
 
-      - name: Configure CMake (Release)
+      - name: Configure CMake (${{ matrix.build_type }})
         run: |
           $env:PYTHON = (Get-Command python).Path
           cmake -S . -B build `
-            -DCMAKE_BUILD_TYPE=Release `
+            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} `
             -DCMAKE_CXX_STANDARD=23 `
             -DPython3_EXECUTABLE="$env:PYTHON" `
             -DPython_EXECUTABLE="$env:PYTHON"
@@ -52,7 +56,7 @@ jobs:
 
       - name: Build Examples
         run: |
-          cmake --build build --config Release -j
+          cmake --build build --config ${{ matrix.build_type }} -j
         shell: pwsh
 
       - name: Collect Example Binaries and Resources
@@ -69,11 +73,11 @@ jobs:
             # Find and copy the executable for this example
             # Check multiple possible locations
             $possiblePaths = @(
-              "build/bin/Release/${dir}main.exe",
-              "build/bin/Release/${dir}.exe",
-              "build/examples/${dir}/Release/*.exe",
+              "build/bin/${{ matrix.build_type }}/${dir}main.exe",
+              "build/bin/${{ matrix.build_type }}/${dir}.exe",
+              "build/examples/${dir}/${{ matrix.build_type }}/*.exe",
               "build/examples/${dir}/*.exe",
-              "build/examples/Release/${dir}main.exe"
+              "build/examples/${{ matrix.build_type }}/${dir}main.exe"
             )
             
             foreach ($pattern in $possiblePaths) {
@@ -99,7 +103,7 @@ jobs:
           }
           
           # Also collect any loose executables from bin directory
-          $looseExes = Get-ChildItem -Path "build/bin/Release" -Filter "*.exe" -ErrorAction SilentlyContinue
+          $looseExes = Get-ChildItem -Path "build/bin/${{ matrix.build_type }}" -Filter "*.exe" -ErrorAction SilentlyContinue
           if ($looseExes) {
             foreach ($exe in $looseExes) {
               # Check if already copied to a subdirectory
@@ -145,16 +149,16 @@ jobs:
           
           # Create ZIP directly from the examples folder content
           Push-Location artifacts/examples
-          Compress-Archive -Path * -DestinationPath "../../helios-examples-$version-win64.zip"
+          Compress-Archive -Path * -DestinationPath "../../helios-examples-$version-win64-${{ matrix.build_type }}.zip"
           Pop-Location
           
-          Write-Host "Created: helios-examples-$version-win64.zip"
+          Write-Host "Created: helios-examples-$version-win64-${{ matrix.build_type }}.zip"
         shell: pwsh
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: helios-examples-win64
+          name: helios-examples-win64-${{ matrix.build_type }}
           path: helios-examples-*.zip
           retention-days: 30
 

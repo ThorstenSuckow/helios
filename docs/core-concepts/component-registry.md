@@ -140,6 +140,9 @@ Components can implement the following methods:
 | `bool onRemove()` | Called before removal, `false` prevents removal |
 | `void enable()` | Enables the component |
 | `void disable()` | Disables the component |
+| `void onClone(const T&)` | Called after copy construction during cloning |
+| `void onActivate()` | Called when owning GameObject is activated |
+| `void onDeactivate()` | Called when owning GameObject is deactivated |
 
 ## Bootstrap
 

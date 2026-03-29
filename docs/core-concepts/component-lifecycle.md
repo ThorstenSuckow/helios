@@ -48,7 +48,7 @@ concept HasOnRemove = requires(T t) {
 };
 
 template<typename T>
-concept HasToogleable = requires(T t) {
+concept HasToggleable = requires(T t) {
     {t.disable()} -> std::same_as<void>;
     {t.enable()} -> std::same_as<void>;
 };
@@ -139,7 +139,7 @@ public:
 };
 ```
 
-**Important:** Both `enable()` and `disable()` must be implemented together (the `HasToogleable` concept requires both).
+**Important:** Both `enable()` and `disable()` must be implemented together (the `HasToggleable` concept requires both).
 
 ### onClone
 

@@ -1,6 +1,6 @@
 \subsection{GameObject als leichtgewichtige Fassade}\label{sec:gameobject}
 
-Mit dem Refactoring hin zu einem ECS-basierten Ansatz ist das \textit{GameObject} semantisch erhalten geblieben.
+Mit dem Refactoring hin zu einem ECS-basierten Ansatz ist das GameObject semantisch erhalten geblieben.
 Auch als Klasse findet sich das \texttt{GameObject} weiterhin, allerdings wurde seine Implementierung stark angepasst (siehe Abbildung~\ref{fig:gameobject}).\\
 
 \begin{figure}[!htbp]
@@ -47,17 +47,17 @@ Darüber hinaus bietet die Fassade folgende Funktionen:
 
 \begin{itemize}
     \itemsep0.5em
-    \item \texttt{setActive}/\texttt{isActive}: Aktivieren und Deaktivieren eines \textit{GameObjects}.
+    \item \texttt{setActive}/\texttt{isActive}: Aktivieren und Deaktivieren eines GameObjects.
     Beim Deaktivieren wird die \texttt{Active}-Tag-Komponente durch eine \texttt{Inactive}-Tag-Komponente ersetzt (und umgekehrt); vorhandene Hooks der Komponenten werden aufgerufen (siehe Abschnitt~\ref{sec:components}).
-    \textit{GameObjects}, die zusammen mit anderen eine Hierarchie bilden, werden über die \texttt{HierarchyComponent} als \textit{dirty} markiert, damit ein entsprechendes System (\texttt{HierarchyPropagationSystem}) den Aktivierungszustand an alle Nachfahren propagieren kann.
+    GameObjects, die zusammen mit anderen eine Hierarchie bilden, werden über die \texttt{HierarchyComponent} als \textit{dirty} markiert, damit ein entsprechendes System (\texttt{HierarchyPropagationSystem}) den Aktivierungszustand an alle Nachfahren propagieren kann.
     \item \texttt{onAcquire}/\texttt{onRelease}: Ermöglicht eine einfache Integration mit dem \textit{GameObject Pooling} (siehe Abschnitt~\ref{sec:runtime_manager}).
-    Der \texttt{GameObjectPoolManager} ruft die jeweilige Methode beim Entnehmen bzw. Zurücklegen eines Objekts auf; intern erfolgt dann der Aufruf der entsprechenden Hooks, falls implementiert.
+    Der \texttt{GameObjectPoolManager} ruft die jeweilige Methode bei der Entnahme beziehungsweise Rückgabe eines Objekts auf; intern erfolgt dann der Aufruf der entsprechenden Hooks, falls implementiert.
 \end{itemize}
 
 \vspace{5mm}
 \begin{tcolorbox}[title={\texttt{HierarchyComponent}: Hierarchische GameObjects}, colback=black!5, colframe=black]
     Die \texttt{HierarchyComponent} wurde mit dem in Meilenstein 5 benötigten UI-System eingeführt.
-    Die Komponente erlaubt eine vom Szenegraphen unabhängige hierarchische Anordnung von \textit{GameObjects}.
+    Die Komponente erlaubt eine vom Szenegraphen unabhängige hierarchische Anordnung von GameObjects.
     Dadurch kann innerhalb eines Frames auf bereits aktualisierte Daten von Eltern-Entitäten zugegriffen werden, beispielsweise zur Berechnung von Positionsdaten relativ zur Positionierung eines Elternelements.
 \end{tcolorbox}
 \vspace{5mm}

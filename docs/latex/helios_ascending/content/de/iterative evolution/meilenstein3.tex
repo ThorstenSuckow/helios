@@ -3,13 +3,12 @@
 Mit dem für Meilenstein 3 geplanten Funktionsumfang standen die Umsetzung der Spielphysik und der Feuermechaniken im Fokus.\\
 
 Die Anforderungen an Physik- und Waffensysteme machten jedoch schnell deutlich, dass ein klassisch objektorientierter Entwurf zu unerwünscht tiefen Vererbungshierarchien führen würde.
-Im Hinblick auf die angestrebte Performance erschienen die damit verbundenen Laufzeitkosten, insbesondere virtuelle Funktionsaufrufe und die durch das \textit{runtime dispatching} bedingten \textit{VTable-Lookups}~\cite[S. 161-164]{Gre19}~\cite[S. 55]{agnerfog}, mit dem Wunsch nach einer effizienten Implementierung nicht vereinbar.\footnote{
-    Wir verwenden hier explizit den Begriff ``Wunsch``, da die Anforderungen an die Performance im Prototyp-Dokument nicht ausdrücklich formuliert wurden.
-}\\
+Im Hinblick auf die angestrebte Performance erschienen die damit verbundenen Laufzeitkosten, insbesondere virtuelle Funktionsaufrufe und die durch das \textit{runtime dispatching}~\cite{MS94} bedingten \textit{VTable-Lookups}~\cite[S. 161-164]{Gre19}~\cite[S. 55]{agnerfog}, mit dem Wunsch nach einer möglichst effizienten Implementierung nicht vereinbar.\\
 
+\vspace{5mm}
 \begin{lstlisting}[style=c++style,
     caption={
-        Auszug aus dem Interface des \texttt{GameObject} (Stand Meilenstein 2). Die gleichzeitige Verwendung einer spielweltbasierten \texttt{position} und der \texttt{translation} aus dem \textit{SceneGraph} weist bereits auf eine doppelte Zustandsrepräsentation hin. Die inkonsequente Trennung sorgte in späteren Meilensteinen für Synchronisations- und Zuständigkeitskonflikte beim Hinzufügen weiterer transformationsbasierter Systeme.
+        Auszug aus dem Interface des \texttt{GameObject} (Stand Meilenstein 2). Die gleichzeitige Verwendung einer spielweltbasierten \texttt{position} und der \texttt{translation} aus dem Szenengraph weist bereits auf eine doppelte Zustandsrepräsentation hin. Die inkonsequente Trennung sorgte in späteren Meilensteinen für Synchronisations- und Zuständigkeitskonflikte beim Hinzufügen weiterer transformationsbasierter Systeme.
     },
     label=lst:gameobject_v1]
     Transform* transform_;
@@ -17,43 +16,46 @@ Im Hinblick auf die angestrebte Performance erschienen die damit verbundenen Lau
     GameObject& setScale(const vec3f& scale) noexcept;
     GameObject& setRotation(const mat4f& rotation) noexcept;
 \end{lstlisting}
+\vspace{5mm}
 
 Um den Aufwand zu reduzieren und sich im Sinne des \textit{Tracer Bullet Development}~\cite[S. 50-55]{TH20} schrittweise den Anforderungen zu nähern, wurde entschieden, die Physik- und Transformationskomponenten aus dem \texttt{GameObject} zu extrahieren.
-Dieses wurde fortan, dem bereits zitierten \textit{composition-first} Ansatz folgend, als reiner Komponenten-Container aufgefasst und markierte damit den ersten - zunächst unbewussten - Schritt in Richtung eines datenorientierten Ansatzes.
-
-Insgesamt entspricht die Umsetzung hier einem \textit{Compound Object}~\cite[S. 88]{Fab18}, wie es in ähnlicher Form auch in Unity zu finden ist~\cite{UnityGameObject}; mit der ECS-Architektur einhergehende Änderungen dieses Designs werden in Abschnitt~\ref{sec:ecs} beschrieben.
+Dieses wurde fortan, dem bereits zitierten \textit{Composition First}-Ansatz folgend, als reiner Komponenten-Container aufgefasst und markierte damit den ersten Schritt in Richtung eines datenorientierten Ansatzes: Insgesamt entspricht die Umsetzung damit einem \textit{Compound Object}~\cite[S. 88]{Fab18}, wie es in ähnlicher Form auch in Unity zu finden ist~\cite{UnityGameObject}; weitere, mit der ECS-Architektur einhergehende Änderungen dieses Designs werden in Abschnitt~\ref{sec:ecs} beschrieben.
 
 \subsubsection{Steuerung des Verhaltens über Systeme}
 
 
-Physik und Feuermechaniken wurden als eigenständige Systeme betrachtet, die in der \textit{GameLoop} - die zu diesem Zeitpunkt noch als einfache \texttt{while}-Schleife ohne eigene Logik implementiert war - über einen zentralen Aufruf von \texttt{GameWorld::update(float delta)} aktualisiert werden.
-In Meilenstein 3 iterierten diese Systeme über alle \texttt{GameObjects} und prüften das Vorhandensein entsprechender Komponenten (u.\,a. \texttt{ShootComponent}, \texttt{Move2DComponent}) sowie deren Zustand, um diese bei Bedarf zu aktualisieren.\\
-
-Diese Form der Iteration über einen Vektor von \texttt{unique\_ptr}, verbunden mit ständigen Typprüfungen, erwies sich als performancekritisch - eine Laufzeitmessung geben wir in Abschnitt~\ref{sec:ecs} an.\\
+Physik und Feuermechaniken wurden als eigenständige Systeme betrachtet, die in der GameLoop - die zu diesem Zeitpunkt noch als einfache \texttt{while}-Schleife ohne eigene Logik implementiert war - über einen zentralen Aufruf von \texttt{GameWorld::update(float delta)} aktualisiert werden.
+In Meilenstein 3 iterierten diese Systeme über alle \texttt{GameObjects} und prüften das Vorhandensein entsprechender Komponenten (u.\,a. \texttt{ShootComponent}, \texttt{Move2DComponent}) sowie deren Zustand, um diese bei Bedarf zu aktualisieren.\footnote{
+Diese Form der Iteration über einen Vektor von \texttt{unique\_ptr}, verbunden mit ständigen Typprüfungen, erwies sich als performancekritisch - eine Laufzeitmessung geben wir in Abschnitt~\ref{sec:ecs} an.
+}\\
 
 Mit diesem Meilenstein erfolgte auch die Veröffentlichung der \textit{Spaceship Shooting Demo} (siehe Abbildung~\ref{fig:spaceshipshooting}).
-Diese beinhaltete neben einem für \textit{Twin-Stick-Shooter} typischen Steuerungs-Layout auch das in den Anforderungen genannte \textit{Grid}, das als \textbf{visuelle} Referenz für die Schiffsbewegung relativ zum Level dient.
+Diese beinhaltete neben einem für \textit{Twin-Stick-Shooter} typischen Steuerungs-Layout~\cite{GameDeveloperTwinStick} auch das in den Anforderungen genannte \textit{Grid}, das als visuelle Referenz für die Schiffsbewegung relativ zum Level dient.
 Das Grid-Layout orientiert sich an \textit{Geometry Wars 3} (Spielmodus \textit{Evolved Classic}) und besitzt 29 Zellen in $x$-Richtung sowie 19 Zellen in $y$-Richtung.
-Die Größe einer Zelle entspricht der \textit{Bounding Box} des Spielerschiffs und beträgt $5 \times 5$ \textit{helios units}\footnote{$1$ \textit{helios unit} entspricht $1\,\mathrm{m}$.}.
+Die Größe einer Zelle entspricht der \textit{Bounding Box} des Spielerschiffs und beträgt $5 \times 5$ Meter\footnote{
+    Maßeinheiten werden in der Klasse \texttt{helios::core::units::Unit} definiert. So entspricht $1$ \texttt{HELIOS\_SPATIAL\_UNIT} beispielsweise $1\,\mathrm{m}$.
+}.
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=1\columnwidth]{content/de/iterative evolution/img/spaceshipshooting}
     \caption{Screenshot der \textit{Spaceship Shooting Demo} aus Meilenstein 3.
-    In der dargestellten Szene feuert das Spielerschiff (gelbes Dreieck) Projektile.
-    Diese werden über Ellipsen realisiert, die im OpenGL-\texttt{GL\_LINE\_LOOP}-Modus gerendert werden. (Quelle: eigene Aufnahme)}
+    In der dargestellten Szene feuert das Spielerschiff Projektile, die über Ellipsen repräsentiert werden.
+    Das Rendering der geometrischen Primitive erfolgt über den OpenGL-\texttt{GL\_LINE\_LOOP}-Modus. (Quelle: eigene Aufnahme)}
     \label{fig:spaceshipshooting}
 \end{figure}
 
 \subsubsection{Spawn, Despawn und Pooling von Projektilen}
 
-Um die Performance beim Feuern der Projektile zu stabilisieren, wurde ein frühes \textit{Pooling}-Verfahren eingeführt, damit zur Laufzeit keine Heap-Allokationen für die Erstellung neuer Objekte stattfinden müssen~\cite[S. 1074-1079]{Gre24}.
+Um die Performance beim Feuern der Projektile zu stabilisieren, wurde ein frühes \textit{Pooling}-Verfahren eingeführt, damit zur Laufzeit keine \textit{Heap}-Allokationen für die Erstellung neuer Objekte stattfinden müssen~\cite[S. 1074-1079]{Gre24}.
 Ein spezialisiertes \texttt{ProjectilePoolSystem} verwaltet dabei die Lebenszyklen der Projektile:
 Anstatt Objekte bei jedem Schuss neu zu instanziieren und beim Verlassen der Spielwelt zu zerstören, werden despawnte Projektile deaktiviert und für spätere Schussereignisse wiederverwendet.
-Dabei prüft das System in jedem Frame, ob die \textit{LevelBounds} noch die \textit{Axis-Aligned Bounding Box} (\textit{AABB}) eines Projektils einschließen, und entfernt das Projektil nötigenfalls aus der Spielwelt, um es zurück in den Pool zu legen.\\
+Dabei prüft das System in jedem Frame, ob die Bounding Box der Spielwelt noch die \textit{Axis-Aligned Bounding Box} (\textit{AABB}) eines Projektils einschließt.
+Im negativen Fall wird das Projektil entfernt und zurück in den Pool gelegt.\\
 
-Die Logik der \textit{Bounds}-Überprüfung und die Anwendung der gewünschten Reaktion wurde später in das \texttt{LevelBoundsBehavior}-System überführt, das gleichzeitig ein konfigurierbares Verhalten pro \texttt{GameObject} (bzw. \textit{Prefab}) erlaubt, u.\,a. \texttt{Reflect} (mit oder ohne Restitutionskoeffizient), \texttt{Despawn} und \texttt{Stick}.\\
+Die Logik der Bounds-Prüfung und die Anwendung der gewünschten Reaktion wurde später in das \texttt{LevelBoundsBehavior}-System überführt, das gleichzeitig ein konfigurierbares Verhalten pro \texttt{GameObject} berücksichtigt, so zum Beispiel \texttt{Reflect} (mit oder ohne Restitutionskoeffizient), \texttt{Despawn} (wie im hier gezeigten Fall) oder \texttt{Stick} (bleibt am Zielobjekt haften).\\
 
 Das Pooling-Konzept wurde in späteren Iterationen der Engine weiter ausgebaut, wofür ein eigenes \textit{Runtime}-System geschaffen wurde (siehe Abschnitt~\ref{sec:runtime_manager}).
 Während das initiale Pooling-System Projektile noch als eigenständige \texttt{GameObjects} verwaltet - also $N$ Objekte mit jeweils $M$ Komponenten, deren Zustände auf viele Objektinstanzen verteilt werden - basiert das spätere Verfahren auf dem \texttt{EntityManager} und \textit{Type Erased Sparse Sets}.
 Hierdurch werden die Daten komponentenweise zusammengefasst; die Anzahl der in diesem Kontext separat verwalteten Speicherstrukturen reduziert sich damit im Wesentlichen auf die Anzahl der $M$ verschiedenen Komponententypen.
+Abschnitt~\ref{sec:ecs} liefert hierzu detailliertere Ausführungen.

@@ -19,7 +19,7 @@ Not knowing how to run.
 
 Das Projektstudium hatte zum Ziel, einen spielbaren \textit{Geometry Wars}-Klon zu entwickeln.
 Mit einem Zeitbudget von 300 Stunden - was aufgerundet 40 Manntagen entspricht - mag es etwas verwundern, dass das Ergebnis zwar spielbar, am Ende in Teilen aber unbestreitbar ungeschliffen wirkt.
-Mit der Formulierung im Prototyp-Dokument, dass ein wesentliches Hauptaugenmerk auf die Architektur gelegt werden sollte, wäre gerade aufgrund der eher lose erfolgten Formulierung ein Ergebnis mit mehr Game Feel sicherlich möglich gewesen~\cite{juiceitorloseit}.\\
+Mit der Anforderung im Prototyp-Dokument, dass ein wesentliches Hauptaugenmerk auf die Architektur gelegt werden sollte, wäre gerade aufgrund der eher lose erfolgten Formulierung ein Ergebnis mit mehr Game Feel sicherlich möglich gewesen~\cite{juiceitorloseit}.\\
 
 Dass dies am Ende nicht vollständig umgesetzt werden konnte, lag vor allem an der Umstellung auf ECS-typische Datenstrukturen, wobei wir uns auch hier nicht an selbst auferlegten Projektanforderungen orientiert haben: Es gab keine konkreten Lastszenarien, die die Berechnung tausender Objekte pro Frame-Update forderten.
 Vielmehr entsprang die Entscheidung, in dieses Gebiet tiefer einzutauchen, der Motivation, mit \textit{helios} als ``\textit{Game Framework built from first principles}``~\cite{HeliosProjectHome} integrative Aspekte bei der Umsetzung solcher Datenstrukturen in der Praxis zu erproben.
@@ -27,7 +27,7 @@ Dieser Entschluss ist erst mit Durchdringung der Domäne \textit{Game Engine} ge
 
 Das Projekt fand sich in dieser Phase durch die Programmierung der Engine-nahen Systeme an einem Scheideweg.
 Die konsequente Fortführung des objektorientierten Ansatzes hätte ein späteres Umstellen auf ein anderes Paradigma mit hohem Aufwand verbunden, Klassenhierarchien wären unkontrolliert gewachsen.
-Im Gegensatz dazu hätte zum damaligen Zeitpunkt der datenorientierte Ansatz~\cite{Bay22} eine intensivere Einarbeitung erfordert und die praktische Implementierung verzögert.
+Im Gegensatz dazu hätte zum damaligen Zeitpunkt der datenorientierte Ansatz eine intensivere Einarbeitung erfordert und die praktische Implementierung verzögert.
 Stattdessen haben wir an dieser Stelle einen pragmatischen Weg mit dem \textit{Game Object} als Compound Object eingeschlagen und konnten uns damit tiefer mit der Game-Engine-Entwicklung und der Programmiersprache C++ vertraut machen.
 Damit haben wir uns vor einer vorzeitigen Optimierung geschützt, die wir im Prototyp-Dokument warnend festhielten.\footnote{
     ``Premature optimization is the root of all evil``~\cite{Knu74}
@@ -56,8 +56,7 @@ Plakativ betrachtet bedeutete dies einen Wechsel von einem Ansatz, in dem die Fu
 Mit zunehmender Erfahrung mit C++ im Rahmen dieses Projekts wuchs auch das Vertrauen in die Codebasis.
 Die ursprünglich konsequente Verwendung von \texttt{unique\_ptr} und \texttt{shared\_ptr} zur Abbildung eindeutiger Besitzverhältnisse wurde in den tieferen Schichten der Engine schrittweise durch rohe Zeiger und Referenzen ersetzt; Lebenszeitgarantien werden stattdessen per Dokumentation in höheren Schichten vereinbart.\\
 
-Mit der Umstellung auf einen ECS-basierten Ansatz wurde auch die Template-"-Meta\-pro\-gram\-mie\-rung
- \cite[S. 112-114]{Str18} als idiomatischer Ansatz zur Bereitstellung generischer Komponenten und Systeme etabliert.
+Mit der Umstellung auf einen ECS-basierten Ansatz wurde auch die Template-"-Meta\-pro\-gram\-mie\-rung als idiomatischer Ansatz zur Bereitstellung generischer Komponenten und Systeme etabliert.
 Deren großer Vorteil für \textit{helios} liegt insbesondere in der zur Kompilierzeit abgesicherten Typsicherheit.
 Das klassische \textit{Liskovsche Substitutionsprinzip}~\cite[S. 148]{LG01} tritt dabei gegenüber der Verwendung von \textit{C++-Concepts} und statischer Introspektion in den Hintergrund.
 Dies ermöglicht die Validierung von Typeigenschaften zur Kompilierzeit, was dynamische Indirektionen im Hot Path reduziert.
@@ -84,7 +83,7 @@ Ein Hinweis auf diesen Lernprozess findet sich auch in den für das Projekt typi
 Damit lässt sich rückblickend feststellen, dass der praxisnahe Ansatz mit der zu diesem Zeitpunkt noch begrenzten fachlichen Erfahrung kollidierte.
 Eine frühere Auseinandersetzung mit den Anforderungen sowie eine engere Rücksprache mit der Projektbetreuung über die architektonischen Auswirkungen hätten spätere konzeptionelle Probleme vermeiden können.
 Damit hätte sich auch der durch das UI-System entstandene Scope Creep in Meilenstein 5 durch eine vorausschauendere Planung abfedern lassen.
-Dass solche Hürden durch das in dem Prototyp-Dokument festgelegte \textit{Tracer Bullet Development} in Kauf genommen wurden, sollte nicht unerwähnt bleiben.
+Dass solche Hürden durch das in dem Prototyp-Dokument festgelegte \textit{Tracer Bullet Development} in Kauf genommen wurden, sollte jedoch nicht unerwähnt bleiben.
 
 \subsubsection{KI als Produktivitätsgewinn oder als zusätzlicher Aufwand?}
 
@@ -95,7 +94,7 @@ Bei Quellcode-Dokumentation und -Generierung (am Beispiel der ImGui-Widgets) ges
 Da Verantwortung für fachliche Korrektheit und Integration weiterhin bei den Autoren liegt, müssen vorgeschlagene Änderungen einer erneuten Überprüfung unterzogen werden.
 Dieser Schritt reduzierte unserem Empfinden nach die Rolle der KI von einem fachlichen, autonomen Assistenten auf ein Werkzeug, dessen generierte Vorschläge durch eine autoritative Kontrolle abgenommen werden müssen - und diese verbleibt beim Entwickler.\\
 
-Aus bisheriger Projekterfahrung fällt dieser zusätzliche Prüfaufwand bei Pair Programming mit einem menschlichen Gegenüber wesentlich geringer aus, insbesondere wenn fachliche Qualifikation und Projekterfahrung gegeben sind.
+Aus bisheriger Projekterfahrung fällt dieser zusätzliche Prüfaufwand bei \textit{Pair Programming} mit einem menschlichen Gegenüber wesentlich geringer aus, insbesondere wenn fachliche Qualifikation und Projekterfahrung gegeben sind.
 Diese zusätzliche Arbeitslast durch KI-Tools wird auch in aktuellen Studien beobachtet~\cite{METRStudy}.
 Auch Hinweise, dass mit der Generierung von Dokumentation ein wesentlicher Teil der Reflexion verloren geht, in der sich ein Entwickler intensiv mit dem Quellcode auseinandersetzt, finden sich in aktuellen Arbeiten, beispielsweise bei Catalan et al.~\cite{CDMK26}.
 

@@ -4,7 +4,7 @@
 Meilenstein 2 markierte die erste funktionale Erweiterung der Architektur, die ein Rendering in Abhängigkeit von Benutzereingaben (Gamepad-Input) ermöglichte.\\
 
 In diesem Zusammenhang wurden die Klassen \texttt{GameWorld} und \texttt{GameObject} eingeführt.
-Deren Semantik blieb zwar bis zur finalen Version erhalten, sie durchliefen im weiteren Verlauf des Projekts allerdings eine tiefgreifende strukturelle Transformation: Von Datencontainern, die Geschäftslogik kapseln, hin zu leichtgewichtigen Fassadenobjekten~\cite[S. 185-193]{GHJV94} für den Zugriff auf darunterliegende, C++ \textit{Template}-basierte \textit{Registries} eines datenorientierten ECS.\\
+Deren Semantik blieb zwar bis zur finalen Version erhalten, sie durchliefen im weiteren Verlauf des Projekts allerdings eine tiefgreifende strukturelle Transformation: Von Datencontainern, die Geschäftslogik kapseln, hin zu leichtgewichtigen Fassadenobjekten~\cite[S. 185-193]{GHJV94} für den Zugriff auf darunterliegende, C++ \textit{Template}-basierte \textit{Registries}~\cite[S. 112-114]{Str18} eines datenorientierten ECS.\\
 
 Der im vorherigen Abschnitt~\ref{sec:meilenstein_1} angesprochene architektonische Umbruch des Rendering-Systems betraf die Repräsentanten der Viewports~\cite[40]{SWH15}, die ursprünglich als statische, eins-zu-eins mit dem Fenster korrespondierende Renderziele verstanden wurden.
 Die \texttt{Viewport}-Klasse wurde so angepasst, dass innerhalb der Engine die Unterstützung mehrerer solcher Instanzen über ein einzelnes \texttt{RenderTarget} (als Abstraktion eines Framebuffers~\cite[S. 329]{HDMS+14}) ermöglicht wurde.

@@ -38,10 +38,10 @@ Zur Markierung ungültiger Positionen in den Sparse Sets werden sogenannte \text
 \subsubsection{Verwaltung durch \texttt{EntityRegistry} und \textit{Free List}}
 
 Die Verwaltung und Neuerstellung von Handles wird durch die \texttt{EntityRegistry} auf Anfrage des \texttt{EntityManager}s realisiert.
-Dabei werden innerhalb einer \textit{Free List} bereits gelöschte IDs verwaltet, deren Positionen in den Sparse Sets durch einen \textit{Tombstone} repräsentiert werden.
-Enthält die \textit{Free List} einen Eintrag, wird für den jeweiligen Index in der Registry die Versionsnummer inkrementiert und anschließend ein neues Handle, bestehend aus Index und aktualisierter Versionsnummer, zurückgegeben.
-Auf diese Weise können Indizes wiederverwendet und aufgrund der aktualisierten Versionsnummer dennoch von \textit{stale} Indizes unterschieden werden.
-Sollte die \textit{Free List} keine Einträge enthalten, wird der zugrunde liegende Vektor um einen neuen Eintrag erweitert und mit der Versionsnummer $1$ versehen; bei Wiedeverwendung der \textit{EntityId} wird die Versionsnummer inkrementiert.
+Dabei werden innerhalb einer Free List bereits gelöschte IDs verwaltet, deren Positionen in den Sparse Sets durch einen \textit{Tombstone} repräsentiert werden.
+Enthält die Free List einen Eintrag, wird für den jeweiligen Index in der Registry die Versionsnummer inkrementiert und anschließend ein neues Handle, bestehend aus Index und aktualisierter Versionsnummer, zurückgegeben.
+Auf diese Weise können Indizes wiederverwendet und aufgrund der aktualisierten Versionsnummer dennoch von abgelaufenen Indizes unterschieden werden.
+Sollte die Free List keine Einträge enthalten, wird der zugrunde liegende Vektor um einen neuen Eintrag erweitert und mit der Versionsnummer $1$ versehen; bei Wiederverwendung der \textit{EntityId} wird die Versionsnummer inkrementiert.
 
 \vspace{5mm}
 \begin{tcolorbox}[colback=black!5, colframe=black, title={Wertebereich von \texttt{EntityId}}]

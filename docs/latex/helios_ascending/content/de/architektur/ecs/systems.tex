@@ -91,7 +91,7 @@ Die möglichen Kollisionspaarungen werden über eine Bitmaske bestimmt - so kann
 Weiterhin kann das Verhalten bei einer Kollision über die Klasse \texttt{CollisionBehavior} verfeinert werden, um beispielsweise ein automatisches \texttt{Despawn} bei einer Gegnerkollision auszulösen.
 
 In einem nächsten Schritt werden die Paare in der \textit{Narrow Phase} präziser geprüft.
-In unserer Umsetzung verwenden wir hierbei der Einfachheit halber die \textit{AABB} der Spielobjekte zur Ermittlung von Überschneidungen.
+In unserer Umsetzung verwenden wir hierbei der Einfachheit halber die AABB der Spielobjekte zur Ermittlung von Überschneidungen.
 Erkannte Kollisionen werden in einer \texttt{CollisionsStateComponent} gespeichert, die später vom \texttt{CollisionStateResponseSystem} ausgewertet wird.
 Während diese in Meilenstein 4 noch als einfacher \texttt{DespawnCommand} behandelt wurden, reiht Meilenstein 5 stattdessen \texttt{TriggerCollisionEvent}s oder \texttt{SolidCollisionEvent}s als \textit{Pass-Events} (siehe Abschnitt~\ref{sec:runtime_messaging}) in den Nachrichtenpuffer ein.
 Damit kann die Entscheidung, welches Verhalten bei welchem Kollisionstyp anzuwenden ist (und welche zusätzliche Aktion gegebenenfalls ausgelöst werden soll), leichter an unterschiedliche Systeme delegiert werden: So wertet ein \texttt{DamageOnCollisionSystem} die \texttt{SolidCollisionEvent}s aus und schreibt einen \texttt{ApplyDamageCommand} in den enginespezifischen Befehlspuffer, um die Lebenspunkte der beteiligten Objekte anzupassen.

@@ -56,6 +56,6 @@ Im negativen Fall wird das Projektil entfernt und zurück in den Pool gelegt.\\
 Die Logik der Bounds-Prüfung und die Anwendung der gewünschten Reaktion wurde später in das \texttt{LevelBoundsBehavior}-System überführt, das gleichzeitig ein konfigurierbares Verhalten pro \texttt{GameObject} berücksichtigt, so zum Beispiel \texttt{Reflect} (mit oder ohne Restitutionskoeffizient), \texttt{Despawn} (wie im hier gezeigten Fall) oder \texttt{Stick} (bleibt am Zielobjekt haften).\\
 
 Das Pooling-Konzept wurde in späteren Iterationen der Engine weiter ausgebaut, wofür ein eigenes \textit{Runtime}-System geschaffen wurde (siehe Abschnitt~\ref{sec:runtime_manager}).
-Während das initiale Pooling-System Projektile noch als eigenständige \texttt{GameObjects} verwaltet - also $N$ Objekte mit jeweils $M$ Komponenten, deren Zustände auf viele Objektinstanzen verteilt werden - basiert das spätere Verfahren auf dem \texttt{EntityManager} und \textit{Type Erased Sparse Sets}.
+Während das initiale Pooling-System Projektile noch als eigenständige \texttt{GameObjects} verwaltet - also $N$ Objekte mit jeweils $M$ Komponenten, deren Zustände auf viele Objektinstanzen verteilt werden - basiert das spätere Verfahren auf dem \texttt{EntityManager} und \textit{Sparse Sets}.
 Hierdurch werden die Daten komponentenweise zusammengefasst; die Anzahl der in diesem Kontext separat verwalteten Speicherstrukturen reduziert sich damit im Wesentlichen auf die Anzahl der $M$ verschiedenen Komponententypen.
 Abschnitt~\ref{sec:ecs} liefert hierzu detailliertere Ausführungen.

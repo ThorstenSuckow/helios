@@ -288,11 +288,6 @@ async function main() {
       meta: { title: 'System & TypedSystem', description: 'Abstract base class and composition wrapper for game systems operating on the GameWorld.', slug: '/core-concepts/ecs/system', tags: ['ecs', 'architecture', 'system'], keywords: ['helios', 'System', 'TypedSystem', 'SystemRegistry', 'ECS', 'game logic'], sidebar_label: 'System & TypedSystem', sidebar_position: 6 }
     },
     {
-      src: path.join(repoRoot, 'docs', 'core-concepts', 'ecs', 'updatable.md'),
-      dest: path.join(websiteRoot, 'docs', 'core-concepts', 'ecs', 'updatable.md'),
-      meta: { title: 'Updatable (Removed)', description: 'The Updatable interface has been removed. See System & TypedSystem.', slug: '/core-concepts/ecs/updatable', tags: ['ecs', 'architecture', 'migration'], keywords: ['helios', 'Updatable', 'removed', 'migration'], sidebar_label: 'Updatable (Removed)', sidebar_position: 7 }
-    },
-    {
       src: path.join(repoRoot, 'docs', 'core-concepts', 'ecs', 'traits.md'),
       dest: path.join(websiteRoot, 'docs', 'core-concepts', 'ecs', 'traits.md'),
       meta: { title: 'Traits', description: 'Compile-time detection of component lifecycle hooks using C++20 concepts.', slug: '/core-concepts/ecs/traits', tags: ['ecs', 'architecture', 'concepts'], keywords: ['helios', 'Traits', 'ECS', 'concepts', 'compile-time', 'lifecycle'], sidebar_label: 'Traits', sidebar_position: 8 }
@@ -300,7 +295,7 @@ async function main() {
     {
       src: path.join(repoRoot, 'docs', 'core-concepts', 'ecs', 'component-ops.md'),
       dest: path.join(websiteRoot, 'docs', 'core-concepts', 'ecs', 'component-ops.md'),
-      meta: { title: 'ComponentOps', description: 'Function pointers for type-erased component lifecycle callbacks.', slug: '/core-concepts/ecs/component-ops', tags: ['ecs', 'architecture', 'reflection'], keywords: ['helios', 'ComponentOps', 'ECS', 'function pointers', 'type erasure'], sidebar_label: 'ComponentOps', sidebar_position: 9 }
+      meta: { title: 'ComponentOps', description: 'Function pointers for type-erased component lifecycle callbacks.', slug: '/core-concepts/ecs/component-ops', tags: ['ecs', 'architecture', 'reflection'], keywords: ['helios', 'ComponentOps', 'ECS', 'function pointers', 'type erasure'], sidebar_label: 'ComponentOps', sidebar_position: 8 }
     },
     {
       src: path.join(repoRoot, 'examples', 'README.md'),

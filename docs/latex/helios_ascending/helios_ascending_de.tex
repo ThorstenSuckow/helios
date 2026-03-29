@@ -7,7 +7,9 @@
 \usepackage{microtype}
 
 
-\usepackage[english, ngerman]{babel}
+
+\usepackage[main=ngerman, english]{babel}
+
 
 % ----- Zitate/Anführungen
 \usepackage{csquotes}
@@ -28,7 +30,28 @@
 \usepackage{cleveref}
 
 % ----- biblatex (nach babel, csquotes, hyperref)
-\usepackage[backend=biber,style=acmnumeric,doi=true,url=true,sorting=none]{biblatex}
+
+\usepackage[
+    backend=biber,
+    style=ieee,
+    doi=true,
+    url=true,
+    sorting=none,
+    language=auto,     % Erkennt die Sprache von babel
+    autolang=other%,    % Wechselt das Datumsformat bei Sprachwechsel
+   % urldate=short      % Verhindert lange (englische) Monatsnamen, falls ISO scheitert
+]{biblatex}
+
+
+\DefineBibliographyStrings{ngerman}{
+  retrieved = {abgerufen am},
+  from      = {von},
+  urlseen   = {abgerufen am},
+}
+
+\DeclareFieldFormat{url}{\url{#1}}
+
+
 \addbibresource{helios_ascending.bib}
 
 

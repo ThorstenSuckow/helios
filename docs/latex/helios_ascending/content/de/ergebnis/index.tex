@@ -9,7 +9,7 @@
 
 Die in der Einleitung dieses Dokuments formulierten Kernanforderungen (siehe Abschnitt~\ref{sec:einleitung}) wurden mit Meilenstein 5 in der \textit{Scoring Demo} umgesetzt; offen geblieben sind lediglich grafische Effekte, die das \textit{Game Feel} zusätzlich aufwerten sollten.\\
 
-Im Folgenden geben wir einen Überblick über die Umsetzung des Spielkonzepts und die Messungen der geforderten Lastkriterien.
+Im Folgenden geben wir einen Überblick über die Umsetzung des Spielkonzepts und stellen Messungen der geforderten Lastkriterien vor.
 
 \subsection*{Umgesetztes Spielkonzept}
 Die \textit{Scoring Demo} zählt nach dem Start des Spiels einen Countdown von 3 Minuten herunter.
@@ -23,7 +23,7 @@ Damit ist die Umsetzung der \textit{Scoring Demo} näher am ersten Teil der \tex
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.8\columnwidth]{content/de/ergebnis/img/geometrywars_pgr}
-    \caption{Ausschnitt einer Spielszene von \textit{Geometry Wars} als Minispiel in \textit{Project Gotham Racing 2}. (Quelle: \url{https://www.youtube.com/watch?v=KSoyRPQ1DjQ)} (abgerufen am 28.03.2026))}
+    \caption{Ausschnitt einer Spielszene von \textit{Geometry Wars} als Minispiel in \textit{Project Gotham Racing 2}. (Quelle: \cite{gwpgr2})}
     \label{fig:geometrywars_pgr}
 \end{figure}
 
@@ -41,14 +41,15 @@ Die Anforderungen bezüglich der Lastkriterien wurden im ursprünglichen Dokumen
     \centering
     \includegraphics[width=1.0\columnwidth]{content/de/ergebnis/img/fps_balkengrafik}
     \caption{
-        Vergleich der FPS auf zwei unterschiedlichen Testsystemen: \textit{AMD Ryzen 9 9950X3D, 64\,GB RAM, NVIDIA GeForce RTX 5090} sowie \textit{Intel Core i7-8750H, 16\,GB RAM, NVIDIA GeForce GTX 1070 Max-Q}.
-        Auf dem schwächeren Testsystem treten Framerateeinbrüche auf unter 60 FPS ab ungefähr $2\,500$ gleichzeitig dargestellten Objekten auf. (Quelle: eigene Darstellung)
+        Vergleich der FPS auf zwei unterschiedlichen Testsystemen: AMD Ryzen 9 9950X3D, 64\,GB RAM, NVIDIA GeForce RTX 5090 (blau) sowie Intel Core i7-8750H, 16\,GB RAM, NVIDIA GeForce GTX 1070 Max-Q (orange).
+        Das mobile System unterschreitet 60 FPS bei ca. $2\,500$ gleichzeitig dargestellten Objekten.
+        Bei dem schnelleren Desktop-PC ist die Framerate auf ein oberes Limit von 240 FPS aufgrund aktiviertem V-Sync und der durch den Monitor vorgegebenen Bildwiederholfrequenz festgelegt. (Quelle: eigene Darstellung)
     }
     \label{fig:fps_balkengrafik}
 \end{figure}
 
 Die Validierung erfolgte über die mit Meilenstein 5 veröffentlichte \textit{Runtime Test Demo}, die eine spezielle Spielszene darstellt (siehe Abbildung~\ref{fig:lastkriterien}):
-Über einen vorkonfigurierten \textit{GameObject}-Pool mit einer Größe von $50\,000$ Objekten kann über einen Schieberegler die Anzahl der gleichzeitig darzustellenden Objekte ausgewählt werden.
+Über einen vorkonfigurierten GameObject-Pool mit einer Größe von $50\,000$ Objekten kann über einen Schieberegler die Anzahl der gleichzeitig darzustellenden Objekte ausgewählt werden.
 Die Objekte werden über den \texttt{RandomSpawnPlacer} und den \texttt{MoveInitializer} aus dem \texttt{spawn}-Modul mit zufälliger Platzierung und Bewegungsrichtung initialisiert.
 
 \begin{figure}[!htbp]
@@ -68,16 +69,16 @@ Die Objekte werden über den \texttt{RandomSpawnPlacer} und den \texttt{MoveInit
 
     \begin{subfigure}{0.48\columnwidth}
         \centering
-        \includegraphics[width=\linewidth]{content/de/ergebnis/img/go25000}
+        \includegraphics[width=\linewidth]{content/de/ergebnis/img/go50000}
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.48\columnwidth}
         \centering
-        \includegraphics[width=\linewidth]{content/de/ergebnis/img/go50000}
+        \includegraphics[width=\linewidth]{content/de/ergebnis/img/go25000}
     \end{subfigure}
 
     \caption{
-        Auswirkung der Anzahl gleichzeitig dargestellter Spielobjekte auf die Performance. Die Abbildung zeigt $2\,500$, $5\,000$, $25\,000$ und $50\,000$ Objekte in einem Testszenarium (von oben links im Uhrzeigersinn; Testsystem AMD Ryzen 9 9950X3D, GeForce RTX 5090).
+        Auswirkung der Anzahl gleichzeitig animierter Spielobjekte auf die Performance. Die Abbildung zeigt $2\,500$, $5\,000$, $25\,000$ und $50\,000$ Objekte in einem Testszenarium (von oben links im Uhrzeigersinn; Testsystem AMD Ryzen 9 9950X3D, GeForce RTX 5090).
         Ab etwa $4\,500$ Objekten sinkt die Framerate unter 120 FPS.
         Bei $10\,000$ Objekten wird weiterhin eine Framerate von über 60 FPS erzielt, womit die Anforderungen deutlich übertroffen werden. (Quelle: eigene Aufnahme)
     }
@@ -90,13 +91,13 @@ Es findet kein GPU-Instancing statt; stattdessen werden für alle $N$ dargestell
 Dieser \textit{Draw-Call-Bound} könnte durch \textit{Batching} reduziert werden, damit die Ansteuerung des Grafik-Backends (hier: OpenGL) nicht zum Flaschenhals wird~\cite{Ceb04}.
 Außerdem setzt die derzeitige Implementierung die \textit{Uniform Values} bei jedem \textit{Draw Call} erneut; auch hier bietet sich Optimierungspotenzial an, da einige Werte pro Frame global wiederverwendet werden können.\\
 
-Ein weiterer Flaschenhals existiert im \textit{Scene Graph}: So konnten wir durch Tests nachweisen, dass ein Befüllen des \textit{GameObject}-Pools mit $100\,000$ Prefabs zu deutlichen Einbrüchen der Framerate führt, obwohl noch keine Objekte auf dem Bildschirm dargestellt werden.
+Ein weiterer Flaschenhals existiert im Szenegraphen: So konnten wir durch Tests nachweisen, dass ein Befüllen des GameObject-Pools mit $100\,000$ Prefabs zu deutlichen Einbrüchen der Framerate führt, obwohl noch keine Objekte auf dem Bildschirm dargestellt werden.
 Dies ist darauf zurückzuführen, dass diese Objekte in den Szenegraphen eingehängt werden und während der Programmausführung durchiteriert werden müssen, um ihre Teilnahme am Rendering-Prozess zu bestimmen, was den in Abschnitt~\ref{sec:ecs} nachgewiesenen Laufzeitvorteil durch die ECS-Architektur teilweise relativiert.
 Auch hier bietet sich Optimierungspotenzial an, beispielsweise durch die Migration des Szenegraphen hin zu einem für die ECS-Architektur idiomatischeren Ansatz oder durch die Speicherung nichtaktiver Szeneknoten in einem separaten Container, damit die Iteration über die tatsächlich aktiven Objekte beschleunigt werden kann.
 Auch das \textit{Frustum Culling}~\cite[830]{AHHP+18} von Objekten sollte in späteren Iterationen berücksichtigt werden; momentan kommt es nicht zum Tragen, da die Spielszene in ihrer Gesamtheit dargestellt wird.\\
 
 \subsection*{Aufwertung des Game Feel durch grafische Effekte}
-Mit der Konzentration auf die Umsetzung der Kernmechaniken und -features wurde die Anforderung zur zusätzlichen Aufwertung des \textit{Game Feel} durch grafische Effekte nicht umgesetzt.
+Mit der Konzentration auf die Umsetzung des ECS wurde die Anforderung zur zusätzlichen Aufwertung des Game Feel durch grafische Effekte nicht umgesetzt.
 Hier ist der Einsatz von Partikeleffekten bei Kollisionen sowie eine gleichzeitige Verformung des Grids denkbar.
 Damit könnten die Auswirkungen der Spielmechaniken auf die Spielwelt visualisiert werden.
 Auch optische Hinweise, wie beispielsweise ein Blinken des Spielerschiffs, während die Kollisionskomponente nach einem Respawn für einige Zeit deaktiviert ist, würden das Gameplay aufwerten.

@@ -91,6 +91,13 @@ export namespace helios::engine::mechanics::combat::components {
             frequency_ = freq;
         }
 
+        /**
+         * @brief Resets this component to an initial state.
+         */
+        void reset() {
+            direction_ = {};
+            frequency_ = 0.0f;
+        }
 
         /**
          * @brief Returns the current aim direction.

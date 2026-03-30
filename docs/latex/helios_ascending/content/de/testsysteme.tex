@@ -1,0 +1,42 @@
+\chapter*{Testsysteme}
+\addcontentsline{toc}{chapter}{Testsysteme}
+
+Zur Evaluation der Lastkriterien wurden zwei Referenzsysteme verwendet, die in Tabelle~\ref{tab:hardware} aufgeführt sind.
+Die Systeme werden im Dokument der Einfachheit halber abkürzend als \textit{Desktop} und \textit{Laptop} bezeichnet.\\
+
+Alle Benchmarks wurden unter Windows 11 Pro (x64) durchgeführt, wobei die \textit{Release-Builds} der jeweils getesteten Softwarekomponenten zum Einsatz kamen.\\
+
+\begin{table}[!htbp]
+    \centering
+    \begin{tabularx}{\textwidth}{l Y Y}
+    \toprule
+    \textbf{} & \textbf{Desktop} & \textbf{Laptop} \\
+    \midrule
+    \textbf{CPU}  & AMD Ryzen 9 9950X3D (16 Kerne, 32 Threads, 4\,300\,MHz) & Intel Core i7-8750H (6 Kerne, 12 Threads) \\
+    \textbf{RAM}  & 64\,GB DDR5       & 16\,GB DDR4 \\
+    \textbf{GPU}  & NVIDIA GeForce RTX 5090 & NVIDIA GeForce GTX 1070 Max-Q \\
+    \bottomrule
+    \end{tabularx}
+    \caption{Spezifikationen der verwendeten Testsysteme.}
+    \label{tab:hardware}
+\end{table}
+
+\subsection*{Cache-Hierarchie}
+Tabelle~\ref{tab:cache_hierarchy} zeigt die jeweilige Cache-Hierarchie beider Systeme.
+
+\begin{table}[!htbp]
+    \centering
+    \begin{tabularx}{\textwidth}{l Y Y}
+    \toprule
+    \textbf{} & \textbf{Desktop} & \textbf{Laptop} \\
+    \midrule
+    L1 Data        & 48\,KiB $\times$ 16 & 32\,KiB $\times$ 6 \\
+    L1 Instruction & 32\,KiB $\times$ 16 & 32\,KiB $\times$ 6 \\
+    L2 Unified     & 1\,024\,KiB $\times$ 16 & 256\,KiB $\times$ 6 \\
+    L3 Unified     & 128\,MiB (96\,MiB + 32\,MiB) & 9\,MiB  \\
+    \bottomrule
+    \end{tabularx}
+    \caption{Cache-Hierarchie der verwendeten Testsysteme.}
+    \label{tab:cache_hierarchy}
+\end{table}
+

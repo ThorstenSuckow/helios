@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Changelog | helios</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://helios.garagecraft.games/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://helios.garagecraft.games/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://helios.garagecraft.games/docs/changelog"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Changelog | helios"><meta data-rh="true" name="description" content="Chronological list of notable changes to helios; manually curated release notes."><meta data-rh="true" property="og:description" content="Chronological list of notable changes to helios; manually curated release notes."><meta data-rh="true" name="keywords" content="helios,changelog,releases,version history"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://helios.garagecraft.games/docs/changelog"><link data-rh="true" rel="alternate" href="https://helios.garagecraft.games/docs/changelog" hreflang="en"><link data-rh="true" rel="alternate" href="https://helios.garagecraft.games/docs/changelog" hreflang="x-default"><link data-rh="true" rel="preconnect" href="https://LK14YGETTG-dsn.algolia.net" crossorigin="anonymous"><link rel="search" type="application/opensearchdescription+xml" title="helios" href="/opensearch.xml"><link rel="stylesheet" href="/assets/css/styles.d8266996.css">
-<script src="/assets/js/runtime~main.93810315.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.13e2a0d8.js" defer="defer"></script>
 <script src="/assets/js/main.6a35ce41.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -15,7 +15,9 @@
 <p>All notable changes to this project will be documented in this file.</p>
 <p>The format is based on <a href="https://keepachangelog.com/en/1.0.0/" target="_blank" rel="noopener noreferrer" class="">Keep a Changelog</a>,
 and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target="_blank" rel="noopener noreferrer" class="">Semantic Versioning</a>.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="unreleased"><a href="https://github.com/thorstensuckow/helios/compare/v0.4.0-milestone4...HEAD" target="_blank" rel="noopener noreferrer" class="">Unreleased</a><a href="#unreleased" class="hash-link" aria-label="Direct link to unreleased" title="Direct link to unreleased" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="unreleased"><a href="https://github.com/thorstensuckow/helios/compare/v0.5.0-milestone5...HEAD" target="_blank" rel="noopener noreferrer" class="">Unreleased</a><a href="#unreleased" class="hash-link" aria-label="Direct link to unreleased" title="Direct link to unreleased" translate="no">​</a></h2>
+<p>No unreleased changes yet.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="050-milestone5---2026-03-30"><a href="https://github.com/thorstensuckow/helios/compare/v0.4.0-milestone4...v0.5.0-milestone5" target="_blank" rel="noopener noreferrer" class="">0.5.0-milestone5</a> - 2026-03-30<a href="#050-milestone5---2026-03-30" class="hash-link" aria-label="Direct link to 050-milestone5---2026-03-30" title="Direct link to 050-milestone5---2026-03-30" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="added">Added<a href="#added" class="hash-link" aria-label="Direct link to Added" title="Direct link to Added" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="ecs-architecture-sparse-set-refactor">ECS Architecture (Sparse-Set Refactor)<a href="#ecs-architecture-sparse-set-refactor" class="hash-link" aria-label="Direct link to ECS Architecture (Sparse-Set Refactor)" title="Direct link to ECS Architecture (Sparse-Set Refactor)" translate="no">​</a></h4>
 <ul>
@@ -41,9 +43,8 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class=""><code>ErasedUnique</code> type-erased unique ownership wrapper (16 bytes: <code>void*</code> + deleter) in <code>helios.core.memory</code></li>
 <li class=""><code>helios.core.memory</code> module for low-level memory utilities</li>
 <li class=""><code>GameWorld::resourceRegistry()</code> accessor for direct resource registration and lookup</li>
-<li class=""><code>GameWorld::registerManager&lt;T&gt;()</code> convenience method replacing <code>addManager&lt;T&gt;()</code></li>
+<li class=""><code>GameWorld::registerResource&lt;T&gt;()</code> convenience method replacing <code>addManager&lt;T&gt;()</code></li>
 <li class=""><code>GameWorld::registerCommandHandler&lt;T&gt;()</code> for non-owning handler registration</li>
-<li class=""><code>GameWorld::registerResource&lt;T&gt;()</code> for arbitrary owning resource registration</li>
 <li class=""><code>GameWorld::manager&lt;T&gt;()</code> accessor replacing <code>getManager&lt;T&gt;()</code></li>
 <li class=""><code>GameWorld::entityManager()</code> public accessor</li>
 </ul>
@@ -56,12 +57,17 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class=""><code>EngineCommandBuffer</code> concrete facade pre-configured with all engine command types (Aim2D, Shoot, Move2D, Steering, UpdateScore, ScheduledSpawnPlan, Spawn, Despawn, StateCommand<gamestate>, StateCommand<matchstate>, UiAction, TimerControl, WorldLifecycle)</matchstate></gamestate></li>
 <li class=""><code>ExecutableCommand</code> concept for commands that can self-execute via <code>execute(UpdateContext&amp;)</code> method</li>
 <li class=""><code>CommandTypeId</code> compile-time type identifier for command types</li>
+<li class=""><code>DelayedStateCommand</code> for timer-deferred state transitions with configurable delay and discard conditions</li>
 <li class=""><code>WorldLifecycleCommand</code> and <code>WorldLifecycleManager</code> for deferred world reset operations</li>
+<li class=""><code>CommandBufferRegistry</code> for type-indexed storage of <code>CommandBuffer</code> instances</li>
+<li class=""><code>CommandHandlerRegistry</code> for type-indexed storage of command handlers</li>
+<li class=""><code>CommandBufferTypeId</code> compile-time type identifier for command buffer types</li>
 </ul>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="entity-resolution-224">Entity Resolution (#224)<a href="#entity-resolution-224" class="hash-link" aria-label="Direct link to Entity Resolution (#224)" title="Direct link to Entity Resolution (#224)" translate="no">​</a></h4>
 <ul>
 <li class=""><code>EntityResolver</code> callable struct for resolving <code>EntityHandle</code> to <code>GameObject</code> via <code>EntityManager</code></li>
 <li class=""><code>UpdateContext::find(EntityHandle)</code> for entity lookup without direct <code>GameWorld</code> access</li>
+<li class=""><code>UpdateContext::view()</code> for querying entities directly from update context</li>
 </ul>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="bootstrap-factory-217">Bootstrap Factory (#217)<a href="#bootstrap-factory-217" class="hash-link" aria-label="Direct link to Bootstrap Factory (#217)" title="Direct link to Bootstrap Factory (#217)" translate="no">​</a></h4>
 <ul>
@@ -74,14 +80,16 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class=""><code>StateTransitionId&lt;T&gt;</code> trait specialization mechanism via <code>helios.engine.state.Bindings</code></li>
 <li class=""><code>StateTransitionContext&lt;T&gt;</code> for type-safe state transitions</li>
 <li class=""><code>StateToIdMap&lt;State, Id&gt;</code> and <code>StateToIdMapPair&lt;Lft, Rgt, Id&gt;</code> for state-to-typed-ID mapping (#225)</li>
-<li class=""><code>GameState</code> bitmask enum with <code>Undefined</code>, <code>Start</code>, <code>Running</code>, <code>Paused</code>, <code>GameOver</code>, <code>Any</code> states</li>
-<li class=""><code>MatchState</code> bitmask enum with <code>Undefined</code>, <code>WaitingForPlayers</code>, <code>Playing</code>, <code>GameOver</code>, <code>Any</code> states</li>
+<li class=""><code>CombinedStateToIdMapPair&lt;Lft, Rgt, Id&gt;</code> for mapping state pairs to IDs</li>
+<li class=""><code>GameState</code> bitmask enum with <code>Undefined</code>, <code>Booted</code>, <code>MatchReady</code>, <code>Title</code>, <code>Running</code>, <code>Paused</code>, <code>GameOver</code>, <code>Any</code> states</li>
+<li class=""><code>MatchState</code> bitmask enum with <code>Undefined</code>, <code>WaitingForPlayers</code>, <code>Countdown</code>, <code>Playing</code>, <code>GameOver</code>, <code>Any</code> states</li>
 <li class=""><code>GameStateManager</code> and <code>MatchStateManager</code> for hierarchical state machine management</li>
 <li class=""><code>GameFlowSystem</code> for managing game state transitions</li>
 <li class=""><code>MatchFlowSystem</code> for managing match state transitions with previous-state tracking</li>
 <li class=""><code>DefaultGameStateTransitionGuards</code> and <code>DefaultMatchStateTransitionGuards</code> for state rules</li>
-<li class=""><code>LambdaGameStateListener</code> and <code>LambdaMatchStateListener</code> for callback-based state observation</li>
+<li class=""><code>LambdaGameStateListener</code> and <code>LambdaMatchStateListener</code> for callback-based state observation with enter-only and transition-only variants</li>
 <li class=""><code>MatchStateComponent</code> for tracking per-entity match state and transition context</li>
+<li class=""><code>StateComponent::stateFrom()</code> for retrieving the source state of the last transition</li>
 <li class=""><code>GameStateTransitionId</code> and <code>MatchStateTransitionId</code> for named transitions</li>
 <li class=""><code>Session</code> class for managing game/match state, player entity, and active viewport IDs</li>
 <li class=""><code>Session::trackState&lt;T&gt;()</code> for explicit state registration</li>
@@ -105,6 +113,63 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Orthographic projection support in <code>Camera</code> (<code>ortho()</code>)</li>
 <li class=""><code>render_text_demo</code> example demonstrating text rendering pipeline</li>
 </ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="health-and-damage-system">Health and Damage System<a href="#health-and-damage-system" class="hash-link" aria-label="Direct link to Health and Damage System" title="Direct link to Health and Damage System" translate="no">​</a></h4>
+<ul>
+<li class=""><code>helios.engine.mechanics.health</code> module for entity health management</li>
+<li class=""><code>HealthComponent</code> with health depletion behavior and dirty flag tracking</li>
+<li class=""><code>HealthManager</code> for processing <code>ApplyDamageCommand</code> and emitting health events</li>
+<li class=""><code>HealthUpdateClearSystem</code> for clearing health dirty flags each frame</li>
+<li class=""><code>HealthChangeContext</code> for health modification data</li>
+<li class=""><code>HealthDepletedBehavior</code> enum for configurable depletion responses</li>
+<li class=""><code>HealthChangedEvent</code> for health modification notifications</li>
+<li class=""><code>HealthDepletedEvent</code> for entity health depletion signals</li>
+<li class=""><code>helios.engine.mechanics.damage</code> module for damage handling</li>
+<li class=""><code>ApplyDamageCommand</code> for damage command pipeline</li>
+<li class=""><code>DamageOnCollisionSystem</code> for applying damage on solid collisions via commands</li>
+<li class=""><code>DamageDealerComponent</code> for defining layer-based damage values</li>
+<li class=""><code>LastDamageComponent</code> for tracking the last damage source</li>
+<li class=""><code>CollisionLayer</code> module for defining collision layer identifiers</li>
+<li class=""><code>DamageContext</code> and <code>InteractionContext</code> for damage interaction data</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="lives-and-player-system">Lives and Player System<a href="#lives-and-player-system" class="hash-link" aria-label="Direct link to Lives and Player System" title="Direct link to Lives and Player System" translate="no">​</a></h4>
+<ul>
+<li class=""><code>LivesComponent</code> for tracking remaining lives with default initialization and reset</li>
+<li class=""><code>LivesBindingComponent</code> for binding UI to <code>LivesComponent</code> mutations</li>
+<li class=""><code>LivesRevision</code> type alias for tracking <code>LivesComponent</code> mutations</li>
+<li class=""><code>Lives2UiTextUpdateSystem</code> for synchronizing UI text with <code>LivesComponent</code></li>
+<li class=""><code>PlayerComponent</code> for identifying the player entity in a match</li>
+<li class=""><code>PlayerDiedEvent</code> for player death event signaling</li>
+<li class=""><code>DeadTagComponent</code> for marking dead entities</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="timer-system">Timer System<a href="#timer-system" class="hash-link" aria-label="Direct link to Timer System" title="Direct link to Timer System" translate="no">​</a></h4>
+<ul>
+<li class=""><code>helios.engine.mechanics.timing</code> module for game timing</li>
+<li class=""><code>GameTimer</code> with configurable states (<code>Undefined</code>, <code>Running</code>, <code>Paused</code>, <code>Finished</code>) and reset support</li>
+<li class=""><code>TimerManager</code> for processing <code>TimerControlCommand</code> commands</li>
+<li class=""><code>TimerControlCommand</code> and <code>TimerControlContext</code> for timer command pipeline</li>
+<li class=""><code>GameTimerUpdateSystem</code> for updating timers and handling <code>Finished</code> state transitions</li>
+<li class=""><code>GameTimerClearSystem</code> for resetting finished timers each frame</li>
+<li class=""><code>GameTimerBindingComponent</code> for binding entities to game timers</li>
+<li class=""><code>GameTimer2UiTextUpdateSystem</code> for binding timer values to UI text components</li>
+<li class=""><code>TimeFormatterComponent</code> for formatting time values with elapsed label and visibility options</li>
+<li class=""><code>TimeDisplayMode</code> enum for UI time layout configuration</li>
+<li class=""><code>TimerRevision</code> type alias for tracking timer state changes</li>
+<li class=""><code>GameTimerId</code> strongly-typed identifier for timer instances</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="scoring-system">Scoring System<a href="#scoring-system" class="hash-link" aria-label="Direct link to Scoring System" title="Direct link to Scoring System" translate="no">​</a></h4>
+<ul>
+<li class=""><code>helios.engine.mechanics.scoring</code> module for score management</li>
+<li class=""><code>ScorePool</code> and <code>ScorePoolSnapshot</code> for score state management</li>
+<li class=""><code>MaxScorePoolSnapshot</code> for running max score tracking</li>
+<li class=""><code>ScorePoolManager</code> for managing score pools with reset functionality</li>
+<li class=""><code>UpdateScoreCommand</code> for score command pipeline</li>
+<li class=""><code>ScorePoolComponent</code>, <code>ScoreValueComponent</code>, <code>ScoreObserverComponent</code>, <code>MaxScoreObserverComponent</code></li>
+<li class=""><code>CombatScoringSystem</code> for scoring on <code>HealthDepletedEvent</code></li>
+<li class=""><code>ScoreObserverSystem</code>, <code>MaxScoreObserverSystem</code>, <code>ScoreObserverClearSystem</code>, <code>MaxScoreObserverClearSystem</code></li>
+<li class=""><code>Score2UiTextUpdateSystem</code> and <code>MaxScore2UiTextUpdateSystem</code> for UI binding</li>
+<li class=""><code>ScorePoolId</code>, <code>ScoreTypeId</code>, <code>ScorePoolRevision</code> typed identifiers</li>
+<li class=""><code>KillReward</code>, <code>Score</code>, <code>ScoreContext</code> data structures</li>
+</ul>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="scene-and-viewport">Scene and Viewport<a href="#scene-and-viewport" class="hash-link" aria-label="Direct link to Scene and Viewport" title="Direct link to Scene and Viewport" translate="no">​</a></h4>
 <ul>
 <li class=""><code>SceneId</code> strongly-typed identifier for scenes</li>
@@ -112,23 +177,23 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class=""><code>SceneRenderingSystem</code> for automated viewport-based scene rendering</li>
 <li class=""><code>StateToViewportPolicyUpdateSystem&lt;Lft, Rgt&gt;</code> for state-driven viewport activation</li>
 <li class=""><code>ViewportId</code> strongly-typed identifier (replacing raw viewport pointers)</li>
+<li class=""><code>ViewportSnapshot</code> for capturing viewport state per frame</li>
+<li class=""><code>ActiveViewportIdsStateComponent</code> for tracking active viewport IDs</li>
 </ul>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="ui-system">UI System<a href="#ui-system" class="hash-link" aria-label="Direct link to UI System" title="Direct link to UI System" translate="no">​</a></h4>
 <ul>
 <li class=""><code>helios.engine.modules.ui</code> module for UI components and systems</li>
 <li class=""><code>MenuComponent</code>, <code>MenuFocusComponent</code>, <code>UiStyleComponent</code> for menu state</li>
 <li class=""><code>MenuConfig</code>, <code>MenuItemConfig</code>, <code>MenuBuilder</code> for fluent menu configuration</li>
-<li class=""><code>MenuDisplaySystem</code> for state-driven menu visibility management</li>
+<li class=""><code>MenuDisplaySystem</code> for state-driven menu visibility management (generalized for flexible state types)</li>
 <li class=""><code>MenuNavigationSystem</code> for gamepad-based menu navigation</li>
 <li class=""><code>UiTransformSystem</code> with hierarchy support and anchor positioning (<code>TopLeft</code>, <code>BottomLeft</code>)</li>
 <li class=""><code>UiTextComponent</code> with <code>renderable()</code> accessors</li>
 <li class=""><code>ActionId</code> and <code>MenuId</code> strongly-typed identifiers</li>
 <li class=""><code>UiActionCommand</code>, <code>UiActionCommandHandler</code>, <code>UiActionCommandManager</code> for UI interactions</li>
 <li class=""><code>UiTextFormatSystem</code> for batched text formatting, extracted from <code>UiTextComponent::update()</code> (#230)</li>
-</ul>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="score-observer-229">Score Observer (#229)<a href="#score-observer-229" class="hash-link" aria-label="Direct link to Score Observer (#229)" title="Direct link to Score Observer (#229)" translate="no">​</a></h4>
-<ul>
-<li class=""><code>ScoreObserverComponent</code> and <code>MaxScoreObserverComponent</code> now store only <code>ScorePoolRevision</code> instead of full snapshots</li>
+<li class=""><code>NumberFormatterComponent</code> for numeric value formatting in UI</li>
+<li class=""><code>UiStyleUpdateSystem</code> and <code>UiTextBoundsUpdateSystem</code> for UI state management</li>
 </ul>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="builder-dsl">Builder DSL<a href="#builder-dsl" class="hash-link" aria-label="Direct link to Builder DSL" title="Direct link to Builder DSL" translate="no">​</a></h4>
 <ul>
@@ -139,6 +204,8 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class=""><code>.emitterPlacement()</code> for emitter-relative spawn positioning</li>
 <li class=""><code>.timerCondition()</code>, <code>.timerWithAvailabilityCondition()</code>, <code>.fixedAmount()</code> rule helpers</li>
 <li class=""><code>MenuBuilder</code> for fluent menu and menu item configuration</li>
+<li class=""><code>HealthBuilder</code>, <code>ObserverBuilder</code>, <code>ScoringBuilder</code>, <code>UiTransformBuilder</code> for fluent <code>GameObjectFactory</code> configuration</li>
+<li class=""><code>CombatConfig</code>, <code>HealthConfig</code>, <code>ObserverConfig</code>, <code>ScorePoolConfig</code>, <code>ScoreValueConfig</code>, <code>TextRenderableConfig</code>, <code>UiTransformConfig</code> builder config types</li>
 </ul>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="typed-identifiers">Typed Identifiers<a href="#typed-identifiers" class="hash-link" aria-label="Direct link to Typed Identifiers" title="Direct link to Typed Identifiers" translate="no">​</a></h4>
 <ul>
@@ -147,6 +214,30 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class=""><code>PrefabIdComponent</code> for tagging GameObjects as prefab instances</li>
 <li class=""><code>ViewportId</code>, <code>SceneId</code>, <code>FontId</code>, <code>ActionId</code>, <code>MenuId</code> as <code>StrongId</code> specializations</li>
 <li class=""><code>StateTypeId</code> for unique state type identification at runtime</li>
+<li class=""><code>GameTimerId</code> for timer identification</li>
+<li class=""><code>SystemTypeId</code> for unique system type identification</li>
+<li class=""><code>ManagerTypeId</code> for unique manager type identification</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="compile-time-concepts-and-tags">Compile-Time Concepts and Tags<a href="#compile-time-concepts-and-tags" class="hash-link" aria-label="Direct link to Compile-Time Concepts and Tags" title="Direct link to Compile-Time Concepts and Tags" translate="no">​</a></h4>
+<ul>
+<li class=""><code>helios.engine.common</code> module for shared engine infrastructure</li>
+<li class=""><code>HasSubmit</code>, <code>HasClear</code>, <code>HasReset</code>, <code>HasInit</code>, <code>HasUpdate</code>, <code>HasTag</code> compile-time concepts</li>
+<li class=""><code>IsCommandBufferLike</code>, <code>IsCommandHandlerLike</code>, <code>IsManagerLike</code>, <code>IsSystemLike</code> role concepts</li>
+<li class=""><code>CommandBufferRole</code>, <code>ManagerRole</code>, <code>SystemRole</code> compile-time tag types for role classification</li>
+<li class=""><code>ConceptModelRegistry</code> for type-indexed storage of type-erased wrappers (Concept/Model pattern)</li>
+<li class=""><code>ManagerRegistry</code> for type-erased manager registration and lookup</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="type-erasure-architecture">Type Erasure Architecture<a href="#type-erasure-architecture" class="hash-link" aria-label="Direct link to Type Erasure Architecture" title="Direct link to Type Erasure Architecture" translate="no">​</a></h4>
+<ul>
+<li class=""><code>System</code> as a type-erased wrapper (replacing inheritance-based <code>Updatable</code>)</li>
+<li class=""><code>ConceptModelRegistry</code> used for <code>ManagerRegistry</code> and <code>SystemRegistry</code></li>
+<li class="">Type-erased <code>Manager</code> registration via Concept/Model pattern</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="lifecycle-system">Lifecycle System<a href="#lifecycle-system" class="hash-link" aria-label="Direct link to Lifecycle System" title="Direct link to Lifecycle System" translate="no">​</a></h4>
+<ul>
+<li class=""><code>WorldLifecycleCommand</code> and <code>WorldLifecycleManager</code> for deferred world reset operations</li>
+<li class=""><code>WorldLifecycleAction</code> enum for lifecycle operation types</li>
+<li class=""><code>GameObjectLifecycleSystem</code> for processing entity lifecycle transitions</li>
 </ul>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="other">Other<a href="#other" class="hash-link" aria-label="Direct link to Other" title="Direct link to Other" translate="no">​</a></h4>
 <ul>
@@ -155,17 +246,29 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class=""><code>SpawnInitializer::reset()</code> / <code>SpawnScheduler::reset()</code> for resetting internal states</li>
 <li class=""><code>GameObjectPool</code> span accessors for active and inactive GameObjects</li>
 <li class=""><code>Random</code> initial seed storage and <code>reset()</code> functionality</li>
-<li class=""><code>ScorePool</code> and <code>ScorePoolManager</code> reset functionality</li>
 <li class=""><code>vec2ui</code> type for unsigned integer 2D vectors</li>
 <li class=""><code>ortho()</code> function for orthographic projection matrices</li>
 <li class="">FreeType library integration for text rendering</li>
+<li class=""><code>EmittedByComponent</code> for tracking the source entity of spawned objects</li>
+<li class=""><code>SpaceshipWidget</code> for real-time physics parameter tuning via ImGui</li>
+<li class=""><code>StateOverlayWidget</code> for displaying <code>GameState</code> and <code>MatchState</code> transitions via ImGui</li>
+<li class=""><code>totalTime</code> tracking in <code>GameLoop</code> and <code>UpdateContext</code></li>
+<li class=""><code>TILDE</code> key mapping for keyboard input</li>
+<li class=""><code>isKeyReleased()</code> method on <code>InputAdapter</code> and <code>GLFWInputAdapter</code></li>
+<li class=""><code>scoring_demo</code> example demonstrating full scoring, health, timer, and state management pipeline</li>
 </ul>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="documentation">Documentation<a href="#documentation" class="hash-link" aria-label="Direct link to Documentation" title="Direct link to Documentation" translate="no">​</a></h4>
 <ul>
 <li class=""><code>docs/core-concepts/resource-registry.md</code> — comprehensive documentation for ResourceRegistry including custom Managers, custom CommandBuffers, and plain resources</li>
+<li class=""><code>docs/core-concepts/state-management.md</code> — state management architecture with HSM overview</li>
+<li class=""><code>docs/core-concepts/sparse-set.md</code> — SparseSet data structure documentation</li>
+<li class=""><code>docs/core-concepts/object-pooling.md</code> — object pooling and prefab management</li>
+<li class=""><code>docs/core-concepts/text-rendering.md</code> — text rendering pipeline documentation</li>
+<li class=""><code>docs/core-concepts/component-lifecycle.md</code> — component lifecycle and traits</li>
+<li class=""><code>docs/core-concepts/component-registry.md</code> — component registration and bootstrap</li>
+<li class=""><code>docs/core-concepts/ecs/</code> — comprehensive ECS documentation (EntityHandle, EntityManager, EntityRegistry, GameObject, System, View, Traits, ComponentOps, component structure)</li>
 <li class="">Updated <code>docs/core-concepts/command-system.md</code> to reflect compile-time typed architecture</li>
-<li class="">Updated <code>docs/core-concepts/gameloop-architecture.md</code> for ResourceRegistry integration</li>
-<li class="">Updated <code>docs/core-concepts/object-pooling.md</code> with ResourceRegistry cross-reference</li>
+<li class="">Updated <code>docs/core-concepts/gameloop-architecture.md</code> for ResourceRegistry integration and typed pass filtering</li>
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="changed">Changed<a href="#changed" class="hash-link" aria-label="Direct link to Changed" title="Direct link to Changed" translate="no">​</a></h3>
 <ul>
@@ -173,6 +276,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class=""><strong>BREAKING</strong>: <code>GameObject</code> is now a lightweight facade (~16 bytes, safe to copy by value)</li>
 <li class=""><strong>BREAKING</strong>: <code>Component</code> is no longer a superclass; components use compile-time traits instead</li>
 <li class=""><strong>BREAKING</strong>: All component <code>explicit</code> copy constructors removed (aggregate-style components)</li>
+<li class=""><strong>BREAKING</strong>: <code>Updatable</code> base class removed — systems use type-erased <code>System</code> wrapper via <code>ConceptModelRegistry</code></li>
 <li class=""><strong>BREAKING</strong>: <code>GameObjectSpawnSystem</code> now takes <code>SpawnManager&amp;</code> instead of <code>vector&lt;unique_ptr&lt;SpawnScheduler&gt;&gt;</code></li>
 <li class=""><strong>BREAKING</strong>: <code>GameLoop::Phase::addPass()</code> now requires state template parameter: <code>.addPass&lt;GameState&gt;(GameState::Any)</code></li>
 <li class=""><strong>BREAKING</strong>: <code>Viewport</code> constructor requires <code>ViewportId</code> parameter</li>
@@ -189,23 +293,31 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class=""><strong>BREAKING</strong>: <code>CommandBuffer</code> is now an abstract base class; the concrete implementation is <code>EngineCommandBuffer</code> (#217)</li>
 <li class=""><strong>BREAKING</strong>: Removed <code>TargetedCommand</code>, <code>WorldCommand</code>, and all command base classes — commands are now plain structs (value types) (#217)</li>
 <li class=""><strong>BREAKING</strong>: Removed all command dispatchers (<code>WorldCommandDispatcher</code>, <code>TargetedCommandDispatcher</code>, <code>TypedWorldCommandDispatcher</code>, <code>TypedTargetedCommandDispatcher</code>, <code>SpawnCommandDispatcher</code>, <code>DespawnCommandDispatcher</code>, <code>ScheduledSpawnPlanCommandDispatcher</code>, <code>UiActionCommandDispatcher</code>, <code>ScoreCommandDispatcher</code>, <code>StateCommandDispatcher</code>, <code>TimerCommandDispatcher</code>) — replaced by <code>TypedCommandHandler&lt;T&gt;</code> registered via <code>ResourceRegistry</code> (#217)</li>
-<li class=""><strong>BREAKING</strong>: <code>GameWorld::addManager&lt;T&gt;()</code> replaced by <code>GameWorld::registerManager&lt;T&gt;()</code> (#217)</li>
+<li class=""><strong>BREAKING</strong>: <code>GameWorld::addManager&lt;T&gt;()</code> replaced by <code>GameWorld::registerResource&lt;T&gt;()</code> (#217)</li>
 <li class=""><strong>BREAKING</strong>: <code>GameWorld::getManager&lt;T&gt;()</code> (returning pointer) replaced by <code>GameWorld::manager&lt;T&gt;()</code> (returning reference) (#217)</li>
 <li class=""><strong>BREAKING</strong>: <code>Manager::flush()</code> no longer takes <code>GameWorld&amp;</code> parameter — uses <code>UpdateContext&amp;</code> only (#224)</li>
 <li class=""><strong>BREAKING</strong>: <code>Manager::onAdd()</code> removed — initialization logic moved to <code>Manager::init()</code> (#217)</li>
 <li class=""><strong>BREAKING</strong>: <code>Manager::gameWorld_</code> protected member removed (#217, #224)</li>
-<li class=""><strong>BREAKING</strong>: <code>UpdateContext</code> no longer exposes full <code>GameWorld</code> reference — provides <code>resourceRegistry()</code>, <code>session()</code>, <code>find()</code>, <code>commandBuffer()</code>, and <code>level()</code> instead (#224)</li>
+<li class=""><strong>BREAKING</strong>: <code>UpdateContext</code> no longer exposes full <code>GameWorld</code> reference — provides <code>session()</code>, <code>find()</code>, <code>commandBuffer()</code>, <code>view()</code>, and <code>level()</code> instead (#224)</li>
 <li class=""><strong>BREAKING</strong>: <code>UpdateContext::commandBuffer()</code> now returns <code>EngineCommandBuffer&amp;</code> from ResourceRegistry instead of <code>CommandBuffer&amp;</code> from GameLoop (#217)</li>
+<li class=""><strong>BREAKING</strong>: <code>ResourceRegistry</code> hidden behind commit points — not directly accessible from <code>UpdateContext</code></li>
 <li class=""><strong>BREAKING</strong>: <code>GameLoop</code> no longer owns <code>CommandBuffer</code> — it is owned by <code>GameWorld::ResourceRegistry</code> (#217)</li>
 <li class=""><strong>BREAKING</strong>: <code>GameLoop::commandBuffer()</code> accessor removed (#217)</li>
 <li class=""><strong>BREAKING</strong>: <code>GameLoop::update()</code> signature changed to <code>update(GameWorld&amp;, float, InputSnapshot&amp;, span&lt;ViewportSnapshot&gt;)</code> (#224)</li>
-<li class=""><strong>BREAKING</strong>: <code>GameWorld</code> removed all domain-specific handler registrations (<code>registerScoreCommandHandler</code>, <code>registerSpawnCommandHandler</code>, <code>registerStateCommandHandler</code>, <code>registerTimerCommandHandler</code>, <code>registerUiActionCommandHandler</code>) — all replaced by generic <code>registerCommandHandler&lt;T&gt;()</code> + ResourceRegistry (#217)</li>
-<li class=""><strong>BREAKING</strong>: <code>GameWorld</code> removed <code>SpawnCommandHandlerRegistry</code>, <code>scoreCommandHandler_</code>, <code>timerCommandHandler_</code>, <code>uiActionCommandHandler_</code>, <code>stateCommandHandlers_</code> members (#217)</li>
+<li class=""><strong>BREAKING</strong>: <code>GameWorld</code> removed all domain-specific handler registrations — all replaced by generic <code>registerCommandHandler&lt;T&gt;()</code> + ResourceRegistry (#217)</li>
 <li class=""><strong>BREAKING</strong>: <code>Aim2DCommand</code> and <code>ShootCommand</code> no longer inherit from <code>TargetedCommand</code> — they are self-executing commands carrying an <code>EntityHandle</code> and resolving entities via <code>UpdateContext::find()</code> (#217, #224)</li>
 <li class=""><strong>BREAKING</strong>: <code>GameStateManager</code> and <code>MatchStateManager</code> now derive from generic <code>StateManager&lt;TState&gt;</code> template (#222)</li>
 <li class=""><strong>BREAKING</strong>: <code>CollisionBehavior::Despawn</code> renamed to <code>CollisionBehavior::PassEvent</code></li>
+<li class=""><strong>BREAKING</strong>: <code>helios.engine.core.data</code> module dissolved — types moved to domain-specific modules (<code>common.types</code>, <code>scoring.types</code>, <code>spawn.types</code>, <code>ui.widgets.types</code>)</li>
+<li class=""><strong>BREAKING</strong>: <code>helios.core.buffer</code> moved to <code>helios.core.container.buffer</code></li>
+<li class=""><strong>BREAKING</strong>: <code>DeathEvent</code> renamed to <code>HealthDepletedEvent</code></li>
+<li class=""><strong>BREAKING</strong>: <code>LastAttackerComponent</code> renamed to <code>LastDamageComponent</code> and moved to <code>mechanics.damage</code></li>
+<li class=""><strong>BREAKING</strong>: <code>GameTimerObserverComponent</code> renamed to <code>GameTimerBindingComponent</code></li>
+<li class=""><strong>BREAKING</strong>: <code>TimerState::Started</code> renamed to <code>TimerState::Running</code></li>
+<li class=""><strong>BREAKING</strong>: <code>PushEvent</code> renamed to <code>PhaseEvent</code> for clarity</li>
+<li class=""><strong>BREAKING</strong>: <code>GameState::Start</code> split into <code>Booted</code>, <code>MatchReady</code>, <code>Title</code> states</li>
 <li class=""><code>GameWorld::level()</code> returns pointer instead of reference</li>
-<li class=""><code>ChaseSystem</code> now only considers active entities</li>
+<li class=""><code>ChaseSystem</code> now only considers active entities (respects <code>DeadTagComponent</code>)</li>
 <li class="">UI offsets replace margins in <code>UiTransformSystem</code></li>
 <li class=""><code>TextRenderable</code> uses <code>TextMesh</code> for text management</li>
 <li class=""><code>OpenGLGlyphTextRenderer</code> uses <code>FontResourceProvider</code> for glyph rendering</li>
@@ -216,24 +328,42 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class=""><code>ScoreObserverComponent</code> / <code>MaxScoreObserverComponent</code> store revision only; UI-binding systems read values from pool directly (#229)</li>
 <li class=""><code>UiTextComponent</code> setters (<code>setDouble()</code>, <code>setText()</code>) no longer call <code>update()</code> — formatting is handled by <code>UiTextFormatSystem</code> (#230)</li>
 <li class="">Commands are flushed in deterministic template parameter order (combat → motion → scoring → spawn → state → UI → timing → lifecycle)</li>
-<li class="">All examples updated to use <code>bootstrap::makeGameWorld()</code> factory and <code>registerManager&lt;T&gt;()</code> API</li>
+<li class="">All examples updated to use <code>bootstrap::makeGameWorld()</code> factory and <code>registerResource&lt;T&gt;()</code> API</li>
 <li class=""><code>helios.engine.Bootstrap</code> module renamed to <code>helios.engine.bootstrap</code> (lowercase)</li>
 <li class=""><code>NumberFormatComponent::format()</code> now requires explicit template parameter: <code>format&lt;double&gt;()</code></li>
 <li class=""><code>scoring_demo</code> refactored into separate module files (<code>IdConfig</code>, <code>ArenaConfig</code>, <code>SpawnConfiguration</code>, <code>EnemyPrefabs</code>, <code>MenuConfiguration</code>)</li>
+<li class=""><code>MenuDisplaySystem</code> generalized to support flexible state types</li>
+<li class=""><code>LambdaStateListener</code> enhanced to support enter-only and transition-only callbacks</li>
+<li class=""><code>DamageOnCollisionSystem</code> now emits <code>ApplyDamageCommand</code> instead of mutating health directly</li>
+<li class=""><code>CombatScoringSystem</code> listens for <code>HealthDepletedEvent</code> instead of <code>DeathEvent</code></li>
+<li class=""><code>TimerState</code> extended with <code>Finished</code> state</li>
+<li class=""><code>TimeFormatterComponent</code> enhanced with elapsed label and hide-when-zero options</li>
+<li class=""><code>TextRenderableConfig</code> enhanced with number and timestamp formatting support</li>
+<li class=""><code>SystemRegistry</code> and <code>ManagerRegistry</code> now use <code>ConceptModelRegistry</code> for type-erased storage</li>
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="removed">Removed<a href="#removed" class="hash-link" aria-label="Direct link to Removed" title="Direct link to Removed" translate="no">​</a></h3>
 <ul>
 <li class=""><code>TargetedCommand</code> base class and <code>WorldCommand</code> base class (#217)</li>
 <li class=""><code>TargetedCommandDispatcher</code>, <code>WorldCommandDispatcher</code>, <code>TypedTargetedCommandDispatcher</code>, <code>TypedWorldCommandDispatcher</code> (#217)</li>
 <li class=""><code>SpawnCommandDispatcher</code>, <code>DespawnCommandDispatcher</code>, <code>ScheduledSpawnPlanCommandDispatcher</code> (#217)</li>
-<li class=""><code>UiActionCommandDispatcher</code> (#217)</li>
+<li class=""><code>UiActionCommandDispatcher</code>, <code>ScoreCommandDispatcher</code>, <code>StateCommandDispatcher</code>, <code>TimerCommandDispatcher</code> (#217)</li>
 <li class=""><code>helios.engine.runtime.spawn.dispatcher</code> module (#217)</li>
 <li class=""><code>SpawnCommandHandler</code> interface and <code>SpawnCommandHandlerRegistry</code> (#217)</li>
 <li class=""><code>ScoreCommandHandler</code>, <code>TimerCommandHandler</code>, <code>StateCommandHandler</code>, <code>TypedStateCommandHandler</code> interfaces (#217)</li>
-<li class=""><code>UiActionCommandHandler</code> interface (#217)</li>
 <li class=""><code>Manager::gameWorld_</code> protected member (#224)</li>
 <li class=""><code>Manager::onAdd()</code> virtual method (#217)</li>
 <li class=""><code>GameWorld::gameObjects_</code> legacy <code>unordered_map</code> storage (#217)</li>
+<li class=""><code>Component</code> base class — replaced by compile-time traits</li>
+<li class=""><code>Updatable</code> base class — replaced by type-erased <code>System</code></li>
+<li class=""><code>System</code> (inheritance-based) base class from <code>helios.engine.ecs</code></li>
+<li class=""><code>CloneableComponent</code> base class</li>
+<li class=""><code>GameObjectFilter</code> and <code>helios.engine.ecs.query</code> module</li>
+<li class=""><code>RenderCommand</code> intermediate class (replaced by direct queue emission)</li>
+<li class=""><code>helios.engine.core.data</code> module (dissolved into domain modules)</li>
+<li class=""><code>GameTimerObserverClearSystem</code> (replaced by <code>GameTimerClearSystem</code>)</li>
+<li class=""><code>FocusMenuListener</code> (replaced by direct <code>MenuDisplaySystem</code> handling)</li>
+<li class=""><code>AttackContext</code> (replaced by <code>DamageContext</code> / <code>InteractionContext</code>)</li>
+<li class=""><code>DeathEvent</code> (replaced by <code>HealthDepletedEvent</code>)</li>
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixed">Fixed<a href="#fixed" class="hash-link" aria-label="Direct link to Fixed" title="Direct link to Fixed" translate="no">​</a></h3>
 <ul>
@@ -244,6 +374,12 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">VAO reset timing issue in OpenGL rendering</li>
 <li class="">Duplicate import of <code>RotationStateComponent</code> in <code>LevelBoundsBehaviorSystem</code></li>
 <li class=""><code>GameObjectPoolRegistry::has()</code> now uses <code>contains()</code> instead of <code>find() != end()</code></li>
+<li class="">Collision layer IDs not properly associated in multi-layer configurations</li>
+<li class=""><code>GameWorld</code> reset now properly resets pending state transitions</li>
+<li class=""><code>GameObjectSpawnSystem</code> properly initializes <code>gameWorld_</code> to <code>nullptr</code></li>
+<li class="">Delayed command execution condition check in <code>TypedCommandBuffer</code></li>
+<li class="">Timer reset now uses <code>setState</code> for proper <code>TimerState</code> assignment</li>
+<li class=""><code>passEventBus_.swapBuffers()</code> called before command execution for correct event ordering</li>
 </ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="040-milestone4---2026-01-29"><a href="https://github.com/thorstensuckow/helios/compare/v0.3.0-milestone3...v0.4.0-milestone4" target="_blank" rel="noopener noreferrer" class="">0.4.0-milestone4</a> - 2026-01-29<a href="#040-milestone4---2026-01-29" class="hash-link" aria-label="Direct link to 040-milestone4---2026-01-29" title="Direct link to 040-milestone4---2026-01-29" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="added-1">Added<a href="#added-1" class="hash-link" aria-label="Direct link to Added" title="Direct link to Added" translate="no">​</a></h3>
@@ -419,6 +555,6 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Cross-platform support (Windows, Linux, macOS)</li>
 <li class="">Unit testing framework with Google Test</li>
 <li class="">Example applications (simple cube rendering, game controller input)</li>
-</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-tags-row"><div class="col"><b>Tags:</b><ul class="tags_jXut padding--none margin-left--sm"><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/docs/tags/changelog">changelog</a></li><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/docs/tags/release-notes">release-notes</a></li></ul></div></div><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/thorstensuckow/helios/tree/main/website/docs/changelog.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#unreleased" class="table-of-contents__link toc-highlight">Unreleased</a><ul><li><a href="#added" class="table-of-contents__link toc-highlight">Added</a></li><li><a href="#changed" class="table-of-contents__link toc-highlight">Changed</a></li><li><a href="#removed" class="table-of-contents__link toc-highlight">Removed</a></li><li><a href="#fixed" class="table-of-contents__link toc-highlight">Fixed</a></li></ul></li><li><a href="#040-milestone4---2026-01-29" class="table-of-contents__link toc-highlight">0.4.0-milestone4 - 2026-01-29</a><ul><li><a href="#added-1" class="table-of-contents__link toc-highlight">Added</a></li><li><a href="#changed-1" class="table-of-contents__link toc-highlight">Changed</a></li></ul></li><li><a href="#030-milestone3---2025-12-25" class="table-of-contents__link toc-highlight">0.3.0-milestone3 - 2025-12-25</a><ul><li><a href="#added-2" class="table-of-contents__link toc-highlight">Added</a></li><li><a href="#changed-2" class="table-of-contents__link toc-highlight">Changed</a></li><li><a href="#fixed-1" class="table-of-contents__link toc-highlight">Fixed</a></li></ul></li><li><a href="#020-milestone2---2025-12-16" class="table-of-contents__link toc-highlight">0.2.0-milestone2 - 2025-12-16</a><ul><li><a href="#added-3" class="table-of-contents__link toc-highlight">Added</a></li><li><a href="#changed-3" class="table-of-contents__link toc-highlight">Changed</a></li><li><a href="#fixed-2" class="table-of-contents__link toc-highlight">Fixed</a></li></ul></li><li><a href="#010-milestone1---2025-10-21" class="table-of-contents__link toc-highlight">0.1.0-milestone1 - 2025-10-21</a><ul><li><a href="#added-4" class="table-of-contents__link toc-highlight">Added</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Documentation</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/intro">Getting Started</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/api/overview">API Reference</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/examples/simple-cube">Examples</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/thorstensuckow/helios/discussions" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub Discussions<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/thorstensuckow/helios/issues" target="_blank" rel="noopener noreferrer" class="footer__link-item">Issues<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://www.researchgate.net/publication/397445662_helios_Design_and_prototypical_implementation_of_a_C_game_framework" target="_blank" rel="noopener noreferrer" class="footer__link-item">Academic Paper<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/thorstensuckow/helios" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 <a href="https://thorsten.suckow-homberg.de">Thorsten Suckow-Homberg</a> / <a href="https://garagecraft.games">GarageCraft Games</a>. Licensed under MIT. Built with Docusaurus.</div></div></div></footer></div>
+</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-tags-row"><div class="col"><b>Tags:</b><ul class="tags_jXut padding--none margin-left--sm"><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/docs/tags/changelog">changelog</a></li><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/docs/tags/release-notes">release-notes</a></li></ul></div></div><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/thorstensuckow/helios/tree/main/website/docs/changelog.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#unreleased" class="table-of-contents__link toc-highlight">Unreleased</a></li><li><a href="#050-milestone5---2026-03-30" class="table-of-contents__link toc-highlight">0.5.0-milestone5 - 2026-03-30</a><ul><li><a href="#added" class="table-of-contents__link toc-highlight">Added</a></li><li><a href="#changed" class="table-of-contents__link toc-highlight">Changed</a></li><li><a href="#removed" class="table-of-contents__link toc-highlight">Removed</a></li><li><a href="#fixed" class="table-of-contents__link toc-highlight">Fixed</a></li></ul></li><li><a href="#040-milestone4---2026-01-29" class="table-of-contents__link toc-highlight">0.4.0-milestone4 - 2026-01-29</a><ul><li><a href="#added-1" class="table-of-contents__link toc-highlight">Added</a></li><li><a href="#changed-1" class="table-of-contents__link toc-highlight">Changed</a></li></ul></li><li><a href="#030-milestone3---2025-12-25" class="table-of-contents__link toc-highlight">0.3.0-milestone3 - 2025-12-25</a><ul><li><a href="#added-2" class="table-of-contents__link toc-highlight">Added</a></li><li><a href="#changed-2" class="table-of-contents__link toc-highlight">Changed</a></li><li><a href="#fixed-1" class="table-of-contents__link toc-highlight">Fixed</a></li></ul></li><li><a href="#020-milestone2---2025-12-16" class="table-of-contents__link toc-highlight">0.2.0-milestone2 - 2025-12-16</a><ul><li><a href="#added-3" class="table-of-contents__link toc-highlight">Added</a></li><li><a href="#changed-3" class="table-of-contents__link toc-highlight">Changed</a></li><li><a href="#fixed-2" class="table-of-contents__link toc-highlight">Fixed</a></li></ul></li><li><a href="#010-milestone1---2025-10-21" class="table-of-contents__link toc-highlight">0.1.0-milestone1 - 2025-10-21</a><ul><li><a href="#added-4" class="table-of-contents__link toc-highlight">Added</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Documentation</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/intro">Getting Started</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/api/overview">API Reference</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/examples/simple-cube">Examples</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/thorstensuckow/helios/discussions" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub Discussions<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/thorstensuckow/helios/issues" target="_blank" rel="noopener noreferrer" class="footer__link-item">Issues<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://www.researchgate.net/publication/397445662_helios_Design_and_prototypical_implementation_of_a_C_game_framework" target="_blank" rel="noopener noreferrer" class="footer__link-item">Academic Paper<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/thorstensuckow/helios" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 <a href="https://thorsten.suckow-homberg.de">Thorsten Suckow-Homberg</a> / <a href="https://garagecraft.games">GarageCraft Games</a>. Licensed under MIT. Built with Docusaurus.</div></div></div></footer></div>
 </body>
 </html>

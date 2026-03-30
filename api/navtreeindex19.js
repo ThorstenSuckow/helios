@@ -1,5 +1,8 @@
 var NAVTREEINDEX19 =
 {
+"classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1Lives2UiTextUpdateSystem.html":[4,0,0,3,7,8,0,0,1],
+"classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1Lives2UiTextUpdateSystem.html":[6,0,0,3,5,6,0,0,1],
+"classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1Lives2UiTextUpdateSystem.html#ad1150d98670461c20862cdf6e78214d9":[3,0,391,0,0],
 "classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1Lives2UiTextUpdateSystem.html#ad1150d98670461c20862cdf6e78214d9":[4,0,0,3,7,8,0,0,1,0],
 "classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1Lives2UiTextUpdateSystem.html#ad1150d98670461c20862cdf6e78214d9":[6,0,0,3,5,6,0,0,1,0],
 "classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1Lives2UiTextUpdateSystem.html#afbf698b4edcefae93396595e08fa3803":[3,0,391,0,1],
@@ -246,8 +249,5 @@ var NAVTREEINDEX19 =
 "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiStyleComponent.html#a3a2fe4189a339774c0693652a6bcd8c3":[6,0,0,3,5,6,3,1,4,12],
 "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiStyleComponent.html#a47d57a3ca2e22971f7503398e3057e56":[3,0,417,0,8],
 "classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiStyleComponent.html#a47d57a3ca2e22971f7503398e3057e56":[3,0,417,1,8],
-"classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiStyleComponent.html#a47d57a3ca2e22971f7503398e3057e56":[4,0,0,3,7,8,3,1,4,8],
-"classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiStyleComponent.html#a47d57a3ca2e22971f7503398e3057e56":[6,0,0,3,5,6,3,1,4,8],
-"classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiStyleComponent.html#a78077950c31e772c915c9b2752aad772":[3,0,417,0,5],
-"classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiStyleComponent.html#a78077950c31e772c915c9b2752aad772":[3,0,417,1,5]
+"classhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1components_1_1UiStyleComponent.html#a47d57a3ca2e22971f7503398e3057e56":[4,0,0,3,7,8,3,1,4,8]
 };

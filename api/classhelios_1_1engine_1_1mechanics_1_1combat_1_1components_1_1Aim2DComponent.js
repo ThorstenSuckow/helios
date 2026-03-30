@@ -11,6 +11,7 @@ var classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1Aim2DComponent
     [ "isEnabled", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1Aim2DComponent.html#ac6e240264cf0baa6bc44376d0d0a3ceb", null ],
     [ "operator=", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1Aim2DComponent.html#ad381fa41d77c2b019ba4b97233491af1", null ],
     [ "operator=", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1Aim2DComponent.html#a839ae11933ebd1654a3bdb75d2bc3793", null ],
+    [ "reset", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1Aim2DComponent.html#a263f3e01adf3a7bcaaf36ee1afad8cd0", null ],
     [ "direction_", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1Aim2DComponent.html#a3c0795d8c60eaa7f539c0dddea0db227", null ],
     [ "frequency_", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1Aim2DComponent.html#a1d5d344567c54f15d0917258777a8cfa", null ],
     [ "isEnabled_", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1Aim2DComponent.html#a8af481492761dc6f835987e31aad64bd", null ]

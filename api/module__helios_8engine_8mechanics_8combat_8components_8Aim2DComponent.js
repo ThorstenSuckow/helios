@@ -10,6 +10,7 @@ var module__helios_8engine_8mechanics_8combat_8components_8Aim2DComponent =
     [ "helios::engine::mechanics::combat::components::Aim2DComponent::Aim2DComponent", "module__helios_8engine_8mechanics_8combat_8components_8Aim2DComponent.html#a1d6f50d6b86ede0bb3875ca20ee7abc3", null ],
     [ "helios::engine::mechanics::combat::components::Aim2DComponent::operator=", "module__helios_8engine_8mechanics_8combat_8components_8Aim2DComponent.html#ad381fa41d77c2b019ba4b97233491af1", null ],
     [ "helios::engine::mechanics::combat::components::Aim2DComponent::aim", "module__helios_8engine_8mechanics_8combat_8components_8Aim2DComponent.html#a6f3b5ca03cc26b5047779ee139c0dffa", null ],
+    [ "helios::engine::mechanics::combat::components::Aim2DComponent::reset", "module__helios_8engine_8mechanics_8combat_8components_8Aim2DComponent.html#a263f3e01adf3a7bcaaf36ee1afad8cd0", null ],
     [ "helios::engine::mechanics::combat::components::Aim2DComponent::direction", "module__helios_8engine_8mechanics_8combat_8components_8Aim2DComponent.html#aaf6c3ad095f473814e3dde532153bda2", null ],
     [ "helios::engine::mechanics::combat::components::Aim2DComponent::frequency", "module__helios_8engine_8mechanics_8combat_8components_8Aim2DComponent.html#a4228b66722d776d82dd81983e6a7ac06", null ],
     [ "helios::engine::mechanics::combat::components::Aim2DComponent::direction_", "module__helios_8engine_8mechanics_8combat_8components_8Aim2DComponent.html#a3c0795d8c60eaa7f539c0dddea0db227", null ],

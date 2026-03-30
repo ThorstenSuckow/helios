@@ -1,5 +1,13 @@
 var NAVTREEINDEX59 =
 {
+"structhelios_1_1math_1_1vec4.html#aaa35ca824a53010bc2191cfa6a0ada9f":[3,0,575,3,6],
+"structhelios_1_1math_1_1vec4.html#aaa35ca824a53010bc2191cfa6a0ada9f":[4,0,0,6,7,6],
+"structhelios_1_1math_1_1vec4.html#aaa35ca824a53010bc2191cfa6a0ada9f":[6,0,0,6,4,6],
+"structhelios_1_1math_1_1vec4.html#af408aedb7aecfda24fe4b5377178ece6":[3,0,575,3,2],
+"structhelios_1_1math_1_1vec4.html#af408aedb7aecfda24fe4b5377178ece6":[4,0,0,6,7,2],
+"structhelios_1_1math_1_1vec4.html#af408aedb7aecfda24fe4b5377178ece6":[6,0,0,6,4,2],
+"structhelios_1_1rendering_1_1Vertex.html":[3,0,624,0],
+"structhelios_1_1rendering_1_1Vertex.html":[4,0,0,7,13],
 "structhelios_1_1rendering_1_1Vertex.html":[6,0,0,7,12],
 "structhelios_1_1rendering_1_1Vertex.html#a6a60a969f8b46c06dfd111cad987a017":[3,0,624,0,2],
 "structhelios_1_1rendering_1_1Vertex.html#a6a60a969f8b46c06dfd111cad987a017":[4,0,0,7,13,2],
@@ -241,13 +249,5 @@ var NAVTREEINDEX59 =
 "structhelios_1_1util_1_1Colors.html#a14494b093c5a4860bbcd3dd2f1f6b935":[3,0,637,0,59],
 "structhelios_1_1util_1_1Colors.html#a14494b093c5a4860bbcd3dd2f1f6b935":[4,0,0,9,3,59],
 "structhelios_1_1util_1_1Colors.html#a14494b093c5a4860bbcd3dd2f1f6b935":[6,0,0,9,3,59],
-"structhelios_1_1util_1_1Colors.html#a145d589bf122d504caa66be55f1d58d0":[3,0,637,0,87],
-"structhelios_1_1util_1_1Colors.html#a145d589bf122d504caa66be55f1d58d0":[4,0,0,9,3,87],
-"structhelios_1_1util_1_1Colors.html#a145d589bf122d504caa66be55f1d58d0":[6,0,0,9,3,87],
-"structhelios_1_1util_1_1Colors.html#a15b3c8174cedcceaeef6d33921de9899":[3,0,637,0,49],
-"structhelios_1_1util_1_1Colors.html#a15b3c8174cedcceaeef6d33921de9899":[4,0,0,9,3,49],
-"structhelios_1_1util_1_1Colors.html#a15b3c8174cedcceaeef6d33921de9899":[6,0,0,9,3,49],
-"structhelios_1_1util_1_1Colors.html#a1629826282c18dd666ac54e696f66aa3":[3,0,637,0,65],
-"structhelios_1_1util_1_1Colors.html#a1629826282c18dd666ac54e696f66aa3":[4,0,0,9,3,65],
-"structhelios_1_1util_1_1Colors.html#a1629826282c18dd666ac54e696f66aa3":[6,0,0,9,3,65]
+"structhelios_1_1util_1_1Colors.html#a145d589bf122d504caa66be55f1d58d0":[3,0,637,0,87]
 };

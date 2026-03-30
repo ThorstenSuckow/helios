@@ -1,5 +1,13 @@
 var NAVTREEINDEX60 =
 {
+"structhelios_1_1util_1_1Colors.html#a145d589bf122d504caa66be55f1d58d0":[4,0,0,9,3,87],
+"structhelios_1_1util_1_1Colors.html#a145d589bf122d504caa66be55f1d58d0":[6,0,0,9,3,87],
+"structhelios_1_1util_1_1Colors.html#a15b3c8174cedcceaeef6d33921de9899":[3,0,637,0,49],
+"structhelios_1_1util_1_1Colors.html#a15b3c8174cedcceaeef6d33921de9899":[4,0,0,9,3,49],
+"structhelios_1_1util_1_1Colors.html#a15b3c8174cedcceaeef6d33921de9899":[6,0,0,9,3,49],
+"structhelios_1_1util_1_1Colors.html#a1629826282c18dd666ac54e696f66aa3":[3,0,637,0,65],
+"structhelios_1_1util_1_1Colors.html#a1629826282c18dd666ac54e696f66aa3":[4,0,0,9,3,65],
+"structhelios_1_1util_1_1Colors.html#a1629826282c18dd666ac54e696f66aa3":[6,0,0,9,3,65],
 "structhelios_1_1util_1_1Colors.html#a1a51dd8155b7ef7db2f225f4d56a9958":[3,0,637,0,40],
 "structhelios_1_1util_1_1Colors.html#a1a51dd8155b7ef7db2f225f4d56a9958":[4,0,0,9,3,40],
 "structhelios_1_1util_1_1Colors.html#a1a51dd8155b7ef7db2f225f4d56a9958":[6,0,0,9,3,40],
@@ -241,13 +249,5 @@ var NAVTREEINDEX60 =
 "structhelios_1_1window_1_1WindowConfig.html#a3ffc9f8d5d4e517423dda6f691dfe14e":[4,0,0,10,2,4],
 "structhelios_1_1window_1_1WindowConfig.html#a3ffc9f8d5d4e517423dda6f691dfe14e":[6,0,0,10,2,4],
 "structhelios_1_1window_1_1WindowConfig.html#a5f0a9e4ccdf1e17187ebde121d6cf525":[3,0,655,0,3],
-"structhelios_1_1window_1_1WindowConfig.html#a5f0a9e4ccdf1e17187ebde121d6cf525":[4,0,0,10,2,3],
-"structhelios_1_1window_1_1WindowConfig.html#a5f0a9e4ccdf1e17187ebde121d6cf525":[6,0,0,10,2,3],
-"structhelios_1_1window_1_1WindowConfig.html#ab260764badd2ed71a573ac75bce658e3":[3,0,655,0,2],
-"structhelios_1_1window_1_1WindowConfig.html#ab260764badd2ed71a573ac75bce658e3":[4,0,0,10,2,2],
-"structhelios_1_1window_1_1WindowConfig.html#ab260764badd2ed71a573ac75bce658e3":[6,0,0,10,2,2],
-"structhelios_1_1window_1_1WindowConfig.html#abf59b6fbc306130ec84737dbe3498ffd":[3,0,655,0,1],
-"structhelios_1_1window_1_1WindowConfig.html#abf59b6fbc306130ec84737dbe3498ffd":[4,0,0,10,2,1],
-"structhelios_1_1window_1_1WindowConfig.html#abf59b6fbc306130ec84737dbe3498ffd":[6,0,0,10,2,1],
-"structhelios_1_1window_1_1WindowConfig.html#afeb2920257a14419637ebdb102a5c333":[3,0,655,0,5]
+"structhelios_1_1window_1_1WindowConfig.html#a5f0a9e4ccdf1e17187ebde121d6cf525":[4,0,0,10,2,3]
 };

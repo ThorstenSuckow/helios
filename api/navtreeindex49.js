@@ -1,5 +1,13 @@
 var NAVTREEINDEX49 =
 {
+"module__helios_8ext_8imgui_8widgets_8LogWidget.html#ab634d67b1e8911c808a4070a392e6ab6":[3,0,25,13],
+"module__helios_8ext_8imgui_8widgets_8LogWidget.html#ad362d393aa91890ffd592c025cd4f226":[3,0,25,21],
+"module__helios_8ext_8imgui_8widgets_8LogWidget.html#ad59b894922d8b66525cca2cdee97cf5c":[3,0,25,19],
+"module__helios_8ext_8imgui_8widgets_8LogWidget.html#ad8aa78ed7a7bd44649200624cf08ed64":[3,0,25,4],
+"module__helios_8ext_8imgui_8widgets_8LogWidget.html#ae1e865e68912c362ca27e9645d6f1067":[3,0,25,9],
+"module__helios_8ext_8imgui_8widgets_8LogWidget.html#aebde41f96ee07dfc7a920f634601b01e":[3,0,25,11],
+"module__helios_8ext_8imgui_8widgets_8LogWidget.html#afc994789e5e455057029c6c26f0fbb1b":[3,0,25,14],
+"module__helios_8ext_8imgui_8widgets_8MainMenuWidget.html":[3,0,26],
 "module__helios_8ext_8imgui_8widgets_8MainMenuWidget.html#a3963ddeca55c4a3d8968bbf8958b4148":[3,0,26,6],
 "module__helios_8ext_8imgui_8widgets_8MainMenuWidget.html#a49386a348d8547c894c6f19e966984a0":[3,0,26,7],
 "module__helios_8ext_8imgui_8widgets_8MainMenuWidget.html#a8f6ddd4eafcd90795ebd3bab0abeddd3":[3,0,26,5],
@@ -241,13 +249,5 @@ var NAVTREEINDEX49 =
 "module__helios_8math_8types.html#a4f47bd1a12c6a4461761f26ffabfb439":[3,0,575,50],
 "module__helios_8math_8types.html#a55cd2251d2249ab35eb5f2ea9999f414":[3,0,575,20],
 "module__helios_8math_8types.html#a57c950d4cb887c103dc2423f3ea81ce4":[3,0,575,14],
-"module__helios_8math_8types.html#a581fd38f8554d49c33a42b46255cc983":[3,0,575,42],
-"module__helios_8math_8types.html#a5b05dad91f30e5af5a58f4d9a8a69775":[3,0,575,85],
-"module__helios_8math_8types.html#a6146713ae785c06b31121c953357dda4":[3,0,575,62],
-"module__helios_8math_8types.html#a6168417f43e3cf34c6376fe5f288b038":[3,0,575,38],
-"module__helios_8math_8types.html#a64379fe55f1794fad912feafd5051224":[3,0,575,114],
-"module__helios_8math_8types.html#a6737f82dfb6d4b5afc3eee979715a500":[3,0,575,90],
-"module__helios_8math_8types.html#a6a604e51ca84090aa8e8d7f46bd02009":[3,0,575,55],
-"module__helios_8math_8types.html#a6bca908e940499722f0a3af6447ad719":[3,0,575,79],
-"module__helios_8math_8types.html#a6c51266bc7e6f142ce172b8c2022645a":[3,0,575,36]
+"module__helios_8math_8types.html#a581fd38f8554d49c33a42b46255cc983":[3,0,575,42]
 };

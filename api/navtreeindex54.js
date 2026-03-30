@@ -1,5 +1,13 @@
 var NAVTREEINDEX54 =
 {
+"namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types.html#a582a1deeeb0b47612daff20c822fad70ac981e681de438daec04a921807b230cd":[4,0,0,3,6,7,4,3,3],
+"namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types.html#a582a1deeeb0b47612daff20c822fad70ad3cc257e4841e4a0060965b73e01de40":[4,0,0,3,6,7,4,3,7],
+"namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types.html#a582a1deeeb0b47612daff20c822fad70ae030acb336d4af795043c35a30e86491":[4,0,0,3,6,7,4,3,1],
+"namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types.html#a582a1deeeb0b47612daff20c822fad70aec0fc0100c4fc1ce4eea230c3dc10360":[4,0,0,3,6,7,4,3,0],
+"namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types.html#a582a1deeeb0b47612daff20c822fad70aee1ded5ee510cf5f4c605debf346a9b2":[4,0,0,3,6,7,4,3,5],
+"namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types.html#a5a9b40b91cd49d24dffc892db68cfd6c":[4,0,0,3,6,7,4,0],
+"namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types.html#ac1ab7672513e3787e24d20624e620470":[4,0,0,3,6,7,4,4],
+"namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types.html#af44847fbfef2d292284b0c69fc11935b":[4,0,0,3,6,7,4,5],
 "namespacehelios_1_1engine_1_1mechanics_1_1scoring.html":[4,0,0,3,6,8],
 "namespacehelios_1_1engine_1_1mechanics_1_1scoring.html#ab4c5f88fd823d42fdba6b3f26b0005fb":[4,0,0,3,6,8,8],
 "namespacehelios_1_1engine_1_1mechanics_1_1scoring_1_1commands.html":[4,0,0,3,6,8,0],
@@ -241,13 +249,5 @@ var NAVTREEINDEX54 =
 "namespacehelios_1_1input_1_1types.html#a4dd39c1a113edbe36b92b088d8dbf2ffae3d5e52e08008f6e44675b09af3e2380":[4,0,0,5,1,0,2],
 "namespacehelios_1_1input_1_1types.html#a4dd39c1a113edbe36b92b088d8dbf2ffaea3ebfb6dc92c9b4ae1a2b94900c693f":[4,0,0,5,1,0,1],
 "namespacehelios_1_1input_1_1types.html#a963e220296531c047308439c3425bcc5":[4,0,0,5,1,2],
-"namespacehelios_1_1input_1_1types.html#a963e220296531c047308439c3425bcc5a501d3c1d3d31f70db984de48396437f6":[4,0,0,5,1,0,4],
-"namespacehelios_1_1input_1_1types.html#a963e220296531c047308439c3425bcc5a501d3c1d3d31f70db984de48396437f6":[4,0,0,5,1,2,2],
-"namespacehelios_1_1input_1_1types.html#a963e220296531c047308439c3425bcc5aec4d00988f117bae026eab04ddfa7f33":[4,0,0,5,1,2,0],
-"namespacehelios_1_1input_1_1types.html#a963e220296531c047308439c3425bcc5afa378b1b6c52b1404b7cbdd2a1567fa4":[4,0,0,5,1,2,1],
-"namespacehelios_1_1math.html":[4,0,0,6],
-"namespacehelios_1_1math.html#a01625d8968c400bd7e812715d7f1941f":[4,0,0,6,39],
-"namespacehelios_1_1math.html#a058bd8629e8b9fdd7914ec513cf515f5":[4,0,0,6,14],
-"namespacehelios_1_1math.html#a076c3e1ea3dd5beb87bc701e87cd4f1a":[4,0,0,6,31],
-"namespacehelios_1_1math.html#a08252f81850c5902e3c8dead272f3332":[4,0,0,6,25]
+"namespacehelios_1_1input_1_1types.html#a963e220296531c047308439c3425bcc5a501d3c1d3d31f70db984de48396437f6":[4,0,0,5,1,0,4]
 };

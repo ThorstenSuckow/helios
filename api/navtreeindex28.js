@@ -1,5 +1,11 @@
 var NAVTREEINDEX28 =
 {
+"classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget.html":[4,0,0,0,1,0,2],
+"classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget.html":[6,0,0,0,1,0,2],
+"classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget.html#a4bf6248a0eac6b458e6a3962eba5a134":[3,0,23,0,1],
+"classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget.html#a4bf6248a0eac6b458e6a3962eba5a134":[4,0,0,0,1,0,2,1],
+"classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget.html#a4bf6248a0eac6b458e6a3962eba5a134":[6,0,0,0,1,0,2,1],
+"classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget.html#a6279a8fc3504a82c4c408b363f5d81c1":[3,0,23,0,0],
 "classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget.html#a6279a8fc3504a82c4c408b363f5d81c1":[4,0,0,0,1,0,2,0],
 "classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget.html#a6279a8fc3504a82c4c408b363f5d81c1":[6,0,0,0,1,0,2,0],
 "classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget.html":[3,0,24,0],
@@ -243,11 +249,5 @@ var NAVTREEINDEX28 =
 "classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader.html#a8026bd0761ea2fcf7a95a180dd04c6da":[6,0,0,0,2,0,1,0,8],
 "classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader.html#a976375b582a059aa61e4ee92b5407bd0":[3,0,37,0,3],
 "classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader.html#a976375b582a059aa61e4ee92b5407bd0":[4,0,0,0,2,0,2,0,3],
-"classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader.html#a976375b582a059aa61e4ee92b5407bd0":[6,0,0,0,2,0,1,0,3],
-"classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader.html#aa190c03967578f7fe516a67372b5a0a1":[3,0,37,0,4],
-"classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader.html#aa190c03967578f7fe516a67372b5a0a1":[4,0,0,0,2,0,2,0,4],
-"classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader.html#aa190c03967578f7fe516a67372b5a0a1":[6,0,0,0,2,0,1,0,4],
-"classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader.html#aa28d2974cd5dee7707bedb4474b149b1":[3,0,37,0,9],
-"classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader.html#aa28d2974cd5dee7707bedb4474b149b1":[4,0,0,0,2,0,2,0,9],
-"classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader.html#aa28d2974cd5dee7707bedb4474b149b1":[6,0,0,0,2,0,1,0,9]
+"classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader.html#a976375b582a059aa61e4ee92b5407bd0":[6,0,0,0,2,0,1,0,3]
 };

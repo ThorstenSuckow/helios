@@ -1,5 +1,11 @@
 var NAVTREEINDEX27 =
 {
+"classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWFactory.html":[3,0,4,0],
+"classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWFactory.html":[4,0,0,0,0,0,1],
+"classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWFactory.html":[6,0,0,0,0,0,1],
+"classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWFactory.html#a54d0cb4c98bc9f34fc59a969f71c7e5d":[3,0,4,0,0],
+"classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWFactory.html#a54d0cb4c98bc9f34fc59a969f71c7e5d":[4,0,0,0,0,0,1,0],
+"classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWFactory.html#a54d0cb4c98bc9f34fc59a969f71c7e5d":[6,0,0,0,0,0,1,0],
 "classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWFactory.html#a72f9711b61439bcc15a60834bddfd7c3":[3,0,4,0,1],
 "classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWFactory.html#a72f9711b61439bcc15a60834bddfd7c3":[4,0,0,0,0,0,1,1],
 "classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWFactory.html#a72f9711b61439bcc15a60834bddfd7c3":[6,0,0,0,0,0,1,1],
@@ -243,11 +249,5 @@ var NAVTREEINDEX27 =
 "classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget.html#a8054bfc5ba37251f2abcd4ae88b83ded":[3,0,22,1,0],
 "classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget.html#a8054bfc5ba37251f2abcd4ae88b83ded":[4,0,0,0,1,0,1,0],
 "classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget.html#a8054bfc5ba37251f2abcd4ae88b83ded":[6,0,0,0,1,0,1,0],
-"classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget.html":[3,0,23,0],
-"classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget.html":[4,0,0,0,1,0,2],
-"classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget.html":[6,0,0,0,1,0,2],
-"classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget.html#a4bf6248a0eac6b458e6a3962eba5a134":[3,0,23,0,1],
-"classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget.html#a4bf6248a0eac6b458e6a3962eba5a134":[4,0,0,0,1,0,2,1],
-"classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget.html#a4bf6248a0eac6b458e6a3962eba5a134":[6,0,0,0,1,0,2,1],
-"classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget.html#a6279a8fc3504a82c4c408b363f5d81c1":[3,0,23,0,0]
+"classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget.html":[3,0,23,0]
 };

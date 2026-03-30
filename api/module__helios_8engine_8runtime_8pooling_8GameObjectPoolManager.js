@@ -9,5 +9,6 @@ var module__helios_8engine_8runtime_8pooling_8GameObjectPoolManager =
     [ "helios::engine::runtime::pooling::GameObjectPoolManager::init", "module__helios_8engine_8runtime_8pooling_8GameObjectPoolManager.html#a734504bc830143c5a4a23c61a1324914", null ],
     [ "helios::engine::runtime::pooling::GameObjectPoolManager::flush", "module__helios_8engine_8runtime_8pooling_8GameObjectPoolManager.html#a32e5b335a9649964ba08bd754ec4fa0b", null ],
     [ "helios::engine::runtime::pooling::GameObjectPoolManager::pool", "module__helios_8engine_8runtime_8pooling_8GameObjectPoolManager.html#a7ea115ab0b5d9fcca19733261660df9e", null ],
-    [ "helios::engine::runtime::pooling::GameObjectPoolManager::reset", "module__helios_8engine_8runtime_8pooling_8GameObjectPoolManager.html#a074423d9b208db991ea5998dde145632", null ]
+    [ "helios::engine::runtime::pooling::GameObjectPoolManager::reset", "module__helios_8engine_8runtime_8pooling_8GameObjectPoolManager.html#a074423d9b208db991ea5998dde145632", null ],
+    [ "helios::engine::runtime::pooling::GameObjectPoolManager::reset", "module__helios_8engine_8runtime_8pooling_8GameObjectPoolManager.html#a9dbaf6b030b50d81b382fda72a35723b", null ]
 ];

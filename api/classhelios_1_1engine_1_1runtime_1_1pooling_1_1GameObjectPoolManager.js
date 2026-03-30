@@ -8,5 +8,6 @@ var classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager =
     [ "pool", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager.html#a7ea115ab0b5d9fcca19733261660df9e", null ],
     [ "poolSnapshot", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager.html#adefe79820216fb38882703ec30fca781", null ],
     [ "release", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager.html#af829a0868d04b23adb9db07ab7cd3ee5", null ],
-    [ "reset", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager.html#a074423d9b208db991ea5998dde145632", null ]
+    [ "reset", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager.html#a074423d9b208db991ea5998dde145632", null ],
+    [ "reset", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager.html#a9dbaf6b030b50d81b382fda72a35723b", null ]
 ];

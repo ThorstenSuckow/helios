@@ -237,7 +237,7 @@
         </inbodydescription>
         <location file="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolManager.ixx" line="233" column="23" bodyfile="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolManager.ixx" bodystart="233" bodyend="249"/>
         <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a7ea115ab0b5d9fcca19733261660df9e" compoundref="GameObjectPoolManager_8ixx" startline="346" endline="351">pool</references>
-        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a074423d9b208db991ea5998dde145632" compoundref="GameObjectPoolManager_8ixx" startline="363" endline="377">reset</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a9dbaf6b030b50d81b382fda72a35723b" compoundref="GameObjectPoolManager_8ixx" startline="380" endline="389">reset</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a61dd2e91ab27f3070c8063259e7fbc64" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>std::optional&lt; <ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> &gt;</type>
@@ -379,6 +379,7 @@
         <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a734504bc830143c5a4a23c61a1324914" compoundref="GameObjectPoolManager_8ixx" startline="300" endline="320">init</referencedby>
         <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1adefe79820216fb38882703ec30fca781" compoundref="GameObjectPoolManager_8ixx" startline="210" endline="218">poolSnapshot</referencedby>
         <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1af829a0868d04b23adb9db07ab7cd3ee5" compoundref="GameObjectPoolManager_8ixx" startline="233" endline="249">release</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a9dbaf6b030b50d81b382fda72a35723b" compoundref="GameObjectPoolManager_8ixx" startline="380" endline="389">reset</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a074423d9b208db991ea5998dde145632" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -391,11 +392,47 @@
         </briefdescription>
         <detaileddescription>
 <para>Iterates through all registered pools and releases every active entity back to its pool. This effectively returns all pooled objects to their inactive state without destroying them.</para>
-<para>Useful for level transitions or game restarts where all pooled objects should be recycled. </para>
+<para>Useful for level transitions or game restarts where all pooled objects should be recycled.</para>
+<para><simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a9dbaf6b030b50d81b382fda72a35723b" kindref="member">reset(const types::GameObjectPoolId)</ref> </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolManager.ixx" line="363" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolManager.ixx" bodystart="363" bodyend="377"/>
+        <location file="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolManager.ixx" line="365" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolManager.ixx" bodystart="365" bodyend="369"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a074423d9b208db991ea5998dde145632" compoundref="GameObjectPoolManager_8ixx" startline="365" endline="369">reset</references>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a074423d9b208db991ea5998dde145632" compoundref="GameObjectPoolManager_8ixx" startline="365" endline="369">reset</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a9dbaf6b030b50d81b382fda72a35723b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::pooling::GameObjectPoolManager::reset</definition>
+        <argsstring>(const types::GameObjectPoolId poolId)</argsstring>
+        <name>reset</name>
+        <qualifiedname>helios::engine::runtime::pooling::GameObjectPoolManager::reset</qualifiedname>
+        <param>
+          <type>const <ref refid="namespacehelios_1_1engine_1_1runtime_1_1pooling_1_1types_1a9eabad620f775312a5f29f77a73d31d1" kindref="member">types::GameObjectPoolId</ref></type>
+          <declname>poolId</declname>
+        </param>
+        <briefdescription>
+<para>Reset the pool with the specified poolId. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Releases every active entity back to its pool specified by poolId. This effectively returns all pooled objects to their inactive state without destroying them.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>poolId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ID of the pool to reset. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolManager.ixx" line="380" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolManager.ixx" bodystart="380" bodyend="389"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a7ea115ab0b5d9fcca19733261660df9e" compoundref="GameObjectPoolManager_8ixx" startline="346" endline="351">pool</references>
         <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1af829a0868d04b23adb9db07ab7cd3ee5" compoundref="GameObjectPoolManager_8ixx" startline="233" endline="249">release</references>
       </memberdef>
     </sectiondef>
@@ -439,7 +476,7 @@
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolManager.ixx" line="105" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolManager.ixx" bodystart="105" bodyend="379"/>
+    <location file="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolManager.ixx" line="105" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/pooling/GameObjectPoolManager.ixx" bodystart="105" bodyend="390"/>
     <listofallmembers>
       <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a61dd2e91ab27f3070c8063259e7fbc64" prot="public" virt="non-virtual"><scope>helios::engine::runtime::pooling::GameObjectPoolManager</scope><name>acquire</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1af957b45c3ef1a8f19c94d7e0cb7e4554" prot="public" virt="non-virtual"><scope>helios::engine::runtime::pooling::GameObjectPoolManager</scope><name>addPoolConfig</name></member>
@@ -454,6 +491,7 @@
       <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1adefe79820216fb38882703ec30fca781" prot="public" virt="non-virtual"><scope>helios::engine::runtime::pooling::GameObjectPoolManager</scope><name>poolSnapshot</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1af829a0868d04b23adb9db07ab7cd3ee5" prot="public" virt="non-virtual"><scope>helios::engine::runtime::pooling::GameObjectPoolManager</scope><name>release</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a074423d9b208db991ea5998dde145632" prot="public" virt="non-virtual"><scope>helios::engine::runtime::pooling::GameObjectPoolManager</scope><name>reset</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a9dbaf6b030b50d81b382fda72a35723b" prot="public" virt="non-virtual"><scope>helios::engine::runtime::pooling::GameObjectPoolManager</scope><name>reset</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

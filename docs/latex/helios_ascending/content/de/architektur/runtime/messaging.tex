@@ -1,13 +1,13 @@
 \subsection{Das Messaging-Konzept}\label{sec:runtime_messaging}
 
-Der Nachrichtenaustausch zwischen Systemen und Laufzeitkomponenten erfolgt über den \texttt{UpdateContext}, der als \textit{Context Object}~\cite[182-204]{ACM03} Schnittstellen zum Lesen und Ablegen von Nachrichten bereitstellt (siehe Abschnitt~\ref{sec:runtime_gameloop}).
-Darunter befindet sich der Zugriff auf einen zentralen und Engine-spezifischen \texttt{CommandBuffer}, der - basierend auf zur Compile-Time definierten Command-Typen - relevante \textit{Commands} zur Ablage und Weiterverarbeitung bereitstellt.\footnote{
-    Die Angabe der zur Kompilierzeit bekannten Befehlstypen ermöglicht einen Performance-Vorteil, der mit erhöhtem Bootstrapping- und Wartungsaufwand bei der Einführung neuer \textit{Commands} einhergeht, wie in Abschnitt~\ref{sec:meilenstein_5} beschrieben.
+Der Nachrichtenaustausch zwischen Systemen und Laufzeitkomponenten erfolgt über den \texttt{UpdateContext}, der als Kontextobjekt Schnittstellen zum Lesen und Ablegen von Nachrichten bereitstellt (siehe Abschnitt~\ref{sec:runtime_gameloop}).
+Darunter befindet sich der Zugriff auf einen zentralen und Engine-spezifischen \texttt{CommandBuffer}, der - basierend auf zur Kompilierzeit definierten Befehlstypen - relevante \textit{Commands} zur Ablage und Weiterverarbeitung bereitstellt.\footnote{
+    Die Angabe der zur Kompilierzeit bekannten Befehlstypen ermöglicht einen Performance-Vorteil, der mit erhöhtem Bootstrapping- und Wartungsaufwand bei der Einführung neuer Commands einhergeht, wie in Abschnitt~\ref{sec:meilenstein_5} beschrieben.
 }
 
 Die Command-Verarbeitung stützt sich auf die \texttt{CommandHandlerRegistry}:
-Bei der Abarbeitung (\textit{Flush)} des \texttt{TypedCommandBuffer} wird für jeden Befehlstyp geprüft, ob ein registrierter Handler vorliegt.
-Ist dies der Fall, wird der \textit{Command} an diesen delegiert; andernfalls wird - sofern der \textit{Command} das \texttt{ExecutableCommand}-Concept erfüllt - dessen \texttt{execute}-Methode direkt aufgerufen.\\
+Bei der Abarbeitung (\textit{Flush}) des \texttt{TypedCommandBuffer} wird für jeden Befehlstyp geprüft, ob ein registrierter Handler vorliegt.
+Ist dies der Fall, wird der Command an diesen delegiert; andernfalls wird - sofern der Command das \texttt{ExecutableCommand}-Concept erfüllt - dessen \texttt{execute}-Methode direkt aufgerufen.\\
 
 Die Registrierung eines Handlers erfolgt über die \texttt{GameWorld}:
 
@@ -17,14 +17,14 @@ gameWorld.registerCommandHandler<SpawnCommand, DespawnCommand>(handler);
 
 Die \texttt{GameWorld} nutzt hierbei \textit{Variadic Templates} zusammen mit \textit{Fold Expressions}~\cite[S. 82-118]{Ban22}, um für jeden übergebenen Command-Typ einen zugehörigen Handler-Eintrag in der \texttt{ResourceRegistry} der \texttt{GameWorld} anzulegen.
 Auch hier werden die Handler erneut über \textit{Concepts} (\texttt{IsCommandHandlerLike}) validiert, um sicherzustellen, dass für jeden angegebenen Typ eine passende \texttt{submit}-Funktion implementiert ist.
-Intern speichert die Registry eine \textit{type erased} Indirektion, sodass Methoden des Handlers ohne Vererbung von einer gemeinsamen Basisklasse aufgerufen werden können.\\
+Intern speichert die Registry eine \textit{type erased} Indirektion, sodass Methoden des Handlers ohne Vererbung von einer gemeinsamen Basisklasse aufgerufen werden können.
 
 \vspace{5mm}
 \begin{tcolorbox}[title={Verarbeitungsreihenfolge von Befehlen}, colback=black!5, colframe=black]
     In der \texttt{GameWorld} registrierte \texttt{CommandBuffer} werden von der \texttt{GameLoop} bei jedem Phasenwechsel geflusht.
     Darüber hinaus ist es möglich, über \texttt{CommitPoints} ein Flushen innerhalb einer Phase zwischen zwei Pässen auszulösen.\\
     Dabei wird der Write-Buffer des \texttt{CommandBuffer} mit dem Read-Buffer getauscht, was für nachfolgende Pässe, die über den \texttt{UpdateContext} Commands eines bestimmten Typs erwarten, relevant ist:
-    Systeme müssen daher so angeordnet werden, dass die Reihenfolge der Verarbeitung die erfolgten Buffer-Swaps berücksichtigt.\\
+    Systeme müssen daher so angeordnet werden, dass die Reihenfolge der Verarbeitung die erfolgten Buffer-Swaps berücksichtigt.
 \end{tcolorbox}
 \vspace{5mm}
 
@@ -42,4 +42,4 @@ Der \texttt{UpdateContext} bietet hierbei Zugriff auf drei Ebenen von Event-Buss
     \item \textbf{Frame-Events} (\texttt{pushFrame}/\texttt{readFrame}): Werden am Ende eines Frames getauscht und erlauben eine frameübergreifende Kommunikation.
 \end{itemize}
 
-Durch die Aufteilung in diese drei Ebenen und eine entsprechende Strukturierung der \textit{GameLoop} lässt sich die Reichweite einer Nachricht gezielt eingrenzen.
+Durch die Aufteilung in diese drei Ebenen und eine entsprechende Strukturierung der GameLoop lässt sich die Reichweite einer Nachricht gezielt eingrenzen.

@@ -1,17 +1,17 @@
 \section{Meilenstein 4: Spawning und Kollisionserkennung}\label{sec:meilenstein_4}
 
-Meilenstein 4 sah die Fertigstellung eines \textit{Vertical Slice} vor, in dem die wichtigsten Regeln und Mechaniken des Spiels implementiert werden sollten.\\
+Meilenstein 4 sah die Fertigstellung eines \textit{Vertical Slice}~\cite[S. 701]{Mcc04} vor, in dem die wichtigsten Regeln und Mechaniken des Spiels implementiert werden sollten.\\
 
 Da sich die vorherigen Meilensteine vor allem auf die technische Umsetzung des Framework-Grundgerüsts konzentriert hatten, sah sich die Entwicklung zu diesem Zeitpunkt mit der Herausforderung konfrontiert, die mit Meilenstein 3 begonnenen und zunehmend komplexer werdenden Spielmechaniken zu integrieren.
 Dies machte eine umfassende Umstrukturierung der Codebasis erforderlich.
-Abgeschlossen werden konnte der Meilenstein schließlich mit einer API für die \textit{GameLoop}, die eine klarere Strukturierung der verschiedenen Systeme innerhalb einer Frame-Iteration erlaubte (siehe Abschnitt~\ref{sec:runtime_gameloop}).
+Abgeschlossen werden konnte der Meilenstein schließlich auch mit einer GameLoop-API, die eine klarere Strukturierung der verschiedenen Systeme innerhalb einer Frame-Iteration erlaubt.
 Insgesamt wurden in diesem Meilenstein folgende Konzepte umgesetzt:
 
 \begin{itemize}
     \itemsep0.5em
     \item Einführung des \texttt{Manager}-Konzepts als Orchestrator spezifischer Subsysteme (siehe Abschnitt~\ref{sec:runtime_manager}).
-    \item Entwurf einer \textit{phasenbasierten} \textit{GameLoop}, die mit verschiedenen \textit{Passes} und \textit{Commit Points} klare Schnittstellen für Systemübergänge definiert.
-    \item Implementierung von \texttt{CommandHandler} und \texttt{CommandBuffer}, die nach dem \textit{Push-Pull}-Prinzip verschiedene Phasen der \textit{GameLoop} zum Nachrichtenaustausch nutzen können.
+    \item Entwurf einer \textit{phasenbasierten} GameLoop, die mit verschiedenen Pässen und Commit Points klare Schnittstellen für Systemübergänge definiert (siehe Abschnitt~\ref{sec:runtime_gameloop}).
+    \item Implementierung von \texttt{CommandHandler} und \texttt{CommandBuffer}, die nach dem \textit{Push-Pull}-Prinzip verschiedene Phasen der GameLoop zum Nachrichtenaustausch nutzen können (siehe Abschnitt~\ref{sec:runtime_messaging}).
 \end{itemize}
 
 Die bereits erwähnte Umstrukturierung der Codebasis hatte indes auch Auswirkungen auf den Entwicklungsprozess:
@@ -28,18 +28,17 @@ Die Auswirkungen auf die Kompilierzeit wurden im Projektkontext als vernachläss
 
 
 \subsubsection{Expression Builder für das Spawn-System}
-Außerdem erfolgte eine logische Trennung zwischen engine-intrinsischen Funktionen - der bereits zitierten \textit{Runtime} - und Modulen, die für Spielmechaniken verantwortlich sind.
-Zwischen diesen (\texttt{mechanics}) besteht ein äußerst geringer Grad an Kopplung; sie stellen unter anderem Implementierungen für Kampf- und Punktesysteme bereit.
+In dieser Phase erfolgte außerdem eine logische Trennung engine-intrinsischer Funktionen, und zwar zwischen Laufzeitsystemen und Modulen, die für Spielmechaniken verantwortlich sind.
 Zudem wurde ein \textit{policy-basiertes} System für Spawning und Despawning eingeführt, das auf dem im \texttt{runtime}-Modul platzierten Spawn-System von \textit{helios} aufsetzt.
-Dieses wurde im weiteren Verlauf ausgebaut und kann mithilfe einer \textit{Domain Specific Language} (DSL) konfiguriert werden, um eine semantische Konfiguration von Spawn-Logiken in Verbindung mit \textit{Prefab}-Pools vorzunehmen.\\
+Dieses wurde im weiteren Verlauf ausgebaut und kann mithilfe einer \textit{Domain Specific Language} (DSL) konfiguriert werden, um eine semantische Konfiguration von Spawn-Logiken in Verbindung mit Prefab-Pools vorzunehmen.\\
 
-Der in diesem Zusammenhang implementierte \textit{Expression Builder}~\cite[S. 343-350]{FP11} erlaubt die Konfiguration von \textit{GameObjects} wie Spielern, Gegnern, Projektilen und Spielfiguren.
-Mit dieser Factory lässt sich der Code zur Spielweltkonfiguration einfacher und lesbarer halten.
+Der in diesem Zusammenhang implementierte \textit{Expression Builder}~\cite[S. 343-350]{FP11} erlaubt die Konfiguration von GameObjects wie Spielern, Gegnern, Projektilen und Spielfiguren.
+Mit dieser \textit{Factory} lässt sich der Code zur Spielweltkonfiguration einfacher und lesbarer halten.
 Außerdem müssen semantische Details nicht in der abstrakteren Implementierung aufgenommen werden (siehe Listing~\ref{lst:gameobjectdsl}).\\
 
 \vspace{5mm}
 \begin{lstlisting}[style=c++style,
-    caption={Auszug aus dem Code zur Konfiguration des \textit{BlueEnemy}, einem Gegnertyp, der 30 Sekunden nach Spielbeginn in der \textit{Collision Detection Demo} spawnt und aus einer Chase-Komponente zum Verfolgen des Spielers besteht.},
+    caption={Auszug aus dem Code zur Konfiguration des \textit{Blue Enemy}, einem rhombusförmigen Gegnertyp, der 30 Sekunden nach Spielbeginn in der \textit{Collision Detection Demo} spawnt und eine Komponente zum Verfolgen des Spielers besitzt (\texttt{ChaseComponent}).},
     label=lst:gameobjectdsl]
 auto blueEnemyPrefab = GameObjectFactory::instance()
     .gameObject()
@@ -59,17 +58,17 @@ auto blueEnemyPrefab = GameObjectFactory::instance()
 \end{lstlisting}
 \vspace{5mm}
 
-Dem Code in Listing~\ref{lst:gameobjectdsl} ist die \textit{vanilla} Konfiguration eines \texttt{GameObject} gegenübergestellt (siehe Listing~\ref{lst:gameobjectcmpbased}).
-Im direkten Vergleich lässt sich erkennen, dass die Gruppierung von Komponenten hinter einfacher lesbaren Methoden, die über ein \textit{Fluent Interface}~\cite{FluentInterface} realisiert wurden, den Quellcode zwar nicht wesentlich reduziert, ihn aber intuitiv verständlicher macht.
+Dem Code in Listing~\ref{lst:gameobjectdsl} ist die \textit{Vanilla}-Konfiguration eines \texttt{GameObject} gegenübergestellt (siehe Listing~\ref{lst:gameobjectcmpbased}).
+Die Gruppierung von Komponenten hinter einfacher lesbaren Methoden, die über ein \textit{Fluent Interface}~\cite{FluentInterface} realisiert wurden, reduziert den Quellcode zwar nicht wesentlich, macht ihn aber intuitiv verständlicher.
 
 \vspace{5mm}
 \begin{lstlisting}[style=c++style,
-    caption={Konfiguration eines Spieler-Objekts ohne DSL (Codebasis Meilenstein 4).},
+    caption={Konfiguration eines Spieler-Objekts ohne DSL.},
     label=lst:gameobjectcmpbased]
 auto shipGameObject = std::make_unique<GameObject>();
 shipGameObject->add<SceneNodeComponent>(spaceshipSceneNode);
 shipGameObject->add<TwinStickInputComponent>();
-// ... weitere Komponenten hinzufügen
+// ... weitere Komponenten
 \end{lstlisting}
 \vspace{5mm}
 
@@ -84,4 +83,5 @@ shipGameObject->add<TwinStickInputComponent>();
 \subsubsection{Grid-basierte Kollisionserkennung}
 
 Eine weitere fachliche Vertiefung fand in diesem Meilenstein mit der Implementierung des Kollisionssystems statt.
-Dieses basiert auf einem Grid-basierten Ansatz (\textit{Spatial Partitioning}), um die Anzahl der zu prüfenden Kollisionen zu reduzieren, und wird in Abschnitt~\ref{sec:systems} beschrieben.
+Dieses basiert auf \textit{Spatial Partitioning}~\cite[S. 18]{Eri04}, um die Anzahl der zu prüfenden Kollisionen zu reduzieren.
+Abschnitt~\ref{sec:systems} widmet sich der Implementierung des Systems.

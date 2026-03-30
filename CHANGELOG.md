@@ -9,6 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 No unreleased changes yet.
 
+## [0.6.0-milestone6] - 2026-03-30
+
+### Added
+
+#### Documentation
+- `helios` engine document (`docs/latex/helios_ascending/`)
+  - Academic documentation covering the evolution from OOP prototype to ECS-based engine (Trier University of Applied Sciences, WS 2025/26)
+  - Iterative evolution chapters for milestones 1–5 with architectural rationale
+  - Architecture analysis: System Layering, ECS (Sparse Sets, EntityHandle, Components, GameObject, Systems), Runtime (GameLoop, Messaging, Managers, State Management, GameWorld)
+  - Benchmark comparison of AoS (Milestone 3) vs SoA (Milestone 5) on Desktop (AMD Ryzen 9 9950X3D) and Laptop (Intel Core i7-8750H)
+  - Performance validation results for the Scoring Demo (FPS vs. object count)
+  - AI usage documentation (GitHub Copilot in development workflow)
+  - Notation and terminology conventions
+  - Glossary of engine-specific terms (Appendix)
+  - Benchmark source code listings (Appendix)
+
 ## [0.5.0-milestone5] - 2026-03-30
 
 ### Added
@@ -520,7 +536,8 @@ No unreleased changes yet.
 - Example applications (simple cube rendering, game controller input)
 
 
-[Unreleased]: https://github.com/thorstensuckow/helios/compare/v0.5.0-milestone5...HEAD
+[Unreleased]: https://github.com/thorstensuckow/helios/compare/v0.6.0-milestone6...HEAD
+[0.6.0-milestone6]: https://github.com/thorstensuckow/helios/compare/v0.5.0-milestone5...v0.6.0-milestone6
 [0.5.0-milestone5]: https://github.com/thorstensuckow/helios/compare/v0.4.0-milestone4...v0.5.0-milestone5
 [0.4.0-milestone4]: https://github.com/thorstensuckow/helios/compare/v0.3.0-milestone3...v0.4.0-milestone4
 [0.3.0-milestone3]: https://github.com/thorstensuckow/helios/compare/v0.2.0-milestone2...v0.3.0-milestone3

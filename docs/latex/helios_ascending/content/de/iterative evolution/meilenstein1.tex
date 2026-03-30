@@ -5,20 +5,18 @@ Der erste Meilenstein umfasste das grundlegende Anwendungsgerüst, in welches da
 Zu diesem Zeitpunkt war das System noch primär nach klassischen Paradigmen des objektorientierten Designs (\textit{OOD}) entworfen, geprägt durch einen Erfahrungshintergrund aus der Frontend- und UI-Entwicklung.
 
 Ziel war die Implementierung eines robusten Fenstermanagements auf Basis von \textit{glfw}~\cite{glfwHomepage}, um den Fokus nachfolgender Meilensteine vollständig auf die Einbindung der Spielsysteme und -mechaniken legen zu können.
-In diesem Zuge wurde außerdem die Abstraktion der Rendering-Engine eingeführt, aus der schließlich eine Spezialisierung zur Anbindung an ein \textit{OpenGL}-Backend~\cite{OpenGLHomepage} hervorging.\\
+Gleichzeitig wurde die Abstraktion der Rendering-Engine eingeführt, aus der schließlich eine Spezialisierung zur Anbindung an ein \textit{OpenGL}-Backend~\cite{OpenGLHomepage} hervorging.\\
 
-Bereits in dieser frühen Phase wurden Designentscheidungen getroffen, die sich in den später entwickelten, tieferen Schichten der Engine in dieser Form nicht mehr finden.
-Insbesondere der stark objektorientierte Ansatz wurde mit wachsendem Verständnis der Leistungsanforderungen an Spiele-Engines zugunsten eines \textit{Composition over Inheritance}-Ansatzes~\cite[S. 20]{GHJV94} aufgegeben, was schließlich in Meilenstein 5 in einer \textit{Entity Component System}-Architektur (\textit{ECS}) mündete (siehe Abschnitt~\ref{sec:meilenstein_5}).\footnote{
-Gregory bezeichnet einen verwandten Ansatz als~\textit{property-centric view}~\cite[S. 1058]{Gre19}
-}
+In dieser frühen Phase wurden Designentscheidungen getroffen, die sich in den später entwickelten, tieferen Schichten der Engine in dieser Form nicht mehr finden.
+Insbesondere der stark objektorientierte Ansatz wurde mit wachsendem Verständnis der Leistungsanforderungen an Spiele-Engines zugunsten eines \textit{Composition over Inheritance}-Ansatzes~\cite[S. 20]{GHJV94} aufgegeben, was schließlich in Meilenstein 5 in einer \textit{Entity Component System}-Architektur (\textit{ECS}) mündete (siehe Abschnitt~\ref{sec:meilenstein_5}).
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.4\columnwidth]{content/de/iterative evolution/img/simplecuberendering}
-    \caption{Screenshot der ersten lauffähigen Anwendung mit der \textit{helios}-Engine, der \textit{Simple Cube Rendering Demo}, die einen rotierenden Würfel darstellt.
-    Die zugrunde liegende Architektur implementiert bereits wesentliche Komponenten der Anwendungsschicht, darunter das Fenstermanagement sowie ein Event-System nach dem \textit{Publish-Subscribe}-Entwurfsmuster. (Quelle: eigene Aufnahme)}
+    \includegraphics[width=0.8\columnwidth]{content/de/iterative evolution/img/simplecuberendering}
+    \caption{Screenshot der ersten lauffähigen Anwendung, die mit der \textit{helios}-Engine realisiert wurde.
+    Die \textit{Simple Cube Rendering Demo} stellt einen rotierenden Würfel dar; die zugrunde liegende Architektur implementiert bereits wesentliche Komponenten der Anwendungsschicht, darunter das Fenstermanagement sowie ein Event-System nach dem \textit{Publish-Subscribe}-Entwurfsmuster~\cite[S. 339-343]{BMRS+96}. (Quelle: eigene Aufnahme)}
     \label{fig:simplecuberendering}
 \end{figure}
 
 Im Zuge der weiteren Entwicklung tiefer liegender Schichten musste die Anwendungsschicht nur geringfügig angepasst werden; größere Änderungen ergaben sich in diesem Bereich hauptsächlich durch die Umstrukturierung von Modulen.
-Signifikante funktionale Anpassungen betrafen im Wesentlichen die Handhabung der Viewports, worauf im nächsten Abschnitt~\ref{sec:meilenstein_2} kurz eingegangen wird.
+Signifikante funktionale Anpassungen erfolgten mit Meilenstein 2 und betrafen im Wesentlichen die Handhabung der Viewports und den Entwurf der \texttt{Renderable}-Klasse.

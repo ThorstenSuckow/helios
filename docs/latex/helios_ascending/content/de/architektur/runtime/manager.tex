@@ -1,29 +1,29 @@
 \subsection{Manager als Befehlsverwalter}\label{sec:runtime_manager}
 
-Manager dienen in \textit{helios} der Orchestrierung verschiedener Aktionen innerhalb der \textit{GameLoop}; ihr Konzept ist dabei nicht an eine bestimmte Fachlichkeit gebunden.
-Sie werden häufig als \texttt{CommandHandler} eingesetzt, womit ihnen die Aufgabe zukommt, innerhalb eines Frames Befehle zu sammeln und diese zu einem bestimmten Zeitpunkt - der von der \textit{GameLoop} ausgelöst und an \texttt{GameWorld::flushManagers()} signalisiert wird - zusammen mit den damit verbundenen Aufgaben auszuführen.\\
+Manager dienen in \textit{helios} der Orchestrierung verschiedener Aktionen innerhalb der GameLoop; ihr Konzept ist dabei nicht an eine bestimmte Fachlichkeit gebunden.
+Sie werden häufig als \texttt{CommandHandler} eingesetzt, womit ihnen die Aufgabe zukommt, innerhalb eines Frames Befehle zu sammeln und diese zu einem bestimmten Zeitpunkt - der von der GameLoop ausgelöst und an \texttt{GameWorld::flushManagers()} signalisiert wird - zusammen mit den damit verbundenen Aufgaben auszuführen.\\
 
-Zur Identifizierung eines Typs, der in \textit{helios} die Rolle eines \textit{Managers} übernehmen kann, werden \texttt{Concepts} (\texttt{IsManagerLike}) zusammen mit dem \texttt{EngineRoleTag} \texttt{ManagerRole} zur Kennzeichnung verwendet.\\
+Zur Identifizierung eines Typs, der in \textit{helios} die Rolle eines \textit{Managers} übernehmen kann, werden wiederum Concepts (\texttt{IsManagerLike}) zusammen mit einem \texttt{EngineRoleTag} (\texttt{ManagerRole}) verwendet.\\
 
-\textit{helios} implementiert u.\,a. folgende Manager:
+\textit{helios} implementiert unter anderem folgende Manager:
 
 \begin{itemize}
-    \item \texttt{HealthManager}: Verarbeitet Befehle zur Anwendung von Schaden auf die in der \textit{GameWorld} aktiven \textit{GameObjects}, beispielsweise ausgelöst durch Kollisionen.
+    \item \texttt{HealthManager}: Verarbeitet Befehle zur Anwendung von Schaden auf die in der GameWorld aktiven GameObjects, beispielsweise ausgelöst durch Kollisionen.
     Aktualisierungen der \texttt{HealthComponent} der betreffenden Objekte werden dabei über Events an die nächste Phase kommuniziert, was eine Verarbeitung als grafische Effekte oder Audio-Elemente erlaubt.
-    Der Manager sorgt außerdem dafür, dass die Objekte eine \texttt{DeadTagComponent} erhalten, um bestimmte Systeme (wie Bewegungssysteme) innerhalb desselben Frames nicht mehr zu berücksichtigen.
+    Der Manager sorgt außerdem dafür, dass die Objekte eine \texttt{DeadTagComponent} erhalten, um bestimmte Systeme (wie Bewegungssysteme) innerhalb desselben Frames nicht mehr zu berücksichtigen, sollten entsprechende Informationen über ein \texttt{HealthDepletedEvent} weitergeleitet werden.
 
     \item \texttt{ScorePoolManager}: Verwaltet die \texttt{ScorePools} in \textit{helios}, die dazu verwendet werden, Punkte bzw. Belohnungen zu sammeln.
-    Die \texttt{ScorePools} sind abstrakte Punktesysteme, die klassische Punktestände repräsentieren können und über \texttt{ScorePoolId}s an \textit{GameObjects} gebunden werden, sodass verschiedene \textit{GameObjects} über eigene, voneinander getrennte Punktestände verfügen.\footnote{
+    Die \texttt{ScorePools} sind abstrakte Punktesysteme, die klassische Punktestände repräsentieren können und über \texttt{ScorePoolId}s an GameObjects gebunden werden, sodass verschiedene GameObjects über eigene, voneinander getrennte Punktestände verfügen.\footnote{
         Ein ``Punkt`` als Belohnung/Strafe ist ein abstraktes Konzept in \textit{helios}.
         Dies würde auch die Berechnung von Erfahrungspunkten über einen solchen Pool erlauben.
     }
-    Das eigentliche Scoring ist als Mechanik in \texttt{helios.engine.mechanics.scoring} implementiert; der Manager integriert diese auf breiter Ebene in die \textit{GameWorld}.
+    Das eigentliche Scoring ist als Mechanik in \texttt{helios.engine.mechanics.scoring} implementiert; der Manager integriert diese auf breiter Ebene in die GameWorld.
 
-    \item \texttt{GameObjectPoolManager}: Verwaltet verschiedene Objektpools von \textit{GameObjects}, um die Erstellung solcher Entitäten zur Laufzeit möglichst zu vermeiden.
-    Der Manager bedient sich hierbei einer Liste von \texttt{PoolConfiguration}s, die jeweils eine festgelegte Zahl von \textit{GameObjects} auf Basis eines Prefabs enthalten, und bietet Fassadenfunktionen zur Rückgabe und Bereitstellung der in den Pools enthaltenen Objekte an (\texttt{acquire}, \texttt{release}).
-    Entgegen vieler anderer Manager, die zugleich als \texttt{CommandHandler} fungieren, arbeitet der \texttt{GameObjectPoolManager} nicht selbst als Befehlsverarbeiter zur Verwaltung der Objekte in den Pools - diese Rolle wird von dem im Folgenden vorgestellten \texttt{SpawnManager} übernommen.
+    \item \texttt{GameObjectPoolManager}: Verwaltet verschiedene Objektpools von GameObjects, um die Erstellung solcher Entitäten zur Laufzeit möglichst zu vermeiden.
+    Der Manager bedient sich hierbei einer Liste von \texttt{PoolConfiguration}s, die jeweils eine festgelegte Zahl von GameObjects auf Basis eines Prefabs enthalten, und bietet Fassadenfunktionen zur Rückgabe und Bereitstellung der in den Pools enthaltenen Objekte an (\texttt{acquire}, \texttt{release}).
+    Entgegen vieler anderer Manager, die zugleich als \texttt{CommandHandler} fungieren, arbeitet der \texttt{GameObjectPoolManager} nicht selbst als Befehlsverarbeiter zur Verwaltung der Objekte in den Pools - diese Rolle wird von dem \texttt{SpawnManager} übernommen.
 
-    \item \texttt{SpawnManager}: Auf Basis verschiedener Regeln und Bedingungen hat dieser Manager die Aufgabe, \textit{GameObjects} in die Spielwelt zu spawnen (\texttt{SpawnCommand}) oder diese zu entfernen und in die \texttt{GamePools} zurückzulegen (\texttt{DespawnCommand}).
+    \item \texttt{SpawnManager}: Auf Basis verschiedener Regeln und Bedingungen hat dieser Manager die Aufgabe, GameObjects in die Spielwelt zu spawnen (\texttt{SpawnCommand}) oder diese zu entfernen und in die \texttt{GamePools} zurückzulegen (\texttt{DespawnCommand}).
     Hierzu besitzt der \texttt{SpawnManager} eine Assoziation zu dem in der Runtime genutzten \texttt{GameObjectPoolManager}, damit die Ressourcenverwaltung an diesen delegiert werden kann.
     Ist eine Entität nicht mit einem Pool verbunden, findet an dieser Stelle folglich keine Delegation statt.
 
@@ -31,7 +31,7 @@ Zur Identifizierung eines Typs, der in \textit{helios} die Rolle eines \textit{M
     Auf das \textit{State Management} gehen wir als gesondertes Konzept in Abschnitt~\ref{sec:state_management} kurz ein.
 \end{itemize}
 
-Daneben finden sich noch der \texttt{WorldLifecycleManager} zur Verwaltung von Lifecycle-Commands wie einem \texttt{reset} der \textit{GameWorld}, der \texttt{TimerManager} zur Verwaltung von Spielmechaniken, die eine Zeitmessung benötigen, sowie der \texttt{UiActionCommandManager} zur Verarbeitung von UI-Commands, etwa der Aktivierung von Menüoptionen.\\
+Daneben finden sich noch der \texttt{WorldLifecycleManager} zur Verwaltung von Lifecycle-Commands wie einem \texttt{reset} der GameWorld, der \texttt{TimerManager} zur Verwaltung von Spielmechaniken, die eine Zeitmessung benötigen, sowie der \texttt{UiActionCommandManager} zur Verarbeitung von UI-Commands, etwa der Aktivierung von Menüoptionen.\\
 
 Abbildung~\ref{fig:manager_auswirkungen} zeigt den Ausschnitt einer Spielszene, wobei die von den Managern beeinflussten Systeme markiert sind.
 

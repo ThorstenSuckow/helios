@@ -1,6 +1,6 @@
 \subsection{State Management zur Verwaltung von Systemzuständen}\label{sec:state_management}
 
-In der Spieleentwicklung werden endliche Automaten (\textit{Finite State Machines}, \textit{FSM}) in zahlreichen Bereichen verwendet, darunter die Animation~\cite[S. 786-805]{Gre19}, Künstliche Intelligenz~\cite[S. 62-64]{YT25} sowie Abbildung des Verhaltens von Spielobjekten~\cite[S. 87-104]{Nys14}.
+In der Spielentwicklung werden endliche Automaten (\textit{Finite State Machines}, \textit{FSM}) in zahlreichen Bereichen verwendet, darunter die Animation~\cite[S. 786-805]{Gre19}, Künstliche Intelligenz~\cite[S. 62-64]{YT25} sowie Abbildung des Verhaltens von Spielobjekten~\cite[S. 87-104]{Nys14}.
 
 In \textit{helios} wurde das Konzept eines endlichen Automaten zur Verwaltung des globalen Anwendungszustands sowie zur Abbildung des Zustands des Regelsystems eines integrierten Spiels implementiert.
 Der \texttt{StateManager} (siehe Abschnitt~\ref{sec:runtime_manager}) ist template-basiert entworfen und nicht an vordefinierte Zustände gebunden.
@@ -19,14 +19,14 @@ Optional kann einer Regel eine \textit{Guard}-Funktion zugeordnet werden, die zu
 Über die \texttt{GameWorld} wird der \texttt{StateManager} in jedem Frame aufgerufen, um mögliche Zustandswechsel zu verarbeiten (\texttt{flushManagers()}).
 Die Anforderungen an einen Zustandswechsel werden dabei über einen \texttt{StateCommand} gekapselt, der Informationen über den gewünschten Zustandswechsel in Form des oben genannten Tripels enthält.
 
-Wurde ein Zustandswechsel akzeptiert, informiert der \texttt{StateManager} registrierte Listener über die folgenden \textit{Hooks}:
+Wurde ein Zustandswechsel akzeptiert, informiert der \texttt{StateManager} registrierte Listener über die folgenden Hooks:
 \begin{enumerate}
-    \item \texttt{onStateExit()} - Reaktion auf das Verlassen des bisherigen Zustands.
-    \item \texttt{onStateTransition()} - Verarbeitung des Übergangs selbst.
-    \item \texttt{onStateEnter()} - Reaktion auf das Eintreten des neuen Zustands.
+    \item \texttt{onStateExit()}: Reaktion auf das Verlassen des bisherigen Zustands.
+    \item \texttt{onStateTransition()}: Verarbeitung des Übergangs selbst.
+    \item \texttt{onStateEnter()}: Reaktion auf das Eintreten des neuen Zustands.
 \end{enumerate}
 
-Damit können spielspezifische Reaktionen auf Zustandswechsel realisiert werden.
+Dies erleichtert die Umsetzung spielspezifischer Reaktionen auf Zustandswechsel.
 
 \subsubsection{GameState und MatchState als vorimplementierte Zustandstypen}
 
@@ -56,11 +56,11 @@ Eine Abbildung des Automaten ist in Abbildung~\ref{fig:match_state} dargestellt.
 \subsubsection{Zustandsabhängiges Rendering}
 
 Um den aktiven Spielzustand mit der visuellen Darstellung zu verknüpfen, verwendet \textit{helios} ein Mapping von Zustandskombinationen auf \texttt{ViewportId}s und \texttt{MenuId}s.
-Damit können Tupel aus \texttt{GameState} und \texttt{MatchState} auf eine oder mehrere dieser IDs abgebildet werden, wodurch beispielsweise im Zustand \texttt{Paused} der \textit{MenuViewport} sowie ein \textit{PauseMenu} als Overlay angezeigt werden (siehe Listing~\ref{lst:statemapping}).
+Damit können Tupel aus \texttt{GameState} und \texttt{MatchState} auf eine oder mehrere dieser Ids abgebildet werden, wodurch beispielsweise im Zustand \texttt{Paused} der \textit{MenuViewport} sowie ein \textit{PauseMenu} als Overlay angezeigt werden (siehe Listing~\ref{lst:statemapping}).
 
 \vspace{5mm}
 \begin{lstlisting}[style=c++style,
-    caption={Codeausschnitt aus der \textit{Scoring Demo}. Die Einführung von Automaten in \textit{helios} erlaubt die Konfiguration zustandsspezifischer Anzeigen.},
+    caption={Codeausschnitt aus der \textit{Scoring Demo}, der die Konfiguration zustandsspezifischer Anzeigen demonstriert.},
     label=lst:statemapping]
 stateToViewportMap
   .add(GameState::Any, ViewportId{"main"})
@@ -79,7 +79,7 @@ stateToMenuMap
 
 \subsubsection{Integration mit der GameLoop}
 
-Die \texttt{GameLoop} nutzt die Zustandsinformationen, um die Ausführung von \textit{Passes} zu steuern.
-Jedem Pass kann ein bestimmter Zustand zugeordnet werden, sodass Systeme, die ausschließlich im laufenden Spiel relevant sind, nicht aktualisiert werden, wenn sich das Spiel im Titelscreen oder im Pausenzustand befindet.
+Die \texttt{GameLoop} nutzt die Zustandsinformationen, um die Ausführung von Pässen zu steuern.
+Jedem Pass kann ein bestimmter Zustand zugeordnet werden, sodass Systeme, die ausschließlich im \textit{laufenden Spiel} relevant sind, nicht aktualisiert werden, wenn sich das Spiel im Titelscreen oder im Pausenzustand befindet.
 Dies vereinfacht den Ausschluss bestimmter Systeme, die in einem Zustand wie beispielsweise ``pausiert'' nicht laufen sollen (Animation, Physik), während die Verarbeitung anderer Systeme (Input, Rendering) weiterhin möglich ist.
-Auf die konkrete Konfiguration wird in Abschnitt~\ref{sec:runtime_gameloop} eingegangen.
+Eine konkrete Konfiguration wird in Abschnitt~\ref{sec:runtime_gameloop} vorgestellt.

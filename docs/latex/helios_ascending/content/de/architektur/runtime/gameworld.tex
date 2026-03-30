@@ -39,20 +39,20 @@ Damit ist zugleich sichergestellt, dass von jedem registrierten Typ nur eine Ins
 \begin{tcolorbox}[title={Die Verwendung von Singletons in \textit{helios}}, colback=black!5, colframe=black]
     Gregory verbindet in~\cite[S. 418]{Gre19} den \textit{Manager} mit der Rolle einer \textit{Singleton}-Klasse.
     \textit{helios} gibt für die von der \texttt{GameWorld} verwalteten Ressourcen keinen fachlichen Basistyp vor, solange die zur Kompilierzeit geforderten und über \textit{Concepts} ausgedrückten Einschränkungen erfüllt sind.
-    Die Singleton-Rolle ist hier somit weder an Vererbung noch an eine bestimmte Klassenhierarchie gebunden, sondern ergibt sich aus der Registrierung über einen konkreten Typ.
+    Die Singleton-Rolle ist somit weder an Vererbung noch an eine bestimmte Klassenhierarchie gebunden, sondern ergibt sich aus der Registrierung über einen konkreten Typ.
 \end{tcolorbox}
 \vspace{5mm}
 
-\textit{Views}, die einen Zugriff auf eine Sammlung von Objektinstanzen ermöglichen und unter einem bestimmten \texttt{EngineRoleTag} spezifiziert wurden, sind über semantisch eindeutige, pluralisierte Methoden wie \texttt{managers} und \texttt{commandHandlers} erreichbar.
-Diese liefern einen \texttt{std::span} auf die intern über das \textit{Type Erasure}-Idiom verwalteten Instanzen zurück.\footnote{
-    Die Implementierung in \textit{helios} orientiert sich hierbei weitgehend an der in ~\cite{TypeErasure} beschriebenen Implementierung.
+Views, die einen Zugriff auf eine Sammlung von Objektinstanzen ermöglichen, die über ein \texttt{EngineRoleTag} identifiziert werden können, sind über semantisch eindeutige, pluralisierte Methoden wie \texttt{managers} und \texttt{commandHandlers} erreichbar.
+Diese liefern einen \texttt{std::span} auf die intern über das \textit{Type Erasure}-Idiom~\cite[S. 318-328]{Ban22} verwalteten Instanzen zurück.\footnote{
+    \textit{helios} setzt hierbei weitgehend die in \cite{TypeErasure} beschriebene Implementierung um.
 }\\
 
-Die \texttt{GameWorld} bietet außerdem Funktionen zur Erstellung von \textit{GameObjects} sowie die Möglichkeit, einen gefilterten \textit{View} auf solche Entitäten anzufragen, die über eine bestimmte Konstellation von Komponenten verfügen, was für die in Abschnitt~\ref{sec:systems} beschriebenen Systeme von besonderer Relevanz ist.
+Die \texttt{GameWorld} bietet außerdem Funktionen zur Erstellung von GameObjects sowie die Möglichkeit, gefilterte GameObject-Views unter Berücksichtigung bestimmter Komponentenkonstellationen anzufragen; dies ist gerade für die in Abschnitt~\ref{sec:systems} beschriebenen Systeme von besonderer Relevanz.
 
 Als weitere Aufgabe verwaltet die \texttt{GameWorld} die \texttt{Session}.
-Hierbei handelt es sich um die semantische Definition eines \textit{GameObjects}, dem während der Laufzeit des Spiels die Rolle zukommt, den Zugriff auf Komponenten zu ermöglichen, die für den globalen Spielzustand von Bedeutung sind.
-Hierzu gehören unter anderem \texttt{GameState}, \texttt{MatchState} und die aktiven \texttt{ViewportId}s.\\
+Hierbei handelt es sich um die semantische Definition eines GameObjects, dem während der Laufzeit des Spiels die Rolle zukommt, den Zugriff auf Komponenten und Informationen zu ermöglichen, die für den globalen Spielzustand von Bedeutung sind.
+Hierzu gehören unter anderem \texttt{GameState}, \texttt{MatchState}, die aktiven \texttt{ViewportId}s sowie das \texttt{EntityHandle}, das mit dem Spieler assoziiert ist.\\
 
 Als Orchestrator hat die \texttt{GameWorld} schließlich die Aufgabe, auf von außen eintretende Signale zu reagieren und die von ihr verwalteten Laufzeitkomponenten entsprechend zu koordinieren.
-Hierzu gehört beispielsweise das Leeren der Nachrichtenpuffer der \textit{Manager} und \textit{CommandHandler}, auf die in Abschnitt~\ref{sec:runtime_messaging} näher eingegangen wird.
+Hierzu gehört beispielsweise das Leeren der Nachrichtenpuffer der Manager und CommandHandler, worauf in Abschnitt~\ref{sec:runtime_messaging} näher eingegangen wird.

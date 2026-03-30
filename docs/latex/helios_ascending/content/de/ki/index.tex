@@ -17,19 +17,19 @@ Bei der Entwicklung von \textit{helios} kam \textit{GitHub Copilot} in folgenden
     \item Unterstützung bei Compilerfehlern.
     \item Hilfestellung bei der Übertragung von Programmierkonzepten aus anderen Sprachen in C++-idiomatische Konstrukte.
     \item Code Reviews, die auf GitHub beim Erstellen von Pull Requests durchgeführt wurden.
-    \item Ausformulierung von Tickets und Anforderungen sowie deren direkte Erstellung als \textit{GitHub Issue}.
-    \item Aufsetzen der Projektwebseite~\cite{HeliosProjectHome} unter Anwendung von \textit{Docusaurus}~\cite{docusaurus}.
-    \item Quellcodegenerierung im \texttt{helios.ext.imgui}-Modul, insbesondere um die implementierten Widgets um Funktionalität zu erweitern.
-    \item Unterstützung beim Zusammenführen der \textit{implementation units} und \textit{interface units} (siehe Abschnitt~\ref{sec:meilenstein_4}).
-    \item Mit zunehmender Kenntnis über Programmiersprache und Anforderungen wurde im späteren Projektverlauf die Funktion zur automatischen Vervollständigung von Quellcode in unserer IDE \textit{CLion} aktiviert, um die manuelle Eingabe von \textit{Boilerplate}-Code zu reduzieren.
+    \item Ausformulierung von Tickets und Anforderungen sowie deren direkte Erstellung als GitHub Issue.
+    \item Erstellung der Projektwebseite~\cite{HeliosProjectHome} mit \textit{Docusaurus}~\cite{docusaurus}.
+    \item Quellcodegenerierung im \texttt{helios.ext.imgui}-Modul, um die implementierten Widgets um Funktionalität zu erweitern.
+    \item Unterstützung beim Zusammenführen der Implementation Units und Interface Units (siehe Abschnitt~\ref{sec:meilenstein_4}).
+    \item Mit zunehmender Kenntnis über Programmiersprache und Anforderungen wurde im späteren Projektverlauf die Funktion zur automatischen Vervollständigung von Quellcode in unserer IDE \textit{CLion} aktiviert, um die manuelle Eingabe von Boilerplate-Code zu reduzieren.
 \end{itemize}
 
 
 Obwohl keine belastbaren Metriken erfasst wurden, haben wir die Nutzung insgesamt als hilfreich wahrgenommen, insbesondere bei Code Reviews.
 Ein exemplarisches Beispiel zeigt der in Abbildung~\ref{fig:copilot} dargestellte Kommentar von GitHub Copilot:
-Hier weist die KI darauf hin, dass die durch das initiale Hinzufügen der ECS-\textit{Systeme} (siehe Abschnitt~\ref{sec:systems}) hergestellte Ordnung verloren geht, wenn der \textit{View} aufgrund von Änderungen der zu repräsentierenden Datencontainer neu erstellt werden muss.
-Konsequenterweise wurde die Umsetzung einem Refactoring unterzogen: Die Lösung wurde über das \textit{Type Erasure}-Idiom generalisiert.
-In einem zusätzlichen Feld wird nun die Einfügereihenfolge festgehalten, um die \textit{View} mit der ursprünglichen Sortierung wiederherzustellen.\\
+Hier weist die KI darauf hin, dass die durch das initiale Hinzufügen der ECS-Systeme (siehe Abschnitt~\ref{sec:systems}) hergestellte Ordnung verloren geht, wenn der View aufgrund von Änderungen der zu repräsentierenden Datencontainer neu erstellt werden muss.
+Konsequenterweise wurde die Umsetzung einem Refactoring unterzogen: Die Lösung wurde über das Type Erasure-Idiom generalisiert.
+In einem zusätzlichen Feld wird nun die Einfügereihenfolge festgehalten, um die View mit der ursprünglichen Sortierung wiederherzustellen.\\
 
 \begin{figure}[!htbp]
     \centering
@@ -52,17 +52,17 @@ In Abbildung~\ref{fig:heliosContributors} ist die Anzahl der Commits von GitHub 
 \end{figure}
 
 Während die Anzahl der Commits von Copilot als direkte Beiträge von Anpassungen über die Code Reviews aufgefasst werden kann, ist die Anzahl der Commits der Autoren nicht direkt mit der Menge des von ihnen geschriebenen Codes gleichzusetzen: So können mit Pull-Requests verwandte Commits kleine Änderungen oder Ergänzungen enthalten, die von Copilot vorgeschlagen wurden.
-Damit verbunden lässt sich der regelmäßige Ausschlag der Commitanzahl zum Abschluss einer Projektphase in \textit{helios} nicht bloß auf nötige Anpassungen des Quellcodes und der Projektstruktur zurückführen - es fliessen auch neu erstellte bzw. angepasste Dokumentation sowie Webseitenanpassungen in die Statistik ein.\\
+Damit verbunden lässt sich der regelmäßige Ausschlag der Commitanzahl zum Abschluss einer Projektphase in \textit{helios} nicht bloß auf nötige Anpassungen des Quellcodes und der Projektstruktur zurückführen - es fließen auch neu erstellte bzw. angepasste Dokumentation sowie Webseitenanpassungen in die Statistik ein.\\
 
 Insgesamt lässt sich festhalten, dass der Einsatz von GitHub Copilot das Projekt unterstützt hat.
-Zu erwähnen ist jedoch auch, dass Validierung und Kontextualisierung der Ergebnisse eine zusätzliche Überprüfung bedeutet haben.
+Validierung und Kontextualisierung der generierten Ergebnisse haben allerdings zusätzliche Aufwände bedeutet.
 
 \vspace{5mm}
 \begin{tcolorbox}[title={Die Spieleindustrie und der Einsatz von KI}, colback=black!5, colframe=black]
     Der Einsatz von KI-gestützten Tools kann die Produktivität in der Software-Entwicklung steigern~\cite{githubProductivity}.
-    Folglich zählt das MIT Technology Review in der Ausgabe 01/2026 \textit{Generative Coding} zu den zehn wichtigsten Technologietrends und notiert dazu unter anderem, dass - während große Unternehmen wie Microsoft bereits einen Großteil der Codebasis mit Hilfe von KI entwickeln lassen~\cite{heiseAi} - sich gleichzeitig eine Abnahme des Stellenangebots für Junior-Positionen abzeichnet.\\
+    Folglich zählt das MIT Technology Review in der Ausgabe 01/2026 \textit{Generative Coding} zu den zehn wichtigsten Technologietrends und stellt dabei gleichzeitig fest, dass sich eine Abnahme des Stellenangebots für Junior-Positionen abzeichnet, während große Unternehmen wie Microsoft bereits einen Großteil der Codebasis mit Hilfe von KI entwickeln lassen~\cite{heiseAi}.\\
 
-    Mit der Welle der Entlassungen in der Spieleindustrie in vergangenen Jahren~\cite{gamesindustryLayoffs} sowie der Ankündigung namhafter Studios, KI in der Spielentwicklung nutzen zu wollen~\cite{larianAi}~\cite{ubisoftAi}, befürchten Konsumenten jedoch um die Qualität der Spiele; gleichermaßen fürchten Autoren, Grafiker und Synchronsprecher um ihre Arbeitsplätze.~\cite[S. 22]{Soti2026}
-    Entsprechend kontrovers wird das Thema in der Spielentwicklung diskutiert.~\cite{pcgameraAi}\\
+    Mit der Welle der Entlassungen in der Spieleindustrie in vergangenen Jahren~\cite{gamesindustryLayoffs} sowie der Ankündigung namhafter Studios, KI in der Spielentwicklung nutzen zu wollen~\cite{larianAi}~\cite{ubisoftAi}, fürchten Konsumenten um die Qualität der Spiele, und gleichermaßen Autoren, Grafiker und Synchronsprecher um ihre Arbeitsplätze.~\cite[S. 22]{Soti2026}
+    Entsprechend kontrovers wird das Thema in diesem Kontext diskutiert~\cite{pcgameraAi}.
 \end{tcolorbox}
 \vspace{5mm}

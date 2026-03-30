@@ -1,0 +1,376 @@
+\chapter{Quellcode der Benchmarks}\label{ch:benchmarkcode}
+
+Der folgende Anhang enthält die Quellcode-Beispiele der Benchmark-Tests, die in Kapitel~\ref{sec:ecs} zur Gegenüberstellung der AoS- und SoA-Implementierungen in Meilenstein~3 und Meilenstein~5 verwendet wurden.\\
+
+\noindent
+Importlisten und \texttt{include}-Direktiven sind auszugsweise dargestellt..
+
+\section{Meilenstein 3 (AoS)}\label{sec:benchmarkcode_aos}
+
+\begin{lstlisting}[style=c++style,
+    basicstyle=\ttfamily\footnotesize,
+caption={Benchmark-Quellcode basierend auf der AoS-Implementierung der GameObject-Infrastruktur in Meilenstein~3.},
+label=lst:aos_benchmark]
+#include <benchmark/benchmark.h>
+
+import helios;
+
+using namespace helios::engine::game;
+using namespace helios::engine::game::components::physics;
+
+static std::vector<std::unique_ptr<GameObject>> createGameObjects(std::size_t count) {
+    std::vector<std::unique_ptr<GameObject>> objects;
+    objects.reserve(count);
+
+    for (std::size_t i = 0; i < count; ++i) {
+        auto obj = std::make_unique<GameObject>();
+
+        obj->add<TransformComponent>();
+
+        if (i % 2 == 0) {
+            obj->add<Move2DComponent>();
+        }
+        if (i % 3 == 0) {
+            obj->add<LevelBoundsBehaviorComponent>();
+        }
+        if (i % 5 == 0) {
+            obj->add<ScaleComponent>(
+                1.0f, 1.0f, 1.0f,
+                helios::core::units::Unit::Meter
+            );
+        }
+
+        objects.push_back(std::move(obj));
+    }
+
+    return objects;
+}
+
+static void BM_HasComponent(benchmark::State& state) {
+    const auto count = static_cast<std::size_t>(state.range(0));
+    auto objects = createGameObjects(count);
+
+    for (auto _ : state) {
+        std::size_t found = 0;
+        for (const auto& obj : objects) {
+            if (obj->has<Move2DComponent>()) {
+                ++found;
+            }
+        }
+        benchmark::DoNotOptimize(found);
+    }
+
+    state.SetItemsProcessed(
+        static_cast<int64_t>(state.iterations()) *
+        static_cast<int64_t>(count)
+    );
+}
+
+BENCHMARK(BM_HasComponent)
+    ->Arg(100)
+    ->Arg(200)
+    ->Arg(500)
+    ->Arg(1000)
+    ->Arg(2000)
+    ->Arg(5000)
+    ->Arg(10000)
+    ->Arg(20000)
+    ->Arg(50000)
+    ->Unit(benchmark::kMicrosecond);
+
+static void BM_GetComponent(benchmark::State& state) {
+    const auto count = static_cast<std::size_t>(state.range(0));
+    auto objects = createGameObjects(count);
+
+    for (auto _ : state) {
+        std::size_t found = 0;
+        for (const auto& obj : objects) {
+            if (obj->get<Move2DComponent>() != nullptr) {
+                ++found;
+            }
+        }
+        benchmark::DoNotOptimize(found);
+    }
+
+    state.SetItemsProcessed(
+        static_cast<int64_t>(state.iterations()) *
+        static_cast<int64_t>(count)
+    );
+}
+
+BENCHMARK(BM_GetComponent)
+    ->Arg(100)
+    ->Arg(200)
+    ->Arg(500)
+    ->Arg(1000)
+    ->Arg(2000)
+    ->Arg(5000)
+    ->Arg(10000)
+    ->Arg(20000)
+    ->Arg(50000)
+    ->Unit(benchmark::kMicrosecond);
+
+static void BM_GetMultipleComponents(benchmark::State& state) {
+    const auto count = static_cast<std::size_t>(state.range(0));
+    auto objects = createGameObjects(count);
+
+    for (auto _ : state) {
+        std::size_t matched = 0;
+        for (const auto& obj : objects) {
+            auto* m2d = obj->get<Move2DComponent>();
+            if (!m2d) continue;
+
+            auto* tc  = obj->get<TransformComponent>();
+            auto* bbc = obj->get<LevelBoundsBehaviorComponent>();
+            auto* sc  = obj->get<ScaleComponent>();
+
+            if (tc && bbc && sc) {
+                ++matched;
+            }
+        }
+        benchmark::DoNotOptimize(matched);
+    }
+
+    state.SetItemsProcessed(
+        static_cast<int64_t>(state.iterations()) *
+        static_cast<int64_t>(count)
+    );
+}
+
+BENCHMARK(BM_GetMultipleComponents)
+    ->Arg(100)
+    ->Arg(200)
+    ->Arg(500)
+    ->Arg(1000)
+    ->Arg(2000)
+    ->Arg(5000)
+    ->Arg(10000)
+    ->Arg(20000)
+    ->Arg(50000)
+    ->Unit(benchmark::kMicrosecond);
+
+static void BM_HasComponent_Absent(benchmark::State& state) {
+    const auto count = static_cast<std::size_t>(state.range(0));
+    auto objects = createGameObjects(count);
+
+    for (auto _ : state) {
+        std::size_t found = 0;
+        for (const auto& obj : objects) {
+            if (obj->has<AabbColliderComponent>()) {
+                ++found;
+            }
+        }
+        benchmark::DoNotOptimize(found);
+    }
+
+    state.SetItemsProcessed(
+        static_cast<int64_t>(state.iterations()) *
+        static_cast<int64_t>(count)
+    );
+}
+
+BENCHMARK(BM_HasComponent_Absent)
+    ->Arg(100)
+    ->Arg(200)
+    ->Arg(500)
+    ->Arg(1000)
+    ->Arg(2000)
+    ->Arg(5000)
+    ->Arg(10000)
+    ->Arg(20000)
+    ->Arg(50000)
+    ->Unit(benchmark::kMicrosecond);
+
+
+BENCHMARK_MAIN();
+\end{lstlisting}
+
+\section{Meilenstein 5 (SoA)}\label{sec:benchmarkcode_soa}
+
+\begin{lstlisting}[style=c++style,
+basicstyle=\ttfamily\footnotesize,
+    caption={Benchmark-Quellcode basierend auf der SoA-Implementierung der ECS-Infrastruktur in Meilenstein~5.},
+    label=lst:soa_benchmark]
+#include <benchmark/benchmark.h>
+
+import helios;
+
+using namespace helios::engine::ecs;
+using namespace helios::engine::modules::physics::motion::components;
+using namespace helios::engine::modules::spatial::transform::components;
+using namespace helios::engine::mechanics::bounds::components;
+using namespace helios::engine::modules::physics::collision::components;
+
+struct EcsFixture {
+    EntityRegistry registry;
+    EntityManager em;
+    std::vector<GameObject> gameObjects;
+
+    explicit EcsFixture(std::size_t count)
+        : em(registry, count) {
+
+        gameObjects.reserve(count);
+
+        for (std::size_t i = 0; i < count; ++i) {
+            GameObject gameObject{ em.create(), &em};
+
+            gameObject.add<TranslationStateComponent>();
+
+            if (i % 2 == 0) {
+                gameObject.add<Move2DComponent>();
+            }
+            if (i % 3 == 0) {
+                gameObject.add<LevelBoundsBehaviorComponent>();
+            }
+            if (i % 5 == 0) {
+                gameObject.add<ScaleStateComponent>(
+                    1.0f, 1.0f, 1.0f,
+                    helios::core::units::Unit::Meter
+                );
+            }
+
+            gameObjects.push_back(gameObject);
+        }
+    }
+};
+
+static void BM_ECS_HasComponent(benchmark::State& state) {
+    const auto count = static_cast<std::size_t>(state.range(0));
+    EcsFixture fixture(count);
+
+    for (auto _ : state) {
+        std::size_t found = 0;
+        for (auto& go : fixture.gameObjects) {
+            if (go.has<Move2DComponent>()) {
+                ++found;
+            }
+        }
+        benchmark::DoNotOptimize(found);
+    }
+
+    state.SetItemsProcessed(
+        static_cast<int64_t>(state.iterations()) *
+        static_cast<int64_t>(count)
+    );
+}
+
+BENCHMARK(BM_ECS_HasComponent)
+    ->Arg(100)
+    ->Arg(200)
+    ->Arg(500)
+    ->Arg(1000)
+    ->Arg(2000)
+    ->Arg(5000)
+    ->Arg(10000)
+    ->Arg(20000)
+    ->Arg(50000)
+    ->Unit(benchmark::kMicrosecond);
+
+static void BM_ECS_GetComponent(benchmark::State& state) {
+    const auto count = static_cast<std::size_t>(state.range(0));
+    EcsFixture fixture(count);
+
+    for (auto _ : state) {
+        std::size_t found = 0;
+        for (auto& go : fixture.gameObjects) {
+            if (go.get<Move2DComponent>() != nullptr) {
+                ++found;
+            }
+        }
+        benchmark::DoNotOptimize(found);
+    }
+
+    state.SetItemsProcessed(
+        static_cast<int64_t>(state.iterations()) *
+        static_cast<int64_t>(count)
+    );
+}
+
+BENCHMARK(BM_ECS_GetComponent)
+    ->Arg(100)
+    ->Arg(200)
+    ->Arg(500)
+    ->Arg(1000)
+    ->Arg(2000)
+    ->Arg(5000)
+    ->Arg(10000)
+    ->Arg(20000)
+    ->Arg(50000)
+    ->Unit(benchmark::kMicrosecond);
+
+static void BM_ECS_GetMultipleComponents(benchmark::State& state) {
+    const auto count = static_cast<std::size_t>(state.range(0));
+    EcsFixture fixture(count);
+
+    for (auto _ : state) {
+        std::size_t matched = 0;
+        for (auto& go : fixture.gameObjects) {
+            auto* m2d = go.get<Move2DComponent>();
+            if (!m2d) continue;
+
+            auto* tsc = go.get<TranslationStateComponent>();
+            auto* lbb = go.get<LevelBoundsBehaviorComponent>();
+            auto* sc  = go.get<ScaleStateComponent>();
+
+            if (tsc && lbb && sc) {
+                ++matched;
+            }
+        }
+        benchmark::DoNotOptimize(matched);
+    }
+
+    state.SetItemsProcessed(
+        static_cast<int64_t>(state.iterations()) *
+            static_cast<int64_t>(count)
+    );
+}
+
+BENCHMARK(BM_ECS_GetMultipleComponents)
+    ->Arg(100)
+    ->Arg(200)
+    ->Arg(500)
+    ->Arg(1000)
+    ->Arg(2000)
+    ->Arg(5000)
+    ->Arg(10000)
+    ->Arg(20000)
+    ->Arg(50000)
+    ->Unit(benchmark::kMicrosecond);
+
+
+static void BM_ECS_HasComponent_Absent(benchmark::State& state) {
+    const auto count = static_cast<std::size_t>(state.range(0));
+    EcsFixture fixture(count);
+
+    for (auto _ : state) {
+        std::size_t found = 0;
+        for (auto& go : fixture.gameObjects) {
+            if (go.has<AabbColliderComponent>()) {
+                ++found;
+            }
+        }
+        benchmark::DoNotOptimize(found);
+    }
+
+    state.SetItemsProcessed(
+        static_cast<int64_t>(state.iterations()) *
+        static_cast<int64_t>(count)
+    );
+}
+
+BENCHMARK(BM_ECS_HasComponent_Absent)
+    ->Arg(100)
+    ->Arg(200)
+    ->Arg(500)
+    ->Arg(1000)
+    ->Arg(2000)
+    ->Arg(5000)
+    ->Arg(10000)
+    ->Arg(20000)
+    ->Arg(50000)
+    ->Unit(benchmark::kMicrosecond);
+
+
+BENCHMARK_MAIN();
+
+\end{lstlisting}

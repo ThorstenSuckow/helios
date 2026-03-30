@@ -24,7 +24,7 @@ No unreleased changes yet.
   - Notation and terminology conventions
   - Glossary of engine-specific terms (Appendix)
   - Benchmark source code listings (Appendix)
-  - 
+
 ## [0.5.0-milestone5] - 2026-03-30
 
 ### Added

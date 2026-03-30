@@ -40,7 +40,6 @@ The following files are **automatically copied** from the repository during the 
 | `docs/core-concepts/ecs/entity-handle.md` | `docs/core-concepts/ecs/entity-handle.md` | Versioned entity reference |
 | `docs/core-concepts/ecs/view.md` | `docs/core-concepts/ecs/view.md` | Component-based entity queries |
 | `docs/core-concepts/ecs/system.md` | `docs/core-concepts/ecs/system.md` | Game logic processor base class |
-| `docs/core-concepts/ecs/updatable.md` | `docs/core-concepts/ecs/updatable.md` | Per-frame update interface |
 | `docs/core-concepts/ecs/traits.md` | `docs/core-concepts/ecs/traits.md` | Compile-time lifecycle detection |
 | `docs/core-concepts/ecs/component-ops.md` | `docs/core-concepts/ecs/component-ops.md` | Lifecycle function pointers |
 | `examples/README.md` | `docs/examples/overview.md` | Examples overview |

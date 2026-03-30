@@ -61,7 +61,6 @@ const sidebars: SidebarsConfig = {
         'core-concepts/ecs/entity-handle',
         'core-concepts/ecs/view',
         'core-concepts/ecs/system',
-        'core-concepts/ecs/updatable',
         'core-concepts/ecs/traits',
         'core-concepts/ecs/component-ops',
         'core-concepts/sparse-set',

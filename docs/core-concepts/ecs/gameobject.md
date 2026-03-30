@@ -53,6 +53,7 @@ auto entity = gameWorld.gameObject(entityHandle);
 | `getOrAdd<T>(args...)` | Returns existing or creates new component |
 | `has<T>()` | Checks if component is attached |
 | `has(typeId)` | Checks by runtime type ID |
+| `remove<T>()` | Removes a component, returns true if removed |
 
 #### Adding Components
 
@@ -79,6 +80,15 @@ if (transform) {
 // Const version for read-only access
 const auto* health = player.get<HealthComponent>();
 ```
+
+#### Removing Components
+
+```cpp
+// Returns true if the component was removed
+bool removed = player.remove<ShieldComponent>();
+```
+
+> **Note:** If the component implements `onRemove()` and returns `false`, the removal is cancelled and `remove<T>()` returns `false`.
 
 ### Activation State
 

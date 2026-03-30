@@ -153,10 +153,10 @@ export namespace helios::ext::opengl::rendering {
 
                 if (shader != lastShader_) {
                     shader->use();
+                    shader->applyUniformValues(frameUniformValues);
                     lastShader_ = shader;
                 }
 
-                shader->applyUniformValues(frameUniformValues);
                 shader->applyUniformValues(command.objectUniformValues());
                 shader->applyUniformValues(command.materialUniformValues());
 

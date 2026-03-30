@@ -2,7 +2,7 @@
  * @file GameObject.benchmark.cpp
  * @brief Benchmarks for iterating over GameObjects and querying components.
  *
- * Measures the cost of component lookups in the in the legacy GameObject-based design.
+ * Measures the cost of component lookups in the legacy GameObject-based design.
  */
 #include <benchmark/benchmark.h>
 
@@ -78,8 +78,14 @@ static void BM_HasComponent(benchmark::State& state) {
 
 BENCHMARK(BM_HasComponent)
     ->Arg(100)
+    ->Arg(200)
+    ->Arg(500)
     ->Arg(1000)
+    ->Arg(2000)
+    ->Arg(5000)
     ->Arg(10000)
+    ->Arg(20000)
+    ->Arg(50000)
     ->Unit(benchmark::kMicrosecond);
 
 
@@ -105,12 +111,18 @@ static void BM_GetComponent(benchmark::State& state) {
 
 BENCHMARK(BM_GetComponent)
     ->Arg(100)
+    ->Arg(200)
+    ->Arg(500)
     ->Arg(1000)
+    ->Arg(2000)
+    ->Arg(5000)
     ->Arg(10000)
+    ->Arg(20000)
+    ->Arg(50000)
     ->Unit(benchmark::kMicrosecond);
 
 
-// BM_GetMultipleComponents – measures querying several component types per
+// BM_GetMultipleComponents - measures querying several component types per
 // object (similar to what LevelBoundsBehaviorSystem does each frame).
 static void BM_GetMultipleComponents(benchmark::State& state) {
     const auto count = static_cast<std::size_t>(state.range(0));
@@ -140,12 +152,18 @@ static void BM_GetMultipleComponents(benchmark::State& state) {
 
 BENCHMARK(BM_GetMultipleComponents)
     ->Arg(100)
+    ->Arg(200)
+    ->Arg(500)
     ->Arg(1000)
+    ->Arg(2000)
+    ->Arg(5000)
     ->Arg(10000)
+    ->Arg(20000)
+    ->Arg(50000)
     ->Unit(benchmark::kMicrosecond);
 
 
-// BM_HasComponent_Absent – worst-case: component is never present
+// BM_HasComponent_Absent - worst-case: component is never present
 static void BM_HasComponent_Absent(benchmark::State& state) {
     const auto count = static_cast<std::size_t>(state.range(0));
     auto objects = createGameObjects(count);
@@ -165,10 +183,17 @@ static void BM_HasComponent_Absent(benchmark::State& state) {
     );
 }
 
+// use various sizes for scaling comparisons
 BENCHMARK(BM_HasComponent_Absent)
     ->Arg(100)
+    ->Arg(200)
+    ->Arg(500)
     ->Arg(1000)
+    ->Arg(2000)
+    ->Arg(5000)
     ->Arg(10000)
+    ->Arg(20000)
+    ->Arg(50000)
     ->Unit(benchmark::kMicrosecond);
 
 

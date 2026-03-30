@@ -41,7 +41,7 @@ Die Anforderungen bezüglich der Lastkriterien wurden im ursprünglichen Dokumen
     \centering
     \includegraphics[width=1.0\columnwidth]{content/de/ergebnis/img/fps_balkengrafik}
     \caption{
-        Vergleich der FPS auf zwei unterschiedlichen Testsystemen: AMD Ryzen 9 9950X3D, 64\,GB RAM, NVIDIA GeForce RTX 5090 (blau) sowie Intel Core i7-8750H, 16\,GB RAM, NVIDIA GeForce GTX 1070 Max-Q (orange).
+        Vergleich der FPS auf zwei unterschiedlichen Testsystemen: Desktop (blau) sowie Laptop (orange).
         Das mobile System unterschreitet 60 FPS bei ca. $2\,500$ gleichzeitig dargestellten Objekten.
         Bei dem schnelleren Desktop-PC ist die Framerate auf ein oberes Limit von 240 FPS bei aktiviertem V-Sync und der durch den Monitor vorgegebenen Bildwiederholfrequenz festgelegt. (Quelle: eigene Darstellung)
     }
@@ -78,14 +78,14 @@ Die Objekte werden über den \texttt{RandomSpawnPlacer} und den \texttt{MoveInit
     \end{subfigure}
 
     \caption{
-        Auswirkung der Anzahl gleichzeitig animierter Spielobjekte auf die Performance. Die Abbildung zeigt $2\,500$, $5\,000$, $25\,000$ und $50\,000$ Objekte in einem Testszenarium (von oben links im Uhrzeigersinn; Testsystem AMD Ryzen 9 9950X3D, GeForce RTX 5090).
+        Auswirkung der Anzahl gleichzeitig animierter Spielobjekte auf die Performance. Die Abbildung zeigt $2\,500$, $5\,000$, $25\,000$ und $50\,000$ Objekte in einem Testszenarium (von oben links im Uhrzeigersinn; Desktop).
         Ab etwa $4\,500$ Objekten sinkt die Framerate unter 120 FPS.
         Bei $10\,000$ Objekten wird weiterhin eine Framerate von über 60 FPS erzielt, womit die Anforderungen deutlich übertroffen werden. (Quelle: eigene Aufnahme)
     }
     \label{fig:lastkriterien}
 \end{figure}
 
-Auf dem leistungsfähigen Testsystem (AMD Ryzen 9 9950X3D) konnten Framerateeinbrüche auf unter 60 FPS erst jenseits einer Größenordnung von etwa $10\,000$ Spielobjekten festgestellt werden.
+Auf dem leistungsfähigen Testsystem (Desktop) konnten Framerateeinbrüche auf unter 60 FPS erst jenseits einer Größenordnung von etwa $10\,000$ Spielobjekten festgestellt werden.
 Hierbei ist zu beachten, dass Optimierungen der Engine hauptsächlich CPU-seitig durch die in Abschnitt~\ref{sec:ecs} beschriebene ECS-Architektur ansetzen und keine Optimierungen hinsichtlich der GPU-Auslastung erfolgen:
 Es findet kein GPU-Instancing statt; stattdessen werden für alle $N$ dargestellten Spielobjekte auch $N$ Draw Calls ausgeführt.
 Dieser \textit{Draw-Call-Bound} könnte durch \textit{Batching} reduziert werden, damit die Ansteuerung des Grafik-Backends (hier: OpenGL) nicht zum Flaschenhals wird~\cite{Ceb04}.

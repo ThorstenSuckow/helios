@@ -101,7 +101,7 @@ export namespace helios::examples::scoring {
                        .fontScale(1.0f)
                        .fontResourceProvider(renderingDevice.fontResourceProvider())
                        .shader(glyphShader)
-                       .color(helios::util::Colors::LightGray)
+                       .color(helios::util::Colors::White)
                        .attachTo(&titleScene.root());
 
                 })
@@ -114,6 +114,28 @@ export namespace helios::examples::scoring {
 
                 })
                 .make();
+
+        auto authorText = GameObjectFactory::instance()
+            .gameObject(gameWorld)
+            .withRendering([&](auto& rnb) {
+                rnb.textRenderable()
+                   .text("2026 GarageCraft Games, @ThorstenSuckow")
+                   .fontId(uiTextFont)
+                   .fontScale(0.6f)
+                   .fontResourceProvider(renderingDevice.fontResourceProvider())
+                   .shader(glyphShader)
+                   .color(helios::util::Colors::LightGray)
+                   .attachTo(&titleScene.root());
+            })
+            .withUiTransform([](auto& tb) {
+                tb.transform()
+                  .pivot(helios::engine::modules::ui::layout::Anchor::Center)
+                  .viewport(helios::engine::common::types::ViewportId{"titleViewport"})
+                  .anchor(helios::engine::modules::ui::layout::Anchor::Center)
+                  .offsets({-20.0f, 0.0f, 0.0f, 0.0f});
+
+            })
+            .make();
 
 
             auto menuBox = GameObjectFactory::instance()
@@ -512,8 +534,8 @@ export namespace helios::examples::scoring {
                    .useElapsedLabel("GO!")
                    .hideWhenZero()
                    .displayRemaining()
-                   .fontId(uiTextFont)
-                   .fontScale(4.0f)
+                   .fontId(gameTitleFont)
+                   .fontScale(1.0f)
                    .fontResourceProvider(renderingDevice.fontResourceProvider())
                    .shader(glyphShader)
                    .color(helios::util::Colors::White)
@@ -539,6 +561,7 @@ export namespace helios::examples::scoring {
             highScoreText.setActive(true);
             titleText.setActive(true);
             pressStartText.setActive(true);
+            authorText.setActive(true);
 
     }
 

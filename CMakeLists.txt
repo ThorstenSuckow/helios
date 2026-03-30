@@ -72,7 +72,7 @@ target_link_libraries(imgui PUBLIC thirdparty::glfw thirdparty::glad)
 add_library(thirdparty::imgui ALIAS imgui)
 
 
-add_subdirectory(src)
+add_subdirectory(include)
 
 option(BUILD_TESTING "Build tests" ON)
 if(BUILD_TESTING)

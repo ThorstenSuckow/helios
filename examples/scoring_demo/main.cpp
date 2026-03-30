@@ -475,7 +475,7 @@ int main() {
     auto& timerManager      = gameWorld.manager<TimerManager>();
 
     // State listeners and UI action policies
-    installMatchStateListeners(matchStateManager, timerManager);
+    installMatchStateListeners(matchStateManager, timerManager, poolManager);
     installGameStateListeners(gameStateManager, timerManager);
     installDemoTimeListeners(gameStateManager, matchStateManager, timerManager);
     installCountdownTimeListeners(gameStateManager, matchStateManager, timerManager);
@@ -593,14 +593,17 @@ int main() {
 
             .addPass<GameState>(Running)//
             .addSystem<DamageOnCollisionSystem>()
+            .addSystem<GameTimerUpdateSystem>(timerManager)
             // makes sure manager generated passEvents are available in the next pass
             .addCommitPoint(CommitPoint::Structural)
 
             .addPass<GameState>(Running)
             .addSystem<CombatScoringSystem>()
             .addSystem<GameObjectLifecycleSystem>()
-            .addSystem<ScoringDemoRuleSystem>(timerManager)
-            .addSystem<GameTimerUpdateSystem>(timerManager);
+            // ScoringDemo needs Timer updates from previous pass,
+            // since timer clear system will reset finished timers to
+            // unfinished
+            .addSystem<ScoringDemoRuleSystem>(timerManager);
 
 
     // ----------------------------------------
@@ -656,7 +659,7 @@ int main() {
     gameWorld.init();
     gameLoop.init(gameWorld);
 
-    bool showImgui = false;
+    bool showDebug = false;
     bool tilde = false;
 
     gameWorld.session().setStateFrom<GameState>(
@@ -677,7 +680,7 @@ int main() {
 
         if (!tilde && inputManager.isKeyPressed(Key::TILDE)) {
             tilde = true;
-            showImgui = !showImgui;
+            showDebug = !showDebug;
         }
         if (tilde && inputManager.isKeyReleased(Key::TILDE)) {
             tilde = false;
@@ -702,9 +705,12 @@ int main() {
         }
 
         // 10.4 ImGui Overlay
-        if (showImgui) {
+        if (showDebug) {
             imguiOverlay.render();
         }
+        leftStickGizmo.setActive(showDebug);
+        rightStickGizmo.setActive(showDebug);
+        shipDirectionGizmo.setActive(showDebug);
 
         // 10.5 Frame Synchronization
         win->swapBuffers();

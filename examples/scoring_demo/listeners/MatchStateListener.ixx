@@ -19,6 +19,8 @@ using namespace helios::engine::state::types;
 using namespace helios::engine::state::listeners;
 using namespace helios::engine::state::commands;
 using namespace helios::engine::runtime::world;
+using namespace helios::engine::runtime::pooling;
+using namespace helios::engine::mechanics::combat::components;
 using namespace helios::engine::mechanics::match::types;
 using namespace helios::engine::mechanics::match::components;
 using namespace helios::engine::mechanics::gamestate::types;
@@ -39,7 +41,9 @@ export namespace helios::examples::scoring {
      * @param matchStateManager The match state manager to register listeners with.
      */
     inline void installMatchStateListeners(
-        StateManager<MatchState>& matchStateManager, TimerManager& timerManager
+        StateManager<MatchState>& matchStateManager,
+        TimerManager& timerManager,
+        GameObjectPoolManager& poolManager
     ) {
         matchStateManager.addStateListener(
             std::make_unique<LambdaStateListener<MatchState>>(
@@ -52,7 +56,7 @@ export namespace helios::examples::scoring {
                  const StateTransitionContext<MatchState> transitionContext) -> void {
 
             },
-            [&timerManager](UpdateContext& updateContext, const MatchState to) -> void {
+            [&timerManager, &poolManager](UpdateContext& updateContext, const MatchState to) -> void {
 
                 auto player = updateContext.find(updateContext.session().playerEntityHandle());
 
@@ -76,11 +80,12 @@ export namespace helios::examples::scoring {
 
                     auto* sc = player->get<SteeringComponent>();
                     auto* mc = player->get<Move2DComponent>();
+                    auto* a2dc = player->get<Aim2DComponent>();
                     sc->reset();
                     mc->reset();
+                    a2dc->reset();
 
                     player->get<HealthComponent>()->reset();
-
                     player->remove<DeadTagComponent>();
                 }
 
@@ -111,6 +116,8 @@ export namespace helios::examples::scoring {
                 }
 
                 if (to == MatchState::GameOver || to == MatchState::Warmup) {
+                    // return remaining projectiles to its pool
+                    poolManager.reset(IdConfig::ProjectilePoolId);
                     player->setActive(false);
                 }
 

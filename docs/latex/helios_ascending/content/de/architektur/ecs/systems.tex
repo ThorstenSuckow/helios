@@ -22,6 +22,7 @@ Damit geht die über Vererbung vermittelte Rollensemantik bewusst verloren, um z
 Dies soll das Paradigma der \textit{Composition over Inheritance} bekräftigen und Entwickler dazu ermutigen, schlanke, leichtgewichtige \textit{Systeme} zu bevorzugen, worauf in den vorherigen Abschnitten mit dem Entwurfsziel von \textit{helios} bereits Bezug genommen wurde.
 Die hierbei genutzten \texttt{EngineRoleTags} werden auch in anderen Kernkonzepten von \textit{helios} verwendet, etwa bei \textit{Managern} und \textit{CommandHandlern} (siehe Abschnitte~\ref{sec:runtime_manager} und~\ref{sec:runtime_messaging}).
 
+\vspace{5mm}
 \begin{lstlisting}[style=c++style,
     caption={Auszug aus dem Quellcode der beteiligten Klassen und Concepts zur Erstellung von Systemen in \textit{helios}. Systeme müssen von keinem bestimmten Basistyp erben, dafür aber eine \texttt{update}-Methode besitzen, die einen \texttt{UpdateContext} als Argument entgegennimmt. Die Rolle eines Systems wird über Tags ausgedrückt, die über Concepts zur Kompilierzeit überprüft werden.},
     label=lst:system_inheritance]
@@ -59,10 +60,10 @@ Das Concept stellt sicher, dass die übergebene Klasse über die entsprechende \
 Beim Aufruf erstellt die in Listing~\ref{lst:system_loop} gezeigte \texttt{update}-Methode einen \textit{View} auf die erforderlichen Komponentenkonstellationen.
 Die vom Entwickler hinterlegte Logik ist Implementierungsdetail und kann über eine bloße Aktualisierung der Komponenten hinausgehen, beispielsweise durch das Senden von Nachrichten an nachgelagerte Systeme.
 
+\vspace{5mm}
 \begin{lstlisting}[style=c++style,
-    caption={Skizze einer \texttt{update}-Implementierung, die einen View ausschließlich über aktive GameObjects erstellt, bei denen die aufgeführten Komponenten auch \textit{enabled} sind. Auf die Rolle von \texttt{UpdateContext} wird in Abschnitt~\ref{sec:runtime_gameloop} näher eingegangen.},
+    caption={Quellcode-Skizze einer \texttt{update}-Implementierung, die einen View ausschließlich über aktive GameObjects erstellt, bei denen die aufgeführten Komponenten auch \textit{enabled} sind. Auf die Rolle von \texttt{UpdateContext} wird in Abschnitt~\ref{sec:runtime_gameloop} näher eingegangen.},
     label=lst:system_loop]
-
     void update(UpdateContext& updateContext) {
         for (auto [go, cc, tsc, active] : updateContext.view<
                     ChaseComponent,
@@ -74,6 +75,7 @@ Die vom Entwickler hinterlegte Logik ist Implementierungsdetail und kann über e
         }
     }
 \end{lstlisting}
+\vspace{5mm}
 
 \begin{tcolorbox}[title={Exkurs: Kollisionserkennungssystem}, colback=black!5, colframe=black]
     In Meilenstein 4 (siehe Abschnitt~\ref{sec:meilenstein_4}) fand eine fachliche Vertiefung in der Implementierung eines Kollisionssystems statt.

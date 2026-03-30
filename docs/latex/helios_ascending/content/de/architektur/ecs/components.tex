@@ -2,7 +2,7 @@
 
 \textit{helios} verfolgt das Entwurfsziel, keine Funktionalität von Akteuren, die am Hot Path teilnehmen, in Basisklassen auszulagern (siehe Abschnitt~\ref{sec:ecs}).
 Aus diesem Grund existiert in \textit{helios} auch keine Komponenten-Basisklasse.
-Ohnehin wäre dies nicht sinnvoll, da Verwaltung und Verantwortlichkeiten der Komponenten erst in den ECS-Systemen hinterlegt sind.
+Ohnehin wäre dies nicht sinnvoll, da das Verhalten der Komponenten erst mit den ECS-Systemen definiert wird.
 Damit wird einer implementierenden API auch mehr Flexibilität geboten und der Abhängigkeitsgraph bleibt schlank.\\
 
 Die Speicherung der Komponenten erfolgt als SoA-Implementierung über die Klasse \texttt{SparseSet<}\(\mathcal{T}\)\texttt{>}, die vom \texttt{EntityManager} verwaltet wird und Zugriffe wie \texttt{get}, \texttt{emplace} und \texttt{remove} ermöglicht.
@@ -21,15 +21,15 @@ Folgende Hooks sind dabei vorgesehen:
 \begin{itemize}
     \itemsep0.5em
     \item \texttt{onAcquire} / \texttt{onRelease}: Methoden, die aufgerufen werden, sobald eine Komponente aus einem Pool erstmalig oder erneut angefordert wird.
-    Diese Hooks werden verwendet, um den Zustand der Komponenten auf einen für die Fachlichkeit sinnvollen initialen Zustand zurückzusetzen.
+    Diese Hooks werden verwendet, um den Zustand der Komponenten auf einen für die Fachlichkeit sinnvollen initialen Zustand zu setzen.
 
     \item \texttt{onActivate} / \texttt{onDeactivate}: Methoden, die aufgerufen werden, wenn das besitzende \texttt{GameObject} aktiviert bzw. deaktiviert wird.
     Die Semantik spiegelt die aktive Teilnahme eines GameObjects an der GameWorld wider.
-    Systeme, die zur Laufzeit über diese Komponenten iterieren, erhalten so nur die aktiven Teilnehmer.
+    Die Methoden erlauben es, den Zustand der Komponenten mit der aktiven Teilnahme des repräsentierten GameObjects abzugleichen.
 
-    \item \texttt{enable} / \texttt{disable}: Komponenten können über diese Hooks von außen gezielt aktiviert oder deaktiviert werden, unabhängig von der Beteiligung des besitzenden GameObjects an der GameWorld.
+    \item \texttt{enable} / \texttt{disable}: Komponenten können über diese Hooks von außen gezielt aktiviert oder deaktiviert werden, unabhängig von der Beteiligung des repräsentierten GameObjects an der GameWorld.
     Dies ermöglicht beispielsweise die temporäre Deaktivierung von Komponenten, die erst nach einer bestimmten Zeit wieder zugeschaltet werden sollen, ohne, dass \texttt{SparseSet}-Operationen im Hot Path für diese Komponenten angefordert werden.
-    Wird eine zusätzliche Methode \texttt{isEnabled} zur Kompilierzeit in einer Komponente gefunden, liefert ihr Aufruf die gewünschte Information über ihren Zustand zur Laufzeit.
+    Wird eine zusätzliche Methode \texttt{isEnabled} zur Kompilierzeit in einer Komponente gefunden, liefert ihr Aufruf zur Laufzeit die gewünschte Zustandsinformation.
 
     \item \texttt{onClone}: Wenn der Copy-Constructor für eine Komponente nicht gelöscht wurde, bedeutet dies für \textit{helios}, dass die Komponente kopiert werden darf.
     Sinnvoll ist das beispielsweise für Prefabs, bei denen der Kopiervorgang aufgrund einer hohen Komponentenanzahl vereinfacht werden soll.

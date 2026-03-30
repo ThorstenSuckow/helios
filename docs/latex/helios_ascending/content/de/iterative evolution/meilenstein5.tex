@@ -11,7 +11,8 @@ Die Änderungen beschränkten sich weitgehend auf die tieferen, gekapselten Schi
 }
 
 Ein hoher Migrationsaufwand entstand jedoch durch den Austausch der bislang in \textit{helios} verwendeten GUIDs zur Identifikation von Spielobjekten, die sich durch alle Schichten der bisher umgesetzten Engine und ihrer Subsysteme zogen.
-Da diese GUIDs nun durch einen \texttt{EntityHandle} ersetzt wurden, waren die Änderungen zwar zahlreich, aber über die Refactoring-Tools der IDE schnell durchgeführt.\\
+Da diese GUIDs nun durch einen \texttt{EntityHandle} ersetzt werden mussten, fanden zahlreiche Änderungen über viele Dateien hinweg statt.
+Die Refactoring-Tools der IDE halfen dabei, dies in annehmbarer Zeit durchzuführen.\\
 
 Anstelle der Änderungen in der Datenhaltung erwies sich in diesem Meilenstein die Integration eines \textit{User Interface} als weitaus folgenreicher.
 
@@ -19,12 +20,12 @@ Anstelle der Änderungen in der Datenhaltung erwies sich in diesem Meilenstein d
 Das für die Steuerung des Spiels notwendige User Interface in Form eines \textit{Heads-Up-Displays} (\textit{HUD}) sollte Menüoptionen zum Starten, Pausieren und Beenden des Spiels erhalten.
 Die Fertigstellung verzögerte sich hierdurch wesentlich~\cite[S. 274]{Mou15}.
 Um die Aufwände gering zu halten, folgten wir bei der Textdarstellung dem Ansatz von de~Vries, der die Anzeige von Text als Glyph-Rendering mittels FreeType~\cite{freetype} in~\cite[S. 449-457]{Vri20} demonstriert.
-In \textit{helios} erfolgt das Text-Rendering, nachdem die Meshes von der Rendering-Pipeline abgearbeitet wurden.
-Texte werden dabei als spezialisierte \textit{Renderables} behandelt, die neben der Zuordnung der Font-Ressource auch die Konfiguration von Skalierungsfaktor und Textfarbe erlauben.
+In \textit{helios} erfolgt das Text-Rendering, nachdem die Meshes von der Rendering-Pipeline verarbeitet wurden.
+Texte werden dabei als spezialisierte \textit{Renderables} behandelt, die neben der Zuordnung der Font-Ressource auch die Konfiguration von Skalierungsfaktor und Textfarbe erlauben.\\
 
 Eine semantische Erweiterung des bisher primär als (inter-)aktiv verstandenen GameObject-Begriffs ergibt sich durch die Behandlung von Texten als eben solche Objekte.
-Auch diese sind bei \textit{helios} in der GameWorld verankert (siehe Listing~\ref{lst:gameobject_text}), wodurch wir eine weitere Abstraktionsschicht einsparen konnten.
-Komponenten, die für die Anzeige benötigten Daten vorhalten (z.\,B. Anzahl der Spielerleben, ScorePool-IDs oder Timer), werden über ein einfaches Binding-System pro GameLoop-Iteration abgefragt und zur Anzeige gebracht.
+Auch diese sind bei \textit{helios} nun in der GameWorld verankert, wodurch wir eine weitere Abstraktionsschicht einsparen können (siehe Listing~\ref{lst:gameobject_text}).
+Komponenten, die für die Anzeige benötigte Daten besitzen (z.\,B. Anzahl der Spielerleben, ScorePool-Ids oder Timer), werden über ein einfaches Binding-System pro GameLoop-Iteration abgefragt und in die Anzeige integriert.
 
 \vspace{5mm}
 \begin{lstlisting}[style=c++style,
@@ -55,7 +56,7 @@ auto scoreText = GameObjectFactory::instance()
 Neben der Textanzeige erforderte die Umsetzung der Spielmenüs außerdem eine Auswertung von Spielzuständen.
 Hierbei greifen wir auf endliche Automaten zurück.
 Die Implementierungen in dem Modul \texttt{helios.engine.state} folgen dabei einem generischen Muster auf Basis von Templates.\footnote{
-    Damit ist die Definition weiterer Zustandsautomaten möglich, um beispielsweise hierarchische Automaten für komplexere Spielsteuerungen zu realisieren (siehe Abschnitt~\ref{sec:state_management}).
+    Damit ist die Definition weiterer Zustandsautomaten möglich, um beispielsweise hierarchische Automaten für komplexere Spielsteuerungen realisieren zu können (siehe Abschnitt~\ref{sec:state_management}).
 }
 Damit konnte die GameLoop um die Möglichkeit erweitert werden, einzelne Systeme basierend auf Zuständen zu aktivieren beziehungsweise zu deaktivieren.\\
 

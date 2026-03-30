@@ -1,30 +1,30 @@
 \section{Meilenstein 2: Controller-Input und die Evolution des GameObjects}\label{sec:meilenstein_2}
 
 
-Meilenstein 2 markierte die erste funktionale Erweiterung der Architektur, die ein Rendering in Abhängigkeit von Benutzereingaben (Gamepad-Input) ermöglichte.\\
+Meilenstein 2 markierte die erste funktionale Erweiterung der Architektur, die ein Rendering in Abhängigkeit von Gamepad-Eingabedaten ermöglichte.\\
 
 In diesem Zusammenhang wurden die Klassen \texttt{GameWorld} und \texttt{GameObject} eingeführt.
 Deren Semantik blieb zwar bis zur finalen Version erhalten, sie durchliefen im weiteren Verlauf des Projekts allerdings eine tiefgreifende strukturelle Transformation: Von Datencontainern, die Geschäftslogik kapseln, hin zu leichtgewichtigen Fassadenobjekten~\cite[S. 185-193]{GHJV94} für den Zugriff auf darunterliegende, C++ \textit{Template}-basierte \textit{Registries}~\cite[S. 112-114]{Str18} eines datenorientierten ECS.\\
 
 Der im vorherigen Abschnitt~\ref{sec:meilenstein_1} angesprochene architektonische Umbruch des Rendering-Systems betraf die Repräsentanten der Viewports~\cite[40]{SWH15}, die ursprünglich als statische, eins-zu-eins mit dem Fenster korrespondierende Renderziele verstanden wurden.
 Die \texttt{Viewport}-Klasse wurde so angepasst, dass innerhalb der Engine die Unterstützung mehrerer solcher Instanzen über ein einzelnes \texttt{RenderTarget} (als Abstraktion eines Framebuffers~\cite[S. 329]{HDMS+14}) ermöglicht wurde.
-Dies vereinfachte die Darstellung unterschiedlicher Szenen oder Szenenausschnitte, die von verschiedenen Kameras beobachtet werden.
+Dies vereinfacht die Darstellung unterschiedlicher Szenen oder Szenenausschnitte, die von verschiedenen Kameras beobachtet werden.
 Als positiver Seiteneffekt erleichterte diese Abstraktion die spätere Einführung von UI-Elementen in Meilenstein 5.\\
 
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.8\columnwidth]{content/de/iterative evolution/img/gamecontrollerinput}
-    \caption{Oberfläche der \textit{Game Controller Input Demo}. Der Szenengraph enthält verschiedene geometrische Primitive, deren Farbintensität bzw. Skalierung in Abhängigkeit von den Controller-Eingaben variiert. (Quelle: eigene Aufnahme)}
+    \caption{Oberfläche der \textit{Game Controller Input Demo}. Der Szenegraph enthält verschiedene geometrische Primitive, deren Farbintensität bzw. Skalierung in Abhängigkeit von den Controller-Eingaben variiert. (Quelle: eigene Aufnahme)}
     \label{fig:gamecontrollerinput}
 \end{figure}
 
 
 Die in Abbildung~\ref{fig:gamecontrollerinput} dargestellte Demonstration zeigt die Funktionalität der Eingabeverarbeitung, die über die Klasse \texttt{InputManager} realisiert wird, die für diesen Meilenstein erweitert wurde.
-Der \texttt{InputManager} ist in der äußersten Anwendungsschicht angesiedelt und liefert der \texttt{GameLoop} Informationen über Gamepad-Eingaben, die in Transformationen der hier dargestellten Objekte umgerechnet werden.
-Weitere Abstraktionsebenen waren noch nicht vorhanden; Szenenknoten wurden mittels \texttt{setScale} und \texttt{setTranslation} direkt modifiziert, Farbänderungen durch unmittelbare Aufrufe auf den mit den Knoten verbundenen \texttt{Renderables} realisiert.\\
+Der \texttt{InputManager} ist in der äußersten Anwendungsschicht angesiedelt und liefert der \texttt{GameLoop} Informationen über Gamepad-Eingaben, die in Transformationen der dargestellten Objekte umgerechnet werden.
+Weitere Abstraktionsebenen waren noch nicht vorhanden; Szeneknoten wurden mittels \texttt{setScale} und \texttt{setTranslation} direkt modifiziert, Farbänderungen durch unmittelbare Aufrufe auf den mit den Knoten verbundenen \texttt{Renderables} realisiert.\\
 
-In dieser Phase zeigte sich, dass der ursprüngliche Entwurf des Rendering-Systems zu komplex war.
+In dieser Phase zeigte sich auch, dass der ursprüngliche Entwurf des Rendering-Systems zu komplex war.
 Es erfolgte eine Restrukturierung, bei der in der resultierenden Hierarchie die Klasse \texttt{RenderPrototype} als Wurzelelement~\cite[S. 128]{Eva03} für \textit{Shader}- und \textit{Mesh}-Daten dient, um eine effizientere Wiederverwendung solcher Instanzen zu ermöglichen (siehe Abbildung~\ref{fig:renderable}).
 \texttt{RenderPrototype}s können von mehreren \texttt{Renderables} geteilt werden; optionale, individuelle Anpassungen (beispielsweise der \textit{Uniform Variablen}~\cite[S. 117-139]{SWH15}) werden durch die Schnittstellen der \texttt{Renderable}-Klasse ermöglicht: Somit kann der extrinsische Zustand eines Objekts zur Repräsentation grafischer Informationen über kompakte \textit{structs} angepasst werden~\cite[S. 196-197]{GHJV94}.\\
 
@@ -32,7 +32,7 @@ Es erfolgte eine Restrukturierung, bei der in der resultierenden Hierarchie die 
     \centering
     \includegraphics[width=0.8\columnwidth]{content/de/iterative evolution/img/renderable}
     \caption{
-        Design des \texttt{Renderable} in Meilenstein 2 (unten) im Vergleich zum ersten Entwurf (oben). Das Konzept, wiederverwendbare und zustandslose Basisobjekte für visuell identische Instanzen zu nutzen, wurde beibehalten, jedoch strukturell in das \texttt{RenderPrototype} als zentrales Objekt überführt. Individuelle Anpassungen von \texttt{Mesh}- bzw. \texttt{Material}-Eigenschaften lassen sich weiterhin vornehmen, allerdings durch präziser voneinander abgegrenzte Schnittstellen innerhalb der \texttt{Renderable}-Spezialisierungen. Der Entwurf trägt noch die stark objektorientierten Design-Entscheidungen der frühen Entwicklungsphase. (Quelle: eigene Darstellung)}
+        Design des \texttt{Renderable} in Meilenstein 2 (unten) im Vergleich zum ersten Entwurf (oben). Das Konzept, wiederverwendbare und zustandslose Basisobjekte für visuell identische Instanzen zu nutzen, wurde beibehalten, jedoch strukturell in \texttt{RenderPrototype} als zentrales Objekt überführt. Individuelle Anpassungen von \texttt{Mesh}- bzw. \texttt{Material}-Eigenschaften lassen sich weiterhin vornehmen, allerdings durch präziser voneinander abgegrenzte Schnittstellen innerhalb der \texttt{Renderable}-Spezialisierungen. Der Entwurf trägt noch die stark objektorientierten Design-Entscheidungen der frühen Entwicklungsphase. (Quelle: eigene Darstellung)}
     \label{fig:renderable}
 \end{figure}
 
@@ -61,7 +61,7 @@ Weitere Implementierungen in diesem Meilenstein betrafen unter anderem:
 \begin{itemize}
     \itemsep0.5em
     \item die Integration von \textit{Dear ImGui}~\cite{DearImgui} zur einfacheren Auswertung von Log-Nachrichten und zur gezielten Konfiguration von \texttt{GameObject}-Parametern zur Laufzeit (siehe Abbildung~\ref{fig:spaceshipcontrol}),
-    \item die Einführung einer spezialisierten \texttt{SceneNode} mit \texttt{lookAt}-Implementierung~\cite[S. 128-129]{PJH23} sowie einer Bitmaske zur Auswahl der in Eltern-Kind-Beziehungen zu vererbenden 3D-Transformationsdaten (Skalierung, Rotation, Translation).
+    \item die Einführung einer spezialisierten \texttt{SceneNode} als \texttt{CameraSceneNode} mit \texttt{lookAt}-Implementierung~\cite[S. 128-129]{PJH23}; außerdem eine Bitmaske zur Auswahl der in Eltern-Kind-Beziehungen zu vererbenden 3D-Transformationsdaten von Szeneknoten (Skalierung, Rotation, Translation).
 \end{itemize}
 
 \begin{figure}[!htbp]

@@ -2,12 +2,12 @@
 
 Der Nachrichtenaustausch zwischen Systemen und Laufzeitkomponenten erfolgt über den \texttt{UpdateContext}, der als Kontextobjekt Schnittstellen zum Lesen und Ablegen von Nachrichten bereitstellt (siehe Abschnitt~\ref{sec:runtime_gameloop}).
 Darunter befindet sich der Zugriff auf einen zentralen und Engine-spezifischen \texttt{CommandBuffer}, der - basierend auf zur Kompilierzeit definierten Befehlstypen - relevante \textit{Commands} zur Ablage und Weiterverarbeitung bereitstellt.\footnote{
-    Die Angabe der zur Kompilierzeit bekannten Befehlstypen ermöglicht einen Performance-Vorteil, der mit erhöhtem Bootstrapping- und Wartungsaufwand bei der Einführung neuer \textit{Commands} einhergeht, wie in Abschnitt~\ref{sec:meilenstein_5} beschrieben.
+    Die Angabe der zur Kompilierzeit bekannten Befehlstypen ermöglicht einen Performance-Vorteil, der mit erhöhtem Bootstrapping- und Wartungsaufwand bei der Einführung neuer Commands einhergeht, wie in Abschnitt~\ref{sec:meilenstein_5} beschrieben.
 }
 
 Die Command-Verarbeitung stützt sich auf die \texttt{CommandHandlerRegistry}:
 Bei der Abarbeitung (\textit{Flush)} des \texttt{TypedCommandBuffer} wird für jeden Befehlstyp geprüft, ob ein registrierter Handler vorliegt.
-Ist dies der Fall, wird der \textit{Command} an diesen delegiert; andernfalls wird - sofern der \textit{Command} das \texttt{ExecutableCommand}-Concept erfüllt - dessen \texttt{execute}-Methode direkt aufgerufen.\\
+Ist dies der Fall, wird der Command an diesen delegiert; andernfalls wird - sofern der Command das \texttt{ExecutableCommand}-Concept erfüllt - dessen \texttt{execute}-Methode direkt aufgerufen.\\
 
 Die Registrierung eines Handlers erfolgt über die \texttt{GameWorld}:
 

@@ -1,7 +1,7 @@
 \subsection{Systeme als Verhaltensträger}\label{sec:systems}
 
 In einem Frame werden die über die \texttt{GameLoop} registrierten Systeme in einer bestimmten Reihenfolge aufgerufen.
-Systeme iterieren hierbei nicht nur über einzelne Komponenten, sondern können - je nach Aufgabe - auch über eine Komposition von Komponenten iterieren, da beispielsweise eine Skalierungskomponente in unterschiedlichen Kontexten angewendet wird (UI, aktives NPC- oder Spielerobjekt).\footnote{
+Systeme iterieren hierbei nicht nur über einzelne Komponenten, sondern können - je nach Aufgabe - auch über eine Komposition von Komponenten iterieren, da beispielsweise eine Skalierungskomponente in unterschiedlichen Kontexten verwendet wird (UI, aktives NPC- oder Spielerobjekt).\footnote{
     Eine Komposition von Komponenten wird durch das Vorhandensein einer Menge verschiedener Komponententypen ausgedrückt.
     Unity bezieht sich darauf in ähnlicher Weise über die bereits erwähnten \textit{Archetypes} bzw. \textit{Chunks}.
 }
@@ -78,11 +78,11 @@ Die vom Entwickler hinterlegte Logik ist Implementierungsdetail und kann über e
 \vspace{5mm}
 
 \begin{tcolorbox}[title={Exkurs: Kollisionserkennungssystem}, colback=black!5, colframe=black]
-    In Meilenstein 4 (siehe Abschnitt~\ref{sec:meilenstein_4}) fand eine fachliche Vertiefung in der Implementierung eines Kollisionssystems statt.
-Die Umsetzung basiert auf einem \textit{Grid}-basierten Ansatz (\textit{Spatial Partitioning}), um die Anzahl der zu prüfenden Kollisionen zu reduzieren.
+    In Meilenstein 4 (siehe Abschnitt~\ref{sec:meilenstein_4}) fand eine fachliche Vertiefung in Kollisionserkennung und -behandlung statt.
+Die erfolgte Umsetzung des Kollisionssystems basiert auf einem \textit{Grid}-basierten Ansatz (\textit{Spatial Partitioning}), um die Anzahl der zu prüfenden Kollisionen zu reduzieren.
 
-Bei der Umsetzung folgen wir Ericson, der dieses Prinzip in~\cite[Kapitel 4]{Eri04} beschreibt:
-Hierbei wird das Spielfeld in eine vorab festgelegte Anzahl von Zellen unterteilt; in jedem Frame werden diese Zellen auf mögliche Kollisionspaare untersucht (\textit{Broad Phase}).
+Hierbei folgen wir Ericson, der dieses Prinzip in~\cite[Kapitel 4]{Eri04} beschreibt:
+Das Spielfeld wird in eine vorab festgelegte Anzahl von Zellen unterteilt; in jedem Frame werden diese Zellen auf mögliche Kollisionspaare untersucht (\textit{Broad Phase}).
 
 Da in unserem Fall keine Kollisionserkennung von Gegnern oder Projektilen untereinander durchgeführt werden muss, kann die Anzahl der zu prüfenden Paare auf jene Zellen reduziert werden, in denen sich mindestens ein Projektil und ein Gegnerobjekt oder die Spielerfigur und ein Gegnerobjekt befinden~\cite[S.~285]{Eri04}.
 

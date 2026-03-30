@@ -2,7 +2,7 @@
 
 \subsection{Strukturierung des Engine-Kerns}
 
-Die Strukturierung der Engine folgt der im Prototyp-Dokument beschriebenen Unterteilung in Module und orientiert sich weitgehend an einem \textit{by-feature, by-layer}-Ansatz, wie sie in Abbildung~\ref{fig:engine_struktur} dargestellt ist.\\
+Die Strukturierung der Engine folgt der im Prototyp-Dokument beschriebenen Unterteilung in Module und orientiert sich weitgehend an einem \textit{by-feature, by-layer}-Ansatz, wie in Abbildung~\ref{fig:engine_struktur} dargestellt.\\
 
 \begin{figure}[!htbp]
     \setlength{\DTbaselineskip}{18pt}
@@ -26,9 +26,9 @@ Die Unterteilung der Module gestaltet sich dabei wie folgt:
 \begin{itemize}
     \itemsep0.5em
     \item \texttt{builder/}: Stellt \textit{Builder}-Klassen für Spawn-Systeme und GameObjects bereit.
-    Diese basieren auf Expression Builder, Fluent Interfaces sowie einer DSL, um die Konfiguration von Fachobjekten aus einem hohen Abstraktionsgrad in einen besser lesbaren Kontext zu überführen.
+    Diese basieren auf Expression Builder, Fluent Interfaces sowie einer DSL, um die Konfiguration von Fachobjekten aus einem hohen Abstraktionsgrad in einen intuitiveren Kontext zu überführen.
     \item \texttt{common/}: Enthält allgemeine Hilfsklassen, die vor allem von \texttt{mechanics} und \texttt{modules} genutzt werden, darunter spielspezifische Kontextklassen für systemübergreifende Informationen.
-    \item \texttt{core/}: Stellt fundamentale Datentypen und Objekte zur Verfügung, die für den Betrieb der Engine benötigt werden, wie beispielsweise \texttt{Units}, die das metrische System für \textit{helios} definieren.
+    \item \texttt{core/}: Stellt fundamentale Datentypen und Objekte zur Verfügung, die für den Betrieb der Engine benötigt werden, wie beispielsweise \texttt{Units}, in der das metrische System für \textit{helios} definiert ist.
     \item \texttt{ecs/}: Implementiert die Kernkomponenten der ECS-Architektur, darunter den \texttt{EntityManager}, die \texttt{GameObject}-Fassade und die \texttt{SparseSet}-Datenstruktur.
     \item \texttt{mechanics/}: Implementiert Komponenten, Systeme, Datentypen und Nachrichtenobjekte für spezifische Spielmechaniken (z.\,B. Eingabeverarbeitung, Gesundheits- und Schadenslogik sowie Punktesysteme).
     \item \texttt{modules/}: Stellt Subsysteme mit einer höheren Nähe zum Engine-Kern bereit.
@@ -46,7 +46,7 @@ Eine schematische Darstellung der Architektur findet sich in Abbildung~\ref{fig:
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=1.0\columnwidth]{content/de/architektur/img/layered_engine_architecture}
-    \caption{Logische Gliederung der Engine-Schichten in \textit{helios}. Als Orchestrator und Verwalter kapselt Runtime die Module \texttt{mechanics} und \texttt{modules}, die domänenspezifische und wiederverwendbare Klassen enthalten und auf dieser Infrastruktur aufbauen. Die Laufzeitschicht nutzt Definitionen und Implementierungen aus \texttt{ecs}- und \texttt{core}. Das Modul \texttt{tooling} realisiert \textit{Cross-cutting concerns}~\cite{KLMM+97} und ist deshalb querschnittlich dargestellt.  (Quelle: eigene Darstellung)}
+    \caption{Logische Gliederung der Engine-Schichten in \textit{helios}. Als Orchestrator und Verwalter kapselt Runtime die Module \texttt{mechanics} und \texttt{modules}, die domänenspezifische und wiederverwendbare Klassen enthalten und auf der Runtime-Infrastruktur aufbauen. Die Laufzeitschicht nutzt Definitionen und Implementierungen aus \texttt{ecs}- und \texttt{core}. Das Modul \texttt{tooling} realisiert \textit{Cross-cutting concerns}~\cite{KLMM+97} und ist deshalb querschnittlich dargestellt.  (Quelle: eigene Darstellung)}
     \label{fig:layered_engine_architecture}
 \end{figure}
 
@@ -59,15 +59,16 @@ Innerhalb der Module nutzt \textit{helios} zur eindeutigen Identifizierung und t
     \item \texttt{commands}: Steuerkommandos, die innerhalb eines Frames von Systemen und Managern generiert werden.
     Die Verarbeitung erfolgt über \texttt{CommandHandler}-Konzepte, auf die in Abschnitt~\ref{sec:runtime_messaging} näher eingegangen wird.
     \item \texttt{components}: Objekte, die fachlich unterschiedliche Zustände eines GameObjects repräsentieren.
-    Als primär datenhaltende \texttt{struct}s konzipiert, können diese Objekte auch Invarianten absichern, etwa durch \textit{Clamping} von Werten, sollten darüber hinaus jedoch kein Verhalten implementieren.\footnote{
-        Im Gegensatz zu unserem Konzept, das Invarianten erlaubt, sehen andere ECS-Architekturen wie \textit{Unity DOTS} vor, dass Komponenten als reine Informationsträger fungieren: Invarianten werden dort in den Systemen abgesichert~\cite{UnityComponentConcepts}.
+    Als primär datenhaltende \texttt{struct}s konzipiert, können diese Objekte auch Invarianten absichern, etwa durch \textit{Clamping} von Werten.
+    Sie sollten darüber hinaus jedoch kein Verhalten implementieren.\footnote{
+        Im Gegensatz zu unserem Konzept, das auch eine Absicherung von Invarianten berücksichtigt, sehen andere ECS-Architekturen wie \textit{Unity DOTS} vor, dass Komponenten als reine Informationsträger fungieren: Invarianten werden dort in den Systemen abgesichert~\cite{UnityComponentConcepts}.
     }
     \item \texttt{events}: Nachrichten, die Systeme in Frame $N$ generieren und die von nachgelagerten Systemen im selben Frame oder in Frame $N+1$ verarbeitet werden können.
     Im Gegensatz zu \texttt{Commands} sind \textit{Events} als Informationsträger konzipiert.
     Sind deterministische Aktionen gefragt, sollten \texttt{Commands} verwendet werden.
     Die Unterscheidung existiert in \textit{helios} jedoch nur auf semantischer Ebene.
     \item \texttt{systems}: Logikeinheiten, die das Verhalten von GameObjects modifizieren, indem sie Komponenten aktualisieren sowie \texttt{Commands} und \texttt{Events} emittieren.
-    \item \texttt{types}: Hilfstypen wie Kontextobjekte~\cite[182-204]{ACM03} zum Datentransport sowie typisierte IDs zur sicheren Identifizierung von Ressourcen zur Laufzeit.
+    \item \texttt{types}: Hilfstypen wie Kontextobjekte~\cite[182-204]{ACM03} zum Datentransport sowie typisierte Ids zur sicheren Identifizierung von Ressourcen zur Laufzeit.
 \end{itemize}
 
 \begin{figure}[!htbp]

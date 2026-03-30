@@ -4,7 +4,7 @@ Erst mit zunehmender Komplexität des Projekts und der dadurch wachsenden Anzahl
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=1.0\textwidth]{content/de/architektur/ecs/img/ecs_evolution}
-    \caption{Konzeptionelle Darstellung der Evolution des \texttt{GameObject} als Compound Object (oben) hin zu einem datenorientierten Ansatz in Meilenstein 5 (unten). Die obere Darstellung verdeutlicht die Vermengung der Verantwortlichkeiten von Speichern, Verwalten und Zugriff auf die GameObjects sowie deren Komponenten. Mit der Einführung der ECS-Architektur konnte die Struktur in ein performantes Modell entkoppelt werden. (Quelle: eigene Darstellung)}
+    \caption{Konzeptionelle Darstellung der Evolution des \texttt{GameObject} als Compound Object (oben) hin zu einem datenorientierten Ansatz in Meilenstein 5 (unten). Die obere Darstellung verdeutlicht die Vermengung der Verantwortlichkeiten von \textit{Speichern}, \textit{Verwalten} und \textit{Zugriff} auf die GameObjects sowie deren Komponenten. Mit der Einführung der ECS-Architektur konnte die Struktur in ein performanteres Modell entkoppelt werden. (Quelle: eigene Darstellung)}
     \label{fig:ecs_evolution}
 \end{figure}
 
@@ -12,12 +12,12 @@ Umfassende Anwendung findet der SoA-Ansatz in \textit{Entity Component Systems}.
     Bei Gregory findet sich dieser Ansatz unter dem Begriff~\textit{property-centric view}~\cite[S. 1058]{Gre19}.
 }
 Hier wird eine Entität als theoretisches Konzept behandelt und ist im Code ein virtuelles Aggregat aus $N$ verschiedenen Komponenten, die in nach Komponententypen gruppierten Arrays gespeichert werden.
-Der abstrahierende Archetyp löst sich damit zunächst in eine lose erscheinende Ansammlung unterschiedlicher Komponenten auf.
+Der abstrahierte Archetyp löst sich damit zunächst in eine lose erscheinende Ansammlung unterschiedlicher Komponenten auf.
 Erst das ECS-\textit{System} ermöglicht eine konzeptuelle Integration der sich aus diesen Beziehungen ergebenden Fachlichkeit und Verantwortlichkeit.
 
 \vspace{5mm}
 \begin{tcolorbox}[title={Abgrenzung des ECS-Begriffs}, colback=black!5, colframe=black]
-    Als weitere Abgrenzung zu dem in Abschnitt~\ref{sec:meilenstein_3} eingeführten Compound Object weisen wir an dieser Stelle auf \textit{Fabian} hin, der in~\cite[84]{Fab18} erklärt, dass bereits ein Compound Object, das dem \textit{Composition over Inheritance}-Prinzip folgt und seine Eigenschaften in einer AoS-Struktur speichert, als ECS bezeichnet werden kann.
+    Als weitere Abgrenzung zu dem in Abschnitt~\ref{sec:meilenstein_3} eingeführten Compound Object weisen wir an dieser Stelle auf \textit{Fabian} hin, der in~\cite[84]{Fab18} erklärt, dass bereits ein Compound Object, das dem \textit{Composition over Inheritance}-Prinzip folgt und seine Eigenschaften in einer AoS-Struktur speichert, im Sinne eines ECS verstanden werden kann.
     Wir verwenden den Begriff im Folgenden jedoch im Kontext eines SoA-Layouts: Dies impliziert auch die Anforderung, die Daten für verschiedene Zugriffsarten effizient im Speicher anzuordnen, und geht damit über die reine Konzeption von Objekten und Eigenschaften hinaus.
 \end{tcolorbox}
 \vspace{5mm}
@@ -25,20 +25,19 @@ Erst das ECS-\textit{System} ermöglicht eine konzeptuelle Integration der sich 
 Die Idee hinter ECS liegt in der Trennung von Daten und Verhalten und hat in der Spielentwicklung prominente Vertreter, darunter das bereits erwähnte \textit{Unity DOTS} sowie die Open-Source-Projekte \textit{Bevy} (Rust)~\cite{BevyProject}, \textit{EnTT}~\cite{EnttProject} und \textit{Flecs}~\cite{FlecsProject} (beide C++).
 Die ECS-Architektur wird jedoch auch in anderen Domänen eingesetzt, in denen eine performante Verarbeitung von Daten relevant ist, etwa bei GPU-beschleunigten, nebenläufigen Batch-Simulationen zum Training von KI-Agenten~\cite{SRXB+23}.
 
-Dass eine Game-Engine auch ohne ECS populär und performant sein kann, zeigt unterdessen \textit{Godot}.
+Dass eine Game Engine auch ohne ECS populär und performant sein kann, zeigt unterdessen \textit{Godot}.
 Die Entwickler begründen den Verzicht auf eine solche Implementierung damit, dass die überwiegende Mehrheit der Spiele dies nicht benötige, die Engine aber entsprechende Hilfswerkzeuge bereitstelle, falls dieser Bedarf doch entstehen sollte: ``The vast majority of games do not need this and Godot provides handy helpers to do the job for most cases when you do.''~\cite{GodotNoECS}.
 
 \subsubsection{ECS als Entwurfsentscheidung}
 
-\textit{helios} orientiert sich an bewährten Implementierungen und verzichtet dort auf Polymorphie, wo tiefe Vererbungshierarchien für unnötigen Overhead sorgen.
-Dies betrifft insbesondere Systeme, die innerhalb eines Frames angefragt und ausgeführt werden.
-Ziel ist es, alle Systeme, die innerhalb eines Frames angesteuert werden, ohne Vererbung zu implementieren, sofern Vererbung bedeuten würde, dass fachliches Verhalten in einer Elternklasse liegt.
+Ziel von \textit{helios} ist es, alle Systeme, die innerhalb eines Frames angesteuert werden, ohne Vererbung zu implementieren, sofern Vererbung bedeuten würde, dass fachliches Verhalten in einer Elternklasse liegt.
+Hierzu sehen wir die ECS-Architektur als geeignetes Mittel, um eine Trennung von Daten und Verhalten zu gewährleisten.
 
 \subsubsection{Sparse Sets als Speicherlayout-Strategie}
 
-Prozessoren moderner Computersysteme verfügen über CPU-nahen Caches\footnote{
+Prozessoren moderner Computersysteme verfügen über CPU-nahe Caches\footnote{
     Unterteilt in sogenannte \textit{Level} (L1, L2, L3), um Cache-Hierarchien abzubilden.
-    Diese unterscheiden sich vor allem in der Zugriffsgeschwindigkeit.
+    Diese unterscheiden sich voneinander in Kapazität und vor allem in Zugriffsgeschwindigkeit.
 }, auf die etwa 10- bis 100-mal schneller zugegriffen werden kann als auf den Hauptspeicher~\cite[S.~5]{Man20}~\cite[79]{HP17}.
 Der Cache dient als Speicher für Daten, auf die eine CPU während der Programmausführung häufig zugreifen muss.
 Dies erfolgt in Form zusammenhängender Speicheradressen, sogenannter \textit{Cache Lines}, die typischerweise 32 bis 64 Byte große Blöcke umfassen~\cite[531]{TB23}.
@@ -48,7 +47,7 @@ Dem liegt die allgemeine Hypothese zugrunde, dass ein Programm, das auf Daten an
 Durch geschickte Speicherlayouts können performancekritische Anwendungen unnötige Zugriffe auf den Hauptspeicher vermeiden.
 Diese um Größenordnungen langsameren Zugriffe erfolgen dann, wenn ein angefordertes Speicherwort nicht im Cache gefunden  und dadurch ein \textit{Cache Miss} ausgelöst wird.\\
 
-Erste Iterationen von \textit{helios} begünstigten diese \textit{Cache Misses}, da die \texttt{GameWorld} die enthaltenen GameObjects über
+Erste Iterationen von \textit{helios} begünstigten diese Cache Misses, da die \texttt{GameWorld} die enthaltenen GameObjects über
 
 \begin{verbatim}
     std::vector<std::unique_ptr<GameObject>>
@@ -63,11 +62,11 @@ Ein \texttt{GameObject} wiederum verwaltete seine assoziierten Komponenten analo
 
 \noindent
 Iteriert nun ein System über alle GameObjects, um eine bestimmte Komponenteninstanz vom Typ $\mathcal{T}$ zu aktualisieren, muss das System über alle Objekte laufen und gleichzeitig einen teuren \textit{run-time type information}-Cast (\textit{RTTI}-Cast) auf den Komponententyp $\mathcal{T}$ ausführen.
-Für den performancekritischen \textit{Hot Path} entstehen zudem durch \textit{Pointer Chasing} (\texttt{world} $\rightarrow$ \texttt{gameobject} $\rightarrow$ \texttt{component})~\cite{HKSN+16} unverhältnismäßig teure Operationen (siehe Listing~\ref{lst:gameobject_cache_miss}).
+Für den performancekritischen \textit{Hot Path} entstehen zudem durch \textit{Pointer Chasing}~\cite{HKSN+16} (\texttt{world} $\rightarrow$ \texttt{gameobject} $\rightarrow$ \texttt{component}) unverhältnismäßig teure Operationen (siehe Listing~\ref{lst:gameobject_cache_miss}).
 
 \vspace{5mm}
 \begin{lstlisting}[style=c++style,
-caption={Codebeispiel für die Iteration über alle GameObjects, um Komponenten eines bestimmten Typs $\mathcal{T}$ zu finden (Meilenstein 3). Die Implementierung begünstigt \textit{Cache Misses}, da die angefragten Daten nicht in zusammenhängenden Speicherbereichen liegen.},
+caption={Codebeispiel für die Iteration über alle GameObjects, um Komponenten eines bestimmten Typs $\mathcal{T}$ zu finden (Meilenstein~3). Die Implementierung begünstigt \textit{Cache Misses}, da die angefragten Daten nicht in zusammenhängenden Speicherbereichen liegen.},
 label=lst:gameobject_cache_miss]
 for (auto& go : gameWorld.gameObjects()) {
     if (go->guid() != guid) {
@@ -92,7 +91,7 @@ auto* sparseSet = EntityManager::getSparseSet<T>()
 
 \noindent
 Das übergebene Template-Argument wird dabei intern über einen entsprechenden \texttt{TypeIndex} in einen \texttt{size\_t}-Wert umgewandelt.
-Insgesamt kann damit die oben dargestellte Implementierung wie in Listing~\ref{lst:gameobject_component_access} vereinfacht werden.
+Insgesamt kann damit die oben dargestellte Implementierung vereinfacht werden, wie in Listing~\ref{lst:gameobject_component_access} dargestellt.
 
 \vspace{5mm}
 \begin{lstlisting}[style=c++style,
@@ -107,7 +106,7 @@ return gameObject->get<T>();
 \vspace{5mm}
 
 Da fortlaufende Speicherbereiche im Cache vorgehalten werden, kann auch die Iteration über Komponenten gleichen Typs beschleunigt werden.
-Dies ist gerade bei Game-Engines von Bedeutung, wenn tausende Objekte im Hot Path aktualisiert werden müssen, beispielsweise bei Physiksystemen, die die Translationen beteiligter Objekte anhand ihrer jeweiligen \texttt{TransformComponent} aktualisieren.
+Dies ist gerade bei Game Engines von Bedeutung, wenn tausende Objekte im Hot Path aktualisiert werden müssen, beispielsweise bei Physiksystemen, die die Translationen beteiligter Objekte anhand ihrer jeweiligen \texttt{TransformComponent} aktualisieren.
 
 \vspace{5mm}
 \begin{lstlisting}[style=c++style,

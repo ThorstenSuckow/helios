@@ -21,9 +21,9 @@ Die Anforderungen an einen Zustandswechsel werden dabei über einen \texttt{Stat
 
 Wurde ein Zustandswechsel akzeptiert, informiert der \texttt{StateManager} registrierte Listener über die folgenden Hooks:
 \begin{enumerate}
-    \item \texttt{onStateExit()} - Reaktion auf das Verlassen des bisherigen Zustands.
-    \item \texttt{onStateTransition()} - Verarbeitung des Übergangs selbst.
-    \item \texttt{onStateEnter()} - Reaktion auf das Eintreten des neuen Zustands.
+    \item \texttt{onStateExit()}: Reaktion auf das Verlassen des bisherigen Zustands.
+    \item \texttt{onStateTransition()}: Verarbeitung des Übergangs selbst.
+    \item \texttt{onStateEnter()}: Reaktion auf das Eintreten des neuen Zustands.
 \end{enumerate}
 
 Dies erleichtert die Umsetzung spielspezifischer Reaktionen auf Zustandswechsel.
@@ -56,7 +56,7 @@ Eine Abbildung des Automaten ist in Abbildung~\ref{fig:match_state} dargestellt.
 \subsubsection{Zustandsabhängiges Rendering}
 
 Um den aktiven Spielzustand mit der visuellen Darstellung zu verknüpfen, verwendet \textit{helios} ein Mapping von Zustandskombinationen auf \texttt{ViewportId}s und \texttt{MenuId}s.
-Damit können Tupel aus \texttt{GameState} und \texttt{MatchState} auf eine oder mehrere dieser IDs abgebildet werden, wodurch beispielsweise im Zustand \texttt{Paused} der \textit{MenuViewport} sowie ein \textit{PauseMenu} als Overlay angezeigt werden (siehe Listing~\ref{lst:statemapping}).
+Damit können Tupel aus \texttt{GameState} und \texttt{MatchState} auf eine oder mehrere dieser Ids abgebildet werden, wodurch beispielsweise im Zustand \texttt{Paused} der \textit{MenuViewport} sowie ein \textit{PauseMenu} als Overlay angezeigt werden (siehe Listing~\ref{lst:statemapping}).
 
 \vspace{5mm}
 \begin{lstlisting}[style=c++style,

@@ -8,7 +8,7 @@ Im Hinblick auf die angestrebte Performance erschienen die damit verbundenen Lau
 \vspace{5mm}
 \begin{lstlisting}[style=c++style,
     caption={
-        Auszug aus dem Interface des \texttt{GameObject} (Stand Meilenstein 2). Die gleichzeitige Verwendung einer spielweltbasierten \texttt{position} und der \texttt{translation} aus dem Szenengraph weist bereits auf eine doppelte Zustandsrepräsentation hin. Die inkonsequente Trennung sorgte in späteren Meilensteinen für Synchronisations- und Zuständigkeitskonflikte beim Hinzufügen weiterer transformationsbasierter Systeme.
+        Auszug aus dem Interface des \texttt{GameObject} (Stand Meilenstein 2). Die gleichzeitige Verwendung einer spielweltbasierten \texttt{position} und der \texttt{translation} aus dem Szenegraph weist bereits auf eine doppelte Zustandsrepräsentation hin. Die inkonsequente Trennung sorgte in späteren Meilensteinen für Synchronisations- und Zuständigkeitskonflikte beim Hinzufügen weiterer transformationsbasierter Systeme.
     },
     label=lst:gameobject_v1]
     Transform* transform_;
@@ -18,7 +18,7 @@ Im Hinblick auf die angestrebte Performance erschienen die damit verbundenen Lau
 \end{lstlisting}
 \vspace{5mm}
 
-Um den Aufwand zu reduzieren und sich im Sinne des \textit{Tracer Bullet Development}~\cite[S. 50-55]{TH20} schrittweise den Anforderungen zu nähern, wurde entschieden, die Physik- und Transformationskomponenten aus dem \texttt{GameObject} zu extrahieren.
+Um den Aufwand zu reduzieren und sich im Sinne des \textit{Tracer Bullet Development}~\cite[S. 50-55]{TH20} schrittweise den Anforderungen zu nähern, wurde entschieden, die Physik- und Transformationskomponenten aus dem \texttt{GameObject} zu extrahieren (siehe Listing~\ref{lst:gameobject_v1}).
 Dieses wurde fortan, dem bereits zitierten \textit{Composition First}-Ansatz folgend, als reiner Komponenten-Container aufgefasst und markierte damit den ersten Schritt in Richtung eines datenorientierten Ansatzes~\cite{Bay22}: Insgesamt entspricht die Umsetzung damit einem \textit{Compound Object}~\cite[S. 88]{Fab18}, wie es in ähnlicher Form auch in Unity zu finden ist~\cite{UnityGameObject}; weitere, mit der ECS-Architektur einhergehende Änderungen dieses Designs werden in Abschnitt~\ref{sec:ecs} beschrieben.
 
 \subsubsection{Steuerung des Verhaltens über Systeme}
@@ -32,9 +32,9 @@ Diese Form der Iteration über einen Vektor von \texttt{unique\_ptr}, verbunden 
 Mit diesem Meilenstein erfolgte auch die Veröffentlichung der \textit{Spaceship Shooting Demo} (siehe Abbildung~\ref{fig:spaceshipshooting}).
 Diese beinhaltete neben einem für \textit{Twin-Stick-Shooter} typischen Steuerungs-Layout~\cite{GameDeveloperTwinStick} auch das in den Anforderungen genannte \textit{Grid}, das als visuelle Referenz für die Schiffsbewegung relativ zum Level dient.
 Das Grid-Layout orientiert sich an \textit{Geometry Wars 3} (Spielmodus \textit{Evolved Classic}) und besitzt 29 Zellen in $x$-Richtung sowie 19 Zellen in $y$-Richtung.
-Die Größe einer Zelle entspricht der \textit{Bounding Box} des Spielerschiffs und beträgt $5 \times 5$ Meter\footnote{
-    Maßeinheiten werden in der Klasse \texttt{helios::core::units::Unit} definiert. So entspricht $1$ \texttt{HELIOS\_SPATIAL\_UNIT} beispielsweise $1\,\mathrm{m}$.
-}.
+Die Größe einer Zelle entspricht der \textit{Bounding Box} des Spielerschiffs und beträgt $5 \times 5$ Meter.\footnote{
+    Maßeinheiten werden in der Klasse \texttt{helios::core::units::Unit} definiert. So entspricht beispielsweise $1$ \texttt{HELIOS\_SPATIAL\_UNIT} $1\,\mathrm{m}$.
+}
 
 \begin{figure}[!htbp]
     \centering
@@ -56,6 +56,6 @@ Im negativen Fall wird das Projektil entfernt und zurück in den Pool gelegt.\\
 Die Logik der Bounds-Prüfung und die Anwendung der gewünschten Reaktion wurde später in das \texttt{LevelBoundsBehavior}-System überführt, das gleichzeitig ein konfigurierbares Verhalten pro \texttt{GameObject} berücksichtigt, so zum Beispiel \texttt{Reflect} (mit oder ohne Restitutionskoeffizient), \texttt{Despawn} (wie im hier gezeigten Fall) oder \texttt{Stick} (bleibt am Zielobjekt haften).\\
 
 Das Pooling-Konzept wurde in späteren Iterationen der Engine weiter ausgebaut, wofür ein eigenes \textit{Runtime}-System geschaffen wurde (siehe Abschnitt~\ref{sec:runtime_manager}).
-Während das initiale Pooling-System Projektile noch als eigenständige \texttt{GameObjects} verwaltet - also $N$ Objekte mit jeweils $M$ Komponenten, deren Zustände auf viele Objektinstanzen verteilt werden - basiert das spätere Verfahren auf dem \texttt{EntityManager} und \textit{Sparse Sets}.
+Während das initiale Pooling-System Projektile noch als eigenständige \texttt{GameObjects} verwaltet - wodurch sich $N$ Projektil-Objektinstanzen mit jeweils $M$ Komponenten ergeben - basiert das spätere Verfahren auf \textit{Sparse Sets}.
 Hierdurch werden die Daten komponentenweise zusammengefasst; die Anzahl der in diesem Kontext separat verwalteten Speicherstrukturen reduziert sich damit im Wesentlichen auf die Anzahl der $M$ verschiedenen Komponententypen.
 Abschnitt~\ref{sec:ecs} liefert hierzu detailliertere Ausführungen.

@@ -363,7 +363,7 @@ export namespace helios::engine::runtime::pooling {
          * @see reset(const types::GameObjectPoolId)
          */
         void reset() {
-            for (auto& [poolId, poolPtr]  : pools_.pools()) {
+            for (auto& [poolId, _]  : pools_.pools()) {
                 reset(poolId);
             }
         }
@@ -375,7 +375,7 @@ export namespace helios::engine::runtime::pooling {
          * This effectively returns all pooled objects to their inactive state without
          * destroying them.
          *
-         * @param poolId
+         * @param poolId The ID of the pool to reset.
          */
         void reset(const types::GameObjectPoolId poolId) {
 

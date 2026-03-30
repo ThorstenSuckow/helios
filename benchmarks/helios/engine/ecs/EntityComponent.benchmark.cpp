@@ -7,7 +7,7 @@
  *
  * These benchmarks mirror the structure of GameObject.benchmark.cpp (v0.3.0-milestone3)
  * to allow a direct comparison between the dynamic_cast-based approach and
- * the ECS / SparseSet approach (v0.5.0.-milestone5).
+ * the ECS / SparseSet approach (v0.5.0-milestone5).
  */
 #include <benchmark/benchmark.h>
 

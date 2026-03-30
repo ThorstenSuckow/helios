@@ -127,7 +127,7 @@ Ein Eintrag innerhalb des Sparse Arrays enthält den Index des zugehörigen Elem
 \centering
 \includegraphics[width=0.8\columnwidth]{content/de/architektur/ecs/img/sparsedense}
 \caption{Prinzip der Sparse Set-Datenstruktur.
-Oben ist das Sparse Array dargestellt, das Einträge für GameObjects mit der Id $1, 3, 2, 42, 118, 119$ enthält (in dieser Einfügereihenfolge). Die in dem Array gespeicherten Werte entsprechen der Position im Dense Array (unten), an denen die eigentlichen Komponenten des Typs $\mathcal{T}$ gespeichert sind. Um den Speicherbereich in seiner dichten Anordnung auch beim Löschen zu erhalten und teure Move-Operationen zu vermeiden, wird hierbei das letzte Element des Dense Arrays an die Position des gelöschten Elements geschoben. Aufgrund der hierdurch notwendigen Neuzuordnung der Indizes benötigt das Sparse Set auch eine Abbildung von Dense-Indizes zu Sparse-Indizes, um die Änderungen korrekt zu propagieren (hier nicht dargestellt).  (Quelle: eigene Darstellung)}
+Oben ist das Sparse Array dargestellt, das Einträge für GameObjects mit der Id $1, 3, 2, 42, 118, 119$ enthält (in dieser Einfügereihenfolge). Die in dem Array gespeicherten Werte entsprechen der Position im Dense Array (unten), an denen die eigentlichen Komponenten des Typs $\mathcal{T}$ gespeichert sind. Spätere Löschoperationen werden zusätzlich über eine Abbildung von Dense- zu Sparse-Indizes unterstützt (nicht abgebildet): Die dichte Anordnung kann beibehalten werden, indem das letzte Element des Dense Arrays an die Position des gelöschten Elements geschoben wird; im Anschluss findet eine Neuzuordnung der Indizes statt.  (Quelle: eigene Darstellung)}
 \label{fig:sparsedense}
 \end{figure}
 
@@ -137,75 +137,66 @@ Dies erlaubt einen elementweisen Zugriff in $\mathcal{O}(1)$ für eine bestimmte
 Mit dem vorherigen Design des \texttt{GameObject} als Compound Object ergaben sich statt eines dichten Speicherbereichs viele verstreute Speicherbereiche auf dem Heap.
 Dies ist für die einzelnen Iterationen der GameLoop nicht optimal, da bei 120 FPS nur ca.~$8{,}3$\,ms für alle Operationen und Berechnungen der verschiedenen Systeme zur Verfügung stehen, inklusive der Kommunikation mit der GPU.
 
-Die Tabellen~\ref{tab:benchmark_meilenstein3} und~\ref{tab:benchmark_meilenstein5} sowie Abbildung~\ref{fig:benchmark_vergleich} stellen die beiden Implementierungen vergleichend gegenüber.
-Dabei zeigt sich deutlich, dass die SoA-Implementierung besser skaliert, was sich in einem über die verschiedenen Problemgrößen hinweg nahezu konstanten Durchsatz widerspiegelt, während die AoS-Implementierung mit wachsender Anzahl von Entitäten deutlich an Durchsatz verliert.\footnote{
-    Alle Messungen wurden auf demselben Testsystem durchgeführt: AMD Ryzen 9 9950X3D, 64\,GB RAM, Windows 11 Pro (x64), Build 26200).
+Die Tabelle~\ref{tab:benchmark_durchsatz_systemvergleich} sowie die Abbildungen~\ref{fig:benchmark_vergleich_durchsatz} und \ref{fig:benchmark_vergleich_dauer} stellen die beiden Implementierungen vergleichend gegenüber.\footnote{
+Der Quellcode für der Benchmarks findet sich in Anhang~\ref{ch:benchmarkcode}.
 }
+Dabei zeigt sich deutlich, dass die SoA-Implementierung besser skaliert, was sich in einem über die verschiedenen Problemgrößen hinweg nahezu konstanten Durchsatz widerspiegelt, während die AoS-Implementierung mit wachsender Anzahl von Entitäten deutlich an Durchsatz verliert.
 
 
 \begin{table}[H]
 \centering
-\begin{tabular}{l r r r r}
+\begin{tabular}{l r rr rr}
 \toprule
-\textbf{Benchmark} & \textbf{$N$} & \textbf{Zeit [$\mu$s]} & \textbf{CPU [$\mu$s]} & \textbf{Durchsatz [M/s]} \\
+\textbf{Benchmark} & \textbf{Objekte}
+& \multicolumn{2}{c}{\textbf{Desktop [M O/s]}}
+& \multicolumn{2}{c}{\textbf{Laptop [M O/s]}} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}
+& & \textbf{MS 3} & \textbf{MS 5} & \textbf{MS 3} & \textbf{MS 5} \\
 \midrule
-\texttt{HasComponent}           & 100     &   1,17 &   1,17 & 85,33 \\
-& 1\,000  &  14,30 &  13,50 & 74,09 \\
-& 10\,000 & 214,00 & 215,00 & 46,55 \\
+\texttt{HasComponent}
+& 100     &  81,45 & 232,73 &  32,58 & 127,43 \\
+& 1\,000  &  66,68 & 235,98 &  25,49 & 127,43 \\
+& 10\,000 &  45,51 & 235,99 &  22,47 & 127,43 \\
 \addlinespace
-\texttt{GetComponent}           & 100     &   1,23 &   1,25 & 80,31 \\
-& 1\,000  &  14,20 &  14,10 & 70,80 \\
-& 10\,000 & 213,00 & 215,00 & 46,55 \\
-\addlinespace
-\texttt{GetMultipleComponents}  & 100     &   3,21 &   3,15 & 31,75 \\
-& 1\,000  &  33,80 &  33,80 & 29,62 \\
-& 10\,000 & 413,00 & 419,00 & 23,89 \\
-\addlinespace
-\texttt{HasComponent\_Absent}   & 100     &   1,61 &   1,60 & 62,33 \\
-& 1\,000  &  17,80 &  18,00 & 55,46 \\
-& 10\,000 & 255,00 & 255,00 & 39,22 \\
-\bottomrule
-\end{tabular}
-\caption{Benchmark-Ergebnisse der AoS-Implementierung (Compound Object, Meilenstein~3).}
-\label{tab:benchmark_meilenstein3}
-\end{table}
 
-\begin{table}[H]
-\centering
-\begin{tabular}{l r r r r}
-\toprule
-\textbf{Benchmark} & \textbf{$N$} & \textbf{Zeit [$\mu$s]} & \textbf{CPU [$\mu$s]} & \textbf{Durchsatz [M/s]} \\
-\midrule
-\texttt{HasComponent}           & 100     &   0,43 &   0,43 & 232,73 \\
-& 1\,000  &   4,25 &   4,24 & 235,98 \\
-& 10\,000 &  43,70 &  43,00 & 232,73 \\
+\texttt{GetComponent}
+& 100     &  70,27 & 188,63 &  31,86 & 102,40 \\
+& 1\,000  &  66,68 & 200,00 &  25,65 & 101,67 \\
+& 10\,000 &  45,52 & 188,63 &  21,97 & 101,68 \\
 \addlinespace
-\texttt{GetComponent}           & 100     &   0,56 &   0,56 & 179,20 \\
-& 1\,000  &   5,55 &   5,44 & 183,80 \\
-& 10\,000 &  57,10 &  57,20 & 174,83 \\
+
+\texttt{GetMultipleComponents}
+& 100     &  29,68 &  65,16 &  11,95 &  36,66 \\
+& 1\,000  &  27,70 &  65,16 &  10,86 &  36,67 \\
+& 10\,000 &  22,22 &  65,16 &  10,24 &  36,66 \\
 \addlinespace
-\texttt{GetMultipleComponents}  & 100     &   1,91 &   1,84 & 54,30 \\
-& 1\,000  &  16,60 &  16,70 & 59,73 \\
-& 10\,000 & 163,00 & 164,00 & 61,00 \\
-\addlinespace
-\texttt{HasComponent\_Absent}   & 100     &   0,36 &   0,36 & 279,45 \\
-& 1\,000  &   2,65 &   2,61 & 383,32 \\
-& 10\,000 &  27,80 &  27,60 & 362,02 \\
+
+\texttt{HasComponent\_Absent}
+& 100     &  60,62 & 426,67 &  24,13 & 256,46 \\
+& 1\,000  &  51,94 & 424,77 &  18,82 & 254,86 \\
+& 10\,000 &  32,51 & 415,54 &  17,78 & 260,65 \\
 \bottomrule
 \end{tabular}
-\caption{Benchmark-Ergebnisse der SoA-Implementierung (Sparse Set, Meilenstein~5).}
-\label{tab:benchmark_meilenstein5}
+\caption{Vergleich des Durchsatzes komponentenbezogener Operationen zwischen Meilenstein~3 (AoS) und Meilenstein~5 (SoA). Dargestellt sind repräsentative Werte für Mengen der Größenordnung von $100$, $1\,000$ und $10\,000$ GameObjects. Es zeigt sich, dass die SoA-Implementierung in Meilenstein~5 deutlich höhere Durchsatzwerte erzielt (in \textit{Millionen Objekte pro Sekunde}). Gleichzeitig erhalten wir hier einen nahezu konstanten Durchsatz über alle Problemgrößen hinweg, was für lineare Laufzeitkosten spricht. (Quelle: eigene Darstellung)}
+\label{tab:benchmark_durchsatz_systemvergleich}
 \end{table}
 
 \begin{figure}[!htbp]
 \centering
-\includegraphics[width=1.0\columnwidth]{content/de/architektur/ecs/img/benchmark_durchsatz}
-
+\includegraphics[width=1.0\columnwidth]{content/de/architektur/ecs/img/benchmark_durchsatz_laptop}
 \vspace{0.8em}
+\includegraphics[width=1.0\columnwidth]{content/de/architektur/ecs/img/benchmark_durchsatz_desktop}
+\caption{Vergleich des Durchsatzes bei zentralen Komponentenoperationen. Mit Umstellung auf den SoA-Ansatz zeigt sich für beide Systeme ein höherer Durchsatz. Auch die in Meilenstein~3 erkennbare monotone Abnahme des Durchsatzes bei steigender Problemgröße bleibt nun aus. (Quelle: eigene Darstellung)}
+\label{fig:benchmark_vergleich_durchsatz}
+\end{figure}
 
-\includegraphics[width=1.0\columnwidth]{content/de/architektur/ecs/img/benchmark_dauer}
-\caption{Vergleich der ECS-Benchmarks hinsichtlich Durchsatz (oben) und Laufzeit (unten). Beim Durchsatz sind höhere Werte, bei der Laufzeit niedrigere Werte günstiger. Dargestellt sind die Methoden \texttt{get<T>()}, \texttt{has<T>()}, die kombinierte Abfrage mehrerer Komponenten sowie der Negativfall einer nicht vorhandenen Komponente bei einer Problemgröße von 10\,000 Entitäten. (Quelle: eigene Darstellung)}
-\label{fig:benchmark_vergleich}
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=1.0\columnwidth]{content/de/architektur/ecs/img/benchmark_dauer_laptop}
+\vspace{0.8em}
+\includegraphics[width=1.0\columnwidth]{content/de/architektur/ecs/img/benchmark_dauer_desktop}
+\caption{Vergleich der Dauer zentraler Komponentenoperationen. Auch das langsamere Laptop-System (oben) profitiert trotz seiner kleineren Cache-Größen von dem Sparse-Set-Speicherlayout. (Quelle: eigene Darstellung)}
+\label{fig:benchmark_vergleich_dauer}
 \end{figure}
 
 Insgesamt ist ein ECS somit nicht nur ein Paradigma zur Trennung von Verhalten und Daten, sondern entfaltet seine Stärke vor allem dann, wenn die Daten effizient im Speicher angeordnet werden, wie auch \textit{Cox et al.} in~\cite{CWVW+25} zeigen.\\

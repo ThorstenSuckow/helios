@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env node
+#!/usr/bin/env node
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -121,7 +121,7 @@ async function copyMarkdown(src, dest, repoRoot, meta, mappings) {
   const full = frontmatter + SYNC_BANNER + '\n' + rewritten.trimEnd() + '\n';
   await fs.mkdir(path.dirname(dest), { recursive: true });
   await fs.writeFile(dest, full, 'utf8');
-  console.log(`[sync-docs] âœ“ ${path.relative(repoRoot, src)} â†’ ${path.relative(repoRoot, dest)}`);
+  console.log(`[sync-docs] ✓ ${path.relative(repoRoot, src)} → ${path.relative(repoRoot, dest)}`);
 }
 
 async function main() {

@@ -1,4 +1,4 @@
-﻿# helios Examples
+# helios Examples
 
 This directory contains example applications demonstrating various features of the helios game framework.
 
@@ -140,7 +140,7 @@ A complete scoring system example featuring:
 **Location:** `v0.0.1-alpha/runtime_test/`
 
 An interactive performance test for measuring the framerate impact of increasing numbers of active GameObjects:
-- ImGui slider widget to dynamically control active object count (0 â€“ 10 000)
+- ImGui slider widget to dynamically control active object count (0 – 10 000)
 - Object pool acquire/release driven by slider target
 - Random placement and random movement for stress objects
 - Real-time FPS metrics to identify performance thresholds
@@ -227,12 +227,12 @@ Each example should follow this structure:
 
 ```
 example_name/
-â”œâ”€â”€ main.cpp              # Main application code
-â”œâ”€â”€ resources/            # Optional: shaders, textures, models, etc.
-â”‚   â”œâ”€â”€ shader.vert
-â”‚   â”œâ”€â”€ shader.frag
-â”‚   â””â”€â”€ ...
-â””â”€â”€ README.md            # Optional: Tutorial/documentation
+├── main.cpp              # Main application code
+├── resources/            # Optional: shaders, textures, models, etc.
+│   ├── shader.vert
+│   ├── shader.frag
+│   └── ...
+└── README.md            # Optional: Tutorial/documentation
 ```
 
 ## Common Patterns

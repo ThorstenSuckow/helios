@@ -1,4 +1,4 @@
-﻿# Website Documentation Sync
+# Website Documentation Sync
 
 This directory contains the helios project website built with Docusaurus.
 

@@ -1,4 +1,4 @@
-﻿# Website Build Scripts
+# Website Build Scripts
 
 This directory contains build-time scripts for the helios Docusaurus website.
 
@@ -68,7 +68,7 @@ The script automatically rewrites relative links from repository structure to we
 | Repository Link | Website Link | Example |
 |-----------------|--------------|---------|
 | `./README.md` | `/docs` | Docs overview |
-| `../README.md` | `/` | Repository root â†’ homepage |
+| `../README.md` | `/` | Repository root → homepage |
 | `../../docs/heliosapi.md` | `/docs/api/overview` | API documentation |
 | `../../docs/styleguide.md` | `/docs/contributing/styleguide` | Style guide |
 | `./styleguide.md` | `/docs/contributing/styleguide` | Within docs/ |
@@ -97,8 +97,8 @@ keywords: [helios, 3D rendering, OpenGL, cube, tutorial]
 **MDX Escaping:**
 
 The script automatically escapes characters that conflict with MDX/JSX:
-- `<=` â†’ `&lt;=`
-- `>=` â†’ `&gt;=`
+- `<=` → `&lt;=`
+- `>=` → `&gt;=`
 - Isolated `<` and `>` surrounded by spaces
 
 Code blocks are preserved without escaping.
@@ -175,9 +175,9 @@ If Docusaurus shows warnings about unresolved links:
 4. **Verify in synced file:** Check that the link was rewritten correctly
 
 **Common patterns:**
-- `./file.md` â†’ `/docs/section/file`
-- `../file.md` â†’ `/docs/file`
-- `../../README.md` â†’ `/` (homepage)
+- `./file.md` → `/docs/section/file`
+- `../file.md` → `/docs/file`
+- `../../README.md` → `/` (homepage)
 
 **External links** (starting with `http://` or `https://`) are not modified.
 

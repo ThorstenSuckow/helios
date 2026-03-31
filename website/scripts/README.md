@@ -32,12 +32,15 @@ Synchronizes markdown documentation from the repository root into the website's 
 | `docs/core-concepts/gameloop-architecture.md` | `docs/core-concepts/gameloop-architecture.md` | Commands, Events, EventBus |
 | **Examples** | | |
 | `examples/README.md` | `docs/examples/overview.md` | Examples overview |
-| `examples/simple_cube_rendering/README.md` | `docs/examples/simple-cube.md` | Cube rendering tutorial |
-| `examples/game_controller_input/README.md` | `docs/examples/gamepad-input.md` | Gamepad input tutorial |
-| `examples/spaceship_control/README.md` | `docs/examples/spaceship-control.md` | Spaceship control demo |
-| `examples/spaceship_shooting/README.md` | `docs/examples/spaceship-shooting.md` | Twin-stick shooting demo |
-| `examples/enemy_spawn/README.md` | `docs/examples/enemy-spawn.md` | Enemy spawn demo |
-| `examples/collision_detection/README.md` | `docs/examples/collision-detection.md` | Collision detection demo |
+| `examples/v0.0.1-alpha/simple_cube_rendering/README.md` | `docs/examples/simple-cube.md` | Cube rendering tutorial |
+| `examples/v0.0.1-alpha/game_controller_input/README.md` | `docs/examples/gamepad-input.md` | Gamepad input tutorial |
+| `examples/v0.0.1-alpha/spaceship_control/README.md` | `docs/examples/spaceship-control.md` | Spaceship control demo |
+| `examples/v0.0.1-alpha/spaceship_shooting/README.md` | `docs/examples/spaceship-shooting.md` | Twin-stick shooting demo |
+| `examples/v0.0.1-alpha/enemy_spawn/README.md` | `docs/examples/enemy-spawn.md` | Enemy spawn demo |
+| `examples/v0.0.1-alpha/collision_detection/README.md` | `docs/examples/collision-detection.md` | Collision detection demo |
+| `examples/v0.0.1-alpha/render_text_demo/README.md` | `docs/examples/render-text-demo.md` | Text rendering demo |
+| `examples/v0.0.1-alpha/scoring_demo/README.md` | `docs/examples/scoring-demo.md` | Scoring system demo |
+| `examples/v0.0.1-alpha/runtime_test/README.md` | `docs/examples/runtime-test.md` | Runtime stress test |
 
 **Usage:**
 

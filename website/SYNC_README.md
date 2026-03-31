@@ -43,14 +43,15 @@ The following files are **automatically copied** from the repository during the 
 | `docs/core-concepts/ecs/traits.md` | `docs/core-concepts/ecs/traits.md` | Compile-time lifecycle detection |
 | `docs/core-concepts/ecs/component-ops.md` | `docs/core-concepts/ecs/component-ops.md` | Lifecycle function pointers |
 | `examples/README.md` | `docs/examples/overview.md` | Examples overview |
-| `examples/simple_cube_rendering/README.md` | `docs/examples/simple-cube.md` | Simple cube rendering tutorial |
-| `examples/game_controller_input/README.md` | `docs/examples/gamepad-input.md` | Gamepad input tutorial |
-| `examples/spaceship_control/README.md` | `docs/examples/spaceship-control.md` | Spaceship control example |
-| `examples/spaceship_shooting/README.md` | `docs/examples/spaceship-shooting.md` | Twin-stick shooting example |
-| `examples/enemy_spawn/README.md` | `docs/examples/enemy-spawn.md` | Enemy spawning example |
-| `examples/collision_detection/README.md` | `docs/examples/collision-detection.md` | Collision detection example |
-| `examples/render_text_demo/README.md` | `docs/examples/render-text-demo.md` | Text rendering demo |
-| `examples/scoring_demo/README.md` | `docs/examples/scoring-demo.md` | Scoring system demo |
+| `examples/v0.0.1-alpha/simple_cube_rendering/README.md` | `docs/examples/simple-cube.md` | Simple cube rendering tutorial |
+| `examples/v0.0.1-alpha/game_controller_input/README.md` | `docs/examples/gamepad-input.md` | Gamepad input tutorial |
+| `examples/v0.0.1-alpha/spaceship_control/README.md` | `docs/examples/spaceship-control.md` | Spaceship control example |
+| `examples/v0.0.1-alpha/spaceship_shooting/README.md` | `docs/examples/spaceship-shooting.md` | Twin-stick shooting example |
+| `examples/v0.0.1-alpha/enemy_spawn/README.md` | `docs/examples/enemy-spawn.md` | Enemy spawning example |
+| `examples/v0.0.1-alpha/collision_detection/README.md` | `docs/examples/collision-detection.md` | Collision detection example |
+| `examples/v0.0.1-alpha/render_text_demo/README.md` | `docs/examples/render-text-demo.md` | Text rendering demo |
+| `examples/v0.0.1-alpha/scoring_demo/README.md` | `docs/examples/scoring-demo.md` | Scoring system demo |
+| `examples/v0.0.1-alpha/runtime_test/README.md` | `docs/examples/runtime-test.md` | Runtime stress test |
 
 ### How It Works
 
@@ -64,9 +65,9 @@ The following files are **automatically copied** from the repository during the 
 
 ### Important Notes
 
-⚠️ **Do NOT edit the synced files directly in `website/docs/`** – they will be overwritten on next build!
+âš ï¸ **Do NOT edit the synced files directly in `website/docs/`** â€“ they will be overwritten on next build!
 
-✅ **Always edit the source files** in the repository root or `docs/` folder.
+âœ… **Always edit the source files** in the repository root or `docs/` folder.
 
 ### Linking Between Documents
 
@@ -119,32 +120,32 @@ The sync script runs automatically during CI builds, ensuring the deployed websi
 
 ## Scripts
 
-- `npm start` – Start development server with hot reload
-- `npm run build` – Build static site for production
-- `npm run serve` – Serve the production build locally
-- `npm run clear` – Clear Docusaurus cache
-- `node ./scripts/sync-changelog.mjs` – Manually sync documentation
+- `npm start` â€“ Start development server with hot reload
+- `npm run build` â€“ Build static site for production
+- `npm run serve` â€“ Serve the production build locally
+- `npm run clear` â€“ Clear Docusaurus cache
+- `node ./scripts/sync-changelog.mjs` â€“ Manually sync documentation
 
 ## File Structure
 
 ```
 website/
-├── docs/                      # Docusaurus documentation pages
-│   ├── changelog.md          # ⚠️ Auto-synced (do not edit)
-│   ├── contributing/
-│   │   ├── styleguide.md     # ⚠️ Auto-synced (do not edit)
-│   │   ├── doxygen-style.md  # ⚠️ Auto-synced (do not edit)
-│   │   ├── commits.md        # ⚠️ Auto-synced (do not edit)
-│   │   ├── changelog-guide.md # ⚠️ Auto-synced (do not edit)
-│   │   └── guide.md          # ✅ Manually maintained
-│   └── ...
-├── scripts/
-│   └── sync-changelog.mjs    # Auto-sync script
-├── src/                       # React components, CSS
-├── static/                    # Static assets (images, logo, etc.)
-├── docusaurus.config.ts       # Docusaurus configuration
-├── sidebars.ts                # Sidebar navigation structure
-└── package.json               # Dependencies & scripts
+â”œâ”€â”€ docs/                      # Docusaurus documentation pages
+â”‚   â”œâ”€â”€ changelog.md          # âš ï¸ Auto-synced (do not edit)
+â”‚   â”œâ”€â”€ contributing/
+â”‚   â”‚   â”œâ”€â”€ styleguide.md     # âš ï¸ Auto-synced (do not edit)
+â”‚   â”‚   â”œâ”€â”€ doxygen-style.md  # âš ï¸ Auto-synced (do not edit)
+â”‚   â”‚   â”œâ”€â”€ commits.md        # âš ï¸ Auto-synced (do not edit)
+â”‚   â”‚   â”œâ”€â”€ changelog-guide.md # âš ï¸ Auto-synced (do not edit)
+â”‚   â”‚   â””â”€â”€ guide.md          # âœ… Manually maintained
+â”‚   â””â”€â”€ ...
+â”œâ”€â”€ scripts/
+â”‚   â””â”€â”€ sync-changelog.mjs    # Auto-sync script
+â”œâ”€â”€ src/                       # React components, CSS
+â”œâ”€â”€ static/                    # Static assets (images, logo, etc.)
+â”œâ”€â”€ docusaurus.config.ts       # Docusaurus configuration
+â”œâ”€â”€ sidebars.ts                # Sidebar navigation structure
+â””â”€â”€ package.json               # Dependencies & scripts
 ```
 
 ## Troubleshooting

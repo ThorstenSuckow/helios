@@ -303,47 +303,47 @@ async function main() {
       meta: { title: 'Examples Overview', description: 'Example applications demonstrating helios features: rendering, input, scene graph, and more.', slug: '/examples', tags: ['examples', 'tutorial'], keywords: ['helios', 'examples', 'tutorials', 'getting started'], sidebar_label: 'Overview' }
     },
     {
-      src: path.join(repoRoot, 'examples', 'simple_cube_rendering', 'README.md'),
+      src: path.join(repoRoot, 'examples', 'v0.0.1-alpha', 'simple_cube_rendering', 'README.md'),
       dest: path.join(websiteRoot, 'docs', 'examples', 'simple-cube.md'),
       meta: { title: 'Simple Cube Rendering', description: 'Tutorial: Rendering a 3D cube with helios - shaders, materials, meshes, and render loop.', slug: '/examples/simple-cube', tags: ['examples', 'rendering', 'tutorial'], keywords: ['helios', '3D rendering', 'OpenGL', 'cube', 'tutorial'], sidebar_label: 'Simple Cube' }
     },
     {
-      src: path.join(repoRoot, 'examples', 'game_controller_input', 'README.md'),
+      src: path.join(repoRoot, 'examples', 'v0.0.1-alpha', 'game_controller_input', 'README.md'),
       dest: path.join(websiteRoot, 'docs', 'examples', 'gamepad-input.md'),
       meta: { title: 'Game Controller Input', description: 'Tutorial: Handling gamepad/controller input in helios - buttons, analog sticks, and triggers.', slug: '/examples/gamepad-input', tags: ['examples', 'input', 'tutorial'], keywords: ['helios', 'gamepad', 'controller', 'input', 'tutorial'], sidebar_label: 'Gamepad Input' }
     },
     {
-      src: path.join(repoRoot, 'examples', 'spaceship_control', 'README.md'),
+      src: path.join(repoRoot, 'examples', 'v0.0.1-alpha', 'spaceship_control', 'README.md'),
       dest: path.join(websiteRoot, 'docs', 'examples', 'spaceship-control.md'),
       meta: { title: 'Spaceship Control', description: 'Example: Complete game loop with command pattern, scene graph cameras, transform inheritance, and ImGui debug overlay.', slug: '/examples/spaceship-control', tags: ['examples', 'input', 'imgui', 'logging', 'game-loop', 'camera', 'scene-graph'], keywords: ['helios', 'gamepad', 'ImGui', 'logging', 'debug overlay', 'camera', 'transform inheritance', 'game system'], sidebar_label: 'Spaceship Control' }
     },
     {
-      src: path.join(repoRoot, 'examples', 'spaceship_shooting', 'README.md'),
+      src: path.join(repoRoot, 'examples', 'v0.0.1-alpha', 'spaceship_shooting', 'README.md'),
       dest: path.join(websiteRoot, 'docs', 'examples', 'spaceship-shooting.md'),
       meta: { title: 'Spaceship Shooting', description: 'Example: Twin-stick shooter with bullet pooling, shooting components, aim tracking, and arena collision.', slug: '/examples/spaceship-shooting', tags: ['examples', 'input', 'gameplay', 'bullet-pool', 'components'], keywords: ['helios', 'twin-stick', 'shooter', 'bullet pool', 'shooting', 'aiming', 'game system'], sidebar_label: 'Spaceship Shooting' }
     },
     {
-      src: path.join(repoRoot, 'examples', 'enemy_spawn', 'README.md'),
+      src: path.join(repoRoot, 'examples', 'v0.0.1-alpha', 'enemy_spawn', 'README.md'),
       dest: path.join(websiteRoot, 'docs', 'examples', 'enemy-spawn.md'),
       meta: { title: 'Enemy Spawn', description: 'Example: Timed enemy spawning with object pooling, spawn schedulers, and random placement.', slug: '/examples/enemy-spawn', tags: ['examples', 'spawn', 'pooling', 'gameplay'], keywords: ['helios', 'spawn system', 'object pool', 'enemy', 'timer', 'random placement'], sidebar_label: 'Enemy Spawn' }
     },
     {
-      src: path.join(repoRoot, 'examples', 'collision_detection', 'README.md'),
+      src: path.join(repoRoot, 'examples', 'v0.0.1-alpha', 'collision_detection', 'README.md'),
       dest: path.join(websiteRoot, 'docs', 'examples', 'collision-detection.md'),
       meta: { title: 'Collision Detection', description: 'Example: Grid-based collision detection with layers, masks, and collision events.', slug: '/examples/collision-detection', tags: ['examples', 'collision', 'physics', 'gameplay'], keywords: ['helios', 'collision detection', 'AABB', 'grid', 'spatial partitioning', 'collision events'], sidebar_label: 'Collision Detection' }
     },
     {
-      src: path.join(repoRoot, 'examples', 'render_text_demo', 'README.md'),
+      src: path.join(repoRoot, 'examples', 'v0.0.1-alpha', 'render_text_demo', 'README.md'),
       dest: path.join(websiteRoot, 'docs', 'examples', 'render-text-demo.md'),
       meta: { title: 'Text Rendering Demo', description: 'Example: FreeType-based text rendering with dynamic updates, font loading, and orthographic projection.', slug: '/examples/render-text-demo', tags: ['examples', 'text', 'rendering', 'freetype'], keywords: ['helios', 'text rendering', 'FreeType', 'font', 'glyph', 'OpenGL'], sidebar_label: 'Text Rendering' }
     },
     {
-      src: path.join(repoRoot, 'examples', 'scoring_demo', 'README.md'),
+      src: path.join(repoRoot, 'examples', 'v0.0.1-alpha', 'scoring_demo', 'README.md'),
       dest: path.join(websiteRoot, 'docs', 'examples', 'scoring-demo.md'),
       meta: { title: 'Scoring Demo', description: 'Example: Score pools, score observers, UI text rendering, and kill attribution with health/damage mechanics.', slug: '/examples/scoring-demo', tags: ['examples', 'scoring', 'ui', 'gameplay'], keywords: ['helios', 'scoring', 'score pool', 'UI', 'text rendering', 'health', 'damage'], sidebar_label: 'Scoring Demo' }
     },
     {
-      src: path.join(repoRoot, 'examples', 'runtime_test', 'README.md'),
+      src: path.join(repoRoot, 'examples', 'v0.0.1-alpha', 'runtime_test', 'README.md'),
       dest: path.join(websiteRoot, 'docs', 'examples', 'runtime-test.md'),
       meta: { title: 'Runtime Stress Test', description: 'Interactive performance test for measuring framerate impact with dynamic object pooling.', slug: '/examples/runtime-test', tags: ['examples', 'performance', 'pooling', 'stress-test'], keywords: ['helios', 'runtime test', 'stress test', 'object pooling', 'FPS', 'performance', 'ImGui'], sidebar_label: 'Runtime Stress Test' }
     },

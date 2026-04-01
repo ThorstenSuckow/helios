@@ -48,7 +48,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         /**
          * @brief The shader used for text rendering.
          */
-        std::shared_ptr<helios::ext::opengl::rendering::shader::OpenGLShader> shader_;
+        std::shared_ptr<helios::ext::opengl::rendering::shader::LegacyOpenGLShader> shader_;
 
         /**
          * @brief The text color.
@@ -135,7 +135,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @return Reference to this config for method chaining.
          */
-        TextRenderableConfig& shader(const std::shared_ptr<helios::ext::opengl::rendering::shader::OpenGLShader>& shader) {
+        TextRenderableConfig& shader(const std::shared_ptr<helios::ext::opengl::rendering::shader::LegacyOpenGLShader>& shader) {
             shader_ = std::move(shader);
 
             return *this;

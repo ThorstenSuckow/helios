@@ -51,7 +51,7 @@ export namespace helios::ext::opengl::rendering {
      * directly in most use cases.
      *
      * @note The renderer expects all shaders and meshes to be OpenGL-specific implementations
-     *       (`OpenGLShader` and `OpenGLMesh`). Using incompatible types will trigger assertions.
+     *       (`LegacyOpenGLShader` and `OpenGLMesh`). Using incompatible types will trigger assertions.
      *
      * @see helios::rendering::mesh::MeshRenderer
      * @see helios::rendering::mesh::MeshRenderCommand
@@ -69,7 +69,7 @@ export namespace helios::ext::opengl::rendering {
          * Used to avoid redundant shader program activations. Reset at the beginning
          * of each render pass.
          */
-        mutable const helios::ext::opengl::rendering::shader::OpenGLShader* lastShader_ = nullptr;
+        mutable const helios::ext::opengl::rendering::shader::LegacyOpenGLShader* lastShader_ = nullptr;
 
         /**
          * @brief Cached VAO ID for state optimization.
@@ -148,8 +148,8 @@ export namespace helios::ext::opengl::rendering {
                 const auto& baseShader = renderPrototype_ptr->material().shader();
                 const auto& baseMesh = renderPrototype_ptr->mesh();
 
-                const auto* shader = static_cast<const helios::ext::opengl::rendering::shader::OpenGLShader*>(&baseShader);
-                assert(shader && "Unexpected failure when casting to OpenGLShader.");
+                const auto* shader = static_cast<const helios::ext::opengl::rendering::shader::LegacyOpenGLShader*>(&baseShader);
+                assert(shader && "Unexpected failure when casting to LegacyOpenGLShader.");
 
                 if (shader != lastShader_) {
                     shader->use();

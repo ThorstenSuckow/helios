@@ -35,7 +35,7 @@ export namespace helios::rendering::text {
      * ## Usage
      *
      * ```cpp
-     * auto shader = std::make_shared<OpenGLShader>(...);
+     * auto shader = std::make_shared<LegacyOpenGLShader>(...);
      * auto textProps = std::make_shared<TextShaderProperties>(textColor);
      *
      * // Get font provider from rendering device

@@ -127,13 +127,13 @@ Files</h2></td></tr>
 <tr class="memdesc:Inactive_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag component indicating an inactive entity. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md284"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md287"></a>
 helios::engine::mechanics::lifecycle::components</h1>
 <p>Components for managing entity lifecycle states.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md285"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md288"></a>
 Overview</h1>
 <p>This module provides tag components for entity activation state, a marker for dead entities, and a component for scheduling delayed activation of other components after spawn.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md286"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md289"></a>
 Components</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -147,7 +147,7 @@ Components</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">DelayedComponentEnabler</span>  </td><td class="markdownTableBodyNone">Tracks components pending delayed activation with countdown timers  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md287"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md290"></a>
 Active / Inactive</h1>
 <p>Managed automatically by <span class="tt">GameObject::setActive()</span>:</p>
 <ul>
@@ -159,10 +159,10 @@ Active / Inactive</h1>
 <div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span> [entity, health, active] : gameWorld-&gt;view&lt;</div>
 <div class="line">    HealthComponent, Active</div>
 <div class="line">&gt;().whereEnabled()) { ... }</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md288"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md291"></a>
 DeadTagComponent</h1>
 <p>Attached by <span class="tt">HealthManager</span> when an entity's health reaches zero and the <span class="tt">HealthDepletedBehavior::DeadTag</span> flag is set. Systems can query for this tag to apply death-related logic (scoring, VFX, cleanup) without re-checking health values. Move-only; copying is not permitted.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md289"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md292"></a>
 DelayedComponentEnabler</h1>
 <p>Schedules delayed activation of other components. Works in conjunction with <span class="tt">DelayedComponentEnablerSystem</span>.</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span>* enabler = entity.get&lt;DelayedComponentEnabler&gt;();</div>

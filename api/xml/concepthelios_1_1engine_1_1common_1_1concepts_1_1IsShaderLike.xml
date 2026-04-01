@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="concepthelios_1_1engine_1_1common_1_1concepts_1_1IsShaderLike" kind="concept">
+    <compoundname>helios::engine::common::concepts::IsShaderLike</compoundname>
+    <templateparamlist>
+      <param>
+        <type>class T</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;class T&gt;
+concept <ref refid="concepthelios_1_1engine_1_1common_1_1concepts_1_1IsShaderLike" kindref="compound">helios::engine::common::concepts::IsShaderLike</ref> =  requires(T&amp; t, <ref refid="classUniformValueMap" kindref="compound">UniformValueMap</ref>&amp; uniformValueMap) {
+        {
+            t.use()
+        } -&gt; std::same_as&lt;void&gt;;
+        {
+            t.applyUniformValues(uniformValueMap)
+        } -&gt; std::same_as&lt;void&gt;;
+
+    }    </initializer>
+    <briefdescription>
+<para>Constrains T to types that provide a minimal shader interface. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>A type satisfies IsShaderLike if it: 1. Provides `void use()` to bind the shader for rendering. 2. Provides `void applyUniformValues(UniformValueMap&amp;)` to set uniform parameters from a value map.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type to constrain.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="classUniformValueMap" kindref="compound">UniformValueMap</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/common/concepts/IsShaderLike.ixx" line="30" column="5"/>
+  </compounddef>
+</doxygen>

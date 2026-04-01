@@ -39,6 +39,7 @@ var annotated_dup =
               [ "OpenGLMesh", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh.html", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh" ]
             ] ],
             [ "shader", "namespacehelios_1_1ext_1_1opengl_1_1rendering_1_1shader.html", [
+              [ "LegacyOpenGLShader", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1LegacyOpenGLShader.html", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1LegacyOpenGLShader" ],
               [ "OpenGLShader", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader.html", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader" ],
               [ "OpenGLUniformLocationMap", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLUniformLocationMap.html", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLUniformLocationMap" ]
             ] ],
@@ -779,5 +780,6 @@ var annotated_dup =
       [ "hash&lt; helios::engine::runtime::world::types::SystemTypeId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1runtime_1_1world_1_1types_1_1SystemTypeId_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1runtime_1_1world_1_1types_1_1SystemTypeId_01_4" ],
       [ "hash&lt; helios::engine::state::types::StateTypeId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1state_1_1types_1_1StateTypeId_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1state_1_1types_1_1StateTypeId_01_4" ],
       [ "hash&lt; helios::util::Guid &gt;", "structstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4.html", "structstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4" ]
-    ] ]
+    ] ],
+    [ "UniformValueMap", "classUniformValueMap.html", "classUniformValueMap" ]
 ];

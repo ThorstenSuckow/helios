@@ -113,7 +113,7 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1shader_1_1Shader__inherit__graph.svg" width="155" height="154"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1shader_1_1Shader__inherit__graph.svg" width="183" height="154"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Collaboration diagram for helios::rendering::shader::Shader:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
@@ -127,7 +127,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a76056c0d2e01aa816412e1cade0716b5" id="r_a76056c0d2e01aa816412e1cade0716b5"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a76056c0d2e01aa816412e1cade0716b5">~Shader</a> ()=default</td></tr>
 <tr class="memitem:a2d052ed4e9ac589782122c0a81df1840" id="r_a2d052ed4e9ac589782122c0a81df1840"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d052ed4e9ac589782122c0a81df1840">use</a> () const noexcept=0</td></tr>
 <tr class="memdesc:a2d052ed4e9ac589782122c0a81df1840"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activates this shader for subsequent rendering operations. Draw calls of the current rendering pass will use this shader until it is unbound or another shader is bound.  <br /></td></tr>
-<tr class="memitem:a62e042796d6c0a946bea3ea0cebc1fd2" id="r_a62e042796d6c0a946bea3ea0cebc1fd2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a62e042796d6c0a946bea3ea0cebc1fd2">applyUniformValues</a> (const <a class="el" href="classhelios_1_1rendering_1_1shader_1_1UniformValueMap.html">UniformValueMap</a> &amp;uniformValueMap) const noexcept=0</td></tr>
+<tr class="memitem:a62e042796d6c0a946bea3ea0cebc1fd2" id="r_a62e042796d6c0a946bea3ea0cebc1fd2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a62e042796d6c0a946bea3ea0cebc1fd2">applyUniformValues</a> (const <a class="el" href="classUniformValueMap.html">UniformValueMap</a> &amp;uniformValueMap) const noexcept=0</td></tr>
 <tr class="memdesc:a62e042796d6c0a946bea3ea0cebc1fd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies the specified <a class="el" href="classhelios_1_1rendering_1_1shader_1_1UniformValueMap.html" title="Maps uniform semantics to their values for shader parameter binding.">UniformValueMap</a> to the uniforms defined by the shader. This method does not change the binding state of the shader, but it passes the uniform values to the underlying rendering backend. Implementations should ensure that the shader is properly bound before this method is called.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-static-attribs" class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
@@ -180,7 +180,7 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
         <tr>
           <td class="memname">virtual void helios::rendering::shader::Shader::applyUniformValues </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classhelios_1_1rendering_1_1shader_1_1UniformValueMap.html">UniformValueMap</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>uniformValueMap</em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="classUniformValueMap.html">UniformValueMap</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>uniformValueMap</em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -199,7 +199,7 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader.html#a976375b582a059aa61e4ee92b5407bd0">helios::ext::opengl::rendering::shader::OpenGLShader</a>.</p>
+<p>Implemented in <a class="el" href="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1LegacyOpenGLShader.html#a99c53454b34e570562d46063e4352b96">helios::ext::opengl::rendering::shader::LegacyOpenGLShader</a>.</p>
 
 <p class="reference">References <a class="el" href="#a62e042796d6c0a946bea3ea0cebc1fd2">applyUniformValues()</a>.</p>
 
@@ -244,7 +244,7 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 
 <p>Activates this shader for subsequent rendering operations. Draw calls of the current rendering pass will use this shader until it is unbound or another shader is bound. </p>
 
-<p>Implemented in <a class="el" href="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader.html#a50ea56d9f86a3f7d8342c7e5792a61a1">helios::ext::opengl::rendering::shader::OpenGLShader</a>.</p>
+<p>Implemented in <a class="el" href="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1LegacyOpenGLShader.html#a75032b796b570a39940e44a5a8a9ec63">helios::ext::opengl::rendering::shader::LegacyOpenGLShader</a>.</p>
 
 </div>
 </div>

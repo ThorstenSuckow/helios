@@ -125,14 +125,14 @@ Files</h2></td></tr>
 <tr class="memdesc:SpawnCommand_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command for requesting GameObject spawning from a pool. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md695"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md698"></a>
 helios::engine::runtime::spawn::commands</h1>
 <p>Commands for spawn and despawn operations.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md696"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md699"></a>
 Overview</h1>
 <p>This module contains command classes that represent spawn and despawn operations. These commands are emitted by systems and submitted directly to the SpawnCommandHandler during the command flush phase.</p>
 <p>The system is built around <b>compile-time type safety</b>: command types are declared as template parameters, eliminating virtual dispatch overhead for queue access and enabling the compiler to verify command routing at build time.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md697"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md700"></a>
 Architecture</h1>
 <div class="fragment"><div class="line">┌──────────────────────────────────────────────────────────────────────┐</div>
 <div class="line">│                     COMMAND PIPELINE                                 │</div>
@@ -164,7 +164,7 @@ Architecture</h1>
 <div class="line">│  - EngineCommandBuffer                                               │</div>
 <div class="line">│                                                                      │</div>
 <div class="line">└──────────────────────────────────────────────────────────────────────┘</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md698"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md701"></a>
 Key Classes</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -178,11 +178,11 @@ Key Classes</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">EngineCommandBuffer</span>  </td><td class="markdownTableBodyNone">Concrete facade pre-configured with all engine command types  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md699"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md702"></a>
 Flush Routing</h1>
 <p>During <span class="tt">TypedCommandBuffer::flush()</span>, each command type is processed in template parameter order:</p>
 <p>1. <b>Handler route:</b> If a handler for <span class="tt">Cmd</span> is registered in the <span class="tt">CommandHandlerRegistry</span>, all queued commands are submitted to the handler via the stored function pointer. 2. <b>Direct execution:</b> Otherwise, if the command satisfies <span class="tt">ExecutableCommand</span>, it executes itself 3. <b>Assertion:</b> If neither applies, an assertion fires (misconfiguration)</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md700"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md703"></a>
 Usage</h1>
 <div class="fragment"><div class="line"><span class="comment">// Spawn command with context</span></div>
 <div class="line">SpawnContext ctx;</div>

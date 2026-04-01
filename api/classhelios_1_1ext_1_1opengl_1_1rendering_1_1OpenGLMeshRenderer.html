@@ -146,10 +146,10 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>OpenGLDevice</b></td
 <li>VAO bindings are only updated when rendering a mesh with a different VAO.</li>
 </ul>
 <p>## Usage</p>
-<p>```cpp <a class="el" href="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLMeshRenderer.html" title="OpenGL implementation of the MeshRenderer interface.">OpenGLMeshRenderer</a> renderer; MeshRenderCommand command = createRenderCommand(); UniformValueMap frameUniforms = {{"viewMatrix", viewMat}, {"projMatrix", projMat}}; renderer.render(command, frameUniforms); ```</p>
+<p>```cpp <a class="el" href="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLMeshRenderer.html" title="OpenGL implementation of the MeshRenderer interface.">OpenGLMeshRenderer</a> renderer; MeshRenderCommand command = createRenderCommand(); <a class="el" href="classUniformValueMap.html" title="Maps uniform semantics to their values for shader parameter binding.">UniformValueMap</a> frameUniforms = {{"viewMatrix", viewMat}, {"projMatrix", projMat}}; renderer.render(command, frameUniforms); ```</p>
 <p>## Ownership</p>
 <p>This class is typically owned by `OpenGLDevice` and should not be instantiated directly in most use cases.</p>
-<dl class="section note"><dt>Note</dt><dd>The renderer expects all shaders and meshes to be OpenGL-specific implementations (`OpenGLShader` and `OpenGLMesh`). Using incompatible types will trigger assertions.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The renderer expects all shaders and meshes to be OpenGL-specific implementations (`LegacyOpenGLShader` and `OpenGLMesh`). Using incompatible types will trigger assertions.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1rendering_1_1mesh_1_1MeshRenderer.html" title="Abstract base class for mesh rendering operations.">helios::rendering::mesh::MeshRenderer</a> </dd>
 <dd>
 <a class="el" href="classhelios_1_1rendering_1_1mesh_1_1MeshRenderCommand.html" title="DTO for storing rendering-specific command information to be passed to the RenderQueue.">helios::rendering::mesh::MeshRenderCommand</a> </dd>
@@ -228,7 +228,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>OpenGLDevice</b></td
 <dl class="section note"><dt>Note</dt><dd>If the render command does not contain a valid render prototype, the method returns without issuing any draw calls.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd>MeshRenderCommand </dd>
 <dd>
-UniformValueMap </dd></dl>
+<a class="el" href="classUniformValueMap.html" title="Maps uniform semantics to their values for shader parameter binding.">UniformValueMap</a> </dd></dl>
 
 <p>Implements <a class="el" href="classhelios_1_1rendering_1_1mesh_1_1MeshRenderer.html#ab2f80bf9dc2fc28d6ca18ed7b5c782ae">helios::rendering::mesh::MeshRenderer</a>.</p>
 

@@ -131,7 +131,7 @@ Public Member Functions</h2></td></tr>
 <li>**Reduced Duplication:** Avoids redundant storage of shader and property data.</li>
 </ul>
 <p>## Usage</p>
-<p>```cpp auto shader = std::make_shared&lt;OpenGLShader&gt;(...); auto textProps = std::make_shared&lt;TextShaderProperties&gt;(textColor);</p>
+<p>```cpp auto shader = std::make_shared&lt;LegacyOpenGLShader&gt;(...); auto textProps = std::make_shared&lt;TextShaderProperties&gt;(textColor);</p>
 <p>// Get font provider from rendering device auto&amp; fontProvider = device.fontResourceProvider(); fontProvider.loadFont(FontId{"roboto"}, "fonts/Roboto.ttf");</p>
 <p>auto prototype = std::make_shared&lt;TextRenderPrototype&gt;(shader, textProps, &amp;fontProvider);</p>
 <p>// Share prototype across multiple renderables <a class="el" href="classhelios_1_1rendering_1_1text_1_1TextRenderable.html" title="High-level text component that can be attached to game objects.">TextRenderable</a> title(std::make_unique&lt;TextMesh&gt;("Title", fontId), prototype); <a class="el" href="classhelios_1_1rendering_1_1text_1_1TextRenderable.html" title="High-level text component that can be attached to game objects.">TextRenderable</a> score(std::make_unique&lt;TextMesh&gt;("Score: 0", fontId), prototype); ```</p>

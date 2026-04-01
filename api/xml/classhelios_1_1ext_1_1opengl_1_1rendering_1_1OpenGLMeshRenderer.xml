@@ -25,9 +25,9 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLMeshRenderer_1accd7af6628105ddac739ee29d98a867a" prot="private" static="no" mutable="yes">
-        <type>const <ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader" kindref="compound">helios::ext::opengl::rendering::shader::OpenGLShader</ref> *</type>
-        <definition>const helios::ext::opengl::rendering::shader::OpenGLShader* helios::ext::opengl::rendering::OpenGLMeshRenderer::lastShader_</definition>
+      <memberdef kind="variable" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLMeshRenderer_1a625bee92080d09475d883dc622e007d1" prot="private" static="no" mutable="yes">
+        <type>const <ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1LegacyOpenGLShader" kindref="compound">helios::ext::opengl::rendering::shader::LegacyOpenGLShader</ref> *</type>
+        <definition>const helios::ext::opengl::rendering::shader::LegacyOpenGLShader* helios::ext::opengl::rendering::OpenGLMeshRenderer::lastShader_</definition>
         <argsstring></argsstring>
         <name>lastShader_</name>
         <qualifiedname>helios::ext::opengl::rendering::OpenGLMeshRenderer::lastShader_</qualifiedname>
@@ -40,7 +40,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/ext/opengl/rendering/OpenGLMeshRenderer.ixx" line="72" column="76" bodyfile="/tmp/h/include/ext/opengl/rendering/OpenGLMeshRenderer.ixx" bodystart="72" bodyend="-1"/>
+        <location file="/tmp/h/include/ext/opengl/rendering/OpenGLMeshRenderer.ixx" line="72" column="82" bodyfile="/tmp/h/include/ext/opengl/rendering/OpenGLMeshRenderer.ixx" bodystart="72" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLMeshRenderer_1af93ab35de0242006a19159a25a61434a" prot="private" static="no" mutable="yes">
         <type>unsigned int</type>
@@ -166,7 +166,7 @@
 </simplesect>
 <simplesect kind="see"><para>MeshRenderCommand </para>
 </simplesect>
-<simplesect kind="see"><para>UniformValueMap </para>
+<simplesect kind="see"><para><ref refid="classUniformValueMap" kindref="compound">UniformValueMap</ref> </para>
 </simplesect>
 </para>
         </detaileddescription>
@@ -188,10 +188,10 @@
 </listitem></itemizedlist>
 </para>
 <para>## Usage</para>
-<para>```cpp <ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLMeshRenderer" kindref="compound">OpenGLMeshRenderer</ref> renderer; MeshRenderCommand command = createRenderCommand(); UniformValueMap frameUniforms = {{&quot;viewMatrix&quot;, viewMat}, {&quot;projMatrix&quot;, projMat}}; renderer.render(command, frameUniforms); ```</para>
+<para>```cpp <ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLMeshRenderer" kindref="compound">OpenGLMeshRenderer</ref> renderer; MeshRenderCommand command = createRenderCommand(); <ref refid="classUniformValueMap" kindref="compound">UniformValueMap</ref> frameUniforms = {{&quot;viewMatrix&quot;, viewMat}, {&quot;projMatrix&quot;, projMat}}; renderer.render(command, frameUniforms); ```</para>
 <para>## Ownership</para>
 <para>This class is typically owned by `OpenGLDevice` and should not be instantiated directly in most use cases.</para>
-<para><simplesect kind="note"><para>The renderer expects all shaders and meshes to be OpenGL-specific implementations (`OpenGLShader` and `OpenGLMesh`). Using incompatible types will trigger assertions.</para>
+<para><simplesect kind="note"><para>The renderer expects all shaders and meshes to be OpenGL-specific implementations (`LegacyOpenGLShader` and `OpenGLMesh`). Using incompatible types will trigger assertions.</para>
 </simplesect>
 <simplesect kind="see"><para><ref refid="classhelios_1_1rendering_1_1mesh_1_1MeshRenderer" kindref="compound">helios::rendering::mesh::MeshRenderer</ref> </para>
 </simplesect>
@@ -229,7 +229,7 @@
     <listofallmembers>
       <member refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLMeshRenderer_1ac5e589bdb464735cb411bd7af40d3d5f" prot="private" virt="non-virtual"><scope>helios::ext::opengl::rendering::OpenGLMeshRenderer</scope><name>beginRenderPass</name></member>
       <member refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLMeshRenderer_1a014819462e13c94e34c6ba2b0e19d212" prot="private" virt="non-virtual"><scope>helios::ext::opengl::rendering::OpenGLMeshRenderer</scope><name>init</name></member>
-      <member refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLMeshRenderer_1accd7af6628105ddac739ee29d98a867a" prot="private" virt="non-virtual"><scope>helios::ext::opengl::rendering::OpenGLMeshRenderer</scope><name>lastShader_</name></member>
+      <member refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLMeshRenderer_1a625bee92080d09475d883dc622e007d1" prot="private" virt="non-virtual"><scope>helios::ext::opengl::rendering::OpenGLMeshRenderer</scope><name>lastShader_</name></member>
       <member refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLMeshRenderer_1af93ab35de0242006a19159a25a61434a" prot="private" virt="non-virtual"><scope>helios::ext::opengl::rendering::OpenGLMeshRenderer</scope><name>lastVao_</name></member>
       <member refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLMeshRenderer_1a84972ffe03569b8094dce30abc8a0c52" prot="private" virt="non-virtual"><scope>helios::ext::opengl::rendering::OpenGLMeshRenderer</scope><name>OpenGLDevice</name></member>
       <member refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLMeshRenderer_1aa05d8d2158accb4ea60061a99d8d7394" prot="public" virt="virtual"><scope>helios::ext::opengl::rendering::OpenGLMeshRenderer</scope><name>render</name></member>

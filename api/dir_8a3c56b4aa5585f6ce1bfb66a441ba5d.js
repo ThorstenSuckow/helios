@@ -10,5 +10,6 @@ var dir_8a3c56b4aa5585f6ce1bfb66a441ba5d =
     [ "IsCommandBufferLike.ixx", "IsCommandBufferLike_8ixx.html", "IsCommandBufferLike_8ixx" ],
     [ "IsCommandHandlerLike.ixx", "IsCommandHandlerLike_8ixx.html", "IsCommandHandlerLike_8ixx" ],
     [ "IsManagerLike.ixx", "IsManagerLike_8ixx.html", "IsManagerLike_8ixx" ],
+    [ "IsShaderLike.ixx", "IsShaderLike_8ixx.html", "IsShaderLike_8ixx" ],
     [ "IsSystemLike.ixx", "IsSystemLike_8ixx.html", "IsSystemLike_8ixx" ]
 ];

@@ -22,7 +22,7 @@
 <codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>app/<sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GLFWApplication<sp/>and<sp/>factory</highlight></codeline>
 <codeline><highlight class="normal">└──<sp/>opengl/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>OpenGL<sp/>rendering<sp/>backend</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>├──<sp/>rendering/<sp/>#<sp/>OpenGL<sp/>RenderingDevice</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>├──<sp/>shader/<sp/><sp/><sp/><sp/>#<sp/>OpenGLShader<sp/>implementation</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>├──<sp/>shader/<sp/><sp/><sp/><sp/>#<sp/>LegacyOpenGLShader<sp/>implementation</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>└──<sp/>model/<sp/><sp/><sp/><sp/><sp/>#<sp/>OpenGLMesh<sp/>implementation</highlight></codeline>
 </programlisting></para>
 </sect2>
@@ -47,7 +47,7 @@
 <sect2 id="dir_c65593c1e2ce5122a06a0735d96badb1_1autotoc_md25">
 <title>Separation of Concerns</title><para><itemizedlist>
 <listitem><para><bold>helios core</bold> defines the <bold>interfaces</bold> (e.g., <computeroutput>Window</computeroutput>, <computeroutput>RenderingDevice</computeroutput>, <computeroutput>Shader</computeroutput>)</para>
-</listitem><listitem><para><bold><computeroutput>ext</computeroutput> modules</bold> provide the <bold>implementations</bold> (e.g., <computeroutput>GLFWWindow</computeroutput>, <computeroutput>OpenGLShader</computeroutput>)</para>
+</listitem><listitem><para><bold><computeroutput>ext</computeroutput> modules</bold> provide the <bold>implementations</bold> (e.g., <computeroutput>GLFWWindow</computeroutput>, <computeroutput>LegacyOpenGLShader</computeroutput>)</para>
 </listitem><listitem><para>Applications use <bold>factories</bold> to instantiate concrete implementations</para>
 </listitem></itemizedlist>
 </para>
@@ -92,7 +92,7 @@
 <title><computeroutput>helios.ext.opengl</computeroutput></title><para>OpenGL 4.5+ rendering backend.</para>
 <para><bold>Key Classes:</bold><itemizedlist>
 <listitem><para><computeroutput>OpenGLRenderingDevice</computeroutput> - Main rendering interface</para>
-</listitem><listitem><para><computeroutput>OpenGLShader</computeroutput> - Shader compilation and linking</para>
+</listitem><listitem><para><computeroutput>LegacyOpenGLShader</computeroutput> - Shader compilation and linking</para>
 </listitem><listitem><para><computeroutput>OpenGLMesh</computeroutput> - VBO/IBO management</para>
 </listitem><listitem><para><computeroutput>OpenGLUniformLocationMap</computeroutput> - Uniform binding</para>
 </listitem></itemizedlist>

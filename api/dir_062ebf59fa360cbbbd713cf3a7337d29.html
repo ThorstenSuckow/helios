@@ -133,14 +133,14 @@ Files</h2></td></tr>
 <tr class="memdesc:TypedCommandBuffer_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compile-time typed command buffer with handler routing. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md648"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md651"></a>
 helios::engine::runtime::messaging::command</h1>
 <p>Compile-time typed command buffering and handler routing infrastructure.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md649"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md652"></a>
 Overview</h1>
 <p>This module implements the Command pattern for deferred action execution within the game loop. Commands are enqueued during system updates and flushed at defined commit points, ensuring deterministic and reproducible world mutations.</p>
 <p>The system is built around <b>compile-time type safety</b>: command types are declared as template parameters, eliminating virtual dispatch overhead for queue access and enabling the compiler to verify command routing at build time.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md650"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md653"></a>
 Architecture</h1>
 <div class="fragment"><div class="line">┌──────────────────────────────────────────────────────────────────────┐</div>
 <div class="line">│                     COMMAND PIPELINE                                 │</div>
@@ -174,7 +174,7 @@ Architecture</h1>
 <div class="line">│  └────────────────────────────────────────────────────────────┘      │</div>
 <div class="line">│                                                                      │</div>
 <div class="line">└──────────────────────────────────────────────────────────────────────┘</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md651"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md654"></a>
 Key Classes</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -192,11 +192,11 @@ Key Classes</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">EngineCommandBuffer</span>  </td><td class="markdownTableBodyNone">Concrete facade pre-configured with all engine command types  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md652"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md655"></a>
 Flush Routing</h1>
 <p>During <span class="tt">TypedCommandBuffer::flush()</span>, each command type is processed in template parameter order:</p>
 <p>1. <b>Handler route:</b> If a handler is registered in the <span class="tt">CommandHandlerRegistry</span>, each queued command is submitted via the stored function pointer. 2. <b>Direct execution:</b> If no handler is registered and the command satisfies the <span class="tt">ExecutableCommand</span> concept (provides a noexcept <span class="tt">execute(UpdateContext&amp;)</span> method), it is executed directly. 3. <b>Assertion:</b> If neither condition holds, an assertion fires (misconfiguration).</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md653"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md656"></a>
 Usage</h1>
 <div class="fragment"><div class="line"><span class="comment">// Systems enqueue commands via UpdateContext</span></div>
 <div class="line"><span class="keywordtype">void</span> update(UpdateContext&amp; ctx) <span class="keyword">noexcept</span> {</div>
@@ -227,7 +227,7 @@ Usage</h1>
 <div class="line">    <span class="keywordtype">void</span> flush(UpdateContext&amp; ctx) <span class="keyword">noexcept</span> { <span class="comment">/* batch processing */</span> }</div>
 <div class="line">};</div>
 <div class="ttc" id="astructhelios_1_1engine_1_1common_1_1tags_1_1ManagerRole_html"><div class="ttname"><a href="structhelios_1_1engine_1_1common_1_1tags_1_1ManagerRole.html">helios::engine::common::tags::ManagerRole</a></div><div class="ttdoc">Compile-time tag identifying a class as a Manager.</div><div class="ttdef"><b>Definition</b> <a href="ManagerRole_8ixx_source.html#l00021">ManagerRole.ixx:21</a></div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md654"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md657"></a>
 Game Loop Integration</h1>
 <p>Commands are flushed at each commit point in the game loop:</p>
 <div class="fragment"><div class="line"><span class="comment">// Phase commit sequence</span></div>

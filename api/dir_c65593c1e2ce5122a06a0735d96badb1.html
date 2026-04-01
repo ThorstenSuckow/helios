@@ -141,7 +141,7 @@ Available Extensions</h2>
 <div class="line">│   └── app/      # GLFWApplication and factory</div>
 <div class="line">└── opengl/        # OpenGL rendering backend</div>
 <div class="line">    ├── rendering/ # OpenGL RenderingDevice</div>
-<div class="line">    ├── shader/    # OpenGLShader implementation</div>
+<div class="line">    ├── shader/    # LegacyOpenGLShader implementation</div>
 <div class="line">    └── model/     # OpenGLMesh implementation</div>
 </div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md23"></a>
 Architecture</h1>
@@ -159,7 +159,7 @@ Extension Responsibilities</h2>
 Separation of Concerns</h2>
 <ul>
 <li><b>helios core</b> defines the <b>interfaces</b> (e.g., <span class="tt">Window</span>, <span class="tt">RenderingDevice</span>, <span class="tt">Shader</span>)</li>
-<li><b><span class="tt">ext</span> modules</b> provide the <b>implementations</b> (e.g., <span class="tt">GLFWWindow</span>, <span class="tt">OpenGLShader</span>)</li>
+<li><b><span class="tt">ext</span> modules</b> provide the <b>implementations</b> (e.g., <span class="tt">GLFWWindow</span>, <span class="tt">LegacyOpenGLShader</span>)</li>
 <li>Applications use <b>factories</b> to instantiate concrete implementations</li>
 </ul>
 <h1 class="doxsection"><a class="anchor" id="autotoc_md26"></a>
@@ -201,7 +201,7 @@ Extension Modules</h1>
 <p>OpenGL 4.5+ rendering backend.</p>
 <p><b>Key Classes:</b></p><ul>
 <li><span class="tt">OpenGLRenderingDevice</span> - Main rendering interface</li>
-<li><span class="tt">OpenGLShader</span> - Shader compilation and linking</li>
+<li><span class="tt">LegacyOpenGLShader</span> - Shader compilation and linking</li>
 <li><span class="tt">OpenGLMesh</span> - VBO/IBO management</li>
 <li><span class="tt">OpenGLUniformLocationMap</span> - Uniform binding</li>
 </ul>

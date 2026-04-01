@@ -110,7 +110,7 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d_dep.svg" width="134" height="178"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d_dep.svg" width="219" height="178"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-files" class="groupheader"><a id="files" name="files"></a>
@@ -135,6 +135,8 @@ Files</h2></td></tr>
 <tr class="memdesc:IsCommandHandlerLike_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept constraining types that can handle specific commands. <br /></td></tr>
 <tr class="memitem:IsManagerLike_2Eixx" id="r_IsManagerLike_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="IsManagerLike_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="IsManagerLike_8ixx.html">IsManagerLike.ixx</a></td></tr>
 <tr class="memdesc:IsManagerLike_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept constraining types eligible for manager registration. <br /></td></tr>
+<tr class="memitem:IsShaderLike_2Eixx" id="r_IsShaderLike_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="IsShaderLike_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="IsShaderLike_8ixx.html">IsShaderLike.ixx</a></td></tr>
+<tr class="memdesc:IsShaderLike_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept constraining types usable as shader abstractions. <br /></td></tr>
 <tr class="memitem:IsSystemLike_2Eixx" id="r_IsSystemLike_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="IsSystemLike_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="IsSystemLike_8ixx.html">IsSystemLike.ixx</a></td></tr>
 <tr class="memdesc:IsSystemLike_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept constraining types eligible for system registration. <br /></td></tr>
 </table>
@@ -147,25 +149,47 @@ Overview</h1>
 <p>This module provides C++20 concepts that constrain types for specific engine roles (System, Manager, CommandBuffer, CommandHandler). The concepts combine structural requirements (e.g. <span class="tt">flush()</span>, <span class="tt">update()</span>) with explicit opt-in via the <a class="el" href="dir_e2e03a8bd11d187a90561967ca820988.html">tag system</a>, preventing accidental registration of types that happen to have matching method signatures.</p>
 <h1 class="doxsection"><a class="anchor" id="autotoc_md129"></a>
 Concepts</h1>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md130"></a>
+Capability Detection</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Concept  </th><th class="markdownTableHeadNone">Requires  </th><th class="markdownTableHeadNone">Purpose  </th></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">HasTag&lt;T, Tag&gt;</span>  </td><td class="markdownTableBodyNone"><span class="tt">T::EngineRoleTag == Tag</span>  </td><td class="markdownTableBodyNone">Detects compile-time role tag  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt">HasInit&lt;T&gt;</span>  </td><td class="markdownTableBodyNone"><span class="tt">T::init(GameWorld&amp;)</span>  </td><td class="markdownTableBodyNone">Detects optional one-time initialization  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">HasInit&lt;T&gt;</span>  </td><td class="markdownTableBodyNone"><span class="tt">init(GameWorld&amp;)</span>  </td><td class="markdownTableBodyNone">Detects optional one-time initialization  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">HasUpdate&lt;T&gt;</span>  </td><td class="markdownTableBodyNone"><span class="tt">T::update(UpdateContext&amp;)</span>  </td><td class="markdownTableBodyNone">Detects per-frame update capability  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">HasUpdate&lt;T&gt;</span>  </td><td class="markdownTableBodyNone"><span class="tt">update(UpdateContext&amp;)</span>  </td><td class="markdownTableBodyNone">Detects per-frame update capability  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt">IsManagerLike&lt;T&gt;</span>  </td><td class="markdownTableBodyNone"><span class="tt">flush(UpdateContext&amp;)</span> + <span class="tt">ManagerRole</span>  </td><td class="markdownTableBodyNone">Gates <span class="tt">GameWorld::registerResource&lt;T&gt;()</span>  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">HasSubmit&lt;T, Cmd&gt;</span>  </td><td class="markdownTableBodyNone"><span class="tt">submit(const Cmd&amp;) noexcept -&gt; bool</span>  </td><td class="markdownTableBodyNone">Detects command submission capability  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">IsSystemLike&lt;T&gt;</span>  </td><td class="markdownTableBodyNone"><span class="tt">update(UpdateContext&amp;)</span> + <span class="tt">SystemRole</span>  </td><td class="markdownTableBodyNone">Gates <span class="tt">SystemRegistry::add&lt;T&gt;()</span>  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">HasClear&lt;T&gt;</span>  </td><td class="markdownTableBodyNone"><span class="tt">clear() -&gt; void</span>  </td><td class="markdownTableBodyNone">Detects clear capability  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt">IsCommandBufferLike&lt;T&gt;</span>  </td><td class="markdownTableBodyNone">Derives from <span class="tt">CommandBuffer</span>  </td><td class="markdownTableBodyNone">Gates command buffer registration  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">IsCommandHandlerLike&lt;T&gt;</span>  </td><td class="markdownTableBodyNone">Derives from <span class="tt">CommandHandler</span>  </td><td class="markdownTableBodyNone">Gates command handler registration  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">HasReset&lt;T&gt;</span>  </td><td class="markdownTableBodyNone"><span class="tt">reset() -&gt; void</span>  </td><td class="markdownTableBodyNone">Detects optional reset capability  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md130"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md131"></a>
+Role Constraints</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Concept  </th><th class="markdownTableHeadNone">Requires  </th><th class="markdownTableHeadNone">Purpose  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">IsManagerLike&lt;T&gt;</span>  </td><td class="markdownTableBodyNone"><span class="tt">flush(UpdateContext&amp;)</span> + <span class="tt">ManagerRole</span>  </td><td class="markdownTableBodyNone">Gates <span class="tt">GameWorld::registerResource&lt;T&gt;()</span>  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">IsSystemLike&lt;T&gt;</span>  </td><td class="markdownTableBodyNone"><span class="tt">update(UpdateContext&amp;)</span> + <span class="tt">SystemRole</span>  </td><td class="markdownTableBodyNone">Gates <span class="tt">SystemRegistry::add&lt;T&gt;()</span>  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">IsCommandBufferLike&lt;T&gt;</span>  </td><td class="markdownTableBodyNone"><span class="tt">flush(GameWorld&amp;, UpdateContext&amp;)</span> + <span class="tt">HasClear</span>  </td><td class="markdownTableBodyNone">Gates command buffer registration  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">IsCommandHandlerLike&lt;T, ...Cmds&gt;</span>  </td><td class="markdownTableBodyNone"><span class="tt">submit(const Cmd&amp;) noexcept -&gt; bool</span> for each <span class="tt">Cmd</span>  </td><td class="markdownTableBodyNone">Gates command handler registration  </td></tr>
+</table>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md132"></a>
+Structural Constraints</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Concept  </th><th class="markdownTableHeadNone">Requires  </th><th class="markdownTableHeadNone">Purpose  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">IsShaderLike&lt;T&gt;</span>  </td><td class="markdownTableBodyNone"><span class="tt">use()</span> + <span class="tt">applyUniformValues(<a class="el" href="classUniformValueMap.html" title="Maps uniform semantics to their values for shader parameter binding.">UniformValueMap</a>&amp;)</span>  </td><td class="markdownTableBodyNone">Constrains types usable as shader abstractions  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md133"></a>
 Tag-Based Opt-In</h1>
 <p>Role concepts combine structural checks with a tag requirement:</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
@@ -173,7 +197,7 @@ Tag-Based Opt-In</h1>
 <div class="line">    { t.flush(ctx) } -&gt; std::same_as&lt;void&gt;;</div>
 <div class="line">} &amp;&amp; HasTag&lt;T, ManagerRole&gt;;</div>
 </div><!-- fragment --><p>This means a type must both implement the required interface <b>and</b> declare <span class="tt">using EngineRoleTag = ManagerRole;</span> to be eligible for registration.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md131"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md134"></a>
 See Also</h1>
 <ul>
 <li><a class="el" href="dir_e2e03a8bd11d187a90561967ca820988.html">Tags</a> — Role tag types</li>

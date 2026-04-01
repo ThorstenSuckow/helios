@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">tmp-h-include-ext | helios</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://helios.garagecraft.games/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://helios.garagecraft.games/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://helios.garagecraft.games/docs/helios/folders/tmp/h/include/ext"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="tmp-h-include-ext | helios"><meta data-rh="true" name="description" content="Folders Index"><meta data-rh="true" property="og:description" content="Folders Index"><meta data-rh="true" name="keywords" content="doxygen,reference,dir"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://helios.garagecraft.games/docs/helios/folders/tmp/h/include/ext"><link data-rh="true" rel="alternate" href="https://helios.garagecraft.games/docs/helios/folders/tmp/h/include/ext" hreflang="en"><link data-rh="true" rel="alternate" href="https://helios.garagecraft.games/docs/helios/folders/tmp/h/include/ext" hreflang="x-default"><link data-rh="true" rel="preconnect" href="https://LK14YGETTG-dsn.algolia.net" crossorigin="anonymous"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"API Reference (Doxygen)","item":"https://helios.garagecraft.games/docs/helios/"},{"@type":"ListItem","position":2,"name":"Files","item":"https://helios.garagecraft.games/docs/helios/files"},{"@type":"ListItem","position":3,"name":"tmp","item":"https://helios.garagecraft.games/docs/helios/folders/tmp"},{"@type":"ListItem","position":4,"name":"h","item":"https://helios.garagecraft.games/docs/helios/folders/tmp/h"},{"@type":"ListItem","position":5,"name":"include","item":"https://helios.garagecraft.games/docs/helios/folders/tmp/h/include"},{"@type":"ListItem","position":6,"name":"ext","item":"https://helios.garagecraft.games/docs/helios/folders/tmp/h/include/ext"}]}</script><link rel="search" type="application/opensearchdescription+xml" title="helios" href="/opensearch.xml"><link rel="stylesheet" href="/assets/css/styles.d8266996.css">
-<script src="/assets/js/runtime~main.5f59a608.js" defer="defer"></script>
-<script src="/assets/js/main.6a35ce41.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.dc96de5b.js" defer="defer"></script>
+<script src="/assets/js/main.6057e8e3.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -43,7 +43,7 @@
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">│   └── app/      # GLFWApplication and factory</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">└── opengl/        # OpenGL rendering backend</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">    ├── rendering/ # OpenGL RenderingDevice</span></span></div>
-<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">    ├── shader/    # OpenGLShader implementation</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">    ├── shader/    # LegacyOpenGLShader implementation</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">    └── model/     # OpenGLMesh implementation</span></span></div>
 </div>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="autotoc_md23">Architecture<a href="#autotoc_md23" class="hash-link" aria-label="Direct link to Architecture" title="Direct link to Architecture" translate="no">​</a></h2>
@@ -52,7 +52,7 @@
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="autotoc_md25">Separation of Concerns<a href="#autotoc_md25" class="hash-link" aria-label="Direct link to Separation of Concerns" title="Direct link to Separation of Concerns" translate="no">​</a></h3>
 <ul class="doxyList">
 <li class=""><b>helios core</b> defines the <b>interfaces</b> (e.g., <span class="doxyComputerOutput">Window</span>, <span class="doxyComputerOutput">RenderingDevice</span>, <span class="doxyComputerOutput">Shader</span>)</li>
-<li class=""><b><span class="doxyComputerOutput">ext</span> modules</b> provide the <b>implementations</b> (e.g., <span class="doxyComputerOutput">GLFWWindow</span>, <span class="doxyComputerOutput">OpenGLShader</span>)</li>
+<li class=""><b><span class="doxyComputerOutput">ext</span> modules</b> provide the <b>implementations</b> (e.g., <span class="doxyComputerOutput">GLFWWindow</span>, <span class="doxyComputerOutput">LegacyOpenGLShader</span>)</li>
 <li class="">Applications use <b>factories</b> to instantiate concrete implementations</li>
 </ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="autotoc_md26">Using Extensions<a href="#autotoc_md26" class="hash-link" aria-label="Direct link to Using Extensions" title="Direct link to Using Extensions" translate="no">​</a></h2>
@@ -91,7 +91,7 @@
 <p><b>Key Classes:</b></p>
 <ul class="doxyList">
 <li class=""><span class="doxyComputerOutput">OpenGLRenderingDevice</span> - Main rendering interface</li>
-<li class=""><span class="doxyComputerOutput">OpenGLShader</span> - Shader compilation and linking</li>
+<li class=""><span class="doxyComputerOutput">LegacyOpenGLShader</span> - Shader compilation and linking</li>
 <li class=""><span class="doxyComputerOutput">OpenGLMesh</span> - VBO/IBO management</li>
 <li class=""><span class="doxyComputerOutput">OpenGLUniformLocationMap</span> - Uniform binding</li>
 </ul>

@@ -12,6 +12,7 @@
     <innerfile refid="IsCommandBufferLike_8ixx">IsCommandBufferLike.ixx</innerfile>
     <innerfile refid="IsCommandHandlerLike_8ixx">IsCommandHandlerLike.ixx</innerfile>
     <innerfile refid="IsManagerLike_8ixx">IsManagerLike.ixx</innerfile>
+    <innerfile refid="IsShaderLike_8ixx">IsShaderLike.ixx</innerfile>
     <innerfile refid="IsSystemLike_8ixx">IsSystemLike.ixx</innerfile>
     <briefdescription>
     </briefdescription>
@@ -23,7 +24,8 @@
 <title>Overview</title><para>This module provides C++20 concepts that constrain types for specific engine roles (System, Manager, CommandBuffer, CommandHandler). The concepts combine structural requirements (e.g. <computeroutput>flush()</computeroutput>, <computeroutput>update()</computeroutput>) with explicit opt-in via the <ref refid="dir_e2e03a8bd11d187a90561967ca820988" kindref="compound">tag system</ref>, preventing accidental registration of types that happen to have matching method signatures.</para>
 </sect1>
 <sect1 id="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d_1autotoc_md129">
-<title>Concepts</title><para><table rows="8" cols="3"><row>
+<title>Concepts</title><sect2 id="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d_1autotoc_md130">
+<title>Capability Detection</title><para><table rows="7" cols="3"><row>
 <entry thead="yes"><para>Concept  </para>
 </entry><entry thead="yes"><para>Requires  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
@@ -35,13 +37,37 @@
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>HasInit&lt;T&gt;</computeroutput>  </para>
-</entry><entry thead="no"><para><computeroutput>T::init(GameWorld&amp;)</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>init(GameWorld&amp;)</computeroutput>  </para>
 </entry><entry thead="no"><para>Detects optional one-time initialization  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>HasUpdate&lt;T&gt;</computeroutput>  </para>
-</entry><entry thead="no"><para><computeroutput>T::update(UpdateContext&amp;)</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>update(UpdateContext&amp;)</computeroutput>  </para>
 </entry><entry thead="no"><para>Detects per-frame update capability  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>HasSubmit&lt;T, Cmd&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>submit(const Cmd&amp;) noexcept -&gt; bool</computeroutput>  </para>
+</entry><entry thead="no"><para>Detects command submission capability  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>HasClear&lt;T&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>clear() -&gt; void</computeroutput>  </para>
+</entry><entry thead="no"><para>Detects clear capability  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>HasReset&lt;T&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>reset() -&gt; void</computeroutput>  </para>
+</entry><entry thead="no"><para>Detects optional reset capability  </para>
+</entry></row>
+</table>
+</para>
+</sect2>
+<sect2 id="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d_1autotoc_md131">
+<title>Role Constraints</title><para><table rows="5" cols="3"><row>
+<entry thead="yes"><para>Concept  </para>
+</entry><entry thead="yes"><para>Requires  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>IsManagerLike&lt;T&gt;</computeroutput>  </para>
@@ -55,18 +81,33 @@
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>IsCommandBufferLike&lt;T&gt;</computeroutput>  </para>
-</entry><entry thead="no"><para>Derives from <computeroutput>CommandBuffer</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>flush(GameWorld&amp;, UpdateContext&amp;)</computeroutput> + <computeroutput>HasClear</computeroutput>  </para>
 </entry><entry thead="no"><para>Gates command buffer registration  </para>
 </entry></row>
 <row>
-<entry thead="no"><para><computeroutput>IsCommandHandlerLike&lt;T&gt;</computeroutput>  </para>
-</entry><entry thead="no"><para>Derives from <computeroutput>CommandHandler</computeroutput>  </para>
+<entry thead="no"><para><computeroutput>IsCommandHandlerLike&lt;T, ...Cmds&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>submit(const Cmd&amp;) noexcept -&gt; bool</computeroutput> for each <computeroutput>Cmd</computeroutput>  </para>
 </entry><entry thead="no"><para>Gates command handler registration  </para>
 </entry></row>
 </table>
 </para>
+</sect2>
+<sect2 id="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d_1autotoc_md132">
+<title>Structural Constraints</title><para><table rows="2" cols="3"><row>
+<entry thead="yes"><para>Concept  </para>
+</entry><entry thead="yes"><para>Requires  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>IsShaderLike&lt;T&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>use()</computeroutput> + <computeroutput>applyUniformValues(<ref refid="classUniformValueMap" kindref="compound">UniformValueMap</ref>&amp;)</computeroutput>  </para>
+</entry><entry thead="no"><para>Constrains types usable as shader abstractions  </para>
+</entry></row>
+</table>
+</para>
+</sect2>
 </sect1>
-<sect1 id="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d_1autotoc_md130">
+<sect1 id="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d_1autotoc_md133">
 <title>Tag-Based Opt-In</title><para>Role concepts combine structural checks with a tag requirement:</para>
 <para><programlisting filename=".cpp"><codeline><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">concept<sp/></highlight><highlight class="normal">IsManagerLike<sp/>=<sp/></highlight><highlight class="keyword">requires</highlight><highlight class="normal">(T&amp;<sp/>t,<sp/>UpdateContext&amp;<sp/>ctx)<sp/>{</highlight></codeline>
@@ -75,7 +116,7 @@
 </programlisting></para>
 <para>This means a type must both implement the required interface <bold>and</bold> declare <computeroutput>using EngineRoleTag = ManagerRole;</computeroutput> to be eligible for registration.</para>
 </sect1>
-<sect1 id="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d_1autotoc_md131">
+<sect1 id="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d_1autotoc_md134">
 <title>See Also</title><para><itemizedlist>
 <listitem><para><ref refid="dir_e2e03a8bd11d187a90561967ca820988" kindref="compound">Tags</ref> — Role tag types</para>
 </listitem><listitem><para>System — System architecture</para>

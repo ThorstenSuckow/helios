@@ -12,11 +12,11 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_04e46b302a6aadc7f23a11997ed7852b_1autotoc_md396">
+<sect1 id="dir_04e46b302a6aadc7f23a11997ed7852b_1autotoc_md399">
 <title>helios::engine::mechanics::timing</title><para>Game timer management system.</para>
 <para>This module provides timers, commands, components, and systems for tracking elapsed time, controlling timer state transitions, and observing timer updates from within the ECS.</para>
 </sect1>
-<sect1 id="dir_04e46b302a6aadc7f23a11997ed7852b_1autotoc_md397">
+<sect1 id="dir_04e46b302a6aadc7f23a11997ed7852b_1autotoc_md400">
 <title>Submodules</title><para><table rows="5" cols="2"><row>
 <entry thead="yes"><para>Submodule  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
@@ -40,7 +40,7 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_04e46b302a6aadc7f23a11997ed7852b_1autotoc_md398">
+<sect1 id="dir_04e46b302a6aadc7f23a11997ed7852b_1autotoc_md401">
 <title>Key Classes</title><para><table rows="4" cols="2"><row>
 <entry thead="yes"><para>Class  </para>
 </entry><entry thead="yes"><para>Description  </para>
@@ -60,10 +60,10 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_04e46b302a6aadc7f23a11997ed7852b_1autotoc_md399">
+<sect1 id="dir_04e46b302a6aadc7f23a11997ed7852b_1autotoc_md402">
 <title>Architecture</title><para>1. <bold>GameTimer</bold> accumulates elapsed time and increments a revision counter on each update 2. <bold>TimerControlCommand</bold> is written into the command buffer to request state transitions (start, pause, stop) 3. <bold>TimerCommandDispatcher</bold> routes the command to the <bold>TimerManager</bold> via the Visitor pattern 4. <bold>TimerManager</bold> collects pending commands and applies them during <computeroutput>flush()</computeroutput> 5. <bold>GameTimerUpdateSystem</bold> advances all timers by the current delta time each frame 6. <bold>GameTimerBindingComponent</bold> allows entities to track a specific timer&apos;s revision</para>
 </sect1>
-<sect1 id="dir_04e46b302a6aadc7f23a11997ed7852b_1autotoc_md400">
+<sect1 id="dir_04e46b302a6aadc7f23a11997ed7852b_1autotoc_md403">
 <title>Integration</title><para>The timing system integrates with:<itemizedlist>
 <listitem><para><bold>Command system</bold> - timer state transitions are requested via <computeroutput>TimerControlCommand</computeroutput></para>
 </listitem><listitem><para><bold>Manager system</bold> - <computeroutput>TimerManager</computeroutput> participates in the game loop flush cycle</para>

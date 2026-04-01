@@ -236,6 +236,7 @@ var hierarchy =
     [ "helios::engine::modules::ui::layout::components::NumberFormatterComponent", "classhelios_1_1engine_1_1modules_1_1ui_1_1layout_1_1components_1_1NumberFormatterComponent.html", null ],
     [ "helios::engine::builder::gameObject::builders::ObserverBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1ObserverBuilder.html", null ],
     [ "helios::engine::builder::gameObject::builders::configs::ObserverConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1ObserverConfig.html", null ],
+    [ "helios::ext::opengl::rendering::shader::OpenGLShader", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader.html", null ],
     [ "helios::ext::opengl::rendering::shader::OpenGLUniformLocationMap", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLUniformLocationMap.html", null ],
     [ "helios::engine::runtime::gameloop::Pass", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html", [
       [ "helios::engine::runtime::gameloop::TypedPass< StateType >", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1TypedPass.html", null ]
@@ -311,7 +312,7 @@ var hierarchy =
     [ "helios::engine::builder::gameObject::builders::ScoringBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1ScoringBuilder.html", null ],
     [ "helios::engine::runtime::world::Session", "classhelios_1_1engine_1_1runtime_1_1world_1_1Session.html", null ],
     [ "helios::rendering::shader::Shader", "classhelios_1_1rendering_1_1shader_1_1Shader.html", [
-      [ "helios::ext::opengl::rendering::shader::OpenGLShader", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader.html", null ]
+      [ "helios::ext::opengl::rendering::shader::LegacyOpenGLShader", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1LegacyOpenGLShader.html", null ]
     ] ],
     [ "helios::rendering::asset::shape::Shape", "structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape.html", [
       [ "helios::rendering::asset::shape::basic::Circle", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Circle.html", null ],
@@ -453,6 +454,7 @@ var hierarchy =
     [ "helios::engine::builder::gameObject::builders::configs::UiTransformConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1UiTransformConfig.html", null ],
     [ "helios::engine::modules::ui::transform::systems::UiTransformSystem", "classhelios_1_1engine_1_1modules_1_1ui_1_1transform_1_1systems_1_1UiTransformSystem.html", null ],
     [ "helios::rendering::shader::UniformValueMap", "classhelios_1_1rendering_1_1shader_1_1UniformValueMap.html", null ],
+    [ "UniformValueMap", "classUniformValueMap.html", null ],
     [ "helios::engine::runtime::world::UpdateContext", "classhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html", null ],
     [ "helios::engine::mechanics::scoring::commands::UpdateScoreCommand", "classhelios_1_1engine_1_1mechanics_1_1scoring_1_1commands_1_1UpdateScoreCommand.html", null ],
     [ "helios::math::vec2&lt; T &gt;", "structhelios_1_1math_1_1vec2.html", null ],

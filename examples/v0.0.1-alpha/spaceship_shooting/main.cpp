@@ -114,7 +114,7 @@ int main() {
     // 3. Shader Creation
     // ========================================
     auto defaultShader =
-            std::make_shared<OpenGLShader>("./resources/cube.vert", "./resources/cube.frag", basicStringFileReader);
+            std::make_shared<LegacyOpenGLShader>("./resources/cube.vert", "./resources/cube.frag", basicStringFileReader);
 
     auto uniformLocationMap = std::make_unique<OpenGLUniformLocationMap>();
     bool mapping = uniformLocationMap->set(UniformSemantics::ModelMatrix, 1);

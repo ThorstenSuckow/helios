@@ -62,7 +62,7 @@ int main() {
     auto& renderingDevice = static_cast<helios::ext::opengl::rendering::OpenGLDevice&>(app->renderingDevice());
 
     // shader configuration
-    auto shader = std::make_shared<helios::ext::opengl::rendering::shader::OpenGLShader>(
+    auto shader = std::make_shared<helios::ext::opengl::rendering::shader::LegacyOpenGLShader>(
         "./resources/simple_vertex_shader.vert",
         "./resources/simple_fragment_shader.frag",
         stringFileReader

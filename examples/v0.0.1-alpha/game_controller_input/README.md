@@ -64,7 +64,7 @@ We create a scene with several simple shapes (circles, rectangles) that will rep
 // From main()
 
 // Create a shared shader and material properties
-auto shader = std::make_shared<OpenGLShader>(...);
+auto shader = std::make_shared<LegacyOpenGLShader>(...);
 auto buttonMaterialPropsOverride = MaterialShaderPropertiesOverride(...);
 
 // Create a renderable for a button (e.g., a circle)

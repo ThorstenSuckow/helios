@@ -100,7 +100,7 @@ glyphUniformLocationMap->set(helios::rendering::shader::UniformSemantics::TextCo
 glyphUniformLocationMap->set(helios::rendering::shader::UniformSemantics::ModelMatrix, 8);
 glyphUniformLocationMap->set(helios::rendering::shader::UniformSemantics::ViewMatrix, 9);
 
-auto glyphShader = std::make_shared<helios::ext::opengl::rendering::shader::OpenGLShader>(
+auto glyphShader = std::make_shared<helios::ext::opengl::rendering::shader::LegacyOpenGLShader>(
     "resources/font_shader.vert",
     "resources/font_shader.frag",
     helios::util::io::BasicStringFileReader()

@@ -202,7 +202,7 @@ int main() {
     // 3. Shader Creation
     // ========================================
     auto defaultShader =
-            std::make_shared<OpenGLShader>(
+            std::make_shared<LegacyOpenGLShader>(
     "./resources/cube.vert",
     "./resources/cube.frag", basicStringFileReader);
 
@@ -224,7 +224,7 @@ int main() {
     glyphUniformLocationMap->set(UniformSemantics::ModelMatrix, 8);
     glyphUniformLocationMap->set(UniformSemantics::ViewMatrix, 9);
 
-    auto glyphShader = std::make_shared<OpenGLShader>(
+    auto glyphShader = std::make_shared<LegacyOpenGLShader>(
         "resources/font_shader.vert",
         "resources/font_shader.frag",
         BasicStringFileReader()

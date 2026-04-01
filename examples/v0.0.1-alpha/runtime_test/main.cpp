@@ -286,7 +286,7 @@ int main() {
     // 3. Shader Creation
     // ========================================
     auto defaultShader =
-            std::make_shared<OpenGLShader>(
+            std::make_shared<LegacyOpenGLShader>(
                 "./resources/cube.vert",
                 "./resources/cube.frag", basicStringFileReader);
 

@@ -1,18 +1,16 @@
 /**
- * @file OpenGLShader.ixx
+ * @file LegacyOpenGLShader.ixx
  * @brief OpenGL implementation of shader program management.
  */
 module;
 
-#include <cassert>
-#include <format>
 #include <glad/gl.h>
-#include <helios/helios_config.h>
-#include <optional>
+#include <format>
 #include <stdexcept>
 #include <string>
+#include <helios/helios_config.h>
 
-export module helios.ext.opengl.rendering.shader.OpenGLShader;
+export module helios.ext.opengl.rendering.shader.LegacyOpenGLShader;
 
 import helios.rendering.shader.Shader;
 
@@ -32,8 +30,10 @@ export namespace helios::ext::opengl::rendering::shader {
      * getting loaded via a StringFileReader and immediately  compiled after loading.
      * Any occupied memory for source-files and file-paths to the shader is being cleared
      * once compilation succeeded and are not guaranteed to persist the compilation process.
+     *
+     * @deprecated use OpenGLShader
      */
-    class OpenGLShader  {
+    class LegacyOpenGLShader : public helios::rendering::shader::Shader {
 
     private:
         /**
@@ -61,8 +61,10 @@ export namespace helios::ext::opengl::rendering::shader {
             const std::string& fragmentShaderPath,
             const helios::util::io::StringFileReader& stringFileReader
         ) {
+            logger_.info(std::format("Loading shader from {0}, {1}", vertexShaderPath, fragmentShaderPath));
             if (!stringFileReader.readInto(fragmentShaderPath, fragmentShaderSource_) ||
                 !stringFileReader.readInto(vertexShaderPath, vertexShaderSource_)) {
+                logger_.error("Could not load shader");
                 throw std::runtime_error("Could not load shader");
             }
         }
@@ -77,6 +79,7 @@ export namespace helios::ext::opengl::rendering::shader {
          */
         void compile() {
             if (progId_ != 0) {
+                logger_.warn("Shader already compiled");
                 return;
             }
 
@@ -99,13 +102,14 @@ export namespace helios::ext::opengl::rendering::shader {
             if (!success) {
                 glGetShaderInfoLog(vertexShader, 512, nullptr, infoLog);
 
+                logger_.error("VERTEX::COMPILATION_FAILED " + static_cast<std::string>(infoLog));
                 throw std::runtime_error("Vertex Shader Compilation failed.");
             }
 
             glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
             if (!success) {
                 glGetShaderInfoLog(fragmentShader, 512, nullptr, infoLog);
-
+                logger_.error("SHADER::FRAGMENT::COMPILATION_FAILED " + static_cast<std::string>(infoLog));
                 throw std::runtime_error("Fragment Shader Compilation failed.");
             }
 
@@ -118,7 +122,7 @@ export namespace helios::ext::opengl::rendering::shader {
             glGetProgramiv(progId_, GL_LINK_STATUS, &success);
             if (!success) {
                 glGetProgramInfoLog(progId_, 512, nullptr, infoLog);
-
+                logger_.error("PROGRAM_LINKING_FAILED " + static_cast<std::string>(infoLog));
                 throw std::runtime_error("Program linking failed.");
             }
 
@@ -130,6 +134,7 @@ export namespace helios::ext::opengl::rendering::shader {
             fragmentShaderSource_.clear();
             fragmentShaderSource_.shrink_to_fit();
 
+            logger_.info("Shader loaded and linked");
         }
 
 
@@ -140,14 +145,24 @@ export namespace helios::ext::opengl::rendering::shader {
             unsigned int progId_ = 0;
 
             /**
-             * @brief The OpenGLUniformLocationMap this shader uses.
+             * @brief A unique pointer to the OpenGLUniformLocationMap this shader uses.
              */
-            std::optional<OpenGLUniformLocationMap> uniformLocationMap_;
+            std::unique_ptr<const OpenGLUniformLocationMap> uniformLocationMap_ = nullptr;
 
     public:
+        /**
+         * @brief Rule of three.
+         * @see https://wikis.khronos.org/opengl/Common_Mistakes#RAII_and_hidden_destructor_calls
+         * @see https://en.cppreference.com/w/cpp/language/rule_of_three.html
+         *
+         * Prevent copying.
+         */
+        LegacyOpenGLShader(const LegacyOpenGLShader&)=delete;
+        LegacyOpenGLShader& operator =(const LegacyOpenGLShader&) = delete;
+
 
         /**
-         * @brief Creates and initializes this OpenGLShader.
+         * @brief Creates and initializes this LegacyOpenGLShader.
          * An instance of this class is guaranteed to have a progId_ != 0,
          * hence shader-files where successfully loaded and compiled, ready to be used.
          *
@@ -157,7 +172,7 @@ export namespace helios::ext::opengl::rendering::shader {
          *
          * @throws if creating this shader failed.
          */
-        OpenGLShader(
+        LegacyOpenGLShader(
             const std::string& vertexShaderPath,
             const std::string& fragmentShaderPath,
             const helios::util::io::StringFileReader& stringFileReader
@@ -166,20 +181,23 @@ export namespace helios::ext::opengl::rendering::shader {
                 load(vertexShaderPath, fragmentShaderPath, stringFileReader);
                 compile();
             } catch (std::runtime_error& e) {
+                logger_.error("Could not initialize shader");
                 throw std::runtime_error("Could not initialize shader");
             }
         }
 
 
         /**
-         * @brief Activates this OpenGLShader for subsequent draw calls.
+         * @brief Activates this LegacyOpenGLShader for subsequent draw calls.
          * This implementation calls `glUseProgram` with the `progId_` received after
          * compilation.
          *
          * @see https://registry.khronos.org/OpenGL-Refpages/gl4/html/glUseProgram.xhtml
          */
-        void use() const noexcept {
-            assert(progId_ != 0 && "Shader program ID must be valid before use.");
+        void use() const noexcept override {
+            if (!progId_) {
+                logger_.error("Cannot use shader, progId_ is invalid");
+            }
             glUseProgram(progId_);
         }
 
@@ -188,21 +206,22 @@ export namespace helios::ext::opengl::rendering::shader {
          *
          * @see https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDeleteProgram.xhtml
          */
-        ~OpenGLShader() {
+        ~LegacyOpenGLShader() override {
             if (progId_ != 0) {
                 glDeleteProgram(progId_);
             }
         }
 
         /**
-         * @brief Sets the OpenGLUniformLocationMap for this OpenGLShader.
+         * @brief Sets the OpenGLUniformLocationMap for this LegacyOpenGLShader.
          * Ownership is transferred to this instance.
          *
          * @param uniformLocationMap The OpenGLUniformMap providing the mappings for the uniforms
          * of the underlying GLSL shader.
          */
-        void setUniformLocationMap(const OpenGLUniformLocationMap& uniformLocationMap) noexcept {
-            uniformLocationMap_ = uniformLocationMap;
+        void setUniformLocationMap(
+            std::unique_ptr<const OpenGLUniformLocationMap> uniformLocationMap) noexcept {
+            uniformLocationMap_ = std::move(uniformLocationMap);
         }
 
         /**
@@ -215,7 +234,8 @@ export namespace helios::ext::opengl::rendering::shader {
          * -1 if no location map was registered with this shader or if the uniform with the
          * specified semantics was not found.
          */
-        [[nodiscard]] int uniformLocation(helios::rendering::shader::UniformSemantics uniformSemantics) const noexcept {
+        [[nodiscard]] int uniformLocation(
+            helios::rendering::shader::UniformSemantics uniformSemantics) const noexcept {
             if (uniformLocationMap_) {
                 return uniformLocationMap_->get(uniformSemantics);
             }
@@ -227,7 +247,7 @@ export namespace helios::ext::opengl::rendering::shader {
          * @copydoc helios::rendering::shader::Shader::applyUniformValues()
          */
         void applyUniformValues(
-            const helios::rendering::shader::UniformValueMap& uniformValueMap) const noexcept {
+            const helios::rendering::shader::UniformValueMap& uniformValueMap) const noexcept override {
 
             if (const auto viewMatrixUniform = uniformLocation(helios::rendering::shader::UniformSemantics::ViewMatrix); viewMatrixUniform != -1) {
                 if (const auto* mat4f_ptr = uniformValueMap.mat4f_ptr(helios::rendering::shader::UniformSemantics::ViewMatrix)) {

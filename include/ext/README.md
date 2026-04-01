@@ -16,7 +16,7 @@ ext/
 │   └── app/      # GLFWApplication and factory
 └── opengl/        # OpenGL rendering backend
     ├── rendering/ # OpenGL RenderingDevice
-    ├── shader/    # OpenGLShader implementation
+    ├── shader/    # LegacyOpenGLShader implementation
     └── model/     # OpenGLMesh implementation
 ```
 
@@ -32,7 +32,7 @@ ext/
 ### Separation of Concerns
 
 - **helios core** defines the **interfaces** (e.g., `Window`, `RenderingDevice`, `Shader`)
-- **`ext` modules** provide the **implementations** (e.g., `GLFWWindow`, `OpenGLShader`)
+- **`ext` modules** provide the **implementations** (e.g., `GLFWWindow`, `LegacyOpenGLShader`)
 - Applications use **factories** to instantiate concrete implementations
 
 ## Using Extensions
@@ -79,7 +79,7 @@ OpenGL 4.5+ rendering backend.
 
 **Key Classes:**
 - `OpenGLRenderingDevice` - Main rendering interface
-- `OpenGLShader` - Shader compilation and linking
+- `LegacyOpenGLShader` - Shader compilation and linking
 - `OpenGLMesh` - VBO/IBO management
 - `OpenGLUniformLocationMap` - Uniform binding
 

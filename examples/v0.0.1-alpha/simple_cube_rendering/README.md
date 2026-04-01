@@ -54,7 +54,7 @@ Shaders define how our geometry is transformed and colored. We load vertex and f
 ```cpp
 const auto basicStringFileReader = BasicStringFileReader();
 
-auto shader_ptr = std::make_shared<OpenGLShader>(
+auto shader_ptr = std::make_shared<LegacyOpenGLShader>(
     "./resources/cube.vert",
     "./resources/cube.frag",
     basicStringFileReader

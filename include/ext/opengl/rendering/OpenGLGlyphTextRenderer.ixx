@@ -25,7 +25,7 @@ import helios.rendering.text.TextMesh;
 import helios.rendering.text.Glyph;
 
 import helios.math;
-import helios.ext.opengl.rendering.shader.OpenGLShader;
+import helios.ext.opengl.rendering.shader.LegacyOpenGLShader;
 import helios.ext.opengl.rendering.FreeTypeFontResourceManager;
 
 
@@ -98,7 +98,7 @@ export namespace helios::ext::opengl::rendering {
          * Used to avoid redundant shader program activations. Reset at the beginning
          * of each render pass.
          */
-        mutable const helios::ext::opengl::rendering::shader::OpenGLShader* lastShader_ = nullptr;
+        mutable const helios::ext::opengl::rendering::shader::LegacyOpenGLShader* lastShader_ = nullptr;
 
         /**
          * @brief Cached texture ID for state optimization.
@@ -238,8 +238,8 @@ export namespace helios::ext::opengl::rendering {
             if (auto* textPrototype = command.textRenderPrototype()) {
                 const auto& baseShader = textPrototype->shader();
 
-                const auto* shader = static_cast<const helios::ext::opengl::rendering::shader::OpenGLShader*>(&baseShader);
-                assert(shader && "Unexpected failure when casting to OpenGLShader.");
+                const auto* shader = static_cast<const helios::ext::opengl::rendering::shader::LegacyOpenGLShader*>(&baseShader);
+                assert(shader && "Unexpected failure when casting to LegacyOpenGLShader.");
 
                 if (lastShader_ != shader) {
                     shader->use();

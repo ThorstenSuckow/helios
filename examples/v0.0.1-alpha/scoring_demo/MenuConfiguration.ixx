@@ -33,8 +33,8 @@ export namespace helios::examples::scoring {
         helios::engine::ecs::GameObject& shipGameObject,
         helios::engine::runtime::world::GameWorld& gameWorld,
         helios::rendering::RenderingDevice& renderingDevice,
-        std::shared_ptr<helios::ext::opengl::rendering::shader::OpenGLShader> glyphShader,
-        std::shared_ptr<helios::ext::opengl::rendering::shader::OpenGLShader> defaultShader,
+        std::shared_ptr<helios::ext::opengl::rendering::shader::LegacyOpenGLShader> glyphShader,
+        std::shared_ptr<helios::ext::opengl::rendering::shader::LegacyOpenGLShader> defaultShader,
         helios::scene::Scene& titleScene,
         helios::scene::Scene& menuScene,
         helios::scene::Scene& hudScene

@@ -27,7 +27,7 @@ import helios.rendering.text.TextRenderer;
 import helios.rendering.text.FontResourceProvider;
 
 import helios.ext.opengl.rendering.model.OpenGLMesh;
-import helios.ext.opengl.rendering.shader.OpenGLShader;
+import helios.ext.opengl.rendering.shader.LegacyOpenGLShader;
 import helios.ext.opengl.rendering.OpenGLGlyphTextRenderer;
 import helios.ext.opengl.rendering.OpenGLMeshRenderer;
 

@@ -109,7 +109,7 @@ int main() {
     glyphUniformLocationMap->set(helios::rendering::shader::UniformSemantics::ViewMatrix, 9);
 
     // Create the text shader from vertex and fragment shader files.
-    auto glyphShader = std::make_shared<helios::ext::opengl::rendering::shader::OpenGLShader>(
+    auto glyphShader = std::make_shared<helios::ext::opengl::rendering::shader::LegacyOpenGLShader>(
         "resources/font_shader.vert",
         "resources/font_shader.frag",
         helios::util::io::BasicStringFileReader()

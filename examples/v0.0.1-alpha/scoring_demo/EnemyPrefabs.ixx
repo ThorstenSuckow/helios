@@ -8,7 +8,7 @@ module;
 
 export module helios.examples.scoring.EnemyPrefabs;
 
-import helios.ext.opengl.rendering.shader.OpenGLShader;
+import helios.ext.opengl.rendering.shader.LegacyOpenGLShader;
 
 import helios.examples.scoring.ArenaConfig;
 import helios.examples.scoring.IdConfig;
@@ -47,7 +47,7 @@ export namespace helios::examples::scoring {
     inline void createEnemyPrefabs(
         helios::engine::runtime::world::GameWorld& gameWorld,
         helios::engine::ecs::GameObject playerGameObject,
-        std::shared_ptr<helios::ext::opengl::rendering::shader::OpenGLShader> defaultShader
+        std::shared_ptr<helios::ext::opengl::rendering::shader::LegacyOpenGLShader> defaultShader
     ) {
         using namespace helios::engine::runtime::world;
         using namespace helios::engine::builder::gameObject;

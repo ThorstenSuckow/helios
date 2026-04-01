@@ -44,7 +44,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         /**
          * @brief The shader for rendering.
          */
-        std::shared_ptr<helios::ext::opengl::rendering::shader::OpenGLShader> shader_;
+        std::shared_ptr<helios::ext::opengl::rendering::shader::LegacyOpenGLShader> shader_;
 
         /**
          * @brief The primitive type for mesh rendering.
@@ -102,7 +102,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @return Reference to this config for chaining.
          */
-        MeshRenderableConfig& shader(std::shared_ptr<helios::ext::opengl::rendering::shader::OpenGLShader> shader) {
+        MeshRenderableConfig& shader(std::shared_ptr<helios::ext::opengl::rendering::shader::LegacyOpenGLShader> shader) {
             shader_ = shader;
 
             return *this;

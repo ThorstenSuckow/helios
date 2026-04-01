@@ -12,15 +12,31 @@ types that happen to have matching method signatures.
 
 ## Concepts
 
+### Capability Detection
+
 | Concept | Requires | Purpose |
 |---------|----------|---------|
 | `HasTag<T, Tag>` | `T::EngineRoleTag == Tag` | Detects compile-time role tag |
-| `HasInit<T>` | `T::init(GameWorld&)` | Detects optional one-time initialization |
-| `HasUpdate<T>` | `T::update(UpdateContext&)` | Detects per-frame update capability |
+| `HasInit<T>` | `init(GameWorld&)` | Detects optional one-time initialization |
+| `HasUpdate<T>` | `update(UpdateContext&)` | Detects per-frame update capability |
+| `HasSubmit<T, Cmd>` | `submit(const Cmd&) noexcept -> bool` | Detects command submission capability |
+| `HasClear<T>` | `clear() -> void` | Detects clear capability |
+| `HasReset<T>` | `reset() -> void` | Detects optional reset capability |
+
+### Role Constraints
+
+| Concept | Requires | Purpose |
+|---------|----------|---------|
 | `IsManagerLike<T>` | `flush(UpdateContext&)` + `ManagerRole` | Gates `GameWorld::registerResource<T>()` |
 | `IsSystemLike<T>` | `update(UpdateContext&)` + `SystemRole` | Gates `SystemRegistry::add<T>()` |
-| `IsCommandBufferLike<T>` | Derives from `CommandBuffer` | Gates command buffer registration |
-| `IsCommandHandlerLike<T>` | Derives from `CommandHandler` | Gates command handler registration |
+| `IsCommandBufferLike<T>` | `flush(GameWorld&, UpdateContext&)` + `HasClear` | Gates command buffer registration |
+| `IsCommandHandlerLike<T, ...Cmds>` | `submit(const Cmd&) noexcept -> bool` for each `Cmd` | Gates command handler registration |
+
+### Structural Constraints
+
+| Concept | Requires | Purpose |
+|---------|----------|---------|
+| `IsShaderLike<T>` | `use()` + `applyUniformValues(UniformValueMap&)` | Constrains types usable as shader abstractions |
 
 ## Tag-Based Opt-In
 

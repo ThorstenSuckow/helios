@@ -78,8 +78,8 @@ export namespace helios::ext::opengl::rendering::shader {
          * map, otherwise false (e.g. if position was < 0)
          */
         bool set(
-            helios::rendering::shader::UniformSemantics uniformSemantics,
-            int position
+            const helios::rendering::shader::UniformSemantics uniformSemantics,
+            const int position
         ) noexcept {
             assert(position >= 0 && "position must not be less than 0");
 

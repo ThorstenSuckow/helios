@@ -6,7 +6,7 @@ This directory contains example applications demonstrating various features of t
 
 ### 1. Simple Cube Rendering
 
-**Location:** `v0.0.1-alpha/simple_cube_rendering/`
+**Location:** `archive/milestones/simple_cube_rendering/`
 
 An example showing the fundamentals of 3D rendering with helios:
 - Creating and configuring shaders
@@ -21,7 +21,7 @@ An example showing the fundamentals of 3D rendering with helios:
 
 ### 2. Game Controller Input
 
-**Location:** `v0.0.1-alpha/game_controller_input/`
+**Location:** `archive/milestones/game_controller_input/`
 
 Demonstrates gamepad/controller input handling with helios.
 
@@ -29,7 +29,7 @@ Demonstrates gamepad/controller input handling with helios.
 
 ### 3. Spaceship Control
 
-**Location:** `v0.0.1-alpha/spaceship_control/`
+**Location:** `archive/milestones/spaceship_control/`
 
 A complete game loop example featuring:
 - GameLoop architecture with Pre/Main/Post phases
@@ -48,7 +48,7 @@ A complete game loop example featuring:
 
 ### 4. Spaceship Shooting
 
-**Location:** `v0.0.1-alpha/spaceship_shooting/`
+**Location:** `archive/milestones/spaceship_shooting/`
 
 A twin-stick shooter example extending Spaceship Control with:
 - Projectile spawning via ProjectileSpawnSystem
@@ -66,7 +66,7 @@ A twin-stick shooter example extending Spaceship Control with:
 
 ### 5. Enemy Spawn
 
-**Location:** `v0.0.1-alpha/enemy_spawn/`
+**Location:** `archive/milestones/enemy_spawn/`
 
 Demonstrates the spawn system with:
 - Timed spawning via SpawnScheduler and SpawnRule
@@ -84,7 +84,7 @@ Demonstrates the spawn system with:
 
 ### 6. Collision Detection
 
-**Location:** `v0.0.1-alpha/collision_detection/`
+**Location:** `archive/milestones/collision_detection/`
 
 A comprehensive collision detection example featuring:
 - Grid-based spatial partitioning with GridCollisionDetectionSystem
@@ -102,7 +102,7 @@ A comprehensive collision detection example featuring:
 
 ### 7. Text Rendering Demo
 
-**Location:** `v0.0.1-alpha/render_text_demo/`
+**Location:** `archive/milestones/render_text_demo/`
 
 Demonstrates FreeType-based text rendering with:
 - Font loading with TextRenderer::addFontFamily()
@@ -118,7 +118,7 @@ Demonstrates FreeType-based text rendering with:
 
 ### 8. Scoring Demo
 
-**Location:** `v0.0.1-alpha/scoring_demo/`
+**Location:** `archive/milestones/scoring_demo/`
 
 A complete scoring system example featuring:
 - ScorePoolManager for centralized score tracking
@@ -137,7 +137,7 @@ A complete scoring system example featuring:
 
 ### 9. Runtime Stress Test
 
-**Location:** `v0.0.1-alpha/runtime_test/`
+**Location:** `archive/milestones/runtime_test/`
 
 An interactive performance test for measuring the framerate impact of increasing numbers of active GameObjects:
 - ImGui slider widget to dynamically control active object count (0 – 10 000)
@@ -171,14 +171,14 @@ cmake --build build --config Release
 
 Example executables are placed in:
 ```
-build/examples/milestones/<milestone_N>/<example_name>/
+build/examples/milestones/<example_name>/
 ```
 
 For example, to run the simple cube renderer:
 
 ```bash
 # Windows
-cd build/examples/v0.0.1-alpha/simple_cube_rendering
+cd build/examples/archive/milestones/simple_cube_rendering
 ./main.exe
 ```
 

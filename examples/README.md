@@ -171,10 +171,10 @@ cmake --build build --config Release
 
 Example executables are placed in:
 ```
-build/examples/milestones/<example_name>/
+build/examples/
 ```
 
-For example, to run the simple cube renderer:
+For example, to run the simple cube renderer (from the archived milestones):
 
 ```bash
 # Windows

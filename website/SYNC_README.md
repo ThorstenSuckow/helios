@@ -43,15 +43,15 @@ The following files are **automatically copied** from the repository during the 
 | `docs/core-concepts/ecs/traits.md` | `docs/core-concepts/ecs/traits.md` | Compile-time lifecycle detection |
 | `docs/core-concepts/ecs/component-ops.md` | `docs/core-concepts/ecs/component-ops.md` | Lifecycle function pointers |
 | `examples/README.md` | `docs/examples/overview.md` | Examples overview |
-| `examples/v0.0.1-alpha/simple_cube_rendering/README.md` | `docs/examples/simple-cube.md` | Simple cube rendering tutorial |
-| `examples/v0.0.1-alpha/game_controller_input/README.md` | `docs/examples/gamepad-input.md` | Gamepad input tutorial |
-| `examples/v0.0.1-alpha/spaceship_control/README.md` | `docs/examples/spaceship-control.md` | Spaceship control example |
-| `examples/v0.0.1-alpha/spaceship_shooting/README.md` | `docs/examples/spaceship-shooting.md` | Twin-stick shooting example |
-| `examples/v0.0.1-alpha/enemy_spawn/README.md` | `docs/examples/enemy-spawn.md` | Enemy spawning example |
-| `examples/v0.0.1-alpha/collision_detection/README.md` | `docs/examples/collision-detection.md` | Collision detection example |
-| `examples/v0.0.1-alpha/render_text_demo/README.md` | `docs/examples/render-text-demo.md` | Text rendering demo |
-| `examples/v0.0.1-alpha/scoring_demo/README.md` | `docs/examples/scoring-demo.md` | Scoring system demo |
-| `examples/v0.0.1-alpha/runtime_test/README.md` | `docs/examples/runtime-test.md` | Runtime stress test |
+| `examples/archive/milestones/simple_cube_rendering/README.md` | `docs/examples/simple-cube.md` | Simple cube rendering tutorial |
+| `examples/archive/milestones/game_controller_input/README.md` | `docs/examples/gamepad-input.md` | Gamepad input tutorial |
+| `examples/archive/milestones/spaceship_control/README.md` | `docs/examples/spaceship-control.md` | Spaceship control example |
+| `examples/archive/milestones/spaceship_shooting/README.md` | `docs/examples/spaceship-shooting.md` | Twin-stick shooting example |
+| `examples/archive/milestones/enemy_spawn/README.md` | `docs/examples/enemy-spawn.md` | Enemy spawning example |
+| `examples/archive/milestones/collision_detection/README.md` | `docs/examples/collision-detection.md` | Collision detection example |
+| `examples/archive/milestones/render_text_demo/README.md` | `docs/examples/render-text-demo.md` | Text rendering demo |
+| `examples/archive/milestones/scoring_demo/README.md` | `docs/examples/scoring-demo.md` | Scoring system demo |
+| `examples/archive/milestones/runtime_test/README.md` | `docs/examples/runtime-test.md` | Runtime stress test |
 
 ### How It Works
 

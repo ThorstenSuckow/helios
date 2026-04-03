@@ -45,9 +45,9 @@
         <location file="/tmp/h/include/helios/rendering/RenderPassFactory.ixx" line="77" column="34" bodyfile="/tmp/h/include/helios/rendering/RenderPassFactory.ixx" bodystart="77" bodyend="81"/>
         <referencedby refid="classhelios_1_1engine_1_1modules_1_1scene_1_1systems_1_1SceneRenderingSystem_1af588da7986395df508b89d1e939d9cc4" compoundref="SceneRenderingSystem_8ixx" startline="89" endline="117">helios::engine::modules::scene::systems::SceneRenderingSystem::update</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1rendering_1_1RenderPassFactory_1ab3de082b56a0e7b2ca11da66453252ef" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>RenderPass</type>
-        <definition>RenderPass helios::rendering::RenderPassFactory::buildRenderPass</definition>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1RenderPassFactory_1a5da7ff640fad48b784839dce66f6ad1c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>LegacyRenderPass</type>
+        <definition>LegacyRenderPass helios::rendering::RenderPassFactory::buildRenderPass</definition>
         <argsstring>(const helios::scene::Snapshot &amp;snapshot) const</argsstring>
         <name>buildRenderPass</name>
         <qualifiedname>helios::rendering::RenderPassFactory::buildRenderPass</qualifiedname>
@@ -56,20 +56,20 @@
           <declname>snapshot</declname>
         </param>
         <briefdescription>
-<para>Builds a `RenderPass` from a given `Snapshot`. </para>
+<para>Builds a `LegacyRenderPass` from a given `Snapshot`. </para>
         </briefdescription>
         <detaileddescription>
-<para>This method orchestrates the creation of a `RenderQueue` and populates it with render commands derived from the `SnapshotItem`s within the snapshot. It also sets up frame-specific uniform values (view and projection matrices) for the `RenderPass`.</para>
+<para>This method orchestrates the creation of a `RenderQueue` and populates it with render commands derived from the `SnapshotItem`s within the snapshot. It also sets up frame-specific uniform values (view and projection matrices) for the `LegacyRenderPass`.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>snapshot</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A const reference to the snapshot containing the scene data for which the `RenderPass` is to be built.</para>
+<para>A const reference to the snapshot containing the scene data for which the `LegacyRenderPass` is to be built.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>A fully constructed `RenderPass` object containing the render queue and frame-specific uniforms.</para>
+<simplesect kind="return"><para>A fully constructed `LegacyRenderPass` object containing the render queue and frame-specific uniforms.</para>
 </simplesect>
 <simplesect kind="see"><para><ref refid="classhelios_1_1rendering_1_1RenderPassFactory_1ab24ad189d343ee9bdc7ed6395ee76bcb" kindref="member">populateRenderQueue()</ref> </para>
 </simplesect>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/RenderPassFactory.ixx" line="99" column="21" bodyfile="/tmp/h/include/helios/rendering/RenderPassFactory.ixx" bodystart="99" bodyend="117"/>
+        <location file="/tmp/h/include/helios/rendering/RenderPassFactory.ixx" line="99" column="27" bodyfile="/tmp/h/include/helios/rendering/RenderPassFactory.ixx" bodystart="99" bodyend="117"/>
         <references refid="classhelios_1_1rendering_1_1RenderPassFactory_1ab24ad189d343ee9bdc7ed6395ee76bcb" compoundref="RenderPassFactory_8ixx" startline="131" endline="142">helios::rendering::RenderPassFactory::populateRenderQueue</references>
         <references refid="namespacehelios_1_1rendering_1_1shader_1a0a320e03bcf6f60bc90428c450dfb329a5c79d4241e5a2978c699473b01f82fe9" compoundref="UniformSemantics_8ixx" startline="46">helios::rendering::shader::ProjectionMatrix</references>
         <references refid="classhelios_1_1scene_1_1Snapshot_1aae4b2f152fd9144ce8e264064495e867" compoundref="Snapshot_8ixx" startline="140" endline="142">helios::scene::Snapshot::projectionMatrix</references>
@@ -132,7 +132,7 @@
         <references refid="classhelios_1_1rendering_1_1RenderQueue_1a2d14f75f8f57728f71608dbfde485d80" compoundref="RenderQueue_8ixx" startline="139" endline="149">helios::rendering::RenderQueue::clear</references>
         <references refid="classhelios_1_1rendering_1_1RenderPassFactory_1a0d266254acf26e1e1d9ac3f8cdedd712" compoundref="RenderPassFactory_8ixx" startline="158" endline="182">helios::rendering::RenderPassFactory::makeRenderCommand</references>
         <references refid="classhelios_1_1scene_1_1Snapshot_1a3eea2f4891bde7b2373f7c2577dcbf54" compoundref="Snapshot_8ixx" startline="119" endline="121">helios::scene::Snapshot::snapshotItems</references>
-        <referencedby refid="classhelios_1_1rendering_1_1RenderPassFactory_1ab3de082b56a0e7b2ca11da66453252ef" compoundref="RenderPassFactory_8ixx" startline="99" endline="117">helios::rendering::RenderPassFactory::buildRenderPass</referencedby>
+        <referencedby refid="classhelios_1_1rendering_1_1RenderPassFactory_1a5da7ff640fad48b784839dce66f6ad1c" compoundref="RenderPassFactory_8ixx" startline="99" endline="117">helios::rendering::RenderPassFactory::buildRenderPass</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1rendering_1_1RenderPassFactory_1a0d266254acf26e1e1d9ac3f8cdedd712" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>

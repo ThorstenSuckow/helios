@@ -153,6 +153,8 @@ var NAVTREEINDEX0 =
 "DelayedComponentEnabler_8ixx_source.html":[7,0,0,0,1,1,2,4,6,1,3],
 "DelayedStateCommand_8ixx.html":[7,0,0,0,1,1,2,7,0,1],
 "DelayedStateCommand_8ixx_source.html":[7,0,0,0,1,1,2,7,0,1],
+"DenseRuntimeHandleRegistry_8ixx.html":[7,0,0,0,1,1,1,0,3],
+"DenseRuntimeHandleRegistry_8ixx_source.html":[7,0,0,0,1,1,1,0,3],
 "DequeEventQueue_8ixx.html":[7,0,0,0,1,1,3,2],
 "DequeEventQueue_8ixx_source.html":[7,0,0,0,1,1,3,2],
 "DespawnCommand_8ixx.html":[7,0,0,0,1,1,2,6,3,1,1],
@@ -247,7 +249,5 @@ var NAVTREEINDEX0 =
 "GameLoop_8ixx.html":[7,0,0,0,1,1,2,6,0,2],
 "GameLoop_8ixx.html#acbc04f24078582c7d42b2085be5d5750":[7,0,0,0,1,1,2,6,0,2,1],
 "GameLoop_8ixx_source.html":[7,0,0,0,1,1,2,6,0,2],
-"GameObjectFactory_8ixx.html":[7,0,0,0,1,1,2,0,0,2],
-"GameObjectFactory_8ixx_source.html":[7,0,0,0,1,1,2,0,0,2],
-"GameObjectLifecycleSystem_8ixx.html":[7,0,0,0,1,1,2,4,6,2,2]
+"GameObjectFactory_8ixx.html":[7,0,0,0,1,1,2,0,0,2]
 };

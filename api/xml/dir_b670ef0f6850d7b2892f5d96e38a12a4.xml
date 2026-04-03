@@ -12,11 +12,11 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_b670ef0f6850d7b2892f5d96e38a12a4_1autotoc_md258">
+<sect1 id="dir_b670ef0f6850d7b2892f5d96e38a12a4_1autotoc_md261">
 <title>helios::engine::mechanics::health</title><para>Health management system for game entities.</para>
 <para>This module provides components, events, types, systems, and a manager for tracking entity health, processing damage, and handling death.</para>
 </sect1>
-<sect1 id="dir_b670ef0f6850d7b2892f5d96e38a12a4_1autotoc_md259">
+<sect1 id="dir_b670ef0f6850d7b2892f5d96e38a12a4_1autotoc_md262">
 <title>Submodules</title><para><table rows="6" cols="2"><row>
 <entry thead="yes"><para>Submodule  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
@@ -44,7 +44,7 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_b670ef0f6850d7b2892f5d96e38a12a4_1autotoc_md260">
+<sect1 id="dir_b670ef0f6850d7b2892f5d96e38a12a4_1autotoc_md263">
 <title>Architecture</title><para>1. <bold>HealthComponent</bold> tracks current/maximum health and carries behaviour flags 2. <bold>HealthManager</bold> receives <computeroutput>ApplyDamageCommand</computeroutput>s via <computeroutput>submit()</computeroutput> and processes them in batch during the manager flush phase:<itemizedlist>
 <listitem><para>Applies damage to the target&apos;s <computeroutput>HealthComponent</computeroutput></para>
 </listitem><listitem><para>Pushes a <computeroutput>HealthChangedEvent</computeroutput> to the <bold>phase</bold> bus (available next phase)</para>
@@ -53,7 +53,7 @@
 </listitem></itemizedlist>
 </para>
 </sect1>
-<sect1 id="dir_b670ef0f6850d7b2892f5d96e38a12a4_1autotoc_md261">
+<sect1 id="dir_b670ef0f6850d7b2892f5d96e38a12a4_1autotoc_md264">
 <title>Key Types</title><para><itemizedlist>
 <listitem><para><computeroutput>HealthChangeBehavior</computeroutput> – selects the event bus for health-change reporting</para>
 </listitem><listitem><para><computeroutput>HealthDepletedBehavior</computeroutput> – selects actions on health depletion (event, despawn, dead-tag)</para>
@@ -61,7 +61,7 @@
 </listitem></itemizedlist>
 </para>
 </sect1>
-<sect1 id="dir_b670ef0f6850d7b2892f5d96e38a12a4_1autotoc_md262">
+<sect1 id="dir_b670ef0f6850d7b2892f5d96e38a12a4_1autotoc_md265">
 <title>Integration</title><para>The health system integrates with:<itemizedlist>
 <listitem><para><bold>Combat system</bold> – <computeroutput>ApplyDamageCommand</computeroutput> is routed to <computeroutput>HealthManager</computeroutput></para>
 </listitem><listitem><para><bold>Scoring system</bold> – <computeroutput>HealthDepletedEvent</computeroutput> triggers score awards</para>

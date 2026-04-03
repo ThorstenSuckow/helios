@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="RuntimeHandle_8ixx" kind="file" language="C++">
+    <compoundname>RuntimeHandle.ixx</compoundname>
+    <includes local="no">cstdint</includes>
+    <includes local="no">string_view</includes>
+    <includes refid="types_8ixx" local="no">helios.core.types</includes>
+    <includes refid="StrongId_8ixx" local="no">helios.core.data.StrongId</includes>
+    <incdepgraph>
+      <node id="6">
+        <label>helios.core.algorithms</label>
+        <link refid="algorithms_8ixx"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>RuntimeHandle.ixx</label>
+        <link refid="RuntimeHandle_8ixx"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>helios.core.data.StrongId</label>
+        <link refid="StrongId_8ixx"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>helios.core.types</label>
+        <link refid="types_8ixx"/>
+      </node>
+      <node id="2">
+        <label>cstdint</label>
+      </node>
+      <node id="7">
+        <label>string</label>
+      </node>
+      <node id="3">
+        <label>string_view</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structhelios_1_1core_1_1data_1_1RuntimeHandle" prot="public">helios::core::data::RuntimeHandle</innerclass>
+    <innerclass refid="structstd_1_1hash_3_01helios_1_1core_1_1data_1_1RuntimeHandle_3_01StrongIdentifier_00_01RuntimeId_01_4_01_4" prot="public">std::hash&lt; helios::core::data::RuntimeHandle&lt; StrongIdentifier, RuntimeId &gt; &gt;</innerclass>
+    <innernamespace refid="namespacehelios">helios</innernamespace>
+    <innernamespace refid="namespacehelios_1_1core">helios::core</innernamespace>
+    <innernamespace refid="namespacehelios_1_1core_1_1data">helios::core::data</innernamespace>
+    <briefdescription>
+<para>Lightweight handle pairing a strong identifier with a runtime index. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/**</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>@file<sp/>RuntimeHandle.ixx</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>@brief<sp/>Lightweight<sp/>handle<sp/>pairing<sp/>a<sp/>strong<sp/>identifier<sp/>with<sp/>a<sp/>runtime<sp/>index.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">module</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstdint&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string_view&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8core_8data_8RuntimeHandle" kindref="compound">helios.core.data.RuntimeHandle</ref>;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8core_8data_8StrongId" kindref="compound">helios.core.data.StrongId</ref>;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8core_8types" kindref="compound">helios.core.types</ref>;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1core_1_1types" kindref="compound">helios::core::types</ref>;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1core_1_1data" kindref="compound">helios::core::data</ref><sp/>{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>A<sp/>lightweight<sp/>handle<sp/>that<sp/>pairs<sp/>a<sp/>stable<sp/>StrongIdentifier<sp/>with<sp/>a<sp/>dense<sp/>RuntimeId.</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>`RuntimeHandle`<sp/>bridges<sp/>the<sp/>gap<sp/>between<sp/>content-authored,<sp/>hash-based</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>identifiers<sp/>(`StrongId`)<sp/>and<sp/>fast,<sp/>contiguous<sp/>runtime<sp/>indices<sp/>used<sp/>by<sp/>pools</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>and<sp/>registries.<sp/>The<sp/>handle<sp/>is<sp/>a<sp/>plain<sp/>value<sp/>type<sp/>suitable<sp/>for<sp/>storage<sp/>in</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>components,<sp/>containers,<sp/>and<sp/>command<sp/>buffers.</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Equality<sp/>is<sp/>defined<sp/>over<sp/>both<sp/>fields;<sp/>two<sp/>handles<sp/>are<sp/>equal<sp/>only<sp/>when<sp/>both</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>their<sp/>`strongId`<sp/>and<sp/>`runtimeId`<sp/>match.</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>A<sp/>`std::hash`<sp/>specialization<sp/>is<sp/>provided<sp/>so<sp/>that<sp/>`RuntimeHandle`<sp/>can<sp/>be<sp/>used</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>as<sp/>a<sp/>key<sp/>in<sp/>unordered<sp/>containers.</highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@tparam<sp/>StrongIdentifier<sp/>The<sp/>compile-time<sp/>identifier<sp/>type<sp/>(typically<sp/>a<sp/>`StrongId&lt;Tag&gt;`).</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@tparam<sp/>RuntimeId<sp/>The<sp/>dense<sp/>runtime<sp/>index<sp/>type<sp/>(typically<sp/>`uint32_t`).</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>StrongId</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>DenseRuntimeHandleRegistry</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>StrongIdentifier,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>RuntimeId&gt;</highlight></codeline>
+<codeline lineno="40" refid="structhelios_1_1core_1_1data_1_1RuntimeHandle" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structhelios_1_1core_1_1data_1_1RuntimeHandle" kindref="compound">RuntimeHandle</ref><sp/>{</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>The<sp/>stable,<sp/>content-authored<sp/>identifier.</highlight></codeline>
+<codeline lineno="44"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45" refid="structhelios_1_1core_1_1data_1_1RuntimeHandle_1a8874692030718a6b2c5c4b275a263dfb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>StrongIdentifier<sp/><ref refid="structhelios_1_1core_1_1data_1_1RuntimeHandle_1a8874692030718a6b2c5c4b275a263dfb" kindref="member">strongId</ref>{};</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="48"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>The<sp/>dense<sp/>runtime<sp/>index<sp/>assigned<sp/>by<sp/>a<sp/>registry<sp/>or<sp/>pool.</highlight></codeline>
+<codeline lineno="49"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50" refid="structhelios_1_1core_1_1data_1_1RuntimeHandle_1a01deb6c347a64f68ac10aad706d0113b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RuntimeId<sp/><ref refid="structhelios_1_1core_1_1data_1_1RuntimeHandle_1a01deb6c347a64f68ac10aad706d0113b" kindref="member">runtimeId</ref>{};</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="52"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="53"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Defaulted<sp/>equality<sp/>comparison<sp/>over<sp/>both<sp/>fields.</highlight></codeline>
+<codeline lineno="54"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55" refid="structhelios_1_1core_1_1data_1_1RuntimeHandle_1aed10dacafece5ff2cd7f252b90a8cb56" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1core_1_1data_1_1RuntimeHandle_1aed10dacafece5ff2cd7f252b90a8cb56" kindref="member">operator==</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1core_1_1data_1_1RuntimeHandle" kindref="compound">RuntimeHandle</ref>&amp;,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1core_1_1data_1_1RuntimeHandle" kindref="compound">RuntimeHandle</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="63"><highlight class="comment">/**</highlight></codeline>
+<codeline lineno="64"><highlight class="comment"><sp/>*<sp/>@brief<sp/>Hash<sp/>specialization<sp/>for<sp/>RuntimeHandle.</highlight></codeline>
+<codeline lineno="65"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="66"><highlight class="comment"><sp/>*<sp/>@details<sp/>Packs<sp/>`strongId`<sp/>and<sp/>`runtimeId`<sp/>into<sp/>a<sp/>single<sp/>64-bit<sp/>value</highlight></codeline>
+<codeline lineno="67"><highlight class="comment"><sp/>*<sp/>before<sp/>hashing,<sp/>assuming<sp/>both<sp/>underlying<sp/>types<sp/>are<sp/>`uint32_t`.</highlight></codeline>
+<codeline lineno="68"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="69"><highlight class="comment"><sp/>*<sp/>@tparam<sp/>StrongIdentifier<sp/>The<sp/>compile-time<sp/>identifier<sp/>type.</highlight></codeline>
+<codeline lineno="70"><highlight class="comment"><sp/>*<sp/>@tparam<sp/>RuntimeId<sp/>The<sp/>runtime<sp/>index<sp/>type.</highlight></codeline>
+<codeline lineno="71"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>StrongIdentifier,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>RuntimeId&gt;</highlight></codeline>
+<codeline lineno="73" refid="structstd_1_1hash_3_01helios_1_1core_1_1data_1_1RuntimeHandle_3_01StrongIdentifier_00_01RuntimeId_01_4_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">std::hash&lt;<ref refid="namespacehelios" kindref="compound">helios</ref>::<ref refid="structhelios_1_1core_1_1data_1_1RuntimeHandle" kindref="compound">core::data::RuntimeHandle</ref>&lt;StrongIdentifier,<sp/>RuntimeId&gt;&gt;<sp/>{</highlight></codeline>
+<codeline lineno="74" refid="structstd_1_1hash_3_01helios_1_1core_1_1data_1_1RuntimeHandle_3_01StrongIdentifier_00_01RuntimeId_01_4_01_4_1ad1f733a0da1930ba072947fac01c2d97" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::size_t<sp/><ref refid="structstd_1_1hash_3_01helios_1_1core_1_1data_1_1RuntimeHandle_3_01StrongIdentifier_00_01RuntimeId_01_4_01_4_1ad1f733a0da1930ba072947fac01c2d97" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1core_1_1data_1_1RuntimeHandle" kindref="compound">helios::core::data::RuntimeHandle&lt;StrongIdentifier, RuntimeId&gt;</ref>&amp;<sp/>handle)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(std::is_same_v&lt;helios::core::types::StrongId_t,<sp/>uint32_t&gt;);</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(std::is_same_v&lt;RuntimeId,<sp/>uint32_t&gt;);</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t<sp/>packed<sp/>=<sp/>(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">uint64_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(handle.strongId.value())<sp/>&lt;&lt;<sp/>32)<sp/>|</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">uint64_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(handle.runtimeId);</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::hash&lt;uint64_t&gt;{}(packed);</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="84"><highlight class="normal">};</highlight></codeline>
+    </programlisting>
+    <location file="/tmp/h/include/helios/core/data/RuntimeHandle.ixx"/>
+  </compounddef>
+</doxygen>

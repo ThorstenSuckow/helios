@@ -1,0 +1,324 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8rendering_8LegacyRenderPass" kind="module">
+    <compoundname>helios.rendering.LegacyRenderPass</compoundname>
+    <innerfile refid="LegacyRenderPass_8ixx">LegacyRenderPass.ixx</innerfile>
+    <innerclass refid="classhelios_1_1rendering_1_1LegacyRenderPass" prot="public">helios::rendering::LegacyRenderPass</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1rendering_1_1LegacyRenderPass_1a966bd2ad47c044885b3a80bdcfca8dc5" prot="private" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1rendering_1_1RenderQueue" kindref="compound">helios::rendering::RenderQueue</ref></type>
+        <definition>helios::rendering::RenderQueue helios::rendering::LegacyRenderPass::renderQueue_</definition>
+        <argsstring></argsstring>
+        <name>renderQueue_</name>
+        <qualifiedname>helios::rendering::LegacyRenderPass::renderQueue_</qualifiedname>
+        <briefdescription>
+<para>The `RenderQueue` for this pass, containing all render commands. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/LegacyRenderPass.ixx" line="69" column="40" bodyfile="/tmp/h/include/helios/rendering/LegacyRenderPass.ixx" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1rendering_1_1LegacyRenderPass_1a41020e21486a8b6e976fc5d7af2b07ea" prot="private" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap" kindref="compound">helios::rendering::shader::UniformValueMap</ref></type>
+        <definition>helios::rendering::shader::UniformValueMap helios::rendering::LegacyRenderPass::frameUniformValues_</definition>
+        <argsstring></argsstring>
+        <name>frameUniformValues_</name>
+        <qualifiedname>helios::rendering::LegacyRenderPass::frameUniformValues_</qualifiedname>
+        <briefdescription>
+<para>Uniform values specific to the current frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This map contains uniforms that change once per frame, such as the view and the projection matrices. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/LegacyRenderPass.ixx" line="77" column="52" bodyfile="/tmp/h/include/helios/rendering/LegacyRenderPass.ixx" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1rendering_1_1LegacyRenderPass_1a6c3ea9df5ef2a1a1419c450327386167" prot="private" static="no" mutable="no">
+        <type>const <ref refid="classhelios_1_1rendering_1_1Viewport" kindref="compound">helios::rendering::Viewport</ref> *</type>
+        <definition>const helios::rendering::Viewport* helios::rendering::LegacyRenderPass::viewport_</definition>
+        <argsstring></argsstring>
+        <name>viewport_</name>
+        <qualifiedname>helios::rendering::LegacyRenderPass::viewport_</qualifiedname>
+        <briefdescription>
+<para>Non-owning pointer to the `Viewport` processed by this pass. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The caller must ensure the viewport remains valid for the lifetime of this pass. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/LegacyRenderPass.ixx" line="84" column="43" bodyfile="/tmp/h/include/helios/rendering/LegacyRenderPass.ixx" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1rendering_1_1LegacyRenderPass_1ab82742c03b667da9fcc073aba2f9ae3a" prot="protected" static="yes" mutable="no">
+        <type>const <ref refid="classhelios_1_1util_1_1log_1_1Logger" kindref="compound">helios::util::log::Logger</ref> &amp;</type>
+        <definition>const helios::util::log::Logger&amp; helios::rendering::LegacyRenderPass::logger_</definition>
+        <argsstring></argsstring>
+        <name>logger_</name>
+        <qualifiedname>helios::rendering::LegacyRenderPass::logger_</qualifiedname>
+        <initializer>= <ref refid="classhelios_1_1util_1_1log_1_1LogManager_1a750d8fd5b3ee3678600644756b0631e7" kindref="member">helios::util::log::LogManager::loggerForScope</ref>(
+            <ref refid="OpenGLUniformLocationMap_8ixx_1acbc04f24078582c7d42b2085be5d5750" kindref="member">HELIOS_LOG_SCOPE</ref>
+        )</initializer>
+        <briefdescription>
+<para>Shared logger instance for all <ref refid="classhelios_1_1rendering_1_1LegacyRenderPass" kindref="compound">LegacyRenderPass</ref> objects. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/LegacyRenderPass.ixx" line="90" column="55" bodyfile="/tmp/h/include/helios/rendering/LegacyRenderPass.ixx" bodystart="90" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1LegacyRenderPass_1a5cf767dce120724872e6d62ca9398fc1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::rendering::LegacyRenderPass::~LegacyRenderPass</definition>
+        <argsstring>()=default</argsstring>
+        <name>~LegacyRenderPass</name>
+        <qualifiedname>helios::rendering::LegacyRenderPass::~LegacyRenderPass</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/LegacyRenderPass.ixx" line="95" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1LegacyRenderPass_1a0bca4fef5ebdfdf937cb32e6f6f18c36" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::rendering::LegacyRenderPass::LegacyRenderPass</definition>
+        <argsstring>(const LegacyRenderPass &amp;)=delete</argsstring>
+        <name>LegacyRenderPass</name>
+        <qualifiedname>helios::rendering::LegacyRenderPass::LegacyRenderPass</qualifiedname>
+        <param>
+          <type>const LegacyRenderPass &amp;</type>
+        </param>
+        <briefdescription>
+<para>Prevent copying. A <ref refid="classhelios_1_1rendering_1_1LegacyRenderPass" kindref="compound">LegacyRenderPass</ref> is not intended to be copied. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/LegacyRenderPass.ixx" line="101" column="9"/>
+        <references refid="classhelios_1_1rendering_1_1LegacyRenderPass_1a0bca4fef5ebdfdf937cb32e6f6f18c36">helios::rendering::LegacyRenderPass::LegacyRenderPass</references>
+        <referencedby refid="classhelios_1_1rendering_1_1LegacyRenderPass_1aef01d45d7e1ecabcf2939bcccb32cce0" compoundref="LegacyRenderPass_8ixx" startline="129" endline="140">helios::rendering::LegacyRenderPass::LegacyRenderPass</referencedby>
+        <referencedby refid="classhelios_1_1rendering_1_1LegacyRenderPass_1a0bca4fef5ebdfdf937cb32e6f6f18c36">helios::rendering::LegacyRenderPass::LegacyRenderPass</referencedby>
+        <referencedby refid="classhelios_1_1rendering_1_1LegacyRenderPass_1a355408330b267b71693b54776d1d6de5">helios::rendering::LegacyRenderPass::LegacyRenderPass</referencedby>
+        <referencedby refid="classhelios_1_1rendering_1_1LegacyRenderPass_1a8b86194dc066a2f40d1e5bacb2d1ea21">helios::rendering::LegacyRenderPass::operator=</referencedby>
+        <referencedby refid="classhelios_1_1rendering_1_1LegacyRenderPass_1acc89be79f351df7a59b809df573996a5">helios::rendering::LegacyRenderPass::operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1LegacyRenderPass_1a8b86194dc066a2f40d1e5bacb2d1ea21" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>LegacyRenderPass &amp;</type>
+        <definition>LegacyRenderPass &amp; helios::rendering::LegacyRenderPass::operator=</definition>
+        <argsstring>(const LegacyRenderPass &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>helios::rendering::LegacyRenderPass::operator=</qualifiedname>
+        <param>
+          <type>const LegacyRenderPass &amp;</type>
+        </param>
+        <briefdescription>
+<para>Prevent copy assignment. A <ref refid="classhelios_1_1rendering_1_1LegacyRenderPass" kindref="compound">LegacyRenderPass</ref> is not intended to be copied. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/LegacyRenderPass.ixx" line="107" column="26"/>
+        <references refid="classhelios_1_1rendering_1_1LegacyRenderPass_1a0bca4fef5ebdfdf937cb32e6f6f18c36">helios::rendering::LegacyRenderPass::LegacyRenderPass</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1LegacyRenderPass_1a355408330b267b71693b54776d1d6de5" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::rendering::LegacyRenderPass::LegacyRenderPass</definition>
+        <argsstring>(LegacyRenderPass &amp;&amp;) noexcept=default</argsstring>
+        <name>LegacyRenderPass</name>
+        <qualifiedname>helios::rendering::LegacyRenderPass::LegacyRenderPass</qualifiedname>
+        <param>
+          <type>LegacyRenderPass &amp;&amp;</type>
+        </param>
+        <briefdescription>
+<para>Allow move. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/LegacyRenderPass.ixx" line="112" column="9"/>
+        <references refid="classhelios_1_1rendering_1_1LegacyRenderPass_1a0bca4fef5ebdfdf937cb32e6f6f18c36">helios::rendering::LegacyRenderPass::LegacyRenderPass</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1LegacyRenderPass_1acc89be79f351df7a59b809df573996a5" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>LegacyRenderPass &amp;</type>
+        <definition>LegacyRenderPass &amp; helios::rendering::LegacyRenderPass::operator=</definition>
+        <argsstring>(LegacyRenderPass &amp;&amp;) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>helios::rendering::LegacyRenderPass::operator=</qualifiedname>
+        <param>
+          <type>LegacyRenderPass &amp;&amp;</type>
+        </param>
+        <briefdescription>
+<para>Allow move assignment. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/LegacyRenderPass.ixx" line="117" column="26"/>
+        <references refid="classhelios_1_1rendering_1_1LegacyRenderPass_1a0bca4fef5ebdfdf937cb32e6f6f18c36">helios::rendering::LegacyRenderPass::LegacyRenderPass</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1LegacyRenderPass_1aef01d45d7e1ecabcf2939bcccb32cce0" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::rendering::LegacyRenderPass::LegacyRenderPass</definition>
+        <argsstring>(const helios::rendering::Viewport *viewport, helios::rendering::RenderQueue renderQueue, const helios::rendering::shader::UniformValueMap &amp;frameUniformValues) noexcept</argsstring>
+        <name>LegacyRenderPass</name>
+        <qualifiedname>helios::rendering::LegacyRenderPass::LegacyRenderPass</qualifiedname>
+        <param>
+          <type>const <ref refid="classhelios_1_1rendering_1_1Viewport" kindref="compound">helios::rendering::Viewport</ref> *</type>
+          <declname>viewport</declname>
+        </param>
+        <param>
+          <type><ref refid="classhelios_1_1rendering_1_1RenderQueue" kindref="compound">helios::rendering::RenderQueue</ref></type>
+          <declname>renderQueue</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap" kindref="compound">helios::rendering::shader::UniformValueMap</ref> &amp;</type>
+          <declname>frameUniformValues</declname>
+        </param>
+        <briefdescription>
+<para>Creates a new `LegacyRenderPass` with the specified viewport, render queue, and frame uniforms. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The render queue is moved into this pass. The viewport pointer must remain valid for the lifetime of this pass.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>viewport</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Non-owning pointer to the viewport this <ref refid="classhelios_1_1rendering_1_1LegacyRenderPass" kindref="compound">LegacyRenderPass</ref> is processing. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>renderQueue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The `RenderQueue` to be processed with this pass (moved). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>frameUniformValues</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Frame-specific uniform values (e.g., view/projection matrices). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/LegacyRenderPass.ixx" line="129" column="18" bodyfile="/tmp/h/include/helios/rendering/LegacyRenderPass.ixx" bodystart="129" bodyend="140"/>
+        <references refid="classhelios_1_1rendering_1_1LegacyRenderPass_1aece3d26744fd5ca4663a9c6a8e58bcda" compoundref="LegacyRenderPass_8ixx" startline="176" endline="178">helios::rendering::LegacyRenderPass::frameUniformValues</references>
+        <references refid="classhelios_1_1rendering_1_1LegacyRenderPass_1a0bca4fef5ebdfdf937cb32e6f6f18c36">helios::rendering::LegacyRenderPass::LegacyRenderPass</references>
+        <references refid="classhelios_1_1rendering_1_1LegacyRenderPass_1a010e32541b4c29e1ef684eb5bccce45f" compoundref="LegacyRenderPass_8ixx" startline="147" endline="149">helios::rendering::LegacyRenderPass::renderQueue</references>
+        <references refid="classhelios_1_1rendering_1_1LegacyRenderPass_1a8ec5f6da52185b13e87a907ef0d0f0c9" compoundref="LegacyRenderPass_8ixx" startline="156" endline="158">helios::rendering::LegacyRenderPass::viewport</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1LegacyRenderPass_1a010e32541b4c29e1ef684eb5bccce45f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const RenderQueue &amp;</type>
+        <definition>const RenderQueue &amp; helios::rendering::LegacyRenderPass::renderQueue</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>renderQueue</name>
+        <qualifiedname>helios::rendering::LegacyRenderPass::renderQueue</qualifiedname>
+        <briefdescription>
+<para>Returns a const ref to the `RenderQueue` this `LegacyRenderPass` holds. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A const ref to this `LegacyRenderPass`&apos; `RenderQueue`. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/LegacyRenderPass.ixx" line="147" column="28" bodyfile="/tmp/h/include/helios/rendering/LegacyRenderPass.ixx" bodystart="147" bodyend="149"/>
+        <referencedby refid="classhelios_1_1rendering_1_1LegacyRenderPass_1aef01d45d7e1ecabcf2939bcccb32cce0" compoundref="LegacyRenderPass_8ixx" startline="129" endline="140">helios::rendering::LegacyRenderPass::LegacyRenderPass</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1LegacyRenderPass_1a8ec5f6da52185b13e87a907ef0d0f0c9" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const Viewport &amp;</type>
+        <definition>const Viewport &amp; helios::rendering::LegacyRenderPass::viewport</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>viewport</name>
+        <qualifiedname>helios::rendering::LegacyRenderPass::viewport</qualifiedname>
+        <briefdescription>
+<para>Returns a const ref to the `Viewport` this `LegacyRenderPass` holds. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A const ref to this `LegacyRenderPass`&apos; `Viewport`. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/LegacyRenderPass.ixx" line="156" column="25" bodyfile="/tmp/h/include/helios/rendering/LegacyRenderPass.ixx" bodystart="156" bodyend="158"/>
+        <referencedby refid="classhelios_1_1rendering_1_1LegacyRenderPass_1aef01d45d7e1ecabcf2939bcccb32cce0" compoundref="LegacyRenderPass_8ixx" startline="129" endline="140">helios::rendering::LegacyRenderPass::LegacyRenderPass</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1LegacyRenderPass_1a2fe3c6dc9eac9f7539b254e18f808597" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::rendering::LegacyRenderPass::setFrameUniformValues</definition>
+        <argsstring>(const helios::rendering::shader::UniformValueMap &amp;frameUniformValues) noexcept</argsstring>
+        <name>setFrameUniformValues</name>
+        <qualifiedname>helios::rendering::LegacyRenderPass::setFrameUniformValues</qualifiedname>
+        <param>
+          <type>const <ref refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap" kindref="compound">helios::rendering::shader::UniformValueMap</ref> &amp;</type>
+          <declname>frameUniformValues</declname>
+        </param>
+        <briefdescription>
+<para>Sets the frame-specific uniform values for this pass. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frameUniformValues</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The `UniformValueMap` containing frame-specific uniform values. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/LegacyRenderPass.ixx" line="165" column="14" bodyfile="/tmp/h/include/helios/rendering/LegacyRenderPass.ixx" bodystart="165" bodyend="167"/>
+        <references refid="classhelios_1_1rendering_1_1LegacyRenderPass_1aece3d26744fd5ca4663a9c6a8e58bcda" compoundref="LegacyRenderPass_8ixx" startline="176" endline="178">helios::rendering::LegacyRenderPass::frameUniformValues</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1LegacyRenderPass_1aece3d26744fd5ca4663a9c6a8e58bcda" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap" kindref="compound">helios::rendering::shader::UniformValueMap</ref> &amp;</type>
+        <definition>const helios::rendering::shader::UniformValueMap &amp; helios::rendering::LegacyRenderPass::frameUniformValues</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>frameUniformValues</name>
+        <qualifiedname>helios::rendering::LegacyRenderPass::frameUniformValues</qualifiedname>
+        <briefdescription>
+<para>Returns a const reference to this `LegacyRenderPass`&apos; `UniformValueMap`. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The map might be empty.</para>
+<para><simplesect kind="return"><para>A const reference to this `LegacyRenderPass`&apos; `UniformValueMap` for the current frame. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/LegacyRenderPass.ixx" line="176" column="59" bodyfile="/tmp/h/include/helios/rendering/LegacyRenderPass.ixx" bodystart="176" bodyend="178"/>
+        <referencedby refid="classhelios_1_1rendering_1_1LegacyRenderPass_1aef01d45d7e1ecabcf2939bcccb32cce0" compoundref="LegacyRenderPass_8ixx" startline="129" endline="140">helios::rendering::LegacyRenderPass::LegacyRenderPass</referencedby>
+        <referencedby refid="classhelios_1_1rendering_1_1LegacyRenderPass_1a2fe3c6dc9eac9f7539b254e18f808597" compoundref="LegacyRenderPass_8ixx" startline="165" endline="167">helios::rendering::LegacyRenderPass::setFrameUniformValues</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/rendering/LegacyRenderPass.ixx" line="10" column="15"/>
+  </compounddef>
+</doxygen>

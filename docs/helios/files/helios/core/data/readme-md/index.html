@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">helios-core-data-readme-md | helios</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://helios.garagecraft.games/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://helios.garagecraft.games/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://helios.garagecraft.games/docs/helios/files/helios/core/data/readme-md"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="helios-core-data-readme-md | helios"><meta data-rh="true" name="description" content="Namespaces Index"><meta data-rh="true" property="og:description" content="Namespaces Index"><meta data-rh="true" name="keywords" content="doxygen,reference,file"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://helios.garagecraft.games/docs/helios/files/helios/core/data/readme-md"><link data-rh="true" rel="alternate" href="https://helios.garagecraft.games/docs/helios/files/helios/core/data/readme-md" hreflang="en"><link data-rh="true" rel="alternate" href="https://helios.garagecraft.games/docs/helios/files/helios/core/data/readme-md" hreflang="x-default"><link data-rh="true" rel="preconnect" href="https://LK14YGETTG-dsn.algolia.net" crossorigin="anonymous"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"API Reference (Doxygen)","item":"https://helios.garagecraft.games/docs/helios/"},{"@type":"ListItem","position":2,"name":"Files","item":"https://helios.garagecraft.games/docs/helios/files"},{"@type":"ListItem","position":3,"name":"helios/core/data/README.md","item":"https://helios.garagecraft.games/docs/helios/files/helios/core/data/readme-md"}]}</script><link rel="search" type="application/opensearchdescription+xml" title="helios" href="/opensearch.xml"><link rel="stylesheet" href="/assets/css/styles.d8266996.css">
-<script src="/assets/js/runtime~main.ebf82c97.js" defer="defer"></script>
-<script src="/assets/js/main.6057e8e3.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.c16df9ee.js" defer="defer"></script>
+<script src="/assets/js/main.f5d3fc6f.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -17,23 +17,37 @@
 
 
 <table class="doxyMembersIndex"><tbody><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left">namespace</td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left"><a class="" href="/docs/helios/namespaces/helios/core/data">data</a></td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
-<p>Core data structures for type indexing. <a class="" href="/docs/helios/namespaces/helios/core/data/#details">More...</a></p>
+<p>Core data primitives for identifiers, handles, and type indexing. <a class="" href="/docs/helios/namespaces/helios/core/data/#details">More...</a></p>
 </td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr></tbody></table>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="file-listing">File Listing<a href="#file-listing" class="hash-link" aria-label="Direct link to File Listing" title="Direct link to File Listing" translate="no">​</a></h2>
 <p>The file content with the documentation metadata removed is:</p>
 <div class="doxyProgramListing">
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight"># helios::core::data</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
-<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">Core data structures for type indexing and efficient lookups.</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">Core data primitives for identifiers, handles, and type indexing.</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
-<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">This module provides fundamental data structures including type indexing utilities for efficient type-based lookups at compile and runtime.</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">This module provides the foundational value types used across the engine</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">for stable identification and efficient runtime lookups.</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">## Key Types</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">| Type | Purpose |</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">|------|---------|</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">| `StrongId&lt;Tag&gt;` | Tag-based, strongly-typed identifier with compile-time string hashing (FNV-1a) |</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">| `RuntimeHandle&lt;StrongIdentifier, RuntimeId&gt;` | Lightweight pair of a stable `StrongId` and a dense runtime index |</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">| `TypeIndexer` | Compile-time type-to-index mapping |</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">## See Also</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">- [Container](../container/README.md) — `DenseRuntimeHandleRegistry` that produces `RuntimeHandle` instances</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">---</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">&lt;details&gt;</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">@namespace helios::core::data</span></span></div>
-<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">@brief Core data structures for type indexing.</span></span></div>
-<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">@details This module provides fundamental data structures including type indexing utilities for efficient type-based lookups.</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">@brief Core data primitives for identifiers, handles, and type indexing.</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">@details Provides StrongId (tag-based compile-time identifiers), RuntimeHandle</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">(stable-ID + dense-index pairs), and TypeIndexer for type-based lookups.</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">&lt;/p&gt;&lt;/details&gt;</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>

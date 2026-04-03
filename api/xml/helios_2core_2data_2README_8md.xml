@@ -10,16 +10,30 @@
     <programlisting>
 <codeline><highlight class="normal">#<sp/>helios::core::data</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">Core<sp/>data<sp/>structures<sp/>for<sp/>type<sp/>indexing<sp/>and<sp/>efficient<sp/>lookups.</highlight></codeline>
+<codeline><highlight class="normal">Core<sp/>data<sp/>primitives<sp/>for<sp/>identifiers,<sp/>handles,<sp/>and<sp/>type<sp/>indexing.</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>fundamental<sp/>data<sp/>structures<sp/>including<sp/>type<sp/>indexing<sp/>utilities<sp/>for<sp/>efficient<sp/>type-based<sp/>lookups<sp/>at<sp/>compile<sp/>and<sp/>runtime.</highlight></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>the<sp/>foundational<sp/>value<sp/>types<sp/>used<sp/>across<sp/>the<sp/>engine</highlight></codeline>
+<codeline><highlight class="normal">for<sp/>stable<sp/>identification<sp/>and<sp/>efficient<sp/>runtime<sp/>lookups.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Key<sp/>Types</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Type<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`StrongId&lt;Tag&gt;`<sp/>|<sp/>Tag-based,<sp/>strongly-typed<sp/>identifier<sp/>with<sp/>compile-time<sp/>string<sp/>hashing<sp/>(FNV-1a)<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`RuntimeHandle&lt;StrongIdentifier,<sp/>RuntimeId&gt;`<sp/>|<sp/>Lightweight<sp/>pair<sp/>of<sp/>a<sp/>stable<sp/>`StrongId`<sp/>and<sp/>a<sp/>dense<sp/>runtime<sp/>index<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`TypeIndexer`<sp/>|<sp/>Compile-time<sp/>type-to-index<sp/>mapping<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>See<sp/>Also</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>[Container](../container/README.md)<sp/>—<sp/>`DenseRuntimeHandleRegistry`<sp/>that<sp/>produces<sp/>`RuntimeHandle`<sp/>instances</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>
 <codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
 <codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
 <codeline><highlight class="normal">@namespace<sp/>helios::core::data</highlight></codeline>
-<codeline><highlight class="normal">@brief<sp/>Core<sp/>data<sp/>structures<sp/>for<sp/>type<sp/>indexing.</highlight></codeline>
-<codeline><highlight class="normal">@details<sp/>This<sp/>module<sp/>provides<sp/>fundamental<sp/>data<sp/>structures<sp/>including<sp/>type<sp/>indexing<sp/>utilities<sp/>for<sp/>efficient<sp/>type-based<sp/>lookups.</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Core<sp/>data<sp/>primitives<sp/>for<sp/>identifiers,<sp/>handles,<sp/>and<sp/>type<sp/>indexing.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Provides<sp/>StrongId<sp/>(tag-based<sp/>compile-time<sp/>identifiers),<sp/>RuntimeHandle</highlight></codeline>
+<codeline><highlight class="normal">(stable-ID<sp/>+<sp/>dense-index<sp/>pairs),<sp/>and<sp/>TypeIndexer<sp/>for<sp/>type-based<sp/>lookups.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
 <codeline></codeline>
 <codeline></codeline>

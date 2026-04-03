@@ -8,13 +8,13 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_b1389cf074ecf461b5a393105b0e9b57_1autotoc_md302">
+<sect1 id="dir_b1389cf074ecf461b5a393105b0e9b57_1autotoc_md305">
 <title>helios::engine::mechanics::lifecycle::systems</title><para>Systems for processing entity lifecycle transitions.</para>
 </sect1>
-<sect1 id="dir_b1389cf074ecf461b5a393105b0e9b57_1autotoc_md303">
+<sect1 id="dir_b1389cf074ecf461b5a393105b0e9b57_1autotoc_md306">
 <title>Overview</title><para>This module provides systems that handle lifecycle-related logic each frame: delayed component activation and entity death processing.</para>
 </sect1>
-<sect1 id="dir_b1389cf074ecf461b5a393105b0e9b57_1autotoc_md304">
+<sect1 id="dir_b1389cf074ecf461b5a393105b0e9b57_1autotoc_md307">
 <title>Systems</title><para><table rows="3" cols="2"><row>
 <entry thead="yes"><para>System  </para>
 </entry><entry thead="yes"><para>Description  </para>
@@ -30,13 +30,13 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_b1389cf074ecf461b5a393105b0e9b57_1autotoc_md305">
+<sect1 id="dir_b1389cf074ecf461b5a393105b0e9b57_1autotoc_md308">
 <title>DelayedComponentEnablerSystem</title><para>Each frame, the system: 1. Iterates all active entities with <computeroutput>DelayedComponentEnabler</computeroutput> 2. Decrements each deferred component&apos;s timer by <computeroutput>deltaTime</computeroutput> 3. Enables components whose timers reach zero via <computeroutput>ComponentOpsRegistry</computeroutput> 4. Removes activated entries from the deferred list</para>
 </sect1>
-<sect1 id="dir_b1389cf074ecf461b5a393105b0e9b57_1autotoc_md306">
+<sect1 id="dir_b1389cf074ecf461b5a393105b0e9b57_1autotoc_md309">
 <title>GameObjectLifecycleSystem</title><para>Reads <computeroutput>HealthDepletedEvent</computeroutput>s from the pass bus. For each affected entity: 1. Inspects the <computeroutput>HealthDepletedBehavior</computeroutput> flags on the <computeroutput>HealthComponent</computeroutput> 2. If <computeroutput>Despawn</computeroutput> is set and the entity has a <computeroutput>SpawnedByProfileComponent</computeroutput>, a <computeroutput>DespawnCommand</computeroutput> is enqueued via the command buffer 3. Otherwise the entity is deactivated via <computeroutput>setActive(false)</computeroutput></para>
 </sect1>
-<sect1 id="dir_b1389cf074ecf461b5a393105b0e9b57_1autotoc_md307">
+<sect1 id="dir_b1389cf074ecf461b5a393105b0e9b57_1autotoc_md310">
 <title>Scheduling</title><para>Both systems should be scheduled in the gameplay phase:</para>
 <para><programlisting><codeline><highlight class="normal">DelayedComponentEnablerSystem<sp/><sp/>→<sp/>after<sp/>spawn,<sp/>before<sp/>collision</highlight></codeline>
 <codeline><highlight class="normal">GameObjectLifecycleSystem<sp/><sp/><sp/><sp/><sp/><sp/>→<sp/>after<sp/>health<sp/>manager<sp/>flush</highlight></codeline>

@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">helios-core-container-readme-md | helios</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://helios.garagecraft.games/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://helios.garagecraft.games/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://helios.garagecraft.games/docs/helios/files/helios/core/container/readme-md"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="helios-core-container-readme-md | helios"><meta data-rh="true" name="description" content="Namespaces Index"><meta data-rh="true" property="og:description" content="Namespaces Index"><meta data-rh="true" name="keywords" content="doxygen,reference,file"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://helios.garagecraft.games/docs/helios/files/helios/core/container/readme-md"><link data-rh="true" rel="alternate" href="https://helios.garagecraft.games/docs/helios/files/helios/core/container/readme-md" hreflang="en"><link data-rh="true" rel="alternate" href="https://helios.garagecraft.games/docs/helios/files/helios/core/container/readme-md" hreflang="x-default"><link data-rh="true" rel="preconnect" href="https://LK14YGETTG-dsn.algolia.net" crossorigin="anonymous"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"API Reference (Doxygen)","item":"https://helios.garagecraft.games/docs/helios/"},{"@type":"ListItem","position":2,"name":"Files","item":"https://helios.garagecraft.games/docs/helios/files"},{"@type":"ListItem","position":3,"name":"helios/core/container/README.md","item":"https://helios.garagecraft.games/docs/helios/files/helios/core/container/readme-md"}]}</script><link rel="search" type="application/opensearchdescription+xml" title="helios" href="/opensearch.xml"><link rel="stylesheet" href="/assets/css/styles.d8266996.css">
-<script src="/assets/js/runtime~main.ebf82c97.js" defer="defer"></script>
-<script src="/assets/js/main.6057e8e3.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.c16df9ee.js" defer="defer"></script>
+<script src="/assets/js/main.f5d3fc6f.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -38,9 +38,10 @@
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">| Submodule | Purpose |</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">|-----------|---------|</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">| `ConceptModelRegistry` | Generic type-indexed registry for type-erased wrappers (Concept/Model pattern) |</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">| `DenseRuntimeHandleRegistry` | Dense registry mapping `StrongId`-based identifiers to contiguous runtime indices |</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">| `buffer/` | Double-buffering infrastructure for thread-safe message passing |</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
-<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">## Key Type</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">## Key Types</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">### ConceptModelRegistry</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
@@ -55,8 +56,23 @@
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">| `SystemRegistry` | `System` | `SystemTypeId` |</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">| `ManagerRegistry` | `Manager` | `ResourceTypeId` |</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">### DenseRuntimeHandleRegistry</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">A dense registry that maps `StrongId`-based identifiers to contiguous</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">`RuntimeId` indices. Produces `RuntimeHandle` instances via idempotent</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">`getOrCreate()`. Used as the backend for per-resource-type handle registries:</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">| Alias | StrongIdentifier | RuntimeId |</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">|-------|-----------------|-----------|</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">| `ViewportHandleRegistry` | `ViewportId` | `ViewportRuntimeId` |</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">| `FramebufferHandleRegistry` | `FramebufferId` | `FramebufferRuntimeId` |</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">| `MaterialHandleRegistry` | `MaterialId` | `MaterialRuntimeId` |</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">| `MeshHandleRegistry` | `MeshId` | `MeshRuntimeId` |</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">| `ShaderHandleRegistry` | `ShaderId` | `ShaderRuntimeId` |</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">## See Also</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">- [Data](../data/README.md) — `StrongId` and `RuntimeHandle` primitives</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">- [Buffer](buffer/README.md) — Double-buffered message containers</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">- [System](../../engine/runtime/world/README.md) — System architecture using SystemRegistry</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">- [Resource Registry](../../../../docs/core-concepts/resource-registry.md) — ManagerRegistry integration</span></span></div>

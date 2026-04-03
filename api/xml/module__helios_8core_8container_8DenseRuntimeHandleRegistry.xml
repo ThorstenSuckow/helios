@@ -1,0 +1,195 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8core_8container_8DenseRuntimeHandleRegistry" kind="module">
+    <compoundname>helios.core.container.DenseRuntimeHandleRegistry</compoundname>
+    <innerfile refid="DenseRuntimeHandleRegistry_8ixx">DenseRuntimeHandleRegistry.ixx</innerfile>
+    <innerclass refid="classhelios_1_1core_1_1container_1_1DenseRuntimeHandleRegistry" prot="public">helios::core::container::DenseRuntimeHandleRegistry</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1core_1_1container_1_1DenseRuntimeHandleRegistry_1aab0d12de1950506212db83b3f9f1c3d1" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; StrongId_t &gt;</type>
+        <definition>std::vector&lt;StrongId_t&gt; helios::core::container::DenseRuntimeHandleRegistry&lt; StrongIdentifier, RuntimeId &gt;::ids_</definition>
+        <argsstring></argsstring>
+        <name>ids_</name>
+        <qualifiedname>helios::core::container::DenseRuntimeHandleRegistry::ids_</qualifiedname>
+        <briefdescription>
+<para>Dense storage of registered strong-ID values. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The index of each entry is its corresponding `RuntimeId`. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/container/DenseRuntimeHandleRegistry.ixx" line="67" column="21" bodyfile="/tmp/h/include/helios/core/container/DenseRuntimeHandleRegistry.ixx" bodystart="67" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1core_1_1container_1_1DenseRuntimeHandleRegistry_1a5287a93e4e9af30e982a4976c615eee4" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::core::container::DenseRuntimeHandleRegistry&lt; StrongIdentifier, RuntimeId &gt;::DenseRuntimeHandleRegistry</definition>
+        <argsstring>(const size_t defaultCapacity=DEFAULT_RUNTIME_HANDLE_REGISTRY_CAPACITY)</argsstring>
+        <name>DenseRuntimeHandleRegistry</name>
+        <qualifiedname>helios::core::container::DenseRuntimeHandleRegistry::DenseRuntimeHandleRegistry</qualifiedname>
+        <param>
+          <type>const size_t</type>
+          <declname>defaultCapacity</declname>
+          <defval>DEFAULT_RUNTIME_HANDLE_REGISTRY_CAPACITY</defval>
+        </param>
+        <briefdescription>
+<para>Constructs the registry with a reserved capacity. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>defaultCapacity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Initial capacity hint for the internal vector. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/container/DenseRuntimeHandleRegistry.ixx" line="76" column="18" bodyfile="/tmp/h/include/helios/core/container/DenseRuntimeHandleRegistry.ixx" bodystart="76" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1core_1_1container_1_1DenseRuntimeHandleRegistry_1a434b74b7fc75fafced2e46045e93ad53" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::core::container::DenseRuntimeHandleRegistry&lt; StrongIdentifier, RuntimeId &gt;::has</definition>
+        <argsstring>(StrongIdentifier strongId) const noexcept</argsstring>
+        <name>has</name>
+        <qualifiedname>helios::core::container::DenseRuntimeHandleRegistry::has</qualifiedname>
+        <param>
+          <type>StrongIdentifier</type>
+          <declname>strongId</declname>
+        </param>
+        <briefdescription>
+<para>Checks whether a strong identifier is registered. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>strongId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The identifier to look up.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the identifier is present. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/container/DenseRuntimeHandleRegistry.ixx" line="87" column="15" bodyfile="/tmp/h/include/helios/core/container/DenseRuntimeHandleRegistry.ixx" bodystart="87" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1core_1_1container_1_1DenseRuntimeHandleRegistry_1ae8af177c90abf22d0be8cf4a4aec1523" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::optional&lt; RuntimeId &gt;</type>
+        <definition>std::optional&lt; RuntimeId &gt; helios::core::container::DenseRuntimeHandleRegistry&lt; StrongIdentifier, RuntimeId &gt;::runtimeId</definition>
+        <argsstring>(StrongIdentifier strongId) const noexcept</argsstring>
+        <name>runtimeId</name>
+        <qualifiedname>helios::core::container::DenseRuntimeHandleRegistry::runtimeId</qualifiedname>
+        <param>
+          <type>StrongIdentifier</type>
+          <declname>strongId</declname>
+        </param>
+        <briefdescription>
+<para>Returns the runtime index for a registered identifier. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>strongId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The identifier to look up.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The associated `RuntimeId`, or `std::nullopt` if not registered. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/container/DenseRuntimeHandleRegistry.ixx" line="98" column="24" bodyfile="/tmp/h/include/helios/core/container/DenseRuntimeHandleRegistry.ixx" bodystart="98" bodyend="108"/>
+        <referencedby refid="classhelios_1_1core_1_1container_1_1DenseRuntimeHandleRegistry_1a98a2013152caa9a6c5dbaf919a21175a" compoundref="DenseRuntimeHandleRegistry_8ixx" startline="137" endline="149">helios::core::container::DenseRuntimeHandleRegistry&lt; StrongIdentifier, RuntimeId &gt;::getOrCreate</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1core_1_1container_1_1DenseRuntimeHandleRegistry_1a27bf0b34c76bd304333cda4836f967fb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structhelios_1_1core_1_1data_1_1RuntimeHandle" kindref="compound">RuntimeHandle</ref>&lt; StrongIdentifier, RuntimeId &gt;</type>
+        <definition>RuntimeHandle&lt; StrongIdentifier, RuntimeId &gt; helios::core::container::DenseRuntimeHandleRegistry&lt; StrongIdentifier, RuntimeId &gt;::getOrCreate</definition>
+        <argsstring>(std::string strId)</argsstring>
+        <name>getOrCreate</name>
+        <qualifiedname>helios::core::container::DenseRuntimeHandleRegistry::getOrCreate</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>strId</declname>
+        </param>
+        <briefdescription>
+<para>Returns an existing handle or creates a new one from a string key. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Constructs a `StrongIdentifier` from `strId` and delegates to the `StrongIdentifier` overload.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>strId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>String key that is hashed into a `StrongIdentifier`.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The existing or newly created handle. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/container/DenseRuntimeHandleRegistry.ixx" line="120" column="23" bodyfile="/tmp/h/include/helios/core/container/DenseRuntimeHandleRegistry.ixx" bodystart="120" bodyend="122"/>
+        <references refid="classhelios_1_1core_1_1container_1_1DenseRuntimeHandleRegistry_1a27bf0b34c76bd304333cda4836f967fb" compoundref="DenseRuntimeHandleRegistry_8ixx" startline="120" endline="122">helios::core::container::DenseRuntimeHandleRegistry&lt; StrongIdentifier, RuntimeId &gt;::getOrCreate</references>
+        <referencedby refid="classhelios_1_1core_1_1container_1_1DenseRuntimeHandleRegistry_1a27bf0b34c76bd304333cda4836f967fb" compoundref="DenseRuntimeHandleRegistry_8ixx" startline="120" endline="122">helios::core::container::DenseRuntimeHandleRegistry&lt; StrongIdentifier, RuntimeId &gt;::getOrCreate</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1core_1_1container_1_1DenseRuntimeHandleRegistry_1a98a2013152caa9a6c5dbaf919a21175a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structhelios_1_1core_1_1data_1_1RuntimeHandle" kindref="compound">RuntimeHandle</ref>&lt; StrongIdentifier, RuntimeId &gt;</type>
+        <definition>RuntimeHandle&lt; StrongIdentifier, RuntimeId &gt; helios::core::container::DenseRuntimeHandleRegistry&lt; StrongIdentifier, RuntimeId &gt;::getOrCreate</definition>
+        <argsstring>(const StrongIdentifier strongId)</argsstring>
+        <name>getOrCreate</name>
+        <qualifiedname>helios::core::container::DenseRuntimeHandleRegistry::getOrCreate</qualifiedname>
+        <param>
+          <type>const StrongIdentifier</type>
+          <declname>strongId</declname>
+        </param>
+        <briefdescription>
+<para>Returns an existing handle or registers a new entry. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the identifier is already registered, the existing handle is returned. Otherwise a new entry is appended and a fresh `RuntimeId` is assigned.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>strongId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The identifier to register.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The existing or newly created handle.</para>
+</simplesect>
+<simplesect kind="pre"><para>The registry must not have reached its reserved capacity. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/container/DenseRuntimeHandleRegistry.ixx" line="137" column="23" bodyfile="/tmp/h/include/helios/core/container/DenseRuntimeHandleRegistry.ixx" bodystart="137" bodyend="149"/>
+        <references refid="classhelios_1_1core_1_1container_1_1DenseRuntimeHandleRegistry_1ae8af177c90abf22d0be8cf4a4aec1523" compoundref="DenseRuntimeHandleRegistry_8ixx" startline="98" endline="108">helios::core::container::DenseRuntimeHandleRegistry&lt; StrongIdentifier, RuntimeId &gt;::runtimeId</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/core/container/DenseRuntimeHandleRegistry.ixx" line="14" column="15"/>
+  </compounddef>
+</doxygen>

@@ -8,13 +8,13 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_1b0fbe5df8695f68df77faff1a12338c_1autotoc_md118">
+<sect1 id="dir_1b0fbe5df8695f68df77faff1a12338c_1autotoc_md121">
 <title>helios.engine.builder.spawnSystem</title><para>Fluent, ID-centric builder API for configuring the spawn system: pools, profiles, and schedulers.</para>
 </sect1>
-<sect1 id="dir_1b0fbe5df8695f68df77faff1a12338c_1autotoc_md119">
+<sect1 id="dir_1b0fbe5df8695f68df77faff1a12338c_1autotoc_md122">
 <title>Overview</title><para><computeroutput>SpawnSystemFactory</computeroutput> provides an API where each <bold>pool ID</bold> is the entry point for all related configuration. Profiles and scheduling rules are nested under their pool, ensuring co-location of related IDs and reducing configuration errors.</para>
 </sect1>
-<sect1 id="dir_1b0fbe5df8695f68df77faff1a12338c_1autotoc_md120">
+<sect1 id="dir_1b0fbe5df8695f68df77faff1a12338c_1autotoc_md123">
 <title>Architecture</title><para><programlisting><codeline><highlight class="normal">spawnSystem/</highlight></codeline>
 <codeline><highlight class="normal">├──<sp/>_module.ixx<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Module<sp/>facade</highlight></codeline>
 <codeline><highlight class="normal">├──<sp/>SpawnSystemFactory.ixx<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Entry<sp/>point<sp/>(analog<sp/>to<sp/>GameObjectFactory)</highlight></codeline>
@@ -28,8 +28,8 @@
 <codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/>└──<sp/>SchedulerConfig.ixx<sp/><sp/>#<sp/>Standalone<sp/>rule<sp/>config<sp/>(for<sp/>SchedulerBuilder)</highlight></codeline>
 </programlisting></para>
 </sect1>
-<sect1 id="dir_1b0fbe5df8695f68df77faff1a12338c_1autotoc_md121">
-<title>Usage</title><sect2 id="dir_1b0fbe5df8695f68df77faff1a12338c_1autotoc_md122">
+<sect1 id="dir_1b0fbe5df8695f68df77faff1a12338c_1autotoc_md124">
+<title>Usage</title><sect2 id="dir_1b0fbe5df8695f68df77faff1a12338c_1autotoc_md125">
 <title>ID-centric API (recommended)</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1builder_1_1spawnSystem" kindref="compound">helios::engine::builder::spawnSystem</ref>;</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"><ref refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1SpawnSystemFactory_1a82a9bc4bbd9718c1158e6bb37c763c54" kindref="member">SpawnSystemFactory::configure</ref>(poolManager,<sp/>spawnManager)</highlight></codeline>
@@ -74,7 +74,7 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.commitCyclic&lt;2&gt;();</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="dir_1b0fbe5df8695f68df77faff1a12338c_1autotoc_md123">
+<sect2 id="dir_1b0fbe5df8695f68df77faff1a12338c_1autotoc_md126">
 <title>Chained Pool Configuration</title><para><computeroutput>commit()</computeroutput> and <computeroutput>commitCyclic&lt;N&gt;()</computeroutput> return a <computeroutput>SpawnSystemConfigurator</computeroutput> that provides <computeroutput>pool()</computeroutput> for starting the next pool configuration:</para>
 <para><programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1SpawnSystemFactory_1a82a9bc4bbd9718c1158e6bb37c763c54" kindref="member">SpawnSystemFactory::configure</ref>(poolManager,<sp/>spawnManager)</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.pool(ProjectilePoolId,<sp/>prefab1,<sp/>50)</highlight></codeline>
@@ -85,7 +85,7 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.commit();</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="dir_1b0fbe5df8695f68df77faff1a12338c_1autotoc_md124">
+<sect2 id="dir_1b0fbe5df8695f68df77faff1a12338c_1autotoc_md127">
 <title>Separate Scheduling with commitProfilesOnly()</title><para>When the same profiles need different scheduling strategies (e.g., in different levels), commit profiles without rules and attach schedulers separately:</para>
 <para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Register<sp/>pool<sp/>+<sp/>profiles<sp/>(no<sp/>schedulers<sp/>created)</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal">spawns.pool(OrangePoolId,<sp/>orangePrefab,<sp/>100)</highlight></codeline>
@@ -102,7 +102,7 @@
 </programlisting></para>
 </sect2>
 </sect1>
-<sect1 id="dir_1b0fbe5df8695f68df77faff1a12338c_1autotoc_md125">
+<sect1 id="dir_1b0fbe5df8695f68df77faff1a12338c_1autotoc_md128">
 <title>Design Decisions</title><para><itemizedlist>
 <listitem><para><bold>ID-centric</bold>: Pool ID is the root of all related config - no mismatched IDs possible</para>
 </listitem><listitem><para><bold>No GameLoop dependency</bold>: Dispatcher registration is the caller&apos;s responsibility</para>
@@ -113,7 +113,7 @@
 </listitem></itemizedlist>
 </para>
 </sect1>
-<sect1 id="dir_1b0fbe5df8695f68df77faff1a12338c_1autotoc_md126">
+<sect1 id="dir_1b0fbe5df8695f68df77faff1a12338c_1autotoc_md129">
 <title>See Also</title><para><itemizedlist>
 <listitem><para><ref refid="dir_a108d9e19c5aa79c49bc6bd27980ebb3" kindref="compound">GameObjectFactory</ref> - analogous builder for GameObjects</para>
 </listitem><listitem><para><ref refid="dir_920d0445133e8943cdb9dc7f8f55cbd5" kindref="compound">SpawnManager</ref> - processes spawn/despawn commands</para>

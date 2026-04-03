@@ -70,9 +70,11 @@ var annotated_dup =
             [ "TypeIndexedReadWriteBuffer", "classhelios_1_1core_1_1container_1_1buffer_1_1TypeIndexedReadWriteBuffer.html", "classhelios_1_1core_1_1container_1_1buffer_1_1TypeIndexedReadWriteBuffer" ],
             [ "WriteBuffer", "classhelios_1_1core_1_1container_1_1buffer_1_1WriteBuffer.html", "classhelios_1_1core_1_1container_1_1buffer_1_1WriteBuffer" ]
           ] ],
-          [ "ConceptModelRegistry", "classhelios_1_1core_1_1container_1_1ConceptModelRegistry.html", "classhelios_1_1core_1_1container_1_1ConceptModelRegistry" ]
+          [ "ConceptModelRegistry", "classhelios_1_1core_1_1container_1_1ConceptModelRegistry.html", "classhelios_1_1core_1_1container_1_1ConceptModelRegistry" ],
+          [ "DenseRuntimeHandleRegistry", "classhelios_1_1core_1_1container_1_1DenseRuntimeHandleRegistry.html", "classhelios_1_1core_1_1container_1_1DenseRuntimeHandleRegistry" ]
         ] ],
         [ "data", "namespacehelios_1_1core_1_1data.html", [
+          [ "RuntimeHandle", "structhelios_1_1core_1_1data_1_1RuntimeHandle.html", "structhelios_1_1core_1_1data_1_1RuntimeHandle" ],
           [ "StrongId", "structhelios_1_1core_1_1data_1_1StrongId.html", "structhelios_1_1core_1_1data_1_1StrongId" ],
           [ "TypeIndexer", "classhelios_1_1core_1_1data_1_1TypeIndexer.html", "classhelios_1_1core_1_1data_1_1TypeIndexer" ]
         ] ],
@@ -712,9 +714,9 @@ var annotated_dup =
           [ "TextLayout", "structhelios_1_1rendering_1_1text_1_1TextLayout.html", "structhelios_1_1rendering_1_1text_1_1TextLayout" ],
           [ "TypeSetter", "classhelios_1_1rendering_1_1text_1_1TypeSetter.html", "classhelios_1_1rendering_1_1text_1_1TypeSetter" ]
         ] ],
+        [ "LegacyRenderPass", "classhelios_1_1rendering_1_1LegacyRenderPass.html", "classhelios_1_1rendering_1_1LegacyRenderPass" ],
         [ "Renderable", "classhelios_1_1rendering_1_1Renderable.html", "classhelios_1_1rendering_1_1Renderable" ],
         [ "RenderingDevice", "classhelios_1_1rendering_1_1RenderingDevice.html", "classhelios_1_1rendering_1_1RenderingDevice" ],
-        [ "RenderPass", "classhelios_1_1rendering_1_1RenderPass.html", "classhelios_1_1rendering_1_1RenderPass" ],
         [ "RenderPassFactory", "classhelios_1_1rendering_1_1RenderPassFactory.html", "classhelios_1_1rendering_1_1RenderPassFactory" ],
         [ "RenderPrototype", "classhelios_1_1rendering_1_1RenderPrototype.html", "classhelios_1_1rendering_1_1RenderPrototype" ],
         [ "RenderQueue", "classhelios_1_1rendering_1_1RenderQueue.html", "classhelios_1_1rendering_1_1RenderQueue" ],
@@ -763,6 +765,7 @@ var annotated_dup =
       ] ]
     ] ],
     [ "std", null, [
+      [ "hash&lt; helios::core::data::RuntimeHandle&lt; StrongIdentifier, RuntimeId &gt; &gt;", "structstd_1_1hash_3_01helios_1_1core_1_1data_1_1RuntimeHandle_3_01StrongIdentifier_00_01RuntimeId_01_4_01_4.html", "structstd_1_1hash_3_01helios_1_1core_1_1data_1_1RuntimeHandle_3_01StrongIdentifier_00_01RuntimeId_01_4_01_4" ],
       [ "hash&lt; helios::core::data::StrongId&lt; Tag, Underlying &gt; &gt;", "structstd_1_1hash_3_01helios_1_1core_1_1data_1_1StrongId_3_01Tag_00_01Underlying_01_4_01_4.html", "structstd_1_1hash_3_01helios_1_1core_1_1data_1_1StrongId_3_01Tag_00_01Underlying_01_4_01_4" ],
       [ "hash&lt; helios::engine::ecs::EntityHandle &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1ecs_1_1EntityHandle_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1ecs_1_1EntityHandle_01_4" ],
       [ "hash&lt; helios::engine::ecs::types::ComponentTypeId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1ecs_1_1types_1_1ComponentTypeId_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1ecs_1_1types_1_1ComponentTypeId_01_4" ],

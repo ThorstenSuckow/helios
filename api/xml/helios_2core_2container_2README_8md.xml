@@ -24,9 +24,10 @@
 <codeline><highlight class="normal">|<sp/>Submodule<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|-----------|---------|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`ConceptModelRegistry`<sp/>|<sp/>Generic<sp/>type-indexed<sp/>registry<sp/>for<sp/>type-erased<sp/>wrappers<sp/>(Concept/Model<sp/>pattern)<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`DenseRuntimeHandleRegistry`<sp/>|<sp/>Dense<sp/>registry<sp/>mapping<sp/>`StrongId`-based<sp/>identifiers<sp/>to<sp/>contiguous<sp/>runtime<sp/>indices<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`buffer/`<sp/>|<sp/>Double-buffering<sp/>infrastructure<sp/>for<sp/>thread-safe<sp/>message<sp/>passing<sp/>|</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">##<sp/>Key<sp/>Type</highlight></codeline>
+<codeline><highlight class="normal">##<sp/>Key<sp/>Types</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">###<sp/>ConceptModelRegistry</highlight></codeline>
 <codeline></codeline>
@@ -41,8 +42,23 @@
 <codeline><highlight class="normal">|<sp/>`SystemRegistry`<sp/>|<sp/>`System`<sp/>|<sp/>`SystemTypeId`<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`ManagerRegistry`<sp/>|<sp/>`Manager`<sp/>|<sp/>`ResourceTypeId`<sp/>|</highlight></codeline>
 <codeline></codeline>
+<codeline><highlight class="normal">###<sp/>DenseRuntimeHandleRegistry</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">A<sp/>dense<sp/>registry<sp/>that<sp/>maps<sp/>`StrongId`-based<sp/>identifiers<sp/>to<sp/>contiguous</highlight></codeline>
+<codeline><highlight class="normal">`RuntimeId`<sp/>indices.<sp/>Produces<sp/>`RuntimeHandle`<sp/>instances<sp/>via<sp/>idempotent</highlight></codeline>
+<codeline><highlight class="normal">`getOrCreate()`.<sp/>Used<sp/>as<sp/>the<sp/>backend<sp/>for<sp/>per-resource-type<sp/>handle<sp/>registries:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Alias<sp/>|<sp/>StrongIdentifier<sp/>|<sp/>RuntimeId<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|-----------------|-----------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ViewportHandleRegistry`<sp/>|<sp/>`ViewportId`<sp/>|<sp/>`ViewportRuntimeId`<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`FramebufferHandleRegistry`<sp/>|<sp/>`FramebufferId`<sp/>|<sp/>`FramebufferRuntimeId`<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`MaterialHandleRegistry`<sp/>|<sp/>`MaterialId`<sp/>|<sp/>`MaterialRuntimeId`<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`MeshHandleRegistry`<sp/>|<sp/>`MeshId`<sp/>|<sp/>`MeshRuntimeId`<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ShaderHandleRegistry`<sp/>|<sp/>`ShaderId`<sp/>|<sp/>`ShaderRuntimeId`<sp/>|</highlight></codeline>
+<codeline></codeline>
 <codeline><highlight class="normal">##<sp/>See<sp/>Also</highlight></codeline>
 <codeline></codeline>
+<codeline><highlight class="normal">-<sp/>[Data](../data/README.md)<sp/>—<sp/>`StrongId`<sp/>and<sp/>`RuntimeHandle`<sp/>primitives</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>[Buffer](buffer/README.md)<sp/>—<sp/>Double-buffered<sp/>message<sp/>containers</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>[System](../../engine/runtime/world/README.md)<sp/>—<sp/>System<sp/>architecture<sp/>using<sp/>SystemRegistry</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>[Resource<sp/>Registry](../../../../docs/core-concepts/resource-registry.md)<sp/>—<sp/>ManagerRegistry<sp/>integration</highlight></codeline>

@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="structhelios_1_1core_1_1data_1_1RuntimeHandle" kind="struct" language="C++" prot="public">
+    <compoundname>helios::core::data::RuntimeHandle</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename StrongIdentifier</type>
+      </param>
+      <param>
+        <type>typename RuntimeId</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structhelios_1_1core_1_1data_1_1RuntimeHandle_1a8874692030718a6b2c5c4b275a263dfb" prot="public" static="no" mutable="no">
+        <type>StrongIdentifier</type>
+        <definition>StrongIdentifier helios::core::data::RuntimeHandle&lt; StrongIdentifier, RuntimeId &gt;::strongId</definition>
+        <argsstring></argsstring>
+        <name>strongId</name>
+        <qualifiedname>helios::core::data::RuntimeHandle::strongId</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>The stable, content-authored identifier. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/data/RuntimeHandle.ixx" line="45" column="26" bodyfile="/tmp/h/include/helios/core/data/RuntimeHandle.ixx" bodystart="45" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhelios_1_1core_1_1data_1_1RuntimeHandle_1a01deb6c347a64f68ac10aad706d0113b" prot="public" static="no" mutable="no">
+        <type>RuntimeId</type>
+        <definition>RuntimeId helios::core::data::RuntimeHandle&lt; StrongIdentifier, RuntimeId &gt;::runtimeId</definition>
+        <argsstring></argsstring>
+        <name>runtimeId</name>
+        <qualifiedname>helios::core::data::RuntimeHandle::runtimeId</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>The dense runtime index assigned by a registry or pool. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/data/RuntimeHandle.ixx" line="50" column="19" bodyfile="/tmp/h/include/helios/core/data/RuntimeHandle.ixx" bodystart="50" bodyend="50"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="structhelios_1_1core_1_1data_1_1RuntimeHandle_1aed10dacafece5ff2cd7f252b90a8cb56" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool operator==</definition>
+        <argsstring>(const RuntimeHandle &amp;, const RuntimeHandle &amp;)=default</argsstring>
+        <name>operator==</name>
+        <qualifiedname>helios::core::data::RuntimeHandle::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1core_1_1data_1_1RuntimeHandle" kindref="compound">RuntimeHandle</ref> &amp;</type>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1core_1_1data_1_1RuntimeHandle" kindref="compound">RuntimeHandle</ref> &amp;</type>
+        </param>
+        <briefdescription>
+<para>Defaulted equality comparison over both fields. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/data/RuntimeHandle.ixx" line="55" column="21"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A lightweight handle that pairs a stable StrongIdentifier with a dense RuntimeId. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>`RuntimeHandle` bridges the gap between content-authored, hash-based identifiers (`StrongId`) and fast, contiguous runtime indices used by pools and registries. The handle is a plain value type suitable for storage in components, containers, and command buffers.</para>
+<para>Equality is defined over both fields; two handles are equal only when both their `strongId` and `runtimeId` match.</para>
+<para>A `std::hash` specialization is provided so that `RuntimeHandle` can be used as a key in unordered containers.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>StrongIdentifier</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The compile-time identifier type (typically a `StrongId&lt;Tag&gt;`). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>RuntimeId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The dense runtime index type (typically `uint32_t`).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="structhelios_1_1core_1_1data_1_1StrongId" kindref="compound">StrongId</ref> </para>
+</simplesect>
+<simplesect kind="see"><para>DenseRuntimeHandleRegistry </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/core/data/RuntimeHandle.ixx" line="40" column="5" bodyfile="/tmp/h/include/helios/core/data/RuntimeHandle.ixx" bodystart="40" bodyend="58"/>
+    <listofallmembers>
+      <member refid="structhelios_1_1core_1_1data_1_1RuntimeHandle_1aed10dacafece5ff2cd7f252b90a8cb56" prot="public" virt="non-virtual"><scope>helios::core::data::RuntimeHandle</scope><name>operator==</name></member>
+      <member refid="structhelios_1_1core_1_1data_1_1RuntimeHandle_1a01deb6c347a64f68ac10aad706d0113b" prot="public" virt="non-virtual"><scope>helios::core::data::RuntimeHandle</scope><name>runtimeId</name></member>
+      <member refid="structhelios_1_1core_1_1data_1_1RuntimeHandle_1a8874692030718a6b2c5c4b275a263dfb" prot="public" virt="non-virtual"><scope>helios::core::data::RuntimeHandle</scope><name>strongId</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

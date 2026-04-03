@@ -65,6 +65,7 @@ var hierarchy =
     [ "helios::engine::mechanics::lifecycle::components::DelayedComponentEnabler", "classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1DelayedComponentEnabler.html", null ],
     [ "helios::engine::mechanics::lifecycle::systems::DelayedComponentEnablerSystem", "classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1DelayedComponentEnablerSystem.html", null ],
     [ "helios::engine::state::commands::DelayedStateCommand&lt; StateType &gt;", "classhelios_1_1engine_1_1state_1_1commands_1_1DelayedStateCommand.html", null ],
+    [ "helios::core::container::DenseRuntimeHandleRegistry&lt; StrongIdentifier, RuntimeId &gt;", "classhelios_1_1core_1_1container_1_1DenseRuntimeHandleRegistry.html", null ],
     [ "helios::engine::runtime::spawn::commands::DespawnCommand", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1DespawnCommand.html", null ],
     [ "helios::engine::modules::physics::motion::components::DirectionComponent", "classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1DirectionComponent.html", null ],
     [ "helios::event::Dispatcher", "classhelios_1_1event_1_1Dispatcher.html", null ],
@@ -130,6 +131,7 @@ var hierarchy =
     [ "helios::rendering::text::Glyph", "structhelios_1_1rendering_1_1text_1_1Glyph.html", null ],
     [ "helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem", "classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem.html", null ],
     [ "helios::util::Guid", "classhelios_1_1util_1_1Guid.html", null ],
+    [ "std::hash&lt; helios::core::data::RuntimeHandle&lt; StrongIdentifier, RuntimeId &gt; &gt;", "structstd_1_1hash_3_01helios_1_1core_1_1data_1_1RuntimeHandle_3_01StrongIdentifier_00_01RuntimeId_01_4_01_4.html", null ],
     [ "std::hash&lt; helios::core::data::StrongId&lt; Tag, Underlying &gt; &gt;", "structstd_1_1hash_3_01helios_1_1core_1_1data_1_1StrongId_3_01Tag_00_01Underlying_01_4_01_4.html", null ],
     [ "std::hash&lt; helios::engine::ecs::EntityHandle &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1ecs_1_1EntityHandle_01_4.html", null ],
     [ "std::hash&lt; helios::engine::ecs::types::ComponentTypeId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1ecs_1_1types_1_1ComponentTypeId_01_4.html", null ],
@@ -180,6 +182,7 @@ var hierarchy =
     [ "helios::engine::ecs::SparseSet&lt; T &gt;::Iterator", "structhelios_1_1engine_1_1ecs_1_1SparseSet_1_1Iterator.html", null ],
     [ "helios::engine::ecs::View&lt; Components &gt;::Iterator", "structhelios_1_1engine_1_1ecs_1_1View_1_1Iterator.html", null ],
     [ "helios::engine::mechanics::damage::components::LastDamageComponent", "classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent.html", null ],
+    [ "helios::rendering::LegacyRenderPass", "classhelios_1_1rendering_1_1LegacyRenderPass.html", null ],
     [ "helios::engine::runtime::world::Level", "classhelios_1_1engine_1_1runtime_1_1world_1_1Level.html", null ],
     [ "helios::engine::mechanics::bounds::components::LevelBoundsBehaviorComponent", "classhelios_1_1engine_1_1mechanics_1_1bounds_1_1components_1_1LevelBoundsBehaviorComponent.html", null ],
     [ "helios::engine::mechanics::bounds::systems::LevelBoundsBehaviorSystem", "classhelios_1_1engine_1_1mechanics_1_1bounds_1_1systems_1_1LevelBoundsBehaviorSystem.html", null ],
@@ -262,7 +265,6 @@ var hierarchy =
     [ "helios::rendering::RenderingDevice", "classhelios_1_1rendering_1_1RenderingDevice.html", [
       [ "helios::ext::opengl::rendering::OpenGLDevice", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice.html", null ]
     ] ],
-    [ "helios::rendering::RenderPass", "classhelios_1_1rendering_1_1RenderPass.html", null ],
     [ "helios::rendering::RenderPassFactory", "classhelios_1_1rendering_1_1RenderPassFactory.html", null ],
     [ "helios::rendering::RenderPrototype", "classhelios_1_1rendering_1_1RenderPrototype.html", null ],
     [ "helios::rendering::RenderQueue", "classhelios_1_1rendering_1_1RenderQueue.html", null ],
@@ -274,6 +276,7 @@ var hierarchy =
     [ "helios::engine::runtime::spawn::scheduling::RuleProcessor", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1RuleProcessor.html", [
       [ "helios::engine::runtime::spawn::scheduling::DefaultRuleProcessor", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1DefaultRuleProcessor.html", null ]
     ] ],
+    [ "helios::core::data::RuntimeHandle&lt; StrongIdentifier, RuntimeId &gt;", "structhelios_1_1core_1_1data_1_1RuntimeHandle.html", null ],
     [ "helios::engine::modules::spatial::transform::components::ScaleStateComponent", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1ScaleStateComponent.html", null ],
     [ "helios::engine::modules::spatial::transform::systems::ScaleSystem", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1systems_1_1ScaleSystem.html", null ],
     [ "helios::scene::Scene", "classhelios_1_1scene_1_1Scene.html", null ],

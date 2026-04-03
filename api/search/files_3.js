@@ -14,10 +14,11 @@ var searchData=
   ['delayedcomponentenablerinitializer_2eixx_11',['DelayedComponentEnablerInitializer.ixx',['../DelayedComponentEnablerInitializer_8ixx.html',1,'']]],
   ['delayedcomponentenablersystem_2eixx_12',['DelayedComponentEnablerSystem.ixx',['../DelayedComponentEnablerSystem_8ixx.html',1,'']]],
   ['delayedstatecommand_2eixx_13',['DelayedStateCommand.ixx',['../DelayedStateCommand_8ixx.html',1,'']]],
-  ['dequeeventqueue_2eixx_14',['DequeEventQueue.ixx',['../DequeEventQueue_8ixx.html',1,'']]],
-  ['despawncommand_2eixx_15',['DespawnCommand.ixx',['../DespawnCommand_8ixx.html',1,'']]],
-  ['directioncomponent_2eixx_16',['DirectionComponent.ixx',['../DirectionComponent_8ixx.html',1,'']]],
-  ['dispatcher_2eixx_17',['Dispatcher.ixx',['../Dispatcher_8ixx.html',1,'']]],
-  ['distributedspawnplacer_2eixx_18',['DistributedSpawnPlacer.ixx',['../DistributedSpawnPlacer_8ixx.html',1,'']]],
-  ['doublebuffer_2eixx_19',['DoubleBuffer.ixx',['../DoubleBuffer_8ixx.html',1,'']]]
+  ['denseruntimehandleregistry_2eixx_14',['DenseRuntimeHandleRegistry.ixx',['../DenseRuntimeHandleRegistry_8ixx.html',1,'']]],
+  ['dequeeventqueue_2eixx_15',['DequeEventQueue.ixx',['../DequeEventQueue_8ixx.html',1,'']]],
+  ['despawncommand_2eixx_16',['DespawnCommand.ixx',['../DespawnCommand_8ixx.html',1,'']]],
+  ['directioncomponent_2eixx_17',['DirectionComponent.ixx',['../DirectionComponent_8ixx.html',1,'']]],
+  ['dispatcher_2eixx_18',['Dispatcher.ixx',['../Dispatcher_8ixx.html',1,'']]],
+  ['distributedspawnplacer_2eixx_19',['DistributedSpawnPlacer.ixx',['../DistributedSpawnPlacer_8ixx.html',1,'']]],
+  ['doublebuffer_2eixx_20',['DoubleBuffer.ixx',['../DoubleBuffer_8ixx.html',1,'']]]
 ];

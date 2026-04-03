@@ -123,6 +123,8 @@ Files</h2></td></tr>
 <tr class="memdesc:helios_2core_2container_2__module_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aggregate module for <a class="el" href="namespacehelios_1_1core_1_1container.html" title="Generic container types shared across the engine. .">helios::core::container</a> namespace. <br /></td></tr>
 <tr class="memitem:ConceptModelRegistry_2Eixx" id="r_ConceptModelRegistry_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="ConceptModelRegistry_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ConceptModelRegistry_8ixx.html">ConceptModelRegistry.ixx</a></td></tr>
 <tr class="memdesc:ConceptModelRegistry_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic type-indexed registry for type-erased wrappers. <br /></td></tr>
+<tr class="memitem:DenseRuntimeHandleRegistry_2Eixx" id="r_DenseRuntimeHandleRegistry_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="DenseRuntimeHandleRegistry_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="DenseRuntimeHandleRegistry_8ixx.html">DenseRuntimeHandleRegistry.ixx</a></td></tr>
+<tr class="memdesc:DenseRuntimeHandleRegistry_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dense registry mapping strong identifiers to contiguous runtime indices. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <h1 class="doxsection"><a class="anchor" id="autotoc_md45"></a>
@@ -139,10 +141,12 @@ Submodules</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">ConceptModelRegistry</span>  </td><td class="markdownTableBodyNone">Generic type-indexed registry for type-erased wrappers (Concept/Model pattern)  </td></tr>
 <tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">DenseRuntimeHandleRegistry</span>  </td><td class="markdownTableBodyNone">Dense registry mapping <span class="tt">StrongId</span>-based identifiers to contiguous runtime indices  </td></tr>
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">buffer/</span>  </td><td class="markdownTableBodyNone">Double-buffering infrastructure for thread-safe message passing  </td></tr>
 </table>
 <h1 class="doxsection"><a class="anchor" id="autotoc_md48"></a>
-Key Type</h1>
+Key Types</h1>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md49"></a>
 ConceptModelRegistry</h2>
 <p>A generic container that stores type-erased wrapper instances indexed by a compile-time ID provider. Provides O(1) lookup by concrete type and insertion-order iteration for deterministic processing.</p>
@@ -155,9 +159,27 @@ ConceptModelRegistry</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">ManagerRegistry</span>  </td><td class="markdownTableBodyNone"><span class="tt">Manager</span>  </td><td class="markdownTableBodyNone"><span class="tt">ResourceTypeId</span>  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md50"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md50"></a>
+DenseRuntimeHandleRegistry</h2>
+<p>A dense registry that maps <span class="tt">StrongId</span>-based identifiers to contiguous <span class="tt">RuntimeId</span> indices. Produces <span class="tt">RuntimeHandle</span> instances via idempotent <span class="tt">getOrCreate()</span>. Used as the backend for per-resource-type handle registries:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Alias  </th><th class="markdownTableHeadNone">StrongIdentifier  </th><th class="markdownTableHeadNone">RuntimeId  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">ViewportHandleRegistry</span>  </td><td class="markdownTableBodyNone"><span class="tt">ViewportId</span>  </td><td class="markdownTableBodyNone"><span class="tt">ViewportRuntimeId</span>  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">FramebufferHandleRegistry</span>  </td><td class="markdownTableBodyNone"><span class="tt">FramebufferId</span>  </td><td class="markdownTableBodyNone"><span class="tt">FramebufferRuntimeId</span>  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">MaterialHandleRegistry</span>  </td><td class="markdownTableBodyNone"><span class="tt">MaterialId</span>  </td><td class="markdownTableBodyNone"><span class="tt">MaterialRuntimeId</span>  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">MeshHandleRegistry</span>  </td><td class="markdownTableBodyNone"><span class="tt">MeshId</span>  </td><td class="markdownTableBodyNone"><span class="tt">MeshRuntimeId</span>  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">ShaderHandleRegistry</span>  </td><td class="markdownTableBodyNone"><span class="tt">ShaderId</span>  </td><td class="markdownTableBodyNone"><span class="tt">ShaderRuntimeId</span>  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md51"></a>
 See Also</h1>
 <ul>
+<li><a class="el" href="dir_10cf350f37124dbdd00ea56cff4fe733.html">Data</a> — <span class="tt">StrongId</span> and <span class="tt">RuntimeHandle</span> primitives</li>
 <li><a class="el" href="dir_7dafa7c3990f6b8470767c1b0dd6115a.html">Buffer</a> — Double-buffered message containers</li>
 <li><a class="el" href="dir_271ebd1cecf9fce13500c2bd2d622746.html">System</a> — System architecture using SystemRegistry</li>
 <li>Resource Registry — ManagerRegistry integration</li>

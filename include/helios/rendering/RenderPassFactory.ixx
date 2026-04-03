@@ -1,6 +1,6 @@
 /**
  * @file RenderPassFactory.ixx
- * @brief Factory for creating RenderPass objects from scene snapshots.
+ * @brief Factory for creating LegacyRenderPass objects from scene snapshots.
  */
 module;
 
@@ -12,7 +12,7 @@ export module helios.rendering.RenderPassFactory;
 import helios.scene.Snapshot;
 import helios.scene.SnapshotItem;
 
-import helios.rendering.RenderPass;
+import helios.rendering.LegacyRenderPass;
 import helios.rendering.RenderQueue;
 
 import helios.rendering.shader.UniformSemantics;
@@ -25,15 +25,15 @@ import helios.util.log.LogManager;
 export namespace helios::rendering {
 
     /**
-     * @brief Factory for constructing `RenderPass` objects from scene snapshots.
+     * @brief Factory for constructing `LegacyRenderPass` objects from scene snapshots.
      *
      * `RenderPassFactory` transforms high-level scene data (`Snapshot` and `SnapshotItem`)
      * into low-level rendering commands suitable for the rendering device. It creates
-     * `RenderPass` objects with populated `RenderQueue`s and configured frame uniforms.
+     * `LegacyRenderPass` objects with populated `RenderQueue`s and configured frame uniforms.
      *
      * ## Responsibilities
      *
-     * - Build `RenderPass` objects from `Snapshot` data.
+     * - Build `LegacyRenderPass` objects from `Snapshot` data.
      * - Populate `RenderQueue` with `MeshRenderCommand` and `TextRenderCommand` objects.
      * - Configure frame-level uniforms (view/projection matrices).
      *
@@ -53,7 +53,7 @@ export namespace helios::rendering {
      *       of high-level scene data into lower-level rendering commands might be
      *       realized with strategies and/or separate factories.
      *
-     * @see RenderPass
+     * @see LegacyRenderPass
      * @see Snapshot
      * @see SnapshotItem
      * @see RenderQueue
@@ -81,22 +81,22 @@ export namespace helios::rendering {
         }
 
         /**
-         * @brief Builds a `RenderPass` from a given `Snapshot`.
+         * @brief Builds a `LegacyRenderPass` from a given `Snapshot`.
          *
          * This method orchestrates the creation of a `RenderQueue` and populates it
          * with render commands derived from the `SnapshotItem`s within the snapshot.
          * It also sets up frame-specific uniform values (view and projection matrices)
-         * for the `RenderPass`.
+         * for the `LegacyRenderPass`.
          *
          * @param snapshot A const reference to the snapshot containing the scene data
-         *                 for which the `RenderPass` is to be built.
+         *                 for which the `LegacyRenderPass` is to be built.
          *
-         * @return A fully constructed `RenderPass` object containing the render queue
+         * @return A fully constructed `LegacyRenderPass` object containing the render queue
          *         and frame-specific uniforms.
          *
          * @see populateRenderQueue()
          */
-        [[nodiscard]] RenderPass buildRenderPass(const helios::scene::Snapshot& snapshot) const {
+        [[nodiscard]] LegacyRenderPass buildRenderPass(const helios::scene::Snapshot& snapshot) const {
 
             auto renderQueue = RenderQueue();
 
@@ -109,7 +109,7 @@ export namespace helios::rendering {
             frameUniformValues.set(helios::rendering::shader::UniformSemantics::ProjectionMatrix, projectionMatrix);
             frameUniformValues.set(helios::rendering::shader::UniformSemantics::ViewMatrix, viewMatrix);
 
-            return RenderPass(
+            return LegacyRenderPass(
                 &snapshot.viewport(),
                 std::move(renderQueue),
                 frameUniformValues

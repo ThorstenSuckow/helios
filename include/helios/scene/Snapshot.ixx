@@ -22,7 +22,7 @@ export namespace helios::scene {
      *
      * The class encapsulates all necessary data to render a single frame. It is
      * designed to be a lightweight DTO to pass information to the rendering
-     * engine abstraction layer, such as the `RenderPass` class.
+     * engine abstraction layer, such as the `LegacyRenderPass` class.
      *
      * A snapshot includes a camera's projection and view matrix that should be used
      * for rendering the scene. A collection of `SnapshotItems` holds the information

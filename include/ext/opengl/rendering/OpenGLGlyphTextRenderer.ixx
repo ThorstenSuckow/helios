@@ -33,7 +33,7 @@ import helios.rendering.shader.UniformSemantics;
 import helios.engine.modules.ui.widgets.types.FontId;
 import helios.rendering.text.TextRenderCommand;
 
-import helios.rendering.RenderPass;
+import helios.rendering.LegacyRenderPass;
 
 import helios.rendering.shader.UniformValueMap;
 
@@ -176,7 +176,7 @@ export namespace helios::ext::opengl::rendering {
          *
          * @param renderPass The render pass being started (currently unused, reserved for future use).
          */
-        void beginRenderPass(helios::rendering::RenderPass& renderPass) const noexcept {
+        void beginRenderPass(helios::rendering::LegacyRenderPass& renderPass) const noexcept {
             // Reset cached state at the beginning of each render pass
             // to ensure proper shader and VAO binding even when render queue contents change
             lastShader_ = nullptr;

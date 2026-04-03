@@ -14,9 +14,10 @@ used by the event system.
 | Submodule | Purpose |
 |-----------|---------|
 | `ConceptModelRegistry` | Generic type-indexed registry for type-erased wrappers (Concept/Model pattern) |
+| `DenseRuntimeHandleRegistry` | Dense registry mapping `StrongId`-based identifiers to contiguous runtime indices |
 | `buffer/` | Double-buffering infrastructure for thread-safe message passing |
 
-## Key Type
+## Key Types
 
 ### ConceptModelRegistry
 
@@ -31,8 +32,23 @@ Used as the backend for:
 | `SystemRegistry` | `System` | `SystemTypeId` |
 | `ManagerRegistry` | `Manager` | `ResourceTypeId` |
 
+### DenseRuntimeHandleRegistry
+
+A dense registry that maps `StrongId`-based identifiers to contiguous
+`RuntimeId` indices. Produces `RuntimeHandle` instances via idempotent
+`getOrCreate()`. Used as the backend for per-resource-type handle registries:
+
+| Alias | StrongIdentifier | RuntimeId |
+|-------|-----------------|-----------|
+| `ViewportHandleRegistry` | `ViewportId` | `ViewportRuntimeId` |
+| `FramebufferHandleRegistry` | `FramebufferId` | `FramebufferRuntimeId` |
+| `MaterialHandleRegistry` | `MaterialId` | `MaterialRuntimeId` |
+| `MeshHandleRegistry` | `MeshId` | `MeshRuntimeId` |
+| `ShaderHandleRegistry` | `ShaderId` | `ShaderRuntimeId` |
+
 ## See Also
 
+- [Data](../data/README.md) — `StrongId` and `RuntimeHandle` primitives
 - [Buffer](buffer/README.md) — Double-buffered message containers
 - [System](../../engine/runtime/world/README.md) — System architecture using SystemRegistry
 - [Resource Registry](../../../../docs/core-concepts/resource-registry.md) — ManagerRegistry integration

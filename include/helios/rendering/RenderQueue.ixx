@@ -41,7 +41,7 @@ export namespace helios::rendering {
      *
      * @see RenderCommand
      * @see TextRenderCommand
-     * @see RenderPass
+     * @see LegacyRenderPass
      */
     class RenderQueue {
 

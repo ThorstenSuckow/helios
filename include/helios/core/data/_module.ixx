@@ -7,5 +7,6 @@ export module helios.core.data;
 
 export import helios.core.data.TypeIndexer;
 export import helios.core.data.StrongId;
+export import helios.core.data.RuntimeHandle;
 
 

@@ -1,5 +1,5 @@
 /**
- * @file RenderPass.ixx
+ * @file LegacyRenderPass.ixx
  * @brief Abstraction representing a render pass (framebuffer, attachments, etc.).
  */
 module;
@@ -7,7 +7,7 @@ module;
 #include <memory>
 #include <cassert>
 
-export module helios.rendering.RenderPass;
+export module helios.rendering.LegacyRenderPass;
 
 import helios.rendering.RenderQueue;
 import helios.rendering.shader.UniformValueMap;
@@ -17,13 +17,13 @@ import helios.rendering.Viewport;
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
 
-#define HELIOS_LOG_SCOPE "helios::rendering::RenderPass"
+#define HELIOS_LOG_SCOPE "helios::rendering::LegacyRenderPass"
 export namespace helios::rendering {
 
     /**
      * @brief Encapsulates a single rendering pass with its associated resources.
      *
-     * A `RenderPass` holds a `RenderQueue` containing all `MeshRenderCommand` and
+     * A `LegacyRenderPass` holds a `RenderQueue` containing all `MeshRenderCommand` and
      * `TextRenderCommand` objects to be processed. It also stores frame-level
      * uniform values (e.g., view and projection matrices) that remain constant
      * during the pass.
@@ -60,7 +60,7 @@ export namespace helios::rendering {
      * @see Viewport
      * @see RenderPassFactory
      */
-    class RenderPass {
+    class LegacyRenderPass {
 
     private:
         /**
@@ -85,48 +85,48 @@ export namespace helios::rendering {
 
     protected:
         /**
-         * @brief Shared logger instance for all RenderPass objects.
+         * @brief Shared logger instance for all LegacyRenderPass objects.
          */
         inline static const helios::util::log::Logger& logger_ = helios::util::log::LogManager::loggerForScope(
             HELIOS_LOG_SCOPE
         );
 
     public:
-        ~RenderPass() = default;
+        ~LegacyRenderPass() = default;
 
         /**
          * @brief Prevent copying.
-         * A RenderPass is not intended to be copied.
+         * A LegacyRenderPass is not intended to be copied.
          */
-        RenderPass(const RenderPass&) = delete;
+        LegacyRenderPass(const LegacyRenderPass&) = delete;
 
         /**
          * @brief Prevent copy assignment.
-         * A RenderPass is not intended to be copied.
+         * A LegacyRenderPass is not intended to be copied.
          */
-        RenderPass& operator=(const RenderPass&) = delete;
+        LegacyRenderPass& operator=(const LegacyRenderPass&) = delete;
 
         /**
          * @brief Allow move.
          */
-        RenderPass(RenderPass&&) noexcept = default;
+        LegacyRenderPass(LegacyRenderPass&&) noexcept = default;
 
         /**
          * @brief Allow move assignment.
          */
-        RenderPass& operator=(RenderPass&&) noexcept = default;
+        LegacyRenderPass& operator=(LegacyRenderPass&&) noexcept = default;
 
         /**
-         * @brief Creates a new `RenderPass` with the specified viewport, render queue, and frame uniforms.
+         * @brief Creates a new `LegacyRenderPass` with the specified viewport, render queue, and frame uniforms.
          *
          * The render queue is moved into this pass. The viewport pointer must remain
          * valid for the lifetime of this pass.
          *
-         * @param viewport Non-owning pointer to the viewport this RenderPass is processing.
+         * @param viewport Non-owning pointer to the viewport this LegacyRenderPass is processing.
          * @param renderQueue The `RenderQueue` to be processed with this pass (moved).
          * @param frameUniformValues Frame-specific uniform values (e.g., view/projection matrices).
          */
-        explicit RenderPass(
+        explicit LegacyRenderPass(
             const helios::rendering::Viewport* viewport,
             helios::rendering::RenderQueue renderQueue,
             const helios::rendering::shader::UniformValueMap& frameUniformValues
@@ -136,22 +136,22 @@ export namespace helios::rendering {
             renderQueue_(std::move(renderQueue)),
             frameUniformValues_(frameUniformValues) {
 
-            assert(viewport_ != nullptr && "Unexpected nullptr for viewport in RenderPass constructor");
+            assert(viewport_ != nullptr && "Unexpected nullptr for viewport in LegacyRenderPass constructor");
         }
 
         /**
-         * @brief Returns a const ref to the `RenderQueue` this `RenderPass` holds.
+         * @brief Returns a const ref to the `RenderQueue` this `LegacyRenderPass` holds.
          *
-         * @return A const ref to this `RenderPass`' `RenderQueue`.
+         * @return A const ref to this `LegacyRenderPass`' `RenderQueue`.
          */
         [[nodiscard]] const RenderQueue& renderQueue() const noexcept {
             return renderQueue_;
         }
 
         /**
-         * @brief Returns a const ref to the `Viewport` this `RenderPass` holds.
+         * @brief Returns a const ref to the `Viewport` this `LegacyRenderPass` holds.
          *
-         * @return A const ref to this `RenderPass`' `Viewport`.
+         * @return A const ref to this `LegacyRenderPass`' `Viewport`.
          */
         [[nodiscard]] const Viewport& viewport() const noexcept {
             return *viewport_;
@@ -167,11 +167,11 @@ export namespace helios::rendering {
         }
 
         /**
-         * @brief Returns a const reference to this `RenderPass`' `UniformValueMap`.
+         * @brief Returns a const reference to this `LegacyRenderPass`' `UniformValueMap`.
          *
          * The map might be empty.
          *
-         * @return A const reference to this `RenderPass`' `UniformValueMap` for the current frame.
+         * @return A const reference to this `LegacyRenderPass`' `UniformValueMap` for the current frame.
          */
         [[nodiscard]] const helios::rendering::shader::UniformValueMap& frameUniformValues() const noexcept {
             return frameUniformValues_;

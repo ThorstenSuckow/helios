@@ -12,7 +12,7 @@ import helios.math.types;
 import helios.util.log;
 import helios.rendering.Renderable;
 import helios.rendering.RenderQueue;
-import helios.rendering.RenderPass;
+import helios.rendering.LegacyRenderPass;
 import helios.rendering.text.TextRenderer;
 import helios.rendering.text.FontResourceProvider;
 
@@ -42,7 +42,7 @@ export namespace helios::rendering {
      *
      * The `render()` convenience method executes all three steps in sequence.
      *
-     * @see RenderPass
+     * @see LegacyRenderPass
      * @see RenderQueue
      * @see TextRenderer
      */
@@ -87,20 +87,20 @@ export namespace helios::rendering {
          *
          * This method should be called at the start of each frame before any drawing occurs.
          *
-         * @param renderPass The RenderPass that is about to be processed by the rendering device.
+         * @param renderPass The LegacyRenderPass that is about to be processed by the rendering device.
          */
-        virtual void beginRenderPass(helios::rendering::RenderPass& renderPass) const noexcept = 0;
+        virtual void beginRenderPass(helios::rendering::LegacyRenderPass& renderPass) const noexcept = 0;
 
 
         /**
-         * @brief Advises this RenderingDevice to process the specified RenderPass.
+         * @brief Advises this RenderingDevice to process the specified LegacyRenderPass.
          *
-         * A `RenderPass` consists of `RenderCommand`s this RenderDevice executes, i.e.
+         * A `LegacyRenderPass` consists of `RenderCommand`s this RenderDevice executes, i.e.
          * binding meshes, materials and shaders as well as drawing geometry.
          *
-         * @param renderPass A reference to the RenderPass that holds the `RenderCommand`s to be executed.
+         * @param renderPass A reference to the LegacyRenderPass that holds the `RenderCommand`s to be executed.
          */
-        virtual void doRender(helios::rendering::RenderPass& renderPass) const noexcept = 0;
+        virtual void doRender(helios::rendering::LegacyRenderPass& renderPass) const noexcept = 0;
 
 
         /**
@@ -112,16 +112,16 @@ export namespace helios::rendering {
          * Implementing classes should take care of unbinding frame buffers and/or flushing
          * command buffers.
          *
-         * @param renderPass The RenderPass that was processed by the rendering device.
+         * @param renderPass The LegacyRenderPass that was processed by the rendering device.
          */
-        virtual void endRenderPass(helios::rendering::RenderPass& renderPass) const noexcept = 0;
+        virtual void endRenderPass(helios::rendering::LegacyRenderPass& renderPass) const noexcept = 0;
 
         /**
-         * @brief Convenience method to subsequently call `beginRenderPass`, `doRender`, and `endRenderPass` (in this order) with the specified `RenderPass`.
+         * @brief Convenience method to subsequently call `beginRenderPass`, `doRender`, and `endRenderPass` (in this order) with the specified `LegacyRenderPass`.
          *
-         * @param renderPass The RenderPass to process by this RenderingDevice.
+         * @param renderPass The LegacyRenderPass to process by this RenderingDevice.
          */
-        void render(helios::rendering::RenderPass& renderPass) const {
+        void render(helios::rendering::LegacyRenderPass& renderPass) const {
             beginRenderPass(renderPass);
             doRender(renderPass);
             endRenderPass(renderPass);

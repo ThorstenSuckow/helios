@@ -21,7 +21,7 @@ TEST(RenderPassTest, HandlesArgsProperly) {
 
     auto viewport = helios::rendering::Viewport(0.0f, 0.0f, 1.0f, 1.0f);
 
-    auto pass = RenderPass(&viewport, std::move(queue), frameUniformValues);
+    auto pass = LegacyRenderPass(&viewport, std::move(queue), frameUniformValues);
 
     EXPECT_EQ(pass.renderQueue().meshRenderCommandsSize(), 1);
     const float* roughness = pass.frameUniformValues().float_ptr(UniformSemantics::MaterialRoughness);
@@ -37,7 +37,7 @@ TEST(RenderPassTest, HandlesEmptyRenderQueueGracefully) {
     auto uniformValues = UniformValueMap();
     auto viewport = helios::rendering::Viewport(0.0f, 0.0f, 1.0f, 1.0f);
 
-    auto pass = RenderPass(&viewport, RenderQueue(), uniformValues);
+    auto pass = LegacyRenderPass(&viewport, RenderQueue(), uniformValues);
     EXPECT_EQ(pass.renderQueue().meshRenderCommandsSize(), 0);
 }
 
@@ -45,7 +45,7 @@ TEST(RenderPassTest, HandlesEmptyUniformValueMapGracefully) {
     auto renderQueue = RenderQueue();
     auto viewport = helios::rendering::Viewport(0.0f, 0.0f, 1.0f, 1.0f);
 
-    auto pass = RenderPass(&viewport, std::move(renderQueue), UniformValueMap());
+    auto pass = LegacyRenderPass(&viewport, std::move(renderQueue), UniformValueMap());
 
     EXPECT_EQ(pass.frameUniformValues().mat4f_ptr(UniformSemantics::ModelMatrix), nullptr);
 }
@@ -53,7 +53,7 @@ TEST(RenderPassTest, HandlesEmptyUniformValueMapGracefully) {
 TEST(RenderPassTest, HandlesBothEmptyArgsGracefully) {
     auto viewport = helios::rendering::Viewport(0.0f, 0.0f, 1.0f, 1.0f);
 
-    auto pass = RenderPass(&viewport, RenderQueue(), UniformValueMap());
+    auto pass = LegacyRenderPass(&viewport, RenderQueue(), UniformValueMap());
 
     EXPECT_EQ(pass.renderQueue().meshRenderCommandsSize(), 0);
     EXPECT_EQ(pass.frameUniformValues().mat4f_ptr(UniformSemantics::ModelMatrix), nullptr);
@@ -70,7 +70,7 @@ TEST(RenderPassTest, HandlesNullViewportE) {
 
     #ifdef HELIOS_DEBUG
         EXPECT_DEATH(
-                RenderPass(nullptr, RenderQueue(), uniformValues),
+                LegacyRenderPass(nullptr, RenderQueue(), uniformValues),
                 ".*Unexpected nullptr.*"
         );
     #endif

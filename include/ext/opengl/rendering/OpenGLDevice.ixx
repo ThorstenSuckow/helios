@@ -16,7 +16,7 @@ export module helios.ext.opengl.rendering.OpenGLDevice;
 import helios.math.types;
 import helios.rendering.RenderingDevice;
 import helios.rendering.RenderQueue;
-import helios.rendering.RenderPass;
+import helios.rendering.LegacyRenderPass;
 import helios.rendering.mesh.PrimitiveType;
 import helios.rendering.mesh.MeshConfig;
 import helios.rendering.ClearFlags;
@@ -144,7 +144,7 @@ export namespace helios::ext::opengl::rendering {
          * @see clear()
          * @see clearColor()
          */
-        void beginRenderPass(helios::rendering::RenderPass& renderPass) const noexcept override {
+        void beginRenderPass(helios::rendering::LegacyRenderPass& renderPass) const noexcept override {
             meshRenderer_->beginRenderPass(renderPass);
             textRenderer_->beginRenderPass(renderPass);
 
@@ -187,7 +187,7 @@ export namespace helios::ext::opengl::rendering {
          *
          * @see renderTextCommands()
          */
-        void doRender(helios::rendering::RenderPass& renderPass) const noexcept override {
+        void doRender(helios::rendering::LegacyRenderPass& renderPass) const noexcept override {
             const auto& renderQueue = renderPass.renderQueue();
 
             if (renderQueue.meshRenderCommandsSize() > 0) {
@@ -207,7 +207,7 @@ export namespace helios::ext::opengl::rendering {
          *
          * @param renderPass The render pass containing mesh render commands.
          */
-        void renderMeshCommands(const helios::rendering::RenderPass& renderPass) const noexcept {
+        void renderMeshCommands(const helios::rendering::LegacyRenderPass& renderPass) const noexcept {
 
             const auto& renderQueue = renderPass.renderQueue();
 
@@ -225,7 +225,7 @@ export namespace helios::ext::opengl::rendering {
          *
          * @param renderPass The render pass containing text render commands.
          */
-        void renderTextCommands(const helios::rendering::RenderPass& renderPass) const noexcept {
+        void renderTextCommands(const helios::rendering::LegacyRenderPass& renderPass) const noexcept {
             const auto& renderQueue = renderPass.renderQueue();
 
             for (auto& rc: renderQueue.textRenderCommands()) {
@@ -240,7 +240,7 @@ export namespace helios::ext::opengl::rendering {
          *
          * @param renderPass The render pass to end.
          */
-        void endRenderPass(helios::rendering::RenderPass& renderPass) const noexcept override {
+        void endRenderPass(helios::rendering::LegacyRenderPass& renderPass) const noexcept override {
             glBindVertexArray(0);
         }
 

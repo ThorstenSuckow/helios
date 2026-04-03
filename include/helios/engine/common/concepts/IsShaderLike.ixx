@@ -27,7 +27,7 @@ export namespace helios::engine::common::concepts {
      * @see UniformValueMap
      */
     template<class T>
-    concept IsShaderLike = requires(T& t, UniformValueMap& uniformValueMap) {
+    concept IsShaderLike = requires(const T& t, const UniformValueMap& uniformValueMap) {
         {
             t.use()
         } -> std::same_as<void>;

@@ -131,7 +131,7 @@ The rendering pipeline uses a deferred command pattern with render passes.
 
 **Flow:**
 ```
-Scene → Snapshot → RenderPass → RenderQueue → RenderCommand → GPU
+Scene → Snapshot → LegacyRenderPass → RenderQueue → RenderCommand → GPU
 ```
 
 **Key Classes:**
@@ -139,7 +139,7 @@ Scene → Snapshot → RenderPass → RenderQueue → RenderCommand → GPU
 - `Renderable` - Instance of a RenderPrototype with optional overrides
 - `RenderCommand` - Low-level GPU command
 - `RenderQueue` - Collection of commands for a pass
-- `RenderPass` - Execution unit with frame-specific uniforms
+- `LegacyRenderPass` - Execution unit with frame-specific uniforms
 
 **Example:**
 ```cpp

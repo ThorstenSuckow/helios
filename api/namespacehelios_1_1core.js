@@ -5,6 +5,7 @@ var namespacehelios_1_1core =
     ] ],
     [ "container", "namespacehelios_1_1core_1_1container.html", "namespacehelios_1_1core_1_1container" ],
     [ "data", "namespacehelios_1_1core_1_1data.html", "namespacehelios_1_1core_1_1data" ],
+    [ "ecs", "namespacehelios_1_1core_1_1ecs.html", "namespacehelios_1_1core_1_1ecs" ],
     [ "memory", "namespacehelios_1_1core_1_1memory.html", "namespacehelios_1_1core_1_1memory" ],
     [ "spatial", "namespacehelios_1_1core_1_1spatial.html", "namespacehelios_1_1core_1_1spatial" ],
     [ "types", "namespacehelios_1_1core_1_1types.html", "namespacehelios_1_1core_1_1types" ],

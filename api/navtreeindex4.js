@@ -1,7 +1,5 @@
 var NAVTREEINDEX4 =
 {
-"classhelios_1_1app_1_1Application.html#aedbc6395e86cec1e645d5fd093764fa0":[6,0,0,1,1,17],
-"classhelios_1_1app_1_1Application.html#af98c4f879155bcbccf305b8018e7d884":[3,0,42,0,10],
 "classhelios_1_1app_1_1Application.html#af98c4f879155bcbccf305b8018e7d884":[4,0,0,1,1,10],
 "classhelios_1_1app_1_1Application.html#af98c4f879155bcbccf305b8018e7d884":[6,0,0,1,1,10],
 "classhelios_1_1app_1_1controller_1_1BasicWindowRenderingController.html":[3,0,44,0],
@@ -249,5 +247,7 @@ var NAVTREEINDEX4 =
 "classhelios_1_1core_1_1container_1_1buffer_1_1TypeIndexedDoubleBuffer.html#aeb9f78b9ce82feb682056b3919953a03":[6,0,0,2,0,0,5,13],
 "classhelios_1_1core_1_1container_1_1buffer_1_1TypeIndexedDoubleBuffer_1_1ReadSource.html":[3,0,56,0,1],
 "classhelios_1_1core_1_1container_1_1buffer_1_1TypeIndexedDoubleBuffer_1_1ReadSource.html":[3,0,56,1,1],
-"classhelios_1_1core_1_1container_1_1buffer_1_1TypeIndexedDoubleBuffer_1_1ReadSource.html":[4,0,0,2,1,0,5,1]
+"classhelios_1_1core_1_1container_1_1buffer_1_1TypeIndexedDoubleBuffer_1_1ReadSource.html":[4,0,0,2,1,0,5,1],
+"classhelios_1_1core_1_1container_1_1buffer_1_1TypeIndexedDoubleBuffer_1_1ReadSource.html":[6,0,0,2,0,0,5,1],
+"classhelios_1_1core_1_1container_1_1buffer_1_1TypeIndexedDoubleBuffer_1_1ReadSource.html#ada94a4a83f08d72994e14a6d3b821e88":[3,0,56,0,1,1]
 };

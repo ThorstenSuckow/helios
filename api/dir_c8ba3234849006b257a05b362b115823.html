@@ -130,13 +130,13 @@ Files</h2></td></tr>
 <tr class="memdesc:WorldLifecycleManager_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manager for deferred world-level lifecycle operations. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md297"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md306"></a>
 helios::engine::mechanics::lifecycle</h1>
 <p>Lifecycle management for entity components and world-level lifecycle operations.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md298"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md307"></a>
 Overview</h1>
 <p>This module provides mechanisms for controlling when components become active during an entity's lifecycle, as well as world-level lifecycle operations such as resetting the game world. The primary use cases are delayed component activation after spawn (collision immunity, staggered wave spawns, effect sequencing) and deferred world reset via the command pipeline.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md299"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md308"></a>
 Key Classes</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -160,7 +160,7 @@ Key Classes</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">WorldLifecycleAction</span>  </td><td class="markdownTableBodyNone">Enum defining available lifecycle operations (e.g. <span class="tt">Reset</span>)  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md300"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md309"></a>
 Architecture</h1>
 <div class="fragment"><div class="line">DelayedComponentEnablerInitializer</div>
 <div class="line">        │</div>
@@ -178,7 +178,7 @@ Architecture</h1>
 <div class="line">│  - enable() when delta &lt;= 0    │</div>
 <div class="line">│  - sync() to remove completed  │</div>
 <div class="line">└────────────────────────────────┘</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md301"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md310"></a>
 Usage</h1>
 <div class="fragment"><div class="line"><span class="comment">// During spawn initialization, defer collision component by 0.5 seconds</span></div>
 <div class="line"><span class="keyword">auto</span>* enabler = entity.get&lt;DelayedComponentEnabler&gt;();</div>
@@ -189,13 +189,13 @@ Usage</h1>
 <div class="line">    CollisionComponent,</div>
 <div class="line">    RenderableComponent</div>
 <div class="line">&gt;&gt;(0.1f);  <span class="comment">// 0.1s delay between each entity in batch</span></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md302"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md311"></a>
 Common Patterns</h1>
 <p><b>Collision Immunity</b> </p><div class="fragment"><div class="line"><span class="comment">// Projectiles ignore collisions for 0.2s after spawn</span></div>
 <div class="line">DelayedComponentEnablerInitializer&lt;CollisionComponent&gt;(0.2f)</div>
 </div><!-- fragment --><p><b>Staggered Wave Spawns</b> </p><div class="fragment"><div class="line"><span class="comment">// 10 enemies appear one by one, 0.5s apart, then pattern repeats</span></div>
 <div class="line">DelayedComponentEnablerInitializer&lt;RenderableComponent, AIComponent&gt;(0.5f, 10)</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md303"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md312"></a>
 World Lifecycle</h1>
 <p>The <span class="tt">WorldLifecycleManager</span> enables deferred world-level operations through the command pipeline. Systems and state listeners submit <span class="tt">WorldLifecycleCommand</span> instances instead of calling <span class="tt">GameWorld</span> methods directly.</p>
 <div class="fragment"><div class="line"><span class="comment">// Request a world reset (e.g. from a game-over state listener)</span></div>

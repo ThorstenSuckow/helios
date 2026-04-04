@@ -11,12 +11,13 @@ var searchData=
   ['lifecyclebuilder_2eixx_8',['LifecycleBuilder.ixx',['../LifecycleBuilder_8ixx.html',1,'']]],
   ['lifecycleconfig_2eixx_9',['LifecycleConfig.ixx',['../LifecycleConfig_8ixx.html',1,'']]],
   ['line_2eixx_10',['Line.ixx',['../Line_8ixx.html',1,'']]],
-  ['lives2uitextupdatesystem_2eixx_11',['Lives2UiTextUpdateSystem.ixx',['../Lives2UiTextUpdateSystem_8ixx.html',1,'']]],
-  ['livesbindingcomponent_2eixx_12',['LivesBindingComponent.ixx',['../LivesBindingComponent_8ixx.html',1,'']]],
-  ['livescomponent_2eixx_13',['LivesComponent.ixx',['../LivesComponent_8ixx.html',1,'']]],
-  ['livesrevision_2eixx_14',['LivesRevision.ixx',['../LivesRevision_8ixx.html',1,'']]],
-  ['logger_2eixx_15',['Logger.ixx',['../Logger_8ixx.html',1,'']]],
-  ['logmanager_2eixx_16',['LogManager.ixx',['../LogManager_8ixx.html',1,'']]],
-  ['logsink_2eixx_17',['LogSink.ixx',['../LogSink_8ixx.html',1,'']]],
-  ['logwidget_2eixx_18',['LogWidget.ixx',['../LogWidget_8ixx.html',1,'']]]
+  ['linearlookupstrategy_2eixx_11',['LinearLookupStrategy.ixx',['../LinearLookupStrategy_8ixx.html',1,'']]],
+  ['lives2uitextupdatesystem_2eixx_12',['Lives2UiTextUpdateSystem.ixx',['../Lives2UiTextUpdateSystem_8ixx.html',1,'']]],
+  ['livesbindingcomponent_2eixx_13',['LivesBindingComponent.ixx',['../LivesBindingComponent_8ixx.html',1,'']]],
+  ['livescomponent_2eixx_14',['LivesComponent.ixx',['../LivesComponent_8ixx.html',1,'']]],
+  ['livesrevision_2eixx_15',['LivesRevision.ixx',['../LivesRevision_8ixx.html',1,'']]],
+  ['logger_2eixx_16',['Logger.ixx',['../Logger_8ixx.html',1,'']]],
+  ['logmanager_2eixx_17',['LogManager.ixx',['../LogManager_8ixx.html',1,'']]],
+  ['logsink_2eixx_18',['LogSink.ixx',['../LogSink_8ixx.html',1,'']]],
+  ['logwidget_2eixx_19',['LogWidget.ixx',['../LogWidget_8ixx.html',1,'']]]
 ];

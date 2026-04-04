@@ -17,14 +17,14 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d_1autotoc_md130">
+<sect1 id="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d_1autotoc_md139">
 <title>helios::engine::common::concepts</title><para>Compile-time concepts for engine role classification and capability detection.</para>
 </sect1>
-<sect1 id="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d_1autotoc_md131">
+<sect1 id="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d_1autotoc_md140">
 <title>Overview</title><para>This module provides C++20 concepts that constrain types for specific engine roles (System, Manager, CommandBuffer, CommandHandler). The concepts combine structural requirements (e.g. <computeroutput>flush()</computeroutput>, <computeroutput>update()</computeroutput>) with explicit opt-in via the <ref refid="dir_e2e03a8bd11d187a90561967ca820988" kindref="compound">tag system</ref>, preventing accidental registration of types that happen to have matching method signatures.</para>
 </sect1>
-<sect1 id="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d_1autotoc_md132">
-<title>Concepts</title><sect2 id="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d_1autotoc_md133">
+<sect1 id="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d_1autotoc_md141">
+<title>Concepts</title><sect2 id="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d_1autotoc_md142">
 <title>Capability Detection</title><para><table rows="7" cols="3"><row>
 <entry thead="yes"><para>Concept  </para>
 </entry><entry thead="yes"><para>Requires  </para>
@@ -63,7 +63,7 @@
 </table>
 </para>
 </sect2>
-<sect2 id="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d_1autotoc_md134">
+<sect2 id="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d_1autotoc_md143">
 <title>Role Constraints</title><para><table rows="5" cols="3"><row>
 <entry thead="yes"><para>Concept  </para>
 </entry><entry thead="yes"><para>Requires  </para>
@@ -92,7 +92,7 @@
 </table>
 </para>
 </sect2>
-<sect2 id="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d_1autotoc_md135">
+<sect2 id="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d_1autotoc_md144">
 <title>Structural Constraints</title><para><table rows="2" cols="3"><row>
 <entry thead="yes"><para>Concept  </para>
 </entry><entry thead="yes"><para>Requires  </para>
@@ -107,7 +107,7 @@
 </para>
 </sect2>
 </sect1>
-<sect1 id="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d_1autotoc_md136">
+<sect1 id="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d_1autotoc_md145">
 <title>Tag-Based Opt-In</title><para>Role concepts combine structural checks with a tag requirement:</para>
 <para><programlisting filename=".cpp"><codeline><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">concept<sp/></highlight><highlight class="normal">IsManagerLike<sp/>=<sp/></highlight><highlight class="keyword">requires</highlight><highlight class="normal">(T&amp;<sp/>t,<sp/>UpdateContext&amp;<sp/>ctx)<sp/>{</highlight></codeline>
@@ -116,7 +116,7 @@
 </programlisting></para>
 <para>This means a type must both implement the required interface <bold>and</bold> declare <computeroutput>using EngineRoleTag = ManagerRole;</computeroutput> to be eligible for registration.</para>
 </sect1>
-<sect1 id="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d_1autotoc_md137">
+<sect1 id="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d_1autotoc_md146">
 <title>See Also</title><para><itemizedlist>
 <listitem><para><ref refid="dir_e2e03a8bd11d187a90561967ca820988" kindref="compound">Tags</ref> — Role tag types</para>
 </listitem><listitem><para>System — System architecture</para>

@@ -8,13 +8,13 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_a8f8c4b70d3587fcf7159bd2d30de216_1autotoc_md107">
+<sect1 id="dir_a8f8c4b70d3587fcf7159bd2d30de216_1autotoc_md116">
 <title>helios::engine::builder</title><para>Fluent builder pattern implementation for constructing game entities in the helios engine.</para>
 </sect1>
-<sect1 id="dir_a8f8c4b70d3587fcf7159bd2d30de216_1autotoc_md108">
+<sect1 id="dir_a8f8c4b70d3587fcf7159bd2d30de216_1autotoc_md117">
 <title>Overview</title><para>This module provides a declarative, composable API for creating <computeroutput>GameObject</computeroutput> instances with their associated components. The builder pattern enables clean, readable entity construction while abstracting the complexity of component dependencies and initialization order.</para>
 </sect1>
-<sect1 id="dir_a8f8c4b70d3587fcf7159bd2d30de216_1autotoc_md109">
+<sect1 id="dir_a8f8c4b70d3587fcf7159bd2d30de216_1autotoc_md118">
 <title>Key Classes</title><para><table rows="3" cols="2"><row>
 <entry thead="yes"><para>Class  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
@@ -30,11 +30,11 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_a8f8c4b70d3587fcf7159bd2d30de216_1autotoc_md110">
-<title>Submodules</title><sect2 id="dir_a8f8c4b70d3587fcf7159bd2d30de216_1autotoc_md111">
+<sect1 id="dir_a8f8c4b70d3587fcf7159bd2d30de216_1autotoc_md119">
+<title>Submodules</title><sect2 id="dir_a8f8c4b70d3587fcf7159bd2d30de216_1autotoc_md120">
 <title>gameObject/</title><para>The main factory and prototype classes for GameObject construction.</para>
 </sect2>
-<sect2 id="dir_a8f8c4b70d3587fcf7159bd2d30de216_1autotoc_md112">
+<sect2 id="dir_a8f8c4b70d3587fcf7159bd2d30de216_1autotoc_md121">
 <title>gameObject/builders/</title><para>Domain-specific builders for different aspects of entity configuration:</para>
 <para><table rows="15" cols="2"><row>
 <entry thead="yes"><para>Builder  </para>
@@ -99,7 +99,7 @@
 </table>
 </para>
 </sect2>
-<sect2 id="dir_a8f8c4b70d3587fcf7159bd2d30de216_1autotoc_md113">
+<sect2 id="dir_a8f8c4b70d3587fcf7159bd2d30de216_1autotoc_md122">
 <title>gameObject/builders/configs/</title><para>Fine-grained configuration classes used by builders:</para>
 <para><table rows="20" cols="2"><row>
 <entry thead="yes"><para>Config  </para>
@@ -185,8 +185,8 @@
 </para>
 </sect2>
 </sect1>
-<sect1 id="dir_a8f8c4b70d3587fcf7159bd2d30de216_1autotoc_md114">
-<title>Usage</title><sect2 id="dir_a8f8c4b70d3587fcf7159bd2d30de216_1autotoc_md115">
+<sect1 id="dir_a8f8c4b70d3587fcf7159bd2d30de216_1autotoc_md123">
+<title>Usage</title><sect2 id="dir_a8f8c4b70d3587fcf7159bd2d30de216_1autotoc_md124">
 <title>Creating a New GameObject</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>player<sp/>=<sp/>GameObjectFactory::gameObject()</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.withMotion([](</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>motion)<sp/>{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>motion.move2D()</highlight></codeline>
@@ -211,7 +211,7 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.make(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);<sp/></highlight><highlight class="comment">//<sp/>active<sp/>=<sp/>true</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="dir_a8f8c4b70d3587fcf7159bd2d30de216_1autotoc_md116">
+<sect2 id="dir_a8f8c4b70d3587fcf7159bd2d30de216_1autotoc_md125">
 <title>Cloning an Existing GameObject</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>enemyTemplate<sp/>=<sp/>createEnemyTemplate();</highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>enemy<sp/>=<sp/>GameObjectFactory::from(enemyTemplate.get())</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.withTransform([&amp;](</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>transform)<sp/>{</highlight></codeline>
@@ -222,7 +222,7 @@
 </programlisting></para>
 </sect2>
 </sect1>
-<sect1 id="dir_a8f8c4b70d3587fcf7159bd2d30de216_1autotoc_md117">
+<sect1 id="dir_a8f8c4b70d3587fcf7159bd2d30de216_1autotoc_md126">
 <title>Architecture</title><para><programlisting><codeline><highlight class="normal">┌─────────────────────────────────────────────────────────────────┐</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GameObjectFactory<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/>┌───────────────────────────────────────────────────────────┐<sp/><sp/>│</highlight></codeline>
@@ -246,11 +246,11 @@
 <codeline><highlight class="normal">└─────────────────────────────────────────────────────────────────┘</highlight></codeline>
 </programlisting></para>
 </sect1>
-<sect1 id="dir_a8f8c4b70d3587fcf7159bd2d30de216_1autotoc_md118">
+<sect1 id="dir_a8f8c4b70d3587fcf7159bd2d30de216_1autotoc_md127">
 <title>Design Principles</title><para>The builder module follows these principles:</para>
 <para>1. <bold>Fluent Interface</bold>: Method chaining for readable configuration. 2. <bold>Callback-Based Configuration</bold>: Builders are configured via lambdas, allowing scoped access. 3. <bold>Automatic Dependencies</bold>: Configs automatically add required dependent components. 4. <bold>Separation of Concerns</bold>: Each builder focuses on a single domain (motion, rendering, etc.). 5. <bold>Cloning Support</bold>: <computeroutput>GameObjectFactory::from()</computeroutput> creates new entities based on existing templates.</para>
 </sect1>
-<sect1 id="dir_a8f8c4b70d3587fcf7159bd2d30de216_1autotoc_md119">
+<sect1 id="dir_a8f8c4b70d3587fcf7159bd2d30de216_1autotoc_md128">
 <title>Related Modules</title><para><table rows="4" cols="2"><row>
 <entry thead="yes"><para>Module  </para>
 </entry><entry thead="yes"><para>Purpose  </para>

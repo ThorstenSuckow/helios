@@ -141,15 +141,15 @@ Files</h2></td></tr>
 <tr class="memdesc:IsSystemLike_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept constraining types eligible for system registration. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md130"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md139"></a>
 helios::engine::common::concepts</h1>
 <p>Compile-time concepts for engine role classification and capability detection.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md131"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md140"></a>
 Overview</h1>
 <p>This module provides C++20 concepts that constrain types for specific engine roles (System, Manager, CommandBuffer, CommandHandler). The concepts combine structural requirements (e.g. <span class="tt">flush()</span>, <span class="tt">update()</span>) with explicit opt-in via the <a class="el" href="dir_e2e03a8bd11d187a90561967ca820988.html">tag system</a>, preventing accidental registration of types that happen to have matching method signatures.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md132"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md141"></a>
 Concepts</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md133"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md142"></a>
 Capability Detection</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -167,7 +167,7 @@ Capability Detection</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">HasReset&lt;T&gt;</span>  </td><td class="markdownTableBodyNone"><span class="tt">reset() -&gt; void</span>  </td><td class="markdownTableBodyNone">Detects optional reset capability  </td></tr>
 </table>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md134"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md143"></a>
 Role Constraints</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -181,7 +181,7 @@ Role Constraints</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">IsCommandHandlerLike&lt;T, ...Cmds&gt;</span>  </td><td class="markdownTableBodyNone"><span class="tt">submit(const Cmd&amp;) noexcept -&gt; bool</span> for each <span class="tt">Cmd</span>  </td><td class="markdownTableBodyNone">Gates command handler registration  </td></tr>
 </table>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md135"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md144"></a>
 Structural Constraints</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -189,7 +189,7 @@ Structural Constraints</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">IsShaderLike&lt;T&gt;</span>  </td><td class="markdownTableBodyNone"><span class="tt">use()</span> + <span class="tt">applyUniformValues(<a class="el" href="classUniformValueMap.html" title="Maps uniform semantics to their values for shader parameter binding.">UniformValueMap</a>&amp;)</span>  </td><td class="markdownTableBodyNone">Constrains types usable as shader abstractions  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md136"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md145"></a>
 Tag-Based Opt-In</h1>
 <p>Role concepts combine structural checks with a tag requirement:</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
@@ -197,7 +197,7 @@ Tag-Based Opt-In</h1>
 <div class="line">    { t.flush(ctx) } -&gt; std::same_as&lt;void&gt;;</div>
 <div class="line">} &amp;&amp; HasTag&lt;T, ManagerRole&gt;;</div>
 </div><!-- fragment --><p>This means a type must both implement the required interface <b>and</b> declare <span class="tt">using EngineRoleTag = ManagerRole;</span> to be eligible for registration.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md137"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md146"></a>
 See Also</h1>
 <ul>
 <li><a class="el" href="dir_e2e03a8bd11d187a90561967ca820988.html">Tags</a> — Role tag types</li>

@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="helios_2core_2ecs_2README_8md" kind="file" language="Markdown">
+    <compoundname>helios/core/ecs/README.md</compoundname>
+    <innernamespace refid="namespacehelios_1_1core_1_1ecs">helios::core::ecs</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>helios::core::ecs</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Generic,<sp/>reusable<sp/>ECS<sp/>primitives<sp/>shared<sp/>across<sp/>the<sp/>engine.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>the<sp/>low-level<sp/>building<sp/>blocks<sp/>for<sp/>entity<sp/>management<sp/>and</highlight></codeline>
+<codeline><highlight class="normal">component<sp/>storage<sp/>that<sp/>are<sp/>independent<sp/>of<sp/>any<sp/>specific<sp/>engine<sp/>subsystem.</highlight></codeline>
+<codeline><highlight class="normal">The<sp/>types<sp/>defined<sp/>here<sp/>are<sp/>policy-based<sp/>templates<sp/>that<sp/>can<sp/>be<sp/>specialised</highlight></codeline>
+<codeline><highlight class="normal">for<sp/>different<sp/>domains<sp/>(e.g.<sp/>game<sp/>entities,<sp/>rendering<sp/>resources,<sp/>scene<sp/>handles).</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Higher-level,<sp/>engine-specific<sp/>ECS<sp/>facilities<sp/>(e.g.<sp/>`GameObject`,<sp/>`View`,</highlight></codeline>
+<codeline><highlight class="normal">`EntityManager`)<sp/>are<sp/>located<sp/>in<sp/>`helios.engine.ecs`.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Key<sp/>Types</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`EntityHandle&lt;TStrongId&gt;`<sp/>|<sp/>Versioned,<sp/>strongly-typed<sp/>handle<sp/>for<sp/>safe<sp/>entity<sp/>references<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`EntityRegistry&lt;TStrongId,<sp/>TLookupStrategy,<sp/>TAllowRemoval&gt;`<sp/>|<sp/>Handle<sp/>allocation,<sp/>version<sp/>tracking,<sp/>and<sp/>validation<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SparseSet&lt;T,<sp/>TAllowRemoval&gt;`<sp/>|<sp/>Generic<sp/>O(1)<sp/>sparse<sp/>set<sp/>for<sp/>entity-keyed<sp/>storage<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SparseSetBase`<sp/>|<sp/>Type-erased<sp/>base<sp/>for<sp/>polymorphic<sp/>sparse<sp/>set<sp/>access<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`HashedLookupStrategy`<sp/>|<sp/>O(1)<sp/>hash-based<sp/>strong<sp/>ID<sp/>collision<sp/>detection<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`LinearLookupStrategy`<sp/>|<sp/>Linear-scan<sp/>strong<sp/>ID<sp/>collision<sp/>detection<sp/>for<sp/>small<sp/>registries<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>EntityHandle</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">`EntityHandle`<sp/>combines<sp/>an<sp/>`EntityId`,<sp/>a<sp/>`VersionId`,<sp/>and<sp/>a<sp/>domain-specific</highlight></codeline>
+<codeline><highlight class="normal">`TStrongId`<sp/>into<sp/>a<sp/>single<sp/>lightweight<sp/>value.<sp/>The<sp/>version<sp/>enables<sp/>stale-handle</highlight></codeline>
+<codeline><highlight class="normal">detection<sp/>after<sp/>entity<sp/>removal.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.core.ecs.EntityHandle;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Handle<sp/>is<sp/>a<sp/>value<sp/>type<sp/>—<sp/>safe<sp/>to<sp/>copy<sp/>and<sp/>compare</highlight></codeline>
+<codeline><highlight class="normal">helios::core::ecs::EntityHandle&lt;MyStrongId&gt;<sp/>handle;</highlight></codeline>
+<codeline><highlight class="normal">if<sp/>(handle.isValid())<sp/>{<sp/>/*<sp/>version<sp/>&gt;=<sp/>1<sp/>*/<sp/>}</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>EntityRegistry</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>`EntityRegistry`<sp/>is<sp/>the<sp/>authoritative<sp/>source<sp/>for<sp/>entity<sp/>lifecycle</highlight></codeline>
+<codeline><highlight class="normal">management.<sp/>It<sp/>supports:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>**Handle<sp/>creation**<sp/>with<sp/>optional<sp/>strong<sp/>ID<sp/>auto-assignment</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Validation**<sp/>via<sp/>combined<sp/>version<sp/>+<sp/>strong<sp/>ID<sp/>checks</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Destruction**<sp/>with<sp/>index<sp/>recycling<sp/>through<sp/>a<sp/>free<sp/>list</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Configurable<sp/>removal**<sp/>(`TAllowRemoval<sp/>=<sp/>false`<sp/>disables<sp/>`destroy()`)</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Pluggable<sp/>lookup<sp/>strategies**<sp/>for<sp/>strong<sp/>ID<sp/>collision<sp/>detection</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.core.ecs.EntityRegistry;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">helios::core::ecs::EntityRegistry&lt;MyStrongId&gt;<sp/>registry(1024);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">auto<sp/>handle<sp/>=<sp/>registry.create();</highlight></codeline>
+<codeline><highlight class="normal">assert(registry.isValid(handle));</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">registry.destroy(handle);</highlight></codeline>
+<codeline><highlight class="normal">assert(!registry.isValid(handle));</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>SparseSet</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">A<sp/>generic<sp/>sparse<sp/>set<sp/>mapping<sp/>`EntityId`<sp/>to<sp/>densely<sp/>packed<sp/>data<sp/>of<sp/>type<sp/>`T`.</highlight></codeline>
+<codeline><highlight class="normal">Provides<sp/>O(1)<sp/>amortised<sp/>insertion,<sp/>lookup,<sp/>and<sp/>swap-and-pop<sp/>removal<sp/>with</highlight></codeline>
+<codeline><highlight class="normal">cache-friendly<sp/>iteration<sp/>over<sp/>the<sp/>dense<sp/>storage.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">Sparse:<sp/><sp/>[<sp/><sp/>2<sp/><sp/>|<sp/><sp/>×<sp/><sp/>|<sp/><sp/>0<sp/><sp/>|<sp/><sp/>×<sp/><sp/>|<sp/><sp/>1<sp/><sp/>]<sp/><sp/><sp/>(dense<sp/>index<sp/>per<sp/>EntityId)</highlight></codeline>
+<codeline><highlight class="normal">Dense:<sp/><sp/><sp/>[<sp/>T[0](id=2)<sp/>|<sp/>T[1](id=4)<sp/>|<sp/>T[2](id=0)<sp/>]</highlight></codeline>
+<codeline><highlight class="normal">×<sp/>=<sp/>Tombstone</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>`TAllowRemoval`<sp/>template<sp/>parameter<sp/>guards<sp/>against<sp/>accidental<sp/>removal</highlight></codeline>
+<codeline><highlight class="normal">in<sp/>pools<sp/>that<sp/>are<sp/>intended<sp/>to<sp/>be<sp/>append-only.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Lookup<sp/>Strategies</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">`EntityRegistry`<sp/>delegates<sp/>strong<sp/>ID<sp/>collision<sp/>detection<sp/>to<sp/>a<sp/>strategy<sp/>object:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Strategy<sp/>|<sp/>Lookup<sp/>|<sp/>Insertion<sp/>|<sp/>Removal<sp/>|<sp/>Use<sp/>Case<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|----------|--------|-----------|---------|----------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`HashedLookupStrategy`<sp/>|<sp/>O(1)<sp/>avg<sp/>|<sp/>O(1)<sp/>avg<sp/>|<sp/>O(1)<sp/>avg<sp/>|<sp/>Default<sp/>—<sp/>large<sp/>registries<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`LinearLookupStrategy`<sp/>|<sp/>O(n)<sp/>|<sp/>O(n)<sp/>|<sp/>O(1)<sp/>|<sp/>Small<sp/>registries<sp/>where<sp/>hash<sp/>overhead<sp/>is<sp/>undesirable<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>See<sp/>Also</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>[Engine<sp/>ECS](../../engine/ecs/README.md)<sp/>—<sp/>`GameObject`,<sp/>`EntityManager`,<sp/>`View`,<sp/>`ComponentReflector`</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>[Core<sp/>Types](../types.ixx)<sp/>—<sp/>`EntityId`,<sp/>`VersionId`,<sp/>`EntityTombstone`,<sp/>`StrongId_t`</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>[Container](../container/README.md)<sp/>—<sp/>`DenseRuntimeHandleRegistry`,<sp/>`ConceptModelRegistry`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+<codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::core::ecs</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Generic,<sp/>reusable<sp/>ECS<sp/>primitives.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Provides<sp/>policy-based<sp/>templates<sp/>for<sp/>entity<sp/>handle<sp/>management,<sp/>version<sp/>tracking,<sp/>and<sp/>sparse-set<sp/>storage<sp/>that<sp/>are<sp/>independent<sp/>of<sp/>any<sp/>specific<sp/>engine<sp/>subsystem.</highlight></codeline>
+<codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
+<codeline></codeline>
+    </programlisting>
+    <location file="/tmp/h/include/helios/core/ecs/README.md"/>
+  </compounddef>
+</doxygen>

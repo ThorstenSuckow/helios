@@ -37,7 +37,7 @@ var searchData=
   ['steelblue_34',['SteelBlue',['../structhelios_1_1util_1_1Colors.html#a9a2788f5b611da799c3a40d79b8492ca',1,'helios::util::Colors']]],
   ['steeringinput_5f_35',['steeringInput_',['../classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent.html#a623e6ee4c6073dad69377c46b68cf6e6',1,'helios::engine::modules::physics::motion::components::SteeringComponent']]],
   ['sticknoisethreshold_5f_36',['stickNoiseThreshold_',['../classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy.html#a3762bc530d61b887b87757ccc156db99',1,'helios::input::gamepad::DeadzoneStrategy']]],
-  ['strongid_37',['strongId',['../structhelios_1_1core_1_1data_1_1RuntimeHandle.html#a8874692030718a6b2c5c4b275a263dfb',1,'helios::core::data::RuntimeHandle']]],
+  ['strongid_37',['strongId',['../structhelios_1_1core_1_1data_1_1RuntimeHandle.html#a8874692030718a6b2c5c4b275a263dfb',1,'helios::core::data::RuntimeHandle::strongId'],['../structhelios_1_1core_1_1ecs_1_1EntityHandle.html#abdadf73f1f659a0b3be6b4171a36b911',1,'helios::core::ecs::EntityHandle::strongId']]],
   ['submitfn_38',['submitFn',['../structhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandlerEntry.html#a16001a9e5369661d03546c6d8123fbb7',1,'helios::engine::runtime::messaging::command::CommandHandlerEntry::submitFn'],['../structhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandlerRef.html#a6351518ea3b3e2ad31323094c89ad482',1,'helios::engine::runtime::messaging::command::CommandHandlerRef::submitFn']]],
   ['systemregistry_5f_39',['systemRegistry_',['../classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html#a250ed9ad716af2b60d3af697cc4bd415',1,'helios::engine::runtime::gameloop::Pass']]]
 ];

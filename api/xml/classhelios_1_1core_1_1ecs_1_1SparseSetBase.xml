@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1core_1_1ecs_1_1SparseSetBase" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>helios::core::ecs::SparseSetBase</compoundname>
+    <derivedcompoundref refid="classhelios_1_1core_1_1ecs_1_1SparseSet" prot="public" virt="non-virtual">helios::core::ecs::SparseSet&lt; T, TAllowRemoval &gt;</derivedcompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1core_1_1ecs_1_1SparseSetBase_1a79962ff2e033bed8a67f14560c7f0a89" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual helios::core::ecs::SparseSetBase::~SparseSetBase</definition>
+        <argsstring>()=default</argsstring>
+        <name>~SparseSetBase</name>
+        <qualifiedname>helios::core::ecs::SparseSetBase::~SparseSetBase</qualifiedname>
+        <briefdescription>
+<para>Virtual destructor for proper cleanup of derived classes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/ecs/SparseSet.ixx" line="39" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1core_1_1ecs_1_1SparseSetBase_1a5fb6b9e4d9e7dd50687d48e57343b705" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool helios::core::ecs::SparseSetBase::remove</definition>
+        <argsstring>(EntityId id)=0</argsstring>
+        <name>remove</name>
+        <qualifiedname>helios::core::ecs::SparseSetBase::remove</qualifiedname>
+        <reimplementedby refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a2056521a7cade007ad34204ad5087c84">remove</reimplementedby>
+        <param>
+          <type>EntityId</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+<para>Removes the element at the given index. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The EntityId of the element to remove.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the element was removed, false if not found or removal was cancelled. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/ecs/SparseSet.ixx" line="49" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1core_1_1ecs_1_1SparseSetBase_1a3475e8fd6bef05509592cd9633971fdc" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool helios::core::ecs::SparseSetBase::contains</definition>
+        <argsstring>(EntityId id) const =0</argsstring>
+        <name>contains</name>
+        <qualifiedname>helios::core::ecs::SparseSetBase::contains</qualifiedname>
+        <reimplementedby refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a23ea289a853cae0401fe0bb31e4b5798">contains</reimplementedby>
+        <param>
+          <type>EntityId</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+<para>Checks whether an element exists for the specified EntityId. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The EntityId to test.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the set contains the EntityId. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/ecs/SparseSet.ixx" line="58" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1core_1_1ecs_1_1SparseSetBase_1aa773d9a947168d4f1d4de01ef65fb35b" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void *</type>
+        <definition>virtual void * helios::core::ecs::SparseSetBase::raw</definition>
+        <argsstring>(EntityId id)=0</argsstring>
+        <name>raw</name>
+        <qualifiedname>helios::core::ecs::SparseSetBase::raw</qualifiedname>
+        <reimplementedby refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1ac06a1dc42d0744f801b0c532e660e115">raw</reimplementedby>
+        <param>
+          <type>EntityId</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+<para>Returns a raw void pointer to the element at the given index. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The EntityId to look up.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Raw pointer to the element, or `nullptr` if not found. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/ecs/SparseSet.ixx" line="67" column="23"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Abstract base class for type-erased sparse set access. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>`SparseSetBase` provides a non-templated interface for polymorphic operations on sparse sets. This enables containers to store heterogeneous pools and perform common operations (e.g., removal) without knowing the concrete element type.</para>
+<para><simplesect kind="see"><para><ref refid="classhelios_1_1core_1_1ecs_1_1SparseSet" kindref="compound">SparseSet</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::core::ecs::SparseSet&lt; T, TAllowRemoval &gt;</label>
+        <link refid="classhelios_1_1core_1_1ecs_1_1SparseSet"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>helios::core::ecs::SparseSetBase</label>
+        <link refid="classhelios_1_1core_1_1ecs_1_1SparseSetBase"/>
+      </node>
+    </inheritancegraph>
+    <location file="/tmp/h/include/helios/core/ecs/SparseSet.ixx" line="32" column="5" bodyfile="/tmp/h/include/helios/core/ecs/SparseSet.ixx" bodystart="32" bodyend="68"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1core_1_1ecs_1_1SparseSetBase_1a3475e8fd6bef05509592cd9633971fdc" prot="public" virt="pure-virtual"><scope>helios::core::ecs::SparseSetBase</scope><name>contains</name></member>
+      <member refid="classhelios_1_1core_1_1ecs_1_1SparseSetBase_1aa773d9a947168d4f1d4de01ef65fb35b" prot="public" virt="pure-virtual"><scope>helios::core::ecs::SparseSetBase</scope><name>raw</name></member>
+      <member refid="classhelios_1_1core_1_1ecs_1_1SparseSetBase_1a5fb6b9e4d9e7dd50687d48e57343b705" prot="public" virt="pure-virtual"><scope>helios::core::ecs::SparseSetBase</scope><name>remove</name></member>
+      <member refid="classhelios_1_1core_1_1ecs_1_1SparseSetBase_1a79962ff2e033bed8a67f14560c7f0a89" prot="public" virt="virtual"><scope>helios::core::ecs::SparseSetBase</scope><name>~SparseSetBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

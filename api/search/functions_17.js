@@ -52,7 +52,7 @@ var searchData=
   ['_7eshader_49',['~Shader',['../classhelios_1_1rendering_1_1shader_1_1Shader.html#a76056c0d2e01aa816412e1cade0716b5',1,'helios::rendering::shader::Shader']]],
   ['_7eshape_50',['~Shape',['../structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape.html#aad16a718a0af0d74e3d6bfa97377b9bb',1,'helios::rendering::asset::shape::Shape']]],
   ['_7esnapshot_51',['~Snapshot',['../classhelios_1_1scene_1_1Snapshot.html#aaad8367749cf2a8c03a9cc65b812f389',1,'helios::scene::Snapshot']]],
-  ['_7esparsesetbase_52',['~SparseSetBase',['../classhelios_1_1engine_1_1ecs_1_1SparseSetBase.html#abd5c881fd0387b87ff06b428ccdb4db3',1,'helios::engine::ecs::SparseSetBase']]],
+  ['_7esparsesetbase_52',['~SparseSetBase',['../classhelios_1_1core_1_1ecs_1_1SparseSetBase.html#a79962ff2e033bed8a67f14560c7f0a89',1,'helios::core::ecs::SparseSetBase::~SparseSetBase()'],['../classhelios_1_1engine_1_1ecs_1_1SparseSetBase.html#abd5c881fd0387b87ff06b428ccdb4db3',1,'helios::engine::ecs::SparseSetBase::~SparseSetBase()']]],
   ['_7espawnamountprovider_53',['~SpawnAmountProvider',['../classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountProvider.html#a7ae43eddd23541bcfe12b67b8f493284',1,'helios::engine::runtime::spawn::policy::amount::SpawnAmountProvider']]],
   ['_7espawncondition_54',['~SpawnCondition',['../classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition.html#ae32fb7e2816360aa7d59d3b2a21c656a',1,'helios::engine::runtime::spawn::policy::SpawnCondition']]],
   ['_7espawninitializer_55',['~SpawnInitializer',['../classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer.html#ad5514051aaafea0f164769d695a96991',1,'helios::engine::runtime::spawn::behavior::SpawnInitializer']]],

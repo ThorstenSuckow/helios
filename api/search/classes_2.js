@@ -39,7 +39,7 @@ var searchData=
   ['conceptmodelregistry_3c_20manager_2c_20managertypeid_20_3e_36',['ConceptModelRegistry&lt; Manager, ManagerTypeId &gt;',['../classhelios_1_1core_1_1container_1_1ConceptModelRegistry.html',1,'helios::core::container']]],
   ['conceptmodelregistry_3c_20system_2c_20systemtypeid_20_3e_37',['ConceptModelRegistry&lt; System, SystemTypeId &gt;',['../classhelios_1_1core_1_1container_1_1ConceptModelRegistry.html',1,'helios::core::container']]],
   ['consolesink_38',['ConsoleSink',['../classhelios_1_1util_1_1log_1_1ConsoleSink.html',1,'helios::util::log']]],
-  ['constiterator_39',['ConstIterator',['../structhelios_1_1engine_1_1ecs_1_1SparseSet_1_1ConstIterator.html',1,'helios::engine::ecs::SparseSet']]],
+  ['constiterator_39',['ConstIterator',['../structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator.html',1,'helios::core::ecs::SparseSet&lt; T, TAllowRemoval &gt;::ConstIterator'],['../structhelios_1_1engine_1_1ecs_1_1SparseSet_1_1ConstIterator.html',1,'helios::engine::ecs::SparseSet&lt; T &gt;::ConstIterator']]],
   ['controller_40',['Controller',['../classhelios_1_1app_1_1controller_1_1Controller.html',1,'helios::app::controller']]],
   ['cube_41',['Cube',['../structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Cube.html',1,'helios::rendering::asset::shape::basic']]],
   ['cullnonestrategy_42',['CullNoneStrategy',['../classhelios_1_1scene_1_1CullNoneStrategy.html',1,'helios::scene']]],

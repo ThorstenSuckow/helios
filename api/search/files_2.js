@@ -41,7 +41,10 @@ var searchData=
   ['conceptmodelregistry_2eixx_38',['ConceptModelRegistry.ixx',['../ConceptModelRegistry_8ixx.html',1,'']]],
   ['consolesink_2eixx_39',['ConsoleSink.ixx',['../ConsoleSink_8ixx.html',1,'']]],
   ['controller_2eixx_40',['Controller.ixx',['../Controller_8ixx.html',1,'']]],
-  ['cube_2eixx_41',['Cube.ixx',['../Cube_8ixx.html',1,'']]],
-  ['cullnonestrategy_2eixx_42',['CullNoneStrategy.ixx',['../CullNoneStrategy_8ixx.html',1,'']]],
-  ['cyclicspawnscheduler_2eixx_43',['CyclicSpawnScheduler.ixx',['../CyclicSpawnScheduler_8ixx.html',1,'']]]
+  ['core_2fecs_2fentityhandle_2eixx_41',['EntityHandle.ixx',['../core_2ecs_2EntityHandle_8ixx.html',1,'']]],
+  ['core_2fecs_2fentityregistry_2eixx_42',['EntityRegistry.ixx',['../core_2ecs_2EntityRegistry_8ixx.html',1,'']]],
+  ['core_2fecs_2fsparseset_2eixx_43',['SparseSet.ixx',['../core_2ecs_2SparseSet_8ixx.html',1,'']]],
+  ['cube_2eixx_44',['Cube.ixx',['../Cube_8ixx.html',1,'']]],
+  ['cullnonestrategy_2eixx_45',['CullNoneStrategy.ixx',['../CullNoneStrategy_8ixx.html',1,'']]],
+  ['cyclicspawnscheduler_2eixx_46',['CyclicSpawnScheduler.ixx',['../CyclicSpawnScheduler_8ixx.html',1,'']]]
 ];

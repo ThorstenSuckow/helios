@@ -12,5 +12,5 @@ var searchData=
   ['inputsnapshot_9',['InputSnapshot',['../classhelios_1_1input_1_1InputSnapshot.html',1,'helios::input']]],
   ['interactioncontext_10',['InteractionContext',['../structhelios_1_1engine_1_1common_1_1types_1_1InteractionContext.html',1,'helios::engine::common::types']]],
   ['invalidstatetransitionid_11',['InvalidStateTransitionId',['../structhelios_1_1engine_1_1state_1_1types_1_1InvalidStateTransitionId.html',1,'helios::engine::state::types']]],
-  ['iterator_12',['Iterator',['../structhelios_1_1engine_1_1ecs_1_1SparseSet_1_1Iterator.html',1,'helios::engine::ecs::SparseSet&lt; T &gt;::Iterator'],['../structhelios_1_1engine_1_1ecs_1_1View_1_1Iterator.html',1,'helios::engine::ecs::View&lt; Components &gt;::Iterator']]]
+  ['iterator_12',['Iterator',['../structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator.html',1,'helios::core::ecs::SparseSet&lt; T, TAllowRemoval &gt;::Iterator'],['../structhelios_1_1engine_1_1ecs_1_1SparseSet_1_1Iterator.html',1,'helios::engine::ecs::SparseSet&lt; T &gt;::Iterator'],['../structhelios_1_1engine_1_1ecs_1_1View_1_1Iterator.html',1,'helios::engine::ecs::View&lt; Components &gt;::Iterator']]]
 ];

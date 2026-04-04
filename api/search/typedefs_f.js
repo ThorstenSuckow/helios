@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['value_5ftype_0',['value_type',['../structhelios_1_1engine_1_1ecs_1_1SparseSet_1_1Iterator.html#a3522c3f43725ecf01cfbec3ca320afb6',1,'helios::engine::ecs::SparseSet::Iterator::value_type'],['../structhelios_1_1engine_1_1ecs_1_1SparseSet_1_1ConstIterator.html#a5ff61de3728401c9a0db00adef0cfc54',1,'helios::engine::ecs::SparseSet::ConstIterator::value_type']]],
+  ['value_5ftype_0',['value_type',['../structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator.html#a342a6be8b57a9446d3b6dad55681771b',1,'helios::core::ecs::SparseSet::Iterator::value_type'],['../structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator.html#aa089e1c38df847e1b33f5c3393c4bfec',1,'helios::core::ecs::SparseSet::ConstIterator::value_type'],['../structhelios_1_1engine_1_1ecs_1_1SparseSet_1_1Iterator.html#a3522c3f43725ecf01cfbec3ca320afb6',1,'helios::engine::ecs::SparseSet::Iterator::value_type'],['../structhelios_1_1engine_1_1ecs_1_1SparseSet_1_1ConstIterator.html#a5ff61de3728401c9a0db00adef0cfc54',1,'helios::engine::ecs::SparseSet::ConstIterator::value_type']]],
   ['vec2d_1',['vec2d',['../namespacehelios_1_1math.html#acb8f1b0c5acc937254f38e27787db452',1,'helios::math']]],
   ['vec2f_2',['vec2f',['../namespacehelios_1_1math.html#aeab5c7e555a142f8f763a3317460d5c0',1,'helios::math']]],
   ['vec2i_3',['vec2i',['../namespacehelios_1_1math.html#aff32bafe25abeda0bb858b51ae46bff8',1,'helios::math']]],

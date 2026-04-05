@@ -13,8 +13,6 @@ export module helios.core.ecs.SparseSet;
 import helios.core.ecs.EntityHandle;
 import helios.core.types;
 
-import helios.engine.ecs.Traits;
-
 using namespace helios::core::ecs;
 using namespace helios::core::types;
 export namespace helios::core::ecs {
@@ -380,7 +378,7 @@ export namespace helios::core::ecs {
             [[nodiscard]] bool operator==(const Iterator& other) const { return dataIt_ == other.dataIt_;}
             [[nodiscard]] bool operator!=(const Iterator& other) const { return dataIt_ != other.dataIt_;}
 
-            Iterator& operator++(int) {
+            Iterator operator++(int) {
                 Iterator tmp = *this;
                 ++(*this);
                 return tmp;
@@ -426,7 +424,7 @@ export namespace helios::core::ecs {
             [[nodiscard]] bool operator==(const ConstIterator& other) const { return dataIt_ == other.dataIt_;}
             [[nodiscard]] bool operator!=(const ConstIterator& other) const { return dataIt_ != other.dataIt_;}
 
-            ConstIterator& operator++(int) {
+            ConstIterator operator++(int) {
                 ConstIterator tmp = *this;
                 ++(*this);
                 return tmp;

@@ -5,6 +5,8 @@
 module;
 
 #include <vector>
+#include <algorithm>
+#include <ranges>
 
 export module helios.core.ecs.LinearLookupStrategy;
 

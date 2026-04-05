@@ -7,6 +7,7 @@ export module helios.core;
 
 export import helios.core.container.buffer;
 export import helios.core.data;
+export import helios.core.ecs;
 export import helios.core.spatial;
 export import helios.core.types;
 export import helios.core.algorithms;

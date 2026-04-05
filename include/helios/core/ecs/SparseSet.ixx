@@ -378,7 +378,7 @@ export namespace helios::core::ecs {
             [[nodiscard]] bool operator==(const Iterator& other) const { return dataIt_ == other.dataIt_;}
             [[nodiscard]] bool operator!=(const Iterator& other) const { return dataIt_ != other.dataIt_;}
 
-            Iterator& operator++(int) {
+            Iterator operator++(int) {
                 Iterator tmp = *this;
                 ++(*this);
                 return tmp;
@@ -424,7 +424,7 @@ export namespace helios::core::ecs {
             [[nodiscard]] bool operator==(const ConstIterator& other) const { return dataIt_ == other.dataIt_;}
             [[nodiscard]] bool operator!=(const ConstIterator& other) const { return dataIt_ != other.dataIt_;}
 
-            ConstIterator& operator++(int) {
+            ConstIterator operator++(int) {
                 ConstIterator tmp = *this;
                 ++(*this);
                 return tmp;

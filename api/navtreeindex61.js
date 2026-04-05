@@ -1,5 +1,13 @@
 var NAVTREEINDEX61 =
 {
+"structhelios_1_1rendering_1_1ViewportSnapshot.html#a54c1f5786011b271d7fbf851d19baec5":[6,0,0,7,15,1],
+"structhelios_1_1rendering_1_1ViewportSnapshot.html#ad191bcea267fcf31fe5468426deb6b08":[3,0,636,0,2],
+"structhelios_1_1rendering_1_1ViewportSnapshot.html#ad191bcea267fcf31fe5468426deb6b08":[4,0,0,7,16,2],
+"structhelios_1_1rendering_1_1ViewportSnapshot.html#ad191bcea267fcf31fe5468426deb6b08":[6,0,0,7,15,2],
+"structhelios_1_1rendering_1_1ViewportSnapshot.html#afc15828925933fff39e28cf6fdce171f":[3,0,636,0,0],
+"structhelios_1_1rendering_1_1ViewportSnapshot.html#afc15828925933fff39e28cf6fdce171f":[4,0,0,7,16,0],
+"structhelios_1_1rendering_1_1ViewportSnapshot.html#afc15828925933fff39e28cf6fdce171f":[6,0,0,7,15,0],
+"structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape.html":[3,0,599,0],
 "structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape.html":[4,0,0,7,0,0,1],
 "structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape.html":[6,0,0,7,0,0,1],
 "structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape.html#a45b8025937ff78d5ca63ef3ea4b56d54":[3,0,599,0,1],
@@ -241,13 +249,5 @@ var NAVTREEINDEX61 =
 "structhelios_1_1util_1_1Colors.html#a23d8909707bb40c0666bd6450a40f391":[6,0,0,9,3,66],
 "structhelios_1_1util_1_1Colors.html#a2503417c0dd450cd361ce7886c1c775f":[3,0,647,0,1],
 "structhelios_1_1util_1_1Colors.html#a2503417c0dd450cd361ce7886c1c775f":[4,0,0,9,3,1],
-"structhelios_1_1util_1_1Colors.html#a2503417c0dd450cd361ce7886c1c775f":[6,0,0,9,3,1],
-"structhelios_1_1util_1_1Colors.html#a2684622cfcd0c51dbc066e7b292ebdd5":[3,0,647,0,76],
-"structhelios_1_1util_1_1Colors.html#a2684622cfcd0c51dbc066e7b292ebdd5":[4,0,0,9,3,76],
-"structhelios_1_1util_1_1Colors.html#a2684622cfcd0c51dbc066e7b292ebdd5":[6,0,0,9,3,76],
-"structhelios_1_1util_1_1Colors.html#a2dbe35a8cf274a70d8c53938787aed29":[3,0,647,0,73],
-"structhelios_1_1util_1_1Colors.html#a2dbe35a8cf274a70d8c53938787aed29":[4,0,0,9,3,73],
-"structhelios_1_1util_1_1Colors.html#a2dbe35a8cf274a70d8c53938787aed29":[6,0,0,9,3,73],
-"structhelios_1_1util_1_1Colors.html#a2e3783e5cf17f020dba3e303ad47d001":[3,0,647,0,57],
-"structhelios_1_1util_1_1Colors.html#a2e3783e5cf17f020dba3e303ad47d001":[4,0,0,9,3,57]
+"structhelios_1_1util_1_1Colors.html#a2503417c0dd450cd361ce7886c1c775f":[6,0,0,9,3,1]
 };

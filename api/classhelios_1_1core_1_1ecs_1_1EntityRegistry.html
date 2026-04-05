@@ -118,8 +118,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a4f00fbc57e98bc850738e82a665152e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a registry with pre-allocated capacity.  <br /></td></tr>
 <tr class="memitem:a727ce430a51135bfd256125a84ea777b" id="r_a727ce430a51135bfd256125a84ea777b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structhelios_1_1core_1_1ecs_1_1EntityHandle.html">EntityHandle</a>&lt; TStrongId &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a727ce430a51135bfd256125a84ea777b">create</a> (TStrongId strongId=TStrongId{})</td></tr>
 <tr class="memdesc:a727ce430a51135bfd256125a84ea777b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new entity and returns its handle.  <br /></td></tr>
-<tr class="memitem:a7ba0dff8e9e9220b424c56c424d8f13b" id="r_a7ba0dff8e9e9220b424c56c424d8f13b"><td class="memItemLeft" align="right" valign="top">VersionId&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7ba0dff8e9e9220b424c56c424d8f13b">version</a> (const EntityId entityId) const</td></tr>
-<tr class="memdesc:a7ba0dff8e9e9220b424c56c424d8f13b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Looks up the version for an EntityId.  <br /></td></tr>
+<tr class="memitem:a7ba0dff8e9e9220b424c56c424d8f13b" id="r_a7ba0dff8e9e9220b424c56c424d8f13b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1core_1_1types.html#a0b0725c2e899452c00381f709d463746">VersionId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7ba0dff8e9e9220b424c56c424d8f13b">version</a> (const <a class="el" href="namespacehelios_1_1core_1_1types.html#ae66a87b0172199142b048c268bf0b18a">EntityId</a> entityId) const</td></tr>
+<tr class="memdesc:a7ba0dff8e9e9220b424c56c424d8f13b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Looks up the version for an <a class="el" href="namespacehelios_1_1core_1_1types.html#ae66a87b0172199142b048c268bf0b18a" title="Unique identifier for an entity within an EntityPool.">EntityId</a>.  <br /></td></tr>
 <tr class="memitem:a5e4c983574f6fea33037c909ad9c4864" id="r_a5e4c983574f6fea33037c909ad9c4864"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5e4c983574f6fea33037c909ad9c4864">isValid</a> (const <a class="el" href="structhelios_1_1core_1_1ecs_1_1EntityHandle.html">EntityHandle</a>&lt; TStrongId &gt; handle) const noexcept</td></tr>
 <tr class="memdesc:a5e4c983574f6fea33037c909ad9c4864"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether the given handle refers to a currently alive entity.  <br /></td></tr>
 <tr class="memitem:a4fbea42a7a4f329b3582a6ef688265eb" id="r_a4fbea42a7a4f329b3582a6ef688265eb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4fbea42a7a4f329b3582a6ef688265eb">destroy</a> (const <a class="el" href="structhelios_1_1core_1_1ecs_1_1EntityHandle.html">EntityHandle</a>&lt; TStrongId &gt; handle)</td></tr>
@@ -370,9 +370,9 @@ template&lt;typename TStrongId, typename TLookupStrategy = HashedLookupStrategy,
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">VersionId <a class="el" href="classhelios_1_1core_1_1ecs_1_1EntityRegistry.html">helios::core::ecs::EntityRegistry</a>&lt; TStrongId, TLookupStrategy, TAllowRemoval &gt;::version </td>
+          <td class="memname"><a class="el" href="namespacehelios_1_1core_1_1types.html#a0b0725c2e899452c00381f709d463746">VersionId</a> <a class="el" href="classhelios_1_1core_1_1ecs_1_1EntityRegistry.html">helios::core::ecs::EntityRegistry</a>&lt; TStrongId, TLookupStrategy, TAllowRemoval &gt;::version </td>
           <td>(</td>
-          <td class="paramtype">const EntityId</td>          <td class="paramname"><span class="paramname"><em>entityId</em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="namespacehelios_1_1core_1_1types.html#ae66a87b0172199142b048c268bf0b18a">EntityId</a></td>          <td class="paramname"><span class="paramname"><em>entityId</em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -383,14 +383,14 @@ template&lt;typename TStrongId, typename TLookupStrategy = HashedLookupStrategy,
 </table>
 </div><div class="memdoc">
 
-<p>Looks up the version for an EntityId. </p>
+<p>Looks up the version for an <a class="el" href="namespacehelios_1_1core_1_1types.html#ae66a87b0172199142b048c268bf0b18a" title="Unique identifier for an entity within an EntityPool.">EntityId</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">entityId</td><td>The entity to retrieve the version for.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The version for the EntityId, or `InvalidVersion` if not found. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The version for the <a class="el" href="namespacehelios_1_1core_1_1types.html#ae66a87b0172199142b048c268bf0b18a" title="Unique identifier for an entity within an EntityPool.">EntityId</a>, or `InvalidVersion` if not found. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="core_2ecs_2EntityRegistry_8ixx_source.html#l00176">176</a> of file <a class="el" href="core_2ecs_2EntityRegistry_8ixx_source.html">core/ecs/EntityRegistry.ixx</a>.</p>
 

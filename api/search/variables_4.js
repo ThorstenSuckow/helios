@@ -8,7 +8,7 @@ var searchData=
   ['end_5f_5',['end_',['../structhelios_1_1engine_1_1ecs_1_1View_1_1Iterator.html#a3c8cdbaa4869324f531b291f61305c22',1,'helios::engine::ecs::View::Iterator']]],
   ['entityid_6',['entityId',['../structhelios_1_1core_1_1ecs_1_1EntityHandle.html#a1dfe2a8be0a0c13ef326b9f068bbc73c',1,'helios::core::ecs::EntityHandle::entityId'],['../structhelios_1_1engine_1_1ecs_1_1EntityHandle.html#abe242c470a3a2793119b92628f7d2358',1,'helios::engine::ecs::EntityHandle::entityId']]],
   ['entityregistry_5f_7',['entityRegistry_',['../classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#ab82b5eb9c54b2b750b635f2d8e6a168e',1,'helios::engine::runtime::world::GameWorld']]],
-  ['entitytombstone_8',['EntityTombstone',['../namespacehelios_1_1engine_1_1ecs_1_1types.html#a7961b304ea975b996272baf4420cdfa3',1,'helios::engine::ecs::types']]],
+  ['entitytombstone_8',['EntityTombstone',['../namespacehelios_1_1core_1_1types.html#a57aba37985d4b91aefbc85b3c7b01ebf',1,'helios::core::types::EntityTombstone'],['../namespacehelios_1_1engine_1_1ecs_1_1types.html#a7961b304ea975b996272baf4420cdfa3',1,'helios::engine::ecs::types::EntityTombstone']]],
   ['epsilon_5flength_9',['EPSILON_LENGTH',['../namespacehelios_1_1math.html#af25d93f23f91acae02abfd7706b2e36d',1,'helios::math']]],
   ['eventmanager_5f_10',['eventManager_',['../classhelios_1_1app_1_1Application.html#a6cbbd642405f8815ec1b5a58b7d27137',1,'helios::app::Application']]],
   ['eventqueue_5f_11',['eventQueue_',['../classhelios_1_1event_1_1EventManager.html#a06528b307d0e99a55a4aea8b608f6f8b',1,'helios::event::EventManager']]]

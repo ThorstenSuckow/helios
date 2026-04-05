@@ -1,5 +1,9 @@
 var NAVTREEINDEX44 =
 {
+"module__helios_8engine_8mechanics_8scoring_8systems_8ScoreObserverSystem.html#aec026025fe2cdd7a0db83441b458a74e":[3,0,278,3],
+"module__helios_8engine_8mechanics_8scoring_8types.html":[3,0,279],
+"module__helios_8engine_8mechanics_8scoring_8types_8KillReward.html":[3,0,280],
+"module__helios_8engine_8mechanics_8scoring_8types_8KillReward.html#ab8f77ae96d8cb04a64bae4457041670f":[3,0,280,2],
 "module__helios_8engine_8mechanics_8scoring_8types_8KillReward.html#af2fd8c776b80f059b22084ef0a725992":[3,0,280,1],
 "module__helios_8engine_8mechanics_8scoring_8types_8Score.html":[3,0,281],
 "module__helios_8engine_8mechanics_8scoring_8types_8Score.html#a237c2d4de96b81224d760c6d28404037":[3,0,281,5],
@@ -245,9 +249,5 @@ var NAVTREEINDEX44 =
 "module__helios_8engine_8modules_8physics_8collision_8systems_8BoundsUpdateSystem.html#a8a818b4af58ebf5c088e7c2fbfbf4e18":[3,0,335,1],
 "module__helios_8engine_8modules_8physics_8collision_8systems_8BoundsUpdateSystem.html#ad1deeff61e39d52a88cb4884c9c86381":[3,0,335,2],
 "module__helios_8engine_8modules_8physics_8collision_8systems_8CollisionStateClearSystem.html":[3,0,336],
-"module__helios_8engine_8modules_8physics_8collision_8systems_8CollisionStateClearSystem.html#aaf7d8889b1e59038ad79b404bdcef714":[3,0,336,2],
-"module__helios_8engine_8modules_8physics_8collision_8systems_8CollisionStateClearSystem.html#abe5045c12d13ea7009731d589f5c79e8":[3,0,336,1],
-"module__helios_8engine_8modules_8physics_8collision_8systems_8CollisionStateResponseSystem.html":[3,0,337],
-"module__helios_8engine_8modules_8physics_8collision_8systems_8CollisionStateResponseSystem.html#a607e40ccbf7e846c6b404c7d35e918e2":[3,0,337,2],
-"module__helios_8engine_8modules_8physics_8collision_8systems_8CollisionStateResponseSystem.html#ad47ff95afabafa914f53d996b99769ba":[3,0,337,1]
+"module__helios_8engine_8modules_8physics_8collision_8systems_8CollisionStateClearSystem.html#aaf7d8889b1e59038ad79b404bdcef714":[3,0,336,2]
 };

@@ -1,5 +1,9 @@
 var NAVTREEINDEX52 =
 {
+"module__helios_8rendering_8asset_8shape_8Shape.html#a45b8025937ff78d5ca63ef3ea4b56d54":[3,0,599,2],
+"module__helios_8rendering_8asset_8shape_8Shape.html#aad16a718a0af0d74e3d6bfa97377b9bb":[3,0,599,1],
+"module__helios_8rendering_8asset_8shape_8Shape.html#ab88c320baa695dd2d77a852c2c5ee2b9":[3,0,599,3],
+"module__helios_8rendering_8asset_8shape_8Shape.html#ac8d63a4a5a57fd9cac0d99881dcb29e8":[3,0,599,4],
 "module__helios_8rendering_8asset_8shape_8Shape.html#af74c1c5bf7d0ae3eba004b8822fc2a9e":[3,0,599,5],
 "module__helios_8rendering_8asset_8shape_8basic.html":[3,0,590],
 "module__helios_8rendering_8asset_8shape_8basic_8Circle.html":[3,0,591],
@@ -245,9 +249,5 @@ var NAVTREEINDEX52 =
 "module__helios_8scene_8CameraSceneNode.html#ad57acd6f8c8b2e6b02707ba1424377cb":[3,0,639,5],
 "module__helios_8scene_8CameraSceneNode.html#ae9863cf5d6dde842d58d1c86ccec02e0":[3,0,639,7],
 "module__helios_8scene_8CameraSceneNode.html#af2a2b7713898c477a17bfa3dd76dea22":[3,0,639,3],
-"module__helios_8scene_8CullNoneStrategy.html":[3,0,640],
-"module__helios_8scene_8CullNoneStrategy.html#a22667c9b69f3eb78088e8502e90c8382":[3,0,640,2],
-"module__helios_8scene_8CullNoneStrategy.html#ae80f1dc83394827d2515e22d0f7ed7b5":[3,0,640,1],
-"module__helios_8scene_8FrustumCullingStrategy.html":[3,0,641],
-"module__helios_8scene_8FrustumCullingStrategy.html#a12f23b3d9ecc16858fedf7483d9890ae":[3,0,641,3]
+"module__helios_8scene_8CullNoneStrategy.html":[3,0,640]
 };

@@ -1,5 +1,9 @@
 var NAVTREEINDEX41 =
 {
+"module__helios_8engine_8builder_8gameObject_8builders_8configs_8ScoreValueConfig.html":[3,0,99],
+"module__helios_8engine_8builder_8gameObject_8builders_8configs_8ScoreValueConfig.html#a32d49a1de18e910e97d08c7087eaffc4":[3,0,99,2],
+"module__helios_8engine_8builder_8gameObject_8builders_8configs_8ScoreValueConfig.html#a6ddbdd71d994593e19040e5228af901b":[3,0,99,1],
+"module__helios_8engine_8builder_8gameObject_8builders_8configs_8SpawnConfig.html":[3,0,100],
 "module__helios_8engine_8builder_8gameObject_8builders_8configs_8SpawnConfig.html#a3396d1eb3858eb3c0446945d01bdd50d":[3,0,100,2],
 "module__helios_8engine_8builder_8gameObject_8builders_8configs_8SpawnConfig.html#abe0ee627e8eb42212cea1385f565b521":[3,0,100,3],
 "module__helios_8engine_8builder_8gameObject_8builders_8configs_8SpawnConfig.html#af82a8e19f72b857328f6e66e27f9c30c":[3,0,100,1],
@@ -245,9 +249,5 @@ var NAVTREEINDEX41 =
 "module__helios_8engine_8ecs_8SparseSet.html#a9b628236ca3c5a24b067b62fb612faf3":[3,0,164,11],
 "module__helios_8engine_8ecs_8SparseSet.html#a9dd46fecb69a0307e7263f2e862d8627":[3,0,164,13],
 "module__helios_8engine_8ecs_8SparseSet.html#aa52ad2b8e00441b7c5c41c5bd8cc51f2":[3,0,164,22],
-"module__helios_8engine_8ecs_8SparseSet.html#aa72c9d0be676855619731b67eda0d3ee":[3,0,164,28],
-"module__helios_8engine_8ecs_8SparseSet.html#aa99f99cedcaabbd237db35733435fab5":[3,0,164,4],
-"module__helios_8engine_8ecs_8SparseSet.html#aa9bd435e51b28f31d3759a7a005d1883":[3,0,164,54],
-"module__helios_8engine_8ecs_8SparseSet.html#aaa8bb8fcb6cde792b6033a2daba417fd":[3,0,164,48],
-"module__helios_8engine_8ecs_8SparseSet.html#aaba0fd36bc058d2eb5980622d0fd73f3":[3,0,164,38]
+"module__helios_8engine_8ecs_8SparseSet.html#aa72c9d0be676855619731b67eda0d3ee":[3,0,164,28]
 };

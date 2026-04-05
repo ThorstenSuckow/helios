@@ -112,12 +112,151 @@ Classes</h2></td></tr>
 <tr class="memitem:no_5Finit_5Ft" id="r_no_5Finit_5Ft"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1core_1_1types_1_1no__init__t.html">no_init_t</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag type used to indicate skipping default initialization.  <a href="structhelios_1_1core_1_1types_1_1no__init__t.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:aa1d7e3f2fb347012cb83fb46472b57aa" id="r_aa1d7e3f2fb347012cb83fb46472b57aa"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa1d7e3f2fb347012cb83fb46472b57aa">helios::core::types::StrongId_t</a> = uint32_t</td></tr>
+<tr class="memdesc:aa1d7e3f2fb347012cb83fb46472b57aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Underlying integer type for all strong identifiers.  <br /></td></tr>
+<tr class="memitem:a0b0725c2e899452c00381f709d463746" id="r_a0b0725c2e899452c00381f709d463746"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0b0725c2e899452c00381f709d463746">helios::core::types::VersionId</a> = uint32_t</td></tr>
+<tr class="memdesc:a0b0725c2e899452c00381f709d463746"><td class="mdescLeft">&#160;</td><td class="mdescRight">Version number for detecting stale entity references.  <br /></td></tr>
+<tr class="memitem:ae66a87b0172199142b048c268bf0b18a" id="r_ae66a87b0172199142b048c268bf0b18a"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae66a87b0172199142b048c268bf0b18a">helios::core::types::EntityId</a> = uint32_t</td></tr>
+<tr class="memdesc:ae66a87b0172199142b048c268bf0b18a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unique identifier for an entity within an EntityPool.  <br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a209d373c4d42ac831d2f6bfd1c4165ad" id="r_a209d373c4d42ac831d2f6bfd1c4165ad"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="structhelios_1_1core_1_1types_1_1no__init__t.html">no_init_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a209d373c4d42ac831d2f6bfd1c4165ad">helios::core::types::no_init</a></td></tr>
 <tr class="memdesc:a209d373c4d42ac831d2f6bfd1c4165ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag constant for requesting uninitialized construction.  <br /></td></tr>
+<tr class="memitem:a57aba37985d4b91aefbc85b3c7b01ebf" id="r_a57aba37985d4b91aefbc85b3c7b01ebf"><td class="memItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a57aba37985d4b91aefbc85b3c7b01ebf">helios::core::types::EntityTombstone</a> = std::numeric_limits&lt;size_t&gt;::max()</td></tr>
+<tr class="memdesc:a57aba37985d4b91aefbc85b3c7b01ebf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sentinel value indicating an invalid or removed sparse index.  <br /></td></tr>
 </table>
+<a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
+<a id="ae66a87b0172199142b048c268bf0b18a" name="ae66a87b0172199142b048c268bf0b18a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae66a87b0172199142b048c268bf0b18a">&#9670;&#160;</a></span>EntityId</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#ae66a87b0172199142b048c268bf0b18a">helios::core::types::EntityId</a> = uint32_t</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Unique identifier for an entity within an EntityPool. </p>
+<p>Used as the index into the sparse array of an EntityPool. Combined with a <a class="el" href="#a0b0725c2e899452c00381f709d463746" title="Version number for detecting stale entity references.">VersionId</a> in an EntityHandle, it enables safe entity references that detect stale handles after entity removal.</p>
+<dl class="section see"><dt>See also</dt><dd>EntityHandle </dd>
+<dd>
+<a class="el" href="#a0b0725c2e899452c00381f709d463746" title="Version number for detecting stale entity references.">VersionId</a> </dd>
+<dd>
+EntityPool </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="types_8ixx_source.html#l00106">106</a> of file <a class="el" href="types_8ixx_source.html">types.ixx</a>.</p>
+
+</div>
+</div>
+<a id="aa1d7e3f2fb347012cb83fb46472b57aa" name="aa1d7e3f2fb347012cb83fb46472b57aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1d7e3f2fb347012cb83fb46472b57aa">&#9670;&#160;</a></span>StrongId_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#aa1d7e3f2fb347012cb83fb46472b57aa">helios::core::types::StrongId_t</a> = uint32_t</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Underlying integer type for all strong identifiers. </p>
+<p>`StrongId_t` is the common numeric representation used by `StrongId&lt;Tag&gt;` and related lookup structures (e.g., `EntityRegistry`, `LinearLookupStrategy`, `HashedLookupStrategy`). Centralising the typedef ensures a consistent width across the entire identifier subsystem.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="structhelios_1_1core_1_1data_1_1StrongId.html" title="A strongly-typed identifier using tag-based type safety.">helios::core::data::StrongId</a> </dd>
+<dd>
+<a class="el" href="#ae66a87b0172199142b048c268bf0b18a" title="Unique identifier for an entity within an EntityPool.">EntityId</a> </dd>
+<dd>
+<a class="el" href="#a0b0725c2e899452c00381f709d463746" title="Version number for detecting stale entity references.">VersionId</a> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="types_8ixx_source.html#l00077">77</a> of file <a class="el" href="types_8ixx_source.html">types.ixx</a>.</p>
+
+</div>
+</div>
+<a id="a0b0725c2e899452c00381f709d463746" name="a0b0725c2e899452c00381f709d463746"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b0725c2e899452c00381f709d463746">&#9670;&#160;</a></span>VersionId</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a0b0725c2e899452c00381f709d463746">helios::core::types::VersionId</a> = uint32_t</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Version number for detecting stale entity references. </p>
+<p>Each entity slot in an EntityPool has an associated version that is incremented when the entity is removed. EntityHandles store both the <a class="el" href="#ae66a87b0172199142b048c268bf0b18a" title="Unique identifier for an entity within an EntityPool.">EntityId</a> and <a class="el" href="#a0b0725c2e899452c00381f709d463746" title="Version number for detecting stale entity references.">VersionId</a>, allowing the pool to detect when a handle refers to a recycled slot.</p>
+<p>A valid version starts at 1 (uninitialized handles have version 0).</p>
+<dl class="section see"><dt>See also</dt><dd>EntityHandle </dd>
+<dd>
+<a class="el" href="#ae66a87b0172199142b048c268bf0b18a" title="Unique identifier for an entity within an EntityPool.">EntityId</a> </dd>
+<dd>
+EntityPool </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="types_8ixx_source.html#l00093">93</a> of file <a class="el" href="types_8ixx_source.html">types.ixx</a>.</p>
+
+</div>
+</div>
 <a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a id="a57aba37985d4b91aefbc85b3c7b01ebf" name="a57aba37985d4b91aefbc85b3c7b01ebf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57aba37985d4b91aefbc85b3c7b01ebf">&#9670;&#160;</a></span>EntityTombstone</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t helios::core::types::EntityTombstone = std::numeric_limits&lt;size_t&gt;::max()</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sentinel value indicating an invalid or removed sparse index. </p>
+<p>Used in sparse-set data structures (e.g., EntityPool, GameObjectPool) to mark slots that do not contain valid entity references. When a slot contains this value, the corresponding entity has been removed or was never assigned.</p>
+<dl class="section see"><dt>See also</dt><dd>EntityPool </dd>
+<dd>
+GameObjectPool </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="types_8ixx_source.html#l00119">119</a> of file <a class="el" href="types_8ixx_source.html">types.ixx</a>.</p>
+
+</div>
+</div>
 <a id="a209d373c4d42ac831d2f6bfd1c4165ad" name="a209d373c4d42ac831d2f6bfd1c4165ad"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a209d373c4d42ac831d2f6bfd1c4165ad">&#9670;&#160;</a></span>no_init</h2>
 
@@ -145,7 +284,7 @@ Variables</h2></td></tr>
 <dd>
 <a class="el" href="classhelios_1_1util_1_1Guid.html" title="Representative of a Globally Unique Identifier.">helios::util::Guid</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8ixx_source.html#l00060">60</a> of file <a class="el" href="types_8ixx_source.html">types.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8ixx_source.html#l00062">62</a> of file <a class="el" href="types_8ixx_source.html">types.ixx</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="MaxScoreObserverComponent_8ixx_source.html#l00038">helios::engine::mechanics::scoring::components::MaxScoreObserverComponent::helios::engine::mechanics::scoring::systems::MaxScoreObserverClearSystem</a>, <a class="el" href="ScoreObserverComponent_8ixx_source.html#l00037">helios::engine::mechanics::scoring::components::ScoreObserverComponent::helios::engine::mechanics::scoring::systems::ScoreObserverClearSystem</a>, and <a class="el" href="Viewport_8ixx_source.html#l00213">helios::rendering::Viewport::Viewport()</a>.</p>
 

@@ -1,5 +1,9 @@
 var NAVTREEINDEX47 =
 {
+"module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#a0cbddc9f0c796d3167a7cc8be8617a69":[3,0,428,15],
+"module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#a1cccdf8571d03e926d43d607f692d27c":[3,0,428,20],
+"module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#a2bc6c1460fe74912cb882ca036f9283a":[3,0,428,2],
+"module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#a3cadf23c78913bd41503da6d2f50ac52":[3,0,428,19],
 "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#a4869554c41143ac5ee33b44b88bb6a43":[3,0,428,21],
 "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#a51194fb56af3bb1705c93df80dc6fed0":[3,0,428,18],
 "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#a57f2548b4dcfcc9e5f02f3fecb2be4fa":[3,0,428,4],
@@ -245,9 +249,5 @@ var NAVTREEINDEX47 =
 "module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8MoveInitializer.html":[3,0,475],
 "module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8MoveInitializer.html#a34970d0df4fc8d050baf7925da236923":[3,0,475,1],
 "module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8MoveInitializer.html#a34970d0df4fc8d050baf7925da236923a2a3cd5946cfd317eb99c3d32e35e2d4c":[3,0,475,1,4],
-"module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8MoveInitializer.html#a34970d0df4fc8d050baf7925da236923a39e6b4ab3e4adecf031d3aa8410bb3ce":[3,0,475,1,3],
-"module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8MoveInitializer.html#a34970d0df4fc8d050baf7925da236923a64663f4646781c9c0110838b905daa23":[3,0,475,1,0],
-"module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8MoveInitializer.html#a34970d0df4fc8d050baf7925da236923a92b09c7c48c520c3c55e497875da437c":[3,0,475,1,1],
-"module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8MoveInitializer.html#a34970d0df4fc8d050baf7925da236923a945d5e233cf7d6240f6b783b36a374ff":[3,0,475,1,2],
-"module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8MoveInitializer.html#a4905d1db361b9e45967cc2a249b7c00e":[3,0,475,3]
+"module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8MoveInitializer.html#a34970d0df4fc8d050baf7925da236923a39e6b4ab3e4adecf031d3aa8410bb3ce":[3,0,475,1,3]
 };

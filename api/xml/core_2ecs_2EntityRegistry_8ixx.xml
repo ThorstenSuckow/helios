@@ -9,10 +9,10 @@
     <includes refid="LinearLookupStrategy_8ixx" local="no">helios.core.ecs.LinearLookupStrategy</includes>
     <includes refid="core_2ecs_2EntityHandle_8ixx" local="no">helios.core.ecs.EntityHandle</includes>
     <incdepgraph>
-      <node id="8">
+      <node id="12">
         <label>helios.core.ecs.EntityHandle</label>
         <link refid="core_2ecs_2EntityHandle_8ixx"/>
-        <childnode refid="9" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
@@ -26,25 +26,29 @@
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
-        </childnode>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="8" relation="include">
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="5">
+      <node id="7">
         <label>helios.core.ecs.HashedLookupStrategy</label>
         <link refid="HashedLookupStrategy_8ixx"/>
-        <childnode refid="6" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="7">
+      <node id="9">
         <label>helios.core.ecs.LinearLookupStrategy</label>
         <link refid="LinearLookupStrategy_8ixx"/>
         <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
@@ -52,14 +56,30 @@
       <node id="4">
         <label>helios.core.types</label>
         <link refid="types_8ixx"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>algorithm</label>
       </node>
       <node id="3">
         <label>cassert</label>
       </node>
-      <node id="9">
+      <node id="5">
+        <label>cstdint</label>
+      </node>
+      <node id="13">
         <label>functional</label>
       </node>
       <node id="6">
+        <label>limits</label>
+      </node>
+      <node id="11">
+        <label>ranges</label>
+      </node>
+      <node id="8">
         <label>unordered_set</label>
       </node>
       <node id="2">
@@ -100,7 +120,7 @@
 <codeline lineno="22"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
 <codeline lineno="23"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Sentinel<sp/>version<sp/>indicating<sp/>an<sp/>invalid<sp/>or<sp/>uninitialized<sp/>handle.</highlight></codeline>
 <codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="25" refid="namespacehelios_1_1core_1_1ecs_1a1b017098e173629d9f24137cec7c655f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1core_1_1ecs_1a1b017098e173629d9f24137cec7c655f" kindref="member">InvalidVersion</ref><sp/>=<sp/>VersionId{0};</highlight></codeline>
+<codeline lineno="25" refid="namespacehelios_1_1core_1_1ecs_1a1b017098e173629d9f24137cec7c655f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1core_1_1ecs_1a1b017098e173629d9f24137cec7c655f" kindref="member">InvalidVersion</ref><sp/>=<sp/><ref refid="namespacehelios_1_1core_1_1types_1a0b0725c2e899452c00381f709d463746" kindref="member">VersionId</ref>{0};</highlight></codeline>
 <codeline lineno="26"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
 <codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>The<sp/>initial<sp/>version<sp/>assigned<sp/>to<sp/>newly<sp/>created<sp/>entities.</highlight></codeline>
@@ -108,7 +128,7 @@
 <codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Versions<sp/>start<sp/>at<sp/>1<sp/>to<sp/>distinguish<sp/>valid<sp/>handles<sp/>from<sp/>default-initialized</highlight></codeline>
 <codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>handles<sp/>that<sp/>may<sp/>have<sp/>a<sp/>version<sp/>of<sp/>0.</highlight></codeline>
 <codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="33" refid="namespacehelios_1_1core_1_1ecs_1a5436b6eab572b18f1fe3e4aeddd88fef" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1core_1_1ecs_1a5436b6eab572b18f1fe3e4aeddd88fef" kindref="member">InitialVersion</ref><sp/>=<sp/>VersionId{1};</highlight></codeline>
+<codeline lineno="33" refid="namespacehelios_1_1core_1_1ecs_1a5436b6eab572b18f1fe3e4aeddd88fef" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1core_1_1ecs_1a5436b6eab572b18f1fe3e4aeddd88fef" kindref="member">InitialVersion</ref><sp/>=<sp/><ref refid="namespacehelios_1_1core_1_1types_1a0b0725c2e899452c00381f709d463746" kindref="member">VersionId</ref>{1};</highlight></codeline>
 <codeline lineno="34"><highlight class="normal"></highlight></codeline>
 <codeline lineno="35"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
@@ -214,14 +234,14 @@
 <codeline lineno="136"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="137" refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a727ce430a51135bfd256125a84ea777b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structhelios_1_1core_1_1ecs_1_1EntityHandle" kindref="compound">EntityHandle&lt;TStrongId&gt;</ref><sp/><ref refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a727ce430a51135bfd256125a84ea777b" kindref="member">create</ref>(TStrongId<sp/>strongId<sp/>=<sp/>TStrongId{})<sp/>{</highlight></codeline>
 <codeline lineno="138"><highlight class="normal"></highlight></codeline>
-<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>EntityId<sp/>idx;</highlight></codeline>
-<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VersionId<sp/><ref refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a7ba0dff8e9e9220b424c56c424d8f13b" kindref="member">version</ref>;</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1core_1_1types_1ae66a87b0172199142b048c268bf0b18a" kindref="member">EntityId</ref><sp/>idx;</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1core_1_1types_1a0b0725c2e899452c00381f709d463746" kindref="member">VersionId</ref><sp/><ref refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a7ba0dff8e9e9220b424c56c424d8f13b" kindref="member">version</ref>;</highlight></codeline>
 <codeline lineno="141"><highlight class="normal"></highlight></codeline>
 <codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(freeList_.empty())<sp/>{</highlight></codeline>
-<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>idx<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">EntityId</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(versions_.size());</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>idx<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="namespacehelios_1_1core_1_1types_1ae66a87b0172199142b048c268bf0b18a" kindref="member">EntityId</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(versions_.size());</highlight></codeline>
 <codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a7ba0dff8e9e9220b424c56c424d8f13b" kindref="member">version</ref><sp/>=<sp/><ref refid="namespacehelios_1_1core_1_1ecs_1a5436b6eab572b18f1fe3e4aeddd88fef" kindref="member">InitialVersion</ref>;</highlight></codeline>
 <codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>versions_.push_back(<ref refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a7ba0dff8e9e9220b424c56c424d8f13b" kindref="member">version</ref>);</highlight></codeline>
-<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>strongIds_.push_back(StrongId_t{});</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>strongIds_.push_back(<ref refid="namespacehelios_1_1core_1_1types_1aa1d7e3f2fb347012cb83fb46472b57aa" kindref="member">StrongId_t</ref>{});</highlight></codeline>
 <codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
 <codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>idx<sp/>=<sp/>freeList_.back();</highlight></codeline>
 <codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>freeList_.pop_back();</highlight></codeline>
@@ -251,8 +271,8 @@
 <codeline lineno="173"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="174"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>The<sp/>version<sp/>for<sp/>the<sp/>EntityId,<sp/>or<sp/>`InvalidVersion`<sp/>if<sp/>not<sp/>found.</highlight></codeline>
 <codeline lineno="175"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="176" refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a7ba0dff8e9e9220b424c56c424d8f13b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/>VersionId<sp/><ref refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a7ba0dff8e9e9220b424c56c424d8f13b" kindref="member">version</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>EntityId<sp/>entityId)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(entityId<sp/>&gt;=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">EntityId</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(versions_.size()))<sp/>{</highlight></codeline>
+<codeline lineno="176" refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a7ba0dff8e9e9220b424c56c424d8f13b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="namespacehelios_1_1core_1_1types_1a0b0725c2e899452c00381f709d463746" kindref="member">VersionId</ref><sp/><ref refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a7ba0dff8e9e9220b424c56c424d8f13b" kindref="member">version</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1core_1_1types_1ae66a87b0172199142b048c268bf0b18a" kindref="member">EntityId</ref><sp/>entityId)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(entityId<sp/>&gt;=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="namespacehelios_1_1core_1_1types_1ae66a87b0172199142b048c268bf0b18a" kindref="member">EntityId</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(versions_.size()))<sp/>{</highlight></codeline>
 <codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1core_1_1ecs_1a1b017098e173629d9f24137cec7c655f" kindref="member">InvalidVersion</ref>;</highlight></codeline>
 <codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>versions_[entityId];</highlight></codeline>
@@ -273,7 +293,7 @@
 <codeline lineno="195" refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a5e4c983574f6fea33037c909ad9c4864" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a5e4c983574f6fea33037c909ad9c4864" kindref="member">isValid</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1core_1_1ecs_1_1EntityHandle" kindref="compound">EntityHandle&lt;TStrongId&gt;</ref><sp/>handle)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
 <codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>index<sp/>=<sp/>handle.entityId;</highlight></codeline>
 <codeline lineno="197"><highlight class="normal"></highlight></codeline>
-<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(index<sp/>&gt;=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">EntityId</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(versions_.size()))<sp/>{</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(index<sp/>&gt;=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="namespacehelios_1_1core_1_1types_1ae66a87b0172199142b048c268bf0b18a" kindref="member">EntityId</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(versions_.size()))<sp/>{</highlight></codeline>
 <codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="201"><highlight class="normal"></highlight></codeline>

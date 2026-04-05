@@ -13,8 +13,6 @@ export module helios.core.ecs.SparseSet;
 import helios.core.ecs.EntityHandle;
 import helios.core.types;
 
-import helios.engine.ecs.Traits;
-
 using namespace helios::core::ecs;
 using namespace helios::core::types;
 export namespace helios::core::ecs {

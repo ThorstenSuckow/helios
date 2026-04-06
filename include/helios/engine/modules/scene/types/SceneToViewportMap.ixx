@@ -53,16 +53,21 @@ export namespace helios::engine::modules::scene::types {
          *
          * @param sceneHandle Handle of the scene to associate.
          * @param viewportHandle Handle of the viewport to register.
+         *
+         * @return true if the viewportHandle was successfully registered for the SceneHandle,
+         * otehrwise false
          */
-        void add(const SceneHandle sceneHandle, const ViewportHandle viewportHandle) {
+        bool add(const SceneHandle sceneHandle, const ViewportHandle viewportHandle) {
 
             const auto denseSceneIdx = sceneHandle.entityId;
             const auto denseViewportIdx = viewportHandle.entityId;
 
             // assert that the viewport was not already registered.
-            assert((viewportHandle.entityId >= viewportToSceneHandles_.size()
-            || !viewportToSceneHandles_[denseViewportIdx].isValid())
-            && "Viewport already exists");
+            if (viewportHandle.entityId >= viewportToSceneHandles_.size()
+            || !viewportToSceneHandles_[denseViewportIdx].isValid()) {
+                assert(false && "Viewport already exists");
+                return false;
+            }
 
             // scene idx to viewport handles
             if (sceneToViewportHandles_.size() <= denseSceneIdx) {
@@ -75,6 +80,8 @@ export namespace helios::engine::modules::scene::types {
                 viewportToSceneHandles_.resize(denseViewportIdx + 1);
             }
             viewportToSceneHandles_[denseViewportIdx] = sceneHandle;
+
+            return true;
         }
 
         /**
@@ -101,7 +108,7 @@ export namespace helios::engine::modules::scene::types {
          *
          * @return A span of viewport handles, or an empty span if not found.
          */
-        [[nodiscard]] std::span<ViewportHandle> viewportHandles(const SceneHandle sceneHandle) const noexcept {
+        [[nodiscard]] std::span<const ViewportHandle> viewportHandles(const SceneHandle sceneHandle) const noexcept {
 
             const auto denseSceneIdx = sceneHandle.entityId;
 

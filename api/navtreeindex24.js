@@ -1,17 +1,5 @@
 var NAVTREEINDEX24 =
 {
-"classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler.html#a1d31c5fcafe3553798f4854423ae6954":[6,0,0,3,2,4,4,1,2],
-"classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler.html#a5090dd44cb9247f19c916bd21de149c3":[3,0,505,1,0],
-"classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler.html#a5090dd44cb9247f19c916bd21de149c3":[4,0,0,3,3,4,4,1,0],
-"classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler.html#a5090dd44cb9247f19c916bd21de149c3":[6,0,0,3,2,4,4,1,0],
-"classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler.html#a5244f5c9bf0019ad74b98f34176610b7":[3,0,505,1,1],
-"classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler.html#a5244f5c9bf0019ad74b98f34176610b7":[4,0,0,3,3,4,4,1,1],
-"classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler.html#a5244f5c9bf0019ad74b98f34176610b7":[6,0,0,3,2,4,4,1,1],
-"classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler.html#a78aaa4935e379c7339cd01939a70c0d0":[3,0,505,1,3],
-"classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler.html#a78aaa4935e379c7339cd01939a70c0d0":[4,0,0,3,3,4,4,1,3],
-"classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler.html#a78aaa4935e379c7339cd01939a70c0d0":[6,0,0,3,2,4,4,1,3],
-"classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1DefaultRuleProcessor.html":[3,0,506,0],
-"classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1DefaultRuleProcessor.html":[4,0,0,3,3,4,4,2],
 "classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1DefaultRuleProcessor.html":[6,0,0,3,2,4,4,2],
 "classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1DefaultRuleProcessor.html#a6f092f731086b99815778df231a9f59f":[3,0,506,0,0],
 "classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1DefaultRuleProcessor.html#a6f092f731086b99815778df231a9f59f":[4,0,0,3,3,4,4,2,0],
@@ -249,5 +237,17 @@ var NAVTREEINDEX24 =
 "classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html#ad2741764d9418afcc573517700d36cbb":[6,0,0,3,2,0,3,7],
 "classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html":[3,0,525,0],
 "classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html":[4,0,0,3,3,0,4],
-"classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html":[6,0,0,3,2,0,4]
+"classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html":[6,0,0,3,2,0,4],
+"classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html#a05e0269ef59954066304d444264ee133":[3,0,525,0,5],
+"classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html#a05e0269ef59954066304d444264ee133":[4,0,0,3,3,0,4,5],
+"classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html#a05e0269ef59954066304d444264ee133":[6,0,0,3,2,0,4,5],
+"classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html#a4a7fa60f4d0fb1925a0d8c78037c5b93":[3,0,525,0,4],
+"classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html#a4a7fa60f4d0fb1925a0d8c78037c5b93":[4,0,0,3,3,0,4,4],
+"classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html#a4a7fa60f4d0fb1925a0d8c78037c5b93":[6,0,0,3,2,0,4,4],
+"classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html#a52613c548b261c8841cd4212a0e40793":[3,0,525,0,3],
+"classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html#a52613c548b261c8841cd4212a0e40793":[4,0,0,3,3,0,4,3],
+"classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html#a52613c548b261c8841cd4212a0e40793":[6,0,0,3,2,0,4,3],
+"classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html#a6a3fbd714901feffe20c01fa7996956f":[3,0,525,0,1],
+"classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html#a6a3fbd714901feffe20c01fa7996956f":[4,0,0,3,3,0,4,1],
+"classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html#a6a3fbd714901feffe20c01fa7996956f":[6,0,0,3,2,0,4,1]
 };

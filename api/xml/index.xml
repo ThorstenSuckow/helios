@@ -3131,19 +3131,12 @@
     <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1systems_1_1SceneSyncSystem_1a4bcfb01eaf31f73adf7a0f0321de91eb" kind="function"><name>update</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap" kind="class"><name>helios::engine::modules::scene::types::SceneToViewportMap</name>
-    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a70d09f21bf85f5e77f32dc284b3db84e" kind="variable"><name>scenes_</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a673490b887aeef09970af87ee994ccb7" kind="variable"><name>viewports_</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a595a0e001575a8f6eb5feec68f5754cf" kind="variable"><name>sceneIdsToViewportIds_</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a2c6e636ca773a01836cc56f2c7db0979" kind="variable"><name>viewportMap_</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1aaec664ea232a6b0837484a1ac3aefcdc" kind="variable"><name>needsUpdate_</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1af554601256c2e29977456fb579382de0" kind="variable"><name>sceneToViewportHandles_</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1ad60d02c03b0ae49a7173219d5342c86d" kind="variable"><name>viewportToSceneHandles_</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a659c5936676c75fb7576d5e90c6486af" kind="function"><name>SceneToViewportMap</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a1604635a2b96d41229ec4838f8c1af86" kind="function"><name>updateCache</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a6cde3b0562ff3e4afe3a8b099f3d039f" kind="function"><name>add</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a075a79e7901703977b9527c513192fa1" kind="function"><name>scene</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a04b2740b62ebbe714c99c9139ad2cc2b" kind="function"><name>viewports</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1aa4f7a83bc22e82d9811599bbfc827687" kind="function"><name>scenes</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a9f4ae28ebe7c7e7d30e254cba076b3e4" kind="function"><name>hasScene</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1acd8a90325af6ff14d38fdf43618643fe" kind="function"><name>viewport</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a6cf7f35307ed75b0f347950045aedcf6" kind="function"><name>add</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1ae9c34ca8ffac442f020d170ee82808a2" kind="function"><name>sceneHandle</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1ad0a0ada01b2011475b43ed2b3c941b99" kind="function"><name>viewportHandles</name></member>
   </compound>
   <compound refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1ScheduledSpawnPlan" kind="struct"><name>helios::engine::runtime::spawn::scheduling::ScheduledSpawnPlan</name>
     <member refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1ScheduledSpawnPlan_1a55124110ac3a99f129c036247219491b" kind="variable"><name>spawnProfileId</name></member>
@@ -5378,7 +5371,11 @@
   </compound>
   <compound refid="namespacehelios_1_1rendering_1_1text" kind="namespace"><name>helios::rendering::text</name>
   </compound>
+  <compound refid="namespacehelios_1_1rendering_1_1viewport_1_1types" kind="namespace"><name>helios::rendering::viewport::types</name>
+  </compound>
   <compound refid="namespacehelios_1_1scene" kind="namespace"><name>helios::scene</name>
+  </compound>
+  <compound refid="namespacehelios_1_1scene_1_1types" kind="namespace"><name>helios::scene::types</name>
   </compound>
   <compound refid="namespacehelios_1_1util" kind="namespace"><name>helios::util</name>
   </compound>
@@ -10289,19 +10286,12 @@
     <member refid="structstd_1_1hash_3_01helios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneId_01_4_1a5cc2a84a637d079a065646d5375df2ba" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="module__helios_8engine_8modules_8scene_8types_8SceneToViewportMap" kind="module"><name>helios.engine.modules.scene.types.SceneToViewportMap</name>
-    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a70d09f21bf85f5e77f32dc284b3db84e" kind="variable"><name>scenes_</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a673490b887aeef09970af87ee994ccb7" kind="variable"><name>viewports_</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a595a0e001575a8f6eb5feec68f5754cf" kind="variable"><name>sceneIdsToViewportIds_</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a2c6e636ca773a01836cc56f2c7db0979" kind="variable"><name>viewportMap_</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1aaec664ea232a6b0837484a1ac3aefcdc" kind="variable"><name>needsUpdate_</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1af554601256c2e29977456fb579382de0" kind="variable"><name>sceneToViewportHandles_</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1ad60d02c03b0ae49a7173219d5342c86d" kind="variable"><name>viewportToSceneHandles_</name></member>
     <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a659c5936676c75fb7576d5e90c6486af" kind="function"><name>SceneToViewportMap</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a1604635a2b96d41229ec4838f8c1af86" kind="function"><name>updateCache</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a6cde3b0562ff3e4afe3a8b099f3d039f" kind="function"><name>add</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a075a79e7901703977b9527c513192fa1" kind="function"><name>scene</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a04b2740b62ebbe714c99c9139ad2cc2b" kind="function"><name>viewports</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1aa4f7a83bc22e82d9811599bbfc827687" kind="function"><name>scenes</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a9f4ae28ebe7c7e7d30e254cba076b3e4" kind="function"><name>hasScene</name></member>
-    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1acd8a90325af6ff14d38fdf43618643fe" kind="function"><name>viewport</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a6cf7f35307ed75b0f347950045aedcf6" kind="function"><name>add</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1ae9c34ca8ffac442f020d170ee82808a2" kind="function"><name>sceneHandle</name></member>
+    <member refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1ad0a0ada01b2011475b43ed2b3c941b99" kind="function"><name>viewportHandles</name></member>
   </compound>
   <compound refid="module__helios_8engine_8modules_8spatial" kind="module"><name>helios.engine.modules.spatial</name>
   </compound>

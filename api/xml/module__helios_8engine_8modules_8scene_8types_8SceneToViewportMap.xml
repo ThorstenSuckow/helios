@@ -5,132 +5,65 @@
     <innerfile refid="SceneToViewportMap_8ixx">SceneToViewportMap.ixx</innerfile>
     <innerclass refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap" prot="public">helios::engine::modules::scene::types::SceneToViewportMap</innerclass>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a70d09f21bf85f5e77f32dc284b3db84e" prot="private" static="no" mutable="yes">
-        <type>std::vector&lt; <ref refid="classhelios_1_1scene_1_1Scene" kindref="compound">Scene</ref> * &gt;</type>
-        <definition>std::vector&lt;Scene*&gt; helios::engine::modules::scene::types::SceneToViewportMap::scenes_</definition>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1af554601256c2e29977456fb579382de0" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::vector&lt; ViewportHandle &gt; &gt;</type>
+        <definition>std::vector&lt;std::vector&lt;ViewportHandle&gt; &gt; helios::engine::modules::scene::types::SceneToViewportMap::sceneToViewportHandles_</definition>
         <argsstring></argsstring>
-        <name>scenes_</name>
-        <qualifiedname>helios::engine::modules::scene::types::SceneToViewportMap::scenes_</qualifiedname>
+        <name>sceneToViewportHandles_</name>
+        <qualifiedname>helios::engine::modules::scene::types::SceneToViewportMap::sceneToViewportHandles_</qualifiedname>
         <briefdescription>
-<para>All registered scenes. </para>
+<para>Scene-indexed list of associated viewport handles. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" line="60" column="29" bodyfile="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" bodystart="60" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" line="37" column="21" bodyfile="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" bodystart="37" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a673490b887aeef09970af87ee994ccb7" prot="private" static="no" mutable="yes">
-        <type>std::vector&lt; <ref refid="classhelios_1_1rendering_1_1Viewport" kindref="compound">Viewport</ref> * &gt;</type>
-        <definition>std::vector&lt;Viewport*&gt; helios::engine::modules::scene::types::SceneToViewportMap::viewports_</definition>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1ad60d02c03b0ae49a7173219d5342c86d" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; SceneHandle &gt;</type>
+        <definition>std::vector&lt;SceneHandle&gt; helios::engine::modules::scene::types::SceneToViewportMap::viewportToSceneHandles_</definition>
         <argsstring></argsstring>
-        <name>viewports_</name>
-        <qualifiedname>helios::engine::modules::scene::types::SceneToViewportMap::viewports_</qualifiedname>
+        <name>viewportToSceneHandles_</name>
+        <qualifiedname>helios::engine::modules::scene::types::SceneToViewportMap::viewportToSceneHandles_</qualifiedname>
         <briefdescription>
-<para>All registered viewports. </para>
+<para>Viewport-indexed reverse lookup to the owning scene handle. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" line="65" column="29" bodyfile="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" bodystart="65" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a595a0e001575a8f6eb5feec68f5754cf" prot="private" static="no" mutable="yes">
-        <type>std::unordered_map&lt; <ref refid="namespacehelios_1_1engine_1_1modules_1_1scene_1_1types_1a6ec81b3430a6ae7d546164323ed5afb3" kindref="member">SceneId</ref>, std::vector&lt; <ref refid="namespacehelios_1_1engine_1_1common_1_1types_1a348f02d525fc051290ccabd8091e45f5" kindref="member">ViewportId</ref> &gt; &gt;</type>
-        <definition>std::unordered_map&lt;SceneId, std::vector&lt;ViewportId&gt; &gt; helios::engine::modules::scene::types::SceneToViewportMap::sceneIdsToViewportIds_</definition>
-        <argsstring></argsstring>
-        <name>sceneIdsToViewportIds_</name>
-        <qualifiedname>helios::engine::modules::scene::types::SceneToViewportMap::sceneIdsToViewportIds_</qualifiedname>
-        <briefdescription>
-<para>Maps scene IDs to their associated viewport IDs. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" line="70" column="36" bodyfile="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" bodystart="70" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a2c6e636ca773a01836cc56f2c7db0979" prot="private" static="no" mutable="yes">
-        <type>std::unordered_map&lt; <ref refid="namespacehelios_1_1engine_1_1modules_1_1scene_1_1types_1a6ec81b3430a6ae7d546164323ed5afb3" kindref="member">SceneId</ref>, std::vector&lt; <ref refid="classhelios_1_1rendering_1_1Viewport" kindref="compound">Viewport</ref> * &gt; &gt;</type>
-        <definition>std::unordered_map&lt;SceneId, std::vector&lt;Viewport*&gt; &gt; helios::engine::modules::scene::types::SceneToViewportMap::viewportMap_</definition>
-        <argsstring></argsstring>
-        <name>viewportMap_</name>
-        <qualifiedname>helios::engine::modules::scene::types::SceneToViewportMap::viewportMap_</qualifiedname>
-        <briefdescription>
-<para>Cached mapping from scene IDs to viewport pointers. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" line="75" column="36" bodyfile="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" bodystart="75" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1aaec664ea232a6b0837484a1ac3aefcdc" prot="private" static="no" mutable="yes">
-        <type>bool</type>
-        <definition>bool helios::engine::modules::scene::types::SceneToViewportMap::needsUpdate_</definition>
-        <argsstring></argsstring>
-        <name>needsUpdate_</name>
-        <qualifiedname>helios::engine::modules::scene::types::SceneToViewportMap::needsUpdate_</qualifiedname>
-        <initializer>= false</initializer>
-        <briefdescription>
-<para>Flag indicating the cache needs rebuilding. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" line="80" column="22" bodyfile="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" bodystart="80" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" line="42" column="21" bodyfile="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" bodystart="42" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a659c5936676c75fb7576d5e90c6486af" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a659c5936676c75fb7576d5e90c6486af" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
         <type></type>
         <definition>helios::engine::modules::scene::types::SceneToViewportMap::SceneToViewportMap</definition>
         <argsstring>()=default</argsstring>
         <name>SceneToViewportMap</name>
         <qualifiedname>helios::engine::modules::scene::types::SceneToViewportMap::SceneToViewportMap</qualifiedname>
         <briefdescription>
-<para>Default constructor. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" line="87" column="9"/>
+        <location file="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" line="46" column="18"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a1604635a2b96d41229ec4838f8c1af86" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>void</type>
-        <definition>void helios::engine::modules::scene::types::SceneToViewportMap::updateCache</definition>
-        <argsstring>() const</argsstring>
-        <name>updateCache</name>
-        <qualifiedname>helios::engine::modules::scene::types::SceneToViewportMap::updateCache</qualifiedname>
-        <briefdescription>
-<para>Rebuilds the internal cache if modifications were made. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>Called lazily by query methods. Rebuilds the viewportMap_ from the scene-to-viewport-ID mappings. </para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" line="95" column="14" bodyfile="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" bodystart="95" bodyend="114"/>
-        <references refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1acd8a90325af6ff14d38fdf43618643fe" compoundref="SceneToViewportMap_8ixx" startline="214" endline="228">helios::engine::modules::scene::types::SceneToViewportMap::viewport</references>
-        <referencedby refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a075a79e7901703977b9527c513192fa1" compoundref="SceneToViewportMap_8ixx" startline="152" endline="167">helios::engine::modules::scene::types::SceneToViewportMap::scene</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1acd8a90325af6ff14d38fdf43618643fe" compoundref="SceneToViewportMap_8ixx" startline="214" endline="228">helios::engine::modules::scene::types::SceneToViewportMap::viewport</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a04b2740b62ebbe714c99c9139ad2cc2b" compoundref="SceneToViewportMap_8ixx" startline="176" endline="184">helios::engine::modules::scene::types::SceneToViewportMap::viewports</referencedby>
-      </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a6cde3b0562ff3e4afe3a8b099f3d039f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>void</type>
-        <definition>void helios::engine::modules::scene::types::SceneToViewportMap::add</definition>
-        <argsstring>(Scene *scene, Viewport *viewport)</argsstring>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a6cf7f35307ed75b0f347950045aedcf6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::modules::scene::types::SceneToViewportMap::add</definition>
+        <argsstring>(const SceneHandle sceneHandle, const ViewportHandle viewportHandle)</argsstring>
         <name>add</name>
         <qualifiedname>helios::engine::modules::scene::types::SceneToViewportMap::add</qualifiedname>
         <param>
-          <type><ref refid="classhelios_1_1scene_1_1Scene" kindref="compound">Scene</ref> *</type>
-          <declname>scene</declname>
+          <type>const SceneHandle</type>
+          <declname>sceneHandle</declname>
         </param>
         <param>
-          <type><ref refid="classhelios_1_1rendering_1_1Viewport" kindref="compound">Viewport</ref> *</type>
-          <declname>viewport</declname>
+          <type>const ViewportHandle</type>
+          <declname>viewportHandle</declname>
         </param>
         <briefdescription>
 <para>Registers a scene-viewport association. </para>
@@ -139,74 +72,72 @@
 <para>Adds the viewport to the scene&apos;s viewport list. A scene can have multiple viewports, but each viewport can only be added once.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>scene</parametername>
+<parametername>sceneHandle</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Pointer to the scene. Must not be null. </para>
+<para>Handle of the scene to associate. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>viewport</parametername>
+<parametername>viewportHandle</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Pointer to the viewport. Must not be null or already registered. </para>
+<para>Handle of the viewport to register.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" line="125" column="14" bodyfile="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" bodystart="125" bodyend="143"/>
-        <references refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a9f4ae28ebe7c7e7d30e254cba076b3e4" compoundref="SceneToViewportMap_8ixx" startline="202" endline="204">helios::engine::modules::scene::types::SceneToViewportMap::hasScene</references>
-        <references refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a075a79e7901703977b9527c513192fa1" compoundref="SceneToViewportMap_8ixx" startline="152" endline="167">helios::engine::modules::scene::types::SceneToViewportMap::scene</references>
-        <references refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1acd8a90325af6ff14d38fdf43618643fe" compoundref="SceneToViewportMap_8ixx" startline="214" endline="228">helios::engine::modules::scene::types::SceneToViewportMap::viewport</references>
-      </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a075a79e7901703977b9527c513192fa1" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type><ref refid="classhelios_1_1scene_1_1Scene" kindref="compound">Scene</ref> *</type>
-        <definition>Scene * helios::engine::modules::scene::types::SceneToViewportMap::scene</definition>
-        <argsstring>(ViewportId viewportId) const noexcept</argsstring>
-        <name>scene</name>
-        <qualifiedname>helios::engine::modules::scene::types::SceneToViewportMap::scene</qualifiedname>
-        <param>
-          <type><ref refid="namespacehelios_1_1engine_1_1common_1_1types_1a348f02d525fc051290ccabd8091e45f5" kindref="member">ViewportId</ref></type>
-          <declname>viewportId</declname>
-        </param>
-        <briefdescription>
-<para>Returns the scene associated with a viewport ID. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>viewportId</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The viewport identifier to look up.</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>Pointer to the scene, or nullptr if not found. </para>
+<simplesect kind="return"><para>true if the viewportHandle was successfully registered for the SceneHandle, otehrwise false </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" line="152" column="15" bodyfile="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" bodystart="152" bodyend="167"/>
-        <references refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a075a79e7901703977b9527c513192fa1" compoundref="SceneToViewportMap_8ixx" startline="152" endline="167">helios::engine::modules::scene::types::SceneToViewportMap::scene</references>
-        <references refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a1604635a2b96d41229ec4838f8c1af86" compoundref="SceneToViewportMap_8ixx" startline="95" endline="114">helios::engine::modules::scene::types::SceneToViewportMap::updateCache</references>
-        <referencedby refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a6cde3b0562ff3e4afe3a8b099f3d039f" compoundref="SceneToViewportMap_8ixx" startline="125" endline="143">helios::engine::modules::scene::types::SceneToViewportMap::add</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a075a79e7901703977b9527c513192fa1" compoundref="SceneToViewportMap_8ixx" startline="152" endline="167">helios::engine::modules::scene::types::SceneToViewportMap::scene</referencedby>
+        <location file="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" line="60" column="14" bodyfile="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" bodystart="60" bodyend="85"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1ae9c34ca8ffac442f020d170ee82808a2" compoundref="SceneToViewportMap_8ixx" startline="94" endline="102">helios::engine::modules::scene::types::SceneToViewportMap::sceneHandle</references>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a04b2740b62ebbe714c99c9139ad2cc2b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>std::span&lt; <ref refid="classhelios_1_1rendering_1_1Viewport" kindref="compound">Viewport</ref> * &gt;</type>
-        <definition>std::span&lt; Viewport * &gt; helios::engine::modules::scene::types::SceneToViewportMap::viewports</definition>
-        <argsstring>(SceneId sceneId) const noexcept</argsstring>
-        <name>viewports</name>
-        <qualifiedname>helios::engine::modules::scene::types::SceneToViewportMap::viewports</qualifiedname>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1ae9c34ca8ffac442f020d170ee82808a2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SceneHandle</type>
+        <definition>SceneHandle helios::engine::modules::scene::types::SceneToViewportMap::sceneHandle</definition>
+        <argsstring>(const ViewportHandle viewportHandle) const noexcept</argsstring>
+        <name>sceneHandle</name>
+        <qualifiedname>helios::engine::modules::scene::types::SceneToViewportMap::sceneHandle</qualifiedname>
         <param>
-          <type><ref refid="namespacehelios_1_1engine_1_1modules_1_1scene_1_1types_1a6ec81b3430a6ae7d546164323ed5afb3" kindref="member">SceneId</ref></type>
-          <declname>sceneId</declname>
+          <type>const ViewportHandle</type>
+          <declname>viewportHandle</declname>
+        </param>
+        <briefdescription>
+<para>Returns the scene associated with a viewport. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>viewportHandle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Handle of the viewport to look up.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The associated scene handle, or an invalid handle if not found. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" line="94" column="22" bodyfile="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" bodystart="94" bodyend="102"/>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a6cf7f35307ed75b0f347950045aedcf6" compoundref="SceneToViewportMap_8ixx" startline="60" endline="85">helios::engine::modules::scene::types::SceneToViewportMap::add</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1ad0a0ada01b2011475b43ed2b3c941b99" compoundref="SceneToViewportMap_8ixx" startline="111" endline="120">helios::engine::modules::scene::types::SceneToViewportMap::viewportHandles</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1ad0a0ada01b2011475b43ed2b3c941b99" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::span&lt; const ViewportHandle &gt;</type>
+        <definition>std::span&lt; const ViewportHandle &gt; helios::engine::modules::scene::types::SceneToViewportMap::viewportHandles</definition>
+        <argsstring>(const SceneHandle sceneHandle) const noexcept</argsstring>
+        <name>viewportHandles</name>
+        <qualifiedname>helios::engine::modules::scene::types::SceneToViewportMap::viewportHandles</qualifiedname>
+        <param>
+          <type>const SceneHandle</type>
+          <declname>sceneHandle</declname>
         </param>
         <briefdescription>
 <para>Returns all viewports associated with a scene. </para>
@@ -214,129 +145,27 @@
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>sceneId</parametername>
+<parametername>sceneHandle</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The scene identifier to look up.</para>
+<para>Handle of the scene to look up.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>Span of viewport pointers, or empty span if not found. </para>
+<simplesect kind="return"><para>A span of viewport handles, or an empty span if not found. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" line="176" column="19" bodyfile="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" bodystart="176" bodyend="184"/>
-        <references refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a9f4ae28ebe7c7e7d30e254cba076b3e4" compoundref="SceneToViewportMap_8ixx" startline="202" endline="204">helios::engine::modules::scene::types::SceneToViewportMap::hasScene</references>
-        <references refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a1604635a2b96d41229ec4838f8c1af86" compoundref="SceneToViewportMap_8ixx" startline="95" endline="114">helios::engine::modules::scene::types::SceneToViewportMap::updateCache</references>
-      </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1aa4f7a83bc22e82d9811599bbfc827687" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>std::span&lt; <ref refid="classhelios_1_1scene_1_1Scene" kindref="compound">Scene</ref> * &gt;</type>
-        <definition>std::span&lt; Scene * &gt; helios::engine::modules::scene::types::SceneToViewportMap::scenes</definition>
-        <argsstring>() const noexcept</argsstring>
-        <name>scenes</name>
-        <qualifiedname>helios::engine::modules::scene::types::SceneToViewportMap::scenes</qualifiedname>
-        <briefdescription>
-<para>Returns all registered scenes. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><simplesect kind="return"><para>Span of scene pointers. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" line="191" column="19" bodyfile="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" bodystart="191" bodyend="193"/>
-      </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a9f4ae28ebe7c7e7d30e254cba076b3e4" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool helios::engine::modules::scene::types::SceneToViewportMap::hasScene</definition>
-        <argsstring>(const SceneId sceneId) const noexcept</argsstring>
-        <name>hasScene</name>
-        <qualifiedname>helios::engine::modules::scene::types::SceneToViewportMap::hasScene</qualifiedname>
-        <param>
-          <type>const <ref refid="namespacehelios_1_1engine_1_1modules_1_1scene_1_1types_1a6ec81b3430a6ae7d546164323ed5afb3" kindref="member">SceneId</ref></type>
-          <declname>sceneId</declname>
-        </param>
-        <briefdescription>
-<para>Checks if a scene is registered. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>sceneId</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The scene identifier to check.</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>True if the scene is registered, false otherwise. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" line="202" column="14" bodyfile="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" bodystart="202" bodyend="204"/>
-        <referencedby refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a6cde3b0562ff3e4afe3a8b099f3d039f" compoundref="SceneToViewportMap_8ixx" startline="125" endline="143">helios::engine::modules::scene::types::SceneToViewportMap::add</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1acd8a90325af6ff14d38fdf43618643fe" compoundref="SceneToViewportMap_8ixx" startline="214" endline="228">helios::engine::modules::scene::types::SceneToViewportMap::viewport</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a04b2740b62ebbe714c99c9139ad2cc2b" compoundref="SceneToViewportMap_8ixx" startline="176" endline="184">helios::engine::modules::scene::types::SceneToViewportMap::viewports</referencedby>
-      </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1acd8a90325af6ff14d38fdf43618643fe" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type><ref refid="classhelios_1_1rendering_1_1Viewport" kindref="compound">Viewport</ref> *</type>
-        <definition>Viewport * helios::engine::modules::scene::types::SceneToViewportMap::viewport</definition>
-        <argsstring>(SceneId sceneId, ViewportId viewportId) const noexcept</argsstring>
-        <name>viewport</name>
-        <qualifiedname>helios::engine::modules::scene::types::SceneToViewportMap::viewport</qualifiedname>
-        <param>
-          <type><ref refid="namespacehelios_1_1engine_1_1modules_1_1scene_1_1types_1a6ec81b3430a6ae7d546164323ed5afb3" kindref="member">SceneId</ref></type>
-          <declname>sceneId</declname>
-        </param>
-        <param>
-          <type><ref refid="namespacehelios_1_1engine_1_1common_1_1types_1a348f02d525fc051290ccabd8091e45f5" kindref="member">ViewportId</ref></type>
-          <declname>viewportId</declname>
-        </param>
-        <briefdescription>
-<para>Returns a specific viewport for a scene. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>sceneId</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The scene identifier. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>viewportId</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The viewport identifier.</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>Pointer to the viewport, or nullptr if not found. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" line="214" column="18" bodyfile="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" bodystart="214" bodyend="228"/>
-        <references refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a9f4ae28ebe7c7e7d30e254cba076b3e4" compoundref="SceneToViewportMap_8ixx" startline="202" endline="204">helios::engine::modules::scene::types::SceneToViewportMap::hasScene</references>
-        <references refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a1604635a2b96d41229ec4838f8c1af86" compoundref="SceneToViewportMap_8ixx" startline="95" endline="114">helios::engine::modules::scene::types::SceneToViewportMap::updateCache</references>
-        <references refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1acd8a90325af6ff14d38fdf43618643fe" compoundref="SceneToViewportMap_8ixx" startline="214" endline="228">helios::engine::modules::scene::types::SceneToViewportMap::viewport</references>
-        <referencedby refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a6cde3b0562ff3e4afe3a8b099f3d039f" compoundref="SceneToViewportMap_8ixx" startline="125" endline="143">helios::engine::modules::scene::types::SceneToViewportMap::add</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1a1604635a2b96d41229ec4838f8c1af86" compoundref="SceneToViewportMap_8ixx" startline="95" endline="114">helios::engine::modules::scene::types::SceneToViewportMap::updateCache</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1acd8a90325af6ff14d38fdf43618643fe" compoundref="SceneToViewportMap_8ixx" startline="214" endline="228">helios::engine::modules::scene::types::SceneToViewportMap::viewport</referencedby>
+        <location file="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" line="111" column="20" bodyfile="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" bodystart="111" bodyend="120"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1scene_1_1types_1_1SceneToViewportMap_1ae9c34ca8ffac442f020d170ee82808a2" compoundref="SceneToViewportMap_8ixx" startline="94" endline="102">helios::engine::modules::scene::types::SceneToViewportMap::sceneHandle</references>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" line="13" column="15"/>
+    <location file="/tmp/h/include/helios/engine/modules/scene/types/SceneToViewportMap.ixx" line="11" column="15"/>
   </compounddef>
 </doxygen>

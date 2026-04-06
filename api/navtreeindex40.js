@@ -1,17 +1,5 @@
 var NAVTREEINDEX40 =
 {
-"module__helios_8core_8ecs_8EntityRegistry.html#aad19e4cf9fdf39f410cf0ee380f9f35d":[3,0,67,1],
-"module__helios_8core_8ecs_8HashedLookupStrategy.html":[3,0,68],
-"module__helios_8core_8ecs_8HashedLookupStrategy.html#a2feff8e60b4c1459e6b0b61fae0f2079":[3,0,68,3],
-"module__helios_8core_8ecs_8HashedLookupStrategy.html#a70f21ba641d077a3d0ea3633fb4967b2":[3,0,68,2],
-"module__helios_8core_8ecs_8HashedLookupStrategy.html#aa85b6ae51bd2ec519182f6de6bf68a40":[3,0,68,4],
-"module__helios_8core_8ecs_8HashedLookupStrategy.html#ace92269b2e605bd09935ff2652598cc4":[3,0,68,1],
-"module__helios_8core_8ecs_8LinearLookupStrategy.html":[3,0,69],
-"module__helios_8core_8ecs_8LinearLookupStrategy.html#a98d353764c3de0a921ad116b7e1e0933":[3,0,69,2],
-"module__helios_8core_8ecs_8LinearLookupStrategy.html#aab15ecdd833c8bb0d57460b62672d3ae":[3,0,69,1],
-"module__helios_8core_8ecs_8LinearLookupStrategy.html#ad4583b14f0bd1ed65cf69df66d0b04d9":[3,0,69,4],
-"module__helios_8core_8ecs_8LinearLookupStrategy.html#adba30bb9ce212b9b729a50aefebaf4fc":[3,0,69,3],
-"module__helios_8core_8ecs_8SparseSet.html":[3,0,70],
 "module__helios_8core_8ecs_8SparseSet.html#a0e3ddfa616b3b96f1de174e2d392a6b2":[3,0,70,2],
 "module__helios_8core_8ecs_8SparseSet.html#a0f05b615d67336203c934a26ad29955f":[3,0,70,44],
 "module__helios_8core_8ecs_8SparseSet.html#a1585e1c6f563c55b27536219eafb2b0e":[3,0,70,21],
@@ -249,5 +237,17 @@ var NAVTREEINDEX40 =
 "module__helios_8engine_8builder_8gameObject_8builders_8configs_8SceneNodeConfig.html#ae39bb189d891965952eddc224e3d44e5":[3,0,97,3],
 "module__helios_8engine_8builder_8gameObject_8builders_8configs_8ScorePoolConfig.html":[3,0,98],
 "module__helios_8engine_8builder_8gameObject_8builders_8configs_8ScorePoolConfig.html#a82dbea3af8f972ff49467d459c01fb22":[3,0,98,2],
-"module__helios_8engine_8builder_8gameObject_8builders_8configs_8ScorePoolConfig.html#a9c793e2c3203aa5b81b3d78c0350ed71":[3,0,98,1]
+"module__helios_8engine_8builder_8gameObject_8builders_8configs_8ScorePoolConfig.html#a9c793e2c3203aa5b81b3d78c0350ed71":[3,0,98,1],
+"module__helios_8engine_8builder_8gameObject_8builders_8configs_8ScoreValueConfig.html":[3,0,99],
+"module__helios_8engine_8builder_8gameObject_8builders_8configs_8ScoreValueConfig.html#a32d49a1de18e910e97d08c7087eaffc4":[3,0,99,2],
+"module__helios_8engine_8builder_8gameObject_8builders_8configs_8ScoreValueConfig.html#a6ddbdd71d994593e19040e5228af901b":[3,0,99,1],
+"module__helios_8engine_8builder_8gameObject_8builders_8configs_8SpawnConfig.html":[3,0,100],
+"module__helios_8engine_8builder_8gameObject_8builders_8configs_8SpawnConfig.html#a3396d1eb3858eb3c0446945d01bdd50d":[3,0,100,2],
+"module__helios_8engine_8builder_8gameObject_8builders_8configs_8SpawnConfig.html#abe0ee627e8eb42212cea1385f565b521":[3,0,100,3],
+"module__helios_8engine_8builder_8gameObject_8builders_8configs_8SpawnConfig.html#af82a8e19f72b857328f6e66e27f9c30c":[3,0,100,1],
+"module__helios_8engine_8builder_8gameObject_8builders_8configs_8SteeringConfig.html":[3,0,101],
+"module__helios_8engine_8builder_8gameObject_8builders_8configs_8SteeringConfig.html#a73df29c453034c411aac68ccefb8f2b9":[3,0,101,1],
+"module__helios_8engine_8builder_8gameObject_8builders_8configs_8SteeringConfig.html#ae48ee1b690bfad63f202fee27490c767":[3,0,101,2],
+"module__helios_8engine_8builder_8gameObject_8builders_8configs_8SteeringConfig.html#afba2945fed23ca25500361a43a78cde0":[3,0,101,3],
+"module__helios_8engine_8builder_8gameObject_8builders_8configs_8TextRenderableConfig.html":[3,0,102]
 };

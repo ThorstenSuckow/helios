@@ -1,17 +1,5 @@
 var NAVTREEINDEX39 =
 {
-"helios_2engine_2runtime_2world_2types_2__module_8ixx_source.html":[7,0,0,0,1,1,2,6,4,0,0],
-"helios_2engine_2state_2__module_8ixx.html":[7,0,0,0,1,1,2,7,4],
-"helios_2engine_2state_2__module_8ixx_source.html":[7,0,0,0,1,1,2,7,4],
-"helios_2engine_2state_2commands_2__module_8ixx.html":[7,0,0,0,1,1,2,7,0,0],
-"helios_2engine_2state_2commands_2__module_8ixx_source.html":[7,0,0,0,1,1,2,7,0,0],
-"helios_2engine_2state_2components_2__module_8ixx.html":[7,0,0,0,1,1,2,7,1,0],
-"helios_2engine_2state_2components_2__module_8ixx_source.html":[7,0,0,0,1,1,2,7,1,0],
-"helios_2engine_2state_2listeners_2__module_8ixx.html":[7,0,0,0,1,1,2,7,2,0],
-"helios_2engine_2state_2listeners_2__module_8ixx_source.html":[7,0,0,0,1,1,2,7,2,0],
-"helios_2engine_2state_2types_2__module_8ixx.html":[7,0,0,0,1,1,2,7,3,0],
-"helios_2engine_2state_2types_2__module_8ixx_source.html":[7,0,0,0,1,1,2,7,3,0],
-"helios_2engine_2tooling_2__module_8ixx.html":[7,0,0,0,1,1,2,8,0],
 "helios_2engine_2tooling_2__module_8ixx_source.html":[7,0,0,0,1,1,2,8,0],
 "helios_2event_2__module_8ixx.html":[7,0,0,0,1,1,3,0],
 "helios_2event_2__module_8ixx_source.html":[7,0,0,0,1,1,3,0],
@@ -249,5 +237,17 @@ var NAVTREEINDEX39 =
 "module__helios_8core_8ecs_8EntityRegistry.html#a5436b6eab572b18f1fe3e4aeddd88fef":[3,0,67,8],
 "module__helios_8core_8ecs_8EntityRegistry.html#a5e4c983574f6fea33037c909ad9c4864":[3,0,67,5],
 "module__helios_8core_8ecs_8EntityRegistry.html#a727ce430a51135bfd256125a84ea777b":[3,0,67,3],
-"module__helios_8core_8ecs_8EntityRegistry.html#a7ba0dff8e9e9220b424c56c424d8f13b":[3,0,67,4]
+"module__helios_8core_8ecs_8EntityRegistry.html#a7ba0dff8e9e9220b424c56c424d8f13b":[3,0,67,4],
+"module__helios_8core_8ecs_8EntityRegistry.html#aad19e4cf9fdf39f410cf0ee380f9f35d":[3,0,67,1],
+"module__helios_8core_8ecs_8HashedLookupStrategy.html":[3,0,68],
+"module__helios_8core_8ecs_8HashedLookupStrategy.html#a2feff8e60b4c1459e6b0b61fae0f2079":[3,0,68,3],
+"module__helios_8core_8ecs_8HashedLookupStrategy.html#a70f21ba641d077a3d0ea3633fb4967b2":[3,0,68,2],
+"module__helios_8core_8ecs_8HashedLookupStrategy.html#aa85b6ae51bd2ec519182f6de6bf68a40":[3,0,68,4],
+"module__helios_8core_8ecs_8HashedLookupStrategy.html#ace92269b2e605bd09935ff2652598cc4":[3,0,68,1],
+"module__helios_8core_8ecs_8LinearLookupStrategy.html":[3,0,69],
+"module__helios_8core_8ecs_8LinearLookupStrategy.html#a98d353764c3de0a921ad116b7e1e0933":[3,0,69,2],
+"module__helios_8core_8ecs_8LinearLookupStrategy.html#aab15ecdd833c8bb0d57460b62672d3ae":[3,0,69,1],
+"module__helios_8core_8ecs_8LinearLookupStrategy.html#ad4583b14f0bd1ed65cf69df66d0b04d9":[3,0,69,4],
+"module__helios_8core_8ecs_8LinearLookupStrategy.html#adba30bb9ce212b9b729a50aefebaf4fc":[3,0,69,3],
+"module__helios_8core_8ecs_8SparseSet.html":[3,0,70]
 };

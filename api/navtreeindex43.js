@@ -1,17 +1,5 @@
 var NAVTREEINDEX43 =
 {
-"module__helios_8engine_8mechanics_8health_8events.html":[3,0,212],
-"module__helios_8engine_8mechanics_8health_8events_8HealthChangedEvent.html":[3,0,213],
-"module__helios_8engine_8mechanics_8health_8events_8HealthChangedEvent.html#aa05d2ee20ee665c06b0ec5f3f53033b3":[3,0,213,1],
-"module__helios_8engine_8mechanics_8health_8events_8HealthChangedEvent.html#ac506dd62dcf3c21b43466521691d02c9":[3,0,213,2],
-"module__helios_8engine_8mechanics_8health_8events_8HealthDepletedEvent.html":[3,0,214],
-"module__helios_8engine_8mechanics_8health_8events_8HealthDepletedEvent.html#a4b8c26b570172ace4807fa868a78346b":[3,0,214,2],
-"module__helios_8engine_8mechanics_8health_8events_8HealthDepletedEvent.html#a8f25111a18cca122dff6839f8b8efed3":[3,0,214,1],
-"module__helios_8engine_8mechanics_8health_8events_8HealthDepletedEvent.html#ae5f5a255c505948945ff6b17b1b7c249":[3,0,214,3],
-"module__helios_8engine_8mechanics_8health_8registry.html":[3,0,216],
-"module__helios_8engine_8mechanics_8health_8registry.html#addd86c1513766492364e86dbaf1a609f":[3,0,216,0],
-"module__helios_8engine_8mechanics_8health_8systems.html":[3,0,217],
-"module__helios_8engine_8mechanics_8health_8systems_8HealthUpdateClearSystem.html":[3,0,218],
 "module__helios_8engine_8mechanics_8health_8systems_8HealthUpdateClearSystem.html#a52331aa983fb5f32f7588ff74bfce6b7":[3,0,218,1],
 "module__helios_8engine_8mechanics_8health_8systems_8HealthUpdateClearSystem.html#ab7a4c03d250d898716be4741b6773870":[3,0,218,2],
 "module__helios_8engine_8mechanics_8health_8types.html":[3,0,219],
@@ -249,5 +237,17 @@ var NAVTREEINDEX43 =
 "module__helios_8engine_8mechanics_8scoring_8systems_8ScoreObserverClearSystem.html#ad5b8dd3fff4891e9be80da37a79a2273":[3,0,277,2],
 "module__helios_8engine_8mechanics_8scoring_8systems_8ScoreObserverSystem.html":[3,0,278],
 "module__helios_8engine_8mechanics_8scoring_8systems_8ScoreObserverSystem.html#a2ac268cb1c836d919a5c2ef1674d1278":[3,0,278,1],
-"module__helios_8engine_8mechanics_8scoring_8systems_8ScoreObserverSystem.html#a9d74ff43473895bb8246e9670932cedb":[3,0,278,2]
+"module__helios_8engine_8mechanics_8scoring_8systems_8ScoreObserverSystem.html#a9d74ff43473895bb8246e9670932cedb":[3,0,278,2],
+"module__helios_8engine_8mechanics_8scoring_8systems_8ScoreObserverSystem.html#aec026025fe2cdd7a0db83441b458a74e":[3,0,278,3],
+"module__helios_8engine_8mechanics_8scoring_8types.html":[3,0,279],
+"module__helios_8engine_8mechanics_8scoring_8types_8KillReward.html":[3,0,280],
+"module__helios_8engine_8mechanics_8scoring_8types_8KillReward.html#ab8f77ae96d8cb04a64bae4457041670f":[3,0,280,2],
+"module__helios_8engine_8mechanics_8scoring_8types_8KillReward.html#af2fd8c776b80f059b22084ef0a725992":[3,0,280,1],
+"module__helios_8engine_8mechanics_8scoring_8types_8Score.html":[3,0,281],
+"module__helios_8engine_8mechanics_8scoring_8types_8Score.html#a237c2d4de96b81224d760c6d28404037":[3,0,281,5],
+"module__helios_8engine_8mechanics_8scoring_8types_8Score.html#a7c0902a979af6edc6df7687a509d6743":[3,0,281,4],
+"module__helios_8engine_8mechanics_8scoring_8types_8Score.html#a849dba0a8f2002517c0911248370242f":[3,0,281,3],
+"module__helios_8engine_8mechanics_8scoring_8types_8Score.html#a99ab62d12f92078ea3353e7022584b88":[3,0,281,2],
+"module__helios_8engine_8mechanics_8scoring_8types_8Score.html#ad6ce115b5c9287fbac4b5639dffa0b63":[3,0,281,1],
+"module__helios_8engine_8mechanics_8scoring_8types_8ScorePoolId.html":[3,0,283]
 };

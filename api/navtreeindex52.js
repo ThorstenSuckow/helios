@@ -1,5 +1,7 @@
 var NAVTREEINDEX52 =
 {
+"module__helios_8rendering_8asset_8shape_8basic_8Ellipse.html#acaf9134b8929a9153dfcc95dd65280fc":[3,0,593,1],
+"module__helios_8rendering_8asset_8shape_8basic_8Ellipse.html#ad401c4242eb7646038f39ff6f0ac4c2c":[3,0,593,3],
 "module__helios_8rendering_8asset_8shape_8basic_8Grid.html":[3,0,594],
 "module__helios_8rendering_8asset_8shape_8basic_8Grid.html#a0cfe72303608a25721b9621d71c21376":[3,0,594,2],
 "module__helios_8rendering_8asset_8shape_8basic_8Grid.html#a37d90bb97245634ed249c8d266da6b93":[3,0,594,1],
@@ -247,7 +249,5 @@ var NAVTREEINDEX52 =
 "module__helios_8scene_8Scene.html#a328b36a3ea8ff303419dc60ed3fd0627":[3,0,642,7],
 "module__helios_8scene_8Scene.html#a3daf47f04c82372f22c8a6f85b277160":[3,0,642,11],
 "module__helios_8scene_8Scene.html#a411492ac5cc05ac601ee0aef03dced51":[3,0,642,9],
-"module__helios_8scene_8Scene.html#a776c5b21ffb85e5d63a5117b51797bb9":[3,0,642,8],
-"module__helios_8scene_8Scene.html#a9b596ef125f2e58772117279f8b1351c":[3,0,642,6],
-"module__helios_8scene_8Scene.html#ac25813beeeb6cbccf15cb04a14df9113":[3,0,642,5]
+"module__helios_8scene_8Scene.html#a776c5b21ffb85e5d63a5117b51797bb9":[3,0,642,8]
 };

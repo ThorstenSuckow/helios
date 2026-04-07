@@ -119,13 +119,14 @@ Typedefs</h2></td></tr>
 Enumerations</h2></td></tr>
 <tr class="memitem:a8e0bcae228fdf9f4cb489e7f912d80be" id="r_a8e0bcae228fdf9f4cb489e7f912d80be"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8e0bcae228fdf9f4cb489e7f912d80be">helios::engine::mechanics::gamestate::types::GameState</a> : GameStateType { <br />
 &#160;&#160;<a class="el" href="#a8e0bcae228fdf9f4cb489e7f912d80beaec0fc0100c4fc1ce4eea230c3dc10360">Undefined</a> = 0
-, <a class="el" href="#a8e0bcae228fdf9f4cb489e7f912d80bea21f45ef9bdfed8430be0b52bab6c3a99">Booted</a> = 1 &lt;&lt; 0
-, <a class="el" href="#a8e0bcae228fdf9f4cb489e7f912d80beab78a3223503896721cca1303f776159b">Title</a> = 1 &lt;&lt; 1
-, <a class="el" href="#a8e0bcae228fdf9f4cb489e7f912d80bea165d53d9068b7a9f038a6023ae51ee97">MatchReady</a> = 1 &lt;&lt; 2
+, <a class="el" href="#a8e0bcae228fdf9f4cb489e7f912d80bead31181c15b9b2bfe52e84052376b0c04">Booting</a> = 1 &lt;&lt; 0
+, <a class="el" href="#a8e0bcae228fdf9f4cb489e7f912d80bea21f45ef9bdfed8430be0b52bab6c3a99">Booted</a> = 1 &lt;&lt; 1
+, <a class="el" href="#a8e0bcae228fdf9f4cb489e7f912d80beab78a3223503896721cca1303f776159b">Title</a> = 1 &lt;&lt; 2
 , <br />
-&#160;&#160;<a class="el" href="#a8e0bcae228fdf9f4cb489e7f912d80bea5bda814c4aedb126839228f1a3d92f09">Running</a> = 1 &lt;&lt; 3
-, <a class="el" href="#a8e0bcae228fdf9f4cb489e7f912d80beae99180abf47a8b3a856e0bcb2656990a">Paused</a> = 1 &lt;&lt; 4
-, <a class="el" href="#a8e0bcae228fdf9f4cb489e7f912d80beaed36a1ef76a59ee3f15180e0441188ad">Any</a> = Booted | Running | MatchReady | Title | Paused
+&#160;&#160;<a class="el" href="#a8e0bcae228fdf9f4cb489e7f912d80bea165d53d9068b7a9f038a6023ae51ee97">MatchReady</a> = 1 &lt;&lt; 3
+, <a class="el" href="#a8e0bcae228fdf9f4cb489e7f912d80bea5bda814c4aedb126839228f1a3d92f09">Running</a> = 1 &lt;&lt; 4
+, <a class="el" href="#a8e0bcae228fdf9f4cb489e7f912d80beae99180abf47a8b3a856e0bcb2656990a">Paused</a> = 1 &lt;&lt; 5
+, <a class="el" href="#a8e0bcae228fdf9f4cb489e7f912d80beaed36a1ef76a59ee3f15180e0441188ad">Any</a> = Booting | Booted | Running | MatchReady | Title | Paused
 <br />
  }</td></tr>
 <tr class="memdesc:a8e0bcae228fdf9f4cb489e7f912d80be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration of possible game states.  <a href="#a8e0bcae228fdf9f4cb489e7f912d80be">More...</a><br /></td></tr>
@@ -147,6 +148,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:af65e991fd980093437a4316684efbf74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bitwise OR operator for combining game states.  <br /></td></tr>
 <tr class="memitem:a02090d5a1bd064971c1be9315b221085" id="r_a02090d5a1bd064971c1be9315b221085"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="#a8e0bcae228fdf9f4cb489e7f912d80be">GameState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a02090d5a1bd064971c1be9315b221085">helios::engine::mechanics::gamestate::types::operator&amp;</a> (const <a class="el" href="#a8e0bcae228fdf9f4cb489e7f912d80be">GameState</a> lhs, const <a class="el" href="#a8e0bcae228fdf9f4cb489e7f912d80be">GameState</a> rhs) noexcept</td></tr>
 <tr class="memdesc:a02090d5a1bd064971c1be9315b221085"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bitwise AND operator for masking game states.  <br /></td></tr>
+<tr class="memitem:a6335367a21d069e26e50e28eef7bdbbb" id="r_a6335367a21d069e26e50e28eef7bdbbb"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="#a8e0bcae228fdf9f4cb489e7f912d80be">GameState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6335367a21d069e26e50e28eef7bdbbb">helios::engine::mechanics::gamestate::types::operator~</a> (const <a class="el" href="#a8e0bcae228fdf9f4cb489e7f912d80be">GameState</a> lhs) noexcept</td></tr>
+<tr class="memdesc:a6335367a21d069e26e50e28eef7bdbbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bitwise NOT operator for inverting game state bits.  <br /></td></tr>
 <tr class="memitem:ab0579070ccee01e3cbb703c14375bf77" id="r_ab0579070ccee01e3cbb703c14375bf77"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab0579070ccee01e3cbb703c14375bf77">helios::engine::mechanics::gamestate::types::hasFlag</a> (const <a class="el" href="#a8e0bcae228fdf9f4cb489e7f912d80be">GameState</a> mask, const <a class="el" href="#a8e0bcae228fdf9f4cb489e7f912d80be">GameState</a> flag) noexcept</td></tr>
 <tr class="memdesc:ab0579070ccee01e3cbb703c14375bf77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a flag is set in a state mask.  <br /></td></tr>
 </table><table class="memberdecls">
@@ -209,6 +212,7 @@ Variables</h2></td></tr>
 <p>States can be combined using bitwise operators for masking. </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a8e0bcae228fdf9f4cb489e7f912d80beaec0fc0100c4fc1ce4eea230c3dc10360" name="a8e0bcae228fdf9f4cb489e7f912d80beaec0fc0100c4fc1ce4eea230c3dc10360"></a>Undefined&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8e0bcae228fdf9f4cb489e7f912d80bead31181c15b9b2bfe52e84052376b0c04" name="a8e0bcae228fdf9f4cb489e7f912d80bead31181c15b9b2bfe52e84052376b0c04"></a>Booting&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a8e0bcae228fdf9f4cb489e7f912d80bea21f45ef9bdfed8430be0b52bab6c3a99" name="a8e0bcae228fdf9f4cb489e7f912d80bea21f45ef9bdfed8430be0b52bab6c3a99"></a>Booted&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a8e0bcae228fdf9f4cb489e7f912d80beab78a3223503896721cca1303f776159b" name="a8e0bcae228fdf9f4cb489e7f912d80beab78a3223503896721cca1303f776159b"></a>Title&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a8e0bcae228fdf9f4cb489e7f912d80bea165d53d9068b7a9f038a6023ae51ee97" name="a8e0bcae228fdf9f4cb489e7f912d80bea165d53d9068b7a9f038a6023ae51ee97"></a>MatchReady&#160;</td><td class="fielddoc"></td></tr>
@@ -295,7 +299,7 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the flag is set in the mask. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameState_8ixx_source.html#l00071">71</a> of file <a class="el" href="GameState_8ixx_source.html">GameState.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameState_8ixx_source.html#l00081">81</a> of file <a class="el" href="GameState_8ixx_source.html">GameState.ixx</a>.</p>
 
 </div>
 </div>
@@ -328,7 +332,7 @@ Variables</h2></td></tr>
 
 <p>Bitwise AND operator for masking game states. </p>
 
-<p class="definition">Definition at line <a class="el" href="GameState_8ixx_source.html#l00060">60</a> of file <a class="el" href="GameState_8ixx_source.html">GameState.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameState_8ixx_source.html#l00062">62</a> of file <a class="el" href="GameState_8ixx_source.html">GameState.ixx</a>.</p>
 
 </div>
 </div>
@@ -361,7 +365,38 @@ Variables</h2></td></tr>
 
 <p>Bitwise OR operator for combining game states. </p>
 
-<p class="definition">Definition at line <a class="el" href="GameState_8ixx_source.html#l00053">53</a> of file <a class="el" href="GameState_8ixx_source.html">GameState.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameState_8ixx_source.html#l00055">55</a> of file <a class="el" href="GameState_8ixx_source.html">GameState.ixx</a>.</p>
+
+</div>
+</div>
+<a id="a6335367a21d069e26e50e28eef7bdbbb" name="a6335367a21d069e26e50e28eef7bdbbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6335367a21d069e26e50e28eef7bdbbb">&#9670;&#160;</a></span>operator~()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a8e0bcae228fdf9f4cb489e7f912d80be">GameState</a> helios::engine::mechanics::gamestate::types::operator~ </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a8e0bcae228fdf9f4cb489e7f912d80be">GameState</a></td>          <td class="paramname"><span class="paramname"><em>lhs</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Bitwise NOT operator for inverting game state bits. </p>
+
+<p class="definition">Definition at line <a class="el" href="GameState_8ixx_source.html#l00069">69</a> of file <a class="el" href="GameState_8ixx_source.html">GameState.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="GameState_8ixx_source.html#l00047">Any</a>.</p>
 
 </div>
 </div>

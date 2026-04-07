@@ -1,5 +1,7 @@
 var NAVTREEINDEX47 =
 {
+"module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#a98cbe97a3109c14b10f3512141147c1c":[3,0,428,11],
+"module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#aa52f3f47d44e2770842fb1d3d0d4d295":[3,0,428,6],
 "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#aaa1b42a834c11c2ef03c32bc1e8d9827":[3,0,428,12],
 "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#ab341134fc3ea3f11257d09eda77db7fb":[3,0,428,14],
 "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#ad5d3cd1fe4d274b2e0fbf93dff460577":[3,0,428,9],
@@ -247,7 +249,5 @@ var NAVTREEINDEX47 =
 "module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8RandomDirectionInitializer.html#acc5c6d430c92ca5523aec5dabe4f8207":[3,0,476,1],
 "module__helios_8engine_8runtime_8spawn_8behavior_8placements.html":[3,0,477],
 "module__helios_8engine_8runtime_8spawn_8behavior_8placements_8AxisSpawnPlacer.html":[3,0,478],
-"module__helios_8engine_8runtime_8spawn_8behavior_8placements_8AxisSpawnPlacer.html#a63526dfb3c2d53b1b44ed3fb60b308b8":[3,0,478,2],
-"module__helios_8engine_8runtime_8spawn_8behavior_8placements_8AxisSpawnPlacer.html#afabe2f1bdd04f460f3d7e2091902daf1":[3,0,478,1],
-"module__helios_8engine_8runtime_8spawn_8behavior_8placements_8ColumnSpawnPlacer.html":[3,0,479]
+"module__helios_8engine_8runtime_8spawn_8behavior_8placements_8AxisSpawnPlacer.html#a63526dfb3c2d53b1b44ed3fb60b308b8":[3,0,478,2]
 };

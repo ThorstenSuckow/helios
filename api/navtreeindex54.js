@@ -1,5 +1,7 @@
 var NAVTREEINDEX54 =
 {
+"module__helios_8window_8Window.html#a36cf16dcb794e5cc07a363673e4787a5":[3,0,664,14],
+"module__helios_8window_8Window.html#a3a4a6fcd73d8632f3368e98acc338c85":[3,0,664,24],
 "module__helios_8window_8Window.html#a3aadafde86d1cf52080eda7a8209b8ba":[3,0,664,25],
 "module__helios_8window_8Window.html#a42e441b82a4e44295864f7919d958355":[3,0,664,1],
 "module__helios_8window_8Window.html#a6b70ab4bbf999583b306297859e074cc":[3,0,664,19],
@@ -240,14 +242,12 @@ var NAVTREEINDEX54 =
 "namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1systems.html":[4,0,0,3,6,3,1],
 "namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html":[4,0,0,3,6,3,2],
 "namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a02090d5a1bd064971c1be9315b221085":[4,0,0,3,6,3,2,4],
-"namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a54ed1e4e41fc7a66768c28383874826a":[4,0,0,3,6,3,2,6],
+"namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a54ed1e4e41fc7a66768c28383874826a":[4,0,0,3,6,3,2,7],
+"namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a6335367a21d069e26e50e28eef7bdbbb":[4,0,0,3,6,3,2,6],
 "namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a73539c0b43e1877f9c1e3fd329cc1fa4":[4,0,0,3,6,3,2,2],
 "namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a73539c0b43e1877f9c1e3fd329cc1fa4a16f0d7ac8bebb828d1b88da0ae96df30":[4,0,0,3,6,3,2,2,2],
 "namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a73539c0b43e1877f9c1e3fd329cc1fa4a243246fb21a19e24cefc7250e179df79":[4,0,0,3,6,3,2,2,3],
 "namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a73539c0b43e1877f9c1e3fd329cc1fa4a4f03ca19300ef12a6732174076992060":[4,0,0,3,6,3,2,2,1],
 "namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a73539c0b43e1877f9c1e3fd329cc1fa4aa755f6cef42bb1c48404ed8217e9e73e":[4,0,0,3,6,3,2,2,4],
-"namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a73539c0b43e1877f9c1e3fd329cc1fa4acdde80fb9f9fc91777e43c0dd98320b1":[4,0,0,3,6,3,2,2,5],
-"namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a73539c0b43e1877f9c1e3fd329cc1fa4aec0fc0100c4fc1ce4eea230c3dc10360":[4,0,0,3,6,3,2,2,0],
-"namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a73b150e7583e97e71959b2f58fe4b9b1":[4,0,0,3,6,3,2,0],
-"namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a8e0bcae228fdf9f4cb489e7f912d80be":[4,0,0,3,6,3,2,1]
+"namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html#a73539c0b43e1877f9c1e3fd329cc1fa4acdde80fb9f9fc91777e43c0dd98320b1":[4,0,0,3,6,3,2,2,5]
 };

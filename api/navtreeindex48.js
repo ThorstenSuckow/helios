@@ -1,5 +1,7 @@
 var NAVTREEINDEX48 =
 {
+"module__helios_8engine_8runtime_8spawn_8behavior_8placements_8AxisSpawnPlacer.html#afabe2f1bdd04f460f3d7e2091902daf1":[3,0,478,1],
+"module__helios_8engine_8runtime_8spawn_8behavior_8placements_8ColumnSpawnPlacer.html":[3,0,479],
 "module__helios_8engine_8runtime_8spawn_8behavior_8placements_8ColumnSpawnPlacer.html#a34762adec8963ba02032845e2fc56462":[3,0,479,1],
 "module__helios_8engine_8runtime_8spawn_8behavior_8placements_8DistributedSpawnPlacer.html":[3,0,480],
 "module__helios_8engine_8runtime_8spawn_8behavior_8placements_8DistributedSpawnPlacer.html#aaf6baab1a55e6dfbb23747fc72259ade":[3,0,480,1],
@@ -247,7 +249,5 @@ var NAVTREEINDEX48 =
 "module__helios_8engine_8runtime_8world_8types_8ManagerTypeId.html#a31ad8219a42ac40016b4ff5fbbece5db":[3,0,530,2],
 "module__helios_8engine_8runtime_8world_8types_8ManagerTypeId.html#a48f2bb2810d3ae1c6b9f9fb3d6c08722":[3,0,530,1],
 "module__helios_8engine_8runtime_8world_8types_8ManagerTypeId.html#a82690197c69924155d4e27e4e5e41f49":[3,0,530,4],
-"module__helios_8engine_8runtime_8world_8types_8ManagerTypeId.html#ac96ca15cc0c6fe138a445c54dac7ff62":[3,0,530,5],
-"module__helios_8engine_8runtime_8world_8types_8ManagerTypeId.html#ae7c761e7883c92018474b66705b5fa93":[3,0,530,3],
-"module__helios_8engine_8runtime_8world_8types_8ResourceTypeId.html":[3,0,531]
+"module__helios_8engine_8runtime_8world_8types_8ManagerTypeId.html#ac96ca15cc0c6fe138a445c54dac7ff62":[3,0,530,5]
 };

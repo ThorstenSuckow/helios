@@ -1,5 +1,7 @@
 var NAVTREEINDEX49 =
 {
+"module__helios_8engine_8runtime_8world_8types_8ManagerTypeId.html#ae7c761e7883c92018474b66705b5fa93":[3,0,530,3],
+"module__helios_8engine_8runtime_8world_8types_8ResourceTypeId.html":[3,0,531],
 "module__helios_8engine_8runtime_8world_8types_8ResourceTypeId.html#a25a17595f925230200bc0866a2d6ee20":[3,0,531,3],
 "module__helios_8engine_8runtime_8world_8types_8ResourceTypeId.html#a28679f89fc65b49865b10f3677a13a03":[3,0,531,2],
 "module__helios_8engine_8runtime_8world_8types_8ResourceTypeId.html#a37f9dd904ff6a2a737cf569545d71e8b":[3,0,531,4],
@@ -247,7 +249,5 @@ var NAVTREEINDEX49 =
 "module__helios_8ext_8imgui_8ImGuiLogSink.html#a35d5147045ab3040e14410530674f2bc":[3,0,17,2],
 "module__helios_8ext_8imgui_8ImGuiLogSink.html#a4e0540a3ef8f7838fdaa082225863e2f":[3,0,17,5],
 "module__helios_8ext_8imgui_8ImGuiLogSink.html#ab80c1cfe5b99ab3a1d0b4a811995e912":[3,0,17,3],
-"module__helios_8ext_8imgui_8ImGuiOverlay.html":[3,0,18],
-"module__helios_8ext_8imgui_8ImGuiOverlay.html#a042c8dc0c0d0a6a0cf47daaf404e8601":[3,0,18,4],
-"module__helios_8ext_8imgui_8ImGuiOverlay.html#ab3f79cc8881b8d1ee688bdbe976955a7":[3,0,18,2]
+"module__helios_8ext_8imgui_8ImGuiOverlay.html":[3,0,18]
 };

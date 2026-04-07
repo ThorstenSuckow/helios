@@ -67,7 +67,7 @@ export namespace helios::engine::mechanics::gamestate::types {
      * @brief Bitwise NOT operator for inverting game state bits.
      */
     [[nodiscard]] constexpr GameState operator~(const GameState lhs) noexcept {
-        return static_cast<GameState>(~static_cast<GameStateType>(lhs));
+        return static_cast<GameState>((~static_cast<GameStateType>(lhs)) & static_cast<GameStateType>(GameState::Any));
     }
 
 

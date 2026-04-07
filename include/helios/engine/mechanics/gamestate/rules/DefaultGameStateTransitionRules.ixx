@@ -24,13 +24,6 @@ export namespace helios::engine::mechanics::gamestate::rules {
 
     /**
      * @brief Provides the default set of game state transition rules.
-     *
-     * Defines standard transitions such as:
-     * - Undefined -> Title (on TitleRequested)
-     * - Title -> Running (on StartRequested)
-     * - Running <-> Paused (on TogglePause)
-     * - Paused -> Running (on RestartRequested)
-     * - Paused -> Title (on QuitGameRequested)
      */
     class DefaultGameStateTransitionRules {
 
@@ -38,6 +31,12 @@ export namespace helios::engine::mechanics::gamestate::rules {
 
             StateTransitionRule<GameState>(
                 GameState::Undefined,
+                StateTransitionIdType<GameState>::BootRequest,
+                GameState::Booting
+            ),
+
+            StateTransitionRule<GameState>(
+                GameState::Booting,
                 StateTransitionIdType<GameState>::BootRequest,
                 GameState::Booted
             ),

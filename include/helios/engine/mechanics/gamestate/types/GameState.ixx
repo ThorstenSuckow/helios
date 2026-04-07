@@ -28,21 +28,23 @@ export namespace helios::engine::mechanics::gamestate::types {
 
         Undefined = 0,
 
-        Booted = 1 << 0,
+        Booting = 1 << 0,
 
-        Title = 1 << 1,
+        Booted = 1 << 1,
 
-        MatchReady = 1 << 2,
+        Title = 1 << 2,
 
-        Running = 1 << 3,
+        MatchReady = 1 << 3,
 
-        Paused = 1 << 4,
+        Running = 1 << 4,
+
+        Paused = 1 << 5,
 
 
         /**
          * @brief Bitmask representing all defined states.
          */
-        Any = Booted | Running | MatchReady | Title | Paused
+        Any = Booting | Booted | Running | MatchReady | Title | Paused
 
 
     };
@@ -60,6 +62,14 @@ export namespace helios::engine::mechanics::gamestate::types {
     [[nodiscard]] constexpr GameState operator&(const GameState lhs, const GameState rhs) noexcept {
         return static_cast<GameState>(static_cast<GameStateType>(lhs) & static_cast<GameStateType>(rhs));
     }
+
+    /**
+     * @brief Bitwise NOT operator for inverting game state bits.
+     */
+    [[nodiscard]] constexpr GameState operator~(const GameState lhs) noexcept {
+        return static_cast<GameState>((~static_cast<GameStateType>(lhs)) & static_cast<GameStateType>(GameState::Any));
+    }
+
 
     /**
      * @brief Checks if a flag is set in a state mask.

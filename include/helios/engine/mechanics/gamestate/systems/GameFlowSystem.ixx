@@ -21,12 +21,11 @@ import helios.engine.runtime;
 
 import helios.engine.common.tags.SystemRole;
 
+using namespace helios::engine::state::commands;
+using namespace helios::engine::state::types;
+using namespace helios::engine::mechanics::gamestate;
+using namespace helios::engine::mechanics::gamestate::types;
 export namespace helios::engine::mechanics::gamestate::systems {
-
-    using namespace helios::engine::state::commands;
-    using namespace helios::engine::state::types;
-    using namespace helios::engine::mechanics::gamestate;
-    using namespace helios::engine::mechanics::gamestate::types;
 
     /**
      * @brief System that drives automatic game state transitions.
@@ -81,13 +80,6 @@ export namespace helios::engine::mechanics::gamestate::systems {
             prevGameStateTransitionId_ = gameStateTransitionId;
 
             switch (gameState) {
-
-                case GameState::Undefined: {
-                    updateContext.queueCommand<StateCommand<GameState>>(
-                        StateTransitionRequest<GameState>(gameState, GameStateTransitionId::BootRequest)
-                    );
-                    break;
-                }
 
                 case GameState::Booted: {
                     updateContext.queueCommand<StateCommand<GameState>>(

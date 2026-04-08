@@ -8,7 +8,8 @@ var module__helios_8engine_8mechanics_8gamestate_8types_8GameState =
       [ "helios::engine::mechanics::gamestate::types::GameState::MatchReady", "module__helios_8engine_8mechanics_8gamestate_8types_8GameState.html#a8e0bcae228fdf9f4cb489e7f912d80bea165d53d9068b7a9f038a6023ae51ee97", null ],
       [ "helios::engine::mechanics::gamestate::types::GameState::Running", "module__helios_8engine_8mechanics_8gamestate_8types_8GameState.html#a8e0bcae228fdf9f4cb489e7f912d80bea5bda814c4aedb126839228f1a3d92f09", null ],
       [ "helios::engine::mechanics::gamestate::types::GameState::Paused", "module__helios_8engine_8mechanics_8gamestate_8types_8GameState.html#a8e0bcae228fdf9f4cb489e7f912d80beae99180abf47a8b3a856e0bcb2656990a", null ],
-      [ "helios::engine::mechanics::gamestate::types::GameState::Any", "module__helios_8engine_8mechanics_8gamestate_8types_8GameState.html#a8e0bcae228fdf9f4cb489e7f912d80beaed36a1ef76a59ee3f15180e0441188ad", null ]
+      [ "helios::engine::mechanics::gamestate::types::GameState::Any", "module__helios_8engine_8mechanics_8gamestate_8types_8GameState.html#a8e0bcae228fdf9f4cb489e7f912d80beaed36a1ef76a59ee3f15180e0441188ad", null ],
+      [ "helios::engine::mechanics::gamestate::types::GameState::BootingCompleted", "module__helios_8engine_8mechanics_8gamestate_8types_8GameState.html#a8e0bcae228fdf9f4cb489e7f912d80bea051d5feca3fc34c51e3d3415a259a02f", null ]
     ] ],
     [ "helios::engine::mechanics::gamestate::types::GameStateType", "module__helios_8engine_8mechanics_8gamestate_8types_8GameState.html#a73b150e7583e97e71959b2f58fe4b9b1", null ],
     [ "helios::engine::mechanics::gamestate::types::operator|", "module__helios_8engine_8mechanics_8gamestate_8types_8GameState.html#af65e991fd980093437a4316684efbf74", null ],

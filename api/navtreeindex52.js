@@ -1,5 +1,14 @@
 var NAVTREEINDEX52 =
 {
+"module__helios_8rendering_8asset_8shape_8basic.html":[3,0,590],
+"module__helios_8rendering_8asset_8shape_8basic_8Circle.html":[3,0,591],
+"module__helios_8rendering_8asset_8shape_8basic_8Circle.html#a71614cc76b83d631846d77e9ed606c18":[3,0,591,3],
+"module__helios_8rendering_8asset_8shape_8basic_8Circle.html#a7216e5fe912fe498b88884e55966be91":[3,0,591,2],
+"module__helios_8rendering_8asset_8shape_8basic_8Circle.html#ac5fb77c5afd9ed76ba52ef7bda4771e6":[3,0,591,1],
+"module__helios_8rendering_8asset_8shape_8basic_8Cube.html":[3,0,592],
+"module__helios_8rendering_8asset_8shape_8basic_8Cube.html#a298bea767099a4c310ab7108024f848e":[3,0,592,1],
+"module__helios_8rendering_8asset_8shape_8basic_8Ellipse.html":[3,0,593],
+"module__helios_8rendering_8asset_8shape_8basic_8Ellipse.html#a0a00d877402b4a268fff6d4321c40c02":[3,0,593,2],
 "module__helios_8rendering_8asset_8shape_8basic_8Ellipse.html#acaf9134b8929a9153dfcc95dd65280fc":[3,0,593,1],
 "module__helios_8rendering_8asset_8shape_8basic_8Ellipse.html#ad401c4242eb7646038f39ff6f0ac4c2c":[3,0,593,3],
 "module__helios_8rendering_8asset_8shape_8basic_8Grid.html":[3,0,594],
@@ -240,14 +249,5 @@ var NAVTREEINDEX52 =
 "module__helios_8scene_8CullNoneStrategy.html#ae80f1dc83394827d2515e22d0f7ed7b5":[3,0,640,1],
 "module__helios_8scene_8FrustumCullingStrategy.html":[3,0,641],
 "module__helios_8scene_8FrustumCullingStrategy.html#a12f23b3d9ecc16858fedf7483d9890ae":[3,0,641,3],
-"module__helios_8scene_8FrustumCullingStrategy.html#a6132bcbaab01c563b08a97036f985e5a":[3,0,641,2],
-"module__helios_8scene_8FrustumCullingStrategy.html#ad9f145bb29b43f0142eb417f14e83498":[3,0,641,1],
-"module__helios_8scene_8Scene.html":[3,0,642],
-"module__helios_8scene_8Scene.html#a054843594de8ccc99336935ac0cbde11":[3,0,642,13],
-"module__helios_8scene_8Scene.html#a213062a1999076c7fea5688c9831efbf":[3,0,642,2],
-"module__helios_8scene_8Scene.html#a29e89fdacfa35fb808a8016068b1c8ed":[3,0,642,4],
-"module__helios_8scene_8Scene.html#a328b36a3ea8ff303419dc60ed3fd0627":[3,0,642,7],
-"module__helios_8scene_8Scene.html#a3daf47f04c82372f22c8a6f85b277160":[3,0,642,11],
-"module__helios_8scene_8Scene.html#a411492ac5cc05ac601ee0aef03dced51":[3,0,642,9],
-"module__helios_8scene_8Scene.html#a776c5b21ffb85e5d63a5117b51797bb9":[3,0,642,8]
+"module__helios_8scene_8FrustumCullingStrategy.html#a6132bcbaab01c563b08a97036f985e5a":[3,0,641,2]
 };

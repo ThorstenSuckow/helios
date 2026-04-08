@@ -1,5 +1,12 @@
 var NAVTREEINDEX47 =
 {
+"module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#a61c34d3beef78cd268a0db3b422104de":[3,0,428,22],
+"module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#a64cf9c25c8a55e76bc170e6695802860":[3,0,428,17],
+"module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#a666dd3c2243085c084489ab7f1219cec":[3,0,428,16],
+"module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#a73240d4b197cb66a5c60f079d6d592ee":[3,0,428,23],
+"module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#a7cdb5ea50deabb80c732e9f54d099dc2":[3,0,428,13],
+"module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#a7edaf655511bfd775e9f36411fbaa304":[3,0,428,3],
+"module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#a83d32272df2f16ac5b58ec59d5292e11":[3,0,428,10],
 "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#a98cbe97a3109c14b10f3512141147c1c":[3,0,428,11],
 "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#aa52f3f47d44e2770842fb1d3d0d4d295":[3,0,428,6],
 "module__helios_8engine_8modules_8ui_8widgets_8components_8UiTextComponent.html#aaa1b42a834c11c2ef03c32bc1e8d9827":[3,0,428,12],
@@ -242,12 +249,5 @@ var NAVTREEINDEX47 =
 "module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8MoveInitializer.html#a4905d1db361b9e45967cc2a249b7c00e":[3,0,475,3],
 "module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8MoveInitializer.html#a52da231cb8c38e7217bed1a9c3a4d423":[3,0,475,6],
 "module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8MoveInitializer.html#ad459bfb349bf4d8882af3c3c5307b764":[3,0,475,4],
-"module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8MoveInitializer.html#ae047147f4547547c56e5e94233e81ce0":[3,0,475,5],
-"module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8MoveInitializer.html#ae895c56c346fad65c5246eb3bbfcb732":[3,0,475,2],
-"module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8RandomDirectionInitializer.html":[3,0,476],
-"module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8RandomDirectionInitializer.html#a0e904523f6d2fe97f2302a3d3c2d472e":[3,0,476,2],
-"module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8RandomDirectionInitializer.html#acc5c6d430c92ca5523aec5dabe4f8207":[3,0,476,1],
-"module__helios_8engine_8runtime_8spawn_8behavior_8placements.html":[3,0,477],
-"module__helios_8engine_8runtime_8spawn_8behavior_8placements_8AxisSpawnPlacer.html":[3,0,478],
-"module__helios_8engine_8runtime_8spawn_8behavior_8placements_8AxisSpawnPlacer.html#a63526dfb3c2d53b1b44ed3fb60b308b8":[3,0,478,2]
+"module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8MoveInitializer.html#ae047147f4547547c56e5e94233e81ce0":[3,0,475,5]
 };

@@ -168,6 +168,10 @@ requires IsManagerLike&lt;T&gt;</td></tr>
 requires IsCommandBufferLike&lt;T&gt;</td></tr>
 <tr class="memitem:af55dcfbe4ec5a15a16e1a1456143cade template"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af55dcfbe4ec5a15a16e1a1456143cade">tryCommandBuffer</a> () const noexcept</td></tr>
 <tr class="memdesc:af55dcfbe4ec5a15a16e1a1456143cade"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves a registered <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Type-erased wrapper for command buffers using the Concept/Model pattern.">CommandBuffer</a> by type, or nullptr if not found.  <br /></td></tr>
+<tr class="memitem:a73e7454e5e3ee988dfa232076df75f30" id="r_a73e7454e5e3ee988dfa232076df75f30"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; <br />
+requires IsCommandBufferLike&lt;T&gt;</td></tr>
+<tr class="memitem:a73e7454e5e3ee988dfa232076df75f30 template"><td class="memItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a73e7454e5e3ee988dfa232076df75f30">commandBuffer</a> () const noexcept</td></tr>
+<tr class="memdesc:a73e7454e5e3ee988dfa232076df75f30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves a registered <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Type-erased wrapper for command buffers using the Concept/Model pattern.">CommandBuffer</a> by type.  <br /></td></tr>
 <tr class="memitem:a11713e9efa213dbebde7c5b7ca3ddbf3" id="r_a11713e9efa213dbebde7c5b7ca3ddbf3"><td class="memTemplParams" colspan="2">template&lt;typename... CommandType, typename OwningT&gt; <br />
 requires IsCommandHandlerLike&lt;OwningT, CommandType...&gt;</td></tr>
 <tr class="memitem:a11713e9efa213dbebde7c5b7ca3ddbf3 template"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a11713e9efa213dbebde7c5b7ca3ddbf3">registerCommandHandler</a> (OwningT &amp;owner)</td></tr>
@@ -188,6 +192,8 @@ requires IsCommandHandlerLike&lt;OwningT, CommandType...&gt;</td></tr>
 <tr class="memdesc:a768b8b5bc3cdffd15fb8c6b3d9cd54e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a const View for iterating entities with specific components.  <br /></td></tr>
 <tr class="memitem:ac4319f3453e06ad04125c43b17047398" id="r_ac4319f3453e06ad04125c43b17047398"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html">helios::engine::ecs::GameObject</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac4319f3453e06ad04125c43b17047398">find</a> (const <a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a> handle)</td></tr>
 <tr class="memdesc:ac4319f3453e06ad04125c43b17047398"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds a GameObject by its EntityHandle.  <br /></td></tr>
+<tr class="memitem:a373006e1f413923d19d6dcbe0a168074" id="r_a373006e1f413923d19d6dcbe0a168074"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a373006e1f413923d19d6dcbe0a168074">destroy</a> (const <a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a> handle)</td></tr>
+<tr class="memdesc:a373006e1f413923d19d6dcbe0a168074"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to remove an entity from the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html" title="Central game state container for entities, resources, and the active level.">GameWorld</a>.  <br /></td></tr>
 <tr class="memitem:ac2dda75670b28086b1426d320b945db0" id="r_ac2dda75670b28086b1426d320b945db0"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html">helios::engine::ecs::GameObject</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac2dda75670b28086b1426d320b945db0">find</a> (const <a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a> handle) const</td></tr>
 <tr class="memdesc:ac2dda75670b28086b1426d320b945db0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds a GameObject by its EntityHandle (const version).  <br /></td></tr>
 <tr class="memitem:abcc2243a9cb4b493634a63932434bcaf" id="r_abcc2243a9cb4b493634a63932434bcaf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html">helios::engine::ecs::GameObject</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abcc2243a9cb4b493634a63932434bcaf">clone</a> (const <a class="el" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html">helios::engine::ecs::GameObject</a> gameObject)</td></tr>
@@ -304,7 +310,7 @@ View </dd>
 
 <p class="definition">Definition at line <a class="el" href="GameWorld_8ixx_source.html#l00207">207</a> of file <a class="el" href="GameWorld_8ixx_source.html">GameWorld.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameWorld_8ixx_source.html#l00463">addGameObject()</a>, <a class="el" href="GameWorld_8ixx_source.html#l00185">em_</a>, <a class="el" href="GameWorld_8ixx_source.html#l00176">entityRegistry_</a>, and <a class="el" href="GameWorld_8ixx_source.html#l00190">session_</a>.</p>
+<p class="reference">References <a class="el" href="GameWorld_8ixx_source.html#l00479">addGameObject()</a>, <a class="el" href="GameWorld_8ixx_source.html#l00185">em_</a>, <a class="el" href="GameWorld_8ixx_source.html#l00176">entityRegistry_</a>, and <a class="el" href="GameWorld_8ixx_source.html#l00190">session_</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="#ac004c6fdb4e8fcdd334c302f7cb0653c">GameWorld()</a>, <a class="el" href="#ac36313172a25b316147c1ecba9cfadae">GameWorld()</a>, <a class="el" href="#a8309cffe7fbad212831bb353f9bd78d8">operator=()</a>, and <a class="el" href="#a9db65d4d44f4c271cf60e7803297c2aa">operator=()</a>.</p>
 <div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
@@ -423,11 +429,11 @@ View </dd>
 <dd>
 EntityManager::create </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameWorld_8ixx_source.html#l00463">463</a> of file <a class="el" href="GameWorld_8ixx_source.html">GameWorld.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameWorld_8ixx_source.html#l00479">479</a> of file <a class="el" href="GameWorld_8ixx_source.html">GameWorld.ixx</a>.</p>
 
 <p class="reference">References <a class="el" href="GameWorld_8ixx_source.html#l00185">em_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="GameWorld_8ixx_source.html#l00555">clone()</a>, and <a class="el" href="GameWorld_8ixx_source.html#l00207">GameWorld()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="GameWorld_8ixx_source.html#l00587">clone()</a>, and <a class="el" href="GameWorld_8ixx_source.html#l00207">GameWorld()</a>.</p>
 <div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-5-summary" class="dynsummary" style="display:block;">
 </div>
@@ -471,15 +477,57 @@ EntityManager::create </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>A new inactive GameObject with cloned components.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd>EntityManager::clone </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameWorld_8ixx_source.html#l00555">555</a> of file <a class="el" href="GameWorld_8ixx_source.html">GameWorld.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameWorld_8ixx_source.html#l00587">587</a> of file <a class="el" href="GameWorld_8ixx_source.html">GameWorld.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameWorld_8ixx_source.html#l00463">addGameObject()</a>, <a class="el" href="GameWorld_8ixx_source.html#l00185">em_</a>, and <a class="el" href="GameObject_8ixx_source.html#l00129">helios::engine::ecs::GameObject::entityHandle()</a>.</p>
+<p class="reference">References <a class="el" href="GameWorld_8ixx_source.html#l00479">addGameObject()</a>, <a class="el" href="GameWorld_8ixx_source.html#l00185">em_</a>, and <a class="el" href="GameObject_8ixx_source.html#l00129">helios::engine::ecs::GameObject::entityHandle()</a>.</p>
 <div id="dynsection-6" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-6-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-6-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_abcc2243a9cb4b493634a63932434bcaf_cgraph.svg" width="515" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
+
+</div>
+</div>
+<a id="a73e7454e5e3ee988dfa232076df75f30" name="a73e7454e5e3ee988dfa232076df75f30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73e7454e5e3ee988dfa232076df75f30">&#9670;&#160;</a></span>commandBuffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; <br />
+requires IsCommandBufferLike&lt;T&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T &amp; helios::engine::runtime::world::GameWorld::commandBuffer </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Retrieves a registered <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Type-erased wrapper for command buffers using the Concept/Model pattern.">CommandBuffer</a> by type. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Type-erased wrapper for command buffers using the Concept/Model pattern.">CommandBuffer</a> type. Must satisfy IsCommandBufferLike.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section pre"><dt>Precondition</dt><dd>A <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Type-erased wrapper for command buffers using the Concept/Model pattern.">CommandBuffer</a> of type `T` must already be registered. Use <a class="el" href="#af55dcfbe4ec5a15a16e1a1456143cade" title="Retrieves a registered CommandBuffer by type, or nullptr if not found.">tryCommandBuffer&lt;T&gt;()</a> when the buffer is optional.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer.html" title="Type-erased wrapper for command buffers using the Concept/Model pattern.">CommandBuffer</a>. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="GameWorld_8ixx_source.html#l00402">402</a> of file <a class="el" href="GameWorld_8ixx_source.html">GameWorld.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="GameWorld_8ixx_source.html#l00159">resourceRegistry_</a>.</p>
 
 </div>
 </div>
@@ -509,9 +557,49 @@ EntityManager::create </dd></dl>
 <p>Returns a reference to the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandlerRegistry.html" title="Registry that maps CommandType types to handler instances via function pointers.">CommandHandlerRegistry</a>. </p>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandlerRegistry.html" title="Registry that maps CommandType types to handler instances via function pointers.">CommandHandlerRegistry</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameWorld_8ixx_source.html#l00417">417</a> of file <a class="el" href="GameWorld_8ixx_source.html">GameWorld.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameWorld_8ixx_source.html#l00433">433</a> of file <a class="el" href="GameWorld_8ixx_source.html">GameWorld.ixx</a>.</p>
 
 <p class="reference">References <a class="el" href="GameWorld_8ixx_source.html#l00168">commandHandlerRegistry_</a>.</p>
+
+</div>
+</div>
+<a id="a373006e1f413923d19d6dcbe0a168074" name="a373006e1f413923d19d6dcbe0a168074"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a373006e1f413923d19d6dcbe0a168074">&#9670;&#160;</a></span>destroy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::engine::runtime::world::GameWorld::destroy </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">helios::engine::ecs::EntityHandle</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Attempts to remove an entity from the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html" title="Central game state container for entities, resources, and the active level.">GameWorld</a>. </p>
+<p>Delegates to the EntityManager who is then tasked to remove the entity and all associated components.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handle</td><td>The EntityHandle to remove.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the entity was removed, otherwise false.</dd></dl>
+<dl class="section see"><dt>See also</dt><dd>EntityManager::destroy() </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="GameWorld_8ixx_source.html#l00554">554</a> of file <a class="el" href="GameWorld_8ixx_source.html">GameWorld.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="GameWorld_8ixx_source.html#l00185">em_</a>.</p>
 
 </div>
 </div>
@@ -580,7 +668,7 @@ EntityManager::create </dd></dl>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Optional containing the GameObject if found, std::nullopt otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameWorld_8ixx_source.html#l00518">518</a> of file <a class="el" href="GameWorld_8ixx_source.html">GameWorld.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameWorld_8ixx_source.html#l00534">534</a> of file <a class="el" href="GameWorld_8ixx_source.html">GameWorld.ixx</a>.</p>
 
 <p class="reference">References <a class="el" href="GameWorld_8ixx_source.html#l00185">em_</a>.</p>
 
@@ -618,7 +706,7 @@ EntityManager::create </dd></dl>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Optional containing the GameObject if found, std::nullopt otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameWorld_8ixx_source.html#l00533">533</a> of file <a class="el" href="GameWorld_8ixx_source.html">GameWorld.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameWorld_8ixx_source.html#l00565">565</a> of file <a class="el" href="GameWorld_8ixx_source.html">GameWorld.ixx</a>.</p>
 
 <p class="reference">References <a class="el" href="GameWorld_8ixx_source.html#l00185">em_</a>.</p>
 
@@ -656,7 +744,7 @@ EntityManager::create </dd></dl>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="GameWorld_8ixx_source.html#l00445">445</a> of file <a class="el" href="GameWorld_8ixx_source.html">GameWorld.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameWorld_8ixx_source.html#l00461">461</a> of file <a class="el" href="GameWorld_8ixx_source.html">GameWorld.ixx</a>.</p>
 
 <p class="reference">References <a class="el" href="GameWorld_8ixx_source.html#l00159">resourceRegistry_</a>.</p>
 
@@ -702,7 +790,7 @@ EntityManager::create </dd></dl>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="GameWorld_8ixx_source.html#l00430">430</a> of file <a class="el" href="GameWorld_8ixx_source.html">GameWorld.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameWorld_8ixx_source.html#l00446">446</a> of file <a class="el" href="GameWorld_8ixx_source.html">GameWorld.ixx</a>.</p>
 
 <p class="reference">References <a class="el" href="GameWorld_8ixx_source.html#l00159">resourceRegistry_</a>.</p>
 
@@ -1107,7 +1195,7 @@ requires IsCommandHandlerLike&lt;OwningT, CommandType...&gt;</div>
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandlerRegistry.html" title="Registry that maps CommandType types to handler instances via function pointers.">CommandHandlerRegistry</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameWorld_8ixx_source.html#l00408">408</a> of file <a class="el" href="GameWorld_8ixx_source.html">GameWorld.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameWorld_8ixx_source.html#l00424">424</a> of file <a class="el" href="GameWorld_8ixx_source.html">GameWorld.ixx</a>.</p>
 
 <p class="reference">References <a class="el" href="GameWorld_8ixx_source.html#l00168">commandHandlerRegistry_</a>.</p>
 
@@ -1196,7 +1284,7 @@ requires IsManagerLike&lt;T&gt;</div>
 <p>Resets all managers and the session to their initial state. </p>
 <p>Called during level transitions or game restarts to clear accumulated state. Invokes <a class="el" href="#aa134c91f1cff94cb3e708d7908e2a291" title="Resets all managers and the session to their initial state.">reset()</a> on all managers and the session. </p>
 
-<p class="definition">Definition at line <a class="el" href="GameWorld_8ixx_source.html#l00573">573</a> of file <a class="el" href="GameWorld_8ixx_source.html">GameWorld.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameWorld_8ixx_source.html#l00605">605</a> of file <a class="el" href="GameWorld_8ixx_source.html">GameWorld.ixx</a>.</p>
 
 <p class="reference">References <a class="el" href="GameWorld_8ixx_source.html#l00159">resourceRegistry_</a>, and <a class="el" href="GameWorld_8ixx_source.html#l00190">session_</a>.</p>
 
@@ -1229,7 +1317,7 @@ requires IsManagerLike&lt;T&gt;</div>
 <p>Use for direct resource access. Prefer the convenience methods `registerManager()`, `registerCommandBuffer()`, `manager()`, `tryManager()`, and `tryCommandBuffer()` for type-constrained access.</p>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html" title="Unified type-indexed registry for all engine resources.">ResourceRegistry</a>.    </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameWorld_8ixx_source.html#l00599">599</a> of file <a class="el" href="GameWorld_8ixx_source.html">GameWorld.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameWorld_8ixx_source.html#l00631">631</a> of file <a class="el" href="GameWorld_8ixx_source.html">GameWorld.ixx</a>.</p>
 
 <p class="reference">References <a class="el" href="GameWorld_8ixx_source.html#l00159">resourceRegistry_</a>.</p>
 
@@ -1262,7 +1350,7 @@ requires IsManagerLike&lt;T&gt;</div>
 <p>Use for direct resource access. Prefer the convenience methods `registerManager()`, `registerCommandBuffer()`, `manager()`, `tryManager()`, and `tryCommandBuffer()` for type-constrained access.</p>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1ResourceRegistry.html" title="Unified type-indexed registry for all engine resources.">ResourceRegistry</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameWorld_8ixx_source.html#l00592">592</a> of file <a class="el" href="GameWorld_8ixx_source.html">GameWorld.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameWorld_8ixx_source.html#l00624">624</a> of file <a class="el" href="GameWorld_8ixx_source.html">GameWorld.ixx</a>.</p>
 
 <p class="reference">References <a class="el" href="GameWorld_8ixx_source.html#l00159">resourceRegistry_</a>.</p>
 
@@ -1470,7 +1558,7 @@ template&lt;typename... Components&gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>A View for iterating matching entities.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd>View </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameWorld_8ixx_source.html#l00492">492</a> of file <a class="el" href="GameWorld_8ixx_source.html">GameWorld.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameWorld_8ixx_source.html#l00508">508</a> of file <a class="el" href="GameWorld_8ixx_source.html">GameWorld.ixx</a>.</p>
 
 <p class="reference">References <a class="el" href="GameWorld_8ixx_source.html#l00185">em_</a>.</p>
 
@@ -1518,7 +1606,7 @@ template&lt;typename... Components&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A const View for iterating matching entities. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameWorld_8ixx_source.html#l00504">504</a> of file <a class="el" href="GameWorld_8ixx_source.html">GameWorld.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameWorld_8ixx_source.html#l00520">520</a> of file <a class="el" href="GameWorld_8ixx_source.html">GameWorld.ixx</a>.</p>
 
 <p class="reference">References <a class="el" href="GameWorld_8ixx_source.html#l00185">em_</a>.</p>
 

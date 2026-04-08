@@ -1,5 +1,11 @@
 var NAVTREEINDEX31 =
 {
+"classhelios_1_1rendering_1_1LegacyRenderPass.html#acc89be79f351df7a59b809df573996a5":[6,0,0,7,5,6],
+"classhelios_1_1rendering_1_1LegacyRenderPass.html#aece3d26744fd5ca4663a9c6a8e58bcda":[3,0,601,0,4],
+"classhelios_1_1rendering_1_1LegacyRenderPass.html#aece3d26744fd5ca4663a9c6a8e58bcda":[4,0,0,7,6,4],
+"classhelios_1_1rendering_1_1LegacyRenderPass.html#aece3d26744fd5ca4663a9c6a8e58bcda":[6,0,0,7,5,4],
+"classhelios_1_1rendering_1_1LegacyRenderPass.html#aef01d45d7e1ecabcf2939bcccb32cce0":[3,0,601,0,3],
+"classhelios_1_1rendering_1_1LegacyRenderPass.html#aef01d45d7e1ecabcf2939bcccb32cce0":[4,0,0,7,6,3],
 "classhelios_1_1rendering_1_1LegacyRenderPass.html#aef01d45d7e1ecabcf2939bcccb32cce0":[6,0,0,7,5,3],
 "classhelios_1_1rendering_1_1RenderPassFactory.html":[3,0,615,0],
 "classhelios_1_1rendering_1_1RenderPassFactory.html":[4,0,0,7,9],
@@ -243,11 +249,5 @@ var NAVTREEINDEX31 =
 "classhelios_1_1rendering_1_1material_1_1Material.html#a4c3143a0cdc335e3918a199293f14acb":[6,0,0,7,1,0,4],
 "classhelios_1_1rendering_1_1material_1_1Material.html#a740d6cd2bebb918e984ecc91cb7e36a4":[3,0,603,0,5],
 "classhelios_1_1rendering_1_1material_1_1Material.html#a740d6cd2bebb918e984ecc91cb7e36a4":[4,0,0,7,1,0,5],
-"classhelios_1_1rendering_1_1material_1_1Material.html#a740d6cd2bebb918e984ecc91cb7e36a4":[6,0,0,7,1,0,5],
-"classhelios_1_1rendering_1_1material_1_1Material.html#a960af91c6543693a71470ab3ca0a7fd7":[3,0,603,0,2],
-"classhelios_1_1rendering_1_1material_1_1Material.html#a960af91c6543693a71470ab3ca0a7fd7":[4,0,0,7,1,0,2],
-"classhelios_1_1rendering_1_1material_1_1Material.html#a960af91c6543693a71470ab3ca0a7fd7":[6,0,0,7,1,0,2],
-"classhelios_1_1rendering_1_1material_1_1Material.html#a974a60df3a4824668532258827016afc":[3,0,603,0,1],
-"classhelios_1_1rendering_1_1material_1_1Material.html#a974a60df3a4824668532258827016afc":[4,0,0,7,1,0,1],
-"classhelios_1_1rendering_1_1material_1_1Material.html#a974a60df3a4824668532258827016afc":[6,0,0,7,1,0,1]
+"classhelios_1_1rendering_1_1material_1_1Material.html#a740d6cd2bebb918e984ecc91cb7e36a4":[6,0,0,7,1,0,5]
 };

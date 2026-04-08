@@ -1,5 +1,11 @@
 var NAVTREEINDEX42 =
 {
+"module__helios_8engine_8ecs_8SparseSet.html#ac4ae7627768152b5a8fb783090f48754":[3,0,164,32],
+"module__helios_8engine_8ecs_8SparseSet.html#ac4e98f9617f52e80b3918c29a673ff8b":[3,0,164,9],
+"module__helios_8engine_8ecs_8SparseSet.html#ac5b0d99fea0c67358ef32bb2319fa3c6":[3,0,164,53],
+"module__helios_8engine_8ecs_8SparseSet.html#ace9be3cad573b79cbe021d656e7ab0c5":[3,0,164,37],
+"module__helios_8engine_8ecs_8SparseSet.html#ad58833ce6af8b70dc114083ddcd75dae":[3,0,164,34],
+"module__helios_8engine_8ecs_8SparseSet.html#ae15c8f6b3462a0657bfca614f8ccaec9":[3,0,164,15],
 "module__helios_8engine_8ecs_8SparseSet.html#ae21a9b992473caf69ee266dfac626afc":[3,0,164,25],
 "module__helios_8engine_8ecs_8SparseSet.html#ae70d52e7ae058c7e3273470d74aa01d5":[3,0,164,50],
 "module__helios_8engine_8ecs_8SparseSet.html#ae8129a104b2a41f4d5912cd076cd1429":[3,0,164,19],
@@ -191,6 +197,7 @@ var NAVTREEINDEX42 =
 "module__helios_8engine_8mechanics_8gamestate_8types_8GameState.html#a6335367a21d069e26e50e28eef7bdbbb":[3,0,207,4],
 "module__helios_8engine_8mechanics_8gamestate_8types_8GameState.html#a73b150e7583e97e71959b2f58fe4b9b1":[3,0,207,1],
 "module__helios_8engine_8mechanics_8gamestate_8types_8GameState.html#a8e0bcae228fdf9f4cb489e7f912d80be":[3,0,207,0],
+"module__helios_8engine_8mechanics_8gamestate_8types_8GameState.html#a8e0bcae228fdf9f4cb489e7f912d80bea051d5feca3fc34c51e3d3415a259a02f":[3,0,207,0,8],
 "module__helios_8engine_8mechanics_8gamestate_8types_8GameState.html#a8e0bcae228fdf9f4cb489e7f912d80bea165d53d9068b7a9f038a6023ae51ee97":[3,0,207,0,4],
 "module__helios_8engine_8mechanics_8gamestate_8types_8GameState.html#a8e0bcae228fdf9f4cb489e7f912d80bea21f45ef9bdfed8430be0b52bab6c3a99":[3,0,207,0,2],
 "module__helios_8engine_8mechanics_8gamestate_8types_8GameState.html#a8e0bcae228fdf9f4cb489e7f912d80bea5bda814c4aedb126839228f1a3d92f09":[3,0,207,0,5],
@@ -242,12 +249,5 @@ var NAVTREEINDEX42 =
 "module__helios_8engine_8mechanics_8health_8components_8HealthComponent.html#ae9e8d4e019cb22caa654e1182dd366f3":[3,0,211,12],
 "module__helios_8engine_8mechanics_8health_8events.html":[3,0,212],
 "module__helios_8engine_8mechanics_8health_8events_8HealthChangedEvent.html":[3,0,213],
-"module__helios_8engine_8mechanics_8health_8events_8HealthChangedEvent.html#aa05d2ee20ee665c06b0ec5f3f53033b3":[3,0,213,1],
-"module__helios_8engine_8mechanics_8health_8events_8HealthChangedEvent.html#ac506dd62dcf3c21b43466521691d02c9":[3,0,213,2],
-"module__helios_8engine_8mechanics_8health_8events_8HealthDepletedEvent.html":[3,0,214],
-"module__helios_8engine_8mechanics_8health_8events_8HealthDepletedEvent.html#a4b8c26b570172ace4807fa868a78346b":[3,0,214,2],
-"module__helios_8engine_8mechanics_8health_8events_8HealthDepletedEvent.html#a8f25111a18cca122dff6839f8b8efed3":[3,0,214,1],
-"module__helios_8engine_8mechanics_8health_8events_8HealthDepletedEvent.html#ae5f5a255c505948945ff6b17b1b7c249":[3,0,214,3],
-"module__helios_8engine_8mechanics_8health_8registry.html":[3,0,216],
-"module__helios_8engine_8mechanics_8health_8registry.html#addd86c1513766492364e86dbaf1a609f":[3,0,216,0]
+"module__helios_8engine_8mechanics_8health_8events_8HealthChangedEvent.html#aa05d2ee20ee665c06b0ec5f3f53033b3":[3,0,213,1]
 };

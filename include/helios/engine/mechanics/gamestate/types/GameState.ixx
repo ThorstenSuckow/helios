@@ -42,10 +42,14 @@ export namespace helios::engine::mechanics::gamestate::types {
 
 
         /**
-         * @brief Bitmask representing all defined states.
+         * @brief Bitmask representing all base/ single-bit state flags.
          */
-        Any = Booting | Booted | Running | MatchReady | Title | Paused
+        Any = Booting | Booted | Running | MatchReady | Title | Paused,
 
+        /**
+         * @brief Bitmask representing booted state, i.e. any state except Booting.
+         */
+        BootingCompleted = Any & ~Booting
 
     };
 

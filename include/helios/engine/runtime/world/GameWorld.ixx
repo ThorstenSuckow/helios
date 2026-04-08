@@ -387,6 +387,22 @@ export namespace helios::engine::runtime::world {
             return resourceRegistry_.tryGet<T>();
         }
 
+        /**
+         * @brief  Retrieves a registered CommandBuffer by type.
+         *
+         * @tparam T The CommandBuffer type. Must satisfy IsCommandBufferLike.
+         *
+         * @pre A CommandBuffer of type `T` must already be registered.
+         *      Use tryCommandBuffer<T>() when the buffer is optional.
+         *
+         * @return Reference to the CommandBuffer.
+         */
+        template<typename T>
+        requires IsCommandBufferLike<T>
+        T& commandBuffer() const noexcept {
+            return resourceRegistry_.get<T>();
+        }
+
 
         /**
          * @brief Registers a command handler for one or more command types.
@@ -521,6 +537,22 @@ export namespace helios::engine::runtime::world {
             }
 
             return helios::engine::ecs::GameObject(handle, &em_);
+        }
+
+        /**
+         * @brief Attempts to remove an entity from the GameWorld.
+         *
+         * @details Delegates to the EntityManager who is then tasked to remove the
+         * entity and all associated components.
+         *
+         * @param handle The EntityHandle to remove.
+         *
+         * @return True if the entity was removed, otherwise false.
+         *
+         * @see EntityManager::destroy()
+         */
+        [[nodiscard]] bool destroy(const helios::engine::ecs::EntityHandle handle) {
+            return em_.destroy(handle);
         }
 
         /**

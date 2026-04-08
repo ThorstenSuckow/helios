@@ -392,6 +392,9 @@ export namespace helios::engine::runtime::world {
          *
          * @tparam T The CommandBuffer type. Must satisfy IsCommandBufferLike.
          *
+         * @pre A CommandBuffer of type `T` must already be registered.
+         *      Use tryCommandBuffer<T>() when the buffer is optional.
+         *
          * @return Reference to the CommandBuffer.
          */
         template<typename T>

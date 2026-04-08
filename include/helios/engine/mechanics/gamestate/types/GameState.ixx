@@ -44,8 +44,12 @@ export namespace helios::engine::mechanics::gamestate::types {
         /**
          * @brief Bitmask representing all defined states.
          */
-        Any = Booting | Booted | Running | MatchReady | Title | Paused
+        Any = Booting | Booted | Running | MatchReady | Title | Paused,
 
+        /**
+         * @brief Bitmask representing booted state, i.e. any state w/o Booting
+         */
+        BootingCompleted = Booted | Running | MatchReady | Title | Paused
 
     };
 

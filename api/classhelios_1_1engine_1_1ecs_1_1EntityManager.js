@@ -4,7 +4,7 @@ var classhelios_1_1engine_1_1ecs_1_1EntityManager =
     [ "clone", "classhelios_1_1engine_1_1ecs_1_1EntityManager.html#ac5e13477c8dfc73875e797a5ec74baef", null ],
     [ "componentTypeIds", "classhelios_1_1engine_1_1ecs_1_1EntityManager.html#a041b95e0c84837d37ba46f9933ed29be", null ],
     [ "create", "classhelios_1_1engine_1_1ecs_1_1EntityManager.html#a0329c03ca1997fb72d3e58725e937fe3", null ],
-    [ "destroy", "classhelios_1_1engine_1_1ecs_1_1EntityManager.html#a407554a390eb1986ae7b469caa406fad", null ],
+    [ "destroy", "classhelios_1_1engine_1_1ecs_1_1EntityManager.html#a4201c46757d1135eba61a168a9c0cf0a", null ],
     [ "disable", "classhelios_1_1engine_1_1ecs_1_1EntityManager.html#af8e0fb8b7c210d7fbc3621765bd257e5", null ],
     [ "emplace", "classhelios_1_1engine_1_1ecs_1_1EntityManager.html#af0e75c4b42a3efb8f308ca9430075464", null ],
     [ "emplaceOrGet", "classhelios_1_1engine_1_1ecs_1_1EntityManager.html#aabc010881d9c613de7cd9102c20d198d", null ],

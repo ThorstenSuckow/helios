@@ -120,8 +120,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a25b75ef19285ac096849471b41b8a33d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if an entity handle is valid.  <br /></td></tr>
 <tr class="memitem:aa803ffb4157df506b30b1b85832f8b87" id="r_aa803ffb4157df506b30b1b85832f8b87"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa803ffb4157df506b30b1b85832f8b87">isValid</a> (const <a class="el" href="namespacehelios_1_1engine_1_1ecs_1_1types.html#ae84533c67f73dee28dde0ce536ecf85e">EntityId</a> entityId) const noexcept</td></tr>
 <tr class="memdesc:aa803ffb4157df506b30b1b85832f8b87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if an entity ID is valid.  <br /></td></tr>
-<tr class="memitem:a407554a390eb1986ae7b469caa406fad" id="r_a407554a390eb1986ae7b469caa406fad"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a407554a390eb1986ae7b469caa406fad">destroy</a> (const <a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">EntityHandle</a> &amp;<a class="el" href="#a01ae81037793ce4bebb83a256220c38e">handle</a>)</td></tr>
-<tr class="memdesc:a407554a390eb1986ae7b469caa406fad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys an entity and invalidates its handle.  <br /></td></tr>
+<tr class="memitem:a4201c46757d1135eba61a168a9c0cf0a" id="r_a4201c46757d1135eba61a168a9c0cf0a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4201c46757d1135eba61a168a9c0cf0a">destroy</a> (const <a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">EntityHandle</a> <a class="el" href="#a01ae81037793ce4bebb83a256220c38e">handle</a>)</td></tr>
+<tr class="memdesc:a4201c46757d1135eba61a168a9c0cf0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys an entity and invalidates its handle.  <br /></td></tr>
 <tr class="memitem:afc62dc2277d76ec4a52e2bb04a49715f" id="r_afc62dc2277d76ec4a52e2bb04a49715f"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:afc62dc2277d76ec4a52e2bb04a49715f template"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afc62dc2277d76ec4a52e2bb04a49715f">get</a> (const <a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">EntityHandle</a> <a class="el" href="#a01ae81037793ce4bebb83a256220c38e">handle</a>) const</td></tr>
 <tr class="memdesc:afc62dc2277d76ec4a52e2bb04a49715f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves a component for the given entity.  <br /></td></tr>
@@ -355,8 +355,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a407554a390eb1986ae7b469caa406fad" name="a407554a390eb1986ae7b469caa406fad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a407554a390eb1986ae7b469caa406fad">&#9670;&#160;</a></span>destroy()</h2>
+<a id="a4201c46757d1135eba61a168a9c0cf0a" name="a4201c46757d1135eba61a168a9c0cf0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4201c46757d1135eba61a168a9c0cf0a">&#9670;&#160;</a></span>destroy()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -367,7 +367,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">bool helios::engine::ecs::EntityManager::destroy </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">EntityHandle</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>handle</em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="structhelios_1_1engine_1_1ecs_1_1EntityHandle.html">EntityHandle</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -379,7 +379,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Destroys an entity and invalidates its handle. </p>
-<p>Increments the entity's version in the registry, making all existing handles to this entity stale. Does not automatically remove components from storage.</p>
+<p>Increments the entity's version in the registry, making all existing handles to this entity stale. Does automatically remove its components from storage.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">handle</td><td>The handle of the entity to destroy.</td></tr>
@@ -395,7 +395,7 @@ Public Member Functions</h2></td></tr>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-3-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1EntityManager_a407554a390eb1986ae7b469caa406fad_cgraph.svg" width="100%" height="472"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1ecs_1_1EntityManager_a4201c46757d1135eba61a168a9c0cf0a_cgraph.svg" width="100%" height="472"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -1175,7 +1175,7 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>`true` if the component was removed, `false` if the handle was invalid, the component was not attached, or removal was blocked by `onRemove`.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a407554a390eb1986ae7b469caa406fad" title="Destroys an entity and invalidates its handle.">destroy</a> </dd>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a4201c46757d1135eba61a168a9c0cf0a" title="Destroys an entity and invalidates its handle.">destroy</a> </dd>
 <dd>
 <a class="el" href="classhelios_1_1engine_1_1ecs_1_1SparseSet.html#aa72c9d0be676855619731b67eda0d3ee" title="Removes the element at the given index using swap-and-pop.">SparseSet::remove</a> </dd></dl>
 

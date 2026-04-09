@@ -5,7 +5,7 @@ var module__helios_8engine_8ecs_8EntityManager =
     [ "helios::engine::ecs::EntityManager::create", "module__helios_8engine_8ecs_8EntityManager.html#a0329c03ca1997fb72d3e58725e937fe3", null ],
     [ "helios::engine::ecs::EntityManager::isValid", "module__helios_8engine_8ecs_8EntityManager.html#a25b75ef19285ac096849471b41b8a33d", null ],
     [ "helios::engine::ecs::EntityManager::isValid", "module__helios_8engine_8ecs_8EntityManager.html#aa803ffb4157df506b30b1b85832f8b87", null ],
-    [ "helios::engine::ecs::EntityManager::destroy", "module__helios_8engine_8ecs_8EntityManager.html#a407554a390eb1986ae7b469caa406fad", null ],
+    [ "helios::engine::ecs::EntityManager::destroy", "module__helios_8engine_8ecs_8EntityManager.html#a4201c46757d1135eba61a168a9c0cf0a", null ],
     [ "helios::engine::ecs::EntityManager::get", "module__helios_8engine_8ecs_8EntityManager.html#afc62dc2277d76ec4a52e2bb04a49715f", null ],
     [ "helios::engine::ecs::EntityManager::getSparseSet", "module__helios_8engine_8ecs_8EntityManager.html#ab5c96f1027c20943e58595197575d57d", null ],
     [ "helios::engine::ecs::EntityManager::getSparseSet", "module__helios_8engine_8ecs_8EntityManager.html#a9747785b45dce1e2e0c4320116f66156", null ],

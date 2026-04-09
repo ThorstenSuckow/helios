@@ -138,7 +138,7 @@ export namespace helios::engine::ecs {
          *
          * @return `true` if the entity was destroyed, `false` if already invalid.
          */
-        [[nodiscard]] bool destroy(const EntityHandle& handle) {
+        [[nodiscard]] bool destroy(const EntityHandle handle) {
 
             if (!registry_.isValid(handle)) {
                 return false;

@@ -131,8 +131,8 @@ export namespace helios::engine::ecs {
          * @brief Destroys an entity and invalidates its handle.
          *
          * @details Increments the entity's version in the registry, making all
-         * existing handles to this entity stale. Does not automatically remove
-         * components from storage.
+         * existing handles to this entity stale. Does automatically remove
+         * its components from storage.
          *
          * @param handle The handle of the entity to destroy.
          *

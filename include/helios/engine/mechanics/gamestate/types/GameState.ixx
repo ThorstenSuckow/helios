@@ -32,24 +32,29 @@ export namespace helios::engine::mechanics::gamestate::types {
 
         Booted = 1 << 1,
 
-        Title = 1 << 2,
+        Warmup = 1 << 2,
 
-        MatchReady = 1 << 3,
+        Title = 1 << 3,
 
-        Running = 1 << 4,
+        MatchReady = 1 << 4,
 
-        Paused = 1 << 5,
+        Running = 1 << 5,
+
+        Paused = 1 << 6,
+
+        Shutdown = 1 << 7,
 
 
         /**
          * @brief Bitmask representing all base/ single-bit state flags.
          */
-        Any = Booting | Booted | Running | MatchReady | Title | Paused,
+        Any = Booting | Booted | Running | MatchReady | Title | Paused | Shutdown | Warmup,
 
         /**
-         * @brief Bitmask representing booted state, i.e. any state except Booting.
+         * @brief Bitmask representing any running state, i.e. any state except Booting, Booted, Warmup and Shutdown.
          */
-        BootingCompleted = Any & ~Booting
+        Live = Any & ~(Booting | Booted | Warmup | Shutdown),
+
 
     };
 

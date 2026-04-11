@@ -1,5 +1,13 @@
 var NAVTREEINDEX56 =
 {
+"namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1commands.html":[4,0,0,3,3,4,1],
+"namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1events.html":[4,0,0,3,3,4,2],
+"namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1policy.html":[4,0,0,3,3,4,3],
+"namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount.html":[4,0,0,3,3,4,3,0],
+"namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1conditions.html":[4,0,0,3,3,4,3,1],
+"namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling.html":[4,0,0,3,3,4,4],
+"namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1types.html":[4,0,0,3,3,4,5],
+"namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1types.html#adbee7d14f4c127a65914c192c3e18162":[4,0,0,3,3,4,5,6],
 "namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1types.html#ae716aefdd419832a328bfaf9b2c45ae9":[4,0,0,3,3,4,5,7],
 "namespacehelios_1_1engine_1_1runtime_1_1world.html":[4,0,0,3,3,0],
 "namespacehelios_1_1engine_1_1runtime_1_1world.html#a12c55c47caeb5dc7588c1b1e74f4992f":[4,0,0,3,3,0,10],
@@ -241,13 +249,5 @@ var NAVTREEINDEX56 =
 "structhelios_1_1core_1_1ecs_1_1EntityHandle.html#a46331cdd728e64f2bbf6c456b3f4c9eb":[6,0,0,2,2,0,3],
 "structhelios_1_1core_1_1ecs_1_1EntityHandle.html#a5cf2b151e9328b6b216dff07170b2c02":[3,0,66,0,0],
 "structhelios_1_1core_1_1ecs_1_1EntityHandle.html#a5cf2b151e9328b6b216dff07170b2c02":[4,0,0,2,3,0,0],
-"structhelios_1_1core_1_1ecs_1_1EntityHandle.html#a5cf2b151e9328b6b216dff07170b2c02":[6,0,0,2,2,0,0],
-"structhelios_1_1core_1_1ecs_1_1EntityHandle.html#abdadf73f1f659a0b3be6b4171a36b911":[3,0,66,0,5],
-"structhelios_1_1core_1_1ecs_1_1EntityHandle.html#abdadf73f1f659a0b3be6b4171a36b911":[4,0,0,2,3,0,5],
-"structhelios_1_1core_1_1ecs_1_1EntityHandle.html#abdadf73f1f659a0b3be6b4171a36b911":[6,0,0,2,2,0,5],
-"structhelios_1_1core_1_1ecs_1_1EntityHandle.html#ae1593bc838e551f1e5127daa41eec042":[3,0,66,0,6],
-"structhelios_1_1core_1_1ecs_1_1EntityHandle.html#ae1593bc838e551f1e5127daa41eec042":[4,0,0,2,3,0,6],
-"structhelios_1_1core_1_1ecs_1_1EntityHandle.html#ae1593bc838e551f1e5127daa41eec042":[6,0,0,2,2,0,6],
-"structhelios_1_1core_1_1ecs_1_1EntityHandle.html#afd3b46e17141bc738e5617b76b54acbd":[3,0,66,0,1],
-"structhelios_1_1core_1_1ecs_1_1EntityHandle.html#afd3b46e17141bc738e5617b76b54acbd":[4,0,0,2,3,0,1]
+"structhelios_1_1core_1_1ecs_1_1EntityHandle.html#a5cf2b151e9328b6b216dff07170b2c02":[6,0,0,2,2,0,0]
 };

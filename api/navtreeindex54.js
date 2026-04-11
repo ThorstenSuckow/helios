@@ -1,5 +1,9 @@
 var NAVTREEINDEX54 =
 {
+"module__helios_8util_8time.html":[3,0,658],
+"module__helios_8util_8time_8Stopwatch.html":[3,0,659],
+"module__helios_8util_8time_8Stopwatch.html#a1eee2ebce8dcd1f2b4d0b5d1a21fb09f":[3,0,659,1],
+"module__helios_8util_8time_8Stopwatch.html#a9b8420e3f05247078e9bdf7c400b40fd":[3,0,659,2],
 "module__helios_8util_8time_8Stopwatch.html#aaa33b220a4f5e2682f8408b81a1367d0":[3,0,659,3],
 "module__helios_8util_8time_8Stopwatch.html#ac25c9dc3b13ddef5e3d168036aec68a0":[3,0,659,4],
 "module__helios_8window.html":[3,0,660],
@@ -245,9 +249,5 @@ var NAVTREEINDEX54 =
 "namespacehelios_1_1engine_1_1mechanics_1_1damage_1_1commands.html":[4,0,0,3,6,2,0],
 "namespacehelios_1_1engine_1_1mechanics_1_1damage_1_1components.html":[4,0,0,3,6,2,1],
 "namespacehelios_1_1engine_1_1mechanics_1_1damage_1_1systems.html":[4,0,0,3,6,2,2],
-"namespacehelios_1_1engine_1_1mechanics_1_1gamestate.html":[4,0,0,3,6,3],
-"namespacehelios_1_1engine_1_1mechanics_1_1gamestate.html#a8cbc47f1a88e13102691fea025f40461":[4,0,0,3,6,3,3],
-"namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1rules.html":[4,0,0,3,6,3,0],
-"namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1systems.html":[4,0,0,3,6,3,1],
-"namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types.html":[4,0,0,3,6,3,2]
+"namespacehelios_1_1engine_1_1mechanics_1_1gamestate.html":[4,0,0,3,6,3]
 };

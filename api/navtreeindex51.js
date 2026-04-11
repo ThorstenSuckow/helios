@@ -1,5 +1,9 @@
 var NAVTREEINDEX51 =
 {
+"module__helios_8input_8types_8Gamepad.html#a4dd39c1a113edbe36b92b088d8dbf2ffae3d5e52e08008f6e44675b09af3e2380":[3,0,578,1,2],
+"module__helios_8input_8types_8Gamepad.html#a4dd39c1a113edbe36b92b088d8dbf2ffaea3ebfb6dc92c9b4ae1a2b94900c693f":[3,0,578,1,1],
+"module__helios_8input_8types_8Gamepad.html#a963e220296531c047308439c3425bcc5a501d3c1d3d31f70db984de48396437f6":[3,0,578,1,4],
+"module__helios_8input_8types_8Key.html":[3,0,579],
 "module__helios_8input_8types_8Key.html#a963e220296531c047308439c3425bcc5":[3,0,579,0],
 "module__helios_8input_8types_8Key.html#a963e220296531c047308439c3425bcc5a501d3c1d3d31f70db984de48396437f6":[3,0,579,0,2],
 "module__helios_8input_8types_8Key.html#a963e220296531c047308439c3425bcc5aec4d00988f117bae026eab04ddfa7f33":[3,0,579,0,0],
@@ -245,9 +249,5 @@ var NAVTREEINDEX51 =
 "module__helios_8rendering_8asset.html":[3,0,588],
 "module__helios_8rendering_8asset_8shape.html":[3,0,589],
 "module__helios_8rendering_8asset_8shape_8Shape.html":[3,0,599],
-"module__helios_8rendering_8asset_8shape_8Shape.html#a45b8025937ff78d5ca63ef3ea4b56d54":[3,0,599,2],
-"module__helios_8rendering_8asset_8shape_8Shape.html#aad16a718a0af0d74e3d6bfa97377b9bb":[3,0,599,1],
-"module__helios_8rendering_8asset_8shape_8Shape.html#ab88c320baa695dd2d77a852c2c5ee2b9":[3,0,599,3],
-"module__helios_8rendering_8asset_8shape_8Shape.html#ac8d63a4a5a57fd9cac0d99881dcb29e8":[3,0,599,4],
-"module__helios_8rendering_8asset_8shape_8Shape.html#af74c1c5bf7d0ae3eba004b8822fc2a9e":[3,0,599,5]
+"module__helios_8rendering_8asset_8shape_8Shape.html#a45b8025937ff78d5ca63ef3ea4b56d54":[3,0,599,2]
 };

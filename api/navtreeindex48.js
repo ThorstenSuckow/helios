@@ -1,5 +1,9 @@
 var NAVTREEINDEX48 =
 {
+"module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8MoveInitializer.html#a4905d1db361b9e45967cc2a249b7c00e":[3,0,475,3],
+"module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8MoveInitializer.html#a52da231cb8c38e7217bed1a9c3a4d423":[3,0,475,6],
+"module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8MoveInitializer.html#ad459bfb349bf4d8882af3c3c5307b764":[3,0,475,4],
+"module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8MoveInitializer.html#ae047147f4547547c56e5e94233e81ce0":[3,0,475,5],
 "module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8MoveInitializer.html#ae895c56c346fad65c5246eb3bbfcb732":[3,0,475,2],
 "module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8RandomDirectionInitializer.html":[3,0,476],
 "module__helios_8engine_8runtime_8spawn_8behavior_8initializers_8RandomDirectionInitializer.html#a0e904523f6d2fe97f2302a3d3c2d472e":[3,0,476,2],
@@ -245,9 +249,5 @@ var NAVTREEINDEX48 =
 "module__helios_8engine_8runtime_8world_8UpdateContext.html#a5748f227bfab7fe248186fe4d54b6444":[3,0,533,17],
 "module__helios_8engine_8runtime_8world_8UpdateContext.html#a5a17fe1e9fb5409938ec9d9442887ffe":[3,0,533,12],
 "module__helios_8engine_8runtime_8world_8UpdateContext.html#a5fa74f194fbee96f883d6964df940bef":[3,0,533,15],
-"module__helios_8engine_8runtime_8world_8UpdateContext.html#a6a1c8408558f967c0c5993d6b0eb2fe5":[3,0,533,9],
-"module__helios_8engine_8runtime_8world_8UpdateContext.html#a7308ea8a5fe81ac196b1501554d21d61":[3,0,533,11],
-"module__helios_8engine_8runtime_8world_8UpdateContext.html#a7973f73a32e697f534ed311cef2f50d4":[3,0,533,16],
-"module__helios_8engine_8runtime_8world_8UpdateContext.html#aba16db6e6b434f908f937e2a225d7337":[3,0,533,6],
-"module__helios_8engine_8runtime_8world_8UpdateContext.html#ac28d2e3d69b43ef90a3a962a5bf3ef3c":[3,0,533,8]
+"module__helios_8engine_8runtime_8world_8UpdateContext.html#a6a1c8408558f967c0c5993d6b0eb2fe5":[3,0,533,9]
 };

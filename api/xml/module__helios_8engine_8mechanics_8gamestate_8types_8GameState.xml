@@ -32,9 +32,17 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
+        <enumvalue id="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80bea89be10c310ee8cfe640aba66e7368c6c" prot="public">
+          <name>Warmup</name>
+          <initializer>= 1 &lt;&lt; 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
         <enumvalue id="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beab78a3223503896721cca1303f776159b" prot="public">
           <name>Title</name>
-          <initializer>= 1 &lt;&lt; 2</initializer>
+          <initializer>= 1 &lt;&lt; 3</initializer>
           <briefdescription>
           </briefdescription>
           <detaileddescription>
@@ -42,7 +50,7 @@
         </enumvalue>
         <enumvalue id="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80bea165d53d9068b7a9f038a6023ae51ee97" prot="public">
           <name>MatchReady</name>
-          <initializer>= 1 &lt;&lt; 3</initializer>
+          <initializer>= 1 &lt;&lt; 4</initializer>
           <briefdescription>
           </briefdescription>
           <detaileddescription>
@@ -50,7 +58,7 @@
         </enumvalue>
         <enumvalue id="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80bea5bda814c4aedb126839228f1a3d92f09" prot="public">
           <name>Running</name>
-          <initializer>= 1 &lt;&lt; 4</initializer>
+          <initializer>= 1 &lt;&lt; 5</initializer>
           <briefdescription>
           </briefdescription>
           <detaileddescription>
@@ -58,7 +66,15 @@
         </enumvalue>
         <enumvalue id="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beae99180abf47a8b3a856e0bcb2656990a" prot="public">
           <name>Paused</name>
-          <initializer>= 1 &lt;&lt; 5</initializer>
+          <initializer>= 1 &lt;&lt; 6</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80bea1a4ebb180ba59b067782515ffee6e975" prot="public">
+          <name>Shutdown</name>
+          <initializer>= 1 &lt;&lt; 7</initializer>
           <briefdescription>
           </briefdescription>
           <detaileddescription>
@@ -66,18 +82,18 @@
         </enumvalue>
         <enumvalue id="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beaed36a1ef76a59ee3f15180e0441188ad" prot="public">
           <name>Any</name>
-          <initializer>= Booting | Booted | Running | MatchReady | Title | Paused</initializer>
+          <initializer>= Booting | Booted | Running | MatchReady | Title | Paused | Shutdown | Warmup</initializer>
           <briefdescription>
 <para>Bitmask representing all base/ single-bit state flags. </para>
           </briefdescription>
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80bea051d5feca3fc34c51e3d3415a259a02f" prot="public">
-          <name>BootingCompleted</name>
-          <initializer>= Any &amp; ~Booting</initializer>
+        <enumvalue id="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80bea955ad3298db330b5ee880c2c9e6f23a0" prot="public">
+          <name>Live</name>
+          <initializer>= Any &amp; ~(Booting | Booted | Warmup | Shutdown)</initializer>
           <briefdescription>
-<para>Bitmask representing booted state, i.e. any state except Booting. </para>
+<para>Bitmask representing any running state, i.e. any state except Booting, Booted, Warmup and Shutdown. </para>
           </briefdescription>
           <detaileddescription>
           </detaileddescription>
@@ -90,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/types/GameState.ixx" line="27" column="5" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/types/GameState.ixx" bodystart="27" bodyend="54"/>
+        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/types/GameState.ixx" line="27" column="5" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/types/GameState.ixx" bodystart="27" bodyend="59"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="typedef">
@@ -149,7 +165,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/types/GameState.ixx" line="59" column="26" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/types/GameState.ixx" bodystart="59" bodyend="61"/>
+        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/types/GameState.ixx" line="64" column="26" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/types/GameState.ixx" bodystart="64" bodyend="66"/>
       </memberdef>
       <memberdef kind="function" id="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a02090d5a1bd064971c1be9315b221085" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>GameState</type>
@@ -172,7 +188,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/types/GameState.ixx" line="66" column="26" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/types/GameState.ixx" bodystart="66" bodyend="68"/>
+        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/types/GameState.ixx" line="71" column="26" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/types/GameState.ixx" bodystart="71" bodyend="73"/>
       </memberdef>
       <memberdef kind="function" id="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a6335367a21d069e26e50e28eef7bdbbb" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>GameState</type>
@@ -191,8 +207,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/types/GameState.ixx" line="73" column="26" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/types/GameState.ixx" bodystart="73" bodyend="75"/>
-        <references refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beaed36a1ef76a59ee3f15180e0441188ad" compoundref="GameState_8ixx" startline="47">helios::engine::mechanics::gamestate::types::Any</references>
+        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/types/GameState.ixx" line="78" column="26" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/types/GameState.ixx" bodystart="78" bodyend="80"/>
+        <references refid="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1a8e0bcae228fdf9f4cb489e7f912d80beaed36a1ef76a59ee3f15180e0441188ad" compoundref="GameState_8ixx" startline="51">helios::engine::mechanics::gamestate::types::Any</references>
       </memberdef>
       <memberdef kind="function" id="namespacehelios_1_1engine_1_1mechanics_1_1gamestate_1_1types_1ab0579070ccee01e3cbb703c14375bf77" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -235,7 +251,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/types/GameState.ixx" line="85" column="21" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/types/GameState.ixx" bodystart="85" bodyend="87"/>
+        <location file="/tmp/h/include/helios/engine/mechanics/gamestate/types/GameState.ixx" line="90" column="21" bodyfile="/tmp/h/include/helios/engine/mechanics/gamestate/types/GameState.ixx" bodystart="90" bodyend="92"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

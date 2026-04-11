@@ -1,5 +1,9 @@
 var NAVTREEINDEX43 =
 {
+"module__helios_8engine_8mechanics_8health_8components_8HealthComponent.html#ae9e8d4e019cb22caa654e1182dd366f3":[3,0,211,12],
+"module__helios_8engine_8mechanics_8health_8events.html":[3,0,212],
+"module__helios_8engine_8mechanics_8health_8events_8HealthChangedEvent.html":[3,0,213],
+"module__helios_8engine_8mechanics_8health_8events_8HealthChangedEvent.html#aa05d2ee20ee665c06b0ec5f3f53033b3":[3,0,213,1],
 "module__helios_8engine_8mechanics_8health_8events_8HealthChangedEvent.html#ac506dd62dcf3c21b43466521691d02c9":[3,0,213,2],
 "module__helios_8engine_8mechanics_8health_8events_8HealthDepletedEvent.html":[3,0,214],
 "module__helios_8engine_8mechanics_8health_8events_8HealthDepletedEvent.html#a4b8c26b570172ace4807fa868a78346b":[3,0,214,2],
@@ -245,9 +249,5 @@ var NAVTREEINDEX43 =
 "module__helios_8engine_8mechanics_8scoring_8systems_8ScoreObserverClearSystem.html#a6e564a13a7d5032da202b6a2a5019d3c":[3,0,277,1],
 "module__helios_8engine_8mechanics_8scoring_8systems_8ScoreObserverClearSystem.html#ad5b8dd3fff4891e9be80da37a79a2273":[3,0,277,2],
 "module__helios_8engine_8mechanics_8scoring_8systems_8ScoreObserverSystem.html":[3,0,278],
-"module__helios_8engine_8mechanics_8scoring_8systems_8ScoreObserverSystem.html#a2ac268cb1c836d919a5c2ef1674d1278":[3,0,278,1],
-"module__helios_8engine_8mechanics_8scoring_8systems_8ScoreObserverSystem.html#a9d74ff43473895bb8246e9670932cedb":[3,0,278,2],
-"module__helios_8engine_8mechanics_8scoring_8systems_8ScoreObserverSystem.html#aec026025fe2cdd7a0db83441b458a74e":[3,0,278,3],
-"module__helios_8engine_8mechanics_8scoring_8types.html":[3,0,279],
-"module__helios_8engine_8mechanics_8scoring_8types_8KillReward.html":[3,0,280]
+"module__helios_8engine_8mechanics_8scoring_8systems_8ScoreObserverSystem.html#a2ac268cb1c836d919a5c2ef1674d1278":[3,0,278,1]
 };

@@ -72,7 +72,11 @@ export namespace helios::engine::mechanics::gamestate::systems {
             const auto gameState = session.state<GameState>();
             auto gameStateTransitionId = session.stateTransitionId<GameState>();
 
-            if (gameState != GameState::Undefined && prevMatchState_ == gameState && prevGameStateTransitionId_ == gameStateTransitionId) {
+            // only return if the state is undefined.
+            // in any other case, we allow to drive the state forward, even if
+            // the previous state is the same as the current one, in case any guard
+            // did veto the next state
+            if (gameState == GameState::Undefined) {// && prevMatchState_ == gameState && prevGameStateTransitionId_ == gameStateTransitionId) {
                 return;
             }
 
@@ -82,6 +86,13 @@ export namespace helios::engine::mechanics::gamestate::systems {
             switch (gameState) {
 
                 case GameState::Booted: {
+                    updateContext.queueCommand<StateCommand<GameState>>(
+                        StateTransitionRequest<GameState>(gameState, GameStateTransitionId::WarmupRequest)
+                    );
+                    break;
+                }
+
+                case GameState::Warmup: {
                     updateContext.queueCommand<StateCommand<GameState>>(
                         StateTransitionRequest<GameState>(gameState, GameStateTransitionId::TitleRequest)
                     );
@@ -94,7 +105,6 @@ export namespace helios::engine::mechanics::gamestate::systems {
                     );
                     break;
                 }
-
 
                 default:
                     break;

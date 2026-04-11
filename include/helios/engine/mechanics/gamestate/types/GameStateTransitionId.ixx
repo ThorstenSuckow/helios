@@ -24,13 +24,17 @@ export namespace helios::engine::mechanics::gamestate::types {
 
         BootRequest,
 
+        WarmupRequest,
+
         ReadyMatchRequest,
 
         StartMatchRequest,
 
         TogglePause,
 
-        TitleRequest
+        TitleRequest,
+
+        ShutdownRequest
 
     };
 

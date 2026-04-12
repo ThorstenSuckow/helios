@@ -4,6 +4,7 @@
  */
 module;
 
+#include "helios/helios_config.h"
 #include <vector>
 #include <cassert>
 
@@ -14,23 +15,13 @@ import helios.core.ecs.LinearLookupStrategy;
 import helios.core.ecs.HashedLookupStrategy;
 import helios.core.types;
 
+import helios.core.data.concepts;
+import helios.core.ecs.concepts;
+
 using namespace helios::core::ecs;
-using namespace helios::core::types;    
+using namespace helios::core::types;
+
 export namespace helios::core::ecs {
-
-
-    /**
-     * @brief Sentinel version indicating an invalid or uninitialized handle.
-     */
-    constexpr auto InvalidVersion = VersionId{0};
-
-    /**
-     * @brief The initial version assigned to newly created entities.
-     *
-     * Versions start at 1 to distinguish valid handles from default-initialized
-     * handles that may have a version of 0.
-     */
-    constexpr auto InitialVersion = VersionId{1};
 
 
     /**
@@ -66,12 +57,20 @@ export namespace helios::core::ecs {
      * @tparam TStrongId       A strong ID type carrying domain semantics.
      * @tparam TLookupStrategy The strategy used for strong ID collision detection.
      * @tparam TAllowRemoval   If false, `destroy()` triggers an assertion instead of removing.
+     * @tparam TCapacity       Default initial capacity for pre-allocation.
      *
      * @see EntityHandle
      * @see HashedLookupStrategy
      * @see LinearLookupStrategy
      */
-    template<typename TStrongId, typename TLookupStrategy = HashedLookupStrategy, bool TAllowRemoval = true>
+    template<
+        typename TStrongId,
+        typename TLookupStrategy = HashedLookupStrategy,
+        bool TAllowRemoval = true,
+        size_t TCapacity = DEFAULT_ENTITY_MANAGER_CAPACITY
+    >
+    requires helios::core::data::concepts::IsStrongIdLike<TStrongId> &&
+    helios::core::ecs::concepts::IsStrongIdCollisionResolverLike<TLookupStrategy>
     class EntityRegistry {
 
 
@@ -100,12 +99,14 @@ export namespace helios::core::ecs {
          */
         TLookupStrategy lookupStrategy_;
 
+        /**
+         * @brief Auto-increment counter for generating strong IDs when none is provided.
+         */
+        size_t strongIdCounter_ = 0;
+
     public:
 
-        /**
-         * @brief Default constructor. Creates an empty registry.
-         */
-        EntityRegistry() = default;
+
 
         /**
          * @brief Constructs a registry with pre-allocated capacity.
@@ -115,7 +116,8 @@ export namespace helios::core::ecs {
          *
          * @param capacity The initial capacity to reserve.
          */
-        explicit EntityRegistry(const size_t capacity) : lookupStrategy_(capacity) {
+        explicit EntityRegistry(const size_t capacity = TCapacity)
+          : lookupStrategy_(capacity) {
             versions_.reserve(capacity);
             strongIds_.reserve(capacity);
             freeList_.reserve(capacity);
@@ -153,14 +155,17 @@ export namespace helios::core::ecs {
             }
 
             if (!strongId.isValid()) {
-                strongId = TStrongId{idx};
+                strongId = TStrongId{static_cast<StrongId_t>(++strongIdCounter_)};
             }
+            assert(strongId.isValid() && "EntityRegistry: invalid strongId");
 
             assert(!lookupStrategy_.has(strongId.value()) && "EntityRegistry: strongId collision");
 
             strongIds_[idx] = strongId.value();
 
-            lookupStrategy_.add(strongId.value());
+            const bool added = lookupStrategy_.add(strongId.value());
+
+            assert(added && "EntityRegistry: failed to add strongId to lookupStrategy");
 
             return {idx, version, strongId};
 
@@ -178,6 +183,21 @@ export namespace helios::core::ecs {
                 return InvalidVersion;
             }
             return versions_[entityId];
+        }
+
+        /**
+         * @brief Looks up the strong ID for an entity index.
+         *
+         * @param entityId The entity index to retrieve the strong ID for.
+         *
+         * @return The strong ID for the entity, or a default-constructed
+         *         (invalid) `TStrongId` if out of bounds.
+         */
+        [[nodiscard]] TStrongId strongId(const EntityId entityId) const {
+            if (entityId >= static_cast<EntityId>(strongIds_.size())) {
+                return TStrongId{};
+            }
+            return static_cast<TStrongId>(strongIds_[entityId]);
         }
 
 

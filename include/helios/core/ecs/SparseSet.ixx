@@ -108,13 +108,12 @@ export namespace helios::core::ecs {
      * *Amortized due to potential sparse array resize.
      *
      * @tparam T             The type of elements stored in the set. Must be move-assignable.
-     * @tparam TAllowRemoval If false, `remove()` triggers an assertion instead of removing.
      *
      * @see SparseSetBase
      * @see EntityId
      * @see EntityTombstone
      */
-    template <typename T, bool TAllowRemoval>
+    template <typename T>
     class SparseSet : public SparseSetBase {
 
 
@@ -252,18 +251,11 @@ export namespace helios::core::ecs {
          * 3. Pop the last element from dense storage
          * 4. Mark the removed slot as Tombstone
          *
-         * If `TAllowRemoval` is false, triggers an assertion failure.
-         *
          * @param idx The EntityId of the element to remove.
          *
          * @return True if the element was removed, false if not found.
          */
         [[nodiscard]] bool remove(const EntityId idx) override {
-
-            if constexpr (!TAllowRemoval) {
-                assert(false && "SparseSet: data removal is not allowed");
-                return false;
-            }
 
             if (idx >= sparse_.size() || sparse_[idx] == Tombstone) {
                 return false;
@@ -352,7 +344,14 @@ export namespace helios::core::ecs {
             using DataIt = typename std::vector<T>::iterator;
             using IdIt = typename std::vector<EntityId>::iterator;
 
+            /**
+             * @brief Iterator into the dense data storage.
+             */
             DataIt dataIt_;
+
+            /**
+             * @brief Iterator into the dense-to-sparse ID mapping.
+             */
             IdIt idIt_;
 
             using iterator_category = std::forward_iterator_tag;
@@ -398,7 +397,14 @@ export namespace helios::core::ecs {
             using DataIt = typename std::vector<T>::const_iterator;
             using IdIt = typename std::vector<EntityId>::const_iterator;
 
+            /**
+             * @brief Const iterator into the dense data storage.
+             */
             DataIt dataIt_;
+
+            /**
+             * @brief Const iterator into the dense-to-sparse ID mapping.
+             */
             IdIt idIt_;
 
             using iterator_category = std::forward_iterator_tag;

@@ -23,9 +23,12 @@ export namespace helios::core::ecs {
      * O(1) removal. Suitable for small registries where hash overhead is
      * undesirable.
      *
+     * @tparam TCapacity Default initial capacity for pre-allocation.
+     *
      * @see EntityRegistry
      * @see HashedLookupStrategy
      */
+    template<size_t TCapacity>
     class LinearLookupStrategy {
 
         /**
@@ -40,7 +43,7 @@ export namespace helios::core::ecs {
          *
          * @param capacity The initial capacity to reserve.
          */
-        explicit LinearLookupStrategy(const size_t capacity) {
+        explicit LinearLookupStrategy(const size_t capacity = TCapacity) {
             strongIds_.reserve(capacity);
         };
 

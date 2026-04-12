@@ -6,13 +6,28 @@ module;
 
 
 #include <functional>
+#include <cstdint>
 
 export module helios.core.ecs.EntityHandle;
 
 import helios.core.types;
+import helios.core.data.concepts;
 
 using namespace helios::core::types;
 export namespace helios::core::ecs {
+
+    /**
+     * @brief Sentinel version indicating an invalid or uninitialized handle.
+     */
+    constexpr auto InvalidVersion = VersionId{0};
+
+    /**
+     * @brief The initial version assigned to newly created entities.
+     *
+     * Versions start at 1 to distinguish valid handles from default-initialized
+     * handles that may have a version of 0.
+     */
+    constexpr auto InitialVersion = VersionId{1};
 
 
     /**
@@ -28,24 +43,25 @@ export namespace helios::core::ecs {
      * @see EntityRegistry
      */
     template<typename TStrongId>
+    requires helios::core::data::concepts::IsStrongIdLike<TStrongId>
     struct EntityHandle {
 
         /**
          * @brief The unique identifier for the entity within the registry.
          */
-        EntityId entityId;
+        EntityId entityId{0};
 
         /**
          * @brief The version number for stale handle detection.
          *
          * Incremented when an entity is removed from the registry.
          */
-        VersionId versionId;
+        VersionId versionId = helios::core::ecs::InvalidVersion;
 
         /**
          * @brief The domain-specific strong ID associated with this handle.
          */
-        TStrongId strongId;
+        TStrongId strongId{0};
 
         /**
          * @brief Compares two handles for equality.

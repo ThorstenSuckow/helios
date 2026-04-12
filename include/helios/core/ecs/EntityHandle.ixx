@@ -61,7 +61,7 @@ export namespace helios::core::ecs {
         /**
          * @brief The domain-specific strong ID associated with this handle.
          */
-        TStrongId strongId{0};
+        TStrongId strongId{};
 
         /**
          * @brief Compares two handles for equality.

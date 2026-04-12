@@ -36,6 +36,8 @@
   </compound>
   <compound refid="structhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1types_1_1ActionIdTag" kind="struct"><name>helios::engine::modules::ui::widgets::types::ActionIdTag</name>
   </compound>
+  <compound refid="structhelios_1_1core_1_1ecs_1_1components_1_1Active" kind="struct"><name>helios::core::ecs::components::Active</name>
+  </compound>
   <compound refid="structhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1Active" kind="struct"><name>helios::engine::mechanics::lifecycle::components::Active</name>
   </compound>
   <compound refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1viewport_1_1components_1_1ActiveViewportIdsStateComponent" kind="class"><name>helios::engine::modules::rendering::viewport::components::ActiveViewportIdsStateComponent</name>
@@ -554,6 +556,24 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1types_1_1CommandTypeId_1a8d08a5c15507d1b0b70ec09b392b59cd" kind="function"><name>id</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1types_1_1CommandTypeId_1a11f99a4fd4b8186276e11f3a8c21aeb7" kind="friend"><name>operator==</name></member>
   </compound>
+  <compound refid="structhelios_1_1core_1_1ecs_1_1ComponentOps" kind="struct"><name>helios::core::ecs::ComponentOps</name>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1af21284f08415c24182c3bb97350fbb90" kind="typedef"><name>OnAcquireFn</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1abd9705266311ee998f87bdcbb7ccbfbb" kind="typedef"><name>OnReleaseFn</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1add017ad07cc9218478e3bf562b6d4c10" kind="typedef"><name>OnRemoveFn</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1ad10567ddd7c563f793872755a9b2824a" kind="typedef"><name>EnableFn</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1ad2c18eb3c354b7dd904bc8746a12f210" kind="typedef"><name>DisableFn</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1ab5607da5c9c63f43bdf30502c3b5a07a" kind="typedef"><name>CloneFn</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a1d61eb889aa96e9f683b779dc5459941" kind="typedef"><name>OnActivateFn</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a551183ce2a7003875651aac96b512f4e" kind="typedef"><name>OnDeactivateFn</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a0f4a959360df1adde4156176603feb65" kind="variable"><name>onAcquire</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1ad47b9d5ee21c7b31e94882c381f1e1e2" kind="variable"><name>onRelease</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a4a1d31f4c2b357ef4b804b967921d9a0" kind="variable"><name>onRemove</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a0abe6af96dbd66b94627a4c189e2cb15" kind="variable"><name>enable</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a5fca23bea7494abb8e3180bce41d7270" kind="variable"><name>disable</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a4109da406ad4e02414c23fabe425b433" kind="variable"><name>clone</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a3a4aa68145fa8d138ec7e15ee0d6cd69" kind="variable"><name>onActivate</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1ab927749990bf9450b845454c0b8e5ebb" kind="variable"><name>onDeactivate</name></member>
+  </compound>
   <compound refid="structhelios_1_1engine_1_1ecs_1_1ComponentOps" kind="struct"><name>helios::engine::ecs::ComponentOps</name>
     <member refid="structhelios_1_1engine_1_1ecs_1_1ComponentOps_1a1386d6b1e0a1e44717e64c811709c3f4" kind="typedef"><name>OnAcquireFn</name></member>
     <member refid="structhelios_1_1engine_1_1ecs_1_1ComponentOps_1a4d4bfbd98df615635082f532caab7b1e" kind="typedef"><name>OnReleaseFn</name></member>
@@ -572,14 +592,32 @@
     <member refid="structhelios_1_1engine_1_1ecs_1_1ComponentOps_1a370ff04f6afc0d3973ce978c846a3407" kind="variable"><name>onActivate</name></member>
     <member refid="structhelios_1_1engine_1_1ecs_1_1ComponentOps_1a9ac6f38c84be560d483a0235126d9e6a" kind="variable"><name>onDeactivate</name></member>
   </compound>
+  <compound refid="classhelios_1_1core_1_1ecs_1_1ComponentOpsRegistry" kind="class"><name>helios::core::ecs::ComponentOpsRegistry</name>
+    <member refid="classhelios_1_1core_1_1ecs_1_1ComponentOpsRegistry_1a3045ac3afcb406f5da0239b25d7faad5" kind="typedef"><name>ComponentTypeId_type</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1ComponentOpsRegistry_1a09b26ac4257643cfda77016bb3328301" kind="variable"><name>operations_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1ComponentOpsRegistry_1ad90ed935e14cead634da33cdbad4e40d" kind="variable"><name>emptyOps_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1ComponentOpsRegistry_1ac63dd3ae8f096af5bc83a8fa4d53101b" kind="function"><name>setOps</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1ComponentOpsRegistry_1a6bcd5fbc7939a43d62c42f4e1ba7a5c9" kind="function"><name>ops</name></member>
+  </compound>
   <compound refid="classhelios_1_1engine_1_1ecs_1_1ComponentOpsRegistry" kind="class"><name>helios::engine::ecs::ComponentOpsRegistry</name>
     <member refid="classhelios_1_1engine_1_1ecs_1_1ComponentOpsRegistry_1a1e7dcae3f4619dc3c216cb4cc7010dbe" kind="variable"><name>operations_</name></member>
     <member refid="classhelios_1_1engine_1_1ecs_1_1ComponentOpsRegistry_1a4f53fea0ea9cee7f6f437847c66b9e4d" kind="variable"><name>emptyOps_</name></member>
     <member refid="classhelios_1_1engine_1_1ecs_1_1ComponentOpsRegistry_1a9cf5faa3931d77b83c0a1f6e0e621fc8" kind="function"><name>setOps</name></member>
     <member refid="classhelios_1_1engine_1_1ecs_1_1ComponentOpsRegistry_1acedf93d0fcd9b72ff45b226a5c37782c" kind="function"><name>ops</name></member>
   </compound>
+  <compound refid="classhelios_1_1core_1_1ecs_1_1ComponentReflector" kind="class"><name>helios::core::ecs::ComponentReflector</name>
+    <member refid="classhelios_1_1core_1_1ecs_1_1ComponentReflector_1a5d043a5f62645838965abdc2b2363dab" kind="function"><name>registerType</name></member>
+  </compound>
   <compound refid="classhelios_1_1engine_1_1ecs_1_1ComponentReflector" kind="class"><name>helios::engine::ecs::ComponentReflector</name>
     <member refid="classhelios_1_1engine_1_1ecs_1_1ComponentReflector_1a766a63ff1fca4a9ff2a95406af08f393" kind="function"><name>registerType</name></member>
+  </compound>
+  <compound refid="classhelios_1_1core_1_1ecs_1_1ComponentTypeId" kind="class"><name>helios::core::ecs::ComponentTypeId</name>
+    <member refid="classhelios_1_1core_1_1ecs_1_1ComponentTypeId_1a6b5c028da462e76575342e5a928a441e" kind="variable"><name>id_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1ComponentTypeId_1a9722490cc6f05ceb8c0388f75bc4f75b" kind="function"><name>ComponentTypeId</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1ComponentTypeId_1a47933f4bb7e61b6d9ff85247b44936d6" kind="function"><name>ComponentTypeId</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1ComponentTypeId_1ab3b85da9c2e9c18ea259c72cd6324d46" kind="function"><name>value</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1ComponentTypeId_1a15e26bc4870ec44a045010857fab0221" kind="function"><name>id</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1ComponentTypeId_1a0d3961b62506323fd47f26889cb0c206" kind="friend"><name>operator==</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1ecs_1_1types_1_1ComponentTypeId" kind="class"><name>helios::engine::ecs::types::ComponentTypeId</name>
     <member refid="classhelios_1_1engine_1_1ecs_1_1types_1_1ComponentTypeId_1a17cebf270973715d551dd2ce5338998b" kind="typedef"><name>ComponentType</name></member>
@@ -665,24 +703,24 @@
     <member refid="classhelios_1_1util_1_1log_1_1ConsoleSink_1aef7ce8eb3e08ae3302986a506610b4d5" kind="function"><name>flush</name></member>
   </compound>
   <compound refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator" kind="struct"><name>helios::core::ecs::SparseSet::ConstIterator</name>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a5ac0cef90ba6712f731173bf6d3f5db5" kind="typedef"><name>DataIt</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1ae4a83a3610f463f60050be74870464e3" kind="typedef"><name>IdIt</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a53d64d9821360265e9d277cec58f51e3" kind="typedef"><name>iterator_category</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1aa089e1c38df847e1b33f5c3393c4bfec" kind="typedef"><name>value_type</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a920004180ff4541796cdad5975e36bcf" kind="typedef"><name>difference_type</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1ac3badb92a4402008d7b6666c51543929" kind="typedef"><name>pointer</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a31c1525bceb84afcd6a503f1cc711f9e" kind="typedef"><name>reference</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a2ab07f740a9a8a5fcec777630629f920" kind="variable"><name>dataIt_</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1aee2ec4166f98bdfd5a85aaa5160ef36a" kind="variable"><name>idIt_</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a5e5e30f9039d3dc766f70ef3617071d7" kind="function"><name>ConstIterator</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a87d54b66cd7ab0a61f70e40e205e8329" kind="function"><name>ConstIterator</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a0f05b615d67336203c934a26ad29955f" kind="function"><name>operator*</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a63343c9b272d86370c25b539289f05f4" kind="function"><name>operator-&gt;</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1ad254d2ec806b7d0ba4bd493b24248e22" kind="function"><name>entityId</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a4b776acce234be8c645e18cbf339f581" kind="function"><name>operator==</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a30c28303060cb94415631747ffd400ac" kind="function"><name>operator!=</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a83d242e5adc547f36f4158276152ab86" kind="function"><name>operator++</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a6fbc969258545523c9321e97b9900378" kind="function"><name>operator++</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a5afb826d2cc45b681fefd24f13e4cfd7" kind="typedef"><name>DataIt</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a59e52643848f4524b4608374a558539c" kind="typedef"><name>IdIt</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a48f530b474b528d893125cc8852a4c47" kind="typedef"><name>iterator_category</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1ae902c76d34282624e15196856c97f5fa" kind="typedef"><name>value_type</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a6cc7cc53bc5dbbcc41679651c78195d4" kind="typedef"><name>difference_type</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1adbff507378640900796262545c12a393" kind="typedef"><name>pointer</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a97c17d72edcb77669a8f491c898132ba" kind="typedef"><name>reference</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1ad30eb603a980bf5ade4208ace921ee4c" kind="variable"><name>dataIt_</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a76a777f9a998fb9ff4af6efd03146e7a" kind="variable"><name>idIt_</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1ab7586a73b8ca3ff74583b9941e06a20a" kind="function"><name>ConstIterator</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a63dcc4c508210aac87da90377a16fa0a" kind="function"><name>ConstIterator</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a234dece9b45bdd7a92b11c66143ec675" kind="function"><name>operator*</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a7138c43798dee27ad72022994402af85" kind="function"><name>operator-&gt;</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a8088df429042227742d4e721fe8b1db0" kind="function"><name>entityId</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a241f4f5c6cecc2b889fcfdb04b0ef703" kind="function"><name>operator==</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a242495276b1518de91a3bf76b6cd52f5" kind="function"><name>operator!=</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1aa5e91ca80d15c1aa44d1634c18f3704a" kind="function"><name>operator++</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a6f634bef8fd5ccea0f0b2eca93646260" kind="function"><name>operator++</name></member>
   </compound>
   <compound refid="structhelios_1_1engine_1_1ecs_1_1SparseSet_1_1ConstIterator" kind="struct"><name>helios::engine::ecs::SparseSet::ConstIterator</name>
     <member refid="structhelios_1_1engine_1_1ecs_1_1SparseSet_1_1ConstIterator_1ac4e98f9617f52e80b3918c29a673ff8b" kind="typedef"><name>DataIt</name></member>
@@ -931,6 +969,31 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1a4e594cd7a4488f09100f15218b98eaf4" kind="function"><name>flush</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer_1a701d4a896befeab9bae711e07adbb20e" kind="function"><name>clear</name></member>
   </compound>
+  <compound refid="classhelios_1_1core_1_1ecs_1_1Entity" kind="class"><name>helios::core::ecs::Entity</name>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a8a44a88acc3ccc32bd1262a84739bed3" kind="typedef"><name>ComponentTypeId_type</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a7189565a40ad08f72c9be19738c3f030" kind="typedef"><name>ComponentOpsRegistry_type</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a0d3c4ab0754c28372c11b2bfc26c1b05" kind="typedef"><name>HierarchyComponent_type</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1ac4e38fc153b9ab6045d70ea3124f1a99" kind="variable"><name>entityHandle_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a9f1f1282c1fec510708aa7987f1fce16" kind="variable"><name>entityManager_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a83ca14548e083d88e7843134e4e362b0" kind="function"><name>Entity</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a10fa2e064c99c14b2403d9653a51fe4e" kind="function"><name>componentTypeIds</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1aa2872107b8f1c32e8f641b640f439bf7" kind="function"><name>handle</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a5e6a885bff8b2bebc40daaa6489d773e" kind="function"><name>handle</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1aee42e22a7f9344750103469394fc1605" kind="function"><name>add</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a1b3dfd13fdfcc2009f2dc856ed179fa0" kind="function"><name>getOrAdd</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a236452aefbb7458b9d6d0501ee99afe1" kind="function"><name>remove</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a1e30179014ea9dc1b400fd5685c53fe0" kind="function"><name>raw</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a7574320ce55c48881bdcddadecdbbe58" kind="function"><name>get</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a4f191774e8d4163d6c71831b636d30a1" kind="function"><name>get</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a193adec463fdbd1553331e4c3ab28a96" kind="function"><name>has</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1ae9ce4433ed785c1399f1301afa07c9aa" kind="function"><name>has</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a18ee37b1fc563a001a420b4a822d2fde" kind="function"><name>enableComponent</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a08d839196ccd6b954c04235d01fcd842" kind="function"><name>disableComponent</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a8481b5943825c17dcbe463e317efc0eb" kind="function"><name>setActive</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a3775ccf88496b4b3b0f7c523edb5bdb0" kind="function"><name>isActive</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1ab705835e212e2d86cbf596a1fc744859" kind="function"><name>onRelease</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a4edf9b9901e09d392267345e2c7f50c7" kind="function"><name>onAcquire</name></member>
+  </compound>
   <compound refid="structhelios_1_1core_1_1ecs_1_1EntityHandle" kind="struct"><name>helios::core::ecs::EntityHandle</name>
     <member refid="structhelios_1_1core_1_1ecs_1_1EntityHandle_1a1dfe2a8be0a0c13ef326b9f068bbc73c" kind="variable"><name>entityId</name></member>
     <member refid="structhelios_1_1core_1_1ecs_1_1EntityHandle_1ae1593bc838e551f1e5127daa41eec042" kind="variable"><name>versionId</name></member>
@@ -950,6 +1013,36 @@
   </compound>
   <compound refid="structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1_1EntityHandlePairHash" kind="struct"><name>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::EntityHandlePairHash</name>
     <member refid="structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1_1EntityHandlePairHash_1ae379749e85cbf4b81f46e8d5fc2123b7" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="classhelios_1_1core_1_1ecs_1_1EntityManager" kind="class"><name>helios::core::ecs::EntityManager</name>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1a223552f57d7502e504a8054d2f6c3da7" kind="typedef"><name>EntityRegistry_type</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1a0f16f06838c65fb3bd24190b4502a932" kind="typedef"><name>Handle_type</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1a02c871aa4cf9592e9b100498fde2eb46" kind="typedef"><name>ComponentTypeId_type</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1aad1bb2cea8a940e25730eb0f08e6ecb6" kind="typedef"><name>ComponentOpsRegistry_type</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1ada32bab98bcbde37ada3d445daa19bcf" kind="variable"><name>components_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1ac8637d4d89bb1ba5723531e9cafdee9d" kind="variable"><name>registry_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1a1a649120e2f2a5aedbe0f281aba82c52" kind="variable"><name>capacity_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1ae8d6c7109a4652279ecd44aa597978f6" kind="function"><name>EntityManager</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1a1091c877cfb150fb44535c73e22843ad" kind="function"><name>EntityManager</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1a299c5dc4dc65f211d19b000de7915e32" kind="function"><name>create</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1aede32b0a5be4262c36adb6108f6ea8d5" kind="function"><name>isValid</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1ad324827cb578ac7906eabe4c5cad17b6" kind="function"><name>isValid</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1ac2c7c999580310808b158d28f3c2f8b5" kind="function"><name>destroy</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1aebb37bce30de5ce70fc6ec0244ba541c" kind="function"><name>get</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1a49f5d08e687c18f3eddfa8f58400a68f" kind="function"><name>getSparseSet</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1a928bf4534e6b9b29a683c5e38501e91b" kind="function"><name>getSparseSet</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1a7ac271175b8ae1e89840d532269ded5f" kind="function"><name>has</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1a5344f37e8e97767977a28bc1a34691d4" kind="function"><name>has</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1a2222931f8aa67c0a9657b9b1c894d13f" kind="function"><name>enable</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1a93a292175afe55061146ead0b2d508b9" kind="function"><name>disable</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1a5eb69b25051f67b4f2af60a762b92e7c" kind="function"><name>enable</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1a249774a34eb5c9644b1f36b525b41a6c" kind="function"><name>emplace</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1aea9fba715a5967cec7246f86436bb9bf" kind="function"><name>emplaceOrGet</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1a761454da8201f18ad77fc325f3020b57" kind="function"><name>remove</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1ab9bf233af1244e056737bfd6b333d4f8" kind="function"><name>componentTypeIds</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1a6e83aa19650466a38aba7902a50394d7" kind="function"><name>clone</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1a8aebac892be4f5422361a80329381491" kind="function"><name>raw</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1a86de76e7978163b6fd292a2348eec505" kind="function"><name>handle</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1ecs_1_1EntityManager" kind="class"><name>helios::engine::ecs::EntityManager</name>
     <member refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a9e81d3664390434fea14b3088dfbe8ef" kind="variable"><name>components_</name></member>
@@ -977,16 +1070,17 @@
     <member refid="classhelios_1_1engine_1_1ecs_1_1EntityManager_1a01ae81037793ce4bebb83a256220c38e" kind="function"><name>handle</name></member>
   </compound>
   <compound refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry" kind="class"><name>helios::core::ecs::EntityRegistry</name>
-    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1ae30aa7a040cdc982709116a4f0341e2e" kind="variable"><name>freeList_</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1ae999f69b53fe2504f0849ff04473330c" kind="variable"><name>versions_</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a9ada63c87623622deb66cb57600d9760" kind="variable"><name>strongIds_</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1ab456d356d77c698210e608648de08171" kind="variable"><name>lookupStrategy_</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1aad19e4cf9fdf39f410cf0ee380f9f35d" kind="function"><name>EntityRegistry</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a4f00fbc57e98bc850738e82a665152e4" kind="function"><name>EntityRegistry</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a727ce430a51135bfd256125a84ea777b" kind="function"><name>create</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a7ba0dff8e9e9220b424c56c424d8f13b" kind="function"><name>version</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a5e4c983574f6fea33037c909ad9c4864" kind="function"><name>isValid</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a4fbea42a7a4f329b3582a6ef688265eb" kind="function"><name>destroy</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1ac7741e94ddab8cf63d890f2ebc80f51a" kind="variable"><name>freeList_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a8a07ec837b93857a06d9c6ac1b769cb8" kind="variable"><name>versions_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a2aa24a06a62dedd6adb715efae9e44fc" kind="variable"><name>strongIds_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a812fc2c937b7c96389094aa2b485da78" kind="variable"><name>lookupStrategy_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a9a57d8f8cb9383822be68da1604d4907" kind="variable"><name>strongIdCounter_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1ad3aa3d4f5f325d1270df24e2e0b4d766" kind="function"><name>EntityRegistry</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a0329c6196a7f177f0f24cc83759f2740" kind="function"><name>create</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a431fd152609413702ac28b808b261285" kind="function"><name>version</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1abb8bcdce4449ab412384a9e4e05380ab" kind="function"><name>strongId</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1af0018d49f67093db4495c37406c95298" kind="function"><name>isValid</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a1a1948fadfe10647d0c13fd7fef6c55e" kind="function"><name>destroy</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry" kind="class"><name>helios::engine::ecs::EntityRegistry</name>
     <member refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry_1a0910789ac8f03f1a0360db86c403c52b" kind="variable"><name>freeList_</name></member>
@@ -998,6 +1092,13 @@
     <member refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry_1a2f3b3cd6bcecd7c8e04fe42fa1c25c7a" kind="function"><name>isValid</name></member>
     <member refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry_1aea6c94d2dcd58d3c97cc560375895c93" kind="function"><name>destroy</name></member>
     <member refid="classhelios_1_1engine_1_1ecs_1_1EntityRegistry_1a591a6f061afdd39dbf579746e22f03c5" kind="function"><name>version</name></member>
+  </compound>
+  <compound refid="structhelios_1_1core_1_1ecs_1_1EntityResolver" kind="struct"><name>helios::core::ecs::EntityResolver</name>
+    <member refid="structhelios_1_1core_1_1ecs_1_1EntityResolver_1a2bf53a275cf01051c5f6aab2ec35e80d" kind="typedef"><name>Handle_type</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1EntityResolver_1ab1ee6624d17a7790f79e0040d1ce7f85" kind="typedef"><name>Entity_type</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1EntityResolver_1a67820393c7565352b89b4a86d529906a" kind="variable"><name>em</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1EntityResolver_1a147d78376ce0422503f4d4d8a5083231" kind="function"><name>operator()</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1EntityResolver_1a6b13746e795a5371d85d8cb7290de364" kind="function"><name>find</name></member>
   </compound>
   <compound refid="structhelios_1_1engine_1_1ecs_1_1EntityResolver" kind="struct"><name>helios::engine::ecs::EntityResolver</name>
     <member refid="structhelios_1_1engine_1_1ecs_1_1EntityResolver_1ae25f14a1d906b204f268a16da2c0f638" kind="variable"><name>em</name></member>
@@ -1631,11 +1732,24 @@
     <member refid="classhelios_1_1util_1_1Guid_1a2be0de1a0c0c0d321459531e9b308c34" kind="function"><name>hash</name></member>
     <member refid="classhelios_1_1util_1_1Guid_1abec6ac186114474b23bfb8369e4080a9" kind="function"><name>generate</name></member>
   </compound>
+  <compound refid="structHandleToManager" kind="struct"><name>HandleToManager</name>
+  </compound>
+  <compound refid="structHandleToManager_3_01THandle_01_4" kind="struct"><name>HandleToManager&lt; THandle &gt;</name>
+  </compound>
+  <compound refid="structHandleToManager_3_01THandle_00_01THead_01_4" kind="struct"><name>HandleToManager&lt; THandle, THead &gt;</name>
+    <member refid="structHandleToManager_3_01THandle_00_01THead_01_4_1a3fd2d33044684afd5211b638ddeb49ed" kind="variable"><name>value</name></member>
+  </compound>
+  <compound refid="structHandleToManager_3_01THandle_00_01THead_00_01TTail_8_8_8_01_4" kind="struct"><name>HandleToManager&lt; THandle, THead, TTail... &gt;</name>
+    <member refid="structHandleToManager_3_01THandle_00_01THead_00_01TTail_8_8_8_01_4_1a11fcf46fd56de9232ed8f233debdaf84" kind="variable"><name>value</name></member>
+  </compound>
   <compound refid="structstd_1_1hash_3_01helios_1_1core_1_1data_1_1RuntimeHandle_3_01StrongIdentifier_00_01RuntimeId_01_4_01_4" kind="struct"><name>std::hash&lt; helios::core::data::RuntimeHandle&lt; StrongIdentifier, RuntimeId &gt; &gt;</name>
     <member refid="structstd_1_1hash_3_01helios_1_1core_1_1data_1_1RuntimeHandle_3_01StrongIdentifier_00_01RuntimeId_01_4_01_4_1ad1f733a0da1930ba072947fac01c2d97" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structstd_1_1hash_3_01helios_1_1core_1_1data_1_1StrongId_3_01Tag_00_01Underlying_01_4_01_4" kind="struct"><name>std::hash&lt; helios::core::data::StrongId&lt; Tag, Underlying &gt; &gt;</name>
     <member refid="structstd_1_1hash_3_01helios_1_1core_1_1data_1_1StrongId_3_01Tag_00_01Underlying_01_4_01_4_1a3c9ca5c934ff0b85a4abb811e8ae3780" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="structstd_1_1hash_3_01helios_1_1core_1_1ecs_1_1ComponentTypeId_3_01THandle_01_4_01_4" kind="struct"><name>std::hash&lt; helios::core::ecs::ComponentTypeId&lt; THandle &gt; &gt;</name>
+    <member refid="structstd_1_1hash_3_01helios_1_1core_1_1ecs_1_1ComponentTypeId_3_01THandle_01_4_01_4_1ad81434e7260fea3d85918cb7a0e8e051" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structstd_1_1hash_3_01helios_1_1core_1_1ecs_1_1EntityHandle_3_01TStrongId_01_4_01_4" kind="struct"><name>std::hash&lt; helios::core::ecs::EntityHandle&lt; TStrongId &gt; &gt;</name>
     <member refid="structstd_1_1hash_3_01helios_1_1core_1_1ecs_1_1EntityHandle_3_01TStrongId_01_4_01_4_1a352635d836e7e3b4354e48e69aefa2d8" kind="function"><name>operator()</name></member>
@@ -1781,6 +1895,19 @@
   </compound>
   <compound refid="structhelios_1_1engine_1_1runtime_1_1world_1_1types_1_1SystemTypeId_1_1helios__engine__common__tag__SystemTypes" kind="struct"><name>helios::engine::runtime::world::types::SystemTypeId::helios_engine_common_tag_SystemTypes</name>
   </compound>
+  <compound refid="classhelios_1_1core_1_1ecs_1_1components_1_1HierarchyComponent" kind="class"><name>helios::core::ecs::components::HierarchyComponent</name>
+    <member refid="classhelios_1_1core_1_1ecs_1_1components_1_1HierarchyComponent_1a22607a1a38e86b41ce03caf3ef48bfc5" kind="variable"><name>children_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1components_1_1HierarchyComponent_1a384eb86ea7879833fd2e840f8af07fe5" kind="variable"><name>parent_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1components_1_1HierarchyComponent_1a7b986e460ebc739b0b0ca5c64869ad10" kind="variable"><name>isDirty_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1components_1_1HierarchyComponent_1a166928ae0631946e765cc85b4e36344f" kind="variable"><name>isEnabled_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1components_1_1HierarchyComponent_1a17aa8be148ab762c7dca959c96f2179d" kind="function"><name>addChild</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1components_1_1HierarchyComponent_1a6084f9ecf5ad4f39b3e432fc83e35017" kind="function"><name>setParent</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1components_1_1HierarchyComponent_1ac11249df3364a3c892e77841ff27bcbc" kind="function"><name>parent</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1components_1_1HierarchyComponent_1a656c0d67e84c7be45b386c5d574dc4ce" kind="function"><name>children</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1components_1_1HierarchyComponent_1a42938860c9fede5719ecf9e32c129e1b" kind="function"><name>markDirty</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1components_1_1HierarchyComponent_1a50abb16e65993d63a73971f5247be802" kind="function"><name>clearDirty</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1components_1_1HierarchyComponent_1aeebc7a694939fd7629a86a019520b415" kind="function"><name>isDirty</name></member>
+  </compound>
   <compound refid="classhelios_1_1engine_1_1ecs_1_1components_1_1HierarchyComponent" kind="class"><name>helios::engine::ecs::components::HierarchyComponent</name>
     <member refid="classhelios_1_1engine_1_1ecs_1_1components_1_1HierarchyComponent_1a34117c8ac941ad938a510aaea8690eb3" kind="variable"><name>children_</name></member>
     <member refid="classhelios_1_1engine_1_1ecs_1_1components_1_1HierarchyComponent_1a3e835fdb16da29ed829c923a3b74439a" kind="variable"><name>parent_</name></member>
@@ -1840,6 +1967,8 @@
     <member refid="classhelios_1_1ext_1_1imgui_1_1ImGuiWidget_1a05b3e6ee2d701b06c67bf0c57af9a829" kind="function"><name>~ImGuiWidget</name></member>
     <member refid="classhelios_1_1ext_1_1imgui_1_1ImGuiWidget_1a0ad065b003992409713a4e4c306b7499" kind="function"><name>draw</name></member>
   </compound>
+  <compound refid="structhelios_1_1core_1_1ecs_1_1components_1_1Inactive" kind="struct"><name>helios::core::ecs::components::Inactive</name>
+  </compound>
   <compound refid="structhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1Inactive" kind="struct"><name>helios::engine::mechanics::lifecycle::components::Inactive</name>
   </compound>
   <compound refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1InitializerList" kind="class"><name>helios::engine::runtime::spawn::behavior::initializers::InitializerList</name>
@@ -1891,24 +2020,40 @@
   <compound refid="structhelios_1_1engine_1_1state_1_1types_1_1InvalidStateTransitionId" kind="struct"><name>helios::engine::state::types::InvalidStateTransitionId</name>
   </compound>
   <compound refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator" kind="struct"><name>helios::core::ecs::SparseSet::Iterator</name>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a0e3ddfa616b3b96f1de174e2d392a6b2" kind="typedef"><name>DataIt</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1ab8837891c244318d539490e5d95bc915" kind="typedef"><name>IdIt</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1ab0ee6df17dc0874c38da4d8f528b6f9e" kind="typedef"><name>iterator_category</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a342a6be8b57a9446d3b6dad55681771b" kind="typedef"><name>value_type</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a972c6556c6a0d69c2d17277724cd19d0" kind="typedef"><name>difference_type</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a96246335f9958fe47efd6a730d7269ac" kind="typedef"><name>pointer</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a1fc765789b73e072dbc15a81ca527fde" kind="typedef"><name>reference</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1adef1934b7914ff57ee680c2b10fc11a2" kind="variable"><name>dataIt_</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a6db3e037256ce6ecd0b9bde82b4a9dac" kind="variable"><name>idIt_</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a3689649239582120d34e09270ed22cb3" kind="function"><name>Iterator</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a20fa85a0d03cfafda9ca7a0dc2f1c0ca" kind="function"><name>Iterator</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a7d3eb70182e9b1807629d8a42f4d7a68" kind="function"><name>operator*</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1ae72ad92b73e2122c07ca4486580ababa" kind="function"><name>operator-&gt;</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a49bf68e28b91caccceaca47c3cde48b4" kind="function"><name>entityId</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a17f8ad03234d15cdfb8731bbeb6c8cc0" kind="function"><name>operator==</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a71aca00c8b6566ee3f3c463ac20b8c9a" kind="function"><name>operator!=</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a62723d8a4ca8d0c2b6878dd8f7dabb43" kind="function"><name>operator++</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1aa9503ddc91814451077e3da11dcf600e" kind="function"><name>operator++</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a5e3912abbecb8f5047ad14d8b4a0fb39" kind="typedef"><name>DataIt</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a504e227167bd15ac4c030f8a39971996" kind="typedef"><name>IdIt</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a9a0afcb1b9c86c3e364d439b859346ee" kind="typedef"><name>iterator_category</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a70908618c001a1a886e0948f4cef96ad" kind="typedef"><name>value_type</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1aa02fe884a1f902d102160013e7c559e6" kind="typedef"><name>difference_type</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1acd1b58746100506f9fd79adfc383b013" kind="typedef"><name>pointer</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a0d87fe0aa7e20d07ec050c81ac94777d" kind="typedef"><name>reference</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a9927b4c54c72abb4444140b0664565ae" kind="variable"><name>dataIt_</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a7524e26d029c2a3d69b457d3a6d89baf" kind="variable"><name>idIt_</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1ab1dd579b716ade749f9e0501092bb890" kind="function"><name>Iterator</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1af7d8ceccb603830ccb6f3f57edb2b04b" kind="function"><name>Iterator</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1ab8b6c3cc4474f425a2ac0e9e010ce6f0" kind="function"><name>operator*</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a6e5a0f195645fbddd18f2a7d7f8b99d6" kind="function"><name>operator-&gt;</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a094437f9f99e32dbfbac9ffe8c67797e" kind="function"><name>entityId</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1ad2f464f31752bd7b1d0694be0529b7de" kind="function"><name>operator==</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a34c982e979b4979b1a64df28bcd23ec3" kind="function"><name>operator!=</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a0a3dec18e5fcaf54579ac35e5816ff24" kind="function"><name>operator++</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1abea6f5350cbea61d2d9750fa394a64f8" kind="function"><name>operator++</name></member>
+  </compound>
+  <compound refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator" kind="struct"><name>helios::core::ecs::View::Iterator</name>
+    <member refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1adcfc8953ead88289651bd9f154a5a400" kind="typedef"><name>Entity_type</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1ae9fc24b041684203fdeacc3cf0e82260" kind="typedef"><name>LeadComponent</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a114b2701a8bac11bf386a60d611322c1" kind="typedef"><name>LeadIterator</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a0a85c6b438dafab388749a73fd26a63e" kind="variable"><name>current_</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1ad93a750dc105163a14c993b871bb579b" kind="variable"><name>end_</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a75199b1b1bf567132e8e5b672c3006c3" kind="variable"><name>view_</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1ac3dfac42cb4c654cc2a68d622d42aaa6" kind="function"><name>Iterator</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1aa2ee33f3077777e9e679e3f3461615d3" kind="function"><name>Iterator</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a037b3606579f069520280215ebfa7b92" kind="function"><name>isValid</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a98c325850bd02c2499028bd2d30a2996" kind="function"><name>advance</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1aa8fc2157f5538a40e540fa0dc578f538" kind="function"><name>operator++</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a9fd45e3758f21907b7d28ad1a8c7811a" kind="function"><name>operator!=</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a92faa83b47608337773023f315275af2" kind="function"><name>operator*</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a3e905c9159835aed0d115a133240df0a" kind="function"><name>operator==</name></member>
   </compound>
   <compound refid="structhelios_1_1engine_1_1ecs_1_1SparseSet_1_1Iterator" kind="struct"><name>helios::engine::ecs::SparseSet::Iterator</name>
     <member refid="structhelios_1_1engine_1_1ecs_1_1SparseSet_1_1Iterator_1a4b128df5220830867ac736b5abb85e93" kind="typedef"><name>DataIt</name></member>
@@ -2069,11 +2214,11 @@
     <member refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Line_1ae778de05eb924f01bf3e5eb7a68ca1d6" kind="function"><name>primitiveType</name></member>
   </compound>
   <compound refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy" kind="class"><name>helios::core::ecs::LinearLookupStrategy</name>
-    <member refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1ac1351fe907eca614927a61300c89506c" kind="variable"><name>strongIds_</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1aab15ecdd833c8bb0d57460b62672d3ae" kind="function"><name>LinearLookupStrategy</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1a98d353764c3de0a921ad116b7e1e0933" kind="function"><name>remove</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1adba30bb9ce212b9b729a50aefebaf4fc" kind="function"><name>add</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1ad4583b14f0bd1ed65cf69df66d0b04d9" kind="function"><name>has</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1a1b4785a221f2e041e264bc83bde7dd75" kind="variable"><name>strongIds_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1af08f6e4ed6641a8f96622ecf96f14127" kind="function"><name>LinearLookupStrategy</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1a31ad49f535a654df1599d4615dc0be83" kind="function"><name>remove</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1af5b3ee5bea63d62b4dddb4e197ceb9a5" kind="function"><name>add</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1a94d2248b61f690a35983f6d37260e332" kind="function"><name>has</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1Lives2UiTextUpdateSystem" kind="class"><name>helios::engine::modules::ui::binding::systems::Lives2UiTextUpdateSystem</name>
     <member refid="classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1Lives2UiTextUpdateSystem_1ad1150d98670461c20862cdf6e78214d9" kind="typedef"><name>EngineRoleTag</name></member>
@@ -3413,26 +3558,26 @@
     <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1events_1_1SolidCollisionEvent_1a087b084be4efe41b4fd397a0e9ab1b2b" kind="function"><name>source</name></member>
   </compound>
   <compound refid="classhelios_1_1core_1_1ecs_1_1SparseSet" kind="class"><name>helios::core::ecs::SparseSet</name>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1abc4b8785b0ce51bae8ccfa27a571df1b" kind="variable"><name>sparse_</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1ab26944b9d81b7fcf9634112b982fc202" kind="variable"><name>denseToSparse_</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1aba4cfe4c3344cd64300edd1011bf2390" kind="variable"><name>storage_</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a45f56bdcf340f69fac33b460823d2ad3" kind="function"><name>SparseSet</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a1585e1c6f563c55b27536219eafb2b0e" kind="function"><name>SparseSet</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1ab373a800df8faaab7661443fb25da866" kind="function"><name>SparseSet</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a1de57b19935b2c50f8796ba63a613796" kind="function"><name>operator=</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1afd7e5182b90bf69394150ffcc58310dd" kind="function"><name>SparseSet</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a9e6cf2157f74c3d3a872a65ea7451e20" kind="function"><name>operator=</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a394cad4f3af4020415e8b05665a04b39" kind="function"><name>emplace</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1ada642cc396367b447198c06f04ca5c13" kind="function"><name>insert</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a2056521a7cade007ad34204ad5087c84" kind="function"><name>remove</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a7389e8cbb2075ca78348191404af3cae" kind="function"><name>get</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a87657bb11ab0ca1dd6a9600cef241f1c" kind="function"><name>get</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a23ea289a853cae0401fe0bb31e4b5798" kind="function"><name>contains</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1ac06a1dc42d0744f801b0c532e660e115" kind="function"><name>raw</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a2bc746585020854627e8b0a7a5830c23" kind="function"><name>begin</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a29e6b581e538e7a8211bcf1d86413e8a" kind="function"><name>end</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a974345665fc1ce9ec3211ae1e6690b42" kind="function"><name>begin</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1ae57beacf075a5a6a4644c60913c7b43b" kind="function"><name>end</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a6fae28ee0e9a16e22fd4aee9292f316a" kind="variable"><name>sparse_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a79acc3693f595d0e57fd2f7c42a63315" kind="variable"><name>denseToSparse_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1ac07ba289893988a7825cf71bee616cd6" kind="variable"><name>storage_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a15b84f60a107411154e3fc715e882721" kind="function"><name>SparseSet</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a4921437673f76daf08f370d60e6cf848" kind="function"><name>SparseSet</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a95783a21caad1dfe664089223a6451a5" kind="function"><name>SparseSet</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1ae0e88cffe1cfae82b931e08163b603e4" kind="function"><name>operator=</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1aa9c5d97fc6d6c4f7288aeb07098f6557" kind="function"><name>SparseSet</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a4644f2dc86ba0fc270dde5ab68b011f9" kind="function"><name>operator=</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1aebbf7ef233eaeeb70dc80720a3ddae41" kind="function"><name>emplace</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a37e3834ea5546da2872cac698c0dc817" kind="function"><name>insert</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a033ab2140d02a85052073269f376c186" kind="function"><name>remove</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1abd3366a7e64b09e9e3f8b940f8a94cfd" kind="function"><name>get</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1af188c6b11a5676ba92c2dab856c0ebe4" kind="function"><name>get</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a5489bb7a8436d49fda3113c3dad1897e" kind="function"><name>contains</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a67d4c852e299669a7dd75fb3c017e192" kind="function"><name>raw</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a60f6dfbf65bb4e7de524d8ac84722c8a" kind="function"><name>begin</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a38ffbc3df980812fae75fe2ba68c6bf3" kind="function"><name>end</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a2626f0cebe3d2d055233d33eb3656b62" kind="function"><name>begin</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1afcb49c5ab85bd53fe104276d8244b6a1" kind="function"><name>end</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1ecs_1_1SparseSet" kind="class"><name>helios::engine::ecs::SparseSet</name>
     <member refid="classhelios_1_1engine_1_1ecs_1_1SparseSet_1a85d44051c97be7a172ecacfeb626d7a5" kind="variable"><name>sparse_</name></member>
@@ -4180,6 +4325,14 @@
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1a0df59b0da67db0a31fb34a9ec6c2802e" kind="function"><name>clear</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer_1ab037bba2507b9a4402031b44ae756fef" kind="function"><name>flush</name></member>
   </compound>
+  <compound refid="classhelios_1_1core_1_1ecs_1_1TypedHandleWorld" kind="class"><name>helios::core::ecs::TypedHandleWorld</name>
+    <member refid="classhelios_1_1core_1_1ecs_1_1TypedHandleWorld_1a4721f2495932ef31c2c8131500c1a61b" kind="variable"><name>entityManagers_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1TypedHandleWorld_1ab59154bcc8222f72f2bc50018a87c564" kind="function"><name>entityManager</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1TypedHandleWorld_1aafc64d467aeb0c25a93828821f88aae9" kind="function"><name>entityManager</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1TypedHandleWorld_1a284afbf6b7beac39dd1128b42942c93f" kind="function"><name>addEntity</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1TypedHandleWorld_1a87d73dd5775c92bd5e266e438dc0fab1" kind="function"><name>findEntity</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1TypedHandleWorld_1abc265f473afcc16da88add28a3379a63" kind="function"><name>view</name></member>
+  </compound>
   <compound refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1TypedPass" kind="class"><name>helios::engine::runtime::gameloop::TypedPass</name>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1TypedPass_1af8f0775327faeea59ae852fc781d44bf" kind="friend"><name>helios::engine::runtime::gameloop::Phase</name></member>
     <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1TypedPass_1a1c68a9a1c6db2113ed67b88a3f5b8e5c" kind="variable"><name>owner_</name></member>
@@ -4490,6 +4643,19 @@
     <member refid="structhelios_1_1rendering_1_1Vertex_1ac26b0224bfd42a7576cc9f14c7ebc703" kind="variable"><name>normal</name></member>
     <member refid="structhelios_1_1rendering_1_1Vertex_1a6a60a969f8b46c06dfd111cad987a017" kind="variable"><name>texCoords</name></member>
   </compound>
+  <compound refid="classhelios_1_1core_1_1ecs_1_1View" kind="class"><name>helios::core::ecs::View</name>
+    <member refid="classhelios_1_1core_1_1ecs_1_1View_1aa6f130b5d8a725fbc039f7c51281fafd" kind="variable"><name>em_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1View_1a3b9751bdfb6c2506bae5bee463a6d57e" kind="variable"><name>includeSets_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1View_1a4a4404742593c305ffcc8b60ad4dd2d0" kind="variable"><name>excludeChecks_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1View_1a088ddbff4757928253cbcdf697de6107" kind="variable"><name>filterEnabledOnly_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1View_1a84abb4c05220e4032500667d270f492b" kind="variable"><name>filterActiveOnly_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1View_1aef00274ddebf90a83dab371805d991f8" kind="function"><name>View</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1View_1a422b9b52f0a5ce507452d14d0330b119" kind="function"><name>exclude</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1View_1a4987087aa7880fd76292469b98c96452" kind="function"><name>empty</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1View_1a840bb8623fb25bfd880cea241d940438" kind="function"><name>whereEnabled</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1View_1ac0697f65ebd69774a9c4c457f884a073" kind="function"><name>begin</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1View_1a51ccd6bdbb98e6adbefa4308874ef716" kind="function"><name>end</name></member>
+  </compound>
   <compound refid="classhelios_1_1engine_1_1ecs_1_1View" kind="class"><name>helios::engine::ecs::View</name>
     <member refid="classhelios_1_1engine_1_1ecs_1_1View_1a88b1ead365d68bac917632827fb0f9bc" kind="variable"><name>em_</name></member>
     <member refid="classhelios_1_1engine_1_1ecs_1_1View_1a2c103470f9e90c6ac6c07ddf801e932f" kind="variable"><name>includeSets_</name></member>
@@ -4627,6 +4793,20 @@
     <member refid="classhelios_1_1core_1_1container_1_1buffer_1_1TypeIndexedDoubleBuffer_1_1WriteSink_1a8ea126190977e1c52f5f18769ff2eda9" kind="function"><name>WriteSink</name></member>
     <member refid="classhelios_1_1core_1_1container_1_1buffer_1_1TypeIndexedDoubleBuffer_1_1WriteSink_1af2b13d1e58c68fe67be922fbb32dbfd5" kind="function"><name>push</name></member>
   </compound>
+  <compound refid="concepthelios_1_1core_1_1ecs_1_1concepts_1_1IsStrongIdCollisionResolverLike" kind="concept"><name>helios::core::ecs::concepts::IsStrongIdCollisionResolverLike</name>
+  </compound>
+  <compound refid="concepthelios_1_1core_1_1ecs_1_1traits_1_1HasActivatable" kind="concept"><name>helios::core::ecs::traits::HasActivatable</name>
+  </compound>
+  <compound refid="concepthelios_1_1core_1_1ecs_1_1traits_1_1HasClone" kind="concept"><name>helios::core::ecs::traits::HasClone</name>
+  </compound>
+  <compound refid="concepthelios_1_1core_1_1ecs_1_1traits_1_1HasOnAcquire" kind="concept"><name>helios::core::ecs::traits::HasOnAcquire</name>
+  </compound>
+  <compound refid="concepthelios_1_1core_1_1ecs_1_1traits_1_1HasOnRelease" kind="concept"><name>helios::core::ecs::traits::HasOnRelease</name>
+  </compound>
+  <compound refid="concepthelios_1_1core_1_1ecs_1_1traits_1_1HasOnRemove" kind="concept"><name>helios::core::ecs::traits::HasOnRemove</name>
+  </compound>
+  <compound refid="concepthelios_1_1core_1_1ecs_1_1traits_1_1HasToggleable" kind="concept"><name>helios::core::ecs::traits::HasToggleable</name>
+  </compound>
   <compound refid="concepthelios_1_1engine_1_1common_1_1concepts_1_1HasClear" kind="concept"><name>helios::engine::common::concepts::HasClear</name>
   </compound>
   <compound refid="concepthelios_1_1engine_1_1common_1_1concepts_1_1HasInit" kind="concept"><name>helios::engine::common::concepts::HasInit</name>
@@ -4694,6 +4874,12 @@
     <member refid="namespacehelios_1_1core_1_1ecs_1a1b017098e173629d9f24137cec7c655f" kind="variable"><name>InvalidVersion</name></member>
     <member refid="namespacehelios_1_1core_1_1ecs_1a5436b6eab572b18f1fe3e4aeddd88fef" kind="variable"><name>InitialVersion</name></member>
     <member refid="namespacehelios_1_1core_1_1ecs_1ac54a68839edca614708991c777ae17c8" kind="variable"><name>Tombstone</name></member>
+  </compound>
+  <compound refid="namespacehelios_1_1core_1_1ecs_1_1components" kind="namespace"><name>helios::core::ecs::components</name>
+  </compound>
+  <compound refid="namespacehelios_1_1core_1_1ecs_1_1concepts" kind="namespace"><name>helios::core::ecs::concepts</name>
+  </compound>
+  <compound refid="namespacehelios_1_1core_1_1ecs_1_1traits" kind="namespace"><name>helios::core::ecs::traits</name>
   </compound>
   <compound refid="namespacehelios_1_1core_1_1memory" kind="namespace"><name>helios::core::memory</name>
   </compound>
@@ -5505,13 +5691,55 @@
   </compound>
   <compound refid="TypeIndexer_8ixx" kind="file"><name>TypeIndexer.ixx</name>
   </compound>
+  <compound refid="core_2ecs_2ComponentOps_8ixx" kind="file"><name>core/ecs/ComponentOps.ixx</name>
+  </compound>
+  <compound refid="engine_2ecs_2ComponentOps_8ixx" kind="file"><name>engine/ecs/ComponentOps.ixx</name>
+  </compound>
+  <compound refid="core_2ecs_2ComponentOpsRegistry_8ixx" kind="file"><name>core/ecs/ComponentOpsRegistry.ixx</name>
+  </compound>
+  <compound refid="engine_2ecs_2ComponentOpsRegistry_8ixx" kind="file"><name>engine/ecs/ComponentOpsRegistry.ixx</name>
+  </compound>
+  <compound refid="core_2ecs_2ComponentReflector_8ixx" kind="file"><name>core/ecs/ComponentReflector.ixx</name>
+  </compound>
+  <compound refid="engine_2ecs_2ComponentReflector_8ixx" kind="file"><name>engine/ecs/ComponentReflector.ixx</name>
+  </compound>
+  <compound refid="core_2ecs_2components_2Active_8ixx" kind="file"><name>core/ecs/components/Active.ixx</name>
+  </compound>
+  <compound refid="engine_2mechanics_2lifecycle_2components_2Active_8ixx" kind="file"><name>engine/mechanics/lifecycle/components/Active.ixx</name>
+  </compound>
+  <compound refid="core_2ecs_2components_2HierarchyComponent_8ixx" kind="file"><name>core/ecs/components/HierarchyComponent.ixx</name>
+  </compound>
+  <compound refid="engine_2ecs_2components_2HierarchyComponent_8ixx" kind="file"><name>engine/ecs/components/HierarchyComponent.ixx</name>
+  </compound>
+  <compound refid="core_2ecs_2components_2Inactive_8ixx" kind="file"><name>core/ecs/components/Inactive.ixx</name>
+  </compound>
+  <compound refid="engine_2mechanics_2lifecycle_2components_2Inactive_8ixx" kind="file"><name>engine/mechanics/lifecycle/components/Inactive.ixx</name>
+  </compound>
+  <compound refid="core_2ecs_2ComponentTypeId_8ixx" kind="file"><name>core/ecs/ComponentTypeId.ixx</name>
+  </compound>
+  <compound refid="engine_2ecs_2types_2ComponentTypeId_8ixx" kind="file"><name>engine/ecs/types/ComponentTypeId.ixx</name>
+  </compound>
+  <compound refid="__modules_8ixx" kind="file"><name>_modules.ixx</name>
+  </compound>
+  <compound refid="IsStrongIdCollisionResolverLike_8ixx" kind="file"><name>IsStrongIdCollisionResolverLike.ixx</name>
+  </compound>
+  <compound refid="Entity_8ixx" kind="file"><name>Entity.ixx</name>
+  </compound>
   <compound refid="core_2ecs_2EntityHandle_8ixx" kind="file"><name>core/ecs/EntityHandle.ixx</name>
   </compound>
   <compound refid="engine_2ecs_2EntityHandle_8ixx" kind="file"><name>engine/ecs/EntityHandle.ixx</name>
   </compound>
+  <compound refid="core_2ecs_2EntityManager_8ixx" kind="file"><name>core/ecs/EntityManager.ixx</name>
+  </compound>
+  <compound refid="engine_2ecs_2EntityManager_8ixx" kind="file"><name>engine/ecs/EntityManager.ixx</name>
+  </compound>
   <compound refid="core_2ecs_2EntityRegistry_8ixx" kind="file"><name>core/ecs/EntityRegistry.ixx</name>
   </compound>
   <compound refid="engine_2ecs_2EntityRegistry_8ixx" kind="file"><name>engine/ecs/EntityRegistry.ixx</name>
+  </compound>
+  <compound refid="core_2ecs_2EntityResolver_8ixx" kind="file"><name>core/ecs/EntityResolver.ixx</name>
+  </compound>
+  <compound refid="engine_2ecs_2EntityResolver_8ixx" kind="file"><name>engine/ecs/EntityResolver.ixx</name>
   </compound>
   <compound refid="HashedLookupStrategy_8ixx" kind="file"><name>HashedLookupStrategy.ixx</name>
   </compound>
@@ -5520,6 +5748,16 @@
   <compound refid="core_2ecs_2SparseSet_8ixx" kind="file"><name>core/ecs/SparseSet.ixx</name>
   </compound>
   <compound refid="engine_2ecs_2SparseSet_8ixx" kind="file"><name>engine/ecs/SparseSet.ixx</name>
+  </compound>
+  <compound refid="core_2ecs_2Traits_8ixx" kind="file"><name>core/ecs/Traits.ixx</name>
+  </compound>
+  <compound refid="engine_2ecs_2Traits_8ixx" kind="file"><name>engine/ecs/Traits.ixx</name>
+  </compound>
+  <compound refid="TypedHandleWorld_8ixx" kind="file"><name>TypedHandleWorld.ixx</name>
+  </compound>
+  <compound refid="core_2ecs_2View_8ixx" kind="file"><name>core/ecs/View.ixx</name>
+  </compound>
+  <compound refid="engine_2ecs_2View_8ixx" kind="file"><name>engine/ecs/View.ixx</name>
   </compound>
   <compound refid="ErasedUnique_8ixx" kind="file"><name>ErasedUnique.ixx</name>
   </compound>
@@ -5651,18 +5889,6 @@
   </compound>
   <compound refid="Unit_8ixx" kind="file"><name>Unit.ixx</name>
   </compound>
-  <compound refid="ComponentOps_8ixx" kind="file"><name>ComponentOps.ixx</name>
-  </compound>
-  <compound refid="ComponentOpsRegistry_8ixx" kind="file"><name>ComponentOpsRegistry.ixx</name>
-  </compound>
-  <compound refid="ComponentReflector_8ixx" kind="file"><name>ComponentReflector.ixx</name>
-  </compound>
-  <compound refid="HierarchyComponent_8ixx" kind="file"><name>HierarchyComponent.ixx</name>
-  </compound>
-  <compound refid="EntityManager_8ixx" kind="file"><name>EntityManager.ixx</name>
-  </compound>
-  <compound refid="EntityResolver_8ixx" kind="file"><name>EntityResolver.ixx</name>
-  </compound>
   <compound refid="GameObject_8ixx" kind="file"><name>GameObject.ixx</name>
   </compound>
   <compound refid="ecs_2registry_8ixx" kind="file"><name>ecs/registry.ixx</name>
@@ -5717,15 +5943,9 @@
   </compound>
   <compound refid="HierarchyPropagationSystem_8ixx" kind="file"><name>HierarchyPropagationSystem.ixx</name>
   </compound>
-  <compound refid="Traits_8ixx" kind="file"><name>Traits.ixx</name>
-  </compound>
-  <compound refid="ComponentTypeId_8ixx" kind="file"><name>ComponentTypeId.ixx</name>
-  </compound>
   <compound refid="EntityId_8ixx" kind="file"><name>EntityId.ixx</name>
   </compound>
   <compound refid="EntityTombstone_8ixx" kind="file"><name>EntityTombstone.ixx</name>
-  </compound>
-  <compound refid="View_8ixx" kind="file"><name>View.ixx</name>
   </compound>
   <compound refid="LevelBoundsBehaviorComponent_8ixx" kind="file"><name>LevelBoundsBehaviorComponent.ixx</name>
   </compound>
@@ -5781,13 +6001,9 @@
   </compound>
   <compound refid="WorldLifecycleCommand_8ixx" kind="file"><name>WorldLifecycleCommand.ixx</name>
   </compound>
-  <compound refid="Active_8ixx" kind="file"><name>Active.ixx</name>
-  </compound>
   <compound refid="DeadTagComponent_8ixx" kind="file"><name>DeadTagComponent.ixx</name>
   </compound>
   <compound refid="DelayedComponentEnabler_8ixx" kind="file"><name>DelayedComponentEnabler.ixx</name>
-  </compound>
-  <compound refid="Inactive_8ixx" kind="file"><name>Inactive.ixx</name>
   </compound>
   <compound refid="DelayedComponentEnablerSystem_8ixx" kind="file"><name>DelayedComponentEnablerSystem.ixx</name>
   </compound>
@@ -6403,6 +6619,8 @@
   </compound>
   <compound refid="helios_2core_2ecs_2__module_8ixx" kind="file"><name>helios/core/ecs/_module.ixx</name>
   </compound>
+  <compound refid="helios_2core_2ecs_2components_2__module_8ixx" kind="file"><name>helios/core/ecs/components/_module.ixx</name>
+  </compound>
   <compound refid="helios_2core_2memory_2__module_8ixx" kind="file"><name>helios/core/memory/_module.ixx</name>
   </compound>
   <compound refid="helios_2core_2spatial_2__module_8ixx" kind="file"><name>helios/core/spatial/_module.ixx</name>
@@ -6776,6 +6994,10 @@
   <compound refid="helios_2core_2container_2README_8md" kind="file"><name>helios/core/container/README.md</name>
   </compound>
   <compound refid="helios_2core_2data_2README_8md" kind="file"><name>helios/core/data/README.md</name>
+  </compound>
+  <compound refid="helios_2core_2ecs_2components_2README_8md" kind="file"><name>helios/core/ecs/components/README.md</name>
+  </compound>
+  <compound refid="helios_2core_2ecs_2concepts_2README_8md" kind="file"><name>helios/core/ecs/concepts/README.md</name>
   </compound>
   <compound refid="helios_2core_2ecs_2README_8md" kind="file"><name>helios/core/ecs/README.md</name>
   </compound>
@@ -7193,6 +7415,8 @@
   </compound>
   <compound refid="dir_1a83b528599da40ca3e2005a9bc9336b" kind="dir"><name>common</name>
   </compound>
+  <compound refid="dir_26e6c957be264ba2163ce76e297c0235" kind="dir"><name>components</name>
+  </compound>
   <compound refid="dir_8bbfdb3074aa5394e722af7d9f4cad42" kind="dir"><name>components</name>
   </compound>
   <compound refid="dir_c6483a69d8044e8cd0979f3e8cae52db" kind="dir"><name>components</name>
@@ -7240,6 +7464,8 @@
   <compound refid="dir_11b76823d843ebc113ffccbf22529fdf" kind="dir"><name>components</name>
   </compound>
   <compound refid="dir_7a23a44b7b02552993267eb30c5e34a1" kind="dir"><name>components</name>
+  </compound>
+  <compound refid="dir_11cbe91cfc8db7725fac4de5b80e73c7" kind="dir"><name>concepts</name>
   </compound>
   <compound refid="dir_8a3c56b4aa5585f6ce1bfb66a441ba5d" kind="dir"><name>concepts</name>
   </compound>
@@ -8066,7 +8292,93 @@
   </compound>
   <compound refid="module__helios_8core_8ecs" kind="module"><name>helios.core.ecs</name>
   </compound>
+  <compound refid="module__helios_8core_8ecs_8ComponentOps" kind="module"><name>helios.core.ecs.ComponentOps</name>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1af21284f08415c24182c3bb97350fbb90" kind="typedef"><name>OnAcquireFn</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1abd9705266311ee998f87bdcbb7ccbfbb" kind="typedef"><name>OnReleaseFn</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1add017ad07cc9218478e3bf562b6d4c10" kind="typedef"><name>OnRemoveFn</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1ad10567ddd7c563f793872755a9b2824a" kind="typedef"><name>EnableFn</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1ad2c18eb3c354b7dd904bc8746a12f210" kind="typedef"><name>DisableFn</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1ab5607da5c9c63f43bdf30502c3b5a07a" kind="typedef"><name>CloneFn</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a1d61eb889aa96e9f683b779dc5459941" kind="typedef"><name>OnActivateFn</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a551183ce2a7003875651aac96b512f4e" kind="typedef"><name>OnDeactivateFn</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a0f4a959360df1adde4156176603feb65" kind="variable"><name>onAcquire</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1ad47b9d5ee21c7b31e94882c381f1e1e2" kind="variable"><name>onRelease</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a4a1d31f4c2b357ef4b804b967921d9a0" kind="variable"><name>onRemove</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a0abe6af96dbd66b94627a4c189e2cb15" kind="variable"><name>enable</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a5fca23bea7494abb8e3180bce41d7270" kind="variable"><name>disable</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a4109da406ad4e02414c23fabe425b433" kind="variable"><name>clone</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a3a4aa68145fa8d138ec7e15ee0d6cd69" kind="variable"><name>onActivate</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1ab927749990bf9450b845454c0b8e5ebb" kind="variable"><name>onDeactivate</name></member>
+  </compound>
+  <compound refid="module__helios_8core_8ecs_8ComponentOpsRegistry" kind="module"><name>helios.core.ecs.ComponentOpsRegistry</name>
+    <member refid="classhelios_1_1core_1_1ecs_1_1ComponentOpsRegistry_1a3045ac3afcb406f5da0239b25d7faad5" kind="typedef"><name>ComponentTypeId_type</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1ComponentOpsRegistry_1a09b26ac4257643cfda77016bb3328301" kind="variable"><name>operations_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1ComponentOpsRegistry_1ad90ed935e14cead634da33cdbad4e40d" kind="variable"><name>emptyOps_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1ComponentOpsRegistry_1ac63dd3ae8f096af5bc83a8fa4d53101b" kind="function"><name>setOps</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1ComponentOpsRegistry_1a6bcd5fbc7939a43d62c42f4e1ba7a5c9" kind="function"><name>ops</name></member>
+  </compound>
+  <compound refid="module__helios_8core_8ecs_8ComponentReflector" kind="module"><name>helios.core.ecs.ComponentReflector</name>
+    <member refid="classhelios_1_1core_1_1ecs_1_1ComponentReflector_1a5d043a5f62645838965abdc2b2363dab" kind="function"><name>registerType</name></member>
+  </compound>
+  <compound refid="module__helios_8core_8ecs_8components" kind="module"><name>helios.core.ecs.components</name>
+  </compound>
+  <compound refid="module__helios_8core_8ecs_8components_8Active" kind="module"><name>helios.core.ecs.components.Active</name>
+  </compound>
+  <compound refid="module__helios_8core_8ecs_8components_8HierarchyComponent" kind="module"><name>helios.core.ecs.components.HierarchyComponent</name>
+    <member refid="classhelios_1_1core_1_1ecs_1_1components_1_1HierarchyComponent_1a22607a1a38e86b41ce03caf3ef48bfc5" kind="variable"><name>children_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1components_1_1HierarchyComponent_1a384eb86ea7879833fd2e840f8af07fe5" kind="variable"><name>parent_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1components_1_1HierarchyComponent_1a7b986e460ebc739b0b0ca5c64869ad10" kind="variable"><name>isDirty_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1components_1_1HierarchyComponent_1a166928ae0631946e765cc85b4e36344f" kind="variable"><name>isEnabled_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1components_1_1HierarchyComponent_1a17aa8be148ab762c7dca959c96f2179d" kind="function"><name>addChild</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1components_1_1HierarchyComponent_1a6084f9ecf5ad4f39b3e432fc83e35017" kind="function"><name>setParent</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1components_1_1HierarchyComponent_1ac11249df3364a3c892e77841ff27bcbc" kind="function"><name>parent</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1components_1_1HierarchyComponent_1a656c0d67e84c7be45b386c5d574dc4ce" kind="function"><name>children</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1components_1_1HierarchyComponent_1a42938860c9fede5719ecf9e32c129e1b" kind="function"><name>markDirty</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1components_1_1HierarchyComponent_1a50abb16e65993d63a73971f5247be802" kind="function"><name>clearDirty</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1components_1_1HierarchyComponent_1aeebc7a694939fd7629a86a019520b415" kind="function"><name>isDirty</name></member>
+  </compound>
+  <compound refid="module__helios_8core_8ecs_8components_8Inactive" kind="module"><name>helios.core.ecs.components.Inactive</name>
+  </compound>
+  <compound refid="module__helios_8core_8ecs_8ComponentTypeId" kind="module"><name>helios.core.ecs.ComponentTypeId</name>
+    <member refid="classhelios_1_1core_1_1ecs_1_1ComponentTypeId_1a6b5c028da462e76575342e5a928a441e" kind="variable"><name>id_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1ComponentTypeId_1a9722490cc6f05ceb8c0388f75bc4f75b" kind="function"><name>ComponentTypeId</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1ComponentTypeId_1a47933f4bb7e61b6d9ff85247b44936d6" kind="function"><name>ComponentTypeId</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1ComponentTypeId_1ab3b85da9c2e9c18ea259c72cd6324d46" kind="function"><name>value</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1ComponentTypeId_1a15e26bc4870ec44a045010857fab0221" kind="function"><name>id</name></member>
+    <member refid="structstd_1_1hash_3_01helios_1_1core_1_1ecs_1_1ComponentTypeId_3_01THandle_01_4_01_4_1ad81434e7260fea3d85918cb7a0e8e051" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="module__helios_8core_8ecs_8concepts" kind="module"><name>helios.core.ecs.concepts</name>
+  </compound>
+  <compound refid="module__helios_8core_8ecs_8concepts_8IsStrongIdCollisionResolverLike" kind="module"><name>helios.core.ecs.concepts.IsStrongIdCollisionResolverLike</name>
+  </compound>
+  <compound refid="module__helios_8core_8ecs_8Entity" kind="module"><name>helios.core.ecs.Entity</name>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a8a44a88acc3ccc32bd1262a84739bed3" kind="typedef"><name>ComponentTypeId_type</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a7189565a40ad08f72c9be19738c3f030" kind="typedef"><name>ComponentOpsRegistry_type</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a0d3c4ab0754c28372c11b2bfc26c1b05" kind="typedef"><name>HierarchyComponent_type</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1ac4e38fc153b9ab6045d70ea3124f1a99" kind="variable"><name>entityHandle_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a9f1f1282c1fec510708aa7987f1fce16" kind="variable"><name>entityManager_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a83ca14548e083d88e7843134e4e362b0" kind="function"><name>Entity</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a10fa2e064c99c14b2403d9653a51fe4e" kind="function"><name>componentTypeIds</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1aa2872107b8f1c32e8f641b640f439bf7" kind="function"><name>handle</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a5e6a885bff8b2bebc40daaa6489d773e" kind="function"><name>handle</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1aee42e22a7f9344750103469394fc1605" kind="function"><name>add</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a1b3dfd13fdfcc2009f2dc856ed179fa0" kind="function"><name>getOrAdd</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a236452aefbb7458b9d6d0501ee99afe1" kind="function"><name>remove</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a1e30179014ea9dc1b400fd5685c53fe0" kind="function"><name>raw</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a7574320ce55c48881bdcddadecdbbe58" kind="function"><name>get</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a4f191774e8d4163d6c71831b636d30a1" kind="function"><name>get</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a193adec463fdbd1553331e4c3ab28a96" kind="function"><name>has</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1ae9ce4433ed785c1399f1301afa07c9aa" kind="function"><name>has</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a18ee37b1fc563a001a420b4a822d2fde" kind="function"><name>enableComponent</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a08d839196ccd6b954c04235d01fcd842" kind="function"><name>disableComponent</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a8481b5943825c17dcbe463e317efc0eb" kind="function"><name>setActive</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a3775ccf88496b4b3b0f7c523edb5bdb0" kind="function"><name>isActive</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1ab705835e212e2d86cbf596a1fc744859" kind="function"><name>onRelease</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1Entity_1a4edf9b9901e09d392267345e2c7f50c7" kind="function"><name>onAcquire</name></member>
+  </compound>
   <compound refid="module__helios_8core_8ecs_8EntityHandle" kind="module"><name>helios.core.ecs.EntityHandle</name>
+    <member refid="namespacehelios_1_1core_1_1ecs_1a1b017098e173629d9f24137cec7c655f" kind="variable"><name>InvalidVersion</name></member>
+    <member refid="namespacehelios_1_1core_1_1ecs_1a5436b6eab572b18f1fe3e4aeddd88fef" kind="variable"><name>InitialVersion</name></member>
     <member refid="structhelios_1_1core_1_1ecs_1_1EntityHandle_1a1dfe2a8be0a0c13ef326b9f068bbc73c" kind="variable"><name>entityId</name></member>
     <member refid="structhelios_1_1core_1_1ecs_1_1EntityHandle_1ae1593bc838e551f1e5127daa41eec042" kind="variable"><name>versionId</name></member>
     <member refid="structhelios_1_1core_1_1ecs_1_1EntityHandle_1abdadf73f1f659a0b3be6b4171a36b911" kind="variable"><name>strongId</name></member>
@@ -8076,19 +8388,32 @@
     <member refid="structhelios_1_1core_1_1ecs_1_1EntityHandle_1a5cf2b151e9328b6b216dff07170b2c02" kind="function"><name>isValid</name></member>
     <member refid="structstd_1_1hash_3_01helios_1_1core_1_1ecs_1_1EntityHandle_3_01TStrongId_01_4_01_4_1a352635d836e7e3b4354e48e69aefa2d8" kind="function"><name>operator()</name></member>
   </compound>
+  <compound refid="module__helios_8core_8ecs_8EntityManager" kind="module"><name>helios.core.ecs.EntityManager</name>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1a223552f57d7502e504a8054d2f6c3da7" kind="typedef"><name>EntityRegistry_type</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1a0f16f06838c65fb3bd24190b4502a932" kind="typedef"><name>Handle_type</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1a02c871aa4cf9592e9b100498fde2eb46" kind="typedef"><name>ComponentTypeId_type</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1aad1bb2cea8a940e25730eb0f08e6ecb6" kind="typedef"><name>ComponentOpsRegistry_type</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityManager_1ae8d6c7109a4652279ecd44aa597978f6" kind="function"><name>EntityManager</name></member>
+  </compound>
   <compound refid="module__helios_8core_8ecs_8EntityRegistry" kind="module"><name>helios.core.ecs.EntityRegistry</name>
-    <member refid="namespacehelios_1_1core_1_1ecs_1a1b017098e173629d9f24137cec7c655f" kind="variable"><name>InvalidVersion</name></member>
-    <member refid="namespacehelios_1_1core_1_1ecs_1a5436b6eab572b18f1fe3e4aeddd88fef" kind="variable"><name>InitialVersion</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1ae30aa7a040cdc982709116a4f0341e2e" kind="variable"><name>freeList_</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1ae999f69b53fe2504f0849ff04473330c" kind="variable"><name>versions_</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a9ada63c87623622deb66cb57600d9760" kind="variable"><name>strongIds_</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1ab456d356d77c698210e608648de08171" kind="variable"><name>lookupStrategy_</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1aad19e4cf9fdf39f410cf0ee380f9f35d" kind="function"><name>EntityRegistry</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a4f00fbc57e98bc850738e82a665152e4" kind="function"><name>EntityRegistry</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a727ce430a51135bfd256125a84ea777b" kind="function"><name>create</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a7ba0dff8e9e9220b424c56c424d8f13b" kind="function"><name>version</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a5e4c983574f6fea33037c909ad9c4864" kind="function"><name>isValid</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a4fbea42a7a4f329b3582a6ef688265eb" kind="function"><name>destroy</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1ac7741e94ddab8cf63d890f2ebc80f51a" kind="variable"><name>freeList_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a8a07ec837b93857a06d9c6ac1b769cb8" kind="variable"><name>versions_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a2aa24a06a62dedd6adb715efae9e44fc" kind="variable"><name>strongIds_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a812fc2c937b7c96389094aa2b485da78" kind="variable"><name>lookupStrategy_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a9a57d8f8cb9383822be68da1604d4907" kind="variable"><name>strongIdCounter_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1ad3aa3d4f5f325d1270df24e2e0b4d766" kind="function"><name>EntityRegistry</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a0329c6196a7f177f0f24cc83759f2740" kind="function"><name>create</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a431fd152609413702ac28b808b261285" kind="function"><name>version</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1abb8bcdce4449ab412384a9e4e05380ab" kind="function"><name>strongId</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1af0018d49f67093db4495c37406c95298" kind="function"><name>isValid</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry_1a1a1948fadfe10647d0c13fd7fef6c55e" kind="function"><name>destroy</name></member>
+  </compound>
+  <compound refid="module__helios_8core_8ecs_8EntityResolver" kind="module"><name>helios.core.ecs.EntityResolver</name>
+    <member refid="structhelios_1_1core_1_1ecs_1_1EntityResolver_1a2bf53a275cf01051c5f6aab2ec35e80d" kind="typedef"><name>Handle_type</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1EntityResolver_1ab1ee6624d17a7790f79e0040d1ce7f85" kind="typedef"><name>Entity_type</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1EntityResolver_1a67820393c7565352b89b4a86d529906a" kind="variable"><name>em</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1EntityResolver_1a147d78376ce0422503f4d4d8a5083231" kind="function"><name>operator()</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1EntityResolver_1a6b13746e795a5371d85d8cb7290de364" kind="function"><name>find</name></member>
   </compound>
   <compound refid="module__helios_8core_8ecs_8HashedLookupStrategy" kind="module"><name>helios.core.ecs.HashedLookupStrategy</name>
     <member refid="classhelios_1_1core_1_1ecs_1_1HashedLookupStrategy_1abc824737d5a4bcd0d7e75f0fabae2ce2" kind="variable"><name>strongIds_</name></member>
@@ -8098,74 +8423,111 @@
     <member refid="classhelios_1_1core_1_1ecs_1_1HashedLookupStrategy_1aa85b6ae51bd2ec519182f6de6bf68a40" kind="function"><name>has</name></member>
   </compound>
   <compound refid="module__helios_8core_8ecs_8LinearLookupStrategy" kind="module"><name>helios.core.ecs.LinearLookupStrategy</name>
-    <member refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1ac1351fe907eca614927a61300c89506c" kind="variable"><name>strongIds_</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1aab15ecdd833c8bb0d57460b62672d3ae" kind="function"><name>LinearLookupStrategy</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1a98d353764c3de0a921ad116b7e1e0933" kind="function"><name>remove</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1adba30bb9ce212b9b729a50aefebaf4fc" kind="function"><name>add</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1ad4583b14f0bd1ed65cf69df66d0b04d9" kind="function"><name>has</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1a1b4785a221f2e041e264bc83bde7dd75" kind="variable"><name>strongIds_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1af08f6e4ed6641a8f96622ecf96f14127" kind="function"><name>LinearLookupStrategy</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1a31ad49f535a654df1599d4615dc0be83" kind="function"><name>remove</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1af5b3ee5bea63d62b4dddb4e197ceb9a5" kind="function"><name>add</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1a94d2248b61f690a35983f6d37260e332" kind="function"><name>has</name></member>
   </compound>
   <compound refid="module__helios_8core_8ecs_8SparseSet" kind="module"><name>helios.core.ecs.SparseSet</name>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a0e3ddfa616b3b96f1de174e2d392a6b2" kind="typedef"><name>DataIt</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1ab8837891c244318d539490e5d95bc915" kind="typedef"><name>IdIt</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1ab0ee6df17dc0874c38da4d8f528b6f9e" kind="typedef"><name>iterator_category</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a342a6be8b57a9446d3b6dad55681771b" kind="typedef"><name>value_type</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a972c6556c6a0d69c2d17277724cd19d0" kind="typedef"><name>difference_type</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a96246335f9958fe47efd6a730d7269ac" kind="typedef"><name>pointer</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a1fc765789b73e072dbc15a81ca527fde" kind="typedef"><name>reference</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a5ac0cef90ba6712f731173bf6d3f5db5" kind="typedef"><name>DataIt</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1ae4a83a3610f463f60050be74870464e3" kind="typedef"><name>IdIt</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a53d64d9821360265e9d277cec58f51e3" kind="typedef"><name>iterator_category</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1aa089e1c38df847e1b33f5c3393c4bfec" kind="typedef"><name>value_type</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a920004180ff4541796cdad5975e36bcf" kind="typedef"><name>difference_type</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1ac3badb92a4402008d7b6666c51543929" kind="typedef"><name>pointer</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a31c1525bceb84afcd6a503f1cc711f9e" kind="typedef"><name>reference</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a5e3912abbecb8f5047ad14d8b4a0fb39" kind="typedef"><name>DataIt</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a504e227167bd15ac4c030f8a39971996" kind="typedef"><name>IdIt</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a9a0afcb1b9c86c3e364d439b859346ee" kind="typedef"><name>iterator_category</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a70908618c001a1a886e0948f4cef96ad" kind="typedef"><name>value_type</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1aa02fe884a1f902d102160013e7c559e6" kind="typedef"><name>difference_type</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1acd1b58746100506f9fd79adfc383b013" kind="typedef"><name>pointer</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a0d87fe0aa7e20d07ec050c81ac94777d" kind="typedef"><name>reference</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a5afb826d2cc45b681fefd24f13e4cfd7" kind="typedef"><name>DataIt</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a59e52643848f4524b4608374a558539c" kind="typedef"><name>IdIt</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a48f530b474b528d893125cc8852a4c47" kind="typedef"><name>iterator_category</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1ae902c76d34282624e15196856c97f5fa" kind="typedef"><name>value_type</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a6cc7cc53bc5dbbcc41679651c78195d4" kind="typedef"><name>difference_type</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1adbff507378640900796262545c12a393" kind="typedef"><name>pointer</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a97c17d72edcb77669a8f491c898132ba" kind="typedef"><name>reference</name></member>
     <member refid="namespacehelios_1_1core_1_1ecs_1ac54a68839edca614708991c777ae17c8" kind="variable"><name>Tombstone</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1abc4b8785b0ce51bae8ccfa27a571df1b" kind="variable"><name>sparse_</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1ab26944b9d81b7fcf9634112b982fc202" kind="variable"><name>denseToSparse_</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1aba4cfe4c3344cd64300edd1011bf2390" kind="variable"><name>storage_</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1adef1934b7914ff57ee680c2b10fc11a2" kind="variable"><name>dataIt_</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a6db3e037256ce6ecd0b9bde82b4a9dac" kind="variable"><name>idIt_</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a2ab07f740a9a8a5fcec777630629f920" kind="variable"><name>dataIt_</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1aee2ec4166f98bdfd5a85aaa5160ef36a" kind="variable"><name>idIt_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a6fae28ee0e9a16e22fd4aee9292f316a" kind="variable"><name>sparse_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a79acc3693f595d0e57fd2f7c42a63315" kind="variable"><name>denseToSparse_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1ac07ba289893988a7825cf71bee616cd6" kind="variable"><name>storage_</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a9927b4c54c72abb4444140b0664565ae" kind="variable"><name>dataIt_</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a7524e26d029c2a3d69b457d3a6d89baf" kind="variable"><name>idIt_</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1ad30eb603a980bf5ade4208ace921ee4c" kind="variable"><name>dataIt_</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a76a777f9a998fb9ff4af6efd03146e7a" kind="variable"><name>idIt_</name></member>
     <member refid="classhelios_1_1core_1_1ecs_1_1SparseSetBase_1a79962ff2e033bed8a67f14560c7f0a89" kind="function"><name>~SparseSetBase</name></member>
     <member refid="classhelios_1_1core_1_1ecs_1_1SparseSetBase_1a5fb6b9e4d9e7dd50687d48e57343b705" kind="function"><name>remove</name></member>
     <member refid="classhelios_1_1core_1_1ecs_1_1SparseSetBase_1a3475e8fd6bef05509592cd9633971fdc" kind="function"><name>contains</name></member>
     <member refid="classhelios_1_1core_1_1ecs_1_1SparseSetBase_1aa773d9a947168d4f1d4de01ef65fb35b" kind="function"><name>raw</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a45f56bdcf340f69fac33b460823d2ad3" kind="function"><name>SparseSet</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a1585e1c6f563c55b27536219eafb2b0e" kind="function"><name>SparseSet</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1ab373a800df8faaab7661443fb25da866" kind="function"><name>SparseSet</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a1de57b19935b2c50f8796ba63a613796" kind="function"><name>operator=</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1afd7e5182b90bf69394150ffcc58310dd" kind="function"><name>SparseSet</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a9e6cf2157f74c3d3a872a65ea7451e20" kind="function"><name>operator=</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a394cad4f3af4020415e8b05665a04b39" kind="function"><name>emplace</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1ada642cc396367b447198c06f04ca5c13" kind="function"><name>insert</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a2056521a7cade007ad34204ad5087c84" kind="function"><name>remove</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a7389e8cbb2075ca78348191404af3cae" kind="function"><name>get</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a87657bb11ab0ca1dd6a9600cef241f1c" kind="function"><name>get</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a23ea289a853cae0401fe0bb31e4b5798" kind="function"><name>contains</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1ac06a1dc42d0744f801b0c532e660e115" kind="function"><name>raw</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a3689649239582120d34e09270ed22cb3" kind="function"><name>Iterator</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a20fa85a0d03cfafda9ca7a0dc2f1c0ca" kind="function"><name>Iterator</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a7d3eb70182e9b1807629d8a42f4d7a68" kind="function"><name>operator*</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1ae72ad92b73e2122c07ca4486580ababa" kind="function"><name>operator-&gt;</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a49bf68e28b91caccceaca47c3cde48b4" kind="function"><name>entityId</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a17f8ad03234d15cdfb8731bbeb6c8cc0" kind="function"><name>operator==</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a71aca00c8b6566ee3f3c463ac20b8c9a" kind="function"><name>operator!=</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a62723d8a4ca8d0c2b6878dd8f7dabb43" kind="function"><name>operator++</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1aa9503ddc91814451077e3da11dcf600e" kind="function"><name>operator++</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a5e5e30f9039d3dc766f70ef3617071d7" kind="function"><name>ConstIterator</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a87d54b66cd7ab0a61f70e40e205e8329" kind="function"><name>ConstIterator</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a0f05b615d67336203c934a26ad29955f" kind="function"><name>operator*</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a63343c9b272d86370c25b539289f05f4" kind="function"><name>operator-&gt;</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1ad254d2ec806b7d0ba4bd493b24248e22" kind="function"><name>entityId</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a4b776acce234be8c645e18cbf339f581" kind="function"><name>operator==</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a30c28303060cb94415631747ffd400ac" kind="function"><name>operator!=</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a83d242e5adc547f36f4158276152ab86" kind="function"><name>operator++</name></member>
-    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a6fbc969258545523c9321e97b9900378" kind="function"><name>operator++</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a2bc746585020854627e8b0a7a5830c23" kind="function"><name>begin</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a29e6b581e538e7a8211bcf1d86413e8a" kind="function"><name>end</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a974345665fc1ce9ec3211ae1e6690b42" kind="function"><name>begin</name></member>
-    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1ae57beacf075a5a6a4644c60913c7b43b" kind="function"><name>end</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a15b84f60a107411154e3fc715e882721" kind="function"><name>SparseSet</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a4921437673f76daf08f370d60e6cf848" kind="function"><name>SparseSet</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a95783a21caad1dfe664089223a6451a5" kind="function"><name>SparseSet</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1ae0e88cffe1cfae82b931e08163b603e4" kind="function"><name>operator=</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1aa9c5d97fc6d6c4f7288aeb07098f6557" kind="function"><name>SparseSet</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a4644f2dc86ba0fc270dde5ab68b011f9" kind="function"><name>operator=</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1aebbf7ef233eaeeb70dc80720a3ddae41" kind="function"><name>emplace</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a37e3834ea5546da2872cac698c0dc817" kind="function"><name>insert</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a033ab2140d02a85052073269f376c186" kind="function"><name>remove</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1abd3366a7e64b09e9e3f8b940f8a94cfd" kind="function"><name>get</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1af188c6b11a5676ba92c2dab856c0ebe4" kind="function"><name>get</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a5489bb7a8436d49fda3113c3dad1897e" kind="function"><name>contains</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a67d4c852e299669a7dd75fb3c017e192" kind="function"><name>raw</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1ab1dd579b716ade749f9e0501092bb890" kind="function"><name>Iterator</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1af7d8ceccb603830ccb6f3f57edb2b04b" kind="function"><name>Iterator</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1ab8b6c3cc4474f425a2ac0e9e010ce6f0" kind="function"><name>operator*</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a6e5a0f195645fbddd18f2a7d7f8b99d6" kind="function"><name>operator-&gt;</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a094437f9f99e32dbfbac9ffe8c67797e" kind="function"><name>entityId</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1ad2f464f31752bd7b1d0694be0529b7de" kind="function"><name>operator==</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a34c982e979b4979b1a64df28bcd23ec3" kind="function"><name>operator!=</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1a0a3dec18e5fcaf54579ac35e5816ff24" kind="function"><name>operator++</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator_1abea6f5350cbea61d2d9750fa394a64f8" kind="function"><name>operator++</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1ab7586a73b8ca3ff74583b9941e06a20a" kind="function"><name>ConstIterator</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a63dcc4c508210aac87da90377a16fa0a" kind="function"><name>ConstIterator</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a234dece9b45bdd7a92b11c66143ec675" kind="function"><name>operator*</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a7138c43798dee27ad72022994402af85" kind="function"><name>operator-&gt;</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a8088df429042227742d4e721fe8b1db0" kind="function"><name>entityId</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a241f4f5c6cecc2b889fcfdb04b0ef703" kind="function"><name>operator==</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a242495276b1518de91a3bf76b6cd52f5" kind="function"><name>operator!=</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1aa5e91ca80d15c1aa44d1634c18f3704a" kind="function"><name>operator++</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator_1a6f634bef8fd5ccea0f0b2eca93646260" kind="function"><name>operator++</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a60f6dfbf65bb4e7de524d8ac84722c8a" kind="function"><name>begin</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a38ffbc3df980812fae75fe2ba68c6bf3" kind="function"><name>end</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1a2626f0cebe3d2d055233d33eb3656b62" kind="function"><name>begin</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1SparseSet_1afcb49c5ab85bd53fe104276d8244b6a1" kind="function"><name>end</name></member>
+  </compound>
+  <compound refid="module__helios_8core_8ecs_8Traits" kind="module"><name>helios.core.ecs.Traits</name>
+  </compound>
+  <compound refid="module__helios_8core_8ecs_8TypedHandleWorld" kind="module"><name>helios.core.ecs.TypedHandleWorld</name>
+    <member refid="classhelios_1_1core_1_1ecs_1_1TypedHandleWorld_1a4721f2495932ef31c2c8131500c1a61b" kind="variable"><name>entityManagers_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1TypedHandleWorld_1ab59154bcc8222f72f2bc50018a87c564" kind="function"><name>entityManager</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1TypedHandleWorld_1aafc64d467aeb0c25a93828821f88aae9" kind="function"><name>entityManager</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1TypedHandleWorld_1a284afbf6b7beac39dd1128b42942c93f" kind="function"><name>addEntity</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1TypedHandleWorld_1a87d73dd5775c92bd5e266e438dc0fab1" kind="function"><name>findEntity</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1TypedHandleWorld_1abc265f473afcc16da88add28a3379a63" kind="function"><name>view</name></member>
+  </compound>
+  <compound refid="module__helios_8core_8ecs_8View" kind="module"><name>helios.core.ecs.View</name>
+    <member refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1adcfc8953ead88289651bd9f154a5a400" kind="typedef"><name>Entity_type</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1ae9fc24b041684203fdeacc3cf0e82260" kind="typedef"><name>LeadComponent</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a114b2701a8bac11bf386a60d611322c1" kind="typedef"><name>LeadIterator</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1View_1aa6f130b5d8a725fbc039f7c51281fafd" kind="variable"><name>em_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1View_1a3b9751bdfb6c2506bae5bee463a6d57e" kind="variable"><name>includeSets_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1View_1a4a4404742593c305ffcc8b60ad4dd2d0" kind="variable"><name>excludeChecks_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1View_1a088ddbff4757928253cbcdf697de6107" kind="variable"><name>filterEnabledOnly_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1View_1a84abb4c05220e4032500667d270f492b" kind="variable"><name>filterActiveOnly_</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a0a85c6b438dafab388749a73fd26a63e" kind="variable"><name>current_</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1ad93a750dc105163a14c993b871bb579b" kind="variable"><name>end_</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a75199b1b1bf567132e8e5b672c3006c3" kind="variable"><name>view_</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1View_1aef00274ddebf90a83dab371805d991f8" kind="function"><name>View</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1View_1a422b9b52f0a5ce507452d14d0330b119" kind="function"><name>exclude</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1View_1a4987087aa7880fd76292469b98c96452" kind="function"><name>empty</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1View_1a840bb8623fb25bfd880cea241d940438" kind="function"><name>whereEnabled</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1ac3dfac42cb4c654cc2a68d622d42aaa6" kind="function"><name>Iterator</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1aa2ee33f3077777e9e679e3f3461615d3" kind="function"><name>Iterator</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a037b3606579f069520280215ebfa7b92" kind="function"><name>isValid</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a98c325850bd02c2499028bd2d30a2996" kind="function"><name>advance</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1aa8fc2157f5538a40e540fa0dc578f538" kind="function"><name>operator++</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a9fd45e3758f21907b7d28ad1a8c7811a" kind="function"><name>operator!=</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a92faa83b47608337773023f315275af2" kind="function"><name>operator*</name></member>
+    <member refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a3e905c9159835aed0d115a133240df0a" kind="function"><name>operator==</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1View_1ac0697f65ebd69774a9c4c457f884a073" kind="function"><name>begin</name></member>
+    <member refid="classhelios_1_1core_1_1ecs_1_1View_1a51ccd6bdbb98e6adbefa4308874ef716" kind="function"><name>end</name></member>
   </compound>
   <compound refid="module__helios_8core_8memory" kind="module"><name>helios.core.memory</name>
   </compound>

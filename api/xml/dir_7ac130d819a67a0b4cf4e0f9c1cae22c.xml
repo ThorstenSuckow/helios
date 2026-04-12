@@ -7,13 +7,13 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_7ac130d819a67a0b4cf4e0f9c1cae22c_1autotoc_md66">
+<sect1 id="dir_7ac130d819a67a0b4cf4e0f9c1cae22c_1autotoc_md79">
 <title>helios::core::memory</title><para>Low-level memory utilities for type-erased ownership.</para>
 </sect1>
-<sect1 id="dir_7ac130d819a67a0b4cf4e0f9c1cae22c_1autotoc_md67">
+<sect1 id="dir_7ac130d819a67a0b4cf4e0f9c1cae22c_1autotoc_md80">
 <title>Overview</title><para>This module provides foundational memory primitives used by the engine&apos;s resource management layer. The primary type is <computeroutput>ErasedUnique</computeroutput>, a lightweight ownership wrapper that enables heterogeneous collections without requiring a common base class.</para>
 </sect1>
-<sect1 id="dir_7ac130d819a67a0b4cf4e0f9c1cae22c_1autotoc_md68">
+<sect1 id="dir_7ac130d819a67a0b4cf4e0f9c1cae22c_1autotoc_md81">
 <title>Key Classes</title><para><table rows="2" cols="2"><row>
 <entry thead="yes"><para>Class  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
@@ -25,14 +25,14 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_7ac130d819a67a0b4cf4e0f9c1cae22c_1autotoc_md69">
+<sect1 id="dir_7ac130d819a67a0b4cf4e0f9c1cae22c_1autotoc_md82">
 <title>ErasedUnique</title><para><computeroutput>ErasedUnique</computeroutput> provides <computeroutput>unique_ptr</computeroutput>-like ownership semantics without requiring a virtual destructor or common base class. It stores a <computeroutput>void*</computeroutput> and a typed deleter function pointer:</para>
 <para><programlisting filename=".cpp"><codeline><highlight class="keyword">struct<sp/></highlight><highlight class="normal">ErasedUnique<sp/>{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>ptr<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>void<sp/>(*destroy)(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
 <codeline><highlight class="normal">};</highlight></codeline>
 </programlisting></para>
-<sect2 id="dir_7ac130d819a67a0b4cf4e0f9c1cae22c_1autotoc_md70">
+<sect2 id="dir_7ac130d819a67a0b4cf4e0f9c1cae22c_1autotoc_md83">
 <title>Construction</title><para>Constructed from any <computeroutput>std::unique_ptr&lt;T&gt;</computeroutput>. The deleter captures the concrete type at construction time:</para>
 <para><programlisting filename=".cpp"><codeline><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>obj<sp/>=<sp/>std::make_unique&lt;MyResource&gt;(args...);</highlight></codeline>
 <codeline><highlight class="normal">ErasedUnique<sp/>erased{std::move(obj)};</highlight></codeline>
@@ -40,13 +40,13 @@
 <codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>erased.destroy<sp/>→<sp/>calls<sp/>delete<sp/>static_cast&lt;MyResource*&gt;(ptr)</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="dir_7ac130d819a67a0b4cf4e0f9c1cae22c_1autotoc_md71">
+<sect2 id="dir_7ac130d819a67a0b4cf4e0f9c1cae22c_1autotoc_md84">
 <title>Move-Only Semantics</title><para><computeroutput>ErasedUnique</computeroutput> is move-only. Moving transfers ownership and nulls the source. Copy construction and assignment are implicitly deleted.</para>
 <para><programlisting filename=".cpp"><codeline><highlight class="normal">ErasedUnique<sp/>a{std::make_unique&lt;Foo&gt;()};</highlight></codeline>
 <codeline><highlight class="normal">ErasedUnique<sp/>b<sp/>=<sp/>std::move(a);<sp/></highlight><highlight class="comment">//<sp/>a<sp/>is<sp/>now<sp/>empty</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="dir_7ac130d819a67a0b4cf4e0f9c1cae22c_1autotoc_md72">
+<sect2 id="dir_7ac130d819a67a0b4cf4e0f9c1cae22c_1autotoc_md85">
 <title>Primary Consumer</title><para><computeroutput>ErasedUnique</computeroutput> is used by <computeroutput>ResourceRegistry</computeroutput> to store Managers, CommandBuffers, and other heterogeneous resources in a single <computeroutput>std::vector&lt;ErasedUnique&gt;</computeroutput> without vtable overhead for destruction.</para>
 <para><hruler/>
  <details><summary>Doxygen</summary><para></para>

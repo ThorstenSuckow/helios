@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="structHandleToManager" kind="struct" language="C++" prot="public">
+    <compoundname>HandleToManager</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename THandle</type>
+      </param>
+      <param>
+        <type>typename...</type>
+        <declname>TEntityManagers</declname>
+        <defname>TEntityManagers</defname>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+<para>Maps a handle type to the index of its owning EntityManager in a parameter pack. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Recursively walks the `TEntityManagers...` pack and returns the zero-based index of the first manager whose `Handle_type` matches `THandle`. A `static_assert` fires if no match is found.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>THandle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The handle type to look up. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>TEntityManagers</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The EntityManager types to search. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/core/ecs/TypedHandleWorld.ixx" line="32" column="1" bodyfile="/tmp/h/include/helios/core/ecs/TypedHandleWorld.ixx" bodystart="32" bodyend="-1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

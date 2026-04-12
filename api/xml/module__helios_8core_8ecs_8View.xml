@@ -1,0 +1,554 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8core_8ecs_8View" kind="module">
+    <compoundname>helios.core.ecs.View</compoundname>
+    <innerfile refid="core_2ecs_2View_8ixx">core/ecs/View.ixx</innerfile>
+    <innerclass refid="classhelios_1_1core_1_1ecs_1_1View" prot="public">helios::core::ecs::View</innerclass>
+    <innerclass refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator" prot="public">helios::core::ecs::View::Iterator</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1adcfc8953ead88289651bd9f154a5a400" prot="public" static="no">
+        <type>Entity&lt; typename TEntityManager::Handle_type, TEntityManager &gt;</type>
+        <definition>using helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::Entity_type =  Entity&lt;typename TEntityManager::Handle_type, TEntityManager&gt;</definition>
+        <argsstring></argsstring>
+        <name>Entity_type</name>
+        <qualifiedname>helios::core::ecs::View::Iterator::Entity_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/ecs/View.ixx" line="149" column="13" bodyfile="/tmp/h/include/helios/core/ecs/View.ixx" bodystart="149" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1ae9fc24b041684203fdeacc3cf0e82260" prot="public" static="no">
+        <type>std::tuple_element_t&lt; 0, std::tuple&lt; Components... &gt; &gt;</type>
+        <definition>using helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::LeadComponent =  std::tuple_element_t&lt;0, std::tuple&lt;Components...&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>LeadComponent</name>
+        <qualifiedname>helios::core::ecs::View::Iterator::LeadComponent</qualifiedname>
+        <briefdescription>
+<para>The first component type determines iteration order. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/ecs/View.ixx" line="154" column="13" bodyfile="/tmp/h/include/helios/core/ecs/View.ixx" bodystart="154" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a114b2701a8bac11bf386a60d611322c1" prot="public" static="no">
+        <type>typename SparseSet&lt; LeadComponent &gt;::Iterator</type>
+        <definition>using helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::LeadIterator =  typename SparseSet&lt;LeadComponent&gt;::Iterator</definition>
+        <argsstring></argsstring>
+        <name>LeadIterator</name>
+        <qualifiedname>helios::core::ecs::View::Iterator::LeadIterator</qualifiedname>
+        <briefdescription>
+<para><ref refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator" kindref="compound">Iterator</ref> type from the lead component&apos;s <ref refid="classhelios_1_1core_1_1ecs_1_1SparseSet" kindref="compound">SparseSet</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/ecs/View.ixx" line="159" column="13" bodyfile="/tmp/h/include/helios/core/ecs/View.ixx" bodystart="159" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1core_1_1ecs_1_1View_1aa6f130b5d8a725fbc039f7c51281fafd" prot="private" static="no" mutable="no">
+        <type>TEntityManager *</type>
+        <definition>TEntityManager* helios::core::ecs::View&lt; TEntityManager, Components &gt;::em_</definition>
+        <argsstring></argsstring>
+        <name>em_</name>
+        <qualifiedname>helios::core::ecs::View::em_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/ecs/View.ixx" line="56" column="24" bodyfile="/tmp/h/include/helios/core/ecs/View.ixx" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1core_1_1ecs_1_1View_1a3b9751bdfb6c2506bae5bee463a6d57e" prot="private" static="no" mutable="no">
+        <type>std::tuple&lt; SparseSet&lt; Components &gt; *... &gt;</type>
+        <definition>std::tuple&lt;SparseSet&lt;Components&gt;*... &gt; helios::core::ecs::View&lt; TEntityManager, Components &gt;::includeSets_</definition>
+        <argsstring></argsstring>
+        <name>includeSets_</name>
+        <qualifiedname>helios::core::ecs::View::includeSets_</qualifiedname>
+        <briefdescription>
+<para>Pointers to the SparseSets of the included components. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/ecs/View.ixx" line="61" column="20" bodyfile="/tmp/h/include/helios/core/ecs/View.ixx" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1core_1_1ecs_1_1View_1a4a4404742593c305ffcc8b60ad4dd2d0" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::function&lt; bool(<ref refid="namespacehelios_1_1core_1_1types_1ae66a87b0172199142b048c268bf0b18a" kindref="member">EntityId</ref>)&gt; &gt;</type>
+        <definition>std::vector&lt;std::function&lt;bool(EntityId)&gt; &gt; helios::core::ecs::View&lt; TEntityManager, Components &gt;::excludeChecks_</definition>
+        <argsstring></argsstring>
+        <name>excludeChecks_</name>
+        <qualifiedname>helios::core::ecs::View::excludeChecks_</qualifiedname>
+        <briefdescription>
+<para>List of exclusion predicates. Stores functions that return true if an entity should be EXCLUDED. Operates on <ref refid="namespacehelios_1_1core_1_1types_1ae66a87b0172199142b048c268bf0b18a" kindref="member">EntityId</ref> (index) because the <ref refid="classhelios_1_1core_1_1ecs_1_1SparseSet" kindref="compound">SparseSet</ref> uses it internally. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/ecs/View.ixx" line="68" column="21" bodyfile="/tmp/h/include/helios/core/ecs/View.ixx" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1core_1_1ecs_1_1View_1a088ddbff4757928253cbcdf697de6107" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool helios::core::ecs::View&lt; TEntityManager, Components &gt;::filterEnabledOnly_</definition>
+        <argsstring></argsstring>
+        <name>filterEnabledOnly_</name>
+        <qualifiedname>helios::core::ecs::View::filterEnabledOnly_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>Flag to filter only enabled components. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/ecs/View.ixx" line="73" column="14" bodyfile="/tmp/h/include/helios/core/ecs/View.ixx" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1core_1_1ecs_1_1View_1a84abb4c05220e4032500667d270f492b" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool helios::core::ecs::View&lt; TEntityManager, Components &gt;::filterActiveOnly_</definition>
+        <argsstring></argsstring>
+        <name>filterActiveOnly_</name>
+        <qualifiedname>helios::core::ecs::View::filterActiveOnly_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/ecs/View.ixx" line="75" column="14" bodyfile="/tmp/h/include/helios/core/ecs/View.ixx" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a0a85c6b438dafab388749a73fd26a63e" prot="public" static="no" mutable="no">
+        <type>LeadIterator</type>
+        <definition>LeadIterator helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::current_</definition>
+        <argsstring></argsstring>
+        <name>current_</name>
+        <qualifiedname>helios::core::ecs::View::Iterator::current_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/ecs/View.ixx" line="161" column="26" bodyfile="/tmp/h/include/helios/core/ecs/View.ixx" bodystart="161" bodyend="-1"/>
+        <referencedby refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a98c325850bd02c2499028bd2d30a2996" compoundref="core_2ecs_2View_8ixx" startline="257" endline="261">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::advance</referencedby>
+        <referencedby refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a037b3606579f069520280215ebfa7b92" compoundref="core_2ecs_2View_8ixx" startline="191" endline="249">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::isValid</referencedby>
+        <referencedby refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1aa2ee33f3077777e9e679e3f3461615d3" compoundref="core_2ecs_2View_8ixx" startline="177" endline="178">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::Iterator</referencedby>
+        <referencedby refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a9fd45e3758f21907b7d28ad1a8c7811a" compoundref="core_2ecs_2View_8ixx" startline="280" endline="282">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::operator!=</referencedby>
+        <referencedby refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a92faa83b47608337773023f315275af2" compoundref="core_2ecs_2View_8ixx" startline="291" endline="303">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::operator*</referencedby>
+        <referencedby refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a3e905c9159835aed0d115a133240df0a" compoundref="core_2ecs_2View_8ixx" startline="305" endline="307">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::operator==</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1ad93a750dc105163a14c993b871bb579b" prot="public" static="no" mutable="no">
+        <type>LeadIterator</type>
+        <definition>LeadIterator helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::end_</definition>
+        <argsstring></argsstring>
+        <name>end_</name>
+        <qualifiedname>helios::core::ecs::View::Iterator::end_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/ecs/View.ixx" line="162" column="26" bodyfile="/tmp/h/include/helios/core/ecs/View.ixx" bodystart="162" bodyend="-1"/>
+        <referencedby refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a98c325850bd02c2499028bd2d30a2996" compoundref="core_2ecs_2View_8ixx" startline="257" endline="261">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::advance</referencedby>
+        <referencedby refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a037b3606579f069520280215ebfa7b92" compoundref="core_2ecs_2View_8ixx" startline="191" endline="249">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::isValid</referencedby>
+        <referencedby refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1aa2ee33f3077777e9e679e3f3461615d3" compoundref="core_2ecs_2View_8ixx" startline="177" endline="178">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::Iterator</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a75199b1b1bf567132e8e5b672c3006c3" prot="public" static="no" mutable="no">
+        <type>const View *</type>
+        <definition>const View* helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::view_</definition>
+        <argsstring></argsstring>
+        <name>view_</name>
+        <qualifiedname>helios::core::ecs::View::Iterator::view_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/ecs/View.ixx" line="163" column="24" bodyfile="/tmp/h/include/helios/core/ecs/View.ixx" bodystart="163" bodyend="-1"/>
+        <referencedby refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a037b3606579f069520280215ebfa7b92" compoundref="core_2ecs_2View_8ixx" startline="191" endline="249">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::isValid</referencedby>
+        <referencedby refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1aa2ee33f3077777e9e679e3f3461615d3" compoundref="core_2ecs_2View_8ixx" startline="177" endline="178">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::Iterator</referencedby>
+        <referencedby refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a92faa83b47608337773023f315275af2" compoundref="core_2ecs_2View_8ixx" startline="291" endline="303">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::operator*</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1core_1_1ecs_1_1View_1aef00274ddebf90a83dab371805d991f8" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::core::ecs::View&lt; TEntityManager, Components &gt;::View</definition>
+        <argsstring>(TEntityManager *em)</argsstring>
+        <name>View</name>
+        <qualifiedname>helios::core::ecs::View::View</qualifiedname>
+        <param>
+          <type>TEntityManager *</type>
+          <declname>em</declname>
+        </param>
+        <briefdescription>
+<para>Constructs the view and retrieves the necessary component sets. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>em</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the <ref refid="classhelios_1_1core_1_1ecs_1_1EntityManager" kindref="compound">EntityManager</ref> to retrieve sets and construct Entities. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/ecs/View.ixx" line="83" column="18" bodyfile="/tmp/h/include/helios/core/ecs/View.ixx" bodystart="83" bodyend="86"/>
+        <referencedby refid="classhelios_1_1core_1_1ecs_1_1View_1a422b9b52f0a5ce507452d14d0330b119" compoundref="core_2ecs_2View_8ixx" startline="108" endline="117">helios::core::ecs::View&lt; TEntityManager, Components &gt;::exclude</referencedby>
+        <referencedby refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1aa2ee33f3077777e9e679e3f3461615d3" compoundref="core_2ecs_2View_8ixx" startline="177" endline="178">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::Iterator</referencedby>
+        <referencedby refid="classhelios_1_1core_1_1ecs_1_1View_1a840bb8623fb25bfd880cea241d940438" compoundref="core_2ecs_2View_8ixx" startline="135" endline="138">helios::core::ecs::View&lt; TEntityManager, Components &gt;::whereEnabled</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1core_1_1ecs_1_1View_1a422b9b52f0a5ce507452d14d0330b119" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>View &amp;</type>
+        <definition>View &amp; helios::core::ecs::View&lt; TEntityManager, Components &gt;::exclude</definition>
+        <argsstring>()</argsstring>
+        <name>exclude</name>
+        <qualifiedname>helios::core::ecs::View::exclude</qualifiedname>
+        <briefdescription>
+<para>Excludes entities that have a specific component. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Entities possessing the specified component type will be skipped during iteration. Multiple exclusions can be chained.</para>
+<para>```cpp // Skip entities with Shield or Invincible for (auto [e, health] : world-&gt;view&lt;HealthComponent&gt;() .<ref refid="classhelios_1_1core_1_1ecs_1_1View_1a422b9b52f0a5ce507452d14d0330b119" kindref="member">exclude&lt;ShieldComponent&gt;()</ref> .<ref refid="classhelios_1_1core_1_1ecs_1_1View_1a422b9b52f0a5ce507452d14d0330b119" kindref="member">exclude&lt;InvincibleComponent&gt;()</ref>) { // Only vulnerable entities } ```</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The component type to exclude.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to this <ref refid="classhelios_1_1core_1_1ecs_1_1View" kindref="compound">View</ref> for method chaining. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/ecs/View.ixx" line="108" column="14" bodyfile="/tmp/h/include/helios/core/ecs/View.ixx" bodystart="108" bodyend="117"/>
+        <references refid="classhelios_1_1core_1_1ecs_1_1View_1aef00274ddebf90a83dab371805d991f8" compoundref="core_2ecs_2View_8ixx" startline="83" endline="86">helios::core::ecs::View&lt; TEntityManager, Components &gt;::View</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1core_1_1ecs_1_1View_1a4987087aa7880fd76292469b98c96452" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::core::ecs::View&lt; TEntityManager, Components &gt;::empty</definition>
+        <argsstring>()</argsstring>
+        <name>empty</name>
+        <qualifiedname>helios::core::ecs::View::empty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/ecs/View.ixx" line="119" column="15" bodyfile="/tmp/h/include/helios/core/ecs/View.ixx" bodystart="119" bodyend="125"/>
+        <references refid="classhelios_1_1core_1_1ecs_1_1View_1ac0697f65ebd69774a9c4c457f884a073" compoundref="core_2ecs_2View_8ixx" startline="318" endline="332">helios::core::ecs::View&lt; TEntityManager, Components &gt;::begin</references>
+        <references refid="classhelios_1_1core_1_1ecs_1_1View_1a51ccd6bdbb98e6adbefa4308874ef716" compoundref="core_2ecs_2View_8ixx" startline="339" endline="347">helios::core::ecs::View&lt; TEntityManager, Components &gt;::end</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1core_1_1ecs_1_1View_1a840bb8623fb25bfd880cea241d940438" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>View &amp;</type>
+        <definition>View &amp; helios::core::ecs::View&lt; TEntityManager, Components &gt;::whereEnabled</definition>
+        <argsstring>()</argsstring>
+        <name>whereEnabled</name>
+        <qualifiedname>helios::core::ecs::View::whereEnabled</qualifiedname>
+        <briefdescription>
+<para>Filters to only include entities with enabled components. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Components must implement `isEnabled()` returning bool. Components without this method are assumed to be enabled.</para>
+<para><simplesect kind="return"><para>Reference to this <ref refid="classhelios_1_1core_1_1ecs_1_1View" kindref="compound">View</ref> for method chaining. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/ecs/View.ixx" line="135" column="14" bodyfile="/tmp/h/include/helios/core/ecs/View.ixx" bodystart="135" bodyend="138"/>
+        <references refid="classhelios_1_1core_1_1ecs_1_1View_1aef00274ddebf90a83dab371805d991f8" compoundref="core_2ecs_2View_8ixx" startline="83" endline="86">helios::core::ecs::View&lt; TEntityManager, Components &gt;::View</references>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1ac3dfac42cb4c654cc2a68d622d42aaa6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::Iterator</definition>
+        <argsstring>()=default</argsstring>
+        <name>Iterator</name>
+        <qualifiedname>helios::core::ecs::View::Iterator::Iterator</qualifiedname>
+        <briefdescription>
+<para>Default constructor creating an invalid iterator. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/ecs/View.ixx" line="168" column="13"/>
+        <referencedby refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a9fd45e3758f21907b7d28ad1a8c7811a" compoundref="core_2ecs_2View_8ixx" startline="280" endline="282">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::operator!=</referencedby>
+        <referencedby refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1aa8fc2157f5538a40e540fa0dc578f538" compoundref="core_2ecs_2View_8ixx" startline="268" endline="271">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::operator++</referencedby>
+        <referencedby refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a3e905c9159835aed0d115a133240df0a" compoundref="core_2ecs_2View_8ixx" startline="305" endline="307">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::operator==</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1aa2ee33f3077777e9e679e3f3461615d3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::Iterator</definition>
+        <argsstring>(LeadIterator current, LeadIterator end, const View *view)</argsstring>
+        <name>Iterator</name>
+        <qualifiedname>helios::core::ecs::View::Iterator::Iterator</qualifiedname>
+        <param>
+          <type>LeadIterator</type>
+          <declname>current</declname>
+        </param>
+        <param>
+          <type>LeadIterator</type>
+          <declname>end</declname>
+        </param>
+        <param>
+          <type>const View *</type>
+          <declname>view</declname>
+        </param>
+        <briefdescription>
+<para>Constructs an iterator with the given range and view. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>current</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator" kindref="compound">Iterator</ref> to the current position. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>end</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator" kindref="compound">Iterator</ref> to the end position. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>view</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the owning <ref refid="classhelios_1_1core_1_1ecs_1_1View" kindref="compound">View</ref> for filter access. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/ecs/View.ixx" line="177" column="13" bodyfile="/tmp/h/include/helios/core/ecs/View.ixx" bodystart="177" bodyend="178"/>
+        <references refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a0a85c6b438dafab388749a73fd26a63e" compoundref="core_2ecs_2View_8ixx" startline="161">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::current_</references>
+        <references refid="classhelios_1_1core_1_1ecs_1_1View_1a51ccd6bdbb98e6adbefa4308874ef716" compoundref="core_2ecs_2View_8ixx" startline="339" endline="347">helios::core::ecs::View&lt; TEntityManager, Components &gt;::end</references>
+        <references refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1ad93a750dc105163a14c993b871bb579b" compoundref="core_2ecs_2View_8ixx" startline="162">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::end_</references>
+        <references refid="classhelios_1_1core_1_1ecs_1_1View_1aef00274ddebf90a83dab371805d991f8" compoundref="core_2ecs_2View_8ixx" startline="83" endline="86">helios::core::ecs::View&lt; TEntityManager, Components &gt;::View</references>
+        <references refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a75199b1b1bf567132e8e5b672c3006c3" compoundref="core_2ecs_2View_8ixx" startline="163">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::view_</references>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a037b3606579f069520280215ebfa7b92" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::isValid</definition>
+        <argsstring>() const</argsstring>
+        <name>isValid</name>
+        <qualifiedname>helios::core::ecs::View::Iterator::isValid</qualifiedname>
+        <briefdescription>
+<para>Validates if the current entity matches all filter criteria. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Performs the following checks in order: 1. <ref refid="classhelios_1_1core_1_1ecs_1_1Entity" kindref="compound">Entity</ref> validity in the registry 2. Include check - entity has all required components 3. Exclude check - entity has none of the excluded components 4. Enabled check - all components pass isEnabled() (if filtered)</para>
+<para><simplesect kind="return"><para>True if the entity passes all checks, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/ecs/View.ixx" line="191" column="19" bodyfile="/tmp/h/include/helios/core/ecs/View.ixx" bodystart="191" bodyend="249"/>
+        <references refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a0a85c6b438dafab388749a73fd26a63e" compoundref="core_2ecs_2View_8ixx" startline="161">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::current_</references>
+        <references refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1ad93a750dc105163a14c993b871bb579b" compoundref="core_2ecs_2View_8ixx" startline="162">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::end_</references>
+        <references refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a75199b1b1bf567132e8e5b672c3006c3" compoundref="core_2ecs_2View_8ixx" startline="163">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::view_</references>
+        <referencedby refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a98c325850bd02c2499028bd2d30a2996" compoundref="core_2ecs_2View_8ixx" startline="257" endline="261">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::advance</referencedby>
+        <referencedby refid="classhelios_1_1core_1_1ecs_1_1View_1ac0697f65ebd69774a9c4c457f884a073" compoundref="core_2ecs_2View_8ixx" startline="318" endline="332">helios::core::ecs::View&lt; TEntityManager, Components &gt;::begin</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a98c325850bd02c2499028bd2d30a2996" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::advance</definition>
+        <argsstring>()</argsstring>
+        <name>advance</name>
+        <qualifiedname>helios::core::ecs::View::Iterator::advance</qualifiedname>
+        <briefdescription>
+<para>Advances to the next valid entity. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Increments the underlying iterator and skips invalid entities until a valid one is found or end is reached. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/ecs/View.ixx" line="257" column="18" bodyfile="/tmp/h/include/helios/core/ecs/View.ixx" bodystart="257" bodyend="261"/>
+        <references refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a0a85c6b438dafab388749a73fd26a63e" compoundref="core_2ecs_2View_8ixx" startline="161">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::current_</references>
+        <references refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1ad93a750dc105163a14c993b871bb579b" compoundref="core_2ecs_2View_8ixx" startline="162">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::end_</references>
+        <references refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a037b3606579f069520280215ebfa7b92" compoundref="core_2ecs_2View_8ixx" startline="191" endline="249">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::isValid</references>
+        <referencedby refid="classhelios_1_1core_1_1ecs_1_1View_1ac0697f65ebd69774a9c4c457f884a073" compoundref="core_2ecs_2View_8ixx" startline="318" endline="332">helios::core::ecs::View&lt; TEntityManager, Components &gt;::begin</referencedby>
+        <referencedby refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1aa8fc2157f5538a40e540fa0dc578f538" compoundref="core_2ecs_2View_8ixx" startline="268" endline="271">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::operator++</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1aa8fc2157f5538a40e540fa0dc578f538" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>Iterator &amp;</type>
+        <definition>Iterator &amp; helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::operator++</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>operator++</name>
+        <qualifiedname>helios::core::ecs::View::Iterator::operator++</qualifiedname>
+        <briefdescription>
+<para>Pre-increment operator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Reference to this iterator after advancing. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/ecs/View.ixx" line="268" column="22" bodyfile="/tmp/h/include/helios/core/ecs/View.ixx" bodystart="268" bodyend="271"/>
+        <references refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a98c325850bd02c2499028bd2d30a2996" compoundref="core_2ecs_2View_8ixx" startline="257" endline="261">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::advance</references>
+        <references refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1ac3dfac42cb4c654cc2a68d622d42aaa6">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::Iterator</references>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a9fd45e3758f21907b7d28ad1a8c7811a" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::operator!=</definition>
+        <argsstring>(const Iterator &amp;other) const noexcept</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>helios::core::ecs::View::Iterator::operator!=</qualifiedname>
+        <param>
+          <type>const Iterator &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Inequality comparison. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The iterator to compare against.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if iterators point to different positions. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/ecs/View.ixx" line="280" column="18" bodyfile="/tmp/h/include/helios/core/ecs/View.ixx" bodystart="280" bodyend="282"/>
+        <references refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a0a85c6b438dafab388749a73fd26a63e" compoundref="core_2ecs_2View_8ixx" startline="161">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::current_</references>
+        <references refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1ac3dfac42cb4c654cc2a68d622d42aaa6">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::Iterator</references>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a92faa83b47608337773023f315275af2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::operator*</definition>
+        <argsstring>() const</argsstring>
+        <name>operator*</name>
+        <qualifiedname>helios::core::ecs::View::Iterator::operator*</qualifiedname>
+        <briefdescription>
+<para>Dereference operator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A tuple containing {GameObject, Component*...}.</para>
+</simplesect>
+<simplesect kind="note"><para>Returns by value to support C++17 Structured Binding (auto [go, comp] : view). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/ecs/View.ixx" line="291" column="19" bodyfile="/tmp/h/include/helios/core/ecs/View.ixx" bodystart="291" bodyend="303"/>
+        <references refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a0a85c6b438dafab388749a73fd26a63e" compoundref="core_2ecs_2View_8ixx" startline="161">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::current_</references>
+        <references refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a75199b1b1bf567132e8e5b672c3006c3" compoundref="core_2ecs_2View_8ixx" startline="163">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::view_</references>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a3e905c9159835aed0d115a133240df0a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::operator==</definition>
+        <argsstring>(const Iterator &amp;other) const noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>helios::core::ecs::View::Iterator::operator==</qualifiedname>
+        <param>
+          <type>const Iterator &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/ecs/View.ixx" line="305" column="19" bodyfile="/tmp/h/include/helios/core/ecs/View.ixx" bodystart="305" bodyend="307"/>
+        <references refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a0a85c6b438dafab388749a73fd26a63e" compoundref="core_2ecs_2View_8ixx" startline="161">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::current_</references>
+        <references refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1ac3dfac42cb4c654cc2a68d622d42aaa6">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::Iterator</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1core_1_1ecs_1_1View_1ac0697f65ebd69774a9c4c457f884a073" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Iterator</type>
+        <definition>Iterator helios::core::ecs::View&lt; TEntityManager, Components &gt;::begin</definition>
+        <argsstring>()</argsstring>
+        <name>begin</name>
+        <qualifiedname>helios::core::ecs::View::begin</qualifiedname>
+        <briefdescription>
+<para>Returns an iterator to the first valid entity. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Uses the first component type&apos;s <ref refid="classhelios_1_1core_1_1ecs_1_1SparseSet" kindref="compound">SparseSet</ref> as the lead. If the first entity is invalid, advances to the next valid one.</para>
+<para><simplesect kind="return"><para><ref refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator" kindref="compound">Iterator</ref> to the first valid entity, or <ref refid="classhelios_1_1core_1_1ecs_1_1View_1a51ccd6bdbb98e6adbefa4308874ef716" kindref="member">end()</ref> if none found. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/ecs/View.ixx" line="318" column="19" bodyfile="/tmp/h/include/helios/core/ecs/View.ixx" bodystart="318" bodyend="332"/>
+        <references refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a98c325850bd02c2499028bd2d30a2996" compoundref="core_2ecs_2View_8ixx" startline="257" endline="261">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::advance</references>
+        <references refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1a037b3606579f069520280215ebfa7b92" compoundref="core_2ecs_2View_8ixx" startline="191" endline="249">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::isValid</references>
+        <referencedby refid="classhelios_1_1core_1_1ecs_1_1View_1a4987087aa7880fd76292469b98c96452" compoundref="core_2ecs_2View_8ixx" startline="119" endline="125">helios::core::ecs::View&lt; TEntityManager, Components &gt;::empty</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1core_1_1ecs_1_1View_1a51ccd6bdbb98e6adbefa4308874ef716" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Iterator</type>
+        <definition>Iterator helios::core::ecs::View&lt; TEntityManager, Components &gt;::end</definition>
+        <argsstring>()</argsstring>
+        <name>end</name>
+        <qualifiedname>helios::core::ecs::View::end</qualifiedname>
+        <briefdescription>
+<para>Returns an iterator to the end (past the last entity). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>End iterator for comparison. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/ecs/View.ixx" line="339" column="19" bodyfile="/tmp/h/include/helios/core/ecs/View.ixx" bodystart="339" bodyend="347"/>
+        <referencedby refid="classhelios_1_1core_1_1ecs_1_1View_1a4987087aa7880fd76292469b98c96452" compoundref="core_2ecs_2View_8ixx" startline="119" endline="125">helios::core::ecs::View&lt; TEntityManager, Components &gt;::empty</referencedby>
+        <referencedby refid="structhelios_1_1core_1_1ecs_1_1View_1_1Iterator_1aa2ee33f3077777e9e679e3f3461615d3" compoundref="core_2ecs_2View_8ixx" startline="177" endline="178">helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator::Iterator</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/core/ecs/View.ixx" line="11" column="15"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="structHandleToManager_3_01THandle_00_01THead_00_01TTail_8_8_8_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>HandleToManager&lt; THandle, THead, TTail... &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename THandle</type>
+      </param>
+      <param>
+        <type>typename THead</type>
+      </param>
+      <param>
+        <type>typename ...</type>
+        <declname>TTail</declname>
+        <defname>TTail</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structHandleToManager_3_01THandle_00_01THead_00_01TTail_8_8_8_01_4_1a11fcf46fd56de9232ed8f233debdaf84" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>size_t</type>
+        <definition>size_t HandleToManager&lt; THandle, THead, TTail... &gt;::value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <qualifiedname>HandleToManager&lt; THandle, THead, TTail... &gt;::value</qualifiedname>
+        <initializer>= [] {
+        if constexpr (std::is_same_v&lt;typename THead::Handle_type, THandle&gt;) {
+            return size_t{0};
+        } else {
+            return size_t{1} + <ref refid="structHandleToManager" kindref="compound">HandleToManager</ref>&lt;THandle, TTail...&gt;::value;
+        }
+    }()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/ecs/TypedHandleWorld.ixx" line="36" column="29" bodyfile="/tmp/h/include/helios/core/ecs/TypedHandleWorld.ixx" bodystart="36" bodyend="42"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/core/ecs/TypedHandleWorld.ixx" line="35" column="1" bodyfile="/tmp/h/include/helios/core/ecs/TypedHandleWorld.ixx" bodystart="35" bodyend="43"/>
+    <listofallmembers>
+      <member refid="structHandleToManager_3_01THandle_00_01THead_00_01TTail_8_8_8_01_4_1a11fcf46fd56de9232ed8f233debdaf84" prot="public" virt="non-virtual"><scope>HandleToManager&lt; THandle, THead, TTail... &gt;</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

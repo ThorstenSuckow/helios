@@ -1,0 +1,206 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="core_2ecs_2ComponentOps_8ixx" kind="file" language="C++">
+    <compoundname>core/ecs/ComponentOps.ixx</compoundname>
+    <includes refid="core_2ecs_2EntityHandle_8ixx" local="no">helios.core.ecs.EntityHandle</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>ComponentOps.ixx</label>
+        <link refid="core_2ecs_2ComponentOps_8ixx"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios.core.ecs.EntityHandle</label>
+        <link refid="core_2ecs_2EntityHandle_8ixx"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>helios.core.types</label>
+        <link refid="types_8ixx"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>cstdint</label>
+      </node>
+      <node id="3">
+        <label>functional</label>
+      </node>
+      <node id="5">
+        <label>helios.core.data.concepts</label>
+      </node>
+      <node id="7">
+        <label>limits</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structhelios_1_1core_1_1ecs_1_1ComponentOps" prot="public">helios::core::ecs::ComponentOps</innerclass>
+    <innernamespace refid="namespacehelios">helios</innernamespace>
+    <innernamespace refid="namespacehelios_1_1core">helios::core</innernamespace>
+    <innernamespace refid="namespacehelios_1_1core_1_1ecs">helios::core::ecs</innernamespace>
+    <briefdescription>
+<para>Function pointer structure for type-erased component lifecycle callbacks. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/**</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>@file<sp/>ComponentOps.ixx</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>@brief<sp/>Function<sp/>pointer<sp/>structure<sp/>for<sp/>type-erased<sp/>component<sp/>lifecycle<sp/>callbacks.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">module</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8core_8ecs_8ComponentOps" kindref="compound">helios.core.ecs.ComponentOps</ref>;</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8core_8ecs_8EntityHandle" kindref="compound">helios.core.ecs.EntityHandle</ref>;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11" refid="namespacehelios_1_1core_1_1ecs" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1core_1_1ecs" kindref="compound">helios::core::ecs</ref><sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Container<sp/>for<sp/>type-erased<sp/>component<sp/>lifecycle<sp/>function<sp/>pointers.</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>`ComponentOps`<sp/>enables<sp/>runtime<sp/>invocation<sp/>of<sp/>component<sp/>lifecycle</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>hooks<sp/>without<sp/>knowing<sp/>the<sp/>concrete<sp/>component<sp/>type.<sp/>Function<sp/>pointers<sp/>are</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>set<sp/>during<sp/>type<sp/>registration<sp/>via<sp/>`ComponentReflector::registerType&lt;T&gt;()`.</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>##<sp/>Type<sp/>Erasure<sp/>Pattern</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```cpp</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>//<sp/>At<sp/>registration<sp/>(type<sp/>known):</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>ComponentOps<sp/>ops{</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/>.onAcquire<sp/>=<sp/>[](void*<sp/>ptr)<sp/>{</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>static_cast&lt;HealthComponent*&gt;(ptr)-&gt;onAcquire();</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>};</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>//<sp/>At<sp/>runtime<sp/>(type<sp/>erased):</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>if<sp/>(ops.onAcquire)<sp/>{</highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/>ops.onAcquire(rawComponent);</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>}</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>ComponentOpsRegistry</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>ComponentReflector</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>Traits</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40" refid="structhelios_1_1core_1_1ecs_1_1ComponentOps" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structhelios_1_1core_1_1ecs_1_1ComponentOps" kindref="compound">ComponentOps</ref><sp/>{</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Function<sp/>signature<sp/>for<sp/>pool<sp/>acquisition<sp/>callback.</highlight></codeline>
+<codeline lineno="44"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>ptr<sp/>Raw<sp/>pointer<sp/>to<sp/>the<sp/>component<sp/>instance.</highlight></codeline>
+<codeline lineno="46"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47" refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1af21284f08415c24182c3bb97350fbb90" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1af21284f08415c24182c3bb97350fbb90" kindref="member">OnAcquireFn</ref><sp/>=<sp/>void(*)(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="49"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="50"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Function<sp/>signature<sp/>for<sp/>pool<sp/>release<sp/>callback.</highlight></codeline>
+<codeline lineno="51"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="52"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>ptr<sp/>Raw<sp/>pointer<sp/>to<sp/>the<sp/>component<sp/>instance.</highlight></codeline>
+<codeline lineno="53"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54" refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1abd9705266311ee998f87bdcbb7ccbfbb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1abd9705266311ee998f87bdcbb7ccbfbb" kindref="member">OnReleaseFn</ref><sp/>=<sp/>void(*)(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*);</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="56"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="57"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Function<sp/>signature<sp/>for<sp/>removal<sp/>interception<sp/>callback.</highlight></codeline>
+<codeline lineno="58"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="59"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>ptr<sp/>Raw<sp/>pointer<sp/>to<sp/>the<sp/>component<sp/>instance.</highlight></codeline>
+<codeline lineno="60"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="61"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>`true`<sp/>to<sp/>allow<sp/>removal,<sp/>`false`<sp/>to<sp/>prevent<sp/>it.</highlight></codeline>
+<codeline lineno="62"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63" refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1add017ad07cc9218478e3bf562b6d4c10" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1add017ad07cc9218478e3bf562b6d4c10" kindref="member">OnRemoveFn</ref><sp/>=<sp/>bool(*)(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="65"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="66"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Function<sp/>signature<sp/>for<sp/>component<sp/>enable<sp/>callback.</highlight></codeline>
+<codeline lineno="67"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="68"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>ptr<sp/>Raw<sp/>pointer<sp/>to<sp/>the<sp/>component<sp/>instance.</highlight></codeline>
+<codeline lineno="69"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70" refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1ad10567ddd7c563f793872755a9b2824a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1ad10567ddd7c563f793872755a9b2824a" kindref="member">EnableFn</ref><sp/>=<sp/>void(*)(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*);</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="72"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="73"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Function<sp/>signature<sp/>for<sp/>component<sp/>disable<sp/>callback.</highlight></codeline>
+<codeline lineno="74"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="75"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>ptr<sp/>Raw<sp/>pointer<sp/>to<sp/>the<sp/>component<sp/>instance.</highlight></codeline>
+<codeline lineno="76"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77" refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1ad2c18eb3c354b7dd904bc8746a12f210" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1ad2c18eb3c354b7dd904bc8746a12f210" kindref="member">DisableFn</ref><sp/>=<sp/>void(*)(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*);</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="79"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="80"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Function<sp/>signature<sp/>for<sp/>component<sp/>cloning.</highlight></codeline>
+<codeline lineno="81"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="82"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>manager<sp/>Raw<sp/>pointer<sp/>to<sp/>the<sp/>EntityManager.</highlight></codeline>
+<codeline lineno="83"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>source<sp/>Raw<sp/>pointer<sp/>to<sp/>the<sp/>source<sp/>component.</highlight></codeline>
+<codeline lineno="84"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>target<sp/>Pointer<sp/>to<sp/>the<sp/>target<sp/>EntityHandle.</highlight></codeline>
+<codeline lineno="85"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="86"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>Raw<sp/>pointer<sp/>to<sp/>the<sp/>newly<sp/>created<sp/>component.</highlight></codeline>
+<codeline lineno="87"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="88" refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1ab5607da5c9c63f43bdf30502c3b5a07a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1ab5607da5c9c63f43bdf30502c3b5a07a" kindref="member">CloneFn</ref><sp/>=<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*(*)(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>manager,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>source,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>target);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="90"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="91"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Function<sp/>signature<sp/>for<sp/>Entity<sp/>activation<sp/>callback.</highlight></codeline>
+<codeline lineno="92"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="93"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>ptr<sp/>Raw<sp/>pointer<sp/>to<sp/>the<sp/>component<sp/>instance.</highlight></codeline>
+<codeline lineno="94"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="95" refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a1d61eb889aa96e9f683b779dc5459941" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a1d61eb889aa96e9f683b779dc5459941" kindref="member">OnActivateFn</ref><sp/>=<sp/>void(*)(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*);</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="97"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="98"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Function<sp/>signature<sp/>for<sp/>Entity<sp/>deactivation<sp/>callback.</highlight></codeline>
+<codeline lineno="99"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="100"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>ptr<sp/>Raw<sp/>pointer<sp/>to<sp/>the<sp/>component<sp/>instance.</highlight></codeline>
+<codeline lineno="101"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="102" refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a551183ce2a7003875651aac96b512f4e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a551183ce2a7003875651aac96b512f4e" kindref="member">OnDeactivateFn</ref><sp/>=<sp/>void(*)(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="104"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="105"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Called<sp/>when<sp/>entity<sp/>is<sp/>acquired<sp/>from<sp/>an<sp/>object<sp/>pool.</highlight></codeline>
+<codeline lineno="106"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="107" refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a0f4a959360df1adde4156176603feb65" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1af21284f08415c24182c3bb97350fbb90" kindref="member">OnAcquireFn</ref><sp/><ref refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a0f4a959360df1adde4156176603feb65" kindref="member">onAcquire</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="109"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="110"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Called<sp/>when<sp/>entity<sp/>is<sp/>released<sp/>back<sp/>to<sp/>an<sp/>object<sp/>pool.</highlight></codeline>
+<codeline lineno="111"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="112" refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1ad47b9d5ee21c7b31e94882c381f1e1e2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1abd9705266311ee998f87bdcbb7ccbfbb" kindref="member">OnReleaseFn</ref><sp/><ref refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1ad47b9d5ee21c7b31e94882c381f1e1e2" kindref="member">onRelease</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="114"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="115"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Called<sp/>before<sp/>component<sp/>removal.<sp/>Return<sp/>`false`<sp/>to<sp/>block.</highlight></codeline>
+<codeline lineno="116"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="117" refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a4a1d31f4c2b357ef4b804b967921d9a0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1add017ad07cc9218478e3bf562b6d4c10" kindref="member">OnRemoveFn</ref><sp/><ref refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a4a1d31f4c2b357ef4b804b967921d9a0" kindref="member">onRemove</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="119"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="120"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Called<sp/>to<sp/>enable<sp/>the<sp/>component.</highlight></codeline>
+<codeline lineno="121"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="122" refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a0abe6af96dbd66b94627a4c189e2cb15" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1ad10567ddd7c563f793872755a9b2824a" kindref="member">EnableFn</ref><sp/><ref refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a0abe6af96dbd66b94627a4c189e2cb15" kindref="member">enable</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="124"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="125"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Called<sp/>to<sp/>disable<sp/>the<sp/>component.</highlight></codeline>
+<codeline lineno="126"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="127" refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a5fca23bea7494abb8e3180bce41d7270" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1ad2c18eb3c354b7dd904bc8746a12f210" kindref="member">DisableFn</ref><sp/><ref refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a5fca23bea7494abb8e3180bce41d7270" kindref="member">disable</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="129"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="130"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Called<sp/>to<sp/>clone<sp/>the<sp/>component<sp/>to<sp/>a<sp/>target<sp/>entity.</highlight></codeline>
+<codeline lineno="131"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="132" refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a4109da406ad4e02414c23fabe425b433" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1ab5607da5c9c63f43bdf30502c3b5a07a" kindref="member">CloneFn</ref><sp/><ref refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a4109da406ad4e02414c23fabe425b433" kindref="member">clone</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="134"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="135"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Called<sp/>when<sp/>the<sp/>owning<sp/>Entity<sp/>is<sp/>activated.</highlight></codeline>
+<codeline lineno="136"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="137" refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a3a4aa68145fa8d138ec7e15ee0d6cd69" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a1d61eb889aa96e9f683b779dc5459941" kindref="member">OnActivateFn</ref><sp/><ref refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a3a4aa68145fa8d138ec7e15ee0d6cd69" kindref="member">onActivate</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="139"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="140"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Called<sp/>when<sp/>the<sp/>owning<sp/>Entity<sp/>is<sp/>deactivated.</highlight></codeline>
+<codeline lineno="141"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="142" refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1ab927749990bf9450b845454c0b8e5ebb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1a551183ce2a7003875651aac96b512f4e" kindref="member">OnDeactivateFn</ref><sp/><ref refid="structhelios_1_1core_1_1ecs_1_1ComponentOps_1ab927749990bf9450b845454c0b8e5ebb" kindref="member">onDeactivate</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/tmp/h/include/helios/core/ecs/ComponentOps.ixx"/>
+  </compounddef>
+</doxygen>

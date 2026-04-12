@@ -1,10 +1,6 @@
 var searchData=
 [
-  ['managerregistry_0',['ManagerRegistry',['../namespacehelios_1_1engine_1_1runtime_1_1world.html#a12c55c47caeb5dc7588c1b1e74f4992f',1,'helios::engine::runtime::world']]],
-  ['mat4d_1',['mat4d',['../namespacehelios_1_1math.html#a058bd8629e8b9fdd7914ec513cf515f5',1,'helios::math']]],
-  ['mat4f_2',['mat4f',['../namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3',1,'helios::math']]],
-  ['mat4i_3',['mat4i',['../namespacehelios_1_1math.html#abfde83491c8def2cca7e8816bb9a0075',1,'helios::math']]],
-  ['matchstatemanager_4',['MatchStateManager',['../namespacehelios_1_1engine_1_1mechanics_1_1match.html#a151fc4e8d8a8f2eb87866789883eda39',1,'helios::engine::mechanics::match']]],
-  ['matchstatetype_5',['MatchStateType',['../namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types.html#a4c35aad58be5d0fe9bb4f2ba77da7827',1,'helios::engine::mechanics::match::types']]],
-  ['menuid_6',['MenuId',['../namespacehelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1types.html#adbe4976cb1cb556cd5c761aa2a233ff7',1,'helios::engine::modules::ui::widgets::types']]]
+  ['leadcomponent_0',['LeadComponent',['../structhelios_1_1core_1_1ecs_1_1View_1_1Iterator.html#ae9fc24b041684203fdeacc3cf0e82260',1,'helios::core::ecs::View::Iterator::LeadComponent'],['../structhelios_1_1engine_1_1ecs_1_1View_1_1Iterator.html#aeb01eb697edaae8307ff7e33f2f6a9af',1,'helios::engine::ecs::View::Iterator::LeadComponent']]],
+  ['leaditerator_1',['LeadIterator',['../structhelios_1_1core_1_1ecs_1_1View_1_1Iterator.html#a114b2701a8bac11bf386a60d611322c1',1,'helios::core::ecs::View::Iterator::LeadIterator'],['../structhelios_1_1engine_1_1ecs_1_1View_1_1Iterator.html#a431623414b6cc8ef438e8baaf1b21de4',1,'helios::engine::ecs::View::Iterator::LeadIterator']]],
+  ['livesrevision_2',['LivesRevision',['../namespacehelios_1_1engine_1_1mechanics_1_1match_1_1types.html#a5a9b40b91cd49d24dffc892db68cfd6c',1,'helios::engine::mechanics::match::types']]]
 ];

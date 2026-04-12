@@ -79,12 +79,26 @@ var annotated_dup =
           [ "TypeIndexer", "classhelios_1_1core_1_1data_1_1TypeIndexer.html", "classhelios_1_1core_1_1data_1_1TypeIndexer" ]
         ] ],
         [ "ecs", "namespacehelios_1_1core_1_1ecs.html", [
+          [ "components", "namespacehelios_1_1core_1_1ecs_1_1components.html", [
+            [ "Active", "structhelios_1_1core_1_1ecs_1_1components_1_1Active.html", null ],
+            [ "HierarchyComponent", "classhelios_1_1core_1_1ecs_1_1components_1_1HierarchyComponent.html", "classhelios_1_1core_1_1ecs_1_1components_1_1HierarchyComponent" ],
+            [ "Inactive", "structhelios_1_1core_1_1ecs_1_1components_1_1Inactive.html", null ]
+          ] ],
+          [ "ComponentOps", "structhelios_1_1core_1_1ecs_1_1ComponentOps.html", "structhelios_1_1core_1_1ecs_1_1ComponentOps" ],
+          [ "ComponentOpsRegistry", "classhelios_1_1core_1_1ecs_1_1ComponentOpsRegistry.html", "classhelios_1_1core_1_1ecs_1_1ComponentOpsRegistry" ],
+          [ "ComponentReflector", "classhelios_1_1core_1_1ecs_1_1ComponentReflector.html", "classhelios_1_1core_1_1ecs_1_1ComponentReflector" ],
+          [ "ComponentTypeId", "classhelios_1_1core_1_1ecs_1_1ComponentTypeId.html", "classhelios_1_1core_1_1ecs_1_1ComponentTypeId" ],
+          [ "Entity", "classhelios_1_1core_1_1ecs_1_1Entity.html", "classhelios_1_1core_1_1ecs_1_1Entity" ],
           [ "EntityHandle", "structhelios_1_1core_1_1ecs_1_1EntityHandle.html", "structhelios_1_1core_1_1ecs_1_1EntityHandle" ],
+          [ "EntityManager", "classhelios_1_1core_1_1ecs_1_1EntityManager.html", "classhelios_1_1core_1_1ecs_1_1EntityManager" ],
           [ "EntityRegistry", "classhelios_1_1core_1_1ecs_1_1EntityRegistry.html", "classhelios_1_1core_1_1ecs_1_1EntityRegistry" ],
+          [ "EntityResolver", "structhelios_1_1core_1_1ecs_1_1EntityResolver.html", "structhelios_1_1core_1_1ecs_1_1EntityResolver" ],
           [ "HashedLookupStrategy", "classhelios_1_1core_1_1ecs_1_1HashedLookupStrategy.html", "classhelios_1_1core_1_1ecs_1_1HashedLookupStrategy" ],
           [ "LinearLookupStrategy", "classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy.html", "classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy" ],
           [ "SparseSetBase", "classhelios_1_1core_1_1ecs_1_1SparseSetBase.html", "classhelios_1_1core_1_1ecs_1_1SparseSetBase" ],
-          [ "SparseSet", "classhelios_1_1core_1_1ecs_1_1SparseSet.html", "classhelios_1_1core_1_1ecs_1_1SparseSet" ]
+          [ "SparseSet", "classhelios_1_1core_1_1ecs_1_1SparseSet.html", "classhelios_1_1core_1_1ecs_1_1SparseSet" ],
+          [ "TypedHandleWorld", "classhelios_1_1core_1_1ecs_1_1TypedHandleWorld.html", "classhelios_1_1core_1_1ecs_1_1TypedHandleWorld" ],
+          [ "View", "classhelios_1_1core_1_1ecs_1_1View.html", "classhelios_1_1core_1_1ecs_1_1View" ]
         ] ],
         [ "memory", "namespacehelios_1_1core_1_1memory.html", [
           [ "ErasedUnique", "structhelios_1_1core_1_1memory_1_1ErasedUnique.html", "structhelios_1_1core_1_1memory_1_1ErasedUnique" ]
@@ -775,6 +789,7 @@ var annotated_dup =
     [ "std", null, [
       [ "hash&lt; helios::core::data::RuntimeHandle&lt; StrongIdentifier, RuntimeId &gt; &gt;", "structstd_1_1hash_3_01helios_1_1core_1_1data_1_1RuntimeHandle_3_01StrongIdentifier_00_01RuntimeId_01_4_01_4.html", "structstd_1_1hash_3_01helios_1_1core_1_1data_1_1RuntimeHandle_3_01StrongIdentifier_00_01RuntimeId_01_4_01_4" ],
       [ "hash&lt; helios::core::data::StrongId&lt; Tag, Underlying &gt; &gt;", "structstd_1_1hash_3_01helios_1_1core_1_1data_1_1StrongId_3_01Tag_00_01Underlying_01_4_01_4.html", "structstd_1_1hash_3_01helios_1_1core_1_1data_1_1StrongId_3_01Tag_00_01Underlying_01_4_01_4" ],
+      [ "hash&lt; helios::core::ecs::ComponentTypeId&lt; THandle &gt; &gt;", "structstd_1_1hash_3_01helios_1_1core_1_1ecs_1_1ComponentTypeId_3_01THandle_01_4_01_4.html", "structstd_1_1hash_3_01helios_1_1core_1_1ecs_1_1ComponentTypeId_3_01THandle_01_4_01_4" ],
       [ "hash&lt; helios::core::ecs::EntityHandle&lt; TStrongId &gt; &gt;", "structstd_1_1hash_3_01helios_1_1core_1_1ecs_1_1EntityHandle_3_01TStrongId_01_4_01_4.html", "structstd_1_1hash_3_01helios_1_1core_1_1ecs_1_1EntityHandle_3_01TStrongId_01_4_01_4" ],
       [ "hash&lt; helios::engine::ecs::EntityHandle &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1ecs_1_1EntityHandle_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1ecs_1_1EntityHandle_01_4" ],
       [ "hash&lt; helios::engine::ecs::types::ComponentTypeId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1ecs_1_1types_1_1ComponentTypeId_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1ecs_1_1types_1_1ComponentTypeId_01_4" ],
@@ -793,5 +808,9 @@ var annotated_dup =
       [ "hash&lt; helios::engine::state::types::StateTypeId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1state_1_1types_1_1StateTypeId_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1state_1_1types_1_1StateTypeId_01_4" ],
       [ "hash&lt; helios::util::Guid &gt;", "structstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4.html", "structstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4" ]
     ] ],
+    [ "HandleToManager", "structHandleToManager.html", null ],
+    [ "HandleToManager&lt; THandle &gt;", "structHandleToManager_3_01THandle_01_4.html", null ],
+    [ "HandleToManager&lt; THandle, THead &gt;", "structHandleToManager_3_01THandle_00_01THead_01_4.html", "structHandleToManager_3_01THandle_00_01THead_01_4" ],
+    [ "HandleToManager&lt; THandle, THead, TTail... &gt;", "structHandleToManager_3_01THandle_00_01THead_00_01TTail_8_8_8_01_4.html", "structHandleToManager_3_01THandle_00_01THead_00_01TTail_8_8_8_01_4" ],
     [ "UniformValueMap", "classUniformValueMap.html", "classUniformValueMap" ]
 ];

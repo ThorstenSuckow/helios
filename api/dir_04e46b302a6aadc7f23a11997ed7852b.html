@@ -130,11 +130,11 @@ Files</h2></td></tr>
 <tr class="memdesc:TimerManager_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manager for game timers and timer command handling. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md411"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md424"></a>
 helios::engine::mechanics::timing</h1>
 <p>Game timer management system.</p>
 <p>This module provides timers, commands, components, and systems for tracking elapsed time, controlling timer state transitions, and observing timer updates from within the ECS.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md412"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md425"></a>
 Submodules</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -148,7 +148,7 @@ Submodules</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">systems/</span>  </td><td class="markdownTableBodyNone">Systems that advance timers each frame  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md413"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md426"></a>
 Key Classes</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -160,10 +160,10 @@ Key Classes</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">TimerCommandHandler</span>  </td><td class="markdownTableBodyNone">Abstract handler interface for timer control commands  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md414"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md427"></a>
 Architecture</h1>
 <p>1. <b>GameTimer</b> accumulates elapsed time and increments a revision counter on each update 2. <b>TimerControlCommand</b> is written into the command buffer to request state transitions (start, pause, stop) 3. <b>TimerCommandDispatcher</b> routes the command to the <b>TimerManager</b> via the Visitor pattern 4. <b>TimerManager</b> collects pending commands and applies them during <span class="tt">flush()</span> 5. <b>GameTimerUpdateSystem</b> advances all timers by the current delta time each frame 6. <b>GameTimerBindingComponent</b> allows entities to track a specific timer's revision</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md415"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md428"></a>
 Integration</h1>
 <p>The timing system integrates with:</p><ul>
 <li><b>Command system</b> - timer state transitions are requested via <span class="tt">TimerControlCommand</span></li>

@@ -125,13 +125,13 @@ Files</h2></td></tr>
 <tr class="memdesc:SpawnSystemFactory_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factory for fluent, ID-centric configuration of the spawn system. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md130"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md143"></a>
 helios.engine.builder.spawnSystem</h1>
 <p>Fluent, ID-centric builder API for configuring the spawn system: pools, profiles, and schedulers.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md131"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md144"></a>
 Overview</h1>
 <p><span class="tt">SpawnSystemFactory</span> provides an API where each <b>pool ID</b> is the entry point for all related configuration. Profiles and scheduling rules are nested under their pool, ensuring co-location of related IDs and reducing configuration errors.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md132"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md145"></a>
 Architecture</h1>
 <div class="fragment"><div class="line">spawnSystem/</div>
 <div class="line">├── _module.ixx                  # Module facade</div>
@@ -144,9 +144,9 @@ Architecture</h1>
 <div class="line">│       ├── _module.ixx</div>
 <div class="line">│       ├── SpawnPoolConfig.ixx  # ID-centric: pool → profiles → rules</div>
 <div class="line">│       └── SchedulerConfig.ixx  # Standalone rule config (for SchedulerBuilder)</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md133"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md146"></a>
 Usage</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md134"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md147"></a>
 ID-centric API (recommended)</h2>
 <div class="fragment"><div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacehelios_1_1engine_1_1builder_1_1spawnSystem.html">helios::engine::builder::spawnSystem</a>;</div>
 <div class="line"> </div>
@@ -192,7 +192,7 @@ ID-centric API (recommended)</h2>
 <div class="line">        .commitCyclic&lt;2&gt;();</div>
 <div class="ttc" id="aclasshelios_1_1engine_1_1builder_1_1spawnSystem_1_1SpawnSystemFactory_html_a82a9bc4bbd9718c1158e6bb37c763c54"><div class="ttname"><a href="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1SpawnSystemFactory.html#a82a9bc4bbd9718c1158e6bb37c763c54">helios::engine::builder::spawnSystem::SpawnSystemFactory::configure</a></div><div class="ttdeci">static helios::engine::builder::spawnSystem::builders::configs::SpawnSystemConfigurator configure(helios::engine::runtime::pooling::GameObjectPoolManager &amp;poolManager, helios::engine::runtime::spawn::SpawnManager &amp;spawnManager)</div><div class="ttdoc">Creates a configurator for fluent spawn system setup.</div><div class="ttdef"><b>Definition</b> <a href="SpawnSystemFactory_8ixx_source.html#l00060">SpawnSystemFactory.ixx:60</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1engine_1_1builder_1_1spawnSystem_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1builder_1_1spawnSystem.html">helios::engine::builder::spawnSystem</a></div><div class="ttdef"><b>Definition</b> <a href="SchedulerConfig_8ixx_source.html#l00020">SchedulerConfig.ixx:20</a></div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md135"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md148"></a>
 Chained Pool Configuration</h2>
 <p><span class="tt">commit()</span> and <span class="tt">commitCyclic&lt;N&gt;()</span> return a <span class="tt">SpawnSystemConfigurator</span> that provides <span class="tt">pool()</span> for starting the next pool configuration:</p>
 <div class="fragment"><div class="line"><a class="code hl_function" href="classhelios_1_1engine_1_1builder_1_1spawnSystem_1_1SpawnSystemFactory.html#a82a9bc4bbd9718c1158e6bb37c763c54">SpawnSystemFactory::configure</a>(poolManager, spawnManager)</div>
@@ -202,7 +202,7 @@ Chained Pool Configuration</h2>
 <div class="line">    .pool(EnemyPoolId, prefab2, 200) <span class="comment">// ← next pool on the return value</span></div>
 <div class="line">        .profile(EnemyProfileId).randomPlacement().done()</div>
 <div class="line">        .commit();</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md136"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md149"></a>
 Separate Scheduling with commitProfilesOnly()</h2>
 <p>When the same profiles need different scheduling strategies (e.g., in different levels), commit profiles without rules and attach schedulers separately:</p>
 <div class="fragment"><div class="line"><span class="comment">// Register pool + profiles (no schedulers created)</span></div>
@@ -217,7 +217,7 @@ Separate Scheduling with commitProfilesOnly()</h2>
 <div class="line">    SchedulerConfig(LeftProfileId, LeftRuleId).timerCondition(5.0f).fixedAmount(10),</div>
 <div class="line">    SchedulerConfig(RightProfileId, RightRuleId).timerCondition(5.0f).fixedAmount(10)</div>
 <div class="line">);</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md137"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md150"></a>
 Design Decisions</h1>
 <ul>
 <li><b>ID-centric</b>: Pool ID is the root of all related config - no mismatched IDs possible</li>
@@ -227,7 +227,7 @@ Design Decisions</h1>
 <li><b>done() chaining</b>: Nested configs return to their parent via <span class="tt">done()</span>, enabling natural indentation</li>
 <li><b>Move-only configs</b>: SpawnPoolConfig is not copyable (unique_ptr members). For reusable profile setups with different scheduling, use <span class="tt">commitProfilesOnly()</span> + <span class="tt">SchedulerBuilder</span></li>
 </ul>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md138"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md151"></a>
 See Also</h1>
 <ul>
 <li><a class="el" href="dir_a108d9e19c5aa79c49bc6bd27980ebb3.html">GameObjectFactory</a> - analogous builder for GameObjects</li>

@@ -1,6 +1,21 @@
 var concepts =
 [
     [ "helios", "namespacehelios.html", [
+      [ "core", "namespacehelios_1_1core.html", [
+        [ "ecs", "namespacehelios_1_1core_1_1ecs.html", [
+          [ "concepts", "namespacehelios_1_1core_1_1ecs_1_1concepts.html", [
+            [ "IsStrongIdCollisionResolverLike", "concepthelios_1_1core_1_1ecs_1_1concepts_1_1IsStrongIdCollisionResolverLike.html", null ]
+          ] ],
+          [ "traits", "namespacehelios_1_1core_1_1ecs_1_1traits.html", [
+            [ "HasOnRemove", "concepthelios_1_1core_1_1ecs_1_1traits_1_1HasOnRemove.html", null ],
+            [ "HasOnAcquire", "concepthelios_1_1core_1_1ecs_1_1traits_1_1HasOnAcquire.html", null ],
+            [ "HasOnRelease", "concepthelios_1_1core_1_1ecs_1_1traits_1_1HasOnRelease.html", null ],
+            [ "HasToggleable", "concepthelios_1_1core_1_1ecs_1_1traits_1_1HasToggleable.html", null ],
+            [ "HasClone", "concepthelios_1_1core_1_1ecs_1_1traits_1_1HasClone.html", null ],
+            [ "HasActivatable", "concepthelios_1_1core_1_1ecs_1_1traits_1_1HasActivatable.html", null ]
+          ] ]
+        ] ]
+      ] ],
       [ "engine", "namespacehelios_1_1engine.html", [
         [ "common", "namespacehelios_1_1engine_1_1common.html", [
           [ "concepts", "namespacehelios_1_1engine_1_1common_1_1concepts.html", [

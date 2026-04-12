@@ -1,0 +1,184 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="core_2ecs_2ComponentTypeId_8ixx" kind="file" language="C++">
+    <compoundname>core/ecs/ComponentTypeId.ixx</compoundname>
+    <includes local="no">functional</includes>
+    <includes refid="types_8ixx" local="no">helios.core.types</includes>
+    <includes refid="TypeIndexer_8ixx" local="no">helios.core.data.TypeIndexer</includes>
+    <incdepgraph>
+      <node id="6">
+        <label>helios.core.data.TypeIndexer</label>
+        <link refid="TypeIndexer_8ixx"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>ComponentTypeId.ixx</label>
+        <link refid="core_2ecs_2ComponentTypeId_8ixx"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios.core.types</label>
+        <link refid="types_8ixx"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>atomic</label>
+      </node>
+      <node id="4">
+        <label>cstdint</label>
+      </node>
+      <node id="2">
+        <label>functional</label>
+      </node>
+      <node id="5">
+        <label>limits</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classhelios_1_1core_1_1ecs_1_1ComponentTypeId" prot="public">helios::core::ecs::ComponentTypeId</innerclass>
+    <innerclass refid="structstd_1_1hash_3_01helios_1_1core_1_1ecs_1_1ComponentTypeId_3_01THandle_01_4_01_4" prot="public">std::hash&lt; helios::core::ecs::ComponentTypeId&lt; THandle &gt; &gt;</innerclass>
+    <innernamespace refid="namespacehelios">helios</innernamespace>
+    <innernamespace refid="namespacehelios_1_1core">helios::core</innernamespace>
+    <innernamespace refid="namespacehelios_1_1core_1_1ecs">helios::core::ecs</innernamespace>
+    <briefdescription>
+<para>Compile-time type identifier for component types. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Provides a unique, compile-time generated ID for each component type, enabling O(1) direct indexing into the component storage vector within GameObject. </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/**</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>@file<sp/>ComponentTypeId.ixx</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>@brief<sp/>Compile-time<sp/>type<sp/>identifier<sp/>for<sp/>component<sp/>types.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*<sp/>@details<sp/>Provides<sp/>a<sp/>unique,<sp/>compile-time<sp/>generated<sp/>ID<sp/>for<sp/>each<sp/>component<sp/>type,</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>enabling<sp/>O(1)<sp/>direct<sp/>indexing<sp/>into<sp/>the<sp/>component<sp/>storage<sp/>vector<sp/>within<sp/>GameObject.</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">module</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;functional&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8core_8ecs_8ComponentTypeId" kindref="compound">helios.core.ecs.ComponentTypeId</ref>;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8core_8data_8TypeIndexer" kindref="compound">helios.core.data.TypeIndexer</ref>;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8core_8types" kindref="compound">helios.core.types</ref>;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1core_1_1ecs" kindref="compound">helios::core::ecs</ref><sp/>{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Unique<sp/>type<sp/>identifier<sp/>for<sp/>component<sp/>types,<sp/>scoped<sp/>per<sp/>domain.</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>ComponentTypeId<sp/>assigns<sp/>a<sp/>unique,<sp/>monotonically<sp/>increasing<sp/>integer<sp/>ID</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>to<sp/>each<sp/>component<sp/>type<sp/>at<sp/>compile<sp/>time.<sp/>This<sp/>ID<sp/>is<sp/>used<sp/>as<sp/>an<sp/>index<sp/>into<sp/>the</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>component<sp/>storage<sp/>vector<sp/>within<sp/>EntityManager,<sp/>enabling<sp/>O(1)<sp/>access.</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>##<sp/>Domain<sp/>Scoping</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>class<sp/>is<sp/>templated<sp/>on<sp/>`THandle`<sp/>so<sp/>that<sp/>each<sp/>domain<sp/>(identified<sp/>by<sp/>its</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>`EntityHandle&lt;TStrongId&gt;`<sp/>specialisation)<sp/>has<sp/>its<sp/>own<sp/>independent<sp/>type-ID</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>counter<sp/>via<sp/>`TypeIndexer&lt;THandle&gt;`.<sp/>This<sp/>means<sp/>the<sp/>same<sp/>component<sp/>type<sp/>`T`</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>can<sp/>receive<sp/>different<sp/>IDs<sp/>in<sp/>different<sp/>domains.</highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>**Usage:**</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```cpp</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>//<sp/>Get<sp/>the<sp/>ID<sp/>for<sp/>a<sp/>component<sp/>type<sp/>in<sp/>the<sp/>game<sp/>domain</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>auto<sp/>id<sp/>=<sp/>ComponentTypeId&lt;GameHandle&gt;::id&lt;Move2DComponent&gt;();</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>//<sp/>Use<sp/>the<sp/>value<sp/>as<sp/>an<sp/>index</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>components_[id.value()]<sp/>=<sp/>std::move(component);</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```</highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>**Thread<sp/>Safety:**<sp/>The<sp/>static<sp/>ID<sp/>generation<sp/>is<sp/>thread-safe<sp/>due<sp/>to<sp/>C++11<sp/>static</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>initialization<sp/>guarantees.</highlight></codeline>
+<codeline lineno="44"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@tparam<sp/>THandle<sp/>The<sp/>concrete<sp/>`EntityHandle&lt;TStrongId&gt;`<sp/>specialisation</highlight></codeline>
+<codeline lineno="46"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>scoping<sp/>this<sp/>type-ID<sp/>counter.</highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="48"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>TypeIndexer</highlight></codeline>
+<codeline lineno="49"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>EntityManager</highlight></codeline>
+<codeline lineno="50"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>THandle&gt;</highlight></codeline>
+<codeline lineno="52" refid="classhelios_1_1core_1_1ecs_1_1ComponentTypeId" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1core_1_1ecs_1_1ComponentTypeId_1a9722490cc6f05ceb8c0388f75bc4f75b" kindref="member">ComponentTypeId</ref><sp/>{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="54"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="55"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>The<sp/>underlying<sp/>ID<sp/>value.</highlight></codeline>
+<codeline lineno="56"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>id_{0};</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="61"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="62"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Constructs<sp/>a<sp/>ComponentTypeId<sp/>with<sp/>a<sp/>specific<sp/>ID<sp/>value.</highlight></codeline>
+<codeline lineno="63"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="64"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>This<sp/>constructor<sp/>initializes<sp/>a<sp/>ComponentTypeId<sp/>object<sp/>with<sp/>a<sp/>given</highlight></codeline>
+<codeline lineno="65"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>ID,<sp/>representing<sp/>a<sp/>unique<sp/>identifier<sp/>for<sp/>a<sp/>component<sp/>type.<sp/>The<sp/>ID<sp/>is<sp/>used</highlight></codeline>
+<codeline lineno="66"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>internally<sp/>for<sp/>indexing<sp/>and<sp/>retrieving<sp/>components<sp/>from<sp/>the<sp/>storage<sp/>system.</highlight></codeline>
+<codeline lineno="67"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="68"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>id<sp/>The<sp/>unique<sp/>identifier<sp/>assigned<sp/>to<sp/>the<sp/>component<sp/>type.</highlight></codeline>
+<codeline lineno="69"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>ID<sp/>must<sp/>be<sp/>a<sp/>valid<sp/>non-negative<sp/>value.</highlight></codeline>
+<codeline lineno="70"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71" refid="classhelios_1_1core_1_1ecs_1_1ComponentTypeId_1a9722490cc6f05ceb8c0388f75bc4f75b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1core_1_1ecs_1_1ComponentTypeId_1a9722490cc6f05ceb8c0388f75bc4f75b" kindref="member">ComponentTypeId</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>:<sp/>id_(<ref refid="classhelios_1_1core_1_1ecs_1_1ComponentTypeId_1a15e26bc4870ec44a045010857fab0221" kindref="member">id</ref>)<sp/>{}</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="73"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="74"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Constructs<sp/>an<sp/>uninitialized<sp/>ComponentTypeId.</highlight></codeline>
+<codeline lineno="75"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="76"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>no_init_t<sp/>Tag<sp/>to<sp/>indicate<sp/>no<sp/>initialization.</highlight></codeline>
+<codeline lineno="77"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="78" refid="classhelios_1_1core_1_1ecs_1_1ComponentTypeId_1a47933f4bb7e61b6d9ff85247b44936d6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1core_1_1ecs_1_1ComponentTypeId_1a47933f4bb7e61b6d9ff85247b44936d6" kindref="member">ComponentTypeId</ref>(<ref refid="structhelios_1_1core_1_1types_1_1no__init__t" kindref="compound">helios::core::types::no_init_t</ref>)<sp/>{}</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="80"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="81"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Returns<sp/>the<sp/>underlying<sp/>ID<sp/>value.</highlight></codeline>
+<codeline lineno="82"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="83"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>The<sp/>numeric<sp/>type<sp/>ID,<sp/>suitable<sp/>for<sp/>use<sp/>as<sp/>an<sp/>array<sp/>index.</highlight></codeline>
+<codeline lineno="84"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="85" refid="classhelios_1_1core_1_1ecs_1_1ComponentTypeId_1ab3b85da9c2e9c18ea259c72cd6324d46" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1core_1_1ecs_1_1ComponentTypeId_1ab3b85da9c2e9c18ea259c72cd6324d46" kindref="member">value</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>id_;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="89"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="90"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Gets<sp/>the<sp/>ComponentTypeId<sp/>for<sp/>a<sp/>specific<sp/>component<sp/>type.</highlight></codeline>
+<codeline lineno="91"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="92"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>Uses<sp/>TypeIndexer<sp/>to<sp/>generate<sp/>a<sp/>unique,<sp/>monotonically<sp/>increasing<sp/>ID</highlight></codeline>
+<codeline lineno="93"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>for<sp/>each<sp/>component<sp/>type.<sp/>The<sp/>ID<sp/>is<sp/>generated<sp/>once<sp/>per<sp/>type<sp/>and<sp/>cached.</highlight></codeline>
+<codeline lineno="94"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="95"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@tparam<sp/>T<sp/>The<sp/>component<sp/>type.<sp/>Must<sp/>be<sp/>a<sp/>concrete<sp/>type<sp/>(not<sp/>abstract).</highlight></codeline>
+<codeline lineno="96"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="97"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>The<sp/>unique<sp/>ComponentTypeId<sp/>for<sp/>type<sp/>T.</highlight></codeline>
+<codeline lineno="98"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="100" refid="classhelios_1_1core_1_1ecs_1_1ComponentTypeId_1a15e26bc4870ec44a045010857fab0221" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1core_1_1ecs_1_1ComponentTypeId_1a9722490cc6f05ceb8c0388f75bc4f75b" kindref="member">ComponentTypeId&lt;THandle&gt;</ref><sp/><ref refid="classhelios_1_1core_1_1ecs_1_1ComponentTypeId_1a15e26bc4870ec44a045010857fab0221" kindref="member">id</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>tid<sp/>=<sp/><ref refid="classhelios_1_1core_1_1data_1_1TypeIndexer" kindref="compound">helios::core::data::TypeIndexer&lt;THandle&gt;::template</ref><sp/>typeIndex&lt;T&gt;();</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1core_1_1ecs_1_1ComponentTypeId_1a9722490cc6f05ceb8c0388f75bc4f75b" kindref="member">ComponentTypeId</ref>(tid);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105" refid="classhelios_1_1core_1_1ecs_1_1ComponentTypeId_1a0d3961b62506323fd47f26889cb0c206" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1core_1_1ecs_1_1ComponentTypeId_1a0d3961b62506323fd47f26889cb0c206" kindref="member">operator==</ref>(<ref refid="classhelios_1_1core_1_1ecs_1_1ComponentTypeId_1a9722490cc6f05ceb8c0388f75bc4f75b" kindref="member">ComponentTypeId</ref>,<sp/><ref refid="classhelios_1_1core_1_1ecs_1_1ComponentTypeId_1a9722490cc6f05ceb8c0388f75bc4f75b" kindref="member">ComponentTypeId</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="112"><highlight class="comment">/**</highlight></codeline>
+<codeline lineno="113"><highlight class="comment"><sp/>*<sp/>@brief<sp/>std::hash<sp/>specialization<sp/>for<sp/>ComponentTypeId.</highlight></codeline>
+<codeline lineno="114"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="115"><highlight class="comment"><sp/>*<sp/>@details<sp/>Enables<sp/>use<sp/>of<sp/>ComponentTypeId<sp/>as<sp/>a<sp/>key<sp/>in<sp/>unordered<sp/>containers.</highlight></codeline>
+<codeline lineno="116"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>THandle&gt;</highlight></codeline>
+<codeline lineno="118" refid="structstd_1_1hash_3_01helios_1_1core_1_1ecs_1_1ComponentTypeId_3_01THandle_01_4_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">std::hash&lt;<ref refid="namespacehelios" kindref="compound">helios</ref>::core::ecs::ComponentTypeId&lt;THandle&gt;&gt;<sp/>{</highlight></codeline>
+<codeline lineno="119" refid="structstd_1_1hash_3_01helios_1_1core_1_1ecs_1_1ComponentTypeId_3_01THandle_01_4_01_4_1ad81434e7260fea3d85918cb7a0e8e051" refkind="member"><highlight class="normal"><sp/><sp/><sp/>std::size_t<sp/><ref refid="structstd_1_1hash_3_01helios_1_1core_1_1ecs_1_1ComponentTypeId_3_01THandle_01_4_01_4_1ad81434e7260fea3d85918cb7a0e8e051" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1core_1_1ecs_1_1ComponentTypeId" kindref="compound">helios::core::ecs::ComponentTypeId&lt;THandle&gt;</ref>&amp;<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">.value();</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal">};</highlight></codeline>
+    </programlisting>
+    <location file="/tmp/h/include/helios/core/ecs/ComponentTypeId.ixx"/>
+  </compounddef>
+</doxygen>

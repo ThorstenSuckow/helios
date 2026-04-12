@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['value_0',['value',['../structhelios_1_1engine_1_1mechanics_1_1scoring_1_1types_1_1ScoreValueContext.html#a57254abeceea033ccc41a53448c90da2',1,'helios::engine::mechanics::scoring::types::ScoreValueContext']]],
+  ['value_0',['value',['../structHandleToManager_3_01THandle_00_01THead_00_01TTail_8_8_8_01_4.html#a11fcf46fd56de9232ed8f233debdaf84',1,'HandleToManager&lt; THandle, THead, TTail... &gt;::value'],['../structHandleToManager_3_01THandle_00_01THead_01_4.html#a3fd2d33044684afd5211b638ddeb49ed',1,'HandleToManager&lt; THandle, THead &gt;::value'],['../structhelios_1_1engine_1_1mechanics_1_1scoring_1_1types_1_1ScoreValueContext.html#a57254abeceea033ccc41a53448c90da2',1,'helios::engine::mechanics::scoring::types::ScoreValueContext::value']]],
   ['value_5f_1',['value_',['../classhelios_1_1engine_1_1mechanics_1_1scoring_1_1types_1_1Score.html#a237c2d4de96b81224d760c6d28404037',1,'helios::engine::mechanics::scoring::types::Score']]],
   ['vao_5f_2',['vao_',['../classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh.html#a0cb20b32780fecc3812fec350edb0288',1,'helios::ext::opengl::rendering::model::OpenGLMesh']]],
   ['vbo_5f_3',['vbo_',['../classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh.html#ae9ca6c9aabe1e4548b34246b009507bd',1,'helios::ext::opengl::rendering::model::OpenGLMesh']]],
@@ -10,7 +10,7 @@ var searchData=
   ['versionindex_5f_7',['versionIndex_',['../classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#aad4858b225d850bd70aa2a7e9f8d7c09',1,'helios::engine::runtime::pooling::GameObjectPool']]],
   ['vertices_8',['vertices',['../structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape.html#ac8d63a4a5a57fd9cac0d99881dcb29e8',1,'helios::rendering::asset::shape::Shape::vertices'],['../structhelios_1_1rendering_1_1text_1_1TextLayout.html#a101b79f54346541f2717aef3d48305ad',1,'helios::rendering::text::TextLayout::vertices']]],
   ['vertices_5f_9',['vertices_',['../classhelios_1_1rendering_1_1mesh_1_1Mesh.html#a2cce5a0f7de32f749a1b0435e5868eac',1,'helios::rendering::mesh::Mesh']]],
-  ['view_5f_10',['view_',['../structhelios_1_1engine_1_1ecs_1_1View_1_1Iterator.html#ac1643cac751bc977cd12053b76587218',1,'helios::engine::ecs::View::Iterator']]],
+  ['view_5f_10',['view_',['../structhelios_1_1core_1_1ecs_1_1View_1_1Iterator.html#a75199b1b1bf567132e8e5b672c3006c3',1,'helios::core::ecs::View::Iterator::view_'],['../structhelios_1_1engine_1_1ecs_1_1View_1_1Iterator.html#ac1643cac751bc977cd12053b76587218',1,'helios::engine::ecs::View::Iterator::view_']]],
   ['viewmatrix_5f_11',['viewMatrix_',['../classhelios_1_1scene_1_1Camera.html#a5c915d9ba00c11dcef1885f02e32945c',1,'helios::scene::Camera::viewMatrix_'],['../classhelios_1_1scene_1_1Snapshot.html#ac0110b8cf9d487de2dc6c13ba721cb2b',1,'helios::scene::Snapshot::viewMatrix_']]],
   ['viewport_5f_12',['viewport_',['../classhelios_1_1scene_1_1Snapshot.html#a90b2285b3d9028b864bf81952e2a2e75',1,'helios::scene::Snapshot']]],
   ['viewportid_13',['viewportId',['../structhelios_1_1rendering_1_1ViewportSnapshot.html#ad191bcea267fcf31fe5468426deb6b08',1,'helios::rendering::ViewportSnapshot']]],

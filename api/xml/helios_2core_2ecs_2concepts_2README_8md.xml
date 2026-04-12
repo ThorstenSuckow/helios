@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="helios_2core_2ecs_2concepts_2README_8md" kind="file" language="Markdown">
+    <compoundname>helios/core/ecs/concepts/README.md</compoundname>
+    <innernamespace refid="namespacehelios_1_1core_1_1ecs_1_1concepts">helios::core::ecs::concepts</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>helios::core::ecs::concepts</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Compile-time<sp/>constraints<sp/>for<sp/>ECS<sp/>extension<sp/>points.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>submodule<sp/>defines<sp/>concepts<sp/>that<sp/>constrain<sp/>the<sp/>template<sp/>parameters<sp/>used</highlight></codeline>
+<codeline><highlight class="normal">across<sp/>`helios.core.ecs`.<sp/>They<sp/>ensure<sp/>that<sp/>user-provided<sp/>types<sp/>satisfy<sp/>the</highlight></codeline>
+<codeline><highlight class="normal">structural<sp/>requirements<sp/>expected<sp/>by<sp/>the<sp/>generic<sp/>ECS<sp/>infrastructure<sp/>at<sp/>compile</highlight></codeline>
+<codeline><highlight class="normal">time.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Concepts</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Concept<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|---------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`IsStrongIdCollisionResolverLike`<sp/>|<sp/>Constrains<sp/>lookup<sp/>strategies<sp/>used<sp/>by<sp/>`EntityRegistry`<sp/>for<sp/>strong<sp/>ID<sp/>collision<sp/>detection<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>IsStrongIdCollisionResolverLike</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Requires<sp/>a<sp/>type<sp/>to<sp/>provide<sp/>`add`,<sp/>`remove`,<sp/>and<sp/>`has`<sp/>operations<sp/>on<sp/>`StrongId_t`</highlight></codeline>
+<codeline><highlight class="normal">values,<sp/>each<sp/>returning<sp/>`bool`.<sp/>Any<sp/>type<sp/>satisfying<sp/>this<sp/>concept<sp/>can<sp/>be<sp/>used<sp/>as<sp/>the</highlight></codeline>
+<codeline><highlight class="normal">`TLookupStrategy`<sp/>parameter<sp/>of<sp/>`EntityRegistry`.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Satisfied<sp/>by:**</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`HashedLookupStrategy`<sp/>—<sp/>O(1)<sp/>amortised,<sp/>default<sp/>strategy</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`LinearLookupStrategy`<sp/>—<sp/>O(n)<sp/>scan,<sp/>suitable<sp/>for<sp/>small<sp/>registries</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Related<sp/>Modules</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Module<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|--------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`helios.core.ecs.EntityRegistry`<sp/>|<sp/>Primary<sp/>consumer<sp/>of<sp/>the<sp/>lookup<sp/>strategy<sp/>concept<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`helios.core.ecs.HashedLookupStrategy`<sp/>|<sp/>Hash-based<sp/>strategy<sp/>implementation<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`helios.core.ecs.LinearLookupStrategy`<sp/>|<sp/>Linear-scan<sp/>strategy<sp/>implementation<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+<codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::core::ecs::concepts</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Compile-time<sp/>constraints<sp/>for<sp/>ECS<sp/>extension<sp/>points.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Defines<sp/>concepts<sp/>that<sp/>constrain<sp/>template<sp/>parameters<sp/>used<sp/>by<sp/>the<sp/>generic<sp/>ECS<sp/>infrastructure,<sp/>such<sp/>as<sp/>lookup<sp/>strategies<sp/>for<sp/>EntityRegistry.</highlight></codeline>
+<codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
+<codeline></codeline>
+    </programlisting>
+    <location file="/tmp/h/include/helios/core/ecs/concepts/README.md"/>
+  </compounddef>
+</doxygen>

@@ -2,10 +2,17 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy" kind="class" language="C++" prot="public">
     <compoundname>helios::core::ecs::LinearLookupStrategy</compoundname>
+    <templateparamlist>
+      <param>
+        <type>size_t</type>
+        <declname>TCapacity</declname>
+        <defname>TCapacity</defname>
+      </param>
+    </templateparamlist>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1ac1351fe907eca614927a61300c89506c" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1a1b4785a221f2e041e264bc83bde7dd75" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="namespacehelios_1_1core_1_1types_1aa1d7e3f2fb347012cb83fb46472b57aa" kindref="member">StrongId_t</ref> &gt;</type>
-        <definition>std::vector&lt;StrongId_t&gt; helios::core::ecs::LinearLookupStrategy::strongIds_</definition>
+        <definition>std::vector&lt;StrongId_t&gt; helios::core::ecs::LinearLookupStrategy&lt; TCapacity &gt;::strongIds_</definition>
         <argsstring></argsstring>
         <name>strongIds_</name>
         <qualifiedname>helios::core::ecs::LinearLookupStrategy::strongIds_</qualifiedname>
@@ -16,19 +23,20 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/core/ecs/LinearLookupStrategy.ixx" line="34" column="21" bodyfile="/tmp/h/include/helios/core/ecs/LinearLookupStrategy.ixx" bodystart="34" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/core/ecs/LinearLookupStrategy.ixx" line="37" column="21" bodyfile="/tmp/h/include/helios/core/ecs/LinearLookupStrategy.ixx" bodystart="37" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1aab15ecdd833c8bb0d57460b62672d3ae" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1af08f6e4ed6641a8f96622ecf96f14127" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
-        <definition>helios::core::ecs::LinearLookupStrategy::LinearLookupStrategy</definition>
-        <argsstring>(const size_t capacity)</argsstring>
+        <definition>helios::core::ecs::LinearLookupStrategy&lt; TCapacity &gt;::LinearLookupStrategy</definition>
+        <argsstring>(const size_t capacity=TCapacity)</argsstring>
         <name>LinearLookupStrategy</name>
         <qualifiedname>helios::core::ecs::LinearLookupStrategy::LinearLookupStrategy</qualifiedname>
         <param>
           <type>const size_t</type>
           <declname>capacity</declname>
+          <defval>TCapacity</defval>
         </param>
         <briefdescription>
 <para>Constructs a strategy with pre-allocated capacity. </para>
@@ -47,11 +55,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/core/ecs/LinearLookupStrategy.ixx" line="43" column="18" bodyfile="/tmp/h/include/helios/core/ecs/LinearLookupStrategy.ixx" bodystart="43" bodyend="45"/>
+        <location file="/tmp/h/include/helios/core/ecs/LinearLookupStrategy.ixx" line="46" column="18" bodyfile="/tmp/h/include/helios/core/ecs/LinearLookupStrategy.ixx" bodystart="46" bodyend="48"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1a98d353764c3de0a921ad116b7e1e0933" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1a31ad49f535a654df1599d4615dc0be83" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
-        <definition>bool helios::core::ecs::LinearLookupStrategy::remove</definition>
+        <definition>bool helios::core::ecs::LinearLookupStrategy&lt; TCapacity &gt;::remove</definition>
         <argsstring>(const StrongId_t id)</argsstring>
         <name>remove</name>
         <qualifiedname>helios::core::ecs::LinearLookupStrategy::remove</qualifiedname>
@@ -78,11 +86,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/core/ecs/LinearLookupStrategy.ixx" line="54" column="15" bodyfile="/tmp/h/include/helios/core/ecs/LinearLookupStrategy.ixx" bodystart="54" bodyend="73"/>
+        <location file="/tmp/h/include/helios/core/ecs/LinearLookupStrategy.ixx" line="57" column="15" bodyfile="/tmp/h/include/helios/core/ecs/LinearLookupStrategy.ixx" bodystart="57" bodyend="76"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1adba30bb9ce212b9b729a50aefebaf4fc" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1af5b3ee5bea63d62b4dddb4e197ceb9a5" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
-        <definition>bool helios::core::ecs::LinearLookupStrategy::add</definition>
+        <definition>bool helios::core::ecs::LinearLookupStrategy&lt; TCapacity &gt;::add</definition>
         <argsstring>(const StrongId_t id)</argsstring>
         <name>add</name>
         <qualifiedname>helios::core::ecs::LinearLookupStrategy::add</qualifiedname>
@@ -109,12 +117,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/core/ecs/LinearLookupStrategy.ixx" line="82" column="15" bodyfile="/tmp/h/include/helios/core/ecs/LinearLookupStrategy.ixx" bodystart="82" bodyend="88"/>
-        <references refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1ad4583b14f0bd1ed65cf69df66d0b04d9" compoundref="LinearLookupStrategy_8ixx" startline="97" endline="99">has</references>
+        <location file="/tmp/h/include/helios/core/ecs/LinearLookupStrategy.ixx" line="85" column="15" bodyfile="/tmp/h/include/helios/core/ecs/LinearLookupStrategy.ixx" bodystart="85" bodyend="91"/>
+        <references refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1a94d2248b61f690a35983f6d37260e332" compoundref="LinearLookupStrategy_8ixx" startline="100" endline="102">helios::core::ecs::LinearLookupStrategy&lt; TCapacity &gt;::has</references>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1ad4583b14f0bd1ed65cf69df66d0b04d9" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1a94d2248b61f690a35983f6d37260e332" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
-        <definition>bool helios::core::ecs::LinearLookupStrategy::has</definition>
+        <definition>bool helios::core::ecs::LinearLookupStrategy&lt; TCapacity &gt;::has</definition>
         <argsstring>(const StrongId_t id) const</argsstring>
         <name>has</name>
         <qualifiedname>helios::core::ecs::LinearLookupStrategy::has</qualifiedname>
@@ -141,8 +149,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/core/ecs/LinearLookupStrategy.ixx" line="97" column="15" bodyfile="/tmp/h/include/helios/core/ecs/LinearLookupStrategy.ixx" bodystart="97" bodyend="99"/>
-        <referencedby refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1adba30bb9ce212b9b729a50aefebaf4fc" compoundref="LinearLookupStrategy_8ixx" startline="82" endline="88">add</referencedby>
+        <location file="/tmp/h/include/helios/core/ecs/LinearLookupStrategy.ixx" line="100" column="15" bodyfile="/tmp/h/include/helios/core/ecs/LinearLookupStrategy.ixx" bodystart="100" bodyend="102"/>
+        <referencedby refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1af5b3ee5bea63d62b4dddb4e197ceb9a5" compoundref="LinearLookupStrategy_8ixx" startline="85" endline="91">helios::core::ecs::LinearLookupStrategy&lt; TCapacity &gt;::add</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -150,19 +158,28 @@
     </briefdescription>
     <detaileddescription>
 <para>`LinearLookupStrategy` stores strong IDs in a contiguous vector and performs linear scans for membership tests. Swap-and-pop is used for O(1) removal. Suitable for small registries where hash overhead is undesirable.</para>
-<para><simplesect kind="see"><para><ref refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry" kindref="compound">EntityRegistry</ref> </para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>TCapacity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Default initial capacity for pre-allocation.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry" kindref="compound">EntityRegistry</ref> </para>
 </simplesect>
 <simplesect kind="see"><para><ref refid="classhelios_1_1core_1_1ecs_1_1HashedLookupStrategy" kindref="compound">HashedLookupStrategy</ref> </para>
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="/tmp/h/include/helios/core/ecs/LinearLookupStrategy.ixx" line="29" column="5" bodyfile="/tmp/h/include/helios/core/ecs/LinearLookupStrategy.ixx" bodystart="29" bodyend="102"/>
+    <location file="/tmp/h/include/helios/core/ecs/LinearLookupStrategy.ixx" line="32" column="5" bodyfile="/tmp/h/include/helios/core/ecs/LinearLookupStrategy.ixx" bodystart="32" bodyend="105"/>
     <listofallmembers>
-      <member refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1adba30bb9ce212b9b729a50aefebaf4fc" prot="public" virt="non-virtual"><scope>helios::core::ecs::LinearLookupStrategy</scope><name>add</name></member>
-      <member refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1ad4583b14f0bd1ed65cf69df66d0b04d9" prot="public" virt="non-virtual"><scope>helios::core::ecs::LinearLookupStrategy</scope><name>has</name></member>
-      <member refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1aab15ecdd833c8bb0d57460b62672d3ae" prot="public" virt="non-virtual"><scope>helios::core::ecs::LinearLookupStrategy</scope><name>LinearLookupStrategy</name></member>
-      <member refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1a98d353764c3de0a921ad116b7e1e0933" prot="public" virt="non-virtual"><scope>helios::core::ecs::LinearLookupStrategy</scope><name>remove</name></member>
-      <member refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1ac1351fe907eca614927a61300c89506c" prot="private" virt="non-virtual"><scope>helios::core::ecs::LinearLookupStrategy</scope><name>strongIds_</name></member>
+      <member refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1af5b3ee5bea63d62b4dddb4e197ceb9a5" prot="public" virt="non-virtual"><scope>helios::core::ecs::LinearLookupStrategy</scope><name>add</name></member>
+      <member refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1a94d2248b61f690a35983f6d37260e332" prot="public" virt="non-virtual"><scope>helios::core::ecs::LinearLookupStrategy</scope><name>has</name></member>
+      <member refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1af08f6e4ed6641a8f96622ecf96f14127" prot="public" virt="non-virtual"><scope>helios::core::ecs::LinearLookupStrategy</scope><name>LinearLookupStrategy</name></member>
+      <member refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1a31ad49f535a654df1599d4615dc0be83" prot="public" virt="non-virtual"><scope>helios::core::ecs::LinearLookupStrategy</scope><name>remove</name></member>
+      <member refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1a1b4785a221f2e041e264bc83bde7dd75" prot="private" virt="non-virtual"><scope>helios::core::ecs::LinearLookupStrategy</scope><name>strongIds_</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

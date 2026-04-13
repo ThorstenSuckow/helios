@@ -10,7 +10,6 @@ export import helios.ecs.concepts;
 export import helios.ecs.types;
 export import helios.ecs.strategies;
 export import helios.ecs.components;
-export import helios.ecs.tags;
 
 export import helios.ecs.ComponentOpsRegistry;
 export import helios.ecs.ComponentReflector;

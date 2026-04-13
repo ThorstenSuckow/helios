@@ -1,4 +1,4 @@
-# helios::core::ecs::components
+# helios::ecs::components
 
 ECS core components for entity lifecycle and relationships.
 
@@ -53,13 +53,13 @@ hc->markDirty();  // Triggers propagation next frame
 
 | Module | Purpose |
 |--------|---------|
-| `helios.core.ecs.Entity` | Manages `Active`/`Inactive` tags via `setActive()` |
-| `helios.engine.ecs.systems` | Systems that process ECS components |
+| `helios.ecs.Entity` | Manages `Active`/`Inactive` tags via `setActive()` |
+| `helios.ecs.systems` | Systems that process ECS components |
 
 ---
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::core::ecs::components
+@namespace helios::ecs::components
 @brief ECS core components for entity lifecycle and relationships.
 @details Provides tag components for entity activation state (Active, Inactive) and hierarchy management for parent-child entity relationships.
 </p></details>

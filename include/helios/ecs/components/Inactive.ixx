@@ -4,9 +4,9 @@
  */
 module;
 
-export module helios.core.ecs.components.Inactive;
+export module helios.ecs.components.Inactive;
 
-export namespace helios::core::ecs::components {
+export namespace helios::ecs::components {
 
     /**
      * @brief Tag component indicating that an entity is inactive.

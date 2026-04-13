@@ -8,11 +8,11 @@ module;
 #include <span>
 #include <vector>
 
-export module helios.core.ecs.components.HierarchyComponent;
+export module helios.ecs.components.HierarchyComponent;
 
-import helios.core.ecs.EntityHandle;
+import helios.ecs.types.EntityHandle;
 
-export namespace helios::core::ecs::components {
+export namespace helios::ecs::components {
 
     /**
      * @brief Stores parent-child relationships for hierarchical entity graphs.

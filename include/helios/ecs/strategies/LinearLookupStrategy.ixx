@@ -8,12 +8,12 @@ module;
 #include <algorithm>
 #include <ranges>
 
-export module helios.core.ecs.LinearLookupStrategy;
+export module helios.ecs.strategies.LinearLookupStrategy;
 
-import helios.core.types;
+import helios.core.types.TypeDefs;
 
 using namespace helios::core::types;
-export namespace helios::core::ecs {
+export namespace helios::ecs::strategies {
 
     /**
      * @brief Lookup strategy using a flat vector with linear scan.

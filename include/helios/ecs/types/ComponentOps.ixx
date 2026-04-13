@@ -4,11 +4,11 @@
  */
 module;
 
-export module helios.core.ecs.ComponentOps;
+export module helios.ecs.types.ComponentOps;
 
-import helios.core.ecs.EntityHandle;
+import helios.ecs.types.EntityHandle;
 
-export namespace helios::core::ecs {
+export namespace helios::ecs::types {
 
     /**
      * @brief Container for type-erased component lifecycle function pointers.

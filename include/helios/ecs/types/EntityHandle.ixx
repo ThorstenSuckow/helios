@@ -8,13 +8,13 @@ module;
 #include <functional>
 #include <cstdint>
 
-export module helios.core.ecs.EntityHandle;
+export module helios.ecs.types.EntityHandle;
 
-import helios.core.types;
-import helios.core.data.concepts;
+import helios.ecs.types.TypeDefs;
+import helios.ecs.concepts.IsStrongIdLike;
 
-using namespace helios::core::types;
-export namespace helios::core::ecs {
+using namespace helios::ecs::concepts;
+export namespace helios::ecs::types {
 
     /**
      * @brief Sentinel version indicating an invalid or uninitialized handle.
@@ -43,7 +43,7 @@ export namespace helios::core::ecs {
      * @see EntityRegistry
      */
     template<typename TStrongId>
-    requires helios::core::data::concepts::IsStrongIdLike<TStrongId>
+    requires IsStrongIdLike<TStrongId>
     struct EntityHandle {
 
         /**
@@ -56,7 +56,7 @@ export namespace helios::core::ecs {
          *
          * Incremented when an entity is removed from the registry.
          */
-        VersionId versionId = helios::core::ecs::InvalidVersion;
+        VersionId versionId = InvalidVersion;
 
         /**
          * @brief The domain-specific strong ID associated with this handle.
@@ -111,8 +111,8 @@ export namespace helios::core::ecs {
  * Packs entityId and versionId into a 64-bit value for hashing.
  */
 template<typename TStrongId>
-struct std::hash<helios::core::ecs::EntityHandle<TStrongId>> {
-    std::size_t operator()(const helios::core::ecs::EntityHandle<TStrongId>& handle) const noexcept {
+struct std::hash<helios::ecs::types::EntityHandle<TStrongId>> {
+    std::size_t operator()(const helios::ecs::types::EntityHandle<TStrongId>& handle) const noexcept {
 
         const uint64_t packed = (static_cast<uint64_t>(handle.entityId) << 32) |
                                 static_cast<uint64_t>(handle.versionId);

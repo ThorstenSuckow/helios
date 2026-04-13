@@ -4,14 +4,13 @@
  */
 module;
 
-#include <cstdint>
 #include <string>
 
-export module helios.core.algorithms;
+export module helios.core.types.FuncDefs;
 
 
 
-export namespace helios::core::algorithms {
+export namespace helios::core::types {
 
     /**
      * @brief Computes a 32-bit FNV-1a hash from a string.

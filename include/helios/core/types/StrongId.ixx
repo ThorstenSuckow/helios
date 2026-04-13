@@ -7,12 +7,12 @@ module;
 #include <cstdint>
 #include <string_view>
 
-export module helios.core.data.StrongId;
+export module helios.core.types.StrongId;
 
-import helios.core.algorithms;
-import helios.core.types;
+import helios.core.types.FuncDefs;
+import helios.core.types.TypeDefs;
 
-export namespace helios::core::data {
+export namespace helios::core::types {
 
     /**
      * @brief A strongly-typed identifier using tag-based type safety.
@@ -22,27 +22,16 @@ export namespace helios::core::data {
      * compile-time string hashing via FNV-1a algorithm.
      *
      * @tparam Tag Empty struct used to distinguish different ID types.
-     * @tparam Underlying The underlying integral type (default: uint32_t).
      */
-    template<typename Tag, typename Underlying = uint32_t>
+    template<typename Tag>
     struct StrongId {
-        static_assert(std::is_integral_v<Underlying>);
 
     private:
 
         /**
          * @brief The underlying ID value.
          */
-        Underlying id_{};
-
-        /**
-         * @brief Constructs from a raw underlying value.
-         *
-         * @param id The raw ID value.
-         */
-        explicit constexpr StrongId(const Underlying id) noexcept
-            : id_(id) {
-        }
+        StrongId_t id_{};
 
     public:
 
@@ -54,26 +43,45 @@ export namespace helios::core::data {
          * @param str The string to hash.
          */
         explicit constexpr StrongId(const std::string_view str) noexcept
-            : StrongId(helios::core::algorithms::fnv1a_hash(str)) {}
+            : StrongId(fnv1a_hash(str)) {}
+
+
+        /**
+         * @brief Constructs from a raw underlying value.
+         *
+         * @param id The raw ID value.
+         */
+        explicit constexpr StrongId(const StrongId_t id) noexcept
+            : id_(id) {
+        }
 
         /**
          * @brief Constructs an uninitialized ID.
          *
          * @param no_init_t Tag type indicating no initialization.
          */
-        explicit constexpr StrongId(helios::core::types::no_init_t) {};
+         explicit constexpr StrongId(no_init_t) {};
 
         /**
          * @brief Default constructor creating an uninitialized ID.
          */
-        explicit constexpr StrongId() : StrongId(helios::core::types::no_init){};
+        explicit constexpr StrongId() : StrongId(no_init){};
+
+        /**
+         * @brief Returns true if the strong id is considered valid.
+         *
+         * @return True if the StrongId is considered valid, else false.
+         */
+        [[nodiscard]] bool isValid() const noexcept {;
+            return id_ != 0;
+        }
 
         /**
          * @brief Returns the underlying ID value.
          *
          * @return The raw underlying value.
          */
-        [[nodiscard]] Underlying value() const noexcept {
+        [[nodiscard]] StrongId_t value() const noexcept {
             return id_;
         }
 
@@ -118,9 +126,9 @@ export namespace helios::core::data {
 }
 
 
-template<typename Tag, typename Underlying>
-struct std::hash<helios::core::data::StrongId<Tag, Underlying>> {
-    std::size_t operator()(const helios::core::data::StrongId<Tag, Underlying>& id) const noexcept {
+template<typename Tag>
+struct std::hash<helios::core::types::StrongId<Tag>> {
+    helios::core::types::StrongId_t operator()(const helios::core::types::StrongId<Tag>& id) const noexcept {
         return id.value();
     }
 

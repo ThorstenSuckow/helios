@@ -8,17 +8,16 @@ module;
 #include <vector>
 #include <functional>
 
-export module helios.core.ecs.View;
+export module helios.ecs.View;
 
-import helios.core.ecs.SparseSet;
+import helios.ecs.SparseSet;
+import helios.ecs.types.TypeDefs;
+import helios.ecs.EntityManager;
+import helios.ecs.Entity;
+import helios.ecs.types.EntityHandle;
 
-import helios.core.ecs.EntityManager;
-import helios.core.ecs.Entity;
-import helios.core.ecs.EntityHandle;
-import helios.core.types;
-
-using namespace helios::core::types;
-export namespace helios::core::ecs {
+using namespace helios::ecs::types;
+export namespace helios::ecs {
 
     /**
      * @brief A view class to iterate over entities having specific components.

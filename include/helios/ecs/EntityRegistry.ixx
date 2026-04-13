@@ -8,20 +8,20 @@ module;
 #include <vector>
 #include <cassert>
 
-export module helios.core.ecs.EntityRegistry;
+export module helios.ecs.EntityRegistry;
 
-import helios.core.ecs.EntityHandle;
-import helios.core.ecs.LinearLookupStrategy;
-import helios.core.ecs.HashedLookupStrategy;
-import helios.core.types;
+import helios.core.types.TypeDefs;
+import helios.ecs.types.TypeDefs;
+import helios.ecs.types.EntityHandle;
+import helios.ecs.strategies.LinearLookupStrategy;
+import helios.ecs.strategies.HashedLookupStrategy;
 
-import helios.core.data.concepts;
-import helios.core.ecs.concepts;
+import helios.ecs.concepts;
 
-using namespace helios::core::ecs;
+using namespace helios::ecs::types;
 using namespace helios::core::types;
-
-export namespace helios::core::ecs {
+using namespace helios::ecs::strategies;
+export namespace helios::ecs {
 
 
     /**
@@ -69,8 +69,8 @@ export namespace helios::core::ecs {
         bool TAllowRemoval = true,
         size_t TCapacity = DEFAULT_ENTITY_MANAGER_CAPACITY
     >
-    requires helios::core::data::concepts::IsStrongIdLike<TStrongId> &&
-    helios::core::ecs::concepts::IsStrongIdCollisionResolverLike<TLookupStrategy>
+    requires helios::ecs::concepts::IsStrongIdLike<TStrongId> &&
+    helios::ecs::concepts::IsStrongIdCollisionResolverLike<TLookupStrategy>
     class EntityRegistry {
 
 

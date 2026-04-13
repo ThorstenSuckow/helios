@@ -6,15 +6,14 @@ module;
 
 #include <vector>
 
-export module helios.core.ecs.ComponentOpsRegistry;
+export module helios.ecs.ComponentOpsRegistry;
 
-import helios.core.ecs.EntityHandle;
-import helios.core.ecs.ComponentOps;
-import helios.core.ecs.Traits;
-import helios.core.ecs.ComponentTypeId;
+import helios.ecs.types.EntityHandle;
+import helios.ecs.types.ComponentOps;
+import helios.ecs.types.ComponentTypeId;
 
-
-export namespace helios::core::ecs {
+using namespace helios::ecs::types;
+export namespace helios::ecs {
 
     /**
      * @brief Global registry for component lifecycle function pointers.

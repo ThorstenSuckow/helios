@@ -11,11 +11,11 @@ module;
 #include <type_traits>
 #include <optional>
 
-export module helios.core.ecs.TypedHandleWorld;
+export module helios.ecs.TypedHandleWorld;
 
-import helios.core.ecs.View;
-import helios.core.ecs.EntityResolver;
-import helios.core.ecs.Entity;
+import helios.ecs.View;
+import helios.ecs.EntityResolver;
+import helios.ecs.Entity;
 
 
 /**
@@ -57,7 +57,7 @@ struct HandleToManager<THandle> {
     static_assert(sizeof(THandle) == 0, "No EntityManager found for the given handle type.");
 };
 
-export namespace helios::core::ecs {
+export namespace helios::ecs {
 
 
     /**

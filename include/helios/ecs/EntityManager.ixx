@@ -9,19 +9,20 @@ module;
 #include <memory>
 #include <vector>
 
-export module helios.core.ecs.EntityManager;
+export module helios.ecs.EntityManager;
 
-import helios.core.types;
-import helios.core.ecs.ComponentTypeId;
-import helios.core.ecs.SparseSet;
-import helios.core.ecs.Traits;
-import helios.core.ecs.EntityRegistry;
-import helios.core.ecs.EntityHandle;
-import helios.core.ecs.ComponentOps;
-import helios.core.ecs.ComponentOpsRegistry;
+import helios.ecs.SparseSet;
+import helios.ecs.EntityRegistry;
+import helios.ecs.ComponentOpsRegistry;
 
-using namespace helios::core::types;
-export namespace helios::core::ecs {
+import helios.ecs.types;
+
+import helios.ecs.concepts.Traits;
+
+
+using namespace helios::ecs::types;
+using namespace helios::ecs::concepts;
+export namespace helios::ecs {
     
     /**
      * @brief Manages entities and their associated components.

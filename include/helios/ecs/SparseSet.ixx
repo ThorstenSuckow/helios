@@ -8,14 +8,14 @@ module;
 #include <functional>
 #include <vector>
 
-export module helios.core.ecs.SparseSet;
+export module helios.ecs.SparseSet;
 
-import helios.core.ecs.EntityHandle;
-import helios.core.types;
+import helios.ecs.types.EntityHandle;
+import helios.ecs.types.TypeDefs;
 
-using namespace helios::core::ecs;
-using namespace helios::core::types;
-export namespace helios::core::ecs {
+
+using namespace helios::ecs::types;
+export namespace helios::ecs {
 
     /**
      * @brief Abstract base class for type-erased sparse set access.

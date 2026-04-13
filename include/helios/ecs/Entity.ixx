@@ -10,23 +10,20 @@ module;
 #include <generator>
 
 
-export module helios.core.ecs.Entity;
+export module helios.ecs.Entity;
 
 
-import helios.core.ecs.EntityHandle;
+import helios.ecs.types.EntityHandle;
 
-import helios.util.Guid;
+import helios.ecs.EntityManager;
+import helios.ecs.components;
 
-import helios.core.ecs.EntityManager;
-import helios.core.ecs.components;
+import helios.ecs.ComponentOpsRegistry;
 
-import helios.core.ecs.ComponentOpsRegistry;
+import helios.ecs.types.ComponentTypeId;
 
-import helios.core.ecs.ComponentTypeId;
-import helios.core.data;
-
-
-export namespace helios::core::ecs {
+using namespace helios::ecs::types;
+export namespace helios::ecs {
 
     /**
      * @brief Lightweight facade for entity component manipulation.
@@ -159,13 +156,13 @@ export namespace helios::core::ecs {
 
             bool active = true;
 
-            if (entityManager_->has<components::Active>(entityHandle_)) {
+            if (entityManager_->template  has<components::Active>(entityHandle_)) {
                 active = true;
             } else {
                 active = false;
             }
 
-            auto* cmp = entityManager_->emplace<T>(entityHandle_, std::forward<Args>(args)...);
+            auto* cmp = entityManager_->template  emplace<T>(entityHandle_, std::forward<Args>(args)...);
 
             auto typeId = ComponentTypeId_type::template id<T>();
             const auto ops = ComponentOpsRegistry_type::ops(typeId);
@@ -192,8 +189,8 @@ export namespace helios::core::ecs {
          */
         template<typename T, typename ...Args>
         T& getOrAdd(Args&& ...args) {
-            if (entityManager_->has<T>(entityHandle_)) {
-                return *entityManager_->get<T>(entityHandle_);
+            if (entityManager_->template  has<T>(entityHandle_)) {
+                return *entityManager_->template  get<T>(entityHandle_);
             }
             return add<T>(std::forward<Args>(args)...);
         }
@@ -207,7 +204,7 @@ export namespace helios::core::ecs {
          */
         template<typename T>
         bool remove() {
-            return entityManager_->remove<T>(entityHandle_);
+            return entityManager_->template  remove<T>(entityHandle_);
         }
 
         /**
@@ -218,7 +215,7 @@ export namespace helios::core::ecs {
          * @return Raw void pointer to the component, or nullptr if not found.
          */
         void* raw(const ComponentTypeId_type typeId) {
-            return entityManager_->raw(entityHandle_, typeId);
+            return entityManager_->template  raw(entityHandle_, typeId);
         }
 
         /**
@@ -230,7 +227,7 @@ export namespace helios::core::ecs {
          */
         template<typename T>
         T* get() {
-            return entityManager_->get<T>(entityHandle_);
+            return entityManager_->template  get<T>(entityHandle_);
         }
 
         /**
@@ -242,7 +239,7 @@ export namespace helios::core::ecs {
          */
         template<typename T>
         const T* get() const {
-            return entityManager_->get<T>(entityHandle_);
+            return entityManager_->template  get<T>(entityHandle_);
         }
 
         /**
@@ -254,7 +251,7 @@ export namespace helios::core::ecs {
          */
         template<typename T>
         bool has() const noexcept{
-            return entityManager_->has<T>(entityHandle_);
+            return entityManager_->template  has<T>(entityHandle_);
         }
 
         /**
@@ -265,7 +262,7 @@ export namespace helios::core::ecs {
          * @return True if the component is attached, false otherwise.
          */
         bool has(ComponentTypeId_type typeId) const noexcept {
-            return entityManager_->has(entityHandle_, typeId);
+            return entityManager_->template  has(entityHandle_, typeId);
         }
 
         /**
@@ -274,7 +271,7 @@ export namespace helios::core::ecs {
          * @param typeId The component type identifier.
          */
         void enableComponent(const ComponentTypeId_type typeId) {
-            entityManager_->enable(entityHandle_, typeId);
+            entityManager_->template  enable(entityHandle_, typeId);
         }
 
         /**
@@ -283,7 +280,7 @@ export namespace helios::core::ecs {
          * @param typeId The component type identifier.
          */
         void disableComponent(const ComponentTypeId_type typeId) {
-            entityManager_->disable(entityHandle_, typeId);
+            entityManager_->template  disable(entityHandle_, typeId);
         }
 
         /**
@@ -310,27 +307,27 @@ export namespace helios::core::ecs {
          */
         void setActive(const bool active) {
 
-            bool isActive = entityManager_->has<components::Active>(entityHandle_);
-            bool isInActive = entityManager_->has<components::Inactive>(entityHandle_);
+            bool isActive = entityManager_->template  has<components::Active>(entityHandle_);
+            bool isInActive = entityManager_->template  has<components::Inactive>(entityHandle_);
 
             if (!isActive && active) {
-                auto* hc =  entityManager_->get<HierarchyComponent_type>(entityHandle_);
+                auto* hc =  entityManager_->template  get<HierarchyComponent_type>(entityHandle_);
                 if (hc) {
                     hc->markDirty();
                 }
 
-                entityManager_->remove<components::Inactive>(entityHandle_);
-                entityManager_->emplaceOrGet<components::Active>(entityHandle_);
+                entityManager_->template  remove<components::Inactive>(entityHandle_);
+                entityManager_->template  emplaceOrGet<components::Active>(entityHandle_);
             }
 
             if (!isInActive && !active) {
-                auto* hc =  entityManager_->get<HierarchyComponent_type>(entityHandle_);
+                auto* hc =  entityManager_->template  get<HierarchyComponent_type>(entityHandle_);
                 if (hc) {
                     hc->markDirty();
                 }
 
-                entityManager_->emplaceOrGet<components::Inactive>(entityHandle_);
-                entityManager_->remove<components::Active>(entityHandle_);
+                entityManager_->template  emplaceOrGet<components::Inactive>(entityHandle_);
+                entityManager_->template  remove<components::Active>(entityHandle_);
             }
 
             for (auto typeId : componentTypeIds()) {
@@ -351,7 +348,7 @@ export namespace helios::core::ecs {
          * @return True if the entity has the Active tag component.
          */
         [[nodiscard]] bool isActive() const {
-            return entityManager_->has<components::Active>(entityHandle_);
+            return entityManager_->template  has<components::Active>(entityHandle_);
         }
 
         /**
@@ -363,7 +360,7 @@ export namespace helios::core::ecs {
         void onRelease() {
             for (auto typeId : componentTypeIds()) {
                 const auto ops = ComponentOpsRegistry_type::ops(typeId);
-                void* raw = entityManager_->raw(entityHandle_, typeId);
+                void* raw = entityManager_->template  raw(entityHandle_, typeId);
 
                 if (ops.onRelease) {
                     ops.onRelease(raw);
@@ -380,7 +377,7 @@ export namespace helios::core::ecs {
         void onAcquire() {
             for (auto typeId : componentTypeIds()) {
                 const auto ops = ComponentOpsRegistry_type::ops(typeId);
-                void* raw = entityManager_->raw(entityHandle_, typeId);
+                void* raw = entityManager_->template  raw(entityHandle_, typeId);
 
                 if (ops.onAcquire) {
                     ops.onAcquire(raw);

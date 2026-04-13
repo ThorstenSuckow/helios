@@ -6,13 +6,15 @@ module;
 
 #include <optional>
 
-export module helios.core.ecs.EntityResolver;
+export module helios.ecs.EntityResolver;
 
-import helios.core.ecs.EntityHandle;
-import helios.core.ecs.EntityManager;
-import helios.core.ecs.Entity;
+import helios.ecs.EntityManager;
+import helios.ecs.Entity;
 
-export namespace helios::core::ecs {
+import helios.ecs.types.EntityHandle;
+
+using namespace helios::ecs::types;
+export namespace helios::ecs {
 
     /**
      * @brief Callable that resolves an EntityHandle to an Entity facade.

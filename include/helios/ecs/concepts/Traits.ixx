@@ -6,10 +6,10 @@ module;
 
 #include <concepts>
 
-export module helios.core.ecs.Traits;
+export module helios.ecs.concepts.Traits;
 
 
-export namespace helios::core::ecs::traits {
+export namespace helios::ecs::concepts::traits {
 
     /**
      * @brief Trait for components that support removal interception.

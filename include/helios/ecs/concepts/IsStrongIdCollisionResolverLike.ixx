@@ -6,12 +6,12 @@ module;
 
 #include <concepts>
 
-export module helios.core.ecs.concepts.IsStrongIdCollisionResolverLike;
+export module helios.ecs.concepts.IsStrongIdCollisionResolverLike;
 
 import helios.core.types;
 
 using namespace helios::core::types;
-export namespace helios::core::ecs::concepts {
+export namespace helios::ecs::concepts {
 
     /**
      * @brief Constraint for types that can track strong ID uniqueness.

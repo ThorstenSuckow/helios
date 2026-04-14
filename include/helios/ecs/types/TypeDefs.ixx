@@ -1,5 +1,5 @@
 /**
- * @file types.ixx
+ * @file TypeDefs.ixx
  * @brief Core type definitions and tag types for the helios engine.
  */
 module;

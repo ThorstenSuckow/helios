@@ -145,7 +145,7 @@ export namespace helios::ecs {
          */
         struct Iterator {
 
-            using Entity_type = Entity<typename TEntityManager::Handle_type, TEntityManager>;
+            using Entity_type = Entity<TEntityManager>;
 
             /**
              * @brief The first component type determines iteration order.

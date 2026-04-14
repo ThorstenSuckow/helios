@@ -46,6 +46,8 @@ export namespace helios::ecs::types {
     requires IsStrongIdLike<TStrongId>
     struct EntityHandle {
 
+        using StrongId_type = TStrongId;
+
         /**
          * @brief The unique identifier for the entity within the registry.
          */

@@ -4,6 +4,7 @@
  */
 module;
 
+
 #include <ostream>
 #include <tuple>
 #include <utility>
@@ -167,12 +168,47 @@ export namespace helios::ecs {
          * @return An `Entity` wrapping the newly created handle.
          */
         template<typename THandle>
+        [[nodiscard]] auto addEntity(THandle::StrongId_type strongId) {
+            auto& em = entityManager<THandle>();
+
+            auto handle = em.create(strongId);
+
+            return Entity{handle, &em};
+        }
+
+        /**
+         * @brief Creates a new entity with an auto-generated id.
+         *
+         * @tparam THandle The handle type identifying the target domain.
+         *
+         * @return An `Entity` wrapping the newly created handle.
+         */
+        template<typename THandle>
         [[nodiscard]] auto addEntity() {
             auto& em = entityManager<THandle>();
 
             auto handle = em.create();
 
             return Entity{handle, &em};
+        }
+
+        /**
+         * @brief Destroys an entity identified by its handle.
+         *
+         * @details Delegates to the owning `EntityManager::destroy()`. The
+         * handle's version is incremented, making all existing copies stale.
+         *
+         * @tparam THandle The handle type identifying the target domain.
+         *
+         * @param handle The handle of the entity to destroy.
+         *
+         * @return True if the entity was valid and successfully destroyed.
+         */
+        template<typename THandle>
+        bool destroy(THandle handle) {
+            auto& em = entityManager<THandle>();
+
+            return em.destroy(handle);
         }
 
         /**
@@ -192,7 +228,7 @@ export namespace helios::ecs {
             auto& em = entityManager<THandle>();
 
             using EM = std::remove_reference_t<decltype(em)>;
-            using Entity_type = Entity<THandle, EM>;
+            using Entity_type = Entity<EM>;
 
             if (!em.isValid(handle)) {
                 return std::optional<Entity_type>{std::nullopt};
@@ -201,6 +237,28 @@ export namespace helios::ecs {
             return std::optional<Entity_type>{std::in_place, handle, &em};
         }
 
+        /**
+         * @brief Clones all components from a source entity into a new entity.
+         *
+         * @details Creates a new entity in the same domain and copies every
+         * component attached to `source` into it via `EntityManager::clone()`.
+         *
+         * @tparam THandle The handle type identifying the target domain.
+         *
+         * @param source The handle of the entity to clone.
+         *
+         * @return An `Entity` wrapping the newly created clone.
+         */
+        template<typename THandle>
+        [[nodiscard]] auto cloneEntity(THandle source) noexcept {
+            auto& em = entityManager<THandle>();
+
+            auto entity = addEntity<THandle>();
+
+            em.clone(source, entity.handle());
+
+            return entity;
+        }
 
         /**
          * @brief Creates a `View` for iterating entities with specific components.

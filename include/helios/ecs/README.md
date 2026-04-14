@@ -65,7 +65,7 @@ The `helios.ecs` module exports the following types:
 
 ## Template Parameter Overview
 
-The move from `helios.ecs` to `helios.ecs` introduced the
+The move from `helios.engine.ecs` to `helios.ecs` introduced the
 following **new** template parameters:
 
 | Parameter | Used In | Purpose |

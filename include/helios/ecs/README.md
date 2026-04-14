@@ -105,7 +105,7 @@ import helios.ecs;
 
 // 1. Define domain types
 struct MyStrongId { /* ... */ };
-using Handle   = helios::ecs::EntityHandle<MyStrongId>;
+using Handle   = helios::ecs::types::EntityHandle<MyStrongId>;
 using Registry = helios::ecs::EntityRegistry<MyStrongId>;
 using Manager  = helios::ecs::EntityManager<Handle, Registry, 1024>;
 

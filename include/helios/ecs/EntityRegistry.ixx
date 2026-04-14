@@ -254,7 +254,9 @@ export namespace helios::ecs {
 
             versions_[index] += 1;
             strongIds_[index] = 0;
-            lookupStrategy_.remove(handle.strongId.value());
+
+            const bool removed = lookupStrategy_.remove(handle.strongId.value());
+            assert(removed && "EntityRegistry: failed to remove strongId from lookupStrategy");
 
             freeList_.push_back(index);
 

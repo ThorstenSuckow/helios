@@ -76,13 +76,13 @@ export namespace helios::ecs {
      * @see HierarchyComponent
      * @see HierarchyPropagationSystem
      */
-    template<typename THandle, typename TEntityManager>
+    template<typename TEntityManager>
     class Entity {
 
         /**
          * @brief The underlying entity identifier.
          */
-        THandle entityHandle_{0,0};
+        TEntityManager::Handle_type entityHandle_{0,0};
 
         /**
          * @brief Non-owning pointer to the EntityManager.
@@ -92,9 +92,10 @@ export namespace helios::ecs {
 
     public:
 
-        using ComponentTypeId_type = ComponentTypeId<THandle>;
-        using ComponentOpsRegistry_type = ComponentOpsRegistry<THandle>;
-        using HierarchyComponent_type = components::HierarchyComponent<THandle>;
+        using Handle_type = TEntityManager::Handle_type;
+        using ComponentTypeId_type = ComponentTypeId<Handle_type>;
+        using ComponentOpsRegistry_type = ComponentOpsRegistry<Handle_type>;
+        using HierarchyComponent_type = components::HierarchyComponent<Handle_type>;
 
         /**
          * @brief Constructs a Entity wrapper.
@@ -103,7 +104,7 @@ export namespace helios::ecs {
          * @param entityManager Pointer to the EntityManager. Must not be null.
          */
         explicit Entity(
-            const THandle entityHandle,
+            const Handle_type entityHandle,
             TEntityManager* entityManager
 
         ) noexcept : entityHandle_(entityHandle), entityManager_(entityManager) {
@@ -125,7 +126,7 @@ export namespace helios::ecs {
          *
          * @return The EntityHandle for this Entity.
          */
-        [[nodiscard]] THandle handle() noexcept {
+        [[nodiscard]] Handle_type handle() noexcept {
             return entityHandle_;
         }
 
@@ -134,7 +135,7 @@ export namespace helios::ecs {
          *
          * @return The EntityHandle for this Entity.
          */
-        [[nodiscard]] THandle handle() const noexcept {
+        [[nodiscard]] Handle_type handle() const noexcept {
             return entityHandle_;
         }
 

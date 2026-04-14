@@ -76,6 +76,7 @@ export namespace helios::ecs {
 
         using EntityRegistry_type = TEntityRegistry;
         using Handle_type = THandle;
+        using StrongId_type = Handle_type::StrongId_type;
         using ComponentTypeId_type = ComponentTypeId<Handle_type>;
         using ComponentOpsRegistry_type = ComponentOpsRegistry<Handle_type>;
 
@@ -117,8 +118,8 @@ export namespace helios::ecs {
          *
          * @see EntityRegistry::create
          */
-        [[nodiscard]] Handle_type create() {
-            return registry_.create();
+        [[nodiscard]] Handle_type create(StrongId_type strongId = StrongId_type{}) {
+            return registry_.create(strongId);
         }
 
         /**

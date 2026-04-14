@@ -36,8 +36,8 @@ export namespace helios::ecs {
     template<typename TEntityManager>
     struct EntityResolver {
 
-        using Handle_type = typename TEntityManager::Handle_type;
-        using Entity_type = Entity<typename TEntityManager::Handle_type, TEntityManager>;
+        using Handle_type = TEntityManager::Handle_type;
+        using Entity_type = Entity<TEntityManager>;
         
         /**
          * @brief Non-owning pointer to the EntityManager used for validation.

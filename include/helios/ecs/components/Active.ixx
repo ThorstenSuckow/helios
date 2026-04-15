@@ -12,28 +12,15 @@ export namespace helios::ecs::components {
      * @brief Tag component indicating that an entity is active.
      *
      * @details This empty struct serves as a marker component for filtering
-     * active entities in views. It is automatically managed by `GameObject::setActive()`.
+     * active entities in views. It is automatically managed by `Entity<TEntityManager>::setActive()`.
      *
-     * When `setActive(true)` is called:
-     * - The `Active` tag is added
-     * - The `Inactive` tag is removed
-     * - `onActivate()` is called on components that support it
      *
-     * ## Usage in Views
-     *
-     * ```cpp
-     * // Query only active entities
-     * for (auto [entity, health, active] : gameWorld->view<
-     *     HealthComponent,
-     *     Active
-     * >().whereEnabled()) {
-     *     // Process only active entities
-     * }
-     * ```
+     * @tparam THandle The entity handle type used for domain-specific typing.
      *
      * @see Inactive
      * @see Entity::setActive
      */
+    template<typename THandle>
     struct Active {};
 
 }

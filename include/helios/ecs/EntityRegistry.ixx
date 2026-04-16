@@ -106,8 +106,6 @@ export namespace helios::ecs {
 
     public:
 
-
-
         /**
          * @brief Constructs a registry with pre-allocated capacity.
          *

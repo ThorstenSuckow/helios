@@ -3,6 +3,7 @@
   <compounddef id="namespacehelios_1_1core_1_1types" kind="namespace" language="C++">
     <compoundname>helios::core::types</compoundname>
     <innerclass refid="structhelios_1_1core_1_1types_1_1no__init__t" prot="public">helios::core::types::no_init_t</innerclass>
+    <innerclass refid="structhelios_1_1core_1_1types_1_1StrongId" prot="public">helios::core::types::StrongId</innerclass>
     <sectiondef kind="typedef">
       <memberdef kind="typedef" id="namespacehelios_1_1core_1_1types_1aa1d7e3f2fb347012cb83fb46472b57aa" prot="public" static="no">
         <type>uint32_t</type>
@@ -15,7 +16,7 @@
         </briefdescription>
         <detaileddescription>
 <para>`StrongId_t` is the common numeric representation used by `StrongId&lt;Tag&gt;` and related lookup structures (e.g., `EntityRegistry`, `LinearLookupStrategy`, `HashedLookupStrategy`). Centralising the typedef ensures a consistent width across the entire identifier subsystem.</para>
-<para><simplesect kind="see"><para><ref refid="structhelios_1_1core_1_1data_1_1StrongId" kindref="compound">helios::core::data::StrongId</ref> </para>
+<para><simplesect kind="see"><para>helios::core::data::StrongId </para>
 </simplesect>
 <simplesect kind="see"><para><ref refid="namespacehelios_1_1core_1_1types_1ae66a87b0172199142b048c268bf0b18a" kindref="member">EntityId</ref> </para>
 </simplesect>
@@ -99,6 +100,7 @@
         <location file="/tmp/h/include/helios/core/types.ixx" line="62" column="32" bodyfile="/tmp/h/include/helios/core/types.ixx" bodystart="62" bodyend="-1"/>
         <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1MaxScoreObserverComponent_1a01e968d2f03b957bf7eb56248b68c606" compoundref="MaxScoreObserverComponent_8ixx" startline="38">helios::engine::mechanics::scoring::components::MaxScoreObserverComponent::helios::engine::mechanics::scoring::systems::MaxScoreObserverClearSystem</referencedby>
         <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScoreObserverComponent_1ac61ed4347036721e97541a07e2935973" compoundref="ScoreObserverComponent_8ixx" startline="37">helios::engine::mechanics::scoring::components::ScoreObserverComponent::helios::engine::mechanics::scoring::systems::ScoreObserverClearSystem</referencedby>
+        <referencedby refid="structhelios_1_1core_1_1types_1_1StrongId_1a84ff7ab44891224903ebb70d5ed5d63f" compoundref="StrongId_8ixx" startline="68" endline="68">helios::core::types::StrongId&lt; Tag &gt;::StrongId</referencedby>
         <referencedby refid="classhelios_1_1rendering_1_1Viewport_1a6ffa7f48fd9a3250c211e33036a00911" compoundref="Viewport_8ixx" startline="213" endline="222">helios::rendering::Viewport::Viewport</referencedby>
       </memberdef>
       <memberdef kind="variable" id="namespacehelios_1_1core_1_1types_1a57aba37985d4b91aefbc85b3c7b01ebf" prot="public" static="no" constexpr="yes" mutable="no">
@@ -122,6 +124,55 @@
         <inbodydescription>
         </inbodydescription>
         <location file="/tmp/h/include/helios/core/types.ixx" line="119" column="22" bodyfile="/tmp/h/include/helios/core/types.ixx" bodystart="119" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespacehelios_1_1core_1_1types_1abddc1987e78cb80aba95ce8f6e73af7e" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t helios::core::types::fnv1a_hash</definition>
+        <argsstring>(const std::string_view str) noexcept</argsstring>
+        <name>fnv1a_hash</name>
+        <qualifiedname>helios::core::types::fnv1a_hash</qualifiedname>
+        <param>
+          <type>const std::string_view</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>Computes a 32-bit FNV-1a hash from a string. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Implements the Fowler–Noll–Vo hash function (FNV-1a variant), a fast, non-cryptographic hash suitable for hash tables and identifier generation. The function is `constexpr`, enabling compile-time hashing of string literals.</para>
+<para>## Algorithm</para>
+<para>1. Initialize hash with FNV offset basis (2166136261) 2. For each byte: XOR with hash, then multiply by FNV prime (16777619)</para>
+<para>## Usage</para>
+<para>```cpp // Compile-time hash for type-safe IDs constexpr uint32_t id = fnv1a_hash(&quot;enemy_spawn&quot;);</para>
+<para>// Used internally by strongly-typed ID constructors constexpr GameObjectPoolId POOL{&quot;bullets&quot;}; // calls fnv1a_hash ```</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The string view to hash.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>32-bit hash value.</para>
+</simplesect>
+<simplesect kind="note"><para>This is not a cryptographic hash. Do not use for security purposes.</para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function">https://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para>GameObjectPoolId </para>
+</simplesect>
+<simplesect kind="see"><para>SpawnProfileId </para>
+</simplesect>
+<simplesect kind="see"><para>SpawnRuleId </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/types/FuncDefs.ixx" line="49" column="25" bodyfile="/tmp/h/include/helios/core/types/FuncDefs.ixx" bodystart="49" bodyend="56"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

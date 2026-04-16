@@ -5,7 +5,7 @@
     <includes local="no">vector</includes>
     <includes local="no">algorithm</includes>
     <includes local="no">ranges</includes>
-    <includes refid="types_8ixx" local="no">helios.core.types</includes>
+    <includes local="no">helios.core.types.TypeDefs</includes>
     <incdepgraph>
       <node id="1">
         <label>LinearLookupStrategy.ixx</label>
@@ -19,22 +19,11 @@
         <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="5">
-        <label>helios.core.types</label>
-        <link refid="types_8ixx"/>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
-      </node>
       <node id="3">
         <label>algorithm</label>
       </node>
-      <node id="6">
-        <label>cstdint</label>
-      </node>
-      <node id="7">
-        <label>limits</label>
+      <node id="5">
+        <label>helios.core.types.TypeDefs</label>
       </node>
       <node id="4">
         <label>ranges</label>
@@ -43,10 +32,10 @@
         <label>vector</label>
       </node>
     </incdepgraph>
-    <innerclass refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy" prot="public">helios::core::ecs::LinearLookupStrategy</innerclass>
+    <innerclass refid="classhelios_1_1ecs_1_1strategies_1_1LinearLookupStrategy" prot="public">helios::ecs::strategies::LinearLookupStrategy</innerclass>
     <innernamespace refid="namespacehelios">helios</innernamespace>
-    <innernamespace refid="namespacehelios_1_1core">helios::core</innernamespace>
-    <innernamespace refid="namespacehelios_1_1core_1_1ecs">helios::core::ecs</innernamespace>
+    <innernamespace refid="namespacehelios_1_1ecs">helios::ecs</innernamespace>
+    <innernamespace refid="namespacehelios_1_1ecs_1_1strategies">helios::ecs::strategies</innernamespace>
     <briefdescription>
 <para>Linear-scan lookup strategy for strong ID collision detection. </para>
     </briefdescription>
@@ -63,12 +52,12 @@
 <codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;algorithm&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ranges&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight></codeline>
-<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8core_8ecs_8LinearLookupStrategy" kindref="compound">helios.core.ecs.LinearLookupStrategy</ref>;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8ecs_8strategies_8LinearLookupStrategy" kindref="compound">helios.ecs.strategies.LinearLookupStrategy</ref>;</highlight></codeline>
 <codeline lineno="12"><highlight class="normal"></highlight></codeline>
-<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8core_8types" kindref="compound">helios.core.types</ref>;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>helios.core.types.TypeDefs;</highlight></codeline>
 <codeline lineno="14"><highlight class="normal"></highlight></codeline>
 <codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1core_1_1types" kindref="compound">helios::core::types</ref>;</highlight></codeline>
-<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1core_1_1ecs" kindref="compound">helios::core::ecs</ref><sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1ecs_1_1strategies" kindref="compound">helios::ecs::strategies</ref><sp/>{</highlight></codeline>
 <codeline lineno="17"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="18"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
 <codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Lookup<sp/>strategy<sp/>using<sp/>a<sp/>flat<sp/>vector<sp/>with<sp/>linear<sp/>scan.</highlight></codeline>
@@ -84,7 +73,7 @@
 <codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>HashedLookupStrategy</highlight></codeline>
 <codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>TCapacity&gt;</highlight></codeline>
-<codeline lineno="32" refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1af08f6e4ed6641a8f96622ecf96f14127" kindref="member">LinearLookupStrategy</ref><sp/>{</highlight></codeline>
+<codeline lineno="32" refid="classhelios_1_1ecs_1_1strategies_1_1LinearLookupStrategy" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1ecs_1_1strategies_1_1LinearLookupStrategy_1a6161b0fc02c232f595b7630d88b34ea0" kindref="member">LinearLookupStrategy</ref><sp/>{</highlight></codeline>
 <codeline lineno="33"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
 <codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Vector<sp/>of<sp/>registered<sp/>strong<sp/>IDs.</highlight></codeline>
@@ -98,7 +87,7 @@
 <codeline lineno="43"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="44"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>capacity<sp/>The<sp/>initial<sp/>capacity<sp/>to<sp/>reserve.</highlight></codeline>
 <codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="46" refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1af08f6e4ed6641a8f96622ecf96f14127" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1af08f6e4ed6641a8f96622ecf96f14127" kindref="member">LinearLookupStrategy</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>capacity<sp/>=<sp/>TCapacity)<sp/>{</highlight></codeline>
+<codeline lineno="46" refid="classhelios_1_1ecs_1_1strategies_1_1LinearLookupStrategy_1a6161b0fc02c232f595b7630d88b34ea0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1ecs_1_1strategies_1_1LinearLookupStrategy_1a6161b0fc02c232f595b7630d88b34ea0" kindref="member">LinearLookupStrategy</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>capacity<sp/>=<sp/>TCapacity)<sp/>{</highlight></codeline>
 <codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>strongIds_.reserve(capacity);</highlight></codeline>
 <codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="49"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
@@ -109,7 +98,7 @@
 <codeline lineno="54"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="55"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>True<sp/>if<sp/>removed,<sp/>false<sp/>if<sp/>not<sp/>found.</highlight></codeline>
 <codeline lineno="56"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="57" refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1a31ad49f535a654df1599d4615dc0be83" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1a31ad49f535a654df1599d4615dc0be83" kindref="member">remove</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1core_1_1types_1aa1d7e3f2fb347012cb83fb46472b57aa" kindref="member">StrongId_t</ref><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="57" refid="classhelios_1_1ecs_1_1strategies_1_1LinearLookupStrategy_1a89862a732256d86491700d0c454841d9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1ecs_1_1strategies_1_1LinearLookupStrategy_1a89862a732256d86491700d0c454841d9" kindref="member">remove</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1core_1_1types_1aa1d7e3f2fb347012cb83fb46472b57aa" kindref="member">StrongId_t</ref><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
 <codeline lineno="58"><highlight class="normal"></highlight></codeline>
 <codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>it<sp/>=<sp/>std::ranges::find(strongIds_,<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="60"><highlight class="normal"></highlight></codeline>
@@ -137,8 +126,8 @@
 <codeline lineno="82"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="83"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>True<sp/>if<sp/>inserted,<sp/>false<sp/>if<sp/>already<sp/>present.</highlight></codeline>
 <codeline lineno="84"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="85" refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1af5b3ee5bea63d62b4dddb4e197ceb9a5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1af5b3ee5bea63d62b4dddb4e197ceb9a5" kindref="member">add</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1core_1_1types_1aa1d7e3f2fb347012cb83fb46472b57aa" kindref="member">StrongId_t</ref><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
-<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1a94d2248b61f690a35983f6d37260e332" kindref="member">has</ref>(</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">))<sp/>{</highlight></codeline>
+<codeline lineno="85" refid="classhelios_1_1ecs_1_1strategies_1_1LinearLookupStrategy_1a96f97e7c426ab6c8bbac8e3b6b4c2604" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1ecs_1_1strategies_1_1LinearLookupStrategy_1a96f97e7c426ab6c8bbac8e3b6b4c2604" kindref="member">add</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1core_1_1types_1aa1d7e3f2fb347012cb83fb46472b57aa" kindref="member">StrongId_t</ref><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="classhelios_1_1ecs_1_1strategies_1_1LinearLookupStrategy_1a73fe1edc155449c67fefcdfc24fe2cf7" kindref="member">has</ref>(</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">))<sp/>{</highlight></codeline>
 <codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>strongIds_.push_back(</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
@@ -152,7 +141,7 @@
 <codeline lineno="97"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="98"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>True<sp/>if<sp/>the<sp/>ID<sp/>is<sp/>present.</highlight></codeline>
 <codeline lineno="99"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="100" refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1a94d2248b61f690a35983f6d37260e332" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy_1a94d2248b61f690a35983f6d37260e332" kindref="member">has</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1core_1_1types_1aa1d7e3f2fb347012cb83fb46472b57aa" kindref="member">StrongId_t</ref><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="100" refid="classhelios_1_1ecs_1_1strategies_1_1LinearLookupStrategy_1a73fe1edc155449c67fefcdfc24fe2cf7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1ecs_1_1strategies_1_1LinearLookupStrategy_1a73fe1edc155449c67fefcdfc24fe2cf7" kindref="member">has</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1core_1_1types_1aa1d7e3f2fb347012cb83fb46472b57aa" kindref="member">StrongId_t</ref><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::ranges::find(strongIds_,<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>!=<sp/>strongIds_.end();</highlight></codeline>
 <codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="103"><highlight class="normal"></highlight></codeline>
@@ -162,6 +151,6 @@
 <codeline lineno="107"><highlight class="normal"></highlight></codeline>
 <codeline lineno="108"><highlight class="normal">}</highlight></codeline>
     </programlisting>
-    <location file="/tmp/h/include/helios/core/ecs/LinearLookupStrategy.ixx"/>
+    <location file="/tmp/h/include/helios/ecs/strategies/LinearLookupStrategy.ixx"/>
   </compounddef>
 </doxygen>

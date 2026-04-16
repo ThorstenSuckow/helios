@@ -12,7 +12,7 @@ var dir_1ca916e0b9fbc882dbfbd9e6594e5e22 =
     [ "EntityRegistry.ixx", "engine_2ecs_2EntityRegistry_8ixx.html", "engine_2ecs_2EntityRegistry_8ixx" ],
     [ "EntityResolver.ixx", "engine_2ecs_2EntityResolver_8ixx.html", "engine_2ecs_2EntityResolver_8ixx" ],
     [ "GameObject.ixx", "GameObject_8ixx.html", "GameObject_8ixx" ],
-    [ "registry.ixx", "ecs_2registry_8ixx.html", "ecs_2registry_8ixx" ],
+    [ "registry.ixx", "engine_2ecs_2registry_8ixx.html", "engine_2ecs_2registry_8ixx" ],
     [ "SparseSet.ixx", "engine_2ecs_2SparseSet_8ixx.html", "engine_2ecs_2SparseSet_8ixx" ],
     [ "Traits.ixx", "engine_2ecs_2Traits_8ixx.html", "engine_2ecs_2Traits_8ixx" ],
     [ "View.ixx", "engine_2ecs_2View_8ixx.html", "engine_2ecs_2View_8ixx" ]

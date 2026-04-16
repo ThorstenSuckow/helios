@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8ecs_8ComponentOpsRegistry" kind="module">
+    <compoundname>helios.ecs.ComponentOpsRegistry</compoundname>
+    <innerfile refid="ecs_2ComponentOpsRegistry_8ixx">ecs/ComponentOpsRegistry.ixx</innerfile>
+    <innerclass refid="classhelios_1_1ecs_1_1ComponentOpsRegistry" prot="public">helios::ecs::ComponentOpsRegistry</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="classhelios_1_1ecs_1_1ComponentOpsRegistry_1ae399185fcad1b71e6ab8260598ac7eb8" prot="public" static="no">
+        <type><ref refid="classhelios_1_1ecs_1_1types_1_1ComponentTypeId" kindref="compound">ComponentTypeId</ref>&lt; THandle &gt;</type>
+        <definition>using helios::ecs::ComponentOpsRegistry&lt; THandle &gt;::ComponentTypeId_type =  ComponentTypeId&lt;THandle&gt;</definition>
+        <argsstring></argsstring>
+        <name>ComponentTypeId_type</name>
+        <qualifiedname>helios::ecs::ComponentOpsRegistry::ComponentTypeId_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/ecs/ComponentOpsRegistry.ixx" line="68" column="9" bodyfile="/tmp/h/include/helios/ecs/ComponentOpsRegistry.ixx" bodystart="68" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1ecs_1_1ComponentOpsRegistry_1abaea250c97327938f2bafaea9ebd965e" prot="private" static="yes" mutable="no">
+        <type>std::vector&lt; <ref refid="structhelios_1_1ecs_1_1types_1_1ComponentOps" kindref="compound">ComponentOps</ref> &gt;</type>
+        <definition>std::vector&lt;ComponentOps&gt; helios::ecs::ComponentOpsRegistry&lt; THandle &gt;::operations_</definition>
+        <argsstring></argsstring>
+        <name>operations_</name>
+        <qualifiedname>helios::ecs::ComponentOpsRegistry::operations_</qualifiedname>
+        <briefdescription>
+<para>Type-indexed storage for <ref refid="structhelios_1_1ecs_1_1types_1_1ComponentOps" kindref="compound">ComponentOps</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/ecs/ComponentOpsRegistry.ixx" line="59" column="35" bodyfile="/tmp/h/include/helios/ecs/ComponentOpsRegistry.ixx" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1ecs_1_1ComponentOpsRegistry_1a5e67d5cd55aa24eb436dba5cc8f3d52b" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="structhelios_1_1ecs_1_1types_1_1ComponentOps" kindref="compound">ComponentOps</ref></type>
+        <definition>ComponentOps helios::ecs::ComponentOpsRegistry&lt; THandle &gt;::emptyOps_</definition>
+        <argsstring></argsstring>
+        <name>emptyOps_</name>
+        <qualifiedname>helios::ecs::ComponentOpsRegistry::emptyOps_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>Empty ops returned for unregistered types. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/ecs/ComponentOpsRegistry.ixx" line="64" column="46" bodyfile="/tmp/h/include/helios/ecs/ComponentOpsRegistry.ixx" bodystart="64" bodyend="64"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1ecs_1_1ComponentOpsRegistry_1ac0a4428145cb25f044835b3aa4ef8726" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void helios::ecs::ComponentOpsRegistry&lt; THandle &gt;::setOps</definition>
+        <argsstring>(const ComponentTypeId_type typeId, const ComponentOps &amp;ops)</argsstring>
+        <name>setOps</name>
+        <qualifiedname>helios::ecs::ComponentOpsRegistry::setOps</qualifiedname>
+        <param>
+          <type>const ComponentTypeId_type</type>
+          <declname>typeId</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1ecs_1_1types_1_1ComponentOps" kindref="compound">ComponentOps</ref> &amp;</type>
+          <declname>ops</declname>
+        </param>
+        <briefdescription>
+<para>Registers <ref refid="structhelios_1_1ecs_1_1types_1_1ComponentOps" kindref="compound">ComponentOps</ref> for a component type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Auto-resizes the internal vector if necessary.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>typeId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unique identifier for the component type. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ops</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The lifecycle function pointers to register. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/ecs/ComponentOpsRegistry.ixx" line="79" column="21" bodyfile="/tmp/h/include/helios/ecs/ComponentOpsRegistry.ixx" bodystart="79" bodyend="86"/>
+        <referencedby refid="classhelios_1_1ecs_1_1ComponentReflector_1a28ae642ddfd292211483f613431f3418" compoundref="ecs_2ComponentReflector_8ixx" startline="93" endline="170">helios::ecs::ComponentReflector&lt; TEntityManager &gt;::registerType</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ecs_1_1ComponentOpsRegistry_1acd1d3c50c6c9fccee4452bf55eb80f87" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="structhelios_1_1ecs_1_1types_1_1ComponentOps" kindref="compound">ComponentOps</ref> &amp;</type>
+        <definition>static const ComponentOps &amp; helios::ecs::ComponentOpsRegistry&lt; THandle &gt;::ops</definition>
+        <argsstring>(const ComponentTypeId_type typeId)</argsstring>
+        <name>ops</name>
+        <qualifiedname>helios::ecs::ComponentOpsRegistry::ops</qualifiedname>
+        <param>
+          <type>const ComponentTypeId_type</type>
+          <declname>typeId</declname>
+        </param>
+        <briefdescription>
+<para>Retrieves <ref refid="structhelios_1_1ecs_1_1types_1_1ComponentOps" kindref="compound">ComponentOps</ref> for a component type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>typeId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unique identifier for the component type.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to the registered <ref refid="structhelios_1_1ecs_1_1types_1_1ComponentOps" kindref="compound">ComponentOps</ref>, or empty ops if not registered. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/ecs/ComponentOpsRegistry.ixx" line="95" column="35" bodyfile="/tmp/h/include/helios/ecs/ComponentOpsRegistry.ixx" bodystart="95" bodyend="102"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/ecs/ComponentOpsRegistry.ixx" line="9" column="15"/>
+  </compounddef>
+</doxygen>

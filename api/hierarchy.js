@@ -3,13 +3,13 @@ var hierarchy =
     [ "helios::math::aabb&lt; T &gt;", "structhelios_1_1math_1_1aabb.html", null ],
     [ "helios::engine::modules::physics::collision::components::AabbColliderComponent", "classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1AabbColliderComponent.html", null ],
     [ "helios::engine::modules::ui::widgets::types::ActionIdTag", "structhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1types_1_1ActionIdTag.html", null ],
-    [ "helios::core::ecs::components::Active", "structhelios_1_1core_1_1ecs_1_1components_1_1Active.html", null ],
+    [ "helios::ecs::components::Active&lt; THandle &gt;", "structhelios_1_1ecs_1_1components_1_1Active.html", null ],
     [ "helios::engine::mechanics::lifecycle::components::Active", "structhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1Active.html", null ],
     [ "helios::engine::modules::rendering::viewport::components::ActiveViewportIdsStateComponent", "classhelios_1_1engine_1_1modules_1_1rendering_1_1viewport_1_1components_1_1ActiveViewportIdsStateComponent.html", null ],
     [ "helios::engine::builder::gameObject::builders::AiBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1AiBuilder.html", null ],
     [ "helios::engine::mechanics::combat::commands::Aim2DCommand", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1Aim2DCommand.html", null ],
     [ "helios::engine::mechanics::combat::components::Aim2DComponent", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1Aim2DComponent.html", null ],
-    [ "helios::app::Application", "classhelios_1_1app_1_1Application.html", [
+    [ "helios::app::Application", null, [
       [ "helios::ext::glfw::app::GLFWApplication", "classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication.html", null ]
     ] ],
     [ "helios::engine::mechanics::damage::commands::ApplyDamageCommand", "classhelios_1_1engine_1_1mechanics_1_1damage_1_1commands_1_1ApplyDamageCommand.html", null ],
@@ -40,24 +40,19 @@ var hierarchy =
     [ "helios::engine::runtime::messaging::command::CommandHandlerRef&lt; CommandType &gt;", "structhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandlerRef.html", null ],
     [ "helios::engine::runtime::messaging::command::CommandHandlerRegistry", "classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandHandlerRegistry.html", null ],
     [ "helios::engine::runtime::messaging::command::types::CommandTypeId", "classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1types_1_1CommandTypeId.html", null ],
-    [ "helios::core::ecs::ComponentOps", "structhelios_1_1core_1_1ecs_1_1ComponentOps.html", null ],
+    [ "helios::ecs::types::ComponentOps", "structhelios_1_1ecs_1_1types_1_1ComponentOps.html", null ],
     [ "helios::engine::ecs::ComponentOps", "structhelios_1_1engine_1_1ecs_1_1ComponentOps.html", null ],
-    [ "helios::core::ecs::ComponentOpsRegistry&lt; THandle &gt;", "classhelios_1_1core_1_1ecs_1_1ComponentOpsRegistry.html", null ],
+    [ "helios::ecs::ComponentOpsRegistry&lt; THandle &gt;", "classhelios_1_1ecs_1_1ComponentOpsRegistry.html", null ],
     [ "helios::engine::ecs::ComponentOpsRegistry", "classhelios_1_1engine_1_1ecs_1_1ComponentOpsRegistry.html", null ],
-    [ "helios::core::ecs::ComponentReflector&lt; THandle, TEntityManager &gt;", "classhelios_1_1core_1_1ecs_1_1ComponentReflector.html", null ],
+    [ "helios::ecs::ComponentReflector&lt; TEntityManager &gt;", "classhelios_1_1ecs_1_1ComponentReflector.html", null ],
     [ "helios::engine::ecs::ComponentReflector", "classhelios_1_1engine_1_1ecs_1_1ComponentReflector.html", null ],
-    [ "helios::core::ecs::ComponentTypeId&lt; THandle &gt;", "classhelios_1_1core_1_1ecs_1_1ComponentTypeId.html", null ],
+    [ "helios::ecs::types::ComponentTypeId&lt; THandle &gt;", "classhelios_1_1ecs_1_1types_1_1ComponentTypeId.html", null ],
     [ "helios::engine::ecs::types::ComponentTypeId", "classhelios_1_1engine_1_1ecs_1_1types_1_1ComponentTypeId.html", null ],
     [ "helios::engine::modules::spatial::transform::components::ComposeTransformComponent", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1ComposeTransformComponent.html", null ],
     [ "helios::engine::modules::spatial::transform::systems::ComposeTransformSystem", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1systems_1_1ComposeTransformSystem.html", null ],
     [ "helios::core::container::ConceptModelRegistry&lt; AnyT, IdProvider &gt;", "classhelios_1_1core_1_1container_1_1ConceptModelRegistry.html", null ],
-    [ "helios::core::ecs::SparseSet&lt; T &gt;::ConstIterator", "structhelios_1_1core_1_1ecs_1_1SparseSet_1_1ConstIterator.html", null ],
+    [ "helios::ecs::SparseSet&lt; T &gt;::ConstIterator", "structhelios_1_1ecs_1_1SparseSet_1_1ConstIterator.html", null ],
     [ "helios::engine::ecs::SparseSet&lt; T &gt;::ConstIterator", "structhelios_1_1engine_1_1ecs_1_1SparseSet_1_1ConstIterator.html", null ],
-    [ "helios::app::controller::Controller", "classhelios_1_1app_1_1controller_1_1Controller.html", [
-      [ "helios::app::controller::WindowRenderingController", "classhelios_1_1app_1_1controller_1_1WindowRenderingController.html", [
-        [ "helios::app::controller::BasicWindowRenderingController", "classhelios_1_1app_1_1controller_1_1BasicWindowRenderingController.html", null ]
-      ] ]
-    ] ],
     [ "helios::engine::common::types::DamageContext", "structhelios_1_1engine_1_1common_1_1types_1_1DamageContext.html", null ],
     [ "helios::engine::mechanics::damage::components::DamageDealerComponent", "classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1DamageDealerComponent.html", null ],
     [ "helios::engine::mechanics::damage::systems::DamageOnCollisionSystem", "classhelios_1_1engine_1_1mechanics_1_1damage_1_1systems_1_1DamageOnCollisionSystem.html", null ],
@@ -74,7 +69,6 @@ var hierarchy =
     [ "helios::core::container::DenseRuntimeHandleRegistry&lt; StrongIdentifier, RuntimeId &gt;", "classhelios_1_1core_1_1container_1_1DenseRuntimeHandleRegistry.html", null ],
     [ "helios::engine::runtime::spawn::commands::DespawnCommand", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1DespawnCommand.html", null ],
     [ "helios::engine::modules::physics::motion::components::DirectionComponent", "classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1DirectionComponent.html", null ],
-    [ "helios::event::Dispatcher", "classhelios_1_1event_1_1Dispatcher.html", null ],
     [ "helios::core::container::buffer::DoubleBuffer", "classhelios_1_1core_1_1container_1_1buffer_1_1DoubleBuffer.html", [
       [ "helios::core::container::buffer::ReadWriteDoubleBuffer< T >", "classhelios_1_1core_1_1container_1_1buffer_1_1ReadWriteDoubleBuffer.html", null ]
     ] ],
@@ -82,27 +76,16 @@ var hierarchy =
     [ "helios::engine::mechanics::spawn::components::EmittedByComponent", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1EmittedByComponent.html", null ],
     [ "helios::engine::runtime::spawn::types::EmitterContext", "structhelios_1_1engine_1_1runtime_1_1spawn_1_1types_1_1EmitterContext.html", null ],
     [ "helios::engine::runtime::messaging::command::EngineCommandBuffer", "classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1EngineCommandBuffer.html", null ],
-    [ "helios::core::ecs::Entity&lt; THandle, TEntityManager &gt;", "classhelios_1_1core_1_1ecs_1_1Entity.html", null ],
-    [ "helios::core::ecs::EntityHandle&lt; TStrongId &gt;", "structhelios_1_1core_1_1ecs_1_1EntityHandle.html", null ],
+    [ "helios::ecs::Entity&lt; TEntityManager &gt;", "classhelios_1_1ecs_1_1Entity.html", null ],
+    [ "helios::ecs::types::EntityHandle&lt; TStrongId &gt;", "structhelios_1_1ecs_1_1types_1_1EntityHandle.html", null ],
     [ "helios::engine::ecs::EntityHandle", "structhelios_1_1engine_1_1ecs_1_1EntityHandle.html", null ],
-    [ "helios::core::ecs::EntityManager&lt; THandle, TEntityRegistry, TCapacity &gt;", "classhelios_1_1core_1_1ecs_1_1EntityManager.html", null ],
+    [ "helios::ecs::EntityManager&lt; THandle, TEntityRegistry, TCapacity &gt;", "classhelios_1_1ecs_1_1EntityManager.html", null ],
     [ "helios::engine::ecs::EntityManager", "classhelios_1_1engine_1_1ecs_1_1EntityManager.html", null ],
-    [ "helios::core::ecs::EntityRegistry&lt; TStrongId, TLookupStrategy, TAllowRemoval, TCapacity &gt;", "classhelios_1_1core_1_1ecs_1_1EntityRegistry.html", null ],
+    [ "helios::ecs::EntityRegistry&lt; TStrongId, TLookupStrategy, TAllowRemoval, TCapacity &gt;", "classhelios_1_1ecs_1_1EntityRegistry.html", null ],
     [ "helios::engine::ecs::EntityRegistry", "classhelios_1_1engine_1_1ecs_1_1EntityRegistry.html", null ],
-    [ "helios::core::ecs::EntityResolver&lt; TEntityManager &gt;", "structhelios_1_1core_1_1ecs_1_1EntityResolver.html", null ],
+    [ "helios::ecs::EntityResolver&lt; TEntityManager &gt;", "structhelios_1_1ecs_1_1EntityResolver.html", null ],
     [ "helios::engine::ecs::EntityResolver", "structhelios_1_1engine_1_1ecs_1_1EntityResolver.html", null ],
     [ "helios::core::memory::ErasedUnique", "structhelios_1_1core_1_1memory_1_1ErasedUnique.html", null ],
-    [ "helios::event::Event", "classhelios_1_1event_1_1Event.html", [
-      [ "helios::window::event::WindowEvent", "classhelios_1_1window_1_1event_1_1WindowEvent.html", [
-        [ "helios::window::event::FrameBufferResizeEvent", "classhelios_1_1window_1_1event_1_1FrameBufferResizeEvent.html", null ]
-      ] ]
-    ] ],
-    [ "helios::event::EventManager", "classhelios_1_1event_1_1EventManager.html", [
-      [ "helios::event::BasicEventManager", "classhelios_1_1event_1_1BasicEventManager.html", null ]
-    ] ],
-    [ "helios::event::EventQueue", "classhelios_1_1event_1_1EventQueue.html", [
-      [ "helios::event::DequeEventQueue", "classhelios_1_1event_1_1DequeEventQueue.html", null ]
-    ] ],
     [ "helios::engine::modules::ui::widgets::types::FontIdTag", "structhelios_1_1engine_1_1modules_1_1ui_1_1widgets_1_1types_1_1FontIdTag.html", null ],
     [ "helios::rendering::text::FontResourceProvider", "classhelios_1_1rendering_1_1text_1_1FontResourceProvider.html", [
       [ "helios::ext::opengl::rendering::FreeTypeFontResourceManager", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1FreeTypeFontResourceManager.html", null ]
@@ -147,9 +130,9 @@ var hierarchy =
     [ "HandleToManager&lt; THandle, THead &gt;", "structHandleToManager_3_01THandle_00_01THead_01_4.html", null ],
     [ "HandleToManager&lt; THandle, THead, TTail... &gt;", "structHandleToManager_3_01THandle_00_01THead_00_01TTail_8_8_8_01_4.html", null ],
     [ "std::hash&lt; helios::core::data::RuntimeHandle&lt; StrongIdentifier, RuntimeId &gt; &gt;", "structstd_1_1hash_3_01helios_1_1core_1_1data_1_1RuntimeHandle_3_01StrongIdentifier_00_01RuntimeId_01_4_01_4.html", null ],
-    [ "std::hash&lt; helios::core::data::StrongId&lt; Tag, Underlying &gt; &gt;", "structstd_1_1hash_3_01helios_1_1core_1_1data_1_1StrongId_3_01Tag_00_01Underlying_01_4_01_4.html", null ],
-    [ "std::hash&lt; helios::core::ecs::ComponentTypeId&lt; THandle &gt; &gt;", "structstd_1_1hash_3_01helios_1_1core_1_1ecs_1_1ComponentTypeId_3_01THandle_01_4_01_4.html", null ],
-    [ "std::hash&lt; helios::core::ecs::EntityHandle&lt; TStrongId &gt; &gt;", "structstd_1_1hash_3_01helios_1_1core_1_1ecs_1_1EntityHandle_3_01TStrongId_01_4_01_4.html", null ],
+    [ "std::hash&lt; helios::core::types::StrongId&lt; Tag &gt; &gt;", "structstd_1_1hash_3_01helios_1_1core_1_1types_1_1StrongId_3_01Tag_01_4_01_4.html", null ],
+    [ "std::hash&lt; helios::ecs::types::ComponentTypeId&lt; THandle &gt; &gt;", "structstd_1_1hash_3_01helios_1_1ecs_1_1types_1_1ComponentTypeId_3_01THandle_01_4_01_4.html", null ],
+    [ "std::hash&lt; helios::ecs::types::EntityHandle&lt; TStrongId &gt; &gt;", "structstd_1_1hash_3_01helios_1_1ecs_1_1types_1_1EntityHandle_3_01TStrongId_01_4_01_4.html", null ],
     [ "std::hash&lt; helios::engine::ecs::EntityHandle &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1ecs_1_1EntityHandle_01_4.html", null ],
     [ "std::hash&lt; helios::engine::ecs::types::ComponentTypeId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1ecs_1_1types_1_1ComponentTypeId_01_4.html", null ],
     [ "std::hash&lt; helios::engine::mechanics::scoring::types::ScoreTypeId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1mechanics_1_1scoring_1_1types_1_1ScoreTypeId_01_4.html", null ],
@@ -166,7 +149,7 @@ var hierarchy =
     [ "std::hash&lt; helios::engine::runtime::world::types::SystemTypeId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1runtime_1_1world_1_1types_1_1SystemTypeId_01_4.html", null ],
     [ "std::hash&lt; helios::engine::state::types::StateTypeId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1state_1_1types_1_1StateTypeId_01_4.html", null ],
     [ "std::hash&lt; helios::util::Guid &gt;", "structstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4.html", null ],
-    [ "helios::core::ecs::HashedLookupStrategy", "classhelios_1_1core_1_1ecs_1_1HashedLookupStrategy.html", null ],
+    [ "helios::ecs::strategies::HashedLookupStrategy", "classhelios_1_1ecs_1_1strategies_1_1HashedLookupStrategy.html", null ],
     [ "helios::engine::builder::gameObject::builders::HealthBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1HealthBuilder.html", null ],
     [ "helios::engine::mechanics::health::types::HealthChangeContext", "structhelios_1_1engine_1_1mechanics_1_1health_1_1types_1_1HealthChangeContext.html", null ],
     [ "helios::engine::mechanics::health::events::HealthChangedEvent", "classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1HealthChangedEvent.html", null ],
@@ -175,7 +158,7 @@ var hierarchy =
     [ "helios::engine::mechanics::health::events::HealthDepletedEvent", "classhelios_1_1engine_1_1mechanics_1_1health_1_1events_1_1HealthDepletedEvent.html", null ],
     [ "helios::engine::mechanics::health::HealthManager", "classhelios_1_1engine_1_1mechanics_1_1health_1_1HealthManager.html", null ],
     [ "helios::engine::mechanics::health::systems::HealthUpdateClearSystem", "classhelios_1_1engine_1_1mechanics_1_1health_1_1systems_1_1HealthUpdateClearSystem.html", null ],
-    [ "helios::core::ecs::components::HierarchyComponent&lt; THandle &gt;", "classhelios_1_1core_1_1ecs_1_1components_1_1HierarchyComponent.html", null ],
+    [ "helios::ecs::components::HierarchyComponent&lt; THandle &gt;", "classhelios_1_1ecs_1_1components_1_1HierarchyComponent.html", null ],
     [ "helios::engine::ecs::components::HierarchyComponent", "classhelios_1_1engine_1_1ecs_1_1components_1_1HierarchyComponent.html", null ],
     [ "helios::engine::ecs::systems::HierarchyPropagationSystem", "classhelios_1_1engine_1_1ecs_1_1systems_1_1HierarchyPropagationSystem.html", null ],
     [ "helios::ext::imgui::ImGuiBackend", "classhelios_1_1ext_1_1imgui_1_1ImGuiBackend.html", [
@@ -190,7 +173,7 @@ var hierarchy =
       [ "helios::ext::imgui::widgets::LogWidget", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1LogWidget.html", null ],
       [ "helios::ext::imgui::widgets::MainMenuWidget", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1MainMenuWidget.html", null ]
     ] ],
-    [ "helios::core::ecs::components::Inactive", "structhelios_1_1core_1_1ecs_1_1components_1_1Inactive.html", null ],
+    [ "helios::ecs::components::Inactive&lt; THandle &gt;", "structhelios_1_1ecs_1_1components_1_1Inactive.html", null ],
     [ "helios::engine::mechanics::lifecycle::components::Inactive", "structhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1Inactive.html", null ],
     [ "helios::input::InputAdapter", "classhelios_1_1input_1_1InputAdapter.html", [
       [ "helios::ext::glfw::input::GLFWInputAdapter", "classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter.html", null ]
@@ -199,8 +182,8 @@ var hierarchy =
     [ "helios::input::InputSnapshot", "classhelios_1_1input_1_1InputSnapshot.html", null ],
     [ "helios::engine::common::types::InteractionContext", "structhelios_1_1engine_1_1common_1_1types_1_1InteractionContext.html", null ],
     [ "helios::engine::state::types::InvalidStateTransitionId", "structhelios_1_1engine_1_1state_1_1types_1_1InvalidStateTransitionId.html", null ],
-    [ "helios::core::ecs::SparseSet&lt; T &gt;::Iterator", "structhelios_1_1core_1_1ecs_1_1SparseSet_1_1Iterator.html", null ],
-    [ "helios::core::ecs::View&lt; TEntityManager, Components &gt;::Iterator", "structhelios_1_1core_1_1ecs_1_1View_1_1Iterator.html", null ],
+    [ "helios::ecs::SparseSet&lt; T &gt;::Iterator", "structhelios_1_1ecs_1_1SparseSet_1_1Iterator.html", null ],
+    [ "helios::ecs::View&lt; TEntityManager, Components &gt;::Iterator", "structhelios_1_1ecs_1_1View_1_1Iterator.html", null ],
     [ "helios::engine::ecs::SparseSet&lt; T &gt;::Iterator", "structhelios_1_1engine_1_1ecs_1_1SparseSet_1_1Iterator.html", null ],
     [ "helios::engine::ecs::View&lt; Components &gt;::Iterator", "structhelios_1_1engine_1_1ecs_1_1View_1_1Iterator.html", null ],
     [ "helios::engine::mechanics::damage::components::LastDamageComponent", "classhelios_1_1engine_1_1mechanics_1_1damage_1_1components_1_1LastDamageComponent.html", null ],
@@ -211,7 +194,7 @@ var hierarchy =
     [ "helios::engine::builder::gameObject::builders::configs::LevelBoundsCollisionConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1LevelBoundsCollisionConfig.html", null ],
     [ "helios::engine::builder::gameObject::builders::LifecycleBuilder", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1LifecycleBuilder.html", null ],
     [ "helios::engine::builder::gameObject::builders::configs::LifecycleConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1LifecycleConfig.html", null ],
-    [ "helios::core::ecs::LinearLookupStrategy&lt; TCapacity &gt;", "classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy.html", null ],
+    [ "helios::ecs::strategies::LinearLookupStrategy&lt; TCapacity &gt;", "classhelios_1_1ecs_1_1strategies_1_1LinearLookupStrategy.html", null ],
     [ "helios::engine::modules::ui::binding::systems::Lives2UiTextUpdateSystem", "classhelios_1_1engine_1_1modules_1_1ui_1_1binding_1_1systems_1_1Lives2UiTextUpdateSystem.html", null ],
     [ "helios::engine::mechanics::match::components::LivesBindingComponent", "classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesBindingComponent.html", null ],
     [ "helios::engine::mechanics::match::components::LivesComponent", "classhelios_1_1engine_1_1mechanics_1_1match_1_1components_1_1LivesComponent.html", null ],
@@ -355,9 +338,9 @@ var hierarchy =
     [ "helios::scene::Snapshot", "classhelios_1_1scene_1_1Snapshot.html", null ],
     [ "helios::scene::SnapshotItem", "structhelios_1_1scene_1_1SnapshotItem.html", null ],
     [ "helios::engine::modules::physics::collision::events::SolidCollisionEvent", "classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1events_1_1SolidCollisionEvent.html", null ],
-    [ "helios::core::ecs::SparseSetBase", "classhelios_1_1core_1_1ecs_1_1SparseSetBase.html", [
-      [ "helios::core::ecs::SparseSet< LeadComponent >", "classhelios_1_1core_1_1ecs_1_1SparseSet.html", null ],
-      [ "helios::core::ecs::SparseSet< T >", "classhelios_1_1core_1_1ecs_1_1SparseSet.html", null ]
+    [ "helios::ecs::SparseSetBase", "classhelios_1_1ecs_1_1SparseSetBase.html", [
+      [ "helios::ecs::SparseSet< LeadComponent >", "classhelios_1_1ecs_1_1SparseSet.html", null ],
+      [ "helios::ecs::SparseSet< T >", "classhelios_1_1ecs_1_1SparseSet.html", null ]
     ] ],
     [ "helios::engine::ecs::SparseSetBase", "classhelios_1_1engine_1_1ecs_1_1SparseSetBase.html", [
       [ "helios::engine::ecs::SparseSet< LeadComponent >", "classhelios_1_1engine_1_1ecs_1_1SparseSet.html", null ],
@@ -440,7 +423,7 @@ var hierarchy =
     [ "helios::util::io::StringFileReader", "classhelios_1_1util_1_1io_1_1StringFileReader.html", [
       [ "helios::util::io::BasicStringFileReader", "classhelios_1_1util_1_1io_1_1BasicStringFileReader.html", null ]
     ] ],
-    [ "helios::core::data::StrongId&lt; Tag, Underlying &gt;", "structhelios_1_1core_1_1data_1_1StrongId.html", null ],
+    [ "helios::core::types::StrongId&lt; Tag &gt;", "structhelios_1_1core_1_1types_1_1StrongId.html", null ],
     [ "helios::engine::runtime::world::System", "classhelios_1_1engine_1_1runtime_1_1world_1_1System.html", null ],
     [ "helios::engine::common::tags::SystemRole", "structhelios_1_1engine_1_1common_1_1tags_1_1SystemRole.html", null ],
     [ "helios::engine::runtime::world::types::SystemTypeId", "classhelios_1_1engine_1_1runtime_1_1world_1_1types_1_1SystemTypeId.html", null ],
@@ -466,7 +449,7 @@ var hierarchy =
     [ "helios::engine::modules::physics::collision::events::TriggerCollisionEvent", "classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1events_1_1TriggerCollisionEvent.html", null ],
     [ "helios::engine::mechanics::input::systems::TwinStickInputSystem", "classhelios_1_1engine_1_1mechanics_1_1input_1_1systems_1_1TwinStickInputSystem.html", null ],
     [ "helios::engine::runtime::messaging::command::TypedCommandBuffer&lt; CommandTypes &gt;", "classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedCommandBuffer.html", null ],
-    [ "helios::core::ecs::TypedHandleWorld&lt; TEntityManagers &gt;", "classhelios_1_1core_1_1ecs_1_1TypedHandleWorld.html", null ],
+    [ "helios::ecs::TypedHandleWorld&lt; TEntityManagers &gt;", "classhelios_1_1ecs_1_1TypedHandleWorld.html", null ],
     [ "helios::core::container::buffer::TypeIndexedDoubleBuffer&lt; Indexer &gt;", "classhelios_1_1core_1_1container_1_1buffer_1_1TypeIndexedDoubleBuffer.html", null ],
     [ "helios::core::container::buffer::TypeIndexedReadWriteBuffer&lt; Indexer &gt;", "classhelios_1_1core_1_1container_1_1buffer_1_1TypeIndexedReadWriteBuffer.html", null ],
     [ "helios::core::data::TypeIndexer&lt; Group &gt;", "classhelios_1_1core_1_1data_1_1TypeIndexer.html", null ],
@@ -492,17 +475,17 @@ var hierarchy =
     [ "helios::math::vec3&lt; T &gt;", "structhelios_1_1math_1_1vec3.html", null ],
     [ "helios::math::vec4&lt; T &gt;", "structhelios_1_1math_1_1vec4.html", null ],
     [ "helios::rendering::Vertex", "structhelios_1_1rendering_1_1Vertex.html", null ],
-    [ "helios::core::ecs::View&lt; TEntityManager, Components &gt;", "classhelios_1_1core_1_1ecs_1_1View.html", null ],
+    [ "helios::ecs::View&lt; TEntityManager, Components &gt;", "classhelios_1_1ecs_1_1View.html", null ],
     [ "helios::engine::ecs::View&lt; Components &gt;", "classhelios_1_1engine_1_1ecs_1_1View.html", null ],
     [ "helios::rendering::Viewport", "classhelios_1_1rendering_1_1Viewport.html", null ],
     [ "helios::engine::common::types::ViewportIdTag", "structhelios_1_1engine_1_1common_1_1types_1_1ViewportIdTag.html", null ],
     [ "helios::rendering::ViewportKey", "structhelios_1_1rendering_1_1ViewportKey.html", null ],
     [ "helios::rendering::ViewportSnapshot", "structhelios_1_1rendering_1_1ViewportSnapshot.html", null ],
     [ "helios::engine::builder::gameObject::builders::configs::WeaponConfig", "classhelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs_1_1WeaponConfig.html", null ],
-    [ "helios::window::Window", "classhelios_1_1window_1_1Window.html", [
+    [ "helios::window::Window", null, [
       [ "helios::ext::glfw::window::GLFWWindow", "classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow.html", null ]
     ] ],
-    [ "helios::window::WindowConfig", "structhelios_1_1window_1_1WindowConfig.html", [
+    [ "helios::window::WindowConfig", null, [
       [ "helios::ext::glfw::window::GLFWWindowConfig", "structhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindowConfig.html", null ]
     ] ],
     [ "helios::engine::mechanics::lifecycle::commands::WorldLifecycleCommand", "classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1commands_1_1WorldLifecycleCommand.html", null ],

@@ -115,51 +115,8 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-files" class="groupheader"><a id="files" name="files"></a>
 Files</h2></td></tr>
-<tr class="memitem:_5Fmodules_2Eixx" id="r__5Fmodules_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="__modules_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="__modules_8ixx.html">_modules.ixx</a></td></tr>
-<tr class="memitem:IsStrongIdCollisionResolverLike_2Eixx" id="r_IsStrongIdCollisionResolverLike_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="IsStrongIdCollisionResolverLike_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="IsStrongIdCollisionResolverLike_8ixx.html">IsStrongIdCollisionResolverLike.ixx</a></td></tr>
-<tr class="memdesc:IsStrongIdCollisionResolverLike_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for strong ID collision detection strategies. <br /></td></tr>
+<tr class="memitem:_5Fmodules_2Eixx" id="r__5Fmodules_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="core_2ecs_2concepts_2__modules_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_2ecs_2concepts_2__modules_8ixx.html">_modules.ixx</a></td></tr>
 </table>
-<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md64"></a>
-helios::core::ecs::concepts</h1>
-<p>Compile-time constraints for ECS extension points.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md65"></a>
-Overview</h1>
-<p>This submodule defines concepts that constrain the template parameters used across <span class="tt"><a class="el" href="namespacehelios_1_1core_1_1ecs.html" title="Generic, reusable ECS primitives.">helios.core.ecs</a></span>. They ensure that user-provided types satisfy the structural requirements expected by the generic ECS infrastructure at compile time.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md66"></a>
-Concepts</h1>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Concept  </th><th class="markdownTableHeadNone">Purpose  </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">IsStrongIdCollisionResolverLike</span>  </td><td class="markdownTableBodyNone">Constrains lookup strategies used by <span class="tt">EntityRegistry</span> for strong ID collision detection  </td></tr>
-</table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md67"></a>
-IsStrongIdCollisionResolverLike</h1>
-<p>Requires a type to provide <span class="tt">add</span>, <span class="tt">remove</span>, and <span class="tt">has</span> operations on <span class="tt">StrongId_t</span> values, each returning <span class="tt">bool</span>. Any type satisfying this concept can be used as the <span class="tt">TLookupStrategy</span> parameter of <span class="tt">EntityRegistry</span>.</p>
-<p><b>Satisfied by:</b></p><ul>
-<li><span class="tt">HashedLookupStrategy</span> — O(1) amortised, default strategy</li>
-<li><span class="tt">LinearLookupStrategy</span> — O(n) scan, suitable for small registries</li>
-</ul>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md68"></a>
-Related Modules</h1>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Module  </th><th class="markdownTableHeadNone">Purpose  </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classhelios_1_1core_1_1ecs_1_1EntityRegistry.html" title="Generic registry for creating and managing strongly-typed entity handles.">helios.core.ecs.EntityRegistry</a></span>  </td><td class="markdownTableBodyNone">Primary consumer of the lookup strategy concept  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classhelios_1_1core_1_1ecs_1_1HashedLookupStrategy.html" title="Lookup strategy using an unordered set for O(1) amortized lookups.">helios.core.ecs.HashedLookupStrategy</a></span>  </td><td class="markdownTableBodyNone">Hash-based strategy implementation  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy.html" title="Lookup strategy using a flat vector with linear scan.">helios.core.ecs.LinearLookupStrategy</a></span>  </td><td class="markdownTableBodyNone">Linear-scan strategy implementation  </td></tr>
-</table>
-<hr  />
- <details >
-<summary >
-Doxygen</summary>
-<p></p>
-<p></p>
-</details>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

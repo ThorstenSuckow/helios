@@ -50,14 +50,6 @@ var annotated_dup =
           ] ]
         ] ]
       ] ],
-      [ "app", "namespacehelios_1_1app.html", [
-        [ "controller", "namespacehelios_1_1app_1_1controller.html", [
-          [ "BasicWindowRenderingController", "classhelios_1_1app_1_1controller_1_1BasicWindowRenderingController.html", "classhelios_1_1app_1_1controller_1_1BasicWindowRenderingController" ],
-          [ "Controller", "classhelios_1_1app_1_1controller_1_1Controller.html", "classhelios_1_1app_1_1controller_1_1Controller" ],
-          [ "WindowRenderingController", "classhelios_1_1app_1_1controller_1_1WindowRenderingController.html", "classhelios_1_1app_1_1controller_1_1WindowRenderingController" ]
-        ] ],
-        [ "Application", "classhelios_1_1app_1_1Application.html", "classhelios_1_1app_1_1Application" ]
-      ] ],
       [ "core", "namespacehelios_1_1core.html", [
         [ "container", "namespacehelios_1_1core_1_1container.html", [
           [ "buffer", "namespacehelios_1_1core_1_1container_1_1buffer.html", [
@@ -75,30 +67,7 @@ var annotated_dup =
         ] ],
         [ "data", "namespacehelios_1_1core_1_1data.html", [
           [ "RuntimeHandle", "structhelios_1_1core_1_1data_1_1RuntimeHandle.html", "structhelios_1_1core_1_1data_1_1RuntimeHandle" ],
-          [ "StrongId", "structhelios_1_1core_1_1data_1_1StrongId.html", "structhelios_1_1core_1_1data_1_1StrongId" ],
           [ "TypeIndexer", "classhelios_1_1core_1_1data_1_1TypeIndexer.html", "classhelios_1_1core_1_1data_1_1TypeIndexer" ]
-        ] ],
-        [ "ecs", "namespacehelios_1_1core_1_1ecs.html", [
-          [ "components", "namespacehelios_1_1core_1_1ecs_1_1components.html", [
-            [ "Active", "structhelios_1_1core_1_1ecs_1_1components_1_1Active.html", null ],
-            [ "HierarchyComponent", "classhelios_1_1core_1_1ecs_1_1components_1_1HierarchyComponent.html", "classhelios_1_1core_1_1ecs_1_1components_1_1HierarchyComponent" ],
-            [ "Inactive", "structhelios_1_1core_1_1ecs_1_1components_1_1Inactive.html", null ]
-          ] ],
-          [ "ComponentOps", "structhelios_1_1core_1_1ecs_1_1ComponentOps.html", "structhelios_1_1core_1_1ecs_1_1ComponentOps" ],
-          [ "ComponentOpsRegistry", "classhelios_1_1core_1_1ecs_1_1ComponentOpsRegistry.html", "classhelios_1_1core_1_1ecs_1_1ComponentOpsRegistry" ],
-          [ "ComponentReflector", "classhelios_1_1core_1_1ecs_1_1ComponentReflector.html", "classhelios_1_1core_1_1ecs_1_1ComponentReflector" ],
-          [ "ComponentTypeId", "classhelios_1_1core_1_1ecs_1_1ComponentTypeId.html", "classhelios_1_1core_1_1ecs_1_1ComponentTypeId" ],
-          [ "Entity", "classhelios_1_1core_1_1ecs_1_1Entity.html", "classhelios_1_1core_1_1ecs_1_1Entity" ],
-          [ "EntityHandle", "structhelios_1_1core_1_1ecs_1_1EntityHandle.html", "structhelios_1_1core_1_1ecs_1_1EntityHandle" ],
-          [ "EntityManager", "classhelios_1_1core_1_1ecs_1_1EntityManager.html", "classhelios_1_1core_1_1ecs_1_1EntityManager" ],
-          [ "EntityRegistry", "classhelios_1_1core_1_1ecs_1_1EntityRegistry.html", "classhelios_1_1core_1_1ecs_1_1EntityRegistry" ],
-          [ "EntityResolver", "structhelios_1_1core_1_1ecs_1_1EntityResolver.html", "structhelios_1_1core_1_1ecs_1_1EntityResolver" ],
-          [ "HashedLookupStrategy", "classhelios_1_1core_1_1ecs_1_1HashedLookupStrategy.html", "classhelios_1_1core_1_1ecs_1_1HashedLookupStrategy" ],
-          [ "LinearLookupStrategy", "classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy.html", "classhelios_1_1core_1_1ecs_1_1LinearLookupStrategy" ],
-          [ "SparseSetBase", "classhelios_1_1core_1_1ecs_1_1SparseSetBase.html", "classhelios_1_1core_1_1ecs_1_1SparseSetBase" ],
-          [ "SparseSet", "classhelios_1_1core_1_1ecs_1_1SparseSet.html", "classhelios_1_1core_1_1ecs_1_1SparseSet" ],
-          [ "TypedHandleWorld", "classhelios_1_1core_1_1ecs_1_1TypedHandleWorld.html", "classhelios_1_1core_1_1ecs_1_1TypedHandleWorld" ],
-          [ "View", "classhelios_1_1core_1_1ecs_1_1View.html", "classhelios_1_1core_1_1ecs_1_1View" ]
         ] ],
         [ "memory", "namespacehelios_1_1core_1_1memory.html", [
           [ "ErasedUnique", "structhelios_1_1core_1_1memory_1_1ErasedUnique.html", "structhelios_1_1core_1_1memory_1_1ErasedUnique" ]
@@ -107,8 +76,35 @@ var annotated_dup =
           [ "Transform", "classhelios_1_1core_1_1spatial_1_1Transform.html", "classhelios_1_1core_1_1spatial_1_1Transform" ]
         ] ],
         [ "types", "namespacehelios_1_1core_1_1types.html", [
-          [ "no_init_t", "structhelios_1_1core_1_1types_1_1no__init__t.html", null ]
+          [ "no_init_t", "structhelios_1_1core_1_1types_1_1no__init__t.html", null ],
+          [ "StrongId", "structhelios_1_1core_1_1types_1_1StrongId.html", "structhelios_1_1core_1_1types_1_1StrongId" ]
         ] ]
+      ] ],
+      [ "ecs", "namespacehelios_1_1ecs.html", [
+        [ "components", "namespacehelios_1_1ecs_1_1components.html", [
+          [ "Active", "structhelios_1_1ecs_1_1components_1_1Active.html", null ],
+          [ "HierarchyComponent", "classhelios_1_1ecs_1_1components_1_1HierarchyComponent.html", "classhelios_1_1ecs_1_1components_1_1HierarchyComponent" ],
+          [ "Inactive", "structhelios_1_1ecs_1_1components_1_1Inactive.html", null ]
+        ] ],
+        [ "strategies", "namespacehelios_1_1ecs_1_1strategies.html", [
+          [ "HashedLookupStrategy", "classhelios_1_1ecs_1_1strategies_1_1HashedLookupStrategy.html", "classhelios_1_1ecs_1_1strategies_1_1HashedLookupStrategy" ],
+          [ "LinearLookupStrategy", "classhelios_1_1ecs_1_1strategies_1_1LinearLookupStrategy.html", "classhelios_1_1ecs_1_1strategies_1_1LinearLookupStrategy" ]
+        ] ],
+        [ "types", "namespacehelios_1_1ecs_1_1types.html", [
+          [ "ComponentOps", "structhelios_1_1ecs_1_1types_1_1ComponentOps.html", "structhelios_1_1ecs_1_1types_1_1ComponentOps" ],
+          [ "ComponentTypeId", "classhelios_1_1ecs_1_1types_1_1ComponentTypeId.html", "classhelios_1_1ecs_1_1types_1_1ComponentTypeId" ],
+          [ "EntityHandle", "structhelios_1_1ecs_1_1types_1_1EntityHandle.html", "structhelios_1_1ecs_1_1types_1_1EntityHandle" ]
+        ] ],
+        [ "ComponentOpsRegistry", "classhelios_1_1ecs_1_1ComponentOpsRegistry.html", "classhelios_1_1ecs_1_1ComponentOpsRegistry" ],
+        [ "ComponentReflector", "classhelios_1_1ecs_1_1ComponentReflector.html", "classhelios_1_1ecs_1_1ComponentReflector" ],
+        [ "Entity", "classhelios_1_1ecs_1_1Entity.html", "classhelios_1_1ecs_1_1Entity" ],
+        [ "EntityManager", "classhelios_1_1ecs_1_1EntityManager.html", "classhelios_1_1ecs_1_1EntityManager" ],
+        [ "EntityRegistry", "classhelios_1_1ecs_1_1EntityRegistry.html", "classhelios_1_1ecs_1_1EntityRegistry" ],
+        [ "EntityResolver", "structhelios_1_1ecs_1_1EntityResolver.html", "structhelios_1_1ecs_1_1EntityResolver" ],
+        [ "SparseSetBase", "classhelios_1_1ecs_1_1SparseSetBase.html", "classhelios_1_1ecs_1_1SparseSetBase" ],
+        [ "SparseSet", "classhelios_1_1ecs_1_1SparseSet.html", "classhelios_1_1ecs_1_1SparseSet" ],
+        [ "TypedHandleWorld", "classhelios_1_1ecs_1_1TypedHandleWorld.html", "classhelios_1_1ecs_1_1TypedHandleWorld" ],
+        [ "View", "classhelios_1_1ecs_1_1View.html", "classhelios_1_1ecs_1_1View" ]
       ] ],
       [ "engine", "namespacehelios_1_1engine.html", [
         [ "builder", "namespacehelios_1_1engine_1_1builder.html", [
@@ -665,14 +661,6 @@ var annotated_dup =
           [ "FrameStats", "structhelios_1_1engine_1_1tooling_1_1FrameStats.html", "structhelios_1_1engine_1_1tooling_1_1FrameStats" ]
         ] ]
       ] ],
-      [ "event", "namespacehelios_1_1event.html", [
-        [ "BasicEventManager", "classhelios_1_1event_1_1BasicEventManager.html", "classhelios_1_1event_1_1BasicEventManager" ],
-        [ "DequeEventQueue", "classhelios_1_1event_1_1DequeEventQueue.html", "classhelios_1_1event_1_1DequeEventQueue" ],
-        [ "Dispatcher", "classhelios_1_1event_1_1Dispatcher.html", "classhelios_1_1event_1_1Dispatcher" ],
-        [ "Event", "classhelios_1_1event_1_1Event.html", "classhelios_1_1event_1_1Event" ],
-        [ "EventManager", "classhelios_1_1event_1_1EventManager.html", "classhelios_1_1event_1_1EventManager" ],
-        [ "EventQueue", "classhelios_1_1event_1_1EventQueue.html", "classhelios_1_1event_1_1EventQueue" ]
-      ] ],
       [ "input", "namespacehelios_1_1input.html", [
         [ "gamepad", "namespacehelios_1_1input_1_1gamepad.html", [
           [ "DeadzoneStrategy", "classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy.html", "classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy" ],
@@ -776,21 +764,13 @@ var annotated_dup =
         [ "Colors", "structhelios_1_1util_1_1Colors.html", "structhelios_1_1util_1_1Colors" ],
         [ "Guid", "classhelios_1_1util_1_1Guid.html", "classhelios_1_1util_1_1Guid" ],
         [ "Random", "classhelios_1_1util_1_1Random.html", "classhelios_1_1util_1_1Random" ]
-      ] ],
-      [ "window", "namespacehelios_1_1window.html", [
-        [ "event", "namespacehelios_1_1window_1_1event.html", [
-          [ "FrameBufferResizeEvent", "classhelios_1_1window_1_1event_1_1FrameBufferResizeEvent.html", "classhelios_1_1window_1_1event_1_1FrameBufferResizeEvent" ],
-          [ "WindowEvent", "classhelios_1_1window_1_1event_1_1WindowEvent.html", "classhelios_1_1window_1_1event_1_1WindowEvent" ]
-        ] ],
-        [ "Window", "classhelios_1_1window_1_1Window.html", "classhelios_1_1window_1_1Window" ],
-        [ "WindowConfig", "structhelios_1_1window_1_1WindowConfig.html", "structhelios_1_1window_1_1WindowConfig" ]
       ] ]
     ] ],
     [ "std", null, [
       [ "hash&lt; helios::core::data::RuntimeHandle&lt; StrongIdentifier, RuntimeId &gt; &gt;", "structstd_1_1hash_3_01helios_1_1core_1_1data_1_1RuntimeHandle_3_01StrongIdentifier_00_01RuntimeId_01_4_01_4.html", "structstd_1_1hash_3_01helios_1_1core_1_1data_1_1RuntimeHandle_3_01StrongIdentifier_00_01RuntimeId_01_4_01_4" ],
-      [ "hash&lt; helios::core::data::StrongId&lt; Tag, Underlying &gt; &gt;", "structstd_1_1hash_3_01helios_1_1core_1_1data_1_1StrongId_3_01Tag_00_01Underlying_01_4_01_4.html", "structstd_1_1hash_3_01helios_1_1core_1_1data_1_1StrongId_3_01Tag_00_01Underlying_01_4_01_4" ],
-      [ "hash&lt; helios::core::ecs::ComponentTypeId&lt; THandle &gt; &gt;", "structstd_1_1hash_3_01helios_1_1core_1_1ecs_1_1ComponentTypeId_3_01THandle_01_4_01_4.html", "structstd_1_1hash_3_01helios_1_1core_1_1ecs_1_1ComponentTypeId_3_01THandle_01_4_01_4" ],
-      [ "hash&lt; helios::core::ecs::EntityHandle&lt; TStrongId &gt; &gt;", "structstd_1_1hash_3_01helios_1_1core_1_1ecs_1_1EntityHandle_3_01TStrongId_01_4_01_4.html", "structstd_1_1hash_3_01helios_1_1core_1_1ecs_1_1EntityHandle_3_01TStrongId_01_4_01_4" ],
+      [ "hash&lt; helios::core::types::StrongId&lt; Tag &gt; &gt;", "structstd_1_1hash_3_01helios_1_1core_1_1types_1_1StrongId_3_01Tag_01_4_01_4.html", "structstd_1_1hash_3_01helios_1_1core_1_1types_1_1StrongId_3_01Tag_01_4_01_4" ],
+      [ "hash&lt; helios::ecs::types::ComponentTypeId&lt; THandle &gt; &gt;", "structstd_1_1hash_3_01helios_1_1ecs_1_1types_1_1ComponentTypeId_3_01THandle_01_4_01_4.html", "structstd_1_1hash_3_01helios_1_1ecs_1_1types_1_1ComponentTypeId_3_01THandle_01_4_01_4" ],
+      [ "hash&lt; helios::ecs::types::EntityHandle&lt; TStrongId &gt; &gt;", "structstd_1_1hash_3_01helios_1_1ecs_1_1types_1_1EntityHandle_3_01TStrongId_01_4_01_4.html", "structstd_1_1hash_3_01helios_1_1ecs_1_1types_1_1EntityHandle_3_01TStrongId_01_4_01_4" ],
       [ "hash&lt; helios::engine::ecs::EntityHandle &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1ecs_1_1EntityHandle_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1ecs_1_1EntityHandle_01_4" ],
       [ "hash&lt; helios::engine::ecs::types::ComponentTypeId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1ecs_1_1types_1_1ComponentTypeId_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1ecs_1_1types_1_1ComponentTypeId_01_4" ],
       [ "hash&lt; helios::engine::mechanics::scoring::types::ScoreTypeId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1mechanics_1_1scoring_1_1types_1_1ScoreTypeId_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1mechanics_1_1scoring_1_1types_1_1ScoreTypeId_01_4" ],

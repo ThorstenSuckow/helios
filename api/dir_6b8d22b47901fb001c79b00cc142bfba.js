@@ -5,5 +5,5 @@ var dir_6b8d22b47901fb001c79b00cc142bfba =
     [ "systems", "dir_544ce1c1aa4b1192c48075f8adda6aff.html", "dir_544ce1c1aa4b1192c48075f8adda6aff" ],
     [ "types", "dir_650abbc39c12a4c8d60af18d3165a1f5.html", "dir_650abbc39c12a4c8d60af18d3165a1f5" ],
     [ "_module.ixx", "helios_2engine_2modules_2ui_2widgets_2__module_8ixx.html", null ],
-    [ "registry.ixx", "modules_2ui_2widgets_2registry_8ixx.html", "modules_2ui_2widgets_2registry_8ixx" ]
+    [ "registry.ixx", "engine_2modules_2ui_2widgets_2registry_8ixx.html", "engine_2modules_2ui_2widgets_2registry_8ixx" ]
 ];

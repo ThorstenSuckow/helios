@@ -6,5 +6,5 @@ var dir_b670ef0f6850d7b2892f5d96e38a12a4 =
     [ "types", "dir_73f976e4cfb02d3a04525286c98fa7b3.html", "dir_73f976e4cfb02d3a04525286c98fa7b3" ],
     [ "_module.ixx", "helios_2engine_2mechanics_2health_2__module_8ixx.html", null ],
     [ "HealthManager.ixx", "HealthManager_8ixx.html", "HealthManager_8ixx" ],
-    [ "registry.ixx", "mechanics_2health_2registry_8ixx.html", "mechanics_2health_2registry_8ixx" ]
+    [ "registry.ixx", "engine_2mechanics_2health_2registry_8ixx.html", "engine_2mechanics_2health_2registry_8ixx" ]
 ];

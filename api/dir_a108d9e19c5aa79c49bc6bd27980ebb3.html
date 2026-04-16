@@ -125,13 +125,13 @@ Files</h2></td></tr>
 <tr class="memdesc:GameObjectFactory_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factory for creating and cloning GameObjects with fluent configuration. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md120"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md129"></a>
 helios::engine::builder::gameObject</h1>
 <p>Factory and prototype classes for constructing GameObjects with fluent configuration.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md121"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md130"></a>
 Overview</h1>
 <p>This submodule contains the core factory pattern implementation for entity creation. The <span class="tt">GameObjectFactory</span> provides static methods for creating new entities or cloning existing ones, while <span class="tt">GameObjectPrototype</span> enables fluent, callback-based component configuration.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md122"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md131"></a>
 Key Classes</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -141,16 +141,16 @@ Key Classes</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">GameObjectPrototype</span>  </td><td class="markdownTableBodyNone">Internal builder holding all domain-specific builders  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md123"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md132"></a>
 API</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md124"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md133"></a>
 GameObjectFactory</h2>
 <div class="fragment"><div class="line"><span class="comment">// Create a new empty GameObject</span></div>
 <div class="line"><span class="keyword">auto</span> prototype = GameObjectFactory::gameObject();</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Clone an existing GameObject (copies all Cloneable components)</span></div>
 <div class="line"><span class="keyword">auto</span> prototype = GameObjectFactory::from(existingGameObject);</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md125"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md134"></a>
 GameObjectPrototype</h2>
 <div class="fragment"><div class="line">prototype</div>
 <div class="line">    .withMotion([](MotionBuilder&amp; b) { <span class="comment">/* configure motion */</span> })</div>
@@ -167,10 +167,10 @@ GameObjectPrototype</h2>
 <div class="line">    .withScoring([](ScoringBuilder&amp; b) { <span class="comment">/* configure scoring */</span> })</div>
 <div class="line">    .withObserver([](ObserverBuilder&amp; b) { <span class="comment">/* configure observers */</span> })</div>
 <div class="line">    .make(active);  <span class="comment">// Returns std::unique_ptr&lt;GameObject&gt;</span></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md126"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md135"></a>
 Cloning Behavior</h1>
 <p>When using <span class="tt">GameObjectFactory::from()</span>, only components implementing the <span class="tt">Cloneable</span> interface are copied. Components that add dependent components in <span class="tt">onAttach()</span> will have those dependencies resolved via <span class="tt">getOrAdd()</span> to prevent duplicates.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md127"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md136"></a>
 Related Modules</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">

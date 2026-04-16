@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="TypeDefs_8ixx" kind="file" language="C++">
+    <compoundname>TypeDefs.ixx</compoundname>
+    <includes local="no">cstdint</includes>
+    <includes local="no">limits</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>TypeDefs.ixx</label>
+        <link refid="TypeDefs_8ixx"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>cstdint</label>
+      </node>
+      <node id="3">
+        <label>limits</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespacehelios">helios</innernamespace>
+    <innernamespace refid="namespacehelios_1_1ecs">helios::ecs</innernamespace>
+    <innernamespace refid="namespacehelios_1_1ecs_1_1types">helios::ecs::types</innernamespace>
+    <briefdescription>
+<para>Core type definitions and tag types for the helios engine. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/**</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>@file<sp/>TypeDefs.ixx</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>@brief<sp/>Core<sp/>type<sp/>definitions<sp/>and<sp/>tag<sp/>types<sp/>for<sp/>the<sp/>helios<sp/>engine.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">module</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstdint&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;limits&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8ecs_8types_8TypeDefs" kindref="compound">helios.ecs.types.TypeDefs</ref>;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1ecs_1_1types" kindref="compound">helios::ecs::types</ref><sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Version<sp/>number<sp/>for<sp/>detecting<sp/>stale<sp/>entity<sp/>references.</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Each<sp/>entity<sp/>slot<sp/>in<sp/>an<sp/>EntityPool<sp/>has<sp/>an<sp/>associated<sp/>version<sp/>that<sp/>is</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>incremented<sp/>when<sp/>the<sp/>entity<sp/>is<sp/>removed.<sp/>EntityHandles<sp/>store<sp/>both<sp/>the</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>EntityId<sp/>and<sp/>VersionId,<sp/>allowing<sp/>the<sp/>pool<sp/>to<sp/>detect<sp/>when<sp/>a<sp/>handle</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>refers<sp/>to<sp/>a<sp/>recycled<sp/>slot.</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>A<sp/>valid<sp/>version<sp/>starts<sp/>at<sp/>1<sp/>(uninitialized<sp/>handles<sp/>have<sp/>version<sp/>0).</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>EntityHandle</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>EntityId</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>EntityPool</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30" refid="namespacehelios_1_1ecs_1_1types_1a58cc516088b7b594d813b712c9337c8a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1ecs_1_1types_1a58cc516088b7b594d813b712c9337c8a" kindref="member">VersionId</ref><sp/>=<sp/>uint32_t;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Unique<sp/>identifier<sp/>for<sp/>an<sp/>entity<sp/>within<sp/>an<sp/>EntityPool.</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Used<sp/>as<sp/>the<sp/>index<sp/>into<sp/>the<sp/>sparse<sp/>array<sp/>of<sp/>an<sp/>EntityPool.<sp/>Combined<sp/>with</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>a<sp/>VersionId<sp/>in<sp/>an<sp/>EntityHandle,<sp/>it<sp/>enables<sp/>safe<sp/>entity<sp/>references<sp/>that</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>detect<sp/>stale<sp/>handles<sp/>after<sp/>entity<sp/>removal.</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>EntityHandle</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>VersionId</highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>EntityPool</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43" refid="namespacehelios_1_1ecs_1_1types_1acf27c982c01d422a7605616c407ac7b0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1ecs_1_1types_1acf27c982c01d422a7605616c407ac7b0" kindref="member">EntityId</ref><sp/>=<sp/>uint32_t;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="46"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Sentinel<sp/>value<sp/>indicating<sp/>an<sp/>invalid<sp/>or<sp/>removed<sp/>sparse<sp/>index.</highlight></codeline>
+<codeline lineno="48"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="49"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Used<sp/>in<sp/>sparse-set<sp/>data<sp/>structures<sp/>(e.g.,<sp/>EntityPool,<sp/>GameObjectPool)<sp/>to<sp/>mark</highlight></codeline>
+<codeline lineno="50"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>slots<sp/>that<sp/>do<sp/>not<sp/>contain<sp/>valid<sp/>entity<sp/>references.<sp/>When<sp/>a<sp/>slot<sp/>contains<sp/>this</highlight></codeline>
+<codeline lineno="51"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>value,<sp/>the<sp/>corresponding<sp/>entity<sp/>has<sp/>been<sp/>removed<sp/>or<sp/>was<sp/>never<sp/>assigned.</highlight></codeline>
+<codeline lineno="52"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="53"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>EntityPool</highlight></codeline>
+<codeline lineno="54"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>GameObjectPool</highlight></codeline>
+<codeline lineno="55"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56" refid="namespacehelios_1_1ecs_1_1types_1a20b63e085149db90d08d3d4d8bdf3ddb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1ecs_1_1types_1a20b63e085149db90d08d3d4d8bdf3ddb" kindref="member">EntityTombstone</ref><sp/>=<sp/>std::numeric_limits&lt;size_t&gt;::max();</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/tmp/h/include/helios/ecs/types/TypeDefs.ixx"/>
+  </compounddef>
+</doxygen>

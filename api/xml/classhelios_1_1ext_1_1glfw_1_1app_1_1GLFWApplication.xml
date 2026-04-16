@@ -2,10 +2,10 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication" kind="class" language="C++" prot="public">
     <compoundname>helios::ext::glfw::app::GLFWApplication</compoundname>
-    <basecompoundref refid="classhelios_1_1app_1_1Application" prot="public" virt="non-virtual">helios::app::Application</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">helios::app::Application</basecompoundref>
     <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a0aaae554af910f78c815351f503227c5" prot="private" static="no" mutable="no">
-        <type><ref refid="classhelios_1_1window_1_1Window" kindref="compound">helios::window::Window</ref> *</type>
+        <type>helios::window::Window *</type>
         <definition>helios::window::Window* helios::ext::glfw::app::GLFWApplication::current_</definition>
         <argsstring></argsstring>
         <name>current_</name>
@@ -52,7 +52,7 @@
           <declname>inputManager</declname>
         </param>
         <param>
-          <type>std::unique_ptr&lt; <ref refid="classhelios_1_1event_1_1EventManager" kindref="compound">helios::event::EventManager</ref> &gt;</type>
+          <type>std::unique_ptr&lt; helios::event::EventManager &gt;</type>
           <declname>eventManager</declname>
         </param>
         <briefdescription>
@@ -89,33 +89,16 @@
         <inbodydescription>
         </inbodydescription>
         <location file="/tmp/h/include/ext/glfw/app/GLFWApplication.ixx" line="58" column="18" bodyfile="/tmp/h/include/ext/glfw/app/GLFWApplication.ixx" bodystart="58" bodyend="66"/>
-        <references refid="classhelios_1_1app_1_1Application_1a770ed54a97c68d5ac40542f3a702121a" compoundref="Application_8ixx" startline="98" endline="110">helios::app::Application::Application</references>
-        <references refid="classhelios_1_1app_1_1Application_1a6ea14c8bd591020cbd5d2baef551a804" compoundref="Application_8ixx" startline="234" endline="236">helios::app::Application::eventManager</references>
-        <references refid="classhelios_1_1app_1_1Application_1a11fe3ec9b45731268a0eff32ced9f06c" compoundref="Application_8ixx" startline="216" endline="218">helios::app::Application::inputManager</references>
-        <references refid="classhelios_1_1app_1_1Application_1a13d126308f1b5b61d9b87fc4dde57530" compoundref="Application_8ixx" startline="225" endline="227">helios::app::Application::renderingDevice</references>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a30d27364d7c703e81f2f963bb2189fd6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+      <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a30d27364d7c703e81f2f963bb2189fd6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
         <definition>void helios::ext::glfw::app::GLFWApplication::init</definition>
         <argsstring>() override</argsstring>
         <name>init</name>
         <qualifiedname>helios::ext::glfw::app::GLFWApplication::init</qualifiedname>
-        <reimplements refid="classhelios_1_1app_1_1Application_1a94b89541520f5b9e6e8f21c3f7ee1aa9">init</reimplements>
         <briefdescription>
-<para>Initializes the application.    </para>
         </briefdescription>
         <detaileddescription>
-<para>Performs any bootstrapping necessary for this application and provides an idiomatic entry point for APIs using this application. This method ensures that all controllers are initialized and subscribe to this application&apos;s event manager dispatcher.</para>
-<para><parameterlist kind="exception"><parameteritem>
-<parameternamelist>
-<parametername>std::runtime_error</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>If the application was already initialized.    </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -151,75 +134,39 @@
         <inbodydescription>
         </inbodydescription>
         <location file="/tmp/h/include/ext/glfw/app/GLFWApplication.ixx" line="98" column="47" bodyfile="/tmp/h/include/ext/glfw/app/GLFWApplication.ixx" bodystart="98" bodyend="131"/>
-        <references refid="classhelios_1_1app_1_1Application_1a91c2fa7bb451e75bfbed236e270f2207" compoundref="Application_8ixx" startline="46">helios::app::Application::logger_</references>
-        <references refid="classhelios_1_1app_1_1Application_1aa04eb0a14f12afe4323122a4698c04f7" compoundref="Application_8ixx" startline="56">helios::app::Application::renderingDevice_</references>
-        <references refid="classhelios_1_1app_1_1Application_1aedbc6395e86cec1e645d5fd093764fa0" compoundref="Application_8ixx" startline="71">helios::app::Application::windowList_</references>
         <referencedby refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a7f053a4162c99ce3219865cee668cd18" compoundref="GLFWApplication_8ixx" startline="137" endline="149">createWindow</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a7f053a4162c99ce3219865cee668cd18" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+      <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a7f053a4162c99ce3219865cee668cd18" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow" kindref="compound">helios::ext::glfw::window::GLFWWindow</ref> &amp;</type>
         <definition>helios::ext::glfw::window::GLFWWindow &amp; helios::ext::glfw::app::GLFWApplication::createWindow</definition>
         <argsstring>(std::unique_ptr&lt; helios::rendering::RenderTarget &gt; renderTarget, const helios::window::WindowConfig &amp;cfg) override</argsstring>
         <name>createWindow</name>
         <qualifiedname>helios::ext::glfw::app::GLFWApplication::createWindow</qualifiedname>
-        <reimplements refid="classhelios_1_1app_1_1Application_1a8cc35c9dddb4f715d7d5c2b5197ef0d4">createWindow</reimplements>
         <param>
           <type>std::unique_ptr&lt; <ref refid="classhelios_1_1rendering_1_1RenderTarget" kindref="compound">helios::rendering::RenderTarget</ref> &gt;</type>
           <declname>renderTarget</declname>
         </param>
         <param>
-          <type>const <ref refid="structhelios_1_1window_1_1WindowConfig" kindref="compound">helios::window::WindowConfig</ref> &amp;</type>
+          <type>const helios::window::WindowConfig &amp;</type>
           <declname>cfg</declname>
         </param>
         <briefdescription>
-<para>Creates the container for the native window and performs all necessary steps to properly initialize it.    </para>
         </briefdescription>
         <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>renderTarget</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Render target that wraps the framebuffer used by the window.</para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>cfg</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Window configuration defining properties such as title, dimensions, and hints.</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>Reference to the created window instance.</para>
-</simplesect>
-<parameterlist kind="exception"><parameteritem>
-<parameternamelist>
-<parametername>std::invalid_argument</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>If the configuration was invalid.    </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
         <location file="/tmp/h/include/ext/glfw/app/GLFWApplication.ixx" line="137" column="47" bodyfile="/tmp/h/include/ext/glfw/app/GLFWApplication.ixx" bodystart="137" bodyend="149"/>
         <references refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a2c1bfca7c426415f37fcefac7fc68b4d" compoundref="GLFWApplication_8ixx" startline="98" endline="131">createWindow</references>
-        <references refid="classhelios_1_1app_1_1Application_1a91c2fa7bb451e75bfbed236e270f2207" compoundref="Application_8ixx" startline="46">helios::app::Application::logger_</references>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1aec402bfa5500772acb4d47752e80fd3e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+      <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1aec402bfa5500772acb4d47752e80fd3e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
         <definition>void helios::ext::glfw::app::GLFWApplication::setCurrent</definition>
         <argsstring>(helios::window::Window &amp;win) override</argsstring>
         <name>setCurrent</name>
         <qualifiedname>helios::ext::glfw::app::GLFWApplication::setCurrent</qualifiedname>
-        <reimplements refid="classhelios_1_1app_1_1Application_1af98c4f879155bcbccf305b8018e7d884">setCurrent</reimplements>
         <param>
-          <type><ref refid="classhelios_1_1window_1_1Window" kindref="compound">helios::window::Window</ref> &amp;</type>
+          <type>helios::window::Window &amp;</type>
           <declname>win</declname>
         </param>
         <briefdescription>
@@ -250,26 +197,16 @@
         <inbodydescription>
         </inbodydescription>
         <location file="/tmp/h/include/ext/glfw/app/GLFWApplication.ixx" line="163" column="14" bodyfile="/tmp/h/include/ext/glfw/app/GLFWApplication.ixx" bodystart="163" bodyend="190"/>
-        <references refid="classhelios_1_1window_1_1Window_1aa79cbb2b38cc1418eba3b3bd3cfdaae4" compoundref="Window_8ixx" startline="153" endline="155">helios::window::Window::guid</references>
-        <references refid="classhelios_1_1app_1_1Application_1a3cd9e39b64d771f2bc795cbc8c255a33" compoundref="Application_8ixx" startline="192" endline="199">helios::app::Application::hasWindow</references>
-        <references refid="classhelios_1_1app_1_1Application_1a1a784b65ca2b1ce428b90d1be0728b0b" compoundref="Application_8ixx" startline="61">helios::app::Application::inputManager_</references>
-        <references refid="classhelios_1_1app_1_1Application_1a91c2fa7bb451e75bfbed236e270f2207" compoundref="Application_8ixx" startline="46">helios::app::Application::logger_</references>
-        <references refid="classhelios_1_1util_1_1Guid_1a42652f894bf300b8d3060a1d8352458c" compoundref="Guid_8ixx" startline="94" endline="96">helios::util::Guid::value</references>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a6faec11965b694e027225da937c52364" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
-        <type><ref refid="classhelios_1_1window_1_1Window" kindref="compound">helios::window::Window</ref> *</type>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a6faec11965b694e027225da937c52364" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>helios::window::Window *</type>
         <definition>helios::window::Window * helios::ext::glfw::app::GLFWApplication::current</definition>
         <argsstring>() const noexcept override</argsstring>
         <name>current</name>
         <qualifiedname>helios::ext::glfw::app::GLFWApplication::current</qualifiedname>
-        <reimplements refid="classhelios_1_1app_1_1Application_1a361bd11af60d329332662b5b5a940bb9">current</reimplements>
         <briefdescription>
-<para>Returns the currently focused window, or nullptr if none exists or no window is being treated as current.    </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>Pointer to the current window, or nullptr if none is active.    </para>
-</simplesect>
-</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -285,7 +222,6 @@
     <inheritancegraph>
       <node id="2">
         <label>helios::app::Application</label>
-        <link refid="classhelios_1_1app_1_1Application"/>
       </node>
       <node id="1">
         <label>helios::ext::glfw::app::GLFWApplication</label>
@@ -297,10 +233,6 @@
     <collaborationgraph>
       <node id="2">
         <label>helios::app::Application</label>
-        <link refid="classhelios_1_1app_1_1Application"/>
-        <childnode refid="3" relation="usage">
-          <edgelabel>logger_</edgelabel>
-        </childnode>
       </node>
       <node id="1">
         <label>helios::ext::glfw::app::GLFWApplication</label>
@@ -308,35 +240,17 @@
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="3">
-        <label>helios::util::log::Logger</label>
-        <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
-      </node>
     </collaborationgraph>
     <location file="/tmp/h/include/ext/glfw/app/GLFWApplication.ixx" line="36" column="5" bodyfile="/tmp/h/include/ext/glfw/app/GLFWApplication.ixx" bodystart="36" bodyend="199"/>
     <listofallmembers>
-      <member refid="classhelios_1_1app_1_1Application_1a7285d8f027a7cb17a31bf603fc84cc62" prot="public" virt="non-virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>addController</name></member>
-      <member refid="classhelios_1_1app_1_1Application_1a770ed54a97c68d5ac40542f3a702121a" prot="public" virt="non-virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>Application</name></member>
-      <member refid="classhelios_1_1app_1_1Application_1a2dfaeb4cd7c741b225bd968c827983d3" prot="protected" virt="non-virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>controllers_</name></member>
       <member refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a2c1bfca7c426415f37fcefac7fc68b4d" prot="public" virt="non-virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>createWindow</name></member>
-      <member refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a7f053a4162c99ce3219865cee668cd18" prot="public" virt="virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>createWindow</name></member>
-      <member refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a6faec11965b694e027225da937c52364" prot="public" virt="virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>current</name></member>
+      <member refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a7f053a4162c99ce3219865cee668cd18" prot="public" virt="non-virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>createWindow</name></member>
+      <member refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a6faec11965b694e027225da937c52364" prot="public" virt="non-virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>current</name></member>
       <member refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a0aaae554af910f78c815351f503227c5" prot="private" virt="non-virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>current_</name></member>
-      <member refid="classhelios_1_1app_1_1Application_1a6ea14c8bd591020cbd5d2baef551a804" prot="public" virt="non-virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>eventManager</name></member>
-      <member refid="classhelios_1_1app_1_1Application_1a6cbbd642405f8815ec1b5a58b7d27137" prot="protected" virt="non-virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>eventManager_</name></member>
       <member refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1ad50cfc2051b48c6c447df3b53b0734bd" prot="public" virt="non-virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>GLFWApplication</name></member>
       <member refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a017660898c54f7f291433f4090ade565" prot="private" virt="non-virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>glfwRaiiGuard_</name></member>
-      <member refid="classhelios_1_1app_1_1Application_1a3cd9e39b64d771f2bc795cbc8c255a33" prot="public" virt="non-virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>hasWindow</name></member>
-      <member refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a30d27364d7c703e81f2f963bb2189fd6" prot="public" virt="virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>init</name></member>
-      <member refid="classhelios_1_1app_1_1Application_1a60c02bedd6f7ad8ab0c486aa73c1983f" prot="protected" virt="non-virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>initialized_</name></member>
-      <member refid="classhelios_1_1app_1_1Application_1a11fe3ec9b45731268a0eff32ced9f06c" prot="public" virt="non-virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>inputManager</name></member>
-      <member refid="classhelios_1_1app_1_1Application_1a1a784b65ca2b1ce428b90d1be0728b0b" prot="protected" virt="non-virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>inputManager_</name></member>
-      <member refid="classhelios_1_1app_1_1Application_1a91c2fa7bb451e75bfbed236e270f2207" prot="protected" virt="non-virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>logger_</name></member>
-      <member refid="classhelios_1_1app_1_1Application_1a13d126308f1b5b61d9b87fc4dde57530" prot="public" virt="non-virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>renderingDevice</name></member>
-      <member refid="classhelios_1_1app_1_1Application_1aa04eb0a14f12afe4323122a4698c04f7" prot="protected" virt="non-virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>renderingDevice_</name></member>
-      <member refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1aec402bfa5500772acb4d47752e80fd3e" prot="public" virt="virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>setCurrent</name></member>
-      <member refid="classhelios_1_1app_1_1Application_1aedbc6395e86cec1e645d5fd093764fa0" prot="protected" virt="non-virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>windowList_</name></member>
-      <member refid="classhelios_1_1app_1_1Application_1aec579824c0704542d3f7d6c4f47851a1" prot="public" virt="virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>~Application</name></member>
+      <member refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a30d27364d7c703e81f2f963bb2189fd6" prot="public" virt="non-virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>init</name></member>
+      <member refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1aec402bfa5500772acb4d47752e80fd3e" prot="public" virt="non-virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>setCurrent</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

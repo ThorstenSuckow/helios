@@ -8,5 +8,5 @@ var dir_87b9f5c33f5a8f4d48db11d48f10a572 =
     [ "spatial", "dir_7002044952ee345c222d895bec1a9397.html", "dir_7002044952ee345c222d895bec1a9397" ],
     [ "ui", "dir_bf15dcce3b0eb2b2bde353446d930b9c.html", "dir_bf15dcce3b0eb2b2bde353446d930b9c" ],
     [ "_module.ixx", "helios_2engine_2modules_2__module_8ixx.html", null ],
-    [ "registry.ixx", "modules_2registry_8ixx.html", "modules_2registry_8ixx" ]
+    [ "registry.ixx", "engine_2modules_2registry_8ixx.html", "engine_2modules_2registry_8ixx" ]
 ];

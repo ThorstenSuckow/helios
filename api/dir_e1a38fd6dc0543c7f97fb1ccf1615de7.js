@@ -12,5 +12,5 @@ var dir_e1a38fd6dc0543c7f97fb1ccf1615de7 =
     [ "spawn", "dir_bbe960beed295ed1307a81c8b31ebd37.html", "dir_bbe960beed295ed1307a81c8b31ebd37" ],
     [ "timing", "dir_04e46b302a6aadc7f23a11997ed7852b.html", "dir_04e46b302a6aadc7f23a11997ed7852b" ],
     [ "_module.ixx", "helios_2engine_2mechanics_2__module_8ixx.html", null ],
-    [ "registry.ixx", "mechanics_2registry_8ixx.html", "mechanics_2registry_8ixx" ]
+    [ "registry.ixx", "engine_2mechanics_2registry_8ixx.html", "engine_2mechanics_2registry_8ixx" ]
 ];

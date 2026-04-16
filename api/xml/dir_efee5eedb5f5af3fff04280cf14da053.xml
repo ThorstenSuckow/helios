@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_efee5eedb5f5af3fff04280cf14da053" kind="dir">
+    <compoundname>components</compoundname>
+    <innerfile refid="helios_2ecs_2components_2__module_8ixx">helios/ecs/components/_module.ixx</innerfile>
+    <innerfile refid="ecs_2components_2Active_8ixx">ecs/components/Active.ixx</innerfile>
+    <innerfile refid="ecs_2components_2HierarchyComponent_8ixx">ecs/components/HierarchyComponent.ixx</innerfile>
+    <innerfile refid="ecs_2components_2Inactive_8ixx">ecs/components/Inactive.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_efee5eedb5f5af3fff04280cf14da053_1autotoc_md81">
+<title>helios::ecs::components</title><para>ECS core components for entity lifecycle and relationships.</para>
+</sect1>
+<sect1 id="dir_efee5eedb5f5af3fff04280cf14da053_1autotoc_md82">
+<title>Overview</title><para>This submodule provides fundamental components used by the ECS architecture itself, as opposed to game-specific components defined in mechanics or modules. It includes tag components for entity activation state as well as hierarchy management for parent-child entity graphs.</para>
+</sect1>
+<sect1 id="dir_efee5eedb5f5af3fff04280cf14da053_1autotoc_md83">
+<title>Components</title><para><table rows="4" cols="2"><row>
+<entry thead="yes"><para>Component  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>Active</computeroutput>  </para>
+</entry><entry thead="no"><para>Tag component marking an entity as active  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>Inactive</computeroutput>  </para>
+</entry><entry thead="no"><para>Tag component marking an entity as inactive  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>HierarchyComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Parent-child relationships for entity graphs  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_efee5eedb5f5af3fff04280cf14da053_1autotoc_md84">
+<title>Active / Inactive</title><para>Empty tag structs used to filter entities by activation state in views. Managed automatically by <computeroutput>Entity::setActive()</computeroutput>:</para>
+<para><itemizedlist>
+<listitem><para><computeroutput>setActive(true)</computeroutput> → adds <computeroutput>Active</computeroutput>, removes <computeroutput>Inactive</computeroutput>, calls <computeroutput>onActivate()</computeroutput></para>
+</listitem><listitem><para><computeroutput>setActive(false)</computeroutput> → adds <computeroutput>Inactive</computeroutput>, removes <computeroutput>Active</computeroutput>, calls <computeroutput>onDeactivate()</computeroutput></para>
+</listitem></itemizedlist>
+</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Query<sp/>only<sp/>active<sp/>entities</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>[entity,<sp/>health,<sp/>active]<sp/>:<sp/>gameWorld-&gt;view&lt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>HealthComponent,<sp/>Active</highlight></codeline>
+<codeline><highlight class="normal">&gt;().whereEnabled())<sp/>{<sp/>...<sp/>}</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_efee5eedb5f5af3fff04280cf14da053_1autotoc_md85">
+<title>HierarchyComponent</title><para>Enables entities to form tree structures where state changes propagate from parent to child entities.</para>
+<para><bold>Members:</bold><itemizedlist>
+<listitem><para><computeroutput>children_</computeroutput> – Child entity handles</para>
+</listitem><listitem><para><computeroutput>parent_</computeroutput> – Optional parent handle <linebreak/>
+</para>
+</listitem><listitem><para><computeroutput>isDirty_</computeroutput> – Signals pending hierarchy propagation</para>
+</listitem></itemizedlist>
+</para>
+<para><bold>Usage:</bold> <programlisting filename=".cpp"><codeline><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>hc<sp/>=<sp/>entity.add&lt;HierarchyComponent&gt;();</highlight></codeline>
+<codeline><highlight class="normal">hc-&gt;setParent(parentHandle);</highlight></codeline>
+<codeline><highlight class="normal">hc-&gt;addChild(childHandle);</highlight></codeline>
+<codeline><highlight class="normal">hc-&gt;markDirty();<sp/><sp/></highlight><highlight class="comment">//<sp/>Triggers<sp/>propagation<sp/>next<sp/>frame</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_efee5eedb5f5af3fff04280cf14da053_1autotoc_md86">
+<title>Related Modules</title><para><table rows="3" cols="2"><row>
+<entry thead="yes"><para>Module  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="classhelios_1_1ecs_1_1Entity" kindref="compound">helios.ecs.Entity</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>Manages <computeroutput>Active</computeroutput>/<computeroutput>Inactive</computeroutput> tags via <computeroutput>setActive()</computeroutput>  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>helios.ecs.systems</computeroutput>  </para>
+</entry><entry thead="no"><para>Systems that process ECS components  </para>
+</entry></row>
+</table>
+</para>
+<para><hruler/>
+ <details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/ecs/components/"/>
+  </compounddef>
+</doxygen>

@@ -124,13 +124,13 @@ Files</h2></td></tr>
 <tr class="memdesc:helios_2engine_2builder_2__module_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Module aggregation for <a class="el" href="namespacehelios_1_1engine_1_1builder.html" title="Fluent builder pattern for constructing GameObjects.">helios.engine.builder</a>. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md129"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md138"></a>
 helios::engine::builder</h1>
 <p>Fluent builder pattern implementation for constructing game entities in the helios engine.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md130"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md139"></a>
 Overview</h1>
 <p>This module provides a declarative, composable API for creating <span class="tt">GameObject</span> instances with their associated components. The builder pattern enables clean, readable entity construction while abstracting the complexity of component dependencies and initialization order.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md131"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md140"></a>
 Key Classes</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -140,12 +140,12 @@ Key Classes</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">GameObjectPrototype</span>  </td><td class="markdownTableBodyNone">Fluent builder for configuring entity components  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md132"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md141"></a>
 Submodules</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md133"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md142"></a>
 gameObject/</h2>
 <p>The main factory and prototype classes for GameObject construction.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md134"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md143"></a>
 gameObject/builders/</h2>
 <p>Domain-specific builders for different aspects of entity configuration:</p>
 <table class="markdownTable">
@@ -180,7 +180,7 @@ gameObject/builders/</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">ObserverBuilder</span>  </td><td class="markdownTableBodyNone">Data binding and observation  </td></tr>
 </table>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md135"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md144"></a>
 gameObject/builders/configs/</h2>
 <p>Fine-grained configuration classes used by builders:</p>
 <table class="markdownTable">
@@ -225,9 +225,9 @@ gameObject/builders/configs/</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">ObserverConfig</span>  </td><td class="markdownTableBodyNone">Data observation/binding  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md136"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md145"></a>
 Usage</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md137"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md146"></a>
 Creating a New GameObject</h2>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> player = GameObjectFactory::gameObject()</div>
 <div class="line">    .withMotion([](<span class="keyword">auto</span>&amp; motion) {</div>
@@ -251,7 +251,7 @@ Creating a New GameObject</h2>
 <div class="line">                 .layerId(PLAYER_LAYER);</div>
 <div class="line">    })</div>
 <div class="line">    .make(<span class="keyword">true</span>); <span class="comment">// active = true</span></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md138"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md147"></a>
 Cloning an Existing GameObject</h2>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> enemyTemplate = createEnemyTemplate();</div>
 <div class="line"><span class="keyword">auto</span> enemy = GameObjectFactory::from(enemyTemplate.get())</div>
@@ -260,7 +260,7 @@ Cloning an Existing GameObject</h2>
 <div class="line">                 .translate(spawnPosition);</div>
 <div class="line">    })</div>
 <div class="line">    .make(<span class="keyword">true</span>);</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md139"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md148"></a>
 Architecture</h1>
 <div class="fragment"><div class="line">┌─────────────────────────────────────────────────────────────────┐</div>
 <div class="line">│                     GameObjectFactory                           │</div>
@@ -283,11 +283,11 @@ Architecture</h1>
 <div class="line">│  │  └─────────────────────────────────────────────────────┘  │  │</div>
 <div class="line">│  └───────────────────────────────────────────────────────────┘  │</div>
 <div class="line">└─────────────────────────────────────────────────────────────────┘</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md140"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md149"></a>
 Design Principles</h1>
 <p>The builder module follows these principles:</p>
 <p>1. <b>Fluent Interface</b>: Method chaining for readable configuration. 2. <b>Callback-Based Configuration</b>: Builders are configured via lambdas, allowing scoped access. 3. <b>Automatic Dependencies</b>: Configs automatically add required dependent components. 4. <b>Separation of Concerns</b>: Each builder focuses on a single domain (motion, rendering, etc.). 5. <b>Cloning Support</b>: <span class="tt">GameObjectFactory::from()</span> creates new entities based on existing templates.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md141"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md150"></a>
 Related Modules</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">

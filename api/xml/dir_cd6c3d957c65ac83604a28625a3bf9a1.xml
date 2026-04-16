@@ -1,0 +1,289 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_cd6c3d957c65ac83604a28625a3bf9a1" kind="dir">
+    <compoundname>ecs</compoundname>
+    <innerdir refid="dir_efee5eedb5f5af3fff04280cf14da053">components</innerdir>
+    <innerdir refid="dir_1295c110505104bb1709dfaac30141b3">concepts</innerdir>
+    <innerdir refid="dir_22ae9eeafbd2bcd4d4a1a792396a58c8">strategies</innerdir>
+    <innerdir refid="dir_fa74088fa3edbc5b26289785a770ba4d">types</innerdir>
+    <innerfile refid="helios_2ecs_2__module_8ixx">helios/ecs/_module.ixx</innerfile>
+    <innerfile refid="ecs_2ComponentOpsRegistry_8ixx">ecs/ComponentOpsRegistry.ixx</innerfile>
+    <innerfile refid="ecs_2ComponentReflector_8ixx">ecs/ComponentReflector.ixx</innerfile>
+    <innerfile refid="Entity_8ixx">Entity.ixx</innerfile>
+    <innerfile refid="ecs_2EntityManager_8ixx">ecs/EntityManager.ixx</innerfile>
+    <innerfile refid="ecs_2EntityRegistry_8ixx">ecs/EntityRegistry.ixx</innerfile>
+    <innerfile refid="ecs_2EntityResolver_8ixx">ecs/EntityResolver.ixx</innerfile>
+    <innerfile refid="ecs_2registry_8ixx">ecs/registry.ixx</innerfile>
+    <innerfile refid="ecs_2SparseSet_8ixx">ecs/SparseSet.ixx</innerfile>
+    <innerfile refid="TypedHandleWorld_8ixx">TypedHandleWorld.ixx</innerfile>
+    <innerfile refid="ecs_2View_8ixx">ecs/View.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_cd6c3d957c65ac83604a28625a3bf9a1_1autotoc_md94">
+<title>helios::ecs</title><para>Generic, reusable ECS primitives shared across the engine.</para>
+</sect1>
+<sect1 id="dir_cd6c3d957c65ac83604a28625a3bf9a1_1autotoc_md95">
+<title>Overview</title><para>This module provides the complete set of building blocks for entity management, component storage, querying and lifecycle reflection. All types are <bold>policy-based templates</bold> that can be specialised for different domains (e.g. game entities, UI widgets, audio sources).</para>
+<para>The classes were previously located in <computeroutput><ref refid="namespacehelios_1_1ecs" kindref="compound">helios.ecs</ref></computeroutput> (which is now retained only for backward compatibility) and have been generalised through template parameters so they are independent of any specific engine subsystem.</para>
+</sect1>
+<sect1 id="dir_cd6c3d957c65ac83604a28625a3bf9a1_1autotoc_md96">
+<title>Module Structure</title><para>The <computeroutput><ref refid="namespacehelios_1_1ecs" kindref="compound">helios.ecs</ref></computeroutput> module exports the following types:</para>
+<sect2 id="dir_cd6c3d957c65ac83604a28625a3bf9a1_1autotoc_md97">
+<title>Entity Management</title><para><table rows="7" cols="3"><row>
+<entry thead="yes"><para>Class  </para>
+</entry><entry thead="yes"><para>Template Parameters  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>EntityHandle&lt;TStrongId&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>TStrongId</computeroutput> — domain-specific strong ID type  </para>
+</entry><entry thead="no"><para>Versioned, strongly-typed entity reference  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>EntityRegistry&lt;TStrongId, TLookupStrategy, TAllowRemoval, TCapacity&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para>Strong ID type, lookup strategy, removal policy, capacity  </para>
+</entry><entry thead="no"><para>Handle allocation, version tracking, validation  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>EntityManager&lt;THandle, TEntityRegistry, TCapacity&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para>Handle type, registry type, capacity  </para>
+</entry><entry thead="no"><para>Unified entity creation and component storage  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>Entity&lt;THandle, TEntityManager&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para>Handle type, manager type  </para>
+</entry><entry thead="no"><para>Lightweight entity facade (~16 bytes, pass-by-value)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>EntityResolver&lt;TEntityManager&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para>Manager type  </para>
+</entry><entry thead="no"><para>Callable for resolving handles to Entity wrappers  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>TypedHandleWorld&lt;TEntityManagers...&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para>One or more EntityManager specialisations  </para>
+</entry><entry thead="no"><para>Multi-domain world with compile-time handle dispatch  </para>
+</entry></row>
+</table>
+</para>
+</sect2>
+<sect2 id="dir_cd6c3d957c65ac83604a28625a3bf9a1_1autotoc_md98">
+<title>Component Infrastructure</title><para><table rows="5" cols="3"><row>
+<entry thead="yes"><para>Class  </para>
+</entry><entry thead="yes"><para>Template Parameters  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ComponentTypeId&lt;THandle&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para>Handle type (scoping)  </para>
+</entry><entry thead="no"><para>Compile-time unique type identifier for components  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ComponentOps</computeroutput>  </para>
+</entry><entry thead="no"><para><emphasis>(none)</emphasis>  </para>
+</entry><entry thead="no"><para>Type-erased function pointers for lifecycle callbacks  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ComponentOpsRegistry&lt;THandle&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para>Handle type (scoping)  </para>
+</entry><entry thead="no"><para>Global O(1) registry mapping type IDs to ComponentOps  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ComponentReflector&lt;THandle, TEntityManager&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para>Handle type, manager type  </para>
+</entry><entry thead="no"><para>Compile-time trait-based lifecycle registration  </para>
+</entry></row>
+</table>
+</para>
+</sect2>
+<sect2 id="dir_cd6c3d957c65ac83604a28625a3bf9a1_1autotoc_md99">
+<title>Storage &amp; Iteration</title><para><table rows="4" cols="3"><row>
+<entry thead="yes"><para>Class  </para>
+</entry><entry thead="yes"><para>Template Parameters  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>SparseSet&lt;T&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para>Element type  </para>
+</entry><entry thead="no"><para>Generic O(1) entity-keyed storage  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>SparseSetBase</computeroutput>  </para>
+</entry><entry thead="no"><para><emphasis>(none)</emphasis>  </para>
+</entry><entry thead="no"><para>Type-erased base for polymorphic sparse set access  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>View&lt;TEntityManager, Components...&gt;</computeroutput>  </para>
+</entry><entry thead="no"><para>Manager type, component types  </para>
+</entry><entry thead="no"><para>Lightweight component-based entity queries  </para>
+</entry></row>
+</table>
+</para>
+</sect2>
+<sect2 id="dir_cd6c3d957c65ac83604a28625a3bf9a1_1autotoc_md100">
+<title>Lookup Strategies</title><para><table rows="3" cols="5"><row>
+<entry thead="yes"><para>Strategy  </para>
+</entry><entry thead="yes"><para>Lookup  </para>
+</entry><entry thead="yes"><para>Insertion  </para>
+</entry><entry thead="yes"><para>Removal  </para>
+</entry><entry thead="yes"><para>Use Case  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>HashedLookupStrategy</computeroutput>  </para>
+</entry><entry thead="no"><para>O(1) avg  </para>
+</entry><entry thead="no"><para>O(1) avg  </para>
+</entry><entry thead="no"><para>O(1) avg  </para>
+</entry><entry thead="no"><para>Default — large registries  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>LinearLookupStrategy</computeroutput>  </para>
+</entry><entry thead="no"><para>O(n)  </para>
+</entry><entry thead="no"><para>O(n)  </para>
+</entry><entry thead="no"><para>O(1)  </para>
+</entry><entry thead="no"><para>Small registries  </para>
+</entry></row>
+</table>
+</para>
+</sect2>
+<sect2 id="dir_cd6c3d957c65ac83604a28625a3bf9a1_1autotoc_md101">
+<title>Traits (Compile-Time Concepts)</title><para><table rows="7" cols="3"><row>
+<entry thead="yes"><para>Trait  </para>
+</entry><entry thead="yes"><para>Required Method(s)  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>HasOnAcquire</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>onAcquire()</computeroutput>  </para>
+</entry><entry thead="no"><para>Pool acquisition callback  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>HasOnRelease</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>onRelease()</computeroutput>  </para>
+</entry><entry thead="no"><para>Pool release callback  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>HasOnRemove</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>onRemove() → bool</computeroutput>  </para>
+</entry><entry thead="no"><para>Removal interception  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>HasToggleable</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>enable()</computeroutput>, <computeroutput>disable()</computeroutput>  </para>
+</entry><entry thead="no"><para>Component enable/disable  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>HasClone</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>onClone(const T&amp;)</computeroutput>  </para>
+</entry><entry thead="no"><para>Post-copy initialisation  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>HasActivatable</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>onActivate()</computeroutput>, <computeroutput>onDeactivate()</computeroutput>  </para>
+</entry><entry thead="no"><para>Entity activation response  </para>
+</entry></row>
+</table>
+</para>
+</sect2>
+</sect1>
+<sect1 id="dir_cd6c3d957c65ac83604a28625a3bf9a1_1autotoc_md102">
+<title>Template Parameter Overview</title><para>The move from <computeroutput><ref refid="namespacehelios_1_1engine_1_1ecs" kindref="compound">helios.engine.ecs</ref></computeroutput> to <computeroutput><ref refid="namespacehelios_1_1ecs" kindref="compound">helios.ecs</ref></computeroutput> introduced the following <bold>new</bold> template parameters:</para>
+<para><table rows="8" cols="3"><row>
+<entry thead="yes"><para>Parameter  </para>
+</entry><entry thead="yes"><para>Used In  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>TStrongId</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>EntityHandle</computeroutput>, <computeroutput>EntityRegistry</computeroutput>  </para>
+</entry><entry thead="no"><para>Domain-specific strong ID type satisfying <computeroutput>IsStrongIdLike</computeroutput>  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>THandle</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>EntityManager</computeroutput>, <computeroutput>Entity</computeroutput>, <computeroutput>ComponentTypeId</computeroutput>, <computeroutput>ComponentOpsRegistry</computeroutput>, <computeroutput>ComponentReflector</computeroutput>  </para>
+</entry><entry thead="no"><para>The concrete <computeroutput>EntityHandle&lt;TStrongId&gt;</computeroutput> specialisation, scoping type IDs and ops per domain  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>TEntityRegistry</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>EntityManager</computeroutput>  </para>
+</entry><entry thead="no"><para>The concrete <computeroutput>EntityRegistry</computeroutput> specialisation used for handle allocation  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>TEntityManager</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>Entity</computeroutput>, <computeroutput>View</computeroutput>, <computeroutput>EntityResolver</computeroutput>, <computeroutput>ComponentReflector</computeroutput>  </para>
+</entry><entry thead="no"><para>The concrete <computeroutput>EntityManager</computeroutput> specialisation providing component storage  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>TLookupStrategy</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>EntityRegistry</computeroutput>  </para>
+</entry><entry thead="no"><para>Pluggable collision detection strategy for strong IDs  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>TAllowRemoval</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>EntityRegistry</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>bool</computeroutput> policy — <computeroutput>false</computeroutput> disables <computeroutput>destroy()</computeroutput> at compile time  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>TCapacity</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>EntityRegistry</computeroutput>, <computeroutput>EntityManager</computeroutput>  </para>
+</entry><entry thead="no"><para>Default initial capacity hint  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_cd6c3d957c65ac83604a28625a3bf9a1_1autotoc_md103">
+<title>TypedHandleWorld</title><para><computeroutput>TypedHandleWorld&lt;TEntityManagers...&gt;</computeroutput> is a <bold>multi-domain entity world</bold> that holds one <computeroutput>EntityManager</computeroutput> per domain inside a <computeroutput>std::tuple</computeroutput>. The handle type of each manager serves as a compile-time key: calling <computeroutput>world.addEntity&lt;MyHandle&gt;()</computeroutput> selects the correct manager automatically.</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="keyword">using<sp/></highlight><highlight class="normal">GameHandle<sp/>=<sp/>EntityHandle&lt;GameStrongId&gt;;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">UiHandle<sp/><sp/><sp/>=<sp/>EntityHandle&lt;UiStrongId&gt;;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">GameEM<sp/>=<sp/>EntityManager&lt;GameHandle,<sp/>GameRegistry,<sp/>4096&gt;;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">UiEM<sp/><sp/><sp/>=<sp/>EntityManager&lt;UiHandle,<sp/><sp/><sp/>UiRegistry,<sp/><sp/><sp/>512&gt;;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">TypedHandleWorld&lt;GameEM,<sp/>UiEM&gt;<sp/>world;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>player<sp/>=<sp/>world.addEntity&lt;GameHandle&gt;();<sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>→<sp/>GameEM</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>button<sp/>=<sp/>world.addEntity&lt;UiHandle&gt;();<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>→<sp/>UiEM</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_cd6c3d957c65ac83604a28625a3bf9a1_1autotoc_md104">
+<title>Quick Start</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8ecs" kindref="compound">helios.ecs</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>1.<sp/>Define<sp/>domain<sp/>types</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">MyStrongId<sp/>{<sp/></highlight><highlight class="comment">/*<sp/>...<sp/>*/</highlight><highlight class="normal"><sp/>};</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Handle<sp/><sp/><sp/>=<sp/><ref refid="structhelios_1_1ecs_1_1types_1_1EntityHandle" kindref="compound">helios::ecs::types::EntityHandle&lt;MyStrongId&gt;</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Registry<sp/>=<sp/><ref refid="classhelios_1_1ecs_1_1EntityRegistry" kindref="compound">helios::ecs::EntityRegistry&lt;MyStrongId&gt;</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Manager<sp/><sp/>=<sp/><ref refid="classhelios_1_1ecs_1_1EntityManager" kindref="compound">helios::ecs::EntityManager&lt;Handle, Registry, 1024&gt;</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>2.<sp/>Create<sp/>manager<sp/>and<sp/>entity</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">Manager<sp/>em;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>handle<sp/>=<sp/>em.<ref refid="classhelios_1_1ecs_1_1EntityManager_1aab954201f74e12cf29d2b961c8708a2f" kindref="member">create</ref>();</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>3.<sp/>Attach<sp/>components</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>transform<sp/>=<sp/>em.emplace&lt;TransformComponent&gt;(handle,<sp/>position);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>4.<sp/>Use<sp/>the<sp/>Entity<sp/>facade</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classhelios_1_1ecs_1_1Entity" kindref="compound">helios::ecs::Entity&lt;Handle, Manager&gt;</ref><sp/>entity{handle,<sp/>&amp;em};</highlight></codeline>
+<codeline><highlight class="normal">entity.<ref refid="classhelios_1_1ecs_1_1Entity_1a6d53d9ccd082d76aff6870f4fb83db36" kindref="member">add</ref>&lt;HealthComponent&gt;(100.0f);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>5.<sp/>Iterate<sp/>via<sp/>View</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>[e,<sp/>t,<sp/>v]<sp/>:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1ecs_1_1View" kindref="compound">helios::ecs::View&lt;Manager, TransformComponent, VelocityComponent&gt;</ref>(&amp;em))<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>process</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_cd6c3d957c65ac83604a28625a3bf9a1_1autotoc_md105">
+<title>See Also</title><para><itemizedlist>
+<listitem><para>Engine ECS — backward-compatible wrappers (<computeroutput>GameObject</computeroutput>, etc.)</para>
+</listitem><listitem><para><ulink url="../types.ixx">Core Types</ulink> — <computeroutput>EntityId</computeroutput>, <computeroutput>VersionId</computeroutput>, <computeroutput>EntityTombstone</computeroutput>, <computeroutput>StrongId_t</computeroutput></para>
+</listitem></itemizedlist>
+</para>
+<para><hruler/>
+ <details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/ecs/"/>
+  </compounddef>
+</doxygen>

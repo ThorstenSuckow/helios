@@ -126,8 +126,8 @@ Files</h2></td></tr>
 <tr class="memdesc:helios_2engine_2mechanics_2scoring_2__module_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Module facade for the scoring system. <br /></td></tr>
 <tr class="memitem:MaxScorePoolSnapshot_2Eixx" id="r_MaxScorePoolSnapshot_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="MaxScorePoolSnapshot_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MaxScorePoolSnapshot_8ixx.html">MaxScorePoolSnapshot.ixx</a></td></tr>
 <tr class="memdesc:MaxScorePoolSnapshot_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Immutable snapshot of a ScorePool's high score state. <br /></td></tr>
-<tr class="memitem:registry_2Eixx" id="r_registry_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="mechanics_2scoring_2registry_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mechanics_2scoring_2registry_8ixx.html">registry.ixx</a></td></tr>
-<tr class="memdesc:mechanics_2scoring_2registry_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Component registration for scoring module. <br /></td></tr>
+<tr class="memitem:registry_2Eixx" id="r_registry_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="engine_2mechanics_2scoring_2registry_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="engine_2mechanics_2scoring_2registry_8ixx.html">registry.ixx</a></td></tr>
+<tr class="memdesc:engine_2mechanics_2scoring_2registry_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Component registration for scoring module. <br /></td></tr>
 <tr class="memitem:ScorePool_2Eixx" id="r_ScorePool_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="ScorePool_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ScorePool_8ixx.html">ScorePool.ixx</a></td></tr>
 <tr class="memdesc:ScorePool_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Container for accumulated scores by type. <br /></td></tr>
 <tr class="memitem:ScorePoolManager_2Eixx" id="r_ScorePoolManager_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="ScorePoolManager_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ScorePoolManager_8ixx.html">ScorePoolManager.ixx</a></td></tr>
@@ -136,11 +136,11 @@ Files</h2></td></tr>
 <tr class="memdesc:ScorePoolSnapshot_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Immutable snapshot of a score pool's state. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md386"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md395"></a>
 helios::engine::mechanics::scoring</h1>
 <p>Score management and tracking system for game mechanics.</p>
 <p>This module provides components, systems, and infrastructure for tracking and managing scores in the helios engine. It supports multiple score pools (e.g., per-player), score types (e.g., kill rewards), and integrates with the combat and UI systems.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md387"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md396"></a>
 Submodules</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -154,7 +154,7 @@ Submodules</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">types/</span>  </td><td class="markdownTableBodyNone">Score data types and value classes  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md388"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md397"></a>
 Key Classes</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -166,7 +166,7 @@ Key Classes</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">ScorePoolSnapshot</span>  </td><td class="markdownTableBodyNone">Immutable snapshot of pool state  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md389"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md398"></a>
 Architecture</h1>
 <p>The scoring system follows a command-based architecture:</p>
 <p>1. <b>Combat events</b> trigger <span class="tt">UpdateScoreCommand</span> via <span class="tt">CombatScoringSystem</span> 2. <b>Commands</b> are dispatched to <span class="tt">ScorePoolManager</span> 3. <b>Scores</b> are accumulated in <span class="tt">ScorePool</span> instances 4. <b>UI</b> observes pools via <span class="tt">ScoreObserverComponent</span> + <span class="tt">ScoreObserverSystem</span></p>

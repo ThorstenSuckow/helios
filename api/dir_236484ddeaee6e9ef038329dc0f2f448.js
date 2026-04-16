@@ -6,5 +6,5 @@ var dir_236484ddeaee6e9ef038329dc0f2f448 =
     [ "types", "dir_37a029dcaa1a76caf2ff39f24d0096d4.html", "dir_37a029dcaa1a76caf2ff39f24d0096d4" ],
     [ "_module.ixx", "helios_2engine_2modules_2physics_2collision_2__module_8ixx.html", null ],
     [ "Bounds.ixx", "Bounds_8ixx.html", "Bounds_8ixx" ],
-    [ "registry.ixx", "modules_2physics_2collision_2registry_8ixx.html", "modules_2physics_2collision_2registry_8ixx" ]
+    [ "registry.ixx", "engine_2modules_2physics_2collision_2registry_8ixx.html", "engine_2modules_2physics_2collision_2registry_8ixx" ]
 ];

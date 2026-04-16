@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="helios_2ecs_2README_8md" kind="file" language="Markdown">
+    <compoundname>helios/ecs/README.md</compoundname>
+    <innernamespace refid="namespacehelios_1_1ecs">helios::ecs</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>helios::ecs</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Generic,<sp/>reusable<sp/>ECS<sp/>primitives<sp/>shared<sp/>across<sp/>the<sp/>engine.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>the<sp/>complete<sp/>set<sp/>of<sp/>building<sp/>blocks<sp/>for<sp/>entity<sp/>management,</highlight></codeline>
+<codeline><highlight class="normal">component<sp/>storage,<sp/>querying<sp/>and<sp/>lifecycle<sp/>reflection.<sp/>All<sp/>types<sp/>are</highlight></codeline>
+<codeline><highlight class="normal">**policy-based<sp/>templates**<sp/>that<sp/>can<sp/>be<sp/>specialised<sp/>for<sp/>different<sp/>domains</highlight></codeline>
+<codeline><highlight class="normal">(e.g.<sp/>game<sp/>entities,<sp/>UI<sp/>widgets,<sp/>audio<sp/>sources).</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>classes<sp/>were<sp/>previously<sp/>located<sp/>in<sp/>`helios.ecs`<sp/>(which<sp/>is<sp/>now</highlight></codeline>
+<codeline><highlight class="normal">retained<sp/>only<sp/>for<sp/>backward<sp/>compatibility)<sp/>and<sp/>have<sp/>been<sp/>generalised<sp/>through</highlight></codeline>
+<codeline><highlight class="normal">template<sp/>parameters<sp/>so<sp/>they<sp/>are<sp/>independent<sp/>of<sp/>any<sp/>specific<sp/>engine<sp/>subsystem.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Module<sp/>Structure</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>`helios.ecs`<sp/>module<sp/>exports<sp/>the<sp/>following<sp/>types:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Entity<sp/>Management</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Template<sp/>Parameters<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|---------------------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`EntityHandle&lt;TStrongId&gt;`<sp/>|<sp/>`TStrongId`<sp/>—<sp/>domain-specific<sp/>strong<sp/>ID<sp/>type<sp/>|<sp/>Versioned,<sp/>strongly-typed<sp/>entity<sp/>reference<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`EntityRegistry&lt;TStrongId,<sp/>TLookupStrategy,<sp/>TAllowRemoval,<sp/>TCapacity&gt;`<sp/>|<sp/>Strong<sp/>ID<sp/>type,<sp/>lookup<sp/>strategy,<sp/>removal<sp/>policy,<sp/>capacity<sp/>|<sp/>Handle<sp/>allocation,<sp/>version<sp/>tracking,<sp/>validation<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`EntityManager&lt;THandle,<sp/>TEntityRegistry,<sp/>TCapacity&gt;`<sp/>|<sp/>Handle<sp/>type,<sp/>registry<sp/>type,<sp/>capacity<sp/>|<sp/>Unified<sp/>entity<sp/>creation<sp/>and<sp/>component<sp/>storage<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`Entity&lt;THandle,<sp/>TEntityManager&gt;`<sp/>|<sp/>Handle<sp/>type,<sp/>manager<sp/>type<sp/>|<sp/>Lightweight<sp/>entity<sp/>facade<sp/>(~16<sp/>bytes,<sp/>pass-by-value)<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`EntityResolver&lt;TEntityManager&gt;`<sp/>|<sp/>Manager<sp/>type<sp/>|<sp/>Callable<sp/>for<sp/>resolving<sp/>handles<sp/>to<sp/>Entity<sp/>wrappers<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`TypedHandleWorld&lt;TEntityManagers...&gt;`<sp/>|<sp/>One<sp/>or<sp/>more<sp/>EntityManager<sp/>specialisations<sp/>|<sp/>Multi-domain<sp/>world<sp/>with<sp/>compile-time<sp/>handle<sp/>dispatch<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Component<sp/>Infrastructure</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Template<sp/>Parameters<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|---------------------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ComponentTypeId&lt;THandle&gt;`<sp/>|<sp/>Handle<sp/>type<sp/>(scoping)<sp/>|<sp/>Compile-time<sp/>unique<sp/>type<sp/>identifier<sp/>for<sp/>components<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ComponentOps`<sp/>|<sp/>*(none)*<sp/>|<sp/>Type-erased<sp/>function<sp/>pointers<sp/>for<sp/>lifecycle<sp/>callbacks<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ComponentOpsRegistry&lt;THandle&gt;`<sp/>|<sp/>Handle<sp/>type<sp/>(scoping)<sp/>|<sp/>Global<sp/>O(1)<sp/>registry<sp/>mapping<sp/>type<sp/>IDs<sp/>to<sp/>ComponentOps<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ComponentReflector&lt;THandle,<sp/>TEntityManager&gt;`<sp/>|<sp/>Handle<sp/>type,<sp/>manager<sp/>type<sp/>|<sp/>Compile-time<sp/>trait-based<sp/>lifecycle<sp/>registration<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Storage<sp/>&amp;<sp/>Iteration</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Template<sp/>Parameters<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|---------------------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SparseSet&lt;T&gt;`<sp/>|<sp/>Element<sp/>type<sp/>|<sp/>Generic<sp/>O(1)<sp/>entity-keyed<sp/>storage<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SparseSetBase`<sp/>|<sp/>*(none)*<sp/>|<sp/>Type-erased<sp/>base<sp/>for<sp/>polymorphic<sp/>sparse<sp/>set<sp/>access<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`View&lt;TEntityManager,<sp/>Components...&gt;`<sp/>|<sp/>Manager<sp/>type,<sp/>component<sp/>types<sp/>|<sp/>Lightweight<sp/>component-based<sp/>entity<sp/>queries<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Lookup<sp/>Strategies</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Strategy<sp/>|<sp/>Lookup<sp/>|<sp/>Insertion<sp/>|<sp/>Removal<sp/>|<sp/>Use<sp/>Case<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|----------|--------|-----------|---------|----------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`HashedLookupStrategy`<sp/>|<sp/>O(1)<sp/>avg<sp/>|<sp/>O(1)<sp/>avg<sp/>|<sp/>O(1)<sp/>avg<sp/>|<sp/>Default<sp/>—<sp/>large<sp/>registries<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`LinearLookupStrategy`<sp/>|<sp/>O(n)<sp/>|<sp/>O(n)<sp/>|<sp/>O(1)<sp/>|<sp/>Small<sp/>registries<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Traits<sp/>(Compile-Time<sp/>Concepts)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Trait<sp/>|<sp/>Required<sp/>Method(s)<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|--------------------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`HasOnAcquire`<sp/>|<sp/>`onAcquire()`<sp/>|<sp/>Pool<sp/>acquisition<sp/>callback<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`HasOnRelease`<sp/>|<sp/>`onRelease()`<sp/>|<sp/>Pool<sp/>release<sp/>callback<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`HasOnRemove`<sp/>|<sp/>`onRemove()<sp/>→<sp/>bool`<sp/>|<sp/>Removal<sp/>interception<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`HasToggleable`<sp/>|<sp/>`enable()`,<sp/>`disable()`<sp/>|<sp/>Component<sp/>enable/disable<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`HasClone`<sp/>|<sp/>`onClone(const<sp/>T&amp;)`<sp/>|<sp/>Post-copy<sp/>initialisation<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`HasActivatable`<sp/>|<sp/>`onActivate()`,<sp/>`onDeactivate()`<sp/>|<sp/>Entity<sp/>activation<sp/>response<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Template<sp/>Parameter<sp/>Overview</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>move<sp/>from<sp/>`helios.engine.ecs`<sp/>to<sp/>`helios.ecs`<sp/>introduced<sp/>the</highlight></codeline>
+<codeline><highlight class="normal">following<sp/>**new**<sp/>template<sp/>parameters:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Parameter<sp/>|<sp/>Used<sp/>In<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-----------|---------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`TStrongId`<sp/>|<sp/>`EntityHandle`,<sp/>`EntityRegistry`<sp/>|<sp/>Domain-specific<sp/>strong<sp/>ID<sp/>type<sp/>satisfying<sp/>`IsStrongIdLike`<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`THandle`<sp/>|<sp/>`EntityManager`,<sp/>`Entity`,<sp/>`ComponentTypeId`,<sp/>`ComponentOpsRegistry`,<sp/>`ComponentReflector`<sp/>|<sp/>The<sp/>concrete<sp/>`EntityHandle&lt;TStrongId&gt;`<sp/>specialisation,<sp/>scoping<sp/>type<sp/>IDs<sp/>and<sp/>ops<sp/>per<sp/>domain<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`TEntityRegistry`<sp/>|<sp/>`EntityManager`<sp/>|<sp/>The<sp/>concrete<sp/>`EntityRegistry`<sp/>specialisation<sp/>used<sp/>for<sp/>handle<sp/>allocation<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`TEntityManager`<sp/>|<sp/>`Entity`,<sp/>`View`,<sp/>`EntityResolver`,<sp/>`ComponentReflector`<sp/>|<sp/>The<sp/>concrete<sp/>`EntityManager`<sp/>specialisation<sp/>providing<sp/>component<sp/>storage<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`TLookupStrategy`<sp/>|<sp/>`EntityRegistry`<sp/>|<sp/>Pluggable<sp/>collision<sp/>detection<sp/>strategy<sp/>for<sp/>strong<sp/>IDs<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`TAllowRemoval`<sp/>|<sp/>`EntityRegistry`<sp/>|<sp/>`bool`<sp/>policy<sp/>—<sp/>`false`<sp/>disables<sp/>`destroy()`<sp/>at<sp/>compile<sp/>time<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`TCapacity`<sp/>|<sp/>`EntityRegistry`,<sp/>`EntityManager`<sp/>|<sp/>Default<sp/>initial<sp/>capacity<sp/>hint<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>TypedHandleWorld</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">`TypedHandleWorld&lt;TEntityManagers...&gt;`<sp/>is<sp/>a<sp/>**multi-domain<sp/>entity<sp/>world**</highlight></codeline>
+<codeline><highlight class="normal">that<sp/>holds<sp/>one<sp/>`EntityManager`<sp/>per<sp/>domain<sp/>inside<sp/>a<sp/>`std::tuple`.<sp/>The<sp/>handle</highlight></codeline>
+<codeline><highlight class="normal">type<sp/>of<sp/>each<sp/>manager<sp/>serves<sp/>as<sp/>a<sp/>compile-time<sp/>key:<sp/>calling</highlight></codeline>
+<codeline><highlight class="normal">`world.addEntity&lt;MyHandle&gt;()`<sp/>selects<sp/>the<sp/>correct<sp/>manager<sp/>automatically.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>GameHandle<sp/>=<sp/>EntityHandle&lt;GameStrongId&gt;;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>UiHandle<sp/><sp/><sp/>=<sp/>EntityHandle&lt;UiStrongId&gt;;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">using<sp/>GameEM<sp/>=<sp/>EntityManager&lt;GameHandle,<sp/>GameRegistry,<sp/>4096&gt;;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>UiEM<sp/><sp/><sp/>=<sp/>EntityManager&lt;UiHandle,<sp/><sp/><sp/>UiRegistry,<sp/><sp/><sp/>512&gt;;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">TypedHandleWorld&lt;GameEM,<sp/>UiEM&gt;<sp/>world;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">auto<sp/>player<sp/>=<sp/>world.addEntity&lt;GameHandle&gt;();<sp/><sp/><sp/>//<sp/>→<sp/>GameEM</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>button<sp/>=<sp/>world.addEntity&lt;UiHandle&gt;();<sp/><sp/><sp/><sp/><sp/>//<sp/>→<sp/>UiEM</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Quick<sp/>Start</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.ecs;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>1.<sp/>Define<sp/>domain<sp/>types</highlight></codeline>
+<codeline><highlight class="normal">struct<sp/>MyStrongId<sp/>{<sp/>/*<sp/>...<sp/>*/<sp/>};</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>Handle<sp/><sp/><sp/>=<sp/>helios::ecs::types::EntityHandle&lt;MyStrongId&gt;;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>Registry<sp/>=<sp/>helios::ecs::EntityRegistry&lt;MyStrongId&gt;;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>Manager<sp/><sp/>=<sp/>helios::ecs::EntityManager&lt;Handle,<sp/>Registry,<sp/>1024&gt;;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>2.<sp/>Create<sp/>manager<sp/>and<sp/>entity</highlight></codeline>
+<codeline><highlight class="normal">Manager<sp/>em;</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>handle<sp/>=<sp/>em.create();</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>3.<sp/>Attach<sp/>components</highlight></codeline>
+<codeline><highlight class="normal">auto*<sp/>transform<sp/>=<sp/>em.emplace&lt;TransformComponent&gt;(handle,<sp/>position);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>4.<sp/>Use<sp/>the<sp/>Entity<sp/>facade</highlight></codeline>
+<codeline><highlight class="normal">helios::ecs::Entity&lt;Handle,<sp/>Manager&gt;<sp/>entity{handle,<sp/>&amp;em};</highlight></codeline>
+<codeline><highlight class="normal">entity.add&lt;HealthComponent&gt;(100.0f);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>5.<sp/>Iterate<sp/>via<sp/>View</highlight></codeline>
+<codeline><highlight class="normal">for<sp/>(auto<sp/>[e,<sp/>t,<sp/>v]<sp/>:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/>helios::ecs::View&lt;Manager,<sp/>TransformComponent,<sp/>VelocityComponent&gt;(&amp;em))<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>process</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>See<sp/>Also</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>[Engine<sp/>ECS](../../engine/ecs/README.md)<sp/>—<sp/>backward-compatible<sp/>wrappers<sp/>(`GameObject`,<sp/>etc.)</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>[Core<sp/>Types](../types.ixx)<sp/>—<sp/>`EntityId`,<sp/>`VersionId`,<sp/>`EntityTombstone`,<sp/>`StrongId_t`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+<codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::ecs</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Generic,<sp/>reusable<sp/>ECS<sp/>primitives.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Provides<sp/>policy-based<sp/>templates<sp/>for<sp/>entity<sp/>handle<sp/>management,<sp/>version</highlight></codeline>
+<codeline><highlight class="normal">tracking,<sp/>sparse-set<sp/>storage,<sp/>component<sp/>lifecycle<sp/>reflection,<sp/>typed<sp/>views<sp/>and</highlight></codeline>
+<codeline><highlight class="normal">multi-domain<sp/>entity<sp/>worlds<sp/>that<sp/>are<sp/>independent<sp/>of<sp/>any<sp/>specific<sp/>engine<sp/>subsystem.</highlight></codeline>
+<codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
+    </programlisting>
+    <location file="/tmp/h/include/helios/ecs/README.md"/>
+  </compounddef>
+</doxygen>

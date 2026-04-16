@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_1295c110505104bb1709dfaac30141b3" kind="dir">
+    <compoundname>concepts</compoundname>
+    <innerfile refid="helios_2ecs_2concepts_2__module_8ixx">helios/ecs/concepts/_module.ixx</innerfile>
+    <innerfile refid="IsStrongIdCollisionResolverLike_8ixx">IsStrongIdCollisionResolverLike.ixx</innerfile>
+    <innerfile refid="IsStrongIdLike_8ixx">IsStrongIdLike.ixx</innerfile>
+    <innerfile refid="ecs_2concepts_2Traits_8ixx">ecs/concepts/Traits.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_1295c110505104bb1709dfaac30141b3_1autotoc_md88">
+<title>helios::ecs::concepts</title><para>Compile-time constraints for ECS extension points.</para>
+</sect1>
+<sect1 id="dir_1295c110505104bb1709dfaac30141b3_1autotoc_md89">
+<title>Overview</title><para>This submodule defines concepts that constrain the template parameters used across <computeroutput><ref refid="namespacehelios_1_1ecs" kindref="compound">helios.ecs</ref></computeroutput>. They ensure that user-provided types satisfy the structural requirements expected by the generic ECS infrastructure at compile time.</para>
+</sect1>
+<sect1 id="dir_1295c110505104bb1709dfaac30141b3_1autotoc_md90">
+<title>Concepts</title><para><table rows="2" cols="2"><row>
+<entry thead="yes"><para>Concept  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>IsStrongIdCollisionResolverLike</computeroutput>  </para>
+</entry><entry thead="no"><para>Constrains lookup strategies used by <computeroutput>EntityRegistry</computeroutput> for strong ID collision detection  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_1295c110505104bb1709dfaac30141b3_1autotoc_md91">
+<title>IsStrongIdCollisionResolverLike</title><para>Requires a type to provide <computeroutput>add</computeroutput>, <computeroutput>remove</computeroutput>, and <computeroutput>has</computeroutput> operations on <computeroutput>StrongId_t</computeroutput> values, each returning <computeroutput>bool</computeroutput>. Any type satisfying this concept can be used as the <computeroutput>TLookupStrategy</computeroutput> parameter of <computeroutput>EntityRegistry</computeroutput>.</para>
+<para><bold>Satisfied by:</bold><itemizedlist>
+<listitem><para><computeroutput>HashedLookupStrategy</computeroutput> — O(1) amortised, default strategy</para>
+</listitem><listitem><para><computeroutput>LinearLookupStrategy</computeroutput> — O(n) scan, suitable for small registries</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="dir_1295c110505104bb1709dfaac30141b3_1autotoc_md92">
+<title>Related Modules</title><para><table rows="4" cols="2"><row>
+<entry thead="yes"><para>Module  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="classhelios_1_1ecs_1_1EntityRegistry" kindref="compound">helios.ecs.EntityRegistry</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>Primary consumer of the lookup strategy concept  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>helios.ecs.HashedLookupStrategy</computeroutput>  </para>
+</entry><entry thead="no"><para>Hash-based strategy implementation  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>helios.ecs.LinearLookupStrategy</computeroutput>  </para>
+</entry><entry thead="no"><para>Linear-scan strategy implementation  </para>
+</entry></row>
+</table>
+</para>
+<para><hruler/>
+ <details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/ecs/concepts/"/>
+  </compounddef>
+</doxygen>

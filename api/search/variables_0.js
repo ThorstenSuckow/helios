@@ -13,9 +13,5 @@ var searchData=
   ['application_10',['application',['../structhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindowUserPointer.html#a28b59f87a333dfccb031c08d642d7fc5',1,'helios::ext::glfw::window::GLFWWindowUserPointer']]],
   ['aquamarine_11',['Aquamarine',['../structhelios_1_1util_1_1Colors.html#a8e0a83acc3f540940846f212ffdb5448',1,'helios::util::Colors']]],
   ['aspectratio_5f_12',['aspectRatio_',['../classhelios_1_1scene_1_1Camera.html#a95f643525bd276faa7edcd1401f47850',1,'helios::scene::Camera']]],
-  ['aspectratiodenom_13',['aspectRatioDenom',['../structhelios_1_1window_1_1WindowConfig.html#abf59b6fbc306130ec84737dbe3498ffd',1,'helios::window::WindowConfig']]],
-  ['aspectratiodenom_5f_14',['aspectRatioDenom_',['../classhelios_1_1window_1_1Window.html#a3a4a6fcd73d8632f3368e98acc338c85',1,'helios::window::Window']]],
-  ['aspectrationumer_15',['aspectRatioNumer',['../structhelios_1_1window_1_1WindowConfig.html#ab260764badd2ed71a573ac75bce658e3',1,'helios::window::WindowConfig']]],
-  ['aspectrationumer_5f_16',['aspectRatioNumer_',['../classhelios_1_1window_1_1Window.html#a2ba87c8f3140da0087ac0a4cf849b10b',1,'helios::window::Window']]],
-  ['azure_17',['Azure',['../structhelios_1_1util_1_1Colors.html#a1aa091bf77ef8198c0e8bc5f1dde199f',1,'helios::util::Colors']]]
+  ['azure_13',['Azure',['../structhelios_1_1util_1_1Colors.html#a1aa091bf77ef8198c0e8bc5f1dde199f',1,'helios::util::Colors']]]
 ];

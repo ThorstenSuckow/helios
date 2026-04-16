@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8ecs_8types_8TypeDefs" kind="module">
+    <compoundname>helios.ecs.types.TypeDefs</compoundname>
+    <innerfile refid="TypeDefs_8ixx">TypeDefs.ixx</innerfile>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacehelios_1_1ecs_1_1types_1a58cc516088b7b594d813b712c9337c8a" prot="public" static="no">
+        <type>uint32_t</type>
+        <definition>using helios::ecs::types::VersionId =  uint32_t</definition>
+        <argsstring></argsstring>
+        <name>VersionId</name>
+        <qualifiedname>helios::ecs::types::VersionId</qualifiedname>
+        <briefdescription>
+<para>Version number for detecting stale entity references. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Each entity slot in an EntityPool has an associated version that is incremented when the entity is removed. EntityHandles store both the <ref refid="namespacehelios_1_1ecs_1_1types_1acf27c982c01d422a7605616c407ac7b0" kindref="member">EntityId</ref> and <ref refid="namespacehelios_1_1ecs_1_1types_1a58cc516088b7b594d813b712c9337c8a" kindref="member">VersionId</ref>, allowing the pool to detect when a handle refers to a recycled slot.</para>
+<para>A valid version starts at 1 (uninitialized handles have version 0).</para>
+<para><simplesect kind="see"><para><ref refid="structhelios_1_1ecs_1_1types_1_1EntityHandle" kindref="compound">EntityHandle</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="namespacehelios_1_1ecs_1_1types_1acf27c982c01d422a7605616c407ac7b0" kindref="member">EntityId</ref> </para>
+</simplesect>
+<simplesect kind="see"><para>EntityPool </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/ecs/types/TypeDefs.ixx" line="30" column="5" bodyfile="/tmp/h/include/helios/ecs/types/TypeDefs.ixx" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacehelios_1_1ecs_1_1types_1acf27c982c01d422a7605616c407ac7b0" prot="public" static="no">
+        <type>uint32_t</type>
+        <definition>using helios::ecs::types::EntityId =  uint32_t</definition>
+        <argsstring></argsstring>
+        <name>EntityId</name>
+        <qualifiedname>helios::ecs::types::EntityId</qualifiedname>
+        <briefdescription>
+<para>Unique identifier for an entity within an EntityPool. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Used as the index into the sparse array of an EntityPool. Combined with a <ref refid="namespacehelios_1_1ecs_1_1types_1a58cc516088b7b594d813b712c9337c8a" kindref="member">VersionId</ref> in an <ref refid="structhelios_1_1ecs_1_1types_1_1EntityHandle" kindref="compound">EntityHandle</ref>, it enables safe entity references that detect stale handles after entity removal.</para>
+<para><simplesect kind="see"><para><ref refid="structhelios_1_1ecs_1_1types_1_1EntityHandle" kindref="compound">EntityHandle</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="namespacehelios_1_1ecs_1_1types_1a58cc516088b7b594d813b712c9337c8a" kindref="member">VersionId</ref> </para>
+</simplesect>
+<simplesect kind="see"><para>EntityPool </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/ecs/types/TypeDefs.ixx" line="43" column="5" bodyfile="/tmp/h/include/helios/ecs/types/TypeDefs.ixx" bodystart="43" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="namespacehelios_1_1ecs_1_1types_1a20b63e085149db90d08d3d4d8bdf3ddb" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>size_t</type>
+        <definition>size_t helios::ecs::types::EntityTombstone</definition>
+        <argsstring></argsstring>
+        <name>EntityTombstone</name>
+        <qualifiedname>helios::ecs::types::EntityTombstone</qualifiedname>
+        <initializer>= std::numeric_limits&lt;size_t&gt;::max()</initializer>
+        <briefdescription>
+<para>Sentinel value indicating an invalid or removed sparse index. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Used in sparse-set data structures (e.g., EntityPool, GameObjectPool) to mark slots that do not contain valid entity references. When a slot contains this value, the corresponding entity has been removed or was never assigned.</para>
+<para><simplesect kind="see"><para>EntityPool </para>
+</simplesect>
+<simplesect kind="see"><para>GameObjectPool </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/ecs/types/TypeDefs.ixx" line="56" column="22" bodyfile="/tmp/h/include/helios/ecs/types/TypeDefs.ixx" bodystart="56" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/ecs/types/TypeDefs.ixx" line="10" column="15"/>
+  </compounddef>
+</doxygen>

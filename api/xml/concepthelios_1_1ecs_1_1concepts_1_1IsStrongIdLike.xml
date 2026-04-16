@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="concepthelios_1_1ecs_1_1concepts_1_1IsStrongIdLike" kind="concept">
+    <compoundname>helios::ecs::concepts::IsStrongIdLike</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;typename T&gt;
+concept <ref refid="concepthelios_1_1ecs_1_1concepts_1_1IsStrongIdLike" kindref="compound">helios::ecs::concepts::IsStrongIdLike</ref> =  requires(T&amp; t)
+    {
+        {t.isValid()}-&gt;std::same_as&lt;bool&gt;;
+        {t.value()}-&gt;std::same_as&lt;<ref refid="namespacehelios_1_1core_1_1types_1aa1d7e3f2fb347012cb83fb46472b57aa" kindref="member">StrongId_t</ref>&gt;;
+    }    </initializer>
+    <briefdescription>
+<para>Constraint for types that behave as a strong, validatable identifier. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>A type satisfying `IsStrongIdLike` exposes a validity check and a raw value accessor, providing the minimal interface expected by generic ECS utilities that operate on typed identifiers.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The identifier type to check.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para>EntityHandle </para>
+</simplesect>
+<simplesect kind="see"><para>EntityRegistry </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/ecs/concepts/IsStrongIdLike.ixx" line="29" column="5"/>
+  </compounddef>
+</doxygen>

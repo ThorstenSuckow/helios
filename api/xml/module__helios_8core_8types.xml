@@ -2,133 +2,17 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="module__helios_8core_8types" kind="module">
     <compoundname>helios.core.types</compoundname>
+    <innerfile refid="helios_2core_2types_2__module_8ixx">helios/core/types/_module.ixx</innerfile>
     <innerfile refid="types_8ixx">types.ixx</innerfile>
-    <innerclass refid="structhelios_1_1core_1_1types_1_1no__init__t" prot="public">helios::core::types::no_init_t</innerclass>
-    <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="namespacehelios_1_1core_1_1types_1aa1d7e3f2fb347012cb83fb46472b57aa" prot="public" static="no">
-        <type>uint32_t</type>
-        <definition>using helios::core::types::StrongId_t =  uint32_t</definition>
-        <argsstring></argsstring>
-        <name>StrongId_t</name>
-        <qualifiedname>helios::core::types::StrongId_t</qualifiedname>
-        <briefdescription>
-<para>Underlying integer type for all strong identifiers. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>`StrongId_t` is the common numeric representation used by `StrongId&lt;Tag&gt;` and related lookup structures (e.g., `EntityRegistry`, `LinearLookupStrategy`, `HashedLookupStrategy`). Centralising the typedef ensures a consistent width across the entire identifier subsystem.</para>
-<para><simplesect kind="see"><para><ref refid="structhelios_1_1core_1_1data_1_1StrongId" kindref="compound">helios::core::data::StrongId</ref> </para>
-</simplesect>
-<simplesect kind="see"><para><ref refid="namespacehelios_1_1core_1_1types_1ae66a87b0172199142b048c268bf0b18a" kindref="member">EntityId</ref> </para>
-</simplesect>
-<simplesect kind="see"><para><ref refid="namespacehelios_1_1core_1_1types_1a0b0725c2e899452c00381f709d463746" kindref="member">VersionId</ref> </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/core/types.ixx" line="77" column="5" bodyfile="/tmp/h/include/helios/core/types.ixx" bodystart="77" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="namespacehelios_1_1core_1_1types_1a0b0725c2e899452c00381f709d463746" prot="public" static="no">
-        <type>uint32_t</type>
-        <definition>using helios::core::types::VersionId =  uint32_t</definition>
-        <argsstring></argsstring>
-        <name>VersionId</name>
-        <qualifiedname>helios::core::types::VersionId</qualifiedname>
-        <briefdescription>
-<para>Version number for detecting stale entity references. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>Each entity slot in an EntityPool has an associated version that is incremented when the entity is removed. EntityHandles store both the <ref refid="namespacehelios_1_1core_1_1types_1ae66a87b0172199142b048c268bf0b18a" kindref="member">EntityId</ref> and <ref refid="namespacehelios_1_1core_1_1types_1a0b0725c2e899452c00381f709d463746" kindref="member">VersionId</ref>, allowing the pool to detect when a handle refers to a recycled slot.</para>
-<para>A valid version starts at 1 (uninitialized handles have version 0).</para>
-<para><simplesect kind="see"><para>EntityHandle </para>
-</simplesect>
-<simplesect kind="see"><para><ref refid="namespacehelios_1_1core_1_1types_1ae66a87b0172199142b048c268bf0b18a" kindref="member">EntityId</ref> </para>
-</simplesect>
-<simplesect kind="see"><para>EntityPool </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/core/types.ixx" line="93" column="5" bodyfile="/tmp/h/include/helios/core/types.ixx" bodystart="93" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="namespacehelios_1_1core_1_1types_1ae66a87b0172199142b048c268bf0b18a" prot="public" static="no">
-        <type>uint32_t</type>
-        <definition>using helios::core::types::EntityId =  uint32_t</definition>
-        <argsstring></argsstring>
-        <name>EntityId</name>
-        <qualifiedname>helios::core::types::EntityId</qualifiedname>
-        <briefdescription>
-<para>Unique identifier for an entity within an EntityPool. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>Used as the index into the sparse array of an EntityPool. Combined with a <ref refid="namespacehelios_1_1core_1_1types_1a0b0725c2e899452c00381f709d463746" kindref="member">VersionId</ref> in an EntityHandle, it enables safe entity references that detect stale handles after entity removal.</para>
-<para><simplesect kind="see"><para>EntityHandle </para>
-</simplesect>
-<simplesect kind="see"><para><ref refid="namespacehelios_1_1core_1_1types_1a0b0725c2e899452c00381f709d463746" kindref="member">VersionId</ref> </para>
-</simplesect>
-<simplesect kind="see"><para>EntityPool </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/core/types.ixx" line="106" column="5" bodyfile="/tmp/h/include/helios/core/types.ixx" bodystart="106" bodyend="-1"/>
-      </memberdef>
-    </sectiondef>
-    <sectiondef kind="var">
-      <memberdef kind="variable" id="namespacehelios_1_1core_1_1types_1a209d373c4d42ac831d2f6bfd1c4165ad" prot="public" static="no" constexpr="yes" mutable="no">
-        <type>no_init_t</type>
-        <definition>no_init_t helios::core::types::no_init</definition>
-        <argsstring></argsstring>
-        <name>no_init</name>
-        <qualifiedname>helios::core::types::no_init</qualifiedname>
-        <briefdescription>
-<para>Tag constant for requesting uninitialized construction. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>This is a convenience instance of `no_init_t` that can be passed to constructors supporting uninitialized construction.</para>
-<para>```cpp <ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref> id{<ref refid="namespacehelios_1_1core_1_1types_1a209d373c4d42ac831d2f6bfd1c4165ad" kindref="member">helios::core::types::no_init</ref>}; ```</para>
-<para><simplesect kind="see"><para><ref refid="structhelios_1_1core_1_1types_1_1no__init__t" kindref="compound">no_init_t</ref> </para>
-</simplesect>
-<simplesect kind="see"><para><ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref> </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/core/types.ixx" line="62" column="32" bodyfile="/tmp/h/include/helios/core/types.ixx" bodystart="62" bodyend="-1"/>
-        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1MaxScoreObserverComponent_1a01e968d2f03b957bf7eb56248b68c606" compoundref="MaxScoreObserverComponent_8ixx" startline="38">helios::engine::mechanics::scoring::components::MaxScoreObserverComponent::helios::engine::mechanics::scoring::systems::MaxScoreObserverClearSystem</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1scoring_1_1components_1_1ScoreObserverComponent_1ac61ed4347036721e97541a07e2935973" compoundref="ScoreObserverComponent_8ixx" startline="37">helios::engine::mechanics::scoring::components::ScoreObserverComponent::helios::engine::mechanics::scoring::systems::ScoreObserverClearSystem</referencedby>
-        <referencedby refid="classhelios_1_1rendering_1_1Viewport_1a6ffa7f48fd9a3250c211e33036a00911" compoundref="Viewport_8ixx" startline="213" endline="222">helios::rendering::Viewport::Viewport</referencedby>
-      </memberdef>
-      <memberdef kind="variable" id="namespacehelios_1_1core_1_1types_1a57aba37985d4b91aefbc85b3c7b01ebf" prot="public" static="no" constexpr="yes" mutable="no">
-        <type>size_t</type>
-        <definition>size_t helios::core::types::EntityTombstone</definition>
-        <argsstring></argsstring>
-        <name>EntityTombstone</name>
-        <qualifiedname>helios::core::types::EntityTombstone</qualifiedname>
-        <initializer>= std::numeric_limits&lt;size_t&gt;::max()</initializer>
-        <briefdescription>
-<para>Sentinel value indicating an invalid or removed sparse index. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>Used in sparse-set data structures (e.g., EntityPool, GameObjectPool) to mark slots that do not contain valid entity references. When a slot contains this value, the corresponding entity has been removed or was never assigned.</para>
-<para><simplesect kind="see"><para>EntityPool </para>
-</simplesect>
-<simplesect kind="see"><para>GameObjectPool </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/h/include/helios/core/types.ixx" line="119" column="22" bodyfile="/tmp/h/include/helios/core/types.ixx" bodystart="119" bodyend="-1"/>
-      </memberdef>
-    </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/tmp/h/include/helios/core/types.ixx" line="10" column="15"/>
+    <exports>
+      <export refid="module__helios_8core_8types_8FuncDefs">helios.core.types.FuncDefs</export>
+      <export refid="module__helios_8core_8types_8StrongId">helios.core.types.StrongId</export>
+      <export>helios.core.types.TypeDefs</export>
+    </exports>
+    <location file="/tmp/h/include/helios/core/types/_module.ixx" line="6" column="15"/>
   </compounddef>
 </doxygen>

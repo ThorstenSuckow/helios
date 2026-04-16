@@ -6,7 +6,7 @@ var dir_9cbb4b4cfd398af02a68f2645b2e9ca6 =
     [ "types", "dir_c41b981364ff99795c8cb0d2362d5300.html", "dir_c41b981364ff99795c8cb0d2362d5300" ],
     [ "_module.ixx", "helios_2engine_2mechanics_2scoring_2__module_8ixx.html", null ],
     [ "MaxScorePoolSnapshot.ixx", "MaxScorePoolSnapshot_8ixx.html", "MaxScorePoolSnapshot_8ixx" ],
-    [ "registry.ixx", "mechanics_2scoring_2registry_8ixx.html", "mechanics_2scoring_2registry_8ixx" ],
+    [ "registry.ixx", "engine_2mechanics_2scoring_2registry_8ixx.html", "engine_2mechanics_2scoring_2registry_8ixx" ],
     [ "ScorePool.ixx", "ScorePool_8ixx.html", "ScorePool_8ixx" ],
     [ "ScorePoolManager.ixx", "ScorePoolManager_8ixx.html", "ScorePoolManager_8ixx" ],
     [ "ScorePoolSnapshot.ixx", "ScorePoolSnapshot_8ixx.html", "ScorePoolSnapshot_8ixx" ]

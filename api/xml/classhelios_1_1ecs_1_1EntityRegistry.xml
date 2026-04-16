@@ -1,0 +1,379 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1ecs_1_1EntityRegistry" kind="class" language="C++" prot="public">
+    <compoundname>helios::ecs::EntityRegistry</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename TStrongId</type>
+      </param>
+      <param>
+        <type>typename TLookupStrategy</type>
+        <defval><ref refid="classhelios_1_1ecs_1_1strategies_1_1HashedLookupStrategy" kindref="compound">HashedLookupStrategy</ref></defval>
+      </param>
+      <param>
+        <type>bool</type>
+        <declname>TAllowRemoval</declname>
+        <defname>TAllowRemoval</defname>
+        <defval>true</defval>
+      </param>
+      <param>
+        <type>size_t</type>
+        <declname>TCapacity</declname>
+        <defname>TCapacity</defname>
+        <defval>DEFAULT_ENTITY_MANAGER_CAPACITY</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1ecs_1_1EntityRegistry_1aca38b3e7f9053a220a8deaa0f863b765" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="namespacehelios_1_1core_1_1types_1ae66a87b0172199142b048c268bf0b18a" kindref="member">EntityId</ref> &gt;</type>
+        <definition>std::vector&lt;EntityId&gt; helios::ecs::EntityRegistry&lt; TStrongId, TLookupStrategy, TAllowRemoval, TCapacity &gt;::freeList_</definition>
+        <argsstring></argsstring>
+        <name>freeList_</name>
+        <qualifiedname>helios::ecs::EntityRegistry::freeList_</qualifiedname>
+        <briefdescription>
+<para>Free list of recycled entity indices available for reuse. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/ecs/EntityRegistry.ixx" line="80" column="21" bodyfile="/tmp/h/include/helios/ecs/EntityRegistry.ixx" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1ecs_1_1EntityRegistry_1ae990102ea09401354b1692c0e236f0ba" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="namespacehelios_1_1core_1_1types_1a0b0725c2e899452c00381f709d463746" kindref="member">VersionId</ref> &gt;</type>
+        <definition>std::vector&lt;VersionId&gt; helios::ecs::EntityRegistry&lt; TStrongId, TLookupStrategy, TAllowRemoval, TCapacity &gt;::versions_</definition>
+        <argsstring></argsstring>
+        <name>versions_</name>
+        <qualifiedname>helios::ecs::EntityRegistry::versions_</qualifiedname>
+        <briefdescription>
+<para>Version numbers for each entity slot. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The version is incremented when an entity at that index is destroyed, allowing detection of stale handles. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/ecs/EntityRegistry.ixx" line="89" column="21" bodyfile="/tmp/h/include/helios/ecs/EntityRegistry.ixx" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1ecs_1_1EntityRegistry_1a90f1940d295bca1c606d038c8fcc6737" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="namespacehelios_1_1core_1_1types_1aa1d7e3f2fb347012cb83fb46472b57aa" kindref="member">StrongId_t</ref> &gt;</type>
+        <definition>std::vector&lt;StrongId_t&gt; helios::ecs::EntityRegistry&lt; TStrongId, TLookupStrategy, TAllowRemoval, TCapacity &gt;::strongIds_</definition>
+        <argsstring></argsstring>
+        <name>strongIds_</name>
+        <qualifiedname>helios::ecs::EntityRegistry::strongIds_</qualifiedname>
+        <briefdescription>
+<para>Strong ID values for each entity slot. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/ecs/EntityRegistry.ixx" line="95" column="21" bodyfile="/tmp/h/include/helios/ecs/EntityRegistry.ixx" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1ecs_1_1EntityRegistry_1a426e442346284bdff7c66d46e0471561" prot="private" static="no" mutable="no">
+        <type>TLookupStrategy</type>
+        <definition>TLookupStrategy helios::ecs::EntityRegistry&lt; TStrongId, TLookupStrategy, TAllowRemoval, TCapacity &gt;::lookupStrategy_</definition>
+        <argsstring></argsstring>
+        <name>lookupStrategy_</name>
+        <qualifiedname>helios::ecs::EntityRegistry::lookupStrategy_</qualifiedname>
+        <briefdescription>
+<para>Lookup strategy instance for strong ID collision detection. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/ecs/EntityRegistry.ixx" line="100" column="25" bodyfile="/tmp/h/include/helios/ecs/EntityRegistry.ixx" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1ecs_1_1EntityRegistry_1afa1eb5a6ce013f2a878f1ebddb6c03f6" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t helios::ecs::EntityRegistry&lt; TStrongId, TLookupStrategy, TAllowRemoval, TCapacity &gt;::strongIdCounter_</definition>
+        <argsstring></argsstring>
+        <name>strongIdCounter_</name>
+        <qualifiedname>helios::ecs::EntityRegistry::strongIdCounter_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>Auto-increment counter for generating strong IDs when none is provided. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/ecs/EntityRegistry.ixx" line="105" column="16" bodyfile="/tmp/h/include/helios/ecs/EntityRegistry.ixx" bodystart="105" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1ecs_1_1EntityRegistry_1af0915e18605e3b4021aa78e950662492" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::ecs::EntityRegistry&lt; TStrongId, TLookupStrategy, TAllowRemoval, TCapacity &gt;::EntityRegistry</definition>
+        <argsstring>(const size_t capacity=TCapacity)</argsstring>
+        <name>EntityRegistry</name>
+        <qualifiedname>helios::ecs::EntityRegistry::EntityRegistry</qualifiedname>
+        <param>
+          <type>const size_t</type>
+          <declname>capacity</declname>
+          <defval>TCapacity</defval>
+        </param>
+        <briefdescription>
+<para>Constructs a registry with pre-allocated capacity. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Reserving capacity upfront can improve performance when the approximate number of entities is known in advance.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>capacity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The initial capacity to reserve. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/ecs/EntityRegistry.ixx" line="117" column="18" bodyfile="/tmp/h/include/helios/ecs/EntityRegistry.ixx" bodystart="117" bodyend="122"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ecs_1_1EntityRegistry_1ab74aca0096edd3efd5b1e1c63d460d8e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structhelios_1_1ecs_1_1types_1_1EntityHandle" kindref="compound">EntityHandle</ref>&lt; TStrongId &gt;</type>
+        <definition>EntityHandle&lt; TStrongId &gt; helios::ecs::EntityRegistry&lt; TStrongId, TLookupStrategy, TAllowRemoval, TCapacity &gt;::create</definition>
+        <argsstring>(TStrongId strongId=TStrongId{})</argsstring>
+        <name>create</name>
+        <qualifiedname>helios::ecs::EntityRegistry::create</qualifiedname>
+        <param>
+          <type>TStrongId</type>
+          <declname>strongId</declname>
+          <defval>TStrongId{}</defval>
+        </param>
+        <briefdescription>
+<para>Creates a new entity and returns its handle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If recycled indices are available in the free list, one is reused. Otherwise, a new index is allocated at the end of the version vector. If the provided `strongId` is invalid, one is auto-assigned from the entity index.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>strongId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Optional domain-specific strong ID. Defaults to auto-assignment.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A valid `EntityHandle` for the newly created entity. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/ecs/EntityRegistry.ixx" line="137" column="22" bodyfile="/tmp/h/include/helios/ecs/EntityRegistry.ixx" bodystart="137" bodyend="170"/>
+        <references refid="classhelios_1_1ecs_1_1EntityRegistry_1abbfb2b54e24f945eb0db2b589d767574" compoundref="ecs_2EntityRegistry_8ixx" startline="194" endline="199">helios::ecs::EntityRegistry&lt; TStrongId, TLookupStrategy, TAllowRemoval, TCapacity &gt;::strongId</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ecs_1_1EntityRegistry_1a694ca16546aa63dea5c8220f330d56a9" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="namespacehelios_1_1core_1_1types_1a0b0725c2e899452c00381f709d463746" kindref="member">VersionId</ref></type>
+        <definition>VersionId helios::ecs::EntityRegistry&lt; TStrongId, TLookupStrategy, TAllowRemoval, TCapacity &gt;::version</definition>
+        <argsstring>(const EntityId entityId) const</argsstring>
+        <name>version</name>
+        <qualifiedname>helios::ecs::EntityRegistry::version</qualifiedname>
+        <param>
+          <type>const <ref refid="namespacehelios_1_1core_1_1types_1ae66a87b0172199142b048c268bf0b18a" kindref="member">EntityId</ref></type>
+          <declname>entityId</declname>
+        </param>
+        <briefdescription>
+<para>Looks up the version for an <ref refid="namespacehelios_1_1core_1_1types_1ae66a87b0172199142b048c268bf0b18a" kindref="member">EntityId</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>entityId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The entity to retrieve the version for.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The version for the <ref refid="namespacehelios_1_1core_1_1types_1ae66a87b0172199142b048c268bf0b18a" kindref="member">EntityId</ref>, or `InvalidVersion` if not found. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/ecs/EntityRegistry.ixx" line="179" column="20" bodyfile="/tmp/h/include/helios/ecs/EntityRegistry.ixx" bodystart="179" bodyend="184"/>
+        <references refid="namespacehelios_1_1ecs_1_1types_1a8f766ac55555dcfdd723da0bc005d5ee" compoundref="ecs_2types_2EntityHandle_8ixx" startline="22" endline="22">helios::ecs::types::InvalidVersion</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ecs_1_1EntityRegistry_1abbfb2b54e24f945eb0db2b589d767574" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>TStrongId</type>
+        <definition>TStrongId helios::ecs::EntityRegistry&lt; TStrongId, TLookupStrategy, TAllowRemoval, TCapacity &gt;::strongId</definition>
+        <argsstring>(const EntityId entityId) const</argsstring>
+        <name>strongId</name>
+        <qualifiedname>helios::ecs::EntityRegistry::strongId</qualifiedname>
+        <param>
+          <type>const <ref refid="namespacehelios_1_1core_1_1types_1ae66a87b0172199142b048c268bf0b18a" kindref="member">EntityId</ref></type>
+          <declname>entityId</declname>
+        </param>
+        <briefdescription>
+<para>Looks up the strong ID for an entity index. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>entityId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The entity index to retrieve the strong ID for.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The strong ID for the entity, or a default-constructed (invalid) `TStrongId` if out of bounds. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/ecs/EntityRegistry.ixx" line="194" column="20" bodyfile="/tmp/h/include/helios/ecs/EntityRegistry.ixx" bodystart="194" bodyend="199"/>
+        <referencedby refid="classhelios_1_1ecs_1_1EntityRegistry_1ab74aca0096edd3efd5b1e1c63d460d8e" compoundref="ecs_2EntityRegistry_8ixx" startline="137" endline="170">helios::ecs::EntityRegistry&lt; TStrongId, TLookupStrategy, TAllowRemoval, TCapacity &gt;::create</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ecs_1_1EntityRegistry_1a7b5ea46998b711891d8c807b90d1dbad" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::ecs::EntityRegistry&lt; TStrongId, TLookupStrategy, TAllowRemoval, TCapacity &gt;::isValid</definition>
+        <argsstring>(const EntityHandle&lt; TStrongId &gt; handle) const noexcept</argsstring>
+        <name>isValid</name>
+        <qualifiedname>helios::ecs::EntityRegistry::isValid</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1ecs_1_1types_1_1EntityHandle" kindref="compound">EntityHandle</ref>&lt; TStrongId &gt;</type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Checks whether the given handle refers to a currently alive entity. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>A handle is valid if its index is within bounds, its version matches the current version stored in the registry, and its strong ID matches the registered value.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The handle to validate.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the handle is valid and the entity is alive. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/ecs/EntityRegistry.ixx" line="213" column="15" bodyfile="/tmp/h/include/helios/ecs/EntityRegistry.ixx" bodystart="213" bodyend="223"/>
+        <referencedby refid="classhelios_1_1ecs_1_1EntityRegistry_1a77a12cf0672f2afe85713bfdcc21d015" compoundref="ecs_2EntityRegistry_8ixx" startline="240" endline="262">helios::ecs::EntityRegistry&lt; TStrongId, TLookupStrategy, TAllowRemoval, TCapacity &gt;::destroy</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ecs_1_1EntityRegistry_1a77a12cf0672f2afe85713bfdcc21d015" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::ecs::EntityRegistry&lt; TStrongId, TLookupStrategy, TAllowRemoval, TCapacity &gt;::destroy</definition>
+        <argsstring>(const EntityHandle&lt; TStrongId &gt; handle)</argsstring>
+        <name>destroy</name>
+        <qualifiedname>helios::ecs::EntityRegistry::destroy</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1ecs_1_1types_1_1EntityHandle" kindref="compound">EntityHandle</ref>&lt; TStrongId &gt;</type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Destroys the entity referenced by the given handle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the handle is valid, the entity&apos;s version is incremented (invalidating all existing handles to it), the strong ID is unregistered, and the index is added to the free list for recycling.</para>
+<para>If `TAllowRemoval` is false, triggers an assertion failure.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The handle of the entity to destroy.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the entity was successfully destroyed, false if the handle was already invalid. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/ecs/EntityRegistry.ixx" line="240" column="14" bodyfile="/tmp/h/include/helios/ecs/EntityRegistry.ixx" bodystart="240" bodyend="262"/>
+        <references refid="structhelios_1_1ecs_1_1types_1_1EntityHandle_1a010874a6b08dbb642eecc598988a8346" compoundref="ecs_2types_2EntityHandle_8ixx" startline="54" endline="54">helios::ecs::types::EntityHandle&lt; TStrongId &gt;::entityId</references>
+        <references refid="classhelios_1_1ecs_1_1EntityRegistry_1a7b5ea46998b711891d8c807b90d1dbad" compoundref="ecs_2EntityRegistry_8ixx" startline="213" endline="223">helios::ecs::EntityRegistry&lt; TStrongId, TLookupStrategy, TAllowRemoval, TCapacity &gt;::isValid</references>
+        <references refid="structhelios_1_1ecs_1_1types_1_1EntityHandle_1a2f6ce2214948837e8ee31960754c9c48" compoundref="ecs_2types_2EntityHandle_8ixx" startline="66" endline="66">helios::ecs::types::EntityHandle&lt; TStrongId &gt;::strongId</references>
+      </memberdef>
+    </sectiondef>
+    <requiresclause><ref refid="concepthelios_1_1ecs_1_1concepts_1_1IsStrongIdLike" kindref="compound">helios::ecs::concepts::IsStrongIdLike</ref>&lt;TStrongId&gt; &amp;&amp; <ref refid="concepthelios_1_1ecs_1_1concepts_1_1IsStrongIdCollisionResolverLike" kindref="compound">helios::ecs::concepts::IsStrongIdCollisionResolverLike</ref>&lt;TLookupStrategy&gt;    </requiresclause>
+    <briefdescription>
+<para>Generic registry for creating and managing strongly-typed entity handles. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>`EntityRegistry` serves as the authoritative source for entity lifecycle management. It is responsible for:</para>
+<para><itemizedlist>
+<listitem><para>**Handle Creation:** Generates unique `EntityHandle` instances with versioned IDs and domain-specific strong IDs.</para>
+</listitem><listitem><para>**Validation:** Determines whether a given handle refers to a currently alive entity.</para>
+</listitem><listitem><para>**Destruction:** Marks entities as destroyed by incrementing their version and recycling the index for future use (when `TAllowRemoval` is true).</para>
+</listitem></itemizedlist>
+</para>
+<para>## Versioning</para>
+<para>Each entity slot maintains a version number. When an entity is destroyed, its version is incremented. This allows the registry to detect stale handles — handles that reference an entity that has been destroyed and potentially replaced by a new entity at the same index.</para>
+<para>## Index Recycling</para>
+<para>Destroyed entity indices are added to a free list and reused when creating new entities. This keeps the dense version array compact and minimizes memory growth.</para>
+<para>## Strong ID Collision Detection</para>
+<para>The registry delegates collision checks to a configurable `TLookupStrategy`, which tracks which strong IDs are currently in use. The default strategy (`HashedLookupStrategy`) provides O(1) amortized lookups.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>TStrongId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A strong ID type carrying domain semantics. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>TLookupStrategy</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The strategy used for strong ID collision detection. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>TAllowRemoval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If false, `destroy()` triggers an assertion instead of removing. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>TCapacity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Default initial capacity for pre-allocation.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="structhelios_1_1ecs_1_1types_1_1EntityHandle" kindref="compound">EntityHandle</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1ecs_1_1strategies_1_1HashedLookupStrategy" kindref="compound">HashedLookupStrategy</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1ecs_1_1strategies_1_1LinearLookupStrategy" kindref="compound">LinearLookupStrategy</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/ecs/EntityRegistry.ixx" line="74" column="5" bodyfile="/tmp/h/include/helios/ecs/EntityRegistry.ixx" bodystart="74" bodyend="264"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1ecs_1_1EntityRegistry_1ab74aca0096edd3efd5b1e1c63d460d8e" prot="public" virt="non-virtual"><scope>helios::ecs::EntityRegistry</scope><name>create</name></member>
+      <member refid="classhelios_1_1ecs_1_1EntityRegistry_1a77a12cf0672f2afe85713bfdcc21d015" prot="public" virt="non-virtual"><scope>helios::ecs::EntityRegistry</scope><name>destroy</name></member>
+      <member refid="classhelios_1_1ecs_1_1EntityRegistry_1af0915e18605e3b4021aa78e950662492" prot="public" virt="non-virtual"><scope>helios::ecs::EntityRegistry</scope><name>EntityRegistry</name></member>
+      <member refid="classhelios_1_1ecs_1_1EntityRegistry_1aca38b3e7f9053a220a8deaa0f863b765" prot="private" virt="non-virtual"><scope>helios::ecs::EntityRegistry</scope><name>freeList_</name></member>
+      <member refid="classhelios_1_1ecs_1_1EntityRegistry_1a7b5ea46998b711891d8c807b90d1dbad" prot="public" virt="non-virtual"><scope>helios::ecs::EntityRegistry</scope><name>isValid</name></member>
+      <member refid="classhelios_1_1ecs_1_1EntityRegistry_1a426e442346284bdff7c66d46e0471561" prot="private" virt="non-virtual"><scope>helios::ecs::EntityRegistry</scope><name>lookupStrategy_</name></member>
+      <member refid="classhelios_1_1ecs_1_1EntityRegistry_1abbfb2b54e24f945eb0db2b589d767574" prot="public" virt="non-virtual"><scope>helios::ecs::EntityRegistry</scope><name>strongId</name></member>
+      <member refid="classhelios_1_1ecs_1_1EntityRegistry_1afa1eb5a6ce013f2a878f1ebddb6c03f6" prot="private" virt="non-virtual"><scope>helios::ecs::EntityRegistry</scope><name>strongIdCounter_</name></member>
+      <member refid="classhelios_1_1ecs_1_1EntityRegistry_1a90f1940d295bca1c606d038c8fcc6737" prot="private" virt="non-virtual"><scope>helios::ecs::EntityRegistry</scope><name>strongIds_</name></member>
+      <member refid="classhelios_1_1ecs_1_1EntityRegistry_1a694ca16546aa63dea5c8220f330d56a9" prot="public" virt="non-virtual"><scope>helios::ecs::EntityRegistry</scope><name>version</name></member>
+      <member refid="classhelios_1_1ecs_1_1EntityRegistry_1ae990102ea09401354b1692c0e236f0ba" prot="private" virt="non-virtual"><scope>helios::ecs::EntityRegistry</scope><name>versions_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

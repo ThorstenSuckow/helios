@@ -10,13 +10,13 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_9c6cd3e8e6e0499e50b91381009c10c7_1autotoc_md312">
+<sect1 id="dir_9c6cd3e8e6e0499e50b91381009c10c7_1autotoc_md321">
 <title>helios::engine::mechanics::lifecycle::components</title><para>Components for managing entity lifecycle states.</para>
 </sect1>
-<sect1 id="dir_9c6cd3e8e6e0499e50b91381009c10c7_1autotoc_md313">
+<sect1 id="dir_9c6cd3e8e6e0499e50b91381009c10c7_1autotoc_md322">
 <title>Overview</title><para>This module provides tag components for entity activation state, a marker for dead entities, and a component for scheduling delayed activation of other components after spawn.</para>
 </sect1>
-<sect1 id="dir_9c6cd3e8e6e0499e50b91381009c10c7_1autotoc_md314">
+<sect1 id="dir_9c6cd3e8e6e0499e50b91381009c10c7_1autotoc_md323">
 <title>Components</title><para><table rows="5" cols="2"><row>
 <entry thead="yes"><para>Component  </para>
 </entry><entry thead="yes"><para>Description  </para>
@@ -40,7 +40,7 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_9c6cd3e8e6e0499e50b91381009c10c7_1autotoc_md315">
+<sect1 id="dir_9c6cd3e8e6e0499e50b91381009c10c7_1autotoc_md324">
 <title>Active / Inactive</title><para>Managed automatically by <computeroutput>GameObject::setActive()</computeroutput>:</para>
 <para><itemizedlist>
 <listitem><para><computeroutput>setActive(true)</computeroutput> → adds <computeroutput>Active</computeroutput>, removes <computeroutput>Inactive</computeroutput>, calls <computeroutput>onActivate()</computeroutput> on components</para>
@@ -54,10 +54,10 @@
 <codeline><highlight class="normal">&gt;().whereEnabled())<sp/>{<sp/>...<sp/>}</highlight></codeline>
 </programlisting></para>
 </sect1>
-<sect1 id="dir_9c6cd3e8e6e0499e50b91381009c10c7_1autotoc_md316">
+<sect1 id="dir_9c6cd3e8e6e0499e50b91381009c10c7_1autotoc_md325">
 <title>DeadTagComponent</title><para>Attached by <computeroutput>HealthManager</computeroutput> when an entity&apos;s health reaches zero and the <computeroutput>HealthDepletedBehavior::DeadTag</computeroutput> flag is set. Systems can query for this tag to apply death-related logic (scoring, VFX, cleanup) without re-checking health values. Move-only; copying is not permitted.</para>
 </sect1>
-<sect1 id="dir_9c6cd3e8e6e0499e50b91381009c10c7_1autotoc_md317">
+<sect1 id="dir_9c6cd3e8e6e0499e50b91381009c10c7_1autotoc_md326">
 <title>DelayedComponentEnabler</title><para>Schedules delayed activation of other components. Works in conjunction with <computeroutput>DelayedComponentEnablerSystem</computeroutput>.</para>
 <para><programlisting filename=".cpp"><codeline><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>enabler<sp/>=<sp/>entity.get&lt;DelayedComponentEnabler&gt;();</highlight></codeline>
 <codeline><highlight class="normal">enabler-&gt;defer(entity,<sp/>ComponentTypeId::id&lt;CollisionComponent&gt;(),<sp/>0.5f);</highlight></codeline>

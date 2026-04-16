@@ -14,7 +14,7 @@ var searchData=
   ['vec4_3c_20float_20_3e_11',['vec4&lt; float &gt;',['../structhelios_1_1math_1_1vec4.html',1,'helios::math']]],
   ['vec4_3c_20int_20_3e_12',['vec4&lt; int &gt;',['../structhelios_1_1math_1_1vec4.html',1,'helios::math']]],
   ['vertex_13',['Vertex',['../structhelios_1_1rendering_1_1Vertex.html',1,'helios::rendering']]],
-  ['view_14',['View',['../classhelios_1_1core_1_1ecs_1_1View.html',1,'helios::core::ecs::View&lt; TEntityManager, Components &gt;'],['../classhelios_1_1engine_1_1ecs_1_1View.html',1,'helios::engine::ecs::View&lt; Components &gt;']]],
+  ['view_14',['View',['../classhelios_1_1ecs_1_1View.html',1,'helios::ecs::View&lt; TEntityManager, Components &gt;'],['../classhelios_1_1engine_1_1ecs_1_1View.html',1,'helios::engine::ecs::View&lt; Components &gt;']]],
   ['viewport_15',['Viewport',['../classhelios_1_1rendering_1_1Viewport.html',1,'helios::rendering']]],
   ['viewportidtag_16',['ViewportIdTag',['../structhelios_1_1engine_1_1common_1_1types_1_1ViewportIdTag.html',1,'helios::engine::common::types']]],
   ['viewportkey_17',['ViewportKey',['../structhelios_1_1rendering_1_1ViewportKey.html',1,'helios::rendering']]],

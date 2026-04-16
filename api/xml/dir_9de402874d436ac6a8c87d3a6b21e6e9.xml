@@ -5,32 +5,17 @@
     <innerdir refid="dir_26e6c957be264ba2163ce76e297c0235">components</innerdir>
     <innerdir refid="dir_11cbe91cfc8db7725fac4de5b80e73c7">concepts</innerdir>
     <innerfile refid="helios_2core_2ecs_2__module_8ixx">helios/core/ecs/_module.ixx</innerfile>
-    <innerfile refid="core_2ecs_2ComponentOps_8ixx">core/ecs/ComponentOps.ixx</innerfile>
-    <innerfile refid="core_2ecs_2ComponentOpsRegistry_8ixx">core/ecs/ComponentOpsRegistry.ixx</innerfile>
-    <innerfile refid="core_2ecs_2ComponentReflector_8ixx">core/ecs/ComponentReflector.ixx</innerfile>
-    <innerfile refid="core_2ecs_2ComponentTypeId_8ixx">core/ecs/ComponentTypeId.ixx</innerfile>
-    <innerfile refid="Entity_8ixx">Entity.ixx</innerfile>
-    <innerfile refid="core_2ecs_2EntityHandle_8ixx">core/ecs/EntityHandle.ixx</innerfile>
-    <innerfile refid="core_2ecs_2EntityManager_8ixx">core/ecs/EntityManager.ixx</innerfile>
-    <innerfile refid="core_2ecs_2EntityRegistry_8ixx">core/ecs/EntityRegistry.ixx</innerfile>
-    <innerfile refid="core_2ecs_2EntityResolver_8ixx">core/ecs/EntityResolver.ixx</innerfile>
-    <innerfile refid="HashedLookupStrategy_8ixx">HashedLookupStrategy.ixx</innerfile>
-    <innerfile refid="LinearLookupStrategy_8ixx">LinearLookupStrategy.ixx</innerfile>
-    <innerfile refid="core_2ecs_2SparseSet_8ixx">core/ecs/SparseSet.ixx</innerfile>
-    <innerfile refid="core_2ecs_2Traits_8ixx">core/ecs/Traits.ixx</innerfile>
-    <innerfile refid="TypedHandleWorld_8ixx">TypedHandleWorld.ixx</innerfile>
-    <innerfile refid="core_2ecs_2View_8ixx">core/ecs/View.ixx</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_9de402874d436ac6a8c87d3a6b21e6e9_1autotoc_md70">
+<sect1 id="dir_9de402874d436ac6a8c87d3a6b21e6e9_1autotoc_md53">
 <title>helios::core::ecs</title><para>Generic, reusable ECS primitives shared across the engine.</para>
 </sect1>
-<sect1 id="dir_9de402874d436ac6a8c87d3a6b21e6e9_1autotoc_md71">
+<sect1 id="dir_9de402874d436ac6a8c87d3a6b21e6e9_1autotoc_md54">
 <title>Overview</title><para>This module provides the low-level building blocks for entity management and component storage that are independent of any specific engine subsystem. The types defined here are policy-based templates that can be specialised for different domains (e.g. game entities, rendering resources, scene handles).</para>
 <para>Higher-level, engine-specific ECS facilities (e.g. <computeroutput>GameObject</computeroutput>, <computeroutput>View</computeroutput>, <computeroutput>EntityManager</computeroutput>) are located in <computeroutput><ref refid="namespacehelios_1_1engine_1_1ecs" kindref="compound">helios.engine.ecs</ref></computeroutput>.</para>
 </sect1>
-<sect1 id="dir_9de402874d436ac6a8c87d3a6b21e6e9_1autotoc_md72">
+<sect1 id="dir_9de402874d436ac6a8c87d3a6b21e6e9_1autotoc_md55">
 <title>Key Types</title><para><table rows="7" cols="2"><row>
 <entry thead="yes"><para>Class  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
@@ -62,16 +47,16 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_9de402874d436ac6a8c87d3a6b21e6e9_1autotoc_md73">
+<sect1 id="dir_9de402874d436ac6a8c87d3a6b21e6e9_1autotoc_md56">
 <title>EntityHandle</title><para><computeroutput>EntityHandle</computeroutput> combines an <computeroutput>EntityId</computeroutput>, a <computeroutput>VersionId</computeroutput>, and a domain-specific <computeroutput>TStrongId</computeroutput> into a single lightweight value. The version enables stale-handle detection after entity removal.</para>
-<para><programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8core_8ecs_8EntityHandle" kindref="compound">helios.core.ecs.EntityHandle</ref>;</highlight></codeline>
+<para><programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/>helios.core.ecs.EntityHandle;</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Handle<sp/>is<sp/>a<sp/>value<sp/>type<sp/>—<sp/>safe<sp/>to<sp/>copy<sp/>and<sp/>compare</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><ref refid="structhelios_1_1core_1_1ecs_1_1EntityHandle" kindref="compound">helios::core::ecs::EntityHandle&lt;MyStrongId&gt;</ref><sp/>handle;</highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(handle.<ref refid="structhelios_1_1core_1_1ecs_1_1EntityHandle_1a5cf2b151e9328b6b216dff07170b2c02" kindref="member">isValid</ref>())<sp/>{<sp/></highlight><highlight class="comment">/*<sp/>version<sp/>&gt;=<sp/>1<sp/>*/</highlight><highlight class="normal"><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">helios::core::ecs::EntityHandle&lt;MyStrongId&gt;<sp/>handle;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(handle.isValid())<sp/>{<sp/></highlight><highlight class="comment">/*<sp/>version<sp/>&gt;=<sp/>1<sp/>*/</highlight><highlight class="normal"><sp/>}</highlight></codeline>
 </programlisting></para>
 </sect1>
-<sect1 id="dir_9de402874d436ac6a8c87d3a6b21e6e9_1autotoc_md74">
+<sect1 id="dir_9de402874d436ac6a8c87d3a6b21e6e9_1autotoc_md57">
 <title>EntityRegistry</title><para>The <computeroutput>EntityRegistry</computeroutput> is the authoritative source for entity lifecycle management. It supports:</para>
 <para><itemizedlist>
 <listitem><para><bold>Handle creation</bold> with optional strong ID auto-assignment</para>
@@ -81,9 +66,9 @@
 </listitem><listitem><para><bold>Pluggable lookup strategies</bold> for strong ID collision detection</para>
 </listitem></itemizedlist>
 </para>
-<para><programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8core_8ecs_8EntityRegistry" kindref="compound">helios.core.ecs.EntityRegistry</ref>;</highlight></codeline>
+<para><programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/>helios.core.ecs.EntityRegistry;</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><ref refid="classhelios_1_1core_1_1ecs_1_1EntityRegistry" kindref="compound">helios::core::ecs::EntityRegistry&lt;MyStrongId&gt;</ref><sp/>registry(1024);</highlight></codeline>
+<codeline><highlight class="normal">helios::core::ecs::EntityRegistry&lt;MyStrongId&gt;<sp/>registry(1024);</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>handle<sp/>=<sp/>registry.create();</highlight></codeline>
 <codeline><highlight class="normal">assert(registry.isValid(handle));</highlight></codeline>
@@ -92,7 +77,7 @@
 <codeline><highlight class="normal">assert(!registry.isValid(handle));</highlight></codeline>
 </programlisting></para>
 </sect1>
-<sect1 id="dir_9de402874d436ac6a8c87d3a6b21e6e9_1autotoc_md75">
+<sect1 id="dir_9de402874d436ac6a8c87d3a6b21e6e9_1autotoc_md58">
 <title>SparseSet</title><para>A generic sparse set mapping <computeroutput>EntityId</computeroutput> to densely packed data of type <computeroutput>T</computeroutput>. Provides O(1) amortised insertion, lookup, and swap-and-pop removal with cache-friendly iteration over the dense storage.</para>
 <para><programlisting><codeline><highlight class="normal">Sparse:<sp/><sp/>[<sp/><sp/>2<sp/><sp/>|<sp/><sp/>×<sp/><sp/>|<sp/><sp/>0<sp/><sp/>|<sp/><sp/>×<sp/><sp/>|<sp/><sp/>1<sp/><sp/>]<sp/><sp/><sp/>(dense<sp/>index<sp/>per<sp/>EntityId)</highlight></codeline>
 <codeline><highlight class="normal">Dense:<sp/><sp/><sp/>[<sp/>T[0](id=2)<sp/>|<sp/>T[1](id=4)<sp/>|<sp/>T[2](id=0)<sp/>]</highlight></codeline>
@@ -100,7 +85,7 @@
 </programlisting></para>
 <para>The <computeroutput>TAllowRemoval</computeroutput> template parameter guards against accidental removal in pools that are intended to be append-only.</para>
 </sect1>
-<sect1 id="dir_9de402874d436ac6a8c87d3a6b21e6e9_1autotoc_md76">
+<sect1 id="dir_9de402874d436ac6a8c87d3a6b21e6e9_1autotoc_md59">
 <title>Lookup Strategies</title><para><computeroutput>EntityRegistry</computeroutput> delegates strong ID collision detection to a strategy object:</para>
 <para><table rows="3" cols="5"><row>
 <entry thead="yes"><para>Strategy  </para>
@@ -126,7 +111,7 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_9de402874d436ac6a8c87d3a6b21e6e9_1autotoc_md77">
+<sect1 id="dir_9de402874d436ac6a8c87d3a6b21e6e9_1autotoc_md60">
 <title>See Also</title><para><itemizedlist>
 <listitem><para><ref refid="dir_1ca916e0b9fbc882dbfbd9e6594e5e22" kindref="compound">Engine ECS</ref> — <computeroutput>GameObject</computeroutput>, <computeroutput>EntityManager</computeroutput>, <computeroutput>View</computeroutput>, <computeroutput>ComponentReflector</computeroutput></para>
 </listitem><listitem><para><ulink url="../types.ixx">Core Types</ulink> — <computeroutput>EntityId</computeroutput>, <computeroutput>VersionId</computeroutput>, <computeroutput>EntityTombstone</computeroutput>, <computeroutput>StrongId_t</computeroutput></para>

@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="ecs_2types_2EntityHandle_8ixx" kind="file" language="C++">
+    <compoundname>ecs/types/EntityHandle.ixx</compoundname>
+    <includes local="no">functional</includes>
+    <includes local="no">cstdint</includes>
+    <includes refid="IsStrongIdLike_8ixx" local="no">helios.ecs.concepts.IsStrongIdLike</includes>
+    <includes refid="TypeDefs_8ixx" local="no">helios.ecs.types.TypeDefs</includes>
+    <incdepgraph>
+      <node id="4">
+        <label>helios.ecs.concepts.IsStrongIdLike</label>
+        <link refid="IsStrongIdLike_8ixx"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>EntityHandle.ixx</label>
+        <link refid="ecs_2types_2EntityHandle_8ixx"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>helios.ecs.types.TypeDefs</label>
+        <link refid="TypeDefs_8ixx"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>concepts</label>
+      </node>
+      <node id="3">
+        <label>cstdint</label>
+      </node>
+      <node id="2">
+        <label>functional</label>
+      </node>
+      <node id="6">
+        <label>helios.core.types.TypeDefs</label>
+      </node>
+      <node id="8">
+        <label>limits</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structhelios_1_1ecs_1_1types_1_1EntityHandle" prot="public">helios::ecs::types::EntityHandle</innerclass>
+    <innerclass refid="structstd_1_1hash_3_01helios_1_1ecs_1_1types_1_1EntityHandle_3_01TStrongId_01_4_01_4" prot="public">std::hash&lt; helios::ecs::types::EntityHandle&lt; TStrongId &gt; &gt;</innerclass>
+    <innernamespace refid="namespacehelios">helios</innernamespace>
+    <innernamespace refid="namespacehelios_1_1ecs">helios::ecs</innernamespace>
+    <innernamespace refid="namespacehelios_1_1ecs_1_1types">helios::ecs::types</innernamespace>
+    <briefdescription>
+<para>Versioned, strongly-typed handle for referencing entities. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/**</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>@file<sp/>EntityHandle.ixx</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>@brief<sp/>Versioned,<sp/>strongly-typed<sp/>handle<sp/>for<sp/>referencing<sp/>entities.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">module</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;functional&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstdint&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8ecs_8types_8EntityHandle" kindref="compound">helios.ecs.types.EntityHandle</ref>;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8ecs_8types_8TypeDefs" kindref="compound">helios.ecs.types.TypeDefs</ref>;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8ecs_8concepts_8IsStrongIdLike" kindref="compound">helios.ecs.concepts.IsStrongIdLike</ref>;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1ecs_1_1concepts" kindref="compound">helios::ecs::concepts</ref>;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1ecs_1_1types" kindref="compound">helios::ecs::types</ref><sp/>{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Sentinel<sp/>version<sp/>indicating<sp/>an<sp/>invalid<sp/>or<sp/>uninitialized<sp/>handle.</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22" refid="namespacehelios_1_1ecs_1_1types_1a8f766ac55555dcfdd723da0bc005d5ee" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1ecs_1_1types_1a8f766ac55555dcfdd723da0bc005d5ee" kindref="member">InvalidVersion</ref><sp/>=<sp/><ref refid="namespacehelios_1_1ecs_1_1types_1a58cc516088b7b594d813b712c9337c8a" kindref="member">VersionId</ref>{0};</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>The<sp/>initial<sp/>version<sp/>assigned<sp/>to<sp/>newly<sp/>created<sp/>entities.</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Versions<sp/>start<sp/>at<sp/>1<sp/>to<sp/>distinguish<sp/>valid<sp/>handles<sp/>from<sp/>default-initialized</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>handles<sp/>that<sp/>may<sp/>have<sp/>a<sp/>version<sp/>of<sp/>0.</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30" refid="namespacehelios_1_1ecs_1_1types_1a73c3ad9e4d669fa64545af9cab67f91a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1ecs_1_1types_1a73c3ad9e4d669fa64545af9cab67f91a" kindref="member">InitialVersion</ref><sp/>=<sp/><ref refid="namespacehelios_1_1ecs_1_1types_1a58cc516088b7b594d813b712c9337c8a" kindref="member">VersionId</ref>{1};</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>A<sp/>versioned<sp/>handle<sp/>for<sp/>referencing<sp/>entities<sp/>in<sp/>a<sp/>registry.</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>`EntityHandle`<sp/>combines<sp/>an<sp/>entity<sp/>ID<sp/>with<sp/>a<sp/>version<sp/>number<sp/>and<sp/>a</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>domain-specific<sp/>strong<sp/>ID<sp/>to<sp/>provide<sp/>safe,<sp/>typed<sp/>references<sp/>to</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>registered<sp/>entities.<sp/>The<sp/>version<sp/>ensures<sp/>that<sp/>handles<sp/>to<sp/>removed</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>entities<sp/>are<sp/>detected<sp/>as<sp/>stale.</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@tparam<sp/>TStrongId<sp/>A<sp/>strong<sp/>ID<sp/>type<sp/>carrying<sp/>domain<sp/>semantics.</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>EntityRegistry</highlight></codeline>
+<codeline lineno="44"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>TStrongId&gt;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">requires</highlight><highlight class="normal"><sp/>IsStrongIdLike&lt;TStrongId&gt;</highlight></codeline>
+<codeline lineno="47" refid="structhelios_1_1ecs_1_1types_1_1EntityHandle" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structhelios_1_1ecs_1_1types_1_1EntityHandle" kindref="compound">EntityHandle</ref><sp/>{</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49" refid="structhelios_1_1ecs_1_1types_1_1EntityHandle_1a41aa081eb318e74e4ebab6e258857b87" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structhelios_1_1ecs_1_1types_1_1EntityHandle_1a41aa081eb318e74e4ebab6e258857b87" kindref="member">StrongId_type</ref><sp/>=<sp/>TStrongId;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="51"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="52"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>The<sp/>unique<sp/>identifier<sp/>for<sp/>the<sp/>entity<sp/>within<sp/>the<sp/>registry.</highlight></codeline>
+<codeline lineno="53"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54" refid="structhelios_1_1ecs_1_1types_1_1EntityHandle_1a010874a6b08dbb642eecc598988a8346" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1ecs_1_1types_1acf27c982c01d422a7605616c407ac7b0" kindref="member">EntityId</ref><sp/><ref refid="structhelios_1_1ecs_1_1types_1_1EntityHandle_1a010874a6b08dbb642eecc598988a8346" kindref="member">entityId</ref>{0};</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="56"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="57"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>The<sp/>version<sp/>number<sp/>for<sp/>stale<sp/>handle<sp/>detection.</highlight></codeline>
+<codeline lineno="58"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="59"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Incremented<sp/>when<sp/>an<sp/>entity<sp/>is<sp/>removed<sp/>from<sp/>the<sp/>registry.</highlight></codeline>
+<codeline lineno="60"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61" refid="structhelios_1_1ecs_1_1types_1_1EntityHandle_1a2e7c4fcc73d7ba067f40e057a6a6bfe3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1ecs_1_1types_1a58cc516088b7b594d813b712c9337c8a" kindref="member">VersionId</ref><sp/><ref refid="structhelios_1_1ecs_1_1types_1_1EntityHandle_1a2e7c4fcc73d7ba067f40e057a6a6bfe3" kindref="member">versionId</ref><sp/>=<sp/><ref refid="namespacehelios_1_1ecs_1_1types_1a8f766ac55555dcfdd723da0bc005d5ee" kindref="member">InvalidVersion</ref>;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="63"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="64"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>The<sp/>domain-specific<sp/>strong<sp/>ID<sp/>associated<sp/>with<sp/>this<sp/>handle.</highlight></codeline>
+<codeline lineno="65"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66" refid="structhelios_1_1ecs_1_1types_1_1EntityHandle_1a2f6ce2214948837e8ee31960754c9c48" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TStrongId<sp/><ref refid="structhelios_1_1ecs_1_1types_1_1EntityHandle_1a2f6ce2214948837e8ee31960754c9c48" kindref="member">strongId</ref>{};</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="68"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="69"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Compares<sp/>two<sp/>handles<sp/>for<sp/>equality.</highlight></codeline>
+<codeline lineno="70"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71" refid="structhelios_1_1ecs_1_1types_1_1EntityHandle_1a66b37b0f314f0a8767e4bdf18e999ceb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1ecs_1_1types_1_1EntityHandle_1a66b37b0f314f0a8767e4bdf18e999ceb" kindref="member">operator==</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1ecs_1_1types_1_1EntityHandle" kindref="compound">EntityHandle</ref>&amp;)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="73"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="74"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Compares<sp/>two<sp/>handles<sp/>by<sp/>entity<sp/>ID<sp/>(less-than).</highlight></codeline>
+<codeline lineno="75"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="76"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>entityHandle<sp/>The<sp/>handle<sp/>to<sp/>compare<sp/>against.</highlight></codeline>
+<codeline lineno="77"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="78"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>True<sp/>if<sp/>this<sp/>handle&apos;s<sp/>entity<sp/>ID<sp/>is<sp/>less<sp/>than<sp/>the<sp/>other.</highlight></codeline>
+<codeline lineno="79"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="80" refid="structhelios_1_1ecs_1_1types_1_1EntityHandle_1ad3dc91bbf9c2ee65aed86869d1a2aa8c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1ecs_1_1types_1_1EntityHandle_1ad3dc91bbf9c2ee65aed86869d1a2aa8c" kindref="member">operator&lt;</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1ecs_1_1types_1_1EntityHandle" kindref="compound">EntityHandle</ref>&amp;<sp/>entityHandle)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1ecs_1_1types_1_1EntityHandle_1a010874a6b08dbb642eecc598988a8346" kindref="member">entityId</ref><sp/>&lt;<sp/>entityHandle.entityId;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="84"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="85"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Compares<sp/>two<sp/>handles<sp/>by<sp/>entity<sp/>ID<sp/>(greater-than).</highlight></codeline>
+<codeline lineno="86"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="87"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>entityHandle<sp/>The<sp/>handle<sp/>to<sp/>compare<sp/>against.</highlight></codeline>
+<codeline lineno="88"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="89"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>True<sp/>if<sp/>this<sp/>handle&apos;s<sp/>entity<sp/>ID<sp/>is<sp/>greater<sp/>than<sp/>the<sp/>other.</highlight></codeline>
+<codeline lineno="90"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="91" refid="structhelios_1_1ecs_1_1types_1_1EntityHandle_1a0cdb7435f9b1e957194dfbf351c20ab1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1ecs_1_1types_1_1EntityHandle_1a0cdb7435f9b1e957194dfbf351c20ab1" kindref="member">operator&gt;</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1ecs_1_1types_1_1EntityHandle" kindref="compound">EntityHandle</ref>&amp;<sp/>entityHandle)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1ecs_1_1types_1_1EntityHandle_1a010874a6b08dbb642eecc598988a8346" kindref="member">entityId</ref><sp/>&gt;<sp/>entityHandle.entityId;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="96"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="97"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Checks<sp/>if<sp/>this<sp/>handle<sp/>is<sp/>potentially<sp/>valid.</highlight></codeline>
+<codeline lineno="98"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="99"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>True<sp/>if<sp/>the<sp/>version<sp/>is<sp/>at<sp/>least<sp/>1<sp/>(initial<sp/>version).</highlight></codeline>
+<codeline lineno="100"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="101" refid="structhelios_1_1ecs_1_1types_1_1EntityHandle_1ab6f1e9a6b2ee11f4b6436a413f1b27f2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1ecs_1_1types_1_1EntityHandle_1ab6f1e9a6b2ee11f4b6436a413f1b27f2" kindref="member">isValid</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1ecs_1_1types_1_1EntityHandle_1a2e7c4fcc73d7ba067f40e057a6a6bfe3" kindref="member">versionId</ref><sp/>&gt;=<sp/>1;</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="110"><highlight class="comment">/**</highlight></codeline>
+<codeline lineno="111"><highlight class="comment"><sp/>*<sp/>@brief<sp/>Hash<sp/>specialization<sp/>for<sp/>EntityHandle.</highlight></codeline>
+<codeline lineno="112"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="113"><highlight class="comment"><sp/>*<sp/>Packs<sp/>entityId<sp/>and<sp/>versionId<sp/>into<sp/>a<sp/>64-bit<sp/>value<sp/>for<sp/>hashing.</highlight></codeline>
+<codeline lineno="114"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>TStrongId&gt;</highlight></codeline>
+<codeline lineno="116" refid="structstd_1_1hash_3_01helios_1_1ecs_1_1types_1_1EntityHandle_3_01TStrongId_01_4_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">std::hash&lt;<ref refid="namespacehelios" kindref="compound">helios</ref>::<ref refid="structhelios_1_1ecs_1_1types_1_1EntityHandle" kindref="compound">ecs::types::EntityHandle</ref>&lt;TStrongId&gt;&gt;<sp/>{</highlight></codeline>
+<codeline lineno="117" refid="structstd_1_1hash_3_01helios_1_1ecs_1_1types_1_1EntityHandle_3_01TStrongId_01_4_01_4_1a9bbe7c8dfe23b2fada2111b0f10640ed" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::size_t<sp/><ref refid="structstd_1_1hash_3_01helios_1_1ecs_1_1types_1_1EntityHandle_3_01TStrongId_01_4_01_4_1a9bbe7c8dfe23b2fada2111b0f10640ed" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1ecs_1_1types_1_1EntityHandle" kindref="compound">helios::ecs::types::EntityHandle&lt;TStrongId&gt;</ref>&amp;<sp/>handle)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t<sp/>packed<sp/>=<sp/>(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">uint64_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(handle.entityId)<sp/>&lt;&lt;<sp/>32)<sp/>|</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">uint64_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(handle.versionId);</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::hash&lt;uint64_t&gt;{}(packed);</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="124"><highlight class="normal">};</highlight></codeline>
+    </programlisting>
+    <location file="/tmp/h/include/helios/ecs/types/EntityHandle.ixx"/>
+  </compounddef>
+</doxygen>

@@ -22,14 +22,6 @@
     <includes refid="HealthComponent_8ixx" local="no">helios.engine.mechanics.health.components.HealthComponent</includes>
     <includes refid="helios_2engine_2mechanics_2health_2types_2__module_8ixx" local="no">helios.engine.mechanics.health.types</includes>
     <incdepgraph>
-      <node id="61">
-        <label>helios.core.algorithms</label>
-        <link refid="algorithms_8ixx"/>
-        <childnode refid="26" relation="include">
-        </childnode>
-        <childnode refid="3" relation="include">
-        </childnode>
-      </node>
       <node id="111">
         <label>helios.core.container.ConceptModelRegistry</label>
         <link refid="ConceptModelRegistry_8ixx"/>
@@ -204,18 +196,6 @@
         <childnode refid="32" relation="include">
         </childnode>
         <childnode refid="60" relation="include">
-        </childnode>
-      </node>
-      <node id="60">
-        <label>helios.core.data.StrongId</label>
-        <link refid="StrongId_8ixx"/>
-        <childnode refid="26" relation="include">
-        </childnode>
-        <childnode refid="57" relation="include">
-        </childnode>
-        <childnode refid="32" relation="include">
-        </childnode>
-        <childnode refid="61" relation="include">
         </childnode>
       </node>
       <node id="50">
@@ -2842,6 +2822,12 @@
       <node id="71">
         <label>generator</label>
       </node>
+      <node id="61">
+        <label>helios.core.algorithms</label>
+      </node>
+      <node id="60">
+        <label>helios.core.data.StrongId</label>
+      </node>
       <node id="75">
         <label>helios/helios_config.h</label>
       </node>
@@ -3013,9 +2999,9 @@
 <codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>eventPass<sp/>=<sp/>updateContext.readPass&lt;</highlight></codeline>
 <codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1events_1_1SolidCollisionEvent" kindref="compound">helios::engine::modules::physics::collision::events::SolidCollisionEvent</ref>&gt;();</highlight></codeline>
 <codeline lineno="82"><highlight class="normal"></highlight></codeline>
-<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/><ref refid="namespacehelios_1_1event" kindref="compound">event</ref><sp/>:<sp/>eventPass)<sp/>{</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>event<sp/>:<sp/>eventPass)<sp/>{</highlight></codeline>
 <codeline lineno="84"><highlight class="normal"></highlight></codeline>
-<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>go<sp/>=<sp/>updateContext.find(<ref refid="namespacehelios_1_1event" kindref="compound">event</ref>.collisionContext().source);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>go<sp/>=<sp/>updateContext.find(event.collisionContext().source);</highlight></codeline>
 <codeline lineno="86"><highlight class="normal"></highlight></codeline>
 <codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!go)<sp/>{</highlight></codeline>
 <codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">continue</highlight><highlight class="normal">;</highlight></codeline>
@@ -3041,7 +3027,7 @@
 <codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="109"><highlight class="normal"></highlight></codeline>
 <codeline lineno="110"><highlight class="normal"></highlight></codeline>
-<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>damageApplied<sp/>=<sp/>ddc-&gt;damage(<ref refid="namespacehelios_1_1event" kindref="compound">event</ref>.collisionContext().otherCollisionLayerId);</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>damageApplied<sp/>=<sp/>ddc-&gt;damage(event.collisionContext().otherCollisionLayerId);</highlight></codeline>
 <codeline lineno="112"><highlight class="normal"></highlight></codeline>
 <codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>logger_.info(std::format(</highlight></codeline>
 <codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Hitting<sp/>entity<sp/>{0}<sp/>with<sp/>{1}<sp/>damage!&quot;</highlight><highlight class="normal">,<sp/>other.value().entityId,<sp/>damageApplied</highlight></codeline>

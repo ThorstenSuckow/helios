@@ -5,7 +5,7 @@ var dir_4e12247f2bbe360a59cd98a83515e8f1 =
     [ "ecs", "dir_9de402874d436ac6a8c87d3a6b21e6e9.html", "dir_9de402874d436ac6a8c87d3a6b21e6e9" ],
     [ "memory", "dir_7ac130d819a67a0b4cf4e0f9c1cae22c.html", "dir_7ac130d819a67a0b4cf4e0f9c1cae22c" ],
     [ "spatial", "dir_c895596e1264bd44bfc4ab7e30749e4b.html", "dir_c895596e1264bd44bfc4ab7e30749e4b" ],
+    [ "types", "dir_62c93d06e54b3a1290b0b4d6d1513631.html", "dir_62c93d06e54b3a1290b0b4d6d1513631" ],
     [ "_module.ixx", "helios_2core_2__module_8ixx.html", null ],
-    [ "algorithms.ixx", "algorithms_8ixx.html", "algorithms_8ixx" ],
     [ "types.ixx", "types_8ixx.html", "types_8ixx" ]
 ];

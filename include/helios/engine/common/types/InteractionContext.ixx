@@ -11,7 +11,7 @@ import helios.util;
 
 import helios.core.types;
 
-import helios.engine.ecs.EntityHandle;
+import helios.ecs.types.EntityHandle;
 
 export namespace helios::engine::common::types {
 
@@ -22,22 +22,23 @@ export namespace helios::engine::common::types {
      * point. Used as a base context for more specific interaction types
      * such as DamageContext.
      */
+    template<typename THandle>
     struct InteractionContext {
 
         /**
          * @brief Entity that is affected by the interaction.
          */
-        helios::engine::ecs::EntityHandle target{};
+        THandle target{};
 
         /**
          * @brief Entity that initiated the interaction.
          */
-        helios::engine::ecs::EntityHandle instigator{};
+        THandle instigator{};
 
         /**
          * @brief Entity that directly caused the interaction (e.g. projectile).
          */
-        helios::engine::ecs::EntityHandle causer{};
+        THandle causer{};
 
         /**
          * @brief World-space contact point of the interaction.

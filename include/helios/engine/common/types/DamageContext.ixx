@@ -19,12 +19,13 @@ export namespace helios::engine::common::types {
      *
      * @see InteractionContext
      */
+    template<typename THandle>
     struct DamageContext {
 
         /**
          * @brief The underlying interaction between source and target.
          */
-        InteractionContext interactionContext{};
+        InteractionContext<THandle> interactionContext{};
 
         /**
          * @brief Amount of damage to apply.

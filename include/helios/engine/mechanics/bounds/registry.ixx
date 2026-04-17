@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.mechanics.bounds.registry;
 
-import helios.engine.ecs.ComponentReflector;
+import helios.ecs.ComponentReflector;
 import helios.engine.mechanics.bounds.components;
 
 export namespace helios::engine::mechanics::bounds {
@@ -14,10 +14,11 @@ export namespace helios::engine::mechanics::bounds {
     /**
      * @brief Registers all bounds components with the ComponentReflector.
      */
+    template<typename TEntityManager>
     inline void registerComponents() {
-        using R = helios::engine::ecs::ComponentReflector;
+        using R = helios::ecs::ComponentReflector<TEntityManager>;
 
-        R::registerType<components::LevelBoundsBehaviorComponent>();
+        R::template registerType<components::LevelBoundsBehaviorComponent<typename TEntityManager::Handle_type>>();
     }
 
 }

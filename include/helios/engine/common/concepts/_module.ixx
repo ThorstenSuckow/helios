@@ -15,4 +15,5 @@ export import helios.engine.common.concepts.IsManagerLike;
 export import helios.engine.common.concepts.IsSystemLike;
 export import helios.engine.common.concepts.IsCommandBufferLike;
 export import helios.engine.common.concepts.IsCommandHandlerLike;
-export import helios.engine.common.concepts.IsShaderLike;
+export import helios.engine.common.concepts.IsFrustumCullerLike;
+export import helios.engine.common.concepts.IsResourceHandle;

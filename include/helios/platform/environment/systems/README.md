@@ -8,7 +8,7 @@ Systems executing runtime platform lifecycle logic.
 |--------|---------|
 | `PlatformInitSystem<THandle>` | Handles runtime/platform initialization flow |
 | `PollEventsSystem<THandle>` | Triggers per-frame platform event polling |
-| `ShutdownSystem<THandle>` | Handles shutdown requests |
+| `WindowBasedShutdownSystem<THandle>` | Handles shutdown requests |
 | `WarmupDoneSystem<THandle>` | Finalizes runtime warmup state transitions |
 
 ---

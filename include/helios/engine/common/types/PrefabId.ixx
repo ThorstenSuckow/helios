@@ -9,9 +9,9 @@ module;
 
 export module helios.engine.common.types.PrefabId;
 
-import helios.core.algorithms;
+import helios.core.types.FuncDefs;
 import helios.core.types;
-import helios.core.data;
+import helios.core.types.StrongId;
 
 export namespace helios::engine::common::types {
 
@@ -25,8 +25,8 @@ export namespace helios::engine::common::types {
      *
      * @details Used to uniquely identify prefabs.
      *
-     * @see helios::core::data::StrongId
+     * @see helios::core::types::StrongId
      */
-    using PrefabId = helios::core::data::StrongId<PrefabIdTag, uint32_t>;
+    using PrefabId = helios::core::types::StrongId<PrefabIdTag>;
 
 }

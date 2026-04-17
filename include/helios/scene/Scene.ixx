@@ -19,15 +19,17 @@ import helios.scene.CameraSceneNode;
 import helios.scene.Camera;
 import helios.math.types;
 
-import helios.rendering.Viewport;
+import helios.rendering.viewport.Viewport;
 import helios.scene.FrustumCullingStrategy;
 import helios.scene.SnapshotItem;
 
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
 
-import helios.engine.modules.scene.types.SceneId;
+import helios.scene.types.SceneHandle;
 import helios.core.types;
+
+using namespace helios::scene::types;
 
 #define HELIOS_LOG_SCOPE "helios::scene::Scene"
 export namespace helios::scene {
@@ -78,7 +80,7 @@ export namespace helios::scene {
         /**
          * @brief Unique identifier for this scene.
          */
-        helios::engine::modules::scene::types::SceneId sceneId_{helios::core::types::no_init};
+        helios::scene::types::SceneHandle sceneHandle_;
 
         /**
          * @brief Internal helper function to force-propagate the worldTransformation of SceneNodes to their child nodes.
@@ -195,14 +197,14 @@ export namespace helios::scene {
          * @brief Constructs a new Scene with a specific scene ID.
          *
          * @param frustumCullingStrategy The frustum culling strategy to use with this Scene.
-         * @param sceneId Unique identifier for this scene.
+         * @param sceneHandle Unique handle for this scene.
          */
         explicit Scene(
             std::unique_ptr<helios::scene::FrustumCullingStrategy> frustumCullingStrategy,
-                       const helios::engine::modules::scene::types::SceneId sceneId) :
-            Scene(std::move(frustumCullingStrategy))
-             {
-                 sceneId_ = sceneId;
+            const helios::scene::types::SceneHandle sceneHandle
+        ) :
+            Scene(std::move(frustumCullingStrategy)) {
+            sceneHandle_ = sceneHandle;
         }
 
         /**
@@ -233,12 +235,12 @@ export namespace helios::scene {
         }
 
         /**
-         * @brief Returns the unique identifier for this scene.
+         * @brief Returns the unique handle for this scene.
          *
-         * @return The SceneId for this scene.
+         * @return The SceneHandle for this scene.
          */
-        [[nodiscard]] helios::engine::modules::scene::types::SceneId sceneId() const noexcept {
-            return sceneId_;
+        [[nodiscard]] helios::scene::types::SceneHandle sceneHandle() const noexcept {
+            return sceneHandle_;
         }
 
         /**
@@ -295,7 +297,7 @@ export namespace helios::scene {
          * @todo This should be refactored into a factory to prevent domain leakage between Scene and Rendering.
          */
         [[nodiscard]] std::optional<Snapshot>
-        createSnapshot(const rendering::Viewport& viewport) const {
+        createSnapshot(const rendering::viewport::Viewport& viewport) const {
 
             const auto* cameraSceneNode = viewport.cameraSceneNode();
 

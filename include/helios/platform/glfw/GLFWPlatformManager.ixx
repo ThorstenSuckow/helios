@@ -30,7 +30,6 @@ import helios.engine.mechanics.gamestate.types;
 import helios.engine.common.tags.ManagerRole;
 
 import helios.engine.runtime.world;
-import helios.engine.runtime.messaging.command.EngineCommandBuffer;
 
 import helios.platform.environment.commands;
 import helios.platform.environment.components;
@@ -78,8 +77,10 @@ export namespace helios::platform::glfw {
      * @tparam THandle Window/entity handle type.
      * @tparam TCommandBuffer Command buffer used for follow-up state/runtime commands.
      */
-    template<typename THandle, typename TCommandBuffer = NullCommandBuffer>
-    requires IsEntityHandle<THandle> && IsCommandBufferLike<TCommandBuffer>
+    template<typename THandle, typename TStateCommandBuffer = NullCommandBuffer, typename TPlatformCommandBuffer = NullCommandBuffer>
+    requires IsEntityHandle<THandle>
+            && IsCommandBufferLike<TStateCommandBuffer>
+            && IsCommandBufferLike<TPlatformCommandBuffer>
     class GLFWPlatformManager {
 
         GameWorld* gameWorld_ = nullptr;
@@ -128,7 +129,7 @@ export namespace helios::platform::glfw {
             initialized_ = updateContext.session().initialize() &&
                            updateContext.runtimeEnvironment().initialize();
 
-            updateContext.queueCommand<TCommandBuffer, StateCommand<GameState>>(
+            updateContext.queueCommand<TStateCommandBuffer, StateCommand<GameState>>(
                 StateTransitionRequest<GameState>(
                     updateContext.session().state<GameState>(),
                     GameStateTransitionId::BootRequest
@@ -259,7 +260,7 @@ export namespace helios::platform::glfw {
                 const auto* ptr = static_cast<GLFWWindowUserPointer<THandle>*>(glfwGetWindowUserPointer(nativeHandle));
 
                 if (ptr && ptr->gameWorld) {
-                    ptr->gameWorld->commandBuffer<EngineCommandBuffer>().add<WindowResizeCommand<THandle>>(
+                    ptr->gameWorld->commandBuffer<TPlatformCommandBuffer>().add<WindowResizeCommand<THandle>>(
                         ptr->windowHandle,
                         WindowSize(width, height)
                     );
@@ -384,7 +385,7 @@ export namespace helios::platform::glfw {
 
             glfwTerminate();
 
-            updateContext.queueCommand<TCommandBuffer, StateCommand<GameState>>(
+            updateContext.queueCommand<TStateCommandBuffer, StateCommand<GameState>>(
                StateTransitionRequest<GameState>(
                    updateContext.session().state<GameState>(),
                    GameStateTransitionId::ShutdownRequest

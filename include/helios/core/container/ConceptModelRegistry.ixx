@@ -140,7 +140,7 @@ export namespace helios::core::container {
         template<typename T, typename... Args>
         T& add(Args&&... args) {
 
-            assert(!has<T>() && "AnyT already registered with GameLoopPhase");
+            assert(!has<T>() && "AnyT already registered.");
 
             AnyT wrapper{T{std::forward<Args>(args)...}};
 

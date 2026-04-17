@@ -34,12 +34,13 @@ export namespace helios::engine::mechanics::spawn::components {
      *
      * // During despawn
      * auto profileId = entity.get<SpawnedByProfileComponent>()->spawnProfileId();
-     * poolManager.release(profileId, entity.entityHandle());
+     * poolManager.release(profileId, entity.handle());
      * ```
      *
      * @see SpawnProfileId
      * @see GameObjectPoolManager
      */
+    template<typename THandle>
     class SpawnedByProfileComponent  {
 
         /**

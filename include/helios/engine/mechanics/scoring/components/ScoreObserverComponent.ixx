@@ -32,6 +32,7 @@ export namespace helios::engine::mechanics::scoring::components {
      * @see ScoreObserverClearSystem
      * @see ScorePoolSnapshot
      */
+    template<typename THandle>
     class ScoreObserverComponent {
 
         friend class helios::engine::mechanics::scoring::systems::ScoreObserverClearSystem;

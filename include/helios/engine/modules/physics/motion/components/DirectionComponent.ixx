@@ -23,6 +23,7 @@ export namespace helios::engine::modules::physics::motion::components {
      * movement direction, facing direction, or other vector-based properties.
      * It enforces normalization of the stored vector.
      */
+    template<typename THandle>
     class  DirectionComponent {
 
         /**

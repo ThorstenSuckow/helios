@@ -15,7 +15,7 @@ import helios.math.types;
 import helios.core.units.Unit;
 
 
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameObject;
 
 import helios.engine.modules.rendering.renderable.components.RenderableComponent;
 
@@ -32,6 +32,7 @@ export namespace helios::engine::modules::scene::components {
      *
      * @note The SceneNode must remain valid for the lifetime of this component.
      */
+    template<typename THandle>
     class SceneNodeComponent  {
 
     protected:

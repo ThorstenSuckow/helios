@@ -27,6 +27,7 @@ export namespace helios::engine::mechanics::damage::components {
      * which collision layer the target belongs to. Uses a fixed-size array
      * indexed by layer ID for O(1) damage lookup.
      */
+    template<typename THandle>
     class DamageDealerComponent {
 
     private:

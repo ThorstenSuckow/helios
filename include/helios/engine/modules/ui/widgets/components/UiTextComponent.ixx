@@ -17,7 +17,7 @@ import helios.math.types;
 import helios.core.units.Unit;
 
 
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameObject;
 
 import helios.engine.modules.rendering.renderable.components.RenderableComponent;
 
@@ -31,6 +31,7 @@ export namespace helios::engine::modules::ui::widgets::components {
  * Wraps a TextRenderable and provides template-based value formatting.
  * Supports dirty tracking to minimize rendering updates.
  */
+    template<typename THandle>
 class UiTextComponent {
 
     protected:

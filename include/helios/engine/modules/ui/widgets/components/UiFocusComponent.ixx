@@ -10,7 +10,7 @@ export module helios.engine.modules.ui.widgets.components.UiFocusComponent;
 
 import helios.engine.modules.ui.widgets.types.MenuId;
 
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameObject;
 
 export namespace helios::engine::modules::ui::widgets::components {
 
@@ -19,6 +19,7 @@ export namespace helios::engine::modules::ui::widgets::components {
      *
      * Used to manage which UI element has focus for input handling.
      */
+    template<typename THandle>
     struct UiFocusComponent {};
 
 } // namespace helios::engine::modules::ui::widgets::components

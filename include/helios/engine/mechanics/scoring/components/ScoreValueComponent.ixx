@@ -23,7 +23,7 @@ export namespace helios::engine::mechanics::scoring::components {
      *
      * @tparam T The score type (must derive from Score).
      */
-    template<typename T>
+    template<typename THandle, typename T>
     requires std::is_base_of_v<helios::engine::mechanics::scoring::types::Score, T>
     class ScoreValueComponent  {
 

@@ -15,6 +15,7 @@ export namespace helios::engine::mechanics::match::components {
      * GameObject in the match. It can be used by systems to apply player-specific
      * logic, such as input handling, camera control, and UI updates.
      */
+    template<typename THandle>
     class PlayerComponent {};
 
 }

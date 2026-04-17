@@ -8,10 +8,10 @@ export module helios.engine.mechanics.match.components.LivesBindingComponent;
 
 import helios.engine.mechanics.match.types;
 
-import helios.engine.ecs;
+import helios.ecs;
 import helios.core.types;
 
-using namespace helios::engine::ecs;
+using namespace helios::ecs::types;
 using namespace helios::engine::mechanics::match::types;
 
 export namespace helios::engine::mechanics::match::components {
@@ -23,6 +23,7 @@ export namespace helios::engine::mechanics::match::components {
      * Observer systems compare the stored revision against the target's
      * LivesComponent revision to detect changes and update the UI.
      */
+    template<typename THandle>
     class LivesBindingComponent {
 
     private:
@@ -30,7 +31,7 @@ export namespace helios::engine::mechanics::match::components {
         /**
          * @brief Handle of the entity whose lives are observed.
          */
-        EntityHandle entityHandle_;
+        THandle entityHandle_;
 
         /**
          * @brief Last-seen lives revision for change detection.
@@ -44,14 +45,14 @@ export namespace helios::engine::mechanics::match::components {
          *
          * @param target Handle of the entity to observe.
          */
-        LivesBindingComponent(EntityHandle target) : entityHandle_(target) {};
+        LivesBindingComponent(THandle target) : entityHandle_(target) {};
 
         /**
          * @brief Returns the observed entity handle.
          *
-         * @return The target EntityHandle.
+         * @return The target THandle.
          */
-        [[nodiscard]] EntityHandle target() const noexcept {
+        [[nodiscard]] THandle target() const noexcept {
             return entityHandle_;
         }
 

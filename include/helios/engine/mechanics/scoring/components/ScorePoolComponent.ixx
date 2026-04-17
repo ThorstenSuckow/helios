@@ -10,7 +10,7 @@ export module helios.engine.mechanics.scoring.components.ScorePoolComponent;
 
 import helios.engine.mechanics.scoring.types.ScorePoolId;
 
-import helios.core.types;
+import helios.core.types.TypeDefs;
 
 export namespace helios::engine::mechanics::scoring::components {
 
@@ -21,6 +21,7 @@ export namespace helios::engine::mechanics::scoring::components {
      * Attached to entities (e.g., player) to specify which score pool
      * receives points when that entity performs scoring actions.
      */
+    template<typename THandle>
     class ScorePoolComponent  {
 
     private:

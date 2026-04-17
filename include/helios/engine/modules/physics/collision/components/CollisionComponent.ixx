@@ -10,7 +10,7 @@ module;
 export module helios.engine.modules.physics.collision.components.CollisionComponent;
 
 
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameObject;
 
 import helios.engine.modules.physics.collision.types.CollisionBehavior;
 import helios.engine.modules.physics.collision.types.HitPolicy;
@@ -43,6 +43,7 @@ export namespace helios::engine::modules::physics::collision::components {
      * collision.setSolidCollisionMask(LAYER_ENEMY);
      * ```
      */
+    template<typename THandle>
     class CollisionComponent  {
 
         size_t CollisionBehaviorSize = helios::engine::modules::physics::collision::types::CollisionBehaviorItemSize;

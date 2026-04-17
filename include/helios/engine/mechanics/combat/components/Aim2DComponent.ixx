@@ -12,7 +12,7 @@ import helios.engine.runtime.world.UpdateContext;
 
 import helios.math;
 
-import helios.engine.ecs.types.ComponentTypeId;
+import helios.ecs.types.ComponentTypeId;
 
 export namespace helios::engine::mechanics::combat::components {
 
@@ -26,6 +26,7 @@ export namespace helios::engine::mechanics::combat::components {
      * @note This is a base implementation with empty methods. Derive from this
      *       class to implement game-specific aiming logic.
      */
+    template<typename THandle>
     class Aim2DComponent {
 
     protected:

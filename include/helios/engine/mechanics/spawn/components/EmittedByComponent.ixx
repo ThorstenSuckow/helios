@@ -11,7 +11,7 @@ import helios.engine.runtime.spawn.types.SpawnProfileId;
 import helios.core.types;
 import helios.util;
 
-import helios.engine.ecs.EntityHandle;
+import helios.ecs.types.EntityHandle;
 
 export namespace helios::engine::mechanics::spawn::components {
 
@@ -23,12 +23,13 @@ export namespace helios::engine::mechanics::spawn::components {
      * and its source entity (e.g., the player or enemy that fired it). This enables
      * game logic to attribute actions like damage or scoring to the correct source.
      */
+    template<typename THandle>
     class EmittedByComponent {
 
         /**
          * @brief Handle of the entity that emitted this object.
          */
-        helios::engine::ecs::EntityHandle source_{};
+        THandle source_{};
 
         /**
          * @brief Whether this component is enabled.
@@ -81,7 +82,7 @@ export namespace helios::engine::mechanics::spawn::components {
          *
          * @param source Handle of the emitting entity.
          */
-        void setSource(const helios::engine::ecs::EntityHandle source) noexcept {
+        void setSource(const THandle source) noexcept {
             source_ = source;
         }
 
@@ -90,7 +91,7 @@ export namespace helios::engine::mechanics::spawn::components {
          *
          * @return Handle of the entity that emitted this object.
          */
-        [[nodiscard]] helios::engine::ecs::EntityHandle source() const noexcept {
+        [[nodiscard]] THandle source() const noexcept {
             return source_;
         }
 
@@ -98,7 +99,7 @@ export namespace helios::engine::mechanics::spawn::components {
          * @brief Resets the component to its initial state.
          */
         void reset() {
-            source_ = helios::engine::ecs::EntityHandle{};
+            source_ = THandle{};
         }
 
         /**

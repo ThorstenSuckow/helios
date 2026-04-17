@@ -16,6 +16,7 @@ export namespace helios::engine::modules::ui::widgets::components {
      * When a UI element (e.g., menu item) is activated, the associated
      * ActionId can be used to trigger the corresponding action.
      */
+    template<typename THandle>
     class UiActionComponent {
 
         /**

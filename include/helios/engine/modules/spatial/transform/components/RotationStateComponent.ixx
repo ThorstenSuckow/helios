@@ -28,6 +28,7 @@ export namespace helios::engine::modules::spatial::transform::components {
      * The component caches the computed rotation matrices and only recalculates them
      * when the underlying angles or axes change (dirty flag pattern).
      */
+    template<typename THandle>
     class RotationStateComponent  {
 
         /**

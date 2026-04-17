@@ -17,7 +17,7 @@ import helios.core.spatial.Transform;
 import helios.math;
 import helios.core.units.Unit;
 
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameObject;
 import helios.engine.modules.scene.components.SceneNodeComponent;
 
 
@@ -32,6 +32,7 @@ export namespace helios::engine::modules::physics::motion::components {
      * It maintains the current and target rotation angles and is used by the
      * SteeringSystem to update the entity's orientation.
      */
+    template<typename THandle>
     class SteeringComponent  {
 
     protected:

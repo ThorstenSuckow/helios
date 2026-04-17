@@ -21,6 +21,7 @@ export namespace helios::engine::mechanics::damage::components {
      * attribution of kills for scoring and other game logic. The damage context
      * is updated by the damage system when damage is applied.
      */
+    template<typename THandle>
     class LastDamageComponent {
 
     private:
@@ -28,7 +29,7 @@ export namespace helios::engine::mechanics::damage::components {
         /**
          * @brief Context of the most recent damage received.
          */
-        helios::engine::common::types::DamageContext damageContext_{};
+        helios::engine::common::types::DamageContext<THandle> damageContext_{};
 
         /**
          * @brief Whether this component is enabled.
@@ -67,18 +68,18 @@ export namespace helios::engine::mechanics::damage::components {
          *
          * @param other The component to copy from (state is not copied).
          */
-        LastDamageComponent(const LastDamageComponent& other) = default;
+        LastDamageComponent(const LastDamageComponent<THandle>& other) = default;
 
-        LastDamageComponent& operator=(const LastDamageComponent&) = default;
-        LastDamageComponent(LastDamageComponent&&) noexcept = default;
-        LastDamageComponent& operator=(LastDamageComponent&&) noexcept = default;
+        LastDamageComponent& operator=(const LastDamageComponent<THandle>&) = default;
+        LastDamageComponent(LastDamageComponent<THandle>&&) noexcept = default;
+        LastDamageComponent& operator=(LastDamageComponent<THandle>&&) noexcept = default;
 
         /**
          * @brief Sets the last damage context.
          *
          * @param damageContext The damage context to store.
          */
-        void setDamageContext(const DamageContext& damageContext) noexcept {
+        void setDamageContext(const DamageContext<THandle>& damageContext) noexcept {
             damageContext_ = damageContext;
         }
 
@@ -87,7 +88,7 @@ export namespace helios::engine::mechanics::damage::components {
          *
          * @return The stored AttackContext.
          */
-        [[nodiscard]] DamageContext damageContext() const noexcept {
+        [[nodiscard]] DamageContext<THandle> damageContext() const noexcept {
             return damageContext_;
         }
 

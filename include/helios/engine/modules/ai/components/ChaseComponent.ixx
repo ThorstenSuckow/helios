@@ -12,7 +12,7 @@ export module helios.engine.modules.ai.components.ChaseComponent;
 import helios.core.types;
 import helios.util.Guid;
 
-import helios.engine.ecs.EntityHandle;
+import helios.ecs.types.EntityHandle;
 
 
 export namespace helios::engine::modules::ai::components {
@@ -24,6 +24,7 @@ export namespace helios::engine::modules::ai::components {
      * of direction updates via a cooldown timer. Used by ChaseSystem
      * to steer entities towards their targets.
      */
+    template<typename THandle>
     class ChaseComponent  {
 
         /**
@@ -39,7 +40,7 @@ export namespace helios::engine::modules::ai::components {
         /**
          * @brief EntityHandle of the entity to chase.
          */
-        helios::engine::ecs::EntityHandle target_{};
+        THandle target_{};
 
         /**
          * @brief Whether this component is enabled.
@@ -87,7 +88,7 @@ export namespace helios::engine::modules::ai::components {
          *
          * @return The handle of the chase target.
          */
-        [[nodiscard]] helios::engine::ecs::EntityHandle target() const noexcept {
+        [[nodiscard]] THandle target() const noexcept {
             return target_;
         }
 
@@ -141,7 +142,7 @@ export namespace helios::engine::modules::ai::components {
          *
          * @param entityHandle The EntityHandle of the target entity.
          */
-        void setTarget(const helios::engine::ecs::EntityHandle& entityHandle) noexcept {
+        void setTarget(const THandle& entityHandle) noexcept {
             assert(entityHandle.isValid() && "Unexpected invalid entityHandle");
             target_ = entityHandle;
         }

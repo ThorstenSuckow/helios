@@ -14,9 +14,9 @@ export module helios.engine.mechanics.lifecycle.components.DeadTagComponent;
 
 
 
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameObject;
 import helios.engine.runtime.spawn.types.SpawnProfileId;
-import helios.engine.ecs.types.ComponentTypeId;
+import helios.ecs.types.ComponentTypeId;
 import helios.core.types;
 
 export namespace helios::engine::mechanics::lifecycle::components {
@@ -28,6 +28,7 @@ export namespace helios::engine::mechanics::lifecycle::components {
      * (e.g. scoring, VFX, cleanup) without re-checking health values.
      * Move-only; copying is not permitted.
      */
+    template<typename THandle>
     class DeadTagComponent{
 
     public:

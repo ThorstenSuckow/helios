@@ -10,11 +10,11 @@ export module helios.engine.mechanics.combat.components.ShootComponent;
 
 import helios.math;
 
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameObject;
 import helios.engine.mechanics.combat.components.Aim2DComponent;
 import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
 
-import helios.engine.ecs.types.ComponentTypeId;
+import helios.ecs.types.ComponentTypeId;
 
 export namespace helios::engine::mechanics::combat::components {
 
@@ -35,6 +35,7 @@ export namespace helios::engine::mechanics::combat::components {
      * shootComponent->shoot(1.0f);
      * ```
      */
+    template<typename THandle>
     class ShootComponent{
 
     protected:

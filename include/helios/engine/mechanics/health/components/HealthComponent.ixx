@@ -23,6 +23,7 @@ export namespace helios::engine::mechanics::health::components {
      * Manages current and maximum health values for an entity. Provides
      * methods for taking damage, healing, and checking alive status.
      */
+    template<typename THandle>
     class HealthComponent  {
 
     private:

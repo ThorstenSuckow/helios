@@ -15,6 +15,7 @@ export namespace helios::engine::modules::ui::widgets::components {
      * Defines colors for normal, selected, and disabled states
      * of UI elements.
      */
+    template<typename THandle>
     class UiStyleComponent {
 
         bool isEnabled_ = true;

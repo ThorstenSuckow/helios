@@ -26,6 +26,7 @@ export namespace helios::engine::mechanics::bounds::components {
      * restitution (bounciness) when colliding with level walls, used by physics
      * or movement systems to resolve out-of-bounds conditions.
      */
+    template<typename THandle>
     class LevelBoundsBehaviorComponent  {
 
     private:

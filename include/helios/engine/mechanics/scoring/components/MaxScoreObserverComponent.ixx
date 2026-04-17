@@ -32,6 +32,7 @@ export namespace helios::engine::mechanics::scoring::components {
      * @see MaxScoreObserverClearSystem
      * @see MaxScorePoolSnapshot
      */
+    template<typename THandle>
     class MaxScoreObserverComponent {
 
 

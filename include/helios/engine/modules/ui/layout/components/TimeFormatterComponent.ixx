@@ -24,6 +24,7 @@ export namespace helios::engine::modules::ui::layout::components {
      * @see TimeDisplayMode
      * @see GameTimer2UiTextUpdateSystem
      */
+    template<typename THandle>
     class TimeFormatterComponent  {
 
         /**

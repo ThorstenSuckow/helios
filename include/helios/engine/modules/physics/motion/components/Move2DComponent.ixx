@@ -17,7 +17,7 @@ import helios.core.spatial.Transform;
 import helios.math;
 import helios.core.units.Unit;
 
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameObject;
 import helios.engine.modules.scene.components.SceneNodeComponent;
 
 
@@ -40,6 +40,7 @@ export namespace helios::engine::modules::physics::motion::components {
      * @see helios::engine::modules::physics::motion::components::SteeringComponent
      * @see helios::engine::modules::physics::systems::Move2DSystem
      */
+    template<typename THandle>
     class Move2DComponent {
 
     protected:

@@ -20,6 +20,7 @@ export namespace helios::engine::modules::physics::collision::components {
      * This component attaches a spatial bounding box to a GameObject, which can be used
      * by physics systems for broad-phase collision detection or simple trigger interactions.
      */
+    template<typename THandle>
     class AabbColliderComponent  {
 
         /**

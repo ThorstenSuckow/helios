@@ -14,9 +14,9 @@ export module helios.engine.mechanics.lifecycle.components.DelayedComponentEnabl
 
 
 
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameObject;
 import helios.engine.runtime.spawn.types.SpawnProfileId;
-import helios.engine.ecs.types.ComponentTypeId;
+import helios.ecs.types.ComponentTypeId;
 import helios.core.types;
 
 export namespace helios::engine::mechanics::lifecycle::components {
@@ -41,6 +41,7 @@ export namespace helios::engine::mechanics::lifecycle::components {
      * @see DelayedComponentEnablerSystem
      * @see DelayedComponentEnablerInitializer
      */
+    template<typename THandle>
     class DelayedComponentEnabler {
 
         /**
@@ -55,7 +56,7 @@ export namespace helios::engine::mechanics::lifecycle::components {
             /**
              * @brief Type identifier of the deferred component.
              */
-            helios::engine::ecs::types::ComponentTypeId componentTypeId;
+            helios::ecs::types::ComponentTypeId<THandle> componentTypeId;
         };
 
         /**
@@ -99,7 +100,7 @@ export namespace helios::engine::mechanics::lifecycle::components {
          *
          * @param removeList Component type IDs to remove from tracking.
          */
-        void sync(std::span<helios::engine::ecs::types::ComponentTypeId> removeList) {
+        void sync(std::span<helios::ecs::types::ComponentTypeId<THandle>> removeList) {
             std::erase_if(deferredComponents_, [&](const DeferredComponent& dc) {
                 return std::ranges::find(removeList, dc.componentTypeId) != removeList.end();
             });
@@ -118,8 +119,8 @@ export namespace helios::engine::mechanics::lifecycle::components {
          * @note Asserts if delta <= 0 or if the component does not exist on the entity.
          */
         void defer(
-            helios::engine::ecs::GameObject gameObject,
-            helios::engine::ecs::types::ComponentTypeId componentTypeId, const float delta) {
+            helios::engine::runtime::world::GameObject gameObject,
+            helios::ecs::types::ComponentTypeId<THandle> componentTypeId, const float delta) {
             assert(delta > 0 && "delta must be greater than 0");
 
             const bool hasCmp  = gameObject.has(componentTypeId);

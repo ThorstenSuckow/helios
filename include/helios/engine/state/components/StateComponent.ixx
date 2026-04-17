@@ -7,7 +7,7 @@ module;
 export module helios.engine.state.components.StateComponent;
 
 import helios.engine.state.types.StateTransitionId;
-import helios.engine.state.types;
+import helios.engine.state.types.StateTransitionContext;
 
 
 export namespace helios::engine::state::components {

@@ -22,6 +22,7 @@ export namespace helios::engine::modules::spatial::transform::components {
      * container for the ComposeTransformSystem to build the final translation matrix.
      * It separates the raw position data from the computed ComposeTransformComponent.
      */
+    template<typename THandle>
     class TranslationStateComponent {
 
         /**

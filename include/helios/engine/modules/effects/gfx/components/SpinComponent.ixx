@@ -24,6 +24,7 @@ export namespace helios::engine::modules::effects::gfx::components {
      * around a specific axis. It stores the rotation speed, axis, and current
      * rotation state.
      */
+    template<typename THandle>
     class SpinComponent {
 
         /**

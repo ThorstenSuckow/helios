@@ -18,6 +18,7 @@ export namespace helios::engine::mechanics::match::components {
      * Each modification increments an internal LivesRevision counter so
      * that observer systems can detect changes without polling the value.
      */
+    template<typename THandle>
     class LivesComponent {
 
         /**

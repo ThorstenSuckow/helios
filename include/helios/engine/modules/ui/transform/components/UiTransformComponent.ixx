@@ -12,14 +12,16 @@ export module helios.engine.modules.ui.transform.components.UiTransformComponent
 
 import helios.engine.modules.ui.layout.Anchor;
 
-import helios.engine.ecs.types.ComponentTypeId;
+import helios.ecs.types.ComponentTypeId;
 import helios.engine.common.types;
 
 import helios.math;
 
 import helios.core;
 import helios.engine.core;
+import helios.rendering.viewport.types.ViewportHandle;
 
+using namespace helios::rendering::viewport::types;
 export namespace helios::engine::modules::ui::transform::components {
 
 
@@ -30,6 +32,7 @@ export namespace helios::engine::modules::ui::transform::components {
      * pivot point, offsets, and the target viewport. Used by UiTransformSystem
      * to compute screen positions.
      */
+    template<typename THandle>
     class UiTransformComponent{
 
         /**
@@ -43,9 +46,9 @@ export namespace helios::engine::modules::ui::transform::components {
         helios::engine::modules::ui::layout::Anchor pivot_{helios::engine::modules::ui::layout::Anchor::Center};
 
         /**
-         * @brief ID of the viewport this element is positioned relative to.
+         * @brief Handle of the viewport this element is positioned relative to.
          */
-        helios::engine::common::types::ViewportId viewportId_{helios::core::types::no_init};
+        ViewportHandle viewportHandle_;
 
         /**
          * @brief Offsets from anchor point (top, right, bottom, left).
@@ -129,10 +132,10 @@ export namespace helios::engine::modules::ui::transform::components {
         /**
          * @brief Sets the viewport ID.
          *
-         * @param viewportId The ID of the viewport for positioning.
+         * @param viewportHandle The handle of the viewport for positioning.
          */
-        void setViewportId(const helios::engine::common::types::ViewportId viewportId) noexcept {
-            viewportId_ = viewportId;
+        void setViewportHandle(const ViewportHandle viewportHandle) noexcept {
+            viewportHandle_ = viewportHandle;
         }
 
         /**
@@ -172,12 +175,12 @@ export namespace helios::engine::modules::ui::transform::components {
         }
 
         /**
-         * @brief Returns the viewport ID.
+         * @brief Returns the viewport handle.
          *
-         * @return The ID of the viewport this element is positioned relative to.
+         * @return The handle of the viewport this element is positioned relative to.
          */
-        [[nodiscard]] helios::engine::common::types::ViewportId viewportId() const noexcept {
-            return viewportId_;
+        [[nodiscard]] ViewportHandle viewportHandle() const noexcept {
+            return viewportHandle_;
         }
 
 

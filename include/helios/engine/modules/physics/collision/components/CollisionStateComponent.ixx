@@ -13,9 +13,9 @@ export module helios.engine.modules.physics.collision.components.CollisionStateC
 import helios.engine.modules.physics.collision.types.CollisionBehavior;
 import helios.engine.modules.physics.collision.types.CollisionContext;
 
-import helios.engine.ecs.EntityHandle;
+import helios.ecs.types.EntityHandle;
 
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameObject;
 import helios.util.Guid;
 import helios.math;
 
@@ -32,6 +32,7 @@ export namespace helios::engine::modules::physics::collision::components {
      * The state should be reset at the start of each frame by the collision system or
      * when the owning GameObject is acquired from a pool.
      */
+    template<typename THandle>
     class CollisionStateComponent  {
         /**
          * @brief World-space contact point of the collision.
@@ -56,7 +57,7 @@ export namespace helios::engine::modules::physics::collision::components {
         /**
          * @brief Handle of the other entity involved in the collision.
          */
-        std::optional<helios::engine::ecs::EntityHandle> other_;
+        std::optional<THandle> other_;
 
         /**
          * @brief The collision behavior to apply.
@@ -71,7 +72,7 @@ export namespace helios::engine::modules::physics::collision::components {
         /**
          * @brief Full collision context data for event publishing.
          */
-        helios::engine::modules::physics::collision::types::CollisionContext collisionContext_{};
+        helios::engine::modules::physics::collision::types::CollisionContext<THandle> collisionContext_{};
 
         /**
          * @brief Collision layer ID of this entity.
@@ -147,13 +148,13 @@ export namespace helios::engine::modules::physics::collision::components {
          * @return True if the state was set, false if a collision was already recorded.
          */
         bool setState(
-            helios::engine::ecs::GameObject gameObject,
+            THandle entityHandle,
             helios::math::vec3f contact,
             const bool isSolid,
             const bool isTrigger,
             const helios::engine::modules::physics::collision::types::CollisionBehavior collisionBehavior,
             const bool isCollisionReporter,
-            std::optional<helios::engine::ecs::EntityHandle> other = std::nullopt,
+            std::optional<THandle> other = std::nullopt,
             const uint32_t collisionLayer = 0,
             const uint32_t otherCollisionLayer = 0) {
 
@@ -176,7 +177,7 @@ export namespace helios::engine::modules::physics::collision::components {
             otherCollisionLayer_ = otherCollisionLayer;
 
             collisionContext_ = types::CollisionContext{
-                .source = gameObject.entityHandle(),
+                .source = entityHandle,
                 .contact = contact,
                 .isSolid = isSolid,
                 .isTrigger = isTrigger,
@@ -207,7 +208,7 @@ export namespace helios::engine::modules::physics::collision::components {
             other_ = std::nullopt;
             contact_ = helios::math::vec3f{0.0f, 0.0f, 0.0f};
 
-            collisionContext_ = types::CollisionContext{};
+            collisionContext_ = types::CollisionContext<THandle>{};
 
             collisionLayer_ = 0;
             otherCollisionLayer_ = 0;
@@ -227,7 +228,7 @@ export namespace helios::engine::modules::physics::collision::components {
          *
          * @return Reference to the CollisionContext struct containing all collision details.
          */
-        [[nodiscard]] const types::CollisionContext& collisionContext() const noexcept {
+        [[nodiscard]] const types::CollisionContext<THandle>& collisionContext() const noexcept {
             return collisionContext_;
         }
 
@@ -246,7 +247,7 @@ export namespace helios::engine::modules::physics::collision::components {
          *
          * @return Optional handle of the other entity, or nullopt if not set.
          */
-        [[nodiscard]] std::optional<helios::engine::ecs::EntityHandle> other() const noexcept {
+        [[nodiscard]] std::optional<THandle> other() const noexcept {
             return other_;
         }
 

@@ -10,8 +10,8 @@ module;
 export module helios.engine.modules.ui.widgets.components.MenuComponent;
 
 import helios.engine.modules.ui.widgets.types.MenuId;
-import helios.engine.ecs.GameObject;
-import helios.engine.ecs.EntityHandle;
+
+import helios.ecs.types.EntityHandle;
 
 export namespace helios::engine::modules::ui::widgets::components {
 
@@ -24,12 +24,13 @@ export namespace helios::engine::modules::ui::widgets::components {
  * @see MenuDisplaySystem
  * @see MenuNavigationSystem
  */
+template<typename THandle>
 class MenuComponent {
 
     /**
      * @brief Entity handles of the menu items.
      */
-    std::vector<helios::engine::ecs::EntityHandle> menuItems_;
+    std::vector<typename THandle> menuItems_;
 
     /**
      * @brief Unique identifier for this menu.
@@ -57,7 +58,7 @@ class MenuComponent {
     bool isDirty_ = true;
 
 public:
-
+    
     /**
      * @brief Sets the menu identifier.
      *
@@ -111,11 +112,11 @@ public:
     /**
      * @brief Adds a menu item to the end of the list.
      *
-     * @param menuItem The GameObject to add as a menu item.
+     * @param entity The Entity to add as a menu item.
      */
-    void addMenuItem(const helios::engine::ecs::GameObject menuItem) {
+    void addMenuItem(const THandle entityHandle) {
         markDirty();
-        menuItems_.push_back(menuItem.entityHandle());
+        menuItems_.push_back(entityHandle);
     }
 
     /**
@@ -123,7 +124,7 @@ public:
      *
      * @return Span of EntityHandle for all menu items.
      */
-    [[nodiscard]] std::span<helios::engine::ecs::EntityHandle> menuItems() noexcept {
+    [[nodiscard]] std::span<THandle> menuItems() noexcept {
         return menuItems_;
     }
 
@@ -165,22 +166,22 @@ public:
      * @details Resizes the internal vector if necessary. If the item
      * already exists at the index, no action is taken.
      *
-     * @param menuItem The GameObject to insert.
+     * @param entity The Entity to insert.
      * @param index The index at which to insert.
      */
-    void insert(const helios::engine::ecs::GameObject menuItem, const size_t index) {
+    void insert(const THandle entityHandle, const size_t index) {
         if (index >= menuItems_.size()) {
             menuItems_.resize(index + 1);
         }
 
         for (size_t i = 0; i < menuItems_.size(); i++) {
-            if (i == index && menuItems_[i] == menuItem.entityHandle()) {
+            if (i == index && menuItems_[i] == entityHandle) {
                 return;
             }
         }
 
         const auto old = menuItems_[index];
-        menuItems_[index] = menuItem.entityHandle();
+        menuItems_[index] = entityHandle;
         menuItems_.push_back(old);
     }
 };

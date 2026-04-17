@@ -13,6 +13,7 @@ export namespace helios::engine::modules::ui::widgets::components {
  * Manages common UI states such as selection, hover, focus,
  * enabled/disabled, and pressed states.
  */
+template<typename THandle>
 class UiStateComponent {
 
     private:

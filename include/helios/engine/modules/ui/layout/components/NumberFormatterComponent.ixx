@@ -22,6 +22,7 @@ export namespace helios::engine::modules::ui::layout::components {
      * @see Score2UiTextUpdateSystem
      * @see MaxScore2UiTextUpdateSystem
      */
+    template<typename THandle>
     class NumberFormatterComponent  {
 
         /**

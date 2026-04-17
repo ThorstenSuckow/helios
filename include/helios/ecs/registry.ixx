@@ -19,9 +19,9 @@ export namespace helios::ecs {
     inline void registerComponents() {
         using R = ComponentReflector<TEntityManager>;
 
-        R::template registerType<HierarchyComponent>();
-        R::template registerType<Active>();
-        R::template registerType<Inactive>();
+        R::template registerType<HierarchyComponent<typename TEntityManager::Handle_type>>();
+        R::template registerType<Active<typename TEntityManager::Handle_type>>();
+        R::template registerType<Inactive<typename TEntityManager::Handle_type>>();
     }
 
 }

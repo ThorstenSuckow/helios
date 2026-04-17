@@ -13,7 +13,8 @@ import helios.engine.runtime.world.UpdateContext;
 import helios.engine.common.tags.SystemRole;
 
 import helios.engine.runtime.world;
-import helios.engine.runtime.messaging.command.EngineCommandBuffer;
+import helios.engine.runtime.messaging.command.NullCommandBuffer;
+import helios.engine.common.concepts.IsCommandBufferLike;
 
 import helios.platform.environment.commands;
 
@@ -22,12 +23,17 @@ import helios.ecs.components.Active;
 using namespace helios::engine::common::tags;
 using namespace helios::engine::runtime::world;
 using namespace helios::engine::runtime::messaging::command;
+using namespace helios::engine::common::concepts;
 using namespace helios::platform::environment::commands;
 export namespace helios::platform::environment::systems {
 
     /**
      * @brief Submits `PlatformInitCommand` until session/runtime initialization completed.
+     *
+     * @tparam TCommandBuffer Command buffer used for platform init command submission.
      */
+    template<typename TCommandBuffer = NullCommandBuffer>
+    requires IsCommandBufferLike<TCommandBuffer>
     class PlatformInitSystem {
 
         public:
@@ -45,7 +51,7 @@ export namespace helios::platform::environment::systems {
         void update(UpdateContext& updateContext) noexcept {
 
             if (!updateContext.session().isInitialized()) {
-                 updateContext.queueCommand<EngineCommandBuffer, PlatformInitCommand>();
+                 updateContext.queueCommand<TCommandBuffer, PlatformInitCommand>();
             }
         }
 

@@ -13,7 +13,7 @@ export module helios.rendering.asset.shape.basic.Grid;
 import helios.rendering.asset.shape.Shape;
 import helios.rendering.Vertex;
 import helios.math.types;
-import helios.rendering.mesh.PrimitiveType;
+import helios.rendering.mesh.types.PrimitiveType;
 
 using namespace helios::rendering;
 
@@ -156,8 +156,8 @@ export namespace helios::rendering::asset::shape::basic {
          *
          * @return `PrimitiveType::Lines` since the grid is rendered as line segments.
          */
-        [[nodiscard]] helios::rendering::mesh::PrimitiveType primitiveType() const noexcept override {
-            return mesh::PrimitiveType::Lines;
+        [[nodiscard]] helios::rendering::mesh::types::PrimitiveType primitiveType() const noexcept override {
+            return mesh::types::PrimitiveType::Lines;
         }
     };
 

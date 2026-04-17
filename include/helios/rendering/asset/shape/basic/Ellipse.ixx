@@ -13,7 +13,7 @@ export module helios.rendering.asset.shape.basic.Ellipse;
 import helios.rendering.asset.shape.Shape;
 import helios.rendering.Vertex;
 import helios.math.types;
-import helios.rendering.mesh.PrimitiveType;
+import helios.rendering.mesh.types.PrimitiveType;
 
 using namespace helios::rendering;
 
@@ -125,8 +125,8 @@ export namespace helios::rendering::asset::shape::basic {
          * @brief Returns the primitive type used for rendering.
          * @return PrimitiveType::Triangles for triangle-based rendering.
          */
-        [[nodiscard]] helios::rendering::mesh::PrimitiveType primitiveType() const noexcept override {
-            return mesh::PrimitiveType::Triangles;
+        [[nodiscard]] helios::rendering::mesh::types::PrimitiveType primitiveType() const noexcept override {
+            return mesh::types::PrimitiveType::Triangles;
         }
     };
 

@@ -10,12 +10,11 @@ module;
 
 export module helios.core.container.buffer.TypeIndexedReadWriteBuffer;
 
-import helios.core.data.TypeIndexer;
-
+import helios.core.container.buffer.concepts.IsTypeIndexerLike;
 import helios.core.container.buffer.Buffer;
 import helios.core.container.buffer.ReadWriteBuffer;
 
-
+using namespace helios::core::container::buffer::concepts;
 export namespace helios::core::container::buffer {
 
     /**
@@ -32,7 +31,7 @@ export namespace helios::core::container::buffer {
      * @tparam Indexer The TypeIndexer used for mapping message types to buffer indices.
      */
     template<typename Indexer>
-
+    requires IsTypeIndexerLike<Indexer>
     class TypeIndexedReadWriteBuffer {
 
         /**

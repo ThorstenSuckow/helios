@@ -14,7 +14,7 @@ module;
 export module helios.rendering.mesh.Mesh;
 
 import helios.math.types;
-import helios.rendering.mesh.MeshConfig;
+import helios.rendering.mesh.types.MeshConfig;
 import helios.rendering.Vertex;
 import helios.rendering.asset.shape.Shape;
 import helios.util.log.LogManager;
@@ -23,6 +23,7 @@ import helios.math.types;
 
 
 #define HELIOS_LOG_SCOPE "helios::rendering::mesh::Mesh"
+using namespace helios::rendering::mesh::types;
 export namespace helios::rendering::mesh {
 
     /**
@@ -77,7 +78,7 @@ export namespace helios::rendering::mesh {
         /**
          * @brief Shared pointer to the MeshConfig used with this Mesh.
          */
-        std::shared_ptr<const helios::rendering::mesh::MeshConfig> meshConfig_;
+        std::shared_ptr<const MeshConfig> meshConfig_;
 
         /**
          * @todo
@@ -117,7 +118,7 @@ export namespace helios::rendering::mesh {
         explicit Mesh(
             std::shared_ptr<const std::vector<Vertex>> vertices,
             std::shared_ptr<const std::vector<unsigned int>> indices,
-            std::shared_ptr<const helios::rendering::mesh::MeshConfig> meshConfig
+            std::shared_ptr<const MeshConfig> meshConfig
         ) : vertices_(std::move(vertices)),
             indices_(std::move(indices)),
             meshConfig_(std::move(meshConfig)) {
@@ -140,7 +141,7 @@ export namespace helios::rendering::mesh {
          */
         explicit Mesh(
             const helios::rendering::asset::shape::Shape& shape,
-            std::shared_ptr<const helios::rendering::mesh::MeshConfig> meshConfig
+            std::shared_ptr<const MeshConfig> meshConfig
         ) :
             vertices_(shape.vertices),
             indices_(shape.indices),
@@ -188,7 +189,7 @@ export namespace helios::rendering::mesh {
          *
          * @return The MeshConfig used with this Mesh.
          */
-        [[nodiscard]] const helios::rendering::mesh::MeshConfig& meshConfig() const noexcept {
+        [[nodiscard]] const MeshConfig& meshConfig() const noexcept {
             return *meshConfig_;
         }
 

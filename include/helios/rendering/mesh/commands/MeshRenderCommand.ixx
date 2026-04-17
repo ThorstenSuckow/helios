@@ -4,14 +4,13 @@
  */
 module;
 
-#include <memory>
 
-export module helios.rendering.mesh.MeshRenderCommand;
+export module helios.rendering.mesh.commands.MeshRenderCommand;
 
 import helios.rendering.RenderPrototype;
 import helios.rendering.shader.UniformValueMap;
 
-export namespace helios::rendering::mesh {
+export namespace helios::rendering::mesh::commands {
 
     /**
      * @brief DTO for storing rendering-specific command information to be passed to the RenderQueue.

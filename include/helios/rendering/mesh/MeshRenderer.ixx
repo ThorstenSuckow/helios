@@ -1,12 +1,17 @@
+/**
+ * @file MeshRenderer.ixx
+ * @brief Abstract rendering interface for mesh draw commands.
+ */
 module;
 
 export module helios.rendering.mesh.MeshRenderer;
 
-import helios.rendering.mesh.MeshRenderCommand;
-
+import helios.rendering.mesh.commands.MeshRenderCommand;
 
 import helios.rendering.shader.UniformValueMap;
 
+using namespace helios::rendering::shader;
+using namespace helios::rendering::mesh::commands;
 export namespace helios::rendering::mesh {
 
 
@@ -48,8 +53,8 @@ export namespace helios::rendering::mesh {
          * @param frameUniformValues Frame-level uniform values (e.g., view/projection matrices).
          */
         virtual void render(
-            const helios::rendering::mesh::MeshRenderCommand& command,
-            const helios::rendering::shader::UniformValueMap& frameUniformValues
+            const MeshRenderCommand& command,
+            const UniformValueMap& frameUniformValues
         ) noexcept = 0;
     };
 }

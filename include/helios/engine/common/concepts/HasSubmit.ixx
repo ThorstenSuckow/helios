@@ -8,10 +8,6 @@ module;
 
 export module helios.engine.common.concepts.HasSubmit;
 
-export namespace helios::engine::runtime::world {
-    class UpdateContext;
-}
-
 export namespace helios::engine::common::concepts {
 
     /**

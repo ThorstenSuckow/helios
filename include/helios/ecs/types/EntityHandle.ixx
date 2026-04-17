@@ -11,9 +11,9 @@ module;
 export module helios.ecs.types.EntityHandle;
 
 import helios.ecs.types.TypeDefs;
-import helios.ecs.concepts.IsStrongIdLike;
+import helios.core.concepts.IsStrongIdLike;
 
-using namespace helios::ecs::concepts;
+using namespace helios::core::concepts;
 export namespace helios::ecs::types {
 
     /**

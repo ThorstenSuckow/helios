@@ -60,19 +60,19 @@ export namespace helios::core::types {
          *
          * @param no_init_t Tag type indicating no initialization.
          */
-         explicit constexpr StrongId(no_init_t) {};
+         explicit constexpr StrongId(no_init_t)  {}
 
         /**
          * @brief Default constructor creating an uninitialized ID.
          */
-        explicit constexpr StrongId() : StrongId(no_init){};
+        constexpr StrongId() noexcept = default;
 
         /**
          * @brief Returns true if the strong id is considered valid.
          *
          * @return True if the StrongId is considered valid, else false.
          */
-        [[nodiscard]] bool isValid() const noexcept {;
+        [[nodiscard]] bool isValid() const noexcept {
             return id_ != 0;
         }
 

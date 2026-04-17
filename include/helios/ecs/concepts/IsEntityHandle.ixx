@@ -8,9 +8,10 @@ module;
 
 export module helios.ecs.concepts.IsEntityHandle;
 import helios.ecs.types.EntityHandle;
-import helios.ecs.concepts.IsStrongIdLike;
+import helios.core.concepts.IsStrongIdLike;
 
 using namespace helios::ecs::types;
+using namespace helios::core::concepts;
 export namespace helios::ecs::concepts {
 
     /**

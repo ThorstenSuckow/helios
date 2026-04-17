@@ -15,9 +15,12 @@ import helios.input.types.Gamepad;
 import helios.input.gamepad.GamepadState;
 import helios.input.InputAdapter;
 import helios.input.types.Key;
-import helios.window.Window;
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
+
+namespace helios::window {
+    class Window;
+}
 
 #define HELIOS_LOG_SCOPE "helios::input::InputManager"
 export namespace helios::input {
@@ -32,6 +35,8 @@ export namespace helios::input {
      * An `InputManager` allows querying `GamepadState` objects by calling
      * `gamepadState()`. The method accepts an id that identifies the
      * gamepad whose input state should be returned.
+     *
+     * @deprecated
      */
     class InputManager  {
 
@@ -39,7 +44,7 @@ export namespace helios::input {
         /**
          * @brief A pointer to the currently observed window, which might be nullptr.
          */
-        const helios::window::Window* observedWin_ = nullptr;
+        //const helios::window::Window observedWin_ = nullptr;
 
         /**
          * @brief The InputAdapter owned by this InputManager.
@@ -77,9 +82,9 @@ export namespace helios::input {
          *
          * @param win A const reference to the window to observe.
          */
-        void observe(const helios::window::Window& win) noexcept {
-            observedWin_ = &win;
-        }
+       // void observe(const helios::window::Window win) noexcept {
+//            observedWin_ = &win;
+      //  }
 
 
         /**
@@ -89,9 +94,9 @@ export namespace helios::input {
          *
          * @return A non-owning pointer to the currently observed window, or `nullptr`.
          */
-        [[nodiscard]] const helios::window::Window* observedWindow() const {
-            return observedWin_;
-        }
+       // [[nodiscard]] const helios::window::Window observedWindow() const {
+      //      return observedWin_;
+      //  }
 
 
         /**
@@ -108,11 +113,11 @@ export namespace helios::input {
          * @param deltaTime The time elapsed since the last frame, in seconds.
          */
         void poll(float deltaTime)  noexcept {
-            if (observedWin_ != nullptr) {
-                observedWin_->pollEvents();
-            } else {
-                logger_.warn("No window to observe.");
-            }
+           // if (observedWin_ != nullptr) {
+           //     observedWin_->pollEvents();
+            //} else {
+           //    logger_.warn("No window to observe.");
+            //}
             input_->updateGamepadState(gamepadMask_);
         }
 
@@ -129,12 +134,13 @@ export namespace helios::input {
          * @return True if the key is pressed; returns false if the observed window is not set.
          */
         [[nodiscard]] bool isKeyPressed(const helios::input::types::Key& key) const noexcept {
-            if (observedWin_ == nullptr) {
+           /* if (observedWin_ == nullptr) {
                 logger_.warn("No window to observe.");
                 return false;
-            }
+            }*/
 
-            return input_->isKeyPressed(key, *observedWin_);
+            //return input_->isKeyPressed(key, observedWin_);
+            return false;
         }
 
         /**
@@ -149,12 +155,13 @@ export namespace helios::input {
          * @return True if the key is released; returns false if the observed window is not set.
          */
         [[nodiscard]] bool isKeyReleased(const helios::input::types::Key& key) const noexcept {
-            if (observedWin_ == nullptr) {
+          /*  if (observedWin_ == nullptr) {
                 logger_.warn("No window to observe.");
                 return false;
             }
-
-            return input_->isKeyReleased(key, *observedWin_);
+*/
+            return false;
+            //return input_->isKeyReleased(key, *observedWin_);
         }
 
 
@@ -203,7 +210,7 @@ export namespace helios::input {
          * @see isConnected()
          * @see poll()
          */
-        [[nodiscard]] const helios::input::gamepad::GamepadState& gamepadState(helios::input::types::Gamepad gamepadId) const noexcept {
+        [[nodiscard]] const helios::input::gamepad::GamepadState& gamepadState(const helios::input::types::Gamepad gamepadId) const noexcept {
             return input_->gamepadState(gamepadId);
         }
 

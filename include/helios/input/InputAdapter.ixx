@@ -14,11 +14,15 @@ export module helios.input.InputAdapter;
 import helios.input.types.Gamepad;
 import helios.input.gamepad.GamepadState;
 import helios.input.types.Key;
-import helios.window.Window;
+
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
 import helios.input.gamepad.GamepadSettings;
 import helios.input.gamepad.DeadzoneStrategy;
+
+namespace helios::window {
+    class Window;
+}
 
 #define HELIOS_LOG_SCOPE "helios::input::InputAdapter"
 export namespace helios::input {
@@ -36,6 +40,8 @@ export namespace helios::input {
      * @see GLFWInputAdapter for a GLFW-based implementation.
      * @see GamepadSettings for per-controller configuration options.
      * @see DeadzoneStrategy for input normalization strategies.
+     *
+     * @deprecated
      */
     class InputAdapter {
 
@@ -87,9 +93,7 @@ export namespace helios::input {
          *
          * @return True if the key is pressed, otherwise false.
          */
-        [[nodiscard]] virtual bool isKeyPressed(
-            helios::input::types::Key key,
-            const helios::window::Window& win) const noexcept = 0;
+        [[nodiscard]] virtual bool isKeyPressed(helios::input::types::Key key, const helios::window::Window win) const noexcept = 0;
 
         /**
          * @brief Returns true if the key is released, otherwise false.
@@ -101,7 +105,7 @@ export namespace helios::input {
          */
         [[nodiscard]] virtual bool isKeyReleased(
             helios::input::types::Key key,
-            const helios::window::Window& win) const noexcept = 0;
+            const helios::window::Window win) const noexcept = 0;
 
 
         /**

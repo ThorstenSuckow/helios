@@ -103,4 +103,4 @@ export namespace helios::rendering::material {
         }
     };
 
-} // namespace helios::rendering::model
+} // namespace helios::rendering::material

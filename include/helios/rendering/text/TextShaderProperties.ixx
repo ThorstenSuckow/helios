@@ -10,7 +10,6 @@ module;
 
 export module helios.rendering.text.TextShaderProperties;
 
-import helios.rendering.shader.Shader;
 import helios.engine.modules.ui.widgets.types.FontId;
 
 import helios.util.Colors;

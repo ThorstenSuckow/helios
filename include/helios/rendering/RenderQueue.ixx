@@ -13,7 +13,7 @@ module;
 
 export module helios.rendering.RenderQueue;
 
-import helios.rendering.mesh.MeshRenderCommand;
+import helios.rendering.mesh.commands.MeshRenderCommand;
 import helios.rendering.text.TextRenderCommand;
 
 import helios.util.log.Logger;
@@ -49,7 +49,7 @@ export namespace helios::rendering {
         /**
          * @brief Stores the unique ptrs to the RenderCommand objects of this queue.
          */
-        std::vector<helios::rendering::mesh::MeshRenderCommand> meshRenderCommands_;
+        std::vector<helios::rendering::mesh::commands::MeshRenderCommand> meshRenderCommands_;
 
         /**
          * @brief Stores text render commands for glyph-based text rendering.
@@ -97,7 +97,7 @@ export namespace helios::rendering {
          *
          * @todo prevent adding renderables while rendering
          */
-        void add(helios::rendering::mesh::MeshRenderCommand renderCommand) {
+        void add(helios::rendering::mesh::commands::MeshRenderCommand renderCommand) {
             meshRenderCommands_.emplace_back(std::move(renderCommand));
         }
 
@@ -118,7 +118,7 @@ export namespace helios::rendering {
          *
          * @return A const ref to the list of `RenderCommand`s of this queue.
          */
-        [[nodiscard]] std::span<const helios::rendering::mesh::MeshRenderCommand> meshRenderCommands() const  noexcept {
+        [[nodiscard]] std::span<const helios::rendering::mesh::commands::MeshRenderCommand> meshRenderCommands() const  noexcept {
             return meshRenderCommands_;
         }
 

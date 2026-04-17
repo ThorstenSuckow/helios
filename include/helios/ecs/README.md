@@ -4,140 +4,97 @@ Generic, reusable ECS primitives shared across the engine.
 
 ## Overview
 
-This module provides the complete set of building blocks for entity management,
-component storage, querying and lifecycle reflection. All types are
-**policy-based templates** that can be specialised for different domains
-(e.g. game entities, UI widgets, audio sources).
-
-The classes were previously located in `helios.ecs` (which is now
-retained only for backward compatibility) and have been generalised through
-template parameters so they are independent of any specific engine subsystem.
+`helios::ecs` provides policy-based templates for entity identity, storage,
+lookup, lifecycle hooks, and typed views. The module is domain-agnostic and
+can be specialized for game entities, UI entities, render resources, or
+platform/runtime entities.
 
 ## Module Structure
 
-The `helios.ecs` module exports the following types:
-
 ### Entity Management
 
-| Class | Template Parameters | Purpose |
-|-------|---------------------|---------|
-| `EntityHandle<TStrongId>` | `TStrongId` — domain-specific strong ID type | Versioned, strongly-typed entity reference |
-| `EntityRegistry<TStrongId, TLookupStrategy, TAllowRemoval, TCapacity>` | Strong ID type, lookup strategy, removal policy, capacity | Handle allocation, version tracking, validation |
-| `EntityManager<THandle, TEntityRegistry, TCapacity>` | Handle type, registry type, capacity | Unified entity creation and component storage |
-| `Entity<THandle, TEntityManager>` | Handle type, manager type | Lightweight entity facade (~16 bytes, pass-by-value) |
-| `EntityResolver<TEntityManager>` | Manager type | Callable for resolving handles to Entity wrappers |
-| `TypedHandleWorld<TEntityManagers...>` | One or more EntityManager specialisations | Multi-domain world with compile-time handle dispatch |
+| Type | Purpose |
+|------|---------|
+| `EntityHandle<TStrongId>` | Versioned, strongly-typed entity reference |
+| `EntityRegistry<TStrongId, TLookupStrategy, TAllowRemoval, TCapacity>` | Handle allocation, version tracking, validation |
+| `EntityManager<THandle, TEntityRegistry, TCapacity>` | Entity creation, destruction, component storage |
+| `Entity<TManager>` | Lightweight entity facade (handle + manager pointer) |
+| `EntityResolver<TEntityManager>` | Callable handle-to-entity resolver |
+| `TypedHandleWorld<TEntityManagers...>` | Multi-domain world with compile-time handle dispatch |
 
 ### Component Infrastructure
 
-| Class | Template Parameters | Purpose |
-|-------|---------------------|---------|
-| `ComponentTypeId<THandle>` | Handle type (scoping) | Compile-time unique type identifier for components |
-| `ComponentOps` | *(none)* | Type-erased function pointers for lifecycle callbacks |
-| `ComponentOpsRegistry<THandle>` | Handle type (scoping) | Global O(1) registry mapping type IDs to ComponentOps |
-| `ComponentReflector<THandle, TEntityManager>` | Handle type, manager type | Compile-time trait-based lifecycle registration |
+| Type | Purpose |
+|------|---------|
+| `ComponentTypeId<THandle>` | Domain-scoped component type ids |
+| `ComponentOps` | Type-erased lifecycle callback function set |
+| `ComponentOpsRegistry<THandle>` | Runtime map: type id -> component ops |
+| `ComponentReflector<THandle, TEntityManager>` | Trait-based registration of lifecycle hooks |
 
-### Storage & Iteration
+### Storage & Query
 
-| Class | Template Parameters | Purpose |
-|-------|---------------------|---------|
-| `SparseSet<T>` | Element type | Generic O(1) entity-keyed storage |
-| `SparseSetBase` | *(none)* | Type-erased base for polymorphic sparse set access |
-| `View<TEntityManager, Components...>` | Manager type, component types | Lightweight component-based entity queries |
+| Type | Purpose |
+|------|---------|
+| `SparseSet<T>` | Generic O(1)-style sparse-set component storage |
+| `View<TEntityManager, Components...>` | Typed component query/iteration |
 
 ### Lookup Strategies
 
-| Strategy | Lookup | Insertion | Removal | Use Case |
-|----------|--------|-----------|---------|----------|
-| `HashedLookupStrategy` | O(1) avg | O(1) avg | O(1) avg | Default — large registries |
-| `LinearLookupStrategy` | O(n) | O(n) | O(1) | Small registries |
+| Strategy | Purpose |
+|----------|---------|
+| `HashedLookupStrategy` | Hash-based strong-id collision tracking |
+| `LinearLookupStrategy<TCapacity>` | Flat-vector collision tracking for small sets |
 
-### Traits (Compile-Time Concepts)
+### Concepts & Traits
 
-| Trait | Required Method(s) | Purpose |
-|-------|--------------------|---------|
-| `HasOnAcquire` | `onAcquire()` | Pool acquisition callback |
-| `HasOnRelease` | `onRelease()` | Pool release callback |
-| `HasOnRemove` | `onRemove() → bool` | Removal interception |
-| `HasToggleable` | `enable()`, `disable()` | Component enable/disable |
-| `HasClone` | `onClone(const T&)` | Post-copy initialisation |
-| `HasActivatable` | `onActivate()`, `onDeactivate()` | Entity activation response |
-
-## Template Parameter Overview
-
-The move from `helios.engine.ecs` to `helios.ecs` introduced the
-following **new** template parameters:
-
-| Parameter | Used In | Purpose |
-|-----------|---------|---------|
-| `TStrongId` | `EntityHandle`, `EntityRegistry` | Domain-specific strong ID type satisfying `IsStrongIdLike` |
-| `THandle` | `EntityManager`, `Entity`, `ComponentTypeId`, `ComponentOpsRegistry`, `ComponentReflector` | The concrete `EntityHandle<TStrongId>` specialisation, scoping type IDs and ops per domain |
-| `TEntityRegistry` | `EntityManager` | The concrete `EntityRegistry` specialisation used for handle allocation |
-| `TEntityManager` | `Entity`, `View`, `EntityResolver`, `ComponentReflector` | The concrete `EntityManager` specialisation providing component storage |
-| `TLookupStrategy` | `EntityRegistry` | Pluggable collision detection strategy for strong IDs |
-| `TAllowRemoval` | `EntityRegistry` | `bool` policy — `false` disables `destroy()` at compile time |
-| `TCapacity` | `EntityRegistry`, `EntityManager` | Default initial capacity hint |
+| Type | Purpose |
+|------|---------|
+| `IsEntityHandle` | Constraint for `EntityHandle<TStrongId>` shapes |
+| `IsStrongIdCollisionResolverLike` | Constraint for registry lookup strategies |
+| `traits::HasOnAcquire`, `traits::HasOnRelease`, `traits::HasOnRemove` | Optional pool/remove hooks |
+| `traits::HasToggleable`, `traits::HasClone`, `traits::HasActivatable` | Optional component lifecycle hooks |
 
 ## TypedHandleWorld
 
-`TypedHandleWorld<TEntityManagers...>` is a **multi-domain entity world**
-that holds one `EntityManager` per domain inside a `std::tuple`. The handle
-type of each manager serves as a compile-time key: calling
-`world.addEntity<MyHandle>()` selects the correct manager automatically.
+`TypedHandleWorld<TEntityManagers...>` stores multiple manager types and routes
+calls by handle type at compile time:
 
 ```cpp
 using GameHandle = EntityHandle<GameStrongId>;
 using UiHandle   = EntityHandle<UiStrongId>;
 
 using GameEM = EntityManager<GameHandle, GameRegistry, 4096>;
-using UiEM   = EntityManager<UiHandle,   UiRegistry,   512>;
+using UiEM   = EntityManager<UiHandle, UiRegistry, 512>;
 
 TypedHandleWorld<GameEM, UiEM> world;
 
-auto player = world.addEntity<GameHandle>();   // → GameEM
-auto button = world.addEntity<UiHandle>();     // → UiEM
+auto player = world.addEntity<GameHandle>();
+auto button = world.addEntity<UiHandle>();
 ```
 
-## Quick Start
+## Subdirectories
 
-```cpp
-import helios.ecs;
-
-// 1. Define domain types
-struct MyStrongId { /* ... */ };
-using Handle   = helios::ecs::types::EntityHandle<MyStrongId>;
-using Registry = helios::ecs::EntityRegistry<MyStrongId>;
-using Manager  = helios::ecs::EntityManager<Handle, Registry, 1024>;
-
-// 2. Create manager and entity
-Manager em;
-auto handle = em.create();
-
-// 3. Attach components
-auto* transform = em.emplace<TransformComponent>(handle, position);
-
-// 4. Use the Entity facade
-helios::ecs::Entity<Handle, Manager> entity{handle, &em};
-entity.add<HealthComponent>(100.0f);
-
-// 5. Iterate via View
-for (auto [e, t, v] :
-     helios::ecs::View<Manager, TransformComponent, VelocityComponent>(&em)) {
-    // process
-}
-```
+| Directory | Purpose |
+|-----------|---------|
+| `components/` | Core ECS marker/relationship components |
+| `concepts/` | Concepts and lifecycle trait constraints |
+| `strategies/` | Strong-id collision lookup strategies |
+| `types/` | Handle ids, component ids, and ECS typedefs |
 
 ## See Also
 
-- [Engine ECS](../../engine/ecs/README.md) — backward-compatible wrappers (`GameObject`, etc.)
-- [Core Types](../types.ixx) — `EntityId`, `VersionId`, `EntityTombstone`, `StrongId_t`
+- [Components](components/README.md) — ECS core components
+- [Concepts](concepts/README.md) — ECS-specific constraints and lifecycle traits
+- [Core Concepts](../core/concepts/README.md) — shared constraints such as `IsStrongIdLike`
+- [Strategies](strategies/README.md) — lookup strategy implementations
+- [Types](types/README.md) — ECS type layer
+- [Core Concepts: ECS](../../../docs/core-concepts/ecs/README.md) — architecture-oriented ECS documentation
 
 ---
 <details>
 <summary>Doxygen</summary><p>
 @namespace helios::ecs
 @brief Generic, reusable ECS primitives.
-@details Provides policy-based templates for entity handle management, version
-tracking, sparse-set storage, component lifecycle reflection, typed views and
-multi-domain entity worlds that are independent of any specific engine subsystem.
+@details Provides policy-based templates for handle management, sparse-set storage,
+component lifecycle reflection, typed queries, and multi-domain ECS worlds.
 </p></details>

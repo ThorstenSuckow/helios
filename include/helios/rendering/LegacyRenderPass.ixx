@@ -11,7 +11,7 @@ export module helios.rendering.LegacyRenderPass;
 
 import helios.rendering.RenderQueue;
 import helios.rendering.shader.UniformValueMap;
-import helios.rendering.Viewport;
+import helios.rendering.viewport.Viewport;
 
 
 import helios.util.log.Logger;
@@ -81,7 +81,7 @@ export namespace helios::rendering {
          *
          * The caller must ensure the viewport remains valid for the lifetime of this pass.
          */
-        const helios::rendering::Viewport* viewport_;
+        const helios::rendering::viewport::Viewport* viewport_;
 
     protected:
         /**
@@ -127,7 +127,7 @@ export namespace helios::rendering {
          * @param frameUniformValues Frame-specific uniform values (e.g., view/projection matrices).
          */
         explicit LegacyRenderPass(
-            const helios::rendering::Viewport* viewport,
+            const helios::rendering::viewport::Viewport* viewport,
             helios::rendering::RenderQueue renderQueue,
             const helios::rendering::shader::UniformValueMap& frameUniformValues
             ) noexcept
@@ -153,7 +153,7 @@ export namespace helios::rendering {
          *
          * @return A const ref to this `LegacyRenderPass`' `Viewport`.
          */
-        [[nodiscard]] const Viewport& viewport() const noexcept {
+        [[nodiscard]] const helios::rendering::viewport::Viewport& viewport() const noexcept {
             return *viewport_;
         }
 

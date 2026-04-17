@@ -132,7 +132,7 @@ export namespace helios::rendering::material {
              *
              * @param uniformValueMap Target map receiving the uniform values.
              */
-            void writeUniformValues(shader::UniformValueMap& uniformValueMap) const noexcept {
+             void writeUniformValues(shader::UniformValueMap& uniformValueMap) const noexcept {
                 uniformValueMap.set(helios::rendering::shader::UniformSemantics::MaterialBaseColor, baseColor_);
                 uniformValueMap.set(helios::rendering::shader::UniformSemantics::MaterialRoughness, roughness_);
             }

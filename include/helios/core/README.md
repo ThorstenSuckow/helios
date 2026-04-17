@@ -8,17 +8,17 @@ This module provides foundational infrastructure including double-buffering for 
 
 ### algorithms
 
-The `helios.core.algorithms` module provides core algorithms used throughout the engine.
+The `helios.core.types.FuncDefs` module provides core algorithms used throughout the engine.
 
 #### FNV-1a Hash
 
 A fast, compile-time capable hash function for generating identifiers from strings:
 
 ```cpp
-import helios.core.algorithms;
+import helios.core.types.FuncDefs;
 
 // Compile-time hash
-constexpr uint32_t id = helios::core::algorithms::fnv1a_hash("enemy_spawn");
+constexpr uint32_t id = helios::ecs::types::fnv1a_hash("enemy_spawn");
 
 // Used internally by strongly-typed ID constructors
 constexpr GameObjectPoolId POOL{"bullets"};    // calls fnv1a_hash
@@ -77,6 +77,15 @@ public:
     static Guid generate() noexcept;
 };
 ```
+
+### concepts
+
+The `helios.core.concepts` module provides shared compile-time constraints used
+across multiple domains.
+
+| Concept | Purpose |
+|---------|---------|
+| `IsStrongIdLike<T>` | Constrains strong-id style types used across ECS and core modules |
 
 ---
 <details>

@@ -10,19 +10,15 @@ module;
 
 export module helios.core.container.buffer.TypeIndexedDoubleBuffer;
 
-import helios.core.data.TypeIndexer;
-
+import helios.core.container.buffer.concepts.IsTypeIndexerLike;
 import helios.core.container.buffer.DoubleBuffer;
 import helios.core.container.buffer.WriteBuffer;
 import helios.core.container.buffer.ReadBuffer;
 import helios.core.container.buffer.ReadWriteDoubleBuffer;
 
-
+using namespace helios::core::container::buffer::concepts;
 export namespace helios::core::container::buffer {
 
-
-
-    template<typename Indexer>
     /**
      * @class TypeIndexedDoubleBuffer
      * @brief Central hub for publishing and consuming typed messages.
@@ -57,6 +53,8 @@ export namespace helios::core::container::buffer {
      *
      * @tparam Indexer The TypeIndexer used for mapping message types to buffer indices.
      */
+    template<typename Indexer>
+    requires IsTypeIndexerLike<Indexer>
     class TypeIndexedDoubleBuffer {
 
         /**

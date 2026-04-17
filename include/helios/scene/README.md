@@ -2,6 +2,10 @@
 
 This namespace provides scene graph functionality including cameras, scene nodes, transformations, culling strategies, and snapshots for managing 3D scene hierarchies and rendering optimization. Manages the hierarchical organization of objects in 3D space, supporting transformations, culling optimization, and efficient rendering.
 
+## Submodules
+
+- [Types](types/README.md) - scene id/handle and render-context type layer
+
 ---
 <details>
 <summary>Doxygen</summary><p>

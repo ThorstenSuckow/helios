@@ -8,7 +8,6 @@ module;
 
 export module helios.engine.builder.gameObject.builders.configs.ObserverConfig;
 
-import helios.engine.ecs.GameObject;
 
 
 import helios.engine.mechanics.match.components;
@@ -17,9 +16,7 @@ import helios.engine.mechanics.scoring.components;
 import helios.engine.mechanics.scoring.types;
 import helios.engine.mechanics.timing;
 
-
 export namespace helios::engine::builder::gameObject::builders::configs {
-
 
     /**
      * @brief Fluent configuration for observer component setup.
@@ -31,12 +28,15 @@ export namespace helios::engine::builder::gameObject::builders::configs {
      * @see MaxScoreObserverComponent
      * @see GameTimerBindingComponent
      */
+    template<typename Entity>
     class ObserverConfig {
+
+        using Handle_type = typename Entity::Handle_type;
 
         /**
          * @brief Non-owning pointer to the target GameObject.
          */
-        helios::engine::ecs::GameObject gameObject_;
+        Entity gameObject_;
 
     public:
 
@@ -45,7 +45,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @param gameObject Target GameObject to configure.
          */
-        explicit ObserverConfig(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {
+        explicit ObserverConfig(Entity gameObject) : gameObject_(gameObject) {
 
         }
 
@@ -71,11 +71,11 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          */
         ObserverConfig& runningScore(const helios::engine::mechanics::scoring::types::ScorePoolId scorePoolId) {
 
-            auto* soc = gameObject_.get<helios::engine::mechanics::scoring::components::ScoreObserverComponent>();
+            auto* soc = gameObject_.get<helios::engine::mechanics::scoring::components::ScoreObserverComponent<Handle_type>>();
 
             assert(!soc && "ScoreObserverComponent already available.");
 
-            gameObject_.add<helios::engine::mechanics::scoring::components::ScoreObserverComponent>()
+            gameObject_.template add<helios::engine::mechanics::scoring::components::ScoreObserverComponent<Handle_type>>()
                        .setScorePoolId(scorePoolId);
             return *this;
         }
@@ -87,16 +87,16 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @return Reference to this config for chaining.
          */
-        ObserverConfig& lives(const helios::engine::ecs::GameObject gameObject) {
+        ObserverConfig& lives(const Entity gameObject) {
 
             auto* loc = gameObject_.get<
-                helios::engine::mechanics::match::components::LivesBindingComponent
+                helios::engine::mechanics::match::components::LivesBindingComponent<Handle_type>
             >();
 
             assert(!loc && "LivesBindingComponent already available.");
 
-            gameObject_.add<helios::engine::mechanics::match::components::LivesBindingComponent>(
-                gameObject.entityHandle()
+            gameObject_.template add<helios::engine::mechanics::match::components::LivesBindingComponent<Handle_type>>(
+                gameObject.handle()
             );
             return *this;
         }
@@ -110,11 +110,11 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          */
         ObserverConfig& maxScore(const helios::engine::mechanics::scoring::types::ScorePoolId scorePoolId) {
 
-            auto* soc = gameObject_.get<helios::engine::mechanics::scoring::components::MaxScoreObserverComponent>();
+            auto* soc = gameObject_.get<helios::engine::mechanics::scoring::components::MaxScoreObserverComponent<Handle_type>>();
 
             assert(!soc && "MaxScoreObserverComponent already available.");
 
-            gameObject_.add<helios::engine::mechanics::scoring::components::MaxScoreObserverComponent>()
+            gameObject_.template add<helios::engine::mechanics::scoring::components::MaxScoreObserverComponent<Handle_type>>()
                        .setScorePoolId(scorePoolId);
             return *this;
         }
@@ -128,11 +128,11 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          */
         ObserverConfig& time(const helios::engine::mechanics::timing::types::GameTimerId gameTimerId) {
 
-            auto* toc = gameObject_.get<helios::engine::mechanics::timing::components::GameTimerBindingComponent>();
+            auto* toc = gameObject_.get<helios::engine::mechanics::timing::components::GameTimerBindingComponent<Handle_type>>();
 
             assert(!toc && "GameTimerBindingComponent already available.");
 
-            gameObject_.add<helios::engine::mechanics::timing::components::GameTimerBindingComponent>()
+            gameObject_.template add<helios::engine::mechanics::timing::components::GameTimerBindingComponent<Handle_type>>()
                        .setGameTimerId(gameTimerId);
             return *this;
         }

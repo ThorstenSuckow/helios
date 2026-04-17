@@ -6,7 +6,6 @@ module;
 
 export module helios.engine.builder.gameObject.builders.MenuBuilder;
 
-import helios.engine.ecs.GameObject;
 import helios.engine.builder.gameObject.builders.configs.MenuConfig;
 import helios.engine.builder.gameObject.builders.configs.MenuItemConfig;
 
@@ -18,12 +17,13 @@ export namespace helios::engine::builder::gameObject::builders {
      * Provides factory methods to create MenuConfig and MenuItemConfig
      * instances for fluent menu construction.
      */
+    template<typename Entity>
     class MenuBuilder {
 
         /**
          * @brief The GameObject being configured.
          */
-        helios::engine::ecs::GameObject gameObject_;
+        Entity gameObject_;
 
     public:
 
@@ -32,15 +32,15 @@ export namespace helios::engine::builder::gameObject::builders {
          *
          * @param gameObject The GameObject to configure.
          */
-        explicit MenuBuilder(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {}
+        explicit MenuBuilder(Entity gameObject) : gameObject_(gameObject) {}
 
         /**
          * @brief Creates a menu configuration for this GameObject.
          *
          * @return A MenuConfig for fluent configuration.
          */
-        [[nodiscard]] helios::engine::builder::gameObject::builders::configs::MenuConfig menu() {
-            return helios::engine::builder::gameObject::builders::configs::MenuConfig{gameObject_};
+        [[nodiscard]] helios::engine::builder::gameObject::builders::configs::MenuConfig<Entity> menu() {
+            return helios::engine::builder::gameObject::builders::configs::MenuConfig<Entity>{gameObject_};
         }
 
         /**
@@ -50,10 +50,10 @@ export namespace helios::engine::builder::gameObject::builders {
          *
          * @return A MenuItemConfig for fluent configuration.
          */
-        [[nodiscard]] helios::engine::builder::gameObject::builders::configs::MenuItemConfig menuItem(
-         helios::engine::ecs::GameObject& parentMenu
+        [[nodiscard]] helios::engine::builder::gameObject::builders::configs::MenuItemConfig<Entity> menuItem(
+         Entity& parentMenu
         ) {
-            return helios::engine::builder::gameObject::builders::configs::MenuItemConfig{gameObject_, parentMenu};
+            return helios::engine::builder::gameObject::builders::configs::MenuItemConfig<Entity>{gameObject_, parentMenu};
         }
 
     };

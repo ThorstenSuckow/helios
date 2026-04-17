@@ -8,7 +8,6 @@ module;
 
 export module helios.engine.builder.gameObject.builders.configs.MenuConfig;
 
-import helios.engine.ecs.GameObject;
 
 import helios.engine.modules.ui.widgets.types.MenuId;
 
@@ -23,12 +22,15 @@ export namespace helios::engine::builder::gameObject::builders::configs {
      * Provides a builder-style interface for configuring menu properties
      * on a GameObject.
      */
+    template<typename Entity>
     class MenuConfig {
 
         /**
          * @brief The GameObject being configured.
          */
-        helios::engine::ecs::GameObject gameObject_;
+        Entity gameObject_;
+
+        using Handle_type = typename Entity::Handle_type;
 
     public:
 
@@ -37,7 +39,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @param gameObject The GameObject to configure.
          */
-        explicit MenuConfig(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {
+        explicit MenuConfig(Entity gameObject) : gameObject_(gameObject) {
 
         }
 
@@ -50,7 +52,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          */
         MenuConfig& menuId(const helios::engine::modules::ui::widgets::types::MenuId menuId) {
 
-            gameObject_.getOrAdd<helios::engine::modules::ui::widgets::components::MenuComponent>()
+            gameObject_.template getOrAdd<helios::engine::modules::ui::widgets::components::MenuComponent<Handle_type>>()
                         .setMenuId(menuId);
 
             return *this;

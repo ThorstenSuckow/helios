@@ -1,4 +1,3 @@
-
 module;
 
 #include <cassert>
@@ -6,7 +5,6 @@ module;
 
 export module helios.engine.builder.gameObject.builders.configs.CombatConfig;
 
-import helios.engine.ecs.GameObject;
 
 import helios.engine.modules.spatial.transform.components;
 
@@ -17,16 +15,16 @@ using namespace helios::engine::mechanics::damage::components;
 export namespace helios::engine::builder::gameObject::builders::configs {
 
 
+    template<typename Entity>
     class CombatConfig {
 
-        /**
-         * @brief Non-owning pointer to the target GameObject.
-         */
-         helios::engine::ecs::GameObject gameObject_;
+         Entity gameObject_;
 
     public:
 
-        explicit CombatConfig(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {
+        using Handle_type = typename Entity::Handle_type;
+
+        explicit CombatConfig(Entity gameObject) : gameObject_(gameObject) {
 
         }
 
@@ -36,7 +34,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         CombatConfig& trackLastDamage() {
-            gameObject_.getOrAdd<LastDamageComponent>();
+            gameObject_.template getOrAdd<LastDamageComponent<Handle_type>>();
 
             return *this;
         }
@@ -44,4 +42,3 @@ export namespace helios::engine::builder::gameObject::builders::configs {
     };
 
 }
-

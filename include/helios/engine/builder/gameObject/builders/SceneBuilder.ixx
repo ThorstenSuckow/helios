@@ -6,7 +6,6 @@ module;
 
 export module helios.engine.builder.gameObject.builders.SceneBuilder;
 
-import helios.engine.ecs.GameObject;
 import helios.engine.builder.gameObject.builders.configs.SceneNodeConfig;
 
 export namespace helios::engine::builder::gameObject::builders {
@@ -17,12 +16,13 @@ export namespace helios::engine::builder::gameObject::builders {
      * Provides factory methods for setting up scene node
      * parenting and transform inheritance.
      */
+    template<typename Entity>
     class SceneBuilder {
 
         /**
          * @brief Non-owning pointer to the target GameObject.
          */
-        helios::engine::ecs::GameObject gameObject_;
+        Entity gameObject_;
 
     public:
 
@@ -31,15 +31,15 @@ export namespace helios::engine::builder::gameObject::builders {
          *
          * @param gameObject Target GameObject to configure.
          */
-        explicit SceneBuilder(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {}
+        explicit SceneBuilder(Entity gameObject) : gameObject_(gameObject) {}
 
         /**
          * @brief Returns a config for scene node setup.
          *
          * @return SceneNodeConfig for fluent configuration.
          */
-        helios::engine::builder::gameObject::builders::configs::SceneNodeConfig sceneNode() const {
-            return helios::engine::builder::gameObject::builders::configs::SceneNodeConfig{gameObject_};
+        helios::engine::builder::gameObject::builders::configs::SceneNodeConfig<Entity> sceneNode() const {
+            return helios::engine::builder::gameObject::builders::configs::SceneNodeConfig<Entity>{gameObject_};
         }
 
     };

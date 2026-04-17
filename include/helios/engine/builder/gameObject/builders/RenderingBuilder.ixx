@@ -6,7 +6,6 @@ module;
 
 export module helios.engine.builder.gameObject.builders.RenderingBuilder;
 
-import helios.engine.ecs.GameObject;
 import helios.engine.builder.gameObject.builders.configs.MeshRenderableConfig;
 import helios.engine.builder.gameObject.builders.configs.TextRenderableConfig;
 import helios.engine.builder.gameObject.builders.configs.SceneNodeConfig;
@@ -19,12 +18,13 @@ export namespace helios::engine::builder::gameObject::builders {
      * Provides factory methods for setting up meshes, materials,
      * shaders, and scene graph integration.
      */
+    template<typename Entity>
     class RenderingBuilder {
 
         /**
          * @brief Non-owning pointer to the target GameObject.
          */
-        helios::engine::ecs::GameObject gameObject_;
+        Entity gameObject_;
 
     public:
 
@@ -33,15 +33,15 @@ export namespace helios::engine::builder::gameObject::builders {
          *
          * @param gameObject Target GameObject to configure.
          */
-        explicit RenderingBuilder(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {}
+        explicit RenderingBuilder(Entity gameObject) : gameObject_(gameObject) {}
 
         /**
          * @brief Returns a config for renderable (mesh/material) setup.
          *
          * @return MeshRenderableConfig for fluent configuration.
          */
-        helios::engine::builder::gameObject::builders::configs::MeshRenderableConfig meshRenderable() const {
-            return helios::engine::builder::gameObject::builders::configs::MeshRenderableConfig{gameObject_};
+        helios::engine::builder::gameObject::builders::configs::MeshRenderableConfig<Entity> meshRenderable() const {
+            return helios::engine::builder::gameObject::builders::configs::MeshRenderableConfig<Entity>{gameObject_};
         }
 
         /**
@@ -49,8 +49,8 @@ export namespace helios::engine::builder::gameObject::builders {
          *
          * @return TextRenderableConfig for fluent configuration.
          */
-        helios::engine::builder::gameObject::builders::configs::TextRenderableConfig textRenderable() const {
-            return helios::engine::builder::gameObject::builders::configs::TextRenderableConfig{gameObject_};
+        helios::engine::builder::gameObject::builders::configs::TextRenderableConfig<Entity> textRenderable() const {
+            return helios::engine::builder::gameObject::builders::configs::TextRenderableConfig<Entity>{gameObject_};
         }
 
         /**
@@ -58,8 +58,8 @@ export namespace helios::engine::builder::gameObject::builders {
          *
          * @return SceneNodeConfig for fluent configuration.
          */
-        helios::engine::builder::gameObject::builders::configs::SceneNodeConfig sceneNode() const {
-            return helios::engine::builder::gameObject::builders::configs::SceneNodeConfig{gameObject_};
+        helios::engine::builder::gameObject::builders::configs::SceneNodeConfig<Entity> sceneNode() const {
+            return helios::engine::builder::gameObject::builders::configs::SceneNodeConfig<Entity>{gameObject_};
         }
 
     };

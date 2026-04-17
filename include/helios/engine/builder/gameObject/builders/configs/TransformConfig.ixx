@@ -6,7 +6,6 @@ module;
 
 export module helios.engine.builder.gameObject.builders.configs.TransformConfig;
 
-import helios.engine.ecs.GameObject;
 
 import helios.engine.modules.spatial.transform.components;
 
@@ -21,12 +20,12 @@ export namespace helios::engine::builder::gameObject::builders::configs {
      * Automatically adds ComposeTransformComponent and provides
      * methods for setting scale and translation.
      */
+    template<typename Entity>
     class TransformConfig {
 
-        /**
-         * @brief Non-owning pointer to the target GameObject.
-         */
-         helios::engine::ecs::GameObject gameObject_;
+        using Handle_type = typename Entity::Handle_type;
+
+         Entity gameObject_;
 
     public:
 
@@ -35,8 +34,8 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @param gameObject Target GameObject to configure.
          */
-        explicit TransformConfig(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {
-            gameObject_.add<helios::engine::modules::spatial::transform::components::ComposeTransformComponent>();
+        explicit TransformConfig(Entity gameObject) : gameObject_(gameObject) {
+            gameObject_.template add<helios::engine::modules::spatial::transform::components::ComposeTransformComponent<Handle_type>>();
 
         }
 
@@ -52,7 +51,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
             const helios::math::vec3f scale,
             const helios::core::units::Unit unit = helios::core::units::Unit::Meter
         ) {
-            gameObject_.add<helios::engine::modules::spatial::transform::components::ScaleStateComponent>(scale, unit);
+            gameObject_.template add<helios::engine::modules::spatial::transform::components::ScaleStateComponent<Handle_type>>(scale, unit);
             return *this;
         }
 
@@ -64,7 +63,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         TransformConfig& translate(const helios::math::vec3f translation) {
-            gameObject_.getOrAdd<helios::engine::modules::spatial::transform::components::TranslationStateComponent>()
+            gameObject_.template getOrAdd<helios::engine::modules::spatial::transform::components::TranslationStateComponent<Handle_type>>()
                         .setTranslation(translation);
             return *this;
         }
@@ -78,7 +77,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         TransformConfig& rotate(const float degrees, const helios::math::vec3f axis) {
-            auto& rsc = gameObject_.getOrAdd<helios::engine::modules::spatial::transform::components::RotationStateComponent>();
+            auto& rsc = gameObject_.template getOrAdd<helios::engine::modules::spatial::transform::components::RotationStateComponent<Handle_type>>();
 
             rsc.setHeadingRotationAngle(degrees);
             rsc.setHeadingRotationAxis(axis);

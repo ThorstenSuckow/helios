@@ -9,7 +9,6 @@ module;
 
 export module helios.engine.builder.gameObject.builders.configs.CollisionConfig;
 
-import helios.engine.ecs.GameObject;
 
 import helios.engine.modules.physics.collision.components;
 import helios.engine.modules.physics.collision.types;
@@ -23,13 +22,18 @@ export namespace helios::engine::builder::gameObject::builders::configs {
      *
      * Automatically adds CollisionStateComponent and provides methods
      * for configuring collision layers, masks, and behaviors.
+     *
+     * @tparam Entity The entity type (e.g., GameObject).
      */
+    template<typename Entity>
     class CollisionConfig {
 
+        using Handle_type = typename Entity::Handle_type;
+
         /**
-         * @brief Non-owning pointer to the target GameObject.
+         * @brief Non-owning pointer to the target entity.
          */
-        helios::engine::ecs::GameObject gameObject_;
+        Entity gameObject_;
 
         /**
          * @brief Validates CollisionComponent presence.
@@ -38,7 +42,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          */
         void ensureCollisionComponent(const bool isAvailable) const noexcept {
 
-            auto* cc = gameObject_.get<helios::engine::modules::physics::collision::components::CollisionComponent>();
+            auto* cc = gameObject_.get<helios::engine::modules::physics::collision::components::CollisionComponent<Handle_type>>();
 
             if (isAvailable) {
                 assert(cc && "CollisionComponent not configured");
@@ -55,9 +59,9 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @param gameObject Target GameObject to configure.
          */
-        explicit CollisionConfig(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {
+        explicit CollisionConfig(Entity gameObject) : gameObject_(gameObject) {
 
-            gameObject.add<helios::engine::modules::physics::collision::components::CollisionStateComponent>();
+            gameObject.template add<helios::engine::modules::physics::collision::components::CollisionStateComponent<Handle_type>>();
 
         }
 
@@ -67,7 +71,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         CollisionConfig& useBoundingBox() {
-            gameObject_.add<helios::engine::modules::physics::collision::components::AabbColliderComponent>();
+            gameObject_.template add<helios::engine::modules::physics::collision::components::AabbColliderComponent<Handle_type>>();
             return *this;
         }
 
@@ -82,7 +86,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
 
             ensureCollisionComponent(false);
 
-            gameObject_.add<helios::engine::modules::physics::collision::components::CollisionComponent>(layerId);
+            gameObject_.template add<helios::engine::modules::physics::collision::components::CollisionComponent<Handle_type>>(layerId);
 
             return *this;
         }
@@ -104,7 +108,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
 
             ensureCollisionComponent(true);
 
-            gameObject_.get<helios::engine::modules::physics::collision::components::CollisionComponent>()
+            gameObject_.get<helios::engine::modules::physics::collision::components::CollisionComponent<Handle_type>>()
                         ->setHitPolicy(hitPolicy);
 
             return *this;
@@ -121,7 +125,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
 
             ensureCollisionComponent(true);
 
-            gameObject_.get<helios::engine::modules::physics::collision::components::CollisionComponent>()
+            gameObject_.get<helios::engine::modules::physics::collision::components::CollisionComponent<Handle_type>>()
                        ->setIsCollisionReporter(isCollisionReporter);
             return *this;
         }
@@ -136,7 +140,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         CollisionConfig& solidCollisionMask(const uint32_t solidCollisionMask) {
             ensureCollisionComponent(true);
 
-            gameObject_.get<helios::engine::modules::physics::collision::components::CollisionComponent>()
+            gameObject_.get<helios::engine::modules::physics::collision::components::CollisionComponent<Handle_type>>()
                       ->setSolidCollisionMask(solidCollisionMask);
             return *this;
         }
@@ -155,7 +159,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         ) {
             ensureCollisionComponent(true);
 
-            gameObject_.get<helios::engine::modules::physics::collision::components::CollisionComponent>()
+            gameObject_.get<helios::engine::modules::physics::collision::components::CollisionComponent<Handle_type>>()
                       ->addSolidCollisionBehavior(collisionBehavior, otherLayerId);
 
             return *this;
@@ -178,7 +182,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
                 ) {
             ensureCollisionComponent(true);
 
-            gameObject_.getOrAdd<helios::engine::mechanics::damage::components::DamageDealerComponent>()
+            gameObject_.template getOrAdd<helios::engine::mechanics::damage::components::DamageDealerComponent<Handle_type>>()
                         .setDamage(damageAmount, otherLayerId);
 
             return *this;
@@ -187,4 +191,3 @@ export namespace helios::engine::builder::gameObject::builders::configs {
     };
 
 }
-

@@ -6,7 +6,6 @@ module;
 
 export module helios.engine.builder.gameObject.builders.TransformBuilder;
 
-import helios.engine.ecs.GameObject;
 import helios.engine.builder.gameObject.builders.configs.TransformConfig;
 
 export namespace helios::engine::builder::gameObject::builders {
@@ -17,12 +16,13 @@ export namespace helios::engine::builder::gameObject::builders {
      * Provides factory methods for setting up translation,
      * rotation, and scale on a GameObject.
      */
+    template<typename Entity>
     class TransformBuilder {
 
         /**
          * @brief Non-owning pointer to the target GameObject.
          */
-        helios::engine::ecs::GameObject gameObject_;
+        Entity gameObject_;
 
     public:
 
@@ -31,15 +31,15 @@ export namespace helios::engine::builder::gameObject::builders {
          *
          * @param gameObject Target GameObject to configure.
          */
-        explicit TransformBuilder(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {}
+        explicit TransformBuilder(Entity gameObject) : gameObject_(gameObject) {}
 
         /**
          * @brief Returns a config for transform setup.
          *
          * @return TransformConfig for fluent configuration.
          */
-        helios::engine::builder::gameObject::builders::configs::TransformConfig transform() const {
-            return helios::engine::builder::gameObject::builders::configs::TransformConfig{gameObject_};
+        helios::engine::builder::gameObject::builders::configs::TransformConfig<Entity> transform() const {
+            return helios::engine::builder::gameObject::builders::configs::TransformConfig<Entity>{gameObject_};
         }
 
 

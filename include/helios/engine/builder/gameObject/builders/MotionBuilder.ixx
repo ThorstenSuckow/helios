@@ -6,7 +6,6 @@ module;
 
 export module helios.engine.builder.gameObject.builders.MotionBuilder;
 
-import helios.engine.ecs.GameObject;
 import helios.engine.builder.gameObject.builders.configs.Move2DConfig;
 import helios.engine.builder.gameObject.builders.configs.SteeringConfig;
 
@@ -18,12 +17,13 @@ export namespace helios::engine::builder::gameObject::builders {
      * Provides factory methods for obtaining config objects that
      * set up 2D movement and rotation behavior on a GameObject.
      */
+    template<typename Entity>
     class MotionBuilder {
 
         /**
          * @brief Non-owning pointer to the target GameObject.
          */
-        helios::engine::ecs::GameObject gameObject_;
+        Entity gameObject_;
 
     public:
 
@@ -32,15 +32,15 @@ export namespace helios::engine::builder::gameObject::builders {
          *
          * @param gameObject Target GameObject to configure.
          */
-        explicit MotionBuilder(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {}
+        explicit MotionBuilder(Entity gameObject) : gameObject_(gameObject) {}
 
         /**
          * @brief Returns a config for 2D movement setup.
          *
          * @return Move2DConfig for fluent configuration.
          */
-        helios::engine::builder::gameObject::builders::configs::Move2DConfig move2D() {
-            return helios::engine::builder::gameObject::builders::configs::Move2DConfig{gameObject_};
+        helios::engine::builder::gameObject::builders::configs::Move2DConfig<Entity> move2D() {
+            return helios::engine::builder::gameObject::builders::configs::Move2DConfig<Entity>{gameObject_};
         }
 
         /**
@@ -48,11 +48,10 @@ export namespace helios::engine::builder::gameObject::builders {
          *
          * @return SteeringConfig for fluent configuration.
          */
-        helios::engine::builder::gameObject::builders::configs::SteeringConfig steering() const {
-            return helios::engine::builder::gameObject::builders::configs::SteeringConfig{gameObject_};
+        helios::engine::builder::gameObject::builders::configs::SteeringConfig<Entity> steering() const {
+            return helios::engine::builder::gameObject::builders::configs::SteeringConfig<Entity>{gameObject_};
         }
 
     };
 
 }
-

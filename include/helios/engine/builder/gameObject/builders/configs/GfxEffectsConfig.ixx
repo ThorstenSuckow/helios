@@ -6,7 +6,6 @@ module;
 
 export module helios.engine.builder.gameObject.builders.configs.GfxEffectsConfig;
 
-import helios.engine.ecs.GameObject;
 
 import helios.engine.modules.effects.gfx.components.SpinComponent;
 import helios.engine.modules.spatial.transform.components.RotationStateComponent;
@@ -21,12 +20,16 @@ export namespace helios::engine::builder::gameObject::builders::configs {
      * Provides methods for adding continuous rotation (spin)
      * and other visual effects to a GameObject.
      */
+
+    template<typename Entity>
     class GfxEffectsConfig {
+
+        using Handle_type = typename Entity::Handle_type;
 
         /**
          * @brief Non-owning pointer to the target GameObject.
          */
-        helios::engine::ecs::GameObject gameObject_;
+        Entity gameObject_;
 
     public:
 
@@ -35,7 +38,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @param gameObject Target GameObject to configure.
          */
-        explicit GfxEffectsConfig(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {}
+        explicit GfxEffectsConfig(Entity gameObject) : gameObject_(gameObject) {}
 
         /**
          * @brief Adds continuous rotation (spin) effect.
@@ -46,10 +49,10 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         GfxEffectsConfig& spin(const float degreesPerSecond, const helios::math::vec3f spinAxis) {
-            gameObject_.add<helios::engine::modules::effects::gfx::components::SpinComponent>(
+            gameObject_.template add<helios::engine::modules::effects::gfx::components::SpinComponent<Handle_type>>(
                 degreesPerSecond, spinAxis
             );
-            gameObject_.getOrAdd<helios::engine::modules::spatial::transform::components::RotationStateComponent>();
+            gameObject_.template getOrAdd<helios::engine::modules::spatial::transform::components::RotationStateComponent<Handle_type>>();
             return *this;
         }
 
@@ -57,4 +60,3 @@ export namespace helios::engine::builder::gameObject::builders::configs {
     };
 
 }
-

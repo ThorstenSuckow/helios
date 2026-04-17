@@ -9,10 +9,9 @@ module;
 
 export module helios.engine.builder.gameObject.builders.configs.SceneNodeConfig;
 
-import helios.engine.ecs.GameObject;
 import helios.scene;
 import helios.engine.modules.rendering;
-import helios.engine.ecs.components;
+import helios.ecs.components;
 import helios.engine.modules.scene;
 
 import helios.math;
@@ -38,19 +37,22 @@ export namespace helios::engine::builder::gameObject::builders::configs {
      * @see HierarchyComponent
      * @see TransformType
      */
+    template<typename Entity>
     class SceneNodeConfig {
+
+        using Handle_type = typename Entity::Handle_type;
 
         /**
          * @brief Non-owning pointer to the target GameObject.
          */
-        helios::engine::ecs::GameObject gameObject_;
+        Entity gameObject_;
 
 
         /**
          * @brief Validates that a RenderableComponent exists.
          */
         void ensureRenderableComponent() {
-            const auto* renderableComponent = gameObject_.get<helios::engine::modules::rendering::renderable::components::RenderableComponent>();
+            const auto* renderableComponent = gameObject_.get<helios::engine::modules::rendering::renderable::components::RenderableComponent<Handle_type>>();
             assert(renderableComponent && "Unexpected nullptr for RenderableComponent.");
         }
 
@@ -60,7 +62,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @param shouldBeAvailable Whether the component should exist.
          */
         void ensureSceneNode(const bool shouldBeAvailable) {
-            const auto* snc = gameObject_.get<helios::engine::modules::scene::components::SceneNodeComponent>();
+            const auto* snc = gameObject_.get<helios::engine::modules::scene::components::SceneNodeComponent<Handle_type>>();
 
             if (shouldBeAvailable) {
                 assert(snc && "Unexpected nullptr for SceneNodeComponent.");
@@ -77,7 +79,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @param gameObject Target GameObject to configure.
          */
-        explicit SceneNodeConfig(const helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {}
+        explicit SceneNodeConfig(const Entity gameObject) : gameObject_(gameObject) {}
 
         /**
          * @brief Creates a SceneNode and parents it to the given node.
@@ -90,14 +92,14 @@ export namespace helios::engine::builder::gameObject::builders::configs {
             ensureSceneNode(false);
             ensureRenderableComponent();
 
-            const auto* renderableComponent = gameObject_.get<helios::engine::modules::rendering::renderable::components::RenderableComponent>();
+            const auto* renderableComponent = gameObject_.get<helios::engine::modules::rendering::renderable::components::RenderableComponent<Handle_type>>();
 
             auto renderable = renderableComponent->shareRenderable();
 
             auto node = std::make_unique<helios::scene::SceneNode>(renderable);
             auto node_ptr = parent->addNode(std::move(node));
 
-            gameObject_.add<helios::engine::modules::scene::components::SceneNodeComponent>(node_ptr);
+            gameObject_.template add<helios::engine::modules::scene::components::SceneNodeComponent<Handle_type>>(node_ptr);
 
             return *this;
         }
@@ -115,26 +117,26 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @return Reference to this config for chaining.
          */
-        SceneNodeConfig& parent(helios::engine::ecs::GameObject parent) {
+        SceneNodeConfig& parent(Entity parent) {
             ensureSceneNode(false);
             ensureRenderableComponent();
 
-            parent.getOrAdd<helios::engine::ecs::components::HierarchyComponent>().addChild(gameObject_.entityHandle());
-            gameObject_.getOrAdd<helios::engine::ecs::components::HierarchyComponent>().setParent(parent.entityHandle());
+            parent.template getOrAdd<helios::ecs::components::HierarchyComponent<Handle_type>>().addChild(gameObject_.handle());
+            gameObject_.template getOrAdd<helios::ecs::components::HierarchyComponent<Handle_type>>().setParent(parent.handle());
 
-            const auto* renderableComponent = gameObject_.get<helios::engine::modules::rendering::renderable::components::RenderableComponent>();
+            const auto* renderableComponent = gameObject_.get<helios::engine::modules::rendering::renderable::components::RenderableComponent<Handle_type>>();
 
             auto renderable = renderableComponent->shareRenderable();
 
             auto node = std::make_unique<helios::scene::SceneNode>(renderable);
 
-            auto* psn = parent.get<helios::engine::modules::scene::components::SceneNodeComponent>();
+            auto* psn = parent.get<helios::engine::modules::scene::components::SceneNodeComponent<Handle_type>>();
             assert(psn && "Unexpected missing SceneNodeComponent for parent GameObject");
             assert(psn->sceneNode() && "Unexpected missing SceneNode for parent GameObject");
 
             auto node_ptr = psn->sceneNode()->addNode(std::move(node));
 
-            gameObject_.add<helios::engine::modules::scene::components::SceneNodeComponent>(node_ptr);
+            gameObject_.template add<helios::engine::modules::scene::components::SceneNodeComponent<Handle_type>>(node_ptr);
 
             return *this;
         }
@@ -149,7 +151,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         SceneNodeConfig& inherit(helios::math::TransformType transformType) {
             ensureSceneNode(true);
 
-            gameObject_.get<helios::engine::modules::scene::components::SceneNodeComponent>()
+            gameObject_.get<helios::engine::modules::scene::components::SceneNodeComponent<Handle_type>>()
                        ->sceneNode()
                        ->setInheritance(transformType) ;
 

@@ -6,7 +6,6 @@ module;
 
 export module helios.engine.builder.gameObject.builders.ScoringBuilder;
 
-import helios.engine.ecs.GameObject;
 import helios.engine.builder.gameObject.builders.configs.ScorePoolConfig;
 import helios.engine.builder.gameObject.builders.configs.ScoreValueConfig;
 
@@ -18,12 +17,13 @@ export namespace helios::engine::builder::gameObject::builders {
      * Provides methods to create config objects for score pool association
      * and score value components.
      */
+    template<typename Entity>
     class ScoringBuilder {
 
         /**
          * @brief Non-owning pointer to the target GameObject.
          */
-        helios::engine::ecs::GameObject gameObject_;
+        Entity gameObject_;
 
     public:
 
@@ -32,15 +32,15 @@ export namespace helios::engine::builder::gameObject::builders {
          *
          * @param gameObject The target GameObject to configure.
          */
-        explicit ScoringBuilder(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {}
+        explicit ScoringBuilder(Entity gameObject) : gameObject_(gameObject) {}
 
         /**
          * @brief Returns a config object for ScoreValueComponent.
          *
          * @return ScoreValueConfig for fluent configuration.
          */
-        [[nodiscard]] helios::engine::builder::gameObject::builders::configs::ScoreValueConfig scoreValue() const {
-            return helios::engine::builder::gameObject::builders::configs::ScoreValueConfig{gameObject_};
+        [[nodiscard]] helios::engine::builder::gameObject::builders::configs::ScoreValueConfig<Entity> scoreValue() const {
+            return helios::engine::builder::gameObject::builders::configs::ScoreValueConfig<Entity>{gameObject_};
         }
 
         /**
@@ -48,8 +48,8 @@ export namespace helios::engine::builder::gameObject::builders {
          *
          * @return ScorePoolConfig for fluent configuration.
          */
-        [[nodiscard]] helios::engine::builder::gameObject::builders::configs::ScorePoolConfig scorePool() const {
-            return helios::engine::builder::gameObject::builders::configs::ScorePoolConfig{gameObject_};
+        [[nodiscard]] helios::engine::builder::gameObject::builders::configs::ScorePoolConfig<Entity> scorePool() const {
+            return helios::engine::builder::gameObject::builders::configs::ScorePoolConfig<Entity>{gameObject_};
         }
 
     };

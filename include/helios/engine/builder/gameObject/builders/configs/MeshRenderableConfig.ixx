@@ -10,7 +10,6 @@ module;
 
 export module helios.engine.builder.gameObject.builders.configs.MeshRenderableConfig;
 
-import helios.engine.ecs.GameObject;
 import helios.rendering;
 import helios.ext.opengl;
 import helios.engine.modules.rendering;
@@ -29,12 +28,15 @@ export namespace helios::engine::builder::gameObject::builders::configs {
      * Allows specification of shape, shader, primitive type, and color.
      * Builds and attaches a RenderableComponent.
      */
+    template<typename Entity>
     class MeshRenderableConfig {
+
+        using Handle_type = typename Entity::Handle_type;
 
         /**
          * @brief Non-owning pointer to the target GameObject.
          */
-        helios::engine::ecs::GameObject gameObject_;
+        Entity gameObject_;
 
         /**
          * @brief The shape geometry to render.
@@ -49,7 +51,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         /**
          * @brief The primitive type for mesh rendering.
          */
-        helios::rendering::mesh::PrimitiveType primitiveType_;
+        helios::rendering::mesh::types::PrimitiveType primitiveType_;
 
         /**
          * @brief The base color for the material.
@@ -57,15 +59,15 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         helios::math::vec4f color_;
 
         static inline std::unordered_map<
-            helios::rendering::mesh::PrimitiveType,
-            std::shared_ptr<helios::rendering::mesh::MeshConfig>
+            helios::rendering::mesh::types::PrimitiveType,
+            std::shared_ptr<helios::rendering::mesh::types::MeshConfig>
         > meshConfigs_;
 
-        static std::shared_ptr<helios::rendering::mesh::MeshConfig> meshConfig(helios::rendering::mesh::PrimitiveType primitiveType) {
+        static std::shared_ptr<helios::rendering::mesh::types::MeshConfig> meshConfig(helios::rendering::mesh::types::PrimitiveType primitiveType) {
 
             auto [it, inserted] = meshConfigs_.try_emplace(
                 primitiveType,
-                std::make_shared<helios::rendering::mesh::MeshConfig>(primitiveType)
+                std::make_shared<helios::rendering::mesh::types::MeshConfig>(primitiveType)
             );
 
             return it->second;
@@ -79,7 +81,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @param gameObject Target GameObject to configure.
          */
         explicit MeshRenderableConfig(
-            helios::engine::ecs::GameObject gameObject
+            Entity gameObject
         ) : gameObject_(gameObject) {}
 
         /**
@@ -115,7 +117,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @return Reference to this config for chaining.
          */
-        MeshRenderableConfig& primitiveType(helios::rendering::mesh::PrimitiveType primitiveType) {
+        MeshRenderableConfig& primitiveType(helios::rendering::mesh::types::PrimitiveType primitiveType) {
             primitiveType_ = primitiveType;
 
             return *this;
@@ -143,7 +145,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
 
             build();
 
-            SceneNodeConfig scn{gameObject_};
+            SceneNodeConfig<Entity> scn{gameObject_};
 
             scn.parent(parent);
         }
@@ -167,11 +169,11 @@ export namespace helios::engine::builder::gameObject::builders::configs {
 
             const auto renderPrototype = std::make_shared<helios::rendering::RenderPrototype>(material, mesh);
 
-            auto& rc = gameObject_.add<helios::engine::modules::rendering::renderable::components::RenderableComponent>(
+            auto& rc = gameObject_.template add<helios::engine::modules::rendering::renderable::components::RenderableComponent<Handle_type>>(
                 std::make_shared<helios::rendering::mesh::MeshRenderable>(renderPrototype)
             );
 
-            auto& msc = gameObject_.getOrAdd<helios::engine::modules::rendering::model::components::ModelAabbComponent>();
+            auto& msc = gameObject_.template getOrAdd<helios::engine::modules::rendering::model::components::ModelAabbComponent<Handle_type>>();
             msc.setAabb(rc.renderable().localAABB());
 
             return *this;

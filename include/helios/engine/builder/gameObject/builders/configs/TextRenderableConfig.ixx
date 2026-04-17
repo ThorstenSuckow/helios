@@ -10,7 +10,6 @@ module;
 
 export module helios.engine.builder.gameObject.builders.configs.TextRenderableConfig;
 
-import helios.engine.ecs.GameObject;
 import helios.rendering;
 import helios.engine.modules.ui.widgets.types.FontId;
 import helios.core.types;
@@ -33,12 +32,15 @@ export namespace helios::engine::builder::gameObject::builders::configs {
      * Provides a builder-style interface for configuring text rendering
      * properties including font, color, shader, and optional UI text binding.
      */
+    template<typename Entity>
     class TextRenderableConfig {
+
+        using Handle_type = typename Entity::Handle_type;
 
         /**
          * @brief The GameObject being configured.
          */
-        helios::engine::ecs::GameObject gameObject_;
+        Entity gameObject_;
 
         /**
          * @brief Pointer to the font resource provider.
@@ -125,7 +127,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @param gameObject The GameObject to configure.
          */
         explicit TextRenderableConfig(
-            helios::engine::ecs::GameObject gameObject
+            Entity gameObject
         ) : gameObject_(gameObject) {}
 
         /**
@@ -161,11 +163,11 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @return A SceneNodeConfig for further configuration.
          */
-        SceneNodeConfig attachTo(helios::engine::ecs::GameObject parent) {
+        SceneNodeConfig<Entity> attachTo(Entity parent) {
 
             build();
 
-            SceneNodeConfig scn{gameObject_};
+            SceneNodeConfig<Entity> scn{gameObject_};
 
             scn.parent(parent);
 
@@ -179,11 +181,11 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @return A SceneNodeConfig for further configuration.
          */
-        SceneNodeConfig attachTo(helios::scene::SceneNode* parent) {
+        SceneNodeConfig<Entity> attachTo(helios::scene::SceneNode* parent) {
 
             build();
 
-            SceneNodeConfig scn{gameObject_};
+            SceneNodeConfig<Entity> scn{gameObject_};
 
             scn.parent(parent);
 
@@ -345,18 +347,18 @@ export namespace helios::engine::builder::gameObject::builders::configs {
                     textPrototype
             );
 
-            gameObject_.add<helios::engine::modules::rendering::renderable::components::RenderableComponent>(renderable);
+            gameObject_.template add<helios::engine::modules::rendering::renderable::components::RenderableComponent<Handle_type>>(renderable);
 
-            auto& msc = gameObject_.getOrAdd<helios::engine::modules::rendering::model::components::ModelAabbComponent>();
+            auto& msc = gameObject_.template getOrAdd<helios::engine::modules::rendering::model::components::ModelAabbComponent<Handle_type>>();
             msc.setAabb(renderable->localAABB());
 
             if (isUiText_ || usesNumberFormatter_ || usesTimeFormatter_) {
-                gameObject_.add<helios::engine::modules::ui::widgets::components::UiTextComponent>(renderable.get());
+                gameObject_.template add<helios::engine::modules::ui::widgets::components::UiTextComponent<Handle_type>>(renderable.get());
                 isUiText_ = false;
             }
 
             if (usesTimeFormatter_) {
-                auto& tfc = gameObject_.add<helios::engine::modules::ui::layout::components::TimeFormatterComponent>();
+                auto& tfc = gameObject_.template add<helios::engine::modules::ui::layout::components::TimeFormatterComponent<Handle_type>>();
                 tfc.setFormat(
                     timestampFormat_,
                     displayRemaining_ ? modules::ui::layout::types::TimeDisplayMode::Remaining
@@ -370,7 +372,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
             }
 
             if (usesNumberFormatter_) {
-                gameObject_.add<helios::engine::modules::ui::layout::components::NumberFormatterComponent>()
+                gameObject_.template add<helios::engine::modules::ui::layout::components::NumberFormatterComponent<Handle_type>>()
                             .setFormat(numberFormat_);
                 usesNumberFormatter_ = false;
             }

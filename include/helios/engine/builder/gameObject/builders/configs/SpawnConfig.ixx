@@ -6,7 +6,6 @@ module;
 
 export module helios.engine.builder.gameObject.builders.configs.SpawnConfig;
 
-import helios.engine.ecs.GameObject;
 
 import helios.engine.mechanics.spawn.components;
 
@@ -18,21 +17,24 @@ export namespace helios::engine::builder::gameObject::builders::configs {
      * Provides methods for connecting GameObjects to the spawn
      * system and spawn profiles.
      */
+    template<typename Entity>
     class SpawnConfig {
 
         /**
          * @brief Non-owning pointer to the target GameObject.
          */
-        helios::engine::ecs::GameObject gameObject_;
+        Entity gameObject_;
 
     public:
+
+        using Handle_type = typename Entity::Handle_type;
 
         /**
          * @brief Constructs a SpawnConfig.
          *
          * @param gameObject Target GameObject to configure.
          */
-        explicit SpawnConfig(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {}
+        explicit SpawnConfig(Entity gameObject) : gameObject_(gameObject) {}
 
         /**
          * @brief Marks the entity as spawned by a spawn profile.
@@ -43,7 +45,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         SpawnConfig& useSpawnProfile() {
-            gameObject_.add<helios::engine::mechanics::spawn::components::SpawnedByProfileComponent>();
+            gameObject_.template add<helios::engine::mechanics::spawn::components::SpawnedByProfileComponent<Handle_type>>();
 
             return *this;
         }
@@ -57,7 +59,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         SpawnConfig& trackEmitter() {
-            gameObject_.add<helios::engine::mechanics::spawn::components::EmittedByComponent>();
+            gameObject_.template add<helios::engine::mechanics::spawn::components::EmittedByComponent<Handle_type>>();
 
             return *this;
         }
@@ -66,4 +68,3 @@ export namespace helios::engine::builder::gameObject::builders::configs {
     };
 
 }
-

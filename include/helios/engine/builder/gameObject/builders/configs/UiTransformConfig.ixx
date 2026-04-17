@@ -6,7 +6,6 @@ module;
 
 export module helios.engine.builder.gameObject.builders.configs.UiTransformConfig;
 
-import helios.engine.ecs.GameObject;
 import helios.engine.common.types;
 
 import helios.engine.modules.ui;
@@ -15,6 +14,8 @@ import helios.math;
 
 import helios.core;
 import helios.engine.core;
+
+import helios.rendering.viewport;
 
 import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
 import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
@@ -27,12 +28,12 @@ export namespace helios::engine::builder::gameObject::builders::configs {
      * Automatically adds ComposeTransformComponent and provides
      * methods for setting scale and translation.
      */
+    template<typename Entity>
     class UiTransformConfig {
 
-        /**
-         * @brief Non-owning pointer to the target GameObject.
-         */
-         helios::engine::ecs::GameObject gameObject_;
+        using Handle_type = typename Entity::Handle_type;
+
+         Entity gameObject_;
 
 
     public:
@@ -42,10 +43,10 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @param gameObject Target GameObject to configure.
          */
-        explicit UiTransformConfig(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {
-            gameObject_.getOrAdd<helios::engine::modules::spatial::transform::components::ComposeTransformComponent>();
-            gameObject_.getOrAdd<helios::engine::modules::spatial::transform::components::TranslationStateComponent>();
-            gameObject_.add<helios::engine::modules::ui::transform::components::UiTransformComponent>();
+        explicit UiTransformConfig(Entity gameObject) : gameObject_(gameObject) {
+            gameObject_.template getOrAdd<helios::engine::modules::spatial::transform::components::ComposeTransformComponent<Handle_type>>();
+            gameObject_.template getOrAdd<helios::engine::modules::spatial::transform::components::TranslationStateComponent<Handle_type>>();
+            gameObject_.template add<helios::engine::modules::ui::transform::components::UiTransformComponent<Handle_type>>();
         }
 
         /**
@@ -56,7 +57,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         UiTransformConfig& anchor(const helios::engine::modules::ui::layout::Anchor anchor) {
-            gameObject_.get<helios::engine::modules::ui::transform::components::UiTransformComponent>()
+            gameObject_.get<helios::engine::modules::ui::transform::components::UiTransformComponent<Handle_type>>()
                         ->setAnchor(anchor);
             return *this;
         }
@@ -64,13 +65,13 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         /**
          * @brief Sets the viewport for this UI element.
          *
-         * @param viewportId The ID of the viewport to attach to.
+         * @param viewportHandle The Handle of the viewport to attach to.
          *
          * @return Reference to this config for chaining.
          */
-        UiTransformConfig& viewport(const helios::engine::common::types::ViewportId viewportId) {
-            gameObject_.get<helios::engine::modules::ui::transform::components::UiTransformComponent>()
-                        ->setViewportId(viewportId);
+        UiTransformConfig& viewport(const helios::rendering::viewport::types::ViewportHandle viewportHandle) {
+            gameObject_.get<helios::engine::modules::ui::transform::components::UiTransformComponent<Handle_type>>()
+                        ->setViewportHandle(viewportHandle);
             return *this;
         }
 
@@ -82,7 +83,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         UiTransformConfig& pivot(const helios::engine::modules::ui::layout::Anchor anchor) {
-            gameObject_.get<helios::engine::modules::ui::transform::components::UiTransformComponent>()
+            gameObject_.get<helios::engine::modules::ui::transform::components::UiTransformComponent<Handle_type>>()
                         ->setPivot(anchor);
             return *this;
         }
@@ -95,7 +96,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         UiTransformConfig& offsets(const helios::math::vec4f offsets) {
-            gameObject_.get<helios::engine::modules::ui::transform::components::UiTransformComponent>()
+            gameObject_.get<helios::engine::modules::ui::transform::components::UiTransformComponent<Handle_type>>()
                         ->setOffsets(offsets);
             return *this;
         }

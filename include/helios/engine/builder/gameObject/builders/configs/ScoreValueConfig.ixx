@@ -9,7 +9,6 @@ module;
 
 export module helios.engine.builder.gameObject.builders.configs.ScoreValueConfig;
 
-import helios.engine.ecs.GameObject;
 
 import helios.engine.mechanics.scoring.components.ScoreValueComponent;
 
@@ -22,12 +21,15 @@ export namespace helios::engine::builder::gameObject::builders::configs {
      * Provides a template method for adding ScoreValueComponent with
      * a specific score type (e.g., KillReward).
      */
+    template<typename Entity>
     class ScoreValueConfig {
+
+        using Handle_type = typename Entity::Handle_type;
 
         /**
          * @brief Non-owning pointer to the target GameObject.
          */
-        helios::engine::ecs::GameObject gameObject_;
+        Entity gameObject_;
 
     public:
 
@@ -36,7 +38,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @param gameObject Target GameObject to configure.
          */
-        explicit ScoreValueConfig(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {
+        explicit ScoreValueConfig(Entity gameObject) : gameObject_(gameObject) {
 
         }
 
@@ -53,11 +55,11 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         template<typename T, typename... Args>
         ScoreValueConfig& score(Args&&... args) {
 
-            auto* svc = gameObject_.get<helios::engine::mechanics::scoring::components::ScoreValueComponent<T>>();
+            auto* svc = gameObject_.template get<helios::engine::mechanics::scoring::components::ScoreValueComponent<Handle_type, T>>();
 
             assert(!svc && "Component already available.");
 
-            gameObject_.add<helios::engine::mechanics::scoring::components::ScoreValueComponent<T>>(std::forward<Args>(args)...);
+            gameObject_.template add<helios::engine::mechanics::scoring::components::ScoreValueComponent<Handle_type, T>>(std::forward<Args>(args)...);
 
             return *this;
         }

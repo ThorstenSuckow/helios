@@ -6,7 +6,6 @@ module;
 
 export module helios.engine.builder.gameObject.builders.ObserverBuilder;
 
-import helios.engine.ecs.GameObject;
 import helios.engine.builder.gameObject.builders.configs.ObserverConfig;
 
 export namespace helios::engine::builder::gameObject::builders {
@@ -17,12 +16,13 @@ export namespace helios::engine::builder::gameObject::builders {
      * Provides methods to create config objects for observer components
      * that bind to data sources like score pools.
      */
+    template<typename Entity>
     class ObserverBuilder {
 
         /**
          * @brief Non-owning pointer to the target GameObject.
          */
-        helios::engine::ecs::GameObject gameObject_;
+        Entity gameObject_;
 
     public:
 
@@ -31,15 +31,15 @@ export namespace helios::engine::builder::gameObject::builders {
          *
          * @param gameObject The target GameObject to configure.
          */
-        explicit ObserverBuilder(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {}
+        explicit ObserverBuilder(Entity gameObject) : gameObject_(gameObject) {}
 
         /**
          * @brief Returns a config object for observer components.
          *
          * @return ObserverConfig for fluent configuration.
          */
-        [[nodiscard]] helios::engine::builder::gameObject::builders::configs::ObserverConfig observe() const {
-            return helios::engine::builder::gameObject::builders::configs::ObserverConfig{gameObject_};
+        [[nodiscard]] helios::engine::builder::gameObject::builders::configs::ObserverConfig<Entity> observe() const {
+            return helios::engine::builder::gameObject::builders::configs::ObserverConfig<Entity>{gameObject_};
         }
 
     };

@@ -6,8 +6,6 @@ module;
 
 export module helios.engine.builder.gameObject.builders.configs.ScorePoolConfig;
 
-import helios.engine.ecs.GameObject;
-
 
 import helios.engine.mechanics.scoring.types;
 import helios.engine.mechanics.scoring.components.ScorePoolComponent;
@@ -20,23 +18,28 @@ export namespace helios::engine::builder::gameObject::builders::configs {
      *
      * Automatically adds ScorePoolComponent and provides methods for
      * setting the associated score pool ID.
+     *
+     * @tparam Entity The entity type (e.g., GameObject).
      */
+    template<typename Entity>
     class ScorePoolConfig {
 
+        using Handle_type = typename Entity::Handle_type;
+
         /**
-         * @brief Non-owning pointer to the target GameObject.
+         * @brief Non-owning pointer to the target entity.
          */
-        helios::engine::ecs::GameObject gameObject_;
+        Entity gameObject_;
 
     public:
 
         /**
          * @brief Constructs a ScorePoolConfig and adds ScorePoolComponent.
          *
-         * @param gameObject Target GameObject to configure.
+         * @param gameObject Target entity to configure.
          */
-        explicit ScorePoolConfig(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {
-            gameObject_.getOrAdd<helios::engine::mechanics::scoring::components::ScorePoolComponent>();
+        explicit ScorePoolConfig(Entity gameObject) : gameObject_(gameObject) {
+            gameObject_.template getOrAdd<helios::engine::mechanics::scoring::components::ScorePoolComponent<Handle_type>>();
         }
 
         /**
@@ -47,7 +50,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         ScorePoolConfig& poolId(const helios::engine::mechanics::scoring::types::ScorePoolId scorePoolId) {
-            gameObject_.get<helios::engine::mechanics::scoring::components::ScorePoolComponent>()
+            gameObject_.template get<helios::engine::mechanics::scoring::components::ScorePoolComponent<Handle_type>>()
                        ->setScorePoolId(scorePoolId);
             return *this;
         }

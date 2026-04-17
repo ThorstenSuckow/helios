@@ -6,7 +6,6 @@ module;
 
 export module helios.engine.builder.gameObject.builders.LifecycleBuilder;
 
-import helios.engine.ecs.GameObject;
 import helios.engine.builder.gameObject.builders.configs.LifecycleConfig;
 
 export namespace helios::engine::builder::gameObject::builders {
@@ -35,12 +34,10 @@ export namespace helios::engine::builder::gameObject::builders {
      * @see DelayedComponentEnabler
      * @see DelayedComponentEnablerInitializer
      */
+    template<typename Entity>
     class LifecycleBuilder {
 
-        /**
-         * @brief Non-owning pointer to the target GameObject.
-         */
-        helios::engine::ecs::GameObject gameObject_;
+        Entity gameObject_;
 
     public:
 
@@ -49,7 +46,7 @@ export namespace helios::engine::builder::gameObject::builders {
          *
          * @param gameObject Non-owning pointer to the target entity.
          */
-        explicit LifecycleBuilder(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {}
+        explicit LifecycleBuilder(Entity gameObject) : gameObject_(gameObject) {}
 
         /**
          * @brief Returns a configuration object for lifecycle settings.
@@ -59,8 +56,8 @@ export namespace helios::engine::builder::gameObject::builders {
          *
          * @return LifecycleConfig instance targeting the same GameObject.
          */
-        helios::engine::builder::gameObject::builders::configs::LifecycleConfig lifecycle() {
-            return helios::engine::builder::gameObject::builders::configs::LifecycleConfig{gameObject_};
+        helios::engine::builder::gameObject::builders::configs::LifecycleConfig<Entity> lifecycle() {
+            return helios::engine::builder::gameObject::builders::configs::LifecycleConfig<Entity>{gameObject_};
         }
 
 

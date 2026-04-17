@@ -9,7 +9,6 @@ module;
 
 export module helios.engine.builder.gameObject.builders.configs.LifecycleConfig;
 
-import helios.engine.ecs.GameObject;
 
 import helios.engine.mechanics.lifecycle.components.DelayedComponentEnabler;
 
@@ -51,13 +50,12 @@ export namespace helios::engine::builder::gameObject::builders::configs {
      * @see DelayedComponentEnablerSystem
      * @see DelayedComponentEnablerInitializer
      */
+    template<typename Entity>
     class LifecycleConfig {
 
+        Entity& gameObject_;
 
-        /**
-         * @brief Non-owning pointer to the target GameObject.
-         */
-        helios::engine::ecs::GameObject& gameObject_;
+        using Handle_type = typename Entity::Handle_type;
 
     public:
 
@@ -66,7 +64,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @param gameObject Non-owning pointer to the target entity.
          */
-        explicit LifecycleConfig(helios::engine::ecs::GameObject& gameObject) : gameObject_(gameObject) {}
+        explicit LifecycleConfig(Entity& gameObject) : gameObject_(gameObject) {}
 
         /**
          * @brief Enables delayed component activation for this entity.
@@ -79,7 +77,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          */
         LifecycleConfig& useDelayedComponentEnabler() {
 
-            gameObject_.getOrAdd<helios::engine::mechanics::lifecycle::components::DelayedComponentEnabler>();
+            gameObject_.template getOrAdd<helios::engine::mechanics::lifecycle::components::DelayedComponentEnabler<Handle_type>>();
 
             return *this;
         }
@@ -89,4 +87,3 @@ export namespace helios::engine::builder::gameObject::builders::configs {
     };
 
 }
-

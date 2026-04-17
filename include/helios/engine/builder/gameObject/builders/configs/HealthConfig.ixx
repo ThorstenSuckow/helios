@@ -6,7 +6,6 @@ module;
 
 export module helios.engine.builder.gameObject.builders.configs.HealthConfig;
 
-import helios.engine.ecs.GameObject;
 
 import helios.engine.mechanics.health;
 import helios.engine.mechanics.match.components;
@@ -24,12 +23,15 @@ export namespace helios::engine::builder::gameObject::builders::configs {
      * Automatically adds HealthComponent and provides methods for
      * setting maximum health.
      */
+    template<typename Entity>
     class HealthConfig {
+
+        using Handle_type = typename Entity::Handle_type;
 
         /**
          * @brief Non-owning pointer to the target GameObject.
          */
-        helios::engine::ecs::GameObject gameObject_;
+        Entity gameObject_;
 
     public:
 
@@ -38,8 +40,8 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @param gameObject Target GameObject to configure.
          */
-        explicit HealthConfig(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {
-            gameObject.add<HealthComponent>();
+        explicit HealthConfig(Entity gameObject) : gameObject_(gameObject) {
+            gameObject.template add<HealthComponent<Handle_type>>();
         }
 
         /**
@@ -50,9 +52,9 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         HealthConfig& maxHealth(const float maxHealth) {
-            gameObject_.getOrAdd<HealthComponent>()
+            gameObject_.template getOrAdd<HealthComponent<Handle_type>>()
                         .setMaxHealth(maxHealth);
-            gameObject_.getOrAdd<HealthComponent>()
+            gameObject_.template getOrAdd<HealthComponent<Handle_type>>()
                        .heal(maxHealth);
 
             return *this;
@@ -68,7 +70,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         HealthConfig& lives(const size_t lives) {
-            gameObject_.getOrAdd<LivesComponent>(lives);
+            gameObject_.template getOrAdd<LivesComponent<Handle_type>>(lives);
 
             return *this;
         }
@@ -83,7 +85,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         HealthConfig& healthDepletedTriggers(const HealthDepletedBehavior behavior) {
-            gameObject_.getOrAdd<HealthComponent>()
+            gameObject_.template getOrAdd<HealthComponent<Handle_type>>()
                         .setHealthDepletedBehavior(behavior);
 
             return *this;

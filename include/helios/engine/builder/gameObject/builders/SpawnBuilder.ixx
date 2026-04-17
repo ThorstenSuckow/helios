@@ -6,7 +6,6 @@ module;
 
 export module helios.engine.builder.gameObject.builders.SpawnBuilder;
 
-import helios.engine.ecs.GameObject;
 import helios.engine.builder.gameObject.builders.configs.SpawnConfig;
 
 export namespace helios::engine::builder::gameObject::builders {
@@ -17,12 +16,13 @@ export namespace helios::engine::builder::gameObject::builders {
      * Provides factory methods for integrating GameObjects
      * with the spawn system and spawn profiles.
      */
+    template<typename Entity>
     class SpawnBuilder {
 
         /**
          * @brief Non-owning pointer to the target GameObject.
          */
-        helios::engine::ecs::GameObject gameObject_;
+        Entity gameObject_;
 
     public:
 
@@ -31,15 +31,15 @@ export namespace helios::engine::builder::gameObject::builders {
          *
          * @param gameObject Target GameObject to configure.
          */
-        explicit SpawnBuilder(helios::engine::ecs::GameObject gameObject) : gameObject_(gameObject) {}
+        explicit SpawnBuilder(Entity gameObject) : gameObject_(gameObject) {}
 
         /**
          * @brief Returns a config for spawn profile setup.
          *
          * @return SpawnConfig for fluent configuration.
          */
-        helios::engine::builder::gameObject::builders::configs::SpawnConfig spawn() {
-            return helios::engine::builder::gameObject::builders::configs::SpawnConfig{gameObject_};
+        helios::engine::builder::gameObject::builders::configs::SpawnConfig<Entity> spawn() {
+            return helios::engine::builder::gameObject::builders::configs::SpawnConfig<Entity>{gameObject_};
         }
 
 

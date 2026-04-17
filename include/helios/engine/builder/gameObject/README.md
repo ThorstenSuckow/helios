@@ -54,7 +54,7 @@ When using `GameObjectFactory::from()`, only components implementing the `Clonea
 | Module | Purpose |
 |--------|---------|
 | `helios.engine.builder.gameObject.builders` | Domain-specific builders |
-| `helios.engine.ecs` | GameObject, Component, Cloneable |
+| `helios.ecs` | GameObject, Component, Cloneable |
 
 ---
 

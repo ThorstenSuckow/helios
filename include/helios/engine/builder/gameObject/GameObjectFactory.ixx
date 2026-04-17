@@ -4,12 +4,13 @@
  */
 module;
 
+#include <coroutine>
 #include <memory>
 #include <functional>
 
 export module helios.engine.builder.gameObject.GameObjectFactory;
 
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameObject;
 
 import helios.engine.builder.gameObject.builders;
 
@@ -52,6 +53,7 @@ export namespace helios::engine::builder::gameObject {
      * @see RenderingBuilder
      * @see CollisionBuilder
      */
+    template<typename Entity, typename World>
     class GameObjectFactory {
 
         /**
@@ -62,155 +64,157 @@ export namespace helios::engine::builder::gameObject {
          */
         class GameObjectPrototype {
 
+            using Handle_type = typename Entity::Handle_type;
+
             /**
              * @brief The GameObject being configured.
              */
-            helios::engine::ecs::GameObject gameObject_;
+            Entity gameObject_;
 
-            helios::engine::runtime::world::GameWorld& gameWorld_;
+            World& gameWorld_;
 
             /**
              * @brief Builder for motion-related components.
              */
-            std::unique_ptr<helios::engine::builder::gameObject::builders::MotionBuilder> motionBuilder_;
+            std::unique_ptr<helios::engine::builder::gameObject::builders::MotionBuilder<Entity>> motionBuilder_;
 
             /**
              * @brief Builder for rendering-related components.
              */
-            std::unique_ptr<helios::engine::builder::gameObject::builders::RenderingBuilder> renderingBuilder_;
+            std::unique_ptr<helios::engine::builder::gameObject::builders::RenderingBuilder<Entity>> renderingBuilder_;
 
             /**
              * @brief Builder for scene-related components.
              */
-            std::unique_ptr<helios::engine::builder::gameObject::builders::SceneBuilder> sceneBuilder_;
+            std::unique_ptr<helios::engine::builder::gameObject::builders::SceneBuilder<Entity>> sceneBuilder_;
 
             /**
              * @brief Builder for collision-related components.
              */
-            std::unique_ptr<helios::engine::builder::gameObject::builders::CollisionBuilder> collisionBuilder_;
+            std::unique_ptr<helios::engine::builder::gameObject::builders::CollisionBuilder<Entity>> collisionBuilder_;
 
             /**
              * @brief Builder for spatial transform components.
              */
-            std::unique_ptr<helios::engine::builder::gameObject::builders::TransformBuilder> transformBuilder_;
+            std::unique_ptr<helios::engine::builder::gameObject::builders::TransformBuilder<Entity>> transformBuilder_;
 
             /**
              * @brief Builder for UI transform components.
              */
-            std::unique_ptr<helios::engine::builder::gameObject::builders::UiTransformBuilder> uiTransformBuilder_;
+            std::unique_ptr<helios::engine::builder::gameObject::builders::UiTransformBuilder<Entity>> uiTransformBuilder_;
 
             /**
              * @brief Builder for visual effects components.
              */
-            std::unique_ptr<helios::engine::builder::gameObject::builders::EffectsBuilder> effectsBuilder_;
+            std::unique_ptr<helios::engine::builder::gameObject::builders::EffectsBuilder<Entity>> effectsBuilder_;
 
             /**
              * @brief Builder for spawn-related components.
              */
-            std::unique_ptr<helios::engine::builder::gameObject::builders::SpawnBuilder> spawnBuilder_;
+            std::unique_ptr<helios::engine::builder::gameObject::builders::SpawnBuilder<Entity>> spawnBuilder_;
 
             /**
              * @brief Builder for AI behavior components.
              */
-            std::unique_ptr<helios::engine::builder::gameObject::builders::AiBuilder> aiBuilder_;
+            std::unique_ptr<helios::engine::builder::gameObject::builders::AiBuilder<Entity>> aiBuilder_;
 
             /**
              * @brief Builder for combat-related components.
              */
-            std::unique_ptr<helios::engine::builder::gameObject::builders::CombatBuilder> CombatBuilder_;
+            std::unique_ptr<helios::engine::builder::gameObject::builders::CombatBuilder<Entity>> CombatBuilder_;
 
             /**
              * @brief Builder for lifecycle components.
              */
-            std::unique_ptr<helios::engine::builder::gameObject::builders::LifecycleBuilder> lifecycleBuilder_;
+            std::unique_ptr<helios::engine::builder::gameObject::builders::LifecycleBuilder<Entity>> lifecycleBuilder_;
 
             /**
              * @brief Builder for health-related components.
              */
-            std::unique_ptr<helios::engine::builder::gameObject::builders::HealthBuilder> healthBuilder_;
+            std::unique_ptr<helios::engine::builder::gameObject::builders::HealthBuilder<Entity>> healthBuilder_;
 
             /**
              * @brief Builder for scoring-related components.
              */
-            std::unique_ptr<helios::engine::builder::gameObject::builders::ScoringBuilder> scoringBuilder_;
+            std::unique_ptr<helios::engine::builder::gameObject::builders::ScoringBuilder<Entity>> scoringBuilder_;
 
             /**
              * @brief Builder for observer components.
              */
-            std::unique_ptr<helios::engine::builder::gameObject::builders::ObserverBuilder> observerBuilder_;
+            std::unique_ptr<helios::engine::builder::gameObject::builders::ObserverBuilder<Entity>> observerBuilder_;
 
             /**
              * @brief Builder for menu components.
              */
-            std::unique_ptr<helios::engine::builder::gameObject::builders::MenuBuilder> menuBuilder_;
+            std::unique_ptr<helios::engine::builder::gameObject::builders::MenuBuilder<Entity>> menuBuilder_;
         public:
 
             /** @brief Callback type for motion configuration. */
-            using MotionBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::MotionBuilder&)>;
+            using MotionBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::MotionBuilder<Entity>&)>;
 
             /** @brief Callback type for rendering configuration. */
-            using RenderingBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::RenderingBuilder&)>;
+            using RenderingBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::RenderingBuilder<Entity>&)>;
 
             /** @brief Callback type for scene configuration. */
-            using SceneBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::SceneBuilder&)>;
+            using SceneBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::SceneBuilder<Entity>&)>;
 
             /** @brief Callback type for transform configuration. */
-            using TransformBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::TransformBuilder&)>;
+            using TransformBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::TransformBuilder<Entity>&)>;
 
             /** @brief Callback type for UI transform configuration. */
-            using UiTransformBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::UiTransformBuilder&)>;
+            using UiTransformBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::UiTransformBuilder<Entity>&)>;
 
             /** @brief Callback type for collision configuration. */
-            using CollisionBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::CollisionBuilder&)>;
+            using CollisionBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::CollisionBuilder<Entity>&)>;
 
             /** @brief Callback type for effects configuration. */
-            using EffectsBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::EffectsBuilder&)>;
+            using EffectsBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::EffectsBuilder<Entity>&)>;
 
             /** @brief Callback type for spawn configuration. */
-            using SpawnBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::SpawnBuilder&)>;
+            using SpawnBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::SpawnBuilder<Entity>&)>;
 
             /** @brief Callback type for AI configuration. */
-            using AiBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::AiBuilder&)>;
+            using AiBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::AiBuilder<Entity>&)>;
 
             /** @brief Callback type for combat configuration. */
-            using CombatBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::CombatBuilder&)>;
+            using CombatBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::CombatBuilder<Entity>&)>;
 
             /** @brief Callback type for lifecycle configuration. */
-            using LifecycleBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::LifecycleBuilder&)>;
+            using LifecycleBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::LifecycleBuilder<Entity>&)>;
 
             /** @brief Callback type for health configuration. */
-            using HealthBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::HealthBuilder&)>;
+            using HealthBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::HealthBuilder<Entity>&)>;
 
             /** @brief Callback type for scoring configuration. */
-            using ScoringBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::ScoringBuilder&)>;
+            using ScoringBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::ScoringBuilder<Entity>&)>;
 
             /** @brief Callback type for observer configuration. */
-            using ObserverBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::ObserverBuilder&)>;
+            using ObserverBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::ObserverBuilder<Entity>&)>;
 
             /** @brief Callback type for menu configuration. */
-            using MenuBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::MenuBuilder&)>;
+            using MenuBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::MenuBuilder<Entity>&)>;
 
             /**
              * @brief Constructs a prototype with a new empty GameObject.
              */
-            GameObjectPrototype(helios::engine::runtime::world::GameWorld& gameWorld) :
+            GameObjectPrototype(World& gameWorld) :
                 gameObject_(gameWorld.addGameObject()),
                 gameWorld_(gameWorld),
-                motionBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::MotionBuilder>(gameObject_)),
-                renderingBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::RenderingBuilder>(gameObject_)),
-                sceneBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::SceneBuilder>(gameObject_)),
-                collisionBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::CollisionBuilder>(gameObject_)),
-                transformBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::TransformBuilder>(gameObject_)),
-                uiTransformBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::UiTransformBuilder>(gameObject_)),
-                effectsBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::EffectsBuilder>(gameObject_)),
-                spawnBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::SpawnBuilder>(gameObject_)),
-                aiBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::AiBuilder>(gameObject_)),
-                CombatBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::CombatBuilder>(gameObject_)),
-                lifecycleBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::LifecycleBuilder>(gameObject_)),
-                healthBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::HealthBuilder>(gameObject_)),
-                scoringBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::ScoringBuilder>(gameObject_)),
-                observerBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::ObserverBuilder>(gameObject_)),
-                menuBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::MenuBuilder>(gameObject_))
+                motionBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::MotionBuilder<Entity>>(gameObject_)),
+                renderingBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::RenderingBuilder<Entity>>(gameObject_)),
+                sceneBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::SceneBuilder<Entity>>(gameObject_)),
+                collisionBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::CollisionBuilder<Entity>>(gameObject_)),
+                transformBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::TransformBuilder<Entity>>(gameObject_)),
+                uiTransformBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::UiTransformBuilder<Entity>>(gameObject_)),
+                effectsBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::EffectsBuilder<Entity>>(gameObject_)),
+                spawnBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::SpawnBuilder<Entity>>(gameObject_)),
+                aiBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::AiBuilder<Entity>>(gameObject_)),
+                CombatBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::CombatBuilder<Entity>>(gameObject_)),
+                lifecycleBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::LifecycleBuilder<Entity>>(gameObject_)),
+                healthBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::HealthBuilder<Entity>>(gameObject_)),
+                scoringBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::ScoringBuilder<Entity>>(gameObject_)),
+                observerBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::ObserverBuilder<Entity>>(gameObject_)),
+                menuBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::MenuBuilder<Entity>>(gameObject_))
 
             {}
 
@@ -230,7 +234,7 @@ export namespace helios::engine::builder::gameObject {
              *
              * @return Ownership of the configured GameObject.
              */
-            helios::engine::ecs::GameObject make(const bool active = false) {
+            Entity make(const bool active = false) {
                 gameObject_.setActive(active);
                 return gameObject_;
             }
@@ -415,13 +419,13 @@ export namespace helios::engine::builder::gameObject {
              * @return Reference to this prototype for chaining.
              */
             GameObjectPrototype& asPlayerEntity() noexcept {
-                gameObject_.getOrAdd<helios::engine::mechanics::match::components::PlayerComponent>();
-                gameWorld_.session().setPlayerEntityHandle(gameObject_.entityHandle());
+                gameObject_.template getOrAdd<helios::engine::mechanics::match::components::PlayerComponent<Handle_type>>();
+                gameWorld_.session().setPlayerEntityHandle(gameObject_.handle());
                 return *this;
             }
 
             GameObjectPrototype& withPrefabId(const helios::engine::common::types::PrefabId prefabId) {
-                gameObject_.add<helios::engine::runtime::pooling::components::PrefabIdComponent>(prefabId);
+                gameObject_.template add<helios::engine::runtime::pooling::components::PrefabIdComponent<Handle_type>>(prefabId);
                 return *this;
             }
         };
@@ -445,7 +449,7 @@ export namespace helios::engine::builder::gameObject {
          *
          * @return A prototype for fluent configuration.
          */
-        static GameObjectPrototype gameObject(helios::engine::runtime::world::GameWorld& gameWorld) {
+        static GameObjectPrototype gameObject(World& gameWorld) {
             return GameObjectPrototype(gameWorld);
         }
 

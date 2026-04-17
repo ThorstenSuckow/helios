@@ -11,7 +11,7 @@ This module provides access to the complete helios engine functionality, includi
 | Module | Purpose |
 |--------|---------|
 | `helios.engine.core` | Data structures, messaging re-exports, units |
-| `helios.engine.ecs` | ECS base classes (GameObject, Component, System) and query system |
+| `helios.ecs` | ECS base classes (GameObject, Component, System) and query system |
 | `helios.engine.runtime` | Runtime infrastructure (world, gameloop, pooling, messaging, factory) |
 | `helios.engine.modules` | Domain-specific components and systems (physics, spatial, scene) |
 | `helios.engine.mechanics` | Gameplay mechanics (bounds, combat, spawn, input) |
@@ -56,7 +56,7 @@ import helios.engine;
 
 // Access ECS classes
 helios::engine::runtime::world::GameWorld world;
-auto entity = std::make_unique<helios::engine::ecs::GameObject>();
+auto entity = std::make_unique<helios::engine::runtime::world::GameObject>();
 world.addGameObject(std::move(entity));
 
 // Access game loop - systems are registered with phases/passes

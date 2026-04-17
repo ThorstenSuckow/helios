@@ -16,7 +16,8 @@ import helios.engine.runtime.world.UpdateContext;
 import helios.engine.common.tags.SystemRole;
 
 import helios.engine.runtime.world;
-import helios.engine.runtime.messaging.command.EngineCommandBuffer;
+import helios.engine.runtime.messaging.command.NullCommandBuffer;
+import helios.engine.common.concepts.IsCommandBufferLike;
 
 import helios.ecs.components.Active;
 
@@ -31,6 +32,7 @@ import helios.engine.mechanics.gamestate.types;
 using namespace helios::engine::common::tags;
 using namespace helios::engine::runtime::world;
 using namespace helios::engine::runtime::messaging::command;
+using namespace helios::engine::common::concepts;
 using namespace helios::platform::window::components;
 using namespace helios::platform::window::concepts;
 using namespace helios::platform::window::commands;
@@ -43,8 +45,8 @@ export namespace helios::platform::window::systems {
      *
      * @tparam THandle Window handle type.
      */
-    template<typename THandle>
-    requires IsWindowHandle<THandle>
+    template<typename THandle, typename TCommandBuffer = NullCommandBuffer>
+    requires IsWindowHandle<THandle> && IsCommandBufferLike<TCommandBuffer>
     class SwapBuffersSystem {
 
     public:
@@ -66,7 +68,7 @@ export namespace helios::platform::window::systems {
                 WindowComponent<THandle>, WindowShownComponent<THandle>, Active<THandle>
                 >().whereEnabled()) {
 
-                updateContext.queueCommand<EngineCommandBuffer, SwapBuffersCommand<THandle>>(entity.handle());
+                updateContext.queueCommand<TCommandBuffer, SwapBuffersCommand<THandle>>(entity.handle());
             }
 
         }

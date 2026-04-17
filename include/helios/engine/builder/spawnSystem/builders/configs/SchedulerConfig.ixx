@@ -25,6 +25,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
      * Provides convenience methods for assembling a SpawnRule
      * from condition and amount providers.
      */
+    template<typename THandle>
     class SchedulerConfig {
 
         /**
@@ -45,7 +46,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
         /**
          * @brief Provider determining how many to spawn.
          */
-        std::unique_ptr<const helios::engine::runtime::spawn::policy::amount::SpawnAmountProvider> amountProvider_;
+        std::unique_ptr<const helios::engine::runtime::spawn::policy::amount::SpawnAmountProvider<THandle>> amountProvider_;
 
     public:
 
@@ -126,7 +127,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          * @return Reference to this config for chaining.
          */
         SchedulerConfig& amount(
-            std::unique_ptr<const helios::engine::runtime::spawn::policy::amount::SpawnAmountProvider> customProvider
+            std::unique_ptr<const helios::engine::runtime::spawn::policy::amount::SpawnAmountProvider<THandle>> customProvider
         ) {
             amountProvider_ = std::move(customProvider);
             return *this;
@@ -146,8 +147,8 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          *
          * @return The assembled SpawnRule. Ownership is transferred to the caller.
          */
-        [[nodiscard]] std::unique_ptr<helios::engine::runtime::spawn::policy::SpawnRule> build() {
-            return std::make_unique<helios::engine::runtime::spawn::policy::SpawnRule>(
+        [[nodiscard]] std::unique_ptr<helios::engine::runtime::spawn::policy::SpawnRule<THandle>> build() {
+            return std::make_unique<helios::engine::runtime::spawn::policy::SpawnRule<THandle>>(
                 std::move(condition_),
                 std::move(amountProvider_),
                 ruleId_

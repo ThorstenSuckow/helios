@@ -26,12 +26,13 @@ export namespace helios::engine::builder::spawnSystem::builders {
      * Provides factory methods for creating default and cyclic
      * schedulers, and adding rules to them via fluent SchedulerConfig.
      */
+    template<typename THandle>
     class SchedulerBuilder {
 
         /**
          * @brief The spawn manager to register schedulers with.
          */
-        helios::engine::runtime::spawn::SpawnManager& spawnManager_;
+        helios::engine::runtime::spawn::SpawnManager<THandle>& spawnManager_;
 
         /**
          * @brief Adds rules from a parameter pack to a scheduler.
@@ -56,7 +57,7 @@ export namespace helios::engine::builder::spawnSystem::builders {
          * @param spawnManager The spawn manager to register schedulers with.
          */
         explicit SchedulerBuilder(
-            helios::engine::runtime::spawn::SpawnManager& spawnManager
+            helios::engine::runtime::spawn::SpawnManager<THandle>& spawnManager
         ) : spawnManager_(spawnManager) {}
 
         /**
@@ -68,7 +69,7 @@ export namespace helios::engine::builder::spawnSystem::builders {
         template<typename... Configs>
         void defaultScheduler(Configs&&... configs) {
             auto scheduler = std::make_unique<
-                helios::engine::runtime::spawn::scheduling::DefaultSpawnScheduler>();
+                helios::engine::runtime::spawn::scheduling::DefaultSpawnScheduler<THandle>>();
 
             addRules(*scheduler, std::forward<Configs>(configs)...);
 
@@ -88,7 +89,7 @@ export namespace helios::engine::builder::spawnSystem::builders {
             constexpr std::size_t N = sizeof...(Configs);
 
             auto scheduler = std::make_unique<
-                helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler<N>>();
+                helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler<THandle, N>>();
 
             addRules(*scheduler, std::forward<Configs>(configs)...);
 
@@ -101,7 +102,7 @@ export namespace helios::engine::builder::spawnSystem::builders {
          * @param scheduler Ownership is transferred.
          */
         void customScheduler(
-            std::unique_ptr<helios::engine::runtime::spawn::scheduling::SpawnScheduler> scheduler
+            std::unique_ptr<helios::engine::runtime::spawn::scheduling::SpawnScheduler<THandle>> scheduler
         ) {
             spawnManager_.addScheduler(std::move(scheduler));
         }

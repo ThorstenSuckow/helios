@@ -14,7 +14,7 @@ module;
 
 export module helios.engine.builder.spawnSystem.builders.configs.SpawnPoolConfig;
 
-import helios.engine.ecs;
+import helios.ecs;
 
 import helios.engine.runtime.pooling.types.GameObjectPoolId;
 import helios.engine.common.types.PrefabId;
@@ -30,8 +30,11 @@ using namespace helios::engine::runtime::spawn::types;
 export namespace helios::engine::builder::spawnSystem::builders::configs {
 
     // Forward declarations for nested builder return types.
+    template <typename THandle>
     class SpawnPoolConfig;
+    template <typename THandle>
     class SpawnProfileConfig;
+    template <typename THandle>
     class SpawnRuleConfig;
 
     /**
@@ -40,17 +43,18 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
      * Returned by commit() and commitCyclic() to allow starting
      * the next pool() call. Holds only the two manager references.
      */
+    template <typename THandle>
     class SpawnSystemConfigurator {
 
         /**
          * @brief The pool manager for pool registration.
          */
-        helios::engine::runtime::pooling::GameObjectPoolManager& poolManager_;
+        helios::engine::runtime::pooling::GameObjectPoolManager<THandle>& poolManager_;
 
         /**
          * @brief The spawn manager for profile and scheduler registration.
          */
-        helios::engine::runtime::spawn::SpawnManager& spawnManager_;
+        helios::engine::runtime::spawn::SpawnManager<THandle>& spawnManager_;
 
     public:
 
@@ -61,8 +65,8 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          * @param spawnManager The spawn manager for profile and scheduler registration.
          */
         SpawnSystemConfigurator(
-            helios::engine::runtime::pooling::GameObjectPoolManager& poolManager,
-            helios::engine::runtime::spawn::SpawnManager& spawnManager
+            helios::engine::runtime::pooling::GameObjectPoolManager<THandle>& poolManager,
+            helios::engine::runtime::spawn::SpawnManager<THandle>& spawnManager
         ) noexcept : poolManager_(poolManager), spawnManager_(spawnManager) {}
 
         /**
@@ -74,7 +78,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          *
          * @return SpawnPoolConfig for fluent configuration.
          */
-        [[nodiscard]] SpawnPoolConfig pool(
+        [[nodiscard]] SpawnPoolConfig<THandle> pool(
             helios::engine::runtime::pooling::types::GameObjectPoolId poolId,
             helios::engine::common::types::PrefabId prefabId,
             size_t poolSize
@@ -87,12 +91,13 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
      * Configures the condition and amount for a scheduled spawn rule.
      * Returns to the parent SpawnProfileConfig via done().
      */
+    template<typename THandle>
     class SpawnRuleConfig {
 
         /**
          * @brief Parent profile this rule belongs to.
          */
-        SpawnProfileConfig& parent_;
+        SpawnProfileConfig<THandle>& parent_;
 
         /**
          * @brief Unique identifier for this rule.
@@ -107,7 +112,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
         /**
          * @brief Provider determining how many to spawn.
          */
-        std::unique_ptr<const helios::engine::runtime::spawn::policy::amount::SpawnAmountProvider> amountProvider_;
+        std::unique_ptr<const helios::engine::runtime::spawn::policy::amount::SpawnAmountProvider<THandle>> amountProvider_;
 
     public:
 
@@ -118,7 +123,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          * @param ruleId Unique identifier for this rule.
          */
         SpawnRuleConfig(
-            SpawnProfileConfig& parent,
+            SpawnProfileConfig<THandle>& parent,
             helios::engine::runtime::spawn::types::SpawnRuleId ruleId
         ) : parent_(parent), ruleId_(ruleId),
             condition_(nullptr), amountProvider_(nullptr) {}
@@ -188,7 +193,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          * @return Reference to this config for chaining.
          */
         SpawnRuleConfig& amount(
-            std::unique_ptr<const helios::engine::runtime::spawn::policy::amount::SpawnAmountProvider> customProvider
+            std::unique_ptr<const helios::engine::runtime::spawn::policy::amount::SpawnAmountProvider<THandle>> customProvider
         ) {
             amountProvider_ = std::move(customProvider);
             return *this;
@@ -199,8 +204,8 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          *
          * @return The assembled SpawnRule.
          */
-        [[nodiscard]] std::unique_ptr<helios::engine::runtime::spawn::policy::SpawnRule> build() {
-            return std::make_unique<helios::engine::runtime::spawn::policy::SpawnRule>(
+        [[nodiscard]] std::unique_ptr<helios::engine::runtime::spawn::policy::SpawnRule<THandle>> build() {
+            return std::make_unique<helios::engine::runtime::spawn::policy::SpawnRule<THandle>>(
                 std::move(condition_),
                 std::move(amountProvider_),
                 ruleId_
@@ -212,7 +217,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          *
          * @return Reference to the parent SpawnProfileConfig.
          */
-        SpawnProfileConfig& done();
+        SpawnProfileConfig<THandle>& done();
     };
 
     /**
@@ -222,17 +227,18 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
      * for a specific spawn profile. Returns to the parent SpawnPoolConfig
      * via done().
      */
+    template<typename THandle>
     class SpawnProfileConfig {
 
         /**
          * @brief Parent pool this profile belongs to.
          */
-        SpawnPoolConfig& parent_;
+        SpawnPoolConfig<THandle>& parent_;
 
         /**
          * @brief The spawn manager to register with.
          */
-        helios::engine::runtime::spawn::SpawnManager& spawnManager_;
+        helios::engine::runtime::spawn::SpawnManager<THandle>& spawnManager_;
 
         /**
          * @brief Profile identifier.
@@ -247,17 +253,17 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
         /**
          * @brief Placement strategy for spawned entities.
          */
-        std::unique_ptr<helios::engine::runtime::spawn::behavior::SpawnPlacer> placer_;
+        std::unique_ptr<helios::engine::runtime::spawn::behavior::SpawnPlacer<THandle>> placer_;
 
         /**
          * @brief Initialization strategy for spawned entities.
          */
-        std::unique_ptr<helios::engine::runtime::spawn::behavior::SpawnInitializer> initializer_;
+        std::unique_ptr<helios::engine::runtime::spawn::behavior::SpawnInitializer<THandle>> initializer_;
 
         /**
          * @brief Scheduled rules for this profile.
          */
-        std::vector<std::unique_ptr<SpawnRuleConfig>> rules_;
+        std::vector<std::unique_ptr<SpawnRuleConfig<THandle>>> rules_;
 
     public:
 
@@ -270,8 +276,8 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          * @param poolId Pool from which entities are acquired.
          */
         SpawnProfileConfig(
-            SpawnPoolConfig& parent,
-            helios::engine::runtime::spawn::SpawnManager& spawnManager,
+            SpawnPoolConfig<THandle>& parent,
+            helios::engine::runtime::spawn::SpawnManager<THandle>& spawnManager,
             helios::engine::runtime::spawn::types::SpawnProfileId profileId,
             helios::engine::runtime::pooling::types::GameObjectPoolId poolId
         ) : parent_(parent), spawnManager_(spawnManager),
@@ -297,7 +303,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          */
         SpawnProfileConfig& randomPlacement() {
             placer_ = std::make_unique<
-                helios::engine::runtime::spawn::behavior::placements::RandomSpawnPlacer>();
+                helios::engine::runtime::spawn::behavior::placements::RandomSpawnPlacer<THandle>>();
             return *this;
         }
 
@@ -314,7 +320,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
             const helios::math::vec3f& origin
         ) {
             placer_ = std::make_unique<
-                helios::engine::runtime::spawn::behavior::placements::AxisSpawnPlacer>(axis, origin);
+                helios::engine::runtime::spawn::behavior::placements::AxisSpawnPlacer<THandle>>(axis, origin);
             return *this;
         }
 
@@ -326,7 +332,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          * @return Reference to this config for chaining.
          */
         SpawnProfileConfig& placer(
-            std::unique_ptr<helios::engine::runtime::spawn::behavior::SpawnPlacer> customPlacer
+            std::unique_ptr<helios::engine::runtime::spawn::behavior::SpawnPlacer<THandle>> customPlacer
         ) {
             placer_ = std::move(customPlacer);
             return *this;
@@ -339,7 +345,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          */
         SpawnProfileConfig& randomDirectionInitializer() {
             initializer_ = std::make_unique<
-                helios::engine::runtime::spawn::behavior::initializers::MoveInitializer>(
+                helios::engine::runtime::spawn::behavior::initializers::MoveInitializer<THandle>>(
                     helios::engine::runtime::spawn::behavior::initializers::DirectionType::Random);
             return *this;
         }
@@ -353,7 +359,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          */
         SpawnProfileConfig& moveInitializer(const helios::math::vec3f& direction) {
             initializer_ = std::make_unique<
-                helios::engine::runtime::spawn::behavior::initializers::MoveInitializer>(direction);
+                helios::engine::runtime::spawn::behavior::initializers::MoveInitializer<THandle>>(direction);
             return *this;
         }
 
@@ -365,7 +371,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          * @return Reference to this config for chaining.
          */
         SpawnProfileConfig& initializer(
-            std::unique_ptr<helios::engine::runtime::spawn::behavior::SpawnInitializer> customInitializer
+            std::unique_ptr<helios::engine::runtime::spawn::behavior::SpawnInitializer<THandle>> customInitializer
         ) {
             initializer_ = std::move(customInitializer);
             return *this;
@@ -378,8 +384,8 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          *
          * @return Reference to the new rule config for chaining.
          */
-        SpawnRuleConfig& scheduledBy(helios::engine::runtime::spawn::types::SpawnRuleId ruleId) {
-            rules_.push_back(std::make_unique<SpawnRuleConfig>(*this, ruleId));
+        SpawnRuleConfig<THandle>& scheduledBy(helios::engine::runtime::spawn::types::SpawnRuleId ruleId) {
+            rules_.push_back(std::make_unique<SpawnRuleConfig<THandle>>(*this, ruleId));
             return *rules_.back();
         }
 
@@ -398,11 +404,11 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          * @return Vector of built spawn rules (may be empty).
          */
         std::vector<std::pair<helios::engine::runtime::spawn::types::SpawnProfileId,
-                              std::unique_ptr<helios::engine::runtime::spawn::policy::SpawnRule>>>
+                              std::unique_ptr<helios::engine::runtime::spawn::policy::SpawnRule<THandle>>>>
         commit() {
             spawnManager_.addSpawnProfile(
                 profileId_,
-                std::make_unique<SpawnProfile>(
+                std::make_unique<SpawnProfile<THandle>>(
                     SpawnProfile{
                         .gameObjectPoolId = poolId_,
                         .spawnPlacer = std::move(placer_),
@@ -412,7 +418,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
             );
 
             std::vector<std::pair<helios::engine::runtime::spawn::types::SpawnProfileId,
-                                  std::unique_ptr<helios::engine::runtime::spawn::policy::SpawnRule>>> result;
+                                  std::unique_ptr<helios::engine::runtime::spawn::policy::SpawnRule<THandle>>>> result;
             for (auto& rule : rules_) {
                 result.emplace_back(profileId_, rule->build());
             }
@@ -424,7 +430,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          *
          * @return Reference to the parent SpawnPoolConfig.
          */
-        SpawnPoolConfig& done();
+        SpawnPoolConfig<THandle>& done();
     };
 
     /**
@@ -439,17 +445,18 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
      * @see SpawnRuleConfig
      * @see SpawnSystemFactory
      */
+    template<typename THandle>
     class SpawnPoolConfig {
 
         /**
          * @brief The pool manager to register with.
          */
-        helios::engine::runtime::pooling::GameObjectPoolManager& poolManager_;
+        helios::engine::runtime::pooling::GameObjectPoolManager<THandle>& poolManager_;
 
         /**
          * @brief The spawn manager to register profiles with.
          */
-        helios::engine::runtime::spawn::SpawnManager& spawnManager_;
+        helios::engine::runtime::spawn::SpawnManager<THandle>& spawnManager_;
 
         /**
          * @brief Pool identifier.
@@ -469,7 +476,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
         /**
          * @brief Profile configurations attached to this pool.
          */
-        std::vector<std::unique_ptr<SpawnProfileConfig>> profiles_;
+        std::vector<std::unique_ptr<SpawnProfileConfig<THandle>>> profiles_;
 
 
 
@@ -485,8 +492,8 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          * @param poolSize Number of instances to pre-allocate.
          */
         SpawnPoolConfig(
-            helios::engine::runtime::pooling::GameObjectPoolManager& poolManager,
-            helios::engine::runtime::spawn::SpawnManager& spawnManager,
+            helios::engine::runtime::pooling::GameObjectPoolManager<THandle>& poolManager,
+            helios::engine::runtime::spawn::SpawnManager<THandle>& spawnManager,
             helios::engine::runtime::pooling::types::GameObjectPoolId poolId,
             helios::engine::common::types::PrefabId prefabId,
             size_t poolSize
@@ -501,8 +508,8 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          *
          * @return Reference to the new profile config for chaining.
          */
-        SpawnProfileConfig& profile(helios::engine::runtime::spawn::types::SpawnProfileId profileId) {
-            profiles_.push_back(std::make_unique<SpawnProfileConfig>(
+        SpawnProfileConfig<THandle>& profile(helios::engine::runtime::spawn::types::SpawnProfileId profileId) {
+            profiles_.push_back(std::make_unique<SpawnProfileConfig<THandle>>(
                 *this, spawnManager_, profileId, poolId_
             ));
             return *profiles_.back();
@@ -516,10 +523,10 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          *
          * @return Configurator for chaining the next pool() call.
          */
-        SpawnSystemConfigurator commit() {
+        SpawnSystemConfigurator<THandle> commit() {
             commitPool();
             commitProfiles(false);
-            return SpawnSystemConfigurator{poolManager_, spawnManager_};
+            return SpawnSystemConfigurator<THandle>{poolManager_, spawnManager_};
         }
 
         /**
@@ -549,10 +556,10 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          *
          * @return Configurator for chaining the next pool() call.
          */
-        SpawnSystemConfigurator commitProfilesOnly() {
+        SpawnSystemConfigurator<THandle> commitProfilesOnly() {
             commitPool();
             commitProfiles(true);
-            return SpawnSystemConfigurator{poolManager_, spawnManager_};
+            return SpawnSystemConfigurator<THandle>{poolManager_, spawnManager_};
         }
 
         /**
@@ -567,7 +574,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          * @return Configurator for chaining the next pool() call.
          */
         template<std::size_t N>
-        SpawnSystemConfigurator commitCyclic() {
+        SpawnSystemConfigurator<THandle> commitCyclic() {
             commitPool();
 
             auto scheduler = std::make_unique<
@@ -620,7 +627,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
 
     // Out-of-line definitions for done() and pool() methods.
 
-    inline SpawnProfileConfig& SpawnRuleConfig::done() {
+/*    inline SpawnProfileConfig& SpawnRuleConfig::done() {
         return parent_;
     }
 
@@ -634,7 +641,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
         size_t poolSize
     ) {
         return SpawnPoolConfig{poolManager_, spawnManager_, poolId, prefabId, poolSize};
-    }
+    }*/
 
 
 }

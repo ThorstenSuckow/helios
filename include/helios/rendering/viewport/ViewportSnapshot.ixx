@@ -6,13 +6,14 @@ module;
 
 
 
-export module helios.rendering.ViewportSnapshot;
+export module helios.rendering.viewport.ViewportSnapshot;
 
-import helios.engine.common.types.ViewportId;
+import helios.rendering.viewport.types.ViewportHandle;
 import helios.math.types;
 import helios.core.types;
 
-export namespace helios::rendering {
+using namespace helios::rendering::viewport::types;
+export namespace helios::rendering::viewport {
 
     /**
      * @brief Immutable snapshot of a Viewport's state at a specific point in time.
@@ -25,9 +26,9 @@ export namespace helios::rendering {
     struct ViewportSnapshot {
 
         /**
-         * @brief Unique identifier for the viewport.
+         * @brief The associated viewport's handle.
          */
-        helios::engine::common::types::ViewportId viewportId{helios::core::types::no_init};
+        ViewportHandle viewportHandle{};
 
         /**
          * @brief Normalized bounds [x, y, width, height] in range [0, 1].
@@ -41,4 +42,4 @@ export namespace helios::rendering {
     };
 
 
-} // namespace helios::rendering
+} // namespace helios::rendering::viewport

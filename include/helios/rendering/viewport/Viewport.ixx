@@ -1,7 +1,7 @@
 /**
  * @file Viewport.ixx
  *
- * @brief Defines the Viewport class, which represents a rectangular area for rendering within a RenderTarget.
+ * @brief Defines the Viewport class, which represents a rectangular area for rendering within a Framebuffer.
  */
 module;
 
@@ -10,54 +10,52 @@ module;
 #include <memory>
 
 
-export module helios.rendering.Viewport;
+export module helios.rendering.viewport.Viewport;
 
-import helios.rendering.ViewportSnapshot;
+import helios.rendering.viewport.ViewportSnapshot;
 
 import helios.rendering.ClearFlags;
 import helios.core.types;
-import helios.engine.common.types.ViewportId;
+import helios.rendering.viewport.types.ViewportId;
 import helios.math.types;
 import helios.scene.CameraSceneNode;
-import :RenderTargetFwd;
+import :FramebufferFwd;
 import helios.util.log.LogManager;
 import helios.util.log.Logger;
 
-#define HELIOS_LOG_SCOPE "helios::rendering::Viewport"
-export namespace helios::rendering {
+#define HELIOS_LOG_SCOPE "helios::rendering::viewport::Viewport"
+export namespace helios::rendering::viewport {
 
 
-    
-    
     /**
-     * @brief A passkey used to establish a parent-child relationship between a RenderTarget and a Viewport.
+     * @brief A passkey used to establish a parent-child relationship between a Framebuffer and a Viewport.
      *
-     * This struct uses the passkey idiom to restrict the calling of `Viewport::setRenderTarget` to
-     * friend classes (specifically `helios::rendering::RenderTarget`), ensuring that the ownership
+     * This struct uses the passkey idiom to restrict the calling of `Viewport::setFramebuffer` to
+     * friend classes (specifically `helios::rendering::Framebuffer`), ensuring that the ownership
      * hierarchy is managed correctly.
      *
-     * @see `Viewport::setRenderTarget`
+     * @see `Viewport::setFramebuffer`
      * @see https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2024/p2893r3.html#passkey-idiom
      */
     struct ViewportKey {
     private:
-        friend class helios::rendering::RenderTarget;
+        friend class helios::rendering::framebuffer::Framebuffer;
         ViewportKey() = default;
     };
 
     /**
-     * @brief Represents a rectangular area within a RenderTarget where a scene is rendered.
+     * @brief Represents a rectangular area within a Framebuffer where a scene is rendered.
      *
      * A Viewport defines the 2D rectangle into which a 3D scene is projected. Its dimensions are specified
-     * in normalized coordinates relative to its parent `RenderTarget`. It is associated with a `CameraSceneNode`,
+     * in normalized coordinates relative to its parent `Framebuffer`. It is associated with a `CameraSceneNode`,
      * which provides the view and projection matrices. The viewport automatically updates the CameraSceneNode
-     * associated camera's aspect ratio when its parent `RenderTarget` is resized.
+     * associated camera's aspect ratio when its parent `Framebuffer` is resized.
      *
-     * Since a Viewport only stores normalized values for its location and dimensions relative to the owning RenderTarget,
-     * rendering APIs should query the size of the RenderTarget when a viewport is about to be
+     * Since a Viewport only stores normalized values for its location and dimensions relative to the owning Framebuffer,
+     * rendering APIs should query the size of the Framebuffer when a viewport is about to be
      * rendered, allowing them to compute the final screen coordinates and dimensions correctly.
      *
-     * @see helios::rendering::RenderTarget
+     * @see helios::rendering::Framebuffer
      * @see helios::scene::CameraSceneNode
      * @see https://registry.khronos.org/OpenGL-Refpages/gl4/html/glViewport.xhtml
      */
@@ -66,9 +64,9 @@ export namespace helios::rendering {
 
     private:
         /**
-         * @brief Pointer to the parent RenderTarget.
+         * @brief Pointer to the parent Framebuffer.
          */
-        const helios::rendering::RenderTarget* renderTarget_ = nullptr;
+        const helios::rendering::framebuffer::Framebuffer* framebuffer_ = nullptr;
 
         /**
          * @brief Bitmask of buffers to clear.
@@ -101,9 +99,9 @@ export namespace helios::rendering {
         float height_ = 1.0f;
 
         /**
-         * @brief Size of the parent RenderTarget in pixels.
+         * @brief Size of the parent Framebuffer in pixels.
          */
-        helios::math::vec2ui renderTargetSize_{};
+        helios::math::vec2ui framebufferSize_{};
 
         /**
          * @brief The cameraSceneNode associated as the main camera with this viewport.
@@ -129,10 +127,6 @@ export namespace helios::rendering {
          */
         int zIndex_ = 0;
 
-        /**
-         * @brief Unique identifier for this viewport.
-         */
-        const helios::engine::common::types::ViewportId viewportId_{helios::core::types::no_init};
 
         /**
          * @brief Cached absolute bounds [x, y, width, height] in pixels.
@@ -154,33 +148,27 @@ export namespace helios::rendering {
             bounds_[3] = height_;
 
             absoluteBounds_ = {
-            bounds_[0] * renderTargetSize_[0],
-            bounds_[1] * renderTargetSize_[1],
-            bounds_[2] * renderTargetSize_[0],
-            bounds_[3] * renderTargetSize_[1]
+            bounds_[0] * framebufferSize_[0],
+            bounds_[1] * framebufferSize_[1],
+            bounds_[2] * framebufferSize_[0],
+            bounds_[3] * framebufferSize_[1]
             };
-
-            snapshot_ = {viewportId_, bounds_, absoluteBounds_};
 
             needsUpdate_ = false;
         }
 
-        /**
-         * @brief Cached viewport snapshot for efficient access.
-         */
-        mutable ViewportSnapshot snapshot_{};
 
         /**
-         * @brief Updates this Viewport's CameraSceneNode and its associated Camera based on the dimension of the RenderTarget.
+         * @brief Updates this Viewport's CameraSceneNode and its associated Camera based on the dimension of the Framebuffer.
          *
-         * @param width The new width of the RenderTarget in pixels.
-         * @param height The new height of the RenderTarget in pixels.
+         * @param width The new width of the Framebuffer in pixels.
+         * @param height The new height of the Framebuffer in pixels.
          *
          * This method should be called internally whenever the dimensions of the owning
-         * RenderTarget change.
+         * Framebuffer change.
          */
-        void updateCamera(unsigned int renderTargetWidth, unsigned int renderTargetHeight) noexcept {
-            assert(renderTarget_ && "No RenderTarget available for updateCamera()");
+        void updateCamera(unsigned int framebufferWidth, unsigned int framebufferHeight) noexcept {
+            assert(framebuffer_ && "No Framebuffer available for updateCamera()");
 
             if (!cameraSceneNode_) {
                 logger_.warn("updateCamera: Viewport was not configured with a CameraSceneNode, nothing to do here.");
@@ -188,18 +176,26 @@ export namespace helios::rendering {
             }
 
             cameraSceneNode_->camera().onResize(
-                static_cast<float>(renderTargetWidth) * width_,
-                static_cast<float>(renderTargetHeight) * height_
+                static_cast<float>(framebufferWidth) * width_,
+                static_cast<float>(framebufferHeight) * height_
             );
         }
 
     public:
+
+        Viewport(const Viewport& other) = delete;
+        Viewport operator=(const Viewport& other) = delete;
+
+        Viewport(Viewport&& other) noexcept = default;
+        Viewport& operator=(Viewport&& other) noexcept  = default;
+
         /**
          * @brief Constructs a Viewport with normalized bounds set to (0.0f, 0.0f, 1.0f, 1.0f) and z-index 0.
          */
-        Viewport() noexcept : x_(0.0f), y_(0.0f), width_(1.0f), height_(1.0f), zIndex_(0) {
+        Viewport() noexcept :  x_(0.0f), y_(0.0f), width_(1.0f), height_(1.0f), zIndex_(0) {
             needsUpdate_ = true;
         }
+
 
         /**
          * @brief Constructs a Viewport with specified normalized dimensions.
@@ -211,42 +207,31 @@ export namespace helios::rendering {
          * @param zIndex The z-index that determines the rendering order.
          */
         explicit Viewport(
-            float x, float y, float width, float height,
-            const helios::engine::common::types::ViewportId viewportId = helios::engine::common::types::ViewportId{helios::core::types::no_init},
-            const int zIndex = 0
+            float x, float y, float width, float height, const int zIndex = 0
         ) noexcept
             :
-            viewportId_(viewportId),
             zIndex_(zIndex) {
             setBounds(x, y, width, height);
         }
 
         /**
-         * @brief Gets the parent RenderTarget.
+         * @brief Gets the parent Framebuffer.
          *
-         * If the returned value is a nullptr, this Viewport is not owned by any RenderTarget.
+         * If the returned value is a nullptr, this Viewport is not owned by any Framebuffer.
          *
-         * @return A const pointer to the parent RenderTarget, or `nullptr` if not set.
+         * @return A const pointer to the parent Framebuffer, or `nullptr` if not set.
          */
-        [[nodiscard]] const helios::rendering::RenderTarget* renderTarget() const noexcept {
-            return renderTarget_;
+        [[nodiscard]] const helios::rendering::framebuffer::Framebuffer* framebuffer() const noexcept {
+            return framebuffer_;
         }
 
-        /**
-         * @brief Returns the unique identifier for this viewport.
-         *
-         * @return The ViewportId assigned to this viewport.
-         */
-        [[nodiscard]] helios::engine::common::types::ViewportId viewportId() const noexcept {
-            return viewportId_;
-        }
 
         /**
          * @brief Assigns a camera scene node to this viewport.
          *
          * The viewport uses the associated camera's projection matrix and the node's
          * computed view matrix for rendering. The camera's aspect ratio is automatically
-         * updated when the parent RenderTarget is resized.
+         * updated when the parent Framebuffer is resized.
          *
          * @param cameraSceneNode A non-owning raw pointer to the `CameraSceneNode`.
          *        Must remain valid for the lifetime of this viewport.
@@ -268,22 +253,22 @@ export namespace helios::rendering {
         }
 
         /**
-         * @brief Sets the parent RenderTarget for this viewport.
+         * @brief Sets the parent Framebuffer for this viewport.
          *
          * This function can only be called by classes that can construct a `ViewportKey`,
-         * effectively restricting its use to the `RenderTarget` class.
+         * effectively restricting its use to the `Framebuffer` class.
          *
-         * @param renderTarget A pointer to the parent RenderTarget.
+         * @param framebuffer A pointer to the parent Framebuffer.
          * @param key A `ViewportKey` instance, required for authorization.
          *
          * @return A reference to this viewport to allow fluent chaining.
          *
          * @see updateCamera()
          *
-         * @todo The Viewport should observe the RenderTarget for state changes (e.g., resize).
+         * @todo The Viewport should observe the Framebuffer for state changes (e.g., resize).
          */
-        Viewport& setRenderTarget(const helios::rendering::RenderTarget* renderTarget, ViewportKey key) noexcept {
-            renderTarget_ = renderTarget;
+        Viewport& setFramebuffer(const helios::rendering::framebuffer::Framebuffer* framebuffer, ViewportKey key) noexcept {
+            framebuffer_ = framebuffer;
             return *this;
         }
 
@@ -305,20 +290,6 @@ export namespace helios::rendering {
         [[nodiscard]] const helios::math::vec4f& absoluteBounds() const noexcept {
             updateCache();
             return absoluteBounds_;
-        }
-
-        /**
-         * @brief Returns an immutable snapshot of this viewport's current state.
-         *
-         * The snapshot contains the viewport ID and both normalized and absolute bounds.
-         * Useful for passing viewport state to rendering systems without exposing the
-         * mutable Viewport object.
-         *
-         * @return A ViewportSnapshot containing the current viewport state.
-         */
-        [[nodiscard]] ViewportSnapshot snapshot() const noexcept {
-            updateCache();
-            return snapshot_;
         }
 
 
@@ -404,20 +375,20 @@ export namespace helios::rendering {
 
 
         /**
-         * @brief Notifies the viewport of a change in the parent RenderTarget's dimensions.
+         * @brief Notifies the viewport of a change in the parent Framebuffer's dimensions.
          *
-         * This method is called by the parent `RenderTarget` when it is resized. The viewport
+         * This method is called by the parent `Framebuffer` when it is resized. The viewport
          * uses the new dimensions to calculate the correct aspect ratio for its associated camera.
          *
-         * @param width The new width of the RenderTarget in pixels.
-         * @param height The new height of the RenderTarget in pixels.
+         * @param width The new width of the Framebuffer in pixels.
+         * @param height The new height of the Framebuffer in pixels.
          *
          * @see updateCamera()
          */
-         void onRenderTargetResize(const unsigned int width, const unsigned int height) noexcept {
-            renderTargetSize_ = {width, height};
+         void onFramebufferResize(const unsigned int width, const unsigned int height) noexcept {
+            framebufferSize_ = {width, height};
             needsUpdate_ = true;
             updateCamera(width, height);
          }
     };
-} // namespace helios::rendering
+} // namespace helios::rendering::viewport

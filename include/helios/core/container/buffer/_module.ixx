@@ -5,6 +5,8 @@
 
 export module helios.core.container.buffer;
 
+export import helios.core.container.buffer.concepts;
+
 export import helios.core.container.buffer.Buffer;
 export import helios.core.container.buffer.DoubleBuffer;
 export import helios.core.container.buffer.ReadBuffer;

@@ -32,9 +32,9 @@ import helios.engine.common.tags.ManagerRole;
 import helios.engine.runtime.world;
 import helios.engine.runtime.messaging.command.EngineCommandBuffer;
 
-import helios.platform.runtime.commands;
-import helios.platform.runtime.components;
-import helios.platform.runtime.types;
+import helios.platform.environment.commands;
+import helios.platform.environment.components;
+import helios.platform.environment.types;
 
 import helios.platform.window.commands;
 import helios.platform.window.components;
@@ -48,9 +48,9 @@ import helios.engine.common.concepts;
 import helios.engine.runtime.messaging.command;
 
 using namespace helios::engine::common::tags;
-using namespace helios::platform::runtime::commands;
-using namespace helios::platform::runtime::types;
-using namespace helios::platform::runtime::components;
+using namespace helios::platform::environment::commands;
+using namespace helios::platform::environment::types;
+using namespace helios::platform::environment::components;
 using namespace helios::platform::window::commands;
 using namespace helios::platform::window::types;
 using namespace helios::platform::window::components;

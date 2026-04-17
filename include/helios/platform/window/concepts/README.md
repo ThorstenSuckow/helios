@@ -10,7 +10,7 @@ Window-handle compile-time constraints.
 
 ## Related
 
-- `helios.platform.runtime.concepts.IsPlatformHandle`
+- `helios.platform.environment.concepts.IsPlatformHandle`
 - `helios.platform.concepts.IsAnyPlatformHandle`
 
 ---

@@ -10,7 +10,7 @@ Shared compile-time constraints for platform handles.
 
 ## Related Modules
 
-- `helios.platform.runtime.concepts`
+- `helios.platform.environment.concepts`
 - `helios.platform.window.concepts`
 
 ---

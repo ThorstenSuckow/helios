@@ -8,10 +8,10 @@ module;
 
 export module helios.platform.concepts.IsAnyPlatformHandle;
 
-import helios.platform.runtime.concepts;
+import helios.platform.environment.concepts;
 import helios.platform.window.concepts;
 
-using namespace helios::platform::runtime::concepts;
+using namespace helios::platform::environment::concepts;
 using namespace helios::platform::window::concepts;
 export namespace helios::platform::concepts {
 

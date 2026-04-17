@@ -11,9 +11,8 @@ export module helios.engine.common.concepts.IsSystemLike;
 import helios.engine.common.concepts.HasTag;
 import helios.engine.common.tags.SystemRole;
 
-export namespace helios::engine::runtime::world {
-    class UpdateContext;
-}
+import helios.engine.runtime.world.UpdateContextFwd;
+
 
 export namespace helios::engine::common::concepts {
 

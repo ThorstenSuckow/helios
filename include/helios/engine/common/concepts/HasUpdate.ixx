@@ -8,9 +8,7 @@ module;
 
 export module helios.engine.common.concepts.HasUpdate;
 
-export namespace helios::engine::runtime::world {
-    class UpdateContext;
-}
+import helios.engine.runtime.world.UpdateContextFwd;
 
 export namespace helios::engine::common::concepts {
 

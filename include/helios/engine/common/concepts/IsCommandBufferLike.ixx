@@ -11,15 +11,14 @@ export module helios.engine.common.concepts.IsCommandBufferLike;
 import helios.engine.common.concepts.HasTag;
 import helios.engine.common.concepts.HasClear;
 
+
+import helios.engine.runtime.world.GameWorldFwd;
+import helios.engine.runtime.world.UpdateContextFwd;
+
 import helios.engine.common.tags.CommandBufferRole;
 
-export namespace helios::engine::runtime::world {
-    class UpdateContext;
-    class GameWorld;
-}
 
 using namespace helios::engine::runtime::world;
-
 export namespace helios::engine::common::concepts {
 
     /**

@@ -8,9 +8,7 @@ module;
 
 export module helios.engine.common.concepts.HasInit;
 
-export namespace helios::engine::runtime::world {
-    class GameWorld;
-}
+import helios.engine.runtime.world.GameWorldFwd;
 
 export namespace helios::engine::common::concepts {
 

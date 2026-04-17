@@ -1,11 +1,28 @@
-# helios::rendering::model
+# helios::rendering::material
 
-This namespace provides mesh and material definitions for 3D models, including data structures for geometry and material properties used in rendering. Contains (abstract) classes in regard to rendering [shapes](../asset/shape/README.md) consisting of geometric primitives.
+Material abstractions and shader property models.
+
+This module provides immutable material definitions (`Material`,
+`MaterialShaderProperties`) and optional instance-level override payloads.
+
+| Item | Description |
+|------|-------------|
+| `Material` | Material object binding a shader with default material properties |
+| `MaterialShaderProperties` | Immutable default material uniform values |
+| `MaterialShaderPropertiesOverride` | Optional per-instance material override payload |
+| `MaterialEntityManager` | ECS manager alias for material resources |
+| `MaterialProperties` | Simple material property payload |
+
+## Subdirectories
+
+| Directory | Purpose |
+|-----------|---------|
+| `types/` | Strong ids and handle aliases |
 
 ---
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::rendering::model
-@brief 3D model and mesh management.
-@details This namespace provides mesh and material definitions for 3D models, including data structures for geometry and material properties used in rendering. Contains (abstract) classes in regard to rendering shapes consisting of geometric primitives.
-</p></details> 
+@namespace helios::rendering::material
+@brief Material abstractions and shader property models.
+@details Contains immutable material property models, override payloads, and ECS resource aliases for material resources.
+</p></details>

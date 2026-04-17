@@ -9,7 +9,8 @@ export module helios.platform.window.systems.WindowCreateSystem;
 
 
 import helios.engine.runtime.world.UpdateContext;
-import helios.engine.runtime.messaging.command.EngineCommandBuffer;
+import helios.engine.runtime.messaging.command.NullCommandBuffer;
+import helios.engine.common.concepts.IsCommandBufferLike;
 
 import helios.engine.common.tags.SystemRole;
 
@@ -17,10 +18,13 @@ import helios.platform.window.components.WindowCreateRequestComponent;
 import helios.platform.window.commands.WindowCreateCommand;
 
 import helios.ecs.components.Active;
+import helios.platform.window.concepts.IsWindowHandle;
 
+using namespace helios::platform::window::concepts;
 using namespace helios::engine::common::tags;
 using namespace helios::engine::runtime::world;
 using namespace helios::engine::runtime::messaging::command;
+using namespace helios::engine::common::concepts;
 using namespace helios::platform::window::components;
 using namespace helios::platform::window::commands;
 using namespace helios::ecs::components;
@@ -32,7 +36,8 @@ export namespace helios::platform::window::systems {
      *
      * @tparam THandle Window-domain entity handle type.
      */
-    template<typename THandle>
+    template<typename THandle, typename TCommandBuffer = NullCommandBuffer>
+    requires IsWindowHandle<THandle> && IsCommandBufferLike<TCommandBuffer>
     class WindowCreateSystem {
 
         public:
@@ -54,7 +59,7 @@ export namespace helios::platform::window::systems {
                 WindowCreateRequestComponent<THandle>, Active<THandle>
                 >().whereEnabled()) {
 
-                updateContext.queueCommand<EngineCommandBuffer, WindowCreateCommand<THandle>>(
+                updateContext.queueCommand<TCommandBuffer, WindowCreateCommand<THandle>>(
                     entity.handle(),
                     win->windowConfig
                 );

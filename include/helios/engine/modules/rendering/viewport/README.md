@@ -66,7 +66,7 @@ systemRegistry.add<StateToViewportPolicyUpdateSystem>(
 
 | Module | Purpose |
 |--------|---------|
-| `helios.rendering.Viewport` | Low-level viewport definition |
+| `helios.rendering.viewport.Viewport` | Low-level viewport definition |
 | `helios.engine.mechanics.gamestate` | Game state management |
 | `helios.engine.mechanics.match` | Match state management |
 | `helios.engine.runtime.world.Session` | Session state storage |

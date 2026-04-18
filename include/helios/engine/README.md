@@ -13,7 +13,7 @@ This module provides access to the complete helios engine functionality, includi
 | `helios.engine.bootstrap` | Component registration and GameWorld/GameLoop factory |
 | `helios.engine.core` | Data structures, messaging re-exports, units |
 | `helios.ecs` | ECS base classes (GameObject, Component, System) and query system |
-| `helios.engine.runtime` | Runtime infrastructure (world, gameloop, pooling, messaging, factory) |
+| `helios.runtime` | Runtime infrastructure (world, gameloop, pooling, messaging, factory) |
 | `helios.engine.modules` | Domain-specific components and systems (physics, spatial, scene) |
 | `helios.engine.mechanics` | Gameplay mechanics (bounds, combat, spawn, input) |
 | `helios.engine.state` | State bindings and transition types |

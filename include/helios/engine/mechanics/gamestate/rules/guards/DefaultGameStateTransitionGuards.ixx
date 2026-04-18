@@ -8,9 +8,9 @@ module;
 
 export module helios.engine.mechanics.gamestate.rules.guards.DefaultGameStateTransitionGuards;
 
-import helios.engine.runtime.world.UpdateContext;
-import helios.engine.runtime.world.Session;
-import helios.engine.runtime.world.GameWorld;
+import helios.runtime.world.UpdateContext;
+import helios.runtime.world.Session;
+import helios.runtime.world.GameWorld;
 
 import helios.engine.state.Bindings;
 
@@ -38,7 +38,7 @@ export namespace helios::engine::mechanics::gamestate::rules::guards {
          * @return True if an entity with a CurrentContext exists.
          */
         static bool isPlatformInitialized(
-            helios::engine::runtime::world::UpdateContext& updateContext,
+            helios::runtime::world::UpdateContext& updateContext,
             const StateTransitionRequest<GameState> transitionRequest
         ) {
             return updateContext.runtimeEnvironment().isInitialized();
@@ -53,7 +53,7 @@ export namespace helios::engine::mechanics::gamestate::rules::guards {
          * @return True if the infrastructure can be considered in a ready-state.
          */
         static bool isRuntimeInfrastructureReady(
-            helios::engine::runtime::world::UpdateContext& updateContext,
+            helios::runtime::world::UpdateContext& updateContext,
             const StateTransitionRequest<GameState> transitionRequest
         ) {
             return updateContext.runtimeEnvironment().isRuntimeInfrastructureReady();

@@ -11,11 +11,11 @@ module;
 export module helios.engine.mechanics.damage.systems.DamageOnCollisionSystem;
 
 
-import helios.engine.runtime.world.GameObject;
+import helios.runtime.world.GameObject;
 
-import helios.engine.runtime.world.UpdateContext;
-import helios.engine.runtime.world.GameWorld;
-import helios.engine.runtime.messaging.command.NullCommandBuffer;
+import helios.runtime.world.UpdateContext;
+import helios.runtime.world.GameWorld;
+import helios.runtime.messaging.command.NullCommandBuffer;
 import helios.engine.common.concepts.IsCommandBufferLike;
 
 import helios.engine.state.Bindings;
@@ -48,7 +48,7 @@ using namespace helios::engine::mechanics::damage::commands;
 using namespace helios::engine::mechanics::spawn::components;
 
 using namespace helios::engine::common::types;
-using namespace helios::engine::runtime::messaging::command;
+using namespace helios::runtime::messaging::command;
 using namespace helios::engine::common::concepts;
 
 #define HELIOS_LOG_SCOPE "helios::engine::mechanics::damage::systems::DamageOnCollisionSystem"
@@ -81,7 +81,7 @@ export namespace helios::engine::mechanics::damage::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
             auto eventPass = updateContext.readPass<
                 helios::engine::modules::physics::collision::events::SolidCollisionEvent<THandle>>();

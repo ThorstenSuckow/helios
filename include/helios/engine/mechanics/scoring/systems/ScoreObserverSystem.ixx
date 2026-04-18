@@ -15,8 +15,8 @@ import helios.engine.mechanics.scoring.commands;
 import helios.engine.mechanics.scoring.components;
 import helios.engine.mechanics.scoring.types;
 
-import helios.engine.runtime.world.GameWorld;
-import helios.engine.runtime.world.UpdateContext;
+import helios.runtime.world.GameWorld;
+import helios.runtime.world.UpdateContext;
 
 
 import helios.engine.modules.physics.collision.events;
@@ -72,7 +72,7 @@ export namespace helios::engine::mechanics::scoring::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto [entity, soc, active] : updateContext.view<
                 THandle,

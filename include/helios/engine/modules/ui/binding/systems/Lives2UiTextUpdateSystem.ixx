@@ -14,8 +14,8 @@ export module helios.engine.modules.ui.binding.systems.Lives2UiTextUpdateSystem;
 import helios.engine.mechanics.match.components;
 import helios.engine.mechanics.match.types;
 
-import helios.engine.runtime.world.GameWorld;
-import helios.engine.runtime.world.UpdateContext;
+import helios.runtime.world.GameWorld;
+import helios.runtime.world.UpdateContext;
 
 
 import helios.engine.modules.ui.widgets;
@@ -49,7 +49,7 @@ export namespace helios::engine::modules::ui::binding::systems {
          *
          * @param updateContext Current frame context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto [entity, lbc, dfc, txt, active] : updateContext.view<
                 THandle,

@@ -13,11 +13,11 @@ import helios.math;
 
 import helios.core.units.Unit;
 
-import helios.engine.runtime.messaging.command.NullCommandBuffer;
+import helios.runtime.messaging.command.NullCommandBuffer;
 
-import helios.engine.runtime.world.GameObject;
-import helios.engine.runtime.world.GameWorld;
-import helios.engine.runtime.world.UpdateContext;
+import helios.runtime.world.GameObject;
+import helios.runtime.world.GameWorld;
+import helios.runtime.world.UpdateContext;
 
 import helios.engine.modules.spatial.transform.components.ScaleStateComponent;
 import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
@@ -30,7 +30,7 @@ import helios.engine.common.concepts.IsCommandBufferLike;
 import helios.ecs.concepts.IsEntityHandle;
 import helios.engine.common.tags.SystemRole;
 
-using namespace helios::engine::runtime::messaging::command;
+using namespace helios::runtime::messaging::command;
 using namespace helios::engine::common::concepts;
 using namespace helios::ecs::concepts;
 export namespace helios::engine::modules::spatial::transform::systems {
@@ -65,7 +65,7 @@ export namespace helios::engine::modules::spatial::transform::systems {
          *
          * @param updateContext Context containing deltaTime and other frame data.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto [entity, mab, sc, tc, active] : updateContext.view<
                 THandle,

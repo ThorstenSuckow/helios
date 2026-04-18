@@ -10,7 +10,7 @@ export module helios.engine.modules.ui.widgets.components.UiFocusComponent;
 
 import helios.engine.modules.ui.widgets.types.MenuId;
 
-import helios.engine.runtime.world.GameObject;
+import helios.runtime.world.GameObject;
 
 export namespace helios::engine::modules::ui::widgets::components {
 

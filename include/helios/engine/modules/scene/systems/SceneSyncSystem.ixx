@@ -14,9 +14,9 @@ import helios.scene.Scene;
 
 import helios.scene.SceneToViewportMap;
 
-import helios.engine.runtime.world.GameWorld;
+import helios.runtime.world.GameWorld;
 
-import helios.engine.runtime.world.UpdateContext;
+import helios.runtime.world.UpdateContext;
 
 import helios.ecs.components.Active;
 
@@ -74,7 +74,7 @@ export namespace helios::engine::modules::scene::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto [entity, tc, nc, active] : updateContext.view<
                 THandle,

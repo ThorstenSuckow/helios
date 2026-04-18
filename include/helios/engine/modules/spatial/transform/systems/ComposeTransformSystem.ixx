@@ -15,9 +15,9 @@ import helios.engine.modules.spatial.transform.components.RotationStateComponent
 import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
 import helios.engine.modules.effects.gfx.components.SpinComponent;
 
-import helios.engine.runtime.world.GameWorld;
+import helios.runtime.world.GameWorld;
 
-import helios.engine.runtime.world.UpdateContext;
+import helios.runtime.world.UpdateContext;
 
 import helios.ecs.components.Active;
 
@@ -48,7 +48,7 @@ export namespace helios::engine::modules::spatial::transform::systems {
          *
          * @param updateContext Context containing frame timing and game state.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
             const float deltaTime = updateContext.deltaTime();
 

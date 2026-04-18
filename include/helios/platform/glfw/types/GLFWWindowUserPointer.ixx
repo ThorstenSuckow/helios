@@ -7,11 +7,11 @@ module;
 export module helios.platform.glfw.types.GLFWWindowUserPointer;
 
 import helios.ecs.types.EntityHandle;
-import helios.engine.runtime.world.GameWorld;
+import helios.runtime.world.GameWorld;
 import helios.platform.window.concepts.IsWindowHandle;
 
 using namespace helios::ecs::types;
-using namespace helios::engine::runtime::world;
+using namespace helios::runtime::world;
 using namespace helios::platform::window::concepts;
 export namespace helios::platform::glfw::types {
 

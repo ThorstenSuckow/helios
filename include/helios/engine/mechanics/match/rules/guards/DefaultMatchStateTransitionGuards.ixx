@@ -8,9 +8,9 @@ module;
 
 export module helios.engine.mechanics.match.rules.guards.DefaultMatchStateTransitionGuards;
 
-import helios.engine.runtime.world.UpdateContext;
-import helios.engine.runtime.world.Session;
-import helios.engine.runtime.world.GameWorld;
+import helios.runtime.world.UpdateContext;
+import helios.runtime.world.Session;
+import helios.runtime.world.GameWorld;
 
 import helios.engine.state.Bindings;
 
@@ -51,7 +51,7 @@ export namespace helios::engine::mechanics::match::rules::guards {
          * @return True if the player entity exists and is active.
          */
         static bool isPlayerActive(
-            helios::engine::runtime::world::UpdateContext& updateContext,
+            helios::runtime::world::UpdateContext& updateContext,
             const StateTransitionRequest<MatchState> transitionRequest
         ) {
             auto playerOpt = updateContext.find(updateContext.session().playerEntityHandle());
@@ -68,7 +68,7 @@ export namespace helios::engine::mechanics::match::rules::guards {
          * @return True if the player entity exists and is inactive.
          */
         static bool isPlayerInactive(
-            helios::engine::runtime::world::UpdateContext& updateContext,
+            helios::runtime::world::UpdateContext& updateContext,
             const StateTransitionRequest<MatchState> transitionRequest
         ) {
             auto playerOpt = updateContext.find(updateContext.session().playerEntityHandle());
@@ -85,7 +85,7 @@ export namespace helios::engine::mechanics::match::rules::guards {
          * @return True if the player entity has lives left.
          */
         static bool hasLifeLeft(
-            helios::engine::runtime::world::UpdateContext& updateContext,
+            helios::runtime::world::UpdateContext& updateContext,
             const StateTransitionRequest<MatchState> transitionRequest
         ) {
             auto playerOpt = updateContext.find(updateContext.session().playerEntityHandle());
@@ -109,7 +109,7 @@ export namespace helios::engine::mechanics::match::rules::guards {
          * @see hasLifeLeft
          */
         static bool hasNoLifeLeft(
-            helios::engine::runtime::world::UpdateContext& updateContext,
+            helios::runtime::world::UpdateContext& updateContext,
             const StateTransitionRequest<MatchState> transitionRequest
         ) {
            return !hasLifeLeft(updateContext, transitionRequest);

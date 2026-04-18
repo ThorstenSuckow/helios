@@ -8,7 +8,7 @@ module;
 
 export module helios.engine.common.concepts.HasInit;
 
-import helios.engine.runtime.world.GameWorldFwd;
+import helios.runtime.world.GameWorldFwd;
 
 export namespace helios::engine::common::concepts {
 
@@ -24,7 +24,7 @@ export namespace helios::engine::common::concepts {
      * @see System
      */
     template<typename T>
-    concept HasInit = requires(T& t, helios::engine::runtime::world::GameWorld& gameWorld) {
+    concept HasInit = requires(T& t, helios::runtime::world::GameWorld& gameWorld) {
         {t.init(gameWorld) } -> std::same_as<void>;
     };
 

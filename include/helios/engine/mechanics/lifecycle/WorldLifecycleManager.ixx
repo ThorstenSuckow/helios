@@ -8,14 +8,14 @@ module;
 
 export module helios.engine.mechanics.lifecycle.WorldLifecycleManager;
 
-import helios.engine.runtime.world.GameWorld;
-import helios.engine.runtime.world.UpdateContext;
+import helios.runtime.world.GameWorld;
+import helios.runtime.world.UpdateContext;
 
 import helios.engine.mechanics.lifecycle.types;
 import helios.engine.mechanics.lifecycle.commands.WorldLifecycleCommand;
 import helios.engine.common;
 
-using namespace helios::engine::runtime::world;
+using namespace helios::runtime::world;
 using namespace helios::engine::mechanics::lifecycle::commands;
 using namespace helios::engine::mechanics::lifecycle::types;
 

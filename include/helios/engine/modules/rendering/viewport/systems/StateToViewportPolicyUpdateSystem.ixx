@@ -10,12 +10,12 @@ module;
 
 export module helios.engine.modules.rendering.viewport.systems.StateToViewportPolicyUpdateSystem;
 
-import helios.engine.runtime.world.GameWorld;
-import helios.engine.runtime.world.Session;
+import helios.runtime.world.GameWorld;
+import helios.runtime.world.Session;
 
 import helios.engine.state.StateToIdMapPair;
 
-import helios.engine.runtime.world.UpdateContext;
+import helios.runtime.world.UpdateContext;
 import helios.rendering.viewport.types.ViewportHandle;
 import helios.engine.common.tags.SystemRole;
 
@@ -80,7 +80,7 @@ export namespace helios::engine::modules::rendering::viewport::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
             auto& session = updateContext.session();
 

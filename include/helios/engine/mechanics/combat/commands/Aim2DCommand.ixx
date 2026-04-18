@@ -12,11 +12,11 @@ import helios.ecs;
 import helios.math.types;
 import helios.engine.mechanics.combat.components.Aim2DComponent;
 
-import helios.engine.runtime.world.UpdateContext;
-import helios.engine.runtime.world.GameWorld;
-import helios.engine.runtime.world.types;
+import helios.runtime.world.UpdateContext;
+import helios.runtime.world.GameWorld;
+import helios.runtime.world.types;
 
-using namespace helios::engine::runtime::world::types;
+using namespace helios::runtime::world::types;
 export namespace helios::engine::mechanics::combat::commands {
 
     /**
@@ -30,7 +30,7 @@ export namespace helios::engine::mechanics::combat::commands {
      * @note The target GameObject must have an Aim2DComponent attached for this
      *       command to have any effect.
      *
-     * @see helios::engine::runtime::messaging::command::Command
+     * @see helios::runtime::messaging::command::Command
      * @see helios::engine::mechanics::components::Aim2DComponent
      */
     template<typename THandle>
@@ -71,7 +71,7 @@ export namespace helios::engine::mechanics::combat::commands {
          *
          * @param entity The target entity with an Aim2DComponent.
          */
-        void execute(helios::engine::runtime::world::UpdateContext& updateContext) const noexcept {
+        void execute(helios::runtime::world::UpdateContext& updateContext) const noexcept {
 
             auto entity = updateContext.find<THandle>(entityHandle_);
 

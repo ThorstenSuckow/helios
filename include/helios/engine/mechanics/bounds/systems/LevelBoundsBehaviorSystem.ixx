@@ -18,8 +18,8 @@ import helios.engine.state.Bindings;
 import helios.engine.modules.physics.collision.types.CollisionBehavior;
 import helios.engine.modules.physics.collision.types.CollisionResponse;
 
-import helios.engine.runtime.world.GameObject;
-import helios.engine.runtime.world.GameWorld;
+import helios.runtime.world.GameObject;
+import helios.runtime.world.GameWorld;
 import helios.engine.modules.physics.motion.components.Move2DComponent;
 import helios.engine.modules.physics.motion.components.SteeringComponent;
 import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
@@ -34,11 +34,11 @@ import helios.engine.modules.scene.components.SceneNodeComponent;
 
 import helios.ecs.View;
 
-import helios.engine.runtime.world.UpdateContext;
-import helios.engine.runtime.messaging.command.NullCommandBuffer;
+import helios.runtime.world.UpdateContext;
+import helios.runtime.messaging.command.NullCommandBuffer;
 import helios.engine.common.concepts.IsCommandBufferLike;
 
-import helios.engine.runtime.spawn.commands.DespawnCommand;
+import helios.runtime.spawn.commands.DespawnCommand;
 
 import helios.engine.mechanics.spawn.components.SpawnedByProfileComponent;
 
@@ -47,7 +47,7 @@ import helios.ecs.components.Active;
 
 import helios.engine.common.tags.SystemRole;
 
-using namespace helios::engine::runtime::messaging::command;
+using namespace helios::runtime::messaging::command;
 using namespace helios::engine::common::concepts;
 export namespace helios::engine::mechanics::bounds::systems {
 
@@ -93,7 +93,7 @@ export namespace helios::engine::mechanics::bounds::systems {
          *
          * @param updateContext Context containing deltaTime and other frame data.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
             using namespace helios::engine::modules::physics::collision::types;
 
@@ -141,7 +141,7 @@ export namespace helios::engine::mechanics::bounds::systems {
                         auto* sbp = entity.get<helios::engine::mechanics::spawn::components::SpawnedByProfileComponent<THandle>>();
                         assert(sbp && "Unexpected missing SpawnProfile");
 
-                        updateContext.queueCommand<TCommandBuffer, helios::engine::runtime::spawn::commands::DespawnCommand<THandle>>(
+                        updateContext.queueCommand<TCommandBuffer, helios::runtime::spawn::commands::DespawnCommand<THandle>>(
                             entity.handle(), sbp->spawnProfileId()
                         );
 
@@ -179,7 +179,7 @@ export namespace helios::engine::mechanics::bounds::systems {
          * @param collisionResponse The type of response to apply.
          */
         void updateCollisionResponse(
-            helios::engine::runtime::world::GameObject go,
+            helios::runtime::world::GameObject go,
             BounceResult bounceResult,
             helios::engine::modules::physics::collision::types::CollisionResponse collisionResponse) {
 

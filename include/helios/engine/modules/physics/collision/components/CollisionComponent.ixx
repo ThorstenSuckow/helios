@@ -10,7 +10,7 @@ module;
 export module helios.engine.modules.physics.collision.components.CollisionComponent;
 
 
-import helios.engine.runtime.world.GameObject;
+import helios.runtime.world.GameObject;
 
 import helios.engine.modules.physics.collision.types.CollisionBehavior;
 import helios.engine.modules.physics.collision.types.HitPolicy;

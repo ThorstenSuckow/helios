@@ -12,11 +12,11 @@ module;
 
 export module helios.engine.bootstrap;
 
-import helios.engine.runtime.gameloop;
-import helios.engine.runtime.world;
+import helios.runtime.gameloop;
+import helios.runtime.world;
 
 import helios.engine.state.Bindings;
-import helios.engine.runtime.messaging.command;
+import helios.runtime.messaging.command;
 
 import helios.platform;
 
@@ -34,9 +34,9 @@ using namespace helios::engine::state::types;
 using namespace helios::engine::mechanics::gamestate::types;
 using namespace helios::platform::environment;
 using namespace helios::platform::window;
-using namespace helios::engine::runtime::world;
-using namespace helios::engine::runtime::gameloop;
-using namespace helios::engine::runtime::messaging::command;
+using namespace helios::runtime::world;
+using namespace helios::runtime::gameloop;
+using namespace helios::runtime::messaging::command;
 export namespace helios::engine::bootstrap {
 
     template<typename... Tuple>
@@ -139,9 +139,9 @@ export namespace helios::engine::bootstrap {
     inline std::pair<std::unique_ptr<GameWorld>, std::unique_ptr<GameLoop>> bootstrapGameWorld(
         const size_t capacity = ENTITY_MANAGER_DEFAULT_CAPACITY
     ) {
-        auto gameLoop = std::make_unique<helios::engine::runtime::gameloop::GameLoop>();
+        auto gameLoop = std::make_unique<helios::runtime::gameloop::GameLoop>();
 
-        auto gameWorld = std::make_unique<helios::engine::runtime::world::GameWorld>(capacity);
+        auto gameWorld = std::make_unique<helios::runtime::world::GameWorld>(capacity);
 
         registerAllComponents();
 

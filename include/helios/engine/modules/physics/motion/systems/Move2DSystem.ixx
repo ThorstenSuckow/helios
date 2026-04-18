@@ -15,12 +15,12 @@ export module helios.engine.modules.physics.motion.systems.Move2DSystem;
 
 import helios.math;
 
-import helios.engine.runtime.world.GameWorld;
+import helios.runtime.world.GameWorld;
 import helios.engine.modules.physics.motion.components.Move2DComponent;
 import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
 import helios.engine.modules.physics.motion.components.DirectionComponent;
 
-import helios.engine.runtime.world.UpdateContext;
+import helios.runtime.world.UpdateContext;
 
 import helios.ecs.components.Active;
 
@@ -126,7 +126,7 @@ export namespace helios::engine::modules::physics::motion::systems {
          *
          * @param updateContext Context containing deltaTime and other frame data.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto [entity, m2d, dc, tsc, active] : updateContext.view<
                 THandle,

@@ -64,12 +64,12 @@ using namespace helios::engine::tooling;
 using namespace helios::engine::builder::gameObject;
 
 // Runtime
-using namespace helios::engine::runtime::messaging::command;
-using namespace helios::engine::runtime::world;
-using namespace helios::engine::runtime::world::types;
-using namespace helios::engine::runtime::gameloop;
-using namespace helios::engine::runtime::pooling;
-using namespace helios::engine::runtime::spawn;
+using namespace helios::runtime::messaging::command;
+using namespace helios::runtime::world;
+using namespace helios::runtime::world::types;
+using namespace helios::runtime::gameloop;
+using namespace helios::runtime::pooling;
+using namespace helios::runtime::spawn;
 
 // Platform
 using namespace helios::platform::lifecycle;
@@ -99,7 +99,7 @@ using namespace helios::engine::mechanics::combat::systems;
 
 // Mechanics: spawn, bounds, damage, health, input, lifecycle
 using namespace helios::engine::mechanics::spawn::systems;
-using namespace helios::engine::runtime::spawn::types;
+using namespace helios::runtime::spawn::types;
 using namespace helios::engine::mechanics::bounds::systems;
 using namespace helios::engine::mechanics::damage::systems;
 using namespace helios::engine::mechanics::health::systems;

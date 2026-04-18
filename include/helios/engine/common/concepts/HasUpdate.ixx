@@ -8,7 +8,7 @@ module;
 
 export module helios.engine.common.concepts.HasUpdate;
 
-import helios.engine.runtime.world.UpdateContextFwd;
+import helios.runtime.world.UpdateContextFwd;
 
 export namespace helios::engine::common::concepts {
 
@@ -23,7 +23,7 @@ export namespace helios::engine::common::concepts {
      * @see System
      */
     template<typename T>
-    concept HasUpdate = requires(T& t, helios::engine::runtime::world::UpdateContext& updateContext) {
+    concept HasUpdate = requires(T& t, helios::runtime::world::UpdateContext& updateContext) {
         {t.update(updateContext) } -> std::same_as<void>;
     };
 

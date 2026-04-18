@@ -10,9 +10,9 @@ export module helios.engine.mechanics.input.systems.TwinStickInputSystem;
 
 import helios.math.types;
 import helios.math.utils;
-import helios.engine.runtime.world.GameObject;
-import helios.engine.runtime.world.UpdateContext;
-import helios.engine.runtime.messaging.command.NullCommandBuffer;
+import helios.runtime.world.GameObject;
+import helios.runtime.world.UpdateContext;
+import helios.runtime.messaging.command.NullCommandBuffer;
 import helios.engine.common.concepts.IsCommandBufferLike;
 
 
@@ -30,7 +30,7 @@ import helios.engine.common.tags.SystemRole;
 
 
 using namespace helios::engine::mechanics::lifecycle::components;
-using namespace helios::engine::runtime::messaging::command;
+using namespace helios::runtime::messaging::command;
 using namespace helios::engine::common::concepts;
 export namespace helios::engine::mechanics::input::systems {
 
@@ -82,7 +82,7 @@ export namespace helios::engine::mechanics::input::systems {
          *
          * @param updateContext Context containing input snapshot and command buffer.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
             auto& inputSnapshot = updateContext.inputSnapshot();
 

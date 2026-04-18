@@ -99,10 +99,11 @@ int main() {
 
     // shader
     auto cubeShader = gameWorld.add<ShaderHandle>(ShaderId("CubeShader"));
-    cubeShader.setActive(true);
     cubeShader.add<ShaderSourceComponent<ShaderHandle>>(
     "./resources/cube.vert", "./resources/cube.frag"
     );
+
+    auto cubeMesh = gameWorld.add<MeshHandle>(MeshId("CubeMesh"));
 
 
 

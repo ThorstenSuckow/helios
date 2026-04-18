@@ -10,8 +10,8 @@ module;
 
 export module helios.engine.mechanics.health.systems.HealthUpdateClearSystem;
 
-import helios.engine.runtime.world.GameWorld;
-import helios.engine.runtime.world.UpdateContext;
+import helios.runtime.world.GameWorld;
+import helios.runtime.world.UpdateContext;
 
 
 
@@ -41,7 +41,7 @@ export namespace helios::engine::mechanics::health::systems {
          *
          * @param updateContext Current frame context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto [entity, hc, active] : updateContext.view<
                 THandle,

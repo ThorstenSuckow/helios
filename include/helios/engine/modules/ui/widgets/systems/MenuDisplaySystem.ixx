@@ -14,7 +14,7 @@ module;
 export module helios.engine.modules.ui.widgets.systems.MenuDisplaySystem;
 
 import helios.ecs;
-import helios.engine.runtime.world;
+import helios.runtime.world;
 import helios.engine.modules.ui.widgets.types.MenuId;
 
 import helios.engine.modules.ui.widgets.components.UiFocusComponent;
@@ -37,7 +37,7 @@ using namespace helios::engine::mechanics::gamestate::types;
 using namespace helios::engine::mechanics::match::types;
 using namespace helios::ecs::types;
 using namespace helios::engine::modules::ui::widgets::components;
-using namespace helios::engine::runtime::world;
+using namespace helios::runtime::world;
 using namespace helios::ecs;
 export namespace helios::engine::modules::ui::widgets::systems {
 
@@ -101,7 +101,7 @@ export namespace helios::engine::modules::ui::widgets::systems {
          * @param components View of all MenuComponent entities.
          */
         void focusMenu(
-            helios::engine::runtime::world::UpdateContext& updateContext,
+            helios::runtime::world::UpdateContext& updateContext,
             const MenuId menuId, View<THandle, MenuComponent<THandle>>& components) {
             for (auto [entity, mc] : components) {
                 if (mc->menuId() == menuId) {
@@ -143,7 +143,7 @@ export namespace helios::engine::modules::ui::widgets::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
 
             auto& session = updateContext.session();

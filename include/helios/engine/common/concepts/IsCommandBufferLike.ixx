@@ -12,15 +12,15 @@ import helios.engine.common.concepts.HasTag;
 import helios.engine.common.concepts.HasClear;
 
 
-import helios.engine.runtime.world.GameWorldFwd;
-import helios.engine.runtime.world.UpdateContextFwd;
+import helios.runtime.world.GameWorldFwd;
+import helios.runtime.world.UpdateContextFwd;
 
 import helios.engine.common.tags.CommandBufferRole;
 
 import helios.engine.common.tags.CommandBufferRole;
 
 using namespace helios::engine::common::tags;
-using namespace helios::engine::runtime::world;
+using namespace helios::runtime::world;
 export namespace helios::engine::common::concepts {
 
     /**

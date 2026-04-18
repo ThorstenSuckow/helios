@@ -15,9 +15,9 @@ module;
 
 export module helios.engine.modules.physics.collision.systems.CollisionStateResponseSystem;
 
-import helios.engine.runtime.world.GameWorld;
-import helios.engine.runtime.world.UpdateContext;
-import helios.engine.runtime.messaging.command.NullCommandBuffer;
+import helios.runtime.world.GameWorld;
+import helios.runtime.world.UpdateContext;
+import helios.runtime.messaging.command.NullCommandBuffer;
 import helios.engine.common.concepts.IsCommandBufferLike;
 
 
@@ -28,7 +28,7 @@ import helios.engine.modules.physics.collision.types.CollisionBehavior;
 
 import helios.engine.modules.physics.collision.components.CollisionStateComponent;
 
-import helios.engine.runtime.spawn.commands.DespawnCommand;
+import helios.runtime.spawn.commands.DespawnCommand;
 import helios.engine.modules.physics.collision.events;
 
 import helios.engine.mechanics.spawn.components.SpawnedByProfileComponent;
@@ -37,8 +37,8 @@ import helios.ecs.components.Active;
 
 using namespace helios::engine::modules::physics::collision::components;
 using namespace helios::engine::modules::physics::collision::types;
-using namespace helios::engine::runtime::spawn::commands;
-using namespace helios::engine::runtime::messaging::command;
+using namespace helios::runtime::spawn::commands;
+using namespace helios::runtime::messaging::command;
 using namespace helios::engine::common::concepts;
 
 
@@ -79,7 +79,7 @@ export namespace helios::engine::modules::physics::collision::systems {
          *
          * @param updateContext Context providing access to the command buffer and world.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto [entity, csc, sbp, active] : updateContext.view<
                 THandle,

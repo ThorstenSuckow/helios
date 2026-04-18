@@ -19,9 +19,9 @@ import helios.engine.mechanics.scoring.commands;
 import helios.engine.mechanics.scoring.components;
 import helios.engine.mechanics.scoring.types;
 
-import helios.engine.runtime.world.GameWorld;
-import helios.engine.runtime.world.UpdateContext;
-import helios.engine.runtime.messaging.command.NullCommandBuffer;
+import helios.runtime.world.GameWorld;
+import helios.runtime.world.UpdateContext;
+import helios.runtime.messaging.command.NullCommandBuffer;
 import helios.engine.common.concepts.IsCommandBufferLike;
 
 import helios.engine.state.Bindings;
@@ -44,8 +44,8 @@ using namespace helios::engine::mechanics::scoring::types;
 using namespace helios::engine::mechanics::scoring::commands;
 using namespace helios::engine::mechanics::health::events;
 using namespace helios::ecs::types;
-using namespace helios::engine::runtime::world;
-using namespace helios::engine::runtime::messaging::command;
+using namespace helios::runtime::world;
+using namespace helios::runtime::messaging::command;
 using namespace helios::engine::common::concepts;
 
 #define HELIOS_LOG_SCOPE "helios::engine::mechanics::scoring::systems::CombatScoringSystem"
@@ -77,7 +77,7 @@ export namespace helios::engine::mechanics::scoring::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto& event : updateContext.readPass<HealthDepletedEvent<THandle>>()) {
 

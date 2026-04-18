@@ -8,9 +8,9 @@ module;
 
 export module helios.engine.modules.spatial.transform.systems.TransformClearSystem;
 
-import helios.engine.runtime.world.GameWorld;
+import helios.runtime.world.GameWorld;
 
-import helios.engine.runtime.world.UpdateContext;
+import helios.runtime.world.UpdateContext;
 
 import helios.engine.modules.scene.components.SceneNodeComponent;
 import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
@@ -45,7 +45,7 @@ export namespace helios::engine::modules::spatial::transform::systems {
          *
          * @param updateContext The update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto [entity, tc, active] : updateContext.view<
                 THandle,

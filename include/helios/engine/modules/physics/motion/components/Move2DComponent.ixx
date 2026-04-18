@@ -17,7 +17,7 @@ import helios.core.spatial.Transform;
 import helios.math;
 import helios.core.units.Unit;
 
-import helios.engine.runtime.world.GameObject;
+import helios.runtime.world.GameObject;
 import helios.engine.modules.scene.components.SceneNodeComponent;
 
 

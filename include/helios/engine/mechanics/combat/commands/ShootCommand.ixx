@@ -12,8 +12,8 @@ import helios.engine.mechanics.combat.components.ShootComponent;
 import helios.engine.modules.physics.motion.components.Move2DComponent;
 
 
-import helios.engine.runtime.world.UpdateContext;
-import helios.engine.runtime.world.GameWorld;
+import helios.runtime.world.UpdateContext;
+import helios.runtime.world.GameWorld;
 
 export namespace helios::engine::mechanics::combat::commands {
 
@@ -96,7 +96,7 @@ export namespace helios::engine::mechanics::combat::commands {
          *
          * @param gameObject The target entity with a ShootComponent.
          */
-        void execute(helios::engine::runtime::world::UpdateContext& updateContext) const noexcept {
+        void execute(helios::runtime::world::UpdateContext& updateContext) const noexcept {
 
             auto entity = updateContext.find<THandle>(entityHandle_);
 

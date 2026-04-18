@@ -7,7 +7,7 @@ module;
 
 export module helios.engine.state.StateTransitionListener;
 
-import helios.engine.runtime.world.UpdateContext;
+import helios.runtime.world.UpdateContext;
 
 import helios.engine.state.types;
 
@@ -42,7 +42,7 @@ export namespace helios::engine::state {
          * @param from The state being exited.
          */
         virtual void onStateExit(
-            helios::engine::runtime::world::UpdateContext& updateContext,
+            helios::runtime::world::UpdateContext& updateContext,
             const StateType from
         ) noexcept = 0;
 
@@ -53,7 +53,7 @@ export namespace helios::engine::state {
          * @param to The state being entered.
          */
         virtual void onStateEnter(
-           helios::engine::runtime::world::UpdateContext& updateContext,
+           helios::runtime::world::UpdateContext& updateContext,
            const StateType to
        ) noexcept = 0;
 
@@ -64,7 +64,7 @@ export namespace helios::engine::state {
          * @param transitionCtx The complete transition context.
          */
         virtual void onStateTransition(
-            helios::engine::runtime::world::UpdateContext& updateContext,
+            helios::runtime::world::UpdateContext& updateContext,
             const StateTransitionContext<StateType> transitionCtx
         ) noexcept = 0;
 

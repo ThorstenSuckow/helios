@@ -334,7 +334,7 @@ A composition-based game architecture separating data (Components) from behavior
 **Component-Based Design:**
 ```cpp
 import helios.engine.ecs.GameObject;
-import helios.engine.runtime.world.GameWorld;
+import helios.runtime.world.GameWorld;
 
 // Create entity with components
 auto entity = std::make_unique<GameObject>();
@@ -353,7 +353,7 @@ for (auto [obj, move] : gameWorld.find<Move2DComponent>().each()) {
 
 **GameLoop with Phases:**
 ```cpp
-import helios.engine.runtime.gameloop.GameLoop;
+import helios.runtime.gameloop.GameLoop;
 
 GameLoop gameLoop;
 
@@ -382,8 +382,8 @@ while (running) {
 
 **Object Pooling:**
 ```cpp
-import helios.engine.runtime.pooling.GameObjectPoolManager;
-import helios.engine.runtime.spawn.SpawnManager;
+import helios.runtime.pooling.GameObjectPoolManager;
+import helios.runtime.spawn.SpawnManager;
 
 // Create pool manager
 auto poolManager = std::make_unique<GameObjectPoolManager>();

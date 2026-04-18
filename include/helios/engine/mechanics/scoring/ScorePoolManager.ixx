@@ -18,11 +18,11 @@ import helios.engine.mechanics.scoring.commands;
 
 import helios.engine.mechanics.scoring.types.ScorePoolId;
 
-import helios.engine.runtime.world.GameObject;
-import helios.engine.runtime.world.UpdateContext;
+import helios.runtime.world.GameObject;
+import helios.runtime.world.UpdateContext;
 
-import helios.engine.runtime.world.GameWorld;
-import helios.engine.runtime.pooling.GameObjectPool;
+import helios.runtime.world.GameWorld;
+import helios.runtime.pooling.GameObjectPool;
 
 import helios.core.types;
 import helios.util.Guid;
@@ -111,7 +111,7 @@ export namespace helios::engine::mechanics::scoring {
          * @param update_context Reference to the update context.
          */
         void flush(
-            helios::engine::runtime::world::UpdateContext& update_context
+            helios::runtime::world::UpdateContext& update_context
         ) noexcept {
 
             for (const auto& scoreContext : scores_) {
@@ -149,7 +149,7 @@ export namespace helios::engine::mechanics::scoring {
          *
          * @param gameWorld Reference to the game world.
          */
-        void init(helios::engine::runtime::world::GameWorld& gameWorld) {
+        void init(helios::runtime::world::GameWorld& gameWorld) {
             gameWorld.registerCommandHandler<UpdateScoreCommand>(*this);
         }
 

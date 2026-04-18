@@ -14,8 +14,8 @@ export module helios.engine.mechanics.lifecycle.components.DelayedComponentEnabl
 
 
 
-import helios.engine.runtime.world.GameObject;
-import helios.engine.runtime.spawn.types.SpawnProfileId;
+import helios.runtime.world.GameObject;
+import helios.runtime.spawn.types.SpawnProfileId;
 import helios.ecs.types.ComponentTypeId;
 import helios.core.types;
 
@@ -119,7 +119,7 @@ export namespace helios::engine::mechanics::lifecycle::components {
          * @note Asserts if delta <= 0 or if the component does not exist on the entity.
          */
         void defer(
-            helios::engine::runtime::world::GameObject gameObject,
+            helios::runtime::world::GameObject gameObject,
             helios::ecs::types::ComponentTypeId<THandle> componentTypeId, const float delta) {
             assert(delta > 0 && "delta must be greater than 0");
 

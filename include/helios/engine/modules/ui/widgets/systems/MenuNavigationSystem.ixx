@@ -22,8 +22,8 @@ import helios.engine.modules.ui.widgets.components.UiActionComponent;
 
 import helios.engine.modules.ui.widgets.commands.UiActionCommand;
 
-import helios.engine.runtime.world;
-import helios.engine.runtime.messaging.command.NullCommandBuffer;
+import helios.runtime.world;
+import helios.runtime.messaging.command.NullCommandBuffer;
 import helios.engine.common.concepts.IsCommandBufferLike;
 
 import helios.ecs.components.Active;
@@ -42,8 +42,8 @@ using namespace helios::input::types;
 using namespace helios::ecs::components;
 using namespace helios::engine::modules::ui::widgets::types;
 using namespace helios::ecs::types;
-using namespace helios::engine::runtime::world;
-using namespace helios::engine::runtime::messaging::command;
+using namespace helios::runtime::world;
+using namespace helios::runtime::messaging::command;
 using namespace helios::engine::common::concepts;
 using namespace helios::engine::modules::ui::widgets::components;
 using namespace helios::ecs::components;
@@ -86,7 +86,7 @@ export namespace helios::engine::modules::ui::widgets::systems {
          * @param gamepadState The current gamepad state.
          */
         void updateMenu(
-            helios::engine::runtime::world::UpdateContext& updateContext,
+            helios::runtime::world::UpdateContext& updateContext,
             MenuComponent<THandle>* mc, const size_t index) {
 
             auto menuItems = mc->menuItems();
@@ -131,7 +131,7 @@ export namespace helios::engine::modules::ui::widgets::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
             MenuComponent<THandle>* focusedMenu = nullptr;
 

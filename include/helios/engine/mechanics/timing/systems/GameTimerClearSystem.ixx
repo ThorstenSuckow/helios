@@ -10,7 +10,7 @@ export module helios.engine.mechanics.timing.systems.GameTimerClearSystem;
 import helios.engine.mechanics.timing.GameTimer;
 import helios.engine.mechanics.timing.TimerManager;
 
-import helios.engine.runtime.world.UpdateContext;
+import helios.runtime.world.UpdateContext;
 
 import helios.engine.common.tags.SystemRole;
 
@@ -59,7 +59,7 @@ export namespace helios::engine::mechanics::timing::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto& gameTimer : timerManager_.gameTimers()) {
                 if (gameTimer.state() == TimerState::Finished || gameTimer.state() == TimerState::Cancelled) {

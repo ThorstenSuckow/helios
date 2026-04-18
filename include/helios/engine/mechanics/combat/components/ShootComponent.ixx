@@ -10,7 +10,7 @@ export module helios.engine.mechanics.combat.components.ShootComponent;
 
 import helios.math;
 
-import helios.engine.runtime.world.GameObject;
+import helios.runtime.world.GameObject;
 import helios.engine.mechanics.combat.components.Aim2DComponent;
 import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
 

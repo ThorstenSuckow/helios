@@ -66,9 +66,9 @@ The spawn system consists of several layers working together:
 A `SpawnProfile` bundles together everything needed to spawn entities of a particular type:
 
 ```cpp
-import helios.engine.runtime.spawn.types.SpawnProfile;
-import helios.engine.runtime.spawn.behavior.placements.RandomSpawnPlacer;
-import helios.engine.runtime.spawn.behavior.initializers.RandomDirectionInitializer;
+import helios.runtime.spawn.types.SpawnProfile;
+import helios.runtime.spawn.behavior.placements.RandomSpawnPlacer;
+import helios.runtime.spawn.behavior.initializers.RandomDirectionInitializer;
 
 auto enemyProfile = std::make_unique<SpawnProfile>(SpawnProfile{
     .gameObjectPoolId = enemyPoolId,
@@ -141,9 +141,9 @@ public:
 A `SpawnRule` combines a **condition** (when to spawn) with an **amount provider** (how many):
 
 ```cpp
-import helios.engine.runtime.spawn.policy.SpawnRule;
-import helios.engine.runtime.spawn.policy.conditions.TimerSpawnCondition;
-import helios.engine.runtime.spawn.policy.amount.FixedSpawnAmount;
+import helios.runtime.spawn.policy.SpawnRule;
+import helios.runtime.spawn.policy.conditions.TimerSpawnCondition;
+import helios.runtime.spawn.policy.amount.FixedSpawnAmount;
 
 auto rule = std::make_unique<SpawnRule>(
     std::make_unique<TimerSpawnCondition>(2.0f),  // Every 2 seconds
@@ -214,7 +214,7 @@ The `SpawnScheduler` evaluates all registered rules each frame. helios ships wit
 Evaluates all rules independently each frame. Each rule can trigger on its own schedule:
 
 ```cpp
-import helios.engine.runtime.spawn.scheduling.DefaultSpawnScheduler;
+import helios.runtime.spawn.scheduling.DefaultSpawnScheduler;
 
 auto scheduler = std::make_unique<DefaultSpawnScheduler>();
 scheduler->addRule(enemyProfileId, std::move(rule));
@@ -225,7 +225,7 @@ scheduler->addRule(enemyProfileId, std::move(rule));
 Evaluates one rule at a time in a fixed-size ring buffer. Advances to the next rule only when a spawn successfully occurs. Ideal for wave-based or sequential spawn patterns:
 
 ```cpp
-import helios.engine.runtime.spawn.scheduling.CyclicSpawnScheduler;
+import helios.runtime.spawn.scheduling.CyclicSpawnScheduler;
 
 // Cycle: Left → Top → Right → Bottom → Left → ...
 auto scheduler = std::make_unique<CyclicSpawnScheduler<4>>();
@@ -238,7 +238,7 @@ scheduler->addRule(bottomProfileId, std::move(bottomRule));
 In the game loop, the scheduler produces plans that become commands:
 
 ```cpp
-import helios.engine.runtime.spawn.scheduling.SpawnScheduler;
+import helios.runtime.spawn.scheduling.SpawnScheduler;
 
 SpawnScheduler scheduler;
 
@@ -271,7 +271,7 @@ Spawn operations are represented as commands for deferred execution:
 The `SpawnManager` processes spawn/despawn commands:
 
 ```cpp
-import helios.engine.runtime.spawn.SpawnManager;
+import helios.runtime.spawn.SpawnManager;
 
 auto& spawnManager = gameWorld.registerManager<SpawnManager>();
 
@@ -532,7 +532,7 @@ The `LevelBoundsBehaviorComponent` with `BoundsBehavior::Despawn` handles this a
 ## Module Structure
 
 ```
-helios.engine.runtime.spawn/
+helios.runtime.spawn/
 ├── SpawnManager.ixx               # Manager processing commands
 ├── SpawnProfile.ixx               # Profile configuration
 ├── SpawnContext.ixx               # Context for spawn operations

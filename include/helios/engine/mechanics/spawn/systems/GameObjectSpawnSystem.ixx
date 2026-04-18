@@ -15,19 +15,19 @@ export module helios.engine.mechanics.spawn.systems.GameObjectSpawnSystem;
 import helios.engine.state.Bindings;
 
 
-import helios.engine.runtime.world.UpdateContext;
-import helios.engine.runtime.world.GameWorld;
-import helios.engine.runtime.spawn.commands.ScheduledSpawnPlanCommand;
-import helios.engine.runtime.spawn.SpawnManager;
-import helios.engine.runtime.spawn.scheduling.SpawnScheduler;
-import helios.engine.runtime.spawn.events.SpawnPlanCommandExecutedEvent;
-import helios.engine.runtime.messaging.command.NullCommandBuffer;
+import helios.runtime.world.UpdateContext;
+import helios.runtime.world.GameWorld;
+import helios.runtime.spawn.commands.ScheduledSpawnPlanCommand;
+import helios.runtime.spawn.SpawnManager;
+import helios.runtime.spawn.scheduling.SpawnScheduler;
+import helios.runtime.spawn.events.SpawnPlanCommandExecutedEvent;
+import helios.runtime.messaging.command.NullCommandBuffer;
 import helios.engine.common.concepts.IsCommandBufferLike;
 import helios.engine.common.tags.SystemRole;
 
 
-using namespace helios::engine::runtime::world;
-using namespace helios::engine::runtime::messaging::command;
+using namespace helios::runtime::world;
+using namespace helios::runtime::messaging::command;
 using namespace helios::engine::common::concepts;
 export namespace helios::engine::mechanics::spawn::systems {
 
@@ -36,7 +36,7 @@ export namespace helios::engine::mechanics::spawn::systems {
     class GameObjectSpawnSystem {
 
 
-        helios::engine::runtime::spawn::SpawnManager<THandle>& spawnManager_;
+        helios::runtime::spawn::SpawnManager<THandle>& spawnManager_;
 
        GameWorld* gameWorld_ = nullptr;
 
@@ -45,7 +45,7 @@ export namespace helios::engine::mechanics::spawn::systems {
 
         using EngineRoleTag = helios::engine::common::tags::SystemRole;
 
-        explicit GameObjectSpawnSystem(helios::engine::runtime::spawn::SpawnManager<THandle>& spawnManager) noexcept
+        explicit GameObjectSpawnSystem(helios::runtime::spawn::SpawnManager<THandle>& spawnManager) noexcept
         : spawnManager_{spawnManager} {}
 
 
@@ -64,10 +64,10 @@ export namespace helios::engine::mechanics::spawn::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
             const auto& events = updateContext.readFrame<
-                helios::engine::runtime::spawn::events::SpawnPlanCommandExecutedEvent
+                helios::runtime::spawn::events::SpawnPlanCommandExecutedEvent
             >();
 
             for (const auto& spawnScheduler : spawnManager_.spawnSchedulers()) {
@@ -87,7 +87,7 @@ export namespace helios::engine::mechanics::spawn::systems {
 
                 for (auto& plan : scheduledPlans) {
                     updateContext.queueCommand<TCommandBuffer,
-                        helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand<THandle>
+                        helios::runtime::spawn::commands::ScheduledSpawnPlanCommand<THandle>
                     >(
                         plan.spawnProfileId, plan.spawnPlan, plan.spawnContext
                     );

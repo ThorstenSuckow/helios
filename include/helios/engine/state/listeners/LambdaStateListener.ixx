@@ -11,11 +11,11 @@ module;
 export module helios.engine.state.listeners.LambdaStateListener;
 
 import helios.engine.state.StateTransitionListener;
-import helios.engine.runtime.world.UpdateContext;
+import helios.runtime.world.UpdateContext;
 
 import helios.engine.state.types;
 
-import helios.engine.runtime.world.GameObject;
+import helios.runtime.world.GameObject;
 
 using namespace helios::engine::state::types;
 export namespace helios::engine::state::listeners {
@@ -38,17 +38,17 @@ export namespace helios::engine::state::listeners {
         /**
          * @brief Callback type for state enter events.
          */
-        using OnEnterCallback = std::function<void(helios::engine::runtime::world::UpdateContext&, const StateType)>;
+        using OnEnterCallback = std::function<void(helios::runtime::world::UpdateContext&, const StateType)>;
 
         /**
          * @brief Callback type for state exit events.
          */
-        using OnExitCallback = std::function<void(helios::engine::runtime::world::UpdateContext&, const StateType)>;
+        using OnExitCallback = std::function<void(helios::runtime::world::UpdateContext&, const StateType)>;
 
         /**
          * @brief Callback type for state transition events.
          */
-        using OnTransitionCallback = std::function<void(helios::engine::runtime::world::UpdateContext&, const StateTransitionContext<StateType>)>;
+        using OnTransitionCallback = std::function<void(helios::runtime::world::UpdateContext&, const StateTransitionContext<StateType>)>;
 
         /**
          * @brief Callback invoked when entering a state.
@@ -107,7 +107,7 @@ export namespace helios::engine::state::listeners {
          * @copydoc StateTransitionListener::onStateExit
          */
         void onStateExit(
-            helios::engine::runtime::world::UpdateContext& updateContext,
+            helios::runtime::world::UpdateContext& updateContext,
             const StateType from
         ) noexcept override {
             if (onExitCallback_) {
@@ -119,7 +119,7 @@ export namespace helios::engine::state::listeners {
          * @copydoc StateTransitionListener::onStateEnter
          */
         void onStateEnter(
-            helios::engine::runtime::world::UpdateContext& updateContext,
+            helios::runtime::world::UpdateContext& updateContext,
             const StateType to
         ) noexcept override {
             if (onEnterCallback_) {
@@ -131,7 +131,7 @@ export namespace helios::engine::state::listeners {
          * @copydoc StateTransitionListener::onStateTransition
          */
         void onStateTransition(
-            helios::engine::runtime::world::UpdateContext& updateContext,
+            helios::runtime::world::UpdateContext& updateContext,
             const StateTransitionContext<StateType> transitionCtx
         ) noexcept override {
             if (onTransitionCallback_) {

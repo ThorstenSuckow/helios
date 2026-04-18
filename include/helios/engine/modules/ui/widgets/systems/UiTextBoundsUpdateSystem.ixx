@@ -10,8 +10,8 @@ export module helios.engine.modules.ui.widgets.systems.UiTextBoundsUpdateSystem;
 
 import helios.engine.modules.ui.widgets.components.UiTextComponent;
 
-import helios.engine.runtime.world.GameWorld;
-import helios.engine.runtime.world.UpdateContext;
+import helios.runtime.world.GameWorld;
+import helios.runtime.world.UpdateContext;
 
 import helios.ecs.components.Active;
 
@@ -42,7 +42,7 @@ export namespace helios::engine::modules::ui::widgets::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto [entity, txt, mac, active] : updateContext.view<
                 THandle,

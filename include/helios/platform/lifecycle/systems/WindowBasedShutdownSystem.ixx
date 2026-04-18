@@ -8,12 +8,12 @@ export module helios.platform.lifecycle.systems.WindowBasedShutdownSystem;
 
 
 
-import helios.engine.runtime.world.UpdateContext;
+import helios.runtime.world.UpdateContext;
 
 import helios.engine.common.tags.SystemRole;
 
-import helios.engine.runtime.world;
-import helios.engine.runtime.messaging.command.NullCommandBuffer;
+import helios.runtime.world;
+import helios.runtime.messaging.command.NullCommandBuffer;
 import helios.engine.common.concepts.IsCommandBufferLike;
 
 import helios.ecs.components.Active;
@@ -29,8 +29,8 @@ import helios.engine.state.Bindings;
 import helios.engine.mechanics.gamestate.types;
 
 using namespace helios::engine::common::tags;
-using namespace helios::engine::runtime::world;
-using namespace helios::engine::runtime::messaging::command;
+using namespace helios::runtime::world;
+using namespace helios::runtime::messaging::command;
 using namespace helios::engine::common::concepts;
 using namespace helios::platform::environment::components;
 using namespace helios::platform::window::components;

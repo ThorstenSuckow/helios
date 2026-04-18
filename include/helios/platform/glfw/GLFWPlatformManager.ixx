@@ -26,7 +26,7 @@ import helios.engine.mechanics.gamestate.types;
 
 import helios.engine.common.tags.ManagerRole;
 
-import helios.engine.runtime.world;
+import helios.runtime.world;
 
 import helios.platform.environment.commands;
 import helios.platform.lifecycle.commands;
@@ -42,7 +42,7 @@ import helios.platform.glfw.types;
 
 import helios.ecs.concepts;
 import helios.engine.common.concepts;
-import helios.engine.runtime.messaging.command;
+import helios.runtime.messaging.command;
 import helios.platform.window.concepts.IsWindowHandle;
 
 using namespace helios::engine::common::tags;
@@ -62,8 +62,8 @@ using namespace helios::ecs;
 using namespace helios::ecs::concepts;
 using namespace helios::engine::common::concepts;
 using namespace helios::core::types;
-using namespace helios::engine::runtime::messaging::command;
-using namespace helios::engine::runtime::world;
+using namespace helios::runtime::messaging::command;
+using namespace helios::runtime::world;
 using namespace helios::platform::window::concepts;
 
 #define HELIOS_LOG_SCOPE "helios::platform::glfw::GLFWPlatformManager"
@@ -596,7 +596,7 @@ export namespace helios::platform::glfw {
          *
          * @param gameWorld Runtime world used for command-handler registration.
          */
-        void init(helios::engine::runtime::world::GameWorld& gameWorld) noexcept {
+        void init(helios::runtime::world::GameWorld& gameWorld) noexcept {
 
             gameWorld_ = &gameWorld;
 

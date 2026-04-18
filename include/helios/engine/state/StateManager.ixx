@@ -20,15 +20,15 @@ import helios.engine.state.components;
 import helios.engine.state.commands;
 import helios.engine.state.types;
 
-import helios.engine.runtime.world.GameObject;
+import helios.runtime.world.GameObject;
 
 
-import helios.engine.runtime.world.UpdateContext;
+import helios.runtime.world.UpdateContext;
 
-import helios.engine.runtime.world.GameWorld;
-import helios.engine.runtime.world.Session;
+import helios.runtime.world.GameWorld;
+import helios.runtime.world.Session;
 
-import helios.engine.runtime.world.Session;
+import helios.runtime.world.Session;
 
 import helios.core.types;
 import helios.util.Guid;
@@ -96,7 +96,7 @@ export namespace helios::engine::state {
             const StateType from,
             const StateType to,
             const StateTransitionIdType<StateType> transitionId,
-            helios::engine::runtime::world::UpdateContext& updateContext)  {
+            helios::runtime::world::UpdateContext& updateContext)  {
 
             for (auto& listener : listeners_) {
                 listener->onStateExit(updateContext, from);
@@ -115,7 +115,7 @@ export namespace helios::engine::state {
            const StateType from,
            const StateType to,
            const StateTransitionIdType<StateType> transitionId,
-           helios::engine::runtime::world::UpdateContext& updateContext)  {
+           helios::runtime::world::UpdateContext& updateContext)  {
 
             for (auto& listener : listeners_) {
                 listener->onStateTransition(
@@ -137,7 +137,7 @@ export namespace helios::engine::state {
            const StateType from,
            const StateType to,
            const StateTransitionIdType<StateType> transitionId,
-           helios::engine::runtime::world::UpdateContext& updateContext)  {
+           helios::runtime::world::UpdateContext& updateContext)  {
 
             for (auto& listener : listeners_) {
                 listener->onStateEnter(updateContext, to);
@@ -178,7 +178,7 @@ export namespace helios::engine::state {
          * @param updateContext The current frame's update context.
          */
         void flush(
-            helios::engine::runtime::world::UpdateContext& updateContext
+            helios::runtime::world::UpdateContext& updateContext
         ) noexcept {
 
             if (pending_.empty()) {
@@ -259,7 +259,7 @@ export namespace helios::engine::state {
          *
          * @param gameWorld The game world to register with.
          */
-        void init(helios::engine::runtime::world::GameWorld& gameWorld) {
+        void init(helios::runtime::world::GameWorld& gameWorld) {
             gameWorld.registerCommandHandler<StateCommand<StateType>>(*this);
             gameWorld.registerCommandHandler<DelayedStateCommand<StateType>>(*this);
         }

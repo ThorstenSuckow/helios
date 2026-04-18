@@ -12,7 +12,7 @@ import helios.scene.types;
 import helios.scene.types;
 import helios.engine.modules.scene.components;
 
-import helios.engine.runtime.world.Session;
+import helios.runtime.world.Session;
 
 import helios.ecs.types.EntityHandle;
 
@@ -20,9 +20,9 @@ import helios.ecs.types.EntityHandle;
 import helios.engine.modules.rendering.components;
 import helios.engine.modules.rendering.commands;
 
-import helios.engine.runtime.world.GameWorld;
-import helios.engine.runtime.world.UpdateContext;
-import helios.engine.runtime.messaging.command.NullCommandBuffer;
+import helios.runtime.world.GameWorld;
+import helios.runtime.world.UpdateContext;
+import helios.runtime.messaging.command.NullCommandBuffer;
 import helios.engine.common.concepts.IsCommandBufferLike;
 
 import helios.ecs.components.Active;
@@ -46,7 +46,7 @@ using namespace helios::scene::types;
 using namespace helios::engine::common::concepts;
 using namespace helios::engine::modules::spatial::transform::components;
 using namespace helios::engine::modules::rendering::commands;
-using namespace helios::engine::runtime::messaging::command;
+using namespace helios::runtime::messaging::command;
 
 export namespace helios::engine::modules::scene::systems {
 
@@ -67,7 +67,7 @@ export namespace helios::engine::modules::scene::systems {
         using EngineRoleTag = helios::engine::common::tags::SystemRole;
 
 
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
 
             for (auto [entity, vc, active] : updateContext.view<

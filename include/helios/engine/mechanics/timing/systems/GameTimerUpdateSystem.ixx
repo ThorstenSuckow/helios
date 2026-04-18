@@ -13,8 +13,8 @@ import helios.engine.mechanics.timing.TimerManager;
 import helios.engine.state.Bindings;
 
 
-import helios.engine.runtime.world.UpdateContext;
-import helios.engine.runtime.messaging.command.NullCommandBuffer;
+import helios.runtime.world.UpdateContext;
+import helios.runtime.messaging.command.NullCommandBuffer;
 import helios.engine.common.concepts.IsCommandBufferLike;
 
 import helios.engine.common.tags.SystemRole;
@@ -26,8 +26,8 @@ using namespace helios::engine::mechanics::timing;
 
 using namespace helios::engine::mechanics::timing::types;
 using namespace helios::engine::mechanics::timing::commands;
-using namespace helios::engine::runtime::world;
-using namespace helios::engine::runtime::messaging::command;
+using namespace helios::runtime::world;
+using namespace helios::runtime::messaging::command;
 using namespace helios::engine::common::concepts;
 
 export namespace helios::engine::mechanics::timing::systems {
@@ -69,7 +69,7 @@ export namespace helios::engine::mechanics::timing::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto& gameTimer : timerManager_.gameTimers()) {
                 if (gameTimer.state() == TimerState::Running) {

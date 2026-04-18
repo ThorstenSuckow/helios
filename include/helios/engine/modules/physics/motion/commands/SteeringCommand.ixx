@@ -10,8 +10,8 @@ import helios.ecs;
 import helios.math.types;
 import helios.engine.modules.physics.motion.components.SteeringComponent;
 
-import helios.engine.runtime.world.UpdateContext;
-import helios.engine.runtime.world.GameWorld;
+import helios.runtime.world.UpdateContext;
+import helios.runtime.world.GameWorld;
 
 export namespace helios::engine::modules::physics::motion::commands {
 
@@ -70,7 +70,7 @@ export namespace helios::engine::modules::physics::motion::commands {
          *
          * @param entity The GameObject to apply the command to.
          */
-        void execute(helios::engine::runtime::world::UpdateContext& updateContext) const noexcept {
+        void execute(helios::runtime::world::UpdateContext& updateContext) const noexcept {
 
             auto entity = updateContext.find<THandle>(entityHandle_);
 

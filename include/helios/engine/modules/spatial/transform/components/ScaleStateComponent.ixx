@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.modules.spatial.transform.components.ScaleStateComponent;
 
-import helios.engine.runtime.world.GameObject;
+import helios.runtime.world.GameObject;
 import helios.math.types;
 
 import helios.core.spatial.Transform;

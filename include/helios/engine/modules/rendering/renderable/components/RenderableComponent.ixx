@@ -10,7 +10,7 @@ module;
 export module helios.engine.modules.rendering.renderable.components.RenderableComponent;
 
 
-import helios.engine.runtime.world.GameObject;
+import helios.runtime.world.GameObject;
 
 import helios.rendering.Renderable;
 import helios.math.types;

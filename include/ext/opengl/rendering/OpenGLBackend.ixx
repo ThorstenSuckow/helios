@@ -16,7 +16,7 @@ import helios.util.Colors;
 
 import helios.scene.types.SceneMemberRenderContext;
 
-import helios.engine.runtime.world.EngineWorld;
+import helios.runtime.world.EngineWorld;
 
 using namespace helios::math;
 using namespace helios::rendering;
@@ -26,7 +26,7 @@ using namespace helios::rendering::mesh::types;
 using namespace helios::rendering::framebuffer::types;
 using namespace helios::rendering::viewport::types;
 using namespace helios::scene::types;
-using namespace helios::engine::runtime::world;
+using namespace helios::runtime::world;
 export namespace helios::ext::opengl::rendering {
 
 

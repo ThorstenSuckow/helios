@@ -8,8 +8,8 @@ module;
 
 export module helios.engine.mechanics.health.HealthManager;
 
-import helios.engine.runtime.world.GameWorld;
-import helios.engine.runtime.world.UpdateContext;
+import helios.runtime.world.GameWorld;
+import helios.runtime.world.UpdateContext;
 
 import helios.engine.mechanics.damage.commands.ApplyDamageCommand;
 import helios.engine.common.types;
@@ -32,7 +32,7 @@ using namespace helios::engine::mechanics::lifecycle::components;
 using namespace helios::engine::common::types;
 using namespace helios::engine::mechanics::damage::components;
 using namespace helios::engine::mechanics::damage::commands;
-using namespace helios::engine::runtime::world;
+using namespace helios::runtime::world;
 
 #define HELIOS_LOG_SCOPE "helios::engine::mechanics::health::HealthManager"
 export namespace helios::engine::mechanics::health {

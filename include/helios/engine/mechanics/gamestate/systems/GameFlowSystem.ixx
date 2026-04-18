@@ -18,8 +18,8 @@ import helios.engine.state.types.StateTransitionRequest;
 import helios.engine.mechanics.gamestate.types;
 
 import helios.ecs;
-import helios.engine.runtime.world.UpdateContext;
-import helios.engine.runtime.world.Session;
+import helios.runtime.world.UpdateContext;
+import helios.runtime.world.Session;
 
 import helios.engine.common.tags.SystemRole;
 
@@ -70,7 +70,7 @@ export namespace helios::engine::mechanics::gamestate::systems {
          *
          * @param updateContext The update context providing session and command buffer access.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
             auto& session = updateContext.session();
 

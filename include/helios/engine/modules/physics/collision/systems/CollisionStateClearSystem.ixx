@@ -15,8 +15,8 @@ module;
 
 export module helios.engine.modules.physics.collision.systems.CollisionStateClearSystem;
 
-import helios.engine.runtime.world.GameWorld;
-import helios.engine.runtime.world.UpdateContext;
+import helios.runtime.world.GameWorld;
+import helios.runtime.world.UpdateContext;
 
 
 
@@ -24,13 +24,13 @@ import helios.engine.modules.physics.collision.types.CollisionBehavior;
 
 import helios.engine.modules.physics.collision.components.CollisionStateComponent;
 
-import helios.engine.runtime.spawn.commands.DespawnCommand;
+import helios.runtime.spawn.commands.DespawnCommand;
 
 import helios.ecs.components.Active;
 
 using namespace helios::engine::modules::physics::collision::components;
 using namespace helios::engine::modules::physics::collision::types;
-using namespace helios::engine::runtime::spawn::commands;
+using namespace helios::runtime::spawn::commands;
 
 
 
@@ -59,7 +59,7 @@ export namespace helios::engine::modules::physics::collision::systems {
          *
          * @param updateContext Context containing frame data and world access.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
             for (auto [entity, csc, active] : updateContext.view<
                THandle,
                CollisionStateComponent<THandle>,

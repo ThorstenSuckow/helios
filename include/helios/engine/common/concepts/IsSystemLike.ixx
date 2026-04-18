@@ -11,7 +11,7 @@ export module helios.engine.common.concepts.IsSystemLike;
 import helios.engine.common.concepts.HasTag;
 import helios.engine.common.tags.SystemRole;
 
-import helios.engine.runtime.world.UpdateContextFwd;
+import helios.runtime.world.UpdateContextFwd;
 
 
 export namespace helios::engine::common::concepts {
@@ -33,7 +33,7 @@ export namespace helios::engine::common::concepts {
      * @see System
      */
     template<class T>
-    concept IsSystemLike = requires(T& t, helios::engine::runtime::world::UpdateContext& updateContext) {
+    concept IsSystemLike = requires(T& t, helios::runtime::world::UpdateContext& updateContext) {
         {t.update(updateContext) } -> std::same_as<void>;
     } && HasTag<T, tags::SystemRole>;
 }

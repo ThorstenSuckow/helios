@@ -12,7 +12,7 @@ export module helios.engine.mechanics.gamestate.rules.DefaultGameStateTransition
 
 import helios.engine.state.Bindings;
 
-import helios.engine.runtime.world.UpdateContext;
+import helios.runtime.world.UpdateContext;
 
 import helios.engine.mechanics.gamestate.types;
 import helios.engine.mechanics.gamestate.rules.guards;
@@ -23,7 +23,7 @@ import helios.rendering.shader.types.ShaderHandle;
 
 using namespace helios::engine::state::types;
 using namespace helios::rendering::shader::types;
-using namespace helios::engine::runtime::world;
+using namespace helios::runtime::world;
 using namespace helios::engine::mechanics::gamestate::rules::guards;
 export namespace helios::engine::mechanics::gamestate::rules {
 

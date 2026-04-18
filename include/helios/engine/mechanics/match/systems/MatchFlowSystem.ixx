@@ -21,16 +21,16 @@ import helios.engine.state.types;
 import helios.engine.mechanics.gamestate.types;
 
 import helios.ecs;
-import helios.engine.runtime;
+import helios.runtime;
 import helios.engine.common.concepts;
 
 using namespace helios::engine::state::commands;
 using namespace helios::engine::state::types;
 using namespace helios::engine::mechanics::gamestate;
 using namespace helios::engine::mechanics::match::types;
-using namespace helios::engine::runtime::world;
+using namespace helios::runtime::world;
 using namespace helios::engine::common::concepts;
-using namespace helios::engine::runtime::messaging::command;
+using namespace helios::runtime::messaging::command;
 
 import helios.engine.common.tags.SystemRole;
 
@@ -60,7 +60,7 @@ export namespace helios::engine::mechanics::match::systems {
          *
          * @param updateContext The current update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
             auto& session = updateContext.session();
 

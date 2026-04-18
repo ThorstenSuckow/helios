@@ -13,7 +13,7 @@ import helios.engine.mechanics.match.types.MatchState;
 import helios.input.types.Gamepad;
 
 import helios.ecs;
-import helios.engine.runtime;
+import helios.runtime;
 
 using namespace helios::input::types;
 
@@ -40,7 +40,7 @@ export namespace helios::engine::mechanics::match::systems {
          *
          * @param updateContext The current update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
         }
 

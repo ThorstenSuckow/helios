@@ -253,7 +253,7 @@ The `SpawnSystemFactory` uses done()-chaining because its configuration has a na
 | `helios.engine.ecs` | GameObject, Component |
 | `helios.engine.modules` | Component implementations |
 | `helios.engine.mechanics` | Gameplay-specific components |
-| `helios.engine.runtime.world` | GameWorld entity management |
+| `helios.runtime.world` | GameWorld entity management |
 
 ## Related Concepts
 

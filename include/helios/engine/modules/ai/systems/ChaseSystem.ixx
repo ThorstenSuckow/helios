@@ -13,9 +13,9 @@ import helios.math;
 
 import helios.core.units.Unit;
 
-import helios.engine.runtime.world.GameObject;
-import helios.engine.runtime.world.GameWorld;
-import helios.engine.runtime.world.UpdateContext;
+import helios.runtime.world.GameObject;
+import helios.runtime.world.GameWorld;
+import helios.runtime.world.UpdateContext;
 
 import helios.engine.modules.ai.components.ChaseComponent;
 import helios.engine.modules.physics.motion.components.SteeringComponent;
@@ -59,7 +59,7 @@ export namespace helios::engine::modules::ai::systems {
          *
          * @param updateContext Context providing delta time and game world access.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto [entity, sc, cc, tsc, active] : updateContext.view<
                 THandle,

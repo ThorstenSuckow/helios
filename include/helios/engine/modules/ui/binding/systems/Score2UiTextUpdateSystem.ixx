@@ -13,8 +13,8 @@ export module helios.engine.modules.ui.binding.systems.Score2UiTextUpdateSystem;
 
 import helios.engine.mechanics.scoring.components;
 
-import helios.engine.runtime.world.GameWorld;
-import helios.engine.runtime.world.UpdateContext;
+import helios.runtime.world.GameWorld;
+import helios.runtime.world.UpdateContext;
 
 
 import helios.engine.modules.ui.widgets.components.UiTextComponent;
@@ -50,7 +50,7 @@ export namespace helios::engine::modules::ui::binding::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto [entity, soc, nfc, txt, active] : updateContext.view<
                 THandle,

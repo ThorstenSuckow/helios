@@ -20,9 +20,9 @@ import helios.engine.mechanics.timing.GameTimer;
 
 import helios.engine.mechanics.timing.types.GameTimerId;
 
-import helios.engine.runtime.world.UpdateContext;
+import helios.runtime.world.UpdateContext;
 
-import helios.engine.runtime.world.GameWorld;
+import helios.runtime.world.GameWorld;
 
 import helios.core.types;
 import helios.util.Guid;
@@ -31,7 +31,7 @@ import helios.engine.common;
 using namespace helios::engine::mechanics::timing::commands;
 using namespace helios::engine::mechanics::timing::types;
 using namespace helios::engine::mechanics::timing::types;
-using namespace helios::engine::runtime::world;
+using namespace helios::runtime::world;
 export namespace helios::engine::mechanics::timing {
 
     /**
@@ -149,7 +149,7 @@ export namespace helios::engine::mechanics::timing {
          * @param updateContext Reference to the current update context.
          */
         void flush(
-            helios::engine::runtime::world::UpdateContext& updateContext
+            helios::runtime::world::UpdateContext& updateContext
         ) noexcept {
 
             for (const auto& controlContext : pendingControlContexts_) {
@@ -182,7 +182,7 @@ export namespace helios::engine::mechanics::timing {
          *
          * @param gameWorld The game world to register with.
          */
-        void init(helios::engine::runtime::world::GameWorld& gameWorld) {
+        void init(helios::runtime::world::GameWorld& gameWorld) {
             gameWorld.template registerCommandHandler<TimerControlCommand>(*this);
         }
 

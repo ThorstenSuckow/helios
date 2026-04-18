@@ -46,8 +46,8 @@ The spawn system integrates with several other modules:
 
 - `helios.engine.mechanics.spawn.logic` - SpawnScheduler, SpawnCondition, SpawnStrategy
 - `helios.engine.mechanics.spawn.commands` - ScheduledSpawnPlanCommand
-- `helios.engine.runtime.spawn` - SpawnManager, SpawnCommandHandler
-- `helios.engine.runtime.pooling` - GameObjectPoolManager
+- `helios.runtime.spawn` - SpawnManager, SpawnCommandHandler
+- `helios.runtime.pooling` - GameObjectPoolManager
 
 ## Usage
 

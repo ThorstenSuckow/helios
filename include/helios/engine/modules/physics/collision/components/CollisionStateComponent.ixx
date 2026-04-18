@@ -15,7 +15,7 @@ import helios.engine.modules.physics.collision.types.CollisionContext;
 
 import helios.ecs.types.EntityHandle;
 
-import helios.engine.runtime.world.GameObject;
+import helios.runtime.world.GameObject;
 import helios.util.Guid;
 import helios.math;
 

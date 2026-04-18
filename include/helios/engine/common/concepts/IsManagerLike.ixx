@@ -11,7 +11,7 @@ export module helios.engine.common.concepts.IsManagerLike;
 import helios.engine.common.concepts.HasTag;
 import helios.engine.common.tags.ManagerRole;
 
-import helios.engine.runtime.world.UpdateContextFwd;
+import helios.runtime.world.UpdateContextFwd;
 
 
 export namespace helios::engine::common::concepts {
@@ -33,7 +33,7 @@ export namespace helios::engine::common::concepts {
      * @see Manager
      */
     template<class T>
-    concept IsManagerLike = requires(T& t, helios::engine::runtime::world::UpdateContext& updateContext) {
+    concept IsManagerLike = requires(T& t, helios::runtime::world::UpdateContext& updateContext) {
         {t.flush(updateContext) } -> std::same_as<void>;
     } && HasTag<T, tags::ManagerRole>;
 }

@@ -10,13 +10,13 @@ module;
 
 export module helios.engine.builder.gameObject.GameObjectFactory;
 
-import helios.engine.runtime.world.GameObject;
+import helios.runtime.world.GameObject;
 
 import helios.engine.builder.gameObject.builders;
 
-import helios.engine.runtime.world.GameWorld;
+import helios.runtime.world.GameWorld;
 
-import helios.engine.runtime.pooling.components.PrefabIdComponent;
+import helios.runtime.pooling.components.PrefabIdComponent;
 
 import helios.engine.modules;
 import helios.engine.mechanics;
@@ -425,7 +425,7 @@ export namespace helios::engine::builder::gameObject {
             }
 
             GameObjectPrototype& withPrefabId(const helios::engine::common::types::PrefabId prefabId) {
-                gameObject_.template add<helios::engine::runtime::pooling::components::PrefabIdComponent<Handle_type>>(prefabId);
+                gameObject_.template add<helios::runtime::pooling::components::PrefabIdComponent<Handle_type>>(prefabId);
                 return *this;
             }
         };

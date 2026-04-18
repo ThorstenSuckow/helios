@@ -8,7 +8,7 @@ export module helios.engine.modules.physics.motion.commands.Move2DCommand;
 
 import helios.ecs;
 
-import helios.engine.runtime.world.UpdateContext;
+import helios.runtime.world.UpdateContext;
 
 
 import helios.math.types;
@@ -28,7 +28,7 @@ export namespace helios::engine::modules::physics::motion::commands {
      * @note The target GameObject must have a Move2DComponent attached for this
      *       command to have any effect.
      *
-     * @see helios::engine::runtime::messaging::command::Command
+     * @see helios::runtime::messaging::command::Command
      * @see helios::engine::modules::physics::motion::components::Move2DComponent
      */
     template<typename THandle>
@@ -69,7 +69,7 @@ export namespace helios::engine::modules::physics::motion::commands {
          *
          * @param gameObject The target entity with a Move2DComponent.
          */
-        void execute(helios::engine::runtime::world::UpdateContext& updateContext) const noexcept {
+        void execute(helios::runtime::world::UpdateContext& updateContext) const noexcept {
 
             auto gameObject = updateContext.find(entityHandle_);
 

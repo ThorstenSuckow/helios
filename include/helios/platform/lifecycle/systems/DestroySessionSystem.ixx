@@ -7,11 +7,11 @@ module;
 export module helios.platform.lifecycle.systems.DestroySessionSystem;
 
 
-import helios.engine.runtime.world.UpdateContext;
-import helios.engine.runtime.world.Session;
+import helios.runtime.world.UpdateContext;
+import helios.runtime.world.Session;
 import helios.engine.common.tags.SystemRole;
 
-using namespace helios::engine::runtime::world;
+using namespace helios::runtime::world;
 
 export namespace helios::platform::lifecycle::systems {
 
@@ -35,7 +35,7 @@ export namespace helios::platform::lifecycle::systems {
          *
          * @param updateContext Frame-local update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
             updateContext.session().destroy();
         }
     };

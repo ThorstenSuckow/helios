@@ -10,12 +10,12 @@ module;
 
 export module helios.engine.builder.spawnSystem.builders.SchedulerBuilder;
 
-import helios.engine.runtime.spawn.types.SpawnProfileId;
-import helios.engine.runtime.spawn.types.SpawnRuleId;
-import helios.engine.runtime.spawn.SpawnManager;
-import helios.engine.runtime.spawn.scheduling.SpawnScheduler;
-import helios.engine.runtime.spawn.scheduling.DefaultSpawnScheduler;
-import helios.engine.runtime.spawn.scheduling.CyclicSpawnScheduler;
+import helios.runtime.spawn.types.SpawnProfileId;
+import helios.runtime.spawn.types.SpawnRuleId;
+import helios.runtime.spawn.SpawnManager;
+import helios.runtime.spawn.scheduling.SpawnScheduler;
+import helios.runtime.spawn.scheduling.DefaultSpawnScheduler;
+import helios.runtime.spawn.scheduling.CyclicSpawnScheduler;
 import helios.engine.builder.spawnSystem.builders.configs;
 
 export namespace helios::engine::builder::spawnSystem::builders {
@@ -32,7 +32,7 @@ export namespace helios::engine::builder::spawnSystem::builders {
         /**
          * @brief The spawn manager to register schedulers with.
          */
-        helios::engine::runtime::spawn::SpawnManager<THandle>& spawnManager_;
+        helios::runtime::spawn::SpawnManager<THandle>& spawnManager_;
 
         /**
          * @brief Adds rules from a parameter pack to a scheduler.
@@ -57,7 +57,7 @@ export namespace helios::engine::builder::spawnSystem::builders {
          * @param spawnManager The spawn manager to register schedulers with.
          */
         explicit SchedulerBuilder(
-            helios::engine::runtime::spawn::SpawnManager<THandle>& spawnManager
+            helios::runtime::spawn::SpawnManager<THandle>& spawnManager
         ) : spawnManager_(spawnManager) {}
 
         /**
@@ -69,7 +69,7 @@ export namespace helios::engine::builder::spawnSystem::builders {
         template<typename... Configs>
         void defaultScheduler(Configs&&... configs) {
             auto scheduler = std::make_unique<
-                helios::engine::runtime::spawn::scheduling::DefaultSpawnScheduler<THandle>>();
+                helios::runtime::spawn::scheduling::DefaultSpawnScheduler<THandle>>();
 
             addRules(*scheduler, std::forward<Configs>(configs)...);
 
@@ -89,7 +89,7 @@ export namespace helios::engine::builder::spawnSystem::builders {
             constexpr std::size_t N = sizeof...(Configs);
 
             auto scheduler = std::make_unique<
-                helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler<THandle, N>>();
+                helios::runtime::spawn::scheduling::CyclicSpawnScheduler<THandle, N>>();
 
             addRules(*scheduler, std::forward<Configs>(configs)...);
 
@@ -102,7 +102,7 @@ export namespace helios::engine::builder::spawnSystem::builders {
          * @param scheduler Ownership is transferred.
          */
         void customScheduler(
-            std::unique_ptr<helios::engine::runtime::spawn::scheduling::SpawnScheduler<THandle>> scheduler
+            std::unique_ptr<helios::runtime::spawn::scheduling::SpawnScheduler<THandle>> scheduler
         ) {
             spawnManager_.addScheduler(std::move(scheduler));
         }

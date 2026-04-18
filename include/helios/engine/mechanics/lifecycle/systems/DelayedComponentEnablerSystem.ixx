@@ -10,8 +10,8 @@ module;
 export module helios.engine.mechanics.lifecycle.systems.DelayedComponentEnablerSystem;
 
 
-import helios.engine.runtime.world.GameWorld;
-import helios.engine.runtime.world.UpdateContext;
+import helios.runtime.world.GameWorld;
+import helios.runtime.world.UpdateContext;
 import helios.engine.mechanics.lifecycle.components.DelayedComponentEnabler;
 import helios.ecs.types.ComponentTypeId;
 
@@ -62,7 +62,7 @@ export namespace helios::engine::mechanics::lifecycle::systems {
          *
          * @param updateContext Provides deltaTime for timer updates.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
             const float delta = updateContext.deltaTime();
 

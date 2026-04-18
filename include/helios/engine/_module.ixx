@@ -7,7 +7,7 @@ export module helios.engine;
 
 export import helios.engine.core;
 export import helios.ecs;
-export import helios.engine.runtime;
+export import helios.runtime;
 export import helios.engine.modules;
 export import helios.engine.mechanics;
 export import helios.engine.tooling;

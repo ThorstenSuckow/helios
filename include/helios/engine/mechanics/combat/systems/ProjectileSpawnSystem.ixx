@@ -12,17 +12,17 @@ export module helios.engine.mechanics.combat.systems.ProjectileSpawnSystem;
 
 import helios.engine.state.Bindings;
 
-import helios.engine.runtime.world.UpdateContext;
-import helios.engine.runtime.world.GameWorld;
-import helios.engine.runtime.messaging.command.NullCommandBuffer;
+import helios.runtime.world.UpdateContext;
+import helios.runtime.world.GameWorld;
+import helios.runtime.messaging.command.NullCommandBuffer;
 import helios.engine.common.concepts.IsCommandBufferLike;
 import helios.engine.mechanics.combat.components.ShootComponent;
 import helios.engine.mechanics.combat.components.Aim2DComponent;
 import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
-import helios.engine.runtime.spawn.commands.SpawnCommand;
-import helios.engine.runtime.spawn.types.SpawnContext;
-import helios.engine.runtime.spawn.types.EmitterContext;
-import helios.engine.runtime.spawn.types.SpawnProfileId;
+import helios.runtime.spawn.commands.SpawnCommand;
+import helios.runtime.spawn.types.SpawnContext;
+import helios.runtime.spawn.types.EmitterContext;
+import helios.runtime.spawn.types.SpawnProfileId;
 
 import helios.math;
 
@@ -30,8 +30,8 @@ import helios.ecs.components.Active;
 
 import helios.engine.common.tags.SystemRole;
 
-using namespace helios::engine::runtime::spawn::types;
-using namespace helios::engine::runtime::messaging::command;
+using namespace helios::runtime::spawn::types;
+using namespace helios::runtime::messaging::command;
 using namespace helios::engine::common::concepts;
 export namespace helios::engine::mechanics::combat::systems {
 
@@ -84,7 +84,7 @@ export namespace helios::engine::mechanics::combat::systems {
          * References a SpawnProfile in the spawn system that defines how
          * projectiles are placed and initialized.
          */
-        const helios::engine::runtime::spawn::types::SpawnProfileId spawnProfileId_;
+        const helios::runtime::spawn::types::SpawnProfileId spawnProfileId_;
 
 
     public:
@@ -97,7 +97,7 @@ export namespace helios::engine::mechanics::combat::systems {
          * @param spawnProfileId The ID of the spawn profile to use for projectiles.
          */
         explicit ProjectileSpawnSystem(
-            const helios::engine::runtime::spawn::types::SpawnProfileId& spawnProfileId
+            const helios::runtime::spawn::types::SpawnProfileId& spawnProfileId
         ) :
             spawnProfileId_(spawnProfileId)
         {}
@@ -117,7 +117,7 @@ export namespace helios::engine::mechanics::combat::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto [entity, tsc, ac, sc, active] : updateContext.view<
                 THandle,
@@ -163,7 +163,7 @@ export namespace helios::engine::mechanics::combat::systems {
 
                 for (unsigned int i = 0; i < amount; i++) {
                     updateContext.queueCommand<TCommandBuffer,
-                        helios::engine::runtime::spawn::commands::SpawnCommand
+                        helios::runtime::spawn::commands::SpawnCommand
                     >(
                         spawnProfileId_,
                         SpawnContext{

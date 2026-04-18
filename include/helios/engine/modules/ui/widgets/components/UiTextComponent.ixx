@@ -17,7 +17,7 @@ import helios.math.types;
 import helios.core.units.Unit;
 
 
-import helios.engine.runtime.world.GameObject;
+import helios.runtime.world.GameObject;
 
 import helios.engine.modules.rendering.renderable.components.RenderableComponent;
 

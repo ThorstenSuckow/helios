@@ -8,16 +8,16 @@ export module helios.platform.environment.systems.PollEventsSystem;
 
 
 
-import helios.engine.runtime.world.UpdateContext;
-import helios.engine.runtime.messaging.command.NullCommandBuffer;
+import helios.runtime.world.UpdateContext;
+import helios.runtime.messaging.command.NullCommandBuffer;
 import helios.engine.common.concepts.IsCommandBufferLike;
 import helios.engine.common.tags.SystemRole;
 
 import helios.platform.environment.commands.PollEventsCommand;
 
 using namespace helios::engine::common::tags;
-using namespace helios::engine::runtime::world;
-using namespace helios::engine::runtime::messaging::command;
+using namespace helios::runtime::world;
+using namespace helios::runtime::messaging::command;
 using namespace helios::engine::common::concepts;
 using namespace helios::platform::environment::commands;
 export namespace helios::platform::environment::systems {

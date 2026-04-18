@@ -15,9 +15,9 @@ import helios.math;
 
 import helios.core.units.Unit;
 
-import helios.engine.runtime.world.GameObject;
-import helios.engine.runtime.world.GameWorld;
-import helios.engine.runtime.world.UpdateContext;
+import helios.runtime.world.GameObject;
+import helios.runtime.world.GameWorld;
+import helios.runtime.world.UpdateContext;
 
 import helios.engine.modules.scene.components.SceneNodeComponent;
 import helios.engine.modules.spatial.transform.components.ScaleStateComponent;
@@ -68,7 +68,7 @@ export namespace helios::engine::modules::physics::collision::systems {
          *
          * @param updateContext Context containing deltaTime and other frame data.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto [entity, mab, sc, tsc, sca, rsc, bc, active] : updateContext.view<
                 THandle,

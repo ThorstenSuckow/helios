@@ -69,7 +69,7 @@ using namespace helios::runtime::world;
 using namespace helios::runtime::world::types;
 using namespace helios::runtime::gameloop;
 using namespace helios::runtime::pooling;
-using namespace helios::runtime::spawn;
+using namespace helios::gameplay::spawn;
 
 // Platform
 using namespace helios::platform::lifecycle;
@@ -99,7 +99,7 @@ using namespace helios::gameplay::combat::systems;
 
 // Mechanics: spawn, bounds, damage, health, input, lifecycle
 using namespace helios::gameplay::spawn::systems;
-using namespace helios::runtime::spawn::types;
+using namespace helios::gameplay::spawn::types;
 using namespace helios::gameplay::bounds::systems;
 using namespace helios::gameplay::damage::systems;
 using namespace helios::gameplay::health::systems;

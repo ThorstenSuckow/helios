@@ -7,7 +7,7 @@ module;
 export module helios.gameplay.spawn.components.EmittedByComponent;
 
 
-import helios.runtime.spawn.types.SpawnProfileId;
+import helios.gameplay.spawn.types.SpawnProfileId;
 import helios.core.types;
 import helios.util;
 

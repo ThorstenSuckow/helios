@@ -15,7 +15,7 @@ export module helios.gameplay.lifecycle.components.DeadTagComponent;
 
 
 import helios.runtime.world.GameObject;
-import helios.runtime.spawn.types.SpawnProfileId;
+import helios.gameplay.spawn.types.SpawnProfileId;
 import helios.ecs.types.ComponentTypeId;
 import helios.core.types;
 

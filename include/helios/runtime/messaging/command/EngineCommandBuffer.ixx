@@ -7,7 +7,7 @@ module;
 export module helios.runtime.messaging.command.EngineCommandBuffer;
 
 
-import helios.runtime.spawn.commands;
+import helios.gameplay.spawn.commands;
 
 import helios.platform.environment.types;
 import helios.platform.environment.commands;
@@ -51,9 +51,9 @@ export namespace helios::runtime::messaging::command {
             helios::gameplay::combat::commands::ShootCommand<GameObjectHandle>,
             helios::gameplay::damage::commands::ApplyDamageCommand<GameObjectHandle>,
 
-            helios::runtime::spawn::commands::ScheduledSpawnPlanCommand<GameObjectHandle>,
-            helios::runtime::spawn::commands::SpawnCommand<GameObjectHandle>,
-            helios::runtime::spawn::commands::DespawnCommand<GameObjectHandle>,
+            helios::gameplay::spawn::commands::ScheduledSpawnPlanCommand<GameObjectHandle>,
+            helios::gameplay::spawn::commands::SpawnCommand<GameObjectHandle>,
+            helios::gameplay::spawn::commands::DespawnCommand<GameObjectHandle>,
 
 
             // window

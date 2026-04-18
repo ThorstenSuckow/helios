@@ -25,7 +25,7 @@ The pooling system follows a layered architecture:
 3. **GameObjectPoolManager**: Integration with GameWorld for prefab cloning and entity lookup
 4. **GameObjectPoolConfig**: Declarative pool configuration
 
-Spawn/despawn request handling has been moved to `helios::runtime::spawn`.
+Spawn/despawn request handling has been moved to `helios::gameplay::spawn`.
 
 ## Usage
 

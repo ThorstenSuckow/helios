@@ -282,7 +282,7 @@ if (!entity) {
 | Module | Purpose |
 |--------|---------|
 | `helios.runtime.pooling` | Pool classes and manager |
-| `helios.runtime.spawn` | Spawn system integration |
+| `helios.gameplay.spawn` | Spawn system integration |
 | `helios.engine.ecs` | EntityHandle, GameObject |
 | `helios.engine.core.data` | EntityId, VersionId, GameObjectPoolId |
 

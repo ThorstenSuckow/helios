@@ -21,7 +21,7 @@ import helios.runtime.world.UpdateContext;
 import helios.runtime.messaging.command.NullCommandBuffer;
 import helios.engine.common.concepts.IsCommandBufferLike;
 
-import helios.runtime.spawn;
+import helios.gameplay.spawn;
 
 import helios.gameplay.health.events;
 import helios.gameplay.health.types;
@@ -42,7 +42,7 @@ using namespace helios::gameplay::matchstate::events;
 using namespace helios::gameplay::health::types;
 using namespace helios::gameplay::health::events;
 using namespace helios::gameplay::spawn::components;
-using namespace helios::runtime::spawn::commands;
+using namespace helios::gameplay::spawn::commands;
 
 import helios.engine.common.tags.SystemRole;
 

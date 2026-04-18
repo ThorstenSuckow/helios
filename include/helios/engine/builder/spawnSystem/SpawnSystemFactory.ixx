@@ -8,7 +8,7 @@ export module helios.engine.builder.spawnSystem.SpawnSystemFactory;
 
 import helios.engine.builder.spawnSystem.builders.configs.SpawnPoolConfig;
 
-import helios.runtime.spawn.SpawnManager;
+import helios.gameplay.spawn.SpawnManager;
 import helios.runtime.pooling.GameObjectPoolManager;
 
 export namespace helios::engine::builder::spawnSystem {
@@ -60,7 +60,7 @@ export namespace helios::engine::builder::spawnSystem {
          */
         static helios::engine::builder::spawnSystem::builders::configs::SpawnSystemConfigurator<THandle> configure(
             helios::runtime::pooling::GameObjectPoolManager<THandle>& poolManager,
-            helios::runtime::spawn::SpawnManager<THandle>& spawnManager
+            helios::gameplay::spawn::SpawnManager<THandle>& spawnManager
         ) {
             return helios::engine::builder::spawnSystem::builders::configs::SpawnSystemConfigurator<THandle>{
                 poolManager, spawnManager

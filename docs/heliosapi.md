@@ -383,7 +383,7 @@ while (running) {
 **Object Pooling:**
 ```cpp
 import helios.runtime.pooling.GameObjectPoolManager;
-import helios.runtime.spawn.SpawnManager;
+import helios.gameplay.spawn.SpawnManager;
 
 // Create pool manager
 auto poolManager = std::make_unique<GameObjectPoolManager>();

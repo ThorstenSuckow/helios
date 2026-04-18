@@ -28,7 +28,7 @@ import helios.engine.modules.physics.collision.types.CollisionBehavior;
 
 import helios.engine.modules.physics.collision.components.CollisionStateComponent;
 
-import helios.runtime.spawn.commands.DespawnCommand;
+import helios.gameplay.spawn.commands.DespawnCommand;
 import helios.engine.modules.physics.collision.events;
 
 import helios.gameplay.spawn.components.SpawnedByProfileComponent;
@@ -37,7 +37,7 @@ import helios.ecs.components.Active;
 
 using namespace helios::engine::modules::physics::collision::components;
 using namespace helios::engine::modules::physics::collision::types;
-using namespace helios::runtime::spawn::commands;
+using namespace helios::gameplay::spawn::commands;
 using namespace helios::runtime::messaging::command;
 using namespace helios::engine::common::concepts;
 

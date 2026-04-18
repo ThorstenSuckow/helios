@@ -38,7 +38,7 @@ import helios.runtime.world.UpdateContext;
 import helios.runtime.messaging.command.NullCommandBuffer;
 import helios.engine.common.concepts.IsCommandBufferLike;
 
-import helios.runtime.spawn.commands.DespawnCommand;
+import helios.gameplay.spawn.commands.DespawnCommand;
 
 import helios.gameplay.spawn.components.SpawnedByProfileComponent;
 
@@ -141,7 +141,7 @@ export namespace helios::gameplay::bounds::systems {
                         auto* sbp = entity.get<helios::gameplay::spawn::components::SpawnedByProfileComponent<THandle>>();
                         assert(sbp && "Unexpected missing SpawnProfile");
 
-                        updateContext.queueCommand<TCommandBuffer, helios::runtime::spawn::commands::DespawnCommand<THandle>>(
+                        updateContext.queueCommand<TCommandBuffer, helios::gameplay::spawn::commands::DespawnCommand<THandle>>(
                             entity.handle(), sbp->spawnProfileId()
                         );
 

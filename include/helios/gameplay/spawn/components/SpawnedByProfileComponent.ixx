@@ -7,7 +7,7 @@ module;
 export module helios.gameplay.spawn.components.SpawnedByProfileComponent;
 
 
-import helios.runtime.spawn.types.SpawnProfileId;
+import helios.gameplay.spawn.types.SpawnProfileId;
 import helios.core.types;
 
 export namespace helios::gameplay::spawn::components {
@@ -48,7 +48,7 @@ export namespace helios::gameplay::spawn::components {
          *
          * Default-initialized to 0, which represents an invalid/unassigned profile.
          */
-        helios::runtime::spawn::types::SpawnProfileId spawnProfileId_{helios::core::types::no_init};
+        helios::gameplay::spawn::types::SpawnProfileId spawnProfileId_{helios::core::types::no_init};
 
         /**
          * @brief Whether this component is enabled.
@@ -102,7 +102,7 @@ export namespace helios::gameplay::spawn::components {
          *
          * @return The SpawnProfileId assigned to this entity.
          */
-        [[nodiscard]] helios::runtime::spawn::types::SpawnProfileId spawnProfileId() const noexcept {
+        [[nodiscard]] helios::gameplay::spawn::types::SpawnProfileId spawnProfileId() const noexcept {
             return spawnProfileId_;
         }
 
@@ -114,7 +114,7 @@ export namespace helios::gameplay::spawn::components {
          *
          * @param spawnProfileId The profile ID to assign.
          */
-        void setSpawnProfileId(const helios::runtime::spawn::types::SpawnProfileId& spawnProfileId) noexcept {
+        void setSpawnProfileId(const helios::gameplay::spawn::types::SpawnProfileId& spawnProfileId) noexcept {
             spawnProfileId_ = spawnProfileId;
         }
 

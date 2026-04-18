@@ -19,10 +19,10 @@ import helios.engine.common.concepts.IsCommandBufferLike;
 import helios.gameplay.combat.components.ShootComponent;
 import helios.gameplay.combat.components.Aim2DComponent;
 import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
-import helios.runtime.spawn.commands.SpawnCommand;
-import helios.runtime.spawn.types.SpawnContext;
-import helios.runtime.spawn.types.EmitterContext;
-import helios.runtime.spawn.types.SpawnProfileId;
+import helios.gameplay.spawn.commands.SpawnCommand;
+import helios.gameplay.spawn.types.SpawnContext;
+import helios.gameplay.spawn.types.EmitterContext;
+import helios.gameplay.spawn.types.SpawnProfileId;
 
 import helios.math;
 
@@ -30,7 +30,7 @@ import helios.ecs.components.Active;
 
 import helios.engine.common.tags.SystemRole;
 
-using namespace helios::runtime::spawn::types;
+using namespace helios::gameplay::spawn::types;
 using namespace helios::runtime::messaging::command;
 using namespace helios::engine::common::concepts;
 export namespace helios::gameplay::combat::systems {
@@ -84,7 +84,7 @@ export namespace helios::gameplay::combat::systems {
          * References a SpawnProfile in the spawn system that defines how
          * projectiles are placed and initialized.
          */
-        const helios::runtime::spawn::types::SpawnProfileId spawnProfileId_;
+        const helios::gameplay::spawn::types::SpawnProfileId spawnProfileId_;
 
 
     public:
@@ -97,7 +97,7 @@ export namespace helios::gameplay::combat::systems {
          * @param spawnProfileId The ID of the spawn profile to use for projectiles.
          */
         explicit ProjectileSpawnSystem(
-            const helios::runtime::spawn::types::SpawnProfileId& spawnProfileId
+            const helios::gameplay::spawn::types::SpawnProfileId& spawnProfileId
         ) :
             spawnProfileId_(spawnProfileId)
         {}
@@ -163,7 +163,7 @@ export namespace helios::gameplay::combat::systems {
 
                 for (unsigned int i = 0; i < amount; i++) {
                     updateContext.queueCommand<TCommandBuffer,
-                        helios::runtime::spawn::commands::SpawnCommand
+                        helios::gameplay::spawn::commands::SpawnCommand
                     >(
                         spawnProfileId_,
                         SpawnContext{

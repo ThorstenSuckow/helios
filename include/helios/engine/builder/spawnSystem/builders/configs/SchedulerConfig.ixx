@@ -8,14 +8,14 @@ module;
 
 export module helios.engine.builder.spawnSystem.builders.configs.SchedulerConfig;
 
-import helios.runtime.spawn.types.SpawnProfileId;
-import helios.runtime.spawn.types.SpawnRuleId;
+import helios.gameplay.spawn.types.SpawnProfileId;
+import helios.gameplay.spawn.types.SpawnRuleId;
 
-import helios.runtime.spawn.policy.SpawnRule;
-import helios.runtime.spawn.policy.SpawnCondition;
-import helios.runtime.spawn.policy.SpawnConditionAll;
-import helios.runtime.spawn.policy.conditions;
-import helios.runtime.spawn.policy.amount;
+import helios.gameplay.spawn.policy.SpawnRule;
+import helios.gameplay.spawn.policy.SpawnCondition;
+import helios.gameplay.spawn.policy.SpawnConditionAll;
+import helios.gameplay.spawn.policy.conditions;
+import helios.gameplay.spawn.policy.amount;
 
 export namespace helios::engine::builder::spawnSystem::builders::configs {
 
@@ -31,22 +31,22 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
         /**
          * @brief Profile this rule is bound to.
          */
-        helios::runtime::spawn::types::SpawnProfileId profileId_;
+        helios::gameplay::spawn::types::SpawnProfileId profileId_;
 
         /**
          * @brief Unique identifier for the rule.
          */
-        helios::runtime::spawn::types::SpawnRuleId ruleId_;
+        helios::gameplay::spawn::types::SpawnRuleId ruleId_;
 
         /**
          * @brief Condition determining when to spawn.
          */
-        std::unique_ptr<const helios::runtime::spawn::policy::SpawnCondition> condition_;
+        std::unique_ptr<const helios::gameplay::spawn::policy::SpawnCondition> condition_;
 
         /**
          * @brief Provider determining how many to spawn.
          */
-        std::unique_ptr<const helios::runtime::spawn::policy::amount::SpawnAmountProvider<THandle>> amountProvider_;
+        std::unique_ptr<const helios::gameplay::spawn::policy::amount::SpawnAmountProvider<THandle>> amountProvider_;
 
     public:
 
@@ -57,8 +57,8 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          * @param ruleId Unique identifier for this rule.
          */
         SchedulerConfig(
-            helios::runtime::spawn::types::SpawnProfileId profileId,
-            helios::runtime::spawn::types::SpawnRuleId ruleId
+            helios::gameplay::spawn::types::SpawnProfileId profileId,
+            helios::gameplay::spawn::types::SpawnRuleId ruleId
         ) : profileId_(profileId), ruleId_(ruleId), condition_(nullptr), amountProvider_(nullptr) {}
 
         /**
@@ -70,7 +70,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          */
         SchedulerConfig& timerCondition(const float intervalSeconds) {
             condition_ = std::make_unique<
-                helios::runtime::spawn::policy::conditions::TimerSpawnCondition>(
+                helios::gameplay::spawn::policy::conditions::TimerSpawnCondition>(
                     intervalSeconds
                 );
             return *this;
@@ -85,9 +85,9 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          */
         SchedulerConfig& timerWithAvailabilityCondition(const float intervalSeconds) {
             condition_ = std::make_unique<
-                helios::runtime::spawn::policy::SpawnConditionAll>(
-                    std::make_unique<helios::runtime::spawn::policy::conditions::TimerSpawnCondition>(intervalSeconds),
-                    std::make_unique<helios::runtime::spawn::policy::conditions::RequestedAmountIsAvailableCondition>()
+                helios::gameplay::spawn::policy::SpawnConditionAll>(
+                    std::make_unique<helios::gameplay::spawn::policy::conditions::TimerSpawnCondition>(intervalSeconds),
+                    std::make_unique<helios::gameplay::spawn::policy::conditions::RequestedAmountIsAvailableCondition>()
                 );
             return *this;
         }
@@ -100,7 +100,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          * @return Reference to this config for chaining.
          */
         SchedulerConfig& condition(
-            std::unique_ptr<const helios::runtime::spawn::policy::SpawnCondition> customCondition
+            std::unique_ptr<const helios::gameplay::spawn::policy::SpawnCondition> customCondition
         ) {
             condition_ = std::move(customCondition);
             return *this;
@@ -115,7 +115,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          */
         SchedulerConfig& fixedAmount(const size_t count) {
             amountProvider_ = std::make_unique<
-                helios::runtime::spawn::policy::amount::FixedSpawnAmount>(count);
+                helios::gameplay::spawn::policy::amount::FixedSpawnAmount>(count);
             return *this;
         }
 
@@ -127,7 +127,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          * @return Reference to this config for chaining.
          */
         SchedulerConfig& amount(
-            std::unique_ptr<const helios::runtime::spawn::policy::amount::SpawnAmountProvider<THandle>> customProvider
+            std::unique_ptr<const helios::gameplay::spawn::policy::amount::SpawnAmountProvider<THandle>> customProvider
         ) {
             amountProvider_ = std::move(customProvider);
             return *this;
@@ -138,7 +138,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          *
          * @return The spawn profile ID.
          */
-        [[nodiscard]] helios::runtime::spawn::types::SpawnProfileId profileId() const noexcept {
+        [[nodiscard]] helios::gameplay::spawn::types::SpawnProfileId profileId() const noexcept {
             return profileId_;
         }
 
@@ -147,8 +147,8 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          *
          * @return The assembled SpawnRule. Ownership is transferred to the caller.
          */
-        [[nodiscard]] std::unique_ptr<helios::runtime::spawn::policy::SpawnRule<THandle>> build() {
-            return std::make_unique<helios::runtime::spawn::policy::SpawnRule<THandle>>(
+        [[nodiscard]] std::unique_ptr<helios::gameplay::spawn::policy::SpawnRule<THandle>> build() {
+            return std::make_unique<helios::gameplay::spawn::policy::SpawnRule<THandle>>(
                 std::move(condition_),
                 std::move(amountProvider_),
                 ruleId_

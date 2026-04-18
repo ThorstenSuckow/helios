@@ -17,10 +17,10 @@ import helios.state.Bindings;
 
 import helios.runtime.world.UpdateContext;
 import helios.runtime.world.GameWorld;
-import helios.runtime.spawn.commands.ScheduledSpawnPlanCommand;
-import helios.runtime.spawn.SpawnManager;
-import helios.runtime.spawn.scheduling.SpawnScheduler;
-import helios.runtime.spawn.events.SpawnPlanCommandExecutedEvent;
+import helios.gameplay.spawn.commands.ScheduledSpawnPlanCommand;
+import helios.gameplay.spawn.SpawnManager;
+import helios.gameplay.spawn.scheduling.SpawnScheduler;
+import helios.gameplay.spawn.events.SpawnPlanCommandExecutedEvent;
 import helios.runtime.messaging.command.NullCommandBuffer;
 import helios.engine.common.concepts.IsCommandBufferLike;
 import helios.engine.common.tags.SystemRole;
@@ -36,7 +36,7 @@ export namespace helios::gameplay::spawn::systems {
     class GameObjectSpawnSystem {
 
 
-        helios::runtime::spawn::SpawnManager<THandle>& spawnManager_;
+        helios::gameplay::spawn::SpawnManager<THandle>& spawnManager_;
 
        GameWorld* gameWorld_ = nullptr;
 
@@ -45,7 +45,7 @@ export namespace helios::gameplay::spawn::systems {
 
         using EngineRoleTag = helios::engine::common::tags::SystemRole;
 
-        explicit GameObjectSpawnSystem(helios::runtime::spawn::SpawnManager<THandle>& spawnManager) noexcept
+        explicit GameObjectSpawnSystem(helios::gameplay::spawn::SpawnManager<THandle>& spawnManager) noexcept
         : spawnManager_{spawnManager} {}
 
 
@@ -67,7 +67,7 @@ export namespace helios::gameplay::spawn::systems {
         void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
             const auto& events = updateContext.readFrame<
-                helios::runtime::spawn::events::SpawnPlanCommandExecutedEvent
+                helios::gameplay::spawn::events::SpawnPlanCommandExecutedEvent
             >();
 
             for (const auto& spawnScheduler : spawnManager_.spawnSchedulers()) {
@@ -87,7 +87,7 @@ export namespace helios::gameplay::spawn::systems {
 
                 for (auto& plan : scheduledPlans) {
                     updateContext.queueCommand<TCommandBuffer,
-                        helios::runtime::spawn::commands::ScheduledSpawnPlanCommand<THandle>
+                        helios::gameplay::spawn::commands::ScheduledSpawnPlanCommand<THandle>
                     >(
                         plan.spawnProfileId, plan.spawnPlan, plan.spawnContext
                     );

@@ -16,7 +16,6 @@ import helios.engine.mechanics.lifecycle.commands.WorldLifecycleCommand;
 import helios.engine.common;
 
 using namespace helios::engine::runtime::world;
-using namespace helios::engine::runtime::messaging::command;
 using namespace helios::engine::mechanics::lifecycle::commands;
 using namespace helios::engine::mechanics::lifecycle::types;
 

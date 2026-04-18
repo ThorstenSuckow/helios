@@ -32,7 +32,6 @@ using namespace helios::engine::mechanics::lifecycle::components;
 using namespace helios::engine::common::types;
 using namespace helios::engine::mechanics::damage::components;
 using namespace helios::engine::mechanics::damage::commands;
-using namespace helios::engine::runtime::messaging::command;
 using namespace helios::engine::runtime::world;
 
 #define HELIOS_LOG_SCOPE "helios::engine::mechanics::health::HealthManager"
@@ -61,6 +60,7 @@ export namespace helios::engine::mechanics::health {
      * @see HealthDepletedEvent
      * @see Manager
      */
+    template<typename THandle>
     class HealthManager {
 
         /**
@@ -72,7 +72,7 @@ export namespace helios::engine::mechanics::health {
         /**
          * @brief Pending damage contexts collected via submit().
          */
-        std::vector<DamageContext> damageContexts_;
+        std::vector<DamageContext<THandle>> damageContexts_;
 
     public:
         using EngineRoleTag = helios::engine::common::tags::ManagerRole;
@@ -143,7 +143,7 @@ export namespace helios::engine::mechanics::health {
          * @return True if the command was accepted.
          */
         bool submit(
-            const ApplyDamageCommand applyDamageCommand
+            const ApplyDamageCommand<THandle> applyDamageCommand
         ) noexcept {
             damageContexts_.push_back(applyDamageCommand.damageContext());
             return true;
@@ -155,7 +155,7 @@ export namespace helios::engine::mechanics::health {
          * @param gameWorld The game world to register with.
          */
         void init(GameWorld& gameWorld) {
-            gameWorld.template registerCommandHandler<ApplyDamageCommand>(*this);
+            gameWorld.template registerCommandHandler<ApplyDamageCommand<THandle>>(*this);
         }
 
         /**

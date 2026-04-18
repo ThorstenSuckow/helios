@@ -32,8 +32,6 @@ using namespace helios::engine::mechanics::timing::commands;
 using namespace helios::engine::mechanics::timing::types;
 using namespace helios::engine::mechanics::timing::types;
 using namespace helios::engine::runtime::world;
-using namespace helios::engine::runtime::messaging::command;
-
 export namespace helios::engine::mechanics::timing {
 
     /**

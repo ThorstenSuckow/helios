@@ -16,7 +16,7 @@ import helios.engine.modules.ui.widgets.types;
 import helios.engine.modules.ui.widgets.types.ActionId;
 
 
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameObject;
 
 import helios.engine.runtime.world.UpdateContext;
 
@@ -24,7 +24,6 @@ import helios.engine.runtime.world.GameWorld;
 
 import helios.engine.common;
 
-using namespace helios::engine::runtime::messaging::command;
 using namespace helios::engine::modules::ui::widgets::types;
 using namespace helios::engine::modules::ui::widgets::commands;
 
@@ -40,15 +39,16 @@ export namespace helios::engine::modules::ui {
      * @see UiActionCommand
      * @see CommandHandlerRegistry
      */
+    template<typename THandle>
     class UiActionCommandManager {
 
         using ActionCallback = std::function<void(
-            helios::engine::runtime::world::UpdateContext& updateContext, const UiActionCommand& command)>;
+            helios::engine::runtime::world::UpdateContext& updateContext, const UiActionCommand<THandle>& command)>;
 
         /**
          * @brief Queue of pending UI action commands.
          */
-        std::vector<UiActionCommand> commands_;
+        std::vector<UiActionCommand<THandle>> commands_;
 
         /**
          * @brief Map from ActionId to their handling callbacks.
@@ -93,7 +93,7 @@ export namespace helios::engine::modules::ui {
          *
          * @return Always returns true.
          */
-        bool submit(UiActionCommand uiActionCommand) noexcept {
+        bool submit(UiActionCommand<THandle> uiActionCommand) noexcept {
 
             commands_.push_back(std::move(uiActionCommand));
 
@@ -124,7 +124,7 @@ export namespace helios::engine::modules::ui {
          * @param gameWorld The game world to register with.
          */
         void init(helios::engine::runtime::world::GameWorld& gameWorld) {
-            gameWorld.registerCommandHandler<UiActionCommand>(*this);
+            gameWorld.registerCommandHandler<UiActionCommand<THandle>>(*this);
         }
 
     };

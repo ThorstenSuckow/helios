@@ -18,7 +18,7 @@ import helios.engine.mechanics.scoring.commands;
 
 import helios.engine.mechanics.scoring.types.ScorePoolId;
 
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameObject;
 import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.runtime.world.GameWorld;
@@ -29,8 +29,6 @@ import helios.util.Guid;
 import helios.engine.common;
 
 using namespace helios::engine::mechanics::scoring::commands;
-using namespace helios::engine::runtime::messaging::command;
-
 export namespace helios::engine::mechanics::scoring {
 
     /**

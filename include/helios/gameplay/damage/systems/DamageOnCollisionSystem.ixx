@@ -16,7 +16,7 @@ import helios.runtime.world.GameObject;
 import helios.runtime.world.UpdateContext;
 import helios.runtime.world.GameWorld;
 import helios.runtime.messaging.command.NullCommandBuffer;
-import helios.engine.common.concepts.IsCommandBufferLike;
+import helios.runtime.messaging.command.concepts.IsCommandBufferLike;
 
 import helios.state.Bindings;
 
@@ -38,7 +38,7 @@ import helios.gameplay.health.events;
 import helios.math;
 import helios.util;
 
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 using namespace helios::gameplay::health::types;
 using namespace helios::gameplay::health::events;
@@ -49,7 +49,7 @@ using namespace helios::gameplay::spawn::components;
 
 using namespace helios::gameplay::common::types;
 using namespace helios::runtime::messaging::command;
-using namespace helios::engine::common::concepts;
+using namespace helios::runtime::concepts;
 
 #define HELIOS_LOG_SCOPE "helios::gameplay::damage::systems::DamageOnCollisionSystem"
 export namespace helios::gameplay::damage::systems {
@@ -73,7 +73,7 @@ export namespace helios::gameplay::damage::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::tags::SystemRole;
 
 
         /**

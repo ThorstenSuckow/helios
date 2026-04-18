@@ -18,7 +18,7 @@ export module helios.physics.collision.systems.CollisionStateResponseSystem;
 import helios.runtime.world.GameWorld;
 import helios.runtime.world.UpdateContext;
 import helios.runtime.messaging.command.NullCommandBuffer;
-import helios.engine.common.concepts.IsCommandBufferLike;
+import helios.runtime.messaging.command.concepts.IsCommandBufferLike;
 
 
 import helios.state.Bindings;
@@ -39,10 +39,10 @@ using namespace helios::physics::collision::components;
 using namespace helios::physics::collision::types;
 using namespace helios::gameplay::spawn::commands;
 using namespace helios::runtime::messaging::command;
-using namespace helios::engine::common::concepts;
+using namespace helios::runtime::concepts;
 
 
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 export namespace helios::physics::collision::systems {
 
@@ -68,7 +68,7 @@ export namespace helios::physics::collision::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::tags::SystemRole;
 
         /**
          * @brief Processes collision states and issues response commands.

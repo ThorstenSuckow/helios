@@ -32,7 +32,7 @@ import helios.runtime.world.Session;
 
 import helios.core.types;
 import helios.util.Guid;
-import helios.engine.common;
+import helios.runtime.world.tags.ManagerRole;
 
 using helios::state::types::StateTransitionIdType;
 using helios::state::types::StateTransitionContext;
@@ -147,7 +147,7 @@ export namespace helios::state {
 
 
     public:
-        using EngineRoleTag = helios::engine::common::tags::ManagerRole;
+        using EngineRoleTag = helios::runtime::tags::ManagerRole;
 
         /**
          * @brief Constructs a state manager with transition rules.

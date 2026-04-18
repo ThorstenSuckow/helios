@@ -22,13 +22,13 @@ import helios.gameplay.spawn.SpawnManager;
 import helios.gameplay.spawn.scheduling.SpawnScheduler;
 import helios.gameplay.spawn.events.SpawnPlanCommandExecutedEvent;
 import helios.runtime.messaging.command.NullCommandBuffer;
-import helios.engine.common.concepts.IsCommandBufferLike;
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.messaging.command.concepts.IsCommandBufferLike;
+import helios.runtime.world.tags.SystemRole;
 
 
 using namespace helios::runtime::world;
 using namespace helios::runtime::messaging::command;
-using namespace helios::engine::common::concepts;
+using namespace helios::runtime::concepts;
 export namespace helios::gameplay::spawn::systems {
 
     template<typename THandle, typename TCommandBuffer = NullCommandBuffer>
@@ -43,7 +43,7 @@ export namespace helios::gameplay::spawn::systems {
     public:
 
 
-        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::tags::SystemRole;
 
         explicit GameObjectSpawnSystem(helios::gameplay::spawn::SpawnManager<THandle>& spawnManager) noexcept
         : spawnManager_{spawnManager} {}

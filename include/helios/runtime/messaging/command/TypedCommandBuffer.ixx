@@ -29,7 +29,7 @@ using namespace helios::state::commands;
 using namespace helios::gameplay::timing;
 using namespace helios::gameplay::timing::types;
 
-import helios.engine.common.tags.CommandBufferRole;
+import helios.runtime.messaging.command.tags.CommandBufferRole;
 export namespace helios::runtime::messaging::command {
 
     /**
@@ -283,7 +283,7 @@ export namespace helios::runtime::messaging::command {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::CommandBufferRole;
+        using EngineRoleTag = helios::runtime::tags::CommandBufferRole;
 
         /**
          * @brief Enqueues a command of the specified type.

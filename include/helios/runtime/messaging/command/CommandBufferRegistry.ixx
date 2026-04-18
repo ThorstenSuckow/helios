@@ -15,7 +15,7 @@ export module helios.runtime.messaging.command.CommandBufferRegistry;
 import helios.core.container;
 import helios.runtime.messaging.command.CommandBuffer;
 import helios.runtime.messaging.command.types;
-import helios.engine.common.concepts;
+import helios.runtime.concepts;
 import helios.runtime.world.types;
 
 using namespace helios::core::container;

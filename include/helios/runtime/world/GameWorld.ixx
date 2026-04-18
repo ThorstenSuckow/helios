@@ -42,12 +42,12 @@ import helios.ecs.EntityManager;
 import helios.ecs.EntityRegistry;
 import helios.ecs.View;
 
-import helios.engine.common.concepts;
+import helios.runtime.concepts;
 
 import helios.runtime.world.EngineWorld;
 
 
-using namespace helios::engine::common::concepts;
+using namespace helios::runtime::concepts;
 using namespace helios::runtime::messaging::command;
 using namespace helios::platform::environment::types;
 using namespace helios::runtime::world::types;

@@ -13,7 +13,7 @@ import helios.runtime.world.UpdateContext;
 
 import helios.gameplay.lifecycle.types;
 import helios.gameplay.lifecycle.commands.WorldLifecycleCommand;
-import helios.engine.common;
+import helios.runtime.world.tags.ManagerRole;
 
 using namespace helios::runtime::world;
 using namespace helios::gameplay::lifecycle::commands;
@@ -51,7 +51,7 @@ export namespace helios::gameplay::lifecycle {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::ManagerRole;
+        using EngineRoleTag = helios::runtime::tags::ManagerRole;
 
         /**
          * @brief Enqueues a lifecycle command for deferred processing.

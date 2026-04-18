@@ -23,15 +23,15 @@ import helios.rendering.commands;
 import helios.runtime.world.GameWorld;
 import helios.runtime.world.UpdateContext;
 import helios.runtime.messaging.command.NullCommandBuffer;
-import helios.engine.common.concepts.IsCommandBufferLike;
+import helios.runtime.messaging.command.concepts.IsCommandBufferLike;
 
 import helios.ecs.components.Active;
 
 import helios.spatial.transform.components.WorldTransformStateComponent;
 
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
-import helios.engine.common.concepts.IsFrustumCullerLike;
+import helios.scene.concepts.IsFrustumCullerLike;
 
 import helios.rendering.commands.RenderCommand;
 
@@ -39,11 +39,12 @@ using namespace helios::ecs::types;
 
 using namespace helios::scene;
 using namespace helios::scene::types;
+using namespace helios::scene::concepts;
 using namespace helios::scene::components;
 using namespace helios::ecs::components;
 using namespace helios::rendering::components;
 using namespace helios::scene::types;
-using namespace helios::engine::common::concepts;
+using namespace helios::runtime::concepts;
 using namespace helios::spatial::transform::components;
 using namespace helios::rendering::commands;
 using namespace helios::runtime::messaging::command;
@@ -64,7 +65,7 @@ export namespace helios::scene::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::tags::SystemRole;
 
 
         void update(helios::runtime::world::UpdateContext& updateContext) noexcept {

@@ -30,7 +30,7 @@ import helios.gameplay.lifecycle.commands.WorldLifecycleCommand;
 import helios.rendering.shader.commands;
 import helios.platform.window.types.WindowHandle;
 import helios.runtime.world.types;
-import helios.engine.common.tags.CommandBufferRole;
+import helios.runtime.messaging.command.tags.CommandBufferRole;
 
 using namespace helios::platform::environment::types;
 using namespace helios::platform::window::types;

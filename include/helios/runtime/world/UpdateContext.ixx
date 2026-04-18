@@ -22,7 +22,7 @@ import helios.ecs.types.EntityHandle;
 
 import helios.ecs.View;
 
-import helios.engine.common.concepts.IsResourceHandle;
+import helios.rendering.concepts.IsRenderResourceHandle;
 
 import helios.runtime.world.EngineWorld;
 

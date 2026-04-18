@@ -22,7 +22,7 @@ import helios.runtime.world.UpdateContext;
 
 import helios.runtime.world.GameWorld;
 
-import helios.engine.common;
+import helios.runtime.world.tags.ManagerRole;
 
 using namespace helios::ui::widgets::types;
 using namespace helios::ui::widgets::commands;
@@ -56,7 +56,7 @@ export namespace helios::ui {
         std::unordered_map<ActionId, ActionCallback> policies_;
 
     public:
-        using EngineRoleTag = helios::engine::common::tags::ManagerRole;
+        using EngineRoleTag = helios::runtime::tags::ManagerRole;
 
         /**
          * @brief Constructs the manager with default capacity.

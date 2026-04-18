@@ -6,9 +6,9 @@ module;
 
 #include <concepts>
 
-export module helios.engine.common.concepts.HasTag;
+export module helios.runtime.concepts.HasTag;
 
-export namespace helios::engine::common::concepts {
+export namespace helios::runtime::concepts {
 
     /**
      * @brief Detects whether T declares a nested `EngineRoleTag` alias equal to Tag.

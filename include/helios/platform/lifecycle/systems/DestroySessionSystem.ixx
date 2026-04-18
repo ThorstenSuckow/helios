@@ -9,7 +9,7 @@ export module helios.platform.lifecycle.systems.DestroySessionSystem;
 
 import helios.runtime.world.UpdateContext;
 import helios.runtime.world.Session;
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 using namespace helios::runtime::world;
 
@@ -28,7 +28,7 @@ export namespace helios::platform::lifecycle::systems {
         /**
          * @brief Engine role marker used by runtime system registries.
          */
-        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::tags::SystemRole;
 
         /**
          * @brief Destroys the active session in the current update context.

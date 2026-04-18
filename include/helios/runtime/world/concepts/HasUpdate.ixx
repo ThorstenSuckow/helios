@@ -6,13 +6,13 @@ module;
 
 #include <concepts>
 
-export module helios.engine.common.concepts.HasUpdate;
+export module helios.runtime.world.concepts.HasUpdate;
 
 import helios.runtime.world.UpdateContextFwd;
 
-export namespace helios::engine::common::concepts {
+export namespace helios::runtime::concepts {
 
-    /**
+    /**a
      * @brief Requires that T provides a `void update(UpdateContext&)` method.
      *
      * @details This is the mandatory interface for concrete system classes.

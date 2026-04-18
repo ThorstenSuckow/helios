@@ -36,7 +36,7 @@ import helios.math;
 
 import helios.util.log;
 
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 import helios.gameplay.lifecycle.components;
 
@@ -395,7 +395,7 @@ export namespace helios::physics::collision::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::tags::SystemRole;
 
         /**
          * @brief Constructs a GridCollisionDetectionSystem with specified bounds and cell size.

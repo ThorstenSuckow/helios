@@ -5,6 +5,8 @@
 export module helios.runtime.messaging.command;
 
 export import helios.runtime.messaging.command.types;
+export import helios.runtime.messaging.command.concepts;
+export import helios.runtime.messaging.command.tags;
 
 export import helios.runtime.messaging.command.EngineCommandBuffer;
 export import helios.runtime.messaging.command.StateCommandBuffer;

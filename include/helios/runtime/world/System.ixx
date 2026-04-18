@@ -13,10 +13,10 @@ export module helios.runtime.world.System;
 import helios.runtime.world.UpdateContext;
 import helios.runtime.world.GameWorld;
 
-import helios.engine.common.concepts;
+import helios.runtime.concepts;
 
 using namespace helios::runtime::world;
-using namespace helios::engine::common::concepts;
+using namespace helios::runtime::concepts;
 
 export namespace helios::runtime::world {
 

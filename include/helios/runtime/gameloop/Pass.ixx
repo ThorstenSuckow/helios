@@ -14,7 +14,7 @@ import helios.runtime.gameloop.CommitPoint;
 
 
 import helios.runtime.world.SystemRegistry;
-import helios.engine.common.concepts;
+import helios.runtime.concepts;
 
 
 import helios.runtime.world.UpdateContext;
@@ -107,7 +107,7 @@ export namespace helios::runtime::gameloop {
          * @return Reference to this Pass for method chaining.
          */
         template<typename T, typename... Args>
-        requires helios::engine::common::concepts::IsSystemLike<T>
+        requires helios::runtime::concepts::IsSystemLike<T>
         Pass& addSystem(Args&&... args) {
             systemRegistry_.template add<T>(
                 std::forward<Args>(args)...

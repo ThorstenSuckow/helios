@@ -26,7 +26,7 @@ import helios.runtime.pooling.GameObjectPool;
 
 import helios.core.types;
 import helios.util.Guid;
-import helios.engine.common;
+import helios.runtime.world.tags.ManagerRole;
 
 using namespace helios::gameplay::scoring::commands;
 export namespace helios::gameplay::scoring {
@@ -61,7 +61,7 @@ export namespace helios::gameplay::scoring {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::ManagerRole;
+        using EngineRoleTag = helios::runtime::tags::ManagerRole;
 
         /**
          * @brief Creates and registers a new score pool.

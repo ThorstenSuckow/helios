@@ -17,7 +17,7 @@ import helios.runtime;
 
 using namespace helios::input::types;
 
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 export namespace helios::gameplay::matchstate::systems {
 
@@ -33,7 +33,7 @@ export namespace helios::gameplay::matchstate::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::tags::SystemRole;
 
         /**
          * @brief Evaluates match rules.

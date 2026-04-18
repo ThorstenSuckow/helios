@@ -10,7 +10,7 @@ import helios.gameplay.gamestate.types;
 
 import helios.state.Bindings;
 
-import helios.engine.common.concepts;
+import helios.runtime.concepts;
 
 import helios.state.commands;
 import helios.state.types.StateTransitionRequest;
@@ -21,10 +21,10 @@ import helios.ecs;
 import helios.runtime.world.UpdateContext;
 import helios.runtime.world.Session;
 
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 using namespace helios::state::commands;
-using namespace helios::engine::common::concepts;
+using namespace helios::runtime::concepts;
 using namespace helios::state::types;
 using namespace helios::gameplay::gamestate;
 using namespace helios::gameplay::gamestate::types;
@@ -59,7 +59,7 @@ export namespace helios::gameplay::gamestate::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::tags::SystemRole;
 
         /**
          * @brief Updates the game flow and emits state transition commands.

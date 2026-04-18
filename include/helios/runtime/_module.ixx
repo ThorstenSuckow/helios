@@ -8,4 +8,4 @@ export import helios.runtime.gameloop;
 export import helios.runtime.world;
 export import helios.runtime.pooling;
 export import helios.runtime.messaging;
-export import helios.gameplay.spawn;
+export import helios.runtime.concepts;

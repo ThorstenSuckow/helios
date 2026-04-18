@@ -6,9 +6,9 @@ module;
 
 #include <concepts>
 
-export module helios.engine.common.concepts.HasSubmit;
+export module helios.runtime.concepts.HasSubmit;
 
-export namespace helios::engine::common::concepts {
+export namespace helios::runtime::concepts {
 
     /**
      * @brief Constrains types that can accept a command via a noexcept submit() method.

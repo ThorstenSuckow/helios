@@ -22,17 +22,17 @@ import helios.gameplay.gamestate.types;
 
 import helios.ecs;
 import helios.runtime;
-import helios.engine.common.concepts;
+import helios.runtime.concepts;
 
 using namespace helios::state::commands;
 using namespace helios::state::types;
 using namespace helios::gameplay::gamestate;
 using namespace helios::gameplay::matchstate::types;
 using namespace helios::runtime::world;
-using namespace helios::engine::common::concepts;
+using namespace helios::runtime::concepts;
 using namespace helios::runtime::messaging::command;
 
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 export namespace helios::gameplay::matchstate::systems {
 
@@ -53,7 +53,7 @@ export namespace helios::gameplay::matchstate::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::tags::SystemRole;
 
         /**
          * @brief Processes match state and issues transition commands.

@@ -25,7 +25,7 @@ import helios.ecs.components.Active;
 
 using namespace helios::gameplay::timing;
 
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 export namespace helios::ui::binding::systems {
 
@@ -50,7 +50,7 @@ export namespace helios::ui::binding::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::tags::SystemRole;
         /**
          * @brief Constructs the system with a reference to the TimerManager.
          *

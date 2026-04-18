@@ -25,7 +25,7 @@ import helios.ecs.components.Active;
 
 using namespace helios::gameplay::scoring;
 
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 export namespace helios::ui::binding::systems {
 
@@ -45,7 +45,7 @@ export namespace helios::ui::binding::systems {
     public:
 
 
-        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::tags::SystemRole;
         /**
          * @brief Updates text components with current high score values.
          *

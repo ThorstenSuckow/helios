@@ -13,9 +13,9 @@ export module helios.runtime.messaging.command.CommandBuffer;
 import helios.runtime.world.GameWorldFwd;
 import helios.runtime.world.UpdateContextFwd;
 
-import helios.engine.common.concepts.IsCommandBufferLike;
+import helios.runtime.messaging.command.concepts.IsCommandBufferLike;
 
-using namespace helios::engine::common::concepts;
+using namespace helios::runtime::concepts;
 
 using namespace helios::runtime::world;
 export namespace helios::runtime::messaging::command {

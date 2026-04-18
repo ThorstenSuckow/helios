@@ -6,6 +6,7 @@ export module helios.runtime.world;
 
 export import helios.runtime.world.types;
 export import helios.runtime.world.concepts;
+export import helios.runtime.world.tags;
 
 
 export import helios.runtime.world.EngineWorld;

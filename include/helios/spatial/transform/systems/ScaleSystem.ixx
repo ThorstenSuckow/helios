@@ -26,12 +26,12 @@ import helios.rendering.model.components.ModelAabbComponent;
 
 import helios.ecs.components.Active;
 
-import helios.engine.common.concepts.IsCommandBufferLike;
+import helios.runtime.messaging.command.concepts.IsCommandBufferLike;
 import helios.ecs.concepts.IsEntityHandle;
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 using namespace helios::runtime::messaging::command;
-using namespace helios::engine::common::concepts;
+using namespace helios::runtime::concepts;
 using namespace helios::ecs::concepts;
 export namespace helios::spatial::transform::systems {
 
@@ -55,7 +55,7 @@ export namespace helios::spatial::transform::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::tags::SystemRole;
         /**
          * @brief Updates scale for all entities with dirty ScaleComponents.
          *

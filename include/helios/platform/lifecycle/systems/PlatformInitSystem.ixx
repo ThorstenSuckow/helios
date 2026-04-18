@@ -10,20 +10,20 @@ export module helios.platform.lifecycle.systems.PlatformInitSystem;
 
 import helios.runtime.world.UpdateContext;
 
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 import helios.runtime.world;
 import helios.runtime.messaging.command.NullCommandBuffer;
-import helios.engine.common.concepts.IsCommandBufferLike;
+import helios.runtime.messaging.command.concepts.IsCommandBufferLike;
 
 import helios.platform.lifecycle.commands;
 
 import helios.ecs.components.Active;
 
-using namespace helios::engine::common::tags;
+using namespace helios::runtime::tags;
 using namespace helios::runtime::world;
 using namespace helios::runtime::messaging::command;
-using namespace helios::engine::common::concepts;
+using namespace helios::runtime::concepts;
 using namespace helios::platform::lifecycle::commands;
 export namespace helios::platform::lifecycle::systems {
 

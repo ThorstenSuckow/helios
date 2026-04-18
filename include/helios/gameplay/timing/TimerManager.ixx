@@ -26,7 +26,7 @@ import helios.runtime.world.GameWorld;
 
 import helios.core.types;
 import helios.util.Guid;
-import helios.engine.common;
+import helios.runtime.world.tags.ManagerRole;
 
 using namespace helios::gameplay::timing::commands;
 using namespace helios::gameplay::timing::types;
@@ -102,7 +102,7 @@ export namespace helios::gameplay::timing {
         }
 
     public:
-        using EngineRoleTag = helios::engine::common::tags::ManagerRole;
+        using EngineRoleTag = helios::runtime::tags::ManagerRole;
 
         /**
          * @brief Registers a new game timer.

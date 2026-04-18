@@ -4,9 +4,9 @@
  */
 module;
 
-export module helios.engine.common.tags.CommandBufferRole;
+export module helios.runtime.messaging.command.tags.CommandBufferRole;
 
-export namespace helios::engine::common::tags {
+export namespace helios::runtime::tags {
 
     /**
      * @brief Compile-time tag identifying a class as a CommandBuffer.

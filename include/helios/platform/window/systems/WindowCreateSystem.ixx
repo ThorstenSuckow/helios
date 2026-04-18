@@ -10,9 +10,9 @@ export module helios.platform.window.systems.WindowCreateSystem;
 
 import helios.runtime.world.UpdateContext;
 import helios.runtime.messaging.command.NullCommandBuffer;
-import helios.engine.common.concepts.IsCommandBufferLike;
+import helios.runtime.messaging.command.concepts.IsCommandBufferLike;
 
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 import helios.platform.window.components.WindowCreateRequestComponent;
 import helios.platform.window.commands.WindowCreateCommand;
@@ -21,10 +21,10 @@ import helios.ecs.components.Active;
 import helios.platform.window.concepts.IsWindowHandle;
 
 using namespace helios::platform::window::concepts;
-using namespace helios::engine::common::tags;
+using namespace helios::runtime::tags;
 using namespace helios::runtime::world;
 using namespace helios::runtime::messaging::command;
-using namespace helios::engine::common::concepts;
+using namespace helios::runtime::concepts;
 using namespace helios::platform::window::components;
 using namespace helios::platform::window::commands;
 using namespace helios::ecs::components;

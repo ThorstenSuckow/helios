@@ -6,9 +6,9 @@ module;
 
 #include <concepts>
 
-export module helios.engine.common.concepts.HasClear;
+export module helios.runtime.concepts.HasClear;
 
-export namespace helios::engine::common::concepts {
+export namespace helios::runtime::concepts {
 
     /**
      * @brief Constrains types that provide a noexcept-less `clear()` method returning void.

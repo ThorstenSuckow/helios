@@ -48,7 +48,7 @@ import helios.physics.collision.components.AabbColliderComponent;
 
 import helios.math;
 
-import helios.engine.common.tags.ManagerRole;
+import helios.runtime.world.tags.ManagerRole;
 
 using namespace helios::gameplay::spawn::commands;
 using namespace helios::gameplay::spawn::types;
@@ -335,7 +335,7 @@ export namespace helios::gameplay::spawn {
 
 
     public:
-        using EngineRoleTag = helios::engine::common::tags::ManagerRole;
+        using EngineRoleTag = helios::runtime::tags::ManagerRole;
 
         /**
          * @brief Default constructor.

@@ -9,13 +9,13 @@ module;
 
 export module helios.runtime.world.Manager;
 
-import helios.engine.common.concepts.IsManagerLike;
+import helios.runtime.world.concepts.IsManagerLike;
 
 import helios.runtime.world.UpdateContextFwd;
 import helios.runtime.world.GameWorldFwd;
 
 
-using namespace helios::engine::common::concepts;
+using namespace helios::runtime::concepts;
 export namespace helios::runtime::world {
 
     /**

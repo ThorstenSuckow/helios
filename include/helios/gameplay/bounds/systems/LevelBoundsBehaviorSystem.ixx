@@ -36,7 +36,7 @@ import helios.ecs.View;
 
 import helios.runtime.world.UpdateContext;
 import helios.runtime.messaging.command.NullCommandBuffer;
-import helios.engine.common.concepts.IsCommandBufferLike;
+import helios.runtime.messaging.command.concepts.IsCommandBufferLike;
 
 import helios.gameplay.spawn.commands.DespawnCommand;
 
@@ -45,10 +45,10 @@ import helios.gameplay.spawn.components.SpawnedByProfileComponent;
 import helios.ecs.components.Active;
 
 
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 using namespace helios::runtime::messaging::command;
-using namespace helios::engine::common::concepts;
+using namespace helios::runtime::concepts;
 export namespace helios::gameplay::bounds::systems {
 
     /**
@@ -82,7 +82,7 @@ export namespace helios::gameplay::bounds::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::tags::SystemRole;
 
         /**
          * @brief Updates all entities that may have left level bounds.

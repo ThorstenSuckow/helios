@@ -11,7 +11,7 @@ import helios.state;
 
 import helios.state.Bindings;
 
-import helios.engine.common.concepts;
+import helios.runtime.concepts;
 
 import helios.gameplay.gamestate.types;
 
@@ -21,12 +21,12 @@ import helios.ecs;
 import helios.runtime;
 
 
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 using namespace helios::input::types;
 using namespace helios::state::types;
 using namespace helios::state::commands;
-using namespace helios::engine::common::concepts;
+using namespace helios::runtime::concepts;
 using namespace helios::gameplay::gamestate::types;
 using namespace helios::runtime::messaging::command;
 export namespace helios::gameplay::gamestate::systems {
@@ -47,7 +47,7 @@ export namespace helios::gameplay::gamestate::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::tags::SystemRole;
 
         /**
          * @brief Processes input and submits state transition commands.

@@ -29,7 +29,7 @@ import helios.gameplay.matchstate.types;
 import helios.rendering.model.components.ModelAabbComponent;
 import helios.math;
 
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 using namespace helios::ui::widgets::types;
 using namespace helios::state;
@@ -119,7 +119,7 @@ export namespace helios::ui::widgets::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::tags::SystemRole;
 
 
         /**

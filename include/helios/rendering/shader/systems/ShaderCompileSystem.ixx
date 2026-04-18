@@ -14,21 +14,21 @@ import helios.runtime.messaging.command.RenderCommandBuffer;
 import helios.runtime.messaging.command.NullCommandBuffer;
 
 import helios.runtime.world.UpdateContext;
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 import helios.rendering.shader.components;
 import helios.rendering.shader.concepts;
 import helios.rendering.shader.commands;
 
-import helios.engine.common.concepts.IsCommandBufferLike;
+import helios.runtime.messaging.command.concepts.IsCommandBufferLike;
 
 import helios.ecs.components;
 
-using namespace helios::engine::common::tags;
+using namespace helios::runtime::tags;
 using namespace helios::runtime::world;
 using namespace helios::runtime::messaging::command;
 using namespace helios::rendering::shader;
-using namespace helios::engine::common::concepts;
+using namespace helios::runtime::concepts;
 using namespace helios::rendering::shader::components;
 using namespace helios::rendering::shader::commands;
 using namespace helios::ecs::components;

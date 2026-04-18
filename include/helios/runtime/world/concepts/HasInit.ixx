@@ -6,11 +6,11 @@ module;
 
 #include <concepts>
 
-export module helios.engine.common.concepts.HasInit;
+export module helios.runtime.world.concepts.HasInit;
 
 import helios.runtime.world.GameWorldFwd;
 
-export namespace helios::engine::common::concepts {
+export namespace helios::runtime::concepts {
 
     /**
      * @brief Detects whether T provides a `void init(GameWorld&)` method.

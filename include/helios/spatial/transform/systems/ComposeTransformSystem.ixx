@@ -23,7 +23,7 @@ import helios.ecs.components.Active;
 
 import helios.math;
 
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 export namespace helios::spatial::transform::systems {
 
@@ -41,7 +41,7 @@ export namespace helios::spatial::transform::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::tags::SystemRole;
 
         /**
          * @brief Updates TransformComponents based on state components.

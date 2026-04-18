@@ -19,7 +19,7 @@ import helios.ecs.ComponentOpsRegistry;
 
 import helios.ecs.components.Active;
 
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 export namespace helios::gameplay::lifecycle::systems {
 
@@ -51,7 +51,7 @@ export namespace helios::gameplay::lifecycle::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::tags::SystemRole;
         /**
          * @brief Processes all deferred components and activates expired ones.
          *

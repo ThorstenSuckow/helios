@@ -6,14 +6,14 @@ module;
 
 #include<concepts>
 
-export module helios.engine.common.concepts.IsFrustumCullerLike;
+export module helios.scene.concepts.IsFrustumCullerLike;
 
 import helios.ecs.types.EntityHandle;
 import helios.scene.types.PerspectiveCameraContext;
 
 using namespace helios::ecs::types;
 using namespace helios::scene::types;
-export namespace helios::engine::common::concepts {
+export namespace helios::scene::concepts {
 
     /**
      * @brief Constrains types that expose the culling API used by scene extraction systems.

@@ -24,7 +24,7 @@ import helios.ui.widgets.commands.UiActionCommand;
 
 import helios.runtime.world;
 import helios.runtime.messaging.command.NullCommandBuffer;
-import helios.engine.common.concepts.IsCommandBufferLike;
+import helios.runtime.messaging.command.concepts.IsCommandBufferLike;
 
 import helios.ecs.components.Active;
 
@@ -44,12 +44,12 @@ using namespace helios::ui::widgets::types;
 using namespace helios::ecs::types;
 using namespace helios::runtime::world;
 using namespace helios::runtime::messaging::command;
-using namespace helios::engine::common::concepts;
+using namespace helios::runtime::concepts;
 using namespace helios::ui::widgets::components;
 using namespace helios::ecs::components;
 using namespace helios::input::gamepad;
 
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 export namespace helios::ui::widgets::systems {
 
@@ -119,7 +119,7 @@ export namespace helios::ui::widgets::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::tags::SystemRole;
 
 
         /**

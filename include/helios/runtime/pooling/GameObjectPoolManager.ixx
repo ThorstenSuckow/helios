@@ -27,7 +27,7 @@ import helios.runtime.pooling.components.PrefabIdComponent;
 
 import helios.ecs.types.EntityHandle;
 import helios.core.types;
-import helios.engine.common.tags;
+import helios.runtime.world.tags;
 
 import helios.runtime.pooling.GameObjectPoolSnapshot;
 
@@ -173,7 +173,7 @@ export namespace helios::runtime::pooling {
         }
         
     public:
-        using EngineRoleTag = helios::engine::common::tags::ManagerRole;
+        using EngineRoleTag = helios::runtime::tags::ManagerRole;
 
         /**
          * @brief Registers a pool configuration for later initialization.

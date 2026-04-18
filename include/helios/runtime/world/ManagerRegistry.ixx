@@ -14,7 +14,7 @@ export module helios.runtime.world.ManagerRegistry;
 
 import helios.core.container;
 import helios.runtime.world.Manager;
-import helios.engine.common.concepts;
+import helios.runtime.concepts;
 import helios.runtime.world.types;
 
 using namespace helios::core::container;

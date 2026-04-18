@@ -6,15 +6,15 @@ module;
 
 #include <concepts>
 
-export module helios.engine.common.concepts.IsSystemLike;
+export module helios.runtime.world.concepts.IsSystemLike;
 
-import helios.engine.common.concepts.HasTag;
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.concepts.HasTag;
+import helios.runtime.world.tags.SystemRole;
 
 import helios.runtime.world.UpdateContextFwd;
 
 
-export namespace helios::engine::common::concepts {
+export namespace helios::runtime::concepts {
 
     /**
      * @brief Constrains T to types that provide `update(UpdateContext&)` and

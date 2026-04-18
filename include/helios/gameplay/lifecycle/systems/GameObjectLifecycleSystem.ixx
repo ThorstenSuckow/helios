@@ -19,7 +19,7 @@ import helios.runtime.world.Manager;
 import helios.runtime.world.GameWorld;
 import helios.runtime.world.UpdateContext;
 import helios.runtime.messaging.command.NullCommandBuffer;
-import helios.engine.common.concepts.IsCommandBufferLike;
+import helios.runtime.messaging.command.concepts.IsCommandBufferLike;
 
 import helios.gameplay.spawn;
 
@@ -35,7 +35,7 @@ import helios.gameplay.spawn.components.SpawnedByProfileComponent;
 
 using namespace helios::runtime::world;
 using namespace helios::runtime::messaging::command;
-using namespace helios::engine::common::concepts;
+using namespace helios::runtime::concepts;
 
 using namespace helios::gameplay::matchstate::components;
 using namespace helios::gameplay::matchstate::events;
@@ -44,7 +44,7 @@ using namespace helios::gameplay::health::events;
 using namespace helios::gameplay::spawn::components;
 using namespace helios::gameplay::spawn::commands;
 
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 export namespace helios::gameplay::lifecycle::systems {
 
@@ -63,7 +63,7 @@ export namespace helios::gameplay::lifecycle::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::tags::SystemRole;
 
         /**
          * @brief Processes health depletion events and enqueues despawn commands.

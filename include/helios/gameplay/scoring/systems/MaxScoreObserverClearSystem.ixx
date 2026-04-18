@@ -21,7 +21,7 @@ import helios.ecs.components.Active;
 
 
 
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 export namespace helios::gameplay::scoring::systems {
 
@@ -42,7 +42,7 @@ export namespace helios::gameplay::scoring::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::tags::SystemRole;
         /**
          * @brief Clears update flags on all active MaxScoreObserverComponents.
          *

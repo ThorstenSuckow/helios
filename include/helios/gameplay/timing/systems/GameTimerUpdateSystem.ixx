@@ -15,9 +15,9 @@ import helios.state.Bindings;
 
 import helios.runtime.world.UpdateContext;
 import helios.runtime.messaging.command.NullCommandBuffer;
-import helios.engine.common.concepts.IsCommandBufferLike;
+import helios.runtime.messaging.command.concepts.IsCommandBufferLike;
 
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 import helios.gameplay.timing.types;
 import helios.gameplay.timing.commands;
@@ -28,7 +28,7 @@ using namespace helios::gameplay::timing::types;
 using namespace helios::gameplay::timing::commands;
 using namespace helios::runtime::world;
 using namespace helios::runtime::messaging::command;
-using namespace helios::engine::common::concepts;
+using namespace helios::runtime::concepts;
 
 export namespace helios::gameplay::timing::systems {
 
@@ -53,7 +53,7 @@ export namespace helios::gameplay::timing::systems {
     public:
 
 
-        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::tags::SystemRole;
 
 
         /**

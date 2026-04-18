@@ -28,7 +28,7 @@ import helios.ecs.components.Active;
 
 import helios.gameplay.lifecycle.components;
 
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 using namespace helios::gameplay::lifecycle::components;
 using namespace helios::ecs::components;
@@ -53,7 +53,7 @@ export namespace helios::gameplay::ai::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::tags::SystemRole;
         /**
          * @brief Updates steering for all chasing entities.
          *

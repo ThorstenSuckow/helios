@@ -15,7 +15,7 @@ import helios.state.Bindings;
 import helios.runtime.world.UpdateContext;
 import helios.runtime.world.GameWorld;
 import helios.runtime.messaging.command.NullCommandBuffer;
-import helios.engine.common.concepts.IsCommandBufferLike;
+import helios.runtime.messaging.command.concepts.IsCommandBufferLike;
 import helios.gameplay.combat.components.ShootComponent;
 import helios.gameplay.combat.components.Aim2DComponent;
 import helios.spatial.transform.components.TranslationStateComponent;
@@ -28,11 +28,11 @@ import helios.math;
 
 import helios.ecs.components.Active;
 
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 using namespace helios::gameplay::spawn::types;
 using namespace helios::runtime::messaging::command;
-using namespace helios::engine::common::concepts;
+using namespace helios::runtime::concepts;
 export namespace helios::gameplay::combat::systems {
 
     /**
@@ -89,7 +89,7 @@ export namespace helios::gameplay::combat::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::tags::SystemRole;
 
         /**
          * @brief Constructs a ProjectileSpawnSystem with the specified spawn profile.

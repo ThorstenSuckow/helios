@@ -19,7 +19,7 @@ export module helios.platform.opengl.OpenGLShaderCompileManager;
 
 import helios.util.log;
 import helios.util.io;
-import helios.engine.common.tags;
+import helios.runtime.world.tags;
 import helios.runtime.world;
 import helios.rendering.shader.commands;
 import helios.rendering.shader.components;
@@ -31,12 +31,12 @@ import helios.platform.opengl.components.OpenGLShaderComponent;
 
 import helios.runtime.world.EngineWorld;
 import helios.runtime.messaging.command.NullCommandBuffer;
-import helios.engine.common.concepts;
+import helios.runtime.concepts;
 
 using namespace helios::runtime::world;
 using namespace helios::util::log;
 using namespace helios::util::io;
-using namespace helios::engine::common::tags;
+using namespace helios::runtime::tags;
 using namespace helios::rendering::shader::commands;
 using namespace helios::rendering::shader::components;
 using namespace helios::rendering::shader;
@@ -44,7 +44,7 @@ using namespace helios::rendering::shader::types;
 using namespace helios::rendering::shader::concepts;
 using namespace helios::rendering::shader::commands;
 using namespace helios::platform::opengl::components;
-using namespace helios::engine::common::concepts;
+using namespace helios::runtime::concepts;
 using namespace helios::runtime::messaging::command;
 #define HELIOS_LOG_SCOPE "helios::platform::opengl::OpenGLShaderCompileManager"
 export namespace helios::platform::opengl {

@@ -21,7 +21,7 @@ import helios.runtime.messaging.command.TypedCommandBuffer;
 
 
 import helios.runtime.world.types;
-import helios.engine.common.tags.CommandBufferRole;
+import helios.runtime.messaging.command.tags.CommandBufferRole;
 
 static_assert(requires {
   typename helios::state::types::StateTransitionId<

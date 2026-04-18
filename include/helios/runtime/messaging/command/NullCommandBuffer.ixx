@@ -6,11 +6,11 @@ module;
 
 export module helios.runtime.messaging.command.NullCommandBuffer;
 
-import helios.engine.common.tags;
+import helios.runtime.messaging.command.tags.CommandBufferRole;
 import helios.runtime.world.GameWorldFwd;
 import helios.runtime.world.UpdateContextFwd;
 
-using namespace helios::engine::common::tags;
+using namespace helios::runtime::tags;
 using namespace helios::runtime::world;
 export namespace helios::runtime::messaging::command {
 
@@ -23,7 +23,7 @@ export namespace helios::runtime::messaging::command {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::CommandBufferRole;
+        using EngineRoleTag = helios::runtime::tags::CommandBufferRole;
 
         template<class T, class... Args>
         void add(Args&&... args) {/*intentionally noop*/}

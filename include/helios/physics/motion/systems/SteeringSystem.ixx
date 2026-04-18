@@ -25,7 +25,7 @@ import helios.runtime.world.UpdateContext;
 
 import helios.ecs.components.Active;
 
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 export namespace helios::physics::motion::systems {
 
@@ -116,7 +116,7 @@ export namespace helios::physics::motion::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::tags::SystemRole;
         /**
          * @brief Updates the heading of entities.
          *

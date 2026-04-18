@@ -23,7 +23,7 @@ import helios.ecs.components.Active;
 import helios.scene.components.SceneNodeComponent;
 import helios.spatial.transform.components.ComposeTransformComponent;
 
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 export namespace helios::scene::systems {
 
@@ -49,7 +49,7 @@ export namespace helios::scene::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::tags::SystemRole;
 
         /**
          * @brief Reference to the scene-to-viewport mapping for scene iteration.

@@ -16,7 +16,6 @@ import helios.rendering.commands;
 import helios.rendering.shader.commands;
 import helios.rendering.shader.types;
 import helios.runtime.world.types;
-import helios.engine.common.tags;
 
 
 using namespace helios::rendering::shader::types;

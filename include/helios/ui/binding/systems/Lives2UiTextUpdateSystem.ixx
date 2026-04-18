@@ -26,7 +26,7 @@ import helios.ecs.components.Active;
 using namespace helios::gameplay::matchstate::components;
 using namespace helios::gameplay::matchstate::types;
 
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 export namespace helios::ui::binding::systems {
 
@@ -43,7 +43,7 @@ export namespace helios::ui::binding::systems {
     public:
 
 
-        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::tags::SystemRole;
         /**
          * @brief Synchronises bound text elements with their target lives values.
          *

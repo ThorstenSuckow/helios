@@ -13,7 +13,7 @@ import helios.math.utils;
 import helios.runtime.world.GameObject;
 import helios.runtime.world.UpdateContext;
 import helios.runtime.messaging.command.NullCommandBuffer;
-import helios.engine.common.concepts.IsCommandBufferLike;
+import helios.runtime.messaging.command.concepts.IsCommandBufferLike;
 
 
 import helios.state.Bindings;
@@ -26,12 +26,12 @@ import helios.physics.motion.commands.SteeringCommand;
 import helios.gameplay.combat.commands.Aim2DCommand;
 import helios.gameplay.combat.commands.ShootCommand;
 
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 
 using namespace helios::gameplay::lifecycle::components;
 using namespace helios::runtime::messaging::command;
-using namespace helios::engine::common::concepts;
+using namespace helios::runtime::concepts;
 export namespace helios::gameplay::input::systems {
 
     /**
@@ -67,7 +67,7 @@ export namespace helios::gameplay::input::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::tags::SystemRole;
 
         /**
          * @brief Constructs a TwinStickInputSystem for the specified GameObject.

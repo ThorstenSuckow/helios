@@ -22,7 +22,7 @@ import helios.gameplay.scoring.types;
 import helios.runtime.world.GameWorld;
 import helios.runtime.world.UpdateContext;
 import helios.runtime.messaging.command.NullCommandBuffer;
-import helios.engine.common.concepts.IsCommandBufferLike;
+import helios.runtime.messaging.command.concepts.IsCommandBufferLike;
 
 import helios.state.Bindings;
 
@@ -46,10 +46,10 @@ using namespace helios::gameplay::health::events;
 using namespace helios::ecs::types;
 using namespace helios::runtime::world;
 using namespace helios::runtime::messaging::command;
-using namespace helios::engine::common::concepts;
+using namespace helios::runtime::concepts;
 
 #define HELIOS_LOG_SCOPE "helios::gameplay::scoring::systems::CombatScoringSystem"
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 export namespace helios::gameplay::scoring::systems {
 
@@ -69,7 +69,7 @@ export namespace helios::gameplay::scoring::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::tags::SystemRole;
 
 
         /**

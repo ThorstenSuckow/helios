@@ -11,11 +11,11 @@ export module helios.platform.lifecycle.systems.WarmupDoneSystem;
 
 import helios.runtime.world.UpdateContext;
 
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 import helios.runtime.messaging.command;
 
-import helios.engine.common.concepts;
+import helios.runtime.concepts;
 
 import helios.runtime.world;
 import helios.ecs.components.Active;
@@ -28,10 +28,10 @@ import helios.state.types;
 import helios.gameplay.gamestate.types;
 
 using namespace helios::rendering::shader::concepts;
-using namespace helios::engine::common::concepts;
+using namespace helios::runtime::concepts;
 using namespace helios::ecs::components;
 using namespace helios::rendering::shader::components;
-using namespace helios::engine::common::tags;
+using namespace helios::runtime::tags;
 using namespace helios::runtime::world;
 using namespace helios::runtime::messaging::command;
 using namespace helios::state::types;

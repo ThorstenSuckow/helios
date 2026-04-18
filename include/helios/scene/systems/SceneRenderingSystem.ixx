@@ -28,7 +28,7 @@ import helios.scene.SceneToViewportMap;
 
 import helios.scene.components.SceneNodeComponent;
 import helios.spatial.transform.components.ComposeTransformComponent;
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 using namespace helios::scene;
 export namespace helios::scene::systems {
@@ -62,7 +62,7 @@ export namespace helios::scene::systems {
 
     public:
 
-        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::tags::SystemRole;
 
         /**
          * @brief Constructs the system with required dependencies.

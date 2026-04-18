@@ -1,51 +1,54 @@
 # helios::engine::runtime::world
 
-World state management, resource registry, and per-frame update context.
+Runtime world coordination, registries, and frame update context.
 
 ## Overview
 
-This module provides the core classes for managing runtime game state. `GameWorld` is the root container owning the entity system, the `ResourceRegistry` for type-indexed O(1) resource access, the current `Level`, and the `Session`. `UpdateContext` provides the per-frame context passed to systems during updates.
+This module provides the runtime root API for orchestration of frame updates.
+`GameWorld` coordinates typed entity domains through `EngineWorld`, owns runtime
+services (`Session`, `RuntimeEnvironment`), and manages typed resource
+registries for managers and command buffers.
+
+`UpdateContext` carries frame-scoped data into systems (timing, input, event
+bus channels, viewport snapshots, level pointer, and typed command submission).
 
 ## Key Classes
 
 | Class | Purpose |
 |-------|---------|
-| `GameWorld` | Central game state container for entities, resources, and the active level |
-| `ResourceRegistry` | Type-indexed store for Managers and CommandBuffers with O(1) lookup |
-| `Session` | Cross-frame state tracking (game/match states, scores) |
-| `Level` | Game level with world bounds and root scene node |
-| `UpdateContext` | Per-frame context with delta time, event buses, and `queueCommand<T>()` |
-| `SystemRegistry` | `ConceptModelRegistry<System, SystemTypeId>` alias for system storage |
-| `ManagerRegistry` | `ConceptModelRegistry<Manager, ResourceTypeId>` alias for manager storage |
-| `Manager` | Type-erased wrapper for deferred operation handlers (Concept/Model pattern) |
+| `GameWorld` | Runtime root coordinating worlds, registries, session, and environment |
+| `EngineWorld` | Handle-routed aggregate world for game-object/platform/render domains |
+| `ResourceRegistry` | Type-indexed storage for managers and command buffers |
+| `UpdateContext` | Per-frame context passed to system updates |
+| `Session` | Runtime session state facade |
+| `RuntimeEnvironment` | Platform/runtime readiness facade |
+| `Level` | Active level payload owned by `GameWorld` |
+
+## Submodules
+
+| Directory | Purpose |
+|-----------|---------|
+| `concepts/` | Runtime-world specific concepts (e.g. game-object handle concept) |
+| `types/` | Runtime-world ids/type-index ids/handle aliases |
 
 ## Usage
 
 ```cpp
-// Create world and register resources
-helios::engine::runtime::world::GameWorld gameWorld;
-auto& poolMgr = gameWorld.registerResource<GameObjectPoolManager>();
-auto& spawnMgr = gameWorld.registerResource<SpawnManager>();
+helios::engine::runtime::world::GameWorld world;
 
-gameWorld.init(); // Initializes all Managers in registration order
+world.registerCommandBuffer<EngineCommandBuffer>();
+world.registerManager<SomeManager>();
+world.init();
 
-// Create entities
-auto player = gameWorld.addGameObject();
-player.add<TransformComponent>(position);
-player.setActive(true);
+auto entity = world.add<helios::engine::runtime::world::types::GameObjectHandle>();
 
-// Query entities via views
-for (auto [entity, transform, active] : gameWorld.view<
-    TransformComponent, Active
->().whereEnabled()) {
-    // Process matching entities
-}
+// In systems: UpdateContext is used for frame-scoped access
+// updateContext.queueCommand<EngineCommandBuffer, SomeCommand>(...);
 ```
 
 ---
 <details>
 <summary>Doxygen</summary><p>
 @namespace helios::engine::runtime::world
-@brief World state management, resource registry, and per-frame update context.
-@details Provides GameWorld as the root game state container, ResourceRegistry for type-indexed O(1) resource access, UpdateContext for frame state, Session for cross-frame state, Level for world bounds, and SystemRegistry for system organization.
+@brief Runtime world coordination, registries, and per-frame update context.
 </p></details>

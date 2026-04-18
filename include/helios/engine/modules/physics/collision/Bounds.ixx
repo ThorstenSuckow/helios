@@ -9,12 +9,6 @@ export module helios.engine.modules.physics.collision.Bounds;
 
 import helios.math;
 
-import helios.core.units.Unit;
-
-import helios.engine.ecs.GameObject;
-import helios.engine.runtime.world.GameWorld;
-import helios.engine.runtime.world.UpdateContext;
-
 import helios.engine.modules.scene.components.SceneNodeComponent;
 import helios.engine.modules.spatial.transform.components.ScaleStateComponent;
 import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
@@ -40,12 +34,13 @@ export namespace helios::engine::modules::physics::collision::Bounds {
      *
      * @return World-space axis-aligned bounding box.
      */
+    template<typename THandle>
     inline helios::math::aabbf computeWorldAabb(
-        const helios::engine::modules::rendering::model::components::ModelAabbComponent& mab,
-        const helios::engine::modules::scene::components::SceneNodeComponent& sc,
-        const helios::engine::modules::spatial::transform::components::TranslationStateComponent& tsc,
-        const helios::engine::modules::spatial::transform::components::ScaleStateComponent& sca,
-        helios::engine::modules::spatial::transform::components::RotationStateComponent& rsc
+        const helios::engine::modules::rendering::model::components::ModelAabbComponent<THandle>& mab,
+        const helios::engine::modules::scene::components::SceneNodeComponent<THandle>& sc,
+        const helios::engine::modules::spatial::transform::components::TranslationStateComponent<THandle>& tsc,
+        const helios::engine::modules::spatial::transform::components::ScaleStateComponent<THandle>& sca,
+        helios::engine::modules::spatial::transform::components::RotationStateComponent<THandle>& rsc
     ) noexcept  {
 
         const helios::math::mat4f& parentTransform = sc.sceneNode()->parent()->worldTransform();

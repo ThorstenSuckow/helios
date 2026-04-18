@@ -17,7 +17,7 @@ Commands are typically issued by game-state listeners or systems when a timer ne
 ```cpp
 auto context = TimerControlContext{TimerState::Running, myTimerId};
 
-updateContext.queueCommand<TimerControlCommand>(std::move(context));
+updateContext.queueCommand<EngineCommandBuffer, TimerControlCommand>(std::move(context));
 ```
 
 

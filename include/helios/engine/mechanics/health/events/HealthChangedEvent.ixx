@@ -13,7 +13,7 @@ import helios.math;
 import helios.engine.mechanics.health.types.HealthChangeContext;
 import helios.core.types;
 
-import helios.engine.ecs.EntityHandle;
+import helios.ecs.types.EntityHandle;
 
 export namespace helios::engine::mechanics::health::events {
 
@@ -23,12 +23,13 @@ export namespace helios::engine::mechanics::health::events {
      * Emitted by the health system whenever an entity's health value
      * changes, allowing observers to react (e.g. UI updates, VFX).
      */
+    template<typename THandle>
     class HealthChangedEvent {
 
         /**
          * @brief Context describing the health change.
          */
-        helios::engine::mechanics::health::types::HealthChangeContext healthChangeContext_;
+        helios::engine::mechanics::health::types::HealthChangeContext<THandle> healthChangeContext_;
 
     public:
 
@@ -38,7 +39,7 @@ export namespace helios::engine::mechanics::health::events {
          * @param HealthChangeContext Context describing the change.
          */
         explicit HealthChangedEvent(
-                const helios::engine::mechanics::health::types::HealthChangeContext& HealthChangeContext
+                const helios::engine::mechanics::health::types::HealthChangeContext<THandle>& HealthChangeContext
         ) : healthChangeContext_(HealthChangeContext) {}
 
         /**
@@ -46,7 +47,7 @@ export namespace helios::engine::mechanics::health::events {
          *
          * @return The HealthChangeContext for this event.
          */
-        [[nodiscard]] helios::engine::mechanics::health::types::HealthChangeContext HealthChangeContext() const noexcept {
+        [[nodiscard]] helios::engine::mechanics::health::types::HealthChangeContext<THandle> HealthChangeContext() const noexcept {
             return healthChangeContext_;
         }
 

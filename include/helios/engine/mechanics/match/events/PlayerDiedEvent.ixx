@@ -6,14 +6,13 @@ module;
 
 export module helios.engine.mechanics.match.events.PlayerDiedEvent;
 
-import helios.engine.ecs;
+import helios.ecs;
 import helios.util.Guid;
 import helios.math;
 import helios.engine.mechanics.health.types.HealthChangeContext;
 import helios.core.types;
-import helios.engine.ecs.EntityHandle;
 
-using namespace helios::engine::ecs;
+using namespace helios::ecs::types;
 
 export namespace helios::engine::mechanics::match::events {
 
@@ -23,12 +22,13 @@ export namespace helios::engine::mechanics::match::events {
      * Consumed by match-rule systems to trigger life loss, game-over
      * transitions, or respawn logic.
      */
+    template<typename THandle>
     class PlayerDiedEvent {
 
         /**
          * @brief Handle of the player entity that died.
          */
-        EntityHandle source_;
+        THandle source_;
 
     public:
 
@@ -37,14 +37,14 @@ export namespace helios::engine::mechanics::match::events {
          *
          * @param source Handle of the deceased player entity.
          */
-        explicit PlayerDiedEvent(const EntityHandle source) : source_(source) {}
+        explicit PlayerDiedEvent(const THandle source) : source_(source) {}
 
         /**
          * @brief Returns the handle of the deceased player entity.
          *
-         * @return The source EntityHandle.
+         * @return The source THandle.
          */
-        [[nodiscard]] EntityHandle source() const noexcept {
+        [[nodiscard]] THandle source() const noexcept {
             return source_;
         }
 

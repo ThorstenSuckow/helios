@@ -13,7 +13,7 @@ import helios.math;
 import helios.engine.common.types.DamageContext;
 import helios.core.types;
 
-import helios.engine.ecs.EntityHandle;
+import helios.ecs.types.EntityHandle;
 
 using namespace helios::engine::common::types;
 
@@ -25,17 +25,18 @@ export namespace helios::engine::mechanics::health::events {
      * Contains the handle of the deceased entity and optionally the
      * attack context if the death was caused by combat damage.
      */
+    template<typename THandle>
     class HealthDepletedEvent {
 
         /**
          * @brief Handle of the entity that died.
          */
-        helios::engine::ecs::EntityHandle source_;
+        THandle source_;
 
         /**
          * @brief Attack context if death was caused by combat.
          */
-        std::optional<DamageContext> damageContext_;
+        std::optional<DamageContext<THandle>> damageContext_;
 
     public:
 
@@ -47,8 +48,8 @@ export namespace helios::engine::mechanics::health::events {
          * @param damageContext Optional damage context if death was from damage applied.
          */
         explicit HealthDepletedEvent(
-            const helios::engine::ecs::EntityHandle source,
-            std::optional<DamageContext> damageContext = std::nullopt
+            const THandle source,
+            std::optional<DamageContext<THandle>> damageContext = std::nullopt
         ) : damageContext_(damageContext), source_(source) {}
 
         /**
@@ -56,7 +57,7 @@ export namespace helios::engine::mechanics::health::events {
          *
          * @return Optional DamageContext, or nullopt if death was not from combat.
          */
-        [[nodiscard]] std::optional<DamageContext> damageContext() const noexcept {
+        [[nodiscard]] std::optional<DamageContext<THandle>> damageContext() const noexcept {
             return damageContext_;
         }
 
@@ -65,7 +66,7 @@ export namespace helios::engine::mechanics::health::events {
          *
          * @return The source entity handle.
          */
-        [[nodiscard]] helios::engine::ecs::EntityHandle source() const noexcept {
+        [[nodiscard]] THandle source() const noexcept {
             return source_;
         }
 

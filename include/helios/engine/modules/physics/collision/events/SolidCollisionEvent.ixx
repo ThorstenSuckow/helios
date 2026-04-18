@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.modules.physics.collision.events.SolidCollisionEvent;
 
-import helios.engine.ecs.EntityHandle;
+import helios.ecs.types.EntityHandle;
 import helios.math;
 import helios.engine.modules.physics.collision.types.CollisionContext;
 import helios.core.types;
@@ -21,17 +21,18 @@ export namespace helios::engine::modules::physics::collision::events {
      * block movement or trigger physics responses. This event is published to the
      * event bus when an entity with PassEvent behavior detects a solid collision.
      */
+    template<typename THandle>
     class SolidCollisionEvent {
 
         /**
          * @brief Context data describing the collision.
          */
-        collision::types::CollisionContext collisionContext_;
+        collision::types::CollisionContext<THandle> collisionContext_;
 
         /**
          * @brief Handle of the entity that reported the collision.
          */
-        helios::engine::ecs::EntityHandle source_;
+        THandle source_;
 
     public:
 
@@ -42,8 +43,8 @@ export namespace helios::engine::modules::physics::collision::events {
          * @param collisionContext Context data describing the collision.
          */
         explicit SolidCollisionEvent(
-            const helios::engine::ecs::EntityHandle source,
-            const collision::types::CollisionContext& collisionContext
+            const THandle source,
+            const collision::types::CollisionContext<THandle>& collisionContext
         ) : collisionContext_(collisionContext), source_(source) {}
 
         /**
@@ -51,7 +52,7 @@ export namespace helios::engine::modules::physics::collision::events {
          *
          * @return Reference to the collision context data.
          */
-        [[nodiscard]] const collision::types::CollisionContext& collisionContext() const noexcept {
+        [[nodiscard]] const collision::types::CollisionContext<THandle>& collisionContext() const noexcept {
             return collisionContext_;
         }
 
@@ -60,7 +61,7 @@ export namespace helios::engine::modules::physics::collision::events {
          *
          * @return Handle of the entity that reported the collision.
          */
-        [[nodiscard]] helios::engine::ecs::EntityHandle source() const noexcept {
+        [[nodiscard]] THandle source() const noexcept {
             return source_;
         }
 

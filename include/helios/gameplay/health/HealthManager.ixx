@@ -12,7 +12,7 @@ import helios.runtime.world.GameWorld;
 import helios.runtime.world.UpdateContext;
 
 import helios.gameplay.damage.commands.ApplyDamageCommand;
-import helios.engine.common.types;
+import helios.gameplay.common.types;
 import helios.gameplay.damage.components.LastDamageComponent;
 
 import helios.gameplay.health.components.HealthComponent;
@@ -29,7 +29,7 @@ using namespace helios::gameplay::health::types;
 using namespace helios::gameplay::health::components;
 using namespace helios::gameplay::health::events;
 using namespace helios::gameplay::lifecycle::components;
-using namespace helios::engine::common::types;
+using namespace helios::gameplay::common::types;
 using namespace helios::gameplay::damage::components;
 using namespace helios::gameplay::damage::commands;
 using namespace helios::runtime::world;

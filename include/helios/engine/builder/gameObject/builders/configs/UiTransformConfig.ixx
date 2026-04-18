@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.builder.gameObject.builders.configs.UiTransformConfig;
 
-import helios.engine.common.types;
+import helios.gameplay.common.types;
 
 import helios.ui;
 

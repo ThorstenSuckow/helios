@@ -1,4 +1,4 @@
-# helios::engine::common::types
+# helios::gameplay::common::types
 
 Shared context structs for entity-to-entity interactions.
 
@@ -30,7 +30,7 @@ information from the collision/combat layer to the health system.
 
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::engine::common::types
+@namespace helios::gameplay::common::types
 @brief Shared context structs for entity-to-entity interactions.
 @details Contains InteractionContext and DamageContext used across combat, health, and scoring subsystems.
 </p></details>

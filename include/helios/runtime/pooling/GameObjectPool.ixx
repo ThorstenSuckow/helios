@@ -21,7 +21,6 @@ export module helios.runtime.pooling.GameObjectPool;
 import helios.util.Guid;
 import helios.ecs.types.EntityHandle;
 import helios.ecs.types;
-import helios.engine.common.types.VersionId;
 
 export namespace helios::runtime::pooling {
 

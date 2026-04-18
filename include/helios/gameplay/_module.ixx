@@ -11,6 +11,7 @@ export module helios.gameplay;
 export import helios.gameplay.ai;
 export import helios.gameplay.effects;
 export import helios.gameplay.bounds;
+export import helios.engine.common;
 export import helios.gameplay.combat;
 export import helios.gameplay.spawn;
 export import helios.gameplay.input;

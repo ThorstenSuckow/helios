@@ -3,12 +3,12 @@
  * @brief Context struct describing a damage interaction between entities.
  */
 
-export module helios.engine.common.types.DamageContext;
+export module helios.gameplay.common.types.DamageContext;
 
-import helios.engine.common.types.InteractionContext;
+import helios.gameplay.common.types.InteractionContext;
 
 
-export namespace helios::engine::common::types {
+export namespace helios::gameplay::common::types {
 
     /**
      * @brief Extends InteractionContext with a damage amount.

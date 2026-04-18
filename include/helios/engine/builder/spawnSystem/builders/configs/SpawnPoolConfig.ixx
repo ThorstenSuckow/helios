@@ -17,7 +17,7 @@ export module helios.engine.builder.spawnSystem.builders.configs.SpawnPoolConfig
 import helios.ecs;
 
 import helios.runtime.pooling.types.GameObjectPoolId;
-import helios.engine.common.types.PrefabId;
+import helios.gameplay.common.types.PrefabId;
 
 import helios.runtime.pooling;
 
@@ -80,7 +80,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
          */
         [[nodiscard]] SpawnPoolConfig<THandle> pool(
             helios::runtime::pooling::types::GameObjectPoolId poolId,
-            helios::engine::common::types::PrefabId prefabId,
+            helios::gameplay::common::types::PrefabId prefabId,
             size_t poolSize
         );
     };
@@ -466,7 +466,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
         /**
          * @brief Identifier of the prefab template for cloning.
          */
-        helios::engine::common::types::PrefabId prefabId_;
+        helios::gameplay::common::types::PrefabId prefabId_;
 
         /**
          * @brief Number of instances to pre-allocate.
@@ -495,7 +495,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
             helios::runtime::pooling::GameObjectPoolManager<THandle>& poolManager,
             helios::gameplay::spawn::SpawnManager<THandle>& spawnManager,
             helios::runtime::pooling::types::GameObjectPoolId poolId,
-            helios::engine::common::types::PrefabId prefabId,
+            helios::gameplay::common::types::PrefabId prefabId,
             size_t poolSize
         ) : poolManager_(poolManager), spawnManager_(spawnManager),
             poolId_(poolId), prefabId_(prefabId), size_(poolSize) {}
@@ -637,7 +637,7 @@ export namespace helios::engine::builder::spawnSystem::builders::configs {
 
     inline SpawnPoolConfig SpawnSystemConfigurator::pool(
         helios::runtime::pooling::types::GameObjectPoolId poolId,
-        helios::engine::common::types::PrefabId prefabId,
+        helios::gameplay::common::types::PrefabId prefabId,
         size_t poolSize
     ) {
         return SpawnPoolConfig{poolManager_, spawnManager_, poolId, prefabId, poolSize};

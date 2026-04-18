@@ -6,10 +6,10 @@ module;
 
 export module helios.gameplay.damage.commands.ApplyDamageCommand;
 
-import helios.engine.common.types;
+import helios.gameplay.common.types;
 
 
-using namespace helios::engine::common::types;
+using namespace helios::gameplay::common::types;
 export namespace helios::gameplay::damage::commands {
 
     /**

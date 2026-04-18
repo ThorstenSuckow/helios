@@ -6,9 +6,9 @@
 export module helios.gameplay.health.types.HealthChangeContext;
 
 
-import helios.engine.common.types.InteractionContext;
+import helios.gameplay.common.types.InteractionContext;
 
-using namespace helios::engine::common::types;
+using namespace helios::gameplay::common::types;
 
 export namespace helios::gameplay::health::types {
 

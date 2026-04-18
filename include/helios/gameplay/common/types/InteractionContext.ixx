@@ -3,7 +3,7 @@
  * @brief Context struct describing a generic entity-to-entity interaction.
  */
 
-export module helios.engine.common.types.InteractionContext;
+export module helios.gameplay.common.types.InteractionContext;
 
 import helios.math;
 
@@ -13,7 +13,7 @@ import helios.core.types;
 
 import helios.ecs.types.EntityHandle;
 
-export namespace helios::engine::common::types {
+export namespace helios::gameplay::common::types {
 
     /**
      * @brief Describes a generic interaction between entities.

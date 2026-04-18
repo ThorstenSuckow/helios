@@ -10,7 +10,7 @@ export module helios.runtime.pooling.GameObjectPoolConfig;
 
 import helios.runtime.world.GameObject;
 import helios.runtime.pooling.types.GameObjectPoolId;
-import helios.engine.common.types.PrefabId;
+import helios.gameplay.common.types.PrefabId;
 
 export namespace helios::runtime::pooling {
 
@@ -66,7 +66,7 @@ export namespace helios::runtime::pooling {
          * PrefabIdComponent. The pool system resolves this ID to the
          * actual entity at initialization time.
          */
-        const helios::engine::common::types::PrefabId prefabId;
+        const helios::gameplay::common::types::PrefabId prefabId;
 
         /**
          * @brief Initial number of objects to pre-allocate in the pool.

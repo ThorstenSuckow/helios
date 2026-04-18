@@ -18,7 +18,7 @@ This module provides access to the complete helios engine functionality, includi
 | `helios.gameplay` | Gameplay mechanics (bounds, combat, spawn, input) |
 | `helios.state` | State bindings and transition types |
 | `helios.engine.builder` | Builder utilities for entity construction |
-| `helios.engine.common` | Shared tags and common types |
+| `helios.gameplay.common` | Shared tags and common types |
 | `helios.tooling` | Frame pacing and performance metrics |
 
 ## Architecture

@@ -27,6 +27,7 @@ export import helios.spatial;
 export import helios.gameplay;
 export import helios.runtime;
 export import helios.platform;
+export import helios.tooling;
 
 export import helios.bootstrap;
 

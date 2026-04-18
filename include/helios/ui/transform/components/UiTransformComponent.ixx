@@ -13,7 +13,7 @@ export module helios.ui.transform.components.UiTransformComponent;
 import helios.ui.layout.Anchor;
 
 import helios.ecs.types.ComponentTypeId;
-import helios.engine.common.types;
+import helios.gameplay.common.types;
 
 import helios.math;
 

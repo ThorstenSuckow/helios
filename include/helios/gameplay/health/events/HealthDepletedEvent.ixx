@@ -10,12 +10,12 @@ export module helios.gameplay.health.events.HealthDepletedEvent;
 
 import helios.util.Guid;
 import helios.math;
-import helios.engine.common.types.DamageContext;
+import helios.gameplay.common.types.DamageContext;
 import helios.core.types;
 
 import helios.ecs.types.EntityHandle;
 
-using namespace helios::engine::common::types;
+using namespace helios::gameplay::common::types;
 
 export namespace helios::gameplay::health::events {
 

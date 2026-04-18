@@ -7,13 +7,13 @@ module;
 #include <cstdint>
 #include <string_view>
 
-export module helios.engine.common.types.PrefabId;
+export module helios.gameplay.common.types.PrefabId;
 
 import helios.core.types.FuncDefs;
 import helios.core.types;
 import helios.core.types.StrongId;
 
-export namespace helios::engine::common::types {
+export namespace helios::gameplay::common::types {
 
     /**
      * @brief Tag type for PrefabId.

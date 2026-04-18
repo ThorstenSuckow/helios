@@ -24,7 +24,7 @@ import helios.state.Bindings;
 import helios.physics.collision.events.SolidCollisionEvent;
 
 import helios.gameplay.damage.components.DamageDealerComponent;
-import helios.engine.common.types;
+import helios.gameplay.common.types;
 
 import helios.gameplay.spawn.components.EmittedByComponent;
 
@@ -47,7 +47,7 @@ using namespace helios::gameplay::damage::components;
 using namespace helios::gameplay::damage::commands;
 using namespace helios::gameplay::spawn::components;
 
-using namespace helios::engine::common::types;
+using namespace helios::gameplay::common::types;
 using namespace helios::runtime::messaging::command;
 using namespace helios::engine::common::concepts;
 

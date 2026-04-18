@@ -8,9 +8,9 @@ export module helios.gameplay.damage.components.LastDamageComponent;
 
 
 
-import helios.engine.common.types.DamageContext;
+import helios.gameplay.common.types.DamageContext;
 
-using namespace helios::engine::common::types;
+using namespace helios::gameplay::common::types;
 
 export namespace helios::gameplay::damage::components {
 
@@ -29,7 +29,7 @@ export namespace helios::gameplay::damage::components {
         /**
          * @brief Context of the most recent damage received.
          */
-        helios::engine::common::types::DamageContext<THandle> damageContext_{};
+        helios::gameplay::common::types::DamageContext<THandle> damageContext_{};
 
         /**
          * @brief Whether this component is enabled.

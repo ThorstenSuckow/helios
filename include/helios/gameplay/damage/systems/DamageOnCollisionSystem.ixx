@@ -18,7 +18,7 @@ import helios.runtime.world.GameWorld;
 import helios.runtime.messaging.command.NullCommandBuffer;
 import helios.engine.common.concepts.IsCommandBufferLike;
 
-import helios.engine.state.Bindings;
+import helios.state.Bindings;
 
 
 import helios.engine.modules.physics.collision.events.SolidCollisionEvent;

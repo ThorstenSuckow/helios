@@ -8,24 +8,24 @@ export module helios.gameplay.matchstate.systems.MatchFlowSystem;
 
 import helios.gameplay.matchstate.types;
 
-import helios.engine.state.Bindings;
+import helios.state.Bindings;
 
 
 import helios.gameplay.matchstate.types.MatchState;
 import helios.gameplay.matchstate.types.MatchStateTransitionId;
 
-import helios.engine.state.commands;
-import helios.engine.state.types.StateTransitionRequest;
+import helios.state.commands;
+import helios.state.types.StateTransitionRequest;
 
-import helios.engine.state.types;
+import helios.state.types;
 import helios.gameplay.gamestate.types;
 
 import helios.ecs;
 import helios.runtime;
 import helios.engine.common.concepts;
 
-using namespace helios::engine::state::commands;
-using namespace helios::engine::state::types;
+using namespace helios::state::commands;
+using namespace helios::state::types;
 using namespace helios::gameplay::gamestate;
 using namespace helios::gameplay::matchstate::types;
 using namespace helios::runtime::world;

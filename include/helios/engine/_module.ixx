@@ -12,7 +12,7 @@ export import helios.engine.modules;
 export import helios.gameplay;
 export import helios.engine.tooling;
 export import helios.engine.builder;
-export import helios.engine.state;
+export import helios.state;
 export import helios.engine.common;
 export import helios.platform;
 

@@ -10,25 +10,25 @@ module;
 export module helios.gameplay.gamestate.rules.DefaultGameStateTransitionRules;
 
 
-import helios.engine.state.Bindings;
+import helios.state.Bindings;
 
 import helios.runtime.world.UpdateContext;
 
 import helios.gameplay.gamestate.types;
 import helios.gameplay.gamestate.rules.guards;
 
-import helios.engine.state.types.StateTransitionRule;
-import helios.engine.state.types.StateTransitionId;
+import helios.state.types.StateTransitionRule;
+import helios.state.types.StateTransitionId;
 import helios.rendering.shader.types.ShaderHandle;
 
-using namespace helios::engine::state::types;
+using namespace helios::state::types;
 using namespace helios::rendering::shader::types;
 using namespace helios::runtime::world;
 using namespace helios::gameplay::gamestate::rules::guards;
 export namespace helios::gameplay::gamestate::rules {
 
     using namespace helios::gameplay::gamestate::types;
-    using namespace helios::engine::state::types;
+    using namespace helios::state::types;
 
     /**
      * @brief Provides the default set of game state transition rules.

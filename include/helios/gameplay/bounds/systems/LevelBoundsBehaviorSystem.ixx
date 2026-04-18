@@ -12,7 +12,7 @@ export module helios.gameplay.bounds.systems.LevelBoundsBehaviorSystem;
 
 import helios.math;
 
-import helios.engine.state.Bindings;
+import helios.state.Bindings;
 
 
 import helios.engine.modules.physics.collision.types.CollisionBehavior;

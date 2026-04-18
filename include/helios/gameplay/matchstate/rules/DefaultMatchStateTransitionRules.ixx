@@ -9,12 +9,12 @@ module;
 export module helios.gameplay.matchstate.rules.DefaultMatchStateTransitionRules;
 
 
-import helios.engine.state.Bindings;
-import helios.engine.state.types;
+import helios.state.Bindings;
+import helios.state.types;
 import helios.gameplay.matchstate.types;
 import helios.gameplay.matchstate.rules.guards;
 
-using namespace helios::engine::state::types;
+using namespace helios::state::types;
 using namespace helios::gameplay::matchstate::types;
 using namespace helios::gameplay::matchstate::rules::guards;
 

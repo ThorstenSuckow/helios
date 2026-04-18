@@ -13,13 +13,13 @@ export module helios.engine.modules.rendering.viewport.systems.StateToViewportPo
 import helios.runtime.world.GameWorld;
 import helios.runtime.world.Session;
 
-import helios.engine.state.StateToIdMapPair;
+import helios.state.StateToIdMapPair;
 
 import helios.runtime.world.UpdateContext;
 import helios.rendering.viewport.types.ViewportHandle;
 import helios.engine.common.tags.SystemRole;
 
-using namespace helios::engine::state;
+using namespace helios::state;
 using namespace helios::rendering::viewport::types;
 export namespace helios::engine::modules::rendering::viewport::systems {
 

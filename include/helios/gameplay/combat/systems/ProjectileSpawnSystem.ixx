@@ -10,7 +10,7 @@ export module helios.gameplay.combat.systems.ProjectileSpawnSystem;
 
 
 
-import helios.engine.state.Bindings;
+import helios.state.Bindings;
 
 import helios.runtime.world.UpdateContext;
 import helios.runtime.world.GameWorld;

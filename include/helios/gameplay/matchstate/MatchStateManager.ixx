@@ -11,7 +11,7 @@ module;
 export module helios.gameplay.matchstate.MatchStateManager;
 
 import helios.gameplay.matchstate.types;
-import helios.engine.state;
+import helios.state;
 
 
 
@@ -25,9 +25,9 @@ export namespace helios::gameplay::matchstate {
      * @details Instantiation of the generic StateManager template for
      * MatchState. Manages match/round lifecycle states (Warmup, PlayerSpawn, Playing).
      *
-     * @see helios::engine::state::StateManager
+     * @see helios::state::StateManager
      * @see types::MatchState
      */
-    using MatchStateManager = helios::engine::state::StateManager<helios::gameplay::matchstate::types::MatchState>;
+    using MatchStateManager = helios::state::StateManager<helios::gameplay::matchstate::types::MatchState>;
 
 }

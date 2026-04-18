@@ -55,8 +55,8 @@ using namespace helios::ecs::types;
 // Engine core
 using namespace helios::engine::bootstrap;
 using namespace helios::engine::common::types;
-using namespace helios::engine::state;
-using namespace helios::engine::state::types;
+using namespace helios::state;
+using namespace helios::state::types;
 using namespace helios::engine::tooling;
 
 

@@ -12,15 +12,15 @@ import helios.runtime.world.UpdateContext;
 import helios.runtime.world.Session;
 import helios.runtime.world.GameWorld;
 
-import helios.engine.state.Bindings;
+import helios.state.Bindings;
 
 import helios.gameplay.gamestate.types;
-import helios.engine.state.types;
+import helios.state.types;
 
 import helios.rendering.shader.components;
 
 using namespace helios::gameplay::gamestate::types;
-using namespace helios::engine::state::types;
+using namespace helios::state::types;
 using namespace helios::rendering::shader::components;
 export namespace helios::gameplay::gamestate::rules::guards {
 

@@ -16,7 +16,7 @@ import helios.runtime.messaging.command.NullCommandBuffer;
 import helios.engine.common.concepts.IsCommandBufferLike;
 
 
-import helios.engine.state.Bindings;
+import helios.state.Bindings;
 
 
 import helios.gameplay.lifecycle.components.DeadTagComponent;

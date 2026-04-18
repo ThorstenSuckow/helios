@@ -28,7 +28,7 @@ import helios.engine.common.concepts.IsCommandBufferLike;
 
 import helios.ecs.components.Active;
 
-import helios.engine.state.Bindings;
+import helios.state.Bindings;
 
 
 import helios.input.types.Gamepad;

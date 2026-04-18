@@ -25,7 +25,7 @@ import helios.platform.lifecycle.commands;
 import helios.platform.environment.components;
 import helios.platform.environment.concepts;
 
-import helios.engine.state.Bindings;
+import helios.state.Bindings;
 import helios.gameplay.gamestate.types;
 
 using namespace helios::engine::common::tags;

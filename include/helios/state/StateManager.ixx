@@ -1,0 +1,277 @@
+/**
+ * @file StateManager.ixx
+ * @brief Generic state manager and transition orchestrator.
+ */
+module;
+
+#include <memory>
+#include <span>
+#include <vector>
+
+
+export module helios.state.StateManager;
+
+
+import helios.state.TypedStateCommandHandler;
+import helios.state.StateTransitionListener;
+import helios.state.types.StateTransitionRule;
+
+import helios.state.components;
+import helios.state.commands;
+import helios.state.types;
+
+import helios.runtime.world.GameObject;
+
+
+import helios.runtime.world.UpdateContext;
+
+import helios.runtime.world.GameWorld;
+import helios.runtime.world.Session;
+
+import helios.runtime.world.Session;
+
+import helios.core.types;
+import helios.util.Guid;
+import helios.engine.common;
+
+using helios::state::types::StateTransitionIdType;
+using helios::state::types::StateTransitionContext;
+using helios::state::types::StateTransitionRule;
+using helios::state::commands::StateCommand;
+using helios::state::commands::DelayedStateCommand;
+
+export namespace helios::state {
+
+
+    /**
+     * @brief Manages state transitions using a rule-based system.
+     *
+     * @details Implements both Manager and TypedStateCommandHandler interfaces.
+     * Processes state transition commands by matching against registered rules,
+     * executing guards, and notifying listeners.
+     *
+     * ## Transition Flow
+     *
+     * 1. Commands are submitted via submit() and queued
+     * 2. During flush(), the last pending command is processed
+     * 3. Rules are checked to find a matching transition
+     * 4. If a guard is present, it must return true
+     * 5. Listeners are notified: onStateExit -> onStateTransition
+     * 6. Session state is updated via StateComponent
+     * 7. Listeners are notified: onStateEnter (session already reflects new state)
+     *
+     * @tparam StateType The state enum type.
+     *
+     * @see StateTransitionRule
+     * @see StateTransitionListener
+     * @see StateCommand
+     */
+    template <typename StateType>
+    class StateManager {
+
+        /**
+         * @brief Queue of pending state commands.
+         */
+        std::vector<StateCommand<StateType>> pending_;
+
+        /**
+         * @brief Registered transition listeners.
+         */
+        std::vector<std::unique_ptr<StateTransitionListener<StateType>>> listeners_;
+
+        /**
+         * @brief Transition rules defining valid state changes.
+         */
+        std::vector<StateTransitionRule<StateType>> rules_;
+
+        /**
+         * @brief Notifies listeners of state exit.
+         *
+         * @param from The state being exited.
+         * @param to The target state.
+         * @param transitionId The transition identifier.
+         * @param updateContext The current frame's update context.
+         */
+        void signalExit(
+            const StateType from,
+            const StateType to,
+            const StateTransitionIdType<StateType> transitionId,
+            helios::runtime::world::UpdateContext& updateContext)  {
+
+            for (auto& listener : listeners_) {
+                listener->onStateExit(updateContext, from);
+            }
+        }
+
+        /**
+         * @brief Notifies listeners of the transition.
+         *
+         * @param from The source state.
+         * @param to The target state.
+         * @param transitionId The transition identifier.
+         * @param updateContext The current frame's update context.
+         */
+        void signalTransition(
+           const StateType from,
+           const StateType to,
+           const StateTransitionIdType<StateType> transitionId,
+           helios::runtime::world::UpdateContext& updateContext)  {
+
+            for (auto& listener : listeners_) {
+                listener->onStateTransition(
+                    updateContext,
+                    StateTransitionContext<StateType>{from, to, transitionId}
+                );
+            }
+        }
+
+        /**
+         * @brief Notifies listeners of state entry.
+         *
+         * @param from The source state.
+         * @param to The state being entered.
+         * @param transitionId The transition identifier.
+         * @param updateContext The current frame's update context.
+         */
+        void signalEnter(
+           const StateType from,
+           const StateType to,
+           const StateTransitionIdType<StateType> transitionId,
+           helios::runtime::world::UpdateContext& updateContext)  {
+
+            for (auto& listener : listeners_) {
+                listener->onStateEnter(updateContext, to);
+
+            }
+        }
+
+
+    public:
+        using EngineRoleTag = helios::engine::common::tags::ManagerRole;
+
+        /**
+         * @brief Constructs a state manager with transition rules.
+         *
+         * @param rules Span of valid transition rules.
+         */
+        explicit StateManager(std::span<const StateTransitionRule<StateType>> rules)
+        : rules_(rules.begin(), rules.end()) {}
+
+        /**
+         * @brief Registers a state transition listener.
+         *
+         * @param listener The listener to add.
+         *
+         * @return Reference to this manager for chaining.
+         */
+        StateManager& addStateListener(std::unique_ptr<StateTransitionListener<StateType>> listener) noexcept {
+            listeners_.push_back(std::move(listener));
+            return *this;
+        }
+
+        /**
+         * @brief Processes pending state commands.
+         *
+         * @details Processes the last pending command, finds matching rules,
+         * executes guards, and triggers the transition if valid.
+         *
+         * @param updateContext The current frame's update context.
+         */
+        void flush(
+            helios::runtime::world::UpdateContext& updateContext
+        ) noexcept {
+
+            if (pending_.empty()) {
+                return;
+            }
+
+            auto command = pending_.back();
+
+            auto transitionRequest = command.transitionRequest();
+
+            auto& session = updateContext.session();
+            auto currentFrom = session.state<StateType>();
+            auto from = transitionRequest.from();
+            auto transitionId = transitionRequest.transitionId();
+
+
+            if (currentFrom != from) {
+                pending_.clear();
+                return;
+            }
+
+
+            for (auto& rule : rules_) {
+                if (rule.from() == from && rule.transitionId() == transitionId) {
+
+                    if (rule.guard()) {
+                        if (!rule.guard()(updateContext, transitionRequest)) {
+                            break;
+                        }
+                    }
+
+                    signalExit(from, rule.to(), transitionId, updateContext);
+                    signalTransition(from, rule.to(), transitionId, updateContext);
+                    session.setStateFrom<StateType>(StateTransitionContext<StateType>{rule.from(), rule.to(), transitionId});
+                    signalEnter(from, rule.to(), transitionId, updateContext);
+                }
+            }
+
+            pending_.clear();
+        }
+
+        /**
+         * @brief Submits a state command for processing.
+         *
+         * @param stateCommand The command to queue.
+         *
+         * @return True (always accepts commands).
+         */
+        bool submit(
+            const StateCommand<StateType> stateCommand
+        ) noexcept {
+            pending_.push_back(stateCommand);
+            return true;
+        };
+
+        /**
+         * @brief Submits a delayed state command for processing.
+         *
+         * @details Extracts the transition request from the delayed command
+         * and queues it as a regular StateCommand. The timer ID is not
+         * retained by the manager.
+         * The delayed command is guaranteed to be ready for processing when
+         * submitted here.
+         *
+         * @param stateCommand The delayed command to queue.
+         *
+         * @return True (always accepts commands).
+         */
+        bool submit(
+            const DelayedStateCommand<StateType> stateCommand
+        ) noexcept {
+            pending_.push_back(StateCommand<StateType>(stateCommand.transitionRequest()));
+            return true;
+        };
+
+        /**
+         * @brief Initializes the manager and registers with GameWorld.
+         *
+         * @param gameWorld The game world to register with.
+         */
+        void init(helios::runtime::world::GameWorld& gameWorld) {
+            gameWorld.registerCommandHandler<StateCommand<StateType>>(*this);
+            gameWorld.registerCommandHandler<DelayedStateCommand<StateType>>(*this);
+        }
+
+        /**
+         * @brief Clears all pending commands.
+         */
+        void reset() {
+            // intentionally left empty. Clearing the pending queue would also mean
+            // that any pending state transisions **required by the reset** are nuked.
+        }
+
+    };
+
+}

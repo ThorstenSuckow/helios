@@ -23,8 +23,8 @@ import helios.rendering.shader.concepts;
 
 import helios.rendering.shader.components;
 
-import helios.engine.state.commands;
-import helios.engine.state.types;
+import helios.state.commands;
+import helios.state.types;
 import helios.gameplay.gamestate.types;
 
 using namespace helios::rendering::shader::concepts;
@@ -34,8 +34,8 @@ using namespace helios::rendering::shader::components;
 using namespace helios::engine::common::tags;
 using namespace helios::runtime::world;
 using namespace helios::runtime::messaging::command;
-using namespace helios::engine::state::types;
-using namespace helios::engine::state::commands;
+using namespace helios::state::types;
+using namespace helios::state::commands;
 using namespace helios::gameplay::gamestate::types;
 export namespace helios::platform::lifecycle::systems {
 

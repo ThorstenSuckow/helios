@@ -12,7 +12,7 @@ export module helios.gameplay.spawn.systems.GameObjectSpawnSystem;
 
 
 
-import helios.engine.state.Bindings;
+import helios.state.Bindings;
 
 
 import helios.runtime.world.UpdateContext;

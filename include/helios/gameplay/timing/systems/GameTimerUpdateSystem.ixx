@@ -10,7 +10,7 @@ export module helios.gameplay.timing.systems.GameTimerUpdateSystem;
 import helios.gameplay.timing.GameTimer;
 import helios.gameplay.timing.TimerManager;
 
-import helios.engine.state.Bindings;
+import helios.state.Bindings;
 
 
 import helios.runtime.world.UpdateContext;

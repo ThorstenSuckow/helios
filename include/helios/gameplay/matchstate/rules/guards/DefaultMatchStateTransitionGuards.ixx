@@ -12,15 +12,15 @@ import helios.runtime.world.UpdateContext;
 import helios.runtime.world.Session;
 import helios.runtime.world.GameWorld;
 
-import helios.engine.state.Bindings;
+import helios.state.Bindings;
 
 import helios.gameplay.matchstate.types;
-import helios.engine.state.types;
+import helios.state.types;
 
 import helios.gameplay.matchstate.components.LivesComponent;
 
 using namespace helios::gameplay::matchstate::types;
-using namespace helios::engine::state::types;
+using namespace helios::state::types;
 using namespace helios::gameplay::matchstate::components;
 
 export namespace helios::gameplay::matchstate::rules::guards {

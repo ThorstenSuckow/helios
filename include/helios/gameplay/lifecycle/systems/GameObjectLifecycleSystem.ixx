@@ -10,7 +10,7 @@ module;
 
 export module helios.gameplay.lifecycle.systems.GameObjectLifecycleSystem;
 
-import helios.engine.state.Bindings;
+import helios.state.Bindings;
 
 
 

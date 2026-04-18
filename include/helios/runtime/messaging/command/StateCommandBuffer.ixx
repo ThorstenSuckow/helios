@@ -9,9 +9,9 @@ export module helios.runtime.messaging.command.StateCommandBuffer;
 import helios.gameplay.gamestate.types;
 import helios.gameplay.matchstate.types;
 
-import helios.engine.state.Bindings;
+import helios.state.Bindings;
 
-import helios.engine.state.commands;
+import helios.state.commands;
 
 
 import helios.platform.environment.types;
@@ -24,13 +24,13 @@ import helios.runtime.world.types;
 import helios.engine.common.tags.CommandBufferRole;
 
 static_assert(requires {
-  typename helios::engine::state::types::StateTransitionId<
+  typename helios::state::types::StateTransitionId<
     helios::gameplay::matchstate::types::MatchState
   >::Type;
 }, "Bindings not visible in StateCommandBuffer TU");
 
 static_assert(requires {
-  typename helios::engine::state::types::StateTransitionId<
+  typename helios::state::types::StateTransitionId<
     helios::gameplay::gamestate::types::GameState
   >::Type;
 }, "Bindings not visible in StateCommandBuffer TU");
@@ -42,10 +42,10 @@ using namespace helios::runtime::world::types;
 export namespace helios::runtime::messaging::command {
 
     using StateCommandBuffer = helios::runtime::messaging::command::TypedCommandBuffer<
-        helios::engine::state::commands::StateCommand<helios::gameplay::gamestate::types::GameState>,
-        helios::engine::state::commands::DelayedStateCommand<helios::gameplay::gamestate::types::GameState>,
-        helios::engine::state::commands::StateCommand<helios::gameplay::matchstate::types::MatchState>,
-        helios::engine::state::commands::DelayedStateCommand<helios::gameplay::matchstate::types::MatchState>
+        helios::state::commands::StateCommand<helios::gameplay::gamestate::types::GameState>,
+        helios::state::commands::DelayedStateCommand<helios::gameplay::gamestate::types::GameState>,
+        helios::state::commands::StateCommand<helios::gameplay::matchstate::types::MatchState>,
+        helios::state::commands::DelayedStateCommand<helios::gameplay::matchstate::types::MatchState>
     >;
 
 }

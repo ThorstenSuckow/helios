@@ -17,11 +17,11 @@ export module helios.platform.glfw.GLFWPlatformManager;
 import helios.util.log;
 import helios.ecs.types.EntityHandle;
 import helios.core.types;
-import helios.engine.state.Bindings;
+import helios.state.Bindings;
 
 
-import helios.engine.state.commands;
-import helios.engine.state.types;
+import helios.state.commands;
+import helios.state.types;
 import helios.gameplay.gamestate.types;
 
 import helios.engine.common.tags.ManagerRole;
@@ -56,8 +56,8 @@ using namespace helios::platform::window::components;
 using namespace helios::platform::glfw::components;
 using namespace helios::platform::glfw::types;
 using namespace helios::gameplay::gamestate::types;
-using namespace helios::engine::state::commands;
-using namespace helios::engine::state::types;
+using namespace helios::state::commands;
+using namespace helios::state::types;
 using namespace helios::ecs;
 using namespace helios::ecs::concepts;
 using namespace helios::engine::common::concepts;

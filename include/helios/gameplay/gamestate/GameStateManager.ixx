@@ -10,7 +10,7 @@ module;
 
 export module helios.gameplay.gamestate.GameStateManager;
 
-import helios.engine.state;
+import helios.state;
 import helios.gameplay.gamestate.types;
 
 export namespace helios::gameplay::gamestate {
@@ -21,8 +21,8 @@ export namespace helios::gameplay::gamestate {
      * @details Instantiation of the generic StateManager template for
      * GameState. Manages application-level states (Title, Running, Paused).
      *
-     * @see helios::engine::state::StateManager
+     * @see helios::state::StateManager
      * @see types::GameState
      */
-    using GameStateManager = helios::engine::state::StateManager<types::GameState>;
+    using GameStateManager = helios::state::StateManager<types::GameState>;
 }

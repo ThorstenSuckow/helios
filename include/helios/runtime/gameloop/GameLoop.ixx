@@ -19,12 +19,12 @@ import helios.util.log.LogManager;
 
 import helios.ecs;
 
-import helios.engine.state.Bindings;
+import helios.state.Bindings;
 
 
 import helios.runtime.messaging.event.GameLoopEventBus;
 
-import helios.engine.state.Bindings;
+import helios.state.Bindings;
 
 import helios.gameplay.gamestate.types;
 import helios.gameplay.matchstate.types;

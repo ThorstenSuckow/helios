@@ -15,7 +15,7 @@ export module helios.engine.bootstrap;
 import helios.runtime.gameloop;
 import helios.runtime.world;
 
-import helios.engine.state.Bindings;
+import helios.state.Bindings;
 import helios.runtime.messaging.command;
 
 import helios.platform;
@@ -30,7 +30,7 @@ import helios.engine.modules.registry;
 
 import helios.ecs.registry;
 
-using namespace helios::engine::state::types;
+using namespace helios::state::types;
 using namespace helios::gameplay::gamestate::types;
 using namespace helios::platform::environment;
 using namespace helios::platform::window;

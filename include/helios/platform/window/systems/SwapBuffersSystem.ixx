@@ -26,7 +26,7 @@ import helios.platform.window.components;
 import helios.platform.window.concepts.IsWindowHandle;
 
 
-import helios.engine.state.Bindings;
+import helios.state.Bindings;
 import helios.gameplay.gamestate.types;
 
 using namespace helios::engine::common::tags;

@@ -15,7 +15,7 @@ import helios.platform.window.types;
 import helios.platform.glfw.systems;
 import helios.runtime.world.types;
 
-import helios.engine.state.Bindings;
+import helios.state.Bindings;
 
 using namespace helios::runtime::gameloop;
 using namespace helios::gameplay::gamestate::types;

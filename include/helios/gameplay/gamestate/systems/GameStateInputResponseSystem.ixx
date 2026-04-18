@@ -7,9 +7,9 @@ module;
 
 export module helios.gameplay.gamestate.systems.GameStateInputResponseSystem;
 
-import helios.engine.state;
+import helios.state;
 
-import helios.engine.state.Bindings;
+import helios.state.Bindings;
 
 import helios.engine.common.concepts;
 
@@ -24,8 +24,8 @@ import helios.runtime;
 import helios.engine.common.tags.SystemRole;
 
 using namespace helios::input::types;
-using namespace helios::engine::state::types;
-using namespace helios::engine::state::commands;
+using namespace helios::state::types;
+using namespace helios::state::commands;
 using namespace helios::engine::common::concepts;
 using namespace helios::gameplay::gamestate::types;
 using namespace helios::runtime::messaging::command;

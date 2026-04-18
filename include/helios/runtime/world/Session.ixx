@@ -16,9 +16,9 @@ import helios.gameplay.lifecycle.components;
 import helios.gameplay.gamestate.types;
 import helios.gameplay.matchstate.types;
 
-import helios.engine.state.types;
-import helios.engine.state.components;
-import helios.engine.state.types.StateTransitionId;
+import helios.state.types;
+import helios.state.components;
+import helios.state.types.StateTransitionId;
 
 import helios.runtime.world.GameObject;
 import helios.ecs.types.EntityHandle;
@@ -33,8 +33,8 @@ using namespace helios::gameplay::matchstate::types;
 using namespace helios::gameplay::gamestate::types;
 
 
-using namespace helios::engine::state::types;
-using namespace helios::engine::state::components;
+using namespace helios::state::types;
+using namespace helios::state::components;
 
 using namespace helios::engine::modules::rendering::viewport::components;
 

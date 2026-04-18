@@ -16,7 +16,7 @@ This module provides access to the complete helios engine functionality, includi
 | `helios.runtime` | Runtime infrastructure (world, gameloop, pooling, messaging, factory) |
 | `helios.engine.modules` | Domain-specific components and systems (physics, spatial, scene) |
 | `helios.gameplay` | Gameplay mechanics (bounds, combat, spawn, input) |
-| `helios.engine.state` | State bindings and transition types |
+| `helios.state` | State bindings and transition types |
 | `helios.engine.builder` | Builder utilities for entity construction |
 | `helios.engine.common` | Shared tags and common types |
 | `helios.engine.tooling` | Frame pacing and performance metrics |

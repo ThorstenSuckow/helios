@@ -21,7 +21,7 @@ import helios.engine.modules.ui.widgets.components.UiFocusComponent;
 
 import helios.engine.modules.ui.widgets.components.MenuComponent;
 
-import helios.engine.state.CombinedStateToIdMapPair;
+import helios.state.CombinedStateToIdMapPair;
 
 import helios.gameplay.gamestate.types;
 import helios.gameplay.matchstate.types;
@@ -32,7 +32,7 @@ import helios.math;
 import helios.engine.common.tags.SystemRole;
 
 using namespace helios::engine::modules::ui::widgets::types;
-using namespace helios::engine::state;
+using namespace helios::state;
 using namespace helios::gameplay::gamestate::types;
 using namespace helios::gameplay::matchstate::types;
 using namespace helios::ecs::types;

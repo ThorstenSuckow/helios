@@ -2,7 +2,7 @@
 
 Match state management for the helios engine.
 
-This module provides domain-specific types and bindings for managing match states (Warmup, Start, Countdown, Playing, PlayerDefeated, GameOver). It uses the generic `helios::engine::state` framework.
+This module provides domain-specific types and bindings for managing match states (Warmup, Start, Countdown, Playing, PlayerDefeated, GameOver). It uses the generic `helios::state` framework.
 
 ## Components
 
@@ -25,7 +25,7 @@ This module provides domain-specific types and bindings for managing match state
 `MatchStateManager` is a type alias for `StateManager<MatchState>`:
 
 ```cpp
-using MatchStateManager = helios::engine::state::StateManager<types::MatchState>;
+using MatchStateManager = helios::state::StateManager<types::MatchState>;
 ```
 
 The generic `StateManager` provides:
@@ -82,8 +82,8 @@ The generic `StateManager` provides:
 
 ```cpp
 using namespace helios::gameplay::matchstate;
-using namespace helios::engine::state;
-using namespace helios::engine::state::commands;
+using namespace helios::state;
+using namespace helios::state::commands;
 
 // Create manager with rules
 auto manager = std::make_unique<MatchStateManager>(matchStateRules);
@@ -108,5 +108,5 @@ commandBuffer.add<StateCommand<types::MatchState>>(
 <summary>Doxygen</summary><p>
 @namespace helios::gameplay::matchstate
 @brief Match state management for the helios engine.
-@details Provides domain-specific types and bindings for managing match states using the generic helios::engine::state framework.
+@details Provides domain-specific types and bindings for managing match states using the generic helios::state framework.
 </p></details>

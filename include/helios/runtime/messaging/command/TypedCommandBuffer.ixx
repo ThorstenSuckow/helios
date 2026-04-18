@@ -14,18 +14,18 @@ module;
 
 export module helios.runtime.messaging.command.TypedCommandBuffer;
 
-import helios.engine.state.components;
+import helios.state.components;
 
 import helios.runtime.world.GameWorld;
 import helios.runtime.world.UpdateContext;
 
-import helios.engine.state.commands.DelayedStateCommand;
+import helios.state.commands.DelayedStateCommand;
 
 import helios.gameplay.timing.TimerManager;
 import helios.gameplay.timing.types;
 
 using namespace helios::runtime::world;
-using namespace helios::engine::state::commands;
+using namespace helios::state::commands;
 using namespace helios::gameplay::timing;
 using namespace helios::gameplay::timing::types;
 

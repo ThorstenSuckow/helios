@@ -24,7 +24,7 @@ import helios.runtime.world.UpdateContext;
 import helios.runtime.messaging.command.NullCommandBuffer;
 import helios.engine.common.concepts.IsCommandBufferLike;
 
-import helios.engine.state.Bindings;
+import helios.state.Bindings;
 
 
 

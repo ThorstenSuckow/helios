@@ -2,7 +2,7 @@
 
 Game state management for the helios engine.
 
-This module provides domain-specific types and bindings for managing game states (Booted, Title, MatchReady, Running, Paused). It uses the generic `helios::engine::state` framework.
+This module provides domain-specific types and bindings for managing game states (Booted, Title, MatchReady, Running, Paused). It uses the generic `helios::state` framework.
 
 ## Components
 
@@ -25,7 +25,7 @@ This module provides domain-specific types and bindings for managing game states
 `GameStateManager` is a type alias for `StateManager<GameState>`:
 
 ```cpp
-using GameStateManager = helios::engine::state::StateManager<types::GameState>;
+using GameStateManager = helios::state::StateManager<types::GameState>;
 ```
 
 The generic `StateManager` provides:
@@ -56,8 +56,8 @@ The generic `StateManager` provides:
 
 ```cpp
 using namespace helios::gameplay::gamestate;
-using namespace helios::engine::state;
-using namespace helios::engine::state::commands;
+using namespace helios::state;
+using namespace helios::state::commands;
 
 // Create manager with rules
 auto manager = std::make_unique<GameStateManager>(gameStateRules);
@@ -82,5 +82,5 @@ commandBuffer.add<StateCommand<types::GameState>>(
 <summary>Doxygen</summary><p>
 @namespace helios::gameplay::gamestate
 @brief Game state management for the helios engine.
-@details Provides domain-specific types and bindings for managing game states using the generic helios::engine::state framework.
+@details Provides domain-specific types and bindings for managing game states using the generic helios::state framework.
 </p></details>

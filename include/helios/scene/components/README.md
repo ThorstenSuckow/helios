@@ -1,4 +1,4 @@
-# helios::engine::modules::scene::components
+# helios::scene::components
 
 Scene graph integration components.
 
@@ -14,7 +14,7 @@ This module contains components that bridge the game logic layer (GameObjects) w
 
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::engine::modules::scene::components
+@namespace helios::scene::components
 @brief Scene graph integration components.
 @details This module contains components that bridge the game logic layer (GameObjects) with the rendering layer (SceneNodes), enabling visual representation in the scene.
 </p></details>

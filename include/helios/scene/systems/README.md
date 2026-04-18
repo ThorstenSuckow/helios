@@ -1,4 +1,4 @@
-# helios::engine::modules::scene::systems
+# helios::scene::systems
 
 Scene graph synchronization and rendering systems.
 
@@ -30,14 +30,14 @@ systemRegistry.add<SceneRenderingSystem>(
 
 | Module | Purpose |
 |--------|---------|
-| `helios.engine.modules.scene.types` | SceneToViewportMap |
+| `helios.scene.types` | SceneToViewportMap |
 | `helios.rendering` | RenderingDevice, LegacyRenderPass |
 | `helios.scene` | Scene graph |
 
 ---
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::engine::modules::scene::systems
+@namespace helios::scene::systems
 @brief Scene graph synchronization and rendering systems.
 @details Contains systems that bridge gameplay simulation and the rendering scene graph, including transform propagation and viewport-based scene rendering.
 </p></details>

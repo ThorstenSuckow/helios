@@ -12,7 +12,7 @@ import helios.runtime.world.GameWorld;
 
 import helios.runtime.world.UpdateContext;
 
-import helios.engine.modules.scene.components.SceneNodeComponent;
+import helios.scene.components.SceneNodeComponent;
 import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
 
 import helios.engine.modules.spatial.transform.components.ScaleStateComponent;

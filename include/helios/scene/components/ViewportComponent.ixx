@@ -1,7 +1,7 @@
 module;
 
 
-export module helios.engine.modules.scene.components.ViewportComponent;
+export module helios.scene.components.ViewportComponent;
 
 import helios.ecs.types.EntityHandle;
 import helios.scene.types;
@@ -10,7 +10,7 @@ import helios.rendering.viewport;
 using namespace helios::ecs::types;
 using namespace helios::scene::types;
 using namespace helios::rendering::viewport::types;
-export namespace helios::engine::modules::scene::components {
+export namespace helios::scene::components {
 
     template<typename THandle>
     class ViewportComponent {

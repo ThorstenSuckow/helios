@@ -4,12 +4,12 @@
  */
 module;
 
-export module helios.engine.modules.scene.registry;
+export module helios.scene.registry;
 
 import helios.ecs.ComponentReflector;
-import helios.engine.modules.scene.components;
+import helios.scene.components;
 
-export namespace helios::engine::modules::scene {
+export namespace helios::scene {
 
     /**
      * @brief Registers all scene components with the ComponentReflector.

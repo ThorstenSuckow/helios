@@ -18,7 +18,7 @@ import helios.math;
 import helios.core.units.Unit;
 
 import helios.runtime.world.GameObject;
-import helios.engine.modules.scene.components.SceneNodeComponent;
+import helios.scene.components.SceneNodeComponent;
 
 
 export namespace helios::engine::modules::physics::motion::components {

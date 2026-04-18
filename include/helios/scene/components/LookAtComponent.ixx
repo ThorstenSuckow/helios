@@ -1,13 +1,13 @@
 module;
 
 
-export module helios.engine.modules.scene.components.LookAtComponent;
+export module helios.scene.components.LookAtComponent;
 
 
 import helios.math;
 
 using namespace helios::math;
-export namespace helios::engine::modules::scene::components {
+export namespace helios::scene::components {
 
     template<typename THandle>
     class LookAtComponent {

@@ -122,9 +122,9 @@ using namespace helios::engine::modules::physics::motion::components;
 // Modules: spatial, scene, rendering, UI, AI
 using namespace helios::engine::modules::spatial::transform::systems;
 using namespace helios::engine::modules::spatial::transform::components;
-using namespace helios::engine::modules::scene::systems;
-using namespace helios::engine::modules::scene::components;
-using namespace helios::engine::modules::scene;
+using namespace helios::scene::systems;
+using namespace helios::scene::components;
+using namespace helios::scene;
 using namespace helios::engine::modules::rendering::viewport::systems;
 using namespace helios::engine::modules::rendering;
 using namespace helios::engine::modules::rendering::components;

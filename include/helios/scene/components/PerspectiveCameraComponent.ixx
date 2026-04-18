@@ -2,13 +2,13 @@ module;
 
 #include <cassert>
 
-export module helios.engine.modules.scene.components.PerspectiveCameraComponent;
+export module helios.scene.components.PerspectiveCameraComponent;
 
 
 import helios.math;
 
 using namespace helios::math;
-export namespace helios::engine::modules::scene::components {
+export namespace helios::scene::components {
 
     template<typename THandle>
     class PerspectiveCameraComponent {

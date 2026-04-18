@@ -8,7 +8,7 @@ module;
 #include <cassert>
 #include <vector>
 
-export module helios.engine.modules.scene.systems.SceneSyncSystem;
+export module helios.scene.systems.SceneSyncSystem;
 
 import helios.scene.Scene;
 
@@ -20,12 +20,12 @@ import helios.runtime.world.UpdateContext;
 
 import helios.ecs.components.Active;
 
-import helios.engine.modules.scene.components.SceneNodeComponent;
+import helios.scene.components.SceneNodeComponent;
 import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
 
 import helios.engine.common.tags.SystemRole;
 
-export namespace helios::engine::modules::scene::systems {
+export namespace helios::scene::systems {
 
     /**
      * @brief System that synchronizes TransformComponents with SceneNodes.
@@ -79,7 +79,7 @@ export namespace helios::engine::modules::scene::systems {
             for (auto [entity, tc, nc, active] : updateContext.view<
                 THandle,
                 helios::engine::modules::spatial::transform::components::ComposeTransformComponent<THandle>,
-                helios::engine::modules::scene::components::SceneNodeComponent<THandle>,
+                helios::scene::components::SceneNodeComponent<THandle>,
                 helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
 
@@ -106,7 +106,7 @@ export namespace helios::engine::modules::scene::systems {
             for (auto [entity, tc, nc, active] : updateContext.view<
                THandle,
                helios::engine::modules::spatial::transform::components::ComposeTransformComponent<THandle>,
-               helios::engine::modules::scene::components::SceneNodeComponent<THandle>,
+               helios::scene::components::SceneNodeComponent<THandle>,
                helios::ecs::components::Active<THandle>
            >().whereEnabled()) {
 

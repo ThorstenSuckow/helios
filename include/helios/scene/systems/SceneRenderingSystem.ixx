@@ -8,7 +8,7 @@ module;
 #include <cassert>
 #include <vector>
 
-export module helios.engine.modules.scene.systems.SceneRenderingSystem;
+export module helios.scene.systems.SceneRenderingSystem;
 
 import helios.scene.Scene;
 
@@ -26,12 +26,12 @@ import helios.rendering.RenderPassFactory;
 
 import helios.scene.SceneToViewportMap;
 
-import helios.engine.modules.scene.components.SceneNodeComponent;
+import helios.scene.components.SceneNodeComponent;
 import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
 import helios.engine.common.tags.SystemRole;
 
 using namespace helios::scene;
-export namespace helios::engine::modules::scene::systems {
+export namespace helios::scene::systems {
 
     /**
      * @brief Renders scenes through their configured viewports.

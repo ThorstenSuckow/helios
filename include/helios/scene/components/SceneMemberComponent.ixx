@@ -1,13 +1,13 @@
 module;
 
 
-export module helios.engine.modules.scene.components.SceneMemberComponent;
+export module helios.scene.components.SceneMemberComponent;
 
 import helios.scene.types.SceneHandle;
 
 using namespace helios::scene::types;
 
-export namespace helios::engine::modules::scene::components {
+export namespace helios::scene::components {
 
     template<typename THandle>
     class SceneMemberComponent {

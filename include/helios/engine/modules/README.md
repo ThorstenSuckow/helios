@@ -64,7 +64,7 @@ helios.engine.modules
 ```cpp
 import helios.engine.modules.physics.motion.components.Move2DComponent;
 import helios.engine.modules.physics.collision.components.CollisionComponent;
-import helios.engine.modules.scene.components.SceneNodeComponent;
+import helios.scene.components.SceneNodeComponent;
 
 // Add domain components
 entity.add<Move2DComponent>(speed);

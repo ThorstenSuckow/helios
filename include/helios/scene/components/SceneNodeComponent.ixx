@@ -8,7 +8,7 @@ module;
 #include <memory>
 
 
-export module helios.engine.modules.scene.components.SceneNodeComponent;
+export module helios.scene.components.SceneNodeComponent;
 
 import helios.scene.SceneNode;
 import helios.math.types;
@@ -20,7 +20,7 @@ import helios.runtime.world.GameObject;
 import helios.engine.modules.rendering.renderable.components.RenderableComponent;
 
 
-export namespace helios::engine::modules::scene::components {
+export namespace helios::scene::components {
 
     /**
      * @brief Component that links a GameObject to a SceneNode in the scene graph.

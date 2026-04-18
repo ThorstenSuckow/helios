@@ -31,7 +31,7 @@ import helios.engine.modules.spatial.transform.components.ScaleStateComponent;
 import helios.engine.modules.spatial.transform.components.RotationStateComponent;
 
 import helios.engine.modules.physics.collision.Bounds;
-import helios.engine.modules.scene.components.SceneNodeComponent;
+import helios.scene.components.SceneNodeComponent;
 
 import helios.runtime.world.GameWorld;
 import helios.runtime.world.UpdateContext;
@@ -134,7 +134,7 @@ export namespace helios::runtime::spawn {
                 const auto* mab   = go.get<helios::engine::modules::rendering::model::components::ModelAabbComponent>();
                 const auto* sca    = go.get<helios::engine::modules::spatial::transform::components::ScaleStateComponent>();
                 auto* rsc = go.get<helios::engine::modules::spatial::transform::components::RotationStateComponent>();
-                const auto* scn   = go.get<helios::engine::modules::scene::components::SceneNodeComponent>();
+                const auto* scn   = go.get<helios::scene::components::SceneNodeComponent>();
                 const auto* tsc   = go.get<helios::engine::modules::spatial::transform::components::TranslationStateComponent>();
 
                 assert(mab && scn && tsc && sca && rsc && "Missing Components for AABB computation");

@@ -30,7 +30,7 @@ import helios.engine.modules.physics.collision.components.AabbColliderComponent;
 import helios.engine.modules.spatial.transform.components.RotationStateComponent;
 import helios.engine.modules.rendering.model.components.ModelAabbComponent;
 import helios.scene.SceneNode;
-import helios.engine.modules.scene.components.SceneNodeComponent;
+import helios.scene.components.SceneNodeComponent;
 
 import helios.ecs.View;
 
@@ -101,7 +101,7 @@ export namespace helios::gameplay::bounds::systems {
                 THandle,
                 helios::engine::modules::physics::motion::components::Move2DComponent<THandle>,
                 helios::engine::modules::rendering::model::components::ModelAabbComponent<THandle>,
-                helios::engine::modules::scene::components::SceneNodeComponent<THandle>,
+                helios::scene::components::SceneNodeComponent<THandle>,
                 helios::engine::modules::physics::motion::components::DirectionComponent<THandle>,
                 helios::engine::modules::spatial::transform::components::TranslationStateComponent<THandle>,
                 helios::engine::modules::physics::collision::components::AabbColliderComponent<THandle>,

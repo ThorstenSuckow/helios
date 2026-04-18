@@ -19,7 +19,7 @@ import helios.runtime.world.GameObject;
 import helios.runtime.world.GameWorld;
 import helios.runtime.world.UpdateContext;
 
-import helios.engine.modules.scene.components.SceneNodeComponent;
+import helios.scene.components.SceneNodeComponent;
 import helios.engine.modules.spatial.transform.components.ScaleStateComponent;
 import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
 import helios.engine.modules.spatial.transform.components.RotationStateComponent;
@@ -73,7 +73,7 @@ export namespace helios::engine::modules::physics::collision::systems {
             for (auto [entity, mab, sc, tsc, sca, rsc, bc, active] : updateContext.view<
                 THandle,
                 helios::engine::modules::rendering::model::components::ModelAabbComponent<THandle>,
-                helios::engine::modules::scene::components::SceneNodeComponent<THandle>,
+                helios::scene::components::SceneNodeComponent<THandle>,
                 helios::engine::modules::spatial::transform::components::TranslationStateComponent<THandle>,
                 helios::engine::modules::spatial::transform::components::ScaleStateComponent<THandle>,
                 helios::engine::modules::spatial::transform::components::RotationStateComponent<THandle>,

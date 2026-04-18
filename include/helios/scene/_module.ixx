@@ -5,6 +5,10 @@
 
 export module helios.scene;
 
+export import helios.scene.components;
+export import helios.scene.systems;
+export import helios.scene.types;
+
 export import helios.scene.Camera;
 export import helios.scene.CameraSceneNode;
 export import helios.scene.CullNoneStrategy;
@@ -15,5 +19,3 @@ export import helios.scene.Snapshot;
 export import helios.scene.SnapshotItem;
 export import helios.scene.NoCullingStrategy;
 export import helios.scene.SceneToViewportMap;
-
-export import helios.scene.types;

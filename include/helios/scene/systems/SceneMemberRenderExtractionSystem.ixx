@@ -1,7 +1,7 @@
 module;
 
 
-export module helios.engine.modules.scene.systems.SceneMemberRenderExtractionSystem;
+export module helios.scene.systems.SceneMemberRenderExtractionSystem;
 
 import helios.rendering.viewport.types.ViewportHandle;
 
@@ -10,7 +10,7 @@ import helios.ecs.types.EntityHandle;
 import helios.scene.types;
 
 import helios.scene.types;
-import helios.engine.modules.scene.components;
+import helios.scene.components;
 
 import helios.runtime.world.Session;
 
@@ -37,9 +37,9 @@ import helios.engine.modules.rendering.commands.RenderCommand;
 
 using namespace helios::ecs::types;
 
-using namespace helios::engine::modules::scene;
+using namespace helios::scene;
 using namespace helios::scene::types;
-using namespace helios::engine::modules::scene::components;
+using namespace helios::scene::components;
 using namespace helios::ecs::components;
 using namespace helios::engine::modules::rendering::components;
 using namespace helios::scene::types;
@@ -48,7 +48,7 @@ using namespace helios::engine::modules::spatial::transform::components;
 using namespace helios::engine::modules::rendering::commands;
 using namespace helios::runtime::messaging::command;
 
-export namespace helios::engine::modules::scene::systems {
+export namespace helios::scene::systems {
 
     /**
      *

@@ -17,7 +17,9 @@ import helios.engine.runtime.world.UpdateContextFwd;
 
 import helios.engine.common.tags.CommandBufferRole;
 
+import helios.engine.common.tags.CommandBufferRole;
 
+using namespace helios::engine::common::tags;
 using namespace helios::engine::runtime::world;
 export namespace helios::engine::common::concepts {
 
@@ -37,5 +39,5 @@ export namespace helios::engine::common::concepts {
     template<class T>
     concept IsCommandBufferLike = requires(T& t, GameWorld& gameWorld, UpdateContext& updateContext) {
         {t.flush(gameWorld, updateContext) } -> std::same_as<void>;
-    } && HasClear<T>;
+    } && HasClear<T> && HasTag<T, CommandBufferRole>;
 }

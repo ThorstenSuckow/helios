@@ -4,7 +4,6 @@
  */
 module;
 
-#include <coroutine>
 #include <cassert>
 #include <format>
 #include <helios/helios_config.h>

@@ -4,7 +4,6 @@
  */
 module;
 
-#include <coroutine>
 #include <memory>
 #include <functional>
 

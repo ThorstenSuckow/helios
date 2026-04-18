@@ -4,7 +4,6 @@
  */
 module;
 
-#include <coroutine>
 #include <cassert>
 #include <typeindex>
 #include <vector>
@@ -106,21 +105,23 @@ export namespace helios::gameplay::spawn::behavior::initializers {
 
             auto position = cycleLength_ != 0 ?  cursor.position % cycleLength_ : cursor.position;
 
-            for (auto typeId : gameObject.componentTypeIds()) {
+            gameObject.forEachComponentTypeId(
+                [&](const auto typeId) {
+                    // Find the component that should be deferred.
+                    const bool deferThisComponent = std::find(
+                        deferredComponents_.begin(), deferredComponents_.end(), typeId
+                    ) != deferredComponents_.end();
 
-                // Find the component that should be deferred.
-                const bool deferThisComponent = std::find(
-                    deferredComponents_.begin(), deferredComponents_.end(), typeId
-                ) != deferredComponents_.end();
+                    if (deferThisComponent) {
+                        deferFound = true;
+                        auto* dec = gameObject.get<helios::gameplay::lifecycle::components::DelayedComponentEnabler<THandle>>();
+                        assert(dec && "Missing DelayedComponentEnabler");
 
-                if (deferThisComponent) {
-                    deferFound = true;
-                    auto* dec = gameObject.get<helios::gameplay::lifecycle::components::DelayedComponentEnabler>();
-                    assert(dec && "Missing DelayedComponentEnabler");
-
-                    dec->defer(gameObject, typeId, (position + 1) * delay_);
+                        dec->defer(gameObject, typeId, (position + 1) * delay_);
+                    }
                 }
-            }
+            );
+
 
             assert(deferFound && "Unexpected missing deferrable component");
         }

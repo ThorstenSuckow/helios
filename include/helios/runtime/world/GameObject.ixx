@@ -7,7 +7,6 @@ module;
 #include <cassert>
 #include <type_traits>
 #include <typeindex>
-#include <generator>
 
 
 export module helios.runtime.world.GameObject;

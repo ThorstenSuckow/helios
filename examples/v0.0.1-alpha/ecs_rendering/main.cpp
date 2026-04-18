@@ -4,10 +4,6 @@ import helios.ext;
 import helios.examples.ecs_rendering.GameLoop;
 
 #include "Namespaces.h"
-
-// coroutine header is required here, otherwise MSVC will throw an error
-// that EntityManager is missing thi header - although it is loaded there, too
-#include <coroutine>
 #include <memory>
 
 int main() {

@@ -30,6 +30,7 @@ export namespace helios::engine::runtime::pooling::components {
      * @see GameObjectPoolConfig
      * @see GameObjectFactory::withPrefabId
      */
+    template<typename THandle>
     class PrefabIdComponent  {
 
         /**

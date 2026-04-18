@@ -42,6 +42,7 @@ export namespace helios::engine::runtime::pooling {
      * }
      * ```
      */
+    template<typename THandle>
     class GameObjectPoolRegistry {
 
     private:
@@ -49,7 +50,7 @@ export namespace helios::engine::runtime::pooling {
         /**
          * @brief Maps pool IDs to their corresponding GameObjectPool instances.
          */
-        std::unordered_map<helios::engine::runtime::pooling::types::GameObjectPoolId, std::unique_ptr<GameObjectPool>> pools_;
+        std::unordered_map<helios::engine::runtime::pooling::types::GameObjectPoolId, std::unique_ptr<GameObjectPool<THandle>>> pools_;
 
     public:
 
@@ -69,9 +70,9 @@ export namespace helios::engine::runtime::pooling {
          *
          * @return Raw pointer to the added pool for immediate use.
          */
-        GameObjectPool* addPool(
+        GameObjectPool<THandle>* addPool(
             const helios::engine::runtime::pooling::types::GameObjectPoolId id,
-            std::unique_ptr<GameObjectPool> gameObjectPool
+            std::unique_ptr<GameObjectPool<THandle>> gameObjectPool
         ) noexcept {
             pools_[id] = std::move(gameObjectPool);
             return pools_[id].get();
@@ -85,7 +86,7 @@ export namespace helios::engine::runtime::pooling {
          *
          * @return Reference to the pool map.
          */
-        [[nodiscard]]std::unordered_map<helios::engine::runtime::pooling::types::GameObjectPoolId, std::unique_ptr<GameObjectPool>>& pools() {
+        [[nodiscard]]std::unordered_map<helios::engine::runtime::pooling::types::GameObjectPoolId, std::unique_ptr<GameObjectPool<THandle>>>& pools() {
             return pools_;
         }
 
@@ -97,7 +98,7 @@ export namespace helios::engine::runtime::pooling {
          *
          * @return Pointer to the pool, or nullptr if not found.
          */
-        [[nodiscard]] GameObjectPool* pool(const helios::engine::runtime::pooling::types::GameObjectPoolId id) const {
+        [[nodiscard]] GameObjectPool<THandle>* pool(const helios::engine::runtime::pooling::types::GameObjectPoolId id) const {
 
             const auto& it = pools_.find(id);
 

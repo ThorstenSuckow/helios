@@ -8,7 +8,7 @@ module;
 
 export module helios.engine.runtime.pooling.GameObjectPoolConfig;
 
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameObject;
 import helios.engine.runtime.pooling.types.GameObjectPoolId;
 import helios.engine.common.types.PrefabId;
 

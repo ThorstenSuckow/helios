@@ -15,7 +15,7 @@ export module helios.engine.runtime.pooling.GameObjectPoolManager;
 
 import helios.engine.runtime.pooling.types.GameObjectPoolId;
 
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameObject;
 import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.runtime.world.GameWorld;
@@ -25,7 +25,7 @@ import helios.engine.runtime.pooling.GameObjectPoolRegistry;
 import helios.engine.runtime.pooling.GameObjectPoolConfig;
 import helios.engine.runtime.pooling.components.PrefabIdComponent;
 
-import helios.engine.ecs.EntityHandle;
+import helios.ecs.types.EntityHandle;
 import helios.core.types;
 import helios.engine.common.tags;
 
@@ -102,6 +102,7 @@ export namespace helios::engine::runtime::pooling {
      * @see GameObjectPoolRegistry
      * @see Manager
      */
+    template<typename THandle>
     class GameObjectPoolManager {
 
         /**
@@ -110,7 +111,7 @@ export namespace helios::engine::runtime::pooling {
          * @details Pools enable efficient reuse of GameObjects without repeated
          * allocation/deallocation. Each pool is identified by a GameObjectPoolId.
          */
-        helios::engine::runtime::pooling::GameObjectPoolRegistry pools_{};
+        helios::engine::runtime::pooling::GameObjectPoolRegistry<THandle> pools_{};
 
         /**
          * @brief Non-owning pointer to the associated GameWorld.
@@ -152,9 +153,9 @@ export namespace helios::engine::runtime::pooling {
          */
         void fillPool(
             const helios::engine::runtime::pooling::types::GameObjectPoolId gameObjectPoolId,
-            helios::engine::ecs::GameObject gameObjectPrefab
+            helios::engine::runtime::world::GameObject gameObjectPrefab
         ) {
-            helios::engine::ecs::EntityHandle entityHandle{};
+            THandle entityHandle{};
 
             auto* gameObjectPool = pool(gameObjectPoolId);
             
@@ -162,10 +163,10 @@ export namespace helios::engine::runtime::pooling {
             const size_t space = used < gameObjectPool->size() ? gameObjectPool->size() - used : 0;
 
             for (size_t i = 0; i < space; i++) {
-                helios::engine::ecs::GameObject go = gameWorld_->clone(gameObjectPrefab);
+                helios::engine::runtime::world::GameObject go = gameWorld_->clone(gameObjectPrefab);
                 go.setActive(false);
                 go.onRelease();
-                gameObjectPool->addInactive(go.entityHandle());
+                gameObjectPool->addInactive(go.handle());
             }
 
             gameObjectPool->lock();
@@ -230,13 +231,13 @@ export namespace helios::engine::runtime::pooling {
          * @return Optional containing the released GameObject if found,
          *         std::nullopt if the entity was not found in the GameWorld.
          */
-        std::optional<helios::engine::ecs::GameObject> release(
+        std::optional<helios::engine::runtime::world::GameObject> release(
             const helios::engine::runtime::pooling::types::GameObjectPoolId gameObjectPoolId,
-            const helios::engine::ecs::EntityHandle& entityHandle
+            const THandle& entityHandle
         ) {
             auto* gameObjectPool = pool(gameObjectPoolId);
             
-            auto worldGo = gameWorld_->find(entityHandle);
+            auto worldGo = gameWorld_->findEntity(entityHandle);
 
             if (worldGo) {
                 if (gameObjectPool->release(entityHandle)) {
@@ -263,10 +264,10 @@ export namespace helios::engine::runtime::pooling {
          * @return Optional containing the acquired GameObject if available,
          *         std::nullopt if the pool is exhausted.
          */
-        [[nodiscard]] std::optional<helios::engine::ecs::GameObject> acquire(
+        [[nodiscard]] std::optional<helios::engine::runtime::world::GameObject> acquire(
             const helios::engine::runtime::pooling::types::GameObjectPoolId gameObjectPoolId
         )  {
-            helios::engine::ecs::EntityHandle entityHandle{};
+            THandle entityHandle{};
 
             auto* gameObjectPool = pool(gameObjectPoolId);
 
@@ -303,12 +304,14 @@ export namespace helios::engine::runtime::pooling {
             
             for (const auto& [gameObjectPoolId, poolConfig] : poolConfigs_) {
 
-                auto pool = std::make_unique<helios::engine::runtime::pooling::GameObjectPool>(
+                auto pool = std::make_unique<helios::engine::runtime::pooling::GameObjectPool<THandle>>(
                     poolConfig->amount);
 
                 pools_.addPool(gameObjectPoolId, std::move(pool));
 
-                for (auto [entity, pic] : gameWorld.view<helios::engine::runtime::pooling::components::PrefabIdComponent>().whereEnabled()) {
+                for (auto [entity, pic] : gameWorld.view<
+                    THandle,
+                    helios::engine::runtime::pooling::components::PrefabIdComponent<THandle>>().whereEnabled()) {
                     if (pic->prefabId() == poolConfig->prefabId) {
                         fillPool(gameObjectPoolId, entity);
                         break;
@@ -343,7 +346,7 @@ export namespace helios::engine::runtime::pooling {
          *
          * @pre The pool must be registered with this manager.
          */
-        [[nodiscard]] GameObjectPool* pool(
+        [[nodiscard]] GameObjectPool<THandle>* pool(
             const helios::engine::runtime::pooling::types::GameObjectPoolId gameObjectPoolId
         ) const {
             assert(pools_.has(gameObjectPoolId) && "GameObjectPoolId not registered with this manager");

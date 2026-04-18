@@ -1,0 +1,118 @@
+module;
+
+
+export module helios.engine.modules.scene.systems.SceneMemberRenderExtractionSystem;
+
+import helios.rendering.viewport.types.ViewportHandle;
+
+import helios.ecs.types.EntityHandle;
+
+import helios.scene.types;
+
+import helios.scene.types;
+import helios.engine.modules.scene.components;
+
+import helios.engine.runtime.world.Session;
+
+import helios.ecs.types.EntityHandle;
+
+
+import helios.engine.modules.rendering.components;
+import helios.engine.modules.rendering.commands;
+
+import helios.engine.runtime.world.GameWorld;
+import helios.engine.runtime.world.UpdateContext;
+import helios.engine.runtime.messaging.command.NullCommandBuffer;
+import helios.engine.common.concepts.IsCommandBufferLike;
+
+import helios.ecs.components.Active;
+
+import helios.engine.modules.spatial.transform.components.WorldTransformStateComponent;
+
+import helios.engine.common.tags.SystemRole;
+
+import helios.engine.common.concepts.IsFrustumCullerLike;
+
+import helios.engine.modules.rendering.commands.RenderCommand;
+
+using namespace helios::ecs::types;
+
+using namespace helios::engine::modules::scene;
+using namespace helios::scene::types;
+using namespace helios::engine::modules::scene::components;
+using namespace helios::ecs::components;
+using namespace helios::engine::modules::rendering::components;
+using namespace helios::scene::types;
+using namespace helios::engine::common::concepts;
+using namespace helios::engine::modules::spatial::transform::components;
+using namespace helios::engine::modules::rendering::commands;
+using namespace helios::engine::runtime::messaging::command;
+
+export namespace helios::engine::modules::scene::systems {
+
+    /**
+     *
+     * @todo implement culling
+     *
+     * @tparam CullingStrategy
+     */
+    template<typename THandle, typename CullingStrategy, typename TCommandBuffer = NullCommandBuffer>
+    requires IsFrustumCullerLike<CullingStrategy> && IsCommandBufferLike<TCommandBuffer>
+    class SceneMemberRenderExtractionSystem {
+
+        CullingStrategy cullingStrategy_;
+
+    public:
+
+        using EngineRoleTag = helios::engine::common::tags::SystemRole;
+
+
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
+
+
+            for (auto [entity, vc, active] : updateContext.view<
+                THandle,
+                ViewportComponent<THandle>,
+                Active<THandle>
+            >().whereEnabled()) {
+
+                const auto viewportHandle = vc->viewportHandle();
+
+                if (!updateContext.session().isActiveViewport(viewportHandle)) {
+                    continue;
+                }
+
+                const auto sceneHandle = vc->sceneHandle();
+
+                for (auto [innerEntity, smc, rpc, wtsc, innerActive] : updateContext.view<
+                    THandle,
+                    SceneMemberComponent<THandle>,
+                    RenderPrototypeComponent<THandle>,
+                    WorldTransformStateComponent<THandle>,
+                    Active<THandle>
+                >().whereEnabled()) {
+                    if (smc->sceneHandle() == sceneHandle) {
+
+                        auto* mcOverride = innerEntity.get<MaterialOverrideComponent>();
+
+                        updateContext.queueCommand<TCommandBuffer, RenderCommand>(
+                            SceneMemberRenderContext{
+                                innerEntity.handle(),
+                                viewportHandle,
+                                smc->sceneHandle(),
+                                rpc->meshHandle(),
+                                mcOverride ? mcOverride->materialHandle() : rpc->materialHandle(),
+                                rpc->shaderHandle(),
+                                wtsc->worldTransform()
+                        });
+
+
+                    }
+                }
+            }
+
+        }
+
+    };
+
+}

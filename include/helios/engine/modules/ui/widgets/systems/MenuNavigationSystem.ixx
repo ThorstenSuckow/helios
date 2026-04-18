@@ -9,11 +9,11 @@ module;
 #include <cassert>
 
 export module helios.engine.modules.ui.widgets.systems.MenuNavigationSystem;
-import helios.engine.ecs;
+import helios.ecs;
 
 import helios.engine.modules.ui.widgets.components.MenuComponent;
 
-import helios.engine.mechanics.lifecycle.components.Active;
+import helios.ecs.components.Active;
 
 import helios.engine.modules.ui.widgets.types;
 import helios.engine.modules.ui.widgets.components.UiFocusComponent;
@@ -23,26 +23,30 @@ import helios.engine.modules.ui.widgets.components.UiActionComponent;
 import helios.engine.modules.ui.widgets.commands.UiActionCommand;
 
 import helios.engine.runtime.world;
+import helios.engine.runtime.messaging.command.NullCommandBuffer;
+import helios.engine.common.concepts.IsCommandBufferLike;
 
-import helios.engine.mechanics.lifecycle.components.Active;
+import helios.ecs.components.Active;
 
 import helios.engine.state.Bindings;
-import helios.engine.runtime.messaging.command.EngineCommandBuffer;
+
 
 import helios.input.types.Gamepad;
 import helios.input.gamepad.GamepadState;
 
-import helios.engine.ecs.components.HierarchyComponent;
+import helios.ecs.components.HierarchyComponent;
 
 import helios.engine.modules.rendering.model.components.ModelAabbComponent;
 
 using namespace helios::input::types;
-using namespace helios::engine::ecs::components;
+using namespace helios::ecs::components;
 using namespace helios::engine::modules::ui::widgets::types;
-using namespace helios::engine::ecs;
+using namespace helios::ecs::types;
 using namespace helios::engine::runtime::world;
+using namespace helios::engine::runtime::messaging::command;
+using namespace helios::engine::common::concepts;
 using namespace helios::engine::modules::ui::widgets::components;
-using namespace helios::engine::mechanics::lifecycle::components;
+using namespace helios::ecs::components;
 using namespace helios::input::gamepad;
 
 import helios.engine.common.tags.SystemRole;
@@ -65,6 +69,8 @@ export namespace helios::engine::modules::ui::widgets::systems {
      * @see MenuDisplaySystem
      * @see UiActionCommand
      */
+    template<typename THandle, typename TCommandBuffer = NullCommandBuffer>
+    requires IsCommandBufferLike<TCommandBuffer>
     class MenuNavigationSystem {
 
 
@@ -79,7 +85,9 @@ export namespace helios::engine::modules::ui::widgets::systems {
          * @param index The new selected index.
          * @param gamepadState The current gamepad state.
          */
-        void updateMenu(helios::engine::runtime::world::UpdateContext& updateContext, MenuComponent* mc, const size_t index) {
+        void updateMenu(
+            helios::engine::runtime::world::UpdateContext& updateContext,
+            MenuComponent<THandle>* mc, const size_t index) {
 
             auto menuItems = mc->menuItems();
 
@@ -125,13 +133,14 @@ export namespace helios::engine::modules::ui::widgets::systems {
          */
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
-            MenuComponent* focusedMenu = nullptr;
+            MenuComponent<THandle>* focusedMenu = nullptr;
 
             for (auto [entity, fc, hc, active] :  updateContext.view<
-                UiFocusComponent, HierarchyComponent, Active
+                THandle,
+                UiFocusComponent<THandle>, HierarchyComponent<THandle>, Active<THandle>
             >().whereEnabled()) {
-                assert(hc->parent() && updateContext.find(*hc->parent()) && updateContext.find(*hc->parent())->get<MenuComponent>() && "Item expected to have parent menu component.");
-                focusedMenu = updateContext.find(*hc->parent())->get<MenuComponent>();
+                assert(hc->parent() && updateContext.find(*hc->parent()) && updateContext.find(*hc->parent())->get<MenuComponent<THandle>>() && "Item expected to have parent menu component.");
+                focusedMenu = updateContext.find(*hc->parent())->get<MenuComponent<THandle>>();
                 break;
             }
 
@@ -165,11 +174,11 @@ export namespace helios::engine::modules::ui::widgets::systems {
 
             if (gamepadState.isButtonPressed(GamepadInput::A)) {
                 auto* uac = updateContext.find(focusedMenu->menuItems()[focusedMenu->selectedIndex()])->get<
-                    helios::engine::modules::ui::widgets::components::UiActionComponent
+                    helios::engine::modules::ui::widgets::components::UiActionComponent<THandle>
                 >();
 
                 if (uac) {
-                    updateContext.queueCommand<helios::engine::modules::ui::widgets::commands::UiActionCommand>(
+                    updateContext.queueCommand<TCommandBuffer, helios::engine::modules::ui::widgets::commands::UiActionCommand>(
                         focusedMenu->menuItems()[focusedMenu->selectedIndex()], uac->actionId()
                     );
                 }

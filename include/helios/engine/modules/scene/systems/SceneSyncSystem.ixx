@@ -12,13 +12,13 @@ export module helios.engine.modules.scene.systems.SceneSyncSystem;
 
 import helios.scene.Scene;
 
-import helios.engine.modules.scene.types.SceneToViewportMap;
+import helios.scene.SceneToViewportMap;
 
 import helios.engine.runtime.world.GameWorld;
 
 import helios.engine.runtime.world.UpdateContext;
 
-import helios.engine.mechanics.lifecycle.components.Active;
+import helios.ecs.components.Active;
 
 import helios.engine.modules.scene.components.SceneNodeComponent;
 import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
@@ -44,6 +44,7 @@ export namespace helios::engine::modules::scene::systems {
      * @see SceneNodeComponent
      * @see SceneToViewportMap
      */
+    template<typename THandle>
     class SceneSyncSystem {
 
     public:
@@ -53,14 +54,14 @@ export namespace helios::engine::modules::scene::systems {
         /**
          * @brief Reference to the scene-to-viewport mapping for scene iteration.
          */
-        helios::engine::modules::scene::types::SceneToViewportMap& sceneToViewportMap_;
+        helios::scene::SceneToViewportMap& sceneToViewportMap_;
 
         /**
          * @brief Constructs the system with the scene-to-viewport map.
          *
          * @param sceneToViewportMap Reference to the scene mapping for accessing all scenes.
          */
-        explicit SceneSyncSystem(helios::engine::modules::scene::types::SceneToViewportMap& sceneToViewportMap)
+        explicit SceneSyncSystem(helios::scene::SceneToViewportMap& sceneToViewportMap)
         : sceneToViewportMap_(sceneToViewportMap) {}
 
         /**
@@ -76,9 +77,10 @@ export namespace helios::engine::modules::scene::systems {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto [entity, tc, nc, active] : updateContext.view<
-                helios::engine::modules::spatial::transform::components::ComposeTransformComponent,
-                helios::engine::modules::scene::components::SceneNodeComponent,
-                helios::engine::mechanics::lifecycle::components::Active
+                THandle,
+                helios::engine::modules::spatial::transform::components::ComposeTransformComponent<THandle>,
+                helios::engine::modules::scene::components::SceneNodeComponent<THandle>,
+                helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
 
                 if (!tc->isDirty()) {
@@ -96,23 +98,24 @@ export namespace helios::engine::modules::scene::systems {
             }
 
             //Propagate changes and update the nodes
-            for (auto* scene : sceneToViewportMap_.scenes()) {
+            /*for (auto* scene : sceneToViewportMap_.scenes()) {
                 scene->updateNodes();
-            }
+            }*/
 
             // Second pass: read back world transforms from SceneNode to ComposeTransformComponent
             for (auto [entity, tc, nc, active] : updateContext.view<
-               helios::engine::modules::spatial::transform::components::ComposeTransformComponent,
-               helios::engine::modules::scene::components::SceneNodeComponent,
-               helios::engine::mechanics::lifecycle::components::Active
+               THandle,
+               helios::engine::modules::spatial::transform::components::ComposeTransformComponent<THandle>,
+               helios::engine::modules::scene::components::SceneNodeComponent<THandle>,
+               helios::ecs::components::Active<THandle>
            >().whereEnabled()) {
 
-                auto* sceneNode = nc->sceneNode();
+               /* auto* sceneNode = nc->sceneNode();
                 if (!sceneNode || !sceneNode->isActive()) {
                    continue;
                 }
 
-                tc->setWorldTransform(sceneNode->worldTransform());
+                tc->setWorldTransform(sceneNode->worldTransform());*/
             }
 
         }

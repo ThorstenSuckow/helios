@@ -13,7 +13,7 @@ export module helios.engine.mechanics.spawn.systems.GameObjectSpawnSystem;
 
 
 import helios.engine.state.Bindings;
-import helios.engine.runtime.messaging.command.EngineCommandBuffer;
+
 
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.runtime.world.GameWorld;
@@ -21,17 +21,22 @@ import helios.engine.runtime.spawn.commands.ScheduledSpawnPlanCommand;
 import helios.engine.runtime.spawn.SpawnManager;
 import helios.engine.runtime.spawn.scheduling.SpawnScheduler;
 import helios.engine.runtime.spawn.events.SpawnPlanCommandExecutedEvent;
+import helios.engine.runtime.messaging.command.NullCommandBuffer;
+import helios.engine.common.concepts.IsCommandBufferLike;
 import helios.engine.common.tags.SystemRole;
 
 
 using namespace helios::engine::runtime::world;
+using namespace helios::engine::runtime::messaging::command;
+using namespace helios::engine::common::concepts;
 export namespace helios::engine::mechanics::spawn::systems {
 
-
+    template<typename THandle, typename TCommandBuffer = NullCommandBuffer>
+    requires IsCommandBufferLike<TCommandBuffer>
     class GameObjectSpawnSystem {
 
 
-        helios::engine::runtime::spawn::SpawnManager& spawnManager_;
+        helios::engine::runtime::spawn::SpawnManager<THandle>& spawnManager_;
 
        GameWorld* gameWorld_ = nullptr;
 
@@ -40,7 +45,7 @@ export namespace helios::engine::mechanics::spawn::systems {
 
         using EngineRoleTag = helios::engine::common::tags::SystemRole;
 
-        explicit GameObjectSpawnSystem(helios::engine::runtime::spawn::SpawnManager& spawnManager) noexcept
+        explicit GameObjectSpawnSystem(helios::engine::runtime::spawn::SpawnManager<THandle>& spawnManager) noexcept
         : spawnManager_{spawnManager} {}
 
 
@@ -81,8 +86,8 @@ export namespace helios::engine::mechanics::spawn::systems {
                 auto scheduledPlans = spawnScheduler->drainScheduledPlans();
 
                 for (auto& plan : scheduledPlans) {
-                    updateContext.queueCommand<
-                        helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand
+                    updateContext.queueCommand<TCommandBuffer,
+                        helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand<THandle>
                     >(
                         plan.spawnProfileId, plan.spawnPlan, plan.spawnContext
                     );

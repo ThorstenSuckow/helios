@@ -15,7 +15,7 @@ import helios.math;
 
 import helios.core.units.Unit;
 
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameObject;
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
 
@@ -27,7 +27,7 @@ import helios.engine.modules.physics.collision.components.AabbColliderComponent;
 
 import helios.engine.modules.rendering.model.components.ModelAabbComponent;
 
-import helios.engine.mechanics.lifecycle.components.Active;
+import helios.ecs.components.Active;
 
 import helios.engine.common.tags.SystemRole;
 
@@ -51,6 +51,7 @@ export namespace helios::engine::modules::physics::collision::systems {
      *
      * @see helios::engine::modules::physics::collision::Bounds::computeWorldAabb()
      */
+    template<typename THandle>
     class BoundsUpdateSystem {
 
     public:
@@ -70,13 +71,14 @@ export namespace helios::engine::modules::physics::collision::systems {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto [entity, mab, sc, tsc, sca, rsc, bc, active] : updateContext.view<
-                helios::engine::modules::rendering::model::components::ModelAabbComponent,
-                helios::engine::modules::scene::components::SceneNodeComponent,
-                helios::engine::modules::spatial::transform::components::TranslationStateComponent,
-                helios::engine::modules::spatial::transform::components::ScaleStateComponent,
-                helios::engine::modules::spatial::transform::components::RotationStateComponent,
-                helios::engine::modules::physics::collision::components::AabbColliderComponent,
-                helios::engine::mechanics::lifecycle::components::Active
+                THandle,
+                helios::engine::modules::rendering::model::components::ModelAabbComponent<THandle>,
+                helios::engine::modules::scene::components::SceneNodeComponent<THandle>,
+                helios::engine::modules::spatial::transform::components::TranslationStateComponent<THandle>,
+                helios::engine::modules::spatial::transform::components::ScaleStateComponent<THandle>,
+                helios::engine::modules::spatial::transform::components::RotationStateComponent<THandle>,
+                helios::engine::modules::physics::collision::components::AabbColliderComponent<THandle>,
+                helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
 
                 bc->setBounds(helios::engine::modules::physics::collision::Bounds::computeWorldAabb(

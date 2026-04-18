@@ -17,7 +17,7 @@ import helios.engine.modules.spatial.transform.components.ComposeTransformCompon
 
 import helios.engine.modules.spatial.transform.components.ScaleStateComponent;
 
-import helios.engine.mechanics.lifecycle.components.Active;
+import helios.ecs.components.Active;
 
 import helios.engine.common.tags.SystemRole;
 
@@ -31,6 +31,7 @@ export namespace helios::engine::modules::spatial::transform::systems {
      * TransformComponents and resets their dirty flag if it was set. This ensures that
      * changes are only processed once per frame by other systems (like SceneSyncSystem).
      */
+    template<typename THandle>
     class TransformClearSystem {
 
 
@@ -47,15 +48,17 @@ export namespace helios::engine::modules::spatial::transform::systems {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto [entity, tc, active] : updateContext.view<
-                helios::engine::modules::spatial::transform::components::ComposeTransformComponent,
-                helios::engine::mechanics::lifecycle::components::Active
+                THandle,
+                helios::engine::modules::spatial::transform::components::ComposeTransformComponent<THandle>,
+                helios::ecs::components::Active<THandle>
                 >().whereEnabled()) {
                 tc->clearDirty();
             }
 
             for (auto [entity, sc, active] : updateContext.view<
-                helios::engine::modules::spatial::transform::components::ScaleStateComponent,
-                helios::engine::mechanics::lifecycle::components::Active
+                THandle,
+                helios::engine::modules::spatial::transform::components::ScaleStateComponent<THandle>,
+                helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
                 sc->clearDirty();
             }

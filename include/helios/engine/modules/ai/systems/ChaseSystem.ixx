@@ -13,23 +13,25 @@ import helios.math;
 
 import helios.core.units.Unit;
 
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameObject;
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.modules.ai.components.ChaseComponent;
 import helios.engine.modules.physics.motion.components.SteeringComponent;
 
+import helios.engine.mechanics.lifecycle.components.DeadTagComponent;
+
 import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
 
-import helios.engine.mechanics.lifecycle.components.Active;
+import helios.ecs.components.Active;
 
 import helios.engine.mechanics.lifecycle.components;
 
-using namespace helios::engine::mechanics::lifecycle::components;
-
 import helios.engine.common.tags.SystemRole;
 
+using namespace helios::engine::mechanics::lifecycle::components;
+using namespace helios::ecs::components;
 export namespace helios::engine::modules::ai::systems {
 
     /**
@@ -45,6 +47,7 @@ export namespace helios::engine::modules::ai::systems {
      * 3. Calculates direction from entity to target
      * 4. Sets steering intent to face that direction
      */
+    template<typename THandle>
     class ChaseSystem {
 
 
@@ -59,10 +62,11 @@ export namespace helios::engine::modules::ai::systems {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto [entity, sc, cc, tsc, active] : updateContext.view<
-                helios::engine::modules::physics::motion::components::SteeringComponent,
-                helios::engine::modules::ai::components::ChaseComponent,
-                helios::engine::modules::spatial::transform::components::TranslationStateComponent,
-                helios::engine::mechanics::lifecycle::components::Active
+                THandle,
+                helios::engine::modules::physics::motion::components::SteeringComponent<THandle>,
+                helios::engine::modules::ai::components::ChaseComponent<THandle>,
+                helios::engine::modules::spatial::transform::components::TranslationStateComponent<THandle>,
+                helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
 
                 const auto entityHandle = cc->target();

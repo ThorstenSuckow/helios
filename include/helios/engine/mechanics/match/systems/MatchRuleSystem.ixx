@@ -12,7 +12,7 @@ import helios.engine.mechanics.match.types.MatchState;
 
 import helios.input.types.Gamepad;
 
-import helios.engine.ecs;
+import helios.ecs;
 import helios.engine.runtime;
 
 using namespace helios::input::types;

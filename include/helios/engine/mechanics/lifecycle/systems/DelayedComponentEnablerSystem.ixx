@@ -13,11 +13,11 @@ export module helios.engine.mechanics.lifecycle.systems.DelayedComponentEnablerS
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.mechanics.lifecycle.components.DelayedComponentEnabler;
-import helios.engine.ecs.types.ComponentTypeId;
+import helios.ecs.types.ComponentTypeId;
 
-import helios.engine.ecs.ComponentOpsRegistry;
+import helios.ecs.ComponentOpsRegistry;
 
-import helios.engine.mechanics.lifecycle.components.Active;
+import helios.ecs.components.Active;
 
 import helios.engine.common.tags.SystemRole;
 
@@ -40,12 +40,13 @@ export namespace helios::engine::mechanics::lifecycle::systems {
      * @see DelayedComponentEnabler
      * @see DelayedComponentEnablerInitializer
      */
+    template<typename THandle>
     class DelayedComponentEnablerSystem {
 
         /**
          * @brief Temporary buffer for components that completed their delay.
          */
-        std::vector<helios::engine::ecs::types::ComponentTypeId> sync_;
+        std::vector<helios::ecs::types::ComponentTypeId<THandle>> sync_;
 
 
     public:
@@ -66,8 +67,9 @@ export namespace helios::engine::mechanics::lifecycle::systems {
             const float delta = updateContext.deltaTime();
 
             for (auto [entity, dce, active] : updateContext.view<
-                helios::engine::mechanics::lifecycle::components::DelayedComponentEnabler,
-                helios::engine::mechanics::lifecycle::components::Active
+                THandle,
+                helios::engine::mechanics::lifecycle::components::DelayedComponentEnabler<THandle>,
+                helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
 
                 sync_.clear();
@@ -82,7 +84,7 @@ export namespace helios::engine::mechanics::lifecycle::systems {
 
                     if (deferredComponent.delta <= 0) {
                         auto* rawCmp = entity.raw(componentTypeId);
-                        auto ops = helios::engine::ecs::ComponentOpsRegistry::ops(componentTypeId);
+                        auto ops = helios::ecs::ComponentOpsRegistry<THandle>::ops(componentTypeId);
 
                         if (rawCmp && ops.enable) {
                             ops.enable(rawCmp);

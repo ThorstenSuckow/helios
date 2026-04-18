@@ -21,7 +21,7 @@ import helios.engine.runtime.world.UpdateContext;
 import helios.engine.modules.ui.widgets;
 import helios.engine.modules.ui.layout;
 
-import helios.engine.mechanics.lifecycle.components.Active;
+import helios.ecs.components.Active;
 
 using namespace helios::engine::mechanics::match::components;
 using namespace helios::engine::mechanics::match::types;
@@ -37,6 +37,7 @@ export namespace helios::engine::modules::ui::binding::systems {
      * binding against the target's current revision. On mismatch the
      * formatted lives value is written into the UiTextComponent.
      */
+    template<typename THandle>
     class Lives2UiTextUpdateSystem {
 
     public:
@@ -51,10 +52,11 @@ export namespace helios::engine::modules::ui::binding::systems {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto [entity, lbc, dfc, txt, active] : updateContext.view<
-                helios::engine::mechanics::match::components::LivesBindingComponent,
-                helios::engine::modules::ui::layout::components::NumberFormatterComponent,
-                helios::engine::modules::ui::widgets::components::UiTextComponent,
-                helios::engine::mechanics::lifecycle::components::Active
+                THandle,
+                helios::engine::mechanics::match::components::LivesBindingComponent<THandle>,
+                helios::engine::modules::ui::layout::components::NumberFormatterComponent<THandle>,
+                helios::engine::modules::ui::widgets::components::UiTextComponent<THandle>,
+                helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
 
                 auto go = updateContext.find(lbc->target());

@@ -13,7 +13,7 @@ import helios.engine.modules.ui.widgets.components.UiTextComponent;
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
 
-import helios.engine.mechanics.lifecycle.components.Active;
+import helios.ecs.components.Active;
 
 import helios.engine.modules.rendering.model.components.ModelAabbComponent;
 
@@ -28,6 +28,7 @@ export namespace helios::engine::modules::ui::widgets::systems {
      * Monitors UiTextComponent for resize requests and updates the associated
      * ModelAabbComponent with the new text bounds from the underlying TextRenderable.
      */
+    template <typename THandle>
     class UiTextBoundsUpdateSystem {
 
     public:
@@ -44,9 +45,10 @@ export namespace helios::engine::modules::ui::widgets::systems {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto [entity, txt, mac, active] : updateContext.view<
-                helios::engine::modules::ui::widgets::components::UiTextComponent,
-                helios::engine::modules::rendering::model::components::ModelAabbComponent,
-                helios::engine::mechanics::lifecycle::components::Active
+                THandle,
+                helios::engine::modules::ui::widgets::components::UiTextComponent<THandle>,
+                helios::engine::modules::rendering::model::components::ModelAabbComponent<THandle>,
+                helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
 
                 if (txt->needsResize()) {

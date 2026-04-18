@@ -9,19 +9,22 @@ export module helios.engine.mechanics.gamestate.systems.GameFlowSystem;
 import helios.engine.mechanics.gamestate.types;
 
 import helios.engine.state.Bindings;
-import helios.engine.runtime.messaging.command.EngineCommandBuffer;
+
+import helios.engine.common.concepts;
 
 import helios.engine.state.commands;
 import helios.engine.state.types.StateTransitionRequest;
 
 import helios.engine.mechanics.gamestate.types;
 
-import helios.engine.ecs;
-import helios.engine.runtime;
+import helios.ecs;
+import helios.engine.runtime.world.UpdateContext;
+import helios.engine.runtime.world.Session;
 
 import helios.engine.common.tags.SystemRole;
 
 using namespace helios::engine::state::commands;
+using namespace helios::engine::common::concepts;
 using namespace helios::engine::state::types;
 using namespace helios::engine::mechanics::gamestate;
 using namespace helios::engine::mechanics::gamestate::types;
@@ -40,6 +43,8 @@ export namespace helios::engine::mechanics::gamestate::systems {
      * @see GameStateTransitionId
      * @see StateCommand
      */
+    template<typename TCommandBuffer>
+    requires IsCommandBufferLike<TCommandBuffer>
     class GameFlowSystem {
 
         /**
@@ -84,23 +89,23 @@ export namespace helios::engine::mechanics::gamestate::systems {
             prevGameStateTransitionId_ = gameStateTransitionId;
 
             switch (gameState) {
+                case GameState::Booting: {
+                    updateContext.queueCommand<TCommandBuffer, StateCommand<GameState>>(
+                        StateTransitionRequest<GameState>(gameState, GameStateTransitionId::BootRequest)
+                    );
+                    break;
+                }
 
                 case GameState::Booted: {
-                    updateContext.queueCommand<StateCommand<GameState>>(
+                    updateContext.queueCommand<TCommandBuffer, StateCommand<GameState>>(
                         StateTransitionRequest<GameState>(gameState, GameStateTransitionId::WarmupRequest)
                     );
                     break;
                 }
 
-                case GameState::Warmup: {
-                    updateContext.queueCommand<StateCommand<GameState>>(
-                        StateTransitionRequest<GameState>(gameState, GameStateTransitionId::TitleRequest)
-                    );
-                    break;
-                }
 
                 case GameState::MatchReady: {
-                    updateContext.queueCommand<StateCommand<GameState>>(
+                    updateContext.queueCommand<TCommandBuffer, StateCommand<GameState>>(
                         StateTransitionRequest<GameState>(gameState, GameStateTransitionId::StartMatchRequest)
                     );
                     break;

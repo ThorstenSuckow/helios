@@ -13,7 +13,9 @@ import helios.math;
 
 import helios.core.units.Unit;
 
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.messaging.command.NullCommandBuffer;
+
+import helios.engine.runtime.world.GameObject;
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
 
@@ -22,10 +24,15 @@ import helios.engine.modules.spatial.transform.components.ComposeTransformCompon
 
 import helios.engine.modules.rendering.model.components.ModelAabbComponent;
 
-import helios.engine.mechanics.lifecycle.components.Active;
+import helios.ecs.components.Active;
 
+import helios.engine.common.concepts.IsCommandBufferLike;
+import helios.ecs.concepts.IsEntityHandle;
 import helios.engine.common.tags.SystemRole;
 
+using namespace helios::engine::runtime::messaging::command;
+using namespace helios::engine::common::concepts;
+using namespace helios::ecs::concepts;
 export namespace helios::engine::modules::spatial::transform::systems {
 
     /**
@@ -41,6 +48,8 @@ export namespace helios::engine::modules::spatial::transform::systems {
      * - ModelAabbComponent (original model bounds)
      * - ComposeTransformComponent (receives scale updates)
      */
+    template<typename THandle, typename TCommandBuffer = NullCommandBuffer>
+    requires IsCommandBufferLike<TCommandBuffer> && IsEntityHandle<THandle>
     class ScaleSystem {
 
 
@@ -59,10 +68,11 @@ export namespace helios::engine::modules::spatial::transform::systems {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto [entity, mab, sc, tc, active] : updateContext.view<
-                helios::engine::modules::rendering::model::components::ModelAabbComponent,
-                helios::engine::modules::spatial::transform::components::ScaleStateComponent,
-                helios::engine::modules::spatial::transform::components::ComposeTransformComponent,
-                helios::engine::mechanics::lifecycle::components::Active
+                THandle,
+                helios::engine::modules::rendering::model::components::ModelAabbComponent<THandle>,
+                helios::engine::modules::spatial::transform::components::ScaleStateComponent<THandle>,
+                helios::engine::modules::spatial::transform::components::ComposeTransformComponent<THandle>,
+                helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
 
                 if (!sc->isDirty()) {

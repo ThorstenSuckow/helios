@@ -19,7 +19,7 @@ import helios.engine.runtime.world.GameWorld;
 
 import helios.engine.runtime.world.UpdateContext;
 
-import helios.engine.mechanics.lifecycle.components.Active;
+import helios.ecs.components.Active;
 
 import helios.math;
 
@@ -36,6 +36,7 @@ export namespace helios::engine::modules::spatial::transform::systems {
      * It combines heading and spin rotations into a single rotation matrix
      * and updates the local translation.
      */
+    template<typename THandle>
     class ComposeTransformSystem {
 
     public:
@@ -52,19 +53,20 @@ export namespace helios::engine::modules::spatial::transform::systems {
             const float deltaTime = updateContext.deltaTime();
 
             for (auto [entity, tc, tsc, active] : updateContext.view<
-                helios::engine::modules::spatial::transform::components::ComposeTransformComponent,
-                helios::engine::modules::spatial::transform::components::TranslationStateComponent,
-                helios::engine::mechanics::lifecycle::components::Active
+                THandle,
+                helios::engine::modules::spatial::transform::components::ComposeTransformComponent<THandle>,
+                helios::engine::modules::spatial::transform::components::TranslationStateComponent<THandle>,
+                helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
                 tc->setLocalTranslation(tsc->translation());
             }
 
             for (auto [entity, tc, rsc, active] : updateContext.view<
-                helios::engine::modules::spatial::transform::components::ComposeTransformComponent,
-                helios::engine::modules::spatial::transform::components::RotationStateComponent,
-                helios::engine::mechanics::lifecycle::components::Active
+                THandle,
+                helios::engine::modules::spatial::transform::components::ComposeTransformComponent<THandle>,
+                helios::engine::modules::spatial::transform::components::RotationStateComponent<THandle>,
+                helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
-
                tc->setLocalRotation(rsc->rotation());
             }
         }

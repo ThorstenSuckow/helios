@@ -7,3 +7,4 @@ export module helios.engine.modules.scene.systems;
 
 export import helios.engine.modules.scene.systems.SceneSyncSystem;
 export import helios.engine.modules.scene.systems.SceneRenderingSystem;
+export import helios.engine.modules.scene.systems.SceneMemberRenderExtractionSystem;

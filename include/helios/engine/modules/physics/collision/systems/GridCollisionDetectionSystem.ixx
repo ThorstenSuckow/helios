@@ -17,10 +17,10 @@ export module helios.engine.modules.physics.collision.systems.GridCollisionDetec
 
 
 import helios.engine.runtime.world.UpdateContext;
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameObject;
 import helios.engine.runtime.world.GameWorld;
 
-import helios.engine.mechanics.lifecycle.components;
+import helios.ecs.components;
 
 import helios.engine.modules.physics.collision.components.CollisionComponent;
 import helios.engine.modules.physics.collision.components.CollisionStateComponent;
@@ -29,19 +29,21 @@ import helios.engine.modules.physics.collision.components.AabbColliderComponent;
 import helios.engine.modules.physics.collision.types.CollisionBehavior;
 import helios.engine.modules.physics.collision.types.HitPolicy;
 
-import helios.engine.ecs.EntityHandle;
+import helios.ecs.types.EntityHandle;
 
 import helios.util.Guid;
 import helios.math;
 
 import helios.util.log;
 
-using namespace helios::engine::modules::physics::collision::components;
-using namespace helios::engine::mechanics::lifecycle::components;
-
-#define HELIOS_LOG_SCOPE "helios::engine::modules::physics::systems::GridCollisionDetectionSystem"
 import helios.engine.common.tags.SystemRole;
 
+import helios.engine.mechanics.lifecycle.components;
+
+using namespace helios::engine::modules::physics::collision::components;
+using namespace helios::engine::mechanics::lifecycle::components;
+using namespace helios::ecs::components;
+#define HELIOS_LOG_SCOPE "helios::engine::modules::physics::systems::GridCollisionDetectionSystem"
 export namespace helios::engine::modules::physics::collision::systems {
 
     /**
@@ -85,6 +87,7 @@ export namespace helios::engine::modules::physics::collision::systems {
      *
      * @see [Eri05, Chapter 7]
      */
+    template <typename THandle>
     class GridCollisionDetectionSystem {
 
         /**
@@ -123,10 +126,10 @@ export namespace helios::engine::modules::physics::collision::systems {
              *
              * @return A combined hash value for both handles.
              */
-            std::uint64_t operator()(const std::pair<helios::engine::ecs::EntityHandle, helios::engine::ecs::EntityHandle>& pair) const {
+            std::uint64_t operator()(const std::pair<THandle, THandle>& pair) const {
 
-                auto g1 = std::hash<helios::engine::ecs::EntityHandle>{}(pair.first);
-                auto g2 = std::hash<helios::engine::ecs::EntityHandle>{}(pair.second);
+                auto g1 = std::hash<THandle>{}(pair.first);
+                auto g2 = std::hash<THandle>{}(pair.second);
 
                 // compute the hash for the pair - shift g2 one position left, then xor with g1.
                 return g1 ^ (g2 << 1);
@@ -145,22 +148,22 @@ export namespace helios::engine::modules::physics::collision::systems {
             /**
              * @brief Pointer to the GameObject entity.
              */
-            helios::engine::ecs::GameObject gameObject;
+            helios::engine::runtime::world::GameObject gameObject;
 
             /**
              * @brief Pointer to the AABB collider component providing world-space bounds.
              */
-            AabbColliderComponent* aabbColliderComponent;
+            AabbColliderComponent<THandle>* aabbColliderComponent;
 
             /**
              * @brief Pointer to the collision component defining layer masks and collision behavior.
              */
-            CollisionComponent* collisionComponent;
+            CollisionComponent<THandle>* collisionComponent;
 
             /**
              * @brief Pointer to the collision state component for storing collision results.
              */
-            CollisionStateComponent* collisionStateComponent;
+            CollisionStateComponent<THandle>* collisionStateComponent;
         };
 
         /**
@@ -195,7 +198,7 @@ export namespace helios::engine::modules::physics::collision::systems {
          * Stores pairs of EntityHandles in canonical order (smaller handle first) to ensure each
          * collision pair is processed only once per frame, even when entities span multiple cells.
          */
-        std::unordered_set<std::pair<helios::engine::ecs::EntityHandle, helios::engine::ecs::EntityHandle>, EntityHandlePairHash> solvedCollisions_;
+        std::unordered_set<std::pair<THandle, THandle>, EntityHandlePairHash> solvedCollisions_;
 
         /**
          * @brief Size of each grid cell in world units.
@@ -289,13 +292,13 @@ export namespace helios::engine::modules::physics::collision::systems {
          * @param csc_b Collision state component of the second entity.
          */
         inline void postEvent(
-            const helios::engine::ecs::GameObject candidate,
-            const helios::engine::ecs::GameObject match,
+            const helios::engine::runtime::world::GameObject candidate,
+            const helios::engine::runtime::world::GameObject match,
             const helios::math::vec3f contact,
             const CollisionStruct collisionStruct,
             const helios::engine::runtime::world::UpdateContext& updateContext,
-            CollisionStateComponent* csc_a,
-            CollisionStateComponent* csc_b
+            CollisionStateComponent<THandle>* csc_a,
+            CollisionStateComponent<THandle>* csc_b
         ) const noexcept {
 
             bool aIsCollisionReporter = collisionStruct.aIsCollisionReporter;
@@ -314,12 +317,12 @@ export namespace helios::engine::modules::physics::collision::systems {
                 csc_a->setState(
                     candidate,
                     contact, isSolidCollision, isTriggerCollision, collisionStruct.aCollisionBehavior,
-                    aIsCollisionReporter, match.entityHandle(), aCollisionLayer, bCollisionLayer
+                    aIsCollisionReporter, match.handle(), aCollisionLayer, bCollisionLayer
                 );
                 csc_b->setState(
                     match,
                     contact, isSolidCollision, isTriggerCollision, collisionStruct.bCollisionBehavior,
-                    bIsCollisionReporter, candidate.entityHandle(),
+                    bIsCollisionReporter, candidate.handle(),
                     // swap collision layer order
                     bCollisionLayer, aCollisionLayer
                 );
@@ -340,8 +343,8 @@ export namespace helios::engine::modules::physics::collision::systems {
          * @return CollisionStruct a struct with the requested collision information.
          */
         [[nodiscard]] inline CollisionStruct findCollisionType(
-            const CollisionComponent* cc,
-            const CollisionComponent* matchCC
+            const CollisionComponent<THandle>* cc,
+            const CollisionComponent<THandle>* matchCC
         ) const noexcept {
 
             auto isSolidCollision   = false;
@@ -435,11 +438,12 @@ export namespace helios::engine::modules::physics::collision::systems {
             prepareCollisionDetection();
 
             for (auto [entity, cc, csc, acc, active] : updateContext.view<
-                CollisionComponent,
-                CollisionStateComponent,
-                AabbColliderComponent,
-                helios::engine::mechanics::lifecycle::components::Active
-            >().whereEnabled().exclude<DeadTagComponent>()) {
+                THandle,
+                CollisionComponent<THandle>,
+                CollisionStateComponent<THandle>,
+                AabbColliderComponent<THandle>,
+                helios::ecs::components::Active<THandle>
+            >().whereEnabled().template exclude<DeadTagComponent>()) {
 
                 if (!acc->boundsInitialized()) {
                     continue;
@@ -517,11 +521,11 @@ export namespace helios::engine::modules::physics::collision::systems {
          * @param collisionComponent Pointer to the entity's collision component.
          */
         inline void updateCollisionCandidate(
-            helios::engine::ecs::GameObject go,
+            helios::engine::runtime::world::GameObject go,
             const helios::math::aabbi& bounds,
-            AabbColliderComponent* aabbColliderComponent,
-            CollisionComponent* collisionComponent,
-            CollisionStateComponent* collisionStateComponent
+            AabbColliderComponent<THandle>* aabbColliderComponent,
+            CollisionComponent<THandle>* collisionComponent,
+            CollisionStateComponent<THandle>* collisionStateComponent
         ) {
             const auto xMin = bounds.min()[0];
             const auto xMax = bounds.max()[0];
@@ -615,8 +619,8 @@ export namespace helios::engine::modules::physics::collision::systems {
                         continue;
                     }
 
-                    auto lHandle = candidate.gameObject.entityHandle();
-                    auto rHandle = gameObject.entityHandle();
+                    auto lHandle = candidate.gameObject.handle();
+                    auto rHandle = gameObject.handle();
 
                     if (lHandle > rHandle) {
                         std::swap(lHandle, rHandle);

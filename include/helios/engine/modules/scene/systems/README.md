@@ -31,7 +31,7 @@ systemRegistry.add<SceneRenderingSystem>(
 | Module | Purpose |
 |--------|---------|
 | `helios.engine.modules.scene.types` | SceneToViewportMap |
-| `helios.rendering` | RenderingDevice, RenderPass |
+| `helios.rendering` | RenderingDevice, LegacyRenderPass |
 | `helios.scene` | Scene graph |
 
 ---

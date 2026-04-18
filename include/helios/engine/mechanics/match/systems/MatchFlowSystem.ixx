@@ -9,7 +9,7 @@ export module helios.engine.mechanics.match.systems.MatchFlowSystem;
 import helios.engine.mechanics.match.types;
 
 import helios.engine.state.Bindings;
-import helios.engine.runtime.messaging.command.EngineCommandBuffer;
+
 
 import helios.engine.mechanics.match.types.MatchState;
 import helios.engine.mechanics.match.types.MatchStateTransitionId;
@@ -20,13 +20,17 @@ import helios.engine.state.types.StateTransitionRequest;
 import helios.engine.state.types;
 import helios.engine.mechanics.gamestate.types;
 
-import helios.engine.ecs;
+import helios.ecs;
 import helios.engine.runtime;
+import helios.engine.common.concepts;
 
 using namespace helios::engine::state::commands;
 using namespace helios::engine::state::types;
 using namespace helios::engine::mechanics::gamestate;
 using namespace helios::engine::mechanics::match::types;
+using namespace helios::engine::runtime::world;
+using namespace helios::engine::common::concepts;
+using namespace helios::engine::runtime::messaging::command;
 
 import helios.engine.common.tags.SystemRole;
 
@@ -39,6 +43,8 @@ export namespace helios::engine::mechanics::match::systems {
      * transition commands to progress through: Undefined -> Warmup ->
      * PlayerSpawn -> Playing.
      */
+    template<typename TCommandBuffer>
+    requires IsCommandBufferLike<TCommandBuffer>
     class MatchFlowSystem {
 
         MatchState prevMatchState_ = MatchState::Undefined;
@@ -72,21 +78,21 @@ export namespace helios::engine::mechanics::match::systems {
 
 
                 case MatchState::Undefined: {
-                    updateContext.queueCommand<StateCommand<MatchState>>(
+                    updateContext.queueCommand<TCommandBuffer, StateCommand<MatchState>>(
                         StateTransitionRequest<MatchState>(matchState, MatchStateTransitionId::WarmupRequest)
                     );
                     break;
                 }
 
                 case MatchState::Warmup: {
-                    updateContext.queueCommand<StateCommand<MatchState>>(
+                    updateContext.queueCommand<TCommandBuffer, StateCommand<MatchState>>(
                         StateTransitionRequest<MatchState>(matchState, MatchStateTransitionId::StartRequest)
                     );
                     break;
                 }
 
                 case MatchState::Start: {
-                    updateContext.queueCommand<StateCommand<MatchState>>(
+                    updateContext.queueCommand<TCommandBuffer, StateCommand<MatchState>>(
                         StateTransitionRequest<MatchState>(matchState, MatchStateTransitionId::CountdownRequest)
                     );
                     break;

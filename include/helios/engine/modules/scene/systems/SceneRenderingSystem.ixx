@@ -20,19 +20,17 @@ import helios.engine.runtime.world.GameWorld;
 
 import helios.engine.runtime.world.UpdateContext;
 
-import helios.engine.mechanics.lifecycle.components.Active;
+import helios.ecs.components.Active;
 
 import helios.rendering.RenderPassFactory;
 
-import helios.engine.modules.scene.types.SceneToViewportMap;
+import helios.scene.SceneToViewportMap;
 
 import helios.engine.modules.scene.components.SceneNodeComponent;
 import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
-
-using namespace helios::engine::modules::scene::types;
-
 import helios.engine.common.tags.SystemRole;
 
+using namespace helios::scene;
 export namespace helios::engine::modules::scene::systems {
 
     /**
@@ -49,6 +47,7 @@ export namespace helios::engine::modules::scene::systems {
      * @see RenderingDevice
      * @see RenderPassFactory
      */
+    template<typename THandle>
     class SceneRenderingSystem {
 
         /**
@@ -59,7 +58,7 @@ export namespace helios::engine::modules::scene::systems {
         /**
          * @brief Reference to the scene-to-viewport mapping.
          */
-        helios::engine::modules::scene::types::SceneToViewportMap& sceneToViewportMap_;
+        SceneToViewportMap& sceneToViewportMap_;
 
     public:
 
@@ -73,7 +72,7 @@ export namespace helios::engine::modules::scene::systems {
          */
         explicit SceneRenderingSystem(
             helios::rendering::RenderingDevice& renderingDevice,
-            helios::engine::modules::scene::types::SceneToViewportMap& sceneToViewportMap
+            SceneToViewportMap& sceneToViewportMap
         )
         : renderingDevice_(renderingDevice), sceneToViewportMap_(sceneToViewportMap) {}
 
@@ -81,7 +80,7 @@ export namespace helios::engine::modules::scene::systems {
          * @brief Renders all active viewports for this frame.
          *
          * @details Iterates over the session's active viewport IDs, resolves each
-         * to its scene and viewport, creates a snapshot, builds a RenderPass, and
+         * to its scene and viewport, creates a snapshot, builds a LegacyRenderPass, and
          * submits it to the rendering device.
          *
          * @param updateContext The current frame's update context.
@@ -91,16 +90,16 @@ export namespace helios::engine::modules::scene::systems {
 
             auto& session = updateContext.session();
 
-            auto viewportIds = session.viewportIds();
+            auto viewportHandles = session.viewportHandles();
 
-            for (auto viewportId : viewportIds) {
+            for (auto viewportHandle : viewportHandles) {
 
-                auto scene = sceneToViewportMap_.scene(viewportId);
-                if (!scene) {
+                auto sceneHandle = sceneToViewportMap_.key(viewportHandle);
+                if (!sceneHandle.isValid()) {
                     continue;
                 }
 
-                auto viewport = sceneToViewportMap_.viewport(scene->sceneId(), viewportId);
+                /*auto viewport = sceneToViewportMap_.viewport(scene->sceneHandle(), viewportId);
                 if (!viewport) {
                     continue;
                 }
@@ -110,7 +109,7 @@ export namespace helios::engine::modules::scene::systems {
                     auto renderPass = helios::rendering::RenderPassFactory::getInstance()
                         .buildRenderPass(*snapshot);
                     renderingDevice_.render(renderPass);
-                }
+                }*/
 
             }
 

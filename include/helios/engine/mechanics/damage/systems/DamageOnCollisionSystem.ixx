@@ -11,13 +11,15 @@ module;
 export module helios.engine.mechanics.damage.systems.DamageOnCollisionSystem;
 
 
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameObject;
 
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.runtime.world.GameWorld;
+import helios.engine.runtime.messaging.command.NullCommandBuffer;
+import helios.engine.common.concepts.IsCommandBufferLike;
 
 import helios.engine.state.Bindings;
-import helios.engine.runtime.messaging.command.EngineCommandBuffer;
+
 
 import helios.engine.modules.physics.collision.events.SolidCollisionEvent;
 
@@ -46,6 +48,8 @@ using namespace helios::engine::mechanics::damage::commands;
 using namespace helios::engine::mechanics::spawn::components;
 
 using namespace helios::engine::common::types;
+using namespace helios::engine::runtime::messaging::command;
+using namespace helios::engine::common::concepts;
 
 #define HELIOS_LOG_SCOPE "helios::engine::mechanics::damage::systems::DamageOnCollisionSystem"
 export namespace helios::engine::mechanics::damage::systems {
@@ -59,6 +63,8 @@ export namespace helios::engine::mechanics::damage::systems {
      * ApplyDamageCommand. Resolves the true attacker (instigator) via
      * EmittedByComponent when applicable (e.g. projectiles).
      */
+    template<typename THandle, typename TCommandBuffer = NullCommandBuffer>
+    requires IsCommandBufferLike<TCommandBuffer>
     class DamageOnCollisionSystem {
 
 
@@ -78,7 +84,7 @@ export namespace helios::engine::mechanics::damage::systems {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             auto eventPass = updateContext.readPass<
-                helios::engine::modules::physics::collision::events::SolidCollisionEvent>();
+                helios::engine::modules::physics::collision::events::SolidCollisionEvent<THandle>>();
 
             for (const auto& event : eventPass) {
 
@@ -115,8 +121,8 @@ export namespace helios::engine::mechanics::damage::systems {
                 ));
 
                 // the go itself is the source
-                auto instigator= go->entityHandle();
-                auto causer = go->entityHandle();
+                auto instigator= go->handle();
+                auto causer = go->handle();
 
                 auto* ebc = go->get<EmittedByComponent>();
                 if (ebc) {
@@ -137,7 +143,7 @@ export namespace helios::engine::mechanics::damage::systems {
                     .damage = damageApplied
                 };
 
-                updateContext.queueCommand<ApplyDamageCommand>(dc);
+                updateContext.queueCommand<TCommandBuffer, ApplyDamageCommand>(dc);
 
             }
 

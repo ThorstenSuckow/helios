@@ -20,7 +20,7 @@ import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.modules.physics.collision.events;
 
-import helios.engine.mechanics.lifecycle.components.Active;
+import helios.ecs.components.Active;
 
 
 
@@ -38,6 +38,7 @@ export namespace helios::engine::mechanics::scoring::systems {
      * @see ScoreObserverSystem
      * @see ScoreObserverComponent
      */
+    template<typename THandle>
     class ScoreObserverClearSystem {
 
 
@@ -53,8 +54,9 @@ export namespace helios::engine::mechanics::scoring::systems {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto [entity, soc, active] : updateContext.view<
-                helios::engine::mechanics::scoring::components::ScoreObserverComponent,
-                helios::engine::mechanics::lifecycle::components::Active
+                THandle,
+                helios::engine::mechanics::scoring::components::ScoreObserverComponent<THandle>,
+                helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
 
                 soc->clearUpdate();

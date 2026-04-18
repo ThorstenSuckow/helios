@@ -13,7 +13,7 @@ module;
 
 export module helios.engine.modules.ui.widgets.systems.MenuDisplaySystem;
 
-import helios.engine.ecs;
+import helios.ecs;
 import helios.engine.runtime.world;
 import helios.engine.modules.ui.widgets.types.MenuId;
 
@@ -29,16 +29,16 @@ import helios.engine.mechanics.match.types;
 import helios.engine.modules.rendering.model.components.ModelAabbComponent;
 import helios.math;
 
+import helios.engine.common.tags.SystemRole;
+
 using namespace helios::engine::modules::ui::widgets::types;
 using namespace helios::engine::state;
 using namespace helios::engine::mechanics::gamestate::types;
 using namespace helios::engine::mechanics::match::types;
-using namespace helios::engine::ecs;
+using namespace helios::ecs::types;
 using namespace helios::engine::modules::ui::widgets::components;
 using namespace helios::engine::runtime::world;
-
-import helios.engine.common.tags.SystemRole;
-
+using namespace helios::ecs;
 export namespace helios::engine::modules::ui::widgets::systems {
 
     /**
@@ -59,7 +59,7 @@ export namespace helios::engine::modules::ui::widgets::systems {
      * @see MenuComponent
      * @see MenuNavigationSystem
      */
-    template<typename StateLft, typename StateRgt>
+    template<typename THandle, typename StateLft, typename StateRgt>
     class MenuDisplaySystem {
 
 
@@ -76,7 +76,7 @@ export namespace helios::engine::modules::ui::widgets::systems {
         /**
          * @brief Cache for inactive focused items to be cleaned up.
          */
-        std::vector<GameObject> inactiveItems_;
+        std::vector<THandle> inactiveItems_;
 
         /**
          * @brief Shows or hides a menu by ID.
@@ -85,7 +85,7 @@ export namespace helios::engine::modules::ui::widgets::systems {
          * @param show True to show, false to hide.
          * @param components View of all MenuComponent entities.
          */
-        void showMenu(const MenuId menuId, const bool show, View<MenuComponent>& components) {
+        void showMenu(const MenuId menuId, const bool show, View<THandle, MenuComponent<THandle>>& components) {
             for (auto [entity, mc] : components) {
                 if (mc->menuId() == menuId) {
                     entity.setActive(show);
@@ -100,7 +100,9 @@ export namespace helios::engine::modules::ui::widgets::systems {
          * @param menuId The menu to focus.
          * @param components View of all MenuComponent entities.
          */
-        void focusMenu(helios::engine::runtime::world::UpdateContext& updateContext, const MenuId menuId, View<MenuComponent>& components) {
+        void focusMenu(
+            helios::engine::runtime::world::UpdateContext& updateContext,
+            const MenuId menuId, View<THandle, MenuComponent<THandle>>& components) {
             for (auto [entity, mc] : components) {
                 if (mc->menuId() == menuId) {
                     mc->selectDefaultIndex();
@@ -155,7 +157,7 @@ export namespace helios::engine::modules::ui::widgets::systems {
                 return;
             }
 
-            View<MenuComponent> components = updateContext.view<MenuComponent>().whereEnabled();
+            View<THandle, MenuComponent<THandle>> components = updateContext.view<THandle, MenuComponent<THandle>>().whereEnabled();
 
 
             for (auto& prevMenuId : prevMenuIds_) {
@@ -177,7 +179,7 @@ export namespace helios::engine::modules::ui::widgets::systems {
             bool hasFocus = false;
             inactiveItems_.clear();
 
-            for (auto [entity, fc] :  updateContext.view<UiFocusComponent>().whereEnabled()) {
+            for (auto [entity, fc] :  updateContext.view<THandle, UiFocusComponent<THandle>>().whereEnabled()) {
 
                 /**
                  * @todo Check if item is child element of menu?
@@ -191,11 +193,13 @@ export namespace helios::engine::modules::ui::widgets::systems {
                  * @todo guaranteee that the UiFocusComponent is exclusive,
                  * break here if first comp with focus was found.
                  */
-                inactiveItems_.push_back(entity);
+                inactiveItems_.push_back(entity.handle());
             }
 
-            for (auto& item : inactiveItems_) {
-                item.remove<UiFocusComponent>();
+            for (auto& handle : inactiveItems_) {
+                if (auto entity = updateContext.find(handle)) {
+                    entity->remove<UiFocusComponent>();
+                }
             }
 
             // focus an item from the first menu

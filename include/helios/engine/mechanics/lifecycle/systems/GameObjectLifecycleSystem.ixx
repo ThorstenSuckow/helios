@@ -11,13 +11,15 @@ module;
 export module helios.engine.mechanics.lifecycle.systems.GameObjectLifecycleSystem;
 
 import helios.engine.state.Bindings;
-import helios.engine.runtime.messaging.command.EngineCommandBuffer;
+
 
 
 
 import helios.engine.runtime.world.Manager;
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
+import helios.engine.runtime.messaging.command.NullCommandBuffer;
+import helios.engine.common.concepts.IsCommandBufferLike;
 
 import helios.engine.runtime.spawn;
 
@@ -33,6 +35,7 @@ import helios.engine.mechanics.spawn.components.SpawnedByProfileComponent;
 
 using namespace helios::engine::runtime::world;
 using namespace helios::engine::runtime::messaging::command;
+using namespace helios::engine::common::concepts;
 
 using namespace helios::engine::mechanics::match::components;
 using namespace helios::engine::mechanics::match::events;
@@ -54,7 +57,9 @@ export namespace helios::engine::mechanics::lifecycle::systems {
      *   a DespawnCommand is enqueued.
      * - Otherwise the entity is deactivated.
      */
-    class GameObjectLifecycleSystem {
+    template<typename THandle, typename TCommandBuffer = NullCommandBuffer>
+    requires IsCommandBufferLike<TCommandBuffer>
+     class GameObjectLifecycleSystem {
 
     public:
 
@@ -67,7 +72,7 @@ export namespace helios::engine::mechanics::lifecycle::systems {
          */
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
-            auto events = updateContext.readPass<HealthDepletedEvent>();
+            auto events = updateContext.readPass<HealthDepletedEvent<THandle>>();
 
             for (auto& event : events) {
                 auto go = updateContext.find(event.source());
@@ -80,7 +85,7 @@ export namespace helios::engine::mechanics::lifecycle::systems {
                         if (hasHealthDepletedFlag(healthDepletedBehavior, HealthDepletedBehavior::Despawn)) {
                             if (auto* sbp = go->get<SpawnedByProfileComponent>()) {
                                 assert(sbp->spawnProfileId().value() != 0 && "Entity has no SpawnProfileId.");
-                                updateContext.queueCommand<DespawnCommand>(go->entityHandle(), sbp->spawnProfileId());
+                                updateContext.queueCommand<TCommandBuffer, DespawnCommand<THandle>>(go->handle(), sbp->spawnProfileId());
                             } else {
                                 go->setActive(false);
                                 /**

@@ -22,7 +22,7 @@ import helios.engine.modules.physics.motion.components.DirectionComponent;
 
 import helios.engine.runtime.world.UpdateContext;
 
-import helios.engine.mechanics.lifecycle.components.Active;
+import helios.ecs.components.Active;
 
 import helios.engine.common.tags.SystemRole;
 
@@ -42,6 +42,7 @@ export namespace helios::engine::modules::physics::motion::systems {
      * - DirectionComponent (current movement direction)
      * - TranslationStateComponent (receives translation updates)
      */
+    template<typename THandle>
     class Move2DSystem {
 
          private:
@@ -62,7 +63,7 @@ export namespace helios::engine::modules::physics::motion::systems {
          * @return Translation delta to apply to the entity this frame.
          */
         [[nodiscard]] static helios::math::vec3f moveGameObject(
-            helios::engine::modules::physics::motion::components::Move2DComponent* cmp,
+            helios::engine::modules::physics::motion::components::Move2DComponent<THandle>* cmp,
             helios::math::vec3f currentDirection,
             float deltaTime
         ) noexcept {
@@ -128,10 +129,11 @@ export namespace helios::engine::modules::physics::motion::systems {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto [entity, m2d, dc, tsc, active] : updateContext.view<
-                helios::engine::modules::physics::motion::components::Move2DComponent,
-                helios::engine::modules::physics::motion::components::DirectionComponent,
-                helios::engine::modules::spatial::transform::components::TranslationStateComponent,
-                helios::engine::mechanics::lifecycle::components::Active
+                THandle,
+                helios::engine::modules::physics::motion::components::Move2DComponent<THandle>,
+                helios::engine::modules::physics::motion::components::DirectionComponent<THandle>,
+                helios::engine::modules::spatial::transform::components::TranslationStateComponent<THandle>,
+                helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
 
                 helios::math::vec3f translationDelta;

@@ -23,11 +23,11 @@ import helios.engine.modules.scene.components.SceneNodeComponent;
 
 import helios.engine.modules.rendering.model.components.ModelAabbComponent;
 
-import helios.engine.mechanics.lifecycle.components.Active;
+import helios.ecs.components.Active;
 
 import helios.math;
 
-import helios.engine.ecs.components.HierarchyComponent;
+import helios.ecs.components.HierarchyComponent;
 
 import helios.engine.common.tags.SystemRole;
 
@@ -67,6 +67,7 @@ export namespace helios::engine::modules::ui::transform::systems {
      * @see Anchor
      * @see HierarchyComponent
      */
+    template<typename THandle>
     class UiTransformSystem {
 
         /**
@@ -128,20 +129,17 @@ export namespace helios::engine::modules::ui::transform::systems {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto [entity, tc, tsc, ctc, mbc, snc, active] : updateContext.view<
-                helios::engine::modules::ui::transform::components::UiTransformComponent,
-                helios::engine::modules::spatial::transform::components::TranslationStateComponent,
-                helios::engine::modules::spatial::transform::components::ComposeTransformComponent,
-                helios::engine::modules::rendering::model::components::ModelAabbComponent,
-                helios::engine::modules::scene::components::SceneNodeComponent,
-                helios::engine::mechanics::lifecycle::components::Active
+                THandle,
+                helios::engine::modules::ui::transform::components::UiTransformComponent<THandle>,
+                helios::engine::modules::spatial::transform::components::TranslationStateComponent<THandle>,
+                helios::engine::modules::spatial::transform::components::ComposeTransformComponent<THandle>,
+                helios::engine::modules::rendering::model::components::ModelAabbComponent<THandle>,
+                helios::engine::modules::scene::components::SceneNodeComponent<THandle>,
+                helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
 
-                if (!tc->viewportId()) {
-                    continue;
-                }
-
                 for (const auto& snapshot : updateContext.viewportSnapshots()) {
-                    if (snapshot.viewportId != tc->viewportId()) {
+                    if (snapshot.viewportHandle != tc->viewportHandle()) {
                         continue;
                     }
 
@@ -183,7 +181,9 @@ export namespace helios::engine::modules::ui::transform::systems {
 
                     } else {
 
-                        auto* hc = entity.get<helios::engine::ecs::components::HierarchyComponent>();
+                        using Handle = typename std::remove_cvref_t<decltype(entity)>::Handle_type;
+
+                        auto* hc = entity.get<helios::ecs::components::HierarchyComponent<Handle>>();
 
                         if (!hc || !hc->parent()) {
                             continue;
@@ -191,8 +191,8 @@ export namespace helios::engine::modules::ui::transform::systems {
 
                         // we rely on the parent entity so we do not have to wait for the SceneGraph sync
                         if (auto parentGo = updateContext.find(hc->parent().value())) {
-                            auto* pmaabbcc = parentGo->get<rendering::model::components::ModelAabbComponent>();
-                            auto* pctc = parentGo->get<spatial::transform::components::ComposeTransformComponent>();
+                            auto* pmaabbcc = parentGo->get<rendering::model::components::ModelAabbComponent<Handle>>();
+                            auto* pctc = parentGo->get<spatial::transform::components::ComposeTransformComponent<Handle>>();
 
                             auto size = pmaabbcc->aabb().size() * pctc->localScaling();
 

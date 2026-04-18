@@ -23,7 +23,7 @@ import helios.engine.modules.spatial.transform.components.RotationStateComponent
 
 import helios.engine.runtime.world.UpdateContext;
 
-import helios.engine.mechanics.lifecycle.components.Active;
+import helios.ecs.components.Active;
 
 import helios.engine.common.tags.SystemRole;
 
@@ -37,6 +37,7 @@ export namespace helios::engine::modules::physics::motion::systems {
      * It calculates the target rotation from input, applies rotation speed and dampening,
      * and updates the RotationStateComponent and DirectionComponent.
      */
+    template<typename THandle>
     class SteeringSystem {
 
         private:
@@ -51,7 +52,7 @@ export namespace helios::engine::modules::physics::motion::systems {
          * @param deltaTime Time elapsed since last frame in seconds.
          */
         void updateHeading(
-            helios::engine::modules::physics::motion::components::SteeringComponent* cmp,
+            helios::engine::modules::physics::motion::components::SteeringComponent<THandle>* cmp,
             float deltaTime
         ) noexcept {
 
@@ -125,10 +126,11 @@ export namespace helios::engine::modules::physics::motion::systems {
 
 
             for (auto [entity, hc, rsc, dc, active] : updateContext.view<
-                helios::engine::modules::physics::motion::components::SteeringComponent,
-                helios::engine::modules::spatial::transform::components::RotationStateComponent,
-                helios::engine::modules::physics::motion::components::DirectionComponent,
-                helios::engine::mechanics::lifecycle::components::Active
+                THandle,
+                helios::engine::modules::physics::motion::components::SteeringComponent<THandle>,
+                helios::engine::modules::spatial::transform::components::RotationStateComponent<THandle>,
+                helios::engine::modules::physics::motion::components::DirectionComponent<THandle>,
+                helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
 
 

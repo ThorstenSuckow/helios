@@ -15,7 +15,7 @@ import helios.engine.runtime.world.UpdateContext;
 
 
 
-import helios.engine.mechanics.lifecycle.components.Active;
+import helios.ecs.components.Active;
 
 import helios.engine.mechanics.health.components;
 
@@ -30,6 +30,7 @@ export namespace helios::engine::mechanics::health::systems {
      * Should run after all health-related observers have processed the
      * current frame so that stale change notifications are discarded.
      */
+    template<typename THandle>
     class HealthUpdateClearSystem {
 
     public:
@@ -43,8 +44,9 @@ export namespace helios::engine::mechanics::health::systems {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto [entity, hc, active] : updateContext.view<
-                helios::engine::mechanics::health::components::HealthComponent,
-                helios::engine::mechanics::lifecycle::components::Active
+                THandle,
+                helios::engine::mechanics::health::components::HealthComponent<THandle>,
+                helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
                 hc->clearDirty();
             }

@@ -17,10 +17,12 @@ export module helios.engine.modules.physics.collision.systems.CollisionStateResp
 
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
+import helios.engine.runtime.messaging.command.NullCommandBuffer;
+import helios.engine.common.concepts.IsCommandBufferLike;
 
 
 import helios.engine.state.Bindings;
-import helios.engine.runtime.messaging.command.EngineCommandBuffer;
+
 
 import helios.engine.modules.physics.collision.types.CollisionBehavior;
 
@@ -31,11 +33,13 @@ import helios.engine.modules.physics.collision.events;
 
 import helios.engine.mechanics.spawn.components.SpawnedByProfileComponent;
 
-import helios.engine.mechanics.lifecycle.components.Active;
+import helios.ecs.components.Active;
 
 using namespace helios::engine::modules::physics::collision::components;
 using namespace helios::engine::modules::physics::collision::types;
 using namespace helios::engine::runtime::spawn::commands;
+using namespace helios::engine::runtime::messaging::command;
+using namespace helios::engine::common::concepts;
 
 
 import helios.engine.common.tags.SystemRole;
@@ -58,7 +62,9 @@ export namespace helios::engine::modules::physics::collision::systems {
      *
      * This system should run after collision detection but before collision state clearing.
      */
-    class CollisionStateResponseSystem {
+    template<typename THandle, typename TCommandBuffer = NullCommandBuffer>
+    requires IsCommandBufferLike<TCommandBuffer>
+     class CollisionStateResponseSystem {
 
     public:
 
@@ -76,9 +82,10 @@ export namespace helios::engine::modules::physics::collision::systems {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto [entity, csc, sbp, active] : updateContext.view<
-                CollisionStateComponent,
-                helios::engine::mechanics::spawn::components::SpawnedByProfileComponent,
-                helios::engine::mechanics::lifecycle::components::Active
+                THandle,
+                CollisionStateComponent<THandle>,
+                helios::engine::mechanics::spawn::components::SpawnedByProfileComponent<THandle>,
+                helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
 
                 if (!csc->hasCollision()) {
@@ -90,15 +97,15 @@ export namespace helios::engine::modules::physics::collision::systems {
                 if (hasFlag(collisionBehavior, CollisionBehavior::PassEvent)) {
 
                     if (csc->isTrigger()) {
-                        updateContext.pushPass<events::TriggerCollisionEvent>(
-                            entity.entityHandle(),
+                        updateContext.pushPass<events::TriggerCollisionEvent<THandle>>(
+                            entity.handle(),
                             csc->collisionContext()
                        );
                     }
 
                     if (csc->isSolid()) {
-                        updateContext.pushPass<events::SolidCollisionEvent>(
-                            entity.entityHandle(),
+                        updateContext.pushPass<events::SolidCollisionEvent<THandle>>(
+                            entity.handle(),
                             csc->collisionContext()
                        );
                     }
@@ -106,8 +113,8 @@ export namespace helios::engine::modules::physics::collision::systems {
 
 
                 if (hasFlag(collisionBehavior, CollisionBehavior::Despawn)) {
-                    updateContext.queueCommand<DespawnCommand>(
-                        entity.entityHandle(), sbp->spawnProfileId());
+                    updateContext.queueCommand<TCommandBuffer, DespawnCommand<THandle>>(
+                        entity.handle(), sbp->spawnProfileId());
                 }
             }
 

@@ -21,12 +21,14 @@ import helios.engine.mechanics.scoring.types;
 
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
+import helios.engine.runtime.messaging.command.NullCommandBuffer;
+import helios.engine.common.concepts.IsCommandBufferLike;
 
 import helios.engine.state.Bindings;
-import helios.engine.runtime.messaging.command.EngineCommandBuffer;
 
 
-import helios.engine.ecs.types.EntityId;
+
+import helios.ecs.types.TypeDefs;
 
 import helios.engine.mechanics.health.events.HealthDepletedEvent;
 
@@ -41,7 +43,10 @@ using namespace helios::engine::mechanics::scoring::components;
 using namespace helios::engine::mechanics::scoring::types;
 using namespace helios::engine::mechanics::scoring::commands;
 using namespace helios::engine::mechanics::health::events;
-using namespace helios::engine::ecs::types;
+using namespace helios::ecs::types;
+using namespace helios::engine::runtime::world;
+using namespace helios::engine::runtime::messaging::command;
+using namespace helios::engine::common::concepts;
 
 #define HELIOS_LOG_SCOPE "helios::engine::mechanics::scoring::systems::CombatScoringSystem"
 import helios.engine.common.tags.SystemRole;
@@ -55,6 +60,8 @@ export namespace helios::engine::mechanics::scoring::systems {
      * ScoreValueComponent. If so, issues an UpdateScoreCommand to
      * credit the attacker's score pool.
      */
+    template<typename THandle, typename TCommandBuffer = NullCommandBuffer>
+    requires IsCommandBufferLike<TCommandBuffer>
     class CombatScoringSystem {
 
         inline static const helios::util::log::Logger& logger_ = helios::util::log::LogManager::loggerForScope(
@@ -72,7 +79,7 @@ export namespace helios::engine::mechanics::scoring::systems {
          */
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
-            for (auto& event : updateContext.readPass<HealthDepletedEvent>()) {
+            for (auto& event : updateContext.readPass<HealthDepletedEvent<THandle>>()) {
 
                 if (!event.damageContext()) {
                     continue;
@@ -111,7 +118,7 @@ export namespace helios::engine::mechanics::scoring::systems {
                     svc->score().value())
                 );
 
-                updateContext.queueCommand<UpdateScoreCommand>(
+                updateContext.queueCommand<TCommandBuffer, UpdateScoreCommand>(
                     std::move(scoreContext)
                 );
             }

@@ -18,7 +18,7 @@ import helios.engine.runtime.world.UpdateContext;
 
 import helios.rendering.text.TextShaderPropertiesOverride;
 
-import helios.engine.mechanics.lifecycle.components.Active;
+import helios.ecs.components.Active;
 
 
 import helios.engine.common.tags.SystemRole;
@@ -32,6 +32,7 @@ export namespace helios::engine::modules::ui::widgets::systems {
      * Monitors UiTextComponent for resize requests and updates the associated
      * ModelAabbComponent with the new text bounds from the underlying TextRenderable.
      */
+    template<typename THandle>
     class UiStyleUpdateSystem {
 
     public:
@@ -47,10 +48,11 @@ export namespace helios::engine::modules::ui::widgets::systems {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto [entity, txt, usy, usc, active] : updateContext.view<
-                helios::engine::modules::ui::widgets::components::UiTextComponent,
-                helios::engine::modules::ui::widgets::components::UiStyleComponent,
-                helios::engine::modules::ui::widgets::components::UiStateComponent,
-                helios::engine::mechanics::lifecycle::components::Active
+                THandle,
+                helios::engine::modules::ui::widgets::components::UiTextComponent<THandle>,
+                helios::engine::modules::ui::widgets::components::UiStyleComponent<THandle>,
+                helios::engine::modules::ui::widgets::components::UiStateComponent<THandle>,
+                helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
 
 

@@ -10,12 +10,14 @@ export module helios.engine.mechanics.input.systems.TwinStickInputSystem;
 
 import helios.math.types;
 import helios.math.utils;
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameObject;
 import helios.engine.runtime.world.UpdateContext;
+import helios.engine.runtime.messaging.command.NullCommandBuffer;
+import helios.engine.common.concepts.IsCommandBufferLike;
 
 
 import helios.engine.state.Bindings;
-import helios.engine.runtime.messaging.command.EngineCommandBuffer;
+
 
 import helios.engine.mechanics.lifecycle.components.DeadTagComponent;
 
@@ -24,10 +26,12 @@ import helios.engine.modules.physics.motion.commands.SteeringCommand;
 import helios.engine.mechanics.combat.commands.Aim2DCommand;
 import helios.engine.mechanics.combat.commands.ShootCommand;
 
-using namespace helios::engine::mechanics::lifecycle::components;
-
 import helios.engine.common.tags.SystemRole;
 
+
+using namespace helios::engine::mechanics::lifecycle::components;
+using namespace helios::engine::runtime::messaging::command;
+using namespace helios::engine::common::concepts;
 export namespace helios::engine::mechanics::input::systems {
 
     /**
@@ -44,6 +48,8 @@ export namespace helios::engine::mechanics::input::systems {
      * @note Requires the owning GameObject to have Move2DComponent and Aim2DComponent
      *       attached for the generated commands to have any effect.
      */
+    template<typename THandle, typename TCommandBuffer = NullCommandBuffer>
+    requires IsCommandBufferLike<TCommandBuffer>
     class TwinStickInputSystem {
 
         /**
@@ -55,9 +61,9 @@ export namespace helios::engine::mechanics::input::systems {
         bool useDedicatedShootInput_ = false;
 
         /**
-         * @brief Reference to the GameObject this system reads input for.
+         * @brief Reference to the EntityHandle this system reads input for.
          */
-        helios::engine::ecs::GameObject gameObject_;
+        THandle entityHandle_;
 
     public:
 
@@ -68,8 +74,8 @@ export namespace helios::engine::mechanics::input::systems {
          *
          * @param gameObject Reference to the GameObject to generate input commands for.
          */
-        explicit TwinStickInputSystem(helios::engine::ecs::GameObject gameObject) :
-        gameObject_(gameObject) {}
+        explicit TwinStickInputSystem(THandle entityHandle) :
+        entityHandle_(entityHandle) {}
 
         /**
          * @brief Processes gamepad input and generates movement/aiming commands.
@@ -92,12 +98,12 @@ export namespace helios::engine::mechanics::input::systems {
             float finalFreq = 0.0f;
             auto rdir = helios::math::vec2f{0.0f, 0.0f};
 
-            if (gameObject_.has<DeadTagComponent>()) {
-                updateContext.queueCommand<helios::engine::modules::physics::motion::commands::Move2DCommand>(
-                    gameObject_.entityHandle(), ldir, finalSpeed
+            if (entityHandle_.has<DeadTagComponent>()) {
+                updateContext.queueCommand<TCommandBuffer, helios::engine::modules::physics::motion::commands::Move2DCommand<THandle>>(
+                    entityHandle_, ldir, finalSpeed
                 );
-                updateContext.queueCommand<helios::engine::mechanics::combat::commands::Aim2DCommand>(
-                    gameObject_.entityHandle(), rdir, finalFreq
+                updateContext.queueCommand<TCommandBuffer, helios::engine::mechanics::combat::commands::Aim2DCommand<THandle>>(
+                    entityHandle_, rdir, finalFreq
                 );
                 return;
             }
@@ -110,12 +116,12 @@ export namespace helios::engine::mechanics::input::systems {
              * @todo DO NOT POST IF input is already inactive in shootComponent
              * and no input was detected (after normalizing)
              */
-            updateContext.queueCommand<helios::engine::modules::physics::motion::commands::Move2DCommand>(
-                gameObject_.entityHandle(), ldir, finalSpeed
+            updateContext.queueCommand<TCommandBuffer, helios::engine::modules::physics::motion::commands::Move2DCommand<THandle>>(
+                entityHandle_, ldir, finalSpeed
             );
 
-            updateContext.queueCommand<helios::engine::modules::physics::motion::commands::SteeringCommand>(
-                gameObject_.entityHandle(), ldir, finalSpeed
+            updateContext.queueCommand<TCommandBuffer, helios::engine::modules::physics::motion::commands::SteeringCommand<THandle>>(
+                entityHandle_, ldir, finalSpeed
             );
 
             if (freq > helios::math::EPSILON_LENGTH) {
@@ -123,23 +129,23 @@ export namespace helios::engine::mechanics::input::systems {
                 finalFreq = freq;
             }
 
-            updateContext.queueCommand<helios::engine::mechanics::combat::commands::Aim2DCommand>(
-                gameObject_.entityHandle(), rdir, finalFreq
+            updateContext.queueCommand<TCommandBuffer, helios::engine::mechanics::combat::commands::Aim2DCommand<THandle>>(
+                entityHandle_, rdir, finalFreq
             );
 
             if (useDedicatedShootInput_) {
                 // right trigger: shooting
                 const auto rightTrigger = inputSnapshot.gamepadState().triggerRight();
                 if (rightTrigger > 0.0f) {
-                    updateContext.queueCommand<helios::engine::mechanics::combat::commands::ShootCommand>(
-                       gameObject_.entityHandle(), rightTrigger
-                   );
+                    updateContext.queueCommand<TCommandBuffer, helios::engine::mechanics::combat::commands::ShootCommand<THandle>>(
+                        entityHandle_, rightTrigger
+                    );
                 }
             } else {
                 if (finalFreq > 0.0f) {
-                    updateContext.queueCommand<helios::engine::mechanics::combat::commands::ShootCommand>(
-                       gameObject_.entityHandle(), finalFreq
-                   );
+                    updateContext.queueCommand<TCommandBuffer, helios::engine::mechanics::combat::commands::ShootCommand<THandle>>(
+                        entityHandle_, finalFreq
+                    );
                 }
             }
 

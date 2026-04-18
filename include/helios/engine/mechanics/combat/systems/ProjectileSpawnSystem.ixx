@@ -11,9 +11,11 @@ export module helios.engine.mechanics.combat.systems.ProjectileSpawnSystem;
 
 
 import helios.engine.state.Bindings;
-import helios.engine.runtime.messaging.command.EngineCommandBuffer;
+
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.runtime.world.GameWorld;
+import helios.engine.runtime.messaging.command.NullCommandBuffer;
+import helios.engine.common.concepts.IsCommandBufferLike;
 import helios.engine.mechanics.combat.components.ShootComponent;
 import helios.engine.mechanics.combat.components.Aim2DComponent;
 import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
@@ -24,11 +26,13 @@ import helios.engine.runtime.spawn.types.SpawnProfileId;
 
 import helios.math;
 
-import helios.engine.mechanics.lifecycle.components.Active;
+import helios.ecs.components.Active;
 
 import helios.engine.common.tags.SystemRole;
 
 using namespace helios::engine::runtime::spawn::types;
+using namespace helios::engine::runtime::messaging::command;
+using namespace helios::engine::common::concepts;
 export namespace helios::engine::mechanics::combat::systems {
 
     /**
@@ -70,6 +74,8 @@ export namespace helios::engine::mechanics::combat::systems {
      * @see SpawnCommand
      * @see EmitterContext
      */
+    template<typename THandle, typename TCommandBuffer = NullCommandBuffer>
+    requires IsCommandBufferLike<TCommandBuffer>
     class ProjectileSpawnSystem {
 
         /**
@@ -114,10 +120,11 @@ export namespace helios::engine::mechanics::combat::systems {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto [entity, tsc, ac, sc, active] : updateContext.view<
-                helios::engine::modules::spatial::transform::components::TranslationStateComponent,
-                helios::engine::mechanics::combat::components::Aim2DComponent,
-                helios::engine::mechanics::combat::components::ShootComponent,
-                helios::engine::mechanics::lifecycle::components::Active
+                THandle,
+                helios::engine::modules::spatial::transform::components::TranslationStateComponent<THandle>,
+                helios::engine::mechanics::combat::components::Aim2DComponent<THandle>,
+                helios::engine::mechanics::combat::components::ShootComponent<THandle>,
+                helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
 
 
@@ -155,7 +162,7 @@ export namespace helios::engine::mechanics::combat::systems {
                 assert(aimDirection.isNormalized() && "Unexpected aimDirection.length()");
 
                 for (unsigned int i = 0; i < amount; i++) {
-                    updateContext.queueCommand<
+                    updateContext.queueCommand<TCommandBuffer,
                         helios::engine::runtime::spawn::commands::SpawnCommand
                     >(
                         spawnProfileId_,
@@ -163,7 +170,7 @@ export namespace helios::engine::mechanics::combat::systems {
                             EmitterContext{
                                 tsc->translation(),
                                 sc->sourceVelocity() + (aimDirection * sc->projectileSpeed()),
-                                entity.entityHandle()
+                                entity.handle()
                             }
                         }
                     );

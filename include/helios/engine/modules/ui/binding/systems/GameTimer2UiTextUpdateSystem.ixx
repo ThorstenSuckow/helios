@@ -21,7 +21,7 @@ import helios.engine.runtime.world.UpdateContext;
 import helios.engine.modules.ui.widgets;
 import helios.engine.modules.ui.layout;
 
-import helios.engine.mechanics.lifecycle.components.Active;
+import helios.ecs.components.Active;
 
 using namespace helios::engine::mechanics::timing;
 
@@ -40,6 +40,7 @@ export namespace helios::engine::modules::ui::binding::systems {
      * @see GameTimerBindingComponent
      * @see TimeFormatterComponent
      */
+    template<typename THandle>
     class GameTimer2UiTextUpdateSystem {
 
         /**
@@ -72,10 +73,11 @@ export namespace helios::engine::modules::ui::binding::systems {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto [entity, gtc, dfc, txt, active] : updateContext.view<
-                helios::engine::mechanics::timing::components::GameTimerBindingComponent,
-                helios::engine::modules::ui::layout::components::TimeFormatterComponent,
-                helios::engine::modules::ui::widgets::components::UiTextComponent,
-                helios::engine::mechanics::lifecycle::components::Active
+                THandle,
+                helios::engine::mechanics::timing::components::GameTimerBindingComponent<THandle>,
+                helios::engine::modules::ui::layout::components::TimeFormatterComponent<THandle>,
+                helios::engine::modules::ui::widgets::components::UiTextComponent<THandle>,
+                helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
 
                 if (const auto* timer = timerManager_.gameTimer(gtc->gameTimerId());

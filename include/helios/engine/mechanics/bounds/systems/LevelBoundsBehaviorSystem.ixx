@@ -13,12 +13,12 @@ export module helios.engine.mechanics.bounds.systems.LevelBoundsBehaviorSystem;
 import helios.math;
 
 import helios.engine.state.Bindings;
-import helios.engine.runtime.messaging.command.EngineCommandBuffer;
+
 
 import helios.engine.modules.physics.collision.types.CollisionBehavior;
 import helios.engine.modules.physics.collision.types.CollisionResponse;
 
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameObject;
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.modules.physics.motion.components.Move2DComponent;
 import helios.engine.modules.physics.motion.components.SteeringComponent;
@@ -32,19 +32,23 @@ import helios.engine.modules.rendering.model.components.ModelAabbComponent;
 import helios.scene.SceneNode;
 import helios.engine.modules.scene.components.SceneNodeComponent;
 
-import helios.engine.ecs.View;
+import helios.ecs.View;
 
 import helios.engine.runtime.world.UpdateContext;
+import helios.engine.runtime.messaging.command.NullCommandBuffer;
+import helios.engine.common.concepts.IsCommandBufferLike;
 
 import helios.engine.runtime.spawn.commands.DespawnCommand;
 
 import helios.engine.mechanics.spawn.components.SpawnedByProfileComponent;
 
-import helios.engine.mechanics.lifecycle.components.Active;
+import helios.ecs.components.Active;
 
 
 import helios.engine.common.tags.SystemRole;
 
+using namespace helios::engine::runtime::messaging::command;
+using namespace helios::engine::common::concepts;
 export namespace helios::engine::mechanics::bounds::systems {
 
     /**
@@ -55,6 +59,8 @@ export namespace helios::engine::mechanics::bounds::systems {
      * When an entity leaves the bounds, it applies bounce behavior based on the
      * LevelBoundsBehaviorComponent's restitution coefficient.
      */
+        template<typename THandle, typename TCommandBuffer = NullCommandBuffer>
+        requires IsCommandBufferLike<TCommandBuffer>
     class LevelBoundsBehaviorSystem {
 
         /**
@@ -92,14 +98,15 @@ export namespace helios::engine::mechanics::bounds::systems {
             using namespace helios::engine::modules::physics::collision::types;
 
             for (auto [entity, m2d, ab, sc, dc, tsc, bc, bbc, active] : updateContext.view<
-                helios::engine::modules::physics::motion::components::Move2DComponent,
-                helios::engine::modules::rendering::model::components::ModelAabbComponent,
-                helios::engine::modules::scene::components::SceneNodeComponent,
-                helios::engine::modules::physics::motion::components::DirectionComponent,
-                helios::engine::modules::spatial::transform::components::TranslationStateComponent,
-                helios::engine::modules::physics::collision::components::AabbColliderComponent,
-                helios::engine::mechanics::bounds::components::LevelBoundsBehaviorComponent,
-                helios::engine::mechanics::lifecycle::components::Active
+                THandle,
+                helios::engine::modules::physics::motion::components::Move2DComponent<THandle>,
+                helios::engine::modules::rendering::model::components::ModelAabbComponent<THandle>,
+                helios::engine::modules::scene::components::SceneNodeComponent<THandle>,
+                helios::engine::modules::physics::motion::components::DirectionComponent<THandle>,
+                helios::engine::modules::spatial::transform::components::TranslationStateComponent<THandle>,
+                helios::engine::modules::physics::collision::components::AabbColliderComponent<THandle>,
+                helios::engine::mechanics::bounds::components::LevelBoundsBehaviorComponent<THandle>,
+                helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
 
 
@@ -124,17 +131,18 @@ export namespace helios::engine::mechanics::bounds::systems {
                         );
 
                         bouncedWorldTranslation = bounceResult.translation;
-                        updateCollisionResponse(entity, bounceResult, bbc->collisionResponse());
+                        updateCollisionResponse(entity.handle(), bounceResult, bbc->collisionResponse());
 
                     } else if (bbc->collisionBehavior() == CollisionBehavior::Despawn) {
+
                         /**
                          * @todo optimize
                          */
-                        auto* sbp = entity.get<helios::engine::mechanics::spawn::components::SpawnedByProfileComponent>();
+                        auto* sbp = entity.get<helios::engine::mechanics::spawn::components::SpawnedByProfileComponent<THandle>>();
                         assert(sbp && "Unexpected missing SpawnProfile");
 
-                        updateContext.queueCommand<helios::engine::runtime::spawn::commands::DespawnCommand>(
-                            entity.entityHandle(), sbp->spawnProfileId()
+                        updateContext.queueCommand<TCommandBuffer, helios::engine::runtime::spawn::commands::DespawnCommand<THandle>>(
+                            entity.handle(), sbp->spawnProfileId()
                         );
 
                     }
@@ -171,12 +179,12 @@ export namespace helios::engine::mechanics::bounds::systems {
          * @param collisionResponse The type of response to apply.
          */
         void updateCollisionResponse(
-            helios::engine::ecs::GameObject go,
+            helios::engine::runtime::world::GameObject go,
             BounceResult bounceResult,
             helios::engine::modules::physics::collision::types::CollisionResponse collisionResponse) {
 
             if (collisionResponse == helios::engine::modules::physics::collision::types::CollisionResponse::AlignHeadingToDirection) {
-                auto* psc = go.get<helios::engine::modules::physics::motion::components::SteeringComponent>();
+                auto* psc = go.get<helios::engine::modules::physics::motion::components::SteeringComponent<THandle>>();
 
                 const auto direction = bounceResult.direction;
 
@@ -211,8 +219,8 @@ export namespace helios::engine::mechanics::bounds::systems {
             helios::math::aabbf objectBounds,
             helios::math::aabbf levelBounds,
             const float restitution,
-            helios::engine::modules::physics::motion::components::Move2DComponent& m2d,
-            helios::engine::modules::physics::motion::components::DirectionComponent& dc
+            helios::engine::modules::physics::motion::components::Move2DComponent<THandle>& m2d,
+            helios::engine::modules::physics::motion::components::DirectionComponent<THandle>& dc
         ) noexcept {
 
 

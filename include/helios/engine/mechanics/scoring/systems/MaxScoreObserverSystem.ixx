@@ -21,7 +21,7 @@ import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.modules.physics.collision.events;
 
-import helios.engine.mechanics.lifecycle.components.Active;
+import helios.ecs.components.Active;
 
 
 import helios.util.log;
@@ -45,6 +45,7 @@ export namespace helios::engine::mechanics::scoring::systems {
      * @see MaxScoreObserverComponent
      * @see ScorePoolManager
      */
+    template<typename THandle>
     class MaxScoreObserverSystem {
 
         /**
@@ -72,8 +73,9 @@ export namespace helios::engine::mechanics::scoring::systems {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto [entity, soc, active] : updateContext.view<
-                helios::engine::mechanics::scoring::components::MaxScoreObserverComponent,
-                helios::engine::mechanics::lifecycle::components::Active
+                THandle,
+                helios::engine::mechanics::scoring::components::MaxScoreObserverComponent<THandle>,
+                helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
 
 

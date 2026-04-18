@@ -21,7 +21,7 @@ import helios.engine.modules.ui.widgets.components.UiTextComponent;
 
 import helios.engine.modules.ui.layout.components.NumberFormatterComponent;
 
-import helios.engine.mechanics.lifecycle.components.Active;
+import helios.ecs.components.Active;
 
 
 import helios.engine.common.tags.SystemRole;
@@ -38,6 +38,7 @@ export namespace helios::engine::modules::ui::binding::systems {
      * @see ScoreObserverComponent
      * @see NumberFormatterComponent
      */
+    template<typename THandle>
     class Score2UiTextUpdateSystem {
 
     public:
@@ -52,10 +53,11 @@ export namespace helios::engine::modules::ui::binding::systems {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
 
             for (auto [entity, soc, nfc, txt, active] : updateContext.view<
-                helios::engine::mechanics::scoring::components::ScoreObserverComponent,
-                helios::engine::modules::ui::layout::components::NumberFormatterComponent,
-                helios::engine::modules::ui::widgets::components::UiTextComponent,
-                helios::engine::mechanics::lifecycle::components::Active
+                THandle,
+                helios::engine::mechanics::scoring::components::ScoreObserverComponent<THandle>,
+                helios::engine::modules::ui::layout::components::NumberFormatterComponent<THandle>,
+                helios::engine::modules::ui::widgets::components::UiTextComponent<THandle>,
+                helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
 
                 if (!soc->hasUpdate()) {

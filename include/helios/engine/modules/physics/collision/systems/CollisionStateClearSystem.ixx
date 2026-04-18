@@ -26,7 +26,7 @@ import helios.engine.modules.physics.collision.components.CollisionStateComponen
 
 import helios.engine.runtime.spawn.commands.DespawnCommand;
 
-import helios.engine.mechanics.lifecycle.components.Active;
+import helios.ecs.components.Active;
 
 using namespace helios::engine::modules::physics::collision::components;
 using namespace helios::engine::modules::physics::collision::types;
@@ -48,6 +48,7 @@ export namespace helios::engine::modules::physics::collision::systems {
      * Running this system after collision response systems have processed their events
      * ensures a clean slate for the next collision detection pass.
      */
+    template<typename THandle>
     class CollisionStateClearSystem {
 
     public:
@@ -60,8 +61,9 @@ export namespace helios::engine::modules::physics::collision::systems {
          */
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept {
             for (auto [entity, csc, active] : updateContext.view<
-               CollisionStateComponent,
-               helios::engine::mechanics::lifecycle::components::Active
+               THandle,
+               CollisionStateComponent<THandle>,
+               helios::ecs::components::Active<THandle>
            >().whereEnabled()) {
                 csc->reset();
            }

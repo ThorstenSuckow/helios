@@ -15,16 +15,12 @@ import helios.engine.runtime.world.Session;
 
 import helios.engine.state.StateToIdMapPair;
 
-
 import helios.engine.runtime.world.UpdateContext;
-
-import helios.engine.common.types.ViewportId;
-
-using namespace helios::engine::state;
-using namespace helios::engine::common::types;
-
+import helios.rendering.viewport.types.ViewportHandle;
 import helios.engine.common.tags.SystemRole;
 
+using namespace helios::engine::state;
+using namespace helios::rendering::viewport::types;
 export namespace helios::engine::modules::rendering::viewport::systems {
 
     /**
@@ -38,9 +34,9 @@ export namespace helios::engine::modules::rendering::viewport::systems {
      * ## Usage
      *
      * ```cpp
-     * StateToIdMapPair<GameState, MatchState, ViewportId> policy;
-     * policy.add(GameState::Running, ViewportId("game"));
-     * policy.add(MatchState::GameOver, ViewportId("game_over"));
+     * StateToIdMapPair<GameState, MatchState, ViewportHandle> policy;
+     * policy.add(GameState::Running, ViewportHandle("game"));
+     * policy.add(MatchState::GameOver, ViewportHandle("game_over"));
      * policy.freeze();
      *
      * gameLoop.phase(PhaseType::Pre)
@@ -62,7 +58,7 @@ export namespace helios::engine::modules::rendering::viewport::systems {
         /**
          * @brief Policy defining viewport-to-state mappings.
          */
-        StateToIdMapPair<StateLft, StateRgt, ViewportId> stateToIdMapPair_;
+        StateToIdMapPair<StateLft, StateRgt, ViewportHandle> stateToIdMapPair_;
 
     public:
 
@@ -73,7 +69,7 @@ export namespace helios::engine::modules::rendering::viewport::systems {
          *
          * @param stateToIdMapPair Policy mapping states to viewport IDs.
          */
-        explicit StateToViewportPolicyUpdateSystem(StateToIdMapPair<StateLft, StateRgt, ViewportId> stateToIdMapPair)
+        explicit StateToViewportPolicyUpdateSystem(StateToIdMapPair<StateLft, StateRgt, ViewportHandle> stateToIdMapPair)
             : stateToIdMapPair_(std::move(stateToIdMapPair)){}
 
         /**
@@ -91,10 +87,10 @@ export namespace helios::engine::modules::rendering::viewport::systems {
             auto gameState  = session.state<StateLft>();
             auto matchState = session.state<StateRgt>();
 
-            session.clearViewportIds();
+            session.clearViewportHandles();
 
             auto viewportIds = stateToIdMapPair_.ids(gameState, matchState);
-            session.setViewportIds(viewportIds);
+            session.setViewportHandles(viewportIds);
 
 
 

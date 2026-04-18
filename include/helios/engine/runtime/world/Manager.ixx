@@ -11,12 +11,12 @@ export module helios.engine.runtime.world.Manager;
 
 import helios.engine.common.concepts.IsManagerLike;
 
+import helios.engine.runtime.world.UpdateContextFwd;
+import helios.engine.runtime.world.GameWorldFwd;
+
+
 using namespace helios::engine::common::concepts;
-
 export namespace helios::engine::runtime::world {
-
-    class UpdateContext;
-    class GameWorld;
 
     /**
      * @brief Concept detecting an optional `init(GameWorld&)` method on a manager.

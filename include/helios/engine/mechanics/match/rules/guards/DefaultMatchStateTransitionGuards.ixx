@@ -4,6 +4,8 @@
  */
 module;
 
+#include <concepts>
+
 export module helios.engine.mechanics.match.rules.guards.DefaultMatchStateTransitionGuards;
 
 import helios.engine.runtime.world.UpdateContext;
@@ -90,7 +92,8 @@ export namespace helios::engine::mechanics::match::rules::guards {
             if (!playerOpt) {
                 return false;
             }
-            auto* lc = playerOpt->get<LivesComponent>();
+            using Handle_type = std::remove_cvref_t<decltype(playerOpt->handle())>;
+            auto* lc = playerOpt->get<LivesComponent<Handle_type>>();
             return lc && lc->lives() > 0;
 
         }

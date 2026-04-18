@@ -11,6 +11,8 @@ module;
 
 export module helios.engine.runtime.world.Session;
 
+
+import helios.engine.mechanics.lifecycle.components;
 import helios.engine.mechanics.gamestate.types;
 import helios.engine.mechanics.match.types;
 
@@ -18,23 +20,27 @@ import helios.engine.state.types;
 import helios.engine.state.components;
 import helios.engine.state.types.StateTransitionId;
 
-import helios.engine.common.types.ViewportId;
+import helios.engine.runtime.world.GameObject;
+import helios.ecs.types.EntityHandle;
 
-import helios.engine.ecs.GameObject;
-import helios.engine.ecs.EntityHandle;
+import helios.engine.mechanics.lifecycle.components;
 
-import helios.engine.common.types.ViewportId;
+import helios.rendering.viewport.types.ViewportHandle;
 
-import helios.engine.modules.rendering.viewport.components.ActiveViewportIdsStateComponent;
+import helios.engine.modules.rendering.viewport.components.ActiveViewportHandlesStateComponent;
 
 using namespace helios::engine::mechanics::match::types;
 using namespace helios::engine::mechanics::gamestate::types;
+
 
 using namespace helios::engine::state::types;
 using namespace helios::engine::state::components;
 
 using namespace helios::engine::modules::rendering::viewport::components;
 
+using namespace helios::rendering::viewport::types;
+using namespace helios::engine::mechanics::lifecycle::components;
+using namespace helios::engine::runtime::world;
 export namespace helios::engine::runtime::world {
 
     /**
@@ -61,28 +67,47 @@ export namespace helios::engine::runtime::world {
      */
     class Session {
 
+        using Handle_type = GameObject::Handle_type;
+
         /**
          * @brief The underlying GameObject storing session components.
          */
-        ecs::GameObject gameObject_;
+        GameObject gameObject_;
 
         /**
          * @brief Handle to the player entity.
          */
-        ecs::EntityHandle playerEntity_;
+        Handle_type playerEntity_;
 
     public:
 
         /**
          * @brief Constructs a session with the given GameObject.
          *
-         * @details Automatically adds ActiveViewportIdsStateComponent.
+         * @details Automatically adds ActiveViewportHandlesStateComponent.
          * State types must be registered separately via trackState<T>().
          *
          * @param go The GameObject to use as the session entity.
          */
-        explicit Session(const ecs::GameObject go) : gameObject_(go) {
-            gameObject_.add<ActiveViewportIdsStateComponent>();
+        explicit Session(const GameObject go) : gameObject_(go) {
+            gameObject_.add<ActiveViewportHandlesStateComponent<Handle_type>>();
+            gameObject_.add<UninitializedComponent<Handle_type>>();
+        }
+
+        [[nodiscard]] bool isInitialized() const noexcept {
+            return !gameObject_.has<UninitializedComponent<Handle_type>>();
+        }
+
+        [[nodiscard]] bool initialize() noexcept {
+            return gameObject_.remove<UninitializedComponent<Handle_type>>();
+        }
+
+        [[nodiscard]] bool isDestroyed() noexcept {
+            return gameObject_.has<DestroyedComponent<Handle_type>>();
+        }
+
+        void destroy() noexcept {
+            gameObject_.add<DestroyedComponent<Handle_type>>();
         }
 
         /**
@@ -90,7 +115,7 @@ export namespace helios::engine::runtime::world {
          *
          * @param go The player's entity handle.
          */
-        void setPlayerEntityHandle(const ecs::EntityHandle go) noexcept {
+        void setPlayerEntityHandle(const Handle_type go) noexcept {
             playerEntity_ = go;
         }
 
@@ -99,7 +124,7 @@ export namespace helios::engine::runtime::world {
          *
          * @return The player's entity handle.
          */
-        [[nodiscard]] ecs::EntityHandle playerEntityHandle() const noexcept {
+        [[nodiscard]] Handle_type playerEntityHandle() const noexcept {
             return playerEntity_;
         }
 
@@ -182,26 +207,37 @@ export namespace helios::engine::runtime::world {
         /**
          * @brief Replaces the active viewport IDs with the provided list.
          *
-         * @param viewportIds The new list of active viewport IDs.
+         * @param viewportHandles The new list of active viewport IDs.
          */
-        void setViewportIds(std::span<const helios::engine::common::types::ViewportId>& viewportIds) noexcept {
-            gameObject_.get<ActiveViewportIdsStateComponent>()->setViewportIds(viewportIds);
+        void setViewportHandles(std::span<const ViewportHandle>& viewportHandles) noexcept {
+            gameObject_.get<ActiveViewportHandlesStateComponent<Handle_type>>()->setViewportHandles(viewportHandles);
         }
 
         /**
-         * @brief Returns the currently active viewport IDs.
+         * @brief Returns the currently active viewport handles.
          *
-         * @return Read-only span of viewport identifiers.
+         * @return Read-only span of viewport handles.
          */
-        [[nodiscard]] std::span<const helios::engine::common::types::ViewportId> viewportIds() const noexcept {
-            return gameObject_.get<ActiveViewportIdsStateComponent>()->viewportIds();
+        [[nodiscard]] std::span<const ViewportHandle> viewportHandles() const noexcept {
+            return gameObject_.get<ActiveViewportHandlesStateComponent<Handle_type>>()->viewportHandles();
         }
 
         /**
-         * @brief Clears all active viewport IDs.
+         * @brief Returns true if the specified ViewportHandle is currently active.
+         *
+         * @param viewportHandle The ViewportHandle to check for activity.
+         *
+         * @return true if the ViewportHandle is considered active, otherwise false.
          */
-       void clearViewportIds() noexcept {
-            gameObject_.get<ActiveViewportIdsStateComponent>()->clear();
+        [[nodiscard]] bool isActiveViewport(const ViewportHandle viewportHandle) const noexcept {
+            return gameObject_.get<ActiveViewportHandlesStateComponent<Handle_type>>()->has(viewportHandle);
+        }
+
+        /**
+         * @brief Clears all active viewport handles.
+         */
+       void clearViewportHandles() noexcept {
+            gameObject_.get<ActiveViewportHandlesStateComponent<Handle_type>>()->clear();
         }
     };
 

@@ -10,10 +10,10 @@ module;
 
 export module helios.engine.runtime.messaging.command.CommandHandlerRegistry;
 
-import helios.engine.ecs.types.ComponentTypeId;
+import helios.ecs.types.ComponentTypeId;
 import helios.engine.runtime.messaging.command.types;
 
-using namespace helios::engine::ecs::types;
+using namespace helios::ecs::types;
 using namespace helios::engine::runtime::messaging::command::types;
 
 

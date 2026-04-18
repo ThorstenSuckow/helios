@@ -8,7 +8,7 @@ module;
 
 export module helios.engine.runtime.messaging.command.types.CommandTypeId;
 
-import helios.core.data.TypeIndexer;
+import helios.core.TypeIndexer;
 import helios.core.types;
 
 export namespace helios::engine::runtime::messaging::command::types {
@@ -82,7 +82,7 @@ export namespace helios::engine::runtime::messaging::command::types {
          */
         template <typename T>
         [[nodiscard]] static CommandTypeId id() {
-            static const size_t tid = helios::core::data::TypeIndexer<ComponentType>::typeIndex<T>();
+            static const size_t tid = helios::core::TypeIndexer<ComponentType>::typeIndex<T>();
             return CommandTypeId(tid);
         }
 

@@ -21,6 +21,7 @@ export namespace helios::gameplay::scoring {
 
         R::template registerType<components::ScorePoolComponent<typename TEntityManager::Handle_type>>();
         R::template registerType<components::ScoreObserverComponent<typename TEntityManager::Handle_type>>();
+        R::template registerType<components::MaxScoreObserverComponent<typename TEntityManager::Handle_type>>();
         R::template registerType<components::ScoreValueComponent<typename TEntityManager::Handle_type, types::KillReward>>();
     }
 

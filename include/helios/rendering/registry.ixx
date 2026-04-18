@@ -24,7 +24,9 @@ export namespace helios::rendering {
 
         using R = helios::ecs::ComponentReflector<TEntityManager>;
 
+        R::template registerType<components::RenderableComponent<typename TEntityManager::Handle_type>>();
         R::template registerType<components::RenderPrototypeComponent<typename TEntityManager::Handle_type>>();
+        R::template registerType<components::MaterialOverrideComponent<typename TEntityManager::Handle_type>>();
     }
 
 }

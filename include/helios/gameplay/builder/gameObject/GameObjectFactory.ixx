@@ -133,7 +133,7 @@ export namespace helios::gameplay::builder::gameObject {
             /**
              * @brief Builder for combat-related components.
              */
-            std::unique_ptr<helios::gameplay::builder::gameObject::builders::CombatBuilder<Entity>> CombatBuilder_;
+            std::unique_ptr<helios::gameplay::builder::gameObject::builders::CombatBuilder<Entity>> combatBuilder_;
 
             /**
              * @brief Builder for lifecycle components.
@@ -221,7 +221,7 @@ export namespace helios::gameplay::builder::gameObject {
                 effectsBuilder_(std::make_unique<helios::gameplay::builder::gameObject::builders::EffectsBuilder<Entity>>(gameObject_)),
                 spawnBuilder_(std::make_unique<helios::gameplay::builder::gameObject::builders::SpawnBuilder<Entity>>(gameObject_)),
                 aiBuilder_(std::make_unique<helios::gameplay::builder::gameObject::builders::AiBuilder<Entity>>(gameObject_)),
-                CombatBuilder_(std::make_unique<helios::gameplay::builder::gameObject::builders::CombatBuilder<Entity>>(gameObject_)),
+                combatBuilder_(std::make_unique<helios::gameplay::builder::gameObject::builders::CombatBuilder<Entity>>(gameObject_)),
                 lifecycleBuilder_(std::make_unique<helios::gameplay::builder::gameObject::builders::LifecycleBuilder<Entity>>(gameObject_)),
                 healthBuilder_(std::make_unique<helios::gameplay::builder::gameObject::builders::HealthBuilder<Entity>>(gameObject_)),
                 scoringBuilder_(std::make_unique<helios::gameplay::builder::gameObject::builders::ScoringBuilder<Entity>>(gameObject_)),
@@ -274,6 +274,18 @@ export namespace helios::gameplay::builder::gameObject {
              */
             GameObjectPrototype& withRendering(const RenderingBuilderCallback& rbc) {
                 rbc(*renderingBuilder_);
+                return *this;
+            }
+
+            /**
+             * @brief Configures scene-related components.
+             *
+             * @param sbc Callback receiving a SceneBuilder reference.
+             *
+             * @return Reference to this prototype for chaining.
+             */
+            GameObjectPrototype& withScene(const SceneBuilderCallback& sbc) {
+                sbc(*sceneBuilder_);
                 return *this;
             }
 
@@ -357,7 +369,7 @@ export namespace helios::gameplay::builder::gameObject {
              * @return Reference to this prototype for chaining.
              */
             GameObjectPrototype& withCombat(const CombatBuilderCallback& sbc) {
-                sbc(*CombatBuilder_);
+                sbc(*combatBuilder_);
                 return *this;
             }
 

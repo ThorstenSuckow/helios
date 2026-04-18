@@ -20,15 +20,21 @@ import helios.runtime.messaging.command;
 
 import helios.platform;
 
+import helios.registry;
+import helios.scene.registry;
+import helios.spatial.registry;
+import helios.ui.registry;
+import helios.scene.registry;
+import helios.physics.registry;
+import helios.gameplay.registry;
+import helios.ecs.registry;
+import helios.rendering.registry;
+import helios.runtime.registry;
+
 import helios.gameplay.lifecycle;
 import helios.gameplay.timing;
 import helios.gameplay.gamestate;
 import helios.gameplay.matchstate;
-
-import helios.gameplay.registry;
-
-
-import helios.ecs.registry;
 
 using namespace helios::state::types;
 using namespace helios::gameplay::gamestate::types;
@@ -46,9 +52,15 @@ export namespace helios::bootstrap {
     template<typename... TEntityManagers>
     struct ComponentRegistrar<std::tuple<TEntityManagers...>> {
         static void registerComponents() {
+            (helios::registerComponents<TEntityManagers>(), ...);
             (helios::gameplay::registerComponents<TEntityManagers>(), ...);
-          //  (helios::registerComponents<TEntityManagers>(), ...);
             (helios::ecs::registerComponents<TEntityManagers>(), ...);
+            (helios::rendering::registerComponents<TEntityManagers>(), ...);
+            (helios::runtime::registerComponents<TEntityManagers>(), ...);
+            (helios::scene::registerComponents<TEntityManagers>(), ...);
+            (helios::spatial::registerComponents<TEntityManagers>(), ...);
+            (helios::ui::registerComponents<TEntityManagers>(), ...);
+            (helios::physics::registerComponents<TEntityManagers>(), ...);
         }
 
     };

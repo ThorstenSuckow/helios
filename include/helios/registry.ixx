@@ -6,13 +6,13 @@ module;
 
 export module helios.registry;
 
-import helios.gameplay.ai.registry;
+import helios.ecs.registry;
+import helios.gameplay.registry;
 import helios.rendering.registry;
 import helios.spatial.registry;
 import helios.ui.registry;
 import helios.scene.registry;
 import helios.physics.registry;
-import helios.gameplay.effects.registry;
 
 export namespace helios {
 
@@ -21,12 +21,13 @@ export namespace helios {
      */
     template<typename TEntityManager>
     inline void registerComponents() {
-        helios::gameplay::ai::registerComponents<TEntityManager>();
+        helios::ecs::registerComponents<TEntityManager>();
+        helios::gameplay::registerComponents<TEntityManager>();
+        helios::rendering::registerComponents<TEntityManager>();
         helios::spatial::registerComponents<TEntityManager>();
         helios::ui::registerComponents<TEntityManager>();
+        helios::scene::registerComponents<TEntityManager>();
         helios::physics::registerComponents<TEntityManager>();
-        helios::gameplay::effects::registerComponents<TEntityManager>();
     }
 
 }
-

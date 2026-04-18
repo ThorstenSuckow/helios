@@ -6,6 +6,7 @@ module;
 
 export module helios.gameplay.registry;
 
+import helios.gameplay.ai.registry;
 import helios.gameplay.scoring.registry;
 import helios.gameplay.health.registry;
 import helios.gameplay.spawn.registry;
@@ -13,6 +14,7 @@ import helios.gameplay.bounds.registry;
 import helios.gameplay.combat.registry;
 import helios.gameplay.damage.registry;
 import helios.gameplay.lifecycle.registry;
+import helios.gameplay.effects.registry;
 
 export namespace helios::gameplay {
 
@@ -21,6 +23,7 @@ export namespace helios::gameplay {
      */
     template<typename TEntityManager>
     inline void registerComponents() {
+        helios::gameplay::ai::registerComponents<TEntityManager>();
         helios::gameplay::scoring::registerComponents<TEntityManager>();
         helios::gameplay::health::registerComponents<TEntityManager>();
         helios::gameplay::spawn::registerComponents<TEntityManager>();
@@ -28,6 +31,7 @@ export namespace helios::gameplay {
         helios::gameplay::combat::registerComponents<TEntityManager>();
         helios::gameplay::damage::registerComponents<TEntityManager>();
         helios::gameplay::lifecycle::registerComponents<TEntityManager>();
+        helios::gameplay::effects::registerComponents<TEntityManager>();
     }
 
 }

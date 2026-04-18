@@ -18,7 +18,6 @@ export import helios.math;
 export import helios.rendering;
 export import helios.scene;
 export import helios.input;
-export import helios.engine;
 export import helios.util;
 export import helios.state;
 export import helios.ui;

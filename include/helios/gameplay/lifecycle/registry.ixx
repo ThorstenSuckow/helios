@@ -18,7 +18,10 @@ export namespace helios::gameplay::lifecycle {
     inline void registerComponents() {
         using R = helios::ecs::ComponentReflector<TEntityManager>;
 
+        R::template registerType<components::DeadTagComponent<typename TEntityManager::Handle_type>>();
         R::template registerType<components::DelayedComponentEnabler<typename TEntityManager::Handle_type>>();
+        R::template registerType<components::DestroyedComponent<typename TEntityManager::Handle_type>>();
+        R::template registerType<components::UninitializedComponent<typename TEntityManager::Handle_type>>();
     }
 
 }

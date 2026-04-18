@@ -22,7 +22,6 @@ export namespace helios::scene {
         R::template registerType<components::LookAtComponent<typename TEntityManager::Handle_type>>();
         R::template registerType<components::PerspectiveCameraComponent<typename TEntityManager::Handle_type>>();
         R::template registerType<components::SceneMemberComponent<typename TEntityManager::Handle_type>>();
-        R::template registerType<components::SceneNodeComponent<typename TEntityManager::Handle_type>>();
         R::template registerType<components::ViewportComponent<typename TEntityManager::Handle_type>>();
     }
 

@@ -20,6 +20,10 @@ export namespace helios::ui::widgets {
 
         R::template registerType<components::UiTextComponent<typename TEntityManager::Handle_type>>();
         R::template registerType<components::MenuComponent<typename TEntityManager::Handle_type>>();
+        R::template registerType<components::UiActionComponent<typename TEntityManager::Handle_type>>();
+        R::template registerType<components::UiFocusComponent<typename TEntityManager::Handle_type>>();
+        R::template registerType<components::UiStateComponent<typename TEntityManager::Handle_type>>();
+        R::template registerType<components::UiStyleComponent<typename TEntityManager::Handle_type>>();
     }
 
 }

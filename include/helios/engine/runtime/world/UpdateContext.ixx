@@ -17,7 +17,6 @@ import helios.engine.runtime.messaging.event.GameLoopEventBus;
 
 import helios.engine.runtime.world.ResourceRegistry;
 
-import helios.ecs.EntityResolver;
 import helios.engine.runtime.world.RuntimeEnvironment;
 import helios.ecs.types.EntityHandle;
 

@@ -15,7 +15,6 @@ module;
 export module helios.ecs.TypedHandleWorld;
 
 import helios.ecs.View;
-import helios.ecs.EntityResolver;
 import helios.ecs.Entity;
 
 

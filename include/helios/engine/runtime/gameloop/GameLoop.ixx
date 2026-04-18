@@ -17,10 +17,10 @@ import helios.engine.runtime.world.UpdateContext;
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
 
-import helios.engine.ecs;
+import helios.ecs;
 
 import helios.engine.state.Bindings;
-import helios.engine.runtime.messaging.command.EngineCommandBuffer;
+
 
 import helios.engine.runtime.messaging.event.GameLoopEventBus;
 
@@ -35,7 +35,7 @@ import helios.engine.runtime.gameloop.Phase;
 import helios.engine.runtime.world.Manager;
 
 import helios.input.InputSnapshot;
-import helios.rendering.ViewportSnapshot;
+import helios.rendering.viewport.ViewportSnapshot;
 
 import helios.engine.runtime.gameloop.PassCommitListener;
 
@@ -202,7 +202,7 @@ export namespace helios::engine::runtime::gameloop {
         void onPassCommit(
             const CommitPoint commitPoint,
             GameWorld& gameWorld,
-            UpdateContext& updateContext) noexcept override {
+            UpdateContext& updateContext) noexcept {
 
             // commands must be executed before Managers
             if ((commitPoint & CommitPoint::FlushCommands) == CommitPoint::FlushCommands) {
@@ -313,24 +313,14 @@ export namespace helios::engine::runtime::gameloop {
 
             assert(!initialized_ && "init() already called");
 
-            for (auto phase : {helios::engine::runtime::gameloop::PhaseType::Pre,
-                               helios::engine::runtime::gameloop::PhaseType::Main,
-                               helios::engine::runtime::gameloop::PhaseType::Post}) {
-                switch (phase) {
-                    case helios::engine::runtime::gameloop::PhaseType::Pre:
-                        prePhase_.init(gameWorld);
-                        prePhase_.addPassCommitListener(this);
-                        break;
-                    case helios::engine::runtime::gameloop::PhaseType::Main:
-                        mainPhase_.init(gameWorld);
-                        mainPhase_.addPassCommitListener(this);
-                        break;
-                    case helios::engine::runtime::gameloop::PhaseType::Post:
-                        postPhase_.init(gameWorld);
-                        postPhase_.addPassCommitListener(this);
-                        break;
-                }
-            }
+            prePhase_.init(gameWorld);
+            prePhase_.addPassCommitListener(this);
+
+            mainPhase_.init(gameWorld);
+            mainPhase_.addPassCommitListener(this);
+
+            postPhase_.init(gameWorld);
+            postPhase_.addPassCommitListener(this);
 
             initialized_ = true;
         }
@@ -369,7 +359,7 @@ export namespace helios::engine::runtime::gameloop {
             GameWorld& gameWorld,
             float deltaTime,
             const helios::input::InputSnapshot& inputSnapshot,
-            std::span<const helios::rendering::ViewportSnapshot> viewportSnapshots
+            std::span<const helios::rendering::viewport::ViewportSnapshot> viewportSnapshots
         ) noexcept {
 
             assert(initialized_ && "GameLoop not initialized");
@@ -378,8 +368,8 @@ export namespace helios::engine::runtime::gameloop {
 
             auto updateContext = UpdateContext(
                   gameWorld.resourceRegistry(),
-                  helios::engine::ecs::EntityResolver(&gameWorld.entityManager()),
                   gameWorld.session(),
+                  gameWorld.runtimeEnvironment(),
                   deltaTime,
                   totalTime_,
                   phaseEventBus_,
@@ -387,36 +377,26 @@ export namespace helios::engine::runtime::gameloop {
                   frameEventBus_,
                   inputSnapshot,
                   viewportSnapshots,
-                  gameWorld.level()
+                  gameWorld.level(),
+                  gameWorld.engineWorld()
               );
 
             auto& session = gameWorld.session();
 
             // gameloop phases
-            for (auto phase : {helios::engine::runtime::gameloop::PhaseType::Pre,
-                               helios::engine::runtime::gameloop::PhaseType::Main,
-                               helios::engine::runtime::gameloop::PhaseType::Post}) {
+            prePhase_.update(gameWorld, updateContext);
+            phaseCommit(gameWorld, updateContext);
 
-                switch (phase) {
-                    case helios::engine::runtime::gameloop::PhaseType::Pre:
-                        prePhase_.update(gameWorld, updateContext);
-                        phaseCommit(gameWorld, updateContext);
+            mainPhase_.update(gameWorld, updateContext);
+            phaseCommit(gameWorld, updateContext);
 
-                        break;
-                    case helios::engine::runtime::gameloop::PhaseType::Main:
-                        mainPhase_.update(gameWorld, updateContext);
-                        phaseCommit(gameWorld, updateContext);
+            postPhase_.update(gameWorld, updateContext);
+            phaseCommit(gameWorld, updateContext);
+            frameEventBus_.swapBuffers();
+        }
 
-                        break;
-                    case helios::engine::runtime::gameloop::PhaseType::Post:
-                        postPhase_.update(gameWorld, updateContext);
-                        phaseCommit(gameWorld, updateContext);
-                        frameEventBus_.swapBuffers();
-                        break;
-                }
-
-
-            }
+        [[nodiscard]] bool isRunning( GameWorld& gameWorld) const noexcept {
+            return initialized_ && !gameWorld.session().isDestroyed();
         }
 
 

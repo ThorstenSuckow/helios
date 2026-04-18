@@ -4,4 +4,4 @@
  */
 export module helios.engine.modules.rendering.viewport.components;
 
-export import helios.engine.modules.rendering.viewport.components.ActiveViewportIdsStateComponent;
+export import helios.engine.modules.rendering.viewport.components.ActiveViewportHandlesStateComponent;

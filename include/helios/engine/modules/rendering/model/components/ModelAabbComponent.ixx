@@ -20,6 +20,7 @@ export namespace helios::engine::modules::rendering::model::components {
      * from a 3D model or mesh. It is essential for culling, collision detection, and
      * other spatial queries.
      */
+    template<typename THandle>
     class ModelAabbComponent  {
 
         /**

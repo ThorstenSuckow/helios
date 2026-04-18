@@ -10,7 +10,7 @@ module;
 export module helios.engine.modules.rendering.renderable.components.RenderableComponent;
 
 
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameObject;
 
 import helios.rendering.Renderable;
 import helios.math.types;
@@ -27,6 +27,7 @@ export namespace helios::engine::modules::rendering::renderable::components {
      * When attached, it automatically extracts the AABB from the renderable's mesh
      * and populates a ModelAabbComponent on the same GameObject.
      */
+    template<typename THandle>
     class RenderableComponent  {
 
         /**

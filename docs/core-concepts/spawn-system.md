@@ -340,7 +340,7 @@ Each `commit()` / `commitCyclic<N>()` returns a `SpawnSystemConfigurator` that
 starts the next `pool()`:
 
 ```cpp
-using namespace helios::engine::builder::spawnSystem;
+using namespace helios::gameplay::builder::spawnSystem;
 
 SpawnSystemFactory::configure(poolManager, spawnManager)
 
@@ -420,8 +420,8 @@ SpawnSystemFactory::configure(poolManager, spawnManager)
 When the same profiles need different scheduling strategies (e.g., per-level difficulty), use `commitProfilesOnly()` to register pool and profiles without schedulers, then attach rules separately via `SchedulerBuilder`:
 
 ```cpp
-using namespace helios::engine::builder::spawnSystem;
-using namespace helios::engine::builder::spawnSystem::builders::configs;
+using namespace helios::gameplay::builder::spawnSystem;
+using namespace helios::gameplay::builder::spawnSystem::builders::configs;
 
 // 1. Register pool + profiles (no schedulers created)
 SpawnSystemFactory::configure(poolManager, spawnManager)
@@ -572,7 +572,7 @@ helios.gameplay.spawn/
 ├── commands/                      # Spawn/Despawn commands
 └── events/                        # Frame events
 
-helios.engine.builder.spawnSystem/
+helios.gameplay.builder.spawnSystem/
 ├── SpawnSystemFactory.ixx         # Fluent entry point
 ├── builders/
 │   ├── SchedulerBuilder.ixx       # Standalone scheduler registration

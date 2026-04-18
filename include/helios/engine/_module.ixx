@@ -5,6 +5,6 @@
 
 export module helios.engine;
 
-export import helios.engine.builder;
+export import helios.gameplay.builder;
 
 

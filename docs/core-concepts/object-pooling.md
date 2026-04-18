@@ -173,7 +173,7 @@ All prefab clones are created upfront during `init()`, which may cause a startup
 The pooling system integrates with the [Spawn System](./spawn-system.md) through `SpawnManager`. The recommended way to configure both pool and spawn system together is via the `SpawnSystemFactory` builder, which co-locates pool and profile configuration under a single pool ID:
 
 ```cpp
-using namespace helios::engine::builder::spawnSystem;
+using namespace helios::gameplay::builder::spawnSystem;
 
 auto spawns = SpawnSystemFactory::configure(poolManager, spawnManager);
 

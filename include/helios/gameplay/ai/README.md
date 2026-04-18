@@ -98,7 +98,7 @@ The `ChaseSystem` operates as follows:
 |--------|---------|
 | `helios.physics.motion` | SteeringComponent for direction control |
 | `helios.spatial.transform` | TranslationStateComponent for position |
-| `helios.engine.builder` | ChaseConfig for fluent setup |
+| `helios.gameplay.builder` | ChaseConfig for fluent setup |
 
 ---
 

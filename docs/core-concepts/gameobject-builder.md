@@ -62,7 +62,7 @@ The builder system is organized into three layers:
 The entry point for entity construction. Requires a GameWorld reference.
 
 ```cpp
-import helios.engine.builder;
+import helios.gameplay.builder;
 
 // Create a new entity via the GameWorld
 auto prototype = GameObjectFactory::gameObject(gameWorld);

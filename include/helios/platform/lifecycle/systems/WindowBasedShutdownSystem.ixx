@@ -4,7 +4,7 @@
  */
 module;
 
-export module helios.platform.environment.systems.WindowBasedShutdownSystem;
+export module helios.platform.lifecycle.systems.WindowBasedShutdownSystem;
 
 
 
@@ -21,7 +21,7 @@ import helios.ecs.components.Active;
 import helios.platform.window.components;
 import helios.platform.window.concepts;
 
-import helios.platform.environment.commands;
+import helios.platform.lifecycle.commands;
 import helios.platform.environment.components;
 import helios.platform.environment.concepts;
 
@@ -36,10 +36,10 @@ using namespace helios::platform::environment::components;
 using namespace helios::platform::window::components;
 using namespace helios::platform::window::concepts;
 using namespace helios::platform::environment::concepts;
-using namespace helios::platform::environment::commands;
+using namespace helios::platform::lifecycle::commands;
 using namespace helios::ecs::components;
 using namespace helios::engine::mechanics::gamestate::types;
-export namespace helios::platform::environment::systems {
+export namespace helios::platform::lifecycle::systems {
 
     /**
      * @brief Queues `ShutdownCommand` when no active window entities are left.

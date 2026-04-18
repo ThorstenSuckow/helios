@@ -6,7 +6,7 @@ module;
 
 #include <concepts>
 
-export module helios.platform.environment.systems.WarmupDoneSystem;
+export module helios.platform.lifecycle.systems.WarmupDoneSystem;
 
 
 import helios.engine.runtime.world.UpdateContext;
@@ -37,7 +37,7 @@ using namespace helios::engine::runtime::messaging::command;
 using namespace helios::engine::state::types;
 using namespace helios::engine::state::commands;
 using namespace helios::engine::mechanics::gamestate::types;
-export namespace helios::platform::environment::systems {
+export namespace helios::platform::lifecycle::systems {
 
     /**
      * @brief Signals warmup completion through a typed state command buffer.

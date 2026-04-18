@@ -5,9 +5,9 @@
 module;
 
 
-export module helios.platform.environment.commands.ShutdownCommand;
+export module helios.platform.lifecycle.commands.ShutdownCommand;
 
-export namespace helios::platform::environment::commands {
+export namespace helios::platform::lifecycle::commands {
 
     /**
      * @brief Marker command that triggers shutdown of the platform runtime.

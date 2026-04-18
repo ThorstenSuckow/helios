@@ -5,9 +5,9 @@
 module;
 
 
-export module helios.platform.environment.commands.PlatformInitCommand;
+export module helios.platform.lifecycle.commands.PlatformInitCommand;
 
-export namespace helios::platform::environment::commands {
+export namespace helios::platform::lifecycle::commands {
 
     /**
      * @brief Marker command that triggers platform initialization.

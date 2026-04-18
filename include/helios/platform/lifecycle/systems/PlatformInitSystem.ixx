@@ -4,7 +4,7 @@
  */
 module;
 
-export module helios.platform.environment.systems.PlatformInitSystem;
+export module helios.platform.lifecycle.systems.PlatformInitSystem;
 
 
 
@@ -16,7 +16,7 @@ import helios.engine.runtime.world;
 import helios.engine.runtime.messaging.command.NullCommandBuffer;
 import helios.engine.common.concepts.IsCommandBufferLike;
 
-import helios.platform.environment.commands;
+import helios.platform.lifecycle.commands;
 
 import helios.ecs.components.Active;
 
@@ -24,8 +24,8 @@ using namespace helios::engine::common::tags;
 using namespace helios::engine::runtime::world;
 using namespace helios::engine::runtime::messaging::command;
 using namespace helios::engine::common::concepts;
-using namespace helios::platform::environment::commands;
-export namespace helios::platform::environment::systems {
+using namespace helios::platform::lifecycle::commands;
+export namespace helios::platform::lifecycle::systems {
 
     /**
      * @brief Submits `PlatformInitCommand` until session/runtime initialization completed.

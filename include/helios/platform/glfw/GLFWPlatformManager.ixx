@@ -7,11 +7,8 @@ module;
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
 #include <cassert>
-#include <iostream>
-#include <memory>
 #include <ostream>
 #include <ranges>
-#include <unordered_map>
 #include <vector>
 
 export module helios.platform.glfw.GLFWPlatformManager;
@@ -32,6 +29,7 @@ import helios.engine.common.tags.ManagerRole;
 import helios.engine.runtime.world;
 
 import helios.platform.environment.commands;
+import helios.platform.lifecycle.commands;
 import helios.platform.environment.components;
 import helios.platform.environment.types;
 
@@ -45,9 +43,11 @@ import helios.platform.glfw.types;
 import helios.ecs.concepts;
 import helios.engine.common.concepts;
 import helios.engine.runtime.messaging.command;
+import helios.platform.window.concepts.IsWindowHandle;
 
 using namespace helios::engine::common::tags;
 using namespace helios::platform::environment::commands;
+using namespace helios::platform::lifecycle::commands;
 using namespace helios::platform::environment::types;
 using namespace helios::platform::environment::components;
 using namespace helios::platform::window::commands;
@@ -64,7 +64,8 @@ using namespace helios::engine::common::concepts;
 using namespace helios::core::types;
 using namespace helios::engine::runtime::messaging::command;
 using namespace helios::engine::runtime::world;
-    
+using namespace helios::platform::window::concepts;
+
 #define HELIOS_LOG_SCOPE "helios::platform::glfw::GLFWPlatformManager"
 export namespace helios::platform::glfw {
 
@@ -75,10 +76,11 @@ export namespace helios::platform::glfw {
      * as pending work, and processes them in `flush(...)` in a deterministic order.
      *
      * @tparam THandle Window/entity handle type.
-     * @tparam TCommandBuffer Command buffer used for follow-up state/runtime commands.
+     * @tparam TStateCommandBuffer Command buffer used for follow-up state commands.
+     * @tparam TPlatformCommandBuffer Command buffer used by GLFW callbacks for platform commands.
      */
     template<typename THandle, typename TStateCommandBuffer = NullCommandBuffer, typename TPlatformCommandBuffer = NullCommandBuffer>
-    requires IsEntityHandle<THandle>
+    requires IsWindowHandle<THandle>
             && IsCommandBufferLike<TStateCommandBuffer>
             && IsCommandBufferLike<TPlatformCommandBuffer>
     class GLFWPlatformManager {
@@ -108,7 +110,11 @@ export namespace helios::platform::glfw {
         inline static const helios::util::log::Logger& logger_ = helios::util::log::LogManager::loggerForScope(
                    HELIOS_LOG_SCOPE);
 
-
+        /**
+         * @brief Initializes GLFW and transitions runtime/session from booting to boot request.
+         *
+         * @param updateContext Frame-local update context.
+         */
         void initPlatform(UpdateContext& updateContext) noexcept {
 
             if (!shouldInit_ || initialized_) {
@@ -140,6 +146,14 @@ export namespace helios::platform::glfw {
         }
 
 
+        /**
+         * @brief Creates a native GLFW window and binds it to the requested window entity.
+         *
+         * @param updateContext Frame-local update context.
+         * @param cmd Window creation command containing target handle and config.
+         *
+         * @return `true` if the window was created and bound successfully; otherwise `false`.
+         */
         bool createWindow(UpdateContext& updateContext, const WindowCreateCommand<THandle>& cmd) noexcept {
 
             assert(gameWorld_ && "GameWorld not initialized");
@@ -170,32 +184,39 @@ export namespace helios::platform::glfw {
                 );
             }
 
-            assert(window->has<WindowCreateRequestComponent<THandle>>() && "Expected entity to have WindowCreateRequestComponent");
-            window->remove<WindowCreateRequestComponent<THandle>>();
-            assert(!window->has<WindowCreateRequestComponent<THandle>>() && "Expected entity to not have WindowCreateRequestComponent");
-            assert(!window->has<WindowComponent<THandle>>() && "Expected entity to not have WindowComponent");
-            window->add<WindowComponent<THandle>>(
+            assert(window->template has<WindowCreateRequestComponent<THandle>>() && "Expected entity to have WindowCreateRequestComponent");
+            window->template remove<WindowCreateRequestComponent<THandle>>();
+            assert(!window->template has<WindowCreateRequestComponent<THandle>>() && "Expected entity to not have WindowCreateRequestComponent");
+            assert(!window->template has<WindowComponent<THandle>>() && "Expected entity to not have WindowComponent");
+            window->template add<WindowComponent<THandle>>(
                 std::move(cfg.title),
                 WindowSize{cfg.size.width, cfg.size.height},
                 cfg.aspectRatioNumer,
                 cfg.aspectRatioDenom
             );
-            window->add<GLFWWindowHandleComponent<THandle>>(nativeHandle);
+            window->template add<GLFWWindowHandleComponent<THandle>>(nativeHandle);
 
             removeCurrentContext(updateContext);
 
             glfwMakeContextCurrent(nativeHandle);
 
-            window->add<CurrentContextComponent<THandle>>();
+            window->template add<CurrentContextComponent<THandle>>();
 
-            window->add<WindowShownComponent<THandle>>();
-            window->add<GLFWWindowUserPointerComponent<THandle>>(GLFWWindowUserPointer<THandle>(cmd.windowHandle, gameWorld_));
+            window->template add<WindowShownComponent<THandle>>();
+            window->template add<GLFWWindowUserPointerComponent<THandle>>(GLFWWindowUserPointer<THandle>(cmd.windowHandle, gameWorld_));
 
             installResizeListener(gameWorld_, cmd.windowHandle);
 
             return true;
         }
 
+        /**
+         * @brief Loads OpenGL function pointers for the current context.
+         *
+         * @param updateContext Frame-local update context.
+         *
+         * @return `true` if OpenGL was loaded successfully; otherwise `false`.
+         */
         bool initOpenGL(UpdateContext& updateContext) noexcept {
 
             const GLADloadfunc procAddressLoader = glfwGetProcAddress;
@@ -214,6 +235,11 @@ export namespace helios::platform::glfw {
             return true;
         }
 
+        /**
+         * @brief Removes `CurrentContextComponent` from all windows currently marked as active context.
+         *
+         * @param updateContext Frame-local update context.
+         */
         void removeCurrentContext(UpdateContext& updateContext) {
             // remove any currentcontext component
             currentContexts_.clear();
@@ -228,6 +254,12 @@ export namespace helios::platform::glfw {
             }
         }
 
+        /**
+         * @brief Installs GLFW user-pointer data and framebuffer resize callback for a window.
+         *
+         * @param gameWorld Owning game world used by callback command submission.
+         * @param handle Window handle for which the listener is installed.
+         */
         void installResizeListener(GameWorld* gameWorld, THandle handle) noexcept {
 
             auto entity = gameWorld->find<THandle>(handle);
@@ -269,6 +301,12 @@ export namespace helios::platform::glfw {
         }
 
 
+        /**
+         * @brief Executes a single swap-buffers command.
+         *
+         * @param updateContext Frame-local update context.
+         * @param cmd Swap-buffers command.
+         */
         void swapBuffer(UpdateContext& updateContext, const SwapBuffersCommand<THandle>& cmd) noexcept {
 
             const auto entity = updateContext.find(cmd.windowHandle);
@@ -293,6 +331,13 @@ export namespace helios::platform::glfw {
         }
 
 
+        /**
+         * @brief Creates all windows queued during command submission.
+         *
+         * @param updateContext Frame-local update context.
+         *
+         * @return `true` if at least one window was created in this flush; otherwise `false`.
+         */
         bool createWindows(UpdateContext& updateContext) noexcept {
             if (windowCreateCommands_.empty()) {
                 return false;
@@ -309,6 +354,11 @@ export namespace helios::platform::glfw {
             return true;
         }
 
+        /**
+         * @brief Applies queued resize commands to window components.
+         *
+         * @param updateContext Frame-local update context.
+         */
         void resizeWindows(UpdateContext& updateContext) noexcept {
 
             if (pendingResizeCommands_.empty()) {
@@ -334,6 +384,11 @@ export namespace helios::platform::glfw {
             pendingResizeCommands_.clear();
         }
 
+        /**
+         * @brief Processes all queued swap-buffers commands.
+         *
+         * @param updateContext Frame-local update context.
+         */
         void swapBuffers(UpdateContext& updateContext) noexcept {
             if (pendingBufferSwaps_.empty()) {
                 return;
@@ -344,6 +399,11 @@ export namespace helios::platform::glfw {
             pendingBufferSwaps_.clear();
         }
 
+        /**
+         * @brief Polls GLFW events if requested by a poll-events command.
+         *
+         * @param updateContext Frame-local update context.
+         */
         void pollEvents(UpdateContext& updateContext) noexcept {
             if (!pollEvents_) {
                 return;
@@ -353,6 +413,11 @@ export namespace helios::platform::glfw {
             pollEvents_ = false;
         }
 
+        /**
+         * @brief Destroys all windows queued for closing.
+         *
+         * @param updateContext Frame-local update context.
+         */
         void closeWindows(UpdateContext& updateContext) noexcept {
             if (pendingCloseCommands_.empty()) {
                 return;
@@ -381,6 +446,11 @@ export namespace helios::platform::glfw {
         }
 
 
+        /**
+         * @brief Terminates GLFW and queues a shutdown state transition request.
+         *
+         * @param updateContext Frame-local update context.
+         */
         void shutdown(UpdateContext& updateContext) noexcept {
 
             glfwTerminate();
@@ -430,27 +500,62 @@ export namespace helios::platform::glfw {
             swapBuffers(updateContext);
         }
 
+        /**
+         * @brief Marks that platform events should be polled in the next `flush(...)`.
+         *
+         * @param command Poll-events marker command.
+         *
+         * @return `true` when the command was accepted.
+         */
         bool submit(const PollEventsCommand& command) noexcept {
             pollEvents_ = true;
             return true;
         }
 
+        /**
+         * @brief Marks platform initialization for execution during the next `flush(...)`.
+         *
+         * @param command Platform-init marker command.
+         *
+         * @return `true` when the command was accepted.
+         */
         bool submit(const PlatformInitCommand& command) noexcept {
             assert(!initialized_ && "Application was already initialized.");
             shouldInit_ = true;
             return true;
         }
 
+        /**
+         * @brief Queues a window creation request.
+         *
+         * @param command Window creation command.
+         *
+         * @return `true` when the command was queued.
+         */
         bool submit(const WindowCreateCommand<THandle>& command)  noexcept {
             windowCreateCommands_.push_back(command);
             return true;
         }
 
+        /**
+         * @brief Queues a buffer-swap request for a specific window.
+         *
+         * @param command Swap-buffers command.
+         *
+         * @return `true` when the command was queued.
+         */
         bool submit(const SwapBuffersCommand<THandle>& command)  noexcept {
             pendingBufferSwaps_.push_back(command);
             return true;
         }
 
+        /**
+         * @brief Stores the latest resize request per window entity index.
+         *
+         * @param command Window resize command.
+         *
+         * @return `true` when the command was stored.
+         */
         bool submit(const WindowResizeCommand<THandle>& command)  noexcept {
             const auto idx = command.windowHandle.entityId;
 
@@ -462,11 +567,25 @@ export namespace helios::platform::glfw {
             return true;
         }
 
+        /**
+         * @brief Queues a window-close request.
+         *
+         * @param command Window-close command.
+         *
+         * @return `true` when the command was queued.
+         */
         bool submit(const WindowCloseCommand<THandle>& command)  noexcept {
             pendingCloseCommands_.push_back(command);
             return true;
         }
 
+        /**
+         * @brief Marks platform shutdown for execution during the next `flush(...)`.
+         *
+         * @param command Shutdown marker command.
+         *
+         * @return `true` when the command was accepted.
+         */
         bool submit(const ShutdownCommand& command)  noexcept {
             shouldShutdown_ = true;
             return true;

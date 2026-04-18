@@ -135,5 +135,5 @@ using namespace helios::engine::modules::ui::widgets::commands;
 using namespace helios::engine::modules::ui::widgets::types;
 using namespace helios::engine::modules::ui::binding::systems;
 using namespace helios::engine::modules::ui::transform::systems;
-using namespace helios::engine::modules::ai::systems;
+using namespace helios::gameplay::ai::systems;
 

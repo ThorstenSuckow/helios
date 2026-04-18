@@ -6,6 +6,6 @@ export module helios.engine.modules;
 
 export import helios.engine.modules.physics;
 export import helios.engine.modules.spatial;
-export import helios.engine.modules.ai;
+export import helios.gameplay.ai;
 export import helios.engine.modules.ui;
 

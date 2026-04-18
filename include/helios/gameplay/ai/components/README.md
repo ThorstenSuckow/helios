@@ -1,10 +1,10 @@
-# helios::engine::modules::ai::components
+# helios::gameplay::ai::components
 
 AI behavior data components.
 
 ## Overview
 
-Components storing AI behavior state. These are pure data containers processed by the corresponding systems in `helios.engine.modules.ai.systems`.
+Components storing AI behavior state. These are pure data containers processed by the corresponding systems in `helios.gameplay.ai.systems`.
 
 ## Components
 
@@ -43,14 +43,14 @@ float cooldownTimer() const;
 
 | Module | Purpose |
 |--------|---------|
-| `helios.engine.modules.ai.systems` | ChaseSystem processes this component |
+| `helios.gameplay.ai.systems` | ChaseSystem processes this component |
 | `helios.util.Guid` | Target identification |
 
 ---
 
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::engine::modules::ai::components
+@namespace helios::gameplay::ai::components
 @brief AI behavior data components.
 @details Components storing AI behavior state such as chase targets and timing data. Processed by corresponding systems in the ai::systems namespace.
 </p></details>

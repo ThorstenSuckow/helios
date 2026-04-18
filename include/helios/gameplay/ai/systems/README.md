@@ -1,4 +1,4 @@
-# helios::engine::modules::ai::systems
+# helios::gameplay::ai::systems
 
 AI behavior processing systems.
 
@@ -35,7 +35,7 @@ Processes entities with `ChaseComponent`, `SteeringComponent`, and `TranslationS
 ### Registration
 
 ```cpp
-import helios.engine.modules.ai.systems;
+import helios.gameplay.ai.systems;
 
 // Register with GameLoop main phase
 gameLoop.addSystem<ChaseSystem>(Phase::Main, gameWorld);
@@ -45,7 +45,7 @@ gameLoop.addSystem<ChaseSystem>(Phase::Main, gameWorld);
 
 | Module | Purpose |
 |--------|---------|
-| `helios.engine.modules.ai.components` | ChaseComponent data |
+| `helios.gameplay.ai.components` | ChaseComponent data |
 | `helios.engine.modules.physics.motion` | SteeringComponent |
 | `helios.engine.modules.spatial.transform` | TranslationStateComponent |
 
@@ -53,7 +53,7 @@ gameLoop.addSystem<ChaseSystem>(Phase::Main, gameWorld);
 
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::engine::modules::ai::systems
+@namespace helios::gameplay::ai::systems
 @brief AI behavior processing systems.
 @details Systems that process AI components to update entity behavior. ChaseSystem steers entities towards their targets based on cooldown timing and direction calculations.
 </p></details>

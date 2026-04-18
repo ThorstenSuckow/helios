@@ -1,4 +1,4 @@
-# helios::engine::modules::effects::gfx::systems
+# helios::gameplay::effects::gfx::systems
 
 Visual effects systems.
 
@@ -23,7 +23,7 @@ gameLoop.phase(PhaseType::Main).addPass()
 
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::engine::modules::effects::gfx::systems
+@namespace helios::gameplay::effects::gfx::systems
 @brief Visual effects systems.
 @details Contains systems that process visual effect components.
 </p></details>

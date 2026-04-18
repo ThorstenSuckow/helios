@@ -5,7 +5,7 @@
 module;
 
 #include <cassert>
-export module helios.engine.modules.ai.components.ChaseComponent;
+export module helios.gameplay.ai.components.ChaseComponent;
 
 
 
@@ -15,7 +15,7 @@ import helios.util.Guid;
 import helios.ecs.types.EntityHandle;
 
 
-export namespace helios::engine::modules::ai::components {
+export namespace helios::gameplay::ai::components {
 
     /**
      * @brief Component storing chase behavior data.

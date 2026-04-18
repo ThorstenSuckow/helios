@@ -7,7 +7,7 @@ module;
 export module helios.engine.builder.gameObject.builders.configs.GfxEffectsConfig;
 
 
-import helios.engine.modules.effects.gfx.components.SpinComponent;
+import helios.gameplay.effects.gfx.components.SpinComponent;
 import helios.engine.modules.spatial.transform.components.RotationStateComponent;
 
 import helios.math;
@@ -49,7 +49,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         GfxEffectsConfig& spin(const float degreesPerSecond, const helios::math::vec3f spinAxis) {
-            gameObject_.template add<helios::engine::modules::effects::gfx::components::SpinComponent<Handle_type>>(
+            gameObject_.template add<helios::gameplay::effects::gfx::components::SpinComponent<Handle_type>>(
                 degreesPerSecond, spinAxis
             );
             gameObject_.template getOrAdd<helios::engine::modules::spatial::transform::components::RotationStateComponent<Handle_type>>();

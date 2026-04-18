@@ -1,4 +1,4 @@
-# helios::engine::modules::effects::gfx
+# helios::gameplay::effects::gfx
 
 Visual effects components and systems.
 
@@ -25,7 +25,7 @@ gameObject_.get<SpinComponent>()->setAxis(helios::math::Z_AXISf);
 
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::engine::modules::effects::gfx
+@namespace helios::gameplay::effects::gfx
 @brief Visual effects components and systems.
 @details Provides purely visual effects like spinning/rotation that do not affect game logic.
 </p></details>

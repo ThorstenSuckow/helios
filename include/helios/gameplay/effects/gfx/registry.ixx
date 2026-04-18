@@ -4,12 +4,12 @@
  */
 module;
 
-export module helios.engine.modules.effects.gfx.registry;
+export module helios.gameplay.effects.gfx.registry;
 
 import helios.ecs.ComponentReflector;
-import helios.engine.modules.effects.gfx.components;
+import helios.gameplay.effects.gfx.components;
 
-export namespace helios::engine::modules::effects::gfx {
+export namespace helios::gameplay::effects::gfx {
 
     /**
      * @brief Registers all effects GFX components with the ComponentReflector.

@@ -1,4 +1,4 @@
-# helios::engine::modules::ai
+# helios::gameplay::ai
 
 AI behavior modules for game entities in the helios engine.
 
@@ -29,7 +29,7 @@ Systems that process AI components:
 ### Basic Chase Behavior
 
 ```cpp
-import helios.engine.modules.ai;
+import helios.gameplay.ai;
 
 // Create enemy that chases player
 auto enemy = std::make_unique<GameObject>();
@@ -104,7 +104,7 @@ The `ChaseSystem` operates as follows:
 
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::engine::modules::ai
+@namespace helios::gameplay::ai
 @brief AI behavior modules for game entities.
 @details This module provides components and systems for artificial intelligence behaviors, including chase/pursuit mechanics. ChaseComponent stores target and timing data, while ChaseSystem processes entities to steer them towards their targets.
 </p></details>

@@ -1,4 +1,4 @@
-# helios::engine::modules::effects::gfx::components
+# helios::gameplay::effects::gfx::components
 
 Visual effects components.
 
@@ -12,7 +12,7 @@ Visual effects components.
 
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::engine::modules::effects::gfx::components
+@namespace helios::gameplay::effects::gfx::components
 @brief Visual effects components.
 @details Contains data components for visual effects such as spin/rotation.
 </p></details>

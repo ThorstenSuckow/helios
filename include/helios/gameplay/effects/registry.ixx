@@ -4,18 +4,18 @@
  */
 module;
 
-export module helios.engine.modules.effects.registry;
+export module helios.gameplay.effects.registry;
 
-import helios.engine.modules.effects.gfx.registry;
+import helios.gameplay.effects.gfx.registry;
 
-export namespace helios::engine::modules::effects {
+export namespace helios::gameplay::effects {
 
     /**
      * @brief Registers all effects components with the ComponentReflector.
      */
     template<typename TEntityManager>
     inline void registerComponents() {
-        helios::engine::modules::effects::gfx::registerComponents<TEntityManager>();
+        helios::gameplay::effects::gfx::registerComponents<TEntityManager>();
     }
 
 }

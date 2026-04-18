@@ -5,7 +5,7 @@
 module;
 
 
-export module helios.engine.modules.effects.gfx.components.SpinComponent;
+export module helios.gameplay.effects.gfx.components.SpinComponent;
 
 
 
@@ -14,7 +14,7 @@ import helios.math;
 /**
  * @todo move to spatial or effects
  */
-export namespace helios::engine::modules::effects::gfx::components {
+export namespace helios::gameplay::effects::gfx::components {
 
     /**
      * @brief Component that defines spin properties for an entity.

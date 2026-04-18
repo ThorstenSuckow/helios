@@ -1,4 +1,4 @@
-# helios::engine::modules::effects
+# helios::gameplay::effects
 
 Visual effects module for game entities.
 
@@ -16,7 +16,7 @@ This module provides components and systems for visual effects that enhance the 
 
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::engine::modules::effects
+@namespace helios::gameplay::effects
 @brief Visual effects module for game entities.
 @details Provides visual effects components and systems for enhanced presentation.
 </p></details>

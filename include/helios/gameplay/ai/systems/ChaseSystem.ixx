@@ -6,7 +6,7 @@ module;
 
 #include <algorithm>
 
-export module helios.engine.modules.ai.systems.ChaseSystem;
+export module helios.gameplay.ai.systems.ChaseSystem;
 
 
 import helios.math;
@@ -17,7 +17,7 @@ import helios.runtime.world.GameObject;
 import helios.runtime.world.GameWorld;
 import helios.runtime.world.UpdateContext;
 
-import helios.engine.modules.ai.components.ChaseComponent;
+import helios.gameplay.ai.components.ChaseComponent;
 import helios.engine.modules.physics.motion.components.SteeringComponent;
 
 import helios.gameplay.lifecycle.components.DeadTagComponent;
@@ -32,7 +32,7 @@ import helios.engine.common.tags.SystemRole;
 
 using namespace helios::gameplay::lifecycle::components;
 using namespace helios::ecs::components;
-export namespace helios::engine::modules::ai::systems {
+export namespace helios::gameplay::ai::systems {
 
     /**
      * @brief System that steers entities towards their chase targets.
@@ -64,7 +64,7 @@ export namespace helios::engine::modules::ai::systems {
             for (auto [entity, sc, cc, tsc, active] : updateContext.view<
                 THandle,
                 helios::engine::modules::physics::motion::components::SteeringComponent<THandle>,
-                helios::engine::modules::ai::components::ChaseComponent<THandle>,
+                helios::gameplay::ai::components::ChaseComponent<THandle>,
                 helios::engine::modules::spatial::transform::components::TranslationStateComponent<THandle>,
                 helios::ecs::components::Active<THandle>
             >().whereEnabled()) {

@@ -4,12 +4,12 @@
  */
 module;
 
-export module helios.engine.modules.ai.registry;
+export module helios.gameplay.ai.registry;
 
 import helios.ecs.ComponentReflector;
-import helios.engine.modules.ai.components;
+import helios.gameplay.ai.components;
 
-export namespace helios::engine::modules::ai {
+export namespace helios::gameplay::ai {
 
     /**
      * @brief Registers all AI components with the ComponentReflector.

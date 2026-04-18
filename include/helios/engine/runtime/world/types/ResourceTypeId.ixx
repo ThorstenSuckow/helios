@@ -8,7 +8,7 @@ module;
 
 export module helios.engine.runtime.world.types.ResourceTypeId;
 
-import helios.core.data.TypeIndexer;
+import helios.core.TypeIndexer;
 import helios.core.types;
 
 export namespace helios::engine::runtime::world::types {
@@ -85,7 +85,7 @@ export namespace helios::engine::runtime::world::types {
          */
         template <typename T>
         [[nodiscard]] static ResourceTypeId id() {
-            static const size_t tid = helios::core::data::TypeIndexer<ResourceType>::typeIndex<T>();
+            static const size_t tid = helios::core::TypeIndexer<ResourceType>::typeIndex<T>();
             return ResourceTypeId(tid);
         }
 

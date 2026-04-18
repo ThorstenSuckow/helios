@@ -8,7 +8,7 @@ module;
 
 export module helios.engine.runtime.world.types.SystemTypeId;
 
-import helios.core.data.TypeIndexer;
+import helios.core.TypeIndexer;
 import helios.core.types;
 
 export namespace helios::engine::runtime::world::types {
@@ -80,7 +80,7 @@ export namespace helios::engine::runtime::world::types {
          */
         template <typename T>
         [[nodiscard]] static SystemTypeId id() {
-            static const size_t tid = helios::core::data::TypeIndexer<SystemType>::typeIndex<T>();
+            static const size_t tid = helios::core::TypeIndexer<SystemType>::typeIndex<T>();
             return SystemTypeId(tid);
         }
 

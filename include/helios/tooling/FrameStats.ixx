@@ -3,9 +3,9 @@
  * @brief Module defining the FrameStats structure for frame timing information.
  */
 
-export module helios.engine.tooling.FrameStats;
+export module helios.tooling.FrameStats;
 
-export namespace helios::engine::tooling {
+export namespace helios::tooling {
     /**
      * @struct FrameStats
      * @brief Contains timing statistics for a single frame.

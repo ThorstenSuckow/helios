@@ -1,4 +1,4 @@
-# helios::engine::tooling
+# helios::tooling
 
 Utilities for runtime diagnostics and developer tooling such as FPS and frame timing metrics.
 
@@ -14,10 +14,10 @@ Utilities for runtime diagnostics and developer tooling such as FPS and frame ti
 
 ```cpp
 auto stopwatch = std::make_unique<helios::util::time::Stopwatch>();
-helios::engine::tooling::FramePacer pacer(std::move(stopwatch));
+helios::tooling::FramePacer pacer(std::move(stopwatch));
 pacer.setTargetFps(60.0f);
 
-helios::engine::tooling::FpsMetrics metrics;
+helios::tooling::FpsMetrics metrics;
 metrics.setHistorySize(120);
 
 while (running) {
@@ -34,7 +34,7 @@ while (running) {
 ---
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::engine::tooling
+@namespace helios::tooling
 @brief Tooling utilities for diagnostics, metrics and developer overlays.
 @details This namespace contains helper classes for runtime diagnostics (e.g. FPS meters, frame time graphs) intended for debug builds and developer tools.
 </p></details>

@@ -431,8 +431,8 @@ Control frame rate and monitor performance with built-in timing tools.
 
 **Example:**
 ```cpp
-import helios.engine.tooling.FramePacer;
-import helios.engine.tooling.FpsMetrics;
+import helios.tooling.FramePacer;
+import helios.tooling.FpsMetrics;
 
 // Setup frame pacing
 FramePacer pacer;

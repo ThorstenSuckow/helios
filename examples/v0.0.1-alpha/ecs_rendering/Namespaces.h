@@ -58,7 +58,7 @@ using namespace helios::ecs::types;
 using namespace helios::engine::common::types;
 using namespace helios::state;
 using namespace helios::state::types;
-using namespace helios::engine::tooling;
+using namespace helios::tooling;
 
 
 // Builder

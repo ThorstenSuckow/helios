@@ -19,7 +19,7 @@ This module provides access to the complete helios engine functionality, includi
 | `helios.state` | State bindings and transition types |
 | `helios.engine.builder` | Builder utilities for entity construction |
 | `helios.engine.common` | Shared tags and common types |
-| `helios.engine.tooling` | Frame pacing and performance metrics |
+| `helios.tooling` | Frame pacing and performance metrics |
 
 ## Architecture
 

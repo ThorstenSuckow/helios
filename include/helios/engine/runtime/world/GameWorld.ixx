@@ -4,7 +4,7 @@
  */
 module;
 
-
+#include <coroutine>
 #include <cassert>
 #include <format>
 #include <helios/helios_config.h>
@@ -18,12 +18,18 @@ export module helios.engine.runtime.world.GameWorld;
 
 import helios.engine.runtime.world.Session;
 
+import helios.ecs.Entity;
+import helios.engine.runtime.world.RuntimeEnvironment;
+import helios.platform.environment.types;
+
 import helios.engine.runtime.messaging.command.CommandHandlerRegistry;
 
 import helios.engine.runtime.world.ResourceRegistry;
 
 import helios.engine.runtime.world.UpdateContext;
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameObject;
+import helios.engine.runtime.world.types.GameObjectId;
+import helios.engine.runtime.world.types.GameObjectHandle;
 import helios.engine.runtime.world.Manager;
 
 import helios.util.Guid;
@@ -31,100 +37,30 @@ import helios.util.log.Logger;
 import helios.util.log.LogManager;
 import helios.engine.runtime.world.Level;
 
-import helios.engine.ecs.EntityHandle;
-import helios.engine.ecs.EntityManager;
-import helios.engine.ecs.EntityRegistry;
-import helios.engine.ecs.View;
+import helios.ecs.types.EntityHandle;
+import helios.ecs.EntityManager;
+import helios.ecs.EntityRegistry;
+import helios.ecs.View;
 
 import helios.engine.common.concepts;
 
+import helios.engine.runtime.world.EngineWorld;
 
 
 using namespace helios::engine::common::concepts;
 using namespace helios::engine::runtime::messaging::command;
-
+using namespace helios::platform::environment::types;
+using namespace helios::engine::runtime::world::types;
 #define HELIOS_LOG_SCOPE "GameWorld"
 export namespace helios::engine::runtime::world {
 
-
     /**
-     * @brief Central game state container for entities, resources, and the active level.
+     * @brief Runtime root object coordinating world domains, resources, and frame services.
      *
-     * @details
-     * GameWorld is the root container for all runtime game state. It owns the
-     * EntityRegistry/EntityManager for entity lifecycle, a ResourceRegistry for
-     * type-indexed O(1) access to Managers, CommandBuffers, and CommandHandlers,
-     * a Session for cross-frame state tracking, and the current Level.
-     *
-     * ## Key Responsibilities
-     *
-     * - **Entity Management:** Creates entities via `addGameObject()` returning
-     *   lightweight (~16 bytes) `GameObject` wrappers. Entities are identified by
-     *   versioned `EntityHandle` for stale reference detection.
-     * - **Resource Registry:** Provides `resourceRegistry()` for registering and
-     *   looking up Managers, CommandBuffers, and CommandHandlers with O(1) access.
-     * - **Component Queries:** Efficient iteration via `view<Components...>()`
-     *   with optional `.whereEnabled()` and `.exclude<T>()` filtering.
-     * - **Entity Cloning:** Deep-copies entities with all components via `clone()`.
-     * - **Manager Coordination:** Initializes, flushes, and resets Managers that
-     *   handle cross-cutting concerns (spawning, scoring, pooling).
-     * - **Session:** Holds per-run state (tracked game/match states, scores).
-     * - **Level Management:** Holds the active Level with arena bounds.
-     *
-     * ## Usage with GameLoop
-     *
-     * Systems access the GameWorld indirectly via UpdateContext. Entity queries
-     * use views, while mutations are performed through commands submitted via
-     * `UpdateContext::queueCommand<T>()`.
-     *
-     * ```cpp
-     * void update(UpdateContext& ctx) noexcept {
-     *     for (auto [entity, transform, velocity, active] : ctx.view<
-     *         TransformComponent,
-     *         VelocityComponent,
-     *         Active
-     *     >().whereEnabled()) {
-     *         // Process matching entities
-     *     }
-     *
-     *     ctx.queueCommand<DespawnCommand>(handle, profileId);
-     * }
-     * ```
-     *
-     * ## Resource Registration
-     *
-     * ```cpp
-     * auto& poolMgr  = gameWorld.registerManager<GameObjectPoolManager>();
-     * auto& spawnMgr = gameWorld.registerManager<SpawnManager>();
-     * auto& cmdBuf   = gameWorld.registerCommandBuffer<EngineCommandBuffer>();
-     *
-     * gameWorld.init(); // Calls init() on all Managers in registration order
-     * ```
-     *
-     * ## Entity Lifecycle
-     *
-     * ```cpp
-     * auto player = gameWorld.addGameObject();
-     * player.add<TransformComponent>(position);
-     * player.add<HealthComponent>(100.0f);
-     * player.setActive(true);
-     *
-     * if (auto entity = gameWorld.find(handle)) {
-     *     entity->get<HealthComponent>()->takeDamage(10.0f);
-     * }
-     *
-     * auto clone = gameWorld.clone(player);
-     * ```
-     *
-     * @see ResourceRegistry
-     * @see GameObject
-     * @see EntityHandle
-     * @see EntityManager
-     * @see View
-     * @see UpdateContext
-     * @see Manager
-     * @see Session
-     * @see Level
+     * @details `GameWorld` owns the `EngineWorld` (entity domains), `Session`,
+     * `RuntimeEnvironment`, and runtime registries for managers/command buffers.
+     * It also exposes typed convenience APIs (`add`, `find`, `view`, `destroy`)
+     * that delegate to `EngineWorld`.
      */
     class GameWorld {
 
@@ -168,55 +104,40 @@ export namespace helios::engine::runtime::world {
         CommandHandlerRegistry commandHandlerRegistry_;
 
         /**
-         * @brief Entity registry for handle allocation and validation.
-         *
-         * @details Manages entity lifecycle including creation, destruction,
-         * and stale handle detection via versioning.
+         * @brief Aggregate multi-domain entity world.
          */
-        helios::engine::ecs::EntityRegistry entityRegistry_{};
+        EngineWorld engineWorld_{};
 
         /**
-         * @brief Entity manager for component storage.
-         *
-         * @details Stores components in type-indexed SparseSets and provides
-         * methods for component manipulation. Marked `mutable` to allow const
-         * methods to use it without const_cast.
-         */
-        mutable helios::engine::ecs::EntityManager em_;
-
-        /**
-         * @brief The current game session holding state data.
+         * @brief Session object storing runtime/game state.
          */
         Session session_;
 
+        /**
+         * @brief Runtime environment facade for platform readiness state.
+         */
+        RuntimeEnvironment runtimeEnvironment_;
 
 
     public:
 
         /**
-         * @brief Constructs the GameWorld.
+         * @brief Constructs `GameWorld` and creates internal session/environment entities.
          *
-         * @details Initializes the EntityManager with the internal EntityRegistry
-         * and creates a Session backed by a dedicated GameObject.
-         *
-         * @param capacity Initial capacity for the underlying SparseSets.
-         *                 Must be large enough to accommodate the total number of
-         *                 entities (including pooled clones) to avoid reallocation
-         *                 during cloning. Defaults to ENTITY_MANAGER_DEFAULT_CAPACITY.
+         * @details The constructor creates one game-object entity for `Session`
+         * and one platform entity for `RuntimeEnvironment`.
          */
         explicit GameWorld(const size_t capacity = ENTITY_MANAGER_DEFAULT_CAPACITY)
-        : em_(helios::engine::ecs::EntityManager(entityRegistry_, capacity)),
-          session_(Session(addGameObject()))
+        : session_(Session(engineWorld_.add<GameObjectHandle>())),
+         runtimeEnvironment_(RuntimeEnvironment(engineWorld_.add<PlatformHandle>()))
         {};
 
-        /// @brief Non-copyable.
+        /**
+         * @brief Non-copyable, non-movable.
+         */
         GameWorld(const GameWorld&) = delete;
-        /// @brief Non-copyable.
         GameWorld operator=(const GameWorld&) = delete;
-
-        /// @brief Non-movable.
         GameWorld(const GameWorld&&) = delete;
-        /// @brief Non-movable.
         GameWorld operator=(const GameWorld&&) = delete;
 
         /**
@@ -229,13 +150,15 @@ export namespace helios::engine::runtime::world {
         }
 
         /**
-         * @brief Returns a reference to the underlying EntityManager.
+         * @brief Returns a reference to the current runtime platform.
          *
-         * @return Reference to the EntityManager.
+         * @return Reference to the Platform.
          */
-        [[nodiscard]] helios::engine::ecs::EntityManager& entityManager() {
-            return em_;
+        [[nodiscard]] RuntimeEnvironment& runtimeEnvironment() {
+            return runtimeEnvironment_;
         }
+
+
 
         /**
          * @brief Initializes all registered managers.
@@ -244,10 +167,12 @@ export namespace helios::engine::runtime::world {
          * the game loop starts. Each manager's init() method is invoked with a
          * reference to this GameWorld.
          */
-        void init() {
+        GameWorld& init() {
             for (auto& mgr :  resourceRegistry_.managers()) {
                 mgr->init(*this);
             }
+
+            return *this;
         }
 
         /**
@@ -357,7 +282,7 @@ export namespace helios::engine::runtime::world {
         template<typename T>
         requires IsManagerLike<T>
         T& manager() const noexcept {
-            assert(resourceRegistry_.has<T>(), "Manager not registered");
+            assert(resourceRegistry_.has<T>() && "Manager not registered");
             return resourceRegistry_.get<T>();
         }
 
@@ -465,138 +390,6 @@ export namespace helios::engine::runtime::world {
         }
 
         /**
-         * @brief Creates a new GameObject in the world.
-         *
-         * @details Allocates an entity handle via the EntityRegistry and returns
-         * a lightweight GameObject wrapper. The returned GameObject is ~16 bytes
-         * and should be passed by value.
-         *
-         * @return A new GameObject ready for component attachment.
-         *
-         * @see GameObject
-         * @see EntityManager::create
-         */
-        [[nodiscard]] helios::engine::ecs::GameObject addGameObject() {
-            const auto handle = em_.create();
-            return helios::engine::ecs::GameObject(handle, &em_);
-        }
-
-        /**
-         * @brief Creates a View for iterating entities with specific components.
-         *
-         * @details Returns a lightweight view that iterates over all entities
-         * possessing the specified component types. Use with range-based for loops
-         * and structured bindings.
-         *
-         * ```cpp
-         * for (auto [entity, transform, velocity, active] : gameWorld.view<
-         *     TransformComponent,
-         *     VelocityComponent,
-         *     Active
-         * >().whereEnabled()) {
-         *     // Process matching entities
-         * }
-         * ```
-         *
-         * @tparam Components The component types to query for.
-         *
-         * @return A View for iterating matching entities.
-         *
-         * @see View
-         */
-        template <typename... Components>
-        [[nodiscard]] auto view() {
-            return helios::engine::ecs::View<Components...>(&em_);
-        }
-
-        /**
-         * @brief Creates a const View for iterating entities with specific components.
-         *
-         * @tparam Components The component types to query for.
-         *
-         * @return A const View for iterating matching entities.
-         */
-        template <typename... Components>
-        [[nodiscard]] auto view() const {
-            return helios::engine::ecs::View<const Components...>(&em_);
-        }
-
-        /**
-         * @brief Finds a GameObject by its EntityHandle.
-         *
-         * @details Validates the handle and returns a GameObject wrapper if valid.
-         * Returns std::nullopt if the handle is stale or invalid.
-         *
-         * @param handle The EntityHandle to look up.
-         *
-         * @return Optional containing the GameObject if found, std::nullopt otherwise.
-         */
-        [[nodiscard]] std::optional<helios::engine::ecs::GameObject> find(const helios::engine::ecs::EntityHandle handle) {
-            if (!em_.isValid(handle)) {
-                return std::nullopt;
-            }
-
-            return helios::engine::ecs::GameObject(handle, &em_);
-        }
-
-        /**
-         * @brief Attempts to remove an entity from the GameWorld.
-         *
-         * @details Delegates to the EntityManager who is then tasked to remove the
-         * entity and all associated components.
-         *
-         * @param handle The EntityHandle to remove.
-         *
-         * @return True if the entity was removed, otherwise false.
-         *
-         * @see EntityManager::destroy()
-         */
-        [[nodiscard]] bool destroy(const helios::engine::ecs::EntityHandle handle) {
-            return em_.destroy(handle);
-        }
-
-        /**
-         * @brief Finds a GameObject by its EntityHandle (const version).
-         *
-         * @param handle The EntityHandle to look up.
-         *
-         * @return Optional containing the GameObject if found, std::nullopt otherwise.
-         */
-        [[nodiscard]] std::optional<helios::engine::ecs::GameObject> find(const helios::engine::ecs::EntityHandle handle) const {
-
-            if (!em_.isValid(handle)) {
-                return std::nullopt;
-            }
-
-            return helios::engine::ecs::GameObject(handle, &em_);
-        }
-
-        /**
-         * @brief Clones a GameObject and all its components.
-         *
-         * @details Creates a new entity and copies all components from the source
-         * to the target. The new GameObject is initially inactive. Components with
-         * `onClone()` hooks will have them invoked after copy construction.
-         *
-         * @param gameObject The source GameObject to clone.
-         *
-         * @return A new inactive GameObject with cloned components.
-         *
-         * @see EntityManager::clone
-         */
-        [[nodiscard]] helios::engine::ecs::GameObject clone(const helios::engine::ecs::GameObject gameObject) {
-
-            auto newGo = addGameObject();
-
-            newGo.setActive(false);
-
-            em_.clone(gameObject.entityHandle(), newGo.entityHandle());
-
-
-            return newGo;
-        }
-
-        /**
          * @brief Resets all managers and the session to their initial state.
          *
          * @details Called during level transitions or game restarts to clear
@@ -609,7 +402,6 @@ export namespace helios::engine::runtime::world {
             }
 
             session_.reset();
-
         }
 
         /**
@@ -632,6 +424,106 @@ export namespace helios::engine::runtime::world {
             return resourceRegistry_;
         }
 
+        /**
+         * @brief Returns the platform-domain world.
+         *
+         * @return Reference to `PlatformWorld`.
+         */
+        [[nodiscard]] PlatformWorld& platformWorld() noexcept{
+            return engineWorld_.platformWorld();
+        }
+
+        /**
+         * @brief Returns the render-resource domain world.
+         *
+         * @return Reference to `RenderResourceWorld`.
+         */
+        [[nodiscard]] RenderResourceWorld& renderResourceWorld() noexcept{
+            return engineWorld_.renderResourceWorld();
+        }
+
+        /**
+         * @brief Returns the render-target domain world.
+         *
+         * @return Reference to `RenderTargetWorld`.
+         */
+        [[nodiscard]] RenderTargetWorld& renderTargetWorld() noexcept{
+            return engineWorld_.renderTargetWorld();
+        }
+
+        /**
+         * @brief Returns the game-object domain world.
+         *
+         * @return Reference to `GameObjectWorld`.
+         */
+        [[nodiscard]] GameObjectWorld& gameObjectWorld() noexcept{
+            return engineWorld_.gameObjectWorld();
+        }
+
+
+        /**
+         * @brief Returns the aggregate typed world used for handle-routed operations.
+         *
+         * @return Reference to `EngineWorld`.
+         */
+        [[nodiscard]] EngineWorld& engineWorld() noexcept{
+            return engineWorld_;
+        }
+
+        /**
+         * @brief Builds a typed ECS view for a handle domain and component set.
+         *
+         * @tparam THandle Handle domain type.
+         * @tparam Components Component types to include.
+         *
+         * @return Domain-specific view.
+         */
+        template <typename THandle, typename... Components>
+        [[nodiscard]] auto view() {
+            return engineWorld_.view<THandle, Components...>();
+        }
+
+        /**
+         * @brief Finds an entity facade by handle.
+         *
+         * @tparam THandle Handle type.
+         *
+         * @param handle Entity handle to resolve.
+         *
+         * @return Domain-specific entity facade (or empty facade if not found).
+         */
+        template<typename THandle>
+        [[nodiscard]] auto find(const THandle handle) noexcept {
+            return engineWorld_.template find<THandle>(handle);
+        }
+
+        /**
+         * @brief Adds a new entity in the domain inferred from `THandle`.
+         *
+         * @tparam THandle Handle type.
+         *
+         * @param strongId Optional strong id value used by the handle domain.
+         *
+         * @return Domain-specific entity facade for the created entity.
+         */
+        template<typename THandle>
+        [[nodiscard]] auto add(const typename THandle::StrongId_type strongId = typename THandle::StrongId_type{}) noexcept {
+            return engineWorld_.template add<THandle>(strongId);
+        }
+
+        /**
+         * @brief Destroys an entity in the domain inferred from `THandle`.
+         *
+         * @tparam THandle Handle type.
+         *
+         * @param handle Entity handle to destroy.
+         *
+         * @return Domain-specific destroy result.
+         */
+        template<typename THandle>
+        [[nodiscard]] auto destroy(const THandle handle) noexcept {
+            return engineWorld_.template destroy<THandle>(handle);
+        }
 
     };
 
